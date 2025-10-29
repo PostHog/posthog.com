@@ -2,7 +2,6 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
-import { revenueAnalyticsComparisonRows } from 'hooks/productData/revenue_analytics_rows'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'revenue_analytics'
@@ -74,13 +73,6 @@ export default function RevenueAnalytics(): JSX.Element {
         exclude: ['customers', 'pricing', 'posthog-on-posthog'],
         templates: {
             overview: 'stacked',
-        },
-        overrides: {
-            'feature-comparison': {
-                props: {
-                    rows: revenueAnalyticsComparisonRows,
-                },
-            },
         },
     })
 

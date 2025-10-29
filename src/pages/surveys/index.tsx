@@ -2,7 +2,6 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
-import { surveysComparisonRows } from 'hooks/productData/surveys_rows'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'surveys'
@@ -76,13 +75,6 @@ export default function Surveys(): JSX.Element {
         // order: ['overview', 'pricing', 'features'],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
-        },
-        overrides: {
-            'feature-comparison': {
-                props: {
-                    rows: surveysComparisonRows,
-                },
-            },
         },
     })
 

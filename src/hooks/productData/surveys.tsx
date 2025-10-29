@@ -1,4 +1,5 @@
 import React from 'react'
+import { surveysComparisonRows } from './surveys_rows'
 import { IconMessage } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { IconJavaScript, IconApple, IconAndroid, IconReactNative, IconFlutter } from 'components/OSIcons'
@@ -380,6 +381,7 @@ export const surveys = {
                 key: 'posthog',
             },
         ],
+        rows: surveysComparisonRows,
         features: [
             {
                 feature: 'Hosted surveys',

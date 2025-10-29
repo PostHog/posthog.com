@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconPieChart } from '@posthog/icons'
 import Link from 'components/Link'
+import { webAnalyticsComparisonRows } from './web_analytics_rows'
 
 export const webAnalytics = {
     Icon: IconPieChart,
@@ -369,6 +370,7 @@ export const webAnalytics = {
                 key: 'posthog',
             },
         ],
+        rows: webAnalyticsComparisonRows,
         features: [
             {
                 feature: 'Pre-configured dashboards',

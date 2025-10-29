@@ -2,7 +2,6 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
-import { sessionReplayComparisonRows } from 'hooks/productData/session_replay_rows'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'session_replay'
@@ -76,13 +75,6 @@ export default function SessionReplay(): JSX.Element {
                 opacity: 0.2,
                 position: 'center',
                 size: 'cover',
-            },
-        },
-        overrides: {
-            'feature-comparison': {
-                props: {
-                    rows: sessionReplayComparisonRows,
-                },
             },
         },
     })

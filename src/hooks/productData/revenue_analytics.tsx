@@ -1,4 +1,5 @@
 import React from 'react'
+import { revenueAnalyticsComparisonRows } from './revenue_analytics_rows'
 import { IconPiggyBank } from '@posthog/icons'
 
 export const revenueAnalytics = {
@@ -268,6 +269,33 @@ export const revenueAnalytics = {
                 },
             ],
         },
+        companies: [
+            {
+                name: 'Stripe',
+                key: 'stripe',
+            },
+            {
+                name: 'Mixpanel',
+                key: 'mixpanel',
+            },
+            {
+                name: 'Amplitude',
+                key: 'amplitude',
+            },
+            {
+                name: 'Baremetrics',
+                key: 'baremetrics',
+            },
+            {
+                name: 'ChartMogul',
+                key: 'chartmogul',
+            },
+            {
+                name: 'PostHog',
+                key: 'posthog',
+            },
+        ],
+        rows: revenueAnalyticsComparisonRows,
         features: [
             {
                 feature: 'Revenue tracking',

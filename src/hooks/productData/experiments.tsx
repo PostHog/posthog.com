@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconFlask } from '@posthog/icons'
 import Link from 'components/Link'
+import { experimentsComparisonRows } from './experiments_rows'
 
 export const experiments = {
     Icon: IconFlask,
@@ -374,6 +375,7 @@ export const experiments = {
                 key: 'posthog',
             },
         ],
+        rows: experimentsComparisonRows,
         features: [
             {
                 feature: 'Unlimited experiments',

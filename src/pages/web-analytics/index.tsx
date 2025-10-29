@@ -3,7 +3,6 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 import Link from 'components/Link'
-import { webAnalyticsComparisonRows } from 'hooks/productData/web_analytics_rows'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'web_analytics'
@@ -152,13 +151,6 @@ export default function WebAnalytics(): JSX.Element {
         content: {
             answersHeadline: "Here's what you can do with Web Analytics",
             answersDescription: 'Plus some helpful reading for no-code platforms',
-        },
-        overrides: {
-            'feature-comparison': {
-                props: {
-                    rows: webAnalyticsComparisonRows,
-                },
-            },
         },
     })
 

@@ -57,9 +57,10 @@ interface RowConfig {
 interface ProductComparisonTableProps {
     competitors: string[]
     rows: RowConfig[]
+    width?: 'auto' | 'full'
 }
 
-export default function ProductComparisonTable({ competitors, rows }: ProductComparisonTableProps) {
+export default function ProductComparisonTable({ competitors, rows, width = 'auto' }: ProductComparisonTableProps) {
     // Parse shorthand notation (e.g., "error_tracking.core" or "platform.deployment.self_host")
     const parseRowConfig = (row: RowConfig): RowConfig => {
         if (row.path) {
@@ -174,9 +175,38 @@ export default function ProductComparisonTable({ competitors, rows }: ProductCom
             return { name: row.label, description: row.description }
         }
 
-        // Get from feature definition if available
+        // Handle platform features - search through all featureSets if no featureSet specified
+        if (row.type === 'platform' && row.feature) {
+            const platformDefs = featureDefs.platform
+            if (platformDefs) {
+                // If featureSet is specified, use it directly
+                if (row.featureSet) {
+                    const set = platformDefs[row.featureSet]
+                    const feat = set?.[row.feature]
+                    if (feat) {
+                        return {
+                            name: feat.name || row.feature,
+                            description: row.description || feat.description,
+                        }
+                    }
+                } else {
+                    // Search through all featureSets for this platform feature
+                    for (const featureSet in platformDefs) {
+                        const feat = platformDefs[featureSet]?.[row.feature]
+                        if (feat) {
+                            return {
+                                name: feat.name || row.feature,
+                                description: row.description || feat.description,
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Get from feature definition if available (non-platform features)
         if (row.feature && row.featureSet) {
-            const defs = row.type === 'platform' ? featureDefs.platform : featureDefs[row.product || '']
+            const defs = featureDefs[row.product || '']
             const set = defs?.[row.featureSet]
             const feat = set?.[row.feature]
 
@@ -271,7 +301,7 @@ export default function ProductComparisonTable({ competitors, rows }: ProductCom
                 cells: [
                     {
                         content: <div className="font-semibold text-lg">{row.label || ''}</div>,
-                        className: 'col-span-full border-b-2 border-primary pb-2 mb-2',
+                        className: 'col-span-full border-b-2 border-primary bg-accent pb-2',
                     },
                 ],
             }
@@ -300,5 +330,5 @@ export default function ProductComparisonTable({ competitors, rows }: ProductCom
         }
     })
 
-    return <OSTable columns={columns} rows={tableRows} />
+    return <OSTable columns={columns} rows={tableRows} width={width} />
 }

@@ -13,6 +13,7 @@ import {
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import Link from 'components/Link'
+import { productAnalyticsComparisonRows } from './product_analytics_rows'
 
 export const productAnalytics = {
     Icon: IconGraph,
@@ -508,6 +509,7 @@ export const productAnalytics = {
                 key: 'posthog',
             },
         ],
+        rows: productAnalyticsComparisonRows,
         features: [
             {
                 feature: 'Insights',

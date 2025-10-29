@@ -5,7 +5,6 @@ import { useContentData } from 'hooks/useContentData'
 import Link from 'components/Link'
 import { IconRewindPlay, IconToggle, IconTrends, IconUser } from '@posthog/icons'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
-import { errorTrackingComparisonRows } from 'hooks/productData/error_tracking_rows'
 
 const PRODUCT_HANDLE = 'error_tracking'
 
@@ -170,13 +169,6 @@ export default function ErrorTracking(): JSX.Element {
         },
         content: {
             answersDescription: 'Track and resolve errors and exceptions in your application',
-        },
-        overrides: {
-            'feature-comparison': {
-                props: {
-                    rows: errorTrackingComparisonRows,
-                },
-            },
         },
     })
 
