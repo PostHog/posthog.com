@@ -236,7 +236,7 @@ export default function ProductComparisonTable({ competitors, rows }: ProductCom
             name: (
                 <>
                     {key === 'posthog' ? (
-                        <Logo className="h-5 mx-auto" />
+                        <Logo className="h-5 mx-auto w-auto max-w-full" />
                     ) : competitorData[key]?.name ? (
                         competitorData[key].name
                     ) : (
@@ -257,7 +257,7 @@ export default function ProductComparisonTable({ competitors, rows }: ProductCom
                     )}
                 </>
             ),
-            width: 'auto',
+            width: 'minmax(100px, 1fr)',
             align: 'center' as const,
         })),
     ]
@@ -281,7 +281,7 @@ export default function ProductComparisonTable({ competitors, rows }: ProductCom
         const cells = [
             {
                 content: (
-                    <div>
+                    <div className="leading-tight min-w-48">
                         <strong>{featureInfo.name}</strong>
                         {featureInfo.description && (
                             <div className="text-sm text-secondary mt-1">{featureInfo.description}</div>
