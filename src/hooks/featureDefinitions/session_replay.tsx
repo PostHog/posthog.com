@@ -5,7 +5,7 @@ export const sessionReplayFeatures = {
             description: 'AI-generated summaries of session recordings',
         },
     },
-    platform_support: {
+    'Platform support': {
         single_page_app: {
             name: 'Single-page app support',
             description: 'Full support for SPA frameworks like React, Vue, and Angular',

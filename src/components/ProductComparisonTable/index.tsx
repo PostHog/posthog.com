@@ -39,6 +39,12 @@ import { stripe } from '../../hooks/competitorData/stripe'
 // Feature definition imports
 import { errorTrackingFeatures } from '../../hooks/featureDefinitions/error_tracking'
 import { sessionReplayFeatures } from '../../hooks/featureDefinitions/session_replay'
+import { featureFlagsFeatures } from '../../hooks/featureDefinitions/feature_flags'
+import { productAnalyticsFeatures } from '../../hooks/featureDefinitions/product_analytics'
+import { webAnalyticsFeatures } from '../../hooks/featureDefinitions/web_analytics'
+import { experimentsFeatures } from '../../hooks/featureDefinitions/experiments'
+import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
+import { revenueAnalyticsFeatures } from '../../hooks/featureDefinitions/revenue_analytics'
 import { platformFeatures } from '../../hooks/featureDefinitions/platform'
 import { productDescriptions } from '../../hooks/featureDefinitions/products'
 
@@ -68,6 +74,12 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
     const featureDefs: Record<string, any> = {
         error_tracking: errorTrackingFeatures,
         session_replay: sessionReplayFeatures,
+        feature_flags: featureFlagsFeatures,
+        product_analytics: productAnalyticsFeatures,
+        web_analytics: webAnalyticsFeatures,
+        experiments: experimentsFeatures,
+        surveys: surveysFeatures,
+        revenue_analytics: revenueAnalyticsFeatures,
         platform: platformFeatures,
     }
 
