@@ -118,7 +118,7 @@ When an incident is declared, the person who raised the incident is the incident
     - Access to Atlassian is limited due to seats so if you need access talk to Tim or James.
     - Do not try and update the status page via the incident.io dashboard because it won't be sync'd to the Atlassian status page.
 
-The incident lead role is not responsible for fixing the incident, they're responsible for managing it. Sometimes that will be the same person, but if it is too much work for one person. Hand over the incident lead role to someone else not actively working on the fix.
+The incident lead role is not responsible for fixing the incident, they're responsible for managing it. Sometimes that will be the same person. But if it is too much work for one person, hand over the incident lead role to someone else not actively working on the fix.
 
 [You can find all of our production runbooks + specific strategies for debugging outages here (internal)](https://runbooks.posthog.com)
 
