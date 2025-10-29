@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, lazy, Suspense } from 'react'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import { IconDemoThumb, AppIcon } from 'components/OSIcons'
@@ -6,13 +6,12 @@ import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
 import DraggableDesktopIcon from './DraggableDesktopIcon'
-import { Screensaver } from '../Screensaver'
+const Screensaver = lazy(() => import('../Screensaver').then((m) => ({ default: m.Screensaver })))
 import { useInactivityDetection } from '../../hooks/useInactivityDetection'
-import NotificationsPanel from 'components/NotificationsPanel'
+const NotificationsPanel = lazy(() => import('components/NotificationsPanel'))
 import useTheme from '../../hooks/useTheme'
 import { motion } from 'framer-motion'
-import HedgeHogModeEmbed from 'components/HedgehogMode'
-import ReactConfetti from 'react-confetti'
+const HedgeHogModeEmbed = lazy(() => import('components/HedgehogMode'))
 
 declare global {
     interface Window {
@@ -20,14 +19,197 @@ declare global {
     }
 }
 
-interface Product {
-    name: string
-    slug: string
-    Icon: React.ComponentType<any>
-    color?: string
+export const Wallpaper = ({ wallpaper }: { wallpaper: string }): JSX.Element | null => {
+    switch (wallpaper) {
+        case 'hogzilla':
+            return (
+                <div className="select-none flex items-end justify-end absolute inset-0">
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#FFF1D5] to-[#DAE0EB] dark:opacity-0"></div>
+                    <CloudinaryImage
+                        loading="lazy"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
+                        alt=""
+                        width={2574}
+                        height={1256}
+                        className="absolute inset-0 flex items-end justify-end"
+                        imgClassName="max-w-none md:max-h-[628px] h-auto md:h-full w-[700px] md:w-auto z-10"
+                    />
+                </div>
+            )
+        case 'startup-monopoly':
+            return (
+                <div className="select-none block absolute inset-0">
+                    <CloudinaryImage
+                        loading="lazy"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/startup_monopoly_2ac9d45ce3.png"
+                        alt=""
+                        width={1087}
+                        height={540}
+                        className="absolute right-0 top-0 w-[1087px] h-[540px]"
+                    />
+                </div>
+            )
+        case 'office-party':
+            return (
+                <div className="select-none block absolute inset-0">
+                    <div
+                        className="absolute inset-0 opacity-100"
+                        style={{
+                            backgroundImage:
+                                "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_light_27d74f73b5.png')",
+                            backgroundSize: '200px 198px',
+                            backgroundRepeat: 'repeat',
+                        }}
+                    />
+                    <div
+                        className="absolute inset-0 opacity-0 dark:opacity-100"
+                        style={{
+                            backgroundImage:
+                                "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_dark_f1c9f5ce39.png')",
+                            backgroundSize: '200px 198px',
+                            backgroundRepeat: 'repeat',
+                        }}
+                    />
+                    <CloudinaryImage
+                        loading="lazy"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/office_cc4ae8675f.png"
+                        alt=""
+                        width={997}
+                        height={858}
+                        className="absolute bottom-24 left-24 md:bottom-12 md:left-36 w-[498.5px] h-[429px]"
+                    />
+                </div>
+            )
+        case 'keyboard-garden':
+        default:
+            return (
+                <div>
+                    <div
+                        className="absolute inset-0 opacity-100"
+                        style={{
+                            backgroundImage:
+                                "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_light_03a349af5c.png')",
+                            backgroundSize: '100px 100px',
+                            backgroundRepeat: 'repeat',
+                        }}
+                    />
+                    <div
+                        className="absolute inset-0 opacity-0 dark:opacity-100"
+                        style={{
+                            backgroundImage:
+                                "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_dark_9ab088797a.png')",
+                            backgroundSize: '200px 200px',
+                            backgroundRepeat: 'repeat',
+                        }}
+                    />
+                    <div className="absolute bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
+                            alt=""
+                            width={1401}
+                            height={1400}
+                            className="size-[300px] md:size-[700px] dark:hidden"
+                        />
+                        <CloudinaryImage
+                            loading="lazy"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_dark_opt_15e213413c.png"
+                            alt=""
+                            width={1401}
+                            height={1400}
+                            className="size-[300px] md:size-[700px] hidden dark:block"
+                        />
+                    </div>
+                </div>
+            )
+        case '2001-bliss':
+            return (
+                <div
+                    className="select-none block absolute inset-0 bg-repeat bg-center"
+                    style={{
+                        backgroundImage:
+                            "url('https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg')",
+                        backgroundSize: '1180px 738px',
+                    }}
+                >
+                    <CloudinaryImage
+                        loading="lazy"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg"
+                        alt=""
+                        width={1180}
+                        height={738}
+                        imgClassName="hidden"
+                    />
+                    <div className="absolute inset-0 bg-white/60 dark:bg-black/60"></div>
+                </div>
+            )
+        case 'parade':
+            return (
+                <div className="select-none flex items-end fixed inset-0">
+                    <CloudinaryImage
+                        loading="lazy"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_light_ffe041646a.png"
+                        alt=""
+                        width={1565}
+                        height={744}
+                        imgClassName="dark:hidden w-full"
+                    />
+                    <CloudinaryImage
+                        loading="lazy"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_dark_238d90c5ef.png"
+                        alt=""
+                        width={1565}
+                        height={744}
+                        imgClassName="hidden dark:block"
+                    />
+                </div>
+            )
+        case 'coding-at-night':
+            return (
+                <div className="select-none flex items-end fixed inset-0">
+                    <CloudinaryImage
+                        loading="lazy"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/coding_at_night_5d7d21791e.png"
+                        alt=""
+                        width={2360}
+                        height={696}
+                        className="w-full"
+                    />
+                </div>
+            )
+    }
 }
 
-export const useProductLinks = () => {
+export const ConfettiOverlay = ({
+    active,
+    onComplete,
+}: {
+    active: boolean
+    onComplete: () => void
+}): JSX.Element | null => {
+    const [ConfettiComponent, setConfettiComponent] = useState<React.ElementType | null>(null)
+
+    useEffect(() => {
+        if (active && !ConfettiComponent) {
+            import('react-confetti').then((m) => setConfettiComponent(m.default as React.ElementType))
+        }
+    }, [active, ConfettiComponent])
+
+    if (!active || !ConfettiComponent) return null
+
+    const Confetti = ConfettiComponent as React.ComponentType<{
+        onConfettiComplete: () => void
+        recycle: boolean
+        numberOfPieces: number
+    }>
+
+    return (
+        <div className="fixed inset-0">
+            <Confetti onConfettiComplete={onComplete} recycle={false} numberOfPieces={1000} />
+        </div>
+    )
+}
+
+export const useProductLinks = (): AppItem[] => {
     const { posthogInstance, openNewChat } = useApp()
 
     return [
@@ -193,7 +375,7 @@ const validateIconPositions = (
     return true
 }
 
-export default function Desktop() {
+export default function Desktop(): JSX.Element {
     const productLinks = useProductLinks()
     const {
         constraintsRef,
@@ -383,152 +565,7 @@ export default function Desktop() {
             >
                 <div data-scheme="primary" data-app="Desktop" className="fixed size-full">
                     <div className={`fixed inset-0 -z-10 ${getWallpaperClasses()}`} />
-                    {/* Hogzilla */}
-                    <div className="hidden select-none wallpaper-hogzilla:flex items-end justify-end absolute inset-0">
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#FFF1D5] to-[#DAE0EB] dark:opacity-0"></div>
-                        <CloudinaryImage
-                            loading="lazy"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
-                            alt=""
-                            width={2574}
-                            height={1256}
-                            className="absolute inset-0 flex items-end justify-end"
-                            imgClassName="max-w-none md:max-h-[628px] h-auto md:h-full w-[700px] md:w-auto z-10"
-                        />
-                    </div>
-
-                    {/* Startup Monopoly */}
-                    <div className="hidden select-none wallpaper-startup-monopoly:block absolute inset-0">
-                        <CloudinaryImage
-                            loading="lazy"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/startup_monopoly_2ac9d45ce3.png"
-                            alt=""
-                            width={1087}
-                            height={540}
-                            className="absolute right-0 top-0 w-[1087px] h-[540px]"
-                        />
-                    </div>
-
-                    {/* Office party */}
-                    <div className="hidden select-none wallpaper-office-party:block absolute inset-0">
-                        <div
-                            className="absolute inset-0 opacity-100"
-                            style={{
-                                backgroundImage:
-                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_light_27d74f73b5.png')",
-                                backgroundSize: '200px 198px',
-                                backgroundRepeat: 'repeat',
-                            }}
-                        />
-                        <div
-                            className="absolute inset-0 opacity-0 dark:opacity-100"
-                            style={{
-                                backgroundImage:
-                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_dark_f1c9f5ce39.png')",
-                                backgroundSize: '200px 198px',
-                                backgroundRepeat: 'repeat',
-                            }}
-                        />
-                        <CloudinaryImage
-                            loading="lazy"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/office_cc4ae8675f.png"
-                            alt=""
-                            width={997}
-                            height={858}
-                            className="absolute bottom-24 left-24 md:bottom-12 md:left-36 w-[498.5px] h-[429px]"
-                        />
-                    </div>
-
-                    {/* Keyboard garden */}
-                    <div className="hidden select-none wallpaper-keyboard-garden:block">
-                        <div
-                            className="absolute inset-0 opacity-100"
-                            style={{
-                                backgroundImage:
-                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_light_03a349af5c.png')",
-                                backgroundSize: '100px 100px',
-                                backgroundRepeat: 'repeat',
-                            }}
-                        />
-                        <div
-                            className="absolute inset-0 opacity-0 dark:opacity-100"
-                            style={{
-                                backgroundImage:
-                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_dark_9ab088797a.png')",
-                                backgroundSize: '200px 200px',
-                                backgroundRepeat: 'repeat',
-                            }}
-                        />
-                        <div className="absolute bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
-                                alt=""
-                                width={1401}
-                                height={1400}
-                                className="size-[300px] md:size-[700px] dark:hidden"
-                            />
-                            <CloudinaryImage
-                                loading="lazy"
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_dark_opt_15e213413c.png"
-                                alt=""
-                                width={1401}
-                                height={1400}
-                                className="size-[300px] md:size-[700px] hidden dark:block"
-                            />
-                        </div>
-                    </div>
-
-                    {/* 2001 bliss */}
-                    <div
-                        className="hidden select-none wallpaper-2001-bliss:block absolute inset-0 bg-repeat bg-center"
-                        style={{
-                            backgroundImage:
-                                "url('https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg')",
-                            backgroundSize: '1180px 738px',
-                        }}
-                    >
-                        <CloudinaryImage
-                            loading="lazy"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg"
-                            alt=""
-                            width={1180}
-                            height={738}
-                            imgClassName="hidden"
-                        />
-                        <div className="absolute inset-0 bg-white/60 dark:bg-black/60"></div>
-                    </div>
-
-                    {/* Parade */}
-                    <div className="hidden select-none wallpaper-parade:flex items-end fixed inset-0">
-                        <CloudinaryImage
-                            loading="lazy"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_light_ffe041646a.png"
-                            alt=""
-                            width={1565}
-                            height={744}
-                            imgClassName="dark:hidden w-full"
-                        />
-                        <CloudinaryImage
-                            loading="lazy"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_dark_238d90c5ef.png"
-                            alt=""
-                            width={1565}
-                            height={744}
-                            imgClassName="hidden dark:block"
-                        />
-                    </div>
-
-                    {/* Coding at night */}
-                    <div className="hidden select-none wallpaper-coding-at-night:flex items-end fixed inset-0">
-                        <CloudinaryImage
-                            loading="lazy"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/coding_at_night_5d7d21791e.png"
-                            alt=""
-                            width={2360}
-                            height={696}
-                            className="w-full"
-                        />
-                    </div>
+                    <Wallpaper wallpaper={siteSettings.wallpaper} />
 
                     <nav>
                         <motion.ul
@@ -552,26 +589,24 @@ export default function Desktop() {
                     </nav>
                 </div>
                 {!compact && (
-                    <Screensaver
-                        isActive={isInactive || screensaverPreviewActive}
-                        onDismiss={() => {
-                            setScreensaverPreviewActive(false)
-                            dismiss()
-                        }}
-                    />
+                    <Suspense fallback={null}>
+                        <Screensaver
+                            isActive={isInactive || screensaverPreviewActive}
+                            onDismiss={() => {
+                                setScreensaverPreviewActive(false)
+                                dismiss()
+                            }}
+                        />
+                    </Suspense>
                 )}
-                <HedgeHogModeEmbed />
+                <Suspense fallback={null}>
+                    <HedgeHogModeEmbed />
+                </Suspense>
             </ContextMenu>
-            <NotificationsPanel />
-            {confetti && (
-                <div className="fixed inset-0">
-                    <ReactConfetti
-                        onConfettiComplete={() => setConfetti(false)}
-                        recycle={false}
-                        numberOfPieces={1000}
-                    />
-                </div>
-            )}
+            <Suspense fallback={null}>
+                <NotificationsPanel />
+            </Suspense>
+            <ConfettiOverlay active={confetti} onComplete={() => setConfetti(false)} />
         </>
     )
 }

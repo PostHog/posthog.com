@@ -1116,7 +1116,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         })
     }, [])
 
-    const menu = injectDynamicChildren(initialMenu)
+    const menu = useMemo(() => injectDynamicChildren(initialMenu), [injectDynamicChildren])
 
     const closeWindow = useCallback(
         (item: AppWindow) => {
