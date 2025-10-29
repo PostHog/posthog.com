@@ -11,12 +11,14 @@ A trial creates space for you and the customer to validate technical fit, agree 
 ## When to offer Trials
 
 **Offer a trial when:**
+
 - Qualified for sales-assist (>$20K ARR potential)
 - Clear decision makers and timeline identified
 - Customer wants technical validation
 - Customer is ready to invest time in an evaluation of PostHog
 
 **Skip the trial when:**
+
 - Below sales-assist threshold (route to self-serve)
 - No clear timeline or decision process
 - They are price shopping with no technical criteria
@@ -27,6 +29,7 @@ A trial creates space for you and the customer to validate technical fit, agree 
 We default to 2 weeks ($20-$60K ARR) unless there's a compelling reason for 4 weeks.
 
 **Extend to 4 weeks when:**
+
 - Deal value >$60K ARR
 - Customer has a complex technical environment requiring extended implementation
 - Multiple stakeholder validation required
@@ -84,12 +87,14 @@ As customers are technically validating PostHog, you should also start to work w
 Different customers may need and/or request different levels of support during their trial. We should match the customer's energy accordingly:
 
 **Hands-on (larger deals, less technical teams):**
+
 - Weekly check-ins
 - Proactive dashboard building
 - Regular training sessions
 - Frequent Slack engagement
 
 **Self-serve (technical teams, smaller deals):**
+
 - We're available when needed
 - Very quick response times
 - Async support via Slack
@@ -105,17 +110,20 @@ These signals are not guaranteed to always indicate success. Some teams are chat
 > Pro tip: You can always use session replay to also check their activity and learn how they are using PostHog!
 
 **High engagement signals:**
+
 - Active Slack channel (questions, wins, feedback)
 - High insight creation volume
 - Extensive event instrumentation
 - Regular meetings scheduled
 
 **Low engagement signals:**
+
 - Quiet Slack channel
 - Limited insight creation
 - No logins for 3-5+ days
 
 **If engagement drops, be proactive:**
+
 - Build dashboards tied to their KPIs and share with stakeholders
 - Send Loom videos showing interesting insights from their data or record your own demos
 - Ask directly: "Is this still a priority?"
