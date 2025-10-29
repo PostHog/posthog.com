@@ -8,9 +8,9 @@ While ETL tools like Fivetran, Airbyte, and similar platforms often offer unoffi
 
 ## ETL tools
 
-ETL tools like Fivetran and Airbyte are designed for traditional business data with predictable volumes and update patterns, but product analytics data is fundamentally different. PostHog customers often generate billions of events per day with bursty traffic patterns that can overwhelm ETL tool rate limits and quotas. These tools typically sync on hourly or daily schedules, which doesn't meet the real-time requirements of most of our customers.
+ETL tools like Fivetran and Airbyte are designed for traditional business data with predictable volumes and update patterns, but product analytics data is fundamentally different. PostHog customers often generate billions of events per day with bursty traffic patterns that can overwhelm ETL tool rate limits and quotas. These tools typically sync on hourly or daily schedules, which doesn't meet the real-time requirements of most of our customers. In addition, the way that these tools grab data (uncompressed rest API requests in small increments) requires disproportionally large amounts of resources, which means we often need to rate limit those requests.
 
-When data doesn't appear in your warehouse, ETL tools make it extremely difficult to diagnose issues due to their black box processing and limited error visibility. Failures often surface as generic "sync failed" messages without actionable details, and the complex dependency chains mean ETL tools add another layer of infrastructure that can fail independently of PostHog. Additionally, ETL tools introduce unnecessary costs and complexity through additional licensing fees based on data volume and data duplication as your data gets copied multiple times (PostHog → ETL tool → warehouse).
+When data doesn't appear in your warehouse, ETL tools make it extremely difficult to diagnose issues due to their black box processing and limited error visibility. The complex dependency chains mean ETL tools add another layer of infrastructure that can fail independently of PostHog. Additionally, ETL tools introduce unnecessary costs and complexity through additional licensing fees based on data volume and data duplication as your data gets copied multiple times (PostHog → ETL tool → warehouse).
 
 ## Why use PostHog's data pipelines
 
@@ -18,7 +18,7 @@ PostHog's batch exports are purpose-built for product analytics, offering direct
 
 Batch exports provide superior reliability and debugging through enterprise-grade workflow orchestration built on Temporal, comprehensive logging that shows exactly what data was exported and when, automatic retries with exponential backoff for temporary failures, and built-in testing to validate destinations before creating exports. Since PostHog owns the entire pipeline, our team can provide direct support to help debug any issues that arise.
 
-Using PostHog's data pipelines is also often significantly cheaper than using an external ETL tool.
+Using PostHog's data pipelines is also often much cheaper than using an external ETL tool.
 
 ## Supported destinations
 
@@ -47,5 +47,3 @@ If you're currently using an ETL tool with PostHog, migrating to batch exports i
 3. **Test the configuration** using PostHog's built-in testing
 4. **Start the export** and verify data appears in your warehouse
 5. **Disable the ETL tool** once you're confident the batch export is working
-
-The migration typically takes less than an hour and provides immediate benefits in terms of reliability, cost, and data freshness.
