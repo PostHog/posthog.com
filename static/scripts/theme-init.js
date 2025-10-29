@@ -5,6 +5,11 @@
         preferredTheme = newTheme
         document.body.className = newTheme
         window.__onThemeChange(newTheme)
+        
+        var metaThemeColor = document.querySelector('meta[name="theme-color"]')
+        if (metaThemeColor) {
+            metaThemeColor.setAttribute('content', newTheme === 'dark' ? '#1e1f23' : '#ffffff')
+        }
     }
     var preferredTheme
     var darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
