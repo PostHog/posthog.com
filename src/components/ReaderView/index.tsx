@@ -674,10 +674,6 @@ function ReaderViewContent({
                                     padding
                                         ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
                                         : ''
-                                } mx-auto transition-all ${
-                                    fullWidthContent || body?.type !== 'mdx'
-                                        ? 'max-w-full'
-                                        : contentMaxWidthClass || 'max-w-2xl'
                                 }`}
                             >
                                 {/* <DebugContainerQuery /> */}
@@ -686,9 +682,25 @@ function ReaderViewContent({
                                         <GatsbyImage image={getImage(body.featuredImage)} alt={title} />
                                     </div>
                                 )}
-                                {title && !hideTitle && <h1>{title}</h1>}
+                                {title && !hideTitle && (
+                                    <h1
+                                        className={`mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
+                                        {title}
+                                    </h1>
+                                )}
                                 {(body.date || body.contributors || body.tags) && (
-                                    <div className="flex items-center space-x-2 mb-4 flex-wrap">
+                                    <div
+                                        className={`flex items-center space-x-2 mb-4 flex-wrap mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
                                         {body.contributors && <ContributorsSmall contributors={body.contributors} />}
                                         {body.date && <p className="text-sm text-secondary m-0">{body.date}</p>}
                                         {body.tags && (
@@ -710,7 +722,14 @@ function ReaderViewContent({
                                     tableOfContents.length > 0 &&
                                     !hideMobileTableOfContents &&
                                     !hideRightSidebar && (
-                                        <div data-scheme="secondary" className="@4xl/app-reader:hidden mt-4">
+                                        <div
+                                            data-scheme="secondary"
+                                            className={`@4xl/app-reader:hidden mt-4 mx-auto transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? 'max-w-full'
+                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
+                                        >
                                             <TableOfContents
                                                 tableOfContents={tableOfContents}
                                                 contentRef={contentRef}
@@ -721,7 +740,13 @@ function ReaderViewContent({
                                 {body.featuredVideo && <iframe src={body.featuredVideo} />}
                                 <div className="reader-content-container">
                                     {body.type === 'mdx' ? (
-                                        <div className={'@container'}>
+                                        <div
+                                            className={`@container [&>*:not(.OSTable)]:mx-auto [&>*:not(.OSTable)]:transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? '[&>*:not(.OSTable)]:max-w-full'
+                                                    : contentMaxWidthClass || '[&>*:not(.OSTable)]:max-w-2xl'
+                                            }`}
+                                        >
                                             {/* Display customer metadata if this is a customer page */}
                                             {isCustomerPage && customerKey && (
                                                 <CustomerMetadata customerKey={customerKey} />
