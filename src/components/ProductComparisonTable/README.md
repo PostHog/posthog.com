@@ -7,13 +7,13 @@ A flexible comparison table component for displaying product and platform featur
 ```typescript
 interface ProductComparisonTableProps {
     competitors: string[] // Array of competitor keys
-    rows: RowConfig[] // Row configuration array
+    rows: (RowConfig | string)[] // Array of row configs or string paths
     width?: 'auto' | 'full' // Table width (default: 'auto')
 }
 
 interface RowConfig {
-    // Shorthand notation (recommended)
-    path?: string // e.g., "error_tracking.core.error_grouping" or "product_analytics"
+    // Shorthand path (recommended)
+    path?: string // e.g., "error_tracking.core.error_alerts" or "error_tracking.core"
 
     // Type is inferred automatically, but can be explicitly set if needed
     type?: 'feature' | 'header' | 'platform' | 'product'
@@ -40,87 +40,115 @@ The component automatically infers the row type based on the fields present:
 
 ## Configuration Examples
 
-### Shorthand Path Notation
+### Inline Rows (Recommended)
 
-```typescript
-// Single feature
-{
-    path: 'error_tracking.core.error_grouping'
-}
+You can define rows directly inline using string paths:
 
-// Platform feature
-{
-    path: 'platform.deployment.self_host'
-}
-
-// Product-level comparison
-{
-    path: 'product_analytics'
-}
+```tsx
+<ProductComparisonTable
+    competitors={['posthog', 'sentry', 'rollbar']}
+    rows={[
+        'error_tracking.core.error_alerts', // Individual feature
+        'error_tracking.summary', // Product-level comparison
+        'error_tracking.core', // All features in core section
+        'error_tracking', // Entire product (all sections)
+        'platform.deployment.self_host', // Individual platform feature
+        'platform.pricing', // All pricing features
+        {
+            path: 'platform.analytics_integration.built_in_analytics',
+            label: 'Custom label',
+            description: 'Custom description',
+        },
+    ]}
+/>
 ```
 
-### Explicit Configuration
+### Path Expansion
 
-```typescript
-// Header (type inferred from label)
-{ label: 'Core features' }
+The component automatically expands shorter paths:
 
-// Product-level comparison
-{ product: 'product_analytics' }
+-   `error_tracking` → Expands to entire product (summary + all sections with headers)
+-   `error_tracking.summary` → Expands to product-level comparison row
+-   `error_tracking.core` → Expands to section header + all features in core section
+-   `platform.deployment` → Expands to section header + all deployment features
+-   `error_tracking.core.error_alerts` → Individual feature (no expansion)
 
-// Feature
-{ product: 'error_tracking', feature: 'error_alerts' }
+### External Row Files (Complex Cases)
 
-// Feature with overrides
-{
-  product: 'error_tracking',
-  feature: 'exception_capture',
-  label: 'Real-time error capture',
-  description: 'Capture and report errors as they happen'
-}
+For more complex configurations, you can use external files:
 
-// Platform feature (type inferred from feature-only)
-{ feature: 'open_source' }
+```javascript
+// comparison-rows.js
+export const comparisonRows = [
+    'error_tracking.core',
+    'platform.pricing',
+    {
+        path: 'error_tracking.integrations.session_replays',
+        label: 'Session replay integration',
+    },
+]
+```
+
+```tsx
+import { comparisonRows } from './comparison-rows'
+
+;<ProductComparisonTable competitors={['posthog', 'sentry']} rows={comparisonRows} />
 ```
 
 ### Path Structure
 
--   Product features: `{product}.{featureSet}.{feature}`
--   Platform features: `platform.{category}.{feature}`
--   Product-level: `{product}` (checks if product is available)
+-   **Product features**: `{product}.{featureSet}.{feature}`
+-   **Platform features**: `platform.{category}.{feature}`
+-   **Sections**: `{product}.{featureSet}` (expands to all features in section)
+-   **Products**: `{product}` (expands to entire product with all sections)
+-   **Summary**: `{product}.summary` (product-level comparison row)
 
 ## Usage
 
 ### In Blog Articles (MDX)
 
+**Inline rows (simplest):**
+
 ```mdx
-import ProductComparisonTable from 'components/ProductComparisonTable'
+<ProductComparisonTable
+    competitors={['posthog', 'sentry', 'rollbar']}
+    rows={[
+        'error_tracking.core.error_alerts',
+        'error_tracking.core.exception_capture',
+        'platform.deployment.self_host',
+    ]}
+/>
+```
+
+**With section expansion:**
+
+```mdx
+<ProductComparisonTable
+    competitors={['posthog', 'sentry', 'rollbar']}
+    rows={[
+        'error_tracking.core', // Expands to all core features
+        'platform.pricing', // Expands to all pricing features
+    ]}
+/>
+```
+
+**External file (for complex cases):**
+
+```mdx
 import { comparisonRows } from './comparison-rows'
 
 <ProductComparisonTable competitors={['posthog', 'sentry', 'rollbar']} rows={comparisonRows} />
-```
-
-**Example row configuration:**
-
-```javascript
-export const comparisonRows = [
-    { path: 'error_tracking.core.error_alerts' },
-    { path: 'error_tracking.core.exception_capture' },
-    { path: 'platform.deployment.self_host' },
-]
 ```
 
 ### Product-Level Comparisons
 
 For comparing which products competitors offer:
 
-```javascript
-export const productRows = [
-    { product: 'product_analytics' },
-    { product: 'session_replay' },
-    { product: 'error_tracking' },
-    { product: 'llm_analytics' },
-]
+```tsx
+<ProductComparisonTable
+    competitors={['posthog', 'amplitude']}
+    rows={['product_analytics.summary', 'session_replay.summary', 'error_tracking.summary']}
+/>
 ```
 
 ### In Product Pages
@@ -156,6 +184,33 @@ export const errorTrackingProductFeatures = [
 ]
 ```
 
+## Data Structure
+
+Product feature definitions are organized with a `summary` section for product-level comparisons:
+
+```typescript
+// error_tracking.tsx
+export const errorTrackingFeatures = {
+    summary: {
+        name: 'Error tracking',
+        description: 'Track and monitor errors and exceptions in your code',
+    },
+    core: {
+        error_alerts: {
+            name: 'Error alerts',
+            description: 'Get notified in real time...',
+        },
+        // ... more features
+    },
+    monitoring: {
+        // ... features
+    },
+    integrations: {
+        // ... features
+    },
+}
+```
+
 ## Data Loading
 
 The component automatically loads:
@@ -177,7 +232,7 @@ Labels and descriptions are resolved in this order:
 
 1. **Override values** in row config (highest priority) - `label` and `description` props
 2. **Feature definition files** - from `src/hooks/featureDefinitions/`
-3. **Product descriptions** - from `src/hooks/featureDefinitions/products.tsx` for product-level comparisons
+3. **Summary section** - for product-level comparisons
 4. **Fallback** - feature key or product handle
 
 ### Headers

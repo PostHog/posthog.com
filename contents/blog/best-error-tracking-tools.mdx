@@ -21,7 +21,6 @@ seo:
 ---
 
 import { ArrayCTA } from 'components/ArrayCTA'
-import { errorTrackingRows } from './best-error-tracking-tools'
 
 Every developer has shipped a bug that slipped through tests. What matters isn’t perfection, it’s how quickly you find out, understand the cause, and ship a fix. Great error tracking tools give you context, not just stack traces: they show what the user did right before the exception, which release it came from, and what else broke as a result.
 
@@ -43,7 +42,22 @@ Before jumping into the list, here are the features we are looking for in each t
 
 <ProductComparisonTable
     competitors={['posthog', 'sentry', 'rollbar', 'bugsnag', 'glitchtip', 'signoz']}
-    rows={errorTrackingRows}
+    rows={[
+        'error_tracking.core.exception_capture',
+        'error_tracking.core.error_grouping',
+        'error_tracking.core.console_log_capture',
+        'error_tracking.core.mobile_sdk_coverage',
+        { label: 'Platform' },
+        'platform.deployment.self_host',
+        'platform.pricing.usage_based_pricing',
+        'platform.integrations.ci_cd_integrations',
+        {
+            path: 'platform.analytics_integration.built_in_analytics',
+            label: 'Built-in product analytics',
+            description: 'Combine error tracking with product analytics data',
+        },
+        'platform.deployment.open_source',
+    ]}
 />
 
 ### 1. PostHog: Best for contextual debugging and developer control

@@ -1,4 +1,8 @@
 export const errorTrackingFeatures = {
+    summary: {
+        name: 'Error tracking',
+        description: 'Track and monitor errors and exceptions in your code',
+    },
     core: {
         error_alerts: {
             name: 'Error alerts',

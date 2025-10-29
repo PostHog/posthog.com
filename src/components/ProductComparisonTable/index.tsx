@@ -59,11 +59,206 @@ interface RowConfig {
 
 interface ProductComparisonTableProps {
     competitors: string[]
-    rows: RowConfig[]
+    rows: (RowConfig | string)[] // Accept both RowConfig objects and string paths
     width?: 'auto' | 'full'
 }
 
 export default function ProductComparisonTable({ competitors, rows, width = 'auto' }: ProductComparisonTableProps) {
+    // Feature definitions (loaded before use)
+    const featureDefs: Record<string, any> = {
+        error_tracking: errorTrackingFeatures,
+        session_replay: sessionReplayFeatures,
+        platform: platformFeatures,
+    }
+
+    // Expand a section or product path into individual row configs
+    const expandPath = (path: string): RowConfig[] => {
+        const parts = path.split('.')
+        const expanded: RowConfig[] = []
+
+        if (parts.length === 1) {
+            // "error_tracking" - expand entire product (all sections)
+            const product = parts[0]
+            if (product === 'platform') {
+                // Expand all platform sections
+                const platformDefs: any = platformFeatures
+                if (platformDefs) {
+                    for (const featureSet in platformDefs) {
+                        const set = platformDefs[featureSet]
+                        if (set) {
+                            // Add header for section
+                            expanded.push({ label: featureSet, type: 'header' })
+                            // Add all features in this set
+                            for (const feature in set) {
+                                expanded.push({
+                                    type: 'platform',
+                                    featureSet,
+                                    feature,
+                                })
+                            }
+                        }
+                    }
+                }
+            } else {
+                // Expand all sections of a product
+                const defs = featureDefs[product]
+                if (defs) {
+                    // Add summary if it exists
+                    if (defs.summary) {
+                        expanded.push({
+                            type: 'product',
+                            product,
+                            label: defs.summary.name,
+                            description: defs.summary.description,
+                        })
+                    }
+                    // Add all sections
+                    for (const featureSet in defs) {
+                        if (featureSet === 'summary') continue
+                        const set = defs[featureSet]
+                        if (set && typeof set === 'object') {
+                            // Add header for section (convert to sentence case)
+                            const sectionName = featureSet
+                                .split('_')
+                                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                                .join(' ')
+                            expanded.push({ label: sectionName, type: 'header' })
+                            // Add all features in this section
+                            for (const feature in set) {
+                                if (set[feature] && typeof set[feature] === 'object' && 'name' in set[feature]) {
+                                    expanded.push({
+                                        type: 'feature',
+                                        product,
+                                        featureSet,
+                                        feature,
+                                    })
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else if (parts.length === 2) {
+            // "error_tracking.core" - expand a section
+            const [product, featureSet] = parts
+            if (product === 'platform') {
+                // Platform section
+                const platformDefs: any = platformFeatures
+                const set = platformDefs?.[featureSet]
+                if (set) {
+                    expanded.push({ label: featureSet, type: 'header' })
+                    for (const feature in set) {
+                        expanded.push({
+                            type: 'platform',
+                            featureSet,
+                            feature,
+                        })
+                    }
+                }
+            } else {
+                // Product section
+                const defs = featureDefs[product]
+                const set = defs?.[featureSet]
+                if (set && typeof set === 'object') {
+                    if (featureSet === 'summary') {
+                        // Summary is a single product-level row
+                        expanded.push({
+                            type: 'product',
+                            product,
+                            label: set.name,
+                            description: set.description,
+                        })
+                    } else {
+                        // Regular section - add header and all features
+                        // Convert snake_case to Title Case (e.g., "core_features" -> "Core Features")
+                        const sectionName = featureSet
+                            .split('_')
+                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                            .join(' ')
+                        expanded.push({ label: sectionName, type: 'header' })
+                        for (const feature in set) {
+                            if (set[feature] && typeof set[feature] === 'object' && 'name' in set[feature]) {
+                                expanded.push({
+                                    type: 'feature',
+                                    product,
+                                    featureSet,
+                                    feature,
+                                })
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return expanded
+    }
+
+    // Normalize rows - convert strings to RowConfig and expand sections/products
+    const normalizeRows = (rows: (RowConfig | string)[]): RowConfig[] => {
+        const normalized: RowConfig[] = []
+
+        for (const row of rows) {
+            if (typeof row === 'string') {
+                // String path - check if it needs expansion
+                const parts = row.split('.')
+                // Only expand 1 or 2 part paths (products or sections)
+                // 3 part paths are individual features and don't need expansion
+                if (parts.length <= 2) {
+                    if (parts[0] === 'platform') {
+                        // Platform expansion (e.g., "platform.deployment" or "platform")
+                        if (parts.length === 1 || parts.length === 2) {
+                            normalized.push(...expandPath(row))
+                            continue
+                        }
+                    } else {
+                        // Product expansion
+                        const product = parts[0]
+                        const defs = featureDefs[product]
+                        if (defs) {
+                            if (parts.length === 1 || (parts.length === 2 && parts[1] === 'summary')) {
+                                // Expand entire product or summary
+                                normalized.push(...expandPath(row))
+                                continue
+                            } else if (parts.length === 2) {
+                                // Expand section
+                                normalized.push(...expandPath(row))
+                                continue
+                            }
+                        }
+                    }
+                }
+                // Individual feature (3+ parts) - convert to RowConfig
+                normalized.push({ path: row })
+            } else {
+                // RowConfig object - check if path needs expansion
+                if (row.path) {
+                    const parts = row.path.split('.')
+                    if (parts.length <= 2) {
+                        const product = parts[0]
+                        const defs = featureDefs[product]
+                        if (defs) {
+                            // Expand, but apply overrides from row config
+                            const expanded = expandPath(row.path)
+                            if (row.label || row.description) {
+                                // Apply overrides to first expanded row
+                                if (expanded.length > 0 && expanded[0].type !== 'header') {
+                                    expanded[0] = { ...expanded[0], ...row }
+                                }
+                            }
+                            normalized.push(...expanded)
+                            continue
+                        }
+                    }
+                }
+                // No expansion needed
+                normalized.push(row)
+            }
+        }
+
+        return normalized
+    }
+
     // Parse shorthand notation (e.g., "error_tracking.core" or "platform.deployment.self_host")
     const parseRowConfig = (row: RowConfig): RowConfig => {
         if (row.path) {
@@ -152,8 +347,9 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         return row
     }
 
-    // Parse all rows to support shorthand notation and infer types
-    const parsedRows = rows.map((row) => inferType(parseRowConfig(row)))
+    // Normalize, parse, and expand rows
+    const normalizedRows = normalizeRows(rows)
+    const parsedRows = normalizedRows.map((row) => inferType(parseRowConfig(row)))
 
     // Competitor data
     const competitorData: Record<string, any> = {
@@ -187,13 +383,6 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         baremetrics,
         chartmogul,
         stripe,
-    }
-
-    // Feature definitions
-    const featureDefs: Record<string, any> = {
-        error_tracking: errorTrackingFeatures,
-        session_replay: sessionReplayFeatures,
-        platform: platformFeatures,
     }
 
     // Helper to get feature value from competitor data
@@ -308,8 +497,17 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             }
         }
 
-        // Handle product-level comparisons
+        // Handle product-level comparisons - check summary first, then fallback to productDescriptions
         if (row.type === 'product' && row.product) {
+            const defs = featureDefs[row.product]
+            const summary = defs?.summary
+            if (summary) {
+                return {
+                    name: row.label || summary.name || row.product,
+                    description: row.description || summary.description,
+                }
+            }
+            // Fallback to productDescriptions for backward compatibility
             const productDesc = productDescriptions[row.product as keyof typeof productDescriptions]
             if (productDesc) {
                 return {
