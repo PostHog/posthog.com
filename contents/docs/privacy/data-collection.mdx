@@ -12,6 +12,7 @@ You should consider the following tools to help you manage data collection:
 | Feature | Description |
 |---------|-------------|
 | [Asking for opt out](#asking-for-opt-out) | A top-level opt out of all data collection |
+| [IP data capture](#ip-data-capture) | Control whether client IP addresses are captured or discarded |
 | [Autocapture behavior](#autocapture) | Configure what elements and interactions are automatically captured |
 | [Masking sensitive information](#masking-sensitive-information) | Prevent specific sensitive data from being collected |
 | [Overriding captured events](#overriding-captured-events) | Modify or filter event data before it's sent to PostHog |
@@ -72,6 +73,39 @@ To opt users out by default, set `opt_out_capturing_by_default` to `true` in the
 import OptOutDefault from '../product-analytics/_snippets/multilanguage/opt-out-default.mdx'
 
 <OptOutDefault />
+
+## IP data capture
+
+You can control whether client IP addresses are captured or discarded at both the organization and project levels. This helps ensure consistent privacy controls across all environments.
+
+### Organization-level configuration
+
+Organizations can set a default IP data capture policy that automatically applies to all new projects created within the organization. This eliminates the need to manually configure IP data capture settings for each new environment.
+
+To configure the organization default:
+
+1. Go to **Settings** > **Organization** > **General**
+2. Find the **IP data capture default** setting
+3. Choose whether new projects should capture or discard client IP data by default
+
+**EU organizations**: Automatically default to IP data capture disabled for GDPR compliance. This ensures that all new projects created in EU organizations are configured with appropriate privacy settings from the start.
+
+### Project-level configuration
+
+Individual projects can configure their own IP data capture setting, which overrides the organization default if needed. This is useful when you have specific privacy requirements for a particular project or environment.
+
+To configure at the project level:
+
+1. Go to **Settings** > **Project** > **General**
+2. Find the **IP data capture configuration** setting
+3. Choose whether this project should capture or discard client IP data
+
+### How it works
+
+- **New projects**: Automatically inherit the organization's IP data capture default setting
+- **Existing projects**: Are not affected by organization-level changes - they retain their current configuration
+- **Project-level override**: Individual projects can override the organization default if needed
+- **Privacy compliance**: Disabling IP capture helps with GDPR and other privacy regulations by preventing collection of identifiable network information
 
 ## Autocapture
 
