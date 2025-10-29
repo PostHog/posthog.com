@@ -59,7 +59,7 @@ In each growth review, we usually do a couple of deep dives. Topics can be propo
 - Why was churn so high last month? Can we identify any reasons?
 - Where in the onboarding funnel do new users struggle?
 - Can we find leading indicators that predict long-term product usage? (e.g. Facebook’s 7 friends in 10 days)
-- Are there any difference between [high ICP](/handbook/who-we-are-building-for) and non ICP customers in how they use the product?
+- Are there any difference between [high ICP](/handbook/who-we-build-for) and non ICP customers in how they use the product?
 - Are our 10 biggest customers happy users of the product?
 
 ## In-sync or async?
@@ -104,4 +104,4 @@ Very similar to the above, except that the metrics walkthrough doesn't happen in
 - [Main growth review document](https://docs.google.com/document/d/1MgunwZ4_scm7RaEBocyQJzQUt48kTkiBX_529Do50F4/edit#heading=h.na8qqkjykso0) (Session Replay example)
 - [Metrics overview spreadsheet](https://docs.google.com/spreadsheets/d/1Q_hibP9Pv4b8H_9guceKXNrTUP0B_5hWvmiM-EJ2LrU/edit#gid=541742743)
 - [PostHog notebook with relevant usage graphs](https://us.posthog.com/project/2/notebooks/6FwGbwN5) (Session Replay example)
-- [Metabase dashboard for per-product revenue](http://metabase-prod-us/dashboard/39-revenue-growth-by-product?product=session_replay)
+- [Metabase dashboard for per-product revenue](https://metabase.prod-us.posthog.dev/dashboard/39-revenue-growth-by-product?product=session_replay)

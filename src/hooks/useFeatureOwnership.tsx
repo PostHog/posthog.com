@@ -198,14 +198,9 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Marketing analytics',
         owner: ['web-analytics'],
     },
-    'max-ai': {
-        feature: 'PostHog AI platform',
-        owner: ['posthog-ai'],
-        label: 'feature/max-ai',
-    },
     'mcp-server': {
         feature: 'MCP server',
-        owner: ['max-ai'],
+        owner: ['posthog-ai'],
         label: 'feature/mcp',
     },
     messaging: {
@@ -223,7 +218,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     onboarding: {
         feature: 'Onboarding',
-        owner: ['content'],
+        owner: ['growth'],
     },
     'path-cleaning': {
         feature: 'Path cleaning',
@@ -267,6 +262,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'PostHog.com',
         owner: ['brand'],
         label: false,
+    },
+    'posthog-ai': {
+        feature: 'PostHog AI platform',
+        owner: ['posthog-ai'],
+        label: 'feature/posthog-ai',
     },
     'project-homepage': {
         feature: 'Project homepage',
@@ -330,7 +330,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'sdks-mobile': {
         feature: 'SDKs (mobile)',
-        owner: [''],
+        owner: ['mobile'],
         notes: (
             <>
                 Shared responsibility with the relevant small team for feature-owned areas.
@@ -413,7 +413,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     toolbar: {
         feature: 'Toolbar',
-        owner: ['replay'],
+        owner: ['growth'],
     },
     'usage-reports': {
         feature: 'Usage reports',

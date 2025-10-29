@@ -4,15 +4,31 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Incidents are going to happen.
+## The TL;DR 
 
-If you'd rather watch a Loom, check out an incident drill recording [here](https://www.loom.com/share/5603d887624f4981bc089677cb4b8611).
+* If you get paged, acknowledge the page and look at the associated metrics - if it looks even slightly bad and not recovering - **CREATE AN INCIDENT**
+* If you notice something broken with the app (not just a bug) - **CREATE AN INCIDENT**
+* If you are not sure - **CREATE AN INCIDENT**
+* _How?_ 
+  * Click the `Declare incident` button on an alert or do `/inc` in any slack channel
+* _What?_ 
+  * Join the incident channel
+  * Assign yourself as lead (you can always re-assign later)
+  * Share whatever info you have at that time
+  * Escalate by bringing in the relevant team, engineers or via incident.io using the options a the top of the channel
+  * Update the statuspage if there is any noticeable impact to users
 
-## When to raise an incident
+## Raising an incident
 
-> **Anyone can declare an incident and, when in doubt, you should always raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong. It's _always_ better to sound an alarm than not. 
+![alert-example](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/incidentio_alert_343ed2062b.png)
 
-To declare an incident, type `/incident` anywhere in Slack. This creates a new dedicated channel for the incident and add a few stakeholders. It will  trigger an alert in the #incidents channel so everyone else can be aware. Declaring an incident **doesn't** trigger any external notifications. 
+
+Incidents are going to happen. If you'd rather watch a Loom, check out an incident drill recording [here](https://www.loom.com/share/5603d887624f4981bc089677cb4b8611).
+
+
+> **Anyone can declare an incident and, when in doubt, you should always raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong. It's _always_ better to sound an alarm than not.  
+
+To declare an incident, type `/incident` anywhere in Slack. This creates a new dedicated channel for the incident and add a few stakeholders. It will trigger an alert in the #incidents channel so everyone else can be aware. Declaring an incident **doesn't** trigger any external notifications. 
 
 Once an incident is raised an automatic workflow begins that will help you summarize the issue and escalate it appropriately. 
 
@@ -27,11 +43,12 @@ Some things that should definitely be an incident
 Things that _shouldn’t_ be an incident
 
 - Insights returning incorrect data
-- Events being < 5 minutes behind
+- Events being < 5-10 minutes behind (E2E ingestion lag)
 - Unable to save insights, create feature flags
 - Expected disruption which happens as part of scheduled maintenance
 
 > Planning some maintenance? Check the [announcements](/handbook/growth/brand/product-announcements) section instead.
+
 
 ### Security-specific guidance
 
@@ -92,18 +109,18 @@ Examples
 
 ## What happens during an incident?
 
-The person who raised the incident is the incident lead. It’s their responsibility to:
+When an incident is declared, the person who raised the incident is the incident lead. It’s their responsibility to:
 
-- Make sure the right people join the call. This includes [the current on-call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Support. Product Marketers can assist in running communications if required.
+- Make sure the right people join the call. This includes the current on-call person (@on-call-global in Slack) and the team responsible for the alert (we have a [workflow](https://app.incident.io/posthog/settings/workflows/01K7PVWXBB1EWRJB24BBEHYA51) which will try to add these people automatically). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Support. Product Marketers can assist in running communications if required.
 - Take notes in the incident channel. This should include timestamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
 - Update the [status page](https://status.posthog.com/). This is best done in the incident Slack channel using `/incident statuspage` (`/inc sp`). 
     - We use Atlassian for hosting our status page. It is automatically updated from the incident.io slack command.
     - Access to Atlassian is limited due to seats so if you need access talk to Tim or James.
     - Do not try and update the status page via the incident.io dashboard because it won't be sync'd to the Atlassian status page.
 
-If the person who raised the incident is the best person to debug the issue, they should hand over the incident lead role to someone else on the call.
+If the person who raised the incident isn't the best person to debug the issue, they should hand over the incident lead role to someone else on the call.
 
-[You can find all of our production runbooks + specific strategies for debugging outages here (internal)](http://runbooks/)
+[You can find all of our production runbooks + specific strategies for debugging outages here (internal)](https://runbooks.posthog.com)
 
 ### Customer communications
 
@@ -148,13 +165,9 @@ Once the org has had their full access restored, repeat the steps above, but thi
 
 When we’ve identified the root cause of the issue and put a fix in place. End the incident by typing `/inc close` in the incident channel. Make sure to also mark the incident as resolved on the status page.
 
-## What happens after an incident? (Incident analysis)
+## What happens after an incident?
 
-1. If the impact was high, or the incident recurs frequently, proceed to the next step to document the incident and hold an incident-review meeting. If this is a low-/no-impact incident, it's recommended to opt-out of the post-incident flow - we only want to document relevant incidents and keep our processes lean!
-2. Create a PR against the [incidents analysis repository](https://github.com/PostHog/incidents-analysis) using [this template](https://github.com/PostHog/incidents-analysis/blob/master/yyyy-mm-dd-template.md).
-3. Hold a ~30 min meeting discussing the above
-4. If an incident had significant impact on customers (like data loss or flags not being available), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
+Once the incident is resolved, the incident lead should **step away**. Take a walk, go to the gym, have some tea, take a shower. The longer the incident took to resolve, and the more directly customer impacting it was, the more important this is. Bring another team member up to speed, hand off outstanding customer communications, and get your head clear for the post-mortem and followup actions. Anyone else heavily involved in the response should do the same.
 
-All critical incidents should have a PR in the post-mortem repository + a scheduled meeting. All major incidents should have a PR in the post-mortem repository, and optionally a scheduled meeting.
+In almost all cases, a valid incident will have a post-mortem - check out [Post-mortems](/handbook/engineering/operations/post-mortems) for more details.
 
-_Thanks to [Incident Review and Postmortem Best Practices](https://blog.pragmaticengineer.com/postmortem-best-practices/) from Pragmatic Engineer_

@@ -53,6 +53,13 @@ exports.onPreInit = async function (_, options) {
 
 const cloudinaryCache = {}
 
+const REPO_CONFIGS = {
+    'posthog-main-repo': {
+        stripPrefix: '/docs/published/',
+        pathPrefix: '/handbook/engineering',
+    },
+}
+
 export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
     if (
         !process.env.CLOUDINARY_API_KEY ||
@@ -145,7 +152,20 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             })
         }
 
-        const slug = createFilePath({ node, getNode, basePath: `pages` })
+        let slug = createFilePath({ node, getNode, basePath: `pages` })
+        if (parent?.sourceInstanceName) {
+            const config = REPO_CONFIGS[parent.sourceInstanceName]
+            if (config) {
+                if (slug.startsWith(config.stripPrefix)) {
+                    slug = slug.substring(config.stripPrefix.length)
+                }
+                // Ensure slug starts with / before concatenating
+                if (!slug.startsWith('/')) {
+                    slug = `/${slug}`
+                }
+                slug = `${config.pathPrefix}${slug}`
+            }
+        }
 
         createNodeField({
             node,
