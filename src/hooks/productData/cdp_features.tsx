@@ -1,5 +1,5 @@
-// Row configuration for CDP feature comparison slide
-export const cdpComparisonRows = [
+// Feature configuration for CDP feature comparison slide
+export const cdpProductFeatures = [
     { type: 'header', label: 'Integrations' },
     {
         type: 'feature',
@@ -8,7 +8,7 @@ export const cdpComparisonRows = [
         label: 'Number of integrations',
         description: 'Third-party tools you can connect to',
     },
-    { type: 'header', label: 'Data Movement' },
+    { type: 'header', label: 'Data movement' },
     {
         type: 'feature',
         product: 'cdp',
@@ -30,7 +30,7 @@ export const cdpComparisonRows = [
         label: 'Data warehouse sources',
         description: 'Import data from warehouses like Snowflake or BigQuery',
     },
-    { type: 'header', label: 'Platform Features' },
+    { type: 'header', label: 'Platform features' },
     {
         type: 'feature',
         product: 'cdp',

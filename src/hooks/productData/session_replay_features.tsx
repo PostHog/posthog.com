@@ -1,4 +1,5 @@
-export const sessionReplayComparisonRows = [
+// Feature configuration for session replay feature comparison slide
+export const sessionReplayProductFeatures = [
     { type: 'header', label: 'Core features' },
     { type: 'feature', product: 'session_replay', feature: 'ai_summaries' },
     { type: 'feature', product: 'session_replay', feature: 'single_page_app' },

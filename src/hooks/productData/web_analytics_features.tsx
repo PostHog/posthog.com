@@ -1,6 +1,6 @@
-// Row configuration for web analytics feature comparison slide
-export const webAnalyticsComparisonRows = [
-    { type: 'header', label: 'Core Analytics' },
+// Feature configuration for web analytics feature comparison slide
+export const webAnalyticsProductFeatures = [
+    { type: 'header', label: 'Core analytics' },
     {
         type: 'feature',
         product: 'web_analytics',
@@ -20,7 +20,7 @@ export const webAnalyticsComparisonRows = [
         label: 'Session and duration tracking',
     },
     { type: 'feature', product: 'web_analytics', feature: 'bounce_rate_tracking', label: 'Bounce rate tracking' },
-    { type: 'header', label: 'Breakdowns & Reporting' },
+    { type: 'header', label: 'Breakdowns & reporting' },
     { type: 'feature', product: 'web_analytics', feature: 'breakdown_by_geoip', label: 'Breakdown by GeoIP' },
     {
         type: 'feature',
@@ -31,14 +31,14 @@ export const webAnalyticsComparisonRows = [
     { type: 'feature', product: 'web_analytics', feature: 'web_vitals_reporting', label: 'Web Vitals reporting' },
     { type: 'feature', product: 'web_analytics', feature: 'revenue_tracking', label: 'Revenue tracking' },
     { type: 'feature', product: 'web_analytics', feature: 'real_time_reporting', label: 'Real-time reporting' },
-    { type: 'header', label: 'Privacy & Compliance' },
+    { type: 'header', label: 'Privacy & compliance' },
     { type: 'feature', product: 'web_analytics', feature: 'open_source', label: 'Open source' },
     { type: 'feature', product: 'web_analytics', feature: 'first_party_cookies', label: '1st party cookies' },
     { type: 'feature', product: 'web_analytics', feature: 'cookieless_tracking', label: 'Cookieless tracking' },
     { type: 'feature', product: 'web_analytics', feature: 'hipaa_compliance', label: 'HIPAA compliance' },
     { type: 'feature', product: 'web_analytics', feature: 'gdpr_compliance', label: 'GDPR compliance' },
     { type: 'feature', product: 'web_analytics', feature: 'no_data_sampling', label: 'No data sampling' },
-    { type: 'header', label: 'Advanced Features' },
+    { type: 'header', label: 'Advanced features' },
     { type: 'feature', product: 'web_analytics', feature: 'scroll_depth_tracking', label: 'Scroll depth tracking' },
     { type: 'feature', product: 'web_analytics', feature: 'custom_channel_types', label: 'Custom channel types' },
     { type: 'header', label: 'Integration' },

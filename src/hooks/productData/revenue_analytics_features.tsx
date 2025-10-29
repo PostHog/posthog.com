@@ -1,6 +1,6 @@
-// Row configuration for revenue analytics feature comparison slide
-export const revenueAnalyticsComparisonRows = [
-    { type: 'header', label: 'Core Features' },
+// Feature configuration for revenue analytics feature comparison slide
+export const revenueAnalyticsProductFeatures = [
+    { type: 'header', label: 'Core features' },
     {
         type: 'feature',
         product: 'revenue_analytics',
@@ -37,7 +37,7 @@ export const revenueAnalyticsComparisonRows = [
         label: 'Multi-currency support',
         description: 'Handle payments in different currencies with conversion',
     },
-    { type: 'header', label: 'Integration & Analysis' },
+    { type: 'header', label: 'Integration & analysis' },
     {
         type: 'feature',
         product: 'revenue_analytics',

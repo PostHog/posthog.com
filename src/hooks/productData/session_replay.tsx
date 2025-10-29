@@ -7,7 +7,7 @@ import CodeBlock from 'components/Home/CodeBlock'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SnippetRenderer from 'components/SnippetRenderer'
 import { True } from 'components/ComparisonTable/row'
-import { sessionReplayComparisonRows } from './session_replay_rows'
+import { sessionReplayProductFeatures } from './session_replay_features'
 
 export const sessionReplay = {
     Icon: IconRewindPlay,
@@ -498,7 +498,7 @@ window.posthog.onFeatureFlags(function () {
                 key: 'posthog',
             },
         ],
-        rows: sessionReplayComparisonRows,
+        rows: sessionReplayProductFeatures,
     },
     pairsWith: [
         {

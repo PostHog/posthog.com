@@ -69,13 +69,13 @@ import { rows } from './comparison-rows'
 ### In Product Pages
 
 ```tsx
-import { errorTrackingComparisonRows } from 'hooks/productData/error_tracking_rows'
+import { errorTrackingProductFeatures } from 'hooks/productData/error_tracking_features'
 
 const slides = createSlideConfig({
     overrides: {
         'feature-comparison': {
             props: {
-                rows: errorTrackingComparisonRows,
+                rows: errorTrackingProductFeatures,
             },
         },
     },

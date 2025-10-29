@@ -1,6 +1,6 @@
-// Row configuration for experiments feature comparison slide
-export const experimentsComparisonRows = [
-    { type: 'header', label: 'Core Features' },
+// Feature configuration for experiments feature comparison slide
+export const experimentsProductFeatures = [
+    { type: 'header', label: 'Core features' },
     { type: 'feature', product: 'experiments', feature: 'unlimited_experiments', label: 'Unlimited experiments' },
     { type: 'feature', product: 'experiments', feature: 'multivariate_experiments', label: 'Multivariate experiments' },
     { type: 'feature', product: 'experiments', feature: 'secondary_metrics', label: 'Secondary metrics' },
@@ -19,7 +19,7 @@ export const experimentsComparisonRows = [
     { type: 'header', label: 'Analysis' },
     { type: 'feature', product: 'experiments', feature: 'bayesian_statistics', label: 'Bayesian statistics' },
     { type: 'feature', product: 'experiments', feature: 'check_results_anytime', label: 'Check results anytime' },
-    { type: 'header', label: 'Advanced Features' },
+    { type: 'header', label: 'Advanced features' },
     { type: 'feature', product: 'experiments', feature: 'group_level_experiments', label: 'Group-level experiments' },
     {
         type: 'feature',

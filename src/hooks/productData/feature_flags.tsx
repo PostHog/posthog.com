@@ -2,7 +2,7 @@ import React from 'react'
 import { IconToggle } from '@posthog/icons'
 import CodeBlock from 'components/Home/CodeBlock'
 import Link from 'components/Link'
-import { featureFlagsComparisonRows } from './feature_flags_rows'
+import { featureFlagsProductFeatures } from './feature_flags_features'
 
 export const featureFlags = {
     Icon: IconToggle,
@@ -463,7 +463,7 @@ export const featureFlags = {
                 key: 'posthog',
             },
         ],
-        rows: featureFlagsComparisonRows,
+        rows: featureFlagsProductFeatures,
     },
     pairsWith: [
         {

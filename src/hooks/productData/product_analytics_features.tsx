@@ -1,6 +1,6 @@
-// Row configuration for product analytics feature comparison slide
-export const productAnalyticsComparisonRows = [
-    { type: 'header', label: 'Core Insights' },
+// Feature configuration for product analytics feature comparison slide
+export const productAnalyticsProductFeatures = [
+    { type: 'header', label: 'Core insights' },
     {
         type: 'feature',
         product: 'product_analytics',
@@ -29,7 +29,7 @@ export const productAnalyticsComparisonRows = [
         label: 'Reveal user paths between steps',
     },
     { type: 'feature', product: 'product_analytics', feature: 'anomaly_detection', label: 'Anomaly detection' },
-    { type: 'header', label: 'Filtering & Analysis' },
+    { type: 'header', label: 'Filtering & analysis' },
     {
         type: 'feature',
         product: 'product_analytics',
@@ -50,7 +50,7 @@ export const productAnalyticsComparisonRows = [
         label: 'Breakdown by person property',
     },
     { type: 'feature', product: 'product_analytics', feature: 'correlation_analysis', label: 'Correlation analysis' },
-    { type: 'header', label: 'Path Analysis' },
+    { type: 'header', label: 'Path analysis' },
     {
         type: 'feature',
         product: 'product_analytics',
@@ -89,7 +89,7 @@ export const productAnalyticsComparisonRows = [
         feature: 'project_level_permissions',
         label: 'Project-level permissions',
     },
-    { type: 'feature Μεταλλαγές product_analytics', feature: 'pinned_dashboards', label: 'Pinned dashboards' },
+    { type: 'feature', product: 'product_analytics', feature: 'pinned_dashboards', label: 'Pinned dashboards' },
     {
         type: 'feature',
         product: 'product_analytics',
@@ -109,7 +109,7 @@ export const productAnalyticsComparisonRows = [
         label: 'Embed dashboards anywhere',
     },
     { type: 'feature', product: 'product_analytics', feature: 'annotations', label: 'Annotations' },
-    { type: 'header', label: 'Platform Features' },
+    { type: 'header', label: 'Platform features' },
     { type: 'platform', feature: 'open_source' },
     { type: 'platform', feature: 'self_host' },
     { type: 'platform', feature: 'usage_based_pricing' },

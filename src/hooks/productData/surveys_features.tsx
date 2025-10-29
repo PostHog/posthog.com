@@ -1,13 +1,13 @@
-// Row configuration for surveys feature comparison slide
-export const surveysComparisonRows = [
-    { type: 'header', label: 'Core Features' },
+// Feature configuration for surveys feature comparison slide
+export const surveysProductFeatures = [
+    { type: 'header', label: 'Core features' },
     { type: 'feature', product: 'surveys', feature: 'hosted_surveys', label: 'Hosted surveys' },
     { type: 'feature', product: 'surveys', feature: 'mobile_surveys', label: 'Mobile surveys' },
     { type: 'feature', product: 'surveys', feature: 'customizable_pop_ups', label: 'Customizable pop-ups' },
     { type: 'feature', product: 'surveys', feature: 'live_previews', label: 'Live previews' },
     { type: 'feature', product: 'surveys', feature: 'multi_step_surveys', label: 'Multi-step surveys' },
     { type: 'feature', product: 'surveys', feature: 'api_access', label: 'API access' },
-    { type: 'header', label: 'Question Types' },
+    { type: 'header', label: 'Question types' },
     { type: 'feature', product: 'surveys', feature: 'single_choice_questions', label: 'Single choice questions' },
     { type: 'feature', product: 'surveys', feature: 'multiple_choice_questions', label: 'Multiple choice questions' },
     { type: 'feature', product: 'surveys', feature: 'open_text_questions', label: 'Open text questions' },
@@ -19,7 +19,7 @@ export const surveysComparisonRows = [
     { type: 'feature', product: 'surveys', feature: 'target_by_url', label: 'Target by URL' },
     { type: 'feature', product: 'surveys', feature: 'target_by_feature_flag', label: 'Target by feature flag' },
     { type: 'feature', product: 'surveys', feature: 'survey_scheduling', label: 'Survey scheduling' },
-    { type: 'header', label: 'Export & Integration' },
+    { type: 'header', label: 'Export & integration' },
     { type: 'feature', product: 'surveys', feature: 'export_responses', label: 'Export responses' },
     { type: 'feature', product: 'surveys', feature: 'slack_integration', label: 'Slack integration' },
 ]

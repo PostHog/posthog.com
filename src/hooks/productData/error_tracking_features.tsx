@@ -1,5 +1,5 @@
-// Row configuration for error tracking feature comparison slide
-export const errorTrackingComparisonRows = [
+// Feature configuration for error tracking feature comparison slide
+export const errorTrackingProductFeatures = [
     {
         path: 'error_tracking.core.error_alerts',
     },

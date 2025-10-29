@@ -1,5 +1,5 @@
 import { IconWarning } from '@posthog/icons'
-import { errorTrackingComparisonRows } from './error_tracking_rows'
+import { errorTrackingProductFeatures } from './error_tracking_features'
 
 export const errorTracking = {
     Icon: IconWarning,
@@ -244,7 +244,7 @@ export const errorTracking = {
                 key: 'posthog',
             },
         ],
-        rows: errorTrackingComparisonRows,
+        rows: errorTrackingProductFeatures,
     },
     pairsWith: [
         {

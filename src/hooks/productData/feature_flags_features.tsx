@@ -1,6 +1,6 @@
-// Row configuration for feature flags feature comparison slide
-export const featureFlagsComparisonRows = [
-    { type: 'header', label: 'Core Features' },
+// Feature configuration for feature flags feature comparison slide
+export const featureFlagsProductFeatures = [
+    { type: 'header', label: 'Core features' },
     {
         type: 'feature',
         product: 'feature_flags',
@@ -36,7 +36,7 @@ export const featureFlagsComparisonRows = [
         label: 'Multivariate flags',
         description: 'Test multiple variants of a feature',
     },
-    { type: 'header', label: 'Platform Features' },
+    { type: 'header', label: 'Platform features' },
     { type: 'platform', feature: 'open_source' },
     { type: 'platform', feature: 'self_host' },
     { type: 'platform', feature: 'usage_based_pricing' },
