@@ -46,10 +46,10 @@ Finally, run `npm run dev` and go to `http://localhost:5173` to see our new home
 
 ## Adding PostHog
 
-PostHog will manage our survey and track our results. To use [PostHog's React SDK](/docs/libraries/react), install `posthog-js`:
+PostHog will manage our survey and track our results. To use [PostHog's React SDK](/docs/libraries/react), install `posthog-js` and `@posthog/react`:
 
 ```bash
-npm install posthog-js
+npm install posthog-js @posthog/react
 ```
 
 Once installed, import PostHog into `src/main.jsx` and set up a client using your project API key and host from [your project settings](https://us.posthog.com/settings/project). Then, wrap the app with `PostHogProvider` to access PostHog in any component.

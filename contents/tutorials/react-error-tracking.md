@@ -66,10 +66,10 @@ Now, we can run `npm run dev` and click the buttons to trigger the different typ
 
 ## 2. Setting up PostHog for error tracking
 
-Next, we’ll set up PostHog to capture these errors. First, we need to install `posthog-js`:
+Next, we'll set up PostHog to capture these errors. First, we need to install `posthog-js` and `@posthog/react`:
 
 ```bash
-npm install posthog-js
+npm install posthog-js @posthog/react
 ```
 
 Next, create a `PostHogProvider.jsx` file in your `src` directory, and in it, initialize PostHog using your project API key and host from [your project settings](https://us.posthog.com/settings/project). While you are there, make sure that [exception autocapture](https://us.posthog.com/settings/environment-error-tracking#error-tracking-exception-autocapture) is enabled. 

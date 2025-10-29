@@ -57,7 +57,7 @@ We'll use PostHog to create and control our survey as well as monitor results. I
 First, set up PostHog for use on the [client-side](/docs/libraries/next-js#app-router) by installing the [JavaScript React SDK](/docs/libraries/react):
 
 ```bash
-npm install posthog-js
+npm install posthog-js @posthog/react
 ```
 
 Then integrate PostHog by creating a `providers.js` file in your app folder and exporting a `PHProvider` component:

@@ -24,11 +24,11 @@ This tutorial shows you how to follow the recommended approach for the most popu
 > **Prerequisite:** Each of these requires you to have an app created and PostHog installed. To install the [PostHog JavaScript Web SDK](/docs/libraries/js), run the following command for the package manager of your choice:
 >
 > ```bash
-> yarn add posthog-js
+> yarn add posthog-js @posthog/react
 > # or
-> npm install --save posthog-js
+> npm install --save posthog-js @posthog/react
 > # or
-> pnpm add posthog-js
+> pnpm add posthog-js @posthog/react
 > ```
 
 ## Tracking pageviews in Next.js (app router)

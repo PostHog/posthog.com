@@ -98,10 +98,10 @@ The basic setup is now complete. Run `npm run dev` to see your app in action.
 
 With our app set up, it's time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup). 
 
-First install `posthog-js`:
+First install `posthog-js` and `@posthog/react`:
 
 ```bash
-npm install posthog-js
+npm install posthog-js @posthog/react
 ```
 
 Next, import PostHog into `src/main.jsx` and set up it up using your project API key and host from [your project settings](https://us.posthog.com/settings/project). Then we wrap our app with `PostHogProvider` to access PostHog in any component.

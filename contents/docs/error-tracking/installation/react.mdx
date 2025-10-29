@@ -3,7 +3,7 @@ title: React error tracking installation
 showStepsToc: true
 ---
 
-import InstallWebPackageManagers from "../../integrate/_snippets/install-web-package-managers.mdx"
+import InstallReactPackageManagers from "../../integrate/_snippets/install-react-package-managers.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
 import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
 
@@ -13,9 +13,9 @@ import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
 <Step title="Install PostHog web SDK" badge="required">
 
 
-1. Install [`posthog-js`](https://github.com/posthog/posthog-js) using your package manager:
+1. Install [`posthog-js`](https://github.com/posthog/posthog-js) and `@posthog/react` using your package manager:
 
-<InstallWebPackageManagers />
+<InstallReactPackageManagers />
 
 2. Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key and host in [your project settings](https://app.posthog.com/settings/project). Including `VITE_PUBLIC_` in their names ensures they are accessible in the frontend.
 
