@@ -209,13 +209,13 @@ Dynamic cohorts can be based on existing cohorts, and support the following crit
 
 #### Behavioral
 
-| **Event or action**                                             | **Example**                                                                                                        |
-|------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| **Completed event or action**                        | Completed `user signed up` in the last 30 days                                                                     |
-| **Did not complete event or action**                 | Did not complete `user signed up` in the last 2 months                                                             |
-| **Completed event or action multiple times**         | Completed `watched video` 5 times in the last 2 weeks                                                              |
-| **Completed a sequence of events or actions**        | Completed `user signed up` in the last 5 days followed by `watched video` within 1 day of the initial event        |
-| **Did not complete a sequence of events or actions** | Did not complete `user signed up` in the last 5 days followed by `watched video` within 1 day of the initial event |
+| **Event or action** | **Example** |
+| --- | --- |
+| Completed event or action | Completed `user signed up` in the last 30 days |
+| Did not complete event or action | Did not complete `user signed up` in the last 2 months |
+| Completed event or action multiple times | Completed `watched video` 5 times in the last 2 weeks |
+| Completed a sequence of events or actions | Completed `user signed up` in the last 5 days followed by `watched video` within 1 day of the initial event |
+| Did not complete a sequence of events or actions | Did not complete `user signed up` in the last 5 days followed by `watched video` within 1 day of the initial event |
 
 You can select `days`, `weeks`, `months` or `years` time ranges here.
 
@@ -223,25 +223,25 @@ You can select `days`, `weeks`, `months` or `years` time ranges here.
 
 Has or doesn't have a person property with the following operators:
 
-| **Operator**                                 | **Example**                                           |
-|----------------------------------------------|-------------------------------------------------------|
-| `equals` or `does not equal`                 | `Pineapple on pizza` property `does not equal` "true" |
-| `contains` or `does not contain`             | `email` property `does not contain` "gmail"           |
-| `matches regex` or `does not match regex`    | `Country code` property `matches regex` "us|uk|aus"   |
-| `greater than` or `greater than or equal to` | `Age` property is `greater than` "21"                 |
-| `less than` or `less than or equal to`       | `Age property is `less than or equal to` "21"         |
-| `is set` or `is not set`                     | `UTM Source` property `is not set`                    |
-| `between` or `not between`                   | `Age` property is between "18" and "30"               |
-| `minimum` or `maximum` value                 | `Organization size` property `minimum` of "5"         |
+| **Operator** | **Example** |
+| --- | --- |
+| `equals` or `does not equal` | `Pineapple on pizza` property `does not equal` "true" |
+| `contains` or `does not contain` | `email` property `does not contain` "gmail" |
+| `matches regex` or `does not match regex` | `Country code` property `matches regex` "us\|uk\|aus" |
+| `greater than` or `greater than or equal to` | `Age` property `greater than` "21" |
+| `less than` or `less than or equal to` | `Age` property `less than or equal to` "21" |
+| `is set` or `is not set` | `UTM Source` property `is not set` |
+| `between` or `not between` | `Age` property is between "18" and "30" |
+| `minimum` or `maximum` value | `Organization size` property has a `minimum` of "5" |
 
 #### Lifecycle
 
-| **Criteria**                       | **Example**                                                                                         |
-|----------------------------------------|-----------------------------------------------------------------------------------------------------|
-| **Completed an event for first time**  | Completed `shared insight` event for the first time in the "last 30 days"                           |
-| **Completed an event regularly**       | Completed `shared insight` at least "3 times per week" for at least "3 of the last 5 periods"       |
-| **Stopped doing an event**             | Stopped doing `shared insight` event in the "last 5 days" but had done it in the "5 days prior"     |
-| **Started doing event again**          | Started doing `shared insight` event in the "last 5 days" but had not done it in the "5 days prior" |
+| **Criteria** | **Example** |
+| --- | --- |
+| Completed an event for first time | Completed `shared insight` event for the first time in the "last 30 days" |
+| Completed an event regularly | Completed `shared insight` at least "3 times per week" for at least "3 of the last 5 periods" |
+| Stopped doing an event | Stopped doing `shared insight` event in the "last 5 days" but had done it in the "5 days prior" |
+| Started doing event again | Started doing `shared insight` event in the "last 5 days" but had not done it in the "5 days prior" |
 
 You can select `days`, `weeks`, `months` or `years` time ranges here.
 

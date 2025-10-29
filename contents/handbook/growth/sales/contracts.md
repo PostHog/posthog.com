@@ -133,7 +133,7 @@ Occasionally, customers will want to sign an MSA instead of referencing our term
 7. Check the signing order (Client, then PostHog normally).
 8. Send for signature - so long as any proposed changes have been reviewed and approved by Hector or Fraser, you are free to sign on behalf of PostHog
 
-Sometimes large customers will ask for changes to our MSA. We have a list of the kinds of changes we will/won't consider in a private repo [here](https://github.com/PostHog/company-internal/blob/master/finance/sales%20contract%20changes) that you can generally agree to without the Ops team reviewing. However, if you are ever in doubt, ask in `#legal` in Slack
+Sometimes large customers will ask for changes to our MSA. We have a list of the kinds of changes we will/won't consider in a private repo in the [company-internal sales contract changes directory](https://github.com/PostHog/company-internal/blob/master/finance/sales%20contract%20changes) that you can generally agree to without the Ops team reviewing. However, if you are ever in doubt, ask in `#legal` in Slack
 
 ## Business Associate Agreement (BAA)
 

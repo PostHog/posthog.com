@@ -19,7 +19,7 @@ In March, it [announced](https://www.businessinsider.com/dell-remote-workers-pro
 
 It doesn’t have to be this way. The best remote teams are brimming with energy, are super productive, and do incredible work. So whether you’re part of a remote team, leading one, or want to go remote, here’s how the best of the best make it work, with some tips on how you can up your game, too.
 
-> This post was first published in our newsletter, [_Product for Engineers_](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. Subscribe [here](https://newsletter.posthog.com/).
+> This post was first published in our newsletter, [_Product for Engineers_](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. Subscribe via the [Product for Engineers signup page](https://newsletter.posthog.com/).
 
 ### 1. They write everything down
 

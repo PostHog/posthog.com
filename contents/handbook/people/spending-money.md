@@ -8,7 +8,7 @@ There are many occasions when you will need to spend company money.
 
 PostHog is a lean organization - the less we spend, the more time we have to make sure the company takes off. However, it is more important you are productive, healthy, and happy.
 
-**Please spend money in a way that you think is in the best interests of the company. **
+**Please spend money in a way that you think is in the best interests of the company.**
 
 If it's a trivial expense, just buy it. We provide you with a company card to cover 99% of the spending you might need to do. We use Brex for everyone, and also provide UK team members with an additional Revolut card. 
 
@@ -61,7 +61,7 @@ If you have some invoice/receipt to share with the Finance team, send it to fina
 
 Personal expenses should be submitted within 90 days of incurring the expense, otherwise these will not be repaid.
 
-Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! If you used your brex card you can login to Brex, find the charge and use the repay function - more details [here](https://www.brex.com/support/employee-repayments). If it was on Revolut, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog. 
+Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! If you used your brex card you can login to Brex, find the charge and use the repay function — see the [Brex employee repayments guide](https://www.brex.com/support/employee-repayments) for more details. If it was on Revolut, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog.
 
 ## Making larger purchases
 

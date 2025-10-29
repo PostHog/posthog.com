@@ -96,7 +96,7 @@ Lastly, you can run paid ads to acquire new users through social media and searc
 ## The first 10 users are the hardest
 Unless you’ve magically built a viral product that sells itself, early user acquisition will be challenging. The good news is that the next 10 users get easier to acquire than the first 10. Your efforts compound on themselves, so try as many approaches as you can and watch your customer base grow. 
 
-And because we’d be remiss if we didn’t plug our own product, you can track all that user activity, traffic, and revenue using PostHog’s product analytics suite. See the full list of features [here](https://posthog.com/product-features) and sign up for a free trial today.
+And because we’d be remiss if we didn’t plug our own product, you can track all that user activity, traffic, and revenue using PostHog’s product analytics suite. See the full list of features on the [product features page](https://posthog.com/product-features) and sign up for a free trial today.
 
 <NewsletterForm />
 

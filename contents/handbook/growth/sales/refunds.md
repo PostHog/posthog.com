@@ -126,7 +126,7 @@ You need Support specialist level access to Stripe, ask Simon for access.
 
 1. Find customer profile in Stripe (you can search by organization id)
 2. Under payments, find the payment that corresponds to the usage period
-3. Click "Refund payment" **Be careful on this dialog box as pressing enter will automatically complete the refund. **
+3. Click "Refund payment." **Be careful on this dialog box, as pressing Enter will automatically complete the refund.**
 4. Specify the refund amount (default is full refund, remember to change as needed using instructions above)
 5. Add brief comment to explain the reason and link to Zendesk ticket
 6. For partial refunds, you can view the partial refund amount by hovering over the 'Partial refund' box that now displays against the payment.

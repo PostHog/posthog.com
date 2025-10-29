@@ -41,7 +41,7 @@ The feedback app is injected into your site through PostHog. It can be modified 
 
 ![Feedback app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/rome-hackathon/feedback-app.png)
 
-You can find the first PR for the feedback app [here](https://github.com/PostHog/feedback-app/pull/1).
+You can find the first PR for the feedback app in [PostHog/feedback-app pull request #1](https://github.com/PostHog/feedback-app/pull/1).
 
 ## FaceHog (HogBook? Hoggr?) notifications
 

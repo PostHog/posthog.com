@@ -23,7 +23,7 @@ We enforce the use of hardware security keys wherever we can. Every team members
 
 Please enable security keys for Google Workspace, MacOS, AWS, 1Password (or whatever password manager you use) and GitHub at the very least. You can also use the Yubikeys to protect personal accounts. If you are new, please do this within your first month so you don't get locked out.
 
-Google recently changed its settings for 2FA and Yubikeys and you may struggle to link your Yubikeys to your Google account. Go [here to find out about the change](https://joshua.hu/enrolling-hardware-keys-2fa-google-workspace) or use this direct link to head [straight to this page where](https://myaccount.google.com/signinoptions/two-step-verification?flow=sk&opendialog=addsk) you can register your Yubikeys. 
+Google recently changed its settings for 2FA and Yubikeys and you may struggle to link your Yubikeys to your Google account. Review the [overview of Google's hardware key changes](https://joshua.hu/enrolling-hardware-keys-2fa-google-workspace) or use this direct link to head straight to the [two-step verification settings](https://myaccount.google.com/signinoptions/two-step-verification?flow=sk&opendialog=addsk) where you can register your Yubikeys.
 
 > **YubiKey tip:** Avoid spamming OTPs if you accidentally touch your YubiKey by installing the [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) or by running `brew install ykman && ykman config usb --disable OTP`
 
@@ -72,7 +72,7 @@ We receive data collected by our customers from end-users and allow them to unde
 
 ## Pen tests
 
-We conduct these annually, most recently in May 2025 - you can find the report [here](https://drive.google.com/file/d/1JoR74x6U7Kh_0HA8sLDe0AN6YK5-OOZ5/view?usp=sharing) 
+We conduct these annually, most recently in May 2025 — you can find the report in the [May 2025 penetration test summary](https://drive.google.com/file/d/1JoR74x6U7Kh_0HA8sLDe0AN6YK5-OOZ5/view?usp=sharing)
 
 ## Responsible disclosure
 

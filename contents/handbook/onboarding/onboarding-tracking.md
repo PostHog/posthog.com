@@ -35,7 +35,7 @@ Stages `3a` to `4c` only happen for those customers who engaged with us over ema
 - [Onboarding Pipeline Main Workflow Playbook](https://posthog.vitally-eu.io/settings/playbooks/481c2fc5-1c52-412c-a20a-e062c9d02abc) controls setting timestamps for corresponding traits when accounts enter certain stages. These should be treated as rough estimates, as the automations that move accounts from one stage to another are imperfect.
 - Additional automations use best effort to move accounts automatically from one stage to another, though they are somewhat limited by Vitally's ability to trigger on specific data.
 	- Accounts that end up in the Onboarding segment get `1. New Account` automatically (set in main workflow playbook)
-	- Accounts we reach out to — any with a convo started by Cameron, Magda, or Dan, get set to `2. Onboarding Initiated` [here](https://posthog.vitally-eu.io/settings/playbooks/754f037e-892b-435a-a189-9f3da9b922fa)
+     - Accounts we reach out to — any with a convo started by Cameron, Magda, or Dan, get set to `2. Onboarding Initiated` in the [Vitally onboarding playbook](https://posthog.vitally-eu.io/settings/playbooks/754f037e-892b-435a-a189-9f3da9b922fa)
   	- We are working without automations for the other stages for now, as there is some complexity in actually making them update automatically based on limited Vitally triggers. This is a WIP.  
 
 We do not track timestamps for every single stage, just for the overall numbered buckets (e.g, 1. New account, 2. Contacted, 3. Responded, 4. "Onboarding in process", 5. Last touch, 6. Various completion states).

@@ -112,7 +112,7 @@ A demo can also be a great format where questions bubble naturally.
 
 ## Qualifying
 
-A key component of discovery is qualifying customers to ensure they are a good fit and whether they're speaking with the right people at PostHog. You can find more about how we qualify at PostHog [here](/handbook/growth/sales/new-sales#2-we-assign-and-qualify).
+A key component of discovery is qualifying customers to ensure they are a good fit and whether they're speaking with the right people at PostHog. You can find more about how we qualify at PostHog in the [new sales qualification guide](/handbook/growth/sales/new-sales#2-we-assign-and-qualify).
 
 **Qualifiers:**
 
@@ -191,7 +191,7 @@ Champions aren't just customers you're friendly with - they're people who will a
 
 **Goal:** Show PostHog, focus on relevant features, establish technical credibility, get feedback and ask questions.
 
-Reference the demo section above for how you can incorporate discovery into your demo and learn more about how we do sales [here](/handbook/growth/sales/new-sales#3-initial-demo).
+Reference the demo section above for how you can incorporate discovery into your demo and learn more about how we do sales in the [initial demo playbook](/handbook/growth/sales/new-sales#3-initial-demo).
 
 ### 3. Closing and next steps (~3-10min)
 

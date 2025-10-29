@@ -137,7 +137,7 @@ Enterprise customers will also receive 1-2 hours of bespoke training per quarter
 
 ## Sales to CSM "handoff"
 
-Customer lifecycle handoff/ownership is described [here](/handbook/growth/sales/overview#who-the-sales--cs-team-are).
+Customer lifecycle handoff/ownership is described in the [sales and customer success overview](/handbook/growth/sales/overview#who-the-sales--cs-team-are).
 
 
 

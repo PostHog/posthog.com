@@ -60,7 +60,7 @@ The toolbar is now in public beta! No, not "gmail beta", *real* BETA! There's st
 
 However, as we already found so much value in using this toolbar ourselves, we felt it was ready to share with you all! 
 
-When you're trying it out, please raise all issues that you find [here](https://github.com/PostHog/posthog/issues/1129)!
+When you're trying it out, please raise all issues that you find in [issue #1129](https://github.com/PostHog/posthog/issues/1129)!
 
 ### Feature flags
 
