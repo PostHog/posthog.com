@@ -52,6 +52,12 @@ export const productAnalytics = {
             alt: 'Product analytics funnel',
         },
     },
+    videos: {
+        overview: {
+            youtube: '',
+            wistia: '0be67lqiau',
+        },
+    },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
         alt: 'A hedgehog presenting some shocking findings',
@@ -983,6 +989,31 @@ export const productAnalytics = {
                     pendo: true,
                     posthog: false,
                 },
+            },
+        ],
+    },
+    postHogOnPostHog: {
+        title: 'How PostHog uses product analytics',
+        benefits: [
+            {
+                title: 'Track metrics',
+                description: 'and monitor feature usage trends',
+            },
+            {
+                title: 'Understand user behavior',
+                description: 'by analyzing funnels and retention',
+            },
+            {
+                title: 'Identify opportunities',
+                description: 'by filtering based on drop-offs and conversion rates',
+            },
+            {
+                title: 'Find out when things change',
+                description: 'by setting up dashboards and alerts',
+            },
+            {
+                title: 'Make data-driven decisions',
+                description: 'by linking insights to session replays',
             },
         ],
     },
