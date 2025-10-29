@@ -9,6 +9,7 @@ featuredImageType: full
 tags:
   - Product
   - Founders
+  - Revenue
 crosspost:
   - Founders
   - Blog
@@ -33,7 +34,6 @@ To illustrate, let’s imagine two feature flag tools.
 **Feature Flags “R” Us** charges by **seats** and **flags created**:
 
 - Their customers think about every flag and user they add, so they do less of both.
-
 - The flags they do create are more heavily relied on.
 
 This model appeals to companies that ship slowly and make more requests per flag. This means enterprise features, like auditability and access controls, are a priority.
@@ -41,7 +41,6 @@ This model appeals to companies that ship slowly and make more requests per flag
 **The Flag Company of New York** charges by **requests**:
 
 - Their customers give access to every developer who create many more flags.
-
 - This lets those developers use them more often (e.g. to [test in production](/product-engineers/testing-in-production))
 
 This model appeals to companies who ship faster and want flexibility. They need to be more thoughtful about where flags go in code so they don’t spend too much, which means cost controls and DevEx features, like [local evaluation](/docs/feature-flags/local-evaluation), matter more.
@@ -55,9 +54,7 @@ In short, **how much** you charge often doesn’t matter as much as **how** you 
 It’s easy to give things away, especially zero marginal cost software, but it’s a trap for early-stage startups. Typically, startups delay figuring out pricing because:
 
 1. They are scared no one will pay them
-
 2. They are afraid of getting pricing wrong and damaging growth
-
 3. They think user growth is more important than revenue
 
 But, unless you’re building Facebook, you’re always better off charging something as soon as possible, even if the unit economics don’t add up yet. Why? Because paying customers give you different, and more valuable, feedback than free users.
