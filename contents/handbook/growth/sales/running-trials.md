@@ -31,7 +31,6 @@ We default to 2 weeks ($20-$60K ARR) unless there's a compelling reason for 4 we
 - Customer has a complex technical environment requiring extended implementation
 - Multiple stakeholder validation required
 - They are evaluating PostHog alongside other products
-- They have a robust procurement/legal and vendor management process that requires more time
 
 ## Recommended trial prerequisites
 
@@ -55,10 +54,14 @@ You should then follow up with a standard email/Slack message that:
 - Shares a proposed timetable for the evaluation and onboarding process
 - Includes any useful links (relevant docs, competitor comparisons, case studies)
 
-As a separate message, you should lay out what criteria they need to see for the trial to be considered a success - the evaluation will almost certainly fail if you just leave the customer to noodle around trying PostHog. 
+As a separate message, you should lay out what criteria they need to see for the trial to be considered a success - the evaluation will almost certainly fail if you just leave the customer to noodle around trying PostHog.
 
-### Days 1-3: Installation & setup
+### Day 0: Installation
 - SDK installed and firing events
+
+> The evaluation shouldn't progress further into the below guidance until this is complete.
+
+### Days 1-3: Kickoff & Review
 - 30-min kickoff with key stakeholders
 - Review settings and configuration aligned with evaluation goals (Identified events, Session Replay controls, Group analytics etc.)
 - Custom events (real KPIs) and properties instrumented (not just pageviews)
