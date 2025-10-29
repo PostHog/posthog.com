@@ -761,15 +761,35 @@ function ReaderViewContent({
                                     )}
                                 </div>
                                 {showQuestions && (
-                                    <div className="mt-8">
+                                    <div
+                                        className={`mt-8 mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
                                         <h3 id="squeak-questions" className="mb-4">
                                             Community questions
                                         </h3>
-                                        <Questions slug={appWindow?.path} parentName={activeInternalMenu?.name} />
+                                        <Questions
+                                            slug={appWindow?.path}
+                                            parentName={activeInternalMenu?.name}
+                                            className={`mx-auto transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? 'max-w-full'
+                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
+                                        />
                                     </div>
                                 )}
                                 {showSurvey && (
-                                    <div className="mt-8">
+                                    <div
+                                        className={`mt-8 mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
                                         <DocsPageSurvey filePath={filePath} />
                                     </div>
                                 )}
