@@ -14,11 +14,19 @@ export const errorTrackingFeatures = {
         },
         error_grouping: {
             name: 'Error grouping',
-            description: 'Automatically group similar errors to reduce noise',
+            description: 'Automatically group similar errors and remove duplicates',
         },
         stack_tracing: {
             name: 'Stack tracing',
             description: 'Full stack traces with source code context',
+        },
+        console_log_capture: {
+            name: 'Console log capture',
+            description: 'Capture console logs alongside error events',
+        },
+        mobile_sdk_coverage: {
+            name: 'Mobile SDK coverage',
+            description: 'SDKs for iOS, Android, and mobile frameworks',
         },
     },
     monitoring: {
@@ -29,6 +37,10 @@ export const errorTrackingFeatures = {
         source_map_support: {
             name: 'Source map support',
             description: 'Support for source maps in minified code',
+        },
+        release_tracking: {
+            name: 'Release and deploy tracking',
+            description: 'Track errors by release version and deployment',
         },
     },
     integrations: {

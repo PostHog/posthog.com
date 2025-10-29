@@ -12,7 +12,7 @@ export const platformFeatures = {
     pricing: {
         usage_based_pricing: {
             name: 'Usage-based pricing',
-            description: 'Pay only for what you use with flexible pricing',
+            description: 'Only pay for what you use',
         },
         transparent_pricing: {
             name: 'Transparent pricing',
@@ -23,20 +23,7 @@ export const platformFeatures = {
             description: 'Generous free tier available',
         },
     },
-    support: {
-        console_log_capture: {
-            name: 'Console log capture',
-            description: 'Capture console logs alongside events',
-        },
-        mobile_sdk_coverage: {
-            name: 'Mobile SDK coverage',
-            description: 'SDKs for iOS, Android, and mobile frameworks',
-        },
-        release_tracking: {
-            name: 'Release and deploy tracking',
-            description: 'Track errors by release version and deployment',
-        },
-    },
+    support: {},
     integrations: {
         ci_cd_integrations: {
             name: 'Integrations (CI/CD, issue tracking)',

@@ -6,38 +6,6 @@ export const amplitude = {
         comparisonArticle: '/blog/posthog-vs-amplitude',
     },
     products: {
-        revenue_analytics: {
-            available: true,
-            features: {
-                revenue_tracking: true,
-                event_based_revenue_tracking: true,
-                native_multi_source_revenue_tracking: false,
-                deferred_revenue: false,
-                product_analytics_integration: true,
-                multi_currency_support: false,
-                revenue_prediction: false,
-                sql_access: false,
-            },
-        },
-        experiments: {
-            available: true,
-            features: {
-                unlimited_experiments: true,
-                multivariate_experiments: true,
-                secondary_metrics: true,
-                minimum_metrics: true,
-                duration_prediction: false,
-                cross_domain_experiments: false,
-                traffic_allocation: false,
-                target_by_cohort: true,
-                target_by_person_property: true,
-                bayesian_statistics: false,
-                check_results_anytime: false,
-                group_level_experiments: false,
-                integrated_session_replay: false,
-                shared_metrics_library: false,
-            },
-        },
         product_analytics: {
             available: true,
             features: {
@@ -79,6 +47,53 @@ export const amplitude = {
                 dashboard_insight_tags: true,
                 private_insights: false,
             },
+        },
+        web_analytics: {
+            available: true,
+        },
+        session_replay: {
+            available: true,
+        },
+        feature_flags: {
+            available: true,
+        },
+        experiments: {
+            available: true,
+            features: {
+                unlimited_experiments: true,
+                multivariate_experiments: true,
+                secondary_metrics: true,
+                minimum_metrics: true,
+                duration_prediction: false,
+                cross_domain_experiments: false,
+                traffic_allocation: false,
+                target_by_cohort: true,
+                target_by_person_property: true,
+                bayesian_statistics: false,
+                check_results_anytime: false,
+                group_level_experiments: false,
+                integrated_session_replay: false,
+                shared_metrics_library: false,
+            },
+        },
+        surveys: {
+            available: true,
+        },
+        revenue_analytics: {
+            available: true,
+            features: {
+                revenue_tracking: true,
+                event_based_revenue_tracking: true,
+                native_multi_source_revenue_tracking: false,
+                deferred_revenue: false,
+                product_analytics_integration: true,
+                multi_currency_support: false,
+                revenue_prediction: false,
+                sql_access: false,
+            },
+        },
+        product_tours: {
+            available: true,
         },
     },
     platform: {

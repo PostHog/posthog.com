@@ -148,6 +148,7 @@ export const posthog = {
         },
         revenue_analytics: {
             available: true,
+            beta: true,
             features: {
                 revenue_tracking: true,
                 event_based_revenue_tracking: true,
@@ -168,6 +169,9 @@ export const posthog = {
                 data_warehouse_sources: true,
                 built_in_analytics: true,
             },
+        },
+        llm_analytics: {
+            available: true,
         },
         web_analytics: {
             available: true,

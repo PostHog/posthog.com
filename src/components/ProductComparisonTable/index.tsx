@@ -40,18 +40,21 @@ import { stripe } from '../../hooks/competitorData/stripe'
 import { errorTrackingFeatures } from '../../hooks/featureDefinitions/error_tracking'
 import { sessionReplayFeatures } from '../../hooks/featureDefinitions/session_replay'
 import { platformFeatures } from '../../hooks/featureDefinitions/platform'
+import { productDescriptions } from '../../hooks/featureDefinitions/products'
 
 interface RowConfig {
-    // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host"
+    // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
     path?: string
-    // Detailed format (legacy support)
-    type?: 'feature' | 'header' | 'platform'
+    // Type is inferred automatically, but can be explicitly set if needed
+    type?: 'feature' | 'header' | 'platform' | 'product'
     product?: string
     featureSet?: string
     feature?: string
     label?: string
     description?: string
     exclude?: string[]
+    // For product-level comparisons, can specify beta status or custom value
+    customValue?: string | boolean
 }
 
 interface ProductComparisonTableProps {
@@ -66,15 +69,25 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         if (row.path) {
             const parts = row.path.split('.')
             if (parts.length === 1) {
-                // "error_tracking" - entire product or platform
+                // "error_tracking" - entire product or platform or product-level comparison
                 if (parts[0] === 'platform') {
                     return { ...row, type: 'platform', path: undefined }
+                }
+                // Check if this is a product reference for product-level comparison
+                const productDesc = productDescriptions[parts[0] as keyof typeof productDescriptions]
+                if (productDesc) {
+                    return { ...row, type: 'product', product: parts[0], path: undefined }
                 }
                 return { ...row, type: 'feature', product: parts[0], path: undefined }
             } else if (parts.length === 2) {
                 // "error_tracking.core" or "platform.deployment"
                 if (parts[0] === 'platform') {
                     return { ...row, type: 'platform', featureSet: parts[1], path: undefined }
+                }
+                // Check if this is a product reference (e.g., "product_analytics")
+                const productDesc = productDescriptions[parts[0] as keyof typeof productDescriptions]
+                if (productDesc) {
+                    return { ...row, type: 'product', product: parts[0], path: undefined }
                 }
                 return { ...row, type: 'feature', product: parts[0], featureSet: parts[1], path: undefined }
             } else if (parts.length === 3) {
@@ -95,8 +108,52 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         return row
     }
 
-    // Parse all rows to support shorthand notation
-    const parsedRows = rows.map(parseRowConfig)
+    // Infer type from row configuration if not explicitly set
+    const inferType = (row: RowConfig): RowConfig => {
+        // If type is already set, use it (backward compatibility)
+        if (row.type) {
+            return row
+        }
+
+        // Headers: label set without product or feature
+        if (row.label && !row.product && !row.feature) {
+            return { ...row, type: 'header' }
+        }
+
+        // Platform features: feature set without product, or path starts with 'platform'
+        if (row.path?.startsWith('platform') || (row.feature && !row.product && !row.label)) {
+            // Check if feature exists in platform definitions
+            const platformDefs: any = platformFeatures
+            let isPlatformFeature = false
+            if (platformDefs && row.feature) {
+                for (const featureSet in platformDefs) {
+                    if (platformDefs[featureSet]?.[row.feature]) {
+                        isPlatformFeature = true
+                        break
+                    }
+                }
+            }
+            if (isPlatformFeature || row.path?.startsWith('platform')) {
+                return { ...row, type: 'platform' }
+            }
+        }
+
+        // Product-level comparison: product set but no featureSet or feature
+        if (row.product && !row.featureSet && !row.feature) {
+            return { ...row, type: 'product' }
+        }
+
+        // Feature-level: product and (featureSet or feature) are set
+        if (row.product && (row.featureSet || row.feature)) {
+            return { ...row, type: 'feature' }
+        }
+
+        // Default fallback (shouldn't reach here, but keep for safety)
+        return row
+    }
+
+    // Parse all rows to support shorthand notation and infer types
+    const parsedRows = rows.map((row) => inferType(parseRowConfig(row)))
 
     // Competitor data
     const competitorData: Record<string, any> = {
@@ -145,6 +202,24 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         if (!competitor) return false
 
         if (row.type === 'header') return ''
+
+        if (row.type === 'product' && row.product) {
+            // Product-level comparison: check if product is available
+            const productData = competitor.products?.[row.product]
+            if (!productData) return false
+
+            // Check for beta status
+            if (productData.beta === true && row.customValue === undefined) {
+                return 'Beta'
+            }
+
+            // Check for custom value override
+            if (row.customValue !== undefined) {
+                return row.customValue
+            }
+
+            return productData.available || false
+        }
 
         if (row.type === 'platform') {
             const platformFeatures = competitor.platform || {}
@@ -229,6 +304,17 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                             description: row.description || feat.description,
                         }
                     }
+                }
+            }
+        }
+
+        // Handle product-level comparisons
+        if (row.type === 'product' && row.product) {
+            const productDesc = productDescriptions[row.product as keyof typeof productDescriptions]
+            if (productDesc) {
+                return {
+                    name: row.label || productDesc.name,
+                    description: row.description || productDesc.description,
                 }
             }
         }
