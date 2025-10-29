@@ -50,7 +50,7 @@ The provider takes an initialized and configured client instance like this:
 ```react
 // src/index.js
 import posthog from 'posthog-js';
-import { PostHogProvider} from 'posthog-js/react'
+import { PostHogProvider} from '@posthog/react'
 
 posthog.init(process.env.REACT_APP_PUBLIC_POSTHOG_KEY, {
   api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
@@ -78,7 +78,7 @@ If you want to use the library to identify users, capture events, use feature fl
 All the methods of the library are available and can be used as described in the [posthog-js documentation](/docs/libraries/js).
 
 ```react
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 import { useEffect } from 'react'
 import { useUser, useLogin } from '../lib/user'
 
@@ -163,7 +163,7 @@ Since [experiments](/docs/experiments/manual) use feature flags, the code for ru
 // or you can use the feature flags component - /docs/libraries/react#feature-flags-react-component
 
 // Method one: using the useFeatureFlagVariantKey hook
-import { useFeatureFlagVariantKey } from 'posthog-js/react'
+import { useFeatureFlagVariantKey } from '@posthog/react'
 
 function App() {
     const variant = useFeatureFlagVariantKey('experiment-feature-flag-key')
@@ -173,7 +173,7 @@ function App() {
 }
 
 // Method two: using the feature flags component
-import { PostHogFeature } from 'posthog-js/react'
+import { PostHogFeature } from '@posthog/react'
 
 function App() {
     return (
