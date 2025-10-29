@@ -39,6 +39,7 @@ import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CustomerMetadata from './CustomerMetadata'
+import { getVideoClasses } from '../../constants'
 
 dayjs.extend(relativeTime)
 
@@ -678,8 +679,12 @@ function ReaderViewContent({
                             >
                                 {/* <DebugContainerQuery /> */}
                                 {body.featuredImage && !body.featuredVideo && (
-                                    <div className="not-prose mb-4">
-                                        <GatsbyImage image={getImage(body.featuredImage)} alt={title} />
+                                    <div className="not-prose mb-4 text-center">
+                                        <GatsbyImage
+                                            image={getImage(body.featuredImage)}
+                                            alt={title}
+                                            className="rounded"
+                                        />
                                     </div>
                                 )}
                                 {title && !hideTitle && (
@@ -737,14 +742,17 @@ function ReaderViewContent({
                                             />
                                         </div>
                                     )}
-                                {body.featuredVideo && <iframe src={body.featuredVideo} />}
+                                {body.featuredVideo && (
+                                    <iframe src={body.featuredVideo} className={getVideoClasses(fullWidthContent)} />
+                                )}
                                 <div className="reader-content-container">
                                     {body.type === 'mdx' ? (
                                         <div
-                                            className={`@container [&>*:not(.OSTable)]:mx-auto [&>*:not(.OSTable)]:transition-all ${
+                                            className={`@container [&>*:not(.OSTable):not(.Table)]:mx-auto [&>*:not(.OSTable):not(.Table)]:transition-all ${
                                                 fullWidthContent || body?.type !== 'mdx'
-                                                    ? '[&>*:not(.OSTable)]:max-w-full'
-                                                    : contentMaxWidthClass || '[&>*:not(.OSTable)]:max-w-2xl'
+                                                    ? '[&>*:not(.OSTable):not(.Table)]:max-w-full'
+                                                    : contentMaxWidthClass ||
+                                                      '[&>*:not(.OSTable):not(.Table)]:max-w-2xl'
                                             }`}
                                         >
                                             {/* Display customer metadata if this is a customer page */}

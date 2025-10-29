@@ -36,6 +36,7 @@ import { TreeMenu } from 'components/TreeMenu'
 import { postsMenu as menu } from '../navs/posts'
 import MenuBar from 'components/RadixUI/MenuBar'
 import slugify from 'slugify'
+import { getVideoClasses } from '../constants'
 const A = (props) => <Link {...props} state={{ newWindow: true }} />
 
 export const Intro = ({
@@ -47,6 +48,7 @@ export const Intro = ({
     date,
     tags,
     imageURL,
+    fullWidthContent = false,
 }) => {
     return (
         <div className="mb-6">
@@ -55,7 +57,7 @@ export const Intro = ({
                 <p className="mb-1 opacity-70">{date}</p>
             </div>
 
-            {featuredVideo && <iframe src={featuredVideo} />}
+            {featuredVideo && <iframe src={featuredVideo} className={getVideoClasses(fullWidthContent)} />}
             {!featuredVideo && featuredImage && (
                 <GatsbyImage className={`rounded-sm z-0 bg-accent rounded`} image={getImage(featuredImage)} />
             )}

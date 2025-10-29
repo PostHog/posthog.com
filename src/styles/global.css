@@ -1533,6 +1533,15 @@ body.dark {
     animation-iteration-count: infinite;
 }
 
+.Table {
+    thead td {
+        @apply py-2;
+    }
+    tr td:not(:first-child) {
+        @apply pl-4;
+    }
+}
+
 .mermaid-container {
     @apply my-4;
     .messageText,

@@ -277,13 +277,12 @@ const OSTable: React.FC<OSTableProps> = ({
             onLastRowInView?.()
         }
     }, [lastRowInView])
-
     return (
-        <div className="OSTable -mx-4 @xl:-mx-8 md:@2xs/not-full-width:mx-0">
+        <div className="OSTable -mx-4 @md/reader-content-container:-mx-6 @lg/reader-content-container:-mx-8 md:@2xs/not-full-width:mx-0">
             <ScrollArea fullWidth>
-                <div className="px-4 @xl:px-8 md:@2xs/not-full-width:px-0 flex justify-center">
+                <div className="px-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8 md:@2xs/not-full-width:px-0 flex justify-center">
                     <div
-                        className={`text-primary inline-grid min-w-0 divide-x divide-y divide-border border-b border-primary text-[15px] w-min [&>div]:px-2 ${
+                        className={`text-primary inline-grid min-w-[42rem] max-w-full divide-x divide-y divide-border border-b border-primary text-[15px] w-min [&>div]:px-2 ${
                             size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'
                         } ${className}`}
                         style={{ gridTemplateColumns: gridClass }}
