@@ -14,7 +14,7 @@ A trial creates space for you and the customer to validate technical fit, agree 
 - Qualified for sales-assist (>$20K ARR potential)
 - Clear decision makers and timeline identified
 - Customer wants technical validation
-- Customer is ready to invest time in proper evaluation
+- Customer is ready to invest time in an evaluation of PostHog
 
 **Skip the trial when:**
 - Below sales-assist threshold (route to self-serve)
@@ -32,45 +32,34 @@ We default to 2 weeks ($20-$60K ARR) unless there's a compelling reason for 4 we
 - Multiple stakeholder validation required
 - They are evaluating PostHog alongside other products
 
-## Recommended trial prerequisites
+## Trial "must-haves" and "should-haves"
 
-Every trial must include:
+Every trial _must_ include:
 
-1. **SDK installed and events firing** - Can't evaluate without data. This is a non-negotiable.
-2. **Kickoff call/message** - Align on timeline, success criteria, and support expectations.
-3. **Documented success criteria** - Define what "winning" looks like for them (specific metrics, dashboards, or use cases).
-4. **Written timeline** - Include the trial schedule and your closing plan if success criteria are met.
-5. **Shared Slack channel** - Set up before kickoff if possible. Although not required, it is preferred as we can provide much better support. 
+1. **SDK installed and events firing** - Can't trial without data. This is a non-negotiable, and should occur as a "Day 0" item requiring completion before proceeding to any of the recommended timeline steps below.
+2. **Documented success criteria** - Define what "winning" looks like for them. What do they need to see for the trial to be considered a success. Leaving them to their own devices and hoping they envision their success with PostHog in the way that we do is not likely to work.
+3. **Documented timeline** - Define the "when" for each of the success criteria in #2.
 
-You can use the [30-day onboarding success plan template](/handbook/cs-and-onboarding/onboarding-success-plan) as your shared doc and iterate where appropriate. Adapt for trial length and share with the customer as a Slack Canvas.
+Every trial _should_ include:
 
-## Required steps (all trials)
+1. **Kickoff call** - Use this time to align on the "must-haves": success criteria, timeline. An understanding of "how" they will evaluate is just as critical as what you can be doing throughout the trial to help check off the success criteria. Using this time to collaboratively build the success criteria ensures alignment and mutual understanding.
+2. **Shared Slack channel** - Set up before kickoff if possible, so that there's a more "live" way to communicate that comes with better and more accessible support. See [Shared Slack Channels with Customers](/handbook/growth/sales/slack-channels) for additional guidance.
+3. **Onboarding success plan** - Use the [30-day onboarding success plan template](/handbook/cs-and-onboarding/onboarding-success-plan) as a starting point, then iterate where appropriate. Adapt for trial length, and share with the customer as a Slack canvas in the shared Slack channel.
 
-Your first priority is to try and get them into [a shared Slack channel](/handbook/growth/sales/slack-channels) as quickly as possible. If you close them, this will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag @support to create a ticket in a thread.
+## Suggested timeline
 
-You should then follow up with a standard email/Slack message that:
-- Summarizes what they're after and how PostHog is a great fit (if it's not a good fit, they shouldn't have made it this far)
-- Lays out next steps on both sides
-- Shares a proposed timetable for the evaluation and onboarding process
-- Includes any useful links (relevant docs, competitor comparisons, case studies)
-
-As a separate message, you should lay out what criteria they need to see for the trial to be considered a success - the evaluation will almost certainly fail if you just leave the customer to noodle around trying PostHog.
-
-### Day 0: Installation
-- SDK installed and firing events
-
-> The evaluation shouldn't progress further into the below guidance until this is complete.
+> Note: Per above, the trial shouldn't progress past this point until the SDK is installed and event data is being sent to PostHog.
 
 ### Days 1-3: Kickoff & Review
 - 30-min kickoff with key stakeholders
-- Review settings and configuration aligned with evaluation goals (Identified events, Session Replay controls, Group analytics etc.)
+- Review settings and configuration aligned with trial goals (Identified events, Session Replay controls, Group analytics etc.)
 - Custom events (real KPIs) and properties instrumented (not just pageviews)
   - This is crucial. We want to be able to tie back event data in PostHog to actionable business insights stakeholders care about.
 - Build initial dashboards together with customers
 
 ### Days 4-7: Initial validation
 - Additional insights created (trends, funnels, paths)
-- Complimentary products introduced (Session Replay, Error Tracking, LLM Analytics, Data Warehouse etc.)
+- Complimentary products introduced (session replay, error tracking, LLM analytics, data warehouse etc.)
 - Start to gather initial feedback from test group
 - Start to validate success criteria
 
@@ -92,7 +81,7 @@ As customers are technically validating PostHog, you should also start to work w
 
 ## Support approach
 
-Different customers may need and/or request different levels of support during their evaluation. We should match the customer's energy accordingly: 
+Different customers may need and/or request different levels of support during their trial. We should match the customer's energy accordingly:
 
 **Hands-on (larger deals, less technical teams):**
 - Weekly check-ins
@@ -113,7 +102,7 @@ It's important to have visibility into a customer's usage and engagement in orde
 
 These signals are not guaranteed to always indicate success. Some teams are chattier than others, some teams like to keep comms over email, others enjoy regular Zoom meetings - see above for notes on Hands-on vs. Self-serve approaches.
 
-> Pro tip: You can always use Session Replay to also check their activity and learn how they are using PostHog!
+> Pro tip: You can always use session replay to also check their activity and learn how they are using PostHog!
 
 **High engagement signals:**
 - Active Slack channel (questions, wins, feedback)
