@@ -39,7 +39,7 @@ To add PostHog to your [Next.js app](/docs/libraries/next-js) use it to capture 
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
@@ -76,7 +76,7 @@ export default function RootLayout({ children }) {
 
 ## Tracking pageviews in React Router v7
 
-If you are using [React Router](https://reactrouter.com/en/main), start by setting `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file.
+If you are using [React Router](https://reactrouter.com/en/main), start by setting `posthog-js` and `@posthog/react` as external packages in your `vite.config.ts` file.
 
 ```ts file=vite.config.ts
 // ... imports
@@ -84,7 +84,7 @@ If you are using [React Router](https://reactrouter.com/en/main), start by setti
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   ssr: {
-    noExternal: ['posthog-js', 'posthog-js/react']
+    noExternal: ['posthog-js', '@posthog/react']
   }
 });
 ```
@@ -94,7 +94,7 @@ Next, create a `providers.tsx` file in the `app` folder. PostHog will automatica
 ```ts
 // app/providers.tsx
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
   posthog.init('<ph_project_api_key>', {
@@ -147,7 +147,7 @@ If you are using React Router v6 or below AKA `react-router-dom`, start by addin
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
   posthog.init('<ph_project_api_key>', {

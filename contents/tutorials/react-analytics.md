@@ -112,7 +112,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
@@ -144,7 +144,7 @@ Beyond pageviews and autocaptured events, there might be more events you want to
 To showcase this, update the code in `HomePage.jsx` to include a button that uses PostHog to capture a `home_button_clicked` event:
 
 ```jsx file=HomePage.jsx
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 function HomePage() {
   const posthog = usePostHog()

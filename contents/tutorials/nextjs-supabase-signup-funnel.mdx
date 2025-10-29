@@ -273,7 +273,7 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 // Check that PostHog is client-side
 if (typeof window !== 'undefined') {
@@ -332,7 +332,7 @@ However, we need and should be able to track step 5, when the user has successfu
 To do this, update the `Index` definition:
 
 ```js
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 const Index = () => {
   const posthog = usePostHog()

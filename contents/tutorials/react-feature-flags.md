@@ -59,7 +59,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
@@ -106,7 +106,7 @@ Once created, we can add our feature flag to our React app. We do this using the
 ```jsx
 // src/App.jsx
 import './App.css'
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+import { useFeatureFlagEnabled } from '@posthog/react'
 
 function App() {
   
@@ -139,7 +139,7 @@ An alternate way to implement feature flags is to use the `PostHogFeature` React
 ```jsx
 // src/App.jsx
 import './App.css'
-import { PostHogFeature } from 'posthog-js/react'
+import { PostHogFeature } from '@posthog/react'
 
 function App() {
   

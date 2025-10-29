@@ -325,7 +325,7 @@ To do this, create a button and connect it to a function that captures a `post_l
 
 ```js
 // pages/posts/[id].js
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 export default function Post({ post }) {
   const posthog = usePostHog()
@@ -379,7 +379,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from 'next/router';
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 export default function Home({ posts }) {
   const { data: session } = useSession();
@@ -495,7 +495,7 @@ This gives us a basic flag to add to our app.
 We can use PostHog's `isFeatureEnabled()` method to check the flag and show the CTA, but we need to do this in a `useEffect()` to avoid hydration errors. This looks like this
 ```js
 // pages/posts/[id].js
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 import { useState, useEffect } from 'react'
 
 export default function Post({ post }) {

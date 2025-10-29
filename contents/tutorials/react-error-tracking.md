@@ -78,7 +78,7 @@ Next, create a `PostHogProvider.jsx` file in your `src` directory, and in it, in
 // src/PostHogProvider.jsx
 import { useEffect } from 'react';
 import posthog from 'posthog-js';
-import { PostHogProvider as PHProvider } from 'posthog-js/react';
+import { PostHogProvider as PHProvider } from '@posthog/react';
 
 export function PostHogProvider({ children }) {
   useEffect(() => {
@@ -126,7 +126,7 @@ Once done, re-run your app with `npm run dev` and PostHog will autocapture error
 You can also capture errors manually with PostHog’s `captureException` method like this:
 
 ```js
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 export default function App() {
   const posthog = usePostHog();

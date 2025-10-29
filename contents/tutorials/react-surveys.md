@@ -61,7 +61,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
@@ -238,7 +238,7 @@ To fetch the active surveys, we use the `usePostHog` hook to retrieve our PostHo
 import './App.css'
 import { useEffect, useState } from 'react'
 import Survey from './Survey'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 function App() {
   // ... rest of your code ...
@@ -441,7 +441,7 @@ You can capture these events using `posthog.capture()`:
 import './App.css'
 import { useEffect, useState } from 'react'
 import Survey from './Survey'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 function App() {
   const [showSurvey, setShowSurvey] = useState(true)

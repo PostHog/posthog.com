@@ -19,7 +19,7 @@ Install `posthog-js`:
 npm install --save posthog-js
 ```
 
-Start by setting `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file.
+Start by setting `posthog-js` and `@posthog/react` as external packages in your `vite.config.ts` file.
 
 ```ts
 // vite.config.ts
@@ -39,7 +39,7 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   ssr: {
-    noExternal: ["posthog-js", "posthog-js/react"],
+    noExternal: ["posthog-js", "@posthog/react"],
   },
 });
 ```
@@ -50,7 +50,7 @@ Next, create a `provider.tsx` file in the `app` folder. In it, set up the PostHo
 // app/provider.tsx
 import { useEffect, useState } from "react";
 import posthog from "posthog-js";
-import { PostHogProvider } from "posthog-js/react";
+import { PostHogProvider } from "@posthog/react";
 
 export function PHProvider({ children }: { children: React.ReactNode }) {
   const [hydrated, setHydrated] = useState(false);

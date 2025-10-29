@@ -62,7 +62,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 posthog.init(
   <ph_project_api_key>, 
@@ -85,7 +85,7 @@ Use the React `usePostHog` hook in our `src/App.jsx` file to capture a custom ev
 ```jsx
 // src/App.jsx
 import './App.css'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 function App() {
   const posthog = usePostHog()
@@ -145,7 +145,7 @@ With our experiment created, it's time to add it to our React app. To do this, c
 ```jsx
 // src/App.jsx
 import './App.css'
-import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react'
+import { useFeatureFlagVariantKey, usePostHog } from '@posthog/react'
 
 function App() {
   const posthog = usePostHog()
