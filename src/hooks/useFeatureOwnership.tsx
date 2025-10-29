@@ -61,7 +61,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'base-currency': {
         feature: 'Base currency',
-        owner: ['revenue-analytics'],
+        owner: ['web-analytics'],
         label: 'feature/currency',
     },
     'batch-exports': {
@@ -103,7 +103,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'currency-rate-dataset': {
         feature: 'Currency rate dataset',
-        owner: ['revenue-analytics'],
+        owner: ['growth', 'customer-analytics'],
         label: 'feature/currency-rate',
     },
     'customer-analytics': {
@@ -299,11 +299,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'revenue-analytics': {
         feature: 'Revenue analytics',
-        owner: ['revenue-analytics'],
+        owner: ['customer-analytics', 'growth'],
     },
     'revenue-data-management': {
         feature: 'Revenue data management',
-        owner: ['revenue-analytics'],
+        owner: ['customer-analytics', 'growth'],
     },
     sdks: {
         feature: 'SDKs & client libraries (web, server-side)',
