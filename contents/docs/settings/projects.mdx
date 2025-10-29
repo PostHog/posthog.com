@@ -29,6 +29,24 @@ We also **strongly recommend** keeping your apps and marketing website on the sa
 
 You can still query data for your app or marketing website separately if needed. A way to do this is [filtering](/docs/product-analytics/trends/filters) by the `host` property, for example setting `host` to `posthog.com`. Alternatively, you could set [super properties](/docs/libraries/js/features#super-properties) and then filter by them.
 
+### Project settings inheritance
+
+New projects automatically inherit certain settings from their organization, including:
+
+- **IP data capture settings**: New projects inherit the organization's default IP data capture policy, ensuring consistent privacy controls across all environments
+- **Access control defaults**: Project access levels are set according to organization defaults
+
+This inheritance helps maintain consistent configuration across all projects without requiring manual setup for each new environment.
+
+#### IP data capture configuration
+
+IP data capture can be configured at both the organization and project levels:
+
+- **Organization level**: Set a default policy in **Settings** > **Organization** > **General** under **IP data capture default**. This applies to all new projects automatically. EU organizations default to IP capture disabled for GDPR compliance.
+- **Project level**: Override the organization default in **Settings** > **Project** > **General** under **IP data capture configuration**. This allows you to customize IP capture for specific projects or environments.
+
+Individual projects can override organization defaults to meet specific privacy requirements.
+
 It's best to use separate projects for:
 - Apps that are entirely separate products with unlinked authentication systems
 - Admin apps that aren't customer-facing products
