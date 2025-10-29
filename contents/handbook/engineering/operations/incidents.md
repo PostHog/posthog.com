@@ -109,7 +109,7 @@ Examples
 
 ## What happens during an incident?
 
-The person who raised the incident is the incident lead. It’s their responsibility to:
+When an incident is declared, the person who raised the incident is the incident lead. It’s their responsibility to:
 
 - Make sure the right people join the call. This includes the current on-call person (@on-call-global in Slack) and the team responsible for the alert (we have a [workflow](https://app.incident.io/posthog/settings/workflows/01K7PVWXBB1EWRJB24BBEHYA51) which will try to add these people automatically). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Support. Product Marketers can assist in running communications if required.
 - Take notes in the incident channel. This should include timestamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
@@ -118,7 +118,7 @@ The person who raised the incident is the incident lead. It’s their responsibi
     - Access to Atlassian is limited due to seats so if you need access talk to Tim or James.
     - Do not try and update the status page via the incident.io dashboard because it won't be sync'd to the Atlassian status page.
 
-If the person who raised the incident is the best person to debug the issue, they should hand over the incident lead role to someone else on the call.
+If the person who raised the incident isn't the best person to debug the issue, they should hand over the incident lead role to someone else on the call.
 
 [You can find all of our production runbooks + specific strategies for debugging outages here (internal)](https://runbooks.posthog.com)
 
@@ -166,6 +166,8 @@ Once the org has had their full access restored, repeat the steps above, but thi
 When we’ve identified the root cause of the issue and put a fix in place. End the incident by typing `/inc close` in the incident channel. Make sure to also mark the incident as resolved on the status page.
 
 ## What happens after an incident?
+
+Once the incident is resolved, the incident lead should **step away**. Take a walk, go to the gym, have some tea, take a shower. The longer the incident took to resolve, and the more directly customer impacting it was, the more important this is. Bring another team member up to speed, hand off outstanding customer communications, and get your head clear for the post-mortem and followup actions. Anyone else heavily involved in the response should do the same.
 
 In almost all cases, a valid incident will have a post-mortem - check out [Post-mortems](/handbook/engineering/operations/post-mortems) for more details.
 
