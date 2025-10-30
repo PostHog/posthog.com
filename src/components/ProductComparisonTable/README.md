@@ -262,6 +262,7 @@ Header rows automatically span all columns using `col-span-full` and display the
 
 -   Availability rows read `available` from the competitor data at the exact path (supports nested subproducts).
 -   Feature rows read the value at the exact nested path; booleans render ✓/✗ and numbers/strings render as text.
+-   If no matching data exists (value is `undefined`), the company cell is left blank. A red ✗ only appears for explicit `false` values.
 
 ### Competitor Names
 

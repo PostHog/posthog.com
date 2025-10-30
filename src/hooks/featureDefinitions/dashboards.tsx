@@ -2,6 +2,8 @@ export const dashboardsFeatures = {
     summary: {
         name: 'Dashboards',
         description: 'Combine insights into shareable dashboards',
+        url: '/dashboards',
+        docsUrl: '/docs/product-analytics/dashboards',
     },
     features: {
         annotations: {

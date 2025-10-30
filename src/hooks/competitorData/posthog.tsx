@@ -46,6 +46,9 @@ export const posthog = {
         },
         product_analytics: {
             available: true,
+            pricing: {
+                free_tier: '1 million events',
+            },
             features: {
                 anomaly_detection: true,
                 any_step_order: true,
@@ -74,12 +77,20 @@ export const posthog = {
                 reveal_paths_within_funnels: true,
                 reveal_user_paths_between_steps: true,
                 sequential_step_order: true,
-                sql_mode: true,
                 strict_step_order: true,
                 time_to_convert_insights: true,
                 track_custom_events: true,
                 track_pageviews: true,
                 user_level_permissions: true,
+                insights: {
+                    available: true,
+                    features: {
+                        ready_made_insight_types: true,
+                        sql_editor: true,
+                        formula_mode: true,
+                        sampling: true,
+                    },
+                },
                 trends: {
                     available: true,
                     features: {},
@@ -116,8 +127,9 @@ export const posthog = {
                         reveal_user_paths_between_steps: true,
                     },
                 },
-                pricing: {
-                    free_tier: '1 million events',
+                group_analytics: {
+                    available: true,
+                    features: {},
                 },
             },
         },

@@ -126,14 +126,12 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                     }
                 }
             } else {
-                // Single product-level row using summary name/description
+                // Single product-level row – let getFeatureInfo pull summary (including url/docsUrl)
                 const defs = featureDefs[product]
                 if (defs) {
                     expanded.push({
                         type: 'product',
                         product,
-                        label: defs.summary?.name || product,
-                        description: defs.summary?.description,
                     })
                 }
             }
@@ -163,12 +161,10 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                 const set = getDefsNode(defs, featureSetPath)
                 if (set && typeof set === 'object') {
                     if (featureSetPath === 'summary') {
-                        // Summary is a single product-level row
+                        // Summary is a single product-level row – allow getFeatureInfo to source from summary
                         expanded.push({
                             type: 'product',
                             product,
-                            label: set.name,
-                            description: set.description,
                         })
                     } else {
                         const segs = featureSetPath.split('.')
@@ -424,46 +420,74 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
     }
 
     // Helper to get feature value from competitor data
-    const getFeatureValue = (competitorKey: string, row: RowConfig): boolean | string => {
+    const getFeatureValue = (competitorKey: string, row: RowConfig): boolean | string | number | undefined => {
         const competitor = competitorData[competitorKey]
-        if (!competitor) return false
+        if (!competitor) return undefined
 
         if (row.type === 'header') return ''
 
         if (row.type === 'product' && row.product) {
-            // Product-level comparison: check if product is available
+            // Product-level comparison: check availability, supporting nested subproducts via featureSet
             const productData = competitor.products?.[row.product]
-            if (!productData) return false
+            if (!productData) return undefined
 
-            // Check for beta status
+            // Beta label takes precedence unless customValue provided
             if (productData.beta === true && row.customValue === undefined) {
                 return 'Beta'
             }
 
-            // Check for custom value override
             if (row.customValue !== undefined) {
                 return row.customValue
             }
 
-            return productData.available || false
+            if (row.featureSet) {
+                const getNode = (root: any, path?: string) => {
+                    if (!path) return root
+                    const parts = path.split('.')
+                    let node = root
+                    for (const p of parts) {
+                        let next = node?.[p]
+                        if (typeof next === 'undefined' && node?.features && typeof node.features === 'object') {
+                            next = node.features[p]
+                        }
+                        if (typeof next === 'undefined' && p === 'features' && node?.features) {
+                            next = node.features
+                        }
+                        node = next
+                        if (!node) break
+                    }
+                    return node
+                }
+                const node = getNode(productData, row.featureSet)
+                const available = node?.available ?? productData?.available
+                return available
+            }
+
+            return productData.available ?? undefined
         }
 
         if (row.type === 'platform') {
-            const platformFeatures = competitor.platform || {}
+            const platform = competitor.platform || {}
             const featureKey = row.feature || ''
-            return platformFeatures[featureKey] || false
+            if (row.featureSet) {
+                const set = row.featureSet.split('.').reduce((acc: any, key: string) => acc?.[key], platform)
+                const val = set?.features?.[featureKey] ?? set?.[featureKey]
+                return val
+            }
+            return platform[featureKey]
         }
 
         if (row.type === 'feature' && row.product) {
             const productData = competitor.products?.[row.product]
-            if (!productData || !productData.available) return false
+            if (!productData) return undefined
+            if (!productData.available) return false
 
             const featureKey = row.feature || ''
             if (row.featureSet === 'integrations') {
-                return productData.integrations?.[featureKey] || false
+                return productData.integrations?.[featureKey]
             }
             if (row.featureSet === 'pricing') {
-                return productData.pricing?.[featureKey] ?? false
+                return productData.pricing?.[featureKey]
             }
             // Support nested subproducts: traverse into productData by featureSet path
             const getNode = (root: any, path?: string) => {
@@ -493,7 +517,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                     return direct
                 }
             }
-            return productData.features?.[featureKey] || false
+            return productData.features?.[featureKey]
         }
 
         // Product-level availability (supports nested subproducts via featureSet path)
@@ -509,7 +533,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                     }
                 }
             }
-            if (!productData) return false
+            if (!productData) return undefined
 
             const getNode = (root: any, path?: string) => {
                 if (!path) return root
@@ -529,11 +553,11 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                 return node
             }
             const node = getNode(productData, row.featureSet)
-            const available = node?.available ?? productData?.available ?? false
+            const available = node?.available ?? productData?.available
             return available
         }
 
-        return false
+        return undefined
     }
 
     // Helper to get feature name and description
@@ -663,7 +687,8 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             return <span>{value}</span>
         }
 
-        return <span className="text-red font-bold">✗</span>
+        // undefined or null → no data: render blank cell
+        return null
     }
 
     // Build columns

@@ -36,13 +36,22 @@ export const amplitude = {
                 reveal_paths_within_funnels: true,
                 reveal_user_paths_between_steps: true,
                 sequential_step_order: true,
-                sql_mode: 'Add-on',
+
                 strict_step_order: true,
                 time_to_convert_insights: true,
                 track_custom_events: true,
                 track_pageviews: true,
                 user_level_permissions: true,
                 zoom_in_out: true,
+                insights: {
+                    available: true,
+                    features: {
+                        // ready_made_insight_types: true,
+                        sql_editor: 'Add-on',
+                        formula_mode: 'Growth plan or higher',
+                        // sampling: true,
+                    },
+                },
                 trends: {
                     available: true,
                     features: {
@@ -82,6 +91,10 @@ export const amplitude = {
                         reveal_paths_within_funnels: true,
                         reveal_user_paths_between_steps: true,
                     },
+                },
+                group_analytics: {
+                    available: 'Paid add-on',
+                    features: {},
                 },
             },
         },

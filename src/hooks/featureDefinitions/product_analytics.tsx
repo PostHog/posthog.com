@@ -19,8 +19,8 @@ export const productAnalyticsFeatures = {
                 name: 'Ready-made insight types',
                 description: 'Pre-built insight types including trends, funnels, paths, retention, and lifecycle',
             },
-            sql_mode: {
-                name: 'SQL mode',
+            sql_editor: {
+                name: 'SQL query editor',
                 description: 'Write SQL queries directly against your data without a separate data warehouse',
             },
             formula_mode: {
@@ -35,7 +35,7 @@ export const productAnalyticsFeatures = {
     },
     trends: {
         summary: {
-            name: 'Trends',
+            name: 'Graphs & trends',
             description: 'Build custom insights and visualizations',
             url: '/trends',
             docsUrl: '/docs/product-analytics/trends',
@@ -221,7 +221,7 @@ export const productAnalyticsFeatures = {
     group_analytics: {
         summary: {
             name: 'Group analytics',
-            description: 'Analyze user groups to understand how different groups of users behave',
+            description: 'Track metrics at a company and account level',
             url: '/profiles',
             docsUrl: '/docs/product-analytics/group-analytics',
         },

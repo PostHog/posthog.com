@@ -2,6 +2,8 @@ export const webAnalyticsFeatures = {
     summary: {
         name: 'Web Analytics',
         description: 'Privacy-focused web analytics with real-time data and no sampling',
+        url: '/web-analytics',
+        docsUrl: '/docs/web-analytics',
     },
     core_metrics: {
         description: 'Essential traffic and engagement metrics',
