@@ -9,6 +9,7 @@ We want to make sure we don’t assign new leads to people who are out of office
 ### In Salesforce → lead assignment tracker
 - There’s a checkbox called Is Active
 - When someone goes on leave, uncheck this box to make them inactive so they don't receive any new leads
+
 When they return:
 - Recheck the box so they start receiving leads again.
 - Use the Manual Lead Adjustment column to rebalance their totals if needed (more on that below).
