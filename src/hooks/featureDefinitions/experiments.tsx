@@ -19,9 +19,13 @@ export const experimentsFeatures = {
                 name: 'Ratio metrics',
                 description: 'Test ratios such as percentage of positive feedback to capture deeper insights',
             },
-            primary_secondary_metrics: {
-                name: 'Primary and secondary metrics',
-                description: 'Monitor main goals while watching for negative side effects',
+            custom_goals: {
+                name: 'Custom goals',
+                description: 'Define your own goals and metrics to track',
+            },
+            secondary_metrics: {
+                name: 'Secondary metrics',
+                description: 'Monitor impact on unrelated metrics',
             },
             shared_metrics_library: {
                 name: 'Shared metrics library',
@@ -130,6 +134,23 @@ export const experimentsFeatures = {
             side_effect_monitoring: {
                 name: 'Side effect monitoring',
                 description: 'Track secondary metrics to catch unintended consequences',
+            },
+            statistics_engine: {
+                name: 'Statistics engine',
+                description: 'How the results of an experiment are calculated',
+            },
+        },
+    },
+    platforms: {
+        description: 'Run experiments across all major platforms',
+        features: {
+            web: {
+                name: 'Web experiments',
+                description: 'Run experiments on your website or app',
+            },
+            mobile: {
+                name: 'Mobile experiments',
+                description: 'Supports Android, iOS, React Native, and Flutter',
             },
         },
     },

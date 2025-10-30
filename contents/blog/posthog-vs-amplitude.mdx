@@ -144,20 +144,24 @@ Both PostHog and Amplitude offer product analytics. Advanced features like SQL q
         {
             path: 'product_analytics.pricing.free_tier',
             label: 'Free usage',
-            description: 'How much free usage do you get each month?',
+            description: 'Monthly free tier',
         },
+        { label: 'Core features' },
         'product_analytics.features.autocapture',
         'product_analytics.insights.sql_editor',
         'dashboards',
+        { label: 'Insights' },
         'product_analytics.trends',
         'product_analytics.funnels',
         'product_analytics.user_paths',
         'product_analytics.retention',
-        'product_analytics.cohorts',
-        'product_analytics.group_analytics',
         'product_analytics.lifecycle',
         'product_analytics.stickiness',
+        { label: 'Analysis' },
+        'product_analytics.cohorts',
+        'product_analytics.group_analytics',
         'product_analytics.insights.formula_mode',
+        { label: 'Additional products' },
         'web_analytics',
     ]}
 />
@@ -172,64 +176,31 @@ PostHog supports [autocapture](/docs/product-analytics/autocapture), which means
 
 Both PostHog and Amplitude provide robust feature management tools, including boolean and multivariate flags, local evaluation, payloads, targeting, and percentage rollouts.
 
-<ComparisonTable column1="PostHog" column2="Amplitude">
-    <ComparisonRow
-        column1="1 million API requests"
-        column2="50k tracked users"
-        feature="Free usage"
-        description="How much free usage do you get each month?"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Boolean flags"
-        description="Simple flags returning true or flag"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Multivariate flags"
-        description="Flags with multiple customizable values"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Payloads"
-        description="Flags with string, number, or JSON payloads"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Store flag definitions locally"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Percentage rollouts"
-        description="Target percentages of a group"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Custom targeting"
-        description="Target users based on user properties, custom contexts"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flags to turn on or off" />
-    <ComparisonRow
-        column1="Partial"
-        column2={false}
-        feature="Environments"
-        description="Manage flags for dev, staging, prod"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Bootstrapping"
-        description="Flags available on frontend application load"
-    />
-    <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'amplitude']}
+    rows={[
+        {
+            path: 'feature_flags.pricing.free_tier',
+            label: 'Free usage',
+            description: 'Monthly free tier',
+        },
+        { label: 'Flag types' },
+        'feature_flags.features.boolean_flags',
+        'feature_flags.features.multivariate_flags',
+        'feature_flags.features.json_payloads',
+        { label: 'Implementation' },
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.implementation.bootstrapping',
+        { label: 'Targeting' },
+        'feature_flags.targeting.target_by_percentage',
+        'feature_flags.targeting.target_by_person_properties',
+        'feature_flags.targeting.target_by_cohorts',
+        { label: 'Management' },
+        'feature_flags.management.flag_scheduling',
+        'feature_flags.management.multi_environment',
+        'feature_flags.advanced.early_access_widget',
+    ]}
+/>
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
@@ -241,63 +212,33 @@ PostHog's feature flags are tightly integrated with other features, so you can t
 
 Both PostHog and Amplitude support core experimentation features like A/B/n testing, multivariate tests, custom and secondary metrics, and statistical significance calculations. PostHog includes experiments in its free tier (1M requests per month, including mobile support). Most Amplitude Experiments features are locked behind paid plans.
 
-<ComparisonTable column1="PostHog" column2="Amplitude">
-    <ComparisonRow
-        column1="1 million API requests"
-        column2="None"
-        feature="Free usage"
-        description="How much free usage do you get each month?"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web experiments"
-        description="Run A/B tests on web apps and websites"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Mobile experiments"
-        description="Run A/B tests on Android and iOS apps"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Custom goals"
-        description="Customize metrics that a test tracks"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Secondary metrics"
-        description="Monitor impact on unrelated metrics"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Split testing" description="Split participants into groups" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Multivariate (A/B/n) testing"
-        description="Test multiple variants of a change"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Statistical significance"
-        description="Automatically checks for statistical significance"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Holdout testing"
-        description="Withhold multiple features to measure cumulative impact"
-    />
-    <ComparisonRow
-        column1="Bayesian or Sequential"
-        column2="Sequential"
-        feature="Statistics engine"
-        description="How the results of an experiment are calculated"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'amplitude']}
+    rows={[
+        {
+            path: 'experiments.pricing.free_tier',
+            label: 'Free usage',
+            description: 'Monthly free tier',
+        },
+        { label: 'Supported platforms' },
+        'experiments.platforms.web',
+        'experiments.platforms.mobile',
+        { label: 'Supported test types' },
+        'experiments.supported_tests.ab_testing',
+        'experiments.supported_tests.aa_testing',
+        'experiments.supported_tests.abn_testing',
+        'experiments.supported_tests.holdout_testing',
+        'experiments.supported_tests.fake_door_testing',
+        'experiments.supported_tests.redirect_testing',
+        { label: 'Supported metrics & analysis' },
+        'experiments.experiment_types.custom_goals',
+        'experiments.experiment_types.secondary_metrics',
+        'experiments.analysis.statistical_significance',
+        'experiments.analysis.results_visualization',
+        'experiments.analysis.side_effect_monitoring',
+        'experiments.analysis.statistics_engine',
+    ]}
+/>
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
@@ -309,92 +250,34 @@ Amplitude's Web Experiments feature isn't available on any self-serve plan and t
 
 Both PostHog and Amplitude offer session replay, but PostHog offers more features that are useful for developers, like console logs, DOM explorer, and performance monitoring.
 
-<ComparisonTable column1="PostHog" column2="Amplitude">
-    <ComparisonRow
-        column1="5,000 recordings"
-        column2="1,000 recordings"
-        feature="Free usage"
-        description="How much free usage do you get each month?"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web app recordings"
-        description="Capture recordings from single-page apps"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Mobile app recordings"
-        description="Capture recordings in iOS and Android apps"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Heatmaps"
-        description="Visualize where users click in your app or website"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Identity detection"
-        description="Link recordings to user IDs"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Console logs"
-        description="Capture extra content from a user's browser"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Playlists"
-        description="Sort recordings into static and dynamic playlists"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Performance monitoring"
-        description="Track network events within a session"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Privacy masking"
-        description="Censor personal information from playback"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Conditional recording"
-        description="Only capture the sessions you want"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="DOM explorer"
-        description="Explore an interactive snapshot of replays"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Export recordings"
-        description="Save important recordings offline"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Sample recorded sessions"
-        description="Restrict the percentage of sessions that will be recorded"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Record via feature flag"
-        description="Only record sessions for users that have the flag enabled"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'amplitude']}
+    rows={[
+        {
+            path: 'session_replay.pricing.free_tier',
+            label: 'Free usage',
+            description: 'Monthly free tier',
+        },
+        { label: 'Supported platforms' },
+        'session_replay.platform_support.web_app_recordings',
+        'session_replay.platform_support.mobile_app_recordings',
+        { label: 'Analysis tools' },
+        'session_replay.analysis.heatmaps',
+        'session_replay.identity.identity_detection',
+        'session_replay.analysis.console_logs',
+        'session_replay.organization.playlists',
+        'session_replay.analysis.performance_monitoring',
+        'session_replay.privacy.privacy_masking',
+        { label: 'Recording controls' },
+        'session_replay.targeting.conditional_recording',
+        'session_replay.analysis.dom_explorer',
+        'session_replay.targeting.target_by_sample',
+        'session_replay.targeting.target_by_feature_flag',
+        { label: 'Export options' },
+        'session_replay.export.export_to_json',
+        'session_replay.export.export_to_video',
+    ]}
+/>
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
@@ -406,59 +289,33 @@ Replays let you watch how users experience your app, diagnose issues, improve su
 
 PostHog includes surveys out of the box, with 1,500 free responses per month and support for multiple formats like NPS, PMF, open text, and ratings, plus customization and targeting options. Amplitude provides surveys through its Guides & Surveys paid add-on.
 
-<ComparisonTable column1="PostHog" column2="Amplitude">
-    <ComparisonRow
-        column1="1500"
-        column2="n/a"
-        feature="Free usage"
-        description="How much free usage do you get each month?"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Open text" description="Free text answers and feedback" />
-    <ComparisonRow column1={true} column2={true} feature="Product rating" description="Rank using emojis or number" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Single choice"
-        description="Select one answer from multiple"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Multiple choice"
-        description="Select more than one answer from multiple"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="NPS surveys"
-        description="Net Promoter Score survey template"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="PMF surveys"
-        description="Product-market fit survey template"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User property targeting"
-        description="Target users based on any of their user properties"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Custom colors & positioning"
-        description="Customize the colors of your surveys to match your brand"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Custom HTML"
-        description="Add custom HTML to your survey text"
-    />
-    <ComparisonRow column1={true} column2={false} feature="API mode" description="Create surveys via the API" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'amplitude']}
+    rows={[
+        {
+            path: 'surveys.pricing.free_tier',
+            label: 'Free usage',
+            description: 'Monthly free tier',
+        },
+        { label: 'Question types' },
+        'surveys.question_types.freeform_text',
+        'surveys.question_types.rating',
+        'surveys.question_types.multiple_choice',
+        'surveys.question_types.multi_select',
+        'surveys.question_types.emoji_reaction',
+        { label: 'Templates' },
+        'surveys.templates.nps_surveys',
+        'surveys.templates.csat_surveys',
+        'surveys.templates.user_interview_requests',
+        { label: 'Targeting & customization' },
+        'surveys.targeting.custom_targeting',
+        'surveys.targeting.event_triggered',
+        'surveys.presentation.custom_html',
+        'surveys.presentation.custom_ui',
+        'surveys.branching.multi_step_surveys',
+        'surveys.implementation.api_access',
+    ]}
+/>
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
@@ -490,38 +347,21 @@ If you have 50,000 users who generate just a handful of events each month, usage
 
 ### Integrations
 
-<ComparisonTable column1="PostHog" column2="Amplitude">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Imports"
-        description="Import data from data warehouses and other sources"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Exports"
-        description="Export data to data warehouses other destinations"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Segment" description="Send events via Segment" />
-    <ComparisonRow column1={true} column2={false} feature="Zapier" description="Trigger Zapier automations" />
-    <ComparisonRow column1={true} column2={false} feature="Sentry" description="Connect to Sentry data" />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Zendesk"
-        description="Two-way integration for customer support"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Slack" description="Alerts for Slack" />
-    <ComparisonRow column1={true} column2={true} feature="Microsoft Teams" description="Alerts for Microsoft Teams" />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Community integrations"
-        description="Build your own integration"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Google Ads" description="Import ROI data from Google Ads" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'amplitude']}
+    rows={[
+        'platform.integrations.imports',
+        'platform.integrations.exports',
+        'platform.integrations.segment',
+        'platform.integrations.zapier',
+        'platform.integrations.sentry',
+        'platform.integrations.zendesk',
+        'platform.integrations.slack',
+        'platform.integrations.microsoft_teams',
+        'platform.integrations.community_integrations',
+        'platform.integrations.google_ads',
+    ]}
+/>
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
@@ -531,35 +371,18 @@ This is just a small sample of available integrations. See our [data pipeline do
 
 ### Security and compliance
 
-<ComparisonTable column1="PostHog" column2="Amplitude">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize users, drop personal data"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="History, audit logs"
-        description="Manage and view flag edits and related users"
-    />
-    <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
-    <ComparisonRow column1={true} column2={true} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
-    <ComparisonRow column1={true} column2={true} feature="SOC 2 Type II" description="SOC 2 security certification" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="2FA"
-        description="Enforce login with two-factor authentication"
-    />
-    <ComparisonRow
-        column1="Enterprise"
-        column2="Enterprise"
-        feature="SAML/SSO"
-        description="Use SAML or single sign-on authentication"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'amplitude']}
+    rows={[
+        'platform.security.user_privacy_options',
+        'platform.security.history_audit_logs',
+        'platform.security.gdpr_ready',
+        'platform.security.hipaa_ready',
+        'platform.security.soc2_certified',
+        'platform.security.two_factor_auth',
+        'platform.security.saml_sso',
+    ]}
+/>
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 

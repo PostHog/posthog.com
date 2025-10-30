@@ -86,8 +86,12 @@ export const surveysFeatures = {
                 description: 'Get a shareable URL to a survey that you can send directly to users or embed',
             },
             custom_ui: {
-                name: 'Custom UI',
-                description: 'Create completely custom experiences using the Surveys API',
+                name: 'Custom colors & positioning',
+                description: 'Customize the colors of your surveys to match your brand',
+            },
+            custom_html: {
+                name: 'Custom HTML',
+                description: 'Add HTML to your survey text',
             },
             iframe_embedding: {
                 name: 'Iframe embedding',

@@ -15,8 +15,9 @@ export const featureFlagsFeatures = {
                 description: 'Test multiple variants of a feature in a single flag',
             },
             json_payloads: {
-                name: 'JSON payloads',
-                description: 'Pass structured data to variants for dynamic configuration without code changes',
+                name: 'Payloads',
+                description:
+                    'Pass structured data (strings, numbers, or JSON objects) to variants for dynamic configuration without code changes',
             },
             release_conditions: {
                 name: 'Release conditions',
@@ -49,11 +50,11 @@ export const featureFlagsFeatures = {
         description: 'Precisely target who sees each feature',
         features: {
             target_by_percentage: {
-                name: 'Target by percentage',
+                name: 'Percentage-based rollouts',
                 description: 'Roll out features gradually to a percentage of users',
             },
             target_by_person_properties: {
-                name: 'Target by person properties',
+                name: 'Custom targeting',
                 description: 'Target features based on user properties and attributes',
             },
             target_by_cohorts: {
