@@ -190,9 +190,11 @@ export const errorTracking = {
 
 Product feature definitions support:
 
--   A `summary` section for product-level comparisons
+-   A `summary` section for product-level comparisons (supports optional `url` and `docsUrl`)
 -   A top-level `features` node for simple features that don’t belong to a named sub-section
--   Optional named sections (e.g., `funnels`, `paths`) that can include a `description` and a nested `features` object
+-   Optional named sections (e.g., `trends`, `funnels`, `user_paths`) that can include:
+    -   `summary` (name, description, optional `url`, `docsUrl`) – used when you reference the section directly (e.g., `product_analytics.trends`)
+    -   `features` – the feature map displayed when you reference the section’s features (e.g., `product_analytics.trends.features`)
 
 ```typescript
 // error_tracking.tsx
@@ -200,6 +202,8 @@ export const errorTrackingFeatures = {
     summary: {
         name: 'Error tracking',
         description: 'Track and monitor errors and exceptions in your code',
+        url: '/error-tracking',
+        docsUrl: '/docs/error-tracking',
     },
     features: {
         description: 'Core error capture and triage capabilities',
@@ -209,11 +213,10 @@ export const errorTrackingFeatures = {
             // ...
         },
     },
-    monitoring: {
-        description: 'Visibility into performance and releases',
+    trends: {
+        summary: { name: 'Trends', description: 'Build custom insights and visualizations', url: '/trends' },
         features: {
-            source_map_support: { name: 'Source map support', description: '...' },
-            // ...
+            visualization_options: { name: 'Visualization options', description: 'Choose from ...' },
         },
     },
 }
@@ -240,12 +243,25 @@ Labels and descriptions are resolved in this order:
 
 1. **Override values** in row config (highest priority) - `label` and `description` props
 2. **Feature definition files** - from `src/hooks/featureDefinitions/`
-3. **Summary section** - for product-level comparisons
+3. **Summary section** - for product-level comparisons. If the target is a nested section (e.g., `product_analytics.trends`), the component uses that section’s `summary` (and will render the name as a link if `summary.url` is present).
 4. **Fallback** - feature key or product handle
 
 ### Headers
 
 Header rows automatically span all columns using `col-span-full` and display the label with bold styling.
+
+### Path behavior recap
+
+-   `product_analytics` → product summary + availability (`products.product_analytics.available`)
+-   `product_analytics.trends` → section summary + availability (`products.product_analytics.trends.available`)
+-   `product_analytics.trends.features` → “Trends” header + all nested features under `trends.features`
+-   `product_analytics.features.autocapture` → a single feature row from the top-level `features` map
+-   `dashboards` → product summary + availability (`products.dashboards.available`, with a fallback to nested definitions if some vendors nest it under another product)
+
+### Values
+
+-   Availability rows read `available` from the competitor data at the exact path (supports nested subproducts).
+-   Feature rows read the value at the exact nested path; booleans render ✓/✗ and numbers/strings render as text.
 
 ### Competitor Names
 

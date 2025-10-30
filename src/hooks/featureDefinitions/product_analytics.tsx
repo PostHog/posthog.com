@@ -24,7 +24,7 @@ export const productAnalyticsFeatures = {
                 description: 'Write SQL queries directly against your data without a separate data warehouse',
             },
             formula_mode: {
-                name: 'Formula mode',
+                name: 'Custom formulas',
                 description: 'Perform calculations and math operations on multiple event series',
             },
             sampling: {
@@ -37,6 +37,8 @@ export const productAnalyticsFeatures = {
         summary: {
             name: 'Trends',
             description: 'Build custom insights and visualizations',
+            url: '/trends',
+            docsUrl: '/docs/product-analytics/trends',
         },
         features: {
             visualization_options: {
@@ -53,6 +55,8 @@ export const productAnalyticsFeatures = {
         summary: {
             name: 'Funnels',
             description: 'Track users through a sequence of events to find drop-off and improve conversion',
+            url: '/funnels',
+            docsUrl: '/docs/product-analytics/funnels',
         },
         features: {
             conversion_funnels: {
@@ -121,6 +125,8 @@ export const productAnalyticsFeatures = {
         summary: {
             name: 'User paths',
             description: 'Understand how users navigate through your product and where they get stuck',
+            url: '/user-paths',
+            docsUrl: '/docs/product-analytics/user-paths',
         },
         features: {
             reveal_paths_from_start: {
@@ -182,6 +188,75 @@ export const productAnalyticsFeatures = {
             max_steps: {
                 name: 'Max number of steps',
                 description: 'Control the maximum number of steps displayed in path analysis',
+            },
+        },
+    },
+    retention: {
+        summary: {
+            name: 'Retention',
+            description: 'Track user retention over time to understand how long users stay with your product',
+            url: '/retention',
+            docsUrl: '/docs/product-analytics/retention',
+        },
+        features: {
+            retention_by_cohort: {
+                name: 'Retention by cohort',
+                description: 'Track retention for specific user cohorts',
+            },
+        },
+    },
+    cohorts: {
+        summary: {
+            name: 'Cohorts',
+            description: 'Create cohorts of users to analyze and compare',
+            docsUrl: '/docs/product-analytics/cohorts',
+        },
+        features: {
+            cohort_by_events: {
+                name: 'Cohort by events',
+                description: 'Create cohorts based on events',
+            },
+        },
+    },
+    group_analytics: {
+        summary: {
+            name: 'Group analytics',
+            description: 'Analyze user groups to understand how different groups of users behave',
+            url: '/profiles',
+            docsUrl: '/docs/product-analytics/group-analytics',
+        },
+        features: {
+            group_by_events: {
+                name: 'Group by events',
+                description: 'Group users based on events',
+            },
+        },
+    },
+    lifecycle: {
+        summary: {
+            name: 'Lifecycle',
+            description: 'Track user lifecycle to understand how users interact with your product',
+            url: '/lifecycle',
+            docsUrl: '/docs/product-analytics/lifecycle',
+        },
+        features: {
+            lifecycle_by_events: {
+                name: 'Lifecycle by events',
+                description: 'Track lifecycle for specific events',
+            },
+        },
+    },
+    stickiness: {
+        summary: {
+            name: 'Stickiness',
+            description: 'Track user stickiness over time to understand how long users stay with your product',
+            url: '/stickiness',
+            docsUrl: '/docs/product-analytics/stickiness',
+        },
+        features: {
+            stickiness_by_cohort: {
+                name: 'Stickiness by cohort',
+                description: 'Track stickiness for specific user cohorts',
             },
         },
     },

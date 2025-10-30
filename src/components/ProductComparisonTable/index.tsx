@@ -537,7 +537,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
     }
 
     // Helper to get feature name and description
-    const getFeatureInfo = (row: RowConfig): { name: string; description?: string } => {
+    const getFeatureInfo = (row: RowConfig): { name: string; description?: string; url?: string; docsUrl?: string } => {
         if (row.type === 'header') return { name: row.label || '' }
 
         // If label is explicitly provided, use it
@@ -618,13 +618,17 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                     .join(' ')
                 const name = sectionSummary?.name || fallbackName
                 const description = row.description || sectionSummary?.description || section?.description
-                return { name, description }
+                const url = sectionSummary?.url
+                const docsUrl = sectionSummary?.docsUrl
+                return { name, description, url, docsUrl }
             }
             const summary = defs?.summary
             if (summary) {
                 return {
                     name: row.label || summary.name || row.product,
                     description: row.description || summary.description,
+                    url: summary.url,
+                    docsUrl: summary.docsUrl,
                 }
             }
             const productDesc = productDescriptions[row.product as keyof typeof productDescriptions]
@@ -664,7 +668,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
 
     // Build columns
     const columns = [
-        { name: 'Feature', width: 'auto', align: 'left' as const },
+        { name: '', width: 'auto', align: 'left' as const },
         ...competitors.map((key) => ({
             name: (
                 <>
@@ -690,7 +694,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                     )}
                 </>
             ),
-            width: 'minmax(100px, 1fr)',
+            width: 'minmax(150px, 1fr)',
             align: 'center' as const,
         })),
     ]
@@ -703,7 +707,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                 key: `row-${index}`,
                 cells: [
                     {
-                        content: <div className="font-semibold text-lg">{row.label || ''}</div>,
+                        content: <div className="font-semibold text-base">{row.label || ''}</div>,
                         className: 'col-span-full border-b-2 border-primary bg-accent pb-2',
                     },
                 ],
@@ -715,7 +719,14 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             {
                 content: (
                     <div className="leading-tight min-w-48">
-                        <strong>{featureInfo.name}</strong>
+                        {featureInfo.url ? (
+                            <Link to={featureInfo.url} className="group text-sm underline" state={{ newWindow: true }}>
+                                <strong>{featureInfo.name}</strong>
+                                <IconArrowUpRight className="invisible group-hover:visible inline-block size-4 text-secondary relative -top-px" />
+                            </Link>
+                        ) : (
+                            <strong>{featureInfo.name}</strong>
+                        )}
                         {featureInfo.description && (
                             <div className="text-sm text-secondary mt-1">{featureInfo.description}</div>
                         )}

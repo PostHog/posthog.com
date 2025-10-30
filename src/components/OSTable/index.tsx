@@ -197,7 +197,7 @@ const Row = ({
                     ? 'items-start'
                     : columns?.[cellIndex]?.align === 'right'
                     ? 'justify-end'
-                    : 'items-center'
+                    : 'items-center text-center'
             } ${cell.className || ''}`}
                             style={cell.style}
                         >
