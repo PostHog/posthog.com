@@ -1420,7 +1420,7 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                     {
-                        name: 'Lifecycle of CSM Engagement',
+                        name: 'Lifecycle of CSM engagement',
                         url: '/handbook/cs-and-onboarding/lifecycle-csm',
                     },
                     {
