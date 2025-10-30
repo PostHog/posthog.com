@@ -187,14 +187,14 @@ export const posthog_ai = {
                     percent: 30,
                 },
                 {
-                    name: 'Human annotations',
-                    description: 'Generate LLM-as-a-judge prompts from manually labeled traces',
+                    name: 'LLM evals generator',
+                    description: 'Create LLM-as-a-judge prompts from manually labeled traces',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
                 {
-                    name: 'Prompt experiments',
-                    description: 'Configure experiments to A/B test system prompts',
+                    name: 'Prompt experiments builder',
+                    description: 'Set up system prompt experiments in natural language',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
