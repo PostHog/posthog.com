@@ -51,10 +51,8 @@ Surveys are enabled by default. If you want to disable surveys, you can do so wh
 
 ```dart
 final config = PostHogConfig('<ph_project_api_key>');
-config.host = '<ph_client_api_host>';
-config.surveys = false; // Disable surveys
 
-await Posthog().setup(config);
+config.surveys = false; // Disable surveys
 ```
 
 ## Supported Features
