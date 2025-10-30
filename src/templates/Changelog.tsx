@@ -95,11 +95,36 @@ type RoadmapNode = {
     }
 }
 
-export const Change = ({ title, teamName, media, description, cta }) => {
+export const Change = ({ title, teamName, media, description, cta, date, dateCompleted }) => {
+    const anchor = useMemo(() => slugify(title, { lower: true }), [title])
+    const entryLink = useMemo(() => {
+        const rawDate = dateCompleted || date
+        if (!rawDate) {
+            return `#${anchor}`
+        }
+
+        const parsedDate = dayjs.utc(rawDate)
+        if (!parsedDate.isValid()) {
+            return `#${anchor}`
+        }
+
+        return `/changelog/${parsedDate.format('YYYY')}#${anchor}`
+    }, [anchor, date, dateCompleted])
+
     return (
         <>
-            <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
-                {title}
+            <Heading as="h3" id={anchor} className="m-0 flex items-baseline gap-2 group" hideCopy>
+                <>
+                    <span>{title}</span>
+                    <Link
+                        to={entryLink}
+                        className="opacity-0 group-hover:opacity-40 transition-opacity text-sm leading-none focus-visible:opacity-100 focus-visible:outline-none hover:opacity-100"
+                        aria-label={`Link to ${title}`}
+                        title="Copy link"
+                    >
+                        ¶
+                    </Link>
+                </>
             </Heading>
             {teamName && <p className="m-0 text-sm opacity-60 font-semibold">{teamName} Team</p>}
             {media?.data?.attributes?.mime === 'video/mp4' ? (
