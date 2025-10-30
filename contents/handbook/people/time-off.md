@@ -100,7 +100,7 @@ Please communicate parental leave to Fraser as soon as you feel comfortable doin
 
 ### Maternity leave
 
-The above is in reference to Paid Time Off (PTO) - for any expecting mothers, please just let Fraser know the total amount of time you expect to take off, as soons as possible. 
+The above is in reference to Paid Time Off (PTO). Maternity leave can be extended using unpaid time off, please work with your team to find a reasonable solution for both your family and your team, and let Fraser know the total amount of time you expect to take off as soon as possible.
 
 ### Paternity leave
 
