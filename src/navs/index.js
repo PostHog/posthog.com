@@ -1180,6 +1180,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/user-feedback',
             },
             {
+                name: 'In-Person Customer Visits',
+                url: '/handbook/product/visiting-customers',
+            },
+            {
                 name: 'Releasing as beta',
                 url: '/handbook/product/releasing-as-beta',
             },
@@ -1528,7 +1532,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/revops/lead-assignment-ooo',
                     },
                 ],
-            }
+            },
         ],
     },
 ]
