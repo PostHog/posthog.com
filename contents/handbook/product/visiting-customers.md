@@ -27,7 +27,7 @@ The following is a guide to share what has worked, and what hasn't for others wh
 2. **Pick a metro hub, and research potential customers.**  
    Choose a city with a good number of PostHog customers. Aim to identify ~12–15 customers across different sizes and maturity levels in that region. 15 may sound like a lot but you'll likely only be able to talk to 30% of these customers in the end. 
    
-   You should do deep research on each account - take notes of which products, and features our customers are using using Vitally (and offcourse PostHog). Who at those companies is using specific features and have a look a few session recordings. You should refer back to these notes before meeting the customer in person so you are informed.
+   You should do deep research on each account - take notes of which products, and features our customers are using Vitally (and of course PostHog). Who at those companies is using specific features and have a look a few session recordings. You should refer back to these notes before meeting the customer in person so you are informed.
 
 3. **Coordinate with Sales and Customer Success.**  
    Post in the relevant Sales and Customer Success Slack channels about your plans. Tag the account owners for the customers you’d like to visit. Ask if it’s a good time to reach out, whether they have additional context, or if there are other relevant customers or prospects to reach out to as well.
