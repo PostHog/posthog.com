@@ -2040,6 +2040,10 @@ li.squeak-left-border {
         li {
             @apply !mb-0 !leading-relaxed !text-[15px];
         }
+
+        *:first-child {
+            @apply mt-0;
+        }
     }
 }
 

@@ -4,125 +4,147 @@ export const surveysFeatures = {
         description: 'Collect product feedback with no-code surveys and customizable targeting',
     },
     question_types: {
-        multiple_choice: {
-            name: 'Multiple choice',
-            description: 'Single-select questions with predefined answer options',
-        },
-        multi_select: {
-            name: 'Multi-select',
-            description: 'Allow users to select multiple answers from a list',
-        },
-        rating: {
-            name: 'Numerical rating',
-            description: 'Collect ratings on a numerical scale',
-        },
-        emoji_reaction: {
-            name: 'Emoji reaction',
-            description: 'Quick feedback collection using emoji reactions',
-        },
-        embedded_links: {
-            name: 'Embedded links',
-            description: 'Include clickable links within survey questions',
-        },
-        freeform_text: {
-            name: 'Freeform text',
-            description: 'Open-ended text responses for detailed feedback',
+        description: 'Ask anything with flexible question formats',
+        features: {
+            multiple_choice: {
+                name: 'Multiple choice',
+                description: 'Single-select questions with predefined answer options',
+            },
+            multi_select: {
+                name: 'Multi-select',
+                description: 'Allow users to select multiple answers from a list',
+            },
+            rating: {
+                name: 'Numerical rating',
+                description: 'Collect ratings on a numerical scale',
+            },
+            emoji_reaction: {
+                name: 'Emoji reaction',
+                description: 'Quick feedback collection using emoji reactions',
+            },
+            embedded_links: {
+                name: 'Embedded links',
+                description: 'Include clickable links within survey questions',
+            },
+            freeform_text: {
+                name: 'Freeform text',
+                description: 'Open-ended text responses for detailed feedback',
+            },
         },
     },
     templates: {
-        survey_templates: {
-            name: 'Survey templates',
-            description: 'Choose from a library of pre-built templates or start from scratch',
-        },
-        nps_surveys: {
-            name: 'NPS surveys',
-            description: 'Built-in NPS survey templates with automatic score calculation',
-        },
-        csat_surveys: {
-            name: 'CSAT surveys',
-            description: 'Customer satisfaction survey templates',
-        },
-        user_interview_requests: {
-            name: 'User interview requests',
-            description: 'Templates for organizing and scheduling user interviews',
+        description: 'Start faster with common use cases',
+        features: {
+            survey_templates: {
+                name: 'Survey templates',
+                description: 'Choose from a library of pre-built templates or start from scratch',
+            },
+            nps_surveys: {
+                name: 'NPS surveys',
+                description: 'Built-in NPS survey templates with automatic score calculation',
+            },
+            csat_surveys: {
+                name: 'CSAT surveys',
+                description: 'Customer satisfaction survey templates',
+            },
+            user_interview_requests: {
+                name: 'User interview requests',
+                description: 'Templates for organizing and scheduling user interviews',
+            },
         },
     },
     targeting: {
-        display_conditions: {
-            name: 'Display conditions',
-            description: 'Display surveys based on URL, person property, or feature flag',
-        },
-        event_triggered: {
-            name: 'Event-triggered surveys',
-            description: 'Trigger a survey to open when an event occurs, either every time or just once',
-        },
-        custom_targeting: {
-            name: 'Custom targeting',
-            description: 'Target surveys to specific users, cohorts, or behavioral segments',
+        description: 'Control when and who sees a survey',
+        features: {
+            display_conditions: {
+                name: 'Display conditions',
+                description: 'Display surveys based on URL, person property, or feature flag',
+            },
+            event_triggered: {
+                name: 'Event-triggered surveys',
+                description: 'Trigger a survey to open when an event occurs, either every time or just once',
+            },
+            custom_targeting: {
+                name: 'Custom targeting',
+                description: 'Target surveys to specific users, cohorts, or behavioral segments',
+            },
         },
     },
     presentation: {
-        popover: {
-            name: 'Popover surveys',
-            description: 'Display surveys as popovers in the bottom corner of the screen',
-        },
-        feedback_button: {
-            name: 'Feedback button',
-            description: 'Show a feedback button that opens surveys on click',
-        },
-        hosted_surveys: {
-            name: 'Hosted surveys',
-            description: 'Get a shareable URL to a survey that you can send directly to users or embed',
-        },
-        custom_ui: {
-            name: 'Custom UI',
-            description: 'Create completely custom experiences using the Surveys API',
-        },
-        iframe_embedding: {
-            name: 'Iframe embedding',
-            description: 'Embed surveys in your website using an iframe',
+        description: 'Display surveys in-app or hosted',
+        features: {
+            popover: {
+                name: 'Popover surveys',
+                description: 'Display surveys as popovers in the bottom corner of the screen',
+            },
+            feedback_button: {
+                name: 'Feedback button',
+                description: 'Show a feedback button that opens surveys on click',
+            },
+            hosted_surveys: {
+                name: 'Hosted surveys',
+                description: 'Get a shareable URL to a survey that you can send directly to users or embed',
+            },
+            custom_ui: {
+                name: 'Custom UI',
+                description: 'Create completely custom experiences using the Surveys API',
+            },
+            iframe_embedding: {
+                name: 'Iframe embedding',
+                description: 'Embed surveys in your website using an iframe',
+            },
         },
     },
     branching: {
-        multi_step_surveys: {
-            name: 'Multi-step surveys',
-            description: 'Define the next step based on the response received for single choice and rating questions',
-        },
-        conditional_logic: {
-            name: 'Conditional logic',
-            description: 'Create dynamic survey flows based on user responses',
+        description: 'Guide respondents through dynamic flows',
+        features: {
+            multi_step_surveys: {
+                name: 'Multi-step surveys',
+                description:
+                    'Define the next step based on the response received for single choice and rating questions',
+            },
+            conditional_logic: {
+                name: 'Conditional logic',
+                description: 'Create dynamic survey flows based on user responses',
+            },
         },
     },
     integrations: {
-        link_to_webpage: {
-            name: 'Link to webpage',
-            description: 'Send users to a webpage after survey completion',
-        },
-        calendar_invites: {
-            name: 'Calendar invites',
-            description: 'Invite users to book a meeting with a calendar invite',
-        },
-        slack_integration: {
-            name: 'Send responses to Slack',
-            description: 'Send real-time survey responses to a Slack channel',
-        },
-        cdp_destinations: {
-            name: 'Send responses to CDP destinations',
-            description: 'Send survey responses to any CDP destination for further processing',
+        description: 'Connect surveys to your workflows',
+        features: {
+            link_to_webpage: {
+                name: 'Link to webpage',
+                description: 'Send users to a webpage after survey completion',
+            },
+            calendar_invites: {
+                name: 'Calendar invites',
+                description: 'Invite users to book a meeting with a calendar invite',
+            },
+            slack_integration: {
+                name: 'Send responses to Slack',
+                description: 'Send real-time survey responses to a Slack channel',
+            },
+            cdp_destinations: {
+                name: 'Send responses to CDP destinations',
+                description: 'Send survey responses to any CDP destination for further processing',
+            },
         },
     },
     implementation: {
-        no_code: {
-            name: 'No-code setup',
-            description: 'Using PostHog.js? No more code required for basic surveys',
-        },
-        api_access: {
-            name: 'API access',
-            description: 'Full API access for creating custom survey experiences',
-        },
-        sdk_support: {
-            name: 'SDK support',
-            description: 'Supported platforms include JavaScript, iOS, React Native, and Flutter',
+        description: 'Set up surveys with no-code or API',
+        features: {
+            no_code: {
+                name: 'No-code setup',
+                description: 'Using PostHog.js? No more code required for basic surveys',
+            },
+            api_access: {
+                name: 'API access',
+                description: 'Full API access for creating custom survey experiences',
+            },
+            sdk_support: {
+                name: 'SDK support',
+                description: 'Supported platforms include JavaScript, iOS, React Native, and Flutter',
+            },
         },
     },
     features: {

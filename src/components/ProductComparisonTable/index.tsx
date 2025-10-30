@@ -47,6 +47,7 @@ import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
 import { revenueAnalyticsFeatures } from '../../hooks/featureDefinitions/revenue_analytics'
 import { platformFeatures } from '../../hooks/featureDefinitions/platform'
 import { productDescriptions } from '../../hooks/featureDefinitions/products'
+import { dashboardsFeatures } from '../../hooks/featureDefinitions/dashboards'
 
 interface RowConfig {
     // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
@@ -76,6 +77,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         session_replay: sessionReplayFeatures,
         feature_flags: featureFlagsFeatures,
         product_analytics: productAnalyticsFeatures,
+        dashboards: dashboardsFeatures,
         web_analytics: webAnalyticsFeatures,
         experiments: experimentsFeatures,
         surveys: surveysFeatures,
@@ -89,7 +91,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         const expanded: RowConfig[] = []
 
         if (parts.length === 1) {
-            // "error_tracking" - expand entire product (all sections)
+            // "product" - show single product row (availability) or expand platform
             const product = parts[0]
             if (product === 'platform') {
                 // Expand all platform sections
@@ -101,7 +103,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                             // Add header for section
                             expanded.push({ label: featureSet, type: 'header' })
                             // Add all features in this set
-                            for (const feature in set) {
+                            for (const feature in set.features || {}) {
                                 expanded.push({
                                     type: 'platform',
                                     featureSet,
@@ -112,42 +114,15 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                     }
                 }
             } else {
-                // Expand all sections of a product
+                // Single product-level row using summary name/description
                 const defs = featureDefs[product]
                 if (defs) {
-                    // Add summary if it exists
-                    if (defs.summary) {
-                        expanded.push({
-                            type: 'product',
-                            product,
-                            label: defs.summary.name,
-                            description: defs.summary.description,
-                        })
-                    }
-                    // Add all sections
-                    for (const featureSet in defs) {
-                        if (featureSet === 'summary') continue
-                        const set = defs[featureSet]
-                        if (set && typeof set === 'object') {
-                            // Add header for section (convert to sentence case)
-                            const sectionName = featureSet
-                                .split('_')
-                                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                                .join(' ')
-                            expanded.push({ label: sectionName, type: 'header' })
-                            // Add all features in this section
-                            for (const feature in set) {
-                                if (set[feature] && typeof set[feature] === 'object' && 'name' in set[feature]) {
-                                    expanded.push({
-                                        type: 'feature',
-                                        product,
-                                        featureSet,
-                                        feature,
-                                    })
-                                }
-                            }
-                        }
-                    }
+                    expanded.push({
+                        type: 'product',
+                        product,
+                        label: defs.summary?.name || product,
+                        description: defs.summary?.description,
+                    })
                 }
             }
         } else if (parts.length === 2) {
@@ -159,7 +134,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                 const set = platformDefs?.[featureSet]
                 if (set) {
                     expanded.push({ label: featureSet, type: 'header' })
-                    for (const feature in set) {
+                    for (const feature in set.features || {}) {
                         expanded.push({
                             type: 'platform',
                             featureSet,
@@ -182,14 +157,20 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                         })
                     } else {
                         // Regular section - add header and all features
-                        // Convert snake_case to Title Case (e.g., "core_features" -> "Core Features")
-                        const sectionName = featureSet
-                            .split('_')
-                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                            .join(' ')
+                        // For "features", use product summary name as header label
+                        const sectionName =
+                            featureSet === 'features'
+                                ? defs?.summary?.name || 'Features'
+                                : featureSet
+                                      .split('_')
+                                      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                                      .join(' ')
                         expanded.push({ label: sectionName, type: 'header' })
-                        for (const feature in set) {
-                            if (set[feature] && typeof set[feature] === 'object' && 'name' in set[feature]) {
+                        // Add all features in this section (support nested or flat)
+                        const featureMap: any = set?.features || set
+                        for (const feature in featureMap) {
+                            const feat = featureMap[feature]
+                            if (feat && typeof feat === 'object' && 'name' in feat) {
                                 expanded.push({
                                     type: 'feature',
                                     product,
@@ -436,6 +417,9 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             if (row.featureSet === 'integrations') {
                 return productData.integrations?.[featureKey] || false
             }
+            if (row.featureSet === 'pricing') {
+                return productData.pricing?.[featureKey] ?? false
+            }
             return productData.features?.[featureKey] || false
         }
 
@@ -451,14 +435,14 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             return { name: row.label, description: row.description }
         }
 
-        // Handle platform features - search through all featureSets if no featureSet specified
+        // Handle platform features - nested schema: section { description?, features: { ... } }
         if (row.type === 'platform' && row.feature) {
             const platformDefs = featureDefs.platform
             if (platformDefs) {
                 // If featureSet is specified, use it directly
                 if (row.featureSet) {
                     const set = platformDefs[row.featureSet]
-                    const feat = set?.[row.feature]
+                    const feat = set?.features?.[row.feature]
                     if (feat) {
                         return {
                             name: feat.name || row.feature,
@@ -468,7 +452,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                 } else {
                     // Search through all featureSets for this platform feature
                     for (const featureSet in platformDefs) {
-                        const feat = platformDefs[featureSet]?.[row.feature]
+                        const feat = platformDefs[featureSet]?.features?.[row.feature]
                         if (feat) {
                             return {
                                 name: feat.name || row.feature,
@@ -480,11 +464,11 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             }
         }
 
-        // Get from feature definition if available (non-platform features)
+        // Get from feature definition if available (non-platform features with nested sections)
         if (row.feature && row.featureSet) {
             const defs = featureDefs[row.product || '']
             const set = defs?.[row.featureSet]
-            const feat = set?.[row.feature]
+            const feat = set?.features?.[row.feature] || set?.[row.feature]
 
             return {
                 name: feat?.name || row.feature,
@@ -492,13 +476,13 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             }
         }
 
-        // Try to find feature in any featureSet (for flat structures like session_replay)
+        // Try to find feature in any featureSet (search nested features)
         if (row.feature && row.product) {
             const defs = featureDefs[row.product]
             if (defs) {
                 // Search through all featureSets for this feature
                 for (const featureSet in defs) {
-                    const feat = defs[featureSet]?.[row.feature]
+                    const feat = defs[featureSet]?.features?.[row.feature] || defs[featureSet]?.[row.feature]
                     if (feat) {
                         return {
                             name: feat.name || row.feature,

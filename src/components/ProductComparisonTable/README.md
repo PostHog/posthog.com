@@ -188,7 +188,11 @@ export const errorTracking = {
 
 ## Data Structure
 
-Product feature definitions are organized with a `summary` section for product-level comparisons:
+Product feature definitions support:
+
+-   A `summary` section for product-level comparisons
+-   A top-level `features` node for simple features that don’t belong to a named sub-section
+-   Optional named sections (e.g., `funnels`, `paths`) that can include a `description` and a nested `features` object
 
 ```typescript
 // error_tracking.tsx
@@ -197,18 +201,20 @@ export const errorTrackingFeatures = {
         name: 'Error tracking',
         description: 'Track and monitor errors and exceptions in your code',
     },
-    core: {
-        error_alerts: {
-            name: 'Error alerts',
-            description: 'Get notified in real time...',
+    features: {
+        description: 'Core error capture and triage capabilities',
+        features: {
+            error_alerts: { name: 'Error alerts', description: 'Get notified in real time...' },
+            exception_capture: { name: 'Exception capture', description: 'Automatically capture errors' },
+            // ...
         },
-        // ... more features
     },
     monitoring: {
-        // ... features
-    },
-    integrations: {
-        // ... features
+        description: 'Visibility into performance and releases',
+        features: {
+            source_map_support: { name: 'Source map support', description: '...' },
+            // ...
+        },
     },
 }
 ```
