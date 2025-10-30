@@ -136,7 +136,15 @@ export const Change = ({ title, teamName, media, description, cta }) => {
     )
 }
 
-const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => void }) => {
+const Roadmap = ({
+    roadmap,
+    onClose,
+    initialActiveRoadmap,
+}: {
+    roadmap: RoadmapNode
+    onClose: () => void
+    initialActiveRoadmap: RoadmapNode | null
+}) => {
     const { appWindow } = useWindow()
     const { isModerator } = useUser()
     const { addWindow } = useApp()
@@ -173,7 +181,7 @@ const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => vo
             initial={{ width: 0 }}
             animate={{ width: containerWidth }}
             exit={{ width: 0 }}
-            transition={{ duration: isResizing ? 0 : 0.3, ease: 'easeInOut' }}
+            transition={{ duration: isResizing || !!initialActiveRoadmap ? 0 : 0.3, ease: 'easeInOut' }}
         >
             <motion.div
                 className="h-full flex flex-col"
@@ -181,7 +189,7 @@ const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => vo
                 initial={{ x: width }}
                 animate={{ x: 0 }}
                 exit={{ x: width }}
-                transition={{ duration: isResizing ? 0 : 0.3, ease: 'easeInOut' }}
+                transition={{ duration: isResizing || !!initialActiveRoadmap ? 0 : 0.3, ease: 'easeInOut' }}
             >
                 <div className="flex justify-between space-x-2 p-4 border-b border-primary">
                     <div className="flex-1">
@@ -625,13 +633,13 @@ export default function Changelog({
     const timelineContainerRef = useRef<HTMLDivElement>(null)
     const resizeObserverRef = useRef<HTMLDivElement>(null)
     const { href } = useLocation()
-    const initialActiveRoadmap = useMemo(() => {
+    const [initialActiveRoadmap, setInitialActiveRoadmap] = useState(() => {
         if (!href) return null
         const urlObj = new URL(href)
         const id = urlObj.searchParams.get('id')
         if (!id) return null
         return data.allRoadmap.nodes.find((roadmap: RoadmapNode) => roadmap.id === parseInt(id)) || null
-    }, [])
+    })
     const { addWindow } = useApp()
     const { isModerator } = useUser()
     const [windowX, setWindowX] = useState(0)
@@ -751,6 +759,12 @@ export default function Changelog({
             if (category) setCategoryFilter(category)
         }
     }, [href])
+
+    useEffect(() => {
+        if (initialActiveRoadmap) {
+            setInitialActiveRoadmap(null)
+        }
+    }, [])
 
     const filterNavigate = (key: string, value: string) => {
         if (href) {
@@ -877,7 +891,13 @@ export default function Changelog({
                         </AnimatePresence>
                     </div>
                     <AnimatePresence>
-                        {activeRoadmap && <Roadmap roadmap={activeRoadmap} onClose={handleRoadmapClose} />}
+                        {activeRoadmap && (
+                            <Roadmap
+                                roadmap={activeRoadmap}
+                                onClose={handleRoadmapClose}
+                                initialActiveRoadmap={initialActiveRoadmap}
+                            />
+                        )}
                     </AnimatePresence>
                 </div>
             </Editor>
