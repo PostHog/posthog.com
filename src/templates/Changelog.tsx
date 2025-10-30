@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
+import { navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import { IconDownload, IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
 import SEO from 'components/seo'
@@ -613,79 +613,15 @@ const RoadmapCards = ({
     )
 }
 
-export default function Changelog(): JSX.Element {
-    const data = useStaticQuery(graphql`
-        {
-            allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }, sort: { fields: date }) {
-                nodes {
-                    id: strapiID
-                    date
-                    title
-                    description
-                    cta {
-                        label
-                        url
-                    }
-                    media {
-                        gatsbyImageData
-                    }
-                    profiles {
-                        data {
-                            id
-                            attributes {
-                                firstName
-                                lastName
-                                avatar {
-                                    data {
-                                        attributes {
-                                            url
-                                        }
-                                    }
-                                }
-                                color
-                                teams {
-                                    data {
-                                        attributes {
-                                            name
-                                            miniCrest {
-                                                data {
-                                                    attributes {
-                                                        url
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    teams {
-                        data {
-                            attributes {
-                                name
-                                miniCrest {
-                                    data {
-                                        attributes {
-                                            url
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    topic {
-                        data {
-                            attributes {
-                                label
-                            }
-                        }
-                    }
-                }
-            }
+export default function Changelog({
+    data,
+}: {
+    data: {
+        allRoadmap: {
+            nodes: RoadmapNode[]
         }
-    `)
-
+    }
+}): JSX.Element {
     const timelineContainerRef = useRef<HTMLDivElement>(null)
     const resizeObserverRef = useRef<HTMLDivElement>(null)
     const { href } = useLocation()
