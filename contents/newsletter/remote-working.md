@@ -25,7 +25,7 @@ It doesn’t have to be this way. The best remote teams are brimming with energy
 
 Remote work doesn't work without a strong writing culture.
 
-Documenting by default – be it information on how to [file expenses](/handbook/people/spending-money), your [ICP](/handbook/who-we-are-building-for), or what a specific team is [working on this quarter](/teams/product-analytics) – gives everyone access to the same information, regardless of seniority or location.
+Documenting by default – be it information on how to [file expenses](/handbook/people/spending-money), your [ICP](/handbook/who-we-build-for), or what a specific team is [working on this quarter](/teams/product-analytics) – gives everyone access to the same information, regardless of seniority or location.
 
 Why does this work? Because:
 

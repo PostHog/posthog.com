@@ -17,7 +17,7 @@ We take pride in investing as much as possible in our ability to ship cool proje
 
 As we've grown, I've repeatedly underestimated how sharply the importance of communication from the exec team increases. I up the effort, but the requirement ups by more each time we grow, despite knowing it's important. I've even had feedback in [360 reviews](/handbook/people/feedback) of "if you did nothing else, just do a good job of the all-hands and that'd be great".
 
-The number of people each exec is responsible for is increasing exponentially as we scale. In the early days, we had zero direct or indirect reports each, at 15 people, we had roughly 8 people per exec. Today, it's around 35. By the next big offsite, it will be around 80.
+The number of people each exec is responsible for is increasing exponentially [as we scale](/newsletter/building-a-startup-that-scales). In the early days, we had zero direct or indirect reports each, at 15 people, we had roughly 8 people per exec. Today, it's around 35. By the next big offsite, it will be around 80.
 
 There are unfortunate consequences of this: 
 

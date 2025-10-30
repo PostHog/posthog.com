@@ -413,6 +413,10 @@ export const dataPipelines = {
             color: 'blue',
             featured: true,
         },
+        {
+            name: 'Using Fivetran, Airbyte or other ETL tools with PostHog',
+            url: '/docs/cdp/fivetran-airbyte',
+        },
     ],
 }
 
@@ -444,7 +448,7 @@ export const handbookSidebar = [
             },
             {
                 name: '4. Who we are building for',
-                url: '/handbook/who-we-are-building-for',
+                url: '/handbook/who-we-build-for',
             },
             {
                 name: '5. How we make users happy',
@@ -691,16 +695,6 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Demand gen',
-        url: '',
-        children: [
-            {
-                name: 'Overview',
-                url: '/handbook/demand/overview',
-            },
-        ],
-    },
-    {
         name: 'Engineering',
         url: '',
         children: [
@@ -764,28 +758,24 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Internal processes',
+                name: 'Operations',
                 url: '',
                 children: [
                     {
                         name: 'Support hero',
-                        url: '/handbook/engineering/support-hero',
-                    },
-                    {
-                        name: 'Feature ownership',
-                        url: '/handbook/engineering/feature-ownership',
-                    },
-                    {
-                        name: 'Handling incidents',
-                        url: '/handbook/engineering/incidents',
+                        url: '/handbook/engineering/operations/support-hero',
                     },
                     {
                         name: 'On-call rotation',
-                        url: '/handbook/engineering/on-call-rotation',
+                        url: '/handbook/engineering/operations/on-call-rotation',
                     },
                     {
-                        name: 'Bug prioritization',
-                        url: '/handbook/engineering/bug-prioritization',
+                        name: 'Handling incidents',
+                        url: '/handbook/engineering/operations/incidents',
+                    },
+                    {
+                        name: 'Post-mortems',
+                        url: '/handbook/engineering/operations/post-mortems',
                     },
                 ],
             },
@@ -928,6 +918,14 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Feature ownership',
+                url: '/handbook/engineering/feature-ownership',
+            },
+            {
+                name: 'Bug prioritization',
+                url: '/handbook/engineering/bug-prioritization',
+            },
+            {
                 name: 'Shipping & releasing',
                 url: '/handbook/engineering/development-process',
             },
@@ -976,23 +974,23 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing',
             },
             {
-                name: 'Product Marketing',
+                name: 'Product marketing',
                 url: '/handbook/marketing/product-announcements',
             },
             {
-                name: 'Paid Advertising',
+                name: 'Paid ads',
                 url: '/handbook/marketing/paid',
             },
             {
-                name: 'Product Positioning',
+                name: 'Product positioning',
                 url: '/handbook/marketing/positioning',
             },
             {
-                name: 'Marketing Events',
+                name: 'Events',
                 url: '/handbook/marketing/events',
             },
             {
-                name: 'Email & Communications',
+                name: 'Email & comms',
                 url: '',
                 children: [
                     {
@@ -1213,7 +1211,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Incidents & maintenance',
-                url: '/handbook/engineering/incidents#customer-communications',
+                url: '/handbook/engineering/operations/incidents#customer-communications',
             },
             {
                 name: 'Internal processes',
@@ -1284,6 +1282,10 @@ export const handbookSidebar = [
                     {
                         name: 'How to do discovery',
                         url: '/handbook/growth/sales/how-to-do-discovery',
+                    },
+                    {
+                        name: 'Running trials',
+                        url: '/handbook/growth/sales/running-trials',
                     },
                     {
                         name: 'Selling and procuring via AWS Marketplace',
@@ -1368,10 +1370,6 @@ export const handbookSidebar = [
                     {
                         name: 'Onboarding program',
                         url: '/handbook/onboarding/onboarding-program',
-                    },
-                    {
-                        name: 'Onboarding Pipeline',
-                        url: '/handbook/onboarding/onboarding-pipeline',
                     },
                     {
                         name: 'Onboarding tracking',
@@ -1478,6 +1476,16 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Use cases',
+                url: '',
+                children: [
+                    {
+                        name: 'Chrome Extension Billing Issues',
+                        url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
+                    },
+                ],
+            },
+            {
                 name: 'Getting people to talk to you',
                 url: '/handbook/growth/sales/getting-people-to-talk-to-you',
             },
@@ -1507,6 +1515,24 @@ export const handbookSidebar = [
                 name: 'Lifecycle analysis',
                 url: '/handbook/growth/revops/lifecycle-analysis',
             },
+            {
+                name: 'SalesOps',
+                url: '',
+                children: [
+                    {
+                        name: 'Refunds',
+                        url: '/handbook/growth/revops/refunds',
+                    },
+                    {
+                        name: 'Lead assignment during time off',
+                        url: '/handbook/growth/revops/lead-assignment-ooo',
+                    },
+                    {
+                        name: 'Giving credits to customers',
+                        url: '/handbook/growth/revops/credits',
+                    },
+                ],
+            }
         ],
     },
 ]
@@ -2274,6 +2300,7 @@ export const docsMenu = {
                     name: 'AI engineering',
                     url: '/docs/ai-engineering',
                     icon: 'IconLlmPromptEvaluation',
+                    color: 'red',
                     children: [
                         {
                             name: 'Overview',
@@ -3540,14 +3567,14 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Statistics overview',
-                    url: '/docs/experiments/statistics',
-                    icon: 'IconSquareRoot',
+                    name: 'Bayesian statistics',
+                    url: '/docs/experiments/statistics-bayesian',
+                    icon: 'IconFlask',
                     color: 'purple',
                 },
                 {
-                    name: 'Frequentist method',
-                    url: '/docs/experiments/frequentist-method',
+                    name: 'Frequentist statistics',
+                    url: '/docs/experiments/statistics-frequentist',
                     icon: 'IconBook',
                     color: 'blue',
                 },
@@ -4355,6 +4382,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Traces',
+                    url: '/docs/llm-analytics/traces',
+                    icon: 'IconUserPaths',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Spans',
                     url: '/docs/llm-analytics/spans',
                     icon: 'IconBrackets',
@@ -4362,10 +4396,10 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Traces',
-                    url: '/docs/llm-analytics/traces',
-                    icon: 'IconUserPaths',
-                    color: 'orange',
+                    name: 'Sessions',
+                    url: '/docs/llm-analytics/sessions',
+                    icon: 'IconMessages',
+                    color: 'blue',
                     featured: true,
                 },
                 {
@@ -4584,8 +4618,8 @@ export const docsMenu = {
         },
         {
             name: 'PostHog AI',
-            icon: 'IconMagicWand',
-            color: 'purple',
+            icon: 'IconLogomark',
+            color: 'black',
             url: '/docs/posthog-ai',
             description: 'AI-powered product analyst and assistant',
             children: [

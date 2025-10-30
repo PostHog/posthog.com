@@ -45,10 +45,10 @@ Finally, run `npm run dev` and go to `http://localhost:5173/` to see our new hom
 
 ## Adding PostHog
 
-To use PostHog to manage and track our A/B test, we must install and set it up. We do this by installing the `posthog-js` library to get access to the [React SDK](/docs/libraries/react).
+To use PostHog to manage and track our A/B test, we must install and set it up. We do this by installing the `posthog-js` and `@posthog/react` libraries to get access to the [React SDK](/docs/libraries/react).
 
 ```bash
-npm install posthog-js
+npm install posthog-js @posthog/react
 ```
 
 Once installed, import PostHog into `src/main.jsx` and set up a client using our project API key and host from [your project settings](https://us.posthog.com/settings/project).
@@ -62,7 +62,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 posthog.init(
   <ph_project_api_key>, 
@@ -85,7 +85,7 @@ Use the React `usePostHog` hook in our `src/App.jsx` file to capture a custom ev
 ```jsx
 // src/App.jsx
 import './App.css'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 function App() {
   const posthog = usePostHog()
@@ -145,7 +145,7 @@ With our experiment created, it's time to add it to our React app. To do this, c
 ```jsx
 // src/App.jsx
 import './App.css'
-import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react'
+import { useFeatureFlagVariantKey, usePostHog } from '@posthog/react'
 
 function App() {
   const posthog = usePostHog()
