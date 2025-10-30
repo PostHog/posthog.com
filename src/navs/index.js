@@ -1516,16 +1516,20 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/lifecycle-analysis',
             },
             {
-                name: 'Sales Ops',
-                url: '/handbook/growth/revops/salesops',
+                name: 'SalesOps',
+                url: '',
                 children: [
                     {
                         name: 'Refunds',
                         url: '/handbook/growth/revops/refunds',
                     },
                     {
-                        name: 'Lead Assignment During Time Off',
+                        name: 'Lead assignment during time off',
                         url: '/handbook/growth/revops/lead-assignment-ooo',
+                    },
+                    {
+                        name: 'Giving credits to customers',
+                        url: '/handbook/growth/revops/credits',
                     },
                 ],
             }
