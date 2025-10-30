@@ -18,8 +18,9 @@ When they return:
 - Find the queues the person is part of (US East, US West, EMEA, Asia based on location, or All and Max Availability Queues for everyone)
 - Under each queue find Status column
 - Toggle their status to Inactive so Default to stop routing new leads to them
-Important: Even if the person marks themselves as “Out of Office” in their Default personal settings, that does not stop lead assignments. We still need to manually toggle them off in the queues. https://posthog.slack.com/archives/C08THJ8BJTU/p1750883200158039 
 - When they return, Toggle them back to Active in relevant queues
+
+Important: Even if the person marks themselves as “Out of Office” in their Default personal settings, that does not stop lead assignments. We still need to manually toggle them off in the queues.
 
 ### When to take these actions
 - If taking <= 5 days off: Turn them off the day they leave and turn back on the day they return.
