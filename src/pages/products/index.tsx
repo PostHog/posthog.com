@@ -340,7 +340,8 @@ export default function Products(): JSX.Element {
                                     <li>Product engineering tools</li>
                                     <li>Analytics/data viz</li>
                                     <li>
-                                        AI <Icons.IconSparkles className="inline-block size-4 relative -top-px" />
+                                        Automation & AI{' '}
+                                        <Icons.IconSparkles className="inline-block size-4 relative -top-px" />
                                     </li>
                                 </ul>
                                 {/* 
