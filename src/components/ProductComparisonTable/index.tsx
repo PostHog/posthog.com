@@ -48,6 +48,9 @@ import { revenueAnalyticsFeatures } from '../../hooks/featureDefinitions/revenue
 import { platformFeatures } from '../../hooks/featureDefinitions/platform'
 import { productDescriptions } from '../../hooks/featureDefinitions/products'
 import { dashboardsFeatures } from '../../hooks/featureDefinitions/dashboards'
+import { cdpFeatures } from '../../hooks/featureDefinitions/cdp'
+import { dataWarehouseFeatures } from '../../hooks/featureDefinitions/data_warehouse'
+import { llmAnalyticsFeatures } from '../../hooks/featureDefinitions/llm_analytics'
 
 interface RowConfig {
     // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
@@ -83,6 +86,9 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         surveys: surveysFeatures,
         revenue_analytics: revenueAnalyticsFeatures,
         platform: platformFeatures,
+        cdp: cdpFeatures,
+        data_warehouse: dataWarehouseFeatures,
+        llm_analytics: llmAnalyticsFeatures,
     }
 
     // Resolve nested nodes by dot-path

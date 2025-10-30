@@ -2,6 +2,8 @@ export const surveysFeatures = {
     summary: {
         name: 'Surveys',
         description: 'Collect product feedback with no-code surveys and customizable targeting',
+        url: '/surveys',
+        docsUrl: '/docs/surveys',
     },
     question_types: {
         description: 'Ask anything with flexible question formats',
@@ -172,6 +174,10 @@ export const surveysFeatures = {
         automatic_nps_calculation: {
             name: 'Automatic NPS score calculations',
             description: 'Automatic calculation of Net Promoter Scores from NPS survey responses',
+        },
+        ai_response_summaries: {
+            name: 'AI response summaries',
+            description: 'AI-generated summaries of survey responses',
         },
     },
 }

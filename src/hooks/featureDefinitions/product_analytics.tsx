@@ -2,6 +2,8 @@ export const productAnalyticsFeatures = {
     summary: {
         name: 'Product Analytics',
         description: 'Track usage, retention, and feature adoption with comprehensive analytics',
+        url: '/product-analytics',
+        docsUrl: '/docs/product-analytics',
     },
     features: {
         autocapture: {

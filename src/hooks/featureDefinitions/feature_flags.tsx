@@ -2,6 +2,8 @@ export const featureFlagsFeatures = {
     summary: {
         name: 'Feature Flags',
         description: 'Control feature access with precision and safely roll out changes',
+        url: '/feature-flags',
+        docsUrl: '/docs/feature-flags',
     },
     features: {
         description: 'Flexible flag types and rollout strategies',

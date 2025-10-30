@@ -2,6 +2,8 @@ export const revenueAnalyticsFeatures = {
     summary: {
         name: 'Revenue Analytics',
         description: 'Track revenue alongside product metrics with deferred recognition and multi-currency support',
+        url: '/revenue-analytics',
+        docsUrl: '/docs/revenue-analytics',
     },
     data_sources: {
         description: 'Flexible ways to collect revenue data',

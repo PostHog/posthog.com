@@ -2,6 +2,8 @@ export const errorTrackingFeatures = {
     summary: {
         name: 'Error tracking',
         description: 'Track and monitor errors and exceptions in your code',
+        url: '/error-tracking',
+        docsUrl: '/docs/error-tracking',
     },
     features: {
         description: 'Core error capture and triage capabilities',

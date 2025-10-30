@@ -2,6 +2,8 @@ export const experimentsFeatures = {
     summary: {
         name: 'Experiments',
         description: 'Run statistically rigorous A/B tests and validate ideas with confidence',
+        url: '/experiments',
+        docsUrl: '/docs/experiments',
     },
     experiment_types: {
         description: 'Choose metrics that match your goals and monitor side effects',
@@ -152,6 +154,28 @@ export const experimentsFeatures = {
                 name: 'Mobile experiments',
                 description: 'Supports Android, iOS, React Native, and Flutter',
             },
+        },
+    },
+    features: {
+        experiment_analysis: {
+            name: 'Experiment analysis',
+            description: 'Analyze results of A/B tests',
+        },
+        no_code_experiments: {
+            name: 'No-code experiments',
+            description: 'Modify your website and run experiments without writing code',
+        },
+        split_testing: {
+            name: 'Split testing',
+            description: 'Split participants into groups',
+        },
+        recommended_run_time: {
+            name: 'Recommended run time',
+            description: 'Automatically calculate the recommended run time and sample size',
+        },
+        dynamic_cohorts: {
+            name: 'Dynamic cohorts',
+            description: 'Add new users to an experiment automatically by setting a user property',
         },
     },
 }

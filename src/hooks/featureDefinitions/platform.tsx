@@ -10,6 +10,10 @@ export const platformFeatures = {
                 name: 'Self-host option',
                 description: 'Deploy and run on your own infrastructure',
             },
+            managed_reverse_proxy: {
+                name: 'Managed reverse proxy',
+                description: 'Send events from your own domain, managed by us',
+            },
         },
     },
     pricing: {
@@ -44,28 +48,52 @@ export const platformFeatures = {
                 name: 'Data exports',
                 description: 'Export data to data warehouses and other destinations',
             },
-            segment: {
-                name: 'Segment integration',
-                description: 'Send events via Segment',
+            warehouse_import: {
+                name: 'Warehouse import',
+                description: 'Import data from third-party warehouse',
             },
-            zapier: {
-                name: 'Zapier integration',
-                description: 'Trigger Zapier automations',
-            },
-            sentry: {
-                name: 'Sentry integration',
-                description: 'Connect to Sentry data',
+            stripe: {
+                name: 'Stripe',
+                description: 'Stripe customer data connector',
             },
             zendesk: {
-                name: 'Zendesk integration',
-                description: 'Two-way integration for customer support',
+                name: 'Zendesk',
+                description: 'Send and receive data from Zendesk',
+            },
+            hubspot: {
+                name: 'Hubspot',
+                description: 'Send and receive data from Hubspot',
+            },
+            sentry: {
+                name: 'Sentry',
+                description: 'Send and receive data from Sentry',
+            },
+            segment: {
+                name: 'Segment',
+                description: 'Send events via Segment',
+            },
+            rudderstack: {
+                name: 'Rudderstack',
+                description: 'Send events via Rudderstack',
+            },
+            zapier: {
+                name: 'Zapier',
+                description: 'Trigger Zapier automations',
+            },
+            customer_io: {
+                name: 'Customer.io',
+                description: 'Messaging and marketing automation',
+            },
+            intercom: {
+                name: 'Intercom',
+                description: 'Messaging and marketing automation',
             },
             slack: {
-                name: 'Slack integration',
+                name: 'Slack',
                 description: 'Alerts and notifications for Slack',
             },
             microsoft_teams: {
-                name: 'Microsoft Teams integration',
+                name: 'Microsoft Teams',
                 description: 'Alerts and notifications for Microsoft Teams',
             },
             community_integrations: {
@@ -73,7 +101,7 @@ export const platformFeatures = {
                 description: 'Build your own integration',
             },
             google_ads: {
-                name: 'Google Ads integration',
+                name: 'Google Ads',
                 description: 'Import ROI data from Google Ads',
             },
             ci_cd_integrations: {

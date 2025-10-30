@@ -2,6 +2,38 @@ export const sessionReplayFeatures = {
     summary: {
         name: 'Session Replay',
         description: 'Watch real user sessions to understand behavior and fix issues',
+        url: '/session-replay',
+        docsUrl: '/docs/session-replay',
+    },
+    features: {
+        canvas_recording: {
+            name: 'Canvas recording',
+            description: 'Capture canvas elements in your app',
+        },
+        chat_with_recordings: {
+            name: 'Chat with your recordings',
+            description: 'Discover useful recordings using AI-powered chat',
+        },
+        event_timeline: {
+            name: 'Event timeline',
+            description: 'See events triggered during recordings',
+        },
+        iframe_recording: {
+            name: 'Iframe recording',
+            description: 'Record embedded iframes',
+        },
+        minimum_duration: {
+            name: 'Minimum duration',
+            description: 'Only record sessions longer than the minimum duration',
+        },
+        wireframe_mode: {
+            name: 'Wireframe mode',
+            description: 'Low performance impact mobile recordings using wireframes',
+        },
+        screenshot_mode: {
+            name: 'Screenshot mode',
+            description: 'Mobile session reconstructions using app screenshots',
+        },
     },
     platform_support: {
         description: 'Record on web and mobile across major frameworks',

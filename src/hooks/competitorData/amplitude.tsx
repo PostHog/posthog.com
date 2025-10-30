@@ -122,6 +122,13 @@ export const amplitude = {
                 free_tier: '1,000 recordings',
             },
             features: {
+                canvas_recording: false,
+                chat_with_recordings: false,
+                event_timeline: true,
+                iframe_recording: false,
+                minimum_duration: false,
+                wireframe_mode: false,
+                screenshot_mode: false,
                 web_app_recordings: true,
                 mobile_app_recordings: true,
                 ios_recordings: true,
