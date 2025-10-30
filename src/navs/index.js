@@ -1284,6 +1284,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/how-to-do-discovery',
                     },
                     {
+                        name: 'Running trials',
+                        url: '/handbook/growth/sales/running-trials',
+                    },
+                    {
                         name: 'Selling and procuring via AWS Marketplace',
                         url: '/handbook/growth/sales/selling-via-aws',
                     },
