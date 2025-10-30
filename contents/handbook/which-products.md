@@ -16,7 +16,7 @@ Products we know will work well if we ship them:
   - Think error tracking or feature flags. The [persona doesn't change](/handbook/who-we-build-for#our-current-persona) as the company gets bigger.
 - Products that already have a $1bn competitor in the market (e.g. a company with around $100M in revenue)
 - Products that are very easy to integrate for our existing customers. 
-  - For example, users can enable the product in PostHog, without needing to make a code change
+  - For example, users can enable the product in PostHog without needing to make a code change, or products that built on top of data that people are already collecting in PostHog
 - Products that _you_ are excited to build. 
   - People pursuing their interests get more done, go much further, and execute to a better standard.
 - Products that our customers are asking for
