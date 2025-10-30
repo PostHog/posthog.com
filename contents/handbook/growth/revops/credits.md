@@ -23,7 +23,7 @@ Sometimes we might want to offer a customer one time credits to cover an upcomin
   - Include a link to a related Slack message, Zendesk ticket, or internal discussion in reference link field
 - Click Save and the credit will automatically be added to the customer’s balance in Stripe and applied to their next invoice.
 
-Things to keep in mind
+## Things to keep in mind
 - Credits only apply to upcoming invoices.
 - If you’re trying to adjust a completed invoice, this should be handled as a [refund](https://posthog.com/handbook/growth/sales/refunds) instead.
 - Always include enough context in your notes or reference link so others understand why the credit was given.
