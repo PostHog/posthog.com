@@ -8,7 +8,7 @@ Sometimes we might want to offer a customer one time credits to cover an upcomin
 
 - Go to [Billing Admin → Credits](https://billing.posthog.com/admin/billing/credit/)
 - Click Add Credit at the top right.
-- Fill out the form:
+- Click Add credit at the top right.
   - select the customer from dropdown or search
   - enter the total credit amount.
   - choose from the following options for reason:
