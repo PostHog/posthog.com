@@ -98,10 +98,10 @@ The basic setup is now complete. Run `npm run dev` to see your app in action.
 
 With our app set up, it's time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup). 
 
-First install `posthog-js`:
+First install `posthog-js` and `@posthog/react`:
 
 ```bash
-npm install posthog-js
+npm install posthog-js @posthog/react
 ```
 
 Next, import PostHog into `src/main.jsx` and set up it up using your project API key and host from [your project settings](https://us.posthog.com/settings/project). Then we wrap our app with `PostHogProvider` to access PostHog in any component.
@@ -112,7 +112,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
@@ -144,7 +144,7 @@ Beyond pageviews and autocaptured events, there might be more events you want to
 To showcase this, update the code in `HomePage.jsx` to include a button that uses PostHog to capture a `home_button_clicked` event:
 
 ```jsx file=HomePage.jsx
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 function HomePage() {
   const posthog = usePostHog()

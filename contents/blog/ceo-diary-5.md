@@ -119,7 +119,7 @@ We made pricing transparent, put as much info as we could into our docs, created
 There are two further things we did that helped:
 
 - we incentivized users to add their card (more free usage) 
-- usage-based pricing means you can have zero minimum costs, making it easier to get started
+- [usage-based pricing](/newsletter/pricing-advice) means you can have zero minimum costs, making it easier to get started
 
 Once we got better at product, we saw dramatic improvements in our retention too.
 

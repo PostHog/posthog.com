@@ -38,7 +38,7 @@ We will use a [Next.js](/docs/libraries/next-js) app where we already set up the
 
 In our a `page.js` file, we: 
 
-1. Import `useFeatureFlagVariantKey` from `posthog-js/react`, and `useState` and `useEffect` from `react`
+1. Import `useFeatureFlagVariantKey` from `@posthog/react`, and `useState` and `useEffect` from `react`
 2. Set up a state for `mainCopy` using `useState`. 
 3. Set the`mainCopy` state in a `useEffect` using the variant key value we get from PostHog.
 4. Show the `mainCopy` state to users in our component.
@@ -48,7 +48,7 @@ Together, this looks like this:
 ```js
 // app/page.js
 'use client'
-import { useFeatureFlagVariantKey } from 'posthog-js/react'
+import { useFeatureFlagVariantKey } from '@posthog/react'
 import { useState, useEffect } from 'react'
 
 export default function Home() {

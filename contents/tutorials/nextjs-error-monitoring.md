@@ -87,7 +87,7 @@ We'll set up PostHog in the frontend first. This starts by creating a `providers
 'use client'
 
 import posthog from 'posthog-js'
-import { PostHogProvider as PHProvider } from 'posthog-js/react'
+import { PostHogProvider as PHProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export function PostHogProvider({ children }) {
@@ -191,7 +191,7 @@ To ensure all component errors are tracked, we can use the [built-in error bound
 'use client'
 
 import { useEffect } from 'react';
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 export default function Error({
   error,

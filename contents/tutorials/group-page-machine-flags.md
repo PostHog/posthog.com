@@ -47,7 +47,7 @@ In your app, get feature flag payloads, write logic to check the page URL, and u
 
 ```js-web
 'use client'
-import { useFeatureFlagPayload } from 'posthog-js/react'
+import { useFeatureFlagPayload } from '@posthog/react'
 import { usePathname } from 'next/navigation'
 
 export default function Button() {

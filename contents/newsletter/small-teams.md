@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-Startups ship more per person than big companies – everyone knows this. But how do you retain that advantage as you scale?
+Startups ship more per person than big companies – everyone knows this. But how do you retain that advantage [as you scale](/newsletter/building-a-startup-that-scales)?
 
 Our answer is small teams – speedy, innovative, and autonomous one-pizza teams where individuals can still have an outsized impact. They enable us to scale, while retaining the culture and speed of an early-stage startup.
 
