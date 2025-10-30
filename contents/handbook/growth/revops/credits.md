@@ -19,7 +19,7 @@ Sometimes we might want to offer a customer one time credits to cover an upcomin
     - Incident Credit
     - Bug Credit
     - Other
-  - add any internal notes for context in Notes section.
+  - Add any internal notes for context in Notes section.
   - include a link to a related Slack message, Zendesk ticket, or internal discussion in reference link field
 - Click Save and the credit will automatically be added to the customer’s balance in Stripe and applied to their next invoice.
 
