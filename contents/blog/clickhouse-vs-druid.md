@@ -121,7 +121,7 @@ Of course, you can utilize ClickHouse even with these constraints if you utilize
 - Simplified internal architecture
 - Materialized views
 
-Speaking from experience, if you run a billion-event [product analytics platform](/product) like ours, you should use ClickHouse 😉. 
+Speaking from experience, if you run a billion-event [developer platform](/product) like ours, you should use ClickHouse 😉. 
 
 ### When to use Druid
 

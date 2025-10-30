@@ -17,7 +17,7 @@ tags:
 
 As is the case with many fan-favorite Google products, their A/B testing platform, Optimize, was recently sunset. 
 
-PostHog is a great alternative that enables you to set up, run, and track A/B tests. It provides analytics built-in, along with a suite of product tools like feature flags, session replay, and surveys.
+PostHog is a great alternative that enables you to set up, run, and track A/B tests. It provides analytics built-in, along with a suite of dev tools like feature flags, session replay, and surveys.
 
 We wrote this guide to help you migrate from Optimize and make the most out of the tools PostHog has to offer. 
 

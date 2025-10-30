@@ -36,7 +36,7 @@ Hotjar and [Fullstory](/blog/best-fullstory-alternatives) are popular session re
 ## 1. PostHog
 ![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/session-replay.png)
 
-[PostHog](https://posthog.com/) is an all-in-one, Product OS that offers all the tools required to build better products, including but not limited to [session replay](/product/session-recording).
+[PostHog](https://posthog.com/) is an all-in-one developer platform that offers all the tools required to build better products, including but not limited to [session replay](/product/session-recording).
 
 PostHog's session replay tool includes console logs and network activity, so you can identify the causes of bugs or performance problems. There's also a playlist feature, allowing you to save similar replays based on specific events or person properties into one list, and you can save recordings offline for safe keeping.
 

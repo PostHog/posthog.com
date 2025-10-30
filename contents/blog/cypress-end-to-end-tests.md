@@ -247,6 +247,6 @@ Hey! You made it this far. If you see yourself working on challenging issues at 
 
 Check out our [careers](/careers) page and give us a shout!
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />
