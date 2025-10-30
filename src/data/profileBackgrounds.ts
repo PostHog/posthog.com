@@ -32,4 +32,10 @@ export const profileBackgrounds: ProfileBackground[] = [
         url: 'https://res.cloudinary.com/dmukukwp6/image/upload/pink_stars_191ffea97f.gif',
         backgroundRepeat: 'repeat',
     },
+    {
+        id: 'office-hogs',
+        name: 'Office hogs',
+        url: 'https://res.cloudinary.com/dmukukwp6/image/upload/office_hogs_ff1a8b4f48.png',
+        backgroundRepeat: 'repeat',
+    },
 ]
