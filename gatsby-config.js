@@ -126,6 +126,17 @@ module.exports = {
                     {
                         resolve: require.resolve('./plugins/gatsby-remark-video'),
                     },
+                    {
+                        resolve: require.resolve('./plugins/gatsby-remark-rewrite-relative-links'),
+                        options: {
+                            repoConfigs: {
+                                'posthog-main-repo': {
+                                    stripPrefix: '/docs/published/',
+                                    pathPrefix: '/handbook/engineering',
+                                },
+                            },
+                        },
+                    },
                 ],
             },
         },
