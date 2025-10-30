@@ -26,6 +26,7 @@ import { CallToAction } from 'components/CallToAction'
 import { Heading } from 'components/Heading'
 import slugify from 'slugify'
 import { Video } from 'cloudinary-react'
+import { useLocation } from '@reach/router'
 
 dayjs.extend(utc)
 
@@ -216,7 +217,7 @@ const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => vo
                         {hasProfiles && (
                             <div
                                 data-scheme="secondary"
-                                className="py-2 mx-4 px-4 border border-primary rounded-md bg-primary"
+                                className="py-2 mx-4 px-4 border border-primary rounded-md bg-primary mt-2"
                             >
                                 {roadmap.profiles?.data?.map((profile) => {
                                     const avatar = profile.attributes?.avatar?.data?.attributes?.url
@@ -318,6 +319,7 @@ interface RoadmapCardsProps {
     endYear: number
     activeRoadmap: RoadmapNode | null
     hideEmpty: boolean
+    initialActiveRoadmap: RoadmapNode | null
 }
 
 const RoadmapCards = ({
@@ -331,6 +333,7 @@ const RoadmapCards = ({
     containerWidth,
     activeRoadmap,
     hideEmpty,
+    initialActiveRoadmap,
 }: RoadmapCardsProps) => {
     const width = 350
 
@@ -390,6 +393,15 @@ const RoadmapCards = ({
         overscan: 5,
         gap: 15,
     })
+
+    const handleRoadmapClick = (roadmap: RoadmapNode) => {
+        navigate(`?id=${roadmap.id}`)
+        onRoadmapClick(roadmap)
+    }
+
+    const scrollToIndex = (index: number) => {
+        virtualizer.scrollToIndex(index, { align: 'center' })
+    }
 
     useLayoutEffect(() => {
         virtualizer.measure()
@@ -453,8 +465,19 @@ const RoadmapCards = ({
             })
         }
 
+        const handleInitialScroll = () => {
+            if (initialActiveRoadmap) {
+                const index = weeks.findIndex((week) => week.roadmaps.some((r) => r.id === initialActiveRoadmap.id))
+                if (index >= 0) {
+                    scrollToIndex(index)
+                    return
+                }
+            }
+            scrollToLastWeek()
+        }
+
         // Delay to ensure virtualizer has measured content
-        const timer = setTimeout(scrollToLastWeek, 100)
+        const timer = setTimeout(handleInitialScroll, 100)
         return () => clearTimeout(timer)
     }, [weeks, width])
 
@@ -544,7 +567,7 @@ const RoadmapCards = ({
                                                                 className={`group w-full text-left py-2 px-4 flex justify-between gap-1 ${
                                                                     active ? 'bg-primary' : 'hover:bg-primary'
                                                                 }`}
-                                                                onClick={() => onRoadmapClick(roadmap)}
+                                                                onClick={() => handleRoadmapClick(roadmap)}
                                                             >
                                                                 <div>
                                                                     <h5
@@ -591,21 +614,6 @@ const RoadmapCards = ({
 }
 
 export default function Changelog(): JSX.Element {
-    const timelineContainerRef = useRef<HTMLDivElement>(null)
-    const resizeObserverRef = useRef<HTMLDivElement>(null)
-    const { addWindow } = useApp()
-    const { appWindow } = useWindow()
-    const { isModerator } = useUser()
-    const [windowX, setWindowX] = useState(0)
-    const [percentageOfScrollInView, setPercentageOfScrollInView] = useState(0)
-    const [windowPercentageFromLeft, setWindowPercentageFromLeft] = useState(0)
-    const [roadmapsPercentageFromLeft, setRoadmapsPercentageFromLeft] = useState(0)
-    const [activeRoadmap, setActiveRoadmap] = useState<RoadmapNode | null>(null)
-    const [containerWidth, setContainerWidth] = useState(0)
-    const [teamFilter, setTeamFilter] = useState('all')
-    const [categoryFilter, setCategoryFilter] = useState('all')
-    const hideEmpty = useMemo(() => teamFilter !== 'all' || categoryFilter !== 'all', [teamFilter, categoryFilter])
-    const href = appWindow?.location?.href
     const data = useStaticQuery(graphql`
         {
             allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }, sort: { fields: date }) {
@@ -677,6 +685,28 @@ export default function Changelog(): JSX.Element {
             }
         }
     `)
+
+    const timelineContainerRef = useRef<HTMLDivElement>(null)
+    const resizeObserverRef = useRef<HTMLDivElement>(null)
+    const { href } = useLocation()
+    const initialActiveRoadmap = useMemo(() => {
+        if (!href) return null
+        const urlObj = new URL(href)
+        const id = urlObj.searchParams.get('id')
+        if (!id) return null
+        return data.allRoadmap.nodes.find((roadmap: RoadmapNode) => roadmap.id === parseInt(id)) || null
+    }, [])
+    const { addWindow } = useApp()
+    const { isModerator } = useUser()
+    const [windowX, setWindowX] = useState(0)
+    const [percentageOfScrollInView, setPercentageOfScrollInView] = useState(0)
+    const [windowPercentageFromLeft, setWindowPercentageFromLeft] = useState(0)
+    const [roadmapsPercentageFromLeft, setRoadmapsPercentageFromLeft] = useState(0)
+    const [activeRoadmap, setActiveRoadmap] = useState<RoadmapNode | null>(initialActiveRoadmap)
+    const [containerWidth, setContainerWidth] = useState(0)
+    const [teamFilter, setTeamFilter] = useState('all')
+    const [categoryFilter, setCategoryFilter] = useState('all')
+    const hideEmpty = useMemo(() => teamFilter !== 'all' || categoryFilter !== 'all', [teamFilter, categoryFilter])
 
     const handleAddFeature = () => {
         addWindow(
@@ -823,6 +853,11 @@ export default function Changelog(): JSX.Element {
         URL.revokeObjectURL(url)
     }
 
+    const handleRoadmapClose = () => {
+        setActiveRoadmap(null)
+        navigate('')
+    }
+
     return (
         <>
             <SEO title="Changelog - PostHog" />
@@ -879,6 +914,7 @@ export default function Changelog(): JSX.Element {
                                 containerWidth={containerWidth}
                                 activeRoadmap={activeRoadmap}
                                 hideEmpty={hideEmpty}
+                                initialActiveRoadmap={initialActiveRoadmap}
                             />
                         </div>
                         <AnimatePresence>
@@ -905,7 +941,7 @@ export default function Changelog(): JSX.Element {
                         </AnimatePresence>
                     </div>
                     <AnimatePresence>
-                        {activeRoadmap && <Roadmap roadmap={activeRoadmap} onClose={() => setActiveRoadmap(null)} />}
+                        {activeRoadmap && <Roadmap roadmap={activeRoadmap} onClose={handleRoadmapClose} />}
                     </AnimatePresence>
                 </div>
             </Editor>
