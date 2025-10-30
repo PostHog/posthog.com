@@ -1636,6 +1636,10 @@
             "destination": "/handbook/engineering/operations/on-call-rotation"
         },
         { "source": "/handbook/engineering/incidents", "destination": "/handbook/engineering/operations/incidents" },
+        {
+            "source": "/handbook/engineering/support-hero",
+            "destination": "/handbook/engineering/operations/support-hero"
+        },
         { "source": "/handbook/who-we-are-building-for", "destination": "/handbook/who-we-build-for" }
     ],
     "headers": [

@@ -203,10 +203,6 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['posthog-ai'],
         label: 'feature/mcp',
     },
-    messaging: {
-        feature: 'Messaging',
-        owner: ['workflows'],
-    },
     notebooks: {
         feature: 'Notebooks',
         owner: [],
@@ -432,6 +428,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Webhook delivery service',
         owner: ['workflows'],
         label: 'feature/pipelines',
+    },
+    workflows: {
+        feature: 'Workflows',
+        owner: ['workflows'],
+        label: 'feature/workflows',
     },
 }
 

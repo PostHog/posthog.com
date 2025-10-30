@@ -1284,6 +1284,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/how-to-do-discovery',
                     },
                     {
+                        name: 'Running trials',
+                        url: '/handbook/growth/sales/running-trials',
+                    },
+                    {
                         name: 'Selling and procuring via AWS Marketplace',
                         url: '/handbook/growth/sales/selling-via-aws',
                     },
@@ -1366,10 +1370,6 @@ export const handbookSidebar = [
                     {
                         name: 'Onboarding program',
                         url: '/handbook/onboarding/onboarding-program',
-                    },
-                    {
-                        name: 'Onboarding Pipeline',
-                        url: '/handbook/onboarding/onboarding-pipeline',
                     },
                     {
                         name: 'Onboarding tracking',
@@ -1515,6 +1515,20 @@ export const handbookSidebar = [
                 name: 'Lifecycle analysis',
                 url: '/handbook/growth/revops/lifecycle-analysis',
             },
+            {
+                name: 'Sales Ops',
+                url: '/handbook/growth/revops/salesops',
+                children: [
+                    {
+                        name: 'Refunds',
+                        url: '/handbook/growth/revops/refunds',
+                    },
+                    {
+                        name: 'Lead Assignment During Time Off',
+                        url: '/handbook/growth/revops/lead-assignment-ooo',
+                    },
+                ],
+            }
         ],
     },
 ]
