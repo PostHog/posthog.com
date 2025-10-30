@@ -85,6 +85,18 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         platform: platformFeatures,
     }
 
+    // Resolve nested nodes by dot-path
+    const getDefsNode = (root: any, path?: string) => {
+        if (!path) return root
+        const parts = path.split('.')
+        let node = root
+        for (const p of parts) {
+            node = node?.[p]
+            if (!node) break
+        }
+        return node
+    }
+
     // Expand a section or product path into individual row configs
     const expandPath = (path: string): RowConfig[] => {
         const parts = path.split('.')
@@ -125,19 +137,22 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                     })
                 }
             }
-        } else if (parts.length === 2) {
-            // "error_tracking.core" - expand a section
-            const [product, featureSet] = parts
+        } else if (parts.length >= 2) {
+            // product + nested section path
+            const product = parts[0]
+            const featureSetPath = parts.slice(1).join('.')
             if (product === 'platform') {
                 // Platform section
                 const platformDefs: any = platformFeatures
-                const set = platformDefs?.[featureSet]
+                const set = getDefsNode(platformDefs, featureSetPath)
                 if (set) {
-                    expanded.push({ label: featureSet, type: 'header' })
-                    for (const feature in set.features || {}) {
+                    const sectionLabel = featureSetPath.split('.').slice(-1)[0]
+                    expanded.push({ label: sectionLabel, type: 'header' })
+                    const featureMap: any = set?.features || set
+                    for (const feature in featureMap) {
                         expanded.push({
                             type: 'platform',
-                            featureSet,
+                            featureSet: featureSetPath,
                             feature,
                         })
                     }
@@ -145,9 +160,9 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             } else {
                 // Product section
                 const defs = featureDefs[product]
-                const set = defs?.[featureSet]
+                const set = getDefsNode(defs, featureSetPath)
                 if (set && typeof set === 'object') {
-                    if (featureSet === 'summary') {
+                    if (featureSetPath === 'summary') {
                         // Summary is a single product-level row
                         expanded.push({
                             type: 'product',
@@ -156,15 +171,26 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                             description: set.description,
                         })
                     } else {
+                        const segs = featureSetPath.split('.')
+                        const lastSegment = segs[segs.length - 1]
+                        const penultimate = segs[segs.length - 2]
+
+                        // If path points to a subproduct (not ending in "features"), render availability row only
+                        if (lastSegment !== 'features') {
+                            // Emit a product-level availability row for the subproduct.
+                            // Leave label/description undefined so getFeatureInfo can source from section.summary
+                            expanded.push({ type: 'product', product, featureSet: featureSetPath })
+                            return expanded
+                        }
+
                         // Regular section - add header and all features
-                        // For "features", use product summary name as header label
-                        const sectionName =
-                            featureSet === 'features'
-                                ? defs?.summary?.name || 'Features'
-                                : featureSet
-                                      .split('_')
-                                      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                                      .join(' ')
+                        // For "...<Section>.features", use the section name (penultimate segment) as header label
+                        const sectionName = penultimate
+                            ? penultimate
+                                  .split('_')
+                                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                                  .join(' ')
+                            : 'Features'
                         expanded.push({ label: sectionName, type: 'header' })
                         // Add all features in this section (support nested or flat)
                         const featureMap: any = set?.features || set
@@ -174,7 +200,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                                 expanded.push({
                                     type: 'feature',
                                     product,
-                                    featureSet,
+                                    featureSet: featureSetPath,
                                     feature,
                                 })
                             }
@@ -220,6 +246,10 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                             }
                         }
                     }
+                } else if (parts[parts.length - 1] === 'features') {
+                    // Expand section and include header + all features
+                    normalized.push(...expandPath(row))
+                    continue
                 }
                 // Individual feature (3+ parts) - convert to RowConfig
                 normalized.push({ path: row })
@@ -242,6 +272,15 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                             normalized.push(...expanded)
                             continue
                         }
+                    } else if (parts[parts.length - 1] === 'features') {
+                        const expanded = expandPath(row.path)
+                        if (row.label || row.description) {
+                            if (expanded.length > 0 && expanded[0].type !== 'header') {
+                                expanded[0] = { ...expanded[0], ...row }
+                            }
+                        }
+                        normalized.push(...expanded)
+                        continue
                     }
                 }
                 // No expansion needed
@@ -268,7 +307,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                 }
                 return { ...row, type: 'feature', product: parts[0], path: undefined }
             } else if (parts.length === 2) {
-                // "error_tracking.core" or "platform.deployment"
+                // "product.section" or "platform.section"
                 if (parts[0] === 'platform') {
                     return { ...row, type: 'platform', featureSet: parts[1], path: undefined }
                 }
@@ -278,17 +317,23 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                     return { ...row, type: 'product', product: parts[0], path: undefined }
                 }
                 return { ...row, type: 'feature', product: parts[0], featureSet: parts[1], path: undefined }
-            } else if (parts.length === 3) {
-                // "error_tracking.core.exception_capture" or "platform.deployment.self_host"
+            } else {
+                // 3+ parts: allow nested featureSet path
                 if (parts[0] === 'platform') {
-                    return { ...row, type: 'platform', featureSet: parts[1], feature: parts[2], path: undefined }
+                    return {
+                        ...row,
+                        type: 'platform',
+                        featureSet: parts.slice(1, -1).join('.'),
+                        feature: parts[parts.length - 1],
+                        path: undefined,
+                    }
                 }
                 return {
                     ...row,
                     type: 'feature',
                     product: parts[0],
-                    featureSet: parts[1],
-                    feature: parts[2],
+                    featureSet: parts.slice(1, -1).join('.'),
+                    feature: parts[parts.length - 1],
                     path: undefined,
                 }
             }
@@ -420,7 +465,72 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             if (row.featureSet === 'pricing') {
                 return productData.pricing?.[featureKey] ?? false
             }
+            // Support nested subproducts: traverse into productData by featureSet path
+            const getNode = (root: any, path?: string) => {
+                if (!path) return root
+                const parts = path.split('.')
+                let node = root
+                for (const p of parts) {
+                    // Try exact key first
+                    let next = node?.[p]
+                    // If not found, try looking under a nested "features" map
+                    if (typeof next === 'undefined' && node?.features && typeof node.features === 'object') {
+                        next = node.features[p]
+                    }
+                    // If token is literally 'features' move into the map when present
+                    if (typeof next === 'undefined' && p === 'features' && node?.features) {
+                        next = node.features
+                    }
+                    node = next
+                    if (!node) break
+                }
+                return node
+            }
+            const sectionNode = getNode(productData, row.featureSet)
+            if (sectionNode) {
+                const direct = sectionNode.features?.[featureKey] ?? sectionNode?.[featureKey]
+                if (typeof direct !== 'undefined') {
+                    return direct
+                }
+            }
             return productData.features?.[featureKey] || false
+        }
+
+        // Product-level availability (supports nested subproducts via featureSet path)
+        if (row.type === 'product' && row.product) {
+            let productData = competitor.products?.[row.product]
+            // Fallback: some vendors may nest subproducts under another product (e.g., product_analytics.dashboards)
+            if (!productData && competitor.products) {
+                for (const rootKey in competitor.products) {
+                    const maybe = competitor.products[rootKey]?.[row.product]
+                    if (maybe && typeof maybe === 'object') {
+                        productData = maybe
+                        break
+                    }
+                }
+            }
+            if (!productData) return false
+
+            const getNode = (root: any, path?: string) => {
+                if (!path) return root
+                const parts = path.split('.')
+                let node = root
+                for (const p of parts) {
+                    let next = node?.[p]
+                    if (typeof next === 'undefined' && node?.features && typeof node.features === 'object') {
+                        next = node.features[p]
+                    }
+                    if (typeof next === 'undefined' && p === 'features' && node?.features) {
+                        next = node.features
+                    }
+                    node = next
+                    if (!node) break
+                }
+                return node
+            }
+            const node = getNode(productData, row.featureSet)
+            const available = node?.available ?? productData?.available ?? false
+            return available
         }
 
         return false
@@ -441,8 +551,8 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             if (platformDefs) {
                 // If featureSet is specified, use it directly
                 if (row.featureSet) {
-                    const set = platformDefs[row.featureSet]
-                    const feat = set?.features?.[row.feature]
+                    const set = getDefsNode(platformDefs, row.featureSet)
+                    const feat = set?.features?.[row.feature] || set?.[row.feature]
                     if (feat) {
                         return {
                             name: feat.name || row.feature,
@@ -452,7 +562,8 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                 } else {
                     // Search through all featureSets for this platform feature
                     for (const featureSet in platformDefs) {
-                        const feat = platformDefs[featureSet]?.features?.[row.feature]
+                        const feat =
+                            platformDefs[featureSet]?.features?.[row.feature] || platformDefs[featureSet]?.[row.feature]
                         if (feat) {
                             return {
                                 name: feat.name || row.feature,
@@ -467,7 +578,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         // Get from feature definition if available (non-platform features with nested sections)
         if (row.feature && row.featureSet) {
             const defs = featureDefs[row.product || '']
-            const set = defs?.[row.featureSet]
+            const set = getDefsNode(defs, row.featureSet)
             const feat = set?.features?.[row.feature] || set?.[row.feature]
 
             return {
@@ -493,9 +604,22 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             }
         }
 
-        // Handle product-level comparisons - check summary first, then fallback to productDescriptions
+        // Handle product-level rows (availability) for product or nested subproduct
         if (row.type === 'product' && row.product) {
             const defs = featureDefs[row.product]
+            // If this targets a nested subproduct (featureSet path), use section.summary when present
+            if (row.featureSet) {
+                const section = getDefsNode(defs, row.featureSet)
+                const sectionSummary = section?.summary
+                const lastSeg = row.featureSet.split('.').slice(-1)[0]
+                const fallbackName = lastSeg
+                    .split('_')
+                    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                    .join(' ')
+                const name = sectionSummary?.name || fallbackName
+                const description = row.description || sectionSummary?.description || section?.description
+                return { name, description }
+            }
             const summary = defs?.summary
             if (summary) {
                 return {
@@ -503,7 +627,6 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                     description: row.description || summary.description,
                 }
             }
-            // Fallback to productDescriptions for backward compatibility
             const productDesc = productDescriptions[row.product as keyof typeof productDescriptions]
             if (productDesc) {
                 return {
@@ -532,7 +655,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             )
         }
 
-        if (typeof value === 'string') {
+        if (typeof value === 'string' || typeof value === 'number') {
             return <span>{value}</span>
         }
 

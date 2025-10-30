@@ -10,7 +10,10 @@ export const productAnalyticsFeatures = {
         },
     },
     insights: {
-        description: 'Pre-built and custom insights to understand user behavior and product performance',
+        summary: {
+            name: 'Insights',
+            description: 'Pre-built and custom insights to understand user behavior and product performance',
+        },
         features: {
             ready_made_insights: {
                 name: 'Ready-made insight types',
@@ -30,8 +33,27 @@ export const productAnalyticsFeatures = {
             },
         },
     },
+    trends: {
+        summary: {
+            name: 'Trends',
+            description: 'Build custom insights and visualizations',
+        },
+        features: {
+            visualization_options: {
+                name: 'Visualization options',
+                description: 'Choose from a variety of visualization options',
+            },
+            another_feature: {
+                name: 'Another feature test',
+                description: 'Another feature',
+            },
+        },
+    },
     funnels: {
-        description: 'Track users through a sequence of events to find drop-off and improve conversion',
+        summary: {
+            name: 'Funnels',
+            description: 'Track users through a sequence of events to find drop-off and improve conversion',
+        },
         features: {
             conversion_funnels: {
                 name: 'Conversion funnels',
@@ -95,8 +117,11 @@ export const productAnalyticsFeatures = {
             },
         },
     },
-    paths: {
-        description: 'Understand how users navigate through your product and where they get stuck',
+    user_paths: {
+        summary: {
+            name: 'User paths',
+            description: 'Understand how users navigate through your product and where they get stuck',
+        },
         features: {
             reveal_paths_from_start: {
                 name: 'Reveal paths from a start point',

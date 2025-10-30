@@ -80,9 +80,45 @@ export const posthog = {
                 track_custom_events: true,
                 track_pageviews: true,
                 user_level_permissions: true,
-            },
-            pricing: {
-                free_tier: '1 million events',
+                trends: {
+                    available: true,
+                    features: {},
+                },
+                funnels: {
+                    available: true,
+                    features: {
+                        conversion_funnels: true,
+                        conversion_windows: true,
+                        correlation_analysis: true,
+                        exclusion_events: true,
+                        filter_by_cohort: true,
+                        filter_by_events_or_person_property: true,
+                        filter_by_person_property: true,
+                        filter_internal_and_test_users: true,
+                        hide_repeating_steps: true,
+                        historical_trends: true,
+                        max_number_of_steps: '20',
+                        private_insights: true,
+                        project_level_permissions: true,
+                        ready_made_insight_types: true,
+                        reveal_paths_between_points: true,
+                        reveal_paths_from_a_start_point: true,
+                        reveal_paths_from_an_end_point: true,
+                    },
+                },
+                user_paths: {
+                    available: true,
+                    features: {
+                        reveal_paths_between_points: true,
+                        reveal_paths_from_a_start_point: true,
+                        reveal_paths_from_an_end_point: true,
+                        reveal_paths_within_funnels: true,
+                        reveal_user_paths_between_steps: true,
+                    },
+                },
+                pricing: {
+                    free_tier: '1 million events',
+                },
             },
         },
         dashboards: {
