@@ -6,7 +6,7 @@ showTitle: true
 
 Sometimes we might want to offer a customer one time credits to cover an upcoming invoice, for example when accommodating a trial for a new product or offering compensation for a recent incident. Here’s how to do that.
 
-- Go to [Billing Admin → Credits](https://billing.posthog.com/admin/billing/credit/)
+- Go to <PrivateLink url="https://billing.posthog.com/admin/billing/credit/">Billing Admin → Credits</PrivateLink>
 - Click Add Credit at the top right.
 - Click Add credit at the top right.
   - Select the customer from dropdown or search
@@ -25,5 +25,5 @@ Sometimes we might want to offer a customer one time credits to cover an upcomin
 
 ## Things to keep in mind
 - Credits only apply to upcoming invoices.
-- If you’re trying to adjust a completed invoice, this should be handled as a [refund](https://posthog.com/handbook/growth/sales/refunds) instead.
+- If you’re trying to adjust a completed invoice, this should be handled as a [refund](/handbook/growth/sales/refunds) instead.
 - Always include enough context in your notes or reference link so others understand why the credit was given.
