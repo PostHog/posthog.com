@@ -1,0 +1,29 @@
+---
+title: Giving credits to customers
+sidebar: Handbook
+showTitle: true
+---
+
+Sometimes we might want to offer a customer one time credits to cover an upcoming invoice, for example when accommodating a trial for a new product or offering compensation for a recent incident. Here’s how to do that.
+
+- Go to [Billing Admin → Credits](https://billing.posthog.com/admin/billing/credit/)
+- Click Add Credit at the top right.
+- Fill out the form:
+  - select the customer from dropdown or search
+  - enter the total credit amount.
+  - choose from the following options for reason:
+    - First Big Bill
+    - Unwanted Spike
+    - Trial Accommodation
+    - Promo Credit
+    - Incident Credit
+    - Bug Credit
+    - Other
+  - add any internal notes for context in Notes section.
+  - include a link to a related Slack message, Zendesk ticket, or internal discussion in reference link field
+- Click Save and the credit will automatically be added to the customer’s balance in Stripe and applied to their next invoice.
+
+Things to keep in mind
+- Credits only apply to upcoming invoices.
+- If you’re trying to adjust a completed invoice, this should be handled as a [refund](https://posthog.com/handbook/growth/sales/refunds) instead.
+- Always include enough context in your notes or reference link so others understand why the credit was given.
