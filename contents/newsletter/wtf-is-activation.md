@@ -24,7 +24,7 @@ So why isn't there a simple, universal definition? Because:
 
 2. **It’s rarely a single event.** You want users to do many actions in your product: complete onboarding, upload a file, share a link, watch a video. Activation could mean doing any of these, or a combination of them.
 
-3. **Activating may mean doing something multiple times.** Someone might need to do the action multiple times in order to get it. For example, to activate into our session replay product means analyzing not one, but five replays.
+3. **Activating may mean doing something multiple times.** Someone might need to do the action multiple times in order to get it. For example, to activate into our session replay app means analyzing not one, but five replays.
 
 One thing is certain, though. You can’t build a successful product without nailing it. Read on to understand why.
 

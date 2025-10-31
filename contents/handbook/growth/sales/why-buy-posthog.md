@@ -62,7 +62,7 @@ By deploying our simple JavaScript snippet on your website you’ll capture all 
 
 ### One-liner
 
-> A complete analytics platform which fits into your existing data stack.
+> A complete developer platform which fits into your existing data stack.
 
 ### Summary
 

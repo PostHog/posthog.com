@@ -31,7 +31,7 @@ export const Hero = (args) => (
 Hero.args = {
     title: 'Self-hosted alternative to Google Analytics',
     subtitle:
-        'PostHog’s self-hosted analytics platform helps teams better understand how their products are being used. Unlike Google Analytics, PostHog is open-source and can be deployed on your existing infrastructure.',
+        'PostHog’s self-hosted developer platform equips engineers with the dev tools they need to build successful products. Unlike Google Analytics, PostHog is open-source and can be deployed on your existing infrastructure.',
     ctas: [
         <CallToAction key={0} href="https://app.posthog.com/signup">
             Get started - free

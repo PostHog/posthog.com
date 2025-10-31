@@ -109,7 +109,7 @@ Success after launch looks like continued growth in usage metrics. It also looks
 
 If the feature has a large enough impact, it may even inspire a marketing push or case study.
 
-If a large feature is successful to warrant dedicated, sustained work, such as session recordings or group analytics, we might plan to [charge for it](/handbook/engineering/feature-pricing). If this is the case, then success becomes users paying for it. As an example, charging for our feature flags product is a goal for Q2 2023. Follow-on goals are likely growing the revenue of the product. 
+If a large feature is successful to warrant dedicated, sustained work, such as session recordings or group analytics, we might plan to [charge for it](/handbook/engineering/feature-pricing). If this is the case, then success becomes users paying for it. As an example, charging for our feature flags app is a goal for Q2 2023. Follow-on goals are likely growing the revenue of the product. 
 
 The success of the feature post-launch determines future effort and investment in that feature or related features. If a feature gets a lot of usage and feedback, then we often develop plans to continue working on ideas related to it.
 

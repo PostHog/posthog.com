@@ -50,7 +50,7 @@ Tracking the five pirate metrics will give you a complete, end-to-end view of us
 
 McClure visualized the AARRR funnel in a table like the one below, though you could also create a funnel insight, or just build a dashboard of related metrics.  
 
-This version is what the funnel might look like for our product, PostHog, an [all-in-one analytics platform](https://posthog.com/) comprising product analytics, session replay, feature flags, and A/B testing.
+This version is what the funnel might look like for our product, PostHog, an [all-in-one developer platform](https://posthog.com/) comprising product analytics, session replay, feature flags, and A/B testing.
 
 ![aarrr funnel breakdown](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aarrr-pirate-funnel/arrrr-funnel-table.png)
 

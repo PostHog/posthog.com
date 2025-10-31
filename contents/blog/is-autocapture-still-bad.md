@@ -37,7 +37,7 @@ To quote Tony Stark: “An intelligence agency which fears intelligence is, hist
 
 Yes, too much data can make it hard to separate the signal from the noise, but that’s why it’s important to have the correct tools at your disposal. Too much data is only an issue if you’re unable to interrogate data effectively, or don’t know what you’re looking for. 
 
-A well-designed product analytics platform that is shaped by user feedback will enable you to sort the wheat from the data chaff easily. Especially when the [infrastructure is designed to function at scale](https://posthog.com/blog/clickhouse-announcement).
+A well-designed product analytics tool that is shaped by user feedback will enable you to sort the wheat from the data chaff easily. Especially when the [infrastructure is designed to function at scale](https://posthog.com/blog/clickhouse-announcement).
 
 Also, what's the alternative here? Having less data because you can only track the handful of data points you've planned for in advance? That sounds far less appealing.
 
@@ -47,7 +47,7 @@ Amplitude argues autocapture means you need someone to police and clean the data
 
 At PostHog, we do this through our [Data Management suite](/docs/user-guides/data-management), which lets you to add tags, descriptions and more to every event you track — whether autocaptured or not. At a glance you can see when an event has been created,  modified, deleted or gone ‘stale’.
 
-The article also raises the point that someone may make changes to your product which throw off your data without your knowledge. However this isn’t a risk that’s exclusive to autocapture, as it can happen with manual instrumentation as well. Ultimately, no analytics platform can protect your codebase from rogue engineers!
+The article also raises the point that someone may make changes to your product which throw off your data without your knowledge. However this isn’t a risk that’s exclusive to autocapture, as it can happen with manual instrumentation as well. Ultimately, no analytics tool can protect your codebase from rogue engineers!
 
 ## 3. Autocapture takes the same/more time
 

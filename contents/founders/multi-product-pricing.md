@@ -40,7 +40,7 @@ Our only company goal at this point was to get 5 reference, paying customers. By
 
 This journey has repeated itself with session replay. 
 
-Since the free and paid session replay products are largely the same, except for a usage limit with the free product, focusing on more demanding, paid users improved the product for everyone and drove word-of-mouth growth.
+Since the free and paid session replay apps are largely the same, except for a usage limit with the free product, focusing on more demanding, paid users improved the product for everyone and drove word-of-mouth growth.
 
 And, better yet, it's very easy to justify making improvements for paying customers, since it's long-term sustainable.
 

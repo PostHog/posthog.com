@@ -41,6 +41,6 @@ At PostHog, we’ve built a suite of product analytics tools which you can host 
 
 Safari started blocking third-party cookies back in 2017 and they account for 19% of internet traffic, so you’re likely already having a degraded analytics experience if you rely on third-party cookies for Safari users. It’s better to start putting backup systems in place early to avoid such outcomes. One other benefit of starting early is that ad blockers focus on third-party cookies as a way to restrict ads and tracking, which can significantly corrupt the results you get in your analytics. Moving to a first-party cookie approach lets you continue getting high quality tracking for users who install ad blockers.
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />

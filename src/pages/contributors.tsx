@@ -18,7 +18,7 @@ export const ContributorsPage = () => {
             <Layout>
                 <SEO
                     title="Contributors • PostHog"
-                    description="Plugins for getting data in and out of PostHog, the open source product analytics platform."
+                    description="Plugins for getting data in and out of PostHog, the open source developer platform."
                     image={pluginLibraryOgImage}
                 />
                 <div className="centered" style={{ margin: 'auto' }}>

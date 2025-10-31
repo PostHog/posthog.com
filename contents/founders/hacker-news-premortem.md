@@ -97,7 +97,7 @@ Fun fact: [PostHog's pricing page](../../pricing) is the second most popular pla
 
 ## I can't see the difference between this and X?
 
-If you're building something in a crowded space, like - say - an analytics product, people need a very good reason to use a tiny new startup's thing, over a better established competitor,
+If you're building something in a crowded space, like - say - product analytics, people need a very good reason to use a tiny new startup's thing, over a better established competitor,
 
 Reasons they feel this way:
 

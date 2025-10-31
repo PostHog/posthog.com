@@ -182,6 +182,6 @@ Going forward, we're excited to make this system even better, polishing our upgr
 
 Oh, and while we don't spin this out into its own tool for others to use, feel free to check out [our codebase](https://github.com/PostHog/posthog/issues/7054) if you have a similar problem - don't worry, it's open source 😉.
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />

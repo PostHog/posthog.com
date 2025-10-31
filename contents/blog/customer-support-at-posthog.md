@@ -51,6 +51,6 @@ The beauty of open source is that it’s built on a passionate community of cont
 
 Would we do things differently if we were starting over? Barely. We might hone in on Slack as our main comms channel earlier in our journey, but we’re otherwise happy with how customer support at PostHog has evolved.
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />

@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This guide provides detailed instructions on how to achieve key business metrics using PostHog's analytics platform. Each business type has specific metrics that matter most, and this guide shows you exactly how to set up PostHog to track and optimize for those metrics.
+This guide provides detailed instructions on how to achieve key business metrics using PostHog. Each business type has specific metrics that matter most, and this guide shows you exactly how to set up PostHog to track and optimize for those metrics.
 
 ## B2B SaaS
 

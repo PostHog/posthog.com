@@ -9,7 +9,7 @@ export default function Spicy(): JSX.Element {
         <>
             <SEO
                 title="spicy.mov - PostHog"
-                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
+                description="PostHog is the only developer platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/default.png`}
             />
             <MediaPlayer videoId="dQw4w9WgXcQ" />

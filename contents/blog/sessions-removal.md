@@ -53,6 +53,6 @@ In addition to the changes above, we're also significantly improving recordings 
 ## What's next?
 We are considering full support for session-based [behavioral analytics](/product-engineers/behavioral-analytics) and want to gather more context on the use cases for this. In particular, we want to make sure users have flexibility around their own concept of sessions, support a full range of analytics (e.g. session count, duration, multi-device sessions), etc.
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />

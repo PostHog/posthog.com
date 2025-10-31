@@ -158,7 +158,7 @@ Once you [implement your product survey](/tutorials/survey) and get all the data
 
 2. **Start monitoring customer satisfaction** – Run repeated surveys asking the same questions to give you an idea of user perceptions over time. You can use this to track the impact of changes and identify areas requiring change.
 
-3. **Update your product roadmap** – Finally, you can prioritize future development and make data-driven decisions. Ultimately, the goal of product tools (and PostHog) is to help you build better products. Knowing what users think about your product and what they want to see next is a great way to do that.
+3. **Update your product roadmap** – Finally, you can prioritize future development and make data-driven decisions. Ultimately, the goal of dev tools (and PostHog) is to help you build better products. Knowing what users think about your product and what they want to see next is a great way to do that.
 
 As an all-in-one platform, PostHog is uniquely placed to do all of the above. In addition to surveys, we also do product analytics, session replay, feature flags, and A/B testing. If this sounds useful to you, [check us out](https://app.posthog.com/signup).
 

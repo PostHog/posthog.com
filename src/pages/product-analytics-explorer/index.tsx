@@ -14,7 +14,7 @@ export default function ProductAnalytics(): JSX.Element {
         <>
             <SEO
                 title="Product Analytics - PostHog"
-                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
+                description="PostHog is the only developer platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/default.png`}
             />
             <Explorer
@@ -48,7 +48,7 @@ export default function ProductAnalytics(): JSX.Element {
                 leftSidebarContent={<ProductSidebar type="product_analytics" />}
             >
                 <p className="max-w-lg">
-                    PostHog is the only product analytics platform built to natively work with{' '}
+                    PostHog is the only developer platform built to natively work with{' '}
                     <Link to="/session-replay">session replays</Link>, <Link to="/feature-flags">feature flags</Link>,{' '}
                     <Link to="/experiments">experiments</Link>, and <Link to="/surveys">surveys</Link>.
                 </p>

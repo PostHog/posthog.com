@@ -33,6 +33,6 @@ Finally, we don't want to miss out on the fun. Thus, while you need 4 valid PRs 
 
 Happy Hacktoberfest from our entire team at PostHog. Let's get hacking!
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />

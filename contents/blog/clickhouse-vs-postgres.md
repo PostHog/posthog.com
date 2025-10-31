@@ -20,7 +20,7 @@ Honestly, it is a bit ridiculous to compare Postgres and ClickHouse. The two dat
 
 So why even compare them? Because most companies that invest in an online analytical processing (OLAP) database like ClickHouse originally used an online transaction processing (OLTP) stack like MySQL or Postgres. PostHog's database journey was no different. 
 
-In 2020, PostHog used Postgres to store client data. In the beginning, it worked. But usage grew very, very fast. Eventually, that all-purpose Postgres database was tasked to store millions of rows of data. It was obvious Postgres couldn't handle the scale necessary for an analytics platform like PostHog.
+In 2020, PostHog used Postgres to store client data. In the beginning, it worked. But usage grew very, very fast. Eventually, that all-purpose Postgres database was tasked to store millions of rows of data. It was obvious Postgres couldn't handle the scale necessary for a developer platform like PostHog.
 
 At first, the team tried a ton of hack-y and wacky solutions in attempts to get Postgres to work. Turns out, that wasn’t sustainable (who would’ve thought!). Eventually, PostHog [migrated client data to ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion). Boom! 
 

@@ -43,7 +43,7 @@ Worried about GDPR but don’t want to self-host? We recently, we offer [PostHog
 
 ![session recording on posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/activation-checklist-images/session-recording-posthog.png)
 
-We’ve built PostHog to be an all-in-one product analytics platform that, unlike tools such as Amplitude or Mixpanel, doesn’t force you to use other tools to plug feature gaps. Using PostHog across your marketing site therefore enables you to benefit from these tools, including [session recording](/manual/recordings), [heatmaps](/manual/toolbar) and [apps](/apps).
+We’ve built PostHog to be an all-in-one developer platform that, unlike tools such as Amplitude or Mixpanel, doesn’t force you to use other tools to plug feature gaps. Using PostHog across your marketing site therefore enables you to benefit from these tools, including [session recording](/manual/recordings), [heatmaps](/manual/toolbar) and [apps](/apps).
 
 Session recording in particular is useful on a marketing website, as it lets you filter by events to find actual recordings of users who complete certain actions. Want to literally watch how a successful lead differs from an unsuccessful one, or how users navigate your documentation? Now you can. 
 

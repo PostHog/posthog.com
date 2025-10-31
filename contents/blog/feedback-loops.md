@@ -75,7 +75,7 @@ Note how gathering feedback was not an afterthought, but an important part of pl
 
 I go through all these examples to serve as an intuition pump: feedback loops don't arise out of thin air, but aggressively seeking them yourself allows you to move quicker, come up with solutions you wouldn't have otherwise thought of, and leads to a higher quality product.
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <NewsletterForm />
 

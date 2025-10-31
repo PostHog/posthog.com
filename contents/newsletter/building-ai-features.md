@@ -250,7 +250,7 @@ Building AI-powered features shouldn’t be the responsibility of some “AI guy
 
 There are a few ways you can encourage this:
 
--   **Build primitives and make your AI functionality composable**, so teams don’t need to re-invent prompts, streaming, consent, evals, and [analytics](/llm-analytics). This helps teams focus on unique and value-added AI functionality.
+-   **Build primitives and make your AI functionality composable**, so teams don’t need to re-invent prompts, streaming, consent, evals, and [analytics](/llm-analytics). This helps developers focus on unique and value-added AI functionality.
 
 -   **Have a consistent UX pattern across your app.** For us, that’s [Max](/max). This prevents death by a thousand AI widgets.
 

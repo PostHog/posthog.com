@@ -83,9 +83,9 @@ Google Analytics is a self-service analytics platform but that doesn’t mean it
 />
 </BorderWrapper>
 
-For that, you need a _product_ analytics platform. 
+For that, you need _product_ analytics. 
 
-There are lots of self-service product analytics platforms, but naturally we think PostHog is the best. Not only is PostHog entirely self-service, but it’s also an all-in-one toolset which offers a full suite of everything from session recording and feature flags to path analysis and cohorts. 
+There are lots of self-service product analytics tools, but naturally we think PostHog provides the best one. Not only is PostHog entirely self-service, but it’s also an all-in-one suite of dev tools which offers a full suite of everything from session recording and feature flags to path analysis and cohorts. 
 
 PostHog is also unique in that it can be self-hosted on your organization’s existing infrastructure — which means user data stays on your system so that it is safer and more compliant with privacy regulations. This isn’t possible with other self-service analytics platforms, such as Mixpanel or Amplitude, which can be competitive but require you to share data with their systems. 
 

@@ -18,7 +18,7 @@ If you don't have a CDP already set up, you might not need one. PostHog has:
 - [SDKs](/docs/libraries) and [API](/docs/api/capture) to capture data from anywhere.
 - A [data warehouse](/docs/data-warehouse) to easily import and query data from [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), [Zendesk](/tutorials/zendesk-reports), [S3](docs/data-warehouse/setup/s3), and more.
 - Pre-built and customizable [transformations and destinations](/docs/cdp) for cleaning and sending data to other tools like [webhooks](/docs/cdp/destinations/webhook), [Slack](/docs/cdp/destinations/slack), and more.
-- A suite of analysis tools including [SQL querying](/docs/product-analytics/sql) and visualizations.
+- A suite of dev tools including [SQL querying](/docs/product-analytics/sql) and visualizations.
 
 This means PostHog can act as your single source of truth without needing to set up and pay for another tool.
 

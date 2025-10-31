@@ -394,7 +394,7 @@ The "aha" moment came when we realized we could build a real programming languag
 
 The key insight was this: we can pause and resume our own VM at any point, including right before `fetch()` calls. When a script calls `fetch`, we serialize the entire VM state (stack, bytecode, metadata), pass all of that onto the "fetch service" (via a queue like Kafka), push the response back onto the VM's stack, and resume execution on what might be a completely different machine. It doesn't matter if the fetch was called in a for loop or in an extremely recursive call stack, we can pause and resume the language at will. It's magic.
 
-During the [MyKonos hackathon](https://posthog.com/blog/mykonos-hackathon) in May we built the first version of Hog, and then productized it over the next 5 months as part of our new CDP product.
+During the [MyKonos hackathon](https://posthog.com/blog/mykonos-hackathon) in May we built the first version of Hog, and then productized it over the next 5 months as part of our new CDP app.
 
 So that's why we built Hog: to run multi-hop user-provided async scripts in a safe, predictable, and scalable way.
 

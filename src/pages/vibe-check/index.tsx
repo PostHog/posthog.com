@@ -69,7 +69,7 @@ export default function Ick() {
         <>
             <SEO
                 title="You'll hate PostHog if..."
-                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
+                description="PostHog is the only developer platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/default.png`}
             />
             <Wizard

@@ -161,7 +161,7 @@ Simply click on the number of users who completed the step, or dropped off, and 
 
 ## 13. Analyze retrospective data
 
-With some analytics platforms, you can only look at data once you've started collecting it – you have to define an action, then wait months to gather data for it. In PostHog, you can look at retroactive data easily as we capture information automatically and enable you to make faster decisions. 
+With some analytics tools, you can only look at data once you've started collecting it – you have to define an action, then wait months to gather data for it. In PostHog, you can look at retroactive data easily as we capture information automatically and enable you to make faster decisions. 
 
 Quoting [MentionMe Software Engineer Lleo Harress](https://posthog.com/customers/mention-me): 
 
