@@ -1835,8 +1835,8 @@ export const docsMenu = {
                                     url: '/docs/libraries/js',
                                 },
                                 {
-                                    name: 'Features',
-                                    url: '/docs/libraries/js/features',
+                                    name: 'Usage',
+                                    url: '/docs/libraries/js/usage',
                                 },
                                 {
                                     name: 'Configuration',
@@ -1886,6 +1886,20 @@ export const docsMenu = {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
+                            children: [
+                                {
+                                    name: 'Installation',
+                                    url: '/docs/libraries/ios',
+                                },
+                                {
+                                    name: 'Usage',
+                                    url: '/docs/libraries/ios/usage',
+                                },
+                                {
+                                    name: 'Configuration',
+                                    url: '/docs/libraries/ios/configuration',
+                                },
+                            ],
                         },
                         {
                             name: 'Java',
@@ -1900,7 +1914,7 @@ export const docsMenu = {
                             url: '/docs/libraries/node',
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/node',
                                 },
                                 {
@@ -1918,7 +1932,7 @@ export const docsMenu = {
                             url: '/docs/libraries/python',
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/python',
                                 },
                                 {
@@ -1944,7 +1958,7 @@ export const docsMenu = {
                             },
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/react-native',
                                 },
                                 {
