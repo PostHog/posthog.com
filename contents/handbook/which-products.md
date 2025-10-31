@@ -21,7 +21,7 @@ Products we know will work well if we ship them:
   - People pursuing their interests get more done, go much further, and execute to a better standard.
 - Products that our customers are asking for
 
-Products we're less excited about building
+Products we're less excited about building:
 - Products where the ICP quickly changes to something other than an engineer, especially teams far removed from engineering
   - For example, a CRM. We'd be more excited about building a customer support tool, as support often is a task that involves engineering.
 
