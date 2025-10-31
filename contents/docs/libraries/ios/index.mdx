@@ -49,16 +49,7 @@ By default, each iOS app target stores its data in its own sandboxed directory. 
 - Fragmented user journeys
 - Difficulty tracking feature adoption across your app ecosystem
 
-### Setting up app groups
-
-1. **Configure App Groups**: Set up an [App Group](https://developer.apple.com/documentation/xcode/configuring-app-groups) in Xcode for your main app and extension targets
-2. **Configure PostHog**: Use the same App Group identifier in all targets:
-
-```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
-config.appGroupIdentifier = "group.com.yourcompany.yourapp"
-PostHogSDK.shared.setup(config)
-```
+[Learn more about setting up app groups](/docs/libraries/ios/configuration#setting-up-app-groups).
 
 ## Method swizzling
 

@@ -161,6 +161,17 @@ config.setBeforeSend(
 
 **Note:** When chaining beforeSend blocks, order is important. The first block is executed first and the mutated event is passed along to the second block, and so on. If at any point in the chain the event is dropped, any subsequent blocks will not be executed.
 
+## Setting up app groups
+
+1. **Configure App Groups**: Set up an [App Group](https://developer.apple.com/documentation/xcode/configuring-app-groups) in Xcode for your main app and extension targets
+2. **Configure PostHog**: Use the same App Group identifier in all targets:
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+config.appGroupIdentifier = "group.com.yourcompany.yourapp"
+PostHogSDK.shared.setup(config)
+```
+
 ## Method swizzling
 
 Method swizzling is a technique that enables the SDK to intercept and modify method calls at runtime to provide advanced features like screen view tracking, element interactions, session replay, surveys, and more.
@@ -202,7 +213,7 @@ Users must explicitly grant Open Access in **Settings > General > Keyboard > Key
 
 ## All configuration options
 
-The `configuration` element contains several other settings you can toggle:
+The [`PostHogConfig` object](https://github.com/PostHog/posthog.com/pull/13379/files?new_files_changed=true#r2480032424:~:text=gonna%20link%20to-,config%20object,-in%20posthog%20for) contains several other settings you can toggle:
 
 | Attribute | Description |
 |-----------|-------------|
