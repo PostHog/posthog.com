@@ -50,42 +50,42 @@ const runPluginWithAst = (markdownAST, fileRelativePath, options = {}) => {
 const options = {
     repoConfigs: {
         'posthog-main-repo': {
-            // Config exists to mark this as an external repo
+            urlPrefix: 'handbook/engineering',
         },
     },
 }
 
 const tests = [
     {
-        name: 'strips .md extension from relative links',
+        name: 'converts relative link to absolute path with stripped extension',
         run: () => {
             const result = runPlugin('./other.md', 'docs/published/handbook/intro.md', options)
             const linkNode = result.children[0].children[0]
-            assert.strictEqual(linkNode.url, './other')
+            assert.strictEqual(linkNode.url, '/handbook/engineering/docs/published/handbook/other')
         },
     },
     {
-        name: 'strips .mdx extension from relative links',
+        name: 'converts relative .mdx link to absolute path',
         run: () => {
             const result = runPlugin('./component.mdx', 'docs/published/handbook/intro.md', options)
             const linkNode = result.children[0].children[0]
-            assert.strictEqual(linkNode.url, './component')
+            assert.strictEqual(linkNode.url, '/handbook/engineering/docs/published/handbook/component')
         },
     },
     {
-        name: 'preserves anchors when stripping extension',
+        name: 'preserves anchors when converting to absolute',
         run: () => {
             const result = runPlugin('../databases/schema.md#plan', 'docs/published/handbook/intro.md', options)
             const linkNode = result.children[0].children[0]
-            assert.strictEqual(linkNode.url, '../databases/schema#plan')
+            assert.strictEqual(linkNode.url, '/handbook/engineering/docs/published/databases/schema#plan')
         },
     },
     {
-        name: 'preserves query parameters when stripping extension',
+        name: 'preserves query parameters when converting to absolute',
         run: () => {
             const result = runPlugin('./file.md?foo=bar', 'docs/published/handbook/intro.md', options)
             const linkNode = result.children[0].children[0]
-            assert.strictEqual(linkNode.url, './file?foo=bar')
+            assert.strictEqual(linkNode.url, '/handbook/engineering/docs/published/handbook/file?foo=bar')
         },
     },
     {
@@ -169,7 +169,7 @@ const tests = [
 
             const definitionNode = result.children.find((child) => child.type === 'definition')
 
-            assert.strictEqual(definitionNode.url, '../databases/schema#plan')
+            assert.strictEqual(definitionNode.url, '/handbook/engineering/docs/published/databases/schema#plan')
         },
     },
 ]

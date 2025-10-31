@@ -1,3 +1,5 @@
+const path = require('path')
+
 const hasProtocol = (url = '') => /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(url)
 
 const visitLinks = (node, callback) => {
@@ -30,6 +32,10 @@ module.exports = ({ markdownAST, markdownNode, getNode }, pluginOptions = {}) =>
 
     // Only process if this is a configured external repo
     const isExternalRepo = !!config
+
+    // Get the file's path for resolving relative links
+    const fileRelativePath = fileNode.relativePath
+    const fileDir = path.dirname(fileRelativePath)
 
     visitLinks(markdownAST, (node) => {
         const originalUrl = node.url
@@ -87,9 +93,17 @@ module.exports = ({ markdownAST, markdownNode, getNode }, pluginOptions = {}) =>
             return
         }
 
-        // Strip .md/.mdx extension, keep path relative
+        // Strip .md/.mdx extension
         const strippedPath = linkPath.replace(/\.(mdx?)$/i, '')
-        node.url = `${strippedPath}${query}${fragment}`
+
+        // Resolve relative path to absolute
+        const resolvedPath = path.join(fileDir, strippedPath)
+
+        // Convert to absolute URL with configured prefix
+        const urlPrefix = config.urlPrefix || ''
+        const absolutePath = path.posix.join('/', urlPrefix, resolvedPath)
+
+        node.url = `${absolutePath}${query}${fragment}`
     })
 }
 
