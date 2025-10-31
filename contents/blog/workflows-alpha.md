@@ -16,7 +16,7 @@ Monday morning. This is me, happy and caffeinated, walking to my coworking space
 
 [Add image here, art request is submitted]
 
-Last week I had set up a new automation using our new **Workflows** product (soon coming to beta).  
+Last week I had set up a new automation using our new **workflows** product (soon coming to beta).  
 The goal: test if everything works – and, at the same time, let users know it’s available to try.  
 I sent out a simple test email.  
 It looked like this:
@@ -87,13 +87,13 @@ Also, I got so much useful feedback from users testing Workflows. People loved h
 
 ## What Workflows can actually do
 
-**Workflows** is our no-code, drag-and-drop automation engine built right into PostHog – and while it’s still in its early days, it’s already packing some serious muscle.
+**[Workflows](https://posthog.com/docs/workflows)** is our no-code, drag-and-drop automation engine built right into PostHog – and while it’s still in its early days, it’s already packing some serious muscle.
 
 You start by choosing a **trigger** (for example, when someone views a particular page or performs an event in your product).  
 Then you drag in **logic** such as delays, audience splits, or exit conditions.  
 From there, you choose an **action**: send an email, update a user property, or dispatch an event to one of your real-time destinations.
 
-Because it’s built into PostHog’s platform, Workflows lets you leverage behavioral data (who clicked what, what feature they used, how recently) to create highly targeted automations. This turned out to be the biggest benefit for several customers we interviewed: 
+Because it’s built into PostHog’s platform, workflows lets you leverage behavioral data (who clicked what, what feature they used, how recently) to create highly targeted automations. This turned out to be the biggest benefit for several customers we interviewed: 
 
 > “PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.”  
 > — Evan Rallis, Head of Product & Growth at Grantable
@@ -101,6 +101,6 @@ Because it’s built into PostHog’s platform, Workflows lets you leverage beha
 Channel-wise you’re already live with **email** (and Slack, Twilio, etc. coming soon) – and you can tie in any real-time destination you have set up.
 
 The best bit? No fragile API scripts or custom backend logic required – just build visually, publish, and let it run.  
-Since it’s in alpha, coming to beta soon, it’s free for you to try now, and we’d love to have you kick the tyres as we refine it.
+Since it’s in alpha, coming to beta soon, it’s free for you to try now, and we’d love to have you [kick the tyres as we refine it](https://app.posthog.com/workflows).
 
 Just maybe set your entry limits first.
