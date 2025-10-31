@@ -50,39 +50,42 @@ const runPluginWithAst = (markdownAST, fileRelativePath, options = {}) => {
 const options = {
     repoConfigs: {
         'posthog-main-repo': {
-            stripPrefix: '/docs/published/',
-            pathPrefix: '/handbook/engineering',
+            // Config exists to mark this as an external repo
         },
     },
 }
 
 const tests = [
     {
-        name: 'rewrites simple sibling links',
+        name: 'strips .md extension from relative links',
         run: () => {
-            const result = runPlugin('other.md', 'docs/published/handbook/intro.md', options)
+            const result = runPlugin('./other.md', 'docs/published/handbook/intro.md', options)
             const linkNode = result.children[0].children[0]
-            assert.strictEqual(linkNode.url, '/handbook/engineering/handbook/other')
+            assert.strictEqual(linkNode.url, './other')
         },
     },
     {
-        name: 'rewrites parent directory links with anchors',
+        name: 'strips .mdx extension from relative links',
         run: () => {
-            const result = runPlugin(
-                '../databases/schema-changes.md#plan',
-                'docs/published/handbook/architecture/overview.md',
-                options
-            )
+            const result = runPlugin('./component.mdx', 'docs/published/handbook/intro.md', options)
             const linkNode = result.children[0].children[0]
-            assert.strictEqual(linkNode.url, '/handbook/engineering/handbook/databases/schema-changes#plan')
+            assert.strictEqual(linkNode.url, './component')
         },
     },
     {
-        name: 'normalises README files to directory paths',
+        name: 'preserves anchors when stripping extension',
         run: () => {
-            const result = runPlugin('./README.md', 'docs/published/handbook/architecture/overview.md', options)
+            const result = runPlugin('../databases/schema.md#plan', 'docs/published/handbook/intro.md', options)
             const linkNode = result.children[0].children[0]
-            assert.strictEqual(linkNode.url, '/handbook/engineering/handbook/architecture')
+            assert.strictEqual(linkNode.url, '../databases/schema#plan')
+        },
+    },
+    {
+        name: 'preserves query parameters when stripping extension',
+        run: () => {
+            const result = runPlugin('./file.md?foo=bar', 'docs/published/handbook/intro.md', options)
+            const linkNode = result.children[0].children[0]
+            assert.strictEqual(linkNode.url, './file?foo=bar')
         },
     },
     {
@@ -96,28 +99,49 @@ const tests = [
     {
         name: 'ignores links with protocols',
         run: () => {
-            const result = runPlugin('https://posthog.com', 'docs/published/handbook/intro.md', options)
+            const result = runPlugin('https://example.com', 'docs/published/handbook/intro.md', options)
             const linkNode = result.children[0].children[0]
-            assert.strictEqual(linkNode.url, 'https://posthog.com')
+            assert.strictEqual(linkNode.url, 'https://example.com')
         },
     },
     {
-        name: 'ignores files outside configured prefix',
+        name: 'ignores absolute paths',
         run: () => {
-            const result = runPlugin('../../README.md', 'docs/published/handbook/architecture/overview.md', {
-                repoConfigs: {
-                    'posthog-main-repo': {
-                        stripPrefix: '/docs/published/engineering/',
-                        pathPrefix: '/handbook/engineering',
-                    },
-                },
-            })
+            const result = runPlugin('/docs/user-guide', 'docs/published/handbook/intro.md', options)
             const linkNode = result.children[0].children[0]
-            assert.strictEqual(linkNode.url, '../../README.md')
+            assert.strictEqual(linkNode.url, '/docs/user-guide')
         },
     },
     {
-        name: 'rewrites reference-style definitions',
+        name: 'normalizes posthog.com URLs to relative paths',
+        run: () => {
+            const result = runPlugin('https://posthog.com/docs/posthog-ai', 'docs/published/handbook/intro.md', options)
+            const linkNode = result.children[0].children[0]
+            assert.strictEqual(linkNode.url, '/docs/posthog-ai')
+        },
+    },
+    {
+        name: 'normalizes http posthog.com URLs',
+        run: () => {
+            const result = runPlugin('http://posthog.com/teams/data', 'docs/published/handbook/intro.md', options)
+            const linkNode = result.children[0].children[0]
+            assert.strictEqual(linkNode.url, '/teams/data')
+        },
+    },
+    {
+        name: 'preserves query params and anchors when normalizing posthog.com URLs',
+        run: () => {
+            const result = runPlugin(
+                'https://posthog.com/blog/post?utm_source=docs#section',
+                'docs/published/handbook/intro.md',
+                options
+            )
+            const linkNode = result.children[0].children[0]
+            assert.strictEqual(linkNode.url, '/blog/post?utm_source=docs#section')
+        },
+    },
+    {
+        name: 'handles reference-style definitions',
         run: () => {
             const ast = {
                 type: 'root',
@@ -136,16 +160,16 @@ const tests = [
                     {
                         type: 'definition',
                         identifier: 'schema',
-                        url: '../databases/schema-changes.md#plan',
+                        url: '../databases/schema.md#plan',
                     },
                 ],
             }
 
-            const result = runPluginWithAst(ast, 'docs/published/handbook/architecture/overview.md', options)
+            const result = runPluginWithAst(ast, 'docs/published/handbook/intro.md', options)
 
             const definitionNode = result.children.find((child) => child.type === 'definition')
 
-            assert.strictEqual(definitionNode.url, '/handbook/engineering/handbook/databases/schema-changes#plan')
+            assert.strictEqual(definitionNode.url, '../databases/schema#plan')
         },
     },
 ]

@@ -1,53 +1,4 @@
-const path = require('path')
-
-const ensureLeadingSlash = (value = '') => {
-    if (!value) {
-        return ''
-    }
-    return value.startsWith('/') ? value : `/${value}`
-}
-
-const ensureTrailingSlash = (value = '') => {
-    if (!value) {
-        return ''
-    }
-    return value.endsWith('/') ? value : `${value}/`
-}
-
 const hasProtocol = (url = '') => /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(url)
-
-const joinUrl = (base, slug) => {
-    const normalizedBase = base ? ensureLeadingSlash(base).replace(/\/+$/, '') : ''
-    const normalizedSlug = slug ? slug.replace(/^\/+/, '') : ''
-
-    if (normalizedBase && normalizedSlug) {
-        return `${normalizedBase}/${normalizedSlug}`
-    }
-
-    if (normalizedBase) {
-        return normalizedBase || '/'
-    }
-
-    if (normalizedSlug) {
-        return `/${normalizedSlug}`
-    }
-
-    return '/'
-}
-
-const normaliseDocSlug = (slug) => {
-    if (!slug) {
-        return ''
-    }
-
-    const cleaned = slug.replace(/\.(mdx?)$/i, '')
-
-    if (/^(readme|index)$/i.test(cleaned)) {
-        return ''
-    }
-
-    return cleaned.replace(/\/(readme|index)$/gi, '')
-}
 
 const visitLinks = (node, callback) => {
     if (!node || typeof node !== 'object') {
@@ -77,19 +28,8 @@ module.exports = ({ markdownAST, markdownNode, getNode }, pluginOptions = {}) =>
     const { repoConfigs = {} } = pluginOptions
     const config = repoConfigs[fileNode.sourceInstanceName]
 
-    if (!config) {
-        return
-    }
-
-    const stripPrefix = config.stripPrefix ? ensureTrailingSlash(ensureLeadingSlash(config.stripPrefix)) : null
-    const pathPrefix = config.pathPrefix ? ensureLeadingSlash(config.pathPrefix) : ''
-    const fileRelativePath = fileNode.relativePath
-
-    if (!fileRelativePath) {
-        return
-    }
-
-    const fileDir = path.posix.dirname(`/${fileRelativePath}`)
+    // Only process if this is a configured external repo
+    const isExternalRepo = !!config
 
     visitLinks(markdownAST, (node) => {
         const originalUrl = node.url
@@ -98,10 +38,34 @@ module.exports = ({ markdownAST, markdownNode, getNode }, pluginOptions = {}) =>
             return
         }
 
-        if (hasProtocol(originalUrl) || originalUrl.startsWith('/') || originalUrl.startsWith('#')) {
+        // Skip anchor-only links
+        if (originalUrl.startsWith('#')) {
             return
         }
 
+        // Handle posthog.com URL normalization (for all repos, not just external)
+        if (originalUrl.startsWith('https://posthog.com/') || originalUrl.startsWith('http://posthog.com/')) {
+            const url = new URL(originalUrl)
+            node.url = url.pathname + url.search + url.hash
+            return
+        }
+
+        // Skip absolute paths (they already work)
+        if (originalUrl.startsWith('/') && !hasProtocol(originalUrl)) {
+            return
+        }
+
+        // Skip external URLs (other domains)
+        if (hasProtocol(originalUrl)) {
+            return
+        }
+
+        // Only process relative markdown links for external repos
+        if (!isExternalRepo) {
+            return
+        }
+
+        // Split URL into parts
         let linkPath = originalUrl
         let fragment = ''
         let query = ''
@@ -118,38 +82,17 @@ module.exports = ({ markdownAST, markdownNode, getNode }, pluginOptions = {}) =>
             linkPath = linkPath.slice(0, queryIndex)
         }
 
-        if (!linkPath) {
-            return
-        }
-
+        // Check if this is a markdown file link
         if (!/\.(mdx?)$/i.test(linkPath)) {
             return
         }
 
-        const resolvedPath = path.posix.normalize(path.posix.join(fileDir, linkPath))
-
-        if (stripPrefix && !resolvedPath.startsWith(stripPrefix)) {
-            return
-        }
-
-        let relativePath = stripPrefix ? resolvedPath.slice(stripPrefix.length) : resolvedPath.replace(/^\//, '')
-
-        if (relativePath.startsWith('/')) {
-            relativePath = relativePath.slice(1)
-        }
-
-        const slug = normaliseDocSlug(relativePath)
-
-        const finalPath = joinUrl(pathPrefix, slug)
-
-        node.url = `${finalPath}${query}${fragment}`
+        // Strip .md/.mdx extension, keep path relative
+        const strippedPath = linkPath.replace(/\.(mdx?)$/i, '')
+        node.url = `${strippedPath}${query}${fragment}`
     })
 }
 
 module.exports.__testables__ = {
-    ensureLeadingSlash,
-    ensureTrailingSlash,
     hasProtocol,
-    joinUrl,
-    normaliseDocSlug,
 }
