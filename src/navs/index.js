@@ -656,6 +656,10 @@ export const handbookSidebar = [
                         name: 'YouTube',
                         url: '/handbook/content/youtube',
                     },
+                    {
+                        name: 'Publishing videos',
+                        url: '/handbook/growth/marketing/publishing-videos',
+                    },
                 ],
             },
             {
