@@ -631,6 +631,7 @@
         { "source": "/docs/experiments/manual", "destination": "/docs/experiments/installation" },
         { "source": "/docs/experiments/under-the-hood", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/significance", "destination": "/docs/experiments/experiment-significance" },
+        { "source": "/docs/experiments/statistics", "destination": "/docs/experiments/statistics-bayesian" },
         { "source": "/docs/session-replay/manual", "destination": "/docs/session-replay/installation" },
         { "source": "/docs/features/feature-flags", "destination": "/docs/feature-flags" },
         { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags" },
@@ -1285,6 +1286,7 @@
         { "source": "/docs/cdp/route-censor", "destination": "/docs/cdp" },
         { "source": "/docs/cdp/semver-flattener", "destination": "/docs/cdp" },
         { "source": "/docs/experiments/experiment-significance", "destination": "/docs/experiments/statistics" },
+        { "source": "/docs/experiments/frequentist-method", "destination": "/docs/experiments/statistics-frequentist" },
         { "source": "/handbook/product/in-app-prompts", "destination": "/docs/surveys" },
         { "source": "/docs/webhooks", "destination": "/docs/cdp/destinations" },
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
@@ -1632,7 +1634,17 @@
         {
             "source": "/docs/libraries/js/features",
             "destination": "/docs/libraries/js/usage"
-        }
+        },
+        {
+            "source": "/handbook/engineering/on-call-rotation",
+            "destination": "/handbook/engineering/operations/on-call-rotation"
+        },
+        { "source": "/handbook/engineering/incidents", "destination": "/handbook/engineering/operations/incidents" },
+        {
+            "source": "/handbook/engineering/support-hero",
+            "destination": "/handbook/engineering/operations/support-hero"
+        },
+        { "source": "/handbook/who-we-are-building-for", "destination": "/handbook/who-we-build-for" }
     ],
     "headers": [
         {

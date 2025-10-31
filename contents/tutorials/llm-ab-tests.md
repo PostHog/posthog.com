@@ -57,7 +57,7 @@ Run the following commands in your root directory:
 ```bash
 # in the root directory
 npm install posthog-node
-npm install posthog-js
+npm install posthog-js @posthog/react
 touch src/app/providers.js
 ```
 
@@ -66,7 +66,7 @@ This installs the SDKs as well as creates a `providers.js` file. We use this to 
 ```js file=app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
@@ -139,7 +139,7 @@ Update the code in `recipe-builder/page.js` to import the [`usePostHog()`](/docs
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 export default function RecipeBuilder() {
     // existing code...
@@ -176,7 +176,7 @@ Update the code `src/app/page.js` to import the `usePostHog` hook and call `iden
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 export default function Home() {
   // existing code

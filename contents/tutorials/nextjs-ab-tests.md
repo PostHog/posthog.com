@@ -55,7 +55,7 @@ Next, create a `providers.js` file in your `app` folder. In it, initialize PostH
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 export function PHProvider({ children }) {
 	if (typeof window !== 'undefined') {
@@ -214,7 +214,7 @@ Finally, in `providers.js`, we handle the `bootstrapData` and add it to the Post
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 export default function PHProvider({ children, bootstrapData }) {
   if (typeof window !== 'undefined') {
@@ -249,7 +249,7 @@ To set up our A/B test in `app/page.js`:
 ```js
 // app/page.js
 'use client'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 import { useEffect, useState } from 'react'
 
 export default function Home() {

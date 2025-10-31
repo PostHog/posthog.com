@@ -130,7 +130,7 @@ Browser extensions run in multiple contexts, each with different capabilities an
 
 ### Context-specific persistence considerations
 
-For contexts like popup, sidepanel, background, and most other, `localStorage` or `sessionStorage` is recommended since they are shared across all contexts that have access to the `chrome.storage` API. In content scripts, as they use origin's storage, there is no advantage to them over `memory` as data wouldn't be shared between different websites.
+For contexts like popup, sidepanel, and most other, `localStorage` or `sessionStorage` is recommended since they are shared across all contexts that have access to the `chrome.storage` API. In content scripts, as they use origin's storage, there is no advantage to them over `memory` as data wouldn't be shared between different websites. In background service workers, use `memory` since `localStorage` and `sessionStorage` are not available.
 
 ### Distinct ID synchronization
 
@@ -205,7 +205,7 @@ posthog.init('<ph_project_api_key>', {
         distinctID: distinctId
     },
     api_host: '<ph_client_api_host>',
-    persistence: 'localStorage',
+    persistence: 'memory', // No localStorage or sessionStorage in service workers
     disable_external_dependency_loading: true,
     capture_pageview: false, // No DOM in service workers
     autocapture: false, // No DOM events to capture
