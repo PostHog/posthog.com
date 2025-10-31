@@ -34,25 +34,25 @@ We are opinionated at PostHog. That means avoiding hedging like saying "it's com
 2. Provide an example.
 3. Do the research until you can do 1. or 2.
 
-## Brand guidelines
-
-### We're an analytics platform, not a product analytics tool
-
-Unless directly referring to our product analytics suite, substitute references to "product analytics" or "product analytics tool" with the phrase "analytics platform".
-
-> **Example:** “A data warehouse or product analytics tool like PostHog can be helpful here.” would become “A data warehouse or analytics platform like PostHog can be helpful here.
-
-Product OS is also an acceptable alternative – use your judgement based on the context.
-
-### Do not capitalize product features
-
-It's "product analytics" not "Product Analytics" and so on.
-
 ## Style rules
 
 ### Use American English
 
 PostHog is a global company. Our team and our customers are distributed around the world. For consistency, we use American English spelling and grammar.
+
+### Use sentence case for titles and product names
+
+Write "Documentation style guide", not "Documentation Style Guide" and "PostHog has product analytics and session replay apps", not "PostHog has Product Analytics and Session Replay apps".
+
+### Capitalize proper names as appropriate
+
+Write "Redis server", not "redis server".
+
+### Capitalize acronyms and define where needed
+
+Write "URLs", not "urls".
+
+Many acronyms, like that one, will be familiar to developers. When in doubt, link the first use of an acronym to a definition, or provide one.
 
 ### Use sentence case for titles and product names
 
