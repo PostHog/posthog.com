@@ -523,7 +523,7 @@ const RoadmapCards = ({
     }, [])
 
     return (
-        <ScrollArea className="size-full [&>div>div]:size-full">
+        <ScrollArea className="size-full [&>div>div]:size-full [&>div>div]:!flex">
             <div className="h-full px-4">
                 <div
                     ref={containerRef}
