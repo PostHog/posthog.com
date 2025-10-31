@@ -117,9 +117,12 @@ module.exports = {
             resolve: 'gatsby-plugin-mdx',
             options: {
                 shouldBlockNodeFromTransformation: (node) =>
-                    node.internal.type === 'File' &&
-                    node.url &&
-                    new URL(node.url).hostname === 'raw.githubusercontent.com',
+                    (node.internal.type === 'File' &&
+                     node.url &&
+                     new URL(node.url).hostname === 'raw.githubusercontent.com') ||
+                    // Block monorepo files from auto-page-creation (pages created manually in createPages.ts)
+                    (node.internal.type === 'File' &&
+                     node.sourceInstanceName === 'posthog-main-repo'),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
