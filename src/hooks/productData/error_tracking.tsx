@@ -221,16 +221,6 @@ export const errorTracking = {
         },
         companies: [
             {
-                name: 'LogRocket',
-                key: 'logrocket',
-                link: '/blog/posthog-vs-logrocket',
-            },
-            {
-                name: 'Sentry',
-                key: 'sentry',
-                link: '/blog/posthog-vs-sentry',
-            },
-            {
                 name: 'Bugsnag',
                 key: 'bugsnag',
             },
@@ -239,12 +229,128 @@ export const errorTracking = {
                 key: 'datadog',
             },
             {
+                name: 'Glitchtip',
+                key: 'glitchtip',
+            },
+            {
+                name: 'LogRocket',
+                key: 'logrocket',
+                link: '/blog/posthog-vs-logrocket',
+            },
+            {
                 name: 'PostHog',
                 key: 'posthog',
             },
+            {
+                name: 'Rollbar',
+                key: 'rollbar',
+            },
+            {
+                name: 'Sentry',
+                key: 'sentry',
+                link: '/blog/posthog-vs-sentry',
+            },
+            {
+                name: 'Signoz',
+                key: 'signoz',
+            },
         ],
         rows: ['error_tracking'],
+        features: [
+            {
+                feature: 'Error alerts',
+                companies: {
+                    bugsnag: true,
+                    datadog: true,
+                    glitchtip: false,
+                    logrocket: true,
+                    posthog: true,
+                    rollbar: true,
+                    sentry: true,
+                    signoz: true,
+                },
+            },
+            {
+                feature: 'Error grouping',
+                companies: {
+                    bugsnag: true,
+                    datadog: true,
+                    glitchtip: true,
+                    logrocket: true,
+                    posthog: true,
+                    rollbar: true,
+                    sentry: true,
+                    signoz: true,
+                },
+            },
+            {
+                feature: 'Exception capture',
+                companies: {
+                    bugsnag: true,
+                    datadog: true,
+                    glitchtip: true,
+                    logrocket: true,
+                    posthog: true,
+                    rollbar: true,
+                    sentry: true,
+                    signoz: true,
+                },
+            },
+            {
+                feature: 'Issue management',
+                companies: {
+                    bugsnag: true,
+                    datadog: true,
+                    glitchtip: true,
+                    logrocket: false,
+                    posthog: true,
+                    rollbar: true,
+                    sentry: true,
+                    signoz: false,
+                },
+            },
+            {
+                feature: 'Network performance',
+                companies: {
+                    bugsnag: false,
+                    datadog: true,
+                    glitchtip: false,
+                    logrocket: true,
+                    posthog: false,
+                    rollbar: false,
+                    sentry: false,
+                    signoz: true,
+                },
+            },
+            {
+                feature: 'Source map support',
+                companies: {
+                    bugsnag: true,
+                    datadog: true,
+                    glitchtip: true,
+                    logrocket: true,
+                    posthog: true,
+                    rollbar: true,
+                    sentry: true,
+                    signoz: false,
+                },
+            },
+            {
+                feature: 'Stack tracing',
+                companies: {
+                    bugsnag: true,
+                    datadog: true,
+                    glitchtip: true,
+                    logrocket: true,
+                    posthog: true,
+                    rollbar: true,
+                    sentry: true,
+                    signoz: true,
+                },
+            },
+        ],
     },
+    integrations: ['ab_experiments', 'product_analytics', 'session_replays'],
     pairsWith: [
         {
             slug: 'session-replay',

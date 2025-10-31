@@ -30,6 +30,10 @@ export const webAnalyticsFeatures = {
             name: 'Heatmaps',
             description: 'Visualize where users click on your website',
         },
+        movement_maps: {
+            name: 'Movement maps',
+            description: 'Visualize mouse movements',
+        },
         outbound_clicks: {
             name: 'Outbound clicks',
             description: 'See the links that take users away',
@@ -57,6 +61,22 @@ export const webAnalyticsFeatures = {
         web_vitals: {
             name: 'Web vitals',
             description: 'Monitor the performance of your website',
+        },
+        cookieless_tracking: {
+            name: 'Cookieless tracking',
+            description: 'Track users without cookies',
+        },
+        snippet_install: {
+            name: 'Snippet install',
+            description: 'Install HTML snippet',
+        },
+        migration: {
+            name: 'Migration from Google Analytics',
+            description: 'Migrate data from Google Analytics',
+        },
+        script_size: {
+            name: 'Script size',
+            description: 'Size of the script that runs on your site',
         },
     },
 }

@@ -885,7 +885,27 @@ export const productAnalytics = {
                 },
             },
             {
-                feature: 'User-level permissions',
+                feature: 'Annotations',
+                companies: {
+                    amplitude: true,
+                    mixpanel: true,
+                    heap: false,
+                    pendo: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Dashboard insight tags',
+                companies: {
+                    amplitude: false,
+                    mixpanel: false,
+                    heap: false,
+                    pendo: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Dashboard level permissions',
                 companies: {
                     amplitude: true,
                     mixpanel: true,
@@ -895,27 +915,17 @@ export const productAnalytics = {
                 },
             },
             {
-                feature: 'Project-level permissions',
+                feature: 'Dashboard tags',
                 companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
+                    amplitude: false,
+                    mixpanel: false,
+                    heap: false,
+                    pendo: false,
                     posthog: true,
                 },
             },
             {
-                feature: 'Dashboard-level permissions',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Share dashboards externally',
+                feature: 'Embed dashboards',
                 companies: {
                     amplitude: true,
                     mixpanel: true,
@@ -935,43 +945,12 @@ export const productAnalytics = {
                 },
             },
             {
-                feature: 'Subscribe to dashboards',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
                 feature: 'Pinned dashboards',
                 companies: {
                     amplitude: true,
                     mixpanel: true,
                     heap: true,
                     pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Dashboard & insight tags',
-                companies: {
-                    amplitude: false,
-                    mixpanel: false,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-
-            {
-                feature: 'Annotations',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: false,
-                    pendo: false,
                     posthog: true,
                 },
             },
@@ -983,6 +962,46 @@ export const productAnalytics = {
                     heap: true,
                     pendo: true,
                     posthog: false,
+                },
+            },
+            {
+                feature: 'Project level permissions',
+                companies: {
+                    amplitude: true,
+                    mixpanel: true,
+                    heap: true,
+                    pendo: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Share dashboards externally',
+                companies: {
+                    amplitude: true,
+                    mixpanel: true,
+                    heap: false,
+                    pendo: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Subscribe to dashboards',
+                companies: {
+                    amplitude: true,
+                    mixpanel: true,
+                    heap: false,
+                    pendo: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'User level permissions',
+                companies: {
+                    amplitude: true,
+                    mixpanel: true,
+                    heap: true,
+                    pendo: true,
+                    posthog: true,
                 },
             },
         ],

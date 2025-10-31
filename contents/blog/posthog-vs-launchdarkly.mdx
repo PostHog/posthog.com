@@ -18,8 +18,7 @@ seo:
   metaDescription: Looking for the best feature flag and experimentation tool? Compare PostHog vs LaunchDarkly on feature management, A/B testing, and more to find the right fit.
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import ProductComparisonTable from 'components/ProductComparisonTable'
 
 PostHog and LaunchDarkly both help you [de-risk releases](/blog/decouple-deployment-from-release), increase engineering velocity, [configure your app remotely](/blog/feature-flags-vs-configuration), customize experiences, and more.
 
@@ -51,42 +50,46 @@ PostHog is built for high-growth startups. It's simple to implement – we have 
 
 Both tools offer everything you need to use flags and experiments effectivelym but PostHog offers a wider range of tools with greater transparency in all aspects.
 
-<ComparisonTable column1="PostHog" column2="LaunchDarkly">
-  <ComparisonRow column1={true} column2="Partial" feature="Open source" description="Code publicly accessible" />
-  <ComparisonRow column1={true} column2={false} feature="Self-service" description="No need to talk to sales" />
-  <ComparisonRow column1={true} column2={true} feature="All major SDKs" description="JavaScript, Android, iOS, Python, and more" />
-  <ComparisonRow column1={true} column2={true} feature="Proxies" description="Reverse proxy to avoid blockers" />
-  <ComparisonRow column1={true} column2="Pro" feature="API" description="Edit and evaluate flags with API" />
-  <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Faster flags by not having to rely on the server for evaluation" />
-  <ComparisonRow column1={true} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
-  <ComparisonRow column1={true} column2={false} feature="SQL" description="Query flag and product data directly via SQL" />
-  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Real user playback of flag session" />
-  <ComparisonRow column1={true} column2={false} feature="User surveys" description="Collect and analyze feedback, run NPS and PMF surveys " />
-  <ComparisonRow column1={true} column2={true} feature="Customer data platform" description="Sync data with third-party tools" />
-  <ComparisonRow column1={true} column2={false} feature="Data warehouse" description="A single source for all your important data" />
-  <ComparisonRow column1={true} column2={false} feature="Notebooks" description="Ad-hoc analysis and collaboration" />
-  <ComparisonRow column1={true} column2={false} feature="Dark mode" description="Choose between light and dark UI" />
-  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
-
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'launchdarkly']}
+    rows={[
+        'platform.deployment.open_source',
+        { label: 'Self-service', description: 'No need to talk to sales', customValue: true },
+        'platform.developer.sdks',
+        'platform.developer.proxies',
+        'platform.developer.api',
+        'platform.developer.local_evaluation',
+        { label: 'Bootstrapping', description: 'Flags available on frontend application load', customValue: true },
+        'platform.developer.sql',
+        'session_replay',
+        'surveys',
+        'cdp',
+        'data_warehouse',
+        { label: 'Notebooks', description: 'Ad-hoc analysis and collaboration', customValue: true },
+        { label: 'Dark mode', description: 'Choose between light and dark UI', customValue: true },
+    ]}
+/>
 
 ### Feature management
 
 Both PostHog and LaunchDarkly offer all the functionality you expect for feature management using feature flags.
 
-<ComparisonTable column1="PostHog" column2="LaunchDarkly">
-  <ComparisonRow column1={true} column2={true} feature="Boolean flags" description="Simple flags returning true or flag" />
-  <ComparisonRow column1={true} column2={true} feature="Percentage rollouts" description="Target percentages of a group" />
-  <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
-  <ComparisonRow column1={true} column2={true} feature="Multivariate flags" description="Flags with multiple customizable values" />
-  <ComparisonRow column1={true} column2={true} feature="JSON payloads" description="Flags return JSON" />
-  <ComparisonRow column1="Partial" column2={true} feature="Environments" description="Manage flags for dev, staging, prod" />
-  <ComparisonRow column1={true} column2="Enterprise" feature="Scheduling" description="Schedule flags to turn on or off" />
-  <ComparisonRow column1={true} column2="Enterprise" feature="Lifecycle management" description="Display new and old flags" />
-  <ComparisonRow column1={false} column2="Enterprise" feature="Triggers" description="Trigger changes based on metrics" />
-  <ComparisonRow column1={true} column2="Enterprise" feature="Unlimited targeting size" description="Target contexts of any size" />
-  <ComparisonRow column1={true} column2={false} feature="Early access management" description="Manage betas, test features" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'launchdarkly']}
+    rows={[
+        'feature_flags.features.boolean_flags',
+        'feature_flags.features.percentage_rollouts',
+        'feature_flags.features.custom_targeting',
+        'feature_flags.features.multivariate_flags',
+        'feature_flags.features.json_payloads',
+        'feature_flags.features.multi_environment',
+        'feature_flags.features.flag_scheduling',
+        { label: 'Lifecycle management', description: 'Display new and old flags', customValue: true },
+        { label: 'Triggers', description: 'Trigger changes based on metrics', customValue: false },
+        { label: 'Unlimited targeting size', description: 'Target contexts of any size', customValue: true },
+        'feature_flags.features.early_access_management',
+    ]}
+/>
 
 LaunchDarkly’s enterprise plan unlocks advanced workflow features like scheduling, lifecycle management, triggers, and more. PostHog’s [API](/docs/api) enables you to mimic this functionality if needed, but it isn’t built into the UI yet.
 
@@ -94,15 +97,18 @@ LaunchDarkly’s enterprise plan unlocks advanced workflow features like schedul
 
 PostHog and LaunchDarkly have relatively similar experimentation feature sets, enabling you to run [A/B/n tests](/tutorials/abn-testing) with custom goals and calculate if they have a statistically significant impact.
 
-<ComparisonTable column1="PostHog" column2="LaunchDarkly">
-  <ComparisonRow column1="1M requests per month" column2="None, paid add-on" feature="Free usage" description="How many experiments can you run for free?" />
-  <ComparisonRow column1={true} column2={true} feature="Custom goals" description="Customize metrics that test tracks" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
-  <ComparisonRow column1={true} column2={true} feature="Statistical significance calculation" description="Calculate if changes make a statistically significant impact" />
-  <ComparisonRow column1={true} column2={true} feature="Split testing" description="Split participants into groups" />
-  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={true} column2={false} feature="Recommended run time" description="Calculate the recommended run time for your experiments" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'launchdarkly']}
+    rows={[
+        { label: 'Free usage', description: 'How many experiments can you run for free?', customValue: '1M requests per month' },
+        'experiments.features.custom_goals',
+        'experiments.features.secondary_metrics',
+        'experiments.features.statistical_significance',
+        'experiments.features.split_testing',
+        'experiments.features.multivariate_testing',
+        'experiments.features.recommended_run_time',
+    ]}
+/>
 
 PostHog automatically calculates a recommended run time based on past data and minimally acceptable improvements. This helps you avoid the [peeking problem](/blog/ab-testing-mistakes) and end your experiment at the right time.
 
@@ -190,30 +196,36 @@ To give you an idea of what pricing looks like in reality, here are some example
 
 Although LaunchDarkly has basic reporting features, PostHog has a more expansive analytics suite. Visualizations, funnels, retention, SQL querying, and session replays are all integrated with flags and A/B testing data. This enables you to do deeper analysis of their impact and combine them with other product and usage data.
 
-<ComparisonTable column1="PostHog" column2="LaunchDarkly">
-  <ComparisonRow column1={true} column2={true} feature="Analytics" description="Capture usage and calls related to flags" />
-  <ComparisonRow column1={true} column2={true} feature="Trends" description="Graphs of flag usage" />
-  <ComparisonRow column1={true} column2={false} feature="Funnel visualization" description="Analyze impact of flags on funnels" />
-  <ComparisonRow column1={true} column2={false} feature="Retention" description="User retention related to flags" />
-  <ComparisonRow column1={true} column2={false} feature="Breakdowns" description="Breakdown analytics by properties" />
-  <ComparisonRow column1={true} column2={false} feature="Dashboards" description="Multiple customizable insights for a flag" />
-  <ComparisonRow column1={true} column2={false} feature="Non-flag data" description="Combine flag data with other product data" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'launchdarkly']}
+    rows={[
+        { label: 'Analytics', description: 'Capture usage and calls related to flags', customValue: true },
+        'product_analytics.trends',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        { label: 'Breakdowns', description: 'Breakdown analytics by properties', customValue: true },
+        'dashboards',
+        { label: 'Non-flag data', description: 'Combine flag data with other product data', customValue: true },
+    ]}
+/>
 
 ### Integrations
 
 Both PostHog and LaunchDarkly have a range of integrations that enable them to import, export, enhance, and make use of data. 
 
-<ComparisonTable column1="PostHog" column2="LaunchDarkly">
-  <ComparisonRow column1={true} column2={false} feature="Free integrations" description="Use integrations on the free plan" />
-  <ComparisonRow column1={true} column2="Enterprise" feature="Exports" description="Export data to other sources" />
-  <ComparisonRow column1={true} column2={true} feature="Imports" description="Import data from source" />
-  <ComparisonRow column1={true} column2={true} feature="Slack" description="Alerts for Slack" />
-  <ComparisonRow column1={true} column2={true} feature="Microsoft Teams" description="Alerts for Microsoft Teams" />
-  <ComparisonRow column1={true} column2={true} feature="Zapier" description="Trigger Zapier automations" />
-  <ComparisonRow column1="Two-way" column2="One-way" feature="Sentry" description="Connect to Sentry data" />
-  <ComparisonRow column1={false} column2={true} feature="Edge tools" description="Use edge networks" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'launchdarkly']}
+    rows={[
+        { label: 'Free integrations', description: 'Use integrations on the free plan', customValue: true },
+        'platform.integrations.exports',
+        'platform.integrations.imports',
+        'platform.integrations.slack',
+        'platform.integrations.microsoft_teams',
+        'platform.integrations.zapier',
+        'platform.integrations.sentry',
+        { label: 'Edge tools', description: 'Use edge networks', customValue: false },
+    ]}
+/>
 
 LaunchDarkly has more pre-built integrations, but some are only available on higher paid plans, and others replicate functionality built-in to PostHog as standard. These include environments as a service, observability tools, workflow management, and more.
 
@@ -225,17 +237,20 @@ PostHog’s [data warehouse](/docs/data-warehouse) is in private beta and will s
 
 Both PostHog and LaunchDarkly enable companies to remain secure and compliant with privacy regulations. Companies can customize the levels of user privacy related to these platforms to their needs.
 
-<ComparisonTable column1="PostHog" column2="LaunchDarkly">
-  <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
-  <ComparisonRow column1={true} column2={true} feature="History, audit logs" description="Manage and view flag edits and related users" />
-  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
-  <ComparisonRow column1={true} column2={true} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
-  <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
-  <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
-  <ComparisonRow column1="Enterprise" column2="$10/seat/month or Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
-  <ComparisonRow column1={false} column2="Enterprise" feature="Approvals" description="Require approvals to change flags" />
-  <ComparisonRow column1="Enterprise" column2="Enterprise" feature="Permissioning" description="Control who can edit and modify flags" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'launchdarkly']}
+    rows={[
+        'platform.security.user_privacy_options',
+        'platform.security.history_audit_logs',
+        'platform.security.gdpr_ready',
+        'platform.security.hipaa_ready',
+        'platform.security.soc2_certified',
+        'platform.security.two_factor_auth',
+        'platform.security.saml_sso',
+        { label: 'Approvals', description: 'Require approvals to change flags', customValue: false },
+        { label: 'Permissioning', description: 'Control who can edit and modify flags', customValue: 'Enterprise' },
+    ]}
+/>
 
 Many of LaunchDarkly’s advanced compliance tools are only available on its enterprise plans. PostHog also features SSO and SAML in its enterprise edition.
 

@@ -18,9 +18,7 @@ seo:
   metaDescription: Looking for the best A/B testing tool? Compare PostHog vs Statsig on A/B testing, feature flags, analytics, and more to find the right fit.
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonHeader } from 'components/ComparisonTable/header'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import ProductComparisonTable from 'components/ProductComparisonTable'
 
 PostHog and Statsig both offer A/B testing and feature flags, but they're different in two important ways:
 
@@ -52,19 +50,22 @@ We update [our changelog](/changelog) with a recap of new features every week, a
 
 ### Platform
 
-<ComparisonTable column1="PostHog" column2="Statsig">
-  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Test changes and analyze impact" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
-  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
-  <ComparisonRow column1={true} column2={true} feature="Dynamic config" description="Replace hard-coded values in your app with config values" />
-  <ComparisonRow column1={true} column2={true} feature="Web session replays" description="Watch real users use your web app; debug behavior" />
-  <ComparisonRow column1={true} column2={false} feature="Mobile session replays" description="Watch real users use your native mobile app" />
-  <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
-  <ComparisonRow column1={true} column2={false} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
-  <ComparisonRow column1={true} column2={false} feature="Open source" description="Code publicly accessible" />
-  <ComparisonRow column1="Beta" column2={true} feature="Data warehouse experiments" description="Run A/B tests natively on data in your existing warehouse" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'statsig']}
+    rows={[
+        'experiments',
+        'feature_flags',
+        'product_analytics',
+        'web_analytics',
+        { label: 'Dynamic config', description: 'Replace hard-coded values in your app with config values', customValue: true },
+        { label: 'Web session replays', description: 'Watch real users use your web app; debug behavior', customValue: true },
+        { label: 'Mobile session replays', description: 'Watch real users use your native mobile app', customValue: false },
+        'surveys',
+        { label: 'Notebooks', description: 'Collaborate on analysis in shareable notebooks', customValue: false },
+        'platform.deployment.open_source',
+        { label: 'Data warehouse experiments', description: 'Run A/B tests natively on data in your existing warehouse', customValue: 'Beta' },
+    ]}
+/>
 
 ### Experimentation
 
@@ -74,19 +75,22 @@ Both tools enable you to run [A/B/n](/tutorials/abn-testing) and [multivariate](
 
 - **PostHog** provides a more intuitive user interface and simpler setup process, making it ideal for teams who prefer a more straightforward approach to experimentation, and tight integration with its other powerful tools.
 
-<ComparisonTable column1="PostHog" column2="Statsig">
-  <ComparisonRow column1={true} column2={true} feature="Custom goals" description="Customize metrics that a test tracks" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
-  <ComparisonRow column1={true} column2={true} feature="Statistical significance calculation" description="Calculate if changes make a statistically significant impact" />
-  <ComparisonRow column1={true} column2={true} feature="Split testing" description="Split participants into groups" />
-  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={true} column2={true} feature="Recommended run time" description="Calculate the recommended run time for your experiments" />
-  <ComparisonRow column1="Bayesian" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the results of an experiment are calculated" />
-  <ComparisonRow column1="Partial" column2={true} feature="Holdout testing" description="Withhold multiple features to measure cumulative impact" />
-  <ComparisonRow column1={false} column2={true} feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." />
-  <ComparisonRow column1={false} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments" />
-  <ComparisonRow column1={false} column2={true} feature="Bonferroni correction" description="Includes α correction when tests are being performed simultaneously" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'statsig']}
+    rows={[
+        'experiments.features.custom_goals',
+        'experiments.features.secondary_metrics',
+        'experiments.features.statistical_significance',
+        { label: 'Split testing', description: 'Split participants into groups', customValue: true },
+        'experiments.features.multivariate_testing',
+        { label: 'Recommended run time', description: 'Calculate the recommended run time for your experiments', customValue: true },
+        { label: 'Statistics engine', description: 'How the results of an experiment are calculated', customValue: 'Bayesian' },
+        { label: 'Holdout testing', description: 'Withhold multiple features to measure cumulative impact', customValue: 'Partial' },
+        { label: 'Multi-armed bandit', description: 'Optimize tests automatically by allocating traffic to the best performing variant.', customValue: false },
+        { label: 'Mutually exclusive experiments', description: 'Isolate user groups for simultaneous, independent experiments', customValue: false },
+        { label: 'Bonferroni correction', description: 'Includes α correction when tests are being performed simultaneously', customValue: false },
+    ]}
+/>
 
 - **Holdout testing:** It's possible to run a [holdout test](/tutorials/holdout-testing) across multiple A/B tests in PostHog. However, the process is more manual than Statsig's, which has built-in functionality to do this.
   
@@ -94,17 +98,20 @@ Both tools enable you to run [A/B/n](/tutorials/abn-testing) and [multivariate](
 
 While both offer the core features you need, Statsig's feature flags are boolean-based, while PostHog supports [multivariate flags with JSON payloads](/docs/feature-flags/creating-feature-flags#served-value) _and_ boolean flags. This provides greater flexibility in testing and deploying different variations of a feature, making them more suitable for complex rollouts.
 
-<ComparisonTable column1="PostHog" column2="Statsig">
-  <ComparisonRow column1={true} column2={true} feature="Boolean flags" description="Simple flags returning true or flag" />
-  <ComparisonRow column1={true} column2={false} feature="Multivariate flags" description="Flags with multiple customizable values" />
-  <ComparisonRow column1={true} column2={false} feature="Payloads" description="Flags with string, number, or JSON payloads" />
-  <ComparisonRow column1={true} column2={true} feature="Percentage rollouts" description="Target percentages of a group" />
-  <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
-  <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flags to turn on or off" />
-  <ComparisonRow column1="Partial" column2={true} feature="Environments" description="Manage flags for dev, staging, prod" />
-  <ComparisonRow column1={true} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
-  <ComparisonRow column1={true} column2={false} feature="Early access management" description="Manage betas, test features" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'statsig']}
+    rows={[
+        'feature_flags.features.boolean_flags',
+        { label: 'Multivariate flags', description: 'Flags with multiple customizable values', customValue: false },
+        { label: 'Payloads', description: 'Flags with string, number, or JSON payloads', customValue: false },
+        'feature_flags.features.percentage_rollouts',
+        'feature_flags.features.custom_targeting',
+        { label: 'Scheduling', description: 'Schedule flags to turn on or off', customValue: true },
+        'feature_flags.features.multi_environment',
+        { label: 'Bootstrapping', description: 'Flags available on frontend application load', customValue: true },
+        { label: 'Early access management', description: 'Manage betas, test features', customValue: false },
+    ]}
+/>
 
 ### Product analytics
 
@@ -114,21 +121,24 @@ Both PostHog and Statsig offer the functionality you expect from product analyti
 
 - **Statsig** does provide some additional insights, such as retention analysis, but its main focus is to use product analytics to set up metrics to run A/B tests on. 
 
-<ComparisonTable column1="PostHog" column2="Statsig">
-  <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual logging" />
-  <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Combine insights into shareable dashboards" />
-  <ComparisonRow column1={true} column2={true} feature="Graphs and trends" description="Build custom insights and visualizations" />
-  <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at a company level" />
-  <ComparisonRow column1={true} column2={true} feature="Funnels" description="Track users through a sequence of events" />
-  <ComparisonRow column1={true} column2={true} feature="Retention analysis" description="Visualize which users stay, for how long" />
-  <ComparisonRow column1={true} column2="In beta" feature="User paths" description="Track user flows and where they drop-off" />
-  <ComparisonRow column1={true} column2={false} feature="Correlation analysis" description="Suggested events and properties that lead to success or failure" />
-  <ComparisonRow column1={true} column2={false} feature="Lifecycle analysis" description="Understand who is dormant, churning, and thriving" />
-  <ComparisonRow column1={true} column2={false} feature="Stickiness insights" description="See how many times users perform an event in a period of time." />
-  <ComparisonRow column1={true} column2={true} feature="Formulas" description="Use custom formulas to calculate unique insights" />
-  <ComparisonRow column1={true} column2={false} feature="Query editor" description="Write your own queries in SQL" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'statsig']}
+    rows={[
+        'product_analytics.features.autocapture',
+        'dashboards',
+        'product_analytics.trends',
+        'product_analytics.features.cohorts',
+        'product_analytics.group_analytics',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.user_paths',
+        'product_analytics.funnels.features.correlation_analysis',
+        { label: 'Lifecycle analysis', description: 'Understand who is dormant, churning, and thriving', customValue: false },
+        { label: 'Stickiness insights', description: 'See how many times users perform an event in a period of time.', customValue: false },
+        'product_analytics.insights.features.formula_mode',
+        'product_analytics.insights.features.sql_editor',
+    ]}
+/>
 
 ### Integrations
 
@@ -136,31 +146,37 @@ Both PostHog and Statsig have a range of integrations that enable them to import
 
 Below is a sample comparison of PostHog and Statsig's integrations. Be sure to checkout [PostHog's full list of integrations](/cdp).
 
-<ComparisonTable column1="PostHog" column2="Statsig">
-   <ComparisonRow column1={true} column2={true} feature="Imports" description="Import data from source" />
-   <ComparisonRow column1={true} column2={true} feature="Exports" description="Export data to other sources" />
-   <ComparisonRow column1={true} column2={false} feature="Zapier" description="Trigger Zapier automations" />
-   <ComparisonRow column1={true} column2={false} feature="Sentry" description="Connect to Sentry data" />
-   <ComparisonRow column1={false} column2={true} feature="Datadog" description="Capture flag data in Datadog" />
-   <ComparisonRow column1={true} column2={true} feature="Slack" description="Alerts for Slack" />
-   <ComparisonRow column1={true} column2={true} feature="Microsoft Teams" description="Alerts for Microsoft Teams" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'statsig']}
+    rows={[
+        'platform.integrations.imports',
+        'platform.integrations.exports',
+        'platform.integrations.zapier',
+        'platform.integrations.sentry',
+        { label: 'Datadog', description: 'Capture flag data in Datadog', customValue: true },
+        'platform.integrations.slack',
+        'platform.integrations.microsoft_teams',
+    ]}
+/>
 
 ### Security and compliance
 
 Both PostHog and LaunchDarkly enable companies to remain secure and compliant with privacy regulations. Companies can customize the levels of user privacy related to these platforms to their needs.
 
-<ComparisonTable column1="PostHog" column2="Statsig">
-  <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
-  <ComparisonRow column1={true} column2={true} feature="History, audit logs" description="Manage and view flag edits and related users" />
-  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
-  <ComparisonRow column1={true} column2="Enterprise" feature="HIPAA-ready" description="Can be compliant with HIPAA" />
-  <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
-  <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
-  <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
-  <ComparisonRow column1={true} column2={true} feature="Approvals" description="Require approvals to change flags" />
-  <ComparisonRow column1={true} column2={true} feature="Permissioning" description="Control who can edit and modify flags" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'statsig']}
+    rows={[
+        { label: 'User privacy options', description: 'Anonymize users, drop personal data', customValue: true },
+        { label: 'History, audit logs', description: 'Manage and view flag edits and related users', customValue: true },
+        'platform.security.gdpr_ready',
+        'platform.security.hipaa_ready',
+        'platform.security.soc2_certified',
+        'platform.security.two_factor_auth',
+        'platform.security.saml_sso',
+        { label: 'Approvals', description: 'Require approvals to change flags', customValue: true },
+        { label: 'Permissioning', description: 'Control who can edit and modify flags', customValue: true },
+    ]}
+/>
 
 ## Frequently asked questions
 

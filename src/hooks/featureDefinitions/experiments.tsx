@@ -177,5 +177,17 @@ export const experimentsFeatures = {
             name: 'Dynamic cohorts',
             description: 'Add new users to an experiment automatically by setting a user property',
         },
+        native_goal_tracking: {
+            name: 'Native goal tracking',
+            description: 'Track impact on goals without external sources',
+        },
+        namespaces: {
+            name: 'Namespaces',
+            description: 'Avoid conflicts by assigning all users to a namespace',
+        },
+        visual_editor: {
+            name: 'Visual editor',
+            description: 'Create and edit experiments in your app',
+        },
     },
 }

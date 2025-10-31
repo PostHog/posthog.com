@@ -18,9 +18,7 @@ seo:
   metaDescription: Looking for the best feature flag and A/B testing tool? Compare PostHog vs GrowthBook on feature flags, experiments, analytics, and more to find the right fit.
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonHeader } from 'components/ComparisonTable/header'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import ProductComparisonTable from 'components/ProductComparisonTable'
 
 PostHog and GrowthBook both provide open source, self-serve feature flags and experimentation, but they're different in two important ways:
 
@@ -67,34 +65,39 @@ PostHog needs none of this. You use the same app and SDKs for managing and evalu
 
 Both PostHog and GrowthBook have the infrastructure to use flags and experiments effectively with your current app. PostHog has a wider range of product and data tools built in, while GrowthBook relies on third-party integrations
 
-<ComparisonTable column1="PostHog" column2="GrowthBook">
-  <ComparisonRow column1={true} column2={true} feature="Open source" description="Code publicly accessible" />
-  <ComparisonRow column1={true} column2={true} feature="Self-service" description="No need to talk to sales" />
-  <ComparisonRow column1="14" column2="11" feature="SDKs" description="Including JavaScript, Android, iOS, and Python" />
-  <ComparisonRow column1={true} column2={false} feature="Native data sources" description="Compute metrics and results without integrations" />
-  <ComparisonRow column1={true} column2={true} feature="Proxies" description="Reverse proxy to avoid blockers" />
-  <ComparisonRow column1={true} column2={true} feature="Self-hostable" description="Host on your own infrastructure" />
-  <ComparisonRow column1={true} column2="Beta" feature="API" description="Edit and evaluate flags with API" />
-  <ComparisonRow column1={true} column2={true} feature="Local evaluation (aka streaming)" description="Faster flags by not having to rely on the server for evaluation" />
-  <ComparisonRow column1={true} column2={true} feature="SQL" description="Query flag and product data directly via SQL" />
-  <ComparisonRow column1={true} column2={false} feature="Session replays" description="Real user playback of flag session" />
-  <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Simple dashboard of aggregate traffic, sources, campaigns, and session metrics" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'growthbook']}
+    rows={[
+        'platform.deployment.open_source',
+        'platform.developer.sdks',
+        'platform.developer.native_data_sources',
+        'platform.developer.proxies',
+        'platform.deployment.self_host',
+        'platform.developer.api',
+        'platform.developer.local_evaluation',
+        'platform.developer.sql',
+        'session_replay',
+        'web_analytics',
+    ]}
+/>
 
 ### Feature flags
 
 Both PostHog and GrowthBook offer all the functionality you expect from feature flags. 
 
-<ComparisonTable column1="PostHog" column2="GrowthBook">
-  <ComparisonRow column1={true} column2={true} feature="Boolean flags" description="Simple flags returning true or flag" />
-  <ComparisonRow column1={true} column2={true} feature="Percentage rollouts" description="Target percentages of a group" />
-  <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
-  <ComparisonRow column1={true} column2={true} feature="JSON payloads" description="Flags return JSON" />
-  <ComparisonRow column1="Partial" column2={true} feature="Environments" description="Manage flags for dev, staging, prod" />
-  <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flags to turn on or off" />
-  <ComparisonRow column1={true} column2={false} feature="Early access management" description="Manage betas, test features" />
-  <ComparisonRow column1={true} column2={false} feature="Bootstrapping" description="Flags available on frontend application load" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'growthbook']}
+    rows={[
+        'feature_flags.features.boolean_flags',
+        'feature_flags.features.percentage_rollouts',
+        'feature_flags.features.custom_targeting',
+        'feature_flags.features.json_payloads',
+        'feature_flags.features.multi_environment',
+        'feature_flags.features.flag_scheduling',
+        'feature_flags.features.early_access_management',
+        'feature_flags.features.bootstrapping',
+    ]}
+/>
 
 - **Targeting:** GrowthBook's custom targeting using attributes must be set every session and defined in-app before use. It's also only available on the paid Pro plan. PostHog automatically sets its equivalent ([properties](/docs/getting-started/person-properties)) on users. You don’t need to pre-define them and unlimited custom values are free.
 
@@ -108,18 +111,21 @@ Experimentation is where PostHog and GrowthBook’s functionality diverges. Both
 
 - PostHog provides a simpler interface and no need to write SQL or connect to external services – a better experience for users without a background in data science.
 
-<ComparisonTable column1="PostHog" column2="GrowthBook">
-  <ComparisonRow column1={true} column2={true} feature="Custom goals" description="Customize metrics that test tracks" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
-  <ComparisonRow column1={true} column2={false} feature="Native goal tracking" description="Track impact on goals without external sources" />
-  <ComparisonRow column1={true} column2={true} feature="Statistical significance calculation" description="Calculate if changes make a statistically significant impact" />
-  <ComparisonRow column1={true} column2={true} feature="Split testing" description="Split participants into groups" />
-  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={true} column2={false} feature="Recommended run time" description="Calculate the recommended run time for your experiments" />
-  <ComparisonRow column1={false} column2={true} feature="Namespaces" description="Avoid conflicts by assigning all users to a namespace" />
-  <ComparisonRow column1="Beta" column2={true} feature="Visual editor" description="Create and edit experiments in your app" />
-  <ComparisonRow column1="Bayesian" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the success of an experiment is calculated" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'growthbook']}
+    rows={[
+        'experiments.features.custom_goals',
+        'experiments.features.secondary_metrics',
+        'experiments.features.native_goal_tracking',
+        'experiments.features.statistical_significance',
+        'experiments.features.split_testing',
+        'experiments.features.multivariate_testing',
+        'experiments.features.recommended_run_time',
+        'experiments.features.namespaces',
+        'experiments.features.visual_editor',
+        'experiments.features.statistics_engine',
+    ]}
+/>
 
 - **Recommended run time:** PostHog automatically calculates a recommended run time based on past data and minimally acceptable improvements. This helps you avoid the [peeking problem](/blog/ab-testing-mistakes) and end your experiment at the right time.
 
@@ -135,16 +141,16 @@ GrowthBook offers no reporting or analytics tools other than the ability to quer
 
 PostHog provides all the visualizations and product tools for evaluating the success of your features and app. These include trends, funnels, retention, SQL querying, and session replays integrated with your flags and A/B testing data. This enables you to do deeper analysis of their impact and combine them with other product and usage data.
 
-<ComparisonTable column1="PostHog" column2="GrowthBook">
-  <ComparisonRow column1={true} column2={false} feature="Analytics" description="Capture usage and calls related to flags" />
-  <ComparisonRow column1={true} column2={true} feature="Experiment reports" description="Show the results of an experiment" />
-  <ComparisonRow column1={true} column2={false} feature="Trends" description="Graphs of flag usage" />
-  <ComparisonRow column1={true} column2={false} feature="Funnel visualization" description="Analyze impact of flags on funnels" />
-  <ComparisonRow column1={true} column2={false} feature="Retention" description="User retention related to flags" />
-  <ComparisonRow column1={true} column2={true} feature="Breakdowns" description="Breakdown reports by properties" />
-  <ComparisonRow column1={true} column2={false} feature="Dashboards" description="Multiple customizable insights for a flag" />
-  <ComparisonRow column1={true} column2={false} feature="Non-flag data" description="Combine flag data with other product data" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'growthbook']}
+    rows={[
+        'product_analytics',
+        'product_analytics.trends',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'dashboards',
+    ]}
+/>
 
 ### Pricing
 

@@ -79,6 +79,10 @@ export const sessionReplayFeatures = {
                 name: 'Performance monitoring',
                 description: 'Track network events and performance metrics within a session',
             },
+            network_monitor: {
+                name: 'Network monitor',
+                description: 'Monitor network activity during sessions',
+            },
             dom_explorer: {
                 name: 'DOM explorer',
                 description: 'Explore an interactive snapshot of replays',
@@ -129,6 +133,14 @@ export const sessionReplayFeatures = {
             playlists: {
                 name: 'Playlists',
                 description: 'Sort recordings into static and dynamic playlists',
+            },
+            share_replays: {
+                name: 'Share replays',
+                description: 'Generate timestamped short links for sharing',
+            },
+            notes_on_replays: {
+                name: 'Add notes to replays',
+                description: 'Add notes to a timebar when sharing',
             },
         },
     },

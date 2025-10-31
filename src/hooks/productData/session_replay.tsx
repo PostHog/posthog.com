@@ -497,7 +497,99 @@ window.posthog.onFeatureFlags(function () {
                 key: 'posthog',
             },
         ],
-        rows: ['session_replay'],
+        rows: ['session_replay', 'heatmaps'],
+        features: [
+            {
+                feature: 'Session replay',
+                type: 'header',
+                companies: {
+                    fullstory: '',
+                    hotjar: '',
+                    matomo: '',
+                    logrocket: '',
+                    clarity: '',
+                    posthog: '',
+                },
+            },
+            {
+                feature: 'Heatmaps',
+                type: 'header',
+                companies: {
+                    fullstory: '',
+                    hotjar: '',
+                    matomo: '',
+                    logrocket: '',
+                    clarity: '',
+                    posthog: '',
+                },
+            },
+            {
+                feature: 'Clickmaps',
+                companies: {
+                    fullstory: false,
+                    hotjar: true,
+                    matomo: true,
+                    logrocket: true,
+                    clarity: true,
+                    posthog: false,
+                },
+            },
+            {
+                feature: 'Heatmaps',
+                companies: {
+                    fullstory: false,
+                    hotjar: true,
+                    matomo: true,
+                    logrocket: true,
+                    clarity: true,
+                    posthog: false,
+                },
+            },
+            {
+                feature: 'Rage clicks',
+                companies: {
+                    fullstory: false,
+                    hotjar: true,
+                    matomo: false,
+                    logrocket: true,
+                    clarity: false,
+                    posthog: false,
+                },
+            },
+            {
+                feature: 'Save heatmaps',
+                companies: {
+                    fullstory: false,
+                    hotjar: true,
+                    matomo: true,
+                    logrocket: true,
+                    clarity: true,
+                    posthog: false,
+                },
+            },
+            {
+                feature: 'Scrollmaps',
+                companies: {
+                    fullstory: false,
+                    hotjar: true,
+                    matomo: true,
+                    logrocket: false,
+                    clarity: true,
+                    posthog: false,
+                },
+            },
+            {
+                feature: 'Toolbar',
+                companies: {
+                    fullstory: false,
+                    hotjar: true,
+                    matomo: false,
+                    logrocket: true,
+                    clarity: false,
+                    posthog: false,
+                },
+            },
+        ],
     },
     pairsWith: [
         {

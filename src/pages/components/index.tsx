@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Explorer from 'components/Explorer'
 import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -14,6 +13,58 @@ import { useCustomers } from 'hooks/useCustomers'
 import { OSInput, OSTextarea, OSSelect } from 'components/OSForm'
 import { Fieldset } from 'components/OSFieldset'
 import ProductComparisonTable from 'components/ProductComparisonTable'
+import ReaderView from 'components/ReaderView'
+import { TreeMenu } from 'components/TreeMenu'
+import { internalToolsNav } from '../../navs/internalTools'
+
+// Create table of contents for right sidebar
+const tableOfContents = [
+    {
+        value: 'Open graph image templates',
+        url: 'og-templates',
+        depth: 0,
+    },
+    {
+        value: 'OSButton',
+        url: 'osbutton',
+        depth: 0,
+    },
+    {
+        value: 'Form elements',
+        url: 'form-elements',
+        depth: 0,
+    },
+    {
+        value: 'OSInput',
+        url: 'osinput',
+        depth: 1,
+    },
+    {
+        value: 'OSTextarea',
+        url: 'ostextarea',
+        depth: 1,
+    },
+    {
+        value: 'Fieldset',
+        url: 'fieldset',
+        depth: 1,
+    },
+    {
+        value: 'OSSelect',
+        url: 'osselect',
+        depth: 0,
+    },
+    {
+        value: 'Competitor feature matrix',
+        url: 'competitor-matrix',
+        depth: 0,
+    },
+    {
+        value: 'useCustomers',
+        url: 'usecustomers',
+        depth: 0,
+    },
+]
 
 export default function Components(): JSX.Element {
     const { customers } = useCustomers()
@@ -55,26 +106,16 @@ export default function Components(): JSX.Element {
     return (
         <>
             <SEO title="Components - PostHog" description="Components for PostHog" image={`/images/og/default.png`} />
-            <Explorer
-                template="generic"
-                slug="components"
+            <ReaderView
                 title="Components"
-                // options below only needed to override matching the slug
-                // teamName="product-analytics"
-                // roadmapCategory="product-analytics"
-                // changelogCategory="product-analytics"
-                // accentImage={
-                //     <CloudinaryImage
-                //         src="https://res.cloudinary.com/dmukukwp6/image/upload/party_mode_34c15751e4.png"
-                //         alt="Screenshot of hedgehog mode's party mode"
-                //         className="w-full"
-                //         placeholder="none"
-                //     />
-                // }
+                leftSidebar={<TreeMenu items={internalToolsNav} />}
+                tableOfContents={tableOfContents}
+                description="Component showcase and internal tooling for PostHog development"
+                showQuestions={false}
             >
                 <div className="@container text-primary">
                     <div className="space-y-12">
-                        <section>
+                        <section id="og-templates">
                             <h2>Open graph image templates</h2>
 
                             <div className="inline-block w-[600px] h-[315px] border border-primary bg-accent">
@@ -82,7 +123,7 @@ export default function Components(): JSX.Element {
                             </div>
                         </section>
                         {/* OSButton Component Showcase */}
-                        <section>
+                        <section id="osbutton">
                             <h2 className="">
                                 <code>&lt;OSButton /&gt;</code>
                             </h2>
@@ -1296,11 +1337,11 @@ export default function Components(): JSX.Element {
                         </section>
 
                         {/* Form Elements Section */}
-                        <section>
+                        <section id="form-elements">
                             <h2 className="">Form elements</h2>
 
                             {/* OSInput Component Showcase */}
-                            <div className="mb-8">
+                            <div className="mb-8" id="osinput">
                                 <h3 className="text-xl font-semibold mb-4">
                                     <code>&lt;OSInput /&gt;</code>
                                 </h3>
@@ -1464,7 +1505,7 @@ export default function Components(): JSX.Element {
                             </div>
 
                             {/* OSTextarea Component Showcase */}
-                            <div className="mb-8">
+                            <div className="mb-8" id="ostextarea">
                                 <h3 className="text-xl font-semibold mb-4">
                                     <code>&lt;OSTextarea /&gt;</code>
                                 </h3>
@@ -1534,7 +1575,7 @@ export default function Components(): JSX.Element {
                             </div>
 
                             {/* Fieldset Component Showcase */}
-                            <div className="mb-8">
+                            <div className="mb-8" id="fieldset">
                                 <h3 className="text-xl font-semibold mb-4">
                                     <code>&lt;Fieldset /&gt;</code>
                                 </h3>
@@ -1709,7 +1750,7 @@ export default function Components(): JSX.Element {
                         </section>
 
                         {/* OSSelect Component Showcase */}
-                        <section>
+                        <section id="osselect">
                             <h2 className="">
                                 <code>&lt;OSSelect /&gt;</code>
                             </h2>
@@ -1935,7 +1976,7 @@ export default function Components(): JSX.Element {
                             </div>
                         </section>
 
-                        <section>
+                        <section id="competitor-matrix">
                             <h2 className="">Competitor feature matrix</h2>
 
                             <p className="mb-6 text-secondary">
@@ -2004,7 +2045,7 @@ export default function Components(): JSX.Element {
                             </div>
                         </section>
 
-                        <section>
+                        <section id="usecustomers">
                             <h2 className="">
                                 <code>useCustomers</code>
                             </h2>
@@ -2039,7 +2080,7 @@ export default function Components(): JSX.Element {
                         </section>
                     </div>
                 </div>
-            </Explorer>
+            </ReaderView>
         </>
     )
 }

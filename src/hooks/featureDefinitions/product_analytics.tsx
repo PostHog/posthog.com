@@ -6,9 +6,45 @@ export const productAnalyticsFeatures = {
         docsUrl: '/docs/product-analytics',
     },
     features: {
+        custom_events: {
+            name: 'Custom events',
+            description: 'Capture and analyze any type of event',
+        },
+        custom_properties: {
+            name: 'Custom properties',
+            description: 'Add more data to custom events or users',
+        },
         autocapture: {
             name: 'Autocapture',
             description: 'Capture events without manual tracking',
+        },
+        cohorts: {
+            name: 'Cohorts',
+            description: 'Combine users based on properties and events for group analysis',
+        },
+        user_profiles: {
+            name: 'User profiles',
+            description: 'View user demographic data such as country, language, and device type',
+        },
+        monetization_analytics: {
+            name: 'Monetization analytics',
+            description: 'Track purchase value, LTV, and other revenue metrics',
+        },
+        advertising_analytics: {
+            name: 'Advertising analytics',
+            description: 'Track ROI on Google Ads and other marketing campaigns',
+        },
+        real_time_view: {
+            name: 'Real-time view',
+            description: 'Monitor activity on your site or app as it happens',
+        },
+        predictive_insights: {
+            name: 'Predictive insights',
+            description: 'AI-powered alerts when metrics change',
+        },
+        toolbar: {
+            name: 'Toolbar',
+            description: 'View insights on your live website or app with an overlay',
         },
     },
     insights: {

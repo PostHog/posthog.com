@@ -35,6 +35,7 @@ import { fivetran } from '../../hooks/competitorData/fivetran'
 import { baremetrics } from '../../hooks/competitorData/baremetrics'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
 import { stripe } from '../../hooks/competitorData/stripe'
+import { fathom } from '../../hooks/competitorData/fathom'
 
 // Feature definition imports
 import { errorTrackingFeatures } from '../../hooks/featureDefinitions/error_tracking'
@@ -51,6 +52,7 @@ import { dashboardsFeatures } from '../../hooks/featureDefinitions/dashboards'
 import { cdpFeatures } from '../../hooks/featureDefinitions/cdp'
 import { dataWarehouseFeatures } from '../../hooks/featureDefinitions/data_warehouse'
 import { llmAnalyticsFeatures } from '../../hooks/featureDefinitions/llm_analytics'
+import { heatmapsFeatures } from '../../hooks/featureDefinitions/heatmaps'
 
 interface RowConfig {
     // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
@@ -89,6 +91,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         cdp: cdpFeatures,
         data_warehouse: dataWarehouseFeatures,
         llm_analytics: llmAnalyticsFeatures,
+        heatmaps: heatmapsFeatures,
     }
 
     // Resolve nested nodes by dot-path
@@ -423,6 +426,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         baremetrics,
         chartmogul,
         stripe,
+        fathom,
     }
 
     // Helper to get feature value from competitor data
