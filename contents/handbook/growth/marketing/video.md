@@ -34,6 +34,48 @@ showTitle: true
 
 - Be ready to be on camera or have a plan for a replacement. None of us are professional actors (well, maybe some...) but it is better for us to create something real than something generic, even if it isn't perfect. We'll coach and support you through it.
 
+## How to record Loom walkthroughs for us
+
+When recording internal case studies or other video assets, it’s important that all footage is captured in HD (1080p or ideally 4K). Lower-resolution recordings (like 720p) make it difficult for viewers to read on-screen text and limit what the video team can do during editing — such as cropping, zooming, or resizing.
+
+Unfortunately, Loom’s Starter/Creator Lite roles only support 720p recording, so you’ll need to make sure you have the right setup before recording.
+
+> **Want a walkthrough video?** <PrivateLink url="https://www.loom.com/share/45a5c77c75c5400589c06e1edb47ac60?sid=7c74d7ec-076b-4d6c-8ca0-b8a55c45e0a5">Here's an explainer.</PrivateLink>
+
+##¢ Step-by-step setup
+
+1. Check your Loom role
+- Log in to Loom and check your user role ([example screenshot](https://d.pr/i/AaoWCN)).
+- If you’re listed as a **Creator Lite**, click **Request Role Upgrade**.
+- In the request box, note that you need the **Creator** role to record HD assets for the PostHog video team.
+- Upgrades can take up to a day — plan ahead.
+
+2. Install the Loom Desktop App
+- [Download the desktop app](https://d.pr/i/ndABtB).
+- The **browser app and extension do not support 4K recording**.
+
+3. Update video quality settings
+- Open the Loom Desktop App.
+- Click `… More → Settings → Video & audio`.
+- Set **Video quality** to **4K** (or **1080p** if 4K isn’t available).
+- Do **not** leave it on *Auto*.
+
+### Recording guidelines
+
+Loom’s has some [recording tips for a great video](https://support.loom.com/hc/en-us/articles/23267938305565-Recording-tips-for-a-great-video), but we also suggest the following:
+
+- Introduce yourself
+Start by saying your name and role at PostHog.
+
+- Avoid recording sensitive data
+Try not to show customer-sensitive information such as emails or IDs. If you do, leave **timestamped comments** in Loom noting what needs to be blurred or removed.
+
+- Be human
+Mistakes are fine — no need to restart! Just pause, regroup, and keep going. The video team will handle trimming in post-production.
+
+- End with a clear outro
+Example: “Hopefully this helps illustrate how PostHog uses Data Warehouse to track metrics. Thanks for watching!”
+
 ## What does success look like?
 
 1. We make a variety of high quality videos. We trust our taste for this. Brand and content are cornerstones of PostHog’s marketing and video should contribute to this.
