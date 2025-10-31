@@ -82,8 +82,12 @@ function resolveRelativeLink(url?: string, href?: string) {
     const relativeRegex = /^\.\.?\//
     const isMarkdownLink = relativeRegex.test(url) && mdRegex.test(url)
     if (isMarkdownLink) {
-        const urlObj = new URL(url, href)
-        return urlObj.pathname.replace(mdRegex, '') + urlObj.search + urlObj.hash
+        try {
+            const urlObj = new URL(url, href)
+            return urlObj.pathname.replace(mdRegex, '') + urlObj.search + urlObj.hash
+        } catch {
+            return url
+        }
     }
     return url
 }
