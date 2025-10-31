@@ -14,7 +14,7 @@ At its most basic level, a survey is a collection of response events. If you wan
 
 ```js-web
 'use client'
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 export default function Feedback() {
   const posthog = usePostHog();
@@ -81,7 +81,7 @@ To display a survey as a popover, simply call `displaySurvey` with the survey ID
 ```js
 import React from 'react';
 import { DisplaySurveyType } from 'posthog-js';
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
 
@@ -128,7 +128,7 @@ To display a survey inline within a specific element, specify the `displayType` 
 ```js
 import React from 'react';
 import { DisplaySurveyType } from 'posthog-js';
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
 
@@ -181,7 +181,7 @@ The legacy `renderSurvey` method renders an **unstyled** survey in a specific HT
 ```js
 import './App.css';
 import React from 'react';
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 function App() {
   const posthog = usePostHog();
@@ -264,7 +264,7 @@ As an example, we can use `getActiveMatchingSurveys()` to make our Next.js feedb
 
 ```js-web
 'use client'
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 import { useEffect, useState } from 'react';
 
 export default function Feedback() {

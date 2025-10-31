@@ -357,12 +357,12 @@ export default function CDP(): JSX.Element {
                 </blockquote>
                 <p>So what if it didn’t have to be this way?</p>
                 <p>
-                    That’s the idea with PostHog’s customer data infrastructure. everything can finally live in one
-                    place, and can be analyzed with any of PostHog’s insight tools or BI visualizations. it doesn’t
+                    That’s the idea with PostHog’s customer data infrastructure. Everything can finally live in one
+                    place, and can be analyzed with any of PostHog’s insight tools or BI visualizations. It doesn’t
                     require a data engineer, and it scales with you as you grow.
                 </p>
                 <p>
-                    A customer data platform isn't just event pipelines and destinations. it’s not a regurgitated feed
+                    A customer data platform isn't just event pipelines and destinations. It’s not a regurgitated feed
                     of user activity. it’s not just a SQL editor and some transformations.
                 </p>
                 <p>

@@ -113,7 +113,7 @@ These can all be offset by early adopters if there is something important that i
 
 Small signals that you know what you are doing are the creator of a technical product are important. A privacy policy, for example, or no obvious security flaws. No typos, nice design - the details all add up here.
 
-Transparency is a way to build on this. Explain exactly how you handle data, and what your business is aiming to be. If you've got VC funding, some users will assume you're somehow going to harvest and sell data if there's no clear businss model.
+Transparency is a way to build on this. Explain exactly how you handle data, and what your business is aiming to be. If you've got VC funding, some users will assume you're somehow going to harvest and sell data if there's no clear business model.
 
 In the rush to get a Minimum Viable Product out, it's easy to overlook the importance of security. A little effort here can go a long way.
 

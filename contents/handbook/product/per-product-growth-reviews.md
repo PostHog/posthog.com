@@ -104,4 +104,4 @@ Very similar to the above, except that the metrics walkthrough doesn't happen in
 - [Main growth review document](https://docs.google.com/document/d/1MgunwZ4_scm7RaEBocyQJzQUt48kTkiBX_529Do50F4/edit#heading=h.na8qqkjykso0) (Session Replay example)
 - [Metrics overview spreadsheet](https://docs.google.com/spreadsheets/d/1Q_hibP9Pv4b8H_9guceKXNrTUP0B_5hWvmiM-EJ2LrU/edit#gid=541742743)
 - [PostHog notebook with relevant usage graphs](https://us.posthog.com/project/2/notebooks/6FwGbwN5) (Session Replay example)
-- [Metabase dashboard for per-product revenue](http://metabase-prod-us/dashboard/39-revenue-growth-by-product?product=session_replay)
+- [Metabase dashboard for per-product revenue](https://metabase.prod-us.posthog.dev/dashboard/39-revenue-growth-by-product?product=session_replay)
