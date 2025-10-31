@@ -48,7 +48,9 @@ And these are the products we think we'll focus on next:
 - 100x the toolbar
 - Metrics
 - APM
+- BI over any database (not just those synced to our data warehouse)
 - Support -> PRs
+- AI answers and docs
 
 ## How to pick which feature within an existing product to build
 
