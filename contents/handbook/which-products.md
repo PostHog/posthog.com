@@ -14,6 +14,7 @@ Until products are built and launched, it's hard to predict which ones will do w
 Products we know will work well if we ship them:
 - Products engineers use at all company stages
   - Think error tracking or feature flags. The [persona doesn't change](/handbook/who-we-build-for#our-current-persona) as the company gets bigger.
+  - Especially true if it works for a 2 person startup, because that means we get in first
 - Products that already have a $1bn competitor in the market (e.g. a company with around $100M in revenue)
 - Products that are very easy to integrate for our existing customers. 
   - For example, users can enable the product in PostHog without needing to make a code change, or products that built on top of data that people are already collecting in PostHog
@@ -33,14 +34,21 @@ Other times you might have an idea for a great product we should build. In that 
 
 ## Next products on deck
 
-From our [roadmap](/roadmap), here's what we're working on next:
+From our [roadmap](/roadmap), here's what we're currently working on:
 
-- Embedded analytics - `#project-embedded-analytics`
+- Endpoints - `#project-endpoints`
 - Logs - `#project-logs`
-- Tasks - currently within `#team-llm-analytics`
-- Customer analytics + Revenue analytics `#team-customer-analytics`
+- Product autonomy - `#team-array`
+- Customer analytics `#team-customer-analytics`
+- Revenue analytics `#team-revenue-analytics`
 - Workflows `#team-workflows`
 - 100x the toolbar
+
+And these are the products we think we'll focus on next:
+- 100x the toolbar
+- Metrics
+- APM
+- Support -> PRs
 
 ## How to pick which feature within an existing product to build
 
