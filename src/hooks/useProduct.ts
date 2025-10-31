@@ -55,7 +55,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             handle: 'workflows',
             color: 'blue',
             colorSecondary: 'sky-blue',
-            category: 'communication',
+            category: 'automation',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
             slug: 'workflows',
             status: 'WIP',
@@ -1736,7 +1736,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             handle: 'webhooks',
             color: 'red',
             colorSecondary: 'sky-blue',
-            category: 'product_os',
+            category: 'automation',
             slug: 'webhooks',
             seo: {
                 title: 'Webhooks - PostHog',

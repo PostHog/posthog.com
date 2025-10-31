@@ -41,7 +41,7 @@ Once PostHog is initialized, you should be able to capture events.
 For this tutorial, let's capture a conversion event on a `<button id="cta">` click. 
 
 ```jsx
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 export function CTAButton() {
   const posthog = usePostHog()
@@ -79,7 +79,7 @@ Use the React hooks to evaluate the experiment flag and render the `<button id="
 
 ```jsx
 // Method one: using the useFeatureFlagVariantKey hook
-import { useFeatureFlagVariantKey } from 'posthog-js/react'
+import { useFeatureFlagVariantKey } from '@posthog/react'
 
 function CTAButton() {
   const variant = useFeatureFlagVariantKey('test-experiment-ff-key') // 'control' | 'test' | null
@@ -91,7 +91,7 @@ function CTAButton() {
 }
 
 // Method two: using the feature flags component
-import { PostHogFeature } from 'posthog-js/react'
+import { PostHogFeature } from '@posthog/react'
 
 function CTAButton() {
   return (

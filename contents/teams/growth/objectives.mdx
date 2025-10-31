@@ -1,0 +1,44 @@
+## Q4 2025 objectives
+
+This team is now back online after a short time of having no assigned engineers to it - the old team did such a great job they now have their own product!
+
+This is also only a half quarter for this team, plus we're onboarding <TeamMember name="Matthew Brooker" photo />.
+
+
+### Cross-Sell
+
+<TeamMember name="Rafael Audibert" photo /> will be working on cross-sell motions to continue easing our customers into adopting more of our products - that's our moat.
+
+- Make use of the huge amount of data we capture for product intent signals inside PostHog.
+- Work with [Team Platform UX](/teams/platform-ux) to improve the sidebar experience for long-term onboarding (activation for our other products).
+- Expose PostHog signals to Array
+  - It's not yet clear what's Growth team's responsibility here. Each team will send individual signals from their product to Array. The intention here at the moment is that Growth team should send signals to foster feature adoption (introduce error tracking, introduce session replay, add a new NPS survey, etc.)
+  - If the feature is actually implemented we should offer some sort of credit to the customer to justify the feature adoption.
+- Stretch goal: Explore the PostHog Ads concept (using the sidebar? using notifications? using email marketing?). Task success implies an MVP that let's us answer whether we should focus on this or not. If so, decide on a plan for it.
+
+### Integrations
+
+<TeamMember name="Matthew Brooker" photo /> will be working on integrations with external partners to drive growth. We already have an MCP and Array but we don't closely integrate with partners.
+
+- Launch our Vercel integration
+- Integrate with other AI tools (and get them to integrate with us) - this can be either via an MCP or custom integration.
+  - PostHog MCP OAuth flow enables Interaction (and any other MCP-consuming tools) to use us, and for us to be available in Claude, ChatGPT pages
+    - Add new self-serve OAuth screen to let apps generate custom OAuth apps
+    - Stretch goal: Metrics on OAuth usage
+  - Expose PostHog natively inside vibecoding platforms (needs buy-in from platforms)
+    - Might require a forward deployed engineer approach
+- Focus on increasing top of funnel adoption - the more sign ups/orgs created the better!
+
+
+## Next quarters
+
+Non-exhaustive list of things we want to work on eventually:
+- 10x the toolbar
+- One-click migration away from competitors
+- Spin up an SDK team
+- Agent Analytics? SDK Analytics? MCP Analytics?
+- Demo environment for customers to try out PostHog with existing data (and relatable to their own business domain)
+- PostHog-billed AI SDK
+  - Don't need to setup an AI account in each provider, just use PostHog's AI SDK.
+- Improved ingestion URL (dynamic, harder to block/guess)
+- New products playground
