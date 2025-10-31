@@ -3778,6 +3778,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/android',
                         },
                         {
+                            name: 'Flutter',
+                            url: '/docs/error-tracking/installation/flutter',
+                        },
+                        {
                             name: 'Manual/API',
                             url: '/docs/error-tracking/installation/manual',
                         },
