@@ -1,4 +1,3 @@
-import React from 'react'
 import { IconWarning } from '@posthog/icons'
 
 export const errorTracking = {
@@ -47,6 +46,12 @@ export const errorTracking = {
             alt: 'Error impact',
             // classes: 'justify-end items-end pl-4 @lg:pl-6',
             // imgClasses: 'rounded-tl-md shadow-2xl',
+        },
+    },
+    videos: {
+        overview: {
+            youtube: '',
+            wistia: 'scuzsr1rcz',
         },
     },
     hog: {
@@ -344,6 +349,31 @@ export const errorTracking = {
                     datadog: false,
                     posthog: true,
                 },
+            },
+        ],
+    },
+    postHogOnPostHog: {
+        title: 'How PostHog uses error tracking',
+        benefits: [
+            {
+                title: 'Track errors',
+                description: 'and identify spikes in exception events',
+            },
+            {
+                title: 'Investigate root causes',
+                description: 'using stack traces and session replays',
+            },
+            {
+                title: 'Triage issues',
+                description: 'by filtering based on severity and impact',
+            },
+            {
+                title: 'Find out when things go wrong',
+                description: 'by setting up alerts for critical errors',
+            },
+            {
+                title: 'Dodge blame',
+                description: 'by assigning errors to someone else',
             },
         ],
     },
