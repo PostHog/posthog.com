@@ -282,7 +282,7 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
     return (
         <ScrollSpyProvider>
             <div className={`not-prose ${className}`}>
-                <div className="@4xl/app-reader:hidden">
+                <div className="@4xl/app-reader:hidden mb-4">
                     <Accordion
                         items={[
                             {
