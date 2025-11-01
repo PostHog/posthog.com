@@ -1376,6 +1376,10 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-tracking',
                     },
                     {
+                        name: 'Onboarding data',
+                        url: '/handbook/onboarding/onboarding-data',
+                    }
+                    {
                         name: 'Sales handover',
                         url: '/handbook/onboarding/sales-handover',
                     },
