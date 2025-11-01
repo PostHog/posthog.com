@@ -1,4 +1,3 @@
-import React from 'react'
 import { IconWarning } from '@posthog/icons'
 
 export const errorTracking = {
@@ -222,16 +221,6 @@ export const errorTracking = {
         },
         companies: [
             {
-                name: 'LogRocket',
-                key: 'logrocket',
-                link: '/blog/posthog-vs-logrocket',
-            },
-            {
-                name: 'Sentry',
-                key: 'sentry',
-                link: '/blog/posthog-vs-sentry',
-            },
-            {
                 name: 'Bugsnag',
                 key: 'bugsnag',
             },
@@ -240,113 +229,128 @@ export const errorTracking = {
                 key: 'datadog',
             },
             {
+                name: 'Glitchtip',
+                key: 'glitchtip',
+            },
+            {
+                name: 'LogRocket',
+                key: 'logrocket',
+                link: '/blog/posthog-vs-logrocket',
+            },
+            {
                 name: 'PostHog',
                 key: 'posthog',
             },
+            {
+                name: 'Rollbar',
+                key: 'rollbar',
+            },
+            {
+                name: 'Sentry',
+                key: 'sentry',
+                link: '/blog/posthog-vs-sentry',
+            },
+            {
+                name: 'Signoz',
+                key: 'signoz',
+            },
         ],
+        rows: ['error_tracking'],
         features: [
             {
                 feature: 'Error alerts',
                 companies: {
-                    sentry: true,
+                    bugsnag: true,
+                    datadog: true,
+                    glitchtip: false,
                     logrocket: true,
-                    bugsnag: true,
-                    datadog: true,
                     posthog: true,
-                },
-            },
-            {
-                feature: 'Exception capture',
-                companies: {
+                    rollbar: true,
                     sentry: true,
-                    logrocket: true,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Issue management',
-                companies: {
-                    sentry: true,
-                    logrocket: false,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Network performance monitoring',
-                companies: {
-                    sentry: true,
-                    logrocket: true,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
+                    signoz: true,
                 },
             },
             {
                 feature: 'Error grouping',
                 companies: {
-                    sentry: true,
-                    logrocket: true,
                     bugsnag: true,
                     datadog: true,
+                    glitchtip: true,
+                    logrocket: true,
                     posthog: true,
+                    rollbar: true,
+                    sentry: true,
+                    signoz: true,
+                },
+            },
+            {
+                feature: 'Exception capture',
+                companies: {
+                    bugsnag: true,
+                    datadog: true,
+                    glitchtip: true,
+                    logrocket: true,
+                    posthog: true,
+                    rollbar: true,
+                    sentry: true,
+                    signoz: true,
+                },
+            },
+            {
+                feature: 'Issue management',
+                companies: {
+                    bugsnag: true,
+                    datadog: true,
+                    glitchtip: true,
+                    logrocket: false,
+                    posthog: true,
+                    rollbar: true,
+                    sentry: true,
+                    signoz: false,
+                },
+            },
+            {
+                feature: 'Network performance',
+                companies: {
+                    bugsnag: false,
+                    datadog: true,
+                    glitchtip: false,
+                    logrocket: true,
+                    posthog: false,
+                    rollbar: false,
+                    sentry: false,
+                    signoz: true,
                 },
             },
             {
                 feature: 'Source map support',
                 companies: {
-                    sentry: true,
-                    logrocket: true,
                     bugsnag: true,
                     datadog: true,
+                    glitchtip: true,
+                    logrocket: true,
                     posthog: true,
+                    rollbar: true,
+                    sentry: true,
+                    signoz: false,
                 },
             },
             {
                 feature: 'Stack tracing',
                 companies: {
-                    sentry: true,
-                    logrocket: false,
                     bugsnag: true,
                     datadog: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Integration with product analytics',
-                companies: {
-                    sentry: false,
+                    glitchtip: true,
                     logrocket: true,
-                    bugsnag: false,
-                    datadog: false,
                     posthog: true,
-                },
-            },
-            {
-                feature: 'Integration with session replays',
-                companies: {
+                    rollbar: true,
                     sentry: true,
-                    logrocket: true,
-                    bugsnag: false,
-                    datadog: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Integration with A/B experiments',
-                companies: {
-                    sentry: false,
-                    logrocket: false,
-                    bugsnag: true,
-                    datadog: false,
-                    posthog: true,
+                    signoz: true,
                 },
             },
         ],
     },
+    integrations: ['ab_experiments', 'product_analytics', 'session_replays'],
     pairsWith: [
         {
             slug: 'session-replay',

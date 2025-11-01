@@ -268,6 +268,33 @@ export const revenueAnalytics = {
                 },
             ],
         },
+        companies: [
+            {
+                name: 'Stripe',
+                key: 'stripe',
+            },
+            {
+                name: 'Mixpanel',
+                key: 'mixpanel',
+            },
+            {
+                name: 'Amplitude',
+                key: 'amplitude',
+            },
+            {
+                name: 'Baremetrics',
+                key: 'baremetrics',
+            },
+            {
+                name: 'ChartMogul',
+                key: 'chartmogul',
+            },
+            {
+                name: 'PostHog',
+                key: 'posthog',
+            },
+        ],
+        rows: ['revenue_analytics'],
         features: [
             {
                 feature: 'Revenue tracking',

@@ -15,9 +15,7 @@ seo:
   metaDescription: Looking for the best Google Analytics alternative? Compare PostHog vs Plausible on web analytics, product analytics, integrations, and more to find the right fit.
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonHeader } from 'components/ComparisonTable/header'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import ProductComparisonTable from 'components/ProductComparisonTable'
 
 ## How is PostHog different?
 
@@ -43,38 +41,44 @@ This isn't limited to event capture and features either. Our [data warehouse](/d
 
 Both Plausible and PostHog are [Google Analytics alternatives](/blog/ga4-alternatives), so they're ideal for tracking and analyzing your website. 
 
-<ComparisonTable column1="PostHog" column2="Plausible">
-  <ComparisonRow column1={true} column2={true} feature="Pageviews" description="Track visitors and their views" />
-  <ComparisonRow column1={true} column2={true} feature="Sessions" description="Track unique sessions and their durations" />
-  <ComparisonRow column1={true} column2={true} feature="Traffic breakdown" description="See where your visitors and conversions are coming from" />
-  <ComparisonRow column1={true} column2={true} feature="Conversions" description="Track actions you want users to take" />
-  <ComparisonRow column1={true} column2={true} feature="Bounce rate" description="See the percentage of users that leave after one pageview" />
-  <ComparisonRow column1={true} column2={true} feature="Entry and exit paths" description="See the pages users first visit and the last ones before they leave" />
-  <ComparisonRow column1={true} column2={true} feature="Outbound clicks" description="See the links that take users away" />
-  <ComparisonRow column1={true} column2={true} feature="UTM tracking" description="Track marketing campaigns with UTM tags" />
-  <ComparisonRow column1={true} column2={true} feature="Cookieless tracking" description="Track users without cookies" />
-  <ComparisonRow column1={true} column2={true} feature="Snippet install" description="Install HTML snippet" />
-  <ComparisonRow column1={"56.8 kb"} column2={"<1 kB"} feature="Script size" description="Size of the script that runs on your site" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'plausible']}
+    rows={[
+        'web_analytics.features.pageviews',
+        'web_analytics.features.sessions',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.conversions',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.entry_exit_paths',
+        'web_analytics.features.outbound_clicks',
+        'web_analytics.features.utm_tracking',
+        'web_analytics.features.cookieless_tracking',
+        'web_analytics.features.snippet_install',
+        { label: 'Script size', description: 'Size of the script that runs on your site', customValue: '56.8 kb' },
+    ]}
+/>
 
 ## Product analytics
 
 Teams rely on [product analytics](/product-analytics) when they need more customization in both capturing and analyzing data. Although not a focus of Plausible, it does offer some basic product analytics features for those that need them.
 
-<ComparisonTable column1="PostHog" column2="Plausible">
-  <ComparisonRow column1={true} column2={true} feature="Custom events" description="Capture and analyze any type of event" />
-  <ComparisonRow column1={true} column2="Events only" feature="Custom properties" description="Add more data to custom events or users" />
-  <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture frontend clicks and events automatically" />
-  <ComparisonRow column1={true} column2={false} feature="Graphs and trends" description="Build custom insights and visualizations" />
-  <ComparisonRow column1={true} column2="Limited" feature="Funnels" description="Track users through a sequence of events" />
-  <ComparisonRow column1={true} column2={false} feature="Retention" description="Visualize which users stay, for how long" />
-  <ComparisonRow column1={true} column2={false} feature="Custom dashboards" description="Build a custom dashboard of your own or use a template" />
-  <ComparisonRow column1={true} column2={false} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
-  <ComparisonRow column1={true} column2={false} feature="User profiles" description="View user demographic data such as country, language, and device type" />
-  <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Track metrics at a company and account level" />
-  <ComparisonRow column1={true} column2={false} feature="Paths" description="Track user flows and where they drop off" />
-  <ComparisonRow column1={true} column2={false} feature="SQL" description="Query your data with SQL" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'plausible']}
+    rows={[
+        'product_analytics.features.custom_events',
+        'product_analytics.features.custom_properties',
+        'product_analytics.features.autocapture',
+        'product_analytics.trends',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'dashboards',
+        'product_analytics.features.cohorts',
+        'product_analytics.features.user_profiles',
+        'product_analytics.group_analytics',
+        'product_analytics.user_paths',
+        'product_analytics.insights.features.sql_editor',
+    ]}
+/>
 
 > 💡 **Good to know:** Many of Plausible's product analytics features, like custom properties and [funnels](/docs/product-analytics/funnels), are on its more expensive "Business" plan. It's roughly twice the price of the Growth plan and includes up to 10 team members and priority support.
 
@@ -82,19 +86,22 @@ Teams rely on [product analytics](/product-analytics) when they need more custom
 
 Beyond web analytics is where PostHog really shines. We provide all of the tools developers need to build a successful product (and they all work together). 
 
-<ComparisonTable column1="PostHog" column2="Plausible">
-  <ComparisonRow column1={true} column2={true} feature="EU hosting" description="Access and store your data in the EU" />
-  <ComparisonRow column1={true} column2={true} feature="Open source" description="View code, comment on roadmap, and contribute" />
-  <ComparisonRow column1={true} column2={false} feature="Free collaboration" description="Add unlimited teammates to your project" />
-  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click in your app or website" />
-  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users use your product, diagnose bugs" />
-  <ComparisonRow column1={true} column2={false} feature="Experiments" description="Run A/B/n tests on new features, optimize conversion funnels" />
-  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF surveys" />
-  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely, toggle features for cohorts or individuals" />
-  <ComparisonRow column1={true} column2={false} feature="Server-side SDKs" description="Capture events and use features from Python, Node, and more" />
-  <ComparisonRow column1={true} column2={false} feature="Mobile SDKs" description="Capture events and use features from Android, iOS, and more" />
-  <ComparisonRow column1={true} column2="Partial" feature="API" description="Capture events, get stats, and make changes via API" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'plausible']}
+    rows={[
+        'platform.deployment.eu_hosting',
+        'platform.deployment.open_source',
+        { label: 'Free collaboration', description: 'Add unlimited teammates to your project', customValue: false },
+        'heatmaps',
+        'session_replay',
+        'experiments',
+        'surveys',
+        'feature_flags',
+        'platform.developer.server_side_sdks',
+        'platform.developer.mobile_sdks',
+        'platform.developer.api',
+    ]}
+/>
 
 > 💡 **Good to know:** 
 > 1. Plausible's API is limited to capturing events and querying aggregate metrics. PostHog's API provides capture, full SQL querying, feature flags, and CRUD operations for all metadata.
@@ -104,36 +111,42 @@ Beyond web analytics is where PostHog really shines. We provide all of the tools
 
 Although Plausible has some integrations with other tools, it mostly stands on its own. PostHog has many more features for importing data from other sources as well as sending it to other destinations.
 
-<ComparisonTable column1="PostHog" column2="Plausible">
-  <ComparisonRow column1={true} column2={true} feature="CSV exports" description="Export your data as a CSV" />
-  <ComparisonRow column1={true} column2={false} feature="Warehouse exports" description="Export data to warehouses like S3 and BigQuery for storage and analysis" />
-  <ComparisonRow column1={true} column2={false} feature="Data warehouse" description="Query customer and product data together" />
-  <ComparisonRow column1={true} column2={false} feature="Warehouse import" description="Import data from third-party sources like Postgres, S3, and GCS" />
-  <ComparisonRow column1="Events, reports" column2="Reports, anomalies" feature="Slack" description="Send events, reports, and anomalies to Slack" />
-  <ComparisonRow column1={true} column2={true} feature="Email" description="Send reports to email" />
-  <ComparisonRow column1={false} column2={true} feature="Google Search Console" description="See search queries that sent traffic to your site" />
-  <ComparisonRow column1={true} column2={false} feature="Stripe" description="Import charges, customers, invoices, subscriptions, and more" />
-  <ComparisonRow column1={true} column2={false} feature="Hubspot" description="Import contacts, companies, deals, and more" />
-  <ComparisonRow column1={true} column2={false} feature="Zapier" description="Trigger Zapier automations" />
-  <ComparisonRow column1={true} column2={false} feature="Zendesk" description="Import organizations, tickets, users, and more" />
-  <ComparisonRow column1={true} column2={false} feature="Sentry" description="Send and receive error data with Sentry" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'plausible']}
+    rows={[
+        'platform.integrations.csv_exports',
+        { label: 'Warehouse exports', description: 'Export data to warehouses like S3 and BigQuery for storage and analysis', customValue: false },
+        { label: 'Data warehouse', description: 'Query customer and product data together', customValue: false },
+        'platform.integrations.warehouse_import',
+        'platform.integrations.slack',
+        'platform.integrations.email_reports',
+        { label: 'Google Search Console', description: 'See search queries that sent traffic to your site', customValue: true },
+        'platform.integrations.stripe',
+        'platform.integrations.hubspot',
+        'platform.integrations.zapier',
+        'platform.integrations.zendesk',
+        'platform.integrations.sentry',
+    ]}
+/>
 
 ## Security, compliance, privacy
 
 Plausible prides itself on being privacy-friendly, but PostHog stands toe-to-toe with it in terms of features. On top of that, PostHog includes many of the features enterprises need for compliance.
 
-<ComparisonTable column1="PostHog" column2="Plausible">
-  <ComparisonRow column1="7 years" column2="3 years" feature="Data retention" description="The length of time event data is retained" />
-  <ComparisonRow column1={true} column2={true} feature="Bot blocking" description="Block scrapers, crawlers, and other unwanted traffic from stats" />
-  <ComparisonRow column1={true} column2={true} feature="Reverse proxy" description="Avoid tracking blockers and capture more data" />
-  <ComparisonRow column1={true} column2={false} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
-  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
-  <ComparisonRow column1={true} column2={true} feature="Data anonymization" description="Options to anonymize user data" />
-  <ComparisonRow column1={true} column2={false} feature="SOC 2" description="SOC 2 security certification" />
-  <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
-  <ComparisonRow column1="Enterprise" column2={false} feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'plausible']}
+    rows={[
+        { label: 'Data retention', description: 'The length of time event data is retained', customValue: '7 years' },
+        'platform.security.bot_blocking',
+        'platform.security.reverse_proxy',
+        'platform.security.hipaa_ready',
+        'platform.security.gdpr_ready',
+        'platform.security.data_anonymization',
+        'platform.security.soc2_certified',
+        'platform.security.two_factor_auth',
+        'platform.security.saml_sso',
+    ]}
+/>
 
 ## Frequently asked questions
 

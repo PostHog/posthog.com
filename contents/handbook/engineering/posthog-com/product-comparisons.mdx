@@ -1,0 +1,55 @@
+---
+title: Product & feature comparisons
+---
+
+We maintain a single source of truth for both:
+
+-   the features of each product
+-   our competitors across all of their products and features
+
+By having a single source of truth, we're able to keep this data up-to-date across product comparison tables, blog posts, and other documentation.
+
+## Product features
+
+```
+/src/hooks/featureDefinitions/{productName}.tsx
+```
+
+-   summary
+    -   name
+    -   description
+-   {sectionName}
+    -   description
+    -   features
+        -   {featureName}
+            -   name
+            -   description
+
+## Competitors
+
+```
+/src/hooks/competitorData/{competitorName}.tsx
+```
+
+Contains:
+
+-   name
+-   key
+-   assets
+    -   icon
+    -   comparisonArticle
+-   products
+    -   {productName}
+        -   availability
+        -   features
+            -   {featureName}
+                -   name
+                -   description
+-   platform
+-   pricing
+
+## Referencing data
+
+-   `dashboards` returns value of `availabile` and displays the feature's name and description from `summary`
+-   `dashboards.features` returns all features from the array, with their name and description
+-   `dashboards.features.annotations` will return an individual feature

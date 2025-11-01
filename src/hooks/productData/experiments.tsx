@@ -374,6 +374,7 @@ export const experiments = {
                 key: 'posthog',
             },
         ],
+        rows: ['experiments'],
         features: [
             {
                 feature: 'Unlimited experiments',

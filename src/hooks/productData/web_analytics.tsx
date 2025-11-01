@@ -369,6 +369,7 @@ export const webAnalytics = {
                 key: 'posthog',
             },
         ],
+        rows: ['web_analytics'],
         features: [
             {
                 feature: 'Pre-configured dashboards',

@@ -18,9 +18,7 @@ seo:
   metaDescription: Looking for the best experimentation and feature flag tool? Compare PostHog vs Optimizely on feature flags, A/B testing, analytics, and more to find the right fit.
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonHeader } from 'components/ComparisonTable/header'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import ProductComparisonTable from 'components/ProductComparisonTable'
 
 PostHog and Optimizely are both multi-product tools to help you improve your apps and websites. Beyond experimentation and feature flags, they have significantly different focuses:
 
@@ -56,19 +54,22 @@ Optimizely has some analytics, such as web marketing, but largely relies on Goog
 
 Although both Optimizely and PostHog provide experimentation and feature flags, their overall platforms are significantly different.
 
-<ComparisonTable column1="PostHog" column2="Optimizely">
-  <ComparisonRow column1={true} column2={false} feature="Open source" description="Optimizely has open-source SDKs" />
-  <ComparisonRow column1={true} column2={false} feature="Self-service" description="Start without talking to sales" />
-  <ComparisonRow column1={true} column2={true} feature="Experiments" description="Run A/B tests" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Manage and rollout features remotely" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Native feature tracking" />
-  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Get web stats like traffic" />
-  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Play back real user sessions" />
-  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Ask users questions and track responses" />
-  <ComparisonRow column1={false} column2={true} feature="CMS" description="Manage content" />
-  <ComparisonRow column1={false} column2={true} feature="Cart optimization" description="Optimize ecommerce checkouts" />
-  <ComparisonRow column1={false} column2={true} feature="Project management" description="Manage projects related to experiments" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'optimizely']}
+    rows={[
+        'platform.deployment.open_source',
+        { label: 'Self-service', description: 'Start without talking to sales', customValue: true },
+        'experiments',
+        'feature_flags',
+        'product_analytics',
+        'web_analytics',
+        'session_replay',
+        'surveys',
+        { label: 'CMS', description: 'Manage content', customValue: false },
+        { label: 'Cart optimization', description: 'Optimize ecommerce checkouts', customValue: false },
+        { label: 'Project management', description: 'Manage projects related to experiments', customValue: false },
+    ]}
+/>
 
 <ArrayCTA />
 
@@ -82,18 +83,21 @@ Optimizely splits its experimentation features into two separate categories, web
 
 The core web experimentation features like traffic allocation, preview mode, cross-browser, dynamic website support, targeting, and more are available in both Optimizely and PostHog 
 
-<ComparisonTable column1="PostHog" column2="Optimizely">
-  <ComparisonRow column1={true} column2={true} feature="A/B/n tests" description="Do tests with multiple variants" />
-  <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users with custom attributes" />
-  <ComparisonRow column1={true} column2={true} feature="Custom goals" description="Set experiment goals to any metric" />
-  <ComparisonRow column1={true} column2={true} feature="Single-page app support" description="Use app frameworks like React and Vue" />
-  <ComparisonRow column1="Beta" column2={true} feature="No-code experiments" description="Implement experiments without code" />
-  <ComparisonRow column1={true} column2={true} feature="Low-code experiments" description="Implement experiments with a small amount of code" />
-  <ComparisonRow column1={true} column2={true} feature="Funnel tests" description="Use funnels as a goal" />
-  <ComparisonRow column1={true} column2={false} feature="Native analytics" description="Track experiments without third-party tools" />
-  <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule experiments to run at specific times" />
-  <ComparisonRow column1={true} column2={true} feature="Use external data" description="Use data from other platforms in experiments" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'optimizely']}
+    rows={[
+        { label: 'A/B/n tests', description: 'Do tests with multiple variants', customValue: true },
+        'experiments.features.custom_targeting',
+        'experiments.features.custom_goals',
+        { label: 'Single-page app support', description: 'Use app frameworks like React and Vue', customValue: true },
+        'experiments.features.no_code_experiments',
+        { label: 'Low-code experiments', description: 'Implement experiments with a small amount of code', customValue: true },
+        'experiments.features.funnel_metrics',
+        { label: 'Native analytics', description: 'Track experiments without third-party tools', customValue: true },
+        { label: 'Scheduling', description: 'Schedule experiments to run at specific times', customValue: true },
+        { label: 'Use external data', description: 'Use data from other platforms in experiments', customValue: true },
+    ]}
+/>
 
 - In Optimizely, many features of web experiments, like scheduling, multi-armed bandits, [multi-variate testing](/tutorials/abn-testing), and advanced personalization are only available on the higher-tier "Accelerate" plan or as add-ons.
 
@@ -121,18 +125,21 @@ The core web experimentation features like traffic allocation, preview mode, cro
 
 Feature experimentation relates to releasing and testing feature changes in your product. Both Optimizely and PostHog have all the core features to do this safely and effectively.
 
-<ComparisonTable column1="PostHog" column2="Optimizely">
-  <ComparisonRow column1={true} column2={true} feature="Flags" description="Use and evaluate feature flags" />
-  <ComparisonRow column1={true} column2={true} feature="Rollouts" description="Control rollout of features remotely" />
-  <ComparisonRow column1={true} column2={true} feature="User targeting" description="Target specific users" />
-  <ComparisonRow column1={true} column2={true} feature="Logging" description="Log flag usage" />
-  <ComparisonRow column1={true} column2={true} feature="Audience builder" description="Known as cohorts in PostHog" />
-  <ComparisonRow column1={true} column2={true} feature="Custom attributes" description="Known as properties in PostHog" />
-  <ComparisonRow column1={true} column2={true} feature="UI controls" description="Configure experiments with UI" />
-  <ComparisonRow column1={true} column2={true} feature="Stats engine" description="Calculate the statistical significance of experiments" />
-  <ComparisonRow column1={true} column2={true} feature="Remote configuration" description="Configure your experiments without changing code" />
-  <ComparisonRow column1="Partial" column2={true} feature="Environments" description="Manage flags for dev, staging, prod" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'optimizely']}
+    rows={[
+        'feature_flags.features.boolean_flags',
+        'feature_flags.features.percentage_rollouts',
+        'feature_flags.features.custom_targeting',
+        { label: 'Logging', description: 'Log flag usage', customValue: true },
+        { label: 'Audience builder', description: 'Known as cohorts in PostHog', customValue: true },
+        { label: 'Custom attributes', description: 'Known as properties in PostHog', customValue: true },
+        { label: 'UI controls', description: 'Configure experiments with UI', customValue: true },
+        'experiments.features.statistical_significance',
+        { label: 'Remote configuration', description: 'Configure your experiments without changing code', customValue: true },
+        'feature_flags.features.multi_environment',
+    ]}
+/>
 
 In Optimizely, many of the feature experimentation features, like multi-armed bandits and custom segmentation, are only available in higher tier plans. These are all available for free in PostHog.
 
@@ -140,12 +147,15 @@ In Optimizely, many of the feature experimentation features, like multi-armed ba
 
 PostHog and Optimizely are very different here. Optimizely is sales-driven and completely opaque. PostHog is self-serve and transparent.
 
-<ComparisonTable column1="PostHog" column2="Optimizely">
-  <ComparisonRow column1={true} column2={false} feature="Transparent" description="See pricing without talking to sales" />
-  <ComparisonRow column1={true} column2={false} feature="Usage-based" description="Pay based on how much you use" />
-  <ComparisonRow column1={true} column2={false} feature="Free tier" description="Use for free forever" />
-  <ComparisonRow column1={true} column2={true} feature="Per-product pricing" description="Separate pricing for each product" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'optimizely']}
+    rows={[
+        'platform.pricing.transparent_pricing',
+        'platform.pricing.usage_based_pricing',
+        'platform.pricing.free_tier',
+        { label: 'Per-product pricing', description: 'Separate pricing for each product', customValue: true },
+    ]}
+/>
 
 For many Optimizely products, there are also paid add-ons like advanced personalization, the data platform, and their Salesforce integration. PostHog only has free and paid tiers for each product with a single enterprise add-on for SSO, dedicated support, and advanced permissions.
 
@@ -157,50 +167,59 @@ Although Optimizely has web analytics through its content marketing platform, it
 
 PostHog’s product analytics suite shines here. It treats feature flags and experiments as usage, so you can analyze them like any other user behavior. On top of standard experiment results, you can use visualizations like trends, funnels, user paths, and even direct SQL access. 
 
-<ComparisonTable column1="PostHog" column2="Optimizely">
-  <ComparisonRow column1={true} column2={false} feature="Native analytics" description="Track experiments without the use of third parties" />
-  <ComparisonRow column1={true} column2={true} feature="Results" description="View experiment results" />
-  <ComparisonRow column1={true} column2={true} feature="Segment results" description="Break results down for segments" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor non-goal metrics" />
-  <ComparisonRow column1={true} column2={true} feature="Winner" description="Calculate the winning experiment variant" />
-  <ComparisonRow column1={true} column2={false} feature="Custom insights" description="Query and customize analytics" />
-  <ComparisonRow column1={true} column2={false} feature="Trends" description="Visualize results as a trend" />
-  <ComparisonRow column1={true} column2={false} feature="Funnels" description="Visualize results as a funnel" />
-  <ComparisonRow column1={true} column2={true} feature="Confidence interval" description="Show confidence in results" />
-  <ComparisonRow column1={true} column2={false} feature="Session replay" description="View user sessions related to the experiments" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'optimizely']}
+    rows={[
+        { label: 'Native analytics', description: 'Track experiments without the use of third parties', customValue: true },
+        { label: 'Results', description: 'View experiment results', customValue: true },
+        { label: 'Segment results', description: 'Break results down for segments', customValue: true },
+        'experiments.features.secondary_metrics',
+        { label: 'Winner', description: 'Calculate the winning experiment variant', customValue: true },
+        { label: 'Custom insights', description: 'Query and customize analytics', customValue: true },
+        'product_analytics.trends',
+        'product_analytics.funnels',
+        { label: 'Confidence interval', description: 'Show confidence in results', customValue: true },
+        'session_replay',
+    ]}
+/>
 
 Another bonus of PostHog is the ability to view user sessions related to feature flags and experiments. You can see directly how they respond to new features and changes as well as how it affects the rest of their session.
 
 ## SDKs and API
 
 PostHog and Optimizely both support similar languages and frameworks with SDKs, as well as provide an API for interacting with data. 
-<ComparisonTable column1="PostHog" column2="Optimizely">
-  <ComparisonRow column1="14" column2="14" feature="Total count" description="Total number of SDKs" />
-  <ComparisonRow column1={true} column2={true} feature="Client" description="JavaScript, React" />
-  <ComparisonRow column1={true} column2={true} feature="Server" description="Node, Python, Go, PHP" />
-  <ComparisonRow column1={true} column2={true} feature="Mobile" description="Android, iOS" />
-  <ComparisonRow column1={false} column2={true} feature="OTT" description="Over-the-top TV applications" />
-  <ComparisonRow column1={true} column2={true} feature="API" description="Access and update data through REST API" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'optimizely']}
+    rows={[
+        'platform.developer.sdks',
+        { label: 'Client', description: 'JavaScript, React', customValue: true },
+        { label: 'Server', description: 'Node, Python, Go, PHP', customValue: true },
+        { label: 'Mobile', description: 'Android, iOS', customValue: true },
+        { label: 'OTT', description: 'Over-the-top TV applications', customValue: false },
+        'platform.developer.api',
+    ]}
+/>
 
 ## Integrations
 
 PostHog’s integrations are free while Optimizely often requires a subscription to their data platform "enhancement."
 
-<ComparisonTable column1="PostHog" column2="Optimizely">
-  <ComparisonRow column1={false} column2={true} feature="Google Analytics" />
-  <ComparisonRow column1={true} column2="Add-on" feature="Salesforce" />
-  <ComparisonRow column1={true} column2={true} feature="CDP" />
-  <ComparisonRow column1={true} column2={false} feature="Zapier" />
-  <ComparisonRow column1={true} column2={true} feature="Segment" />
-  <ComparisonRow column1={true} column2={true} feature="Exports" />
-  <ComparisonRow column1={true} column2={true} feature="S3" />
-  <ComparisonRow column1={true} column2={true} feature="Snowflake" />
-  <ComparisonRow column1={true} column2={true} feature="BigQuery" />
-  <ComparisonRow column1={true} column2={true} feature="Slack" />
-  <ComparisonRow column1={true} column2={true} feature="Teams" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'optimizely']}
+    rows={[
+        { label: 'Google Analytics', customValue: false },
+        'platform.integrations.salesforce',
+        'cdp',
+        'platform.integrations.zapier',
+        'platform.integrations.segment',
+        'platform.integrations.exports',
+        'platform.integrations.s3',
+        'platform.integrations.snowflake',
+        'platform.integrations.bigquery',
+        'platform.integrations.slack',
+        'platform.integrations.microsoft_teams',
+    ]}
+/>
 
 PostHog’s [data warehouse](/docs/data-warehouse) further expands these destinations by enabling you to use data from these sources directly in PostHog. 
 
@@ -208,15 +227,18 @@ PostHog’s [data warehouse](/docs/data-warehouse) further expands these destina
 
 Both PostHog and Optimizely have the privacy and compliance tools users expect.
 
-<ComparisonTable column1="PostHog" column2="Optimizely">
-  <ComparisonRow column1={true} column2={true} feature="Change history" description="Trail of changes to data" />
-  <ComparisonRow column1="Enterprise" column2={true} feature="SSO" description="Enterprise" />
-  <ComparisonRow column1={true} column2={true} feature="2FA" description="Two-factor authentication" />
-  <ComparisonRow column1={true} column2={true} feature="Roles and permissions" description="Control who can do what" />
-  <ComparisonRow column1={true} column2={true} feature="GDPR ready" description="Stay compliant with GDPR" />
-  <ComparisonRow column1={true} column2={false} feature="Cookieless" description="Use product without cookies" />
-  <ComparisonRow column1={true} column2={true} feature="DPA available" description="Enter into Data Processing Agreements" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'optimizely']}
+    rows={[
+        { label: 'Change history', description: 'Trail of changes to data', customValue: true },
+        'platform.security.saml_sso',
+        'platform.security.two_factor_auth',
+        { label: 'Roles and permissions', description: 'Control who can do what', customValue: true },
+        'platform.security.gdpr_ready',
+        { label: 'Cookieless', description: 'Use product without cookies', customValue: true },
+        { label: 'DPA available', description: 'Enter into Data Processing Agreements', customValue: true },
+    ]}
+/>
 
 ## Frequently asked questions
 

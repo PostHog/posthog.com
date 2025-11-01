@@ -80,6 +80,9 @@ export const surveys = {
         max: 100000,
     },
     volume: 1500,
+    pricing: {
+        free_tier: '1500 responses/month',
+    },
     customers: {
         purplewave: {
             headline: 'reached a 25% response rate with surveys',
@@ -380,22 +383,131 @@ export const surveys = {
                 key: 'posthog',
             },
         ],
+        rows: ['surveys'],
         features: [
             {
-                feature: 'Hosted surveys',
+                feature: 'Aggregated results',
                 companies: {
-                    // pendo: true,
+                    pendo: false,
+                    hotjar: false,
+                    sprig: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'AI response summaries',
+                companies: {
+                    pendo: false,
+                    hotjar: false,
+                    sprig: false,
+                    posthog: false,
+                },
+            },
+            {
+                feature: 'API access',
+                companies: {
+                    pendo: true,
                     hotjar: true,
                     sprig: true,
                     posthog: true,
                 },
             },
             {
-                feature: 'Mobile surveys',
+                feature: 'Automatic NPS calculation',
                 companies: {
-                    // pendo: false,
-                    // hotjar: false,
-                    // sprig: false,
+                    pendo: false,
+                    hotjar: false,
+                    sprig: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Calendar invites',
+                companies: {
+                    pendo: false,
+                    hotjar: false,
+                    sprig: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Capture partial responses',
+                companies: {
+                    pendo: false,
+                    hotjar: false,
+                    sprig: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'CDP destinations',
+                companies: {
+                    pendo: false,
+                    hotjar: false,
+                    sprig: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Completion conditions',
+                companies: {
+                    pendo: false,
+                    hotjar: false,
+                    sprig: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Conditional logic',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'CSAT questions',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'CSAT surveys',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Custom HTML',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: false,
+                    posthog: false,
+                },
+            },
+            {
+                feature: 'Custom targeting',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Custom UI',
+                companies: {
+                    pendo: false,
+                    hotjar: false,
+                    sprig: false,
                     posthog: true,
                 },
             },
@@ -409,7 +521,115 @@ export const surveys = {
                 },
             },
             {
+                feature: 'Customizable wait periods',
+                companies: {
+                    pendo: false,
+                    hotjar: false,
+                    sprig: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Display conditions',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Embedded links',
+                companies: {
+                    pendo: true,
+                    hotjar: false,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Emoji reaction',
+                companies: {
+                    pendo: false,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Event triggered',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Feedback button',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Freeform text',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Hosted surveys',
+                companies: {
+                    pendo: false,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Iframe embedding',
+                companies: {
+                    pendo: false,
+                    hotjar: true,
+                    sprig: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Link to webpage',
+                companies: {
+                    pendo: true,
+                    hotjar: false,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
                 feature: 'Live previews',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Mobile surveys',
+                companies: {
+                    pendo: false,
+                    hotjar: false,
+                    sprig: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Multi-select',
                 companies: {
                     pendo: true,
                     hotjar: true,
@@ -427,16 +647,7 @@ export const surveys = {
                 },
             },
             {
-                feature: 'API access',
-                companies: {
-                    pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Single choice questions',
+                feature: 'Multiple choice',
                 companies: {
                     pendo: true,
                     hotjar: true,
@@ -454,6 +665,33 @@ export const surveys = {
                 },
             },
             {
+                feature: 'No-code',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'NPS questions',
+                companies: {
+                    pendo: false,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'NPS surveys',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
                 feature: 'Open text questions',
                 companies: {
                     pendo: true,
@@ -463,7 +701,7 @@ export const surveys = {
                 },
             },
             {
-                feature: 'Numerical rating questions',
+                feature: 'Popover',
                 companies: {
                     pendo: true,
                     hotjar: true,
@@ -472,7 +710,7 @@ export const surveys = {
                 },
             },
             {
-                feature: 'Emoji rating questions',
+                feature: 'Rating',
                 companies: {
                     pendo: true,
                     hotjar: true,
@@ -481,16 +719,61 @@ export const surveys = {
                 },
             },
             {
-                feature: 'Third-party link support',
+                feature: 'Rating questions',
                 companies: {
                     pendo: true,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'SDK support',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Single choice questions',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Slack integration',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Survey templates',
+                companies: {
+                    pendo: true,
+                    hotjar: true,
+                    sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Target by cohort',
+                companies: {
+                    pendo: false,
                     hotjar: false,
-                    sprig: true,
+                    sprig: false,
                     posthog: true,
                 },
             },
             {
-                feature: 'Target by property',
+                feature: 'Target by person property',
                 companies: {
                     pendo: true,
                     hotjar: true,
@@ -508,25 +791,7 @@ export const surveys = {
                 },
             },
             {
-                feature: 'Target by feature flag',
-                companies: {
-                    pendo: false,
-                    hotjar: false,
-                    sprig: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Survey scheduling',
-                companies: {
-                    pendo: true,
-                    hotjar: false,
-                    sprig: false,
-                    postHog: false,
-                },
-            },
-            {
-                feature: 'Export responses',
+                feature: 'User filtering',
                 companies: {
                     pendo: true,
                     hotjar: true,
@@ -535,7 +800,16 @@ export const surveys = {
                 },
             },
             {
-                feature: 'Slack integration',
+                feature: 'User interview requests',
+                companies: {
+                    pendo: false,
+                    hotjar: false,
+                    sprig: false,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'User targeting',
                 companies: {
                     pendo: true,
                     hotjar: true,
