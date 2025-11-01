@@ -17,6 +17,8 @@ export const datadog = {
                 source_map_support: true,
             },
             integrations: {
+                datadog: false,
+
                 session_replays: true,
             },
         },
@@ -39,6 +41,7 @@ export const datadog = {
             local_evaluation: false,
             mobile_sdks: false,
             native_data_sources: false,
+            notebooks: false,
             proxies: false,
             sdks: false,
             server_side_sdks: false,

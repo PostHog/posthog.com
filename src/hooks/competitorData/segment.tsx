@@ -30,6 +30,7 @@ export const segment = {
             local_evaluation: false,
             mobile_sdks: false,
             native_data_sources: false,
+            notebooks: false,
             proxies: false,
             sdks: false,
             server_side_sdks: false,
@@ -42,6 +43,8 @@ export const segment = {
             community_integrations: false,
             csv_exports: false,
             customer_io: false,
+            datadog: false,
+
             email_reports: false,
             exports: true,
             gcs: false,

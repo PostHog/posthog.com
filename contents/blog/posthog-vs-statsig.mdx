@@ -57,13 +57,13 @@ We update [our changelog](/changelog) with a recap of new features every week, a
         'feature_flags',
         'product_analytics',
         'web_analytics',
-        { label: 'Dynamic config', description: 'Replace hard-coded values in your app with config values', customValue: true },
-        { label: 'Web session replays', description: 'Watch real users use your web app; debug behavior', customValue: true },
-        { label: 'Mobile session replays', description: 'Watch real users use your native mobile app', customValue: false },
+        'feature_flags.features.remote_config',
+        'session_replay.platform_support.features.web_app_recordings',
+        'session_replay.platform_support.features.mobile_app_recordings',
         'surveys',
-        { label: 'Notebooks', description: 'Collaborate on analysis in shareable notebooks', customValue: false },
+        'platform.developer.notebooks',
         'platform.deployment.open_source',
-        { label: 'Data warehouse experiments', description: 'Run A/B tests natively on data in your existing warehouse', customValue: 'Beta' },
+        'experiments.supported_tests.features.data_warehouse_experiments',
     ]}
 />
 
@@ -78,17 +78,16 @@ Both tools enable you to run [A/B/n](/tutorials/abn-testing) and [multivariate](
 <ProductComparisonTable
     competitors={['posthog', 'statsig']}
     rows={[
-        'experiments.features.custom_goals',
-        'experiments.features.secondary_metrics',
-        'experiments.features.statistical_significance',
-        { label: 'Split testing', description: 'Split participants into groups', customValue: true },
-        'experiments.features.multivariate_testing',
-        { label: 'Recommended run time', description: 'Calculate the recommended run time for your experiments', customValue: true },
-        { label: 'Statistics engine', description: 'How the results of an experiment are calculated', customValue: 'Bayesian' },
-        { label: 'Holdout testing', description: 'Withhold multiple features to measure cumulative impact', customValue: 'Partial' },
-        { label: 'Multi-armed bandit', description: 'Optimize tests automatically by allocating traffic to the best performing variant.', customValue: false },
-        { label: 'Mutually exclusive experiments', description: 'Isolate user groups for simultaneous, independent experiments', customValue: false },
-        { label: 'Bonferroni correction', description: 'Includes α correction when tests are being performed simultaneously', customValue: false },
+        'experiments.experiment_types.features.custom_goals',
+        'experiments.experiment_types.features.secondary_metrics',
+        'experiments.analysis.features.statistical_significance',
+        'experiments.features.split_testing',
+        'experiments.implementation.features.multivariate_testing',
+        'experiments.features.recommended_run_time',
+        'experiments.analysis.features.statistics_engine',
+        'experiments.supported_tests.features.holdout_testing',
+        'experiments.supported_tests.features.multi_armed_bandit',
+        'experiments.supported_tests.features.mutually_exclusive_experiments',
     ]}
 />
 
@@ -102,14 +101,14 @@ While both offer the core features you need, Statsig's feature flags are boolean
     competitors={['posthog', 'statsig']}
     rows={[
         'feature_flags.features.boolean_flags',
-        { label: 'Multivariate flags', description: 'Flags with multiple customizable values', customValue: false },
-        { label: 'Payloads', description: 'Flags with string, number, or JSON payloads', customValue: false },
-        'feature_flags.features.percentage_rollouts',
-        'feature_flags.features.custom_targeting',
-        { label: 'Scheduling', description: 'Schedule flags to turn on or off', customValue: true },
-        'feature_flags.features.multi_environment',
-        { label: 'Bootstrapping', description: 'Flags available on frontend application load', customValue: true },
-        { label: 'Early access management', description: 'Manage betas, test features', customValue: false },
+        'feature_flags.features.multivariate_flags',
+        'feature_flags.features.json_payloads',
+        'feature_flags.targeting.features.target_by_percentage',
+        'feature_flags.targeting.features.target_by_person_properties',
+        'feature_flags.management.features.flag_scheduling',
+        'feature_flags.management.features.multi_environment',
+        'feature_flags.implementation.features.bootstrapping',
+        'feature_flags.advanced.features.early_access_widget',
     ]}
 />
 
@@ -133,8 +132,8 @@ Both PostHog and Statsig offer the functionality you expect from product analyti
         'product_analytics.retention',
         'product_analytics.user_paths',
         'product_analytics.funnels.features.correlation_analysis',
-        { label: 'Lifecycle analysis', description: 'Understand who is dormant, churning, and thriving', customValue: false },
-        { label: 'Stickiness insights', description: 'See how many times users perform an event in a period of time.', customValue: false },
+        'product_analytics.lifecycle',
+        'product_analytics.stickiness',
         'product_analytics.insights.features.formula_mode',
         'product_analytics.insights.features.sql_editor',
     ]}
@@ -153,7 +152,7 @@ Below is a sample comparison of PostHog and Statsig's integrations. Be sure to c
         'platform.integrations.exports',
         'platform.integrations.zapier',
         'platform.integrations.sentry',
-        { label: 'Datadog', description: 'Capture flag data in Datadog', customValue: true },
+        'platform.integrations.datadog',
         'platform.integrations.slack',
         'platform.integrations.microsoft_teams',
     ]}
@@ -166,15 +165,15 @@ Both PostHog and LaunchDarkly enable companies to remain secure and compliant wi
 <ProductComparisonTable
     competitors={['posthog', 'statsig']}
     rows={[
-        { label: 'User privacy options', description: 'Anonymize users, drop personal data', customValue: true },
-        { label: 'History, audit logs', description: 'Manage and view flag edits and related users', customValue: true },
+        'platform.security.user_privacy_options',
+        'platform.security.history_audit_logs',
         'platform.security.gdpr_ready',
         'platform.security.hipaa_ready',
         'platform.security.soc2_certified',
         'platform.security.two_factor_auth',
         'platform.security.saml_sso',
-        { label: 'Approvals', description: 'Require approvals to change flags', customValue: true },
-        { label: 'Permissioning', description: 'Control who can edit and modify flags', customValue: true },
+        'feature_flags.management.features.approvals',
+        'feature_flags.management.features.permissioning',
     ]}
 />
 

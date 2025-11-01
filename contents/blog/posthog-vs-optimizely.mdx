@@ -129,15 +129,15 @@ Feature experimentation relates to releasing and testing feature changes in your
     competitors={['posthog', 'optimizely']}
     rows={[
         'feature_flags.features.boolean_flags',
-        'feature_flags.features.percentage_rollouts',
-        'feature_flags.features.custom_targeting',
+        'feature_flags.targeting.features.target_by_percentage',
+        'feature_flags.targeting.features.target_by_person_properties',
         { label: 'Logging', description: 'Log flag usage', customValue: true },
         { label: 'Audience builder', description: 'Known as cohorts in PostHog', customValue: true },
         { label: 'Custom attributes', description: 'Known as properties in PostHog', customValue: true },
         { label: 'UI controls', description: 'Configure experiments with UI', customValue: true },
         'experiments.features.statistical_significance',
         { label: 'Remote configuration', description: 'Configure your experiments without changing code', customValue: true },
-        'feature_flags.features.multi_environment',
+        'feature_flags.management.features.multi_environment',
     ]}
 />
 

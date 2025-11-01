@@ -6,25 +6,26 @@ export const featureFlagsFeatures = {
         docsUrl: '/docs/feature-flags',
     },
     features: {
-        description: 'Flexible flag types and rollout strategies',
-        features: {
-            boolean_flags: {
-                name: 'Boolean flags',
-                description: 'Simple on/off flags to enable or disable features',
-            },
-            multivariate_flags: {
-                name: 'Multivariate flags',
-                description: 'Test multiple variants of a feature in a single flag',
-            },
-            json_payloads: {
-                name: 'Payloads',
-                description:
-                    'Pass structured data (strings, numbers, or JSON objects) to variants for dynamic configuration without code changes',
-            },
-            release_conditions: {
-                name: 'Release conditions',
-                description: 'Target flags by user properties, cohorts, geographic location, or traffic percentage',
-            },
+        boolean_flags: {
+            name: 'Boolean flags',
+            description: 'Simple on/off flags to enable or disable features',
+        },
+        multivariate_flags: {
+            name: 'Multivariate flags',
+            description: 'Test multiple variants of a feature in a single flag',
+        },
+        json_payloads: {
+            name: 'Payloads',
+            description:
+                'Pass structured data (strings, numbers, or JSON objects) to variants for dynamic configuration without code changes',
+        },
+        remote_config: {
+            name: 'Remote config',
+            description: 'Replace hard-coded values in your app with remotely configurable parameters',
+        },
+        release_conditions: {
+            name: 'Release conditions',
+            description: 'Target flags by user properties, cohorts, geographic location, or traffic percentage',
         },
     },
     implementation: {
@@ -76,25 +77,33 @@ export const featureFlagsFeatures = {
     management: {
         description: 'Operate flags safely at scale',
         features: {
-            flag_scheduling: {
-                name: 'Flag scheduling',
-                description: 'Schedule flags to turn on or off automatically at specified times',
-            },
-            instant_rollbacks: {
-                name: 'Instant rollbacks',
-                description: 'Disable a feature without touching your codebase',
-            },
-            history_activity: {
-                name: 'History and activity feed',
-                description: "See who hit a feature flag, the flag's value, and which page they were on",
+            approvals: {
+                name: 'Flag approvals',
+                description: 'Require approvals to change flags',
             },
             flag_administration: {
                 name: 'Flag administration',
                 description: 'Control who can modify flags with user roles and permissions',
             },
+            flag_scheduling: {
+                name: 'Flag scheduling',
+                description: 'Schedule flags to turn on or off automatically at specified times',
+            },
+            history_activity: {
+                name: 'History and activity feed',
+                description: "See who hit a feature flag, the flag's value, and which page they were on",
+            },
+            instant_rollbacks: {
+                name: 'Instant rollbacks',
+                description: 'Disable a feature without touching your codebase',
+            },
             multi_environment: {
                 name: 'Multi-environment support',
                 description: 'Use the same flag key across PostHog projects for local development or staging',
+            },
+            permissioning: {
+                name: 'Flag permissioning',
+                description: 'Control who can edit and modify flags',
             },
         },
     },

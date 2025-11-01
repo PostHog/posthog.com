@@ -18,6 +18,7 @@ export const bugsnag = {
             },
             integrations: {
                 ab_experiments: true,
+                datadog: false,
             },
         },
     },
@@ -39,6 +40,7 @@ export const bugsnag = {
             local_evaluation: false,
             mobile_sdks: false,
             native_data_sources: false,
+            notebooks: false,
             proxies: false,
             sdks: false,
             server_side_sdks: false,

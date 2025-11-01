@@ -148,6 +148,10 @@ export const platformFeatures = {
                 name: 'CSV exports',
                 description: 'Export your data as a CSV',
             },
+            datadog: {
+                name: 'Datadog',
+                description: 'Send feature flag and event data to Datadog',
+            },
             email_reports: {
                 name: 'Email reports',
                 description: 'Send reports to email',
@@ -192,6 +196,10 @@ export const platformFeatures = {
             mobile_sdks: {
                 name: 'Mobile SDKs',
                 description: 'Capture events and use features from Android, iOS, and more',
+            },
+            notebooks: {
+                name: 'Notebooks',
+                description: 'Collaborate on analysis in shareable notebooks',
             },
         },
     },

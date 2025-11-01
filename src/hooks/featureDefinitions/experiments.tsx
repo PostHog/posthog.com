@@ -52,15 +52,27 @@ export const experimentsFeatures = {
                 description:
                     'Run experiments with three or more variants to quickly identify the best-performing option',
             },
-            holdout_testing: {
-                name: 'Holdout testing',
-                description:
-                    'Reserve a group of users who do not see any changes, so you can measure long-term impact against a true baseline',
+            data_warehouse_experiments: {
+                name: 'Data warehouse experiments',
+                description: 'Run A/B tests natively on data in your existing warehouse',
             },
             fake_door_testing: {
                 name: 'Fake door testing',
                 description:
                     'Measure interest in a potential feature by exposing users to a "coming soon" entry point before building it',
+            },
+            holdout_testing: {
+                name: 'Holdout testing',
+                description:
+                    'Reserve a group of users who do not see any changes, so you can measure long-term impact against a true baseline',
+            },
+            multi_armed_bandit: {
+                name: 'Multi-armed bandit',
+                description: 'Optimize tests automatically by allocating traffic to the best performing variant',
+            },
+            mutually_exclusive_experiments: {
+                name: 'Mutually exclusive experiments',
+                description: 'Isolate user groups for simultaneous, independent experiments',
             },
             redirect_testing: {
                 name: 'Redirect testing',
