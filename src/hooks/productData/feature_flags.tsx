@@ -458,6 +458,11 @@ export const featureFlags = {
                 link: '/blog/posthog-vs-growthbook',
             },
             {
+                name: 'Statsig',
+                key: 'statsig',
+                link: '/blog/posthog-vs-statsig',
+            },
+            {
                 name: 'PostHog',
                 key: 'posthog',
             },

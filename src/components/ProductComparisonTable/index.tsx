@@ -3,6 +3,7 @@ import OSTable from 'components/OSTable'
 import Logo from 'components/Logo'
 import Link from 'components/Link'
 import { IconArrowUpRight } from '@posthog/icons'
+import { useApp } from '../../context/App'
 
 // Competitor data imports
 import { posthog } from '../../hooks/competitorData/posthog'
@@ -36,6 +37,8 @@ import { baremetrics } from '../../hooks/competitorData/baremetrics'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
 import { stripe } from '../../hooks/competitorData/stripe'
 import { fathom } from '../../hooks/competitorData/fathom'
+import { plausible } from '../../hooks/competitorData/plausible'
+import { statsig } from '../../hooks/competitorData/statsig'
 
 // Feature definition imports
 import { errorTrackingFeatures } from '../../hooks/featureDefinitions/error_tracking'
@@ -427,6 +430,8 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         chartmogul,
         stripe,
         fathom,
+        plausible,
+        statsig,
     }
 
     // Helper to get feature value from competitor data
@@ -701,6 +706,9 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         return null
     }
 
+    const { siteSettings } = useApp()
+    const isDark = siteSettings.theme === 'dark'
+
     // Build columns
     const columns = [
         { name: '', width: 'auto', align: 'left' as const },
@@ -708,7 +716,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             name: (
                 <>
                     {key === 'posthog' ? (
-                        <Logo className="h-5 mx-auto w-auto max-w-full" />
+                        <Logo className="h-5 mx-auto w-auto max-w-full" fill={isDark ? 'white' : ''} />
                     ) : competitorData[key]?.name ? (
                         competitorData[key].name
                     ) : (
