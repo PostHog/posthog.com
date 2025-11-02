@@ -1284,6 +1284,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/how-to-do-discovery',
                     },
                     {
+                        name: 'Running trials',
+                        url: '/handbook/growth/sales/running-trials',
+                    },
+                    {
                         name: 'Selling and procuring via AWS Marketplace',
                         url: '/handbook/growth/sales/selling-via-aws',
                     },
@@ -1366,10 +1370,6 @@ export const handbookSidebar = [
                     {
                         name: 'Onboarding program',
                         url: '/handbook/onboarding/onboarding-program',
-                    },
-                    {
-                        name: 'Onboarding Pipeline',
-                        url: '/handbook/onboarding/onboarding-pipeline',
                     },
                     {
                         name: 'Onboarding tracking',
@@ -1515,6 +1515,24 @@ export const handbookSidebar = [
                 name: 'Lifecycle analysis',
                 url: '/handbook/growth/revops/lifecycle-analysis',
             },
+            {
+                name: 'SalesOps',
+                url: '',
+                children: [
+                    {
+                        name: 'Refunds',
+                        url: '/handbook/growth/revops/refunds',
+                    },
+                    {
+                        name: 'Lead assignment during time off',
+                        url: '/handbook/growth/revops/lead-assignment-ooo',
+                    },
+                    {
+                        name: 'Giving credits to customers',
+                        url: '/handbook/growth/revops/credits',
+                    },
+                ],
+            }
         ],
     },
 ]
@@ -1817,8 +1835,8 @@ export const docsMenu = {
                                     url: '/docs/libraries/js',
                                 },
                                 {
-                                    name: 'Features',
-                                    url: '/docs/libraries/js/features',
+                                    name: 'Usage',
+                                    url: '/docs/libraries/js/usage',
                                 },
                                 {
                                     name: 'Configuration',
@@ -1868,6 +1886,20 @@ export const docsMenu = {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
+                            children: [
+                                {
+                                    name: 'Installation',
+                                    url: '/docs/libraries/ios',
+                                },
+                                {
+                                    name: 'Usage',
+                                    url: '/docs/libraries/ios/usage',
+                                },
+                                {
+                                    name: 'Configuration',
+                                    url: '/docs/libraries/ios/configuration',
+                                },
+                            ],
                         },
                         {
                             name: 'Java',
@@ -1882,7 +1914,7 @@ export const docsMenu = {
                             url: '/docs/libraries/node',
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/node',
                                 },
                                 {
@@ -1900,7 +1932,7 @@ export const docsMenu = {
                             url: '/docs/libraries/python',
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/python',
                                 },
                                 {
@@ -1926,7 +1958,7 @@ export const docsMenu = {
                             },
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/react-native',
                                 },
                                 {
@@ -3744,6 +3776,10 @@ export const docsMenu = {
                         {
                             name: 'Android',
                             url: '/docs/error-tracking/installation/android',
+                        },
+                        {
+                            name: 'Flutter',
+                            url: '/docs/error-tracking/installation/flutter',
                         },
                         {
                             name: 'Manual/API',
