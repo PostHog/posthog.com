@@ -252,8 +252,10 @@ export const posthog = {
                     flag_scheduling: true,
                     history_activity: true,
                     instant_rollbacks: true,
+                    lifecycle: true,
                     multi_environment: 'Partial',
                     permissioning: true,
+                    triggers: false,
                 },
             },
             testing: {

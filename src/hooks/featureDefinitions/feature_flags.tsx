@@ -106,6 +106,10 @@ export const featureFlagsFeatures = {
                 name: 'Instant rollbacks',
                 description: 'Disable a feature without touching your codebase',
             },
+            lifecycle: {
+                name: 'Lifecycle management',
+                description: 'Display new and old flags',
+            },
             multi_environment: {
                 name: 'Multi-environment support',
                 description: 'Use the same flag key across PostHog projects for local development or staging',
@@ -113,6 +117,10 @@ export const featureFlagsFeatures = {
             permissioning: {
                 name: 'Flag permissioning',
                 description: 'Control who can edit and modify flags',
+            },
+            triggers: {
+                name: 'Triggers',
+                description: 'Trigger changes based on metrics',
             },
         },
     },

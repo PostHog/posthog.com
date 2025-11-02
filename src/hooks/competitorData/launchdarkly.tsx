@@ -28,8 +28,8 @@ export const launchdarkly = {
             },
             targeting: {
                 features: {
-                    target_by_percentage: false,
-                    target_by_person_properties: false,
+                    target_by_percentage: true,
+                    target_by_person_properties: true,
                     target_by_cohorts: false,
                     geographic_targeting: false,
                     group_targeting: false,
@@ -42,8 +42,10 @@ export const launchdarkly = {
                     flag_scheduling: 'Enterprise',
                     history_activity: false,
                     instant_rollbacks: false,
+                    lifecycle: 'Enterprise',
                     multi_environment: true,
                     permissioning: true,
+                    triggers: 'Enterprise',
                 },
             },
             testing: {
@@ -68,7 +70,7 @@ export const launchdarkly = {
         experiments: {
             available: true,
             pricing: {
-                free_tier: false,
+                free_tier: 'None, paid add-on',
             },
             features: {
                 count_value_metrics: false,
@@ -200,19 +202,20 @@ export const launchdarkly = {
     platform: {
         deployment: {
             open_source: 'Partial',
+            reverse_proxy: true,
             self_host: false,
         },
         developer: {
             api: 'Pro',
             native_data_sources: false,
             notebooks: false,
-            proxies: true,
             sdks: true,
             sql: false,
         },
         pricing: {
             free_tier: false,
             transparent_pricing: false,
+            self_serve: false,
             usage_based_pricing: true,
         },
         integrations: {

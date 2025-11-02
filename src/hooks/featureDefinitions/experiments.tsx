@@ -159,7 +159,7 @@ export const experimentsFeatures = {
                     'Pass structured data to variants, letting you dynamically configure and change user experiences without redeploys',
             },
             multivariate_testing: {
-                name: 'Multivariate testing',
+                name: 'Multivariate (A/B/n) testing',
                 description: 'Test multiple variables simultaneously to find optimal combinations',
             },
             api_access: {
