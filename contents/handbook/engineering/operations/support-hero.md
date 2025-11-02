@@ -19,7 +19,7 @@ Our Support Engineers, in [the Support team](/teams/support) triage tickets for 
 Most engineering teams run a incident.io schedule:
 
 -   [Product Analytics](https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MQKVAJTKFB3AJDXJT)
--   [Feature SucceFlags](https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MPKV37SV54YQJ9HTK)
+-   [Feature Flags](https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MPKV37SV54YQJ9HTK)
 -   [Replay](https://app.incident.io/posthog/on-call/schedules/01K8WVCP2M7GRSJ5R65DVYRXYK)
 -   [Infrastructure](https://app.incident.io/posthog/on-call/schedules/01K747JK9BVYP9K516Q07HA6H2)
 -   [Growth](https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MG1V5M3N0HZ3H4ZJP)
