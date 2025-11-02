@@ -16,21 +16,21 @@ Our Support Engineers, in [the Support team](/teams/support) triage tickets for 
 
 ## When is my turn?
 
-Most engineering teams run a PagerDuty schedule:
+Most engineering teams run a incident.io schedule:
 
--   [Product Analytics](https://posthog.pagerduty.com/schedules#PXUZ9XL)
--   [Feature Success](https://posthog.pagerduty.com/schedules#P04FUTJ)
--   [Replay](https://posthog.pagerduty.com/schedules#PLGXQIF)
--   [CDP](https://posthog.pagerduty.com/schedules#PM8YSH8)
--   [Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
--   [Growth](https://posthog.pagerduty.com/schedules#PN1Q6BO)
--   [Surveys](https://posthog.pagerduty.com/schedules#P04FUTJ)
+-   [Product Analytics](hhttps://app.incident.io/posthog/on-call/schedules/01K8WVCP2MQKVAJTKFB3AJDXJT)
+-   [Feature SucceFlags](https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MPKV37SV54YQJ9HTK)
+-   [Replay](https://app.incident.io/posthog/on-call/schedules/01K8WVCP2M7GRSJ5R65DVYRXYK)
+-   [Infrastructure](https://app.incident.io/posthog/on-call/schedules/01K747JK9BVYP9K516Q07HA6H2)
+-   [Growth](https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MG1V5M3N0HZ3H4ZJP)
+-   [Surveys](https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MWDV4HHMFJXDFZT3N)
+-   [All schedules]https://app.incident.io/posthog/on-call/schedules)
 
 The schedules consist of contiguous blocks, but that definitely doesn't mean working 24/7 – you should just work your normal hours.
 
 ## What if I'm scheduled for a week when I won't be available?
 
-Swap with a teammate in advance! Find a volunteer by asking in Slack, then use PagerDuty schedule overrides. You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
+Swap with a teammate in advance! Find a volunteer by asking in Slack, then use incident.io schedule overrides. You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
 
 ## I can't assign tickets or make public replies
 
@@ -141,7 +141,7 @@ The key principle: We want to be responsive to our open-source community when we
 
 ## What do I do as a SDK Support Hero?
 
-Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation. [The schedule is managed in PagerDuty](https://posthog.pagerduty.com/schedules#P7B7NTR).
+Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation. [The schedule is managed in incident.io](https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MD6JK1TEGAK97450S).
 
 Your primary responsibility is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
 
