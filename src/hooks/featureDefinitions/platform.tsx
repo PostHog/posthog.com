@@ -74,7 +74,7 @@ export const platformFeatures = {
             },
             gcs: {
                 name: 'Google Cloud Storage',
-                description: 'Export data to GCS',
+                description: 'Import/export data',
             },
             snowflake: {
                 name: 'Snowflake',
@@ -168,6 +168,10 @@ export const platformFeatures = {
                 name: 'Email reports',
                 description: 'Send reports to email',
             },
+            discord: {
+                name: 'Discord',
+                description: 'Send survey responses and data to Discord',
+            },
         },
     },
     developer: {
@@ -250,6 +254,10 @@ export const platformFeatures = {
             gdpr_ready: {
                 name: 'GDPR-ready',
                 description: 'Can be compliant with GDPR',
+            },
+            ccpa_ready: {
+                name: 'CCPA-ready',
+                description: 'Compliant with California Consumer Privacy Act',
             },
             hipaa_ready: {
                 name: 'HIPAA-ready',

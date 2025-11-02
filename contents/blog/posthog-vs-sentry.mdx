@@ -1,18 +1,18 @@
 ---
-title: "In-depth: PostHog vs Sentry"
+title: 'In-depth: PostHog vs Sentry'
 date: 2025-01-29
 author:
- - ian-vanagas
+    - ian-vanagas
 rootpage: /blog
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/sentry_0369fbe6bf.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/sentry_0369fbe6bf.jpg
 featuredImageType: full
 category: General
 tags:
-  - Comparisons
+    - Comparisons
 seo:
-  metaTitle: PostHog vs Sentry in-depth tool comparison
-  metaDescription: Looking for the best error monitoring tool with session replay? Compare PostHog vs Sentry on error tracking, performance monitoring, analytics, and more to find the right fit.
+    metaTitle: PostHog vs Sentry in-depth tool comparison
+    metaDescription: Looking for the best error monitoring tool with session replay? Compare PostHog vs Sentry on error tracking, performance monitoring, analytics, and more to find the right fit.
 ---
 
 import ProductComparisonTable from 'components/ProductComparisonTable'
@@ -20,7 +20,7 @@ import ProductComparisonTable from 'components/ProductComparisonTable'
 PostHog and [Sentry](/blog/best-sentry-alternatives) are multi-product platforms trusted by developers to help make their apps better. There is some overlap in how both manage to do that (we're both "telemetry" tools), but many features differ.
 
 1. **Sentry** is an application monitoring tool with error and performance monitoring, session replay, code coverage, and more. It's built for engineers and devops teams.
- 
+
 2. **PostHog** is an all-in-one platform for building successful products. On top of [error tracking](/error-tracking), it includes [product analytics](/product-analytics), [session replays](/session-replay), [feature flags](/experiments), [surveys](/surveys), [LLM analytics](/llm-analytics), and more. It's built for engineers and product teams.
 
 ## How is PostHog different?
@@ -29,8 +29,8 @@ PostHog and [Sentry](/blog/best-sentry-alternatives) are multi-product platforms
 
 The core data each product cares about reveals a lot about their priorities:
 
-- PostHog cares about events and people.
-- Sentry cares about errors and code.
+-   PostHog cares about events and people.
+-   Sentry cares about errors and code.
 
 Broadly, PostHog is mostly a proactive tool that helps you make your product better. Sentry is mostly a reactive tool that helps prevent your product from getting worse.
 
@@ -44,7 +44,7 @@ Sentry also limits many of its features, including team collaboration, to its hi
 
 ### 3. Flexibility and breadth
 
-Sentry is much more focused and opinionated in how you use it. The tools are tailored for developers and devops teams to do error and performance monitoring. 
+Sentry is much more focused and opinionated in how you use it. The tools are tailored for developers and devops teams to do error and performance monitoring.
 
 PostHog offers more flexibility and breadth. It's built for developers but also used by marketing, growth, and data teams. Startups and scaleups use PostHog for tracking [retention](/docs/product-analytics/retention), running targeted [A/B tests](/experiments), [booking user interviews](/tutorials/feedback-interviews-site-apps), and more.
 
@@ -64,21 +64,25 @@ The core of PostHog and Sentry are different. Sentry focuses entirely on error a
     competitors={['posthog', 'sentry']}
     rows={[
         'error_tracking',
-        { label: 'Performance monitoring', description: 'Trace requests or queries and profile functions', customValue: 'Partial' },
+        {
+            label: 'Performance monitoring',
+            description: 'Trace requests or queries and profile functions',
+            values: ['', ''],
+        },
         'session_replay',
         'surveys',
         'product_analytics',
         'web_analytics',
-        { label: 'LLM analytics', description: 'Monitor and debug your LLM-powered features', customValue: false },
+        { label: 'LLM analytics', description: 'Monitor and debug your LLM-powered features', values: ['', ''] },
         'feature_flags',
         'experiments',
         'heatmaps',
     ]}
 />
 
-- Sentry includes the ability to create and visualize custom metrics as you would do with product analytics, but its visualizations and customizability is limited compared to PostHog.
+-   Sentry includes the ability to create and visualize custom metrics as you would do with product analytics, but its visualizations and customizability is limited compared to PostHog.
 
-- PostHog includes [network performance tracking](/docs/session-replay/network-recording) in session replay and [web vitals tracking](/docs/web-analytics/web-vitals) in web analytics. This helps you both analyze performance and requests for specific sessions and get an overview of web vitals and areas for improvement.
+-   PostHog includes [network performance tracking](/docs/session-replay/network-recording) in session replay and [web vitals tracking](/docs/web-analytics/web-vitals) in web analytics. This helps you both analyze performance and requests for specific sessions and get an overview of web vitals and areas for improvement.
 
 ### Platform
 
@@ -89,13 +93,13 @@ The core of PostHog and Sentry are different. Sentry focuses entirely on error a
         'platform.deployment.open_source',
         'platform.deployment.eu_hosting',
         'platform.pricing.free_tier',
-        { label: 'Alerting', description: 'Alert when types of events happen', customValue: true },
+        { label: 'Alerting', description: 'Alert when types of events happen', values: ['', ''] },
         'platform.developer.sdks',
-        { label: 'Free team members', description: 'Invite your team to your project for free', customValue: false },
+        { label: 'Free team members', description: 'Invite your team to your project for free', values: ['', ''] },
     ]}
 />
 
-- Sentry's free plan is limited to 1 user, 5k errors, and 50 replays, along with several feature restrictions. PostHog has a [free plan](/pricing) and a "pay-as-you-go" paid plan with a generous free tier, meaning you get to use all of the features for free.
+-   Sentry's free plan is limited to 1 user, 5k errors, and 50 replays, along with several feature restrictions. PostHog has a [free plan](/pricing) and a "pay-as-you-go" paid plan with a generous free tier, meaning you get to use all of the features for free.
 
 ### Error and performance monitoring
 
@@ -104,15 +108,23 @@ Error and performance monitoring is the main focus of Sentry. Although PostHog h
 <ProductComparisonTable
     competitors={['posthog', 'sentry']}
     rows={[
-        { label: 'Exception capture', description: 'Capture errors and exceptions including stack traces', customValue: true },
-        { label: 'Free errors', description: 'Free errors you can capture per month', customValue: '100k' },
-        { label: 'Issue management', description: 'Monitor and manage issues', customValue: true },
-        { label: 'Code context', description: 'See the code related to the issue', customValue: true },
-        { label: 'Tracing', description: 'Track the path of a request across your system', customValue: false },
-        { label: 'Profiling', description: 'Monitor and visualize code performance', customValue: false },
-        { label: 'Network performance', description: 'Track network performance of sessions', customValue: true },
-        { label: 'Cron monitoring', description: 'Track scheduled job health', customValue: false },
-        { label: 'Release tracking', description: 'Track the performance of each release of your software', customValue: false },
+        {
+            label: 'Exception capture',
+            description: 'Capture errors and exceptions including stack traces',
+            values: ['', ''],
+        },
+        { label: 'Free errors', description: 'Free errors you can capture per month', values: ['100k', '5k'] },
+        { label: 'Issue management', description: 'Monitor and manage issues', values: ['', ''] },
+        { label: 'Code context', description: 'See the code related to the issue', values: ['', ''] },
+        { label: 'Tracing', description: 'Track the path of a request across your system', values: ['', ''] },
+        { label: 'Profiling', description: 'Monitor and visualize code performance', values: ['', ''] },
+        { label: 'Network performance', description: 'Track network performance of sessions', values: ['', ''] },
+        { label: 'Cron monitoring', description: 'Track scheduled job health', values: ['', ''] },
+        {
+            label: 'Release tracking',
+            description: 'Track the performance of each release of your software',
+            values: ['', ''],
+        },
     ]}
 />
 
@@ -123,18 +135,18 @@ Replays enable you to watch how users experience your app, diagnose issues, impr
 <ProductComparisonTable
     competitors={['posthog', 'sentry']}
     rows={[
-        { label: 'Web', description: 'Record sessions from web apps', customValue: true },
-        { label: 'iOS', description: 'Record sessions from iOS apps', customValue: true },
-        { label: 'Android', description: 'Record sessions from Android apps', customValue: true },
-        { label: 'React Native', description: 'Record sessions from React Native apps', customValue: true },
-        { label: 'Flutter', description: 'Record sessions from Flutter apps', customValue: true },
-        { label: 'Sampling', description: 'Choose what sessions you record', customValue: true },
-        { label: 'Privacy', description: 'Censor private or personal information', customValue: true },
-        { label: 'Console', description: 'Capture console logs, errors', customValue: true },
-        { label: 'Canvas', description: 'Record canvas elements', customValue: true },
-        { label: 'Free allowance', description: 'Free replays per month', customValue: '5,000' },
-        { label: '50k replays cost', description: 'Cost per month of 50,000 replays', customValue: '$173' },
-        { label: '100k replays cost', description: 'Cost per month of 100,000 replays', customValue: '$273' },
+        { label: 'Web', description: 'Record sessions from web apps', values: ['', ''] },
+        { label: 'iOS', description: 'Record sessions from iOS apps', values: ['', ''] },
+        { label: 'Android', description: 'Record sessions from Android apps', values: ['', ''] },
+        { label: 'React Native', description: 'Record sessions from React Native apps', values: ['', ''] },
+        { label: 'Flutter', description: 'Record sessions from Flutter apps', values: ['', ''] },
+        { label: 'Sampling', description: 'Choose what sessions you record', values: ['', ''] },
+        { label: 'Privacy', description: 'Censor private or personal information', values: ['', ''] },
+        { label: 'Console', description: 'Capture console logs, errors', values: ['', ''] },
+        { label: 'Canvas', description: 'Record canvas elements', values: ['', ''] },
+        { label: 'Free allowance', description: 'Free replays per month', values: ['5,000', '50'] },
+        { label: '50k replays cost', description: 'Cost per month of 50,000 replays', values: ['173', ''] },
+        { label: '100k replays cost', description: 'Cost per month of 100,000 replays', values: ['$273', ''] },
     ]}
 />
 
@@ -147,21 +159,21 @@ Feedback in Sentry is connected to errors and included as part of the price. It 
 <ProductComparisonTable
     competitors={['posthog', 'sentry']}
     rows={[
-        { label: 'Text input', description: 'Capture what users want to tell you', customValue: true },
-        { label: 'Rating and selects', description: 'Let users pick preset options', customValue: false },
-        { label: 'Multi-part surveys', description: 'Ask multiple questions', customValue: false },
-        { label: 'Templates', description: 'For NPS, CSAT, interviews, and more', customValue: false },
-        { label: 'Triggers', description: 'Trigger surveys on events and actions', customValue: false },
-        { label: 'User targeting', description: 'Target specific users or cohorts', customValue: false },
-        { label: 'API', description: 'Implement your own UI', customValue: true },
-        { label: 'Customization', description: 'Color, position, branding, delay', customValue: false },
-        { label: 'Free allowance', description: 'Free responses per month', customValue: '1500' },
+        { label: 'Text input', description: 'Capture what users want to tell you', values: ['', ''] },
+        { label: 'Rating and selects', description: 'Let users pick preset options', values: ['', ''] },
+        { label: 'Multi-part surveys', description: 'Ask multiple questions', values: ['', ''] },
+        { label: 'Templates', description: 'For NPS, CSAT, interviews, and more', values: ['', ''] },
+        { label: 'Triggers', description: 'Trigger surveys on events and actions', values: ['', ''] },
+        { label: 'User targeting', description: 'Target specific users or cohorts', values: ['', ''] },
+        { label: 'API', description: 'Implement your own UI', values: ['', ''] },
+        { label: 'Customization', description: 'Color, position, branding, delay', values: ['', ''] },
+        { label: 'Free allowance', description: 'Free responses per month', values: ['1,500', ''] },
     ]}
 />
 
 ### Analytics
 
-On the flip side to error and performance monitoring, analytics is a main focus of PostHog where it shines compared to Sentry. 
+On the flip side to error and performance monitoring, analytics is a main focus of PostHog where it shines compared to Sentry.
 
 Sentry does have some analytics capabilities but it is limited compared to PostHog's full suite of product analytics features. On top of this, many of Sentry's features like custom dashboards and insights are exclusive to their more expensive business plan.
 
@@ -180,16 +192,16 @@ Sentry does have some analytics capabilities but it is limited compared to PostH
     ]}
 />
 
-- An error in Sentry and an event in PostHog are relatively similar. Using this as a basis, PostHog has a 200x higher free tier (5k vs 1M).
+-   An error in Sentry and an event in PostHog are relatively similar. Using this as a basis, PostHog has a 200x higher free tier (5k vs 1M).
 
-- Sentry only autocaptures errors. If you really wanted to use it to capture clicks and pageviews, you would need to do so manually.
+-   Sentry only autocaptures errors. If you really wanted to use it to capture clicks and pageviews, you would need to do so manually.
 
 ### Security and compliance
 
 <ProductComparisonTable
     competitors={['posthog', 'sentry']}
     rows={[
-        { label: 'Audit logs', description: 'Manage and view edits and related users', customValue: true },
+        { label: 'Audit logs', description: 'Manage and view edits and related users', values: ['', ''] },
         'platform.security.gdpr_ready',
         'platform.security.hipaa_ready',
         'platform.security.soc2_certified',
@@ -210,11 +222,15 @@ Both PostHog and Sentry work with other tools, but PostHog can act more as a sin
         'platform.integrations.segment',
         'platform.integrations.slack',
         'platform.integrations.microsoft_teams',
-        { label: 'Postgres', description: 'Sync and query data from your database', customValue: false },
-        { label: 'Stripe', description: 'Sync and query data from Stripe', customValue: false },
-        { label: 'Zendesk', description: 'Sync and query data from Zendesk', customValue: false },
-        { label: 'Hubspot', description: 'Sync and query data from Hubspot', customValue: false },
-        { label: 'Project management', description: 'Add issues to tools like Jira, Linear, and GitHub', customValue: true },
+        { label: 'Postgres', description: 'Sync and query data from your database', values: ['', ''] },
+        { label: 'Stripe', description: 'Sync and query data from Stripe', values: ['', ''] },
+        { label: 'Zendesk', description: 'Sync and query data from Zendesk', values: ['', ''] },
+        { label: 'Hubspot', description: 'Sync and query data from Hubspot', values: ['', ''] },
+        {
+            label: 'Project management',
+            description: 'Add issues to tools like Jira, Linear, and GitHub',
+            values: ['', ''],
+        },
     ]}
 />
 
@@ -224,15 +240,15 @@ Both PostHog and Sentry work with other tools, but PostHog can act more as a sin
 
 Every PostHog user gets a generous amount of free usage each month:
 
-| &nbsp;                                   | **Free usage per month** |
-|------------------------------------------|--------------------------|
-| **Error tracking**                       | 100k errors              |
-| **Product analytics**                    | 1 million events         |
-| **Session replay**                       | 5,000 recordings         |
-| **Surveys**                              | 1500 responses           |
-| **LLM analytics**                        | 100k events         |
-| **Feature flags and A/B testing**        | 1 million API requests   |
-| **Data warehouse**                       | 1 million synced rows    |
+| &nbsp;                            | **Free usage per month** |
+| --------------------------------- | ------------------------ |
+| **Error tracking**                | 100k errors              |
+| **Product analytics**             | 1 million events         |
+| **Session replay**                | 5,000 recordings         |
+| **Surveys**                       | 1500 responses           |
+| **LLM analytics**                 | 100k events              |
+| **Feature flags and A/B testing** | 1 million API requests   |
+| **Data warehouse**                | 1 million synced rows    |
 
 Beyond this, we have usage-based pricing with volume discounts. Starts can also qualify for free credits.
 
@@ -260,4 +276,4 @@ You can get started with PostHog in less than 90 seconds using our [AI install w
 
 ### Can I use PostHog with a CDP?
 
-Yes. You can use PostHog with Segment, Rudderstack, and more. See our docs on using [PostHog with a CDP](/docs/advanced/cdp) for more. 
+Yes. You can use PostHog with Segment, Rudderstack, and more. See our docs on using [PostHog with a CDP](/docs/advanced/cdp) for more.

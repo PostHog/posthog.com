@@ -32,7 +32,7 @@ export const heatmapsFeatures = {
         },
         toolbar: {
             name: 'Toolbar',
-            description: 'View heatmaps in browser',
+            description: 'View heatmaps overlaid directly on a webpage',
         },
     },
 }

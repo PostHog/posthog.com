@@ -6,16 +6,16 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-logrocket/posthog-vs-logrocket.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-logrocket/posthog-vs-logrocket.jpg
 featuredImageType: full
 author:
-  - joe-martin
+    - joe-martin
 category: General
 tags:
-  - Comparisons
+    - Comparisons
 seo:
-  metaTitle: PostHog vs LogRocket in-depth tool comparison
-  metaDescription: Looking for the best product analytics and session replay tool? Compare PostHog vs LogRocket on analytics, feature flags, and more to find the right fit.
+    metaTitle: PostHog vs LogRocket in-depth tool comparison
+    metaDescription: Looking for the best product analytics and session replay tool? Compare PostHog vs LogRocket on analytics, feature flags, and more to find the right fit.
 ---
 
 import ProductComparisonTable from 'components/ProductComparisonTable'
@@ -74,7 +74,7 @@ While LogRocket offers some product analytics features, it isn’t primarily int
         'product_analytics.features.cohorts',
         'product_analytics.user_paths',
         'product_analytics.retention',
-        { label: 'UTM tracking', description: 'Track marketing campaigns with UTM tags', customValue: true },
+        { label: 'UTM tracking', description: 'Track marketing campaigns with UTM tags', values: ['', ''] },
         'product_analytics.funnels.features.correlation_analysis',
         'product_analytics.group_analytics',
         'product_analytics.insights.features.formula_mode',
@@ -105,17 +105,13 @@ LogRocket and PostHog both offer robust, full-featured [session replay tools](/b
     ]}
 />
 
-- **Mobile app recordings:** Session replay for mobile apps is currently under development – see [our GitHub mega issue](https://github.com/PostHog/posthog/issues/13267) for more.
+-   **Mobile app recordings:** Session replay for mobile apps is currently under development – see [our GitHub mega issue](https://github.com/PostHog/posthog/issues/13267) for more.
 
 ### Heatmaps and click tracking
 
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
-    rows={[
-        'heatmaps.features.heatmaps',
-        'heatmaps.features.clickmaps',
-        'heatmaps.features.scrollmaps',
-    ]}
+    rows={['heatmaps.features.heatmaps', 'heatmaps.features.clickmaps', 'heatmaps.features.scrollmaps']}
 />
 
 ### Tracking & SDKs
@@ -125,13 +121,21 @@ LogRocket and PostHog both offer robust, full-featured [session replay tools](/b
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
     rows={[
-        { label: 'Event tracking', description: 'Track manually instrumented events', customValue: true },
-        { label: 'Autocapture', description: 'Automatically track events without instrumentation', customValue: true },
-        { label: 'Combined events', description: 'Track related events as a single trackable action or behavior', customValue: true },
-        { label: 'Reverse proxy available', description: 'Send events from your own domain to capture more data', customValue: true },
-        { label: 'Cross-domain tracking', description: 'Track users across domains and sub-domains', customValue: true },
-        { label: 'Server-side tracking', description: 'Send events from your server', customValue: true },
-        { label: 'Capture API', description: 'Send events through an API', customValue: true },
+        { label: 'Event tracking', description: 'Track manually instrumented events', values: ['', ''] },
+        { label: 'Autocapture', description: 'Automatically track events without instrumentation', values: ['', ''] },
+        {
+            label: 'Combined events',
+            description: 'Track related events as a single trackable action or behavior',
+            values: ['', ''],
+        },
+        {
+            label: 'Reverse proxy available',
+            description: 'Send events from your own domain to capture more data',
+            values: ['', ''],
+        },
+        { label: 'Cross-domain tracking', description: 'Track users across domains and sub-domains', values: ['', ''] },
+        { label: 'Server-side tracking', description: 'Send events from your server', values: ['', ''] },
+        { label: 'Capture API', description: 'Send events through an API', values: ['', ''] },
     ]}
 />
 
@@ -142,13 +146,13 @@ PostHog supports a wide range of client and server libraries, but not all featur
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
     rows={[
-        { label: 'JavaScript', customValue: true },
-        { label: 'React Native', customValue: true },
-        { label: 'React', customValue: true },
-        { label: 'Flutter', customValue: true },
-        { label: 'iOS', customValue: true },
-        { label: 'Android', customValue: true },
-        { label: 'Ruby', customValue: true },
+        { label: 'JavaScript', values: ['', ''] },
+        { label: 'React Native', values: ['', ''] },
+        { label: 'React', values: ['', ''] },
+        { label: 'Flutter', values: ['', ''] },
+        { label: 'iOS', values: ['', ''] },
+        { label: 'Android', values: ['', ''] },
+        { label: 'Ruby', values: ['', ''] },
     ]}
 />
 
@@ -168,11 +172,11 @@ PostHog supports a wide range of client and server libraries, but not all featur
         'platform.integrations.snowflake',
         'platform.integrations.bigquery',
         'platform.integrations.rudderstack',
-        { label: 'Airbyte', description: 'Extract and load data to external platforms', customValue: true },
+        { label: 'Airbyte', description: 'Extract and load data to external platforms', values: ['', ''] },
     ]}
 />
 
-### Popular integrations 
+### Popular integrations
 
 Below, we've listed a few of the most popular integrations used across PostHog and LogRocket. See our [app directory](/cdp) for a full list.
 
@@ -191,6 +195,7 @@ Below, we've listed a few of the most popular integrations used across PostHog a
 />
 
 ### Compliance
+
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
     rows={[
@@ -212,15 +217,15 @@ Got another question? You can [ask the PostHog team anything you want](/question
 
 PostHog has transparent pricing based on usage with a generous free tier:
 
-|                       | **Free usage per month** 
-|-----------------------|--------------------------
-| **Product analytics** | 1 million events        
-| **Session replay**    | 5,000 recordings         
-| **Feature flags**     | 1 million API requests
-| **A/B testing**       | 1 million API requests  
-| **Surveys**           | 1500 responses
+|                       | **Free usage per month** |
+| --------------------- | ------------------------ |
+| **Product analytics** | 1 million events         |
+| **Session replay**    | 5,000 recordings         |
+| **Feature flags**     | 1 million API requests   |
+| **A/B testing**       | 1 million API requests   |
+| **Surveys**           | 1500 responses           |
 
-We charge progressively less the more you use once you exceed your monthly free allowance. Volume, non-profit and [startup discounts](/startups) are also available. 
+We charge progressively less the more you use once you exceed your monthly free allowance. Volume, non-profit and [startup discounts](/startups) are also available.
 
 ### How can I estimate my usage?
 

@@ -369,3 +369,23 @@ If you need to add a custom row that doesn't exist in the competitor data, you c
 />
 
 The `values` array should have the same length as the `competitors` array, with each value corresponding to a competitor in order.
+
+### Section headers
+
+Add section headers to organize comparison tables into logical groups. Headers only require a `label` property:
+
+```tsx
+<ProductComparisonTable
+    competitors={['posthog', 'amplitude']}
+    rows={[
+        { label: 'Core Features' },  // Section header - no description needed
+        'product_analytics.features.autocapture',
+        'product_analytics.features.cohorts',
+        { label: 'Advanced Features' },  // Another section header
+        'product_analytics.insights.sql_editor',
+        'product_analytics.group_analytics',
+    ]}
+/>
+```
+
+Headers automatically span across all columns and are styled with a border to visually separate sections.

@@ -23,6 +23,10 @@ export const sessionReplayFeatures = {
             name: 'Event timeline',
             description: 'See events triggered during recordings',
         },
+        highlights: {
+            name: 'Highlights',
+            description: 'Create short clips from recordings',
+        },
         iframe_recording: {
             name: 'Iframe recording',
             description: 'Record embedded iframes',
@@ -34,6 +38,10 @@ export const sessionReplayFeatures = {
         screenshot_mode: {
             name: 'Screenshot mode',
             description: 'Mobile session reconstructions using app screenshots',
+        },
+        sentiment_scores: {
+            name: 'Frustration and engagement scores',
+            description: 'Filter recordings by sentiment analysis',
         },
         wireframe_mode: {
             name: 'Wireframe mode',
@@ -85,7 +93,7 @@ export const sessionReplayFeatures = {
                 description: 'Track network events and performance metrics within a session',
             },
             network_monitor: {
-                name: 'Network & performance monitoring',
+                name: 'Network monitoring',
                 description: 'Monitor network activity during sessions',
             },
             dom_explorer: {
@@ -110,9 +118,17 @@ export const sessionReplayFeatures = {
                 name: 'Conditional recording',
                 description: 'Only capture the sessions you want based on conditions',
             },
+            filter_by_user_or_event: {
+                name: 'Filter recordings by user or event',
+                description: 'Find specific recordings by filtering for users or events',
+            },
             minimum_duration: {
                 name: 'Minimum duration',
                 description: 'Only record sessions longer than a specified duration',
+            },
+            search_by_network: {
+                name: 'Search by network request',
+                description: 'Search recordings by network requests made during the session',
             },
             target_by_url: {
                 name: 'Target recordings by URL',
@@ -125,14 +141,6 @@ export const sessionReplayFeatures = {
             target_by_feature_flag: {
                 name: 'Record via feature flag',
                 description: 'Only record sessions for users that have the flag enabled',
-            },
-            filter_by_user_or_event: {
-                name: 'Filter recordings by user or event',
-                description: 'Find specific recordings by filtering for users or events',
-            },
-            search_by_network: {
-                name: 'Search by network request',
-                description: 'Search recordings by network requests made during the session',
             },
         },
     },

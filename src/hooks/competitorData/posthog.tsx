@@ -18,7 +18,7 @@ export const posthog = {
                 scrollmaps: true,
                 movement_maps: true,
                 rage_clicks: true,
-                save_heatmaps: true,
+                save_heatmaps: false,
                 toolbar: true,
             },
         },
@@ -56,6 +56,7 @@ export const posthog = {
                 export_to_json: true,
                 export_to_video: 'Beta',
                 filter_by_user_or_event: true,
+                highlights: 'Beta',
                 identity_detection: true,
                 iframe_recording: true,
                 minimum_duration: true,
@@ -65,6 +66,7 @@ export const posthog = {
                 privacy_masking: true,
                 rage_click_detection: true,
                 retention_policy: 'Up to 3 months',
+                sentiment_scores: false,
                 screenshot_mode: true,
                 scrollmaps: true,
                 search_by_network: false,
@@ -378,9 +380,39 @@ export const posthog = {
                 popover: true,
                 rating: true,
                 sdk_support: true,
+                sentiment_analysis: false,
                 slack_integration: true,
                 survey_templates: true,
                 user_interview_requests: true,
+                webhooks: true,
+            },
+            presentation: {
+                features: {
+                    hosted_surveys: 'Beta',
+                },
+            },
+            targeting: {
+                features: {
+                    display_conditions: true,
+                    event_triggered: true,
+                    linked_feature_flag: true,
+                    custom_targeting: true,
+                },
+            },
+            question_types: {
+                features: {
+                    multiple_choice: true,
+                    multi_select: true,
+                    rating: true,
+                    emoji_reaction: true,
+                    interview_scheduling: true,
+                },
+            },
+            platforms: {
+                features: {
+                    web: true,
+                    mobile: true,
+                },
             },
         },
         revenue_analytics: {
@@ -490,6 +522,7 @@ export const posthog = {
             csv_exports: true,
             customer_io: true,
             datadog: false,
+            discord: true,
             email_reports: true,
             exports: true,
             gcs: true,
@@ -529,6 +562,7 @@ export const posthog = {
         },
         security: {
             bot_blocking: true,
+            ccpa_ready: true,
             cookieless_tracking: true,
             data_anonymization: true,
             data_retention: '7 years',

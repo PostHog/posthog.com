@@ -58,16 +58,16 @@ Although both Optimizely and PostHog provide experimentation and feature flags, 
     competitors={['posthog', 'optimizely']}
     rows={[
         'platform.deployment.open_source',
-        { label: 'Self-service', description: 'Start without talking to sales', customValue: true },
+        { label: 'Self-service', description: 'Start without talking to sales', values: ['', ''] },
         'experiments',
         'feature_flags',
         'product_analytics',
         'web_analytics',
         'session_replay',
         'surveys',
-        { label: 'CMS', description: 'Manage content', customValue: false },
-        { label: 'Cart optimization', description: 'Optimize ecommerce checkouts', customValue: false },
-        { label: 'Project management', description: 'Manage projects related to experiments', customValue: false },
+        { label: 'CMS', description: 'Manage content', values: ['', ''] },
+        { label: 'Cart optimization', description: 'Optimize ecommerce checkouts', values: ['', ''] },
+        { label: 'Project management', description: 'Manage projects related to experiments', values: ['', ''] },
     ]}
 />
 
@@ -86,20 +86,20 @@ The core web experimentation features like traffic allocation, preview mode, cro
 <ProductComparisonTable
     competitors={['posthog', 'optimizely']}
     rows={[
-        { label: 'A/B/n tests', description: 'Do tests with multiple variants', customValue: true },
+        { label: 'A/B/n tests', description: 'Do tests with multiple variants', values: ['', ''] },
         'experiments.features.custom_targeting',
         'experiments.features.custom_goals',
-        { label: 'Single-page app support', description: 'Use app frameworks like React and Vue', customValue: true },
+        { label: 'Single-page app support', description: 'Use app frameworks like React and Vue', values: ['', ''] },
         'experiments.features.no_code_experiments',
         {
             label: 'Low-code experiments',
             description: 'Implement experiments with a small amount of code',
-            customValue: true,
+            values: ['', ''],
         },
         'experiments.features.funnel_metrics',
-        { label: 'Native analytics', description: 'Track experiments without third-party tools', customValue: true },
-        { label: 'Scheduling', description: 'Schedule experiments to run at specific times', customValue: true },
-        { label: 'Use external data', description: 'Use data from other platforms in experiments', customValue: true },
+        { label: 'Native analytics', description: 'Track experiments without third-party tools', values: ['', ''] },
+        { label: 'Scheduling', description: 'Schedule experiments to run at specific times', values: ['', ''] },
+        { label: 'Use external data', description: 'Use data from other platforms in experiments', values: ['', ''] },
     ]}
 />
 
@@ -176,15 +176,15 @@ Feature experimentation relates to releasing and testing feature changes in your
         'feature_flags.features.boolean_flags',
         'feature_flags.targeting.features.target_by_percentage',
         'feature_flags.targeting.features.target_by_person_properties',
-        { label: 'Logging', description: 'Log flag usage', customValue: true },
-        { label: 'Audience builder', description: 'Known as cohorts in PostHog', customValue: true },
-        { label: 'Custom attributes', description: 'Known as properties in PostHog', customValue: true },
-        { label: 'UI controls', description: 'Configure experiments with UI', customValue: true },
+        { label: 'Logging', description: 'Log flag usage', values: ['', ''] },
+        { label: 'Audience builder', description: 'Known as cohorts in PostHog', values: ['', ''] },
+        { label: 'Custom attributes', description: 'Known as properties in PostHog', values: ['', ''] },
+        { label: 'UI controls', description: 'Configure experiments with UI', values: ['', ''] },
         'experiments.analysis.features.statistical_significance',
         {
             label: 'Remote configuration',
             description: 'Configure your experiments without changing code',
-            customValue: true,
+            values: ['', ''],
         },
         'feature_flags.management.features.multi_environment',
     ]}
@@ -202,7 +202,7 @@ PostHog and Optimizely are very different here. Optimizely is sales-driven and c
         'platform.pricing.transparent_pricing',
         'platform.pricing.usage_based_pricing',
         'platform.pricing.free_tier',
-        { label: 'Per-product pricing', description: 'Separate pricing for each product', customValue: true },
+        { label: 'Per-product pricing', description: 'Separate pricing for each product', values: ['', ''] },
     ]}
 />
 
@@ -222,16 +222,16 @@ PostHog’s product analytics suite shines here. It treats feature flags and exp
         {
             label: 'Native analytics',
             description: 'Track experiments without the use of third parties',
-            customValue: true,
+            values: ['', ''],
         },
-        { label: 'Results', description: 'View experiment results', customValue: true },
-        { label: 'Segment results', description: 'Break results down for segments', customValue: true },
+        { label: 'Results', description: 'View experiment results', values: ['', ''] },
+        { label: 'Segment results', description: 'Break results down for segments', values: ['', ''] },
         'experiments.features.secondary_metrics',
-        { label: 'Winner', description: 'Calculate the winning experiment variant', customValue: true },
-        { label: 'Custom insights', description: 'Query and customize analytics', customValue: true },
+        { label: 'Winner', description: 'Calculate the winning experiment variant', values: ['', ''] },
+        { label: 'Custom insights', description: 'Query and customize analytics', values: ['', ''] },
         'product_analytics.trends',
         'product_analytics.funnels',
-        { label: 'Confidence interval', description: 'Show confidence in results', customValue: true },
+        { label: 'Confidence interval', description: 'Show confidence in results', values: ['', ''] },
         'session_replay',
     ]}
 />
@@ -246,10 +246,10 @@ PostHog and Optimizely both support similar languages and frameworks with SDKs, 
     competitors={['posthog', 'optimizely']}
     rows={[
         'platform.developer.sdks',
-        { label: 'Client', description: 'JavaScript, React', customValue: true },
-        { label: 'Server', description: 'Node, Python, Go, PHP', customValue: true },
-        { label: 'Mobile', description: 'Android, iOS', customValue: true },
-        { label: 'OTT', description: 'Over-the-top TV applications', customValue: false },
+        { label: 'Client', description: 'JavaScript, React', values: ['', ''] },
+        { label: 'Server', description: 'Node, Python, Go, PHP', values: ['', ''] },
+        { label: 'Mobile', description: 'Android, iOS', values: ['', ''] },
+        { label: 'OTT', description: 'Over-the-top TV applications', values: ['', ''] },
         'platform.developer.api',
     ]}
 />
@@ -261,7 +261,7 @@ PostHog’s integrations are free while Optimizely often requires a subscription
 <ProductComparisonTable
     competitors={['posthog', 'optimizely']}
     rows={[
-        { label: 'Google Analytics', customValue: false },
+        { label: 'Google Analytics', values: ['', ''] },
         'platform.integrations.salesforce',
         'cdp',
         'platform.integrations.zapier',
@@ -284,13 +284,13 @@ Both PostHog and Optimizely have the privacy and compliance tools users expect.
 <ProductComparisonTable
     competitors={['posthog', 'optimizely']}
     rows={[
-        { label: 'Change history', description: 'Trail of changes to data', customValue: true },
+        { label: 'Change history', description: 'Trail of changes to data', values: ['', ''] },
         'platform.security.saml_sso',
         'platform.security.two_factor_auth',
-        { label: 'Roles and permissions', description: 'Control who can do what', customValue: true },
+        { label: 'Roles and permissions', description: 'Control who can do what', values: ['', ''] },
         'platform.security.gdpr_ready',
-        { label: 'Cookieless', description: 'Use product without cookies', customValue: true },
-        { label: 'DPA available', description: 'Enter into Data Processing Agreements', customValue: true },
+        { label: 'Cookieless', description: 'Use product without cookies', values: ['', ''] },
+        { label: 'DPA available', description: 'Enter into Data Processing Agreements', values: ['', ''] },
     ]}
 />
 

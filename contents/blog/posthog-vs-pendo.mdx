@@ -6,16 +6,16 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-pendo/posthog-vs-pendo.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-pendo/posthog-vs-pendo.jpg
 featuredImageType: full
 author:
-  - joe-martin
+    - joe-martin
 category: General
 tags:
-  - Comparisons
+    - Comparisons
 seo:
-  metaTitle: PostHog vs Pendo in-depth tool comparison
-  metaDescription: Looking for the best product analytics and in-app messaging tool? Compare PostHog vs Pendo on analytics, session replays, pricing, and more to find the right fit.
+    metaTitle: PostHog vs Pendo in-depth tool comparison
+    metaDescription: Looking for the best product analytics and in-app messaging tool? Compare PostHog vs Pendo on analytics, session replays, pricing, and more to find the right fit.
 ---
 
 import ProductComparisonTable from 'components/ProductComparisonTable'
@@ -30,36 +30,40 @@ Now it's time for the long answer...
 
 In this article we’ll explore the crucial differences and similarities between Pendo (specifically, Pendo Engage) and PostHog. We’ll cover topics such as:
 
-- Pendo and PostHog’s [core features](#core-features)
-- [Product analytics](#product-analytics) and [in-app messaging](#in-app-messages-and-prompts) features in detail
-- [Integrations](#apps-and-integrations) and [data pipelines](#data-pipelines)
-- [Libraries](#library-support), [tracking differences and SDKs](#sdks-and-tracking)
-- [Privacy, security and regulatory compliance](#compliance-and-security)
-- [Pricing details](#how-much-does-pendo-cost), [free trials](#do-pendo-and-posthog-offer-free-trials) and other [frequently asked questions](#frequently-asked-questions)
+-   Pendo and PostHog’s [core features](#core-features)
+-   [Product analytics](#product-analytics) and [in-app messaging](#in-app-messages-and-prompts) features in detail
+-   [Integrations](#apps-and-integrations) and [data pipelines](#data-pipelines)
+-   [Libraries](#library-support), [tracking differences and SDKs](#sdks-and-tracking)
+-   [Privacy, security and regulatory compliance](#compliance-and-security)
+-   [Pricing details](#how-much-does-pendo-cost), [free trials](#do-pendo-and-posthog-offer-free-trials) and other [frequently asked questions](#frequently-asked-questions)
 
 ## How is PostHog different?
 
 ### 1. PostHog is an all-in one platform
+
 PostHog brings all the tools engineers need to measure success, run experiments, and more, into one platform. It’s a complete, all-in-one product OS, with robust analytics, feature flagging, A/B testing, and session capturing features. Pendo, on the other hand, is more limited, and requires you to adopt other platforms, such as Hotjar or [LaunchDarkly](/blog/posthog-vs-launchdarkly), to get comparable functionality to PostHog.
 
 ### 2. PostHog is built for engineers
+
 We built PostHog to support technically-savvy product managers and engineers — especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). As such, PostHog includes many powerful features that aren’t available in tools like Pendo, which are built for more general audiences.
 
 ### 3. PostHog is open source
+
 Because we build for engineers first, we're also open source. You can check out [PostHog’s source code](https://github.com/PostHog), [build integrations](/docs/apps/build) or [other services](/blog/how-we-built-an-app-server) on top of the product, and even [give feedback or interact with the team via GitHub](https://github.com/PostHog). Transparency, including transparent pricing, is one of our core values.
 
 <ArrayCTA />
 
 ## Comparing PostHog and Pendo
+
 **Pendo** has four pricing tiers — Free, Starter, Growth, and Portfolio – for its main product, Pendo Engage. Pendo's Starter plan is limited to 2,000 active users a minimum of $8,000 per year.
 
 **PostHog** has three pricing plans — Free, Scale, and Enterprise:
 
-- The Free plan includes everything early-stage companies need with a generous usage limit – 1 million events and 5k replays per month.
+-   The Free plan includes everything early-stage companies need with a generous usage limit – 1 million events and 5k replays per month.
 
-- The Scale plan unlocks advanced features, like group analytics and A/B testing. Your first 1 million events and 5k replays each month are still free – you pay for what you use thereafter. 
+-   The Scale plan unlocks advanced features, like group analytics and A/B testing. Your first 1 million events and 5k replays each month are still free – you pay for what you use thereafter.
 
-- The Enterprise plan unlocks extra security, compliance, and permissioning features to meet the needs of large businesses. 
+-   The Enterprise plan unlocks extra security, compliance, and permissioning features to meet the needs of large businesses.
 
 > **Are you an early-stage startup?** Get $50k in PostHog credit, and more, by joining [our PostHog for Startups program](/startups)!
 
@@ -74,24 +78,23 @@ To make a clean comparison between PostHog and Pendo, we’ll focus on comparing
         'surveys',
         'feature_flags',
         'experiments',
-        { label: 'In-app prompts and messages', description: 'Send messages to users in your app', customValue: true },
-        { label: 'Apps/integrations', description: 'Push and pull data to other destinations', customValue: true },
+        { label: 'In-app prompts and messages', description: 'Send messages to users in your app', values: ['', ''] },
+        { label: 'Apps/integrations', description: 'Push and pull data to other destinations', values: ['', ''] },
         'platform.deployment.open_source',
     ]}
 />
 
-- **Session replays:** [Session replays](/session-replay) in PostHog recreate exactly what real users see and how they use your product. They also enable you to debug problems using built-in console logs and network performance.
+-   **Session replays:** [Session replays](/session-replay) in PostHog recreate exactly what real users see and how they use your product. They also enable you to debug problems using built-in console logs and network performance.
 
-- **Feature flags:** PostHog includes [multivariate feature flags](/feature-flags) that support JSON payloads, enabling you to push real-time changes to your product without redeploying. Teams can use feature flags to offer different features or UI choices to users, to trigger in-app messages, and more.
+-   **Feature flags:** PostHog includes [multivariate feature flags](/feature-flags) that support JSON payloads, enabling you to push real-time changes to your product without redeploying. Teams can use feature flags to offer different features or UI choices to users, to trigger in-app messages, and more.
 
-- **A/B testing:** In PostHog, you can use the [experimentation suite](/experiments) to create multivariate tests within your product, such as showing some users a different page layout to others. Over time, you can build an understanding of which page performs better, correlate results with other events, and deploy a final version.
+-   **A/B testing:** In PostHog, you can use the [experimentation suite](/experiments) to create multivariate tests within your product, such as showing some users a different page layout to others. Over time, you can build an understanding of which page performs better, correlate results with other events, and deploy a final version.
 
 ### Product Analytics
 
-PostHog and Pendo are ultimately built for different types of users. While PostHog is designed with engineers and technical users in mind, Pendo is intended more for marketers and UX designers. 
+PostHog and Pendo are ultimately built for different types of users. While PostHog is designed with engineers and technical users in mind, Pendo is intended more for marketers and UX designers.
 
-This difference is reflected in all levels of the product, but especially in product analytics, where many advanced features which are lacking in Pendo, are available in PostHog. 
-
+This difference is reflected in all levels of the product, but especially in product analytics, where many advanced features which are lacking in Pendo, are available in PostHog.
 
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
@@ -102,7 +105,7 @@ This difference is reflected in all levels of the product, but especially in pro
         'product_analytics.features.cohorts',
         'product_analytics.user_paths',
         'product_analytics.retention',
-        { label: 'UTM tracking', description: 'Track marketing campaigns with UTM tags', customValue: true },
+        { label: 'UTM tracking', description: 'Track marketing campaigns with UTM tags', values: ['', ''] },
         'product_analytics.funnels.features.correlation_analysis',
         'product_analytics.group_analytics',
         'product_analytics.insights.features.formula_mode',
@@ -110,46 +113,56 @@ This difference is reflected in all levels of the product, but especially in pro
     ]}
 />
 
-- **Correlation analysis:** [Correlation analysis](/product-analytics) automatically highlights significant linking properties or events relevant to an insight. For example, you can find if users who complete a funnel are likely to be from a certain location, or have completed another event. In PostHog, correlation analysis is a standard part of analytics. 
+-   **Correlation analysis:** [Correlation analysis](/product-analytics) automatically highlights significant linking properties or events relevant to an insight. For example, you can find if users who complete a funnel are likely to be from a certain location, or have completed another event. In PostHog, correlation analysis is a standard part of analytics.
 
-- **Formulas:** Formulas in PostHog enable you to create custom insights using your data. A simple example of a formula would be an equation to figure out a ratio or percentage (e.g. the percentage of users who completed two different events), though advanced formulas can use more elaborate functions, such as `COS` and `SIN`.
+-   **Formulas:** Formulas in PostHog enable you to create custom insights using your data. A simple example of a formula would be an equation to figure out a ratio or percentage (e.g. the percentage of users who completed two different events), though advanced formulas can use more elaborate functions, such as `COS` and `SIN`.
 
-- **SQL access:** While both PostHog and Pendo have ready-made insights and visualization types, only PostHog gives you unlimited access to your data by [writing your own SQL queries](/docs/sql). This is ideal for data scientists, product managers, and engineers who want to perform advanced analysis on user data.
+-   **SQL access:** While both PostHog and Pendo have ready-made insights and visualization types, only PostHog gives you unlimited access to your data by [writing your own SQL queries](/docs/sql). This is ideal for data scientists, product managers, and engineers who want to perform advanced analysis on user data.
 
-<h4 className="mb-4">Discover what's possible with <span className="text-blue">product analytics</span></h4>
-<TutorialsSlider slugs={[
-  "/tutorials/churn-rate",
-  "/tutorials/event-tracking-guide",
-  "/tutorials/api-get-insights-persons",
-  "/tutorials/feature-retention",
-  "/tutorials/next-steps-after-installing"
-]} />
+<h4 className="mb-4">
+    Discover what's possible with <span className="text-blue">product analytics</span>
+</h4>
+<TutorialsSlider
+    slugs={[
+        '/tutorials/churn-rate',
+        '/tutorials/event-tracking-guide',
+        '/tutorials/api-get-insights-persons',
+        '/tutorials/feature-retention',
+        '/tutorials/next-steps-after-installing',
+    ]}
+/>
 
 ### In-app messages and prompts
+
 Pendo is all about creating in-app messages, prompts, tooltips, measuring their impact on adoption and retention, and collecting feedback. But these aren't unique features – PostHog also supports in-app messages and interactive pop-ups through the use of [feature flag payloads](/docs/feature-flags/payloads) and [site apps](/tutorials/build-site-app), as well as [customizable surveys](/docs/surveys/manual).
 
-The main difference is, because Pendo is designed for less technical users, it offers an interface that is simpler, but less powerful. You can easily create tooltips, announcement pop-ups and polls in Pendo, but not other types of prompt such as a Calendly integration. 
+The main difference is, because Pendo is designed for less technical users, it offers an interface that is simpler, but less powerful. You can easily create tooltips, announcement pop-ups and polls in Pendo, but not other types of prompt such as a Calendly integration.
 
-PostHog has ready-made apps for displaying pop-ups and tooltips, including banners and site notifications, but can also create customizable surveys with which you can collect qualitative feedback to analyze alongside the quantitative data. Surveys can even be used to send links to users for scheduling face-to-face interviews. 
+PostHog has ready-made apps for displaying pop-ups and tooltips, including banners and site notifications, but can also create customizable surveys with which you can collect qualitative feedback to analyze alongside the quantitative data. Surveys can even be used to send links to users for scheduling face-to-face interviews.
 
-<h4 className="mb-4">Discover what's possible with <span className="text-blue">PostHog apps</span></h4>
-<TutorialsSlider slugs={[
-  "/tutorials/build-site-app",
-  "/tutorials/build-your-own-posthog-app",
-  "/tutorials/how-to-connect-discord-to-posthog-with-zapier",
-  "/tutorials/react-popups"
-]} />
+<h4 className="mb-4">
+    Discover what's possible with <span className="text-blue">PostHog apps</span>
+</h4>
+<TutorialsSlider
+    slugs={[
+        '/tutorials/build-site-app',
+        '/tutorials/build-your-own-posthog-app',
+        '/tutorials/how-to-connect-discord-to-posthog-with-zapier',
+        '/tutorials/react-popups',
+    ]}
+/>
 
 ### Apps and integrations
+
 Both Pendo and PostHog have a wide selection of apps and integration. Both also include integrations with tools such as Zapier, which enable you to move data to even more platforms.
 
-One unique advantage of PostHog is that, because it is open source, it’s easy to [create your own apps and integrations](/tutorials/build-your-own-posthog-app). This is useful if you’re, for example, using niche software in your stack that hasn’t been widely adopted, or if you require a direct integration between PostHog and your product. 
+One unique advantage of PostHog is that, because it is open source, it’s easy to [create your own apps and integrations](/tutorials/build-your-own-posthog-app). This is useful if you’re, for example, using niche software in your stack that hasn’t been widely adopted, or if you require a direct integration between PostHog and your product.
 
 > The number of available apps is constantly increasing for both PostHog and Pendo, so rather than list all available apps, we’ve shortened this section to only list the most popular integrations in particular categories. Want the full list? Check [the PostHog app library](/apps)!
 
 ### Data pipelines
 
-‘Data pipeline’ refers to apps which enable you to integrate with data warehouses, data lakes, or other forms of data storage. 
+‘Data pipeline’ refers to apps which enable you to integrate with data warehouses, data lakes, or other forms of data storage.
 
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
@@ -163,13 +176,13 @@ One unique advantage of PostHog is that, because it is open source, it’s easy 
         'platform.integrations.snowflake',
         'platform.integrations.bigquery',
         'platform.integrations.rudderstack',
-        { label: 'Airbyte', description: 'Extract and load data to external platforms', customValue: true },
+        { label: 'Airbyte', description: 'Extract and load data to external platforms', values: ['', ''] },
     ]}
 />
 
-### Popular integrations 
+### Popular integrations
 
-Below, we've listed a few of the most popular integrations used across PostHog and Pendo. 
+Below, we've listed a few of the most popular integrations used across PostHog and Pendo.
 
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
@@ -177,10 +190,10 @@ Below, we've listed a few of the most popular integrations used across PostHog a
         'platform.integrations.hubspot',
         'platform.integrations.salesforce',
         'platform.integrations.zapier',
-        { label: 'Shopify', description: 'Sync customer and order data', customValue: false },
+        { label: 'Shopify', description: 'Sync customer and order data', values: ['', ''] },
         'platform.integrations.stripe',
         'platform.integrations.slack',
-        { label: 'Discord', description: 'Receive notifications about new data', customValue: false },
+        { label: 'Discord', description: 'Receive notifications about new data', values: ['', ''] },
         'platform.integrations.microsoft_teams',
         'platform.integrations.intercom',
         'platform.integrations.customer_io',
@@ -193,7 +206,8 @@ Below, we've listed a few of the most popular integrations used across PostHog a
 
 ## Compliance and security
 
-Regulatory compliance can be a critical need for many teams, especially if they operate in financial or healthcare industries. Regulations such as HIPPA and GDPR can require teams to store data in certain locations, or to protect data in certain ways. 
+Regulatory compliance can be a critical need for many teams, especially if they operate in financial or healthcare industries. Regulations such as HIPPA and GDPR can require teams to store data in certain locations, or to protect data in certain ways.
+
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
     rows={[
@@ -213,16 +227,25 @@ Regulatory compliance can be a critical need for many teams, especially if they 
 Pendo and PostHog both support a variety of tracking and implementation options to get your data into their platform. Both platforms enable you to create tracked events manually, as well as offering autocapture to help you get started quickly.
 
 Autocapture is preferred by many users because it's faster to set up, but some argue that it creates too much noise or cost to be useful. We disagree, and it’s why PostHog gives you your first million events for free, every month — so you can capture events without worrying about these issues. [It’s something we feel quite strongly about](/blog/is-autocapture-still-bad).
+
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
     rows={[
-        { label: 'Event tracking', description: 'Track manually instrumented events', customValue: true },
-        { label: 'Autocapture', description: 'Automatically track events without instrumentation', customValue: true },
-        { label: 'Combined events (actions)', description: 'Track related events as a single trackable action or behavior', customValue: false },
-        { label: 'Send events from your own domain', description: 'Ensure ad blockers don\'t block data capture', customValue: true },
-        { label: 'Cross-domain tracking', description: 'Track users across domains and subdomains', customValue: true },
-        { label: 'Server-side tracking', description: 'Send events from your server', customValue: true },
-        { label: 'Capture API', description: 'Send events through an API', customValue: true },
+        { label: 'Event tracking', description: 'Track manually instrumented events', values: ['', ''] },
+        { label: 'Autocapture', description: 'Automatically track events without instrumentation', values: ['', ''] },
+        {
+            label: 'Combined events (actions)',
+            description: 'Track related events as a single trackable action or behavior',
+            values: ['', ''],
+        },
+        {
+            label: 'Send events from your own domain',
+            description: "Ensure ad blockers don't block data capture",
+            values: ['', ''],
+        },
+        { label: 'Cross-domain tracking', description: 'Track users across domains and subdomains', values: ['', ''] },
+        { label: 'Server-side tracking', description: 'Send events from your server', values: ['', ''] },
+        { label: 'Capture API', description: 'Send events through an API', values: ['', ''] },
     ]}
 />
 
@@ -233,13 +256,13 @@ PostHog supports a wide range of client and server libraries, but not all featur
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
     rows={[
-        { label: 'JavaScript', customValue: true },
-        { label: 'React Native', customValue: true },
-        { label: 'React', customValue: true },
-        { label: 'Flutter', customValue: true },
-        { label: 'iOS', customValue: true },
-        { label: 'Android', customValue: true },
-        { label: 'Ruby', customValue: false },
+        { label: 'JavaScript', values: ['', ''] },
+        { label: 'React Native', values: ['', ''] },
+        { label: 'React', values: ['', ''] },
+        { label: 'Flutter', values: ['', ''] },
+        { label: 'iOS', values: ['', ''] },
+        { label: 'Android', values: ['', ''] },
+        { label: 'Ruby', values: ['', ''] },
     ]}
 />
 
@@ -255,19 +278,19 @@ Got another question? You can [ask the PostHog team anything you want](/question
 
 ### Who is Pendo useful for?
 
-Pendo is designed primarily for marketers and UX specialists. Its key features are the ability to create in-app prompts and messages, such as tooltips, without technical know-how. Pendo enables these users to follow the performance of such messages and to monitor broad feature adoption and usage. 
+Pendo is designed primarily for marketers and UX specialists. Its key features are the ability to create in-app prompts and messages, such as tooltips, without technical know-how. Pendo enables these users to follow the performance of such messages and to monitor broad feature adoption and usage.
 
 ### Who is PostHog useful for?
 
-PostHog is built primarily with engineers, product managers and other technical users in mind. It also offers the ability to create in-app prompts and messages, but also offers a number of other tools that are useful for these types of teams, such as feature flags and session replays. 
+PostHog is built primarily with engineers, product managers and other technical users in mind. It also offers the ability to create in-app prompts and messages, but also offers a number of other tools that are useful for these types of teams, such as feature flags and session replays.
 
-This difference is ultimately reflected in many of the features both platforms offer, and how they are designed. PostHog's focus on breadth and supporting engineers in creating better products, for example, is reflected in its core features. 
+This difference is ultimately reflected in many of the features both platforms offer, and how they are designed. PostHog's focus on breadth and supporting engineers in creating better products, for example, is reflected in its core features.
 
 ### How much does Pendo cost?
 
-Pendo has complex, tier-based pricing, which isn’t entirely transparent and is based on the number of monthly active users. 
+Pendo has complex, tier-based pricing, which isn’t entirely transparent and is based on the number of monthly active users.
 
-A free tier is available with basic features, but can only track up to 500 monthly active users. After this, the Starter tier offers greater in-app messaging features and support for up to 2,000 monthly active users — but costs $8,000 per year. 
+A free tier is available with basic features, but can only track up to 500 monthly active users. After this, the Starter tier offers greater in-app messaging features and support for up to 2,000 monthly active users — but costs $8,000 per year.
 
 Two additional tiers are available for larger teams — Growth and Portfolio — but the pricing for each is custom and not available publicly.
 

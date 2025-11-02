@@ -64,7 +64,7 @@ Both PostHog and Matomo offer a range of tools for tracking and analyzing your s
         {
             label: 'Free team members',
             description: 'Number of users you can invite to your instance',
-            customValue: 'Unlimited',
+            values: ['Unlimited', ''],
         },
         'platform.deployment.eu_hosting',
         'platform.deployment.open_source',
@@ -134,7 +134,7 @@ But this doesn't mean either lacks those types of integrations.
         {
             label: 'Warehouse exports',
             description: 'Export data to warehouses like S3 and BigQuery for storage and analysis',
-            customValue: true,
+            values: ['', ''],
         },
         'platform.integrations.warehouse_import',
         'platform.integrations.slack',
@@ -142,7 +142,7 @@ But this doesn't mean either lacks those types of integrations.
         {
             label: 'Google Search Console',
             description: 'See search queries that sent traffic to your site',
-            customValue: false,
+            values: ['', ''],
         },
         'platform.integrations.wordpress',
         'platform.integrations.stripe',
@@ -174,7 +174,7 @@ Matomo positions itself as a Google Analytics alternative that protects your dat
         {
             label: 'Audit log',
             description: 'Get a report of all activities happening in your instance',
-            customValue: 'Enterprise',
+            values: ['', 'Enterprise?'],
         },
     ]}
 />

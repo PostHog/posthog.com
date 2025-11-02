@@ -34,7 +34,8 @@ interface RowConfig {
 
 The component automatically infers the row type based on the fields present:
 
--   **Header**: `{ label: 'Section name' }` - label without product/feature
+-   **Header**: `{ label: 'Section name' }` - label only, no product/feature/values (description is optional)
+-   **Custom row**: `{ label: 'Custom feature', values: [true, false] }` - label with values array (treated as feature row)
 -   **Product-level**: `{ product: 'product_analytics' }` - product without featureSet/feature
 -   **Feature**: `{ product: 'error_tracking', feature: 'error_alerts' }` - product with feature
 -   **Platform feature**: `{ feature: 'open_source' }` - feature without product (if exists in platform definitions)
@@ -174,6 +175,26 @@ If you need to add a custom row that doesn't exist in the competitor data, use t
 ```
 
 The `values` array should have the same length as the `competitors` array, with each value corresponding to a competitor in the same order.
+
+### Section Headers
+
+Organize tables into logical groups with section headers. Headers only require a `label` property:
+
+```tsx
+<ProductComparisonTable
+    competitors={['posthog', 'amplitude']}
+    rows={[
+        { label: 'Core Features' },  // Section header - description is optional
+        'product_analytics.features.autocapture',
+        'product_analytics.features.cohorts',
+        { label: 'Advanced Analytics' },
+        'product_analytics.insights.sql_editor',
+        'product_analytics.group_analytics',
+    ]}
+/>
+```
+
+Headers span across all columns and are visually separated with borders. The `description` field is optional and typically not used for headers.
 
 ### In Product Pages
 

@@ -54,19 +54,19 @@ Both tools offer everything you need to use flags and experiments effectivelym b
     competitors={['posthog', 'launchdarkly']}
     rows={[
         'platform.deployment.open_source',
-        { label: 'Self-service', description: 'No need to talk to sales', customValue: true },
+        { label: 'Self-service', description: 'No need to talk to sales', values: ['', ''] },
         'platform.developer.sdks',
         'platform.developer.proxies',
         'platform.developer.api',
         'platform.developer.local_evaluation',
-        { label: 'Bootstrapping', description: 'Flags available on frontend application load', customValue: true },
+        { label: 'Bootstrapping', description: 'Flags available on frontend application load', values: ['', ''] },
         'platform.developer.sql',
         'session_replay',
         'surveys',
         'cdp',
         'data_warehouse',
-        { label: 'Notebooks', description: 'Ad-hoc analysis and collaboration', customValue: true },
-        { label: 'Dark mode', description: 'Choose between light and dark UI', customValue: true },
+        { label: 'Notebooks', description: 'Ad-hoc analysis and collaboration', values: ['', ''] },
+        { label: 'Dark mode', description: 'Choose between light and dark UI', values: ['', ''] },
     ]}
 />
 
@@ -84,9 +84,9 @@ Both PostHog and LaunchDarkly offer all the functionality you expect for feature
         'feature_flags.features.json_payloads',
         'feature_flags.management.features.multi_environment',
         'feature_flags.management.features.flag_scheduling',
-        { label: 'Lifecycle management', description: 'Display new and old flags', customValue: true },
-        { label: 'Triggers', description: 'Trigger changes based on metrics', customValue: false },
-        { label: 'Unlimited targeting size', description: 'Target contexts of any size', customValue: true },
+        { label: 'Lifecycle management', description: 'Display new and old flags', values: ['', ''] },
+        { label: 'Triggers', description: 'Trigger changes based on metrics', values: ['', ''] },
+        { label: 'Unlimited targeting size', description: 'Target contexts of any size', values: ['', ''] },
         'feature_flags.features.early_access_management',
     ]}
 />
@@ -103,7 +103,7 @@ PostHog and LaunchDarkly have relatively similar experimentation feature sets, e
         {
             label: 'Free usage',
             description: 'How many experiments can you run for free?',
-            customValue: '1M requests per month',
+            values: ['1M requests per month', ''],
         },
         'experiments.features.custom_goals',
         'experiments.features.secondary_metrics',
@@ -216,13 +216,13 @@ Although LaunchDarkly has basic reporting features, PostHog has a more expansive
 <ProductComparisonTable
     competitors={['posthog', 'launchdarkly']}
     rows={[
-        { label: 'Analytics', description: 'Capture usage and calls related to flags', customValue: true },
+        { label: 'Analytics', description: 'Capture usage and calls related to flags', values: ['', ''] },
         'product_analytics.trends',
         'product_analytics.funnels',
         'product_analytics.retention',
-        { label: 'Breakdowns', description: 'Breakdown analytics by properties', customValue: true },
+        { label: 'Breakdowns', description: 'Breakdown analytics by properties', values: ['', ''] },
         'dashboards',
-        { label: 'Non-flag data', description: 'Combine flag data with other product data', customValue: true },
+        { label: 'Non-flag data', description: 'Combine flag data with other product data', values: ['', ''] },
     ]}
 />
 
@@ -233,14 +233,14 @@ Both PostHog and LaunchDarkly have a range of integrations that enable them to i
 <ProductComparisonTable
     competitors={['posthog', 'launchdarkly']}
     rows={[
-        { label: 'Free integrations', description: 'Use integrations on the free plan', customValue: true },
+        { label: 'Free integrations', description: 'Use integrations on the free plan', values: ['', ''] },
         'platform.integrations.exports',
         'platform.integrations.imports',
         'platform.integrations.slack',
         'platform.integrations.microsoft_teams',
         'platform.integrations.zapier',
         'platform.integrations.sentry',
-        { label: 'Edge tools', description: 'Use edge networks', customValue: false },
+        { label: 'Edge tools', description: 'Use edge networks', values: ['', ''] },
     ]}
 />
 
@@ -264,8 +264,8 @@ Both PostHog and LaunchDarkly enable companies to remain secure and compliant wi
         'platform.security.soc2_certified',
         'platform.security.two_factor_auth',
         'platform.security.saml_sso',
-        { label: 'Approvals', description: 'Require approvals to change flags', customValue: false },
-        { label: 'Permissioning', description: 'Control who can edit and modify flags', customValue: 'Enterprise' },
+        { label: 'Approvals', description: 'Require approvals to change flags', values: ['', ''] },
+        { label: 'Permissioning', description: 'Control who can edit and modify flags', values: ['Enterprise?', ''] },
     ]}
 />
 

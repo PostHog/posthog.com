@@ -5,6 +5,54 @@ export const surveysFeatures = {
         url: '/surveys',
         docsUrl: '/docs/surveys',
     },
+    features: {
+        ai_response_summaries: {
+            name: 'AI response summaries',
+            description: 'AI-generated summaries of survey responses',
+        },
+        aggregated_results: {
+            name: 'Aggregated results',
+            description: 'See feedback summarized and broken down per response',
+        },
+        automatic_nps_calculation: {
+            name: 'Automatic NPS score calculations',
+            description: 'Automatic calculation of Net Promoter Scores from NPS survey responses',
+        },
+        capture_partial_responses: {
+            name: 'Capture partial responses',
+            description:
+                'Log responses to individual questions as they are received, rather than waiting for completion',
+        },
+        completion_conditions: {
+            name: 'Completion conditions',
+            description: 'Configure the survey to repeat on a schedule or when display conditions are met',
+        },
+        customizable_wait_periods: {
+            name: 'Customizable wait periods',
+            description: 'Set a delay before a survey opens',
+        },
+        sentiment_analysis: {
+            name: 'Sentiment analysis',
+            description: 'Analyze survey results using AI to discover trends',
+        },
+        webhooks: {
+            name: 'Webhooks',
+            description: 'Send survey responses to places like Slack or Teams',
+        },
+    },
+    platforms: {
+        description: '',
+        features: {
+            web: {
+                name: 'Web surveys',
+                description: 'Show surveys on websites and web apps',
+            },
+            mobile: {
+                name: 'Mobile surveys',
+                description: 'Show surveys in mobile apps',
+            },
+        },
+    },
     question_types: {
         description: 'Ask anything with flexible question formats',
         features: {
@@ -32,6 +80,10 @@ export const surveysFeatures = {
                 name: 'Freeform text',
                 description: 'Open-ended text responses for detailed feedback',
             },
+            interview_scheduling: {
+                name: 'Interview scheduling',
+                description: 'Send users a link to schedule a feedback meeting',
+            },
         },
     },
     templates: {
@@ -39,7 +91,7 @@ export const surveysFeatures = {
         features: {
             survey_templates: {
                 name: 'Survey templates',
-                description: 'Choose from a library of pre-built templates or start from scratch',
+                description: 'Choose from a library of pre-built templates (CSAT, NPS, etc) or start from scratch',
             },
             nps_surveys: {
                 name: 'NPS surveys',
@@ -64,11 +116,15 @@ export const surveysFeatures = {
         features: {
             display_conditions: {
                 name: 'Display conditions',
-                description: 'Display surveys based on URL, person property, or feature flag',
+                description: 'Display surveys based on URL or person property',
             },
             event_triggered: {
                 name: 'Event-triggered surveys',
                 description: 'Trigger a survey to open when an event occurs, either every time or just once',
+            },
+            linked_feature_flag: {
+                name: 'Feature flag targeting',
+                description: 'Target surveys to specific users based on feature flags',
             },
             custom_targeting: {
                 name: 'Custom targeting',
@@ -155,33 +211,6 @@ export const surveysFeatures = {
                 name: 'SDK support',
                 description: 'Supported platforms include JavaScript, iOS, React Native, and Flutter',
             },
-        },
-    },
-    features: {
-        capture_partial_responses: {
-            name: 'Capture partial responses',
-            description:
-                'Log responses to individual questions as they are received, rather than waiting for completion',
-        },
-        completion_conditions: {
-            name: 'Completion conditions',
-            description: 'Configure the survey to repeat on a schedule or when display conditions are met',
-        },
-        customizable_wait_periods: {
-            name: 'Customizable wait periods',
-            description: 'Set a delay before a survey opens',
-        },
-        aggregated_results: {
-            name: 'Aggregated results',
-            description: 'See feedback summarized and broken down per response',
-        },
-        automatic_nps_calculation: {
-            name: 'Automatic NPS score calculations',
-            description: 'Automatic calculation of Net Promoter Scores from NPS survey responses',
-        },
-        ai_response_summaries: {
-            name: 'AI response summaries',
-            description: 'AI-generated summaries of survey responses',
         },
     },
 }

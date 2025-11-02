@@ -54,7 +54,7 @@ Both Plausible and PostHog are [Google Analytics alternatives](/blog/ga4-alterna
         'web_analytics.features.utm_tracking',
         'web_analytics.features.cookieless_tracking',
         'web_analytics.features.snippet_install',
-        { label: 'Script size', description: 'Size of the script that runs on your site', customValue: '56.8 kb' },
+        { label: 'Script size', description: 'Size of the script that runs on your site', values: ['56.8 kb', ''] },
     ]}
 />
 
@@ -91,7 +91,7 @@ Beyond web analytics is where PostHog really shines. We provide all of the tools
     rows={[
         'platform.deployment.eu_hosting',
         'platform.deployment.open_source',
-        { label: 'Free collaboration', description: 'Add unlimited teammates to your project', customValue: false },
+        { label: 'Free collaboration', description: 'Add unlimited teammates to your project', values: ['', ''] },
         'heatmaps',
         'session_replay',
         'experiments',
@@ -119,16 +119,16 @@ Although Plausible has some integrations with other tools, it mostly stands on i
         {
             label: 'Warehouse exports',
             description: 'Export data to warehouses like S3 and BigQuery for storage and analysis',
-            customValue: false,
+            values: ['', ''],
         },
-        { label: 'Data warehouse', description: 'Query customer and product data together', customValue: false },
+        { label: 'Data warehouse', description: 'Query customer and product data together', values: ['', ''] },
         'platform.integrations.warehouse_import',
         'platform.integrations.slack',
         'platform.integrations.email_reports',
         {
             label: 'Google Search Console',
             description: 'See search queries that sent traffic to your site',
-            customValue: true,
+            values: ['', ''],
         },
         'platform.integrations.stripe',
         'platform.integrations.hubspot',
@@ -145,7 +145,7 @@ Plausible prides itself on being privacy-friendly, but PostHog stands toe-to-toe
 <ProductComparisonTable
     competitors={['posthog', 'plausible']}
     rows={[
-        { label: 'Data retention', description: 'The length of time event data is retained', customValue: '7 years' },
+        { label: 'Data retention', description: 'The length of time event data is retained', values: ['', '7 years'] },
         'platform.security.bot_blocking',
         'platform.deployment.reverse_proxy',
         'platform.security.hipaa_ready',

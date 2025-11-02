@@ -1,3 +1,5 @@
+import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory'
+
 export const hotjar = {
     name: 'Hotjar',
     key: 'hotjar',
@@ -7,7 +9,7 @@ export const hotjar = {
     },
     products: {
         product_analytics: {
-            available: true,
+            available: false,
             features: {
                 advertising_analytics: false,
                 autocapture: false,
@@ -74,9 +76,10 @@ export const hotjar = {
                 clickmaps: false,
                 conditional_recording: false,
                 event_timeline: false,
-                export_to_json: false,
+                export_to_json: true,
                 export_to_video: false,
                 filter_by_user_or_event: false,
+                highlights: true,
                 identity_detection: false,
                 iframe_recording: false,
                 minimum_duration: false,
@@ -89,6 +92,7 @@ export const hotjar = {
                 screenshot_mode: false,
                 scrollmaps: false,
                 search_by_network: false,
+                sentiment_scores: true,
                 share_replays: false,
                 single_page_app: false,
                 target_by_feature_flag: false,
@@ -143,14 +147,41 @@ export const hotjar = {
                 nps_surveys: true,
                 pmf_surveys: '',
                 popover: true,
+                sentiment_analysis: true,
                 survey_templates: true,
                 user_interview_requests: true,
+                webhooks: true,
             },
             presentation: {
                 features: {
                     popover: true,
                     feedback_button: true,
                     hosted_surveys: true,
+                },
+            },
+            platforms: {
+                features: {
+                    web: true,
+                    mobile: false,
+                },
+            },
+            targeting: {
+                features: {
+                    display_conditions: true,
+                    event_triggered: true,
+                    linked_feature_flag: false,
+                    custom_targeting: false,
+                },
+            },
+            question_types: {
+                features: {
+                    multiple_choice: true,
+                    multi_select: true,
+                    rating: true,
+                    emoji_reaction: true,
+                    embedded_links: true,
+                    freeform_text: true,
+                    interview_scheduling: true,
                 },
             },
         },
@@ -162,6 +193,9 @@ export const hotjar = {
         },
         data_warehouse: {
             available: false,
+        },
+        dashboards: {
+            available: true,
         },
     },
     platform: {
@@ -179,21 +213,25 @@ export const hotjar = {
             bigquery: false,
             community_integrations: false,
             customer_io: false,
+            csv_exports: true,
             datadog: false,
+            discord: false,
             exports: true,
             gcs: false,
             google_ads: false,
-            hubspot: true,
+            hubspot: false,
             imports: false,
             intercom: true,
             microsoft_teams: true,
             redshift: false,
+            postgres: false,
             s3: false,
             salesforce: true,
             segment: true,
             slack: true,
             snowflake: false,
             sentry: false,
+            stripe: false,
             zapier: true,
             zendesk: false,
         },
@@ -201,6 +239,7 @@ export const hotjar = {
             notebooks: false,
         },
         security: {
+            ccpa_ready: true,
             cookieless_tracking: false,
             data_anonymization: true,
             gdpr_ready: true,
