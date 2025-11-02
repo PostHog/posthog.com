@@ -5,6 +5,11 @@ export const experimentsFeatures = {
         url: '/experiments',
         docsUrl: '/docs/experiments',
     },
+    pricing: {
+        free_tier: {
+            name: 'Monthly free tier',
+        },
+    },
     features: {
         funnel_metrics: {
             name: 'Funnel metrics',

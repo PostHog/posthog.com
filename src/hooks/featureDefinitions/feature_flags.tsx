@@ -5,6 +5,11 @@ export const featureFlagsFeatures = {
         url: '/feature-flags',
         docsUrl: '/docs/feature-flags',
     },
+    pricing: {
+        free_tier: {
+            name: 'Monthly free tier',
+        },
+    },
     features: {
         boolean_flags: {
             name: 'Boolean flags',

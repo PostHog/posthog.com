@@ -57,6 +57,10 @@ export const productAnalyticsFeatures = {
             description: 'Pre-built and custom insights to understand user behavior and product performance',
         },
         features: {
+            ai_insight_builder: {
+                name: 'AI insight builder',
+                description: '"Talk to your data" using AI',
+            },
             ready_made_insights: {
                 name: 'Ready-made insight types',
                 description: 'Pre-built insight types including trends, funnels, paths, retention, and lifecycle',
@@ -304,7 +308,7 @@ export const productAnalyticsFeatures = {
     },
     pricing: {
         free_tier: {
-            name: 'Free usage',
+            name: 'Monthly free tier',
         },
     },
 }

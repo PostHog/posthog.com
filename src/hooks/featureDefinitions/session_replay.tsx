@@ -5,6 +5,11 @@ export const sessionReplayFeatures = {
         url: '/session-replay',
         docsUrl: '/docs/session-replay',
     },
+    pricing: {
+        free_tier: {
+            name: 'Monthly free tier',
+        },
+    },
     features: {
         canvas_recording: {
             name: 'Canvas recording',
@@ -80,7 +85,7 @@ export const sessionReplayFeatures = {
                 description: 'Track network events and performance metrics within a session',
             },
             network_monitor: {
-                name: 'Network monitor',
+                name: 'Network & performance monitoring',
                 description: 'Monitor network activity during sessions',
             },
             dom_explorer: {
@@ -104,6 +109,10 @@ export const sessionReplayFeatures = {
             conditional_recording: {
                 name: 'Conditional recording',
                 description: 'Only capture the sessions you want based on conditions',
+            },
+            minimum_duration: {
+                name: 'Minimum duration',
+                description: 'Only record sessions longer than a specified duration',
             },
             target_by_url: {
                 name: 'Target recordings by URL',
@@ -167,7 +176,7 @@ export const sessionReplayFeatures = {
         features: {
             export_to_json: {
                 name: 'Export recordings to JSON',
-                description: 'Export session data as JSON for further analysis',
+                description: 'Export important recording data offline',
             },
             export_to_video: {
                 name: 'Export recordings to video',

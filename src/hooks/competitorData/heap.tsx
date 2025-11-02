@@ -25,10 +25,11 @@ export const heap = {
                 insights: {
                     available: true,
                     features: {
+                        ai_insight_builder: true,
                         formula_mode: false,
                         ready_made_insight_types: true,
                         sampling: false,
-                        sql_editor: 'Exports only',
+                        sql_editor: false,
                     },
                 },
                 trends: {
@@ -75,7 +76,7 @@ export const heap = {
                 canvas_recording: false,
                 chat_with_recordings: false,
                 clickmaps: false,
-                conditional_recording: false,
+                conditional_recording: true,
                 event_timeline: false,
                 export_to_json: false,
                 export_to_video: false,
@@ -95,7 +96,7 @@ export const heap = {
                 share_replays: false,
                 single_page_app: false,
                 target_by_feature_flag: false,
-                target_by_sample: false,
+                target_by_sample: true,
                 target_by_url: false,
                 wireframe_mode: false,
             },
@@ -114,7 +115,7 @@ export const heap = {
                     heatmaps: false,
                     console_logs: false,
                     performance_monitoring: false,
-                    network_monitor: true,
+                    network_monitor: false,
                     dom_explorer: false,
                 },
             },
@@ -126,9 +127,32 @@ export const heap = {
         },
         feature_flags: {
             available: false,
+            pricing: {
+                free_tier: 'n/a',
+            },
+            features: {
+                implementation: {
+                    features: {
+                        local_evaluation: false,
+                    },
+                },
+            },
         },
         experiments: {
             available: false,
+            pricing: {
+                free_tier: 'n/a',
+            },
+            analysis: {
+                features: {
+                    statistics_engine: 'n/a',
+                },
+            },
+            supported_tests: {
+                features: {
+                    holdout_testing: 'n/a',
+                },
+            },
         },
         surveys: {
             available: false,
@@ -184,16 +208,16 @@ export const heap = {
             zendesk: false,
         },
         security: {
-            gdpr_ready: false,
-            hipaa_ready: false,
-            history_audit_logs: false,
-            saml_sso: false,
-            soc2_certified: false,
-            two_factor_auth: false,
-            user_privacy_options: false,
+            gdpr_ready: true,
+            hipaa_ready: true,
+            history_audit_logs: true,
+            saml_sso: true,
+            soc2_certified: true,
+            two_factor_auth: true,
+            user_privacy_options: true,
         },
     },
     pricing: {
-        model: 'Usage-based',
+        model: '',
     },
 }
