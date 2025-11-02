@@ -33,7 +33,6 @@ export const signoz = {
         developer: {
             api: false,
             collaboration: false,
-            local_evaluation: false,
             mobile_sdks: 'Partial',
             native_data_sources: false,
             notebooks: false,

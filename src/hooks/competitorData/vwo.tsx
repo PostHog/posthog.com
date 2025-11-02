@@ -84,7 +84,6 @@ export const vwo = {
         },
         developer: {
             api: false,
-            local_evaluation: false,
             native_data_sources: false,
             notebooks: false,
             proxies: false,

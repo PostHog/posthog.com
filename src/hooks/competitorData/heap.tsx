@@ -164,7 +164,6 @@ export const heap = {
         },
         developer: {
             api: false,
-            local_evaluation: false,
             notebooks: false,
             proxies: false,
             sdks: false,

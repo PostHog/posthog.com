@@ -19,7 +19,7 @@ export const growthbook = {
             },
             implementation: {
                 features: {
-                    local_evaluation: false,
+                    local_evaluation: true,
                     bootstrapping: false,
                     api_access: false,
                     sdk_support: false,
@@ -156,7 +156,6 @@ export const growthbook = {
         },
         developer: {
             api: 'Beta',
-            local_evaluation: true,
             native_data_sources: false,
             notebooks: false,
             proxies: true,

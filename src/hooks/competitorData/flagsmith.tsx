@@ -18,7 +18,7 @@ export const flagsmith = {
             },
             implementation: {
                 features: {
-                    local_evaluation: false,
+                    local_evaluation: true,
                     bootstrapping: false,
                     api_access: false,
                     sdk_support: false,
@@ -81,7 +81,6 @@ export const flagsmith = {
             notebooks: false,
             proxies: false,
             api: false,
-            local_evaluation: false,
             sql: false,
         },
         integrations: {

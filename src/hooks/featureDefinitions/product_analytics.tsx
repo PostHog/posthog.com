@@ -48,7 +48,7 @@ export const productAnalyticsFeatures = {
         },
         user_profiles: {
             name: 'User profiles',
-            description: 'View user demographic data such as country, language, and device type',
+            description: 'Track personally-identifiable user info like name, email, and usage data',
         },
     },
     insights: {

@@ -150,7 +150,6 @@ export const sentry = {
         developer: {
             api: true,
             collaboration: false,
-            local_evaluation: false,
             mobile_sdks: false,
             native_data_sources: false,
             notebooks: false,

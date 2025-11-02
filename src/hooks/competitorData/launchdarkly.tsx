@@ -19,7 +19,7 @@ export const launchdarkly = {
             },
             implementation: {
                 features: {
-                    local_evaluation: false,
+                    local_evaluation: true,
                     bootstrapping: true,
                     api_access: false,
                     sdk_support: false,
@@ -208,7 +208,6 @@ export const launchdarkly = {
         },
         developer: {
             api: 'Pro',
-            local_evaluation: true,
             native_data_sources: false,
             notebooks: false,
             proxies: true,

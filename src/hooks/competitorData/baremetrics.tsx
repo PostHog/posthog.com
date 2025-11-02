@@ -34,7 +34,6 @@ export const baremetrics = {
         developer: {
             api: false,
             collaboration: false,
-            local_evaluation: false,
             mobile_sdks: false,
             native_data_sources: false,
             notebooks: false,

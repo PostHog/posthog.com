@@ -711,6 +711,11 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             )
         }
 
+        // Handle React nodes (JSX elements)
+        if (React.isValidElement(value)) {
+            return value
+        }
+
         if (typeof value === 'string' || typeof value === 'number') {
             return <span>{value}</span>
         }

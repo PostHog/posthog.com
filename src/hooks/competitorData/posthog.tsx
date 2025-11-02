@@ -1,3 +1,8 @@
+import React from 'react'
+import { IconPiggyBank } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import Link from 'components/Link'
+
 export const posthog = {
     name: 'PostHog',
     key: 'posthog',
@@ -125,7 +130,15 @@ export const posthog = {
                 historical_trends: true,
                 include_and_exclude_wildcards: true,
                 max_number_of_steps: '20',
-                monetization_analytics: 'Via revenue_analytics product',
+                monetization_analytics: (
+                    <>
+                        Via{' '}
+                        <Link to="/revenue-analytics" className="group !no-underline" state={{ newWindow: true }}>
+                            <IconPiggyBank className="size-4 inline-block text-green" />{' '}
+                            <span className="group-hover:!underline">Revenue Analytics</span>
+                        </Link>
+                    </>
+                ),
                 predictive_insights: false,
                 private_insights: true,
                 project_level_permissions: true,
@@ -498,6 +511,7 @@ export const posthog = {
             exports: true,
             gcs: true,
             google_ads: true,
+            google_search_console: false,
             hubspot: true,
             imports: true,
             intercom: true,
@@ -520,10 +534,9 @@ export const posthog = {
             api: true,
             collaboration: 'Invite teammates to collaborate on all features',
             cross_domain_tracking: true,
-            local_evaluation: true,
             mobile_sdks: true,
             native_data_sources: true,
-            notebooks: false,
+            notebooks: true,
             proxies: true,
             sdks: '14',
             server_side_sdks: true,
@@ -540,8 +553,10 @@ export const posthog = {
             gdpr_ready: true,
             hipaa_ready: true,
             history_audit_logs: true,
+            role_based_access_control: true,
             saml_sso: 'Enterprise',
             soc2_certified: true,
+            security_certification: 'SOC 2 Type II',
             two_factor_auth: true,
             user_privacy_options: true,
         },

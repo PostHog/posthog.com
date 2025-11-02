@@ -140,6 +140,10 @@ export const platformFeatures = {
                 name: 'Google Ads',
                 description: 'Import ROI data from Google Ads',
             },
+            google_search_console: {
+                name: 'Google Search Console',
+                description: 'Import data from Google Search Console',
+            },
             ci_cd_integrations: {
                 name: 'CI/CD integrations',
                 description: 'Connect with development tools and workflows',
@@ -184,10 +188,6 @@ export const platformFeatures = {
             api: {
                 name: 'API',
                 description: 'Capture events, get stats, and make changes via API',
-            },
-            local_evaluation: {
-                name: 'Local evaluation (aka streaming)',
-                description: 'Faster flags by not having to rely on the server for evaluation',
             },
             sql: {
                 name: 'SQL',
@@ -254,6 +254,14 @@ export const platformFeatures = {
             hipaa_ready: {
                 name: 'HIPAA-ready',
                 description: 'Can be compliant with HIPAA',
+            },
+            role_based_access_control: {
+                name: 'Role-based access control',
+                description: 'Control access to features and data based on user roles and permissions',
+            },
+            security_certification: {
+                name: 'Security certification',
+                description: 'Third-party security compliance frameworks',
             },
             soc2_certified: {
                 name: 'SOC 2 Type II',

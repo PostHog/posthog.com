@@ -156,7 +156,6 @@ export const optimizely = {
         },
         developer: {
             api: true,
-            local_evaluation: false,
             native_data_sources: false,
             notebooks: false,
             proxies: false,
