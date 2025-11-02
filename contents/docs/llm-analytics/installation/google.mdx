@@ -86,7 +86,72 @@ const client = new GoogleGenAI({
 
 </MultiLanguage>
 
-> **Note:** This integration also works with Vertex AI via Google Cloud Platform. You can use the Google Gen AI SDK's Vertex AI client with PostHog analytics. See [this example](/questions/vertex-api-support) for more details.
+> **Note:** This integration also works with Vertex AI via Google Cloud Platform. You can use the Google Gen AI SDK's Vertex AI client with PostHog analytics.
+>
+> <details>
+> <summary>Click to see Vertex AI code example</summary>
+>
+> <MultiLanguage>
+>
+> ```python
+> from posthog import Posthog
+> from posthog.ai.gemini import Client
+>
+> # Initialize PostHog
+> posthog = Posthog(
+>     project_api_key="<ph_project_api_key>",
+>     host="<ph_client_api_host>"
+> )
+>
+> # Initialize Gemini client with Vertex AI
+> client = Client(
+>     vertexai=True,
+>     project="your-gcp-project-id",
+>     location="us-central1",
+>     posthog_client=posthog,
+>     posthog_distinct_id="user-123"
+> )
+>
+> # Use it
+> response = client.models.generate_content(
+>     model="gemini-2.0-flash",
+>     contents=["Hello, world!"]
+> )
+>
+> print(response.text)
+> ```
+>
+> ```typescript
+> import { PostHog } from 'posthog-node'
+> import { PostHogGoogleGenAI } from 'posthog-ai/gemini'
+>
+> // Initialize PostHog
+> const posthog = new PostHog(
+>   '<ph_project_api_key>',
+>   { host: '<ph_client_api_host>' }
+> )
+>
+> // Initialize Gemini client with Vertex AI
+> const client = new PostHogGoogleGenAI({
+>   vertexai: true,
+>   project: 'your-gcp-project-id',
+>   location: 'us-central1',
+>   posthog: posthog
+> })
+>
+> // Use it
+> const response = await client.models.generateContent({
+>   model: 'gemini-2.0-flash',
+>   contents: 'Hello, world!',
+>   posthogDistinctId: 'user-123'
+> })
+>
+> console.log(response.text)
+> ```
+>
+> </MultiLanguage>
+>
+> </details>
 
 </Step>
 
