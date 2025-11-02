@@ -26,6 +26,7 @@ interface RowConfig {
     description?: string // Optional custom description override
     exclude?: string[] // Optional features to exclude
     customValue?: string | boolean // For custom product-level values
+    values?: (string | boolean | number | undefined)[] // For custom per-competitor values (array length should match competitors array)
 }
 ```
 
@@ -149,6 +150,30 @@ For comparing which products competitors offer:
     rows={['product_analytics.summary', 'session_replay.summary', 'error_tracking.summary']}
 />
 ```
+
+### Custom Line Items with Per-Competitor Values
+
+If you need to add a custom row that doesn't exist in the competitor data, use the `values` property:
+
+```tsx
+<ProductComparisonTable
+    competitors={['posthog', 'amplitude']}
+    rows={[
+        {
+            label: 'In-app prompts and messages',
+            description: 'Send messages to users in your app',
+            values: [true, false], // One value per competitor, in order
+        },
+        {
+            label: 'Custom pricing tier',
+            description: 'Special pricing available',
+            values: ['Enterprise only', 'All plans'],
+        },
+    ]}
+/>
+```
+
+The `values` array should have the same length as the `competitors` array, with each value corresponding to a competitor in the same order.
 
 ### In Product Pages
 

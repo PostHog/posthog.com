@@ -70,6 +70,8 @@ interface RowConfig {
     exclude?: string[]
     // For product-level comparisons, can specify beta status or custom value
     customValue?: string | boolean
+    // For custom per-competitor values (array length should match competitors array)
+    values?: (string | boolean | number | undefined)[]
 }
 
 interface ProductComparisonTableProps {
@@ -356,8 +358,8 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             return row
         }
 
-        // Headers: label set without product or feature
-        if (row.label && !row.product && !row.feature) {
+        // Headers: label set without product or feature (but not if values array is present)
+        if (row.label && !row.product && !row.feature && !row.values) {
             return { ...row, type: 'header' }
         }
 
@@ -386,6 +388,11 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
 
         // Feature-level: product and (featureSet or feature) are set
         if (row.product && (row.featureSet || row.feature)) {
+            return { ...row, type: 'feature' }
+        }
+
+        // Custom row with values array: treat as feature
+        if (row.values) {
             return { ...row, type: 'feature' }
         }
 
@@ -683,12 +690,18 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
     }
 
     // Render competitor cell
-    const renderCell = (competitorKey: string, row: RowConfig): React.ReactNode => {
+    const renderCell = (competitorKey: string, row: RowConfig, competitorIndex: number): React.ReactNode => {
         if (row.type === 'header') {
             return <strong>{row.label}</strong>
         }
 
-        const value = getFeatureValue(competitorKey, row)
+        // If values array is provided, use it instead of fetching from competitor data
+        let value: any
+        if (row.values !== undefined) {
+            value = row.values[competitorIndex]
+        } else {
+            value = getFeatureValue(competitorKey, row)
+        }
 
         if (typeof value === 'boolean') {
             return value ? (
@@ -776,8 +789,8 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                     </div>
                 ),
             },
-            ...competitors.map((key) => ({
-                content: renderCell(key, row),
+            ...competitors.map((key, index) => ({
+                content: renderCell(key, row, index),
             })),
         ]
 

@@ -312,3 +312,60 @@ If you want to cherry-pick specific features, just reference the key directly.
         },
     ]}
 />
+
+### Add custom line items with arbitrary values
+
+If you need to add a custom row that doesn't exist in the competitor data, you can use the `values` property to specify a value for each competitor.
+
+<OSTabs
+    padding
+    triggerDataScheme="primary"
+    tabs={[
+        {
+            label: 'Output',
+            value: 'table',
+            content: (
+                <ProductComparisonTable
+                    competitors={['posthog', 'fullstory']}
+                    rows={[
+                        {
+                            label: 'In-app prompts and messages',
+                            description: 'Send messages to users in your app',
+                            values: [true, false],
+                        },
+                        {
+                            label: 'Custom pricing tier',
+                            description: 'Special pricing available',
+                            values: ['Enterprise only', 'All plans'],
+                        },
+                    ]}
+                />
+            ),
+        },
+        {
+            label: 'Code',
+            value: 'code',
+            content: (
+                <pre>
+                    <code className="language-mdx">{`<ProductComparisonTable
+  competitors={['posthog', 'amplitude']}
+  rows={[
+    {
+      label: 'In-app prompts and messages',
+      description: 'Send messages to users in your app',
+      values: [true, false],
+    },
+    {
+      label: 'Custom pricing tier',
+      description: 'Special pricing available',
+      values: ['Enterprise only', 'All plans'],
+    },
+  ]}
+/>`}</code>
+                </pre>
+            ),
+        },
+    ]}
+/>
+
+The `values` array should have the same length as the `competitors` array, with each value corresponding to a competitor in order.
