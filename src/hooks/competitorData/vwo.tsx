@@ -10,15 +10,21 @@ export const vwo = {
             pricing: {
                 free_tier: false,
             },
-            experiment_types: {
-                features: {
-                    count_value_metrics: false,
-                    custom_goals: false,
-                    funnel_metrics: false,
-                    ratio_metrics: false,
-                    secondary_metrics: true,
-                    shared_metrics_library: false,
-                },
+            features: {
+                count_value_metrics: false,
+                custom_goals: false,
+                dynamic_cohorts: false,
+                experiment_analysis: false,
+                funnel_metrics: false,
+                namespacing: false,
+                native_goal_tracking: false,
+                no_code_experiments: false,
+                ratio_metrics: false,
+                recommended_run_time: false,
+                secondary_metrics: true,
+                shared_metrics_library: false,
+                split_testing: false,
+                visual_editor: false,
             },
             supported_tests: {
                 features: {
@@ -64,16 +70,6 @@ export const vwo = {
                     mobile: false,
                     web: false,
                 },
-            },
-            features: {
-                dynamic_cohorts: false,
-                experiment_analysis: false,
-                namespaces: false,
-                native_goal_tracking: false,
-                no_code_experiments: false,
-                recommended_run_time: false,
-                split_testing: false,
-                visual_editor: false,
             },
         },
     },

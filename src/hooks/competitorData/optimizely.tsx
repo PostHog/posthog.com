@@ -11,15 +11,21 @@ export const optimizely = {
             pricing: {
                 free_tier: false,
             },
-            experiment_types: {
-                features: {
-                    count_value_metrics: false,
-                    custom_goals: true,
-                    funnel_metrics: true,
-                    ratio_metrics: false,
-                    secondary_metrics: true,
-                    shared_metrics_library: false,
-                },
+            features: {
+                count_value_metrics: false,
+                custom_goals: true,
+                dynamic_cohorts: false,
+                experiment_analysis: false,
+                funnel_metrics: true,
+                namespacing: false,
+                native_goal_tracking: false,
+                no_code_experiments: true,
+                ratio_metrics: false,
+                recommended_run_time: false,
+                secondary_metrics: true,
+                shared_metrics_library: false,
+                split_testing: false,
+                visual_editor: false,
             },
             supported_tests: {
                 features: {
@@ -66,16 +72,6 @@ export const optimizely = {
                     web: false,
                 },
             },
-            features: {
-                dynamic_cohorts: false,
-                experiment_analysis: false,
-                namespaces: false,
-                native_goal_tracking: false,
-                no_code_experiments: true,
-                recommended_run_time: false,
-                split_testing: false,
-                visual_editor: false,
-            },
         },
         feature_flags: {
             available: true,
@@ -84,6 +80,7 @@ export const optimizely = {
             },
             features: {
                 boolean_flags: true,
+                early_access_management: false,
                 multivariate_flags: false,
                 json_payloads: false,
                 release_conditions: false,
@@ -132,7 +129,6 @@ export const optimizely = {
             advanced: {
                 features: {
                     persist_across_auth: false,
-                    early_access_widget: false,
                 },
             },
         },

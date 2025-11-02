@@ -235,7 +235,7 @@ export default function FeatureMatrix(): JSX.Element {
                                 width="full"
                                 competitors={experimentsCompetitors}
                                 rows={[
-                                    'experiments.experiment_types.features',
+                                    'experiments.features',
                                     'experiments.supported_tests.features',
                                     'experiments.targeting.features',
                                 ]}

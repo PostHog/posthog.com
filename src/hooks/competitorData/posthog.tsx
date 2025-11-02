@@ -232,6 +232,7 @@ export const posthog = {
             },
             features: {
                 boolean_flags: true,
+                early_access_management: true,
                 multivariate_flags: true,
                 json_payloads: true,
                 release_conditions: true,
@@ -280,7 +281,6 @@ export const posthog = {
             advanced: {
                 features: {
                     persist_across_auth: true,
-                    early_access_widget: true,
                 },
             },
         },
@@ -289,15 +289,21 @@ export const posthog = {
             pricing: {
                 free_tier: '1 million API requests',
             },
-            experiment_types: {
-                features: {
-                    count_value_metrics: true,
-                    custom_goals: true,
-                    funnel_metrics: true,
-                    ratio_metrics: true,
-                    secondary_metrics: true,
-                    shared_metrics_library: true,
-                },
+            features: {
+                count_value_metrics: true,
+                custom_goals: true,
+                dynamic_cohorts: true,
+                experiment_analysis: true,
+                funnel_metrics: true,
+                namespacing: false,
+                native_goal_tracking: true,
+                no_code_experiments: true,
+                ratio_metrics: true,
+                recommended_run_time: true,
+                secondary_metrics: true,
+                shared_metrics_library: true,
+                split_testing: true,
+                visual_editor: 'Beta',
             },
             supported_tests: {
                 features: {
@@ -343,16 +349,6 @@ export const posthog = {
                     mobile: true,
                     web: true,
                 },
-            },
-            features: {
-                dynamic_cohorts: true,
-                experiment_analysis: true,
-                namespaces: false,
-                native_goal_tracking: true,
-                no_code_experiments: true,
-                recommended_run_time: true,
-                split_testing: true,
-                visual_editor: 'Beta',
             },
         },
         surveys: {
@@ -499,6 +495,7 @@ export const posthog = {
             usage_based_pricing: true,
             transparent_pricing: true,
             free_tier: true,
+            self_serve: true,
         },
         integrations: {
             azure_blob: true,
@@ -507,6 +504,7 @@ export const posthog = {
             community_integrations: true,
             csv_exports: true,
             customer_io: true,
+            datadog: false,
             email_reports: true,
             exports: true,
             gcs: true,
@@ -537,7 +535,6 @@ export const posthog = {
             mobile_sdks: true,
             native_data_sources: true,
             notebooks: true,
-            proxies: true,
             sdks: '14',
             server_side_sdks: true,
             sql: true,

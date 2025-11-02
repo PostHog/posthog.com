@@ -15,6 +15,7 @@ export const flagsmith = {
                 multivariate_flags: true,
                 json_payloads: false,
                 release_conditions: false,
+                early_access_management: false,
             },
             implementation: {
                 features: {
@@ -60,7 +61,6 @@ export const flagsmith = {
             advanced: {
                 features: {
                     persist_across_auth: false,
-                    early_access_widget: false,
                 },
             },
         },

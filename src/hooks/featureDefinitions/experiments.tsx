@@ -5,34 +5,63 @@ export const experimentsFeatures = {
         url: '/experiments',
         docsUrl: '/docs/experiments',
     },
-    experiment_types: {
-        description: 'Choose metrics that match your goals and monitor side effects',
-        features: {
-            funnel_metrics: {
-                name: 'Funnel metrics',
-                description: 'Track conversion rates across multi-step journeys, like signup flows or checkout',
-            },
-            count_value_metrics: {
-                name: 'Count and value metrics',
-                description:
-                    'Measure totals such as pageviews or clicks, or capture values like revenue, order size, or time spent',
-            },
-            ratio_metrics: {
-                name: 'Ratio metrics',
-                description: 'Test ratios such as percentage of positive feedback to capture deeper insights',
-            },
-            custom_goals: {
-                name: 'Custom goals',
-                description: 'Define your own goals and metrics to track',
-            },
-            secondary_metrics: {
-                name: 'Secondary metrics',
-                description: 'Monitor impact on unrelated metrics',
-            },
-            shared_metrics_library: {
-                name: 'Shared metrics library',
-                description: 'Create reusable metrics across experiments for consistency and easy experiment setup',
-            },
+    features: {
+        funnel_metrics: {
+            name: 'Funnel metrics',
+            description: 'Track conversion rates across multi-step journeys, like signup flows or checkout',
+        },
+        count_value_metrics: {
+            name: 'Count and value metrics',
+            description:
+                'Measure totals such as pageviews or clicks, or capture values like revenue, order size, or time spent',
+        },
+        ratio_metrics: {
+            name: 'Ratio metrics',
+            description: 'Test ratios such as percentage of positive feedback to capture deeper insights',
+        },
+        custom_goals: {
+            name: 'Custom goals',
+            description: 'Define your own goals and metrics to track',
+        },
+        secondary_metrics: {
+            name: 'Secondary metrics',
+            description: 'Monitor impact on unrelated metrics',
+        },
+        shared_metrics_library: {
+            name: 'Shared metrics library',
+            description: 'Create reusable metrics across experiments for consistency and easy experiment setup',
+        },
+        experiment_analysis: {
+            name: 'Experiment analysis',
+            description: 'Analyze results of A/B tests',
+        },
+        no_code_experiments: {
+            name: 'No-code experiments',
+            description: 'Modify your website and run experiments without writing code',
+        },
+        split_testing: {
+            name: 'Split testing',
+            description: 'Split participants into groups',
+        },
+        recommended_run_time: {
+            name: 'Recommended run time',
+            description: 'Automatically calculate the recommended run time and sample size',
+        },
+        dynamic_cohorts: {
+            name: 'Dynamic cohorts',
+            description: 'Add new users to an experiment automatically by setting a user property',
+        },
+        native_goal_tracking: {
+            name: 'Native goal tracking',
+            description: 'Track impact on goals without external sources',
+        },
+        namespacing: {
+            name: 'Namespacing',
+            description: 'Avoid conflicts by assigning all users to a namespace',
+        },
+        visual_editor: {
+            name: 'Visual editor',
+            description: 'Create and edit experiments in your app',
         },
     },
     supported_tests: {
@@ -166,40 +195,6 @@ export const experimentsFeatures = {
                 name: 'Mobile experiments',
                 description: 'Supports Android, iOS, React Native, and Flutter',
             },
-        },
-    },
-    features: {
-        experiment_analysis: {
-            name: 'Experiment analysis',
-            description: 'Analyze results of A/B tests',
-        },
-        no_code_experiments: {
-            name: 'No-code experiments',
-            description: 'Modify your website and run experiments without writing code',
-        },
-        split_testing: {
-            name: 'Split testing',
-            description: 'Split participants into groups',
-        },
-        recommended_run_time: {
-            name: 'Recommended run time',
-            description: 'Automatically calculate the recommended run time and sample size',
-        },
-        dynamic_cohorts: {
-            name: 'Dynamic cohorts',
-            description: 'Add new users to an experiment automatically by setting a user property',
-        },
-        native_goal_tracking: {
-            name: 'Native goal tracking',
-            description: 'Track impact on goals without external sources',
-        },
-        namespaces: {
-            name: 'Namespaces',
-            description: 'Avoid conflicts by assigning all users to a namespace',
-        },
-        visual_editor: {
-            name: 'Visual editor',
-            description: 'Create and edit experiments in your app',
         },
     },
 }

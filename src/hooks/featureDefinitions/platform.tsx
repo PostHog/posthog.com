@@ -39,6 +39,10 @@ export const platformFeatures = {
                 name: 'Free tier',
                 description: 'Generous free tier available',
             },
+            self_serve: {
+                name: 'Self-serve',
+                description: 'No need to talk to sales',
+            },
         },
     },
     support: {
@@ -180,10 +184,6 @@ export const platformFeatures = {
             native_data_sources: {
                 name: 'Native data sources',
                 description: 'Compute metrics and results without integrations',
-            },
-            proxies: {
-                name: 'Proxies',
-                description: 'Reverse proxy to avoid blockers',
             },
             api: {
                 name: 'API',

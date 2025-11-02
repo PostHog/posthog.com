@@ -169,15 +169,21 @@ export const mixpanel = {
             pricing: {
                 free_tier: false,
             },
-            experiment_types: {
-                features: {
-                    count_value_metrics: false,
-                    custom_goals: true,
-                    funnel_metrics: false,
-                    ratio_metrics: false,
-                    secondary_metrics: true,
-                    shared_metrics_library: false,
-                },
+            features: {
+                count_value_metrics: false,
+                custom_goals: true,
+                dynamic_cohorts: false,
+                experiment_analysis: true,
+                funnel_metrics: false,
+                namespacing: false,
+                native_goal_tracking: false,
+                no_code_experiments: false,
+                ratio_metrics: false,
+                recommended_run_time: false,
+                secondary_metrics: true,
+                shared_metrics_library: false,
+                split_testing: false,
+                visual_editor: false,
             },
             supported_tests: {
                 features: {
@@ -223,16 +229,6 @@ export const mixpanel = {
                     mobile: false,
                     web: false,
                 },
-            },
-            features: {
-                dynamic_cohorts: false,
-                experiment_analysis: true,
-                namespaces: false,
-                native_goal_tracking: false,
-                no_code_experiments: false,
-                recommended_run_time: false,
-                split_testing: false,
-                visual_editor: false,
             },
         },
         surveys: {

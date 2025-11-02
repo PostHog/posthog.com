@@ -13,6 +13,7 @@ export const growthbook = {
             },
             features: {
                 boolean_flags: true,
+                early_access_management: false,
                 multivariate_flags: false,
                 json_payloads: true,
                 release_conditions: false,
@@ -61,7 +62,6 @@ export const growthbook = {
             advanced: {
                 features: {
                     persist_across_auth: false,
-                    early_access_widget: false,
                 },
             },
         },
@@ -70,15 +70,21 @@ export const growthbook = {
             pricing: {
                 free_tier: true,
             },
-            experiment_types: {
-                features: {
-                    count_value_metrics: false,
-                    custom_goals: true,
-                    funnel_metrics: false,
-                    ratio_metrics: false,
-                    secondary_metrics: true,
-                    shared_metrics_library: false,
-                },
+            features: {
+                count_value_metrics: false,
+                custom_goals: true,
+                dynamic_cohorts: false,
+                experiment_analysis: false,
+                funnel_metrics: false,
+                namespacing: true,
+                native_goal_tracking: false,
+                no_code_experiments: false,
+                ratio_metrics: false,
+                recommended_run_time: false,
+                secondary_metrics: true,
+                shared_metrics_library: false,
+                split_testing: true,
+                visual_editor: true,
             },
             supported_tests: {
                 features: {
@@ -125,16 +131,6 @@ export const growthbook = {
                     web: false,
                 },
             },
-            features: {
-                dynamic_cohorts: false,
-                experiment_analysis: false,
-                namespaces: true,
-                native_goal_tracking: false,
-                no_code_experiments: false,
-                recommended_run_time: false,
-                split_testing: true,
-                visual_editor: true,
-            },
         },
         product_analytics: {
             available: false,
@@ -152,13 +148,13 @@ export const growthbook = {
     platform: {
         deployment: {
             open_source: true,
+            reverse_proxy: true,
             self_host: true,
         },
         developer: {
             api: 'Beta',
             native_data_sources: false,
             notebooks: false,
-            proxies: true,
             sdks: '11',
             sql: true,
         },
@@ -166,25 +162,25 @@ export const growthbook = {
             free_tier: true,
             transparent_pricing: true,
             usage_based_pricing: false,
+            self_serve: true,
         },
         integrations: {
-            datadog: false,
-
+            datadog: true,
             exports: false,
-            imports: false,
+            imports: true,
             microsoft_teams: false,
             sentry: false,
-            slack: false,
+            slack: true,
             zapier: false,
         },
         security: {
-            gdpr_ready: false,
-            hipaa_ready: false,
-            history_audit_logs: false,
-            saml_sso: false,
-            soc2_certified: false,
+            gdpr_ready: true,
+            hipaa_ready: true,
+            history_audit_logs: 'Enterprise',
+            saml_sso: 'Enterprise',
+            soc2_certified: true,
             two_factor_auth: false,
-            user_privacy_options: false,
+            user_privacy_options: true,
         },
         analytics_integration: {
             built_in_analytics: false,

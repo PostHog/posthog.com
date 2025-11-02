@@ -2,20 +2,20 @@
 title: 'In-depth: PostHog vs LaunchDarkly'
 date: 2024-01-11
 author:
-  - ian-vanagas
+    - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/comparisons/launchdarkly.jpeg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/comparisons/launchdarkly.jpeg
 featuredImageType: full
 category: General
 tags:
-  - Comparisons
+    - Comparisons
 seo:
-  metaTitle: PostHog vs LaunchDarkly in-depth tool comparison
-  metaDescription: Looking for the best feature flag and experimentation tool? Compare PostHog vs LaunchDarkly on feature management, A/B testing, and more to find the right fit.
+    metaTitle: PostHog vs LaunchDarkly in-depth tool comparison
+    metaDescription: Looking for the best feature flag and experimentation tool? Compare PostHog vs LaunchDarkly on feature management, A/B testing, and more to find the right fit.
 ---
 
 import ProductComparisonTable from 'components/ProductComparisonTable'
@@ -42,7 +42,7 @@ Our code, culture, and strategy are public [on GitHub](https://github.com/PostHo
 
 ### 3. Built for startups and engineers
 
-PostHog is built for high-growth startups. It's simple to implement – we have many [SDKs](/docs/libraries), [tutorials](/tutorials), and docs to help you get started quickly with any type of app – and will grow with you as you scale. When you need advanced product analytics such as [a CDP](/cdp) or [data warehouse](/data-warehouse), you can just turn those features on. LaunchDarkly focuses on enterprise users, managers, and DevOps. This means more focus on governance and integrations. 
+PostHog is built for high-growth startups. It's simple to implement – we have many [SDKs](/docs/libraries), [tutorials](/tutorials), and docs to help you get started quickly with any type of app – and will grow with you as you scale. When you need advanced product analytics such as [a CDP](/cdp) or [data warehouse](/data-warehouse), you can just turn those features on. LaunchDarkly focuses on enterprise users, managers, and DevOps. This means more focus on governance and integrations.
 
 ## Comparing PostHog and LaunchDarkly
 
@@ -100,12 +100,16 @@ PostHog and LaunchDarkly have relatively similar experimentation feature sets, e
 <ProductComparisonTable
     competitors={['posthog', 'launchdarkly']}
     rows={[
-        { label: 'Free usage', description: 'How many experiments can you run for free?', customValue: '1M requests per month' },
+        {
+            label: 'Free usage',
+            description: 'How many experiments can you run for free?',
+            customValue: '1M requests per month',
+        },
         'experiments.features.custom_goals',
         'experiments.features.secondary_metrics',
-        'experiments.features.statistical_significance',
+        'experiments.analysis.features.statistical_significance',
         'experiments.features.split_testing',
-        'experiments.features.multivariate_testing',
+        'experiments.implementation.features.multivariate_testing',
         'experiments.features.recommended_run_time',
     ]}
 />
@@ -119,10 +123,10 @@ PostHog automatically calculates a recommended run time based on past data and m
 PostHog and LaunchDarkly take opposing approaches.
 
 <ComparisonTable column1="PostHog" column2="LaunchDarkly">
-  <ComparisonRow column1="Per-request pricing" column2="Based on MAU + seats + add-ons" feature="Pricing" />
-  <ComparisonRow column1={true} column2="Trial only" feature="Free plan" />
-  <ComparisonRow column1={true} column2={false} feature="Free experiments" />
-  <ComparisonRow column1={true} column2={false} feature="Free collaboration" />
+    <ComparisonRow column1="Per-request pricing" column2="Based on MAU + seats + add-ons" feature="Pricing" />
+    <ComparisonRow column1={true} column2="Trial only" feature="Free plan" />
+    <ComparisonRow column1={true} column2={false} feature="Free experiments" />
+    <ComparisonRow column1={true} column2={false} feature="Free collaboration" />
 </ComparisonTable>
 
 **PostHog’s** [feature flag pricing](/feature-flags#pricing) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available.
@@ -140,57 +144,70 @@ As mentioned earlier, many of the security, approval, and workflow features that
 To give you an idea of what pricing looks like in reality, here are some example situations and their estimated costs for both PostHog and LaunchDarkly.
 
 <OverflowXSection>
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td><strong>Seats</strong></td>
-            <td><strong>MAUs</strong></td>
-            <td><strong>Requests</strong></td>
-            <td><strong>Request location</strong></td>
-            <td><strong>PostHog cost</strong></td>
-            <td><strong>LaunchDarkly cost</strong></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>5</td>
-            <td>5,000</td>
-            <td>1,000,000</td>
-            <td>Backend</td>
-            <td>$0</td>
-            <td>$100</td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>15,000</td>
-            <td>1,000,000</td>
-            <td>Frontend</td>
-            <td>$0</td>
-            <td>$200 + cost of 5000 MAUs</td>
-        </tr>
-        <tr>
-            <td>20</td>
-            <td>25,000</td>
-            <td>5,000,000</td>
-            <td>Backend</td>
-            <td>$400</td>
-            <td>$400</td>
-        </tr>
-        <tr>
-            <td>30</td>
-            <td>50,000</td>
-            <td>15,000,000</td>
-            <td>Frontend</td>
-            <td>$1,400</td>
-            <td>??? (Enterprise)</td>
-        </tr>
-    </tbody>
-</table>
+    <table className="w-full mt-4" style="min-width: 600px;">
+        <thead>
+            <tr>
+                <td>
+                    <strong>Seats</strong>
+                </td>
+                <td>
+                    <strong>MAUs</strong>
+                </td>
+                <td>
+                    <strong>Requests</strong>
+                </td>
+                <td>
+                    <strong>Request location</strong>
+                </td>
+                <td>
+                    <strong>PostHog cost</strong>
+                </td>
+                <td>
+                    <strong>LaunchDarkly cost</strong>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>5</td>
+                <td>5,000</td>
+                <td>1,000,000</td>
+                <td>Backend</td>
+                <td>$0</td>
+                <td>$100</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>15,000</td>
+                <td>1,000,000</td>
+                <td>Frontend</td>
+                <td>$0</td>
+                <td>$200 + cost of 5000 MAUs</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>25,000</td>
+                <td>5,000,000</td>
+                <td>Backend</td>
+                <td>$400</td>
+                <td>$400</td>
+            </tr>
+            <tr>
+                <td>30</td>
+                <td>50,000</td>
+                <td>15,000,000</td>
+                <td>Frontend</td>
+                <td>$1,400</td>
+                <td>??? (Enterprise)</td>
+            </tr>
+        </tbody>
+    </table>
 </OverflowXSection>
 
-> **Notes:** 
-> - Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage to depend on the polling duration and active number of servers. If you use flags with one server polling every 30 seconds, this amount is under 1M requests (meaning free). 
-> - PostHog has volume discounts on flags over 2 million requests per month. 
+> **Notes:**
+>
+> -   Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage to depend on the polling duration and active number of servers. If you use flags with one server polling every 30 seconds, this amount is under 1M requests (meaning free).
+> -   PostHog has volume discounts on flags over 2 million requests per month.
 
 ### Reporting and analytics
 
@@ -211,7 +228,7 @@ Although LaunchDarkly has basic reporting features, PostHog has a more expansive
 
 ### Integrations
 
-Both PostHog and LaunchDarkly have a range of integrations that enable them to import, export, enhance, and make use of data. 
+Both PostHog and LaunchDarkly have a range of integrations that enable them to import, export, enhance, and make use of data.
 
 <ProductComparisonTable
     competitors={['posthog', 'launchdarkly']}
@@ -262,11 +279,11 @@ PostHog is built for startups and their engineers. It provides all the tools sta
 
 ### How much does PostHog cost?
 
-Feature flags and experiments are free for up to 1M requests per month. Beyond that, it costs $0.0001/request (or $1 per 10,000 requests). There are discounts for high-volume users, non-profits, and [startups](/startups). Other products, like product analytics and session replay, have separate but similarly structured pricing. 
+Feature flags and experiments are free for up to 1M requests per month. Beyond that, it costs $0.0001/request (or $1 per 10,000 requests). There are discounts for high-volume users, non-profits, and [startups](/startups). Other products, like product analytics and session replay, have separate but similarly structured pricing.
 
 ### How much does LaunchDarkly cost?
 
-LaunchDarkly starts at $10 per seat per month. This includes unlimited flags, server-side monthly active users, and 1,000 client-side monthly active users. More client-side monthly active users, also known as monthly context instances, cost more. 
+LaunchDarkly starts at $10 per seat per month. This includes unlimited flags, server-side monthly active users, and 1,000 client-side monthly active users. More client-side monthly active users, also known as monthly context instances, cost more.
 
 Their pro plan doubles the cost to $20 per seat per month. It adds API, unlimited projects, and more integrations. Above that, their enterprise plan requires talking to sales. It includes custom roles, SSO, scheduling, workflows, and more.
 
@@ -278,13 +295,13 @@ Yes. See our [LaunchDarkly to PostHog migration guide](/docs/migrate/launchdarkl
 
 LaunchDarkly offers a 14-day free trial, but beyond that, all access and features are paid.
 
-PostHog lets you use all its features for free. Once you upgrade to paid, you get 1M flag requests, 1M events, and 5,000 recordings for free each month. This means if you stay below this, PostHog remains free. 
+PostHog lets you use all its features for free. Once you upgrade to paid, you get 1M flag requests, 1M events, and 5,000 recordings for free each month. This means if you stay below this, PostHog remains free.
 
 ### How long does it take to implement PostHog?
 
 Feature flags and experiments are simple. They are a few lines of code in all of your favorite languages. They can even be set up on no-code site builders like [Framer](/tutorials/framer-analytics) or [Webflow](/tutorials/webflow-ab-tests).
 
-The process requires signing up for PostHog, installing the snippet or SDK in your app, creating the flag in PostHog, and implementing the flag evaluation and relevant logic in your app. In many of the SDKs, we handle important aspects like local evaluation and event capture for you. 
+The process requires signing up for PostHog, installing the snippet or SDK in your app, creating the flag in PostHog, and implementing the flag evaluation and relevant logic in your app. In many of the SDKs, we handle important aspects like local evaluation and event capture for you.
 
 Much of the PostHog implementation, like user identification, is reused across products. Because PostHog is an all-in-one platform, analytics capture for targeting and A/B testing doesn’t need setup or connection either.
 

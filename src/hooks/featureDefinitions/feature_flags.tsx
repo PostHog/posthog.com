@@ -10,38 +10,42 @@ export const featureFlagsFeatures = {
             name: 'Boolean flags',
             description: 'Simple on/off flags to enable or disable features',
         },
-        multivariate_flags: {
-            name: 'Multivariate flags',
-            description: 'Test multiple variants of a feature in a single flag',
+        early_access_management: {
+            name: 'Early access feature opt-in widget',
+            description: 'Allow users to opt in or out of specified features with a built-in widget or custom UI',
         },
         json_payloads: {
             name: 'Payloads',
             description:
                 'Pass structured data (strings, numbers, or JSON objects) to variants for dynamic configuration without code changes',
         },
-        remote_config: {
-            name: 'Remote config',
-            description: 'Replace hard-coded values in your app with remotely configurable parameters',
+        multivariate_flags: {
+            name: 'Multivariate flags',
+            description: 'Test multiple variants of a feature in a single flag',
         },
         release_conditions: {
             name: 'Release conditions',
             description: 'Target flags by user properties, cohorts, geographic location, or traffic percentage',
         },
+        remote_config: {
+            name: 'Remote config',
+            description: 'Replace hard-coded values in your app with remotely configurable parameters',
+        },
     },
     implementation: {
         description: 'Integrate flags efficiently across platforms',
         features: {
-            local_evaluation: {
-                name: 'Local evaluation',
-                description: 'Cache flag values for faster evaluation and reduced API calls',
+            api_access: {
+                name: 'API access',
+                description: 'Evaluate flags programmatically using PostHog API',
             },
             bootstrapping: {
                 name: 'Bootstrapping',
                 description: 'Make flags available immediately on page load without waiting for API response',
             },
-            api_access: {
-                name: 'API access',
-                description: 'Evaluate flags programmatically using PostHog API',
+            local_evaluation: {
+                name: 'Local evaluation',
+                description: 'Cache flag values for faster evaluation and reduced API calls',
             },
             sdk_support: {
                 name: 'SDK support',
@@ -144,10 +148,6 @@ export const featureFlagsFeatures = {
                 name: 'Persist across authentication',
                 description:
                     "Persist feature flags across authentication events so flag values don't change when users log in",
-            },
-            early_access_widget: {
-                name: 'Early access feature opt-in widget',
-                description: 'Allow users to opt in or out of specified features with a built-in widget or custom UI',
             },
             automated_reports: {
                 name: 'Automated usage reports',
