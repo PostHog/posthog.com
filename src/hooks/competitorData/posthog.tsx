@@ -591,7 +591,7 @@ export const posthog = {
             data_retention: '7 years',
             gdpr_ready: true,
             hipaa_ready: true,
-            history_audit_logs: true,
+            history_audit_logs: 'Enterprise',
             role_based_access_control: true,
             saml_sso: 'Enterprise',
             soc2_certified: true,

@@ -123,6 +123,7 @@ export const matomo = {
             eu_hosting: true,
             open_source: true,
             self_host: true,
+            reverse_proxy: false,
         },
         developer: {
             api: true,
@@ -134,8 +135,8 @@ export const matomo = {
             bigquery: true,
             csv_exports: true,
             datadog: false,
-
             email_reports: true,
+            google_search_console: false,
             hubspot: false,
             sentry: false,
             slack: true,
@@ -146,7 +147,7 @@ export const matomo = {
             zendesk: false,
         },
         pricing: {
-            free_tier: true,
+            free_tier: false,
             transparent_pricing: false,
             usage_based_pricing: false,
         },
@@ -154,6 +155,7 @@ export const matomo = {
             bot_blocking: true,
             data_anonymization: true,
             gdpr_ready: true,
+            history_audit_logs: true,
             hipaa_ready: false,
             reverse_proxy: false,
             saml_sso: 'Enterprise',
