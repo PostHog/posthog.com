@@ -135,14 +135,16 @@ export const hotjar = {
         surveys: {
             available: true,
             features: {
-                multiple_choice: true,
-                popover: true,
-                feedback_button: true,
-                nps_surveys: true,
-                csat_surveys: true,
-                user_interview_requests: true,
-                survey_templates: true,
                 api_access: false,
+                csat_surveys: true,
+                custom_html: '',
+                feedback_button: true,
+                multiple_choice: true,
+                nps_surveys: true,
+                pmf_surveys: '',
+                popover: true,
+                survey_templates: true,
+                user_interview_requests: true,
             },
             presentation: {
                 features: {

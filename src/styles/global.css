@@ -22,6 +22,14 @@
             @apply no-underline;
         }
 
+        h4 {
+            @apply text-lg;
+
+            code {
+                @apply !text-lg;
+            }
+        }
+
         /* expandable/collapsible sections */
         details {
             @apply bg-primary border border-transparent rounded;

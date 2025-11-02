@@ -49,6 +49,10 @@ export const surveysFeatures = {
                 name: 'CSAT surveys',
                 description: 'Customer satisfaction survey templates',
             },
+            pmf_surveys: {
+                name: 'PMF surveys',
+                description: 'Product-market fit survey templates',
+            },
             user_interview_requests: {
                 name: 'User interview requests',
                 description: 'Templates for organizing and scheduling user interviews',
