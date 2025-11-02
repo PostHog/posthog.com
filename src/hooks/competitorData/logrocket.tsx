@@ -9,8 +9,9 @@ export const logrocket = {
         product_analytics: {
             available: true,
             features: {
+                actions: true,
                 advertising_analytics: false,
-                autocapture: false,
+                autocapture: true,
                 cohorts: true,
                 custom_events: true,
                 custom_properties: true,
@@ -62,6 +63,9 @@ export const logrocket = {
         },
         web_analytics: {
             available: false,
+            features: {
+                utm_tracking: true,
+            },
         },
         session_replay: {
             available: true,
@@ -74,7 +78,7 @@ export const logrocket = {
                 clickmaps: false,
                 conditional_recording: true,
                 event_timeline: false,
-                export_to_json: false,
+                export_to_json: '',
                 export_to_video: false,
                 filter_by_user_or_event: false,
                 identity_detection: true,
@@ -144,11 +148,26 @@ export const logrocket = {
         error_tracking: {
             available: true,
         },
+        dashboards: {
+            available: true,
+        },
     },
     platform: {
         deployment: {
             open_source: false,
             self_host: false,
+            reverse_proxy: true,
+        },
+        libraries: {
+            features: {
+                android: true,
+                flutter: false,
+                ios: true,
+                javascript: true,
+                react_native: true,
+                react: true,
+                ruby: false,
+            },
         },
         pricing: {
             free_tier: true,
@@ -156,12 +175,12 @@ export const logrocket = {
             usage_based_pricing: true,
         },
         integrations: {
+            airbyte: false,
             azure_blob: false,
             bigquery: false,
             community_integrations: false,
             customer_io: true,
             datadog: false,
-
             exports: true,
             gcs: false,
             google_ads: false,
@@ -170,23 +189,28 @@ export const logrocket = {
             intercom: true,
             microsoft_teams: false,
             redshift: false,
+            rudderstack: false,
             s3: false,
             salesforce: true,
             segment: true,
             slack: false,
             snowflake: false,
             sentry: true,
+            stripe: true,
             zapier: true,
             zendesk: false,
         },
         developer: {
-            notebooks: false,
+            features: {
+                cross_domain_tracking: true,
+                notebooks: false,
+            },
         },
         security: {
             cookieless_tracking: false,
             data_anonymization: true,
             gdpr_ready: true,
-            hipaa_ready: false,
+            hipaa_ready: true,
             history_audit_logs: false,
             saml_sso: true,
             soc2_certified: true,

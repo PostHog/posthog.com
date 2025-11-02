@@ -74,7 +74,7 @@ While LogRocket offers some product analytics features, it isn’t primarily int
         'product_analytics.features.cohorts',
         'product_analytics.user_paths',
         'product_analytics.retention',
-        { label: 'UTM tracking', description: 'Track marketing campaigns with UTM tags', values: ['', ''] },
+        'web_analytics.features.utm_tracking',
         'product_analytics.funnels.features.correlation_analysis',
         'product_analytics.group_analytics',
         'product_analytics.insights.features.formula_mode',
@@ -121,21 +121,13 @@ LogRocket and PostHog both offer robust, full-featured [session replay tools](/b
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
     rows={[
-        { label: 'Event tracking', description: 'Track manually instrumented events', values: ['', ''] },
-        { label: 'Autocapture', description: 'Automatically track events without instrumentation', values: ['', ''] },
-        {
-            label: 'Combined events',
-            description: 'Track related events as a single trackable action or behavior',
-            values: ['', ''],
-        },
-        {
-            label: 'Reverse proxy available',
-            description: 'Send events from your own domain to capture more data',
-            values: ['', ''],
-        },
-        { label: 'Cross-domain tracking', description: 'Track users across domains and sub-domains', values: ['', ''] },
-        { label: 'Server-side tracking', description: 'Send events from your server', values: ['', ''] },
-        { label: 'Capture API', description: 'Send events through an API', values: ['', ''] },
+        'product_analytics.features.custom_events',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.actions',
+        'platform.deployment.reverse_proxy',
+        'platform.developer.cross_domain_tracking',
+        { label: 'Server-side tracking', description: 'Send events from your server', values: [true, true] },
+        { label: 'Capture API', description: 'Send events through an API', values: [true, true] },
     ]}
 />
 
@@ -146,13 +138,15 @@ PostHog supports a wide range of client and server libraries, but not all featur
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
     rows={[
-        { label: 'JavaScript', values: ['', ''] },
-        { label: 'React Native', values: ['', ''] },
-        { label: 'React', values: ['', ''] },
-        { label: 'Flutter', values: ['', ''] },
-        { label: 'iOS', values: ['', ''] },
-        { label: 'Android', values: ['', ''] },
-        { label: 'Ruby', values: ['', ''] },
+        { label: 'Web' },
+        'platform.libraries.features.javascript',
+        'platform.libraries.features.react',
+        'platform.libraries.features.ruby',
+        { label: 'Mobile' },
+        'platform.libraries.features.android',
+        'platform.libraries.features.ios',
+        'platform.libraries.features.flutter',
+        'platform.libraries.features.react_native',
     ]}
 />
 
@@ -172,7 +166,7 @@ PostHog supports a wide range of client and server libraries, but not all featur
         'platform.integrations.snowflake',
         'platform.integrations.bigquery',
         'platform.integrations.rudderstack',
-        { label: 'Airbyte', description: 'Extract and load data to external platforms', values: ['', ''] },
+        'platform.integrations.airbyte',
     ]}
 />
 

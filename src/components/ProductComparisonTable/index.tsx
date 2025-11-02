@@ -502,7 +502,6 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         if (row.type === 'feature' && row.product) {
             const productData = competitor.products?.[row.product]
             if (!productData) return undefined
-            if (!productData.available) return false
 
             const featureKey = row.feature || ''
             if (row.featureSet === 'integrations') {

@@ -52,6 +52,10 @@ export const platformFeatures = {
     integrations: {
         description: 'Integrations with other tools and workflows',
         features: {
+            airbyte: {
+                name: 'Airbyte',
+                description: 'Extract and load data to external platforms',
+            },
             imports: {
                 name: 'Data imports',
                 description: 'Import data from data warehouses and other sources',
@@ -171,6 +175,32 @@ export const platformFeatures = {
             discord: {
                 name: 'Discord',
                 description: 'Send survey responses and data to Discord',
+            },
+        },
+    },
+    libraries: {
+        description: 'Libraries for different languages and frameworks',
+        features: {
+            android: {
+                name: 'Android',
+            },
+            ios: {
+                name: 'iOS',
+            },
+            flutter: {
+                name: 'Flutter',
+            },
+            javascript: {
+                name: 'JavaScript',
+            },
+            react: {
+                name: 'React',
+            },
+            react_native: {
+                name: 'React Native',
+            },
+            ruby: {
+                name: 'Ruby',
             },
         },
     },
