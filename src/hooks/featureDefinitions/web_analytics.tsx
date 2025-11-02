@@ -14,10 +14,6 @@ export const webAnalyticsFeatures = {
             name: 'Conversions',
             description: 'Track actions you want users to take',
         },
-        clickmaps: {
-            name: 'Clickmaps',
-            description: 'See what elements people click on in pages',
-        },
         custom_channel_types: {
             name: 'Custom channel types',
             description: 'Create custom channel types by defining rules that match incoming events',
@@ -25,10 +21,6 @@ export const webAnalyticsFeatures = {
         entry_exit_paths: {
             name: 'Entry and exit paths',
             description: 'See the pages users first visit and the last ones before they leave',
-        },
-        heatmaps: {
-            name: 'Heatmaps',
-            description: 'Visualize where users click on your website',
         },
         movement_maps: {
             name: 'Movement maps',
@@ -41,10 +33,6 @@ export const webAnalyticsFeatures = {
         pageviews: {
             name: 'Pageviews',
             description: 'Track visitors and their views',
-        },
-        scrollmaps: {
-            name: 'Scrollmaps',
-            description: 'Visualize how far users scroll on your website',
         },
         sessions: {
             name: 'Sessions',

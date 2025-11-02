@@ -1,18 +1,18 @@
 ---
-title: "In-depth: PostHog vs Plausible"
+title: 'In-depth: PostHog vs Plausible'
 date: 2024-10-01
 author:
- - ian-vanagas
+    - ian-vanagas
 rootpage: /blog
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/plausible_5d7d99ef07.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/plausible_5d7d99ef07.jpg
 featuredImageType: full
 category: General
 tags:
-  - Comparisons
+    - Comparisons
 seo:
-  metaTitle: PostHog vs Plausible in-depth tool comparison
-  metaDescription: Looking for the best Google Analytics alternative? Compare PostHog vs Plausible on web analytics, product analytics, integrations, and more to find the right fit.
+    metaTitle: PostHog vs Plausible in-depth tool comparison
+    metaDescription: Looking for the best Google Analytics alternative? Compare PostHog vs Plausible on web analytics, product analytics, integrations, and more to find the right fit.
 ---
 
 import ProductComparisonTable from 'components/ProductComparisonTable'
@@ -21,7 +21,7 @@ import ProductComparisonTable from 'components/ProductComparisonTable'
 
 ### 1. We're free (forever)
 
-Our ["pay-as-you-go" tier](/pricing) includes all of the features of PostHog for free with an allowance of 1M events per month. For Plausible, this would cost a minimum of $69/m. 
+Our ["pay-as-you-go" tier](/pricing) includes all of the features of PostHog for free with an allowance of 1M events per month. For Plausible, this would cost a minimum of $69/m.
 
 Beyond PostHog's free tier, we try to be as cheap as possible and transparent. Want to know how much we'll charge? See our [pricing calculator](/pricing).
 
@@ -39,7 +39,7 @@ This isn't limited to event capture and features either. Our [data warehouse](/d
 
 ## Web analytics
 
-Both Plausible and PostHog are [Google Analytics alternatives](/blog/ga4-alternatives), so they're ideal for tracking and analyzing your website. 
+Both Plausible and PostHog are [Google Analytics alternatives](/blog/ga4-alternatives), so they're ideal for tracking and analyzing your website.
 
 <ProductComparisonTable
     competitors={['posthog', 'plausible']}
@@ -84,7 +84,7 @@ Teams rely on [product analytics](/product-analytics) when they need more custom
 
 ## Platform
 
-Beyond web analytics is where PostHog really shines. We provide all of the tools developers need to build a successful product (and they all work together). 
+Beyond web analytics is where PostHog really shines. We provide all of the tools developers need to build a successful product (and they all work together).
 
 <ProductComparisonTable
     competitors={['posthog', 'plausible']}
@@ -103,7 +103,8 @@ Beyond web analytics is where PostHog really shines. We provide all of the tools
     ]}
 />
 
-> 💡 **Good to know:** 
+> 💡 **Good to know:**
+>
 > 1. Plausible's API is limited to capturing events and querying aggregate metrics. PostHog's API provides capture, full SQL querying, feature flags, and CRUD operations for all metadata.
 > 2. You can add unlimited teammates to your project in PostHog. Plausible limits you to 3 on their growth plan and 10 on their business plan. For more than that, you need a custom enterprise plan.
 
@@ -115,12 +116,20 @@ Although Plausible has some integrations with other tools, it mostly stands on i
     competitors={['posthog', 'plausible']}
     rows={[
         'platform.integrations.csv_exports',
-        { label: 'Warehouse exports', description: 'Export data to warehouses like S3 and BigQuery for storage and analysis', customValue: false },
+        {
+            label: 'Warehouse exports',
+            description: 'Export data to warehouses like S3 and BigQuery for storage and analysis',
+            customValue: false,
+        },
         { label: 'Data warehouse', description: 'Query customer and product data together', customValue: false },
         'platform.integrations.warehouse_import',
         'platform.integrations.slack',
         'platform.integrations.email_reports',
-        { label: 'Google Search Console', description: 'See search queries that sent traffic to your site', customValue: true },
+        {
+            label: 'Google Search Console',
+            description: 'See search queries that sent traffic to your site',
+            customValue: true,
+        },
         'platform.integrations.stripe',
         'platform.integrations.hubspot',
         'platform.integrations.zapier',
@@ -138,7 +147,7 @@ Plausible prides itself on being privacy-friendly, but PostHog stands toe-to-toe
     rows={[
         { label: 'Data retention', description: 'The length of time event data is retained', customValue: '7 years' },
         'platform.security.bot_blocking',
-        'platform.security.reverse_proxy',
+        'platform.deployment.reverse_proxy',
         'platform.security.hipaa_ready',
         'platform.security.gdpr_ready',
         'platform.security.data_anonymization',
@@ -156,19 +165,19 @@ Plausible is a monthly subscription based on usage. Plans start at $9/m for 10k 
 
 PostHog is [entirely usage-based](/pricing). Its free tier includes:
 
-| Feature                         | Free usage per month  | Additional cost        |
-|---------------------------------|:---------------------:|:----------------------:|
-| Product analytics               | 1 million events      | From $0.00005/event    |
-| Session replay                  | 5,000 recordings      | From $0.005/recording  |
-| Surveys                         | 1500 responses        | From $0.10/response    |
-| Feature flags and A/B testing   | 1 million API requests| From $0.0001/request   |
-| Data warehouse                  | 1 million synced rows | From $0.000015/row     |
+| Feature                       |  Free usage per month  |    Additional cost    |
+| ----------------------------- | :--------------------: | :-------------------: |
+| Product analytics             |    1 million events    |  From $0.00005/event  |
+| Session replay                |    5,000 recordings    | From $0.005/recording |
+| Surveys                       |     1500 responses     |  From $0.10/response  |
+| Feature flags and A/B testing | 1 million API requests | From $0.0001/request  |
+| Data warehouse                | 1 million synced rows  |  From $0.000015/row   |
 
 Basically, we aim to give you the tools you want for as cheap as possible. We split out the products, and features like [group analytics](/docs/product-analytics/group-analytics) and [pipelines](/docs/cdp) within products, to do this.
 
 ### Does PostHog offer a free trial?
 
-Plausible offers a free trial, but PostHog doesn't, what gives? 
+Plausible offers a free trial, but PostHog doesn't, what gives?
 
 Instead of a free trial, PostHog offers a free forever tier as long as you stay under the free limits. You don't even need a credit card, but adding one unlocks all the features (we have billing limits you can use too).
 
@@ -181,8 +190,8 @@ Yes, see our [Google Analytics to PostHog migration guide](/docs/migrate/google-
 Although PostHog has many more features than Plausible, it isn't necessarily more complicated. Our [web analytics](/web-analytics) dashboard is similar to Plausible's:
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_39_58_2x_5dff6baf53.png"
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_40_26_2x_76efad2201.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_39_58_2x_5dff6baf53.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_40_26_2x_76efad2201.png"
     classes="rounded"
     alt="PostHog web analytics dashboard"
 />
@@ -191,7 +200,48 @@ Our [install snippet](/docs/getting-started/install?tab=snippet) is also only a 
 
 ```html
 <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    !(function (t, e) {
+        var o, n, p, r
+        e.__SV ||
+            ((window.posthog = e),
+            (e._i = []),
+            (e.init = function (i, s, a) {
+                function g(t, e) {
+                    var o = e.split('.')
+                    2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                        (t[e] = function () {
+                            t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                        })
+                }
+                ;((p = t.createElement('script')).type = 'text/javascript'),
+                    (p.crossOrigin = 'anonymous'),
+                    (p.async = !0),
+                    (p.src = s.api_host + '/static/array.js'),
+                    (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r)
+                var u = e
+                for (
+                    void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+                        u.people = u.people || [],
+                        u.toString = function (t) {
+                            var e = 'posthog'
+                            return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e
+                        },
+                        u.people.toString = function () {
+                            return u.toString(1) + '.people (stub)'
+                        },
+                        o =
+                            'capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId'.split(
+                                ' '
+                            ),
+                        n = 0;
+                    n < o.length;
+                    n++
+                )
+                    g(u, o[n])
+                e._i.push([i, s, a])
+            }),
+            (e.__SV = 1))
+    })(document, window.posthog || [])
     posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
 </script>
 ```

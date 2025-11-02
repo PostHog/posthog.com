@@ -26,13 +26,13 @@ export const sessionReplayFeatures = {
             name: 'Minimum duration',
             description: 'Only record sessions longer than the minimum duration',
         },
-        wireframe_mode: {
-            name: 'Wireframe mode',
-            description: 'Low performance impact mobile recordings using wireframes',
-        },
         screenshot_mode: {
             name: 'Screenshot mode',
             description: 'Mobile session reconstructions using app screenshots',
+        },
+        wireframe_mode: {
+            name: 'Wireframe mode',
+            description: 'Low performance impact mobile recordings using wireframes',
         },
     },
     platform_support: {

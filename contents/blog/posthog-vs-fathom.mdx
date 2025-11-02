@@ -1,18 +1,18 @@
 ---
-title: "In-depth: PostHog vs Fathom"
+title: 'In-depth: PostHog vs Fathom'
 date: 2024-11-13
 author:
- - bijan-boustani
+    - bijan-boustani
 rootpage: /blog
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog_vs_fathom_analytics_e327b58767.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog_vs_fathom_analytics_e327b58767.jpg
 featuredImageType: full
 category: General
 tags:
-  - Comparisons
+    - Comparisons
 seo:
-  metaTitle: PostHog vs Fathom in-depth tool comparison
-  metaDescription: Looking for the best Google Analytics alternative? Compare PostHog vs Fathom on web analytics, product analytics, pricing, and more to find the right fit.
+    metaTitle: PostHog vs Fathom in-depth tool comparison
+    metaDescription: Looking for the best Google Analytics alternative? Compare PostHog vs Fathom on web analytics, product analytics, pricing, and more to find the right fit.
 ---
 
 import ProductComparisonTable from 'components/ProductComparisonTable'
@@ -39,31 +39,15 @@ Beyond PostHog's free tier, we try to be as cheap as possible and [transparent](
 
 Both Fathom and PostHog are [Google Analytics alternatives](/blog/ga4-alternatives), so they're ideal for tracking and analyzing your website.
 
-<ProductComparisonTable
-    competitors={['posthog', 'fathom']}
-    rows={[
-        'web_analytics.features.pageviews',
-        'web_analytics.features.sessions',
-        'web_analytics.features.traffic_breakdown',
-        'web_analytics.features.conversions',
-        'web_analytics.features.bounce_rate',
-        'web_analytics.features.entry_exit_paths',
-        'web_analytics.features.outbound_clicks',
-        'web_analytics.features.utm_tracking',
-        'web_analytics.features.cookieless_tracking',
-        'web_analytics.features.snippet_install',
-        'web_analytics.features.migration',
-        'web_analytics.features.script_size',
-    ]}
-/>
+<ProductComparisonTable competitors={['posthog', 'fathom']} rows={['web_analytics.features']} />
 
 In terms of design, both PostHog and Fathom's [web analytics dashboards](/docs/web-analytics/dashboard) look similar, which we can see in the screenshots below:
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_dashboard_light_bc76a94566.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_dashboard_dark_42ac39a5f7.png"
-  classes="rounded"
-  alt="PostHog web analytics dashboard"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_dashboard_light_bc76a94566.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_dashboard_dark_42ac39a5f7.png"
+    classes="rounded"
+    alt="PostHog web analytics dashboard"
 />
 
 The big difference is that PostHog includes sessions, where Fathom only includes visitors:
@@ -83,7 +67,6 @@ Teams rely on [product analytics](/product-analytics) when they need more custom
         'product_analytics.trends',
         'product_analytics.funnels',
         'product_analytics.retention',
-        'dashboards',
         'product_analytics.features.cohorts',
         'product_analytics.features.user_profiles',
         'product_analytics.group_analytics',
@@ -141,7 +124,7 @@ Fathom prides itself on being privacy-friendly, but PostHog stands toe-to-toe wi
     rows={[
         'platform.security.data_retention',
         'platform.security.bot_blocking',
-        'platform.security.reverse_proxy',
+        'platform.deployment.reverse_proxy',
         'platform.security.hipaa_ready',
         'platform.security.gdpr_ready',
         'platform.security.soc2_certified',
@@ -158,13 +141,13 @@ Fathom is a monthly subscription based on usage. Plans start at $15 per month fo
 
 PostHog is [entirely usage-based](/pricing). Its free tier includes:
 
-| Feature                         | Free usage per month  | Additional cost        |
-|---------------------------------|:---------------------:|:----------------------:|
-| Product analytics               | 1 million events      | From $0.00005/event    |
-| Session replay                  | 5,000 recordings      | From $0.005/recording  |
-| Surveys                         | 1500 responses        | From $0.10/response    |
-| Feature flags and A/B testing   | 1 million API requests| From $0.0001/request   |
-| Data warehouse                  | 1 million synced rows | From $0.000015/row     |
+| Feature                       |  Free usage per month  |    Additional cost    |
+| ----------------------------- | :--------------------: | :-------------------: |
+| Product analytics             |    1 million events    |  From $0.00005/event  |
+| Session replay                |    5,000 recordings    | From $0.005/recording |
+| Surveys                       |     1500 responses     |  From $0.10/response  |
+| Feature flags and A/B testing | 1 million API requests | From $0.0001/request  |
+| Data warehouse                | 1 million synced rows  |  From $0.000015/row   |
 
 Basically, we aim to give you the tools you want for as cheap as possible. We split out the products, and features like [group analytics](/docs/product-analytics/group-analytics) and [pipelines](/docs/cdp) within products, to do this.
 
@@ -180,8 +163,8 @@ Yes, see our [Google Analytics to PostHog migration guide](/docs/migrate/google-
 
 ## Further Reading
 
-- [The best Fathom alternatives & competitors, compared](/blog/best-fathom-alternatives)
-- [The 9 best GA4 alternatives for apps and websites](/blog/ga4-alternatives)
-- [The 9 best GDPR-compliant analytics tools](/blog/best-fathom-alternatives)
+-   [The best Fathom alternatives & competitors, compared](/blog/best-fathom-alternatives)
+-   [The 9 best GA4 alternatives for apps and websites](/blog/ga4-alternatives)
+-   [The 9 best GDPR-compliant analytics tools](/blog/best-fathom-alternatives)
 
 <ArrayCTA />

@@ -132,9 +132,16 @@ export const fathom = {
         integrations: {
             csv_exports: true,
             datadog: false,
-
+            exports: false,
             email_reports: true,
+            hubspot: false,
+            sentry: false,
+            slack: false,
+            stripe: false,
+            warehouse_import: false,
             wordpress: true,
+            zapier: false,
+            zendesk: false,
         },
         pricing: {
             free_tier: false,

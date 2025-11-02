@@ -6,11 +6,22 @@ export const fullstory = {
         comparisonArticle: '/blog/posthog-vs-fullstory',
     },
     products: {
+        heatmaps: {
+            available: true,
+            features: {
+                clickmaps: true,
+                heatmaps: true,
+                rage_clicks: true,
+                scrollmaps: true,
+                movement_maps: true,
+            },
+        },
         product_analytics: {
             available: true,
             features: {
+                actions: true,
                 advertising_analytics: false,
-                autocapture: false,
+                autocapture: true,
                 cohorts: false,
                 custom_events: true,
                 custom_properties: true,
@@ -62,6 +73,12 @@ export const fullstory = {
         },
         web_analytics: {
             available: false,
+            features: {
+                clickmaps: true,
+                heatmaps: true,
+                scrollmaps: true,
+                movement_maps: true,
+            },
         },
         session_replay: {
             available: true,
@@ -138,6 +155,7 @@ export const fullstory = {
     platform: {
         deployment: {
             open_source: false,
+            reverse_proxy: true,
             self_host: false,
         },
         pricing: {
@@ -159,17 +177,22 @@ export const fullstory = {
             intercom: true,
             microsoft_teams: false,
             redshift: false,
+            rudderstack: true,
             s3: false,
             salesforce: true,
             segment: true,
             slack: false,
             snowflake: true,
             sentry: false,
+            stripe: false,
             zapier: false,
             zendesk: false,
         },
         developer: {
+            api: true,
+            cross_domain_tracking: true,
             notebooks: false,
+            server_side_sdks: true,
         },
         security: {
             cookieless_tracking: false,

@@ -6,16 +6,16 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/comparisons/matomo.jpeg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/comparisons/matomo.jpeg
 featuredImageType: full
 author:
-  - andy-vandervell
+    - andy-vandervell
 category: General
 tags:
-  - Comparisons
+    - Comparisons
 seo:
-  metaTitle: PostHog vs Matomo in-depth tool comparison
-  metaDescription: Looking for the best web analytics platform? Compare PostHog vs Matomo on analytics, integrations, compliance, pricing, and more to find the right fit.
+    metaTitle: PostHog vs Matomo in-depth tool comparison
+    metaDescription: Looking for the best web analytics platform? Compare PostHog vs Matomo on analytics, integrations, compliance, pricing, and more to find the right fit.
 ---
 
 import ProductComparisonTable from 'components/ProductComparisonTable'
@@ -34,13 +34,13 @@ Matomo charges extra for features like funnel analysis, cohorts, path analysis, 
 
 ### 2. It's built for engineers
 
-Rather than focusing on marketers like Matomo, PostHog focuses on the tools engineers need to build better products. 
+Rather than focusing on marketers like Matomo, PostHog focuses on the tools engineers need to build better products.
 
 On top of product analytics, this includes A/B testing, feature flags, a complete API, direct SQL access, and more. PostHog also includes a data warehouse so you can import and query data from other sources as well as destinations to send your data to external warehouses or other tools.
 
 ### 3. Seamless integrations with the tools you already use
 
-PostHog is built to work with the tools you already use. 
+PostHog is built to work with the tools you already use.
 
 That means you can import data and query from sources like Stripe, Hubspot, Zendesk, S3, and more. You can also export data in batches to your data warehouse like Snowflake or BigQuery as well as a range of real time destinations like Google Ads and Slack.
 
@@ -61,7 +61,11 @@ Both PostHog and Matomo offer a range of tools for tracking and analyzing your s
         'surveys',
         'feature_flags',
         'platform.pricing.free_tier',
-        { label: 'Free team members', description: 'Number of users you can invite to your instance', customValue: 'Unlimited' },
+        {
+            label: 'Free team members',
+            description: 'Number of users you can invite to your instance',
+            customValue: 'Unlimited',
+        },
         'platform.deployment.eu_hosting',
         'platform.deployment.open_source',
         'platform.developer.server_side_sdks',
@@ -118,8 +122,8 @@ Product analytics reveals the evolution of both tools. While PostHog has always 
 
 A simple way to compare integrations:
 
-- PostHog has more integrations with data and product tools.
-- Matomo has more integrations with ecommerce and CMS platforms.
+-   PostHog has more integrations with data and product tools.
+-   Matomo has more integrations with ecommerce and CMS platforms.
 
 But this doesn't mean either lacks those types of integrations.
 
@@ -127,11 +131,19 @@ But this doesn't mean either lacks those types of integrations.
     competitors={['posthog', 'matomo']}
     rows={[
         'platform.integrations.csv_exports',
-        { label: 'Warehouse exports', description: 'Export data to warehouses like S3 and BigQuery for storage and analysis', customValue: true },
+        {
+            label: 'Warehouse exports',
+            description: 'Export data to warehouses like S3 and BigQuery for storage and analysis',
+            customValue: true,
+        },
         'platform.integrations.warehouse_import',
         'platform.integrations.slack',
         'platform.integrations.email_reports',
-        { label: 'Google Search Console', description: 'See search queries that sent traffic to your site', customValue: false },
+        {
+            label: 'Google Search Console',
+            description: 'See search queries that sent traffic to your site',
+            customValue: false,
+        },
         'platform.integrations.wordpress',
         'platform.integrations.stripe',
         'platform.integrations.hubspot',
@@ -152,20 +164,25 @@ Matomo positions itself as a Google Analytics alternative that protects your dat
     rows={[
         'platform.deployment.self_host',
         'platform.security.bot_blocking',
-        'platform.security.reverse_proxy',
+        'platform.deployment.reverse_proxy',
         'platform.security.hipaa_ready',
         'platform.security.gdpr_ready',
         'platform.security.data_anonymization',
         'platform.security.soc2_certified',
         'platform.security.two_factor_auth',
         'platform.security.saml_sso',
-        { label: 'Audit log', description: 'Get a report of all activities happening in your instance', customValue: 'Enterprise' },
+        {
+            label: 'Audit log',
+            description: 'Get a report of all activities happening in your instance',
+            customValue: 'Enterprise',
+        },
     ]}
 />
 
-> 💡 **Good to know:** 
-> - Matomo's on-premise offering can be made HIPAA compliant, but not their cloud offering.
-> - PostHog is self-hostable under a MIT license [without guarantee](/docs/self-host/open-source/disclaimer) or support. 
+> 💡 **Good to know:**
+>
+> -   Matomo's on-premise offering can be made HIPAA compliant, but not their cloud offering.
+> -   PostHog is self-hostable under a MIT license [without guarantee](/docs/self-host/open-source/disclaimer) or support.
 
 ## Frequently asked questions
 
@@ -175,19 +192,19 @@ Matomo's Cloud offering starts at $29/month for 50,000 hits. This includes 1,500
 
 PostHog is [entirely usage-based](/pricing). Its free tier includes:
 
-| Feature                         | Free usage per month  | Additional cost        |
-|---------------------------------|:---------------------:|:----------------------:|
-| Product analytics               | 1 million events      | From $0.00005/event    |
-| Session replay                  | 5,000 recordings      | From $0.005/recording  |
-| Surveys                         | 1500 responses        | From $0.10/response    |
-| Feature flags and A/B testing   | 1 million API requests| From $0.0001/request   |
-| Data warehouse                  | 1 million synced rows | From $0.000015/row     |
+| Feature                       |  Free usage per month  |    Additional cost    |
+| ----------------------------- | :--------------------: | :-------------------: |
+| Product analytics             |    1 million events    |  From $0.00005/event  |
+| Session replay                |    5,000 recordings    | From $0.005/recording |
+| Surveys                       |     1500 responses     |  From $0.10/response  |
+| Feature flags and A/B testing | 1 million API requests | From $0.0001/request  |
+| Data warehouse                | 1 million synced rows  |  From $0.000015/row   |
 
 You'll never pay anything if you stay within these limits and you can set billing limits to avoid surprise bills.
 
 ### Does PostHog offer a free trial?
 
-Matomo offers a free trial, but PostHog doesn't, what gives? 
+Matomo offers a free trial, but PostHog doesn't, what gives?
 
 Instead of a free trial, PostHog offers a free forever tier as long as you stay under the free limits. You don't even need a credit card, but adding one unlocks all the features (we have billing limits you can use too).
 
@@ -204,8 +221,8 @@ Yes. See our [Matomo to PostHog migration guide](/docs/migrate/matomo) for more.
 Although PostHog has many features, it isn't necessarily complicated. Our [web analytics](/web-analytics) dashboard is similar to Matomo's:
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_39_58_2x_5dff6baf53.png"
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_40_26_2x_76efad2201.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_39_58_2x_5dff6baf53.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_40_26_2x_76efad2201.png"
     classes="rounded"
     alt="PostHog web analytics dashboard"
 />
@@ -214,7 +231,48 @@ Our [install snippet](/docs/getting-started/install?tab=snippet) is also only a 
 
 ```html
 <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    !(function (t, e) {
+        var o, n, p, r
+        e.__SV ||
+            ((window.posthog = e),
+            (e._i = []),
+            (e.init = function (i, s, a) {
+                function g(t, e) {
+                    var o = e.split('.')
+                    2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                        (t[e] = function () {
+                            t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                        })
+                }
+                ;((p = t.createElement('script')).type = 'text/javascript'),
+                    (p.crossOrigin = 'anonymous'),
+                    (p.async = !0),
+                    (p.src = s.api_host + '/static/array.js'),
+                    (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r)
+                var u = e
+                for (
+                    void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+                        u.people = u.people || [],
+                        u.toString = function (t) {
+                            var e = 'posthog'
+                            return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e
+                        },
+                        u.people.toString = function () {
+                            return u.toString(1) + '.people (stub)'
+                        },
+                        o =
+                            'capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId'.split(
+                                ' '
+                            ),
+                        n = 0;
+                    n < o.length;
+                    n++
+                )
+                    g(u, o[n])
+                e._i.push([i, s, a])
+            }),
+            (e.__SV = 1))
+    })(document, window.posthog || [])
     posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
 </script>
 ```

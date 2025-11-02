@@ -6,16 +6,16 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
 featuredImageType: full
 author:
-  - lior-neu-ner
+    - lior-neu-ner
 category: General
 tags:
-  - Comparisons
+    - Comparisons
 seo:
-  metaTitle: PostHog vs Google Analytics 4 in-depth tool comparison
-  metaDescription: Looking for the best web analytics tool? Compare PostHog vs GA4 on analytics, integrations, compliance, pricing, and more to find the right fit.
+    metaTitle: PostHog vs Google Analytics 4 in-depth tool comparison
+    metaDescription: Looking for the best web analytics tool? Compare PostHog vs GA4 on analytics, integrations, compliance, pricing, and more to find the right fit.
 ---
 
 import ProductComparisonTable from 'components/ProductComparisonTable'
@@ -64,9 +64,10 @@ You can also go deeper on user behavior by utilizing [heatmaps](/docs/toolbar/he
 <ProductComparisonTable
     competitors={['posthog', 'ga4']}
     rows={[
-        'web_analytics.features.heatmaps',
-        'web_analytics.features.clickmaps',
-        'web_analytics.features.scrollmaps',
+        'heatmaps.features.heatmaps',
+        'heatmaps.features.clickmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.movement_maps',
         'product_analytics.funnels.features.correlation_analysis',
         'product_analytics.lifecycle',
         'product_analytics.stickiness',
@@ -143,57 +144,67 @@ PostHog makes GDPR compliance easy by letting you choose where your data is host
 Yes, PostHog has much of the same functionality as Google Analytics, but we use different terminology. Here’s a quick comparison of the two:
 
 <OverflowXSection>
-<table className="w-full mt-4" style="min-width: 600px;">
-  <thead>
-    <tr>
-      <td><strong>GA name</strong></td>
-      <td><strong>PostHog equivalent</strong></td>
-      <td></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Report</td>
-      <td>Insight</td>
-      <td>Query and filter analytics data and visualize results. Types include trends, funnels, retention, and more.</td>
-    </tr>
-    <tr>
-      <td>Dimensions</td>
-      <td>Properties</td>
-      <td>Additional details added to events, persons, and groups such as location, browser, and status.</td>
-    </tr>
-    <tr>
-      <td>View</td>
-      <td>Dashboard</td>
-      <td>A collection of insights displayed together.</td>
-    </tr>
-    <tr>
-      <td>Audience</td>
-      <td>Persons</td>
-      <td>Represents a user or set of users who create events, potentially filtered by properties or behaviors.</td>
-    </tr>
-    <tr>
-      <td>Segment</td>
-      <td>Filter</td>
-      <td>A way to create a subset of your data.</td>
-    </tr>
-    <tr>
-      <td>Goals and conversions</td>
-      <td>Actions</td>
-      <td>An event or collection of events representing a target behavior.</td>
-    </tr>
-    <tr>
-      <td>Client ID</td>
-      <td>Distinct ID</td>
-      <td>A unique identifier for a user.</td>
-    </tr>
-    <tr>
-      <td>Measurement ID</td>
-      <td>Project API key</td>
-      <td>The unique identifier for your project, used to send data to your PostHog instance.</td>
-    </tr>
-  </tbody>
-</table>
+    <table className="w-full mt-4" style="min-width: 600px;">
+        <thead>
+            <tr>
+                <td>
+                    <strong>GA name</strong>
+                </td>
+                <td>
+                    <strong>PostHog equivalent</strong>
+                </td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Report</td>
+                <td>Insight</td>
+                <td>
+                    Query and filter analytics data and visualize results. Types include trends, funnels, retention, and
+                    more.
+                </td>
+            </tr>
+            <tr>
+                <td>Dimensions</td>
+                <td>Properties</td>
+                <td>Additional details added to events, persons, and groups such as location, browser, and status.</td>
+            </tr>
+            <tr>
+                <td>View</td>
+                <td>Dashboard</td>
+                <td>A collection of insights displayed together.</td>
+            </tr>
+            <tr>
+                <td>Audience</td>
+                <td>Persons</td>
+                <td>
+                    Represents a user or set of users who create events, potentially filtered by properties or
+                    behaviors.
+                </td>
+            </tr>
+            <tr>
+                <td>Segment</td>
+                <td>Filter</td>
+                <td>A way to create a subset of your data.</td>
+            </tr>
+            <tr>
+                <td>Goals and conversions</td>
+                <td>Actions</td>
+                <td>An event or collection of events representing a target behavior.</td>
+            </tr>
+            <tr>
+                <td>Client ID</td>
+                <td>Distinct ID</td>
+                <td>A unique identifier for a user.</td>
+            </tr>
+            <tr>
+                <td>Measurement ID</td>
+                <td>Project API key</td>
+                <td>The unique identifier for your project, used to send data to your PostHog instance.</td>
+            </tr>
+        </tbody>
+    </table>
 </OverflowXSection>
 
 See our [guide to PostHog for Google Analytics users](/blog/google-analytics-to-posthog) for more help on making the switch.

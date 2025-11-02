@@ -776,7 +776,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                 content: (
                     <div className="leading-tight min-w-48">
                         {featureInfo.url ? (
-                            <Link to={featureInfo.url} className="group text-sm underline" state={{ newWindow: true }}>
+                            <Link to={featureInfo.url} className="group underline" state={{ newWindow: true }}>
                                 <strong>{featureInfo.name}</strong>
                                 <IconArrowUpRight className="invisible group-hover:visible inline-block size-4 text-secondary relative -top-px" />
                             </Link>

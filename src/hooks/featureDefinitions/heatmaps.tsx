@@ -6,21 +6,25 @@ export const heatmapsFeatures = {
         docsUrl: '/docs/session-replay/heatmaps',
     },
     features: {
+        clickmaps: {
+            name: 'Clickmaps',
+            description: 'See what elements people click on in pages',
+        },
         heatmaps: {
             name: 'Heatmaps',
             description: 'See clicks and mouse movement on your site',
         },
-        clickmaps: {
-            name: 'Clickmaps',
-            description: 'See what elements users click',
-        },
-        scrollmaps: {
-            name: 'Scrollmaps',
-            description: 'See how far users scroll',
+        movement_maps: {
+            name: 'Movement maps',
+            description: 'Visualize mouse movements',
         },
         rage_clicks: {
             name: 'Rage clicks',
             description: 'Track repeated clicks in the same place',
+        },
+        scrollmaps: {
+            name: 'Scrollmaps',
+            description: 'Visualize how far users scroll on your website',
         },
         save_heatmaps: {
             name: 'Save heatmaps',

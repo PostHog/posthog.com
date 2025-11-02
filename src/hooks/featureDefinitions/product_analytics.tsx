@@ -10,6 +10,10 @@ export const productAnalyticsFeatures = {
             name: 'Advertising analytics',
             description: 'Track ROI on Google Ads and other marketing campaigns',
         },
+        actions: {
+            name: 'Actions',
+            description: 'Combine multiple events into a single action for analysis',
+        },
         autocapture: {
             name: 'Autocapture',
             description: 'Capture events without manual tracking',

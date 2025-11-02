@@ -381,7 +381,7 @@ export default function FeatureMatrix(): JSX.Element {
                                     'platform.security.two_factor_auth',
                                     'platform.security.saml_sso',
                                     'platform.security.bot_blocking',
-                                    'platform.security.reverse_proxy',
+                                    'platform.deployment.reverse_proxy',
                                 ]}
                             />
                         </section>

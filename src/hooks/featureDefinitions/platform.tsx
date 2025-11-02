@@ -10,13 +10,17 @@ export const platformFeatures = {
                 name: 'Open-source',
                 description: 'Fully open-source codebase',
             },
-            self_host: {
-                name: 'Self-host option',
-                description: 'Deploy and run on your own infrastructure',
+            reverse_proxy: {
+                name: 'Reverse proxy',
+                description: 'Avoid tracking blockers and capture more data',
             },
             managed_reverse_proxy: {
                 name: 'Managed reverse proxy',
                 description: 'Send events from your own domain, managed by us',
+            },
+            self_host: {
+                name: 'Self-host option',
+                description: 'Deploy and run on your own infrastructure',
             },
         },
     },
@@ -165,6 +169,10 @@ export const platformFeatures = {
                 name: 'SDKs',
                 description: 'Number of SDKs available',
             },
+            cross_domain_tracking: {
+                name: 'Cross-domain tracking',
+                description: 'Track users across multiple domains and subdomains',
+            },
             native_data_sources: {
                 name: 'Native data sources',
                 description: 'Compute metrics and results without integrations',
@@ -222,10 +230,6 @@ export const platformFeatures = {
             bot_blocking: {
                 name: 'Bot blocking',
                 description: 'Block scrapers, crawlers, and other unwanted traffic from stats',
-            },
-            reverse_proxy: {
-                name: 'Reverse proxy',
-                description: 'Avoid tracking blockers and capture more data',
             },
             user_privacy_options: {
                 name: 'User privacy options',
