@@ -2,54 +2,313 @@
 title: Product & feature comparisons
 ---
 
-We maintain a single source of truth for both:
+import OSTabs from 'components/OSTabs'
 
--   the features of each product
--   our competitors across all of their products and features
+Keeping product comparison charts up-to-date across a large website with multiple products is tricky, so we've built a way to source data from a single place. That way, if a competitor adds a new feature (or updates an existing one), we can update the data in one place and have it automatically reflected across the entire website in existing product comparison tables, blog posts, and other documentation.
 
-By having a single source of truth, we're able to keep this data up-to-date across product comparison tables, blog posts, and other documentation.
+To do this, we need a source of record for:
+
+-   feature definitions (each PostHog product and its feature set)
+-   competitor data (each competitor and their product and feature offerings)
+
+By standardizing all features across all products and competitors, we can generate a comparison table without any hard-coded data.
+
+## Example
+
+This is not an ordinary Markdown table. (In fact, it's not Markdown at all!)
+
+<OSTabs
+    padding
+    triggerDataScheme="primary"
+    tabs={[
+        {
+            label: 'Output',
+            value: 'table',
+            content: (
+                <ProductComparisonTable
+                    competitors={['posthog', 'amplitude']}
+                    rows={[
+                        { label: 'Some product summaries' },
+                        'product_analytics',
+                        'experiments',
+                        { label: 'Cherry-picked rows about Product Analytics' },
+                        {
+                            path: 'product_analytics.pricing.free_tier',
+                            label: 'Free usage',
+                            description: 'Custom description for the pricing row',
+                        },
+                        'product_analytics.features.autocapture',
+                        'product_analytics.insights.sql_editor',
+                        'product_analytics.cohorts',
+                    ]}
+                />
+            ),
+        },
+        {
+            label: 'Code',
+            value: 'code',
+            content: (
+                <pre>
+                    <code className="language-mdx">{`<ProductComparisonTable
+  competitors={['posthog', 'amplitude']}
+  rows={[
+    { label: 'Some product summaries' },
+    'product_analytics',
+    'experiments',
+    { label: 'Info about Product Analytics' },
+    {
+      path: 'product_analytics.pricing.free_tier',
+      label: 'Free usage',
+      description: 'Monthly free tier',
+    },
+    'product_analytics.features.autocapture',
+    'product_analytics.insights.sql_editor',
+    'product_analytics.cohorts',
+  ]}
+/>`}</code>
+                </pre>
+            ),
+        },
+    ]}
+/>
+
+See more examples in the [PostHog vs Amplitude blog post](/blog/posthog-vs-amplitude). All tables are dynamically rendered from data sourced from json arrays.
 
 ## Product features
+
+Feature definitions for PostHog products are stored in:
 
 ```
 /src/hooks/featureDefinitions/{productName}.tsx
 ```
 
--   summary
-    -   name
-    -   description
--   {sectionName}
-    -   description
-    -   features
-        -   {featureName}
-            -   name
-            -   description
+### Session Replay example:
 
-## Competitors
+`/src/hooks/featureDefinitions/session_replay.tsx`
+
+Features can live in the `features` node, or nested inside in a logical grouping. (This is a truncated example.)
+
+```typescript
+export const sessionReplayFeatures = {
+    summary: {
+        name: 'Session Replay',
+        description: 'Watch real user sessions to understand behavior and fix issues',
+        url: '/session-replay',
+        docsUrl: '/docs/session-replay',
+    },
+    features: {
+        canvas_recording: {
+            name: 'Canvas recording',
+            description: 'Capture canvas elements in your app',
+        },
+        chat_with_recordings: {
+            name: 'Chat with your recordings',
+            description: 'Discover useful recordings using AI-powered chat',
+        },
+    },
+    platform_support: {
+        description: 'Record on web and mobile across major frameworks',
+        features: {
+            web_app_recordings: {
+                name: 'Web app recordings',
+                description: 'Capture recordings from single-page apps and websites',
+            },
+            mobile_app_recordings: {
+                name: 'Mobile app recordings',
+                description: 'Capture recordings in iOS and Android apps',
+            },
+            ios_recordings: {
+                name: 'iOS recordings',
+                description: 'Record sessions from iOS mobile apps',
+            },
+        },
+    },
+}
+```
+
+## Competitor data
+
+Competitor data is stored in:
 
 ```
+
 /src/hooks/competitorData/{competitorName}.tsx
+
 ```
 
-Contains:
+### Amplitude example:
 
--   name
--   key
--   assets
-    -   icon
-    -   comparisonArticle
--   products
-    -   {productName}
-        -   availability
-        -   features
-            -   {featureName}
-                -   name
-                -   description
--   platform
--   pricing
+`/src/hooks/competitorData/amplitude.tsx`
+
+Feature-level data for competitors is stored in the same format, with the exception being that products are namespaced under the `products` node.
+
+```typescript
+export const amplitude = {
+    name: 'Amplitude',
+    key: 'amplitude',
+    assets: {
+        icon: '/images/competitors/amplitude.svg',
+        comparisonArticle: '/blog/posthog-vs-amplitude',
+    },
+    products: {
+        session_replay: {
+            available: true,
+            pricing: {
+                free_tier: '1,000 recordings',
+            },
+            features: {
+                canvas_recording: false,
+                chat_with_recordings: false,
+                clickmaps: false,
+                conditional_recording: false,
+            },
+        },
+
+        platform: {
+            deployment: {
+                open_source: false,
+                self_host: false,
+            },
+            pricing: {
+                free_tier: true,
+                transparent_pricing: false,
+                usage_based_pricing: true,
+            },
+        },
+    },
+}
+```
 
 ## Referencing data
 
--   `dashboards` returns value of `availabile` and displays the feature's name and description from `summary`
--   `dashboards.features` returns all features from the array, with their name and description
--   `dashboards.features.annotations` will return an individual feature
+There are several ways to assemble competitor tables. It uses the `<ProductComparisonTable />` component which uses `<OSTable />` internally.
+
+### Compare products between competitors
+
+This will list out the top-level product names and descriptions.
+
+<OSTabs
+    padding
+    triggerDataScheme="primary"
+    tabs={[
+        {
+            label: 'Output',
+            value: 'table',
+            content: (
+                <ProductComparisonTable
+                    competitors={['posthog', 'amplitude']}
+                    rows={[
+                        { product: 'product_analytics' },
+                        { product: 'web_analytics' },
+                        { product: 'session_replay' },
+                    ]}
+                />
+            ),
+        },
+        {
+            label: 'Code',
+            value: 'code',
+            content: (
+                <pre>
+                    <code className="language-mdx">{`<ProductComparisonTable
+  competitors={['posthog', 'amplitude']}
+  rows={[
+    { product: 'product_analytics' },
+    { product: 'web_analytics' },
+    { product: 'session_replay' }
+  ]}
+/>`}</code>
+                </pre>
+            ),
+        },
+    ]}
+/>
+
+### Render all items within a node
+
+Use `features` to render all items inside the node.
+
+This is helpful for comparing all features within a product without having to reference them individually.
+
+<OSTabs
+    padding
+    triggerDataScheme="primary"
+    tabs={[
+        {
+            label: 'Output',
+            value: 'table',
+            content: (
+                <ProductComparisonTable competitors={['posthog', 'amplitude']} rows={['product_analytics.features']} />
+            ),
+        },
+        {
+            label: 'Code',
+            value: 'code',
+            content: (
+                <pre>
+                    <code className="language-mdx">{`<ProductComparisonTable
+  competitors={['posthog', 'amplitude']}
+  rows={[
+    { label: 'This will render all items in the node' },
+    'product_analytics.features',
+    'dashboards'
+  ]}
+/>`}</code>
+                </pre>
+            ),
+        },
+    ]}
+/>
+
+### Compare specific features between competitors
+
+If you want to cherry-pick specific features, just reference the key directly.
+
+<OSTabs
+    padding
+    triggerDataScheme="primary"
+    tabs={[
+        {
+            label: 'Output',
+            value: 'table',
+            content: (
+                <ProductComparisonTable
+                    competitors={['posthog', 'amplitude']}
+                    rows={[
+                        {
+                            path: 'product_analytics.pricing.free_tier',
+                            label: 'Free usage',
+                            description: 'Monthly free tier',
+                        },
+                        { label: 'Core features' },
+                        'product_analytics.features.autocapture',
+                        'product_analytics.insights.sql_editor',
+                        'dashboards',
+                    ]}
+                />
+            ),
+        },
+        {
+            label: 'Code',
+            value: 'code',
+            content: (
+                <pre>
+                    <code className="language-mdx">{`<ProductComparisonTable
+  competitors={['posthog', 'amplitude']}
+  rows={[
+    {
+      path: 'product_analytics.pricing.free_tier',
+      label: 'Free usage',
+      description: 'Monthly free tier',
+    },
+    { label: 'Core features' },
+    'product_analytics.features.autocapture',
+    'product_analytics.insights.sql_editor',
+    'dashboards',
+  ]}
+/>`}</code>
+                </pre>
+            ),
+        },
+    ]}
+/>
