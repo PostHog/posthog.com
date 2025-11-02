@@ -86,40 +86,16 @@ PostHog and Mixpanel offer broadly similar product analytics features, including
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
     rows={[
-        {
-            path: 'product_analytics.features.ai_insight_builder',
-            label: 'AI insight builder',
-            description: 'Create insights and chat to your data using AI',
-        },
-        {
-            path: 'product_analytics.features.alerts',
-            label: 'Alerts',
-            description: 'Get notifications when insights fall outside set thresholds',
-        },
+        'product_analytics.insights.ai_insight_builder',
+        'product_analytics.insights.alerts',
         'product_analytics.features.autocapture',
-        {
-            path: 'heatmaps.features.clickmaps',
-            label: 'Clickmaps',
-            description: 'See what elements people click on in your app',
-        },
-        {
-            path: 'heatmaps.features.heatmaps',
-            label: 'Heatmaps',
-            description: 'Visualize where users click in your app',
-        },
-        {
-            path: 'heatmaps.features.scrollmaps',
-            label: 'Scrollmaps',
-            description: 'Visualize how far users scroll in your app',
-        },
+        'heatmaps.features.clickmaps',
+        'heatmaps.features.heatmaps',
+        'heatmaps.features.scrollmaps',
         'product_analytics.insights.sql_editor',
         'dashboards',
         'product_analytics.cohorts',
-        {
-            path: 'product_analytics.features.correlation_analysis',
-            label: 'Correlation analysis',
-            description: 'Suggested events and properties that lead to success or failure',
-        },
+        'product_analytics.funnels.correlation_analysis',
         'product_analytics.insights.formula_mode',
         'product_analytics.group_analytics',
         { label: 'Insights' },
@@ -178,16 +154,8 @@ PostHog's session replay can be used by anyone, but it includes numerous develop
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
     rows={[
-        {
-            path: 'session_replay.features.canvas_recording',
-            label: 'Canvas recording',
-            description: 'Capture canvas elements in your app',
-        },
-        {
-            path: 'session_replay.features.chat_with_recordings',
-            label: 'Chat with your recordings',
-            description: 'Discover useful recordings using AI-powered chat',
-        },
+        'session_replay.features.canvas_recording',
+        'session_replay.features.chat_with_recordings',
         'session_replay.analysis.console_logs',
         'session_replay.targeting.conditional_recording',
         'session_replay.analysis.dom_explorer',
@@ -196,22 +164,10 @@ PostHog's session replay can be used by anyone, but it includes numerous develop
             label: 'Export recordings',
             description: 'Save important recordings offline',
         },
-        {
-            path: 'session_replay.features.event_timeline',
-            label: 'Event timeline',
-            description: 'See events triggered during recordings',
-        },
-        {
-            path: 'session_replay.features.iframe_recording',
-            label: 'Iframe recording',
-            description: 'Record embedded iframes',
-        },
+        'session_replay.features.event_timeline',
+        'session_replay.features.iframe_recording',
         'session_replay.identity.identity_detection',
-        {
-            path: 'session_replay.features.minimum_duration',
-            label: 'Minimum duration',
-            description: 'Only record sessions longer than the minimum duration',
-        },
+        'session_replay.features.minimum_duration',
         'session_replay.analysis.performance_monitoring',
         'session_replay.organization.playlists',
         'session_replay.privacy.privacy_masking',
@@ -297,9 +253,9 @@ You **can't run A/B tests using Mixpanel**, but you can analyze the results of e
     competitors={['posthog', 'mixpanel']}
     rows={[
         {
-            path: 'experiments.features.ab_testing',
             label: 'Built-in A/B testing',
             description: 'Setup and run A/B tests using feature flags',
+            values: [true, false],
         },
         {
             path: 'experiments.features.experiment_analysis',
@@ -314,6 +270,7 @@ You **can't run A/B tests using Mixpanel**, but you can analyze the results of e
         'experiments.custom_goals',
         'experiments.secondary_metrics',
         'experiments.analysis.statistical_significance',
+        'experiments.analysis.features.statistics_engine',
         {
             path: 'experiments.features.split_testing',
             label: 'Split testing',
@@ -331,7 +288,6 @@ You **can't run A/B tests using Mixpanel**, but you can analyze the results of e
             description: 'Add new users to an experiment automatically by setting a user property',
         },
         'experiments.supported_tests.features.holdout_testing',
-        'experiments.analysis.features.statistics_engine',
     ]}
 />
 
@@ -350,19 +306,6 @@ You can't build a successful product on data alone. Surveys are useful for [gath
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
     rows={[
-        { label: 'Question types' },
-        'surveys.question_types.freeform_text',
-        'surveys.question_types.rating',
-        'surveys.question_types.multiple_choice',
-        'surveys.question_types.multi_select',
-        { label: 'Templates' },
-        'surveys.templates.nps_surveys',
-        {
-            path: 'surveys.templates.user_interview_requests',
-            label: 'PMF surveys',
-            description: 'Product-market fit survey template',
-        },
-        { label: 'Targeting & customization' },
         {
             path: 'surveys.features.ai_response_summaries',
             label: 'AI response summaries',
@@ -390,6 +333,18 @@ You can't build a successful product on data alone. Surveys are useful for [gath
         'surveys.presentation.custom_ui',
         'surveys.branching.conditional_logic',
         'surveys.implementation.api_access',
+        { label: 'Question types' },
+        'surveys.question_types.freeform_text',
+        'surveys.question_types.rating',
+        'surveys.question_types.multiple_choice',
+        'surveys.question_types.multi_select',
+        { label: 'Templates' },
+        'surveys.templates.nps_surveys',
+        {
+            path: 'surveys.templates.user_interview_requests',
+            label: 'PMF surveys',
+            description: 'Product-market fit survey template',
+        },
     ]}
 />
 

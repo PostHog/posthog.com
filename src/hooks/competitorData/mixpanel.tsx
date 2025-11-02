@@ -26,6 +26,8 @@ export const mixpanel = {
                 insights: {
                     available: true,
                     features: {
+                        ai_insight_builder: true,
+                        alerts: true,
                         formula_mode: true,
                         ready_made_insight_types: true,
                         sampling: false,
@@ -163,6 +165,42 @@ export const mixpanel = {
         },
         feature_flags: {
             available: false,
+            features: {
+                boolean_flags: false,
+                early_access_management: false,
+                json_payloads: false,
+                multivariate_flags: false,
+                release_conditions: false,
+            },
+            implementation: {
+                features: {
+                    local_evaluation: false,
+                    bootstrapping: false,
+                },
+            },
+            targeting: {
+                features: {
+                    target_by_percentage: false,
+                    target_by_person_properties: false,
+                    target_by_cohorts: false,
+                },
+            },
+            management: {
+                features: {
+                    approvals: false,
+                    multi_environment: false,
+                    flag_administration: false,
+                    flag_scheduling: false,
+                    history_activity: false,
+                },
+            },
+            testing: {
+                features: {
+                    flag_overrides: false,
+                    toolbar_integration: false,
+                    user_assignment: false,
+                },
+            },
         },
         experiments: {
             available: 'Analysis only',
@@ -231,8 +269,77 @@ export const mixpanel = {
                 },
             },
         },
+        heatmaps: {
+            available: false,
+            features: {
+                clickmaps: true,
+                heatmaps: false,
+                scrollmaps: false,
+            },
+        },
         surveys: {
             available: false,
+            features: {
+                aggregated_results: false,
+                ai_response_summaries: false,
+                automatic_nps_calculation: false,
+                capture_partial_responses: false,
+                completion_conditions: false,
+                custom_targeting: false,
+                customizable_wait_periods: false,
+                display_conditions: false,
+                linked_feature_flag: false,
+                nps_surveys: false,
+                pmf_surveys: false,
+                sdk_support: false,
+                sentiment_analysis: false,
+                slack_integration: false,
+                survey_templates: false,
+                target_by_feature_flag: false,
+                user_interview_requests: false,
+                webhooks: false,
+            },
+            targeting: {
+                features: {
+                    custom_targeting: false,
+                    display_conditions: false,
+                    event_triggered: false,
+                },
+            },
+            presentation: {
+                features: {
+                    feedback_button: false,
+                    custom_html: false,
+                    custom_ui: false,
+                    conditional_logic: false,
+                },
+            },
+            branching: {
+                features: {
+                    conditional_logic: false,
+                },
+            },
+            question_types: {
+                features: {
+                    freeform_text: false,
+                    multiple_choice: false,
+                    multi_select: false,
+                    rating: false,
+                    emoji_reaction: false,
+                    interview_scheduling: false,
+                },
+            },
+            platforms: {
+                features: {
+                    web: false,
+                    mobile: false,
+                },
+            },
+            implementation: {
+                features: {
+                    api_access: false,
+                },
+            },
         },
         error_tracking: {
             available: false,
@@ -269,6 +376,7 @@ export const mixpanel = {
     },
     platform: {
         deployment: {
+            managed_reverse_proxy: false,
             open_source: 'Libraries only',
             self_host: false,
         },
@@ -282,9 +390,9 @@ export const mixpanel = {
             community_integrations: false,
             customer_io: true,
             datadog: false,
-
             exports: false,
             google_ads: false,
+            hubspot: true,
             imports: false,
             intercom: true,
             microsoft_teams: false,

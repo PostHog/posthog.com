@@ -61,6 +61,10 @@ export const productAnalyticsFeatures = {
                 name: 'AI insight builder',
                 description: '"Talk to your data" using AI',
             },
+            alerts: {
+                name: 'Alerts',
+                description: 'Get notifications when insights fall outside set thresholds',
+            },
             ready_made_insights: {
                 name: 'Ready-made insight types',
                 description: 'Pre-built insight types including trends, funnels, paths, retention, and lifecycle',
