@@ -1632,6 +1632,10 @@
             "destination": "/docs/posthog-ai"
         },
         {
+            "source": "/docs/libraries/js/features",
+            "destination": "/docs/libraries/js/usage"
+        },
+        {
             "source": "/handbook/engineering/on-call-rotation",
             "destination": "/handbook/engineering/operations/on-call-rotation"
         },
