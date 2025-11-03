@@ -1,7 +1,15 @@
 ---
-title: Preventing feature flags from being blocked
+title: How to prevent feature flags from being blocked
 sidebar: Docs
 showTitle: true
+date: 2025-11-03
+author:
+  - dustin-byrne
+showTitle: true
+sidebar: Docs
+tags:
+  - feature flags
+  - configuration
 ---
 
 Ad blockers can occasionally interfere with feature flag functionality by blocking requests to PostHog. This guide explains what steps you can take to ensure your feature flags are not affected.
