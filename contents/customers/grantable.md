@@ -37,7 +37,7 @@ With Workflows, Grantable doesn’t have to do that. Workflows runs on top of th
 <Quote
  imageSource="https://res.cloudinary.com/dmukukwp6/image/upload/evan_rallis_08cffd54f7.jpeg"
     size="md"
-    name="Evan Ralliss"
+    name="Evan Rallis"
     title="Head of Product & Growth"
     quote={`"PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy."`}
 />
