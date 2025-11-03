@@ -23,7 +23,7 @@ export const errorTrackingFeatures = {
                 description: 'Get notified in real time by email, Slack, or webhook when issues occur',
             },
             exception_capture: {
-                name: 'Exception capture',
+                name: 'Realtime error capture',
                 description: 'Automatically capture and report errors as they happen',
             },
             issue_management: {
@@ -31,7 +31,7 @@ export const errorTrackingFeatures = {
                 description: 'Manage and organize error issues with assignment and status tracking',
             },
             error_grouping: {
-                name: 'Error grouping',
+                name: 'Error grouping & deduplication',
                 description: 'Automatically group similar errors and remove duplicates',
             },
             stack_tracing: {
@@ -49,6 +49,10 @@ export const errorTrackingFeatures = {
             profiling: {
                 name: 'Profiling',
                 description: 'Monitor and visualize code performance',
+            },
+            user_device_context: {
+                name: 'User & device context',
+                description: 'Capture user and device details with errors',
             },
         },
     },
@@ -84,8 +88,8 @@ export const errorTrackingFeatures = {
                 name: 'Integration with product analytics',
                 description: 'Connect error data with product usage analytics',
             },
-            session_replays: {
-                name: 'Integration with session replays',
+            session_replay: {
+                name: 'Integration with session replay',
                 description: 'Link errors to session recordings for context',
             },
             ab_experiments: {

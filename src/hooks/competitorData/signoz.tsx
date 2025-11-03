@@ -8,13 +8,30 @@ export const signoz = {
         error_tracking: {
             available: true,
             features: {
+                console_log_capture: false,
                 error_alerts: true,
                 exception_capture: true,
                 issue_management: true,
                 error_grouping: true,
                 stack_tracing: true,
+                mobile_sdk_coverage: 'Partial',
                 network_performance: true,
                 source_map_support: true,
+                user_device_context: true,
+            },
+            monitoring: {
+                features: {
+                    cron_monitoring: '',
+                    network_performance: '',
+                    release_tracking: 'Partial',
+                    performance_monitoring: true,
+                },
+            },
+            integrations: {
+                ab_experiments: '',
+                datadog: false,
+                product_analytics: false,
+                session_replay: false,
             },
         },
     },

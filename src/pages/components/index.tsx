@@ -1998,7 +1998,7 @@ export default function Components(): JSX.Element {
                                         { path: 'error_tracking.monitoring.network_performance' },
                                         { path: 'error_tracking.monitoring.source_map_support' },
                                         { path: 'error_tracking.integrations.product_analytics' },
-                                        { path: 'error_tracking.integrations.session_replays' },
+                                        { path: 'error_tracking.integrations.session_replay' },
                                         { path: 'error_tracking.integrations.ab_experiments' },
                                     ]}
                                 />

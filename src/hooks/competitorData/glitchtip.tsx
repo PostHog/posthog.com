@@ -8,13 +8,30 @@ export const glitchtip = {
         error_tracking: {
             available: true,
             features: {
+                console_log_capture: false,
                 error_alerts: true,
+                error_grouping: true,
                 exception_capture: true,
                 issue_management: true,
-                error_grouping: true,
-                stack_tracing: true,
+                mobile_sdk_coverage: false,
                 network_performance: false,
                 source_map_support: true,
+                stack_tracing: true,
+                user_device_context: true,
+            },
+            monitoring: {
+                features: {
+                    cron_monitoring: '',
+                    network_performance: '',
+                    release_tracking: false,
+                    performance_monitoring: false,
+                },
+            },
+            integrations: {
+                ab_experiments: '',
+                datadog: false,
+                product_analytics: false,
+                session_replay: false,
             },
         },
     },

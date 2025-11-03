@@ -18,8 +18,7 @@ export const datadog = {
             },
             integrations: {
                 datadog: false,
-
-                session_replays: true,
+                session_replay: true,
             },
         },
     },

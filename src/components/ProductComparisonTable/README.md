@@ -85,7 +85,7 @@ export const comparisonRows = [
     'error_tracking.core',
     'platform.pricing',
     {
-        path: 'error_tracking.integrations.session_replays',
+        path: 'error_tracking.integrations.session_replay',
         label: 'Session replay integration',
     },
 ]
@@ -184,7 +184,7 @@ Organize tables into logical groups with section headers. Headers only require a
 <ProductComparisonTable
     competitors={['posthog', 'amplitude']}
     rows={[
-        { label: 'Core Features' },  // Section header - description is optional
+        { label: 'Core Features' }, // Section header - description is optional
         'product_analytics.features.autocapture',
         'product_analytics.features.cohorts',
         { label: 'Advanced Analytics' },

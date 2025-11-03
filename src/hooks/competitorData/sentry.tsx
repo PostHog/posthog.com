@@ -13,10 +13,14 @@ export const sentry = {
             },
             features: {
                 code_context: true,
+                error_grouping: true,
+                console_log_capture: false,
                 exception_capture: true,
                 issue_management: true,
+                mobile_sdk_coverage: true,
                 profiling: true,
                 stack_tracing: true,
+                user_device_context: true,
             },
             monitoring: {
                 features: {
@@ -25,6 +29,10 @@ export const sentry = {
                     release_tracking: true,
                     performance_monitoring: true,
                 },
+            },
+            integrations: {
+                session_replay: 'Limited',
+                product_analytics: false,
             },
         },
         llm_analytics: {
@@ -222,8 +230,8 @@ export const sentry = {
         deployment: {
             eu_hosting: true,
             managed_reverse_proxy: false,
-            open_source: true,
-            self_host: false,
+            open_source: 'Open core',
+            self_host: true,
         },
         pricing: {
             free_tier: 'Limited',
@@ -245,7 +253,7 @@ export const sentry = {
             azure_blob: false,
             bigquery: false,
             cdp: false,
-            ci_cd_integrations: false,
+            ci_cd_integrations: true,
             community_integrations: false,
             csv_exports: false,
             customer_io: false,

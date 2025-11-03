@@ -8,17 +8,30 @@ export const bugsnag = {
         error_tracking: {
             available: true,
             features: {
+                console_log_capture: false,
                 error_alerts: true,
                 exception_capture: true,
                 issue_management: true,
                 error_grouping: true,
                 stack_tracing: true,
+                mobile_sdk_coverage: true,
                 network_performance: true,
                 source_map_support: true,
+                user_device_context: true,
+            },
+            monitoring: {
+                features: {
+                    cron_monitoring: '',
+                    network_performance: '',
+                    release_tracking: true,
+                    performance_monitoring: true,
+                },
             },
             integrations: {
                 ab_experiments: true,
                 datadog: false,
+                product_analytics: false,
+                session_replay: false,
             },
         },
     },
@@ -28,6 +41,7 @@ export const bugsnag = {
             managed_reverse_proxy: false,
             open_source: false,
             self_host: false,
+            ci_cd_integrations: true,
         },
         pricing: {
             free_tier: true,
@@ -49,7 +63,7 @@ export const bugsnag = {
             azure_blob: false,
             bigquery: false,
             cdp: false,
-            ci_cd_integrations: false,
+            ci_cd_integrations: true,
             community_integrations: false,
             csv_exports: false,
             customer_io: false,
