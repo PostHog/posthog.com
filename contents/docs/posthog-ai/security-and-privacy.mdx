@@ -1,0 +1,25 @@
+---
+title: Security and privacy with PostHog AI
+---
+
+## What access does PostHog AI have to my data?
+
+While working with PostHog AI, you will certainly share some information with it. Data analysis is a core feature. When doing research, PostHog AI can read the following data in your project:
+
+- Events, persons, sessions, groups
+- Actions and cohorts
+- Event and property definitions
+- Data warehouse schema
+
+Based on that context, PostHog AI comes up with queries, runs them, and summarizes the results. Those results can be as high-level as a single number, or as detailed as a list of users with all their properties.
+
+## Is my data shared with third parties?
+
+We use third-party providers to power PostHog AI, so messages and all data accessed by PostHog AI (see list above) is passed through them.
+
+Our list of data subprocessors includes:
+- OpenAI and Anthropic – responsible for the core of PostHog AI's functionality, have access to user messages and all data types.
+- Azure – responsible for semantic search across PostHog, has access to actions and cohorts (including their filters)
+
+Other providers that are not data subprocessors:
+- Perplexity – responsible for providing context about your product and/or company, has access to domain name (for websites) or application bundle ID (for mobile applications). We do not send any of your data.

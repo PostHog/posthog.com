@@ -1,0 +1,101 @@
+---
+title: Getting started with PostHog AI
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconGraph, IconRewindPlay, IconToggle  } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+
+
+<QuestLog firstSpeechBubble="AGI is here! Let's get started!" lastSpeechBubble="Try talking to PostHog AI!">
+
+<QuestLogItem 
+    title="Enable PostHog AI"
+    subtitle="Required"
+    icon="IconCode2"
+>
+
+  To get started with PostHog AI, the first step is to enable PostHog AI in your organization settings.
+
+  <OSButton variant="primary" asLink to="/docs/posthog-ai/enable">
+    Enable PostHog AI
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Open PostHog AI"
+  subtitle="Required"
+  icon="IconCode"
+>
+
+  Once you've enabled PostHog AI, you can open it up wherever you are in PostHog! Just click on the [PostHog AI](https://app.posthog.com/#panel=max) icon in the corner of the app and get to chatting.
+
+  <OSButton variant="primary" asLink to="/docs/posthog-ai/enable">
+    Open PostHog AI
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+    title="Run /init command"
+    subtitle="Required"
+    icon="IconCode2"
+>
+
+  Once you've opened PostHog AI, you can run the `/init` command to get started. This will help PostHog AI understand your product and your data.
+
+  <OSButton variant="primary" asLink to="/docs/posthog-ai/commands">
+    Run /init command
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Explore PostHog AI tools"
+  subtitle="Recommended"
+  icon="IconLlmPromptEvaluation"
+>
+
+Explore the tools available to you in PostHog AI.
+
+<OSButton variant="primary" asLink to="/docs/posthog-ai/tools">
+  Explore PostHog AI tools
+</OSButton>
+
+</QuestLogItem>
+
+
+<QuestLogItem 
+  title="Ask PostHog AI to do things"
+  subtitle="Recommended"
+  icon="IconLogomark"
+>
+
+  Take advantage of PostHog AI. Make it do things for you.
+
+  ### <IconRewindPlay className="text-yellow w-7 -mt-1 inline-block"/> Session replay
+
+  Ask PostHog AI to create a playlist of session replays.
+
+  ###  <IconGraph className="text-blue w-7 -mt-1 inline-block"/>  Product analytics
+
+  Ask PostHog AI to create a trend, funnel, or retention insight.
+
+  ###  <IconToggle className="text-seagreen w-7 -mt-1 inline-block"/>  Data Warehouse
+
+  Ask PostHog AI to write SQL to query the data warehouse.
+
+   --- 
+
+  That's it! You're ready to start integrating.
+
+  <OSButton variant="primary" asLink to="/docs/posthog-ai/enable">
+    Enable PostHog AI
+  </OSButton>
+
+</QuestLogItem>
+
+</QuestLog>
