@@ -27,7 +27,7 @@ Grantable had already tried basically every workflow automation platform in the 
 However, this didn’t work for two reasons.
 
 ### No shared source of truth
-Tools like Zapier or Make don’t sit on top of your product data. You have to keep feeding them user state, usage events, subscription info, ICP classification logic, etc. Every time your data model changes, you’re updating brittle queries and reconnecting fields by hand.
+Tools like Zapier or Make don’t sit on top of your product data. You must continually provide them with user states, usage events, subscription information, ICP classification logic. Every time your data model changes, you’re updating brittle queries and reconnecting fields by hand.
 
 *“There’s no core dataset they live on top of unless you keep pushing data in manually. That is not a pretty process. And as your product changes, you have to keep re-wiring all of it.”*
 
