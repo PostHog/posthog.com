@@ -1532,7 +1532,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/revops/credits',
                     },
                 ],
-            }
+            },
         ],
     },
 ]
@@ -4416,7 +4416,7 @@ export const docsMenu = {
                 {
                     name: 'Sessions',
                     url: '/docs/llm-analytics/sessions',
-                    icon: 'IconMessages',
+                    icon: 'IconStack',
                     color: 'blue',
                     featured: true,
                 },
