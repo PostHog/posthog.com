@@ -78,8 +78,6 @@ export const heap = {
                 clickmaps: false,
                 conditional_recording: true,
                 event_timeline: false,
-                export_to_json: false,
-                export_to_video: false,
                 filter_by_user_or_event: false,
                 identity_detection: true,
                 iframe_recording: false,
@@ -87,7 +85,7 @@ export const heap = {
                 movement_maps: false,
                 notes_on_replays: false,
                 playlists: false,
-                privacy_masking: false,
+                privacy_masking: true,
                 rage_click_detection: false,
                 retention_policy: false,
                 screenshot_mode: false,
@@ -99,6 +97,13 @@ export const heap = {
                 target_by_sample: true,
                 target_by_url: false,
                 wireframe_mode: false,
+            },
+            export: {
+                features: {
+                    export_to_json: false,
+                    export_to_video: false,
+                    retention_policy: '',
+                },
             },
             platform_support: {
                 features: {
@@ -131,10 +136,39 @@ export const heap = {
                 free_tier: 'n/a',
             },
             features: {
-                implementation: {
-                    features: {
-                        local_evaluation: false,
-                    },
+                boolean_flags: false,
+                early_access_management: false,
+                multivariate_flags: false,
+                json_payloads: false,
+                release_conditions: false,
+                remote_config: false,
+                single_page_app_support: false,
+                usage_logs: false,
+            },
+            implementation: {
+                features: {
+                    bootstrapping: false,
+                    local_evaluation: false,
+                },
+            },
+            management: {
+                features: {
+                    flag_administration: false,
+                    flag_scheduling: false,
+                    history_activity: false,
+                    instant_rollbacks: false,
+                    multi_environment: false,
+                },
+            },
+            targeting: {
+                features: {
+                    cohort_integration: false,
+                    custom_targeting: false,
+                    exclusion_rules: false,
+                    geographic_targeting: false,
+                    group_level_experiments: false,
+                    target_by_percentage: false,
+                    target_by_person_properties: false,
                 },
             },
         },
@@ -143,10 +177,42 @@ export const heap = {
             pricing: {
                 free_tier: 'n/a',
             },
-            analysis: {
+            features: {
+                count_value_metrics: false,
+                custom_goals: false,
+                dynamic_cohorts: false,
+                experiment_analysis: false,
+                funnel_metrics: false,
+                namespacing: false,
+                native_goal_tracking: false,
+                no_code_experiments: false,
+                ratio_metrics: false,
+                recommended_run_time: false,
+                secondary_metrics: false,
+                shared_metrics_library: false,
+                split_testing: false,
+                visual_editor: false,
+            },
+            targeting: {
                 features: {
-                    statistics_engine: 'n/a',
+                    cohort_integration: false,
+                    custom_targeting: false,
+                    exclusion_rules: false,
+                    geographic_targeting: false,
+                    group_level_experiments: false,
                 },
+            },
+            implementation: {
+                features: {
+                    api_access: false,
+                    feature_flag_foundation: false,
+                    json_payloads: false,
+                    multivariate_testing: false,
+                },
+            },
+            analysis: {
+                statistical_significance: false,
+                statistics_engine: 'n/a',
             },
             supported_tests: {
                 features: {

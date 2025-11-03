@@ -157,8 +157,8 @@ PostHog supports a wide range of client and server libraries, but not all featur
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
     rows={[
-        'platform.integrations.exports',
-        'platform.integrations.imports',
+        { label: 'Import API', description: 'Import data via API', values: [true, true] },
+        { label: 'Export API', description: 'Export data via API', values: [true, true] },
         'platform.integrations.redshift',
         'platform.integrations.s3',
         'platform.integrations.azure_blob',

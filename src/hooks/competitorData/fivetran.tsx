@@ -9,10 +9,15 @@ export const fivetran = {
             available: true,
             features: {
                 number_of_integrations: '500+',
-                real_time_streaming: false,
-                batch_exports: true,
-                data_warehouse_sources: true,
+                realtime_streaming: false,
                 built_in_analytics: false,
+            },
+        },
+        data_warehouse: {
+            available: true,
+            features: {
+                batch_exports: true,
+                warehouse_sources: true,
             },
         },
     },

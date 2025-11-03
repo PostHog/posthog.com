@@ -5,6 +5,16 @@ export const dataWarehouseFeatures = {
         url: '/data-warehouse',
         docsUrl: '/docs/data-warehouse',
     },
+    features: {
+        warehouse_sources: {
+            name: 'Import from data warehouses',
+            description: 'Import data from third-party sources like Postgres, S3, GCS, Stripe, HubSpot, and more',
+        },
+        batch_exports: {
+            name: 'Batch exports',
+            description: 'Schedule data exports to S3, Snowflake, BigQuery, and more',
+        },
+    },
     query: {
         description: 'Query with PostHog SQL',
         features: {
@@ -80,10 +90,6 @@ export const dataWarehouseFeatures = {
     external_sources: {
         description: 'Query PostHog alongside business data',
         features: {
-            data_warehouse_sources: {
-                name: 'Data warehouse sources',
-                description: 'Connect external sources like Stripe, HubSpot, and databases',
-            },
             unified_queries: {
                 name: 'Unified queries',
                 description: 'JOIN PostHog events with external tables',

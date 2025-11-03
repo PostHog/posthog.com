@@ -120,6 +120,7 @@ export const fathom = {
         deployment: {
             eu_hosting: true,
             open_source: false,
+            reverse_proxy: false,
             self_host: false,
         },
         developer: {
@@ -153,7 +154,6 @@ export const fathom = {
             data_retention: "Forever (as long as you're a customer)",
             gdpr_ready: true,
             hipaa_ready: false,
-            reverse_proxy: false,
             saml_sso: false,
             soc2_certified: false,
             two_factor_auth: true,

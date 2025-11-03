@@ -184,7 +184,7 @@ export const sessionReplayFeatures = {
         features: {
             export_to_json: {
                 name: 'Export recordings to JSON',
-                description: 'Export important recording data offline',
+                description: 'Export important recording data for offline storage',
             },
             export_to_video: {
                 name: 'Export recordings to video',

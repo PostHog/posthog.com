@@ -108,7 +108,7 @@ export const launchdarkly = {
                     geographic_targeting: false,
                     group_level_experiments: false,
                     holdouts: false,
-                    percentage_rollouts: false,
+                    target_by_percentage: false,
                 },
             },
             implementation: {
@@ -194,9 +194,16 @@ export const launchdarkly = {
         },
         cdp: {
             available: true,
+            features: {
+                realtime_streaming: 'Enterprise',
+            },
         },
         data_warehouse: {
             available: false,
+            features: {
+                batch_exports: false,
+                warehouse_sources: true,
+            },
         },
     },
     platform: {

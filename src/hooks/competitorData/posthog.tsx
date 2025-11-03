@@ -53,8 +53,6 @@ export const posthog = {
                 clickmaps: true,
                 conditional_recording: true,
                 event_timeline: true,
-                export_to_json: true,
-                export_to_video: 'Beta',
                 filter_by_user_or_event: true,
                 highlights: 'Beta',
                 identity_detection: true,
@@ -76,6 +74,13 @@ export const posthog = {
                 target_by_sample: true,
                 target_by_url: true,
                 wireframe_mode: true,
+            },
+            export: {
+                features: {
+                    export_to_json: true,
+                    export_to_video: 'Beta',
+                    retention_policy: 'Up to 3 months',
+                },
             },
             platform_support: {
                 features: {
@@ -325,7 +330,6 @@ export const posthog = {
                     geographic_targeting: true,
                     group_level_experiments: true,
                     holdouts: true,
-                    percentage_rollouts: true,
                 },
             },
             implementation: {
@@ -443,10 +447,7 @@ export const posthog = {
             available: true,
             features: {
                 number_of_integrations: '60+',
-                real_time_streaming: true,
-                data_warehouse_sources: true,
-                real_time_destinations: true,
-                batch_exports: true,
+                realtime_streaming: true,
                 custom_transformations: true,
                 no_code_setup: true,
                 built_in_analytics: true,
@@ -467,11 +468,12 @@ export const posthog = {
                 simplified_syntax: true,
                 smart_joins: true,
                 product_functions: true,
-                data_warehouse_sources: true,
+                warehouse_sources: true,
                 unified_queries: true,
                 custom_views: true,
                 scheduled_syncs: true,
                 cloud_storage: true,
+                batch_exports: true,
             },
         },
         web_analytics: {
@@ -564,6 +566,7 @@ export const posthog = {
             imports: true,
             intercom: true,
             microsoft_teams: true,
+            postgres: true,
             redshift: true,
             rudderstack: true,
             s3: true,

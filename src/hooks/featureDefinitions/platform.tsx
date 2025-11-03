@@ -92,10 +92,6 @@ export const platformFeatures = {
                 name: 'Email reports',
                 description: 'Send reports to email',
             },
-            exports: {
-                name: 'Data exports',
-                description: 'Export data to data warehouses and other destinations',
-            },
             gcs: {
                 name: 'Google Cloud Storage',
                 description: 'Import/export data',
@@ -116,10 +112,6 @@ export const platformFeatures = {
                 name: 'Google Search Console',
                 description: 'Import data from Google Search Console',
             },
-            imports: {
-                name: 'Data imports',
-                description: 'Import data from data warehouses and other sources',
-            },
             intercom: {
                 name: 'Intercom',
                 description: 'Messaging and marketing automation',
@@ -127,6 +119,10 @@ export const platformFeatures = {
             microsoft_teams: {
                 name: 'Microsoft Teams',
                 description: 'Alerts and notifications for Microsoft Teams',
+            },
+            postgres: {
+                name: 'Postgres',
+                description: 'Import and export data to a Postgres database',
             },
             redshift: {
                 name: 'Amazon Redshift',
@@ -167,10 +163,6 @@ export const platformFeatures = {
             segment: {
                 name: 'Segment',
                 description: 'Send events via Segment',
-            },
-            warehouse_import: {
-                name: 'Warehouse import',
-                description: 'Import data from third-party warehouse',
             },
             wordpress: {
                 name: 'WordPress',

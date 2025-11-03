@@ -233,8 +233,9 @@ Both PostHog and LaunchDarkly have a range of integrations that enable them to i
     competitors={['posthog', 'launchdarkly']}
     rows={[
         { label: 'Free integrations', description: 'Use integrations on the free plan', values: [true, false] },
-        'platform.integrations.exports',
-        'platform.integrations.imports',
+        'data_warehouse.features.warehouse_sources',
+        'data_warehouse.features.batch_exports',
+        'cdp.features.realtime_streaming',
         'platform.integrations.slack',
         'platform.integrations.microsoft_teams',
         'platform.integrations.zapier',

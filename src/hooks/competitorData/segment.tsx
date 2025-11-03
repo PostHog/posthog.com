@@ -9,11 +9,16 @@ export const segment = {
             available: true,
             features: {
                 number_of_integrations: '300+',
-                real_time_streaming: true,
-                batch_exports: true,
-                data_warehouse_sources: false,
+                realtime_streaming: true,
                 built_in_analytics: false,
             },
+        },
+    },
+    data_warehouse: {
+        available: true,
+        features: {
+            batch_exports: true,
+            warehouse_sources: true,
         },
     },
     platform: {

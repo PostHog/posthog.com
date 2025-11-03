@@ -62,11 +62,11 @@ export const ga4 = {
         },
         heatmaps: {
             available: false,
-            feature: {
+            features: {
                 clickmaps: false,
                 heatmaps: false,
                 scrollmaps: false,
-                movement_maps: '',
+                movement_maps: false,
             },
         },
         web_analytics: {

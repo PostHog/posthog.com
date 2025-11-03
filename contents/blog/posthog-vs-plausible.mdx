@@ -91,7 +91,7 @@ Beyond web analytics is where PostHog really shines. We provide all of the tools
     rows={[
         'platform.deployment.eu_hosting',
         'platform.deployment.open_source',
-        { label: 'Free collaboration', description: 'Add unlimited teammates to your project', values: ['', ''] },
+        { label: 'Free collaboration', description: 'Add unlimited teammates to your project', values: [true, false] },
         'heatmaps',
         'session_replay',
         'experiments',
@@ -116,20 +116,12 @@ Although Plausible has some integrations with other tools, it mostly stands on i
     competitors={['posthog', 'plausible']}
     rows={[
         'platform.integrations.csv_exports',
-        {
-            label: 'Warehouse exports',
-            description: 'Export data to warehouses like S3 and BigQuery for storage and analysis',
-            values: ['', ''],
-        },
-        { label: 'Data warehouse', description: 'Query customer and product data together', values: ['', ''] },
-        'platform.integrations.warehouse_import',
+        'data_warehouse',
+        'data_warehouse.features.warehouse_sources',
+        'data_warehouse.features.batch_exports',
         'platform.integrations.slack',
         'platform.integrations.email_reports',
-        {
-            label: 'Google Search Console',
-            description: 'See search queries that sent traffic to your site',
-            values: ['', ''],
-        },
+        'platform.integrations.google_search_console',
         'platform.integrations.stripe',
         'platform.integrations.hubspot',
         'platform.integrations.zapier',
@@ -145,7 +137,7 @@ Plausible prides itself on being privacy-friendly, but PostHog stands toe-to-toe
 <ProductComparisonTable
     competitors={['posthog', 'plausible']}
     rows={[
-        { label: 'Data retention', description: 'The length of time event data is retained', values: ['', '7 years'] },
+        'platform.security.data_retention',
         'platform.security.bot_blocking',
         'platform.deployment.reverse_proxy',
         'platform.security.hipaa_ready',

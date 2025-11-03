@@ -33,7 +33,7 @@ export const plausible = {
                 pre_configured_dashboards: false,
                 real_time_reporting: false,
                 revenue_tracking: false,
-                script_size: '',
+                script_size: '<1 kB',
                 session_and_duration_tracking: false,
                 sessions: true,
                 snippet_install: true,
@@ -100,8 +100,20 @@ export const plausible = {
         },
         dashboards: {
             available: true,
-            feature: {
+            features: {
                 custom_dashboards: false,
+            },
+        },
+        cdp: {
+            features: {
+                realtime_streaming: '',
+            },
+        },
+        data_warehouse: {
+            available: false,
+            features: {
+                batch_exports: false,
+                warehouse_sources: false,
             },
         },
         heatmaps: {
@@ -127,6 +139,7 @@ export const plausible = {
         deployment: {
             eu_hosting: true,
             open_source: true,
+            reverse_proxy: true,
             self_host: false,
         },
         developer: {
@@ -138,8 +151,9 @@ export const plausible = {
         integrations: {
             csv_exports: true,
             datadog: false,
-
+            exports: false,
             email_reports: true,
+            google_search_console: true,
             hubspot: false,
             sentry: false,
             slack: 'Reports, anomalies',
@@ -156,6 +170,7 @@ export const plausible = {
         security: {
             bot_blocking: true,
             data_anonymization: true,
+            data_retention: '3 years',
             gdpr_ready: true,
             hipaa_ready: false,
             reverse_proxy: true,

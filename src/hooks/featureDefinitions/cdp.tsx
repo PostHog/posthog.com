@@ -5,21 +5,15 @@ export const cdpFeatures = {
         url: '/cdp',
         docsUrl: '/docs/cdp',
     },
+    features: {
+        realtime_streaming: {
+            name: 'Realtime event streaming',
+            description: 'Send events to Slack, webhooks, and 40+ tools as they happen',
+        },
+    },
     sources_destinations: {
         description: 'Connect tools to your data pipeline',
         features: {
-            data_warehouse_sources: {
-                name: 'Data warehouse sources',
-                description: 'Import from Stripe, Hubspot, Salesforce, and more to join with product data',
-            },
-            real_time_destinations: {
-                name: 'Real-time destinations',
-                description: 'Send events to Slack, webhooks, and 40+ tools as they happen',
-            },
-            batch_exports: {
-                name: 'Batch exports',
-                description: 'Reliable scheduled exports to S3, Snowflake, BigQuery, and more',
-            },
             custom_transformations: {
                 name: 'Custom transformations',
                 description: 'Filter, modify, and enrich data before sending to destinations',

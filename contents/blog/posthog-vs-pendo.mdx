@@ -168,8 +168,8 @@ One unique advantage of PostHog is that, because it is open source, it’s easy 
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
     rows={[
-        'platform.integrations.exports',
-        'platform.integrations.imports',
+        { label: 'Import API', description: 'Import data via API', values: [true, true] },
+        { label: 'Export API', description: 'Export data via API', values: [true, true] },
         'platform.integrations.redshift',
         'platform.integrations.s3',
         'platform.integrations.azure_blob',

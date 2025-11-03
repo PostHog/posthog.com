@@ -49,7 +49,7 @@ export const optimizely = {
                     geographic_targeting: false,
                     group_level_experiments: false,
                     holdouts: false,
-                    percentage_rollouts: false,
+                    target_by_percentage: false,
                 },
             },
             implementation: {

@@ -106,7 +106,7 @@ export const growthbook = {
                     geographic_targeting: false,
                     group_level_experiments: false,
                     holdouts: false,
-                    percentage_rollouts: false,
+                    target_by_percentage: false,
                 },
             },
             implementation: {
@@ -143,6 +143,17 @@ export const growthbook = {
         },
         dashboards: {
             available: false,
+        },
+        cdp: {
+            features: {
+                realtime_streaming: false,
+            },
+        },
+        data_warehouse: {
+            features: {
+                batch_exports: false,
+                warehouse_sources: true,
+            },
         },
     },
     platform: {

@@ -239,7 +239,7 @@ export const amplitude = {
                     geographic_targeting: true,
                     group_level_experiments: false,
                     holdouts: true,
-                    percentage_rollouts: true,
+                    target_by_percentage: true,
                 },
             },
             implementation: {
@@ -263,6 +263,19 @@ export const amplitude = {
                     mobile: true,
                     web: true,
                 },
+            },
+        },
+        cdp: {
+            available: true,
+            features: {
+                realtime_streaming: true,
+            },
+        },
+        data_warehouse: {
+            available: true,
+            features: {
+                batch_exports: true,
+                warehouse_sources: true,
             },
         },
         surveys: {

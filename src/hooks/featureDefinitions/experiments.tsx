@@ -134,7 +134,7 @@ export const experimentsFeatures = {
                 name: 'Geographic targeting',
                 description: 'Limit experiments to certain countries or regions to account for local differences',
             },
-            percentage_rollouts: {
+            target_by_percentage: {
                 name: 'Percentage rollouts',
                 description: 'Start with a small slice of users and gradually expand once results look good',
             },
