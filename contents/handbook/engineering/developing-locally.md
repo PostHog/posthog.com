@@ -645,6 +645,36 @@ When creating a new email, there are a few steps to take. It's important to add 
 
 If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal billing guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
 
+## Extra: Resetting your local database
+
+If you need to start fresh with a clean database (for example, if your local data is corrupted or you want to test the initial setup), follow these steps:
+
+1. Stop all PostHog services and remove all Docker volumes:
+
+    ```bash
+    docker compose down -v
+    ```
+
+    This will remove all data stored in Docker volumes, including your PostgreSQL, ClickHouse, and Redis data.
+
+2. Start PostHog again:
+
+    ```bash
+    hogli start
+    ```
+
+    Or if you're not using Flox:
+
+    ```bash
+    ./bin/start
+    ```
+
+3. Wait for all migrations to complete. You can monitor the logs to ensure migrations have finished running.
+
+4. Once PostHog is running, click the **generate-demo-data** button in the UI, then type `r` to generate test data.
+
+> **Note:** This process will completely wipe your local database. Make sure you don't have any important local data before proceeding.
+
 ## Extra: Working with the data warehouse
 
 [See here for working with data warehouse](/handbook/engineering/data-warehouse)
