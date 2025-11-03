@@ -124,6 +124,10 @@ export const platformFeatures = {
                 name: 'Postgres',
                 description: 'Import and export data to a Postgres database',
             },
+            project_management: {
+                name: 'Project management',
+                description: 'Add issues to tools like Jira, Linear, and GitHub',
+            },
             redshift: {
                 name: 'Amazon Redshift',
                 description: 'Export data to Redshift',

@@ -5,9 +5,19 @@ export const errorTrackingFeatures = {
         url: '/error-tracking',
         docsUrl: '/docs/error-tracking',
     },
+    pricing: {
+        free_tier: {
+            name: 'Free errors',
+            description: 'Free errors you can capture per month',
+        },
+    },
     features: {
         description: 'Core error capture and triage capabilities',
         features: {
+            code_context: {
+                name: 'Code context',
+                description: 'See the code related to the issue',
+            },
             error_alerts: {
                 name: 'Error alerts',
                 description: 'Get notified in real time by email, Slack, or webhook when issues occur',
@@ -26,7 +36,7 @@ export const errorTrackingFeatures = {
             },
             stack_tracing: {
                 name: 'Stack tracing',
-                description: 'Full stack traces with source code context',
+                description: 'Track the path of a request across your system',
             },
             console_log_capture: {
                 name: 'Console log capture',
@@ -36,11 +46,19 @@ export const errorTrackingFeatures = {
                 name: 'Mobile SDK coverage',
                 description: 'SDKs for iOS, Android, and mobile frameworks',
             },
+            profiling: {
+                name: 'Profiling',
+                description: 'Monitor and visualize code performance',
+            },
         },
     },
     monitoring: {
         description: 'Visibility into performance and releases',
         features: {
+            cron_monitoring: {
+                name: 'Cron monitoring',
+                description: 'Track scheduled job health',
+            },
             network_performance: {
                 name: 'Network performance monitoring',
                 description: 'Track network requests and performance metrics',
@@ -52,6 +70,10 @@ export const errorTrackingFeatures = {
             release_tracking: {
                 name: 'Release and deploy tracking',
                 description: 'Track errors by release version and deployment',
+            },
+            performance_monitoring: {
+                name: 'Performance monitoring',
+                description: 'Trace requests or queries and profile functions',
             },
         },
     },

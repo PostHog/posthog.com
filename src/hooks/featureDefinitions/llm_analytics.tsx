@@ -1,7 +1,7 @@
 export const llmAnalyticsFeatures = {
     summary: {
         name: 'LLM Analytics',
-        description: 'Gather usage and performance data for your AI and LLM product',
+        description: 'Monitor and debug your LLM-powered features',
         url: '/llm-analytics',
         docsUrl: '/docs/llm-analytics',
     },

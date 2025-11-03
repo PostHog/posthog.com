@@ -24,14 +24,27 @@ export const posthog = {
         },
         error_tracking: {
             available: true,
+            pricing: {
+                free_tier: '100k',
+            },
             features: {
+                code_context: true,
                 error_alerts: true,
+                error_grouping: true,
                 exception_capture: true,
                 issue_management: true,
-                error_grouping: true,
-                stack_tracing: true,
                 network_performance: true,
+                profiling: false,
                 source_map_support: true,
+                stack_tracing: false,
+            },
+            monitoring: {
+                features: {
+                    cron_monitoring: false,
+                    network_performance: true,
+                    release_tracking: false,
+                    performance_monitoring: 'Partial',
+                },
             },
             integrations: {
                 datadog: false,
@@ -40,6 +53,9 @@ export const posthog = {
                 session_replays: true,
                 ab_experiments: true,
             },
+        },
+        llm_analytics: {
+            available: true,
         },
         session_replay: {
             available: true,
@@ -358,7 +374,7 @@ export const posthog = {
         surveys: {
             available: true,
             pricing: {
-                free_tier: '1500 responses',
+                free_tier: '1,500 responses',
             },
             features: {
                 aggregated_results: true,
@@ -386,7 +402,6 @@ export const posthog = {
                 iframe_embedding: true,
                 link_to_webpage: true,
                 multi_select: true,
-                multi_step_surveys: true,
                 multiple_choice: true,
                 no_code: true,
                 nps_surveys: true,
@@ -404,6 +419,7 @@ export const posthog = {
             presentation: {
                 features: {
                     hosted_surveys: 'Beta',
+                    custom_ui: true,
                 },
             },
             targeting: {
@@ -420,6 +436,11 @@ export const posthog = {
                     rating: true,
                     emoji_reaction: true,
                     interview_scheduling: true,
+                },
+            },
+            branching: {
+                features: {
+                    multi_step_surveys: true,
                 },
             },
             platforms: {
@@ -567,6 +588,7 @@ export const posthog = {
             intercom: true,
             microsoft_teams: true,
             postgres: true,
+            project_management: true,
             redshift: true,
             rudderstack: true,
             s3: true,

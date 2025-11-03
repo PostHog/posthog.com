@@ -64,16 +64,12 @@ The core of PostHog and Sentry are different. Sentry focuses entirely on error a
     competitors={['posthog', 'sentry']}
     rows={[
         'error_tracking',
-        {
-            label: 'Performance monitoring',
-            description: 'Trace requests or queries and profile functions',
-            values: ['', ''],
-        },
+        'error_tracking.monitoring.performance_monitoring',
         'session_replay',
         'surveys',
         'product_analytics',
         'web_analytics',
-        { label: 'LLM analytics', description: 'Monitor and debug your LLM-powered features', values: ['', ''] },
+        'llm_analytics',
         'feature_flags',
         'experiments',
         'heatmaps',
@@ -93,9 +89,9 @@ The core of PostHog and Sentry are different. Sentry focuses entirely on error a
         'platform.deployment.open_source',
         'platform.deployment.eu_hosting',
         'platform.pricing.free_tier',
-        { label: 'Alerting', description: 'Alert when types of events happen', values: ['', ''] },
+        'product_analytics.features.alerts',
         'platform.developer.sdks',
-        { label: 'Free team members', description: 'Invite your team to your project for free', values: ['', ''] },
+        { label: 'Free team members', description: 'Invite your team to your project for free', values: [true, false] },
     ]}
 />
 
@@ -108,23 +104,15 @@ Error and performance monitoring is the main focus of Sentry. Although PostHog h
 <ProductComparisonTable
     competitors={['posthog', 'sentry']}
     rows={[
-        {
-            label: 'Exception capture',
-            description: 'Capture errors and exceptions including stack traces',
-            values: ['', ''],
-        },
-        { label: 'Free errors', description: 'Free errors you can capture per month', values: ['100k', '5k'] },
-        { label: 'Issue management', description: 'Monitor and manage issues', values: ['', ''] },
-        { label: 'Code context', description: 'See the code related to the issue', values: ['', ''] },
-        { label: 'Tracing', description: 'Track the path of a request across your system', values: ['', ''] },
-        { label: 'Profiling', description: 'Monitor and visualize code performance', values: ['', ''] },
-        { label: 'Network performance', description: 'Track network performance of sessions', values: ['', ''] },
-        { label: 'Cron monitoring', description: 'Track scheduled job health', values: ['', ''] },
-        {
-            label: 'Release tracking',
-            description: 'Track the performance of each release of your software',
-            values: ['', ''],
-        },
+        'error_tracking.features.exception_capture',
+        'error_tracking.pricing.free_tier',
+        'error_tracking.features.issue_management',
+        'error_tracking.features.code_context',
+        'error_tracking.features.stack_tracing',
+        'error_tracking.features.profiling',
+        'error_tracking.monitoring.network_performance',
+        'error_tracking.monitoring.cron_monitoring',
+        'error_tracking.monitoring.release_tracking',
     ]}
 />
 
@@ -135,18 +123,18 @@ Replays enable you to watch how users experience your app, diagnose issues, impr
 <ProductComparisonTable
     competitors={['posthog', 'sentry']}
     rows={[
-        { label: 'Web', description: 'Record sessions from web apps', values: ['', ''] },
-        { label: 'iOS', description: 'Record sessions from iOS apps', values: ['', ''] },
-        { label: 'Android', description: 'Record sessions from Android apps', values: ['', ''] },
-        { label: 'React Native', description: 'Record sessions from React Native apps', values: ['', ''] },
-        { label: 'Flutter', description: 'Record sessions from Flutter apps', values: ['', ''] },
-        { label: 'Sampling', description: 'Choose what sessions you record', values: ['', ''] },
-        { label: 'Privacy', description: 'Censor private or personal information', values: ['', ''] },
-        { label: 'Console', description: 'Capture console logs, errors', values: ['', ''] },
-        { label: 'Canvas', description: 'Record canvas elements', values: ['', ''] },
-        { label: 'Free allowance', description: 'Free replays per month', values: ['5,000', '50'] },
-        { label: '50k replays cost', description: 'Cost per month of 50,000 replays', values: ['173', ''] },
-        { label: '100k replays cost', description: 'Cost per month of 100,000 replays', values: ['$273', ''] },
+        'session_replay.platform_support.web_app_recordings',
+        'session_replay.platform_support.ios_recordings',
+        'session_replay.platform_support.android_recordings',
+        'session_replay.platform_support.react_native_recordings',
+        'session_replay.platform_support.flutter_recordings',
+        'session_replay.targeting.target_by_sample',
+        'session_replay.privacy.privacy_masking',
+        'session_replay.analysis.console_logs',
+        'session_replay.features.canvas_recording',
+        { label: 'Free allowance', description: 'Free recordings per month', values: ['5,000', '50'] },
+        { label: '50k replays cost', description: 'Cost per month of 50,000 replays', values: ['$173', '$172'] },
+        { label: '100k replays cost', description: 'Cost per month of 100,000 replays', values: ['$273', '$314'] },
     ]}
 />
 
@@ -159,15 +147,16 @@ Feedback in Sentry is connected to errors and included as part of the price. It 
 <ProductComparisonTable
     competitors={['posthog', 'sentry']}
     rows={[
-        { label: 'Text input', description: 'Capture what users want to tell you', values: ['', ''] },
-        { label: 'Rating and selects', description: 'Let users pick preset options', values: ['', ''] },
-        { label: 'Multi-part surveys', description: 'Ask multiple questions', values: ['', ''] },
-        { label: 'Templates', description: 'For NPS, CSAT, interviews, and more', values: ['', ''] },
-        { label: 'Triggers', description: 'Trigger surveys on events and actions', values: ['', ''] },
-        { label: 'User targeting', description: 'Target specific users or cohorts', values: ['', ''] },
-        { label: 'API', description: 'Implement your own UI', values: ['', ''] },
-        { label: 'Customization', description: 'Color, position, branding, delay', values: ['', ''] },
-        { label: 'Free allowance', description: 'Free responses per month', values: ['1,500', ''] },
+        'surveys.question_types.freeform_text',
+        'surveys.question_types.rating',
+        'surveys.question_types.multiple_choice',
+        'surveys.branching.multi_step_surveys',
+        'surveys.templates.survey_templates',
+        'surveys.targeting.event_triggered',
+        'surveys.targeting.custom_targeting',
+        'surveys.presentation.custom_ui',
+        'surveys.implementation.api_access',
+        { label: 'Free allowance', description: 'Free responses per month', values: ['1,500', 'Included'] },
     ]}
 />
 
@@ -201,7 +190,7 @@ Sentry does have some analytics capabilities but it is limited compared to PostH
 <ProductComparisonTable
     competitors={['posthog', 'sentry']}
     rows={[
-        { label: 'Audit logs', description: 'Manage and view edits and related users', values: ['', ''] },
+        'platform.security.history_audit_logs',
         'platform.security.gdpr_ready',
         'platform.security.hipaa_ready',
         'platform.security.soc2_certified',
@@ -217,20 +206,16 @@ Both PostHog and Sentry work with other tools, but PostHog can act more as a sin
 <ProductComparisonTable
     competitors={['posthog', 'sentry']}
     rows={[
-        'platform.integrations.warehouse_import',
-        'platform.integrations.exports',
+        'data_warehouse.features.warehouse_sources',
+        'data_warehouse.features.batch_exports',
         'platform.integrations.segment',
         'platform.integrations.slack',
         'platform.integrations.microsoft_teams',
-        { label: 'Postgres', description: 'Sync and query data from your database', values: ['', ''] },
-        { label: 'Stripe', description: 'Sync and query data from Stripe', values: ['', ''] },
-        { label: 'Zendesk', description: 'Sync and query data from Zendesk', values: ['', ''] },
-        { label: 'Hubspot', description: 'Sync and query data from Hubspot', values: ['', ''] },
-        {
-            label: 'Project management',
-            description: 'Add issues to tools like Jira, Linear, and GitHub',
-            values: ['', ''],
-        },
+        'platform.integrations.postgres',
+        'platform.integrations.stripe',
+        'platform.integrations.hubspot',
+        'platform.integrations.zendesk',
+        'platform.integrations.project_management',
     ]}
 />
 

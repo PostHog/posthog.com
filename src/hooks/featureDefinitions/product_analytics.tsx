@@ -63,7 +63,7 @@ export const productAnalyticsFeatures = {
             },
             alerts: {
                 name: 'Alerts',
-                description: 'Get notifications when insights fall outside set thresholds',
+                description: 'Get notifications when events occur',
             },
             ready_made_insights: {
                 name: 'Ready-made insight types',

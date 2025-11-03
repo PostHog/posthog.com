@@ -8,6 +8,27 @@ export const sentry = {
     products: {
         error_tracking: {
             available: true,
+            pricing: {
+                free_tier: '5k',
+            },
+            features: {
+                code_context: true,
+                exception_capture: true,
+                issue_management: true,
+                profiling: true,
+                stack_tracing: true,
+            },
+            monitoring: {
+                features: {
+                    cron_monitoring: true,
+                    network_performance: true,
+                    release_tracking: true,
+                    performance_monitoring: true,
+                },
+            },
+        },
+        llm_analytics: {
+            available: false,
         },
         session_replay: {
             available: true,
@@ -15,9 +36,8 @@ export const sentry = {
                 free_tier: 'Limited',
             },
             features: {
-                canvas_recording: false,
+                canvas_recording: true,
                 chat_with_recordings: false,
-                clickmaps: false,
                 conditional_recording: false,
                 event_timeline: false,
                 export_to_json: false,
@@ -29,33 +49,31 @@ export const sentry = {
                 movement_maps: false,
                 notes_on_replays: false,
                 playlists: false,
-                privacy_masking: false,
+                privacy_masking: true,
                 rage_click_detection: false,
                 retention_policy: false,
                 screenshot_mode: false,
-                scrollmaps: false,
                 search_by_network: false,
                 share_replays: false,
                 single_page_app: false,
                 target_by_feature_flag: false,
-                target_by_sample: false,
+                target_by_sample: true,
                 target_by_url: false,
                 wireframe_mode: false,
             },
             platform_support: {
                 features: {
-                    web_app_recordings: false,
-                    mobile_app_recordings: false,
-                    ios_recordings: false,
-                    android_recordings: false,
-                    react_native_recordings: false,
-                    flutter_recordings: false,
+                    web_app_recordings: true,
+                    mobile_app_recordings: true,
+                    ios_recordings: true,
+                    android_recordings: true,
+                    react_native_recordings: true,
+                    flutter_recordings: true,
                 },
             },
             analysis: {
                 features: {
-                    heatmaps: false,
-                    console_logs: false,
+                    console_logs: true,
                     performance_monitoring: false,
                     network_monitor: false,
                     dom_explorer: false,
@@ -67,13 +85,61 @@ export const sentry = {
                 },
             },
         },
+        heatmaps: {
+            available: false,
+            features: {
+                clickmaps: false,
+                heatmaps: false,
+                scrollmaps: false,
+            },
+        },
         surveys: {
             available: true,
+            pricing: {
+                free_tier: 'Included',
+            },
+            features: {
+                capture_partial_responses: '',
+            },
+            question_types: {
+                features: {
+                    freeform_text: true,
+                    rating: true,
+                    multiple_choice: true,
+                },
+            },
+            branching: {
+                features: {
+                    multi_step_surveys: false,
+                },
+            },
+            presentation: {
+                features: {
+                    custom_ui: false,
+                },
+            },
+            templates: {
+                features: {
+                    survey_templates: false,
+                },
+            },
+            targeting: {
+                features: {
+                    custom_targeting: false,
+                    event_triggered: false,
+                },
+            },
+            implementation: {
+                features: {
+                    api_access: true,
+                },
+            },
         },
         product_analytics: {
             available: 'Partial',
             features: {
                 advertising_analytics: false,
+                alerts: true,
                 autocapture: 'Errors only',
                 cohorts: false,
                 custom_events: true,
@@ -135,6 +201,23 @@ export const sentry = {
             available: false,
         },
     },
+    dashboards: {
+        available: true,
+        features: {},
+    },
+    data_warehouse: {
+        available: false,
+        features: {
+            batch_exports: false,
+            warehouse_sources: false,
+        },
+    },
+    cdp: {
+        available: false,
+        features: {
+            realtime_streaming: '',
+        },
+    },
     platform: {
         deployment: {
             eu_hosting: true,
@@ -176,6 +259,8 @@ export const sentry = {
             imports: false,
             intercom: false,
             microsoft_teams: true,
+            project_management: true,
+            postgres: false,
             redshift: false,
             rudderstack: false,
             s3: false,
@@ -197,7 +282,7 @@ export const sentry = {
             data_retention: false,
             gdpr_ready: true,
             hipaa_ready: true,
-            history_audit_logs: false,
+            history_audit_logs: true,
             reverse_proxy: false,
             saml_sso: true,
             soc2_certified: true,
