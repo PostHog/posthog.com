@@ -22,7 +22,7 @@ PostHog wasn’t always this central to the way Grantable worked. Early on, the 
 That move, from ‘see data’ to ‘do something with it right away,’ is exactly why Grantable is betting on Workflows.
 
 ## PostHog Workflows vs. other tools 
-Grantable had already tried basically every workflow automation platform in the market – tools like Zapier, Make, and relay.app – and had gone all-in on them before: hiring teams to build complex automation, shipping real production flows on top of those systems, even auto-generating large sites with tens of thousands of pages powered by those workflows.
+Grantable had already tried basically every workflow automation platform in the market – tools like Zapier, Make, and relay.app – and had gone all-in on them before: hiring teams to build complex automations, shipping real production flows on top of those systems, even auto-generating large sites with tens of thousands of pages powered by those workflows.
 
 However, this didn’t work for two reasons.
 
