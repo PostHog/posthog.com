@@ -40,4 +40,16 @@ export const productDescriptions = {
         name: 'Product tours',
         description: 'Create guides for new users',
     },
+    cdp: {
+        name: 'CDP',
+        description: 'Ingest, transform, and send data between 145+ tools',
+    },
+    data_warehouse: {
+        name: 'Data warehouse',
+        description: 'Sync and query data from your database',
+    },
+    dashboards: {
+        name: 'Dashboards',
+        description: 'Combine insights into shareable dashboards',
+    },
 }

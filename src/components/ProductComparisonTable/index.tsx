@@ -83,20 +83,20 @@ interface ProductComparisonTableProps {
 export default function ProductComparisonTable({ competitors, rows, width = 'auto' }: ProductComparisonTableProps) {
     // Feature definitions (loaded before use)
     const featureDefs: Record<string, any> = {
-        error_tracking: errorTrackingFeatures,
-        session_replay: sessionReplayFeatures,
-        feature_flags: featureFlagsFeatures,
-        product_analytics: productAnalyticsFeatures,
-        dashboards: dashboardsFeatures,
-        web_analytics: webAnalyticsFeatures,
-        experiments: experimentsFeatures,
-        surveys: surveysFeatures,
-        revenue_analytics: revenueAnalyticsFeatures,
-        platform: platformFeatures,
         cdp: cdpFeatures,
+        dashboards: dashboardsFeatures,
         data_warehouse: dataWarehouseFeatures,
-        llm_analytics: llmAnalyticsFeatures,
+        error_tracking: errorTrackingFeatures,
+        experiments: experimentsFeatures,
+        feature_flags: featureFlagsFeatures,
         heatmaps: heatmapsFeatures,
+        llm_analytics: llmAnalyticsFeatures,
+        platform: platformFeatures,
+        product_analytics: productAnalyticsFeatures,
+        revenue_analytics: revenueAnalyticsFeatures,
+        session_replay: sessionReplayFeatures,
+        surveys: surveysFeatures,
+        web_analytics: webAnalyticsFeatures,
     }
 
     // Resolve nested nodes by dot-path

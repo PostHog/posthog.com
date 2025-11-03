@@ -200,22 +200,22 @@ export const sentry = {
         heatmaps: {
             available: false,
         },
-    },
-    dashboards: {
-        available: true,
-        features: {},
-    },
-    data_warehouse: {
-        available: false,
-        features: {
-            batch_exports: false,
-            warehouse_sources: false,
+        dashboards: {
+            available: true,
+            features: {},
         },
-    },
-    cdp: {
-        available: false,
-        features: {
-            realtime_streaming: '',
+        data_warehouse: {
+            available: false,
+            features: {
+                batch_exports: false,
+                warehouse_sources: false,
+            },
+        },
+        cdp: {
+            available: false,
+            features: {
+                realtime_streaming: '',
+            },
         },
     },
     platform: {
