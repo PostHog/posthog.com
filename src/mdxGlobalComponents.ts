@@ -5,6 +5,7 @@ import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { ComparisonTable } from './components/ComparisonTable'
 import ProductComparisonTable from './components/ProductComparisonTable'
+import Snippet from '../contents/docs/integrate/snippet.mdx'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Emoji } from './components/Emoji'
 import { FeatureAvailability } from './components/FeatureAvailability'
@@ -38,6 +39,7 @@ export const shortcodes = {
     Caption,
     ComparisonTable,
     ProductComparisonTable,
+    Snippet,
     CompensationCalculator,
     Emoji,
     FeatureAvailability,

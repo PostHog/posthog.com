@@ -9,6 +9,7 @@ import CloudinaryImage from './components/CloudinaryImage'
 import { Images } from './components/Careers/Images'
 import { ComparisonTable } from './components/ComparisonTable'
 import ProductComparisonTable from './components/ProductComparisonTable'
+import Snippet from '../contents/docs/integrate/snippet.mdx'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { ContentViewer } from './components/ContentViewer'
 import { Drawer } from './components/Drawer'
@@ -74,6 +75,7 @@ export const shortcodes = {
     ImageSlider,
     ComparisonTable,
     ProductComparisonTable,
+    Snippet,
     CompensationCalculator,
     ContentViewer,
     Drawer,
