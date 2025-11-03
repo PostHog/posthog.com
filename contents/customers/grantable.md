@@ -15,7 +15,7 @@ PostHog wasn’t always this central to the way Grantable worked. Early on, the 
     size="md"
     name="Evan Rallis"
     title="Head of Product & Growth"
-    quote={`“We’ve started adding PostHog events into every PR. All new features have a PostHog event requirement,” Evan says. “We track usage, pipe that into dashboards for activation and retention, and now we’re starting to act on it automatically with Workflows.”`}
+    quote={`“We’ve started adding PostHog events into every PR. All new features have a PostHog event requirement. We track usage, pipe that into dashboards for activation and retention, and now we’re starting to act on it automatically with Workflows.”`}
 />
 </BorderWrapper>
 
