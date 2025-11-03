@@ -52,9 +52,11 @@ With Workflows, he says, the cost difference is “absurd” in a good way. Acco
 
 Now, instead of worrying about cost or upkeep, the team can simply build — confident that their workflows run on the same trusted data powering the rest of PostHog.
 
-## What they’ve already built with Workflows (in alpha)
-Grantable started with onboarding — rebuilding their first user email (previously in Customer.io) directly in Workflows.
-How it works today:
+## How PostHog Workflows powers Grantable's onboarding
+
+PostHog Workflows is currently in alpha, but that hasn't stopped Grantable from building complex flows and migrating away from tools such as Customer.io. The team has already rebuilt their new user onboarding in PostHog. 
+
+Here's how it works:
 1. Trigger: a user completes onboarding in the product
 2. Pull context: grab info from that onboarding flow (who they are, what plan, what they did)
 3. Action: send an HTML email using Workflows’ built-in email step
