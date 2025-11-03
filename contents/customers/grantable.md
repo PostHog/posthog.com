@@ -7,7 +7,7 @@ date: 2025-11-05
 ---
 [Grantable](https://www.grantable.co/) builds software for compliance, onboarding, and revenue operations. Evan Rallis leads product there – and he says PostHog is now “a massive part of pretty much everything we do.”
 
-PostHog wasn’t always this central. Early on, Grantable mostly used it for session replay to see how people behaved in the app. Over time, that changed. Now they’re using product analytics, feature flags, error tracking, surveys, web analytics, data warehouse, even LLM tracing – and most recently, [Workflows](https://posthog.com/docs/workflows).
+PostHog wasn’t always this central to the way Grantable worked. Early on, the team mostly used PostHog for session replay to see how people behaved in the app. Over time, that changed. Now they’re using product analytics, feature flags, error tracking, surveys, web analytics, data warehouse, even LLM analytics – and, most recently, [Workflows](https://posthog.com/docs/workflows).
 
 <BorderWrapper>
 <Quote
