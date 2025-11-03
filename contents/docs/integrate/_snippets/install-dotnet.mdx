@@ -39,22 +39,6 @@ dotnet user-secrets set "PostHog:PersonalApiKey" "phx_..."
 
 You can find your project API key and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
 
-To see detailed logging, set the log level to `Debug` or `Trace` in `appsettings.json`:
-
-```json
-{
-  "DetailedErrors": true,
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning",
-      "PostHog": "Trace"
-    }
-  },
-  ...
-}
-```
-
 ## Working with .NET Feature Management
 
 `PostHog.AspNetCore` supports [.NET Feature Management](https://learn.microsoft.com/en-us/azure/azure-app-configuration/feature-management-dotnet-reference). This enables you to use the &lt;feature /&gt; tag helper and the `FeatureGateAttribute` in your ASP.NET Core applications to gate access to certain features using PostHog feature flags.
@@ -171,3 +155,22 @@ public static readonly PostHogClient PostHog = new(new PostHogOptions {
 });
 ```
 
+## Debugging
+
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debugging to see what's happening. 
+
+To see detailed logging, set the log level to `Debug` or `Trace` in `appsettings.json`:
+
+```json
+{
+  "DetailedErrors": true,
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning",
+      "PostHog": "Trace"
+    }
+  },
+  ...
+}
+```

@@ -215,7 +215,16 @@ You should call `shutdown` on your program's exit to exit cleanly:
 await client.shutdown()
 ```
 
-## Debugging and exceptions
+## Debugging
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debugging to see what's happening. 
+
+You can enable debugging by calling the `debug()` method in your code. This will enable verbose logs about the inner workings of the SDK.
+
+```node
+client.debug()
+```
+
+## Handling errors thrown by the SDK
 
 If you are experiencing issues with the SDK it could be a number of things from an incorrectly configured API key, to some other network related issues.
 
@@ -226,12 +235,6 @@ client.on("error", (err) => {
   // Whatever handling you want
   console.error("PostHog had an error!", err)
 })
-```
-
-Or you can enable debugging to get verbose logs about all the inner workings of the SDK.
-
-```node
-client.debug()
 ```
 
 ## Short-lived processes like serverless environments

@@ -25,10 +25,6 @@ import RubyInstall from '../../integrate/_snippets/install-ruby.mdx'
 
 <RubyInstall />
 
-### Debug logging
-
-The log level by default is set to WARN. You can change it to DEBUG if you want to debug the client by running `posthog.logger.level = Logger::DEBUG`, where `posthog` is your initialized `PostHog::Client` instance.
-
 ## Capturing events
 
 import RubySendEvents from '../../integrate/send-events/_snippets/send-events-ruby.mdx'
@@ -180,6 +176,10 @@ posthog.group_identify(
 The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
 If the optional `distinct_id` is not provided in the group identify call, it defaults to `${groupType}_${groupKey}` (e.g., `$company_company_id_in_your_db` in the example above). This default behavior will result in each group appearing as a separate person in PostHog. To avoid this, it's often more practical to use a consistent `distinct_id`, such as `group_identifier`.
+
+## Debugging
+
+The Ruby SDK logs by default. The log level by default is set to `WARN`. You can change it to `DEBUG` if you want to debug the client by running `posthog.logger.level = Logger::DEBUG`, where `posthog` is your initialized `PostHog::Client` instance.
 
 ## Thank you
 

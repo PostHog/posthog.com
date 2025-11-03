@@ -667,3 +667,50 @@ posthog.init('<ph_project_api_key>', {
 ### Removing already ingested events
 
 Deleting already ingested events is complicated, but you can add user agents to the [internal and test accounts filter](https://us.posthog.com/settings/project-product-analytics#internal-user-filtering) in your project settings to filter them from your analytics.
+
+## Debugging
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debugging to see what's happening.
+
+### Enabling debug mode
+
+You can enable debug mode by setting the `debug` option to `true` in the `init` call. A common pattern is to set this to `true` in development environments only using environment variables.
+
+```ts
+posthog.init('<ph_project_api_key>', {
+  debug: true // Set this to true in development environments only using environment variables
+})
+```
+
+This will enable verbose logs about the inner workings of the SDK.
+
+You can also call `posthog.debug()` in your code or in the dev console like Chrome DevTools or Firefox Developer Tools at runtime.
+
+```ts
+posthog.debug()
+```
+
+If you can't access or update your code, you can enable debug mode on your website by appending this query to the URL `?__posthog_debug=true`.
+
+You can try this on the PostHog website:
+
+```url
+https://posthog.com/?__posthog_debug=true
+```
+
+
+### Exposing the `posthog` global object to the browser console
+
+> This has been tested in Chrome and Firefox. Safari doesn't have this feature, but other Chromium and Gecko/Firefox browsers do.
+
+Sometimes, you may want to test PostHog directly in the browser's dev console. This lets you run commands like `posthog.capture('test event')` directly in the console.
+
+The SDK will expose the `window.posthog` global object to the browser console on some sites, but most modern web app like React and Vue will not.
+
+To expose PostHog in the browser:
+
+1. Enable debug mode by setting `debug: true` in your config
+2. In the browser console, search for the console log message `[PostHog.js] Starting in debug mode`
+3. Expand the logged object
+4. Right-click on `this` and pick **Store as global variable**
+
+You can then access `posthog` as `temp0` in Firefox and `temp1` in Chrome. You can then do stuff like `temp1.capture('test event')` in the console.
