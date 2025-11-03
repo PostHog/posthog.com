@@ -313,6 +313,20 @@ If you want to cherry-pick specific features, just reference the key directly.
     ]}
 />
 
+### Override label/description but source values from competitor files
+
+This is useful when referencing a global feature but want to tailor the label or description to be more personalized to the product or feature.
+
+_Example: If there's a global data retention for 7 years but in reference to heatmaps, you might want to say "Heatmap data retained for 7 years."_
+
+```
+{
+    label: 'Custom label',
+    description: 'Custom description about heatmaps',
+    path: 'heatmaps.features.heatmaps',
+},
+```
+
 ### Add custom line items with arbitrary values
 
 If you need to add a custom row that doesn't exist in the competitor data, you can use the `values` property to specify a value for each competitor.
@@ -378,10 +392,10 @@ Add section headers to organize comparison tables into logical groups. Headers o
 <ProductComparisonTable
     competitors={['posthog', 'amplitude']}
     rows={[
-        { label: 'Core Features' },  // Section header - no description needed
+        { label: 'Core Features' }, // Section header - no description needed
         'product_analytics.features.autocapture',
         'product_analytics.features.cohorts',
-        { label: 'Advanced Features' },  // Another section header
+        { label: 'Advanced Features' }, // Another section header
         'product_analytics.insights.sql_editor',
         'product_analytics.group_analytics',
     ]}
