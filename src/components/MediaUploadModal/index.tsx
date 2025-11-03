@@ -37,14 +37,14 @@ const Image = ({
     width,
     height,
     tags: initialTags = [],
+    library: initialLibrary = 'Uncategorized',
 }: any) => {
     const { addToast } = useToast()
     const { getJwt } = useUser()
     const [loadingSize, setLoadingSize] = useState<string | number | null>(null)
-    const [library, setLibrary] = useState<string>('Uncategorized')
+    const [library, setLibrary] = useState<string>(initialLibrary)
     const [tags, setTags] = useState<string>(Array.isArray(initialTags) ? initialTags.join(', ') : '')
     const [savingMetadata, setSavingMetadata] = useState(false)
-    const [metadataLoaded, setMetadataLoaded] = useState(false)
 
     const cloudinaryBase = `https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}`
 
@@ -57,34 +57,6 @@ const Image = ({
     const availableSizes = isImage ? resizeSizes.filter((size) => size < maxDimension) : []
 
     const libraryOptions = ['Uncategorized', 'Creative library', 'Docs/handbook screenshots', 'Post images']
-
-    // Load metadata when component mounts
-    useEffect(() => {
-        const loadMetadata = async () => {
-            try {
-                const jwt = await getJwt()
-                const response = await fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/cloudinary-metadata/metadata?publicId=${public_id}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${jwt}`,
-                        },
-                    }
-                )
-
-                if (response.ok) {
-                    const data = await response.json()
-                    setLibrary(data.library || 'Uncategorized')
-                    setTags(Array.isArray(data.tags) ? data.tags.join(', ') : '')
-                    setMetadataLoaded(true)
-                }
-            } catch (err) {
-                console.error('Failed to load metadata:', err)
-            }
-        }
-
-        loadMetadata()
-    }, [public_id])
 
     const handleSaveMetadata = async () => {
         setSavingMetadata(true)
@@ -596,7 +568,7 @@ export default function MediaUploadModal() {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
     // Filter images based on search query and tag
-    const displayImages = showAllUploads ? allImages : [...userImages, ...((user?.profile as any)?.images || [])]
+    const displayImages = showAllUploads ? allImages : [...userImages]
 
     const filteredImages = useMemo(() => {
         return displayImages.filter(
@@ -669,6 +641,27 @@ export default function MediaUploadModal() {
             window.removeEventListener('paste', handlePaste)
         }
     }, [onDrop, addToast])
+
+    useEffect(() => {
+        const fetchUserImages = async () => {
+            try {
+                const jwt = await getJwt()
+                const response = await fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/cloudinary-metadata/user-images`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${jwt}`,
+                        },
+                    }
+                )
+                const data = await response.json()
+                setUserImages(data)
+            } catch (err) {
+                console.error('Failed to fetch user images:', err)
+            }
+        }
+        fetchUserImages()
+    }, [])
 
     return isModerator ? (
         <ScrollArea className="w-full">
