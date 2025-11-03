@@ -273,7 +273,7 @@ export const posthog = {
             },
             management: {
                 features: {
-                    approvals: false,
+                    approvals: true,
                     flag_administration: true,
                     flag_scheduling: true,
                     history_activity: true,

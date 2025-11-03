@@ -6,6 +6,20 @@ export const statsig = {
         comparisonArticle: '/blog/posthog-vs-statsig',
     },
     products: {
+        cdp: {
+            features: {
+                realtime_streaming: true,
+            },
+        },
+        data_warehouse: {
+            features: {
+                batch_exports: true,
+                warehouse_sources: true,
+            },
+        },
+        dashboards: {
+            available: true,
+        },
         experiments: {
             available: true,
             pricing: {
@@ -21,10 +35,10 @@ export const statsig = {
                 native_goal_tracking: false,
                 no_code_experiments: false,
                 ratio_metrics: false,
-                recommended_run_time: false,
+                recommended_run_time: true,
                 secondary_metrics: true,
                 shared_metrics_library: false,
-                split_testing: false,
+                split_testing: true,
                 visual_editor: false,
             },
             supported_tests: {
@@ -32,7 +46,7 @@ export const statsig = {
                     aa_testing: false,
                     ab_testing: false,
                     abn_testing: false,
-                    data_warehouse_experiments: 'Beta',
+                    data_warehouse_experiments: true,
                     fake_door_testing: false,
                     holdout_testing: false,
                     multi_armed_bandit: true,
@@ -47,7 +61,8 @@ export const statsig = {
                     geographic_targeting: false,
                     group_level_experiments: false,
                     holdouts: false,
-                    target_by_percentage: false,
+                    target_by_percentage: true,
+                    target_by_person_properties: true,
                 },
             },
             implementation: {
@@ -84,19 +99,20 @@ export const statsig = {
                 multivariate_flags: false,
                 json_payloads: false,
                 release_conditions: false,
+                remote_config: true,
             },
             implementation: {
                 features: {
                     local_evaluation: false,
-                    bootstrapping: false,
+                    bootstrapping: true,
                     api_access: false,
                     sdk_support: false,
                 },
             },
             targeting: {
                 features: {
-                    target_by_percentage: false,
-                    target_by_person_properties: false,
+                    target_by_percentage: true,
+                    target_by_person_properties: true,
                     target_by_cohorts: false,
                     geographic_targeting: false,
                     group_targeting: false,
@@ -106,7 +122,7 @@ export const statsig = {
                 features: {
                     approvals: true,
                     flag_administration: false,
-                    flag_scheduling: false,
+                    flag_scheduling: true,
                     history_activity: false,
                     instant_rollbacks: false,
                     multi_environment: true,
@@ -169,7 +185,7 @@ export const statsig = {
                     features: {},
                 },
                 user_paths: {
-                    available: true,
+                    available: 'Beta',
                     features: {},
                 },
                 lifecycle: {
@@ -313,12 +329,12 @@ export const statsig = {
             data_retention: false,
             gdpr_ready: true,
             hipaa_ready: 'Enterprise',
-            history_audit_logs: false,
+            history_audit_logs: true,
             reverse_proxy: false,
             saml_sso: 'Enterprise',
             soc2_certified: true,
             two_factor_auth: true,
-            user_privacy_options: false,
+            user_privacy_options: true,
         },
         analytics_integration: {
             built_in_analytics: false,

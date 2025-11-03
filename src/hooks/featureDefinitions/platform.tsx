@@ -7,7 +7,7 @@ export const platformFeatures = {
                 description: 'Access and store your data in the EU',
             },
             open_source: {
-                name: 'Open-source',
+                name: 'Open source',
                 description: 'Fully open-source codebase',
             },
             reverse_proxy: {
