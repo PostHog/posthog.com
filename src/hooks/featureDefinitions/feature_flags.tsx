@@ -36,6 +36,14 @@ export const featureFlagsFeatures = {
             name: 'Remote config',
             description: 'Replace hard-coded values in your app with remotely configurable parameters',
         },
+        single_page_app_support: {
+            name: 'Single-page app support',
+            description: 'Use app frameworks like React and Vue',
+        },
+        usage_logs: {
+            name: 'Flag usage logs',
+            description: 'Track how many times a feature flag has been called',
+        },
     },
     implementation: {
         description: 'Integrate flags efficiently across platforms',

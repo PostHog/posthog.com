@@ -44,6 +44,10 @@ export const experimentsFeatures = {
             name: 'No-code experiments',
             description: 'Modify your website and run experiments without writing code',
         },
+        low_code_experiments: {
+            name: 'Low-code experiments',
+            description: 'Implement experiments with a small amount of code',
+        },
         split_testing: {
             name: 'Split testing',
             description: 'Split participants into groups',
@@ -121,6 +125,10 @@ export const experimentsFeatures = {
             cohort_integration: {
                 name: 'Cohort integration',
                 description: 'Target specific user segments or behavioral cohorts',
+            },
+            custom_targeting: {
+                name: 'Custom targeting',
+                description: 'Target users by properties and other attributes',
             },
             geographic_targeting: {
                 name: 'Geographic targeting',

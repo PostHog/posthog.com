@@ -58,16 +58,16 @@ Although both Optimizely and PostHog provide experimentation and feature flags, 
     competitors={['posthog', 'optimizely']}
     rows={[
         'platform.deployment.open_source',
-        { label: 'Self-service', description: 'Start without talking to sales', values: ['', ''] },
+        'platform.pricing.self_serve',
         'experiments',
         'feature_flags',
         'product_analytics',
         'web_analytics',
         'session_replay',
         'surveys',
-        { label: 'CMS', description: 'Manage content', values: ['', ''] },
-        { label: 'Cart optimization', description: 'Optimize ecommerce checkouts', values: ['', ''] },
-        { label: 'Project management', description: 'Manage projects related to experiments', values: ['', ''] },
+        { label: 'CMS', description: 'Manage content', values: [false, true] },
+        { label: 'Cart optimization', description: 'Optimize ecommerce checkouts', values: [false, true] },
+        { label: 'Project management', description: 'Manage projects related to experiments', values: [false, true] },
     ]}
 />
 
@@ -86,20 +86,24 @@ The core web experimentation features like traffic allocation, preview mode, cro
 <ProductComparisonTable
     competitors={['posthog', 'optimizely']}
     rows={[
-        { label: 'A/B/n tests', description: 'Do tests with multiple variants', values: ['', ''] },
-        'experiments.features.custom_targeting',
+        'experiments.implementation.multivariate_testing',
+        'experiments.targeting.custom_targeting',
         'experiments.features.custom_goals',
-        { label: 'Single-page app support', description: 'Use app frameworks like React and Vue', values: ['', ''] },
+        'feature_flags.features.single_page_app_support',
         'experiments.features.no_code_experiments',
-        {
-            label: 'Low-code experiments',
-            description: 'Implement experiments with a small amount of code',
-            values: ['', ''],
-        },
+        'experiments.features.low_code_experiments',
         'experiments.features.funnel_metrics',
-        { label: 'Native analytics', description: 'Track experiments without third-party tools', values: ['', ''] },
-        { label: 'Scheduling', description: 'Schedule experiments to run at specific times', values: ['', ''] },
-        { label: 'Use external data', description: 'Use data from other platforms in experiments', values: ['', ''] },
+        {
+            label: 'Native analytics',
+            description: 'Track experiments without third-party tools',
+            values: [true, false],
+        },
+        'feature_flags.management.flag_scheduling',
+        {
+            label: 'Use external data',
+            description: 'Use data from other platforms in experiments',
+            values: [true, true],
+        },
     ]}
 />
 
@@ -107,62 +111,22 @@ The core web experimentation features like traffic allocation, preview mode, cro
 
 -   PostHog doesn't offer a no-code experiment creator yet, but it does have a UI to create and manage experiments as well as snippets to make it easy to implement them. For example, you can add a basic experiment anywhere you can insert custom JavaScript like this:
 
+<!-- prettier-ignore -->
 ```html
 <script>
-    !(function (t, e) {
-        var o, n, p, r
-        e.__SV ||
-            ((window.posthog = e),
-            (e._i = []),
-            (e.init = function (i, s, a) {
-                function g(t, e) {
-                    var o = e.split('.')
-                    2 == o.length && ((t = t[o[0]]), (e = o[1])),
-                        (t[e] = function () {
-                            t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
-                        })
-                }
-                ;((p = t.createElement('script')).type = 'text/javascript'),
-                    (p.crossOrigin = 'anonymous'),
-                    (p.async = !0),
-                    (p.src = s.api_host + '/static/array.js'),
-                    (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r)
-                var u = e
-                for (
-                    void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
-                        u.people = u.people || [],
-                        u.toString = function (t) {
-                            var e = 'posthog'
-                            return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e
-                        },
-                        u.people.toString = function () {
-                            return u.toString(1) + '.people (stub)'
-                        },
-                        o =
-                            'capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep'.split(
-                                ' '
-                            ),
-                        n = 0;
-                    n < o.length;
-                    n++
-                )
-                    g(u, o[n])
-                e._i.push([i, s, a])
-            }),
-            (e.__SV = 1))
-    })(document, window.posthog || [])
-    posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
-
-    posthog.onFeatureFlags(() => {
-        // Check the value of the 'test-flag' feature flag
-        if (posthog.getFeatureFlag('test-flag') === 'test') {
-            // If the feature flag is enabled, change the text of the landing-header
-            const landingHeader = document.getElementById('landing-header')
-            if (landingHeader) {
-                landingHeader.textContent = 'Welcome to our site!'
-            }
-        }
-    })
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_4BIQvFqC5ra6YzijINp7EcrILU2K2TF7ISd2QPPHBVR',{api_host:'https://us.i.posthog.com', defaults:'2025-05-24'})
+  
+  posthog.onFeatureFlags(() => {
+    // Check the value of the 'test-flag' feature flag
+    if (posthog.getFeatureFlag('test-flag') === 'test') {
+      // If the feature flag is enabled, change the text of the landing-header
+      const landingHeader = document.getElementById('landing-header');
+      if (landingHeader) {
+        landingHeader.textContent = "Welcome to our site!";
+      }
+    }
+  });
 </script>
 ```
 
@@ -176,16 +140,20 @@ Feature experimentation relates to releasing and testing feature changes in your
         'feature_flags.features.boolean_flags',
         'feature_flags.targeting.features.target_by_percentage',
         'feature_flags.targeting.features.target_by_person_properties',
-        { label: 'Logging', description: 'Log flag usage', values: ['', ''] },
-        { label: 'Audience builder', description: 'Known as cohorts in PostHog', values: ['', ''] },
-        { label: 'Custom attributes', description: 'Known as properties in PostHog', values: ['', ''] },
-        { label: 'UI controls', description: 'Configure experiments with UI', values: ['', ''] },
-        'experiments.analysis.features.statistical_significance',
+        'feature_flags.features.usage_logs',
         {
-            label: 'Remote configuration',
-            description: 'Configure your experiments without changing code',
-            values: ['', ''],
+            label: 'Audience builder',
+            description: 'Known as cohorts in PostHog',
+            path: 'feature_flags.targeting.target_by_cohorts',
         },
+        {
+            label: 'Custom attributes',
+            description: 'Known as properties in PostHog',
+            path: 'experiments.targeting.custom_targeting',
+        },
+        'experiments.analysis.statistical_significance',
+        'experiments.analysis.statistics_engine',
+        'feature_flags.features.remote_config',
         'feature_flags.management.features.multi_environment',
     ]}
 />
@@ -202,7 +170,7 @@ PostHog and Optimizely are very different here. Optimizely is sales-driven and c
         'platform.pricing.transparent_pricing',
         'platform.pricing.usage_based_pricing',
         'platform.pricing.free_tier',
-        { label: 'Per-product pricing', description: 'Separate pricing for each product', values: ['', ''] },
+        { label: 'Per-product pricing', description: 'Separate pricing for each product', values: [true, true] },
     ]}
 />
 
@@ -222,16 +190,19 @@ PostHog’s product analytics suite shines here. It treats feature flags and exp
         {
             label: 'Native analytics',
             description: 'Track experiments without the use of third parties',
-            values: ['', ''],
+            values: [true, false],
         },
-        { label: 'Results', description: 'View experiment results', values: ['', ''] },
-        { label: 'Segment results', description: 'Break results down for segments', values: ['', ''] },
+        { label: 'Segment results', description: 'Break results down for segments', values: [true, true] },
         'experiments.features.secondary_metrics',
-        { label: 'Winner', description: 'Calculate the winning experiment variant', values: ['', ''] },
-        { label: 'Custom insights', description: 'Query and customize analytics', values: ['', ''] },
+        { label: 'Winner', description: 'Calculate the winning experiment variant', values: [true, true] },
+        { label: 'Custom insights', description: 'Query and customize analytics', values: [true, false] },
         'product_analytics.trends',
         'product_analytics.funnels',
-        { label: 'Confidence interval', description: 'Show confidence in results', values: ['', ''] },
+        {
+            label: 'Confidence interval',
+            description: 'Show confidence in results',
+            path: 'experiments.analysis.statistical_significance',
+        },
         'session_replay',
     ]}
 />
@@ -246,10 +217,10 @@ PostHog and Optimizely both support similar languages and frameworks with SDKs, 
     competitors={['posthog', 'optimizely']}
     rows={[
         'platform.developer.sdks',
-        { label: 'Client', description: 'JavaScript, React', values: ['', ''] },
-        { label: 'Server', description: 'Node, Python, Go, PHP', values: ['', ''] },
-        { label: 'Mobile', description: 'Android, iOS', values: ['', ''] },
-        { label: 'OTT', description: 'Over-the-top TV applications', values: ['', ''] },
+        'platform.developer.client_side_sdks',
+        'platform.developer.server_side_sdks',
+        'platform.developer.mobile_sdks',
+        'platform.developer.tv_sdks',
         'platform.developer.api',
     ]}
 />
@@ -261,7 +232,7 @@ PostHog’s integrations are free while Optimizely often requires a subscription
 <ProductComparisonTable
     competitors={['posthog', 'optimizely']}
     rows={[
-        { label: 'Google Analytics', values: ['', ''] },
+        'platform.integrations.google_analytics',
         'platform.integrations.salesforce',
         'cdp',
         'platform.integrations.zapier',
@@ -284,13 +255,17 @@ Both PostHog and Optimizely have the privacy and compliance tools users expect.
 <ProductComparisonTable
     competitors={['posthog', 'optimizely']}
     rows={[
-        { label: 'Change history', description: 'Trail of changes to data', values: ['', ''] },
+        {
+            label: 'Change history',
+            description: 'Trail of changes to data',
+            path: 'platform.security.history_audit_logs',
+        },
         'platform.security.saml_sso',
         'platform.security.two_factor_auth',
-        { label: 'Roles and permissions', description: 'Control who can do what', values: ['', ''] },
+        'platform.security.role_based_access_control',
         'platform.security.gdpr_ready',
-        { label: 'Cookieless', description: 'Use product without cookies', values: ['', ''] },
-        { label: 'DPA available', description: 'Enter into Data Processing Agreements', values: ['', ''] },
+        'platform.security.cookieless_tracking',
+        'platform.security.dpa',
     ]}
 />
 

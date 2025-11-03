@@ -148,6 +148,10 @@ export const platformFeatures = {
                 name: 'Google Ads',
                 description: 'Import ROI data from Google Ads',
             },
+            google_analytics: {
+                name: 'Google Analytics',
+                description: 'Connect with Google Analytics data',
+            },
             google_search_console: {
                 name: 'Google Search Console',
                 description: 'Import data from Google Search Console',
@@ -211,6 +215,10 @@ export const platformFeatures = {
                 name: 'SDKs',
                 description: 'Number of SDKs available',
             },
+            client_side_sdks: {
+                name: 'Client-side SDKs',
+                description: 'Capture events and use features from JavaScript, React, and more',
+            },
             cross_domain_tracking: {
                 name: 'Cross-domain tracking',
                 description: 'Track users across multiple domains and subdomains',
@@ -243,6 +251,10 @@ export const platformFeatures = {
                 name: 'Notebooks',
                 description: 'Collaborate on analysis in shareable notebooks',
             },
+            tv_sdks: {
+                name: 'OTT',
+                description: 'Over-the-top TV applications',
+            },
         },
     },
     analytics_integration: {
@@ -257,37 +269,37 @@ export const platformFeatures = {
     security: {
         description: 'Security and compliance features',
         features: {
-            data_retention: {
-                name: 'Data retention',
-                description: 'The length of time event data is retained',
-            },
             bot_blocking: {
                 name: 'Bot blocking',
                 description: 'Block scrapers, crawlers, and other unwanted traffic from stats',
             },
-            user_privacy_options: {
-                name: 'User privacy options',
-                description: 'Anonymize users, drop personal data',
+            dpa: {
+                name: 'DPA available',
+                description: 'Data Processing Agreement',
             },
             data_anonymization: {
                 name: 'Data anonymization',
                 description: 'Anonymize user data for privacy',
             },
+            data_retention: {
+                name: 'Data retention',
+                description: 'The length of time event data is retained',
+            },
             cookieless_tracking: {
                 name: 'Cookieless tracking option',
                 description: 'Track users without cookies',
             },
-            history_audit_logs: {
-                name: 'History and audit logs',
-                description: 'Manage and view edits and related users',
+            ccpa_ready: {
+                name: 'CCPA-ready',
+                description: 'Compliant with California Consumer Privacy Act',
             },
             gdpr_ready: {
                 name: 'GDPR-ready',
                 description: 'Can be compliant with GDPR',
             },
-            ccpa_ready: {
-                name: 'CCPA-ready',
-                description: 'Compliant with California Consumer Privacy Act',
+            history_audit_logs: {
+                name: 'History and audit logs',
+                description: 'Manage and view edits and related users',
             },
             hipaa_ready: {
                 name: 'HIPAA-ready',
@@ -296,6 +308,10 @@ export const platformFeatures = {
             role_based_access_control: {
                 name: 'Role-based access control',
                 description: 'Control access to features and data based on user roles and permissions',
+            },
+            saml_sso: {
+                name: 'SAML/SSO',
+                description: 'Use SAML or single sign-on authentication',
             },
             security_certification: {
                 name: 'Security certification',
@@ -309,9 +325,9 @@ export const platformFeatures = {
                 name: '2FA',
                 description: 'Enforce login with two-factor authentication',
             },
-            saml_sso: {
-                name: 'SAML/SSO',
-                description: 'Use SAML or single sign-on authentication',
+            user_privacy_options: {
+                name: 'User privacy options',
+                description: 'Anonymize users, drop personal data',
             },
         },
     },

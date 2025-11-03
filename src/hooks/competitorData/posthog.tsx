@@ -228,6 +228,9 @@ export const posthog = {
                 multivariate_flags: true,
                 json_payloads: true,
                 release_conditions: true,
+                remote_config: true,
+                single_page_app_support: true,
+                usage_logs: true,
             },
             implementation: {
                 features: {
@@ -292,6 +295,7 @@ export const posthog = {
                 namespacing: false,
                 native_goal_tracking: true,
                 no_code_experiments: 'Beta',
+                low_code_experiments: true,
                 ratio_metrics: true,
                 recommended_run_time: true,
                 secondary_metrics: true,
@@ -315,6 +319,7 @@ export const posthog = {
             targeting: {
                 features: {
                     cohort_integration: true,
+                    custom_targeting: true,
                     exclusion_rules: true,
                     geographic_targeting: true,
                     group_level_experiments: true,
@@ -400,7 +405,6 @@ export const posthog = {
                     display_conditions: true,
                     event_triggered: true,
                     linked_feature_flag: true,
-                    custom_targeting: true,
                 },
             },
             question_types: {
@@ -552,6 +556,7 @@ export const posthog = {
             exports: true,
             gcs: true,
             google_ads: true,
+            google_analytics: false,
             google_search_console: false,
             hubspot: true,
             imports: true,
@@ -573,6 +578,7 @@ export const posthog = {
         },
         developer: {
             api: true,
+            client_side_sdks: true,
             collaboration: 'Invite teammates to collaborate on all features',
             cross_domain_tracking: true,
             mobile_sdks: true,
@@ -581,6 +587,7 @@ export const posthog = {
             sdks: '14',
             server_side_sdks: true,
             sql: true,
+            tv_sdks: false,
         },
         analytics_integration: {
             built_in_analytics: true,
@@ -591,6 +598,7 @@ export const posthog = {
             cookieless_tracking: true,
             data_anonymization: true,
             data_retention: '7 years',
+            dpa: true,
             gdpr_ready: true,
             hipaa_ready: true,
             history_audit_logs: 'Enterprise',

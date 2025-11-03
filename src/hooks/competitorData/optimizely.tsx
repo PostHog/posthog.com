@@ -20,6 +20,7 @@ export const optimizely = {
                 namespacing: false,
                 native_goal_tracking: false,
                 no_code_experiments: true,
+                low_code_experiments: true,
                 ratio_metrics: false,
                 recommended_run_time: false,
                 secondary_metrics: true,
@@ -43,6 +44,7 @@ export const optimizely = {
             targeting: {
                 features: {
                     cohort_integration: false,
+                    custom_targeting: true,
                     exclusion_rules: false,
                     geographic_targeting: false,
                     group_level_experiments: false,
@@ -63,7 +65,7 @@ export const optimizely = {
                     results_visualization: false,
                     side_effect_monitoring: false,
                     statistical_significance: true,
-                    statistics_engine: false,
+                    statistics_engine: 'Frequentist with sequential testing',
                 },
             },
             platforms: {
@@ -84,6 +86,9 @@ export const optimizely = {
                 multivariate_flags: false,
                 json_payloads: false,
                 release_conditions: false,
+                remote_config: true,
+                single_page_app_support: true,
+                usage_logs: true,
             },
             implementation: {
                 features: {
@@ -95,18 +100,18 @@ export const optimizely = {
             },
             targeting: {
                 features: {
-                    target_by_percentage: false,
-                    target_by_person_properties: false,
-                    target_by_cohorts: false,
                     geographic_targeting: false,
                     group_targeting: false,
+                    target_by_cohorts: true,
+                    target_by_percentage: true,
+                    target_by_person_properties: true,
                 },
             },
             management: {
                 features: {
                     approvals: false,
                     flag_administration: false,
-                    flag_scheduling: false,
+                    flag_scheduling: true,
                     history_activity: false,
                     instant_rollbacks: false,
                     multi_environment: true,
@@ -144,6 +149,9 @@ export const optimizely = {
         surveys: {
             available: false,
         },
+        cdp: {
+            available: true,
+        },
     },
     platform: {
         deployment: {
@@ -152,31 +160,44 @@ export const optimizely = {
         },
         developer: {
             api: true,
+            client_side_sdks: true,
+            mobile_sdks: true,
             native_data_sources: false,
             notebooks: false,
             proxies: false,
             sdks: '14',
+            server_side_sdks: true,
             sql: false,
+            tv_sdks: true,
         },
         pricing: {
             free_tier: false,
             transparent_pricing: false,
-            usage_based_pricing: true,
+            usage_based_pricing: false,
+            self_serve: false,
         },
         integrations: {
+            bigquery: true,
             datadog: false,
-
             exports: true,
+            google_analytics: true,
             imports: false,
             microsoft_teams: true,
             sentry: false,
+            s3: true,
+            salesforce: 'Add-on',
+            segment: true,
             slack: true,
+            snowflake: true,
             zapier: false,
         },
         security: {
+            cookieless_tracking: false,
+            dpa: true,
             gdpr_ready: true,
             hipaa_ready: false,
-            history_audit_logs: false,
+            history_audit_logs: true,
+            role_based_access_control: true,
             saml_sso: true,
             soc2_certified: false,
             two_factor_auth: true,
