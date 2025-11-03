@@ -66,7 +66,7 @@ Here's how it works:
 That workflow is live in production today and it took Evan only 10 minutes to set it up. 
 *“We’re thrilled with it. We shipped it fast, it works, and it’s tied to our real product data instead of being duct-taped across tools. Even though PostHog Workflows is in alpha we've been able to build and release changes in one tenth the time it would have taken with Zapier. And that might be an understatement.”*
 
-The Grantable team is following a familiar PostHog pattern: start with one product, realize it works better, then pull more into the stack. Session replay replaced standalone tools; error tracking replaced Sentry; heat maps replaced Clarity; surveys replaced Intercom; and now Workflows is replacing Customer.io and Zapier-style automations — all powered by the same shared data underneath.
+The Grantable team is following a familiar PostHog pattern: start with one product, realize it works better, then pull more into the stack. Session replay replaced standalone tools; error tracking replaced Sentry; heatmaps replaced Clarity; surveys replaced Intercom; and now Workflows is replacing Customer.io and Zapier-style automations — all powered by the same shared data underneath.
 
 ## Why this matters (to Grantable and to us)
 Grantable isn’t just “using a new feature.” They’re reshaping their operating rhythm around PostHog.
