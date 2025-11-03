@@ -169,7 +169,7 @@ function TreeMenuItem({
 
             {hasChildren && (
                 <Collapsible.Content>
-                    <div className="space-y-px">
+                    <div className="space-y-px pb-2">
                         {item.children?.map((child, childIndex) => {
                             const key = `${child.name}-${childIndex}-${child.url}`
                             const hasChildren = child.children && child.children.length > 0
