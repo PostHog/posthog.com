@@ -215,17 +215,29 @@ export default function Timeline({
                                         <p className="text-sm m-0 font-semibold absolute -top-6 left-0">{year}</p>
                                     )}
                                     <div className="flex gap-1">
-                                        {Array.from({ length: 4 }, (_, i) => i + 1).map((day) => {
-                                            const count = data?.[year]?.[month]?.[day]?.count || 0
-                                            const color = getAcivityColor(count)
-                                            return (
-                                                <div
-                                                    style={{ width: WEEK_BOX_SIZE, height: WEEK_BOX_SIZE }}
-                                                    className={`rounded-[1px] ${color}`}
-                                                    key={`${year}-${month}-${day}`}
-                                                />
+                                        {(() => {
+                                            const now = dayjs()
+                                            const isCurrentMonth = year === now.year() && month === now.month() + 1
+                                            const latestNonEmptyWeek = [4, 3, 2, 1].find(
+                                                (w) => (data?.[year]?.[month]?.[w]?.count || 0) > 0
                                             )
-                                        })}
+                                            const currentWeek = Math.min(4, Math.ceil(now.date() / 7))
+                                            const weeksToRender = isCurrentMonth
+                                                ? [latestNonEmptyWeek || currentWeek]
+                                                : [1, 2, 3, 4]
+
+                                            return weeksToRender.map((week) => {
+                                                const count = data?.[year]?.[month]?.[week]?.count || 0
+                                                const color = getAcivityColor(count)
+                                                return (
+                                                    <div
+                                                        style={{ width: WEEK_BOX_SIZE, height: WEEK_BOX_SIZE }}
+                                                        className={`rounded-[1px] ${color}`}
+                                                        key={`${year}-${month}-${week}`}
+                                                    />
+                                                )
+                                            })
+                                        })()}
                                     </div>
                                     <p className="text-sm text-primary m-0 font-semibold absolute translate-y-1/2">
                                         {dayjs()
