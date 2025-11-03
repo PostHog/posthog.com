@@ -1532,7 +1532,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/revops/credits',
                     },
                 ],
-            }
+            },
         ],
     },
 ]
@@ -2467,13 +2467,9 @@ export const docsMenu = {
                 },
                 {
                     name: 'Tools and features',
-                    url: '/docs/posthog-ai',
+                    url: '/docs/toolbar',
                     icon: 'IconToolbar',
                     children: [
-                        {
-                            name: 'PostHog AI',
-                            url: '/docs/posthog-ai',
-                        },
                         {
                             name: 'Toolbar',
                             url: '/docs/toolbar',
@@ -4652,20 +4648,38 @@ export const docsMenu = {
                 },
                 {
                     name: 'Getting started',
-                    url: '/docs/posthog-ai#how-do-i-access-posthog-ai',
+                },
+                {
+                    name: 'Getting started',
+                    url: '/docs/posthog-ai/overview',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
                 },
                 {
+                    name: 'Concepts',
+                },
+                {
                     name: 'Data access',
-                    url: '/docs/posthog-ai#what-access-does-posthog-ai-have-to-my-data',
+                    url: '/docs/posthog-ai/overview',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
                 {
+                    name: 'Guides',
+                },
+                {
                     name: 'Security',
-                    url: '/docs/posthog-ai#is-my-data-shared-with-third-parties',
+                    url: '/docs/posthog-ai/overview',
+                    icon: 'IconShield',
+                    color: 'red',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'FAQs',
+                    url: '/docs/posthog-ai/overview',
                     icon: 'IconShield',
                     color: 'red',
                 },
@@ -4892,8 +4906,8 @@ export const productMenu = {
         },
         {
             name: 'PostHog AI',
-            icon: 'IconMagicWand',
-            color: 'purple',
+            icon: 'IconLogomark',
+            color: 'black',
             url: '/ai',
         },
         {
