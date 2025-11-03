@@ -10,8 +10,8 @@ export const plausible = {
             available: true,
             features: {
                 advertising_analytics: false,
-                bounce_rate: true,
                 bounce_rate_tracking: false,
+                bounce_rate: true,
                 breakdown_by_device_and_browser: false,
                 breakdown_by_geoip: false,
                 clickmaps: false,
@@ -33,16 +33,15 @@ export const plausible = {
                 pre_configured_dashboards: false,
                 real_time_reporting: false,
                 revenue_tracking: false,
-                script_size: false,
-                scrollmaps: false,
+                script_size: '',
                 session_and_duration_tracking: false,
                 sessions: true,
                 snippet_install: true,
                 traffic_breakdown: true,
                 utm_tracking: true,
                 visitor_and_view_tracking: false,
-                web_vitals: false,
                 web_vitals_reporting: false,
+                web_vitals: false,
             },
         },
         product_analytics: {
@@ -97,6 +96,12 @@ export const plausible = {
                         sql_editor: false,
                     },
                 },
+            },
+        },
+        dashboards: {
+            available: true,
+            feature: {
+                custom_dashboards: false,
             },
         },
         heatmaps: {

@@ -10,6 +10,10 @@ export const dashboardsFeatures = {
             name: 'Annotations',
             description: 'Add notes to timelines to mark important events',
         },
+        custom_dashboards: {
+            name: 'Custom dashboards',
+            description: 'Build a custom dashboard of your own or use a template',
+        },
         dashboard_level_permissions: {
             name: 'Dashboard-level permissions',
             description: 'Set permissions for individual dashboards',

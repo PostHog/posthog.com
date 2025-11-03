@@ -56,93 +56,53 @@ export const platformFeatures = {
                 name: 'Airbyte',
                 description: 'Extract and load data to external platforms',
             },
-            imports: {
-                name: 'Data imports',
-                description: 'Import data from data warehouses and other sources',
-            },
-            exports: {
-                name: 'Data exports',
-                description: 'Export data to data warehouses and other destinations',
-            },
-            redshift: {
-                name: 'Amazon Redshift',
-                description: 'Export data to Redshift',
-            },
-            s3: {
-                name: 'Amazon S3',
-                description: 'Export data to a S3 bucket',
-            },
             azure_blob: {
                 name: 'Azure Blob Storage',
                 description: 'Export data to Microsoft Azure',
-            },
-            gcs: {
-                name: 'Google Cloud Storage',
-                description: 'Import/export data',
-            },
-            snowflake: {
-                name: 'Snowflake',
-                description: 'Export data to Snowflake database',
             },
             bigquery: {
                 name: 'BigQuery',
                 description: 'Export data to Google BigQuery for analysis',
             },
-            warehouse_import: {
-                name: 'Warehouse import',
-                description: 'Import data from third-party warehouse',
+            ci_cd_integrations: {
+                name: 'CI/CD integrations',
+                description: 'Connect with development tools and workflows',
             },
-            stripe: {
-                name: 'Stripe',
-                description: 'Stripe customer data connector',
+            community_integrations: {
+                name: 'Community integrations',
+                description: 'Build your own integration',
             },
-            zendesk: {
-                name: 'Zendesk',
-                description: 'Send and receive data from Zendesk',
-            },
-            hubspot: {
-                name: 'Hubspot',
-                description: 'Send and receive data from Hubspot',
-            },
-            salesforce: {
-                name: 'Salesforce',
-                description: 'Sync event and person data',
-            },
-            sentry: {
-                name: 'Sentry',
-                description: 'Send and receive data from Sentry',
-            },
-            segment: {
-                name: 'Segment',
-                description: 'Send events via Segment',
-            },
-            rudderstack: {
-                name: 'Rudderstack',
-                description: 'Send events via Rudderstack',
-            },
-            zapier: {
-                name: 'Zapier',
-                description: 'Trigger Zapier automations',
+            csv_exports: {
+                name: 'CSV exports',
+                description: 'Export your data as a CSV',
             },
             customer_io: {
                 name: 'Customer.io',
                 description: 'Messaging and marketing automation',
             },
-            intercom: {
-                name: 'Intercom',
-                description: 'Messaging and marketing automation',
+            datadog: {
+                name: 'Datadog',
+                description: 'Send feature flag and event data to Datadog',
             },
-            slack: {
-                name: 'Slack',
-                description: 'Alerts and notifications for Slack',
+            discord: {
+                name: 'Discord',
+                description: 'Send survey responses and data to Discord',
             },
-            microsoft_teams: {
-                name: 'Microsoft Teams',
-                description: 'Alerts and notifications for Microsoft Teams',
+            email_reports: {
+                name: 'Email reports',
+                description: 'Send reports to email',
             },
-            community_integrations: {
-                name: 'Community integrations',
-                description: 'Build your own integration',
+            exports: {
+                name: 'Data exports',
+                description: 'Export data to data warehouses and other destinations',
+            },
+            gcs: {
+                name: 'Google Cloud Storage',
+                description: 'Import/export data',
+            },
+            hubspot: {
+                name: 'Hubspot',
+                description: 'Send and receive data from Hubspot',
             },
             google_ads: {
                 name: 'Google Ads',
@@ -156,29 +116,73 @@ export const platformFeatures = {
                 name: 'Google Search Console',
                 description: 'Import data from Google Search Console',
             },
-            ci_cd_integrations: {
-                name: 'CI/CD integrations',
-                description: 'Connect with development tools and workflows',
+            imports: {
+                name: 'Data imports',
+                description: 'Import data from data warehouses and other sources',
+            },
+            intercom: {
+                name: 'Intercom',
+                description: 'Messaging and marketing automation',
+            },
+            microsoft_teams: {
+                name: 'Microsoft Teams',
+                description: 'Alerts and notifications for Microsoft Teams',
+            },
+            redshift: {
+                name: 'Amazon Redshift',
+                description: 'Export data to Redshift',
+            },
+            rudderstack: {
+                name: 'Rudderstack',
+                description: 'Send events via Rudderstack',
+            },
+            s3: {
+                name: 'Amazon S3',
+                description: 'Export data to a S3 bucket',
+            },
+            salesforce: {
+                name: 'Salesforce',
+                description: 'Sync event and person data',
+            },
+            shopify: {
+                name: 'Shopify',
+                description: 'Sync customer and order data',
+            },
+            slack: {
+                name: 'Slack',
+                description: 'Alerts and notifications for Slack',
+            },
+            snowflake: {
+                name: 'Snowflake',
+                description: 'Export data to Snowflake database',
+            },
+            stripe: {
+                name: 'Stripe',
+                description: 'Stripe customer data connector',
+            },
+            sentry: {
+                name: 'Sentry',
+                description: 'Send and receive data from Sentry',
+            },
+            segment: {
+                name: 'Segment',
+                description: 'Send events via Segment',
+            },
+            warehouse_import: {
+                name: 'Warehouse import',
+                description: 'Import data from third-party warehouse',
             },
             wordpress: {
                 name: 'WordPress',
                 description: 'Easily capture data from your WordPress site',
             },
-            csv_exports: {
-                name: 'CSV exports',
-                description: 'Export your data as a CSV',
+            zapier: {
+                name: 'Zapier',
+                description: 'Trigger Zapier automations',
             },
-            datadog: {
-                name: 'Datadog',
-                description: 'Send feature flag and event data to Datadog',
-            },
-            email_reports: {
-                name: 'Email reports',
-                description: 'Send reports to email',
-            },
-            discord: {
-                name: 'Discord',
-                description: 'Send survey responses and data to Discord',
+            zendesk: {
+                name: 'Zendesk',
+                description: 'Send and receive data from Zendesk',
             },
         },
     },
@@ -261,8 +265,8 @@ export const platformFeatures = {
         description: 'Analytics features available platform-wide',
         features: {
             built_in_analytics: {
-                name: 'Built-in product analytics',
-                description: 'Combine error tracking with product analytics data',
+                name: 'Built-in analytics',
+                description: 'Analyze data without the need for third-party tools',
             },
         },
     },

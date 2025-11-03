@@ -31,6 +31,10 @@ export const surveysFeatures = {
             name: 'Customizable wait periods',
             description: 'Set a delay before a survey opens',
         },
+        in_app_prompts_messages: {
+            name: 'In-app prompts and messages',
+            description: 'Send messages to users in your app',
+        },
         sentiment_analysis: {
             name: 'Sentiment analysis',
             description: 'Analyze survey results using AI to discover trends',

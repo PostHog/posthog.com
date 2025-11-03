@@ -65,7 +65,7 @@ Because we build for engineers first, we're also open source. You can check out 
 
 -   The Enterprise plan unlocks extra security, compliance, and permissioning features to meet the needs of large businesses.
 
-> **Are you an early-stage startup?** Get $50k in PostHog credit, and more, by joining [our PostHog for Startups program](/startups)!
+> **Are you an early-stage startup?** Get $50k in PostHog credit, and more, by joining [our PostHog for Startups program](/startups).
 
 To make a clean comparison between PostHog and Pendo, we’ll focus on comparing Pendo Engage to PostHog and include features from all pricing tiers.
 
@@ -78,8 +78,8 @@ To make a clean comparison between PostHog and Pendo, we’ll focus on comparing
         'surveys',
         'feature_flags',
         'experiments',
-        { label: 'In-app prompts and messages', description: 'Send messages to users in your app', values: ['', ''] },
-        { label: 'Apps/integrations', description: 'Push and pull data to other destinations', values: ['', ''] },
+        'surveys.features.in_app_prompts_messages',
+        { label: 'Apps/integrations', description: 'Push and pull data to other destinations', values: [true, true] },
         'platform.deployment.open_source',
     ]}
 />
@@ -105,7 +105,7 @@ This difference is reflected in all levels of the product, but especially in pro
         'product_analytics.features.cohorts',
         'product_analytics.user_paths',
         'product_analytics.retention',
-        { label: 'UTM tracking', description: 'Track marketing campaigns with UTM tags', values: ['', ''] },
+        'web_analytics.features.utm_tracking',
         'product_analytics.funnels.features.correlation_analysis',
         'product_analytics.group_analytics',
         'product_analytics.insights.features.formula_mode',
@@ -122,7 +122,8 @@ This difference is reflected in all levels of the product, but especially in pro
 <h4 className="mb-4">
     Discover what's possible with <span className="text-blue">product analytics</span>
 </h4>
-<TutorialsSlider
+
+<TutorialsList
     slugs={[
         '/tutorials/churn-rate',
         '/tutorials/event-tracking-guide',
@@ -143,7 +144,7 @@ PostHog has ready-made apps for displaying pop-ups and tooltips, including banne
 <h4 className="mb-4">
     Discover what's possible with <span className="text-blue">PostHog apps</span>
 </h4>
-<TutorialsSlider
+<TutorialsList
     slugs={[
         '/tutorials/build-site-app',
         '/tutorials/build-your-own-posthog-app',
@@ -176,7 +177,7 @@ One unique advantage of PostHog is that, because it is open source, it’s easy 
         'platform.integrations.snowflake',
         'platform.integrations.bigquery',
         'platform.integrations.rudderstack',
-        { label: 'Airbyte', description: 'Extract and load data to external platforms', values: ['', ''] },
+        'platform.integrations.airbyte',
     ]}
 />
 
@@ -190,10 +191,10 @@ Below, we've listed a few of the most popular integrations used across PostHog a
         'platform.integrations.hubspot',
         'platform.integrations.salesforce',
         'platform.integrations.zapier',
-        { label: 'Shopify', description: 'Sync customer and order data', values: ['', ''] },
+        'platform.integrations.shopify',
         'platform.integrations.stripe',
         'platform.integrations.slack',
-        { label: 'Discord', description: 'Receive notifications about new data', values: ['', ''] },
+        'platform.integrations.discord',
         'platform.integrations.microsoft_teams',
         'platform.integrations.intercom',
         'platform.integrations.customer_io',
@@ -231,21 +232,14 @@ Autocapture is preferred by many users because it's faster to set up, but some a
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
     rows={[
-        { label: 'Event tracking', description: 'Track manually instrumented events', values: ['', ''] },
-        { label: 'Autocapture', description: 'Automatically track events without instrumentation', values: ['', ''] },
-        {
-            label: 'Combined events (actions)',
-            description: 'Track related events as a single trackable action or behavior',
-            values: ['', ''],
-        },
-        {
-            label: 'Send events from your own domain',
-            description: "Ensure ad blockers don't block data capture",
-            values: ['', ''],
-        },
-        { label: 'Cross-domain tracking', description: 'Track users across domains and subdomains', values: ['', ''] },
-        { label: 'Server-side tracking', description: 'Send events from your server', values: ['', ''] },
-        { label: 'Capture API', description: 'Send events through an API', values: ['', ''] },
+        'product_analytics.features.custom_events',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.actions',
+        'platform.deployment.reverse_proxy',
+        'platform.developer.cross_domain_tracking',
+        'platform.developer.server_side_sdks',
+        'platform.developer.api',
+        { label: 'Capture API', description: 'Send events through an API', values: [true, true] },
     ]}
 />
 
@@ -256,13 +250,15 @@ PostHog supports a wide range of client and server libraries, but not all featur
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
     rows={[
-        { label: 'JavaScript', values: ['', ''] },
-        { label: 'React Native', values: ['', ''] },
-        { label: 'React', values: ['', ''] },
-        { label: 'Flutter', values: ['', ''] },
-        { label: 'iOS', values: ['', ''] },
-        { label: 'Android', values: ['', ''] },
-        { label: 'Ruby', values: ['', ''] },
+        { label: 'Web' },
+        'platform.libraries.javascript',
+        'platform.libraries.react',
+        'platform.libraries.ruby',
+        { label: 'Mobile' },
+        'platform.libraries.android',
+        'platform.libraries.flutter',
+        'platform.libraries.ios',
+        'platform.libraries.react_native',
     ]}
 />
 

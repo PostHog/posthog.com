@@ -9,8 +9,9 @@ export const pendo = {
         product_analytics: {
             available: true,
             features: {
+                actions: false,
                 advertising_analytics: false,
-                autocapture: false,
+                autocapture: true,
                 cohorts: true,
                 custom_events: true,
                 custom_properties: true,
@@ -62,12 +63,21 @@ export const pendo = {
         },
         web_analytics: {
             available: false,
+            features: {
+                utm_tracking: true,
+            },
+        },
+        dashboards: {
+            available: true,
         },
         session_replay: {
             available: true,
         },
         surveys: {
             available: true,
+            features: {
+                in_app_prompts_messages: true,
+            },
         },
         feature_flags: {
             available: false,
@@ -78,8 +88,21 @@ export const pendo = {
     },
     platform: {
         deployment: {
+            eu_hosting: true,
             open_source: false,
+            reverse_proxy: true,
             self_host: false,
+        },
+        libraries: {
+            features: {
+                android: true,
+                flutter: true,
+                ios: true,
+                javascript: true,
+                react: true,
+                react_native: true,
+                ruby: false,
+            },
         },
         pricing: {
             free_tier: true,
@@ -87,12 +110,14 @@ export const pendo = {
             usage_based_pricing: false,
         },
         integrations: {
+            airbyte: false,
             azure_blob: false,
             bigquery: true,
             ci_cd_integrations: false,
             community_integrations: false,
             customer_io: false,
             datadog: false,
+            discord: false,
             exports: true,
             gcs: false,
             google_ads: false,
@@ -106,6 +131,7 @@ export const pendo = {
             salesforce: true,
             segment: true,
             sentry: false,
+            shopify: false,
             slack: true,
             snowflake: true,
             stripe: false,
@@ -113,6 +139,8 @@ export const pendo = {
             zendesk: false,
         },
         security: {
+            cookieless_tracking: false,
+            data_anonymization: true,
             gdpr_ready: true,
             hipaa_ready: true,
             history_audit_logs: false,
@@ -125,10 +153,12 @@ export const pendo = {
             built_in_analytics: false,
         },
         developer: {
-            api: false,
+            api: true,
+            cross_domain_tracking: true,
             notebooks: false,
             proxies: false,
             sdks: false,
+            server_side_sdks: true,
             sql: false,
         },
     },
