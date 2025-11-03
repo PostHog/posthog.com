@@ -70,6 +70,7 @@ The Grantable team is following a familiar PostHog pattern: start with one produ
 
 ## Why this matters (to Grantable and to us)
 Grantable isn’t just “using a new feature.” They’re reshaping their operating rhythm around PostHog.
+
 A few things stand out:
 - Workflows is credible for production, not just prototyping.
 *“We’re already running onboarding email off it, in alpha. We would never have put onboarding into Zapier."* 
