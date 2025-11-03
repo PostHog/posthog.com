@@ -13,6 +13,7 @@ import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { Heading } from 'components/Heading'
 import TutorialsSlider from 'components/TutorialsSlider'
+import TutorialsList from 'components/TutorialsList'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import { useLayoutData } from 'components/Layout/hooks'
 import Title from 'components/Edition/Title'
@@ -307,6 +308,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         ),
         a: A,
         TutorialsSlider,
+        TutorialsList,
         NewsletterForm,
         BuiltBy,
         TeamMember,
