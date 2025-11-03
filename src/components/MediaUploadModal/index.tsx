@@ -720,7 +720,7 @@ export default function MediaUploadModal() {
                     </div>
 
                     <div className="flex flex-col">
-                        <div className="flex items-center justify-between mb-2">
+                        {/* <div className="flex items-center justify-between mb-2">
                             <div>
                                 <h3 className="m-0">{showAllUploads ? 'All uploads' : 'Your uploads'}</h3>
                                 <p className="text-sm text-secondary mt-1">Recent uploads to Cloudinary</p>
@@ -743,7 +743,7 @@ export default function MediaUploadModal() {
                                     All uploads
                                 </button>
                             </div>
-                        </div>
+                        </div> */}
 
                         <div className="flex gap-2 mb-4">
                             <div className="relative flex-grow">
