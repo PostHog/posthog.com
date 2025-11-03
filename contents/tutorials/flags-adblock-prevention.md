@@ -5,8 +5,6 @@ showTitle: true
 date: 2025-11-03
 author:
   - dustin-byrne
-showTitle: true
-sidebar: Docs
 tags:
   - feature flags
   - configuration
