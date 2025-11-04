@@ -30,7 +30,6 @@ But not quite the kind I expected.
 ![reply to my email 1](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_alpha3_8f3453dfbd.png)
 ![reply to my email 2](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_alpha2_dcc58991c0.png)
 ![reply to my email 3](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_alpha4_4174b14490.png)
----
 
 So yes, my workflow worked – a little too well.  
 Luckily, only a few users experienced the spam storm, and most took it as a joke (thankfully reducing my panic level from “delete everything” to “mild existential dread”).  
