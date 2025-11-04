@@ -25,7 +25,7 @@ It looked like this:
 
 I was genuinely excited to see how users would react.  
 Maybe some quick replies. Maybe some feedback.
-And… I got replies all right.  2
+And… I got replies all right.
 But not quite the kind I expected.
 ![reply to my email 1](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_alpha3_8f3453dfbd.png)
 ![reply to my email 2](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_alpha2_dcc58991c0.png)
