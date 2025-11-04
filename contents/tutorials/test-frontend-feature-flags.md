@@ -108,7 +108,7 @@ import React from 'react';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import posthog from 'posthog-js';
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import App from './App';
 
 posthog.init(
@@ -133,12 +133,12 @@ With this setup, events are automatically captured, and we can set up our [React
 
 In PostHog, go to the "Feature Flags" tab and click the "New feature flag" button. Set the key to `test-flag` and the release condition to 100% of users then click "Save."
 
-With the flag created, go to  `src/App.jsx` in our React app, import `useFeatureFlagEnabled` from `posthog-js/react`, and use it to check the `test-flag`. We have access to this because we set up the `PostHogProvider` earlier. We then conditionally render either a link to PostHog if the flag is enabled or the default "Learn React" link if not. This looks like this:
+With the flag created, go to  `src/App.jsx` in our React app, import `useFeatureFlagEnabled` from `@posthog/react`, and use it to check the `test-flag`. We have access to this because we set up the `PostHogProvider` earlier. We then conditionally render either a link to PostHog if the flag is enabled or the default "Learn React" link if not. This looks like this:
 
 ```js
 // src/App.jsx
 import './App.css';
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+import { useFeatureFlagEnabled } from '@posthog/react'
 
 function App() {
   const flagEnabled = useFeatureFlagEnabled('test-flag')
@@ -192,7 +192,7 @@ import App from './App';
 
 const mockUseFeatureFlagEnabled = vi.fn()
 
-vi.mock('posthog-js/react', () => ({
+vi.mock('@posthog/react', () => ({
     useFeatureFlagEnabled: () => mockUseFeatureFlagEnabled(),
 }))
 

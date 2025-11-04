@@ -16,10 +16,10 @@ Currently, all revenue dashboards can be found in Metabase (though we hope to ha
 
 ## Important dashboards
 (these require internal access)
-- [General overview](http://metabase-prod-us/dashboard/1-overview): Useful to see our ARR graph and get quick links to dig into revenue for certain months.
-- [Revenue lifecycle](http://metabase-prod-us/dashboard/38-revenue-lifecycle-deep-dive-dashboard): Useful to see trends over time for churn, expansion, new revenue, etc.
-- [Product-specific analysis](http://metabase-prod-us/dashboard/39-revenue-growth-by-product) (pick your product and date [month] at the top!): Kind of a combination of the above two, but for a specific product
-- [Revenue by customer bucket](http://metabase-prod-us/dashboard/40-revenue-growth-by-customer-spend-size): Useful for understanding trends in contract size for financial modeling, support, etc
+- [General overview](https://metabase.prod-us.posthog.dev/dashboard/1-overview): Useful to see our ARR graph and get quick links to dig into revenue for certain months.
+- [Revenue lifecycle](https://metabase.prod-us.posthog.dev/dashboard/38-revenue-lifecycle-deep-dive-dashboard): Useful to see trends over time for churn, expansion, new revenue, etc.
+- [Product-specific analysis](https://metabase.prod-us.posthog.dev/dashboard/39-revenue-growth-by-product) (pick your product and date [month] at the top!): Kind of a combination of the above two, but for a specific product
+- [Revenue by customer bucket](https://metabase.prod-us.posthog.dev/dashboard/40-revenue-growth-by-customer-spend-size): Useful for understanding trends in contract size for financial modeling, support, etc
 
 ## FAQ
 

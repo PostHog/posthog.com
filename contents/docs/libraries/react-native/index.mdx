@@ -330,6 +330,8 @@ To set up [session replay](/docs/session-replay/mobile) in your project, all you
 
 To set up surveys, follow the [additional installation instructions for React Native](/docs/surveys/installation?tab=React+Native). Surveys launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
 
+> Note: URL and CSS selector targeting are not supported in React Native. Surveys that rely on these conditions will not appear.
+
 ## Disabling for local development
 
 You may want to disable PostHog when working locally or in a test environment. You can do this by setting the `disable` option to `true` when initializing PostHog. Helpfully this allows you to continue using `usePostHog` and safely calling it without anything actually happening.

@@ -38,7 +38,7 @@ export const MaxCTA = ({ className = '', children, question }: MaxCTAProps): JSX
                     href={maxUrl}
                     externalNoIcon
                 >
-                    Ask with Max
+                    Ask PostHog AI
                     <IconOpenSidebar className="size-6 inline-block opacity-75 group-hover:opacity-100" />
                 </CallToAction>
             </aside>

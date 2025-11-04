@@ -185,6 +185,8 @@ For customers in an annual contract but paying quarterly we require them to pay 
 
 ## Contract buyouts
 
+> **Want to speak to us about a contract buyout?** Get in touch with the Sales team via your shared Slack channel, or [reach out directly](/talk-to-a-human).
+
 Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
 
 Some rules:
@@ -228,6 +230,9 @@ For any of the above scenarios you should use our [discounting principles](contr
 ### When they will end the contract term with credit remaining
 
 We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher spend than the original contract.
+
+### When a customer doesn't renew their credit purchase
+When a customer chooses not to renew a prepaid credit contract we automatically remove any remaining credits on the expiry date. Their account will then roll onto our standard monthly plan and they'll be charged for usage. It's the customer's responsibility to stop sending us events or cancel their subscription and downgrade to the free tier if they don't want to keep paying.
 
 ## Varying contractual terms
 

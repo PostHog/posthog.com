@@ -1,10 +1,10 @@
 > For Next.js, we recommend following the [Next.js integration guide](/docs/integrate/next-js) instead.
 
-1. Install [`posthog-js`](https://github.com/posthog/posthog-js) using your package manager:
+1. Install [`posthog-js`](https://github.com/posthog/posthog-js) and `@posthog/react` using your package manager:
 
-import InstallWebPackageManagers from "./install-web-package-managers.mdx"
+import InstallReactPackageManagers from "./install-react-package-managers.mdx"
 
-<InstallWebPackageManagers />
+<InstallReactPackageManagers />
 
 2. Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key and host in [your project settings](https://us.posthog.com/settings/project). Including `VITE_PUBLIC_` in their names ensures they are accessible in the frontend.
 
@@ -22,7 +22,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import posthog from 'posthog-js';
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
@@ -49,7 +49,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 <details>
   <summary>Using React Router v7?</summary>
 
-  You need to set `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file to avoid SSR errors.
+  You need to set `posthog-js` and `@posthog/react` as external packages in your `vite.config.ts` file to avoid SSR errors.
 
   ```ts file=vite.config.ts
   // ... imports
@@ -57,7 +57,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
   export default defineConfig({
     plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
     ssr: {
-      noExternal: ['posthog-js', 'posthog-js/react']
+      noExternal: ['posthog-js', '@posthog/react']
     }
   });
   ``` 

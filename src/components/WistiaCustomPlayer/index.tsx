@@ -10,10 +10,12 @@ import {
 import { Select } from 'components/RadixUI/Select'
 import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
+import usePostHog from 'hooks/usePostHog'
 
 interface WistiaCustomPlayerProps {
     mediaId: string
     aspectRatio?: number
+    theme?: 'light' | 'dark' | 'auto'
     className?: string
     autoPlay?: boolean
     muted?: boolean
@@ -37,6 +39,7 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
         {
             mediaId,
             aspectRatio = 1.7777777777777777,
+            theme = 'auto',
             className = '',
             autoPlay = false,
             muted = false,
@@ -67,6 +70,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
         const [showCaptionSearch, setShowCaptionSearch] = useState(false)
         const [captionSearchQuery, setCaptionSearchQuery] = useState('')
         const [isReady, setIsReady] = useState(false)
+        const hasTrackedPlayRef = useRef(false)
+        const posthog = usePostHog()
 
         // Store initial props in refs to use them without causing re-renders
         const autoPlayRef = useRef(autoPlay)
@@ -429,7 +434,23 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                         }
 
                         // Bind event listeners
-                        video.bind('play', () => setIsPlaying(true))
+                        video.bind('play', () => {
+                            setIsPlaying(true)
+
+                            // Track video play event in PostHog (only once per session)
+                            if (!hasTrackedPlayRef.current && posthog && typeof posthog.capture === 'function') {
+                                hasTrackedPlayRef.current = true
+
+                                // Get video title from Wistia
+                                const videoTitle = video.name?.() || video._impl?.data?.media?.name || 'Unknown'
+
+                                posthog.capture('Played video', {
+                                    video_source: 'wistia',
+                                    video_id: mediaId,
+                                    video_title: videoTitle,
+                                })
+                            }
+                        })
                         video.bind('pause', () => setIsPlaying(false))
                         video.bind('end', () => setIsPlaying(false))
                         video.bind('timechange', (t: number) => {
@@ -664,7 +685,10 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
         if (isPreview) {
             return (
                 <div className={`flex flex-col overflow-hidden ${className}`}>
-                    <div className="relative bg-black" style={{ paddingTop: `${(1 / aspectRatio) * 100}%` }}>
+                    <div
+                        className={`relative ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}
+                        style={{ paddingTop: `${(1 / aspectRatio) * 100}%` }}
+                    >
                         <div className="absolute inset-0 flex items-center justify-center">
                             {/* Wistia thumbnail */}
                             <img
@@ -676,15 +700,37 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                     e.currentTarget.src = `https://embedwistia-a.akamaihd.net/deliveries/${mediaId}/thumbnail.jpg?width=640`
                                 }}
                             />
-                            <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                            <div
+                                className={`absolute inset-0 ${
+                                    theme === 'dark' ? 'bg-black/30' : 'bg-white/30'
+                                } flex items-center justify-center`}
+                            >
                                 <div className="bg-black/50 rounded-full p-4">
-                                    <IconPlayFilled className="w-8 h-8 text-white" />
+                                    <IconPlayFilled
+                                        className={`w-8 h-8 ${
+                                            theme === 'dark'
+                                                ? 'text-white'
+                                                : theme === 'light'
+                                                ? 'text-black'
+                                                : 'text-secondary'
+                                        }`}
+                                    />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="bg-gray-dark p-3">
-                        <div className="text-center text-white/60 text-xs">Video Player Preview</div>
+                        <div
+                            className={`text-center ${
+                                theme === 'dark'
+                                    ? 'text-white/60'
+                                    : theme === 'light'
+                                    ? 'text-black/60'
+                                    : 'text-secondary/60'
+                            } text-xs`}
+                        >
+                            Video Player Preview
+                        </div>
                     </div>
                 </div>
             )
@@ -693,7 +739,10 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
         return (
             <div className={`flex flex-col ${className}`}>
                 {/* Video container */}
-                <div className="relative bg-black" style={{ paddingTop: `${(1 / aspectRatio) * 100}%` }}>
+                <div
+                    className={`relative ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}
+                    style={{ paddingTop: `${(1 / aspectRatio) * 100}%` }}
+                >
                     <div className="absolute inset-0">
                         {/* Wistia player container */}
                         <div ref={containerRef} className="w-full h-full" />
@@ -710,14 +759,22 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                 style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
                             >
                                 {/* Playhead */}
-                                <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-3 h-3 bg-white rounded-full shadow-lg pointer-events-none" />
+                                <div
+                                    className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-3 h-3 ${
+                                        theme === 'dark' ? 'bg-white' : theme === 'light' ? 'bg-black' : 'bg-secondary'
+                                    } rounded-full shadow-lg pointer-events-none`}
+                                />
                             </div>
                         </div>
 
                         {/* Top controls */}
                         <div className="absolute top-2 right-2 flex gap-2">
                             {/* Volume controls */}
-                            <div className="flex items-center gap-1 bg-black/50 rounded px-2 py-1">
+                            <div
+                                className={`flex items-center gap-1 ${
+                                    theme === 'dark' ? 'bg-black/50' : 'bg-white/50'
+                                } rounded px-2 py-1`}
+                            >
                                 <OSButton
                                     onClick={handleMuteToggle}
                                     variant="default"
@@ -745,7 +802,15 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                     {/* Play button and time display */}
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3 shrink-0 basis-60">
-                            <span className="!text-white text-sm font-mono">
+                            <span
+                                className={`${
+                                    theme === 'dark'
+                                        ? '!text-white'
+                                        : theme === 'light'
+                                        ? '!text-black'
+                                        : '!text-secondary'
+                                } text-sm font-mono`}
+                            >
                                 {formatTime(currentTime)} / {formatTime(duration)}
                             </span>
                         </div>
@@ -756,7 +821,13 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                 variant="default"
                                 size="md"
                                 icon={isPlaying ? <IconPauseFilled /> : <IconPlayFilled />}
-                                className="bg-white text-secondary rounded-full w-8 h-8"
+                                className={`${
+                                    theme === 'dark'
+                                        ? '!bg-white !text-black'
+                                        : theme === 'light'
+                                        ? '!bg-black/75 !text-white'
+                                        : '!bg-black/75 !text-white dark:!bg-white dark:!text-black'
+                                } rounded-full w-8 h-8`}
                                 zoomHover="lg"
                                 // tooltip={isPlaying ? 'Pause' : 'Play'}
                             />
@@ -771,7 +842,13 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                     value=""
                                     groups={chapterGroups}
                                     placeholder="Chapters"
-                                    className="!text-white bg-black/50"
+                                    className={`${
+                                        theme === 'dark'
+                                            ? '!text-white bg-black/50'
+                                            : theme === 'light'
+                                            ? '!text-black bg-white/50'
+                                            : '!text-secondary bg-black/50'
+                                    }`}
                                     dataScheme="tertiary"
                                 />
                             )}
@@ -793,7 +870,13 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                 }}
                                 variant="default"
                                 size="lg"
-                                className="!text-white px-2 py-1 text-xs font-medium"
+                                className={`${
+                                    theme === 'dark'
+                                        ? '!text-white'
+                                        : theme === 'light'
+                                        ? '!text-black'
+                                        : '!text-secondary'
+                                } px-2 py-1 text-xs font-medium`}
                             >
                                 {playbackRate}x
                             </OSButton>
@@ -804,7 +887,13 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                 variant="default"
                                 size="lg"
                                 icon={showCaptions ? <IconClosedCaptionsFilled /> : <IconClosedCaptions />}
-                                className="!text-white p-1.5"
+                                className={`${
+                                    theme === 'dark'
+                                        ? '!text-white'
+                                        : theme === 'light'
+                                        ? '!text-black'
+                                        : '!text-secondary'
+                                } p-1.5`}
                                 tooltip={showCaptions ? 'Hide captions' : 'Show captions'}
                             />
 
@@ -855,11 +944,23 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
 
                     {/* Caption display area */}
                     {showCaptions && !showCaptionSearch && (
-                        <div className="text-center text-white text-sm pt-4 px-4 min-h-[32px] flex items-center justify-center">
+                        <div
+                            className={`text-center ${
+                                theme === 'dark' ? 'text-white' : theme === 'light' ? 'text-black' : 'text-secondary'
+                            } text-sm pt-4 px-4 min-h-[32px] flex items-center justify-center`}
+                        >
                             {captionText ? (
                                 <p className="text-2xl font-medium">{captionText}</p>
                             ) : (
-                                <p className="!text-white/30 text-xs italic">
+                                <p
+                                    className={`${
+                                        theme === 'dark'
+                                            ? '!text-white/30'
+                                            : theme === 'light'
+                                            ? '!text-black/30'
+                                            : '!text-secondary/30'
+                                    } text-xs italic`}
+                                >
                                     {captions.length > 0 ? '' : 'No captions available'}
                                 </p>
                             )}
@@ -880,7 +981,13 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                 size="lg"
                                 showClearButton
                                 onClear={() => setCaptionSearchQuery('')}
-                                className="text-primary"
+                                className={`${
+                                    theme === 'dark'
+                                        ? 'text-white'
+                                        : theme === 'light'
+                                        ? 'text-black'
+                                        : 'text-secondary'
+                                }`}
                             />
                         </div>
                     )}

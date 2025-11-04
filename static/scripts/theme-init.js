@@ -7,7 +7,6 @@
         window.__onThemeChange(newTheme)
     }
     var preferredTheme
-    var slug = window.location.pathname.substring(1)
     var darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
     darkQuery.addListener(function (e) {
         if (!localStorage.getItem('theme')) {

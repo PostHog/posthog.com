@@ -1,7 +1,7 @@
 import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
 
-export const MaxExampleCards = [
+export const PostHogAIExampleCards = [
     {
         top: 'What changed across my product this week?',
         bottom: (

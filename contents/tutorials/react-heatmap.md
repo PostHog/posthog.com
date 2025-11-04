@@ -59,7 +59,7 @@ npm i posthog-js
 
 After installing, go to `src/main.jsx` and set up the PostHog provider. To do this:
 
-1. Import `posthog` from `posthog-js` and the `PostHogProvider` from `posthog-js/react`
+1. Import `posthog` from `posthog-js` and the `PostHogProvider` from `@posthog/react`
 2. Initialize `posthog` with your project API key and host from [your project settings](https://us.posthog.com/settings/project).
 3. Wrap your `App` component in the `PostHogProvider` with the initialized `posthog` as a `client` property
 
@@ -70,7 +70,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',

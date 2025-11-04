@@ -56,6 +56,7 @@ While there is no fixed budget for onboardings they should be relatively less ex
 -   Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible
 -   Consider doing more casual social activities that are less expensive: dinners, drinks etc
 -   You can request budget for the team lead +1 more team member as an onboarding budget, any other team members joining can use their working together budget (be mindful that onboardings are distracting so the more team members you have join, the less productive the team will be that week, you also have offsites for the team to all get together).
+    -   Create a Slack channel for the onboarding (`#onboarding-[who]-[team]-[month]-[year]-[where]`) add everyone who’s going 
 -   The new team member already has their own onboarding budget to book their flights and accommodation, so do not include them in the budget.
 -   See if there are any other onboardings at the same time you could pair up with
 
@@ -70,6 +71,7 @@ Your first week can definitely be a bit overwhelming at any new company, so here
 - You will get all your equipment set up and get access to all the accounts you need
 - You will receive your new hire kit (which includes [No Rules Rules](https://www.penguin.co.uk/books/439530/no-rules-rules-by-meyer-reed-hastings-and-erin/9780753560969) which we encourage everyone to read as it gives you a great insight into how we work as a company
 - You should try and set up a few calls with a range of people to introduce yourself
+- You should try and speak to some actual users of your product. Your manager or PM will help you set these up, and this can be a great source of things to work on in your first week.
 - You should dive straight in, fix a typo in the handbook, ship a tiny bug fix, anything to get you going! 
 
 ### Engineering
@@ -121,7 +123,7 @@ We use a number of different tools to organise our work and communicate at PostH
 ### Engineering
 
 -   AWS
--   PagerDuty
+-   Incident.io
 -   Heroku
 -   Grafana
 
@@ -238,6 +240,7 @@ Below are a list of Slack channels you may find helpful:
 -   `#general`
 -   `#alerts`
 -   `#industry-news`
+-   `#changelog` - keep up with all the cool things we're shipping across the team
 
 ### Social channels
 
