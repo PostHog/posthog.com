@@ -210,7 +210,9 @@ export const posthog = {
                 },
                 group_analytics: {
                     available: true,
-                    features: {},
+                    features: {
+                        group_by_events: true,
+                    },
                 },
                 insights: {
                     available: true,

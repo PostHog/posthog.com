@@ -154,6 +154,7 @@ export const logrocket = {
     },
     platform: {
         deployment: {
+            eu_hosting: true,
             open_source: false,
             self_host: false,
             reverse_proxy: true,
@@ -171,6 +172,7 @@ export const logrocket = {
         },
         pricing: {
             free_tier: true,
+            self_serve: true,
             transparent_pricing: false,
             usage_based_pricing: true,
         },

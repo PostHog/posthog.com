@@ -348,7 +348,7 @@ export const amplitude = {
         },
         pricing: {
             free_tier: true,
-            self_serve: 'Starter plans only',
+            self_serve: 'Starter, Plus plans only',
             transparent_pricing: false,
             usage_based_pricing: true,
         },

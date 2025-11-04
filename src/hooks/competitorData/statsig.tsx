@@ -197,7 +197,7 @@ export const statsig = {
                     features: {},
                 },
                 group_analytics: {
-                    available: true,
+                    available: false,
                     features: {},
                 },
             },
@@ -278,6 +278,7 @@ export const statsig = {
             free_tier: false,
             transparent_pricing: false,
             usage_based_pricing: true,
+            self_serve: true,
         },
         developer: {
             api: false,

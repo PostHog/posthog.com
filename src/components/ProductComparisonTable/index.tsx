@@ -28,7 +28,9 @@ import { mixpanel } from '../../hooks/competitorData/mixpanel'
 import { heap } from '../../hooks/competitorData/heap'
 import { pendo } from '../../hooks/competitorData/pendo'
 import { ga4 } from '../../hooks/competitorData/ga4'
+import { glassbox } from '../../hooks/competitorData/glassbox'
 import { vwo } from '../../hooks/competitorData/vwo'
+import { smartlook } from '../../hooks/competitorData/smartlook'
 import { sprig } from '../../hooks/competitorData/sprig'
 import { segment } from '../../hooks/competitorData/segment'
 import { mparticle } from '../../hooks/competitorData/mparticle'
@@ -429,7 +431,9 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         heap,
         pendo,
         ga4,
+        glassbox,
         vwo,
+        smartlook,
         sprig,
         segment,
         mparticle,

@@ -376,6 +376,7 @@ export const mixpanel = {
     },
     platform: {
         deployment: {
+            eu_hosting: true,
             managed_reverse_proxy: false,
             open_source: 'Libraries only',
             self_host: false,
@@ -384,6 +385,7 @@ export const mixpanel = {
             free_tier: true,
             transparent_pricing: false,
             usage_based_pricing: true,
+            self_serve: true,
         },
         integrations: {
             ci_cd_integrations: false,

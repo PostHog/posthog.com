@@ -56,7 +56,7 @@ export const pendo = {
                     features: {},
                 },
                 group_analytics: {
-                    available: true,
+                    available: false,
                     features: {},
                 },
             },
@@ -88,7 +88,7 @@ export const pendo = {
     },
     platform: {
         deployment: {
-            eu_hosting: true,
+            eu_hosting: 'Enterprise only',
             open_source: false,
             reverse_proxy: true,
             self_host: false,
@@ -108,6 +108,7 @@ export const pendo = {
             free_tier: true,
             transparent_pricing: false,
             usage_based_pricing: false,
+            self_serve: true,
         },
         integrations: {
             airbyte: false,
