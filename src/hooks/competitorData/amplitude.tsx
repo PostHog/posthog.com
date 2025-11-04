@@ -25,6 +25,7 @@ export const amplitude = {
                 insights: {
                     available: true,
                     features: {
+                        ai_insight_builder: true,
                         formula_mode: 'Growth plan or higher',
                         ready_made_insight_types: true,
                         sampling: false,
@@ -374,6 +375,7 @@ export const amplitude = {
             gdpr_ready: true,
             hipaa_ready: true,
             history_audit_logs: true,
+            role_based_access_control: true,
             saml_sso: 'Enterprise',
             soc2_certified: true,
             two_factor_auth: true,
@@ -390,7 +392,7 @@ export const amplitude = {
         },
         tools: {
             cms: '',
-            notebooks: false,
+            notebooks: true,
             project_management_tools: '',
         },
     },

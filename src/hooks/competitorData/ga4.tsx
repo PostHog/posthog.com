@@ -52,6 +52,7 @@ export const ga4 = {
                 insights: {
                     available: true,
                     features: {
+                        ai_insight_builder: true,
                         formula_mode: false,
                         ready_made_insight_types: true,
                         sampling: false,

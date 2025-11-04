@@ -288,6 +288,7 @@ export const heap = {
             gdpr_ready: true,
             hipaa_ready: true,
             history_audit_logs: true,
+            role_based_access_control: true,
             saml_sso: true,
             soc2_certified: true,
             two_factor_auth: true,
