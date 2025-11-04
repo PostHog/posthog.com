@@ -132,6 +132,17 @@ retention_period_days
 - Deprecated, no usage (maybe except very old, long-lived hobby installs but unlikely and totally unsupported)
 
 ### PostgreSQL
+
+PostgreSQL writes happen when:
+
+  1. User pins to playlist → Immediate write
+  2. User requests persistence → Immediate write + background LTS copy task
+  3. Auto-trigger on save → Background LTS copy task (via post_save signal)
+  4. Periodic sweep → Finds recordings 24hrs-90days old without LTS path, queues background tasks
+
+Note: Regular session recordings (not pinned/persisted) do NOT write to PostgreSQL - they only exist in
+ClickHouse session_replay_events table until explicitly pinned or persisted as LTS.
+  
 **`posthog_sessionrecording`** model:
 - session_id (unique), team_id
 - object_storage_path (for LTS recordings)
