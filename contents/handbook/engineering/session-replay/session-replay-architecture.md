@@ -11,7 +11,7 @@ showTitle: true
 **PostHog-JS** uses **rrweb** (record and replay the web) to:
 - Serialize DOM into JSON snapshots
 - Capture full snapshots (complete DOM state) + incremental snapshots (mutations/interactions)
-- Track clicks, keypresses, mouse activity, console logs
+- Track clicks, keypresses, mouse activity, console logs, network requests
 - Batch events into `$snapshot_items` arrays with a `$session_id` (UUIDv7)
 - Send to `/s/` (replay capture endpoint) via `$snapshot` events
 
