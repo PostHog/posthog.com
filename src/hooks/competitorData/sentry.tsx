@@ -82,7 +82,7 @@ export const sentry = {
             analysis: {
                 features: {
                     console_logs: true,
-                    performance_monitoring: false,
+                    performance_monitoring: true,
                     network_monitor: false,
                     dom_explorer: false,
                 },
@@ -237,6 +237,7 @@ export const sentry = {
             free_tier: 'Limited',
             transparent_pricing: false,
             usage_based_pricing: false,
+            self_serve: true,
         },
         developer: {
             api: true,

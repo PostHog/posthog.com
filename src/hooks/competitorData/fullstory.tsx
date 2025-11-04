@@ -38,6 +38,7 @@ export const fullstory = {
                         sampling: false,
                         sql_editor: false,
                     },
+                    alerts: true,
                 },
                 trends: {
                     available: true,
@@ -147,6 +148,12 @@ export const fullstory = {
         },
         experiments: {
             available: false,
+        },
+        error_tracking: {
+            available: false,
+            features: {
+                issue_management: false,
+            },
         },
         dashboards: {
             available: true,

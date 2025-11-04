@@ -29,6 +29,7 @@ export const hotjar = {
                         sampling: false,
                         sql_editor: false,
                     },
+                    alerts: false,
                 },
                 trends: {
                     available: true,
@@ -68,14 +69,14 @@ export const hotjar = {
         session_replay: {
             available: true,
             pricing: {
-                free_tier: true,
+                free_tier: '35/day',
             },
             features: {
                 canvas_recording: false,
                 chat_with_recordings: false,
                 clickmaps: false,
                 conditional_recording: false,
-                event_timeline: false,
+                event_timeline: true,
                 export_to_json: true,
                 export_to_video: false,
                 filter_by_user_or_event: false,
@@ -193,6 +194,12 @@ export const hotjar = {
         },
         data_warehouse: {
             available: false,
+        },
+        error_tracking: {
+            available: false,
+            features: {
+                issue_management: false,
+            },
         },
         dashboards: {
             available: true,

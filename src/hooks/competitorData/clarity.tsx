@@ -16,7 +16,7 @@ export const clarity = {
                 chat_with_recordings: false,
                 clickmaps: false,
                 conditional_recording: false,
-                event_timeline: false,
+                event_timeline: true,
                 export_to_json: false,
                 export_to_video: false,
                 filter_by_user_or_event: true,
@@ -63,6 +63,40 @@ export const clarity = {
                     ai_summaries: true,
                 },
             },
+        },
+        heatmaps: {
+            available: true,
+            features: {
+                rage_clicks: true,
+                scrollmaps: true,
+            },
+        },
+        surveys: {
+            available: false,
+            features: {
+                feedback_button: false,
+            },
+            platforms: {
+                features: {
+                    web: false,
+                    mobile: false,
+                },
+            },
+        },
+        product_analytics: {
+            available: false,
+        },
+        web_analytics: {
+            available: false,
+        },
+        feature_flags: {
+            available: false,
+        },
+        experiments: {
+            available: false,
+        },
+        error_tracking: {
+            available: false,
         },
     },
     platform: {

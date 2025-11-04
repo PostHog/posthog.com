@@ -12,8 +12,7 @@ tags:
     - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
@@ -53,74 +52,22 @@ Both PostHog and Matomo are multi-product platforms. The big difference between 
 
 Another big difference is pricing. Matomo is only free to self-host. On top of this, features like session replays, heatmaps, and A/B testing are only available as paid add-ons in Matomo, but are free to use in PostHog.
 
-<ComparisonTable column1="PostHog" column2="Matomo">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Autocapture"
-        description="Capture clicks and pageviews without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Search tools"
-        description="Get keyword data and track search ad performance"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'matomo']}
+    rows={[
+        'platform.pricing.free_tier',
+        'web_analytics',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.cohorts',
+        'web_analytics.features.search_tools',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 ### Why do companies use PostHog?
 
@@ -171,74 +118,22 @@ Because Piwik Pro spun out of Matomo, they share a lot of similarities.
 
 Since the split, Piwik Pro has grown to focus more on compliance and integration with other tools. This shows in some of the features it lacks, such as A/B testing and session replay. It also isn't open source.
 
-<ComparisonTable column1="Piwik Pro" column2="Matomo">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Autocapture"
-        description="Capture clicks and pageviews without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Search tools"
-        description="Get keyword data and track search ad performance"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['piwik_pro', 'matomo']}
+    rows={[
+        'platform.pricing.free_tier',
+        'web_analytics',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.cohorts',
+        'web_analytics.features.search_tools',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 ### Why do companies use Piwik Pro?
 
@@ -287,74 +182,32 @@ Plausible is also open source and self-hostable. This makes it a popular choice 
 
 Plausible focuses entirely on web analytics. It has a simplified, privacy-focused feature set to do this. This means it lacks many of the more advanced product analytics features Matomo offers.
 
-<ComparisonTable column1="Plausible" column2="Matomo">
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={'Pageviews'}
-        column2={false}
-        feature="Autocapture"
-        description="Capture clicks and pageviews without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={'Keywords'}
-        column2={true}
-        feature="Search tools"
-        description="Get keyword data and track search ad performance"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['plausible', 'matomo']}
+    rows={[
+        'platform.pricing.free_tier',
+        'web_analytics',
+        'product_analytics',
+        {
+            path: 'product_analytics.features.autocapture',
+            label: 'Autocapture',
+            description: 'Capture clicks and pageviews without manual instrumentation',
+            values: ['Pageviews', false],
+        },
+        'product_analytics.features.cohorts',
+        {
+            path: 'web_analytics.features.search_tools',
+            label: 'Search tools',
+            description: 'Get keyword data and track search ad performance',
+            values: ['Keywords', true],
+        },
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 ### Why do companies use Plausible?
 
@@ -405,74 +258,22 @@ A huge 489,524 of the top 1 million sites deploy Google Analytics according to [
 
 Google Analytics that inspired Matomo to be what it is. Matomo has long surpassed Google Analytics in terms of features however, while keeping its focus on control and privacy.
 
-<ComparisonTable column1="Google Analytics" column2="Matomo">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Autocapture"
-        description="Capture clicks and pageviews without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Search tools"
-        description="Get keyword data and track search ad performance"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['ga4', 'matomo']}
+    rows={[
+        'platform.pricing.free_tier',
+        'web_analytics',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.cohorts',
+        'web_analytics.features.search_tools',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 ### Why do companies use Google Analytics?
 
@@ -521,74 +322,22 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Heap), as of Oct
 
 Heap has much more focus on product analytics than Matomo. It lacks a simple web analytics dashboard, but does have autocapture.
 
-<ComparisonTable column1="Heap" column2="Matomo">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Autocapture"
-        description="Capture clicks and pageviews without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Search tools"
-        description="Get keyword data and track search ad performance"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['heap', 'matomo']}
+    rows={[
+        'platform.pricing.free_tier',
+        'web_analytics',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.cohorts',
+        'web_analytics.features.search_tools',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 ### Why do companies use Heap?
 
@@ -635,74 +384,22 @@ Amplitude and Matomo are neck and neck in terms of popularity. According to [Bui
 
 ### How does Amplitude compare to Matomo?
 
-<ComparisonTable column1="Amplitude" column2="Matomo">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Autocapture"
-        description="Capture clicks and pageviews without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Search tools"
-        description="Get keyword data and track search ad performance"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['amplitude', 'matomo']}
+    rows={[
+        'platform.pricing.free_tier',
+        'web_analytics',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.cohorts',
+        'web_analytics.features.search_tools',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 ### Why do companies use Amplitude?
 
@@ -749,74 +446,32 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Fathom-Analytics
 
 Fathom, like Plausible, has a much simpler feature set than Matomo. It focuses on providing the core web analytics features in a privacy-friendly way.
 
-<ComparisonTable column1="Fathom" column2="Matomo">
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={'Limited'}
-        column2={true}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={'Pageviews'}
-        column2={false}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Search tools"
-        description="Get keyword data and track search ad performance"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['fathom', 'matomo']}
+    rows={[
+        'platform.pricing.free_tier',
+        'web_analytics',
+        {
+            path: 'product_analytics',
+            label: 'Product analytics',
+            description: 'Custom events, trends, funnels, paths, and retention',
+            values: ['Limited', true],
+        },
+        {
+            path: 'product_analytics.features.autocapture',
+            label: 'Autocapture',
+            description: 'Capture events without manual instrumentation',
+            values: ['Pageviews', false],
+        },
+        'product_analytics.features.cohorts',
+        'web_analytics.features.search_tools',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 > 💡 **Good to know:** Fathom isn't entirely EU hosted, but instead attempts to stay compliant with European regulation by:
 >
@@ -869,74 +524,27 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Umami), as of Oc
 
 Umami, like Plausible and Fathom, focuses on web analytics. Unlike those two alternatives (and Matomo), it has a free tier. It lacks the full feature set of Matomo however.
 
-<ComparisonTable column1="Umami" column2="Matomo">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={'Pageviews'}
-        column2={false}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Search tools"
-        description="Get keyword data and track search ad performance"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['umami', 'matomo']}
+    rows={[
+        'platform.pricing.free_tier',
+        'web_analytics',
+        'product_analytics',
+        {
+            path: 'product_analytics.features.autocapture',
+            label: 'Autocapture',
+            description: 'Capture events without manual instrumentation',
+            values: ['Pageviews', false],
+        },
+        'product_analytics.features.cohorts',
+        'web_analytics.features.search_tools',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 ### Why do companies use Umami?
 

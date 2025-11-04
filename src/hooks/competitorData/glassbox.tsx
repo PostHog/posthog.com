@@ -14,7 +14,7 @@ export const glassbox = {
                 custom_properties: true,
                 toolbar: false,
                 group_analytics: {
-                    available: true,
+                    available: false,
                 },
                 insights: {
                     available: true,
@@ -23,6 +23,7 @@ export const glassbox = {
                         ready_made_insight_types: true,
                         sql_editor: false,
                     },
+                    alerts: true,
                 },
                 trends: {
                     available: true,
@@ -59,6 +60,11 @@ export const glassbox = {
                 canvas_recording: true,
                 privacy_masking: true,
             },
+            analysis: {
+                features: {
+                    performance_monitoring: true,
+                },
+            },
         },
         heatmaps: {
             available: true,
@@ -73,6 +79,12 @@ export const glassbox = {
         },
         feature_flags: {
             available: false,
+        },
+        error_tracking: {
+            available: false,
+            features: {
+                issue_management: true,
+            },
         },
         dashboards: {
             available: true,

@@ -28,6 +28,7 @@ export const pendo = {
                         sampling: false,
                         sql_editor: false,
                     },
+                    alerts: false,
                 },
                 trends: {
                     available: true,
@@ -62,7 +63,11 @@ export const pendo = {
             },
         },
         heatmaps: {
-            available: true,
+            available: false,
+            features: {
+                rage_clicks: false,
+                scrollmaps: false,
+            },
         },
         web_analytics: {
             available: false,
@@ -75,11 +80,37 @@ export const pendo = {
         },
         session_replay: {
             available: true,
+            pricing: {
+                free_tier: 'None',
+            },
+            features: {
+                event_timeline: true,
+            },
+            platform_support: {
+                features: {
+                    web_app_recordings: true,
+                    mobile_app_recordings: false,
+                },
+            },
+            analysis: {
+                features: {
+                    console_logs: false,
+                    network_monitor: false,
+                    performance_monitoring: false,
+                },
+            },
         },
         surveys: {
             available: true,
             features: {
                 in_app_prompts_messages: true,
+                feedback_button: true,
+            },
+            platforms: {
+                features: {
+                    web: true,
+                    mobile: true,
+                },
             },
         },
         feature_flags: {
@@ -87,6 +118,12 @@ export const pendo = {
         },
         experiments: {
             available: false,
+        },
+        error_tracking: {
+            available: false,
+            features: {
+                issue_management: false,
+            },
         },
     },
     platform: {

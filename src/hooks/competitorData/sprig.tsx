@@ -5,6 +5,40 @@ export const sprig = {
         icon: '/images/competitors/sprig.svg',
     },
     products: {
+        product_analytics: {
+            available: false,
+        },
+        web_analytics: {
+            available: false,
+        },
+        session_replay: {
+            available: true,
+            pricing: {
+                free_tier: 'None',
+            },
+            features: {
+                event_timeline: true,
+            },
+            platform_support: {
+                features: {
+                    web_app_recordings: true,
+                    mobile_app_recordings: 'No Flutter',
+                },
+            },
+            analysis: {
+                features: {
+                    console_logs: false,
+                    network_monitor: false,
+                },
+            },
+        },
+        heatmaps: {
+            available: true,
+            features: {
+                rage_clicks: false,
+                scrollmaps: false,
+            },
+        },
         surveys: {
             available: true,
             features: {
@@ -25,7 +59,23 @@ export const sprig = {
                 target_by_person_property: false,
                 user_targeting: true,
                 user_filtering: true,
+                feedback_button: true,
             },
+            platforms: {
+                features: {
+                    web: true,
+                    mobile: 'No Flutter',
+                },
+            },
+        },
+        feature_flags: {
+            available: false,
+        },
+        experiments: {
+            available: false,
+        },
+        error_tracking: {
+            available: false,
         },
     },
     platform: {

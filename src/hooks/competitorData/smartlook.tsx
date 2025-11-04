@@ -22,6 +22,7 @@ export const smartlook = {
                         ready_made_insight_types: true,
                         sql_editor: false,
                     },
+                    alerts: true,
                 },
                 trends: {
                     available: true,
@@ -58,6 +59,11 @@ export const smartlook = {
                 canvas_recording: true,
                 privacy_masking: true,
             },
+            analysis: {
+                features: {
+                    performance_monitoring: false,
+                },
+            },
         },
         heatmaps: {
             available: true,
@@ -72,6 +78,12 @@ export const smartlook = {
         },
         feature_flags: {
             available: false,
+        },
+        error_tracking: {
+            available: false,
+            features: {
+                issue_management: false,
+            },
         },
         dashboards: {
             available: true,

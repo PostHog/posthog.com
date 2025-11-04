@@ -28,6 +28,7 @@ export const logrocket = {
                         sampling: false,
                         sql_editor: false,
                     },
+                    alerts: true,
                 },
                 trends: {
                     available: true,
@@ -147,6 +148,9 @@ export const logrocket = {
         },
         error_tracking: {
             available: true,
+            features: {
+                issue_management: true,
+            },
         },
         dashboards: {
             available: true,

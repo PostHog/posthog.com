@@ -6,70 +6,73 @@ import { IconArrowUpRight } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
 // Competitor data imports
+import { ab_tasty } from '../../hooks/competitorData/ab_tasty'
 import { adobe_analytics } from '../../hooks/competitorData/adobe_analytics'
-import { posthog } from '../../hooks/competitorData/posthog'
-import { sentry } from '../../hooks/competitorData/sentry'
-import { logrocket } from '../../hooks/competitorData/logrocket'
-import { bugsnag } from '../../hooks/competitorData/bugsnag'
-import { datadog } from '../../hooks/competitorData/datadog'
-import { fullstory } from '../../hooks/competitorData/fullstory'
-import { hotjar } from '../../hooks/competitorData/hotjar'
-import { matomo } from '../../hooks/competitorData/matomo'
-import { clarity } from '../../hooks/competitorData/clarity'
-import { rollbar } from '../../hooks/competitorData/rollbar'
-import { glitchtip } from '../../hooks/competitorData/glitchtip'
-import { signoz } from '../../hooks/competitorData/signoz'
-import { optimizely } from '../../hooks/competitorData/optimizely'
-import { launchdarkly } from '../../hooks/competitorData/launchdarkly'
-import { flagsmith } from '../../hooks/competitorData/flagsmith'
-import { growthbook } from '../../hooks/competitorData/growthbook'
 import { amplitude } from '../../hooks/competitorData/amplitude'
-import { mixpanel } from '../../hooks/competitorData/mixpanel'
-import { heap } from '../../hooks/competitorData/heap'
-import { pendo } from '../../hooks/competitorData/pendo'
+import { baremetrics } from '../../hooks/competitorData/baremetrics'
+import { bugsnag } from '../../hooks/competitorData/bugsnag'
+import { chartmogul } from '../../hooks/competitorData/chartmogul'
+import { clarity } from '../../hooks/competitorData/clarity'
+import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
+import { datadog } from '../../hooks/competitorData/datadog'
+import { devcycle } from '../../hooks/competitorData/devcycle'
+import { dynamic_yield } from '../../hooks/competitorData/dynamic_yield'
+import { eppo } from '../../hooks/competitorData/eppo'
+import { fathom } from '../../hooks/competitorData/fathom'
+import { fivetran } from '../../hooks/competitorData/fivetran'
+import { flagsmith } from '../../hooks/competitorData/flagsmith'
+import { fullstory } from '../../hooks/competitorData/fullstory'
 import { ga4 } from '../../hooks/competitorData/ga4'
 import { glassbox } from '../../hooks/competitorData/glassbox'
-import { vwo } from '../../hooks/competitorData/vwo'
-import { smartlook } from '../../hooks/competitorData/smartlook'
-import { sprig } from '../../hooks/competitorData/sprig'
-import { segment } from '../../hooks/competitorData/segment'
-import { mparticle } from '../../hooks/competitorData/mparticle'
-import { rudderstack } from '../../hooks/competitorData/rudderstack'
-import { fivetran } from '../../hooks/competitorData/fivetran'
-import { baremetrics } from '../../hooks/competitorData/baremetrics'
-import { chartmogul } from '../../hooks/competitorData/chartmogul'
-import { stripe } from '../../hooks/competitorData/stripe'
-import { fathom } from '../../hooks/competitorData/fathom'
-import { plausible } from '../../hooks/competitorData/plausible'
-import { umami } from '../../hooks/competitorData/umami'
-import { piwik_pro } from '../../hooks/competitorData/piwik_pro'
-import { statsig } from '../../hooks/competitorData/statsig'
-import { eppo } from '../../hooks/competitorData/eppo'
-import { unleash } from '../../hooks/competitorData/unleash'
-import { split } from '../../hooks/competitorData/split'
-import { devcycle } from '../../hooks/competitorData/devcycle'
-import { ab_tasty } from '../../hooks/competitorData/ab_tasty'
+import { glitchtip } from '../../hooks/competitorData/glitchtip'
+import { growthbook } from '../../hooks/competitorData/growthbook'
 import { harness } from '../../hooks/competitorData/harness'
-import { mutiny } from '../../hooks/competitorData/mutiny'
-import { dynamic_yield } from '../../hooks/competitorData/dynamic_yield'
+import { heap } from '../../hooks/competitorData/heap'
+import { hotjar } from '../../hooks/competitorData/hotjar'
 import { kameleoon } from '../../hooks/competitorData/kameleoon'
+import { launchdarkly } from '../../hooks/competitorData/launchdarkly'
+import { logrocket } from '../../hooks/competitorData/logrocket'
+import { lucky_orange } from '../../hooks/competitorData/lucky_orange'
+import { matomo } from '../../hooks/competitorData/matomo'
+import { mixpanel } from '../../hooks/competitorData/mixpanel'
+import { mouseflow } from '../../hooks/competitorData/mouseflow'
+import { mparticle } from '../../hooks/competitorData/mparticle'
+import { mutiny } from '../../hooks/competitorData/mutiny'
+import { optimizely } from '../../hooks/competitorData/optimizely'
+import { pendo } from '../../hooks/competitorData/pendo'
+import { piwik_pro } from '../../hooks/competitorData/piwik_pro'
+import { plausible } from '../../hooks/competitorData/plausible'
+import { posthog } from '../../hooks/competitorData/posthog'
+import { rollbar } from '../../hooks/competitorData/rollbar'
+import { rudderstack } from '../../hooks/competitorData/rudderstack'
+import { segment } from '../../hooks/competitorData/segment'
+import { sentry } from '../../hooks/competitorData/sentry'
+import { signoz } from '../../hooks/competitorData/signoz'
+import { smartlook } from '../../hooks/competitorData/smartlook'
+import { split } from '../../hooks/competitorData/split'
+import { sprig } from '../../hooks/competitorData/sprig'
+import { statsig } from '../../hooks/competitorData/statsig'
+import { stripe } from '../../hooks/competitorData/stripe'
+import { umami } from '../../hooks/competitorData/umami'
+import { unleash } from '../../hooks/competitorData/unleash'
+import { vwo } from '../../hooks/competitorData/vwo'
 
 // Feature definition imports
-import { errorTrackingFeatures } from '../../hooks/featureDefinitions/error_tracking'
-import { sessionReplayFeatures } from '../../hooks/featureDefinitions/session_replay'
-import { featureFlagsFeatures } from '../../hooks/featureDefinitions/feature_flags'
-import { productAnalyticsFeatures } from '../../hooks/featureDefinitions/product_analytics'
-import { webAnalyticsFeatures } from '../../hooks/featureDefinitions/web_analytics'
-import { experimentsFeatures } from '../../hooks/featureDefinitions/experiments'
-import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
-import { revenueAnalyticsFeatures } from '../../hooks/featureDefinitions/revenue_analytics'
-import { platformFeatures } from '../../hooks/featureDefinitions/platform'
-import { productDescriptions } from '../../hooks/featureDefinitions/products'
-import { dashboardsFeatures } from '../../hooks/featureDefinitions/dashboards'
 import { cdpFeatures } from '../../hooks/featureDefinitions/cdp'
+import { dashboardsFeatures } from '../../hooks/featureDefinitions/dashboards'
 import { dataWarehouseFeatures } from '../../hooks/featureDefinitions/data_warehouse'
-import { llmAnalyticsFeatures } from '../../hooks/featureDefinitions/llm_analytics'
+import { errorTrackingFeatures } from '../../hooks/featureDefinitions/error_tracking'
+import { experimentsFeatures } from '../../hooks/featureDefinitions/experiments'
+import { featureFlagsFeatures } from '../../hooks/featureDefinitions/feature_flags'
 import { heatmapsFeatures } from '../../hooks/featureDefinitions/heatmaps'
+import { llmAnalyticsFeatures } from '../../hooks/featureDefinitions/llm_analytics'
+import { platformFeatures } from '../../hooks/featureDefinitions/platform'
+import { productAnalyticsFeatures } from '../../hooks/featureDefinitions/product_analytics'
+import { productDescriptions } from '../../hooks/featureDefinitions/products'
+import { revenueAnalyticsFeatures } from '../../hooks/featureDefinitions/revenue_analytics'
+import { sessionReplayFeatures } from '../../hooks/featureDefinitions/session_replay'
+import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
+import { webAnalyticsFeatures } from '../../hooks/featureDefinitions/web_analytics'
 
 interface RowConfig {
     // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
@@ -420,53 +423,56 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
 
     // Competitor data
     const competitorData: Record<string, any> = {
+        ab_tasty,
         adobe_analytics,
-        posthog,
-        sentry,
-        logrocket,
-        bugsnag,
-        datadog,
-        fullstory,
-        hotjar,
-        matomo,
-        clarity,
-        rollbar,
-        glitchtip,
-        signoz,
-        optimizely,
-        launchdarkly,
-        flagsmith,
-        growthbook,
         amplitude,
-        mixpanel,
-        heap,
-        pendo,
+        baremetrics,
+        bugsnag,
+        chartmogul,
+        clarity,
+        crazy_egg,
+        datadog,
+        devcycle,
+        dynamic_yield,
+        eppo,
+        fathom,
+        fivetran,
+        flagsmith,
+        fullstory,
         ga4,
         glassbox,
-        vwo,
-        smartlook,
-        sprig,
-        segment,
-        mparticle,
-        rudderstack,
-        fivetran,
-        baremetrics,
-        chartmogul,
-        stripe,
-        fathom,
-        plausible,
-        umami,
-        piwik_pro,
-        statsig,
-        eppo,
-        unleash,
-        split,
-        devcycle,
-        ab_tasty,
+        glitchtip,
+        growthbook,
         harness,
-        mutiny,
-        dynamic_yield,
+        heap,
+        hotjar,
         kameleoon,
+        launchdarkly,
+        logrocket,
+        lucky_orange,
+        matomo,
+        mixpanel,
+        mouseflow,
+        mparticle,
+        mutiny,
+        optimizely,
+        pendo,
+        piwik_pro,
+        plausible,
+        posthog,
+        rollbar,
+        rudderstack,
+        segment,
+        sentry,
+        signoz,
+        smartlook,
+        split,
+        sprig,
+        statsig,
+        stripe,
+        umami,
+        unleash,
+        vwo,
     }
 
     // Helper to get feature value from competitor data
