@@ -17,7 +17,6 @@ export const fathom = {
                 breakdown_by_geoip: false,
                 clickmaps: false,
                 conversions: true,
-                cookieless_tracking: true,
                 custom_channel_types: false,
                 entry_exit_paths: false,
                 first_party_cookies: false,
@@ -152,6 +151,7 @@ export const fathom = {
         },
         security: {
             bot_blocking: true,
+            cookieless_tracking: true,
             data_retention: "Forever (as long as you're a customer)",
             gdpr_ready: true,
             hipaa_ready: false,

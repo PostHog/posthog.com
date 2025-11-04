@@ -66,6 +66,9 @@ export const heap = {
         },
         web_analytics: {
             available: false,
+            features: {
+                snippet_install: true,
+            },
         },
         session_replay: {
             available: true,
@@ -265,7 +268,7 @@ export const heap = {
             ci_cd_integrations: false,
             community_integrations: false,
             datadog: false,
-            exports: false,
+            email_reports: true,
             google_ads: false,
             imports: false,
             microsoft_teams: false,
@@ -276,6 +279,7 @@ export const heap = {
             zendesk: false,
         },
         security: {
+            cookieless_tracking: false,
             gdpr_ready: true,
             hipaa_ready: true,
             history_audit_logs: true,

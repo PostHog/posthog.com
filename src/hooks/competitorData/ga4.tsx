@@ -146,6 +146,7 @@ export const ga4 = {
             bigquery: true,
             customer_io: false,
             datadog: false,
+            email_reports: true,
             google_ads: true,
             google_search_console: true,
             hubspot: false,
@@ -163,6 +164,7 @@ export const ga4 = {
             transparent_pricing: false,
         },
         security: {
+            cookieless_tracking: false,
             data_anonymization: true,
             gdpr_ready: false,
             hipaa_ready: false,

@@ -36,7 +36,7 @@ export const optimizely = {
                     data_warehouse_experiments: false,
                     fake_door_testing: false,
                     holdout_testing: false,
-                    multi_armed_bandit: false,
+                    multi_armed_bandit: true,
                     mutually_exclusive_experiments: false,
                     redirect_testing: false,
                 },
@@ -56,12 +56,13 @@ export const optimizely = {
                 features: {
                     api_access: false,
                     feature_flag_foundation: false,
-                    json_payloads: false,
+                    json_payloads: true,
                     multivariate_testing: true,
                 },
             },
             analysis: {
                 features: {
+                    llm_support: false,
                     results_visualization: false,
                     side_effect_monitoring: false,
                     statistical_significance: true,
@@ -92,7 +93,7 @@ export const optimizely = {
             },
             implementation: {
                 features: {
-                    local_evaluation: false,
+                    local_evaluation: true,
                     bootstrapping: false,
                     api_access: false,
                     sdk_support: false,
@@ -148,6 +149,12 @@ export const optimizely = {
         },
         surveys: {
             available: false,
+        },
+        data_warehouse: {
+            features: {
+                warehouse_sources: false,
+                batch_exports: false,
+            },
         },
         cdp: {
             available: true,

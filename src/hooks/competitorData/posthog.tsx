@@ -362,6 +362,7 @@ export const posthog = {
             },
             analysis: {
                 features: {
+                    llm_support: true,
                     results_visualization: true,
                     side_effect_monitoring: true,
                     statistical_significance: true,

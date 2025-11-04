@@ -69,12 +69,14 @@ export const statsig = {
                 features: {
                     api_access: false,
                     feature_flag_foundation: false,
+                    local_evaluation: true,
                     json_payloads: false,
                     multivariate_testing: true,
                 },
             },
             analysis: {
                 features: {
+                    llm_support: false,
                     results_visualization: false,
                     side_effect_monitoring: false,
                     statistical_significance: true,
@@ -276,7 +278,7 @@ export const statsig = {
         },
         pricing: {
             free_tier: false,
-            transparent_pricing: false,
+            transparent_pricing: true,
             usage_based_pricing: true,
             self_serve: true,
         },

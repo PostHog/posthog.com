@@ -121,10 +121,11 @@ export const launchdarkly = {
             },
             analysis: {
                 features: {
+                    llm_support: true,
                     results_visualization: false,
                     side_effect_monitoring: false,
                     statistical_significance: true,
-                    statistics_engine: false,
+                    statistics_engine: 'Bayesian, Frequentist',
                 },
             },
             platforms: {
@@ -221,7 +222,7 @@ export const launchdarkly = {
         },
         pricing: {
             free_tier: false,
-            transparent_pricing: false,
+            transparent_pricing: true,
             self_serve: false,
             usage_based_pricing: true,
         },

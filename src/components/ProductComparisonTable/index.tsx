@@ -41,7 +41,10 @@ import { chartmogul } from '../../hooks/competitorData/chartmogul'
 import { stripe } from '../../hooks/competitorData/stripe'
 import { fathom } from '../../hooks/competitorData/fathom'
 import { plausible } from '../../hooks/competitorData/plausible'
+import { umami } from '../../hooks/competitorData/umami'
+import { piwik_pro } from '../../hooks/competitorData/piwik_pro'
 import { statsig } from '../../hooks/competitorData/statsig'
+import { eppo } from '../../hooks/competitorData/eppo'
 
 // Feature definition imports
 import { errorTrackingFeatures } from '../../hooks/featureDefinitions/error_tracking'
@@ -444,7 +447,10 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         stripe,
         fathom,
         plausible,
+        umami,
+        piwik_pro,
         statsig,
+        eppo,
     }
 
     // Helper to get feature value from competitor data

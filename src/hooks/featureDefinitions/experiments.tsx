@@ -179,6 +179,10 @@ export const experimentsFeatures = {
     analysis: {
         description: 'Measure results with statistical rigor',
         features: {
+            llm_support: {
+                name: 'AI/LLM support',
+                description: 'Compare models with experiments, view performance, cost, and latency',
+            },
             statistical_significance: {
                 name: 'Statistical significance',
                 description: 'Automatic calculation of statistical significance with configurable confidence levels',

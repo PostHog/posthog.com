@@ -13,7 +13,7 @@ export const flagsmith = {
             features: {
                 boolean_flags: false,
                 multivariate_flags: true,
-                json_payloads: false,
+                json_payloads: true,
                 release_conditions: false,
                 early_access_management: false,
             },
@@ -38,7 +38,7 @@ export const flagsmith = {
                 features: {
                     approvals: true,
                     flag_administration: false,
-                    flag_scheduling: false,
+                    flag_scheduling: true,
                     history_activity: false,
                     instant_rollbacks: false,
                     multi_environment: false,
@@ -64,6 +64,29 @@ export const flagsmith = {
                 },
             },
         },
+        experiments: {
+            available: true,
+            features: {
+                llm_support: false,
+                multivariate: false,
+                statistics_engine: 'Bayesian, Frequentist',
+            },
+            analysis: {
+                features: {
+                    llm_support: false,
+                    statistics_engine: 'Bayesian',
+                },
+            },
+            supported_tests: {
+                multi_armed_bandit: false,
+            },
+        },
+        data_warehouse: {
+            features: {
+                warehouse_sources: false,
+                batch_exports: false,
+            },
+        },
     },
     platform: {
         deployment: {
@@ -72,6 +95,7 @@ export const flagsmith = {
         },
         pricing: {
             usage_based_pricing: true,
+            self_serve: true,
             transparent_pricing: true,
             free_tier: true,
         },

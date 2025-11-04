@@ -252,10 +252,11 @@ export const amplitude = {
             },
             analysis: {
                 features: {
+                    llm_support: false,
                     results_visualization: true,
                     side_effect_monitoring: true,
                     statistical_significance: true,
-                    statistics_engine: 'Sequential',
+                    statistics_engine: 'Bayesian',
                 },
             },
             platforms: {

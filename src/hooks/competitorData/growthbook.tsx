@@ -119,6 +119,7 @@ export const growthbook = {
             },
             analysis: {
                 features: {
+                    llm_support: false,
                     results_visualization: false,
                     side_effect_monitoring: false,
                     statistical_significance: true,

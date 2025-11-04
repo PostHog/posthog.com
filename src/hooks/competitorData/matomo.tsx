@@ -70,7 +70,6 @@ export const matomo = {
                 breakdown_by_geoip: false,
                 clickmaps: false,
                 conversions: true,
-                cookieless_tracking: true,
                 custom_channel_types: false,
                 entry_exit_paths: true,
                 first_party_cookies: false,
@@ -154,6 +153,7 @@ export const matomo = {
         },
         security: {
             bot_blocking: true,
+            cookieless_tracking: true,
             data_anonymization: true,
             gdpr_ready: true,
             history_audit_logs: true,
