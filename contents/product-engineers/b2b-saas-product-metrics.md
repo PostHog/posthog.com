@@ -105,7 +105,7 @@ At PostHog, our main product metric is [Discoveries](/handbook/product/metrics),
 
 We view this figure as more important than the number of active users. If the number of Discoveries is growing, we know we're on the right path. 
 
-**Is it useful?** You're in serious trouble if you're not tracking feature usage, and it's where a [product analytics platform](/product) like PostHog is vital. Trying to do this with Google Analytics is a losing battle.
+**Is it useful?** You're in serious trouble if you're not tracking feature usage, and it's where a [developer platform](/product) like PostHog is vital. Trying to do this with Google Analytics is a losing battle.
 
 ### Net Promoter Score (NPS)
 
@@ -215,7 +215,7 @@ To help get you started, we've chosen five metrics that are useful for any B2B p
 
 You don't need to measure all of these to be successful, and other metrics might be better for your specific product, but they're a good starting point.
 
-And if you're in need a product analytics platform to track them, learn [how we can help](/product).
+And if you're in need product analytics to track them, learn [how we can help](/product-analytics).
 
 ## Further reading
 
