@@ -94,7 +94,6 @@ export const heap = {
                 notes_on_replays: false,
                 playlists: false,
                 privacy_masking: true,
-                rage_click_detection: false,
                 retention_policy: false,
                 screenshot_mode: false,
                 scrollmaps: false,
@@ -245,6 +244,9 @@ export const heap = {
         },
         heatmaps: {
             available: true,
+            features: {
+                rage_clicks: false,
+            },
         },
     },
     platform: {

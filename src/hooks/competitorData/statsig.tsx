@@ -229,7 +229,6 @@ export const statsig = {
                 notes_on_replays: false,
                 playlists: false,
                 privacy_masking: true,
-                rage_click_detection: false,
                 retention_policy: '30 days',
                 screenshot_mode: false,
                 scrollmaps: false,
@@ -264,6 +263,12 @@ export const statsig = {
                 features: {
                     ai_summaries: false,
                 },
+            },
+        },
+        heatmaps: {
+            available: false,
+            features: {
+                rage_clicks: false,
             },
         },
         surveys: {

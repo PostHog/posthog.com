@@ -161,15 +161,6 @@ export const sessionReplayFeatures = {
             },
         },
     },
-    detection: {
-        description: 'Automatically detect important user behaviors',
-        features: {
-            rage_click_detection: {
-                name: 'Rage-click detection',
-                description: 'Automatically detect and highlight rage clicks',
-            },
-        },
-    },
     privacy: {
         description: 'Protect user privacy and sensitive information',
         features: {

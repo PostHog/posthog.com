@@ -12,8 +12,7 @@ tags:
     - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
@@ -42,23 +41,24 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of 
 
 PostHog offers more features for engineers, such as console logs and network monitoring on session replays, but doesn't currently offer scroll maps. PostHog isn't totally free like Clarity, but still has a generous free plan. All users get 5,000 replays and 1 million analytics events for free every month.
 
-<ComparisonTable column1="PostHog" column2="Clarity">
-  <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={true} column2="Android only" feature="Mobile session replay" description="View real sessions in mobile apps" />
-  <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
-  <ComparisonRow column1={true} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
-  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Debug issues faster by browsing the user's console" />
-  <ComparisonRow column1={true} column2={false} feature="Canvas recording" description="Capture canvas elements from your application" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
-  <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
-  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-</ComparisonTable>
-
-\*iOS replays are under development.
+<ProductComparisonTable
+competitors={['posthog', 'clarity']}
+rows={[
+'session_replay.platform_support.web_app_recordings',
+'session_replay.platform_support.mobile_app_recordings',
+'session_replay.features.event_timeline',
+'session_replay.analysis.network_monitor',
+'session_replay.analysis.console_logs',
+'session_replay.features.canvas_recording',
+'heatmaps',
+'heatmaps.features.rage_clicks',
+'heatmaps.features.scrollmaps',
+'product_analytics',
+'feature_flags',
+'experiments',
+'surveys',
+]}
+/>
 
 ### Why do companies use PostHog?
 
@@ -101,21 +101,24 @@ According to [BuiltWith](https://trends.builtwith.com/widgets/LogRocket), 1,132 
 
 LogRocket offers more features for engineers who want to investigate performance issues and bugs. It also adds some basic analytics features for analyzing conversion funnels and user paths. LogRocket's free plan includes 1,000 sessions per month.
 
-<ComparisonTable column1="LogRocket" column2="Clarity">
-  <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={true} column2="Android only" feature="Mobile session replay" description="View real sessions in mobile apps" />
-  <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
-  <ComparisonRow column1={true} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
-  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Debug issues faster by browsing the user's console" />
-  <ComparisonRow column1={true} column2={false} feature="Canvas recording" description="Capture canvas elements from your application" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
-  <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-</ComparisonTable>
+<ProductComparisonTable
+competitors={['logrocket', 'clarity']}
+rows={[
+'session_replay.platform_support.web_app_recordings',
+'session_replay.platform_support.mobile_app_recordings',
+'session_replay.features.event_timeline',
+'session_replay.analysis.network_monitor',
+'session_replay.analysis.console_logs',
+'session_replay.features.canvas_recording',
+'heatmaps',
+'heatmaps.features.rage_clicks',
+'heatmaps.features.scrollmaps',
+'product_analytics',
+'feature_flags',
+'experiments',
+'surveys',
+]}
+/>
 
 ### Why do companies use LogRocket?
 
@@ -158,21 +161,24 @@ According to data from [BuiltWith](https://trends.builtwith.com/analytics/FullSt
 
 FullStory is a more complex and mature product than Clarity, going way beyond basic session replay by offering everything companies need to understand behavior on websites and in apps. FullStory offers a basic free plan with a 10,000 sessions monthly limit.
 
-<ComparisonTable column1="FullStory" column2="Clarity">
-  <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={true} column2="Android only" feature="Mobile session replay" description="View real sessions in mobile apps" />
-  <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
-  <ComparisonRow column1={true} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
-  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Debug issues faster by browsing the user's console" />
-  <ComparisonRow column1={true} column2={false} feature="Canvas recording" description="Capture canvas elements from your application" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
-  <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-</ComparisonTable>
+<ProductComparisonTable
+competitors={['fullstory', 'clarity']}
+rows={[
+'session_replay.platform_support.web_app_recordings',
+'session_replay.platform_support.mobile_app_recordings',
+'session_replay.features.event_timeline',
+'session_replay.analysis.network_monitor',
+'session_replay.analysis.console_logs',
+'session_replay.features.canvas_recording',
+'heatmaps',
+'heatmaps.features.rage_clicks',
+'heatmaps.features.scrollmaps',
+'product_analytics',
+'feature_flags',
+'experiments',
+'surveys',
+]}
+/>
 
 ### Why do companies use FullStory?
 
@@ -213,21 +219,24 @@ According to reviews on G2, companies use FullStory for:
 
 UXCam offers similar core session replay features, but it only works on mobile apps. You can use Clarity on your web app and mobile app, though it only supports Android at present. UXCam's free plan includes 3,000 sessions for free each month.
 
-<ComparisonTable column1="UXCam" column2="Clarity">
-  <ComparisonRow column1={false} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={true} column2="Android only" feature="Mobile session replay" description="View real sessions in mobile apps" />
-  <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
-  <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
-  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Debug issues faster by browsing the user's console" />
-  <ComparisonRow column1={false} column2={false} feature="Canvas recording" description="Capture canvas elements from your application" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
-  <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-</ComparisonTable>
+<ProductComparisonTable
+competitors={['uxcam', 'clarity']}
+rows={[
+'session_replay.platform_support.web_app_recordings',
+'session_replay.platform_support.mobile_app_recordings',
+'session_replay.features.event_timeline',
+'session_replay.analysis.network_monitor',
+'session_replay.analysis.console_logs',
+'session_replay.features.canvas_recording',
+'heatmaps',
+'heatmaps.features.rage_clicks',
+'heatmaps.features.scrollmaps',
+'product_analytics',
+'feature_flags',
+'experiments',
+'surveys',
+]}
+/>
 
 ### Why do companies use UXCam?
 
@@ -272,21 +281,24 @@ Lucky Orange is a simplified, focused take on Clarity. It does many of the same 
 
 While it doesn't offer full product analytics, it includes:
 
-<ComparisonTable column1="Lucky Orange" column2="Clarity">
-  <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={false} column2="Android only" feature="Mobile session replay" description="View real sessions in mobile apps" />
-  <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
-  <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
-  <ComparisonRow column1={false} column2={false} feature="Console logs" description="Debug issues faster by browsing the user's console" />
-  <ComparisonRow column1={false} column2={false} feature="Canvas recording" description="Capture canvas elements from your application" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
-  <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-</ComparisonTable>
+<ProductComparisonTable
+competitors={['lucky_orange', 'clarity']}
+rows={[
+'session_replay.platform_support.web_app_recordings',
+'session_replay.platform_support.mobile_app_recordings',
+'session_replay.features.event_timeline',
+'session_replay.analysis.network_monitor',
+'session_replay.analysis.console_logs',
+'session_replay.features.canvas_recording',
+'heatmaps',
+'heatmaps.features.rage_clicks',
+'heatmaps.features.scrollmaps',
+'product_analytics',
+'feature_flags',
+'experiments',
+'surveys',
+]}
+/>
 
 ### Why do companies use Lucky Orange?
 
@@ -329,21 +341,24 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Hotjar), as Feb 
 
 In many ways, Hotjar is a more mature version of Clarity. It lacks the depth of analysis of PostHog or LogRocket, but it offers a few useful enhancements compared to Clarity. For example, it supports both Android and iOS mobile apps. Hotjar's free plan includes 35 daily session (~1,000 per month) for free and basic features.
 
-<ComparisonTable column1="Hotjar" column2="Clarity">
-  <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={false} column2="Android only" feature="Mobile session replay" description="View real sessions in mobile apps" />
-  <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
-  <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
-  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Debug issues faster by browsing the user's console" />
-  <ComparisonRow column1={false} column2={false} feature="Canvas recording" description="Capture canvas elements from your application" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
-  <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-</ComparisonTable>
+<ProductComparisonTable
+competitors={['hotjar', 'clarity']}
+rows={[
+'session_replay.platform_support.web_app_recordings',
+'session_replay.platform_support.mobile_app_recordings',
+'session_replay.features.event_timeline',
+'session_replay.analysis.network_monitor',
+'session_replay.analysis.console_logs',
+'session_replay.features.canvas_recording',
+'heatmaps',
+'heatmaps.features.rage_clicks',
+'heatmaps.features.scrollmaps',
+'product_analytics',
+'feature_flags',
+'experiments',
+'surveys',
+]}
+/>
 
 ### Why do companies use Hotjar?
 
@@ -386,21 +401,24 @@ According to data from BuiltWith, 5,555 of the top 1 million websites use Mousef
 
 Mouseflow offers one or two features Clarity doesn't, such as funnel analysis and user feedback tools, but its replay and heatmaps features are more or less the same. Mouseflow's free plan includes 500 monthly sessions – upgrading to its Starter plan gives you 5,000 sessions for $30 a month.
 
-<ComparisonTable column1="Mouseflow" column2="Clarity">
-  <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={false} column2="Android only" feature="Mobile session replay" description="View real sessions in mobile apps" />
-  <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
-  <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
-  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Debug issues faster by browsing the user's console" />
-  <ComparisonRow column1={false} column2={false} feature="Canvas recording" description="Capture canvas elements from your application" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
-  <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-</ComparisonTable>
+<ProductComparisonTable
+competitors={['mouseflow', 'clarity']}
+rows={[
+'session_replay.platform_support.web_app_recordings',
+'session_replay.platform_support.mobile_app_recordings',
+'session_replay.features.event_timeline',
+'session_replay.analysis.network_monitor',
+'session_replay.analysis.console_logs',
+'session_replay.features.canvas_recording',
+'heatmaps',
+'heatmaps.features.rage_clicks',
+'heatmaps.features.scrollmaps',
+'product_analytics',
+'feature_flags',
+'experiments',
+'surveys',
+]}
+/>
 
 ### Why do companies use Mouseflow?
 

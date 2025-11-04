@@ -92,7 +92,6 @@ export const hotjar = {
                 notes_on_replays: false,
                 playlists: false,
                 privacy_masking: false,
-                rage_click_detection: false,
                 retention_policy: false,
                 screenshot_mode: false,
                 scrollmaps: false,

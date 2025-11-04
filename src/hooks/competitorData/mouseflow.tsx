@@ -17,6 +17,7 @@ export const mouseflow = {
                 free_tier: '500/mo',
             },
             features: {
+                canvas_recording: false,
                 event_timeline: true,
             },
             platform_support: {

@@ -80,7 +80,6 @@ export const posthog = {
                 notes_on_replays: true,
                 playlists: true,
                 privacy_masking: true,
-                rage_click_detection: true,
                 retention_policy: 'Up to 3 months',
                 sentiment_scores: false,
                 screenshot_mode: true,

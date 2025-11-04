@@ -78,7 +78,7 @@ export const logrocket = {
                 chat_with_recordings: false,
                 clickmaps: false,
                 conditional_recording: true,
-                event_timeline: false,
+                event_timeline: true,
                 export_to_json: '',
                 export_to_video: false,
                 filter_by_user_or_event: false,
@@ -89,7 +89,6 @@ export const logrocket = {
                 notes_on_replays: false,
                 playlists: true,
                 privacy_masking: true,
-                rage_click_detection: false,
                 retention_policy: false,
                 screenshot_mode: false,
                 scrollmaps: false,
@@ -129,8 +128,9 @@ export const logrocket = {
         heatmaps: {
             available: true,
             features: {
-                heatmaps: true,
                 clickmaps: true,
+                heatmaps: true,
+                rage_clicks: true,
                 scrollmaps: true,
             },
         },

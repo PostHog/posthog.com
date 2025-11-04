@@ -126,7 +126,6 @@ export const mixpanel = {
                 notes_on_replays: false,
                 playlists: false,
                 privacy_masking: true,
-                rage_click_detection: true,
                 retention_policy: true,
                 screenshot_mode: true,
                 scrollmaps: false,
@@ -274,6 +273,7 @@ export const mixpanel = {
             features: {
                 clickmaps: true,
                 heatmaps: false,
+                rage_clicks: true,
                 scrollmaps: false,
             },
         },

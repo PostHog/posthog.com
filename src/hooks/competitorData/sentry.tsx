@@ -60,7 +60,6 @@ export const sentry = {
                 notes_on_replays: false,
                 playlists: false,
                 privacy_masking: true,
-                rage_click_detection: false,
                 retention_policy: false,
                 screenshot_mode: false,
                 search_by_network: false,
@@ -100,6 +99,7 @@ export const sentry = {
             features: {
                 clickmaps: false,
                 heatmaps: false,
+                rage_clicks: false,
                 scrollmaps: false,
             },
         },

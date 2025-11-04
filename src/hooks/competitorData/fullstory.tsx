@@ -89,11 +89,11 @@ export const fullstory = {
                 free_tier: false,
             },
             features: {
-                canvas_recording: false,
+                canvas_recording: true,
                 chat_with_recordings: false,
                 clickmaps: true,
                 conditional_recording: true,
-                event_timeline: false,
+                event_timeline: true,
                 export_to_json: true,
                 export_to_video: false,
                 filter_by_user_or_event: true,
@@ -104,7 +104,6 @@ export const fullstory = {
                 notes_on_replays: true,
                 playlists: false,
                 privacy_masking: true,
-                rage_click_detection: true,
                 retention_policy: '1 month',
                 screenshot_mode: false,
                 scrollmaps: true,
@@ -129,9 +128,9 @@ export const fullstory = {
             analysis: {
                 features: {
                     heatmaps: true,
-                    console_logs: false,
+                    console_logs: true,
                     performance_monitoring: true,
-                    network_monitor: false,
+                    network_monitor: true,
                     dom_explorer: false,
                 },
             },

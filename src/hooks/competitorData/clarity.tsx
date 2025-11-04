@@ -27,7 +27,6 @@ export const clarity = {
                 notes_on_replays: false,
                 playlists: false,
                 privacy_masking: true,
-                rage_click_detection: true,
                 retention_policy: '30 days',
                 screenshot_mode: false,
                 scrollmaps: false,

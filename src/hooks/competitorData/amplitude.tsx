@@ -106,7 +106,6 @@ export const amplitude = {
                 notes_on_replays: false,
                 playlists: false,
                 privacy_masking: true,
-                rage_click_detection: true,
                 retention_policy: true,
                 screenshot_mode: false,
                 scrollmaps: false,
@@ -286,6 +285,9 @@ export const amplitude = {
         },
         heatmaps: {
             available: false,
+            features: {
+                rage_clicks: true,
+            },
         },
         surveys: {
             available: true,
