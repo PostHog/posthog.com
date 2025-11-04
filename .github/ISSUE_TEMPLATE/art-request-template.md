@@ -13,7 +13,7 @@ projects:
 ---
 
 > **How art requests work**
-> By default, Lottie and Daniel should be assigned to all art requests and the request will be added to their [the art project board](https://github.com/orgs/PostHog/projects/65). They will decide who will work on this brief and reassign as needed. You can check the project board for updates if needed. 
+> By default, Lottie and Daniel should be assigned to all art requests and the request will be added to [the art project board](https://github.com/orgs/PostHog/projects/65). They will decide who will work on this brief and reassign as needed. You can check the project board for updates if needed. 
 >
 > If your request is genuinely urgent, please share in [#team-marketing channel](https://posthog.slack.com/archives/C08CG24E3SR) and mention Lottie, Daniel, and/or Cory.
 
