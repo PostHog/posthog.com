@@ -10,6 +10,7 @@ import { ab_tasty } from '../../hooks/competitorData/ab_tasty'
 import { adobe_analytics } from '../../hooks/competitorData/adobe_analytics'
 import { amplitude } from '../../hooks/competitorData/amplitude'
 import { appcues } from '../../hooks/competitorData/appcues'
+import { appsignal } from '../../hooks/competitorData/appsignal'
 import { baremetrics } from '../../hooks/competitorData/baremetrics'
 import { bugsnag } from '../../hooks/competitorData/bugsnag'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
@@ -39,11 +40,13 @@ import { mixpanel } from '../../hooks/competitorData/mixpanel'
 import { mouseflow } from '../../hooks/competitorData/mouseflow'
 import { mparticle } from '../../hooks/competitorData/mparticle'
 import { mutiny } from '../../hooks/competitorData/mutiny'
+import { newrelic } from '../../hooks/competitorData/newrelic'
 import { optimizely } from '../../hooks/competitorData/optimizely'
 import { pendo } from '../../hooks/competitorData/pendo'
 import { piwik_pro } from '../../hooks/competitorData/piwik_pro'
 import { plausible } from '../../hooks/competitorData/plausible'
 import { posthog } from '../../hooks/competitorData/posthog'
+import { raygun } from '../../hooks/competitorData/raygun'
 import { rollbar } from '../../hooks/competitorData/rollbar'
 import { rudderstack } from '../../hooks/competitorData/rudderstack'
 import { segment } from '../../hooks/competitorData/segment'
@@ -432,6 +435,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         adobe_analytics,
         amplitude,
         appcues,
+        appsignal,
         baremetrics,
         bugsnag,
         chartmogul,
@@ -461,11 +465,13 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         mouseflow,
         mparticle,
         mutiny,
+        newrelic,
         optimizely,
         pendo,
         piwik_pro,
         plausible,
         posthog,
+        raygun,
         rollbar,
         rudderstack,
         segment,

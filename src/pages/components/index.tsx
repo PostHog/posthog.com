@@ -1995,7 +1995,7 @@ export default function Components(): JSX.Element {
                                         { path: 'error_tracking.core.issue_management' },
                                         { path: 'error_tracking.core.error_grouping' },
                                         { path: 'error_tracking.core.stack_tracing' },
-                                        { path: 'error_tracking.monitoring.network_performance' },
+                                        { path: 'error_tracking.monitoring.performance_monitoring' },
                                         { path: 'error_tracking.monitoring.source_map_support' },
                                         { path: 'error_tracking.integrations.product_analytics' },
                                         { path: 'error_tracking.integrations.session_replay' },

@@ -13,10 +13,12 @@ export const sentry = {
             },
             features: {
                 code_context: true,
+                error_alerts: true,
                 error_grouping: true,
-                console_log_capture: false,
+                console_log_capture: true,
                 exception_capture: true,
                 issue_management: true,
+                log_management: true,
                 mobile_sdk_coverage: true,
                 profiling: true,
                 stack_tracing: true,
@@ -25,7 +27,7 @@ export const sentry = {
             monitoring: {
                 features: {
                     cron_monitoring: true,
-                    network_performance: true,
+                    distributed_tracing: true,
                     release_tracking: true,
                     performance_monitoring: true,
                 },
@@ -102,7 +104,7 @@ export const sentry = {
             },
         },
         surveys: {
-            available: true,
+            available: 'Feedback only',
             pricing: {
                 free_tier: 'Included',
             },
@@ -297,6 +299,7 @@ export const sentry = {
             hipaa_ready: true,
             history_audit_logs: true,
             reverse_proxy: false,
+            role_based_access_control: true,
             saml_sso: true,
             soc2_certified: true,
             two_factor_auth: true,

@@ -14,7 +14,6 @@ export const glitchtip = {
                 exception_capture: true,
                 issue_management: true,
                 mobile_sdk_coverage: false,
-                network_performance: false,
                 source_map_support: true,
                 stack_tracing: true,
                 user_device_context: true,
@@ -22,7 +21,6 @@ export const glitchtip = {
             monitoring: {
                 features: {
                     cron_monitoring: '',
-                    network_performance: '',
                     release_tracking: false,
                     performance_monitoring: false,
                 },

@@ -5,16 +5,26 @@ export const rollbar = {
         icon: '/images/competitors/rollbar.svg',
     },
     products: {
+        product_analytics: {
+            available: false,
+        },
+        session_replay: {
+            available: false,
+        },
+        surveys: {
+            available: false,
+        },
         error_tracking: {
             available: true,
             features: {
-                console_log_capture: false,
+                console_log_capture: true,
                 error_alerts: true,
                 error_grouping: true,
                 exception_capture: true,
                 issue_management: true,
+                log_management: false,
                 mobile_sdk_coverage: true,
-                network_performance: false,
+                profiling: false,
                 source_map_support: true,
                 stack_tracing: true,
                 user_device_context: true,
@@ -22,7 +32,7 @@ export const rollbar = {
             monitoring: {
                 features: {
                     cron_monitoring: '',
-                    network_performance: '',
+                    distributed_tracing: false,
                     release_tracking: true,
                     performance_monitoring: false,
                 },
@@ -42,6 +52,8 @@ export const rollbar = {
         },
         pricing: {
             free_tier: true,
+            model: 'Usage-based',
+            self_serve: true,
             transparent_pricing: false,
             usage_based_pricing: true,
         },
@@ -99,8 +111,9 @@ export const rollbar = {
             data_retention: false,
             gdpr_ready: false,
             hipaa_ready: false,
-            history_audit_logs: false,
+            history_audit_logs: 'Enterprise',
             reverse_proxy: false,
+            role_based_access_control: true,
             saml_sso: false,
             soc2_certified: false,
             two_factor_auth: false,
@@ -109,8 +122,5 @@ export const rollbar = {
         analytics_integration: {
             built_in_analytics: false,
         },
-    },
-    pricing: {
-        model: 'Usage-based',
     },
 }

@@ -74,8 +74,6 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 >
 > PostHog goes deeper than Clarity by making it easy to debug issues via detailed event timelines, console logs, and network monitoring, while also enabling you to understand user behavior at every level when combined with product analytics and its other tools.
 
-<br />
-
 ## 2. LogRocket
 
 -   **Founded:** 2016
@@ -132,8 +130,6 @@ Reviews on G2.com suggest companies use LogRocket because it:
 > #### Bottom line
 >
 > LogRocket is an excellent Clarity alternative for companies that need more comprehensive bug tracking and error monitoring tools. Less technical users, such as marketers and designers, might find it overwhelming, but there's something here for everyone.
-
-<br />
 
 ## 3. FullStory
 
@@ -192,8 +188,6 @@ According to reviews on G2, companies use FullStory for:
 >
 > FullStory is a big step up from Clarity, which is reflected in the cost. It's a good choice for large companies, especially those in the e-commerce space, but it might be overkill for smaller ones who want an inexpensive tool that does the basics well.
 
-<br />
-
 ## 4. UXCam
 
 -   **Founded:** 2014
@@ -248,8 +242,6 @@ According to G2 reviews, UXCam helps companies:
 > #### Bottom line
 >
 > UXCam is a good option if you're developing a mobile app and don't have a web app. It offers more tools than Clarity for understanding conversion behavior and useful features for diagnosing app crashes and performance issues.
-
-<br />
 
 ## 5. Lucky Orange
 
@@ -310,8 +302,6 @@ According to [reviews on G2](https://www.g2.com/products/lucky-orange/reviews.ht
 >
 > Lucky Orange is ideal for small businesses owners who want actionable insights without much effort. It's easy to use and offers some useful benefits Clarity doesn't, such as basic conversion funnels and event tracking.
 
-<br />
-
 ## 6. Hotjar
 
 -   **Founded:** 2014
@@ -368,8 +358,6 @@ According to G2 reviews, users are fans of Hotjar because:
 > #### Bottom line
 >
 > Hotjar is a sensible option for non-technical users, though it only offers marginal upgrades on what Clarity offers for free.
-
-<br />
 
 ## 7. Mouseflow
 

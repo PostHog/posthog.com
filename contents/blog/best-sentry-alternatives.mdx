@@ -12,8 +12,7 @@ tags:
     - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
@@ -51,98 +50,28 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of 
 
 ### How does PostHog compare to Sentry?
 
-<ComparisonTable column1="PostHog" column2="Sentry">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Error tracking"
-        description="Capture errors and exceptions, provide stack traces to debug issues"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Performance monitoring"
-        description="Monitor the performance of your app, including request latency, resource usage, and more"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Distributed tracing"
-        description="Follow a request across services to identify latency bottlenecks and inter-service dependencies."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Profiling"
-        description="Capture detailed CPU, memory, and function-level performance metrics to pinpoint inefficient code segments."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Alerting"
-        description="Detect and receive notifications when problems arise"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Release tracking"
-        description="Associate errors and performance issues with specific deployments"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Log management"
-        description="Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={'Feedback only'}
-        feature="Surveys"
-        description="Collect feedback and run satisfaction surveys"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={'Audit log, permissions'}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'sentry']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'error_tracking',
+        'error_tracking.monitoring.features.performance_monitoring',
+        'error_tracking.monitoring.features.distributed_tracing',
+        'error_tracking.features.profiling',
+        'error_tracking.features.error_alerts',
+        'error_tracking.monitoring.features.release_tracking',
+        'error_tracking.features.log_management',
+        'error_tracking.features.console_log_capture',
+        'product_analytics',
+        'session_replay',
+        'surveys',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 ### Why do companies use PostHog?
 
@@ -157,8 +86,6 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 > #### Bottom line
 >
 > If you're looking for error tracking and session replay, along with many more tools for making your product better, PostHog is a great alternative to Sentry. This is especially the case for startups and scale ups, thanks to PostHog's generous free tier.
-
-<br />
 
 ## 2. Rollbar
 
@@ -187,98 +114,28 @@ According to [BuiltWith](https://trends.builtwith.com/widgets/Rollbar), as of Fe
 
 ### How does Rollbar compare to Sentry?
 
-<ComparisonTable column1="Rollbar" column2="Sentry">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Error tracking"
-        description="Capture errors and exceptions, provide stack traces to debug issues"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Performance monitoring"
-        description="Monitor the performance of your app, including request latency, resource usage, and more"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Distributed tracing"
-        description="Follow a request across services to identify latency bottlenecks and inter-service dependencies."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Profiling"
-        description="Capture detailed CPU, memory, and function-level performance metrics to pinpoint inefficient code segments."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Alerting"
-        description="Detect and receive notifications when problems arise"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Release tracking"
-        description="Associate errors and performance issues with specific deployments"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Log management"
-        description="Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={'Feedback only'}
-        feature="Surveys"
-        description="Collect feedback and run satisfaction surveys"
-    />
-    <ComparisonRow
-        column1={'Audit on enterprise plans'}
-        column2={'Audit log, permissions'}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['rollbar', 'sentry']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'error_tracking',
+        'error_tracking.monitoring.features.performance_monitoring',
+        'error_tracking.monitoring.features.distributed_tracing',
+        'error_tracking.features.profiling',
+        'error_tracking.features.error_alerts',
+        'error_tracking.monitoring.features.release_tracking',
+        'error_tracking.features.log_management',
+        'error_tracking.features.console_log_capture',
+        'product_analytics',
+        'session_replay',
+        'surveys',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 ### Why do companies use Rollbar?
 
@@ -293,8 +150,6 @@ According to [reviews on G2](https://www.g2.com/products/rollbar/reviews), compa
 > #### Bottom line
 >
 > If Sentry is too complex or expensive for your needs, Rollbar might be a great alternative to try.
-
-<br />
 
 ## 3. Raygun
 
@@ -325,98 +180,28 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Raygun), as of F
 
 ### How does Raygun compare to Sentry?
 
-<ComparisonTable column1="Raygun" column2="Sentry">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Error tracking"
-        description="Capture errors and exceptions, provide stack traces to debug issues"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Performance monitoring"
-        description="Monitor the performance of your app, including request latency, resource usage, and more"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Distributed tracing"
-        description="Follow a request across services to identify latency bottlenecks and inter-service dependencies."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Profiling"
-        description="Capture detailed CPU, memory, and function-level performance metrics to pinpoint inefficient code segments."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Alerting"
-        description="Detect and receive notifications when problems arise"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Release tracking"
-        description="Associate errors and performance issues with specific deployments"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Log management"
-        description="Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={'Feedback only'}
-        feature="Surveys"
-        description="Collect feedback and run satisfaction surveys"
-    />
-    <ComparisonRow
-        column1={'Audit log, permissions'}
-        column2={'Audit log, permissions'}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['raygun', 'sentry']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'error_tracking',
+        'error_tracking.monitoring.features.performance_monitoring',
+        'error_tracking.monitoring.distributed_tracing',
+        'error_tracking.features.profiling',
+        'error_tracking.features.error_alerts',
+        'error_tracking.monitoring.features.release_tracking',
+        'error_tracking.features.log_management',
+        'error_tracking.features.console_log_capture',
+        'product_analytics',
+        'session_replay',
+        'surveys',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 ### Why do companies use Raygun?
 
@@ -431,8 +216,6 @@ According to G2 reviews, Raygun is chosen because:
 > #### Bottom line
 >
 > If you're looking for a simple tool to do error tracking and performance monitoring, Raygun is one to try out. Their lack of a free tier makes them harder to recommend for small projects though.
-
-<br />
 
 ## 4. Datadog
 
@@ -461,98 +244,28 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Datadog), as of 
 
 ### How does Datadog compare to Sentry?
 
-<ComparisonTable column1="Datadog" column2="Sentry">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Error tracking"
-        description="Capture errors and exceptions, provide stack traces to debug issues"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Performance monitoring"
-        description="Monitor the performance of your app, including request latency, resource usage, and more"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Distributed tracing"
-        description="Follow a request across services to identify latency bottlenecks and inter-service dependencies."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Profiling"
-        description="Capture detailed CPU, memory, and function-level performance metrics to pinpoint inefficient code segments."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Alerting"
-        description="Detect and receive notifications when problems arise"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Release tracking"
-        description="Associate errors and performance issues with specific deployments"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Log management"
-        description="Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={'Feedback only'}
-        feature="Surveys"
-        description="Collect feedback and run satisfaction surveys"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={'Audit log, permissions'}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['datadog', 'sentry']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'error_tracking',
+        'error_tracking.monitoring.features.performance_monitoring',
+        'error_tracking.monitoring.distributed_tracing',
+        'error_tracking.features.profiling',
+        'error_tracking.features.error_alerts',
+        'error_tracking.monitoring.features.release_tracking',
+        'error_tracking.features.log_management',
+        'error_tracking.features.console_log_capture',
+        'product_analytics',
+        'session_replay',
+        'surveys',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 > **Note:** Although Datadog has a free tier, its 1 day data retention is not enough for real usage.
 
@@ -569,8 +282,6 @@ According to G2 reviewers, Datadog is chosen because:
 > #### Bottom line
 >
 > For huge enterprises, Datadog is likely already on your monitoring radar. The main complaint is the cost, which might make other tools more appealing, especially for smaller teams.
-
-<br />
 
 ## 5. New Relic
 
@@ -601,98 +312,28 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/New-Relic), as o
 
 ### How does New Relic compare to Sentry?
 
-<ComparisonTable column1="New Relic" column2="Sentry">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Error tracking"
-        description="Capture errors and exceptions, provide stack traces to debug issues"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Performance monitoring"
-        description="Monitor the performance of your app, including request latency, resource usage, and more"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Distributed tracing"
-        description="Follow a request across services to identify latency bottlenecks and inter-service dependencies."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Profiling"
-        description="Capture detailed CPU, memory, and function-level performance metrics to pinpoint inefficient code segments."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Alerting"
-        description="Detect and receive notifications when problems arise"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Release tracking"
-        description="Associate errors and performance issues with specific deployments"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Log management"
-        description="Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={'Feedback only'}
-        feature="Surveys"
-        description="Collect feedback and run satisfaction surveys"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={'Audit log, permissions'}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['newrelic', 'sentry']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'error_tracking',
+        'error_tracking.monitoring.features.performance_monitoring',
+        'error_tracking.monitoring.distributed_tracing',
+        'error_tracking.features.profiling',
+        'error_tracking.features.error_alerts',
+        'error_tracking.monitoring.features.release_tracking',
+        'error_tracking.features.log_management',
+        'error_tracking.features.console_log_capture',
+        'product_analytics',
+        'session_replay',
+        'surveys',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 ### Why do companies use New Relic?
 
@@ -705,8 +346,6 @@ G2 reviewers like New Relic because:
 > #### Bottom line
 >
 > New Relic is similar to Datadog: it has a ton of observability and monitoring features (along with the added bonus of a free tier). Definitely one to consider for enterprise DevOps and SRE teams.
-
-<br />
 
 ## 6. LogRocket
 
@@ -735,98 +374,28 @@ According to [BuiltWith](https://trends.builtwith.com/widgets/LogRocket), as of 
 
 ### How does LogRocket compare to Sentry?
 
-<ComparisonTable column1="LogRocket" column2="Sentry">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Error tracking"
-        description="Capture errors and exceptions, provide stack traces to debug issues"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Performance monitoring"
-        description="Monitor the performance of your app, including request latency, resource usage, and more"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Distributed tracing"
-        description="Follow a request across services to identify latency bottlenecks and inter-service dependencies."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Profiling"
-        description="Capture detailed CPU, memory, and function-level performance metrics to pinpoint inefficient code segments."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Alerting"
-        description="Detect and receive notifications when problems arise"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Release tracking"
-        description="Associate errors and performance issues with specific deployments"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Log management"
-        description="Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={'Feedback only'}
-        feature="Surveys"
-        description="Collect feedback and run satisfaction surveys"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={'Audit log, permissions'}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['logrocket', 'sentry']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'error_tracking',
+        'error_tracking.monitoring.features.performance_monitoring',
+        'error_tracking.monitoring.distributed_tracing',
+        'error_tracking.features.profiling',
+        'error_tracking.features.error_alerts',
+        'error_tracking.monitoring.features.release_tracking',
+        'error_tracking.features.log_management',
+        'error_tracking.features.console_log_capture',
+        'product_analytics',
+        'session_replay',
+        'surveys',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 ### Why do companies use LogRocket?
 
@@ -841,8 +410,6 @@ According to G2 reviews, customers use LogRocket because:
 > #### Bottom line
 >
 > LogRocket, like PostHog, is focused more engineering, product and support teams. It's a good alternative to Sentry for these types of teams.
-
-<br />
 
 ## 7. AppSignal
 
@@ -873,98 +440,28 @@ AppSignal isn't listed on BuiltWith, as it's largely backend focused, but organi
 
 ### How does AppSignal compare to Sentry?
 
-<ComparisonTable column1="AppSignal" column2="Sentry">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Error tracking"
-        description="Capture errors and exceptions, provide stack traces to debug issues"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Performance monitoring"
-        description="Monitor the performance of your app, including request latency, resource usage, and more"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Distributed tracing"
-        description="Follow a request across services to identify latency bottlenecks and inter-service dependencies."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Profiling"
-        description="Capture detailed CPU, memory, and function-level performance metrics to pinpoint inefficient code segments."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Alerting"
-        description="Detect and receive notifications when problems arise"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Release tracking"
-        description="Associate errors and performance issues with specific deployments"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Log management"
-        description="Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Product analytics"
-        description="Custom events, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={'Feedback only'}
-        feature="Surveys"
-        description="Collect feedback and run satisfaction surveys"
-    />
-    <ComparisonRow
-        column1={'Permissions'}
-        column2={'Audit log, permissions'}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['appsignal', 'sentry']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'error_tracking',
+        'error_tracking.monitoring.features.performance_monitoring',
+        'error_tracking.monitoring.distributed_tracing',
+        'error_tracking.features.profiling',
+        'error_tracking.features.error_alerts',
+        'error_tracking.monitoring.features.release_tracking',
+        'error_tracking.features.log_management',
+        'error_tracking.features.console_log_capture',
+        'product_analytics',
+        'session_replay',
+        'surveys',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
 
 ### Why do companies use AppSignal?
 

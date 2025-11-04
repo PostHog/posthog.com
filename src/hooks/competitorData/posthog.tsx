@@ -34,8 +34,8 @@ export const posthog = {
                 error_grouping: true,
                 exception_capture: true,
                 issue_management: true,
+                log_management: 'Beta',
                 mobile_sdk_coverage: 'Partial',
-                network_performance: true,
                 profiling: false,
                 source_map_support: true,
                 stack_tracing: false,
@@ -44,7 +44,7 @@ export const posthog = {
             monitoring: {
                 features: {
                     cron_monitoring: false,
-                    network_performance: true,
+                    distributed_tracing: false,
                     release_tracking: 'Partial',
                     performance_monitoring: true,
                 },

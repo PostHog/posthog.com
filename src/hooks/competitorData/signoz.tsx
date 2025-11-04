@@ -15,14 +15,12 @@ export const signoz = {
                 error_grouping: true,
                 stack_tracing: true,
                 mobile_sdk_coverage: 'Partial',
-                network_performance: true,
                 source_map_support: true,
                 user_device_context: true,
             },
             monitoring: {
                 features: {
                     cron_monitoring: '',
-                    network_performance: '',
                     release_tracking: 'Partial',
                     performance_monitoring: true,
                 },

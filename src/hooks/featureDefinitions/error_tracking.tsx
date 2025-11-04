@@ -34,6 +34,11 @@ export const errorTrackingFeatures = {
                 name: 'Error grouping & deduplication',
                 description: 'Automatically group similar errors and remove duplicates',
             },
+            log_management: {
+                name: 'Log management',
+                description:
+                    'Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance',
+            },
             stack_tracing: {
                 name: 'Stack tracing',
                 description: 'Track the path of a request across your system',
@@ -63,21 +68,22 @@ export const errorTrackingFeatures = {
                 name: 'Cron monitoring',
                 description: 'Track scheduled job health',
             },
-            network_performance: {
-                name: 'Network performance monitoring',
-                description: 'Track network requests and performance metrics',
+            distributed_tracing: {
+                name: 'Distributed tracing',
+                description:
+                    'Follow a request across services to identify latency bottlenecks and inter-service dependencies',
             },
-            source_map_support: {
-                name: 'Source map support',
-                description: 'Support for source maps in minified code',
+            performance_monitoring: {
+                name: 'Performance monitoring',
+                description: 'Trace requests or queries and profile functions',
             },
             release_tracking: {
                 name: 'Release and deploy tracking',
                 description: 'Track errors by release version and deployment',
             },
-            performance_monitoring: {
-                name: 'Performance monitoring',
-                description: 'Trace requests or queries and profile functions',
+            source_map_support: {
+                name: 'Source map support',
+                description: 'Support for source maps in minified code',
             },
         },
     },

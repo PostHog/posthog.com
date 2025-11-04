@@ -149,7 +149,18 @@ export const logrocket = {
         error_tracking: {
             available: true,
             features: {
+                console_log_capture: true,
+                error_alerts: true,
                 issue_management: true,
+                log_management: false,
+                profiling: false,
+            },
+            monitoring: {
+                features: {
+                    distributed_tracing: false,
+                    performance_monitoring: true,
+                    release_tracking: false,
+                },
             },
         },
         dashboards: {
@@ -222,6 +233,7 @@ export const logrocket = {
             gdpr_ready: true,
             hipaa_ready: true,
             history_audit_logs: false,
+            role_based_access_control: true,
             saml_sso: true,
             soc2_certified: true,
             two_factor_auth: true,
