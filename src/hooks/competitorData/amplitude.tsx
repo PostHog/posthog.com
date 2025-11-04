@@ -305,7 +305,6 @@ export const amplitude = {
                 custom_targeting: true,
                 custom_ui: true,
                 customizable_wait_periods: false,
-                display_conditions: true,
                 embedded_links: false,
                 emoji_reaction: true,
                 event_triggered: true,
@@ -326,6 +325,11 @@ export const amplitude = {
                 slack_integration: true,
                 survey_templates: true,
                 user_interview_requests: false,
+            },
+            targeting: {
+                features: {
+                    display_conditions: true,
+                },
             },
         },
         revenue_analytics: {

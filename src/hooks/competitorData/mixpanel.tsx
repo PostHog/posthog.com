@@ -287,7 +287,6 @@ export const mixpanel = {
                 completion_conditions: false,
                 custom_targeting: false,
                 customizable_wait_periods: false,
-                display_conditions: false,
                 linked_feature_flag: false,
                 nps_surveys: false,
                 pmf_surveys: false,
