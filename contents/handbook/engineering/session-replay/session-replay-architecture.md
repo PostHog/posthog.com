@@ -127,7 +127,7 @@ retention_period_days
 
 **`session_recording_events`** (legacy):
 - Stored raw `snapshot_data` directly in ClickHouse
-- Deprecated, being phased out
+- Deprecated, no usage (maybe except very old, long-lived hobby installs but unlikely and totally unsupported)
 
 ### PostgreSQL
 **`posthog_sessionrecording`** model:
