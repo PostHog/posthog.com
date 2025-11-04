@@ -56,7 +56,7 @@ export const pendo = {
                     features: {},
                 },
                 group_analytics: {
-                    available: false,
+                    available: true,
                     features: {},
                 },
             },

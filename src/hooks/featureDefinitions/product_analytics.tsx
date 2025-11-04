@@ -44,7 +44,7 @@ export const productAnalyticsFeatures = {
         },
         toolbar: {
             name: 'Toolbar',
-            description: 'View insights on your live website or app with an overlay',
+            description: 'Tag events or view insights on your live website or app with an overlay',
         },
         user_profiles: {
             name: 'User profiles',

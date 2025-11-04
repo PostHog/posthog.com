@@ -20,7 +20,7 @@ export const heap = {
                 monetization_analytics: false,
                 predictive_insights: false,
                 real_time_view: false,
-                toolbar: false,
+                toolbar: true,
                 user_profiles: true,
                 insights: {
                     available: true,

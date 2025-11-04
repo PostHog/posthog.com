@@ -12,6 +12,7 @@ export const glassbox = {
                 cohorts: false,
                 custom_events: true,
                 custom_properties: true,
+                toolbar: false,
                 group_analytics: {
                     available: true,
                 },
@@ -74,6 +75,9 @@ export const glassbox = {
             available: false,
         },
         dashboards: {
+            available: true,
+        },
+        surveys: {
             available: true,
         },
     },

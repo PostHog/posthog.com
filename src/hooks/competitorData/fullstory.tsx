@@ -66,7 +66,7 @@ export const fullstory = {
                     features: {},
                 },
                 group_analytics: {
-                    available: false,
+                    available: true,
                     features: {},
                 },
             },
