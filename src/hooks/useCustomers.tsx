@@ -12,6 +12,7 @@ import CreatifyLogoDark from '../images/customers/creatify-dark.png'
 import DHLLogo from '../components/CustomerLogos/DHLLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
+import GrantableLogo from '../components/CustomerLogos/GrantableLogo'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
@@ -649,6 +650,26 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Business loans and financial services',
         featured: false,
         logo: QredLogo,
+        height: 8,
+    },
+    grantable: {
+        name: 'Grantable',
+        toolsUsed: [
+            'workflows',
+            'feature_flags',
+            'session_replay',
+            'experiments',
+            'product_analytics',
+            'surveys',
+            'error_tracking',
+            'llm_analytics',
+            'data_warehouse',
+        ],
+        industries: ['Business', 'SaaS'],
+        users: ['Data', 'Product', 'Marketing'],
+        notes: 'AI Compliance and Grant Writing',
+        featured: false,
+        logo: GrantableLogo,
         height: 8,
     },
     // swype: {

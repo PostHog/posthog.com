@@ -153,7 +153,7 @@ After materializing our top 100 properties and updating our queries, we analyzed
 
 As a product, we're only scratching the surface of what ClickHouse can do to power product analytics. If you're interested in helping us with these kinds of problems, [we're hiring](https://posthog.com/careers)!
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <NewsletterForm />
 

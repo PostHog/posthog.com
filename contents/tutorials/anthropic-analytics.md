@@ -10,7 +10,7 @@ tags:
 
 Tracking your Claude usage, costs, and latency is crucial to understanding how your users are interacting with your AI and LLM-powered features.
 
-In this tutorial, we'll build a basic Next.js app, implement the Claude API, and capture these events automatically using PostHog's LLM analytics product.
+In this tutorial, we'll build a basic Next.js app, implement the Claude API, and capture these events automatically using PostHog LLM analytics.
 
 ## 1. Creating a Next.js app
 
