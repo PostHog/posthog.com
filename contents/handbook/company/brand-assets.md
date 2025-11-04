@@ -192,7 +192,7 @@ Our hedgehog mascot is called Max and we're quite particular about how he (or an
 
 ![How to draw a hedgehog](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_guide_1_2fab7b9cb6.png)
 
-If Max is drawn in colour he should always have a beige body with brown spines, arms, and legs. His arms should only bend once in the middle and he doesn't have fingers unless swearing or pointing. His feet are stubby by design and his snout lines should be visible unless obscured by a mask or beard. His expression comes mainly from his eyebrows. 
+If Max is drawn in color he should always have a beige body with brown spines, arms, and legs. His arms should only bend once in the middle and he doesn't have fingers unless swearing or pointing. His feet are stubby by design and his snout lines should be visible unless obscured by a mask or beard. His expression comes mainly from his eyebrows. 
 
 ![Draw the rest of the hedgehog](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_guide2_d61482248f.png)
 
