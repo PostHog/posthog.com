@@ -161,7 +161,7 @@ Two-phase fetch:
   - Gets S3 URLs with byte ranges for each session block
   - Generates pre-signed URLs (60s expiry)
   - Client fetches compressed blocks directly from S3
-- **Legacy**: Old recordings stored in ClickHouse `session_recording_events` table
+- **Legacy**: Recordings were originally stored in ClickHouse `session_recording_events` table (migrated away in 2024)
 
 **Query** (`queries/session_replay_events.py`):
 ```python
