@@ -8,7 +8,7 @@ export const platformFeatures = {
             },
             open_source: {
                 name: 'Open source',
-                description: 'Fully open-source codebase',
+                description: 'Audit code, contribute to roadmap, and build integrations',
             },
             reverse_proxy: {
                 name: 'Reverse proxy',
@@ -246,6 +246,10 @@ export const platformFeatures = {
             mobile_sdks: {
                 name: 'Mobile SDKs',
                 description: 'Capture events and use features from Android, iOS, and more',
+            },
+            project_management_tools: {
+                name: 'Project management tools',
+                description: 'Plan better with backlogs, boards, calendars, and more',
             },
             notebooks: {
                 name: 'Notebooks',

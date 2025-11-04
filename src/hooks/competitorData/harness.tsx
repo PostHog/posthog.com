@@ -1,35 +1,33 @@
-export const unleash = {
-    name: 'Unleash',
-    key: 'unleash',
+export const harness = {
+    name: 'Harness',
+    key: 'harness',
     assets: {
-        icon: '/images/competitors/unleash.svg',
+        icon: '/images/competitors/harness.svg',
     },
     products: {
-        product_analytics: {
-            available: false,
-            features: {
-                cohorts: true,
-            },
-        },
         feature_flags: {
             available: true,
             features: {
-                automation: true,
                 json_payloads: true,
             },
             implementation: {
                 local_evaluation: true,
             },
             management: {
-                data_source: 'First-party (flags)',
                 flag_scheduling: true,
             },
         },
         experiments: {
-            available: 'Requires 3rd-party analytics',
+            available: true,
             features: {
                 funnel_tests: false,
             },
+            analysis: {
+                statistics_engine: 'Frequentist',
+            },
+        },
+        product_analytics: {
+            available: false,
         },
         session_replay: {
             available: false,
@@ -37,16 +35,14 @@ export const unleash = {
     },
     platform: {
         deployment: {
-            open_source: true,
-            self_host: true,
-            eu_hosting: true,
-        },
-        developer: {
-            api: true,
+            open_source: 'SDKs',
         },
         pricing: {
             self_serve: true,
             transparent_pricing: true,
+        },
+        developer: {
+            api: 'Edit only',
         },
         security: {
             history_audit_logs: true,
@@ -54,6 +50,6 @@ export const unleash = {
         },
     },
     pricing: {
-        model: 'Free + cloud subscription',
+        model: 'Free + subscription',
     },
 }

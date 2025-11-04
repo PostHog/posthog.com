@@ -5,6 +5,22 @@ export const vwo = {
         icon: '/images/competitors/vwo.svg',
     },
     products: {
+        product_analytics: {
+            available: false,
+        },
+        feature_flags: {
+            available: true,
+            features: {
+                automation: true,
+            },
+            management: {
+                data_source: 'First-party',
+                flag_scheduling: true,
+            },
+            implementation: {
+                local_evaluation: true,
+            },
+        },
         experiments: {
             available: true,
             pricing: {
@@ -16,6 +32,7 @@ export const vwo = {
                 dynamic_cohorts: false,
                 experiment_analysis: false,
                 funnel_metrics: false,
+                funnel_tests: true,
                 namespacing: false,
                 native_goal_tracking: false,
                 no_code_experiments: false,
@@ -88,8 +105,9 @@ export const vwo = {
         },
         pricing: {
             free_tier: false,
-            transparent_pricing: false,
             usage_based_pricing: false,
+            self_serve: false,
+            transparent_pricing: false,
         },
         integrations: {
             datadog: false,
@@ -104,7 +122,8 @@ export const vwo = {
         security: {
             gdpr_ready: false,
             hipaa_ready: false,
-            history_audit_logs: false,
+            history_audit_logs: true,
+            role_based_access_control: true,
             saml_sso: false,
             soc2_certified: false,
             two_factor_auth: false,

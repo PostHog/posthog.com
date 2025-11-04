@@ -17,6 +17,7 @@ export const optimizely = {
                 dynamic_cohorts: false,
                 experiment_analysis: false,
                 funnel_metrics: true,
+                funnel_tests: true,
                 namespacing: false,
                 native_goal_tracking: false,
                 no_code_experiments: true,

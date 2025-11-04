@@ -40,6 +40,10 @@ export const experimentsFeatures = {
             name: 'Experiment analysis',
             description: 'Analyze results of A/B tests',
         },
+        funnel_tests: {
+            name: 'Funnel tests',
+            description: 'Use conversion funnels as goals for your A/B test',
+        },
         no_code_experiments: {
             name: 'No-code experiments',
             description: 'Modify your website and run experiments without writing code',

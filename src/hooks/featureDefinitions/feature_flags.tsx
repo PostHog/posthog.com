@@ -11,6 +11,10 @@ export const featureFlagsFeatures = {
         },
     },
     features: {
+        automation: {
+            name: 'Automation',
+            description: 'Trigger flag states based on schedules, triggers',
+        },
         boolean_flags: {
             name: 'Boolean flags',
             description: 'Simple on/off flags to enable or disable features',
@@ -97,6 +101,10 @@ export const featureFlagsFeatures = {
             approvals: {
                 name: 'Flag approvals',
                 description: 'Require approvals to change flags',
+            },
+            data_source: {
+                name: 'Data source',
+                description: 'Main source of data used by flags and A/B tests',
             },
             flag_administration: {
                 name: 'Flag administration',

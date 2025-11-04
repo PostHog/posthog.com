@@ -12,6 +12,7 @@ export const launchdarkly = {
                 free_tier: false,
             },
             features: {
+                automation: true,
                 boolean_flags: true,
                 early_access_management: false,
                 multivariate_flags: true,
@@ -38,6 +39,7 @@ export const launchdarkly = {
             management: {
                 features: {
                     approvals: true,
+                    data_source: 'First-party',
                     flag_administration: false,
                     flag_scheduling: 'Enterprise',
                     history_activity: false,
@@ -78,6 +80,7 @@ export const launchdarkly = {
                 dynamic_cohorts: false,
                 experiment_analysis: false,
                 funnel_metrics: false,
+                funnel_tests: true,
                 namespacing: false,
                 native_goal_tracking: false,
                 no_code_experiments: false,

@@ -17,6 +17,7 @@ export const flagsmith = {
                 free_tier: true,
             },
             features: {
+                automation: true,
                 boolean_flags: false,
                 early_access_management: false,
                 json_payloads: true,
@@ -44,6 +45,7 @@ export const flagsmith = {
             management: {
                 features: {
                     approvals: true,
+                    data_source: 'Third-party',
                     flag_administration: false,
                     flag_scheduling: true,
                     history_activity: false,
@@ -74,6 +76,7 @@ export const flagsmith = {
         experiments: {
             available: 'Requires third-party analytics',
             features: {
+                funnel_tests: false,
                 llm_support: false,
                 multivariate: false,
                 statistics_engine: 'Bayesian, Frequentist',

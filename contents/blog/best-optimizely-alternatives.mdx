@@ -12,8 +12,7 @@ tags:
     - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
@@ -48,80 +47,18 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of 
 
 The core of feature flags and experimentation are similar between the two. The big difference is that PostHog is free, open-source, and has analytics built in, while Optimizely has a range of enterprise content, commerce, and collaboration tools.
 
-<ComparisonTable column1="PostHog" column2="Optimizely">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Visual experiment editor"
-        description="Easily create experiments that make changes to your site or app"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnel tests"
-        description="Use conversion funnels as goals for your A/B test"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Advanced targeting"
-        description="Target flags and A/B tests on segments and non-users"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Personalization"
-        description="Deliver targeted content and products to users"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="CMS"
-        description="Produce and manage content to show on your site"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Built-in analytics"
-        description="First-party analytics with custom events, pageviews, and more"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="API"
-        description="Evaluate and edit flags and A/B tests with an API"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Project management tools"
-        description="Plan better with backlogs, boards, calendars, and more."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'optimizely']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.deployment.open_source',
+        'feature_flags',
+        'experiments',
+        'experiments.features.funnel_tests',
+        'product_analytics',
+        'platform.developer.api',
+    ]}
+/>
 
 ### Why do companies use PostHog?
 
@@ -174,80 +111,18 @@ Optimizely and VWO are both massive, multi-product platforms with many similarit
 
 The difference is that Optimizely has CMS and content tools while VWO has more product tools like session replays, surveys, and [behavioral analytics](/product-engineers/behavioral-analytics).
 
-<ComparisonTable column1="VWO" column2="Optimizely">
-    <ComparisonRow
-        column1="Trial"
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Visual experiment editor"
-        description="Easily create experiments that make changes to your site or app"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnel tests"
-        description="Use conversion funnels as goals for your A/B test"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Advanced targeting"
-        description="Target flags and A/B tests on segments and non-users"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Personalization"
-        description="Deliver targeted content and products to users"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="CMS"
-        description="Produce and manage content to show on your site"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Built-in analytics"
-        description="First-party analytics with custom events, pageviews, and more"
-    />
-    <ComparisonRow
-        column1="Edit only"
-        column2={true}
-        feature="API"
-        description="Evaluate and edit flags and A/B tests with an API"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Project management tools"
-        description="Plan better with backlogs, boards, calendars, and more."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['vwo', 'optimizely']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.deployment.open_source',
+        'feature_flags',
+        'experiments',
+        'experiments.features.funnel_tests',
+        'product_analytics',
+        'platform.developer.api',
+    ]}
+/>
 
 ### Why do companies use VWO?
 
@@ -294,80 +169,18 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), 1
 
 [LaunchDarkly](/blog/best-launchdarkly-alternatives) focuses more on feature releases and development best practices, while Optimizely focuses on improving digital experiences. This means LaunchDarkly has more robust governance and automation tools but is missing ones for non-developers like a visual editor, CMS, or project management.
 
-<ComparisonTable column1="LaunchDarkly" column2="Optimizely">
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Visual experiment editor"
-        description="Easily create experiments that make changes to your site or app"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnel tests"
-        description="Use conversion funnels as goals for your A/B test"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Advanced targeting"
-        description="Target flags and A/B tests on segments and non-users"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Personalization"
-        description="Deliver targeted content and products to users"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="CMS"
-        description="Produce and manage content to show on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Built-in analytics"
-        description="First-party analytics with custom events, pageviews, and more"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="API"
-        description="Evaluate and edit flags and A/B tests with an API"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Project management tools"
-        description="Plan better with backlogs, boards, calendars, and more."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['launchdarkly', 'optimizely']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.deployment.open_source',
+        'feature_flags',
+        'experiments',
+        'experiments.features.funnel_tests',
+        'product_analytics',
+        'platform.developer.api',
+    ]}
+/>
 
 ### Why do companies use LaunchDarkly?
 
@@ -416,80 +229,18 @@ According to BuiltWith, [Mutiny](https://trends.builtwith.com/analytics/Mutiny) 
 
 Mutiny is entirely focused on personalization, meaning they don't have the breadth of tools Optimizely has. They do include tools important to marketers like the visual editor and conversion analytics though.
 
-<ComparisonTable column1="Mutiny" column2="Optimizely">
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Visual experiment editor"
-        description="Easily create experiments that make changes to your site or app"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Funnel tests"
-        description="Use conversion funnels as goals for your A/B test"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Advanced targeting"
-        description="Target flags and A/B tests on segments and non-users"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Personalization"
-        description="Deliver targeted content and products to users"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="CMS"
-        description="Produce and manage content to show on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Built-in analytics"
-        description="First-party analytics with custom events, pageviews, and more"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="API"
-        description="Evaluate and edit flags and A/B tests with an API"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Project management tools"
-        description="Plan better with backlogs, boards, calendars, and more."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['mutiny', 'optimizely']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.deployment.open_source',
+        'feature_flags',
+        'experiments',
+        'experiments.features.funnel_tests',
+        'product_analytics',
+        'platform.developer.api',
+    ]}
+/>
 
 ### Why do companies use Mutiny?
 
@@ -538,80 +289,18 @@ As of April 2024, 2,351 of the top million sites use AB Tasty according to [Buil
 
 AB Tasty shares many similarities to Optimizely when it comes to digital experience optimization, though it lacks funnel tests and API evaluation. Like many of the other alternatives listed here, it also doesn't include the content or project management tools Optimizely offers.
 
-<ComparisonTable column1="AB Tasty" column2="Optimizely">
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Visual experiment editor"
-        description="Easily create experiments that make changes to your site or app"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Funnel tests"
-        description="Use conversion funnels as goals for your A/B test"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Advanced targeting"
-        description="Target flags and A/B tests on segments and non-users"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Personalization"
-        description="Deliver targeted content and products to users"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="CMS"
-        description="Produce and manage content to show on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Built-in analytics"
-        description="First-party analytics with custom events, pageviews, and more"
-    />
-    <ComparisonRow
-        column1="Edit only"
-        column2={true}
-        feature="API"
-        description="Evaluate and edit flags and A/B tests with an API"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Project management tools"
-        description="Plan better with backlogs, boards, calendars, and more."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['ab_tasty', 'optimizely']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.deployment.open_source',
+        'feature_flags',
+        'experiments',
+        'experiments.features.funnel_tests',
+        'product_analytics',
+        'platform.developer.api',
+    ]}
+/>
 
 ### Why do companies use AB Tasty?
 
@@ -658,80 +347,18 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Dynamic-Yield), 
 
 Dynamic Yield focuses more on personalization than optimization but includes many of the same features as Optimizely. For example, feature flags are not a primary feature, but a visual experiment editor is included.
 
-<ComparisonTable column1="Dynamic Yield" column2="Optimizely">
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Visual experiment editor"
-        description="Easily create experiments that make changes to your site or app"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Funnel tests"
-        description="Use conversion funnels as goals for your A/B test"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Advanced targeting"
-        description="Target flags and A/B tests on segments and non-users"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Personalization"
-        description="Deliver targeted content and products to users"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="CMS"
-        description="Produce and manage content to show on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Built-in analytics"
-        description="First-party analytics with custom events, pageviews, and more"
-    />
-    <ComparisonRow
-        column1="Evaluate only"
-        column2={true}
-        feature="API"
-        description="Evaluate and edit flags and A/B tests with an API"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Project management tools"
-        description="Plan better with backlogs, boards, calendars, and more."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['dynamic_yield', 'optimizely']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.deployment.open_source',
+        'feature_flags',
+        'experiments',
+        'experiments.features.funnel_tests',
+        'product_analytics',
+        'platform.developer.api',
+    ]}
+/>
 
 ### Why do companies use Dynamic Yield?
 
@@ -778,80 +405,18 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Kameleoon), 816 
 
 Kameleoon focuses on experimentation and engineering best practices more than Optimizely, but it still includes a no-code experiment editor that product managers can use. It doesn't include the CMS and project management tools that Optimizely has.
 
-<ComparisonTable column1="Kameleoon" column2="Optimizely">
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Visual experiment editor"
-        description="Easily create experiments that make changes to your site or app"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Funnel tests"
-        description="Use conversion funnels as goals for your A/B test"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Advanced targeting"
-        description="Target flags and A/B tests on segments and non-users"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Personalization"
-        description="Deliver targeted content and products to users"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="CMS"
-        description="Produce and manage content to show on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Built-in analytics"
-        description="First-party analytics with custom events, pageviews, and more"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="API"
-        description="Evaluate and edit flags and A/B tests with an API"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Project management tools"
-        description="Plan better with backlogs, boards, calendars, and more."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['kameleoon', 'optimizely']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.deployment.open_source',
+        'feature_flags',
+        'experiments',
+        'experiments.features.funnel_tests',
+        'product_analytics',
+        'platform.developer.api',
+    ]}
+/>
 
 ### Why do companies use Kameleoon?
 

@@ -12,6 +12,7 @@ export const growthbook = {
                 free_tier: true,
             },
             features: {
+                automation: true,
                 boolean_flags: true,
                 early_access_management: false,
                 multivariate_flags: false,
@@ -38,6 +39,7 @@ export const growthbook = {
             management: {
                 features: {
                     approvals: false,
+                    data_source: 'Third-party',
                     flag_administration: false,
                     flag_scheduling: true,
                     history_activity: false,
@@ -76,6 +78,7 @@ export const growthbook = {
                 dynamic_cohorts: false,
                 experiment_analysis: false,
                 funnel_metrics: false,
+                funnel_tests: false,
                 namespacing: true,
                 native_goal_tracking: false,
                 no_code_experiments: false,
@@ -168,7 +171,7 @@ export const growthbook = {
             self_host: true,
         },
         developer: {
-            api: 'Beta',
+            api: true,
             native_data_sources: false,
             notebooks: false,
             sdks: '11',

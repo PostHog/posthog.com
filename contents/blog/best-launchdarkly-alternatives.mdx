@@ -12,8 +12,7 @@ tags:
     - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
@@ -53,92 +52,23 @@ The core features for feature flags and experimentation are similar between the 
 
 Features like integrations, API controls, and reusable segments are only available on LaunchDarkly's Pro plan, but are available for free on PostHog.
 
-<ComparisonTable column1="PostHog" column2="LaunchDarkly">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Advanced targeting"
-        description="Target flags and A/B tests on segments and non-users"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnel tests"
-        description="Use conversion funnels as goals for your A/B test"
-    />
-    <ComparisonRow
-        column1={'Bayesian, Frequentist'}
-        column2={'Bayesian, Frequentist'}
-        feature="Statistical approach"
-        description="The models available for statistical analysis of experiments"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Advanced analytics"
-        description="Custom SQL, paths, and retention analysis with flag data and beyond."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Major SDKs"
-        description="Pre-built SDKs for JavaScript, Python, iOS, Android, Go, and more"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="API"
-        description="Evaluate and edit flags and A/B tests with an API"
-    />
-    <ComparisonRow
-        column1={'Scheduling only'}
-        column2={true}
-        feature="Automations"
-        description="Trigger flag states based on schedules, triggers"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Imports and exports"
-        description="Import and export data to and from other popular tools"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={'SDKs'}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'launchdarkly']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.deployment.open_source',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.management.flag_scheduling',
+        'experiments',
+        'experiments.features.funnel_tests',
+        'experiments.analysis.statistics_engine',
+        'product_analytics',
+        'platform.developer.api',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+    ]}
+/>
 
 ### How popular is PostHog?
 
@@ -189,92 +119,23 @@ It also includes a warehouse-native mode to connect directly and utilize your da
 
 Statsig focuses a lot on their experimentation product, but they are also much broader than LaunchDarkly thanks to their built-in analytics and warehouse-native mode.
 
-<ComparisonTable column1="Statsig" column2="LaunchDarkly">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Advanced targeting"
-        description="Target flags and A/B tests on segments and non-users"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnel tests"
-        description="Use conversion funnels as goals for your A/B test"
-    />
-    <ComparisonRow
-        column1={'Bayesian, Frequentist'}
-        column2={'Bayesian, Frequentist'}
-        feature="Statistical approach"
-        description="The models available for statistical analysis of experiments"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Advanced analytics"
-        description="Custom SQL, paths, and retention analysis with flag data and beyond."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Major SDKs"
-        description="Pre-built SDKs for JavaScript, Python, iOS, Android, Go, and more"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="API"
-        description="Evaluate and edit flags and A/B tests with an API"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Automations"
-        description="Trigger flag states based on schedules, triggers"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Imports and exports"
-        description="Import and export data to and from other popular tools"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={'SDKs'}
-        column2={'SDKs'}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['statsig', 'launchdarkly']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.deployment.open_source',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.management.flag_scheduling',
+        'experiments',
+        'experiments.features.funnel_tests',
+        'experiments.analysis.statistics_engine',
+        'product_analytics',
+        'platform.developer.api',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+    ]}
+/>
 
 ### How popular is Statsig?
 
@@ -325,92 +186,23 @@ According to G2, users are big fans of Statsig because:
 
 When it comes to experimentation, Optimizely and LaunchDarkly have all the core features teams want. Beyond this, Optimizely has much more available like content and project management, while LaunchDarkly has greater depth in workflows.
 
-<ComparisonTable column1="Optimizely" column2="LaunchDarkly">
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Advanced targeting"
-        description="Target flags and A/B tests on segments and non-users"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnel tests"
-        description="Use conversion funnels as goals for your A/B test"
-    />
-    <ComparisonRow
-        column1={'Sequential'}
-        column2={'Bayesian, Frequentist'}
-        feature="Statistical approach"
-        description="The models available for statistical analysis of experiments"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Advanced analytics"
-        description="Custom SQL, paths, and retention analysis with flag data and beyond."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Major SDKs"
-        description="Pre-built SDKs for JavaScript, Python, iOS, Android, Go, and more"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="API"
-        description="Evaluate and edit flags and A/B tests with an API"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Automations"
-        description="Trigger flag states based on schedules, triggers"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Imports and exports"
-        description="Import and export data to and from other popular tools"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={'SDKs'}
-        column2={'SDKs'}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['optimizely', 'launchdarkly']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.deployment.open_source',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.management.flag_scheduling',
+        'experiments',
+        'experiments.features.funnel_tests',
+        'experiments.analysis.statistics_engine',
+        'product_analytics',
+        'platform.developer.api',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+    ]}
+/>
 
 ### How popular is Optimizely?
 
@@ -463,92 +255,23 @@ Split, a feature flags and experimentation platform that used to be on this list
 
 Both Harness and LaunchDarkly have a broad, enterprise focus. The difference is that Harness focuses on DevOps and CI/CD, while LaunchDarkly goes deeper on feature management.
 
-<ComparisonTable column1="Harness" column2="LaunchDarkly">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Advanced targeting"
-        description="Target flags and A/B tests on segments and non-users"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Funnel tests"
-        description="Use conversion funnels as goals for your A/B test"
-    />
-    <ComparisonRow
-        column1={'Frequentist'}
-        column2={'Bayesian, Frequentist'}
-        feature="Statistical approach"
-        description="The models available for statistical analysis of experiments"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Advanced analytics"
-        description="Custom SQL, paths, and retention analysis with flag data and beyond."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Major SDKs"
-        description="Pre-built SDKs for JavaScript, Python, iOS, Android, Go, and more"
-    />
-    <ComparisonRow
-        column1={'Edit only'}
-        column2={true}
-        feature="API"
-        description="Evaluate and edit flags and A/B tests with an API"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Automations"
-        description="Trigger flag states based on schedules, triggers"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Imports and exports"
-        description="Import and export data to and from other popular tools"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={'SDKs'}
-        column2={'SDKs'}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['harness', 'launchdarkly']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.deployment.open_source',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.management.flag_scheduling',
+        'experiments',
+        'experiments.features.funnel_tests',
+        'experiments.analysis.statistics_engine',
+        'product_analytics',
+        'platform.developer.api',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+    ]}
+/>
 
 ### How popular is Harness?
 
@@ -601,92 +324,23 @@ The VWO platform is home to multiple different products including testing, insig
 
 Like Optimizely, VWO has a larger feature set than LaunchDarkly, but less of a focus on feature flags specifically.
 
-<ComparisonTable column1="VWO" column2="LaunchDarkly">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Advanced targeting"
-        description="Target flags and A/B tests on segments and non-users"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnel tests"
-        description="Use conversion funnels as goals for your A/B test"
-    />
-    <ComparisonRow
-        column1={'Bayesian'}
-        column2={'Bayesian, Frequentist'}
-        feature="Statistical approach"
-        description="The models available for statistical analysis of experiments"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Advanced analytics"
-        description="Custom SQL, paths, and retention analysis with flag data and beyond."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Major SDKs"
-        description="Pre-built SDKs for JavaScript, Python, iOS, Android, Go, and more"
-    />
-    <ComparisonRow
-        column1={'Edit only'}
-        column2={true}
-        feature="API"
-        description="Evaluate and edit flags and A/B tests with an API"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Automations"
-        description="Trigger flag states based on schedules, triggers"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Imports and exports"
-        description="Import and export data to and from other popular tools"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={'SDKs'}
-        column2={'SDKs'}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['vwo', 'launchdarkly']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.deployment.open_source',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.management.flag_scheduling',
+        'experiments',
+        'experiments.features.funnel_tests',
+        'experiments.analysis.statistics_engine',
+        'product_analytics',
+        'platform.developer.api',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+    ]}
+/>
 
 ### How popular is VWO?
 
@@ -737,92 +391,23 @@ A/B Tasty is a suite of tools for optimizing brand and product experiments. This
 
 AB Tasty has many similar features to LaunchDarkly but lacks the depth. For example, it's missing conversion funnel A/B tests, API evaluation, automation, and more. It makes up for this in the other optimization tools its platform includes.
 
-<ComparisonTable column1="AB Tasty" column2="LaunchDarkly">
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Advanced targeting"
-        description="Target flags and A/B tests on segments and non-users"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Funnel tests"
-        description="Use conversion funnels as goals for your A/B test"
-    />
-    <ComparisonRow
-        column1={'Bayesian, Frequentist'}
-        column2={'Bayesian, Frequentist'}
-        feature="Statistical approach"
-        description="The models available for statistical analysis of experiments"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Advanced analytics"
-        description="Custom SQL, paths, and retention analysis with flag data and beyond."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Major SDKs"
-        description="Pre-built SDKs for JavaScript, Python, iOS, Android, Go, and more"
-    />
-    <ComparisonRow
-        column1={'Edit only'}
-        column2={true}
-        feature="API"
-        description="Evaluate and edit flags and A/B tests with an API"
-    />
-    <ComparisonRow
-        column1={'Limited'}
-        column2={true}
-        feature="Automations"
-        description="Trigger flag states based on schedules, triggers"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Imports and exports"
-        description="Import and export data to and from other popular tools"
-    />
-    <ComparisonRow
-        column1={'No audit'}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={'SDKs'}
-        column2={'SDKs'}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['ab_tasty', 'launchdarkly']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.deployment.open_source',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.management.flag_scheduling',
+        'experiments',
+        'experiments.features.funnel_tests',
+        'experiments.analysis.statistics_engine',
+        'product_analytics',
+        'platform.developer.api',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+    ]}
+/>
 
 ### How popular is AB Tasty?
 
@@ -871,92 +456,23 @@ DevCycle is a startup launched out of Taplytics, another A/B testing platform. I
 
 DevCycle has many of the feature flagging features but misses out A/B testing.
 
-<ComparisonTable column1="DevCycle" column2="LaunchDarkly">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={'Segments'}
-        column2={true}
-        feature="Advanced targeting"
-        description="Target flags and A/B tests on segments and non-users"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Funnel tests"
-        description="Use conversion funnels as goals for your A/B test"
-    />
-    <ComparisonRow
-        column1={'Frequentist'}
-        column2={'Bayesian, Frequentist'}
-        feature="Statistical approach"
-        description="The models available for statistical analysis of experiments"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Advanced analytics"
-        description="Custom SQL, paths, and retention analysis with flag data and beyond."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Major SDKs"
-        description="Pre-built SDKs for JavaScript, Python, iOS, Android, Go, and more"
-    />
-    <ComparisonRow
-        column1={'Edit only'}
-        column2={true}
-        feature="API"
-        description="Evaluate and edit flags and A/B tests with an API"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Automations"
-        description="Trigger flag states based on schedules, triggers"
-    />
-    <ComparisonRow
-        column1={'Exports only'}
-        column2={true}
-        feature="Imports and exports"
-        description="Import and export data to and from other popular tools"
-    />
-    <ComparisonRow
-        column1={'No audit log'}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={'SDKs'}
-        column2={'SDKs'}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['devcycle', 'launchdarkly']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.deployment.open_source',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.management.flag_scheduling',
+        'experiments',
+        'experiments.features.funnel_tests',
+        'experiments.analysis.statistics_engine',
+        'product_analytics',
+        'platform.developer.api',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+    ]}
+/>
 
 ### How popular is DevCycle?
 

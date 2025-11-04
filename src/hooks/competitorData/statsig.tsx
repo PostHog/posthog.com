@@ -29,6 +29,7 @@ export const statsig = {
                 count_value_metrics: false,
                 custom_goals: true,
                 dynamic_cohorts: false,
+                funnel_tests: true,
                 experiment_analysis: false,
                 funnel_metrics: false,
                 namespacing: false,
@@ -283,7 +284,7 @@ export const statsig = {
             self_serve: true,
         },
         developer: {
-            api: false,
+            api: true,
             collaboration: false,
             mobile_sdks: false,
             native_data_sources: false,

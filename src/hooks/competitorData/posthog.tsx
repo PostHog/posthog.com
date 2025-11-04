@@ -249,6 +249,7 @@ export const posthog = {
                 free_tier: '1 million API requests',
             },
             features: {
+                automation: true,
                 boolean_flags: true,
                 early_access_management: true,
                 multivariate_flags: true,
@@ -278,6 +279,7 @@ export const posthog = {
             management: {
                 features: {
                     approvals: true,
+                    data_source: 'First-party',
                     flag_administration: true,
                     flag_scheduling: true,
                     history_activity: true,
@@ -318,6 +320,7 @@ export const posthog = {
                 dynamic_cohorts: true,
                 experiment_analysis: true,
                 funnel_metrics: true,
+                funnel_tests: true,
                 namespacing: false,
                 native_goal_tracking: true,
                 no_code_experiments: 'Beta',
@@ -616,11 +619,15 @@ export const posthog = {
             cross_domain_tracking: true,
             mobile_sdks: true,
             native_data_sources: true,
-            notebooks: true,
             sdks: '14',
             server_side_sdks: true,
             sql: true,
             tv_sdks: false,
+        },
+        tools: {
+            cms: false,
+            notebooks: true,
+            project_management_tools: false,
         },
         analytics_integration: {
             built_in_analytics: true,

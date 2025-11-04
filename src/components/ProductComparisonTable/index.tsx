@@ -48,6 +48,11 @@ import { eppo } from '../../hooks/competitorData/eppo'
 import { unleash } from '../../hooks/competitorData/unleash'
 import { split } from '../../hooks/competitorData/split'
 import { devcycle } from '../../hooks/competitorData/devcycle'
+import { ab_tasty } from '../../hooks/competitorData/ab_tasty'
+import { harness } from '../../hooks/competitorData/harness'
+import { mutiny } from '../../hooks/competitorData/mutiny'
+import { dynamic_yield } from '../../hooks/competitorData/dynamic_yield'
+import { kameleoon } from '../../hooks/competitorData/kameleoon'
 
 // Feature definition imports
 import { errorTrackingFeatures } from '../../hooks/featureDefinitions/error_tracking'
@@ -457,6 +462,11 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         unleash,
         split,
         devcycle,
+        ab_tasty,
+        harness,
+        mutiny,
+        dynamic_yield,
+        kameleoon,
     }
 
     // Helper to get feature value from competitor data

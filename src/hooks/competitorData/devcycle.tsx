@@ -8,17 +8,25 @@ export const devcycle = {
         feature_flags: {
             available: true,
             features: {
+                automation: true,
                 json_payloads: true,
             },
             implementation: {
                 local_evaluation: true,
             },
             management: {
+                data_source: 'First-party',
                 flag_scheduling: true,
             },
         },
         experiments: {
             available: false,
+            features: {
+                funnel_tests: false,
+            },
+            analysis: {
+                statistics_engine: 'Frequentist',
+            },
         },
         product_analytics: {
             available: false,
@@ -36,12 +44,15 @@ export const devcycle = {
             self_host: false,
             eu_hosting: false,
         },
+        developer: {
+            api: true,
+        },
         pricing: {
             self_serve: true,
             transparent_pricing: true,
         },
         security: {
-            history_audit_logs: true,
+            history_audit_logs: false,
             role_based_access_control: true,
         },
     },
