@@ -215,10 +215,10 @@ You should call `shutdown` on your program's exit to exit cleanly:
 await client.shutdown()
 ```
 
-## Debugging
-If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debugging to see what's happening. 
+## Debug mode
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
 
-You can enable debugging by calling the `debug()` method in your code. This will enable verbose logs about the inner workings of the SDK.
+You can enable debug mode by calling the `debug()` method in your code. This will enable verbose logs about the inner workings of the SDK.
 
 ```node
 client.debug()

@@ -668,8 +668,9 @@ posthog.init('<ph_project_api_key>', {
 
 Deleting already ingested events is complicated, but you can add user agents to the [internal and test accounts filter](https://us.posthog.com/settings/project-product-analytics#internal-user-filtering) in your project settings to filter them from your analytics.
 
-## Debugging
-If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debugging to see what's happening.
+## Debug mode
+
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening.
 
 ### Enabling debug mode
 
@@ -697,7 +698,6 @@ You can try this on the PostHog website:
 https://posthog.com/?__posthog_debug=true
 ```
 
-
 ### Exposing the `posthog` global object to the browser console
 
 > This has been tested in Chrome and Firefox. Safari doesn't have this feature, but other Chromium and Gecko/Firefox browsers do.
@@ -714,3 +714,17 @@ To expose PostHog in the browser:
 4. Right-click on `this` and pick **Store as global variable**
 
 You can then access `posthog` as `temp0` in Firefox and `temp1` in Chrome. You can then do stuff like `temp1.capture('test event')` in the console.
+
+### View logs in the developer console
+
+After enabling debug mode, you should see logs in the developer console like this:
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2025_11_04_at_3_32_58_PM_4ed3c4300f.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2025_11_04_at_3_32_58_PM_4ed3c4300f.png"
+  alt="View logs in the developer console"
+/>
+
+<Caption>Chrome DevTools console showing PostHog logs</Caption>
+
+When you reach out to support, please include debug logs from the developer console to help us diagnose the issue faster.
