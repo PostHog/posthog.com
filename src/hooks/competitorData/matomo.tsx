@@ -148,6 +148,7 @@ export const matomo = {
         },
         pricing: {
             free_tier: false,
+            self_serve: 'Trial only',
             transparent_pricing: false,
             usage_based_pricing: false,
         },

@@ -311,6 +311,7 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
                         ]}
                         defaultValue="table-of-contents"
                         skin={true}
+                        dataScheme="secondary"
                     />
                 </div>
                 <div className="hidden @4xl/app-reader:block">

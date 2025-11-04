@@ -65,7 +65,7 @@ export const heap = {
             },
         },
         web_analytics: {
-            available: true,
+            available: false,
         },
         session_replay: {
             available: true,
@@ -241,12 +241,14 @@ export const heap = {
     },
     platform: {
         deployment: {
+            eu_hosting: true,
             open_source: false,
             self_host: false,
         },
         pricing: {
             free_tier: true,
             transparent_pricing: false,
+            self_serve: true,
             usage_based_pricing: true,
         },
         analytics_integration: {

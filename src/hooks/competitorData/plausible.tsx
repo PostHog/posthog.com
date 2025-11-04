@@ -45,10 +45,10 @@ export const plausible = {
             },
         },
         product_analytics: {
-            available: true,
+            available: false,
             features: {
                 advertising_analytics: false,
-                autocapture: false,
+                autocapture: 'Pageviews',
                 cohorts: false,
                 custom_events: true,
                 custom_properties: 'Events only',
@@ -164,6 +164,7 @@ export const plausible = {
         },
         pricing: {
             free_tier: false,
+            self_serve: 'Trial only',
             transparent_pricing: false,
             usage_based_pricing: false,
         },

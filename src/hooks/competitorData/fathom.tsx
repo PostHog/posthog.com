@@ -47,10 +47,10 @@ export const fathom = {
             },
         },
         product_analytics: {
-            available: true,
+            available: 'Limited',
             features: {
                 advertising_analytics: false,
-                autocapture: false,
+                autocapture: 'Pageviews',
                 cohorts: false,
                 custom_events: true,
                 custom_properties: true,
@@ -146,6 +146,7 @@ export const fathom = {
         },
         pricing: {
             free_tier: false,
+            self_serve: 'Trial only',
             transparent_pricing: false,
             usage_based_pricing: true,
         },

@@ -6,6 +6,7 @@ import { IconArrowUpRight } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
 // Competitor data imports
+import { adobe_analytics } from '../../hooks/competitorData/adobe_analytics'
 import { posthog } from '../../hooks/competitorData/posthog'
 import { sentry } from '../../hooks/competitorData/sentry'
 import { logrocket } from '../../hooks/competitorData/logrocket'
@@ -406,6 +407,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
 
     // Competitor data
     const competitorData: Record<string, any> = {
+        adobe_analytics,
         posthog,
         sentry,
         logrocket,

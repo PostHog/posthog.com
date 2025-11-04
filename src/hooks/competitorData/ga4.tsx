@@ -10,7 +10,7 @@ export const ga4 = {
             available: true,
             features: {
                 advertising_analytics: true,
-                autocapture: false,
+                autocapture: true,
                 cohorts: true,
                 custom_events: true,
                 custom_properties: true,
@@ -153,12 +153,14 @@ export const ga4 = {
             salesforce: false,
             sentry: false,
             stripe: true,
+            self_serve: true,
             zapier: true,
         },
         pricing: {
             free_tier: true,
-            transparent_pricing: false,
+            self_serve: true,
             usage_based_pricing: false,
+            transparent_pricing: false,
         },
         security: {
             data_anonymization: true,

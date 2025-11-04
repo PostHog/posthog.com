@@ -278,6 +278,9 @@ export const amplitude = {
                 warehouse_sources: true,
             },
         },
+        heatmaps: {
+            available: false,
+        },
         surveys: {
             available: true,
             pricing: {
@@ -339,11 +342,13 @@ export const amplitude = {
     },
     platform: {
         deployment: {
+            eu_hosting: true,
             open_source: false,
             self_host: false,
         },
         pricing: {
             free_tier: true,
+            self_serve: 'Starter plans only',
             transparent_pricing: false,
             usage_based_pricing: true,
         },
