@@ -19,12 +19,14 @@ Events include metadata: `$window_id`, `$session_id`, `$snapshot_source` (Web/Mo
 
 ## 2. Ingestion pipeline
 
-### Phase 1: Rust capture service
-**`rust/capture/src/v0_endpoint.rs`**
-- Receives POST to `/s/` endpoint
-- Validates session_id (rejects malformed/too long IDs)
-- Routes to replay-specific Kafka sink (`process_replay_events`)
-- Publishes to **`session_recording_snapshot_item_events`** topic (or `_overflow` topic if billing-limited)
+### Phase 1: Rust capture service (recordings mode)
+**`rust/capture/src/router.rs:235` and `rust/capture/src/v0_endpoint.rs:342`**
+- Separate capture service instance running with `CAPTURE_MODE=recordings`
+- Receives POST to `/s/` endpoint (routed to `recording` handler)
+- Validates session_id (rejects IDs >70 chars or with non-alphanumeric characters except hyphens)
+- Calls `process_replay_events` to transform events into `$snapshot_items` format
+- Publishes to **`session_recording_snapshot_item_events`** Kafka topic
+- Or **`session_recording_snapshot_item_overflow`** if session is billing-limited (checked via Redis) OR if session id is present in Redis key @posthog/capture-overflow/replay (operational/load management) 
 
 **Kafka sink** (`rust/capture/src/sinks/kafka.rs`):
 - Produces to primary topic: `KAFKA_SESSION_RECORDING_SNAPSHOT_ITEM_EVENTS`
@@ -94,7 +96,7 @@ Events include metadata: `$window_id`, `$session_id`, `$snapshot_source` (Web/Mo
    - Accumulates events as newline-delimited JSON: `[windowId, event]\n[windowId, event]\n...`
    - Tracks metadata: click_count, keypress_count, URLs, console logs, active_milliseconds
    - Compresses each session block with Snappy
-4. **Flushes** periodically (max 10min buffer age or 50MB buffer size)
+4. **Flushes** periodically (max 10 seconds buffer age or 100 MB buffer size)
 
 **Persistence** (`sessions/s3-session-batch-writer.ts`):
 - Writes to **S3** as multipart uploads
@@ -153,7 +155,7 @@ retention_period_days
 **GET `/api/projects/:id/session_recordings/:session_id/snapshots`**:
 Two-phase fetch:
 1. **Phase 1**: Returns available sources: `["blob"]` or `["blob", "realtime"]`
-    - note: "realtime" is deprecated and will be fully deleted soon
+    - note: "realtime" source is no longer used for blob-ingested recordings (possibly used only for Hobby) 
 2. **Phase 2**: Client requests `?source=blob`
 
 **Source resolution**:
@@ -183,11 +185,12 @@ Returns block listing:
 ### Frontend playback
 **`frontend/src/scenes/session-recordings/player/`**
 
-1. **sessionRecordingPlayerLogic** fetches snapshots
-2. Decompresses Snappy blocks
-3. Parses JSONL: `[windowId, event]` per line
-4. Feeds to **rrweb-player** for DOM reconstruction
-5. Renders in iframe with timeline controls
+1. **sessionRecordingPlayerLogic** fetches snapshot sources (only blob_v2 now, except for hobby) 
+2. For each snapshot source fetches snapshots
+3. Decompresses Snappy blocks
+4. Parses JSONL: `[windowId, event]` per line
+5. Feeds to **rrweb-player** for DOM reconstruction
+6. Renders in iframe with timeline controls
 
 **Metadata** (`playerMetaLogic.tsx`):
 - Shows person info, properties, events, console logs
@@ -195,10 +198,10 @@ Returns block listing:
 
 ## Key optimizations
 
-- **Compression**: Snappy for session blocks (~70-80% reduction)
+- **Compression**: Snappy for session blocks
 - **Byte-range fetching**: Only fetch needed time ranges from S3
 - **Pre-signed URLs**: Direct client→S3 download, no proxying
-- **Buffering**: 10min batches reduce S3 write ops
+- **Buffering**: 10 second batches reduce S3 write ops
 - **Sharding**: ClickHouse sharded by distinct_id
 - **TTL**: Automatic expiry based on retention_period_days
 - **Overflow handling**: Separate Kafka topic + limiter for billing control
