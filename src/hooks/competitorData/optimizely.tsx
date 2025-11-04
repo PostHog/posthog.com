@@ -141,6 +141,12 @@ export const optimizely = {
         },
         product_analytics: {
             available: false,
+            features: {
+                autocapture: false,
+            },
+            insights: {
+                sql_editor: false,
+            },
         },
         web_analytics: {
             available: true,
@@ -163,6 +169,7 @@ export const optimizely = {
     },
     platform: {
         deployment: {
+            eu_hosting: true,
             open_source: false,
             self_host: false,
         },

@@ -1,7 +1,7 @@
 export const experimentsFeatures = {
     summary: {
         name: 'Experiments',
-        description: 'Run statistically rigorous A/B tests and validate ideas with confidence',
+        description: 'Run statistically rigorous A/B/n tests and validate ideas with confidence',
         url: '/experiments',
         docsUrl: '/docs/experiments',
     },

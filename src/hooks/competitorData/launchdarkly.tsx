@@ -191,7 +191,7 @@ export const launchdarkly = {
             },
         },
         session_replay: {
-            available: false,
+            available: true,
         },
         surveys: {
             available: false,

@@ -7,6 +7,18 @@ export const vwo = {
     products: {
         product_analytics: {
             available: false,
+            features: {
+                autocapture: false,
+            },
+            insights: {
+                sql_editor: false,
+            },
+        },
+        session_replay: {
+            available: true,
+        },
+        surveys: {
+            available: true,
         },
         feature_flags: {
             available: true,
@@ -35,7 +47,7 @@ export const vwo = {
                 funnel_tests: true,
                 namespacing: false,
                 native_goal_tracking: false,
-                no_code_experiments: false,
+                no_code_experiments: true,
                 ratio_metrics: false,
                 recommended_run_time: false,
                 secondary_metrics: true,
@@ -51,8 +63,8 @@ export const vwo = {
                     data_warehouse_experiments: false,
                     fake_door_testing: false,
                     holdout_testing: false,
-                    multi_armed_bandit: false,
-                    mutually_exclusive_experiments: false,
+                    multi_armed_bandit: true,
+                    mutually_exclusive_experiments: true,
                     redirect_testing: false,
                 },
             },
@@ -92,6 +104,7 @@ export const vwo = {
     },
     platform: {
         deployment: {
+            eu_hosting: true,
             open_source: false,
             self_host: false,
         },

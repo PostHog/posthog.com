@@ -50,7 +50,7 @@ export const statsig = {
                     data_warehouse_experiments: true,
                     fake_door_testing: false,
                     holdout_testing: false,
-                    multi_armed_bandit: true,
+                    multi_armed_bandit: 'Pro',
                     mutually_exclusive_experiments: true,
                     redirect_testing: false,
                 },

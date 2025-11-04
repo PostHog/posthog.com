@@ -81,7 +81,7 @@ export const growthbook = {
                 funnel_tests: false,
                 namespacing: true,
                 native_goal_tracking: false,
-                no_code_experiments: false,
+                no_code_experiments: 'Pro',
                 ratio_metrics: false,
                 recommended_run_time: false,
                 secondary_metrics: true,
@@ -97,8 +97,8 @@ export const growthbook = {
                     data_warehouse_experiments: false,
                     fake_door_testing: false,
                     holdout_testing: false,
-                    multi_armed_bandit: false,
-                    mutually_exclusive_experiments: false,
+                    multi_armed_bandit: 'Pro',
+                    mutually_exclusive_experiments: true,
                     redirect_testing: false,
                 },
             },
@@ -139,7 +139,11 @@ export const growthbook = {
         product_analytics: {
             available: false,
             features: {
+                autocapture: false,
                 cohorts: true,
+            },
+            insights: {
+                sql_editor: 'Partial',
             },
         },
         session_replay: {
@@ -149,6 +153,9 @@ export const growthbook = {
             available: false,
         },
         dashboards: {
+            available: false,
+        },
+        surveys: {
             available: false,
         },
         cdp: {
