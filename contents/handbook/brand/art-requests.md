@@ -18,7 +18,7 @@ They can help you with things like:
 - Branded merch 
 - Animated UI elements
 
-They get a lot of work requests, so they use [a request template](.github/ISSUE_TEMPLATE/art-request-template.md) to help them prioritize. All art requests should use this template, which automatically assigns work to their project board. 
+They get a lot of work requests, so they use [a request template](https://github.com/PostHog/posthog.com/issues/new/choose) to help them prioritize. All art requests should use this template, which automatically assigns work to their project board. 
 
 You can see what they are working on via the [Art & Brand Planning project board](https://github.com/orgs/PostHog/projects/65/views/2).
 
