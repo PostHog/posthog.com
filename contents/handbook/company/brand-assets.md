@@ -151,6 +151,7 @@ Loud Noises is used in the sign the hedgehog is holding:
 
 If you have questions about which font to use, please ask in <PrivateLink url="https://posthog.slack.com/archives/C01V9AT7DK4">#team-brand-and-vibes</PrivateLink> - don't just do what feels right to you!
 
+
 ## Colors
 
 We have two color schemes (light and dark mode), but primarily use light mode.
@@ -185,9 +186,23 @@ When possible, use opacity to modify colors. This allows us to use fewer colors 
 
 We use [Pitch](https://pitch.com) for polished presentations (like when giving a talk). Read more about this in our [communication guidelines](/handbook/company/communication#google-docs-and-slides).
 
+## Illustration guide
+
+Our hedgehog mascot is called Max and we're quite particular about how he (or any of his hoggy pals) are illustrated. We're exploring AI tools for internal use, but currently ask that you don't use AI tools to create your own hedgehog art. Instead, you can follow the guidelines below, or [create a new art request](/handbook/brand/art-requests).  
+
+![How to draw a hedgehog](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_guide_1_2fab7b9cb6.png)
+
+If Max is drawn in colour he should always have a beige body with brown spines, arms, and legs. His arms should only bend once in the middle and he doesn't have fingers unless swearing or pointing. His feet are stubby by design and his snout lines should be visible unless obscured by a mask or beard. His expression comes mainly from his eyebrows. 
+
+![Draw the rest of the hedgehog](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_guide2_d61482248f.png)
+
+He should be outlined with a strong, black monoline with consistent thickness. He should always face left, right, or straight-on but shouldn't be drawn with a side profile or from behind as he's self-conscious.
+
+> A more detailed version of this guide is <PrivateLink url="https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0">available on Figma</PrivateLink> for team members.
+
 ## Hedgehog library
 
-For team members we keep all our currently approved hedgehogs [in this Figma file](https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0). This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team.
+For team members we keep all our currently approved hedgehogs <PrivateLink url="https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0">in this Figma file</PrivateLink>. This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team.
 
 Here's how:
 1. Open the Figma file. You can manually browse, or use `Cmd + F` to search based on keywords such as 'happy', 'sad', or 'will smith'.
