@@ -63,7 +63,11 @@ export const lucky_orange = {
     },
     platform: {
         deployment: {
+            eu_hosting: false,
             open_source: false,
+        },
+        pricing: {
+            self_serve: true,
         },
     },
 }

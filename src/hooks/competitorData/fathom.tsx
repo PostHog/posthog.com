@@ -49,7 +49,7 @@ export const fathom = {
                 advertising_analytics: false,
                 autocapture: 'Pageviews',
                 cohorts: false,
-                custom_events: true,
+                custom_events: 'Events only',
                 custom_properties: true,
                 monetization_analytics: false,
                 predictive_insights: false,
@@ -63,6 +63,7 @@ export const fathom = {
                 funnels: {
                     available: false,
                     features: {
+                        conversion_funnels: true,
                         correlation_analysis: false,
                     },
                 },

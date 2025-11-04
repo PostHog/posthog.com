@@ -65,6 +65,7 @@ export const plausible = {
                     available: 'Limited',
                     features: {
                         correlation_analysis: false,
+                        conversion_funnels: true,
                     },
                 },
                 retention: {

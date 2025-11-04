@@ -1,17 +1,17 @@
-export const pendo = {
-    name: 'Pendo',
-    key: 'pendo',
+export const appcues = {
+    name: 'Appcues',
+    key: 'appcues',
     assets: {
-        icon: '/images/competitors/pendo.svg',
-        comparisonArticle: '/blog/posthog-vs-pendo',
+        icon: '/images/competitors/appcues.svg',
+        comparisonArticle: '',
     },
     products: {
         product_analytics: {
-            available: true,
+            available: 'Limited',
             features: {
                 actions: false,
                 advertising_analytics: false,
-                autocapture: 'Limited',
+                autocapture: true,
                 cohorts: true,
                 custom_events: true,
                 custom_properties: true,
@@ -41,11 +41,11 @@ export const pendo = {
                     },
                 },
                 retention: {
-                    available: true,
+                    available: false,
                     features: {},
                 },
                 user_paths: {
-                    available: true,
+                    available: false,
                     features: {},
                 },
                 lifecycle: {
@@ -57,7 +57,7 @@ export const pendo = {
                     features: {},
                 },
                 group_analytics: {
-                    available: true,
+                    available: false,
                     features: {},
                 },
             },
@@ -75,23 +75,23 @@ export const pendo = {
         web_analytics: {
             available: false,
             features: {
-                utm_tracking: true,
+                utm_tracking: false,
             },
         },
         dashboards: {
             available: true,
         },
         session_replay: {
-            available: true,
+            available: false,
             pricing: {
-                free_tier: 'None',
+                free_tier: 'Trial only',
             },
             features: {
-                event_timeline: true,
+                event_timeline: false,
             },
             platform_support: {
                 features: {
-                    web_app_recordings: true,
+                    web_app_recordings: false,
                     mobile_app_recordings: false,
                 },
             },
@@ -131,36 +131,36 @@ export const pendo = {
     },
     platform: {
         deployment: {
-            eu_hosting: 'Enterprise only',
+            eu_hosting: false,
             open_source: false,
-            reverse_proxy: true,
+            reverse_proxy: false,
             self_host: false,
         },
         libraries: {
             features: {
                 android: true,
-                flutter: true,
+                flutter: false,
                 ios: true,
                 javascript: true,
                 react: true,
-                react_native: true,
+                react_native: false,
                 ruby: false,
             },
         },
         pricing: {
-            free_tier: true,
+            free_tier: 'Only trial',
             transparent_pricing: false,
             usage_based_pricing: false,
-            model: 'Seat-based',
+            model: 'Contact sales',
             self_serve: false,
         },
         integrations: {
             airbyte: false,
             azure_blob: false,
-            bigquery: true,
+            bigquery: false,
             ci_cd_integrations: false,
             community_integrations: false,
-            customer_io: false,
+            customer_io: true,
             datadog: false,
             discord: false,
             exports: true,
@@ -169,8 +169,8 @@ export const pendo = {
             hubspot: true,
             imports: true,
             intercom: true,
-            microsoft_teams: true,
-            redshift: true,
+            microsoft_teams: false,
+            redshift: false,
             rudderstack: false,
             s3: false,
             salesforce: true,
@@ -178,16 +178,16 @@ export const pendo = {
             sentry: false,
             shopify: false,
             slack: true,
-            snowflake: true,
-            stripe: false,
+            snowflake: false,
+            stripe: true,
             zapier: true,
-            zendesk: false,
+            zendesk: true,
         },
         security: {
             cookieless_tracking: false,
             data_anonymization: true,
             gdpr_ready: true,
-            hipaa_ready: true,
+            hipaa_ready: false,
             history_audit_logs: false,
             saml_sso: true,
             soc2_certified: true,
@@ -195,14 +195,14 @@ export const pendo = {
             user_privacy_options: true,
         },
         analytics_integration: {
-            built_in_analytics: false,
+            built_in_analytics: true,
         },
         developer: {
             api: true,
-            cross_domain_tracking: true,
+            cross_domain_tracking: false,
             proxies: false,
-            sdks: false,
-            server_side_sdks: true,
+            sdks: true,
+            server_side_sdks: false,
             sql: false,
         },
         tools: {

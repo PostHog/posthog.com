@@ -12,8 +12,7 @@ tags:
     - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
@@ -51,80 +50,24 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of 
 
 Plausible focuses on web analytics. PostHog includes web analytics but also offers a full suite of tools to help you build a better site and product. On top of this, you can use all of the features of PostHog for free forever. Plausible costs a minimum of $9/month.
 
-<ComparisonTable column1="PostHog" column2="Plausible">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Conversions"
-        description="Track conversions towards a goal metric with funnels"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cookieless tracking"
-        description="Option to track without using cookies"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Product analytics"
-        description="Create custom dashboards, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Custom events"
-        description="Manually capture custom events and properties wherever they happen"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="User profiles"
-        description="Capture and analyze data at the user-level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Reverse proxy"
-        description="Official instructions to capture more accurate data by avoiding tracking blockers"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'plausible']}
+    rows={[
+        'platform.pricing.free_tier',
+        'platform.pricing.self_serve',
+        'web_analytics',
+        'product_analytics.funnels.conversion_funnels',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.security.cookieless_tracking',
+        'product_analytics',
+        'product_analytics.features.custom_events',
+        'product_analytics.features.user_profiles',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'platform.deployment.reverse_proxy',
+    ]}
+/>
 
 ### Why do companies use PostHog?
 
@@ -139,8 +82,6 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 > #### Bottom line
 >
 > Because PostHog is free, has web analytics and more, and still has the privacy and compliance features Plausible offers, it makes for a great alternative, especially for developers and startups.
-
-<br />
 
 ## 2. Fathom
 
@@ -171,80 +112,24 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Fathom-Analytics
 
 Feature-wise, Plausible and Fathom are nearly identical. Looking closer, however, Fathom is missing some of the compliance features Plausible offers, like [open source](/blog/best-open-source-analytics-tools) code.
 
-<ComparisonTable column1="Fathom" column2="Plausible">
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Conversions"
-        description="Track conversions towards a goal metric with funnels"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cookieless tracking"
-        description="Option to track without using cookies"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Product analytics"
-        description="Create custom dashboards, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1="Events only"
-        column2={true}
-        feature="Custom events"
-        description="Manually capture custom events and properties wherever they happen"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="User profiles"
-        description="Capture and analyze data at the user-level"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Reverse proxy"
-        description="Official instructions to capture more accurate data by avoiding tracking blockers"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['fathom', 'plausible']}
+    rows={[
+        'platform.pricing.free_tier',
+        'platform.pricing.self_serve',
+        'web_analytics',
+        'product_analytics.funnels.conversion_funnels',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.security.cookieless_tracking',
+        'product_analytics',
+        'product_analytics.features.custom_events',
+        'product_analytics.features.user_profiles',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'platform.deployment.reverse_proxy',
+    ]}
+/>
 
 > 💡 **Good to know:** Fathom isn't entirely EU hosted, but instead attempts to stay compliant with European regulation by:
 >
@@ -265,8 +150,6 @@ Fathom has limited reviews on G2, but much more praise on social. Judging from s
 > #### Bottom line
 >
 > Fathom and Plausible both provide a simple web analytics experience. Depending on your regulatory needs, it is one to consider, but it is missing some of the features users choose Plausible for.
-
-<br />
 
 ## 3. Matomo
 
@@ -297,80 +180,24 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Matomo), as of O
 
 Matomo is more of a like-for-like alternative to Google Analytics, meaning it has many more features than Plausible. Both are also privacy-focused, open source, and only have trials, not free tiers.
 
-<ComparisonTable column1="Matomo" column2="Plausible">
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Conversions"
-        description="Track conversions towards a goal metric with funnels"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cookieless tracking"
-        description="Option to track without using cookies"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Product analytics"
-        description="Create custom dashboards, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Custom events"
-        description="Manually capture custom events and properties wherever they happen"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="User profiles"
-        description="Capture and analyze data at the user-level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Reverse proxy"
-        description="Official instructions to capture more accurate data by avoiding tracking blockers"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['matomo', 'plausible']}
+    rows={[
+        'platform.pricing.free_tier',
+        'platform.pricing.self_serve',
+        'web_analytics',
+        'product_analytics.funnels.conversion_funnels',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.security.cookieless_tracking',
+        'product_analytics',
+        'product_analytics.features.custom_events',
+        'product_analytics.features.user_profiles',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'platform.deployment.reverse_proxy',
+    ]}
+/>
 
 ### Why do companies use Matomo?
 
@@ -385,8 +212,6 @@ According to reviews on [G2](https://www.g2.com/products/matomo-formerly-piwik/r
 > #### Bottom line
 >
 > Matomo is a solid alternative to Plausible thanks to its similar, but expanded feature set and focus on privacy. For advanced Google Analytics users, it's an especially good choice.
-
-<br />
 
 ## 4. Heap
 
@@ -419,80 +244,24 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Heap), a similar
 
 Heap has much more of a product focus than Plausible. This means it lacks the easy-to-use web analytics features, but makes up for it with product analytics, session replay, and more. It also isn't open source or hostable in the EU.
 
-<ComparisonTable column1="Heap" column2="Plausible">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Conversions"
-        description="Track conversions towards a goal metric with funnels"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Cookieless tracking"
-        description="Option to track without using cookies"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Product analytics"
-        description="Create custom dashboards, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Custom events"
-        description="Manually capture custom events and properties wherever they happen"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="User profiles"
-        description="Capture and analyze data at the user-level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Reverse proxy"
-        description="Official instructions to capture more accurate data by avoiding tracking blockers"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['heap', 'plausible']}
+    rows={[
+        'platform.pricing.free_tier',
+        'platform.pricing.self_serve',
+        'web_analytics',
+        'product_analytics.funnels.conversion_funnels',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.security.cookieless_tracking',
+        'product_analytics',
+        'product_analytics.features.custom_events',
+        'product_analytics.features.user_profiles',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'platform.deployment.reverse_proxy',
+    ]}
+/>
 
 ### Why do companies use Heap?
 
@@ -507,8 +276,6 @@ According to G2 reviews, companies enjoy these three areas of Heap:
 > #### Bottom line
 >
 > Heap is a good alternative for teams focused on improving their product. For web or privacy-focused teams, there are likely better options.
-
-<br />
 
 ## 5. Piwik Pro
 
@@ -541,80 +308,24 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Piwik-PRO), as o
 
 Piwik Pro takes a more heavyweight approach to compliance with its consent and tag management features.
 
-<ComparisonTable column1="Piwik Pro" column2="Plausible">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Conversions"
-        description="Track conversions towards a goal metric with funnels"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cookieless tracking"
-        description="Option to track without using cookies"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Product analytics"
-        description="Create custom dashboards, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Custom events"
-        description="Manually capture custom events and properties wherever they happen"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="User profiles"
-        description="Capture and analyze data at the user-level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Reverse proxy"
-        description="Official instructions to capture more accurate data by avoiding tracking blockers"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['piwik_pro', 'plausible']}
+    rows={[
+        'platform.pricing.free_tier',
+        'platform.pricing.self_serve',
+        'web_analytics',
+        'product_analytics.funnels.conversion_funnels',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.security.cookieless_tracking',
+        'product_analytics',
+        'product_analytics.features.custom_events',
+        'product_analytics.features.user_profiles',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'platform.deployment.reverse_proxy',
+    ]}
+/>
 
 ### Why do companies use Piwik Pro?
 
@@ -629,8 +340,6 @@ Based on reviews from [G2](https://www.g2.com/products/piwik-pro/reviews), the f
 > #### Bottom line
 >
 > For users looking for the compliance features Piwik Pro offers, it's a good alternative to Plausible, especially because of Piwik Pro's free tier and privacy focus.
-
-<br />
 
 ## 6. Umami
 
@@ -661,80 +370,28 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Umami), as of Oc
 
 Umami is one of the most similar tools to Plausible on this list. It is open source, privacy focused, and even has a similar metrics dashboard. While it does lack some of the features of Plausible, Umami does have a free cloud hosted option.
 
-<ComparisonTable column1="Umami" column2="Plausible">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Conversions"
-        description="Track conversions towards a goal metric with funnels"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cookieless tracking"
-        description="Option to track without using cookies"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Product analytics"
-        description="Create custom dashboards, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={'Events only'}
-        column2={true}
-        feature="Custom events"
-        description="Manually capture custom events and properties wherever they happen"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="User profiles"
-        description="Capture and analyze data at the user-level"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Reverse proxy"
-        description="Official instructions to capture more accurate data by avoiding tracking blockers"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['umami', 'plausible']}
+    rows={[
+        'platform.pricing.free_tier',
+        'platform.pricing.self_serve',
+        'web_analytics',
+        'product_analytics.funnels.conversion_funnels',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.security.cookieless_tracking',
+        'product_analytics',
+        {
+            label: 'Custom events',
+            description: 'Manually capture custom events and properties wherever they happen',
+            values: ['Events only', true],
+        },
+        'product_analytics.features.user_profiles',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'platform.deployment.reverse_proxy',
+    ]}
+/>
 
 ### Why do companies use Umami?
 
@@ -749,8 +406,6 @@ According to its few [G2](https://www.g2.com/products/umami/reviews) reviews and
 > #### Bottom line
 >
 > Umami is a like-for-like alternative to Plausible. For users looking for a privacy-focused, open source, and simple web analytics tool, it's a good choice.
-
-<br />
 
 ## 7. Google Analytics
 
@@ -785,80 +440,24 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Google-Analytics
 
 Plausible positions itself as a privacy-focused alternative to Google Analytics. It doesn't have as many features, but for many users, the privacy trade-off is worth it.
 
-<ComparisonTable column1="Google Analytics" column2="Plausible">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Free tier"
-        description="Free forever option, no credit card required"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Web analytics"
-        description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Conversions"
-        description="Track conversions towards a goal metric with funnels"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="EU hosting"
-        description="Store your data in the EU for compliance"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Cookieless tracking"
-        description="Option to track without using cookies"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Product analytics"
-        description="Create custom dashboards, trends, funnels, paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Custom events"
-        description="Manually capture custom events and properties wherever they happen"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="User profiles"
-        description="Capture and analyze data at the user-level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Cohort analysis"
-        description="Combine users into cohorts for analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Reverse proxy"
-        description="Official instructions to capture more accurate data by avoiding tracking blockers"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['ga4', 'plausible']}
+    rows={[
+        'platform.pricing.free_tier',
+        'platform.pricing.self_serve',
+        'web_analytics',
+        'product_analytics.funnels.conversion_funnels',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.security.cookieless_tracking',
+        'product_analytics',
+        'product_analytics.features.custom_events',
+        'product_analytics.features.user_profiles',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'platform.deployment.reverse_proxy',
+    ]}
+/>
 
 ### Why do companies use Google Analytics?
 

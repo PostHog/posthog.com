@@ -243,6 +243,9 @@ export const posthog = {
                 user_level_permissions: true,
             },
         },
+        product_tours: {
+            available: false,
+        },
         feature_flags: {
             available: true,
             pricing: {

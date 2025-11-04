@@ -18,7 +18,7 @@ export const ga4 = {
                 predictive_insights: true,
                 real_time_view: true,
                 toolbar: false,
-                user_profiles: false,
+                user_profiles: 'Anonymous',
                 trends: {
                     available: true,
                     features: {},
@@ -26,6 +26,7 @@ export const ga4 = {
                 funnels: {
                     available: true,
                     features: {
+                        conversion_funnels: true,
                         correlation_analysis: false,
                     },
                 },
@@ -136,6 +137,7 @@ export const ga4 = {
         deployment: {
             eu_hosting: false,
             open_source: false,
+            reverse_proxy: false,
             self_host: false,
         },
         developer: {

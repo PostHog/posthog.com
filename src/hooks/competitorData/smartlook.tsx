@@ -53,6 +53,9 @@ export const smartlook = {
         web_analytics: {
             available: false,
         },
+        product_tours: {
+            available: true,
+        },
         session_replay: {
             available: true,
             features: {
@@ -62,6 +65,7 @@ export const smartlook = {
             analysis: {
                 features: {
                     performance_monitoring: false,
+                    network_monitor: true,
                 },
             },
         },
@@ -87,6 +91,9 @@ export const smartlook = {
         },
         dashboards: {
             available: true,
+        },
+        surveys: {
+            available: false,
         },
     },
     platform: {

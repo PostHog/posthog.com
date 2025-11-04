@@ -26,6 +26,7 @@ export const piwik_pro = {
                 cohorts: true,
                 custom_events: true,
                 custom_properties: true,
+                user_profiles: true,
                 insights: {
                     available: true,
                     features: {
@@ -40,7 +41,9 @@ export const piwik_pro = {
                 },
                 funnels: {
                     available: true,
-                    features: {},
+                    features: {
+                        conversion_funnels: true,
+                    },
                 },
                 retention: {
                     available: false,
@@ -73,6 +76,7 @@ export const piwik_pro = {
             open_source: false,
             self_host: true,
             eu_hosting: true,
+            reverse_proxy: true,
         },
         pricing: {
             free_tier: true,

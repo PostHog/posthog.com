@@ -116,7 +116,7 @@ export const logrocket = {
                     heatmaps: false,
                     console_logs: true,
                     performance_monitoring: true,
-                    network_monitor: false,
+                    network_monitor: true,
                     dom_explorer: false,
                 },
             },

@@ -63,7 +63,18 @@ export const mouseflow = {
     },
     platform: {
         deployment: {
+            eu_hosting: true,
             open_source: false,
+        },
+        security: {
+            role_based_access_control: '',
+        },
+        pricing: {
+            transparent_pricing: '',
+            self_serve: true,
+        },
+        tools: {
+            notebooks: '',
         },
     },
 }

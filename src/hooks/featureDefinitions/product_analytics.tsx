@@ -24,7 +24,7 @@ export const productAnalyticsFeatures = {
         },
         custom_events: {
             name: 'Custom events',
-            description: 'Capture and analyze any type of event',
+            description: 'Manually capture custom events and properties wherever they happen',
         },
         custom_properties: {
             name: 'Custom properties',

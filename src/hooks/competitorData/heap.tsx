@@ -39,6 +39,7 @@ export const heap = {
                 funnels: {
                     available: true,
                     features: {
+                        conversion_funnels: true,
                         correlation_analysis: true,
                     },
                 },
@@ -63,6 +64,9 @@ export const heap = {
                     features: {},
                 },
             },
+        },
+        product_tours: {
+            available: false,
         },
         web_analytics: {
             available: false,
@@ -247,6 +251,7 @@ export const heap = {
         deployment: {
             eu_hosting: true,
             open_source: false,
+            reverse_proxy: false,
             self_host: false,
         },
         pricing: {

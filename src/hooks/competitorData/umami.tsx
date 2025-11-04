@@ -21,6 +21,11 @@ export const umami = {
         },
         product_analytics: {
             available: false,
+            features: {
+                conversion_funnels: false,
+                user_profiles: false,
+                cohorts: false,
+            },
         },
         session_replay: {
             available: false,
@@ -37,6 +42,7 @@ export const umami = {
             open_source: true,
             self_host: true,
             eu_hosting: false,
+            reverse_proxy: false,
         },
         pricing: {
             free_tier: true,

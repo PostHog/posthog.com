@@ -9,6 +9,7 @@ import { useApp } from '../../context/App'
 import { ab_tasty } from '../../hooks/competitorData/ab_tasty'
 import { adobe_analytics } from '../../hooks/competitorData/adobe_analytics'
 import { amplitude } from '../../hooks/competitorData/amplitude'
+import { appcues } from '../../hooks/competitorData/appcues'
 import { baremetrics } from '../../hooks/competitorData/baremetrics'
 import { bugsnag } from '../../hooks/competitorData/bugsnag'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
@@ -56,6 +57,8 @@ import { stripe } from '../../hooks/competitorData/stripe'
 import { umami } from '../../hooks/competitorData/umami'
 import { unleash } from '../../hooks/competitorData/unleash'
 import { vwo } from '../../hooks/competitorData/vwo'
+import { walkme } from '../../hooks/competitorData/walkme'
+import { whatfix } from '../../hooks/competitorData/whatfix'
 
 // Feature definition imports
 import { cdpFeatures } from '../../hooks/featureDefinitions/cdp'
@@ -69,6 +72,7 @@ import { llmAnalyticsFeatures } from '../../hooks/featureDefinitions/llm_analyti
 import { platformFeatures } from '../../hooks/featureDefinitions/platform'
 import { productAnalyticsFeatures } from '../../hooks/featureDefinitions/product_analytics'
 import { productDescriptions } from '../../hooks/featureDefinitions/products'
+import { productToursFeatures } from '../../hooks/featureDefinitions/product_tours'
 import { revenueAnalyticsFeatures } from '../../hooks/featureDefinitions/revenue_analytics'
 import { sessionReplayFeatures } from '../../hooks/featureDefinitions/session_replay'
 import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
@@ -110,6 +114,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         llm_analytics: llmAnalyticsFeatures,
         platform: platformFeatures,
         product_analytics: productAnalyticsFeatures,
+        product_tours: productToursFeatures,
         revenue_analytics: revenueAnalyticsFeatures,
         session_replay: sessionReplayFeatures,
         surveys: surveysFeatures,
@@ -426,6 +431,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         ab_tasty,
         adobe_analytics,
         amplitude,
+        appcues,
         baremetrics,
         bugsnag,
         chartmogul,
@@ -473,6 +479,8 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         umami,
         unleash,
         vwo,
+        walkme,
+        whatfix,
     }
 
     // Helper to get feature value from competitor data
