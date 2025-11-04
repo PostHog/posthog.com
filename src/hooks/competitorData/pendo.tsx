@@ -11,7 +11,7 @@ export const pendo = {
             features: {
                 actions: false,
                 advertising_analytics: false,
-                autocapture: true,
+                autocapture: 'Limited',
                 cohorts: true,
                 custom_events: true,
                 custom_properties: true,
@@ -60,6 +60,9 @@ export const pendo = {
                     features: {},
                 },
             },
+        },
+        heatmaps: {
+            available: true,
         },
         web_analytics: {
             available: false,
@@ -148,7 +151,7 @@ export const pendo = {
             saml_sso: true,
             soc2_certified: true,
             two_factor_auth: true,
-            user_privacy_options: false,
+            user_privacy_options: true,
         },
         analytics_integration: {
             built_in_analytics: false,

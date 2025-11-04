@@ -103,6 +103,7 @@ export const smartlook = {
             soc2_certified: false,
             saml_sso: false,
             two_factor_auth: true,
+            user_privacy_options: true,
         },
     },
     pricing: {

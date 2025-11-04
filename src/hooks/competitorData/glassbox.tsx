@@ -103,6 +103,7 @@ export const glassbox = {
             soc2_certified: true,
             saml_sso: true,
             two_factor_auth: true,
+            user_privacy_options: true,
         },
     },
     pricing: {

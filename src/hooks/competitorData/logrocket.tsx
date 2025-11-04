@@ -221,7 +221,7 @@ export const logrocket = {
             saml_sso: true,
             soc2_certified: true,
             two_factor_auth: true,
-            user_privacy_options: false,
+            user_privacy_options: true,
         },
     },
     pricing: {

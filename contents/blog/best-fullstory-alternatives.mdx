@@ -12,8 +12,7 @@ tags:
     - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
@@ -46,75 +45,26 @@ Typical PostHog users are engineers and product managers at startups and mid-siz
 
 PostHog goes beyond the feature set of FullStory. It matches key features like single snippet installation, user segmentation, and privacy options, while also having surveys and A/B testing. As a (big) bonus, it's also free, self-serve, and open source
 
-<ComparisonTable column1="PostHog" column2="FullStory">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'fullstory']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [true, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is PostHog?
 
@@ -165,75 +115,26 @@ Smartlook is an analytics platform that combines session replays with product an
 
 The feature sets of Smartlook and FullStory are nearly identical. The difference is that Smartlook focuses slightly more on product analytics, is self-serve, and adds crash reports.
 
-<ComparisonTable column1="Smartlook" column2="FullStory">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['smartlook', 'fullstory']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [true, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is Smartlook?
 
@@ -282,75 +183,26 @@ According to G2 reviewers, Smartlook users benefit from:
 
 One of the biggest downsides of Amplitude is its lack of autocapture. On top of this, they lack the session replay and heatmaps of FullStory.
 
-<ComparisonTable column1="Amplitude" column2="FullStory">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['amplitude', 'fullstory']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [true, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is Amplitude?
 
@@ -403,75 +255,26 @@ Contentsquare, a marketing and ecommerce analytics firm, [acquired Heap in Septe
 
 Heap and FullStory both focus on user experience data and have many of the same features to do it. Autocapture is a main selling point for both.
 
-<ComparisonTable column1="Heap" column2="FullStory">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['heap', 'fullstory']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [true, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is Heap?
 
@@ -524,75 +327,26 @@ Glassbox predominantly provides "digital experience intelligence" to business an
 
 Glassbox and FullStory share many of the same features, but Glassbox is not self-serve and it's unclear how easy implementation is.
 
-<ComparisonTable column1="Glassbox" column2="FullStory">
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['glassbox', 'fullstory']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [false, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is Glassbox?
 
@@ -643,75 +397,26 @@ According to G2 reviews, customers use Glassbox for:
 
 LogRocket matches many of FullStory's features while having a greater focus on error and performance tracking.
 
-<ComparisonTable column1="LogRocket" column2="FullStory">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['logrocket', 'fullstory']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [true, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is LogRocket?
 
@@ -760,75 +465,26 @@ The reviewers of G2 use LogRocket for these reasons:
 
 Although Pendo shares similarities with FullStory, it focuses more on qualitative feedback, in-app guides, and product planning. It lacks the autocapture that makes FullStory powerful.
 
-<ComparisonTable column1="Pendo" column2="FullStory">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['pendo', 'fullstory']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [true, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is Pendo?
 
