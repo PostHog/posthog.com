@@ -16,10 +16,9 @@ Monday morning. This is me, happy and caffeinated, walking to my coworking space
 
 [Add image here, art request is submitted]
 
-Last week I had set up a new automation using our new **workflows** product (soon coming to beta).  
-The goal: test if everything works – and, at the same time, let users know it’s available to try.  
-I sent out a simple test email.  
-It looked like this:
+Last week, I set up a new automation using our new **workflows** product, which is in alpha. I wanted to test how it worked – and, at the same time, let users know it’s available to try.  
+
+I sent out a simple test email that looked like this:
 ![workflows email](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_alpha1_04ea076a13.png)
 ---
 
