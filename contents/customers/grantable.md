@@ -1,5 +1,5 @@
 ---
-title: How Grantable replaces Zapier-style automation with PostHog Workflows (and cuts setup time ~90%)
+title: How Grantable replaced Zapier with PostHog Workflows and cut setup time by ~90%
 customer: Grantable
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/grantable.png
@@ -9,15 +9,7 @@ date: 2025-11-05
 
 PostHog wasn’t always this central. Early on, Grantable mostly used it for session replay to see how people behaved in the app. Over time, that changed. Now they’re using product analytics, feature flags, error tracking, surveys, web analytics, data warehouse, even LLM tracing – and most recently, [Workflows](https://posthog.com/docs/workflows).
 
-<BorderWrapper>
-<Quote
- imageSource="https://res.cloudinary.com/dmukukwp6/image/upload/evan_rallis_08cffd54f7.jpeg"
-    size="md"
-    name="Evan Rallis"
-    title="Head of Product & Growth"
-    quote={`“We’ve started adding PostHog events into every PR. All new features have a PostHog event requirement,” Evan says. “We track usage, pipe that into dashboards for activation and retention, and now we’re starting to act on it automatically with Workflows.”`}
-/>
-</BorderWrapper>
+“We’ve started adding PostHog events into every PR. All new features have a PostHog event requirement,” Evan says. “We track usage, pipe that into dashboards for activation and retention, and now we’re starting to act on it automatically with Workflows.”
 
 That move, from ‘see data’ to ‘do something with it right away,’ is exactly why Grantable is betting on Workflows.
 
@@ -54,22 +46,18 @@ Now, instead of worrying about cost or upkeep, the team can simply build — con
 
 ## What they’ve already built with Workflows (in alpha)
 Grantable started with onboarding — rebuilding their first user email (previously in Customer.io) directly in Workflows.
-How it works today:
 
-1. Trigger: a user completes onboarding in the product
+How it works is simple. The workflow is triggered when a user completes onboarding in the product, then as a second step pulls in context on that user.
 
 ![grantable_screenshot1](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_11_03_at_16_14_58_782d6dffa3.png)
-2. Pull context: grab info from that onboarding flow (who they are, what plan, what they did)
 
-3. Action: send an HTML email using Workflows’ built-in email step
+Next, that data flows into an HTML email built inside PostHog's editor. Evan used drag-and-drop tools to make the email template, and can pull in contextual data from the user with Liquid template language - including setting a fallback for situations where data is not available. 
 
 ![grantable_screenshot2](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_11_03_at_16_15_29_d7febfd2c2.png)
 
-4. Follow-up action: post a Slack alert internally with the user’s info and status
+Finally, once the email is sent, the workflow triggers a Slack alert for Grantable to let them know the user exists and their status. This helps keep the team informed about new users and, again, can pull in whatever information the team needs from PostHog. 
 
 ![grantable_screenshot3](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_11_03_at_16_15_48_8e02547d60.png)
-
-5. Track: confirm it ran
 
 That workflow is live in production today and it took Evan only 10 minutes to set it up. 
 *“We’re thrilled with it. We shipped it fast, it works, and it’s tied to our real product data instead of being duct-taped across tools. Even in alpha, Workflows has been at least one-tenth of the time it would’ve taken us to build something we’d actually put in production in Zapier. And that might be an understatement.”*

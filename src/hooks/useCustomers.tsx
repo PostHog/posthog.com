@@ -655,7 +655,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     grantable: {
         name: 'Grantable',
         toolsUsed: [
-            'workflow_automation',
+            'workflows',
             'feature_flags',
             'session_replay',
             'experiments',
