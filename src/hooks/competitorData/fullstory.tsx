@@ -191,8 +191,12 @@ export const fullstory = {
         developer: {
             api: true,
             cross_domain_tracking: true,
-            notebooks: false,
             server_side_sdks: true,
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
         },
         security: {
             cookieless_tracking: false,

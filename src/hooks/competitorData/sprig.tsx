@@ -45,11 +45,15 @@ export const sprig = {
             collaboration: false,
             mobile_sdks: false,
             native_data_sources: false,
-            notebooks: false,
             proxies: false,
             sdks: false,
             server_side_sdks: false,
             sql: false,
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
         },
         integrations: {
             azure_blob: false,

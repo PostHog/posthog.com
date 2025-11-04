@@ -235,8 +235,11 @@ export const hotjar = {
             zapier: true,
             zendesk: false,
         },
-        developer: {
+        developer: {},
+        tools: {
+            cms: '',
             notebooks: false,
+            project_management_tools: '',
         },
         security: {
             ccpa_ready: true,

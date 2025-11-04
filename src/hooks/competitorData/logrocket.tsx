@@ -205,8 +205,12 @@ export const logrocket = {
         developer: {
             features: {
                 cross_domain_tracking: true,
-                notebooks: false,
             },
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
         },
         security: {
             cookieless_tracking: false,

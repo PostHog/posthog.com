@@ -98,10 +98,14 @@ export const vwo = {
         developer: {
             api: false,
             native_data_sources: false,
-            notebooks: false,
             proxies: false,
             sdks: false,
             sql: false,
+        },
+        tools: {
+            cms: true,
+            notebooks: false,
+            project_management_tools: true,
         },
         pricing: {
             free_tier: false,

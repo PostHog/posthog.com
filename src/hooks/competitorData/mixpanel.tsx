@@ -421,10 +421,14 @@ export const mixpanel = {
         },
         developer: {
             api: false,
-            notebooks: false,
             proxies: false,
             sdks: false,
             sql: false,
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
         },
     },
     pricing: {

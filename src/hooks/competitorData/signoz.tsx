@@ -52,11 +52,15 @@ export const signoz = {
             collaboration: false,
             mobile_sdks: 'Partial',
             native_data_sources: false,
-            notebooks: false,
             proxies: false,
             sdks: false,
             server_side_sdks: false,
             sql: false,
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
         },
         integrations: {
             azure_blob: false,

@@ -12,6 +12,7 @@ export const dynamic_yield = {
             available: true,
             features: {
                 funnel_tests: false,
+                no_code_experiments: true,
             },
         },
         product_analytics: {
@@ -31,6 +32,11 @@ export const dynamic_yield = {
         },
         developer: {
             api: 'Evaluate only',
+        },
+        tools: {
+            cms: false,
+            notebooks: false,
+            project_management_tools: false,
         },
     },
     pricing: {

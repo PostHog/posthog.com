@@ -98,8 +98,11 @@ export const clarity = {
             zapier: false,
             zendesk: false,
         },
-        developer: {
+        developer: {},
+        tools: {
+            cms: '',
             notebooks: false,
+            project_management_tools: '',
         },
         security: {
             cookieless_tracking: false,

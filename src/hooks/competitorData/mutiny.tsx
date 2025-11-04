@@ -12,6 +12,7 @@ export const mutiny = {
             available: true,
             features: {
                 funnel_tests: false,
+                no_code_experiments: true,
             },
         },
         product_analytics: {
@@ -31,6 +32,11 @@ export const mutiny = {
         },
         developer: {
             api: false,
+        },
+        tools: {
+            cms: true,
+            notebooks: false,
+            project_management_tools: true,
         },
     },
     pricing: {

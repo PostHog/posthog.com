@@ -171,12 +171,16 @@ export const optimizely = {
             client_side_sdks: true,
             mobile_sdks: true,
             native_data_sources: false,
-            notebooks: false,
             proxies: false,
             sdks: '14',
             server_side_sdks: true,
             sql: false,
             tv_sdks: true,
+        },
+        tools: {
+            cms: true,
+            notebooks: false,
+            project_management_tools: true,
         },
         pricing: {
             free_tier: false,

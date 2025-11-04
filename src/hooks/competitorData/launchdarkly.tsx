@@ -220,9 +220,13 @@ export const launchdarkly = {
         developer: {
             api: 'Pro',
             native_data_sources: false,
-            notebooks: false,
             sdks: true,
             sql: false,
+        },
+        tools: {
+            cms: true,
+            notebooks: false,
+            project_management_tools: true,
         },
         pricing: {
             free_tier: false,

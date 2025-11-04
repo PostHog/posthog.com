@@ -23,6 +23,7 @@ export const ab_tasty = {
             available: true,
             features: {
                 funnel_tests: false,
+                no_code_experiments: true,
             },
             analysis: {
                 statistics_engine: 'Bayesian, Frequentist',
@@ -49,6 +50,11 @@ export const ab_tasty = {
         security: {
             history_audit_logs: false,
             role_based_access_control: true,
+        },
+        tools: {
+            cms: false,
+            notebooks: false,
+            project_management_tools: false,
         },
     },
     pricing: {

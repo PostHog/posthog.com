@@ -259,10 +259,14 @@ export const heap = {
         },
         developer: {
             api: false,
-            notebooks: false,
             proxies: false,
             sdks: false,
             sql: false,
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
         },
         integrations: {
             ci_cd_integrations: false,

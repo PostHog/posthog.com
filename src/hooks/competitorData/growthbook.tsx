@@ -173,9 +173,13 @@ export const growthbook = {
         developer: {
             api: true,
             native_data_sources: false,
-            notebooks: false,
             sdks: '11',
             sql: true,
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
         },
         pricing: {
             free_tier: true,

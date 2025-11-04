@@ -127,8 +127,12 @@ export const matomo = {
         developer: {
             api: true,
             mobile_sdks: true,
-            notebooks: false,
             server_side_sdks: true,
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
         },
         integrations: {
             bigquery: true,

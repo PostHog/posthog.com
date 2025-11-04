@@ -247,14 +247,6 @@ export const platformFeatures = {
                 name: 'Mobile SDKs',
                 description: 'Capture events and use features from Android, iOS, and more',
             },
-            project_management_tools: {
-                name: 'Project management tools',
-                description: 'Plan better with backlogs, boards, calendars, and more',
-            },
-            notebooks: {
-                name: 'Notebooks',
-                description: 'Collaborate on analysis in shareable notebooks',
-            },
             tv_sdks: {
                 name: 'OTT',
                 description: 'Over-the-top TV applications',
@@ -333,6 +325,20 @@ export const platformFeatures = {
                 name: 'User privacy options',
                 description: 'Anonymize users, drop personal data',
             },
+        },
+    },
+    tools: {
+        cms: {
+            name: 'CMS',
+            description: 'Produce and manage content to show on your site',
+        },
+        notebooks: {
+            name: 'Notebooks',
+            description: 'Collaborate on analysis in shareable notebooks',
+        },
+        project_management_tools: {
+            name: 'Project management tools',
+            description: 'Plan better with backlogs, boards, calendars, and more',
         },
     },
 }

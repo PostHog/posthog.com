@@ -113,10 +113,14 @@ export const flagsmith = {
         developer: {
             sdks: false,
             native_data_sources: false,
-            notebooks: false,
             proxies: false,
             api: false,
             sql: false,
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
         },
         integrations: {
             datadog: false,

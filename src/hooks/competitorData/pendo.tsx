@@ -156,11 +156,15 @@ export const pendo = {
         developer: {
             api: true,
             cross_domain_tracking: true,
-            notebooks: false,
             proxies: false,
             sdks: false,
             server_side_sdks: true,
             sql: false,
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
         },
     },
     pricing: {

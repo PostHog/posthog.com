@@ -139,8 +139,12 @@ export const ga4 = {
         developer: {
             api: false,
             mobile_sdks: false,
-            notebooks: false,
             server_side_sdks: false,
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
         },
         integrations: {
             bigquery: true,

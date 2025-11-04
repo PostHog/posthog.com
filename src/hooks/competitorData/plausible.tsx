@@ -144,8 +144,12 @@ export const plausible = {
         developer: {
             api: 'Partial',
             mobile_sdks: false,
-            notebooks: false,
             server_side_sdks: false,
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
         },
         integrations: {
             csv_exports: true,

@@ -126,8 +126,12 @@ export const fathom = {
             api: true,
             collaboration: 'Share web analytics with or without a password',
             mobile_sdks: false,
-            notebooks: false,
             server_side_sdks: false,
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
         },
         integrations: {
             csv_exports: true,

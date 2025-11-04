@@ -12,6 +12,7 @@ export const kameleoon = {
             available: true,
             features: {
                 funnel_tests: false,
+                no_code_experiments: true,
             },
         },
         product_analytics: {
@@ -31,6 +32,11 @@ export const kameleoon = {
         },
         developer: {
             api: true,
+        },
+        tools: {
+            cms: false,
+            notebooks: false,
+            project_management_tools: false,
         },
     },
     pricing: {
