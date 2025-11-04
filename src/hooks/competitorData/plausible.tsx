@@ -32,6 +32,7 @@ export const plausible = {
                 pre_configured_dashboards: false,
                 real_time_reporting: false,
                 revenue_tracking: false,
+                search_tools: 'Keywords',
                 script_size: '<1 kB',
                 session_and_duration_tracking: false,
                 sessions: true,

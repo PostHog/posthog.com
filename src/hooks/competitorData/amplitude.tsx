@@ -80,6 +80,9 @@ export const amplitude = {
         },
         web_analytics: {
             available: true,
+            features: {
+                search_tools: false,
+            },
         },
         session_replay: {
             available: true,

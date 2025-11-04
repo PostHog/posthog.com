@@ -212,6 +212,7 @@ export const hotjar = {
         },
         pricing: {
             free_tier: true,
+            self_serve: true,
             transparent_pricing: true,
             usage_based_pricing: false,
         },

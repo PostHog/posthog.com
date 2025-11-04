@@ -88,6 +88,7 @@ export const matomo = {
                 revenue_tracking: false,
                 script_size: false,
                 scrollmaps: false,
+                search_tools: true,
                 session_and_duration_tracking: false,
                 sessions: true,
                 snippet_install: true,

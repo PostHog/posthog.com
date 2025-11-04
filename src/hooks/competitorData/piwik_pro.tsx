@@ -13,6 +13,7 @@ export const piwik_pro = {
                 custom_channel_types: false,
                 entry_exit_paths: true,
                 pageviews: true,
+                search_tools: true,
                 snippet_install: false,
                 traffic_breakdown: true,
                 utm_tracking: true,
@@ -62,6 +63,9 @@ export const piwik_pro = {
         },
         feature_flags: {
             available: false,
+        },
+        heatmaps: {
+            available: true,
         },
     },
     platform: {

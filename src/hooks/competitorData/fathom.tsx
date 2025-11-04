@@ -15,12 +15,10 @@ export const fathom = {
                 bounce_rate_tracking: false,
                 breakdown_by_device_and_browser: false,
                 breakdown_by_geoip: false,
-                clickmaps: false,
                 conversions: true,
                 custom_channel_types: false,
                 entry_exit_paths: false,
                 first_party_cookies: false,
-                heatmaps: false,
                 hipaa_compliance: false,
                 integration_with_feature_flags: false,
                 integration_with_session_replay: false,
@@ -34,7 +32,7 @@ export const fathom = {
                 real_time_reporting: false,
                 revenue_tracking: false,
                 script_size: '<2 kB',
-                scrollmaps: false,
+                search_tools: false,
                 session_and_duration_tracking: false,
                 sessions: false,
                 snippet_install: true,
@@ -110,6 +108,14 @@ export const fathom = {
         },
         surveys: {
             available: false,
+        },
+        heatmaps: {
+            available: false,
+            features: {
+                clickmaps: false,
+                heatmaps: false,
+                scrollmaps: false,
+            },
         },
     },
     platform: {

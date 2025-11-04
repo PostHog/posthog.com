@@ -13,6 +13,7 @@ export const umami = {
                 custom_channel_types: false,
                 entry_exit_paths: false,
                 pageviews: true,
+                search_tools: false,
                 snippet_install: true,
                 traffic_breakdown: true,
                 utm_tracking: true,

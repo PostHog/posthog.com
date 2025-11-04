@@ -68,6 +68,7 @@ export const heap = {
             available: false,
             features: {
                 snippet_install: true,
+                search_tools: false,
             },
         },
         session_replay: {

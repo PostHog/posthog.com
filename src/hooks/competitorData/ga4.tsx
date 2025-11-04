@@ -95,6 +95,7 @@ export const ga4 = {
                 real_time_reporting: true,
                 revenue_tracking: true,
                 script_size: false,
+                search_tools: true,
                 session_and_duration_tracking: true,
                 sessions: false,
                 snippet_install: false,

@@ -58,6 +58,10 @@ export const webAnalyticsFeatures = {
             name: 'Snippet install',
             description: 'Install HTML snippet',
         },
+        search_tools: {
+            name: 'Search tools',
+            description: 'Get keyword data and track search ad performance',
+        },
         migration: {
             name: 'Migration from Google Analytics',
             description: 'Migrate data from Google Analytics',
