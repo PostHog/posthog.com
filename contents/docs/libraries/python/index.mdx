@@ -187,11 +187,11 @@ You can also explicitly chose to enable or disable GeoIP for a single capture re
 posthog.capture('test_event', disable_geoip=True|False)
 ```
 
-## Debugging
+## Debug mode 
 
-If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debugging to see what's happening. 
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
 
-You can enable debugging by setting the `debug` option to `True` in the `PostHog` object. This will enable verbose logs about the inner workings of the SDK.
+You can enable debug mode by setting the `debug` option to `True` in the `PostHog` object. This will enable verbose logs about the inner workings of the SDK.
 
 ```python
 posthog.debug = True # +
