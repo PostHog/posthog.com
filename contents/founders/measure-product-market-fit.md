@@ -256,7 +256,7 @@ Retention is _the main_ lagging indicator of product-market fit for any type of 
 
 You'll want to track active users over a long(ish) period of time – weeks or months, rather than days. It's best to track events or actions where a user is experiencing the _real value_ of your product. Again, logging in does not count!
 
-For our product PostHog, an [all-in-one analytics platform](http://posthog.com/), this might look like:
+For our product PostHog, an [all-in-one developer platform](http://posthog.com/), this might look like:
 
 > Show `unique users` who performed a `discovery` for the first time in the last `12 months` and then came back to perform a `discovery` on any of the next months.
 
