@@ -57,6 +57,7 @@ import { split } from '../../hooks/competitorData/split'
 import { sprig } from '../../hooks/competitorData/sprig'
 import { statsig } from '../../hooks/competitorData/statsig'
 import { stripe } from '../../hooks/competitorData/stripe'
+import { survicate } from '../../hooks/competitorData/survicate'
 import { umami } from '../../hooks/competitorData/umami'
 import { unleash } from '../../hooks/competitorData/unleash'
 import { vwo } from '../../hooks/competitorData/vwo'
@@ -482,6 +483,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         sprig,
         statsig,
         stripe,
+        survicate,
         umami,
         unleash,
         vwo,

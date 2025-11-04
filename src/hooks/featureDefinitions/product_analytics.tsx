@@ -14,6 +14,10 @@ export const productAnalyticsFeatures = {
             name: 'Actions',
             description: 'Combine multiple events into a single action for analysis',
         },
+        ai_analysis: {
+            name: 'AI analysis',
+            description: 'Surface user pain points using AI',
+        },
         autocapture: {
             name: 'Autocapture',
             description: 'Capture events without manual tracking',

@@ -8,6 +8,7 @@ export const crazy_egg = {
         product_analytics: {
             available: false,
             features: {
+                ai_analysis: false,
                 funnels: {
                     available: true,
                 },
@@ -73,6 +74,9 @@ export const crazy_egg = {
         },
         pricing: {
             self_serve: 'Trial only',
+        },
+        security: {
+            cookieless_tracking: false,
         },
     },
 }

@@ -21,6 +21,7 @@ export const fullstory = {
             features: {
                 actions: true,
                 advertising_analytics: false,
+                ai_analysis: false,
                 autocapture: true,
                 cohorts: false,
                 custom_events: true,
@@ -145,6 +146,12 @@ export const fullstory = {
         },
         surveys: {
             available: false,
+            platforms: {
+                features: {
+                    web: false,
+                    mobile: false,
+                },
+            },
         },
         experiments: {
             available: false,

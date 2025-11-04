@@ -11,6 +11,7 @@ export const pendo = {
             features: {
                 actions: false,
                 advertising_analytics: false,
+                ai_analysis: true,
                 autocapture: 'Limited',
                 cohorts: true,
                 custom_events: true,
@@ -66,7 +67,7 @@ export const pendo = {
             available: true,
         },
         heatmaps: {
-            available: false,
+            available: true,
             features: {
                 rage_clicks: false,
                 scrollmaps: false,

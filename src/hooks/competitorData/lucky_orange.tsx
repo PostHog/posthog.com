@@ -6,7 +6,16 @@ export const lucky_orange = {
     },
     products: {
         product_analytics: {
-            available: 'Funnels',
+            available: false,
+            features: {
+                ai_analysis: false,
+            },
+            funnels: {
+                available: true,
+            },
+            user_paths: {
+                available: false,
+            },
         },
         web_analytics: {
             available: true,
@@ -68,6 +77,9 @@ export const lucky_orange = {
         },
         pricing: {
             self_serve: true,
+        },
+        security: {
+            cookieless_tracking: false,
         },
     },
 }

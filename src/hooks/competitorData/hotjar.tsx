@@ -12,6 +12,7 @@ export const hotjar = {
             available: false,
             features: {
                 advertising_analytics: false,
+                ai_analysis: false,
                 autocapture: false,
                 cohorts: false,
                 custom_events: true,
