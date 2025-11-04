@@ -12,8 +12,7 @@ tags:
     - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import ProductComparisonTable from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
@@ -49,80 +48,23 @@ PostHog offers product analytics as well as a fully-integrated A/B testing tool.
 
 Both tools are open source. However, Flagsmith offers self-hosting while PostHog recommends self-hosting for hobbyist projects only.
 
-<ComparisonTable column1="PostHog" column2="Flagsmith">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Payloads"
-        description="Flags with string, number, or JSON payloads"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Remote config"
-        description="Easily change feature properties without deploying new code."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Scheduling"
-        description="Schedule flag updates and rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cohorts"
-        description="Gradually release features to specific groups"
-    />
-    <ComparisonRow
-        column1={true}
-        column2="Requires 3rd-party analytics"
-        feature="Multivariate (A/B/n) testing"
-        description="Test multiple variants of a change"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Product analytics"
-        description="Track trends, funnels, user paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting option"
-        description="Choose where your data is stored"
-    />
-    <ComparisonRow
-        column1={'Hobbyist only'}
-        column2={true}
-        feature="Self-hosting"
-        description="Host on your own server"
-    />
-    <ComparisonRow
-        column1={'No audit log'}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'flagsmith']}
+    rows={[
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.features.json_payloads',
+        'feature_flags.management.flag_scheduling',
+        'product_analytics.features.cohorts',
+        'experiments',
+        'product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.deployment.self_host',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+    ]}
+/>
 
 ### Why do companies use PostHog?
 
@@ -168,75 +110,23 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), a
 
 [LaunchDarkly](/blog/best-launchdarkly-alternatives) and Flagsmith have similar feature management and governance features, though LaunchDarkly has a more comprehensive A/B testing offering.
 
-<ComparisonTable column1="LaunchDarkly" column2="Flagsmith">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Payloads"
-        description="Flags with string, number, or JSON payloads"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Remote config"
-        description="Easily change feature properties without deploying new code."
-    />
-    <ComparisonRow
-        column1="Enterprise"
-        column2={true}
-        feature="Scheduling"
-        description="Schedule flag updates and rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cohorts"
-        description="Gradually release features to specific groups"
-    />
-    <ComparisonRow
-        column1={true}
-        column2="Requires 3rd-party analytics"
-        feature="Multivariate (A/B/n) testing"
-        description="Test multiple variants of a change"
-    />
-    <ComparisonRow
-        column1="Trends only"
-        column2={false}
-        feature="Product analytics"
-        description="Track trends, funnels, user paths, and retention"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="EU hosting option"
-        description="Choose where your data is stored"
-    />
-    <ComparisonRow column1={false} column2={true} feature="Self-hosting" description="Host on your own server" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['launchdarkly', 'flagsmith']}
+    rows={[
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.features.json_payloads',
+        'feature_flags.management.flag_scheduling',
+        'product_analytics.features.cohorts',
+        'experiments',
+        'product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.deployment.self_host',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+    ]}
+/>
 
 ### Why do companies use LaunchDarkly?
 
@@ -281,77 +171,26 @@ It also includes a warehouse-native mode to connect directly and utilize your [d
 
 ### How does Statsig compare to Flagsmith?
 
-Statsig has a similar feature set to Flagsmith but it does not include flag payloads or remote config. However, it does include built-in analytics and A/B testing.
+Statsig has a similar feature set to Flagsmith but it does not include flag payloads. However, it does include built-in analytics and A/B testing.
 
-<ComparisonTable column1="Statsig" column2="Flagsmith">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Payloads"
-        description="Flags with string, number, or JSON payloads"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Remote config"
-        description="Easily change feature properties without deploying new code."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Scheduling"
-        description="Schedule flag updates and rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cohorts"
-        description="Gradually release features to specific groups"
-    />
-    <ComparisonRow
-        column1={true}
-        column2="Requires 3rd-party analytics"
-        feature="Multivariate (A/B/n) testing"
-        description="Test multiple variants of a change"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Product analytics"
-        description="Track trends, funnels, user paths, and retention"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="EU hosting option"
-        description="Choose where your data is stored"
-    />
-    <ComparisonRow column1={false} column2={true} feature="Self-hosting" description="Host on your own server" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['statsig', 'flagsmith']}
+    rows={[
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.features.json_payloads',
+        'feature_flags.features.remote_config',
+        'feature_flags.management.flag_scheduling',
+        'product_analytics.features.cohorts',
+        'experiments',
+        'product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.deployment.self_host',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+    ]}
+/>
 
 ### Why do companies use Statsig?
 
@@ -395,75 +234,23 @@ Unleash is a feature management platform that provides an overview of all featur
 
 Unleash is the most similar alternative to Flagsmith. Both focus on a comprehensive feature flag offering, governance tools, and self-hosting.
 
-<ComparisonTable column1="Unleash" column2="Flagsmith">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Payloads"
-        description="Flags with string, number, or JSON payloads"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Remote config"
-        description="Easily change feature properties without deploying new code."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Scheduling"
-        description="Schedule flag updates and rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cohorts"
-        description="Gradually release features to specific groups"
-    />
-    <ComparisonRow
-        column1="Requires 3rd-party analytics"
-        column2="Requires 3rd-party analytics"
-        feature="Multivariate (A/B/n) testing"
-        description="Test multiple variants of a change"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Product analytics"
-        description="Track trends, funnels, user paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="EU hosting option"
-        description="Choose where your data is stored"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Self-hosting" description="Host on your own server" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['unleash', 'flagsmith']}
+    rows={[
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.features.json_payloads',
+        'feature_flags.management.flag_scheduling',
+        'product_analytics.features.cohorts',
+        'experiments',
+        'product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.deployment.self_host',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+    ]}
+/>
 
 ### Why do companies use Unleash?
 
@@ -505,75 +292,23 @@ According to G2, users are big fans of Unleash because:
 
 By focusing on feature flags, Split and Flagsmith have similar feature sets. Split provides more observability and testing tools, like alerts, while Flagsmith focuses more on self-hosting. Split does not offer A/B testing.
 
-<ComparisonTable column1="Split" column2="Flagsmith">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Payloads"
-        description="Flags with string, number, or JSON payloads"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Remote config"
-        description="Easily change feature properties without deploying new code."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Scheduling"
-        description="Schedule flag updates and rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cohorts"
-        description="Gradually release features to specific groups"
-    />
-    <ComparisonRow
-        column1={false}
-        column2="Requires 3rd-party analytics"
-        feature="Multivariate (A/B/n) testing"
-        description="Test multiple variants of a change"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Product analytics"
-        description="Track trends, funnels, user paths, and retention"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="EU hosting option"
-        description="Choose where your data is stored"
-    />
-    <ComparisonRow column1={false} column2={true} feature="Self-hosting" description="Host on your own server" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['split', 'flagsmith']}
+    rows={[
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.features.json_payloads',
+        'feature_flags.management.flag_scheduling',
+        'product_analytics.features.cohorts',
+        'experiments',
+        'product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.deployment.self_host',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+    ]}
+/>
 
 ### How popular is Split?
 
@@ -625,75 +360,23 @@ It's a popular choice for companies in strict regulatory environments because it
 
 GrowthBook supports almost all of the features that Flagsmith does except for local evaluation of feature flags.
 
-<ComparisonTable column1="Growthbook" column2="Flagsmith">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Payloads"
-        description="Flags with string, number, or JSON payloads"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Remote config"
-        description="Easily change feature properties without deploying new code."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Scheduling"
-        description="Schedule flag updates and rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cohorts"
-        description="Gradually release features to specific groups"
-    />
-    <ComparisonRow
-        column1={true}
-        column2="Requires 3rd-party analytics"
-        feature="Multivariate (A/B/n) testing"
-        description="Test multiple variants of a change"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Product analytics"
-        description="Track trends, funnels, user paths, and retention"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="EU hosting option"
-        description="Choose where your data is stored"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Self-hosting" description="Host on your own server" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['growthbook', 'flagsmith']}
+    rows={[
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.features.json_payloads',
+        'feature_flags.management.flag_scheduling',
+        'product_analytics.features.cohorts',
+        'experiments',
+        'product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.deployment.self_host',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+    ]}
+/>
 
 ### Why do companies use GrowthBook?
 
@@ -737,75 +420,23 @@ DevCycle is a startup launched out of Taplytics, another A/B testing platform. I
 
 DevCycle has many of the core feature flag features that Flagsmith has but is not open source. DevCycle used to support A/B testing, but it has since removed that functionality.
 
-<ComparisonTable column1="DevCycle" column2="Flagsmith">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Payloads"
-        description="Flags with string, number, or JSON payloads"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Remote config"
-        description="Easily change feature properties without deploying new code."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Scheduling"
-        description="Schedule flag updates and rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Cohorts"
-        description="Gradually release features to specific groups"
-    />
-    <ComparisonRow
-        column1={false}
-        column2="Requires 3rd-party analytics"
-        feature="Multivariate (A/B/n) testing"
-        description="Test multiple variants of a change"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Product analytics"
-        description="Track trends, funnels, user paths, and retention"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="EU hosting option"
-        description="Choose where your data is stored"
-    />
-    <ComparisonRow column1={false} column2={true} feature="Self-hosting" description="Host on your own server" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['devcycle', 'flagsmith']}
+    rows={[
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'feature_flags.features.json_payloads',
+        'feature_flags.management.flag_scheduling',
+        'product_analytics.features.cohorts',
+        'experiments',
+        'product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.deployment.self_host',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+    ]}
+/>
 
 ### Why do companies use DevCycle?
 

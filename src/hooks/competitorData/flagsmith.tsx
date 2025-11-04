@@ -5,6 +5,12 @@ export const flagsmith = {
         icon: '/images/competitors/flagsmith.svg',
     },
     products: {
+        product_analytics: {
+            available: false,
+            features: {
+                cohorts: true,
+            },
+        },
         feature_flags: {
             available: true,
             pricing: {
@@ -12,10 +18,11 @@ export const flagsmith = {
             },
             features: {
                 boolean_flags: false,
-                multivariate_flags: true,
-                json_payloads: true,
-                release_conditions: false,
                 early_access_management: false,
+                json_payloads: true,
+                multivariate_flags: true,
+                release_conditions: false,
+                remote_config: true,
             },
             implementation: {
                 features: {
@@ -65,7 +72,7 @@ export const flagsmith = {
             },
         },
         experiments: {
-            available: true,
+            available: 'Requires third-party analytics',
             features: {
                 llm_support: false,
                 multivariate: false,
@@ -90,6 +97,7 @@ export const flagsmith = {
     },
     platform: {
         deployment: {
+            eu_hosting: true,
             open_source: 'Open core',
             self_host: true,
         },
@@ -118,13 +126,14 @@ export const flagsmith = {
             sentry: false,
         },
         security: {
-            user_privacy_options: false,
-            history_audit_logs: false,
             gdpr_ready: false,
             hipaa_ready: false,
+            history_audit_logs: true,
+            role_based_access_control: true,
+            saml_sso: false,
             soc2_certified: false,
             two_factor_auth: false,
-            saml_sso: false,
+            user_privacy_options: false,
         },
         analytics_integration: {
             built_in_analytics: false,

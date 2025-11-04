@@ -544,7 +544,7 @@ export const posthog = {
             open_source: true,
             reverse_proxy: true,
             managed_reverse_proxy: true,
-            self_host: 'Limited',
+            self_host: true,
         },
         libraries: {
             features: {

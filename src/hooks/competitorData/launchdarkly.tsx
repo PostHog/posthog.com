@@ -136,11 +136,11 @@ export const launchdarkly = {
             },
         },
         product_analytics: {
-            available: true,
+            available: 'Requires third-party data warehouse',
             features: {
                 advertising_analytics: false,
                 autocapture: false,
-                cohorts: false,
+                cohorts: true,
                 custom_events: true,
                 custom_properties: false,
                 monetization_analytics: false,
@@ -209,6 +209,7 @@ export const launchdarkly = {
     },
     platform: {
         deployment: {
+            eu_hosting: true,
             open_source: 'Partial',
             reverse_proxy: true,
             self_host: false,
@@ -240,6 +241,7 @@ export const launchdarkly = {
             gdpr_ready: true,
             hipaa_ready: true,
             history_audit_logs: true,
+            role_based_access_control: true,
             saml_sso: true,
             soc2_certified: true,
             two_factor_auth: true,

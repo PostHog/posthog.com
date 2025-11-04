@@ -45,6 +45,9 @@ import { umami } from '../../hooks/competitorData/umami'
 import { piwik_pro } from '../../hooks/competitorData/piwik_pro'
 import { statsig } from '../../hooks/competitorData/statsig'
 import { eppo } from '../../hooks/competitorData/eppo'
+import { unleash } from '../../hooks/competitorData/unleash'
+import { split } from '../../hooks/competitorData/split'
+import { devcycle } from '../../hooks/competitorData/devcycle'
 
 // Feature definition imports
 import { errorTrackingFeatures } from '../../hooks/featureDefinitions/error_tracking'
@@ -451,6 +454,9 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         piwik_pro,
         statsig,
         eppo,
+        unleash,
+        split,
+        devcycle,
     }
 
     // Helper to get feature value from competitor data

@@ -135,6 +135,9 @@ export const growthbook = {
         },
         product_analytics: {
             available: false,
+            features: {
+                cohorts: true,
+            },
         },
         session_replay: {
             available: false,
@@ -159,6 +162,7 @@ export const growthbook = {
     },
     platform: {
         deployment: {
+            eu_hosting: 'Self-hosted',
             open_source: true,
             reverse_proxy: true,
             self_host: true,
@@ -189,6 +193,7 @@ export const growthbook = {
             gdpr_ready: true,
             hipaa_ready: true,
             history_audit_logs: 'Enterprise',
+            role_based_access_control: true,
             saml_sso: 'Enterprise',
             soc2_certified: true,
             two_factor_auth: false,

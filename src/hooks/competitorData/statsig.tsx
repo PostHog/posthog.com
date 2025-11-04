@@ -105,7 +105,7 @@ export const statsig = {
             },
             implementation: {
                 features: {
-                    local_evaluation: false,
+                    local_evaluation: true,
                     bootstrapping: true,
                     api_access: false,
                     sdk_support: false,
@@ -334,6 +334,7 @@ export const statsig = {
             hipaa_ready: 'Enterprise',
             history_audit_logs: true,
             reverse_proxy: false,
+            role_based_access_control: true,
             saml_sso: 'Enterprise',
             soc2_certified: true,
             two_factor_auth: true,
