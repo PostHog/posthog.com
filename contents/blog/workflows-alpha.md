@@ -1,6 +1,6 @@
 ---
 date: 2025-11-03
-title: Workflows Are Now in Alpha. And I Already Managed to Break Mine
+title: Workflows are now in Alpha and I already broke mine
 author:
   - sara-miteva
 featuredImage: >-
