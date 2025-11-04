@@ -201,6 +201,7 @@ export const whatfix = {
             api: true,
             cross_domain_tracking: false,
             proxies: false,
+            mobile_sdks: true,
             sdks: true,
             server_side_sdks: false,
             sql: false,

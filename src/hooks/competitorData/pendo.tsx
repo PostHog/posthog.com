@@ -116,6 +116,16 @@ export const pendo = {
                     mobile: true,
                 },
             },
+            targeting: {
+                features: {
+                    custom_targeting: true,
+                },
+            },
+            branching: {
+                features: {
+                    multi_step_surveys: true,
+                },
+            },
         },
         feature_flags: {
             available: false,
@@ -202,6 +212,7 @@ export const pendo = {
             api: true,
             cross_domain_tracking: true,
             proxies: false,
+            mobile_sdks: true,
             sdks: false,
             server_side_sdks: true,
             sql: false,

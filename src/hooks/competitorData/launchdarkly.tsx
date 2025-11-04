@@ -29,6 +29,7 @@ export const launchdarkly = {
             },
             targeting: {
                 features: {
+                    custom_targeting: false,
                     target_by_percentage: true,
                     target_by_person_properties: true,
                     target_by_cohorts: false,
@@ -209,6 +210,9 @@ export const launchdarkly = {
                 batch_exports: false,
                 warehouse_sources: true,
             },
+        },
+        heatmaps: {
+            available: false,
         },
     },
     platform: {

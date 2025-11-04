@@ -50,6 +50,16 @@ export const crazy_egg = {
             features: {
                 feedback_button: true,
             },
+            targeting: {
+                features: {
+                    custom_targeting: true,
+                },
+            },
+            branching: {
+                features: {
+                    multi_step_surveys: true,
+                },
+            },
             platforms: {
                 features: {
                     web: true,

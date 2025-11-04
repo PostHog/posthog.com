@@ -85,6 +85,13 @@ export const clarity = {
         },
         product_analytics: {
             available: false,
+            features: {
+                autocapture: true,
+                cohorts: true,
+            },
+            group_analytics: {
+                available: false,
+            },
         },
         web_analytics: {
             available: false,

@@ -157,6 +157,9 @@ export const optimizely = {
         surveys: {
             available: false,
         },
+        heatmaps: {
+            available: false,
+        },
         data_warehouse: {
             features: {
                 warehouse_sources: false,

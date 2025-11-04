@@ -20,6 +20,9 @@ export const vwo = {
         session_replay: {
             available: true,
         },
+        heatmaps: {
+            available: true,
+        },
         surveys: {
             available: true,
         },
@@ -75,6 +78,7 @@ export const vwo = {
             targeting: {
                 features: {
                     cohort_integration: false,
+                    custom_targeting: true,
                     exclusion_rules: false,
                     geographic_targeting: false,
                     group_level_experiments: false,

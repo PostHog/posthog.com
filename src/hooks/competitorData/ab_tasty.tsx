@@ -29,9 +29,17 @@ export const ab_tasty = {
             analysis: {
                 statistics_engine: 'Bayesian, Frequentist',
             },
+            targeting: {
+                features: {
+                    custom_targeting: true,
+                },
+            },
         },
         product_analytics: {
             available: false,
+            features: {
+                autocapture: false,
+            },
             insights: {
                 features: {
                     alerts: true,
@@ -39,6 +47,12 @@ export const ab_tasty = {
             },
         },
         session_replay: {
+            available: false,
+        },
+        heatmaps: {
+            available: false,
+        },
+        surveys: {
             available: false,
         },
     },

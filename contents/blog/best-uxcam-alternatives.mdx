@@ -12,8 +12,7 @@ tags:
     - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
@@ -45,63 +44,21 @@ By combining all these tools into one platform, it eliminates the need for stitc
 
 UXCam is solely focused on mobile apps. PostHog, however, supports both mobile and web apps, with SDKs for all popular web and mobile frameworks, including React Native.
 
-<ComparisonTable column1="PostHog" column2="UXCam">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your mobile apps; discover friction points"
-    />
-    <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users tap and interact" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Integrations"
-        description="Import from and export to external services"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Transparent pricing"
-        description="Get pricing immediately without talking to sales"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'uxcam']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'product_analytics.group_analytics',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'heatmaps',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use PostHog?
 
@@ -145,63 +102,21 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 
 LogRocket supports all the features UXCam does and more – like performance monitoring and error tracking.
 
-<ComparisonTable column1="LogRocket" column2="UXCam">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your mobile apps; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Integrations"
-        description="Import from and export to external services"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Transparent pricing"
-        description="Get pricing immediately without talking to sales"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['logrocket', 'uxcam']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'product_analytics.group_analytics',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'heatmaps',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use LogRocket?
 
@@ -245,63 +160,21 @@ Smartlook combines session replays, product analytics, visualizations, and crash
 
 The feature sets of Smartlook and UXCam are nearly identical. The difference is that Smartlook adds crash reports.
 
-<ComparisonTable column1="Smartlook" column2="FullStory">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your mobile apps; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Integrations"
-        description="Import from and export to external services"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Transparent pricing"
-        description="Get pricing immediately without talking to sales"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['smartlook', 'fullstory']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'product_analytics.group_analytics',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'heatmaps',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Smartlook?
 
@@ -341,63 +214,21 @@ According to G2 reviewers, Smartlook users benefit from:
 
 Fullstory is the most similar alternative to UXCam. It provides the same capabilities that UXCam does without any of the extra features that other alternatives on this list do – like A/B testing or error monitoring.
 
-<ComparisonTable column1="FullStory" column2="UXCam">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your mobile apps; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Integrations"
-        description="Import from and export to external services"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Transparent pricing"
-        description="Get pricing immediately without talking to sales"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['fullstory', 'uxcam']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'product_analytics.group_analytics',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'heatmaps',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use FullStory?
 
@@ -439,63 +270,21 @@ According to reviews on G2, companies use FullStory for:
 
 Clarity covers most of the same features as UXCam with the exclusion of product analytics. It's also free, of course, though it only retains data for 30 days.
 
-<ComparisonTable column1="Clarity" column2="Hotjar">
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your mobile apps; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Integrations"
-        description="Import from and export to external services"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Transparent pricing"
-        description="Get pricing immediately without talking to sales"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['clarity', 'hotjar']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'product_analytics.group_analytics',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'heatmaps',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Microsoft Clarity?
 
@@ -535,63 +324,21 @@ Contentsquare is an analytics platform that combines heatmaps, customer journey 
 
 Contentsquare includes all of UXCam's features and more, like crash reports and AI-powered analytics recommendations. It caters mostly to large enterprises, though. UXCam's user-friendly interface may appeal to smaller and mid-size companies.
 
-<ComparisonTable column1="Contentsquare" column2="UXCam">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your mobile apps; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Integrations"
-        description="Import from and export to external services"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Transparent pricing"
-        description="Get pricing immediately without talking to sales"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['contentsquare', 'uxcam']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'product_analytics.group_analytics',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'heatmaps',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Contentsquare?
 

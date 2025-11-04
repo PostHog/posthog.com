@@ -175,7 +175,12 @@ export const hotjar = {
                     display_conditions: true,
                     event_triggered: true,
                     linked_feature_flag: false,
-                    custom_targeting: false,
+                    custom_targeting: true,
+                },
+            },
+            branching: {
+                features: {
+                    multi_step_surveys: true,
                 },
             },
             question_types: {

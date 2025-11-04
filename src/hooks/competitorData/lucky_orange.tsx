@@ -52,6 +52,17 @@ export const lucky_orange = {
             available: true,
             features: {
                 feedback_button: true,
+                integrations: true,
+            },
+            targeting: {
+                features: {
+                    custom_targeting: true,
+                },
+            },
+            branching: {
+                features: {
+                    multi_step_surveys: false,
+                },
             },
             platforms: {
                 features: {

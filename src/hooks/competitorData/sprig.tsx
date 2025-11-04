@@ -75,6 +75,17 @@ export const sprig = {
                 user_targeting: true,
                 user_filtering: true,
                 feedback_button: true,
+                integrations: true,
+            },
+            targeting: {
+                features: {
+                    custom_targeting: true,
+                },
+            },
+            branching: {
+                features: {
+                    multi_step_surveys: true,
+                },
             },
             platforms: {
                 features: {

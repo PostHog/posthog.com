@@ -14,7 +14,9 @@ import { appsignal } from '../../hooks/competitorData/appsignal'
 import { baremetrics } from '../../hooks/competitorData/baremetrics'
 import { bugsnag } from '../../hooks/competitorData/bugsnag'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
+import { chameleon } from '../../hooks/competitorData/chameleon'
 import { clarity } from '../../hooks/competitorData/clarity'
+import { contentsquare } from '../../hooks/competitorData/contentsquare'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
 import { datadog } from '../../hooks/competitorData/datadog'
 import { devcycle } from '../../hooks/competitorData/devcycle'
@@ -58,8 +60,12 @@ import { sprig } from '../../hooks/competitorData/sprig'
 import { statsig } from '../../hooks/competitorData/statsig'
 import { stripe } from '../../hooks/competitorData/stripe'
 import { survicate } from '../../hooks/competitorData/survicate'
+import { survey_monkey } from '../../hooks/competitorData/survey_monkey'
 import { umami } from '../../hooks/competitorData/umami'
 import { unleash } from '../../hooks/competitorData/unleash'
+import { userpilot } from '../../hooks/competitorData/userpilot'
+import { userflow } from '../../hooks/competitorData/userflow'
+import { uxcam } from '../../hooks/competitorData/uxcam'
 import { vwo } from '../../hooks/competitorData/vwo'
 import { walkme } from '../../hooks/competitorData/walkme'
 import { whatfix } from '../../hooks/competitorData/whatfix'
@@ -440,7 +446,9 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         baremetrics,
         bugsnag,
         chartmogul,
+        chameleon,
         clarity,
+        contentsquare,
         crazy_egg,
         datadog,
         devcycle,
@@ -484,8 +492,12 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         statsig,
         stripe,
         survicate,
+        survey_monkey,
         umami,
         unleash,
+        userpilot,
+        userflow,
+        uxcam,
         vwo,
         walkme,
         whatfix,

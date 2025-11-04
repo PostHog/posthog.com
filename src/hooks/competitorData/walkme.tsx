@@ -200,6 +200,7 @@ export const walkme = {
         developer: {
             api: true,
             cross_domain_tracking: false,
+            mobile_sdks: true,
             proxies: false,
             sdks: true,
             server_side_sdks: false,

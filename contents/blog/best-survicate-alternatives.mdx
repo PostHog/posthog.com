@@ -12,9 +12,6 @@ tags:
     - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
-
 ## 1. Sprig
 
 -   **Founded:** 2017
@@ -41,56 +38,20 @@ According to [data from BuiltWith](https://trends.builtwith.com/analytics/Sprig)
 
 Sprig is a great replacement for Survicate, especially if you want to dive deeper into what's behind survey answers. It supports web and mobile apps, but doesn't offer surveys on email or shareable-link surveys.
 
-<ComparisonTable column1="Sprig" column2="Survicate">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Surveys"
-        description="Collect and analyze feedback, run NPS and PMF"
-    />
-    <ComparisonRow
-        column1="Web and mobile apps"
-        column2={true}
-        feature="Multi-channel surveys"
-        description="Send surveys in mobile apps, email, links"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Targeting"
-        description="Control who sees your survey and when"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Survey logic"
-        description="Customize survey flows based on previous responses"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Integrations"
-        description="Send survey data to all your tools"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['sprig', 'survicate']}
+    rows={[
+        'surveys',
+        'surveys.platforms.web',
+        'surveys.platforms.mobile',
+        'surveys.targeting.custom_targeting',
+        'surveys.branching.multi_step_surveys',
+        'surveys.integrations',
+        'session_replay',
+        'heatmaps',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Sprig?
 
@@ -138,56 +99,20 @@ Survicate supports platforms PostHog doesn't yet, such as surveys for mobile app
 
 But, while Survicate goes slightly deeper on survey features, PostHog integrates entire tools Survicate doesn't, such as [session replays](/session-replay), [product analytics](/product-analytics), and [A/B testing](/experiments). This makes it easier to connect survey data to real users, and real sessions.
 
-<ComparisonTable column1="PostHog" column2="Survicate">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Surveys"
-        description="Collect and analyze feedback, run NPS and PMF"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Multi-channel surveys"
-        description="Send surveys in mobile apps, email, links"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Targeting"
-        description="Control who sees your survey and when"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Survey logic"
-        description="Customize survey flows based on previous responses"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Integrations"
-        description="Send survey data to all your tools"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'survicate']}
+    rows={[
+        'surveys',
+        'surveys.platforms.web',
+        'surveys.platforms.mobile',
+        'surveys.targeting.custom_targeting',
+        'surveys.branching.multi_step_surveys',
+        'surveys.integrations',
+        'session_replay',
+        'heatmaps',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use PostHog?
 
@@ -226,56 +151,20 @@ Like Survicate, SurveyMonkey is a tool which solely focuses on surveys. It has e
 
 SurveyMonkey is the most similar alternative to Survicate on this list. They have almost all the same features and support all the same platforms.
 
-<ComparisonTable column1="SurveyMonkey" column2="Survicate">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Surveys"
-        description="Collect and analyze feedback, run NPS and PMF"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Multi-channel surveys"
-        description="Send surveys in mobile apps, email, links"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Targeting"
-        description="Control who sees your survey and when"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Survey logic"
-        description="Customize survey flows based on previous responses"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Integrations"
-        description="Send survey data to all your tools"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['survey_monkey', 'survicate']}
+    rows={[
+        'surveys',
+        'surveys.platforms.web',
+        'surveys.platforms.mobile',
+        'surveys.targeting.custom_targeting',
+        'surveys.branching.multi_step_surveys',
+        'surveys.integrations',
+        'session_replay',
+        'heatmaps',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use SurveyMonkey?
 
@@ -321,56 +210,20 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Hotjar), Hotjar 
 
 Hotjar and Survicate have comparable features when it comes to surveys. Hotjar is only available for websites, though.
 
-<ComparisonTable column1="Hotjar" column2="Survicate">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Surveys"
-        description="Collect and analyze feedback, run NPS and PMF"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Multi-channel surveys"
-        description="Send surveys in mobile apps, email, links"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Targeting"
-        description="Control who sees your survey and when"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Survey logic"
-        description="Customize survey flows based on previous responses"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Integrations"
-        description="Send survey data to all your tools"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['hotjar', 'survicate']}
+    rows={[
+        'surveys',
+        'surveys.platforms.web',
+        'surveys.platforms.mobile',
+        'surveys.targeting.custom_targeting',
+        'surveys.branching.multi_step_surveys',
+        'surveys.integrations',
+        'session_replay',
+        'heatmaps',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Hotjar?
 
@@ -418,56 +271,20 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Pendo), 3,166 of
 
 Pendo includes all of the key survey features that Survicate does and, unlike most other alternatives, it also supports mobile apps.
 
-<ComparisonTable column1="Pendo" column2="Survicate">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Surveys"
-        description="Collect and analyze feedback, run NPS and PMF"
-    />
-    <ComparisonRow
-        column1="Web and mobile apps"
-        column2={true}
-        feature="Multi-channel surveys"
-        description="Send surveys in mobile apps, email, links"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Targeting"
-        description="Control who sees your survey and when"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Survey logic"
-        description="Customize survey flows based on previous responses"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Integrations"
-        description="Send survey data to all your tools"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['pendo', 'survicate']}
+    rows={[
+        'surveys',
+        'surveys.platforms.web',
+        'surveys.platforms.mobile',
+        'surveys.targeting.custom_targeting',
+        'surveys.branching.multi_step_surveys',
+        'surveys.integrations',
+        'session_replay',
+        'heatmaps',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Pendo?
 
@@ -513,56 +330,20 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Lucky-Orange), a
 
 When it comes to surveys, Lucky Orange does many of the same things as Survicate. However, it's designed specifically for optimizing conversion on e-commerce websites, so doesn't support any of the other platforms that Survicate does.
 
-<ComparisonTable column1="Lucky Orange" column2="Survicate">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Surveys"
-        description="Collect and analyze feedback, run NPS and PMF"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Multi-channel surveys"
-        description="Send surveys in mobile apps, email, links"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Targeting"
-        description="Control who sees your survey and when"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Survey logic"
-        description="Customize survey flows based on previous responses"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Integrations"
-        description="Send survey data to all your tools"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['lucky_orange', 'survicate']}
+    rows={[
+        'surveys',
+        'surveys.platforms.web',
+        'surveys.platforms.mobile',
+        'surveys.targeting.custom_targeting',
+        'surveys.branching.multi_step_surveys',
+        'surveys.integrations',
+        'session_replay',
+        'heatmaps',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Lucky Orange?
 
@@ -606,60 +387,24 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/CrazyEgg), as of
 
 -   🐞 **Errors tracking:** Find out if errors are preventing your visitors from converting.
 
-### How does Lucky Orange compare to Survicate?
+### How does Crazy Egg compare to Survicate?
 
 Crazy Egg has a few features Survicate doesn't, including basic analytics and A/B tests, but doesn't support mobile apps or other platforms. It also doesn't have any integrations.
 
-<ComparisonTable column1="Crazy Egg" column2="Survicate">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Surveys"
-        description="Collect and analyze feedback, run NPS and PMF"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Multi-channel surveys"
-        description="Send surveys in mobile apps, email, links"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Targeting"
-        description="Control who sees your survey and when"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Survey logic"
-        description="Customize survey flows based on previous responses"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Integrations"
-        description="Send survey data to all your tools"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Heatmaps"
-        description="Visualize where users click and interact on your site"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['crazy_egg', 'survicate']}
+    rows={[
+        'surveys',
+        'surveys.platforms.web',
+        'surveys.platforms.mobile',
+        'surveys.targeting.custom_targeting',
+        'surveys.branching.multi_step_surveys',
+        'surveys.integrations',
+        'session_replay',
+        'heatmaps',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Crazy Egg?
 

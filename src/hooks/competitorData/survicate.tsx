@@ -38,6 +38,19 @@ export const survicate = {
         },
         surveys: {
             available: true,
+            features: {
+                integrations: true,
+            },
+            targeting: {
+                features: {
+                    custom_targeting: true,
+                },
+            },
+            branching: {
+                features: {
+                    multi_step_surveys: true,
+                },
+            },
             platforms: {
                 features: {
                     web: true,

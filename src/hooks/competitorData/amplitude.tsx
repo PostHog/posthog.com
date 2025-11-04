@@ -239,6 +239,7 @@ export const amplitude = {
             targeting: {
                 features: {
                     cohort_integration: true,
+                    custom_targeting: true,
                     exclusion_rules: false,
                     geographic_targeting: true,
                     group_level_experiments: false,
@@ -390,6 +391,7 @@ export const amplitude = {
         },
         developer: {
             api: false,
+            mobile_sdks: true,
             proxies: false,
             sdks: false,
             sql: false,

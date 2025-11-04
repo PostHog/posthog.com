@@ -23,7 +23,7 @@ export const fullstory = {
                 advertising_analytics: false,
                 ai_analysis: false,
                 autocapture: true,
-                cohorts: false,
+                cohorts: true,
                 custom_events: true,
                 custom_properties: true,
                 monetization_analytics: false,
@@ -68,7 +68,7 @@ export const fullstory = {
                     features: {},
                 },
                 group_analytics: {
-                    available: true,
+                    available: false,
                     features: {},
                 },
             },
@@ -155,6 +155,14 @@ export const fullstory = {
         },
         experiments: {
             available: false,
+            features: {
+                no_code_experiments: false,
+            },
+            targeting: {
+                features: {
+                    custom_targeting: false,
+                },
+            },
         },
         error_tracking: {
             available: false,
