@@ -45,6 +45,8 @@ To help the new owner of a customer hit the ground running, we should make sure 
 
 For handover to take place there should be an Account Plan (saved as a note on the account in Vitally) and the customer should have been onboarded properly to the products they are currently paying for. 
 
+> All open invoices should also have been paid before handing over.  It makes sense to use existing relationships to chase payments, rather than the new owner's first action needing to be chasing payments/suspending access for non-payment.
+
 ### Account Plan
 
 Our [account planning template](/handbook/growth/sales/account-planning) is an ideal document to share with the new owner detailing everything they need to know about the customer.  The existing owner should have this up to date and then schedule a handover call for the new owner.  Feel free to push back and ask for it as the new owner if this doesn't happen!  Feel free to ask [Dana](/community/profiles/32545) or [Simon](/community/profiles/28895) for help with this if you're not getting the information you need from the previous owner.
