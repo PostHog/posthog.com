@@ -20,7 +20,7 @@ Last week I had set up a new automation using our new **workflows** product (soo
 The goal: test if everything works – and, at the same time, let users know it’s available to try.  
 I sent out a simple test email.  
 It looked like this:
-![workflwows email](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_alpha1_04ea076a13.png)
+![workflows email](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_alpha1_04ea076a13.png)
 ---
 
 I was genuinely excited to see how users would react.  
