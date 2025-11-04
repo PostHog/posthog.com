@@ -154,6 +154,7 @@ export const launchdarkly = {
                 insights: {
                     available: false,
                     features: {
+                        alerts: true,
                         formula_mode: false,
                         ready_made_insight_types: false,
                         sampling: false,

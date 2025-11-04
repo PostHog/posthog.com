@@ -11,19 +11,29 @@ export const split = {
                 json_payloads: true,
             },
             implementation: {
-                local_evaluation: true,
+                features: {
+                    local_evaluation: true,
+                },
             },
             management: {
-                flag_scheduling: true,
+                features: {
+                    flag_scheduling: true,
+                    multi_environment: true,
+                },
             },
         },
         experiments: {
-            available: false,
+            available: true,
         },
         product_analytics: {
             available: false,
             features: {
                 cohorts: true,
+            },
+            insights: {
+                features: {
+                    alerts: true,
+                },
             },
         },
         session_replay: {

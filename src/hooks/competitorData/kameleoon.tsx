@@ -12,6 +12,12 @@ export const kameleoon = {
                     local_evaluation: true,
                 },
             },
+            management: {
+                features: {
+                    flag_scheduling: true,
+                    multi_environment: true,
+                },
+            },
         },
         experiments: {
             available: true,
@@ -31,7 +37,10 @@ export const kameleoon = {
                 autocapture: false,
             },
             insights: {
-                sql_editor: false,
+                features: {
+                    alerts: true,
+                    sql_editor: false,
+                },
             },
         },
         session_replay: {
@@ -57,6 +66,10 @@ export const kameleoon = {
             cms: false,
             notebooks: false,
             project_management_tools: false,
+        },
+        security: {
+            history_audit_logs: true,
+            role_based_access_control: true,
         },
     },
     pricing: {

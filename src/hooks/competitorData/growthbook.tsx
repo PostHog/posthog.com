@@ -143,7 +143,10 @@ export const growthbook = {
                 cohorts: true,
             },
             insights: {
-                sql_editor: 'Partial',
+                features: {
+                    alerts: false,
+                    sql_editor: 'Partial',
+                },
             },
         },
         session_replay: {

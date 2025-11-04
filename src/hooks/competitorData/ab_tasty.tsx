@@ -17,6 +17,7 @@ export const ab_tasty = {
             management: {
                 data_source: 'First-party',
                 flag_scheduling: true,
+                multi_environment: true,
             },
         },
         experiments: {
@@ -31,6 +32,11 @@ export const ab_tasty = {
         },
         product_analytics: {
             available: false,
+            insights: {
+                features: {
+                    alerts: true,
+                },
+            },
         },
         session_replay: {
             available: false,

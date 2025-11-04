@@ -12,8 +12,7 @@ tags:
     - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
@@ -46,68 +45,26 @@ PostHog is much more popular than Split. According to [BuiltWith](https://trends
 
 PostHog has a broader collection of tools, including a full product analytics suite. Split (AKA Split.io) focuses entirely on experimentation and feature flags, which are reflected in some small feature differences here.
 
-<ComparisonTable column1="PostHog" column2="Split">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Advanced analytics"
-        description="Custom SQL, paths, and retention analysis with flag data and beyond."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Alerting"
-        description="Detect and receive notifications when problems arise"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Environments"
-        description="Separate data for different parts of the development lifecycle"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Scheduling"
-        description="Trigger flag states at certain times"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'split']}
+    rows={[
+        'platform.pricing.self_serve',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'experiments',
+        {
+            path: 'product_analytics',
+            label: 'Advanced analytics',
+            description: 'Custom SQL, paths, and retention analysis with flag data and beyond.',
+        },
+        'product_analytics.insights.alerts',
+        'feature_flags.management.multi_environment',
+        'feature_flags.management.flag_scheduling',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use PostHog?
 
@@ -154,68 +111,26 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), a
 
 LaunchDarkly and Split are nearly identical in their feature sets. LaunchDarkly does have a greater depth in its enterprise feature, but this comes with the downside of not being self-serve.
 
-<ComparisonTable column1="LaunchDarkly" column2="Split">
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Advanced analytics"
-        description="Custom SQL, paths, and retention analysis with flag data and beyond."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Alerting"
-        description="Detect and receive notifications when problems arise"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Environments"
-        description="Separate data for different parts of the development lifecycle"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Scheduling"
-        description="Trigger flag states at certain times"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['launchdarkly', 'split']}
+    rows={[
+        'platform.pricing.self_serve',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'experiments',
+        {
+            path: 'product_analytics',
+            label: 'Advanced analytics',
+            description: 'Custom SQL, paths, and retention analysis with flag data and beyond.',
+        },
+        'product_analytics.insights.alerts',
+        'feature_flags.management.multi_environment',
+        'feature_flags.management.flag_scheduling',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use LaunchDarkly?
 
@@ -230,8 +145,6 @@ According to [G2 reviews](https://www.g2.com/products/launchdarkly/reviews#revie
 > #### Bottom line
 >
 > Although LaunchDarkly has a near-identical feature set to Split, it isn't self-serve. For teams needing strong governance and automation tools, LaunchDarkly makes a good choice. For smaller teams, there are likely better options.
-
-<br />
 
 ## 3. VWO
 
@@ -267,68 +180,30 @@ Similar to PostHog, VWO is a multi-product platform that includes most of the fe
 
 VWO has analytics, though it's behavioral analytics, like session replays and heatmaps, rather than product analytics.
 
-<ComparisonTable column1="VWO" column2="Split">
-    <ComparisonRow
-        column1={'Trial only'}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Advanced analytics"
-        description="Custom SQL, paths, and retention analysis with flag data and beyond."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Alerting"
-        description="Detect and receive notifications when problems arise"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Environments"
-        description="Separate data for different parts of the development lifecycle"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Scheduling"
-        description="Trigger flag states at certain times"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['vwo', 'split']}
+    rows={[
+        {
+            label: 'Self-serve',
+            description: 'Free to try, no mandatory sales calls',
+            values: ['Trial only', true],
+        },
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'experiments',
+        {
+            path: 'product_analytics',
+            label: 'Advanced analytics',
+            description: 'Custom SQL, paths, and retention analysis with flag data and beyond.',
+        },
+        'product_analytics.insights.alerts',
+        'feature_flags.management.multi_environment',
+        'feature_flags.management.flag_scheduling',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use VWO?
 
@@ -377,68 +252,26 @@ GrowthBook is open source with 5.5k stars on GitHub. It is self-hostable, but yo
 
 GrowthBook's biggest plus-points are that it's open source and warehouse-native. Though it does miss some of Split's more advanced features.
 
-<ComparisonTable column1="GrowthBook" column2="Split">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Advanced analytics"
-        description="Custom SQL, paths, and retention analysis with flag data and beyond."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Alerting"
-        description="Detect and receive notifications when problems arise"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Environments"
-        description="Separate data for different parts of the development lifecycle"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Scheduling"
-        description="Trigger flag states at certain times"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['growthbook', 'split']}
+    rows={[
+        'platform.pricing.self_serve',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'experiments',
+        {
+            path: 'product_analytics',
+            label: 'Advanced analytics',
+            description: 'Custom SQL, paths, and retention analysis with flag data and beyond.',
+        },
+        'product_analytics.insights.alerts',
+        'feature_flags.management.multi_environment',
+        'feature_flags.management.flag_scheduling',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use GrowthBook?
 
@@ -489,68 +322,26 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/AB-Tasty), as of
 
 AB Tasty has the closest feature set of all the listed alternatives to Split, with the bonus of personalization and recommendation tools. This does mean that both miss out on more advanced analytics tools, however.
 
-<ComparisonTable column1="AB Tasty" column2="Split">
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Advanced analytics"
-        description="Custom SQL, paths, and retention analysis with flag data and beyond."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Alerting"
-        description="Detect and receive notifications when problems arise"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Environments"
-        description="Separate data for different parts of the development lifecycle"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Scheduling"
-        description="Trigger flag states at certain times"
-    />
-    <ComparisonRow
-        column1={'No audit'}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['ab_tasty', 'split']}
+    rows={[
+        'platform.pricing.self_serve',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'experiments',
+        {
+            path: 'product_analytics',
+            label: 'Advanced analytics',
+            description: 'Custom SQL, paths, and retention analysis with flag data and beyond.',
+        },
+        'product_analytics.insights.alerts',
+        'feature_flags.management.multi_environment',
+        'feature_flags.management.flag_scheduling',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use AB Tasty?
 
@@ -595,68 +386,26 @@ Harness is a software delivery platform. This means it includes products like Gi
 
 Harness has a different feature set than Split. It focuses on DevOps, whereas Split focuses on product and engineering. The key difference is Harness' lack of A/B testing.
 
-<ComparisonTable column1="Harness" column2="Split">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Advanced analytics"
-        description="Custom SQL, paths, and retention analysis with flag data and beyond."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Alerting"
-        description="Detect and receive notifications when problems arise"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Environments"
-        description="Separate data for different parts of the development lifecycle"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Scheduling"
-        description="Trigger flag states at certain times"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['harness', 'split']}
+    rows={[
+        'platform.pricing.self_serve',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'experiments',
+        {
+            path: 'product_analytics',
+            label: 'Advanced analytics',
+            description: 'Custom SQL, paths, and retention analysis with flag data and beyond.',
+        },
+        'product_analytics.insights.alerts',
+        'feature_flags.management.multi_environment',
+        'feature_flags.management.flag_scheduling',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Harness?
 
@@ -701,68 +450,26 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Kameleoon), as o
 
 Although it isn't self-serve and doesn't have local evaluation for feature flags, Kameleoon matches up closely with Split when it comes to feature sets. It also includes a personalization feature that Split doesn't have.
 
-<ComparisonTable column1="Kameleoon" column2="Split">
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Feature flags"
-        description="Deploy features safely with targeting and percentage rollouts"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Local evaluation"
-        description="Use local, cached flag values to increase speed"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="A/B testing"
-        description="Run multivariate tests and see the impact of changes with custom goals and reports"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Advanced analytics"
-        description="Custom SQL, paths, and retention analysis with flag data and beyond."
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Alerting"
-        description="Detect and receive notifications when problems arise"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Environments"
-        description="Separate data for different parts of the development lifecycle"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Scheduling"
-        description="Trigger flag states at certain times"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Governance"
-        description="Audit log, roles-based access, permissions"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['kameleoon', 'split']}
+    rows={[
+        'platform.pricing.self_serve',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'experiments',
+        {
+            path: 'product_analytics',
+            label: 'Advanced analytics',
+            description: 'Custom SQL, paths, and retention analysis with flag data and beyond.',
+        },
+        'product_analytics.insights.alerts',
+        'feature_flags.management.multi_environment',
+        'feature_flags.management.flag_scheduling',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Kameleoon?
 

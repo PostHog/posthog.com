@@ -11,7 +11,10 @@ export const vwo = {
                 autocapture: false,
             },
             insights: {
-                sql_editor: false,
+                features: {
+                    alerts: false,
+                    sql_editor: false,
+                },
             },
         },
         session_replay: {
@@ -28,6 +31,7 @@ export const vwo = {
             management: {
                 data_source: 'First-party',
                 flag_scheduling: true,
+                multi_environment: true,
             },
             implementation: {
                 local_evaluation: true,

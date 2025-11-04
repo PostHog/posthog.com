@@ -15,6 +15,7 @@ export const harness = {
             },
             management: {
                 flag_scheduling: true,
+                multi_environment: true,
             },
         },
         experiments: {
@@ -28,6 +29,11 @@ export const harness = {
         },
         product_analytics: {
             available: false,
+            insights: {
+                features: {
+                    alerts: true,
+                },
+            },
         },
         session_replay: {
             available: false,
