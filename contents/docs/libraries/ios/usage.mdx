@@ -222,3 +222,27 @@ To set up [session replay](/docs/session-replay/mobile) in your project, all you
 ## Surveys
 
 [Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
+
+## Debug mode 
+
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
+
+You can enable debug mode by setting the `debug` option to `true` in the `PostHogConfig` object. A common pattern is to set this to `true` in development environments only for local development.
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_client_api_host>")
+config.debug = true
+PostHogSDK.shared.setup(config)
+```
+
+This will enable verbose logs about the inner workings of the SDK.
+
+You can also toggle debug by calling the `PostHogSDK.shared.debug()` method in your code.
+
+```swift
+// Enable debug mode
+PostHogSDK.shared.debug(true)
+
+// Disable debug mode
+PostHogSDK.shared.debug(false)
+```
