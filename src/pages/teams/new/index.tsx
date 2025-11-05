@@ -5,7 +5,7 @@ import OSButton from 'components/OSButton'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 
 type TeamPageProps = {
     params: {
@@ -20,17 +20,7 @@ export default function NewTeam(props: TeamPageProps) {
     const isModerator = user?.role?.type === 'moderator'
     const onSaveRef = useRef<(() => void) | null>(null)
 
-    const data = useStaticQuery(graphql`
-        {
-            allSqueakTeam {
-                nodes {
-                    id
-                    name
-                    slug
-                }
-            }
-        }
-    `)
+    const { data } = props as any
 
     // Create teams navigation for sidebar
     const teamsNavigation = useMemo(() => {
@@ -50,7 +40,7 @@ export default function NewTeam(props: TeamPageProps) {
                 .map((t: any) => ({
                     name: t.name,
                     url: `/teams/${t.slug}`,
-                }))
+                })),
         ]
     }, [data?.allSqueakTeam?.nodes])
 
@@ -94,3 +84,15 @@ export default function NewTeam(props: TeamPageProps) {
         </>
     )
 }
+
+export const query = graphql`
+    {
+        allSqueakTeam {
+            nodes {
+                id
+                name
+                slug
+            }
+        }
+    }
+`

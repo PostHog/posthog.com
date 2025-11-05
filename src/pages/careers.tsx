@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 import React, { useRef, useState } from 'react'
 import { CareersHero } from '../components/Careers/CareersHero'
 import { OpenRoles } from '../components/Careers/OpenRoles'
@@ -43,9 +43,8 @@ const careersTableOfContents = [
     { url: '#team-quotes', value: 'Team quotes', depth: 0 },
 ]
 
-const IndexPage = () => {
+const IndexPage = ({ data }: any) => {
     const ref = useRef<HTMLDivElement>(null)
-    const data = useStaticQuery(query)
     const latestJob = data?.allAshbyJobPosting?.nodes && data.allAshbyJobPosting.nodes[0]
     const latestJobCreatedAt = latestJob && new Date(latestJob['publishedDate'])
     const [showTableOfContents, setShowTableOfContents] = useState(false)
@@ -191,7 +190,7 @@ const IndexPage = () => {
     )
 }
 
-const query = graphql`
+export const query = graphql`
     query CareersQuery {
         allAshbyJobPosting(sort: { fields: publishedDate, order: DESC }) {
             nodes {

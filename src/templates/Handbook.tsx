@@ -5,12 +5,10 @@ import { Blockquote } from 'components/BlockQuote'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
-import Team from 'components/People'
 import TestimonialsTable from 'components/TestimonialsTable'
 import { ZoomImage } from 'components/ZoomImage'
 import { shortcodes } from '../mdxGlobalComponents'
 import Markdown from 'markdown-to-jsx'
-import TeamRoadmap from 'components/TeamRoadmap'
 import TeamMembers from 'components/TeamMembers'
 import { CategoryData } from 'components/Blog/constants/categories'
 import { TutorialTags } from 'components/Tutorials/constants/tags'
@@ -345,7 +343,6 @@ export default function Handbook({
     } = post
 
     const components = {
-        Team,
         inlineCode: InlineCode,
         blockquote: Blockquote,
         pre: MdxCodeBlock,
@@ -361,7 +358,6 @@ export default function Handbook({
         TestimonialsTable,
         AppParameters: AppParametersFactory({ config: appConfig }),
         TemplateParameters: TemplateParametersFactory(templateConfigs),
-        TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
         TutorialTags,

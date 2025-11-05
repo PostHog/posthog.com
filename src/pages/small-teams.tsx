@@ -4,77 +4,17 @@ import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import Link from 'components/Link'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 import TeamPatch from 'components/TeamPatch'
 import { useUser } from 'hooks/useUser'
 import OSButton from 'components/OSButton'
 import OSTable from 'components/OSTable'
 
-const SmallTeamsPage = () => {
+const SmallTeamsPage = ({ data }: any) => {
     const [searchTerm, setSearchTerm] = useState('')
     const { isModerator } = useUser()
 
-    const { allTeams } = useStaticQuery(graphql`
-        {
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
-                nodes {
-                    id
-                    name
-                    slug
-                    createdAt
-                    tagline
-                    leadProfiles {
-                        data {
-                            id
-                        }
-                    }
-                    profiles {
-                        data {
-                            id
-                            attributes {
-                                firstName
-                                lastName
-                                color
-                                avatar {
-                                    data {
-                                        attributes {
-                                            url
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    crest {
-                        data {
-                            attributes {
-                                url
-                            }
-                        }
-                    }
-                    miniCrest {
-                        data {
-                            attributes {
-                                url
-                            }
-                        }
-                    }
-                    crestOptions {
-                        textColor
-                        textShadow
-                        fontSize
-                        frame
-                        frameColor
-                        plaque
-                        plaqueColor
-                        imageScale
-                        imageXOffset
-                        imageYOffset
-                    }
-                }
-            }
-        }
-    `)
+    const { allTeams } = data
 
     // Filter teams based on search term (team names only)
     const filteredTeams = useMemo(() => {
@@ -290,3 +230,65 @@ const SmallTeamsPage = () => {
 }
 
 export default SmallTeamsPage
+
+export const query = graphql`
+    {
+        allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
+            nodes {
+                id
+                name
+                slug
+                createdAt
+                tagline
+                leadProfiles {
+                    data {
+                        id
+                    }
+                }
+                profiles {
+                    data {
+                        id
+                        attributes {
+                            firstName
+                            lastName
+                            color
+                            avatar {
+                                data {
+                                    attributes {
+                                        url
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                crest {
+                    data {
+                        attributes {
+                            url
+                        }
+                    }
+                }
+                miniCrest {
+                    data {
+                        attributes {
+                            url
+                        }
+                    }
+                }
+                crestOptions {
+                    textColor
+                    textShadow
+                    fontSize
+                    frame
+                    frameColor
+                    plaque
+                    plaqueColor
+                    imageScale
+                    imageXOffset
+                    imageYOffset
+                }
+            }
+        }
+    }
+`
