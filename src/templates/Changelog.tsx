@@ -377,15 +377,14 @@ const RoadmapCards = ({
                 // Create week entries with metadata
                 if (y === currentYear && m === currentMonthIndex) {
                     const latestNonEmptyWeek = [4, 3, 2, 1].find((w) => (buckets[w] || []).length > 0)
-                    const currentWeek = Math.min(4, Math.ceil(now.date() / 7))
-                    const targetWeek = latestNonEmptyWeek || currentWeek
-
-                    monthWeeks.push({
-                        roadmaps: buckets[targetWeek] || [],
-                        year: y,
-                        month: m,
-                        week: targetWeek,
-                    })
+                    if (latestNonEmptyWeek) {
+                        monthWeeks.push({
+                            roadmaps: buckets[latestNonEmptyWeek] || [],
+                            year: y,
+                            month: m,
+                            week: latestNonEmptyWeek,
+                        })
+                    }
                 } else {
                     for (let w = 1; w <= 4; w++) {
                         monthWeeks.push({
