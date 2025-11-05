@@ -32,8 +32,11 @@ import { glitchtip } from '../../hooks/competitorData/glitchtip'
 import { growthbook } from '../../hooks/competitorData/growthbook'
 import { harness } from '../../hooks/competitorData/harness'
 import { heap } from '../../hooks/competitorData/heap'
+import { helicone } from '../../hooks/competitorData/helicone'
 import { hotjar } from '../../hooks/competitorData/hotjar'
 import { kameleoon } from '../../hooks/competitorData/kameleoon'
+import { langfuse } from '../../hooks/competitorData/langfuse'
+import { langsmith } from '../../hooks/competitorData/langsmith'
 import { launchdarkly } from '../../hooks/competitorData/launchdarkly'
 import { logrocket } from '../../hooks/competitorData/logrocket'
 import { lucky_orange } from '../../hooks/competitorData/lucky_orange'
@@ -522,8 +525,11 @@ export default function ProductComparisonTable({
         growthbook,
         harness,
         heap,
+        helicone,
         hotjar,
         kameleoon,
+        langfuse,
+        langsmith,
         launchdarkly,
         logrocket,
         lucky_orange,

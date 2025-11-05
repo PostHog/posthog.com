@@ -489,6 +489,16 @@ export const posthog = {
         },
         llm_analytics: {
             available: true,
+            features: {
+                alerting: true,
+                cost_tracking: true,
+                generation_tracking: true,
+                latency_tracking: true,
+                prompt_evaluations: false,
+                prompt_playground: true,
+                token_tracking: true,
+                trace_visualization: true,
+            },
         },
         data_warehouse: {
             available: true,
