@@ -44,10 +44,10 @@ Finally, run `npm run dev` and go to `http://localhost:5173` to see our new home
 
 ## Adding PostHog
 
-Since PostHog handles the management and evaluation of feature flags, we must set it up in our app. To do this, start by installing the `posthog-js` library to get access to the [React SDK](/docs/libraries/react).
+Since PostHog handles the management and evaluation of feature flags, we must set it up in our app. To do this, start by installing the `posthog-js` and `@posthog/react` libraries to get access to the [React SDK](/docs/libraries/react).
 
 ```bash
-npm install posthog-js
+npm install posthog-js @posthog/react
 ```
 
 Once installed, import PostHog into `src/main.jsx` and set it up using your project API key and host from [your project settings](https://us.posthog.com/settings/project). Wrap your app in the React `PostHogProvider` to access PostHog in any component.
@@ -59,7 +59,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
@@ -106,7 +106,7 @@ Once created, we can add our feature flag to our React app. We do this using the
 ```jsx
 // src/App.jsx
 import './App.css'
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+import { useFeatureFlagEnabled } from '@posthog/react'
 
 function App() {
   
@@ -139,7 +139,7 @@ An alternate way to implement feature flags is to use the `PostHogFeature` React
 ```jsx
 // src/App.jsx
 import './App.css'
-import { PostHogFeature } from 'posthog-js/react'
+import { PostHogFeature } from '@posthog/react'
 
 function App() {
   

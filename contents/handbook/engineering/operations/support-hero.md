@@ -16,21 +16,13 @@ Our Support Engineers, in [the Support team](/teams/support) triage tickets for 
 
 ## When is my turn?
 
-Most engineering teams run a PagerDuty schedule:
-
--   [Product Analytics](https://posthog.pagerduty.com/schedules#PXUZ9XL)
--   [Feature Success](https://posthog.pagerduty.com/schedules#P04FUTJ)
--   [Replay](https://posthog.pagerduty.com/schedules#PLGXQIF)
--   [CDP](https://posthog.pagerduty.com/schedules#PM8YSH8)
--   [Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
--   [Growth](https://posthog.pagerduty.com/schedules#PN1Q6BO)
--   [Surveys](https://posthog.pagerduty.com/schedules#P04FUTJ)
+Most engineering teams run a incident.io schedule, check out the [escalation schedules](/handbook/engineering/operations/on-call-rotation#escalation-schedules).
 
 The schedules consist of contiguous blocks, but that definitely doesn't mean working 24/7 – you should just work your normal hours.
 
 ## What if I'm scheduled for a week when I won't be available?
 
-Swap with a teammate in advance! Find a volunteer by asking in Slack, then use PagerDuty schedule overrides. You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
+Swap with a teammate in advance! Find a volunteer by asking in Slack, then use incident.io schedule overrides. You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
 
 ## I can't assign tickets or make public replies
 
@@ -61,7 +53,7 @@ There are three sources of tickets:
 
 ### Shipping features
 
-Some tickets ask for new features. If the feature is useful for users matching [our ICP](/handbook/who-we-are-building-for), then decide whether to just build it. Otherwise, create a feature request issue in GitHub or +1 on an existing one – you can then send a link to the user, giving them a way of tracking progress. Also make sure to let the [Customer Success team](/teams/customer-success) know, since they will track feature requests for paying customers.
+Some tickets ask for new features. If the feature is useful for users matching [our ICP](/handbook/who-we-build-for), then decide whether to just build it. Otherwise, create a feature request issue in GitHub or +1 on an existing one – you can then send a link to the user, giving them a way of tracking progress. Also make sure to let the [Customer Success team](/teams/customer-success) know, since they will track feature requests for paying customers.
 
 Sometimes a feature already exists, but a user doesn't know about it or how to use it. In this case, you should either send them a link to the relevant docs page or [update the docs](/handbook/engineering/writing-docs) to make it clearer.
 
@@ -141,7 +133,7 @@ The key principle: We want to be responsive to our open-source community when we
 
 ## What do I do as a SDK Support Hero?
 
-Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation. [The schedule is managed in PagerDuty](https://posthog.pagerduty.com/schedules#P7B7NTR).
+Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation. [The schedule is managed in incident.io](https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MD6JK1TEGAK97450S).
 
 Your primary responsibility is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
 

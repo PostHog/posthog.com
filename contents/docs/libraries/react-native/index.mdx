@@ -332,6 +332,28 @@ To set up surveys, follow the [additional installation instructions for React Na
 
 > Note: URL and CSS selector targeting are not supported in React Native. Surveys that rely on these conditions will not appear.
 
+## Debug mode 
+
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
+
+You can enable debug mode by setting the `debug` option to `true` in the `PostHogProvider` options. This will enable verbose logs about the inner workings of the SDK.
+
+```react-native
+<PostHogProvider
+    apiKey="<ph_project_api_key>"
+    options={{
+        debug: true,
+        host: "<ph_client_api_host>",
+    }}
+>
+```
+
+You can also call the `debug()` method in your code. 
+
+```react-native
+posthog.debug()
+```
+
 ## Disabling for local development
 
 You may want to disable PostHog when working locally or in a test environment. You can do this by setting the `disable` option to `true` when initializing PostHog. Helpfully this allows you to continue using `usePostHog` and safely calling it without anything actually happening.

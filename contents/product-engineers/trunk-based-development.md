@@ -59,7 +59,7 @@ The `main` or trunk branch is the most important branch for two reasons:
 
 By merging to `main` regularly, everyone can be confident `main` is stable and the most up-to-date code. Developers do not need to search for healthy branches. 
 
-It also enables engineers to be more confident in continuously deploying it. This helps teams ship more and maintain momentum. 
+It also enables engineers to be more confident in continuously deploying it. This helps them ship more and maintain momentum. 
 
 ### 3. Reviewable PRs
 

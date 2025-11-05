@@ -57,7 +57,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 -   [Workflows](/teams/workflows)
 -   [Batch Exports (light support)](/teams/batch-exports)
--   Embedded Analytics
+-   Endpoints
 -   Logs
 
 </fieldset>
@@ -67,7 +67,6 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 -   [Customer Analytics](/teams/customer-analytics)
 -   [LLM Analytics](/teams/llm-analytics)
--   [Revenue Analytics](/teams/revenue-analytics)
 
 </fieldset>
 

@@ -39,7 +39,7 @@ It was the engineering team who persuaded them otherwise during a feedback sessi
 
 Before entering Y Combinator (YC), James and Tim hadn’t worked at a FAANG company, didn’t know anyone in Silicon Valley, had already [pivoted four or five times](/blog/story-about-pivots), and had no revenue. In contrast, everyone in YC’s example application videos had thousands of users, and had worked at impressive companies. They still got an interview invitation, and won a place in the W20 batch.
 
-💡 **What we learned:** There will always be a company who is raising more money, generating more revenue, buzzier and “more popular”, and so on. Building a startup isn’t a zero-sum game, but the best way to fail is to chase someone else’s idea of success. Reminder: Fundraising + press ≠ product-market fit.
+💡 **What we learned:** There will always be a company who is raising more money, generating more revenue, buzzier and “more popular”, and so on. [Building a startup](/newsletter/building-a-startup-that-scales) isn’t a zero-sum game, but the best way to fail is to chase someone else’s idea of success. Reminder: Fundraising + press ≠ product-market fit.
 
 ## 3. Believing people wanted to solve their problem
 
