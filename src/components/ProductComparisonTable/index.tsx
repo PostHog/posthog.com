@@ -807,9 +807,9 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
 
         if (typeof value === 'boolean') {
             return value ? (
-                <span className="text-green font-bold">✓</span>
+                <span className="text-green text-lg font-bold">✓</span>
             ) : (
-                <span className="text-red font-bold">✗</span>
+                <span className="text-red text-lg font-bold">✗</span>
             )
         }
 

@@ -385,7 +385,13 @@ export default function SlidesTemplate({
 
             case 'feature-comparison': {
                 const companies = productData?.comparison?.companies || []
-                const competitors = companies.map((c: any) => c.key)
+                let competitors = companies.map((c: any) => c.key)
+
+                // Put PostHog first in the comparison (after the feature name column)
+                const posthogIndex = competitors.indexOf('posthog')
+                if (posthogIndex > 0) {
+                    competitors = ['posthog', ...competitors.filter((c: string) => c !== 'posthog')]
+                }
 
                 // Get rows from product data or props override
                 const rows = props.rows || productData?.comparison?.rows

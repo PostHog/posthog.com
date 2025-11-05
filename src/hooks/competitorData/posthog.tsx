@@ -70,7 +70,6 @@ export const posthog = {
             features: {
                 canvas_recording: true,
                 chat_with_recordings: true,
-                clickmaps: true,
                 conditional_recording: true,
                 crash_reports: false,
                 event_timeline: true,

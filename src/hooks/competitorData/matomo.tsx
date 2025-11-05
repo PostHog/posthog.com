@@ -69,12 +69,10 @@ export const matomo = {
                 bounce_rate_tracking: false,
                 breakdown_by_device_and_browser: false,
                 breakdown_by_geoip: false,
-                clickmaps: false,
                 conversions: true,
                 custom_channel_types: false,
                 entry_exit_paths: true,
                 first_party_cookies: false,
-                heatmaps: false,
                 hipaa_compliance: false,
                 integration_with_feature_flags: false,
                 integration_with_session_replay: false,
@@ -88,7 +86,6 @@ export const matomo = {
                 real_time_reporting: false,
                 revenue_tracking: false,
                 script_size: false,
-                scrollmaps: false,
                 search_tools: true,
                 session_and_duration_tracking: false,
                 sessions: true,
@@ -101,10 +98,30 @@ export const matomo = {
             },
         },
         session_replay: {
-            available: true,
+            available: 'Plugin',
+            features: {
+                canvas_recording: true,
+                privacy_masking: true,
+            },
+            export: {
+                features: {
+                    retention_policy: '3 months',
+                },
+            },
+            platform_support: {
+                features: {
+                    web_app_recordings: true,
+                    mobile_app_recordings: true,
+                },
+            },
         },
         heatmaps: {
             available: true,
+            features: {
+                clickmaps: true,
+                heatmaps: true,
+                scrollmaps: true,
+            },
         },
         experiments: {
             available: true,
