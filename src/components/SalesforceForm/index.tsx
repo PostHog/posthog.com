@@ -263,6 +263,7 @@ function RadioGroup({
 const inputContainerClasses = `relative text-left text-sm col-span-full @lg:col-span-2 font-semibold flex items-center`
 
 interface CTAButtonProps {
+    location?: 'top' | 'bottom'
     width?: 'full' | 'auto'
     size?: 'sm' | 'md' | 'lg' | 'xs' | 'xl'
     variant?: 'primary' | 'secondary' | 'default' | 'underline' | 'underlineOnHover'
@@ -270,9 +271,9 @@ interface CTAButtonProps {
     label?: string
 }
 
-const CTAButton = ({ width, size, variant, icon, label }: CTAButtonProps) => {
+const CTAButton = ({ location, width, size, variant, icon, label }: CTAButtonProps) => {
     return (
-        <div className={`px-4 pt-2 pb-1 border-b border-primary flex-[0_0_auto]`}>
+        <div className={`px-4 flex-[0_0_auto] ${location === 'top' ? 'pt-2 pb-1 border-primary border-b' : 'pt-1'}`}>
             <OSButton
                 width={width || 'auto'}
                 size={size || 'md'}
@@ -356,7 +357,6 @@ export default function SalesforceForm({
     customFields,
     customMessage,
     onSubmit,
-    buttonOptions,
     formOptions,
     form,
     type = 'lead',
@@ -439,10 +439,16 @@ export default function SalesforceForm({
                         <ScrollArea className="min-h-0">
                             <div className="@container p-4">
                                 <div className="grid grid-cols-12 gap-2">
-                                    <span className="relative text-left text-sm col-span-full @lg:col-span-2 font-semibold flex items-center">
-                                        To
-                                    </span>
-                                    <div className="col-span-full @lg:col-span-10 text-sm">sales@posthog.com</div>
+                                    {formOptions?.showToField && (
+                                        <>
+                                            <span className="relative text-left text-sm col-span-full @lg:col-span-2 font-semibold flex items-center">
+                                                To
+                                            </span>
+                                            <div className="col-span-full @lg:col-span-10 text-sm">
+                                                sales@posthog.com
+                                            </div>
+                                        </>
+                                    )}
                                     {form.fields.map(
                                         (
                                             { name, label, placeholder, type, required, options, fieldType, cols },
