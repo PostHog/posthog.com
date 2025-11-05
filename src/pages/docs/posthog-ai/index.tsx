@@ -22,54 +22,54 @@ import PostHogAIDiagram from './posthog-ai-diagram'
 
 const phFeatures = [
     {
-        title: 'Session replay',
-        description: 'Use PostHog AI to create playlists of session replays.',
-        icon: <IconRewindPlay className="text-yellow" />,
-        url: '/docs/session-replay',
-    },
-    {
         title: 'Product analytics',
-        description: 'Ask PostHog AI to create and edit insights and dashboards.',
+        description: 'Ask PostHog AI to create insights and build dashboards.',
         icon: <IconTrends className="text-blue" />,
         url: '/docs/product-analytics',
     },
     {
+        title: 'Session replay',
+        description: 'Use PostHog AI to find and summarize session replays.',
+        icon: <IconRewindPlay className="text-yellow" />,
+        url: '/docs/session-replay',
+    },
+    {
         title: 'Feature flags',
-        description: 'PostHog AI can create feature flags.',
+        description: 'Have PostHog AI create feature flags in seconds.',
         icon: <IconToggle className="text-seagreen" />,
         url: '/docs/feature-flags',
     },
     {
-        title: 'Surveys',
-        description: 'Use PostHog AI to create surveys.',
-        icon: <IconUser className="text-red" />,
-        url: '/docs/product-analytics/identify',
+        title: 'Data warehouse',
+        description: 'Use PostHog AI to write, fix, and validate SQL queries.',
+        icon: <IconDatabase className="text-purple" />,
+        url: '/docs/data-warehouse',
     },
     {
-        title: 'LLM analytics',
-        description: 'Use PostHog AI to debug LLM calls and AI generations.',
+        title: 'Error tracking',
+        description: 'Let PostHog AI search and find the most impactful issues and errors.',
         icon: <IconLlmAnalytics className="text-[#681291]" />,
         url: '/docs/llm-analytics',
     },
     {
-        title: 'Data warehouse',
-        description: 'Use PostHog AI to write SQL to query product data directly from the data warehouse.',
-        icon: <IconDatabase className="text-purple" />,
-        url: '/docs/data-warehouse',
+        title: 'Surveys',
+        description: 'Ask PostHog AI to generate surveys and analyze responses.',
+        icon: <IconUser className="text-red" />,
+        url: '/docs/product-analytics/identify',
     },
 ]
 
-const errorTrackingFeatures = [
-    { text: 'Create dashboards', url: '/docs/error-tracking/capture' },
-    { text: 'Create insights', url: '/docs/error-tracking/capture#automatic-exception-capture' },
-    { text: 'Deep research', url: '/docs/error-tracking/stack-traces' },
-    { text: 'Summarize session replays', url: '/docs/error-tracking/grouping-issues' },
-    { text: 'Edit filters', url: '/docs/error-tracking/managing-issues' },
-    { text: 'Navigate PostHog UI', url: '/docs/error-tracking/assigning-issues' },
-    { text: 'Context', url: '/docs/error-tracking/alerts' },
-    { text: 'Configurate memory', url: '/docs/error-tracking/external-tracking' },
-    { text: 'Access to event schema', url: '/docs/error-tracking/debugging-with-mcp' },
-    { text: 'Write SQL', url: '/docs/error-tracking/fix-with-ai-prompts' },
+const posthogAIFeatures = [
+    { text: 'Build insights', url: '/docs/posthog-ai/tools-and-capabilities' },
+    { text: 'Create dashboards', url: '/docs/posthog-ai/tools-and-capabilities' },
+    { text: 'Deep research', url: '/docs/posthog-ai/deep-research', comingSoon: true },
+    { text: 'Summarize session replays', url: '/docs/posthog-ai/session-summaries', comingSoon: true },
+    { text: 'Access PostHog dev tools', url: '/docs/posthog-ai/tools-and-capabilities' },
+    { text: 'Analyze product data and event schema', url: '/docs/posthog-ai/tools-and-capabilities' },
+    { text: 'Navigate PostHog UI', url: '/docs/posthog-ai/tools-and-capabilities' },
+    { text: 'Manage context', url: '/docs/posthog-ai/tools-and-capabilities' },
+    { text: 'Search documentation', url: '/docs/posthog-ai/tools-and-capabilities' },
+    { text: 'Save memory', url: '/docs/posthog-ai/tools-and-capabilities' },
 ]
 
 export const Content = () => {
@@ -82,43 +82,43 @@ export const Content = () => {
                         PostHog AI is an agentic, LLM-powered interface for working within the PostHog platform. You can
                         think of it as the product analyst or assistant that lives inside your PostHog project. It's
                         here to help you find answers and to get things done fast.
-                        <p>
-                            <p>
-                                Unlike other agents, PostHog AI is deeply connected to your product data and event
-                                schema. It constantly learns from real product usage. Describe what you want in natural
-                                language and it can:
-                            </p>
-                            <ul>
-                                <li>Conduct research and query data to answer product and customer questions</li>
-                                <li>Navigate the PostHog UI to edit filters, create insights, and build dashboards</li>
-                                <li>Access dev tools to write SQL, create feature flags, set up surveys, and more</li>
-                                <li>Summarize and analyze insights, session replays, experiments, and more</li>
-                                <li>Explain features and search PostHog documentation</li>
-                            </ul>
-                        </p>
-                        PostHog AI's main interface is an in-app chat window, but it also appears throughout the
-                        platform as interactive UI elements embedded within PostHog features. For example, you might see
-                        the AI icon{' '}
+                    </p>
+                    <p>
+                        Unlike other agents, PostHog AI is deeply connected to your product data and event schema. It
+                        accesses your PostHog project and learns from real product usage. Describe what you want in
+                        natural language and it can:
+                    </p>
+                    <ul>
+                        <li>Conduct research and query data to answer product and customer questions</li>
+                        <li>Navigate the PostHog UI to edit filters, create insights, and build dashboards</li>
+                        <li>Use PostHog dev tools to write SQL, create feature flags, set up surveys, and more</li>
+                        <li>Summarize and analyze insights, session replays, experiments, and more</li>
+                        <li>Explain features and search PostHog documentation</li>
+                    </ul>
+                    <p>
+                        PostHog AI's main interface is an in-app AI chat, but it also appears throughout the platform as
+                        interactive UI elements embedded within other PostHog features. For example, you might see the
+                        AI icon{' '}
                         <span className="inline-block">
                             <IconSparkles className="h-4 w-4" />
                         </span>{' '}
                         when editing filters, a "Fix errors with AI" link in the SQL editor, or an "Analyze results"
                         button in surveys.
                     </p>
-                    <p>All of these AI touchpoints are connected and powered by the same underlying PostHog AI core.</p>
+                    <p>All of these AI touchpoints across the platform are powered by the same PostHog AI core.</p>
                 </div>
 
                 <div className="mt-8 -mx-4 @xl:-mx-8">
                     <ScrollArea fullWidth>
                         <div className="px-4 @xl:px-8">
-                            <PostHogAIDiagram className={`max-h-[36rem] min-h-[22rem] fill-black dark:fill-white`} />
+                            <PostHogAIDiagram className={`max-h-[34rem] min-h-[22rem] fill-black dark:fill-white`} />
                         </div>
                     </ScrollArea>
                 </div>
             </section>
 
             <section className="mb-8">
-                <h2 className="mb-4">Capable of doing a lot</h2>
+                <h2 className="mb-4">Skills and features</h2>
                 <OSTable
                     columns={[
                         { name: '', width: '1fr', align: 'left' },
@@ -126,7 +126,7 @@ export const Content = () => {
                         { name: '', width: '1fr', align: 'left' },
                         { name: <IconLogomark className="h-7" />, width: '80px', align: 'center' },
                     ]}
-                    rows={errorTrackingFeatures.reduce((rows, feature, i) => {
+                    rows={posthogAIFeatures.reduce((rows, feature, i) => {
                         if (i % 2 === 0) rows.push({ cells: [] as any[] })
                         const row = rows[rows.length - 1]
                         row.cells.push(
@@ -140,7 +140,7 @@ export const Content = () => {
             </section>
 
             <section className="mb-8">
-                <h2 className="mb-4">Powers the PostHog ecosystem</h2>
+                <h2 className="mb-4">Built into the PostHog platform</h2>
                 <div className="flex flex-col gap-4 lg:grid @lg:grid-cols-3">
                     {phFeatures.map((feature, index) => (
                         <Card key={index} url={feature.url} className="bg-accent dark:bg-accent-dark not-prose">
@@ -163,19 +163,19 @@ export const Content = () => {
                         type="Getting started"
                         title="Start here"
                         description="A high-level overview of the integration process for error tracking"
-                        url="/docs/error-tracking/start-here"
+                        url="/docs/posthog-ai/start-here"
                     />
                     <ResourceItem
-                        type="Quickstart"
-                        title="Set up Next.js error tracking"
-                        description="Install and configure error tracking in your Next.js app"
-                        url="/docs/error-tracking/installation/nextjs"
+                        type="Access"
+                        title="Enable PostHog AI"
+                        description="Configure access to PostHog AI in your PostHog project"
+                        url="/docs/posthog-ai/enable"
                     />
                     <ResourceItem
-                        type="Concepts"
-                        title="Issues and exceptions"
-                        description="Learn how to manage and track issues and exceptions"
-                        url="/docs/error-tracking/issues-and-exceptions"
+                        type="Features"
+                        title="Tools and skills"
+                        description="Learn about PostHog AI's capabilities"
+                        url="/docs/posthog-ai/tools"
                     />
                 </ul>
             </section>

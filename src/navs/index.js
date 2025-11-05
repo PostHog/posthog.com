@@ -4657,15 +4657,15 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Enable PostHog AI',
-                    url: '/docs/posthog-ai/enable',
+                    name: 'Allow access',
+                    url: '/docs/posthog-ai/allow-access',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
                 },
                 {
-                    name: 'Add context and memory',
-                    url: '/docs/posthog-ai/add-context',
+                    name: 'Add memory',
+                    url: '/docs/posthog-ai/add-memory',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
@@ -4677,6 +4677,12 @@ export const docsMenu = {
                     name: 'Platform access and chat UI',
                     url: '/docs/posthog-ai/platform-access-and-chat-ui',
                     icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
+                    name: 'Context and commands',
+                    url: '/docs/posthog-ai/context-and-commands',
+                    icon: 'IconLlmPromptManagement',
                     color: 'orange',
                 },
                 {
@@ -4692,8 +4698,8 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Session replay summaries',
-                    url: '/docs/posthog-ai/session-replay-summaries',
+                    name: 'Session summaries',
+                    url: '/docs/posthog-ai/session-summaries',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
