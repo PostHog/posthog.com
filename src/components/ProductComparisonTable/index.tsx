@@ -165,6 +165,12 @@ export default function ProductComparisonTable({
         })
     }
 
+    // Capitalize first letter only (sentence case)
+    const sentenceCase = (str: string): string => {
+        if (!str) return str
+        return str.charAt(0).toUpperCase() + str.slice(1)
+    }
+
     // Expand a section or product path into individual row configs
     const expandPath = (path: string, shouldAutoExpand: boolean): RowConfig[] => {
         const parts = path.split('.')
@@ -190,7 +196,7 @@ export default function ProductComparisonTable({
                         if (set) {
                             // Add header for section
                             expanded.push({
-                                label: featureSet.replace(/_/g, ' '),
+                                label: sentenceCase(featureSet.replace(/_/g, ' ')),
                                 description: set.description,
                                 type: 'header',
                             })
@@ -226,7 +232,7 @@ export default function ProductComparisonTable({
 
                         // Store both the key and description for rendering
                         expanded.push({
-                            label: sectionKey.replace(/_/g, ' '),
+                            label: sentenceCase(sectionKey.replace(/_/g, ' ')),
                             description: section.description,
                             type: 'header',
                         })
@@ -278,7 +284,7 @@ export default function ProductComparisonTable({
                 if (set) {
                     const lastKey = featureSetPath.split('.').slice(-1)[0]
                     expanded.push({
-                        label: lastKey.replace(/_/g, ' '),
+                        label: sentenceCase(lastKey.replace(/_/g, ' ')),
                         description: set.description,
                         type: 'header',
                     })
@@ -317,7 +323,7 @@ export default function ProductComparisonTable({
 
                         // Regular section - add header and all features
                         // For "...<Section>.features", use the section name (penultimate segment) as header label
-                        const sectionName = penultimate ? penultimate.replace(/_/g, ' ') : 'features'
+                        const sectionName = penultimate ? sentenceCase(penultimate.replace(/_/g, ' ')) : 'Features'
                         expanded.push({
                             label: sectionName,
                             description: set.description,
