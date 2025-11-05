@@ -23,7 +23,7 @@ This direct link to behavioral data is [what customers say makes the biggest dif
 
 Channel-wise you’re already live with **email** (and Slack, Twilio, etc. coming soon) – and you can tie in any real-time destination you have set up.
 
-No fragile API scripts or custom backend logic required – just build visually, publish, and let it run.  
+No fragile API scripts or custom backend logic required – just build visually, publish, and let it run.  It's so simple even a marketer can build with it, so I decided to try it out. 
 
 
 ## What I built
