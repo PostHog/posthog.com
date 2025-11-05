@@ -25,14 +25,10 @@ interface IProps {
             cols?: 1 | 2
         }
     }
-    buttonOptions?: {
-        className?: string
-        size?: 'sm' | 'md' | 'lg' | 'absurd'
-        type?: 'primary' | 'secondary' | 'outline'
-    }
     formOptions?: {
         className?: string
         cols?: 1 | 2
+        ctaLocation?: 'top' | 'bottom'
     }
     autoValidate?: boolean
     form: {
@@ -46,7 +42,13 @@ interface IProps {
             fieldType?: string
             cols?: 1 | 2
         }[]
-        buttonText?: string
+        ctaButton: {
+            label?: string
+            width?: 'full' | 'auto'
+            icon?: React.ReactNode | null
+            size?: 'sm' | 'md' | 'lg' | 'absurd'
+            type?: 'primary' | 'secondary' | 'outline'
+        }
         message?: string
         name: string
     }
@@ -260,6 +262,30 @@ function RadioGroup({
 
 const inputContainerClasses = `relative text-left text-sm col-span-full @lg:col-span-2 font-semibold flex items-center`
 
+interface CTAButtonProps {
+    width?: 'full' | 'auto'
+    size?: 'sm' | 'md' | 'lg' | 'xs' | 'xl'
+    variant?: 'primary' | 'secondary' | 'default' | 'underline' | 'underlineOnHover'
+    icon?: React.ReactNode
+    label?: string
+}
+
+const CTAButton = ({ width, size, variant, icon, label }: CTAButtonProps) => {
+    return (
+        <div className={`px-4 pt-2 pb-1 border-b border-primary flex-[0_0_auto]`}>
+            <OSButton
+                width={width || 'auto'}
+                size={size || 'md'}
+                variant={variant || 'primary'}
+                icon={icon}
+                type="submit"
+            >
+                {label || 'Submit'}
+            </OSButton>
+        </div>
+    )
+}
+
 const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
     const { name, placeholder, required } = props
     if (!name) return null
@@ -358,6 +384,14 @@ export default function SalesforceForm({
         setConfetti(true)
     }
 
+    const ctaButtonProps: CTAButtonProps = {
+        width: form.ctaButton?.width as CTAButtonProps['width'] | undefined,
+        size: form.ctaButton?.size as CTAButtonProps['size'] | undefined,
+        variant: form.ctaButton?.type as CTAButtonProps['variant'] | undefined,
+        icon: form.ctaButton?.icon || undefined,
+        label: form.ctaButton?.label,
+    }
+
     return form.fields.length > 0 ? (
         submitted ? (
             <>
@@ -400,11 +434,7 @@ export default function SalesforceForm({
                 onSubmit={handleSubmit}
             >
                 <Form className={formOptions?.className}>
-                    <div className="px-4 pt-2 pb-1 border-b border-primary flex-[0_0_auto]">
-                        <OSButton size="md" variant="primary" icon={<IconSend />} type="submit">
-                            {form.buttonText ?? 'Submit'}
-                        </OSButton>
-                    </div>
+                    {formOptions?.ctaLocation === 'top' && <CTAButton {...ctaButtonProps} />}
                     <div className="flex-1">
                         <ScrollArea className="min-h-0">
                             <div className="@container p-4">
@@ -477,6 +507,7 @@ export default function SalesforceForm({
                             </div>
                         </ScrollArea>
                     </div>
+                    {formOptions?.ctaLocation === 'bottom' && <CTAButton {...ctaButtonProps} />}
                 </Form>
             </Formik>
         )

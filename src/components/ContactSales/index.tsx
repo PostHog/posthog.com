@@ -13,6 +13,7 @@ import TeamMember from 'components/TeamMember'
 import { Script } from 'gatsby'
 import Editor from 'components/Editor'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { IconSend } from '@posthog/icons'
 
 const features = [
     'Volume discounts',
@@ -36,7 +37,7 @@ const VideoSection = () => (
     </section>
 )
 
-export default function ContactSales({ location }) {
+export default function ContactSales({ location }: { location: any }) {
     const [showVideo, setShowVideo] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
 
@@ -54,7 +55,7 @@ export default function ContactSales({ location }) {
         if (!isMobile) {
             setTimeout(() => {
                 window.scrollTo({
-                    top: document.getElementById('demo-video').offsetTop - 80,
+                    top: document.getElementById('demo-video')?.offsetTop - 80 || 0,
                     behavior: 'smooth',
                 })
             }, 100)
@@ -73,11 +74,9 @@ export default function ContactSales({ location }) {
                 <div data-scheme="primary" className="bg-accent text-primary h-full" data-default-form-id="509041">
                     <SalesforceForm
                         type="lead"
-                        buttonOptions={{
-                            size: 'md',
-                        }}
                         formOptions={{
                             className: 'pb-4 flex flex-col',
+                            ctaLocation: 'top',
                         }}
                         form={{
                             fields: [
@@ -152,7 +151,13 @@ export default function ContactSales({ location }) {
                                     required: false,
                                 },
                             ],
-                            buttonText: 'Send',
+                            ctaButton: {
+                                label: 'Send',
+                                size: 'md',
+                                type: 'primary',
+                                width: 'full',
+                                icon: <IconSend />,
+                            },
                             message: "Message received! We'll be in touch.",
                             name: 'Contact sales',
                         }}
