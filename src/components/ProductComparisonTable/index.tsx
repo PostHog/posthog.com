@@ -974,8 +974,14 @@ export default function ProductComparisonTable({
         ]
 
         // Check if this row has any data from competitors
-        const hasData = competitors.some((key) => {
-            const value = getFeatureValue(key, row)
+        const hasData = competitors.some((key, index) => {
+            // If row has custom values array, check those instead
+            let value: any
+            if (row.values !== undefined) {
+                value = row.values[index]
+            } else {
+                value = getFeatureValue(key, row)
+            }
             return value !== undefined && value !== '' && value !== null
         })
 
