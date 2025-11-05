@@ -15,17 +15,17 @@ import { Provider as ToastProvider } from './src/context/Toast'
 
 export const wrapRootElement = ({ element }) => (
     <ToastProvider>
-        <UserProvider>{wrapElement({ element })}</UserProvider>
+        <UserProvider>
+            <Provider element={element} location={location}>
+                {wrapElement({ element })}
+            </Provider>
+        </UserProvider>
     </ToastProvider>
 )
 
 export const wrapPageElement = ({ element, props: { location } }) => {
     initKea(true, location)
-    return (
-        <Provider element={element} location={location}>
-            <Wrapper />
-        </Provider>
-    )
+    return <Wrapper />
 }
 
 export const onRenderBody = function ({ setPreBodyComponents, setPostBodyComponents }) {
@@ -35,13 +35,6 @@ export const onRenderBody = function ({ setPreBodyComponents, setPostBodyCompone
             src: '/scripts/theme-init.js',
         }),
     ])
-
-    // setPostBodyComponents([
-    //     React.createElement('script', {
-    //         key: 'initial-loader',
-    //         src: '/scripts/initial-loader.js',
-    //     }),
-    // ])
 }
 
 export const onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
