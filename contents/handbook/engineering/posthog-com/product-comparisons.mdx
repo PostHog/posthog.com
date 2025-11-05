@@ -74,12 +74,13 @@ This is not an ordinary Markdown table. (In fact, it's not Markdown at all!)
 
 See more examples in the [PostHog vs Amplitude blog post](/blog/posthog-vs-amplitude). All tables are dynamically rendered from data sourced from json arrays.
 
-## Product features
+## Product & platform features
 
 Feature definitions for PostHog products are stored in:
 
 ```
-/src/hooks/featureDefinitions/{productName}.tsx
+/src/hooks/featureDefinitions/{productName}.tsx // individual products
+/src/hooks/featureDefinitions/platform.tsx // overall platform
 ```
 
 ### Session Replay example:
@@ -126,21 +127,22 @@ export const sessionReplayFeatures = {
 }
 ```
 
-## Competitor data
+## Competitor (& PostHog) data
 
 Competitor data is stored in:
 
 ```
-
 /src/hooks/competitorData/{competitorName}.tsx
-
+/src/hooks/competitorData/posthog.tsx
 ```
 
 ### Amplitude example:
 
 `/src/hooks/competitorData/amplitude.tsx`
 
-Feature-level data for competitors is stored in the same format, with the exception being that products are namespaced under the `products` node.
+Feature-level data for competitors is stored in the same format, with the exception being that products are namespaced under the `products` node in a single file instead of being spread across multiple files for each product.
+
+There's also a `platform` node below the `product` array.
 
 ```typescript
 export const amplitude = {
@@ -163,17 +165,18 @@ export const amplitude = {
                 conditional_recording: false,
             },
         },
+    },
 
-        platform: {
-            deployment: {
-                open_source: false,
-                self_host: false,
-            },
-            pricing: {
-                free_tier: true,
-                transparent_pricing: false,
-                usage_based_pricing: true,
-            },
+    platform: {
+        deployment: {
+            eu_hosting: true,
+            open_source: false,
+            self_host: false,
+        },
+        pricing: {
+            free_tier: true,
+            transparent_pricing: false,
+            usage_based_pricing: true,
         },
     },
 }
@@ -238,7 +241,10 @@ This is helpful for comparing all features within a product without having to re
             label: 'Output',
             value: 'table',
             content: (
-                <ProductComparisonTable competitors={['posthog', 'amplitude']} rows={['product_analytics.features']} />
+                <ProductComparisonTable
+                    competitors={['posthog', 'amplitude']}
+                    rows={['product_analytics.features', { label: 'Optional custom section header' }, 'dashboards']}
+                />
             ),
         },
         {
@@ -249,9 +255,9 @@ This is helpful for comparing all features within a product without having to re
                     <code className="language-mdx">{`<ProductComparisonTable
   competitors={['posthog', 'amplitude']}
   rows={[
-    { label: 'This will render all items in the node' },
-    'product_analytics.features',
-    'dashboards'
+    'product_analytics.features', // includes "Features" section header
+    { label: 'Optional custom section header' },
+    'dashboards' // only renders true/false for 'available' and sources text from dashboards.tsx using the 'summary' node
   ]}
 />`}</code>
                 </pre>
@@ -262,7 +268,7 @@ This is helpful for comparing all features within a product without having to re
 
 ### Compare specific features between competitors
 
-If you want to cherry-pick specific features, just reference the key directly.
+If you want to cherry-pick specific features, just reference the key directly. (This is useful for blog posts that compare specific features between competitors in a manually set order.)
 
 <OSTabs
     padding
@@ -403,3 +409,51 @@ Add section headers to organize comparison tables into logical groups. Headers o
 ```
 
 Headers automatically span across all columns and are styled with a border to visually separate sections.
+
+## Excluding sections
+
+Product pages list out all sections within a product's feature set by default, but in some cases it doesn't make sense to do so.
+
+For example, showing the `platform.integrations` section might make sense for the [Product Analytics comparison](/product-analytics#feature-comparison), but not for [LLM Analytics comparison](/llm-analytics#feature-comparison) where that product doesn't really integrate with the tools that are otherwise integrated across the PostHog platform.
+
+If you want to exclude a section from rendering, you can use the `excludedSections` property.
+
+```tsx
+<ProductComparisonTable
+    competitors={['posthog', 'amplitude']}
+    rows={['product_analytics.features']}
+    excludedSections={['platform']}
+/>
+```
+
+For product pages, this is handled by the `excluded_sections` property in the product's feature definition file.
+
+`/src/hooks/productData/llm_analytics.tsx`:
+
+```typescript
+export const llmAnalytics = {
+    ...
+    comparison: {
+        companies: [
+            {
+                name: 'Langfuse',
+                key: 'langfuse',
+            },
+            {
+                name: 'Langsmith',
+                key: 'langsmith',
+            },
+            {
+                name: 'Helicone',
+                key: 'helicone',
+            },
+            {
+                name: 'PostHog',
+                key: 'posthog',
+            },
+        ],
+        rows: ['llm_analytics'],
+        excluded_sections: ['platform'], // or an individual node like 'platform.integrations'
+    },
+}
+```

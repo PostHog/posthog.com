@@ -410,6 +410,7 @@ export const llmAnalytics = {
             },
         ],
         rows: ['llm_analytics'],
+        excluded_sections: ['platform'],
     },
     pairsWith: [
         {

@@ -113,6 +113,7 @@ interface ProductComparisonTableProps {
     rows: (RowConfig | string)[] // Accept both RowConfig objects and string paths
     width?: 'auto' | 'full'
     autoExpand?: boolean // When true, auto-expand single product names and include platform features
+    excludedSections?: string[] // Sections to exclude from rendering (e.g., ['platform'] or ['platform.deployment'])
 }
 
 export default function ProductComparisonTable({
@@ -120,6 +121,7 @@ export default function ProductComparisonTable({
     rows,
     width = 'auto',
     autoExpand = false,
+    excludedSections = [],
 }: ProductComparisonTableProps) {
     // Feature definitions (loaded before use)
     const featureDefs: Record<string, any> = {
@@ -152,6 +154,17 @@ export default function ProductComparisonTable({
         return node
     }
 
+    // Check if a path should be excluded
+    const isExcluded = (path: string): boolean => {
+        return excludedSections.some((excludedPath) => {
+            // Exact match
+            if (path === excludedPath) return true
+            // Check if path starts with excluded path (e.g., 'platform.deployment.self_host' matches 'platform.deployment')
+            if (path.startsWith(excludedPath + '.')) return true
+            return false
+        })
+    }
+
     // Expand a section or product path into individual row configs
     const expandPath = (path: string, shouldAutoExpand: boolean): RowConfig[] => {
         const parts = path.split('.')
@@ -161,10 +174,18 @@ export default function ProductComparisonTable({
             // "product" - expand all sections or show single product row (availability) or expand platform
             const product = parts[0]
             if (product === 'platform') {
+                // Check if entire platform is excluded
+                if (isExcluded('platform')) {
+                    return expanded
+                }
                 // Expand all platform sections
                 const platformDefs: any = platformFeatures
                 if (platformDefs) {
                     for (const featureSet in platformDefs) {
+                        const sectionPath = `platform.${featureSet}`
+                        // Skip if this section is excluded
+                        if (isExcluded(sectionPath)) continue
+
                         const set = platformDefs[featureSet]
                         if (set) {
                             // Add header for section
@@ -175,6 +196,10 @@ export default function ProductComparisonTable({
                             })
                             // Add all features in this set
                             for (const feature in set.features || {}) {
+                                const featurePath = `${sectionPath}.${feature}`
+                                // Skip if this specific feature is excluded
+                                if (isExcluded(featurePath)) continue
+
                                 expanded.push({
                                     type: 'platform',
                                     featureSet,
@@ -192,6 +217,10 @@ export default function ProductComparisonTable({
                     for (const sectionKey in defs) {
                         if (sectionKey === 'summary' || sectionKey === 'pricing') continue
 
+                        const sectionPath = `${product}.${sectionKey}`
+                        // Skip if this section is excluded
+                        if (isExcluded(sectionPath)) continue
+
                         const section = defs[sectionKey]
                         if (!section || typeof section !== 'object') continue
 
@@ -207,6 +236,10 @@ export default function ProductComparisonTable({
                         // while others (like top-level 'features') have them directly
                         const features = section.features || section
                         for (const featureKey in features) {
+                            const featurePath = `${sectionPath}.${featureKey}`
+                            // Skip if this specific feature is excluded
+                            if (isExcluded(featurePath)) continue
+
                             const feature = features[featureKey]
                             if (feature && typeof feature === 'object' && 'name' in feature) {
                                 expanded.push({
@@ -903,7 +936,7 @@ export default function ProductComparisonTable({
                     {
                         content: (
                             <div>
-                                <div className="font-semibold text-base capitalize">{row.label || ''}</div>
+                                <div className="font-semibold text-base">{row.label || ''}</div>
                                 {row.description && (
                                     <div className="text-sm text-secondary mt-1">{row.description}</div>
                                 )}

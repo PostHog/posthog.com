@@ -5,9 +5,10 @@ import ProductComparisonTable from 'components/ProductComparisonTable'
 interface FeatureComparisonSlideProps {
     competitors: string[]
     rows: any[]
+    excludedSections?: string[]
 }
 
-export default function FeatureComparisonSlide({ competitors, rows }: FeatureComparisonSlideProps) {
+export default function FeatureComparisonSlide({ competitors, rows, excludedSections }: FeatureComparisonSlideProps) {
     if (!competitors || !rows || competitors.length === 0 || rows.length === 0) {
         return (
             <div className="h-full p-8 flex items-center justify-center">
@@ -19,7 +20,13 @@ export default function FeatureComparisonSlide({ competitors, rows }: FeatureCom
     return (
         <div className="h-full text-primary flex flex-col">
             <ScrollArea className="min-h-0 h-full">
-                <ProductComparisonTable competitors={competitors} rows={rows} width="full" autoExpand={true} />
+                <ProductComparisonTable
+                    competitors={competitors}
+                    rows={rows}
+                    width="full"
+                    autoExpand={true}
+                    excludedSections={excludedSections}
+                />
             </ScrollArea>
         </div>
     )

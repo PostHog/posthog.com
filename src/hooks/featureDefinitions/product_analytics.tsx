@@ -18,6 +18,10 @@ export const productAnalyticsFeatures = {
             name: 'AI analysis',
             description: 'Surface user pain points using AI',
         },
+        alerts: {
+            name: 'Alerts',
+            description: 'Alert when types of events happen',
+        },
         autocapture: {
             name: 'Autocapture',
             description: 'Capture events without manual tracking',

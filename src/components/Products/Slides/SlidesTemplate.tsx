@@ -404,7 +404,17 @@ export default function SlidesTemplate({
                     )
                 }
 
-                return <FeatureComparisonSlide competitors={competitors} rows={rows} {...props} />
+                // Get excluded sections from product data
+                const excludedSections = productData?.comparison?.excluded_sections
+
+                return (
+                    <FeatureComparisonSlide
+                        competitors={competitors}
+                        rows={rows}
+                        excludedSections={excludedSections}
+                        {...props}
+                    />
+                )
             }
 
             case 'docs':
