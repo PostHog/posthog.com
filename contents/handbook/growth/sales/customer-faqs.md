@@ -8,7 +8,9 @@ Here's how to respond to common customer requests. These usually arrive in the f
 
 ## Can you increase my rate limits?
 
-We are working on a charging model for this, but in the interim you can opt customers into the beta by sharing their region (EU or US), organization and project IDs into the [#project-query-api-scheduler](https://posthog.slack.com/archives/C0895LZRFQS) channel.  You should also make them aware that whilst this is free whilst in beta, it will become billable when we roll out pricing (current ETA is mid 2025).
+We are working on a charging model for this, but for now we need to first figure out whether a customer should optimize their usage of our [/query](/docs/api/queries) endpoint before raising any limits.  Start a thread in <PrivateLink url='https://posthog.slack.com/archives/C0932JBCUFL'>#project-endpoints</PrivateLink> with the organization and project IDs of the customer and which endpoint they are using.  The Endpoints team can then help figure out why they are being rate limited and whether they can solve their problem without removing rate limits (e.g. through materialization of views).  If we do need to add them to the rate limit override, you should first make it clear to the customer that we will soon be charging separately for this endpoint, but increased rate limits are free before that charging model is released.
+
+You may also find customers using our deprecated /events endpoint.  They should migrate from this to a supported solution - this [docs page](/docs/api/events) details the correct path that they should take based on their use case.
 
 ## Do you have plans to add more hosting options outside of the US and EU?
 
