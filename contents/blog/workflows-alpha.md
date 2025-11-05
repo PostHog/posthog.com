@@ -10,7 +10,7 @@ hideAnchor: true
 category: PostHog news
 ---
 
-We've been building **[Workflows](https://posthog.com/docs/workflows)** for a whole now: this is our Zapier-style automation builder you can use to trigger actions based on live user behavior. And, while it’s still in its early days, it’s already packing some serious muscle.
+We've been building **[Workflows](https://posthog.com/docs/workflows)** for a while now: this is our Zapier-style automation builder you can use to trigger actions based on live user behavior. And, while it’s still in its early days, it’s already packing some serious muscle.
 
 You can define triggers (like “user viewed this page” or “performed this event”), add logic (delays, splits, or exit conditions), and finish with actions — such as sending an email, updating a property, or firing an event to another tool.
 
