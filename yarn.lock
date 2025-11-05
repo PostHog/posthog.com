@@ -4511,10 +4511,12 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@posthog/core@1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@posthog/core/-/core-1.5.0.tgz#56900cf9fbb37e9a5687020ce3864d05e67dabe1"
-  integrity sha512-oxfV20QMNwH30jKybUyqi3yGuMghULQz1zkJgQG3rjpHDxhD2vDN6E7UpmaqgphMIvGG3Q+DgfU10zfSPA7w7w==
+"@posthog/core@1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@posthog/core/-/core-1.5.1.tgz#77219929d743b4bcb7bc443ad3685c5ab3edcc55"
+  integrity sha512-8fdEzfvdStr45iIncTD+gnqp45UBTUpRK/bwB4shP5usCKytnPIeilU8rIpNBOVjJPwfW+2N8yWhQ0l14x191Q==
+  dependencies:
+    cross-spawn "^7.0.6"
 
 "@posthog/hedgehog-mode@^0.0.41":
   version "0.0.41"
@@ -24052,12 +24054,12 @@ postcss@^8.2.15, postcss@^8.2.9, postcss@^8.3.11, postcss@^8.4.14, postcss@^8.4.
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
-posthog-js@1.285.1:
-  version "1.285.1"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.285.1.tgz#47e6abb62c5501ea07c72779cf8dc89a93e8ef8f"
-  integrity sha512-+Cn3igI6LoOJuGtsiVsD15a0jGIaR1zE5tEG3Ovd4MLgti3RFHdS1eOisZTJUuQa2bR8X/Bx7HdoXsGNmW9h4Q==
+posthog-js@1.285.2:
+  version "1.285.2"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.285.2.tgz#20250aaa455ba20fb541236f7fcf12dfa9a87c7e"
+  integrity sha512-wAh8oaPrDND4c7rSvRWkdfbzsaVx6lRanig/T+Tufg2J561mC9NLrO2uqZiSRIMpfX6pOPFGf5WKcFhTzJNhzA==
   dependencies:
-    "@posthog/core" "1.5.0"
+    "@posthog/core" "1.5.1"
     core-js "^3.38.1"
     fflate "^0.4.8"
     preact "^10.19.3"
