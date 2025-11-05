@@ -48,7 +48,6 @@ Stages `3a` to `4b` only happen for those customers who engaged with us over ema
 - [Onboarding Pipeline Traits](https://posthog.vitally-eu.io/settings/traits/accounts) track the stage.
 - [Boost plan lead for onboarding specialist](https://posthog.vitally-eu.io/settings/playbooks/992541a3-e1cb-4e87-83c1-0b0c70ac1f7f)
 - [100-500 Onboarding Segment Logic - first payment due >100 (updated 9/2/2025)](https://posthog.vitally-eu.io/settings/playbooks/92d05ad4-11d6-44c7-ae29-fa1636b74920)
-- [$500–1667 MRR, >50 employees, >7 users, ICP country, paying 3+ months](https://posthog.vitally-eu.io/settings/playbooks/9727434b-f9b3-4636-8c4e-9daaff0581e5)
 - [[Onboarding Pipeline] 1. New Non-startup Account (Onboarding lead first payment due](https://posthog.vitally-eu.io/settings/playbooks/533794c1-e9dc-479c-925c-7e0487648661)
 - [[Onboarding Pipeline] 1. New Startup Account (Startup lead for onboarding specialist)](https://posthog.vitally-eu.io/settings/playbooks/8fd68f0d-0b86-4b16-876f-fb8097e7bf0d)
 
@@ -69,6 +68,9 @@ Stages `3a` to `4b` only happen for those customers who engaged with us over ema
 - [[Pipeline Automation — Stage X - 5] Update status to Awaiting Final Outreach](https://posthog.vitally-eu.io/settings/playbooks/aa1d8ac8-a602-4906-8508-cd29e95abe60) - This status is assigned ~10 days before the next renewal date (after having gone through any other step in the pipeline)
 - [sales lead - first payment due — all 2000+](https://posthog.vitally-eu.io/settings/playbooks/755bce87-458e-4ab7-b4d4-c8a63dec4ca8)
 
+#### Other
+
+- [Post-onboarding satisfaction survey trigger](https://posthog.vitally-eu.io/settings/playbooks/5d5c0361-5565-4d5f-89e7-21744378a2fb)
 
 ### Segments
 
