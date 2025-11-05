@@ -31,7 +31,6 @@ It's Simon's job, with input from Dana and Charles, to review the list of <Priva
 - US CSM
 - EU TAM
 - EU CSM
-- Singapore TAM
 
 And then it is down to the Team Leads to figure out which team member is taking on the customer.
 
@@ -44,6 +43,8 @@ To help the new owner of a customer hit the ground running, we should make sure 
 - TAE -> CSM after sufficient cross-product expansion has take place.
 
 For handover to take place there should be an Account Plan (saved as a note on the account in Vitally) and the customer should have been onboarded properly to the products they are currently paying for. 
+
+> All open invoices should also have been paid before handing over.  It makes sense to use existing relationships to chase payments, rather than the new owner's first action needing to be chasing payments/suspending access for non-payment.
 
 ### Account Plan
 

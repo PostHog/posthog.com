@@ -31,7 +31,7 @@ export const productAnalytics = {
     overview: {
         title: 'Product analytics with autocapture',
         description:
-            'PostHog is the only product analytics platform built to natively work with session replay, feature flags, experiments, and surveys.',
+            'PostHog is the only developer platform built to natively work with session replay, feature flags, experiments, and surveys.',
         textColor: 'text-white', // tw
     },
     screenshots: {

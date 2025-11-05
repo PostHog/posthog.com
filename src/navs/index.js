@@ -1184,6 +1184,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/user-feedback',
             },
             {
+                name: 'In-Person Customer Visits',
+                url: '/handbook/product/visiting-customers',
+            },
+            {
                 name: 'Releasing as beta',
                 url: '/handbook/product/releasing-as-beta',
             },
@@ -4420,7 +4424,7 @@ export const docsMenu = {
                 {
                     name: 'Sessions',
                     url: '/docs/llm-analytics/sessions',
-                    icon: 'IconMessages',
+                    icon: 'IconStack',
                     color: 'blue',
                     featured: true,
                 },
@@ -4739,6 +4743,50 @@ export const docsMenu = {
                 {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/workflows/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'red',
+                },
+            ],
+        },
+        {
+            name: 'Logs',
+            icon: 'IconSearch',
+            color: 'blue',
+            url: '/docs/logs',
+            description: 'Search and analyze your application logs with OpenTelemetry.',
+            children: [
+                {
+                    name: 'Logs',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/logs',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/logs/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Install logging client',
+                    url: '/docs/logs/installation',
+                    icon: 'IconCode',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/logs/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
                 },

@@ -26,13 +26,30 @@ A generation is a single call to an LLM.
 
 ### Cost properties
 
-Cost properties are optional as we can automatically calculate them from model and token counts. If you want, you can provide your own cost property instead.
+Cost properties are optional as we can automatically calculate them from model and token counts. If you want, you can provide your own cost properties or custom pricing instead.
+
+#### Pre-calculated costs
 
 | Property | Description |
 |----------|-------------|
 | `$ai_input_cost_usd` | *(Optional)* The cost in USD of the input tokens |
 | `$ai_output_cost_usd` | *(Optional)* The cost in USD of the output tokens |
-| `$ai_total_cost_usd` | *(Optional)* The total cost in USD (input + output) |
+| `$ai_request_cost_usd` | *(Optional)* The cost in USD for the requests |
+| `$ai_web_search_cost_usd` | *(Optional)* The cost in USD for the web searches |
+| `$ai_total_cost_usd` | *(Optional)* The total cost in USD (sum of all cost components) |
+
+#### Custom pricing
+
+| Property | Description |
+|----------|-------------|
+| `$ai_input_token_price` | *(Optional)* Price per input token (used to calculate `$ai_input_cost_usd`) |
+| `$ai_output_token_price` | *(Optional)* Price per output token (used to calculate `$ai_output_cost_usd`) |
+| `$ai_cache_read_token_price` | *(Optional)* Price per cached token read |
+| `$ai_cache_write_token_price` | *(Optional)* Price per cached token write |
+| `$ai_request_price` | *(Optional)* Price per request |
+| `$ai_request_count` | *(Optional)* Number of requests (defaults to 1 if `$ai_request_price` is set) |
+| `$ai_web_search_price` | *(Optional)* Price per web search |
+| `$ai_web_search_count` | *(Optional)* Number of web searches performed |
 
 ### Cache properties
 

@@ -47,7 +47,7 @@ Its LLM observability product (known as [LLM analytics](/docs/llm-analytics)) in
 
 #### What makes PostHog special?
 
-PostHog’s LLM analytics product works with the rest of our product suite. This means you can visualize LLM-related data along product and business data, create custom queries using [SQL](/docs/product-analytics/sql), view [session replays](/docs/session-replay) of AI interactions, [A/B test prompts](/tutorials/llm-ab-tests), and more.
+PostHog’s LLM analytics app works with the rest of our dev tool suite. This means you can visualize LLM-related data along product and business data, create custom queries using [SQL](/docs/product-analytics/sql), view [session replays](/docs/session-replay) of AI interactions, [A/B test prompts](/tutorials/llm-ab-tests), and more.
 
 PostHog’s hosted Cloud version and all of its LLM analytics features are free to use. It comes with 100k LLM observability events for free every month with 30 day retention. Beyond this, pricing is usage-based and [totally transparent](/pricing). 
 
