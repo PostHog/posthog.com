@@ -4,6 +4,7 @@ import Logo from 'components/Logo'
 import Link from 'components/Link'
 import { IconArrowUpRight } from '@posthog/icons'
 import { useApp } from '../../context/App'
+import { useLocation } from '@reach/router'
 
 // Competitor data imports
 import { ab_tasty } from '../../hooks/competitorData/ab_tasty'
@@ -828,38 +829,44 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
 
     const { siteSettings } = useApp()
     const isDark = siteSettings.theme === 'dark'
+    const location = useLocation()
 
     // Build columns
     const columns = [
         { name: '', width: 'auto', align: 'left' as const },
-        ...competitors.map((key) => ({
-            name: (
-                <>
-                    {key === 'posthog' ? (
-                        <Logo className="h-5 mx-auto w-auto max-w-full" fill={isDark ? 'white' : ''} />
-                    ) : competitorData[key]?.name ? (
-                        competitorData[key].name
-                    ) : (
-                        key
-                    )}
-                    {competitorData[key]?.assets?.comparisonArticle && (
-                        <>
-                            <br />
-                            <Link
-                                to={competitorData[key].assets.comparisonArticle}
-                                className="underline text-[13px] opacity-75 hover:opacity-100 ml-3"
-                                state={{ newWindow: true }}
-                            >
-                                compare
-                                <IconArrowUpRight className="inline-block size-3" />
-                            </Link>
-                        </>
-                    )}
-                </>
-            ),
-            width: 'minmax(150px, 1fr)',
-            align: 'center' as const,
-        })),
+        ...competitors.map((key) => {
+            const comparisonArticle = competitorData[key]?.assets?.comparisonArticle
+            const isCurrentPage = comparisonArticle && location.pathname === comparisonArticle
+
+            return {
+                name: (
+                    <>
+                        {key === 'posthog' ? (
+                            <Logo className="h-5 mx-auto w-auto max-w-full" fill={isDark ? 'white' : ''} />
+                        ) : competitorData[key]?.name ? (
+                            competitorData[key].name
+                        ) : (
+                            key
+                        )}
+                        {comparisonArticle && !isCurrentPage && (
+                            <>
+                                <br />
+                                <Link
+                                    to={comparisonArticle}
+                                    className="underline text-[13px] opacity-75 hover:opacity-100 ml-3"
+                                    state={{ newWindow: true }}
+                                >
+                                    compare
+                                    <IconArrowUpRight className="inline-block size-3" />
+                                </Link>
+                            </>
+                        )}
+                    </>
+                ),
+                width: 'minmax(150px, 1fr)',
+                align: 'center' as const,
+            }
+        }),
     ]
 
     // Build rows
