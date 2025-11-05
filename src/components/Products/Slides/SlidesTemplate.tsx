@@ -394,7 +394,7 @@ export default function SlidesTemplate({
                 }
 
                 // Get rows from product data or props override
-                const rows = props.rows || productData?.comparison?.rows
+                let rows = props.rows || productData?.comparison?.rows
 
                 if (!rows || rows.length === 0) {
                     return (
@@ -402,6 +402,11 @@ export default function SlidesTemplate({
                             <p className="text-xl text-secondary">No feature comparison available</p>
                         </div>
                     )
+                }
+
+                // Add platform features at the end of the comparison
+                if (!rows.includes('platform')) {
+                    rows = [...rows, 'platform']
                 }
 
                 return <FeatureComparisonSlide competitors={competitors} rows={rows} {...props} />
