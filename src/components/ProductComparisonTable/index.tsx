@@ -149,7 +149,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
         const expanded: RowConfig[] = []
 
         if (parts.length === 1) {
-            // "product" - show single product row (availability) or expand platform
+            // "product" - expand all sections or show single product row (availability) or expand platform
             const product = parts[0]
             if (product === 'platform') {
                 // Expand all platform sections
@@ -159,7 +159,11 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                         const set = platformDefs[featureSet]
                         if (set) {
                             // Add header for section
-                            expanded.push({ label: featureSet, type: 'header' })
+                            expanded.push({
+                                label: featureSet.replace(/_/g, ' '),
+                                description: set.description,
+                                type: 'header',
+                            })
                             // Add all features in this set
                             for (const feature in set.features || {}) {
                                 expanded.push({
@@ -172,13 +176,47 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                     }
                 }
             } else {
-                // Single product-level row – let getFeatureInfo pull summary (including url/docsUrl)
+                // Check if this is a product with feature definitions - if so, expand all sections
                 const defs = featureDefs[product]
                 if (defs) {
-                    expanded.push({
-                        type: 'product',
-                        product,
-                    })
+                    // Expand all sections within the product (skip 'summary' and 'pricing')
+                    for (const sectionKey in defs) {
+                        if (sectionKey === 'summary' || sectionKey === 'pricing') continue
+
+                        const section = defs[sectionKey]
+                        if (!section || typeof section !== 'object') continue
+
+                        // Store both the key and description for rendering
+                        expanded.push({
+                            label: sectionKey.replace(/_/g, ' '),
+                            description: section.description,
+                            type: 'header',
+                        })
+
+                        // Add all features in this section
+                        // Some sections have features nested under a 'features' property,
+                        // while others (like top-level 'features') have them directly
+                        const features = section.features || section
+                        for (const featureKey in features) {
+                            const feature = features[featureKey]
+                            if (feature && typeof feature === 'object' && 'name' in feature) {
+                                expanded.push({
+                                    type: 'feature',
+                                    product,
+                                    featureSet: sectionKey,
+                                    feature: featureKey,
+                                })
+                            }
+                        }
+                    }
+
+                    // If no sections were found, create a single product-level row
+                    if (expanded.length === 0) {
+                        expanded.push({
+                            type: 'product',
+                            product,
+                        })
+                    }
                 }
             }
         } else if (parts.length >= 2) {
@@ -190,8 +228,12 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                 const platformDefs: any = platformFeatures
                 const set = getDefsNode(platformDefs, featureSetPath)
                 if (set) {
-                    const sectionLabel = featureSetPath.split('.').slice(-1)[0]
-                    expanded.push({ label: sectionLabel, type: 'header' })
+                    const lastKey = featureSetPath.split('.').slice(-1)[0]
+                    expanded.push({
+                        label: lastKey.replace(/_/g, ' '),
+                        description: set.description,
+                        type: 'header',
+                    })
                     const featureMap: any = set?.features || set
                     for (const feature in featureMap) {
                         expanded.push({
@@ -227,13 +269,12 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
 
                         // Regular section - add header and all features
                         // For "...<Section>.features", use the section name (penultimate segment) as header label
-                        const sectionName = penultimate
-                            ? penultimate
-                                  .split('_')
-                                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                                  .join(' ')
-                            : 'Features'
-                        expanded.push({ label: sectionName, type: 'header' })
+                        const sectionName = penultimate ? penultimate.replace(/_/g, ' ') : 'features'
+                        expanded.push({
+                            label: sectionName,
+                            description: set.description,
+                            type: 'header',
+                        })
                         // Add all features in this section (support nested or flat)
                         const featureMap: any = set?.features || set
                         for (const feature in featureMap) {
@@ -829,7 +870,14 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                 key: `row-${index}`,
                 cells: [
                     {
-                        content: <div className="font-semibold text-base">{row.label || ''}</div>,
+                        content: (
+                            <div>
+                                <div className="font-semibold text-base capitalize">{row.label || ''}</div>
+                                {row.description && (
+                                    <div className="text-sm text-secondary mt-1">{row.description}</div>
+                                )}
+                            </div>
+                        ),
                         className: 'col-span-full border-b-2 border-primary bg-accent pb-2',
                     },
                 ],
