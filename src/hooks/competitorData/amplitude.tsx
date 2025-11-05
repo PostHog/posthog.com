@@ -351,6 +351,12 @@ export const amplitude = {
         product_tours: {
             available: true,
         },
+        error_tracking: {
+            available: false,
+        },
+        llm_analytics: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
