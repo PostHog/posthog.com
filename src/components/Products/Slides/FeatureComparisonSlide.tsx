@@ -19,7 +19,7 @@ export default function FeatureComparisonSlide({ competitors, rows }: FeatureCom
     return (
         <div className="h-full text-primary flex flex-col">
             <ScrollArea className="min-h-0 h-full">
-                <ProductComparisonTable competitors={competitors} rows={rows} width="full" />
+                <ProductComparisonTable competitors={competitors} rows={rows} width="full" autoExpand={true} />
             </ScrollArea>
         </div>
     )

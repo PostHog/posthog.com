@@ -109,9 +109,15 @@ interface ProductComparisonTableProps {
     competitors: string[]
     rows: (RowConfig | string)[] // Accept both RowConfig objects and string paths
     width?: 'auto' | 'full'
+    autoExpand?: boolean // When true, auto-expand single product names and include platform features
 }
 
-export default function ProductComparisonTable({ competitors, rows, width = 'auto' }: ProductComparisonTableProps) {
+export default function ProductComparisonTable({
+    competitors,
+    rows,
+    width = 'auto',
+    autoExpand = false,
+}: ProductComparisonTableProps) {
     // Feature definitions (loaded before use)
     const featureDefs: Record<string, any> = {
         cdp: cdpFeatures,
@@ -144,7 +150,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
     }
 
     // Expand a section or product path into individual row configs
-    const expandPath = (path: string): RowConfig[] => {
+    const expandPath = (path: string, shouldAutoExpand: boolean): RowConfig[] => {
         const parts = path.split('.')
         const expanded: RowConfig[] = []
 
@@ -176,10 +182,10 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                     }
                 }
             } else {
-                // Check if this is a product with feature definitions - if so, expand all sections
+                // Check if this is a product with feature definitions
                 const defs = featureDefs[product]
-                if (defs) {
-                    // Expand all sections within the product (skip 'summary' and 'pricing')
+                if (defs && shouldAutoExpand) {
+                    // Auto-expand all sections within the product (skip 'summary' and 'pricing')
                     for (const sectionKey in defs) {
                         if (sectionKey === 'summary' || sectionKey === 'pricing') continue
 
@@ -217,6 +223,12 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                             product,
                         })
                     }
+                } else if (defs) {
+                    // Not auto-expanding, just create a single product-level row
+                    expanded.push({
+                        type: 'product',
+                        product,
+                    })
                 }
             }
         } else if (parts.length >= 2) {
@@ -297,7 +309,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
     }
 
     // Normalize rows - convert strings to RowConfig and expand sections/products
-    const normalizeRows = (rows: (RowConfig | string)[]): RowConfig[] => {
+    const normalizeRows = (rows: (RowConfig | string)[], shouldAutoExpand: boolean): RowConfig[] => {
         const normalized: RowConfig[] = []
 
         for (const row of rows) {
@@ -310,7 +322,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                     if (parts[0] === 'platform') {
                         // Platform expansion (e.g., "platform.deployment" or "platform")
                         if (parts.length === 1 || parts.length === 2) {
-                            normalized.push(...expandPath(row))
+                            normalized.push(...expandPath(row, shouldAutoExpand))
                             continue
                         }
                     } else {
@@ -320,18 +332,18 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                         if (defs) {
                             if (parts.length === 1 || (parts.length === 2 && parts[1] === 'summary')) {
                                 // Expand entire product or summary
-                                normalized.push(...expandPath(row))
+                                normalized.push(...expandPath(row, shouldAutoExpand))
                                 continue
                             } else if (parts.length === 2) {
                                 // Expand section
-                                normalized.push(...expandPath(row))
+                                normalized.push(...expandPath(row, shouldAutoExpand))
                                 continue
                             }
                         }
                     }
                 } else if (parts[parts.length - 1] === 'features') {
                     // Expand section and include header + all features
-                    normalized.push(...expandPath(row))
+                    normalized.push(...expandPath(row, shouldAutoExpand))
                     continue
                 }
                 // Individual feature (3+ parts) - convert to RowConfig
@@ -345,7 +357,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                         const defs = featureDefs[product]
                         if (defs) {
                             // Expand, but apply overrides from row config
-                            const expanded = expandPath(row.path)
+                            const expanded = expandPath(row.path, shouldAutoExpand)
                             if (row.label || row.description) {
                                 // Apply overrides to first expanded row
                                 if (expanded.length > 0 && expanded[0].type !== 'header') {
@@ -356,7 +368,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                             continue
                         }
                     } else if (parts[parts.length - 1] === 'features') {
-                        const expanded = expandPath(row.path)
+                        const expanded = expandPath(row.path, shouldAutoExpand)
                         if (row.label || row.description) {
                             if (expanded.length > 0 && expanded[0].type !== 'header') {
                                 expanded[0] = { ...expanded[0], ...row }
@@ -474,7 +486,12 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
     }
 
     // Normalize, parse, and expand rows
-    const normalizedRows = normalizeRows(rows)
+    // When autoExpand is true, append platform features
+    let processedRows = rows
+    if (autoExpand && !rows.includes('platform')) {
+        processedRows = [...rows, 'platform']
+    }
+    const normalizedRows = normalizeRows(processedRows, autoExpand)
     const parsedRows = normalizedRows.map((row) => inferType(parseRowConfig(row)))
 
     // Competitor data
@@ -864,7 +881,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                         )}
                     </>
                 ),
-                width: 'minmax(150px, 1fr)',
+                width: 'minmax(120px, 1fr)',
                 align: 'center' as const,
             }
         }),
