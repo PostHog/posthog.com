@@ -9,7 +9,7 @@ The Flutter SDK captures anonymous events by default. However, this may change d
 For example:
 
 ```dart
-final config = PostHogConfig(POSTHOG_API_KEY);
+final config = PostHogConfig('<ph_project_api_key>');
 config.host = POSTHOG_HOST;
 config.personProfiles = PostHogPersonProfiles.identifiedOnly;
 ```

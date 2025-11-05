@@ -31,7 +31,6 @@ It's Simon's job, with input from Dana and Charles, to review the list of <Priva
 - US CSM
 - EU TAM
 - EU CSM
-- Singapore TAM
 
 And then it is down to the Team Leads to figure out which team member is taking on the customer.
 

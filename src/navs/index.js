@@ -1180,6 +1180,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/user-feedback',
             },
             {
+                name: 'In-Person Customer Visits',
+                url: '/handbook/product/visiting-customers',
+            },
+            {
                 name: 'Releasing as beta',
                 url: '/handbook/product/releasing-as-beta',
             },
@@ -1532,7 +1536,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/revops/credits',
                     },
                 ],
-            }
+            },
         ],
     },
 ]
@@ -3778,6 +3782,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/android',
                         },
                         {
+                            name: 'Flutter',
+                            url: '/docs/error-tracking/installation/flutter',
+                        },
+                        {
                             name: 'Manual/API',
                             url: '/docs/error-tracking/installation/manual',
                         },
@@ -4412,7 +4420,7 @@ export const docsMenu = {
                 {
                     name: 'Sessions',
                     url: '/docs/llm-analytics/sessions',
-                    icon: 'IconMessages',
+                    icon: 'IconStack',
                     color: 'blue',
                     featured: true,
                 },
