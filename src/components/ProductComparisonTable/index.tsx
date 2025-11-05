@@ -4,7 +4,6 @@ import Logo from 'components/Logo'
 import Link from 'components/Link'
 import { IconArrowUpRight } from '@posthog/icons'
 import { useApp } from '../../context/App'
-import { useLocation } from '@reach/router'
 
 // Competitor data imports
 import { ab_tasty } from '../../hooks/competitorData/ab_tasty'
@@ -829,14 +828,16 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
 
     const { siteSettings } = useApp()
     const isDark = siteSettings.theme === 'dark'
-    const location = useLocation()
+
+    // Get current pathname - safely handle SSR
+    const currentPathname = typeof window !== 'undefined' ? window.location.pathname : ''
 
     // Build columns
     const columns = [
         { name: '', width: 'auto', align: 'left' as const },
         ...competitors.map((key) => {
             const comparisonArticle = competitorData[key]?.assets?.comparisonArticle
-            const isCurrentPage = comparisonArticle && location.pathname === comparisonArticle
+            const isCurrentPage = comparisonArticle && currentPathname === comparisonArticle
 
             return {
                 name: (
