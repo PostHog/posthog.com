@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The onboarding team operates a high volume, high velocity sales pipeline with all pay-as-you-go (or YC) accounts that are forecasted to spend > $100 and are not otherwise engaged by Sales/CSM. As such, Onboarding is a linear flow moving from initial outreach to confirming the product is configured properly, ending with customers who are happy paying multiple bills. We aim to keep engagements to ~8 weeks, or 2 full billing periods, but in practice, there is some spillover depending on responsiveness. 
+The onboarding team operates a high volume, high velocity sales pipeline with all pay-as-you-go (or YC) accounts that are forecasted to spend > $100 and are not otherwise engaged by Sales/CSM. As such, Onboarding is a linear flow moving from initial outreach to confirming the product is configured properly, ending with customers who are happy paying multiple bills. We aim to keep engagements to ~8 weeks, or 2 full billing periods, but in practice, there is some spillover depending on responsiveness.
 
 ### Stages
 
@@ -18,14 +18,13 @@ These are the statuses we use to track users in the new **Onboarding Pipeline** 
 - `3b. Engaged — Call Booked` -  Assigned as soon as a customer books a call with us.
 - `4a. Intro Call Completed` - Assigned when the first call is completed.
 - `4b. Second Call Completed` - Assigned when we complete the second call, diving deeper into specific KPIs and business goals.
-- `4c. Homework Offered` - Assigned only to customers who have completed a second call with us, and receive tailored homework.
 - `5. Awaiting Final Outreach` - Assigned to both engaged and unengaged customers; the final stage where we review the account, and wrap up the onboarding process.
 - `6a. Onboarded — No Engagement` - Assigned to customers that never engaged with us in any way.
 - `6b. Onboarded — Engaged` - Assigned to those who engaged either over email or also in a call.
 - `6c. Sales Handoff` - Assigned to customers that we [hand over to sales](/handbook/onboarding/sales-handover). This can happen at any stage throughout the process.
 - `6d. Churned` - Assigned to churned customers.
 
-Stages `3a` to `4c` only happen for those customers who engaged with us over email or in a call. For those who never engaged with us, they skip immediately to `5. Awaiting Final Outreach`.
+Stages `3a` to `4b` only happen for those customers who engaged with us over email or in a call. For those who never engaged with us, they skip immediately to `5. Awaiting Final Outreach`.
 
 > Note: You may need to add this property to your views in Vitally. It's found under `Custom Traits`.
 
@@ -36,7 +35,8 @@ Stages `3a` to `4c` only happen for those customers who engaged with us over ema
 - Additional automations use best effort to move accounts automatically from one stage to another, though they are somewhat limited by Vitally's ability to trigger on specific data.
 	- Accounts that end up in the Onboarding segment get `1. New Account` automatically (set in main workflow playbook)
 	- Accounts we reach out to — any with a convo started by Cameron, Magda, or Dan, get set to `2. Onboarding Initiated` [here](https://posthog.vitally-eu.io/settings/playbooks/754f037e-892b-435a-a189-9f3da9b922fa)
-  	- We are working without automations for the other stages for now, as there is some complexity in actually making them update automatically based on limited Vitally triggers. This is a WIP.  
+  	- We are working without automations for the other stages for now, as there is some complexity in actually making them update automatically based on limited Vitally triggers. This is a WIP.
+  	- `5. Awaiting Final Outreach` - This status is assigned ~10 days before the next renewal date (after having gone through other steps in the pipeline in [this playbook in Vitally](https://posthog.vitally-eu.io/settings/playbooks/aa1d8ac8-a602-4906-8508-cd29e95abe60).
 
 We do not track timestamps for every single stage, just for the overall numbered buckets (e.g, 1. New account, 2. Contacted, 3. Responded, 4. "Onboarding in process", 5. Last touch, 6. Various completion states).
 
