@@ -9,12 +9,9 @@ export const smartlook = {
             available: true,
             features: {
                 autocapture: true,
-                cohorts: false,
+                cohorts: true,
                 custom_events: true,
                 custom_properties: true,
-                group_analytics: {
-                    available: false,
-                },
                 insights: {
                     available: true,
                     features: {
@@ -48,6 +45,9 @@ export const smartlook = {
                     available: false,
                     features: {},
                 },
+            },
+            group_analytics: {
+                available: false,
             },
         },
         web_analytics: {

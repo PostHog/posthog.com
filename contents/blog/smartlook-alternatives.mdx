@@ -10,8 +10,7 @@ tags:
     - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
@@ -38,75 +37,28 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of 
 
 PostHog has more features than Smartlook. Both have key features like single snippet installation, user segmentation, and user privacy options, but PostHog has A/B testing, feature flags, and surveys.
 
-<ComparisonTable column1="PostHog" column2="Smartlook">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'smartlook']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            path: 'platform.implementation',
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [true, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use PostHog?
 
@@ -146,75 +98,28 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Amplitude), as o
 
 One of the biggest downsides of Amplitude is its lack of autocapture. It also doesn’t have heatmaps, though it recently added session replay.
 
-<ComparisonTable column1="Amplitude" column2="Smartlook">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['amplitude', 'smartlook']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            path: 'platform.implementation',
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [true, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Amplitude?
 
@@ -255,75 +160,28 @@ Contentsquare, a marketing and ecommerce analytics firm, [acquired Heap in Septe
 
 ### How does Heap compare to Smartlook?
 
-<ComparisonTable column1="Heap" column2="Smartlook">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['heap', 'smartlook']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            path: 'platform.implementation',
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [true, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Heap?
 
@@ -364,75 +222,28 @@ As of March 2024, just 393 of the top 1 million websites use Glassbox according 
 
 Glassbox and Smartlook share many of the same features, but Glassbox is not self-serve and implementation isn’t as straightforward.
 
-<ComparisonTable column1="Glassbox" column2="Smartlook">
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['glassbox', 'smartlook']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            path: 'platform.implementation',
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [false, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Glassbox?
 
@@ -472,75 +283,28 @@ According to data from BuiltWith, as of March 2024, 3,400 of the top million web
 
 Pendo’s lack of autocapture is a major drawback, though its focus on qualitative feedback through in-app guides and product planning will appeal to many.
 
-<ComparisonTable column1="Pendo" column2="Smartlook">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['pendo', 'smartlook']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            path: 'platform.implementation',
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [true, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Pendo?
 
@@ -581,75 +345,28 @@ According to [BuiltWith](https://trends.builtwith.com/widgets/LogRocket), as of 
 
 LogRocket matches many of Smartlook's features and has a strong focus on error and performance tracking.
 
-<ComparisonTable column1="LogRocket" column2="Smartlook">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['logrocket', 'smartlook']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            path: 'platform.implementation',
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [true, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use LogRocket?
 
@@ -687,75 +404,28 @@ Contentsquare is an analytics platform that combines heatmaps, customer journey 
 
 Contentsquare is popular with large enterprises and has more advanced features, including AI-powered analytics recommendations. Smartlook is a good choice for smaller businesses.
 
-<ComparisonTable column1="Contentsquare" column2="Smartlook">
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['contentsquare', 'smartlook']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            path: 'platform.implementation',
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [true, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Contentsquare?
 
@@ -794,75 +464,28 @@ According to G2 reviews, people like Contentsquare because:
 
 Smartlook has a lot more features than Hotjar and, as it’s free to try, could be a great alternative to try out if you’re looking for more than Hotjar offers.
 
-<ComparisonTable column1="Hotjar" column2="Smartlook">
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Fast implementation"
-        description="Single snippet installed to get started fast"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Funnels and journey maps"
-        description="Measure conversion and track the paths users take"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User segmenting"
-        description="Analyze and filter based on user properties and behaviors"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users on your site; discover friction points"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="User privacy options"
-        description="Anonymize, mask, and block data you don't want or need"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={false}
-        feature="Open source"
-        description="Audit code, contribute to roadmap, and build integrations"
-    />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['hotjar', 'smartlook']}
+    rows={[
+        'platform.pricing.self_serve',
+        {
+            path: 'platform.implementation',
+            label: 'Fast implementation',
+            description: 'Single snippet installed to get started fast',
+            values: [true, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.funnels',
+        'product_analytics.group_analytics',
+        'product_analytics.features.cohorts',
+        'session_replay',
+        'heatmaps',
+        'experiments',
+        'platform.security.user_privacy_options',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Hotjar?
 

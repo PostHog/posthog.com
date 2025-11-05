@@ -10,8 +10,10 @@ export const fullstory = {
             available: true,
             features: {
                 clickmaps: true,
+                dead_taps: true,
                 heatmaps: true,
                 rage_clicks: true,
+                rage_taps: true,
                 scrollmaps: true,
                 movement_maps: true,
             },

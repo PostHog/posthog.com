@@ -9,7 +9,7 @@ export const glassbox = {
             available: true,
             features: {
                 autocapture: true,
-                cohorts: false,
+                cohorts: true,
                 custom_events: true,
                 custom_properties: true,
                 toolbar: false,

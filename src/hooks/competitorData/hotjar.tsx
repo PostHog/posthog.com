@@ -268,7 +268,7 @@ export const hotjar = {
             saml_sso: false,
             soc2_certified: false,
             two_factor_auth: false,
-            user_privacy_options: false,
+            user_privacy_options: true,
         },
     },
     pricing: {

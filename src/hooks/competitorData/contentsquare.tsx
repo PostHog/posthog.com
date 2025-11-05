@@ -60,7 +60,11 @@ export const contentsquare = {
             open_source: false,
         },
         pricing: {
+            self_serve: false,
             transparent_pricing: false,
+        },
+        security: {
+            user_privacy_options: true,
         },
     },
 }
