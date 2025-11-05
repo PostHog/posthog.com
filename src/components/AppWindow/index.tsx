@@ -126,6 +126,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         compact,
         menu: appMenu,
         taskbarRef,
+        rendered: appRendered,
         setRendered: setAppRendered,
     } = useApp()
     const isSSR = typeof window === 'undefined'
@@ -149,7 +150,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const [closing, setClosing] = useState(false)
     const [closed, setClosed] = useState(false)
     const [minimizing, setMinimizing] = useState(false)
-    const [animating, setAnimating] = useState(true)
+    const [animating, setAnimating] = useState(appRendered)
     const animationStartTimeRef = useRef<number | null>(null)
     const posthog = usePostHog()
 
