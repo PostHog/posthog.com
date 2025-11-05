@@ -19,6 +19,10 @@ export const sessionReplayFeatures = {
             name: 'Chat with your recordings',
             description: 'Discover useful recordings using AI-powered chat',
         },
+        crash_reports: {
+            name: 'Crash reports',
+            description: 'Learn what happens before a crash without complex debugging or reproduction',
+        },
         event_timeline: {
             name: 'Event timeline',
             description: 'See events triggered during recordings',

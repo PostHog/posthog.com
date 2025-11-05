@@ -60,6 +60,8 @@ export const smartlook = {
             available: true,
             features: {
                 canvas_recording: true,
+                console_logs: true,
+                crash_reports: true,
                 privacy_masking: true,
             },
             analysis: {
@@ -68,12 +70,25 @@ export const smartlook = {
                     network_monitor: true,
                 },
             },
+            targeting: {
+                features: {
+                    filter_by_user_or_event: true,
+                },
+            },
+            ai: {
+                features: {
+                    ai_summaries: false,
+                },
+            },
         },
         heatmaps: {
             available: true,
             features: {
                 clickmaps: true,
+                dead_taps: true,
                 heatmaps: true,
+                rage_clicks: true,
+                rage_taps: true,
                 scrollmaps: true,
             },
         },

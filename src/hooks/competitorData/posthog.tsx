@@ -14,10 +14,12 @@ export const posthog = {
             available: true,
             features: {
                 clickmaps: true,
+                dead_taps: false,
                 heatmaps: true,
                 scrollmaps: true,
                 movement_maps: true,
                 rage_clicks: true,
+                rage_taps: true,
                 save_heatmaps: false,
                 toolbar: true,
             },
@@ -70,6 +72,7 @@ export const posthog = {
                 chat_with_recordings: true,
                 clickmaps: true,
                 conditional_recording: true,
+                crash_reports: false,
                 event_timeline: true,
                 filter_by_user_or_event: true,
                 highlights: 'Beta',
@@ -119,7 +122,7 @@ export const posthog = {
             },
             ai: {
                 features: {
-                    ai_summaries: 'In alpha',
+                    ai_summaries: 'Beta',
                 },
             },
         },

@@ -23,9 +23,30 @@ export const contentsquare = {
         },
         session_replay: {
             available: true,
+            features: {
+                crash_reports: true,
+                console_logs: true,
+                network_monitor: true,
+            },
+            targeting: {
+                features: {
+                    filter_by_user_or_event: true,
+                },
+            },
+            ai: {
+                features: {
+                    ai_summaries: true,
+                },
+            },
         },
         heatmaps: {
             available: true,
+            features: {
+                dead_taps: false,
+                rage_clicks: true,
+                rage_taps: false,
+                scrollmaps: true,
+            },
         },
         experiments: {
             available: false,

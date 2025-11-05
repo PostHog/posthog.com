@@ -16,6 +16,7 @@ export const clarity = {
                 chat_with_recordings: false,
                 clickmaps: false,
                 conditional_recording: false,
+                crash_reports: false,
                 event_timeline: true,
                 export_to_json: false,
                 export_to_video: false,
@@ -50,11 +51,13 @@ export const clarity = {
             },
             analysis: {
                 features: {
-                    heatmaps: false,
                     console_logs: false,
-                    performance_monitoring: false,
-                    network_monitor: false,
+                    dead_taps: true,
                     dom_explorer: false,
+                    heatmaps: false,
+                    network_monitor: false,
+                    performance_monitoring: false,
+                    rage_taps: true,
                 },
             },
             ai: {
@@ -66,6 +69,7 @@ export const clarity = {
         heatmaps: {
             available: true,
             features: {
+                dead_taps: true,
                 rage_clicks: true,
                 scrollmaps: true,
             },

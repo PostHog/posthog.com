@@ -22,6 +22,14 @@ export const heatmapsFeatures = {
             name: 'Rage clicks',
             description: 'Track repeated clicks in the same place',
         },
+        rage_taps: {
+            name: 'Rage taps',
+            description: 'Identify repetitive taps made out of frustration',
+        },
+        dead_taps: {
+            name: 'Dead taps',
+            description: 'Detect taps on elements that do not respond or trigger an action',
+        },
         scrollmaps: {
             name: 'Scrollmaps',
             description: 'Visualize how far users scroll on your website',

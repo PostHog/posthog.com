@@ -25,7 +25,9 @@ export const uxcam = {
             available: true,
             features: {
                 canvas_recording: false,
+                crash_reports: true,
                 event_timeline: true,
+                filter_by_user_or_event: true,
             },
             analysis: {
                 features: {
@@ -39,11 +41,18 @@ export const uxcam = {
                     web_app_recordings: false,
                 },
             },
+            ai: {
+                features: {
+                    ai_summaries: false,
+                },
+            },
         },
         heatmaps: {
             available: true,
             features: {
+                dead_taps: true,
                 rage_clicks: true,
+                rage_taps: true,
                 scrollmaps: true,
             },
         },

@@ -13,8 +13,7 @@ tags:
     - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. LogRocket
 
@@ -28,33 +27,26 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 #### Supported features
 
-<ComparisonTable column1="LogRocket">
-    <ComparisonRow
-        column1="Android, iOS, React Native"
-        feature="Supported platforms"
-        description="Mobile platforms where session replay is available"
-    />
-    <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
-    <ComparisonRow
-        column1={true}
-        feature="Filters"
-        description="View specific replays based on user segments, screens visited, events"
-    />
-    <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
-    <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-    <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-    <ComparisonRow
-        column1={true}
-        feature="Dead taps"
-        description="Detect taps on elements that do not respond or trigger an action"
-    />
-    <ComparisonRow
-        column1={true}
-        feature="Crash reports"
-        description="Learn what happens before a crash without complex debugging or reproduction"
-    />
-    <ComparisonRow column1={true} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['logrocket']}
+    rows={[
+        {
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'session_replay.ai.ai_summaries',
+    ]}
+/>
 
 ### How much does LogRocket cost?
 
@@ -90,33 +82,27 @@ It's designed to provide deep insights into user behavior, helping product manag
 
 #### Supported features
 
-<ComparisonTable column1="UXCam">
-    <ComparisonRow
-        column1="Android, iOS, React Native, Flutter"
-        feature="Supported platforms"
-        description="Mobile platforms where session replay is available"
-    />
-    <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
-    <ComparisonRow
-        column1={true}
-        feature="Filters"
-        description="View specific replays based on user segments, screens visited, events"
-    />
-    <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
-    <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-    <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-    <ComparisonRow
-        column1={true}
-        feature="Dead taps"
-        description="Detect taps on elements that do not respond or trigger an action"
-    />
-    <ComparisonRow
-        column1={true}
-        feature="Crash reports"
-        description="Learn what happens before a crash without complex debugging or reproduction"
-    />
-    <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['uxcam']}
+    rows={[
+        {
+            path: 'session_replay.platform_support',
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native, Flutter'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'session_replay.ai.ai_summaries',
+    ]}
+/>
 
 ### How much does UXCam cost?
 
@@ -150,33 +136,27 @@ It includes most of the session replay features you would expect, but doesn't su
 
 #### Supported features
 
-<ComparisonTable column1="Microsoft Clarity">
-    <ComparisonRow
-        column1="Android, iOS, React Native"
-        feature="Supported platforms"
-        description="Mobile platforms where session replay is available"
-    />
-    <ComparisonRow column1={false} feature="Debug logs" description="View console logs, network logs" />
-    <ComparisonRow
-        column1={true}
-        feature="Filters"
-        description="View specific replays based on user segments, screens visited, events"
-    />
-    <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
-    <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-    <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-    <ComparisonRow
-        column1={true}
-        feature="Dead taps"
-        description="Detect taps on elements that do not respond or trigger an action"
-    />
-    <ComparisonRow
-        column1={false}
-        feature="Crash reports"
-        description="Learn what happens before a crash without complex debugging or reproduction"
-    />
-    <ComparisonRow column1={true} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['clarity']}
+    rows={[
+        {
+            path: 'session_replay.platform_support',
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'session_replay.ai.ai_summaries',
+    ]}
+/>
 
 ### How much does Microsoft Clarity cost?
 
@@ -198,7 +178,7 @@ According to [reviews on G2](https://www.g2.com/products/microsoft-microsoft-cla
 
 ## 4. PostHog
 
-**Typical users** Engineering and product teams
+**Typical users:** Engineering and product teams
 
 ![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1722527045/posthog.com/contents/posthog-mobile-replay.png)
 
@@ -210,33 +190,27 @@ It's designed for product-minded engineers, growth teams, and product managers w
 
 #### Supported features
 
-<ComparisonTable column1="PostHog">
-    <ComparisonRow
-        column1="Android, iOS, React Native, Flutter"
-        feature="Supported platforms"
-        description="Mobile platforms where session replay is available"
-    />
-    <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
-    <ComparisonRow
-        column1={true}
-        feature="Filters"
-        description="View specific replays based on user segments, screens visited, events"
-    />
-    <ComparisonRow column1={false} feature="Heatmaps" description="Highlight areas that get the most interaction" />
-    <ComparisonRow column1={false} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-    <ComparisonRow column1={false} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-    <ComparisonRow
-        column1={false}
-        feature="Dead taps"
-        description="Detect taps on elements that do not respond or trigger an action"
-    />
-    <ComparisonRow
-        column1={false}
-        feature="Crash reports"
-        description="Learn what happens before a crash without complex debugging or reproduction"
-    />
-    <ComparisonRow column1="Alpha" feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog']}
+    rows={[
+        {
+            path: 'session_replay.platform_support',
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native, Flutter'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'session_replay.ai.ai_summaries',
+    ]}
+/>
 
 ### How much does PostHog cost?
 
@@ -268,33 +242,27 @@ Smartlook combines session replays, product analytics, visualizations, and crash
 
 #### Supported features
 
-<ComparisonTable column1="Smartlook">
-    <ComparisonRow
-        column1="Android, iOS, React Native, Flutter"
-        feature="Supported platforms"
-        description="Mobile platforms where session replay is available"
-    />
-    <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
-    <ComparisonRow
-        column1={true}
-        feature="Filters"
-        description="View specific replays based on user segments, screens visited, events"
-    />
-    <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
-    <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-    <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-    <ComparisonRow
-        column1={true}
-        feature="Dead taps"
-        description="Detect taps on elements that do not respond or trigger an action"
-    />
-    <ComparisonRow
-        column1={true}
-        feature="Crash reports"
-        description="Learn what happens before a crash without complex debugging or reproduction"
-    />
-    <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['smartlook']}
+    rows={[
+        {
+            path: 'session_replay.platform_support',
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native, Flutter'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'session_replay.ai.ai_summaries',
+    ]}
+/>
 
 ### How much does Smartlook cost?
 
@@ -326,33 +294,27 @@ According to [G2](https://www.g2.com/products/smartlook/reviews) reviewers, Smar
 
 #### Supported features
 
-<ComparisonTable column1="FullStory">
-    <ComparisonRow
-        column1="Android, iOS, React Native, Flutter"
-        feature="Supported platforms"
-        description="Mobile platforms where session replay is available"
-    />
-    <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
-    <ComparisonRow
-        column1={true}
-        feature="Filters"
-        description="View specific replays based on user segments, screens visited, events"
-    />
-    <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
-    <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-    <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-    <ComparisonRow
-        column1={true}
-        feature="Dead taps"
-        description="Detect taps on elements that do not respond or trigger an action"
-    />
-    <ComparisonRow
-        column1={false}
-        feature="Crash reports"
-        description="Learn what happens before a crash without complex debugging or reproduction"
-    />
-    <ComparisonRow column1={true} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['fullstory']}
+    rows={[
+        {
+            path: 'session_replay.platform_support',
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native, Flutter'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'session_replay.ai.ai_summaries',
+    ]}
+/>
 
 ### How much does FullStory cost?
 
@@ -384,33 +346,27 @@ Contentsquare is an analytics platform that combines heatmaps, customer journey 
 
 #### Supported features
 
-<ComparisonTable column1="Contentsquare">
-    <ComparisonRow
-        column1="Android, iOS, React Native"
-        feature="Supported platforms"
-        description="Mobile platforms where session replay is available"
-    />
-    <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
-    <ComparisonRow
-        column1={true}
-        feature="Filters"
-        description="View specific replays based on user segments, screens visited, events"
-    />
-    <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
-    <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-    <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-    <ComparisonRow
-        column1={false}
-        feature="Dead taps"
-        description="Detect taps on elements that do not respond or trigger an action"
-    />
-    <ComparisonRow
-        column1={true}
-        feature="Crash reports"
-        description="Learn what happens before a crash without complex debugging or reproduction"
-    />
-    <ComparisonRow column1={true} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['contentsquare']}
+    rows={[
+        {
+            path: 'session_replay.platform_support',
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'session_replay.ai.ai_summaries',
+    ]}
+/>
 
 ### How much does Contentsquare cost?
 

@@ -91,8 +91,8 @@ export const fullstory = {
             features: {
                 canvas_recording: true,
                 chat_with_recordings: false,
-                clickmaps: true,
                 conditional_recording: true,
+                crash_reports: false,
                 event_timeline: true,
                 export_to_json: true,
                 export_to_video: false,
@@ -106,7 +106,6 @@ export const fullstory = {
                 privacy_masking: true,
                 retention_policy: '1 month',
                 screenshot_mode: false,
-                scrollmaps: true,
                 search_by_network: false,
                 share_replays: true,
                 single_page_app: false,
@@ -127,11 +126,14 @@ export const fullstory = {
             },
             analysis: {
                 features: {
-                    heatmaps: true,
                     console_logs: true,
-                    performance_monitoring: true,
-                    network_monitor: true,
+                    dead_taps: true,
                     dom_explorer: false,
+                    heatmaps: true,
+                    network_monitor: true,
+                    performance_monitoring: true,
+                    rage_clicks: true,
+                    rage_taps: true,
                 },
             },
             ai: {

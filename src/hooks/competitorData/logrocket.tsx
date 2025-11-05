@@ -78,10 +78,11 @@ export const logrocket = {
                 chat_with_recordings: false,
                 clickmaps: false,
                 conditional_recording: true,
+                crash_reports: true,
                 event_timeline: true,
                 export_to_json: '',
                 export_to_video: false,
-                filter_by_user_or_event: false,
+                filter_by_user_or_event: true,
                 identity_detection: true,
                 iframe_recording: false,
                 minimum_duration: false,
@@ -121,7 +122,7 @@ export const logrocket = {
             },
             ai: {
                 features: {
-                    ai_summaries: false,
+                    ai_summaries: true,
                 },
             },
         },
@@ -129,8 +130,10 @@ export const logrocket = {
             available: true,
             features: {
                 clickmaps: true,
+                dead_taps: true,
                 heatmaps: true,
                 rage_clicks: true,
+                rage_taps: true,
                 scrollmaps: true,
             },
         },
