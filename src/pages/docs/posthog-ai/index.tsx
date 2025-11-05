@@ -7,10 +7,18 @@ import ReaderView from 'components/ReaderView'
 import OSTable from 'components/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconCheck, IconLogomark } from '@posthog/icons'
-import { IconRewindPlay, IconTrends, IconToggle, IconUser, IconLlmAnalytics, IconDatabase } from '@posthog/icons'
+import {
+    IconRewindPlay,
+    IconTrends,
+    IconToggle,
+    IconUser,
+    IconLlmAnalytics,
+    IconDatabase,
+    IconSparkles,
+} from '@posthog/icons'
 import Card from 'components/Card'
 import Link from 'components/Link'
-import ErrorTrackingDiagram from './error-tracking-diagram'
+import PostHogAIDiagram from './posthog-ai-diagram'
 
 const phFeatures = [
     {
@@ -71,29 +79,39 @@ export const Content = () => {
                 <h2 className="mb-4">Overview</h2>
                 <div>
                     <p>
-                        PostHog AI is a product analyst and assistant that lives inside of the PostHog app. It powers a
-                        range of features and produts, including session replays, product analytics, feature flags, and
-                        more. It's able to leverage the full power of the PostHog platform to answer questions and help
-                        you get things done.
+                        PostHog AI is an agentic, LLM-powered interface for working within the PostHog platform. You can
+                        think of it as the product analyst or assistant that lives inside your PostHog project. It's
+                        here to help you find answers and to get things done fast.
+                        <p>
+                            <p>
+                                Unlike other agents, PostHog AI is deeply connected to your product data and event
+                                schema. It constantly learns from real product usage. Describe what you want in natural
+                                language and it can:
+                            </p>
+                            <ul>
+                                <li>Conduct research and query data to answer product and customer questions</li>
+                                <li>Navigate the PostHog UI to edit filters, create insights, and build dashboards</li>
+                                <li>Access dev tools to write SQL, create feature flags, set up surveys, and more</li>
+                                <li>Summarize and analyze insights, session replays, experiments, and more</li>
+                                <li>Explain features and search PostHog documentation</li>
+                            </ul>
+                        </p>
+                        PostHog AI's main interface is an in-app chat window, but it also appears throughout the
+                        platform as interactive UI elements embedded within PostHog features. For example, you might see
+                        the AI icon{' '}
+                        <span className="inline-block">
+                            <IconSparkles className="h-4 w-4" />
+                        </span>{' '}
+                        when editing filters, a "Fix errors with AI" link in the SQL editor, or an "Analyze results"
+                        button in surveys.
                     </p>
-                    <p>PostHog AI can:</p>
-                    <ul>
-                        <li>Put on a data analyst hat and explore your PostHog data in depth</li>
-                        <li>Create dashboards and generate PostHog data visualizations, such as insights</li>
-                        <li>Interact natively with the PostHog UI, for example by editing filters</li>
-                        <li>Generate complex PostHog SQL queries</li>
-                        <li>Answer questions from PostHog's documentation</li>
-                        <li>Create surveys using natural language</li>
-                        <li>Write Hog functions to power your realtime destinations</li>
-                    </ul>
+                    <p>All of these AI touchpoints are connected and powered by the same underlying PostHog AI core.</p>
                 </div>
 
                 <div className="mt-8 -mx-4 @xl:-mx-8">
                     <ScrollArea fullWidth>
                         <div className="px-4 @xl:px-8">
-                            <ErrorTrackingDiagram
-                                className={`max-h-[28rem] min-h-[22rem] fill-black dark:fill-white`}
-                            />
+                            <PostHogAIDiagram className={`max-h-[36rem] min-h-[22rem] fill-black dark:fill-white`} />
                         </div>
                     </ScrollArea>
                 </div>
@@ -175,7 +193,7 @@ const PostHogAI: React.FC = () => {
                     <Intro
                         subheader="Getting started"
                         title="PostHog AI"
-                        description="Deeply connected with your data, and lives inside of the PostHog app."
+                        description="Deeply connected with your product. Lives inside the PostHog app."
                         buttonText="Get started"
                         buttonLink="/docs/posthog-ai"
                         imageColumnClasses="mt-4 md:-mt-8"
