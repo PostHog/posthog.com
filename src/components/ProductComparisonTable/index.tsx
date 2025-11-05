@@ -863,7 +863,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
     ]
 
     // Build rows
-    const tableRows = parsedRows.map((row, index) => {
+    const allRows = parsedRows.map((row, index) => {
         // Handle header rows - span across all columns
         if (row.type === 'header') {
             return {
@@ -881,6 +881,7 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
                         className: 'col-span-full border-b-2 border-primary bg-accent pb-2',
                     },
                 ],
+                isHeader: true,
             }
         }
 
@@ -908,10 +909,38 @@ export default function ProductComparisonTable({ competitors, rows, width = 'aut
             })),
         ]
 
+        // Check if this row has any data from competitors
+        const hasData = competitors.some((key) => {
+            const value = getFeatureValue(key, row)
+            return value !== undefined && value !== '' && value !== null
+        })
+
         return {
             key: `row-${index}`,
             cells,
+            hasData,
+            isHeader: false,
         }
+    })
+
+    // First pass: filter out feature rows with no data
+    const rowsWithData = allRows.filter((row) => row.isHeader || row.hasData)
+
+    // Second pass: filter out headers that have no feature rows following them
+    const tableRows = rowsWithData.filter((row, index) => {
+        if (!row.isHeader) return true // Keep all feature rows
+
+        // For headers, check if there's at least one non-header row before the next header
+        for (let i = index + 1; i < rowsWithData.length; i++) {
+            if (rowsWithData[i].isHeader) {
+                // Found next header with no feature rows in between
+                return false
+            }
+            // Found a feature row, keep this header
+            return true
+        }
+        // This header is at the end with no feature rows after it
+        return false
     })
 
     return <OSTable columns={columns} rows={tableRows} width={width} />
