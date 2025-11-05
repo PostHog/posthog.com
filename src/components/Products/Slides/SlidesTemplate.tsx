@@ -383,14 +383,39 @@ export default function SlidesTemplate({
                     />
                 )
 
-            case 'feature-comparison':
+            case 'feature-comparison': {
+                const companies = productData?.comparison?.companies || []
+                let competitors = companies.map((c: any) => c.key)
+
+                // Put PostHog first in the comparison (after the feature name column)
+                const posthogIndex = competitors.indexOf('posthog')
+                if (posthogIndex > 0) {
+                    competitors = ['posthog', ...competitors.filter((c: string) => c !== 'posthog')]
+                }
+
+                // Get rows from product data or props override
+                const rows = props.rows || productData?.comparison?.rows
+
+                if (!rows || rows.length === 0) {
+                    return (
+                        <div className="h-full p-8 flex items-center justify-center">
+                            <p className="text-xl text-secondary">No feature comparison available</p>
+                        </div>
+                    )
+                }
+
+                // Get excluded sections from product data
+                const excludedSections = productData?.comparison?.excluded_sections
+
                 return (
                     <FeatureComparisonSlide
-                        features={productData?.comparison?.features || []}
-                        companies={productData?.comparison?.companies}
+                        competitors={competitors}
+                        rows={rows}
+                        excludedSections={excludedSections}
                         {...props}
                     />
                 )
+            }
 
             case 'docs':
                 return (
