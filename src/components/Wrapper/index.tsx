@@ -15,6 +15,8 @@ export default function Wrapper() {
         closingAllWindowsAnimation,
         setClosingAllWindowsAnimation,
         closeAllWindows,
+        rendered,
+        siteSettings,
     } = useApp()
     const [shakeReady, setShakeReady] = useState(false)
     const dotLottieRef = useRef<any>(null)
@@ -31,7 +33,11 @@ export default function Wrapper() {
     }, [])
 
     return (
-        <div className="fixed inset-0 size-full flex flex-col">
+        <div
+            data-app-rendered={rendered}
+            data-app-experience={siteSettings.experience}
+            className="fixed inset-0 size-full flex flex-col"
+        >
             {!compact && <TaskBarMenu />}
             <div ref={constraintsRef} className="flex-grow relative">
                 {ready && <Desktop />}

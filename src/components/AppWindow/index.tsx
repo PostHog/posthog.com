@@ -126,6 +126,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         compact,
         menu: appMenu,
         taskbarRef,
+        setRendered: setAppRendered,
     } = useApp()
     const isSSR = typeof window === 'undefined'
     const controls = useDragControls()
@@ -400,6 +401,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
 
     useEffect(() => {
         setRendered(true)
+        setAppRendered(true)
     }, [])
 
     useEffect(() => {
@@ -564,6 +566,8 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             ref={windowRef}
                             data-app="AppWindow"
                             data-scheme="tertiary"
+                            data-rendered={rendered}
+                            data-path={item.path}
                             suppressHydrationWarning
                             className={`@container absolute !select-auto flex flex-col ${
                                 item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-transparent'

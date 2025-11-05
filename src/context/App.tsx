@@ -124,6 +124,8 @@ interface AppContextType {
     copyDesktopParams: () => void
     desktopCopied: boolean
     shareableDesktopURL: string
+    rendered: boolean
+    setRendered: (rendered: boolean) => void
 }
 
 interface AppProviderProps {
@@ -283,6 +285,8 @@ export const Context = createContext<AppContextType>({
     copyDesktopParams: () => {},
     desktopCopied: false,
     shareableDesktopURL: '',
+    rendered: false,
+    setRendered: () => {},
 })
 
 export interface AppSetting {
@@ -322,7 +326,7 @@ const appSettings: AppSettings = {
         },
         position: {
             center: true,
-            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
+            getPositionDefaults: (size, _windows, getDesktopCenterPosition) => {
                 if (typeof window === 'undefined') {
                     return {
                         x: 0,
@@ -330,18 +334,8 @@ const appSettings: AppSettings = {
                     }
                 }
 
-                const { x, y } = getDesktopCenterPosition(size)
-                const keyboardGardenImageWidth = 700
-                const keyboardGardenImageLeft = window.innerWidth - keyboardGardenImageWidth
-                const windowRight = x + size.width
-                if (windowRight > keyboardGardenImageLeft) {
-                    const newX = x - (windowRight - keyboardGardenImageLeft)
-                    return {
-                        x: newX < 115 ? x : newX,
-                        y,
-                    }
-                }
-                return { x, y }
+                const { y } = getDesktopCenterPosition(size)
+                return { x: 150, y }
             },
         },
     },
@@ -1007,6 +1001,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
     const [desktopCopied, setDesktopCopied] = useState(false)
+    const [rendered, setRendered] = useState(false)
     const urlObj = isSSR ? null : new URL(location.href)
     const queryString = isSSR ? '' : urlObj?.search.substring(1)
     const parsed = isSSR ? {} : qs.parse(queryString)
@@ -2017,6 +2012,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 copyDesktopParams,
                 desktopCopied,
                 shareableDesktopURL,
+                rendered,
+                setRendered,
             }}
         >
             {children}

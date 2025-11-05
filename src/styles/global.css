@@ -2552,3 +2552,252 @@ article.reader-view-content-container:has(.quest-sidebar) {
         display: none;
     }
 }
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-app='AppWindow'] {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) !important;
+    max-width: 90vw;
+    max-height: 90vh;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/'] {
+    max-width: min(850px, 90vw);
+    max-height: min(1000px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+    top: 50%;
+    left: 150px;
+    transform: translateY(-50%) !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/careers-og'] {
+    max-width: min(800px, 90vw);
+    max-height: min(1000px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/product-toolkit'] {
+    max-width: min(800px, 90vw);
+    max-height: min(1000px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/paint'] {
+    max-width: min(2000px, 90vw);
+    max-height: min(2000px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/talk-to-a-human'] {
+    max-width: min(700px, 90vw);
+    max-height: min(552px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='start'],
+:not([data-app-rendered='true']) [data-path='/start'] {
+    max-width: min(850px, 90vw);
+    max-height: min(580px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/about'] {
+    max-width: min(900px, 90vw);
+    max-height: min(1000px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/customer-data-infrastructure'] {
+    max-width: min(1000px, 90vw);
+    max-height: min(1000px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/signup'] {
+    max-width: min(900px, 90vw);
+    max-height: min(750px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/display-options'] {
+    max-width: min(600px, 90vw);
+    max-height: min(550px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/why'] {
+    max-width: min(750px, 90vw);
+    max-height: min(575px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/terms'] {
+    max-width: min(10000px, 90vw);
+    max-height: min(10000px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/privacy'] {
+    max-width: min(10000px, 90vw);
+    max-height: min(10000px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/dpa'] {
+    max-width: min(10000px, 90vw);
+    max-height: min(10000px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/baa'] {
+    max-width: min(10000px, 90vw);
+    max-height: min(10000px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/vibe-check'] {
+    max-width: min(750px, 90vw);
+    max-height: min(575px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/credits'] {
+    max-width: min(300px, 90vw);
+    max-height: min(700px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/kbd'] {
+    max-width: min(600px, 90vw);
+    max-height: min(625px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/demo'] {
+    max-width: min(960px, 90vw);
+    max-height: min(682px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/sales'] {
+    max-width: min(1100px, 90vw);
+    max-height: min(900px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/spicy.mov'] {
+    max-width: min(960px, 90vw);
+    max-height: min(682px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='cher'] {
+    max-width: min(960px, 90vw);
+    max-height: min(682px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='ask-max'] {
+    max-width: min(400px, 90vw);
+    max-height: min(600px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='community-auth-signin'],
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='community-auth-register'],
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='community-auth-forgot-password'],
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='/reset-password'] {
+    max-width: min(470px, 90vw);
+    max-height: min(299px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='search'] {
+    max-width: min(800px, 90vw);
+    max-height: min(72px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='share'] {
+    max-width: min(500px, 90vw);
+    max-height: min(500px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='media-upload'] {
+    max-width: min(900px, 90vw);
+    max-height: min(800px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='cool-tech-jobs-issue'] {
+    max-width: min(500px, 90vw);
+    max-height: min(500px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='cool-tech-jobs-add-a-job'] {
+    max-width: min(600px, 90vw);
+    max-height: min(775px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='signup-embed'] {
+    max-width: min(500px, 90vw);
+    max-height: min(400px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='ask-a-question'] {
+    max-width: min(600px, 90vw);
+    max-height: min(500px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='application-success'] {
+    max-width: min(575px, 90vw);
+    max-height: min(1000px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
+
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='edit-roadmap'],
+[data-app-rendered='false'][data-app-experience='posthog'] [data-path='add-roadmap'] {
+    max-width: min(650px, 90vw);
+    max-height: min(800px, 90vh);
+    height: 100% !important;
+    width: 100% !important;
+}
