@@ -8,6 +8,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 category: PostHog news
+tags:
+  - Product
 ---
 
 We've been building **[Workflows](https://posthog.com/docs/workflows)** for a while now: this is our Zapier-style automation builder you can use to trigger actions based on live user behavior. And, while it’s still in its early days, it’s already packing some serious muscle.
