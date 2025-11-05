@@ -9,8 +9,8 @@ export const ArrayCTA = () => {
             <p className="font-bold text-center relative text-lg mb-0">Want to just try it already?</p>
             <p className="text-xs text-center text-secondary mt-1 mb-6">(Sorry for the shameless CTA.)</p>
             <div className="flex flex-col @sm:flex-row justify-center items-center gap-2 xl:gap-4">
-                <SignupCTA text="Try PostHog - free" size="lg" />
-                <OSButton variant="secondary" asLink to="/talk-to-a-human" size="lg" state={{ newWindow: true }}>
+                <SignupCTA text="Try PostHog - free" size="md" />
+                <OSButton variant="secondary" asLink to="/talk-to-a-human" size="md" state={{ newWindow: true }}>
                     Schedule a demo
                 </OSButton>
             </div>
