@@ -249,11 +249,11 @@ You can also create an opportunity directly from scratch, but make sure to conne
 
 Stages will differ depending on the chosen Opportunity Record Type. The following stages are for the New and Existing Business Record Types:
 
-1. Inbound Lead (10%) - Customer has submitted a contact us form/demo request
-2. Meeting Booked (20%) - Customer has booked a demo or other meeting with us
-3. Demo Completed (40%) - The first demo meeting has happened. At this point we should decide whether to manage them through the hands-on or self-serve pipeline and switch accordingly.
-4. Product Evaluation (50%) - We are assisting them in a guided evaluation of PostHog. We should have a Slack Connect channel and a time-boxed trial period agreed with them.
-5. Commercial & Legal Review (80%) - They have completed their evaluation and PostHog is the right tool for them. We are now working with them on contractual items such as custom pricing, MSAs etc.
+1. Problem Agreement - Buyer explicitly acknowledges they have a meaningful problem that can be qualified (e.g. "What happens if you don't solve this problem?")
+2. Solution Agreement - Buyer confirms our solution is best suited to solve their problem. Can be as simple as "We think PostHog will work for us"
+3. Priority Agreement - A senior decision-maker acknowledges the problem as a priority and validates our solution.
+4. Commercial Agreement - Mutual agreement is reached on price and all contractual terms.
+5. Vendor Approval - Buyer completes internal processes (legal, security, procurement) and contract is executed.
 6. Closed Won (100%) - They have signed the contract and are officially a PostHog customer.
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
 
@@ -291,6 +291,7 @@ The renewal pipeline stages are:
 The "Opportunity Notes" section is to track key actions and next steps to manage an opportunity and avoid missed follow-ups. It has the following fields:
 
 -   Next Steps: Add actions or tasks required to move the opportunity forward. Be clear and concise to ensure anyone reviewing the opportunity understands what needs to happen next.
+  -   For the New Business Sales Team, the Next Step should have three specific elements:  1) a timestamp  -- when was this change made, 2) the owner at the customer for the next step -- who do we expect to take the action? 3) a binary outcome - (what will we/you get) related to the stage, with the next step date reflecting when the outcome is expected.
 -   Next Step Date: Enter the date by which the next step should be completed. This helps in maintaining timelines and keeping follow-ups on track.
 
 ### Opportunity closure details
@@ -299,7 +300,8 @@ This section is to add additional information for opportunities that are won or 
 
 -   Loss Reason: A required field for any opportunity marked as "Closed - Lost." Pick the most appropriate option from the dropdown to help identify patterns.
 -   Additional Loss Context: Optional field to add further insights into the loss. It's great to include specific customer feedback if available.
--   Contract Start Date: Especially important for correct account setup and tracking renewals.
+-   Contract Start Date: Especially important for correct account setup and tracking renewals. This date must match the start date of the customer’s current billing period for which they intend to apply credits. Setting this correctly ensures that any purchased or applied credits can be used immediately for the intended billing cycle.
+    - Example: if a customer’s billing period runs from September 21 to October 21, and they purchase credits on October 15, the contract start date must be September 21 for credits to be applied to their current billing period. If instead the start date is set to a later date, credits would only apply to the next billing period, meaning the customer won't be able to use them right away. [see more info on under contracts](https://posthog.com/handbook/growth/sales/contracts)
 -   Products: Select the products discussed/planned to be used as part of the opportunity. Make sure to include all addons so RevOps can ensure the customer’s subscription is set up correctly.
 -   Contract Link: Link to the contract in PandaDoc for easy access and reference.
 

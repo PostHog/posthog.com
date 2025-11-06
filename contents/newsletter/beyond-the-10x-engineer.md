@@ -107,7 +107,7 @@ Customer obsession guides us toward building products people want, not just what
 Our teams have a lot of autonomy. They decide on their roadmap, goals, and implementation details. To ensure they make the best decision possible, they must be able to analyze and use all the information available to them. This means:
 
 - Analyzing feedback usage and benchmark data.
-- Understanding the competitive landscape (feature sets, pricing).
+- Understanding the competitive landscape (feature sets, [pricing](/newsletter/pricing-advice)).
 - Choosing the right metrics to [measure the success of new features](https://newsletter.posthog.com/p/how-to-build-new-features-users-love).
 - Understanding the infrastructure requirements and scalability.
 

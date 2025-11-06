@@ -5,7 +5,7 @@ import * as Icons from '@posthog/icons'
 export const popularProducts = ['web_analytics', 'product_analytics', 'session_replay', 'feature_flags', 'experiments']
 
 // Newest products to highlight in the menu
-export const newestProducts = ['llm_analytics', 'error_tracking', 'revenue_analytics', 'web_analytics']
+export const newestProducts = ['posthog_ai', 'llm_analytics', 'error_tracking', 'revenue_analytics', 'web_analytics']
 
 // Category ordering for display
 export const categoryOrder = [
@@ -15,8 +15,8 @@ export const categoryOrder = [
     'dataviz',
     'product',
     // 'engineering',
+    'automation',
     'communication',
-    'ai',
     'product_os',
 ] as const
 
@@ -28,8 +28,8 @@ export const categoryDisplayNames: Record<string, string> = {
     dataviz: 'Data visualization',
     product: 'Product',
     // engineering: 'Engineering',
+    automation: 'Automation',
     communication: 'Communication',
-    ai: 'PostHog AI',
     product_os: 'Utilities, add-ons, & packages',
 }
 
@@ -41,8 +41,8 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
     dataviz: { icon: 'IconTrends', color: 'yellow' },
     product: { icon: 'IconApps', color: 'red' },
     // engineering: { icon: 'IconWrench', color: 'gray' },
+    automation: { icon: 'IconBolt', color: 'blue' },
     communication: { icon: 'IconMessage', color: 'sky-blue' },
-    ai: { icon: 'IconSparkles', color: 'purple' },
     product_os: { icon: 'IconGear', color: 'gray' },
 }
 
@@ -71,8 +71,8 @@ export const productOrder: Record<string, string[]> = {
         'sql',
         'bi',
     ],
+    automation: ['posthog_ai', 'webhooks', 'workflows'],
     communication: ['surveys', 'messaging', 'user-interviews'],
-    ai: ['ai', 'max', 'raquel', 'annika', 'marius'],
     product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
 }
 
@@ -115,15 +115,6 @@ export const nonProductPages = {
         url: '/customer-data-infrastructure/destinations',
         icon: 'IconDecisionTree',
         color: 'purple',
-    },
-    ai: {
-        slug: 'ai',
-        url: '/ai',
-        category: 'ai',
-        parentIcon: 'doc',
-        icon: 'IconBrain',
-        color: 'purple',
-        description: 'AI suite',
     },
 }
 

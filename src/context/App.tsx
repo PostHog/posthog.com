@@ -14,6 +14,7 @@ import { useToast } from './Toast'
 import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { themeOptions } from '../hooks/useTheme'
 import ContactSales from 'components/ContactSales'
+import qs from 'qs'
 
 declare global {
     interface Window {
@@ -119,6 +120,10 @@ interface AppContextType {
     setConfetti: (isActive: boolean) => void
     confetti: boolean
     posthogInstance?: string
+    desktopParams?: string
+    copyDesktopParams: () => void
+    desktopCopied: boolean
+    shareableDesktopURL: string
 }
 
 interface AppProviderProps {
@@ -274,6 +279,10 @@ export const Context = createContext<AppContextType>({
     setConfetti: () => {},
     confetti: false,
     posthogInstance: undefined,
+    desktopParams: undefined,
+    copyDesktopParams: () => {},
+    desktopCopied: false,
+    shareableDesktopURL: '',
 })
 
 export interface AppSetting {
@@ -972,8 +981,8 @@ const isLabel = (item: any) => !item?.url && item?.name
 const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
     const siteSettings = {
         experience: 'posthog',
-        colorMode: 'light',
-        theme: 'light',
+        colorMode: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
+        theme: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
         skinMode: 'modern',
         cursor: 'default',
         wallpaper: 'keyboard-garden',
@@ -997,8 +1006,17 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
+    const [desktopCopied, setDesktopCopied] = useState(false)
+    const urlObj = isSSR ? null : new URL(location.href)
+    const queryString = isSSR ? '' : urlObj?.search.substring(1)
+    const parsed = isSSR ? {} : qs.parse(queryString)
+    const paramsWindows = parsed?.windows
+    const stateWindows = element.props?.location?.state?.savedWindows
+
     const [windows, setWindows] = useState<AppWindow[]>(
-        location.key === 'initial' && location.pathname === '/' && isMobile ? [] : getInitialWindows(element)
+        (location.key === 'initial' && location.pathname === '/' && isMobile) || !!paramsWindows
+            ? []
+            : getInitialWindows(element)
     )
     const focusedWindow = useMemo(() => {
         return windows.reduce<AppWindow | undefined>(
@@ -1027,6 +1045,36 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }),
         [destinationNav, transformationNav, sourceWebhooksNav]
     )
+
+    const desktopParams = useMemo(() => {
+        const innerWidth = isSSR ? 0 : window.innerWidth
+        const innerHeight = isSSR ? 0 : window.innerHeight
+
+        const savedWindows = [...windows]
+            .filter((win) => !win.minimized && win.path.startsWith('/'))
+            .sort((a, b) => a.zIndex - b.zIndex)
+            .map((win) => ({
+                path: win.path,
+                position: {
+                    x: (win.position.x / innerWidth) * 100,
+                    y: (win.position.y / (innerHeight - taskbarHeight)) * 100,
+                },
+                size: {
+                    width: (win.size.width / innerWidth) * 100,
+                    height: (win.size.height / innerHeight) * 100,
+                },
+                zIndex: win.zIndex,
+            }))
+
+        return savedWindows.length > 0
+            ? `${location.pathname}?${qs.stringify({ windows: savedWindows }, { encode: false })}`
+            : undefined
+    }, [windows, taskbarHeight, location, isSSR])
+
+    const shareableDesktopURL = useMemo(() => {
+        const url = `${location.origin}${desktopParams}`
+        return url
+    }, [location, desktopParams])
 
     const injectDynamicChildren = useCallback((menu: Menu) => {
         return menu?.map((item) => {
@@ -1117,6 +1165,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                                   path: newWindow.path,
                                   fromHistory: newWindow.fromHistory,
                                   props: newWindow.props,
+                                  location: newWindow.location,
                               }
                             : w
                     )
@@ -1281,8 +1330,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             zIndex?: number
         }
     ) {
-        const size = getInitialSize(element.key)
+        const size = element.props?.location?.state?.size || element.props.size || getInitialSize(element.key)
         const position =
+            element.props?.location?.state?.position ||
             element.props.position ||
             appSettings[element.key]?.position?.getPositionDefaults?.(size, windows, getDesktopCenterPosition) ||
             getPositionDefaults(element.key, size, windows)
@@ -1518,8 +1568,26 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         setWindows([])
     }
 
+    const copyDesktopParams = () => {
+        if (!desktopParams) return
+        try {
+            navigator.clipboard.writeText(shareableDesktopURL)
+            setDesktopCopied(true)
+            setTimeout(() => {
+                setDesktopCopied(false)
+            }, 2000)
+        } catch (error) {
+            console.error(error)
+            addToast({
+                error: true,
+                description: 'Failed to copy desktop link to clipboard',
+                duration: 2000,
+            })
+        }
+    }
+
     useEffect(() => {
-        if (location.key === 'initial' && location.pathname === '/' && isMobile) {
+        if ((location.key === 'initial' && location.pathname === '/' && isMobile) || paramsWindows) {
             return
         }
         updatePages(element)
@@ -1724,6 +1792,15 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     }
                 }
             }
+            if (e.shiftKey && e.key === 'C') {
+                e.preventDefault()
+                if (!desktopParams) return
+                copyDesktopParams()
+                addToast({
+                    description: 'Desktop link copied to clipboard',
+                    duration: 2000,
+                })
+            }
         }
 
         document.addEventListener('keydown', handleKeyDown)
@@ -1845,6 +1922,53 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [])
 
+    const convertWindowsToPixels = (windows: any[]) => {
+        const innerWidth = window.innerWidth
+        const innerHeight = window.innerHeight
+
+        return windows.map((win) => ({
+            ...win,
+            size: {
+                width: (parseFloat(win.size.width) / 100) * innerWidth,
+                height: (parseFloat(win.size.height) / 100) * innerHeight,
+            },
+            position: {
+                x: (parseFloat(win.position.x) / 100) * innerWidth,
+                y: (parseFloat(win.position.y) / 100) * (innerHeight - taskbarHeight),
+            },
+        }))
+    }
+
+    useEffect(() => {
+        if (isSSR) return
+
+        if (paramsWindows) {
+            const [initialWindow, ...rest] = convertWindowsToPixels(parsed.windows)
+
+            navigate(initialWindow.path, {
+                state: {
+                    newWindow: true,
+                    size: initialWindow.size,
+                    position: initialWindow.position,
+                    savedWindows: rest,
+                },
+            })
+        }
+
+        if (stateWindows) {
+            const [nextWindow, ...rest] = stateWindows
+            if (!nextWindow) return
+            navigate(nextWindow.path, {
+                state: {
+                    newWindow: true,
+                    size: nextWindow.size,
+                    position: nextWindow.position,
+                    savedWindows: rest.length > 0 ? rest : undefined,
+                },
+            })
+        }
+    }, [stateWindows])
+
     return (
         <Context.Provider
             value={{
@@ -1889,6 +2013,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 setConfetti,
                 confetti,
                 posthogInstance,
+                desktopParams,
+                copyDesktopParams,
+                desktopCopied,
+                shareableDesktopURL,
             }}
         >
             {children}

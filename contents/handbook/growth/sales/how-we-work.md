@@ -185,7 +185,7 @@ Finally, if you are bringing engineers onto a call, brief them first - what is t
 
 You will run into questions that you don't know the answer to from time to time - this is ok! Some principles here:
 
-- Try to solve your own problems. Deep dive the docs, ask Max AI, ask the rest of the sales team first - a bit of digging is a valuable opportunity for you to learn.
+- Try to solve your own problems. Deep dive the docs, ask PostHog AI, ask the rest of the sales team first - a bit of digging is a valuable opportunity for you to learn.
 - Similar to the above, don't just copy and paste questions from Slack with no context. Add some commentary - 'they have asked X, their use case is generally Y, I think the answer might be Z - is that right?'. Do some of the lifting here, rather than putting all the mental load on an engineering team.
 - If you open a ticket in Zendesk and know which team the ticket needs to go to, make sure to select "escalated" on the ticket so that it will bypass support and go straight to that team.
 

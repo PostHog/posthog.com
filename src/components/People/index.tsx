@@ -44,6 +44,7 @@ export const TeamMember = (props: any) => {
         pineappleOnPizza,
         startDate,
         isTeamLead,
+        viewingOwnTeam,
     } = props
     const [ref, inView] = useInView({
         threshold: 0,
@@ -144,14 +145,20 @@ export const TeamMember = (props: any) => {
                             {isTeamLead && teamData.length > 0 && (
                                 <ZoomHover size="lg" className="cursor-default">
                                     <Tooltip trigger={<Stickers name="StickerCrown" />}>
-                                        Leads the{' '}
-                                        <Link
-                                            to={`/teams/${teamData[0].attributes.slug}`}
-                                            state={{ newWindow: true }}
-                                            className="font-semibold underline"
-                                        >
-                                            {teamData[0].attributes.name} Team
-                                        </Link>
+                                        {viewingOwnTeam ? (
+                                            'Small team lead'
+                                        ) : (
+                                            <>
+                                                Leads the{' '}
+                                                <Link
+                                                    to={`/teams/${teamData[0].attributes.slug}`}
+                                                    state={{ newWindow: true }}
+                                                    className="font-semibold underline"
+                                                >
+                                                    {teamData[0].attributes.name} Team
+                                                </Link>
+                                            </>
+                                        )}
                                     </Tooltip>
                                 </ZoomHover>
                             )}

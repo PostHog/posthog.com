@@ -35,7 +35,7 @@ Once you've established contact, you basically want to get them into the same fl
 
 > Do not push for discounted, credit-based plan no matter what - consider what actually makes sense here! Some customers are very highly likely to stick with PostHog even if they are paying monthly, e.g. if they have many users regularly logging in, lots of product activity, multi-product adoption etc. Do not turn up to a new customer and the first thing they hear from you be 'would you like to pre-purchase credits?'
 
-You'll also go through the same [contracting process](/handbook/growth/sales/contracts#annual-plans-and-more) with them. We usually find that convincing a customer happily paying monthly to switch to prepaid credits is quite difficult, especially if they are a fast-growing startup (who tend to value flexibility over pure cost saving). This means that the discounts may not be as effective. If you're finding this is the case, you can get them on an prepaid credit plan but paying monthly or quarterly and halve the discount you offer. 
+You'll also go through the same [contracting process](/handbook/growth/sales/contracts) with them. We usually find that convincing a customer happily paying monthly to switch to prepaid credits is quite difficult, especially if they are a fast-growing startup (who tend to value flexibility over pure cost saving). This means that the discounts may not be as effective. If you're finding this is the case, you can get them on an prepaid credit plan but paying monthly or quarterly and halve the discount you offer. 
 
 ## Expansion & Cross-sell
 

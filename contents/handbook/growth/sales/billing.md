@@ -13,14 +13,14 @@ All PostHog instances talk to a common external **Billing Service**. This servic
 
 The Billing Service is the source of truth for product information, what plans are offered on those products (eg a free vs a paid plan on Session Replay), and feature entitlements on those plans. Our payment provider Stripe is the source of truth for customer information, invoices, and payments. The billing service communicates with Stripe to pull all the relevant information together before responding to customer requests.
 
-### Annual Plan Automation
+### Credit-based Plan Automation
 
 
-To ensure consistency in the setup of annual plans we have [Zapier Automation](https://zapier.com/app/zaps/folder/1809976) to take care of all of the Stripe-related object setup.
+To ensure consistency in the setup of credit-based plans we have [Zapier Automation](https://zapier.com/app/zaps/folder/1809976) to take care of all of the Stripe-related object setup.
 
 #### Loading contract details
 
-Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
+Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Credit-based Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
 
 ##### Upfront Payment Setup
 
@@ -29,7 +29,7 @@ Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#rout
 If this is a new contract for an existing customer, you will need to add their existing Stripe Customer ID manually to the table. You can find this information in Vitally under Traits. If this is a brand new customer, click “Create Stripe Customer” button to assign them a new ID.
 
 ###### Step 2: Create invoice
-- Go to the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) and click “Create Invoice - Upfront”. This will:
+- Go to the [Credit-based Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) and click “Create Invoice - Upfront”. This will:
   - Create a draft Invoice object against the Stripe Customer Object.
   - Add the ID of the Invoice to the table (for easy review later on). The due date of the invoice will be the Contract Start Date + 30 days which are our standard payment terms. You might need to manually change this if we have different terms with the customer.
 
@@ -62,14 +62,14 @@ If this is a new contract for an existing customer, you will need to add their e
 
 We define late payments as follows:
 
-1. For annual paid up-front customers, that have not made payment and their due date has passed.  Usually this is 30 days from the contract start date (Net 30) although can differ based on other contractual terms.
-2. For monthly usage-based customers, we will attempt 4 automated payments using the card we have on file.  Each failed payment sends an alert to the #sales-alerts Slack channel.  After 4 failed payments we will stop attempting to take further payments.
+1. For credit-based customers, that have not made payment on an invoice and their due date has passed.  The first invoice is usually 30 days from the contract start date (Net 30) although can differ based on other contractual terms. This rule applies to all payment terms, including and not limited to annual and quarterly, regardless whether there are still credits available or not.
+2. For pay-as-you-go usage-based customers, we will attempt 4 automated payments using the card we have on file.  Each failed payment sends an alert to the #sales-alerts Slack channel.  After 4 failed payments we will stop attempting to take further payments.
 
 In either of the above scenarios the account owner as defined in Vitally needs to take action to ensure that payment is made. If there is no owner in Vitally, Simon will handle this process. If you are an AE, remember this also has impact on your commission, as we don't pay out until the customer has paid their invoice.
 
 #### Step 1 - On the day their payment becomes late
 
-You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For annual customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page. To get a payment update link, click on the subscription, then click actions in the top right corner and choose share payment update link. Make it easy for them to make payment by including these details in your email.
+You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For credit-based customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page. To get a payment update link, click on the subscription, then click actions in the top right corner and choose share payment update link. Make it easy for them to make payment by including these details in your email.
 
 > Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they come back to you with genuine reasons why they need more time, use your discretion with the next steps. 
 

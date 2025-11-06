@@ -311,6 +311,7 @@
         { "source": "/travismedia", "destination": "/?utm_source=travismedia&utm_campaign=travismedia" },
         { "source": "/viktor", "destination": "/?utm_source=viktor&utm_campaign=viktor" },
         { "source": "/starterstory", "destination": "/?utm_source=starterstory&utm_campaign=starterstory" },
+        { "source": "/jsmastery", "destination": "/?utm_source=jsmastery&utm_campaign=jsmastery" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
         { "source": "/tutorials/categories/plugins", "destination": "/tutorials/categories/apps" },
         { "source": "/trial", "destination": "/pricing" },
@@ -630,6 +631,7 @@
         { "source": "/docs/experiments/manual", "destination": "/docs/experiments/installation" },
         { "source": "/docs/experiments/under-the-hood", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/significance", "destination": "/docs/experiments/experiment-significance" },
+        { "source": "/docs/experiments/statistics", "destination": "/docs/experiments/statistics-bayesian" },
         { "source": "/docs/session-replay/manual", "destination": "/docs/session-replay/installation" },
         { "source": "/docs/features/feature-flags", "destination": "/docs/feature-flags" },
         { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags" },
@@ -696,7 +698,7 @@
         { "source": "/roadmap/changelog", "destination": "/changelog/2025" },
         { "source": "/blog/posthog-changelog", "destination": "/changelog/2025" },
         { "source": "/roadmap/changelog/2023", "destination": "/changelog/2025" },
-        { "source": "/changelog", "destination": "/changelog/2025" },
+        { "source": "/changelog/2025", "destination": "/changelog" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/apps/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
         { "source": "/cdp/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
@@ -1211,7 +1213,8 @@
         { "source": "/handbook/small-teams/feature-success", "destination": "/teams/feature-success" },
         { "source": "/handbook/small-teams/customer-success", "destination": "/teams/customer-success" },
         { "source": "/handbook/small-teams/growth", "destination": "/teams/growth" },
-        { "source": "/handbook/small-teams/data-warehouse", "destination": "/teams/data-warehouse" },
+        { "source": "/handbook/small-teams/data-warehouse", "destination": "/teams/data-stack" },
+        { "source": "/teams/data-warehouse", "destination": "/teams/data-stack" },
         { "source": "/handbook/small-teams/infrastructure", "destination": "/teams/infrastructure" },
         { "source": "/handbook/small-teams/pipeline", "destination": "/teams/pipeline" },
         { "source": "/handbook/small-teams/web-analytics", "destination": "/teams/web-analytics" },
@@ -1283,6 +1286,7 @@
         { "source": "/docs/cdp/route-censor", "destination": "/docs/cdp" },
         { "source": "/docs/cdp/semver-flattener", "destination": "/docs/cdp" },
         { "source": "/docs/experiments/experiment-significance", "destination": "/docs/experiments/statistics" },
+        { "source": "/docs/experiments/frequentist-method", "destination": "/docs/experiments/statistics-frequentist" },
         { "source": "/handbook/product/in-app-prompts", "destination": "/docs/surveys" },
         { "source": "/docs/webhooks", "destination": "/docs/cdp/destinations" },
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
@@ -1365,6 +1369,8 @@
             "destination": "/handbook/content/tags-and-categories"
         },
         { "source": "/handbook/growth/marketing/components", "destination": "/handbook/content/components" },
+        { "source": "/handbook/content/writing-for-posthog", "destination": "/handbook/content" },
+        { "source": "/handbook/content/tags-and-categories", "destination": "/handbook/content/metadata" },
         { "source": "/handbook/growth/marketing/paid", "destination": "/handbook/brand/paid" },
         {
             "source": "/handbook/growth/marketing/value-propositions",
@@ -1466,7 +1472,11 @@
         },
         {
             "source": "/max-ai",
-            "destination": "/max"
+            "destination": "/ai"
+        },
+        {
+            "source": "/max",
+            "destination": "/ai"
         },
         {
             "source": "/docs/surveys/webhook",
@@ -1616,7 +1626,25 @@
         { "source": "/eu", "destination": "/pricing" },
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
-        { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" }
+        { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" },
+        {
+            "source": "/docs/max-ai",
+            "destination": "/docs/posthog-ai"
+        },
+        {
+            "source": "/docs/libraries/js/features",
+            "destination": "/docs/libraries/js/usage"
+        },
+        {
+            "source": "/handbook/engineering/on-call-rotation",
+            "destination": "/handbook/engineering/operations/on-call-rotation"
+        },
+        { "source": "/handbook/engineering/incidents", "destination": "/handbook/engineering/operations/incidents" },
+        {
+            "source": "/handbook/engineering/support-hero",
+            "destination": "/handbook/engineering/operations/support-hero"
+        },
+        { "source": "/handbook/who-we-are-building-for", "destination": "/handbook/who-we-build-for" }
     ],
     "headers": [
         {

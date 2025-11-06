@@ -52,25 +52,25 @@ After choosing one, you are brought to a form where you can complete the details
 
 <ProductScreenshot imageLight={newSurveyLight} imageDark={newSurveyDark} alt="Create a survey" classes="rounded" />
 
-## Max AI and surveys
+## PostHog AI and surveys
 
-[Max](/max), PostHog's AI-powered assistant, can help you create surveys quickly using natural language. Max understands different question types and can:
+[PostHog AI](/docs/posthog-ai), PostHog's AI-powered assistant, can help you create surveys quickly using natural language. PostHog AI understands different question types and can:
 
 -   Generate complete surveys based on your research goals
 -   Suggest appropriate question types (freeform text, rating scales, multiple choice, etc.)
 -   Help you set up display conditions and targeting
 -   Recommend survey templates for common use cases
 
-You can ask Max things like:
+You can ask PostHog AI things like:
 
 -   "Create an NPS survey for my mobile app users"
 -   "Build a product satisfaction survey with rating questions"
 -   "Help me create a survey to understand why users churn"
 -   "Generate a post-purchase feedback survey"
 
-To get started, click "Max" in the top right corner of the PostHog app and describe what kind of survey you want to create.
+To get started, click "PostHog AI" in the top right corner of the PostHog app and describe what kind of survey you want to create.
 
-> **Note:** Max is currently in beta, so you may encounter occasional issues. We appreciate any feedback you can share to help us improve!
+> **Note:** PostHog AI is currently in beta, so you may encounter occasional issues. We appreciate any feedback you can share to help us improve!
 
 ## Creating a new survey
 
@@ -111,6 +111,67 @@ https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123
 
 Without the parameter, responses are collected anonymously and cannot be linked to users.
 With the parameter, responses are attributed to the specified user, enabling you to see survey data alongside other user events and properties.
+
+#### Pre-filling survey responses via URL
+
+You can pre-fill survey answers using URL parameters, which is especially useful for creating one-click survey links in emails. This feature works with single choice, multiple choice, and rating questions.
+
+**Basic syntax:**
+
+```
+https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123&q0=2&q1=8
+```
+
+- `q{N}` = question index (0-based, e.g., `q0` for the first question, `q1` for the second)
+- Value = choice index (for single/multiple choice) or rating number
+
+**Examples:**
+
+**Single choice question:**
+```
+# Pre-select the 3rd choice (index 2) for the first question
+?distinct_id=user123&q0=2
+```
+
+**Rating question:**
+```
+# Pre-fill a rating of 9 out of 10
+?distinct_id=user123&q0=9
+```
+
+**Multiple choice question:**
+```
+# Pre-select choices at index 0 and 2 (use repeated parameters)
+?distinct_id=user123&q0=0&q0=2
+```
+
+**Multiple questions:**
+```
+# Pre-fill first question (choice 3) and second question (rating 8)
+?distinct_id=user123&q0=3&q1=8
+```
+
+**Auto-submit (one-click surveys):**
+
+Add `auto_submit=true` to automatically submit the survey when all required questions are pre-filled. This is perfect for email surveys where clicking a link should instantly submit the response:
+
+```
+# One-click email survey - click the link and the response is submitted
+?distinct_id=user123&q0=2&auto_submit=true
+```
+
+When auto-submit is enabled:
+- The survey auto-submits immediately if all required questions are pre-filled
+- Users see a confirmation message ("Thanks! Your response was recorded")
+- The form remains visible so users can optionally add more feedback
+- If required questions are missing, the survey shows normally without auto-submitting
+
+**Important notes:**
+- Question indices are 0-based (first question is `q0`, second is `q1`, etc.)
+- Choice indices are also 0-based (first choice is `0`, second is `1`, etc.)
+- Invalid indices are silently ignored
+- Pre-filling only works with choice and rating questions (not open text)
+- Users can still modify pre-filled answers before submitting (unless auto-submit is used)
 
 ### Steps
 

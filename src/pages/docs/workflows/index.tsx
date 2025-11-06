@@ -82,7 +82,7 @@ export const Content = () => {
                 <p>Workflows is currently in early beta. While in beta, workflows is free to use.</p>
                 <p>
                     After the beta, pricing will be based on how many real-time destinations you use and how many
-                    messages you send each month. You’ll get 10,000 destinations or messages free each month, with
+                    messages you send each month. You'll get 10,000 destinations or messages free each month, with
                     discounts as your usage grows.
                 </p>
             </section>
@@ -100,15 +100,15 @@ export const Content = () => {
                     />
                     <ResourceItem
                         type="Quickstart"
-                        title="Set up a messaging channel"
-                        description="Configure a messaging channel for your first workflow"
+                        title="Set up a channel"
+                        description="Configure a channel for your first workflow"
                         url="/docs/workflows/configure-channels"
                     />
                     <ResourceItem
                         type="Concepts"
-                        title="Issues and exceptions"
-                        description="Learn how to manage and track issues and exceptions"
-                        url="/docs/error-tracking/issues-and-exceptions"
+                        title="The workflow builder"
+                        description="Learn how to use the workflow builder to create your first workflow"
+                        url="/docs/workflows/workflow-builder"
                     />
                 </ul>
             </section>

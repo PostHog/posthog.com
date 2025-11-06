@@ -1,9 +1,5 @@
-import cntl from 'cntl'
-import Layout from 'components/Layout'
-import React, { useEffect, useState, useLayoutEffect, useRef } from 'react'
+import React, { useEffect, useState, useLayoutEffect, useRef, useCallback } from 'react'
 import SEO from 'components/seo'
-import Link from 'components/Link'
-import Tooltip from 'components/Tooltip'
 import Explorer from 'components/Explorer'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
@@ -16,340 +12,187 @@ import am5geodata_usaLow from '@amcharts/amcharts5-geodata/usaLow'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 import { ZoomImage } from 'components/ZoomImage'
 import { useWindow } from '../context/Window'
+import { graphql, useStaticQuery } from 'gatsby'
+import dayjs from 'dayjs'
+import { AnimatePresence, motion } from 'framer-motion'
+import EventForm from 'components/EventForm'
+import { useUser } from 'hooks/useUser'
+import qs from 'qs'
+import { IconPencil, IconTrash } from '@posthog/icons'
+import { useToast } from '../context/Toast'
 
-type Event = {
+export type Event = {
     date: string // YYYY-MM-DD
-    startTime?: string // HH:MM in 24hr format
     name: string
     description?: string
     location: {
         label: string // Location display name
         lat?: number
         lng?: number
-        venue?: string // Venue name
+        venue?: {
+            name: string
+        }
     }
     private?: boolean
-    format?: string
+    format?: string[]
     audience?: string[]
     speakers?: string[]
     speakerTopic?: string
     partners?: Array<{ name: string; url?: string }>
     attendees?: number
     vibeScore?: number
-    photos?: string[]
+    photos?: { id: number; url: string }[]
     video?: string
-    deck?: string
+    presentation?: string
     link?: string
+    startTime?: string // HH:mm format
+    id: number
 }
 
-// Helper to parse month name to number
-const parseMonth = (monthStr: string): number => {
-    const months: { [key: string]: number } = {
-        January: 0,
-        February: 1,
-        March: 2,
-        April: 3,
-        May: 4,
-        June: 5,
-        July: 6,
-        August: 7,
-        September: 8,
-        October: 9,
-        November: 10,
-        December: 11,
+const transformStrapiEvent = (strapiEvent: any): Event => {
+    const {
+        private: isPrivate,
+        speakers: speakersData,
+        partners: partnersData,
+        photos: photosData,
+    } = strapiEvent.attributes
+
+    const photos = photosData?.data?.map((photo: any) => ({ id: photo.id, url: photo.attributes?.url }))
+    const speakers = speakersData?.data?.map((s: any) =>
+        [s.attributes?.firstName, s.attributes?.lastName].filter(Boolean).join(' ')
+    )
+    const partners = partnersData?.map((p: any) => ({ name: p.name, url: p.url || undefined }))
+
+    return {
+        ...strapiEvent.attributes,
+        private: isPrivate === true,
+        speakers,
+        partners,
+        photos,
+        id: strapiEvent.id,
     }
-    return months[monthStr] || 0
 }
 
-// Helper to parse time to 24hr format
-const parseTime = (timeStr?: string): string | undefined => {
-    if (!timeStr) return undefined
-    const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i)
-    if (!match) return undefined
-    const [_, hours, minutes, period] = match
-    let hour = parseInt(hours)
-    if (period.toUpperCase() === 'PM' && hour !== 12) hour += 12
-    if (period.toUpperCase() === 'AM' && hour === 12) hour = 0
-    return `${hour.toString().padStart(2, '0')}:${minutes}`
+const useEvents = (): { events: Event[]; refreshEvents: () => void; deleteEvent: (eventId: number) => void } => {
+    const { getJwt } = useUser()
+    const { addToast } = useToast()
+    const [events, setEvents] = useState<Event[]>([])
+    const fetchEvents = async (page = 1) => {
+        try {
+            const eventsQuery = qs.stringify(
+                {
+                    pagination: {
+                        page,
+                        pageSize: 100,
+                    },
+                    sort: ['date:desc'],
+                    populate: {
+                        location: {
+                            populate: ['venue'],
+                        },
+                        photos: true,
+                        speakers: true,
+                        partners: true,
+                    },
+                },
+                { encodeValuesOnly: true }
+            )
+            const eventsUrl = `${process.env.GATSBY_SQUEAK_API_HOST}/api/events?${eventsQuery}`
+            const response = await fetch(eventsUrl)
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch events: ${response.statusText}`)
+            }
+
+            const { data: events, meta } = await response.json()
+
+            if (!events || !Array.isArray(events)) {
+                throw new Error('Invalid response format: events data is missing or malformed')
+            }
+
+            setEvents((prev) => [...prev, ...events.map(transformStrapiEvent)])
+
+            if (meta?.pagination?.pageCount > meta?.pagination?.page) {
+                await fetchEvents(page + 1)
+            }
+        } catch (error: any) {
+            console.error('Error fetching events:', error)
+            addToast({
+                title: 'Failed to load events',
+                description: error?.message || 'An unexpected error occurred while loading events.',
+                error: true,
+            })
+        }
+    }
+
+    const deleteEvent = async (eventId: number) => {
+        if (confirm('Are you sure you want to delete this event?')) {
+            try {
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/events/${eventId}`, {
+                    headers: {
+                        Authorization: `Bearer ${await getJwt()}`,
+                    },
+                    method: 'DELETE',
+                })
+
+                if (!response.ok) {
+                    throw new Error(response.statusText)
+                }
+
+                addToast({ title: 'Event deleted', description: 'The event was deleted successfully.' })
+                refreshEvents()
+            } catch (error: any) {
+                addToast({
+                    title: 'Failed to delete event',
+                    description: error?.message || 'An unexpected error occurred while deleting the event.',
+                    error: true,
+                })
+            }
+        }
+    }
+
+    const refreshEvents = useCallback(() => {
+        setEvents([])
+        fetchEvents()
+    }, [])
+
+    useEffect(() => {
+        refreshEvents()
+    }, [])
+
+    return { events, refreshEvents, deleteEvent }
 }
 
-// Helper to split comma-separated values
-const splitValues = (str?: string): string[] | undefined => {
-    if (!str || str === '-') return undefined
-    return str
-        .split(',')
-        .map((s) => s.trim())
-        .filter(Boolean)
-}
+const EventCard = ({ children, onClose }: { children: React.ReactNode; onClose: () => void }) => {
+    return (
+        <motion.div
+            initial={{ opacity: 0, translateX: '-50%' }}
+            animate={{ opacity: 1, translateX: 0 }}
+            exit={{ opacity: 0, translateX: '-50%' }}
+            transition={{ duration: 0.3 }}
+            className="absolute left-4 top-4 bottom-4 w-96 rounded bg-primary border border-primary shadow-lg z-10 overflow-hidden flex flex-col"
+        >
+            <button
+                onClick={onClose}
+                className="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center rounded hover:bg-accent text-primary hover:text-primary text-xl leading-none"
+            >
+                ✕
+            </button>
 
-// Helper to parse partners
-const parsePartners = (str?: string): Array<{ name: string; url?: string }> | undefined => {
-    const values = splitValues(str)
-    if (!values) return undefined
-    return values.map((name) => ({ name }))
+            <ScrollArea className="flex-1">{children}</ScrollArea>
+        </motion.div>
+    )
 }
-
-const eventsData: Event[] = [
-    {
-        date: '2025-07-10',
-        name: 'MCP After Hours: AI Dev Tools Demo Night',
-        location: { label: 'San Francisco, CA' },
-        format: 'Talks',
-        audience: splitValues('Founders, engineers'),
-        speakers: splitValues('Peter Kirkham'),
-        partners: parsePartners('Speakeasy'),
-        attendees: 85,
-        vibeScore: 3,
-        link: 'https://github.com/PostHog/meta/issues/325',
-    },
-    {
-        date: '2025-07-22',
-        name: 'AGI Builders Meetup with PostHog',
-        location: { label: 'San Francisco, CA' },
-        format: 'Talks, Fireside',
-        audience: splitValues('SF AI Enthusiasts'),
-        speakers: splitValues('Peter Kirkham, James Hawkins'),
-        partners: parsePartners('AGI Builders'),
-        attendees: 112,
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/company-internal/issues/1999',
-    },
-    {
-        date: '2025-07-24',
-        name: 'Stealth Mode Mornings with PostHog',
-        location: { label: 'New York City, NY' },
-        format: 'Breakfast',
-        audience: splitValues('Stealth founders'),
-        speakers: splitValues('Mine Kansu'),
-        partners: parsePartners('Starcycle, Cooley'),
-        attendees: 7,
-        vibeScore: 2,
-        link: 'https://github.com/PostHog/meta/issues/330',
-    },
-    {
-        date: '2025-08-12',
-        name: 'AI Product Breakfast: AI Decisioning',
-        location: { label: 'Austin, TX' },
-        format: 'Breakfast + OST',
-        audience: splitValues('AI Engineers'),
-        speakers: splitValues('Haven Barnes'),
-        partners: parsePartners('AITX'),
-        attendees: 25,
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/334',
-    },
-    {
-        date: '2025-08-21',
-        name: 'Building With and For AI: Developer Tools for Modern Apps',
-        location: { label: 'New York City, NY' },
-        format: 'Talks, Networking',
-        audience: splitValues('Engineers, Engineering managers'),
-        speakers: splitValues('Abe Basu'),
-        partners: parsePartners('Vercel, Profound'),
-        attendees: 50,
-        vibeScore: 3,
-        link: 'https://github.com/PostHog/meta/issues/342',
-    },
-    {
-        date: '2025-08-26',
-        name: 'The Future of Developer Experience: Toronto Edition',
-        location: { label: 'Toronto, Canada' },
-        format: 'Talks, Networking',
-        audience: splitValues('Startup founders'),
-        speakers: splitValues('Vincent Ge'),
-        partners: parsePartners('Deskree'),
-        attendees: 75,
-        vibeScore: 3,
-        link: 'https://github.com/PostHog/meta/issues/347',
-    },
-    {
-        date: '2025-08-31',
-        name: 'Pubquiz at Flutter & friends',
-        location: { label: 'Stockholm, Sweeden' },
-        format: 'Pub quiz',
-        audience: splitValues('Flutter engineers'),
-        speakers: splitValues('Manoel Aranda Neto'),
-        attendees: 50,
-        vibeScore: 2,
-        link: 'https://github.com/PostHog/meta/issues/358',
-    },
-    {
-        date: '2025-09-14',
-        name: 'Valio Con',
-        location: { label: 'Oceanside, CA', lat: 33.1939, lng: -117.3827, venue: 'Seabird Hotel' },
-        format: 'Conference sponsorship',
-        audience: splitValues('Designers, Creatives'),
-        speakers: splitValues('Cory Watilo'),
-        speakerTopic: 'Why doing design wrong feels so right',
-        attendees: 65,
-        vibeScore: 4,
-        photos: ['https://res.cloudinary.com/dmukukwp6/image/upload/cory_valio_con_c6989afcef.jpeg'],
-        deck: 'https://www.figma.com/slides/nteoqVgdXmpjeQAOLIyTm7/Valio-Con-2025?node-id=1-42&t=khKhBYwd4m5wkAp4-1',
-        link: 'https://github.com/PostHog/meta/issues/343',
-    },
-    {
-        date: '2025-09-16',
-        name: 'PostHog hardware hacknight',
-        location: { label: 'Vermont' },
-        format: 'Meetup',
-        audience: splitValues('Engineers and founders'),
-        speakers: splitValues('Danilo Campos'),
-        attendees: 19,
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/322',
-    },
-    {
-        date: '2025-09-23',
-        name: 'PostHog Founders Lunch',
-        location: { label: 'Cardiff, UK' },
-        format: 'Lunch + OST',
-        audience: splitValues('Founders'),
-        speakers: splitValues('Adam Leith'),
-        attendees: 25,
-        vibeScore: 4,
-        link: 'https://github.com/PostHog/meta/issues/372',
-    },
-    {
-        date: '2025-09-24',
-        name: 'James dinner with ODF founders',
-        location: { label: 'San Francisco, CA' },
-        private: true,
-        format: 'Dinner',
-        audience: splitValues('Founders'),
-        speakers: splitValues('James Hawkins'),
-        partners: parsePartners('ODF'),
-        attendees: 11,
-        vibeScore: 4,
-        link: 'https://posthog.slack.com/archives/C08CG24E3SR/p1758828510754499',
-    },
-    {
-        date: '2025-09-24',
-        name: "München Hogtoberfest '25",
-        location: { label: 'Munich, Germany' },
-        format: 'Drinks',
-        audience: splitValues('Founders, Engineers'),
-        partners: parsePartners('Speedinvest'),
-        attendees: 7,
-        vibeScore: 2,
-        link: 'https://github.com/PostHog/meta/issues/361',
-    },
-    {
-        date: '2025-09-25',
-        name: 'MCP Builders Breakfast',
-        location: { label: 'Amsterdam, Denmark' },
-        format: 'Breakfast + OST',
-        audience: splitValues('MCP practitioners'),
-        speakers: splitValues('Jonathan Mieloo'),
-        partners: parsePartners('Fiberplane'),
-        attendees: 20,
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/356',
-    },
-    {
-        date: '2025-09-26',
-        name: "From Open Source to Scale: A Conversation with PostHog's Tim Glaser",
-        location: { label: 'Dublin, Ireland' },
-        format: 'Panel',
-        audience: splitValues('Founders'),
-        speakers: splitValues('Tim Glaser'),
-        attendees: 55,
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/371',
-    },
-    {
-        date: '2025-09-28',
-        name: 'Paellas and Agents with PostHog',
-        location: { label: 'Barcelona, Spain' },
-        format: 'Workshop',
-        audience: splitValues('AI engineers'),
-        speakers: splitValues('Georgiy Tarasov'),
-        attendees: 22,
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/333',
-    },
-    {
-        date: '2025-09-30',
-        name: 'Jersey City Tech Meetup with PostHog',
-        location: { label: 'Jersey City, New Jersey' },
-        format: 'Talks, Panel, Networking',
-        audience: splitValues('Product managers and engineers'),
-        speakers: splitValues('Abe Basu'),
-        partners: parsePartners('Apprentice.io'),
-        attendees: 70,
-        vibeScore: 4,
-        link: 'https://github.com/PostHog/meta/issues/339',
-    },
-    {
-        date: '2025-10-10',
-        name: 'Product Weekend',
-        location: { label: 'Toronto, Canada', lat: 43.6532, lng: -79.3832 },
-        format: 'Workshop',
-        audience: splitValues('Product managers'),
-        speakers: splitValues('Zach Waterfield'),
-        link: 'theproductweekend.com/toronto-oct2025',
-    },
-    {
-        date: '2025-10-14',
-        startTime: '18:00',
-        name: 'AI LA Salon with PostHog',
-        location: { label: 'Los Angeles, CA', lat: 34.0522, lng: -118.2437 },
-        format: 'Talks',
-        audience: splitValues('Founders and engineers'),
-        speakers: splitValues('Raquel Smith'),
-        partners: parsePartners('AI LA'),
-        link: 'lu.ma/ailasalon-posthog',
-    },
-    {
-        date: '2025-10-15',
-        startTime: '17:30',
-        name: 'MCP After Hours London: AI Tooling Demos',
-        location: { label: 'London, UK', lat: 51.5074, lng: -0.1278 },
-        format: 'Demos',
-        audience: splitValues('AI engineers'),
-        speakers: splitValues('Joshua Snyder'),
-        partners: parsePartners('Speakeasy'),
-        link: 'https://luma.com/3f2mh0no',
-    },
-    {
-        date: '2025-10-16',
-        startTime: '19:00',
-        name: 'Dev Korea #3',
-        location: { label: 'Seoul, South Korea', lat: 37.5665, lng: 126.978, venue: 'Google for Startups Campus' },
-        format: 'Talks, Networking',
-        audience: splitValues('Developers'),
-        speakers: splitValues('Max Wiersma'),
-        speakerTopic: 'Using PostHog to prioritize and understand user needs',
-        link: 'https://dev-korea.com/events/dev-korea-3-october-2025',
-    },
-    {
-        date: '2025-10-21',
-        startTime: '17:30',
-        name: 'Granola Fireside with James Hawkins',
-        location: { label: 'London, UK', lat: 51.5074, lng: -0.1278 },
-        format: 'Fireside chat',
-        audience: splitValues('Founders and engineers'),
-        speakers: splitValues('James Hawkins'),
-        partners: parsePartners('Granola'),
-        link: 'https://luma.com/t5e4fyah',
-    },
-    {
-        date: '2025-11-14',
-        startTime: '15:00',
-        name: 'Product Weekend',
-        location: { label: 'Dublin, Ireland', lat: 53.3498, lng: -6.2603 },
-        format: 'Workshop',
-        audience: splitValues('Product managers'),
-        speakers: splitValues('Alessandro Pogliaghi'),
-        speakerTopic: 'Leveraging AI in Product Development',
-        link: 'https://theproductweekend.com/dublin-nov2025',
-    },
-]
 
 function Events() {
+    const { isModerator } = useUser()
+    const { events: eventsData, refreshEvents, deleteEvent } = useEvents()
     const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('upcoming')
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
     const [hoveredEvent, setHoveredEvent] = useState<Event | null>(null)
     const [chartKey, setChartKey] = useState(0)
+    const [creatingEvent, setCreatingEvent] = useState(false)
+    const [editingEvent, setEditingEvent] = useState<boolean>(false)
     const chartRef = useRef<HTMLDivElement>(null)
     const chartInstanceRef = useRef<am5map.MapChart | null>(null)
     const pointSeriesRef = useRef<am5map.ClusteredPointSeries | null>(null)
@@ -358,7 +201,7 @@ function Events() {
     // Generate unique event key
     const getEventKey = (event: Event) => {
         const slug = event.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')
-        return `${event.date}-${slug}`
+        return `${event.date}-${event.id}-${slug}`
     }
 
     const today = new Date()
@@ -374,6 +217,8 @@ function Events() {
 
     const handleEventClick = (event: Event) => {
         setSelectedEvent(event)
+        setEditingEvent(false)
+        setCreatingEvent(false)
         // Hide tooltip and zoom to the event location with animation (deeper zoom for active state)
         if (chartInstanceRef.current && pointSeriesRef.current && event.location.lat && event.location.lng) {
             pointSeriesRef.current.hideTooltip()
@@ -525,10 +370,10 @@ function Events() {
                 })
             }
 
-            // Attach zoom handlers
-            ;(chart.events as any).on('wheelended', updateBordersAndStates)
-            ;(chart.events as any).on('panended', updateBordersAndStates)
-            ;(chart.events as any).on('zoomended', updateBordersAndStates)
+                // Attach zoom handlers
+                ; (chart.events as any).on('wheelended', updateBordersAndStates)
+                ; (chart.events as any).on('panended', updateBordersAndStates)
+                ; (chart.events as any).on('zoomended', updateBordersAndStates)
 
             // Run once to set initial state
             updateBordersAndStates()
@@ -557,8 +402,8 @@ function Events() {
                     fill: isSelected
                         ? am5.color(0x2f80fa) // Blue when selected (active)
                         : isHovered
-                        ? am5.color(0xef4444) // Red when hovered
-                        : am5.color(0xff9500), // Orange by default
+                            ? am5.color(0xef4444) // Red when hovered
+                            : am5.color(0xff9500), // Orange by default
                     stroke: am5.color(0xffffff), // Always white border
                     strokeWidth: isSelected ? 3 : 2,
                     tooltipText: '{name}\n{location}\n{date}',
@@ -582,12 +427,12 @@ function Events() {
                 }
             })
 
-            // Adjust marker size to remain constant at different zoom levels
-            ;(chart.events as any).on('wheelended', () => {
-                const zoomLevel = chart.get('zoomLevel', 1)
-                const baseScale = 1 / Math.sqrt(zoomLevel)
-                circle.set('scale', Math.max(baseScale, 0.6))
-            })
+                // Adjust marker size to remain constant at different zoom levels
+                ; (chart.events as any).on('wheelended', () => {
+                    const zoomLevel = chart.get('zoomLevel', 1)
+                    const baseScale = 1 / Math.sqrt(zoomLevel)
+                    circle.set('scale', Math.max(baseScale, 0.6))
+                })
 
             return am5.Bullet.new(root, {
                 sprite: container,
@@ -693,13 +538,13 @@ function Events() {
 
         pointSeries.set('tooltip', tooltip)
 
-        // Hide tooltip when zoom/pan starts
-        ;(chart.events as any).on('wheelstarted', () => {
-            pointSeries.hideTooltip()
-        })
-        ;(chart.events as any).on('panstarted', () => {
-            pointSeries.hideTooltip()
-        })
+            // Hide tooltip when zoom/pan starts
+            ; (chart.events as any).on('wheelstarted', () => {
+                pointSeries.hideTooltip()
+            })
+            ; (chart.events as any).on('panstarted', () => {
+                pointSeries.hideTooltip()
+            })
 
         // Function to update cluster colors based on hover state
         const updateClusterColors = () => {
@@ -777,8 +622,8 @@ function Events() {
 
         // Store reference for use in effects
         chartInstanceRef.current = chart
-        ;(chartInstanceRef.current as any).updateClusterColors = updateClusterColors
-        ;(chartInstanceRef.current as any).clusterBullets = clusterBullets
+            ; (chartInstanceRef.current as any).updateClusterColors = updateClusterColors
+            ; (chartInstanceRef.current as any).clusterBullets = clusterBullets
 
         // Handle window/container resize
         let lastWidth = 0
@@ -934,7 +779,7 @@ function Events() {
                     const clusterBullets = (chartInstanceRef.current as any).clusterBullets
                     console.log('🔵 Total cluster bullets:', clusterBullets?.size || 0)
                 }
-                ;(chartInstanceRef.current as any).updateClusterColors()
+                (chartInstanceRef.current as any).updateClusterColors()
             }, 50)
         }
     }, [displayEvents, selectedEvent, hoveredEvent])
@@ -1019,6 +864,13 @@ function Events() {
         }
     }, [selectedEvent, displayEvents])
 
+    useEffect(() => {
+        const newSelectedEvent = selectedEvent && eventsData.find((event) => selectedEvent.id === event.id)
+        if (newSelectedEvent && newSelectedEvent !== selectedEvent) {
+            setSelectedEvent(newSelectedEvent)
+        }
+    }, [eventsData])
+
     return (
         <>
             <SEO
@@ -1055,6 +907,20 @@ function Events() {
                         <ScrollArea className="flex-1">
                             <div className="p-4 h-96 @xl:h-full">
                                 <div className="space-y-3">
+                                    {isModerator && (
+                                        <OSButton
+                                            variant="primary"
+                                            width="full"
+                                            size="md"
+                                            onClick={() => {
+                                                setCreatingEvent(true)
+                                                setSelectedEvent(null)
+                                                setEditingEvent(false)
+                                            }}
+                                        >
+                                            Add event
+                                        </OSButton>
+                                    )}
                                     {displayEvents.map((event) => (
                                         <OSButton
                                             data-scheme="primary"
@@ -1067,11 +933,10 @@ function Events() {
                                             zoomHover="md"
                                             className={`bg-primary border border-primary active:bg-primary
                       
-                      ${
-                          selectedEvent && getEventKey(selectedEvent) === getEventKey(event)
-                              ? 'border-primary outline outline-orange outline-2 outline-offset-1'
-                              : 'border-primary'
-                      }
+                      ${selectedEvent && getEventKey(selectedEvent) === getEventKey(event)
+                                                    ? 'border-primary outline outline-orange outline-2 outline-offset-1'
+                                                    : 'border-primary'
+                                                }
                     `}
                                         >
                                             <div className="w-full">
@@ -1079,7 +944,7 @@ function Events() {
                                                     <div className="float-right ml-2 max-w-20">
                                                         {event.photos[0] && (
                                                             <img
-                                                                src={event.photos[0]}
+                                                                src={event.photos[0].url}
                                                                 alt={`Event photo`}
                                                                 className="w-20 max-h-20 object-cover rounded"
                                                             />
@@ -1114,217 +979,252 @@ function Events() {
                     </aside>
 
                     <div className="flex-1 relative h-full border-primary border-t @xl:border-t-0">
-                        {selectedEvent && (
-                            <div className="absolute left-4 top-4 bottom-4 w-96 rounded bg-primary border border-primary shadow-lg z-10 overflow-hidden flex flex-col">
-                                <button
-                                    onClick={() => setSelectedEvent(null)}
-                                    className="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center rounded hover:bg-accent text-primary hover:text-primary text-xl leading-none"
+                        <AnimatePresence>
+                            {(editingEvent || creatingEvent) && isModerator ? (
+                                <EventCard
+                                    onClose={() => {
+                                        setCreatingEvent(false)
+                                        setEditingEvent(false)
+                                        setSelectedEvent(null)
+                                    }}
                                 >
-                                    ✕
-                                </button>
-
-                                <ScrollArea className="flex-1">
                                     <div className="p-4">
-                                        <h2 className="text-xl font-bold mb-1 pr-12">{selectedEvent.name}</h2>
-                                        <div className="mb-2 text-secondary">
-                                            {new Date(selectedEvent.date).toLocaleDateString('en-US', {
-                                                month: 'long',
-                                                day: 'numeric',
-                                                year: 'numeric',
-                                            })}
-                                        </div>
-
-                                        <div className="space-y-3 text-sm mb-4">
-                                            {selectedEvent.private && (
-                                                <div
-                                                    data-scheme="secondary"
-                                                    className="border border-primary bg-primary rounded p-2"
-                                                >
-                                                    <div className="text-secondary text-[13px]">
-                                                        This event is closed to the public
-                                                    </div>
-                                                </div>
-                                            )}
-
-                                            {selectedEvent.startTime && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Start time</div>
-                                                    <div>
-                                                        {(() => {
-                                                            const [hours, minutes] = selectedEvent.startTime
-                                                                .split(':')
-                                                                .map(Number)
-                                                            const period = hours >= 12 ? 'PM' : 'AM'
-                                                            const displayHours = hours % 12 || 12
-                                                            return `${displayHours}:${minutes
-                                                                .toString()
-                                                                .padStart(2, '0')} ${period}`
-                                                        })()}
-                                                    </div>
-                                                </div>
-                                            )}
-
-                                            <div>
-                                                <div className="text-secondary text-[13px] mb-1">Location</div>
-                                                {selectedEvent.location.venue && (
-                                                    <div className="text-primary font-semibold mt-1">
-                                                        {selectedEvent.location.venue}
-                                                    </div>
-                                                )}
-                                                <div>{selectedEvent.location.label}</div>
+                                        <EventForm
+                                            event={editingEvent && selectedEvent ? selectedEvent : undefined}
+                                            onSuccess={() => {
+                                                if (editingEvent) {
+                                                    setEditingEvent(false)
+                                                } else {
+                                                    setCreatingEvent(false)
+                                                }
+                                                refreshEvents()
+                                            }}
+                                        />
+                                    </div>
+                                </EventCard>
+                            ) : (
+                                selectedEvent && (
+                                    <EventCard onClose={() => setSelectedEvent(null)}>
+                                        <div className="p-4">
+                                            <h2 className="text-xl font-bold mb-1 pr-12">{selectedEvent.name}</h2>
+                                            <div className="mb-2 text-secondary">
+                                                {dayjs(selectedEvent.date).format('MMMM D, YYYY')}
                                             </div>
 
-                                            {selectedEvent.description && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Description</div>
-                                                    <div className="text-sm leading-relaxed">
-                                                        {selectedEvent.description}
+                                            <div className="space-y-3 text-sm mb-4">
+                                                {selectedEvent.private && (
+                                                    <div
+                                                        data-scheme="secondary"
+                                                        className="border border-primary bg-primary rounded p-2"
+                                                    >
+                                                        <div className="text-secondary text-[13px]">
+                                                            This event is closed to the public
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            )}
+                                                )}
 
-                                            {selectedEvent.speakers && selectedEvent.speakers.length > 0 && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">
-                                                        Speaker{selectedEvent.speakers.length > 1 ? 's' : ''}
+                                                {selectedEvent.startTime && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">
+                                                            Start time
+                                                        </div>
+                                                        <div>
+                                                            {dayjs(
+                                                                `${selectedEvent.date} ${selectedEvent.startTime}`
+                                                            ).format('h:mm A')}
+                                                        </div>
                                                     </div>
-                                                    <div className="flex flex-wrap gap-2">
-                                                        {selectedEvent.speakers.map((speaker, i) => (
-                                                            <TeamMember key={i} name={speaker} photo />
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            )}
+                                                )}
 
-                                            {selectedEvent.speakerTopic && (
                                                 <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Topic</div>
-                                                    <div>{selectedEvent.speakerTopic}</div>
-                                                    {selectedEvent.deck && (
-                                                        <a
-                                                            href={selectedEvent.deck}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="block mt-1 font-semibold underline"
-                                                        >
-                                                            View slide deck
-                                                        </a>
+                                                    <div className="text-secondary text-[13px] mb-1">Location</div>
+                                                    {selectedEvent.location.venue && (
+                                                        <div className="text-primary font-semibold mt-1">
+                                                            {selectedEvent.location.venue.name}
+                                                        </div>
                                                     )}
+                                                    <div>{selectedEvent.location.label}</div>
                                                 </div>
-                                            )}
 
-                                            {selectedEvent.format && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Format</div>
-                                                    <div>{selectedEvent.format}</div>
-                                                </div>
-                                            )}
+                                                {selectedEvent.description && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">
+                                                            Description
+                                                        </div>
+                                                        <div className="text-sm leading-relaxed">
+                                                            {selectedEvent.description}
+                                                        </div>
+                                                    </div>
+                                                )}
 
-                                            {selectedEvent.audience && selectedEvent.audience.length > 0 && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Audience</div>
-                                                    <div>{selectedEvent.audience.join(', ')}</div>
-                                                </div>
-                                            )}
+                                                {selectedEvent.speakers && selectedEvent.speakers.length > 0 && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">
+                                                            Speaker{selectedEvent.speakers.length > 1 ? 's' : ''}
+                                                        </div>
+                                                        <div className="flex flex-wrap gap-2">
+                                                            {selectedEvent.speakers.map((speaker, i) => (
+                                                                <TeamMember key={i} name={speaker} photo />
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
 
-                                            {selectedEvent.partners && selectedEvent.partners.length > 0 && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Partners</div>
-                                                    <div className="flex flex-wrap gap-2">
-                                                        {selectedEvent.partners.map((partner, i) =>
-                                                            partner.url ? (
-                                                                <a
-                                                                    key={i}
-                                                                    href={partner.url}
-                                                                    target="_blank"
-                                                                    rel="noopener noreferrer"
-                                                                    className="text-orange hover:underline"
-                                                                >
-                                                                    {partner.name}
-                                                                </a>
-                                                            ) : (
-                                                                <span key={i}>{partner.name}</span>
-                                                            )
+                                                {selectedEvent.speakerTopic && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">Topic</div>
+                                                        <div>{selectedEvent.speakerTopic}</div>
+                                                        {selectedEvent.presentation && (
+                                                            <a
+                                                                href={selectedEvent.presentation}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="block mt-1 font-semibold underline"
+                                                            >
+                                                                View slide deck
+                                                            </a>
                                                         )}
                                                     </div>
-                                                </div>
-                                            )}
+                                                )}
 
-                                            {selectedEvent.attendees && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Attendees</div>
-                                                    <div>{selectedEvent.attendees} people</div>
-                                                </div>
-                                            )}
-
-                                            {selectedEvent.vibeScore && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Vibe Score</div>
-                                                    <div className="flex gap-1">
-                                                        {Array.from({ length: selectedEvent.vibeScore }).map((_, i) => (
-                                                            <span key={i} className="text-lg">
-                                                                🔥
-                                                            </span>
-                                                        ))}
+                                                {selectedEvent.format && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">Format</div>
+                                                        <div>{selectedEvent.format.join(', ')}</div>
                                                     </div>
-                                                </div>
-                                            )}
+                                                )}
 
-                                            {selectedEvent.photos && selectedEvent.photos.length > 0 && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Photos</div>
-                                                    <div className="grid grid-cols-2 gap-2">
-                                                        {selectedEvent.photos.map((photo, i) => (
-                                                            <ZoomImage key={i}>
-                                                                <img
-                                                                    src={photo}
-                                                                    alt={`Event photo ${i + 1}`}
-                                                                    className="w-full h-32 object-cover rounded"
-                                                                />
-                                                            </ZoomImage>
-                                                        ))}
+                                                {selectedEvent.audience && selectedEvent.audience.length > 0 && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">Audience</div>
+                                                        <div>{selectedEvent.audience.join(', ')}</div>
                                                     </div>
-                                                </div>
-                                            )}
+                                                )}
 
-                                            {selectedEvent.video && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Video</div>
-                                                    <a
-                                                        href={selectedEvent.video}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="text-orange hover:underline text-sm"
-                                                    >
-                                                        Watch video →
-                                                    </a>
-                                                </div>
-                                            )}
+                                                {selectedEvent.partners && selectedEvent.partners.length > 0 && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">Partners</div>
+                                                        <div className="flex flex-wrap gap-2">
+                                                            {selectedEvent.partners.map((partner, i) =>
+                                                                partner.url ? (
+                                                                    <a
+                                                                        key={i}
+                                                                        href={partner.url}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="text-orange hover:underline"
+                                                                    >
+                                                                        {partner.name}
+                                                                    </a>
+                                                                ) : (
+                                                                    <span key={i}>{partner.name}</span>
+                                                                )
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                )}
 
-                                            {selectedEvent.link && (
-                                                <div>
-                                                    <OSButton
-                                                        asLink
-                                                        to={selectedEvent.link}
-                                                        variant={
-                                                            new Date(selectedEvent.date) >=
-                                                            new Date(new Date().toISOString().split('T')[0])
-                                                                ? 'primary'
-                                                                : 'secondary'
-                                                        }
-                                                        width="full"
-                                                        size="md"
-                                                        external
-                                                    >
-                                                        View details
-                                                    </OSButton>
-                                                </div>
-                                            )}
+                                                {selectedEvent.attendees && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">Attendees</div>
+                                                        <div>{selectedEvent.attendees} people</div>
+                                                    </div>
+                                                )}
+
+                                                {selectedEvent.vibeScore && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">
+                                                            Vibe Score
+                                                        </div>
+                                                        <div className="flex gap-1">
+                                                            {Array.from({ length: selectedEvent.vibeScore }).map(
+                                                                (_, i) => (
+                                                                    <span key={i} className="text-lg">
+                                                                        🔥
+                                                                    </span>
+                                                                )
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {selectedEvent.photos && selectedEvent.photos.length > 0 && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">Photos</div>
+                                                        <div className="grid grid-cols-2 gap-2">
+                                                            {selectedEvent.photos.map((photo, i) => (
+                                                                <ZoomImage key={i}>
+                                                                    <img
+                                                                        src={photo.url}
+                                                                        alt={`Event photo ${i + 1}`}
+                                                                        className="w-full h-32 object-cover rounded"
+                                                                    />
+                                                                </ZoomImage>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {selectedEvent.video && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">Video</div>
+                                                        <a
+                                                            href={selectedEvent.video}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="text-orange hover:underline text-sm"
+                                                        >
+                                                            Watch video →
+                                                        </a>
+                                                    </div>
+                                                )}
+
+                                                {selectedEvent.link && (
+                                                    <div>
+                                                        <OSButton
+                                                            asLink
+                                                            to={selectedEvent.link}
+                                                            variant={
+                                                                new Date(selectedEvent.date) >=
+                                                                    new Date(new Date().toISOString().split('T')[0])
+                                                                    ? 'primary'
+                                                                    : 'secondary'
+                                                            }
+                                                            width="full"
+                                                            size="md"
+                                                            external
+                                                        >
+                                                            View details
+                                                        </OSButton>
+                                                    </div>
+                                                )}
+                                                {isModerator && (
+                                                    <div className="mt-2 flex justify-end gap-1">
+                                                        <OSButton
+                                                            size="md"
+                                                            tooltip="Edit this event"
+                                                            icon={<IconPencil />}
+                                                            onClick={() => {
+                                                                setEditingEvent(true)
+                                                            }}
+                                                        />
+                                                        <OSButton
+                                                            size="md"
+                                                            tooltip="Delete this event"
+                                                            icon={<IconTrash />}
+                                                            onClick={() => {
+                                                                deleteEvent(selectedEvent.id)
+                                                                setSelectedEvent(null)
+                                                            }}
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
-                                </ScrollArea>
-                            </div>
-                        )}
+                                    </EventCard>
+                                )
+                            )}
+                        </AnimatePresence>
 
                         <div key={chartKey} ref={chartRef} className="w-full h-full" />
                     </div>

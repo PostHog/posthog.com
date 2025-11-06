@@ -19,7 +19,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const PipelineTemplate = path.resolve(`src/templates/Pipeline.js`)
     const DashboardTemplate = path.resolve(`src/templates/Template.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
-    const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
     const HubTagTemplate = path.resolve(`src/templates/Hub/Tag.tsx`)
@@ -65,6 +64,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                     fields {
                         slug
+                    }
+                    parent {
+                        ... on File {
+                            sourceInstanceName
+                        }
                     }
                     rawBody
                 }
@@ -638,8 +642,19 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             })
         }
     )
-
-    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
+    const { localHandbook, engineeringHandbook } = result.data.handbook.nodes.reduce(
+        (acc, node) => {
+            if (node.parent?.sourceInstanceName === 'posthog-main-repo') {
+                acc.engineeringHandbook.push(node)
+            } else {
+                acc.localHandbook.push(node)
+            }
+            return acc
+        },
+        { localHandbook: [], engineeringHandbook: [] }
+    )
+    createPosts(engineeringHandbook, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
+    createPosts(localHandbook, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' }, (node) => ({
         regex: `$${node.url}/`,
@@ -815,16 +830,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             })
         }
     }
-
-    result.data.roadmapYears.group.forEach(({ fieldValue: year }) => {
-        createPage({
-            path: `/changelog/${year}`,
-            component: ChangelogTemplate,
-            context: {
-                year: Number(year),
-            },
-        })
-    })
 
     result.data.postHogPipelines.nodes.forEach((node) => {
         createPage({
