@@ -252,7 +252,6 @@ export const statsig = {
             },
             analysis: {
                 features: {
-                    heatmaps: false,
                     console_logs: false,
                     performance_monitoring: false,
                     network_monitor: false,
@@ -268,6 +267,7 @@ export const statsig = {
         heatmaps: {
             available: false,
             features: {
+                heatmaps: false,
                 rage_clicks: false,
             },
         },

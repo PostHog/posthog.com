@@ -194,9 +194,6 @@ export const appcues = {
             two_factor_auth: true,
             user_privacy_options: true,
         },
-        analytics_integration: {
-            built_in_analytics: true,
-        },
         developer: {
             api: true,
             cross_domain_tracking: false,

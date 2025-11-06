@@ -259,9 +259,6 @@ export const launchdarkly = {
             two_factor_auth: true,
             user_privacy_options: true,
         },
-        analytics_integration: {
-            built_in_analytics: true,
-        },
     },
     pricing: {
         model: 'Seat-based + usage',

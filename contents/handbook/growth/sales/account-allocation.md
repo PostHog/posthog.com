@@ -40,7 +40,9 @@ To help the new owner of a customer hit the ground running, we should make sure 
 
 - TAE -> TAM 1-3 months after the initial contract is signed and the customer is onboarded into 1 or 2 primary products.
 - TAE -> CSM 1-3 months after the initial contract is signed and the customer is onboarded into 3 or more primary products.
-- TAE -> CSM after sufficient cross-product expansion has take place.
+- TAM -> CSM after sufficient cross-product expansion has take place.
+
+> For accounts who will be landing at $100k+ a year or have high expansion potential after the initial contract, we should involve a TAM early in the process to ensure a smooth transition.  See the section further down this page on how this works. 
 
 For handover to take place there should be an Account Plan (saved as a note on the account in Vitally) and the customer should have been onboarded properly to the products they are currently paying for. 
 
@@ -93,3 +95,13 @@ Before handing over a customer, the existing owner needs to ensure that the cust
 #### Error Tracking
 
 - They have set up tracking using posthog-js.
+
+## High potential customers
+
+For TAE-led customers who will be landing at $100k+ a year or have high expansion potential into new product areas, we should introduce a TAM earlier on than normal.
+
+The prime time for this is when the technical win is confirmed - the TAM should be introduced to the customer by the TAE in an evaluation or POC wrap-up call when we know that the customer has selected PostHog.
+
+The introduction is purely for relationship building and continuity purposes so that the TAM can hit the ground running with the customer after the initial contract is signed.  It's still on the TAE to work with the customer on contracts etc, and as such only the TAE will be recognized on the initial contract for commission purposes.  After the initial deal is closed won the TAM will take over the account in their book of business.
+
+The TAE and TAM should use their overlapping time to work with the customer on a documented onboarding plan per the above guidance.
