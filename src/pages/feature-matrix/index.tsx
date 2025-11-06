@@ -10,6 +10,7 @@ import { featureFlags } from 'hooks/productData/feature_flags'
 import { experiments } from 'hooks/productData/experiments'
 import { surveys } from 'hooks/productData/surveys'
 import { errorTracking } from 'hooks/productData/error_tracking'
+import { workflows } from 'hooks/productData/workflows'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import { internalToolsNav } from '../../navs/internalTools'
@@ -59,6 +60,11 @@ const tableOfContents = [
     {
         value: 'Heatmaps',
         url: 'heatmaps',
+        depth: 0,
+    },
+    {
+        value: 'Workflows',
+        url: 'workflows',
         depth: 0,
     },
     {
