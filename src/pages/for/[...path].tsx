@@ -78,6 +78,7 @@ interface SlideConfig {
     bgColor?: string
     textColor?: string
     content?: ContentItem[]
+    teamSlug?: string
 }
 
 interface PresentationConfig {
@@ -87,6 +88,7 @@ interface PresentationConfig {
         thumbnails?: boolean
         notes?: boolean
         form?: boolean
+        teamSlug?: string
     }
 }
 
@@ -309,6 +311,7 @@ const CustomPresentationPage = () => {
                         companyLogo={props.companyLogo}
                         companyName={props.companyName}
                         salesRep={salesRep}
+                        teamSlug={props.teamSlug}
                         slideKey={slideKey}
                     >
                         {props.children}
@@ -382,6 +385,7 @@ const CustomPresentationPage = () => {
                 slides={slides}
                 presenterNotes={{}}
                 config={config.config}
+                salesRep={salesRep}
             >
                 <div
                     data-scheme="primary"

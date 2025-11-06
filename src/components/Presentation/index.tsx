@@ -17,6 +17,14 @@ interface AccordionItem {
     content: React.ReactNode
 }
 
+interface SalesRep {
+    name: string
+    title: string
+    email: string
+    photo: string
+    color: string
+}
+
 interface PresentationProps {
     template: 'generic' | 'product' | 'feature'
     slug: string
@@ -38,7 +46,9 @@ interface PresentationProps {
         thumbnails?: boolean
         notes?: boolean
         form?: boolean
+        teamSlug?: string
     }
+    salesRep?: SalesRep | null
 }
 
 const SidebarContent = ({
@@ -105,6 +115,7 @@ export default function Presentation({
     slideId,
     presenterNotes,
     config,
+    salesRep,
 }: PresentationProps) {
     const { siteSettings } = useApp()
     const { appWindow } = useWindow()
@@ -448,7 +459,7 @@ export default function Presentation({
                             data-scheme="secondary"
                             className="w-80 h-full bg-primary border-l border-primary hidden @2xl:block"
                         >
-                            <PresentationForm />
+                            <PresentationForm teamSlug={config?.teamSlug} salesRep={salesRep} />
                         </aside>
                     )}
                 </div>

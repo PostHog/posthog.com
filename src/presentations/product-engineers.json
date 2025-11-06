@@ -3,7 +3,8 @@
     "config": {
         "thumbnails": false,
         "notes": false,
-        "form": true
+        "form": true,
+        "teamSlug": "sales-cs"
     },
     "slides": {
         "overview": {

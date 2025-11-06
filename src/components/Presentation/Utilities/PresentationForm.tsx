@@ -2,6 +2,20 @@ import { IconSend } from '@posthog/icons'
 import ContactSales from 'components/ContactSales'
 import React from 'react'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import TeamMembers from './TeamMembers'
+
+interface SalesRep {
+    name: string
+    title: string
+    email: string
+    photo: string
+    color: string
+}
+
+interface PresentationFormProps {
+    teamSlug?: string
+    salesRep?: SalesRep | null
+}
 
 const formConfig = {
     type: 'lead' as const,
@@ -95,7 +109,7 @@ const formConfig = {
     },
 }
 
-export default function PresentationForm() {
+export default function PresentationForm({ teamSlug, salesRep }: PresentationFormProps) {
     return (
         <ScrollArea viewportClasses="[&>div]:h-full">
             <div data-scheme="primary" className="bg-accent text-primary h-full p-4" data-default-form-id="509041">
@@ -103,6 +117,9 @@ export default function PresentationForm() {
                     <h3 className="text-xl mb-1">Get a demo</h3>
                     <p className="text-sm">We'll get in touch if you'd like to chat.</p>
                 </div>
+
+                <TeamMembers teamSlug={teamSlug} salesRep={salesRep} />
+
                 <ContactSales formConfig={formConfig as any} />
             </div>
         </ScrollArea>

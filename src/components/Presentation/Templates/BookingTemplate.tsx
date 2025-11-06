@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ParseHtml from '../Utilities/parseHtml'
 import { DemoScheduler } from 'components/DemoScheduler'
 import SalesRep from '../Utilities/SalesRep'
+import TeamMembers from '../Utilities/TeamMembers'
 import Logos from '../Utilities/Logos'
 import OSButton from 'components/OSButton'
 
@@ -17,6 +18,7 @@ interface ColumnsTemplateProps {
     companyLogo?: string
     companyName?: string
     salesRep?: SalesRep
+    teamSlug?: string
     slideKey?: string
 }
 
@@ -32,6 +34,7 @@ export default function ColumnsTemplate({
     companyLogo,
     companyName,
     salesRep,
+    teamSlug,
     slideKey,
 }: ColumnsTemplateProps) {
     return (
@@ -64,7 +67,7 @@ export default function ColumnsTemplate({
                     </div>
                 </div>
 
-                <SalesRep salesRep={salesRep} />
+                <TeamMembers salesRep={salesRep} teamSlug={teamSlug} />
             </div>
 
             <aside className="flex-1 flex items-center justify-center">
