@@ -141,6 +141,8 @@ As such, management roles are paid on the same pay scale as other ICs. Becoming 
 
 Management is a skill of its own, and it's not any more important than any other skills that make someone a great IC. It's possible that you may be a manager for a short time, but it becomes clear that your strengths lie primarily in the other skills that are involved with being an IC. In this case we might move you back to a pure IC position, where your skills can really shine, and move someone else from your team or from around the company into the manager / team lead role.
 
+Additionally, managers who are excelling with their teams may have limited interaction with their own manager. This is because, as discussed [above](/#part-time-managers), management is intentionally spread thin. If you feel like your manager is mostly ignoring you, this isn't a bad thing and usually means you and your team are doing a fine job!
+
 ## Recommended reading
 
 These have been recommended by multiple managers on the team:
