@@ -437,6 +437,15 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['workflows'],
         label: 'feature/workflows',
     },
+    wizard: {
+        feature: 'Wizard',
+        owner: [],
+        notes: (
+            <>
+                Owned by <TeamMember name="Danilo Campos" photo />, with help from Team Array
+            </>
+        ),
+    },
 }
 
 export const useFeatureOwnership = ({ teamSlug }: { teamSlug?: string } = {}): { features: Feature[] } => {

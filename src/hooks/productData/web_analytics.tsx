@@ -370,6 +370,7 @@ export const webAnalytics = {
             },
         ],
         rows: ['web_analytics'],
+        excluded_sections: ['platform.libraries', 'platform.developer', 'platform.integrations'],
     },
     pairsWith: [
         {

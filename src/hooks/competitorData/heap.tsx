@@ -262,9 +262,6 @@ export const heap = {
             self_serve: true,
             usage_based_pricing: true,
         },
-        analytics_integration: {
-            built_in_analytics: true,
-        },
         developer: {
             api: false,
             proxies: false,

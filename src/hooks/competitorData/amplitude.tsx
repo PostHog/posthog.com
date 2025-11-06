@@ -394,9 +394,6 @@ export const amplitude = {
             two_factor_auth: true,
             user_privacy_options: true,
         },
-        analytics_integration: {
-            built_in_analytics: true,
-        },
         developer: {
             api: false,
             mobile_sdks: true,

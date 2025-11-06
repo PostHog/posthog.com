@@ -114,6 +114,7 @@ interface ProductComparisonTableProps {
     width?: 'auto' | 'full'
     autoExpand?: boolean // When true, auto-expand single product names and include platform features
     excludedSections?: string[] // Sections to exclude from rendering (e.g., ['platform'] or ['platform.deployment'])
+    requireCompleteData?: boolean // When true, only show rows where ALL competitors have data (default: false)
 }
 
 export default function ProductComparisonTable({
@@ -122,6 +123,7 @@ export default function ProductComparisonTable({
     width = 'auto',
     autoExpand = false,
     excludedSections = [],
+    requireCompleteData = false,
 }: ProductComparisonTableProps) {
     // Feature definitions (loaded before use)
     const featureDefs: Record<string, any> = {
@@ -220,8 +222,12 @@ export default function ProductComparisonTable({
                 const defs = featureDefs[product]
                 if (defs && shouldAutoExpand) {
                     // Auto-expand all sections within the product (skip 'summary' and 'pricing')
+                    // Process top-level 'features' sections first without headers
+                    // Then process other sections with headers
+
+                    // First pass: add top-level 'features' without headers
                     for (const sectionKey in defs) {
-                        if (sectionKey === 'summary' || sectionKey === 'pricing') continue
+                        if (sectionKey !== 'features') continue
 
                         const sectionPath = `${product}.${sectionKey}`
                         // Skip if this section is excluded
@@ -230,7 +236,37 @@ export default function ProductComparisonTable({
                         const section = defs[sectionKey]
                         if (!section || typeof section !== 'object') continue
 
-                        // Store both the key and description for rendering
+                        // Add all features in this section (no header for 'features')
+                        const features = section.features || section
+                        for (const featureKey in features) {
+                            const featurePath = `${sectionPath}.${featureKey}`
+                            // Skip if this specific feature is excluded
+                            if (isExcluded(featurePath)) continue
+
+                            const feature = features[featureKey]
+                            if (feature && typeof feature === 'object' && 'name' in feature) {
+                                expanded.push({
+                                    type: 'feature',
+                                    product,
+                                    featureSet: sectionKey,
+                                    feature: featureKey,
+                                })
+                            }
+                        }
+                    }
+
+                    // Second pass: add other sections with headers
+                    for (const sectionKey in defs) {
+                        if (sectionKey === 'summary' || sectionKey === 'pricing' || sectionKey === 'features') continue
+
+                        const sectionPath = `${product}.${sectionKey}`
+                        // Skip if this section is excluded
+                        if (isExcluded(sectionPath)) continue
+
+                        const section = defs[sectionKey]
+                        if (!section || typeof section !== 'object') continue
+
+                        // Store both the key and description for rendering (with header)
                         expanded.push({
                             label: sentenceCase(sectionKey.replace(/_/g, ' ')),
                             description: section.description,
@@ -238,8 +274,6 @@ export default function ProductComparisonTable({
                         })
 
                         // Add all features in this section
-                        // Some sections have features nested under a 'features' property,
-                        // while others (like top-level 'features') have them directly
                         const features = section.features || section
                         for (const featureKey in features) {
                             const featurePath = `${sectionPath}.${featureKey}`
@@ -979,8 +1013,11 @@ export default function ProductComparisonTable({
             })),
         ]
 
-        // Check if this row has any data from competitors
-        const hasData = competitors.some((key, index) => {
+        // Check if this row has data from competitors
+        // If requireCompleteData is true, ALL competitors must have data
+        // Otherwise, at least ONE competitor must have data
+        const checkMethod = requireCompleteData ? 'every' : 'some'
+        const hasData = competitors[checkMethod]((key, index) => {
             // If row has custom values array, check those instead
             let value: any
             if (row.values !== undefined) {

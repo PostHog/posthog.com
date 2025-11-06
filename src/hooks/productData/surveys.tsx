@@ -384,6 +384,13 @@ export const surveys = {
             },
         ],
         rows: ['surveys'],
+        excluded_sections: [
+            'surveys.features',
+            'surveys.question_types',
+            'surveys.templates',
+            'platform.libraries',
+            'platform.integrations',
+        ],
     },
     ai: {
         // title: '',

@@ -54,7 +54,6 @@ export const clarity = {
                     console_logs: false,
                     dead_taps: true,
                     dom_explorer: false,
-                    heatmaps: false,
                     network_monitor: false,
                     performance_monitoring: false,
                     rage_taps: true,
@@ -70,6 +69,7 @@ export const clarity = {
             available: true,
             features: {
                 dead_taps: true,
+                heatmaps: true,
                 rage_clicks: true,
                 scrollmaps: true,
             },
