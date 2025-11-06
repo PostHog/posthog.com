@@ -29,6 +29,8 @@ interface IProps {
         className?: string
         cols?: 1 | 2
         ctaLocation?: 'top' | 'bottom'
+        showToField?: boolean
+        rowPadding?: string
     }
     autoValidate?: boolean
     form: {
@@ -269,11 +271,16 @@ interface CTAButtonProps {
     variant?: 'primary' | 'secondary' | 'default' | 'underline' | 'underlineOnHover'
     icon?: React.ReactNode
     label?: string
+    rowPadding?: string
 }
 
-const CTAButton = ({ location, width, size, variant, icon, label }: CTAButtonProps) => {
+const CTAButton = ({ location, width, size, variant, icon, label, rowPadding }: CTAButtonProps) => {
     return (
-        <div className={`px-4 flex-[0_0_auto] ${location === 'top' ? 'pt-2 pb-1 border-primary border-b' : 'pt-1'}`}>
+        <div
+            className={`flex-[0_0_auto] ${location === 'top' ? 'py-2 border-primary border-b mb-4' : 'pt-1'} ${
+                rowPadding || ''
+            }`}
+        >
             <OSButton
                 width={width || 'auto'}
                 size={size || 'md'}
@@ -287,8 +294,8 @@ const CTAButton = ({ location, width, size, variant, icon, label }: CTAButtonPro
     )
 }
 
-const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
-    const { name, placeholder, required } = props
+const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement> & { className?: string }) => {
+    const { name, placeholder, required, className } = props
     if (!name) return null
     const { errors, validateField, setFieldValue } = useFormikContext<Record<string, any>>()
     const error = (errors as any)[name]
@@ -301,7 +308,7 @@ const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
                     {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
                 </span>
             </label>
-            <div className="col-span-full @lg:col-span-10">
+            <div className="col-span-full">
                 <textarea
                     rows={8}
                     onChange={(e) => setFieldValue(name, e.target.value)}
@@ -310,7 +317,7 @@ const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
                     }}
                     className={`outline-none text-sm rounded border bg-primary ring-0 focus:ring-0 w-full resize-none ${
                         error ? 'border-red' : 'border-primary'
-                    }`}
+                    } ${className}`}
                     {...props}
                     {...(props.type === 'number' ? { min: 0 } : {})}
                 />
@@ -385,6 +392,8 @@ export default function SalesforceForm({
     }
 
     const ctaButtonProps: CTAButtonProps = {
+        location: formOptions?.ctaLocation || 'bottom',
+        rowPadding: formOptions?.rowPadding || '',
         width: form.ctaButton?.width as CTAButtonProps['width'] | undefined,
         size: form.ctaButton?.size as CTAButtonProps['size'] | undefined,
         variant: form.ctaButton?.type as CTAButtonProps['variant'] | undefined,
@@ -437,8 +446,8 @@ export default function SalesforceForm({
                     {formOptions?.ctaLocation === 'top' && <CTAButton {...ctaButtonProps} />}
                     <div className="flex-1">
                         <ScrollArea className="min-h-0">
-                            <div className="@container p-4">
-                                <div className="grid grid-cols-12 gap-2">
+                            <div className="@container">
+                                <div className={`grid grid-cols-12 gap-2 ${formOptions?.rowPadding || ''}`}>
                                     {formOptions?.showToField && (
                                         <>
                                             <span className="relative text-left text-sm col-span-full @lg:col-span-2 font-semibold flex items-center">
@@ -494,22 +503,20 @@ export default function SalesforceForm({
                                             )
                                         }
                                     )}
+                                    {form.fields.map(({ name, label, fieldType, required }, index) => {
+                                        if (fieldType === 'textarea') {
+                                            return (
+                                                <Textarea
+                                                    key={`${name}-${index}`}
+                                                    name={name}
+                                                    placeholder={label}
+                                                    required={required}
+                                                />
+                                            )
+                                        }
+                                        return null
+                                    })}
                                 </div>
-                            </div>
-                            <div className="px-4">
-                                {form.fields.map(({ name, label, fieldType, required }, index) => {
-                                    if (fieldType === 'textarea') {
-                                        return (
-                                            <Textarea
-                                                key={`${name}-${index}`}
-                                                name={name}
-                                                placeholder={label}
-                                                required={required}
-                                            />
-                                        )
-                                    }
-                                    return null
-                                })}
                             </div>
                         </ScrollArea>
                     </div>

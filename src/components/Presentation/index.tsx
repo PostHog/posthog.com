@@ -9,6 +9,8 @@ import { motion } from 'framer-motion'
 import { navigate } from 'gatsby'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
+import ContactSales from 'components/ContactSales'
+import PresentationForm from './Utilities/PresentationForm'
 
 interface AccordionItem {
     title: string
@@ -393,6 +395,13 @@ export default function Presentation({
                             </>
                         )}
                     </main>
+                    {/* editor/form panel */}
+                    <aside
+                        data-scheme="secondary"
+                        className="w-80 h-full bg-primary border-l border-primary hidden @2xl:block"
+                    >
+                        <PresentationForm />
+                    </aside>
                 </div>
             </div>
 

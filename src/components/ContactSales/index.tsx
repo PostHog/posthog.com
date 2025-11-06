@@ -5,13 +5,14 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import SalesforceForm from 'components/SalesforceForm'
 
 interface ContactSalesProps {
-    location?: any
     formConfig?: {
         type: 'lead' | 'contact'
         formOptions?: {
             className?: string
             cols?: 1 | 2
             ctaLocation?: 'top' | 'bottom'
+            showToField?: boolean | undefined
+            rowPadding?: string
         }
         form: {
             fields: {
@@ -46,10 +47,9 @@ interface ContactSalesProps {
         autoValidate?: boolean
         source?: string
     }
-    defaultFormId?: string
 }
 
-export default function ContactSales({ formConfig, defaultFormId = '509041' }: ContactSalesProps) {
+export default function ContactSales({ formConfig }: ContactSalesProps) {
     if (!formConfig) {
         return null
     }
@@ -57,20 +57,7 @@ export default function ContactSales({ formConfig, defaultFormId = '509041' }: C
     return (
         <>
             <Script id="default-form-script" src="/scripts/default-form-script.js" />
-            <SEO
-                title="Talk to a human – Book a PostHog demo"
-                description="PostHog is self-serve, but our team is here if you need us. Book a demo to get setup help, discuss your technical requirements, or see features in action."
-                image={`/images/og/talk-to-a-human.png`}
-            />
-            <ScrollArea>
-                <div
-                    data-scheme="primary"
-                    className="bg-accent text-primary h-full"
-                    data-default-form-id={defaultFormId}
-                >
-                    <SalesforceForm {...formConfig} />
-                </div>
-            </ScrollArea>
+            <SalesforceForm {...formConfig} />
         </>
     )
 }
