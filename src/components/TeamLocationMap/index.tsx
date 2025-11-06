@@ -68,8 +68,16 @@ export default function TeamLocationMap(): JSX.Element {
         }
     `)
 
-    const mapboxLocations = data.allMapboxLocation.nodes
+    const mapboxLocations = data.allMapboxLocation?.nodes || []
     const teamMembers: TeamMember[] = data.team.teamMembers
+
+    // Log for debugging
+    console.log('Map Debug:', {
+        mapboxLocationsCount: mapboxLocations.length,
+        teamMembersCount: teamMembers.length,
+        sampleMapboxLocation: mapboxLocations[0],
+        sampleTeamMember: teamMembers[0],
+    })
 
     // Create a map of profileId to team member
     const profileMap = useMemo(() => {
@@ -84,9 +92,17 @@ export default function TeamLocationMap(): JSX.Element {
     const locationGroups: LocationGroup[] = useMemo(() => {
         const groups: LocationGroup[] = []
 
+        if (mapboxLocations.length === 0) {
+            console.warn('No Mapbox locations available. The MAPBOX_TOKEN env var may not be set during build.')
+            return groups
+        }
+
         mapboxLocations.forEach((mapboxLocation: any) => {
             const member = profileMap[mapboxLocation.profileId]
-            if (!member) return
+            if (!member) {
+                console.warn('No member found for profileId:', mapboxLocation.profileId)
+                return
+            }
 
             const { longitude, latitude } = mapboxLocation.coordinates
             const coords: [number, number] = [longitude, latitude]
@@ -110,6 +126,7 @@ export default function TeamLocationMap(): JSX.Element {
             }
         })
 
+        console.log('Location groups created:', groups.length, 'groups')
         return groups
     }, [mapboxLocations, profileMap])
 
@@ -121,12 +138,21 @@ export default function TeamLocationMap(): JSX.Element {
             <div className="mb-6">
                 <h2 className="text-2xl font-bold mb-2">Where we're based</h2>
                 <p className="text-base opacity-75">
-                    PostHog team members are distributed across <strong>{uniqueLocations} locations</strong> around the
-                    world.
-                    {totalMapped < teamMembers.length && (
-                        <span className="ml-1">
-                            (Showing {totalMapped} of {teamMembers.length} team members with location data)
-                        </span>
+                    {uniqueLocations > 0 ? (
+                        <>
+                            PostHog team members are distributed across <strong>{uniqueLocations} locations</strong>{' '}
+                            around the world.
+                            {totalMapped < teamMembers.length && (
+                                <span className="ml-1">
+                                    (Showing {totalMapped} of {teamMembers.length} team members with location data)
+                                </span>
+                            )}
+                        </>
+                    ) : (
+                        <>
+                            Map data is currently unavailable. Location data requires the MAPBOX_TOKEN environment
+                            variable to be set during build time for geocoding team member locations.
+                        </>
                     )}
                 </p>
             </div>
