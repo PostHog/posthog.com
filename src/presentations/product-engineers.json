@@ -1,5 +1,9 @@
 {
     "name": "Product Engineers",
+    "config": {
+        "defaultThumbnailsVisible": false,
+        "defaultNotesVisible": false
+    },
     "slides": {
         "overview": {
             "template": "stacked",

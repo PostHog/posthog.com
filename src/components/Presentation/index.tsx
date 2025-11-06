@@ -34,6 +34,10 @@ interface PresentationProps {
     }>
     slideId?: string
     presenterNotes?: Record<string, string>
+    config?: {
+        defaultThumbnailsVisible?: boolean
+        defaultNotesVisible?: boolean
+    }
 }
 
 const SidebarContent = ({
@@ -91,23 +95,56 @@ export default function Presentation({
     slides = [],
     slideId,
     presenterNotes,
+    config,
 }: PresentationProps) {
     const { siteSettings } = useApp()
     const { appWindow } = useWindow()
     const [isMobile, setIsMobile] = useState<boolean>(getIsMobile(siteSettings, appWindow))
-    const [isNavVisible, setIsNavVisible] = useState<boolean>(!isMobile)
+
+    // Get initial state from query params or config
+    const getInitialPanelStates = () => {
+        if (typeof window === 'undefined') return { thumbnails: true, notes: true }
+
+        const params = new URLSearchParams(window.location.search)
+        const thumbnailsParam = params.get('thumbnails')
+        const notesParam = params.get('notes')
+
+        const thumbnails =
+            thumbnailsParam !== null ? thumbnailsParam === 'true' : config?.defaultThumbnailsVisible ?? true
+
+        const notes = notesParam !== null ? notesParam === 'true' : config?.defaultNotesVisible ?? true
+
+        return { thumbnails, notes }
+    }
+
+    const initialStates = getInitialPanelStates()
+    const [isNavVisible, setIsNavVisible] = useState<boolean>(initialStates.thumbnails)
     const [isPresentationMode, setIsPresentationMode] = useState<boolean>(false)
     const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
     const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
-    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(true)
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(initialStates.notes)
     const [drawerHeight, setDrawerHeight] = useState<number>(90)
     const [lastOpenHeight, setLastOpenHeight] = useState<number>(90)
     const [isDragging, setIsDragging] = useState<boolean>(false)
     const [dragStartHeight, setDragStartHeight] = useState<number>(0)
     const containerRef = useRef<HTMLDivElement>(null)
 
+    // Update URL when panel states change
+    const updateURL = (thumbnails: boolean, notes: boolean) => {
+        if (typeof window === 'undefined') return
+
+        const params = new URLSearchParams(window.location.search)
+        params.set('thumbnails', String(thumbnails))
+        params.set('notes', String(notes))
+
+        const newURL = `${window.location.pathname}?${params.toString()}${window.location.hash}`
+        window.history.replaceState({}, '', newURL)
+    }
+
     const toggleNav = () => {
-        setIsNavVisible(!isNavVisible)
+        const newState = !isNavVisible
+        setIsNavVisible(newState)
+        updateURL(newState, isDrawerOpen)
     }
 
     const toggleDrawer = () => {
@@ -117,11 +154,13 @@ export default function Presentation({
                 setLastOpenHeight(drawerHeight)
             }
             setIsDrawerOpen(false)
+            updateURL(isNavVisible, false)
         } else {
             // Opening: restore last height, but ensure it's reasonable
             const heightToRestore = lastOpenHeight >= 25 ? lastOpenHeight : 90
             setDrawerHeight(heightToRestore)
             setIsDrawerOpen(true)
+            updateURL(isNavVisible, true)
         }
     }
 
@@ -251,7 +290,14 @@ export default function Presentation({
     }, [appWindow, siteSettings])
 
     useEffect(() => {
-        setIsNavVisible(!isMobile)
+        // On mobile, hide the sidebar, but don't update URL
+        // This way when they go back to desktop, it restores their preference
+        if (isMobile) {
+            setIsNavVisible(false)
+        } else {
+            // On desktop, restore from initial state
+            setIsNavVisible(initialStates.thumbnails)
+        }
     }, [isMobile])
 
     const enterPresentationMode = () => {

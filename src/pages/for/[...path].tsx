@@ -83,6 +83,10 @@ interface SlideConfig {
 interface PresentationConfig {
     name: string
     slides: Record<string, SlideConfig>
+    config?: {
+        defaultThumbnailsVisible?: boolean
+        defaultNotesVisible?: boolean
+    }
 }
 
 const CustomPresentationPage = () => {
@@ -135,6 +139,7 @@ const CustomPresentationPage = () => {
             const processedConfig: PresentationConfig = {
                 name: customConfig.name || 'Custom Presentation',
                 slides: {},
+                config: customConfig.config,
             }
 
             Object.entries(customConfig.slides || {}).forEach(([slideKey, slideConfig]: [string, any]) => {
@@ -375,6 +380,7 @@ const CustomPresentationPage = () => {
                 )}
                 slides={slides}
                 presenterNotes={{}}
+                config={config.config}
             >
                 <div
                     data-scheme="primary"
