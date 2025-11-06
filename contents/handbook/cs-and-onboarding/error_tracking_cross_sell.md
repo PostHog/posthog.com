@@ -31,3 +31,40 @@ Additionally having Error Tracking turned on means you can leverage AI (such as 
 #### Key value compared to other error tracking products
 
 Historically, error tracking has been primarily used by engineering teams, but with PostHog, there is also deliberate value for other teams. For example, the marketing team can quickly identify why conversions might have dipped and specifically target Session Replays tied to errors. This is incredibly valuable to quickly identify blockers. With other error tracking software, you may be able to get clarity on bugs and errors, but with PostHog, you can get a complete picture of the user journey, and many non-engineers can benefit from this.
+
+# Common blockers
+**“This increases costs that we didn’t budget for”**
+We should proactively give credits so customers can trial a new product. For example:
+- Free trial: give credits to cover usage of a new product for X weeks / months – make sure this is timeboxed! 
+- Match competitor pricing: if a competitor is significantly cheaper than PostHog, verify this and offer to bring customer over at competitor pricing for X months
+- More credits: offer to give additional credits on top of new product usage
+
+**“My champion doesn’t make decisions on this product”**
+You should first try to build a relationship with the persona that will be users of the product. For error tracking, this will be engineers who work on areas where exceptions are critical (link to persona page).
+
+Ask your champion how they are currently tackling the common use cases. Identify team members you want an introduction to and ask your champion for a warm connection. You can position it as a learning opportunity, asking for feedback, or a pitch (if you have a really strong understanding of the specific value-add). Help your champion with the internal pitch. 
+
+For error tracking, these questions are helpful to start the conversation:
+- When an error occurs, how easy is it for you to see exactly which user actions led up to it and how it affected the experience?
+  - Debugging relies often relies on reproducing error	
+  - Error Tracking tied directly to replays makes root cause and impact obvious.
+- If you’ve built your own error tracking, how much effort goes into maintaining and correlating it with analytics?
+  - Time wasted maintaining infra, blind spots in analysis.
+  - Lightweight SDK that's tightly integrated with other products.
+- How do you decide which errors to fix first?
+  - Prioritizing by gut feeling or frequency, not business impact.
+  - Error Tracking + Product & Revenue Analytics can show which errors have the greatest impact.
+
+If you’re not sure who the persona should be, ask the product team! 
+
+**“I don’t have the resource or time to implement error tracking”**
+It’s important to position implementation as simple, especially if you’re asking your customer to try out a product for the first time. This is where you shine as a technical success person. Help your customer cut through the cognitive load of figuring out implementation.
+
+Error tracking can be implemented with one click, or two lines of code*(*depending on the SDK). Hyperlink to the project settings to enable exception autocapture or share the snippet addition for the SDK they’re using. Follow up with a rough plan that is tied with their needs, such as:
+1. Enable exception autocapture – see events flow through
+2. Assess the errors, issue groupings – decide if you want to customise default properties so you’re getting higher quality signals
+3. Work with errors - update the status, view stacktraces, watch session replays and assign to teammates 
+4. Set up alerts
+
+Create dashboards for your customer to help them understand the value of the product.
+
