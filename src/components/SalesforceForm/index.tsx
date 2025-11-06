@@ -404,7 +404,7 @@ export default function SalesforceForm({
     return form.fields.length > 0 ? (
         submitted ? (
             <>
-                <div className="bg-accent border border-input px-6 py-16 rounded-md flex justify-center items-center">
+                <div className="bg-primary text-primary border border-green p-4 rounded flex justify-center items-center">
                     {customMessage || <div dangerouslySetInnerHTML={{ __html: form?.message || '' }} />}
                 </div>
             </>
