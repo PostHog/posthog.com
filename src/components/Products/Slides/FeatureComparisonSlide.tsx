@@ -6,9 +6,15 @@ interface FeatureComparisonSlideProps {
     competitors: string[]
     rows: any[]
     excludedSections?: string[]
+    requireCompleteData?: boolean
 }
 
-export default function FeatureComparisonSlide({ competitors, rows, excludedSections }: FeatureComparisonSlideProps) {
+export default function FeatureComparisonSlide({
+    competitors,
+    rows,
+    excludedSections,
+    requireCompleteData,
+}: FeatureComparisonSlideProps) {
     if (!competitors || !rows || competitors.length === 0 || rows.length === 0) {
         return (
             <div className="h-full p-8 flex items-center justify-center">
@@ -26,7 +32,7 @@ export default function FeatureComparisonSlide({ competitors, rows, excludedSect
                     width="full"
                     autoExpand={true}
                     excludedSections={excludedSections}
-                    requireCompleteData={true}
+                    requireCompleteData={requireCompleteData}
                 />
             </ScrollArea>
         </div>

@@ -380,6 +380,7 @@ export const experiments = {
             },
         ],
         rows: ['experiments'],
+        require_complete_data: true,
     },
     pairsWith: [
         {

@@ -478,11 +478,11 @@ window.posthog.onFeatureFlags(function () {
                 key: 'hotjar',
                 link: '/blog/posthog-vs-hotjar',
             },
-            {
-                name: 'Matomo',
-                key: 'matomo',
-                link: '/blog/posthog-vs-matomo',
-            },
+            // {
+            //     name: 'Matomo',
+            //     key: 'matomo',
+            //     link: '/blog/posthog-vs-matomo',
+            // },
             {
                 name: 'LogRocket',
                 key: 'logrocket',
@@ -503,6 +503,7 @@ window.posthog.onFeatureFlags(function () {
             },
         ],
         rows: ['session_replay', 'heatmaps'],
+        excluded_sections: ['platform.integrations', 'platform.libraries', 'platform.developer', 'platform.security'],
     },
     pairsWith: [
         {

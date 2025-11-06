@@ -404,14 +404,16 @@ export default function SlidesTemplate({
                     )
                 }
 
-                // Get excluded sections from product data
+                // Get excluded sections and require complete data from product data
                 const excludedSections = productData?.comparison?.excluded_sections
+                const requireCompleteData = productData?.comparison?.require_complete_data
 
                 return (
                     <FeatureComparisonSlide
                         competitors={competitors}
                         rows={rows}
                         excludedSections={excludedSections}
+                        requireCompleteData={requireCompleteData}
                         {...props}
                     />
                 )

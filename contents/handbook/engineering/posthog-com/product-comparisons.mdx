@@ -410,7 +410,9 @@ Add section headers to organize comparison tables into logical groups. Headers o
 
 Headers automatically span across all columns and are styled with a border to visually separate sections.
 
-## Excluding sections
+## Product page overrides
+
+### Excluding sections
 
 Product pages list out all sections within a product's feature set by default, but in some cases it doesn't make sense to do so.
 
@@ -454,6 +456,22 @@ export const llmAnalytics = {
         ],
         rows: ['llm_analytics'],
         excluded_sections: ['platform'], // or an individual node like 'platform.integrations'
+    },
+}
+```
+
+## Excluding rows with missing data
+
+By default, the component will show rows where a competitor's cell doesn't have a value. This can be overridden on a per-product basis by setting `require_complete_data: true` in the product's feature definition file.
+
+`/src/hooks/productData/product_analytics.tsx`:
+
+```typescript
+export const productAnalytics = {
+    ...
+    comparison: {
+        rows: ['product_analytics'],
+        require_complete_data: true,
     },
 }
 ```

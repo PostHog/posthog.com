@@ -468,6 +468,7 @@ export const featureFlags = {
             },
         ],
         rows: ['feature_flags'],
+        excluded_sections: ['platform.libraries', 'platform.developer', 'platform.integrations', 'platform.security'],
     },
     pairsWith: [
         {

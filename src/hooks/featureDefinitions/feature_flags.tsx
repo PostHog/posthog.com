@@ -148,7 +148,7 @@ export const featureFlagsFeatures = {
                 description: 'Override flag values locally for development and testing',
             },
             toolbar_integration: {
-                name: 'PostHog toolbar integration',
+                name: 'Toolbar integration',
                 description: 'Toggle flags directly from the PostHog toolbar while browsing your site',
             },
             user_assignment: {

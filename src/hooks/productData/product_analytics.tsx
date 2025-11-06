@@ -514,6 +514,8 @@ export const productAnalytics = {
             },
         ],
         rows: ['product_analytics'],
+        excluded_sections: ['platform.integrations'],
+        require_complete_data: true,
     },
     pairsWith: [
         {

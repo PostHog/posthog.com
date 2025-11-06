@@ -416,9 +416,6 @@ export const mixpanel = {
             two_factor_auth: true,
             user_privacy_options: true,
         },
-        analytics_integration: {
-            built_in_analytics: true,
-        },
         developer: {
             api: false,
             proxies: false,

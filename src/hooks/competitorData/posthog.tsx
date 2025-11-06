@@ -645,9 +645,6 @@ export const posthog = {
             notebooks: true,
             project_management_tools: false,
         },
-        analytics_integration: {
-            built_in_analytics: true,
-        },
         security: {
             bot_blocking: true,
             ccpa_ready: true,
