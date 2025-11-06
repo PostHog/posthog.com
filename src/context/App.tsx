@@ -1069,7 +1069,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (savedWindows.length === 0) return undefined
 
         // Preserve existing query parameters from the current URL
-        const currentParams = isSSR ? {} : qs.parse(window.location.search.substring(1))
+        const currentParams = isSSR ? {} : qs.parse(location.search.substring(1))
         const allParams = {
             ...currentParams,
             windows: savedWindows,
@@ -1955,9 +1955,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             // Preserve non-windows query parameters when navigating
             const nonWindowsParams = { ...parsed }
             delete nonWindowsParams.windows
-            const queryString = Object.keys(nonWindowsParams).length > 0
-                ? `?${qs.stringify(nonWindowsParams, { encode: false })}`
-                : ''
+            const queryString =
+                Object.keys(nonWindowsParams).length > 0 ? `?${qs.stringify(nonWindowsParams, { encode: false })}` : ''
 
             navigate(`${initialWindow.path}${queryString}`, {
                 state: {
@@ -1974,11 +1973,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             if (!nextWindow) return
 
             // Preserve query parameters from current URL when navigating to next window
-            const currentParams = qs.parse(window.location.search.substring(1))
+            const currentParams = qs.parse(location.search.substring(1))
             delete currentParams.windows
-            const queryString = Object.keys(currentParams).length > 0
-                ? `?${qs.stringify(currentParams, { encode: false })}`
-                : ''
+            const queryString =
+                Object.keys(currentParams).length > 0 ? `?${qs.stringify(currentParams, { encode: false })}` : ''
 
             navigate(`${nextWindow.path}${queryString}`, {
                 state: {
