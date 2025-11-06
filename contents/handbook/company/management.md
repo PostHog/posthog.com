@@ -27,16 +27,18 @@ This guidance applies to all teams, irrespective of whether you manage an engine
 
 ### Part-time managers
 
-Because of the relatively short list of tasks that managers have, management at PostHog is a part-time job. That means everyone, including the founders, still spend the majority of their time on practising what they do best - for most managers, this isn't actually management!
+Because of the relatively short list of tasks that managers have, management at PostHog is a part-time job. That means nearly everyone, oftentimes including the founders, still spend the majority of their time on practising what they do best - for most managers, this isn't actually management!
 
-As an engineer, you wouldn't respect the opinion of someone who can't code on a coding-specific question.
+As an engineer, you want the opinion of someone who can actually code.
 As a designer, you really want your manager to have an eye for design.
 As an operator, you want to be managed by someone who has scaled a business.
 That's why it's important for managers to keep practising their craft.
 
 However, management tasks do come _first_, as giving context to your team tends to have a multiplying effect vs. getting one more PR out. After that though, it's back to work.
 
-> You'll sometimes hear us use the term "team lead". A team lead is the leader of a small team. By default they also manage the individuals that are part of their team, though very occasionally they don't, such as when a new small team has just been created. 
+Additionally, management is intentionally spread thin at PostHog. This is a forcing function for making sure that teams and ICs continue to have high levels of autonomy. Bored managers are micromanagers. Thus you'll find that those who are doing management as more than a part-time role (eg some members of #team-blitzscale and even IC roles such as product management) are spread across many teams. This forces them to only give attention where it's truly needed, and give space & autonomy everywhere else.
+
+> You'll sometimes hear us use the term "team lead". A team lead is the leader of a small team. By default they also manage the individuals that are part of their team, though very occasionally they don't, such as when a new small team has just been created.
 
 ## How do I set context?
 
