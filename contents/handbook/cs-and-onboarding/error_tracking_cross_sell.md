@@ -8,7 +8,7 @@ With Product Analytics, there are a few good starting points for error tracking 
 
 The first is setting up trends to track how error rates change over time. This could be creating an insight of `$exception` events and setting alerts when error counts hit specific thresholds. This can be a good way to not only track historical trends but getting real time notifications on high impact exceptions that could be affecting users.
 
-Another useful thing customers should track are funnels where conversion between steps could have a drop off and how that might be impacted by errors. This can help highlight where errors are blocking users from completing critical flows. Leveraging lifetime value of a customer and multipling the impact for funnel drop off can be a quick way to highlight potential revenue loss.
+Another useful thing customers should track are funnels where conversion between steps could have a drop off and how that might be impacted by errors. This can help highlight where errors are blocking users from completing critical flows. Leveraging lifetime value of a customer and multiplying the impact for funnel drop off can be a quick way to highlight potential revenue loss.
 
 Customers can also track impacts on retention by measuring users who encounter errors and if they come back less frequently as a result.
 
@@ -22,9 +22,8 @@ When viewing a session, you can use the "Only show matching events" toggle to fi
 
 #### Other wonderful use cases
 
-With Feature Flags, you can roll out or revert code updates based on users who've hit specific exceptions. This is useful for quickly responding to errors by targeting affected user cohorts. It allows you to minimize impact and quickly make changes if users are having a bad experience due to errors. Feature flags can act as kill switches, allowing you to quickly turn off problematic features without deploying changes
+With Feature Flags, you can roll out or revert code updates based on users who've hit specific exceptions. This is useful for quickly responding to errors by targeting affected user cohorts. It allows you to minimize impact and quickly make changes if users are having a bad experience due to errors. Feature flags can act as kill switches, allowing you to quickly turn off problematic features without deploying changes.
 
 You can set custom Data Pipeline destinations to send your error tracking exceptions to other sources that could be helpful for your team if the built-in alert function isn't enough.
 
-Additionally having Error Tracking turned out means you can leverage AI (such as PostHog AI or Claude Code) to help diagnose, summarize, and prioritize issues base on impact. 
-
+Additionally having Error Tracking turned on means you can leverage AI (such as PostHog AI or Claude Code) to help diagnose, summarize, and prioritize issues based on impact.
