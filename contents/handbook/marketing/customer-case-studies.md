@@ -1,5 +1,5 @@
 ---
-title: Customer Case Studies
+title: Customer case studies
 sidebar: Handbook
 showTitle: true
 ---
@@ -13,7 +13,7 @@ Case studies should make our users look smart, our products look useful, and Pos
 
 **Things we do care about:**
 - that PostHog has helped them achieve meaningful results
-- that they represent [who we build for](https://posthog.com/handbook/who-we-build-for)
+- that they represent [who we build for](/handbook/who-we-build-for)
 - that someone else might benefit from reading their story 
 
 > Case studies are typically owned by the [marketing team](/teams/marketing). They live in `/contents/customers/` and appear on [posthog.com/customers](/customers). If you have a suggestion for who we should interview, let us know in the <PrivateLink url="https://posthog.slack.com/archives/C08CG24E3SR">marketing channel</PrivateLink>.
@@ -51,12 +51,12 @@ Trust your gut — if it feels like a good story, it probably is. Worst case, it
 If it is worth turning into a case study, draft a PR right away while it's still fresh. Ask at least one teammate to review it to catch any grammar mistakes (or really bad jokes).
 
 **Best practices:**
-- **Be specific** - Use real numbers and and measurable outcomes where possible
+- **Be specific** - Use real numbers and measurable outcomes where possible
 - **Use quotes** - Let the customer's voice come through
 - **Keep it concise** - Aim for between 700-1400 words including quotes
 
 ### 6. Review and approval
-PR looking good? Tag the customer in Github for review. You’re not asking for copy edits — just a quick fact check. Legal and/ PR teams will sometimes want to be looped in for approval as well. They might also request using Google Docs instead of GitHub. 
+PR looking good? Tag the customer in Github for review. You're not asking for copy edits – just a quick fact check. Legal and PR teams will sometimes want to be looped in for approval as well. They might also request using Google Docs instead of GitHub. 
 
 Do what you need to do. The goal is to get the rubber stamp.
 
@@ -65,7 +65,7 @@ Do what you need to do. The goal is to get the rubber stamp.
 ### 7. Publish!
 Most people are excited to be featured and will sign off quickly. If you need artwork to go with the case study, use the [art or brand request template](https://github.com/PostHog/posthog.com/issues/new/choose) 
 
-Once the case study is merged and live on the website, the last step is to send a merch credit to the particpants as thank you.
+Once the case study is merged and live on the website, the last step is to send a merch credit to the participants as thank you.
 
 That's it - you did it!
 
