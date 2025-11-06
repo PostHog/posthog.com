@@ -97,10 +97,12 @@ const formConfig = {
 
 export default function PresentationForm() {
     return (
-        <ScrollArea>
+        <ScrollArea viewportClasses="[&>div]:h-full">
             <div data-scheme="primary" className="bg-accent text-primary h-full p-4" data-default-form-id="509041">
-                <h3 className="">Get a demo</h3>
-                <p className="text-sm">We'll get in touch if you're interested.</p>
+                <div className="mb-4">
+                    <h3 className="text-xl mb-1">Get a demo</h3>
+                    <p className="text-sm">We'll get in touch if you'd like to chat.</p>
+                </div>
                 <ContactSales formConfig={formConfig as any} />
             </div>
         </ScrollArea>
