@@ -35,8 +35,9 @@ interface PresentationProps {
     slideId?: string
     presenterNotes?: Record<string, string>
     config?: {
-        defaultThumbnailsVisible?: boolean
-        defaultNotesVisible?: boolean
+        thumbnails?: boolean
+        notes?: boolean
+        form?: boolean
     }
 }
 
@@ -88,10 +89,7 @@ export const getIsMobile = (siteSettings: any, appWindow: any) => {
 }
 
 // Extract query param reading logic - DRY principle
-const getPanelStateFromURL = (
-    param: string,
-    configDefault?: boolean
-): boolean => {
+const getPanelStateFromURL = (param: string, configDefault?: boolean): boolean => {
     if (typeof window === 'undefined') return configDefault ?? true
     const params = new URLSearchParams(window.location.search)
     const value = params.get(param)
@@ -114,13 +112,14 @@ export default function Presentation({
 
     // Lazy initializers read state once on mount - prevents flash of wrong state
     const [isNavVisible, setIsNavVisible] = useState<boolean>(() =>
-        getPanelStateFromURL('thumbnails', config?.defaultThumbnailsVisible)
+        getPanelStateFromURL('thumbnails', config?.thumbnails)
     )
     const [isPresentationMode, setIsPresentationMode] = useState<boolean>(false)
     const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
     const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
-    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(() =>
-        getPanelStateFromURL('notes', config?.defaultNotesVisible)
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(() => getPanelStateFromURL('notes', config?.notes))
+    const [isFormVisible, setIsFormVisible] = useState<boolean>(() =>
+        getPanelStateFromURL('form', config?.form ?? false)
     )
     const [drawerHeight, setDrawerHeight] = useState<number>(90)
     const [lastOpenHeight, setLastOpenHeight] = useState<number>(90)
@@ -299,7 +298,7 @@ export default function Presentation({
         if (isMobile) {
             setIsNavVisible(false)
         } else {
-            setIsNavVisible(getPanelStateFromURL('thumbnails', config?.defaultThumbnailsVisible))
+            setIsNavVisible(getPanelStateFromURL('thumbnails', config?.thumbnails))
         }
     }, [isMobile, config])
 
@@ -444,12 +443,14 @@ export default function Presentation({
                         )}
                     </main>
                     {/* editor/form panel */}
-                    <aside
-                        data-scheme="secondary"
-                        className="w-80 h-full bg-primary border-l border-primary hidden @2xl:block"
-                    >
-                        <PresentationForm />
-                    </aside>
+                    {isFormVisible && (
+                        <aside
+                            data-scheme="secondary"
+                            className="w-80 h-full bg-primary border-l border-primary hidden @2xl:block"
+                        >
+                            <PresentationForm />
+                        </aside>
+                    )}
                 </div>
             </div>
 

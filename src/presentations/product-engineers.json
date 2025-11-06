@@ -1,8 +1,9 @@
 {
     "name": "Product Engineers",
     "config": {
-        "defaultThumbnailsVisible": false,
-        "defaultNotesVisible": false
+        "thumbnails": false,
+        "notes": false,
+        "form": true
     },
     "slides": {
         "overview": {

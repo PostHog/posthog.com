@@ -84,8 +84,9 @@ interface PresentationConfig {
     name: string
     slides: Record<string, SlideConfig>
     config?: {
-        defaultThumbnailsVisible?: boolean
-        defaultNotesVisible?: boolean
+        thumbnails?: boolean
+        notes?: boolean
+        form?: boolean
     }
 }
 
