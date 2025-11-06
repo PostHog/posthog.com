@@ -317,7 +317,7 @@ const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement> & { className?
                     }}
                     className={`outline-none text-sm rounded border bg-primary ring-0 focus:ring-0 w-full resize-none ${
                         error ? 'border-red' : 'border-primary'
-                    } ${className}`}
+                    } ${className ?? ''}`}
                     {...props}
                     {...(props.type === 'number' ? { min: 0 } : {})}
                 />
