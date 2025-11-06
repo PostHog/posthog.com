@@ -1283,7 +1283,7 @@ export const handbookSidebar = [
                             },
                              {
                                 name: 'Communications templates',
-                                url: '/handbook/growth/sales/communictions-templates',
+                                url: '/handbook/growth/sales/communications-templates',
                             },
                         ],
                     },
