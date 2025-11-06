@@ -1140,6 +1140,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/posthog-com/presentations',
             },
             {
+                name: 'Product & feature comparisons',
+                url: '/handbook/engineering/posthog-com/product-comparisons',
+            },
+            {
                 name: 'Editing API docs',
                 url: '/handbook/engineering/posthog-com/api-docs',
             },

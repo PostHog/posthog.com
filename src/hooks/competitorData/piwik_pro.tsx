@@ -1,0 +1,108 @@
+export const piwik_pro = {
+    name: 'Piwik Pro',
+    key: 'piwik_pro',
+    assets: {
+        icon: '/images/competitors/piwik-pro.svg',
+    },
+    products: {
+        web_analytics: {
+            available: true,
+            features: {
+                bounce_rate: true,
+                cookieless_tracking: true,
+                custom_channel_types: false,
+                entry_exit_paths: true,
+                pageviews: true,
+                search_tools: true,
+                snippet_install: false,
+                traffic_breakdown: true,
+                utm_tracking: true,
+            },
+        },
+        product_analytics: {
+            available: true,
+            features: {
+                autocapture: false,
+                cohorts: true,
+                custom_events: true,
+                custom_properties: true,
+                user_profiles: true,
+                insights: {
+                    available: true,
+                    features: {
+                        formula_mode: false,
+                        ready_made_insight_types: true,
+                        sql_editor: false,
+                    },
+                },
+                trends: {
+                    available: true,
+                    features: {},
+                },
+                funnels: {
+                    available: true,
+                    features: {
+                        conversion_funnels: true,
+                    },
+                },
+                retention: {
+                    available: false,
+                    features: {},
+                },
+                user_paths: {
+                    available: true,
+                    features: {},
+                },
+                group_analytics: {
+                    available: false,
+                },
+            },
+        },
+        session_replay: {
+            available: false,
+        },
+        experiments: {
+            available: false,
+        },
+        feature_flags: {
+            available: false,
+        },
+        heatmaps: {
+            available: true,
+        },
+    },
+    platform: {
+        deployment: {
+            open_source: false,
+            self_host: true,
+            eu_hosting: true,
+            reverse_proxy: true,
+        },
+        pricing: {
+            free_tier: true,
+            self_serve: true,
+            transparent_pricing: true,
+            usage_based_pricing: false,
+        },
+        developer: {
+            api: true,
+            sdks: true,
+        },
+        integrations: {
+            email_reports: true,
+            exports: true,
+            imports: true,
+        },
+        security: {
+            cookieless_tracking: true,
+            gdpr_ready: true,
+            hipaa_ready: false,
+            soc2_certified: false,
+            saml_sso: true,
+            two_factor_auth: true,
+        },
+    },
+    pricing: {
+        model: 'Free tier + subscription',
+    },
+}
