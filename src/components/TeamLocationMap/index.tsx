@@ -6,13 +6,119 @@ import Tooltip from 'components/RadixUI/Tooltip'
 
 const GEO_URL = '/world-countries-sans-antarctica.json'
 
-// Avoid displaying two locations that are too close to each other
-const isOverlapping = (lat: number, lng: number, locations: LocationGroup[], offset = 2) => {
-    return locations.some((otherLocation) => {
-        return (
-            Math.abs(otherLocation.coordinates[1] - lat) < offset &&
-            Math.abs(otherLocation.coordinates[0] - lng) < offset
-        )
+// Simple coordinate mapping for common locations
+// Format: [longitude, latitude]
+const LOCATION_COORDS: { [key: string]: [number, number] } = {
+    // North America - Cities
+    'san francisco': [-122.4194, 37.7749],
+    'new york': [-74.006, 40.7128],
+    'los angeles': [-118.2437, 34.0522],
+    seattle: [-122.3321, 47.6062],
+    portland: [-122.6765, 45.5231],
+    chicago: [-87.6298, 41.8781],
+    austin: [-97.7431, 30.2672],
+    denver: [-104.9903, 39.7392],
+    boston: [-71.0589, 42.3601],
+    toronto: [-79.3832, 43.6532],
+    montreal: [-73.5673, 45.5017],
+    vancouver: [-123.1207, 49.2827],
+
+    // Europe - Cities
+    london: [-0.1276, 51.5074],
+    paris: [2.3522, 48.8566],
+    berlin: [13.405, 52.52],
+    amsterdam: [4.9041, 52.3676],
+    barcelona: [2.1734, 41.3851],
+    madrid: [-3.7038, 40.4168],
+    rome: [12.4964, 41.9028],
+    lisbon: [-9.1393, 38.7223],
+    dublin: [-6.2603, 53.3498],
+    edinburgh: [-3.1883, 55.9533],
+    manchester: [-2.2426, 53.4808],
+    stockholm: [18.0686, 59.3293],
+    copenhagen: [12.5683, 55.6761],
+    oslo: [10.7522, 59.9139],
+    helsinki: [24.9384, 60.1695],
+    warsaw: [21.0122, 52.2297],
+    prague: [14.4378, 50.0755],
+    vienna: [16.3738, 48.2082],
+    budapest: [19.0402, 47.4979],
+    zurich: [8.5417, 47.3769],
+    munich: [11.582, 48.1351],
+    brussels: [4.3517, 50.8503],
+    athens: [23.7275, 37.9838],
+    krakow: [19.945, 50.0647],
+    porto: [-8.6291, 41.1579],
+    valencia: [-0.3763, 39.4699],
+
+    // South America
+    bogotá: [-74.0721, 4.711],
+    bogota: [-74.0721, 4.711],
+    'são paulo': [-46.6333, -23.5505],
+    'buenos aires': [-58.3816, -34.6037],
+    santiago: [-70.6693, -33.4489],
+    lima: [-77.0428, -12.0464],
+
+    // Asia
+    singapore: [103.8198, 1.3521],
+    tokyo: [139.6917, 35.6895],
+    bangkok: [100.5018, 13.7563],
+    dubai: [55.2708, 25.2048],
+    'tel aviv': [34.7818, 32.0853],
+    istanbul: [28.9784, 41.0082],
+
+    // Oceania
+    sydney: [151.2093, -33.8688],
+    melbourne: [144.9631, -37.8136],
+    auckland: [174.7633, -36.8485],
+
+    // Countries (fallback to capitals)
+    'united states': [-95.7129, 37.0902],
+    usa: [-95.7129, 37.0902],
+    'united kingdom': [-0.1276, 51.5074],
+    uk: [-0.1276, 51.5074],
+    canada: [-106.3468, 56.1304],
+    germany: [13.405, 52.52],
+    france: [2.3522, 48.8566],
+    spain: [-3.7038, 40.4168],
+    italy: [12.4964, 41.9028],
+    netherlands: [4.9041, 52.3676],
+    belgium: [4.3517, 50.8503],
+    portugal: [-9.1393, 38.7223],
+    poland: [21.0122, 52.2297],
+    sweden: [18.0686, 59.3293],
+    norway: [10.7522, 59.9139],
+    denmark: [12.5683, 55.6761],
+    finland: [24.9384, 60.1695],
+    ireland: [-6.2603, 53.3498],
+    switzerland: [8.5417, 47.3769],
+    austria: [16.3738, 48.2082],
+    greece: [23.7275, 37.9838],
+    colombia: [-74.0721, 4.711],
+    brazil: [-46.6333, -23.5505],
+    argentina: [-58.3816, -34.6037],
+    chile: [-70.6693, -33.4489],
+    australia: [151.2093, -33.8688],
+    'new zealand': [174.7633, -36.8485],
+    singapore: [103.8198, 1.3521],
+}
+
+function getCoordinates(location?: string, country?: string): [number, number] | null {
+    const searchTerms = [location, country].filter(Boolean).map((s) => s?.toLowerCase().trim())
+
+    for (const term of searchTerms) {
+        if (term && LOCATION_COORDS[term]) {
+            return LOCATION_COORDS[term]
+        }
+    }
+
+    return null
+}
+
+// Avoid displaying markers too close to each other
+const isOverlapping = (lat: number, lng: number, locations: LocationGroup[], offset = 3) => {
+    return locations.some((group) => {
+        return Math.abs(group.coordinates[1] - lat) < offset && Math.abs(group.coordinates[0] - lng) < offset
     })
 }
 
@@ -38,16 +144,6 @@ export default function TeamLocationMap(): JSX.Element {
 
     const data = useStaticQuery(graphql`
         query TeamLocationMapQuery {
-            allMapboxLocation {
-                nodes {
-                    profileId
-                    location
-                    coordinates {
-                        latitude
-                        longitude
-                    }
-                }
-            }
             team: allSqueakProfile(
                 filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
                 sort: { fields: startDate, order: ASC }
@@ -68,67 +164,41 @@ export default function TeamLocationMap(): JSX.Element {
         }
     `)
 
-    const mapboxLocations = data.allMapboxLocation?.nodes || []
     const teamMembers: TeamMember[] = data.team.teamMembers
 
-    // Log for debugging
-    console.log('Map Debug:', {
-        mapboxLocationsCount: mapboxLocations.length,
-        teamMembersCount: teamMembers.length,
-        sampleMapboxLocation: mapboxLocations[0],
-        sampleTeamMember: teamMembers[0],
-    })
-
-    // Create a map of profileId to team member
-    const profileMap = useMemo(() => {
-        const map: { [key: string]: TeamMember } = {}
-        teamMembers.forEach((member) => {
-            map[member.id] = member
-        })
-        return map
-    }, [teamMembers])
-
-    // Group team members by location, avoiding overlaps
+    // Group team members by location
     const locationGroups: LocationGroup[] = useMemo(() => {
         const groups: LocationGroup[] = []
 
-        if (mapboxLocations.length === 0) {
-            console.warn('No Mapbox locations available. The MAPBOX_TOKEN env var may not be set during build.')
-            return groups
-        }
+        teamMembers.forEach((member) => {
+            const coords = getCoordinates(member.location, member.country)
+            if (!coords) return
 
-        mapboxLocations.forEach((mapboxLocation: any) => {
-            const member = profileMap[mapboxLocation.profileId]
-            if (!member) {
-                console.warn('No member found for profileId:', mapboxLocation.profileId)
-                return
-            }
-
-            const { longitude, latitude } = mapboxLocation.coordinates
-            const coords: [number, number] = [longitude, latitude]
+            const [lng, lat] = coords
+            const displayLocation = member.location || member.country || 'Unknown'
 
             // Check if this location overlaps with existing ones
-            if (isOverlapping(latitude, longitude, groups)) {
+            if (isOverlapping(lat, lng, groups)) {
                 // Find the overlapping group and add this member to it
                 const overlappingGroup = groups.find(
-                    (g) => Math.abs(g.coordinates[1] - latitude) < 2 && Math.abs(g.coordinates[0] - longitude) < 2
+                    (g) => Math.abs(g.coordinates[1] - lat) < 3 && Math.abs(g.coordinates[0] - lng) < 3
                 )
                 if (overlappingGroup) {
                     overlappingGroup.members.push(member)
+                    return
                 }
-            } else {
-                // Create a new location group
-                groups.push({
-                    coordinates: coords,
-                    location: mapboxLocation.location,
-                    members: [member],
-                })
             }
+
+            // Create a new location group
+            groups.push({
+                coordinates: coords,
+                location: displayLocation,
+                members: [member],
+            })
         })
 
-        console.log('Location groups created:', groups.length, 'groups')
         return groups
-    }, [mapboxLocations, profileMap])
+    }, [teamMembers])
 
     const totalMapped = locationGroups.reduce((sum, group) => sum + group.members.length, 0)
     const uniqueLocations = locationGroups.length
@@ -150,8 +220,8 @@ export default function TeamLocationMap(): JSX.Element {
                         </>
                     ) : (
                         <>
-                            Map data is currently unavailable. Location data requires the MAPBOX_TOKEN environment
-                            variable to be set during build time for geocoding team member locations.
+                            No team members with mappable location data found. Check the console for details about
+                            available locations.
                         </>
                     )}
                 </p>
