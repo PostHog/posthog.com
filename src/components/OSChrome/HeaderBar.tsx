@@ -199,7 +199,8 @@ export default function HeaderBar({
                                             />
                                         }
                                     >
-                                        {isNavVisible ? 'Hide' : 'Show'} slides
+                                        {isNavVisible ? 'Hide' : 'Show'}
+                                        {slideId ? ` slides` : ''}
                                     </Tooltip>
                                 )}
                             </div>
