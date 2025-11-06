@@ -11,6 +11,7 @@ interface ProductComparisonTableProps {
     width?: 'auto' | 'full' // Table width (default: 'auto')
     autoExpand?: boolean // When true, auto-expand single product names and include platform features (default: false)
     excludedSections?: string[] // Sections to exclude from rendering (e.g., ['platform'] or ['platform.deployment'])
+    requireCompleteData?: boolean // When true, only show rows where ALL competitors have data (default: false)
 }
 
 interface RowConfig {
@@ -82,6 +83,7 @@ In this mode:
 - Platform features automatically appended at the end
 - Section headers with descriptions included
 - PostHog displayed as first column (after feature name column)
+- Only rows with complete data shown (requireCompleteData=true)
 - Empty sections/features automatically filtered out
 - Comparison links hidden when on the current page
 
@@ -305,10 +307,11 @@ The flow is:
 1. `SlidesTemplate` reads `productData.comparison`
 2. Reorders competitors to put PostHog first
 3. Passes `excluded_sections` to `FeatureComparisonSlide`
-4. `FeatureComparisonSlide` renders with `autoExpand={true}`
+4. `FeatureComparisonSlide` renders with `autoExpand={true}` and `requireCompleteData={true}`
 5. Component auto-expands rows and appends platform features
 6. Excluded sections are filtered out
-7. Empty sections/features are automatically hidden
+7. Rows with incomplete data (any competitor missing data) are filtered out
+8. Empty section headers are automatically hidden
 
 ## Data Structure
 
@@ -399,9 +402,16 @@ Auto-generated section headers:
 
 The component automatically filters out rows with no data:
 
-1. **Empty feature rows**: Rows where all competitors have undefined/null/empty values are hidden
+1. **Empty feature rows**:
+   - By default (requireCompleteData=false): Rows where ALL competitors have undefined/null/empty values are hidden
+   - With requireCompleteData=true: Rows where ANY competitor has undefined/null/empty values are hidden
 2. **Empty section headers**: Headers with no visible features beneath them are removed
 3. **Custom values preserved**: Rows with `values` arrays are always kept (they have explicit data)
+
+**requireCompleteData option:**
+- When `false` (default): Shows rows if at least ONE competitor has data (good for blog articles)
+- When `true`: Shows rows only if ALL competitors have data (good for product pages)
+- Product pages use `requireCompleteData={true}` to ensure clean, fully-populated comparison tables
 
 This ensures clean, data-driven tables that only show relevant information.
 

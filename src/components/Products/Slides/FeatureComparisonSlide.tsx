@@ -26,6 +26,7 @@ export default function FeatureComparisonSlide({ competitors, rows, excludedSect
                     width="full"
                     autoExpand={true}
                     excludedSections={excludedSections}
+                    requireCompleteData={true}
                 />
             </ScrollArea>
         </div>
