@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react'
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Accordion } from '../RadixUI/Accordion'
@@ -87,6 +87,17 @@ export const getIsMobile = (siteSettings: any, appWindow: any) => {
     return width < 672
 }
 
+// Extract query param reading logic - DRY principle
+const getPanelStateFromURL = (
+    param: string,
+    configDefault?: boolean
+): boolean => {
+    if (typeof window === 'undefined') return configDefault ?? true
+    const params = new URLSearchParams(window.location.search)
+    const value = params.get(param)
+    return value !== null ? value === 'true' : configDefault ?? true
+}
+
 export default function Presentation({
     accentImage,
     sidebarContent,
@@ -101,36 +112,24 @@ export default function Presentation({
     const { appWindow } = useWindow()
     const [isMobile, setIsMobile] = useState<boolean>(getIsMobile(siteSettings, appWindow))
 
-    // Get initial state from query params or config
-    const getInitialPanelStates = () => {
-        if (typeof window === 'undefined') return { thumbnails: true, notes: true }
-
-        const params = new URLSearchParams(window.location.search)
-        const thumbnailsParam = params.get('thumbnails')
-        const notesParam = params.get('notes')
-
-        const thumbnails =
-            thumbnailsParam !== null ? thumbnailsParam === 'true' : config?.defaultThumbnailsVisible ?? true
-
-        const notes = notesParam !== null ? notesParam === 'true' : config?.defaultNotesVisible ?? true
-
-        return { thumbnails, notes }
-    }
-
-    const initialStates = getInitialPanelStates()
-    const [isNavVisible, setIsNavVisible] = useState<boolean>(initialStates.thumbnails)
+    // Lazy initializers read state once on mount - prevents flash of wrong state
+    const [isNavVisible, setIsNavVisible] = useState<boolean>(() =>
+        getPanelStateFromURL('thumbnails', config?.defaultThumbnailsVisible)
+    )
     const [isPresentationMode, setIsPresentationMode] = useState<boolean>(false)
     const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
     const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
-    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(initialStates.notes)
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(() =>
+        getPanelStateFromURL('notes', config?.defaultNotesVisible)
+    )
     const [drawerHeight, setDrawerHeight] = useState<number>(90)
     const [lastOpenHeight, setLastOpenHeight] = useState<number>(90)
     const [isDragging, setIsDragging] = useState<boolean>(false)
     const [dragStartHeight, setDragStartHeight] = useState<number>(0)
     const containerRef = useRef<HTMLDivElement>(null)
 
-    // Update URL when panel states change
-    const updateURL = (thumbnails: boolean, notes: boolean) => {
+    // Update URL when panel states change - preserves all existing params
+    const updateURL = useCallback((thumbnails: boolean, notes: boolean) => {
         if (typeof window === 'undefined') return
 
         const params = new URLSearchParams(window.location.search)
@@ -139,42 +138,48 @@ export default function Presentation({
 
         const newURL = `${window.location.pathname}?${params.toString()}${window.location.hash}`
         window.history.replaceState({}, '', newURL)
-    }
+    }, [])
 
-    const toggleNav = () => {
-        const newState = !isNavVisible
-        setIsNavVisible(newState)
-        updateURL(newState, isDrawerOpen)
-    }
+    const toggleNav = useCallback(() => {
+        setIsNavVisible((prev) => {
+            const newState = !prev
+            updateURL(newState, isDrawerOpen)
+            return newState
+        })
+    }, [isDrawerOpen, updateURL])
 
-    const toggleDrawer = () => {
-        if (isDrawerOpen) {
-            // Closing: save current height (only if it's reasonable)
-            if (drawerHeight >= 10) {
-                setLastOpenHeight(drawerHeight)
+    const toggleDrawer = useCallback(() => {
+        setIsDrawerOpen((prev) => {
+            if (prev) {
+                // Closing: save current height if reasonable
+                if (drawerHeight >= 10) {
+                    setLastOpenHeight(drawerHeight)
+                }
+                updateURL(isNavVisible, false)
+                return false
+            } else {
+                // Opening: restore last height
+                const heightToRestore = lastOpenHeight >= 25 ? lastOpenHeight : 90
+                setDrawerHeight(heightToRestore)
+                updateURL(isNavVisible, true)
+                return true
             }
-            setIsDrawerOpen(false)
-            updateURL(isNavVisible, false)
-        } else {
-            // Opening: restore last height, but ensure it's reasonable
-            const heightToRestore = lastOpenHeight >= 25 ? lastOpenHeight : 90
-            setDrawerHeight(heightToRestore)
-            setIsDrawerOpen(true)
-            updateURL(isNavVisible, true)
-        }
-    }
+        })
+    }, [drawerHeight, lastOpenHeight, isNavVisible, updateURL])
 
-    const handleVerticalDrag = (_event: any, info: any) => {
-        if (!containerRef.current || !isDrawerOpen) return
-        const containerHeight = containerRef.current.getBoundingClientRect().height
-        const newDrawerHeight = Math.min(Math.max(dragStartHeight - info.offset.y, 0), 300)
-        setDrawerHeight(newDrawerHeight)
+    const handleVerticalDrag = useCallback(
+        (_event: any, info: any) => {
+            if (!containerRef.current || !isDrawerOpen) return
+            const newDrawerHeight = Math.min(Math.max(dragStartHeight - info.offset.y, 0), 300)
+            setDrawerHeight(newDrawerHeight)
 
-        // Update lastOpenHeight for reasonable heights only
-        if (newDrawerHeight >= 10) {
-            setLastOpenHeight(newDrawerHeight)
-        }
-    }
+            // Update lastOpenHeight for reasonable heights only
+            if (newDrawerHeight >= 10) {
+                setLastOpenHeight(newDrawerHeight)
+            }
+        },
+        [dragStartHeight, isDrawerOpen]
+    )
 
     const currentSlideNotes = useMemo(() => {
         if (!presenterNotes || !slides || slides.length === 0) return ''
@@ -289,28 +294,25 @@ export default function Presentation({
         return () => window.removeEventListener('resize', handleResize)
     }, [appWindow, siteSettings])
 
+    // Handle mobile/desktop transitions - don't persist mobile behavior to URL
     useEffect(() => {
-        // On mobile, hide the sidebar, but don't update URL
-        // This way when they go back to desktop, it restores their preference
         if (isMobile) {
             setIsNavVisible(false)
         } else {
-            // On desktop, restore from initial state
-            setIsNavVisible(initialStates.thumbnails)
+            setIsNavVisible(getPanelStateFromURL('thumbnails', config?.defaultThumbnailsVisible))
         }
-    }, [isMobile])
+    }, [isMobile, config])
 
-    const enterPresentationMode = () => {
-        // Use the currently active slide index instead of searching for visible slide
+    const enterPresentationMode = useCallback(() => {
         if (slides.length > 0) {
             setCurrentSlideIndex(activeSlideIndex)
         }
         setIsPresentationMode(true)
-    }
+    }, [slides.length, activeSlideIndex])
 
-    const exitPresentationMode = () => {
+    const exitPresentationMode = useCallback(() => {
         setIsPresentationMode(false)
-    }
+    }, [])
 
     return (
         <>
