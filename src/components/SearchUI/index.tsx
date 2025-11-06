@@ -6,7 +6,7 @@ import { InstantSearch, useRefinementList } from 'react-instantsearch-hooks-web'
 import { useSearchBox, useHits } from 'react-instantsearch-hooks-web'
 import { Combobox } from '@headlessui/react'
 import { navigate } from 'gatsby'
-import { IconFilter } from '@posthog/icons'
+import { IconSparkles } from '@posthog/icons'
 import { capitalizeFirstLetter } from '../../utils'
 import { Hit } from 'instantsearch.js'
 import OSButton from 'components/OSButton'
@@ -59,11 +59,17 @@ const Search = ({
     onEscape?: () => void
 }) => {
     const [query, setQuery] = useState('')
-    const { dragControls } = useWindow()
+    const { openNewChat } = useApp()
+    const { dragControls, appWindow } = useWindow()
     const { refine } = useSearchBox()
     const { hits } = useHits()
-    const [showFilters, setShowFilters] = useState(!!initialFilter)
     const { refine: filterRefine } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
+
+    const openChat = () => {
+        if (query) {
+            openNewChat({ path: `ask-max-${appWindow?.path}`, initialQuestion: query })
+        }
+    }
 
     const handleChange = (hit: Hit) => {
         if (!hit) return
@@ -72,6 +78,11 @@ const Search = ({
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && e.shiftKey) {
+            e.preventDefault()
+            e.stopPropagation()
+            openChat()
+        }
         if (e.key === 'Escape') {
             if (query === '') {
                 // If input is empty, close the search
@@ -110,22 +121,24 @@ const Search = ({
                             value={query}
                             containerClassName="m-0"
                         />
-                        {!hideFilters && (
-                            <div data-scheme="secondary" className="absolute right-1 top-1/2 -translate-y-1/2">
-                                <OSButton
-                                    size="md"
-                                    className={` ${showFilters ? 'opacity-100' : 'opacity-70'}`}
-                                    onClick={(e) => {
-                                        e.stopPropagation()
-                                        setShowFilters(!showFilters)
-                                    }}
-                                    icon={<IconFilter />}
-                                    hover="background"
-                                />
-                            </div>
-                        )}
+
+                        <div data-scheme="secondary" className="absolute right-1 top-1/2 -translate-y-1/2">
+                            <OSButton
+                                disabled={!query}
+                                size="md"
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    openChat()
+                                }}
+                                icon={<IconSparkles />}
+                                hover="background"
+                                className="font-semibold"
+                            >
+                                Ask AI
+                            </OSButton>
+                        </div>
                     </div>
-                    {!hideFilters && showFilters && <Filters isRefinedClassName={isRefinedClassName} />}
+                    {!hideFilters && hits.length > 0 && query && <Filters isRefinedClassName={isRefinedClassName} />}
 
                     {hits.length > 0 && query && (
                         <Combobox.Options
@@ -172,7 +185,7 @@ export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) =>
     const { appWindow } = useWindow()
     const ref = useRef<HTMLDivElement>(null)
 
-    const onChange = () => {
+    const close = () => {
         if (appWindow) {
             closeWindow(appWindow)
         }
@@ -187,12 +200,12 @@ export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) =>
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (ref.current && !ref.current.contains(event.target as Node) && appWindow) {
-                closeWindow(appWindow)
+                close()
             }
         }
         document.addEventListener('mousedown', handleClickOutside)
         return () => document.removeEventListener('mousedown', handleClickOutside)
-    }, [])
+    }, [closeWindow])
 
     return (
         <InstantSearch
@@ -204,12 +217,8 @@ export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) =>
                 <Search
                     initialFilter={initialFilter}
                     className="cursor-grab active:cursor-grabbing p-2 rounded bg-white/25 backdrop-blur shadow-2xl max-w-screen-md border border-primary"
-                    onChange={onChange}
-                    onEscape={() => {
-                        if (appWindow) {
-                            closeWindow(appWindow)
-                        }
-                    }}
+                    onChange={close}
+                    onEscape={close}
                 />
             </div>
         </InstantSearch>
