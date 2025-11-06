@@ -14,10 +14,9 @@ interface SalesRep {
 interface TeamMembersProps {
     teamSlug?: string
     salesRep?: SalesRep | null
-    maxMembers?: number
 }
 
-export default function TeamMembers({ teamSlug = 'sales-product-led', salesRep, maxMembers = 6 }: TeamMembersProps) {
+export default function TeamMembers({ teamSlug = 'sales-product-led', salesRep }: TeamMembersProps) {
     const { allTeams } = useStaticQuery(graphql`
         {
             allTeams: allSqueakTeam {
@@ -88,50 +87,67 @@ export default function TeamMembers({ teamSlug = 'sales-product-led', salesRep, 
     const leadProfiles = team.leadProfiles?.data || []
 
     // Sort profiles to show team leads first
-    const sortedProfiles = profiles
-        .slice()
-        .sort((a: any, b: any) => {
-            const aIsLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === a.id)
-            const bIsLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === b.id)
-            return aIsLead === bIsLead ? 0 : aIsLead ? -1 : 1
-        })
-        .slice(0, maxMembers)
+    const sortedProfiles = profiles.slice().sort((a: any, b: any) => {
+        const aIsLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === a.id)
+        const bIsLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === b.id)
+        return aIsLead === bIsLead ? 0 : aIsLead ? -1 : 1
+    })
 
     return (
         <div>
-            <div className="text-sm opacity-75 mb-3">Your sales team</div>
-            <div className="relative justify-center -ml-3">
-                <div className="flex flex-wrap gap-0" dir="ltr">
-                    {sortedProfiles.map(({ id, attributes: { firstName, lastName, avatar, color } }: any) => {
-                        const name = [firstName, lastName].filter(Boolean).join(' ')
-                        const isTeamLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === id)
-
-                        return (
-                            <span key={id} className="ml-3 relative hover:z-10 rounded-full border-1">
-                                <Tooltip
-                                    trigger={
-                                        <img
-                                            src={avatar?.data?.attributes?.url}
-                                            className={`size-12 rounded-full bg-${
-                                                color ?? 'accent dark:bg-accent-dark'
-                                            } border-2 ${
-                                                isTeamLead ? 'border-yellow' : 'border-light dark:border-dark'
-                                            } transform scale-100 hover:scale-110 transition-all cursor-default`}
-                                            alt={name}
-                                        />
-                                    }
-                                    side="bottom"
-                                    delay={0}
-                                >
-                                    <div className="text-center">
-                                        <div className="font-semibold">
-                                            {name} {isTeamLead ? '(Lead)' : ''}
-                                        </div>
+            <div
+                data-scheme="primary"
+                className="relative justify-center transform transition-all duration-100 border border-primary bg-primary rounded p-4 mb-4"
+            >
+                <h3 className="text-sm mb-1">Our {team.name} Team</h3>
+                <p className="text-sm mb-3">One of these friendly faces would love to chat with you.</p>
+                <div className="flex flex-wrap justify-end ml-3" dir="rtl">
+                    {profiles.length > 8 && (
+                        <span className="visible cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-primary">
+                            <Tooltip
+                                trigger={
+                                    <div className="size-10 rounded-full bg-accent border border-light dark:border-dark flex items-center justify-center text-sm font-semibold transform scale-100 hover:scale-125 transition-all">
+                                        {profiles.length - 7}+
                                     </div>
-                                </Tooltip>
-                            </span>
-                        )
-                    })}
+                                }
+                                side="bottom"
+                            >
+                                {profiles.length - 7} more
+                            </Tooltip>
+                        </span>
+                    )}
+                    {sortedProfiles
+                        .slice(0, profiles.length > 8 ? 7 : undefined)
+                        .reverse()
+                        .map(({ id, attributes: { firstName, lastName, avatar, color } }: any, index: number) => {
+                            const name = [firstName, lastName].filter(Boolean).join(' ')
+                            const isTeamLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === id)
+
+                            return (
+                                <span
+                                    key={`${name}-${index}`}
+                                    className={`visible cursor-default -ml-3 relative hover:z-10 transform scale-100 hover:scale-125 transition-all rounded-full border-1 ${
+                                        isTeamLead ? 'border-yellow dark:border-yellow' : 'border-primary'
+                                    }`}
+                                >
+                                    <Tooltip
+                                        trigger={
+                                            <img
+                                                src={avatar?.data?.attributes?.url}
+                                                className={`size-10 rounded-full bg-${
+                                                    color ?? 'accent'
+                                                } border border-light dark:border-dark`}
+                                                alt={name}
+                                            />
+                                        }
+                                        side="bottom"
+                                        delay={0}
+                                    >
+                                        {name} {isTeamLead ? '(Team lead)' : ''}
+                                    </Tooltip>
+                                </span>
+                            )
+                        })}
                 </div>
             </div>
         </div>

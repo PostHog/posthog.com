@@ -86,6 +86,7 @@ const formConfig = {
                 type: 'string' as const,
                 required: true,
                 fieldType: 'textarea',
+                hideLabel: true,
             },
             {
                 label: 'Where did you hear about us?',

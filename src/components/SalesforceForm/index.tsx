@@ -503,15 +503,29 @@ export default function SalesforceForm({
                                             )
                                         }
                                     )}
-                                    {form.fields.map(({ name, label, fieldType, required }, index) => {
+                                    {form.fields.map(({ name, label, fieldType, required, hideLabel }, index) => {
                                         if (fieldType === 'textarea') {
                                             return (
-                                                <Textarea
-                                                    key={`${name}-${index}`}
-                                                    name={name}
-                                                    placeholder={label}
-                                                    required={required}
-                                                />
+                                                <>
+                                                    {!hideLabel && (
+                                                        <label className={`${inputContainerClasses}`} htmlFor={name}>
+                                                            <span>
+                                                                {label}
+                                                                {required && (
+                                                                    <span className="text-red dark:text-yellow ml-0.5">
+                                                                        *
+                                                                    </span>
+                                                                )}
+                                                            </span>
+                                                        </label>
+                                                    )}
+                                                    <Textarea
+                                                        key={`${name}-${index}`}
+                                                        name={name}
+                                                        placeholder={label}
+                                                        required={required}
+                                                    />
+                                                </>
                                             )
                                         }
                                         return null
