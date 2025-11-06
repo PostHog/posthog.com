@@ -6,9 +6,8 @@ showTitle: true
 
 > **Have a question?** Ask anything PostHog-related at [posthog.com/questions](/questions).
 
-PostHog provides a free basic level of support to everyone via the community, with additional support options available for paying customers depending on product. 
+PostHog provides a free basic level of support to everyone via the community, with additional support options available for paying customers depending on product.
 
-<OverflowXSection>
 <table className="text-sm">
 <thead>
 <tr>
@@ -69,15 +68,14 @@ PostHog provides a free basic level of support to everyone via the community, wi
 </tr>
 </tbody>
 </table>
-</OverflowXSection>
 
 ## Official Support
 
 There are three ways to get official support:
 
-* Open a ticket through our [in-app support modal](https://app.posthog.com/home#supportModal).
-* Ask a community question directly in the Docs at the bottom of the page, or check out [our database](/questions) of previously answered questions.
-* Open an bug report on [our main Github repo](https://github.com/posthog/posthog).
+-   Open a ticket through our [in-app support modal](https://app.posthog.com/home#supportModal).
+-   Ask a community question directly in the Docs at the bottom of the page, or check out [our database](/questions) of previously answered questions.
+-   Open an bug report on [our main Github repo](https://github.com/posthog/posthog).
 
 We are very grateful to people that do this the other way around and help answer others' questions. You may just end up with some [merch](https://merch.posthog.com/) for particularly good answers :)
 
@@ -87,14 +85,15 @@ Anybody using PostHog Cloud can raise a bug, submit feedback or otherwise ask fo
 
 ### Severity Levels
 
-In order to prioritise our responses we ask you to indicate the impact an issue is having for you.  When creating a ticket you'll be asked to choose a severity level from one of the following:
+In order to prioritise our responses we ask you to indicate the impact an issue is having for you. When creating a ticket you'll be asked to choose a severity level from one of the following:
 
 | **Level** | **Impact**                                                                                        | **Examples**                                                                                                                                         |
-|-----------|---------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Critical  | PostHog is completely unavailable or other significant business impact                         | <ul> <li>PostHog Cloud UI is unavailable</li> <li>Feature Flags API not responding</li> <li>Data loss</li> <li>Security breach</li> </ul>            |
+| --------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | --- | --- | --- |
+| Critical  | PostHog is completely unavailable or other significant business impact                            | <ul> <li>PostHog Cloud UI is unavailable</li> <li>Feature Flags API not responding</li> <li>Data loss</li> <li>Security breach</li> </ul>            |
 | High      | Key features of the product are unavailable, causing major inconvenience or limited functionality | <ul><li>Dashboards not loading</li><li>Session Replays not loading</li><li>Data Ingestion is delayed</li><li>Feature Flag targeting issues</li></ul> |
 | Medium    | There are issues with the product, but the impact is limited                                      | <ul><li>Insights are slow to load</li><li>Session replays have missing information</li></ul>                                                         |
-| Low       | Requests that have minimal impact on the usability of the product                                 | <ul><li>Feature requests</li><li>Usage questions</li></ul>                                                                                           |                                                                                                                                           |                                                                        |                                                                                                 |
+| Low       | Requests that have minimal impact on the usability of the product                                 | <ul><li>Feature requests</li><li>Usage questions</li></ul>                                                                                           |     |     |     |
+
 ## Dedicated Slack
 
 For certain paid customers we support you through a private Slack channel. This helps us all get on the same side - and it's just more fun for everyone.
@@ -103,16 +102,16 @@ We will select the right team for you at PostHog. This typically includes the Cu
 
 [These are the kinds of people](/people) you'd be working with!
 
-We do *not* have non-technical support people who triage issues. We directly connect you to people who are building PostHog. This has scaled to support thousands of companies very effectively, and we always aim to productize solutions to problems.
+We do _not_ have non-technical support people who triage issues. We directly connect you to people who are building PostHog. This has scaled to support thousands of companies very effectively, and we always aim to productize solutions to problems.
 
 From your side, it's important you bring your A team. We recommend you add:
 
-* A stakeholder from engineering
-* A stakeholder from data engineering / data analysis
-* A stakeholder from product management
-* 2-3 power users
-* A stakeholder from customer success (if relevant)
-* A stakeholder from sales (if relevant)
+-   A stakeholder from engineering
+-   A stakeholder from data engineering / data analysis
+-   A stakeholder from product management
+-   2-3 power users
+-   A stakeholder from customer success (if relevant)
+-   A stakeholder from sales (if relevant)
 
 It's best not to let your group get much bigger as it can create a lot of noise.
 
@@ -128,11 +127,11 @@ We help you define meaningful dashboards for your company and regularly check in
 
 We ask to be a user in your PostHog team so we can suggest ways to get more value out of the product. These are some of the ways we can help you:
 
-* Build basic dashboards that cover Acquisition, Activation, Retention, Referral and Revenue
-* Build deep dive dashboards to help you understand changes in the above
-* Give guidance on using Session Recording, Heatmaps and Paths, depending on your product
-* Help you understand the impact on your core metrics of changes deployed behind Feature Flags
-* Help you run Experiments 
+-   Build basic dashboards that cover Acquisition, Activation, Retention, Referral and Revenue
+-   Build deep dive dashboards to help you understand changes in the above
+-   Give guidance on using Session Recording, Heatmaps and Paths, depending on your product
+-   Help you understand the impact on your core metrics of changes deployed behind Feature Flags
+-   Help you run Experiments
 
 ## Terms and Conditions
 
@@ -144,24 +143,24 @@ PostHog Cloud Editions have [standard terms](/terms).
 
 If you need non-standard terms or Service Level Agreements (SLAs), for example, we offer MSAs to Enterprise customers only. These cover things like:
 
-* Custom Service Level Agreements
-* Custom legal changes if you have special requirements
-* Custom information security requirements
+-   Custom Service Level Agreements
+-   Custom legal changes if you have special requirements
+-   Custom information security requirements
 
-We do not make contractual commitments to make product changes or alter our roadmap. 
+We do not make contractual commitments to make product changes or alter our roadmap.
 
 ## Security assessment
 
-We have an extensive range of robust internal [security policies](/handbook/company/security) that apply to all products and cover several requirements around GDPR, SOC 2, HIPAA and CCPA. 
+We have an extensive range of robust internal [security policies](/handbook/company/security) that apply to all products and cover several requirements around GDPR, SOC 2, HIPAA and CCPA.
 
 For Enterprise customers, we are happy to complete your own security assessment. This can take the form of us enabling your team internally (who are responsible for information security since they are hosting the data), or it can mean us just answering questions and adapting our policies if needed.
 
 ## Bespoke pricing
 
-We provide discounts for customers who make an up-front purchase of PostHog Cloud Credit.  You can see the [discount schedule](/handbook/growth/sales/contract-rules#discounts) in our company handbook.
+We provide discounts for customers who make an up-front purchase of PostHog Cloud Credit. You can see the [discount schedule](/handbook/growth/sales/contract-rules#discounts) in our company handbook.
 
 ## Payment via invoicing
 
-We only take payments via credit or debit card, processed via Stripe. 
+We only take payments via credit or debit card, processed via Stripe.
 
-For companies wishing to pay via invoice, an up-front credit purchase is needed.  [Contact our Sales team](/talk-to-a-human) for help with this.
+For companies wishing to pay via invoice, an up-front credit purchase is needed. [Contact our Sales team](/talk-to-a-human) for help with this.

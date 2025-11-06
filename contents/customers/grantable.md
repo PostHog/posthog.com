@@ -2,7 +2,7 @@
 title: How Grantable replaced Zapier with PostHog Workflows and cut setup time by ~90%
 customer: Grantable
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/grantable.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/grantable_story_85e8fd3bba.jpg
 date: 2025-11-05
 ---
 [Grantable](https://www.grantable.co/) is an AI-powered platform that helps nonprofits, businesses, and government offices write winning grant proposals faster. Evan Rallis leads product there – and he says PostHog is now "a massive part of pretty much everything we do."

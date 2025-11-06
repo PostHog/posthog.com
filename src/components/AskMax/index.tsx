@@ -69,7 +69,7 @@ export default function AskMax({
     }
 
     return (
-        <div>
+        <div className="mt-4 p-2">
             {compact ? null : (
                 <div className="@container">
                     <div
