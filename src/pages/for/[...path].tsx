@@ -136,13 +136,21 @@ const CustomPresentationPage = () => {
 
     // Determine which configuration to use
     const config: PresentationConfig = useMemo(() => {
+        // Check if this is a company-specific landing page
+        const isCompanySpecific = companyDomain && companyDomain.includes('.')
+        const defaultTeamSlug = isCompanySpecific ? 'sales-cs' : 'sales-product-led'
+
         // Check for custom configuration first
         if (customConfig) {
             // Process custom config with inheritance
             const processedConfig: PresentationConfig = {
                 name: customConfig.name || 'Custom Presentation',
                 slides: {},
-                config: customConfig.config,
+                config: {
+                    ...customConfig.config,
+                    // Set default teamSlug if not specified in custom config
+                    teamSlug: customConfig.config?.teamSlug || defaultTeamSlug,
+                },
             }
 
             Object.entries(customConfig.slides || {}).forEach(([slideKey, slideConfig]: [string, any]) => {
@@ -169,12 +177,27 @@ const CustomPresentationPage = () => {
 
         // Check for standard role configuration
         if (roleOrId && roleConfigs[roleOrId as keyof typeof roleConfigs]) {
-            return roleConfigs[roleOrId as keyof typeof roleConfigs]
+            const roleConfig = roleConfigs[roleOrId as keyof typeof roleConfigs]
+            return {
+                ...roleConfig,
+                config: {
+                    ...(roleConfig.config || {}),
+                    // Set default teamSlug if not specified in role config
+                    teamSlug: roleConfig.config?.teamSlug || defaultTeamSlug,
+                },
+            }
         }
 
         // Default configuration
-        return defaultConfig
-    }, [roleOrId, customConfig])
+        return {
+            ...defaultConfig,
+            config: {
+                ...(defaultConfig.config || {}),
+                // Set default teamSlug if not specified in default config
+                teamSlug: defaultConfig.config?.teamSlug || defaultTeamSlug,
+            },
+        }
+    }, [roleOrId, customConfig, companyDomain])
 
     // Fetch company data from Clearbit
     useEffect(() => {
