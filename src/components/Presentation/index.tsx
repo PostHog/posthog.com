@@ -313,6 +313,16 @@ export default function Presentation({
         }
     }, [isMobile, config])
 
+    // Update drawer state when config changes
+    useEffect(() => {
+        setIsDrawerOpen(getPanelStateFromURL('notes', config?.notes))
+    }, [config])
+
+    // Update form visibility when config changes
+    useEffect(() => {
+        setIsFormVisible(getPanelStateFromURL('form', config?.form ?? false))
+    }, [config])
+
     const enterPresentationMode = useCallback(() => {
         if (slides.length > 0) {
             setCurrentSlideIndex(activeSlideIndex)

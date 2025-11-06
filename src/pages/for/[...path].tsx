@@ -99,16 +99,22 @@ const CustomPresentationPage = () => {
     const [salesRep, setSalesRep] = useState<SalesRep | null>(null)
 
     // Parse the URL path
+    // URL patterns:
+    // /for/{persona} -> pathSegments = ['', 'for', 'persona']
+    // /for/{company}/{role} -> pathSegments = ['', 'for', 'company', 'role']
     const pathSegments = appWindow?.path ? appWindow?.path.split('/') : []
-    const companyDomain = pathSegments[2] || ''
-    const roleOrId = pathSegments[3] || ''
 
-    // Redirect to homepage if no company is specified
+    // Determine if this is a company-specific or persona-only URL
+    const hasCompany = pathSegments.length >= 4
+    const companyDomain = hasCompany ? pathSegments[2] : ''
+    const roleOrId = hasCompany ? pathSegments[3] : pathSegments[2] || ''
+
+    // Redirect to homepage if no role/persona is specified
     useEffect(() => {
-        if (!companyDomain) {
+        if (!roleOrId) {
             navigate('/')
         }
-    }, [companyDomain])
+    }, [roleOrId])
 
     // Load custom configuration if available
     const [customConfig, setCustomConfig] = useState<any>(null)
@@ -136,8 +142,8 @@ const CustomPresentationPage = () => {
 
     // Determine which configuration to use
     const config: PresentationConfig = useMemo(() => {
-        // Check if this is a company-specific landing page
-        const isCompanySpecific = companyDomain && companyDomain.includes('.')
+        // Check if this is a company-specific landing page (has a company domain in the URL)
+        const isCompanySpecific = !!companyDomain
         const defaultTeamSlug = isCompanySpecific ? 'sales-cs' : 'sales-product-led'
 
         // Check for custom configuration first
@@ -201,7 +207,11 @@ const CustomPresentationPage = () => {
 
     // Fetch company data from Clearbit
     useEffect(() => {
-        if (!companyDomain) return
+        // Only fetch if there's a company domain (i.e., company-specific URL)
+        if (!companyDomain) {
+            setIsLoading(false)
+            return
+        }
 
         const fetchCompanyData = async () => {
             // Check if companyDomain is actually a domain (contains a dot)
