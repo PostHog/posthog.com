@@ -442,7 +442,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: [],
         notes: (
             <>
-                <TeamMember name="Danilo Campos" photo />
+                Owned by <TeamMember name="Danilo Campos" photo />, with help from Team Array
             </>
         ),
     },
