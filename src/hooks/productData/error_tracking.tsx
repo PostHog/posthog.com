@@ -256,7 +256,7 @@ export const errorTracking = {
             },
         ],
         rows: ['error_tracking'],
-        excluded_sections: ['platform.libraries', 'platform.analytics_integration'],
+        excluded_sections: ['platform.libraries'],
     },
     integrations: ['ab_experiments', 'product_analytics', 'session_replays'],
     pairsWith: [

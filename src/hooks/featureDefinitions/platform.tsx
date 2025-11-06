@@ -253,15 +253,6 @@ export const platformFeatures = {
             },
         },
     },
-    analytics_integration: {
-        description: 'Analytics features available platform-wide',
-        features: {
-            built_in_analytics: {
-                name: 'Built-in analytics',
-                description: 'Analyze data without the need for third-party tools',
-            },
-        },
-    },
     security: {
         description: 'Security and compliance features',
         features: {

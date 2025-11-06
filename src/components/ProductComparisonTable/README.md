@@ -11,6 +11,7 @@ interface ProductComparisonTableProps {
     width?: 'auto' | 'full' // Table width (default: 'auto')
     autoExpand?: boolean // When true, auto-expand single product names and include platform features (default: false)
     excludedSections?: string[] // Sections to exclude from rendering (e.g., ['platform'] or ['platform.deployment'])
+    requireCompleteData?: boolean // When true, only show rows where ALL competitors have data (default: false)
 }
 
 interface RowConfig {
@@ -61,29 +62,28 @@ When used in blog articles without `autoExpand`, the component only renders expl
 ```
 
 In this mode:
-- Single product names like `'experiments'` create a single product-level availability row
-- No automatic expansion or platform features added
-- Precise control over what appears in the table
+
+-   Single product names like `'experiments'` create a single product-level availability row
+-   No automatic expansion or platform features added
+-   Precise control over what appears in the table
 
 ### Product Page Mode (autoExpand=true)
 
 When used on product pages via `FeatureComparisonSlide`, the component auto-expands to show full feature sets:
 
 ```tsx
-<ProductComparisonTable
-    competitors={['posthog', 'optimizely', 'amplitude']}
-    rows={['experiments']}
-    autoExpand={true}
-/>
+<ProductComparisonTable competitors={['posthog', 'optimizely', 'amplitude']} rows={['experiments']} autoExpand={true} />
 ```
 
 In this mode:
-- Single product names like `'experiments'` expand to ALL sections and features
-- Platform features automatically appended at the end
-- Section headers with descriptions included
-- PostHog displayed as first column (after feature name column)
-- Empty sections/features automatically filtered out
-- Comparison links hidden when on the current page
+
+-   Single product names like `'experiments'` expand to ALL sections and features
+-   Platform features automatically appended at the end
+-   Section headers with descriptions included
+-   PostHog displayed as first column (after feature name column)
+-   Only rows with complete data shown (requireCompleteData=true)
+-   Empty sections/features automatically filtered out
+-   Comparison links hidden when on the current page
 
 ## Configuration Examples
 
@@ -115,6 +115,7 @@ You can define rows directly inline using string paths:
 The component automatically expands shorter paths based on the `autoExpand` setting:
 
 **With autoExpand=false (blog articles):**
+
 -   `experiments` → Single product availability row
 -   `experiments.summary` → Single product availability row
 -   `experiments.targeting` → Section header + all targeting features
@@ -122,6 +123,7 @@ The component automatically expands shorter paths based on the `autoExpand` sett
 -   `experiments.targeting.features.cohort_integration` → Individual feature (no expansion)
 
 **With autoExpand=true (product pages):**
+
 -   `experiments` → Expands to ALL sections (features, supported_tests, targeting, implementation, analysis, platforms) + platform features
 -   Each section includes a header with description
 -   All features within each section rendered
@@ -177,18 +179,19 @@ export const errorTracking = {
         rows: ['error_tracking'],
         excluded_sections: [
             'platform.libraries',
-            'platform.analytics_integration',
+            'platform.integrations',
         ], // Hide only these two sections
     },
 }
 ```
 
 Exclusion rules:
-- Exact match: `'platform'` excludes the entire platform
-- Parent path: `'platform.deployment'` excludes all deployment features
-- Subnode path: `'platform.deployment.self_host'` excludes only that specific feature
-- Excluded sections are completely omitted from rendering
-- Section headers with no features after exclusions are automatically hidden
+
+-   Exact match: `'platform'` excludes the entire platform
+-   Parent path: `'platform.deployment'` excludes all deployment features
+-   Subnode path: `'platform.deployment.self_host'` excludes only that specific feature
+-   Excluded sections are completely omitted from rendering
+-   Section headers with no features after exclusions are automatically hidden
 
 ## Usage
 
@@ -297,18 +300,21 @@ export const experiments = {
         ],
         rows: ['experiments'], // Auto-expands to all sections + platform
         excluded_sections: ['platform.libraries'], // Optional: exclude sections
+        require_complete_data: true, // Optional: only show rows where ALL competitors have data
     },
 }
 ```
 
 The flow is:
+
 1. `SlidesTemplate` reads `productData.comparison`
 2. Reorders competitors to put PostHog first
-3. Passes `excluded_sections` to `FeatureComparisonSlide`
-4. `FeatureComparisonSlide` renders with `autoExpand={true}`
+3. Passes `excluded_sections` and `require_complete_data` to `FeatureComparisonSlide`
+4. `FeatureComparisonSlide` renders with `autoExpand={true}` and optional `requireCompleteData`
 5. Component auto-expands rows and appends platform features
 6. Excluded sections are filtered out
-7. Empty sections/features are automatically hidden
+7. If `require_complete_data` is true, rows with incomplete data are filtered out
+8. Empty section headers are automatically hidden
 
 ## Data Structure
 
@@ -349,10 +355,13 @@ export const experimentsFeatures = {
 ```
 
 **Important structural notes:**
-- `summary` and `pricing` sections are skipped during auto-expansion
-- Top-level `features` has feature definitions directly (no nested `features` property)
-- Other sections like `targeting` have features nested under a `features` property
-- The component handles both structures automatically
+
+-   `summary` and `pricing` sections are skipped during auto-expansion
+-   Top-level `features` sections are processed first WITHOUT headers (allows multiple products' features to group together)
+-   Other sections like `targeting` are processed second WITH headers and descriptions
+-   Top-level `features` has feature definitions directly (no nested `features` property)
+-   Other sections like `targeting` have features nested under a `features` property
+-   The component handles both structures automatically
 
 ## Data Loading
 
@@ -381,27 +390,37 @@ Labels and descriptions are resolved in this order:
 
 ### Label Formatting
 
-- **Custom labels**: Displayed exactly as provided (e.g., `{ label: 'In-app messages' }`)
-- **Derived labels**: Sentence-cased from keys (first letter capitalized only)
-  - `deployment` → `Deployment`
-  - `analytics_integration` → `Analytics integration`
-  - `supported_tests` → `Supported tests`
+-   **Custom labels**: Displayed exactly as provided (e.g., `{ label: 'In-app messages' }`)
+-   **Derived labels**: Sentence-cased from keys (first letter capitalized only)
+    -   `deployment` → `Deployment`
+    -   `analytics_integration` → `Analytics integration`
+    -   `supported_tests` → `Supported tests`
 
 ### Headers
 
 Auto-generated section headers:
-- Display the section name (sentence-cased from key) and optional description
-- Automatically span all columns
-- Styled with bottom border for visual separation
-- Hidden if no features exist after filtering/exclusions
+
+-   Display the section name (sentence-cased from key) and optional description
+-   Automatically span all columns
+-   Styled with bottom border for visual separation
+-   Hidden if no features exist after filtering/exclusions
 
 ### Automatic Filtering
 
 The component automatically filters out rows with no data:
 
-1. **Empty feature rows**: Rows where all competitors have undefined/null/empty values are hidden
+1. **Empty feature rows**:
+    - By default (requireCompleteData=false): Rows where ALL competitors have undefined/null/empty values are hidden
+    - With requireCompleteData=true: Rows where ANY competitor has undefined/null/empty values are hidden
 2. **Empty section headers**: Headers with no visible features beneath them are removed
 3. **Custom values preserved**: Rows with `values` arrays are always kept (they have explicit data)
+
+**requireCompleteData option:**
+
+-   When `false` (default): Shows rows if at least ONE competitor has data (good for blog articles)
+-   When `true`: Shows rows only if ALL competitors have data (good for product pages)
+-   Configured per-product in productData files via `require_complete_data` setting
+-   When not specified, defaults to `false` for maximum flexibility
 
 This ensures clean, data-driven tables that only show relevant information.
 
@@ -424,11 +443,12 @@ This ensures clean, data-driven tables that only show relevant information.
 ### Competitor Names and Links
 
 Competitor columns display:
-- Full competitor name from competitor data (e.g., "Amplitude" not "amplitude")
-- Optional "compare" link to comparison article (if `comparisonArticle` is set in competitor data)
-- "compare" link is hidden when viewing the comparison article itself (prevents self-referential links)
-- PostHog logo instead of text name
-- On product pages, PostHog appears as first column after feature names
+
+-   Full competitor name from competitor data (e.g., "Amplitude" not "amplitude")
+-   Optional "compare" link to comparison article (if `comparisonArticle` is set in competitor data)
+-   "compare" link is hidden when viewing the comparison article itself (prevents self-referential links)
+-   PostHog logo instead of text name
+-   On product pages, PostHog appears as first column after feature names
 
 ## Adding Competitors
 
@@ -440,6 +460,7 @@ To add a new competitor:
 4. Optionally add `comparisonArticle` path for linking to comparison posts
 
 Example:
+
 ```typescript
 // competitor.tsx
 export const newCompetitor = {
@@ -478,7 +499,8 @@ All old manual `features` arrays in product data files have been removed. The sy
 3. **Product data** (`src/hooks/productData/`) - configuration only (companies, rows, excluded_sections)
 
 This centralized approach:
-- Eliminates duplication
-- Makes updates easier (change once, reflected everywhere)
-- Enables auto-expansion on product pages
-- Provides consistent feature definitions across all comparisons
+
+-   Eliminates duplication
+-   Makes updates easier (change once, reflected everywhere)
+-   Enables auto-expansion on product pages
+-   Provides consistent feature definitions across all comparisons
