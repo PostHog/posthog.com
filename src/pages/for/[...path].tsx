@@ -181,14 +181,17 @@ const CustomPresentationPage = () => {
         if (!companyDomain) return
 
         const fetchCompanyData = async () => {
+            // Check if companyDomain is actually a domain (contains a dot)
+            const isActualDomain = companyDomain.includes('.')
+
             try {
                 const response = await fetch(`/api/customer?domain=${companyDomain}`)
                 if (response.ok) {
                     const data = await response.json()
                     setCompanyData({
-                        name: data?.companyInfo?.name || companyDomain,
+                        name: data?.companyInfo?.name || (isActualDomain ? companyDomain : ''),
                         domain: data?.companyInfo?.domain || companyDomain,
-                        logo: data?.companyInfo?.logo || null,
+                        logo: data?.companyInfo?.logo || undefined,
                     })
                     setSalesRep({
                         email: data?.accountManager?.email,
@@ -200,19 +203,19 @@ const CustomPresentationPage = () => {
                         color: data?.accountManager?.color,
                     })
                 } else {
-                    // Fallback if Clearbit fails
+                    // Fallback if API fails
                     setCompanyData({
-                        name: companyDomain.replace('.com', '').replace('.io', ''),
+                        name: isActualDomain ? companyDomain.replace('.com', '').replace('.io', '') : '',
                         domain: companyDomain,
-                        logo: null,
+                        logo: undefined,
                     })
                 }
             } catch (error) {
                 console.error('Error fetching company data:', error)
                 setCompanyData({
-                    name: companyDomain.replace('.com', '').replace('.io', ''),
+                    name: isActualDomain ? companyDomain.replace('.com', '').replace('.io', '') : '',
                     domain: companyDomain,
-                    logo: null,
+                    logo: undefined,
                 })
             } finally {
                 setIsLoading(false)

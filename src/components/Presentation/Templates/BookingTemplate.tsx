@@ -17,7 +17,7 @@ interface ColumnsTemplateProps {
     textColor?: string
     companyLogo?: string
     companyName?: string
-    salesRep?: SalesRep
+    salesRep?: SalesRep | null
     teamSlug?: string
     slideKey?: string
 }

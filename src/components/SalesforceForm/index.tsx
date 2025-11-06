@@ -43,6 +43,7 @@ interface IProps {
             options?: CustomFieldOption[]
             fieldType?: string
             cols?: 1 | 2
+            hideLabel?: boolean
         }[]
         ctaButton: {
             label?: string
