@@ -14,21 +14,20 @@ For all of these, you can layer on data like `$exception_types`, `$exception_val
 
 #### Session Replay
 
-Session Replay and Error Tracking work wonderfully together, and arguably has the strongest integration among products that work well with error tracking, as you can view recordings of what users are doing inside your app and get a clear signal of errors they encounter as part of their interactions. You can search for specific events within a session, jump straight to a given issue, view before and after interactions, and diagnose behaviors and errors happening, providing valuable context for debugging.
+Session Replay and Error Tracking work wonderfully together – probably the strongest integration we have. You can watch recordings of what users are doing in your app and get clear signals of errors they're hitting. You can search for specific events, jump straight to a given issue, and see what happened before and after – all of which provide valuable context for debugging.
 
-When viewing a session, you can use the "Only show matching events" toggle to filter the session's events by ones connected to exceptions. For example, you can use Session Replay `$rageclick` tracking to identify UI frustration that may correlate with errors. This can help highlight potential frustration customers are experiencing that may otherwise not get communicated. You can also create dynamic cohorts of impacted users, then take actions on these users.
+When viewing a session, use the "Only show matching events" toggle to filter by exception-related events. You can use `$rageclick` to identify UI frustration that correlate with errors – this helps highlight silent frustrations users are experiencing that otherwise aren't communicated. You can also create dynamic cohorts of impacted users and take actions on them.
 
 #### Other wonderful use cases
 
-With Feature Flags, you can roll out or revert code updates based on users who've hit specific exceptions. This is useful for quickly responding to errors by targeting affected user cohorts. It allows you to minimize impact and quickly make changes if users are having a bad experience due to errors. Feature flags can act as kill switches, allowing you to quickly turn off problematic features without deploying changes.
+Feature Flags: Roll out or revert code updates based on users who've hit specific exceptions. This lets you quickly respond to errors by targeting affected user cohorts and minimize impact if users are having a bad experience. Feature flags can act as kill switches – quickly turn off problematic features without deploying changes.
 
-You can set custom Data Pipeline destinations to send your error tracking exceptions to other sources that could be helpful for your team if the built-in alert function isn't enough.
+Data Pipeline: Set up custom destinations to send your error tracking exceptions to other sources if the built-in alert function isn't enough.
 
-Additionally having Error Tracking turned on means you can leverage AI (such as PostHog AI or Claude Code) to help diagnose, summarize, and prioritize issues based on impact.
+AI: Leverage PostHog AI or Claude Code to help diagnose, summarize, and prioritize issues based on impact.
 
-#### Key value compared to other error tracking products
-
-Historically, error tracking has been primarily used by engineering teams, but with PostHog, there is also deliberate value for other teams. For example, the marketing team can quickly identify why conversions might have dipped and specifically target Session Replays tied to errors. This is incredibly valuable to quickly identify blockers. With other error tracking software, you may be able to get clarity on bugs and errors, but with PostHog, you can get a complete picture of the user journey, and many non-engineers can benefit from this.
+#### PostHog vs other error tracking
+Historically, error tracking is something only engineering teams use. With PostHog, there's deliberate value for other teams. For example, marketing can figure out why conversions dipped and look at Session Replays tied to errors. This is incredibly valuable to quickly identify blockers. Other error tracking tools might give you clarity on bugs and errors, but PostHog gives you the complete picture of the user journey.
 
 # Common blockers
 **“This increases costs that we didn’t budget for”**
