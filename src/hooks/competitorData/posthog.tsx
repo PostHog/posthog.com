@@ -37,7 +37,7 @@ export const posthog = {
                 exception_capture: true,
                 issue_management: true,
                 log_management: 'Beta',
-                mobile_sdk_coverage: 'Partial',
+                mobile_sdk_coverage: true,
                 profiling: false,
                 source_map_support: true,
                 stack_tracing: false,
@@ -47,7 +47,7 @@ export const posthog = {
                 features: {
                     cron_monitoring: false,
                     distributed_tracing: false,
-                    release_tracking: 'Partial',
+                    release_tracking: true,
                     performance_monitoring: true,
                 },
             },
