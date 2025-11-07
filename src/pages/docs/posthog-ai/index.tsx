@@ -85,8 +85,7 @@ export const Content = () => {
                     </p>
                     <p>
                         Unlike other agents, PostHog AI is deeply connected to your product data and event schema. It
-                        accesses your PostHog project and learns from real product usage. Describe what you want in
-                        natural language and it can:
+                        learns from real product usage. Describe what you want in natural language and it can:
                     </p>
                     <ul>
                         <li>Conduct research and query data to answer product and customer questions</li>
@@ -96,9 +95,10 @@ export const Content = () => {
                         <li>Explain features and search PostHog documentation</li>
                     </ul>
                     <p>
-                        PostHog AI's main interface is an in-app AI chat, but it also appears throughout the platform as
-                        interactive UI elements embedded within other PostHog features. For example, you might see the
-                        AI icon{' '}
+                        PostHog AI's main interface is an in-app{' '}
+                        <a href="https://app.posthog.com/#panel=max">AI chat</a>, but it also appears throughout the
+                        platform as inline UI elements embedded within other PostHog features. For example, you might
+                        see the AI icon{' '}
                         <span className="inline-block">
                             <IconSparkles className="h-4 w-4" />
                         </span>{' '}
@@ -162,19 +162,19 @@ export const Content = () => {
                     <ResourceItem
                         type="Getting started"
                         title="Start here"
-                        description="A high-level overview of the integration process for error tracking"
+                        description="A high-level overview of PostHog AI and how to get started"
                         url="/docs/posthog-ai/start-here"
                     />
                     <ResourceItem
                         type="Access"
                         title="Enable PostHog AI"
-                        description="Configure access to PostHog AI in your PostHog project"
-                        url="/docs/posthog-ai/enable"
+                        description="Allow PostHog AI access to your PostHog project"
+                        url="/docs/posthog-ai/allow-access"
                     />
                     <ResourceItem
                         type="Features"
                         title="Tools and skills"
-                        description="Learn about PostHog AI's capabilities"
+                        description="Learn about PostHog AI's features and capabilities"
                         url="/docs/posthog-ai/tools"
                     />
                 </ul>
@@ -195,7 +195,7 @@ const PostHogAI: React.FC = () => {
                         title="PostHog AI"
                         description="Deeply connected with your product. Lives inside the PostHog app."
                         buttonText="Get started"
-                        buttonLink="/docs/posthog-ai"
+                        buttonLink="/docs/posthog-ai/start-here"
                         imageColumnClasses="mt-4 md:-mt-8"
                         imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/all_knowing_4e50835711.png"
                         imageClasses="max-h-48 md:max-h-64"
