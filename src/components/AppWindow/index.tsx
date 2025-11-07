@@ -421,11 +421,11 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         () => [
             {
                 type: 'submenu',
-                label: 'Ask Max about this page',
+                label: 'Ask PostHog AI about this page',
                 items: [
                     {
                         type: 'item',
-                        label: 'New Max chat',
+                        label: 'New PostHog AI chat',
                         onClick() {
                             openNewChat({
                                 path: `ask-max-${item.path}`,

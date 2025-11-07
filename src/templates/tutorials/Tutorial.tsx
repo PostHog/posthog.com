@@ -27,6 +27,7 @@ import { Intro } from '../../templates/BlogPost'
 import TutorialsSlider from 'components/TutorialsSlider'
 import { communityMenu, docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
+import { getVideoClasses } from '../../constants'
 
 export const ViewButton = ({ title, view, setView }) => {
     return (
@@ -88,6 +89,7 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
                             featuredImageType="full"
                             titlePosition="top"
                             date={date}
+                            fullWidthContent={fullWidthContent}
                         />
                         {featuredVideo && (
                             <div className="mb-6 flex space-x-2">
@@ -102,7 +104,7 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
                                 </MDXProvider>
                             </div>
                         ) : (
-                            <iframe src={featuredVideo} />
+                            <iframe src={featuredVideo} className={getVideoClasses(fullWidthContent)} />
                         )}
                     </div>
                 </div>

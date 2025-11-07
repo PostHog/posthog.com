@@ -990,6 +990,10 @@ export const handbookSidebar = [
                 url: '/handbook/marketing/events',
             },
             {
+                name: 'Customer case studies',
+                url: '/handbook/marketing/customer-case-studies',
+            },
+            {
                 name: 'Email & comms',
                 url: '',
                 children: [
@@ -1140,6 +1144,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/posthog-com/presentations',
             },
             {
+                name: 'Product & feature comparisons',
+                url: '/handbook/engineering/posthog-com/product-comparisons',
+            },
+            {
                 name: 'Editing API docs',
                 url: '/handbook/engineering/posthog-com/api-docs',
             },
@@ -1178,6 +1186,10 @@ export const handbookSidebar = [
             {
                 name: 'User feedback',
                 url: '/handbook/product/user-feedback',
+            },
+            {
+                name: 'In-Person Customer Visits',
+                url: '/handbook/product/visiting-customers',
             },
             {
                 name: 'Releasing as beta',
@@ -1266,12 +1278,16 @@ export const handbookSidebar = [
                                 url: '/handbook/growth/sales/account-planning',
                             },
                             {
-                                name: 'Cross-sell motions',
+                                name: 'Cross selling tactics',
                                 url: '/handbook/growth/sales/cross-selling',
                             },
                             {
                                 name: 'Cross sell motions',
                                 url: '/handbook/growth/sales/cross-sell-motions',
+                            },
+                             {
+                                name: 'Communications templates',
+                                url: '/handbook/growth/sales/communications-templates',
                             },
                         ],
                     },
@@ -1374,6 +1390,10 @@ export const handbookSidebar = [
                     {
                         name: 'Onboarding tracking',
                         url: '/handbook/onboarding/onboarding-tracking',
+                    },
+                    {
+                        name: 'Onboarding data',
+                        url: '/handbook/onboarding/onboarding-data',
                     },
                     {
                         name: 'Sales handover',
@@ -4412,7 +4432,7 @@ export const docsMenu = {
                 {
                     name: 'Sessions',
                     url: '/docs/llm-analytics/sessions',
-                    icon: 'IconMessages',
+                    icon: 'IconStack',
                     color: 'blue',
                     featured: true,
                 },
@@ -4811,6 +4831,50 @@ export const docsMenu = {
                 {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/workflows/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'red',
+                },
+            ],
+        },
+        {
+            name: 'Logs',
+            icon: 'IconSearch',
+            color: 'blue',
+            url: '/docs/logs',
+            description: 'Search and analyze your application logs with OpenTelemetry.',
+            children: [
+                {
+                    name: 'Logs',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/logs',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/logs/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Install logging client',
+                    url: '/docs/logs/installation',
+                    icon: 'IconCode',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/logs/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
                 },

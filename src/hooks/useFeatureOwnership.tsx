@@ -311,7 +311,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                     #support-client-libraries
                 </PrivateLink>
                 . There is an engineer assigned to SDK support on a rotating schedule. Check the{' '}
-                <PrivateLink url="https://posthog.pagerduty.com/schedules#P7B7NTR">Pager Duty schedule</PrivateLink>.
+                <PrivateLink url="https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MD6JK1TEGAK97450S">
+                    incident.io schedule
+                </PrivateLink>
+                .
                 <br />
                 <br />
                 <strong>For Mobile SDK issues, defer to the Mobile team first.</strong>
@@ -433,6 +436,15 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Workflows',
         owner: ['workflows'],
         label: 'feature/workflows',
+    },
+    wizard: {
+        feature: 'Wizard',
+        owner: [],
+        notes: (
+            <>
+                Owned by <TeamMember name="Danilo Campos" photo />, with help from Team Array
+            </>
+        ),
     },
 }
 

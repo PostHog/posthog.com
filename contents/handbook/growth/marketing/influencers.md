@@ -55,7 +55,7 @@ Some of the influencers we sponsor include:
 - Make sure they tell their audience to "mention them on sign up" or "say that they heard about PostHog from them" so we can track the attribution.
 
 - We generally let influencers decide on what the ad read is like so that it best fits their audience. We can provide guidance on what to talk about though. These points are helpful to share:
-  - PostHog is an all-in-one suite of product and data tools for developers.
+  - PostHog is an all-in-one suite of dev tools helping people build successful products.
   - This means product analytics, web analytics, session replay, A/B testing, feature flags, error tracking, LLM analytics, surveys, and more.
   - We also have a CDP for sending data to 50+ destinations and a data warehouse product that lets you connect to external sources like your database, Stripe or Hubspot to query with SQL (or no code insights) alongside your product data.
   - The goal of these tools is to help founders and engineers understand their customers,  how they are using products, the success of their features, and the journeys of their visitors.

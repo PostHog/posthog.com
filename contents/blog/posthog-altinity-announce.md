@@ -33,7 +33,7 @@ We think this partnership with Altinity is exciting because, while self-hosted d
 
 You can find out more about our partnership with Altinity in the PostHog marketplace, where we’ll soon add even more exciting partners to help you get even more from your PostHog deployment. Until then, we’d love to hear your feedback in [our community page](/posts).
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />
 

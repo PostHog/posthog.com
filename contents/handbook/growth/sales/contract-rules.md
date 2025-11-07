@@ -85,10 +85,7 @@ The below table summarizes the discount levels contained in points 2-4:
 </tbody>
 </table>
 
-Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. For this reason, discounts only apply if customers pay the whole year(s) up front.
-
-As an exception, a customer can choose to contract for a year but pay quarterly - in this case, they can get a discount, but it is halved. No discounts are available for customers paying monthly.
-
+Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. Pre-paid discounts must be paid up-front. We do not offer monthly or quarterly payment plans for discounted contracts. If a customer prefers quarterly or monthly payments, we can offer them a lower credit value, which will reduce their discount.
 ### Credit for case studies
 
 We don't offer additional discounts in exchange for a case study, as paying for case studies can devalue them. We should be working to get our customers to a state of happiness such that they are willing to tell everyone how great PostHog is without needing to pay for it.
