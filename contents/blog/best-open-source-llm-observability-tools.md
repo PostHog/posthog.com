@@ -160,3 +160,7 @@ Its hosted version has a free tier, which offers 10k events per month with 30 da
 #### What makes Lunary special?
 
 Lunary is purpose built for LLM chatbots like knowledge bases and support tools. This shows in their focus on features like PII masking, access management, human reviewing, and multi-modal support. 
+
+## Related reading
+
+If you’re also instrumenting the rest of your app (not just the LLM parts), we have a separate roundup of the [best error tracking tools](/blog/best-error-tracking-tools). It compares the more traditional app monitoring tools — useful if you want LLM traces and regular exception monitoring to live side by side.
