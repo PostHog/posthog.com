@@ -28,11 +28,11 @@ const Filters = ({ isRefinedClassName = 'bg-primary' }: { isRefinedClassName?: s
                         onClick={() => {
                             refine(item.value)
                         }}
-                        className={`text-sm border border-primary rounded-md px-1 flex space-x-1 items-center ${
+                        className={`text-sm text-primary border border-primary rounded px-1 flex space-x-1 items-center whitespace-nowrap ${
                             item.isRefined ? isRefinedClassName : ''
                         }`}
                     >
-                        <span className="text-sm">{capitalizeFirstLetter(item.label)}</span>{' '}
+                        <span className="text-sm">{capitalizeFirstLetter(item.label.replace(/-/g, ' '))}</span>{' '}
                         <span className="text-xs opacity-60 font-semibold">({item.count})</span>
                     </button>
                 </li>
@@ -122,7 +122,7 @@ const Search = ({
                             containerClassName="m-0"
                         />
 
-                        <div data-scheme="secondary" className="absolute right-1 top-1/2 -translate-y-1/2">
+                        <div data-scheme="primary" className="absolute right-1 top-1/2 -translate-y-1/2">
                             <OSButton
                                 disabled={!query}
                                 size="md"
@@ -131,8 +131,8 @@ const Search = ({
                                     openChat()
                                 }}
                                 icon={<IconSparkles />}
-                                hover="background"
-                                className="font-semibold"
+                                hover="border"
+                                className="font-semibold underline bg-accent text-primary"
                             >
                                 Ask AI
                             </OSButton>
