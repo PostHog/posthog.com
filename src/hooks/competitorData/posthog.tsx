@@ -37,7 +37,7 @@ export const posthog = {
                 exception_capture: true,
                 issue_management: true,
                 log_management: 'Beta',
-                mobile_sdk_coverage: 'Partial',
+                mobile_sdk_coverage: true,
                 profiling: false,
                 source_map_support: true,
                 stack_tracing: false,
