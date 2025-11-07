@@ -19,6 +19,7 @@ interface ChatContextType {
     setContext: (context: { type: 'page'; value: { path: string; label: string } }[]) => void
     addContext: (newContext: { type: 'page'; value: { path: string; label: string } }) => void
     firstResponse: string | null
+    initialQuestion?: string
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
@@ -28,11 +29,13 @@ export function ChatProvider({
     quickQuestions: initialQuickQuestions,
     chatId,
     date,
+    initialQuestion,
 }: {
     context?: { type: 'page'; value: { path: string; label: string } }[]
     quickQuestions?: string[]
     chatId?: string
     date?: string
+    initialQuestion?: string
 }): JSX.Element {
     const { windows, setWindowTitle } = useApp()
     const { appWindow } = useWindow()
@@ -192,6 +195,7 @@ export function ChatProvider({
                 setContext,
                 addContext,
                 firstResponse,
+                initialQuestion,
             }}
         >
             <Chat />
