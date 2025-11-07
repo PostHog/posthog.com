@@ -12,17 +12,21 @@ You can pop PostHog AI open wherever you are in PostHog. Click on the [PostHog A
     zoom={false}
 />
 
+<Caption>
+PostHog AI chat is always available in the sidebar
+</Caption>
+
 ## Allow PostHog AI access 
 
-The first time you use PostHog AI, you'll need to grant access to your project. This action requires [admin permissions](/docs/settings/access-control) for your organization.
+In order to use PostHog AI, you need to grant access to your project. This action requires [admin permissions](/docs/settings/access-control) for your organization.
 
 Because PostHog AI features use third-party LLM providers, we require organizations to explicilty opt in with admin approval. In most cases this is just a formality, but we've made it explicit as we take data governance seriously.
 
-There are two ways of granting access to PostHog AI to your project as an organization admin.
+There are two ways of granting PostHog AI access to your project as an organization admin.
 
 ### Option 1: PostHog AI chat
 
-The very first time you enter a prompt in the chat, PostHog AI will ask you to grant it access to your project. 
+The very first time you enter a prompt in the chat, PostHog AI will ask you to grant it access to your project. As an admin, you can enable it directly within the chat. 
 
 <ProductVideo
   videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/allow_posthog_ai_a148e2f744.mp4" 
@@ -31,16 +35,18 @@ The very first time you enter a prompt in the chat, PostHog AI will ask you to g
   autoPlay={true}
 />
 
-<Caption>
-Allow PostHog AI access in the chat
-</Caption>
-
 ### Option 2: Organization settings
 
-You can also enable PostHog AI in your [organization settings](http://app.posthog.com/settings/organization-details#organization-ai-consent).
+Alternatively, you can enable PostHog AI in your [organization settings](http://app.posthog.com/settings/organization-details#organization-ai-consent).
 
 1. Go to **Settings** > **Organization** > **General**
 2. Find the **PostHog AI data analysis** section
 3. Toggle the switch to "on"
 
-
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20251107_nmhv_aafc81cdbb.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20251107_nmkd_ad9d7dbe15.png"
+    alt="PostHog AI settingsr"
+    classes="rounded"
+    zoom={false}
+/>

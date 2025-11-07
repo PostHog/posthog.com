@@ -6,7 +6,7 @@ import Intro from 'components/Docs/Intro'
 import ReaderView from 'components/ReaderView'
 import OSTable from 'components/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { IconCheck, IconLogomark } from '@posthog/icons'
+import { IconCheck, IconLogomark, IconSpinner } from '@posthog/icons'
 import {
     IconRewindPlay,
     IconTrends,
@@ -64,7 +64,7 @@ const posthogAIFeatures = [
     { text: 'Create dashboards', url: '/docs/posthog-ai/tools-and-capabilities' },
     { text: 'Deep research', url: '/docs/posthog-ai/deep-research', comingSoon: true },
     { text: 'Summarize session replays', url: '/docs/posthog-ai/session-summaries', comingSoon: true },
-    { text: 'Access PostHog dev tools', url: '/docs/posthog-ai/tools-and-capabilities' },
+    { text: 'Use dev tools', url: '/docs/posthog-ai/tools-and-capabilities' },
     { text: 'Analyze product data and event schema', url: '/docs/posthog-ai/tools-and-capabilities' },
     { text: 'Navigate PostHog UI', url: '/docs/posthog-ai/tools-and-capabilities' },
     { text: 'Manage context', url: '/docs/posthog-ai/tools-and-capabilities' },
@@ -95,10 +95,9 @@ export const Content = () => {
                         <li>Explain features and search PostHog documentation</li>
                     </ul>
                     <p>
-                        PostHog AI's main interface is an in-app{' '}
-                        <a href="https://app.posthog.com/#panel=max">AI chat</a>, but it also appears throughout the
-                        platform as inline UI elements embedded within other PostHog features. For example, you might
-                        see the AI icon{' '}
+                        The main interface is an in-app <a href="https://app.posthog.com/#panel=max">AI chat</a>, but
+                        PostHog AI also appears throughout the platform as inline UI elements embedded within other
+                        PostHog features. For example, you might see the AI icon{' '}
                         <span className="inline-block">
                             <IconSparkles className="h-4 w-4" />
                         </span>{' '}
@@ -131,11 +130,18 @@ export const Content = () => {
                         const row = rows[rows.length - 1]
                         row.cells.push(
                             { content: <a href={feature.url}>{feature.text}</a> },
-                            { content: <IconCheck className="h-5 text-green" /> }
+                            {
+                                content: feature.comingSoon ? (
+                                    <IconSpinner className="h-5 text-primary" />
+                                ) : (
+                                    <IconCheck className="h-5 text-green" />
+                                ),
+                            }
                         )
                         return rows
                     }, [] as any[])}
                     size="sm"
+                    width="full"
                 />
             </section>
 

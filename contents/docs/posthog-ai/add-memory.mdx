@@ -2,13 +2,26 @@
 title: Add and save memory to PostHog AI
 ---
 
-## Run /init to start PostHog AI's memory
+import {IconGear} from '@posthog/icons'
 
-You can run the `/init` command to start PostHog AI's memory about your project and company. PostHog AI will use this memory to tailor its thinking and reasearch to your project's specific context.
+You can use PostHog AI memory to save context or information across multiple conversations. This helps PostHog AI to remember important details about your product, company, and preferred ways of working. 
 
-## How can I get PostHog AI to remember information?
+PostHog AI uses this memory to tailor its thinking, research, and execution. 
 
-PostHog AI has a memory tied to your project and naturally tries to remember relevant information from your chats. You can also explicitly ask it to remember specific details using verbs like "remember" or "save", or most directly: the `/remember` command in the chat.
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20251107_ngbw_8c59ce9ef9.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20251107_ngeu_1f6af494ee.png"
+  alt="PostHog AI memory"
+  classes="rounded"
+/>
 
-PostHog AI's full memory can be viewed and edited in project settings.
+## Run /init command
 
+To get started, we recommend running the `/init` command in the PostHog AI chat. PostHog AI will ask you a few baseline questions about your product and company and then save it to memory. 
+
+## Edit memory
+
+You can also access PostHog AI's memory to make direct edits. You can access its memory in two ways: 
+
+1. Click the **gear icon** <span className="inline-block"><IconGear className="w-4 h-4" /></span> in the chat 
+2. Navigate to project **Settings** > **AI**
