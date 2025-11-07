@@ -1,5 +1,5 @@
-import { graphql, useStaticQuery } from 'gatsby'
-import React, { useRef, useState } from 'react'
+import { graphql, navigate } from 'gatsby'
+import React, { useEffect, useRef, useState } from 'react'
 import { CareersHero } from '../components/Careers/CareersHero'
 import { OpenRoles } from '../components/Careers/OpenRoles'
 import { Transparency } from '../components/Careers/Transparency'
@@ -26,6 +26,13 @@ import { IconList } from '@posthog/icons'
 import { Popover } from 'components/RadixUI/Popover'
 import Tooltip from 'components/RadixUI/Tooltip'
 
+interface CareersProps {
+    data: {
+        allAshbyJobPosting: { nodes: { publishedDate: string; title: string; id: string; fields: { slug: string } }[] }
+    }
+    location: Location
+}
+
 const careersTableOfContents = [
     { url: '#hero', value: 'Open roles', depth: 0 },
     { url: '#small-teams', value: 'Small teams', depth: 0 },
@@ -43,9 +50,8 @@ const careersTableOfContents = [
     { url: '#team-quotes', value: 'Team quotes', depth: 0 },
 ]
 
-const IndexPage = () => {
+const IndexPage = ({ data, location }: CareersProps): JSX.Element => {
     const ref = useRef<HTMLDivElement>(null)
-    const data = useStaticQuery(query)
     const latestJob = data?.allAshbyJobPosting?.nodes && data.allAshbyJobPosting.nodes[0]
     const latestJobCreatedAt = latestJob && new Date(latestJob['publishedDate'])
     const [showTableOfContents, setShowTableOfContents] = useState(false)
@@ -89,7 +95,7 @@ const IndexPage = () => {
                                             const container = ref.current
                                                 ?.closest('[data-radix-scroll-area-viewport]')
                                                 ?.parentElement?.closest('[data-radix-scroll-area-viewport]')
-                                            const el = container?.querySelector(item.url)
+                                            const el = container?.querySelector(item.url) as HTMLElement | null
                                             if (!el) return
                                             container?.scrollTo({
                                                 top: el.offsetTop,
@@ -156,6 +162,21 @@ const IndexPage = () => {
         ),
     })
 
+    useEffect(() => {
+        try {
+            const params = new URLSearchParams(location.search)
+            const jobId = params.get('ashby_jid')
+            if (jobId) {
+                const job = data.allAshbyJobPosting.nodes.find((node) => node.id === jobId)
+                if (job && job.fields?.slug) {
+                    navigate(`${job.fields.slug}${location.search || ''}`)
+                }
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }, [])
+
     return (
         <>
             <SEO
@@ -191,12 +212,16 @@ const IndexPage = () => {
     )
 }
 
-const query = graphql`
+export const query = graphql`
     query CareersQuery {
         allAshbyJobPosting(sort: { fields: publishedDate, order: DESC }) {
             nodes {
                 publishedDate
                 title
+                id
+                fields {
+                    slug
+                }
             }
         }
     }
