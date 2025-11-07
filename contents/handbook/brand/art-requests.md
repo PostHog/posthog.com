@@ -22,6 +22,8 @@ They get a lot of work requests, so they use [a request template](https://github
 
 You can see what they are working on via the [Art & Brand Planning project board](https://github.com/orgs/PostHog/projects/65/views/2).
 
+To establish a clear connection between the task and the working file, designers will create a frame containing a link to the task. They should then add a link to that frame within the task for easy reference.
+
 Lottie and Daniel usually ask for two weeks minimum notice, but can often work faster on things if needed. If your request is genuinely urgent, please share your request issue in [#team-marketing channel](https://posthog.slack.com/archives/C08CG24E3SR) and mention Lottie, Daniel, and/or [Cory](https://posthog.com/community/profiles/30200).
 
 ## Hedgehog library

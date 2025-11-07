@@ -22,6 +22,14 @@
             @apply no-underline;
         }
 
+        h4 {
+            @apply text-lg;
+
+            code {
+                @apply !text-lg;
+            }
+        }
+
         /* expandable/collapsible sections */
         details {
             @apply bg-primary border border-transparent rounded;
@@ -1533,6 +1541,15 @@ body.dark {
     animation-iteration-count: infinite;
 }
 
+.Table {
+    thead td {
+        @apply py-2;
+    }
+    tr td:not(:first-child) {
+        @apply pl-4;
+    }
+}
+
 .mermaid-container {
     @apply my-4;
     .messageText,
@@ -2030,6 +2047,10 @@ li.squeak-left-border {
 
         li {
             @apply !mb-0 !leading-relaxed !text-[15px];
+        }
+
+        *:first-child {
+            @apply mt-0;
         }
     }
 }
@@ -2550,5 +2571,11 @@ article.reader-view-content-container:has(.quest-sidebar) {
 .role-search + .scrollarea-fade {
     @media (max-width: 767px) {
         display: none;
+    }
+}
+
+.reader-content-container {
+    iframe {
+        @apply w-full aspect-video; /* attempt to make youtube videos full width with hopefully no negative consequences... */
     }
 }
