@@ -96,12 +96,14 @@ interface AppContextType {
         quickQuestions,
         chatId,
         date,
+        initialQuestion,
     }: {
         path: string
         context?: ChatContext[]
         quickQuestions?: string[]
         chatId?: string
         date?: string
+        initialQuestion?: string
     }) => void
     isNotificationsPanelOpen: boolean
     setIsNotificationsPanelOpen: (isOpen: boolean) => void
@@ -1515,12 +1517,14 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         quickQuestions,
         chatId,
         date,
+        initialQuestion,
     }: {
         path: string
         context?: ChatContext[]
         quickQuestions?: string[]
         chatId?: string
         date?: string
+        initialQuestion?: string
     }) => {
         addWindow(
             <ChatProvider
@@ -1533,6 +1537,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 quickQuestions={quickQuestions}
                 chatId={chatId}
                 date={date}
+                initialQuestion={initialQuestion}
             />
         )
     }
