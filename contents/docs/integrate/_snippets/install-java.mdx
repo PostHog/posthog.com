@@ -1,6 +1,6 @@
 The best way to install the PostHog Java SDK is with a build system like Gradle or Maven. This ensures you can easily upgrade to the latest versions.
 
-Look up the latest version in [com.posthog.posthog-server](https://central.sonatype.com/artifact/com.posthog/posthog-server).
+Look up the latest version of [`com.posthog.posthog-server`](https://central.sonatype.com/artifact/com.posthog/posthog-server).
 
 #### Gradle
 
@@ -8,7 +8,7 @@ All you need to do is add the `posthog-server` module to your `build.gradle`:
 
 ```gradle_kotlin file=build.gradle
 dependencies {
-  implementation 'com.posthog:posthog-server:1.+'
+  implementation 'com.posthog:posthog-server:2.+'
 }
 ```
 
@@ -26,7 +26,7 @@ All you need to do is add the `posthog-server` module to your `pom.xml`:
 
 #### Other
 
-See [com.posthog.posthog-server](https://central.sonatype.com/artifact/com.posthog/posthog-server) in the Maven Central Repository. Clicking on the latest version shows you options for adding dependencies for other build systems.
+See [`com.posthog.posthog-server`](https://central.sonatype.com/artifact/com.posthog/posthog-server) in the Maven Central Repository. Clicking on the latest version shows you options for adding dependencies for other build systems.
 
 ### Setup
 
@@ -42,13 +42,31 @@ class Sample {
   public static void main(String args[]) {
     PostHogConfig config = PostHogConfig
             .builder(POSTHOG_API_KEY)
-            .host(POSTHOG_HOST)
+            .host(POSTHOG_HOST) // TIP: host is optional if you use https://us.i.posthog.com
             .build();
     
-    PostHogInterface postHog = PostHog.with(config);
+    PostHogInterface posthog = PostHog.with(config);
 
-    postHog.close();  // send the last events in queue
+    posthog.flush(); // send any remaining events
+    posthog.close(); // shut down the client
   }
 }
 ```
 
+## Integrating with Spring
+
+To see how to integrate the PostHog SDK with Spring, check out this [sample project](https://github.com/PostHog/posthog-android/tree/main/posthog-samples/posthog-spring-sample).
+
+## Debug mode
+
+If you're not seeing the expected events being captured, or the feature flags being evaluated, you can enable debug mode to see what's happening. 
+
+To see detailed logging, set the debug configuration option to true.
+
+```java
+  PostHogConfig config = PostHogConfig
+          .builder(POSTHOG_API_KEY)
+          .host(POSTHOG_HOST)
+          .debug(true)
+          .build();
+```

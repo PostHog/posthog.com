@@ -1,0 +1,51 @@
+---
+title: Java error tracking installation
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+
+import CLIUpload from "../_snippets/cli/upload.mdx"
+import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
+import CLIDownload from "../_snippets/cli/download.mdx"
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+import InstallJava from "../../integrate/_snippets/install-java.mdx"
+
+<Steps>
+<Step title="Install the PostHog SDK for Java" subtitle="Your goal in this step: Install and configure the PostHog SDK for Java." badge="required">
+
+<CalloutBox icon="IconInfo" title="SDK version requirement" type="action">
+
+A minimum SDK version of [2.0.0](https://github.com/PostHog/posthog-android/releases/tag/server-v2.0.0) is required, but we recommend [keeping up to date with the latest version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
+
+</CalloutBox>
+
+<InstallJava />
+
+</Step>
+
+<Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your Java application." badge="optional">
+
+To send errors manually, use the `captureException` method like this:
+
+```java
+try {
+    // Your code that might throw an exception
+    throw new RuntimeException("Something went wrong");
+} catch (Exception e) {
+    posthog.captureException(
+        e,
+        "distinct_id_of_your_user", // TIP: This will associate the exception with a user. It can also be null!
+        Map.of(
+            "service", "payment-processor",
+            "context", "checkout_flow"
+        )
+    );
+}
+```
+</Step>
+
+<StepVerifyErrorTracking />
+
+</Steps>

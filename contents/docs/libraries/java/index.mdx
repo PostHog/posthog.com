@@ -179,7 +179,114 @@ PostHogConfig config = PostHogConfig
 
 ### Local evaluation
 
-While planned, local evaluation of feature flags is not yet supported in the Java SDK. All feature flag evaluations occur remotely via the PostHog API.
+import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
+
+<LocalEvaluationIntro />
+
+Local evaluation improves performance by fetching flag definitions once and evaluating them locally, rather than making API calls for each flag check.
+
+#### Configuration
+
+To enable local evaluation, you need:
+
+1. A **personal API key** (not your project API key)
+   - Generate one at: PostHog → Settings → Account → Personal API Keys
+2. Enable `localEvaluation` in your config
+
+```java
+PostHogConfig config = PostHogConfig
+    .builder(POSTHOG_API_KEY)
+    .host(POSTHOG_HOST)
+    .personalApiKey("phx_your_personal_api_key_here")
+    .localEvaluation(true)
+    .pollIntervalSeconds(30)  // Optional: customize the rate which flag definitions are polled (default: 30s)
+    .build();
+```
+
+> **Note:** Setting the `personalApiKey` automatically enables `localEvaluation` unless explicitly set to `false`.
+
+#### Usage with person and group properties
+
+For local evaluation to work, you must provide person properties, groups, or group properties that are used in your flag's [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions).
+
+Use `PostHogFeatureFlagOptions` to provide these properties:
+
+**Basic flag evaluation:**
+```java
+boolean isEnabled = postHog.isFeatureEnabled("distinct-id", "flag-key");
+```
+
+**With person properties:**
+```java
+PostHogFeatureFlagOptions options = PostHogFeatureFlagOptions
+    .builder()
+    .defaultValue(false)
+    .personProperty("plan", "premium")
+    .personProperty("email", "my-user@example.com")
+    .build();
+
+boolean isEnabled = postHog.isFeatureEnabled("distinct-id", "flag-key", options);
+```
+
+**With groups:**
+```java
+PostHogFeatureFlagOptions options = PostHogFeatureFlagOptions
+    .builder()
+    .defaultValue(false)
+    .group("company", "company_id_in_your_db")
+    .build();
+
+boolean isEnabled = postHog.isFeatureEnabled("distinct-id", "flag-key", options);
+```
+
+**With group properties:**
+```java
+PostHogFeatureFlagOptions options = PostHogFeatureFlagOptions
+    .builder()
+    .defaultValue(false)
+    .group("company", "company_id_in_your_db")
+    .groupProperty("company", "industry", "technology")
+    .groupProperty("company", "employees", 500)
+    .build();
+
+boolean isEnabled = postHog.isFeatureEnabled("distinct-id", "flag-key", options);
+```
+
+**Multivariate flags:**
+```java
+PostHogFeatureFlagOptions options = PostHogFeatureFlagOptions
+    .builder()
+    .defaultValue("control")
+    .personProperty("plan", "premium")
+    .group("company", "company_id_in_your_db")
+    .groupProperty("company", "industry", "technology")
+    .build();
+
+Object flagValue = postHog.getFeatureFlag("distinct-id", "algorithm", options);
+String algorithm = flagValue instanceof String ? (String) flagValue : "control";
+switch (algorithm) {
+    case "neural_network":
+        useNeuralNetwork();
+        break;
+    case "collaborative_filtering":
+        useCollaborativeFiltering();
+        break;
+    default:
+        useControlAlgorithm();
+}
+```
+
+#### Limitations
+
+Local evaluation is **not possible** for flags that:
+
+1. Have **experience continuity** enabled (set when you check "persist flag across authentication steps")
+2. Are linked to an **early access feature**
+3. Depend on **static cohorts**
+
+For these flags, PostHog automatically falls back to remote evaluation via the API.
+
+For more details, see our [local evaluation guide](/docs/feature-flags/local-evaluation).
 
 ### Feature flag caching
 
@@ -207,7 +314,7 @@ Since [experiments](/docs/experiments/manual) use feature flags, the code for ru
 ```java
 Object flagValue = postHog.getFeatureFlag("user_distinct_id", "recommendation_algorithm", "control");
 String variant = flagValue instanceof String ? (String) flagValue : "control";
-if (variant.equals("neural_network")) {
+if ("neural_network".equals(variant)) {
     // Do something differently for this user
 }
 ```
