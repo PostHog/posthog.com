@@ -47,7 +47,7 @@ export const posthog = {
                 features: {
                     cron_monitoring: false,
                     distributed_tracing: false,
-                    release_tracking: 'Partial',
+                    release_tracking: true,
                     performance_monitoring: true,
                 },
             },
