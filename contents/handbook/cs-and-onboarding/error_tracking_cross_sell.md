@@ -1,18 +1,16 @@
 ## Demonstrate the value
 
-The easiest way to help cross-sell a product is to quickly demonstrate its value once you've identified ideal candidates who would be a good fit. Below are a list of products where Error Tracking can add clear value to customers who are already heavily using these products.
+Once you've identified customers who'd benefit from Error Tracking, show them value in ways relevant to them.
+
 
 #### Product Analytics
 
-With Product Analytics, there are a few good starting points for error tracking that a customer may want to consider.
+A few good starting points:
+1. **Track error trends over time**: Create a trends insight for `$exception` events and create alerts when errors hit specific thresholds. You can get both historical trends and real-time notifications on high-impact exceptions to prioritize engineering work.
+2. **See if errors are affecting conversion**: Combine errors with funnels to figure out if drop-off is happening because of errors – especially if errors are blocking users from getting through critical flows. You can tie this to customer lifetime value to show potential revenue loss. This is also useful for experiments - you want to make sure your variant didn't underperform because of a bug rather than the actual feature you're testing.
+3. **Measure retention impact**: Track whether users who hit errors come back less frequently.
 
-The first is setting up trends to track how error rates change over time. This could be creating an insight of `$exception` events and setting alerts when error counts hit specific thresholds. This can be a good way to not only track historical trends but getting real time notifications on high impact exceptions that could be affecting users.
-
-Another useful thing customers should track are funnels where conversion between steps could have a drop off and how that might be impacted by errors. This can help highlight where errors are blocking users from completing critical flows. Leveraging lifetime value of a customer and multiplying the impact for funnel drop off can be a quick way to highlight potential revenue loss.
-
-Customers can also track impacts on retention by measuring users who encounter errors and if they come back less frequently as a result.
-
-For each of these, you can even layer on data such as `$exception_types`, `$exception_values`, or `$exception_sources` to identify which errors are most common. With these insights and funnels, you'll be able to quickly see how users are impacted, if conversions are decreasing, or if it impacts how often users return.
+For all of these, you can layer on data like `$exception_types`, `$exception_values`, or `$exception_sources` to figure out which errors are most common and how they're impacting users.
 
 #### Session Replay
 
