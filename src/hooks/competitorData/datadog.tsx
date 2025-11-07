@@ -14,9 +14,11 @@ export const datadog = {
                 exception_capture: true,
                 issue_management: true,
                 log_management: true,
+                mobile_sdk_coverage: true,
                 profiling: true,
                 source_map_support: true,
                 stack_tracing: true,
+                user_device_context: true,
             },
             integrations: {
                 datadog: false,
