@@ -33,7 +33,7 @@ export const sentry = {
                 },
             },
             integrations: {
-                session_replay: 'Limited',
+                session_replay: true,
                 product_analytics: false,
             },
         },
