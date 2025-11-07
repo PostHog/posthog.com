@@ -38,6 +38,8 @@ const handler = async (req, res) => {
                 },
             }
 
+            console.log('data', data)
+
             resolve(data)
         })
     })
