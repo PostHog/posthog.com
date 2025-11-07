@@ -990,6 +990,10 @@ export const handbookSidebar = [
                 url: '/handbook/marketing/events',
             },
             {
+                name: 'Customer case studies',
+                url: '/handbook/marketing/customer-case-studies',
+            },
+            {
                 name: 'Email & comms',
                 url: '',
                 children: [
