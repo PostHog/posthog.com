@@ -1,5 +1,5 @@
 ---
-title: Communcation templates for incidents
+title: Communication templates for incidents
 sidebar: Handbook
 showTitle: true
 ---
