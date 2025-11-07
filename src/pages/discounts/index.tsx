@@ -10,9 +10,9 @@ const discountsData = {
     actualPricing: {
         title: "PostHog's REAL annual pricing",
         rows: [
-            { item: '20M Events w/ profiles', price: '$23,130' },
-            { item: '100,000 Session Replays', price: '$3,270' },
-            { item: '30M Data Warehouse rows', price: '$4,020' },
+            { item: '20M events w/ profiles', price: '$23,130' },
+            { item: '100,000 session recordings', price: '$3,270' },
+            { item: '30M data warehouse rows', price: '$4,020' },
             { item: '20% discount', price: '-$6,084' },
             { item: 'Total', price: '$24,336', bold: true },
         ],
@@ -20,10 +20,10 @@ const discountsData = {
     extremeDiscounts: {
         title: 'PostHog, but with EXTREME DISCOUNTS',
         baseRows: [
-            { item: '20M Events w/ profiles', price: '$36,260' },
-            { item: '100,000 Session Replays', price: '$4,905' },
-            { item: '30M Data Warehouse rows', price: '$10,050' },
-            { item: 'Premium Support', price: '$10,000' },
+            { item: '20M events w/ profiles', price: '$36,260' },
+            { item: '100,000 session recordings', price: '$4,905' },
+            { item: '30M data warehouse rows', price: '$10,050' },
+            { item: 'Premium support', price: '$10,000' },
         ],
         total: { item: 'Total (after EXTREME discounts)', price: '$24,336', bold: true },
     },
@@ -41,7 +41,7 @@ const discountsData = {
         'What your last vendor will pay us to take you off their hands discount',
         'Your competitor just signed up discount',
         'Synergy optimization discount',
-        'Pre-empting your rfp discount',
+        'Preempting your RFP discount',
         'Thought leader discount',
         'We forgot we had this one',
         'Not having to call you five times this week',
