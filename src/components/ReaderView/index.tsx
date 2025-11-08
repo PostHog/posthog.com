@@ -481,7 +481,9 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                         }}
                     >
                         <motion.div
-                            className="h-full bg-primary rounded @2xl/app-reader:rounded-none pt-4 @2xl/app-reader:pt-0"
+                            className={`h-full bg-primary rounded @2xl/app-reader:rounded-none pt-4  ${
+                                !websiteMode ? '@2xl/app-reader:pt-0' : ''
+                            }`}
                             initial={{ opacity: 1 }}
                             animate={{
                                 opacity: 1,
@@ -492,7 +494,7 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                                 transition: { duration: 0.05 },
                             }}
                         >
-                            <ScrollArea className={websiteMode ? 'pr-4' : 'px-4'}>{children}</ScrollArea>
+                            <ScrollArea className={websiteMode ? 'px-4' : 'px-4'}>{children}</ScrollArea>
                         </motion.div>
                     </motion.div>
                 </>
@@ -634,13 +636,19 @@ function ReaderViewContent({
                 {/* Second row - Main Content */}
                 <div
                     data-scheme="secondary"
-                    className={`bg-primary flex w-full gap-2 min-h-0 flex-grow ${websiteMode && 'pt-8'}`}
+                    className={`bg-primary flex w-full gap-2 min-h-0 flex-grow ${websiteMode && ''}`}
                 >
                     {renderLeftSidebar && <LeftSidebar>{leftSidebar || <Menu parent={parent} />}</LeftSidebar>}
                     <ScrollArea
                         dataScheme="primary"
                         className={`bg-primary border border-primary flex-grow  
-                            ${renderLeftSidebar && isNavVisible ? '@2xl/app-reader:rounded-l' : 'border-l-0'}
+                            ${
+                                !websiteMode
+                                    ? renderLeftSidebar && isNavVisible
+                                        ? '@2xl/app-reader:rounded-l'
+                                        : 'border-l-0'
+                                    : 'border-t-0'
+                            }
                             ${
                                 showSidebar && isTocVisible
                                     ? 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
