@@ -48,7 +48,7 @@ Bring the feature as a solution to the overall strategy, not a simple list of ne
 
 **Experiments → no-code experiments**  
 “You said you want to lift **{goal}**. No-code experiments lets PMs ship A/B tests without engineering. Turn it on here: {project_link}. Start with **{page_or_flow}** where we saw friction. Check **{metric}** in this view: {report_link}. Short Loom with the steps: {loom_link}.”  
-See: [no-code web experiments](https://posthog.com/docs/experiments/no-code-web-experiments) and [experiments overview](https://posthog.com/docs/experiments).
+See: [no-code web experiments](https://posthog.com/docs/experiments/no-code-web-experiments) and [getting started with experiments](https://posthog.com/docs/experiments/start-here).
 
 **Feature flags → quick holdout**  
 “You’re planning to roll out **{feature_or_copy_change}** to improve **{goal}**. Keep a **{holdout_percent}%** holdout on the flag so you can see real lift before full rollout. Flag settings: {project_link}. First results show here: {report_link}.”  
