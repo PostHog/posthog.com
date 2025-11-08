@@ -107,7 +107,7 @@ export default function HeaderBar({
     onOrderHistoryOpen,
     onOrderHistoryClose,
 }: HeaderBarProps) {
-    const { compact, focusedWindow } = useApp()
+    const { compact, focusedWindow, posthogInstance } = useApp()
     const { goBack, goForward, canGoBack, canGoForward, appWindow, menu } = useWindow()
     const [searchOpen, setSearchOpen] = useState(false)
     const [animateCartCount, setAnimateCartCount] = useState(false)
@@ -183,18 +183,25 @@ export default function HeaderBar({
                             {homeURL && <OSButton size="md" icon={<IconHome />} to={homeURL} asLink />}
                             <div>
                                 {hasLeftSidebar && (
-                                    <OSButton
-                                        size="md"
-                                        onClick={onToggleNav}
-                                        active={isNavVisible}
-                                        icon={
-                                            isNavVisible ? (
-                                                <IconSidebarOpen className={navIconClassName} />
-                                            ) : (
-                                                <IconSidebarClose className={navIconClassName} />
-                                            )
+                                    <Tooltip
+                                        trigger={
+                                            <OSButton
+                                                size="md"
+                                                onClick={onToggleNav}
+                                                active={isNavVisible}
+                                                icon={
+                                                    isNavVisible ? (
+                                                        <IconSidebarOpen className={navIconClassName} />
+                                                    ) : (
+                                                        <IconSidebarClose className={navIconClassName} />
+                                                    )
+                                                }
+                                            />
                                         }
-                                    />
+                                    >
+                                        {isNavVisible ? 'Hide' : 'Show'}
+                                        {slideId ? ` slides` : ''}
+                                    </Tooltip>
                                 )}
                             </div>
                         </motion.div>
@@ -234,7 +241,7 @@ export default function HeaderBar({
                                 {appWindow?.meta?.title}
                             </div>
                         ))}
-                    <div className="flex items-center gap-px relative">
+                    <div className="flex items-center gap-0.5 relative">
                         {rightActionButtons}
                         {showSearch && (searchContentRef || onSearch) && !isEditing && (
                             <Tooltip
@@ -340,18 +347,29 @@ export default function HeaderBar({
                 )}
                 <div className="flex items-center gap-1">
                     {showDrawerToggle && (
-                        <Tooltip
-                            trigger={
-                                <OSButton
-                                    size="md"
-                                    icon={<IconBottomPanel />}
-                                    active={isDrawerOpen}
-                                    onClick={onToggleDrawer}
-                                />
-                            }
-                        >
-                            {isDrawerOpen ? 'Hide' : 'Show'} presenter notes
-                        </Tooltip>
+                        <>
+                            <OSButton
+                                variant="secondary"
+                                size="md"
+                                asLink
+                                to="https://app.posthog.com/signup"
+                                className="mr-1"
+                            >
+                                Get started – free
+                            </OSButton>
+                            <Tooltip
+                                trigger={
+                                    <OSButton
+                                        size="md"
+                                        icon={<IconBottomPanel />}
+                                        active={isDrawerOpen}
+                                        onClick={onToggleDrawer}
+                                    />
+                                }
+                            >
+                                {isDrawerOpen ? 'Hide' : 'Show'} presenter notes
+                            </Tooltip>
+                        </>
                     )}
                     {exportToPdf && (
                         <Tooltip

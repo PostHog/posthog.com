@@ -8,7 +8,7 @@ We are [anti-meeting by default](/blog/meetings).
 
 However, while we default to [written and asynchronous communication](/handbook/company/communication), we find that having a few regular touch points for the whole team to come together on a call useful for sharing certain types of information, strengthening our culture and discussing more dynamic issues in real time. 
 
-We keep these minimal in terms of time expectation - no more than 2hrs total per week. They are usually scheduled around 8.30am PDT/4.30pm GMT to allow people across multiple timezones to attend more easily. 
+We keep these minimal in terms of time expectation - no more than 2hrs total per week. They are usually scheduled around 8.30am PDT/4.30pm GMT to allow people across multiple timezones to attend more easily. We default to cameras on, it’s nice to see real faces since we don’t get many in-person moments. If you need yours off, just give the team a quick heads-up why.
 
 You should have been invited to any relevant meetings as part of your [onboarding](/handbook/people/onboarding). 
 
@@ -18,7 +18,7 @@ You should have been invited to any relevant meetings as part of your [onboardin
 - **Tuesday** - Meeting-free - no regularly scheduled internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
 - **Wednesday** - some teams do sprint planning here as well. [Engineering tech talks/brown bags](/handbook/engineering/tech-talks) happen every second week, ClickHouse office hours happen on the alternate week. 
 - **Thursday** - Meeting-free - no regularly scheduled internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
-- **Friday** - extracurricular type meetings like [BookHog](/handbook/people/clubs#clubs-at-posthog) often end up here!
+- **Friday** - extracurricular type meetings like [BookHog](/handbook/people/bookhog) often end up here!
 
 ## The all-hands
 

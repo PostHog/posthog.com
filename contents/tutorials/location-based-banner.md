@@ -32,7 +32,7 @@ After installing PostHog, create a `providers.js` file in the `app` folder which
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export default function PHProvider({ children }) {
@@ -92,12 +92,12 @@ This enables us to change the banner content without rewriting any code, just ed
 
 ## Implementing the banner in our app
 
-With our flag created, we can go back into our app and implement our banner. To do this, create a `banner.js` file in the `app` folder. In this file, import `useFeatureFlagEnabled` from `posthog-js/react`, use it to check the `site-banner` flag, and set up your banner to conditionally show if the flag is true. With some banner styling, this looks like this:
+With our flag created, we can go back into our app and implement our banner. To do this, create a `banner.js` file in the `app` folder. In this file, import `useFeatureFlagEnabled` from `@posthog/react`, use it to check the `site-banner` flag, and set up your banner to conditionally show if the flag is true. With some banner styling, this looks like this:
 
 ```js
 // app/banner.js
 'use client'
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+import { useFeatureFlagEnabled } from '@posthog/react'
 
 export default function Banner() {
 
@@ -157,7 +157,7 @@ If you added a payload to your flag, you can set up your banner to handle it. We
 // app/banner.js
 'use client'
 import Link from 'next/link'
-import { useFeatureFlagPayload } from 'posthog-js/react'
+import { useFeatureFlagPayload } from '@posthog/react'
 
 export default function Banner() {
 

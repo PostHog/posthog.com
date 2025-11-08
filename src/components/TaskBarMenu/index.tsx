@@ -11,6 +11,10 @@ import {
     IconBookmark,
     IconUpload,
     IconCode,
+    IconCheck,
+    IconCopy,
+    IconShare,
+    IconFeatures,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
@@ -23,8 +27,8 @@ import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
-import { navigate } from 'gatsby'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import { Popover } from 'components/RadixUI/Popover'
 
 export default function TaskBarMenu() {
     const {
@@ -41,6 +45,7 @@ export default function TaskBarMenu() {
         taskbarRef,
         posthogInstance,
         websiteMode,
+        copyDesktopParams,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
@@ -183,25 +188,65 @@ export default function TaskBarMenu() {
                                             key={`media-upload`}
                                         />
                                     ),
-                            },
-                            {
-                                type: 'item' as const,
-                                label: 'Components',
-                                link: '/components',
-                                icon: <IconCode className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                            },
-                        ]
-                        : []),
-                    {
-                        type: 'separator' as const,
-                    },
-                    {
-                        type: 'item' as const,
-                        label: 'Community logout',
-                        onClick: () => logout(),
-                        icon: <IconLock className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                    },
-                ]
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'My profile',
+                                    link: `/community/profiles/${user?.profile.id}`,
+                                    icon: <IconUser className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Bookmarks',
+                                    link: '/bookmarks',
+                                    icon: <IconBookmark className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                            ]
+                          : []),
+                      ...(isModerator
+                          ? [
+                                {
+                                    type: 'item' as const,
+                                    label: 'Moderator tools',
+                                    disabled: true,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Upload media',
+                                    icon: <IconUpload className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                    onClick: () =>
+                                        addWindow(
+                                            <MediaUploadModal
+                                                newWindow
+                                                location={{ pathname: `media-upload` }}
+                                                key={`media-upload`}
+                                            />
+                                        ),
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Components',
+                                    link: '/components',
+                                    icon: <IconCode className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Feature matrix',
+                                    link: '/feature-matrix',
+                                    icon: <IconFeatures className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                            ]
+                          : []),
+                      {
+                          type: 'separator' as const,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Community logout',
+                          onClick: () => logout(),
+                          icon: <IconLock className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                      },
+                  ]
                 : [
                     {
                         type: 'item' as const,
@@ -278,7 +323,31 @@ export default function TaskBarMenu() {
                         ]}
                         className="[&_button]:px-2"
                     /> */}
-                        <div className="relative mr-1">
+                    <div className="relative mr-1">
+                        <OSButton
+                            variant="primary"
+                            size="md"
+                            asLink
+                            to={posthogInstance ? posthogInstance.replace(/"/g, '') : 'https://app.posthog.com/signup'}
+                            className=""
+                        >
+                            {posthogInstance ? 'Dashboard' : 'Get started – free'}
+                        </OSButton>
+                    </div>
+                    <Tooltip
+                        trigger={
+                            <OSButton onClick={() => openSearch()} size="sm" className="relative top-px">
+                                <IconSearch className="size-5" />
+                            </OSButton>
+                        }
+                    >
+                        <div className="flex flex-col items-center gap-1">
+                            <p className="text-sm mb-0">Search</p>
+                            <KeyboardShortcut text="/" size="sm" />
+                        </div>
+                    </Tooltip>
+                    <Tooltip
+                        trigger={
                             <OSButton
                                 variant="secondary"
                                 size="md"
@@ -288,6 +357,14 @@ export default function TaskBarMenu() {
                             >
                                 {posthogInstance ? 'Dashboard' : 'Get started – free'}
                             </OSButton>
+                        }
+                    >
+                        <div className="flex flex-col items-center gap-1">
+                            <p className="text-sm mb-0">Ask PostHog AI</p>
+                            <div className="flex items-center gap-1">
+                                <KeyboardShortcut text="Shift" size="sm" />
+                                <KeyboardShortcut text="?" size="sm" />
+                            </div>
                         </div>
                         <Tooltip
                             trigger={

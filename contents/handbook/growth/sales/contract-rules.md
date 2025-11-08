@@ -16,7 +16,7 @@ Although our standard monthly [pricing](/pricing) has volume discounts built in,
 2. **Prepaid credit:** We offer a 20% discount on a paid-up-front plan of >$20k, because it's beneficial to PostHog to have a customer committed.
 3. **Higher spend:** We offer an additional 5% and then 15% on top of the prepaid credit plans when the customer spends above $60k and $100k respectively.
 4. **Multi-year:** We offer an additional 5% for each additional committed credit renewal under a prepaid contract, as longer commitments are beneficial to PostHog (see table below). Credits rollover in-between for multi-year contracts.
-5. **Up-front payment:** We offer an additional 3% where a _multi-year_ contract is all **paid up-front**, as it's better for PostHog to have the money in the bank.
+5. **Up-front payment:** We offer an additional 2.5% per year where a _multi-year_ contract is all **paid up-front**, as it's better for PostHog to have the money in the bank.
 
 > We don't offer a discount for signing a contract by some fixed date (e.g so the deal closes in a specific quarter).
 
@@ -85,17 +85,10 @@ The below table summarizes the discount levels contained in points 2-4:
 </tbody>
 </table>
 
-Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. For this reason, discounts only apply if customers pay the whole year(s) up front.
-
-As an exception, a customer can choose to contract for a year but pay quarterly - in this case, they can get a discount, but it is halved. No discounts are available for customers paying monthly.
-
+Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. Pre-paid discounts must be paid up-front. We do not offer monthly or quarterly payment plans for discounted contracts. If a customer prefers quarterly or monthly payments, we can offer them a lower credit value, which will reduce their discount.
 ### Credit for case studies
 
-We don't offer additional discounts in exchange for a case study, but we can offer up to 5% additional year 1 credit in exchange for a _published_ case study on PostHog.com (ie. the credit is only applied after the case study goes live, not up front). Simon or Charles need to approve this before you offer it to the customer - most case studies are not going to be useful for us, so don't assume you can just offer this.
-
-This should be added as a special term into the order form as follows:
-
-> PostHog will add an additional $XXXXX of credit to Customer account upon successful publishing of a case study on Customer's usage of PostHog on PostHog.com.
+We don't offer additional discounts in exchange for a case study, as paying for case studies can devalue them. We should be working to get our customers to a state of happiness such that they are willing to tell everyone how great PostHog is without needing to pay for it.
 
 ### Self-serve discounts
 
@@ -189,6 +182,8 @@ For customers in an annual contract but paying quarterly we require them to pay 
 
 ## Contract buyouts
 
+> **Want to speak to us about a contract buyout?** Get in touch with the Sales team via your shared Slack channel, or [reach out directly](/talk-to-a-human).
+
 Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
 
 Some rules:
@@ -232,6 +227,9 @@ For any of the above scenarios you should use our [discounting principles](contr
 ### When they will end the contract term with credit remaining
 
 We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher spend than the original contract.
+
+### When a customer doesn't renew their credit purchase
+When a customer chooses not to renew a prepaid credit contract we automatically remove any remaining credits on the expiry date. Their account will then roll onto our standard monthly plan and they'll be charged for usage. It's the customer's responsibility to stop sending us events or cancel their subscription and downgrade to the free tier if they don't want to keep paying.
 
 ## Varying contractual terms
 

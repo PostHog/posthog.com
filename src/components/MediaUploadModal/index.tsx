@@ -82,7 +82,7 @@ const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type
     return (
         <li className="flex space-x-2 items-start">
             <div className="overflow-hidden size-16 flex flex-shrink-0 justify-center items-center bg-accent rounded-sm border border-input">
-                <img src={resource_type === 'video' ? previewUrl : generateCloudinaryUrl('orig-optimized')} />
+                <img src={resource_type === 'video' ? previewUrl : generateCloudinaryUrl('orig-optimized')} loading="lazy" />
             </div>
             <div className="flex-grow">
                 <p className="m-0 font-bold line-clamp-1 text-ellipsis max-w-xl">
@@ -302,9 +302,8 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
         return (
             <div key={node.name} style={{ paddingLeft: `${level * 16}px` }}>
                 <div
-                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${
-                        node.type === 'file' ? 'draggable' : ''
-                    }`}
+                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${node.type === 'file' ? 'draggable' : ''
+                        }`}
                     onClick={() => (node.type === 'directory' ? toggleDirectory(node) : handleFileClick(node))}
                     draggable={node.type === 'file'}
                     onDragStart={(e) => handleFileDrag(e, node)}
@@ -450,9 +449,8 @@ export default function MediaUploadModal() {
                 if (validFiles.length > 0) {
                     await onDrop(validFiles)
                     addToast({
-                        description: `Pasted ${validFiles.length} image${
-                            validFiles.length > 1 ? 's' : ''
-                        } from clipboard`,
+                        description: `Pasted ${validFiles.length} image${validFiles.length > 1 ? 's' : ''
+                            } from clipboard`,
                         duration: 3000,
                     })
                 }
@@ -493,18 +491,16 @@ export default function MediaUploadModal() {
                             <div
                                 {...getRootProps()}
                                 data-scheme="secondary"
-                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${
-                                    isDragActive
+                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${isDragActive
                                         ? 'bg-input border-primary'
                                         : isPasting
-                                        ? 'bg-input border-primary animate-pulse'
-                                        : ''
-                                }`}
+                                            ? 'bg-input border-primary animate-pulse'
+                                            : ''
+                                    }`}
                             >
                                 <div
-                                    className={`flex flex-col justify-center items-center h-full p-8 ${
-                                        isDragActive || isPasting ? '' : 'opacity-50'
-                                    }`}
+                                    className={`flex flex-col justify-center items-center h-full p-8 ${isDragActive || isPasting ? '' : 'opacity-50'
+                                        }`}
                                 >
                                     {isPasting ? (
                                         <Loading className="size-12 mb-4" />
@@ -515,8 +511,8 @@ export default function MediaUploadModal() {
                                         {isPasting
                                             ? 'Pasting image...'
                                             : isDragActive
-                                            ? 'Drop files here'
-                                            : 'Drop files or paste to upload'}
+                                                ? 'Drop files here'
+                                                : 'Drop files or paste to upload'}
                                     </p>
                                     <p className="text-sm text-secondary text-center mt-2 m-0">
                                         {isPasting

@@ -42,7 +42,7 @@ export default function useTopicsNav() {
         })
 
     if (isModerator) {
-        nav.push({ name: 'Max AI', url: '/questions/topic/max', icon: <IconSparkles /> })
+        nav.push({ name: 'PostHog AI', url: '/questions/topic/ai', icon: <IconSparkles /> })
     }
 
     return nav

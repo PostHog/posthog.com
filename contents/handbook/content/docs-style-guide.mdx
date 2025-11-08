@@ -46,6 +46,7 @@ Put button, tab, and other navigation names in bold. This makes it easier for ou
 > **Example:** "Go to the [insights tab](https://us.posthog.com/insights) and click **+ New insight**."
 
 ## Navigating UI
+
 When documenting UI steps, references to UI elements should be in chronological order. When possible, hyperlink to the correct location.
 
 > **Do:** Under **Settings** > **User**, under the [Two-factor section](https://us.posthog.com/settings/user#2fa), click the **Set up 2FA** button.
@@ -148,13 +149,15 @@ Provide detail here. You can go on at length if necessary.
 
 Valid icons are listed in PostHog's <PrivateLink url="https://github.com/posthog/icons#posthogicons">icon library</PrivateLink>.
 
-### Max AI
+### PostHog AI
 
-You can also link to Max AI with a pre-loaded question if you want to give users an easy way to try building using the Max AI.
+You can also link to PostHog AI with a pre-loaded question if you want to give users an easy way to try building using the PostHog AI.
 
-Be aware that Max AI works best with straightforward questions that have predictable answers, e.g. "How many users completed the $pageview event this week?". It may struggle with more open-ended questions such as "Where are users struggling?". For this reason, you should test questions on Max before adding him to docs. 
+Be aware that PostHog AI works best with straightforward questions that have predictable answers, e.g. "How many users completed the $pageview event this week?". It may struggle with more open-ended questions such as "Where are users struggling?". For this reason, you should test questions on PostHog AI before adding it to docs. 
 
-To add a preloaded question to docs or tutorials, you can use the MaxCTA component and add the question you'd like to preload in the question field, like so:
+> **Note:** This component will be renamed to AskPostHogAICTA component soon.
+
+To add a preloaded question to docs or tutorials, you can use the AskMaxCTA component and add the question you'd like to preload in the question field, like so:
 
 ```
 <MaxCTA question="What's my churn rate?" />
@@ -164,11 +167,11 @@ This creates the following component in the docs, where the final link will dive
 
 <MaxCTA question="What's my churn rate?" />
 
-This component is globally available and doesn't need to be imported per page, but doesn't automatically run the query with Max AI (currently).
+This component is globally available and doesn't need to be imported per page, but doesn't automatically run the query with PostHog AI (currently).
 
 ### AskMax
 
-The `<AskMax>` component opens the Max AI chat window directly on the website. Use this for documentation pages where users might need help understanding concepts or troubleshooting. Unlike `<MaxCTA>` which links to the PostHog app, this keeps users in the docs context.
+The `<AskMax>` component opens the PostHog AI chat window directly on the website. Use this for documentation pages where users might need help understanding concepts or troubleshooting. Unlike `<MaxCTA>` which links to the PostHog app, this keeps users in the docs context.
 
 ```jsx
 <AskMax
@@ -196,7 +199,7 @@ Available props:
 - `border`: Add top/bottom borders (defaults to false)
 - `linkOnly`: Render as a button only without the full UI (defaults to false)
 
-The component automatically tracks when users open Max AI and includes the current page context.
+The component automatically tracks when users open PostHog AI and includes the current page context.
 
 ### Steps
 
@@ -266,7 +269,7 @@ You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember na
 
 ### Quest log
 
-The `<QuestLog>` component is for syllabus-style pages. Inspired by video games, it outlines each section as a "quest" to give the reader a visual roadmap of what's needed to reach a larger goal or milestone – like fully adopting our error tracking product.
+The `<QuestLog>` component is for syllabus-style pages. Inspired by video games, it outlines each section as a "quest" to give the reader a visual roadmap of what's needed to reach a larger goal or milestone – like fully adopting our error tracking app.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250731_oiej_cdce484c1c.png"
@@ -387,6 +390,29 @@ print('Hello, world!')
 </Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
+
+### Magic placeholders
+
+You can use magic placeholders to replace the project API key, project name, app host, region, and proxy path in the code block.
+
+- If the user is logged into the PostHog app, the placeholder will be replaced with the actual value from their project.
+- If the user is not logged into the PostHog app, the placeholder will display as is.
+
+| Placeholder | Description | Default |
+| --- | --- | --- |
+| `<ph_project_api_key>` | Your PostHog project API key | `<ph_project_api_key>` |
+| `<ph_project_name>` | Your PostHog project name | `<ph_project_name>` |
+| `<ph_app_host>` | Your PostHog instance URL | `<ph_app_host>` |
+| `<ph_client_api_host>` | Your PostHog client API host | `https://us.i.posthog.com` |
+| `<ph_region>` | Your PostHog region (us/eu) | `<ph_region>` |
+| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2025-05-24` |
+| `<ph_proxy_path>` | Your proxy path | `relay-XXXX` (last 4 digits of project API key) |
+
+You can use these placeholders in the code block like this:
+
+```js
+const client = new PostHog('<ph_project_api_key>', { host: '<ph_client_api_host>' })
+```
 
 ### Code highlighting
 

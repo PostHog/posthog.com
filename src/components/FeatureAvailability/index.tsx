@@ -76,7 +76,7 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
                     </h5>
                 </div>
 
-                {availability.boost && (
+                {typeof availability === 'object' && 'boost' in availability && (
                     <div>
                         <h5 className="flex items-center space-x-1.5 text-base !my-0">
                             <span>Boost</span>
@@ -89,7 +89,7 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
                     </div>
                 )}
 
-                {availability.scale && (
+                {typeof availability === 'object' && 'scale' in availability && (
                     <div>
                         <h5 className="flex items-center space-x-1.5 text-base !my-0">
                             <span>Scale</span>
@@ -119,11 +119,17 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
 
                 {renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.selfServe)}
 
-                {availability.boost &&
-                    renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.boost)}
+                {typeof availability === 'object' &&
+                    'boost' in availability &&
+                    renderAvailabilityIcon(
+                        typeof availability === 'boolean' ? availability : availability.boost || false
+                    )}
 
-                {availability.scale &&
-                    renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.scale)}
+                {typeof availability === 'object' &&
+                    'scale' in availability &&
+                    renderAvailabilityIcon(
+                        typeof availability === 'boolean' ? availability : availability.scale || false
+                    )}
 
                 {renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.enterprise)}
             </div>

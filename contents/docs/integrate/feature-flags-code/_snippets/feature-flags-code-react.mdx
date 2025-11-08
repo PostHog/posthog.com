@@ -17,7 +17,7 @@ PostHog provides several hooks to make it easy to use feature flags in your Reac
 #### Example 1: Using a boolean feature flag
 
 ```react
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+import { useFeatureFlagEnabled } from '@posthog/react'
 
 function App() {
   const showWelcomeMessage = useFeatureFlagEnabled('flag-key')
@@ -48,7 +48,7 @@ export default App;
 #### Example 2: Using a multivariate feature flag
 
 ```react
-import { useFeatureFlagVariantKey } from 'posthog-js/react'
+import { useFeatureFlagVariantKey } from '@posthog/react'
 
 function App() {
   const variantKey = useFeatureFlagVariantKey('show-welcome-message')
@@ -90,7 +90,7 @@ The `useFeatureFlagPayload` hook does *not* send a [`$feature_flag_called`](http
 </CalloutBox>
 
 ```react
-import { useFeatureFlagPayload } from 'posthog-js/react'
+import { useFeatureFlagPayload } from '@posthog/react'
 
 function App() {
   const variant = useFeatureFlagEnabled('show-welcome-message')
@@ -125,7 +125,7 @@ It also automatically captures metrics, like how many times a user interacts wit
 Here is an example:
 
 ```react
-import { PostHogFeature } from 'posthog-js/react'
+import { PostHogFeature } from '@posthog/react'
 
 function App() {
 
@@ -151,7 +151,7 @@ If you wish to customise logic around when the component is considered visible, 
 If your flag has a payload, you can pass a function to children whose first argument is the payload. For example:
 
 ```react
-import { PostHogFeature } from 'posthog-js/react'
+import { PostHogFeature } from '@posthog/react'
 
 function App() {
 

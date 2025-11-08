@@ -350,7 +350,7 @@ const products: Product[] = [
         },
     },
     {
-        name: 'Max AI',
+        name: 'PostHog AI',
         color: 'purple',
         Icon: IconMagicWand,
         description: 'AI-powered product analyst and assistant',
@@ -376,7 +376,7 @@ const products: Product[] = [
         badge: 'BETA',
         pricing: {
             cta: {
-                url: '/max',
+                url: '/ai',
                 text: 'Learn more',
             },
         },

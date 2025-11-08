@@ -36,6 +36,7 @@ import NodeInstall from '../../integrate/_snippets/install-node.mdx'
 | `requestTimeout`              | Timeout in milliseconds for any calls                                                                                 | `10000`                    |
 | `maxCacheSize`                | Maximum size of cache that deduplicates $feature_flag_called calls per user.                                          | `50000`                    |
 | `disableGeoip`                | When true, disables automatic GeoIP resolution for events and feature flags.                                          | `true`                     |
+| `evaluation_environments`     | Environment tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation tags (or no evaluation tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation environments documentation](/docs/feature-flags/evaluation-environments) for more details. | `undefined`                |
 
 > **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`. Also, remember to always call `await posthog.shutdown()` at the end to flush and send all pending events.
 
@@ -214,7 +215,16 @@ You should call `shutdown` on your program's exit to exit cleanly:
 await client.shutdown()
 ```
 
-## Debugging and exceptions
+## Debug mode
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
+
+You can enable debug mode by calling the `debug()` method in your code. This will enable verbose logs about the inner workings of the SDK.
+
+```node
+client.debug()
+```
+
+## Handling errors thrown by the SDK
 
 If you are experiencing issues with the SDK it could be a number of things from an incorrectly configured API key, to some other network related issues.
 
@@ -225,12 +235,6 @@ client.on("error", (err) => {
   // Whatever handling you want
   console.error("PostHog had an error!", err)
 })
-```
-
-Or you can enable debugging to get verbose logs about all the inner workings of the SDK.
-
-```node
-client.debug()
 ```
 
 ## Short-lived processes like serverless environments

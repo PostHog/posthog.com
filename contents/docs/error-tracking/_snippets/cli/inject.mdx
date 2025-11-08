@@ -1,4 +1,6 @@
 ```bash
-# Inject metadata in files to resolve errors
-posthog-cli sourcemap inject --directory ./path/to/assets
+# Inject release and chunk metadata into sourcemaps
+posthog-cli sourcemap inject --directory ./path/to/assets --project my-app --version 1.2.3
 ```
+
+The CLI will create or reuse the [release](/docs/error-tracking/releases) for the detected or supplied project and version. The CLI will try to detect project and version information, but you can set them explicitly with `--project` and `--version`. We recommend setting the project, and letting the CLI detect the version, if your project is continuously deployed (the version will be the git commit hash at build time).

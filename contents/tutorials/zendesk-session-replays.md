@@ -72,7 +72,7 @@ Next, create a `providers.js`  file in your `app`  folder. In it, initialize Pos
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
@@ -193,7 +193,7 @@ The final piece is including a link to the session replay in the ticket. The Jav
 "use client"
 import { useState } from 'react';
 import styles from "./page.module.css";
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 export default function Home() {
   const [content, setContent] = useState('');

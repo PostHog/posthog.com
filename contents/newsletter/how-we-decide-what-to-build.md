@@ -2,18 +2,18 @@
 title: How we decide what to build
 date: 2024-01-10
 author:
-  - ian-vanagas
+    - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/how-we-decide.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/how-we-decide.png
 featuredImageType: full
 tags:
-  - Product engineers
-  - Engineering
-  - Product
+    - Product engineers
+    - Engineering
+    - Product
 crosspost:
-  - Product engineers
-  - Founders
-  - Blog
+    - Product engineers
+    - Founders
+    - Blog
 ---
 
 There is a point in your product journey where what to build next goes from obvious to unclear. The options seem endless and choosing correctly can be the difference between a thriving product and a failing one.
@@ -40,7 +40,7 @@ At PostHog, our principles for what to build tie to [our core strategy](/handboo
 
 3. Be the source of truth for customer and product data.
 
-We also put a lot of weight on user feedback, especially from [our ideal customer profile (ICP)](/handbook/who-we-are-building-for). We talk to users regularly and ask them to comment on our public roadmap and vote on what they want.
+We also put a lot of weight on user feedback, especially from [our ideal customer profile (ICP)](/handbook/who-we-build-for). We talk to users regularly and ask them to comment on our public roadmap and vote on what they want.
 
 There are many other principles such as agile, lean, RICE, themes, metrics, top-down planning, weighted scoring, or following a [benevolent dictator](https://en.wikipedia.org/wiki/Benevolent_dictator_for_life). What matters is **choosing something**.
 
@@ -54,7 +54,7 @@ By talking directly to users and making it easy to share ad hoc feedback, we’v
 
 ![Map](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/map.jpeg)
 
-The axes for this graph relate to our [ICP](/handbook/who-we-are-building-for): **product engineers** at **high-growth startups**. Everything we’ve built already is in green, while things we’re building at the moment are in blue.
+The axes for this graph relate to our [ICP](/handbook/who-we-build-for): **product engineers** at **high-growth startups**. Everything we’ve built already is in green, while things we’re building at the moment are in blue.
 
 Features towards the bottom left correlate best to our ICP, but there are outliers. We’re building web analytics, for example, because it helps us get in first and it’s easy for us to build because we’ve already built product analytics.
 
@@ -104,11 +104,12 @@ Testing is part of the decision-making process. Building MVPs of features and pr
 
 2. How much effort will building it take?
 
-All of PostHog’s products (beyond product analytics) were initially built in 1 to 3 person teams at our hackathons. Our newest products like [web analytics](/teams/web-analytics) and the [data warehouse](/teams/data-warehouse) are being built by single-person teams.
+All of PostHog’s products (beyond product analytics) were initially built in 1 to 3 person teams at our hackathons. Our newest products like [web analytics](/web-analytics) and the [data warehouse](/data-warehouse) are being built by single-person teams.
 
 This enables us to get stronger validation on demand before investing further. Companies like [Apple](https://review.firstround.com/six-steps-to-superior-product-prototyping-lessons-from-an-apple-and-oculus-engineer) and [Spotify](https://blog.crisp.se/wp-content/uploads/2013/01/HowSpotifyBuildsProducts.pdf) also rely on this prototyping-heavy style.
 
 ![Spotify](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/spotify.png)
+
 <Caption>Early Spotify’s product development process</Caption>
 
 Another way we test with minimal effort is by building on what we’ve already done. For example, surveys use the JavaScript library to display forms, event capture for responses, and feature flags for targeting. Having all these things built first made surveys easier to implement, a perfect example of a high impact, low effort opportunity.

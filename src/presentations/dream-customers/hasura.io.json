@@ -1,0 +1,41 @@
+{
+    "123456": {
+        "name": "John Doe",
+        "slides": {
+            "overview": {
+                "template": "stacked",
+                "title": "Hey John!",
+                "description": "We've prepared this custom presentation specifically for the Hasura team to show how PostHog can accelerate your product development."
+            },
+            "error_tracking": {
+                "inherit": "product-engineers",
+                "slideKey": "error_tracking"
+            },
+            "feature_management": {
+                "inherit": "engineering-managers",
+                "slideKey": "feature_flags"
+            },
+            "experiments": {
+                "inherit": "default",
+                "slideKey": "experiments"
+            },
+            "custom_integration": {
+                "template": "columns",
+                "name": "Hasura + PostHog Integration",
+                "title": "Seamless GraphQL Analytics",
+                "description": "Track GraphQL query performance, monitor API usage, and understand how developers interact with your platform. PostHog integrates directly with Hasura to give you instant insights.",
+                "image": "/images/products/product-analytics/screenshot-dashboard.png"
+            },
+            "pricing": {
+                "inherit": "default",
+                "slideKey": "pricing"
+            },
+            "cta": {
+                "inherit": "default",
+                "slideKey": "cta",
+                "title": "Let's discuss Hasura's needs",
+                "description": "We'd love to show you how PostHog can help Hasura build an even better developer experience."
+            }
+        }
+    }
+}

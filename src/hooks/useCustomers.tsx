@@ -12,6 +12,7 @@ import CreatifyLogoDark from '../images/customers/creatify-dark.png'
 import DHLLogo from '../components/CustomerLogos/DHLLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
+import GrantableLogo from '../components/CustomerLogos/GrantableLogo'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
@@ -388,7 +389,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'data_warehouse',
             'error_tracking',
             'cdp',
-            'max_ai',
+            'posthog_ai',
         ],
         notes: <>Would it be clever or lame if we included our own company here?</>,
         logo: PostHogLogo,
@@ -504,7 +505,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     supabase: {
         name: 'Supabase',
-        toolsUsed: ['max_ai', 'experiments', 'product_analytics'],
+        toolsUsed: ['posthog_ai', 'experiments', 'product_analytics'],
         industries: ['Devtool'],
         users: ['Engineering', 'Growth', 'Marketing'],
         notes: 'Postgres in the cloud',
@@ -574,7 +575,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     exa: {
         name: 'Exa',
-        toolsUsed: ['max_ai', 'session_replay', 'product_analytics'],
+        toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
         industries: ['AI', 'Search'],
         users: ['Engineering', 'Product'],
         notes: 'Search API for AI products',
@@ -633,7 +634,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     // },
     gankster: {
         name: 'Gankster',
-        toolsUsed: ['max_ai', 'session_replay', 'product_analytics'],
+        toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
         industries: ['Gaming'],
         users: ['Engineering', 'Growth', 'Marketing'],
         notes: 'Gaming platform',
@@ -649,6 +650,26 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Business loans and financial services',
         featured: false,
         logo: QredLogo,
+        height: 8,
+    },
+    grantable: {
+        name: 'Grantable',
+        toolsUsed: [
+            'workflows',
+            'feature_flags',
+            'session_replay',
+            'experiments',
+            'product_analytics',
+            'surveys',
+            'error_tracking',
+            'llm_analytics',
+            'data_warehouse',
+        ],
+        industries: ['Business', 'SaaS'],
+        users: ['Data', 'Product', 'Marketing'],
+        notes: 'AI Compliance and Grant Writing',
+        featured: false,
+        logo: GrantableLogo,
         height: 8,
     },
     // swype: {

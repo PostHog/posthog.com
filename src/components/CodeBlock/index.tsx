@@ -408,7 +408,7 @@ export const CodeBlock = ({
             >
                 {({ className, tokens, getLineProps, getTokenProps }) => (
                     <pre
-                        data-scheme="secondary"
+                        data-scheme="primary"
                         className={`w-full m-0 p-0 rounded-t-none rounded-b bg-primary border-primary ${
                             showLabel ? 'border-t' : ''
                         }`}
