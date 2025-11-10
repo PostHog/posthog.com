@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import { RenderInClient } from 'components/RenderInClient'
 import usePostHog from '../../hooks/usePostHog'
+import OSButton from 'components/OSButton'
 
 /**
  * A signup CTA that directs to the correct region (EU or US) based on feature flag.
@@ -33,30 +34,34 @@ export const SignupCTA = ({
     return (
         <RenderInClient
             placeholder={
-                <CallToAction
-                    type={type}
+                <OSButton
+                    asLink
+                    variant={type}
                     className={className}
                     width={width}
                     to={`https://us.posthog.com/signup`}
                     event={event}
                     size={size}
                     state={state}
+                    externalNoIcon
                 >
                     {text}
-                </CallToAction>
+                </OSButton>
             }
             render={() => (
-                <CallToAction
-                    type={type}
+                <OSButton
+                    asLink
+                    variant={type}
                     className={className}
                     width={width}
                     to={`https://${posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'us'}.posthog.com/signup`}
                     event={event}
                     size={size}
                     state={state}
+                    externalNoIcon
                 >
                     {text}
-                </CallToAction>
+                </OSButton>
             )}
         />
     )

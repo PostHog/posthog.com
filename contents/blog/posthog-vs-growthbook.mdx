@@ -2,31 +2,27 @@
 title: 'In-depth: PostHog vs GrowthBook'
 date: 2023-10-10
 author:
-  - ian-vanagas
+    - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/comparisons/growthbook.jpeg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/comparisons/growthbook.jpeg
 featuredImageType: full
 category: Engineering
 tags:
-  - Comparisons
+    - Comparisons
 seo:
-  metaTitle: PostHog vs GrowthBook in-depth tool comparison
-  metaDescription: Looking for the best feature flag and A/B testing tool? Compare PostHog vs GrowthBook on feature flags, experiments, analytics, and more to find the right fit.
+    metaTitle: PostHog vs GrowthBook in-depth tool comparison
+    metaDescription: Looking for the best feature flag and A/B testing tool? Compare PostHog vs GrowthBook on feature flags, experiments, analytics, and more to find the right fit.
 ---
-
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonHeader } from 'components/ComparisonTable/header'
-import { ComparisonRow } from 'components/ComparisonTable/row'
 
 PostHog and GrowthBook both provide open source, self-serve feature flags and experimentation, but they're different in two important ways:
 
-- [GrowthBook](/blog/best-growthbook-alternatives) is a warehouse-native feature flag and experiments platform. It focuses on integrating with the product and data tools you already use.
+-   [GrowthBook](/blog/best-growthbook-alternatives) is a warehouse-native feature flag and experiments platform. It focuses on integrating with the product and data tools you already use.
 
-- PostHog is an all-in-one product and data platform. Beyond [feature flags](/feature-flags) and [experiments](/experiments), it includes [product analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [CDP](/cdp), and more.
+-   PostHog is an all-in-one suite of dev tools. Beyond [feature flags](/feature-flags) and [experiments](/experiments), it includes [product analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [CDP](/cdp), and more.
 
 In this post, we'll cover these differences in more detail, and answer frequently asked questions about both tools.
 
@@ -40,7 +36,7 @@ PostHog brings together all the tools engineers need for testing, releasing, and
 
 PostHog combines usage, performance, and [behavioral data](/product-engineers/behavioral-analytics) with flags and experiments. PostHog’s [data warehouse](/data-warehouse) also enables you to pull in data from external sources.
 
-Having all these product and data tools together enables you to do better analysis of shipped features and make better decisions about what you are building next. 
+Having all these dev tools together enables you to do better analysis of shipped features and make better decisions about what you are building next.
 
 ### 2. PostHog is built for startups and engineers
 
@@ -54,7 +50,7 @@ GrowthBook, on the other hand, focuses only on later-stage, larger companies tha
 
 GrowthBook requires more setup than PostHog as it relies heavily on external tools and writing SQL:
 
-1. To get data into GrowthBook, you must integrate a data source. 
+1. To get data into GrowthBook, you must integrate a data source.
 2. To track data related to flags and experiments, you connect to an analytics tool.
 3. To configure data sources and track events, you write SQL configurations in GrowthBook.
 4. To set up goals and analysis, you write more SQL.
@@ -65,69 +61,82 @@ PostHog needs none of this. You use the same app and SDKs for managing and evalu
 
 ### Platform
 
-Both PostHog and GrowthBook have the infrastructure to use flags and experiments effectively with your current app. PostHog has a wider range of product and data tools built in, while GrowthBook relies on third-party integrations
+Both PostHog and GrowthBook have the infrastructure to use flags and experiments effectively with your current app. PostHog has a wider range of dev tools built in, while GrowthBook relies on third-party integrations
 
-<ComparisonTable column1="PostHog" column2="GrowthBook">
-  <ComparisonRow column1={true} column2={true} feature="Open source" description="Code publicly accessible" />
-  <ComparisonRow column1={true} column2={true} feature="Self-service" description="No need to talk to sales" />
-  <ComparisonRow column1="14" column2="11" feature="SDKs" description="Including JavaScript, Android, iOS, and Python" />
-  <ComparisonRow column1={true} column2={false} feature="Native data sources" description="Compute metrics and results without integrations" />
-  <ComparisonRow column1={true} column2={true} feature="Proxies" description="Reverse proxy to avoid blockers" />
-  <ComparisonRow column1={true} column2={true} feature="Self-hostable" description="Host on your own infrastructure" />
-  <ComparisonRow column1={true} column2="Beta" feature="API" description="Edit and evaluate flags with API" />
-  <ComparisonRow column1={true} column2={true} feature="Local evaluation (aka streaming)" description="Faster flags by not having to rely on the server for evaluation" />
-  <ComparisonRow column1={true} column2={true} feature="SQL" description="Query flag and product data directly via SQL" />
-  <ComparisonRow column1={true} column2={false} feature="Session replays" description="Real user playback of flag session" />
-  <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Simple dashboard of aggregate traffic, sources, campaigns, and session metrics" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'growthbook']}
+    rows={[
+        'platform.deployment.open_source',
+        'platform.pricing.self_serve',
+        'platform.developer.sdks',
+        'platform.developer.native_data_sources',
+        'platform.deployment.reverse_proxy',
+        'platform.deployment.self_host',
+        {
+            label: 'API',
+            description: 'Edit and evaluate flags with API',
+            values: [true, 'Beta'],
+        },
+        'feature_flags.implementation.local_evaluation',
+        'platform.developer.sql',
+        'session_replay',
+        'web_analytics',
+    ]}
+/>
 
 ### Feature flags
 
-Both PostHog and GrowthBook offer all the functionality you expect from feature flags. 
+Both PostHog and GrowthBook offer all the functionality you expect from feature flags.
 
-<ComparisonTable column1="PostHog" column2="GrowthBook">
-  <ComparisonRow column1={true} column2={true} feature="Boolean flags" description="Simple flags returning true or flag" />
-  <ComparisonRow column1={true} column2={true} feature="Percentage rollouts" description="Target percentages of a group" />
-  <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
-  <ComparisonRow column1={true} column2={true} feature="JSON payloads" description="Flags return JSON" />
-  <ComparisonRow column1="Partial" column2={true} feature="Environments" description="Manage flags for dev, staging, prod" />
-  <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flags to turn on or off" />
-  <ComparisonRow column1={true} column2={false} feature="Early access management" description="Manage betas, test features" />
-  <ComparisonRow column1={true} column2={false} feature="Bootstrapping" description="Flags available on frontend application load" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'growthbook']}
+    rows={[
+        'feature_flags.features.boolean_flags',
+        'feature_flags.targeting.features.target_by_percentage',
+        'feature_flags.targeting.features.target_by_person_properties',
+        'feature_flags.features.json_payloads',
+        'feature_flags.management.features.multi_environment',
+        'feature_flags.management.features.flag_scheduling',
+        'feature_flags.features.early_access_management',
+        'feature_flags.implementation.features.bootstrapping',
+    ]}
+/>
 
-- **Targeting:** GrowthBook's custom targeting using attributes must be set every session and defined in-app before use. It's also only available on the paid Pro plan. PostHog automatically sets its equivalent ([properties](/docs/getting-started/person-properties)) on users. You don’t need to pre-define them and unlimited custom values are free.
+-   **Targeting:** GrowthBook's custom targeting using attributes must be set every session and defined in-app before use. It's also only available on the paid Pro plan. PostHog automatically sets its equivalent ([properties](/docs/getting-started/person-properties)) on users. You don’t need to pre-define them and unlimited custom values are free.
 
-- **[Bootstrapping](/docs/feature-flags/bootstrapping):** PostHog’s JavaScript web SDK enables you to pass flags directly from the backend before the app loads. This ensures they're available immediately and prevents flickering. GrowthBook instead recommends moving the A/B test or flag logic earlier in the page load (server-side) to prevent this.
+-   **[Bootstrapping](/docs/feature-flags/bootstrapping):** PostHog’s JavaScript web SDK enables you to pass flags directly from the backend before the app loads. This ensures they're available immediately and prevents flickering. GrowthBook instead recommends moving the A/B test or flag logic earlier in the page load (server-side) to prevent this.
 
 ### Experimentation
 
 Experimentation is where PostHog and GrowthBook’s functionality diverges. Both enable you to create [A/B/n tests](/tutorials/abn-testing) with custom goals and calculate statistical significance, but:
 
-- GrowthBook’s A/B testing provides more potential statistical depth, such as Bayesian and Frequentist engines, value capping, regression adjustment, and testing corrections. These do require statistics expertise to use reliably, though.
+-   GrowthBook’s A/B testing provides more potential statistical depth, such as Bayesian and Frequentist engines, value capping, regression adjustment, and testing corrections. These do require statistics expertise to use reliably, though.
 
-- PostHog provides a simpler interface and no need to write SQL or connect to external services – a better experience for users without a background in data science.
+-   PostHog provides a simpler interface and no need to write SQL or connect to external services – a better experience for users without a background in data science.
 
-<ComparisonTable column1="PostHog" column2="GrowthBook">
-  <ComparisonRow column1={true} column2={true} feature="Custom goals" description="Customize metrics that test tracks" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
-  <ComparisonRow column1={true} column2={false} feature="Native goal tracking" description="Track impact on goals without external sources" />
-  <ComparisonRow column1={true} column2={true} feature="Statistical significance calculation" description="Calculate if changes make a statistically significant impact" />
-  <ComparisonRow column1={true} column2={true} feature="Split testing" description="Split participants into groups" />
-  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={true} column2={false} feature="Recommended run time" description="Calculate the recommended run time for your experiments" />
-  <ComparisonRow column1={false} column2={true} feature="Namespaces" description="Avoid conflicts by assigning all users to a namespace" />
-  <ComparisonRow column1="Beta" column2={true} feature="Visual editor" description="Create and edit experiments in your app" />
-  <ComparisonRow column1="Bayesian" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the success of an experiment is calculated" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'growthbook']}
+    rows={[
+        'experiments.features.custom_goals',
+        'experiments.features.secondary_metrics',
+        'experiments.features.native_goal_tracking',
+        'experiments.analysis.features.statistical_significance',
+        'experiments.analysis.features.statistics_engine',
+        'experiments.features.split_testing',
+        'experiments.implementation.features.multivariate_testing',
+        'experiments.features.recommended_run_time',
+        'experiments.features.namespacing',
+        'experiments.features.visual_editor',
+    ]}
+/>
 
-- **Recommended run time:** PostHog automatically calculates a recommended run time based on past data and minimally acceptable improvements. This helps you avoid the [peeking problem](/blog/ab-testing-mistakes) and end your experiment at the right time.
+-   **Recommended run time:** PostHog automatically calculates a recommended run time based on past data and minimally acceptable improvements. This helps you avoid the [peeking problem](/blog/ab-testing-mistakes) and end your experiment at the right time.
 
 ![Recommended run time calculator](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-growthbook/runtime.png)
 
-- **Visual editor:** GrowthBook’s visual editor is similar to PostHog’s [toolbar](/docs/toolbar). It enables you to select an element to modify using an A/B test. The editor is limited to server-side rendered apps.
+-   **Visual editor:** GrowthBook’s visual editor is similar to PostHog’s [toolbar](/docs/toolbar). It enables you to select an element to modify using an A/B test. The editor is limited to server-side rendered apps.
 
-- **Frequentist engine:** GrowthBook has an additional statistical analysis option. It enables you to compare the control with the experiment using p-values and confidence intervals.
+-   **Frequentist engine:** GrowthBook has an additional statistical analysis option. It enables you to compare the control with the experiment using p-values and confidence intervals.
 
 ### Reporting and analytics
 
@@ -135,26 +144,32 @@ GrowthBook offers no reporting or analytics tools other than the ability to quer
 
 PostHog provides all the visualizations and product tools for evaluating the success of your features and app. These include trends, funnels, retention, SQL querying, and session replays integrated with your flags and A/B testing data. This enables you to do deeper analysis of their impact and combine them with other product and usage data.
 
-<ComparisonTable column1="PostHog" column2="GrowthBook">
-  <ComparisonRow column1={true} column2={false} feature="Analytics" description="Capture usage and calls related to flags" />
-  <ComparisonRow column1={true} column2={true} feature="Experiment reports" description="Show the results of an experiment" />
-  <ComparisonRow column1={true} column2={false} feature="Trends" description="Graphs of flag usage" />
-  <ComparisonRow column1={true} column2={false} feature="Funnel visualization" description="Analyze impact of flags on funnels" />
-  <ComparisonRow column1={true} column2={false} feature="Retention" description="User retention related to flags" />
-  <ComparisonRow column1={true} column2={true} feature="Breakdowns" description="Breakdown reports by properties" />
-  <ComparisonRow column1={true} column2={false} feature="Dashboards" description="Multiple customizable insights for a flag" />
-  <ComparisonRow column1={true} column2={false} feature="Non-flag data" description="Combine flag data with other product data" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'growthbook']}
+    rows={[
+        { label: 'Analytics', description: 'Capture usage and calls related to flags', values: [true, false] },
+        { label: 'Experiment reports', description: 'Show the results of an experiment', values: [true, true] },
+        { label: 'Trends', description: 'Graphs of flag usage', values: [true, false] },
+        { label: 'Funnel visualization', description: 'Analyze impact of flags on funnels', values: [true, false] },
+        { label: 'Retention', description: 'User retention related to flags', values: [true, false] },
+        { label: 'Breakdowns', description: 'Breakdown analytics by properties', values: [true, true] },
+        { label: 'Dashboards', description: 'Multiple customizable insights for a flag', values: [true, false] },
+        { label: 'Non-flag data', description: 'Combine flag data with other product data', values: [true, false] },
+    ]}
+/>
 
 ### Pricing
 
-<ComparisonTable column1="PostHog" column2="GrowthBook">
-  <ComparisonRow column1="Per request" column2="Seat-based" feature="Pricing" />
-  <ComparisonRow column1={true} column2={true} feature="Free plan" />
-  <ComparisonRow column1={true} column2={true} feature="Free experiments" />
-  <ComparisonRow column1={true} column2="3 seats free, then $20/seat/month" feature="Free collaboration" />
-  <ComparisonRow column1={true} column2={false} feature="Fully transparent" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'growthbook']}
+    rows={[
+        { label: 'Pricing', values: ['Per request', 'Seat-based'] },
+        { label: 'Free plan', values: [true, true] },
+        { label: 'Free experiments', values: [true, true] },
+        { label: 'Free collaboration', values: [true, '3 seats free, then $20/seat/month'] },
+        { label: 'Fully transparent', values: [true, false] },
+    ]}
+/>
 
 PostHog’s [feature flag pricing](/feature-flags#pricing) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available.
 
@@ -164,86 +179,102 @@ Like PostHog, GrowthBook is free to self-host. GrowthBook Cloud is a seat-based 
 
 ![Growthbook](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-growthbook/growthbook.png)
 
-Features, like flag scheduling, permissions, custom fields, and the visual editor are only available on the GrowthBook Pro paid plan. 
+Features, like flag scheduling, permissions, custom fields, and the visual editor are only available on the GrowthBook Pro paid plan.
 
 #### Example scenarios
 
-To give you an idea of what pricing looks like in reality, here are some example situations and their estimated costs for both PostHog and GrowthBook. 
+To give you an idea of what pricing looks like in reality, here are some example situations and their estimated costs for both PostHog and GrowthBook.
 
 > **Note:** GrowthBook does not display their Enterprise pricing needed to go beyond 10M requests per month.
 
 <OverflowXSection>
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-       <tr>
-            <td><strong>Seats</strong></td>
-            <td><strong>Requests</strong></td>
-            <td><strong>PostHog cost</strong></td>
-            <td><strong>GrowthBook cost</strong></td>
-        </tr>
-    </thead>
-    <tbody>
-       <tr>
-            <td>3</td>
-            <td>1,000,000</td>
-            <td>$0</td>
-            <td>$0</td>
-        </tr>
-       <tr>
-            <td>5</td>
-            <td>2,000,000</td>
-            <td>$100</td>
-            <td>$100</td>
-        </tr>
-       <tr>
-            <td>15</td>
-            <td>4,000,000</td>
-            <td>$300</td>
-            <td>$300</td>
-        </tr>
-       <tr>
-            <td>20</td>
-            <td>15,000,000</td>
-            <td>$1400</td>
-            <td>??? (Enterprise)</td>
-        </tr>
-    </tbody>
-</table>
+    <table className="w-full mt-4" style="min-width: 600px;">
+        <thead>
+            <tr>
+                <td>
+                    <strong>Seats</strong>
+                </td>
+                <td>
+                    <strong>Requests</strong>
+                </td>
+                <td>
+                    <strong>PostHog cost</strong>
+                </td>
+                <td>
+                    <strong>GrowthBook cost</strong>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>3</td>
+                <td>1,000,000</td>
+                <td>$0</td>
+                <td>$0</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>2,000,000</td>
+                <td>$100</td>
+                <td>$100</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>4,000,000</td>
+                <td>$300</td>
+                <td>$300</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>15,000,000</td>
+                <td>$1400</td>
+                <td>??? (Enterprise)</td>
+            </tr>
+        </tbody>
+    </table>
 </OverflowXSection>
 
-> **Notes:** 
-> - Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage depending on the polling duration and active number of servers. If you use locally evaluated flags with one server polling every 30 seconds, this amount is under 1M requests (free). 
-> - PostHog has volume discounts on flags over 2 million requests per month.
+> **Notes:**
+>
+> -   Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage depending on the polling duration and active number of servers. If you use locally evaluated flags with one server polling every 30 seconds, this amount is under 1M requests (free).
+> -   PostHog has volume discounts on flags over 2 million requests per month.
 
 ### Integrations
 
-GrowthBook has integrations with data warehouses and analytics tools they rely on, but little beyond that. PostHog has a wider range of integrations. 
+GrowthBook has integrations with data warehouses and analytics tools they rely on, but little beyond that. PostHog has a wider range of integrations.
 
-<ComparisonTable column1="PostHog" column2="GrowthBook">
-  <ComparisonRow column1={true} column2={false} feature="Exports" description="Export data to other sources" />
-  <ComparisonRow column1={true} column2={true} feature="Imports" description="Import data from sources" />
-  <ComparisonRow column1={true} column2={true} feature="Slack" description="Alerts for Slack" />
-  <ComparisonRow column1={true} column2={false} feature="MS Teams" description="Alerts for Microsoft Teams" />
-  <ComparisonRow column1={true} column2={false} feature="Zapier" description="Trigger Zapier automations" />
-  <ComparisonRow column1={true} column2={false} feature="Sentry" description="Connect to Sentry data" />
-  <ComparisonRow column1={false} column2={true} feature="Datadog" description="Capture flag data in Datadog" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'growthbook']}
+    rows={[
+        'data_warehouse.features.warehouse_sources',
+        'data_warehouse.features.batch_exports',
+        'cdp.features.realtime_streaming',
+        'platform.integrations.slack',
+        'platform.integrations.microsoft_teams',
+        'platform.integrations.zapier',
+        'platform.integrations.sentry',
+        'platform.integrations.datadog',
+    ]}
+/>
 
 [PostHog’s event-based structure](/docs/how-posthog-works/data-model) enables you to import data from anywhere for use with flags and experiments. The free API enables you to connect, edit, and capture from anywhere too. For example, you can import data from [warehouses](/docs/data-warehouse), [no-code site builders](/tutorials/webflow-ab-tests), [Segment](/docs/cdp/segment), and more.
 
 ### Security and compliance
 
-Both PostHog and GrowthBook enable companies to remain secure and compliant with privacy regulations. Companies can customize the levels of user privacy related to these platforms to their needs. 
+Both PostHog and GrowthBook enable companies to remain secure and compliant with privacy regulations. Companies can customize the levels of user privacy related to these platforms to their needs.
 
-<ComparisonTable column1="PostHog" column2="GrowthBook">
-  <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
-  <ComparisonRow column1={true} column2="Enterprise" feature="History, audit logs" description="Manage and view flag edits and related users" />
-  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
-  <ComparisonRow column1={true} column2={true} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
-  <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
-  <ComparisonRow column1={true} column2={false} feature="2FA" description="Enforce login with two-factor authentication" />
-  <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'growthbook']}
+    rows={[
+        'platform.security.user_privacy_options',
+        'platform.security.history_audit_logs',
+        'platform.security.gdpr_ready',
+        'platform.security.hipaa_ready',
+        'platform.security.soc2_certified',
+        'platform.security.two_factor_auth',
+        'platform.security.saml_sso',
+    ]}
+/>
 
 ## Frequently asked questions
 
@@ -269,7 +300,7 @@ Other products, like product analytics and session replay, have separate but sim
 
 GrowthBook, like PostHog, is free to self-host. This doesn’t count infrastructure, implementation, or maintenance costs.
 
-GrowthBook Cloud is free for up to 3 users and 10M requests per month. Its "Pro" plan is $20/seat/month and provides access to premium features. They also have an Enterprise plan that adds more security and compliance tools as well as a higher request limit. 
+GrowthBook Cloud is free for up to 3 users and 10M requests per month. Its "Pro" plan is $20/seat/month and provides access to premium features. They also have an Enterprise plan that adds more security and compliance tools as well as a higher request limit.
 
 ### Do GrowthBook or PostHog offer free trials?
 
@@ -291,11 +322,11 @@ The basic GrowthBook implementation seems relatively similar to PostHog, but the
 
 To implement GrowthBook from scratch:
 
-- Sign up or self-host.
-- Create an SDK endpoint, install the SDK in your app, and initialize the SDK.
-- Set up target attributes in-app and define them in GrowthBook.
-- Set up an analytics tool to track events and integrate it with GrowthBook.
-- Connect your data source (warehouse) and write SQL to configure it.
-- Create a feature flag or experiment. Set up tracking metric(s) using SQL. Implement related logic in-app.
+-   Sign up or self-host.
+-   Create an SDK endpoint, install the SDK in your app, and initialize the SDK.
+-   Set up target attributes in-app and define them in GrowthBook.
+-   Set up an analytics tool to track events and integrate it with GrowthBook.
+-   Connect your data source (warehouse) and write SQL to configure it.
+-   Create a feature flag or experiment. Set up tracking metric(s) using SQL. Implement related logic in-app.
 
 Although GrowthBook provides templates for integrating external tools, this whole process takes longer than PostHog.

@@ -227,16 +227,6 @@ export const errorTracking = {
         },
         companies: [
             {
-                name: 'LogRocket',
-                key: 'logrocket',
-                link: '/blog/posthog-vs-logrocket',
-            },
-            {
-                name: 'Sentry',
-                key: 'sentry',
-                link: '/blog/posthog-vs-sentry',
-            },
-            {
                 name: 'Bugsnag',
                 key: 'bugsnag',
             },
@@ -245,112 +235,34 @@ export const errorTracking = {
                 key: 'datadog',
             },
             {
+                name: 'Glitchtip',
+                key: 'glitchtip',
+            },
+            {
+                name: 'LogRocket',
+                key: 'logrocket',
+                link: '/blog/posthog-vs-logrocket',
+            },
+            {
                 name: 'PostHog',
                 key: 'posthog',
             },
-        ],
-        features: [
             {
-                feature: 'Error alerts',
-                companies: {
-                    sentry: true,
-                    logrocket: true,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
+                name: 'Rollbar',
+                key: 'rollbar',
             },
             {
-                feature: 'Exception capture',
-                companies: {
-                    sentry: true,
-                    logrocket: true,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
+                name: 'Sentry',
+                key: 'sentry',
+                link: '/blog/posthog-vs-sentry',
             },
             {
-                feature: 'Issue management',
-                companies: {
-                    sentry: true,
-                    logrocket: false,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Network performance monitoring',
-                companies: {
-                    sentry: true,
-                    logrocket: true,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Error grouping',
-                companies: {
-                    sentry: true,
-                    logrocket: true,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Source map support',
-                companies: {
-                    sentry: true,
-                    logrocket: true,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Stack tracing',
-                companies: {
-                    sentry: true,
-                    logrocket: false,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Integration with product analytics',
-                companies: {
-                    sentry: false,
-                    logrocket: true,
-                    bugsnag: false,
-                    datadog: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Integration with session replays',
-                companies: {
-                    sentry: true,
-                    logrocket: true,
-                    bugsnag: false,
-                    datadog: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Integration with A/B experiments',
-                companies: {
-                    sentry: false,
-                    logrocket: false,
-                    bugsnag: true,
-                    datadog: false,
-                    posthog: true,
-                },
+                name: 'Signoz',
+                key: 'signoz',
             },
         ],
+        rows: ['error_tracking'],
+        excluded_sections: ['platform.libraries'],
     },
     postHogOnPostHog: {
         title: 'How PostHog uses error tracking',
@@ -377,6 +289,7 @@ export const errorTracking = {
             },
         ],
     },
+    integrations: ['ab_experiments', 'product_analytics', 'session_replays'],
     pairsWith: [
         {
             slug: 'session-replay',

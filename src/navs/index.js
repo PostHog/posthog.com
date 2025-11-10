@@ -990,6 +990,10 @@ export const handbookSidebar = [
                 url: '/handbook/marketing/events',
             },
             {
+                name: 'Customer case studies',
+                url: '/handbook/marketing/customer-case-studies',
+            },
+            {
                 name: 'Email & comms',
                 url: '',
                 children: [
@@ -1140,6 +1144,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/posthog-com/presentations',
             },
             {
+                name: 'Product & feature comparisons',
+                url: '/handbook/engineering/posthog-com/product-comparisons',
+            },
+            {
                 name: 'Editing API docs',
                 url: '/handbook/engineering/posthog-com/api-docs',
             },
@@ -1178,6 +1186,10 @@ export const handbookSidebar = [
             {
                 name: 'User feedback',
                 url: '/handbook/product/user-feedback',
+            },
+            {
+                name: 'In-Person Customer Visits',
+                url: '/handbook/product/visiting-customers',
             },
             {
                 name: 'Releasing as beta',
@@ -1266,12 +1278,16 @@ export const handbookSidebar = [
                                 url: '/handbook/growth/sales/account-planning',
                             },
                             {
-                                name: 'Cross-sell motions',
+                                name: 'Cross selling tactics',
                                 url: '/handbook/growth/sales/cross-selling',
                             },
                             {
                                 name: 'Cross sell motions',
                                 url: '/handbook/growth/sales/cross-sell-motions',
+                            },
+                             {
+                                name: 'Communications templates',
+                                url: '/handbook/growth/sales/communications-templates',
                             },
                         ],
                     },
@@ -1282,6 +1298,10 @@ export const handbookSidebar = [
                     {
                         name: 'How to do discovery',
                         url: '/handbook/growth/sales/how-to-do-discovery',
+                    },
+                    {
+                        name: 'Running trials',
+                        url: '/handbook/growth/sales/running-trials',
                     },
                     {
                         name: 'Selling and procuring via AWS Marketplace',
@@ -1368,12 +1388,12 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-program',
                     },
                     {
-                        name: 'Onboarding Pipeline',
-                        url: '/handbook/onboarding/onboarding-pipeline',
-                    },
-                    {
                         name: 'Onboarding tracking',
                         url: '/handbook/onboarding/onboarding-tracking',
+                    },
+                    {
+                        name: 'Onboarding data',
+                        url: '/handbook/onboarding/onboarding-data',
                     },
                     {
                         name: 'Sales handover',
@@ -1514,6 +1534,24 @@ export const handbookSidebar = [
             {
                 name: 'Lifecycle analysis',
                 url: '/handbook/growth/revops/lifecycle-analysis',
+            },
+            {
+                name: 'SalesOps',
+                url: '',
+                children: [
+                    {
+                        name: 'Refunds',
+                        url: '/handbook/growth/revops/refunds',
+                    },
+                    {
+                        name: 'Lead assignment during time off',
+                        url: '/handbook/growth/revops/lead-assignment-ooo',
+                    },
+                    {
+                        name: 'Giving credits to customers',
+                        url: '/handbook/growth/revops/credits',
+                    },
+                ],
             },
         ],
     },
@@ -1817,8 +1855,8 @@ export const docsMenu = {
                                     url: '/docs/libraries/js',
                                 },
                                 {
-                                    name: 'Features',
-                                    url: '/docs/libraries/js/features',
+                                    name: 'Usage',
+                                    url: '/docs/libraries/js/usage',
                                 },
                                 {
                                     name: 'Configuration',
@@ -1868,6 +1906,20 @@ export const docsMenu = {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
+                            children: [
+                                {
+                                    name: 'Installation',
+                                    url: '/docs/libraries/ios',
+                                },
+                                {
+                                    name: 'Usage',
+                                    url: '/docs/libraries/ios/usage',
+                                },
+                                {
+                                    name: 'Configuration',
+                                    url: '/docs/libraries/ios/configuration',
+                                },
+                            ],
                         },
                         {
                             name: 'Java',
@@ -1882,7 +1934,7 @@ export const docsMenu = {
                             url: '/docs/libraries/node',
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/node',
                                 },
                                 {
@@ -1900,7 +1952,7 @@ export const docsMenu = {
                             url: '/docs/libraries/python',
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/python',
                                 },
                                 {
@@ -1926,7 +1978,7 @@ export const docsMenu = {
                             },
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/react-native',
                                 },
                                 {
@@ -3746,6 +3798,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/android',
                         },
                         {
+                            name: 'Flutter',
+                            url: '/docs/error-tracking/installation/flutter',
+                        },
+                        {
                             name: 'Manual/API',
                             url: '/docs/error-tracking/installation/manual',
                         },
@@ -4380,7 +4436,7 @@ export const docsMenu = {
                 {
                     name: 'Sessions',
                     url: '/docs/llm-analytics/sessions',
-                    icon: 'IconMessages',
+                    icon: 'IconStack',
                     color: 'blue',
                     featured: true,
                 },
@@ -4699,6 +4755,50 @@ export const docsMenu = {
                 {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/workflows/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'red',
+                },
+            ],
+        },
+        {
+            name: 'Logs',
+            icon: 'IconSearch',
+            color: 'blue',
+            url: '/docs/logs',
+            description: 'Search and analyze your application logs with OpenTelemetry.',
+            children: [
+                {
+                    name: 'Logs',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/logs',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/logs/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Install logging client',
+                    url: '/docs/logs/installation',
+                    icon: 'IconCode',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/logs/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
                 },

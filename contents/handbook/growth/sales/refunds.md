@@ -101,7 +101,7 @@ What's "normal" vs "weird" usage:
 ### Refund or credit?
 
 -   Issue credits if the customer's period hasn't ended yet and the invoice isn't finalized. It is much easier and better for users and us to avoid payment if we can!
--   If invoice is finalized and this is a first time request, issue a refund.
+-   If invoice is finalized and this is a first time request, issue a refund via a credit note (do not use the refund button, this is important for correct revenue attribution).
 -   If the customer has overdue invoices and needs changes on that, we need to apply credit notes. Escalate such cases to RevOps.
 
 ## How to issue refunds or credits
@@ -122,14 +122,16 @@ You need Support specialist level access to Stripe, ask Simon for access.
 8. Click 'Save and view'
 9. Confirm that the credits were successfully added to the customer's balance in Stripe under 'Customer invoice balance'
 
-### Issuing refunds
+### Issuing a credit note refund
 
 1. Find customer profile in Stripe (you can search by organization id)
-2. Under payments, find the payment that corresponds to the usage period
-3. Click "Refund payment" **Be careful on this dialog box as pressing enter will automatically complete the refund. **
-4. Specify the refund amount (default is full refund, remember to change as needed using instructions above)
-5. Add brief comment to explain the reason and link to Zendesk ticket
-6. For partial refunds, you can view the partial refund amount by hovering over the 'Partial refund' box that now displays against the payment.
+2. Under Invoices, find the invoice corresponding to the usage period or product you want to refund.
+3. Click “Issue a credit note” in the top right corner of the invoice page.
+4. In the Reason field, select relevant reason from dropdown or select "Other" and add any relevant context (e.g. Zendesk ticket link, Slack message link, or short explanation)
+5. Under "Items to credit" select the corresponding products or charges you want to issue a refund for. If this is a full refund, you can select all products by checking the box at the very top of the list next to Description.
+6. Review the credit amount and confirm everything looks correct.
+7. Under "Amount to credit" field towards the bottom of the page you will see a dropdown that says "Select how to credit" Select "Refund to ... (customer's default payment method)" 
+8. Once you review everything and all looks good click "Issue credit note" this will finalize the process and send a notification email to the customer.
 
 ### Fixed fee product refunds
 For fixed-fee subscriptions (e.g. Boost plan), Stripe’s default proration behavior can cause double crediting.

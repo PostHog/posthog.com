@@ -11,15 +11,9 @@ PostHog autocapture automatically tracks the following events for you:
 
 > 🚧 **Note:** `$autocapture` is currently supported only in UIKit.
 
-### Autocapture configuration
-
-You can enable or disable autocapture through the `PostHogConfig` object.
-
-<AutocaptureConfig />
-
 ### Capturing screen views
 
-With [`configuration.captureScreenViews`](/docs/libraries/ios#all-configuration-options) set as `true`, PostHog will try to record all screen changes automatically.
+With [`configuration.captureScreenViews`](/docs/libraries/ios/configuration#all-configuration-options) set as `true`, PostHog will try to record all screen changes automatically.
 
 If you want to manually send a new screen capture event, use the `screen` function.
 
@@ -104,3 +98,22 @@ To locate and filter interactions with specific elements in PostHog reports, you
 - CSS Selector (the generated `id` attribute in this example)
 
 In the examples above, we can filter for the specific text field using the CSS Selector `#usernameTextField`
+
+### Interaction autocapture
+
+Interaction autocapture records when users interact with UI elements in your app. This includes:
+
+- User interactions like `touch`, `swipe`, `pan`, `pinch`, `rotation`, `long_press`, `scroll`
+- Control types `value_changed`, `submit`, `toggle`, `primary_action`, `menu_action`, `change`
+
+Interaction autocapture is **not enabled by default**. You can enable it by setting `captureElementInteractions` to `true` in the config.
+
+```swift
+let config = PostHogConfig(apiKey: <ph_project_api_key>, host: <ph_client_api_host>)
+config.captureElementInteractions = true // Disabled by default
+PostHogSDK.shared.setup(config)
+```
+
+### Autocapture configuration
+
+You can enable or disable autocapture through the `PostHogConfig` object. Find more details about autocapture configuration in the [configuration page](/docs/libraries/ios/configuration#autocapture-configuration).
