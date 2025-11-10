@@ -62,7 +62,9 @@ const errorTrackingFeatures = [
     { text: 'Issue management', url: '/docs/error-tracking/managing-issues' },
     { text: 'Team assignments', url: '/docs/error-tracking/assigning-issues' },
     { text: 'Alerts', url: '/docs/error-tracking/alerts' },
-    { text: 'Integrations with Linear and GitHub', url: '/docs/error-tracking/external-tracking' },
+    { text: 'Integrations with Linear, GitHub, and GitLab', url: '/docs/error-tracking/external-tracking' },
+    { text: 'Track releases and deploys', url: '/docs/error-tracking/releases' },
+    { text: 'Mobile support', url: '/docs/error-tracking/installation' },
     { text: 'MCP integration', url: '/docs/error-tracking/debugging-with-mcp' },
     { text: 'Fix with AI', url: '/docs/error-tracking/fix-with-ai-prompts' },
 ]
@@ -125,6 +127,7 @@ export const Content = () => {
                         return rows
                     }, [] as any[])}
                     size="sm"
+                    width="full"
                 />
             </section>
 

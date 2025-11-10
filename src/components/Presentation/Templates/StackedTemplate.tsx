@@ -31,7 +31,7 @@ interface StackedTemplateProps {
     textColor?: string
     companyLogo?: string
     companyName?: string
-    salesRep?: SalesRep
+    salesRep?: SalesRep | null
     slideKey?: string
 }
 
@@ -109,7 +109,7 @@ export default function StackedTemplate({
                         />
                         {description && (
                             <ParseHtml
-                                content={description.replace('{companyName}', companyName || '')}
+                                content={description.replace('{companyName}', companyName || 'your product')}
                                 className={`prose text-2xl @2xl:text-xl @2xl:text-balance ${
                                     image ? '' : descriptionWidth
                                 }`}

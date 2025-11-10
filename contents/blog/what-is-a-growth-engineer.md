@@ -19,7 +19,7 @@ Every startup loves to see its growth metrics – signups, subscriptions, and re
 
 In this post, we'll explain the benefits of growth engineers, the type of people who succeed as growth engineers, their skills, what they work on, why you should hire them, and how growth engineering works at PostHog.
 
-> **Who are we?** [PostHog](/) is an open source suite of product and data tools built to help engineers build successful products. Relevant to this post, we have a team of growth engineers who work to maximize the number of people who get value out of PostHog.
+> **Who are we?** [PostHog](/) is an open source suite of dev tools built to help engineers build successful products. Relevant to this post, we have a team of growth engineers who work to maximize the number of people who get value out of PostHog.
 
 ## What are the characteristics of a growth engineer?
 
