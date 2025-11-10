@@ -124,6 +124,10 @@ CREATE TABLE IF NOT EXISTS "{database}"."{schema}"."{table_name}" (
 COMMENT = 'PostHog persons table'
 ```
 
+### Sessions model
+
+You can view the schema for the sessions model in the configuration form when creating a batch export (there are a few too many fields to display here!).
+
 #### How is the persons model kept up to date?
 
 Exporting mutable data (like the persons model) requires executing a merge operation to apply new updates to existing rows. Executing this merge operation in Snowflake involves the following steps:

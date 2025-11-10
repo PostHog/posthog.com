@@ -1278,12 +1278,16 @@ export const handbookSidebar = [
                                 url: '/handbook/growth/sales/account-planning',
                             },
                             {
-                                name: 'Cross-sell motions',
+                                name: 'Cross selling tactics',
                                 url: '/handbook/growth/sales/cross-selling',
                             },
                             {
                                 name: 'Cross sell motions',
                                 url: '/handbook/growth/sales/cross-sell-motions',
+                            },
+                             {
+                                name: 'Communications templates',
+                                url: '/handbook/growth/sales/communications-templates',
                             },
                         ],
                     },

@@ -48,6 +48,12 @@ export const errorTracking = {
             // imgClasses: 'rounded-tl-md shadow-2xl',
         },
     },
+    videos: {
+        overview: {
+            youtube: '',
+            wistia: 'scuzsr1rcz',
+        },
+    },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_hog_c2eff84e29.png',
         alt: 'Just another hedgehog',
@@ -257,6 +263,31 @@ export const errorTracking = {
         ],
         rows: ['error_tracking'],
         excluded_sections: ['platform.libraries'],
+    },
+    postHogOnPostHog: {
+        title: 'How PostHog uses Error Tracking',
+        benefits: [
+            {
+                title: 'Track errors',
+                description: 'and identify spikes in exception events',
+            },
+            {
+                title: 'Investigate root causes',
+                description: 'using stack traces and session replays',
+            },
+            {
+                title: 'Triage issues',
+                description: 'by filtering based on severity and impact',
+            },
+            {
+                title: 'Find out when things go wrong',
+                description: 'by setting up alerts for critical errors',
+            },
+            {
+                title: 'Dodge blame',
+                description: 'by assigning errors to someone else',
+            },
+        ],
     },
     integrations: ['ab_experiments', 'product_analytics', 'session_replays'],
     pairsWith: [

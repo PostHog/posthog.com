@@ -105,6 +105,10 @@ The schema of the model as created in BigQuery is:
 
 The BigQuery table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`. The `properties` field can be either `STRING` or `JSON`, depending on whether the corresponding checkbox is marked or not when creating the batch export.
 
+### Sessions model
+
+You can view the schema for the sessions model in the configuration form when creating a batch export (there are a few too many fields to display here!).
+
 ## Creating the batch export
 
 1. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the **Destinations** tab.
