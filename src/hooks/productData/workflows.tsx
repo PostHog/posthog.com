@@ -1,39 +1,6 @@
 import React from 'react'
-import {
-    IconBell,
-    IconClockRewind,
-    IconDashboard,
-    IconDecisionTree,
-    IconGraph,
-    IconHandMoney,
-    IconLightBulb,
-    IconListTreeConnected,
-    IconLlmAnalytics,
-    IconPiggyBank,
-    IconRewindPlay,
-    IconShield,
-    IconSparkles,
-    IconTarget,
-    IconTrends,
-    IconUser,
-    IconWarning,
-    IconGlobe,
-    IconListCheck,
-} from '@posthog/icons'
-import {
-    IconAnthropic,
-    IconGemini,
-    IconGrid,
-    IconHelicone,
-    IconKeywordsAI,
-    IconLangChain,
-    IconLangfuse,
-    IconOpenAI,
-    IconOpenRouter,
-    IconTag,
-    IconTraceloop,
-    IconVercel,
-} from 'components/OSIcons'
+import { IconDecisionTree } from '@posthog/icons'
+import { Link } from 'react-scroll/modules'
 
 export const workflows = {
     name: 'Workflows',
@@ -88,24 +55,19 @@ export const workflows = {
     //   classes: 'absolute bottom-0 right-4 max-w-lg',
     // },
     customers: {
-        elevenlabs: {
-            headline: 'uses LLM analytics with session replays (and everything else)',
+        grantable: {
+            headline: 'replaced Zapier with PostHog Workflows and cut setup time by ~90%',
             description:
-                'PostHog is amazing. It reins in the chaos to have everything in one place. Otherwise it’s quite overwhelming to try and understand what’s working and what’s not.',
-        },
-        lovable: {
-            headline: 'compared us to every other observability tool, just to be sure',
-            description:
-                "If you're building a new product, just use PostHog.It's a no-brainer. It's the only all-in -one platform like it for developers.",
+                'PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.',
         },
     },
     features: [
         {
-            title: 'Trace monitoring',
-            handle: 'trace_monitoring',
-            template: 'splitImage',
-            headline: 'Trace monitoring',
-            description: 'Debug entire conversations, not just individual calls',
+            title: 'Workflow builder',
+            // handle: 'trace_monitoring',
+            headline: 'Workflow builder',
+            description:
+                'Build automations with a drag-and-drop interface – no YAML, no API juggling. It only takes a few minutes to go from idea to live.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_light_e4cea319cb.png',
@@ -114,225 +76,144 @@ export const workflows = {
                     className: 'rounded-tl-md shadow-2xl justify-end items-end @2xl:mt-8 ml-8 @2xl:ml-0',
                 },
             ],
-            features: [
-                {
-                    icon: <IconListTreeConnected />,
-                    title: 'Multi-turn conversation history',
-                    description: 'Track prompts, completions, and token counts for every interaction',
-                },
-                {
-                    icon: <IconUser />,
-                    title: 'User attribution',
-                    description: 'Trace AI interactions to specific users and organizations',
-                },
-                {
-                    icon: <IconRewindPlay />,
-                    title: 'Integrated session recordings',
-                    description: "Observe any changes to your UI based on the LLM's response",
-                },
-                {
-                    icon: <IconTag />,
-                    title: 'Metadata tracking',
-                    description: 'Add custom properties like conversation ID, session, or feature',
-                },
-                {
-                    icon: <IconShield />,
-                    title: 'Privacy mode',
-                    description: 'Optionally exclude sensitive prompt and completion data',
-                },
-            ],
             // children: (<></>)
         },
         {
-            title: 'Cost analysis',
-            handle: 'cost_analysis',
-            template: 'splitImage',
-            headline: 'Cost analysis',
-            description: 'Track costs by model, user, feature, and time period to optimize spending and pricing',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cost_light_f2794e4e13.png',
-                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cost_dark_d1efde15fd.png',
-                    alt: 'LLM cost analysis',
-                    className: 'justify-center items-center',
-                },
-            ],
-            features: [
-                {
-                    icon: <IconTrends />,
-                    title: 'Model comparison',
-                    description: 'Compare costs across different models and providers',
-                },
-                {
-                    icon: <IconTarget />,
-                    title: 'Cost per user',
-                    description: 'See which users or organizations are driving your LLM costs',
-                },
-                {
-                    icon: <IconSparkles />,
-                    title: 'Feature-level costs',
-                    description: 'Understand the economics of each AI-powered feature',
-                },
-                {
-                    icon: <IconPiggyBank />,
-                    title: 'ROI analysis',
-                    description: 'Connect AI costs to revenue data and user engagement metrics',
-                },
-            ],
-        },
-        {
-            title: 'Performance monitoring',
-            handle: 'performance_monitoring',
-            template: 'splitImage',
-            headline: 'Performance monitoring',
-            description: 'Monitor latency, error rates, and model performance',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
-                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-                    alt: 'LLM performance monitoring',
-                    className: 'justify-center items-center',
-                },
-            ],
-            features: [
-                {
-                    icon: <IconDashboard />,
-                    title: 'Latency tracking',
-                    description: 'Monitor response times and identify performance bottlenecks',
-                },
-                {
-                    icon: <IconWarning />,
-                    title: 'Error monitoring',
-                    description: 'Track API errors, rate limits, and model failures',
-                },
-                {
-                    icon: <IconTrends />,
-                    title: 'Model performance',
-                    description: 'Compare speed and reliability across different models',
-                },
-                {
-                    icon: <IconBell />,
-                    title: 'Real-time alerts',
-                    description: 'Get notified of latency spikes or error rate increases',
-                },
-                {
-                    icon: <IconGlobe />,
-                    title: 'Geographic performance',
-                    description: 'See how performance varies by user location',
-                },
-            ],
-        },
-        {
-            title: 'Native integrations',
-            handle: 'native_integrations',
-            template: 'grid',
-            headline: 'Works with your AI stack',
-            description: 'Simple SDKs for popular LLM providers and observability platforms.',
-            features: [
-                {
-                    icon: <IconOpenAI />,
-                    title: 'OpenAI SDK',
-                    // description: 'Drop-in integration for GPT models with one line of code',
-                },
-                {
-                    icon: <IconAnthropic />,
-                    title: 'Anthropic SDK',
-                    // description: 'Native support for Claude models',
-                },
-                {
-                    icon: <IconGemini />,
-                    title: 'Google Gemini',
-                    // description: 'Native support for Gemini models',
-                },
-                {
-                    icon: <IconLangChain />,
-                    title: 'LangChain',
-                    // description: 'Full observability for LangChain applications',
-                },
-                {
-                    icon: <IconVercel />,
-                    title: 'Vercel AI SDK',
-                    // description: 'Track streaming responses and edge functions',
-                },
-                {
-                    icon: <IconOpenRouter />,
-                    title: 'OpenRouter',
-                    // description: 'Native support for OpenRouter',
-                },
-            ],
-        },
-        {
-            title: 'Platform integrations',
-            handle: 'platform_integrations',
-            template: 'split',
-            headline: 'Integrates with other LLM observability platforms',
+            title: 'Messaging',
+            handle: 'messaging',
+            // template: 'splitImage',
+            headline: 'Messaging',
             description:
-                'Using another LLM observability platform? Send data to PostHog to analyze it with product usage data.',
-            features: [
-                {
-                    icon: <IconLangfuse />,
-                    title: 'Langfuse',
-                    description: '',
-                },
-                {
-                    icon: <IconHelicone />,
-                    title: 'Helicone',
-                    description: '',
-                },
-                {
-                    icon: <IconTraceloop />,
-                    title: 'Traceloop',
-                    description: '',
-                },
-                {
-                    icon: <IconKeywordsAI />,
-                    title: 'Keywords AI',
-                    description: '',
-                },
-            ],
+                'Send targeted emails, Slack posts, or webhook messages to users and cohorts based on live product data. Automate onboarding, activation, or feedback loops directly from PostHog.',
+            // images: [
+            //     {
+            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
+            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+            //         alt: 'LLM performance monitoring',
+            //         className: 'justify-center items-center',
+            //     },
+            // ],
+        },
+        {
+            title: 'Data-native',
+            // template: 'splitImage',
+            headline: 'Data-native',
+            description:
+                'Workflows runs on the product data you already track in PostHog. No need to connect extra tools or import events.',
+            // images: [
+            //     {
+            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
+            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+            //         alt: 'LLM performance monitoring',
+            //         className: 'justify-center items-center',
+            //     },
+            // ],
+        },
+        {
+            title: 'Triggers',
+            // template: 'splitImage',
+            headline: 'Triggers',
+            description:
+                'Start a workflow when a user signs up, clicks a feature, or completes an experiment. Trigger emails, Slack posts, or follow-up events automatically from that behavior.',
+            // images: [
+            //     {
+            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
+            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+            //         alt: 'LLM performance monitoring',
+            //         className: 'justify-center items-center',
+            //     },
+            // ],
+        },
+        {
+            title: 'Conditions & splits',
+            // template: 'splitImage',
+            headline: 'Conditions & splits',
+            description:
+                'Branch logic visually based on user properties, cohorts or random variations, enabling targeted actions or A/B-style automation paths.',
+            // images: [
+            //     {
+            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
+            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+            //         alt: 'LLM performance monitoring',
+            //         className: 'justify-center items-center',
+            //     },
+            // ],
+        },
+        {
+            title: 'Flow control',
+            // template: 'splitImage',
+            headline: 'Flow control',
+            description:
+                'Add delays, pauses, or conditional waits to match how users actually behave. Time actions precisely around engagement, churn, or trial limits.',
+            // images: [
+            //     {
+            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
+            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+            //         alt: 'LLM performance monitoring',
+            //         className: 'justify-center items-center',
+            //     },
+            // ],
+        },
+        {
+            title: 'Channels',
+            // template: 'splitImage',
+            headline: 'Channels',
+            description: 'Reach users wherever they are – email, Slack, Discord, webhooks, or your own destinations.',
+            // images: [
+            //     {
+            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
+            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+            //         alt: 'LLM performance monitoring',
+            //         className: 'justify-center items-center',
+            //     },
+            // ],
+        },
+        {
+            title: 'More features',
+            // template: 'splitImage',
+            headline: 'More features',
+            description:
+                'Build advanced logic with loops, exit conditions, and custom actions. Trigger PostHog events, update user properties, or call APIs — all from one place.',
             children: (
-                <div className="prose-xl p-8">
-                    <h3>Answer questions like:</h3>
-                    <ul className="list-disc">
-                        <li>What are my LLM costs by customer, model, and in total?</li>
-                        <li>How many of my users are interacting with my LLM features?</li>
-                        <li>Are there generation latency spikes?</li>
+                <>
+                    <p>Check out our workflow guides:</p>
+                    <ul>
                         <li>
-                            Does interacting with LLM features correlate with other metrics (retention, usage, revenue,
-                            etc.)?
+                            <Link to="/docs/workflows/email-drip-campaign">Email drip campaign</Link>
+                        </li>
+                        <li>
+                            <Link to="/docs/workflows/triggering-internal-notifications">
+                                Triggering internal notifications
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/docs/workflows/updating-user-properties">Updating user properties</Link>
                         </li>
                     </ul>
-                </div>
+                </>
             ),
+            // images: [
+            //     {
+            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
+            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+            //         alt: 'LLM performance monitoring',
+            //         className: 'justify-center items-center',
+            //     },
+            // ],
         },
         {
-            title: 'Advanced analytics',
-            handle: 'advanced_analytics',
-            template: 'grid',
-            headline: 'Go beyond basic metrics',
-            description: "Use PostHog's full analytics suite to understand AI feature adoption and impact.",
-            features: [
-                {
-                    title: 'Correlation analysis',
-                    description: 'See how AI usage correlates with retention, revenue, and engagement',
-                },
-                {
-                    title: 'Funnel analysis',
-                    description: 'Track conversion through AI-powered features',
-                },
-                {
-                    title: 'Cohort analysis',
-                    description: 'Compare heavy vs light AI users behavior',
-                },
-                {
-                    title: 'Custom dashboards',
-                    description: 'Build dashboards combining AI and product metrics',
-                },
-                {
-                    title: 'SQL access',
-                    description: 'Query raw LLM data with HogQL for custom analysis',
-                },
-            ],
+            title: '',
+            // template: 'splitImage',
+            headline: '',
+            description: '',
+            // images: [
+            //     {
+            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
+            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+            //         alt: 'LLM performance monitoring',
+            //         className: 'justify-center items-center',
+            //     },
+            // ],
         },
     ],
     questions: [
@@ -365,29 +246,26 @@ export const workflows = {
         summary: {
             them: [
                 {
-                    title: "You don't need any product insights",
-                    subtitle: 'and only want to track operational metrics',
+                    title: 'You only need workflows without the product data ',
                 },
-                {
-                    title: 'Deep mobile support',
-                    subtitle: "if you're building a mobile-specific product",
-                },
-                {
-                    title: "You don't want to use an open source product",
-                },
+                // {
+                //     title: 'Deep mobile support',
+                //     subtitle: "if you're building a mobile-specific product",
+                // },
+                // {
+                //     title: "You don't want to use an open source product",
+                // },
             ],
             us: [
                 {
-                    title: 'You want to understand LLM costs on a per user basis',
-                    subtitle: 'in addition to other axes',
+                    title: 'You want automations that run on top of your live product data.',
                 },
                 {
-                    title: 'You want to combine LLM analytics with other tools',
-                    subtitle: 'like Error Tracking and Session Replay',
+                    title: 'You want to trigger actions from real user behavior',
                 },
                 {
-                    title: 'You need easy regulatory compliance for HIPAA and GDPR',
-                    // subtitle: 'Exclude sensitive data with built-in privacy mode',
+                    title: 'You already use PostHog for analytics, feature flags, or experiments',
+                    subtitle: 'Workflows connects everything on top of the PostHog product stack',
                 },
             ],
         },
@@ -417,23 +295,27 @@ export const workflows = {
     },
     pairsWith: [
         {
+            slug: 'experiments',
+            description:
+                'Automatically follow up with users from test variants: send feedback surveys, activate successful groups, or roll out winning experiences.',
+        },
+        {
             slug: 'product-analytics',
-            description: 'Correlate AI usage with user behavior and business metrics',
-        },
-        {
-            slug: 'dashboards',
-            description: 'Build custom dashboards combining LLM and product metrics',
-        },
-        {
-            slug: 'session-replay',
-            description: 'Watch how users interact with AI features in real sessions',
+            description:
+                'Trigger automations from real user behavior. Every click, session, or conversion can start a workflow.',
         },
         {
             slug: 'feature-flags',
-            description: 'Roll out AI features gradually and test different models',
+            description:
+                'React when a feature is turned on, off, or rolled out to a specific segment. Target messages or follow-ups based on flag variations.',
+        },
+        {
+            slug: 'error-tracking',
+            description:
+                'Trigger alerts or messages when errors spike, or notify engineering teams directly in Slack when exceptions occur.',
         },
     ],
-    worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
+    worksWith: ['experiments', 'product-analytics', 'feature-flags', 'error-tracking'],
     presenterNotes: {
         overview:
             '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',

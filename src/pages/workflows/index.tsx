@@ -5,7 +5,7 @@ import { useContentData } from 'hooks/useContentData'
 
 const PRODUCT_HANDLE = 'workflows'
 
-export default function LLMAnalytics(): JSX.Element {
+export default function Workflows(): JSX.Element {
     const contentData = useContentData()
 
     // Combined GraphQL query for both tutorial data and product data
@@ -80,7 +80,7 @@ export default function LLMAnalytics(): JSX.Element {
         templates: {
             overview: 'stacked',
         },
-        exclude: ['answers', 'posthog-on-posthog'],
+        exclude: ['answers', 'posthog-on-posthog', 'feature-comparison'],
         content: {
             answersDescription: '',
             answersHeadline: '',
