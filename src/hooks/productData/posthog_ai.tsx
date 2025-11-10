@@ -525,6 +525,11 @@ export const posthog_ai = {
             ],
         },
     ],
+    videos: {
+        overview: {
+            wistia: 'tgws1dixc0',
+        },
+    },
     answers: [
         {
             q: "What's my churn rate?",
@@ -557,6 +562,31 @@ export const posthog_ai = {
             q: 'Show me a signup funnel',
         },
     ],
+    postHogOnPostHog: {
+        title: 'How PostHog uses PostHog AI',
+        benefits: [
+            {
+                title: 'Build insights and dashboards',
+                description: 'using natural language',
+            },
+            {
+                title: 'Create SQL queries',
+                description: 'to use for detailed analysis',
+            },
+            {
+                title: 'Summarize session replays',
+                description: "so we don't have to watch them all",
+            },
+            {
+                title: 'Get product advice',
+                description: 'because we trained the AI on our blog too',
+            },
+            {
+                title: 'Fix bugs in our implementation',
+                description: 'way faster than reading all the docs',
+            },
+        ],
+    },
     comparison: {
         comparison_companies: {
             Segment: true,
