@@ -30,6 +30,11 @@ export const sessionReplay = {
             'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
         textColor: 'text-black', // tw
     },
+    videos: {
+        overview: {
+            wistia: 'a1480fky0u',
+        },
+    },
     screenshots: {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot_de8cb3a4ed.jpg',
@@ -399,6 +404,35 @@ window.posthog.onFeatureFlags(function () {
             ],
         },
     ],
+    postHogOnPostHog: {
+        title: 'How PostHog uses Session Replay',
+        benefits: [
+            {
+                title: 'Gather context',
+                description: 'by seeing what led to each rageclick',
+            },
+            {
+                title: 'Debug issues',
+                description: 'by watching the prelude to each bug',
+            },
+            {
+                title: 'Assess performance',
+                description: 'by measuring first contentful paint and load time',
+            },
+            {
+                title: 'Resolve experiments',
+                description: 'by seeing how users interact with new features',
+            },
+            {
+                title: 'Build user empathy',
+                description: 'by watching their entire product journey',
+            },
+            {
+                title: 'Improve conversion',
+                description: 'by using context to solve stubborn problems',
+            },
+        ],
+    },
     questions: [
         {
             question: 'Why are users dropping off in my funnel?',
