@@ -15,18 +15,20 @@ Based on that context, PostHog AI comes up with queries, runs them, and summariz
 
 ## Is my data shared with third parties?
 
-We use third-party providers to power PostHog AI, so messages and all data accessed by PostHog AI (see list above) is passed through them.
+We use third-party providers to power PostHog AI, so messages and all data accessed by PostHog AI (see list above) are passed through them.
 
 Our list of data subprocessors includes:
+
 - OpenAI and Anthropic – responsible for the core of PostHog AI's functionality, have access to user messages and all data types.
 - Azure – responsible for semantic search across PostHog, has access to actions and cohorts (including their filters)
 
 Other providers that are not data subprocessors:
+
 - Perplexity – responsible for providing context about your product and/or company, has access to domain name (for websites) or application bundle ID (for mobile applications). We do not send any of your data.
 
 ## How can I disable AI in PostHog?
 
-With [admin permissions](/docs/settings/access-control) for your organization, you can disable PostHog AI and all AI data analysis in your [organization settings](http://app.posthog.com/settings/organization-details#organization-ai-consent).
+With [admin permissions](/docs/settings/access-control) for your organization, you can disable PostHog AI and all AI data analysis in your [organization settings](https://app.posthog.com/settings/organization-details#organization-ai-consent).
 
 1. Go to **Settings** > **Organization** > **General**
 2. Find the **PostHog AI data analysis** section
