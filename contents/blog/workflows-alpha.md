@@ -3,8 +3,6 @@ date: 2025-11-03
 title: Workflows are now in Alpha and I already broke mine
 author:
   - sara-miteva
-featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/this_is_fine_6336efb0ae.jpg
 rootPage: /blog
 sidebar: Blog
 showTitle: true
