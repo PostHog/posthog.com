@@ -31,7 +31,7 @@ You can find out more about the features we (and the other teams) own [here](/ha
 Use this guide to determine if a prospect's use case is a good fit for Feature Flags now, in the future, or at all.
 
 ### Engineers (product, growth, software, etc.)
-**✅ Fully supported now**
+**✅ Fully supported**
 
 They're the primary users of feature flags and get the most value. They can implement flags end-to-end for progressive rollouts, kill switches, canary releases, and targeted feature access without coordination overhead.
 
@@ -40,11 +40,13 @@ They're the primary users of feature flags and get the most value. They can impl
 ---
 
 ### Product Managers
-**✅ Fully supported now**
+**⏳ Partially supported**
 
-They use flags to control feature rollouts, manage beta programs, and make release decisions independently. While they typically need an engineer for initial implementation, they can independently manage flag targeting, rollout percentages, and enable/disable features.
+They use flags to control feature rollouts, manage beta programs, and make release decisions independently. However, they typically need an engineer for initial implementation and adding flags to the codebase. Once implemented, they can independently manage flag targeting, rollout percentages, and enable/disable features.
 
-**Best fit:** PMs who want control over feature releases without deploying code.
+**Coming soon:** AI-assisted flag creation will reduce the engineering dependency by enabling flag generation with natural language prompts.
+
+**Best fit:** PMs who want control over feature releases without deploying code, and have access to engineering resources for initial setup.
 
 ---
 
@@ -58,16 +60,3 @@ They use flags to control feature rollouts, manage beta programs, and make relea
 **Is this customer a fit?**
 - ✅ Yes, if they're comfortable managing flags via UI/API
 - ⏳ Wait if they require deep IaC integration (coming but no firm timeline)
-
----
-
-### Growth/Marketing teams
-**⏳ Limited support → Full support planned (further out)**
-
-**What works today:** Can use flags for messaging, campaigns, and landing page variations - but require engineering help for implementation.
-
-**Coming later:** Natural language-powered flag generation will enable creating and adding flags to the codebase with prompts, reducing engineering dependency.
-
-**Is this customer a fit?**
-- ✅ Yes, if they have dedicated engineering resources
-- ⏳ Wait if they need low-code/independent setup (natural language flags coming but no firm timeline)
