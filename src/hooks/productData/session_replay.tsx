@@ -405,7 +405,7 @@ window.posthog.onFeatureFlags(function () {
         },
     ],
     postHogOnPostHog: {
-        title: 'How we use session replays',
+        title: 'How PostHog uses Session Replay',
         benefits: [
             {
                 title: 'Gather context',
@@ -417,7 +417,7 @@ window.posthog.onFeatureFlags(function () {
             },
             {
                 title: 'Assess performance',
-                description: "by measuring first contentful paint and load time",
+                description: 'by measuring first contentful paint and load time',
             },
             {
                 title: 'Resolve experiments',

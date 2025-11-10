@@ -338,7 +338,7 @@ export const llmAnalytics = {
         },
     ],
     postHogOnPostHog: {
-        title: 'How we use LLM analytics',
+        title: 'How PostHog uses LLM Analytics',
         benefits: [
             {
                 title: 'Analyze costs',
@@ -350,7 +350,7 @@ export const llmAnalytics = {
             },
             {
                 title: 'Monitor performance',
-                description: "by comparing speed and reliability across models",
+                description: 'by comparing speed and reliability across models',
             },
             {
                 title: 'Muck about',

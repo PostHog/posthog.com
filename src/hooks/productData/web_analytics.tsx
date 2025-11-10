@@ -283,7 +283,7 @@ export const webAnalytics = {
         },
     ],
     postHogOnPostHog: {
-        title: 'How PostHog uses web analytics',
+        title: 'How PostHog uses Web Analytics',
         benefits: [
             {
                 title: 'Track pageviews, visitors,',

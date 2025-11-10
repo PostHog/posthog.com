@@ -524,7 +524,7 @@ export const productAnalytics = {
         require_complete_data: true,
     },
     postHogOnPostHog: {
-        title: 'How we use product analytics',
+        title: 'How PostHog uses Product Analytics',
         benefits: [
             {
                 title: 'Track metrics',

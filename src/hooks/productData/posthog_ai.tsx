@@ -563,7 +563,7 @@ export const posthog_ai = {
         },
     ],
     postHogOnPostHog: {
-        title: 'How we use PostHog AI',
+        title: 'How PostHog uses PostHog AI',
         benefits: [
             {
                 title: 'Build insights and dashboards',

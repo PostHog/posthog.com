@@ -265,7 +265,7 @@ export const errorTracking = {
         excluded_sections: ['platform.libraries'],
     },
     postHogOnPostHog: {
-        title: 'How we use error tracking',
+        title: 'How PostHog uses Error Tracking',
         benefits: [
             {
                 title: 'Track errors',
