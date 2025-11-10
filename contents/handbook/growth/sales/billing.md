@@ -67,7 +67,11 @@ We define late payments as follows:
 
 In either of the above scenarios the account owner as defined in Vitally needs to take action to ensure that payment is made. If there is no owner in Vitally, Simon will handle this process. If you are an AE, remember this also has impact on your commission, as we don't pay out until the customer has paid their invoice.
 
+You can find a list of failed and overdue payments <PrivateLink url='https://us.posthog.com/project/2/insights/qEt5N1xg'>in PostHog</PrivateLink>
+
 #### Step 1 - On the day their payment becomes late
+
+As the account owner you will be assigned a risk indicator in Vitally, as well as being tagged in an alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink>.  For unmanaged accounts with a failed payment of $1500 or more Simon and Dana are tagged instead.
 
 You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For credit-based customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page. To get a payment update link, click on the subscription, then click actions in the top right corner and choose share payment update link. Make it easy for them to make payment by including these details in your email.
 
