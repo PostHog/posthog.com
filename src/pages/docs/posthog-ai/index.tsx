@@ -96,8 +96,8 @@ export const Content = () => {
                     </ul>
                     <p>
                         The main interface is an in-app <a href="https://app.posthog.com/#panel=max">AI chat</a>, but
-                        PostHog AI also appears throughout the platform as inline UI elements embedded within other
-                        PostHog features. For example, you might see the AI icon{' '}
+                        PostHog AI also appears throughout the platform as inline UI elements within other PostHog
+                        features. For example, you might see the AI icon{' '}
                         <span className="inline-block">
                             <IconSparkles className="h-4 w-4" />
                         </span>{' '}
