@@ -46,7 +46,9 @@ export default function useProducts() {
 
     const [products, setProducts] = useState(
         initialProducts.map((product) => {
-            const billingData = billingProducts.find((billingProduct: any) => billingProduct.type === product.handle)
+            const billingData =
+                product.billingData ||
+                billingProducts.find((billingProduct: any) => billingProduct.type === product.handle)
             const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
             const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
             const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to
