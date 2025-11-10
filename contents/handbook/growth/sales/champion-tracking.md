@@ -152,3 +152,191 @@ If multiple indicators are declining, it's past time for a direct conversation.
 **For account handoffs:**
 The outgoing owner must include stakeholder mapping in the account plan handoff document. It's not optional.
 
+## Example comms templates
+
+### When your champion tells you they're leaving (proactive)
+
+**Subject:** Quick intro before you head out?
+```
+Hey [Champion Name],
+
+Congrats on the new role! Sad to see you go but excited for what's next for you.
+
+Before you transition out, would you mind introducing me to whoever's taking over the PostHog relationship? I want to make sure they have everything they need and there's no disruption on your team's end.
+
+Also happy to jump on a call with you both if that's easier for the handoff, but no pressure.
+
+Thanks for being such a great partner. Feel free to reach out if you ever need anything at the new gig.
+
+[Your name]
+```
+
+---
+
+### When you discover your champion has already left (reactive)
+
+**Subject:** Checking in on PostHog
+```
+Hey [Remaining Contact],
+
+I just noticed [Champion Name] has moved on (saw the LinkedIn update). Hope the transition is going smoothly on your end.
+
+I've been working with your team on PostHog for [timeframe] and want to make sure nothing falls through the cracks. Who would be the best person to connect with going forward?
+
+Happy to do a refresh call with whoever's taking point to make sure you're getting the most out of PostHog.
+
+Let me know what works.
+
+[Your name]
+```
+
+---
+
+### Establishing a secondary relationship (casual check-in)
+
+**Subject:** PostHog check-in
+```
+Hey [Champion Name],
+
+Quick question: I've been working mostly with you on PostHog, but I'm realizing there are probably other folks on your team who'd benefit from being looped in.
+
+Who else should I be talking to? Thinking specifically about:
+- Whoever owns [specific use case they're not fully using]
+- Your data/engineering lead (if different from you)
+- Anyone else who cares about [relevant metric/outcome]
+
+Not trying to add more meetings to anyone's calendar, just want to make sure the right people know PostHog exists and how to get help if needed.
+
+Let me know who makes sense.
+
+[Your name]
+```
+
+---
+
+### Meeting the economic buyer (no corporate QBR vibes)
+
+**Subject:** Quick PostHog update
+```
+Hey [Economic Buyer Name],
+
+I work with [Champion Name] on your PostHog setup. Wanted to introduce myself and give you a quick pulse check since you're the one who ultimately approved the budget.
+
+Here's what's working well:
+- [Specific metric/usage win]
+- [Product adoption highlight]
+- [Business outcome if applicable]
+
+And where we think there's still room to grow:
+- [Opportunity 1]
+- [Opportunity 2]
+
+No urgent action needed, just wanted to make sure you know PostHog is pulling its weight. Happy to jump on a call if you want to dig into anything, but also fine to keep this async.
+
+[Your name]
+```
+
+---
+
+### Champion engagement dropping (direct check-in)
+
+**Subject:** Everything good?
+```
+Hey [Champion Name],
+
+I've noticed we haven't been as connected lately. No pressure, just wanted to make sure everything's going okay with PostHog on your end.
+
+Is there anything we should be doing differently? Or is it just a busy period and I should check back in a few weeks?
+
+Let me know what's up.
+
+[Your name]
+```
+
+**Alternative version (if they've gone really quiet):**
+
+**Subject:** Checking in
+```
+Hey [Champion Name],
+
+Haven't heard from you in a bit, which is unusual. Just wanted to make sure:
+1. PostHog is still working for you
+2. You're not stuck on anything
+3. There's not some fire I should know about
+
+If you're just heads-down on other stuff, totally get it. But if something's off, let me know so I can help.
+
+[Your name]
+```
+
+---
+
+### Initial stakeholder mapping (during onboarding)
+
+**Subject:** Who else should know about PostHog?
+```
+Hey [Champion Name],
+
+Now that you're up and running with PostHog, I want to make sure the right people on your team know it exists and how to use it.
+
+Who else should I loop in? Thinking about:
+- Engineering lead (for technical questions)
+- Product/data folks (who'd use the analytics side)
+- Whoever controls the budget (so they know what they're paying for)
+
+Not trying to spam your whole team, just want to make sure I'm not leaving anyone out who'd find this useful.
+
+Let me know who makes sense to connect with.
+
+[Your name]
+```
+
+---
+
+### Asking for intro to another team (cross-sell expansion)
+
+**Subject:** PostHog for [other team]?
+```
+Hey [Champion Name],
+
+Quick question: Does your [Marketing/Sales/Product/etc] team track [relevant use case]?
+
+I've been thinking PostHog could help them with [specific value prop], similar to how you're using it for [current use case].
+
+If that resonates, would you mind introducing me to whoever runs that team? Happy to show them what you've built and see if it's useful for them too.
+
+No worries if the timing's not right or it doesn't make sense.
+
+[Your name]
+```
+
+---
+
+### Following up with a detractor (someone skeptical of PostHog)
+
+**Subject:** PostHog questions?
+```
+Hey [Detractor Name],
+
+[Champion Name] mentioned you've been using [competitor tool] and had some questions about PostHog.
+
+I'm not here to do a sales pitch, but if you want to walk through what PostHog does differently (or doesn't do that you need), happy to chat. Might be useful, might not be. Either way, want to make sure you have the full picture.
+
+Let me know if you want to dig into it.
+
+[Your name]
+```
+
+---
+
+### Key patterns across all examples
+
+- Direct subject lines (no corporate jargon)
+- "Hey [Name]," greeting every time
+- Get to the point in the first sentence
+- Casual but professional tone
+- Clear ask or next step
+- Always give an "out" (no pressure)
+- No exclamation point overload
+- No "I hope this email finds you well" nonsense
+
