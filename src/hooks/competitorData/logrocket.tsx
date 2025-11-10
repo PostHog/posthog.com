@@ -152,18 +152,29 @@ export const logrocket = {
         error_tracking: {
             available: true,
             features: {
-                console_log_capture: true,
+                code_context: true,
                 error_alerts: true,
+                error_grouping: true,
+                console_log_capture: true,
+                exception_capture: true,
                 issue_management: true,
-                log_management: false,
+                log_management: true,
+                mobile_sdk_coverage: true,
                 profiling: false,
+                stack_tracing: true,
+                user_device_context: true,
             },
             monitoring: {
                 features: {
+                    cron_monitoring: false,
                     distributed_tracing: false,
+                    release_tracking: true,
                     performance_monitoring: true,
-                    release_tracking: false,
                 },
+            },
+            integrations: {
+                session_replay: true,
+                product_analytics: true,
             },
         },
         dashboards: {
