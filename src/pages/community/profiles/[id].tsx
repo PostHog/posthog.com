@@ -132,6 +132,10 @@ const Points = () => {
                         size="md"
                         width="full"
                     />
+                    <p className="text-sm m-0 mt-4">
+                        Earn points by contributing to discussions, helping others, and achieving milestones in the
+                        PostHog community.
+                    </p>
                 </div>
             )}
         </div>
