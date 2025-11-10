@@ -28,26 +28,26 @@ export const workflows = {
         title: 'Automate workflows with your product data',
         description:
             'Trigger actions based on live user behavior – who clicked what, what feature they used, and how recently. Connect events, feature flags, and experiments to Slack alerts, emails, or custom logic.',
-        textColor: 'text-white',
+        textColor: 'text-black',
         layout: 'overlay',
     },
     screenshots: {
         overview: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_desktop_2399cc57d6.png',
-            srcMobile: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_mobile_b9565d0690.png',
-            alt: 'LLM analytics dashboard',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_overview_339c7cd37b.png',
+            // srcMobile: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_mobile_b9565d0690.png',
+            alt: 'Workflows overview',
             classes: '',
-            // imgClasses: 'rounded-tl-md shadow-2xl',
-            classesMobile: '',
+            imgClasses: 'rounded-t-md shadow-2xl max-w-5xl mx-auto',
+            classesMobile: 'rounded-t-md',
             imgClassesMobile: '',
         },
-        home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_light_a436da72f7.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png',
-            alt: 'LLM Analytics screenshot',
-            classes: 'justify-end items-end pl-4 @lg:pl-6',
-            imgClasses: 'rounded-tl-lg shadow-2xl',
-        },
+        // home: {
+        //     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_light_a436da72f7.png',
+        //     srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png',
+        //     alt: 'LLM Analytics screenshot',
+        //     classes: 'justify-end items-end pl-4 @lg:pl-6',
+        //     imgClasses: 'rounded-tl-lg shadow-2xl',
+        // },
     },
     // hog: {
     //   src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
@@ -70,9 +70,9 @@ export const workflows = {
                 'Build automations with a drag-and-drop interface – no YAML, no API juggling. It only takes a few minutes to go from idea to live.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_light_e4cea319cb.png',
-                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_dark_f49aa4dd89.png',
-                    alt: 'LLM trace',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_canvas_029de986cd.png',
+                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_dark_f49aa4dd89.png',
+                    alt: 'Workflow builder',
                     className: 'rounded-tl-md shadow-2xl justify-end items-end @2xl:mt-8 ml-8 @2xl:ml-0',
                 },
             ],
@@ -85,14 +85,14 @@ export const workflows = {
             headline: 'Messaging',
             description:
                 'Send targeted emails, Slack posts, or webhook messages to users and cohorts based on live product data. Automate onboarding, activation, or feedback loops directly from PostHog.',
-            // images: [
-            //     {
-            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
-            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-            //         alt: 'LLM performance monitoring',
-            //         className: 'justify-center items-center',
-            //     },
-            // ],
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_messaging_9d466af120.png',
+                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+                    alt: 'Workflow messaging',
+                    className: 'justify-center items-center',
+                },
+            ],
         },
         {
             title: 'Data-native',
@@ -100,14 +100,14 @@ export const workflows = {
             headline: 'Data-native',
             description:
                 'Workflows runs on the product data you already track in PostHog. No need to connect extra tools or import events.',
-            // images: [
-            //     {
-            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
-            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-            //         alt: 'LLM performance monitoring',
-            //         className: 'justify-center items-center',
-            //     },
-            // ],
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_events_d25a7eaebf.png',
+                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+                    alt: 'Data-native',
+                    className: 'justify-center items-center',
+                },
+            ],
         },
         {
             title: 'Triggers',
@@ -115,14 +115,14 @@ export const workflows = {
             headline: 'Triggers',
             description:
                 'Start a workflow when a user signs up, clicks a feature, or completes an experiment. Trigger emails, Slack posts, or follow-up events automatically from that behavior.',
-            // images: [
-            //     {
-            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
-            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-            //         alt: 'LLM performance monitoring',
-            //         className: 'justify-center items-center',
-            //     },
-            // ],
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_triggers_00b7e98a48.png',
+                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+                    alt: 'Triggers',
+                    className: 'justify-center items-center',
+                },
+            ],
         },
         {
             title: 'Conditions & splits',
@@ -130,14 +130,14 @@ export const workflows = {
             headline: 'Conditions & splits',
             description:
                 'Branch logic visually based on user properties, cohorts or random variations, enabling targeted actions or A/B-style automation paths.',
-            // images: [
-            //     {
-            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
-            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-            //         alt: 'LLM performance monitoring',
-            //         className: 'justify-center items-center',
-            //     },
-            // ],
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_conditions_92cdc86bf3.png',
+                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+                    alt: 'Conditions & splits',
+                    className: 'justify-center items-center',
+                },
+            ],
         },
         {
             title: 'Flow control',
@@ -145,28 +145,28 @@ export const workflows = {
             headline: 'Flow control',
             description:
                 'Add delays, pauses, or conditional waits to match how users actually behave. Time actions precisely around engagement, churn, or trial limits.',
-            // images: [
-            //     {
-            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
-            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-            //         alt: 'LLM performance monitoring',
-            //         className: 'justify-center items-center',
-            //     },
-            // ],
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_flow_5f0ac20268.png',
+                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+                    alt: 'Flow control',
+                    className: 'justify-center items-center',
+                },
+            ],
         },
         {
             title: 'Channels',
             // template: 'splitImage',
             headline: 'Channels',
             description: 'Reach users wherever they are – email, Slack, Discord, webhooks, or your own destinations.',
-            // images: [
-            //     {
-            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
-            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-            //         alt: 'LLM performance monitoring',
-            //         className: 'justify-center items-center',
-            //     },
-            // ],
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_channels_9a8ee1d2d5.png',
+                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+                    alt: 'Channels',
+                    className: 'justify-center items-center',
+                },
+            ],
         },
         {
             title: 'More features',
@@ -192,20 +192,6 @@ export const workflows = {
                     </ul>
                 </>
             ),
-            // images: [
-            //     {
-            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
-            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-            //         alt: 'LLM performance monitoring',
-            //         className: 'justify-center items-center',
-            //     },
-            // ],
-        },
-        {
-            title: '',
-            // template: 'splitImage',
-            headline: '',
-            description: '',
             // images: [
             //     {
             //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
