@@ -324,7 +324,6 @@ export default function PostHogAI(): JSX.Element {
             'feature-comparison',
             'docs',
             'pairs-with',
-            'posthog-on-posthog',
             'answers',
         ],
         custom: [
