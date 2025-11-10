@@ -56,7 +56,7 @@ export default function CustomerMetadata({ customerKey }: CustomerMetadataProps)
     return (
         <div
             data-scheme="secondary"
-            className="@md:float-right @md:w-60 @md:ml-4 mb-4 p-4 bg-primary rounded border border-primary mt-4 @md:mt-2 space-y-4 @xl:-mr-4"
+            className="@md:float-right @md:w-60 @md:!ml-4 mb-4 p-4 bg-primary rounded border border-primary mt-4 @md:mt-2 space-y-4 @xl:!-mr-4"
         >
             <div className="flex flex-col justify-center">
                 {customerData.logo && renderLogo()}
