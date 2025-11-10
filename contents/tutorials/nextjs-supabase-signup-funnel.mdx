@@ -24,7 +24,7 @@ The application in this tutorial is built entirely upon open-source technologies
 
 -   [Next.js](https://nextjs.org/) is feature rich, Node.js open-source React framework for building modern web apps.
 -   [Supabase](https://supabase.io/) is an open-source alternative to Firebase offering functionality such as a Postgres database, authentication, realtime subscriptions and storage.
--   [PostHog](/) is an open-source product analytics platform with features including feature flags, session replay, analysis of trends, funnels, user paths, and more.
+-   [PostHog](/) is an open-source developer platform with features including feature flags, session replay, analysis of trends, funnels, user paths, and more.
 
 To follow this tutorial along, you need to have:
 
@@ -273,7 +273,7 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 // Check that PostHog is client-side
 if (typeof window !== 'undefined') {
@@ -332,7 +332,7 @@ However, we need and should be able to track step 5, when the user has successfu
 To do this, update the `Index` definition:
 
 ```js
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 const Index = () => {
   const posthog = usePostHog()

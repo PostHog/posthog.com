@@ -19,6 +19,7 @@ features:
 
 import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
 import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
+import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx"
 
 ## Installation
 
@@ -29,6 +30,8 @@ import ReactNativeInstall from '../../integrate/_snippets/install-react-native.m
 <DetailSetUpReverseProxy />
 
 <DetailGroupProductsInOneProject />
+
+<DetailPostHogIPs />
 
 ### Configuration options
 
@@ -329,6 +332,30 @@ To set up [session replay](/docs/session-replay/mobile) in your project, all you
 ## Surveys
 
 To set up surveys, follow the [additional installation instructions for React Native](/docs/surveys/installation?tab=React+Native). Surveys launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
+
+> Note: URL and CSS selector targeting are not supported in React Native. Surveys that rely on these conditions will not appear.
+
+## Debug mode 
+
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
+
+You can enable debug mode by setting the `debug` option to `true` in the `PostHogProvider` options. This will enable verbose logs about the inner workings of the SDK.
+
+```react-native
+<PostHogProvider
+    apiKey="<ph_project_api_key>"
+    options={{
+        debug: true,
+        host: "<ph_client_api_host>",
+    }}
+>
+```
+
+You can also call the `debug()` method in your code. 
+
+```react-native
+posthog.debug()
+```
 
 ## Disabling for local development
 

@@ -39,7 +39,12 @@ To ensure they experience consistent behavior, check that you call `identify()` 
 
 ### 3. An ad-blocker may be blocking calls
 
-Check if an ad-blocker is interfering with PostHog calls. If this is the case, you can fix this by [deploying a reverse proxy](/docs/advanced/proxy).
+Check if an ad-blocker is interfering with PostHog calls. You can fix this by:
+
+- [Deploying a reverse proxy](/docs/advanced/proxy) for your PostHog requests
+- Using the [`flags_api_host`](/docs/libraries/js/config) configuration option to separate feature flag requests from analytics requests
+
+See our guide on [preventing feature flags from being blocked](/tutorials/flags-adblock-prevention) for more details.
 
 ### 4. User or group properties may not have been ingested yet
 

@@ -82,7 +82,7 @@ For information about current and past security advisories and CVEs, see our [ad
 
 ## Reporting phishing
 
-If you receive a phishing or malicious email, it's useful to report it to the security team so that they can make other employees aware. Forward these emails to [security-internal@posthog.com](mailto:security-internal@posthog.com).
+If you receive a phishing email/text/whatsapp, it's useful to report it to the security team so that they can make other employees aware. Take a screenshot and post it in `#phishing-attempts`. You may be asked to forward the email to [security-internal@posthog.com](mailto:security-internal@posthog.com) for further inspection.
 
 ## Secure communication (aka preventing social engineering)
 

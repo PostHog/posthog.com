@@ -40,7 +40,7 @@ To celebrate 50k subscribers to Product for Engineers, here are the 50 most impo
 
 ![Map everything your users could want](https://res.cloudinary.com/dmukukwp6/image/upload/map_b1105bea6c.png)  
 
-11. Your product is more than just its functionality. It's [your brand](https://newsletter.posthog.com/p/how-not-to-be-boring) and how your product is experienced by others. How much you invest in each function, the people you hire, what you decide to build, what function leads your company, your customer communication, and your pricing all matter in making you unique.  
+11. Your product is more than just its functionality. It's [your brand](https://newsletter.posthog.com/p/how-not-to-be-boring) and how your product is experienced by others. How much you invest in each function, the people you hire, what you decide to build, what function leads your company, your customer communication, and [your pricing](/newsletter/pricing-advice) all matter in making you unique.  
 
 12. Your website is the first impression your product is making. A [boring](https://newsletter.posthog.com/i/148803758/what-would-stop-me-from-using-this-thing), templated one signals the product and team behind the website isn't very strong. Creating a website unique to you and built for your ideal customer profile is a way to prevent this, and encourage users into your product.  
 

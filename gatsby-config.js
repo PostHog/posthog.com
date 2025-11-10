@@ -163,14 +163,6 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `sdkReferences`,
-                path: `${__dirname}/src/data/sdkReferences`,
-                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
-            },
-        },
-        {
             resolve: `gatsby-source-strapi-pages`,
             options: {
                 strapiURL: process.env.STRAPI_URL,
@@ -389,6 +381,15 @@ module.exports = {
                     `MdxFrontmatterLogoDarkChildImageSharp`,
                     `MdxFrontmatterIconChildImageSharp`,
                 ],
+            },
+        },
+        {
+            resolve: `gatsby-source-git`,
+            options: {
+                name: `posthog-main-repo`,
+                remote: `https://github.com/posthog/posthog.git`,
+                branch: process.env.GATSBY_POSTHOG_BRANCH || 'master',
+                patterns: `docs/published/**`,
             },
         },
         // {

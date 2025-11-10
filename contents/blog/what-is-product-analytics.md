@@ -88,7 +88,7 @@ Most product analytics tools such as Mixpanel and Amplitude work by capturing us
 
 PostHog enables you to self-host your product analytics, so you keep data on your infrastructure and don't need to share data with anyone. Not even PostHog. 
 
-There are many situations where it may be preferable not to share data with a third-party analytics platform, such as a need to protect user information or mitigate the risk of data breaches. Self-hosting your product analytics platform also provides other benefits, such as circumventing ad blockers due to the lack of third-party cookies.
+There are many situations where it may be preferable not to share data with a third-party analytics platform, such as a need to protect user information or mitigate the risk of data breaches. Self-hosting product analytics also provides other benefits, such as circumventing ad blockers due to the lack of third-party cookies.
 
 > Find out [how to self-host product analytics](/docs/self-host) with PostHog and easily deploy to your infrastructure using DigitalOcean. 
 
@@ -104,7 +104,7 @@ As a result, Google Analytics is often the preferred tool for specific roles in 
 
 ## What are the best product analytics tools?
 
-Naturally, we think PostHog is the best product analytics tool available. 
+Naturally, we think PostHog has the best product analytics tool available. 
 
 Why? PostHog enables you to self-host your analytics, integrates with tools such as data warehouses and offers everything you need to interrogate your data in a simple, visual UI. No SQL required. PostHog also offers many unique features which closed-source competitors do not, such as feature flags and session recording. 
 
@@ -118,6 +118,6 @@ There are a variety of product analytics tools available to choose from however,
 
 - [How to achieve B2B product market fit](/blog/how-to-product-market-fit): How to approach finding market fit for a B2B product
 
-> PostHog is an open-source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open-source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />

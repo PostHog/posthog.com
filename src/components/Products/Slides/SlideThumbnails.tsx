@@ -4,6 +4,7 @@ import { useWindow } from '../../../context/Window'
 import { useApp } from '../../../context/App'
 import { getIsMobile } from 'components/Presentation'
 import { PresentationModeContext } from '../../RadixUI/Tabs'
+import slugify from 'slugify'
 
 interface Slide {
     name: string
@@ -29,6 +30,7 @@ const SlideThumb = ({ slide, index, isActive, slideId, onClick }: SlideThumbProp
     const [isMobile, setIsMobile] = useState<boolean>(getIsMobile(siteSettings, appWindow))
     const [isPortraitMode, setIsPortraitMode] = useState<boolean>(false)
     const slideRef = useRef<HTMLDivElement>(null)
+    const [hasScrolledToHash, setHasScrolledToHash] = useState<boolean>(false)
     useEffect(() => {
         if (isActive && isMobile && slideRef.current) {
             const scrollElement = slideRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement
@@ -88,6 +90,20 @@ const SlideThumb = ({ slide, index, isActive, slideId, onClick }: SlideThumbProp
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
     }, [presentationContext, appWindow, siteSettings])
+
+    useEffect(() => {
+        const hash = appWindow?.element?.props?.location?.hash?.slice(1)
+        if (
+            !hasScrolledToHash &&
+            hash &&
+            slugify(slide?.name?.toLowerCase(), { lower: true }) === slugify(hash?.toLowerCase(), { lower: true })
+        ) {
+            const selector = slideId ? `[data-slide-id="${slideId}"][data-slide="${index}"]` : `[data-slide="${index}"]`
+            const slideElement = document.querySelector(selector)
+            slideElement?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            setHasScrolledToHash(true)
+        }
+    }, [slide, appWindow])
 
     return (
         <div

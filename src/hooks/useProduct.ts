@@ -49,16 +49,16 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         // },
 
         {
-            name: 'Messaging',
+            name: 'Workflows',
             Icon: IconDecisionTree,
-            description: 'send messages to users.',
-            handle: 'messaging',
+            description: 'Automate actions or messages to users.',
+            handle: 'workflows',
             color: 'blue',
             colorSecondary: 'sky-blue',
-            category: 'communication',
+            category: 'automation',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: 'messaging',
-            status: 'alpha',
+            slug: 'workflows',
+            status: 'WIP',
         },
         {
             name: 'User interviews',
@@ -522,28 +522,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             seo: {
                 title: 'Unify external customer data with product usage data',
                 description: 'Analyze product and customer data in PostHog – no matter where it was generated.',
-            },
-        },
-        {
-            name: 'AI README.md',
-            // Icon: IconMagicWand,
-            parentIcon: 'doc',
-            description: 'AI suite',
-            handle: 'ai',
-            color: 'blue',
-            colorSecondary: 'lilac',
-            category: 'ai',
-            slug: 'ai',
-            seo: {
-                title: 'AI @ PostHog',
-                description: 'Your AI-powered product agents',
-            },
-            overview: {
-                title: 'Your AI product analyst and assistant',
-                description:
-                    'Max is an AI-powered product analyst that lives in PostHog. Research answers to product questions by querying data, get things done quickly in the PostHog UI, and learn all about PostHog features.',
-                textColor: 'text-white',
-                layout: 'columns',
             },
         },
         {
@@ -1758,7 +1736,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             handle: 'webhooks',
             color: 'red',
             colorSecondary: 'sky-blue',
-            category: 'product_os',
+            category: 'automation',
             slug: 'webhooks',
             seo: {
                 title: 'Webhooks - PostHog',

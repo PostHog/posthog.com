@@ -123,6 +123,16 @@ export const CompensationCalculator = ({
         setJob(initialJob)
     }, [initialJob])
 
+    React.useEffect(() => {
+        const newRegion = country
+            ? locationFactor
+                  .filter((location) => location.country === country)
+                  .map((location) => location.area)
+                  .sort()[0]
+            : null
+        setRegion(newRegion || null)
+    }, [country])
+
     const setItem = (type: string) => {
         return (value: any) => {
             if (type === 'job') setJob(value)

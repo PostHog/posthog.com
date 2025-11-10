@@ -7,6 +7,7 @@ A generation is a single call to an LLM.
 | Property | Description |
 |----------|-------------|
 | `$ai_trace_id` | The trace ID (a UUID to group AI events) like `conversation_id`<br/>Must contain only letters, numbers, and special characters: `-`, `_`, `~`, `.`, `@`, `(`, `)`, `!`, `'`, `:`, <code>\|</code> <br/>Example: `d9222e05-8708-41b8-98ea-d4a21849e761` |
+| `$ai_session_id` | *(Optional)* Groups related traces together. Use this to organize traces by whatever grouping makes sense for your application (user sessions, workflows, conversations, or other logical boundaries).<br/>Example: `session-abc-123`, `conv-user-456` |
 | `$ai_span_id` | *(Optional)* Unique identifier for this generation |
 | `$ai_span_name` | *(Optional)* Name given to this generation <br/>Example: `summarize_text` |
 | `$ai_parent_id` | *(Optional)* Parent span ID for tree view grouping | 
@@ -25,13 +26,30 @@ A generation is a single call to an LLM.
 
 ### Cost properties
 
-Cost properties are optional as we can automatically calculate them from model and token counts. If you want, you can provide your own cost property instead.
+Cost properties are optional as we can automatically calculate them from model and token counts. If you want, you can provide your own cost properties or custom pricing instead.
+
+#### Pre-calculated costs
 
 | Property | Description |
 |----------|-------------|
 | `$ai_input_cost_usd` | *(Optional)* The cost in USD of the input tokens |
 | `$ai_output_cost_usd` | *(Optional)* The cost in USD of the output tokens |
-| `$ai_total_cost_usd` | *(Optional)* The total cost in USD (input + output) |
+| `$ai_request_cost_usd` | *(Optional)* The cost in USD for the requests |
+| `$ai_web_search_cost_usd` | *(Optional)* The cost in USD for the web searches |
+| `$ai_total_cost_usd` | *(Optional)* The total cost in USD (sum of all cost components) |
+
+#### Custom pricing
+
+| Property | Description |
+|----------|-------------|
+| `$ai_input_token_price` | *(Optional)* Price per input token (used to calculate `$ai_input_cost_usd`) |
+| `$ai_output_token_price` | *(Optional)* Price per output token (used to calculate `$ai_output_cost_usd`) |
+| `$ai_cache_read_token_price` | *(Optional)* Price per cached token read |
+| `$ai_cache_write_token_price` | *(Optional)* Price per cached token write |
+| `$ai_request_price` | *(Optional)* Price per request |
+| `$ai_request_count` | *(Optional)* Number of requests (defaults to 1 if `$ai_request_price` is set) |
+| `$ai_web_search_price` | *(Optional)* Price per web search |
+| `$ai_web_search_count` | *(Optional)* Number of web searches performed |
 
 ### Cache properties
 
@@ -60,6 +78,7 @@ curl -X POST "<ph_client_api_host>/i/v0/e/" \
          "properties": {
              "distinct_id": "user_123",
              "$ai_trace_id": "d9222e05-8708-41b8-98ea-d4a21849e761",
+             "$ai_session_id": "session-abc-123",
              "$ai_model": "gpt-4o",
              "$ai_provider": "openai",
              "$ai_input": [{"role": "user", "content": [{"type": "text", "text": "Analyze this data and suggest improvements"}]}],

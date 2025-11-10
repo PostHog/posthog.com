@@ -11,7 +11,7 @@ export { onPostBuild } from './gatsby/onPostBuild'
 export { createResolvers } from './gatsby/createResolvers'
 export { onPreBootstrap } from './gatsby/onPreBootstrap'
 
-// Implement the Gatsby API “onCreatePage”. This is
+// Implement the Gatsby API "onCreatePage". This is
 // called after every page is created.
 export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }) => {
     const { createPage, deletePage } = actions

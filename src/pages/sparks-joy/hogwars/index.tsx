@@ -7,7 +7,7 @@ export default function HogWars(): JSX.Element {
         <>
             <SEO
                 title="HogWars - PostHog"
-                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
+                description="PostHog is the only developer platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/default.png`}
             />
             <Explorer
