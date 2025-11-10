@@ -346,7 +346,7 @@ export const featureFlags = {
         },
     ],
     postHogOnPostHog: {
-        title: 'How PostHog uses feature flags',
+        title: 'How we use feature flags',
         benefits: [
             {
                 title: 'Test new ideas',

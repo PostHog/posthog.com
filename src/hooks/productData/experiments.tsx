@@ -263,7 +263,7 @@ export const experiments = {
         },
     ],
     postHogOnPostHog: {
-        title: 'How PostHog uses experiments',
+        title: 'How we use experiments',
         benefits: [
             {
                 title: 'A/B tests',

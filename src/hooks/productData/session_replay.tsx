@@ -405,7 +405,7 @@ window.posthog.onFeatureFlags(function () {
         },
     ],
     postHogOnPostHog: {
-        title: 'How PostHog uses session replays',
+        title: 'How we use session replays',
         benefits: [
             {
                 title: 'Gather context',
@@ -422,6 +422,14 @@ window.posthog.onFeatureFlags(function () {
             {
                 title: 'Resolve experiments',
                 description: 'by seeing how users interact with new features',
+            },
+            {
+                title: 'Build user empathy',
+                description: 'by watching their entire product journey',
+            },
+            {
+                title: 'Improve conversion',
+                description: 'by using context to solve stubborn problems',
             },
         ],
     },

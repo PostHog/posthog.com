@@ -338,7 +338,7 @@ export const llmAnalytics = {
         },
     ],
     postHogOnPostHog: {
-        title: 'How PostHog uses LLM analytics',
+        title: 'How we use LLM analytics',
         benefits: [
             {
                 title: 'Analyze costs',
