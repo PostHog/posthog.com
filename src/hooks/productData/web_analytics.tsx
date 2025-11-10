@@ -23,6 +23,11 @@ export const webAnalytics = {
             'Track visitors, pageviews, and conversions with a pre-built dashboard. No cookies required, no complex setup, real-time data, and privacy-focused. Built for people who really liked GA3...',
         textColor: 'text-[#063619]', // tw
     },
+    videos: {
+        overview: {
+            wistia: 'x05zb7x023',
+        },
+    },
     screenshots: {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_2a101a8558.png',
@@ -277,6 +282,31 @@ export const webAnalytics = {
             ],
         },
     ],
+    postHogOnPostHog: {
+        title: 'How PostHog uses Web Analytics',
+        benefits: [
+            {
+                title: 'Track pageviews, visitors,',
+                description: 'and other essential web metrics',
+            },
+            {
+                title: 'Gauge site performance',
+                description: 'using bounce rates and Core Web Vitals',
+            },
+            {
+                title: 'Protect user privacy',
+                description: 'with cookieless tracking and anonymous mode',
+            },
+            {
+                title: 'Monitor ad performance',
+                description: 'by focusing on landing page conversions',
+            },
+            {
+                title: 'Understand users',
+                description: 'by looking at device types and demographics',
+            },
+        ],
+    },
     questions: [
         {
             question: 'Find broken links (404s)',
