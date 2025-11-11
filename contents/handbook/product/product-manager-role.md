@@ -1,5 +1,5 @@
 ---
-title: What product managers Do at PostHog
+title: What product managers do at PostHog
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
