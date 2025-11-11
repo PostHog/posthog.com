@@ -4,7 +4,7 @@ date: 2025-11-11
 author:
  - charles-cook
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/collaboration_sucks_blog_5809d4d74d.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/collaboration_sucks_blog_5809d4d74d.jpg
 featuredImageType: full
 tags:
   - Culture
@@ -88,3 +88,5 @@ Unfortunately for me, not all collaboration can be rooted out, and even I will a
 The point is, if you aren’t actively attempting to collaborate less, you are probably collaborating too much by default and hurting your ability to go far, fast.
 
 *Words by [Charles Cook](https://www.linkedin.com/in/wololo/), who also hates sparkling water, presumably because the bubbles are too collaborative.*
+
+<NewsletterForm />
