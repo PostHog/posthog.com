@@ -96,12 +96,14 @@ interface AppContextType {
         quickQuestions,
         chatId,
         date,
+        initialQuestion,
     }: {
         path: string
         context?: ChatContext[]
         quickQuestions?: string[]
         chatId?: string
         date?: string
+        initialQuestion?: string
     }) => void
     isNotificationsPanelOpen: boolean
     setIsNotificationsPanelOpen: (isOpen: boolean) => void
@@ -981,8 +983,8 @@ const isLabel = (item: any) => !item?.url && item?.name
 const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
     const siteSettings = {
         experience: 'posthog',
-        colorMode: 'light',
-        theme: 'light',
+        colorMode: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
+        theme: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
         skinMode: 'modern',
         cursor: 'default',
         wallpaper: 'keyboard-garden',
@@ -1066,9 +1068,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 zIndex: win.zIndex,
             }))
 
-        return savedWindows.length > 0
-            ? `${location.pathname}?${qs.stringify({ windows: savedWindows }, { encode: false })}`
-            : undefined
+        if (savedWindows.length === 0) return undefined
+
+        // Preserve existing query parameters from the current URL
+        const currentParams = isSSR ? {} : qs.parse(location.search.substring(1))
+        const allParams = {
+            ...currentParams,
+            windows: savedWindows,
+        }
+
+        return `${location.pathname}?${qs.stringify(allParams, { encode: false })}`
     }, [windows, taskbarHeight, location, isSSR])
 
     const shareableDesktopURL = useMemo(() => {
@@ -1508,12 +1517,14 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         quickQuestions,
         chatId,
         date,
+        initialQuestion,
     }: {
         path: string
         context?: ChatContext[]
         quickQuestions?: string[]
         chatId?: string
         date?: string
+        initialQuestion?: string
     }) => {
         addWindow(
             <ChatProvider
@@ -1526,6 +1537,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 quickQuestions={quickQuestions}
                 chatId={chatId}
                 date={date}
+                initialQuestion={initialQuestion}
             />
         )
     }
@@ -1945,7 +1957,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (paramsWindows) {
             const [initialWindow, ...rest] = convertWindowsToPixels(parsed.windows)
 
-            navigate(initialWindow.path, {
+            // Preserve non-windows query parameters when navigating
+            const nonWindowsParams = { ...parsed }
+            delete nonWindowsParams.windows
+            const queryString =
+                Object.keys(nonWindowsParams).length > 0 ? `?${qs.stringify(nonWindowsParams, { encode: false })}` : ''
+
+            navigate(`${initialWindow.path}${queryString}`, {
                 state: {
                     newWindow: true,
                     size: initialWindow.size,
@@ -1958,7 +1976,14 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (stateWindows) {
             const [nextWindow, ...rest] = stateWindows
             if (!nextWindow) return
-            navigate(nextWindow.path, {
+
+            // Preserve query parameters from current URL when navigating to next window
+            const currentParams = qs.parse(location.search.substring(1))
+            delete currentParams.windows
+            const queryString =
+                Object.keys(currentParams).length > 0 ? `?${qs.stringify(currentParams, { encode: false })}` : ''
+
+            navigate(`${nextWindow.path}${queryString}`, {
                 state: {
                     newWindow: true,
                     size: nextWindow.size,

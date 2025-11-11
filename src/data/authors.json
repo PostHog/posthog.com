@@ -39,6 +39,14 @@
         "profile_id": 29070
     },
     {
+        "handle": "sara-miteva",
+        "name": "Sara Miteva",
+        "role": "Product Marketer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/sara-miteva/",
+        "profile_id": 35224
+    },
+    {
         "handle": "michael-matloka",
         "name": "Michael Matloka",
         "role": "Software Engineer",
@@ -429,5 +437,29 @@
         "link_type": "github",
         "link_url": "https://github.com/arda-e",
         "profile_id": 37690
+    },
+    {
+        "handle": "natalia-amorim",
+        "name": "Natalia Amorim",
+        "role": "Content Marketing Manager",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/nataliahelenaamorim/",
+        "profile_id": 35321
+    },
+    {
+        "handle": "dustin-byrne",
+        "name": "Dustin Byrne",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/dustinbyrne",
+        "profile_id": 35043
+    },
+    {
+        "handle": "natalia-amorim",
+        "name": "Natalia Amorim",
+        "role": "Content Marketing Manager",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/nataliahelenaamorim/",
+        "profile_id": 35321
     }
 ]

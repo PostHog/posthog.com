@@ -104,7 +104,6 @@ export const Select = ({
                 placeholder={label}
                 searchable={true}
                 searchPlaceholder="Search topics..."
-                height="!h-96"
                 maxHeight="max-h-[300px]"
                 showLabel={false}
                 className=""
@@ -450,9 +449,9 @@ export const QuestionForm = ({
                 }[view]
             ) : (
                 <div className="flex flex-1 space-x-2">
-                    <div className="rounded-full overflow-hidden w-[40px] h-[40px]">
+                    <div className="rounded-full overflow-hidden aspect-square w-[40px] shrink-0">
                         <Avatar
-                            className="w-[40px] rounded-full"
+                            className="w-full rounded-full"
                             image={getAvatarURL(user?.profile)}
                             color={user?.profile?.color}
                         />

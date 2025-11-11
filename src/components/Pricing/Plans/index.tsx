@@ -116,8 +116,10 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                         <Title
                             className={`${compact ? 'text-sm' : ''} ${showSubtotal ? 'col-span-3' : 'flex-grow'}`}
                             title={
-                                index === 0
+                                index === 0 && up_to
                                     ? `First ${formatCompactNumber(up_to)} ${unit}s`
+                                    : index === 0 && !up_to
+                                    ? `Unlimited ${unit}s`
                                     : !up_to
                                     ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
                                     : `${
