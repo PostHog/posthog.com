@@ -90,7 +90,7 @@ We follow several best practices to combat social engineering attacks. See [Comm
 
 ## Impersonating users
 
-To provide a great customer experience, PostHog employees may occasionally need to access customer data or log in as a user (i.e. *impersonate* them). While our DPA permits this access when necessary to deliver our service, the following guidelines apply:
+To provide a great customer experience, PostHog employees may occasionally need to access customer data or log in as a user (i.e. *impersonate* them). We allow this access when it's necessary to deliver our service, following these guidelines:
 
 1. **Only impersonate when there’s a clear, demonstrable benefit for the customer.**  
    For example, to investigate an incident, resolve a support issue, or review a customer’s setup to give recommendations on how to use PostHog more successfully.
