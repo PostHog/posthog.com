@@ -1,3 +1,14 @@
+## What should the relationship look like before you attempt cross-sell?
+
+* You have an active relationship with the customer in question. You have regular touchpoints with them, and they are responsive to your outreach.
+* You understand their product and PostHog implementation. You know which technologies they are using, and how PostHog fits into their setup.
+* There are no major open issues with their PostHog implementation. They have implemented PostHog Analytics (and Session Reply) into their application(s) and are actively using those features. They are happy with their current setup and aren’t voicing major frustrations.
+* There is no active risk to their renewal, and you aren’t already negotiating that renewal.
+* You know which teams to talk to regarding Error Tracking, you have identified the people best suited to successfully implement Error Tracking.
+* You understand their engineering processes and timelines (at least on a high level) and expect them to have resources available to look into Error Tracking.
+* They are using one of the supported platforms for Error Tracking, https://posthog.com/docs/error-tracking/start-here
+* **Ideally**: They have expressed pain points that Error Tracking could help resolve.
+
 ## Demonstrate the value
 
 Once you've identified customers who'd benefit from Error Tracking, show them value in ways relevant to them.
@@ -65,3 +76,13 @@ Error tracking can be implemented with one click, or two lines of code*(*dependi
 
 Create dashboards for your customer to help them understand the value of the product.
 
+## Action items
+
+* What are common Error Tracking dashboards PostHog and current Error Tracking customers are using? How can we help users get started with similar dashboards as easily as possible?
+* A good starting point for Error Tracking are customers already using Analytics and Session Replay. What other combination of products does Error Tracking work well with?
+* What is a high level story that shows the value of using Error Tracking in PostHog compared to other solutions the customer is using already? How does it help them to be able to correlate data from Error Tracking with e.g. Analytics and Session Replay?
+  * e.g. as an eCommerce customer, being able to correlate exceptions related to shopping carts with the Analytics data about the value of that shopping cart would allow customers to prioritize fixing bugs based on lost revenue.
+  * e.g. as a b2c company, prioritize errors happening as part of the signup funnel
+* What metrics do we track to measure success of this initiative?
+  * Percentage of CSM managed accounts using Error Tracking each quarter
+  * New Error Tracking MRR for CSM managed accounts in X quarters
