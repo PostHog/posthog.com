@@ -66,7 +66,7 @@ Strong product sense means keeping a holistic view. Understanding not just what 
 
 ---
 
-## Hands-on with code (pptional but valuable)
+## Hands-on with code (optional but valuable)
 
 It’s not a requirement that PMs at PostHog know how to code, but it helps.  
 PMs who can navigate a codebase, make small changes, or who have built small side projects often find it easier to empathize with engineers on their team and also with our target users (developers).
