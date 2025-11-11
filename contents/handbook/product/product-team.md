@@ -14,6 +14,8 @@ Among other things, they
 2. organize [user interviews](/handbook/product/user-feedback)
 3. coach product engineers on ["how to do product"](/handbook/engineering/product-engineering)
 
+For a more in-depth look at the product role at PostHog, see [What product managers do at PostHog](/handbook/product/product-manager-role).
+
 # How PMs work
 
 ## Small team membership

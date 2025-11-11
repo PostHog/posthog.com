@@ -1196,16 +1196,20 @@ export const handbookSidebar = [
                 url: '/handbook/product/releasing-as-beta',
             },
             {
-                name: 'Product manager role',
-                url: '/handbook/product/product-manager-role',
-            },
-            {
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
             },
             {
                 name: 'Prioritizing work for mature products',
                 url: '/handbook/product/prioritizing-work-for-mature-products',
+            },
+            {
+                name: 'Product manager role',
+                url: '/handbook/product/product-manager-role',
+            },
+            {
+                name: 'Product manager hiring',
+                url: '/handbook/product/product-manager-hiring',
             },
         ],
     },
@@ -1285,7 +1289,7 @@ export const handbookSidebar = [
                                 name: 'Cross sell motions',
                                 url: '/handbook/growth/sales/cross-sell-motions',
                             },
-                             {
+                            {
                                 name: 'Communications templates',
                                 url: '/handbook/growth/sales/communications-templates',
                             },
