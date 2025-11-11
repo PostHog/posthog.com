@@ -9,7 +9,7 @@ hideAnchor: true
 
 > This page explains what product managers do at PostHog: How the role works, what PMs are responsible for, and how they collaborate with their teams.  
 >  
-> If you’re looking for what we value in PMs and how we hire them, see [What we Look for in product managers](/handbook/product/product-manager-hiring).
+> If you're looking for what we value in PMs and how we hire them, see [What we look for in product managers](/handbook/product/product-manager-hiring).
 
 ## The role at a glance
 
