@@ -957,6 +957,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/community/achievements': {
+        size: {
+            min: {
+                width: 500,
+                height: 1000,
+            },
+            max: {
+                width: 500,
+                height: 1000,
+            },
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
 } as const
 
 export interface SiteSettings {

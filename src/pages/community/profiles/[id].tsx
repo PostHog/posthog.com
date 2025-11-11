@@ -120,7 +120,6 @@ const Points = () => {
                                                     total > 0 ? 'text-green' : 'text-red'
                                                 }`}
                                             >
-                                                {total > 0 ? '+' : ''}
                                                 <span className="font-bold">{total}</span>
                                             </p>
                                         ),
@@ -132,10 +131,6 @@ const Points = () => {
                         size="md"
                         width="full"
                     />
-                    <p className="text-sm m-0 mt-4">
-                        Earn points by contributing to discussions, helping others, and achieving milestones in the
-                        PostHog community.
-                    </p>
                 </div>
             )}
         </div>
@@ -1442,7 +1437,7 @@ export default function ProfilePage({ params }: PageProps) {
                             )}
 
                             {profile.achievements?.length > 0 && (
-                                <Block title="Achievements">
+                                <Block title="Achievements" url={`/community/achievements`}>
                                     <ul className="grid grid-cols-7 gap-2 m-0 p-0 list-none">
                                         {profile.achievements.map(({ achievement, hidden, id }) => (
                                             <li key={id} className="flex justify-center">

@@ -369,6 +369,16 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                                 },
                             },
                             bookmarks: true,
+                            achievements: {
+                                populate: {
+                                    achievement: {
+                                        populate: {
+                                            image: true,
+                                            icon: true,
+                                        },
+                                    },
+                                },
+                            },
                         },
                     },
                     role: {
