@@ -95,7 +95,7 @@ To provide a great customer experience, PostHog employees may occasionally need 
 1. **Only impersonate when there’s a clear, demonstrable benefit for the customer.**  
    For example, to investigate an incident, resolve a support issue, or review a customer’s setup to give recommendations on how to use PostHog more successfully.
 
-2. **Do not make any changes to a customer’s setup without explicit consent.**
+2. **Do not make any changes to a customer’s setup without explicit consent.** Exceptions to this are cases where we are reacting to incidents or bad configurations that are negatively impacting PostHog services in order to protect ourselves _and_ the customer.
 
 3. **Ask for permission whenever possible.**  
    While this isn’t always feasible, such as during an active incident, it’s best practice to inform the customer before accessing their account.
