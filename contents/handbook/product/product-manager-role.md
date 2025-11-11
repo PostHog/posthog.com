@@ -63,7 +63,7 @@ Everything else in the PM role builds on these foundations.
 
 ---
 
-## The product lifecycle and the PM’s Focus
+## The product lifecycle and the PM's focus
 
 The PM’s work evolves with the product.  
 While the principles stay constant — context and clarity — the emphasis shifts by stage of the product.
