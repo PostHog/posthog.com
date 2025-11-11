@@ -87,3 +87,18 @@ If you receive a phishing email/text/whatsapp, it's useful to report it to the s
 ## Secure communication (aka preventing social engineering)
 
 We follow several best practices to combat social engineering attacks. See [Communication Methods](/handbook/company/communication#communication-methods) for more information.
+
+## Impersonating users
+
+To provide a great customer experience, PostHog employees may occasionally need to access customer data or log in as a user (i.e. *impersonate* them). While our DPA permits this access when necessary to deliver our service, the following guidelines apply:
+
+1. **Only impersonate when there’s a clear, demonstrable benefit for the customer.**  
+   For example, to investigate an incident, resolve a support issue, or review a customer’s setup to give recommendations on how to use PostHog more successfully.
+
+2. **Do not make any changes to a customer’s setup without explicit consent.**
+
+3. **Ask for permission whenever possible.**  
+   While this isn’t always feasible, such as during an active incident, it’s best practice to inform the customer before accessing their account.
+
+4. **Use good judgment.**  
+   If you’re unsure whether impersonation is justified, or if a customer might object, either seek their consent or find another way to get the information (for example, by checking our internal PostHog instance).
