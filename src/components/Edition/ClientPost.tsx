@@ -102,7 +102,7 @@ export default function ClientPost({
         <ScrollArea>
             <div className="@container">
                 <div className="flex flex-col-reverse @3xl:flex-row">
-                    <div className={`article-content flex-1 transition-all md:pt-8 w-full overflow-auto`}>
+                    <div className="article-content flex-1 transition-all md:pt-8 w-full">
                         <div
                             className={`mx-auto transition-all ${
                                 fullWidthContent ? 'max-w-full' : 'max-w-3xl'
