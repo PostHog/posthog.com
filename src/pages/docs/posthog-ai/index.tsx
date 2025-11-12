@@ -79,13 +79,14 @@ export const Content = () => {
                 <h2 className="mb-4">Overview</h2>
                 <div>
                     <p>
-                        PostHog AI is an agentic, LLM-powered interface for working within the PostHog platform. You can
-                        think of it as the product analyst or assistant that lives inside your PostHog project. It's
-                        here to help you find answers and to get things done fast.
+                        PostHog AI is an AI agent that works within the PostHog platform. You can think of it as the
+                        product analyst or assistant that lives inside your project. It's here to help you find answers
+                        and to get things done fast.
                     </p>
                     <p>
                         Unlike other agents, PostHog AI is deeply connected to your product data and event schema. It
-                        learns from real product usage. Describe what you want in natural language and it can:
+                        can reference real product usage and perform actions in PostHog. Describe what you want in
+                        natural language and it can:
                     </p>
                     <ul>
                         <li>Conduct research and query data to answer product and customer questions</li>
@@ -101,8 +102,7 @@ export const Content = () => {
                         <span className="inline-block">
                             <IconSparkles className="h-4 w-4" />
                         </span>{' '}
-                        when editing filters, a "Fix errors with AI" link in the SQL editor, or an "Analyze results"
-                        button in surveys.
+                        when editing filters, writing SQL, or watching session replays.
                     </p>
                     <p>All of these AI touchpoints across the platform are powered by the same PostHog AI core.</p>
                 </div>

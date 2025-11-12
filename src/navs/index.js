@@ -4684,8 +4684,8 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Add memory',
-                    url: '/docs/posthog-ai/add-memory',
+                    name: 'Edit memory',
+                    url: '/docs/posthog-ai/edit-memory',
                     icon: 'IconMemory',
                     color: 'purple',
                     featured: true,
