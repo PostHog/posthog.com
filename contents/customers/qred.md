@@ -10,7 +10,7 @@ When Lezgin Zilan, CTO at Swedish fintech [Qred Bank](https://www.qred.se/en), l
 
 “We had big ambitions with Google Analytics which were being driven outside of the engineering team,” explains Lezgin. “There were plans to improve the onboarding flow and to add information that would help customers. But it was a lot of back and forth, and tracking would get missed. Our front-end developers had to spend a lot of time implementing the tracking they needed to analyze users in Google Analytics.”
 
-Eventually, Lezgin began the search for a new tool that could better track user behaviour without eating up dev time and while still meeting the strict regulatory requirements the team has to operate under.
+Eventually, Lezgin began the search for a new tool that could better track user behavior without eating up dev time and while still meeting the strict regulatory requirements the team has to operate under.
 
 “I follow a lot of open source blogs and that’s where I heard about PostHog,” Lezgin explains. “I really liked that it was an open source SaaS, because that essentially gives me an easy exit plan: if I decide to leave, I can just host it myself.”
 
