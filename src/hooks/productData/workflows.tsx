@@ -311,10 +311,10 @@ export const workflows = {
         },
     ],
     worksWith: ['experiments', 'product-analytics', 'feature-flags', 'error-tracking'],
-    presenterNotes: {
-        overview:
-            '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',
-    },
+    // presenterNotes: {
+    //     overview:
+    //         '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',
+    // },
     billingData: {
         description: 'Automate workflows with your product data.',
         docs_url: 'https://posthog.com/docs/workflows',
