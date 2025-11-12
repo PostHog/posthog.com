@@ -1,6 +1,6 @@
 ---
 title: Workflows graduate to beta! Product data, meet automation
-date: 2025-11-09
+date: 2025-11-12
 rootPage: /blog
 sidebar: Blog
 showTitle: true
