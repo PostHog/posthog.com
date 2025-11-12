@@ -93,6 +93,7 @@ Modify the webhook payload to include:
 - Event name
 - Current URL
 - Any other properties valuable for your real-time stream (e.g., organization name, event properties)
+- You can link right to replays ([docs](/docs/cdp/destinations/customizing-destinations#adding-session-replay-links-to-slack-messages)), just know they may not be available immediately
 
 ### 6. Route to Slack
 
