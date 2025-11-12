@@ -28,7 +28,6 @@ So, what does that mean in practice? You can finally automate product-led action
 
 Everything runs on the same event data you already track. Want to send a welcome email when a user completes onboarding? You can build the email and trigger it with an event or a delay. Want to adding branching logic based on their upgrade path? You can do that too. 
 
-
 Workflows now support a range of actions:
 
 - Send emails, from simple notifications to full [drip campaigns](/docs/workflows/email-drip-campaign)
