@@ -2,7 +2,7 @@ import { IconCopy } from '@posthog/icons'
 import Loading from 'components/Loading'
 import { useToast } from '../../context/Toast'
 import React, { useState } from 'react'
-import { CreatableMultiSelect } from 'components/EventForm'
+import CreatableMultiSelect from 'components/CreatableMultiSelect'
 import { useUser } from 'hooks/useUser'
 
 const CLOUDINARY_BASE = `https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}`
@@ -201,15 +201,16 @@ export default function Image({
                     </div>
                 )}
                 {allTags.length > 0 && (
-                    <div>
+                    <div className="mt-2">
                         <CreatableMultiSelect
-                            label="Tags"
+                            label="Add a tag..."
                             options={allTags.map((tag) => ({ label: tag.attributes.label, value: tag.id }))}
                             value={tags?.map((tag) => tag.id) ?? []}
                             allowCreate={false}
                             onChange={handleChangeTags}
                             onAdd={handleAddTag}
                             onRemove={handleRemoveTag}
+                            hideLabel
                         />
                     </div>
                 )}

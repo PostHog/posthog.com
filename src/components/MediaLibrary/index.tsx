@@ -4,8 +4,12 @@ import React, { useEffect, useState } from 'react'
 import Image from './Image'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useMediaLibrary } from 'hooks/useMediaLibrary'
+import { useUser } from 'hooks/useUser'
+import OSButton from 'components/OSButton'
+import { IconSpinner } from '@posthog/icons'
 
 export default function MediaLibrary(): JSX.Element {
+    const { getJwt } = useUser()
     const [showAll, setShowAll] = useState(false)
     const [tag, setTag] = useState('all-tags')
     const [search, setSearch] = useState('')
@@ -19,7 +23,12 @@ export default function MediaLibrary(): JSX.Element {
 
     const fetchTags = async () => {
         try {
-            const tags = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags`)
+            const jwt = await getJwt()
+            const tags = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags`, {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
                 .then((res) => res.json())
                 .then((data) => data.data)
             setTags(tags)
@@ -73,7 +82,7 @@ export default function MediaLibrary(): JSX.Element {
                 </div>
                 <div className="flex-grow-1 min-h-0">
                     <ScrollArea>
-                        <ul className="list-none m-0 p-0 space-y-2 my-4 px-4">
+                        <ul className="list-none m-0 p-0 space-y-4 my-4 px-4">
                             {isLoading && images.length === 0 ? (
                                 <li className="text-center text-secondary py-8">Loading images...</li>
                             ) : images.length === 0 ? (
@@ -87,14 +96,10 @@ export default function MediaLibrary(): JSX.Element {
                             )}
                         </ul>
                         {hasMore && (
-                            <div className="text-center pb-4">
-                                <button
-                                    onClick={fetchMore}
-                                    disabled={isLoading}
-                                    className="px-4 py-2 bg-accent text-primary rounded font-semibold hover:opacity-80 disabled:opacity-50"
-                                >
-                                    {isLoading ? 'Loading...' : 'Load more'}
-                                </button>
+                            <div className="px-4 my-2">
+                                <OSButton variant="primary" width="full" onClick={fetchMore} disabled={isLoading}>
+                                    {isLoading ? <IconSpinner className="size-5 mx-auto animate-spin" /> : 'Load more'}
+                                </OSButton>
                             </div>
                         )}
                     </ScrollArea>
