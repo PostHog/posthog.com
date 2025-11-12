@@ -30,7 +30,7 @@ With Workflows, Grantable doesn’t have to do that. Workflows runs on top of th
 
 <OSQuote
   customer="grantable"
-  author="evan_ralliss"
+  author="evan_rallis"
   product="workflows"
  />
 
