@@ -50,11 +50,10 @@ export default function SmallTeam({ slug, noMiniCrest = false, className = '' }:
         <Link
             to={`/teams/${team.slug}`}
             state={{ newWindow: true }}
-            className={`inline-flex items-center gap-1.5 ${
-                noMiniCrest
+            className={`inline-flex items-center gap-1.5 ${noMiniCrest
                     ? className
-                    : `!no-underline hover:!underline p-0.5 pr-1.5 border border-primary rounded-full font-semibold ${className}`
-            }`}
+                    : `!no-underline hover:!underline p-0.5 pr-1.5 border border-primary rounded-full font-semibold relative top-1 ${className}`
+                }`}
         >
             {!noMiniCrest && miniCrestImage && (
                 <GatsbyImage image={miniCrestImage} alt={`${team.name} mini crest`} className="size-5 shrink-0" />
