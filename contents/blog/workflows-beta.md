@@ -20,7 +20,7 @@ seo:
     }
 ---
 
-When we first introduced [Workflows (in alpha)](/blog/workflows-alpha), it was still a bit rough around the edges, and many of you were brave enough to test (and occasionally break) it. Since then, we’ve spent a lot of time fixing, refining, and adding power where it counts.
+When we first introduced [Workflows (in alpha)](/blog/workflows-alpha), it was still a bit rough around the edges, and many of you were brave enough to test it. Since then, we’ve spent a lot of time fixing, refining, and adding power where it counts.
 
 Now, Workflows has officially graduated to beta.
 
