@@ -12,12 +12,12 @@ The `<ProductScreenshot />` component encapsulates an image with a border and ba
 
 You use it by passing image URLs to the `imageLight` and `imageDark` props like this:
 
-```
+```tsx
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-light.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-dark.png"
-  alt="Sampling config shown set to 100% i.e. no sampling"
-  classes="rounded"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-light.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-dark.png"
+    alt="Sampling config shown set to 100% i.e. no sampling"
+    classes="rounded"
 />
 ```
 
@@ -29,13 +29,10 @@ _Note: If you don't have a dark image, just leave out the `imageDark` prop and t
 
 You can create a slider or carousel of images by wrapping them in the `<ImageSlider>` component like this:
 
-```
+```html
 <ImageSlider>
-
-![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
-
-![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
-
+    ![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
+    ![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 </ImageSlider>
 ```
 
@@ -43,11 +40,12 @@ See an example in our [open-source analytics tools post](/blog/best-open-source-
 
 ## Product videos
 
-Th `<ProductVideo />` component works the same as product screenshots (above) but supports light and dark videos.
+Th `<ProductVideo />` component works the same as product screenshots (above) for videos [uploaded to Cloudinary](/handbook/content/posthog-style-guide#adding-media) but supports light and dark videos.
 
 1. Import the video(s) at the top of the post (directly following the MDX file's frontmatter and dashes):
 
-```
+<!-- prettier-ignore -->
+```html
 ---
 export const NewFunnelLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/handbook/images/docs/user-guides/funnels/new-funnel.mp4"
 export const NewFunnelDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/handbook/images/docs/user-guides/funnels/new-funnel-dark.mp4"
@@ -56,7 +54,8 @@ export const NewFunnelDark = "https://res.cloudinary.com/dmukukwp6/video/upload/
 
 1. Use the component wherever you want the video(s) to appear.
 
-```
+<!-- prettier-ignore -->
+```tsx
 <ProductVideo
   videoLight={NewFunnelLight}
   videoDark={NewFunnelDark}
@@ -66,11 +65,21 @@ export const NewFunnelDark = "https://res.cloudinary.com/dmukukwp6/video/upload/
 
 _Note: If you don't have a dark video, just leave out the `videoDark` prop and the light video will be used for both color modes._
 
+### Embedding YouTube videos
+
+While not an MDX component, a reminder that when embedding a YouTube video, you should do two things:
+
+1. Use the `-nocookie` variant of the YouTube URL. eg:
+    ```
+    https://www.youtube-nocookie.com/embed/{VIDEO_ID}
+    ```
+2. Add the `allowfullscreen` attribute to the iframe so users have the option to watch the video in fullscreen (useful for reading code snippets).
+
 ## Code blocks
 
 The PostHog website has a custom code block component that comes with a number of useful features built-in:
 
--   [Syntax highDarking](#adding-syntax-highlighting)
+-   [Syntax highlighting](#adding-syntax-highlighting)
 -   [Multiple snippets in a single codeblock](#multiple-code-snippets-in-one-block)
 -   [Specifying which file a snippet is from](#specifying-which-file-a-snippet-is-from)
 
@@ -471,110 +480,27 @@ Adding `<ArrayCTA />` to any article will add this simple CTA:
 
 Don't overuse it, but it's useful for high intent pages, like comparisons.
 
-## Comparison tables
+## Feature comparison tables
 
-We used to create custom HTML tables, but we now have an easier to use component that allows us to change the styling of any table.
+When comparing features between two or more products, use the `<ProductComparisonTable />` component which sources data from the `src/hooks/competitorData/` directory and lets you compare specific features across multiple competitors.
 
-To use, first import the componenents by adding this code near the start, right after the frontmatter:
-
-```jsx
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+<!-- prettier-ignore -->
+```tsx
+<ProductComparisonTable
+  competitors={['posthog', 'amplitude']}
+  rows={['product_analytics']}
+/>
 ```
 
-Then, customize the code below to fit your needs.
-
-```jsx
-<ComparisonTable column1="Company name 1" column2="Company name 2">
-    <ComparisonHeader category="Optional header row" />
-    <ComparisonRow column1={true} column2="Text" feature="Feature name" description="Feature description" />
-</ComparisonTable>
-```
-
-In `ComparisonRow`:
-
--   Values for `column1` and `column2` can be: `{true}` | `{false}` | `"Text string"`
--   `feature` is required but `description` can be omitted (only if not using that column for the entire table)
-
-Here's what a comparison table looks like:
-
-<ComparisonTable column1="PostHog" column2="LogRocket">
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Self-serve"
-        description="Free to try, no mandatory sales calls"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Session replay"
-        description="Watch real users use your product; diagnose bugs"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Product analytics"
-        description="Custom trends, funnels, paths, and retention analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Autocapture"
-        description="Capture events without manual instrumentation"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Group analytics"
-        description="Track metrics at the account or company level"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="A/B testing"
-        description="Test changes and analyze their impact"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={true}
-        feature="Performance monitoring"
-        description="Track web vitals, server usage, and network performance."
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Error monitoring"
-        description="Capture exceptions and failures automatically"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Issue management"
-        description="Score issues, triage, monitor app health"
-    />
-    <ComparisonRow
-        column1={false}
-        column2={true}
-        feature="Alerting"
-        description="Set alerts on metric thresholds or anomalies"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Open source"
-        description="Build your own apps and contribute code"
-    />
-</ComparisonTable>
-
-**Important:** You can only use the table components in `mdx` files – an extension to Markdown that lets you use JSX code in a markdown file.
+Read more in the [product & feature comparisons handbook page](/handbook/engineering/posthog-com/product-comparisons).
 
 ## Captions
 
 You can add captions below images using the following code:
 
-`<Caption>Add you caption copy here</Caption>`
+```tsx
+<Caption>Add you caption copy here</Caption>
+```
 
 Here's an example of what it looks like:
 
@@ -584,37 +510,59 @@ Here's an example of what it looks like:
     Adding the 'Buy Now' call to action and adjusting the text enabled Webshare to boost conversion by 26%
 </Caption>
 
-## Quotation
+## Customer quotes
 
-You can add a styled quote component using the following code:
+Add a styled quote component using the following code:
 
+<OSQuote customer="lovable" author="viktor_eriksson" quote={0} />
+
+**Product-specific quote**
+
+<!-- prettier-ignore -->
 ```jsx
-<BorderWrapper>
-    <Quote
-        imageSource="/images/customers/utku.jpg"
-        size="md"
-        name="Utku Zihnioglu"
-        title="Founder & CEO, Webshare "
-        quote={`“We saw PostHog, and saw that it does everything that we needed, and had all these syncing capabilities too. We just knew right away that it was the right tool for us. We started using all of its capabilities.”`}
-    />
-</BorderWrapper>
+<OSQuote
+  customer="significa"
+  author="tomas_gouveia"
+  product="web_analytics"
+ />
 ```
 
-It looks like this:
+<OSQuote customer="significa" author="tomas_gouveia" product="web_analytics" />
 
-<BorderWrapper>
-    <Quote
-        imageSource="/images/customers/utku.jpg"
-        size="md"
-        name="Utku Zihnioglu"
-        title="Founder & CEO, Webshare "
-        quote={`“We saw PostHog, and saw that it does everything that we needed, and had all these syncing capabilities too. We just knew right away that it was the right tool for us. We started using all of its capabilities.”`}
-    />
-</BorderWrapper>
+**Generic quote**
+
+<!-- prettier-ignore -->
+```jsx
+<OSQuote 
+    customer="lovable"
+    author="viktor_eriksson"
+    quote={0}
+/>
+```
 
 We mainly use them in customer stories and some product pages.
 
-## Details
+Quotes are sourced from the `useCustomers` hook and can reference product-specific quotes or general quotes by someone at a company. Be sure to add the customer's information to the `useCustomers` hook in `src/hooks/useCustomers.tsx`.
+
+**Example**
+
+<!-- prettier-ignore -->
+```tsx
+quotes: {
+    viktor_eriksson: {
+        name: 'Viktor Eriksson',
+        role: 'Software Engineer',
+        image: {
+            thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viktor_00c779a706.jpg',
+        },
+        quotes: [
+            "PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in -one platform like it for developers.",
+        ],
+    },
+},
+```
+
+## Collapsible sections
 
 The combination of `<details>` and `<summary>` components enables you to add a collapsible section to your page. Useful for FAQs or details not relevant to the main content.
 
@@ -629,7 +577,7 @@ The combination of `<details>` and `<summary>` components enables you to add a c
 
 ## Tabs
 
-Tabs enable you to display different content in a single section. We often use them to show different code examples for different languages, like in installation pages.
+Tabs enable you to display different content in a single section. We often use them to show different code examples for different languages, like in [installation pages](/docs/product-analytics/installation).
 
 To use them:
 
@@ -676,6 +624,12 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
 </Tab.Group>
 ```
 
+You can default to a specific tab by passing the tab name in the query string like:
+
+```
+/docs/product-analytics/installation?tab=web
+```
+
 ## Links
 
 ### Linking internally
@@ -692,6 +646,17 @@ Be sure to use _relative links_ (exclude `https://posthog.com`) with _absolute p
 | -------------------- | ------------------------------------------ |
 | **Correct syntax**   | `/absolute-path/to/url`                    |
 | **Incorrect syntax** | `https://posthog.com/absolute-path/to/url` |
+
+**Open a new PostHog window**
+
+To open a link in a new window within the PostHog.com OS interface, use `state={{ newWindow: true }}` like:
+
+<!-- prettier-ignore -->
+```tsx
+<Link to="/absolute-path/to/url" state={{ newWindow: true }}>
+  Link text
+</Link>
+```
 
 ### Linking externally
 
@@ -713,7 +678,7 @@ Example:
 
 ### Private links
 
-Sometimes we link to confidential information in our handbook. Since the handbook is public, it's useful to indicate when a link is private so visitors aren't confused as to why they can't access a URL. Use the `<PrivateLink />` component for this. ([Here's an example.](/handbook/people/share-options#what-are-my-share-options-actually-worth))
+Sometimes we link to confidential information in our handbook. Since the handbook is public, it's useful to indicate when a link is private so visitors aren't confused as to why they can't access a URL (like a Slack link or private GitHub repo). Use the `<PrivateLink />` component for this. See an example ([on our share options page.](/handbook/people/share-options#what-are-my-share-options-actually-worth))
 
 ```
 <PrivateLink url="https://path/to/private/link">
@@ -722,7 +687,7 @@ Sometimes we link to confidential information in our handbook. Since the handboo
 
 ```
 
-Private links will always open in a new tab.
+Private links will always open in a new brower tab.
 
 ## Mention a team member
 
@@ -768,7 +733,8 @@ _Note: This does **not** actually embed an X post; it's just styled to look like
 
 Be sure to change the alert message which appears if you click one of the action buttons (reply, repost, like).
 
-```
+<!-- prettier-ignore -->
+```tsx
 <Tweet
     className="mx-auto"
     alertMessage="Gen Z? Don't get distracted. You're here to read our exciting embedded post component."
