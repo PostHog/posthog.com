@@ -46,9 +46,25 @@ export default function SmallTeam({ slug, children, noMiniCrest = false }: Small
     const miniCrestImage = getImage(team.miniCrest)
     const fullCrestUrl = team.crest?.data?.attributes?.url
 
+    // The invisible block is necessary to make sure we have the proper width
+    // with the `relative inline-block` parent when we include a mini crest
     const triggerContent = (
         <span className="relative inline-block">
             <Link to={`/teams/${team.slug}`} state={{ newWindow: true }}>
+                {!noMiniCrest && miniCrestImage && (
+                    <span className="invisible max-h-4 inline-flex items-center gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full">
+                        <span className="h-6 shrink-0 rounded-full overflow-hidden">
+                            <GatsbyImage
+                                image={miniCrestImage}
+                                alt={`${team.name} mini crest`}
+                                className="size-5 shrink-0"
+                            />
+                        </span>
+                        <span className="!text-sm text-red dark:text-yellow font-semibold inline-block truncate">
+                            {children ? children : <>{team.name} Team</>}
+                        </span>
+                    </span>
+                )}
                 <span
                     className={`inline-flex items-center ${
                         !noMiniCrest && miniCrestImage
