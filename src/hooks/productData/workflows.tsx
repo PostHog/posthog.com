@@ -251,7 +251,7 @@ export const workflows = {
                 },
                 {
                     title: 'You already use PostHog for analytics, feature flags, or experiments',
-                    subtitle: 'Workflows connects everything on top of the PostHog product stack',
+                    subtitle: '– Workflows connects everything on top of the PostHog product stack',
                 },
             ],
         },

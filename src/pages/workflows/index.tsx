@@ -5,6 +5,25 @@ import { useContentData } from 'hooks/useContentData'
 
 const PRODUCT_HANDLE = 'workflows'
 
+const CustomPricingSlide = () => {
+    return (
+        <div
+            data-scheme="primary"
+            className="flex flex-col p-12 justify-start @2xl:justify-center items-center h-full bg-primary text-primary"
+        >
+            <h2 className="text-4xl font-bold mb-8">Pricing</h2>
+
+            <div className="bg-accent border border-primary max-w-xl mx-auto rounded p-8 text-center">
+                <div className="text-2xl font-bold mb-4">Workflows is free during beta</div>
+                <p className="text-xl">
+                    Eventually we'll offer usage-based pricing with a generous monthly free tier – like we do
+                    with all of our paid products.
+                </p>
+            </div>
+        </div>
+    )
+}
+
 export default function Workflows(): JSX.Element {
     const contentData = useContentData()
 
@@ -86,6 +105,15 @@ export default function Workflows(): JSX.Element {
             answersHeadline: '',
         },
     })
+
+    // Override the pricing slide with our custom component
+    const pricingSlideIndex = slides.slides.findIndex((slide) => slide.slug === 'pricing')
+    if (pricingSlideIndex !== -1) {
+        slides.slides[pricingSlideIndex] = {
+            ...slides.slides[pricingSlideIndex],
+            component: CustomPricingSlide,
+        }
+    }
 
     return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
 }
