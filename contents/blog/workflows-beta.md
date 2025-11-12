@@ -41,7 +41,7 @@ Teams like [Grantable](/customers/grantable) are already seeing the benefits. Ev
 
 **“PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.”**
 
-Evan Rallis at Grantable said it's almost twice as fast to build automations in Workflows than with other tools, in part because he doesn't need to switch to a third-party tool and wait for data to sync.
+Evan said it's almost twice as fast to build automations in Workflows than with other tools, in part because he doesn't need to switch to a third-party tool and wait for data to sync.
 
 Workflows are still free during beta, so now’s a good time to experiment. Try building something small – maybe an onboarding reminder, a feedback request, or a Slack alert when a user hits a key milestone.
 
