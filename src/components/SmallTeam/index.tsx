@@ -6,11 +6,17 @@ import Link from 'components/Link'
 
 export interface SmallTeamProps {
     slug: string
+    children?: JSX.Element
     noMiniCrest?: boolean
     className?: string
 }
 
-export default function SmallTeam({ slug, noMiniCrest = false, className = '' }: SmallTeamProps): JSX.Element | null {
+export default function SmallTeam({
+    slug,
+    children,
+    noMiniCrest = false,
+    className = '',
+}: SmallTeamProps): JSX.Element | null {
     const {
         allSqueakTeam: { nodes },
     } = useStaticQuery(graphql`
@@ -59,7 +65,7 @@ export default function SmallTeam({ slug, noMiniCrest = false, className = '' }:
             {!noMiniCrest && miniCrestImage && (
                 <GatsbyImage image={miniCrestImage} alt={`${team.name} mini crest`} className="size-5 shrink-0" />
             )}
-            <span className="font-semibold text-sm">{team.name} Team</span>
+            <span className="font-semibold text-sm">{children ? children : <>{team.name} Team</>}</span>
         </Link>
     )
 

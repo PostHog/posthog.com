@@ -12,7 +12,7 @@ One of the many awesome things about PostHog is that support is being dealt with
 
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-Our Support Engineers, in [the Support team](/teams/support) triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, Experiments, Feature Flags, and Survey teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
+Our Support Engineers, in the <SmallTeam slug="support" /> triage tickets for the <SmallTeam slug="product-analytics" />, <SmallTeam slug="web-analytics" />, <SmallTeam slug="data-stack" />, <SmallTeam slug="workflows" />, <SmallTeam slug="replay" />, <SmallTeam slug="expermients" />, <SmallTeam slug="feature-flags" />, and <SmallTeam slug="surveys" /> teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 
@@ -53,7 +53,7 @@ There are three sources of tickets:
 
 ### Shipping features
 
-Some tickets ask for new features. If the feature is useful for users matching [our ICP](/handbook/who-we-build-for), then decide whether to just build it. Otherwise, create a feature request issue in GitHub or +1 on an existing one – you can then send a link to the user, giving them a way of tracking progress. Also make sure to let the [Customer Success team](/teams/customer-success) know, since they will track feature requests for paying customers.
+Some tickets ask for new features. If the feature is useful for users matching [our ICP](/handbook/who-we-build-for), then decide whether to just build it. Otherwise, create a feature request issue in GitHub or +1 on an existing one – you can then send a link to the user, giving them a way of tracking progress. Also make sure to let the <SmallTeam slug="customer-success" /> know, since they will track feature requests for paying customers.
 
 Sometimes a feature already exists, but a user doesn't know about it or how to use it. In this case, you should either send them a link to the relevant docs page or [update the docs](/handbook/engineering/writing-docs) to make it clearer.
 
@@ -174,7 +174,7 @@ Mobile support tickets reported by the PostHog app - Contact support panel with 
 
 The Mobile team will triage and fix them if they are in our domain area or reassign them to the related team.
 
-If you see a Mobile SDK issue, please escalate it to the [Mobile team](/teams/mobile) as soon as possible (@mobile-folks on Slack, Mobile group on Zendesk, and @team-mobile on GitHub).
+If you see a Mobile SDK issue, please escalate it to the <SmallTeam slug="mobile" /> as soon as possible (@mobile-folks on Slack, Mobile group on Zendesk, and @team-mobile on GitHub).
 
 The Mobile team is also happy to collaborate on any non-Mobile SDK issue that requires knowledge in the Mobile ecosystem, e.g., you're debugging person profiles from customers using the Mobile SDKs, and you don't have context on how the SDK works/identifies users.
 
@@ -221,7 +221,7 @@ As an engineer, when answering a question, your first instinct is to give them a
 -   Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 -   If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store.
 
-If you have any questions about how or when to communicate with users, you can always ask the [Brand & Vibes Team](/teams/brand) for help.
+If you have any questions about how or when to communicate with users, you can always ask the <SmallTeam slug="brand" /> for help.
 
 ## How do I prioritize?
 
