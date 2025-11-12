@@ -182,6 +182,19 @@ An uptime SLA are not available to customers outside of these cases. You should 
 
 More details on how exactly the uptime SLA works can be found in our [terms](/terms).
 
+## Enterprise support for month-to-month customers
+
+> Enterprise-level support (8-hour response times, Slack ticket support) is only available with volume credit purchase or the Enterprise add-on purchase.
+
+Customers on month-to-month plans, regardless of spend level, receive:
+- Maximum 24-hour response times
+- Zendesk ticket support only (no Slack ticket creation via Pylon)
+- Shared Slack channel (for $20k+ spend) as a relationship channel, not for support ticketing
+
+This applies to all month-to-month customers, including those who downgrade from volume contracts. To maintain enterprise support while month-to-month, customers must purchase the [Enterprise support add-on](https://posthog.com/platform-addons).
+
+This is beneficial to PostHog because our small support team requires predictable capacity to deliver fast response times. We focus our highest support tiers on customers with mutual long-term commitment. Month-to-month arrangements provide flexibility for customers, but we must reserve our most responsive support for those with whom we have a sustained partnership.
+
 ## Payment method
 
 Our strong preference is for customers to pay by credit card, as this is easier to manage in Stripe and has a lower risk of the customer forgetting to make the payment (which means we have to spend more time chasing).
