@@ -11,7 +11,7 @@ The paid ads team exists to do two things only:
 
 We don't do paid ads for general awareness of the PostHog brand - our website, content, and word of mouth are much better (and cheaper) ways to do this. 
 
-> For now paid ads sits within the [new business sales team](/teams/sales-cs), but will become its own thing once we have more people. This page is for paid ads for PostHog in general. If you're looking for paid ads for our newsletter, [click here](handbook/content/newsletter-ads).
+> For now paid ads sits within the <SmallTeam slug="sales-cs" />, but will become its own thing once we have more people. This page is for paid ads for PostHog in general. If you're looking for paid ads for our newsletter, [click here](handbook/content/newsletter-ads).
 
 ## Channels
 

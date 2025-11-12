@@ -12,7 +12,7 @@ In this case, the team member chooses to leave PostHog.
 
 We ask for 30 days of notice by default (unless locally a different maximum or minimum limit applies), and for team members to work during that notice period. This is so we have some time to find someone to hire and to enable a handover. Please assume by default we will expect team members to work all of this period.
 
-> If you are a current team member and you are thinking about resigning from PostHog, we encourage you to speak with your manager or the [people team](/teams/people) to discuss your reasons for wanting to leave. While we don't want to persuade anyone who is unhappy to stay, you may find that the best solution involves changing things here at PostHog, rather than going somewhere else. If resignation is the only solution after you have discussed your concerns, please send an email communicating your intention to resign to people@posthog.com. We will then start a discussion around what is needed for the handover.
+> If you are a current team member and you are thinking about resigning from PostHog, we encourage you to speak with your manager or the <SmallTeam slug="people" /> to discuss your reasons for wanting to leave. While we don't want to persuade anyone who is unhappy to stay, you may find that the best solution involves changing things here at PostHog, rather than going somewhere else. If resignation is the only solution after you have discussed your concerns, please send an email communicating your intention to resign to people@posthog.com. We will then start a discussion around what is needed for the handover.
 
 ## Involuntary departure
 
