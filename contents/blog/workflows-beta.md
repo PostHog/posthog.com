@@ -8,7 +8,7 @@ hideAnchor: true
 author:
     - sara-miteva
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_beta_cover_a04e206b7a.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/workflows_beta_cover_a04e206b7a.jpg
 featuredImageType: full
 category: Product
 tags:
@@ -26,14 +26,14 @@ Now, Workflows has officially graduated to beta.
 
 So, what does that mean in practice? You can finally automate product-led actions, like sending emails, updating properties, or triggering Slack alerts, directly from your PostHog data. No syncing tools, no duct-taped integrations, no API key scavenger hunts.
 
-Everything runs on the same event data you already track. Want to send a welcome email when a user completes onboarding? You can build the email and trigger it with an event or a delay. Want to adding branching logic based on their upgrade path? You can do that too. 
+Everything runs on the same event data you already track. Want to send a welcome email when a user completes onboarding? You can build the email and trigger it with an event or a delay. Want to adding branching logic based on their upgrade path? You can do that too.
 
 Workflows now support a range of actions:
 
-- Send emails, from simple notifications to full [drip campaigns](/docs/workflows/email-drip-campaign)
-- Trigger Slack messages or webhooks based on live product events
-- Add delays, conditions, and branches to control when and how actions fire
-- Update user properties or trigger events as part of your automation
+-   Send emails, from simple notifications to full [drip campaigns](/docs/workflows/email-drip-campaign)
+-   Trigger Slack messages or webhooks based on live product events
+-   Add delays, conditions, and branches to control when and how actions fire
+-   Update user properties or trigger events as part of your automation
 
 If you’ve used Zapier, Make, Brevo, Active Campaign or similar tools before, the idea will feel familiar, but this time, everything happens inside PostHog. It’s faster, more reliable, and you don't need to send data to third-party platforms.
 
@@ -46,4 +46,3 @@ Evan said it's almost twice as fast to build automations in Workflows than with 
 Workflows are still free during beta, so now’s a good time to experiment. Try building something small – maybe an onboarding reminder, a feedback request, or a Slack alert when a user hits a key milestone.
 
 You can learn more in the [docs](/docs/workflows) or jump straight into launching your first [workflow](https://app.posthog.com/workflows).
-
