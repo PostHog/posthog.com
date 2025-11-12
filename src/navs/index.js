@@ -1289,6 +1289,10 @@ export const handbookSidebar = [
                                 name: 'Communications templates',
                                 url: '/handbook/growth/sales/communications-templates',
                             },
+                            {
+                                name: 'User event streams',
+                                url: '/handbook/growth/sales/user-event-streams',
+                            },
                         ],
                     },
                     {
