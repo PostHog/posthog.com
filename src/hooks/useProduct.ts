@@ -47,19 +47,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         //     name: 'Product analytics',
         //     slug: 'product-analytics',
         // },
-
-        {
-            name: 'Workflows',
-            Icon: IconDecisionTree,
-            description: 'Automate actions or messages to users.',
-            handle: 'workflows',
-            color: 'blue',
-            colorSecondary: 'sky-blue',
-            category: 'automation',
-            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: 'workflows',
-            status: 'WIP',
-        },
         {
             name: 'User interviews',
             Icon: IconThoughtBubble,
