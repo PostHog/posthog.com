@@ -7,17 +7,8 @@ import { useUser } from 'hooks/useUser'
 
 const CLOUDINARY_BASE = `https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}`
 
-export default function Image({
-    name,
-    previewUrl,
-    provider_metadata: { public_id, resource_type },
-    ext,
-    width,
-    height,
-    allTags,
-    id,
-    ...other
-}: any) {
+export default function Image({ name, previewUrl, provider_metadata, ext, width, height, allTags, id, ...other }: any) {
+    const { public_id, resource_type } = provider_metadata || {}
     const { addToast } = useToast()
     const { getJwt } = useUser()
     const [loadingSize, setLoadingSize] = useState<string | number | null>(null)
@@ -185,10 +176,7 @@ export default function Image({
                     </div>
                 ) : (
                     <div className="flex space-x-2 items-center">
-                        <p
-                            className="text-sm line-clamp-1 m-0 text-ellipsis max-w-sm"
-                            title={generateCloudinaryUrl('orig')}
-                        >
+                        <p className="text-sm line-clamp-1 m-0 text-ellipsis" title={generateCloudinaryUrl('orig')}>
                             {generateCloudinaryUrl('orig')}
                         </p>
                         <button

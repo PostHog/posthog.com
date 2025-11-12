@@ -16,7 +16,7 @@ const query = (offset: number, options?: UseMediaLibraryOptions) => {
 
     const params: any = {
         pagination: {
-            start: offset * limit,
+            start: offset,
             limit,
         },
         sort: ['createdAt:desc'],
@@ -80,11 +80,7 @@ export const useMediaLibrary = (options?: UseMediaLibraryOptions) => {
                 )
         }
 
-        return (
-            data
-                ?.reduce((acc, cur) => [...acc, ...(cur.data || [])], [] as any[])
-                .filter((image: any) => !!image?.provider_metadata) ?? []
-        )
+        return data?.reduce((acc, cur) => [...acc, ...(cur.data || [])], [] as any[]) ?? []
     }, [data, showAll, user, options?.search, options?.tag])
 
     const total = data && data[0]?.meta?.pagination?.total
