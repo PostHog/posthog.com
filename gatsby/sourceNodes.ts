@@ -162,6 +162,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 media: cloudinaryMedia,
                 type: category,
                 year,
+                projectedCompletion,
+                dateCompleted,
                 ...other,
             }
             const roadmapNode = {
