@@ -41,13 +41,7 @@ export const TeamMemberLink = ({
         <span className="relative inline-block">
             <Link to={href || (squeakId ? `/community/profiles/${squeakId}` : '')} state={{ newWindow: true }}>
                 {photo && (
-                    <span
-                        className={`invisible max-h-4 inline-flex items-center ${
-                            photo
-                                ? 'gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
-                                : 'border-b border-primary border-dashed'
-                        }`}
-                    >
+                    <span className="invisible max-h-4 inline-flex items-center gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full">
                         <span className="h-6 shrink-0 rounded-full overflow-hidden">
                             {avatarUrl ? (
                                 <img src={avatarUrl} alt="" className={`w-6 bg-${color ? color : 'red'}`} />
