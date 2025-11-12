@@ -40,6 +40,7 @@ import {
 } from 'components/Stickers/Index'
 import TeamFeatures from 'components/TeamFeatures'
 import SpiritAnimal from 'components/Team/SpiritAnimal'
+import SmallTeam from 'components/SmallTeam'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -823,7 +824,7 @@ export default function TeamPage(props: TeamPageProps) {
                 {objectives && (
                     <>
                         <h2>Goals</h2>
-                        <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember }}>
+                        <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember, SmallTeam }}>
                             <MDXRenderer>{objectives}</MDXRenderer>
                         </MDXProvider>
                     </>
@@ -832,7 +833,7 @@ export default function TeamPage(props: TeamPageProps) {
                 {body && (
                     <>
                         <h2>Handbook</h2>
-                        <MDXProvider components={{ PrivateLink }}>
+                        <MDXProvider components={{ PrivateLink, SmallTeam }}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </>

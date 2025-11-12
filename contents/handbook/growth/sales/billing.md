@@ -7,7 +7,7 @@ showTitle: true
 
 ## Managing billing
 
-> This section explains how PostHog's billing system works. Most billing operations described below are handled exclusively by the billing team and are not self serve. Sales should coordinate with the billing team for any billing modifications, pricing changes, or technical billing tasks rather than attempting to implement these directly.
+> This section explains how PostHog's billing system works. Most billing operations described below are handled exclusively by the <SmallTeam slug="billing" /> and are not self serve. Sales should coordinate with the billing team for any billing modifications, pricing changes, or technical billing tasks rather than attempting to implement these directly.
 
 All PostHog instances talk to a common external **Billing Service**. This service is the single point for managing billing across PostHog Cloud US, PostHog Cloud EU (and ,formerly, self-hosted customers). 
 
@@ -107,7 +107,7 @@ After three consecutive missed payment periods, the customer must provide advanc
 
 ### Stripe Products & Prices
 
-> ⚠️ Product and price modifications are restricted and handled exclusively by the billing team. These changes are only made in rare cases and require billing team approval and implementation. Do not attempt to modify products or prices directly - contact the billing team for any pricing-related requests.
+> ⚠️ Product and price modifications are restricted and handled exclusively by the <SmallTeam slug="billing" />. These changes are only made in rare cases and require billing team approval and implementation. Do not attempt to modify products or prices directly - contact the billing team for any pricing-related requests.
 
 Each of our billable Products has an entry in Stripe with each Product having multiple Prices.
 We use a billing config file to determine what is shown in the UI and how billing should behave.
@@ -145,7 +145,7 @@ We generally support the following types of billing plans:
 - Up-front payment, $0 first tier, metered after
 - Flat up-front, no metering (renegotiate contract if they go over)
 
-If at all possible, it's best to stay with these types of billing plans because we already support them, and adding extra stuff will increase complexity. If you do need to add a different type of billing plan, chat with the growth team before agreeing to anything with a customer to make sure it's possible!
+If at all possible, it's best to stay with these types of billing plans because we already support them, and adding extra stuff will increase complexity. If you do need to add a different type of billing plan, chat with the <SmallTeam slug="billing" /> before agreeing to anything with a customer to make sure it's possible!
 
 #### Coupons and Discounts
 As much as possible the existing prices should be used in combination with `Coupons` to offer custom deals to customers. Coupons are applied to the _Customer_ in Stripe, not to the customer's subscription. 
@@ -173,7 +173,7 @@ When calculating usage limits, discounts are taken into consideration _before_ t
 1. Add custom metadata if needed.
 
 ### Plans
-> ⚠️ Plan modifications are handled exclusively by the billing team. Do not attempt to modify plans directly, contact the billing team for any plan related requests.
+> ⚠️ Plan modifications are handled exclusively by the <SmallTeam slug="billing" />. Do not attempt to modify plans directly, contact the billing team for any plan related requests.
 
 You can find a list of available plans in the billing repo. These are found inside `costants/plans`, divided by folder.
 Each plan can have a list of features, and a price.
