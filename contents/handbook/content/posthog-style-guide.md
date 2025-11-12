@@ -189,8 +189,8 @@ Short videos (like screen recordings) should be uploaded to Cloudinary.
 
 There are two other places we host videos:
 
--   YouTube - videos that are intended for a social audience (e.g. TikTok, X, Instagram, etc.)
--   Wistia - we use this for longer videos (like our product demos)
+-   YouTube - videos that are intended for wide distribution
+-   Wistia - hosted videos used for embedding on PostHog.com (like our product demos) – like in product presentations
 
 ### Best practices for images and videos
 
