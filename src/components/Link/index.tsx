@@ -125,7 +125,7 @@ export default function Link({
         onClick && onClick(e)
         if (compact && url && !internal) {
             e.preventDefault()
-            if (/(eu|app)\.posthog\.com/.test(url)) {
+            if (/(eu|us|app)\.posthog\.com/.test(url)) {
                 window.parent.postMessage(
                     {
                         type: 'external-navigation',

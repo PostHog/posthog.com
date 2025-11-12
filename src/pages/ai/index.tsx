@@ -2,27 +2,13 @@ import React from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
-import { useRoadmaps } from 'hooks/useRoadmaps'
-import Markdown from 'components/Squeak/components/Markdown'
-import { IconCheck, IconLightBulb } from '@posthog/icons'
+import { IconLightBulb } from '@posthog/icons'
 import Cards from 'components/Cards'
 import { PostHogAIExampleCards } from 'components/Cards/data'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import CustomRoadmapSlide from 'components/AI/CustomRoadmapSlide'
 
 const PRODUCT_HANDLE = 'posthog_ai'
-
-interface RoadmapItem {
-    id: string
-    attributes: {
-        title: string
-        description: string
-        projectedCompletion?: string
-        complete?: boolean
-        likes: {
-            data: Array<{ id: string }>
-        }
-    }
-}
 
 const CustomManifestoSlide = () => {
     return (
@@ -76,134 +62,6 @@ const CustomManifestoSlide = () => {
                 wake up for the day. We’re working on the ability to generate ideas for what to work on, and to convert
                 these into pull requests agentically. Stay tuned.
             </p>
-        </div>
-    )
-}
-
-const CustomRoadmapSlide = () => {
-    const { roadmaps, isLoading } = useRoadmaps({
-        params: {
-            filters: {
-                $or: [
-                    {
-                        teams: {
-                            name: {
-                                $eq: 'PostHog AI',
-                            },
-                        },
-                    },
-                ],
-            },
-        },
-    })
-
-    if (isLoading) {
-        return (
-            <div data-scheme="primary" className="flex items-center justify-center h-full bg-primary">
-                <div className="text-primary">Loading roadmap...</div>
-            </div>
-        )
-    }
-
-    const underConsideration = roadmaps.filter(
-        (roadmap: RoadmapItem) => !roadmap.attributes.projectedCompletion && !roadmap.attributes.complete
-    )
-    const inProgress = roadmaps.filter(
-        (roadmap: RoadmapItem) => roadmap.attributes.projectedCompletion && !roadmap.attributes.complete
-    )
-    const shipped = roadmaps.filter((roadmap: RoadmapItem) => roadmap.attributes.complete)
-
-    return (
-        <div data-scheme="primary" className="h-full bg-primary text-primary p-4 @md:p-8 overflow-auto">
-            <h2 className="text-3xl @md:text-4xl font-bold mb-6 text-center">Roadmap</h2>
-
-            <div className="grid @lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
-                {/* Under Consideration */}
-                <div className="border border-primary rounded overflow-hidden">
-                    <h3 className="text-sm @md:text-base text-center bg-accent px-4 py-2 mb-0 font-semibold">
-                        Under consideration
-                    </h3>
-                    <div className="divide-y divide-primary overflow-y-auto">
-                        {underConsideration.slice(0, 3).map((roadmap: RoadmapItem) => (
-                            <div key={roadmap.id} className="p-3">
-                                <div className="flex gap-2">
-                                    <div className="shrink-0">
-                                        <div className="bg-[#F5E2B2] rounded px-2 py-1 text-xs font-semibold">
-                                            {roadmap.attributes.likes.data.length}
-                                        </div>
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <h4 className="text-sm font-bold mb-1 leading-tight truncate">
-                                            {roadmap.attributes.title}
-                                        </h4>
-                                        <div className="text-xs line-clamp-2">
-                                            <Markdown>{roadmap.attributes.description}</Markdown>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* In Progress */}
-                <div className="border border-primary rounded overflow-hidden">
-                    <h3 className="text-sm @md:text-base text-center bg-orange text-white px-4 py-2 mb-0 font-semibold">
-                        In progress
-                    </h3>
-                    <div className="divide-y divide-primary overflow-y-auto">
-                        {inProgress.slice(0, 3).map((roadmap: RoadmapItem) => (
-                            <div key={roadmap.id} className="p-3">
-                                <div className="flex gap-2">
-                                    <div className="flex-1 min-w-0">
-                                        <h4 className="text-sm font-bold mb-1 leading-tight truncate">
-                                            {roadmap.attributes.title}
-                                        </h4>
-                                        <div className="text-xs line-clamp-2">
-                                            <Markdown>{roadmap.attributes.description}</Markdown>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Shipped */}
-                <div className="border border-primary rounded overflow-hidden">
-                    <h3 className="text-sm @md:text-base text-center bg-green px-4 py-2 mb-0 font-semibold text-white">
-                        Shipped
-                    </h3>
-                    <div className="divide-y divide-primary overflow-y-auto">
-                        {shipped.slice(0, 3).map((roadmap: RoadmapItem) => (
-                            <div key={roadmap.id} className="p-3">
-                                <div className="flex gap-2">
-                                    <div className="shrink-0">
-                                        <IconCheck className="w-4 h-4 text-green" />
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <h4 className="text-sm font-bold mb-1 leading-tight">
-                                            {roadmap.attributes.title}
-                                        </h4>
-                                        <div className="text-xs line-clamp-2">
-                                            <Markdown>{roadmap.attributes.description}</Markdown>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            <div className="text-center mt-6">
-                <p className="text-sm text-secondary">
-                    Have opinions about what we should build next?{' '}
-                    <Link to="/roadmap" className="text-primary underline" state={{ newWindow: true }}>
-                        Vote on our roadmap.
-                    </Link>
-                </p>
-            </div>
         </div>
     )
 }
@@ -324,7 +182,6 @@ export default function PostHogAI(): JSX.Element {
             'feature-comparison',
             'docs',
             'pairs-with',
-            'posthog-on-posthog',
             'answers',
         ],
         custom: [
@@ -344,7 +201,7 @@ export default function PostHogAI(): JSX.Element {
             //     component: CustomManifestoSlide,
             // },
         ],
-        order: ['overview', 'features', 'demo', 'roadmap', 'pricing', 'getting-started'],
+        order: ['overview', 'features', 'demo', `posthog-on-posthog`, 'roadmap', 'pricing', 'getting-started'],
         templates: {
             overview: 'max',
             features: 'ai',

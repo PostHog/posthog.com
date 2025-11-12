@@ -453,5 +453,13 @@
         "link_type": "github",
         "link_url": "https://github.com/dustinbyrne",
         "profile_id": 35043
+    },
+    {
+        "handle": "natalia-amorim",
+        "name": "Natalia Amorim",
+        "role": "Content Marketing Manager",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/nataliahelenaamorim/",
+        "profile_id": 35321
     }
 ]

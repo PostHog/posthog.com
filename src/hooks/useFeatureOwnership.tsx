@@ -439,12 +439,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     wizard: {
         feature: 'Wizard',
-        owner: [],
-        notes: (
-            <>
-                Owned by <TeamMember name="Danilo Campos" photo />, with help from Team Array
-            </>
-        ),
+        owner: ['content'],
     },
 }
 
