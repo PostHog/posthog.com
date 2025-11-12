@@ -29,6 +29,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { Popover } from 'components/RadixUI/Popover'
+import MediaLibrary from 'components/MediaLibrary'
 
 export default function TaskBarMenu() {
     const {
@@ -183,7 +184,7 @@ export default function TaskBarMenu() {
                                     icon: <IconUpload className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                     onClick: () =>
                                         addWindow(
-                                            <MediaUploadModal
+                                            <MediaLibrary
                                                 newWindow
                                                 location={{ pathname: `media-upload` }}
                                                 key={`media-upload`}

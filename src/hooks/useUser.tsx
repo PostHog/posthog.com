@@ -306,6 +306,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                         populate: {
                             images: {
                                 sort: ['createdAt:desc'],
+                                populate: {
+                                    tags: true,
+                                },
                             },
                             avatar: true,
                             questionSubscriptions: {

@@ -94,7 +94,7 @@ const transformEventToFormValues = (event: Event, speakerOptions?: SelectOption[
     }
 }
 
-function CreatableMultiSelect({
+export const CreatableMultiSelect = ({
     label,
     placeholder,
     description,
@@ -105,6 +105,8 @@ function CreatableMultiSelect({
     touched,
     error,
     allowCreate = true,
+    onAdd,
+    onRemove,
 }: {
     label: string
     placeholder?: string
@@ -116,7 +118,9 @@ function CreatableMultiSelect({
     touched?: boolean
     error?: string
     allowCreate?: boolean
-}) {
+    onAdd?: (value: any) => void
+    onRemove?: (value: any) => void
+}) => {
     const [availableOptions, setAvailableOptions] = React.useState<SelectOption[]>(options)
     const [query, setQuery] = React.useState<string>('')
     const [focused, setFocused] = React.useState<boolean>(false)
@@ -150,6 +154,7 @@ function CreatableMultiSelect({
         const next = Array.from(new Set([...(value || []), valueToAdd]))
         onChange(next)
         setQuery('')
+        onAdd?.(valueToAdd)
     }
 
     const createAndAdd = (labelText: string) => {
@@ -167,6 +172,7 @@ function CreatableMultiSelect({
 
     const removeValue = (item: any) => {
         onChange((value || []).filter((v) => v !== item))
+        onRemove?.(item)
     }
 
     return (
