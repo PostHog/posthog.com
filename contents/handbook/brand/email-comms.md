@@ -37,7 +37,7 @@ These emails are usually tagged as `Service updates` in Customer.io when they in
 
 Important service updates are the _only_ type of email we may send to unsubscribed users, and only if we feel it is warranted to do so.
 
-> `Service updates` emails are often part of an [engineering incident](/handbook/engineering/incidents). We handle comms for those too. 
+> `Service updates` emails are often part of an [engineering incident](/handbook/engineering/operations/incidents). We handle comms for those too. 
 
 Whenever we need to send an email broadcast like this we begin by creating an issue in [the Meta repo](https://github.com/PostHog/meta/), unless it involves discussion of personal information - in which case it is discussed in [Company Internal](https://github.com/PostHog/company-internal). This enables us to summarize information and seek approval from teams while also keeping our work open source, and without requiring everyone log in to Customer.io. Issues are closed when an email is sent. 
 
@@ -90,7 +90,7 @@ We run a series of other, small campaigns with smaller volumes. These include:
 - **Startup & YC updates** is a series of campaigns for the startups and YC programs. These broadly notify users when they join the program, and use 50%, 75% and 100% of their available credit. 
 
 ## API triggered emails
-We maintain a series of API triggered emails by working with the Growth team. These are found in Customer.io's transactional tool and broadly encompass billing and security updates, such as an upcoming bill or a change to 2FA settings. These emails are triggered by API in order to keep them highly relevant and with high deliverability. 
+We maintain a series of API triggered emails by working with the <SmallTeam slug="growth" />. These are found in Customer.io's transactional tool and broadly encompass billing and security updates, such as an upcoming bill or a change to 2FA settings. These emails are triggered by API in order to keep them highly relevant and with high deliverability. 
 
 Transactional emails feature Liquid code to help personalize their content. All transactional emails should contain in the main body content the Liquid to clearly indicate to the user which project or organization the email is regarding, with suitable fallbacks. For example:
 

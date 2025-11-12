@@ -247,7 +247,7 @@ If you found this useful, you might enjoy the following as well:
 
 - [The Product-Market Fit Game](/founders/product-market-fit-game) – This is my “ultimate guide” to finding PMF. I break the problem down to 5 levels you need to clear. Selling to your first 5 reference customers is the final one.
 
-- [How not to be boring](/blog/brand) – There’s no excuse for building a startup with a boring brand. This covers how we think about brand at PostHog.
+- [How not to be boring](/blog/brand) – There’s no excuse for [building a startup](/newsletter/building-a-startup-that-scales) with a boring brand. This covers how we think about brand at PostHog.
 
 - [How first-time founders fail](/newsletter/first-time-founders) – Lessons from successful founders, including Paul Copplestone from Supabase, about how they failed at first attempts.
 

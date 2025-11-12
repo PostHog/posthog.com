@@ -166,11 +166,15 @@ Slack is used differently in different organizations. Here are some guidelines f
 
 Channel naming conventions so people don't get confused:
 
--   `#team-xxxxx` - small team channels, only as listed on the [teams](/teams) page
--   `#project-xxxxxx` - one-off initiatives that may involve people across multiple teams, but don't fit neatly into a team channel
--   `#posthog-xxxxx` - shared channels with _customers_ only (if you want to create a shared channel with an external partner, use `#xxxxxx-posthog` instead)
--   `#alerts-xxxxx` - useful to create a separate channel for your team to send alerts into, so your main channel doesn't get noisy
--   `#support-xxxxx` - similarly, useful to feed support requests in if helpful without adding clutter
+-   `#team-[team-name]` - small team channels, only as listed on the [teams](/teams) page
+-   `#project-[project-name]` - one-off initiatives that may involve people across multiple teams, but don't fit neatly into a team channel
+-   `#posthog-[customer-name]` - shared channels with _customers_ only (if you want to create a shared channel with an external partner, use `#[partner-name]-posthog` instead)
+-   `#alerts-[team-name]` - useful to create a separate channel for your team to send alerts into, so your main channel doesn't get noisy
+-   `#support-[product-name]` - similarly, useful to feed support requests in if helpful without adding clutter
+-   `#offsite-[team]-[month]-[year]-[where]` - For planning and coordination of team offsite events
+-   `#onboarding-[who]-[team]-[month]-[year]-[where]` - For coordinating and supporting new team member onboarding
+-   `#hiring-[team-name]` - For recruiting discussions, candidate feedback, and hiring coordination for a specific team
+-   `#superday-[first-name]-[role]` - For candidate interview coordination and feedback during intensive interview days
 
 On the very rare occasions you need to create a private channel for some reason - most commonly hiring-related - then it's probably worth sticking `#private-xxxxx` in front so people don't accidentally add external parties who shouldn't be in there.
 

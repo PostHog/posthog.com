@@ -13,11 +13,11 @@ featuredImageType: full
 category: CEO diaries
 ---
 
-We take pride in investing as much as possible in our ability to ship cool projects and not in hiring a gazillion managers. As a result, we only have an [exec (AKA blitzscale) team](/teams/blitzscale) of 5, with roughly 150 people working here. And that includes Tim and me as half of this team. Everyone else is doing a ton of individual contributor work.
+We take pride in investing as much as possible in our ability to ship cool projects and not in hiring a gazillion managers. As a result, we only have an exec team of 5 (AKA <SmallTeam slug="blitzscale" />), with roughly 150 people working here. And that includes Tim and me as half of this team. Everyone else is doing a ton of individual contributor work.
 
 As we've grown, I've repeatedly underestimated how sharply the importance of communication from the exec team increases. I up the effort, but the requirement ups by more each time we grow, despite knowing it's important. I've even had feedback in [360 reviews](/handbook/people/feedback) of "if you did nothing else, just do a good job of the all-hands and that'd be great".
 
-The number of people each exec is responsible for is increasing exponentially as we scale. In the early days, we had zero direct or indirect reports each, at 15 people, we had roughly 8 people per exec. Today, it's around 35. By the next big offsite, it will be around 80.
+The number of people each exec is responsible for is increasing exponentially [as we scale](/newsletter/building-a-startup-that-scales). In the early days, we had zero direct or indirect reports each, at 15 people, we had roughly 8 people per exec. Today, it's around 35. By the next big offsite, it will be around 80.
 
 There are unfortunate consequences of this: 
 

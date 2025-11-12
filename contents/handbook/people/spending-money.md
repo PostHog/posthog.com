@@ -109,7 +109,7 @@ For monitors, we suggest you pick one that supports 4K. This means you'll get a 
 
 We would expect to spend $250 to $350 on a monitor. Philips have a [great value model](https://www.amazon.com/Philips-276E8VJSB-3840x2160-UltraNarrow-DispalyPort/dp/B07JXCR263). It comes with an HDMI cable, but you'll need an adaptor to USB-C with most Apple laptops.
 
-For engineers (because of the high density screen) and sales people (because of the in built high quality webcam and microphone), we recommend a Mac Studio Display ([Amazon US](https://www.amazon.com/Apple-Studio-Display-Standard-Tilt-Adjustable/dp/B0DZDDWSBG/ref=sr_1_1_sspa), [Amazon UK](https://www.amazon.co.uk/dp/B0DZDC2Q1N?tag=georiot-trd-21&th=1&ascsubtag=dcw-gb-1631306176175088319-21&geniuslink=true), as long as you can get them for < $2k. If you buy one and leave PostHog, we do expect you to ship these back.
+For engineers (because of the high density screen) and sales people (because of the in built high quality webcam and microphone), we recommend a Mac Studio Display ([Amazon US](https://www.amazon.com/Apple-Studio-Display-Standard-Tilt-Adjustable/dp/B0DZDDWSBG/ref=sr_1_1_sspa), [Amazon UK](https://www.amazon.co.uk/dp/B0DZDC2Q1N?tag=georiot-trd-21&th=1&ascsubtag=dcw-gb-1631306176175088319-21&geniuslink=true)), as long as you can get them for < $2k. If you buy one and leave PostHog, we do expect you to ship these back.
 
 ### Keyboard, mouse, and laptop stand
 

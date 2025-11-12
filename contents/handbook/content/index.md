@@ -25,7 +25,7 @@ We do this by:
 
 Content is the main pillar of our marketing strategy. Our strategy is to go _deeper_ and create better content as we grow. We don't rely on AI. We don't take content in exchange for links. We don't have arbitrary volume goals.
 
-Our latest goals can be found on the [content team page](/teams/content). You can share ad-hoc ideas in our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y).
+Our latest goals can be found on the <SmallTeam slug="content" /> page. You can share ad-hoc ideas in our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y).
 
 ## Who is our audience?
 

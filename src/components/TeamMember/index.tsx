@@ -37,17 +37,13 @@ export const TeamMemberLink = ({
     const displayName = showOnlyFirstName ? firstName : [firstName, lastName].filter(Boolean).join(' ')
     const avatarUrl = avatar?.formats?.thumbnail?.url
 
+    // The invisible block is necessary to make sure we have the proper width
+    // with the `relative inline-block` parent when we include a photo
     return (
         <span className="relative inline-block">
             <Link to={href || (squeakId ? `/community/profiles/${squeakId}` : '')} state={{ newWindow: true }}>
                 {photo && (
-                    <span
-                        className={`invisible max-h-4 inline-flex items-center ${
-                            photo
-                                ? 'gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
-                                : 'border-b border-primary border-dashed'
-                        }`}
-                    >
+                    <span className="invisible max-h-4 inline-flex items-center gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full">
                         <span className="h-6 shrink-0 rounded-full overflow-hidden">
                             {avatarUrl ? (
                                 <img src={avatarUrl} alt="" className={`w-6 bg-${color ? color : 'red'}`} />

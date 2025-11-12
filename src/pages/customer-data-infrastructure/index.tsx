@@ -336,7 +336,7 @@ export default function CDP(): JSX.Element {
                     and dashboards. One of the ways we use it ourselves is to track our support metrics, such as SLAs
                     and first response times. <TeamMember name="Abigail Richardson" photo /> writes up a summary based
                     on this data and shares it with the exec team weekly -&gt; and in the video above she explains how
-                    she gathers the data using SQL (and a little help from PostHog AI).
+                    she gathers the data using SQL.
                 </p>
                 <h3>🪦 RIP the modern data stack</h3>
                 <p>
@@ -357,12 +357,12 @@ export default function CDP(): JSX.Element {
                 </blockquote>
                 <p>So what if it didn’t have to be this way?</p>
                 <p>
-                    That’s the idea with PostHog’s customer data infrastructure. everything can finally live in one
-                    place, and can be analyzed with any of PostHog’s insight tools or BI visualizations. it doesn’t
+                    That’s the idea with PostHog’s customer data infrastructure. Everything can finally live in one
+                    place, and can be analyzed with any of PostHog’s insight tools or BI visualizations. It doesn’t
                     require a data engineer, and it scales with you as you grow.
                 </p>
                 <p>
-                    A customer data platform isn't just event pipelines and destinations. it’s not a regurgitated feed
+                    A customer data platform isn't just event pipelines and destinations. It’s not a regurgitated feed
                     of user activity. it’s not just a SQL editor and some transformations.
                 </p>
                 <p>

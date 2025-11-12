@@ -86,7 +86,7 @@ Every problem has its own set of evaluation criteria, but there are some recurri
 
 - **Performance** – We ingest billions of events per day and this will only grow. We need technology that can keep up and scale to 100x where we are today.
 
-- **Cost** – [Being the cheapest option](/handbook/how-we-make-money) is an important pricing principle for us. This means we always look for ways to reduce costs, such as using S3 for replay storage instead of ClickHouse, which helped us [make replays drastically cheaper](/blog/session-replay-pricing).
+- **Cost** – [Being the cheapest option](/handbook/how-we-make-money) is an important [pricing principle](/newsletter/pricing-advice) for us. This means we always look for ways to reduce costs, such as using S3 for replay storage instead of ClickHouse, which helped us [make replays drastically cheaper](/blog/session-replay-pricing).
 
 - **Reliability** – Companies rely on us to handle business-critical data. We need to maintain a high uptime and availability. Technologies we choose need to prove they are reliable and handle failures gracefully.
 

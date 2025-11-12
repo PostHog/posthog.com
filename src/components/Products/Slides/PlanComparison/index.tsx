@@ -1,7 +1,7 @@
 import React from 'react'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { IconInfo } from '@posthog/icons'
-import ScrollArea from 'components/RadixUI/ScrollArea'
+import useProduct from 'hooks/useProduct'
 
 interface PlanComparisonProps {
     products: any[]
@@ -19,10 +19,9 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
     // Check if this product shares pricing with another product
     const sharesFreeTierWith = productInfo?.sharesFreeTier
     const billingProductHandle = sharesFreeTierWith || productHandle
+    const product = useProduct({ handle: billingProductHandle })
 
-    // Find the specific product data - GraphQL products use 'type' field, but we receive handle
-    // For session_replay handle, we need to match against 'session_replay' type in GraphQL
-    const productData = products.find((product: any) => product.type === billingProductHandle)
+    const productData = product?.billingData
 
     if (!productData || !productData.plans || productData.plans.length === 0) {
         // Skip rendering if no billing/pricing data is available

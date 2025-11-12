@@ -6,7 +6,7 @@ showTitle: true
 
 This page contains security advisories and Common Vulnerabilities and Exposures (CVEs) related to PostHog. We maintain this page to ensure transparency and help our users stay informed about any security issues that may impact them. In the event that a security incident leads to a confirmed exposure or requires action from users we will always contact users proactively. 
 
-For coverage of other, [non-security incidents](/handbook/engineering/incidents), please check [our status page](https://status.posthog.com/). 
+For coverage of other, [non-security incidents](/handbook/engineering/operations/incidents), please check [our status page](https://status.posthog.com/). 
 
 ## Our approach to security advisories
 
@@ -26,7 +26,7 @@ Security vulnerabilities and other security related findings can be reported via
 
 ## Updating this page
 
-PRs to this page which update advisories or CVEs should only occur as part of an incident and should follow all [our usual processes for an incident](/handbook/engineering/incidents). If you need to issue an advisory or CVE and an incident is _not_ declared, you should declare one. 
+PRs to this page which update advisories or CVEs should only occur as part of an incident and should follow all [our usual processes for an incident](/handbook/engineering/operations/incidents). If you need to issue an advisory or CVE and an incident is _not_ declared, you should declare one. 
 
 Declaring an incident will ensure that there is good internal visibility and that members of relevant teams, including our Support team, are aware. Once an advisory is posted to this page, you should also update other teams by posting in the [#tell-posthog-anything](https://posthog.slack.com/archives/C0351B1DMUY) Slack channel. 
 

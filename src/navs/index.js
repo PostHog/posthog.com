@@ -413,6 +413,10 @@ export const dataPipelines = {
             color: 'blue',
             featured: true,
         },
+        {
+            name: 'Using Fivetran, Airbyte or other ETL tools with PostHog',
+            url: '/docs/cdp/fivetran-airbyte',
+        },
     ],
 }
 
@@ -691,16 +695,6 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Demand gen',
-        url: '',
-        children: [
-            {
-                name: 'Overview',
-                url: '/handbook/demand/overview',
-            },
-        ],
-    },
-    {
         name: 'Engineering',
         url: '',
         children: [
@@ -764,28 +758,24 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Internal processes',
+                name: 'Operations',
                 url: '',
                 children: [
                     {
                         name: 'Support hero',
-                        url: '/handbook/engineering/support-hero',
-                    },
-                    {
-                        name: 'Feature ownership',
-                        url: '/handbook/engineering/feature-ownership',
-                    },
-                    {
-                        name: 'Handling incidents',
-                        url: '/handbook/engineering/incidents',
+                        url: '/handbook/engineering/operations/support-hero',
                     },
                     {
                         name: 'On-call rotation',
-                        url: '/handbook/engineering/on-call-rotation',
+                        url: '/handbook/engineering/operations/on-call-rotation',
                     },
                     {
-                        name: 'Bug prioritization',
-                        url: '/handbook/engineering/bug-prioritization',
+                        name: 'Handling incidents',
+                        url: '/handbook/engineering/operations/incidents',
+                    },
+                    {
+                        name: 'Post-mortems',
+                        url: '/handbook/engineering/operations/post-mortems',
                     },
                 ],
             },
@@ -928,6 +918,14 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Feature ownership',
+                url: '/handbook/engineering/feature-ownership',
+            },
+            {
+                name: 'Bug prioritization',
+                url: '/handbook/engineering/bug-prioritization',
+            },
+            {
                 name: 'Shipping & releasing',
                 url: '/handbook/engineering/development-process',
             },
@@ -976,23 +974,27 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing',
             },
             {
-                name: 'Product Marketing',
+                name: 'Product marketing',
                 url: '/handbook/marketing/product-announcements',
             },
             {
-                name: 'Paid Advertising',
+                name: 'Paid ads',
                 url: '/handbook/marketing/paid',
             },
             {
-                name: 'Product Positioning',
+                name: 'Product positioning',
                 url: '/handbook/marketing/positioning',
             },
             {
-                name: 'Marketing Events',
+                name: 'Events',
                 url: '/handbook/marketing/events',
             },
             {
-                name: 'Email & Communications',
+                name: 'Customer case studies',
+                url: '/handbook/marketing/customer-case-studies',
+            },
+            {
+                name: 'Email & comms',
                 url: '',
                 children: [
                     {
@@ -1142,6 +1144,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/posthog-com/presentations',
             },
             {
+                name: 'Product & feature comparisons',
+                url: '/handbook/engineering/posthog-com/product-comparisons',
+            },
+            {
                 name: 'Editing API docs',
                 url: '/handbook/engineering/posthog-com/api-docs',
             },
@@ -1182,6 +1188,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/user-feedback',
             },
             {
+                name: 'In-Person Customer Visits',
+                url: '/handbook/product/visiting-customers',
+            },
+            {
                 name: 'Releasing as beta',
                 url: '/handbook/product/releasing-as-beta',
             },
@@ -1213,7 +1223,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Incidents & maintenance',
-                url: '/handbook/engineering/incidents#customer-communications',
+                url: '/handbook/engineering/operations/incidents#customer-communications',
             },
             {
                 name: 'Internal processes',
@@ -1268,12 +1278,20 @@ export const handbookSidebar = [
                                 url: '/handbook/growth/sales/account-planning',
                             },
                             {
-                                name: 'Cross-sell motions',
+                                name: 'Cross selling tactics',
                                 url: '/handbook/growth/sales/cross-selling',
                             },
                             {
                                 name: 'Cross sell motions',
                                 url: '/handbook/growth/sales/cross-sell-motions',
+                            },
+                             {
+                                name: 'Communications templates',
+                                url: '/handbook/growth/sales/communications-templates',
+                            },
+                            {
+                                name: 'User event streams',
+                                url: '/handbook/growth/sales/user-event-streams',
                             },
                         ],
                     },
@@ -1284,6 +1302,10 @@ export const handbookSidebar = [
                     {
                         name: 'How to do discovery',
                         url: '/handbook/growth/sales/how-to-do-discovery',
+                    },
+                    {
+                        name: 'Running trials',
+                        url: '/handbook/growth/sales/running-trials',
                     },
                     {
                         name: 'Selling and procuring via AWS Marketplace',
@@ -1370,12 +1392,12 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-program',
                     },
                     {
-                        name: 'Onboarding Pipeline',
-                        url: '/handbook/onboarding/onboarding-pipeline',
-                    },
-                    {
                         name: 'Onboarding tracking',
                         url: '/handbook/onboarding/onboarding-tracking',
+                    },
+                    {
+                        name: 'Onboarding data',
+                        url: '/handbook/onboarding/onboarding-data',
                     },
                     {
                         name: 'Sales handover',
@@ -1516,6 +1538,24 @@ export const handbookSidebar = [
             {
                 name: 'Lifecycle analysis',
                 url: '/handbook/growth/revops/lifecycle-analysis',
+            },
+            {
+                name: 'SalesOps',
+                url: '',
+                children: [
+                    {
+                        name: 'Refunds',
+                        url: '/handbook/growth/revops/refunds',
+                    },
+                    {
+                        name: 'Lead assignment during time off',
+                        url: '/handbook/growth/revops/lead-assignment-ooo',
+                    },
+                    {
+                        name: 'Giving credits to customers',
+                        url: '/handbook/growth/revops/credits',
+                    },
+                ],
             },
         ],
     },
@@ -1819,8 +1859,8 @@ export const docsMenu = {
                                     url: '/docs/libraries/js',
                                 },
                                 {
-                                    name: 'Features',
-                                    url: '/docs/libraries/js/features',
+                                    name: 'Usage',
+                                    url: '/docs/libraries/js/usage',
                                 },
                                 {
                                     name: 'Configuration',
@@ -1870,6 +1910,20 @@ export const docsMenu = {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
+                            children: [
+                                {
+                                    name: 'Installation',
+                                    url: '/docs/libraries/ios',
+                                },
+                                {
+                                    name: 'Usage',
+                                    url: '/docs/libraries/ios/usage',
+                                },
+                                {
+                                    name: 'Configuration',
+                                    url: '/docs/libraries/ios/configuration',
+                                },
+                            ],
                         },
                         {
                             name: 'Java',
@@ -1884,7 +1938,7 @@ export const docsMenu = {
                             url: '/docs/libraries/node',
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/node',
                                 },
                                 {
@@ -1902,7 +1956,7 @@ export const docsMenu = {
                             url: '/docs/libraries/python',
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/python',
                                 },
                                 {
@@ -1928,7 +1982,7 @@ export const docsMenu = {
                             },
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/react-native',
                                 },
                                 {
@@ -3551,14 +3605,14 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Statistics overview',
-                    url: '/docs/experiments/statistics',
-                    icon: 'IconSquareRoot',
+                    name: 'Bayesian statistics',
+                    url: '/docs/experiments/statistics-bayesian',
+                    icon: 'IconFlask',
                     color: 'purple',
                 },
                 {
-                    name: 'Frequentist method',
-                    url: '/docs/experiments/frequentist-method',
+                    name: 'Frequentist statistics',
+                    url: '/docs/experiments/statistics-frequentist',
                     icon: 'IconBook',
                     color: 'blue',
                 },
@@ -3746,6 +3800,10 @@ export const docsMenu = {
                         {
                             name: 'Android',
                             url: '/docs/error-tracking/installation/android',
+                        },
+                        {
+                            name: 'Flutter',
+                            url: '/docs/error-tracking/installation/flutter',
                         },
                         {
                             name: 'Manual/API',
@@ -4366,6 +4424,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Traces',
+                    url: '/docs/llm-analytics/traces',
+                    icon: 'IconUserPaths',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Spans',
                     url: '/docs/llm-analytics/spans',
                     icon: 'IconBrackets',
@@ -4373,10 +4438,10 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Traces',
-                    url: '/docs/llm-analytics/traces',
-                    icon: 'IconUserPaths',
-                    color: 'orange',
+                    name: 'Sessions',
+                    url: '/docs/llm-analytics/sessions',
+                    icon: 'IconStack',
+                    color: 'blue',
                     featured: true,
                 },
                 {
@@ -4694,6 +4759,50 @@ export const docsMenu = {
                 {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/workflows/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'red',
+                },
+            ],
+        },
+        {
+            name: 'Logs',
+            icon: 'IconSearch',
+            color: 'blue',
+            url: '/docs/logs',
+            description: 'Search and analyze your application logs with OpenTelemetry.',
+            children: [
+                {
+                    name: 'Logs',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/logs',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/logs/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Install logging client',
+                    url: '/docs/logs/installation',
+                    icon: 'IconCode',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/logs/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
                 },

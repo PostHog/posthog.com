@@ -61,6 +61,11 @@ export const llmAnalytics = {
         textColor: 'text-white',
         layout: 'overlay',
     },
+    videos: {
+        overview: {
+            wistia: 'bl174kpxu8',
+        },
+    },
     screenshots: {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_desktop_2399cc57d6.png',
@@ -332,6 +337,35 @@ export const llmAnalytics = {
             ],
         },
     ],
+    postHogOnPostHog: {
+        title: 'How PostHog uses LLM Analytics',
+        benefits: [
+            {
+                title: 'Analyze costs',
+                description: 'by comparing models and analyzing usage',
+            },
+            {
+                title: 'Spot emergencies',
+                description: 'with latency and error rate alerting',
+            },
+            {
+                title: 'Monitor performance',
+                description: 'by comparing speed and reliability across models',
+            },
+            {
+                title: 'Muck about',
+                description: 'in the prompt playground (meaningfully)',
+            },
+            {
+                title: 'Integrate with other tools',
+                description: 'like Langfuse, Helicone, and more',
+            },
+            {
+                title: 'Build AI features',
+                description: 'like PostHog AI, obviously',
+            },
+        ],
+    },
     questions: [
         {
             question: 'What are my LLM costs by customer?',
@@ -409,98 +443,8 @@ export const llmAnalytics = {
                 key: 'posthog',
             },
         ],
-        features: [
-            {
-                feature: 'Generation tracking',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Latency tracking',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Cost tracking, incl. cost-per-user',
-                companies: {
-                    langfuse: true,
-                    langsmith: false,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Trace visualization',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Token tracking',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Prompt playground',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Prompt evaluations',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: false,
-                },
-            },
-            {
-                feature: 'Alerting',
-                companies: {
-                    langfuse: false,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'SOC 2 compliance',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'HIPAA and GDPR compliance',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-        ],
+        rows: ['llm_analytics'],
+        excluded_sections: ['platform'],
     },
     pairsWith: [
         {

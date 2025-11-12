@@ -34,7 +34,7 @@ PostHog will use the funding to focus on another major input — having the best
 
 ### About PostHog 
 
-PostHog is an open source, product analytics platform. PostHog enables software teams to understand user behavior — auto-capturing events, performing product analytics and dashboarding, enabling video replays, and rolling out new features behind feature flags, all based on an open source platform. The product's open source approach enables companies to self-host, removing the need to send data externally. 
+PostHog is an open source, developer platform. PostHog enables software teams to understand user behavior — auto-capturing events, performing product analytics and dashboarding, enabling video replays, and rolling out new features behind feature flags, all based on an open source platform. The product's open source approach enables companies to self-host, removing the need to send data externally. 
 
 Founded in 2020 by James Hawkins and Tim Glaser, PostHog was a member of Y Combinator's Winter 2020 batch, and has subsequently raised $27m in funding from GV, Y Combinator, and notable angel investors including Jason Warner (CTO, GitHub), Solomon Hykes (Founder, Docker), and others.
 
@@ -50,6 +50,6 @@ We also run the YC Growth Program, which brings together founder-CEOs who are le
 
 [press@posthog.com](mailto:press@posthog.com)
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />
