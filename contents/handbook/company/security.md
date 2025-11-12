@@ -98,9 +98,9 @@ To provide a great customer experience, PostHog employees may occasionally need 
 2. **Do not make any changes to a customer’s setup without explicit consent.**
    Exceptions to this are cases where we are reacting to incidents or bad configurations that are negatively impacting PostHog services in order to protect ourselves _and_ the customer.
 
-4. **Ask for permission whenever possible.**  
+3. **Ask for permission whenever possible.**  
    While this isn’t always feasible, such as during an active incident, it’s best practice to inform the customer before accessing their account.
    When a customer raises a support ticket, we take this as consent to be able to impersonate their account and investigate based on the contents of the ticket. Customers will not be actively asked for permission by our support engineers when they are investigating a ticket, and the customer should inform us in the ticket if they explicitly do not wish for our support engineers to access their account.
 
-6. **Use good judgment.**  
+4. **Use good judgment.**  
    If you’re unsure whether impersonation is justified, or if a customer might object, either seek their consent or find another way to get the information (for example, by checking our internal PostHog instance).
