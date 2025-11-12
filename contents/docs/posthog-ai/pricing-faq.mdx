@@ -1,7 +1,7 @@
 # PostHog AI credits
 
 PostHog uses **AI credits** to charge for all of its AI features.  
-Each time you interact with an AI-powered feature — like asking PostHog to write SQL, summarize data, or analyze sessions — a small number of credits are used based on the complexity of your request.
+Each time you interact with an AI-powered feature — like asking PostHog to write SQL, summarize data, or analyze sessions — credits are used based on the effort required to complete your request.
 
 This means you only pay for what you actually use.  
 There’s no fixed subscription — and every organization has a free tier worth $25 (2,500 credits) so you can explore all PostHog’s AI features before paying anything.
@@ -23,17 +23,15 @@ All AI features still in beta are also free to use — as of **Oct 31**, that in
 
 ### **How credit usage works**
 
-AI credits are based on **token costs**, which reflect the effort required to complete your request.
+AI credits are based on the **underlying token costs**, which reflect the effort required to complete your request.
 
 - Simple queries (like “What were my daily active users in October?”) use very few tokens, and therefore very few credits.  
 - More complex tasks (like analyzing hundreds of session recordings or rewriting a SQL query multiple times) use more tokens and cost a bit more.  
 
-While exact usage varies, credit consumption usually scales with value — more advanced tasks cost more but deliver deeper insights and time savings.
-
+While exact usage varies, credit consumption usually scales with complexity — more advanced tasks cost more but can deliver deeper insights and time savings.
 You’ll always see **real-time cost information** while using AI features.
 
-To keep it simple, token costs are converted into **AI credits**, billed at **$0.01 per credit** — so **1,000 credits = $10**.
-
+PostHog automatically selects the most efficient model for each AI feature. We apply a simple, consistent 20% markup over the underlying LLM provider’s cost: So 1 PostHog AI credit equals $0.8333 of raw inference, and 1,000 credits cost $10.
 | Example interaction | Estimated credit cost |
 | --- | --- |
 | “What are my daily active users in October?” | coming soon |
@@ -47,7 +45,7 @@ To keep it simple, token costs are converted into **AI credits**, billed at **$0
 Stay on top of your AI credit spend in real time:
 
 1. Type `/usage` in chat to see the current cost of your conversation  
-2. Check the **Billing & usage** page to view your total monthly consumption  
+2. Check the [**Billing overview**](https://app.posthog.com/organization/billing/overview) & [**Bulling usage**](https://app.posthog.com/organization/billing/usage) pages to view your total monthly consumption  
 3. (Coming soon) A dashboard showing which AI features use the most credits  
 
 > 💡 Credit data may take up to 24 hours to appear on the Billing & usage page.
@@ -57,6 +55,7 @@ Stay on top of your AI credit spend in real time:
 ### **Control your AI credit spend**
 
 You’re always in control of your AI credit usage:
-- **Real-time tracking** — see costs as you go  
-- **Billing limits** — set hard caps to prevent overspending  
-- **Usage alerts** — get notified when you hit key thresholds  
+- **Real-time tracking:** See costs as you go  
+- **Custom billing limit:** Set hard caps to prevent overspending
+- **Default billing limit:** PostHog sets a default $250 billing limit so you don't accidentially rack up costs without a ceiling 
+- **Usage alerts:** Get notified when you hit key thresholds  
