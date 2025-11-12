@@ -128,15 +128,20 @@ In your [replay ingestion settings](https://us.posthog.com/settings/project-repl
     classes="rounded"
 />
 
-This is useful if you want to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
+There are two modes for how minimum duration is enforced, controlled by the `strictMinimumDuration` configuration option. This is useful if you want to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
 
-### How minimum duration works
+### Legacy mode (default)
 
-There are two modes for how minimum duration is enforced, controlled by the `strictMinimumDuration` configuration option:
+In legacy mode (`strictMinimumDuration: false` or not set), the minimum duration is checked against the **total session age**. When a session starts, the browser records the start time. If the minimum duration has passed since the session start time, the recording data is sent to the backend.
 
-#### Legacy mode (default)
-
-In the legacy mode (`strictMinimumDuration: false` or not set), the minimum duration is checked against the total session age. When a session starts, the browser records the start time. If the minimum duration has passed since the session start time, the recording data is sent to the backend.
+```js-web
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  session_recording: {
+    strictMinimumDuration: false // +
+  }
+})
+```
 
 **Limitation**: If you set a high minimum duration and your user visits multiple pages (causing full page refreshes), the in-memory buffer may be cleared by navigation. When the session reaches the minimum age, we'll start sending data, but you might miss the beginning of the session because the buffer was cleared by the page refresh.
 
@@ -145,21 +150,9 @@ For example, with a 12 second minimum:
 - After 6 more seconds on page B (12 seconds total session age), we start sending the recording
 - Result: You get 6 seconds of recording from page B, but miss the 6 seconds from page A
 
-#### Strict mode (available in 1.291.0+)
+### Strict mode (available in 1.291.0+)
 
-In strict mode (`strictMinimumDuration: true`), the minimum duration is checked against the actual buffered recording data (from first to last timestamp), not the session age. We only start sending the recording once we have the minimum duration of continuous data in the buffer.
-
-**Key difference**: If the user navigates to a new page before reaching the minimum duration, the buffer is cleared and we start over. The recording will only be sent once we have enough continuous data on a single page.
-
-For example, with a 12 second minimum:
-- User visits page A for 6 seconds, then navigates to page B
-- The buffer is cleared on navigation
-- User must stay on page B for 12 seconds before we start sending the recording
-- Result: You get the full recording from page B once it reaches 12 seconds
-
-Once a session has passed the minimum duration threshold on any page, subsequent page navigations in the same session will continue to send recordings immediately.
-
-This mode is **more accurate** for filtering out short sessions, especially on sites with full page refreshes, but may result in missing more session data if users bounce quickly across multiple pages.
+In strict mode (`strictMinimumDuration: true`), the minimum duration is checked against the **actual buffered recording data** (from first to last timestamp), not the session age. We only start sending the recording once we have the minimum duration of continuous data in the buffer.
 
 **Note**: This will become the default behavior in a future release. To opt in now, add to your config:
 
@@ -167,10 +160,22 @@ This mode is **more accurate** for filtering out short sessions, especially on s
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
   session_recording: {
-    strictMinimumDuration: true
+    strictMinimumDuration: true // +
   }
 })
 ```
+
+**Key difference**: If the user navigates to a new page before reaching the minimum duration, the buffer is cleared and we start over. The recording will only be sent once we have enough **continuous data** on a single page.
+
+For example, with a 12 second minimum:
+- User visits page A for 6 seconds, then navigates to page B
+- The buffer is cleared on navigation
+- User must stay on page B for 12 seconds before we start sending the recording
+- Result: You get the full recording from page B once it reaches 12 seconds
+
+Once a session has passed the minimum duration threshold on any page, subsequent page navigations in the same session will continue to send recordings **immediately**.
+
+This mode is **more accurate** for filtering out short sessions, especially on sites with full page refreshes, but may result in missing more session data if users **bounce quickly** across multiple pages.
 
 ### Choosing the right mode
 
