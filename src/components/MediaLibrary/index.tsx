@@ -90,7 +90,7 @@ export default function MediaLibrary(): JSX.Element {
                             ) : (
                                 images?.map((image: { id: string | number; [key: string]: unknown }) => (
                                     <li key={image.id}>
-                                        <Image {...image} allTags={tags} />
+                                        <Image {...image} allTags={tags} fetchTags={fetchTags} />
                                     </li>
                                 ))
                             )}

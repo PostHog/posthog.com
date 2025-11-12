@@ -1,18 +1,34 @@
 import { IconCopy } from '@posthog/icons'
 import Loading from 'components/Loading'
 import { useToast } from '../../context/Toast'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CreatableMultiSelect from 'components/CreatableMultiSelect'
 import { useUser } from 'hooks/useUser'
 
 const CLOUDINARY_BASE = `https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}`
 
-export default function Image({ name, previewUrl, provider_metadata, ext, width, height, allTags, id, ...other }: any) {
+export default function Image({
+    name,
+    previewUrl,
+    provider_metadata,
+    ext,
+    width,
+    height,
+    allTags,
+    fetchTags,
+    id,
+    ...other
+}: any) {
     const { public_id, resource_type } = provider_metadata || {}
     const { addToast } = useToast()
     const { getJwt } = useUser()
     const [loadingSize, setLoadingSize] = useState<string | number | null>(null)
     const [tags, setTags] = useState<any[]>(other.tags || [])
+    const [availableOptions, setAvailableOptions] = useState<any[]>(allTags)
+
+    useEffect(() => {
+        setAvailableOptions(allTags)
+    }, [allTags])
 
     const isImage =
         resource_type === 'image' && ['png', 'jpg', 'jpeg', 'webp'].some((format) => ext.toLowerCase().includes(format))
@@ -58,81 +74,85 @@ export default function Image({ name, previewUrl, provider_metadata, ext, width,
         setTimeout(() => setLoadingSize(null), 500)
     }
 
-    const handleAddTag = async (tagId: any) => {
-        const existingTag = allTags.find((t) => t.id === tagId)
-        if (existingTag) {
+    const addTagToMedia = async (tagId: any, jwt: string) => {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags/add-media`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
+            body: JSON.stringify({ mediaId: id, tagId }),
+        })
+    }
+
+    const removeTagFromMedia = async (tagId: any, jwt: string) => {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags/remove-media`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
+            body: JSON.stringify({ mediaId: id, tagId }),
+        })
+    }
+
+    const handleChangeTags = async (tagIds: any[]) => {
+        const oldTagIds = tags.map((tag) => tag.id)
+        const addedTagIds = tagIds.filter((id) => !oldTagIds.includes(id))
+        const removedTagIds = oldTagIds.filter((id) => !tagIds.includes(id))
+
+        const newTags = tagIds.map((tagId) => availableOptions.find((t) => t.id === tagId)).filter(Boolean)
+        setTags(newTags)
+
+        const jwt = await getJwt()
+        if (!jwt) return
+
+        for (const tagId of addedTagIds) {
             try {
-                const jwt = await getJwt()
-                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags/add-media`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${jwt}`,
-                    },
-                    body: JSON.stringify({
-                        mediaId: id,
-                        tagId: tagId,
-                    }),
-                })
-                if (response.ok) {
-                    addToast({
-                        description: 'Tag added',
-                        duration: 3000,
-                    })
-                } else {
-                    throw new Error('Failed to add tag')
-                }
+                await addTagToMedia(tagId, jwt)
+                addToast({ description: 'Tag added', duration: 3000 })
             } catch (error) {
                 console.error('Failed to add tag:', error)
-                addToast({
-                    description: 'Failed to add tag',
-                    error: true,
-                    duration: 3000,
-                })
+                addToast({ description: 'Failed to add tag', error: true, duration: 3000 })
+            }
+        }
+
+        for (const tagId of removedTagIds) {
+            try {
+                await removeTagFromMedia(tagId, jwt)
+                addToast({ description: 'Tag removed', duration: 3000 })
+            } catch (error) {
+                console.error('Failed to remove tag:', error)
+                addToast({ description: 'Failed to remove tag', error: true, duration: 3000 })
             }
         }
     }
 
-    const handleRemoveTag = async (tagId: any) => {
+    const handleCreateTag = async (label: string) => {
         try {
             const jwt = await getJwt()
-            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags/remove-media`, {
+            if (!jwt) return
+
+            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${jwt}`,
-                },
-                body: JSON.stringify({
-                    mediaId: id,
-                    tagId: tagId,
-                }),
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
+                body: JSON.stringify({ data: { label } }),
             })
+
             if (response.ok) {
-                addToast({
-                    description: 'Tag removed',
-                    duration: 3000,
-                })
-            } else {
-                throw new Error('Failed to remove tag')
+                const { data } = await response.json()
+
+                setAvailableOptions((prev) => [...prev, data])
+
+                setTags((prev) => [...prev, data])
+
+                await addTagToMedia(data.id, jwt)
+
+                fetchTags()
             }
         } catch (error) {
-            console.error('Failed to remove tag:', error)
-            addToast({
-                description: 'Failed to remove tag',
-                error: true,
-                duration: 3000,
-            })
+            console.error('Failed to create tag:', error)
+            addToast({ description: 'Failed to create tag', error: true, duration: 3000 })
         }
-    }
-
-    const handleChangeTags = (tags: any[]) => {
-        const newTags = tags.map((tag) => allTags.find((t) => t.id === tag))
-        setTags(newTags)
     }
 
     return (
         <li className="flex space-x-2 items-start">
-            <div className="overflow-hidden size-16 flex flex-shrink-0 justify-center items-center bg-accent rounded-sm border border-input">
+            <div className="overflow-hidden size-[98px] flex flex-shrink-0 justify-center items-center bg-accent rounded-sm border border-input">
                 <img
                     src={resource_type === 'video' ? previewUrl : generateCloudinaryUrl('orig-optimized')}
                     loading="lazy"
@@ -188,20 +208,19 @@ export default function Image({ name, previewUrl, provider_metadata, ext, width,
                         </button>
                     </div>
                 )}
-                {allTags.length > 0 && (
-                    <div className="mt-2">
-                        <CreatableMultiSelect
-                            label="Add a tag..."
-                            options={allTags.map((tag) => ({ label: tag.attributes.label, value: tag.id }))}
-                            value={tags?.map((tag) => tag.id) ?? []}
-                            allowCreate={false}
-                            onChange={handleChangeTags}
-                            onAdd={handleAddTag}
-                            onRemove={handleRemoveTag}
-                            hideLabel
-                        />
-                    </div>
-                )}
+
+                <div className="mt-2">
+                    <CreatableMultiSelect
+                        label="Add a tag..."
+                        placeholder="Search tags..."
+                        options={availableOptions.map((tag) => ({ label: tag.attributes.label, value: tag.id }))}
+                        value={tags.map((tag) => tag.id)}
+                        allowCreate
+                        onChange={handleChangeTags}
+                        onCreate={handleCreateTag}
+                        hideLabel
+                    />
+                </div>
             </div>
         </li>
     )
