@@ -16,11 +16,11 @@ Like everyone else, our AI journey started with a chatbot. From the first “you
 
 Our beloved hedgehog, Max, was the face that greeted you at every AI interaction. It kept learning, and eventually grew into a very capable product assistant. We learned a lot about [building AI-powered features](/newsletter/building-ai-features) along the way. 
 
-**The problem:** Even as we sprinkled contextual AI across the product, the whole concept of PostHog AI got mentally filed under “the chat.” 
+**The problem:** Even as we added AI capabilities across the platform, people still thought of PostHog AI as "the chat." The broader vision (AI woven through every product) wasn’t landing.
 
 We didn't want to be another company with [hand-wavey marketing](https://posthog.com/newsletter/marketing-for-devs) like “it's not just a chat bot, it's… [insert amazing AI capability here]”, which meant we needed to rethink how we positioned our AI capabilities in the minds of our users.  
 
-### The assistant becomes the architect 
+## The assistant becomes the architect 
 Lots of beta users loved Max, but a comparison that kept coming up internally was Clippy; a paperclip animated assistant from Microsoft Office in the late 90’s, known for its intrusive, and unhelpful pop-ups (It was widely disliked and was removed in Office 2007).
 
 ![automation screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/0822_SM_Clippy_help_o6nlh3_49954d3c4c.webp)
@@ -39,7 +39,7 @@ Max AI became PostHog AI. Not just a character that lives in one corner, but the
 ![automation screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Operation_Axe_Max_dcde574e08.png)
 <Caption>_Don’t worry, we asked Max if he was ok with it._</Caption>
 
-### How we built an AI platform (not just AI features)
+### Why our AI got noticeably better since beta
 Long before this pivot, and as it was happening, the real work of improving PostHog AI was happening deep within PostHog. The <SmallTeam slug="posthog-ai"/> was building a shared infrastructure with the same philosophy as [HogQL](/docs/sql): a single system for each small team to extend.
 
 **Without it:** 
@@ -54,7 +54,6 @@ Long before this pivot, and as it was happening, the real work of improving Post
 - consistent UX patterns
 - platform-level improvements that benefit everyone automatically
 
-### Why our AI got noticeably better since beta
 Overhauling the guts was a good move. It enables deterministic tool‑calling, tighter context packing, and mode‑specific reasoning. 
 
 Translation: fewer “sorry I can’t do that yet” moments, faster replies, cheaper inference. 
@@ -66,20 +65,7 @@ Key differences from older architectures:
 - **Explainable**: Chain-of-thought is visible and easy for you to investigate
 - **MCP integration**: Everything the agent can do is exposed via the [Model Context Protocol](/docs/model-context-protocol)
 
-### What PostHog AI does now (and why it’s not fake‑smart)
-PostHog AI lives inside your product data. It already knows your events, properties, funnels, experiments, and cohorts. You don’t have to teach it what “activation” or “upgrade” means — it sees your taxonomy and uses the same API layer as trends, funnels, and experiments.
-
-When you type something into the chat window, PostHog AI analyzes your request, determines which specialized "modes" it needs to activate, and dynamically loads the appropriate tools and expertise. 
-
-For example, if you ask PostHog AI to "create a funnel tracking the signup flow," it might:
-
-1. Use the read_taxonomy tool to check which events actually exist
-2. Switch to Analytics mode to access insight creation tools
-3. Switch to SQL mode if you need custom transformations
-4. Switch to CDP mode if you want to set up a destination based on the funnel results
-
-![automation screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Placeholder_example_84707e030c.png)
-<Caption>_Interested in a technical deep-dive? Peep our [AI platform architecture](/handbook/engineering/ai/architecture)_</Caption>
+_Interested in a technical deep-dive? Peep our [AI platform architecture](/handbook/engineering/ai/architecture)_
 
 ### How this changes who can use PostHog
 As a company, we’re well known for our [ICP discipline](/newsletter/ideal-customer-profile-framework). Knowing who you’re building for is important — it keeps teams focused, docs clean, and marketing honest. But as PostHog AI matures, we need to keep an eye on the expanding circle.
