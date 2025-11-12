@@ -8,7 +8,7 @@ hideAnchor: true
 author:
     - sara-miteva
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_beta_cover_a04e206b7a.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/workflows_beta_cover_a04e206b7a.jpg
 featuredImageType: full
 category: Product
 tags:
