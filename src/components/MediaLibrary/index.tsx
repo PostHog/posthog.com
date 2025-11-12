@@ -1,24 +1,37 @@
 import { OSInput, OSSelect } from 'components/OSForm'
 import { Checkbox } from 'components/RadixUI/Checkbox'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import Image from './Image'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useMediaLibrary } from 'hooks/useMediaLibrary'
 import { useUser } from 'hooks/useUser'
 import OSButton from 'components/OSButton'
 import { IconSpinner } from '@posthog/icons'
+import debounce from 'lodash/debounce'
 
 export default function MediaLibrary(): JSX.Element {
     const { getJwt } = useUser()
     const [showAll, setShowAll] = useState(false)
     const [tag, setTag] = useState('all-tags')
     const [search, setSearch] = useState('')
+    const [debouncedSearch, setDebouncedSearch] = useState('')
     const [tags, setTags] = useState<{ id: string; attributes: { label: string } }[]>([])
+
+    const debouncedSetSearch = useCallback(
+        debounce((value: string) => {
+            setDebouncedSearch(value)
+        }, 500),
+        []
+    )
+
+    useEffect(() => {
+        debouncedSetSearch(search)
+    }, [search, debouncedSetSearch])
 
     const { images, isLoading, hasMore, fetchMore } = useMediaLibrary({
         showAll,
         tag,
-        search,
+        search: debouncedSearch,
     })
 
     const fetchTags = async () => {
