@@ -24,7 +24,7 @@ We didn't want to be another company with [hand-wavey marketing](https://posthog
 Lots of beta users loved Max, but a comparison that kept coming up internally was Clippy; a paperclip animated assistant from Microsoft Office in the late 90’s, known for its intrusive, and unhelpful pop-ups (It was widely disliked and was removed in Office 2007).
 
 ![automation screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/0822_SM_Clippy_help_o6nlh3_49954d3c4c.webp)
-_Clippy was ahead of its time. Prove me wrong._
+<Caption>_Clippy was ahead of its time. Prove me wrong._</Caption>
 
 Clippy was the Kool-Aid Man busting through your wall; Max AI was opt-in and useful, but still it's instructive. Assistants don’t work when they’re a novelty UI. Whether or not users think it’s a novelty UI is something you have to take ownership of, especially if you're building an AI-native product. 
 
@@ -37,18 +37,18 @@ In the end, we decided to axe Max. Not because we hate joy (we like it so much w
 Max AI became PostHog AI. Not just a character that lives in one corner, but the underlying architecture of PostHog product intelligence (sorry for sneaking a ‘not just’ statement in there).
 
 ![automation screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Operation_Axe_Max_dcde574e08.png)
-_Don’t worry, we asked Max if he was ok with it._
+<Caption>_Don’t worry, we asked Max if he was ok with it._</Caption>
 
 ### How we built an AI platform (not just AI features)
 Long before this pivot, and as it was happening, the real work of improving PostHog AI was happening deep within PostHog. The <SmallTeam slug="posthog-ai"/> was building a shared infrastructure with the same philosophy as [HogQL](/docs/sql): a single system for each small team to extend.
 
-Without it: 
+**Without it:** 
 - fragmented experience
 - duplicated effort
 - maintenance nightmare
 - Teams stuck building simple features from scratch instead of advanced stuff by default
 
-With it: 
+**With it:** 
 - shared agent system any product can extend
 - reusable components that work everywhere
 - consistent UX patterns
@@ -79,8 +79,7 @@ For example, if you ask PostHog AI to "create a funnel tracking the signup flow,
 4. Switch to CDP mode if you want to set up a destination based on the funnel results
 
 ![automation screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Placeholder_example_84707e030c.png)
-
-_Interested in a technical deep-dive? Peep our [AI platform architecture](/handbook/engineering/ai/architecture)_
+<Caption>_Interested in a technical deep-dive? Peep our [AI platform architecture](/handbook/engineering/ai/architecture)_</Caption>
 
 ### How this changes who can use PostHog
 As a company, we’re well known for our [ICP discipline](/newsletter/ideal-customer-profile-framework). Knowing who you’re building for is important — it keeps teams focused, docs clean, and marketing honest. But as PostHog AI matures, we need to keep an eye on the expanding circle.
@@ -97,7 +96,7 @@ With PostHog AI, almost everything you can do in the UI is now doable in natural
 **The result**: product teams that used to rely on one 'PostHog expert' can now self‑serve. Engineers can delegate data questions, PMs can query funnels directly, and analysts can move faster instead of acting as human middleware.
 
 ![automation screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Post_Hog_AI_ICP_c67ac2fa53.jpg)
-_A common piece of feedback we heard during user interviews was that PostHog AI made adoption of PostHog easier for less technical team members._ 
+<Caption>_A common piece of feedback we heard during user interviews was that PostHog AI made adoption of PostHog easier for less technical team members._</Caption> 
 
 ### Build systems, not sidekicks
 Does that mean we’re building a product analytics platform for everyone now? Absolutely not. The point is that AI makes product engineers even more powerful — while also making PostHog accessible to the people they work with. 
@@ -115,5 +114,3 @@ But most people won’t care, so long as the tool makes their workflow better:
 
 ### Try it
 [Enable PostHog AI](/docs/posthog-ai/allow-access) and ask it a question you actually care about this week. Need some inspiration? Check out our [example prompts](/docs/posthog-ai/example-prompts).
-<br />
-<ArrayCTA />
