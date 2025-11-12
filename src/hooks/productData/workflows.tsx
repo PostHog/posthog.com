@@ -20,14 +20,14 @@ export const workflows = {
     },
     volume: 10000,
     seo: {
-        title: 'Workflows – Automate workflows with your product data',
+        title: 'Workflows – Automate workflows with product data',
         description:
-            'Trigger actions based on live user behavior – who clicked what, what feature they used, and how recently.',
+            'Trigger Slack messages, emails, or events based on live user behavior.',
     },
     overview: {
-        title: 'Automate workflows with your product data',
+        title: 'Automate workflows with  product data',
         description:
-            'Trigger actions based on live user behavior – who clicked what, what feature they used, and how recently. Connect events, feature flags, and experiments to Slack alerts, emails, or custom logic.',
+            'Trigger Slack messages, emails, or events based on live user behavior.',
         textColor: 'text-black',
         layout: 'overlay',
     },
@@ -232,7 +232,13 @@ export const workflows = {
         summary: {
             them: [
                 {
-                    title: 'You only need workflows without the product data ',
+                    title: 'You only need workflows without the product data',
+                },
+                {
+                    title: 'You only want simple marketing automations',
+                },
+                {
+                    title: 'You need granular permissioning and audit logs for a large org',
                 },
                 // {
                 //     title: 'Deep mobile support',
@@ -244,10 +250,13 @@ export const workflows = {
             ],
             us: [
                 {
-                    title: 'You want automations that run on top of your live product data.',
+                    title: 'You want automations that run on top of your live product data',
                 },
                 {
                     title: 'You want to trigger actions from real user behavior',
+                },
+                {
+                    title: 'You want usage-based pricing that grows with you',
                 },
                 {
                     title: 'You already use PostHog for analytics, feature flags, or experiments',
