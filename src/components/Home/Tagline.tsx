@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import usePostHog from 'hooks/usePostHog'
 
 const taglineContent = {
-    control: 'We make dev tools that help product engineers build successful products.',
+    control: 'We make dev tools that help product engineers build successful products!',
     test: 'Debug your code, ship features faster, and keep all your usage and customer data in one stack.',
 }
 
