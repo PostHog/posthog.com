@@ -663,17 +663,11 @@ If you need to start fresh with a clean database (for example, if your local dat
     hogli start
     ```
 
-    Or if you're not using Flox:
-
-    ```bash
-    ./bin/start
-    ```
-
 3. Wait for all migrations to complete. You can monitor the logs to ensure migrations have finished running.
 
 4. Once PostHog is running, click the **generate-demo-data** button in the UI, then type `r` to generate test data.
 
-> **Note:** This process will completely wipe your local databases (not only Postgres and Clickhouse but also any assets you might have in Dagster or schedules in Temporal). Make sure you don't have any important local data before proceeding.
+> **Note:** This process will completely wipe your local database. Make sure you don't have any important local data before proceeding.
 
 ## Extra: Working with the data warehouse
 
