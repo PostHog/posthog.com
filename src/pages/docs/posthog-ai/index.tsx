@@ -50,7 +50,7 @@ const phFeatures = [
         title: 'Error tracking',
         description: 'Let PostHog AI search and find the most impactful issues and errors.',
         icon: <IconWarning className="text-orange" />,
-        url: '/docs/error/tracking',
+        url: '/docs/error-tracking',
     },
     {
         title: 'Surveys',
