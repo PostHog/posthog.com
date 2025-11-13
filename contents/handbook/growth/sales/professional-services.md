@@ -60,6 +60,8 @@ Here we make sure that PostHog is correctly integrated into the codebase using o
 
 Once data is integrated, we should provide an intro to PostHog session to the customer to teach them the basics of how to use PostHog.  This will be tailored to their needs but should provide a baseline understanding of how to navigate the UI, where to find events, create insights, filter replays, etc.
 
+> Whilst Sales and CS folks also provide ongoing training to customers in their book of business, it's important to ensure they have a basic understanding of PostHog, especially if they are brand new.
+
 ### Migration
 
 Whilst it's crucial to get live data flowing in to PostHog, the customer may also want to bring over historic data to PostHog from their previous tools.  This will normally be product analytics data, and we have both [managed](/docs/migrate/managed-migrations) and [manual](/docs/migrate/migrate-to-cloud) processes for this depending on the incumbent tool.
