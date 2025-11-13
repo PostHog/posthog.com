@@ -47,7 +47,7 @@ const posthogProxy = async (request: Request) => {
   const response = await fetch(newUrl, {
     method: request.method,
     headers,
-    body: request.body
+    body: request.body,
     // This is required when passing a streaming body (like request.body) to fetch.
     duplex: 'half',
   });
