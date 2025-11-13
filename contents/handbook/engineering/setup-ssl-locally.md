@@ -16,11 +16,9 @@ The easiest option is to use ngrok.
 
 ## Set up SSL via ngrok
 
-1. Make sure you [have ngrok installed](https://ngrok.com/download).
+1. Sign up for an ngrok account (or sign in with GitHub) and run `ngrok authtoken <TOKEN>`
 
-2. Sign up for an ngrok account (or sign in with GitHub) and run `ngrok authtoken <TOKEN>`
-
-3. Find your ngrok config file location:
+2. Find your ngrok config file location:
 
 ```bash
 ngrok config check --log=stdout
@@ -28,7 +26,7 @@ ngrok config check --log=stdout
 
 On macOS, this will show `~/Library/Application Support/ngrok/ngrok.yml` (XDG location). The legacy location `~/.ngrok2/ngrok.yml` is deprecated.
 
-4. Edit your ngrok config file and add the following after the line with `authtoken: <TOKEN>`:
+3. Edit your ngrok config file and add the following after the line with `authtoken: <TOKEN>`:
 
 ```
 tunnels:
@@ -40,13 +38,13 @@ tunnels:
     addr: 8234
 ```
 
-5. Start ngrok. This will give you tunnel URLs such as https://68f83839843a.ngrok-free.dev
+4. Start ngrok. This will give you tunnel URLs such as https://68f83839843a.ngrok-free.dev
 
 ```bash
 ngrok start --all
 ```
 
-6. Copy the HTTPS URL for the tunnel to port 8234 and set it as the value for the `JS_URL` environment variable. Then, start webpack:
+5. Copy the HTTPS URL for the tunnel to port 8234 and set it as the value for the `JS_URL` environment variable. Then, start webpack:
 
 ```bash
 export WEBPACK_HOT_RELOAD_HOST=0.0.0.0
@@ -55,7 +53,7 @@ export JS_URL=https://68f83839843a.ngrok.io
 pnpm start
 ```
 
-7. Use the same URL as the value for `JS_URL` again and start the Django server
+6. Use the same URL as the value for `JS_URL` again and start the Django server
 
 ```bash
 export DEBUG=1
@@ -64,7 +62,7 @@ export JS_URL=https://68f83839843a.ngrok-free.dev
 python manage.py runserver
 ```
 
-8. Open the HTTPS URL for the tunnel to port 8000.
+7. Open the HTTPS URL for the tunnel to port 8000.
 
 **Tips & Tricks**
 
