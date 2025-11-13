@@ -652,7 +652,7 @@ If you need to start fresh with a clean database (for example, if your local dat
 1. Stop all PostHog services and remove all Docker volumes:
 
     ```bash
-    docker compose down -v
+    hogli dev:reset
     ```
 
     This will remove all data stored in Docker volumes, including your PostgreSQL, ClickHouse, and Redis data.
