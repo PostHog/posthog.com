@@ -484,8 +484,8 @@ export const QuestLog: React.FC<{
                                             <div
                                                 className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 border-solid bg-white dark:bg-accent-dark rotate-45 ${
                                                     selectedQuest === questItems.length - 1
-                                                        ? 'border-r border-t border-primary dark:border-primary-dark left-full -translate-x-1/2'
-                                                        : 'border-l border-b border-primary dark:border-primary-dark right-full translate-x-1/2'
+                                                        ? 'border-r border-t border-primary left-full -translate-x-1/2'
+                                                        : 'border-l border-b border-primary right-full translate-x-1/2'
                                                 }`}
                                             ></div>
                                         </div>
