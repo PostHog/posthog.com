@@ -474,7 +474,7 @@ export const QuestLog: React.FC<{
                                         }}
                                     >
                                         {/* Speech Bubble Container */}
-                                        <div className="relative rounded-lg shadow-sm bg-white dark:bg-accent-dark border border-solid border-primary dark:border-primary-dark px-1 py-1 min-w-[120px] max-w-[175px]">
+                                        <div className="relative rounded-lg shadow-sm bg-white dark:bg-accent-dark border border-solid border-primary dark:border-primary px-1 py-1 min-w-[120px] max-w-[175px]">
                                             {/* Speech Text */}
                                             <div className="text-xs font-medium text-primary dark:text-primary-dark text-center">
                                                 <span className="inline-block">{speechText}</span>
