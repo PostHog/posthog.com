@@ -34,7 +34,7 @@ If you already have a CSP set up, you need to update the following headers to st
 > **Note:** The `/report/` endpoint **requires** the trailing slash. Omitting it may cause reports to fail to send correctly.
 
 ```http
-Content-Security-Policy: <your existing rules here>; report-uri <ph_client_api_host>/report/?token=<ph_project_api_key>; report-to posthog
+Content-Security-Policy: <your existing rules here>; report-to posthog
 Reporting-Endpoints: posthog="<ph_client_api_host>/report/?token=<ph_project_api_key>"
 ```
 
@@ -48,7 +48,7 @@ To make sure that your CSP rules don't block PostHog from functioning correctly,
 > **Note:** The `/report/` endpoint **requires** the trailing slash. Omitting it may cause reports to fail to send correctly.
 
 ```http
-Content-Security-Policy-Report-Only: <your initial rules here>; report-uri <ph_client_api_host>/report/?token=<ph_project_api_key>; report-to posthog
+Content-Security-Policy-Report-Only: <your initial rules here>; report-to posthog
 Reporting-Endpoints: posthog="<ph_client_api_host>/report/?token=<ph_project_api_key>"
 ```
 
