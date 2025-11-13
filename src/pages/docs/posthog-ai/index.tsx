@@ -15,6 +15,7 @@ import {
     IconLlmAnalytics,
     IconDatabase,
     IconSparkles,
+    IconWarning,
 } from '@posthog/icons'
 import Card from 'components/Card'
 import Link from 'components/Link'
@@ -48,28 +49,28 @@ const phFeatures = [
     {
         title: 'Error tracking',
         description: 'Let PostHog AI search and find the most impactful issues and errors.',
-        icon: <IconLlmAnalytics className="text-[#681291]" />,
-        url: '/docs/llm-analytics',
+        icon: <IconWarning className="text-orange" />,
+        url: '/docs/error/tracking',
     },
     {
         title: 'Surveys',
         description: 'Ask PostHog AI to generate surveys and analyze responses.',
         icon: <IconUser className="text-red" />,
-        url: '/docs/product-analytics/identify',
+        url: '/docs/surveys',
     },
 ]
 
 const posthogAIFeatures = [
-    { text: 'Build insights', url: '/docs/posthog-ai/tools-and-capabilities' },
-    { text: 'Create dashboards', url: '/docs/posthog-ai/tools-and-capabilities' },
+    { text: 'Build insights', url: '/docs/posthog-ai/write-and-edit-sql' },
+    { text: 'Create dashboards', url: '/docs/posthog-ai/investigate-web-traffic' },
     { text: 'Deep research', url: '/docs/posthog-ai/deep-research', comingSoon: true },
     { text: 'Summarize session replays', url: '/docs/posthog-ai/session-summaries', comingSoon: true },
-    { text: 'Use dev tools', url: '/docs/posthog-ai/tools-and-capabilities' },
-    { text: 'Analyze product data and event schema', url: '/docs/posthog-ai/tools-and-capabilities' },
-    { text: 'Navigate PostHog UI', url: '/docs/posthog-ai/tools-and-capabilities' },
-    { text: 'Manage context', url: '/docs/posthog-ai/tools-and-capabilities' },
-    { text: 'Search documentation', url: '/docs/posthog-ai/tools-and-capabilities' },
-    { text: 'Save memory', url: '/docs/posthog-ai/tools-and-capabilities' },
+    { text: 'Use dev tools', url: '/docs/posthog-ai/tools' },
+    { text: 'Analyze product data and event schema', url: '/docs/posthog-ai/tools' },
+    { text: 'Navigate PostHog UI', url: '/docs/posthog-ai/tools' },
+    { text: 'Manage context', url: '/docs/posthog-ai/context-and-commands' },
+    { text: 'Search documentation', url: '/docs/posthog-ai/tools' },
+    { text: 'Save memory', url: '/docs/posthog-ai/edit-memory' },
 ]
 
 export const Content = () => {
@@ -129,7 +130,13 @@ export const Content = () => {
                         if (i % 2 === 0) rows.push({ cells: [] as any[] })
                         const row = rows[rows.length - 1]
                         row.cells.push(
-                            { content: <a href={feature.url}>{feature.text}</a> },
+                            {
+                                content: feature.comingSoon ? (
+                                    <a onClick={(event) => event.preventDefault()}>{feature.text}</a>
+                                ) : (
+                                    <a href={feature.url}>{feature.text}</a>
+                                ),
+                            },
                             {
                                 content: feature.comingSoon ? (
                                     <IconSpinner className="h-5 text-primary" />
