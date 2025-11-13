@@ -1285,7 +1285,7 @@ export const handbookSidebar = [
                                 name: 'Cross sell motions',
                                 url: '/handbook/growth/sales/cross-sell-motions',
                             },
-                             {
+                            {
                                 name: 'Communications templates',
                                 url: '/handbook/growth/sales/communications-templates',
                             },
@@ -3916,6 +3916,23 @@ export const docsMenu = {
                         {
                             name: 'Track in GitHub and Linear',
                             url: '/docs/error-tracking/external-tracking',
+                        },
+                    ],
+                },
+                {
+                    name: 'Code variables',
+                    url: '/docs/error-tracking/code-variables',
+                    icon: 'IconBrackets',
+                    color: 'purple',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/code-variables',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/error-tracking/code-variables/python',
                         },
                     ],
                 },
