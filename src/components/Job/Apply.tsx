@@ -258,7 +258,7 @@ const Form = ({
                     <div data-scheme="secondary" className="p-4 bg-accent border-b border-primary">
                         <h5 className="m-0">Heads up!</h5>
                         <p className="m-0 text-sm">
-                            It looks like you're applying from a country we don’t hire in (yet!). You can learn more
+                            It looks like you're applying from a country we don't hire in (yet!). You can learn more
                             about where we hire in our{' '}
                             <Link to="/handbook/people/hiring-process" state={{ newWindow: true }}>
                                 handbook
