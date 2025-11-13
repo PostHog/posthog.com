@@ -22,12 +22,18 @@ export const posthog_ai = {
     description: 'Your AI-powered product analyst and product manager',
     role: 'Helpful chatbot',
     handle: 'posthog_ai',
+    type: 'posthog_ai',
     color: 'blue',
     colorSecondary: 'lilac',
     category: 'automation',
     slug: 'ai',
     status: 'beta',
-    hideFromPricingTable: true,
+    slider: {
+        marks: [2500, 10000, 50000, 100000],
+        min: 2500,
+        max: 100000,
+    },
+    volume: 2500,
     seo: {
         title: 'PostHog AI – Your copilot for PostHog data and insights',
         description:
