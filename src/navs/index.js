@@ -688,10 +688,6 @@ export const handbookSidebar = [
                 name: 'Writing metadata',
                 url: '/handbook/content/metadata',
             },
-            {
-                name: 'Content components',
-                url: '/handbook/content/components',
-            },
         ],
     },
     {
@@ -1084,6 +1080,10 @@ export const handbookSidebar = [
         url: '',
         children: [
             {
+                name: 'Overview',
+                url: '/handbook/engineering/posthog-com/overview',
+            },
+            {
                 name: 'Developing the website',
                 url: '/handbook/engineering/posthog-com/developing-the-website',
             },
@@ -1285,7 +1285,7 @@ export const handbookSidebar = [
                                 name: 'Cross sell motions',
                                 url: '/handbook/growth/sales/cross-sell-motions',
                             },
-                             {
+                            {
                                 name: 'Communications templates',
                                 url: '/handbook/growth/sales/communications-templates',
                             },
@@ -4752,6 +4752,12 @@ export const docsMenu = {
                     url: '/docs/workflows/email-drip-campaign',
                     icon: 'IconDatabase',
                     color: 'orange',
+                },
+                {
+                    name: 'Import opt-out lists from Customer.io',
+                    url: '/docs/workflows/import-customerio-optouts',
+                    icon: 'IconDatabase',
+                    color: 'blue',
                 },
                 {
                     name: 'Resources',

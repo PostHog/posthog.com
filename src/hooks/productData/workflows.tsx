@@ -13,6 +13,7 @@ export const workflows = {
     colorSecondary: 'green-2',
     category: 'automation',
     status: 'beta',
+    hideFromPricingTableAndCalculator: true,
     slider: {
         marks: [10000, 50000, 100000, 1000000, 10000000],
         min: 10000,
@@ -21,13 +22,11 @@ export const workflows = {
     volume: 10000,
     seo: {
         title: 'Workflows – Automate workflows with product data',
-        description:
-            'Trigger Slack messages, emails, or events based on live user behavior.',
+        description: 'Trigger Slack messages, emails, or events based on live user behavior.',
     },
     overview: {
         title: 'Automate workflows with  product data',
-        description:
-            'Trigger Slack messages, emails, or events based on live user behavior.',
+        description: 'Trigger Slack messages, emails, or events based on live user behavior.',
         textColor: 'text-black',
         layout: 'overlay',
     },
