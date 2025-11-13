@@ -374,10 +374,8 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
 export default function MediaUploadModal() {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
-    const { getJwt, user } = useUser()
+    const { getJwt, user, fetchUser } = useUser()
     const [loading, setLoading] = useState(0)
-    const [images, setImages] = useState<any[]>([])
-    const [searchQuery, setSearchQuery] = useState('')
     const [isPasting, setIsPasting] = useState(false)
     const { addToast } = useToast()
     const isModerator = user?.role?.type === 'moderator'
@@ -389,15 +387,15 @@ export default function MediaUploadModal() {
             await Promise.all(
                 acceptedFiles.map(async (file: File) => {
                     setLoading((loadingNumber) => loadingNumber + 1)
-                    const uploadedImage = await uploadImage(file, jwt, {
+                    await uploadImage(file, jwt, {
                         field: 'images',
                         id: profileID,
                         type: 'api::profile.profile',
                     })
                     setLoading((loadingNumber) => loadingNumber - 1)
-                    setImages((images) => [...images, uploadedImage])
                 })
             ).catch((err) => console.error(err))
+            await fetchUser()
         }
     }
 
@@ -409,21 +407,7 @@ export default function MediaUploadModal() {
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-    // Filter images based on search query
-    const allImages = [...images, ...((user?.profile as any)?.images || [])]
-
-    const filteredImages = searchQuery
-        ? allImages.filter((image) => image.name.toLowerCase().includes(searchQuery.toLowerCase()))
-        : allImages
-
-    // Handle ESC key to clear search and paste events
     useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') {
-                setSearchQuery('')
-            }
-        }
-
         const handlePaste = async (e: ClipboardEvent) => {
             const items = e.clipboardData?.items
             if (!items) return
@@ -472,10 +456,8 @@ export default function MediaUploadModal() {
             }
         }
 
-        window.addEventListener('keydown', handleKeyDown)
         window.addEventListener('paste', handlePaste)
         return () => {
-            window.removeEventListener('keydown', handleKeyDown)
             window.removeEventListener('paste', handlePaste)
         }
     }, [onDrop, addToast])
@@ -536,7 +518,7 @@ export default function MediaUploadModal() {
                         </div>
                     </div>
 
-                    <MediaLibrary />
+                    <MediaLibrary mediaUploading={loading} />
                 </div>
             </div>
         </ScrollArea>

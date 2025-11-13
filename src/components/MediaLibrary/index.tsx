@@ -9,7 +9,7 @@ import OSButton from 'components/OSButton'
 import { IconSpinner } from '@posthog/icons'
 import debounce from 'lodash/debounce'
 
-export default function MediaLibrary(): JSX.Element {
+export default function MediaLibrary({ mediaUploading }: { mediaUploading: number }): JSX.Element {
     const { getJwt } = useUser()
     const [showAll, setShowAll] = useState(false)
     const [tag, setTag] = useState('all-tags')
@@ -96,6 +96,10 @@ export default function MediaLibrary(): JSX.Element {
                 <div className="flex-grow-1 min-h-0">
                     <ScrollArea>
                         <ul className="list-none m-0 p-0 space-y-4 my-4">
+                            {mediaUploading > 0 &&
+                                Array.from({ length: mediaUploading }).map((_, index) => (
+                                    <li key={index} className="w-full h-20 bg-accent rounded-md animate-pulse mt-2" />
+                                ))}
                             {isLoading && images.length === 0 ? (
                                 <li className="text-center text-secondary py-8">Loading images...</li>
                             ) : images.length === 0 ? (
