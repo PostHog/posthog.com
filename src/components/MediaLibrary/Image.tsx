@@ -196,7 +196,10 @@ export default function Image({
                     </div>
                 ) : (
                     <div className="flex space-x-2 items-center">
-                        <p className="text-sm line-clamp-1 m-0 text-ellipsis" title={generateCloudinaryUrl('orig')}>
+                        <p
+                            className="text-sm line-clamp-1 m-0 text-ellipsis max-w-sm"
+                            title={generateCloudinaryUrl('orig')}
+                        >
                             {generateCloudinaryUrl('orig')}
                         </p>
                         <button

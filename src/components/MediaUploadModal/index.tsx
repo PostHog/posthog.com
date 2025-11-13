@@ -17,6 +17,7 @@ import { useWindow } from '../../context/Window'
 import { useToast } from '../../context/Toast'
 import Loading from 'components/Loading'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import MediaLibrary from 'components/MediaLibrary'
 
 // File System Access API types
 declare global {
@@ -82,7 +83,10 @@ const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type
     return (
         <li className="flex space-x-2 items-start">
             <div className="overflow-hidden size-16 flex flex-shrink-0 justify-center items-center bg-accent rounded-sm border border-input">
-                <img src={resource_type === 'video' ? previewUrl : generateCloudinaryUrl('orig-optimized')} loading="lazy" />
+                <img
+                    src={resource_type === 'video' ? previewUrl : generateCloudinaryUrl('orig-optimized')}
+                    loading="lazy"
+                />
             </div>
             <div className="flex-grow">
                 <p className="m-0 font-bold line-clamp-1 text-ellipsis max-w-xl">
@@ -302,8 +306,9 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
         return (
             <div key={node.name} style={{ paddingLeft: `${level * 16}px` }}>
                 <div
-                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${node.type === 'file' ? 'draggable' : ''
-                        }`}
+                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${
+                        node.type === 'file' ? 'draggable' : ''
+                    }`}
                     onClick={() => (node.type === 'directory' ? toggleDirectory(node) : handleFileClick(node))}
                     draggable={node.type === 'file'}
                     onDragStart={(e) => handleFileDrag(e, node)}
@@ -336,7 +341,7 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
     }
 
     return (
-        <div className="border border-input rounded-md p-4 h-[200px] overflow-auto">
+        <div className="border border-input rounded-md p-4 h-full overflow-auto">
             {!rootDirectory ? (
                 <div className="flex flex-col items-center justify-center h-full">
                     <p className="text-sm text-secondary mb-1">Select a folder to browse local files</p>
@@ -449,8 +454,9 @@ export default function MediaUploadModal() {
                 if (validFiles.length > 0) {
                     await onDrop(validFiles)
                     addToast({
-                        description: `Pasted ${validFiles.length} image${validFiles.length > 1 ? 's' : ''
-                            } from clipboard`,
+                        description: `Pasted ${validFiles.length} image${
+                            validFiles.length > 1 ? 's' : ''
+                        } from clipboard`,
                         duration: 3000,
                     })
                 }
@@ -491,16 +497,18 @@ export default function MediaUploadModal() {
                             <div
                                 {...getRootProps()}
                                 data-scheme="secondary"
-                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${isDragActive
+                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${
+                                    isDragActive
                                         ? 'bg-input border-primary'
                                         : isPasting
-                                            ? 'bg-input border-primary animate-pulse'
-                                            : ''
-                                    }`}
+                                        ? 'bg-input border-primary animate-pulse'
+                                        : ''
+                                }`}
                             >
                                 <div
-                                    className={`flex flex-col justify-center items-center h-full p-8 ${isDragActive || isPasting ? '' : 'opacity-50'
-                                        }`}
+                                    className={`flex flex-col justify-center items-center h-full p-8 ${
+                                        isDragActive || isPasting ? '' : 'opacity-50'
+                                    }`}
                                 >
                                     {isPasting ? (
                                         <Loading className="size-12 mb-4" />
@@ -511,8 +519,8 @@ export default function MediaUploadModal() {
                                         {isPasting
                                             ? 'Pasting image...'
                                             : isDragActive
-                                                ? 'Drop files here'
-                                                : 'Drop files or paste to upload'}
+                                            ? 'Drop files here'
+                                            : 'Drop files or paste to upload'}
                                     </p>
                                     <p className="text-sm text-secondary text-center mt-2 m-0">
                                         {isPasting
@@ -528,49 +536,7 @@ export default function MediaUploadModal() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col">
-                        <h3 className="m-0">Your uploads</h3>
-                        <p className="text-sm text-secondary mt-1 mb-4">Recent uploads to Cloudinary</p>
-
-                        <div className="relative mb-4">
-                            <input
-                                type="text"
-                                className="w-full pr-8 rounded"
-                                placeholder="Search filenames..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                            />
-                            {searchQuery && (
-                                <button
-                                    onClick={() => setSearchQuery('')}
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 text-secondary hover:text-primary transition-colors"
-                                    aria-label="Clear search"
-                                >
-                                    <IconX className="size-4" />
-                                </button>
-                            )}
-                        </div>
-
-                        <div className="flex-grow border border-input rounded-md p-4 overflow-auto">
-                            <ul className="list-none m-0 p-0 space-y-2">
-                                {loading > 0 &&
-                                    Array.from({ length: loading }).map((_, index) => (
-                                        <li
-                                            key={index}
-                                            className="w-full h-20 bg-accent rounded-md animate-pulse mt-2"
-                                        />
-                                    ))}
-                                {filteredImages.map((image) => {
-                                    return <Image key={image.id} {...image} />
-                                })}
-                                {filteredImages.length === 0 && !loading && searchQuery && (
-                                    <li className="text-center text-secondary py-4">
-                                        No files matching "{searchQuery}"
-                                    </li>
-                                )}
-                            </ul>
-                        </div>
-                    </div>
+                    <MediaLibrary />
                 </div>
             </div>
         </ScrollArea>

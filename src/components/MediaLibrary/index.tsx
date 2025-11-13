@@ -57,7 +57,7 @@ export default function MediaLibrary(): JSX.Element {
     return (
         <div data-scheme="primary" className="h-full">
             <div className="h-full flex flex-col">
-                <div className="flex space-x-2 flex-grow-0 flex-shrink-0 p-4">
+                <div className="flex space-x-2 flex-grow-0 flex-shrink-0">
                     <div className="flex-1">
                         <OSInput
                             size="md"
@@ -95,7 +95,7 @@ export default function MediaLibrary(): JSX.Element {
                 </div>
                 <div className="flex-grow-1 min-h-0">
                     <ScrollArea>
-                        <ul className="list-none m-0 p-0 space-y-4 my-4 px-4">
+                        <ul className="list-none m-0 p-0 space-y-4 my-4">
                             {isLoading && images.length === 0 ? (
                                 <li className="text-center text-secondary py-8">Loading images...</li>
                             ) : images.length === 0 ? (

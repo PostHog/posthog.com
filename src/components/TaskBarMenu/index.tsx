@@ -184,7 +184,7 @@ export default function TaskBarMenu() {
                                     icon: <IconUpload className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                     onClick: () =>
                                         addWindow(
-                                            <MediaLibrary
+                                            <MediaUploadModal
                                                 newWindow
                                                 location={{ pathname: `media-upload` }}
                                                 key={`media-upload`}
