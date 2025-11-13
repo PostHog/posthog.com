@@ -4754,6 +4754,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Import opt-out lists from Customer.io',
+                    url: '/docs/workflows/import-customerio-optouts',
+                    icon: 'IconDatabase',
+                    color: 'blue',
+                },
+                {
                     name: 'Resources',
                 },
                 {
