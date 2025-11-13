@@ -83,7 +83,7 @@ You can set mask patterns for specific code blocks using contexts:
 
 ```python
 with new_context():
-    set_code_variables_mask_patterns_context[r".*password.*"]
+    set_code_variables_mask_patterns_context([r".*password.*"])
     mask_patterns_will_only_apply_to_this_method()
 ```
 
@@ -116,6 +116,6 @@ You can set ignore patterns for specific code blocks using contexts:
 
 ```python
 with new_context():
-    set_code_variables_ignore_patterns_context[r"cache_.*"]
+    set_code_variables_ignore_patterns_context([r"cache_.*"])
     ignore_patterns_will_only_apply_to_this_method()
 ```
