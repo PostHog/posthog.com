@@ -15,8 +15,7 @@ Although our standard monthly [pricing](/pricing) has volume discounts built in,
 1. In our consumption-based pricing model, the easiest way to reduce spend is to ensure that the customer is only sending data to us which is valuable to them. There is [different guidance here](/docs/billing/estimating-usage-costs) depending on which product(s) they are looking at.
 2. **Prepaid credit:** We offer a 20% discount on a paid-up-front plan of >$20k, because it's beneficial to PostHog to have a customer committed.
 3. **Higher spend:** We offer an additional 5% and then 15% on top of the prepaid credit plans when the customer spends above $60k and $100k respectively.
-4. **Multi-year:** We offer an additional 5% for each additional committed credit renewal under a prepaid contract, as longer commitments are beneficial to PostHog (see table below). Credits rollover in-between for multi-year contracts.
-5. **Up-front payment:** We offer an additional 2.5% per year where a _multi-year_ contract is all **paid up-front**, as it's better for PostHog to have the money in the bank.
+4. **Multi-purchase commitments:** We offer an additional 5% for each successive credit purchase commitment (up to 3), as longer relationships are beneficial to PostHog (see table below). Credits rollover in-between for multi-purchase contracts.
 
 > We don't offer a discount for signing a contract by some fixed date (e.g so the deal closes in a specific quarter).
 
@@ -27,7 +26,7 @@ The below table summarizes the discount levels contained in points 2-4:
 <table>
 <thead>
 <tr>
-<th>Annual Spend</th>
+<th>Credit Purchase Amount</th>
 <th><strong>Commitment</strong></th>
 <th><strong>Minimum Credit</strong></th>
 <th><strong>Discount</strong></th>
@@ -36,49 +35,49 @@ The below table summarizes the discount levels contained in points 2-4:
 <tbody>
 <tr>
 <td rowspan="3">between $20k and $60k</td>
-<td><strong>1 year</strong></td>
+<td><strong>1x purchase</strong></td>
 <td>$25,000</td>
 <td>20%</td>
 </tr>
 <tr>
-<td class="pl-4"><strong>2 year</strong></td>
+<td class="pl-4"><strong>2x purchase</strong></td>
 <td>$26,666</td>
 <td>25%</td>
 </tr>
 <tr>
-<td class="pl-4"><strong>3 year</strong></td>
+<td class="pl-4"><strong>3x purchase</strong></td>
 <td>$28,572</td>
 <td>30%</td>
 </tr>
 <tr>
 <td rowspan="3">between $60k and $100k</td>
-<td><strong>1 year</strong></td>
+<td><strong>1x purchase</strong></td>
 <td>$80,000</td>
 <td>25%</td>
 </tr>
 <tr>
-<td class="pl-4"><strong>2 year</strong></td>
+<td class="pl-4"><strong>2x purchase</strong></td>
 <td>$85,715</td>
 <td>30%</td>
 </tr>
 <tr>
-<td class="pl-4"><strong>3 year</strong></td>
+<td class="pl-4"><strong>3x purchase</strong></td>
 <td>$92,308</td>
 <td>35%</td>
 </tr>
 <tr>
 <td rowspan="3">$100k or more</td>
-<td><strong>1 year</strong></td>
+<td><strong>1x purchase</strong></td>
 <td>$153,847</td>
 <td>35%</td>
 </tr>
 <tr>
-<td class="pl-4"><strong>2 year</strong></td>
+<td class="pl-4"><strong>2x purchase</strong></td>
 <td>$166,667</td>
 <td>40%</td>
 </tr>
 <tr>
-<td class="pl-4"><strong>3 year</strong></td>
+<td class="pl-4"><strong>3x purchase</strong></td>
 <td>$181,819</td>
 <td>45%</td>
 </tr>
@@ -141,7 +140,7 @@ All free credits associated with startup plan roll-offs are one-time only, and s
 
 ## Additional credit purchase
 
-As it's often difficult to right-size the credit needed for a longer term plan as a standard we offer to honor the discount provided in the original purchase for any additional credit purchased in the first half of a contract term (e.g. 6 months for an annual plan). Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in #sales-alerts to help notify account owners about this.
+For single purchase commitments, when the customer runs out, they can simply purchase more at the appropriate amount, or continue monthly. However, with multi-purchase commitments, a customer may prefer not to repurchase the whole second or third committed amount, eg when they are trying to align with annual budget cycles. In this case, we permit one top-up purchase in between purchases of commitment amounts, provided they re-sign a contract stating that they will purchase the top up amount *and* the remaining commitment amounts. There are alerts set up in #sales-alerts to notify account owners about faster-than-anticipated credit consumption and credit depletion.
 
 ## Price Guarantees & Lock-ins
 
@@ -155,21 +154,13 @@ This request most often comes from procurement teams unfamiliar with our pricing
 
 > "We've dropped Events pricing [X]% over [timeframe]. A price guarantee would have cost you more. We're committed to being the cheapest at every scale—if we're not, tell us. Our prepaid credits for usage based pricing gives budget control without betting against our commitment to low prices."
 
-## Multi-year credit allocation
+## Multi-purchase credit allocation
 
-### Paid up-front
+### Credit paid per commitment period
 
-We will allocate all the credit purchased to the Stripe account when the contract is signed. As above, they can purchase additional credit in the first half of the contract term and take advantage of the same discount as specified in the original contract.
+We will allocate the first commitment amount to the Stripe account when the contract is signed. For the second and third commitment amount, only when the respective payments have been received.
 
-### Paid yearly
-
-We will allocate the credit for that year to the Stripe account when the contract is signed, and then again when subsequent annual invoices are raised.
-
-If a customer wishes to use subsequent year's credit early they must agree to pay the invoice for that year early before the credit is transferred.
-
-The additional credit purchase applies to each year separately, e.g. they can purchase additional credits at the same discount level in the first 6 months of each year.
-
-You can see a signed multi-year contract set up in this way by navigating to Documents -> Examples (folder) inside of [PandaDoc](https://app.pandadoc.com).
+You can see a signed multi-purchase contract set up in this way by navigating to Documents -> Examples (folder) inside of [PandaDoc](https://app.pandadoc.com).
 
 ## Uptime SLA
 
@@ -186,9 +177,9 @@ More details on how exactly the uptime SLA works can be found in our [terms](/te
 
 Our strong preference is for customers to pay by credit card, as this is easier to manage in Stripe and has a lower risk of the customer forgetting to make the payment (which means we have to spend more time chasing).
 
-If a customer wants to pay by ACH or bank transfer, we will usually only consider this if they are paying for 1 year or more up front. This is more likely to be the case for very large customers.
+If a customer wants to pay by ACH or bank transfer, we will usually only consider this if they are making a prepaid credit purchase of $20k or more. This is more likely to be the case for very large customers.
 
-For customers in an annual contract but paying quarterly we require them to pay via credit card - ACH or bank transfer are not accepted.
+We do not allow customers to amortize credit purchases, as it creates distractions for both us and them when they consume the credit before all payments are made. The payment must be upfront.
 
 > We absolutely do not allow payment by check.
 
@@ -201,7 +192,7 @@ Sometimes customers will be locked into a contract with a competitor, but want t
 Some rules:
 
 -   They need to share a copy of their current contract/pricing/bank statement as proof.
--   They sign up to an annual contract worth $20k+/year, paid up front. Their PostHog contract starts when their current one expires.
+-   They sign up to a prepaid credit contract worth $20k+ or more, paid up front. Their PostHog contract starts when their current one expires.
 -   Their usage in the overlap period needs to be proportionate to the contract they've signed, ie. if they sign a $50k contract and have 6 months to run, they get $25k of PostHog credit for free.
 -   The competitor they're using has to be 'real', ie. not some random side project. As a general rule, anyone we have written a [comparison article](/blog/tags/comparisons) about counts.
 -   We have final discretion on deciding who gets the deal.
@@ -224,13 +215,7 @@ In order to qualify for this, the customer needs to send us the full quote docum
 
 ### When they don't have enough credit to cover their term
 
-We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/archives/C071PGWKBQS">#sales-alerts</PrivateLink> when a customer is going to run out of credit before their contract term ends, with the estimated runway remaining. The Vitally account owner (AE or CSM) will be tagged in this message. It's best to be proactive here so that the customer is right-sized well before the credit runs out:
-
--   If they will run out of credit or wish to buy more within the **first 6 months** of the contract term, they can still take advantage of their initial discount. You'll need to have them sign a new order form which adds the additional credit, and it should expire on the date of the original order form.
-    -   Example: Their original order form was signed on 1st January with a 12-month term. Their expansion order form could be signed on 1st June with a 7-month term. Make sure the end date lines up with the end date of the original contract to avoid any issues with the billing server and ARR calculation.
--   If they will run out of credit with **less than 2 months** remaining on their initial term, as long as they sign a renewal order form to start at the end of the original contract term we will cover their usage for free until the renewal date, assuming the renewal order form is signed before they run out of credit and their new contract amount is equal to or greater than the current contract amount.
--   If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date. This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
-    -   Example: Their original order form was signed on 1st January with a 12-month term and they run out of credits in September. We need a new 12-month order form in place with a Contract Start Date of September 1st.
+Most customers try to map purchases to annual budget cycles, so we have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/archives/C071PGWKBQS">#sales-alerts</PrivateLink> when a customer is going to run out of credit before the year ends, with the estimated runway remaining. The Vitally account owner (AE or CSM) will be tagged in this message. It's best to be proactive here so that the customer can plan their purchase well before the credit runs out:
 
 For any of the above scenarios you should use our [discounting principles](contract-rules#discounts) which apply to the spend.
 
@@ -238,7 +223,7 @@ For any of the above scenarios you should use our [discounting principles](contr
 
 ### When they will end the contract term with credit remaining
 
-We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher spend than the original contract.
+We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher spend than the original contract. 
 
 ### When a customer doesn't renew their credit purchase
 When a customer chooses not to renew a prepaid credit contract we automatically remove any remaining credits on the expiry date. Their account will then roll onto our standard monthly plan and they'll be charged for usage. It's the customer's responsibility to stop sending us events or cancel their subscription and downgrade to the free tier if they don't want to keep paying.
