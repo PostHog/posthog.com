@@ -45,7 +45,24 @@ export default function FreeTier({ size = 'normal' }: { size?: 'normal' | 'large
             />
             <FreeTierItem
                 name="Data warehouse"
-                allocation="1M rows"
+                allocation={
+                    <>
+                        1M rows + FREE historical{' '}
+                        <Tooltip
+                            content={() => (
+                                <>
+                                    Ongoing 1M rows/month + free historical syncs for the first 7 days for each new
+                                    source (unlimited on paid plan, 100M otherwise)
+                                </>
+                            )}
+                            placement="top"
+                        >
+                            <Icons.IconInfo
+                                className={`size-3 inline-block relative -top-px ${size === 'large' && 'size-5'}`}
+                            />
+                        </Tooltip>
+                    </>
+                }
                 icon={<Icons.IconDatabase className={`text-purple size-5 ${size === 'large' && 'size-7'}`} />}
                 size={size}
             />

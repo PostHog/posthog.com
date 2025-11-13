@@ -80,17 +80,25 @@ Security vulnerabilities and other security related findings can be reported via
 
 For information about current and past security advisories and CVEs, see our [advisories & CVEs page](/handbook/company/security-advisories).
 
-## Secure communication (aka preventing or detecting social engineering)
+## Reporting phishing
 
-We have a few policies in place to prevent social engineering attacks. 
+If you receive a phishing email/text/whatsapp, it's useful to report it to the security team so that they can make other employees aware. Take a screenshot and post it in `#phishing-attempts`. You may be asked to forward the email to [security-internal@posthog.com](mailto:security-internal@posthog.com) for further inspection.
 
-For our internal communications, we have the following policies:
-- We do not use email for critical communications. 
-- We do not use SMS for critical communications. 
-- We do not use phone for critical communications. 
+## Secure communication (aka preventing social engineering)
 
--> We only use Slack for critical communications
+We follow several best practices to combat social engineering attacks. See [Communication Methods](/handbook/company/communication#communication-methods) for more information.
 
-In case you should receive a suspicious email or other form of communication, please do not click on any links or open any attachments. Instead, please contact the team or person directly via Slack. E.g. if someone claims to be James, send them a message on Slack and ask "James, am I in a call with you right now?". This is a great and easy way to verify if this is legit. The same goes for any other form of communication. 
+## Impersonating users
 
-Please report any suspicious communications to `#project-security` on Slack. 
+To provide a great customer experience, PostHog employees may occasionally need to access customer data or log in as a user (i.e. *impersonate* them). We allow this access when it's necessary to deliver our service, following these guidelines:
+
+1. **Only impersonate when there’s a clear, demonstrable benefit for the customer.**  
+   For example, to investigate an incident, resolve a support issue, or review a customer’s setup to give recommendations on how to use PostHog more successfully.
+
+2. **Do not make any changes to a customer’s setup without explicit consent.** Exceptions to this are cases where we are reacting to incidents or bad configurations that are negatively impacting PostHog services in order to protect ourselves _and_ the customer.
+
+3. **Ask for permission whenever possible.**  
+   While this isn’t always feasible, such as during an active incident, it’s best practice to inform the customer before accessing their account.
+
+4. **Use good judgment.**  
+   If you’re unsure whether impersonation is justified, or if a customer might object, either seek their consent or find another way to get the information (for example, by checking our internal PostHog instance).

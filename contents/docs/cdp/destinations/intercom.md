@@ -5,11 +5,9 @@ templateId:
     - template-intercom-event
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
-<Requirements />
 
 You'll also need access to the relevant Intercom account.
 

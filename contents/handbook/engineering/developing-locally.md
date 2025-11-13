@@ -3,7 +3,6 @@ title: Developing locally
 sidebar: Docs
 showTitle: true
 ---
-
 > ❗️ This guide is intended only for development of PostHog itself. If you're looking to deploy PostHog
 > for your product analytics needs, go to [Self-host PostHog](/docs/self-host).
 
@@ -13,33 +12,33 @@ Before jumping into setup, let's dissect a PostHog.
 
 The app itself is made up of 4 main components that run simultaneously:
 
--   Celery worker (handles execution of background tasks)
--   Django server
--   Node.js plugin server (handles event ingestion and apps/plugins)
--   React frontend built with Node.js
+- Celery worker (handles execution of background tasks)
+- Django server
+- Node.js plugin server (handles event ingestion and apps/plugins)
+- React frontend built with Node.js
 
 We also have a growing collection of Rust services that handle performance-critical operations:
 
--   capture – receives HTTP event capture requests and extracts event payloads
--   feature-flags – handles feature flag evaluation
--   cymbal – processes source maps for error tracking
--   property-defs-rs – extracts and infers property definitions from events
--   hook services – manages webhooks with high performance
--   hogvm – evaluates HogQL bytecode via a stack machine implementation
+- capture – receives HTTP event capture requests and extracts event payloads
+- feature-flags – handles feature flag evaluation
+- cymbal – processes source maps for error tracking
+- property-defs-rs – extracts and infers property definitions from events
+- hook services – manages webhooks with high performance
+- hogvm – evaluates HogQL bytecode via a stack machine implementation
 
 These components rely on a few external services:
 
--   ClickHouse – for storing big data (events, persons – analytics queries)
--   Kafka – for queuing events for ingestion
--   MinIO – for storing files (session recordings, file exports)
--   PostgreSQL – for storing ordinary data (users, projects, saved insights)
--   Redis – for caching and inter-service communication
--   Zookeeper – for coordinating Kafka and ClickHouse clusters
+- ClickHouse – for storing big data (events, persons – analytics queries)
+- Kafka – for queuing events for ingestion
+- MinIO – for storing files (session recordings, file exports)
+- PostgreSQL – for storing ordinary data (users, projects, saved insights)
+- Redis – for caching and inter-service communication
+- Zookeeper – for coordinating Kafka and ClickHouse clusters
 
 When spinning up an instance of PostHog for development, we recommend the following configuration:
 
--   the external services run in Docker over `docker compose`
--   PostHog itself runs on the host (your system)
+- the external services run in Docker over `docker compose`
+- PostHog itself runs on the host (your system)
 
 This is what we'll be using in the guide below.
 
@@ -64,14 +63,14 @@ This is a faster option to get up and running. If you don't want to or can't use
 ![](https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png)
 3. Open the codespace, using one of the "Open in" options from the list.
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
-5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
+5. Ensure that you are using the right Node version (`nvm install 22 && nvm use 22`) then, in another terminal, run `pnpm i` (and use the same terminal for the following commands).
 6. Then run `uv sync`
-    - If this doesn't activate your python virtual environment, run `uv venv`
+    - If this doesn't activate your python virtual environment, run `uv venv` (install `uv` following instructions [here](https://docs.astral.sh/uv/getting-started/installation/#standalone-installer) if needed)
 7. Install `sqlx-cli` with `cargo install sqlx-cli` (install Cargo following instructions [here](https://doc.rust-lang.org/cargo/getting-started/installation.html) if needed)
 8. Now run `DEBUG=1 ./bin/migrate`
 9. Install [mprocs](https://github.com/pvolok/mprocs#installation) (`cargo install mprocs`)
 10. Run `./bin/start`.
-11. Open browser to http://localhost:8010/.
+11. Open browser to <http://localhost:8010/>.
 12. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
 ## Option 2: Developing locally
@@ -104,10 +103,10 @@ This is a faster option to get up and running. If you don't want to or can't use
     ```bash
     sudo apt install -y build-essential
     ```
+
 3. Continue with [cloning the repository](#cloning-the-repository).
 
 #### Cloning the repository
-
 
 Clone the [PostHog repo](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
 
@@ -115,10 +114,10 @@ Clone the [PostHog repo](https://github.com/posthog/posthog). All future command
 git clone https://github.com/PostHog/posthog && cd posthog/
 ```
 
-> [!NOTE] 
 > The `feature-flags` container relies on the presence of the GeoLite cities
-> database in the `/share` directory. You can download a copy via [this github repo](https://github.com/P3TERX/GeoLite.mmdb) 
-> which makes frequent releases. You may also need to modify the file permissions of the database.
+> database in the `/share` directory. If you haven't run `./bin/start` this database may not exist.
+> You can explicitly download it by running `./bin/download-mmdb`. You may also need to modify the
+> file permissions of the database with:
 >
 > `chmod 0755 ./share/GeoLite2-City.mmdb`
 
@@ -130,7 +129,7 @@ Flox is a development environment manager – it ensures we all have the same ri
 
 To get PostHog running in a dev environment:
 
-1. Install Flox (plus `ruff` and `rustup` for pre-commit checks outside the Flox env).
+1. Once you have cloned the repo and installed OrbStack, now install Flox (plus `ruff` and `rustup` for pre-commit checks outside the Flox env).
 
     ```bash
     brew install flox ruff rustup && rustup-init && rustup default stable
@@ -183,6 +182,7 @@ docker compose -f docker-compose.dev.yml up
 > **Friendly tip 3:** On Linux, you might need `sudo` – see [Docker docs on managing Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall). Or look into [Podman](https://podman.io/getting-started/installation) as an alternative that supports rootless containers.
 
 >**Friendly tip 4:** If you see `Error: (HTTP code 500) server error - Ports are not available: exposing port TCP 0.0.0.0:5432 -> 0.0.0.0:0: listen tcp 0.0.0.0:5432: bind: address already in use`, you have Postgres already running somewhere. Try `docker compose -f docker-compose.dev.yml` first, alternatively run `lsof -i :5432` to see what process is using this port.
+
 ```bash
 sudo service postgresql stop
 ```
@@ -236,6 +236,7 @@ Saved preprocessed configuration to '/var/lib/clickhouse/preprocessed_configs/us
 Finally, install Postgres locally. Even if you are planning to run Postgres inside Docker, we need a local copy of Postgres (version 11+) for its CLI tools and development libraries/headers. These are required by `pip` to install `psycopg2`.
 
 - On macOS:
+
     ```bash
     brew install postgresql
     ```
@@ -243,6 +244,7 @@ Finally, install Postgres locally. Even if you are planning to run Postgres insi
 This installs both the Postgres server and its tools. DO NOT start the server after running this.
 
 - On Debian-based Linux:
+
     ```bash
     sudo apt install -y postgresql-client postgresql-contrib libpq-dev
     ```
@@ -261,14 +263,14 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 #### 2. Prepare the frontend
 
-1. Install nvm, with `brew install nvm` or by following the instructions at https://github.com/nvm-sh/nvm. If using fish, you may instead prefer https://github.com/jorgebucaran/nvm.fish.
+1. Install nvm, with `brew install nvm` or by following the instructions at <https://github.com/nvm-sh/nvm>. If using fish, you may instead prefer <https://github.com/jorgebucaran/nvm.fish>.
 
 <blockquote class="warning-note">
     After installation, make sure to follow the instructions printed in your terminal to add NVM to your{' '}
     <code>$PATH</code>. Otherwise the command line will use your system Node.js version instead.
 </blockquote>
 
-2. Install the latest Node.js 18 (the version used by PostHog in production) with `nvm install 18`. You can start using it in the current shell with `nvm use 18`.
+2. Install the latest Node.js 22 (the version used by PostHog in production) with `nvm install 22`. You can start using it in the current shell with `nvm use 22`.
 
 3. Install pnpm by running `corepack enable` and then running `corepack prepare pnpm@9 --activate`. Validate the installation with `pnpm --version`.
 
@@ -283,21 +285,26 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 1. Install the `brotli` compression library and `rust` stable via `rustup`:
 
 - On macOS:
+
     ```bash
     brew install brotli rustup
     rustup default stable
     rustup-init
     # Select 1 to proceed with default installation
     ```
+
 - On Debian-based Linux:
+
     ```bash
     sudo apt install -y brotli
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     # Select 1 to proceed with default installation
     ```
+
 2. Run `pnpm --filter=@posthog/plugin-server install` to install all required packages. We'll actually run the plugin server in a later step.
 
 > **Note:** If you face an error like `ld: symbol(s) not found for architecture arm64`, most probably your openssl build flags are coming from the wrong place. To fix this, run:
+
 ```bash
 export CPPFLAGS=-I/opt/homebrew/opt/openssl/include
 export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
@@ -305,11 +312,13 @@ pnpm --filter=@posthog/plugin-server install
 ```
 
 > **Note:** If you face an error like `import gyp  # noqa: E402`, most probably need to install `python-setuptools`. To fix this, run:
+
 ```bash
 brew install python-setuptools
 ```
 
 > **Troubleshooting plugin server issues:** If you encounter problems starting up the plugin server, try these debugging steps:
+
 ```bash
 cd plugin-server
 pnpm rebuild
@@ -321,12 +330,15 @@ pnpm i
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
 
     - On macOS:
+
         ```bash
         brew install libxml2 libxmlsec1 pkg-config
         ```
+
         > If installing `xmlsec` doesn't work, try updating macOS to the latest version (Sonoma).
 
     - On Debian-based Linux:
+
         ```bash
         sudo apt install -y libxml2 libxmlsec1-dev libffi-dev pkg-config
         ```
@@ -336,6 +348,7 @@ pnpm i
     - On macOS, you can do so with Homebrew: `brew install python@3.11`.
 
     - On Debian-based Linux:
+
         ```bash
         sudo add-apt-repository ppa:deadsnakes/ppa -y
         sudo apt update
@@ -402,13 +415,16 @@ DEBUG=1 ./bin/migrate
 
 #### 6. Start PostHog
 
-Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with:
+Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with one of:
 
 ```bash
 ./bin/start
 
 # only services strictly required to run posthog
 ./bin/start --minimal
+
+# if you want to log additionally each process to a /tmp/posthog-<process-name>.log file for AI code editors to be able to grep
+./bin/start --custom bin/mprocs-with-logging.yaml
 ```
 
 > **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. It will be installed automatically for macOS, while for Linux you can install it manually (`cargo` or `npm`) using the official repo guide.
@@ -501,7 +517,6 @@ Our database migrations must be applied linearly in order, to avoid any conflict
 
 To help with this, we have introduced a tool called [django-linear-migrations](https://github.com/adamchainz/django-linear-migrations). When a migration-caused merge conflict arises, you can solve it by running `python manage.py rebase_migration <conflicted Django app> && git add <app>/migrations` (in our case the app is either `posthog` or `ee`).
 
-
 ## Extra: Working with feature flags
 
 When developing locally with environment variable `DEBUG=1` (which enables a setting called `SELF_CAPTURE`),
@@ -555,7 +570,7 @@ While developing, there are times you may want to connect to the database to que
 
 ## Extra: Accessing the Django Admin
 
-If you cannot access the Django admin http://localhost:8000/admin/, it could be that your local user is not set up as a staff user. You can connect to the database, find your `posthog_user` and set `is_staff` to `true`. This should make the admin page accessible.
+If you cannot access the Django admin <http://localhost:8000/admin/>, it could be that your local user is not set up as a staff user. You can connect to the database, find your `posthog_user` and set `is_staff` to `true`. This should make the admin page accessible.
 
 ## Extra: Sending emails
 
@@ -611,6 +626,7 @@ When creating a new email, there are a few steps to take. It's important to add 
 2. Add the new Customer.io template to the `CUSTOMER_IO_TEMPLATE_ID_MAP` in `posthog/email.py`
 3. Create a template in PostHog as an SMTP backup. Make sure the file name matches the key used in the template map.
 4. Trigger the email with something like this:
+
     ```python
     message = EmailMessage(
         use_http=True,  # This will attempt to send via Customer.io before falling back to SMTP
@@ -628,6 +644,30 @@ When creating a new email, there are a few steps to take. It's important to add 
 ## Extra: Developing paid features (PostHog employees only)
 
 If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal billing guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
+
+## Extra: Resetting your local database
+
+If you need to start fresh with a clean database (for example, if your local data is corrupted or you want to test the initial setup), follow these steps:
+
+1. Stop all PostHog services and remove all Docker volumes:
+
+    ```bash
+    hogli dev:reset
+    ```
+
+    This will remove all data stored in Docker volumes, including your PostgreSQL, ClickHouse, and Redis data.
+
+2. Start PostHog again:
+
+    ```bash
+    hogli start
+    ```
+
+3. Wait for all migrations to complete. You can monitor the logs to ensure migrations have finished running.
+
+4. Once PostHog is running, click the **generate-demo-data** button in the UI, then type `r` to generate test data.
+
+> **Note:** This process will completely wipe your local database. Make sure you don't have any important local data before proceeding.
 
 ## Extra: Working with the data warehouse
 

@@ -29,7 +29,12 @@ interface PostHogOnPostHogSlideProps {
 const VideoPlayerWindow = ({ productData, startTime = 0 }: any) => {
     return (
         <div className="h-full w-full bg-black">
-            <WistiaCustomPlayer mediaId={productData.videos?.overview?.wistia} autoPlay={true} startTime={startTime} />
+            <WistiaCustomPlayer
+                theme="dark"
+                mediaId={productData.videos?.overview?.wistia}
+                autoPlay={true}
+                startTime={startTime}
+            />
         </div>
     )
 }
@@ -254,6 +259,7 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
                     {/* Video player on the left */}
                     <div className={`flex-1 flex flex-col ${isMaximized ? 'fixed inset-0 z-50 p-16 pt-20' : ''}`}>
                         <WistiaCustomPlayer
+                            theme="dark"
                             mediaId={productData.videos?.overview?.wistia}
                             onMaximize={handleMaximize}
                             onPopOut={handlePopOut}

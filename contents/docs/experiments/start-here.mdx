@@ -5,7 +5,7 @@ contentMaxWidthClass: max-w-5xl
 ---
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
-import { CallToAction } from 'components/CallToAction'
+import OSButton from 'components/OSButton'
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { ProductVideo } from 'components/ProductVideo'
@@ -26,9 +26,9 @@ The first step is to install PostHog with the library you want to run experiment
 
 <ExperimentInstallationPlatforms />
 
-<CallToAction type="primary" to="/docs/experiments/installation">
+<OSButton variant="primary" asLink to="/docs/experiments/installation">
   Install PostHog SDK
-</CallToAction>
+</OSButton>
 
 </QuestLogItem>
 
@@ -52,9 +52,9 @@ Fill in the experiment details:
 - **Variants**: By default, you get `control` and `test` variants (you can add more)
 - **Participants**: Choose between user-level or group-level experiments
 
-<CallToAction type="primary" to="/docs/experiments/creating-an-experiment">
+<OSButton variant="primary" asLink to="/docs/experiments/creating-an-experiment">
   Create an experiment
-</CallToAction>
+</OSButton>
 
 </QuestLogItem>
 
@@ -79,9 +79,9 @@ if (posthog.getFeatureFlag('new-checkout-flow') === 'test') {
 
 That's it! When you call `getFeatureFlag()`, PostHog automatically tracks exposures and starts collecting data for your experiment.
 
-<CallToAction type="primary" to="/docs/experiments/adding-experiment-code">
+<OSButton variant="primary" asLink to="/docs/experiments/adding-experiment-code">
   View code examples for all SDKs
-</CallToAction>
+</OSButton>
 
 </QuestLogItem>
 
@@ -105,9 +105,9 @@ Choose from:
     classes="rounded"
 />
 
-<CallToAction type="primary" to="/docs/experiments/metrics">
+<OSButton variant="primary" asLink to="/docs/experiments/metrics">
   Learn about experiment metrics
-</CallToAction>
+</OSButton>
 
 </QuestLogItem>
 
@@ -175,9 +175,9 @@ Choose between Bayesian and frequentist statistical approaches, handle multiple 
 
 That's it! You're ready to start running successful experiments.
 
-<CallToAction type="primary" to="/docs/experiments/installation">
+<OSButton variant="primary" asLink to="/docs/experiments/installation">
   Create your first experiment
-</CallToAction>
+</OSButton>
 
 </QuestLogItem>
 

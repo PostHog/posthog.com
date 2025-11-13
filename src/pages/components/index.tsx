@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Explorer from 'components/Explorer'
 import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -13,6 +12,59 @@ import OSButton from 'components/OSButton'
 import { useCustomers } from 'hooks/useCustomers'
 import { OSInput, OSTextarea, OSSelect } from 'components/OSForm'
 import { Fieldset } from 'components/OSFieldset'
+import ProductComparisonTable from 'components/ProductComparisonTable'
+import ReaderView from 'components/ReaderView'
+import { TreeMenu } from 'components/TreeMenu'
+import { internalToolsNav } from '../../navs/internalTools'
+
+// Create table of contents for right sidebar
+const tableOfContents = [
+    {
+        value: 'Open graph image templates',
+        url: 'og-templates',
+        depth: 0,
+    },
+    {
+        value: 'OSButton',
+        url: 'osbutton',
+        depth: 0,
+    },
+    {
+        value: 'Form elements',
+        url: 'form-elements',
+        depth: 0,
+    },
+    {
+        value: 'OSInput',
+        url: 'osinput',
+        depth: 1,
+    },
+    {
+        value: 'OSTextarea',
+        url: 'ostextarea',
+        depth: 1,
+    },
+    {
+        value: 'Fieldset',
+        url: 'fieldset',
+        depth: 1,
+    },
+    {
+        value: 'OSSelect',
+        url: 'osselect',
+        depth: 0,
+    },
+    {
+        value: 'Competitor feature matrix',
+        url: 'competitor-matrix',
+        depth: 0,
+    },
+    {
+        value: 'useCustomers',
+        url: 'usecustomers',
+        depth: 0,
+    },
+]
 
 export default function Components(): JSX.Element {
     const { customers } = useCustomers()
@@ -54,26 +106,22 @@ export default function Components(): JSX.Element {
     return (
         <>
             <SEO title="Components - PostHog" description="Components for PostHog" image={`/images/og/default.png`} />
-            <Explorer
-                template="generic"
-                slug="components"
+            <ReaderView
                 title="Components"
-                // options below only needed to override matching the slug
-                // teamName="product-analytics"
-                // roadmapCategory="product-analytics"
-                // changelogCategory="product-analytics"
-                // accentImage={
-                //     <CloudinaryImage
-                //         src="https://res.cloudinary.com/dmukukwp6/image/upload/party_mode_34c15751e4.png"
-                //         alt="Screenshot of hedgehog mode's party mode"
-                //         className="w-full"
-                //         placeholder="none"
-                //     />
-                // }
+                leftSidebar={<TreeMenu items={internalToolsNav} />}
+                tableOfContents={tableOfContents}
+                description="Component showcase and internal tooling for PostHog development"
+                showQuestions={false}
             >
                 <div className="@container text-primary">
                     <div className="space-y-12">
                         <section>
+                            <div className="bg-accent p-4 rounded border border-primary mt-4">
+                                <p className="mt-0">This is an internal playground for some React components that are used throughout the site.</p>
+                                <p className="mb-0">If you're looking for components to be used in articles (like blog posts and docs), check out the <Link to="/handbook/engineering/posthog-com/markdown" state={{ newWindow: true }}>MDX components handbook page</Link>.</p>
+                            </div>
+                        </section>
+                        <section id="og-templates">
                             <h2>Open graph image templates</h2>
 
                             <div className="inline-block w-[600px] h-[315px] border border-primary bg-accent">
@@ -81,7 +129,7 @@ export default function Components(): JSX.Element {
                             </div>
                         </section>
                         {/* OSButton Component Showcase */}
-                        <section>
+                        <section id="osbutton">
                             <h2 className="">
                                 <code>&lt;OSButton /&gt;</code>
                             </h2>
@@ -1295,11 +1343,11 @@ export default function Components(): JSX.Element {
                         </section>
 
                         {/* Form Elements Section */}
-                        <section>
+                        <section id="form-elements">
                             <h2 className="">Form elements</h2>
 
                             {/* OSInput Component Showcase */}
-                            <div className="mb-8">
+                            <div className="mb-8" id="osinput">
                                 <h3 className="text-xl font-semibold mb-4">
                                     <code>&lt;OSInput /&gt;</code>
                                 </h3>
@@ -1463,7 +1511,7 @@ export default function Components(): JSX.Element {
                             </div>
 
                             {/* OSTextarea Component Showcase */}
-                            <div className="mb-8">
+                            <div className="mb-8" id="ostextarea">
                                 <h3 className="text-xl font-semibold mb-4">
                                     <code>&lt;OSTextarea /&gt;</code>
                                 </h3>
@@ -1533,7 +1581,7 @@ export default function Components(): JSX.Element {
                             </div>
 
                             {/* Fieldset Component Showcase */}
-                            <div className="mb-8">
+                            <div className="mb-8" id="fieldset">
                                 <h3 className="text-xl font-semibold mb-4">
                                     <code>&lt;Fieldset /&gt;</code>
                                 </h3>
@@ -1708,7 +1756,7 @@ export default function Components(): JSX.Element {
                         </section>
 
                         {/* OSSelect Component Showcase */}
-                        <section>
+                        <section id="osselect">
                             <h2 className="">
                                 <code>&lt;OSSelect /&gt;</code>
                             </h2>
@@ -1934,7 +1982,76 @@ export default function Components(): JSX.Element {
                             </div>
                         </section>
 
-                        <section>
+                        <section id="competitor-matrix">
+                            <h2 className="">Competitor feature matrix</h2>
+
+                            <p className="mb-6 text-secondary">
+                                Comprehensive view of all product and platform features across competitors. This serves
+                                as internal tooling for QA, content creation, and identifying gaps in competitive data.
+                            </p>
+
+                            {/* Error Tracking Features */}
+                            <div className="mb-8">
+                                <h3 className="text-xl font-semibold mb-4">Error Tracking Features</h3>
+                                <ProductComparisonTable
+                                    competitors={['posthog', 'sentry', 'logrocket', 'bugsnag', 'datadog']}
+                                    rows={[
+                                        { path: 'error_tracking.core.error_alerts' },
+                                        { path: 'error_tracking.core.exception_capture' },
+                                        { path: 'error_tracking.core.issue_management' },
+                                        { path: 'error_tracking.core.error_grouping' },
+                                        { path: 'error_tracking.core.stack_tracing' },
+                                        { path: 'error_tracking.monitoring.performance_monitoring' },
+                                        { path: 'error_tracking.monitoring.source_map_support' },
+                                        { path: 'error_tracking.integrations.product_analytics' },
+                                        { path: 'error_tracking.integrations.session_replay' },
+                                        { path: 'error_tracking.integrations.ab_experiments' },
+                                    ]}
+                                />
+                            </div>
+
+                            {/* Session Replay Features */}
+                            <div className="mb-8">
+                                <h3 className="text-xl font-semibold mb-4">Session Replay Features</h3>
+                                <ProductComparisonTable
+                                    competitors={['posthog', 'fullstory', 'hotjar', 'logrocket', 'clarity', 'matomo']}
+                                    rows={[
+                                        { path: 'session_replay.ai.ai_summaries' },
+                                        { path: 'session_replay.platform_support.single_page_app' },
+                                        { path: 'session_replay.platform_support.ios_recordings' },
+                                        { path: 'session_replay.platform_support.android_recordings' },
+                                        { path: 'session_replay.platform_support.react_native_recordings' },
+                                        { path: 'session_replay.platform_support.flutter_recordings' },
+                                        { path: 'session_replay.identity.identity_detection' },
+                                        { path: 'session_replay.targeting.target_by_url' },
+                                        { path: 'session_replay.targeting.filter_by_user_or_event' },
+                                        { path: 'session_replay.export.export_to_json' },
+                                        { path: 'session_replay.export.retention_policy' },
+                                    ]}
+                                />
+                            </div>
+
+                            {/* Platform Features */}
+                            <div className="mb-8">
+                                <h3 className="text-xl font-semibold mb-4">Platform Features</h3>
+                                <ProductComparisonTable
+                                    competitors={['posthog', 'sentry', 'logrocket', 'bugsnag', 'glitchtip', 'signoz']}
+                                    rows={[
+                                        { path: 'platform.deployment.open_source' },
+                                        { path: 'platform.deployment.self_host' },
+                                        { path: 'platform.pricing.usage_based_pricing' },
+                                        { path: 'platform.pricing.transparent_pricing' },
+                                        { path: 'platform.pricing.free_tier' },
+                                        { path: 'platform.support.console_log_capture' },
+                                        { path: 'platform.support.mobile_sdk_coverage' },
+                                        { path: 'platform.integrations.ci_cd_integrations' },
+                                        { path: 'platform.analytics_integration.built_in_analytics' },
+                                    ]}
+                                />
+                            </div>
+                        </section>
+
+                        <section id="usecustomers">
                             <h2 className="">
                                 <code>useCustomers</code>
                             </h2>
@@ -1969,7 +2086,7 @@ export default function Components(): JSX.Element {
                         </section>
                     </div>
                 </div>
-            </Explorer>
+            </ReaderView>
         </>
     )
 }

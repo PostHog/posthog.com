@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import TeamMember from '../components/TeamMember'
 import { PrivateLink } from '../components/PrivateLink'
+import SmallTeam from 'components/SmallTeam'
 
 export interface Feature {
     slug: string
@@ -61,7 +62,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'base-currency': {
         feature: 'Base currency',
-        owner: ['revenue-analytics'],
+        owner: ['web-analytics'],
         label: 'feature/currency',
     },
     'batch-exports': {
@@ -86,14 +87,24 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Cohorts',
         owner: ['feature-flags'],
     },
+    'command-palette': {
+        feature: 'Command palette',
+        owner: ['platform-ux'],
+        label: 'feature/command-bar',
+    },
     comments: {
         feature: 'Comments/Discussions',
         owner: ['platform-features'],
         label: 'feature/comments',
     },
+    'csp-tracking': {
+        feature: 'CSP tracking',
+        owner: ['web-analytics'],
+        label: 'feature/csp-tracking',
+    },
     'currency-rate-dataset': {
         feature: 'Currency rate dataset',
-        owner: ['revenue-analytics'],
+        owner: ['growth', 'customer-analytics'],
         label: 'feature/currency-rate',
     },
     'customer-analytics': {
@@ -119,16 +130,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-visualization': {
         feature: 'Data visualization',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
     },
     'data-pipelines': {
         feature: 'Data pipelines',
-        owner: ['messaging'],
+        owner: ['workflows'],
         label: 'feature/pipeline',
     },
     'data-warehouse': {
         feature: 'Data warehouse',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
     },
     'early-access-features': {
         feature: 'Early access features',
@@ -158,7 +169,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     hogql: {
         feature: 'HogQL',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
         label: 'feature/dashboards',
     },
     ingestion: {
@@ -188,19 +199,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Marketing analytics',
         owner: ['web-analytics'],
     },
-    'max-ai': {
-        feature: 'Max AI platform',
-        owner: ['max-ai'],
-        label: 'feature/max-ai',
-    },
     'mcp-server': {
         feature: 'MCP server',
-        owner: ['max-ai'],
+        owner: ['posthog-ai'],
         label: 'feature/mcp',
-    },
-    messaging: {
-        feature: 'Messaging',
-        owner: ['messaging'],
     },
     notebooks: {
         feature: 'Notebooks',
@@ -213,7 +215,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     onboarding: {
         feature: 'Onboarding',
-        owner: ['content'],
+        owner: ['growth'],
     },
     'path-cleaning': {
         feature: 'Path cleaning',
@@ -235,17 +237,17 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'pipeline-transformations': {
         feature: 'Pipeline transformations',
-        owner: ['messaging'],
+        owner: ['workflows'],
         label: 'feature/pipelines',
     },
     'pipeline-destinations': {
         feature: 'Pipeline destinations',
-        owner: ['messaging'],
+        owner: ['workflows'],
         label: 'feature/cdp',
     },
     'pipeline-sources': {
         feature: 'Pipeline sources',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
         label: 'feature/pipelines',
     },
     platform: {
@@ -257,6 +259,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'PostHog.com',
         owner: ['brand'],
         label: false,
+    },
+    'posthog-ai': {
+        feature: 'PostHog AI platform',
+        owner: ['posthog-ai'],
+        label: 'feature/posthog-ai',
     },
     'project-homepage': {
         feature: 'Project homepage',
@@ -270,7 +277,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     qaas: {
         feature: 'Queries as a Service',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
         label: 'feature/qaas',
     },
     'query-performance': {
@@ -289,11 +296,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'revenue-analytics': {
         feature: 'Revenue analytics',
-        owner: ['revenue-analytics'],
+        owner: ['customer-analytics', 'growth'],
     },
     'revenue-data-management': {
         feature: 'Revenue data management',
-        owner: ['revenue-analytics'],
+        owner: ['customer-analytics', 'growth'],
     },
     sdks: {
         feature: 'SDKs & client libraries (web, server-side)',
@@ -305,33 +312,40 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                     #support-client-libraries
                 </PrivateLink>
                 . There is an engineer assigned to SDK support on a rotating schedule. Check the{' '}
-                <PrivateLink url="https://posthog.pagerduty.com/schedules#P7B7NTR">Pager Duty schedule</PrivateLink>.
+                <PrivateLink url="https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MD6JK1TEGAK97450S">
+                    incident.io schedule
+                </PrivateLink>
+                .
                 <br />
                 <br />
-                <strong>For Mobile SDK issues, defer to the Mobile group first.</strong>
+                <strong>For Mobile SDK issues, defer to the Mobile team first.</strong>
             </>
         ),
         label: 'feature/libraries',
     },
+    'sdks-doctor': {
+        feature: 'SDK doctor',
+        owner: ['growth'],
+        label: 'feature/sdk-doctor',
+    },
     'sdks-mobile': {
         feature: 'SDKs (mobile)',
-        owner: [''],
+        owner: ['mobile'],
         notes: (
             <>
                 Shared responsibility with the relevant small team for feature-owned areas.
                 <br />
-                <br /> Start with the{' '}
-                <a href="https://github.com/orgs/PostHog/teams/team-mobile" target="_blank" rel="noopener noreferrer">
-                    Mobile group
-                </a>{' '}
-                for triage, loop in
-                <PrivateLink url="https://posthog.slack.com/archives/C04MZFDA5KK">
-                    #support-client-libraries
-                </PrivateLink>{' '}
-                as needed.
+                <br /> Start with the <SmallTeam slug="mobile" /> for triage, loop in
+                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink> as
+                needed.
             </>
         ),
         label: 'feature/mobile',
+    },
+    search: {
+        feature: 'Search',
+        owner: ['platform-ux'],
+        label: false,
     },
     security: {
         feature: 'Security',
@@ -361,11 +375,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'sql-editor': {
         feature: 'SQL editor',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
     },
     'sql-insights': {
         feature: 'SQL insights',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
         label: false,
     },
     sso: {
@@ -395,7 +409,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     toolbar: {
         feature: 'Toolbar',
-        owner: ['replay'],
+        owner: ['growth'],
     },
     'usage-reports': {
         feature: 'Usage reports',
@@ -412,12 +426,21 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'webhook-delivery': {
         feature: 'Webhook delivery service',
-        owner: ['messaging'],
+        owner: ['workflows'],
         label: 'feature/pipelines',
+    },
+    workflows: {
+        feature: 'Workflows',
+        owner: ['workflows'],
+        label: 'feature/workflows',
+    },
+    wizard: {
+        feature: 'Wizard',
+        owner: ['content'],
     },
 }
 
-export const useFeatureOwnership = ({ teamSlug }: { teamSlug?: string } = {}) => {
+export const useFeatureOwnership = ({ teamSlug }: { teamSlug?: string } = {}): { features: Feature[] } => {
     const features = Object.entries(FEATURE_DATA).reduce((acc, [key, feature]) => {
         const featureWithSlug: Feature = {
             ...feature,

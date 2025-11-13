@@ -23,7 +23,7 @@ So, what's it like building an all-remote company from the very first day?
 
 ![GitHub Chat](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/remote-culture/github-chat.png) 
 
-Communication is perhaps the single most important value for us at PostHog. In our view, getting this right is essential to running an all-remote company successfully. As such, we highly value the following concepts:
+[Communication is perhaps the single most important value](/blog/ceo-diary-6) for us at PostHog. In our view, getting this right is essential to running an all-remote company successfully. As such, we highly value the following concepts:
 
 #### Asynchronous Communication
 Async communication means people shouldn't rely on getting an immediate response from someone else in order to do their work. 

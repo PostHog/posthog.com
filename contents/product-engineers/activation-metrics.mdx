@@ -2,17 +2,17 @@
 date: 2024-11-28
 title: How we found our activation metric (and how you can too)
 author:
-  - raquel-m-smith
+    - raquel-m-smith
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
 featuredImageType: full
 category: Engineering
 tags:
-  - Product analytics
-  - Product engineers
-  - Growth
+    - Product analytics
+    - Product engineers
+    - Growth
 crosspost:
-  - Blog
+    - Blog
 ---
 
 People are signing up for your product. Great! But before you start planning your IPO, you need to make sure they actually stick around. This is the goal of **activation**.
@@ -55,14 +55,14 @@ After testing multiple event groups, we found that watching 5 or more replays an
 
 ## Our query for testing potential activation metrics
 
-How can you recreate this process for yourself? Creating the groups of potential activation events is easy, but the retention testing query is the tricky part. 
+How can you recreate this process for yourself? Creating the groups of potential activation events is easy, but the retention testing query is the tricky part.
 
 To help you out, we've included the exact query we used below. First, I'll break the query into parts to explain what's happening, then I'll provide the whole thing in one chunk [at the end](#the-final-combined-query).
 
 If you use PostHog, you can create a [new SQL insight](https://us.posthog.com/insights/new) and use our same exact query to explore your data and find your activation metric
 
 > **Note:** Our example query gets retention at the **company level** using [group analytics](/docs/product-analytics/group-analytics). This means that anyone in the company can perform the event and it counts towards activation. This makes the most sense for B2B SaaS products like ours.
-> 
+>
 > If you want to get retention at the **person level**, you can use the same query but replace company references with person ones like changing `company_id` to `distinct_id`.
 
 ### Part 1: Get the companies who started with your product, broken down by month
@@ -94,8 +94,6 @@ WITH starting_companies AS (
 
 > **New to SQL?** Check our guide to [the basics of SQL for analytics](/product-engineers/sql-for-analytics) and our [SQL docs](/docs/product-analytics/sql) for more.
 
-<br />
-
 ### Part 2: Define and filter for your potential activation events
 
 Next, filter for one group of potential activation events. In this case, these are `important button clicked`, `thing saved to db`, and `team member invited`.
@@ -117,8 +115,6 @@ downfunnel AS (
   GROUP BY 1,2
 ),
 ```
-
-<br />
 
 ### Part 3: Filter for successful companies
 
@@ -142,8 +138,6 @@ successful_companies AS (
 
 > **Note:** Make sure there are enough users in each retention cohort to generate good results. If only 2 companies "succeeded" and did all the activation steps, the retention rate isn't going to be trustworthy.
 
-<br />
-
 ### Part 4: Calculate retention for successful companies
 
 To identify if our potential activation metrics are good ones, we calculate retention for successful companies 3 months later. The retention events are likely different from the activation events, but can be the same. It can be as simple as someone logging in or creating new things in your product. Whatever tells you they are an active user.
@@ -162,8 +156,6 @@ retained AS (
   AND event IN ('certain page viewed', 'thing saved to db', 'button clicked', 'logged in')
 )
 ```
-
-<br />
 
 ### Part 5. Put it all together
 
@@ -184,13 +176,11 @@ GROUP BY starting_companies.start_month
 ORDER BY starting_companies.start_month
 ```
 
-<br />
-
 ### Part 6. Repeat with each potential activation metric
 
 Run the query for each of your potential activation metric groups. Save the results so you can compare. Your best retention metric is the one with the most starting companies with the highest final retention.
 
-If none of your event groups work, try playing with the number of times things happen (part 3). Sometimes users need to do something many times before it becomes a habit. 
+If none of your event groups work, try playing with the number of times things happen (part 3). Sometimes users need to do something many times before it becomes a habit.
 
 If this doesn't work, you might have too few users coming in or not enough consistency in their behaviors. You might need to:
 
@@ -270,28 +260,27 @@ LEFT JOIN retained ON successful_companies.company_id = retained.company_id
 GROUP BY starting_companies.start_month
 ORDER BY starting_companies.start_month
 ```
-</details>
 
-<br />
+</details>
 
 ## What do I do with the activation metric once I find it?
 
 You work to improve it, of course! If you know you the actions you want people to do, you can:
 
-- Create email campaigns around them
-- Track signup to activation conversion with [funnels](/docs/product-analytics/funnels)
-- Run an [experiment](/docs/experiments) with your action as a goal metric
-- Launch [surveys](/docs/surveys) asking people why they don't do it
-- Connect activation to sales or revenue data with our [data warehouse](/blog/data-warehouse-at-posthog)
+-   Create email campaigns around them
+-   Track signup to activation conversion with [funnels](/docs/product-analytics/funnels)
+-   Run an [experiment](/docs/experiments) with your action as a goal metric
+-   Launch [surveys](/docs/surveys) asking people why they don't do it
+-   Connect activation to sales or revenue data with our [data warehouse](/blog/data-warehouse-at-posthog)
 
 For example, for session replay, we:
 
-- [Email users pretty quickly](/blog/how-we-built-email-onboarding) if they've shown interest in the product but haven't activated.
+-   [Email users pretty quickly](/blog/how-we-built-email-onboarding) if they've shown interest in the product but haven't activated.
 
-- Added [replay templates](https://us.posthog.com/replay/templates) to set users up with useful filters easily.
+-   Added [replay templates](https://us.posthog.com/replay/templates) to set users up with useful filters easily.
 
-- Keep a close eye on monthly growth in the number of companies that analyze replays.
+-   Keep a close eye on monthly growth in the number of companies that analyze replays.
 
-- Run an [NPS survey](/templates/nps-survey) for replay with an optional feedback box. 
+-   Run an [NPS survey](/templates/nps-survey) for replay with an optional feedback box.
 
 One thing to **not do** is drop all other plans to focus on activation. If you've built a good product, people will find a way to use it. First, focus on [finding PMF](/founders/product-market-fit-game) for your product, and then use activation as an optimization layer on top of a solid product.

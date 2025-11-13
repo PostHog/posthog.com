@@ -1,150 +1,230 @@
-import React, { useEffect, useState } from 'react'
-import SEO from 'components/seo'
-import Link from 'components/Link'
-import Editor from 'components/Editor'
-import { useValues } from 'kea'
-import { layoutLogic } from 'logic/layoutLogic'
-import OSTable from 'components/OSTable'
+import React from 'react'
+import { useStaticQuery, graphql, Link } from 'gatsby'
+import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
+import { IconLightBulb } from '@posthog/icons'
+import Cards from 'components/Cards'
+import { PostHogAIExampleCards } from 'components/Cards/data'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { useCustomers, Customer as CustomerType } from 'hooks/useCustomers'
-import { IconArrowUpRight } from '@posthog/icons'
-import useProduct from 'hooks/useProduct'
-import CloudinaryImage from 'components/CloudinaryImage'
-import OSButton from 'components/OSButton'
+import CustomRoadmapSlide from 'components/AI/CustomRoadmapSlide'
 
-interface Skill {
-    name: string
-    percent: number
+const PRODUCT_HANDLE = 'posthog_ai'
+
+const CustomManifestoSlide = () => {
+    return (
+        <div
+            data-scheme="primary"
+            className="flex flex-col p-12 justify-start @2xl:justify-center items-center h-full bg-primary text-primary"
+        >
+            <h2 className="text-4xl font-bold mb-8">Manifesto</h2>
+            <p>
+                <Link to="/ai" state={{ newWindow: true }}>
+                    PostHog AI
+                </Link>{' '}
+                is our product assistant that helps you build context, assemble insights, find areas for product
+                improvement, and even create pull requests after writing code (alpha).
+            </p>
+
+            <p>PostHog AI is free to use during beta. (After that, we may charge a nominal flat monthly fee.)</p>
+
+            <h2>Why don’t I just ask ChatGPT instead?</h2>
+
+            <p>
+                PostHog AI has a nuanced understanding of your customers - it has access to errors, replays, event data,
+                and everything in your data warehouse. You can ask ChatGPT questions based on data from one product at a
+                time, but that’s like trying to understand a painting when you can only see the color blue - you may get
+                a rough idea, but it’s hardly the Mona Lisa.
+            </p>
+
+            <h2>More than chatting with your data...</h2>
+
+            <p>
+                PostHog AI can read and write. He can find, watch sessions, explain and summarize replays for you. He
+                can create insights, write and edit SQL, conduct multi-step deep research, and more. The goal is to
+                generate a rich understanding of your customers’ broad range of data.
+            </p>
+
+            <h2>Product autonomy</h2>
+
+            <p>
+                The goal long term is to help every developer to ship a product autonomously. There are many steps to
+                get there, many of which we are still to take, but we believe the technology today exists to make very
+                meaningful progress.
+            </p>
+
+            <p>
+                Right now, you can meaningfully detect issues and understand user behavior to inform what you ship. As
+                we give PostHog AI access to more tools, he’ll get smarter, more accurate, and more intelligent.
+            </p>
+
+            <p>
+                Very shortly you’ll be able to detect and generate PRs for fixing UX issues and errors, before you even
+                wake up for the day. We’re working on the ability to generate ideas for what to work on, and to convert
+                these into pull requests agentically. Stay tuned.
+            </p>
+        </div>
+    )
 }
 
-interface ProductData {
-    name: string
-    description?: string
-    skills?: Skill[]
-    handle: string
+const CustomPricingSlide = () => {
+    return (
+        <div
+            data-scheme="primary"
+            className="flex flex-col p-12 justify-start @2xl:justify-center items-center h-full bg-primary text-primary"
+        >
+            <h2 className="text-4xl font-bold mb-8">Pricing</h2>
+
+            <div className="bg-accent border border-primary max-w-xl mx-auto rounded p-8 text-center">
+                <div className="text-2xl font-bold mb-4">PostHog AI is free during beta.</div>
+                <p className="text-xl">
+                    Eventually we'll charge usage-based pricing and will offer a generous monthly free tier, as we do
+                    with all of our paid products.
+                </p>
+            </div>
+        </div>
+    )
 }
 
-function isProductData(obj: unknown): obj is ProductData {
-    return typeof obj === 'object' && obj !== null && 'name' in obj
+const CustomDemoSlide = () => {
+    return (
+        <div
+            data-scheme="primary"
+            className="flex flex-col justify-start @2xl:justify-center items-center h-full bg-primary text-primary"
+        >
+            <h2 className="text-7xl @2xl:text-5xl pt-12 px-4">Chat with your data</h2>
+            <p className="text-4xl @2xl:text-2xl pt-4 px-4 leading-normal text-center text-balance pb-16 @2xl:pb-0">
+                Still building insights manually? Ew. Let PostHog AI help.
+            </p>
+
+            <ScrollArea className="min-h-0 w-full h-full @2xl:-mt-4">
+                <Cards data={PostHogAIExampleCards} buttons={false} />
+            </ScrollArea>
+
+            <div className="flex gap-2 justify-center absolute bottom-4 left-0 right-0 scale-125 @2xl:scale-100">
+                <IconLightBulb className="size-10 opacity-50" />
+                <div className="flex flex-col text-xl">
+                    <strong>Signed into PostHog?</strong>
+                    <p>Click any question to get PostHog AI started.</p>
+                </div>
+            </div>
+        </div>
+    )
 }
 
-const columnData = [
-    { name: '#', width: 'minmax(50px, 0.5fr)', align: 'left' as const },
-    { name: 'Agent', width: 'minmax(170px, 1fr)', align: 'left' as const },
-    { name: 'Description', width: 'minmax(200px, 1.5fr)', align: 'left' as const },
-    { name: 'Skills', width: 'minmax(200px, 2fr)', align: 'left' as const },
-]
-
-export default function AI(): JSX.Element {
-    const allProducts = useProduct()
-
-    const aiAgents = [
-        { name: 'Max', handle: 'max_ai', slug: 'max' },
-        { name: 'Raquel', handle: 'raquel_ai', slug: 'raquel' },
-        { name: 'Annika', handle: 'annika', slug: 'annika' },
-        { name: 'Marius', handle: 'marius', slug: 'marius' },
-    ]
-
-    const rowData = aiAgents.map((agent, index) => {
-        const product = Array.isArray(allProducts)
-            ? allProducts.find((p: unknown) => isProductData(p) && p.handle === agent.handle)
-            : null
-
-        const skills = (product && isProductData(product) ? product.skills : []) || []
-        const skillsList = skills.map((skill: Skill) => `• ${skill.name}`).join('\n')
-
-        return {
-            cells: [
-                {
-                    content: index + 1,
-                },
-                {
-                    content: (
-                        <Link to={`/${agent.slug}`} state={{ newWindow: true }}>
-                            {agent.name}
-                        </Link>
-                    ),
-                },
-                {
-                    content: (product && isProductData(product) ? product.description : undefined) || 'AI Assistant',
-                },
-                {
-                    content: skillsList || '• General AI assistance\n• Product knowledge\n• Task completion',
-                    className: 'whitespace-pre-line',
-                },
-            ],
+export default function PostHogAI(): JSX.Element {
+    const contentData = useContentData()
+    const data = useStaticQuery(graphql`
+        query {
+            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    rawBody
+                    frontmatter {
+                        title
+                        description
+                    }
+                }
+            }
+            allProductData {
+                nodes {
+                    products {
+                        name
+                        type
+                        unit
+                        addons {
+                            name
+                            type
+                            unit
+                            plans {
+                                name
+                                plan_key
+                                included_if
+                                features {
+                                    key
+                                    name
+                                    description
+                                    limit
+                                    note
+                                }
+                            }
+                        }
+                        plans {
+                            name
+                            plan_key
+                            free_allocation
+                            included_if
+                            features {
+                                key
+                                name
+                                description
+                                limit
+                                note
+                            }
+                            tiers {
+                                unit_amount_usd
+                                up_to
+                            }
+                        }
+                    }
+                }
+            }
         }
+    `)
+
+    // Configure slides with custom ProductOS Benefits slide
+    const slides = createSlideConfig({
+        exclude: [
+            'customers',
+            'ai',
+            'comparison-summary',
+            'feature-comparison',
+            'docs',
+            'pairs-with',
+            'answers',
+        ],
+        custom: [
+            {
+                slug: 'roadmap',
+                name: 'Roadmap',
+                component: CustomRoadmapSlide,
+            },
+            {
+                slug: 'demo',
+                name: 'Demo',
+                component: CustomDemoSlide,
+            },
+            // {
+            //     slug: 'manifesto',
+            //     name: 'AI manifesto',
+            //     component: CustomManifestoSlide,
+            // },
+        ],
+        order: ['overview', 'features', 'demo', `posthog-on-posthog`, 'roadmap', 'pricing', 'getting-started'],
+        templates: {
+            overview: 'max',
+            features: 'ai',
+            answers: 'demo',
+        },
+        content: {
+            answersDescription: 'What can PostHog AI do?',
+        },
     })
 
-    return (
-        <>
-            <SEO title="AI README.md – PostHog" description="" image={`/images/og/customers.jpg`} />
-            <Editor
-                title="AI README"
-                type="md"
-                slug="/ai"
-                bookmark={{
-                    title: 'AI README',
-                    description: 'PostHog AI',
-                }}
-            >
-                <ScrollArea>
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/max_aeaeca84a3.png"
-                        alt="Max AI"
-                        className="float-right ml-4 max-w-48 @xl:max-w-64"
-                    />
-                    <p>
-                        <Link to="/max" state={{ newWindow: true }}>
-                            Max
-                        </Link>{' '}
-                        is our product assistant that helps you build context, assemble insights, find areas for product
-                        improvement, and even create pull requests after writing code (alpha).
-                    </p>
+    // Override the pricing slide with our custom component
+    const pricingSlideIndex = slides.slides.findIndex((slide) => slide.slug === 'pricing')
+    if (pricingSlideIndex !== -1) {
+        slides.slides[pricingSlideIndex] = {
+            ...slides.slides[pricingSlideIndex],
+            component: CustomPricingSlide,
+        }
+    }
 
-                    <p>Max is free to use during beta. (After that, we may charge a nominal flat monthly fee.)</p>
+    const mergedData = {
+        ...data,
+        ...contentData,
+    }
 
-                    <h2>Why don’t I just ask ChatGPT instead?</h2>
-
-                    <p>
-                        Max has a nuanced understanding of your customers - it has access to errors, replays, event
-                        data, and everything in your data warehouse. You can ask ChatGPT questions based on data from
-                        one product at a time, but that’s like trying to understand a painting when you can only see the
-                        color blue - you may get a rough idea, but it’s hardly the Mona Lisa.
-                    </p>
-
-                    <h2>More than chatting with your data...</h2>
-
-                    <p>
-                        Max can read and write. He can find, watch sessions, explain and summarize replays for you. He
-                        can create insights, write and edit SQL, conduct multi-step deep research, and more. The goal is
-                        to generate a rich understanding of your customers’ broad range of data.
-                    </p>
-
-                    <h2>Product autonomy</h2>
-
-                    <p>
-                        The goal long term is to help every developer to ship a product autonomously. There are many
-                        steps to get there, many of which we are still to take, but we believe the technology today
-                        exists to make very meaningful progress.
-                    </p>
-
-                    <p>
-                        Right now, you can meaningfully detect issues and understand user behavior to inform what you
-                        ship. As we give Max access to more tools, he’ll get smarter, more accurate, and more
-                        intelligent.
-                    </p>
-
-                    <p>
-                        Very shortly you’ll be able to detect and generate PRs for fixing UX issues and errors, before
-                        you even wake up for the day. We’re working on <em>Max Code</em> - the ability to generate ideas
-                        for what to work on, and to convert these into pull requests agentically. Stay tuned.
-                    </p>
-                    <OSButton asLink to="/max" variant="secondary" size="md" state={{ newWindow: true }}>
-                        Learn more about Max
-                    </OSButton>
-                </ScrollArea>
-            </Editor>
-        </>
-    )
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
 }

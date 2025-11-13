@@ -77,6 +77,7 @@ Ideally, this will happen in Week 3 or 4, and will be with a few existing team m
 
 - Focus on taking more and more ownership on calls so that team members are just there as a safety net.
 - Continue to meet with customers and reaching out to new leads.
+- Add your Calendly link to your Slack profile so customers can book in with you directly (this works!)
 
 ### How do I know if I'm on track?
 
@@ -141,6 +142,8 @@ Ideally, this will happen in Week 3 or 4, and will be with a few existing team m
 
 - Focus on taking more and more ownership on calls so that team members are just there as a safety net.
 - Continue to meet with your book of customers and inbound leads.
+- Add your Calendly link to your Slack profile so customers can book in with you directly (this works!)
+
 
 ### How do I know if I'm on track?
 

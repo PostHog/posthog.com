@@ -11,6 +11,10 @@ import {
     IconBookmark,
     IconUpload,
     IconCode,
+    IconCheck,
+    IconCopy,
+    IconShare,
+    IconFeatures,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
@@ -23,8 +27,8 @@ import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
-import { navigate } from 'gatsby'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import { Popover } from 'components/RadixUI/Popover'
 
 export default function TaskBarMenu() {
     const {
@@ -40,6 +44,7 @@ export default function TaskBarMenu() {
         addWindow,
         taskbarRef,
         posthogInstance,
+        copyDesktopParams,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
@@ -191,6 +196,12 @@ export default function TaskBarMenu() {
                                     link: '/components',
                                     icon: <IconCode className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Feature matrix',
+                                    link: '/feature-matrix',
+                                    icon: <IconFeatures className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
                             ]
                           : []),
                       {
@@ -312,7 +323,7 @@ export default function TaskBarMenu() {
                         }
                     >
                         <div className="flex flex-col items-center gap-1">
-                            <p className="text-sm mb-0">Ask Max</p>
+                            <p className="text-sm mb-0">Ask PostHog AI</p>
                             <div className="flex items-center gap-1">
                                 <KeyboardShortcut text="Shift" size="sm" />
                                 <KeyboardShortcut text="?" size="sm" />

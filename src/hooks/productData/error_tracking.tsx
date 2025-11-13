@@ -1,4 +1,3 @@
-import React from 'react'
 import { IconWarning } from '@posthog/icons'
 
 export const errorTracking = {
@@ -11,8 +10,9 @@ export const errorTracking = {
     colorSecondary: 'red',
     category: 'product_engineering',
     seo: {
-        title: 'Error Tracking - PostHog',
-        description: 'Track errors and exceptions in your code, then assign them as issues.',
+        title: 'Error Tracking – Catch and fix issues faster with PostHog',
+        description:
+            'Capture, monitor, and resolve exceptions with error tracking. Connect Product Analytics and Session Replay to ship confidently with full context.',
     },
     overview: {
         title: 'Track errors and resolve issues',
@@ -46,6 +46,12 @@ export const errorTracking = {
             alt: 'Error impact',
             // classes: 'justify-end items-end pl-4 @lg:pl-6',
             // imgClasses: 'rounded-tl-md shadow-2xl',
+        },
+    },
+    videos: {
+        overview: {
+            youtube: '',
+            wistia: 'scuzsr1rcz',
         },
     },
     hog: {
@@ -221,16 +227,6 @@ export const errorTracking = {
         },
         companies: [
             {
-                name: 'LogRocket',
-                key: 'logrocket',
-                link: '/blog/posthog-vs-logrocket',
-            },
-            {
-                name: 'Sentry',
-                key: 'sentry',
-                link: '/blog/posthog-vs-sentry',
-            },
-            {
                 name: 'Bugsnag',
                 key: 'bugsnag',
             },
@@ -239,113 +235,61 @@ export const errorTracking = {
                 key: 'datadog',
             },
             {
+                name: 'Glitchtip',
+                key: 'glitchtip',
+            },
+            {
+                name: 'LogRocket',
+                key: 'logrocket',
+                link: '/blog/posthog-vs-logrocket',
+            },
+            {
                 name: 'PostHog',
                 key: 'posthog',
             },
+            {
+                name: 'Rollbar',
+                key: 'rollbar',
+            },
+            {
+                name: 'Sentry',
+                key: 'sentry',
+                link: '/blog/posthog-vs-sentry',
+            },
+            {
+                name: 'Signoz',
+                key: 'signoz',
+            },
         ],
-        features: [
+        rows: ['error_tracking'],
+        excluded_sections: ['platform.libraries'],
+    },
+    postHogOnPostHog: {
+        title: 'How PostHog uses Error Tracking',
+        benefits: [
             {
-                feature: 'Error alerts',
-                companies: {
-                    sentry: true,
-                    logrocket: true,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
+                title: 'Track errors',
+                description: 'and identify spikes in exception events',
             },
             {
-                feature: 'Exception capture',
-                companies: {
-                    sentry: true,
-                    logrocket: true,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
+                title: 'Investigate root causes',
+                description: 'using stack traces and session replays',
             },
             {
-                feature: 'Issue management',
-                companies: {
-                    sentry: true,
-                    logrocket: false,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
+                title: 'Triage issues',
+                description: 'by filtering based on severity and impact',
             },
             {
-                feature: 'Network performance monitoring',
-                companies: {
-                    sentry: true,
-                    logrocket: true,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
+                title: 'Find out when things go wrong',
+                description: 'by setting up alerts for critical errors',
             },
             {
-                feature: 'Error grouping',
-                companies: {
-                    sentry: true,
-                    logrocket: true,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Source map support',
-                companies: {
-                    sentry: true,
-                    logrocket: true,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Stack tracing',
-                companies: {
-                    sentry: true,
-                    logrocket: false,
-                    bugsnag: true,
-                    datadog: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Integration with product analytics',
-                companies: {
-                    sentry: false,
-                    logrocket: true,
-                    bugsnag: false,
-                    datadog: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Integration with session replays',
-                companies: {
-                    sentry: true,
-                    logrocket: true,
-                    bugsnag: false,
-                    datadog: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Integration with A/B experiments',
-                companies: {
-                    sentry: false,
-                    logrocket: false,
-                    bugsnag: true,
-                    datadog: false,
-                    posthog: true,
-                },
+                title: 'Dodge blame',
+                description: 'by assigning errors to someone else',
             },
         ],
     },
+    integrations: ['ab_experiments', 'product_analytics', 'session_replays'],
     pairsWith: [
         {
             slug: 'session-replay',

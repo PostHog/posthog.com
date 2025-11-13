@@ -388,6 +388,11 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: "Don't get discount bamboozled",
+                    link: '/discounts',
+                },
+                {
+                    type: 'item',
                     label: 'Social validation for enterprise',
                     link: '/enterprise',
                 },
@@ -433,6 +438,12 @@ export function useMenuData(): MenuType[] {
                     label: 'Merch store',
                     link: '/merch',
                     icon: <Icons.IconStore className="size-4 text-purple" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Events',
+                    link: '/events',
+                    icon: <Icons.IconCalendar className="size-4 text-red" />,
                 },
                 {
                     type: 'item',

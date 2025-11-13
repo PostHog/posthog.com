@@ -32,7 +32,10 @@ In addition, we generate leads under category 4, ie. folks who have signed up an
 - Have seen growth in web/social traffic
 - Other intent signals for accounts below the TAM line, e.g. pricing page visits
 
-We are also starting to experiment with cold outbound, specifically to those who are under category 5, ie. folks who have signed up or used PostHog previously, and are now at a new job which is not using PostHog. We hope these folks are familiar with us and will hopefully be advocates
+We are also starting to experiment with cold outbound, specifically:
+
+- People in category 5 -- they've moved to a new job and are familiar with PostHog
+- People in category 7 -- they work at a growing (adding employees) software or technology company that, as best we can tell, are not currently using PostHog
 
 ## If you're reading this after PostHog outbound, ~~blink twice~~ you can opt out here
 
@@ -46,6 +49,6 @@ Most SaaS companies would likely just blast you with emails, calls and DMs witho
 
 ## What we're doing next
 
-We're going to try some additional cold outbound experiments probably in Q4, and it will probably look more like a marketing exercise than a sales one. Most cold outbound is extremely bad, and our ICP is not interested in some AI BDR offering a discovery call. Most companies are bad at cold outbound and as a result spend way too much money on building sales teams that they churn through, and trashing their brand and profitability. 
+Now that we're actively experimenting with both warm and colder outbound, our focus is on testing and learning. We still think most cold outbound is extremely bad, and our buyers are not interested in some AI BDR offering a discovery call. Most companies are bad at cold outbound and as a result spend way too much money on building sales teams that they churn through, and trashing their brand and profitability. We are trying to avoid that result. 
 
-We will want to target companies with the highest spend potential under the [vibe-based matrix](https://docs.google.com/spreadsheets/d/12scJrtw2vVok_-BNI6xOYsiNTUDrfkJJO_K0JKkz69w/edit?gid=0#gid=0), not just every giant enterprise under the sun. We are well-positioned to do this now that our brand is extremely well-known - it is much easier to get engagement when the people you are contacting have at least heard of your brand before. We are also building a lot more enterprise-grade features like RBAC etc. that will position us really well to serve these much larger customers, and we've already proven we can handle massive scale. 
+We are trying to target companies we view as having the highest potential to spend, and we're experimenting with how we define that list. We are well-positioned to do this now that our brand is extremely well-known - it is much easier to get engagement when the people you are contacting have at least heard of your brand before. We are also building a lot more enterprise-grade features like RBAC etc. that will position us really well to serve these much larger customers, and we've already proven we can handle massive scale. 

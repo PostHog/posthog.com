@@ -19,6 +19,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { TextureTan } from 'components/Textures'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { useWindow } from '../../context/Window'
+import TeamMember from 'components/TeamMember'
+import WistiaCustomPlayer from 'components/WistiaCustomPlayer'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -325,6 +327,17 @@ export default function CDP(): JSX.Element {
                     place.
                 </p>
                 <CDPDiagram className="max-w-lg fill-primary mx-auto" />
+                <h3>How our support engineers use the data warehouse</h3>
+                <div>
+                    <WistiaCustomPlayer mediaId="1cv9e1aimw" aspectRatio={16 / 9} className="max-w-4xl mx-auto" />
+                </div>
+                <p>
+                    You can use data in the PostHog warehouse for almost anything, including building custom insights
+                    and dashboards. One of the ways we use it ourselves is to track our support metrics, such as SLAs
+                    and first response times. <TeamMember name="Abigail Richardson" photo /> writes up a summary based
+                    on this data and shares it with the exec team weekly -&gt; and in the video above she explains how
+                    she gathers the data using SQL.
+                </p>
                 <h3>🪦 RIP the modern data stack</h3>
                 <p>
                     It was a great idea, but as the stage of your company changes, the “modern data stack” inevitably
@@ -344,12 +357,12 @@ export default function CDP(): JSX.Element {
                 </blockquote>
                 <p>So what if it didn’t have to be this way?</p>
                 <p>
-                    That’s the idea with PostHog’s customer data infrastructure. everything can finally live in one
-                    place, and can be analyzed with any of PostHog’s insight tools or BI visualizations. it doesn’t
+                    That’s the idea with PostHog’s customer data infrastructure. Everything can finally live in one
+                    place, and can be analyzed with any of PostHog’s insight tools or BI visualizations. It doesn’t
                     require a data engineer, and it scales with you as you grow.
                 </p>
                 <p>
-                    A customer data platform isn't just event pipelines and destinations. it’s not a regurgitated feed
+                    A customer data platform isn't just event pipelines and destinations. It’s not a regurgitated feed
                     of user activity. it’s not just a SQL editor and some transformations.
                 </p>
                 <p>
