@@ -17,6 +17,7 @@ import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
+import GetCroissantLogo from '../components/CustomerLogos/GetCroissantLogo'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
@@ -282,6 +283,29 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 products: {
                     workflows:
                         'PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.',
+                },
+            },
+        },
+    },
+    getcroissant: {
+        name: 'Get Croissant',
+        toolsUsed: ['workflows', 'product_analytics', 'surveys', 'web_analytics'],
+        industries: ['Business', 'SaaS'],
+        users: ['Growth', 'Product', 'Marketing'],
+        notes: 'Find coworking and meeting spaces anywhere in the world',
+        featured: false,
+        logo: GetCroissantLogo,
+        height: 8,
+        quotes: {
+            jorge_lopez_sarry: {
+                name: 'Jorge Lopez-Sarry',
+                role: 'Growth',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jorge_lopez_sarry_a9197f790d.jpeg',
+                },
+                products: {
+                    workflows:
+                        'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
                 },
             },
         },
