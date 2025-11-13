@@ -10,7 +10,7 @@ We offer shared Slack channels to customers and prospective customers in several
 
 Shared Slack channels allow many folks at PostHog to support our customers.  And, a shared Slack channel must be configured correctly in order for this support to work.
 
-**Note:** Customers on month-to-month plans (including those who downgrade from volume credit purchases to month-to-month) can keep their Slack channel open for relationship communication, but cannot create support tickets via Slack. In such cases support requests must go through in-app Zendesk tickets. This applies even to high-paying customers unless they purchase the Enterprise support add-on.
+**Note:** Customers on month-to-month plans receive a 24-hour response time guarantee (though we always do our best to be as timely as possible). To receive 8-hour response time SLA, customers need a volume credit purchase plan or the Enterprise support add-on.
 
 ## Setting up a Shared Slack Channel via Slack Connect
 
