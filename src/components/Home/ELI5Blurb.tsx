@@ -34,10 +34,10 @@ export default function ELI5Blurb(): JSX.Element {
   return (
     <div data-scheme="secondary" className={`${ready ? 'opacity-100' : 'opacity-0'} bg-primary border border-primary rounded px-4 py-3 flex flex-col @xl:flex-row @xl:justify-between @xl:items-center`}>
       <div>
-        Not sure what PostHog's all about?
+        Trying to understand what PostHog is all about?
       </div>
       <aside>
-        <OSButton asLink to="/posthog-101" variant="secondary" size="md" state={{ newWindow: true }}>Learn more</OSButton>
+        <OSButton asLink to="/posthog-101" variant="secondary" size="md" state={{ newWindow: true }}>PostHog 101</OSButton>
       </aside>
     </div>
   )
