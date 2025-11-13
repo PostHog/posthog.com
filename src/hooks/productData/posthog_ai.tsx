@@ -27,7 +27,7 @@ export const posthog_ai = {
     category: 'automation',
     slug: 'ai',
     status: 'beta',
-    hideFromPricingTable: true,
+    hideFromPricingTableAndCalculator: true,
     seo: {
         title: 'PostHog AI – Your copilot for PostHog data and insights',
         description:

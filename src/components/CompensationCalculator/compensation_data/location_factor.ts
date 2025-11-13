@@ -1113,7 +1113,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
         locationFactor: 0.6,
         currency: 'CZK',
     },
-     {
+    {
         country: 'Denmark',
         area: 'Everywhere else',
         locationFactor: 0.6,
@@ -1320,6 +1320,18 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Austria',
         area: 'All',
+        locationFactor: 0.6,
+        currency: 'EUR',
+    },
+    {
+        country: 'France',
+        area: 'Paris',
+        locationFactor: 0.6,
+        currency: 'EUR',
+    },
+    {
+        country: 'France',
+        area: 'Everywhere else',
         locationFactor: 0.6,
         currency: 'EUR',
     },

@@ -1,4 +1,5 @@
 import React from 'react'
+import OSButton from 'components/OSButton'
 import SEO from 'components/seo'
 import ProductComparisonTable from 'components/ProductComparisonTable'
 
@@ -142,6 +143,14 @@ export default function FeatureMatrix(): JSX.Element {
             >
                 <div className="@container text-primary">
                     <div className="space-y-8">
+
+                        <section>
+                            <div className="bg-accent p-4 rounded border border-primary mt-4">
+                                <p className="mt-0">This is an internal playground for the <code>&lt;ProductComparisonTable /&gt;</code> component used on competitor comparison pages.</p>
+                                <p className="mb-0">
+                                    <OSButton asLink to="/handbook/engineering/posthog-com/product-comparisons" variant="secondary" size="md" state={{ newWindow: true }}>Visit the documentation</OSButton></p>
+                            </div>
+                        </section>
                         {/* Products Overview */}
                         <section id="all-products">
                             <h2 className="text-2xl font-semibold mb-4 border-b border-border pb-2">All products</h2>
