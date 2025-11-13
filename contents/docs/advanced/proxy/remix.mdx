@@ -19,7 +19,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 If you are using Remix, you can use [API routes](https://remix.run/docs/en/main/guides/api-routes) to set up a reverse proxy.
 
-Create a file `<ph_proxy_path>.$.tsx` in the routes folder. For example, if your proxy path is `/ph-relay-xyz123`, name the file `ph-relay-xyz123.$.tsx`.
+Create a file `<ph_proxy_path>.$.tsx` in the routes folder. This will mean your path will be `/<ph_proxy_path>`. The `$` in the file name lets it match any sub-paths called by the SDK like `/<ph_proxy_path>/flags` or `/<ph_proxy_path>/i/v0/e`
 
 In this file, set up code to match requests to a custom route, set a new host header, change the URL to point to PostHog, and rewrite the response.
 
@@ -47,7 +47,9 @@ const posthogProxy = async (request: Request) => {
   const response = await fetch(newUrl, {
     method: request.method,
     headers,
-    body: request.body,
+    body: request.body
+    // This is required when passing a streaming body (like request.body) to fetch.
+    duplex: 'half',
   });
 
   return new Response(response.body, {
