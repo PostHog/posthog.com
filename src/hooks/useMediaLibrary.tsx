@@ -78,6 +78,10 @@ export const useMediaLibrary = (options?: UseMediaLibraryOptions) => {
                         ? image.tags?.some((imgTag: any) => imgTag.id === options?.tag)
                         : true
                 )
+                .map((image: any) => ({
+                    ...image,
+                    profiles: image.related?.filter((related: any) => related.__type === 'api::profile.profile') || [],
+                }))
         }
 
         return data?.reduce((acc, cur) => [...acc, ...(cur.data || [])], [] as any[]) ?? []

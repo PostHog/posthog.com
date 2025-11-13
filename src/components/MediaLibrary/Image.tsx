@@ -1,9 +1,9 @@
-import { IconCopy } from '@posthog/icons'
-import Loading from 'components/Loading'
+import { IconCopy, IconSpinner } from '@posthog/icons'
 import { useToast } from '../../context/Toast'
 import React, { useEffect, useState } from 'react'
 import CreatableMultiSelect from 'components/CreatableMultiSelect'
 import { useUser } from 'hooks/useUser'
+import Link from 'components/Link'
 
 const CLOUDINARY_BASE = `https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}`
 
@@ -17,6 +17,7 @@ export default function Image({
     allTags,
     fetchTags,
     id,
+    profiles = [],
     ...other
 }: any) {
     const { public_id, resource_type } = provider_metadata || {}
@@ -25,6 +26,7 @@ export default function Image({
     const [loadingSize, setLoadingSize] = useState<string | number | null>(null)
     const [tags, setTags] = useState<any[]>(other.tags || [])
     const [availableOptions, setAvailableOptions] = useState<any[]>(allTags)
+    const [uploader] = profiles
 
     useEffect(() => {
         setAvailableOptions(allTags)
@@ -152,14 +154,18 @@ export default function Image({
 
     return (
         <li className="flex space-x-2 items-start">
-            <div className="overflow-hidden size-[98px] flex flex-shrink-0 justify-center items-center bg-accent rounded-sm border border-input">
+            <div
+                className={`overflow-hidden flex flex-shrink-0 justify-center items-center bg-accent rounded-sm border border-input ${
+                    uploader ? 'size-[115px]' : 'size-[96px]'
+                }`}
+            >
                 <img
                     src={resource_type === 'video' ? previewUrl : generateCloudinaryUrl('orig-optimized')}
                     loading="lazy"
                 />
             </div>
             <div className="flex-grow">
-                <p className="m-0 font-bold line-clamp-1 text-ellipsis max-w-xl">
+                <p className="m-0 font-bold line-clamp-1 text-ellipsis max-w-xl leading-none">
                     {name}
                     {isImage && width && height && (
                         <span className="text-sm text-secondary font-normal ml-1">
@@ -168,7 +174,7 @@ export default function Image({
                     )}
                 </p>
                 {isImage ? (
-                    <div className="flex flex-wrap gap-1 mt-1">
+                    <div className="flex flex-wrap gap-1 mt-1.5">
                         {availableSizes.map((size) => (
                             <button
                                 key={size}
@@ -176,7 +182,7 @@ export default function Image({
                                 className="text-xs px-2 py-1 rounded bg-accent hover:bg-opacity-70 transition-colors flex items-center gap-1"
                                 disabled={loadingSize === size}
                             >
-                                {loadingSize === size ? <Loading className="size-3" /> : `${size}px`}
+                                {loadingSize === size ? <IconSpinner className="size-3 animate-spin" /> : `${size}px`}
                             </button>
                         ))}
                         <button
@@ -184,14 +190,18 @@ export default function Image({
                             className="text-xs px-2 py-1 rounded bg-accent hover:bg-opacity-70 transition-colors flex items-center gap-1"
                             disabled={loadingSize === 'orig-optimized'}
                         >
-                            {loadingSize === 'orig-optimized' ? <Loading className="size-3" /> : 'orig (optimized)'}
+                            {loadingSize === 'orig-optimized' ? (
+                                <IconSpinner className="size-3 animate-spin" />
+                            ) : (
+                                'orig (optimized)'
+                            )}
                         </button>
                         <button
                             onClick={() => handleCopy('orig')}
                             className="text-xs px-2 py-1 rounded bg-accent hover:bg-opacity-70 transition-colors flex items-center gap-1"
                             disabled={loadingSize === 'orig'}
                         >
-                            {loadingSize === 'orig' ? <Loading className="size-3" /> : 'orig'}
+                            {loadingSize === 'orig' ? <IconSpinner className="size-3 animate-spin" /> : 'orig'}
                         </button>
                     </div>
                 ) : (
@@ -207,11 +217,10 @@ export default function Image({
                             className="flex-shrink-0 size-5"
                             disabled={loadingSize === 'orig'}
                         >
-                            {loadingSize === 'orig' ? <Loading className="size-3" /> : <IconCopy />}
+                            {loadingSize === 'orig' ? <IconSpinner className="size-3 animate-spin" /> : <IconCopy />}
                         </button>
                     </div>
                 )}
-
                 <div className="mt-2">
                     <CreatableMultiSelect
                         label="Add a tag..."
@@ -224,6 +233,18 @@ export default function Image({
                         hideLabel
                     />
                 </div>
+                {uploader && (
+                    <p className="text-xs text-secondary m-0 mt-1">
+                        Uploaded by{' '}
+                        <Link
+                            className="text-red dark:text-yellow font-semibold"
+                            to={`/community/profiles/${uploader.id}`}
+                            state={{ newWindow: true }}
+                        >
+                            {[uploader.firstName, uploader.lastName].filter(Boolean).join(' ')}
+                        </Link>
+                    </p>
+                )}
             </div>
         </li>
     )
