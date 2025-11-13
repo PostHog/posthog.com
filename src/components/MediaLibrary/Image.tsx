@@ -22,7 +22,7 @@ export default function Image({
 }: any) {
     const { public_id, resource_type } = provider_metadata || {}
     const { addToast } = useToast()
-    const { getJwt } = useUser()
+    const { getJwt, fetchUser } = useUser()
     const [loadingSize, setLoadingSize] = useState<string | number | null>(null)
     const [tags, setTags] = useState<any[]>(other.tags || [])
     const [availableOptions, setAvailableOptions] = useState<any[]>(allTags)
@@ -82,6 +82,7 @@ export default function Image({
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
             body: JSON.stringify({ mediaId: id, tagId }),
         })
+        await fetchUser()
     }
 
     const removeTagFromMedia = async (tagId: any, jwt: string) => {
@@ -90,6 +91,7 @@ export default function Image({
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
             body: JSON.stringify({ mediaId: id, tagId }),
         })
+        await fetchUser()
     }
 
     const handleChangeTags = async (tagIds: any[]) => {
