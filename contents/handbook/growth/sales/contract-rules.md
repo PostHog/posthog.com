@@ -89,7 +89,7 @@ Our general principle is that a customer should get a discount because the cash 
 
 ### Why we require up-front payment for credit purchases
 
-We've found that split payment terms create friction for both teams—customers chasing internal approvals, us chasing invoices, nobody focused on delivering value. When customers pay quarterly or monthly, they often consume credits faster than they pay for them, effectively turning us into a line of credit. We are vendors, not lenders. Our focus is on [building the best product](/handbook/how-we-make-money), not managing accounts receivable. Up-front payments keep everyone focused on customer success and let us invest cash immediately into building features and support. If a customer needs payment flexibility, we're happy to adjust the credit amount and discount, per guidelines above, to fit their budget while maintaining up-front payment.
+We've found that split payment terms create friction for both teams – customers chasing internal approvals, us chasing invoices, nobody focused on delivering value. When customers pay quarterly or monthly, they often consume credits faster than they pay for them, effectively turning us into a line of credit. We are vendors, not lenders. Our focus is on [building the best product](/handbook/how-we-make-money), not managing accounts receivable. Up-front payments keep everyone focused on customer success and let us invest cash immediately into building features and support. If a customer needs payment flexibility, we're happy to adjust the credit amount and discount, per guidelines above, to fit their budget while maintaining up-front payment.
 
 ### Credit for case studies
 
