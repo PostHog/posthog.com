@@ -18,6 +18,8 @@ Croissant’s team was already using PostHog for analytics, web insights, and su
 
 They started by setting up a simple workflow: when a visitor shows signs of B2B intent, PostHog automatically sends a follow-up email to book a demo. If the user hasn’t registered yet, the workflow still stores an “intent” property so they can re-target later.
 
+![croissant screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/croissant_screenshot1_5e2395b9fd.png)
+
 It’s a small automation, but it replaced several brittle custom scripts and runs continuously in production today.
 
 _“We’ve already identified new customers through it. It’s early, but it’s promising, and it runs without needing us to think about it.”_
@@ -26,6 +28,8 @@ _“We’ve already identified new customers through it. It’s early, but it’
 Jorge has used almost every automation platform like Zapier and Windmill, but says Workflows feels different because it starts with the data they already have.
 
 Everything runs on shared product data. There’s no need to rebuild schemas or sync events from a warehouse.
+
+![croissant email screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_b2_B_email_content_9b87b45c07.png)
 
 Instead of rebuilding schemas or syncing events from a warehouse, everything runs on shared product data inside PostHog. That means analytics, surveys, and outreach all live in one place, with fewer moving parts and fewer headaches. And when they need more flexibility, they can still call webhooks, update properties, or fan out to other tools for custom logic.
 
