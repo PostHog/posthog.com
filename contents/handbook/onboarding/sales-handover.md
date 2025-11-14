@@ -36,7 +36,7 @@ If you see an account with a promising, positive growth trajectory, but they may
 Some pointers on what to pay attention to in Vitally while checking for prior Sales engagement:
 
 - Segments (e.g. TAM/CSM Candidate, $20k MRR, Active Trial, Active Self-serve Trial, Annual Plan, etc.)
-- Slack channel (following the naming convention #posthog-[company name])
+- Slack channel (following the naming convention `#posthog-[company name]`)
 - Key Roles (is someone assigned to the account?)
 - Trial Status widget in the Onboarding dashboard
 - Active Conversations and Meetings (any trace of a booked call or an ongoing conversation)
