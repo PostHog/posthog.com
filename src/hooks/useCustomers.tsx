@@ -287,7 +287,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
-    getcroissant: {
+    croissant: {
         name: 'Get Croissant',
         toolsUsed: ['workflows', 'product_analytics', 'surveys', 'web_analytics'],
         industries: ['Business', 'SaaS'],
@@ -297,8 +297,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: GetCroissantLogo,
         height: 8,
         quotes: {
-            jorge_lopez_sarry: {
-                name: 'Jorge Lopez-Sarry',
+            jorge_lopez: {
+                name: 'Jorge López',
                 role: 'Growth',
                 image: {
                     thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jorge_lopez_sarry_a9197f790d.jpeg',
