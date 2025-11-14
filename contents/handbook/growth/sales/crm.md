@@ -153,7 +153,7 @@ These mostly come into the sales inbox rather than the contact form. Whilst ther
 
 By default, when you are out leads will still be routed to you, and as we have no expectation of you being available whilst on PTO leads may be missed and not followed up on.  To mitigate this we need to temporarily remove you from lead round robin:
 
-- If you out for 1 consecutive day or less:
+- If you are out for 1 consecutive day or less:
   - Ensure your calendar is up to date with your time off, so that Default doesn't schedule meetings for when you are out.
 - If you are out for longer than 1 consecutive day:
   - Ensure your calendar is up to date with your time off, so that Default doesn't schedule meetings for when you are out.
