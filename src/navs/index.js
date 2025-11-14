@@ -3920,6 +3920,23 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Code variables',
+                    url: '/docs/error-tracking/code-variables',
+                    icon: 'IconBrackets',
+                    color: 'purple',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/code-variables',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/error-tracking/code-variables/python',
+                        },
+                    ],
+                },
+                {
                     name: 'Group exceptions into issues',
                     url: '/docs/error-tracking/grouping-issues',
                     icon: 'IconList',
