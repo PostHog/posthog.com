@@ -1,47 +1,97 @@
+import { useWindow } from '../../context/Window'
+import { useApp } from '../../context/App'
 import React, { useState, useEffect, useRef } from 'react'
 
 const songs = [
     {
         title: 'Hey',
         artist: 'The Pixies',
-        url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        videoId: 'tVCUAXOBF7w',
     },
     {
         title: 'Where Is My Mind?',
         artist: 'The Pixies',
-        url: 'https://www.youtube.com/watch?v=N3oCS85HvpY',
+        videoId: 'N3oCS85HvpY',
     },
     {
         title: 'Come as You Are',
         artist: 'Nirvana',
-        url: 'https://www.youtube.com/watch?v=vabnZ9-ex7o',
+        videoId: 'vabnZ9-ex7o',
     },
     {
         title: 'Everlong',
         artist: 'Foo Fighters',
-        url: 'https://www.youtube.com/watch?v=eBG7P-K-r1Y',
+        videoId: 'eBG7P-K-r1Y',
     },
     {
         title: 'Just Like Heaven',
         artist: 'The Cure',
-        url: 'https://www.youtube.com/watch?v=n3nPiBai66M',
+        videoId: 'n3nPiBai66M',
     },
     {
         title: 'There Is a Light That Never Goes Out',
         artist: 'The Smiths',
-        url: 'https://www.youtube.com/watch?v=siO6dkqidc4',
+        videoId: 'siO6dkqidc4',
     },
     {
         title: 'Under the Bridge',
         artist: 'Red Hot Chili Peppers',
-        url: 'https://www.youtube.com/watch?v=lwlogyj7nFE',
+        videoId: 'lwlogyj7nFE',
     },
     {
         title: '1979',
         artist: 'The Smashing Pumpkins',
-        url: 'https://www.youtube.com/watch?v=4aeETEoNfOg',
+        videoId: '4aeETEoNfOg',
     },
 ]
+
+// YouTube API types
+interface YTPlayer {
+    playVideo: () => void
+    pauseVideo: () => void
+    stopVideo: () => void
+    loadVideoById: (videoId: string) => void
+}
+
+interface YTPlayerConfig {
+    height: string
+    width: string
+    videoId: string
+    host: string
+    playerVars: {
+        autoplay: number
+        controls: number
+        disablekb: number
+        fs: number
+        modestbranding: number
+        rel: number
+    }
+    events: {
+        onReady: () => void
+        onStateChange: (event: { data: number }) => void
+    }
+}
+
+interface YTPlayerConstructor {
+    new (elementId: string, config: YTPlayerConfig): YTPlayer
+}
+
+interface YTNamespace {
+    Player: YTPlayerConstructor
+    PlayerState: {
+        PLAYING: number
+        PAUSED: number
+        ENDED: number
+    }
+}
+
+// Extend Window interface for YouTube API
+declare global {
+    interface Window {
+        YT: YTNamespace | any
+        onYouTubeIframeAPIReady: (() => void) | null
+    }
+}
 
 interface SwitchProps {
     label: string | JSX.Element
@@ -145,6 +195,8 @@ function Reel({ rotation }: ReelProps): JSX.Element {
 }
 
 export default function TapePlayer(): JSX.Element {
+    const { appWindow } = useWindow()
+    const { setWindowTitle } = useApp()
     const [isPoweredOn, setIsPoweredOn] = useState(true)
     const [isPlaying, setIsPlaying] = useState(false)
     const [danceMode, setDanceMode] = useState(false)
@@ -155,6 +207,76 @@ export default function TapePlayer(): JSX.Element {
     )
     const animationRef = useRef<number>()
     const waveformRef = useRef<number>()
+    const playerRef = useRef<YTPlayer | null>(null)
+    const playerReadyRef = useRef(false)
+
+    // Load YouTube iframe API
+    useEffect(() => {
+        if (appWindow) {
+            setWindowTitle(appWindow, '♫ PostHog.fm')
+        }
+        if (typeof window === 'undefined') return
+
+        // Check if API is already loaded
+        if (window.YT && window.YT.Player) {
+            initializePlayer()
+            return
+        }
+
+        // Load the API
+        const tag = document.createElement('script')
+        tag.src = 'https://www.youtube.com/iframe_api'
+        const firstScriptTag = document.getElementsByTagName('script')[0]
+        firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag)
+
+        // Set up callback
+        window.onYouTubeIframeAPIReady = initializePlayer
+    }, [])
+
+    const initializePlayer = () => {
+        if (typeof window === 'undefined' || !window.YT || playerRef.current) return
+
+        playerRef.current = new window.YT.Player('youtube-player', {
+            height: '0',
+            width: '0',
+            videoId: songs[0].videoId,
+            host: 'https://www.youtube-nocookie.com',
+            playerVars: {
+                autoplay: 0,
+                controls: 0,
+                disablekb: 1,
+                fs: 0,
+                modestbranding: 1,
+                rel: 0,
+            },
+            events: {
+                onReady: () => {
+                    playerReadyRef.current = true
+                },
+                onStateChange: (event: { data: number }) => {
+                    // Update playing state based on YouTube player state
+                    if (event.data === window.YT.PlayerState.PLAYING) {
+                        setIsPlaying(true)
+                    } else if (
+                        event.data === window.YT.PlayerState.PAUSED ||
+                        event.data === window.YT.PlayerState.ENDED
+                    ) {
+                        setIsPlaying(false)
+                    }
+                },
+            },
+        })
+    }
+
+    // Handle song changes
+    useEffect(() => {
+        if (playerRef.current && playerReadyRef.current) {
+            playerRef.current.loadVideoById(songs[currentSongIndex].videoId)
+            if (isPlaying) {
+                playerRef.current.playVideo()
+            }
+        }
+    }, [currentSongIndex])
 
     // Animate the tape reels when playing
     useEffect(() => {
@@ -206,27 +328,50 @@ export default function TapePlayer(): JSX.Element {
     }, [isPlaying, isPoweredOn])
 
     const handlePlay = () => {
-        if (isPoweredOn) setIsPlaying(true)
-    }
-
-    const handlePause = () => {
-        setIsPlaying(false)
-    }
-
-    const handleRewind = () => {
-        if (isPoweredOn) {
-            setCurrentSongIndex((prev) => (prev === 0 ? songs.length - 1 : prev - 1))
+        if (isPoweredOn && playerRef.current && playerReadyRef.current) {
+            playerRef.current.playVideo()
         }
     }
 
-    const handleFastForward = () => {
+    const handlePause = () => {
+        if (playerRef.current && playerReadyRef.current) {
+            playerRef.current.pauseVideo()
+        }
+    }
+
+    const handlePrev = () => {
         if (isPoweredOn) {
+            const wasPlaying = isPlaying
+            setCurrentSongIndex((prev) => (prev === 0 ? songs.length - 1 : prev - 1))
+            if (wasPlaying && playerRef.current && playerReadyRef.current) {
+                setTimeout(() => {
+                    if (playerRef.current) {
+                        playerRef.current.playVideo()
+                    }
+                }, 100)
+            }
+        }
+    }
+
+    const handleSkip = () => {
+        if (isPoweredOn) {
+            const wasPlaying = isPlaying
             setCurrentSongIndex((prev) => (prev === songs.length - 1 ? 0 : prev + 1))
+            if (wasPlaying && playerRef.current && playerReadyRef.current) {
+                setTimeout(() => {
+                    if (playerRef.current) {
+                        playerRef.current.playVideo()
+                    }
+                }, 100)
+            }
         }
     }
 
     const handleEject = () => {
         if (isPoweredOn) {
+            if (playerRef.current && playerReadyRef.current) {
+                playerRef.current.stopVideo()
+            }
             setIsPlaying(false)
             setCurrentSongIndex(0)
         }
@@ -237,7 +382,7 @@ export default function TapePlayer(): JSX.Element {
             navigator.share({
                 title: songs[currentSongIndex].title,
                 text: `Check out ${songs[currentSongIndex].title} by ${songs[currentSongIndex].artist}`,
-                url: songs[currentSongIndex].url,
+                url: `https://www.youtube.com/watch?v=${songs[currentSongIndex].videoId}`,
             })
         }
     }
@@ -246,6 +391,9 @@ export default function TapePlayer(): JSX.Element {
 
     return (
         <div data-scheme="secondary" className="w-full p-6 bg-primary">
+            {/* Hidden YouTube player */}
+            <div id="youtube-player" className="hidden" />
+
             {/* Waveform */}
             <div className="mb-4 h-20 flex items-end justify-between gap-[2px] border-2 border-primary bg-primary p-2 rounded">
                 {waveformBars.map((height, i) => (
@@ -306,7 +454,7 @@ export default function TapePlayer(): JSX.Element {
             {/* Control buttons */}
             <div className="flex items-start justify-center gap-2">
                 <TapeButton label="Eject" icon="⏏" onClick={handleEject} disabled={!isPoweredOn} />
-                <TapeButton label="Rewind" icon="◁◁" onClick={handleRewind} disabled={!isPoweredOn} />
+                <TapeButton label="Prev" icon="◁◁" onClick={handlePrev} disabled={!isPoweredOn} />
                 <TapeButton
                     label="Play"
                     icon="▷"
@@ -315,7 +463,7 @@ export default function TapePlayer(): JSX.Element {
                     isPressed={isPlaying}
                 />
                 <TapeButton label="Pause" icon="||" onClick={handlePause} disabled={!isPoweredOn || !isPlaying} />
-                <TapeButton label="Fast forward" icon="▷▷" onClick={handleFastForward} disabled={!isPoweredOn} />
+                <TapeButton label="Skip" icon="▷▷" onClick={handleSkip} disabled={!isPoweredOn} />
                 <TapeButton label="Share" icon="↗" onClick={handleShare} disabled={!isPoweredOn} />
             </div>
         </div>
