@@ -2933,6 +2933,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Schema management',
+                    url: '/docs/product-analytics/schema-management',
+                    icon: 'IconDatabase',
+                    color: 'blue',
+                },
+                {
                     name: 'Creating insights',
                     url: '/docs/product-analytics/insights',
                     icon: 'IconGraph',
