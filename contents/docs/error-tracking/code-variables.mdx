@@ -2,7 +2,7 @@
 title: Code variables
 ---
 
-Posthog SDK can automatically capture the state of local variables when an exception occurs, giving you a debugger-like view of your application at the time of the error.
+PostHog SDK can automatically capture the state of local variables when an exception occurs, giving you a debugger-like view of your application at the time of the error.
 
 When enabled, PostHog captures the values of variables from each frame in the stack trace, eliminating the need to reproduce errors locally just to understand what values were present when the exception was thrown.
 
@@ -13,13 +13,17 @@ When enabled, PostHog captures the values of variables from each frame in the st
     classes="rounded"
 />
 
+<Caption>
+The variables account_balance, email, user_id, and username and their values
+</Caption>
+
 ## How it works
 
 1. **Variable extraction**: Local variables are extracted from each frame in the stack trace
 2. **Scope filtering**: Only frames from your application code (not third-party libraries) are included
 3. **Type mapping**: Simple types like strings, numbers, and booleans are directly mapped. Complex objects are JSON-serialized when possible. Otherwise their type name is shown
-5. **Truncation**: Long values are automatically truncated to keep event sizes manageable
-6. **Security**: Sensitive variable names are masked or excluded based on configurable patterns
+4. **Truncation**: Long values are automatically truncated to keep event sizes manageable
+5. **Security**: Sensitive variable names are masked or excluded based on configurable patterns
 
 The captured variables appear alongside the stack trace in PostHog, allowing you to inspect the exact state of your application at the moment of the error.
 
@@ -34,12 +38,16 @@ Masking replaces the values of sensitive variables with a redacted placeholder w
     classes="rounded"
 />
 
+<Caption>
+The secret's value is masked
+</Caption>
+
 ### Ignoring
 
-Ignoring completely excludes variables from capture. This is useful for internal framework variables, temporary data, or variables that don't provide debugging value. Ignored variables won't appear in the captured stack trace at all.
+Ignoring completely excludes variables from being captured. This is useful for internal framework variables, temporary data, or variables that don't provide debugging value. Ignored variables won't appear in the captured stack trace at all.
 
-### Platform-specific configuration
+### SDK support
 
 Each SDK provides platform-specific configuration options. See the platform-specific documentation for details:
 
-- [Python configuration](/docs/error-tracking/code-variables/python)
+- [Python](/docs/error-tracking/code-variables/python)
