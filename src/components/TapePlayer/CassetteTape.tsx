@@ -37,9 +37,18 @@ interface CassetteTapeProps {
     artist?: string
     rotation?: number
     labelBackground?: CassetteLabelBackground
+    cassetteColor?: string
+    labelColor?: string
 }
 
-export default function CassetteTape({ title, artist, rotation = 0, labelBackground }: CassetteTapeProps): JSX.Element {
+export default function CassetteTape({
+    title,
+    artist,
+    rotation = 0,
+    labelBackground,
+    cassetteColor,
+    labelColor,
+}: CassetteTapeProps): JSX.Element {
     const labelBackgroundStyle = labelBackground?.url
         ? {
               backgroundImage: `url(${labelBackground.url})`,
@@ -49,11 +58,19 @@ export default function CassetteTape({ title, artist, rotation = 0, labelBackgro
           }
         : {}
 
+    const labelStyle = {
+        ...labelBackgroundStyle,
+        backgroundColor: labelColor,
+    }
+
     return (
-        <div className="flex-1 border-2 border-primary bg-accent shadow-inner aspect-[100/63] rounded">
+        <div
+            className="flex-1 border-2 border-primary shadow-inner aspect-[100/63] rounded bg-accent"
+            style={{ backgroundColor: cassetteColor }}
+        >
             <div
-                className="border-2 border-primary bg-primary m-[3.5%] mb-0 p-[3.5%] pb-0 h-[75%] flex flex-col justify-between rounded"
-                style={labelBackgroundStyle}
+                className="border-2 border-primary m-[3.5%] mb-0 p-[3.5%] pb-0 h-[75%] flex flex-col justify-between rounded bg-primary"
+                style={labelStyle}
             >
                 {/* Tape label */}
                 {title && artist && (

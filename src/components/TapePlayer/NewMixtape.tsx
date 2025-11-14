@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useFormik } from 'formik'
 import { MixtapeFormValues } from './types'
 import { Fieldset } from 'components/OSFieldset'
-import { OSInput, OSSelect } from 'components/OSForm'
+import { OSInput, OSSelect, OSTextarea } from 'components/OSForm'
 import CassetteTape from './CassetteTape'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconSpinner, IconTrash } from '@posthog/icons'
@@ -19,7 +19,6 @@ import { CSS } from '@dnd-kit/utilities'
 import { Track } from './types'
 import { cassetteLabelBackgrounds, CassetteLabelBackground } from '../../data/cassetteBackgrounds'
 import SEO from 'components/seo'
-import qs from 'qs'
 import { useUser } from 'hooks/useUser'
 import { useToast } from '../../context/Toast'
 
@@ -28,59 +27,6 @@ interface SortableTrackProps {
     index: number
     onRemove: () => void
     onChange: (e: React.ChangeEvent<any>) => void
-}
-
-const ProfileSelect = ({ value, onChange }: { value: any; onChange: (value: any) => void }) => {
-    const [profiles, setProfiles] = useState<any[]>([])
-    useEffect(() => {
-        const query = qs.stringify({
-            populate: ['avatar', 'teams'],
-            pagination: {
-                limit: 100,
-            },
-            filters: {
-                teams: {
-                    id: {
-                        $notNull: true,
-                    },
-                },
-            },
-        })
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`)
-            .then((res) => res.json())
-            .then(({ data }) => {
-                setProfiles(data)
-            })
-    }, [])
-
-    const sortedProfiles = useMemo(() => {
-        return [...profiles]
-            .sort((a, b) => {
-                const nameA = [a.attributes.firstName, a.attributes.lastName].filter(Boolean).join(' ')
-                const nameB = [b.attributes.firstName, b.attributes.lastName].filter(Boolean).join(' ')
-                return nameA.localeCompare(nameB)
-            })
-            .map((profile) => {
-                const name = [profile.attributes.firstName, profile.attributes.lastName].filter(Boolean).join(' ')
-                return {
-                    label: name,
-                    value: profile,
-                }
-            })
-    }, [profiles])
-
-    return (
-        <OSSelect
-            label="Recipient"
-            direction="column"
-            placeholder="Recipient"
-            options={sortedProfiles}
-            value={(profiles.includes(value) ? value : profiles.find((profile) => profile.id === value?.id)) || {}}
-            onChange={onChange}
-            searchable={true}
-            searchPlaceholder="Search..."
-        />
-    )
 }
 
 function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps) {
@@ -100,6 +46,7 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
                         Track {index + 1}
                     </span>
                 }
+                className="mb-2"
             >
                 <button type="button" onClick={onRemove} className="absolute top-0 right-3 bg-primary z-10 group">
                     <IconTrash className="size-5 opacity-70 group-hover:opacity-100" />
@@ -136,7 +83,6 @@ export default function NewMixtape(): JSX.Element {
     const [selectedLabelBackground, setSelectedLabelBackground] = useState<CassetteLabelBackground>(
         cassetteLabelBackgrounds[0]
     )
-
     const sensors = useSensors(
         useSensor(PointerSensor),
         useSensor(KeyboardSensor, {
@@ -146,7 +92,7 @@ export default function NewMixtape(): JSX.Element {
 
     const formik = useFormik<MixtapeFormValues>({
         initialValues: {
-            recipient: null,
+            notes: '',
             tracks: [
                 {
                     id: Date.now().toString(),
@@ -156,6 +102,8 @@ export default function NewMixtape(): JSX.Element {
                 },
             ],
             labelBackground: cassetteLabelBackgrounds[0],
+            cassetteColor: '#d2d3cc',
+            labelColor: '#eeefea',
         },
         onSubmit: async (values) => {
             try {
@@ -174,15 +122,17 @@ export default function NewMixtape(): JSX.Element {
                             creator: {
                                 connect: [user?.profile?.id],
                             },
-                            recipient: {
-                                connect: [values.recipient?.id],
-                            },
+                            notes: values.notes,
                             tracks: values.tracks.map((track) => ({
                                 artist: track.artist,
                                 title: track.title,
                                 youtubeUrl: track.youtubeUrl,
                             })),
-                            labelBackground: JSON.stringify(values.labelBackground),
+                            metadata: {
+                                labelBackground: values.labelBackground,
+                                cassetteColor: values.cassetteColor,
+                                labelColor: values.labelColor,
+                            },
                         },
                     }),
                 })
@@ -200,10 +150,6 @@ export default function NewMixtape(): JSX.Element {
         },
         validate: (values) => {
             const errors: Record<string, any> = {}
-
-            if (!values.recipient) {
-                errors.recipient = 'Recipient is required'
-            }
 
             if (!values.tracks || values.tracks.length === 0) {
                 errors.tracks = 'At least one track is required'
@@ -264,8 +210,58 @@ export default function NewMixtape(): JSX.Element {
         <ScrollArea>
             <SEO title="New mixtape" />
             <div data-scheme="primary" className="p-4 grid grid-cols-2 gap-4 items-start">
-                <div className="sticky top-4 space-y-4">
-                    <CassetteTape labelBackground={selectedLabelBackground} />
+                <div className="sticky top-4 space-y-2">
+                    <CassetteTape
+                        labelBackground={selectedLabelBackground}
+                        cassetteColor={formik.values.cassetteColor}
+                        labelColor={formik.values.labelColor}
+                    />
+                    <div className="flex space-x-2">
+                        <Fieldset legend="Cassette color" className="mb-0">
+                            <div className="flex items-center gap-2">
+                                <input
+                                    type="color"
+                                    value={formik.values.cassetteColor}
+                                    onChange={(e) => formik.setFieldValue('cassetteColor', e.target.value)}
+                                    className="size-7 cursor-pointer rounded border-2 border-input"
+                                />
+                                <OSInput
+                                    containerClassName="flex-1"
+                                    showLabel={false}
+                                    size="sm"
+                                    label=""
+                                    value={formik.values.cassetteColor}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                        formik.setFieldValue('cassetteColor', e.target.value)
+                                    }
+                                    placeholder="#000000"
+                                    className="flex-1"
+                                />
+                            </div>
+                        </Fieldset>
+                        <Fieldset legend="Label color" className="mb-0">
+                            <div className="flex items-center gap-2">
+                                <input
+                                    type="color"
+                                    value={formik.values.labelColor}
+                                    onChange={(e) => formik.setFieldValue('labelColor', e.target.value)}
+                                    className="size-7 cursor-pointer rounded border-2 border-input"
+                                />
+                                <OSInput
+                                    containerClassName="flex-1"
+                                    showLabel={false}
+                                    size="sm"
+                                    label=""
+                                    value={formik.values.labelColor}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                        formik.setFieldValue('labelColor', e.target.value)
+                                    }
+                                    placeholder="#000000"
+                                    className="flex-1"
+                                />
+                            </div>
+                        </Fieldset>
+                    </div>
                     <Fieldset legend="Label background">
                         <div className="grid grid-cols-3 gap-2">
                             {cassetteLabelBackgrounds.map((bg) => {
@@ -300,36 +296,43 @@ export default function NewMixtape(): JSX.Element {
                             })}
                         </div>
                     </Fieldset>
+                </div>
+                <form onSubmit={formik.handleSubmit} className="space-y-4 mb-0">
+                    <Fieldset legend="Tracklist" className="mb-0">
+                        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                            <SortableContext items={formik.values.tracks} strategy={verticalListSortingStrategy}>
+                                <div className="space-y-2">
+                                    {formik.values.tracks.map((track, index) => (
+                                        <SortableTrack
+                                            key={track.id}
+                                            track={track}
+                                            index={index}
+                                            onRemove={() => removeTrack(index)}
+                                            onChange={formik.handleChange}
+                                        />
+                                    ))}
+                                </div>
+                            </SortableContext>
+                        </DndContext>
+                        <div className="flex justify-center w-full">
+                            <OSButton variant="secondary" width="full" onClick={addTrack}>
+                                + Add a track
+                            </OSButton>
+                        </div>
+                    </Fieldset>
+
+                    <div className="!m-0">
+                        <OSTextarea
+                            direction="column"
+                            label="Notes"
+                            name="notes"
+                            value={formik.values.notes}
+                            onChange={formik.handleChange}
+                        />
+                    </div>
                     <div>
                         <OSButton variant="primary" width="full" onClick={formik.submitForm}>
                             {formik.isSubmitting ? <IconSpinner className="size-6 animate-spin" /> : 'Publish'}
-                        </OSButton>
-                    </div>
-                </div>
-                <form onSubmit={formik.handleSubmit} className="space-y-4 mb-0">
-                    <ProfileSelect
-                        value={formik.values.recipient}
-                        onChange={(value) => formik.setFieldValue('recipient', value)}
-                    />
-                    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                        <SortableContext items={formik.values.tracks} strategy={verticalListSortingStrategy}>
-                            <div className="space-y-2">
-                                {formik.values.tracks.map((track, index) => (
-                                    <SortableTrack
-                                        key={track.id}
-                                        track={track}
-                                        index={index}
-                                        onRemove={() => removeTrack(index)}
-                                        onChange={formik.handleChange}
-                                    />
-                                ))}
-                            </div>
-                        </SortableContext>
-                    </DndContext>
-
-                    <div className="flex justify-center mt-2 w-full">
-                        <OSButton variant="secondary" width="full" onClick={addTrack}>
-                            + Add a track
                         </OSButton>
                     </div>
                 </form>
