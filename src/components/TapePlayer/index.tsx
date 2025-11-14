@@ -416,7 +416,13 @@ export default function TapePlayer(): JSX.Element {
                     isOn={isPoweredOn}
                     onToggle={() => {
                         setIsPoweredOn(!isPoweredOn)
-                        if (isPoweredOn) setIsPlaying(false)
+                        if (isPoweredOn) {
+                            // Pause the music when turning off
+                            if (playerRef.current && playerReadyRef.current) {
+                                playerRef.current.pauseVideo()
+                            }
+                            setIsPlaying(false)
+                        }
                     }}
                 />
 
@@ -424,7 +430,7 @@ export default function TapePlayer(): JSX.Element {
                 <div className="flex-1 border-2 border-primary bg-accent shadow-inner aspect-[100/63] rounded">
                     <div className="border-2 border-primary bg-primary m-4 p-4 h-[78%] flex flex-col rounded">
                         {/* Tape label */}
-                        <div className="bg-accent border-2 border-primary p-3 mb-5 text-center min-h-[56px] flex flex-col justify-center rounded">
+                        <div className="bg-accent/30 border-2 border-primary p-3 mb-5 text-center min-h-[56px] flex flex-col justify-center rounded">
                             <div className="font-bold text-sm text-primary truncate">{currentSong.title}</div>
                             <div className="text-xs text-secondary truncate">{currentSong.artist}</div>
                         </div>
