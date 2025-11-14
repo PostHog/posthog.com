@@ -97,6 +97,7 @@ export const topicIcons = {
     '#where-in-the-world': IconGlobe,
     'web analytics': IconPieChart,
     'revenue analytics': IconPiggyBank,
+    workflows: IconDecisionTree,
 }
 
 export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
