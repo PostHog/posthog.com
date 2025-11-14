@@ -4,21 +4,21 @@ sidebar: Handbook
 showTitle: true
 ---
 
-As CSM, it is your responsibility to be the expert on each of your customers, whether or not they choose to engage with you. Obviously you’ll learn more about customers that you actually talk to, but there’s still plenty of ways to get to know an account, learn their use cases, and track their journey from all of the data available.
+As a CSM, it is your responsibility to be the expert on each of your customers, whether or not they choose to engage with you. Obviously, you’ll learn more about customers that you actually talk to, but there are still plenty of ways to get to know an account, learn their use cases, and track their journey from all of the data available.
 
-Many customers have never spoken to PostHog – some happily welcome our help, others are strongly independent. In order to be a successful as a CSM, we want to understand our customers and be helpful.
+Many customers have never spoken to PostHog – some happily welcome our help, others are strongly independent. In order to be successful as a CSM, we want to understand our customers and be helpful.
 
-[Get people to talk to you](/handbook/growth/sales/expansion-and-retention#1-get-people-to-talk-to-you) also has good helpful tactics.
+[Get people to talk to you](/handbook/growth/sales/expansion-and-retention#1-get-people-to-talk-to-you) also has good, helpful tactics.
 
 # Newly assigned accounts
 
-When you're assigned a new customer account, your approach will vary depending on their existing relationship with PostHog. This guide walks you through some key steps you can take when welcoming new customers to your book.
+When you're assigned a new customer account, your approach will vary depending on the existing relationship between the customer and PostHog. This guide walks you through some key steps you can take when welcoming new customers to your book.
 
 ## Determine which category your customer falls into
 
 ### No/low interaction with PostHog humans
 
-These are customers who have been using PostHog but haven't had much direct contact with our team. You should do a more thorough assessment before you have your first call with them. If you haven't done your initial outreach yet, you can also use the assessment to customize your message with a specific tip from your learning.
+These are customers who have been using PostHog but haven't had much direct contact with our team. You should conduct a more thorough assessment before your first call with them. If you haven't done your initial outreach yet, you can also use the assessment to customize your message with a specific tip from your learning.
 
 #### Account and business audit
 
@@ -58,19 +58,19 @@ If you don't have an established contact, introduce yourself to the widest blast
 Your intro message should:
 
 -   Introduce yourself as their new CSM
--   Describe value of CSM – dedicated point of contact, go-to person for help or questions, help customer use PostHog effectively e.g. through training or strategic guidance. Many customers misunderstand the CSM role as 'just support', so make sure to distinguish your role as CSM apart from that.
+-   Describe the value of CSM – dedicated point of contact, go-to person for help or questions, help the customer use PostHog effectively, e.g., through training or strategic guidance. Many customers misunderstand the CSM role as 'just support', so make sure to distinguish your role as a CSM apart from that.
 -   Value nugget: show how you can help by delivering value-add
 
 ### Examples of a value nugget
 
 Take a look at your customer's account in Vitally and Metabase to identify ways you can be helpful. Some examples include:
 
--   Increase / decrease in events: make sure this is expected and things are implemented correctly
+-   Increase/decrease in events: make sure this is expected and things are implemented correctly
 -   Recently opened a support ticket: follow up to make sure their issue is resolved
 -   Concrete ways a customer can [optimize their spending](/handbook/cs-and-onboarding/health-checks#are-they-paying-for-things-they-dont-need) or [improve their implementation](/handbook/cs-and-onboarding/health-checks#have-they-implemented-tracking-incorrectly)
 -   Invitation to a shared Slack channel so it's easier to connect with our team.
 -   Lots of new users or low user engagement: offer a training session on how to use PostHog effectively
--   On a legacy pricing plan: "we've moved off legacy plan for more than a year and I'd like to transition you to standard pricing. Happy to discuss the changes"
+-   On a legacy pricing plan: "We've moved off the legacy plan for more than a year, and I'd like to transition you to standard pricing. Happy to discuss the changes."
 
 If there's an established Slack channel you are inheriting, do it in Slack.
 
@@ -84,7 +84,7 @@ You should find what you're comfortable with whilst keeping a sense of PostHog's
 
 In Vitally, you can see how other team members have reached out to customers in the past by going to an account's Active conversations tab for inspiration.
 
-If no response, follow up after 2-3 business days targeting folks in the product or data team. Emphasize the purpose of you reaching out - you're not trying to sell them something, you want to understand their use-case and help optimize their PostHog integration.
+If there is no response, follow up after 2-3 business days, targeting individuals in the engineering, product, or data team. Emphasize the purpose of your reaching out - you're not trying to sell them something, you want to understand their use case and help optimize their PostHog integration.
 
 ## Connect with champion
 
@@ -92,43 +92,43 @@ If no response, follow up after 2-3 business days targeting folks in the product
 
 Aim: start the relationship with a champion, ideally in the engineering, product, or data team
 
-Content: acknowledge their time is valuable, that you will not be selling or pitching. You want to understand how to better serve the customer by understanding how they use PostHog. Would they be open for a 15 minute call? Offer to do this async as well.
+Content: Acknowledge that their time is valuable and that you will not be selling or pitching. You want to understand how to better serve the customer by understanding how they use PostHog. Would they be open for a 15-minute call? Offer to do this async as well.
 
-Pro-tip: If they're not already in Slack, don't ask, add them to Slack by directly sending them an invite. If this is an account that doesn't have an established Slack channel, you can follow our guide on [shared Slack channels](https://posthog.com/handbook/growth/sales/slack-channels) to set one up.
+Pro tip: If they're not already in Slack, don't ask; add them to Slack by sending them a direct invitation. If this is an account without an established Slack channel, you can follow our guide on [shared Slack channels](https://posthog.com/handbook/growth/sales/slack-channels) to set one up.
 
 ### Getting-to-know-you discovery call
 
-This is one of the most effective ways to learn what you need to learn about a customer because you can ask direct questions and should spend a LOT of time listening to their responses. A quick call up front is often better than a month of back and forth in Slack. 
+This is one of the most effective ways to learn what you need to know about a customer, as you can ask direct questions and spend a lot of time listening to their responses. A quick call upfront is often better than a month of back-and-forth in Slack. 
 
-Typically this is a 15-30 minute conversation with the aim of establishing rapport, understanding pain points, and beginning to formulate how you can best help them.
+Typically, this is a 15-30 minute conversation aimed at establishing rapport, understanding pain points, and beginning to formulate how you can best assist them.
 
-Your discovery call should help you determine how the level of engagement you'll have with the customer going forward. Think through the following questions:
+Your discovery call should help you determine the level of engagement you'll have with the customer going forward. Think through the following questions:
 - What is the goal you want to achieve with this customer? (Keep an eye on them vs. become more deeply embedded as a strategic partner)
   - Do they need help fixing their current setup?
-  - Do they have plans / interest in implement new PostHog products?
+  - Do they have plans/interest in implementing new PostHog products?
     - If the answer to either is yes, you can be their strategic partner and collaborate on setting up a detailed [success plan](/handbook/cs-and-onboarding/onboarding-success-plan).
-  - Some customers may not want to engage deeply and that is okay, still continue to monitor their usage/spend and check-in with them when appropriate. 
+  - Some customers may not want to engage deeply, and that is okay; still, continue to monitor their usage/spend and check in with them when appropriate. 
 
 ### Preparation before your call
 
 Some things to consider before your call:
 
-1. Understand customer’s PostHog usage:
+1. Understand the customer’s PostHog usage:
     1. What products are they using? How are they using it? What metrics do they care about from those products?
-    2. What products are they **not** using? This has to be products that would make sense for them to use and you want to understand why they aren’t using it.
-        1. For example, product analytics and web analytics are closely coupled. If customer is using product analytics but not web analytics, understand why. Is there a reason for that? What’s the objection?
+    2. What products are they **not** using? This means products that make sense for them to use, and you want to understand why they aren’t using them.
+        1. For example, product analytics and web analytics are closely coupled. If the customer is using product analytics but not web analytics, understand why. Is there a reason for that? What’s the objection?
 2. Call out feature preview ✨
-    1. Explain what feature preview is and how to enable them
+    1. Explain what feature preview is and how to enable it
     2. Recommend PostHog AI as it's usually relevant regardless of customer use case
-    3. Otherwise, recommend new products that customer likely already has (e.g. Messaging, CRM) – position it as 'You probably already have [product], this is a product we’re trying to launch and would love to see how you would use it / any feedback you have. Keen to relay or rope in engineering team directly with your feedback.'
+    3. Otherwise, recommend new products that the customer likely already has (e.g., Messaging, CRM) – position it as 'You probably already have [product], this is a product we’re trying to launch and would love to see how you would use it / any feedback you have. Keen to relay or rope in the engineering team directly with your feedback.'
 3. Q&A on product
-4. Next steps and ideal catch up cadence.
+4. Next steps and ideal catch-up cadence.
 
 #### Addition questions to consider for your call
 
-Here are some recommended questions you could use. Please do not simply interrogate a customer with each of these questions, this is more of a question bank to use for inspiration!
+Here are some recommended questions you could use. Please do not simply interrogate a customer with each of these questions; this is more of a question bank to use for inspiration!
 
-- What is your role at the company and what team are you on?
+- What is your role at the company, and what team are you on?
 - What does your company do?
 - What are your immediate and overall goals?
 - Can you describe your current analytics setup and any specific tools or libraries you use alongside PostHog?
@@ -175,9 +175,9 @@ A very valuable part of account research is also reviewing past conversations. T
 
 The key places to look for this information:
 
-- **BuildBetter**: will contain recordings of customer success, sales, or onboarding calls. Once in BuildBetter you can use the <PrivateLink url="https://app.buildbetter.app/people">"People"</PrivateLink> data section to search for companies or individual contacts and then see the history of calls, or you can do a direct search or AI chat.
-- **Pylon**: will contain the Slack channel history. You can view the <PrivateLink url="https://app.usepylon.com/accounts">"account"</PrivateLink> page, which is linked to Salesforce accounts for any of your accounts that have a Slack channel. You can filter on "Owner" which should also be mapped to the account owner from Salesforce, which lets you view all Slack or Teams interactions from accounts you own.
-- **Vitally**: will contain Zendesk and email conversations under the <PrivateLink url="https://posthog.vitally-eu.io/conversations/active/">"Active Conversations"</PrivateLink> section. This will let you see who the key contacts were, which support, sales, or CS individuals have worked with them in the past, and so on. It's also really helpful to see how frequently they raise tickets and what issues they have faced.
+- **BuildBetter**: will contain recordings of customer success, sales, or onboarding calls. Once in BuildBetter, you can use the <PrivateLink url="https://app.buildbetter.app/people">"People"</PrivateLink> data section to search for companies or individual contacts and then see the history of calls, or you can do a direct search or AI chat.
+- **Pylon**: will contain the Slack channel history. You can view the <PrivateLink url="https://app.usepylon.com/accounts">"account"</PrivateLink> page, which is linked to Salesforce accounts for any of your accounts that have a Slack channel. You can filter on "Owner", which should also be mapped to the account owner from Salesforce, which lets you view all Slack or Teams interactions from accounts you own.
+- **Vitally**: will contain Zendesk and email conversations under the <PrivateLink url="https://posthog.vitally-eu.io/conversations/active/">"Active Conversations"</PrivateLink> section. This will allow you to see who the key contacts were, which support, sales, or CS individuals they have worked with in the past, and so on. It's also really helpful to see how frequently they raise tickets and what issues they have faced.
 
 ## Recommended approach
-The best recommendation is to find your own rhythm for how you, as an individual, prefer to learn your customers. There's not a strict playbook. This is simply a collection of the best sources of knowledge to use for researching an account.
+The best recommendation is to find your own rhythm for how you, as an individual, prefer to learn about your customers. There's not a strict playbook. This is a compilation of the most reliable sources of knowledge to use for researching an account.
