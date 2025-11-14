@@ -90,7 +90,7 @@ const CustomPricingSlide = () => {
                     <li className="flex items-start">
                         <span className="text-red mr-2">•</span>
                         <div>
-                            <strong>After 2,000 credits/mo:</strong> Usage is billed through Posthog AI credit
+                            <strong>After 2,000 credits/mo:</strong> Usage is billed through PostHog AI credit
                             consumption. See our AI{' '}
                             <Link
                                 to="/docs/posthog-ai/pricing-faq"
