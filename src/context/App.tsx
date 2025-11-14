@@ -1012,6 +1012,20 @@ const appSettings: AppSettings = {
             fixed: true,
         },
     },
+    '/fm/mixtapes/:id': {
+        size: {
+            min: {
+                width: 700,
+                height: 1200,
+            },
+            max: {
+                width: 700,
+                height: 1200,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+    },
 } as const
 
 export interface SiteSettings {

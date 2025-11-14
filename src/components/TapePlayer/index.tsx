@@ -5,15 +5,18 @@ import TapeButton from './TapeButton'
 import CassetteTape from './CassetteTape'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
-import { useWindow } from '../../context/Window'
-import { IconPencil } from '@posthog/icons'
-import { useApp } from '../../context/App'
+import { IconPencil, IconPlusSquare } from '@posthog/icons'
+import { CassetteLabelBackground } from '../../data/cassetteBackgrounds'
 import MixtapeEditor from './MixtapeEditor'
+import { useApp } from '../../context/App'
 
-export default function TapePlayer(): JSX.Element {
-    const { appWindow } = useWindow()
+interface TapePlayerProps {
+    id?: string
+}
+
+export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
+    const { getJwt, user } = useUser()
     const { addWindow } = useApp()
-    const { getJwt } = useUser()
     const [isPoweredOn, setIsPoweredOn] = useState(true)
     const [isPlaying, setIsPlaying] = useState(false)
     const [danceMode, setDanceMode] = useState(false)
@@ -27,9 +30,13 @@ export default function TapePlayer(): JSX.Element {
     const playerRef = useRef<YTPlayer | null>(null)
     const playerReadyRef = useRef(false)
     const [mixtapeSongs, setMixtapeSongs] = useState<Track[]>([])
-    const [genres, setGenres] = useState<string[]>([])
-    const [metadata, setMetadata] = useState<any>()
+    const [metadata, setMetadata] = useState<{
+        cassetteColor?: string
+        labelColor?: string
+        labelBackground?: CassetteLabelBackground
+    }>()
     const [mixtapeId, setMixtapeId] = useState<string | null>(null)
+    const [creators, setCreators] = useState()
 
     const extractVideoId = (url: string): string => {
         // Handle various YouTube URL formats
@@ -50,29 +57,34 @@ export default function TapePlayer(): JSX.Element {
         setMixtapeId(mixtapeId)
         if (!mixtapeId) return
         const jwt = await getJwt()
-        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes/${mixtapeId}?populate=*`, {
-            headers: {
-                Authorization: `Bearer ${jwt}`,
-            },
-        })
+        const response = await fetch(
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes/${mixtapeId}?populate=*`,
+            jwt
+                ? {
+                      headers: {
+                          Authorization: `Bearer ${jwt}`,
+                      },
+                  }
+                : undefined
+        )
         const { data } = await response.json()
-        const tracks = data.attributes.tracks.map((track: any) => ({
-            id: track.id,
-            artist: track.artist,
-            title: track.title,
-            youtubeUrl: track.youtubeUrl,
-        }))
+        const tracks = data.attributes.tracks.map(
+            (track: { id: string; artist: string; title: string; youtubeUrl: string }) => ({
+                id: track.id,
+                artist: track.artist,
+                title: track.title,
+                youtubeUrl: track.youtubeUrl,
+            })
+        )
         setMixtapeSongs(tracks)
-        setGenres(data.attributes.genres)
         setMetadata(data.attributes.metadata)
+        setCreators(data.attributes.creator?.data)
     }
 
     useEffect(() => {
-        const searchParams = new URLSearchParams(appWindow?.location?.search)
-        const mixtapeId = searchParams.get('id')
-        if (!mixtapeId) return
-        fetchMixtapeSongs(mixtapeId)
-    }, [])
+        if (!id) return
+        fetchMixtapeSongs(id)
+    }, [id])
 
     useEffect(() => {
         if (mixtapeSongs.length > 0 && !playerRef.current) {
@@ -239,10 +251,11 @@ export default function TapePlayer(): JSX.Element {
 
     const handleShare = () => {
         if (isPoweredOn && navigator.share) {
+            const videoId = extractVideoId(mixtapeSongs[currentSongIndex].youtubeUrl)
             navigator.share({
                 title: mixtapeSongs[currentSongIndex].title,
                 text: `Check out ${mixtapeSongs[currentSongIndex].title} by ${mixtapeSongs[currentSongIndex].artist}`,
-                url: `https://www.youtube.com/watch?v=${mixtapeSongs[currentSongIndex].videoId}`,
+                url: `https://www.youtube.com/watch?v=${videoId}`,
             })
         }
     }
@@ -261,6 +274,10 @@ export default function TapePlayer(): JSX.Element {
                 />
             )
         }
+    }
+
+    const handleNew = () => {
+        addWindow(<MixtapeEditor key={`/fm/mixtapes/new`} location={{ pathname: `/fm/mixtapes/new` }} newWindow />)
     }
 
     const currentSong = mixtapeSongs[currentSongIndex]
@@ -288,21 +305,33 @@ export default function TapePlayer(): JSX.Element {
 
                 {/* Main player area */}
                 <div className="flex items-stretch gap-3 mb-4">
-                    {/* Power button */}
-                    <Switch
-                        label="Power"
-                        isOn={isPoweredOn}
-                        onToggle={() => {
-                            setIsPoweredOn(!isPoweredOn)
-                            if (isPoweredOn) {
-                                // Pause the music when turning off
-                                if (playerRef.current && playerReadyRef.current) {
-                                    playerRef.current.pauseVideo()
+                    <div className="flex flex-col items-center gap-2">
+                        {/* Power button */}
+                        <Switch
+                            label="Power"
+                            isOn={isPoweredOn}
+                            onToggle={() => {
+                                setIsPoweredOn(!isPoweredOn)
+                                if (isPoweredOn) {
+                                    // Pause the music when turning off
+                                    if (playerRef.current && playerReadyRef.current) {
+                                        playerRef.current.pauseVideo()
+                                    }
+                                    setIsPlaying(false)
                                 }
-                                setIsPlaying(false)
-                            }
-                        }}
-                    />
+                            }}
+                        />
+                        {user && (
+                            <div className="w-full aspect-square mt-auto">
+                                <TapeButton
+                                    label="Create"
+                                    icon={<IconPlusSquare className="size-5" />}
+                                    onClick={handleNew}
+                                    disabled={!isPoweredOn}
+                                />
+                            </div>
+                        )}
+                    </div>
 
                     {/* Cassette tape */}
                     <CassetteTape
@@ -326,14 +355,16 @@ export default function TapePlayer(): JSX.Element {
                             onToggle={() => setDanceMode(!danceMode)}
                             disabled={!isPoweredOn}
                         />
-                        <div className="w-full aspect-square mt-auto">
-                            <TapeButton
-                                label="Edit"
-                                icon={<IconPencil className="size-5" />}
-                                onClick={handleEdit}
-                                disabled={!isPoweredOn}
-                            />
-                        </div>
+                        {creators?.some((creator) => creator.id === user?.profile?.id) && (
+                            <div className="w-full aspect-square mt-auto">
+                                <TapeButton
+                                    label="Edit"
+                                    icon={<IconPencil className="size-5" />}
+                                    onClick={handleEdit}
+                                    disabled={!isPoweredOn}
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
 

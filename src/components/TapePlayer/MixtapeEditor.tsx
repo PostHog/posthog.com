@@ -5,7 +5,7 @@ import { Fieldset } from 'components/OSFieldset'
 import { OSInput, OSTextarea } from 'components/OSForm'
 import CassetteTape from './CassetteTape'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { IconSpinner, IconTrash } from '@posthog/icons'
+import { IconArrowUpRight, IconExternal, IconSpinner, IconTrash } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CreatableMultiSelect from 'components/CreatableMultiSelect'
 import {
@@ -30,7 +30,7 @@ import { cassetteLabelBackgrounds } from '../../data/cassetteBackgrounds'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
 import { useToast } from '../../context/Toast'
-import { navigate } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 
@@ -69,6 +69,7 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
                     direction="column"
                     value={track.artist}
                     onChange={onChange}
+                    className="!bg-accent"
                 />
                 <OSInput
                     label="Title"
@@ -76,6 +77,7 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
                     direction="column"
                     value={track.title}
                     onChange={onChange}
+                    className="!bg-accent"
                 />
                 <OSInput
                     label="YouTube URL"
@@ -83,6 +85,7 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
                     direction="column"
                     value={track.youtubeUrl}
                     onChange={onChange}
+                    className="!bg-accent"
                 />
             </Fieldset>
         </div>
@@ -91,7 +94,7 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
 
 interface MixtapeEditorProps {
     id?: string
-    onSubmit: () => void
+    onSubmit?: () => void
 }
 
 export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX.Element {
@@ -171,7 +174,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                 if (appWindow) {
                     closeWindow(appWindow)
                 }
-                navigate(`/fm?id=${data.id}`, { state: { newWindow: true } })
+                navigate(`/fm/mixtapes/${data.id}`, { state: { newWindow: true } })
             } catch (error) {
                 console.error('Error saving mixtape:', error)
                 addToast({
@@ -297,12 +300,12 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
         )
     }
 
-    const shareUrl = isEditMode && typeof window !== 'undefined' ? `${window.location.origin}/fm?id=${id}` : ''
+    const shareUrl = isEditMode && typeof window !== 'undefined' ? `/fm/mixtapes/${id}` : ''
 
     return (
         <ScrollArea>
             <SEO title={isEditMode ? 'Edit mixtape' : 'New mixtape'} />
-            <div data-scheme="primary" className="p-4 grid grid-cols-2 gap-4 items-start">
+            <div data-scheme="secondary" className="p-4 grid grid-cols-2 gap-4 items-start bg-primary">
                 <div className="sticky top-4 space-y-2">
                     <CassetteTape
                         labelBackground={formik.values.labelBackground}
@@ -328,7 +331,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                                         formik.setFieldValue('cassetteColor', e.target.value)
                                     }
                                     placeholder="#000000"
-                                    className="flex-1"
+                                    className="flex-1 !bg-accent"
                                 />
                             </div>
                         </Fieldset>
@@ -350,7 +353,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                                         formik.setFieldValue('labelColor', e.target.value)
                                     }
                                     placeholder="#000000"
-                                    className="flex-1"
+                                    className="flex-1 !bg-accent"
                                 />
                             </div>
                         </Fieldset>
@@ -392,9 +395,18 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                 </div>
                 <form onSubmit={formik.handleSubmit} className="space-y-2 mb-0">
                     {isEditMode && shareUrl && (
-                        <Fieldset legend="Share URL" className="mb-0">
+                        <Fieldset
+                            legend={
+                                <Link to={shareUrl} state={{ newWindow: true }} className="flex items-center gap-1">
+                                    <span>Share URL</span>
+                                    <IconArrowUpRight className="size-3" />
+                                </Link>
+                            }
+                            className="mb-0"
+                        >
                             <div className="flex items-center gap-2">
-                                <div className="flex-1 font-mono text-sm truncate p-2 bg-accent border border-input rounded">
+                                <div className="flex-1 font-mono text-sm truncate line-clamp-1 p-2 bg-accent border border-input rounded w-0">
+                                    {window.location.origin}
                                     {shareUrl}
                                 </div>
                                 <OSButton
@@ -456,6 +468,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                             name="notes"
                             value={formik.values.notes}
                             onChange={formik.handleChange}
+                            className="!bg-accent"
                         />
                     </Fieldset>
 
