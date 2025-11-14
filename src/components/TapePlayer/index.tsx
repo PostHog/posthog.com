@@ -71,7 +71,7 @@ function Switch({ label, isOn, onToggle, disabled = false }: SwitchProps): JSX.E
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-16 bg-accent/40 border-2 border-primary/70 rounded-sm disabled:opacity-50"
                 >
                     <div
-                        className={`absolute left-0 w-full h-[calc(50%-4px)] bg-[#b6b7af]/70 border border-[#b6b7af] w-[calc(100%+4px)] left-[-2px] rounded-[2px] ${
+                        className={`absolute left-0 w-full h-[calc(50%-4px)] bg-[#b6b7af]/70 border border-[#b6b7af] dark:bg-[#4a4e5c]/70 dark:border-[#4a4e5c] w-[calc(100%+4px)] left-[-2px] rounded-[2px] ${
                             isOn && !disabled
                                 ? 'top-[8px] rounded-br-none rounded-bl-none'
                                 : 'bottom-[8px] rounded-tr-none rounded-tl-none'
@@ -80,7 +80,7 @@ function Switch({ label, isOn, onToggle, disabled = false }: SwitchProps): JSX.E
 
                     {/* Toggle bar that slides */}
                     <div
-                        className={`absolute left-0 w-full h-[8px] bg-primary border border-[#b6b7af] w-[calc(100%+4px)] left-[-2px] rounded-[2px] ${
+                        className={`absolute left-0 w-full h-[8px] bg-primary border border-[#b6b7af] dark:border-[#4a4e5c] w-[calc(100%+4px)] left-[-2px] rounded-[2px] ${
                             isOn && !disabled ? 'top-[4px]' : 'bottom-[4px]'
                         }`}
                     />
