@@ -31,4 +31,10 @@ export const cassetteLabelBackgrounds: CassetteLabelBackground[] = [
         url: 'https://res.cloudinary.com/dmukukwp6/image/upload/pink_stars_191ffea97f.gif',
         backgroundRepeat: 'repeat',
     },
+    {
+        name: 'Straight fire',
+        url: 'https://res.cloudinary.com/dmukukwp6/image/upload/flames_66082da2eb.gif',
+        backgroundRepeat: 'repeat',
+        backgroundSize: '100%',
+    },
 ]
