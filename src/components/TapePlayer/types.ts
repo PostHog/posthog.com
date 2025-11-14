@@ -1,3 +1,5 @@
+import { CassetteLabelBackground } from 'data/cassetteBackgrounds'
+
 // YouTube API types
 export interface YTPlayer {
     playVideo: () => void
@@ -55,7 +57,7 @@ export interface Track {
 }
 
 export interface MixtapeFormValues {
-    creator: number | null
-    recipient: number | null
+    recipient: { id: number } | null
+    labelBackground: CassetteLabelBackground
     tracks: Track[]
 }

@@ -1,5 +1,12 @@
 import React from 'react'
 
+interface CassetteLabelBackground {
+    url: string
+    backgroundSize?: string
+    backgroundRepeat?: string
+    backgroundPosition?: string
+}
+
 interface ReelProps {
     rotation: number
 }
@@ -29,12 +36,25 @@ interface CassetteTapeProps {
     title?: string
     artist?: string
     rotation?: number
+    labelBackground?: CassetteLabelBackground
 }
 
-export default function CassetteTape({ title, artist, rotation = 0 }: CassetteTapeProps): JSX.Element {
+export default function CassetteTape({ title, artist, rotation = 0, labelBackground }: CassetteTapeProps): JSX.Element {
+    const labelBackgroundStyle = labelBackground?.url
+        ? {
+              backgroundImage: `url(${labelBackground.url})`,
+              backgroundSize: labelBackground.backgroundSize || 'auto',
+              backgroundRepeat: labelBackground.backgroundRepeat || 'no-repeat',
+              backgroundPosition: labelBackground.backgroundPosition || 'center',
+          }
+        : {}
+
     return (
         <div className="flex-1 border-2 border-primary bg-accent shadow-inner aspect-[100/63] rounded">
-            <div className="border-2 border-primary bg-primary m-[3.5%] mb-0 p-[3.5%] pb-0 h-[78%] flex flex-col justify-between rounded">
+            <div
+                className="border-2 border-primary bg-primary m-[3.5%] mb-0 p-[3.5%] pb-0 h-[75%] flex flex-col justify-between rounded"
+                style={labelBackgroundStyle}
+            >
                 {/* Tape label */}
                 {title && artist && (
                     <div className="bg-accent/30 border-2 border-primary text-center flex flex-col justify-center rounded py-[3%]">

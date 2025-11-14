@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useFormik } from 'formik'
 import { MixtapeFormValues } from './types'
 import { Fieldset } from 'components/OSFieldset'
-import { OSInput } from 'components/OSForm'
+import { OSInput, OSSelect } from 'components/OSForm'
 import CassetteTape from './CassetteTape'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { IconTrash } from '@posthog/icons'
+import { IconSpinner, IconTrash } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
 import {
@@ -17,12 +17,70 @@ import {
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { Track } from './types'
+import { cassetteLabelBackgrounds, CassetteLabelBackground } from '../../data/cassetteBackgrounds'
+import SEO from 'components/seo'
+import qs from 'qs'
+import { useUser } from 'hooks/useUser'
+import { useToast } from '../../context/Toast'
 
 interface SortableTrackProps {
     track: Track
     index: number
     onRemove: () => void
     onChange: (e: React.ChangeEvent<any>) => void
+}
+
+const ProfileSelect = ({ value, onChange }: { value: any; onChange: (value: any) => void }) => {
+    const [profiles, setProfiles] = useState<any[]>([])
+    useEffect(() => {
+        const query = qs.stringify({
+            populate: ['avatar', 'teams'],
+            pagination: {
+                limit: 100,
+            },
+            filters: {
+                teams: {
+                    id: {
+                        $notNull: true,
+                    },
+                },
+            },
+        })
+        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`)
+            .then((res) => res.json())
+            .then(({ data }) => {
+                setProfiles(data)
+            })
+    }, [])
+
+    const sortedProfiles = useMemo(() => {
+        return [...profiles]
+            .sort((a, b) => {
+                const nameA = [a.attributes.firstName, a.attributes.lastName].filter(Boolean).join(' ')
+                const nameB = [b.attributes.firstName, b.attributes.lastName].filter(Boolean).join(' ')
+                return nameA.localeCompare(nameB)
+            })
+            .map((profile) => {
+                const name = [profile.attributes.firstName, profile.attributes.lastName].filter(Boolean).join(' ')
+                return {
+                    label: name,
+                    value: profile,
+                }
+            })
+    }, [profiles])
+
+    return (
+        <OSSelect
+            label="Recipient"
+            direction="column"
+            placeholder="Recipient"
+            options={sortedProfiles}
+            value={(profiles.includes(value) ? value : profiles.find((profile) => profile.id === value?.id)) || {}}
+            onChange={onChange}
+            searchable={true}
+            searchPlaceholder="Search..."
+        />
+    )
 }
 
 function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps) {
@@ -73,6 +131,12 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
 }
 
 export default function NewMixtape(): JSX.Element {
+    const { addToast } = useToast()
+    const { getJwt, user } = useUser()
+    const [selectedLabelBackground, setSelectedLabelBackground] = useState<CassetteLabelBackground>(
+        cassetteLabelBackgrounds[0]
+    )
+
     const sensors = useSensors(
         useSensor(PointerSensor),
         useSensor(KeyboardSensor, {
@@ -82,7 +146,6 @@ export default function NewMixtape(): JSX.Element {
 
     const formik = useFormik<MixtapeFormValues>({
         initialValues: {
-            creator: null,
             recipient: null,
             tracks: [
                 {
@@ -92,34 +155,51 @@ export default function NewMixtape(): JSX.Element {
                     youtubeUrl: '',
                 },
             ],
+            labelBackground: cassetteLabelBackgrounds[0],
         },
         onSubmit: async (values) => {
             try {
                 // TODO: Submit to Strapi
                 console.log('Submitting mixtape:', values)
 
-                // Example Strapi POST structure:
-                // const response = await fetch('/api/mixtapes', {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify({
-                //         data: {
-                //             creator: values.creator,
-                //             recipient: values.recipient,
-                //             tracks: values.tracks
-                //         }
-                //     })
-                // })
+                const jwt = await getJwt()
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                    body: JSON.stringify({
+                        data: {
+                            creator: {
+                                connect: [user?.profile?.id],
+                            },
+                            recipient: {
+                                connect: [values.recipient?.id],
+                            },
+                            tracks: values.tracks.map((track) => ({
+                                artist: track.artist,
+                                title: track.title,
+                                youtubeUrl: track.youtubeUrl,
+                            })),
+                            labelBackground: JSON.stringify(values.labelBackground),
+                        },
+                    }),
+                })
+                if (!response.ok) {
+                    throw new Error('Failed to create mixtape')
+                }
+                const { data } = await response.json()
+                console.log('Mixtape created:', data)
+                addToast({
+                    description: 'Mixtape created successfully',
+                })
             } catch (error) {
                 console.error('Error creating mixtape:', error)
             }
         },
         validate: (values) => {
             const errors: Record<string, any> = {}
-
-            if (!values.creator) {
-                errors.creator = 'Creator is required'
-            }
 
             if (!values.recipient) {
                 errors.recipient = 'Recipient is required'
@@ -182,11 +262,55 @@ export default function NewMixtape(): JSX.Element {
 
     return (
         <ScrollArea>
+            <SEO title="New mixtape" />
             <div data-scheme="primary" className="p-4 grid grid-cols-2 gap-4 items-start">
-                <div className="sticky top-4">
-                    <CassetteTape />
+                <div className="sticky top-4 space-y-4">
+                    <CassetteTape labelBackground={selectedLabelBackground} />
+                    <Fieldset legend="Label background">
+                        <div className="grid grid-cols-3 gap-2">
+                            {cassetteLabelBackgrounds.map((bg) => {
+                                const isSelected = selectedLabelBackground?.name === bg.name
+                                return (
+                                    <button
+                                        key={bg.name}
+                                        type="button"
+                                        onClick={() => setSelectedLabelBackground(bg)}
+                                        className={`relative overflow-hidden rounded-md border-2 ${
+                                            isSelected ? 'border-red dark:border-yellow' : 'border-input'
+                                        } transition-all hover:scale-105`}
+                                    >
+                                        {bg.url ? (
+                                            <div
+                                                className="aspect-video w-full"
+                                                style={{
+                                                    backgroundImage: `url(${bg.url})`,
+                                                    backgroundSize: bg.backgroundSize || 'auto',
+                                                    backgroundRepeat: bg.backgroundRepeat || 'no-repeat',
+                                                    backgroundPosition: bg.backgroundPosition || 'center',
+                                                }}
+                                            />
+                                        ) : (
+                                            <div className="aspect-video w-full bg-accent" />
+                                        )}
+                                        <span className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-xs p-1">
+                                            {bg.name}
+                                        </span>
+                                    </button>
+                                )
+                            })}
+                        </div>
+                    </Fieldset>
+                    <div>
+                        <OSButton variant="primary" width="full" onClick={formik.submitForm}>
+                            {formik.isSubmitting ? <IconSpinner className="size-6 animate-spin" /> : 'Publish'}
+                        </OSButton>
+                    </div>
                 </div>
                 <form onSubmit={formik.handleSubmit} className="space-y-4 mb-0">
+                    <ProfileSelect
+                        value={formik.values.recipient}
+                        onChange={(value) => formik.setFieldValue('recipient', value)}
+                    />
                     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                         <SortableContext items={formik.values.tracks} strategy={verticalListSortingStrategy}>
                             <div className="space-y-2">
@@ -204,7 +328,7 @@ export default function NewMixtape(): JSX.Element {
                     </DndContext>
 
                     <div className="flex justify-center mt-2 w-full">
-                        <OSButton variant="primary" width="full" onClick={addTrack}>
+                        <OSButton variant="secondary" width="full" onClick={addTrack}>
                             + Add a track
                         </OSButton>
                     </div>
