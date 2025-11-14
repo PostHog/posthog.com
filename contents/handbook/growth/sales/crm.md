@@ -149,6 +149,17 @@ These mostly come into the sales inbox rather than the contact form. Whilst ther
 -   Keep all lead information up-to-date and accurate in Salesforce.
 -   Periodically review lead statuses and update them as needed.
 
+## Handling time off (PTO)
+
+By default, when you are out leads will still be routed to you, and as we have no expectation of you being available whilst on PTO leads may be missed and not followed up on.  To mitigate this we need to temporarily remove you from lead round robin:
+
+- If you are out for 1 consecutive day or less:
+  - Ensure your calendar is up to date with your time off, so that Default doesn't schedule meetings for when you are out.
+- If you are out for longer than 1 consecutive day:
+  - Ensure your calendar is up to date with your time off, so that Default doesn't schedule meetings for when you are out.
+  - Let Mine or Simon know 2 working days before you leave that you are out and need to be taken out of the round robin temporarily
+    - Mine or Simon will then set you to inactive on the <PrivateLink url='https://posthog.lightning.force.com/lightning/o/Lead_Assignment_Tracker__c/list?filterName=All'>Leads assignment tracker</PrivateLink> in Salesforce.
+    - They will also set a reminder to re-add you the day before you are back.
 
 ## Opportunities
 
