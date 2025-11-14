@@ -72,7 +72,7 @@ We receive data collected by our customers from end-users and allow them to unde
 
 ## Pen tests
 
-We conduct these annually, most recently in May 2025 - you can find the report [here](https://drive.google.com/file/d/1JoR74x6U7Kh_0HA8sLDe0AN6YK5-OOZ5/view?usp=sharing) 
+We conduct these annually, most recently in May 2025 - you can find the report in [our Trust Center](https://trust.posthog.com/?itemUid=2aafaddd-5329-45e2-a37e-cf6979191ad4&source=search).
 
 ## Responsible disclosure
 
