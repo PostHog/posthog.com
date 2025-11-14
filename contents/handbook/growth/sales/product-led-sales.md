@@ -15,7 +15,7 @@ Product-led leads can be generated in different ways:
 3. Customers who have used 50% or more of their startup credits and had a last invoice greater than $5000
 4. Customers who are set to roll off the startup plan in the next two months and had a last invoice greater than $1500
 5. Onboarding specialist referral
-6. Manual referrals anyone at PostHog can manually flag an account as a high potential PLG lead for review by sales team. Could be accounts for new or low spend but shows high potential for net new revenue, or when an account is an existing paying customer with credible expansion potential.
+6. Manual referrals: anyone at PostHog can manually flag an account as a high potential lead. This includes new or low spend accounts with strong net new potential or existing paying customers with credible expansion potential.
 
 > We frequently tweak these rules and experiment with different signals to see which work best. Generally you should be aiming for a 20% conversion rate from these types of leads. 
 
