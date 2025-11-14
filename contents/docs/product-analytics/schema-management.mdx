@@ -8,6 +8,8 @@ availability:
     enterprise: full
 ---
 
+import { ProductScreenshot } from 'components/ProductScreenshot'
+
 Schema management lets you define and enforce the structure of your events using typed property groups. This helps document expected properties, provides type safety in your code, and makes your analytics implementation more maintainable.
 
 ## Creating events
@@ -37,6 +39,13 @@ To create an event:
 
 Events created this way will show "-" for **First seen** and **Last seen** until the first event is actually captured by PostHog.
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_14_at_2_29_02_PM_c3fb0a172f.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_14_at_2_29_20_PM_63b8c82e7f.png"
+    alt="Creating a new event definition"
+    classes="rounded"
+/>
+
 ## Creating property groups
 
 Property groups are reusable collections of typed properties that can be attached to one or more events.
@@ -50,26 +59,30 @@ Property groups are reusable collections of typed properties that can be attache
    - **Required**: Whether the property must be present
    - **Description**: Help text for your team
 
-![Creating a property group](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/create_property_group_476e273705.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_14_at_2_26_02_PM_0c5f0a9310.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_14_at_2_26_12_PM_7b16bcf906.png"
+    alt="Creating a property group"
+    classes="rounded"
+/>
 
 Property groups can be reused across multiple events, making it easy to maintain consistent schemas.
 
 ## Adding schemas to events
 
-<CalloutBox icon="IconInfo" title="Already have events?" type="fyi">
-
-    If you already have events from captured data and want to add schemas to them, you can skip ahead to this section.
-
-</CalloutBox>
-
-Once you've created property groups and events, attach property groups to your events:
+Once you've created property groups and events (either new events you created, or existing events from captured data), attach property groups to your events:
 
 1. Go to **Data Management** > **Events**
 2. Select an event
 3. In the **Schema** section, click **Add Property Group**
 4. Choose from your existing property groups or create a new one
 
-![Event schema with property group](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/event_schema_with_property_group_93d0971ebf.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_14_at_2_30_01_PM_3888578617.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_14_at_2_29_38_PM_7410012e28.png"
+    alt="Event schema with property group"
+    classes="rounded"
+/>
 
 Events can have multiple property groups, and each group's properties will be included in the generated types.
 
