@@ -8,7 +8,15 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconSpinner, IconTrash } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CreatableMultiSelect from 'components/CreatableMultiSelect'
-import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
+import {
+    DndContext,
+    closestCenter,
+    KeyboardSensor,
+    PointerSensor,
+    useSensor,
+    useSensors,
+    DragEndEvent,
+} from '@dnd-kit/core'
 import {
     SortableContext,
     sortableKeyboardCoordinates,
@@ -23,12 +31,14 @@ import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
 import { useToast } from '../../context/Toast'
 import { navigate } from 'gatsby'
+import { useApp } from '../../context/App'
+import { useWindow } from '../../context/Window'
 
 interface SortableTrackProps {
     track: Track
     index: number
     onRemove: () => void
-    onChange: (e: React.ChangeEvent<any>) => void
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps) {
@@ -79,9 +89,17 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
     )
 }
 
-export default function NewMixtape(): JSX.Element {
+interface MixtapeEditorProps {
+    id?: string
+}
+
+export default function MixtapeEditor({ id }: MixtapeEditorProps): JSX.Element {
     const { addToast } = useToast()
     const { getJwt, user } = useUser()
+    const { appWindow } = useWindow()
+    const { closeWindow } = useApp()
+    const isEditMode = !!id
+    const [isLoading, setIsLoading] = React.useState(isEditMode)
     const sensors = useSensors(
         useSensor(PointerSensor),
         useSensor(KeyboardSensor, {
@@ -101,17 +119,20 @@ export default function NewMixtape(): JSX.Element {
         onSubmit: async (values) => {
             try {
                 const jwt = await getJwt()
-                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes`, {
-                    method: 'POST',
+                const url = isEditMode
+                    ? `${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes/${id}`
+                    : `${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes`
+                const method = isEditMode ? 'PUT' : 'POST'
+
+                const response = await fetch(url, {
+                    method,
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${jwt}`,
                     },
                     body: JSON.stringify({
                         data: {
-                            creator: {
-                                connect: [user?.profile?.id],
-                            },
+                            ...(!isEditMode ? { creator: { connect: [user?.profile?.id] } } : {}),
                             notes: values.notes,
                             genres: values.genres,
                             tracks: values.tracks.map((track) => ({
@@ -127,27 +148,40 @@ export default function NewMixtape(): JSX.Element {
                         },
                     }),
                 })
+
                 if (!response.ok) {
-                    throw new Error('Failed to create mixtape')
+                    throw new Error(`Failed to ${isEditMode ? 'update' : 'create'} mixtape`)
                 }
+
                 const { data } = await response.json()
-                navigate(`/fm?id=${data.id}`, { state: { newWindow: true } })
-                addToast({
-                    description: 'Mixtape created successfully',
-                })
+
+                if (isEditMode) {
+                    addToast({
+                        description: 'Mixtape updated successfully',
+                    })
+                } else {
+                    addToast({
+                        description: 'Mixtape published successfully',
+                    })
+                    closeWindow(appWindow)
+                    navigate(`/fm?id=${data.id}`, { state: { newWindow: true } })
+                }
             } catch (error) {
-                console.error('Error creating mixtape:', error)
+                console.error('Error saving mixtape:', error)
+                addToast({
+                    description: `Failed to ${isEditMode ? 'update' : 'publish'} mixtape`,
+                })
             }
         },
         validate: (values) => {
-            const errors: Record<string, any> = {}
+            const errors: Record<string, string | Record<number, Record<string, string>>> = {}
 
             if (!values.tracks || values.tracks.length === 0) {
                 errors.tracks = 'At least one track is required'
             } else {
-                const trackErrors: Record<number, any>[] = []
+                const trackErrors: Record<number, Record<string, string>> = {}
                 values.tracks.forEach((track, index) => {
-                    const trackError: Record<string, any> = {}
+                    const trackError: Record<string, string> = {}
 
                     if (!track.artist) {
                         trackError.artist = 'Artist is required'
@@ -166,7 +200,7 @@ export default function NewMixtape(): JSX.Element {
                     }
                 })
 
-                if (trackErrors.length > 0) {
+                if (Object.keys(trackErrors).length > 0) {
                     errors.tracks = trackErrors
                 }
             }
@@ -174,6 +208,58 @@ export default function NewMixtape(): JSX.Element {
             return errors
         },
     })
+
+    // Load existing mixtape if in edit mode
+    React.useEffect(() => {
+        if (!isEditMode) {
+            setIsLoading(false)
+            return
+        }
+
+        const loadMixtape = async () => {
+            try {
+                const jwt = await getJwt()
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes/${id}?populate=*`, {
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                })
+
+                if (!response.ok) {
+                    throw new Error('Failed to load mixtape')
+                }
+
+                const { data } = await response.json()
+                const attributes = data.attributes
+
+                // Populate form with existing data
+                formik.setValues({
+                    notes: attributes.notes || '',
+                    genres: attributes.genres || [],
+                    tracks: attributes.tracks.map(
+                        (track: { artist: string; title: string; youtubeUrl: string }, index: number) => ({
+                            id: `${Date.now()}-${index}`,
+                            artist: track.artist || '',
+                            title: track.title || '',
+                            youtubeUrl: track.youtubeUrl || '',
+                        })
+                    ),
+                    labelBackground: attributes.metadata?.labelBackground || cassetteLabelBackgrounds[0],
+                    cassetteColor: attributes.metadata?.cassetteColor || '#d2d3cc',
+                    labelColor: attributes.metadata?.labelColor || '#eeefea',
+                })
+            } catch (error) {
+                console.error('Error loading mixtape:', error)
+                addToast({
+                    description: 'Failed to load mixtape',
+                })
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        loadMixtape()
+    }, [id, isEditMode])
 
     const addTrack = () => {
         formik.setFieldValue('tracks', [
@@ -187,19 +273,29 @@ export default function NewMixtape(): JSX.Element {
         formik.setFieldValue('tracks', newTracks)
     }
 
-    const handleDragEnd = (event: any) => {
+    const handleDragEnd = (event: DragEndEvent) => {
         const { active, over } = event
 
-        if (active.id !== over.id) {
+        if (over && active.id !== over.id) {
             const oldIndex = formik.values.tracks.findIndex((track) => track.id === active.id)
             const newIndex = formik.values.tracks.findIndex((track) => track.id === over.id)
             formik.setFieldValue('tracks', arrayMove(formik.values.tracks, oldIndex, newIndex))
         }
     }
 
+    if (isLoading) {
+        return (
+            <div className="flex items-center justify-center p-8">
+                <IconSpinner className="size-8 animate-spin" />
+            </div>
+        )
+    }
+
+    const shareUrl = isEditMode && typeof window !== 'undefined' ? `${window.location.origin}/fm?id=${id}` : ''
+
     return (
         <ScrollArea>
-            <SEO title="New mixtape" />
+            <SEO title={isEditMode ? 'Edit mixtape' : 'New mixtape'} />
             <div data-scheme="primary" className="p-4 grid grid-cols-2 gap-4 items-start">
                 <div className="sticky top-4 space-y-2">
                     <CassetteTape
@@ -289,6 +385,28 @@ export default function NewMixtape(): JSX.Element {
                     </Fieldset>
                 </div>
                 <form onSubmit={formik.handleSubmit} className="space-y-2 mb-0">
+                    {isEditMode && shareUrl && (
+                        <Fieldset legend="Share URL" className="mb-0">
+                            <div className="flex items-center gap-2">
+                                <div className="flex-1 font-mono text-sm truncate p-2 bg-accent border border-input rounded">
+                                    {shareUrl}
+                                </div>
+                                <OSButton
+                                    type="button"
+                                    variant="secondary"
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(shareUrl)
+                                        addToast({
+                                            description: 'Share URL copied to clipboard',
+                                        })
+                                    }}
+                                >
+                                    Copy
+                                </OSButton>
+                            </div>
+                        </Fieldset>
+                    )}
+
                     <Fieldset legend="Tracklist" className="mb-0">
                         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                             <SortableContext items={formik.values.tracks} strategy={verticalListSortingStrategy}>
@@ -311,17 +429,17 @@ export default function NewMixtape(): JSX.Element {
                             </OSButton>
                         </div>
                     </Fieldset>
-                    <div>
+                    <Fieldset legend="Genres" className="mb-0">
                         <CreatableMultiSelect
-                            label={<span className="font-medium">Genres</span>}
+                            label="Genres"
                             placeholder="Add genres..."
                             options={formik.values.genres.map((genre) => ({ label: genre, value: genre }))}
                             value={formik.values.genres}
                             onChange={(genres) => formik.setFieldValue('genres', genres)}
-                            hideLabel={false}
+                            hideLabel={true}
                             required={false}
                         />
-                    </div>
+                    </Fieldset>
                     <div className="!m-0">
                         <OSTextarea
                             direction="column"
@@ -334,7 +452,13 @@ export default function NewMixtape(): JSX.Element {
 
                     <div className="!mt-4">
                         <OSButton type="button" variant="primary" width="full" onClick={formik.submitForm}>
-                            {formik.isSubmitting ? <IconSpinner className="size-6 animate-spin" /> : 'Publish'}
+                            {formik.isSubmitting ? (
+                                <IconSpinner className="size-6 animate-spin" />
+                            ) : isEditMode ? (
+                                'Update'
+                            ) : (
+                                'Publish'
+                            )}
                         </OSButton>
                     </div>
                 </form>

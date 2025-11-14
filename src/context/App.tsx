@@ -999,6 +999,19 @@ const appSettings: AppSettings = {
             fixed: true,
         },
     },
+    '/fm/mixtapes/edit/:id': {
+        size: {
+            min: {
+                width: 850,
+                height: 597,
+            },
+            max: {
+                width: 850,
+                height: 597,
+            },
+            fixed: true,
+        },
+    },
 } as const
 
 export interface SiteSettings {
@@ -1260,6 +1273,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (appSettings[key]?.position?.center) {
             return getDesktopCenterPosition(size)
         }
+        console.log(key)
 
         if (appSettings[key]?.position?.topCenter) {
             // Check if desktop (screen width >= 768px)

@@ -1,3 +1,6 @@
-import NewMixtape from 'components/TapePlayer/NewMixtape'
+import React from 'react'
+import MixtapeEditor from 'components/TapePlayer/MixtapeEditor'
 
-export default NewMixtape
+export default function NewMixtapePage(): JSX.Element {
+    return <MixtapeEditor />
+}
