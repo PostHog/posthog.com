@@ -19,7 +19,7 @@ Product-led leads can be generated in different ways:
 
 > We frequently tweak these rules and experiment with different signals to see which work best. Generally you should be aiming for a 20% conversion rate from these types of leads. 
 
-They follow the [normal territory assignment rules](https://posthog.com/handbook/growth/sales/crm#how-we-do-lead-assignments) in Salesforce, and are routed either Account Executives or Technical Account Managers depending on the type.
+They follow the [normal territory assignment rules](https://posthog.com/handbook/growth/sales/crm#how-we-do-lead-assignments) in Salesforce, and are routed either to Account Executives or Technical Account Managers depending on the type.
 
 **Note:** Some product-led leads might have already chatted with someone on our team. Before reaching out, take a quick look in Vitally to see if there’s any prior activity, and check in with the AE or team member who was involved to get the full picture if needed. Every lead has a "Vitally account URL" field in Salesforce which links directly to their Vitally profile for easy review.
 
