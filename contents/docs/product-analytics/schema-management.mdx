@@ -1,0 +1,121 @@
+---
+title: Schema management
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+Schema management lets you define and enforce the structure of your events using typed property groups. This helps document expected properties, provides type safety in your code, and makes your analytics implementation more maintainable.
+
+## Creating property groups
+
+Property groups are reusable collections of typed properties that can be attached to one or more events.
+
+1. Navigate to **Data Management** > **Property Groups**
+2. Click **New Property Group**
+3. Give your group a name (e.g., "Order Information")
+4. Add properties with their types:
+   - **Name**: The property key
+   - **Type**: String, Number, Boolean, or Object
+   - **Required**: Whether the property must be present
+   - **Description**: Help text for your team
+
+![Creating a property group](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/create_property_group_476e273705.png)
+
+Property groups can be reused across multiple events, making it easy to maintain consistent schemas.
+
+## Adding schemas to events
+
+Once you've created property groups, attach them to your events:
+
+1. Go to **Data Management** > **Events**
+2. Select an event
+3. In the **Schema** section, click **Add Property Group**
+4. Choose from your existing property groups or create a new one
+
+![Event schema with property group](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/event_schema_with_property_group_93d0971ebf.png)
+
+Events can have multiple property groups, and each group's properties will be included in the generated types.
+
+## Downloading your schema with the CLI
+
+The PostHog CLI generates TypeScript definitions from your configured schemas.
+
+> **Note:** TypeScript is currently the only supported language for schema generation.
+
+### Install the CLI
+
+```bash
+npm install -g posthog-cli
+```
+
+### Authenticate
+
+```bash
+posthog-cli login
+```
+
+This opens your browser to authorize the CLI with your PostHog account.
+
+![CLI authorization page](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/cli_authorization_6e62c8a498.png)
+
+### Download your schema
+
+```bash
+posthog-cli exp schema pull
+```
+
+The CLI will:
+1. Fetch your event schemas
+2. Generate TypeScript definitions
+3. Save them to a file (default: `posthog-typed.ts`)
+4. Update `posthog.json` with the schema hash
+
+When prompted for the output path, choose a location that's accessible from your application code (e.g., `src/lib/posthog-typed.ts` or `app/lib/posthog-typed.ts`).
+
+**Important:** Commit both `posthog.json` and `posthog-typed.ts` to your git repository. This ensures your team has consistent types and tracks schema changes over time.
+
+On subsequent runs, the CLI only updates the file if your schema has changed.
+
+### Check schema status
+
+```bash
+posthog-cli exp schema status
+```
+
+This shows your current sync status, including the schema hash, last updated time, and number of events.
+
+## Using typed events in your app
+
+Once you've downloaded your schema, import and use the generated PostHog client:
+
+```typescript
+import posthog from './posthog-typed'
+
+// Typed events with autocomplete and validation
+posthog.captureTyped('button_clicked', {
+  button_name: 'signup',      // ✓ Type-checked
+  click_count: 5,             // ✓ Type-checked
+  // missing_required: ...    // ✗ TypeScript error if required
+})
+
+// Regular capture() still works for flexibility
+posthog.capture('dynamic_event', { any: 'data' })
+```
+
+The generated client provides:
+- **Type safety**: Properties are validated against your schema
+- **Autocomplete**: Your IDE suggests event names and properties
+- **Documentation**: Inline types show required properties and descriptions
+- **Flexibility**: `capture()` remains available for dynamic events
+
+![TypeScript type checking in action](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/typescript_type_checking_a5318b2d7e.png)
+
+## Best practices
+
+- **Start with your most important events**: Define schemas for critical conversion events first
+- **Use descriptive property groups**: Name groups by their purpose (e.g., "E-commerce Properties", "User Context")
+- **Don't over-schema**: Not every event needs a schema—use them where type safety adds value
