@@ -91,7 +91,7 @@ const CustomPricingSlide = () => {
                         <span className="text-red mr-2">•</span>
                         <div>
                             <strong>After 2,000 credits/mo:</strong> Usage is billed through Posthog AI credit
-                            consumption. See out AI{' '}
+                            consumption. See our AI{' '}
                             <Link
                                 to="/docs/posthog-ai/pricing-faq"
                                 className="underline font-medium"
