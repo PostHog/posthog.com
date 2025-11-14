@@ -85,6 +85,39 @@ const Image = ({ src, className }: { src: string; className?: string }) => {
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
   {
+    name: 'ImageMaths',
+    kind: 'flow',
+    props: [],
+    Editor: () => (
+      <Image
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/maths_116f02abd0.jpg"
+        className="max-w-full rounded"
+      />
+    ),
+  },
+  {
+    name: 'ImageHogDashboards',
+    kind: 'flow',
+    props: [],
+    Editor: () => (
+      <Image
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_dashboards_996851ce65.png"
+        className="float-right max-w-[192px] @sm:max-w-[384px] ml-2 @sm:ml-4 mb-2 @sm:-mt-4"
+      />
+    ),
+  },
+  {
+    name: 'ImageRetailHogs',
+    kind: 'flow',
+    props: [],
+    Editor: () => (
+      <Image
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/retail_hogs_540cf065e4.png"
+        className="@md:hidden @xl:block @lg:float-right max-w-full @xl:max-w-xs -mb-2 @lg:mb-2 @lg:ml-4 @lg:-mt-2"
+      />
+    ),
+  },
+  {
     name: 'AppCount',
     kind: 'flow',
     props: [],
@@ -141,39 +174,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     kind: 'flow',
     props: [],
     Editor: () => <Button url="/about">Read more about us</Button>,
-  },
-  {
-    name: 'ImageDW',
-    kind: 'flow',
-    props: [],
-    Editor: () => (
-      <Image
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png"
-        className="max-w-[213px] absolute bottom-[-4px] right-0 rounded-br-sm"
-      />
-    ),
-  },
-  {
-    name: 'ImageMoney',
-    kind: 'flow',
-    props: [],
-    Editor: () => (
-      <Image
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/dont_burn_money_28d5861fad.png"
-        className="float-right max-w-[120px] @sm:max-w-[200px] ml-2 @sm:ml-4 mb-2 @sm:-mt-4"
-      />
-    ),
-  },
-  {
-    name: 'ImageReading1',
-    kind: 'flow',
-    props: [],
-    Editor: () => (
-      <Image
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
-        className="@md:hidden @xl:block @lg:float-right max-w-full @xl:max-w-xs rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary -mb-2 @lg:mb-2 @lg:ml-4 @lg:-mt-2"
-      />
-    ),
   },
   {
     name: 'ImageReading2',
