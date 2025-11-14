@@ -27,9 +27,32 @@ Property groups are reusable collections of typed properties that can be attache
 
 Property groups can be reused across multiple events, making it easy to maintain consistent schemas.
 
+## Creating events
+
+You can create event definitions before any events are actually captured. This is useful when planning your analytics implementation upfront, allowing you to:
+
+- Define your event schema before writing instrumentation code
+- Generate TypeScript types for events that haven't been captured yet
+- Document expected events for your team
+- Ensure consistency across your codebase from day one
+
+To create an event:
+
+1. Go to **Data Management** > **Events**
+2. Click **Create event**
+3. Enter the event name (e.g., "user_signed_up")
+4. Optionally add:
+   - **Description**: What the event represents
+   - **Owner**: Team member responsible for this event
+   - **Tags**: Organizational labels
+
+> **Note:** Event names cannot be changed after creation, so choose carefully.
+
+Events created this way will show "-" for **First seen** and **Last seen** until the first event is actually captured by PostHog.
+
 ## Adding schemas to events
 
-Once you've created property groups, attach them to your events:
+Once you've created property groups and events (or if you already have events from captured data), attach property groups to your events:
 
 1. Go to **Data Management** > **Events**
 2. Select an event
@@ -116,6 +139,8 @@ The generated client provides:
 
 ## Best practices
 
+- **Define events upfront**: Create event definitions before implementing instrumentation to get type safety from day one
 - **Start with your most important events**: Define schemas for critical conversion events first
 - **Use descriptive property groups**: Name groups by their purpose (e.g., "E-commerce Properties", "User Context")
 - **Don't over-schema**: Not every event needs a schema—use them where type safety adds value
+- **Commit generated types**: Always commit `posthog-typed.ts` and `posthog.json` to version control so your team stays in sync
