@@ -91,9 +91,10 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
 
 interface MixtapeEditorProps {
     id?: string
+    onSubmit: () => void
 }
 
-export default function MixtapeEditor({ id }: MixtapeEditorProps): JSX.Element {
+export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX.Element {
     const { addToast } = useToast()
     const { getJwt, user } = useUser()
     const { appWindow } = useWindow()
@@ -163,9 +164,14 @@ export default function MixtapeEditor({ id }: MixtapeEditorProps): JSX.Element {
                     addToast({
                         description: 'Mixtape published successfully',
                     })
-                    closeWindow(appWindow)
-                    navigate(`/fm?id=${data.id}`, { state: { newWindow: true } })
                 }
+                if (onSubmit) {
+                    onSubmit()
+                }
+                if (appWindow) {
+                    closeWindow(appWindow)
+                }
+                navigate(`/fm?id=${data.id}`, { state: { newWindow: true } })
             } catch (error) {
                 console.error('Error saving mixtape:', error)
                 addToast({
@@ -440,15 +446,18 @@ export default function MixtapeEditor({ id }: MixtapeEditorProps): JSX.Element {
                             required={false}
                         />
                     </Fieldset>
-                    <div className="!m-0">
+
+                    <Fieldset legend="Notes" className="mb-0">
                         <OSTextarea
                             direction="column"
+                            showLabel={false}
                             label="Notes"
+                            placeholder="Add notes..."
                             name="notes"
                             value={formik.values.notes}
                             onChange={formik.handleChange}
                         />
-                    </div>
+                    </Fieldset>
 
                     <div className="!mt-4">
                         <OSButton type="button" variant="primary" width="full" onClick={formik.submitForm}>

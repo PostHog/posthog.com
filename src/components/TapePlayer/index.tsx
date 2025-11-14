@@ -5,8 +5,14 @@ import TapeButton from './TapeButton'
 import CassetteTape from './CassetteTape'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
+import { useWindow } from '../../context/Window'
+import { IconPencil } from '@posthog/icons'
+import { useApp } from '../../context/App'
+import MixtapeEditor from './MixtapeEditor'
 
 export default function TapePlayer(): JSX.Element {
+    const { appWindow } = useWindow()
+    const { addWindow } = useApp()
     const { getJwt } = useUser()
     const [isPoweredOn, setIsPoweredOn] = useState(true)
     const [isPlaying, setIsPlaying] = useState(false)
@@ -23,6 +29,7 @@ export default function TapePlayer(): JSX.Element {
     const [mixtapeSongs, setMixtapeSongs] = useState<Track[]>([])
     const [genres, setGenres] = useState<string[]>([])
     const [metadata, setMetadata] = useState<any>()
+    const [mixtapeId, setMixtapeId] = useState<string | null>(null)
 
     const extractVideoId = (url: string): string => {
         // Handle various YouTube URL formats
@@ -39,29 +46,32 @@ export default function TapePlayer(): JSX.Element {
         return url // Return as-is if no pattern matches
     }
 
+    const fetchMixtapeSongs = async (mixtapeId: string) => {
+        setMixtapeId(mixtapeId)
+        if (!mixtapeId) return
+        const jwt = await getJwt()
+        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes/${mixtapeId}?populate=*`, {
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+            },
+        })
+        const { data } = await response.json()
+        const tracks = data.attributes.tracks.map((track: any) => ({
+            id: track.id,
+            artist: track.artist,
+            title: track.title,
+            youtubeUrl: track.youtubeUrl,
+        }))
+        setMixtapeSongs(tracks)
+        setGenres(data.attributes.genres)
+        setMetadata(data.attributes.metadata)
+    }
+
     useEffect(() => {
-        const fetchMixtapeSongs = async () => {
-            const searchParams = new URLSearchParams(window.location.search)
-            const mixtapeId = searchParams.get('id')
-            if (!mixtapeId) return
-            const jwt = await getJwt()
-            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes/${mixtapeId}?populate=*`, {
-                headers: {
-                    Authorization: `Bearer ${jwt}`,
-                },
-            })
-            const { data } = await response.json()
-            const tracks = data.attributes.tracks.map((track: any) => ({
-                id: track.id,
-                artist: track.artist,
-                title: track.title,
-                youtubeUrl: track.youtubeUrl,
-            }))
-            setMixtapeSongs(tracks)
-            setGenres(data.attributes.genres)
-            setMetadata(data.attributes.metadata)
-        }
-        fetchMixtapeSongs()
+        const searchParams = new URLSearchParams(appWindow?.location?.search)
+        const mixtapeId = searchParams.get('id')
+        if (!mixtapeId) return
+        fetchMixtapeSongs(mixtapeId)
     }, [])
 
     useEffect(() => {
@@ -237,6 +247,22 @@ export default function TapePlayer(): JSX.Element {
         }
     }
 
+    const handleEdit = () => {
+        if (mixtapeId) {
+            addWindow(
+                <MixtapeEditor
+                    id={mixtapeId}
+                    key={`/fm/mixtapes/edit/:id`}
+                    location={{ pathname: `/fm/mixtapes/edit/${mixtapeId}` }}
+                    newWindow
+                    onSubmit={() => {
+                        fetchMixtapeSongs(mixtapeId)
+                    }}
+                />
+            )
+        }
+    }
+
     const currentSong = mixtapeSongs[currentSongIndex]
 
     return (
@@ -287,19 +313,28 @@ export default function TapePlayer(): JSX.Element {
                         labelColor={metadata?.labelColor}
                         labelBackground={metadata?.labelBackground}
                     />
-
-                    {/* Dance mode switch */}
-                    <Switch
-                        label={
-                            <>
-                                Dance <br />
-                                mode
-                            </>
-                        }
-                        isOn={danceMode}
-                        onToggle={() => setDanceMode(!danceMode)}
-                        disabled={!isPoweredOn}
-                    />
+                    <div className="flex flex-col items-center gap-2">
+                        {/* Dance mode switch */}
+                        <Switch
+                            label={
+                                <>
+                                    Dance <br />
+                                    mode
+                                </>
+                            }
+                            isOn={danceMode}
+                            onToggle={() => setDanceMode(!danceMode)}
+                            disabled={!isPoweredOn}
+                        />
+                        <div className="w-full aspect-square mt-auto">
+                            <TapeButton
+                                label="Edit"
+                                icon={<IconPencil className="size-5" />}
+                                onClick={handleEdit}
+                                disabled={!isPoweredOn}
+                            />
+                        </div>
+                    </div>
                 </div>
 
                 {/* Control buttons */}

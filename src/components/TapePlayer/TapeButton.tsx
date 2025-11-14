@@ -21,7 +21,7 @@ export default function TapeButton({
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`flex flex-col items-center gap-1 disabled:opacity-30 w-full ${className} `}
+            className={`flex flex-col items-center gap-1 disabled:opacity-30 size-full ${className} `}
         >
             <div className="relative size-full bg-accent border-2 border-primary rounded top-[2px]">
                 <div
