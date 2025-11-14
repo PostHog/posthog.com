@@ -306,7 +306,7 @@ export default function TapePlayer(): JSX.Element {
             {/* Control buttons */}
             <div className="flex items-start justify-center gap-2">
                 <TapeButton label="Eject" icon="⏏" onClick={handleEject} disabled={!isPoweredOn} />
-                <TapeButton label="Rewind" icon="◀◀" onClick={handleRewind} disabled={!isPoweredOn} />
+                <TapeButton label="Rewind" icon="◁◁" onClick={handleRewind} disabled={!isPoweredOn} />
                 <TapeButton
                     label="Play"
                     icon="▷"
@@ -315,7 +315,7 @@ export default function TapePlayer(): JSX.Element {
                     isPressed={isPlaying}
                 />
                 <TapeButton label="Pause" icon="||" onClick={handlePause} disabled={!isPoweredOn || !isPlaying} />
-                <TapeButton label="Fast forward" icon="▶▶" onClick={handleFastForward} disabled={!isPoweredOn} />
+                <TapeButton label="Fast forward" icon="▷▷" onClick={handleFastForward} disabled={!isPoweredOn} />
                 <TapeButton label="Share" icon="↗" onClick={handleShare} disabled={!isPoweredOn} />
             </div>
         </div>
