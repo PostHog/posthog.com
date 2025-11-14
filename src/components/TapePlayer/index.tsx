@@ -21,6 +21,8 @@ export default function TapePlayer(): JSX.Element {
     const playerRef = useRef<YTPlayer | null>(null)
     const playerReadyRef = useRef(false)
     const [mixtapeSongs, setMixtapeSongs] = useState<Track[]>([])
+    const [genres, setGenres] = useState<string[]>([])
+    const [metadata, setMetadata] = useState<any>()
 
     const extractVideoId = (url: string): string => {
         // Handle various YouTube URL formats
@@ -56,6 +58,8 @@ export default function TapePlayer(): JSX.Element {
                 youtubeUrl: track.youtubeUrl,
             }))
             setMixtapeSongs(tracks)
+            setGenres(data.attributes.genres)
+            setMetadata(data.attributes.metadata)
         }
         fetchMixtapeSongs()
     }, [])
@@ -275,7 +279,14 @@ export default function TapePlayer(): JSX.Element {
                     />
 
                     {/* Cassette tape */}
-                    <CassetteTape title={currentSong?.title} artist={currentSong?.artist} rotation={rotation} />
+                    <CassetteTape
+                        title={currentSong?.title}
+                        artist={currentSong?.artist}
+                        rotation={rotation}
+                        cassetteColor={metadata?.cassetteColor}
+                        labelColor={metadata?.labelColor}
+                        labelBackground={metadata?.labelBackground}
+                    />
 
                     {/* Dance mode switch */}
                     <Switch

@@ -1,12 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React from 'react'
 import { useFormik } from 'formik'
 import { MixtapeFormValues } from './types'
 import { Fieldset } from 'components/OSFieldset'
-import { OSInput, OSSelect, OSTextarea } from 'components/OSForm'
+import { OSInput, OSTextarea } from 'components/OSForm'
 import CassetteTape from './CassetteTape'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconSpinner, IconTrash } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import CreatableMultiSelect from 'components/CreatableMultiSelect'
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
 import {
     SortableContext,
@@ -17,10 +18,11 @@ import {
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { Track } from './types'
-import { cassetteLabelBackgrounds, CassetteLabelBackground } from '../../data/cassetteBackgrounds'
+import { cassetteLabelBackgrounds } from '../../data/cassetteBackgrounds'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
 import { useToast } from '../../context/Toast'
+import { navigate } from 'gatsby'
 
 interface SortableTrackProps {
     track: Track
@@ -80,9 +82,6 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
 export default function NewMixtape(): JSX.Element {
     const { addToast } = useToast()
     const { getJwt, user } = useUser()
-    const [selectedLabelBackground, setSelectedLabelBackground] = useState<CassetteLabelBackground>(
-        cassetteLabelBackgrounds[0]
-    )
     const sensors = useSensors(
         useSensor(PointerSensor),
         useSensor(KeyboardSensor, {
@@ -93,23 +92,14 @@ export default function NewMixtape(): JSX.Element {
     const formik = useFormik<MixtapeFormValues>({
         initialValues: {
             notes: '',
-            tracks: [
-                {
-                    id: Date.now().toString(),
-                    artist: '',
-                    title: '',
-                    youtubeUrl: '',
-                },
-            ],
+            genres: [],
+            tracks: [],
             labelBackground: cassetteLabelBackgrounds[0],
             cassetteColor: '#d2d3cc',
             labelColor: '#eeefea',
         },
         onSubmit: async (values) => {
             try {
-                // TODO: Submit to Strapi
-                console.log('Submitting mixtape:', values)
-
                 const jwt = await getJwt()
                 const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes`, {
                     method: 'POST',
@@ -123,6 +113,7 @@ export default function NewMixtape(): JSX.Element {
                                 connect: [user?.profile?.id],
                             },
                             notes: values.notes,
+                            genres: values.genres,
                             tracks: values.tracks.map((track) => ({
                                 artist: track.artist,
                                 title: track.title,
@@ -140,7 +131,7 @@ export default function NewMixtape(): JSX.Element {
                     throw new Error('Failed to create mixtape')
                 }
                 const { data } = await response.json()
-                console.log('Mixtape created:', data)
+                navigate(`/fm?id=${data.id}`, { state: { newWindow: true } })
                 addToast({
                     description: 'Mixtape created successfully',
                 })
@@ -212,7 +203,7 @@ export default function NewMixtape(): JSX.Element {
             <div data-scheme="primary" className="p-4 grid grid-cols-2 gap-4 items-start">
                 <div className="sticky top-4 space-y-2">
                     <CassetteTape
-                        labelBackground={selectedLabelBackground}
+                        labelBackground={formik.values.labelBackground}
                         cassetteColor={formik.values.cassetteColor}
                         labelColor={formik.values.labelColor}
                     />
@@ -265,12 +256,12 @@ export default function NewMixtape(): JSX.Element {
                     <Fieldset legend="Label background">
                         <div className="grid grid-cols-3 gap-2">
                             {cassetteLabelBackgrounds.map((bg) => {
-                                const isSelected = selectedLabelBackground?.name === bg.name
+                                const isSelected = formik.values.labelBackground?.name === bg.name
                                 return (
                                     <button
                                         key={bg.name}
                                         type="button"
-                                        onClick={() => setSelectedLabelBackground(bg)}
+                                        onClick={() => formik.setFieldValue('labelBackground', bg)}
                                         className={`relative overflow-hidden rounded-md border-2 ${
                                             isSelected ? 'border-red dark:border-yellow' : 'border-input'
                                         } transition-all hover:scale-105`}
@@ -297,7 +288,7 @@ export default function NewMixtape(): JSX.Element {
                         </div>
                     </Fieldset>
                 </div>
-                <form onSubmit={formik.handleSubmit} className="space-y-4 mb-0">
+                <form onSubmit={formik.handleSubmit} className="space-y-2 mb-0">
                     <Fieldset legend="Tracklist" className="mb-0">
                         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                             <SortableContext items={formik.values.tracks} strategy={verticalListSortingStrategy}>
@@ -320,7 +311,17 @@ export default function NewMixtape(): JSX.Element {
                             </OSButton>
                         </div>
                     </Fieldset>
-
+                    <div>
+                        <CreatableMultiSelect
+                            label={<span className="font-medium">Genres</span>}
+                            placeholder="Add genres..."
+                            options={formik.values.genres.map((genre) => ({ label: genre, value: genre }))}
+                            value={formik.values.genres}
+                            onChange={(genres) => formik.setFieldValue('genres', genres)}
+                            hideLabel={false}
+                            required={false}
+                        />
+                    </div>
                     <div className="!m-0">
                         <OSTextarea
                             direction="column"
@@ -330,8 +331,9 @@ export default function NewMixtape(): JSX.Element {
                             onChange={formik.handleChange}
                         />
                     </div>
-                    <div>
-                        <OSButton variant="primary" width="full" onClick={formik.submitForm}>
+
+                    <div className="!mt-4">
+                        <OSButton type="button" variant="primary" width="full" onClick={formik.submitForm}>
                             {formik.isSubmitting ? <IconSpinner className="size-6 animate-spin" /> : 'Publish'}
                         </OSButton>
                     </div>
