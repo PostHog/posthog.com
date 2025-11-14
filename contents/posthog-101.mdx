@@ -1,0 +1,103 @@
+---
+title: PostHog 101
+template: custom
+images:
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_light_a436da72f7.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_dashboards_light_998b77b1a0.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_dashboards_dark_43ef120c80.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_light_61b3bab3b6.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_cdp_dark_5610c405b2.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_cdp_light_97bc52e8f9.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_dark_f5371a996f.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_light_b0cdbebe8f.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_dark_8f465ecfaa.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_surveys_light_3dfb9f57e9.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_surveys_dark_a492c37d9c.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_dashboard_light_313729cacc.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_dashboard_dark_20eb61e4b2.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_light_465bac8937.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_dark_399c2187ea.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_feature_flags_light_6a7b1dfc70.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_feature_flags_dark_f091ddfb9b.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_product_analytics_trend_light_703f700a5b.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_product_analytics_trend_dark_086dcec4b2.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_light_93bfa1393d.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_dark_ef481dc7a5.png
+---
+
+# What da heck is PostHog?!
+
+#### **tl;dr:** If you're building anything online, PostHog helps you make it better.
+
+We’ve all used products and apps that are really **frustrating to use** – buggy, confusing, or slow.
+
+And we’ve all used products that just seem to work **exactly how you’d expect** – _the ones that feel “sticky” from the moment you sign up._
+
+Well-built products don’t often manifest that perception on their own – the people behind those products rely on [a suite of tools](/products) that help them understand customers, uncover issues they’re facing, and test changes to improve the product – and they continuously repeat this cycle.
+
+PostHog offers just that: a suite of tools to help product builders build products people love.
+
+Skip to: [What you can do with PostHog](#what-can-you-do-with-posthog) →
+
+## An analogy of a retail boutique
+
+If you ran a clothing boutique and observed people shopping, you’d be simultaneously doing a handful of the following:
+
+- Observing customers as they walk in – how they dress, who they’re with, if they’re shopping with intent or casually browsing
+- Engaging customer to collect feedback on what they’re looking for (size, color, style)
+- Proactive helping them find something that meets their needs
+- Listening for feedback about the store, products, or their experience – whether they say it directly to you or not
+- Moving merchandise around to highlight new products or to try to increase visibility of high margin products or best sellers
+- Improving the environment: playing different kinds of music, tidying up, or adjusting the temperature to make sure guests are comfortable
+
+Running an app or web product is like working in a physical store – except without any of the benefits of being in the same room as your customers. You can’t:
+
+- physically see the person and pick up on their non-verbal cues
+- rely on your judgement to say just the right thing in the perfect moment – whether that’s to answer product questions or save them from walking out the front door
+- really understand why people did or didn’t do something (like buy a product, complete a checkout, or upgrade their account), just from looking at numbers or graphs
+
+Quantitative data is valuable, but without also overlaying the qualitative, you’re limited in the conclusions you can make and the takeaways you should make from them. And if you’re making decisions from siloed data (like *just* daily sales numbers), you’re likely missing context that would enrich your decision making.
+
+PostHog helps bridge the gap between what you’d be able to do in-person – by helping connect you to your customers to make more informed decisions.
+
+## What can you do with PostHog?
+
+After installing a small snippet of code, you can do things like:
+
+- Watch screen recordings of people using your product, app, or website - Session Replay
+    - See where they’re clicking or getting stuck. Also helpful in debugging issues they report that you can’t reproduce. It’s leaps and bounds more useful than trying to sift through logs – and more accurate than asking for feedback.
+    - Support teams love using Session Replay to pinpoint exactly what users are talking about – especially in vague support tickets!
+- Build graphs, dashboards, and funnels - Product Analytics, Dashboards
+    - It's way easier than in GA *and* more useful because you can drill into activity of a specific user. (GA can't do this because it only tracks visitors anonymously.)
+- Roll out a new feature to a limited group of users - Feature Flags
+    - This helps make sure you’ve worked out the bugs with a friendly group before releasing it to the world. You can also pair it with Experiments to get statically-significant results at scale.
+- Analyze product usage data *with* things like payment history, CRM info, and warehouse data - Data Warehouse
+    - Run SQL queries that account for data from all of your internal systems – this leads to more informed decisions
+- Ask a question when users do (or don’t do) something - Surveys
+    - Being able to ask specific users (or groups) a question or something like an NPS survey when they complete (or fail to complete) a task helps provide context about what they’re actually thinking in that moment.
+- Use [AI](https://www.notion.so/ai) to set up and analyze most of the things above - PostHog AI
+
+## Why not Google Analytics?
+
+Traditionally we’ve all used Google Analytics to understand usage, but it’s not the right tool for the job. GA lets you see charts and graphs but doesn’t offer the ability to drill in to what each *individual* customer is doing.
+
+With PostHog, you can see charts and graphs in aggregate (like GA), but also go so much deeper. And here, you can import all your customer data that’s generated across dozens of tools. This means that with AI, we’re building a world where you can get answers to questions you don’t even have to ask – because AI will be doing the hard work for you.
+
+
+test 1
+
+test 2
+
+<AppCount />
+
+
+<ImageDW />
+
+<ImageReading1 />
+
+<CTAs />
+
+Questions? [Watch a demo](/demo) or [talk to a human](/talk-to-a-human).
+

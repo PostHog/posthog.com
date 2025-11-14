@@ -1,22 +1,262 @@
-import React from 'react'
-import Editor from "components/Editor"
-import { SEO } from "components/seo"
+import React, { useEffect, useState } from 'react'
+import Link from 'components/Link'
+import OSTable from 'components/OSTable'
+import { useCustomers } from 'hooks/useCustomers'
+import CTA from 'components/Home/CTA'
+import { IconArrowRight, IconArrowUpRight, IconInfo, IconRefresh } from '@posthog/icons'
+import Roadmap from 'components/Home/New/Roadmap'
+import Pricing from 'components/Home/New/Pricing'
+import OSButton from 'components/OSButton'
+import useProduct from 'hooks/useProduct'
+import { Accordion } from 'components/RadixUI/Accordion'
+import { JsxComponentDescriptor } from '@mdxeditor/editor'
+
+import Logo from 'components/Logo'
+import { useApp } from '../../context/App'
+import { useWindow } from '../../context/Window'
+import MDXEditor from 'components/MDXEditor'
+import { graphql, useStaticQuery } from 'gatsby'
+import SEO from 'components/seo'
+import usePostHog from 'hooks/usePostHog'
+import Tooltip from 'components/RadixUI/Tooltip'
+import { PRODUCT_COUNT, APP_COUNT } from '../../constants'
+import Start from 'components/Start'
+import { CallToAction } from 'components/CallToAction'
+import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
+import ProductTabs from 'components/ProductTabs'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import CloudinaryImage from 'components/CloudinaryImage'
+import IntegrationPrompt from 'components/IntegrationPrompt'
+import { motion } from 'framer-motion'
+import Tagline from 'components/Home/Tagline'
+import ELI5Blurb from 'components/Home/ELI5Blurb'
+
+const CTAs = () => {
+  const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
+  return (
+    <div>
+      <div className="flex flex-col @xs:flex-row @xs:justify-center @xl:justify-start gap-3 @sm:gap-2">
+        <CallToAction
+          to="https://app.posthog.com/signup"
+          size="md"
+          state={{ newWindow: true, initialTab: 'signup' }}
+        >
+          Get started - free
+        </CallToAction>
+        <CallToAction type="secondary" size="md" onClick={() => setShowIntegrationPrompt(true)}>
+          Install with AI
+        </CallToAction>
+      </div>
+      <motion.div
+        className="overflow-hidden"
+        initial={{ height: 0 }}
+        animate={{ height: showIntegrationPrompt ? 'auto' : 0 }}
+      >
+        <div
+          data-scheme="secondary"
+          className="mt-4 p-4 border border-primary rounded-md bg-primary [&_h3]:mt-0 [&_ul]:mb-0 [&_ul]:p-0"
+        >
+          <IntegrationPrompt />
+        </div>
+      </motion.div>
+    </div>
+  )
+}
+
+const ProductCount = () => {
+  return <strong>{PRODUCT_COUNT}+ products</strong>
+}
+
+const AppCount = () => {
+  return APP_COUNT
+}
+
+const Button = ({ url, children }: { url: string; children: React.ReactNode }) => {
+  return (
+    <OSButton asLink to={url} variant="secondary" size="md" state={{ newWindow: true }}>
+      {children}
+    </OSButton>
+  )
+}
+
+const Image = ({ src, className }: { src: string; className?: string }) => {
+  return <CloudinaryImage src={src} className={className} />
+}
+
+const jsxComponentDescriptors: JsxComponentDescriptor[] = [
+  {
+    name: 'AppCount',
+    kind: 'flow',
+    props: [],
+    Editor: () => <AppCount />,
+  },
+  {
+    name: 'CTAs',
+    kind: 'flow',
+    props: [],
+    Editor: () => <CTAs />,
+  },
+  {
+    name: 'CTA',
+    kind: 'flow',
+    props: [],
+    Editor: () => (
+      <>
+        <p className="-mt-2">
+          If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
+        </p>
+        <CTA headline={false} />
+      </>
+    ),
+  },
+  {
+    name: 'Logo',
+    kind: 'flow',
+    props: [],
+    Editor: () => {
+      const { siteSettings } = useApp()
+      return <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
+    },
+  },
+  {
+    name: 'ButtonCDI',
+    kind: 'flow',
+    props: [],
+    Editor: () => <Button url="/customer-data-infrastructure">README: Data warehouse / CDP / ETL.md</Button>,
+  },
+  {
+    name: 'ButtonPricing',
+    kind: 'flow',
+    props: [],
+    Editor: () => <Button url="/pricing">Explore pricing</Button>,
+  },
+  {
+    name: 'ButtonAI',
+    kind: 'flow',
+    props: [],
+    Editor: () => <Button url="/ai">Learn about PostHog AI</Button>,
+  },
+  {
+    name: 'ButtonAbout',
+    kind: 'flow',
+    props: [],
+    Editor: () => <Button url="/about">Read more about us</Button>,
+  },
+  {
+    name: 'ImageDW',
+    kind: 'flow',
+    props: [],
+    Editor: () => (
+      <Image
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png"
+        className="max-w-[213px] absolute bottom-[-4px] right-0 rounded-br-sm"
+      />
+    ),
+  },
+  {
+    name: 'ImageMoney',
+    kind: 'flow',
+    props: [],
+    Editor: () => (
+      <Image
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/dont_burn_money_28d5861fad.png"
+        className="float-right max-w-[120px] @sm:max-w-[200px] ml-2 @sm:ml-4 mb-2 @sm:-mt-4"
+      />
+    ),
+  },
+  {
+    name: 'ImageReading1',
+    kind: 'flow',
+    props: [],
+    Editor: () => (
+      <Image
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
+        className="@md:hidden @xl:block @lg:float-right max-w-full @xl:max-w-xs rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary -mb-2 @lg:mb-2 @lg:ml-4 @lg:-mt-2"
+      />
+    ),
+  },
+  {
+    name: 'ImageReading2',
+    kind: 'flow',
+    props: [],
+    Editor: () => (
+      <Image
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
+        className="hidden @md:block @md:float-right @xl:hidden @md:max-w-60 @xl:max-w-xs @sm:ml-4 @sm:mb-2 rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary"
+      />
+    ),
+  },
+  {
+    name: 'TooltipDW',
+    kind: 'flow',
+    props: [],
+    Editor: () => (
+      <Tooltip
+        trigger={
+          <span>
+            <IconInfo className="size-4 inline-block relative -top-px" />
+          </span>
+        }
+        delay={0}
+      >
+        <p className="text-sm mb-0">You can also connect your own!</p>
+      </Tooltip>
+    ),
+  },
+  {
+    name: 'Tagline',
+    kind: 'flow',
+    props: [],
+    Editor: () => <Tagline />,
+  },
+  {
+    name: 'ELI5Blurb',
+    kind: 'flow',
+    props: [],
+    Editor: () => <ELI5Blurb />,
+  },
+]
 
 export default function PostHog101() {
+  const {
+    mdx: { rawBody, mdxBody },
+  } = useStaticQuery(graphql`
+        query {
+            mdx(slug: { eq: "posthog-101" }) {
+                rawBody
+                mdxBody: body
+            }
+        }
+    `)
+  const { appWindow } = useWindow()
+  const { setWindowTitle } = useApp()
+  const posthog = usePostHog()
+
+  useEffect(() => {
+    if (appWindow) {
+      setWindowTitle(appWindow, 'posthog-101.mdx')
+    }
+  }, [])
+
   return (
-    <Editor type="mdx" slug="/posthog-101">
-      <SEO title="PostHog 101" />
-      <h1>PostHog 101</h1>
-      <h2>What you can do with our apps</h2>
-      <p>After installing our code snippet, you can:</p>
-      <ul>
-        <li>watch [screen recordings](/session-replay) of people using your app or website. Seeing where they click and get stuck is leaps and bounds more useful than trying to sift through logs – and more accurate than asking for feedback.</li>
-        <li>create [graphs](/product-analytics) and [dashboards](/dashboards) to see how features are being used. It's way easier than in GA _and_ more useful because you can drill into activity of a specific user. (GA can't do this because it only tracks visitors anonymously.)</li>
-        <li>[roll out a new feature](/feature-flags) to early adopters or beta testers before it's ready for primetime. Or run statically-significant [experiments](/experiments) at scale.</li>
-        <li>send [warehouse data](/customer-data-infrastructure) from third parties and run [SQL queries](/sql-editor) on it. By analyzing product usage data _with_ things like payment history, CRM info, and warehouse data, you can make more informed decisions.</li>
-        <li>[track technical bugs](/error-tracking) users are experiencing so they don't have to report it to you.</li>
-        <li>use [AI](/ai) to set up and analyze most of the things above</li>
-      </ul>
-    </Editor>
+    <>
+      <SEO
+        title="PostHog – We make dev tools for product engineers"
+        updateWindowTitle={false}
+        description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
+        image="/images/og/default.png"
+      />
+      <MDXEditor
+        hideTitle={true}
+        jsxComponentDescriptors={jsxComponentDescriptors}
+        body={rawBody}
+        mdxBody={mdxBody}
+        cta={{
+          url: `https://${posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
+            }.posthog.com/signup`,
+          label: 'Get started - free',
+        }}
+      />
+    </>
   )
 }
