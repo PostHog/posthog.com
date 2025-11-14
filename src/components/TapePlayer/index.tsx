@@ -111,7 +111,7 @@ function TapeButton({ label, icon, onClick, disabled = false, isPressed = false 
                             : '-translate-y-1 active:translate-y-0 active:rounded-none rounded bg-primary active:bg-accent/70 border-primary/80 active:border-primary'
                     }`}
                 >
-                    <div className="text-xl font-bold text-secondary">{icon}</div>
+                    <div className="text-xl font-bold text-secondary opacity-80">{icon}</div>
                 </div>
             </div>
             <div className="text-[9px] font-bold text-secondary uppercase tracking-wide">{label}</div>
