@@ -15,7 +15,7 @@ Be courteous and always provide context on the account (e.g., what you've notice
 
 #### Handover during onboarding
 
-While talking with customers or analyzing the account, conduct a discovery to understand the reason behind their high spend and assess whether there's potential for stable spend or usage moving forward. If they’re happy continuing with PostHog, you can mention our discounted pre-paid plan, which helps them save ~20%. However, if they prefer paying monthly, they are more than welcome to do so!
+While talking with customers or analyzing the account, do some discovery to understand the reason behind their high spend and assess whether there's potential for stable spend or usage moving forward. If they’re happy continuing with PostHog, you can mention our discounted pre-paid plan, which helps them save ~20%. However, if they prefer paying monthly, they are more than welcome to do so!
 
 We typically hand the account over to Sales when a customer is interested in the annual plan, requires additional contractual or legal support, or we notice potential ourselves.
 
