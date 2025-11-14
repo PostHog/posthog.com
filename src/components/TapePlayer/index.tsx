@@ -1,15 +1,13 @@
-import { useWindow } from '../../context/Window'
-import { useApp } from '../../context/App'
-import React, { useState, useEffect, useRef } from 'react'
-import { songs } from './songs'
-import { YTPlayer } from './types'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { Track, YTPlayer } from './types'
 import Switch from './Switch'
 import TapeButton from './TapeButton'
 import CassetteTape from './CassetteTape'
+import SEO from 'components/seo'
+import { useUser } from 'hooks/useUser'
 
 export default function TapePlayer(): JSX.Element {
-    const { appWindow } = useWindow()
-    const { setWindowTitle } = useApp()
+    const { getJwt } = useUser()
     const [isPoweredOn, setIsPoweredOn] = useState(true)
     const [isPlaying, setIsPlaying] = useState(false)
     const [danceMode, setDanceMode] = useState(false)
@@ -22,37 +20,72 @@ export default function TapePlayer(): JSX.Element {
     const waveformRef = useRef<number>()
     const playerRef = useRef<YTPlayer | null>(null)
     const playerReadyRef = useRef(false)
+    const [mixtapeSongs, setMixtapeSongs] = useState<Track[]>([])
 
-    // Load YouTube iframe API
+    const extractVideoId = (url: string): string => {
+        // Handle various YouTube URL formats
+        const patterns = [
+            /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+            /^([a-zA-Z0-9_-]{11})$/, // Direct video ID
+        ]
+
+        for (const pattern of patterns) {
+            const match = url.match(pattern)
+            if (match) return match[1]
+        }
+
+        return url // Return as-is if no pattern matches
+    }
+
     useEffect(() => {
-        if (appWindow) {
-            setWindowTitle(appWindow, '♫ PostHog.fm')
+        const fetchMixtapeSongs = async () => {
+            const searchParams = new URLSearchParams(window.location.search)
+            const mixtapeId = searchParams.get('id')
+            if (!mixtapeId) return
+            const jwt = await getJwt()
+            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes/${mixtapeId}?populate=*`, {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
+            const { data } = await response.json()
+            const tracks = data.attributes.tracks.map((track: any) => ({
+                id: track.id,
+                artist: track.artist,
+                title: track.title,
+                youtubeUrl: track.youtubeUrl,
+            }))
+            setMixtapeSongs(tracks)
         }
-        if (typeof window === 'undefined') return
-
-        // Check if API is already loaded
-        if (window.YT && window.YT.Player) {
-            initializePlayer()
-            return
-        }
-
-        // Load the API
-        const tag = document.createElement('script')
-        tag.src = 'https://www.youtube.com/iframe_api'
-        const firstScriptTag = document.getElementsByTagName('script')[0]
-        firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag)
-
-        // Set up callback
-        window.onYouTubeIframeAPIReady = initializePlayer
+        fetchMixtapeSongs()
     }, [])
 
-    const initializePlayer = () => {
-        if (typeof window === 'undefined' || !window.YT || playerRef.current) return
+    useEffect(() => {
+        if (mixtapeSongs.length > 0 && !playerRef.current) {
+            // Check if API is already loaded
+            if (window.YT && window.YT.Player) {
+                initializePlayer()
+                return
+            }
+
+            // Load the API
+            const tag = document.createElement('script')
+            tag.src = 'https://www.youtube.com/iframe_api'
+            const firstScriptTag = document.getElementsByTagName('script')[0]
+            firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag)
+
+            // Set up callback
+            window.onYouTubeIframeAPIReady = initializePlayer
+        }
+    }, [mixtapeSongs])
+
+    const initializePlayer = useCallback(() => {
+        if (typeof window === 'undefined' || !window.YT || playerRef.current || mixtapeSongs.length <= 0) return
 
         playerRef.current = new window.YT.Player('youtube-player', {
             height: '0',
             width: '0',
-            videoId: songs[0].videoId,
+            videoId: extractVideoId(mixtapeSongs[0].youtubeUrl),
             host: 'https://www.youtube-nocookie.com',
             playerVars: {
                 autoplay: 0,
@@ -79,12 +112,12 @@ export default function TapePlayer(): JSX.Element {
                 },
             },
         })
-    }
+    }, [mixtapeSongs])
 
     // Handle song changes
     useEffect(() => {
-        if (playerRef.current && playerReadyRef.current) {
-            playerRef.current.loadVideoById(songs[currentSongIndex].videoId)
+        if (playerRef.current && playerReadyRef.current && mixtapeSongs.length > 0) {
+            playerRef.current.loadVideoById(extractVideoId(mixtapeSongs[currentSongIndex].youtubeUrl))
             if (isPlaying) {
                 playerRef.current.playVideo()
             }
@@ -155,7 +188,7 @@ export default function TapePlayer(): JSX.Element {
     const handlePrev = () => {
         if (isPoweredOn) {
             const wasPlaying = isPlaying
-            setCurrentSongIndex((prev) => (prev === 0 ? songs.length - 1 : prev - 1))
+            setCurrentSongIndex((prev) => (prev === 0 ? mixtapeSongs.length - 1 : prev - 1))
             if (wasPlaying && playerRef.current && playerReadyRef.current) {
                 setTimeout(() => {
                     if (playerRef.current) {
@@ -169,7 +202,7 @@ export default function TapePlayer(): JSX.Element {
     const handleSkip = () => {
         if (isPoweredOn) {
             const wasPlaying = isPlaying
-            setCurrentSongIndex((prev) => (prev === songs.length - 1 ? 0 : prev + 1))
+            setCurrentSongIndex((prev) => (prev === mixtapeSongs.length - 1 ? 0 : prev + 1))
             if (wasPlaying && playerRef.current && playerReadyRef.current) {
                 setTimeout(() => {
                     if (playerRef.current) {
@@ -193,17 +226,18 @@ export default function TapePlayer(): JSX.Element {
     const handleShare = () => {
         if (isPoweredOn && navigator.share) {
             navigator.share({
-                title: songs[currentSongIndex].title,
-                text: `Check out ${songs[currentSongIndex].title} by ${songs[currentSongIndex].artist}`,
-                url: `https://www.youtube.com/watch?v=${songs[currentSongIndex].videoId}`,
+                title: mixtapeSongs[currentSongIndex].title,
+                text: `Check out ${mixtapeSongs[currentSongIndex].title} by ${mixtapeSongs[currentSongIndex].artist}`,
+                url: `https://www.youtube.com/watch?v=${mixtapeSongs[currentSongIndex].videoId}`,
             })
         }
     }
 
-    const currentSong = songs[currentSongIndex]
+    const currentSong = mixtapeSongs[currentSongIndex]
 
     return (
         <div data-scheme="secondary" className="w-full bg-primary">
+            <SEO title="♫ PostHog.fm" />
             <div className="p-4">
                 {/* Hidden YouTube player */}
                 <div id="youtube-player" className="hidden" />
@@ -241,7 +275,7 @@ export default function TapePlayer(): JSX.Element {
                     />
 
                     {/* Cassette tape */}
-                    <CassetteTape title={currentSong.title} artist={currentSong.artist} rotation={rotation} />
+                    <CassetteTape title={currentSong?.title} artist={currentSong?.artist} rotation={rotation} />
 
                     {/* Dance mode switch */}
                     <Switch
