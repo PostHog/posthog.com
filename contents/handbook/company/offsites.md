@@ -82,6 +82,8 @@ The budget for these trips is up to $2,000 per person in total. We ask team memb
 
 You should assign someone on the small team to be responsible for planning the offsite (doesn't have to be the lead), and they will be supported by the Ops & People team to ensure a successful experience. 
 
+> On occassion during busy hiring peak time, we do recommend any team member involved in the interview process to dedicate at least one hour block per day during the offsites to accommodate candidate interviews so that this does not delay the hiring process on your team while you're away. Please coordinate directly with #team-talent if you have additional questions.
+
 ## Hedge House
 
 PostHog runs the Hedge House, in Cambridge, UK. It's a place designed for small teams to run their offsites and for in-person onboarding. We'd recommend using the Hedge House for small team offsites for cost and convenience reasons if you are in Europe. 
