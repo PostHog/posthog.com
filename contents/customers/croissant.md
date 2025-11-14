@@ -1,14 +1,14 @@
 ---
-title: How Get Croissant connects product data and outreach with PostHog Workflows
+title: How Croissant connects product data and outreach with PostHog Workflows
 
 featuredImage: >-
    https://res.cloudinary.com/dmukukwp6/image/upload/getcroissant_d26d405d9d.jpg
 date: 2025-11-13
 ---
 
-[Get Croissant](https://www.getcroissant.com/) helps people find coworking and meeting spaces anywhere in the world. For their B2B growth team, understanding when someone’s ready to talk and reacting fast is key.
+[Croissant](https://www.getcroissant.com/) helps people find coworking and meeting spaces anywhere in the world. For their B2B growth team, understanding when someone’s ready to talk and reacting fast is key.
 
-Until recently, they did this with a mix of in-house scripts and a tangle of integrations. That changed when they turned on PostHog [Workflows](https://posthog.com/docs/workflows), which let them spot intent signals and follow up automatically, all within the same platform where they already tracked product analytics and web traffic. We talked to Jorge Lopez-Sarry, responsible for growth at Get Croissant, to get the details about how they use Workflows.
+Until recently, they did this with a mix of in-house scripts and a tangle of integrations. That changed when they turned on PostHog [Workflows](https://posthog.com/docs/workflows), which let them spot intent signals and follow up automatically, all within the same platform where they already tracked product analytics and web traffic. We talked to Jorge López, responsible for growth at Croissant, to get the details about how they use Workflows.
 
 _“The main benefit is that everything’s already in PostHog. Syncing data across tools is always hit-or-miss, and expensive. Now it’s all in one place, and we can iterate way faster.”_
 
@@ -42,7 +42,7 @@ _“Even at this early stage, Workflows is better for us than Zapier. It’s sim
 Croissant is already planning to expand beyond onboarding and demos:
 
 - Follow-ups for churn and renewals: tagging users 30 days before cancellation
-- Reactivation pings for frequent travelers who may need space in a new city
+- Reactivation pings for employees that travel frequently and may need space in a new city
 - Cohort-based workflows that target users by behavior patterns
 
 For Croissant, Workflows isn’t just another tool. It’s a way to keep their growth stack simple and their data clean. 
