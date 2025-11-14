@@ -74,8 +74,7 @@ const CustomPricingSlide = () => {
         >
             <h2 className="text-4xl md:text-5xl font-bold mb-8">Usage-based pricing</h2>
 
-            <div className="bg-accent border border-primary max-w-xl mx-auto rounded p-8 text-center">
-                <div className="text-2xl font-bold mb-4">PostHog AI is free during beta.</div>
+            <div className="bg-accent border border-primary rounded p-8 text-left max-w-3xl mx-auto">
                 <p className="text-lg mb-6">
                     AI credits are consumed whenever PostHog performs intelligent work for you. You'll spot these
                     features by the ✨ icon or when using the in-app chat.
