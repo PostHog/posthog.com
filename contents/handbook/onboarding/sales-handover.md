@@ -7,7 +7,7 @@ showTitle: true
 
 #### Direct handover - skipping onboarding
 
-If you see that a customer is spending **more than ~$1,500 monthly**, evaluate whether their usage looks stable and legitimate, and make sure that MRR doesn't come from an unwanted event spike or misconfiguration issue.
+If you see that a customer is spending **more than $1,000 monthly**, evaluate whether their usage looks stable and legitimate, and make sure that MRR doesn't come from an unwanted event spike or misconfiguration issue.
 
 If that's the case, you can pass the account to Sales even **without speaking with the customer first**, as long as you’ve confirmed that the high spend is intentional. The goal is to react quickly to healthy, high-spend accounts—but avoid passing through problematic ones.
 
