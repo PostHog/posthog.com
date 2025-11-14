@@ -73,10 +73,10 @@ export default function CassetteTape({
                 style={labelStyle}
             >
                 {/* Tape label */}
-                {title && artist && (
+                {(title || artist) && (
                     <div className="bg-accent/90 border-2 border-primary text-center flex flex-col justify-center rounded py-[3%]">
-                        <div className="font-bold text-sm text-primary truncate">{title}</div>
-                        <div className="text-xs text-secondary truncate">{artist}</div>
+                        {title && <div className="font-bold text-sm text-primary truncate">{title}</div>}
+                        {artist && <div className="text-xs text-secondary truncate">{artist}</div>}
                     </div>
                 )}
 

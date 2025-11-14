@@ -5,7 +5,7 @@ import { Fieldset } from 'components/OSFieldset'
 import { OSInput, OSTextarea } from 'components/OSForm'
 import CassetteTape from './CassetteTape'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { IconArrowUpRight, IconExternal, IconSpinner, IconTrash } from '@posthog/icons'
+import { IconArrowUpRight, IconSpinner, IconTrash } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CreatableMultiSelect from 'components/CreatableMultiSelect'
 import {
@@ -95,6 +95,9 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
 interface MixtapeEditorProps {
     id?: string
     onSubmit?: () => void
+    location?: { pathname: string }
+    newWindow?: boolean
+    key?: string
 }
 
 export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX.Element {
@@ -104,6 +107,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
     const { closeWindow } = useApp()
     const isEditMode = !!id
     const [isLoading, setIsLoading] = React.useState(isEditMode)
+    const [showErrors, setShowErrors] = React.useState(false)
     const sensors = useSensors(
         useSensor(PointerSensor),
         useSensor(KeyboardSensor, {
@@ -113,6 +117,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
 
     const formik = useFormik<MixtapeFormValues>({
         initialValues: {
+            title: '',
             notes: '',
             genres: [],
             tracks: [],
@@ -137,6 +142,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                     body: JSON.stringify({
                         data: {
                             ...(!isEditMode ? { creator: { connect: [user?.profile?.id] } } : {}),
+                            title: values.title,
                             notes: values.notes,
                             genres: values.genres,
                             tracks: values.tracks.map((track) => ({
@@ -174,7 +180,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                 if (appWindow) {
                     closeWindow(appWindow)
                 }
-                navigate(`/fm/mixtapes/${data.id}`, { state: { newWindow: true } })
+                navigate(`/fm?mixtapeId=${data.id}`, { state: { newWindow: true } })
             } catch (error) {
                 console.error('Error saving mixtape:', error)
                 addToast({
@@ -184,6 +190,10 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
         },
         validate: (values) => {
             const errors: Record<string, string | Record<number, Record<string, string>>> = {}
+
+            if (!values.title || values.title.trim() === '') {
+                errors.title = 'Title is required'
+            }
 
             if (!values.tracks || values.tracks.length === 0) {
                 errors.tracks = 'At least one track is required'
@@ -218,6 +228,13 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
         },
     })
 
+    // Reset errors when form values change
+    React.useEffect(() => {
+        if (showErrors) {
+            setShowErrors(false)
+        }
+    }, [formik.values])
+
     // Load existing mixtape if in edit mode
     React.useEffect(() => {
         if (!isEditMode) {
@@ -243,6 +260,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
 
                 // Populate form with existing data
                 formik.setValues({
+                    title: attributes.title || '',
                     notes: attributes.notes || '',
                     genres: attributes.genres || [],
                     tracks: attributes.tracks.map(
@@ -300,7 +318,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
         )
     }
 
-    const shareUrl = isEditMode && typeof window !== 'undefined' ? `/fm/mixtapes/${id}` : ''
+    const shareUrl = isEditMode && typeof window !== 'undefined' ? `/fm?mixtapeId=${id}` : ''
 
     return (
         <ScrollArea>
@@ -413,7 +431,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                                     type="button"
                                     variant="secondary"
                                     onClick={() => {
-                                        navigator.clipboard.writeText(shareUrl)
+                                        navigator.clipboard.writeText(`${window.location.origin}${shareUrl}`)
                                         addToast({
                                             description: 'Share URL copied to clipboard',
                                         })
@@ -424,6 +442,19 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                             </div>
                         </Fieldset>
                     )}
+
+                    <Fieldset legend="Title" className="mb-0">
+                        <OSInput
+                            direction="column"
+                            showLabel={false}
+                            label="Title"
+                            placeholder="Give your mixtape a name..."
+                            name="title"
+                            value={formik.values.title}
+                            onChange={formik.handleChange}
+                            className="!bg-accent"
+                        />
+                    </Fieldset>
 
                     <Fieldset legend="Tracklist" className="mb-0">
                         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
@@ -473,7 +504,15 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                     </Fieldset>
 
                     <div className="!mt-4">
-                        <OSButton type="button" variant="primary" width="full" onClick={formik.submitForm}>
+                        <OSButton
+                            type="button"
+                            variant="primary"
+                            width="full"
+                            onClick={() => {
+                                setShowErrors(true)
+                                formik.submitForm()
+                            }}
+                        >
                             {formik.isSubmitting ? (
                                 <IconSpinner className="size-6 animate-spin" />
                             ) : isEditMode ? (
@@ -482,6 +521,24 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                                 'Publish'
                             )}
                         </OSButton>
+                        {formik.errors && Object.keys(formik.errors).length > 0 && showErrors && (
+                            <div className="mt-2 text-sm text-red font-semibold space-y-1">
+                                {formik.errors.title && <div>{formik.errors.title}</div>}
+                                {typeof formik.errors.tracks === 'string' && <div>{formik.errors.tracks}</div>}
+                                {typeof formik.errors.tracks === 'object' && (
+                                    <div>
+                                        {Object.entries(
+                                            formik.errors.tracks as Record<number, Record<string, string>>
+                                        ).map(([trackIndex, trackErrors]) => (
+                                            <div key={trackIndex}>
+                                                Track {parseInt(trackIndex) + 1}:{' '}
+                                                {Object.values(trackErrors).join(', ')}
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </form>
             </div>

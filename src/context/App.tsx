@@ -961,15 +961,14 @@ const appSettings: AppSettings = {
     '/fm': {
         size: {
             min: {
-                width: 700,
-                height: 1200,
+                width: 1200,
+                height: 588,
             },
             max: {
-                width: 700,
-                height: 1200,
+                width: 1200,
+                height: 588,
             },
             fixed: true,
-            autoHeight: true,
         },
     },
     '/fm/mixtapes': {
@@ -1010,20 +1009,6 @@ const appSettings: AppSettings = {
                 height: 597,
             },
             fixed: true,
-        },
-    },
-    '/fm/mixtapes/:id': {
-        size: {
-            min: {
-                width: 700,
-                height: 1200,
-            },
-            max: {
-                width: 700,
-                height: 1200,
-            },
-            fixed: true,
-            autoHeight: true,
         },
     },
 } as const

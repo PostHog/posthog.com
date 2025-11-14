@@ -5,10 +5,13 @@ import TapeButton from './TapeButton'
 import CassetteTape from './CassetteTape'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
-import { IconPencil, IconPlusSquare } from '@posthog/icons'
+import { IconPencil } from '@posthog/icons'
 import { CassetteLabelBackground } from '../../data/cassetteBackgrounds'
 import MixtapeEditor from './MixtapeEditor'
 import { useApp } from '../../context/App'
+import Mixtapes from './Mixtapes'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import { useMixtapes } from '../../hooks/useMixtapes'
 
 interface TapePlayerProps {
     id?: string
@@ -17,6 +20,7 @@ interface TapePlayerProps {
 export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
     const { getJwt, user } = useUser()
     const { addWindow } = useApp()
+    const { mixtapes, isLoading, refresh } = useMixtapes()
     const [isPoweredOn, setIsPoweredOn] = useState(true)
     const [isPlaying, setIsPlaying] = useState(false)
     const [danceMode, setDanceMode] = useState(false)
@@ -36,7 +40,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
         labelBackground?: CassetteLabelBackground
     }>()
     const [mixtapeId, setMixtapeId] = useState<string | null>(null)
-    const [creators, setCreators] = useState()
+    const [creators, setCreators] = useState<Array<{ id: number }>>([])
 
     const extractVideoId = (url: string): string => {
         // Handle various YouTube URL formats
@@ -140,7 +144,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
         })
     }, [mixtapeSongs])
 
-    // Handle song changes
+    // Handle song changes and mixtape changes
     useEffect(() => {
         if (playerRef.current && playerReadyRef.current && mixtapeSongs.length > 0) {
             playerRef.current.loadVideoById(extractVideoId(mixtapeSongs[currentSongIndex].youtubeUrl))
@@ -148,7 +152,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                 playerRef.current.playVideo()
             }
         }
-    }, [currentSongIndex])
+    }, [currentSongIndex, mixtapeSongs])
 
     // Animate the tape reels when playing
     useEffect(() => {
@@ -263,127 +267,131 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
     const handleEdit = () => {
         if (mixtapeId) {
             addWindow(
-                <MixtapeEditor
-                    id={mixtapeId}
-                    key={`/fm/mixtapes/edit/:id`}
-                    location={{ pathname: `/fm/mixtapes/edit/${mixtapeId}` }}
-                    newWindow
-                    onSubmit={() => {
-                        fetchMixtapeSongs(mixtapeId)
-                    }}
-                />
+                (
+                    <MixtapeEditor
+                        id={mixtapeId}
+                        key={`/fm/mixtapes/edit/:id`}
+                        location={{ pathname: `/fm/mixtapes/edit/${mixtapeId}` }}
+                        newWindow
+                        onSubmit={() => {
+                            fetchMixtapeSongs(mixtapeId)
+                            refresh()
+                        }}
+                    />
+                ) as any
             )
         }
-    }
-
-    const handleNew = () => {
-        addWindow(<MixtapeEditor key={`/fm/mixtapes/new`} location={{ pathname: `/fm/mixtapes/new` }} newWindow />)
     }
 
     const currentSong = mixtapeSongs[currentSongIndex]
 
     return (
-        <div data-scheme="secondary" className="w-full bg-primary">
-            <SEO title="♫ PostHog.fm" />
-            <div className="p-4">
-                {/* Hidden YouTube player */}
-                <div id="youtube-player" className="hidden" />
+        <ScrollArea>
+            <div data-scheme="secondary" className="w-full bg-primary">
+                <SEO title="♫ PostHog.fm" />
+                <div className="flex items-start">
+                    <div className="p-4 w-[700px] sticky top-0 border-r border-primary">
+                        {/* Hidden YouTube player */}
+                        <div id="youtube-player" className="hidden" />
 
-                {/* Waveform */}
-                <div className="mb-4 h-20 flex items-end justify-between gap-[2px] border-2 border-primary bg-primary p-2 rounded">
-                    {waveformBars.map((height, i) => (
-                        <div
-                            key={i}
-                            className="flex-1 bg-secondary border-l border-r border-primary transition-all duration-100"
-                            style={{
-                                height: isPlaying && isPoweredOn ? `${height}%` : '10%',
-                                opacity: isPoweredOn ? (isPlaying ? 1 : 0.4) : 0.2,
-                            }}
-                        />
-                    ))}
-                </div>
+                        {/* Waveform */}
+                        <div className="mb-4 h-20 flex items-end justify-between gap-[2px] border-2 border-primary bg-primary p-2 rounded">
+                            {waveformBars.map((height, i) => (
+                                <div
+                                    key={i}
+                                    className="flex-1 bg-secondary border-l border-r border-primary transition-all duration-100"
+                                    style={{
+                                        height: isPlaying && isPoweredOn ? `${height}%` : '10%',
+                                        opacity: isPoweredOn ? (isPlaying ? 1 : 0.4) : 0.2,
+                                    }}
+                                />
+                            ))}
+                        </div>
 
-                {/* Main player area */}
-                <div className="flex items-stretch gap-3 mb-4">
-                    <div className="flex flex-col items-center gap-2">
-                        {/* Power button */}
-                        <Switch
-                            label="Power"
-                            isOn={isPoweredOn}
-                            onToggle={() => {
-                                setIsPoweredOn(!isPoweredOn)
-                                if (isPoweredOn) {
-                                    // Pause the music when turning off
-                                    if (playerRef.current && playerReadyRef.current) {
-                                        playerRef.current.pauseVideo()
+                        {/* Main player area */}
+                        <div className="flex items-stretch gap-3 mb-4">
+                            <div className="flex flex-col items-center gap-2">
+                                {/* Power button */}
+                                <Switch
+                                    label="Power"
+                                    isOn={isPoweredOn}
+                                    onToggle={() => {
+                                        setIsPoweredOn(!isPoweredOn)
+                                        if (isPoweredOn) {
+                                            // Pause the music when turning off
+                                            if (playerRef.current && playerReadyRef.current) {
+                                                playerRef.current.pauseVideo()
+                                            }
+                                            setIsPlaying(false)
+                                        }
+                                    }}
+                                />
+                            </div>
+
+                            {/* Cassette tape */}
+                            <CassetteTape
+                                title={currentSong?.title}
+                                artist={currentSong?.artist}
+                                rotation={rotation}
+                                cassetteColor={metadata?.cassetteColor}
+                                labelColor={metadata?.labelColor}
+                                labelBackground={metadata?.labelBackground}
+                            />
+                            <div className="flex flex-col items-center gap-2">
+                                {/* Dance mode switch */}
+                                <Switch
+                                    label={
+                                        <>
+                                            Dance <br />
+                                            mode
+                                        </>
                                     }
-                                    setIsPlaying(false)
-                                }
-                            }}
-                        />
-                        {user && (
-                            <div className="w-full aspect-square mt-auto">
-                                <TapeButton
-                                    label="Create"
-                                    icon={<IconPlusSquare className="size-5" />}
-                                    onClick={handleNew}
+                                    isOn={danceMode}
+                                    onToggle={() => setDanceMode(!danceMode)}
                                     disabled={!isPoweredOn}
                                 />
+                                {creators?.some((creator) => creator.id === user?.profile?.id) && (
+                                    <div className="w-full aspect-square mt-auto">
+                                        <TapeButton
+                                            label="Edit"
+                                            icon={<IconPencil className="size-5" />}
+                                            onClick={handleEdit}
+                                            disabled={!isPoweredOn}
+                                        />
+                                    </div>
+                                )}
                             </div>
-                        )}
-                    </div>
+                        </div>
 
-                    {/* Cassette tape */}
-                    <CassetteTape
-                        title={currentSong?.title}
-                        artist={currentSong?.artist}
-                        rotation={rotation}
-                        cassetteColor={metadata?.cassetteColor}
-                        labelColor={metadata?.labelColor}
-                        labelBackground={metadata?.labelBackground}
-                    />
-                    <div className="flex flex-col items-center gap-2">
-                        {/* Dance mode switch */}
-                        <Switch
-                            label={
-                                <>
-                                    Dance <br />
-                                    mode
-                                </>
-                            }
-                            isOn={danceMode}
-                            onToggle={() => setDanceMode(!danceMode)}
-                            disabled={!isPoweredOn}
-                        />
-                        {creators?.some((creator) => creator.id === user?.profile?.id) && (
-                            <div className="w-full aspect-square mt-auto">
-                                <TapeButton
-                                    label="Edit"
-                                    icon={<IconPencil className="size-5" />}
-                                    onClick={handleEdit}
-                                    disabled={!isPoweredOn}
-                                />
-                            </div>
-                        )}
+                        {/* Control buttons */}
+                        <div className="gap-2 grid grid-cols-6 h-20">
+                            <TapeButton label="Eject" icon="⏏" onClick={handleEject} disabled={!isPoweredOn} />
+                            <TapeButton label="Prev" icon="◁◁" onClick={handlePrev} disabled={!isPoweredOn} />
+                            <TapeButton
+                                label="Play"
+                                icon="▷"
+                                onClick={handlePlay}
+                                disabled={!isPoweredOn || isPlaying}
+                                isPressed={isPlaying}
+                            />
+                            <TapeButton
+                                label="Pause"
+                                icon="||"
+                                onClick={handlePause}
+                                disabled={!isPoweredOn || !isPlaying}
+                            />
+                            <TapeButton label="Skip" icon="▷▷" onClick={handleSkip} disabled={!isPoweredOn} />
+                            <TapeButton label="Share" icon="↗" onClick={handleShare} disabled={!isPoweredOn} />
+                        </div>
                     </div>
-                </div>
-
-                {/* Control buttons */}
-                <div className="gap-2 grid grid-cols-6 h-20">
-                    <TapeButton label="Eject" icon="⏏" onClick={handleEject} disabled={!isPoweredOn} />
-                    <TapeButton label="Prev" icon="◁◁" onClick={handlePrev} disabled={!isPoweredOn} />
-                    <TapeButton
-                        label="Play"
-                        icon="▷"
-                        onClick={handlePlay}
-                        disabled={!isPoweredOn || isPlaying}
-                        isPressed={isPlaying}
+                    <Mixtapes
+                        mixtapes={mixtapes}
+                        isLoading={isLoading}
+                        refresh={refresh}
+                        currentMixtapeId={mixtapeId}
                     />
-                    <TapeButton label="Pause" icon="||" onClick={handlePause} disabled={!isPoweredOn || !isPlaying} />
-                    <TapeButton label="Skip" icon="▷▷" onClick={handleSkip} disabled={!isPoweredOn} />
-                    <TapeButton label="Share" icon="↗" onClick={handleShare} disabled={!isPoweredOn} />
                 </div>
             </div>
-        </div>
+        </ScrollArea>
     )
 }
