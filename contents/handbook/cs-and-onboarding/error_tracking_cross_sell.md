@@ -9,6 +9,54 @@
 * They are using one of the supported platforms for Error Tracking, https://posthog.com/docs/error-tracking/start-here
 * **Ideally**: They have expressed pain points that Error Tracking could help resolve.
 
+## Identify Error Tracking cross-sell opportunities
+
+### Product usage signals
+
+Customers might have needs that are not expressed, and there are usage patterns that may also indicate an opportunity for Error Tracking. When you review customer accounts and chat with users, pay attention to how they use PostHog.
+
+**How users might use PostHog:**
+* Using session replay to investigate user issues, suggesting they don't have a way to detect errors automatically.
+* Frequently searching through event logs or funnel drop-offs to try to trace back to technical issues or user drop points.
+* Setting up alerts primarily on custom events (rather than exceptions), which could indicate they lack out-of-the-box error visibility.
+* Creating dashboards or insights that combine product usage with support data, showing a need to correlate bugs with user experience.
+* Tagging engineering or support teams in insights to ask them to "investigate".
+* Frequently using manual workarounds to monitor application health, such as exporting incidents from PostHog to spreadsheets or other tools.
+* Asking how to attribute support tickets or complaints to specific user sessions, which could be easier with automated error tracking.
+
+### Chat with users
+
+Engage with users. There are cues that signal gaps that Error Tracking is designed to fill.
+
+**Some things users might say**
+* "We keep seeing bugs in production but it's hard to know where they're coming from"
+* "I'm not sure if we're catching all the errors our users encounter"
+* "We use logs to try and track down issues, but it's pretty manual"
+* "We get complaints from users, but it's hard to reproduce what happened"
+* "We only find out about errors when customers report bugs"
+* "Is there a way to get notified when critical errors happen in real time?"
+* "We need to understand how errors are affecting our revenue or user growth"
+* "It's difficult to connect the dots between bugs and their actual impact on users"
+
+### Website signals
+
+Generally speaking, interest in our products can be identified via signals on our website:
+
+**What users might do on our website:**
+* Visiting docs pages, such as:
+  * https://posthog.com/docs/error-tracking/start-here
+  * https://posthog.com/docs/error-tracking
+  * https://posthog.com/docs/error-tracking/installation/react
+* Visiting tutorial pages:
+  * https://posthog.com/tutorials/react-error-tracking
+  * https://posthog.com/tutorials/error-tracking
+* Visiting the error tracking product page (https://posthog.com/error-tracking) and clicking "Get started - free"
+* Reading blog posts about error tracking:
+  * https://posthog.com/blog/posthog-vs-sentry
+  * https://posthog.com/blog/best-sentry-alternatives
+* Asking PostHog AI about error tracking
+* Asking MCP about error tracking
+
 ## Demonstrate the value
 
 Once you've identified customers who'd benefit from Error Tracking, show them value in ways relevant to them.
