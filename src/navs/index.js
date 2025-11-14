@@ -1495,7 +1495,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'New customer onboarding',
-                        url: '/handbook/growth/sales/customer-onboarding.md',
+                        url: '/handbook/growth/sales/customer-onboarding',
                     },
                 ],
             },
