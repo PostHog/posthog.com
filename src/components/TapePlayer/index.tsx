@@ -384,12 +384,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                             <TapeButton label="Share" icon="↗" onClick={handleShare} disabled={!isPoweredOn} />
                         </div>
                     </div>
-                    <Mixtapes
-                        mixtapes={mixtapes}
-                        isLoading={isLoading}
-                        refresh={refresh}
-                        currentMixtapeId={mixtapeId}
-                    />
+                    <Mixtapes mixtapes={mixtapes} isLoading={isLoading} />
                 </div>
             </div>
         </ScrollArea>

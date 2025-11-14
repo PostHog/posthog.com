@@ -961,7 +961,7 @@ const appSettings: AppSettings = {
     '/fm': {
         size: {
             min: {
-                width: 1200,
+                width: 1300,
                 height: 588,
             },
             max: {
