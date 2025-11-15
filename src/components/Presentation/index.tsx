@@ -117,7 +117,7 @@ export default function Presentation({
     config,
     salesRep,
 }: PresentationProps) {
-    const { siteSettings } = useApp()
+    const { siteSettings, websiteMode } = useApp()
     const { appWindow } = useWindow()
     const [isMobile, setIsMobile] = useState<boolean>(getIsMobile(siteSettings, appWindow))
 
@@ -336,7 +336,13 @@ export default function Presentation({
 
     return (
         <>
-            <div ref={containerRef} className="@container w-full h-full flex flex-col min-h-1">
+            <div
+                ref={containerRef}
+                data-scheme="secondary"
+                className={`@container w-full transition-all duration-300 h-full flex flex-col min-h-1 ${
+                    websiteMode ? 'max-w-7xl border-x border-primary mx-auto' : 'max-w-full'
+                }`}
+            >
                 <div
                     data-scheme="secondary"
                     className={`flex flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''}`}

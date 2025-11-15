@@ -16,6 +16,7 @@ export default function Wrapper() {
         closingAllWindowsAnimation,
         setClosingAllWindowsAnimation,
         closeAllWindows,
+        websiteMode,
     } = useApp()
     const [shakeReady, setShakeReady] = useState(false)
     const dotLottieRef = useRef<any>(null)
@@ -27,7 +28,7 @@ export default function Wrapper() {
     }, [closingAllWindowsAnimation])
 
     return (
-        <div className="fixed inset-0 size-full flex flex-col">
+        <div className={`${websiteMode ? '' : 'fixed inset-0 size-full'} flex flex-col`}>
             {!compact && <TaskBarMenu />}
             <div ref={constraintsRef} className="flex-grow relative">
                 <Desktop />
