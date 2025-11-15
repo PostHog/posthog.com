@@ -113,8 +113,7 @@ const ProductButton = ({ handle }: { handle: string }) => {
       iconClassName={`text-${product.color}`}
       color={product.color}
       size="md"
-      variant="underline"
-      className="font-medium text-primary hover:text-primary relative top-0.5 !underline"
+      className="font-medium text-primary hover:text-primary relative top-0.5"
       to={`/${product.slug}`}
       state={{ newWindow: true }}
       asLink
@@ -187,7 +186,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     Editor: () => (
       <Image
         src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto/replay_hog_13a2853b54.png"
-        className="@lg/editor-content:float-right @lg/editor-content:w-3/5 @lg/editor-content:ml-4 -mt-4 max-w-sm @lg/editor-content:max-w-[400px]"
+        className="@lg/editor-content:float-right @lg/editor-content:w-3/5 @lg/editor-content:ml-4 max-w-sm @lg/editor-content:max-w-[400px]"
       />
     ),
   },
