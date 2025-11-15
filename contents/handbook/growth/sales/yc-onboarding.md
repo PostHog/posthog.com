@@ -35,11 +35,11 @@ We want to make this feel as smooth as possible - there is an outsized impact in
   - We check if they have added their billing details (needed to ensure they have a Stripe customer so we can add credits there) and prompt them to do so on the same page otherwise
   - We ask for their YC batch (this determines their deal variant), a screenshot showing them on Bookface, and a number of merch packs for them and their co-founders
 - Valid applications are added to the [Zapier table](https://tables.zapier.com/app/tables/t/01JRCYMWYAJNP3K0B6GTYKKBQB) and approved automatically, which means that founders get their credits almost instantly
-- A brief confirmation email from [Scott](https://posthog.com/community/profiles/32112) is sent right away
+- A brief confirmation email from <TeamMember name="Joe Martin" photo /> is sent right away
 - Shortly after, they receive automated emails containing:
   - An invite to the `#posthog-founders-club` channel in Slack - this is where they can get priority support
   - Links to order merch (multiple emails with unique links, if more than 1 merch pack was requested)
-- After ~12h they receive a welcome email from [Joe](https://posthog.com/community/profiles/29070) with some additional information and access to perks
+- After ~12h they receive a welcome email from <TeamMember name="Joe Martin" photo /> with some additional information and access to perks
   - Following the welcome email, they will get an additional email when they use 50%, 75%, and 100% of their credit, or when their credits fully expire - whichever comes first
 - We review submitted applications in the background
   - We automatically check their batch membership based on their company name and domain (using APIs like these: [1](https://api.ycombinator.com/v0.1/docs), [2](https://github.com/yc-oss/api) - they only include publicly launched companies)
