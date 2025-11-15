@@ -14,6 +14,7 @@ export default function Mixtapes(): JSX.Element {
     const { user } = useUser()
     const { mixtapes, isLoading } = useMixtapes()
     const [selectedGenre, setSelectedGenre] = useState<string>('all')
+    const [selectedCreator, setSelectedCreator] = useState<string>('all')
 
     useEffect(() => {
         if (appWindow) {
@@ -36,16 +37,50 @@ export default function Mixtapes(): JSX.Element {
         ]
     }, [mixtapes])
 
-    // Filter mixtapes based on selected genre
-    const filteredMixtapes = useMemo(() => {
-        if (selectedGenre === 'all') {
-            return mixtapes
-        }
-        return mixtapes.filter((mixtape) => {
-            const genres = mixtape.attributes.genres || []
-            return genres.includes(selectedGenre)
+    // Extract unique creators from all mixtapes
+    const creatorOptions = useMemo(() => {
+        const creators = new Map<string, string>()
+        mixtapes.forEach((mixtape) => {
+            const creatorId = mixtape.attributes.creator?.data[0]?.id
+            if (creatorId) {
+                const firstName = mixtape.attributes.creator?.data[0]?.attributes.firstName || ''
+                const lastName = mixtape.attributes.creator?.data[0]?.attributes.lastName || ''
+                const fullName = [firstName, lastName].filter(Boolean).join(' ')
+                if (fullName) {
+                    creators.set(String(creatorId), fullName)
+                }
+            }
         })
-    }, [mixtapes, selectedGenre])
+        return [
+            { label: 'All creators', value: 'all' },
+            ...Array.from(creators.entries())
+                .sort((a, b) => a[1].localeCompare(b[1]))
+                .map(([id, name]) => ({ label: name, value: id })),
+        ]
+    }, [mixtapes])
+
+    // Filter mixtapes based on selected genre and creator
+    const filteredMixtapes = useMemo(() => {
+        return mixtapes.filter((mixtape) => {
+            // Filter by genre
+            if (selectedGenre !== 'all') {
+                const genres = mixtape.attributes.genres || []
+                if (!genres.includes(selectedGenre)) {
+                    return false
+                }
+            }
+
+            // Filter by creator
+            if (selectedCreator !== 'all') {
+                const creatorId = mixtape.attributes.creator?.data[0]?.id
+                if (String(creatorId) !== selectedCreator) {
+                    return false
+                }
+            }
+
+            return true
+        })
+    }, [mixtapes, selectedGenre, selectedCreator])
 
     return (
         <div data-scheme="secondary" className="p-4 flex flex-col bg-primary h-full">
@@ -65,7 +100,21 @@ export default function Mixtapes(): JSX.Element {
                 </div>
             ) : (
                 <>
-                    <div className="mb-4 flex justify-end">
+                    <div className="mb-4 flex justify-end gap-2">
+                        <OSSelect
+                            label="Filter by creator"
+                            options={creatorOptions}
+                            value={selectedCreator}
+                            onChange={setSelectedCreator}
+                            placeholder="Select a creator..."
+                            direction="row"
+                            size="sm"
+                            width="auto"
+                            showLabel={false}
+                            searchable={true}
+                            searchPlaceholder="Search creators..."
+                            className="!w-[170px]"
+                        />
                         <OSSelect
                             label="Filter by genre"
                             options={genreOptions}
@@ -83,7 +132,7 @@ export default function Mixtapes(): JSX.Element {
                     </div>
                     {filteredMixtapes.length === 0 ? (
                         <div className="flex items-center justify-center w-full flex-grow text-center">
-                            <p className="text-secondary">No mixtapes found for this genre.</p>
+                            <p className="text-secondary">No mixtapes found matching the selected filters.</p>
                         </div>
                     ) : (
                         <div className="grid grid-cols-2 gap-4 w-full overflow-auto">
