@@ -59,7 +59,7 @@ We track all PostHog for YC applications in [this Zapier table](https://tables.z
    If they meet the basic criteria, we automatically apply the correct amount of Stripe credit.
 
 3. **Confirmation**  
-   They receive an automated email from [Scott](community/profiles/32112) via Zapier confirming their acceptance.
+   They receive an automated email from <TeamMember name="Joe Martin" photo /> via Zapier confirming their acceptance.
 
 4. **Merch**  
    A separate email (also from Zapier) sends unique codes to claim founder kits from [the merch store](/merch).  
@@ -69,7 +69,7 @@ We track all PostHog for YC applications in [this Zapier table](https://tables.z
    ~12 hours later, a third email (via [Customer.io](https://fly.customer.io/workspaces/127208/journeys/composer/actions/2185)) is sent by [Joe](community/profiles/29070) welcoming them and explaining perks.
 
 6. **Milestones**  
-   When teams reach 50%, 75%, or 100% of their credit usage — or when credits expire — they receive milestone emails. These come from Customer.io and are managed by [Joe](community/profiles/29070).
+   When teams reach 50%, 75%, or 100% of their credit usage — or when credits expire — they receive milestone emails. These come from Customer.io and are managed by <TeamMember name="Joe Martin" photo />.
 
 7. **Post-credit**  
    Once credit is fully used or expired, teams are moved to a standard paid plan automatically.
