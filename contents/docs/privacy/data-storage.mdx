@@ -96,9 +96,11 @@ You can remove unwanted data from PostHog by deleting groups and persons.
 
 ### Right to be forgotten
 
-<CalloutBox icon="IconWarning" title="Note" type="caution">
+<CalloutBox icon="IconWarning" title="Reusing a deleted distinct_id" type="caution">
 
-You can reuse `distinct_id` values after deletion using the **Reset deleted person** tool, available from the dropdown at the top-right of the [**persons page**](https://app.posthog.com/persons). This tool allows you to reset a deleted `distinct_id` so that future events associated with it will create a new person profile.  
+User deletion requests are not immediate. Instead, they are processed asynchronously. We recommend that you _avoid_ reusing a deleted `distinct_id` value for a new user, as it may lead to unexpected results while the deletion is being processed. Once the deletion process is fully processed, PostHog does not retain any data associated with the deleted `distinct_id`. 
+
+If you must reuse the `distinct_id`, you can do so using the **Reset deleted person** tool, available from the dropdown at the top-right of the [**persons page**](https://app.posthog.com/persons). This tool allows you to reset a deleted `distinct_id` so that future events associated with it will create a new person profile.  
 
 If you instead want to split a person with multiple IDs (e.g. to isolate bad data tied to a specific `distinct_id`), use the **Split IDs** button on their person profile.
 
