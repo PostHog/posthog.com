@@ -58,7 +58,6 @@ export interface Track {
 
 export interface MixtapeFormValues {
     title: string
-    notes: string
     genres: string[]
     labelBackground: CassetteLabelBackground
     cassetteColor: string

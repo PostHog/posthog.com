@@ -2,7 +2,7 @@ import React from 'react'
 import { useFormik } from 'formik'
 import { MixtapeFormValues } from './types'
 import { Fieldset } from 'components/OSFieldset'
-import { OSInput, OSTextarea } from 'components/OSForm'
+import { OSInput } from 'components/OSForm'
 import CassetteTape from './CassetteTape'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconArrowUpRight, IconSpinner, IconTrash } from '@posthog/icons'
@@ -118,7 +118,6 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
     const formik = useFormik<MixtapeFormValues>({
         initialValues: {
             title: '',
-            notes: '',
             genres: [],
             tracks: [],
             labelBackground: cassetteLabelBackgrounds[0],
@@ -143,7 +142,6 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                         data: {
                             ...(!isEditMode ? { creator: { connect: [user?.profile?.id] } } : {}),
                             title: values.title,
-                            notes: values.notes,
                             genres: values.genres,
                             tracks: values.tracks.map((track) => ({
                                 artist: track.artist,
@@ -261,7 +259,6 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                 // Populate form with existing data
                 formik.setValues({
                     title: attributes.title || '',
-                    notes: attributes.notes || '',
                     genres: attributes.genres || [],
                     tracks: attributes.tracks.map(
                         (track: { artist: string; title: string; youtubeUrl: string }, index: number) => ({
@@ -487,19 +484,6 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                             onChange={(genres) => formik.setFieldValue('genres', genres)}
                             hideLabel={true}
                             required={false}
-                        />
-                    </Fieldset>
-
-                    <Fieldset legend="Notes" className="mb-0">
-                        <OSTextarea
-                            direction="column"
-                            showLabel={false}
-                            label="Notes"
-                            placeholder="Add notes..."
-                            name="notes"
-                            value={formik.values.notes}
-                            onChange={formik.handleChange}
-                            className="!bg-accent"
                         />
                     </Fieldset>
 
