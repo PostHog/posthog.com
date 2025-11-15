@@ -30,7 +30,7 @@ export default function TapeButton({
                             ? 'translate-y- border-primary'
                             : isPressed
                             ? 'translate-y-0 rounded-none bg-accent/70 border-primary'
-                            : '-translate-y-1 active:translate-y-0 active:rounded-none rounded bg-primary active:bg-accent/70 border-primary/80 active:border-primary'
+                            : '-translate-y-1 hover:-translate-y-1.5 active:translate-y-0 active:rounded-none rounded bg-primary active:bg-accent/70 border-primary/80 active:border-primary'
                     }`}
                 >
                     <div className="text-xl font-bold text-secondary opacity-80 leading-none">{icon}</div>
