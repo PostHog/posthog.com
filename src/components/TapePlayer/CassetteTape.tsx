@@ -9,9 +9,10 @@ interface CassetteLabelBackground {
 
 interface ReelProps {
     rotation: number
+    teeth?: boolean
 }
 
-function Reel({ rotation }: ReelProps): JSX.Element {
+function Reel({ rotation, teeth = true }: ReelProps): JSX.Element {
     return (
         <div className="relative w-1/4 aspect-square">
             <div className="absolute inset-0 border-2 border-primary rounded-full bg-accent shadow-inner" />
@@ -20,13 +21,15 @@ function Reel({ rotation }: ReelProps): JSX.Element {
                 style={{ transform: `rotate(${rotation}deg)` }}
             >
                 {/* Spindle with 4 teeth */}
-                <div className="relative w-2/3 aspect-square">
-                    <div className="absolute inset-0 border-2 border-primary rounded-full bg-accent" />
-                    <div className="absolute -top-0 left-1/2 -translate-x-1/2 w-1/4 h-1/4 bg-primary border-2 border-primary border-t-0 rounded-[2px]" />
-                    <div className="absolute -bottom-0 left-1/2 -translate-x-1/2 w-1/4 h-1/4 bg-primary border-2 border-primary border-b-0 rounded-[2px]" />
-                    <div className="absolute -left-0 top-1/2 -translate-y-1/2 w-1/4 h-1/4 bg-primary border-2 border-primary border-l-0 rounded-[2px]" />
-                    <div className="absolute -right-0 top-1/2 -translate-y-1/2 w-1/4 h-1/4 bg-primary border-2 border-primary border-r-0 rounded-[2px]" />
-                </div>
+                {teeth && (
+                    <div className="relative w-2/3 aspect-square">
+                        <div className="absolute inset-0 border-2 border-primary rounded-full bg-accent" />
+                        <div className="absolute -top-0 left-1/2 -translate-x-1/2 w-1/4 h-1/4 bg-primary border-2 border-primary border-t-0 rounded-[2px]" />
+                        <div className="absolute -bottom-0 left-1/2 -translate-x-1/2 w-1/4 h-1/4 bg-primary border-2 border-primary border-b-0 rounded-[2px]" />
+                        <div className="absolute -left-0 top-1/2 -translate-y-1/2 w-1/4 h-1/4 bg-primary border-2 border-primary border-l-0 rounded-[2px]" />
+                        <div className="absolute -right-0 top-1/2 -translate-y-1/2 w-1/4 h-1/4 bg-primary border-2 border-primary border-r-0 rounded-[2px]" />
+                    </div>
+                )}
             </div>
         </div>
     )
@@ -39,6 +42,7 @@ interface CassetteTapeProps {
     labelBackground?: CassetteLabelBackground
     cassetteColor?: string
     labelColor?: string
+    teeth?: boolean
 }
 
 export default function CassetteTape({
@@ -48,6 +52,7 @@ export default function CassetteTape({
     labelBackground,
     cassetteColor,
     labelColor,
+    teeth = true,
 }: CassetteTapeProps): JSX.Element {
     const labelBackgroundStyle = labelBackground?.url
         ? {
@@ -82,8 +87,8 @@ export default function CassetteTape({
 
                 {/* Tape reels */}
                 <div className="flex items-center justify-around gap-4 my-auto">
-                    <Reel rotation={rotation} />
-                    <Reel rotation={-rotation} />
+                    <Reel rotation={rotation} teeth={teeth} />
+                    <Reel rotation={-rotation} teeth={teeth} />
                 </div>
             </div>
         </div>

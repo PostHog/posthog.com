@@ -5,13 +5,14 @@ import TapeButton from './TapeButton'
 import CassetteTape from './CassetteTape'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
-import { IconPencil } from '@posthog/icons'
+import { IconPencil, IconPlus } from '@posthog/icons'
 import { CassetteLabelBackground } from '../../data/cassetteBackgrounds'
 import MixtapeEditor from './MixtapeEditor'
 import { useApp } from '../../context/App'
 import Mixtapes from './Mixtapes'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useMixtapes } from '../../hooks/useMixtapes'
+import { navigate } from 'gatsby'
 
 interface TapePlayerProps {
     id?: string
@@ -20,7 +21,6 @@ interface TapePlayerProps {
 export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
     const { getJwt, user } = useUser()
     const { addWindow } = useApp()
-    const { mixtapes, isLoading, refresh } = useMixtapes()
     const [isPoweredOn, setIsPoweredOn] = useState(true)
     const [isPlaying, setIsPlaying] = useState(false)
     const [danceMode, setDanceMode] = useState(false)
@@ -283,6 +283,14 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
         }
     }
 
+    const handleMixtapeLibraryClick = () => {
+        addWindow(<Mixtapes key={`fm/mixtapes`} location={{ pathname: `fm/mixtapes` }} newWindow />)
+    }
+
+    const handleNewMixtapeClick = () => {
+        navigate(`/fm/mixtapes/new`, { state: { newWindow: true } })
+    }
+
     const currentSong = mixtapeSongs[currentSongIndex]
 
     return (
@@ -290,7 +298,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
             <div data-scheme="secondary" className="w-full bg-primary">
                 <SEO title="♫ PostHog.fm" />
                 <div className="flex items-start">
-                    <div className="p-4 w-[700px] sticky top-0 border-r border-primary">
+                    <div className="p-4 w-[700px] sticky top-0">
                         {/* Hidden YouTube player */}
                         <div id="youtube-player" className="hidden" />
 
@@ -384,7 +392,26 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                             <TapeButton label="Share" icon="↗" onClick={handleShare} disabled={!isPoweredOn} />
                         </div>
                     </div>
-                    <Mixtapes mixtapes={mixtapes} isLoading={isLoading} />
+                </div>
+                <div className="p-3 mt-4 border-t border-primary flex items-center space-x-3">
+                    <div className="w-[90px] h-[80px]">
+                        <TapeButton
+                            icon={
+                                <div className="w-[70px]">
+                                    <CassetteTape teeth={false} />
+                                </div>
+                            }
+                            label="Mixtape library"
+                            onClick={handleMixtapeLibraryClick}
+                        />
+                    </div>
+                    <div className="w-[90px] h-[80px]">
+                        <TapeButton
+                            icon={<IconPlus className="size-5" />}
+                            label="Create mixtape"
+                            onClick={handleNewMixtapeClick}
+                        />
+                    </div>
                 </div>
             </div>
         </ScrollArea>

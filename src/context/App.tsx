@@ -961,28 +961,27 @@ const appSettings: AppSettings = {
     '/fm': {
         size: {
             min: {
-                width: 1300,
-                height: 588,
+                width: 720,
+                height: 709,
             },
             max: {
-                width: 1200,
-                height: 588,
+                width: 720,
+                height: 709,
             },
             fixed: true,
         },
     },
-    '/fm/mixtapes': {
+    'fm/mixtapes': {
         size: {
             min: {
                 width: 450,
-                height: 1200,
+                height: 709,
             },
             max: {
                 width: 450,
-                height: 1200,
+                height: 709,
             },
             fixed: true,
-            autoHeight: true,
         },
     },
     '/fm/mixtapes/new': {

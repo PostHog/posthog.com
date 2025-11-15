@@ -1,20 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CassetteTape from './CassetteTape'
-import { Mixtape } from '../../hooks/useMixtapes'
+import { useMixtapes } from '../../hooks/useMixtapes'
 import { navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import Link from 'components/Link'
+import { useApp } from '../../context/App'
+import { useWindow } from '../../context/Window'
 
-interface MixtapesProps {
-    mixtapes: Mixtape[]
-    isLoading: boolean
-}
-
-export default function Mixtapes({ mixtapes, isLoading }: MixtapesProps): JSX.Element {
+export default function Mixtapes(): JSX.Element {
+    const { appWindow } = useWindow()
+    const { setWindowTitle } = useApp()
     const { user } = useUser()
+    const { mixtapes, isLoading } = useMixtapes()
+
+    useEffect(() => {
+        if (appWindow) {
+            setWindowTitle(appWindow, 'Mixtapes')
+        }
+    }, [])
 
     return (
-        <div className="flex-grow p-4 flex items-start">
+        <div data-scheme="secondary" className="p-4 flex items-start bg-primary h-full">
             {isLoading ? (
                 <div className="grid grid-cols-2 gap-4 w-full">
                     <div className="animate-pulse bg-accent border-2 border-primary rounded aspect-[100/63]" />
@@ -67,8 +73,8 @@ export default function Mixtapes({ mixtapes, isLoading }: MixtapesProps): JSX.El
                                     </div>
                                 </div>
                                 <div className="flex items-center justify-between gap-2 mt-2">
-                                    <div>
-                                        <h3 className="text-sm font-semibold flex-grow truncate">
+                                    <div className="line-clamp-1">
+                                        <h3 className="text-sm font-semibold flex-grow truncate line-clamp-1">
                                             {mixtape.attributes.title || 'Untitled Mixtape'}
                                         </h3>
                                         <p className="m-0 text-xs m-0">
@@ -87,12 +93,16 @@ export default function Mixtapes({ mixtapes, isLoading }: MixtapesProps): JSX.El
                                             </Link>
                                         </p>
                                     </div>
-                                    <button
-                                        onClick={() => navigate(`/fm?mixtapeId=${mixtape.id}`)}
-                                        className="px-2 py-0.5 text-xs font-bold bg-accent border-2 border-primary rounded hover:bg-primary transition-colors"
-                                    >
-                                        PLAY
-                                    </button>
+                                    <div className="flex-shrink-0">
+                                        <button
+                                            onClick={() =>
+                                                navigate(`/fm?mixtapeId=${mixtape.id}`, { state: { newWindow: true } })
+                                            }
+                                            className="px-2 py-0.5 text-xs font-bold bg-accent border-2 border-primary rounded hover:bg-primary transition-colors"
+                                        >
+                                            PLAY
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         )
