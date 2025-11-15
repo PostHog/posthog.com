@@ -370,10 +370,10 @@ function Events() {
                 })
             }
 
-            // Attach zoom handlers
-            ;(chart.events as any).on('wheelended', updateBordersAndStates)
-            ;(chart.events as any).on('panended', updateBordersAndStates)
-            ;(chart.events as any).on('zoomended', updateBordersAndStates)
+                // Attach zoom handlers
+                ; (chart.events as any).on('wheelended', updateBordersAndStates)
+                ; (chart.events as any).on('panended', updateBordersAndStates)
+                ; (chart.events as any).on('zoomended', updateBordersAndStates)
 
             // Run once to set initial state
             updateBordersAndStates()
@@ -402,8 +402,8 @@ function Events() {
                     fill: isSelected
                         ? am5.color(0x2f80fa) // Blue when selected (active)
                         : isHovered
-                        ? am5.color(0xef4444) // Red when hovered
-                        : am5.color(0xff9500), // Orange by default
+                            ? am5.color(0xef4444) // Red when hovered
+                            : am5.color(0xff9500), // Orange by default
                     stroke: am5.color(0xffffff), // Always white border
                     strokeWidth: isSelected ? 3 : 2,
                     tooltipText: '{name}\n{location}\n{date}',
@@ -427,12 +427,12 @@ function Events() {
                 }
             })
 
-            // Adjust marker size to remain constant at different zoom levels
-            ;(chart.events as any).on('wheelended', () => {
-                const zoomLevel = chart.get('zoomLevel', 1)
-                const baseScale = 1 / Math.sqrt(zoomLevel)
-                circle.set('scale', Math.max(baseScale, 0.6))
-            })
+                // Adjust marker size to remain constant at different zoom levels
+                ; (chart.events as any).on('wheelended', () => {
+                    const zoomLevel = chart.get('zoomLevel', 1)
+                    const baseScale = 1 / Math.sqrt(zoomLevel)
+                    circle.set('scale', Math.max(baseScale, 0.6))
+                })
 
             return am5.Bullet.new(root, {
                 sprite: container,
@@ -538,13 +538,13 @@ function Events() {
 
         pointSeries.set('tooltip', tooltip)
 
-        // Hide tooltip when zoom/pan starts
-        ;(chart.events as any).on('wheelstarted', () => {
-            pointSeries.hideTooltip()
-        })
-        ;(chart.events as any).on('panstarted', () => {
-            pointSeries.hideTooltip()
-        })
+            // Hide tooltip when zoom/pan starts
+            ; (chart.events as any).on('wheelstarted', () => {
+                pointSeries.hideTooltip()
+            })
+            ; (chart.events as any).on('panstarted', () => {
+                pointSeries.hideTooltip()
+            })
 
         // Function to update cluster colors based on hover state
         const updateClusterColors = () => {
@@ -622,8 +622,8 @@ function Events() {
 
         // Store reference for use in effects
         chartInstanceRef.current = chart
-        ;(chartInstanceRef.current as any).updateClusterColors = updateClusterColors
-        ;(chartInstanceRef.current as any).clusterBullets = clusterBullets
+            ; (chartInstanceRef.current as any).updateClusterColors = updateClusterColors
+            ; (chartInstanceRef.current as any).clusterBullets = clusterBullets
 
         // Handle window/container resize
         let lastWidth = 0
@@ -779,7 +779,7 @@ function Events() {
                     const clusterBullets = (chartInstanceRef.current as any).clusterBullets
                     console.log('🔵 Total cluster bullets:', clusterBullets?.size || 0)
                 }
-                ;(chartInstanceRef.current as any).updateClusterColors()
+                (chartInstanceRef.current as any).updateClusterColors()
             }, 50)
         }
     }, [displayEvents, selectedEvent, hoveredEvent])
@@ -933,11 +933,10 @@ function Events() {
                                             zoomHover="md"
                                             className={`bg-primary border border-primary active:bg-primary
                       
-                      ${
-                          selectedEvent && getEventKey(selectedEvent) === getEventKey(event)
-                              ? 'border-primary outline outline-orange outline-2 outline-offset-1'
-                              : 'border-primary'
-                      }
+                      ${selectedEvent && getEventKey(selectedEvent) === getEventKey(event)
+                                                    ? 'border-primary outline outline-orange outline-2 outline-offset-1'
+                                                    : 'border-primary'
+                                                }
                     `}
                                         >
                                             <div className="w-full">
@@ -1187,7 +1186,7 @@ function Events() {
                                                             to={selectedEvent.link}
                                                             variant={
                                                                 new Date(selectedEvent.date) >=
-                                                                new Date(new Date().toISOString().split('T')[0])
+                                                                    new Date(new Date().toISOString().split('T')[0])
                                                                     ? 'primary'
                                                                     : 'secondary'
                                                             }

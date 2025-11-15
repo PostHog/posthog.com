@@ -11,12 +11,16 @@ import Modal from 'components/Modal'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { useApp } from '../../context/App'
 import { useUser } from 'hooks/useUser'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useWindow } from '../../context/Window'
 import { useToast } from '../../context/Toast'
 import Loading from 'components/Loading'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { OSInput } from 'components/OSForm'
+import { Select } from 'components/RadixUI/Select'
+import ProgressBar from 'components/ProgressBar'
+import OSButton from 'components/OSButton'
 
 // File System Access API types
 declare global {
@@ -29,9 +33,22 @@ declare global {
     }
 }
 
-const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type }, ext, width, height }: any) => {
+const Image = ({
+    name,
+    previewUrl,
+    provider_metadata: { public_id, resource_type },
+    ext,
+    width,
+    height,
+    tags: initialTags = [],
+    library: initialLibrary = 'Uncategorized',
+}: any) => {
     const { addToast } = useToast()
+    const { getJwt } = useUser()
     const [loadingSize, setLoadingSize] = useState<string | number | null>(null)
+    const [library, setLibrary] = useState<string>(initialLibrary)
+    const [tags, setTags] = useState<string>(Array.isArray(initialTags) ? initialTags.join(', ') : '')
+    const [savingMetadata, setSavingMetadata] = useState(false)
 
     const cloudinaryBase = `https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}`
 
@@ -42,6 +59,48 @@ const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type
     const maxDimension = Math.max(width || 0, height || 0)
 
     const availableSizes = isImage ? resizeSizes.filter((size) => size < maxDimension) : []
+
+    const libraryOptions = ['Uncategorized', 'Creative library', 'Docs/handbook screenshots', 'Post images']
+
+    const handleSaveMetadata = async () => {
+        setSavingMetadata(true)
+        try {
+            const jwt = await getJwt()
+            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/cloudinary-metadata/update`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${jwt}`,
+                },
+                body: JSON.stringify({
+                    publicId: public_id,
+                    library,
+                    tags: tags
+                        .split(',')
+                        .map((t) => t.trim())
+                        .filter(Boolean),
+                }),
+            })
+
+            if (response.ok) {
+                addToast({
+                    description: 'Metadata saved successfully',
+                    duration: 3000,
+                })
+            } else {
+                throw new Error('Failed to save metadata')
+            }
+        } catch (err) {
+            console.error('Failed to save metadata:', err)
+            addToast({
+                description: 'Failed to save metadata',
+                error: true,
+                duration: 3000,
+            })
+        } finally {
+            setSavingMetadata(false)
+        }
+    }
 
     const generateCloudinaryUrl = (size: string | number) => {
         if (size === 'orig') {
@@ -82,7 +141,10 @@ const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type
     return (
         <li className="flex space-x-2 items-start">
             <div className="overflow-hidden size-16 flex flex-shrink-0 justify-center items-center bg-accent rounded-sm border border-input">
-                <img src={resource_type === 'video' ? previewUrl : generateCloudinaryUrl('orig-optimized')} loading="lazy" />
+                <img
+                    src={resource_type === 'video' ? previewUrl : generateCloudinaryUrl('orig-optimized')}
+                    loading="lazy"
+                />
             </div>
             <div className="flex-grow">
                 <p className="m-0 font-bold line-clamp-1 text-ellipsis max-w-xl">
@@ -137,6 +199,49 @@ const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type
                         </button>
                     </div>
                 )}
+
+                {/* Metadata fields */}
+                <div className="mt-3 space-y-2 pt-2 border-t border-input">
+                    <div className="flex gap-2 items-end">
+                        <div className="flex-grow">
+                            <label className="text-xs text-secondary mb-1 block">Library</label>
+                            <Select
+                                value={library}
+                                onValueChange={setLibrary}
+                                groups={[
+                                    {
+                                        label: 'Library',
+                                        items: libraryOptions.map((option) => ({
+                                            value: option,
+                                            label: option,
+                                        })),
+                                    },
+                                ]}
+                                className="text-xs w-full"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <OSInput
+                            type="text"
+                            label="Tags (comma-separated)"
+                            showLabel
+                            placeholder="tag1, tag2, tag3"
+                            value={tags}
+                            onChange={(e) => setTags(e.target.value)}
+                        />
+                    </div>
+                    <OSButton onClick={handleSaveMetadata} disabled={savingMetadata} size="sm">
+                        {savingMetadata ? (
+                            <>
+                                <Loading className="size-3" />
+                                Saving...
+                            </>
+                        ) : (
+                            'Save metadata'
+                        )}
+                    </OSButton>
+                </div>
             </div>
         </li>
     )
@@ -302,8 +407,9 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
         return (
             <div key={node.name} style={{ paddingLeft: `${level * 16}px` }}>
                 <div
-                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${node.type === 'file' ? 'draggable' : ''
-                        }`}
+                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${
+                        node.type === 'file' ? 'draggable' : ''
+                    }`}
                     onClick={() => (node.type === 'directory' ? toggleDirectory(node) : handleFileClick(node))}
                     draggable={node.type === 'file'}
                     onDragStart={(e) => handleFileDrag(e, node)}
@@ -371,11 +477,23 @@ export default function MediaUploadModal() {
     const { setWindowTitle } = useApp()
     const { getJwt, user } = useUser()
     const [loading, setLoading] = useState(0)
-    const [images, setImages] = useState<any[]>([])
+    const [loadingData, setLoadingData] = useState(true)
+    const [loadingMore, setLoadingMore] = useState(false)
+    const [loadingError, setLoadingError] = useState<string | null>(null)
+    const [userImages, setUserImages] = useState<any[]>([])
+    const [allImages, setAllImages] = useState<any[]>([])
     const [searchQuery, setSearchQuery] = useState('')
     const [isPasting, setIsPasting] = useState(false)
+    const [showAllUploads, setShowAllUploads] = useState(false)
+    const [mediaAuthor, setMediaAuthor] = useState<string>('user')
+    const [selectedTag, setSelectedTag] = useState<string>('all')
+    const [availableTags, setAvailableTags] = useState<string[]>([])
+    const [page, setPage] = useState(1)
+    const [hasMore, setHasMore] = useState(true)
     const { addToast } = useToast()
     const isModerator = user?.role?.type === 'moderator'
+
+    const ITEMS_PER_PAGE = 20
 
     const onDrop = async (acceptedFiles: File[]) => {
         const profileID = user?.profile?.id
@@ -390,7 +508,8 @@ export default function MediaUploadModal() {
                         type: 'api::profile.profile',
                     })
                     setLoading((loadingNumber) => loadingNumber - 1)
-                    setImages((images) => [...images, uploadedImage])
+                    // Add new images to the beginning of the list
+                    setUserImages((userImages) => [uploadedImage, ...userImages])
                 })
             ).catch((err) => console.error(err))
         }
@@ -402,14 +521,112 @@ export default function MediaUploadModal() {
         }
     }, [])
 
+    // Fetch all images when mediaAuthor is set to 'all'
+    useEffect(() => {
+        const fetchAllImages = async () => {
+            if (mediaAuthor !== 'all') {
+                setAllImages([])
+                return
+            }
+
+            setLoadingData(true)
+            setLoadingError(null)
+            setPage(1)
+            setHasMore(true)
+
+            try {
+                const jwt = await getJwt()
+                const params = new URLSearchParams({
+                    page: '1',
+                    limit: ITEMS_PER_PAGE.toString(),
+                })
+                const response = await fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/cloudinary-metadata/images?${params}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${jwt}`,
+                        },
+                    }
+                )
+
+                if (!response.ok) {
+                    const errorMsg =
+                        response.status === 400 || response.status === 429
+                            ? 'Unable to load all media. Rate limit exceeded. Please try again later.'
+                            : `Failed to load all media (${response.status})`
+
+                    setLoadingError(errorMsg)
+                    addToast({
+                        description: errorMsg,
+                        error: true,
+                        duration: 3000,
+                    })
+                    return
+                }
+
+                const data = await response.json()
+                const images = Array.isArray(data) ? data : data.images || []
+                const hasMoreData = Array.isArray(data) ? false : data.hasMore || false
+
+                setAllImages(images)
+                setHasMore(hasMoreData)
+            } catch (err) {
+                console.error('Failed to fetch all images:', err)
+                const errorMsg = 'Failed to load all uploads'
+                setLoadingError(errorMsg)
+                addToast({
+                    description: errorMsg,
+                    error: true,
+                    duration: 3000,
+                })
+            } finally {
+                setLoadingData(false)
+            }
+        }
+
+        fetchAllImages()
+    }, [mediaAuthor])
+
+    // Fetch available tags
+    useEffect(() => {
+        const fetchTags = async () => {
+            try {
+                const jwt = await getJwt()
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/cloudinary-metadata/tags`, {
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                })
+
+                if (!response.ok) {
+                    console.warn('Failed to fetch tags:', response.status)
+                    // Tags are optional, so we just log and continue
+                    return
+                }
+
+                const data = await response.json()
+                setAvailableTags(data.tags || [])
+            } catch (err) {
+                console.error('Failed to fetch tags:', err)
+                // Tags are optional, so we continue without them
+            }
+        }
+
+        fetchTags()
+    }, [])
+
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-    // Filter images based on search query
-    const allImages = [...images, ...((user?.profile as any)?.images || [])]
+    // Filter images based on search query and tag
+    const displayImages = mediaAuthor === 'all' ? allImages : userImages
 
-    const filteredImages = searchQuery
-        ? allImages.filter((image) => image.name.toLowerCase().includes(searchQuery.toLowerCase()))
-        : allImages
+    const filteredImages = useMemo(() => {
+        return displayImages.filter(
+            (image) =>
+                (!searchQuery || image.name.toLowerCase().includes(searchQuery.toLowerCase())) &&
+                (selectedTag === 'all' || image.tags?.includes(selectedTag))
+        )
+    }, [displayImages, searchQuery, selectedTag])
 
     // Handle ESC key to clear search and paste events
     useEffect(() => {
@@ -449,8 +666,9 @@ export default function MediaUploadModal() {
                 if (validFiles.length > 0) {
                     await onDrop(validFiles)
                     addToast({
-                        description: `Pasted ${validFiles.length} image${validFiles.length > 1 ? 's' : ''
-                            } from clipboard`,
+                        description: `Pasted ${validFiles.length} image${
+                            validFiles.length > 1 ? 's' : ''
+                        } from clipboard`,
                         duration: 3000,
                     })
                 }
@@ -474,6 +692,186 @@ export default function MediaUploadModal() {
         }
     }, [onDrop, addToast])
 
+    const fetchUserImages = async (pageNum = 1, append = false) => {
+        if (!append) {
+            setLoadingData(true)
+            setLoadingError(null)
+        } else {
+            setLoadingMore(true)
+        }
+
+        try {
+            const jwt = await getJwt()
+
+            // Add pagination parameters
+            const params = new URLSearchParams({
+                page: pageNum.toString(),
+                limit: ITEMS_PER_PAGE.toString(),
+            })
+            const url = `${process.env.GATSBY_SQUEAK_API_HOST}/api/cloudinary-metadata/user-images?${params}`
+
+            console.log('Fetching from URL:', url)
+
+            const response = await fetch(url, {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
+
+            console.log('Response status:', response.status, 'OK:', response.ok)
+
+            if (!response.ok) {
+                const errorMsg =
+                    response.status === 400 || response.status === 429
+                        ? 'Unable to load media. Rate limit exceeded. Please try again later.'
+                        : `Failed to load media (${response.status})`
+
+                console.error('API error:', errorMsg)
+
+                // Set error state immediately
+                if (!append) {
+                    setLoadingError(errorMsg)
+                    setLoadingData(false)
+                }
+
+                addToast({
+                    description: errorMsg,
+                    error: true,
+                    duration: 3000,
+                })
+
+                return // Exit early
+            }
+
+            const data = await response.json()
+            console.log('Received data:', data)
+
+            // Handle both old format (array) and new format (object with images and hasMore)
+            const images = Array.isArray(data) ? data : data.images || []
+            const hasMoreData = Array.isArray(data) ? false : data.hasMore || false
+
+            console.log('Processed images:', images.length, 'hasMore:', hasMoreData)
+
+            if (append) {
+                setUserImages((prev) => [...prev, ...images])
+            } else {
+                setUserImages(images)
+            }
+
+            setHasMore(hasMoreData)
+            setLoadingData(false)
+            setLoadingMore(false)
+        } catch (err) {
+            console.error('Failed to fetch user images:', err)
+            const errorMessage = err instanceof Error ? err.message : 'Failed to load images'
+
+            if (!append) {
+                setLoadingError(errorMessage)
+            }
+
+            addToast({
+                description: errorMessage,
+                error: true,
+                duration: 3000,
+            })
+
+            setLoadingData(false)
+            setLoadingMore(false)
+        }
+    }
+
+    const fetchAllImagesPage = async (pageNum = 1, append = false) => {
+        if (!append) {
+            setLoadingData(true)
+            setLoadingError(null)
+        } else {
+            setLoadingMore(true)
+        }
+
+        try {
+            const jwt = await getJwt()
+            const params = new URLSearchParams({
+                page: pageNum.toString(),
+                limit: ITEMS_PER_PAGE.toString(),
+            })
+
+            const response = await fetch(
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/cloudinary-metadata/images?${params}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                }
+            )
+
+            if (!response.ok) {
+                const errorMsg =
+                    response.status === 400 || response.status === 429
+                        ? 'Unable to load all media. Rate limit exceeded. Please try again later.'
+                        : `Failed to load all media (${response.status})`
+
+                if (!append) {
+                    setLoadingError(errorMsg)
+                    setLoadingData(false)
+                }
+
+                addToast({
+                    description: errorMsg,
+                    error: true,
+                    duration: 3000,
+                })
+                return
+            }
+
+            const data = await response.json()
+            const images = Array.isArray(data) ? data : data.images || []
+            const hasMoreData = Array.isArray(data) ? false : data.hasMore || false
+
+            if (append) {
+                setAllImages((prev) => [...prev, ...images])
+            } else {
+                setAllImages(images)
+            }
+
+            setHasMore(hasMoreData)
+            setLoadingData(false)
+            setLoadingMore(false)
+        } catch (err) {
+            console.error('Failed to fetch all images:', err)
+            const errorMessage = 'Failed to load all uploads'
+
+            if (!append) {
+                setLoadingError(errorMessage)
+            }
+
+            addToast({
+                description: errorMessage,
+                error: true,
+                duration: 3000,
+            })
+
+            setLoadingData(false)
+            setLoadingMore(false)
+        }
+    }
+
+    useEffect(() => {
+        setPage(1)
+        setHasMore(true)
+        fetchUserImages(1, false)
+    }, [])
+
+    const handleLoadMore = () => {
+        const nextPage = page + 1
+        setPage(nextPage)
+
+        if (mediaAuthor === 'all') {
+            fetchAllImagesPage(nextPage, true)
+        } else {
+            fetchUserImages(nextPage, true)
+        }
+    }
+
     return isModerator ? (
         <ScrollArea className="w-full">
             <div data-scheme="primary" className="bg-primary text-primary size-full">
@@ -491,16 +889,18 @@ export default function MediaUploadModal() {
                             <div
                                 {...getRootProps()}
                                 data-scheme="secondary"
-                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${isDragActive
+                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${
+                                    isDragActive
                                         ? 'bg-input border-primary'
                                         : isPasting
-                                            ? 'bg-input border-primary animate-pulse'
-                                            : ''
-                                    }`}
+                                        ? 'bg-input border-primary animate-pulse'
+                                        : ''
+                                }`}
                             >
                                 <div
-                                    className={`flex flex-col justify-center items-center h-full p-8 ${isDragActive || isPasting ? '' : 'opacity-50'
-                                        }`}
+                                    className={`flex flex-col justify-center items-center h-full p-8 ${
+                                        isDragActive || isPasting ? '' : 'opacity-50'
+                                    }`}
                                 >
                                     {isPasting ? (
                                         <Loading className="size-12 mb-4" />
@@ -511,8 +911,8 @@ export default function MediaUploadModal() {
                                         {isPasting
                                             ? 'Pasting image...'
                                             : isDragActive
-                                                ? 'Drop files here'
-                                                : 'Drop files or paste to upload'}
+                                            ? 'Drop files here'
+                                            : 'Drop files or paste to upload'}
                                     </p>
                                     <p className="text-sm text-secondary text-center mt-2 m-0">
                                         {isPasting
@@ -529,46 +929,158 @@ export default function MediaUploadModal() {
                     </div>
 
                     <div className="flex flex-col">
-                        <h3 className="m-0">Your uploads</h3>
-                        <p className="text-sm text-secondary mt-1 mb-4">Recent uploads to Cloudinary</p>
-
-                        <div className="relative mb-4">
-                            <input
-                                type="text"
-                                className="w-full pr-8 rounded"
-                                placeholder="Search filenames..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                            />
-                            {searchQuery && (
+                        {/* <div className="flex items-center justify-between mb-2">
+                            <div>
+                                <h3 className="m-0">{showAllUploads ? 'All uploads' : 'Your uploads'}</h3>
+                                <p className="text-sm text-secondary mt-1">Recent uploads to Cloudinary</p>
+                            </div>
+                            <div className="flex gap-2">
                                 <button
-                                    onClick={() => setSearchQuery('')}
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 text-secondary hover:text-primary transition-colors"
-                                    aria-label="Clear search"
+                                    onClick={() => setShowAllUploads(false)}
+                                    className={`text-sm px-3 py-1.5 rounded transition-colors ${
+                                        !showAllUploads ? 'bg-orange text-white' : 'bg-accent hover:bg-opacity-70'
+                                    }`}
                                 >
-                                    <IconX className="size-4" />
+                                    My uploads
                                 </button>
-                            )}
+                                <button
+                                    onClick={() => setShowAllUploads(true)}
+                                    className={`text-sm px-3 py-1.5 rounded transition-colors ${
+                                        showAllUploads ? 'bg-orange text-white' : 'bg-accent hover:bg-opacity-70'
+                                    }`}
+                                >
+                                    All uploads
+                                </button>
+                            </div>
+                        </div> */}
+
+                        <div className="flex gap-2 mb-4">
+                            <div className="relative">
+                                <Select
+                                    value={mediaAuthor}
+                                    onValueChange={(value) => {
+                                        setMediaAuthor(value)
+                                        setPage(1)
+                                        setHasMore(true)
+                                    }}
+                                    groups={[
+                                        {
+                                            label: 'Show media from',
+                                            items: [
+                                                { value: 'user', label: 'My uploads' },
+                                                { value: 'all', label: 'All uploads' },
+                                            ],
+                                        },
+                                    ]}
+                                    className="min-w-[150px]"
+                                />
+                            </div>
+
+                            <div className="relative flex-grow">
+                                <OSInput
+                                    type="text"
+                                    label="Search filenames"
+                                    showLabel={false}
+                                    placeholder="Search filenames..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                />
+                                {searchQuery && (
+                                    <button
+                                        onClick={() => setSearchQuery('')}
+                                        className="absolute right-2 top-1/2 -translate-y-1/2 text-secondary hover:text-primary transition-colors"
+                                        aria-label="Clear search"
+                                    >
+                                        <IconX className="size-4" />
+                                    </button>
+                                )}
+                            </div>
+
+                            <div className="relative">
+                                <Select
+                                    value={selectedTag}
+                                    onValueChange={setSelectedTag}
+                                    placeholder="All tags"
+                                    groups={[
+                                        {
+                                            label: 'Tags',
+                                            items: [
+                                                { value: 'all', label: 'All tags' },
+                                                ...availableTags.map((tag) => ({
+                                                    value: tag,
+                                                    label: tag,
+                                                })),
+                                            ],
+                                        },
+                                    ]}
+                                    className="min-w-[150px]"
+                                />
+                            </div>
                         </div>
 
                         <div className="flex-grow border border-input rounded-md p-4 overflow-auto">
-                            <ul className="list-none m-0 p-0 space-y-2">
-                                {loading > 0 &&
-                                    Array.from({ length: loading }).map((_, index) => (
-                                        <li
-                                            key={index}
-                                            className="w-full h-20 bg-accent rounded-md animate-pulse mt-2"
-                                        />
-                                    ))}
-                                {filteredImages.map((image) => {
-                                    return <Image key={image.id} {...image} />
-                                })}
-                                {filteredImages.length === 0 && !loading && searchQuery && (
-                                    <li className="text-center text-secondary py-4">
-                                        No files matching "{searchQuery}"
-                                    </li>
-                                )}
-                            </ul>
+                            {loadingData ? (
+                                <div className="flex items-center justify-center h-64">
+                                    <ProgressBar chrome={false} />
+                                </div>
+                            ) : loadingError ? (
+                                <div className="flex flex-col items-center justify-center h-64 text-center">
+                                    <p className="text-red dark:text-red font-semibold mb-2">Error</p>
+                                    <p className="text-secondary mb-4">{loadingError}</p>
+                                    <OSButton
+                                        onClick={() => {
+                                            setPage(1)
+                                            setHasMore(true)
+                                            fetchUserImages(1, false)
+                                        }}
+                                        variant="primary"
+                                        size="sm"
+                                    >
+                                        Retry
+                                    </OSButton>
+                                </div>
+                            ) : (
+                                <>
+                                    <ul className="list-none m-0 p-0 space-y-2">
+                                        {loading > 0 &&
+                                            Array.from({ length: loading }).map((_, index) => (
+                                                <li
+                                                    key={index}
+                                                    className="w-full h-20 bg-accent rounded-md animate-pulse mt-2"
+                                                />
+                                            ))}
+                                        {filteredImages.map((image) => {
+                                            return <Image key={image.id} {...image} />
+                                        })}
+                                        {filteredImages.length === 0 && !loading && (
+                                            <li className="text-center text-secondary py-8">
+                                                {searchQuery
+                                                    ? `No files matching "${searchQuery}"`
+                                                    : 'No media uploaded yet. Upload files above to get started.'}
+                                            </li>
+                                        )}
+                                    </ul>
+                                    {hasMore && filteredImages.length > 0 && (
+                                        <div className="flex justify-center mt-4">
+                                            <OSButton
+                                                onClick={handleLoadMore}
+                                                disabled={loadingMore}
+                                                variant="primary"
+                                                size="sm"
+                                            >
+                                                {loadingMore ? (
+                                                    <>
+                                                        <Loading className="size-3" />
+                                                        Loading...
+                                                    </>
+                                                ) : (
+                                                    'Load more'
+                                                )}
+                                            </OSButton>
+                                        </div>
+                                    )}
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

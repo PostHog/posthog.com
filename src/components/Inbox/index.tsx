@@ -42,12 +42,12 @@ const Menu = ({ onValueChange }: { onValueChange: (value: string) => void }) => 
         return [
             ...(user
                 ? [
-                      {
-                          name: 'My subscriptions',
-                          url: '/questions/subscriptions',
-                          icon: <IconNotification />,
-                      },
-                  ]
+                    {
+                        name: 'My subscriptions',
+                        url: '/questions/subscriptions',
+                        icon: <IconNotification />,
+                    },
+                ]
                 : []),
             ...topicsNav,
         ]
@@ -403,11 +403,10 @@ export default function Inbox(props) {
                                                                 </span>
                                                             </div>
                                                             <div
-                                                                className={`order-3 @3xl:order-none flex-[1_0_100%] @3xl:flex-1 ${
-                                                                    active
+                                                                className={`order-3 @3xl:order-none flex-[1_0_100%] @3xl:flex-1 ${active
                                                                         ? 'font-medium @3xl:font-bold'
                                                                         : 'font-medium'
-                                                                }`}
+                                                                    }`}
                                                             >
                                                                 {subject}
                                                             </div>
@@ -442,7 +441,6 @@ export default function Inbox(props) {
                                                 <div className="flex items-center justify-center py-8 h-full">
                                                     <Lottie
                                                         animationData={hourglassAnimation}
-                                                        className="size-6 opacity-75 text-secondary"
                                                         className="size-6 opacity-75 dark:hidden"
                                                         title="Loading questions..."
                                                     />
@@ -460,9 +458,8 @@ export default function Inbox(props) {
                                     {permalink && (
                                         <motion.div
                                             ref={bottomContainerRef}
-                                            className={`flex-none relative min-h-0 min-w-0 ${
-                                                !isDragging ? 'transition-all duration-200 ease-out' : ''
-                                            } ${sideBySide ? '@4xl:border-l border-primary' : ''}`}
+                                            className={`flex-none relative min-h-0 min-w-0 ${!isDragging ? 'transition-all duration-200 ease-out' : ''
+                                                } ${sideBySide ? '@4xl:border-l border-primary' : ''}`}
                                             initial={{
                                                 width: 0,
                                             }}
@@ -511,9 +508,8 @@ export default function Inbox(props) {
                                             )}
 
                                             <div
-                                                className={`bg-accent border-y border-primary px-4 py-2 flex gap-2 items-center sticky top-0 z-10 ${
-                                                    sideBySide ? 'border-t-0' : ''
-                                                }`}
+                                                className={`bg-accent border-y border-primary px-4 py-2 flex gap-2 items-center sticky top-0 z-10 ${sideBySide ? 'border-t-0' : ''
+                                                    }`}
                                             >
                                                 <OSButton
                                                     variant="secondary"
@@ -579,15 +575,14 @@ export default function Inbox(props) {
                                                                         style={{ width: 26, height: 26 }}
                                                                         icon={
                                                                             <IconChevronDown
-                                                                                className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
-                                                                                    sideBySide
+                                                                                className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${sideBySide
                                                                                         ? expandable
                                                                                             ? 'rotate-90'
                                                                                             : '-rotate-90'
                                                                                         : expandable
-                                                                                        ? 'rotate-180'
-                                                                                        : ''
-                                                                                }`}
+                                                                                            ? 'rotate-180'
+                                                                                            : ''
+                                                                                    }`}
                                                                             />
                                                                         }
                                                                         onClick={() => {
