@@ -1622,7 +1622,6 @@
             "source": "/teams/exec",
             "destination": "/teams/blitzscale"
         },
-        { "source": "/teams/growth", "destination": "/teams" },
         { "source": "/eu", "destination": "/pricing" },
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
@@ -1644,7 +1643,10 @@
             "source": "/handbook/engineering/support-hero",
             "destination": "/handbook/engineering/operations/support-hero"
         },
-        { "source": "/handbook/who-we-are-building-for", "destination": "/handbook/who-we-build-for" }
+        { "source": "/handbook/who-we-are-building-for", "destination": "/handbook/who-we-build-for" },
+        { "source": "/example-components", "destination": "/handbook/engineering/posthog-com/markdown" },
+        { "source": "/handbook/content/components", "destination": "/handbook/engineering/posthog-com/markdown" },
+        { "source": "/handbook/engineering/storybook", "destination": "/handbook/engineering/posthog-com/markdown" }
     ],
     "headers": [
         {

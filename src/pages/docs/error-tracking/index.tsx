@@ -58,6 +58,7 @@ const errorTrackingFeatures = [
     { text: 'Capture exceptions', url: '/docs/error-tracking/capture' },
     { text: 'Autocapture', url: '/docs/error-tracking/capture#automatic-exception-capture' },
     { text: 'Stack traces', url: '/docs/error-tracking/stack-traces' },
+    { text: 'Code variables capture', url: '/docs/error-tracking/code-variables' },
     { text: 'Custom error grouping', url: '/docs/error-tracking/grouping-issues' },
     { text: 'Issue management', url: '/docs/error-tracking/managing-issues' },
     { text: 'Team assignments', url: '/docs/error-tracking/assigning-issues' },

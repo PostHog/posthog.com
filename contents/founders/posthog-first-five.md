@@ -38,7 +38,7 @@ James found Marius via a [hobby project](https://github.com/mariusandra/insights
 
 It didn’t take long to realize they should hire Marius full time. “Just from watching him do some actual work with us, it was really clear that he was very talented.”
 
-Today, Marius leads our [Product Analytics Team](/teams/product-analytics). He’s been instrumental in refactoring all our insights to use [SQL](/docs/sql), which fixes whole classes of bugs, and enables engineers to do [cool things in PostHog using SQL](/tutorials/hogql-sum-aggregation).
+Today, Marius leads our <SmallTeam slug="product-analytics" />. He’s been instrumental in refactoring all our insights to use [SQL](/docs/sql), which fixes whole classes of bugs, and enables engineers to do [cool things in PostHog using SQL](/tutorials/hogql-sum-aggregation).
 
 > **What we learned:** Great people will find ways to shine if you give them the chance. Contract work is a great way to do this, especially for early-stage companies. This initial trial with Marius was the genesis of our [SuperWeek / SuperDay process](/handbook/people/hiring-process#4-posthog-superday), which we use to make final decision on potential hires.
 

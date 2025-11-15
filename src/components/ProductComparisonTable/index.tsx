@@ -8,6 +8,7 @@ import { useApp } from '../../context/App'
 // Competitor data imports
 import { ab_tasty } from '../../hooks/competitorData/ab_tasty'
 import { adobe_analytics } from '../../hooks/competitorData/adobe_analytics'
+import { airbrake } from '../../hooks/competitorData/airbrake'
 import { amplitude } from '../../hooks/competitorData/amplitude'
 import { appcues } from '../../hooks/competitorData/appcues'
 import { appsignal } from '../../hooks/competitorData/appsignal'
@@ -574,6 +575,7 @@ export default function ProductComparisonTable({
     const competitorData: Record<string, any> = {
         ab_tasty,
         adobe_analytics,
+        airbrake,
         amplitude,
         appcues,
         appsignal,
