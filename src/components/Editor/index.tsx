@@ -175,8 +175,8 @@ const Options = ({
                         value === 'full'
                             ? '100%'
                             : typeof preferredMaxWidth === 'number'
-                            ? preferredMaxWidth
-                            : appWindow?.size?.width || 1000
+                                ? preferredMaxWidth
+                                : appWindow?.size?.width || 1000
                     )
                 }}
             />
@@ -421,33 +421,33 @@ export function Editor({
                             {...(hasShareButton
                                 ? showCher
                                     ? {
-                                          onClick: () => {
-                                              addWindow(
-                                                  <MediaPlayer
-                                                      newWindow
-                                                      location={{ pathname: `cher` }}
-                                                      key={`cher`}
-                                                      videoId="nZXRV4MezEw"
-                                                  />
-                                              )
-                                          },
-                                      }
+                                        onClick: () => {
+                                            addWindow(
+                                                <MediaPlayer
+                                                    newWindow
+                                                    location={{ pathname: `cher` }}
+                                                    key={`cher`}
+                                                    videoId="nZXRV4MezEw"
+                                                />
+                                            )
+                                        },
+                                    }
                                     : {
-                                          onClick: () => {
-                                              addWindow(
-                                                  <Share
-                                                      title={appWindow?.meta?.title}
-                                                      location={{ pathname: `share` }}
-                                                      key={`share`}
-                                                      newWindow
-                                                      url={`${window.location.origin}${appWindow?.path}`}
-                                                  />
-                                              )
-                                          },
-                                      }
+                                        onClick: () => {
+                                            addWindow(
+                                                <Share
+                                                    title={appWindow?.meta?.title}
+                                                    location={{ pathname: `share` }}
+                                                    key={`share`}
+                                                    newWindow
+                                                    url={`${window.location.origin}${appWindow?.path}`}
+                                                />
+                                            )
+                                        },
+                                    }
                                 : {
-                                      to: cta?.url,
-                                  })}
+                                    to: cta?.url,
+                                })}
                             state={{ newWindow: true }}
                             asLink
                             className="ml-1 -my-0.5"
@@ -588,8 +588,8 @@ export function Editor({
                                                     filter.initialValue === null
                                                         ? null
                                                         : filter.initialValue ??
-                                                          filters[filter.value ?? filter.label]?.value ??
-                                                          filter.options[0].value
+                                                        filters[filter.value ?? filter.label]?.value ??
+                                                        filter.options[0].value
                                                 }
                                                 groups={[
                                                     {
@@ -687,7 +687,7 @@ export function Editor({
                                             {type && <span className="opacity-40">.{type}</span>}
                                         </h1>
                                     )}
-                                    <div className="relative">
+                                    <div className="relative @container/editor-content">
                                         <div ref={searchContentRef}>{children}</div>
                                     </div>
                                 </article>

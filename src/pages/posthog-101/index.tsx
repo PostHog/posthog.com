@@ -89,10 +89,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     kind: 'flow',
     props: [],
     Editor: () => (
-      <Image
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/maths_116f02abd0.jpg"
-        className="max-w-full rounded"
-      />
+      <>
+        <Image
+          src="https://res.cloudinary.com/dmukukwp6/image/upload/maths_116f02abd0.jpg"
+          className="max-w-full @lg/editor-content:float-right @lg/editor-content:w-1/2 mt-4 @lg/editor-content:ml-4 rounded"
+        />
+      </>
     ),
   },
   {
@@ -101,8 +103,8 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     props: [],
     Editor: () => (
       <Image
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_dashboards_996851ce65.png"
-        className="float-right max-w-[192px] @sm:max-w-[384px] ml-2 @sm:ml-4 mb-2 @sm:-mt-4"
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto/hog_dashboards_996851ce65.png"
+        className="@lg/editor-content:float-right @lg/editor-content:w-2/5 @lg/editor-content:ml-12 max-w-[192px] @lg/editor-content:max-w-[384px]"
       />
     ),
   },
@@ -112,8 +114,8 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     props: [],
     Editor: () => (
       <Image
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/retail_hogs_540cf065e4.png"
-        className="@md:hidden @xl:block @lg:float-right max-w-full @xl:max-w-xs -mb-2 @lg:mb-2 @lg:ml-4 @lg:-mt-2"
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto/retail_hogs_540cf065e4.png"
+        className="@lg/editor-content:float-right @lg/editor-content:w-3/5 @lg/editor-content:ml-4 -mt-4 max-w-[192px] @lg/editor-content:max-w-[400px]"
       />
     ),
   },
