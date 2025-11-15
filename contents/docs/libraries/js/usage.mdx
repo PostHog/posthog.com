@@ -311,11 +311,11 @@ posthog.capture("survey sent", {
       id: "d8462827-1575-4e1e-ab1d-b5fddd9f829c",
       question: "What is your favorite color?",
     }
-  ]
-  $survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c: survey_response // required. `survey_response` must be a text value.
+  ],
+  '$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c': survey_response // required. `survey_response` must be a text value.
   // Convert numbers to text e.g. 8 should be converted to "8".
   // For multiple choice select surveys, `survey_response` must be an array of values with the selected choices.
-  // e.g., $survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c: ["response_1", "response_2"]
+  // e.g., '$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c': ["response_1", "response_2"]
 })
 ```
 
