@@ -104,7 +104,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     Editor: () => (
       <Image
         src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto/hog_dashboards_996851ce65.png"
-        className="@lg/editor-content:float-right @lg/editor-content:w-2/5 @lg/editor-content:ml-12 max-w-[192px] @lg/editor-content:max-w-[384px]"
+        className="@lg/editor-content:float-right @lg/editor-content:w-2/5 @lg/editor-content:ml-4 max-w-[192px] @lg/editor-content:max-w-[384px]"
       />
     ),
   },
@@ -116,6 +116,28 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
       <Image
         src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto/retail_hogs_540cf065e4.png"
         className="@lg/editor-content:float-right @lg/editor-content:w-3/5 @lg/editor-content:ml-4 -mt-4 max-w-[192px] @lg/editor-content:max-w-[400px]"
+      />
+    ),
+  },
+  {
+    name: 'ImageReplayHog',
+    kind: 'flow',
+    props: [],
+    Editor: () => (
+      <Image
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto/replay_hog_13a2853b54.png"
+        className="@lg/editor-content:float-right @lg/editor-content:w-3/5 @lg/editor-content:ml-4 -mt-4 max-w-sm @lg/editor-content:max-w-[400px]"
+      />
+    ),
+  },
+  {
+    name: 'ImageChartHog',
+    kind: 'flow',
+    props: [],
+    Editor: () => (
+      <Image
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto/chart_hog_31fcb37849.png"
+        className="@lg/editor-content:float-right @lg/editor-content:w-2/5 @lg/editor-content:ml-4 -mt-4 max-w-md"
       />
     ),
   },
