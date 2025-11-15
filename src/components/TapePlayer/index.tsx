@@ -118,7 +118,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
             videoId: extractVideoId(mixtapeSongs[0].youtubeUrl),
             host: 'https://www.youtube-nocookie.com',
             playerVars: {
-                autoplay: 0,
+                autoplay: 1,
                 controls: 0,
                 disablekb: 1,
                 fs: 0,
