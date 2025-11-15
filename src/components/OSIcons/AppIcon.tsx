@@ -417,7 +417,9 @@ export const AppLink = ({
             >
                 <span className={`inline-block leading-snug`}>
                     <span
-                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] wallpaper-parade:bg-white dark:wallpaper-parade:bg-black wallpaper-coding-at-night:text-white ${finalBackground}  rounded-[2px] px-0.5 py-0`}
+                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] wallpaper-parade:bg-white dark:wallpaper-parade:bg-black ${
+                            source === 'desktop' ? 'wallpaper-coding-at-night:text-white' : ''
+                        } ${finalBackground} rounded-[2px] px-0.5 py-0`}
                     >
                         {label}
                         {extension && <span className="opacity-75">.{extension}</span>}
