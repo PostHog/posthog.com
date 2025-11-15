@@ -275,7 +275,6 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                         newWindow
                         onSubmit={() => {
                             fetchMixtapeSongs(mixtapeId)
-                            refresh()
                         }}
                     />
                 ) as any
