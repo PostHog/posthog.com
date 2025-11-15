@@ -77,6 +77,13 @@ ORDER BY groupidentify_event_count DESC
 
 We have guidance on when to call `posthog.reset()` [here](/docs/libraries/js/features#resetting-a-user).
 
+### Reverse Proxies 
+
+It is best practice for a customer to use PostHog's [Managed Reverse Proxy](/docs/advanced/proxy/managed-reverse-proxy) or to configure their own for events to be sent from their own domain. 
+
+When using either PostHog's managed reverse proxy or deploying a [non-managed reverse proxy](/docs/advanced/proxy#deploying-a-reverse-proxy), events should populate the "Library custom API host" property. Host mapping and domains can potentially be seen in Metabase. You should verify the setup with a customer.  
+
+
 ## Are feature flags resilient?
 
 ### Falling back to working code

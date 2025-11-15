@@ -217,6 +217,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Onboarding',
         owner: ['growth'],
     },
+    'organization-management-deletion': {
+        feature: 'Organization Management & Deletion',
+        owner: ['platform-features'],
+    },
     'path-cleaning': {
         feature: 'Path cleaning',
         owner: ['web-analytics'],

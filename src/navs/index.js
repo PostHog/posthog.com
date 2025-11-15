@@ -1495,7 +1495,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'New customer onboarding',
-                        url: '/handbook/growth/sales/customer-onboarding.md',
+                        url: '/handbook/growth/sales/customer-onboarding',
                     },
                 ],
             },
@@ -2931,6 +2931,12 @@ export const docsMenu = {
                     url: '/docs/product-analytics/capture-events',
                     icon: 'IconSend',
                     color: 'orange',
+                },
+                {
+                    name: 'Schema management',
+                    url: '/docs/product-analytics/schema-management',
+                    icon: 'IconDatabase',
+                    color: 'blue',
                 },
                 {
                     name: 'Creating insights',
