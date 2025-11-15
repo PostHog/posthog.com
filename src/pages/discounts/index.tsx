@@ -192,8 +192,8 @@ export default function Discounts(): JSX.Element {
                 <p>
                     We price our products fairly and offer discounts based on usage and deal terms – you can read all
                     about them{' '}
-                    <Link to="/pricing#discounts" state={{ newWindow: true }}>
-                        on our pricing page.
+                    <Link to="/handbook/growth/sales/contract-rules#discounts" state={{ newWindow: true }}>
+                        in our handbook.
                     </Link>
                 </p>
                 <p>But sometimes this leaves our customers feeling left out. They want huge discounts too!</p>
