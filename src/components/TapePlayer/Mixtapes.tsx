@@ -100,7 +100,7 @@ export default function Mixtapes(): JSX.Element {
                 </div>
             ) : (
                 <>
-                    <div className="mb-4 flex justify-end gap-2">
+                    <div className="mb-4 grid grid-cols-2 gap-2">
                         <OSSelect
                             label="Filter by creator"
                             options={creatorOptions}
@@ -113,7 +113,7 @@ export default function Mixtapes(): JSX.Element {
                             showLabel={false}
                             searchable={true}
                             searchPlaceholder="Search creators..."
-                            className="!w-[170px]"
+                            className="w-full"
                         />
                         <OSSelect
                             label="Filter by genre"
@@ -127,7 +127,7 @@ export default function Mixtapes(): JSX.Element {
                             showLabel={false}
                             searchable={true}
                             searchPlaceholder="Search genres..."
-                            className="!w-[170px]"
+                            className="w-full"
                         />
                     </div>
                     {filteredMixtapes.length === 0 ? (
