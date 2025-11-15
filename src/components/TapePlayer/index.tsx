@@ -295,7 +295,13 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
     return (
         <ScrollArea>
             <div data-scheme="secondary" className="w-full bg-primary">
-                <SEO title="♫ PostHog.fm" />
+                <SEO
+                    title={`${
+                        currentSong?.title && currentSong?.artist
+                            ? `${currentSong?.title} by ${currentSong?.artist} - `
+                            : ''
+                    }♫ PostHog.fm`}
+                />
                 <div className="flex items-start">
                     <div className="p-4 w-[700px] sticky top-0">
                         {/* Hidden YouTube player */}
