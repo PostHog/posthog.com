@@ -63,12 +63,73 @@ const CTAs = () => {
   )
 }
 
+interface ProductButtonsProps {
+  productTypes: string[]
+  className?: string
+  beta?: boolean
+}
+
+const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className = '', beta = false }) => {
+  const allProducts = useProduct()
+
+  // Helper to get product by handle
+  const getProduct = (handle: string) =>
+    Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === handle) : undefined
+
+  return (
+    <span className={`flex flex-wrap gap-1 pt-1 ${className}`}>
+      {productTypes.map((type, index) => {
+        const product = getProduct(type)
+        return product ? (
+          <OSButton
+            key={type}
+            icon={product.Icon ? <product.Icon /> : undefined}
+            iconClassName={`text-${product.color}`}
+            color={product.color}
+            className="font-medium text-primary hover:text-primary"
+            to={`/${product.slug}`}
+            state={{ newWindow: true }}
+            asLink
+          >
+            {product.name}
+            {beta && <span className="text-xs opacity-50">beta</span>}
+          </OSButton>
+        ) : null
+      })}
+    </span>
+  )
+}
+
+// Single product button for inline use
+const ProductButton = ({ handle }: { handle: string }) => {
+  const allProducts = useProduct()
+  const product = Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === handle) : undefined
+
+  if (!product) return null
+
+  return (
+    <OSButton
+      icon={product.Icon ? <product.Icon /> : undefined}
+      iconClassName={`text-${product.color}`}
+      color={product.color}
+      size="md"
+      variant="underline"
+      className="font-medium text-primary hover:text-primary relative top-0.5 !underline"
+      to={`/${product.slug}`}
+      state={{ newWindow: true }}
+      asLink
+    >
+      {product.name}
+    </OSButton>
+  )
+}
+
 const ProductCount = () => {
   return <strong>{PRODUCT_COUNT}+ products</strong>
 }
 
 const AppCount = () => {
-  return APP_COUNT
+  return <>{APP_COUNT}</>
 }
 
 const Button = ({ url, children }: { url: string; children: React.ReactNode }) => {
@@ -137,7 +198,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     Editor: () => (
       <Image
         src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto/chart_hog_31fcb37849.png"
-        className="@lg/editor-content:float-right @lg/editor-content:w-2/5 @lg/editor-content:ml-4 -mt-4 max-w-md"
+        className="@lg/editor-content:float-right @lg/editor-content:w-1/2 @lg/editor-content:ml-4 -mt-4 max-w-md"
       />
     ),
   },
@@ -238,6 +299,54 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     kind: 'flow',
     props: [],
     Editor: () => <ELI5Blurb />,
+  },
+  {
+    name: 'ProductButtonSessionReplay',
+    kind: 'text',
+    props: [],
+    Editor: () => <ProductButton handle="session_replay" />,
+  },
+  {
+    name: 'ProductButtonProductAnalytics',
+    kind: 'text',
+    props: [],
+    Editor: () => <ProductButton handle="product_analytics" />,
+  },
+  {
+    name: 'ProductButtonDashboards',
+    kind: 'text',
+    props: [],
+    Editor: () => <ProductButton handle="dashboards" />,
+  },
+  {
+    name: 'ProductButtonFeatureFlags',
+    kind: 'text',
+    props: [],
+    Editor: () => <ProductButton handle="feature_flags" />,
+  },
+  {
+    name: 'ProductButtonExperiments',
+    kind: 'text',
+    props: [],
+    Editor: () => <ProductButton handle="experiments" />,
+  },
+  {
+    name: 'ProductButtonDataWarehouse',
+    kind: 'text',
+    props: [],
+    Editor: () => <ProductButton handle="data_warehouse" />,
+  },
+  {
+    name: 'ProductButtonSurveys',
+    kind: 'text',
+    props: [],
+    Editor: () => <ProductButton handle="surveys" />,
+  },
+  {
+    name: 'ProductButtonAI',
+    kind: 'text',
+    props: [],
+    Editor: () => <ProductButton handle="posthog_ai" />,
   },
 ]
 
