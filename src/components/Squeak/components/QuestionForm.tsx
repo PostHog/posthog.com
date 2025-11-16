@@ -104,7 +104,6 @@ export const Select = ({
                 placeholder={label}
                 searchable={true}
                 searchPlaceholder="Search topics..."
-                height="!h-96"
                 maxHeight="max-h-[300px]"
                 showLabel={false}
                 className=""

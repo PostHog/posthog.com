@@ -103,7 +103,7 @@ At the time of writing, [we are 37 people](/people), only 11 of whom are in Go T
 
 ![company composition](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/hubs/how-we-designed-our-company-for-speed/posthog-team.png)
 
-We don't do outbound sales, our [marketing team](/teams/marketing) is very small, we only have one product manager, and our [Blitzscale Team](/teams/blitzscale) is only 3 people. These things are all by design.
+We don't do outbound sales, our <SmallTeam slug="marketing" /> is very small, we only have one product manager, and our <SmallTeam slug="blitzscale" /> is only 3 people. These things are all by design.
 
 We're product-led because our ideal users, engineers, want to try something rather than sit on a call.
 

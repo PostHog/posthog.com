@@ -12,7 +12,7 @@ In this case, the team member chooses to leave PostHog.
 
 We ask for 30 days of notice by default (unless locally a different maximum or minimum limit applies), and for team members to work during that notice period. This is so we have some time to find someone to hire and to enable a handover. Please assume by default we will expect team members to work all of this period.
 
-> If you are a current team member and you are thinking about resigning from PostHog, we encourage you to speak with your manager or the [people team](/teams/people) to discuss your reasons for wanting to leave. While we don't want to persuade anyone who is unhappy to stay, you may find that the best solution involves changing things here at PostHog, rather than going somewhere else. If resignation is the only solution after you have discussed your concerns, please send an email communicating your intention to resign to people@posthog.com. We will then start a discussion around what is needed for the handover.
+> If you are a current team member and you are thinking about resigning from PostHog, we encourage you to speak with your manager or the <SmallTeam slug="people" /> to discuss your reasons for wanting to leave. While we don't want to persuade anyone who is unhappy to stay, you may find that the best solution involves changing things here at PostHog, rather than going somewhere else. If resignation is the only solution after you have discussed your concerns, please send an email communicating your intention to resign to people@posthog.com. We will then start a discussion around what is needed for the handover.
 
 ## Involuntary departure
 
@@ -66,10 +66,10 @@ We will then send over an email covering the following points with the team memb
 Final pay will be determined based on length of service and the reasons for leaving:
 
 -   If the offboarding is voluntary, they will be paid up until their last day. We will look at the amount of holiday taken in the last 12 months and will pay any "unused" vacation pay assuming they would have taken 25 days (since we offer unlimited vacation periods).
--   If the offboarding is involuntary and due to performance reasons or a change in business needs, they will receive 4 months of pay, provided they have been at PostHog for at least 3 months (6 months for sales roles). If they have been with PostHog for less time, they will receive 1 month of pay and, if a US team member, we will also cover healthcare costs through the end of the next calendar month.
+-   If the offboarding is involuntary and due to performance reasons or a change in business needs, they will receive 4 months of pay (inclusive of any legally required statutory or contractual notice periods), provided they have been at PostHog for at least 3 months (6 months for sales roles or German employees). If they have been with PostHog for less time, they will receive 1 month of pay and, if a US team member, we will also cover healthcare costs through the end of the next calendar month.
 -   If the offboarding is involuntary and for gross misconduct, including breach of contract, they may be paid the statutory minimum required only, and receive no notice. This is at our discretion depending on the circumstances.
 
-> We ask departing team members to sign a post-termination certificate in order to receive payments beyond their final day of work. If we do not receive this, then we will only pay in line with statutory requirements.
+> We ask departing team members to sign a post-termination certificate, separation agreement or release in order to receive payments beyond their final day of work. If we do not receive this, then we will only pay in line with statutory and contractual requirements.
 
 Please note that if there are local laws which are applicable, we will pay the greater of the above or the legally required minimum.
 
