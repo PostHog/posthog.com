@@ -7,6 +7,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import SmallTeam from 'components/SmallTeam'
 import { useToast } from '../../../context/Toast'
 import OSButton from 'components/OSButton'
+import { Link } from "gatsby"
 
 interface VideoChapter {
     title: string
@@ -225,7 +226,7 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                 {/* Main content area */}
                 <div className="flex-grow flex flex-col @2xl:flex-row gap-8 px-8 pb-8">
                     {/* Video player on the left */}
-                    <div className={`flex-1 flex flex-col ${isMaximized ? 'fixed inset-0 z-50 p-16 pt-20' : ''}`}>
+                    <div className={`@2xl:flex-1 flex flex-col ${isMaximized ? 'fixed inset-0 z-50 p-16 pt-20' : ''}`}>
                         <WistiaCustomPlayer
                             key={selectedVideo?.wistia}
                             theme="dark"
@@ -242,9 +243,9 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                     <div className="@2xl:w-96 flex flex-col gap-6 overflow-auto">
                         <div>
                             {selectedVideo?.chapters && selectedVideo.chapters.length > 0 && (
-                                <div className="mt-4">
-                                    <h4 className="text-lg @2xl:text-xl font-semibold mb-3">
-                                        Jump to a prompt in this video:
+                                <div className="">
+                                    <h4 className="text-lg text-white/60 font-normal mb-3">
+                                        Jump to a prompt in this video
                                     </h4>
                                     <ul className="space-y-2">
                                         {selectedVideo.chapters.map((chapter, index) => (
@@ -259,7 +260,7 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                                                     <span className="inline-block pt-1 font-mono text-sm opacity-70 shrink-0 pr-2">
                                                         {formatTime(chapter.time)}
                                                     </span>
-                                                    <span className="flex-1">{chapter.title}</span>
+                                                    <span className={`flex-1 ${chapter.copyable ? 'before:content-["“"] after:content-["”"]' : ''}`}>{chapter.title}</span>
                                                 </button>
                                                 {chapter.copyable && (
                                                     <OSButton
@@ -285,7 +286,7 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                         {selectedVideo?.author && (
                             <div className="mt-auto">
                                 <fieldset>
-                                    <legend className="bg-transparent">This video features</legend>
+                                    <legend className="bg-transparent text-base">In this video</legend>
                                     <AuthorInfo name={selectedVideo.author} />
                                 </fieldset>
                             </div>
@@ -364,6 +365,7 @@ function AuthorInfo({ name }: { name: string }) {
                 nodes {
                     firstName
                     lastName
+                    squeakId
                     avatar {
                         formats {
                             thumbnail {
@@ -401,27 +403,31 @@ function AuthorInfo({ name }: { name: string }) {
         <div>
             <div className="flex items-start gap-3">
                 {avatarUrl ? (
-                    <CloudinaryImage
-                        src={avatarUrl as `https://res.cloudinary.com/${string}`}
-                        alt={fullName}
-                        className={`size-16 rounded-full overflow-hidden border-2 border-${color} p-[1.5px]`}
-                        imgClassName={`object-cover rounded-full bg-${color}`}
-                        width={80}
-                    />
+                    <Link to={`/community/profiles/${person.squeakId}`} state={{ newWindow: true }}>
+                        <CloudinaryImage
+                            src={avatarUrl as `https://res.cloudinary.com/${string}`}
+                            alt={fullName}
+                            className={`size-16 rounded-full overflow-hidden border-2 border-${color} p-[1.5px]`}
+                            imgClassName={`object-cover rounded-full bg-${color}`}
+                            width={80}
+                        />
+                    </Link>
                 ) : (
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
-                        alt={fullName}
-                        className={`size-16 rounded-full overflow-hidden border-2 border-${color} p-[1.5px]`}
-                        imgClassName={`object-cover rounded-full bg-${color}`}
-                        width={80}
-                    />
+                    <Link to={`/community/profiles/${person.squeakId}`} state={{ newWindow: true }}>
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
+                            alt={fullName}
+                            className={`size-16 rounded-full overflow-hidden border-2 border-${color} p-[1.5px]`}
+                            imgClassName={`object-cover rounded-full bg-${color}`}
+                            width={80}
+                        />
+                    </Link>
                 )}
                 <div className="text-left">
-                    <div className="text-2xl font-semibold">{fullName}</div>
+                    <div className="text-2xl font-semibold"><Link to={`/community/profiles/${person.squeakId}`} state={{ newWindow: true }} className="hover:underline">{fullName}</Link></div>
                     {teamSlug && (
                         <div className="text-secondary">
-                            <SmallTeam slug={teamSlug} inline className="!text-white [&_span]:!text-lg" />
+                            <SmallTeam slug={teamSlug} inline className="!text-white [&_span]:!text-lg [&_span]:no-underline [&_span]:hover:underline" />
                         </div>
                     )}
                     {person.pineappleOnPizza !== null && person.pineappleOnPizza !== undefined && (

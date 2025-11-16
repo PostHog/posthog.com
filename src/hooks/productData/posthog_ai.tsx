@@ -532,22 +532,22 @@ export const posthog_ai = {
             wistia: 'tgws1dixc0',
             chapters: [
                 {
-                    title: '"Add a graph series for unique users"',
+                    title: 'Add a graph series for unique users',
                     time: 60,
                     copyable: true,
                 },
                 {
-                    title: '"Create a dashboard of insights with traffic breakdowns by referral, country, user agent, and operating system"',
+                    title: 'Create a dashboard of insights with traffic breakdowns by referral, country, user agent, and operating system',
                     time: 110,
                     copyable: true,
                 },
                 {
-                    title: '"Find session recordings with filters based on the IP address over the last 60 days"',
+                    title: 'Find session recordings with filters based on the IP address over the last 60 days',
                     time: 246,
                     copyable: true,
                 },
                 {
-                    title: '"Summarize these session recordings in a report for me and provide key findings"',
+                    title: 'Summarize these session recordings in a report for me and provide key findings',
                     time: 285,
                     copyable: true,
                 },
