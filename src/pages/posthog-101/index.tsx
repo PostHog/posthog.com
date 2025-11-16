@@ -35,7 +35,7 @@ const CTAs = () => {
   const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
   return (
     <div>
-      <div className="flex flex-col @xs:flex-row @xs:justify-center @xl:justify-start gap-3 @sm:gap-2">
+      <div className="flex flex-col @xs:flex-row justify-start gap-3 @sm:gap-2 mt-4">
         <CallToAction
           to="https://app.posthog.com/signup"
           size="md"
@@ -221,7 +221,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     Editor: () => (
       <Image
         src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto/hog_dashboards_996851ce65.png"
-        className="@lg/editor-content:float-right @lg/editor-content:w-2/5 @lg/editor-content:ml-4 max-w-[192px] @lg/editor-content:max-w-[384px]"
+        className="float-right @lg/editor-content:w-2/5 ml-4 max-w-[192px] @lg/editor-content:max-w-[384px]"
       />
     ),
   },
@@ -232,7 +232,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     Editor: () => (
       <Image
         src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto/retail_hogs_540cf065e4.png"
-        className="@lg/editor-content:float-right @lg/editor-content:w-3/5 @lg/editor-content:ml-4 -mt-4 max-w-[192px] @lg/editor-content:max-w-[400px]"
+        className="@lg/editor-content:float-right @lg/editor-content:w-3/5 @lg/editor-content:ml-4 @lg/editor-content:-mt-4 @lg/editor-content:max-w-[400px]"
       />
     ),
   },
@@ -243,7 +243,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     Editor: () => (
       <Image
         src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto/replay_hog_13a2853b54.png"
-        className="@lg/editor-content:float-right @lg/editor-content:w-3/5 @lg/editor-content:ml-4 max-w-sm @lg/editor-content:max-w-[400px]"
+        className="@lg/editor-content:float-right @lg/editor-content:w-3/5 @lg/editor-content:ml-4 @lg/editor-content:max-w-[400px]"
       />
     ),
   },
@@ -254,7 +254,40 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     Editor: () => (
       <Image
         src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto/chart_hog_31fcb37849.png"
-        className="@lg/editor-content:float-right @lg/editor-content:w-1/2 @lg/editor-content:ml-4 -mt-4 max-w-md"
+        className="@lg/editor-content:float-left @lg/editor-content:w-1/2 @lg/editor-content:mr-4 @lg/editor-content:-mt-4 @lg/editor-content:max-w-sm"
+      />
+    ),
+  },
+  {
+    name: 'ImageToggleHog',
+    kind: 'flow',
+    props: [],
+    Editor: () => (
+      <Image
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/toggle_3996f389c3.png"
+        className="@lg/editor-content:float-right @lg/editor-content:w-3/5 w-full @lg/editor-content:max-w-md"
+      />
+    ),
+  },
+  {
+    name: 'ImageWizardHog',
+    kind: 'flow',
+    props: [],
+    Editor: () => (
+      <Image
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_b3d95bb903.png"
+        className="float-right @lg/editor-content:w-1/4 @lg/editor-content:ml-4 @lg/editor-content:-mt-8 w-[200px] @lg/editor-content:max-w-sm"
+      />
+    ),
+  },
+  {
+    name: 'ImagePartyHogs',
+    kind: 'flow',
+    props: [],
+    Editor: () => (
+      <Image
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/partyhogs_557688d6f6.png"
+        className="float-right @lg/editor-content:w-2/5 ml-4 w-[220px] @lg/editor-content:max-w-md"
       />
     ),
   },

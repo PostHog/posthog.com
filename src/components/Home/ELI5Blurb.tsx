@@ -33,7 +33,7 @@ export default function ELI5Blurb(): JSX.Element {
   }
 
   return (
-    <div data-scheme="secondary" className={`${ready ? 'opacity-100' : 'opacity-0'} bg-primary border border-primary rounded px-4 py-3 flex flex-col gap-2 @xl:flex-row @xl:justify-between @xl:items-center pr-20 relative text-sm @xl:text-unset`}>
+    <div data-scheme="secondary" className={`${ready ? 'opacity-100' : 'opacity-0'} bg-primary border border-primary rounded mt-8 px-4 py-3 flex flex-col gap-2 @xl:flex-row @xl:justify-between @xl:items-center pr-20 relative text-sm @xl:text-unset`}>
       <div>
         Trying to understand what PostHog is all about?
       </div>
