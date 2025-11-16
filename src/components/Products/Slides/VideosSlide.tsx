@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react'
 import WistiaCustomPlayer from 'components/WistiaCustomPlayer'
 import { useApp } from '../../../context/App'
-import { IconCollapse45, IconCopy } from '@posthog/icons'
+import { IconCollapse45, IconCopy, IconArrowRightDown } from '@posthog/icons'
 import { useWistiaThumbnail } from '../../../hooks/useWistiaThumbnail'
 import TeamMember from 'components/TeamMember'
 import SmallTeam from 'components/SmallTeam'
@@ -186,36 +186,38 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                     <OSButton
                         variant="default"
                         size="md"
-                        onClick={handleBack}
-                        className="text-white hover:text-white/80"
+                        onClick={handlePrev}
+                        disabled={!hasPrev}
+                        className="text-white hover:text-white/80 disabled:opacity-30"
                     >
-                        ↑ Back
+                        ← Previous
                     </OSButton>
 
-                    <h2 className="text-2xl @2xl:text-3xl font-bold text-center flex-1">
-                        How PostHog uses PostHog AI
-                    </h2>
-
-                    <div className="flex gap-2">
+                    <div className="flex-1 flex flex-col items-center gap-1">
                         <OSButton
                             variant="default"
                             size="md"
-                            onClick={handlePrev}
-                            disabled={!hasPrev}
-                            className="text-white hover:text-white/80 disabled:opacity-30"
+                            onClick={handleBack}
+                            className="text-white hover:text-white/80"
+                            icon={<IconArrowRightDown className="rotate-180 scale-y-[-1]" />}
+                            iconPosition="left"
                         >
-                            ← Previous
+                            Back
                         </OSButton>
-                        <OSButton
-                            variant="default"
-                            size="md"
-                            onClick={handleNext}
-                            disabled={!hasNext}
-                            className="text-white hover:text-white/80 disabled:opacity-30"
-                        >
-                            Next →
-                        </OSButton>
+                        <h2 className="text-2xl @2xl:text-3xl font-bold text-center">
+                            How PostHog uses PostHog AI
+                        </h2>
                     </div>
+
+                    <OSButton
+                        variant="default"
+                        size="md"
+                        onClick={handleNext}
+                        disabled={!hasNext}
+                        className="text-white hover:text-white/80 disabled:opacity-30"
+                    >
+                        Next →
+                    </OSButton>
                 </div>
 
                 {/* Main content area */}
@@ -223,6 +225,7 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                     {/* Video player on the left */}
                     <div className={`flex-1 flex flex-col ${isMaximized ? 'fixed inset-0 z-50 p-16 pt-20' : ''}`}>
                         <WistiaCustomPlayer
+                            key={selectedVideo?.wistia}
                             theme="dark"
                             mediaId={selectedVideo?.wistia || ''}
                             onMaximize={handleMaximize}
