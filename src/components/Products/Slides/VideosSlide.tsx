@@ -198,15 +198,17 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                             variant="default"
                             size="md"
                             onClick={handleBack}
-                            className="!text-white/80 hover:!text-white/100"
+                            className=" !text-white/80 hover:!text-white/100"
                             icon={<IconArrowRightDown className="rotate-180" />}
                             iconPosition="left"
                         >
-                            Back
+                            How PostHog uses PostHog AI:
                         </OSButton>
-                        <h2 className="text-2xl @2xl:text-3xl font-bold text-center">
-                            How PostHog uses PostHog AI
-                        </h2>
+                        <div>
+                            <h2 className="text-3xl font-bold text-center">
+                                {selectedVideo?.title}
+                            </h2>
+                        </div>
                     </div>
 
                     <OSButton
@@ -239,8 +241,6 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                     {/* Sidebar with chapters and author info */}
                     <div className="@2xl:w-96 flex flex-col gap-6 overflow-auto">
                         <div>
-                            <h3 className="text-2xl @2xl:text-3xl font-bold mb-2">{selectedVideo?.title}</h3>
-
                             {selectedVideo?.chapters && selectedVideo.chapters.length > 0 && (
                                 <div className="mt-4">
                                     <h4 className="text-lg @2xl:text-xl font-semibold mb-3">
@@ -254,21 +254,26 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                                             >
                                                 <button
                                                     onClick={() => handleChapterClick(chapter.time)}
-                                                    className="flex-1 text-left hover:text-yellow transition-colors flex items-start gap-2"
+                                                    className="flex-1 text-left hover:text-yellow flex items-start gap-2"
                                                 >
-                                                    <span className="font-mono text-sm opacity-70 shrink-0">
+                                                    <span className="inline-block pt-1 font-mono text-sm opacity-70 shrink-0 pr-2">
                                                         {formatTime(chapter.time)}
                                                     </span>
                                                     <span className="flex-1">{chapter.title}</span>
                                                 </button>
                                                 {chapter.copyable && (
-                                                    <button
+                                                    <OSButton
+                                                        variant="default"
+                                                        hover="border"
+                                                        size="xs"
                                                         onClick={() => handleCopyChapter(chapter.title)}
-                                                        className="opacity-0 group-hover:opacity-100 transition-opacity"
-                                                        aria-label="Copy chapter title"
+                                                        className="!text-white opacity-50 group-hover:opacity-100"
+                                                        aria-label="Copy prompt"
+                                                        tooltip="Copy prompt"
+                                                        tooltipDelay={0}
                                                     >
-                                                        <IconCopy className="w-4 h-4" />
-                                                    </button>
+                                                        <IconCopy className="size-5" />
+                                                    </OSButton>
                                                 )}
                                             </li>
                                         ))}
@@ -279,8 +284,10 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
 
                         {selectedVideo?.author && (
                             <div className="mt-auto">
-                                <h4 className="text-lg @2xl:text-xl font-semibold mb-3">This video features:</h4>
-                                <AuthorInfo name={selectedVideo.author} />
+                                <fieldset>
+                                    <legend className="bg-transparent">This video features</legend>
+                                    <AuthorInfo name={selectedVideo.author} />
+                                </fieldset>
                             </div>
                         )}
                     </div>
@@ -392,7 +399,7 @@ function AuthorInfo({ name }: { name: string }) {
 
     return (
         <div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-start gap-3">
                 {avatarUrl ? (
                     <CloudinaryImage
                         src={avatarUrl as `https://res.cloudinary.com/${string}`}
@@ -411,20 +418,20 @@ function AuthorInfo({ name }: { name: string }) {
                     />
                 )}
                 <div className="text-left">
-                    <div className="text-base font-semibold @2xl:leading-tight">{fullName}</div>
+                    <div className="text-2xl font-semibold">{fullName}</div>
                     {teamSlug && (
-                        <div className="text-[13px] text-secondary @2xl:leading-tight">
-                            <SmallTeam slug={teamSlug} />
+                        <div className="text-secondary">
+                            <SmallTeam slug={teamSlug} inline className="!text-white [&_span]:!text-lg" />
                         </div>
+                    )}
+                    {person.pineappleOnPizza !== null && person.pineappleOnPizza !== undefined && (
+                        <p className="italic opacity-75 mt-1 mb-0">
+                            {person.pineappleOnPizza === true && 'Believes pineapple belongs on pizza'}
+                            {person.pineappleOnPizza === false && 'Does not believe pineapple belongs on pizza'}
+                        </p>
                     )}
                 </div>
             </div>
-            {person.pineappleOnPizza !== null && person.pineappleOnPizza !== undefined && (
-                <p className="text-sm italic opacity-75 mt-2">
-                    {person.pineappleOnPizza === true && 'Believes pineapple belongs on pizza'}
-                    {person.pineappleOnPizza === false && 'Does not believe pineapple belongs on pizza'}
-                </p>
-            )}
         </div>
     )
 }
