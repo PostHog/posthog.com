@@ -84,9 +84,10 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
 
             if (typeof window === 'undefined' || !containerRef.current) return
 
-            // Check if we're inside a small container (likely a thumbnail)
+            // Check if we're inside a very small container (likely a thumbnail in a grid)
+            // Allow mobile sizes (down to ~200px width) for legitimate video players
             const rect = containerRef.current.getBoundingClientRect()
-            if (rect.width < 300 || rect.height < 200) {
+            if (rect.width < 200 || rect.height < 100) {
                 console.log('Skipping video initialization - detected thumbnail size', rect.width, rect.height)
                 return
             }
@@ -131,6 +132,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                         playerColor: '000000',
                         captionsOn: false, // Disable native captions
                         captionsDefault: false,
+                        playsinline: true, // Critical for mobile Safari
+                        preload: 'auto', // Preload video metadata
                     },
                     onReady: (video: any) => {
                         playerRef.current = video
