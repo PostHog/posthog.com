@@ -104,7 +104,7 @@ export default function CustomPersonasSlide(): JSX.Element {
           label: (
             <div className="flex flex-col justify-between w-full gap-2">
               <div className="flex-1">
-                <CloudinaryImage src={data.image} width={120} />
+                <CloudinaryImage src={data.image as `https://res.cloudinary.com/${string}`} width={120} />
               </div>
               <div className="text-2xl font-bold">{data.role}</div>
             </div>

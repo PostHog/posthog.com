@@ -30,6 +30,7 @@ import { SlideConfig, SlideConfigResult, defaultSlides, aiSlide } from './create
 import ProgressBar from 'components/ProgressBar'
 import DemoSlide from './DemoSlide'
 import PostHogOnPostHogSlide from './PostHogOnPostHogSlide'
+import VideosSlide from './VideosSlide'
 
 interface SlidesTemplateProps {
     productHandle: string
@@ -373,6 +374,9 @@ export default function SlidesTemplate({
 
             case 'posthog-on-posthog':
                 return <PostHogOnPostHogSlide productData={productData} {...props} />
+
+            case 'videos':
+                return <VideosSlide productData={productData} {...props} />
 
             case 'comparison-summary':
                 return (

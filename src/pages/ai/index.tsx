@@ -207,7 +207,7 @@ export default function PostHogAI(): JSX.Element {
             //     component: CustomManifestoSlide,
             // },
         ],
-        order: ['overview', 'features', 'demo', `posthog-on-posthog`, 'personas', 'roadmap', 'pricing', 'getting-started'],
+        order: ['overview', 'features', 'demo', 'videos', 'personas', 'roadmap', 'pricing', 'getting-started'],
         templates: {
             overview: 'max',
             features: 'ai',

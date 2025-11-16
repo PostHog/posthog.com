@@ -526,8 +526,35 @@ export const posthog_ai = {
         },
     ],
     videos: {
-        overview: {
+        test_video: {
+            wistia: 'scuzsr1rcz',
+        },
+        investigating_web_traffic: {
+            title: 'Investigating web traffic',
+            author: 'Edwin Lim',
             wistia: 'tgws1dixc0',
+            chapters: [
+                {
+                    title: '"Add a graph series for unique users"',
+                    time: 60,
+                    copyable: true,
+                },
+                {
+                    title: '"Create a dashboard of insights with traffic breakdowns by referral, country, user agent, and operating system"',
+                    time: 110,
+                    copyable: true,
+                },
+                {
+                    title: '"Find session recordings with filters based on the IP address over the last 60 days"',
+                    time: 246,
+                    copyable: true,
+                },
+                {
+                    title: '"Summarize these session recordings in a report for me and provide key findings"',
+                    time: 285,
+                    copyable: true,
+                },
+            ]
         },
     },
     answers: [

@@ -153,13 +153,31 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                         video.play()
                                     }
                                 },
-                                time: () => {
-                                    if (playerRef.current && playerRef.current.time) {
-                                        return playerRef.current.time()
-                                    } else if (video && video.time) {
-                                        return video.time()
+                                time: (seconds?: number) => {
+                                    if (seconds !== undefined) {
+                                        // Setter: seek to specific time
+                                        if (playerRef.current && playerRef.current.time) {
+                                            playerRef.current.time(seconds)
+                                        } else if (video && video.time) {
+                                            video.time(seconds)
+                                        }
+                                    } else {
+                                        // Getter: return current time
+                                        if (playerRef.current && playerRef.current.time) {
+                                            return playerRef.current.time()
+                                        } else if (video && video.time) {
+                                            return video.time()
+                                        }
+                                        return 0
                                     }
-                                    return 0
+                                },
+                                state: () => {
+                                    if (playerRef.current && playerRef.current.state) {
+                                        return playerRef.current.state()
+                                    } else if (video && video.state) {
+                                        return video.state()
+                                    }
+                                    return 'paused'
                                 },
                                 currentTime: 0,
                             }
