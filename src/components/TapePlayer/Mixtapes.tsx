@@ -83,7 +83,7 @@ export default function Mixtapes(): JSX.Element {
     }, [mixtapes, selectedGenre, selectedCreator])
 
     return (
-        <div data-scheme="secondary" className="p-4 flex flex-col bg-primary h-full">
+        <div data-scheme="secondary" className="p-4 flex flex-col bg-[#e4e3d8] dark:bg-primary h-full text-primary">
             {isLoading ? (
                 <div className="grid grid-cols-2 gap-4 w-full">
                     <div className="animate-pulse bg-accent border-2 border-primary rounded aspect-[100/63]" />
@@ -169,6 +169,7 @@ export default function Mixtapes(): JSX.Element {
                                                     cassetteColor={mixtape.attributes.metadata?.cassetteColor}
                                                     labelColor={mixtape.attributes.metadata?.labelColor}
                                                     labelBackground={mixtape.attributes.metadata?.labelBackground}
+                                                    teeth={false}
                                                 />
                                             </div>
                                         </div>

@@ -294,7 +294,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
 
     return (
         <ScrollArea>
-            <div data-scheme="secondary" className="w-full bg-primary">
+            <div data-scheme="secondary" className="w-full bg-[#e4e3d8] dark:bg-primary">
                 <SEO
                     title={`${
                         currentSong?.title && currentSong?.artist
@@ -308,7 +308,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                         <div id="youtube-player" className="hidden" />
 
                         {/* Waveform */}
-                        <div className="mb-4 h-20 flex items-end justify-between gap-[2px] border-2 border-primary bg-primary p-2 rounded">
+                        <div className="mb-4 h-20 flex items-end justify-between gap-[2px] border-2 border-primary bg-white dark:bg-primary p-2 rounded">
                             {waveformBars.map((height, i) => (
                                 <div
                                     key={i}
@@ -406,10 +406,8 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                         {mixtapeSongs.map((song, index) => (
                                                             <div
                                                                 key={song.id}
-                                                                className={`cursor-pointer hover:text-accent-dark transition-colors ${
-                                                                    index === currentSongIndex
-                                                                        ? 'font-bold text-accent-dark'
-                                                                        : ''
+                                                                className={`cursor-pointer !text-accent-dark transition-colors ${
+                                                                    index === currentSongIndex ? 'font-bold' : ''
                                                                 }`}
                                                                 onClick={() => {
                                                                     if (isPoweredOn) {
@@ -496,7 +494,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                         <TapeButton
                             icon={
                                 <div className="w-[70px]">
-                                    <CassetteTape teeth={false} />
+                                    <CassetteTape teeth={false} spindle={false} />
                                 </div>
                             }
                             label="Mixtape library"

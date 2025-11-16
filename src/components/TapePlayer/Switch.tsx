@@ -37,7 +37,7 @@ export default function Switch({ label, isOn, onToggle, disabled = false }: Swit
 
                     {/* Toggle bar that slides */}
                     <div
-                        className={`absolute h-[8px] bg-primary border border-[#b6b7af] dark:border-[#4a4e5c] w-[calc(100%+4px)] left-[-2px] rounded-[2px] ${
+                        className={`absolute h-[8px] bg-white dark:bg-primary border border-[#b6b7af] dark:border-[#4a4e5c] w-[calc(100%+4px)] left-[-2px] rounded-[2px] ${
                             isOn && !disabled ? 'top-[4px]' : 'bottom-[4px]'
                         }`}
                     />

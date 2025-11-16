@@ -60,7 +60,11 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
                 }
                 className="mb-2"
             >
-                <button type="button" onClick={onRemove} className="absolute top-0 right-3 bg-primary z-10 group">
+                <button
+                    type="button"
+                    onClick={onRemove}
+                    className="absolute top-0 right-3 bg-[#e4e3d8] dark:bg-primary z-10 group"
+                >
                     <IconTrash className="size-5 opacity-70 group-hover:opacity-100" />
                 </button>
                 <OSInput
@@ -69,7 +73,6 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
                     direction="column"
                     value={track.artist}
                     onChange={onChange}
-                    className="!bg-accent"
                 />
                 <OSInput
                     label="Title"
@@ -77,7 +80,6 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
                     direction="column"
                     value={track.title}
                     onChange={onChange}
-                    className="!bg-accent"
                 />
                 <OSInput
                     label="YouTube URL"
@@ -85,7 +87,6 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
                     direction="column"
                     value={track.youtubeUrl}
                     onChange={onChange}
-                    className="!bg-accent"
                 />
             </Fieldset>
         </div>
@@ -320,7 +321,10 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
     return (
         <ScrollArea>
             <SEO title={isEditMode ? 'Edit mixtape' : 'New mixtape'} />
-            <div data-scheme="secondary" className="p-4 grid grid-cols-2 gap-4 items-start bg-primary">
+            <div
+                data-scheme="secondary"
+                className="p-4 grid grid-cols-2 gap-4 items-start bg-[#e4e3d8] dark:bg-primary text-primary [&_legend]:bg-[#e4e3d8] dark:[&_legend]:bg-primary"
+            >
                 <div className="sticky top-4 space-y-2">
                     <CassetteTape
                         labelBackground={formik.values.labelBackground}
@@ -346,7 +350,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                                         formik.setFieldValue('cassetteColor', e.target.value)
                                     }
                                     placeholder="#000000"
-                                    className="flex-1 !bg-accent"
+                                    className="flex-1"
                                 />
                             </div>
                         </Fieldset>
@@ -368,7 +372,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                                         formik.setFieldValue('labelColor', e.target.value)
                                     }
                                     placeholder="#000000"
-                                    className="flex-1 !bg-accent"
+                                    className="flex-1"
                                 />
                             </div>
                         </Fieldset>
@@ -449,7 +453,6 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                             name="title"
                             value={formik.values.title}
                             onChange={formik.handleChange}
-                            className="!bg-accent"
                         />
                     </Fieldset>
 
