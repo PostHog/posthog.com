@@ -7,6 +7,7 @@ import Cards from 'components/Cards'
 import { PostHogAIExampleCards } from 'components/Cards/data'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import CustomRoadmapSlide from 'components/AI/CustomRoadmapSlide'
+import CustomPersonasSlide from 'components/AI/CustomPersonasSlide'
 
 const PRODUCT_HANDLE = 'posthog_ai'
 
@@ -191,6 +192,11 @@ export default function PostHogAI(): JSX.Element {
                 component: CustomRoadmapSlide,
             },
             {
+                slug: 'personas',
+                name: 'Personas',
+                component: CustomPersonasSlide,
+            },
+            {
                 slug: 'demo',
                 name: 'Demo',
                 component: CustomDemoSlide,
@@ -201,7 +207,7 @@ export default function PostHogAI(): JSX.Element {
             //     component: CustomManifestoSlide,
             // },
         ],
-        order: ['overview', 'features', 'demo', `posthog-on-posthog`, 'roadmap', 'pricing', 'getting-started'],
+        order: ['overview', 'features', 'demo', `posthog-on-posthog`, 'personas', 'roadmap', 'pricing', 'getting-started'],
         templates: {
             overview: 'max',
             features: 'ai',
