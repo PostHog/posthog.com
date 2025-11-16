@@ -243,7 +243,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     Editor: () => (
       <Image
         src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto/replay_hog_13a2853b54.png"
-        className="@lg/editor-content:float-right @lg/editor-content:w-3/5 @lg/editor-content:ml-4 @lg/editor-content:max-w-[400px]"
+        className="@lg/editor-content:float-right @lg/editor-content:w-1/2 @lg/editor-content:ml-4 @lg/editor-content:max-w-[400px]"
       />
     ),
   },
@@ -265,7 +265,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     Editor: () => (
       <Image
         src="https://res.cloudinary.com/dmukukwp6/image/upload/toggle_3996f389c3.png"
-        className="@lg/editor-content:float-right @lg/editor-content:w-3/5 w-full @lg/editor-content:max-w-md"
+        className="@lg/editor-content:float-right @lg/editor-content:w-1/2 w-full @lg/editor-content:max-w-md"
       />
     ),
   },
