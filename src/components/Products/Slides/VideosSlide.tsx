@@ -3,7 +3,7 @@ import WistiaCustomPlayer from 'components/WistiaCustomPlayer'
 import { useApp } from '../../../context/App'
 import { IconCollapse45, IconCopy, IconArrowRightDown } from '@posthog/icons'
 import { useWistiaThumbnail } from '../../../hooks/useWistiaThumbnail'
-import TeamMember from 'components/TeamMember'
+import CloudinaryImage from 'components/CloudinaryImage'
 import SmallTeam from 'components/SmallTeam'
 import { useToast } from '../../../context/Toast'
 import OSButton from 'components/OSButton'
@@ -166,7 +166,7 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                         How PostHog uses PostHog AI
                     </h2>
 
-                    <div className="grid grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3 gap-6 @2xl:gap-8">
+                    <div className="grid grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3 gap-6 @2xl:gap-8 items-start">
                         {displayVideoKeys.map((key) => {
                             const video = videos[key]
                             return <VideoCard key={key} video={video} onClick={() => handleVideoClick(key)} />
@@ -188,7 +188,7 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                         size="md"
                         onClick={handlePrev}
                         disabled={!hasPrev}
-                        className="text-white hover:text-white/80 disabled:opacity-30"
+                        className="!text-white/80 hover:!text-white/100 disabled:!opacity-30"
                     >
                         ← Previous
                     </OSButton>
@@ -198,8 +198,8 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                             variant="default"
                             size="md"
                             onClick={handleBack}
-                            className="text-white hover:text-white/80"
-                            icon={<IconArrowRightDown className="rotate-180 scale-y-[-1]" />}
+                            className="!text-white/80 hover:!text-white/100"
+                            icon={<IconArrowRightDown className="rotate-180" />}
                             iconPosition="left"
                         >
                             Back
@@ -214,7 +214,7 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                         size="md"
                         onClick={handleNext}
                         disabled={!hasNext}
-                        className="text-white hover:text-white/80 disabled:opacity-30"
+                        className="!text-white/80 hover:!text-white/100 disabled:!opacity-30"
                     >
                         Next →
                     </OSButton>
@@ -280,9 +280,6 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                         {selectedVideo?.author && (
                             <div className="mt-auto">
                                 <h4 className="text-lg @2xl:text-xl font-semibold mb-3">This video features:</h4>
-                                <div className="flex items-center gap-3">
-                                    <TeamMember name={selectedVideo.author} photo />
-                                </div>
                                 <AuthorInfo name={selectedVideo.author} />
                             </div>
                         )}
@@ -317,7 +314,7 @@ function VideoCard({ video, onClick }: { video: Video; onClick: () => void }) {
     return (
         <button
             onClick={onClick}
-            className="group relative bg-gray-dark rounded-lg overflow-hidden hover:ring-2 hover:ring-yellow transition-all"
+            className="group relative rounded overflow-hidden hover:ring-2 hover:ring-yellow h-full"
         >
             <div className="aspect-video bg-black flex items-center justify-center relative">
                 {isLoading ? (
@@ -338,11 +335,11 @@ function VideoCard({ video, onClick }: { video: Video; onClick: () => void }) {
                         </div>
                     </>
                 ) : (
-                    <div className="text-white/40">Video Player</div>
+                    <div className="text-white/40">Video player</div>
                 )}
             </div>
             <div className="p-4">
-                <h3 className="text-lg @2xl:text-xl font-semibold text-left">{video.title}</h3>
+                <h3 className="text-lg @2xl:text-xl font-semibold text-center">{video.title}</h3>
             </div>
         </button>
     )
@@ -360,6 +357,14 @@ function AuthorInfo({ name }: { name: string }) {
                 nodes {
                     firstName
                     lastName
+                    avatar {
+                        formats {
+                            thumbnail {
+                                url
+                            }
+                        }
+                    }
+                    color
                     pineappleOnPizza
                     teams {
                         data {
@@ -381,16 +386,41 @@ function AuthorInfo({ name }: { name: string }) {
     if (!person) return null
 
     const teamSlug = person.teams?.data?.[0]?.attributes?.slug
+    const avatarUrl = person.avatar?.formats?.thumbnail?.url
+    const fullName = `${person.firstName} ${person.lastName}`
+    const color = person.color || 'red'
 
     return (
-        <div className="mt-2 space-y-1">
-            {teamSlug && (
-                <p className="text-sm">
-                    <SmallTeam slug={teamSlug} />
-                </p>
-            )}
+        <div>
+            <div className="flex items-center gap-3">
+                {avatarUrl ? (
+                    <CloudinaryImage
+                        src={avatarUrl as `https://res.cloudinary.com/${string}`}
+                        alt={fullName}
+                        className={`size-16 rounded-full overflow-hidden border-2 border-${color} p-[1.5px]`}
+                        imgClassName={`object-cover rounded-full bg-${color}`}
+                        width={80}
+                    />
+                ) : (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
+                        alt={fullName}
+                        className={`size-16 rounded-full overflow-hidden border-2 border-${color} p-[1.5px]`}
+                        imgClassName={`object-cover rounded-full bg-${color}`}
+                        width={80}
+                    />
+                )}
+                <div className="text-left">
+                    <div className="text-base font-semibold @2xl:leading-tight">{fullName}</div>
+                    {teamSlug && (
+                        <div className="text-[13px] text-secondary @2xl:leading-tight">
+                            <SmallTeam slug={teamSlug} />
+                        </div>
+                    )}
+                </div>
+            </div>
             {person.pineappleOnPizza !== null && person.pineappleOnPizza !== undefined && (
-                <p className="text-sm italic opacity-75">
+                <p className="text-sm italic opacity-75 mt-2">
                     {person.pineappleOnPizza === true && 'Believes pineapple belongs on pizza'}
                     {person.pineappleOnPizza === false && 'Does not believe pineapple belongs on pizza'}
                 </p>

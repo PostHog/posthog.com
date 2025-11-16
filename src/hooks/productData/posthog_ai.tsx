@@ -526,9 +526,6 @@ export const posthog_ai = {
         },
     ],
     videos: {
-        test_video: {
-            wistia: 'scuzsr1rcz',
-        },
         investigating_web_traffic: {
             title: 'Investigating web traffic',
             author: 'Edwin Lim',
@@ -555,6 +552,16 @@ export const posthog_ai = {
                     copyable: true,
                 },
             ]
+        },
+        maximizing_data_insights: {
+            title: 'Maximizing data insights',
+            author: 'Eric Duong',
+            wistia: 'syysfftbzk',
+        },
+        answering_business_questions: {
+            title: 'Answering business questions',
+            author: 'Georgiy Tarasov',
+            wistia: 'hjr4vq1py4',
         },
     },
     answers: [
