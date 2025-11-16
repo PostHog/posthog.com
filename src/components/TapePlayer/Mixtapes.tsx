@@ -18,7 +18,7 @@ export default function Mixtapes(): JSX.Element {
 
     useEffect(() => {
         if (appWindow) {
-            setWindowTitle(appWindow, 'Mixtapes')
+            setWindowTitle(appWindow, 'Mixtapes - ♫ PostHog FM')
         }
     }, [])
 

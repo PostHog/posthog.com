@@ -320,7 +320,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
 
     return (
         <ScrollArea>
-            <SEO title={isEditMode ? 'Edit mixtape' : 'New mixtape'} />
+            <SEO title={`${isEditMode ? 'Edit mixtape' : 'New mixtape'} - ♫ PostHog FM`} />
             <div
                 data-scheme="secondary"
                 className="p-4 grid grid-cols-2 gap-4 items-start bg-[#e4e3d8] dark:bg-primary text-primary [&_legend]:bg-[#e4e3d8] dark:[&_legend]:bg-primary"

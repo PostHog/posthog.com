@@ -1190,7 +1190,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 )
                 if (nextFocusedWindow && !nextFocusedWindow.minimized) {
                     if (nextFocusedWindow.path.startsWith('/')) {
-                        navigate(nextFocusedWindow.path)
+                        navigate(`${nextFocusedWindow.path}${nextFocusedWindow.location?.search || ''}`)
                     } else {
                         bringToFront(nextFocusedWindow)
                     }
@@ -1851,7 +1851,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
                     // Navigate to the next window
                     if (nextWindow.path.startsWith('/')) {
-                        navigate(nextWindow.path)
+                        navigate(`${nextWindow.path}${nextWindow.location?.search || ''}`)
                     } else {
                         bringToFront(nextWindow)
                     }

@@ -7,5 +7,5 @@ export default function FMPage(): JSX.Element {
     const searchParams = new URLSearchParams(appWindow?.location?.search || '')
     const mixtapeId = searchParams.get('mixtapeId')
 
-    return <TapePlayer id={mixtapeId || undefined} />
+    return <TapePlayer id={mixtapeId || undefined} key={`fm?mixtapeId=${mixtapeId}`} />
 }
