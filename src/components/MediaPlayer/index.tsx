@@ -54,6 +54,8 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
                     controls: 0,
                     modestbranding: 1,
                     rel: 0,
+                    iv_load_policy: 3,
+                    fs: 1,
                 },
                 events: {
                     onStateChange: (event: any) => {
@@ -216,7 +218,9 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
                     <section className="bg-accent px-2 pb-2">
                         {/* Main video area */}
                         <div className="flex-1 flex flex-col justify-center items-center bg-primary mb-2">
-                            <div id="youtube-player-demo" className="rounded w-full aspect-video" />
+                            <div className="w-full aspect-video relative rounded overflow-hidden">
+                                <div id="youtube-player-demo" className="absolute inset-0 w-full h-full" />
+                            </div>
                         </div>
 
                         {/* Scrubbing bar */}

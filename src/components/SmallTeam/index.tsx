@@ -66,11 +66,10 @@ export default function SmallTeam({ slug, children, noMiniCrest = false }: Small
                     </span>
                 )}
                 <span
-                    className={`inline-flex items-center ${
-                        !noMiniCrest && miniCrestImage
+                    className={`inline-flex items-center ${!noMiniCrest && miniCrestImage
                             ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
                             : 'border-b border-primary border-dashed'
-                    }`}
+                        }`}
                 >
                     {!noMiniCrest && miniCrestImage && (
                         <GatsbyImage
