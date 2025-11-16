@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import OSTable from 'components/OSTable'
 import { useCustomers } from 'hooks/useCustomers'
 import CTA from 'components/Home/CTA'
-import { IconArrowRight, IconArrowUpRight, IconInfo, IconRefresh } from '@posthog/icons'
+import { IconArrowRight, IconArrowUpRight, IconInfo, IconMouseScrollDown, IconRefresh } from '@posthog/icons'
 import Roadmap from 'components/Home/New/Roadmap'
 import Pricing from 'components/Home/New/Pricing'
 import OSButton from 'components/OSButton'
@@ -141,6 +141,63 @@ const Button = ({ url, children }: { url: string; children: React.ReactNode }) =
 
 const Image = ({ src, className }: { src: string; className?: string }) => {
   return <CloudinaryImage src={src} className={className} />
+}
+
+const SmoothScrollLink = ({ targetId, children }: { targetId: string; children: React.ReactNode }) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const element = document.getElementById(targetId)
+    if (element) {
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+      const offsetPosition = elementPosition - 16 // 1rem offset
+
+      // Custom smooth scroll with slower duration
+      const startPosition = window.pageYOffset
+      const distance = offsetPosition - startPosition
+      const duration = 1000 // 1 second (slower than default)
+      let start: number | null = null
+
+      const animation = (currentTime: number) => {
+        if (start === null) start = currentTime
+        const timeElapsed = currentTime - start
+        const progress = Math.min(timeElapsed / duration, 1)
+
+        // Easing function for smooth deceleration
+        const ease = progress < 0.5
+          ? 2 * progress * progress
+          : -1 + (4 - 2 * progress) * progress
+
+        window.scrollTo(0, startPosition + distance * ease)
+
+        if (timeElapsed < duration) {
+          requestAnimationFrame(animation)
+        } else {
+          window.history.pushState(null, '', `#${targetId}`)
+        }
+      }
+
+      requestAnimationFrame(animation)
+    }
+  }
+
+  return (
+    <a
+      href={`#${targetId}`}
+      onClick={handleClick}
+      className="underline cursor-pointer hover:opacity-70 transition-opacity"
+    >
+      {children}
+    </a>
+  )
+}
+
+const SkipToWhatYouCanDo = () => {
+  return (
+    <SmoothScrollLink targetId="what-can-you-do-with-posthog">
+      <IconMouseScrollDown className="size-5 inline-block relative -top-px" />
+      What you can do with PostHog
+    </SmoothScrollLink>
+  )
 }
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
@@ -346,6 +403,18 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     kind: 'text',
     props: [],
     Editor: () => <ProductButton handle="posthog_ai" />,
+  },
+  {
+    name: 'IconMouseScrollDown',
+    kind: 'text',
+    props: [],
+    Editor: () => <IconMouseScrollDown className="size-5 inline-block relative -top-px" />,
+  },
+  {
+    name: 'SkipToWhatYouCanDo',
+    kind: 'text',
+    props: [],
+    Editor: () => <SkipToWhatYouCanDo />,
   },
 ]
 
