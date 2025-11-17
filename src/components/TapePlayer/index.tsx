@@ -14,6 +14,7 @@ import Mixtapes from './Mixtapes'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { navigate } from 'gatsby'
 import { motion } from 'framer-motion'
+import DanceMode from 'components/DanceMode'
 
 const getRandomWaveformBars = () => Array.from({ length: 60 }, () => Math.random() * 80 + 20)
 
@@ -23,7 +24,7 @@ interface TapePlayerProps {
 
 export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
     const { getJwt, user, isModerator } = useUser()
-    const { addWindow } = useApp()
+    const { addWindow, windows, closeWindow } = useApp()
     const { addToast } = useToast()
     const [isPoweredOn, setIsPoweredOn] = useState(true)
     const [isPlaying, setIsPlaying] = useState(false)
@@ -117,6 +118,13 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
             window.onYouTubeIframeAPIReady = initializePlayer
         }
     }, [mixtapeSongs])
+
+    useEffect(() => {
+        const danceModeWindow = windows.find((window) => window.key === 'fm/dance-mode')
+        if (!danceModeWindow) {
+            setDanceMode(false)
+        }
+    }, [windows])
 
     const playRewindSound = useCallback(() => {
         if (!rewindAudioRef.current) {
@@ -432,6 +440,16 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
 
     const handleDanceModeToggle = () => {
         playSwitchSound()
+        const danceModeWindow = windows.find((window) => window.key === 'fm/dance-mode')
+        if (danceMode) {
+            if (danceModeWindow) {
+                closeWindow(danceModeWindow)
+            }
+        } else {
+            if (!danceModeWindow) {
+                addWindow(<DanceMode key={`fm/dance-mode`} location={{ pathname: `fm/dance-mode` }} newWindow />)
+            }
+        }
         setDanceMode((prev) => !prev)
     }
 

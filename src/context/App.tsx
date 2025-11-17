@@ -1010,6 +1010,19 @@ const appSettings: AppSettings = {
             fixed: true,
         },
     },
+    'fm/dance-mode': {
+        size: {
+            min: {
+                width: 500,
+                height: 500,
+            },
+            max: {
+                width: 500,
+                height: 500,
+            },
+            fixed: true,
+        },
+    },
 } as const
 
 export interface SiteSettings {
