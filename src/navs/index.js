@@ -627,6 +627,10 @@ export const handbookSidebar = [
                 url: '/handbook/content',
             },
             {
+                name: 'Brand guidelines and messaging',
+                url: '/handbook/content/brand-message',
+            },
+            {
                 name: 'Docs',
                 url: '/handbook/content/docs',
                 children: [
@@ -1545,7 +1549,7 @@ export const handbookSidebar = [
                 children: [
                     {
                         name: 'Refunds',
-                        url: '/handbook/growth/revops/refunds',
+                        url: '/handbook/growth/sales/refunds',
                     },
                     {
                         name: 'Lead assignment during time off',
