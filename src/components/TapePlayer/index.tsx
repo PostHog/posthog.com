@@ -51,6 +51,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
     const [mixtapeId, setMixtapeId] = useState<string | null>(null)
     const [creators, setCreators] = useState<Array<{ id: number }>>([])
     const [showTrackList, setShowTrackList] = useState(false)
+    const [fetchingMixtape, setFetchingMixtape] = useState(true)
 
     const extractVideoId = (url: string): string => {
         // Handle various YouTube URL formats
@@ -68,6 +69,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
     }
 
     const fetchMixtapeSongs = async (mixtapeId: string) => {
+        setFetchingMixtape(true)
         setMixtapeId(mixtapeId)
         if (!mixtapeId) return
         const jwt = await getJwt()
@@ -93,10 +95,14 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
         setMixtapeSongs(tracks)
         setMetadata(data.attributes.metadata)
         setCreators(data.attributes.creator?.data)
+        setFetchingMixtape(false)
     }
 
     useEffect(() => {
-        if (!id) return
+        if (!id) {
+            setFetchingMixtape(false)
+            return
+        }
         fetchMixtapeSongs(id)
     }, [id])
 
@@ -531,7 +537,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                         playInsertSound()
                                     }}
                                     onAnimationComplete={() => {
-                                        if (mixtapeSongs.length <= 0) {
+                                        if (!fetchingMixtape && mixtapeSongs.length <= 0) {
                                             setTimeout(() => {
                                                 navigate(`/fm`)
                                             }, 300)
