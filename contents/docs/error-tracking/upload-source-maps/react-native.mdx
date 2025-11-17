@@ -26,7 +26,11 @@ import StepVerifySourceMapUpload from './_snippets/step-verify-source-map-upload
 
 <Step title="Inject" badge="required">
 
-  > Automatic source map injection works only in React Native apps using Expo 50 or later, as it relies on Expo’s built-in [debug ID](https://docs.expo.dev/versions/latest/config/metro/#source-map-debug-id) injection.
+<CalloutBox icon="IconInfo" title="Expo 50 or later" type="fyi">
+
+Automatic source map injection works only in React Native apps using Expo 50 or later, as it relies on Expo’s built-in [debug ID](https://docs.expo.dev/versions/latest/config/metro/#source-map-debug-id) injection.
+
+</CalloutBox>
 
   1. Create or update the [metro.config.js](https://docs.expo.dev/versions/latest/config/metro/) file in your app’s root directory so that it looks like this:
 
