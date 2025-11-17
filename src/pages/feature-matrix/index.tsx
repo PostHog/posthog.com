@@ -1,4 +1,5 @@
 import React from 'react'
+import OSButton from 'components/OSButton'
 import SEO from 'components/seo'
 import ProductComparisonTable from 'components/ProductComparisonTable'
 
@@ -10,6 +11,7 @@ import { featureFlags } from 'hooks/productData/feature_flags'
 import { experiments } from 'hooks/productData/experiments'
 import { surveys } from 'hooks/productData/surveys'
 import { errorTracking } from 'hooks/productData/error_tracking'
+import { workflows } from 'hooks/productData/workflows'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import { internalToolsNav } from '../../navs/internalTools'
@@ -59,6 +61,11 @@ const tableOfContents = [
     {
         value: 'Heatmaps',
         url: 'heatmaps',
+        depth: 0,
+    },
+    {
+        value: 'Workflows',
+        url: 'workflows',
         depth: 0,
     },
     {
@@ -136,6 +143,14 @@ export default function FeatureMatrix(): JSX.Element {
             >
                 <div className="@container text-primary">
                     <div className="space-y-8">
+
+                        <section>
+                            <div className="bg-accent p-4 rounded border border-primary mt-4">
+                                <p className="mt-0">This is an internal playground for the <code>&lt;ProductComparisonTable /&gt;</code> component used on competitor comparison pages.</p>
+                                <p className="mb-0">
+                                    <OSButton asLink to="/handbook/engineering/posthog-com/product-comparisons" variant="secondary" size="md" state={{ newWindow: true }}>Visit the documentation</OSButton></p>
+                            </div>
+                        </section>
                         {/* Products Overview */}
                         <section id="all-products">
                             <h2 className="text-2xl font-semibold mb-4 border-b border-border pb-2">All products</h2>

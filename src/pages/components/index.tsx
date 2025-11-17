@@ -115,6 +115,12 @@ export default function Components(): JSX.Element {
             >
                 <div className="@container text-primary">
                     <div className="space-y-12">
+                        <section>
+                            <div className="bg-accent p-4 rounded border border-primary mt-4">
+                                <p className="mt-0">This is an internal playground for some React components that are used throughout the site.</p>
+                                <p className="mb-0">If you're looking for components to be used in articles (like blog posts and docs), check out the <Link to="/handbook/engineering/posthog-com/markdown" state={{ newWindow: true }}>MDX components handbook page</Link>.</p>
+                            </div>
+                        </section>
                         <section id="og-templates">
                             <h2>Open graph image templates</h2>
 

@@ -32,7 +32,7 @@ Your objective should be to get the conversation into Zendesk ASAP, because it's
 
 All support at PostHog is done by actual, full-time engineers. We have two types of engineers: 
 
-- Support engineers, who are focused solely on support across multiple products and sit in [the Support team](/teams/support)
+- Support engineers, who are focused solely on support across multiple products and sit in the <SmallTeam slug="support" />
 - Product engineers, who are focused on products and take on support responsibilities in a [support hero rotation](/handbook/engineering/support-hero)
 
 #### What do Support Engineers do?
@@ -113,7 +113,7 @@ We very rarely receive messages from people wishing to make a legal claim agains
 
 ### Dealing with billing issues
 
-Issues related to billing are handled exclusively by our billing engineers. Billing support is currently lead by <TeamMember name="Eleftheria Trivyzaki" photo />. Most tickets get routed directly to the billing team, however some issues require technical investigation before the billing issue can be resolved. In such cases, add <TeamMember name="Eleftheria Trivyzaki" /> as a follower to the support ticket from the outset, and leave an internal note briefly explaining what will eventually be required. Complete whatever technical investigation is required and then let the customer know you are handing them over to the billing team.
+Issues related to billing are handled exclusively by our billing engineers. Billing support is currently lead by <TeamMember name="Eleftheria Trivyzaki" photo />. Most tickets get routed directly to the <SmallTeam slug="billing" />, however some issues require technical investigation before the billing issue can be resolved. In such cases, add <TeamMember name="Eleftheria Trivyzaki" /> as a follower to the support ticket from the outset, and leave an internal note briefly explaining what will eventually be required. Complete whatever technical investigation is required and then let the customer know you are handing them over to the <SmallTeam slug="billing" />.
 
 ### Users asking for demos, consultations or partnerships
 
