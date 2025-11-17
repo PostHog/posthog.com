@@ -63,7 +63,7 @@ A Sales and CS SuperDay usually looks like this (_there is a degree of flexibili
 
 *   Kick-off session
 *   Meet with [Tim](/tim), who will be trying to answer "Would I buy from this person?"
-*   Meet with [Charles](https://posthog.com/community/profiles/28625), who will be doing a culture and vibe check.
+*   Meet with [Charles](/community/profiles/28625), who will be doing a culture and vibe check.
 *   Time to focus on the task, we can provide support via your personal Slack channel (use the channel, don't slide into people's DMs)
 *   Demo role-play with the team lead and [Simon](/community/profiles/28895)
 *   Meet a few members of our team for a quick chat
