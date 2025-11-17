@@ -47,19 +47,16 @@ Please be aware that PostHog cannot always provide context around why people are
 
 ## References and employment verification
 
-PostHog’s policy is to not provide personal or professional references for former employees. We also do not provide commentary, evaluations, or other information to prospective employers regarding an employee’s performance, conduct, or reason for departure.
-
-**What PostHog will provide:**
-If contacted for employment verification, we will only confirm dates of employment, but no other information may be shared.
+At PostHog, we keep things simple: we don’t give personal or professional references for former team members. When someone asks about a past or current employee, the only information we share is their dates of employment.
 
 **Expectations for current employees:**
-If any external party contacts you for information about a current or former PostHog employee:
+If someone contacts you directly about a current or former employee:
 
--   Do not respond yourself, regardless of your personal relationship. Forward the inquiry to the People & Ops team.
--   Do not comment on the employee’s performance, behavior, or reason for departure.
--   Do not imply or state that you are speaking on behalf of PostHog.
+-   Don’t answer the request yourself — just forward it to the People & Ops team.
+-   Don’t share opinions or details about someone’s performance or why they left.
+-   Don’t speak (or appear to speak) on behalf of PostHog.
 
-This policy ensures consistent, accurate handling of employment-related information and protects the privacy of all current and former PostHog employees.
+This helps us keep things consistent and protects everyone’s privacy.
 
 ## The offboarding process
 
