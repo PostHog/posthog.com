@@ -23,7 +23,7 @@ You will be rolling off our startup plan on Date. If your current usage continue
 |Example recommendation| PostHog looks well instrumented with custom events. I did notice you may be [calling identify / set more than once per session](https://posthog.com/docs/product-analytics/cutting-costs#only-call-identify-once-per-session), which can lead to an increase in cost. Reducing that would cut your bill down a bit. 
 
 
-We are also offering two months free to Start Up Plan roll offs that pre- purchase credits. You could save almost $XXK ($XXk from annual discount and $XXK from the two free months) with an |upfront credit purchase|. 
+We are also offering two months free to startup plan roll offs that pre-purchase credits. You could save almost $XXK ($XXk from annual discount and $XXK from the two free months) with an |upfront credit purchase|. 
 
 
 I'll send over a couple more reminders as we get closer to your roll off date.
