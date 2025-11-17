@@ -61,7 +61,7 @@ Clicking on a person in the [People tab](https://us.posthog.com/persons) opens t
 - Click on the person's ID
 - Click **Delete person** to remove them and all their associated data. You will be prompted to confirm this action.
 
-<CalloutBox icon="IconWarning" title="Reusing a deleted distinct_id" type="caution">
+<CalloutBox icon="IconWarning" title="Avoid reusing deleted distinct IDs" type="caution">
 
 User deletion requests are not immediate. Instead, they are processed asynchronously. We recommend that you _avoid_ reusing a deleted `distinct_id` value for a new user, as it may lead to unexpected results while the deletion is being processed. Once the deletion process is fully processed, PostHog does not retain any data associated with the deleted `distinct_id`. 
 
