@@ -20,7 +20,7 @@ When a customer is coming to the end of their startup credits, this is a prime t
 You will be rolling off our startup plan on Date. If your current usage continues, you can expect your first invoice to be in the $XXXX a month range.
 
 
-|Example recommendation| PostHog looks well instrumented with custom events. I did notice you may be [calling identify / set more than once per session](https://posthog.com/docs/product-analytics/cutting-costs#only-call-identify-once-per-session), which can lead to an increase in cost. Reducing that would cut your bill down a bit. 
+|Example recommendation| PostHog looks well instrumented with custom events. I did notice you may be [calling identify / set more than once per session](/docs/product-analytics/cutting-costs#only-call-identify-once-per-session), which can lead to an increase in cost. Reducing that would cut your bill down a bit. 
 
 
 We are also offering two months free to startup plan roll offs that pre-purchase credits. You could save almost $XXK ($XXk from annual discount and $XXK from the two free months) with an |upfront credit purchase|. 
