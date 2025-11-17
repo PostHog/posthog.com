@@ -6,7 +6,7 @@ import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { Caption } from 'components/Caption'
-import Beta from '../../../../contents/docs/logs/_snippets/beta.mdx'
+import Beta from '../../../../contents/docs/logs/_snippets/logs-beta.mdx'
 
 export const Content = () => {
     return (
