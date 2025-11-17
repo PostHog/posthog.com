@@ -145,15 +145,15 @@ Once you've downloaded your schema, import and use the generated PostHog client:
 ```typescript
 import posthog from './posthog-typed'
 
-// Typed events with autocomplete and validation
-posthog.captureTyped('button_clicked', {
+// Use typed events with autocomplete and type safety on known events:
+posthog.capture('button_clicked', {
   button_name: 'signup',      // ✓ Type-checked
   click_count: 5,             // ✓ Type-checked
   // missing_required: ...    // ✗ TypeScript error if required
 })
 
-// Regular capture() still works for flexibility
-posthog.capture('dynamic_event', { any: 'data' })
+//Use captureRaw() when you need to bypass type checking:
+posthog.captureRaw('dynamic_event', { whatever: 'data' })
 ```
 
 The generated client provides:
