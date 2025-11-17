@@ -61,6 +61,7 @@ function ConsoleLogs() {
                     <CodeBlock
                         code={`posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
   enable_recording_console_log: true,
 });`}
                         language="js"
@@ -68,7 +69,11 @@ function ConsoleLogs() {
                 </div>
                 <div className="flex-1">
                     <h4 className="text-lg">Console logs in a session replay</h4>
-                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/CodeBlocks/SessionReplay/console-logs.png" alt="Console logs in PostHog" placeholder="blurred" />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/CodeBlocks/SessionReplay/console-logs.png"
+                        alt="Console logs in PostHog"
+                        placeholder="blurred"
+                    />
                 </div>
             </div>
         </div>
@@ -88,6 +93,7 @@ function EnableCohortRecordings() {
                 <CodeBlock
                     code={`posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
   disable_session_recording: true,
 });
 window.posthog.onFeatureFlags(function () {

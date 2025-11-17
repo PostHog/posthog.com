@@ -58,7 +58,7 @@ export const ProductFeature = ({
             <div className="flex flex-col">
                 {/* only render if featureName exists */}
                 {featureName && (
-                    <div className="feature-name text-black text-opacity-40 flex items-start gap-2 border-gray-accent-light border-dashed border-l-0 border-r-0 border-t-0 border-b pb-2 mb-4 flex items-center">
+                    <div className="feature-name text-black text-opacity-40 flex items-start gap-2 border-primary border-dashed border-l-0 border-r-0 border-t-0 border-b pb-2 mb-4 flex items-center">
                         {featureIcon && (
                             // Uncomment this piece of code to use svg sprite file
                             <svg className="fill-current opacity-50">

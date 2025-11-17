@@ -121,7 +121,7 @@ Once we launched, we made it _very_ easy to give us feedback. Slack turned out t
 
 * Many users had it open all day at work - we saw 20x the response rate of email
 
-* There's a low bar to posting because people use it informally – people don't spend a lot of time to polish their communication on it. We wanted more communication, rather than less, especially in the early days
+* There's a low bar to posting because people use it informally – people don't spend a lot of time to [polish their communication](/blog/ceo-diary-6) on it. We wanted more communication, rather than less, especially in the early days
 
 There are some issues with using Slack like this:
 

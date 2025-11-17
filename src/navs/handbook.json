@@ -5,7 +5,7 @@
             { "order": "1", "name": "Why does PostHog exist?", "to": "/handbook/why-does-posthog-exist" },
             { "order": "2", "name": "How we got here", "to": "/handbook/story" },
             { "order": "3", "name": "How we get users", "to": "/handbook/how-we-get-users" },
-            { "order": "4", "name": "Who we are building for", "to": "/handbook/who-we-are-building-for" },
+            { "order": "4", "name": "Who we are building for", "to": "/handbook/who-we-build-for" },
             { "order": "5", "name": "How we make users happy", "to": "/handbook/making-users-happy" },
             { "order": "6", "name": "How we make money", "to": "/handbook/how-we-make-money" },
             { "order": "7", "name": "Enduringly low prices", "to": "/handbook/low-prices" },
@@ -19,9 +19,8 @@
                 "to": "/handbook/world-class-engineering"
             },
             { "order": "13", "name": "Not running out of money", "to": "/handbook/finance" },
-            { "order": "14", "name": "Where we are now", "to": "/handbook/current-status" },
-            { "order": "15", "name": "Where are we going?", "to": "/handbook/future" },
-            { "order": "16", "name": "How you can help", "to": "/handbook/help" }
+            { "order": "14", "name": "Where are we going?", "to": "/handbook/future" },
+            { "order": "15", "name": "How you can help", "to": "/handbook/help" }
         ]
     }
 ]

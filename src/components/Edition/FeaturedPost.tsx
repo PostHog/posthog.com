@@ -25,14 +25,14 @@ export default function FeaturedPost({ title, date, authors, featuredImage, slug
     const imageURL = featuredImage?.image?.data?.attributes?.url || featuredImage?.url
 
     return (
-        <section className="grid md:grid-cols-2 gap-6 md:gap-8 items-center rounded-md border border-border dark:border-dark p-5 md:mx-4 bg-accent dark:bg-accent-dark">
+        <section className="grid md:grid-cols-2 gap-6 md:gap-8 items-center rounded-md border border-input p-5 md:mx-4 bg-accent">
             {isLoading ? (
                 <Skeleton />
             ) : (
                 <>
                     <div className="w-full aspect-[600/315] rounded-md overflow-hidden">
                         <Link to={slug}>
-                            <img className="w-full h-full object-cover" src={imageURL || '/banner.png'} />
+                            <img className="w-full h-full object-cover" src={imageURL || '/images/og/default.png'} />
                         </Link>
                     </div>
                     <div>

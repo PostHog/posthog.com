@@ -1,0 +1,32 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Component structure and naming
+
+**Radix UI**
+- Custom components go in `/src/components/RadixUI`
+
+
+### Radix UI
+
+We use Radix UI components. To get them to match our design, we typically create our own version of these components and place them in `/src/components/RadixUI`.
+
+Use `Radix` prefix for imports, then wrap as `<Tabs />`, etc. Example:
+
+```
+import { Tabs as RadixTabs } from 'radix-ui'
+```
+
+This allows us to have simple naming conventions for our components like `<Tabs />`.
+
+### Other components
+
+We also have custom built components (for things that are outside the scope of Radix primatives). They start with `OS` in the name, like:
+
+1. ``/src/components/OSButton`
+1. `/src/components/OSFieldset`
+1. `/src/components/OSIcons`
+1. `/src/components/OSTable`
+1. ``/src/components/OSTabs`

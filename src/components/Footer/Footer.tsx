@@ -1,10 +1,10 @@
 import cntl from 'cntl'
-import Accordion from 'components/Accordion'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
 import React from 'react'
 import { IProps, LinkListItem } from './LinkList'
-import { GitHub, LinkedIn, YouTube, SlackMonochrome, Twitter } from 'components/Icons/Icons'
+import { GitHub, LinkedIn, YouTube, Twitter } from 'components/Icons/Icons'
+import { useLocation } from '@reach/router'
 
 const linklist: IProps[] = [
     {
@@ -14,6 +14,10 @@ const linklist: IProps[] = [
             {
                 title: 'All products',
                 url: '/products',
+            },
+            {
+                title: 'PostHog AI',
+                url: '/ai',
             },
             {
                 title: 'Product analytics',
@@ -244,8 +248,8 @@ const linklist: IProps[] = [
                 url: '/handbook/engineering/developing-locally',
             },
             {
-                title: 'Design',
-                url: '/handbook/design/philosophy',
+                title: 'Brand',
+                url: '/handbook/brand/philosophy',
             },
             {
                 title: 'Marketing',
@@ -354,6 +358,11 @@ const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }) => {
 }
 
 export function Footer(): JSX.Element {
+    const { pathname, state } = useLocation()
+    if (pathname === '/newsletter-fbc' || (state as { isComingFromAd?: boolean })?.isComingFromAd) {
+        return <></>
+    }
+
     const social: Social[] = [
         {
             Icon: <Twitter className="w-5 h-5 box-border fill-current" />,
@@ -386,14 +395,14 @@ export function Footer(): JSX.Element {
     ]
 
     return (
-        <footer className="bg-accent dark:bg-accent-dark border-y border-light dark:border-dark print:hidden">
+        <footer className="bg-accent border-y border-primary print:hidden">
             <div className="relative -top-6">
                 <Link
                     to="/"
-                    className="left-[calc(50%-40px)] w-20 h-12 inline-flex justify-center items-center absolute z-10 rounded bg-light dark:bg-dark px-2 pt-1.5 pb-1 mb-1 border border-b-3 border-light dark:border-dark hover:bg-accent dark:hover:bg-accent-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                    className="left-[calc(50%-40px)] w-20 h-12 inline-flex justify-center items-center absolute z-10 rounded bg-light dark:bg-dark px-2 pt-1.5 pb-1 mb-1 border border-b-3 border-primary hover:bg-accent hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                 >
                     <span className="inline-block">
-                        <Logo noText={true} />
+                        <Logo noText />
                     </span>
                 </Link>
             </div>
@@ -411,7 +420,7 @@ export function Footer(): JSX.Element {
                             <li key={url}>
                                 <Link
                                     to={url}
-                                    className="flex items-center relative px-2.5 pt-2 pb-1.5 mb-1 rounded border border-b-3 border-transparent opacity-70 hover:opacity-100 hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                                    className="flex items-center relative px-2.5 pt-2 pb-1.5 mb-1 rounded border border-b-3 border-transparent opacity-70 hover:opacity-100 hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                                 >
                                     {Icon}
                                 </Link>
@@ -429,17 +438,14 @@ export function Footer(): JSX.Element {
                         <li>
                             <Link
                                 to="https://status.posthog.com"
-                                className="font-bold text-sm text-primary/70 hover:text-red dark:text-primary-dark/75 dark:hover:text-yellow"
+                                className="font-bold text-sm text-secondary hover:text-primary"
                             >
                                 System status
                             </Link>
                         </li>
                         <li className="-mt-1 mdlg:mt-0">
                             <span className="hidden mdlg:inline-block pr-1 text-xl relative top-0.5">👉</span>
-                            <Link
-                                to="/dpa"
-                                className="font-bold text-sm text-primary/70 hover:text-red dark:text-primary-dark/75 dark:hover:text-yellow"
-                            >
+                            <Link to="/dpa" className="font-bold text-sm text-secondary hover:text-primary">
                                 Generate a DPA
                             </Link>
                             <span className="inline-block px-1 text-xl relative top-0.5">👈</span>
@@ -449,8 +455,8 @@ export function Footer(): JSX.Element {
                         </li>
                         <li>
                             <Link
-                                to="/handbook/company/security#soc-2"
-                                className="font-bold text-sm text-primary/70 hover:text-red dark:text-primary-dark/75 dark:hover:text-yellow"
+                                to="/docs/privacy/soc2"
+                                className="font-bold text-sm text-secondary hover:text-primary"
                             >
                                 SOC 2
                             </Link>
@@ -458,24 +464,18 @@ export function Footer(): JSX.Element {
                         <li>
                             <Link
                                 to="/docs/privacy/hipaa-compliance"
-                                className="font-bold text-sm text-primary/70 hover:text-red dark:text-primary-dark/75 dark:hover:text-yellow"
+                                className="font-bold text-sm text-secondary hover:text-primary"
                             >
                                 HIPAA
                             </Link>
                         </li>
                         <li>
-                            <Link
-                                to="/privacy"
-                                className="font-bold text-sm text-primary/70 hover:text-red dark:text-primary-dark/75 dark:hover:text-yellow"
-                            >
+                            <Link to="/privacy" className="font-bold text-sm text-secondary hover:text-primary">
                                 Privacy policy
                             </Link>
                         </li>
                         <li>
-                            <Link
-                                to="/terms"
-                                className="font-bold text-sm text-primary/70 hover:text-red dark:text-primary-dark/75 dark:hover:text-yellow"
-                            >
+                            <Link to="/terms" className="font-bold text-sm text-secondary hover:text-primary">
                                 Terms
                             </Link>
                         </li>

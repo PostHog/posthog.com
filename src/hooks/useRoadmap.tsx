@@ -49,6 +49,7 @@ const query = graphql`
         allSqueakTeam {
             nodes {
                 name
+                tagline
                 roadmaps {
                     squeakId
                     betaAvailable

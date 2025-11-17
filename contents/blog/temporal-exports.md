@@ -117,7 +117,7 @@ The second part of the move to Temporal was making processes transparent both in
 
 As mentioned in the last section, Temporal creates transparency into the completions, errors, and latency of workflows. We also track bytes and records exported. These enable us to improve the export system further and faster than the old system.
 
-For users, the old system hides runs. Exports now [have their own page](https://app.posthog.com/project/apps?tab=batch_exports). On this page, users can:
+For users, the old system hides runs. Exports now [have their own page](https://app.posthog.com/pipeline/destinations). On this page, users can:
 
 - Configure, start, [pause, unpause](https://github.com/PostHog/posthog/pull/16050), reset, [edit](https://github.com/PostHog/posthog/pull/16869), and [delete](https://github.com/PostHog/posthog/pull/16066) exports.
 

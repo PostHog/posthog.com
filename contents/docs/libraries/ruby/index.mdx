@@ -12,8 +12,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: false
-  llmObservability: false
-  errorTracking: false
+  llmAnalytics: false
 ---
 
 The `posthog-ruby` library provides tracking functionality on the server-side for applications built in Ruby.
@@ -25,10 +24,6 @@ It uses an internal queue to make calls fast and non-blocking. It also batches r
 import RubyInstall from '../../integrate/_snippets/install-ruby.mdx'
 
 <RubyInstall />
-
-### Debug logging
-
-The log level by default is set to WARN. You can change it to DEBUG if you want to debug the client by running `posthog.logger.level = Logger::DEBUG`, where `posthog` is your initialized `PostHog::Client` instance.
 
 ## Capturing events
 
@@ -67,7 +62,7 @@ posthog.capture(
 
 ## Alias
 
-Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend. 
+Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend.
 
 In this case, you can use `alias` to assign another distinct ID to the same user.
 
@@ -126,6 +121,7 @@ on_worker_boot do
     on_error: Proc.new { |status, msg| print msg }
   )
 end
+```
 
 ## Experiments (A/B tests)
 
@@ -135,7 +131,7 @@ Since [experiments](/docs/experiments/manual) use feature flags, the code for ru
 variant = posthog.get_feature_flag('experiment-feature-flag-key', 'user_distinct_id')
 
 if variant == 'variant-name'
-    # Do something 
+    # Do something
 end
 ```
 
@@ -180,6 +176,10 @@ posthog.group_identify(
 The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
 If the optional `distinct_id` is not provided in the group identify call, it defaults to `${groupType}_${groupKey}` (e.g., `$company_company_id_in_your_db` in the example above). This default behavior will result in each group appearing as a separate person in PostHog. To avoid this, it's often more practical to use a consistent `distinct_id`, such as `group_identifier`.
+
+## Debug mode
+
+The Ruby SDK debug logs by default. The log level by default is set to `WARN`. You can change it to `DEBUG` if you want to debug the client by running `posthog.logger.level = Logger::DEBUG`, where `posthog` is your initialized `PostHog::Client` instance.
 
 ## Thank you
 

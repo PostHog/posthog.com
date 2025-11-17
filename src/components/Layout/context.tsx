@@ -54,7 +54,6 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         return hedgehogModeLocalStorage
     }, [])
 
-
     const [hedgehogModeEnabled, _setHedgehogModeEnabled] = useState<boolean>(hedgehogModeLocalStorage === 'true')
     const [enterpriseMode, setEnterpriseMode] = useState(false)
     const [theoMode, setTheoMode] = useState(false)
@@ -78,7 +77,6 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     useEffect(() => {
         localStorage.setItem('full-width-content', fullWidthContent + '')
     }, [fullWidthContent])
-
 
     const setHedgehogModeEnabled = (enabled: boolean) => {
         _setHedgehogModeEnabled(enabled)

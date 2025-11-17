@@ -1,0 +1,87 @@
+---
+title: Feature flag dependencies
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+Feature flag dependencies allow you to create a feature flag (called the dependent flag) that's dependent on the state of another flag (called the base flag). This enables sophisticated feature rollout strategies where one flag's activation depends on another flag's value.
+## When to use flag dependencies
+
+Flag dependencies are useful for:
+
+- **Gradual feature rollouts**: Enable a complex feature only after its foundational components are active
+- **Conditional experiments**: Run experiments only on users who have specific features enabled
+- **Safety mechanisms**: Ensure critical flags are enabled before activating dependent features
+- **User segmentation**: Target users based on their participation in other flag rollouts
+
+## Setting up flag dependencies
+
+You can create flag dependencies through release conditions when creating or editing a feature flag.
+
+### Step 1: Create your base flag
+
+First, create the flag that other flags will depend on:
+
+1. Navigate to [feature flags](https://app.posthog.com/feature_flags) in your PostHog app
+2. Click **Create feature flag**
+3. Set up your base flag with appropriate release conditions
+4. Save the flag
+
+### Step 2: Create a dependent flag
+
+1. Create a new feature flag or edit an existing one
+2. In the **Release conditions** section, click **Add condition**
+3. Select **Feature flags** from the property type dropdown
+4. Choose the flag you want to depend on
+5. Set the condition (e.g., flag equals `true` or specific variant)
+6. Configure additional conditions and rollout percentage as needed
+
+### Step 3: Evaluate the dependent flag
+
+When you evaluate a dependent flag, PostHog will automatically evaluate its chain of dependencies. For example, when evaluating the `dependent_flag` flag, PostHog will evaluate the `base_flag` flag first and use its value to determine if the `dependent_flag` condition is met.
+
+### Example: Beta program dependency
+
+Here's a common pattern where you want to enable a new feature only for users in your beta program:
+
+**Base flag**: `beta_program`
+
+- 10% rollout to all users
+- Returns `true` for beta users, `false` for others
+
+**Dependent flag**: `new_dashboard`
+
+- Condition: `beta_program` equals `true`
+- 100% rollout to users who meet the condition
+
+When the dependent flag is evaluated using any of the [evaluation methods](/docs/feature-flags/adding-feature-flag-code), PostHog automatically evaluates the base flag first. This ensures the new dashboard is only shown to beta program participants.
+
+## Supported dependency types
+
+Feature flag dependencies support several condition types:
+
+### Boolean flags
+
+- `flag_name` equals `true`
+- `flag_name` equals `false`
+
+### Multi-variant flags
+
+- `flag_name` equals `specific_variant`
+- `flag_name` equals `true` (matches any variant)
+- `flag_name` equals `false` (matches only if flag evaluates to `false`)
+
+## Troubleshooting
+
+### Dependent flag not activating
+
+If your dependent flag isn't working as expected:
+
+1. **Check the base flag**: Ensure the flag your dependency relies on is active and returning the expected value
+2. **Verify conditions**: Confirm the dependency condition matches the base flag's return value exactly
+3. **Review rollout percentage**: Even if conditions are met, the rollout percentage still applies
+4. **Check user properties**: Ensure the user meets all conditions, not just the flag dependency

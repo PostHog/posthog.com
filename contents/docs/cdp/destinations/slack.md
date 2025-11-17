@@ -4,7 +4,6 @@ templateId:
     - template-slack
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
@@ -22,9 +21,9 @@ You'll also need access to the relevant Slack account.
 
 1. In PostHog, click the [Data pipeline tab](https://us.posthog.com/pipeline/overview) in the left sidebar.
 
-2. Click the **Destinations** tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=slack) tab.
 
-3. Search for **Slack** and select the destination.
+3. Search for **Slack** and click **+ Create**.
 <img alt="Creating a Slack destination" src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_create_8b55d6d50f.png"/>
 
 4. Choose an existing Slack connection or click **Connect to Slack**. You will be redirected to Slack to install the PostHog app.
@@ -49,6 +48,10 @@ You can see a full example of this in our tutorial on [how to send survey respon
 <TemplateParameters />
 
 ## FAQ
+
+### Why can't I see all my Slack channels in the dropdown?
+
+Slack integrations will only show channels that the authorizing user has access to.
 
 ### Is the source code for this destination available?
 

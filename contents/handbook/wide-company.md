@@ -22,8 +22,8 @@ As with any startup, the principles that govern these small teams are:
 
 - Can decide what to build within their own products
 - Can ship without outside interference as far as possible
-  - No product by default
-  - [No design by default](/handbook/design/process)
+  - No product management by default
+  - [No product design by default](/handbook/brand/process)
 - Should work directly with its own users (until it has hit product-market fit within PostHog's platform)
 - Should be small
 
@@ -51,8 +51,7 @@ This means titles, as adopted by the wider world, imply that _seniority_ is more
 
 When you are prompted to put your title somewhere like LinkedIn, please just say as clearly as you can what you are focused on. Please do not focus on how senior you are. Feel free to be weird with it.
 
-Before "Senior Engineer at PostHog" (this is not a title that exists at PostHog anyway)
-After "Product Analytics Engineer at PostHog"
+In other words, instead of your title being "Senior Engineer at PostHog" (which is not a title that exists at PostHog anyway), it's actually "Product Analytics Engineer at PostHog."
 
 ## Goal setting
 

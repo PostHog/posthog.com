@@ -227,7 +227,7 @@ We now need to register our custom application class. Go to `app/manifests/Andro
 </manifest>
 ```
 
-To check your setup, build and run your app a few times. Enter in any values in the text fields and click the **Log in** button. You should start session replays in the [session replay tab](https://us.posthog.com/replay/recent) in PostHog 🎉.
+To check your setup, build and run your app a few times. Enter in any values in the text fields and click the **Log in** button. You should start session replays in the [session replay tab](https://us.posthog.com/replay) in PostHog 🎉.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1722266411/posthog.com/contents/Screenshot_2024-07-29_at_4.19.27_PM.png"

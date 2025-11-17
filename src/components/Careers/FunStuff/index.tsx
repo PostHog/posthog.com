@@ -1,6 +1,6 @@
 import React from 'react'
-import Masonry from 'react-masonry-css'
 import CloudinaryImage from 'components/CloudinaryImage'
+import Link from 'components/Link'
 
 const FunThing: React.FC<{
     image: React.ReactNode
@@ -10,16 +10,16 @@ const FunThing: React.FC<{
     imagePosition: 'top' | 'bottom'
 }> = ({ image, title, content, link, imagePosition }) => (
     <div
-        className={`bg-white dark:bg-accent-dark rounded-md shadow-lg overflow-hidden mb-4 lg:mb-6 xl:mb-8 flex flex-col ${imagePosition === 'top' ? 'flex-col-reverse' : ''
-            }`}
+        className={`bg-primary border border-primary rounded overflow-hidden flex flex-col ${
+            imagePosition === 'top' ? 'flex-col-reverse' : ''
+        }`}
     >
         {link ? (
-            <a href={link} target="_blank" rel="noopener">
+            <Link to={link} state={{ newWindow: true }}>
                 {image}
-            </a>
+            </Link>
         ) : (
             image
-
         )}
         <div className={`p-4 ${imagePosition === 'top' ? '' : ''}`}>
             <h3 className="text-xl mb-1 leading-tight" dangerouslySetInnerHTML={{ __html: title }} />
@@ -57,7 +57,7 @@ const frameContents = [
     },
     {
         title: 'Patrick Collison tweeted about us',
-        content: `When the co-founder of Stripe <a href="https://x.com/patrickc/status/1728009393118032343" target="_blank" rel="noopener">tweets</a> about you unsolicitedly, it's a big deal.`,
+        content: `When the co-founder of Stripe <a href="https://x.com/patrickc/status/1728009393118032343" target="_blank" rel="noreferrer">tweets</a> about you unsolicitedly, it's a big deal.`,
         link: 'https://x.com/patrickc/status/1728009393118032343',
         image: (
             <CloudinaryImage
@@ -69,7 +69,7 @@ const frameContents = [
     },
     {
         title: '6+ hour GitHub star live stream',
-        content: `When we hit 10,000 stars on GitHub, <TeamMember name="Ian Vanagas" /> live streamed to thank <a href="https://www.youtube.com/watch?v=SD7B2teuLXk" target="_blank" rel="noopener">every single one of them</a>.`,
+        content: `When we hit 10,000 stars on GitHub, <TeamMember name="Ian Vanagas" /> live streamed to thank <a href="https://www.youtube.com/watch?v=SD7B2teuLXk" target="_blank" rel="noreferrer">every single one of them</a>.`,
         link: 'https://www.youtube.com/watch?v=SD7B2teuLXk',
         image: (
             <CloudinaryImage
@@ -81,7 +81,7 @@ const frameContents = [
     },
     {
         title: '20k+ GitHub stars',
-        content: `<p>We are honored to be the most popular open source Product OS on GitHub. (Yes, we defined the category, but still...)</p><p>Won't you <a href="https://github.com/PostHog/posthog" target="_blank" rel="noopener">be our next star?</a></p>`,
+        content: `<p>We are honored to be the most popular open source Product OS on GitHub. (Yes, we defined the category, but still...)</p><p>Won't you <a href="https://github.com/PostHog/posthog" target="_blank" rel="noreferrer">be our next star?</a></p>`,
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/github_stars_7e1b503d8b.png"
@@ -165,14 +165,24 @@ const frameContents = [
         title: 'DPA generator, featuring a Taylor Swift edition',
         content: "It's the most fun you've ever had filling out a legal document.",
         link: '/dpa',
-        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/dpa_a05cbe57d5.png" alt="DPA generator" />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/dpa_a05cbe57d5.png"
+                alt="DPA generator"
+            />
+        ),
         imagePosition: 'bottom',
     },
     {
         title: 'Human-readable privacy policy',
         content: "A privacy policy that won't put you to sleep. Be sure to check out the Tweet-style summary, too!",
         link: '/privacy',
-        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/privacy_050678164a.png" alt="Human-readable privacy policy" />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/privacy_050678164a.png"
+                alt="Human-readable privacy policy"
+            />
+        ),
         imagePosition: 'bottom',
     },
     // {
@@ -185,26 +195,16 @@ const frameContents = [
 ]
 
 const FunStuff: React.FC = () => {
-    const breakpointColumnsObj = {
-        default: 3,
-        1024: 2,
-        640: 1,
-    }
-
     return (
-        <section className="max-w-7xl mx-auto px-4 py-12">
-            <h2 className="text-center text-4xl lg:text-5xl text-balance">
+        <section id="fun-stuff" className="not-prose @container pt-12">
+            <h2 className="text-center text-2xl @3xl:text-4xl text-balance">
                 Live, Laugh, LEquip every developer to build successful products
             </h2>
-            <p className="text-center text-lg mb-8 font-semibold opacity-75">
+            <p className="text-center text-base @3xl:text-lg mb-8 text-secondary">
                 Our jobs are zero fun. Here are some things that have made it a little less insufferable.
             </p>
 
-            <Masonry
-                breakpointCols={breakpointColumnsObj}
-                className="flex -ml-4 lg:-ml-6 xl:-ml-8 w-auto"
-                columnClassName="pl-4 lg:pl-6 xl:pl-8 bg-clip-padding"
-            >
+            <div className="bg-accent rounded p-4 grid grid-cols-1 @xl:grid-cols-2 @4xl:grid-cols-3 gap-4 lg:gap-x-6 xl:gap-x-8">
                 {frameContents.map((frame, index) => (
                     <FunThing
                         key={index}
@@ -212,10 +212,10 @@ const FunStuff: React.FC = () => {
                         content={frame.content}
                         link={frame.link}
                         image={frame.image}
-                        imagePosition={frame.imagePosition}
+                        imagePosition={frame.imagePosition as 'top' | 'bottom'}
                     />
                 ))}
-            </Masonry>
+            </div>
         </section>
     )
 }

@@ -4,13 +4,11 @@ templateId:
     - template-airtable
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 It’s easier than ever to export realtime PostHog data to satisfy the Airtable fanatics in your life.
 
-<Requirements />
 
 ## Configuring Airtable
 
@@ -35,8 +33,8 @@ You should have these details now:
 
 With them, we’re ready to set up the Airtable destination.
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline/overview)" tab in the left sidebar.
-2. Click the **Destinations** tab.
+1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=airtable) tab.
 3. Click **New destination** and choose Airtable's **Create** button.
 
 Now we can plug in the above values.

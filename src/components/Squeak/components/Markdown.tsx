@@ -5,9 +5,11 @@ import rehypeSanitize from 'rehype-sanitize'
 import { ZoomImage } from 'components/ZoomImage'
 import { TransformImage } from 'react-markdown/lib/ast-to-react'
 import remarkGfm from 'remark-gfm'
+import { cn } from '../../../utils'
+import Link from 'components/Link'
 
 const replaceMentions = (body: string) => {
-    return body.replace(/@([a-zA-Z0-9-]+\/[0-9]+|max)/g, (match, username) => {
+    return body.replace(/@([a-zA-Z0-9_-]+\/[0-9]+|max)/g, (match, username) => {
         if (username === 'max') {
             return `[${match}](/community/profiles/${process.env.GATSBY_AI_PROFILE_ID})`
         }
@@ -20,11 +22,13 @@ export const Markdown = ({
     transformImageUri,
     allowedElements,
     regularText,
+    className,
 }: {
     children: string
     transformImageUri?: TransformImage | undefined
     allowedElements?: string[]
     regularText?: 'false'
+    className?: string
 }) => {
     return (
         <ReactMarkdown
@@ -32,8 +36,11 @@ export const Markdown = ({
             remarkPlugins={[remarkGfm]}
             transformImageUri={transformImageUri}
             rehypePlugins={[rehypeSanitize]}
-            className={`flex-1 !text-sm overflow-hidden text-ellipsis !pb-0 mr-1 text-primary/75 dark:text-primary-dark/75 font-normal [&_p:last-child]:mb-0 ${regularText ? '' : 'question-content community-post-markdown'
-                }`}
+            className={cn(
+                'markdown prose dark:prose-invert prose-sm max-w-full text-primary [&_a]:font-semibold',
+                !regularText,
+                className
+            )}
             components={{
                 pre: ({ children }) => {
                     return (
@@ -62,7 +69,7 @@ export const Markdown = ({
                     return <code {...props} className="break-all inline-block" />
                 },
                 a: ({ node, ...props }) => {
-                    return <a rel="nofollow" {...props} />
+                    return <Link rel="nofollow noopener noreferrer" {...props} state={{ newWindow: true }} />
                 },
                 img: ZoomImage,
             }}

@@ -23,7 +23,7 @@ posthog.capture('user_signed_up', {
 
 #### With `@react-navigation/native` and autocapture:
 
-When using [@react-navigation/native](https://reactnavigation.org/docs/getting-started/), screen tracking is automatically captured if the [`autocapture`](/docs/libraries/react-native#autocapture) property is used in the `PostHogProvider`:
+When using [@react-navigation/native](https://reactnavigation.org/docs/6.x/getting-started) v6 or lower, screen tracking is automatically captured if the [`autocapture`](/docs/libraries/react-native#autocapture) property is used in the `PostHogProvider`:
 
 It is important that the `PostHogProvider` is configured as a child of the `NavigationContainer`:
 
@@ -44,6 +44,39 @@ export function App() {
 }
 ```
 
+When using [@react-navigation/native](https://reactnavigation.org/docs/7.x/getting-started) v7 or higher, screen tracking has to be manually captured:
+
+```react-native
+// App.(js|ts)
+
+import { PostHogProvider } from 'posthog-react-native'
+import { NavigationContainer } from '@react-navigation/native'
+
+// Using `PostHogProvider` is optional, but needed if you want to capture touch events automatically with the `captureTouches` option.
+export function App() {
+    return (
+        <NavigationContainer>
+            <PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
+              captureScreens: false, // Screen events are handled differently for v7 and higher
+              captureTouches: true,
+            }}>
+                {/* Rest of app */}
+            </PostHogProvider>
+        </NavigationContainer>
+    )
+}
+```
+
+Check out and set it up the official way for [Screen tracking for analytics](https://reactnavigation.org/docs/screen-tracking/).
+
+Then call the `screen` method within the `trackScreenView` method.
+
+```react-native
+const posthog = usePostHog() // use the usePostHog hook if using the PostHogProvider or your own custom posthog instance
+// you can read the params from `getCurrentRoute()`
+posthog.screen(currentRouteName, params)
+```
+
 #### With `react-native-navigation` and autocapture:
 
 First, simplify the wrapping of your screens with a shared PostHogProvider:
@@ -58,7 +91,6 @@ export const SharedPostHogProvider = (props: any) => {
   return (
     <PostHogProvider client={posthog} autocapture={{
       captureScreens: false, // Screen events are handled differently for react-native-navigation
-      captureLifecycleEvents: false, // Lifecycle events are handled differently for react-native-navigation
       captureTouches: true,
     }}>
       {props.children}
@@ -91,9 +123,19 @@ Navigation.events().registerAppLaunchedListener(async () => {
       routeToProperties: (name, properties) => properties,
     },
     captureScreens: true,
-    captureLifecycleEvents: true,
   });
 });
+```
+
+#### With `expo-router`:
+
+Check out and set it up the official way for [Screen tracking for analytics](https://docs.expo.dev/router/reference/screen-tracking/).
+
+Then call the `screen` method within the `useEffect` callback.
+
+```react-native
+const posthog = usePostHog() // use the usePostHog hook if using the PostHogProvider or your own custom posthog instance
+posthog.screen(pathname, params)
 ```
 
 #### Manually capturing screen capture events

@@ -6,10 +6,17 @@ showTitle: true
 
 import RegionWarning from "../_snippets/region-warning.mdx"
 import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<ProxyWarning />
+<CalloutBox icon="IconWarning" title="Warning" type="fyi">
 
-<RegionWarning />
+  1. <ProxyWarning />
+  2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
+
+</CalloutBox>
+
 
 If your team is already using Kubernetes, you may prefer to use Kubernetes resources to setup a proxy to PostHog Cloud rather than deploying a new tool. This method requires one ingress resource for the proxy and one service resource to direct traffic externally to PostHog Cloud.
 

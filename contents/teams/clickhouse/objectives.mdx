@@ -12,22 +12,37 @@ Data Team's mission is to provide a storage and query engine that meets these re
 
 In service of this mission, our goals are:
 
-**Goals for Q2 2025:**
+**Goals for Q4 2025:**
 
-- Query Observability and Performance Improvements
-    - We want to know where the query is coming from and why. Is it per team or posthog wide, is it by our system or by customer?
-    - Add additional metadata tags to better identify and categorize API query sources
+## ClickHouse Tooling
 
-- Make ClickHouse ops easy
-    - Complete cluster management through Infrastructure as Code (IaC)
-    - Optimize speed of critical operational procedures incl. automation for common operations (e.g. ZK)
-    - Implement ClickHouseKeeping automation via Dagster (cleanup jobs, backups, improve replication performance)
-    - Better runbooks for everyone
-    - Build automation for handling ad-hoc deletion requests and disk provisioning  
-    - Storage infrastructure improvements (s3-backed events, get rid of io2)
-    - Switch from ZooKeeper to ClickHouse Keeper
+- **Migrations service (P0)** - _Paweł Szczur_
+    - Make it easy for developers to apply changes to the ClickHouse schema
 
-- Use Altinity Antalya in production for events
-    - upgrade clusters to Antalya 
-    - get DW queries running through Antalya Swarm
-    - Backfill all events onto Iceberg in S3
+- **Chargeback (P1)** - _Paweł Szczur, Jovan Sakovic_
+    - Let product teams know about query tagging properly
+    - Reject queries that are not tagged
+    - Proactively notify teams of bad performance
+    - Report top ClickHouse cost per team
+
+- **SlopCop (query scheduling) (P1)** - _Jovan Sakovic, Paweł Szczur_
+    - Avoid retrying queries that are already running
+    - Query prioritization
+
+- **ClickHouse MCP for internal users (P2)** - _James Greenhill_
+
+- **ClickHouse Handbook(s) (P1)** - _Jovan Sakovic_
+    - Collab on HQL Handbook
+
+
+## ClickHouse Ops
+
+- **US resharding to 16 shards (P0)** - _Daniel Escribano, James Greenhill_
+
+- **Backup restore procedure (P0)** - _Daniel Escribano_
+    - Automated backup restore procedure
+
+- **ClickHouse security (P1)** - _Daniel Escribano_
+    - More constrained privilege on the users' access to the cluster
+    - Cluster locked down
+    - Audit log of activity on clusters

@@ -4,6 +4,7 @@ showTitle: true
 ---
 Although we recommend using one of our pre-built destinations, you can also customize them and build your own. 
 
+
 ## Customizing payload
 
 You can template destination output using curly braces `{}`.
@@ -57,6 +58,8 @@ Or to construct a custom JSON payload that conforms to an existing API specifica
     }
 }
 ```
+
+> You can see the full capabilities of templating with our Hog programming language [here](/docs/hog)
 
 ### Global object
 

@@ -1,0 +1,86 @@
+---
+title: Session recording snapshot API
+---
+
+> **Important:** This API was never built for public use. It's built around the needs of our UI and will change with relatively little notice. 
+>
+> Many people are still building on top of it however, as non-straightforward as it is to use. This page is to help you if you're one of those people. 
+>
+> We are also considering building a session replay batch export mechanism to remove the need to use this API for bulk copying of replay data.
+
+The snapshot API is structured a little like hitting the homepage of a website to see what documents are available and then right-clicking to open each one in a new tab
+
+## Overview
+
+The standard pattern for using this API is:
+
+1. Call the snapshots API with no parameters and receive a list of the sources in the recording. This is not idempotent and can change from second to second.
+2. Call the snapshots API with each source one after the other. This call is idempotent, we never change this data once stored.
+3. Post-process the data. Since session replay is write-heavy, we do not attempt to store or return vanilla rrweb-compatible JSON.
+
+### What is a source?
+
+We store session replay data in more than one place as it is ingested. A "source" is a place you can load replay data from. The API returns a list of sources so that we can direct clients to load snapshots from those sources.
+
+> **Important:** For batch exports of recordings, it is safest to only export recordings that started more than 24 hours ago. We cut off sessions after 24 hours and so you know the recording is immutable at that point.
+
+## Using the snapshot API (Version 2)
+
+We (Pawel 🦸) have released our new version of the ingestion pipeline that is way more efficient and uses way less resources. Last time we improved the ingestion pipeline and let our new costs settle, we were able to [reduce prices](/blog/session-replay-pricing)... (investors hate this one weird trick 😅).
+
+Version 2 writes more files than version 1 (so we don't have to batch for as long, so our ingestion can be faster and cheaper. Cool!)
+
+You can opt in to this new version for reading data by adding `?blob_v2=true` to the initial snapshots call
+
+This "new" version became the default on the 23rd June 2025.
+
+So a call to:
+
+`https://us.posthog.com/api/environments/{the project id}/session_recordings/{the session id}/snapshots?blob_v2=true`
+
+will return a sources list:
+
+```json
+{
+    "sources": [
+        {
+            "source": "blob_v2",
+            "start_timestamp": "2025-05-18T03:59:43.283000Z",
+            "end_timestamp": "2025-05-18T03:59:47.122000Z",
+            "blob_key": "0"
+        },
+    },
+}
+```
+
+We only return `blob_v2` sources, you can make calls to snapshot(s) with `?source=blob_v2&blob_key={the blob_key}` for each `blob_v2` source.
+
+You can also request multiple blobs at once using `?source=blob_v2&start_blob_key={the_first_key}&end_blob_key={the_second_blob_key}`. 
+
+> **Note:** You can request a maximum of 20 blob keys at a time. You will need to tune this for your application as 20 blobs could be a lot of data and timeout. For example, `?source=blob_v2&start_blob_key=0&end_blob_key=20` is invalid as it requests 21 keys.
+
+### Post-processing
+
+All post-processing entrypoints in [our code can be found on GitHub](https://github.com/PostHog/posthog/blob/37babfa29f05f2d4e169e2f33f1643fffe540e95/frontend/src/scenes/session-recordings/player/snapshot-processing/process-all-snapshots.ts)
+
+For each source we load, we call `parseEncodedSnapshots`, and before using the loaded snapshots, we call `processAllSnapshots`
+
+You're welcome to use these directly or rewrite them in your language of choice.
+
+The processing steps are:
+
+ * normalise the data structure
+ * decompress and partially compressed data
+ * transform mobile recording data (this bit isn't open source (yet) sorry)
+ * deduplicate the rrweb data
+ * strip chrome extension snapshots
+ * sort the snapshots
+ * patch in any meta events (a very rare capture bug)
+
+### Data format
+
+```json
+[windowId, event]
+```
+
+

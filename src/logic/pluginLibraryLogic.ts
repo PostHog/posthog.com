@@ -99,7 +99,7 @@ export const pluginLibraryLogic = kea<pluginLibraryLogicType>([
             const { setActivePlugin } = actions
             const plugin = values.filteredPlugins.filter((plugin) => plugin.name === pluginName)[0]
             let markdown = `# ${plugin.name} \n ${plugin.description} \n ${pluginInstallationMd}`
-            if (plugin.url.includes('github.com/')) {
+            if (new URL(plugin.url).hostname === 'github.com') {
                 try {
                     const response = await window.fetch(
                         `https://raw.githubusercontent.com/${plugin.url.split('github.com/')[1]}/main/README.md`

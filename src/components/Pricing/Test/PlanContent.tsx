@@ -1,16 +1,46 @@
 import React, { useEffect, useState } from 'react'
 import { IconCheck } from '@posthog/icons'
-import { Link as ScrollLink } from 'react-scroll'
 import { TrackedCTA } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
-import Modal from 'components/Modal'
-import Lottie from 'react-lottie'
+import { useApp } from '../../../context/App'
+import { useWindow } from '../../../context/Window'
+import ScrollToElement from 'components/ScrollToElement'
 
-export const FreePlanContent = ({ onFreeTierClick }) => {
+const SignupEmbed = (props: any) => {
+    const { setWindowTitle } = useApp()
+    const { appWindow } = useWindow()
+
+    useEffect(() => {
+        if (appWindow) {
+            setWindowTitle(appWindow, 'Signup trends')
+        }
+    }, [])
+
+    return (
+        <iframe
+            className="m-0 size-full"
+            width="100%"
+            height="100%"
+            src="https://app.posthog.com/embedded/gQMqaRP0ZH0V3P3XXrSDnNcqDGoe7Q?refresh=true"
+        />
+    )
+}
+
+export const FreePlanContent = ({
+    onFreeTierClick,
+    isMainColumn = false,
+}: {
+    onFreeTierClick: () => void
+    isMainColumn?: boolean
+}) => {
     return (
         <div>
-            <h4 className="text-xl mb-0">Free</h4>
-            <p className="text-sm opacity-75">No credit card required</p>
+            {!isMainColumn && (
+                <>
+                    <h4 className="text-xl mb-0">Free</h4>
+                    <p className="text-sm opacity-75">No credit card required</p>
+                </>
+            )}
 
             <ul className="list-none p-0 mb-4 space-y-1">
                 <li className="flex items-start gap-2 text-sm">
@@ -38,23 +68,33 @@ export const FreePlanContent = ({ onFreeTierClick }) => {
     )
 }
 
-export const PaidPlanContent = ({ onFreeTierClick }) => {
+export const PaidPlanContent = ({
+    onFreeTierClick,
+    isMainColumn = false,
+}: {
+    onFreeTierClick: () => void
+    isMainColumn?: boolean
+}) => {
     return (
         <div>
-            <span className="text-70 text-[15px]">From</span>
-            <div className="flex items-baseline">
-                <h4 className="text-xl mb-0">$0</h4>
-                <span className="opacity-70 text-sm">/mo</span>
-            </div>
+            {!isMainColumn && (
+                <>
+                    <span className="text-70 text-[15px]">From</span>
+                    <div className="flex items-baseline">
+                        <h4 className="text-xl mb-0">$0</h4>
+                        <span className="opacity-70 text-sm">/mo</span>
+                    </div>
+                </>
+            )}
+
             <p className="text-sm mt-2">
-                <ScrollLink
-                    to="calculator"
-                    offset={-120}
-                    smooth
-                    className="text-red dark:text-yellow font-semibold text-[15px] cursor-pointer"
+                <ScrollToElement
+                    targetId="calculator"
+                    offset={-20}
+                    className="font-semibold text-[15px] cursor-pointer underline"
                 >
                     Estimate your price
-                </ScrollLink>
+                </ScrollToElement>
             </p>
 
             <ul className="list-none p-0 mb-4 space-y-1">
@@ -94,14 +134,20 @@ export const PaidPlanContent = ({ onFreeTierClick }) => {
     )
 }
 
-const RegionButton = ({ active, onClick, children }) => {
+const RegionButton = ({
+    active,
+    onClick,
+    children,
+}: {
+    active: boolean
+    onClick: () => void
+    children: React.ReactNode
+}) => {
     return (
         <button
             onClick={onClick}
             className={`flex-1 flex flex-col items-center py-1.5 px-2 text-sm rounded border ${
-                active
-                    ? 'border-yellow bg-yellow/25 dark:bg-white/5 font-bold'
-                    : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
+                active ? 'border-yellow bg-yellow/25 dark:bg-white/5 font-bold' : 'border-primary bg-transparent'
             }`}
         >
             {children}
@@ -109,25 +155,20 @@ const RegionButton = ({ active, onClick, children }) => {
     )
 }
 
-export default function PlanContent({ activePlan, onFreeTierClick }) {
+export default function PlanContent({
+    activePlan,
+    onFreeTierClick,
+    isMainColumn = false,
+}: {
+    activePlan: string
+    onFreeTierClick: () => void
+    isMainColumn?: boolean
+}) {
     const posthog = usePostHog()
+    const { addWindow } = useApp()
     const [region, setRegion] = useState('us')
     const [signupCountToday, setSignupCountToday] = useState(0)
     const [signupCoundLoading, setSignupCountLoading] = useState(true)
-    const [modalOpen, setModalOpen] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
-
-    const handleOpenModal = () => {
-        setIsLoading(true)
-        setModalOpen(true)
-        setTimeout(() => setIsLoading(false), 3000)
-    }
-
-    const [hogData, setHogData] = useState<any | null>(null)
-
-    useEffect(() => {
-        import('../../../../static/lotties/loading.json').then((data) => setHogData(data.default))
-    }, [])
 
     useEffect(() => {
         if (posthog?.isFeatureEnabled('direct-to-eu-cloud')) {
@@ -147,40 +188,10 @@ export default function PlanContent({ activePlan, onFreeTierClick }) {
 
     return (
         <>
-            <Modal open={modalOpen} setOpen={setModalOpen}>
-                {isLoading ? (
-                    <>
-                        {hogData ? (
-                            <div className="size-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                <Lottie
-                                    options={{
-                                        loop: true,
-                                        autoplay: true,
-                                        animationData: hogData,
-                                    }}
-                                />
-                            </div>
-                        ) : (
-                            <>Loading...</>
-                        )}
-                    </>
-                ) : (
-                    <div className="px-5">
-                        <div className="max-w-4xl mx-auto mt-12 relative rounded-md overflow-hidden">
-                            <iframe
-                                className="m-0"
-                                width="100%"
-                                height="400"
-                                src="https://app.posthog.com/embedded/gQMqaRP0ZH0V3P3XXrSDnNcqDGoe7Q?refresh=true"
-                            />
-                        </div>
-                    </div>
-                )}
-            </Modal>
             {activePlan === 'free' ? (
-                <FreePlanContent onFreeTierClick={onFreeTierClick} />
+                <FreePlanContent onFreeTierClick={onFreeTierClick} isMainColumn={isMainColumn} />
             ) : (
-                <PaidPlanContent onFreeTierClick={onFreeTierClick} />
+                <PaidPlanContent onFreeTierClick={onFreeTierClick} isMainColumn={isMainColumn} />
             )}
             <div className="mt-auto">
                 <div className="mb-4">
@@ -195,6 +206,7 @@ export default function PlanContent({ activePlan, onFreeTierClick }) {
                     </div>
                 </div>
                 <TrackedCTA
+                    state={{ initialTab: 'signup' }}
                     event={{
                         name: `clicked Get started - free`,
                         type: 'cloud',
@@ -208,13 +220,26 @@ export default function PlanContent({ activePlan, onFreeTierClick }) {
                     Get started - free
                 </TrackedCTA>
                 <p
-                    className={`text-sm text-center mt-4 mb-0 transition-opacity text-primary/75 dark:text-primary-dark/75 ${
+                    className={`text-sm text-center mt-4 mb-0 transition-opacity text-secondary ${
                         signupCoundLoading ? 'opacity-0' : 'opacity-100'
                     }`}
                 >
                     {signupCountToday ? <strong>{signupCountToday}</strong> : 'Tons of'} companies signed up{' '}
                     {signupCountToday ? (
-                        <button className="font-bold text-red dark:text-yellow" onClick={handleOpenModal}>
+                        <button
+                            onClick={() =>
+                                addWindow(
+                                    (
+                                        <SignupEmbed
+                                            location={{ pathname: 'signup-embed' }}
+                                            key="signup-embed"
+                                            newWindow
+                                        />
+                                    ) as any
+                                )
+                            }
+                            className="font-bold text-red dark:text-yellow"
+                        >
                             today
                         </button>
                     ) : (

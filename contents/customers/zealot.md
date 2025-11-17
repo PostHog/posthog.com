@@ -1,23 +1,8 @@
 ---
 title: Why Zealot switched to PostHog from Amplitude and BugSnag
 customer: Zealot
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/logo_zealot_light_de961d2a17.png
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/logo_zealot_dark_c10566a321.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/zealot_posthog_error_tracking_14fb1ab6cb.jpg
-industries:
-  - Recruitment
-users:
-  - Engineering
-  - Leadership
-  - Founder
-toolsUsed:
-  - LLM observability
-  - Session recording
-  - Error tracking
-  - Product analytics
 date: 2025-04-02
 ---
 
@@ -71,12 +56,12 @@ Responding to these BugSnag alerts caused a lot of friction, however. Brandon an
 
 A major reason Brandon was willing to make this switch was due to the way PostHog tools are interoperable and can be seamlessly used in combination. 
 
-You can, for example, get an [alert](/docs/alerts) about an [error](/error-tracking), view a linked [session replay](/replay), and jump from there to a view of [the individual person](/docs/data/persons) or [the organization they belong to].
+You can, for example, get an [alert](/docs/alerts) about an [error](/error-tracking), view a linked [session replay](/session-replay), and jump from there to a view of [the individual person](/docs/data/persons) or [the organization they belong to].
 
-You can even use [Max AI](/docs/max-ai), the in-app AI agent, to search for similar errors and recordings using natural language.
+You can even use [PostHog AI](/docs/posthog-ai) to search for similar errors and recordings using natural language.
 
 “That was one thing I really liked in Amplitude,” says Brandon. “They have this AI you can chat to and I was saying that if PostHog released that then that’d be huge... but then I found out you guys have it too and it was so easy to [get into the beta for that](http://app.posthog.com/home#panel=feature-previews) and to start using it.”
 
 “This is one of the things I love most about PostHog, that you have so many tools in one place and they all work together. It makes it a no-brainer for you to install PostHog early on and then, when you get to the point where you need a new tool or to get serious about your data — everything you need is already there.”
 
-“We’re about to launch a whole suite of AI tools, for example. And it’s so great knowing that [LLM observability](/docs/ai-engineering) is going to be there for us when we’re ready.”
+“We’re about to launch a whole suite of AI tools, for example. And it’s so great knowing that [LLM observability](/docs/llm-analytics) is going to be there for us when we’re ready.”

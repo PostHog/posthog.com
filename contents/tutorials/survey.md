@@ -34,15 +34,17 @@ Next, go into your `app` folder and create a `providers.js` file. Create a clien
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
     useEffect(() => {
       posthog.init('<ph_project_api_key>', {
-        api_host: '<ph_client_api_host>'
+        api_host: '<ph_client_api_host>',
+        defaults: '<ph_posthog_js_defaults>',
       })
   }, []);
+
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -91,7 +93,7 @@ Once done, head back to the app and remove the boilerplate from `page.js` . Weâ€
 ```js-web
 // app/page.js
 'use client'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 import { useState } from 'react'
 
 export default function Home() {
@@ -112,7 +114,7 @@ We can then get the surveys for a user with PostHogâ€™s `getActiveMatchingSurvey
 ```js-web
 //app/page.js
 'use client'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 import { useState, useEffect } from 'react'
 
 export default function Home() {

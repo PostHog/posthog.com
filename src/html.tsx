@@ -16,20 +16,15 @@ export default function HTML(props: HTMLProps): JSX.Element {
                 <meta charSet="utf-8" />
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
                 <link
-                    rel="preload"
-                    as="font"
-                    type="font/woff2"
-                    href="//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2"
-                    crossOrigin="anonymous"
+                    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+                    rel="stylesheet"
                 />
-                <link
-                    rel="preload"
-                    as="font"
-                    type="font/woff2"
-                    href="//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2"
-                    crossOrigin="anonymous"
-                />
+
                 <link
                     rel="preload"
                     as="font"
@@ -45,40 +40,12 @@ export default function HTML(props: HTMLProps): JSX.Element {
                     crossOrigin="anonymous"
                 />
                 {process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST && (
-                    <script
-                        dangerouslySetInnerHTML={{
-                            // In the config below, some options are overridden in src/components/CookieBanner/index.tsx
-                            // e.g. persistence
-                            __html: `
-                            !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-                            posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
-                                api_host: "${process.env.GATSBY_POSTHOG_API_HOST}",
-                                ui_host: "${process.env.GATSBY_POSTHOG_UI_HOST}",
-                                capture_pageview: false,
-                                capture_pageleave: true,
-                                uuid_version:'v7',
-                                session_recording: {
-                                    maskAllInputs: false,
-                                    maskInputOptions: {
-                                        password: true,
-                                    },
-                                },
-                                __preview_heatmaps: true,
-                                opt_in_site_apps: true,
-                                __preview_remote_config: true,
-                                __preview_flags_v2: true,
-                                __preview_experimental_cookieless_mode: true,
-                                persistence: 'memory',
-                                person_profiles: 'always',
-                            })
-                            `,
-                        }}
-                    />
+                    <script src="/scripts/posthog-init.js" />
                 )}
 
                 {props.headComponents}
             </head>
-            <body {...props.bodyAttributes} className="light">
+            <body {...props.bodyAttributes} className="light" data-wallpaper="keyboard-garden">
                 {props.preBodyComponents}
                 <div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />
                 {props.postBodyComponents}

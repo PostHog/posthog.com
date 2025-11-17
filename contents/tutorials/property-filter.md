@@ -38,7 +38,7 @@ The property filter app works by setting the selected properties to `null` when 
 
 ## List of default PostHog properties
 
-Below is a list of some of the properties that PostHog captures by default. You can see the full list of properties that PostHog captures by default in [GitHub](https://github.com/PostHog/posthog-js/blob/main/src/utils/event-utils.ts). 
+Below is a list of some of the properties that PostHog captures by default. You can see the full list of properties that PostHog captures by default in [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/event-utils.ts). 
 
 Note that PostHog's default properties begin with `$`, so you'll need to include this when adding them to the property filter app. For example, `$ip,$os`.
 

@@ -1,0 +1,46 @@
+---
+title: Why Rebtel doesn’t use PostHog’s CDP (yet)
+customer: Rebtel
+logo: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/rebtel_a2bf9d5e1b.svg
+logoDark: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/rebtel_a2bf9d5e1b.svg
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/rebtel_2ac4067c92.png
+industries:
+    - Telecom
+users:
+    - Data
+toolsUsed:
+    - Product analytics
+    - Experiments
+date: 2025-09-24
+---
+
+Founded in Stockholm in 2006, Rebtel is a telecom company with a difference. It unites the worlds of dual-culture people through data-free international calling and competitive mobile top-ups. Rebtel constantly experiments with new product types for its users. These have ranged from subscription-based mobile top-up products, a money transfer service, and even a way to send credits to your loved ones in a food delivery app, reflecting a deep culture of experimentation.
+
+“It’s really just in our DNA to try out new ideas,” explains Rebtel’s Head of Data, Chandan Singh. “If an experiment works out it can become a big part of our business, and if not, we learn and move on to something new. That’s how Rebtel has stayed successful over the years.”
+
+Chandan and his team of data engineers and analysts have been at the forefront of this process. They ensure the wider company has the information they need to innovate and iterate — even if they haven’t always had the best tools for the job.
+
+“When I started at Rebtel I had to immediately focus on modernizing the stack we used for data engineering,” explains Chandan. “We didn’t have any product analytics, just Google Analytics — which is terrible — and we wanted to move away from that and use something better.”
+
+The new stack Rebtel migrated to was exactly that — a multi-vendor stack that used mParticle as a CDP, dbt for transformation, Snowflake as a warehouse, and other tools for visualization. Now, as the team looks at the next iteration, they envisage a dual approach - one part focused on warehouse, the other on product analytics.
+
+## Building a new stack for warehousing and analytics
+
+On the warehousing side, events flow from Rebtel’s backend into Snowflake, where they’re transformed with dbt. These are then exposed through Looker to support decision-making across the company.
+
+On the product analytics side, Rebtel focuses on data from its frontend (apps and website). Events are captured via mParticle’s SDK, sent to Snowflake, transformed into a PostHog-friendly format, and then loaded into PostHog.
+
+“What we’re doing is adding new technical capabilities to better understand our users’ behavior and build a better product," explains Chandan. "For that, we need the ability to visualize product data with paths and funnels, define and use cohorts for targeted rollouts, and run experiments in a smart way.”
+
+After several months of exploring alternative tools and comparing them, Rebtel ultimately decided to move forward with PostHog — a decision that was as much to do with the team itself as it was the technology.
+
+“Unlike other tools, PostHog’s product offered us a way to get immediate value now _and_ a clear roadmap to increase our adoption later,” explains Chandan. “But, honestly, the other big thing was [the PostHog DPA](/dpa). The fairytale version of that? It was hilarious and those are the sort of things we really appreciate.”
+
+Right now, Rebtel is using PostHog just for analytics and experiments, but also has hopes to adopt tools such as PostHog’s CDP in the future so that more of the stack sits in one place.
+
+“Using PostHog lets us stay flexible,” says Chandan. “We didn’t want a months-long migration project. We wanted to integrate quickly and run experiments now, while also having room to grow later without having to start the whole process again.”
+
+“Choosing PostHog means we also have a path for creating a simpler, more efficient stack tomorrow.”

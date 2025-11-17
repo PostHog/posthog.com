@@ -38,11 +38,19 @@ We can do this because we can upsell customers multiple of our other products. T
 
 It's better for customers because they get all these tools that are well integrated for the cheapest possible price.
 
+While we don't have loss leaders, we accept that we might not fully understand our cost base and make money on every product on day one. We welcome this pressure to do things more efficiently and get the costs down over time.
+
 ### Every product should be priced separately
 
 Whenever we build a product, like feature flags, or product experimentation, we should have a specific price for that product by itself. Being consistent here is less confusing than randomly combining products for example, even though it will sometimes mean more items to explain to a customer.
 
 It means that customers who want just one product can compare each of our products to our competitors', seeing that we are cheaper everywhere, improving our self-serve top-of-funnel.
+
+This also makes the value of each product more tangible. Usage and value are not the same thing - willigness to pay is the best indicator of the value our customers are getting from each product.
+
+However, when one of our products has a fundamental dependency on another of our products, we should aim to bundle the cost of the dependencies in with the product's pricing so customers only pay once for using a given product.
+
+For example, when someone calls a feature flag, we send a `$feature_flag_called` event so we can have stats. In this case, we don't charge for those events, as the events are solely related to feature flags.
 
 ### Features that increase our stickiness should be free (with a reasonable limit)
 
@@ -50,13 +58,13 @@ A good question to ask yourself here is, "If I were to switch away from PostHog,
 
 For example, if someone were to consider moving from PostHog to some other provider, cohorts would need to be manually recreated in the other provider, which would be tedious. However, something like Web Performance just happens and doesn't require any user involvement, so isn't sticky.
 
-### Product pricing should include everything required to use that product
+### Products should work independently but shine together
 
-When one of our products has a dependency on another of our products, we should bundle the cost of the dependencies in with the product's pricing so customers only pay once for using a given product.
-
-For example, when someone calls a feature flag, we send a $feature_flag_called event so we can have stats. In this case, we don't charge for those events, as the events are solely related to feature flags.
+Each product should be usable on its own. For example, session replay can be enabled independently of other products. But to get the most value out of it, it's best to use it together with our other products. This enables users to have rich filters using the data from the other parts of PostHog. Similarly, you can use error tracking on its own, but it's a lot more powerful if you also use session replay, enabling you to easily click through to the recording of a session where the error occurred.
 
 ### Other guidelines
+
+- We accept pricing complexity for the benefit of the users. Usage-based pricing is inherently more complex (for users and for us) than e.g. flat rates, but it ensures that users only pay for what they use, and allows us to understand true value that they're getting out of each product.
 
 - We should always ask ourselves how newly released features should be priced, even if it's launching as a free product. A default behavior is good, but it shouldn't be used as a replacement for critically thinking about where something fits into our pricing scheme.
 

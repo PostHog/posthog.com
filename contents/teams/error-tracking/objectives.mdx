@@ -1,31 +1,56 @@
-### Q2 2025 Objectives
+### Q4 2025 Objectives
 
-## Launch with pricing
-* Decide on tiers and implement billing / quota limiting changes
-* Remove plugin server from ingestion pipeline (cost savings)
-* Work with comms on rollout
+#### Go all in on AI (Driver: <TeamMember name="David Newell" />)
+* Implement issue autofixing
+  * In-app flow where an issue can be assigned to Max
+  * Build terminal based experience within the CLI
+    * Add issue selection to MCP (e.g. by file, most impactful)
+    * Stretch: Add test writing agent to prevent regressions
+* Add exception capture auto instrumentation to the wizard
+* Integrations to capture exceptions for popular LLM / agent tools (e.g. Langchain)
 
-## Be the default choice for the languages we support
+#### Ship mobile error tracking (Driver: <TeamMember name="Manoel Aranda Neto" />)
+* Complete 'straightforward' section of the [megaissue](https://github.com/PostHog/posthog/issues/38845)
+* Support suppression rules
+* Add suppression of minified exceptions before cymbal processing
+* Build dashboard template including crash free sessions / users metric
 
-### Make it easier to integrate
-* Split stack trace parsing from exception autocapture
-* CLI download URL that points to the latest version
-* Add more source map upload options
-    * GitHub action
-    * NextJS config wrapper
-    * Bundler plugins for at least Webpack and Vite
-* Stretch: Isomorphic SDK for NextJS
+#### Research deep dive on customers (Driver: <TeamMember name="Cory Slater" />)
+* Interview existing, potential, and recently churned customers to understand:
+  * What makes people switch from competitors and what pulls them back?
+  * What value would convince customers to remove billing limits?
+  * How do AI-first companies handle errors differently?
+  * What context would let customers skip steps in their workflow? 
+  * What drives month to month swings in spend vs contraction?
+* Every engineer to attend at least 2 customer interviews
 
-### Product quality
-* UI improvements to issue page
-    * Faster initial loading time (separate issue query from latest / earliest event)
-    * Add context from other products (affected users / groups, event impact correlation)
-* Improve grouping to decrease noise via Word2Vec or embeddings
+#### Increase trust in product (Driver: <TeamMember name="Hugues Pouillot" />)
+* Improve issue grouping
+  * Introduce a measure of grouping accuracy to base changes off
+  * Add fingerprint versioning to avoid duplicate issues when iterating
+  * Fix obvious mis-groupings based on minor stack trace variances
+  * Ship embeddings to support merge suggestions
+* Decide with Team ClickHouse on approach to avoid dual DB querying
+* Reduce the number of stacktrace-less issues
+* Give better context when a recording is not found / source maps missing
+* Rethink UI / UX of issue page
 
-### Build advanced features for larger customers
-* Add versioning to symbol set uploads
-* Add Hog based control rules
-    * Auto assignment
-    * Custom server side grouping
-    * Alert filtering
-    * Inbound issue filtering / suppression
+#### Improving context on issues  (Driver: <TeamMember name="Aleksander Błaszkiewicz" />)
+* Add breakdowns to issues (by release / person_id)
+* Show first affected release & relevant commit
+  * Stretch: Auto assign to commit author
+* Level up Node SDK (add contexts & tagging, $session_id propagation)
+* Capture code variables in Python
+* Stretch: Integrate logs into session timeline
+
+#### Stretch: Billing, spikes and alerts (Driver: <TeamMember name="Oliver Browne" />)
+(Note: this goal largely depends on the capacity Olly has outside of mobile error tracking, which takes precedence)
+* **Email** alerts for total exceptions ingested volume spikes
+* Add billing limits to onboarding
+* Fixed issue sampling (manually configured, drop X% of exceptions for this issue)
+  * Stretch: Adaptive sampling (spread exception capture over billing period)
+* Threshold based alerting per-issue, based on product analytics insight alerts
+  * Support "X occurrences per Y duration"
+  * Add to alerting step during onboarding
+  * Stretch: Support "X affected users per Y duration"
+* Issue time-based snoozing (drop all exceptions for X hours/days, re-open the issue if seen after that period)

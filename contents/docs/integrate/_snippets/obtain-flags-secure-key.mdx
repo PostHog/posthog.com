@@ -1,0 +1,13 @@
+The feature flags secure API key is a secret project specific token listed in the [Feature Flags tab of your project settings](https://us.posthog.com/settings/environment-feature-flags) in the "Feature Flags Secure API Key" section. It provides the SDKs with access to the feature flag definitions for your project so they can evaluate flags locally.
+
+This key needs to be kept secret, and should not be used in the frontend or exposed to users.
+
+> **Note:** Existing personal API keys will continue to work for local evaluation, but we recommend switching to the feature flags secure API key for local evaluation moving forward. We will be deprecating personal API keys for local evaluation in the future.
+
+#### How to obtain a feature flags secure API key
+
+1. Go to the [Feature Flags tab of your project settings](https://us.posthog.com/settings/environment-feature-flags)
+
+2. The key should be displayed in the "Feature Flags Secure API Key" section.
+
+3. Copy the key and use it to initialize the PostHog client.

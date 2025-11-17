@@ -19,7 +19,6 @@ const useNextStepsData = () => {
                         }
                         frontmatter {
                             title
-                            toolsUsed
                         }
                     }
                 }

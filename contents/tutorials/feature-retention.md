@@ -44,6 +44,8 @@ Once we click “Save & add to dashboard,” below is how our retention dashboar
 
 This insight gives us a basic understanding of the features weekly or monthly active users are using. It gives us a first glance at what the most important features for retention might be.
 
+<MaxCTA question="Which features are most used by monthly active users?" />
+
 ## Adding feature retention charts
 
 Next, we'll add some retention charts. Either from your dashboard or “Insights” on the sidebar, create a new insight. This time we’ll be using the “Retention” insight. 

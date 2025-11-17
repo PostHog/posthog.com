@@ -13,11 +13,24 @@ exports.onPreInit = async function (_, options) {
                     Authorization: `Bearer ${strapiKey}`,
                 },
             }
-        ).then((res) => res.json())
+        )
+            .then((res) => res.json())
+            .catch((e) => {
+                console.error('Error fetching Strapi pages', e)
+                return null
+            })
+
+        if (!strapiPages?.data || !strapiPages?.data?.length) {
+            console.log('No data found for Strapi pages', strapiPages)
+        }
         const { data, meta } = strapiPages
         if (data) {
             data.forEach(({ id, attributes }) => {
-                files[attributes.path] = { contributors: attributes.contributors, lastUpdated: attributes.lastUpdated }
+                files[attributes.path] = {
+                    contributors: attributes.contributors,
+                    lastUpdated: attributes.lastUpdated,
+                    commits: attributes.commits,
+                }
             })
         }
         if (meta?.pagination?.pageCount > page) {
@@ -36,7 +49,7 @@ exports.onCreateNode = async function ({ node, getNode, actions, getCache, cache
         if (parent.internal.type === 'File') {
             const file = files[`contents/${parent.relativePath}`]
             if (file) {
-                const { contributors, lastUpdated } = file
+                const { contributors, lastUpdated, commits } = file
                 if (contributors) {
                     try {
                         const contributorsNode = await Promise.all(
@@ -57,6 +70,14 @@ exports.onCreateNode = async function ({ node, getNode, actions, getCache, cache
                     } catch (error) {
                         console.error(error)
                     }
+                }
+
+                if (commits) {
+                    createNodeField({
+                        node,
+                        name: `commits`,
+                        value: commits,
+                    })
                 }
 
                 createNodeField({

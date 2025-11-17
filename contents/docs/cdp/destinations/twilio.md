@@ -4,13 +4,11 @@ templateId:
     - template-twilio
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 You can use your PostHog event data to send SMS messages via Twilio. Here's everything you need to get started.
 
-<Requirements />
 
 ## Configuring Twilio
 
@@ -23,7 +21,7 @@ First, you'll need to create a Twilio account if you don't have one already. The
 ## Configuring PostHog's Twilio destination
 
 1. In PostHog, click the **[Data pipeline](https://us.posthog.com/pipeline/overview)** tab in the left sidebar.
-2. Click the **Destinations** tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=twilio) tab.
 3. Click **New destination** and choose Twilio's **Create** button.
 
 Enter your Account SID, Auth Token, and From Phone Number from Twilio. The recipient phone number can be extracted from your event properties.

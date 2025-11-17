@@ -1,20 +1,27 @@
-## Q2 2025 Goals
+## Q4 2025 Goals
 
-* Make **Cookieless mode** production-ready <TeamMember name="Robbie Coomber" photo />
-  * Add batching to redis calls
-  * Fix associating unidentified users who have allowed cookies
-* **Page reports** <TeamMember name="Lucas Ricoy" photo />
-  * Iterate UX based on feedback after general release
-  * Error tracking cross-sell
-* **Marketing analytics** <TeamMember name="Lucas Ricoy" photo />
-  * Get ad spend data from 2-5 data warehouse connectors (most likely Google Ads and CSV files, then other ad platforms that we can dogfood)
-  * Build out the 80/20 of marketing analytics insights, e.g. total revenue and spending per channel and per campaign
-  * Show GSC data via the API or batching with no filters
-* **Query performance**
-  * Add sampling to web vitals <TeamMember name="Robbie Coomber" photo />
-  * Experiment with pre-aggregating query results <TeamMember name="Lucas Ricoy" photo />
-  * Improve sessions table join <TeamMember name="Robbie Coomber" photo />
-* **HogQL virtual fields** <TeamMember name="Robbie Coomber" photo />
-  * Add support for person initial channel type
-  * Experiment with how to add e.g. CPA (average for channel) as a virtual person property
+* Marketing analytics <TeamMember name="Javier Bahamondes" photo />
+  * Release marketing analytics as generally available (GA)
+  * Add ROAS widget and at least two major integrations (TikTok/YouTube)
+  * Table it for a bit after this to see if it's useful for product engineers
+* Bring AI into web analytics <TeamMember name="Lucas Ricoy" photo /> & <TeamMember name="Javier Bahamondes" photo />
+  * Integrate web analytics with Max
+    * Make Max aware of web analytics and session metrics
+    * Canned insights for both event and session-level metrics
+    * Come up with filters like in Session Replay
+    * Stretch: Explain anomalies with deep research
+  * Add web analytics context to the MCP server so users can ask analytical questions
+  * Ship agent analytics v1 (detect and provide agent/bot traffic insights, figure out SDK/integration/pricing)
+* Improve the core experience <TeamMember name="Lucas Ricoy" photo />
+  * Make pre-aggregated tables reliable for the selected teams
+  * Improve performance for teams not using the pre-aggregated tables
+  * Get cookieless mode out of beta and fix bugs; don't invest a lot of time there for now
+  * Ship web vitals improvements (breakdowns + performance score)
+  * Ship real-time dashboard
+  * Ship a more granular world map
+* Improve the onboarding experience <TeamMember name="Anna Szell" photo /> & <TeamMember name="Lucas Ricoy" photo /> & <TeamMember name="Javier Bahamondes" photo /> & <FutureTeamMember href="/careers/product-engineer-web-analytics"/>
+  * Simplify referral channels and conversion goals setup
+  * Run an experiment simplifying the setup process
+  * Run an experiment revamping the product UX for new users (e.g. reordering tiles, etc.)
+  * Ship at least one improvement based on findings
 

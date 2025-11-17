@@ -8,88 +8,50 @@
 const React = require('react')
 
 import { initKea, wrapElement } from './kea'
-import HandbookLayout from './src/templates/Handbook'
-import Job from './src/templates/Job'
 import { UserProvider } from './src/hooks/useUser'
-import Posts from './src/components/Edition/Posts'
-import { Provider as ToastProvider } from './src/context/toast'
-import { ChatProvider } from './src/hooks/useChat'
-import Chat from './src/components/Chat'
-export const wrapPageElement = ({ element, props }) => {
-    const slug = props.location.pathname.substring(1)
-    initKea(true, props.location)
+import Wrapper from './src/components/Wrapper'
+import { Provider } from './src/context/App'
+import { Provider as ToastProvider } from './src/context/Toast'
+
+export const wrapRootElement = ({ element }) => (
+    <ToastProvider>
+        <UserProvider>{wrapElement({ element })}</UserProvider>
+    </ToastProvider>
+)
+
+export const wrapPageElement = ({ element, props: { location } }) => {
+    initKea(true, location)
     return (
-        <UserProvider>
-            <ChatProvider>
-                {wrapElement({
-                    element:
-                        !/^posts\/new|^posts\/(.*)\/edit/.test(slug) &&
-                        (props.pageContext.post || /^posts|^changelog\/(.*?)\//.test(slug)) ? (
-                            <Posts {...props}>{element}</Posts>
-                        ) : props.custom404 || !props.data || props.pageContext.ignoreWrapper ? (
-                            element
-                        ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
-                          ![
-                              'docs/api/post-only-endpoints',
-                              'docs/api/user',
-                              'docs/integrations',
-                              'docs/product-analytics',
-                              'docs/session-replay',
-                              'docs/feature-flags',
-                              'docs/experiments',
-                              'docs/data',
-                          ].includes(slug) ? (
-                            <HandbookLayout {...props} />
-                        ) : /^session-replay|^product-analytics|^feature-flags|^experiments|^product-os/.test(slug) ? (
-                            <Product {...props} />
-                        ) : /^careers\//.test(slug) ? (
-                            <Job {...props} />
-                        ) : (
-                            element
-                        ),
-                })}
-            </ChatProvider>
-        </UserProvider>
+        <Provider element={element} location={location}>
+            <Wrapper />
+        </Provider>
     )
 }
 
-export const onRenderBody = function ({ setPreBodyComponents }) {
+export const onRenderBody = function ({ setPreBodyComponents, setPostBodyComponents }) {
     setPreBodyComponents([
         React.createElement('script', {
             key: 'dark-mode',
-            dangerouslySetInnerHTML: {
-                __html: `
-(function () {
-    window.__onThemeChange = function () {}
-    function setTheme(newTheme) {
-        window.__theme = newTheme
-        preferredTheme = newTheme
-        document.body.className = newTheme
-        window.__onThemeChange(newTheme)
-    }
-    var preferredTheme
-    var slug = window.location.pathname.substring(1)
-    var darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    darkQuery.addListener(function (e) {
-        if (!localStorage.getItem('theme')) {
-            window.__setPreferredTheme(e.matches ? 'dark' : 'light')
-        }
-    })
-    try {
-        preferredTheme =
-            (localStorage.getItem('theme') || (darkQuery.matches ? 'dark' : 'light')) ||
-            'light'
-    } catch (err) {}
-    window.__setPreferredTheme = function (newTheme) {
-        setTheme(newTheme)
-        try {
-            localStorage.setItem('theme', newTheme)
-        } catch (err) {}
-    }
-    setTheme(preferredTheme)
-})()
-      `,
-            },
+            src: '/scripts/theme-init.js',
         }),
     ])
+
+    setPostBodyComponents([
+        React.createElement('script', {
+            key: 'initial-loader',
+            src: '/scripts/initial-loader.js',
+        }),
+    ])
+}
+
+export const onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
+    const filteredComponents = getHeadComponents().filter((component) => {
+        // remove the inline script added by the gatsby-remark-autolink-headers plugin
+        if (component?.type === 'script' && component?.key === 'gatsby-remark-autolink-headers-script') {
+            return false
+        }
+        return true
+    })
+
+    replaceHeadComponents(filteredComponents)
 }

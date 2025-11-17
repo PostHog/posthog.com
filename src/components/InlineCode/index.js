@@ -3,6 +3,6 @@ import React from 'react'
 export const InlineCode = (props) => (
     <code
         {...props}
-        className="text-inherit p-1 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark !text-[13px]"
+        className="text-red dark:text-yellow py-0.5 px-1 rounded-sm bg-red/10 dark:bg-yellow/10 border border-red/50 dark:border-yellow/50"
     />
 )

@@ -6,9 +6,10 @@ import Link from 'components/Link'
 import { Bang, Eco, TrendUp } from 'components/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import usePostHog from 'hooks/usePostHog'
-import Modal from 'components/Modal'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
+import { useApp } from '../../context/App'
+import { useWindow } from '../../context/Window'
 
 const ProductDetails = () => (
     <>
@@ -23,11 +24,31 @@ const ProductDetails = () => (
     </>
 )
 
-export default function CTA() {
+const SignupEmbed = () => {
+    const { setWindowTitle } = useApp()
+    const { appWindow } = useWindow()
+
+    useEffect(() => {
+        if (appWindow) {
+            setWindowTitle(appWindow, 'Signup trends')
+        }
+    }, [])
+
+    return (
+        <iframe
+            className="m-0 size-full"
+            width="100%"
+            height="100%"
+            src="https://app.posthog.com/embedded/gQMqaRP0ZH0V3P3XXrSDnNcqDGoe7Q?refresh=true"
+        />
+    )
+}
+
+export default function CTA({ headline = true }) {
+    const { addWindow } = useApp()
     const posthog = usePostHog()
     const [version, setVersion] = useState('us')
     const [signupCountToday, setSignupCountToday] = useState(0)
-    const [modalOpen, setModalOpen] = useState(false)
     const [ref, inView] = useInView({ threshold: 0.5, triggerOnce: true })
 
     useEffect(() => {
@@ -42,41 +63,23 @@ export default function CTA() {
 
     return (
         <>
-            <Modal open={modalOpen} setOpen={setModalOpen}>
-                <div className="px-5">
-                    <div className="max-w-4xl mx-auto mt-12 relative rounded-md overflow-hidden">
-                        <iframe
-                            className="m-0"
-                            width="100%"
-                            height="400"
-                            src="https://app.posthog.com/embedded/gQMqaRP0ZH0V3P3XXrSDnNcqDGoe7Q?refresh=true"
-                        />
-                    </div>
-                </div>
-            </Modal>
-            <section ref={ref} className="pt-8 md:pt-0 px-5 lg:px-0 overflow-hidden">
-                {inView && (
-                    <motion.div
-                        transition={{ delay: 1, duration: 0.5 }}
-                        initial={{ translateX: '100%', opacity: 0 }}
-                        animate={{ translateX: '-2rem', opacity: 1 }}
-                        className="absolute bottom-0 right-0 xl:block hidden -z-10"
-                    >
-                        <CloudinaryImage loading="eager" placeholder="none" width={300} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/conversion-hog.png" />
-                    </motion.div>
+            <section id="cta" ref={ref} className="pt-8 md:pt-0 px-5 lg:px-0">
+                {headline && (
+                    <>
+                        <h2 className={heading('lg')}>
+                            This is the <span className="text-red inline-block">call to action.</span>
+                        </h2>
+                        <h3 className={heading('sm')}>
+                            If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
+                        </h3>
+                    </>
                 )}
-                <h2 className={heading('lg')}>
-                    This is the <span className="text-red inline-block">call to action.</span>
-                </h2>
-                <h3 className={heading('sm')}>
-                    If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
-                </h3>
 
                 <div className="md:hidden py-12">
                     <ProductDetails />
                 </div>
 
-                <div className="md:grid grid-cols-2 gap-16 md:pt-24 pb-16 max-w-5xl mx-auto">
+                <div className="md:grid grid-cols-2 gap-16 @xl:pt-16 max-w-5xl mx-auto">
                     <div className="relative text-right">
                         <div className="mb-2">
                             <CloudinaryImage
@@ -98,7 +101,7 @@ export default function CTA() {
                                 transition={{ duration: 1, type: 'tween' }}
                                 initial={{ translateX: '-100vw' }}
                                 animate={{ translateX: 0 }}
-                                className="bg-blue text-left leading-none px-4 py-2 absolute -top-12 md:-top-8 left-4 right-4 lg:-left-16 md:right-auto rounded md:rounded-none"
+                                className="bg-blue text-left leading-none px-4 py-2 absolute -top-12 left-4 right-4 @xl:-left-4 md:right-auto rounded md:rounded-none"
                             >
                                 <span className="text-sm font-bold text-white">
                                     3 people <span className="text-xs text-normal">(would have)</span> added PostHog to
@@ -108,7 +111,7 @@ export default function CTA() {
                                 <span className="text-xs text-white">*if this were a real cart</span>
                             </motion.div>
                         )}
-                        <div className="absolute top-4 md:-top-16 -right-12">
+                        <div className="absolute top-4 -right-12">
                             <div className="relative">
                                 <Bang className="w-[189px] animate-grow" />
                                 <p className="px-8 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase leading-none font-bold text-lg rotate-6">
@@ -178,19 +181,28 @@ export default function CTA() {
                                 width="64"
                                 to={`https://${version === 'us' ? 'app' : 'eu'}.posthog.com/signup`}
                                 className="animate-grow-sm"
+                                state={{ initialTab: 'signup' }}
                             >
                                 Get started
                             </CallToAction>
                         </div>
 
                         <div className="flex items-center gap-3">
-                            <span className="bg-accent dark:bg-accent-dark rounded h-8 w-8 p-1">
+                            <span className="bg-accent rounded h-8 w-8 p-1">
                                 <TrendUp className="opacity-75" />
                             </span>
-                            <p className="text-sm text-primary/50 dark:text-primary-dark/50 leading-tight mb-0">
+                            <p className="text-sm text-secondary leading-tight mb-0">
                                 <strong>Hurry:</strong> {signupCountToday || 'Tons of '} companies signed up{' '}
                                 <button
-                                    onClick={() => setModalOpen(true)}
+                                    onClick={() =>
+                                        addWindow(
+                                            <SignupEmbed
+                                                location={{ pathname: 'signup-embed' }}
+                                                key="signup-embed"
+                                                newWindow
+                                            />
+                                        )
+                                    }
                                     className="font-bold dark:text-yellow text-red"
                                 >
                                     today

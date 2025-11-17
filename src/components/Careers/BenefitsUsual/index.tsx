@@ -1,3 +1,4 @@
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import React from 'react'
 
 export const benefits = [
@@ -62,9 +63,10 @@ const Benefit = ({ icon, title, details, className = '' }: BenefitProps) => {
 
 const BenefitsUsual: React.FC = () => {
     return (
-        <section className="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-2 lg:gap-8">
+        <section id="benefits" className="@container">
+            {/* <DebugContainerQuery /> */}
             <div className="">
-                <h2 className="text-4xl font-bold mb-2">
+                <h2 className="text-2xl @3xl:text-4xl font-bold mb-2">
                     The <em>boring</em> benefits
                 </h2>
                 <p>
@@ -77,8 +79,8 @@ const BenefitsUsual: React.FC = () => {
                     below.
                 </p>
             </div>
-            <div className="pt-12">
-                <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-2 md:gap-6 lg:gap-2">
+            <div className="not-prose pt-12">
+                <div className="grid @2xl:grid-cols-2 gap-6">
                     {benefits.map((benefit) => (
                         <Benefit key={benefit.title} {...benefit} />
                     ))}

@@ -23,9 +23,7 @@ export function Popover({ children, button }: { children: React.ReactNode; butto
             <HeadlessPopover.Button ref={setReferenceElement}>{button}</HeadlessPopover.Button>
 
             <HeadlessPopover.Panel ref={setPopperElement} style={styles.popper} {...attributes.popper}>
-                <div className="px-4 py-2 bg-white dark:bg-gray-accent-dark shadow-lg rounded-md max-h-[85vh] overflow-auto">
-                    {children}
-                </div>
+                <div className="px-4 py-2 bg-white  shadow-lg rounded-md max-h-[85vh] overflow-auto">{children}</div>
                 <div ref={setArrowElement} style={styles.arrow} />
             </HeadlessPopover.Panel>
         </HeadlessPopover>

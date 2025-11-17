@@ -41,7 +41,7 @@ Next, in the `redirect-test/app` folder, create a `providers.js` file and set up
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
   posthog.init("<ph_project_api_key>", {
@@ -80,7 +80,7 @@ In the `app` folder, create two new folders named `control` and `test`. In each 
 ```js
 // app/control/page.js
 'use client'
-import { usePostHog } from "posthog-js/react";
+import { usePostHog } from "@posthog/react";
 
 export default function Control() {
   const posthog = usePostHog();
@@ -101,7 +101,7 @@ This is what the test page looks like:
 ```js
 // app/test/page.js
 'use client'
-import { usePostHog } from "posthog-js/react";
+import { usePostHog } from "@posthog/react";
 
 export default function Test() {
   const posthog = usePostHog();
@@ -194,7 +194,7 @@ export async function middleware(request) {
 
 With our distinct ID, we use the PostHog API to check the value of the `main-redirect` feature flag for a user (because [we can’t use PostHog SDKs in Next.js middleware](https://vercel.com/docs/functions/edge-functions/edge-runtime#supported-apis)). This is known as evaluating the feature flag.
 
-Specifically, we evaluate the flag by making a POST request to the [decide](/docs/api/decide) route with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
+Specifically, we evaluate the flag by making a POST request to the [flags](/docs/api/flags) route with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
 
 ```js
 // redirect-test/middleware.js
@@ -213,7 +213,7 @@ Specifically, we evaluate the flag by making a POST request to the [decide](/doc
 
   // Evaluate experiment flag
   const ph_request = await fetch(
-    'https://us.i.posthog.com/decide?v=4', // or eu.i.posthog.com
+    'https://us.i.posthog.com/flags?v=2', // or eu.i.posthog.com
     requestOptions
   );
   const data = await ph_request.json();
@@ -307,7 +307,7 @@ export async function middleware(request) {
   };
 
   const ph_request = await fetch(
-    'https://us.i.posthog.com/decide?v=4', // or eu
+    'https://us.i.posthog.com/flags?v=2', // or eu
     requestOptions
   );
   const data = await ph_request.json();
@@ -377,7 +377,7 @@ We then import and use it in `app/providers.js` to add the bootstrap data to our
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import cookieCutter from 'cookie-cutter'
 
 if (typeof window !== 'undefined') {

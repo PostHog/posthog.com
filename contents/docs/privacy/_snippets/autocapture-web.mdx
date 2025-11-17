@@ -1,0 +1,25 @@
+In web apps using the [JavaScript Web SDK](/docs/libraries/js), the following data can be autocaptured.
+
+| Feature | Data captured |
+|---------|--------------|
+| Product analytics | Pageviews, pageleaves, clicks, changes of inputs, and form submissions associated with `<a>`, `<button>`, `<form>`, `<input>`, `<select>`, `<textarea>`, and `<label>` tags |
+| Web analytics | Pageviews, pageleaves, conversions, and [web vitals](https://github.com/GoogleChrome/web-vitals) |
+| Session replay | Clicks, mouse movements, scrolling, and snapshots of the DOM |
+| Error tracking | Exceptions thrown in the browser using `onError` and `onUnhandledRejection` |
+
+You can control autocapture using the `autocapture` option in the `posthog.init` call.
+
+You can disable autocapture entirely by setting `autocapture` to `false`.
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    autocapture: false,
+})
+```
+
+You can also control what is captured using the `AutocaptureConfig` object.
+
+import AutocaptureConfig from '../../product-analytics/_snippets/multilanguage/autocapture-config.mdx'
+
+<AutocaptureConfig /> 

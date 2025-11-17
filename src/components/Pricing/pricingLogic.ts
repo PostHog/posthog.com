@@ -5,6 +5,7 @@ import type { pricingLogicType } from './pricingLogicType'
 
 export const TEN_THOUSAND = 10000
 export const ONE_FIFTY_THOUSAND = 150000
+export const HUNDRED_THOUSAND = 100000
 export const MILLION = 1000000
 export const THREE_MILLION = 3000000
 export const FIVE_MILLION = 5000000
@@ -18,7 +19,7 @@ export const BILLION = 1000000000
 export const MAX_PRODUCT_ANALYTICS = TWO_FIFTY_MILLION
 export const MAX_SESSION_REPLAY = ONE_FIFTY_THOUSAND
 export const MAX_FEATURE_FLAGS = TEN_MILLION
-export const MAX_SURVEYS = TEN_THOUSAND
+export const MAX_SURVEYS = HUNDRED_THOUSAND
 
 export const product_type_to_max_events = {
     product_analytics: MAX_PRODUCT_ANALYTICS,

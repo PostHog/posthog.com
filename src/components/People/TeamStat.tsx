@@ -47,10 +47,10 @@ const TeamStat = ({ teamStatData, caption, icon }: Props): JSX.Element => {
     return (
         <div className="flex flex-col text-center">
             <HalfDoughnut chartData={data} stats={teamStatData[0]} />
-            <span className="mt-[-20px] px-7 md:px-0 lg:px-7 text-primary/75 text-sm dark:text-primary-dark/75 max-w-full md:max-w-[260px] lg:max-w-[230px] mx-auto">
+            <span className="mt-[-20px] px-7 md:px-0 lg:px-7 text-secondary text-sm dark:text-primary-dark/75 max-w-full md:max-w-[260px] lg:max-w-[230px] mx-auto">
                 {caption}
             </span>
-            <span className="mt-[9px] text-2xl">{icon}</span>
+            <span className="mt-[9px] text-xl">{icon}</span>
         </div>
     )
 }

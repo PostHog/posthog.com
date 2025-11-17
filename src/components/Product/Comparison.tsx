@@ -55,19 +55,34 @@ const companies = {
     Sprig: {
         comparisonURL: '',
     },
+    BugSnag: {
+        comparisonURL: '',
+    },
+    Datadog: {
+        comparisonURL: '',
+    },
+    Langfuse: {
+        comparisonURL: '',
+    },
+    Langsmith: {
+        comparisonURL: '',
+    },
+    Helicone: {
+        comparisonURL: '',
+    },
     PostHog: {
         comparisonURL: '',
     },
 }
 
-export default function Comparison({ comparison, columnCount, truncate }) {
+export default function Comparison({ comparison, columnCount, truncate, className }) {
     const [collapsed, setCollapsed] = useState(truncate)
     const activeCompanies = Object.keys(companies).filter((company) =>
         comparison.some(({ companies }) => Object.keys(companies).includes(company))
     )
     return (
         <>
-            <div className={`max-w-vw pb-2 mb-10 md:mb-20 [justify-content:_safe_center] overflow-auto`}>
+            <div className={`max-w-vw pb-2 mb-10 md:mb-20 [justify-content:_safe_center] overflow-auto ${className}`}>
                 <div
                     className={`flex-1 grid md:grid-cols-${columnCount} grid-cols-${
                         columnCount + 1
@@ -78,7 +93,7 @@ export default function Comparison({ comparison, columnCount, truncate }) {
                     }`}
                 >
                     {/* header row */}
-                    <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 border-t border-border dark:border-dark">
+                    <div className="bg-accent leading-tight p-2 mt-2 border-t border-input">
                         <strong></strong>
                     </div>
                     {activeCompanies.map((company) => {
@@ -88,10 +103,7 @@ export default function Comparison({ comparison, columnCount, truncate }) {
                                 <Logo className="w-32" />
                             </div>
                         ) : (
-                            <div
-                                key={company}
-                                className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 text-center"
-                            >
+                            <div key={company} className="bg-accent leading-tight p-2 mt-2 text-center">
                                 <strong className="block">{company}</strong>
                                 {comparisonURL && (
                                     <span className="block text-[12px] md:text-sm leading-tight">

@@ -3,6 +3,9 @@ import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
 import { ProfileData } from 'lib/strapi'
 import usePostHog from './usePostHog'
+import { COOKIELESS_SENTINEL_VALUE } from 'posthog-js/lib/src/constants'
+import Link from 'components/Link'
+import { useToast } from '../context/Toast'
 
 export type User = {
     id: number
@@ -60,6 +63,9 @@ type UserContextValue = {
     setNotifications: any
     isValidating: boolean
     voteReply: (id: number, vote: 'up' | 'down', user?: User) => Promise<void>
+    addBookmark: (args: { url: string; title: string; description: string }) => Promise<void>
+    removeBookmark: (args: { url: string; title: string; description: string }) => Promise<void>
+    reportSpam: (type: 'reply' | 'question', id: number) => Promise<void>
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -84,6 +90,9 @@ export const UserContext = createContext<UserContextValue>({
     setNotifications: () => undefined,
     isValidating: true,
     voteReply: async () => undefined,
+    addBookmark: async () => undefined,
+    removeBookmark: async () => undefined,
+    reportSpam: async () => undefined,
 })
 
 type UserProviderProps = {
@@ -96,6 +105,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null)
     const [jwt, setJwt] = useState<string | null>(null)
     const [notifications, setNotifications] = useState<any>([])
+    const { addToast } = useToast()
 
     const posthog = usePostHog()
 
@@ -104,7 +114,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         if (jwt && (await fetchUser(jwt))) {
             setJwt(jwt)
         } else {
-            logout()
+            clearUser()
         }
         setIsValidating(false)
     }
@@ -162,7 +172,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             try {
                 const distinctId = posthog?.get_distinct_id?.()
 
-                if (distinctId) {
+                if (distinctId && distinctId !== COOKIELESS_SENTINEL_VALUE) {
                     await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/${user.id}`, {
                         method: 'PUT',
                         headers: {
@@ -198,14 +208,27 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         }
     }
 
-    const logout = async (): Promise<void> => {
-        posthog?.capture('squeak logout')
-
+    const clearUser = async (): Promise<void> => {
         localStorage.removeItem('jwt')
         localStorage.removeItem('user')
 
         setUser(null)
         setJwt(null)
+    }
+
+    const logout = async (): Promise<void> => {
+        posthog?.capture('squeak logout')
+
+        addToast({
+            title: 'Successfully signed out of PostHog.com',
+            description: (
+                <Link to="https://app.posthog.com" className="text-red dark:text-yellow font-semibold">
+                    Looking for the app?
+                </Link>
+            ),
+        })
+
+        clearUser()
     }
 
     const signUp = async ({
@@ -322,6 +345,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                                     },
                                 },
                             },
+                            bookmarks: true,
                         },
                     },
                     role: {
@@ -571,6 +595,89 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         })
     }
 
+    const addBookmark = async ({ url, title, description }: { url: string; title: string; description: string }) => {
+        const profileID = user?.profile?.id
+        if (!profileID) return
+        const jwt = await getJwt()
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwt}`,
+            },
+            body: JSON.stringify({
+                data: {
+                    bookmarks: [
+                        ...(user?.profile?.bookmarks?.filter((b) => b.url !== url) || []),
+                        { url, title, description },
+                    ],
+                },
+            }),
+        })
+
+        addToast({
+            title: 'Bookmark added',
+            description: (
+                <>
+                    This page has been added to your{' '}
+                    <Link to="/bookmarks" state={{ newWindow: true }} className="text-red dark:text-yellow font-bold">
+                        bookmarks
+                    </Link>
+                    .
+                </>
+            ),
+            onUndo: async () => {
+                removeBookmark({ url, title, description })
+            },
+        })
+        await fetchUser()
+    }
+
+    const removeBookmark = async ({ url, title, description }: { url: string; title: string; description: string }) => {
+        const profileID = user?.profile?.id
+        if (!profileID) return
+        const jwt = await getJwt()
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwt}`,
+            },
+            body: JSON.stringify({
+                data: {
+                    bookmarks: user?.profile?.bookmarks?.filter((b) => b.url !== url),
+                },
+            }),
+        })
+        await fetchUser()
+        addToast({
+            title: 'Bookmark removed',
+            description: 'This page has been removed from your bookmarks.',
+            onUndo: async () => {
+                addBookmark({ url, title, description })
+            },
+        })
+    }
+
+    const reportSpam = async (type: 'reply' | 'question', id: number) => {
+        const profileID = user?.profile?.id
+        if (!profileID) return
+        const jwt = await getJwt()
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/report-spam`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwt}`,
+            },
+            body: JSON.stringify({
+                data: {
+                    type,
+                    id,
+                },
+            }),
+        })
+    }
+
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(user))
     }, [user])
@@ -593,6 +700,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         setNotifications: updateNotifications,
         isValidating,
         voteReply,
+        addBookmark,
+        removeBookmark,
+        reportSpam,
     }
 
     return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

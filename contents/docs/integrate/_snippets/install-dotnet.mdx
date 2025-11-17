@@ -23,7 +23,7 @@ Make sure to configure PostHog with your project API key, instance address, and 
 {
   "PostHog": {
     "ProjectApiKey": "<ph_project_api_key>",
-    "Host": "<ph_client_api_host>"
+    "HostUrl": "<ph_client_api_host>"
   }
 }
 ```
@@ -34,26 +34,10 @@ Use a secrets manager to store your personal API key. For example, when developi
 
 ```bash
 dotnet user-secrets init
-dotnet user-secrets set "PostHog:PersonalApiKey" "phc_..."
+dotnet user-secrets set "PostHog:PersonalApiKey" "phx_..."
 ```
 
 You can find your project API key and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
-
-To see detailed logging, set the log level to `Debug` or `Trace` in `appsettings.json`:
-
-```json
-{
-  "DetailedErrors": true,
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning",
-      "PostHog": "Trace"
-    }
-  },
-  ...
-}
-```
 
 ## Working with .NET Feature Management
 
@@ -171,3 +155,22 @@ public static readonly PostHogClient PostHog = new(new PostHogOptions {
 });
 ```
 
+## Debug mode
+
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
+
+To see detailed logging, set the log level to `Debug` or `Trace` in `appsettings.json`:
+
+```json
+{
+  "DetailedErrors": true,
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning",
+      "PostHog": "Trace"
+    }
+  },
+  ...
+}
+```

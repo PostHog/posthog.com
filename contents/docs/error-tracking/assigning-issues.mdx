@@ -1,0 +1,71 @@
+---
+title: Assign issues to teammates
+---
+
+Error tracking enables you to assign issues to specific PostHog [roles](https://app.posthog.com/settings/organization-roles) or teammates. This helps your team find relevant issues through **filtering**. You can also set up team-specific **alerting** to notify them when assigned issues are created or reopened.
+
+
+## Assigning issues
+
+You can manually assign issues as you triage them in the UI. This can be done both in the issue list and issue detail pages.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_ui_light_109b2bf454.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_ui_dark_4682b2ac80.png"
+    alt="Error tracking assignment UI"
+    classes="rounded"
+/>
+
+1. In your error tracking [issue list](https://app.posthog.com/error_tracking), click the **unassigned** selector under each issue to assign it to a role or user.
+
+2. On the detail page of each issue, click the **Assignee** selector to assign it to a role or user.
+
+Want to assign issues to a **team** rather than an individual teammate? You can create a role in [your project settings](https://app.posthog.com/settings/organization-roles).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/roles_light_6c7ea17be9.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/roles_dark_f721b94577.png"
+  alt="Error tracking role assignees"
+  classes="rounded"
+/>
+
+## Automatic issue assignment
+
+You can set up automatic issue assignment through a set of rules. This can be configured in the [error tracking settings](https://app.posthog.com/error_tracking/configuration?tab=error-tracking-auto-assignment#selectedSetting=error-tracking-auto-assignment) using **auto assignment rules**.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_rules_light_1cf9a2437a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_rules_dark_11e0830b0c.png"
+  alt="Error tracking auto assignment rules"
+  classes="rounded"
+/>
+
+Assignment conditions are evaluated against the properties of the exception event that created the issue. Because assignment rules are evaluated during ingestion, the stack trace (if present) will be unminified, which enables filtering on exception properties such as function name and source file.
+
+Issues can be automatically assigned to a **role** or **user** by configuring a set of filters. These filters can be configured to match **any** or **all** of the criteria.
+
+You can configure automatic assignment to filter on any [event property](/docs/data/events) in PostHog. When there are multiple values for a property, the filters return true if it matches **any** of the values. For example, if you have multiple `exception_functions` values, the filters returns true if it matches **any** of the functions.
+
+Here are some common properties you can filter on:
+
+| Property | Event property | Description |
+| --- | --- | --- |
+| Exception type | `$exception_types` | The type of exception(s) that occurred. |
+| Exception message | `$exception_values` | The message(s) detected on the error. |
+| Exception function | `$exception_functions` | The function(s) where the exception occurred. |
+| Exception source | `$exception_sources` | The source file(s) where the exception occurred. |
+| Exception was handled | `$exception_handled` | Whether the exception was handled by the application. |
+| Device type | `$device_type` | The type of device that the error occurred on. |
+| Browser | `$browser` | The browser that the error occurred in. |
+| Current URL | `$current_url` | The URL that the error occurred on. |
+| Feature flag | `$feature_flag` | The feature flag that the error occurred on. |
+
+You can also set custom properties on the error tracking event to filter on. For example, setting a custom `params_received` property to provide more context or debug information.
+
+### Order of issue assignment rules
+
+Issue assignment filters are evaluated in the order they are configured. They can also be reordered once created. The first filter that matches is used to assign the issue. This means you should configure the most specific filters first, and then the more general filters later.
+
+### Alerting based on assignment 
+
+A common use case for automatic issue assignment is to alert assignees of new issues. Once the issues are automatically assigned, you can set up alerts to notify the assignee. See the [alerts](/docs/error-tracking/alerts) guide for more information.

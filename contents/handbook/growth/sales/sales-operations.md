@@ -48,7 +48,7 @@ getting live **production** data through our pipeline and available for analysis
    1. A [blog post](/blog/aarrr-pirate-funnel) on getting started with the framework.
    2. A sample AARRR [tracking plan](https://docs.google.com/spreadsheets/d/12uV5aKAhU_wygUQl3YXZU2J_QN_AZi4nPFj-9WIKhlY/edit#gid=0) which we can give to customers to fill in.  It shows how we do things at PostHog and may help inspire people who don't know how to get started.
 1. Encourage them to create dashboards for them to show off PostHog in the wider organization.
-1. Keep on top of any [support](/handbook/growth/customer-support) requests / blockers they may have.
+1. Keep on top of any [support](/handbook/support/customer-support) requests / blockers they may have.
 
 
 ## Free trials?
@@ -73,7 +73,7 @@ By contrast, paid has premium features around collaboration - such as user permi
 
 Congratulations, this is the best part! Now we focus on making customers successful at unlocking insights into their product. 
 
-Read about how we do this in the dedicated handbook section, [Ensuring Customer Delight at PostHog](/handbook/growth/customer-support). 
+Read about how we do this in the dedicated handbook section, [Ensuring Customer Delight at PostHog](/handbook/support/customer-support). 
 
 ## How we measure revenue
 

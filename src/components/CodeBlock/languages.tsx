@@ -107,6 +107,10 @@ const languageMap: LanguageMap = {
         language: 'elixir',
         label: 'Elixir',
     },
+    llm: {
+        language: 'markdown',
+        label: 'LLM prompt',
+    },
     segment: {
         language: 'javascript',
         label: 'Segment',

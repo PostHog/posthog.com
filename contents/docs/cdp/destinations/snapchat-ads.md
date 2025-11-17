@@ -4,11 +4,9 @@ templateId:
    - template-snapchat-ads
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
-<Requirements />
 
 You'll also need access to the relevant Snapchat Business account.
 
@@ -16,9 +14,9 @@ You'll also need access to the relevant Snapchat Business account.
 
 1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
 
-2. Click the **Destinations** tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=snapchat) tab.
 
-3. Search for **Snapchat Ads Conversions** and select the destination.
+3. Search for **Snapchat Ads Conversions** and click **+ Create**.
 
 4. Connect your Snapchat Business account at the configuration step.
 

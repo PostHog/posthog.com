@@ -6,59 +6,47 @@ showTitle: true
 
 import RegionWarning from "../_snippets/region-warning.mdx"
 import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<ProxyWarning />
+<CalloutBox icon="IconWarning" title="Warning" type="fyi">
 
-<RegionWarning />
+  1. <ProxyWarning />
+  2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
 
-Vercel supports [rewrites](https://vercel.com/docs/concepts/projects/project-configuration#rewrites) which we can use as a reverse proxy. Create a `vercel.json` file and add a `rewrites` object from the `/ingest` route.
+</CalloutBox>
 
-```json
-{
-  "rewrites": [
-    {
-      "source": "/ingest/static/:path*",
-      "destination": "https://us-assets.i.posthog.com/static/:path*"
-    },
-    {
-      "source": "/ingest/:path*",
-      "destination": "https://us.i.posthog.com/:path*"
-    }
-  ]
-}
-```
-
-Some frameworks, like **SvelteKit** and [Astro](/tutorials/astro-analytics), require a hungrier regex pattern like:
+Vercel supports [rewrites](https://vercel.com/docs/concepts/projects/project-configuration#rewrites) which we can use as a reverse proxy. Create a `vercel.json` file and add a `rewrites` object from a custom route.
 
 ```json
 {
   "rewrites": [
     {
-      "source": "/ingest/static/:path(.*)",
-      "destination": "https://us-assets.i.posthog.com/static/:path*"
+      "source": "/<ph_proxy_path>/static/(.*)",
+      "destination": "https://us-assets.i.posthog.com/static/$1"
     },
     {
-      "source": "/ingest/:path(.*)",
-      "destination": "https://us.i.posthog.com/:path*"
+      "source": "/<ph_proxy_path>/(.*)",
+      "destination": "https://us.i.posthog.com/$1"
     }
   ]
 }
 ```
 
-> **Note:** Some frameworks, like T3 app, don't support Vercel rewrites well. If neither of these options work, we recommend trying another proxy method.
+> **Note:** Some frameworks, like T3 app, don't support Vercel rewrites well. In this scenario, we recommend trying another proxy method.
 
-Once done, set the `/ingest` route of your domain as the API host in your PostHog initialization like this:
+Once done, set the `/<ph_proxy_path>/` route of your domain as the API host in your PostHog initialization like this:
 
 ```js
-posthog.init('<ph_project_api_key>',
-  {
-    api_host: 'https://www.your-domain.com/ingest',
-    ui_host: '<ph_app_host>'
-  }
-)
+posthog.init('<ph_project_api_key>', {
+  api_host: '/<ph_proxy_path>/',
+  ui_host: '<ph_app_host>',
+  defaults: '<ph_posthog_js_defaults>',
+})
 ```
 
-Once updated, deploy your changes on Vercel and check that PostHog requests are going to `https://www.your-domain.com/ingest` by checking the network tab on your domain.
+Once updated, deploy your changes on Vercel and check that PostHog requests are going to `/<ph_proxy_path>/` by checking the network tab on your domain.
 
 ## Setup video
 

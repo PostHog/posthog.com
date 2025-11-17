@@ -11,6 +11,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
 import AskMax from 'components/AskMax'
+import ReaderView from 'components/ReaderView'
 
 export const quickLinks = [
     {
@@ -74,7 +75,7 @@ export const Content = ({ quickLinks = false }) => {
                 <h3 className="m-0 text-xl">Resources</h3>
                 <p className="text-[15px]">Real-world use cases to get you started</p>
 
-                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 @md:grid @md/reader-content:grid-cols-2 @3xl/reader-content:grid-cols-3">
                     <ResourceItem
                         type="Guide"
                         title="Best practices for feature flags"
@@ -84,7 +85,7 @@ export const Content = ({ quickLinks = false }) => {
                     <ResourceItem
                         type="Guide"
                         title="Feature flags API"
-                        description="Evaluate and update with the /decide/ endpoint"
+                        description="Evaluate and update with the /flags/ endpoint"
                         url="/tutorials/api-feature-flags"
                     />
                     <ResourceItem
@@ -117,7 +118,7 @@ export const Content = ({ quickLinks = false }) => {
                     type="custom"
                     size="md"
                     className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
-                    childClassName="text-primary/75 dark:text-primary-dark/75 group-hover:text-primary/100 dark:group-hover:text-primary-dark/100 !bg-white dark:!bg-dark !border-light dark:!border-dark"
+                    childClassName="text-secondary group-hover:text-primary !bg-white dark:!bg-dark !border-light dark:!border-dark"
                     width="[calc(100%_+_3px)]"
                 >
                     Explore guides
@@ -128,7 +129,7 @@ export const Content = ({ quickLinks = false }) => {
                 <h3 className="mb-1 text-xl">Nifty things you can do with feature flags</h3>
                 <p className="text-[15px]">Some use cases you may not have thought of</p>
 
-                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 @md:grid @md/reader-content:grid-cols-2 @3xl/reader-content:grid-cols-3">
                     <ResourceItem
                         title="Add popups to a React app"
                         description="Using payloads to send arbitrary data to your frontend"
@@ -152,38 +153,36 @@ export const Content = ({ quickLinks = false }) => {
 
 const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
     return (
-        <Layout>
+        <ReaderView>
             <SEO title="Feature flags - Docs - PostHog" />
 
-            <PostLayout title={'Feature flags'} hideSurvey hideSidebar>
-                <Intro
-                    subheader="Getting started"
-                    title="Feature flags"
-                    description="Toggle features for cohorts or individuals to test the impact before rolling out to everyone."
-                    buttonText="Create your first feature flag"
-                    buttonLink="/docs/feature-flags/installation"
-                    imageColumnClasses="max-w-96 md:-mt-8"
-                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
-                    imageClasses=""
-                />
+            <Intro
+                subheader="Getting started"
+                title="Feature flags"
+                description="Toggle features for cohorts or individuals to test the impact before rolling out to everyone."
+                buttonText="Create your first feature flag"
+                buttonLink="/docs/feature-flags/installation"
+                imageColumnClasses="max-w-96 md:-mt-8"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
+                imageClasses=""
+            />
 
-                <AskMax
-                    quickQuestions={[
-                        'Why is there a delay in loading flags?',
-                        'How do I create a multivariate flag?',
-                        'Can I override a flag?',
-                    ]}
-                />
+            <AskMax
+                quickQuestions={[
+                    'Why is there a delay in loading flags?',
+                    'How do I create a multivariate flag?',
+                    'Can I override a flag?',
+                ]}
+            />
 
-                <Content />
+            <Content />
 
-                <div className="pt-8">
-                    <CallToAction to="/docs/feature-flags/manual" width="full">
-                        Visit the manual
-                    </CallToAction>
-                </div>
-            </PostLayout>
-        </Layout>
+            <div className="pt-8">
+                <CallToAction to="/docs/feature-flags/manual" width="full">
+                    Visit the manual
+                </CallToAction>
+            </div>
+        </ReaderView>
     )
 }
 

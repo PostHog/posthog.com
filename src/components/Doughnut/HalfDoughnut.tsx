@@ -11,7 +11,7 @@ interface Props {
 
 const HalfDoughnut = ({ chartData, stats }: Props): JSX.Element => {
     return (
-        <div className="relative h-[137px] flex justify-center">
+        <div className="relative h-24 flex justify-center">
             <Doughnut
                 data={chartData}
                 options={{
@@ -31,7 +31,7 @@ const HalfDoughnut = ({ chartData, stats }: Props): JSX.Element => {
                 }}
             />
             <div className="absolute text-center top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                <h3 className="mb-0 text-4xl">{stats}%</h3>
+                <h3 className="mb-0 text-xl">{stats}%</h3>
             </div>
         </div>
     )

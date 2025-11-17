@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting and FAQs
+title: Customer data platform troubleshooting and FAQs
 ---
 
 ## My transformation or destination isn't working, what do I do?

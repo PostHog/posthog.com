@@ -51,7 +51,7 @@ const DropdownContainer = forwardRef(function DropdownContainer(props, ref) {
     return (
         <div
             ref={ref}
-            className="px-5 py-4 absolute w-full border-b z-[50] dark:bg-accent-dark bg-accent border-border dark:border-dark shadow-md overflow-y-auto h-[40vh]"
+            className="px-5 py-4 absolute w-full border-b z-[50] dark:bg-accent-dark bg-accent border-input shadow-md overflow-y-auto h-[40vh]"
         >
             {children}
         </div>
@@ -100,7 +100,7 @@ export const MenuContainer: React.FC<{
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className={`fixed w-full h-full bg-accent/60 dark:bg-accent-dark/60 top-0 left-0 z-[99999999] ${backgroundClassName}`}
+            className={`fixed w-full h-full bg-accent top-0 left-0 z-[99999999] ${backgroundClassName}`}
         >
             <motion.div
                 onClick={(e) => e.stopPropagation()}
@@ -116,7 +116,7 @@ export const MenuContainer: React.FC<{
                     dragControls={dragControls}
                     drag="y"
                     dragListener={false}
-                    className={`bg-white dark:bg-accent-dark pb-4 pt-2 px-4 border-t border-border dark:border-dark ${className}`}
+                    className={`bg-white dark:bg-accent-dark pb-4 pt-2 px-4 border-t border-input ${className}`}
                 >
                     <div
                         onPointerDown={startDrag}
@@ -196,7 +196,7 @@ export default function MobileNav({ className = '', menu: postMenu }) {
         <div className={compact ? 'sticky top-[69px] z-[50] dark:bg-dark bg-tan' : ''}>
             <button
                 onClick={() => setOpen(open === 'menu' ? null : 'menu')}
-                className={`font-bold px-5 py-2 flex w-full items-center justify-between border-b border-border dark:border-dark group -mt-1 ${className}`}
+                className={`font-bold px-5 py-2 flex w-full items-center justify-between border-b border-input group -mt-1 ${className}`}
             >
                 <span className="flex items-center space-x-2 group-active:top-[0.5px] group-active:scale-[.98] transition-all">
                     {ActiveIcon && (
@@ -217,7 +217,7 @@ export default function MobileNav({ className = '', menu: postMenu }) {
                             {menu?.parent?.menu && (
                                 <li className="pb-1 mb-2 flex flex-start items-center relative">
                                     <button
-                                        className="inline-block font-bold bg-gray-accent-light dark:bg-gray-accent-dark mr-2 rounded-sm p-1"
+                                        className="inline-block font-bold bg-accent mr-2 rounded-sm p-1"
                                         onClick={() => {
                                             handleClick({ children: menu?.parent?.menu })
                                         }}
@@ -249,7 +249,7 @@ export default function MobileNav({ className = '', menu: postMenu }) {
                                                         active || url === pathname
                                                             ? 'active-product opacity-90'
                                                             : 'opacity-50'
-                                                    } hover:opacity-100 border-b border-gray-accent-light/50 dark:border-gray-accent-dark border-solid font-semibold flex w-full justify-between space-x-1 items-center py-2`}
+                                                    } hover:opacity-100 border-b border-input dark:border-solid font-semibold flex w-full justify-between space-x-1 items-center py-2`}
                                                     onClick={() => {
                                                         handleClick(menuItem)
                                                     }}

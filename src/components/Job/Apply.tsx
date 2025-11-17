@@ -1,19 +1,20 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import { button, CallToAction, child, container, TrackedCTA } from 'components/CallToAction'
+import { CallToAction, child, container, TrackedCTA } from 'components/CallToAction'
 import { Check2 } from 'components/Icons/Icons'
 import Link from 'components/Link'
-import Modal from 'components/Modal'
 import { AnimatePresence, motion } from 'framer-motion'
-import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState, useCallback } from 'react'
-import Confetti from 'react-confetti'
-import GitHubButton from 'react-github-btn'
+import React, { useState, useCallback, useEffect } from 'react'
 import { NewsletterForm } from 'components/NewsletterForm'
-import { Close } from 'components/NotProductIcons'
 import usePostHog from '../../hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
-import { IconExternal } from '@posthog/icons'
 import { useDropzone } from 'react-dropzone'
+import Input from '../OSForm/input'
+import Textarea from '../OSForm/textarea'
+import { useApp } from '../../context/App'
+import { useWindow } from '../../context/Window'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import { IconSpinner } from '@posthog/icons'
+
 const allowedFileTypes = ['application/pdf']
 
 interface IResumeComponentProps {
@@ -24,58 +25,86 @@ interface IResumeComponentProps {
 }
 
 const components = {
-    valueselect: ({ title, required, path, options }) => (
-        <select
-            name={title}
-            data-path={path}
-            required={required}
-            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
-        >
-            <option disabled selected value="">
-                Select an option
-            </option>
-            {options.map(({ label, value }) => {
-                return (
-                    <option key={value} value={value}>
-                        {label}
-                    </option>
-                )
-            })}
-        </select>
+    valueselect: ({
+        title,
+        required,
+        path,
+        options,
+    }: {
+        title: string
+        required: boolean
+        path: string
+        options: Array<{ label: string; value: string }>
+    }) => (
+        <div className="w-full">
+            <label className="block text-sm font-medium mb-1">
+                {title}
+                {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
+            </label>
+            <select
+                name={title}
+                data-path={path}
+                required={required}
+                className="w-full bg-primary border border-primary rounded px-2.5 py-2 text-[15px]"
+            >
+                <option disabled selected value="">
+                    Select an option
+                </option>
+                {options.map(({ label, value }: { label: string; value: string }) => {
+                    return (
+                        <option key={value} value={value}>
+                            {label}
+                        </option>
+                    )
+                })}
+            </select>
+        </div>
     ),
     string: ({ title, required, path, placeholder }: IResumeComponentProps) => (
-        <input
+        <Input
+            label={title}
+            type="text"
+            size="md"
+            direction="column"
+            touched={false}
             data-path={path}
             required={required}
-            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
-            placeholder={typeof placeholder === 'string' ? placeholder : title}
+            placeholder={title}
+            description={placeholder}
             name={title}
         />
     ),
     email: ({ title, required, path, placeholder }: IResumeComponentProps) => (
-        <input
+        <Input
+            label={title}
+            type="email"
+            size="md"
+            direction="column"
+            touched={false}
             data-path={path}
             required={required}
-            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
-            type="email"
-            placeholder={placeholder || title}
+            placeholder={title}
+            description={placeholder}
             name={title}
         />
     ),
     longtext: ({ title, required, path, placeholder }: IResumeComponentProps) => (
-        <textarea
+        <Textarea
+            label={title}
             rows={5}
+            direction="column"
+            touched={false}
             data-path={path}
             required={required}
-            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white/10 dark:text-white"
-            placeholder={placeholder || title}
+            placeholder={title}
+            description={placeholder}
             name={title}
         />
     ),
     file: ({ title, required, path }: IResumeComponentProps) => {
-        const [fileName, setFileName] = useState()
+        const [fileName, setFileName] = useState<string | null>(null)
 
-        const onDrop = useCallback((acceptedFiles) => {
+        const onDrop = useCallback((acceptedFiles: File[]) => {
             if (acceptedFiles.length > 0) {
                 setFileName(acceptedFiles[0].name)
                 const dataTransfer = new DataTransfer()
@@ -97,123 +126,216 @@ const components = {
         })
 
         return (
-            <div
-                {...getRootProps()}
-                className={`relative h-24 w-full border border-light dark:border-dark ${
-                    isDragActive ? 'bg-blue/10' : 'bg-accent dark:bg-accent-dark'
-                } rounded-md flex justify-center items-center text-black/50 dark:text-white/50`}
-            >
-                <div className="absolute">
-                    {fileName ? (
-                        <p className="!m-0">{fileName}</p>
-                    ) : (
-                        <p className="flex space-x-3 items-center !m-0">
-                            <button type="button" className={container('primary', 'sm')} onClick={open}>
-                                <span className={child('primary', undefined, undefined, 'sm')}>Upload file</span>
-                            </button>
-                            <span className="text-sm">or drag and drop here</span>
-                        </p>
-                    )}
+            <div className="w-full">
+                <label className="block text-sm font-medium mb-1">
+                    {title}
+                    {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
+                </label>
+                <div
+                    {...getRootProps()}
+                    className={`relative h-24 w-full border border-primary ${
+                        isDragActive ? 'bg-blue/10' : 'bg-accent'
+                    } rounded-md flex justify-center items-center text-black/50 dark:text-white/50`}
+                >
+                    <div className="absolute">
+                        {fileName ? (
+                            <p className="!m-0">{fileName}</p>
+                        ) : (
+                            <p className="flex space-x-3 items-center !m-0">
+                                <button type="button" className={container('primary', 'sm')} onClick={open}>
+                                    <span className={child('primary', undefined, undefined, 'sm')}>Upload file</span>
+                                </button>
+                                <span className="text-sm">or drag and drop here</span>
+                            </p>
+                        )}
+                    </div>
+                    <input {...getInputProps()} ref={inputRef} data-path={path} required={required} name={title} />
                 </div>
-                <input {...getInputProps()} ref={inputRef} data-path={path} required={required} name={title} />
             </div>
         )
     },
+    boolean: ({ title, required, path }: IResumeComponentProps) => (
+        <div className="w-full">
+            <label className="block text-sm font-medium mb-1">
+                {title}
+                {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
+            </label>
+            <div className="flex space-x-4">
+                <label className="flex items-center space-x-2">
+                    <input
+                        data-path={path}
+                        type="radio"
+                        name={title}
+                        value={true}
+                        className="w-4 h-4"
+                        required={required}
+                    />
+                    <span>Yes</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                    <input
+                        data-path={path}
+                        type="radio"
+                        name={title}
+                        value={false}
+                        className="w-4 h-4"
+                        required={required}
+                    />
+                    <span>No</span>
+                </label>
+            </div>
+        </div>
+    ),
 }
 
-const Form = ({ setSubmitted, info, id }) => {
-    const [error, setError] = useState(null)
-    const handleSubmit = (e) => {
+const Form = ({
+    onSubmit,
+    info,
+    id,
+    isInExcludedCountry,
+}: {
+    onSubmit: () => void
+    info: any
+    id: string
+    isInExcludedCountry?: boolean
+}) => {
+    const { setConfetti } = useApp()
+    const [error, setError] = useState<string | null>(null)
+    const [loading, setLoading] = useState(false)
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const data = new FormData(e.target)
-        const form = new FormData()
-        let error = null
-        for (const [name, value] of data) {
-            const el = e.target.querySelector(`[name="${name}"]`)
-            const path = el.dataset.path
-            if (el.type === 'file') {
-                if (!allowedFileTypes.includes(value.type)) {
-                    error = `Allowed file types: ${allowedFileTypes.join(', ')}`
-                    break
+        setLoading(true)
+        setError(null)
+
+        try {
+            const data = new FormData(e.currentTarget)
+            const form = new FormData()
+
+            for (const [name, value] of data as any) {
+                const el = e.currentTarget.querySelector(`[name="${name}"]`) as HTMLInputElement
+                const path = el?.dataset.path
+                if (el?.type === 'file') {
+                    if (!allowedFileTypes.includes((value as File).type)) {
+                        throw new Error(`Allowed file types: ${allowedFileTypes.join(', ')}`)
+                    }
+                    form.append(name, value)
+                    form.append(path || '', name)
+                } else {
+                    form.append(path || '', value as string)
                 }
-                form.append(name, value)
-                form.append(path, name)
-            } else {
-                form.append(path, value)
             }
-        }
-        setError(error)
-        form.append('jobPostingId', id)
-        fetch('/api/apply', {
-            method: 'POST',
-            body: form,
-        })
-            .then((res) => res.json())
-            .then(() => {
-                setSubmitted(true)
+
+            form.append('jobPostingId', id)
+
+            const res = await fetch('/api/apply', {
+                method: 'POST',
+                body: form,
             })
+
+            if (!res.ok) {
+                throw new Error('Failed to submit application. Please try again.')
+            }
+
+            onSubmit()
+            setConfetti(true)
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'An unexpected error occurred. Please try again.')
+        } finally {
+            setLoading(false)
+        }
     }
     return (
         <div>
             <h4 className="!text-lg mb-0">(Now for the fun part...)</h4>
             <p>Just fill out this painless form and we'll get back to you within a few days. Thanks in advance!</p>
+            {/*             
             <p className="opacity-50 text-sm">
                 <span className="font-bold">Bolded fields</span> are required
-            </p>
-            <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-2 gap-3">
-                    {info?.applicationFormDefinition?.sections?.map(({ fields }) => {
-                        return fields.map(({ field, isRequired, descriptionPlain }) => {
-                            const required = isRequired
-                            const type = field?.type?.toLowerCase()
+            </p> 
+            */}
+            <div className="bg-accent border border-primary rounded">
+                {isInExcludedCountry && (
+                    <div data-scheme="secondary" className="p-4 bg-accent border-b border-primary">
+                        <h5 className="m-0">Heads up!</h5>
+                        <p className="m-0 text-sm">
+                            It looks like you're applying from a country we don't hire in (yet!). You can learn more
+                            about where we hire in our{' '}
+                            <Link to="/handbook/people/hiring-process" state={{ newWindow: true }}>
+                                handbook
+                            </Link>
+                            .
+                        </p>
+                    </div>
+                )}
+                <form onSubmit={handleSubmit} className="p-4">
+                    <div className="grid grid-cols-2 gap-3">
+                        {info?.applicationFormDefinition?.sections?.map(({ fields }: { fields: any[] }) => {
+                            return fields.map(
+                                ({
+                                    field,
+                                    isRequired,
+                                    descriptionPlain,
+                                }: {
+                                    field: any
+                                    isRequired: boolean
+                                    descriptionPlain: string
+                                }) => {
+                                    const required = isRequired
+                                    const type = field?.type?.toLowerCase()
 
-                            return (
-                                <div
-                                    className={
-                                        type === 'string' || type === 'email' || type === 'valueselect'
-                                            ? 'sm:col-span-1 col-span-2 flex flex-col'
-                                            : 'col-span-2'
-                                    }
-                                    key={field?.path}
-                                >
-                                    <div className="flex-grow">
-                                        <label
-                                            className={`opacity-70 mb-1 inline-block ${required ? 'font-bold' : ''}`}
-                                            htmlFor={field?.title}
+                                    return (
+                                        <div
+                                            className={
+                                                type === 'string' ||
+                                                type === 'email' ||
+                                                type === 'valueselect' ||
+                                                type === 'boolean'
+                                                    ? 'sm:col-span-1 col-span-2 flex flex-col'
+                                                    : 'col-span-2'
+                                            }
+                                            key={field?.path}
                                         >
-                                            {field?.title}
-                                        </label>
-                                    </div>
-                                    {components[type] &&
-                                        components[type]({
-                                            title: field?.title,
-                                            required,
-                                            path: field?.path,
-                                            placeholder: descriptionPlain,
-                                            options: field?.selectableValues,
-                                        })}
-                                </div>
+                                            {components[type as keyof typeof components] &&
+                                                components[type as keyof typeof components]({
+                                                    title: field?.title,
+                                                    required,
+                                                    path: field?.path,
+                                                    placeholder: descriptionPlain,
+                                                    options: field?.selectableValues,
+                                                })}
+                                        </div>
+                                    )
+                                }
                             )
-                        })
-                    })}
-                </div>
-                {error && <p className="font-bold text-red m-0 mt-4">{error}</p>}
-                <button className={`${container()} mt-6 shadow-none !w-full box-border`}>
-                    <span className={child()}>Submit</span>
-                </button>
-            </form>
+                        })}
+                    </div>
+                    {error && <p className="font-bold text-red m-0 mt-4">{error}</p>}
+                    <button className={`${container()} mt-6 shadow-none !w-full box-border`} disabled={loading}>
+                        <span className={child()}>
+                            {loading ? <IconSpinner className="size-5 animate-spin mx-auto" /> : 'Submit'}
+                        </span>
+                    </button>
+                </form>
+            </div>
         </div>
     )
 }
 
 const code = 'X7DABDB33723'
 
-export default function Apply({ id, info }) {
+const ApplicationSuccess = ({ isInExcludedCountry }: { isInExcludedCountry?: boolean }) => {
+    const { setWindowTitle } = useApp()
+    const { appWindow } = useWindow()
     const posthog = usePostHog()
-    const [submitted, setSubmitted] = useState(false)
     const [copyTooltip, setCopyTooltip] = useState(false)
     const [copied, setCopied] = useState(false)
-    const [modalOpen, setModalOpen] = useState(true)
+
+    useEffect(() => {
+        if (appWindow) {
+            setWindowTitle(appWindow, 'Application received!')
+        }
+    }, [])
+
     const handleCopy = () => {
         navigator.clipboard.writeText(code)
         setCopyTooltip(true)
@@ -226,71 +348,57 @@ export default function Apply({ id, info }) {
         }, 3000)
     }
 
-    return submitted ? (
+    return (
         <>
-            <Modal open={modalOpen} setOpen={setModalOpen}>
-                <div className="fixed inset-0">
-                    <Confetti recycle={false} numberOfPieces={1000} />
-                </div>
-                <div onClick={() => setModalOpen(false)} className="flex flex-start justify-center absolute w-full p-4">
-                    <div
-                        className="max-w-xl bg-white dark:bg-dark rounded-md relative"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <button
-                            onClick={() => setModalOpen(false)}
-                            className="absolute right-4 top-4 bg-tan rounded-full w-8 h-8 text-black flex items-center justify-center group active:scale-[.90] focus:ring-0"
-                        >
-                            <span className="inline-block w-4 h-4 opacity-30 group-hover:opacity-50">
-                                <Close />
-                            </span>
-                        </button>
-                        <div className="px-8 text-center">
-                            <CloudinaryImage
-                                className=""
-                                objectFit="contain"
-                                placeholder="blurred"
-                                width={296}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Job/images/newsletter-signup.png"
-                            />
+            <ScrollArea className="bg-primary">
+                <div data-scheme="secondary" className="w-full text-primary rounded-md relative max-h-[80vh]">
+                    <div className="px-8 text-center">
+                        <CloudinaryImage
+                            className=""
+                            objectFit="contain"
+                            placeholder="blurred"
+                            width={296}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Job/images/newsletter-signup.png"
+                        />
+                    </div>
+                    <div className="bg-blue/10 py-8 px-6 md:px-12 mb-8">
+                        <div className="flex items-center space-x-2">
+                            <svg
+                                width="36"
+                                height="36"
+                                viewBox="0 0 36 36"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <rect width="36" height="36" rx="18" fill="#1D4AFF" fillOpacity="0.2" />
+                                <path
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    d="M11.3827 16.8177L15.3008 20.7359L24.6072 11.4295C25.1799 10.8568 26.1144 10.8568 26.6871 11.4295L27.5705 12.3129C28.1432 12.8856 28.1432 13.8201 27.5705 14.3928L16.4268 25.5365C15.8567 26.1066 14.9302 26.1101 14.3557 25.5453L8.43956 19.7282C8.14305 19.4378 7.99569 19.0787 8.0001 18.6639C8.00451 18.2492 8.15982 17.8935 8.46163 17.6094L9.3335 16.7887C9.9124 16.2442 10.8204 16.2574 11.3826 16.8196L11.3827 16.8177Z"
+                                    fill="#1D4AFF"
+                                />
+                            </svg>
+                            <h2 className="text-blue m-0 text-2xl">Application received!</h2>
                         </div>
-                        <div className="bg-blue/10 py-8 px-6 md:px-12 mb-8">
-                            <div className="flex items-center space-x-2">
-                                <svg
-                                    width="36"
-                                    height="36"
-                                    viewBox="0 0 36 36"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <rect width="36" height="36" rx="18" fill="#1D4AFF" fillOpacity="0.2" />
-                                    <path
-                                        fillRule="evenodd"
-                                        clipRule="evenodd"
-                                        d="M11.3827 16.8177L15.3008 20.7359L24.6072 11.4295C25.1799 10.8568 26.1144 10.8568 26.6871 11.4295L27.5705 12.3129C28.1432 12.8856 28.1432 13.8201 27.5705 14.3928L16.4268 25.5365C15.8567 26.1066 14.9302 26.1101 14.3557 25.5453L8.43956 19.7282C8.14305 19.4378 7.99569 19.0787 8.0001 18.6639C8.00451 18.2492 8.15982 17.8935 8.46163 17.6094L9.3335 16.7887C9.9124 16.2442 10.8204 16.2574 11.3826 16.8196L11.3827 16.8177Z"
-                                        fill="#1D4AFF"
-                                    />
-                                </svg>
-                                <h2 className="text-blue m-0 text-2xl">Application received!</h2>
-                            </div>
-                            <p className="text-base mt-2 mb-0">
-                                Our mailhog has delivered your information to the hiring manager.{' '}
-                                <strong>You can expect to get a response within a few days.</strong>
-                            </p>
-                        </div>
+                        <p className="text-base mt-2 mb-0">
+                            Our mailhog has delivered your information to the hiring manager.{' '}
+                            <strong>You can expect to get a response within a few days.</strong>
+                        </p>
+                    </div>
 
+                    {!isInExcludedCountry && (
                         <div className="px-6 md:px-12 mb-8">
                             <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Job/images/sticker.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/laptop_sticker_6c15a03be1.png"
                                 width={140}
-                                className="float-right ml-4"
+                                className="float-right ml-4 -mt-2 rotate-3"
                             />
 
                             <h3 className="m-0 text-base">Here's a laptop sticker, on us!</h3>
                             <p className="m-0 mb-3 text-sm">
                                 This code is our token of appreciation for taking the time to apply.
                             </p>
-                            <div className="rounded-md bg-tan dark:bg-accent-dark border border-light dark:border-dark  py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
+                            <div className="rounded-md bg-tan dark:bg-accent-dark border border-primary  py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
                                 <p className="font-semibold font-code m-0">{code}</p>
                                 <button
                                     disabled={copied}
@@ -337,90 +445,111 @@ export default function Apply({ id, info }) {
                                 </button>
                             </div>
                             <CallToAction
-                                externalNoIcon
                                 to="/merch?product=posthog-sticker"
                                 size="sm"
                                 className="!w-full"
+                                state={{ newWindow: true }}
                             >
-                                <span>Visit merch store</span>
-                                <IconExternal className="w-5 h-5 inline-block ml-1" />
+                                <span>Open merch store</span>
                             </CallToAction>
                         </div>
+                    )}
 
-                        <div className="mx-6 md:mx-12 py-2 ">
-                            <h4 className="mb-0">Be our next star?</h4>
-                            <aside className="float-right h-[28px] w-[125px] ml-8">
-                                <GitHubButton href="https://github.com/PostHog/posthog" />
-                            </aside>
-                            <p className="text-sm mb-0">
-                                We'd love if you starred our repo on GitHub (if you haven't already)!
-                            </p>
-                        </div>
+                    <div className={`mx-6 md:mx-12 pb-2  ${isInExcludedCountry ? '' : 'border-t border-primary pt-6'}`}>
+                        <h4 className="mb-0">More cool tech jobs</h4>
+                        <p className="text-sm mb-4">
+                            While you're waiting to hear back, you might also be interested in exploring our{' '}
+                            <Link
+                                to="/cool-tech-jobs"
+                                state={{ newWindow: true }}
+                                className="text-red dark:text-yellow font-semibold"
+                            >
+                                cool tech job board
+                            </Link>{' '}
+                            – it's where we highlight other companies with similar vibes to PostHog.
+                        </p>
 
-                        <div className="mx-6 md:mx-12 pt-6 pb-2 border-t border-light dark:border-dark">
-                            <h4 className="mb-0">More cool tech jobs</h4>
-                            <p className="text-sm mb-4">
-                                While you're waiting to hear back, you might also be interested in exploring our{' '}
-                                <Link href="/cool-tech-jobs" className="text-red dark:text-yellow font-semibold">
-                                    cool tech job board
-                                </Link>{' '}
-                                – it's where we highlight other companies with similar vibes to PostHog.
-                            </p>
+                        <CallToAction to="/cool-tech-jobs" size="sm" className="" state={{ newWindow: true }}>
+                            <span>Browse cool tech jobs</span>
+                        </CallToAction>
+                    </div>
 
-                            <CallToAction externalNoIcon to="/cool-tech-jobs" size="sm" className="">
-                                <span>Browse cool tech jobs</span>
-                                <IconExternal className="w-5 h-5 inline-block ml-1" />
-                            </CallToAction>
-                        </div>
+                    <div className="mx-6 md:mx-12 py-2 ">
+                        <NewsletterForm className="!py-0 !pt-6" />
+                    </div>
 
-                        <div className="mx-6 md:mx-12 py-2 ">
-                            <NewsletterForm className="!py-0 !pt-6" />
-                        </div>
-
-                        <div className="mx-6 md:mx-12 py-2 ">
-                            <h4 className="mb-0">Install PostHog on a side project</h4>
-                            <p className="text-[15px] mb-3">
-                                Feel free to give PostHog a whirl - we’d love to hear your feedback!
-                            </p>
-                            <RenderInClient
-                                placeholder={
-                                    <TrackedCTA
-                                        className="mt-auto"
-                                        to={`https://us.posthog.com/signup`}
-                                        size="sm"
-                                        event={{ name: `clicked Continue`, type: 'cloud' }}
-                                    >
-                                        Get started - free
-                                    </TrackedCTA>
-                                }
-                                render={() => (
-                                    <TrackedCTA
-                                        className="mt-auto"
-                                        to={`https://${
-                                            posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
-                                                ? 'eu'
-                                                : 'us'
-                                        }.posthog.com/signup`}
-                                        event={{ name: `clicked Continue`, type: 'cloud' }}
-                                    >
-                                        Get started - free
-                                    </TrackedCTA>
-                                )}
-                            />
-                        </div>
-
-                        <div className="mx-6 md:mx-12 pt-2 pb-6  text-center">
-                            <Link to="/" className="font-bold text-red hover:bg-tan/50 w-full block px-4 py-2 rounded">
-                                Go back to PostHog.com
-                            </Link>
-                        </div>
+                    <div className="mx-6 md:mx-12 py-2 ">
+                        <h4 className="mb-0">Install PostHog on a side project</h4>
+                        <p className="text-[15px] mb-3">
+                            Feel free to give PostHog a whirl - we'd love to hear your feedback!
+                        </p>
+                        <RenderInClient
+                            placeholder={
+                                <TrackedCTA
+                                    className="mt-auto"
+                                    to={`https://us.posthog.com/signup`}
+                                    size="sm"
+                                    event={{ name: `clicked Continue`, type: 'cloud' }}
+                                >
+                                    Get started - free
+                                </TrackedCTA>
+                            }
+                            render={() => (
+                                <TrackedCTA
+                                    className="mt-auto"
+                                    to={`https://${
+                                        posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                            ? 'eu'
+                                            : 'us'
+                                    }.posthog.com/signup`}
+                                    event={{ name: `clicked Continue`, type: 'cloud' }}
+                                >
+                                    Get started - free
+                                </TrackedCTA>
+                            )}
+                        />
                     </div>
                 </div>
-            </Modal>
+            </ScrollArea>
+        </>
+    )
+}
+
+export default function Apply({ id, info }: { id: string; info: any }) {
+    const posthog = usePostHog()
+    const { addWindow } = useApp()
+    const [submitted, setSubmitted] = useState(false)
+    const [isInExcludedCountry, setIsInExcludedCountry] = useState()
+
+    const handleSubmit = useCallback(() => {
+        setSubmitted(true)
+        addWindow(
+            <ApplicationSuccess
+                key="application-success"
+                location={{ pathname: 'application-success' }}
+                newWindow
+                isInExcludedCountry={isInExcludedCountry}
+            />
+        )
+    }, [isInExcludedCountry])
+
+    useEffect(() => {
+        setIsInExcludedCountry(posthog?.isFeatureEnabled?.('is-in-excluded-hiring-country'))
+    }, [posthog])
+
+    // preview confirmation window
+    // useEffect(() => {
+    //     addWindow(
+    //         <ApplicationSuccess key="application-success" location={{ pathname: 'application-success' }} newWindow />
+    //     )
+    // }, [])
+
+    return submitted ? (
+        <>
             <h3>Thanks for your interest in joining PostHog!</h3>
             <p>We will review your application as soon as possible and get back to you.</p>
         </>
     ) : (
-        <Form info={info} id={id} setSubmitted={setSubmitted} />
+        <Form info={info} id={id} onSubmit={handleSubmit} isInExcludedCountry={isInExcludedCountry} />
     )
 }

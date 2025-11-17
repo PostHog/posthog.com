@@ -1,23 +1,8 @@
 ---
 title: How ElevenLabs uses every tool PostHog has to launch new features
 customer: ElevenLabs
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1711377704/posthog.com/contents/images/customers/elevenlabs/ElevenLabs_logo.png
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1711377739/posthog.com/contents/images/customers/elevenlabs/ElevenLabs_logo-dark.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/eleven_labs_b5853d00b7.png
-industries:
-  - AI
-users:
-  - Marketing
-  - Growth
-  - Engineering
-toolsUsed:
-  - Feature flags
-  - Product analytics
-  - Feature flags
-  - User surveys
 date: 2024-03-25
 ---
 

@@ -49,7 +49,7 @@ The `writable_events` table uses the [distributed table engine](https://clickhou
 
 The schema looks something like as follows:
 
-```sql
+```sql runInPostHog=false
 CREATE TABLE posthog.writable_events (
     `uuid` UUID,
     `event` String,

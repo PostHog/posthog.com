@@ -23,7 +23,7 @@ So, what's it like building an all-remote company from the very first day?
 
 ![GitHub Chat](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/remote-culture/github-chat.png) 
 
-Communication is perhaps the single most important value for us at PostHog. In our view, getting this right is essential to running an all-remote company successfully. As such, we highly value the following concepts:
+[Communication is perhaps the single most important value](/blog/ceo-diary-6) for us at PostHog. In our view, getting this right is essential to running an all-remote company successfully. As such, we highly value the following concepts:
 
 #### Asynchronous Communication
 Async communication means people shouldn't rely on getting an immediate response from someone else in order to do their work. 
@@ -145,7 +145,7 @@ This can mean [discussions about what a "biscuit" is](https://www.youtube.com/wa
 
 Since our goal is to build an innovative product, it's important to be exposed to multiple perspectives, and there are few better ways to do so professionally than hiring people from various corners of the Earth.
 
-At PostHog, for example, we currently have people based in the US, Brazil, England, Senegal, Belgium, Estonia, Germany, and many other countries. As a result, we consistently get exposed to perspectives we may not have come across before, growing both as individuals and as a company. 
+At PostHog, for example, we currently have people based in the US, Brazil, England, Cyprus, Belgium, Estonia, Germany, and many other countries. As a result, we consistently get exposed to perspectives we may not have come across before, growing both as individuals and as a company. 
 
 ## It's in our DNA 🧬
 

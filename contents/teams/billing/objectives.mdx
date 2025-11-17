@@ -1,43 +1,41 @@
-## Q2 2025 Objectives
+## Q4 2025 Objectives
 
-### Pato
-
-- Pricing changes
-    - API queries (new)
-    - Error tracking (new)
-    - Identified / Non identified (modification)
-    - LLM Observability (new)
-    - Experiments (new / modification)
-    - there may me more 
-- IWA and revenue reporting solution
-- Billing runbooks and docs (internal) (we can all work on this)
-
-### Zach
-
-- RBAC - finish rollout + Enterprise add-on
-- Quota limiting improvements (Temporal)
-- Usage report improvements (Temporal + better pipelines)
-- Evaluate Orb
-- Environments - finish rollout
-- High level scaling plans (usage reports, quota limiting, etc.)
-- Trial changes - do not bill
-- Unsubscribe workflow - remove access + show used features
 
 ### Pawel
 
-- Finish startup program application (if not already done)
-- Usage on billing page - per project/product breakdowns
-- Billing page - compress/improve UI
-- Spike alerts system
-- Zapier annual plan workflow - bring into billing
+- Implement pricing changes and launches (e.g. Data warehouse, Max, Tasks, Logs, Messaging/Workflows)
+- Launch a new, more compact billing page
+- Investigate and improve subscribe flow (e.g. status check timeouts, 3DS)
+- Experiment with the unsubscribe flow to reduce churn
+- Research usage-based billing providers to learn how they deal with challenges we face
+
+### Pato
+
+- Improve billing system, introducing pattern designs and abstractions (strategies for billing limits, forecasting and usage report)
+- Update legacy Stripe API version
+- Move Stripe flows to billing admin (e.g. credit notes, refunds, payments)
+- Collaborate with Mine & BigTimeData to deliver new revenue models
+- Implement pricing changes and launches (with Pawel)
+- Learn to ride a bike properly
+
+### Marce
+
+- Produce and maintain a single source of truth for billing logic
+- Comprehensive set of assertions on the billing system (incl. historical tables)
+- Real-time usage reporting RFC
 
 ### Mine
-- Standardized reporting on lifecycle stages (churn, contraction, new revenue, expansion)
-- Help make sure PostHog BI is on par with Metabase and accurate
 
-### Nice to haves
+- Deliver v1 reconciled revenue reporting with monthly reconciled revenue numbers and migrate all key metrics to the new model as the single source of truth
+- Update lifecycle metrics under new revenue model to include resurrected/paused accounts so expansion/churn views are more realistic
+- Create an end to end dashboard tying marketing -> sales pipeline -> revenue attribution 
+- Ship custom posthog org object in salesforce
+- Work with sales team on automation and tracking of outbound leads
 
-- Login QoL improvements (US/EU, last login method)
-- No more Stripe UI (edit cards, view invoices, etc.)
-- Proper callbacks for time-sensitive checks
-- Case insensitive emails
+### Bonus
+
+- Upgrade billing postgres
+- Enable local payment options in key markets (e.g. India, China; verify the need/ROI first)
+- Improve self-serve credit purchase flow (credit expiry logic, granting credits upfront)
+- Enable billing through partners (e.g. AWS self-serve, Vercel)
+- Support coupons (e.g. newsletters, hackathons)

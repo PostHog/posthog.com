@@ -4,51 +4,40 @@ sidebar: Docs
 showTitle: true
 ---
 
-> Note: Sampling is a feature currently under development. If you'd like to try it out, contact us at `hey@posthog.com`. We're also  proactively rolling this out to test users at the moment, so do let us know if you have any feedback!
+Results sampling can significantly speed up loading if you have a large amount of data or are running complex queries in your [insights](/docs/product-analytics/insights).
 
-## Introduction
+Processing a lot of data can take some time, so we can offer faster results by sampling a portion of the data and extrapolating the results. The results will be less precise, but remain accurate and statistically significant if your sample pool of events is large enough.
 
-Results sampling is a feature aimed at significantly speeding up the loading time on insights for power users that are running complex analyses on large data sets.
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Processing a lot of data can take some time, so we can offer faster results by sampling a portion of the data and extrapolating the results.
+<CalloutBox icon="IconInfo" title="Example">
 
-For instance, say you have set up a funnel looking at the conversion from a '$pageview' event to a 'user_signed_up' event over 180 days, and that within those parameters, PostHog would have to aggregate 1 billion events to compute a result. If we were to turn on sampling at a 0.1 (10%) rate, we'd scan 100 million events, and then multiply the result by 10. 
+A conversion funnel for `$pageview` events leading to `user_signed_up` events over 180 days on a popular website could require aggregating billions of events to compute a result. This could take a while.
 
-As a result of doing this, we can provide an answer much faster, so you don't have to sit around waiting for the insight to load. The tradeoff is that the result you get is not 100% accurate, but the higher the sampling rate and the more events you have, the closer the sampled result will be to the actual result, thus minimizing the tradeoff.
+If we were to turn on sampling at a `1%`, we would aggregate over only 10 million events, and then multiply the result by 100. This results in much faster load times.
 
-## Features
+</CalloutBox>
 
-### Insight sampling
+## Enabling insight sampling
 
-Insight configuration allows you to pick between different sampling rates for your insight. These sampling rates will persist when the insight is saved, meaning if you set an insight to 10% sampling and save it to a dashboard, the results for that insight on the dashboard will be sampled. We flag sampled insights with an icon and a helpful tooltip.
+Sampling can be enabled in each insight under **Advanced options** > **Sampling**. You can choose between sampling at `0.1%`, `1%`, `10%`, and `25%`.
 
-### Speed up slow queries
+ These sampling rates will persist when the insight is saved, meaning if you set an insight to 10% sampling and save it to a dashboard, the results for that insight on the dashboard will be sampled. We flag sampled insights with an icon and a helpful tooltip.
 
-If a certain insight is taking long to load, we display a notice with some recommendations for speeding it up, but also a button you can click to immediately speed up insight calculation. The button will suggest you sample the results, and provide an appropriate sampling rate suggestion. Clicking the button is likely to speed up the query by many orders of magnitude. 
 
-Just note that the insight will then have the sampling filter, which will persist if you save the insight.
+## Speed up slow queries
 
-### Fast mode
-
-Fast mode is an experimental feature where users can flip a switch on the top right just above the insight view to enable 10% sampling for all **new** insights. Saved insights will **not be affected**, but while you are building your graphs we'll immediately apply 10% sampling, making insights load faster. You can override the 10% rate per insight or disable it before saving the insight if you like.
-
-Fast mode is particularly useful for when you are doing exploratory analysis and deciding what metrics to track and what insights are relevant to you. It speeds up the iteration process and you can then turn sampling off when you've settled on the insights you care about and are saving them to a dashboard.
+If a certain insight is taking long to load, we display a notice with some recommendations for speeding it up, including a button to enable sampling. The insight will persist your sampling rate on save.
 
 ## FAQ
 
 ### Will the sampled results be consistent across calculations?
 
-Provided you do not send us events in the past, yes. For a given sampling rate, the analysis will always run on the same set of data, so you don't have to worry about sampled results changing once you hit 'Refresh'.
+If you do not send new data, yes. For a given sampling rate, the analysis will always run on the same set of data, so you don't have to worry about sampled results changing.
 
 ### Does sampling work when calculating conversions?
 
-Yes. Our sampling doesn't just take a random set of events, rather it takes a sample based on a sampling variable (see below). Currently, we use distinct IDs for this, meaning all of a given ID's events will either be taken into the sample or out, so you don't run the risk of an event at the first step of your funnel being in the sample while the subsequent events aren't, for example.
-
-### What variable do you sample by?
-
-We are currently sampling by distinct ID, meaning sampling will work best for PostHog users that track/analyze only anonymous or only identified end users. In other words, if you make use of `posthog.identify` and users have events before and after the `posthog.identify` call, sampling will currently not work very well.
-
-We're working on providing sampling by person IDs in the future, which will unlock sampling for those dealing with both anonymous and identified users.
+Yes. Our sampling doesn't take a random set of events, it takes a sample based on a [sampling variable](#what-variable-do-you-sample-by). Currently, we use a user's [distinct IDs](/docs/getting-started/identify-users) for. All events are attached to distinct IDs, so you don't run the risk of an event at the first step of your funnel being in the sample while the subsequent related events aren't.
 
 ### What sampling mechanism do you use under the hood?
 

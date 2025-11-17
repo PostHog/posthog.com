@@ -9,7 +9,7 @@ const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
-    const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
+    const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.tsx`)
     const BlogTagTemplate = path.resolve(`src/templates/BlogTag.tsx`)
@@ -19,10 +19,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const PipelineTemplate = path.resolve(`src/templates/Pipeline.js`)
     const DashboardTemplate = path.resolve(`src/templates/Template.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
-    const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
-
+    const HubTagTemplate = path.resolve(`src/templates/Hub/Tag.tsx`)
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
@@ -33,18 +32,25 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
 
     const DataPipeline = path.resolve(`src/templates/DataPipeline.tsx`)
+    const SdkReferenceTemplate = path.resolve(`src/templates/sdk/SdkReference.tsx`)
+    const SdkTypeTemplate = path.resolve(`src/templates/sdk/SdkType.tsx`)
 
     const result = (await graphql(`
         {
             allMdx(
                 filter: {
-                    fileAbsolutePath: { regex: "/^((?!contents/teams/).)*$/" }
-                    frontmatter: { title: { ne: "" } }
+                    fileAbsolutePath: {
+                        regex: "/^((?!contents/teams/|contents/about.mdx|contents/media-contents.mdx).)*$/"
+                    }
+                    frontmatter: { title: { nin: [""] }, template: { nin: ["custom"] } }
                 }
             ) {
                 nodes {
                     id
                     slug
+                    frontmatter {
+                        template
+                    }
                 }
             }
             handbook: allMdx(
@@ -58,6 +64,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                     fields {
                         slug
+                    }
+                    parent {
+                        ... on File {
+                            sourceInstanceName
+                        }
                     }
                     rawBody
                 }
@@ -279,7 +290,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     totalCount
                 }
             }
-            postCategories: allPostCategory(filter: { attributes: { folder: { ne: null } } }) {
+            postCategories: allPostCategory(
+                filter: {
+                    attributes: { folder: { nin: [null, "customers", "changelog"] }, label: { ne: "Customers" } }
+                }
+            ) {
                 nodes {
                     attributes {
                         label
@@ -323,6 +338,81 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     name
                     slug
                     type
+                }
+            }
+            allSdkReferences {
+                nodes {
+                    info {
+                        description
+                        id
+                        specUrl
+                        slugPrefix
+                        title
+                        version
+                    }
+                    referenceId
+                    hogRef
+                    id
+                    categories
+                    classes {
+                        description
+                        functions {
+                            category
+                            description
+                            details
+                            examples {
+                                code
+                                name
+                                id
+                            }
+                            id
+                            params {
+                                description
+                                isOptional
+                                name
+                                type
+                            }
+                            path
+                            releaseTag
+                            showDocs
+                            returnType {
+                                id
+                                name
+                            }
+                            title
+                        }
+                        id
+                        title
+                    }
+                    version
+                }
+            }
+            allSdkTypes: allSdkReferences {
+                nodes {
+                    id
+                    version
+                    referenceId
+                    info {
+                        description
+                        id
+                        slugPrefix
+                        specUrl
+                        title
+                        version
+                    }
+                    hogRef
+                    categories
+                    types {
+                        example
+                        id
+                        name
+                        path
+                        properties {
+                            description
+                            name
+                            type
+                        }
+                    }
                 }
             }
         }
@@ -419,111 +509,112 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    if (process.env.VERCEL_ENV !== 'preview') {
-        const categories = {}
-        result.data.categories.categories.forEach(({ category, totalCount }) => {
-            const slug = slugify(category, { lower: true })
-            const base = `/blog/categories/${slug}`
-            categories[category] = {
-                slug,
-                url: base,
-            }
-
-            createPaginatedPages({ totalCount, base, template: BlogCategoryTemplate, extraContext: { category, slug } })
-        })
-
-        result.data.categories.tags.forEach(({ tag, totalCount }) => {
-            const slug = slugify(tag, { lower: true })
-            const base = `/blog/tags/${slug}`
-
-            createPaginatedPages({
-                totalCount,
-                base,
-                template: BlogTagTemplate,
-                extraContext: { tag, slug },
-            })
-        })
-
-        createPaginatedPages({
-            totalCount: result.data.blogPosts.totalCount,
-            base: '/blog/all',
-            template: PaginationTemplate,
-            extraContext: {
-                regex: '/^/blog/',
-                title: 'Blog',
+    result.data.allMdx.nodes.forEach((node) => {
+        createPage({
+            path: replacePath(node.slug),
+            component: PlainTemplate,
+            context: {
+                id: node.id,
             },
         })
+    })
+
+    const categories = {}
+    result.data.categories.categories.forEach(({ category, totalCount }) => {
+        const slug = slugify(category, { lower: true })
+        const base = `/blog/categories/${slug}`
+        categories[category] = {
+            slug,
+            url: base,
+        }
+
+        createPaginatedPages({ totalCount, base, template: BlogCategoryTemplate, extraContext: { category, slug } })
+    })
+
+    result.data.categories.tags.forEach(({ tag, totalCount }) => {
+        const slug = slugify(tag, { lower: true })
+        const base = `/blog/tags/${slug}`
 
         createPaginatedPages({
-            totalCount: result.data.library.totalCount,
-            base: '/library/all',
-            template: PaginationTemplate,
-            extraContext: {
-                regex: '/^/library/',
-                title: 'Library',
-            },
+            totalCount,
+            base,
+            template: BlogTagTemplate,
+            extraContext: { tag, slug },
         })
+    })
+
+    createPaginatedPages({
+        totalCount: result.data.blogPosts.totalCount,
+        base: '/blog/all',
+        template: PaginationTemplate,
+        extraContext: {
+            regex: '/^/blog/',
+            title: 'Blog',
+        },
+    })
+
+    createPaginatedPages({
+        totalCount: result.data.library.totalCount,
+        base: '/library/all',
+        template: PaginationTemplate,
+        extraContext: {
+            regex: '/^/library/',
+            title: 'Library',
+        },
+    })
+
+    createPaginatedPages({
+        totalCount: result.data.founders.totalCount,
+        base: '/founders/all',
+        template: PaginationTemplate,
+        extraContext: {
+            regex: '/^/founders/',
+            title: 'Founders',
+        },
+    })
+
+    createPaginatedPages({
+        totalCount: result.data.productEngineers.totalCount,
+        base: '/product-engineers/all',
+        template: PaginationTemplate,
+        extraContext: {
+            regex: '/^/product-engineers/',
+            title: 'Product engineers',
+        },
+    })
+
+    createPaginatedPages({
+        totalCount: result.data.features.totalCount,
+        base: '/features/all',
+        template: PaginationTemplate,
+        extraContext: {
+            regex: '/^/features/',
+            title: 'Features',
+        },
+    })
+
+    result.data.tutorials.categories.forEach(({ category, totalCount }) => {
+        const slug = slugify(category, { lower: true })
+        const base = `/tutorials/categories/${slug}`
 
         createPaginatedPages({
-            totalCount: result.data.founders.totalCount,
-            base: '/founders/all',
-            template: PaginationTemplate,
-            extraContext: {
-                regex: '/^/founders/',
-                title: 'Founders',
-            },
+            totalCount,
+            base,
+            template: TutorialsCategoryTemplate,
+            extraContext: { activeFilter: category, slug },
         })
+    })
 
-        createPaginatedPages({
-            totalCount: result.data.productEngineers.totalCount,
-            base: '/product-engineers/all',
-            template: PaginationTemplate,
-            extraContext: {
-                regex: '/^/product-engineers/',
-                title: 'Product engineers',
-            },
-        })
+    createPaginatedPages({
+        totalCount: result.data.tutorials.totalCount,
+        base: '/tutorials/all',
+        template: TutorialsTemplate,
+    })
 
-        createPaginatedPages({
-            totalCount: result.data.features.totalCount,
-            base: '/features/all',
-            template: PaginationTemplate,
-            extraContext: {
-                regex: '/^/features/',
-                title: 'Features',
-            },
-        })
-
-        result.data.allMdx.nodes.forEach((node) => {
-            createPage({
-                path: replacePath(node.slug),
-                component: PlainTemplate,
-                context: {
-                    id: node.id,
-                },
-            })
-        })
-
-        result.data.tutorials.categories.forEach(({ category, totalCount }) => {
-            const slug = slugify(category, { lower: true })
-            const base = `/tutorials/categories/${slug}`
-
-            createPaginatedPages({
-                totalCount,
-                base,
-                template: TutorialsCategoryTemplate,
-                extraContext: { activeFilter: category, slug },
-            })
-        })
-
-        createPaginatedPages({
-            totalCount: result.data.tutorials.totalCount,
-            base: '/tutorials/all',
-            template: TutorialsTemplate,
-        })
-
-        result.data.postCategories.nodes.forEach(
-            ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
+    result.data.postCategories.nodes.forEach(
+        ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
+            const isHub = categoryFolder === 'founders' || categoryFolder === 'product-engineers'
+            if (!isHub) {
                 createPage({
                     path: `/${categoryFolder}`,
                     component: PostListingTemplate,
@@ -531,26 +622,39 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         post: true,
                         title: categoryLabel,
                         article: false,
+                        root: categoryFolder,
                     },
                 })
-
-                post_tags?.data?.forEach(({ attributes: { label: tagLabel } }) => {
-                    createPage({
-                        path: `/${categoryFolder}/${slugify(tagLabel, { lower: true, strict: true })}`,
-                        component: PostListingTemplate,
-                        context: {
-                            selectedTag: tagLabel,
-                            post: true,
-                            title: tagLabel,
-                            article: false,
-                        },
-                    })
-                })
             }
-        )
-    }
 
-    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
+            post_tags?.data?.forEach(({ attributes: { label: tagLabel } }) => {
+                createPage({
+                    path: `/${categoryFolder}/${slugify(tagLabel, { lower: true, strict: true })}`,
+                    component: isHub ? HubTagTemplate : PostListingTemplate,
+                    context: {
+                        selectedTag: tagLabel,
+                        post: true,
+                        title: tagLabel,
+                        article: false,
+                        root: categoryFolder,
+                    },
+                })
+            })
+        }
+    )
+    const { localHandbook, engineeringHandbook } = result.data.handbook.nodes.reduce(
+        (acc, node) => {
+            if (node.parent?.sourceInstanceName === 'posthog-main-repo') {
+                acc.engineeringHandbook.push(node)
+            } else {
+                acc.localHandbook.push(node)
+            }
+            return acc
+        },
+        { localHandbook: [], engineeringHandbook: [] }
+    )
+    createPosts(engineeringHandbook, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
+    createPosts(localHandbook, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' }, (node) => ({
         regex: `$${node.url}/`,
@@ -727,21 +831,85 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         }
     }
 
-    result.data.roadmapYears.group.forEach(({ fieldValue: year }) => {
-        createPage({
-            path: `/changelog/${year}`,
-            component: ChangelogTemplate,
-            context: {
-                year: Number(year),
-            },
-        })
-    })
-
     result.data.postHogPipelines.nodes.forEach((node) => {
         createPage({
             path: `/docs/cdp/${node.type}s/${node.slug}`,
             component: DataPipeline,
             context: { id: node.id, ignoreWrapper: true },
+        })
+    })
+
+    // Grab types available for each SDK and version
+    const sdkTypesByReference = result.data.allSdkTypes.nodes.reduce((acc, node) => {
+        const { referenceId, version, ...types } = node
+
+        if (!acc[referenceId]) {
+            acc[referenceId] = {}
+        }
+
+        acc[referenceId][version] = types.types.map(({ name }) => name)
+
+        return acc
+    }, {} as Record<string, Record<string, any>>)
+
+    result.data.allSdkReferences.nodes.forEach((node) => {
+        if (node.version.includes('latest')) {
+            createPage({
+                path: `/docs/references/${node.referenceId}`,
+                component: SdkReferenceTemplate,
+                context: {
+                    name: node.info.title,
+                    description: node.info.description,
+                    fullReference: node,
+                    regex: `/docs/references/${node.referenceId}`,
+                    types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
+                },
+            })
+        } else {
+            createPage({
+                path: `/docs/references/${node.id}`,
+                component: SdkReferenceTemplate,
+                context: {
+                    name: node.info.title,
+                    description: node.info.description,
+                    fullReference: node,
+                    regex: `/docs/references/${node.id}`,
+                    // Null checks, only affects type crosslinking, won't break build
+                    types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
+                },
+            })
+        }
+    })
+
+    result.data.allSdkTypes.nodes.forEach((node) => {
+        node.types?.forEach((type) => {
+            if (type.id && (type.properties || type.example)) {
+                if (node.version.includes('latest')) {
+                    createPage({
+                        path: `/docs/references/${node.referenceId}/types/${type.id}`,
+                        component: SdkTypeTemplate,
+                        context: {
+                            typeData: type,
+                            version: node.version,
+                            id: node.id,
+                            types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
+                            slugPrefix: node.referenceId,
+                        },
+                    })
+                } else {
+                    createPage({
+                        path: `/docs/references/${node.id}/types/${type.id}`,
+                        component: SdkTypeTemplate,
+                        context: {
+                            typeData: type,
+                            version: node.version,
+                            id: node.id,
+                            types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
+                            slugPrefix: node.id,
+                        },
+                    })
+                }
+            }
         })
     })
 }

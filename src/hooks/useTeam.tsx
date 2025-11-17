@@ -25,6 +25,7 @@ const teamQuery = (slug: string) =>
                                 name: true,
                             },
                         },
+                        teams: true,
                     },
                 },
                 leadProfiles: true,
@@ -36,6 +37,8 @@ const teamQuery = (slug: string) =>
                     },
                 },
                 miniCrest: true,
+                tagline: true,
+                spiritAnimal: true,
             },
         },
         { encodeValuesOnly: true }

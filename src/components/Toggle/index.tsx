@@ -13,6 +13,7 @@ export default function Toggle({
     tooltip,
     position = 'left',
     activeOpacity = true,
+    className = '',
 }: {
     checked: boolean
     onChange: (checked: boolean) => void
@@ -22,9 +23,10 @@ export default function Toggle({
     tooltip?: string
     position?: 'left' | 'right'
     activeOpacity?: boolean
+    className?: string
 }) {
     return (
-        <span className="flex space-x-1.5 items-center justify-between">
+        <span className={`flex space-x-1.5 items-center justify-between ${className}`}>
             <Switch.Group>
                 {((position === 'right' && label) || iconLeft) && (
                     <span className="flex items-center">

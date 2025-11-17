@@ -73,15 +73,14 @@ function updateCart(variant: ShopifyProductVariant, quantity: number, cartItems:
 
     const productOnCart = cartItems.map((item) => item.shopifyId).includes(cartItem.shopifyId)
 
-    if (!productOnCart) cartItems.push(cartItem)
-    else {
+    if (!productOnCart) {
+        return [...cartItems, cartItem]
+    } else {
         return cartItems.map((item) => {
             if (item.shopifyId === cartItem.shopifyId) return { ...item, count: quantity } as CartItem
             return item
         })
     }
-
-    return cartItems
 }
 
 function removeCart(variantId: string, cartItems: CartItem[]): CartItem[] {
@@ -95,7 +94,7 @@ const unsubCartItemsChange = useCartStore.subscribe(
     (state) => state.cartItems,
     (cartItems) => {
         const subtotal = cartItems?.reduce((prev, curr) => {
-            return prev + curr.price * curr.count
+            return prev + (curr.kit ? 0 : curr.price) * curr.count
         }, 0)
         const cartCount = cartItems?.length
             ? cartItems.map((item) => item.count).reduce((prev, curr) => prev + curr)

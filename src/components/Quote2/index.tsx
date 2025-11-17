@@ -27,7 +27,7 @@ const base = {
         text-center
         border-r
         border-dashed
-        border-gray-accent-dark
+        
         font-semibold
         text-white/50
         leading-tight
@@ -136,7 +136,7 @@ export const Quote2 = ({
             <div className={classes('section', size, className)}>
                 <div
                     style={offset ? { paddingTop: offset } : {}}
-                    className="hidden md:flex justify-center items-center p-8 border-r border-dashed border-gray-accent-dark"
+                    className="hidden md:flex justify-center items-center p-8 border-r border-dashed "
                 >
                     {logo && <img src={logo} />}
                 </div>
@@ -148,7 +148,7 @@ export const Quote2 = ({
                     </div>
                 </blockquote>
             </div>
-            <hr className="w-full border-0 border-t border-gray-accent-dark border-dashed m-0" />
+            <hr className="w-full border-0 border-t  border-dashed m-0" />
             <div className={classes('section', size, className)}>
                 <div className={classes('tagline', size)}>{companyTagline}</div>
                 <div className={classes('footer', size)}>

@@ -66,7 +66,7 @@ from flask import Flask
 from posthog import Posthog
 
 posthog = Posthog(
-  '<ph_project_api_key>', 
+  '<ph_project_api_key>',
   host='<ph_client_api_host>'
 )
 
@@ -79,10 +79,10 @@ def hello_world():
 @app.route("/user/<string:user>")
 def show_user(user):
   posthog.capture(
-    user, 
-    "visited_user_page", 
-    {
-      '$set_once': {'initial_name': user} 
+    "visited_user_page",
+    distinct_id=user,
+    properties={
+      '$set_once': {'initial_name': user}
     }
   )
   return f"<p>Hello, {user}!</p>"
@@ -104,7 +104,7 @@ The second release condition enables us to test the active flag state by going t
 
 With our feature flag created in PostHog, it is time to implement it in our Flask app.
 
-Back in our `user` route, we add a check with PostHog of our `new-cool-feature` flag. If it is true, we return a different `<p>` tag. If it isn’t, we return the same value as before. 
+Back in our `user` route, we add a check with PostHog of our `new-cool-feature` flag. If it is true, we return a different `<p>` tag. If it isn’t, we return the same value as before.
 
 ```python
 # ...
@@ -112,14 +112,14 @@ Back in our `user` route, we add a check with PostHog of our `new-cool-feature` 
 @app.route("/user/<string:user>")
 def show_user(user):
   flag_enabled = posthog.feature_enabled(
-    'new-cool-feature', 
+    'new-cool-feature',
     user
   )
 
   posthog.capture(
-    user, 
-    "visited_user_page", 
-    {
+    "visited_user_page",
+    distinct_id=user,
+    properties={
       '$set_once': {'initial_name': user}
     }
   )
@@ -142,14 +142,14 @@ Lastly, we must capture the feature flag details in our event. This enables us t
 @app.route("/user/<string:user>")
 def show_user(user):
   flag_enabled = posthog.feature_enabled(
-    'new-cool-feature', 
+    'new-cool-feature',
     user
   )
 
   posthog.capture(
-    user, 
-    "visited_user_page", 
-    {
+    "visited_user_page",
+    distinct_id=user,
+    properties={
       '$set_once': {'initial_name': user},
       '$feature/new-cool-feature': flag_enabled
     }
@@ -157,11 +157,11 @@ def show_user(user):
 
   if flag_enabled:
     return f"<p>Welcome, {user}! You are on the new cool page</p>"
-  
+
   return f"<p>Hello, {user}!</p>"
 ```
 
-This is the basic implementation of Python feature flags in Flask set up. From here, we can set up [A/B tests](/experiments), a [public beta program](/tutorials/public-beta-program), or [canary releases](/tutorials/canary-release). 
+This is the basic implementation of Python feature flags in Flask set up. From here, we can set up [A/B tests](/experiments), a [public beta program](/tutorials/public-beta-program), or [canary releases](/tutorials/canary-release).
 
 ## Further reading
 

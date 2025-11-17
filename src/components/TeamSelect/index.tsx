@@ -1,4 +1,4 @@
-import Select from 'components/Select'
+import { OSSelect } from 'components/OSForm'
 import React, { useEffect, useState } from 'react'
 
 export default function TeamSelect({ value, onChange }) {
@@ -12,12 +12,15 @@ export default function TeamSelect({ value, onChange }) {
     }, [])
 
     return (
-        <Select
-            search
+        <OSSelect
+            label="Team"
+            direction="column"
             value={(teams.includes(value) ? value : teams.find((team) => team.id === value?.id)) || {}}
             onChange={onChange}
             options={teams.map((team) => ({ label: team.attributes.name, value: team }))}
             placeholder="Team"
+            searchable={true}
+            searchPlaceholder="Search teams..."
         />
     )
 }

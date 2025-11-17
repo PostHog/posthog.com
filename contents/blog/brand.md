@@ -65,7 +65,7 @@ Here are some ways we got more specific for this audience after we zeroed-in on 
 
 * **We chose a transparent, flexible pricing model.** It's more complex, but also [much better value](/blog/analytics-pricing). We’ve found technical users tolerate a little more complexity if it helps them save money, and only pay for what they use.
 
-* **We focused on power user features**, such as [SQL access](/docs/sql) and a [built-in data warehouse](/data-warehouse), so technical people can get to the underlying data and debug things.
+* **We focused on power user features**, such as [SQL access](/docs/sql) and a [built-in data warehouse](/blog/data-warehouse-at-posthog), so technical people can get to the underlying data and debug things.
 
 * **We redesigned our entire UX** to have more flexibility, greater information density, and a dark mode. We want PostHog to [look like a dev tool](/blog/posthog-as-a-dev-tool), not an analytics product.
 

@@ -93,13 +93,20 @@ Now, we can run `ng serve` in our terminal and go to [`http://localhost:4200/`](
 
 ## Installing PostHog
 
-With our app set up, it’s time to install and set up PostHog. To start, install the [JavaScript web SDK](/docs/libraries/js):
+With our app set up, it’s time to install and set up PostHog. To start, install the [JavaScript Web SDK](/docs/libraries/js):
 
 ```bash
 npm i posthog-js
 ```
 
-In `main.ts`, initialize PostHog using your project API key and instance address. You can get both in your [project settings](https://app.posthog.com/project/settings).  
+To preemptively fix a TypeScript compilation error, we need to install some `rrweb` types and then clear the `npm` cache.
+
+```bash
+npm install @rrweb/types@2.0.0-alpha.17 rrweb-snapshot@2.0.0-alpha.17
+npm cache clean --force
+```
+
+Next, in `main.ts`, initialize PostHog using your project API key and instance address. You can get both in your [project settings](https://app.posthog.com/project/settings).
 
 ```js
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -107,12 +114,10 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import posthog from 'posthog-js'
 
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_client_api_host>'
-  }
-)
+posthog.init('<ph_project_api_key>', {
+  api_host:'<ph_client_api_host>',
+  defaults: "<ph_posthog_js_defaults>",
+})
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
@@ -120,48 +125,12 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 
 Once set up, go back to your app, refresh, and PostHog begins autocapturing events. This includes button clicks, pageviews, pageleaves, and more. It also starts [recording sessions](/docs/session-replay) if you enable those in [your project settings](https://app.posthog.com/project/settings).
 
-![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-analytics/event.png)
-
-
-## Capturing pageviews
-
-You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Angular creates a single-page app, this only happens once, and the Angular router handles subsequent page changes.
-
-If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
-
-In `app-routing.module.ts`, import `Router`, `NavigationEnd`, and PostHog. Use these to set up a Router constructor that triggers a `$pageview` capture on `NavigationEnd` events like this:
-
-```js
-// other imports...
-import { RouterModule, Routes, Router, NavigationEnd } from '@angular/router';
-import posthog from 'posthog-js';
-
-//... routes, @NgModule
-
-export class AppRoutingModule {
-  constructor(private router: Router) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        posthog.capture('$pageview');
-      }
-    });
-  }
- }
-```
-
-Now, every time a user moves between pages, PostHog captures a `$pageview` event, not just the first page load. 
-
-Lastly, go back to `main.ts` and make sure to set `capture_pageview` in the PostHog initialization config to `false`. This turns off autocaptured pageviews and ensures you won’t double-capture pageviews on the first load.
-
-```js
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_client_api_host>',
-    capture_pageview: false
-  }
-)
-```
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_13_15_47_2x_e281ec8779.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_13_15_19_2x_4dac32043a.png"
+  alt="Events in PostHog"
+  classes="rounded"
+/>
 
 ## Capturing custom events
 

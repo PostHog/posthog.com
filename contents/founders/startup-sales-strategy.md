@@ -247,7 +247,7 @@ If you found this useful, you might enjoy the following as well:
 
 - [The Product-Market Fit Game](/founders/product-market-fit-game) – This is my “ultimate guide” to finding PMF. I break the problem down to 5 levels you need to clear. Selling to your first 5 reference customers is the final one.
 
-- [How not to be boring](/blog/brand) – There’s no excuse for building a startup with a boring brand. This covers how we think about brand at PostHog.
+- [How not to be boring](/blog/brand) – There’s no excuse for [building a startup](/newsletter/building-a-startup-that-scales) with a boring brand. This covers how we think about brand at PostHog.
 
 - [How first-time founders fail](/newsletter/first-time-founders) – Lessons from successful founders, including Paul Copplestone from Supabase, about how they failed at first attempts.
 
@@ -262,4 +262,4 @@ _
 
 [^3]: Pricing to value means charging the maximum you think you can get away with based on the value customers derive from your product. This only makes sense if you’re in a non-competitive market, have a strong moat (unlikely if you’re a startup), and you’re comfortable with competitors undercutting you. At PostHog, we deliberately avoid this because we’re product-led and we want as little friction as possible. In fact, we actively work towards cutting prices – we’ve cut prices for analytics and session replay recently – and give customers the option to set billing limits to avoid surprise bills.
 
-[^4]: This was the setup in the early days. Now, PostHog is entirely inbound – i.e. we do no outbound sales – and we’ve since built a [sales and customer success team](/teams/sales-cs). Our golden rule is the person who closes a deal also manages that relationship long term, rather than handing them off to a dedicated customer success team.
+[^4]: This was the setup in the early days. We’ve since built a [sales and customer success team](/teams/sales-cs). Our golden rule is the person who closes a deal also manages that relationship long term, rather than handing them off to a dedicated customer success team.

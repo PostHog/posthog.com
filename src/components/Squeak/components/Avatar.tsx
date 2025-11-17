@@ -6,7 +6,7 @@ const Image = ({ src, className = '' }: { src: string | null | undefined; classN
         <img className={`object-fill rounded-full ${className}`} src={src} />
     ) : (
         <svg
-            className={`bg-accent dark:bg-accent-dark rounded-full ${className}`}
+            className={`bg-accent rounded-full ${className}`}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 40 40"
@@ -36,19 +36,16 @@ export const Avatar = ({
     return (
         <div
             className={`float-left 
-        leading-[0] rounded-full relative inline-block aspect-square p-px bg-light dark:bg-dark border border-light dark:border-dark ${
+        leading-[0] rounded-full relative inline-block aspect-square p-px bg-light dark:bg-dark border border-primary ${
             color ? `hover:border-${color}` : 'hover:border-[rgba(0,0,0,0.2)] dark:hover:border-[rgba(255,255,255,0.2)]'
         }`}
         >
             {url ? (
-                <Link to={url} className={`shrink-0 ${color ? `bg-${color}` : 'bg-accent dark:bg-accent-dark'}  `}>
+                <Link to={url} className={`shrink-0 ${color ? `bg-${color}` : 'bg-accent'}  `}>
                     <Image className={className} src={image} />
                 </Link>
             ) : (
-                <Image
-                    className={`${color ? `bg-${color}` : 'bg-accent dark:bg-accent-dark'} ${className}`}
-                    src={image}
-                />
+                <Image className={`${color ? `bg-${color}` : 'bg-accent'} ${className}`} src={image} />
             )}
         </div>
     )

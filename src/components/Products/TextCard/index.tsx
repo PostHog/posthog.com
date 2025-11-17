@@ -14,7 +14,7 @@ export const TextCard = ({ title, description, url }: TextCardProps): JSX.Elemen
     const darkMode = websiteTheme === 'dark'
 
     return (
-        <li className="bg-accent dark:bg-accent-dark p-6 rounded flex flex-col items-start">
+        <li className="bg-accent p-6 rounded flex flex-col items-start">
             <p className="text-lg font-bold m-0 leading-tight mb-1">{title}</p>
             <p className="text-sm flex-1 mb-0" dangerouslySetInnerHTML={{ __html: description }} />
             {url && (

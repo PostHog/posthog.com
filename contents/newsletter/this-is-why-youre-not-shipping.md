@@ -69,7 +69,7 @@ And, just like 1:1s, the impact of this latency compounds as a company grows unt
 
 This is a hard problem to solve from the bottom up: it has to come from the top. At PostHog, we solve for this in a few different ways:
 
-1. **We operate a "no design by default" approach**. It's up to product engineers to decide if and when they require design help, and they're free to ship entire products without design input if they choose. We maintain a design system to assist them, and have [clear guidelines on how to work with design](/handbook/design/philosophy).
+1. **We operate a "no design by default" approach**. It's up to product engineers to decide if and when they require design help, and they're free to ship entire products without design input if they choose. We maintain a design system to assist them, and have [clear guidelines on how to work with design](/handbook/brand/philosophy).
 
 2. **Engineers make product decisions.** Product managers at PostHog don't decide what to build, or sign-off on features before they ship. Instead, they gather deep context on users, competitors, and potential solutions, so [product engineers can make informed decisions](/newsletter/product-management-is-broken).
 
@@ -154,7 +154,7 @@ If transparency is the answer, how do you make this happen in a company where it
 
 Your goal here is to train people in how you want to work, and hopefully convince others to do the same. For inspiration, here are some examples from PostHog:
 
-* Joe Martin, who runs our Comms Team, creates a GitHub issue every quarter distilling his personal goals, and his progress – [read his Q2 2025 goals](https://github.com/PostHog/meta/issues/301). 
+* Joe Martin, who runs our Brand team, creates a GitHub issue every quarter distilling his personal goals, and his progress – [read his Q2 2025 goals](https://github.com/PostHog/meta/issues/301). 
 
 * Cory’s [PostHog 3000 issue](https://github.com/PostHog/posthog/issues/12923), where he shared his ongoing work on a UI overhaul.
 

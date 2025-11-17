@@ -83,7 +83,6 @@ Next, select ‘_Select Element_’ and click the additional element you want to
 ### Further reading
 Congratulations, you just made a new calculated event using the PostHog toolbar. You can use this event in insights such as funnels, trends or paths — or you can check these tutorials for further inspiration. 
 
-- [How to correlate errors with product performance using Sentry](/tutorials/sentry-plugin-tutorial)
 - [The complete guide to event tracking](/tutorials/event-tracking-guide)
 - [How and why to build an AARRR pirate funnel in PostHog](/blog/aarrr-pirate-funnel)
 

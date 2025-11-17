@@ -1,0 +1,97 @@
+As console logs can contain sensitive information, we do not capture these logs automatically. 
+You can enable this feature from your client-side by setting `captureLogs = true` in our [iOS SDK config](/docs/session-replay/installation?tab=iOS#step-two-enable-session-recordings-in-your-project-settings).
+
+```ios_swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_client_api_host>")
+config.sessionReplay = true
+config.sessionReplayConfig.captureLogs = true // TIP: Needs to be configured in code. Project settings won't have an effect.
+
+PostHogSDK.shared.setup(config)
+```
+
+> **Important:** Individual console logs are truncated at 2000 characters. The rest of the log is not sent to PostHog. When truncating a log message we add ...[Truncated] to the message.
+
+### Sanitizing or skipping logs
+
+PostHog iOS SDK allows you to customize how log messages are processed and categorized by providing a custom `logSanitizer` handler. 
+
+This handler is called for each new line printed to the console. It receives the line's content and can return either a processed log entry with its severity level, or `nil` to skip the log entirely:
+
+```ios_swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_client_api_host>")
+
+// Custom log processing and sanitization
+config.sessionReplayConfig.captureLogsConfig.logSanitizer = { output in
+
+    // Skip trace-level logs
+    guard !output.contains("TRACE") else {
+        return nil
+    }
+
+    // Determine log level based on message content
+    let level: PostHogLogLevel = {
+        if output.contains("CRITICAL") { return .error }
+        if output.contains("WARN") { return .warn }
+        return .info
+    }()
+    
+    // Remove sensitive information (e.g., auth tokens)
+    let sanitizedMessage = output.replacingOccurrences(
+        of: #"Bearer\s+[A-Za-z0-9-._~+/]+=*"#,
+        with: "Bearer [TOKEN REDACTED]",
+        options: .regularExpression
+    )
+    
+    return PostHogLogEntry(level: level, message: sanitizedMessage)
+}
+
+PostHogSDK.shared.setup(config)
+```
+
+### Configuring minimum log level
+
+By default, the SDK only captures error-level logs to minimize noise in session replays.
+You can adjust this using the `minLogLevel` setting:
+
+```ios_swift
+// Capture errors only (default)
+config.sessionReplayConfig.captureLogsConfig.minLogLevel = .error
+
+// Capture warnings and errors
+config.sessionReplayConfig.captureLogsConfig.minLogLevel = .warn
+
+// Capture all logs (most verbose)
+config.sessionReplayConfig.captureLogsConfig.minLogLevel = .info
+```
+
+Only logs with a level greater than or equal to the `minLogLevel` will be captured. For example, if set to `.warn`, both **warning** and **error** logs will be captured, but **info** logs will be filtered out.
+
+
+### Default behavior
+
+#### Log level
+The SDK captures raw console output directly, independent of any specific logging framework or implementation. 
+Since the raw output doesn't inherently carry log level information, the SDK deduces severity levels by analyzing the log content.
+By default, the SDK automatically classifies log messages into three severity levels:
+
+- **Error** (highest severity)
+  - Messages containing: "error", "exception", "fail", "failed"
+  - OSLog entries with type "Error" or "Fault"
+
+- **Warning** (medium severity)
+  - Messages containing: "warning", "warn", "caution", "deprecated"
+  - OSLog entries with type "Warning"
+
+- **Info** (lowest severity)
+  - All other messages that don't match error or warning patterns
+
+#### Filtering and processing
+- Log filtering based on `minLogLevel` (default: `.error`). Only logs with equal or higher severity are captured. 
+- Multi-line logs are automatically split into separate entries
+- OSLog metadata (e.g., subsystem, category) is automatically removed for cleaner output
+
+The SDK captures logs from:
+- Standard output (stdout)
+- Standard error (stderr)
+- OSLog messages
+- NSLog messages

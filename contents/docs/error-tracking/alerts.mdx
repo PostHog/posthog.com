@@ -1,0 +1,77 @@
+---
+title: Send error tracking alerts
+---
+
+To stay on top of issues, you can set up alerts. These enable you to post to Slack, Discord, Teams, or an HTTP Webhook when an issue is created or reopened.
+
+## Issue created or reopened
+
+To alert when an issue is created or reopened, go to [error tracking's configuration page](https://app.posthog.com/error_tracking/configuration?tab=error-tracking-alerting#selectedSetting=error-tracking-alerting) and click **Alerting**. This shows you a list of existing alerts. Clicking **New notification** brings you to a page to create a new one.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/error_alerts_create_light_1a05deef21.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/error_alerts_create_dark_7585087b18.png"
+    alt="Error tracking alerting"
+    classes="rounded"
+/>
+
+Choosing an option brings you to a page to configure the alert. This may require setting up the Slack integration or pasting in a webhook URL. Once done, you can test the alert by clicking **Test function** and then finalize by clicking **Create & enable**.
+
+This will then send alerts to your chosen destination when an issue is created or reopened like this:
+
+![Slack notification](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_14_02_41_2x_2410295066.png)
+
+## Issue properties and assignments
+
+You can filter an alert based on the properties of an issue. This is useful for notifying a specific team when they have been auto assigned an issue using [auto assignment rules](/docs/error-tracking/managing-issues#auto-assignment-rules).
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/assignee_filter_light_e575af6512.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/assignee_filter_dark_9a8907af03.png"
+    alt="Error tracking alert assignee filtering"
+    classes="rounded"
+/>
+
+## Other alerting options
+
+Since error tracking works by capturing `$exception` events, PostHog features that trigger by events can play a role in alerts too.
+
+### Real time destinations
+
+The first way is using [real time destinations](/docs/cdp/destinations). This enables you to send events (like `$exception`) to other tools as soon as they are ingested.
+
+To create a real time destination, go to the [data pipelines tab](https://app.posthog.com/pipeline/overview) in PostHog, click **+ New**, and then select **Destination**. Choose your destination and press **+ Create**.
+
+On the destination creation screen, make sure to add an event matcher for the `$exception` event, filter for the properties you want, and set the trigger options.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/http_error_alert_light_9898376c56.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/http_error_alert_dark_7705f0e575.png"
+  alt="Real time destination"
+  classes="rounded"
+/>
+
+Check out our [real time destinations docs](/docs/cdp/destinations) for more information.
+
+### Trend alerts
+
+You can also visualize your `$exception` events using [trends](/docs/product-analytics/trends/overview). Once you create a trend insight, click the **Alerts** button at the top of the insight and then **New alert**. 
+
+Here you can set alerts for event volume value, increase, or decrease.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_14_26_43_2x_4ef6402556.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_14_25_35_2x_f36353143b.png"
+  alt="Insight alert"
+  classes="rounded"
+/>
+
+This sends an email notification to the user you choose. Check out our [alerts docs](/docs/alerts) for more information.
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Can't find your alert?" type="fyi">
+
+  If you'd like a destination to be added that we don't yet support, [let us know in-app](https://app.posthog.com/project/2#panel=support%3Afeedback%3Aerror_tracking%3A%3Afalse).
+
+</CalloutBox>

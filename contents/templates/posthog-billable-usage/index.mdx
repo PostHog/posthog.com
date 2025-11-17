@@ -1,0 +1,52 @@
+---
+title: PostHog billable usage
+subtitle: See why you're 10x-ing (and what you're actually paying for)
+thumbnail: https://res.cloudinary.com/dmukukwp6/image/upload/hog_screens_965070a722.png
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/posthog_billable_usage_b2b494d4bb.png
+showTitle: true
+filters:
+  type:
+    - dashboard
+  maintainer: official
+---
+
+<Section
+    divider={false}
+    cols={2}
+>
+    <div>
+      <h5>Your billing page visualized 💸</h5>
+      <p>This dashboard turns your <a href="https://app.posthog.com/organization/billing">billing page</a> into a live, interactive report. Create insights, spot spikes, and optimize how you're spending.</p>
+    </div>
+    <div>
+      <h5>Break usage down by category 📊</h5>
+      <p>Wondering what's actually driving your bill? Analyze product usage across event types, libraries, and multiple products like surveys and feature flags.</p>
+    </div>
+</Section>
+
+<section class="my-12 px-5">
+  <div class="max-w-screen-2xl mx-auto">
+    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-12">What's on this dashboard?</h3>
+    <div class="flex justify-center">
+      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 justify-evenly relative  after:absolute after:w-full after:left-0 after:top-1/2 after:-translateY-1/2 before:absolute before:h-full before:top-0 before:left-1/2 after:-translateX-1/2  sm:after:block after:hidden sm:before:block before:hidden">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 ">
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">📊 Billable usage by event name</h5>
+          <p class="m-0 text-[15px]">See which events are driving the most usage in your product.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 ">
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">📚 Billable usage by library</h5>
+          <p class="m-0 text-[15px]">Break down events by SDK – JavaScript, Python, Node, Rust, and more.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 ">
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">🚩 Feature flag calls</h5>
+          <p class="m-0 text-[15px]">Track how often feature flags are triggered over a billing period.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 ">
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">📮 Surveys sent</h5>
+          <p class="m-0 text-[15px]">See how many surveys were shown and responses received over a billing period.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+

@@ -45,7 +45,7 @@ const Parent = ({ children, url }: { children: React.ReactNode; url?: string }):
 
 const Section = ({ title, section, className = '' }: IColumn) => {
     return (
-        <ul className="list-none p-0 py-3 m-0 flex space-x-5 border-dashed border-gray-accent-light border-l ml-6 pl-6">
+        <ul className="list-none p-0 py-3 m-0 flex space-x-5 border-dashed border-primary border-l ml-6 pl-6">
             {section.map(({ title, icon, url }) => {
                 return (
                     <li

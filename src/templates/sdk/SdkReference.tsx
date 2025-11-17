@@ -1,0 +1,397 @@
+import React, { useState, useEffect } from 'react'
+import { graphql } from 'gatsby'
+import SEO from '../../components/seo'
+import ReactMarkdown from 'react-markdown'
+import Accordion from '../../components/SdkReferences/Accordion'
+import Parameters from '../../components/SdkReferences/Parameters'
+import FunctionReturn from '../../components/SdkReferences/Return'
+import FunctionExamples from '../../components/SdkReferences/Examples'
+import { useLocation } from '@reach/router'
+import { navigate } from 'gatsby'
+import { getLanguageFromSdkId } from '../../components/SdkReferences/utils'
+import { Heading } from '../../components/Heading'
+import Chip from '../../components/Chip'
+import ReaderView from 'components/ReaderView'
+import { Popover } from 'components/RadixUI/Popover'
+import { IconChevronDown } from '@posthog/icons'
+
+export interface Parameter {
+    name: string
+    type: string
+    description: string
+    isOptional: boolean
+}
+
+export interface Example {
+    id: string
+    name: string
+    code: string
+}
+
+export interface SdkFunction {
+    id: string
+    title: string
+    description: string
+    category: string
+    showDocs: boolean
+    examples: Example[]
+    params: Parameter[]
+    returnType: {
+        id: string
+        name: string
+    }
+    returnDescription?: string
+    details: string
+    releaseTag?: string
+}
+
+export interface Class {
+    id: string
+    title: string
+    description: string
+    functions: SdkFunction[]
+}
+
+export interface SdkReferenceData {
+    id: string
+    hogRef: string
+    referenceId: string
+    version: string
+    info: {
+        description: string
+        id: string
+        slugPrefix: string
+        specUrl: string
+        title: string
+        version: string
+    }
+    classes: Class[]
+    categories: string[]
+}
+
+export interface PageContext {
+    fullReference: SdkReferenceData
+    types: string[]
+}
+
+export interface VersionsData {
+    allSdkReferences: {
+        nodes: Array<{
+            id: string
+            version: string
+            referenceId: string
+        }>
+    }
+}
+
+const padDescription = (description: string): string => {
+    return description?.replace(/\n/g, '\n\n') || ''
+}
+
+// Group functions by category, but Initialization always first, and "Other methods" for uncategorized
+function groupFunctionsByCategory(functions: SdkFunction[]): { label: string | null; functions: SdkFunction[] }[] {
+    // Filter out null/undefined functions and those with showDocs === false
+    const validFunctions = functions.filter((func): func is SdkFunction => func != null && func.showDocs !== false)
+
+    // Initialization always first
+    const initialization = validFunctions.filter((func) => func.category === 'Initialization')
+
+    // Group others by category (excluding Initialization and empty/undefined category)
+    const categoryMap: Record<string, SdkFunction[]> = {}
+    validFunctions.forEach((func) => {
+        if (func.category && func.category !== 'Initialization') {
+            if (!categoryMap[func.category]) {
+                categoryMap[func.category] = []
+            }
+            categoryMap[func.category].push(func)
+        }
+    })
+
+    // Find functions with no category or empty category (excluding Initialization)
+    const noCategory = validFunctions.filter((func) => !func.category || func.category.trim() === '')
+
+    // Build ordered list: Initialization, then each category (alphabetical), then "Other methods"
+    const ordered: { label: string | null; functions: SdkFunction[] }[] = []
+
+    if (initialization.length > 0) {
+        ordered.push({ label: 'Initialization', functions: initialization })
+    }
+
+    // Sort categories alphabetically, but "Other methods" is not a category
+    const sortedCategories = Object.keys(categoryMap).sort()
+    for (const cat of sortedCategories) {
+        ordered.push({ label: cat, functions: categoryMap[cat] })
+    }
+
+    if (noCategory.length > 0) {
+        ordered.push({ label: null, functions: noCategory })
+    }
+
+    return ordered
+}
+
+export default function SdkReference({ pageContext, data }: { pageContext: PageContext; data: VersionsData }) {
+    const { fullReference } = pageContext
+    const location = useLocation()
+
+    // Get the language for this SDK reference
+    const sdkLanguage = getLanguageFromSdkId(fullReference.info.id)
+    const validTypes = pageContext.types
+
+    const sdkVersions = data.allSdkReferences.nodes
+
+    // Get versions for current referenceId
+    const currentReferenceId = fullReference.info.id
+    // Sort versions by version string (descending)
+    const availableVersions = sdkVersions
+        .filter((version) => version.referenceId === currentReferenceId)
+        .sort((a, b) => {
+            if (a.version === 'latest') return -1
+            if (b.version === 'latest') return 1
+            return b.version.localeCompare(a.version, undefined, { numeric: true })
+        })
+
+    // State for filtering
+    const [currentFilter, setCurrentFilter] = useState('all')
+    const [versionPopoverOpen, setVersionPopoverOpen] = useState(false)
+
+    // Derive current version from fullReference.id
+    const getCurrentVersion = () => {
+        return fullReference.id.replace(`${currentReferenceId}-`, '')
+    }
+
+    // Pre-transform classes with sorted functions
+    const sortedClasses = fullReference.classes.map((classData) => ({
+        ...classData,
+        sortedFunctions: groupFunctionsByCategory(classData.functions),
+    }))
+
+    // Convert category name to kebab-case for query params
+    const categoryToQueryParam = (category: string): string => {
+        return category.toLowerCase().replace(/\s+/g, '-')
+    }
+
+    // Convert query param back to category name
+    const queryParamToCategory = (queryParam: string): string | null => {
+        return fullReference.categories.find((cat) => categoryToQueryParam(cat) === queryParam) || null
+    }
+
+    // Reset filters
+    const resetFilters = () => {
+        setCurrentFilter('all')
+        navigate(location.pathname)
+    }
+
+    // Handle filter changes
+    const handleFilterChange = (category: string) => {
+        setCurrentFilter(category)
+        const queryParam = categoryToQueryParam(category)
+        navigate(`${location.pathname}?filter=${queryParam}`)
+    }
+
+    // Go to selected version page
+    const handleVersionChange = (version: string) => {
+        setVersionPopoverOpen(false)
+        const versionId = `${currentReferenceId}-${version}`
+        if (version === 'latest') {
+            navigate(`/docs/references/${currentReferenceId}`)
+        } else {
+            navigate(`/docs/references/${versionId}`)
+        }
+    }
+
+    // Initialize filter from query params
+    useEffect(() => {
+        const params = new URLSearchParams(location?.search)
+        const filter = params.get('filter')
+        if (filter) {
+            const category = queryParamToCategory(filter)
+            if (category) {
+                setCurrentFilter(category)
+            }
+        }
+    }, [location])
+
+    // Badge styling based on release tag
+    const getBadgeClasses = (releaseTag: string): string => {
+        switch (releaseTag.toLowerCase()) {
+            case 'public':
+                return `bg-blue/10 text-blue dark:text-blue font-medium text-xs m-[-2px] rounded-sm px-1 py-0.5 inline-block`
+            case 'deprecated':
+                return `bg-orange/10 text-orange dark:text-orange font-medium text-xs m-[-2px] rounded-sm px-1 py-0.5 inline-block`
+            default:
+                return `bg-red/10 text-red dark:text-red font-medium text-xs m-[-2px] rounded-sm px-1 py-0.5 inline-block`
+        }
+    }
+
+    const getFilteredClasses = () => {
+        if (currentFilter === 'all') {
+            return sortedClasses
+        }
+
+        return sortedClasses
+            .map((classData) => {
+                const filteredSortedFunctions = classData.sortedFunctions
+                    .map(({ label, functions }) => ({
+                        label,
+                        functions: functions.filter((func) => func.category === currentFilter),
+                    }))
+                    .filter(({ functions }) => functions.length > 0)
+
+                if (filteredSortedFunctions.length === 0) {
+                    return null
+                }
+
+                return {
+                    ...classData,
+                    sortedFunctions: filteredSortedFunctions,
+                }
+            })
+            .filter((item): item is NonNullable<typeof item> => item !== null)
+    }
+
+    const filteredClasses = getFilteredClasses()
+
+    return (
+        <ReaderView markdownContent={JSON.stringify(fullReference, null, 2)}>
+            <SEO title={`${fullReference.info.title} - PostHog`} />
+            <section>
+                <div className="mb-8 relative">
+                    <div className="flex items-center mt-0 flex-wrap justify-between">
+                        <div className="flex flex-col-reverse md:flex-row md:items-center space-x-2 mb-1 w-full">
+                            <div className="flex-1">
+                                <h1 className="dark:text-white text-3xl sm:text-4xl m-0">{fullReference.info.title}</h1>
+                                <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0 text-black dark:text-white">
+                                    <p className="m-0 font-semibold text-primary/30 dark:text-primary-dark/30">
+                                        SDK Version:
+                                    </p>
+                                    <Popover
+                                        trigger={
+                                            <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none gap-2">
+                                                <span>
+                                                    {getCurrentVersion()}
+                                                    {getCurrentVersion() === 'latest' && (
+                                                        <span className="text-xs text-primary/60 dark:text-primary-dark/60">
+                                                            {' '}
+                                                            ({fullReference.info.version})
+                                                        </span>
+                                                    )}
+                                                </span>
+                                                <IconChevronDown className="size-6" />
+                                            </button>
+                                        }
+                                        dataScheme="secondary"
+                                        open={versionPopoverOpen}
+                                        onOpenChange={setVersionPopoverOpen}
+                                    >
+                                        {availableVersions.map((version) => (
+                                            <button
+                                                key={version.version}
+                                                onClick={() => handleVersionChange(version.version)}
+                                                className="flex items-center gap-2 px-2 py-1 text-sm rounded hover:bg-accent transition-colors w-full"
+                                            >
+                                                <span>{version.version}</span>
+                                            </button>
+                                        ))}
+                                    </Popover>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="w-full">
+                    <div className="flex justify-start items-center mb-6 gap-2 flex-wrap">
+                        <Chip text="All" onClick={resetFilters} active={currentFilter === 'all'} href="" state="" />
+                        {fullReference.categories.map((category) => (
+                            <Chip
+                                key={category}
+                                text={category}
+                                onClick={() => handleFilterChange(category)}
+                                active={currentFilter === category}
+                                href=""
+                                state=""
+                            />
+                        ))}
+                    </div>
+                    {filteredClasses.map((classData) => (
+                        <div key={classData.id} className="mb-12" id={classData.id}>
+                            <h2 className="text-3xl font-bold mb-4">{classData.title}</h2>
+                            <ReactMarkdown>{padDescription(classData.description)}</ReactMarkdown>
+
+                            {classData.sortedFunctions.map(({ label, functions }) => (
+                                <div key={label || 'other-methods'}>
+                                    {/* Only show a heading if label is not null and not "Other methods" */}
+                                    {label && <h3 className="text-xl font-semibold mb-2 mt-8">{label} methods</h3>}
+                                    {/* If label is null, show "Other methods" heading */}
+                                    {!label && <h3 className="text-xl font-semibold mb-2 mt-8">Other methods</h3>}
+                                    {functions.map((func) => (
+                                        <div
+                                            key={`${classData.id}-${func.id}`}
+                                            className="border-gray-accent-light dark:border-gray-accent-dark border-solid border-b first:border-t-0 last:border-b-0 py-8"
+                                        >
+                                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                                                <div className="space-y-6">
+                                                    <Heading
+                                                        as="h4"
+                                                        id={`${classData.id}-${func.id}`}
+                                                        className="text-lg my-0 font-bold"
+                                                    >
+                                                        <code>{func.title}</code>
+                                                        {func.releaseTag && (
+                                                            <span
+                                                                className={`${getBadgeClasses(func.releaseTag)} ml-2`}
+                                                            >
+                                                                {func.releaseTag}
+                                                            </span>
+                                                        )}
+                                                    </Heading>
+                                                    {func.description && (
+                                                        <ReactMarkdown>
+                                                            {padDescription(func.description)}
+                                                        </ReactMarkdown>
+                                                    )}
+                                                    {func.details && (
+                                                        <Accordion title="Notes:">
+                                                            <ReactMarkdown>{func.details}</ReactMarkdown>
+                                                        </Accordion>
+                                                    )}
+                                                    <Parameters
+                                                        slugPrefix={`${currentReferenceId}-${fullReference.info.version}`}
+                                                        params={func.params}
+                                                        validTypes={validTypes}
+                                                    />
+                                                </div>
+
+                                                <div className="lg:sticky top-[108px] space-y-6">
+                                                    <FunctionExamples examples={func.examples} language={sdkLanguage} />
+                                                    <FunctionReturn
+                                                        slugPrefix={`${currentReferenceId}-${fullReference.info.version}`}
+                                                        returnType={func.returnType}
+                                                        validTypes={validTypes}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+            </section>
+        </ReaderView>
+    )
+}
+
+export const query = graphql`
+    query SdkReferencesQuery {
+        allSdkReferences {
+            nodes {
+                id
+                version
+                referenceId
+            }
+        }
+    }
+`

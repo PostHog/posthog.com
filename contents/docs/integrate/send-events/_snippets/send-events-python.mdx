@@ -1,24 +1,35 @@
-import SettingProperties from "./setting-properties-text.mdx" 
-import NamingTip from "./naming-tip.mdx" 
-import Intro from "./intro.mdx" 
+import SettingProperties from "./setting-properties-text.mdx"
+import NamingTip from "./naming-tip.mdx"
+import Intro from "./intro.mdx"
 
 <Intro />
 
 ```python
-posthog.capture('distinct_id_of_the_user', 
-    'user_signed_up')
+# Events captured with no context or explicit distinct_id are marked as personless and have an auto-generated distinct_id:
+posthog.capture('some-anon-event')
+
+from posthog import identify_context, new_context
+
+# Use contexts to manage user identification across multiple capture calls
+with new_context():
+    identify_context('distinct_id_of_the_user')
+    posthog.capture('user_signed_up')
+    posthog.capture('user_logged_in')
+    # You can also capture events with a specific distinct_id
+    posthog.capture('some-custom-action', distinct_id='distinct_id_of_the_user')
+
 ```
 
 <NamingTip />
 
 <SettingProperties />
 
-```
+```python
 posthog.capture(
-    "distinct_id_of_the_user", 
-    "user_signed_up", 
-    {
-        "login_type": "email", 
+    "user_signed_up",
+    distinct_id="distinct_id_of_the_user",
+    properties={
+        "login_type": "email",
         "is_free_trial": "true"
     }
 )
@@ -29,5 +40,5 @@ posthog.capture(
 If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
 
 ```python
-posthog.capture('distinct_id_of_the_user', '$pageview', {'$current_url': 'https://example.com'})
+posthog.capture('$pageview', distinct_id="distinct_id_of_the_user", properties={'$current_url': 'https://example.com'})
 ```

@@ -187,7 +187,7 @@ print(myObject?.['this']?.['is']?.not?.found) // prints 'null'
 
 ### Strings
 
-Strings must always start end end with a single quote. Includes f-string support.
+Strings must always start and end with a single quote. Includes f-string support.
 
 ```rust
 let str := 'string'
@@ -271,7 +271,7 @@ for (let food, value in arr) {
 
 ## Hog's standard library
 
-Hog's standard library includes the following functions and will expand. To see the the most update-to-date list, check the [Python VM's `stl/__init__.py` file](https://github.com/PostHog/posthog/blob/master/hogvm/python/stl/__init__.py).
+Hog's standard library includes the following functions and will expand. To see the the most update-to-date list, check the [Python VM's `stl/__init__.py` file](https://github.com/PostHog/posthog/blob/master/common/hogvm/python/stl/__init__.py).
 
 ### Type conversion
 
@@ -315,13 +315,14 @@ Hog's standard library includes the following functions and will expand. To see 
 - `generateUUIDv4(): string`
 - `position(haystack: string, needle: string): integer`
 - `positionCaseInsensitive(haystack: string, needle: string): integer`
+- `substring(arg: string, start: int, length?: int): string` - `start` is 1-based, e.g. `substring('hello world',1,5)` will return `hello`
 
 ### Objects and arrays
 - `length(arg: any[] | object): integer`
 - `empty(arg: any[] | object): boolean`
 - `notEmpty(arg: any[] | object): boolean`
 - `keys(arg: any[] | object): string[]`
-- `vaues(arg: any[] | object): string[]`
+- `values(arg: any[] | object): string[]`
 - `indexOf(array: any[], elem: any): integer`
 - `has(array: any[], element: any)`
 - `arrayPushBack(arr: any[], value: any): any[]`
@@ -393,7 +394,7 @@ The "aha" moment came when we realized we could build a real programming languag
 
 The key insight was this: we can pause and resume our own VM at any point, including right before `fetch()` calls. When a script calls `fetch`, we serialize the entire VM state (stack, bytecode, metadata), pass all of that onto the "fetch service" (via a queue like Kafka), push the response back onto the VM's stack, and resume execution on what might be a completely different machine. It doesn't matter if the fetch was called in a for loop or in an extremely recursive call stack, we can pause and resume the language at will. It's magic.
 
-During the [MyKonos hackathon](https://posthog.com/blog/mykonos-hackathon) in May we built the first version of Hog, and then productized it over the next 5 months as part of our new CDP product.
+During the [MyKonos hackathon](https://posthog.com/blog/mykonos-hackathon) in May we built the first version of Hog, and then productized it over the next 5 months as part of our new CDP app.
 
 So that's why we built Hog: to run multi-hop user-provided async scripts in a safe, predictable, and scalable way.
 

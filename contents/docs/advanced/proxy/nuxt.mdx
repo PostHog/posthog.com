@@ -6,10 +6,16 @@ showTitle: true
 
 import RegionWarning from "../_snippets/region-warning.mdx"
 import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<ProxyWarning />
+<CalloutBox icon="IconWarning" title="Warning" type="fyi">
 
-<RegionWarning />
+  1. <ProxyWarning />
+  2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
+
+</CalloutBox>
 
 Nuxt 3 uses [Nitro](https://nuxt.com/docs/guide/concepts/server-engine) under the hood, which provides the [routeRules](https://nitro.unjs.io/config#routerules) config that can be used to proxy requests from one route to another. 
 
@@ -19,8 +25,8 @@ To do this, add the following `routeRules` to your `nuxt.config.ts` file:
 // nuxt.config.ts
 export default defineNuxtConfig({
     routeRules: {
-        '/ingest/static/**': { proxy: 'https://us-assets.i.posthog.com/static/**' },
-        '/ingest/**': { proxy: 'https://us.i.posthog.com/**' },
+        '/<ph_proxy_path>/static/**': { proxy: 'https://us-assets.i.posthog.com/static/**' },
+        '/<ph_proxy_path>/**': { proxy: 'https://us.i.posthog.com/**' },
     },
 });
 ```
@@ -29,7 +35,7 @@ Then configure the PostHog client to send requests via your new proxy:
 
 ```js
 const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
-    api_host: 'https://your-host.com/ingest',
+    api_host: 'https://your-host.com/<ph_proxy_path>',
     ui_host: '<ph_app_host>',
 });
 ```

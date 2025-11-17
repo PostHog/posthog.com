@@ -8,7 +8,7 @@ Evaluating [experiment metrics](/docs/experiments/metrics) always depends on eve
 
 To use a data warehouse table with an experiment, you'll first need to join the `events` table to your data warehouse table:
 
-1. Navigate to the [Data warehouse](https://us.posthog.com/data-warehouse) tab and click on **Add join** from the triple dot menu next to your table.
+1. Navigate to the [SQL](https://us.posthog.com/sql) tab and click on **Add join** from the triple dot menu next to your table.
 
 2. Join the `events` table to your data warehouse table:
     - Under **Source Table Key**, specify a column that holds the value of the `distinct_id` present for the `$feature_flag_called` event.
@@ -31,7 +31,7 @@ To use a data warehouse table with an experiment, you'll first need to join the 
   alt="Screenshot of the form to join the events table"
 />
 
-Once you've joined the `events` table to your data warehouse table, you can use the data warehouse table as a [primary or secondary metric](/docs/experiments/metrics) for your experiment:
+Once you've joined the [`events` table](/docs/data-warehouse/sources/posthog) to your data warehouse table, you can use the data warehouse table as a [primary or secondary metric](/docs/experiments/metrics) for your experiment:
 
 1. When picking your metrics, click on the **Data warehouse tables** category and select your table.
 

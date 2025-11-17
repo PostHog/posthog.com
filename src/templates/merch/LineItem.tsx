@@ -34,7 +34,7 @@ export function LineItem(props: LineItemsProps): React.ReactElement {
     return (
         <div className={classes}>
             {image ? (
-                <div className="self-start grid place-content-center image-wrapper relative bg-white rounded-md border border-light dark:border-dark">
+                <div className="self-start grid place-content-center image-wrapper relative bg-white rounded-md border border-primary">
                     {isNew && (
                         <div className="z-10 uppercase text-xs flex items-center justify-center bg-yellow rounded-full py-2 px-1 font-bold aspect-square absolute top-0 right-0 -translate-y-1/2 translate-x-1/2">
                             new
@@ -58,11 +58,21 @@ export function LineItem(props: LineItemsProps): React.ReactElement {
                         )}
                     </div>
                     <div className="text-right">
-                        {item.count > 1 && <span>{item.count} x</span>} <Price price={item.price} />
+                        {item.count > 1 && <span>{item.count} x</span>}
+                        {item.kit ? (
+                            <>
+                                <span className="line-through">
+                                    <Price price={item.price} />
+                                </span>{' '}
+                                <span className="text-green font-bold">FREE</span>
+                            </>
+                        ) : (
+                            <Price price={item.price} />
+                        )}
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
-                    <Quantity defaultValue={item.count} onChange={setQuantity} />
+                    <Quantity defaultValue={item.count} onChange={setQuantity} disabled={item.kit} />
 
                     <div className="cursor-pointer text-sm" onClick={() => void handleRemoveFromCart()}>
                         Remove

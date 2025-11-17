@@ -1,5 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import React, { useState, createContext, useEffect, useContext, useMemo, useRef } from 'react'
+import React, { useState, createContext, useEffect, useContext, useRef } from 'react'
 import { Replies } from './Replies'
 import { Profile } from './Profile'
 import { QuestionData, StrapiData, StrapiRecord, TopicData } from 'lib/strapi'
@@ -11,8 +11,17 @@ import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import { IconArchive, IconPencil, IconPin, IconSparkles, IconTrash, IconUndo } from '@posthog/icons'
-import Tooltip from 'components/Tooltip'
+import {
+    IconArchive,
+    IconPencil,
+    IconPin,
+    IconSparkles,
+    IconTrash,
+    IconUndo,
+    IconExpand,
+    IconShieldLock,
+} from '@posthog/icons'
+import Tooltip from 'components/RadixUI/Tooltip'
 import { Listbox } from '@headlessui/react'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
 import { Check2, Close } from 'components/Icons'
@@ -24,6 +33,12 @@ import Logomark from 'components/Home/images/Logomark'
 import Avatar from './Avatar'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import EditWrapper from './EditWrapper'
+import ReportSpamButton from './ReportSpamButton'
+import OSButton from 'components/OSButton'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import ZendeskTicket from 'components/ZendeskTicket'
+import { TopicSelector } from './TopicSelector'
+import { XIcon } from 'lucide-react'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -34,6 +49,9 @@ type QuestionProps = {
     buttonText?: string
     showActions?: boolean
     askMax?: boolean
+    onQuestionReady?: (question: StrapiRecord<QuestionData>) => void
+    subscribeButton?: boolean
+    isInForum?: boolean
 }
 
 export const CurrentQuestionContext = createContext<any>({})
@@ -64,68 +82,68 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
     }, [])
 
     return (
-        <div className="relative">
+        <div className="relative [&>*]:inline-flex [&>*]:items-center">
             <Listbox value={selectedTopics} onChange={handleChange} multiple>
-                <Listbox.Button className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold">
-                    <Tooltip content={() => <div style={{ maxWidth: 320 }}>Pin thread</div>}>
-                        <span className="flex items-center h-6 justify-center">
-                            <IconPin className="w-5 h-5" />
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                className="w-4 h-4"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
-                                />
-                            </svg>
-                        </span>
-                    </Tooltip>
+                <Listbox.Button as={React.Fragment}>
+                    <OSButton
+                        hover="border"
+                        icon={<IconPin />}
+                        tooltip={
+                            <>
+                                <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" /> Pin
+                                thread
+                            </>
+                        }
+                        size="md"
+                    >
+                        <IconExpand className="size-4 inline-block" />
+                    </OSButton>
                 </Listbox.Button>
                 {topicGroups?.length > 0 && (
                     <Listbox.Options
-                        className={`list-none p-0 m-0 absolute z-20 bg-white dark:bg-gray-accent-dark-hover max-h-[500px] overflow-auto shadow-md rounded-md divide-y divide-light dark:divide-dark mt-2`}
+                        data-scheme="primary"
+                        className={`list-none p-0 m-0 absolute z-20 max-h-[500px] divide-y divide-primary mt-2 bg-primary shadow-xl border border-primary rounded min-w-52`}
                     >
-                        {topicGroups
-                            .sort(
-                                (a, b) =>
-                                    topicGroupsSorted.indexOf(a?.attributes?.label) -
-                                    topicGroupsSorted.indexOf(b?.attributes?.label)
-                            )
-                            .map(({ attributes: { label, topics } }) => {
-                                return (
-                                    <div key={label}>
-                                        <h5 className="!m-0 py-2 px-4 text-sm sticky top-0 bg-white dark:bg-gray-accent-dark-hover whitespace-nowrap">
-                                            {label}
-                                        </h5>
-                                        {topics?.data.map((topic) => {
-                                            const active = selectedTopics.some(
-                                                (selectedTopic) => selectedTopic.id === topic.id
-                                            )
-                                            return (
-                                                <Listbox.Option key={topic.id} value={topic}>
-                                                    <div
-                                                        className={`${
-                                                            active ? 'font-semibold' : ''
-                                                        } py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-black/50 dark:text-primary-dark`}
-                                                    >
-                                                        <span className="flex-shrink-0 w-3">
-                                                            {active && <Check2 />}
-                                                        </span>
+                        <div className="relative">
+                            <ScrollArea className="min-h-0 h-[500px] max-h-[500px]">
+                                {topicGroups
+                                    .sort(
+                                        (a, b) =>
+                                            topicGroupsSorted.indexOf(a?.attributes?.label) -
+                                            topicGroupsSorted.indexOf(b?.attributes?.label)
+                                    )
+                                    .map(({ attributes: { label, topics } }) => {
+                                        return (
+                                            <div key={label}>
+                                                <div className="py-1 px-2 text-[13px] border-b border-primary whitespace-nowrap text-secondary">
+                                                    {label}
+                                                </div>
+                                                {topics?.data.map((topic) => {
+                                                    const active = selectedTopics.some(
+                                                        (selectedTopic) => selectedTopic.id === topic.id
+                                                    )
+                                                    return (
+                                                        <Listbox.Option key={topic.id} value={topic}>
+                                                            <div
+                                                                data-scheme="primary"
+                                                                className={`${
+                                                                    active ? 'font-semibold' : ''
+                                                                } prose-invert py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 text-primary hover:bg-accent bg-primary`}
+                                                            >
+                                                                <span className="flex-shrink-0 w-3">
+                                                                    {active && <Check2 />}
+                                                                </span>
 
-                                                        <span>{topic.attributes.label}</span>
-                                                    </div>
-                                                </Listbox.Option>
-                                            )
-                                        })}
-                                    </div>
-                                )
-                            })}
+                                                                <span>{topic.attributes.label}</span>
+                                                            </div>
+                                                        </Listbox.Option>
+                                                    )
+                                                })}
+                                            </div>
+                                        )
+                                    })}
+                            </ScrollArea>
+                        </div>
                     </Listbox.Options>
                 )}
             </Listbox>
@@ -148,7 +166,7 @@ const EscalateButton = ({ escalate, escalated }) => {
     return (
         <>
             <Modal open={modalOpen} setOpen={setModalOpen}>
-                <div className="border-border dark:border-dark border absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent dark:bg-accent-dark max-w-lg w-full rounded-md">
+                <div className="border-input border absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent max-w-lg w-full rounded-md">
                     <button onClick={() => setModalOpen(false)} className="absolute top-3 right-3">
                         <Close className="w-4 h-4" />
                     </button>
@@ -166,7 +184,7 @@ const EscalateButton = ({ escalate, escalated }) => {
                         />
                         {showResponse && (
                             <>
-                                <p className="text-sm p-2 mt-4 mb-3 border border-border dark:border-border text-center rounded-md bg-light dark:bg-dark font-semibold">
+                                <p className="text-sm p-2 mt-4 mb-3 border border-primary dark:border-primary text-center rounded-md bg-light dark:bg-dark font-semibold">
                                     Response will come from Max, the support hog
                                 </p>
                                 <div className="flex space-x-2 items-start mb-6">
@@ -174,12 +192,12 @@ const EscalateButton = ({ escalate, escalated }) => {
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Squeak/images/max.png"
                                         width={40}
                                         height={40}
-                                        className="rounded-full flex-shrink-0 bg-light dark:bg-dark border border-border dark:border-dark"
+                                        className="rounded-full flex-shrink-0 bg-light dark:bg-dark border border-input"
                                     />
                                     <textarea
                                         rows={5}
                                         placeholder="Message from Max"
-                                        className="w-full p-2 rounded-md border border-border dark:border-dark text-black bg-white"
+                                        className="w-full p-2 rounded-md border border-input text-black bg-white"
                                         value={response}
                                         onChange={(e) => setResponse(e.target.value)}
                                     />
@@ -187,7 +205,7 @@ const EscalateButton = ({ escalate, escalated }) => {
                             </>
                         )}
                     </div>
-                    <div className="p-4 mt-4 border-t border-border dark:border-dark flex justify-end">
+                    <div className="p-4 mt-4 border-t border-input flex justify-end">
                         <CallToAction onClick={handleConfirm} size="sm" type="outline">
                             {showResponse ? 'Escalate and notify' : 'Escalate'}
                         </CallToAction>
@@ -214,49 +232,57 @@ const DeleteButton = ({ questionID }: { questionID: number }) => {
         }
     }
     return (
-        <button
+        <OSButton
             onClick={handleClick}
-            className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold"
-        >
-            <Tooltip content={() => <div style={{ maxWidth: 320 }}>Delete thread</div>}>
-                <span className="flex w-6 h-6">
-                    <IconTrash />
-                </span>
-            </Tooltip>
-        </button>
+            icon={<IconTrash />}
+            size="md"
+            tooltip={
+                <>
+                    <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" /> Delete thread
+                </>
+            }
+        />
     )
 }
 
-const MaxReply = ({ children }: { children: React.ReactNode }) => {
+const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForum: boolean }) => {
     return (
-        <ul className="ml-5 !mb-0 p-0 list-none">
+        <ul className="list-none">
             <li
-                className={`pr-[5px] pl-[30px] pb-2 !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
+                className={`pb-2 !mb-0 ${
+                    isInForum
+                        ? 'px-5'
+                        : 'pr-[5px] pl-[30px] border-l border-solid border-primary squeak-left-border relative before:border-l-0'
+                }`}
             >
                 <Tooltip
-                    content={() => (
-                        <div className="text-sm max-w-64">
-                            Max AI is our resident AI assistant. Double-check responses for accuracy.
-                        </div>
-                    )}
-                    placement="top"
-                >
-                    <div className="relative inline-block">
-                        <div className="flex items-center !text-black dark:!text-white">
-                            <div className="mr-2 relative">
-                                <Avatar
-                                    className="w-[25px] h-[25px] rounded-full"
-                                    image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
-                                />
-                                <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
-                                    <Logomark className="w-[16px]" />
-                                </span>
+                    delay={0}
+                    trigger={
+                        <div className="relative inline-block">
+                            <div className="flex items-center !text-black dark:!text-white">
+                                <div className="mr-2 relative">
+                                    <Avatar
+                                        className={` ${isInForum ? 'size-[40px]' : 'w-[25px] h-[25px]'} rounded-full`}
+                                        image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
+                                    />
+                                    <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
+                                        <Logomark className="w-[16px]" />
+                                    </span>
+                                </div>
+                                <strong>PostHog AI</strong>
                             </div>
-                            <strong>Max AI</strong>
                         </div>
+                    }
+                >
+                    <div className="text-sm max-w-64">
+                        PostHog AI is our resident AI assistant. Double-check responses for accuracy.
                     </div>
                 </Tooltip>
-                <div className="ml-[33px] mt-1 py-2 px-4 bg-accent dark:bg-accent-dark rounded-md border border-light dark:border-dark">
+                <div
+                    className={` mt-1 py-2 px-4 bg-accent rounded-md border border-primary ${
+                        isInForum ? 'ml-[calc(44px_+_.5rem)]' : 'ml-[calc(44px_+_.5rem)]'
+                    }`}
+                >
                     {children}
                 </div>
             </li>
@@ -273,7 +299,7 @@ const Loading = () => {
     )
 }
 
-const AskMaxLoading = () => {
+const AskMaxLoading = ({ isInForum }: { isInForum: boolean }) => {
     const messages = [
         'This usually takes less than 30 seconds.',
         'Searching docs, tutorials, GitHub issues, blogs, community answers...',
@@ -298,17 +324,17 @@ const AskMaxLoading = () => {
     }, [])
 
     return (
-        <MaxReply>
+        <MaxReply isInForum={isInForum}>
             <div className="flex gap-1">
                 <div>
                     <Loading />
                 </div>
                 <div className="flex-1 font-normal question-content community-post-markdown !p-0">
-                    <p className="!mt-1 !mb-0 !pb-0">
+                    <p>
                         <strong>Hang tight, checking to see if we can find an answer for you...</strong>
                     </p>
                     <p
-                        className={`text-primary/75 dark:text-primary-dark/75 !mb-0 !pb-1 transition-opacity duration-500 ${
+                        className={`text-secondary !mb-0 !pb-1 transition-opacity duration-500 ${
                             fadeState === 'out' ? 'opacity-0' : 'opacity-100'
                         }`}
                     >
@@ -329,17 +355,18 @@ const AskMaxButton = ({ onClick, askedMax }: { askedMax: boolean; onClick: () =>
     }
 
     return (
-        <button
+        <OSButton
             disabled={alreadyAsked}
             onClick={handleClick}
-            className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold disabled:!scale-[1] disabled:!top-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:!text-primary/50 dark:disabled:!text-primary-dark/50"
-        >
-            <Tooltip content={() => <div style={{ maxWidth: 320 }}>Ask Max</div>}>
-                <span className="flex w-6 h-6">
-                    <IconSparkles />
-                </span>
-            </Tooltip>
-        </button>
+            icon={<IconSparkles />}
+            size="md"
+            tooltip={
+                <>
+                    <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
+                    {alreadyAsked ? 'Max has already been asked in this thread' : 'Ask Max'}
+                </>
+            }
+        />
     )
 }
 
@@ -348,11 +375,13 @@ const AskMax = ({
     refresh,
     manual = false,
     withContext = false,
+    isInForum = false,
 }: {
     question: any
     refresh: () => void
     manual?: boolean
     withContext?: boolean
+    isInForum?: boolean
 }) => {
     const [loading, setLoading] = useState(true)
     const [confident, setConfident] = useState(false)
@@ -385,19 +414,22 @@ const AskMax = ({
     }, [])
 
     return loading ? (
-        <AskMaxLoading />
+        <AskMaxLoading isInForum={isInForum} />
     ) : !confident ? (
-        <MaxReply>
-            <div className="text-primary/75 dark:text-primary-dark/75 font-normal question-content community-post-markdown !p-0">
-                <p>Dang, we couldn’t find anything this time. A community member will hopefully respond soon!</p>
+        <MaxReply isInForum={isInForum}>
+            <div className="text-secondary font-normal question-content community-post-markdown !p-0">
+                <p className="!mb-0">
+                    Dang, we couldn't find anything this time. A community member will hopefully respond soon!
+                </p>
             </div>
         </MaxReply>
     ) : null
 }
 
-export const Question = (props: QuestionProps) => {
-    const { id, question, showSlug, buttonText, showActions = true, ...other } = props
+export function Question(props: QuestionProps) {
+    const { id, question, showSlug, buttonText, showActions = true, isInForum = false, ...other } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
+    const [isEditingQuestion, setIsEditingQuestion] = useState(false)
     const { user, notifications, setNotifications, isModerator } = useUser()
     const [maxQuestions, setMaxQuestions] = useState(other.askMax ? [{ manual: false, withContext: false }] : [])
 
@@ -429,10 +461,17 @@ export const Question = (props: QuestionProps) => {
         pinTopics,
         escalate,
         mutate,
+        removeTopic,
     } = useQuestion(id, { data: question })
 
+    useEffect(() => {
+        if (questionData) {
+            props.onQuestionReady?.(questionData)
+        }
+    }, [questionData])
+
     if (isLoading) {
-        return <QuestionSkeleton />
+        return <QuestionSkeleton isInForum={isInForum} />
     }
 
     if (isError) {
@@ -466,11 +505,14 @@ export const Question = (props: QuestionProps) => {
                 mutate,
             }}
         >
-            <div className={`${isModerator && !publishedAt ? 'opacity-70' : ''}`}>
+            <div className={`text-primary ${isModerator && !publishedAt ? '' : ''}`}>
                 {archived && (
-                    <div className="font-medium text-sm m-0 mb-6 bg-accent dark:bg-accent-dark border border-light dark:border-dark p-4 rounded text-center">
-                        <p className="font-bold !m-0 !p-0">The following thread has been archived.</p>
-                        <p className="!text-sm !m-0">
+                    <div
+                        data-scheme="secondary"
+                        className="m-4 mb-0 bg-primary border border-primary p-4 rounded text-center"
+                    >
+                        <p className="font-bold text-base !m-0 !p-0">The following thread has been archived.</p>
+                        <p className="!text-sm !m-0 text-balance">
                             It's likely out of date, no longer relevant, or the answer has been added to our{' '}
                             <Link to="/docs">documentation</Link>.
                         </p>
@@ -478,12 +520,14 @@ export const Question = (props: QuestionProps) => {
                 )}
                 <div className={`flex flex-col w-full`}>
                     {!publishedAt && isModerator && (
-                        <p className="font-bold text-sm m-0 mb-4 italic p-2 bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
+                        <p className="font-bold text-sm m-0 mb-4 italic p-2 bg-accent border border-primary rounded">
                             This thread is unpublished and only visible to moderators
                         </p>
                     )}
                     <div
-                        className={`flex items-center space-x-2 w-full ${!questionData.attributes.subject && '-mb-2'}`}
+                        className={`flex items-center space-x-2 w-full ${isInForum ? 'pt-5 pl-5 pr-8' : ''} ${
+                            !questionData.attributes.subject && '-mb-2'
+                        }`}
                     >
                         <Profile
                             profile={questionData.attributes.profile?.data}
@@ -494,33 +538,36 @@ export const Question = (props: QuestionProps) => {
                             profile={questionData.attributes.profile?.data}
                             edits={questionData.attributes.edits}
                         />
-                        <div className="!ml-auto flex space-x-2">
+                        <div className="!ml-auto flex items-center space-x-px [&>*]:inline-flex">
                             {user?.role?.type === 'moderator' && showActions && (
                                 <>
                                     {!archived && <TopicSelect selectedTopics={questionData.attributes.pinnedTopics} />}
                                     <EscalateButton escalate={escalate} escalated={escalated} />
-                                    <button
-                                        onClick={() => archive(!archived)}
-                                        className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold"
-                                    >
-                                        {!archived ? (
-                                            <Tooltip
-                                                content={() => <div style={{ maxWidth: 320 }}>Archive thread</div>}
-                                            >
-                                                <span className="flex w-6 h-6">
-                                                    <IconArchive />
-                                                </span>
-                                            </Tooltip>
-                                        ) : (
-                                            <Tooltip
-                                                content={() => <div style={{ maxWidth: 320 }}>Restore thread</div>}
-                                            >
-                                                <span className="flex w-6 h-6">
-                                                    <IconUndo />
-                                                </span>
-                                            </Tooltip>
-                                        )}
-                                    </button>
+                                    {!archived ? (
+                                        <OSButton
+                                            onClick={() => archive(!archived)}
+                                            icon={<IconArchive />}
+                                            size="md"
+                                            tooltip={
+                                                <>
+                                                    <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
+                                                    Archive thread
+                                                </>
+                                            }
+                                        />
+                                    ) : (
+                                        <OSButton
+                                            onClick={() => archive(!archived)}
+                                            icon={<IconUndo />}
+                                            size="md"
+                                            tooltip={
+                                                <>
+                                                    <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
+                                                    Restore thread
+                                                </>
+                                            }
+                                        />
+                                    )}
                                     <DeleteButton questionID={questionData.id} />
                                     <AskMaxButton
                                         onClick={() =>
@@ -530,59 +577,61 @@ export const Question = (props: QuestionProps) => {
                                     />
                                 </>
                             )}
-                            {!archived && (
+                            {!isQuestionAuthor && <ReportSpamButton type="question" id={questionData.id} />}
+                            {!archived && (props.subscribeButton ?? true) && (
                                 <SubscribeButton contentType="question" id={questionData?.id} show={showActions} />
+                            )}
+                            {isQuestionAuthor && !isEditingQuestion && (
+                                <OSButton
+                                    onClick={() => setIsEditingQuestion(true)}
+                                    icon={<IconPencil />}
+                                    size="md"
+                                    tooltip="Edit post"
+                                />
                             )}
                         </div>
                     </div>
 
                     <div className={archived ? 'opacity-50' : ''}>
-                        <div className="ml-5 pl-[30px] pb-4 border-l border-light dark:border-dark">
+                        <div
+                            className={`pb-4 ${
+                                isInForum ? 'pl-[calc(2.5rem_+_30px)] pr-8' : 'border-l border-primary ml-5 pl-[30px]'
+                            }`}
+                        >
                             {questionData.attributes.subject && (
                                 <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
                                     <Link
                                         to={`/questions/${questionData.attributes.permalink}`}
-                                        className="no-underline font-semibold text-black dark:text-white hover:text-black dark:hover:text-white"
+                                        className="!no-underline hover:!underline font-semibold"
                                     >
                                         {questionData.attributes.subject}
                                     </Link>
                                 </h3>
                             )}
-                            <EditWrapper data={questionData} type="question" onSubmit={() => mutate()}>
-                                {({ setEditing }) => {
-                                    return (
-                                        <>
-                                            <Markdown className="question-content">
-                                                {questionData.attributes.body}
-                                            </Markdown>
-                                            {isQuestionAuthor && (
-                                                <div className="mt-2">
-                                                    <button
-                                                        onClick={() => setEditing(true)}
-                                                        className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                                    >
-                                                        <IconPencil className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
-                                                        Edit
-                                                    </button>
-                                                </div>
-                                            )}
-                                        </>
-                                    )
-                                }}
+                            <EditWrapper
+                                data={questionData}
+                                type="question"
+                                onSubmit={() => mutate()}
+                                onEditingChange={setIsEditingQuestion}
+                                editing={isEditingQuestion}
+                            >
+                                <Markdown className="question-content">{questionData.attributes.body}</Markdown>
                             </EditWrapper>
-                            {showSlug && slugs?.length > 0 && slugs[0]?.slug !== '/questions' && (
-                                <p className="text-xs text-primary/60 dark:text-primary-dark/60 pb-4 mb-0 mt-1">
+
+                            {!isEditingQuestion && showSlug && slugs?.length > 0 && slugs[0]?.slug !== '/questions' && (
+                                <p className="text-xs text-secondary pb-4 mb-0 mt-2">
                                     <span>Originally posted on</span>{' '}
                                     <Link
                                         to={slugs[0]?.slug}
-                                        className="text-primary/60 dark:text-primary-dark/60 font-medium"
+                                        className="text-secondary hover:underline hover:text-primary"
+                                        state={{ newWindow: true }}
                                     >
-                                        https://posthog.com{slugs[0]?.slug}
+                                        posthog.com{slugs[0]?.slug}
                                     </Link>
                                 </p>
                             )}
                         </div>
-                        <Replies expanded={expanded} setExpanded={setExpanded} />
+                        <Replies expanded={expanded} setExpanded={setExpanded} isInForum={isInForum} />
                         {maxQuestions.map((question, index) => {
                             return (
                                 <AskMax
@@ -591,14 +640,18 @@ export const Question = (props: QuestionProps) => {
                                     refresh={mutate}
                                     manual={question.manual}
                                     withContext={question.withContext}
+                                    isInForum={isInForum}
                                 />
                             )
                         })}
                     </div>
                     <div
-                        className={`ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border ${
-                            archived ? 'opacity-25' : ''
-                        }`}
+                        {...(isInForum && { 'data-scheme': 'primary' })}
+                        className={` pb-1 relative w-full ${
+                            isInForum
+                                ? 'bg-primary border-t border-primary pt-4 px-4'
+                                : 'ml-5 pl-8 pr-5 squeak-left-border'
+                        } ${archived ? 'opacity-25' : ''}`}
                     >
                         <QuestionForm
                             archived={archived}
@@ -607,8 +660,95 @@ export const Question = (props: QuestionProps) => {
                             formType="reply"
                             reply={reply}
                             onSubmit={handleReply}
+                            isInForum={isInForum}
                         />
                     </div>
+                    {isModerator && isInForum && (
+                        <div className="p-4 pb-0">
+                            <div className="bg-accent rounded-md p-6 text-primary border border-border">
+                                <h4 className="text-xs opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">
+                                    Moderator tools
+                                </h4>
+                                <div className="grid grid-cols-2">
+                                    <div>
+                                        <Link
+                                            to={`/community/profiles/${questionData?.attributes?.profile?.data?.id}`}
+                                            className="text-yellow font-bold"
+                                        >
+                                            {questionData?.attributes?.profile?.data?.attributes?.firstName
+                                                ? `${questionData?.attributes?.profile?.data?.attributes?.firstName} ${questionData?.attributes?.profile?.data?.attributes?.lastName}`
+                                                : 'Anonymous'}
+                                        </Link>
+                                        <input
+                                            className="w-full m-0 font-normal text-sm text-primary border-none p-0 bg-transparent focus:ring-0"
+                                            type="text"
+                                            value={
+                                                questionData?.attributes?.profile?.data?.attributes?.user?.data
+                                                    ?.attributes?.email
+                                            }
+                                            readOnly
+                                            onFocus={(e) => e.target.select()}
+                                        />
+                                    </div>
+                                    <div className="w-full relative">
+                                        <p className="!text-sm pt-0.5 pb-0 mb-0 flex flex-col items-end space-y-1.5">
+                                            <Link
+                                                className="font-bold"
+                                                to={questionData.attributes.permalink}
+                                                externalNoIcon
+                                            >
+                                                View in PostHog
+                                            </Link>
+                                            <Link
+                                                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${questionData.id}`}
+                                                externalNoIcon
+                                                className="font-bold"
+                                            >
+                                                View in Strapi
+                                            </Link>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    className={`grid gap-x-4 mt-4 border-t divide-x divide-border border-border ${
+                                        questionData.attributes.zendeskTicketID ? 'grid-cols-2' : ''
+                                    }`}
+                                >
+                                    <ZendeskTicket question={questionData} questionID={questionData.id} />
+                                    <div className={`pt-4 ${questionData.attributes.zendeskTicketID ? 'pl-4' : ''}`}>
+                                        <div className="flex items-center justify-between mb-2">
+                                            <h4 className="text-xs text-primary opacity-70 p-0 m-0 font-semibold uppercase">
+                                                Forum topics
+                                            </h4>
+                                            <TopicSelector
+                                                questionId={questionData.id}
+                                                permalink={questionData.attributes.permalink}
+                                            />
+                                        </div>
+                                        <ul className="flex items-center list-none p-0 flex-wrap">
+                                            {questionData.attributes?.topics?.data.map((topic) => (
+                                                <li
+                                                    key={topic.id}
+                                                    className="bg-white dark:bg-white/10 py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
+                                                >
+                                                    <Link
+                                                        to={`/questions/topic/${topic.attributes.slug}`}
+                                                        className="text-yellow text-sm"
+                                                    >
+                                                        {topic.attributes.label}
+                                                    </Link>
+
+                                                    <button onClick={() => removeTopic(topic)}>
+                                                        <XIcon className="h-4 w-4 text-primary" />
+                                                    </button>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </CurrentQuestionContext.Provider>

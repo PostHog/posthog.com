@@ -1,0 +1,40 @@
+---
+title: Using Railway as a reverse proxy
+sidebar: Docs
+showTitle: true
+---
+
+import RegionWarning from "../_snippets/region-warning.mdx"
+import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+
+<CalloutBox icon="IconWarning" title="Warning" type="fyi">
+
+  1. <ProxyWarning />
+  2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
+
+</CalloutBox>
+
+Railway provides a simple way to deploy a [reverse proxy for PostHog](https://railway.com/deploy/posthog-proxy?referralCode=FQRCYT&utm_medium=integration&utm_source=template&utm_campaign=docs-railway-proxy). Click the button below to deploy a reverse proxy on Railway:
+
+
+<div className="w-fit">
+    <a href="https://railway.com/deploy/posthog-proxy?referralCode=FQRCYT&utm_medium=integration&utm_source=template&utm_campaign=docs-railway-proxy">
+        <img src="https://railway.com/button.svg" alt="Deploy on Railway" className="max-w-[200px] h-auto mb-4" noZoom />
+    </a>
+</div>
+
+
+Make sure to set the `POSTHOG_CLOUD_REGION` variable to either `us` or `eu` depending on your PostHog cloud region.
+
+Afterwards, configure your PostHog client to send requests through your reverse proxy.
+
+```js
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://your-project-name.up.railway.app', // Your Railway domain
+  ui_host: 'https://us.posthog.com', // Or https://eu.posthog.com depending on your cloud region.
+})
+```

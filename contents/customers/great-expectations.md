@@ -1,23 +1,8 @@
 ---
 title: 'How Great Expectations uses PostHog to improve content strategy'
 customer: Great Expectations
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/gx_logo_light_ce286f1955.png
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/gx_logo_dark_5a1dba99f7.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog_great_expectations_f90a29aa4d.jpg
-featuredCustomer: false
-industries:
-  - 'SaaS, Data'
-users:
-  - Growth
-  - Engineering
-  - Product
-  - Marketing
-toolsUsed:
-  - PostHog Cloud
-  - Insights
 date: 2024-10-05
 ---
 

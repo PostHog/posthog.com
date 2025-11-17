@@ -1,22 +1,8 @@
 ---
 title: How HostAI increased evaluation score by 50% with PostHog and LangFuse
 customer: HostAI
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1715246033/posthog.com/contents/host-ai-logo.jpg
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1715246033/posthog.com/contents/host-ai-logo.jpg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/hostai_posthog_9aa09a3382.png
-industries:
-  - AI
-users:
-  - Engineering
-  - Leadership
-  - Founder
-toolsUsed:
-  - Feature flags
-  - Product analytics
-  - LLM observability
 date: 2024-05-24
 ---
 

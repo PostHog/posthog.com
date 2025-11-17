@@ -5,7 +5,22 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog offers considerable flexibility in hosting and configuration options to comply with privacy regulations around the world.
+Posthog gives you privacy controls at different levels to protect user privacy and comply with regulations.
+This guide covers the different privacy controls we provide and guidance on how to use them.
+
+- **What you're responsible for**: It's your responsibility to decide what data you collect, if it complies with regulations, and communicate with your users.
+- **What PostHog does for you**: We provide tools and features to help you manage what's collected and store the collected data securely.
+
+## Privacy control features
+
+You can control data collection, ingestion, and storage at different levels. Explore the guides below to learn more about the different privacy control features:
+
+- [Manage data collection](/docs/privacy/data-collection)
+- [Manage data processing](/docs/privacy/data-storage#processing-data-before-storage)
+- [Manage data storage](/docs/privacy/data-storage)
+
+
+## Guidance on navigating regulations
 
 In these guides, we offer advice for using PostHog in a compliant manner under the following legal frameworks:
 
@@ -15,7 +30,13 @@ In these guides, we offer advice for using PostHog in a compliant manner under t
 
 - [The California Consumer Privacy Act](/docs/privacy/ccpa-compliance/) (CCPA), which applies to qualifying for-profit businesses collecting personal information on residents of California
 
-> **Please note:** these guides do not constitute legal advice. We recommend seeking professional advice to ensure you remain compliant with relevant legislation.
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox type="info" title="These are not legal advice">
+
+It is up to you to ensure you're compliant with regulations. We strongly recommend reading the relevant regulations in full and seeking independent legal advice regarding your obligations. 
+
+</CalloutBox>
 
 ## Frequently asked questions
 
@@ -23,7 +44,7 @@ This overview covers some frequently asked questions about PostHog and privacy. 
 
 ### Is it ok for my API key to be exposed and public?
 
-import ExposedApiKeys from "../\_snippets/exposed-api-keys.mdx"
+import ExposedApiKeys from "../_snippets/exposed-api-keys.mdx"
 
 <ExposedApiKeys />
 

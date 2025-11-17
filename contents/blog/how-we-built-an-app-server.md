@@ -14,7 +14,7 @@ featuredImageType: full
 category: Engineering
 ---
 
-PostHog's mission is to increase the number of successful products in the world. To achieve it, we're building a comprehensive [suite of analytics and data tools](/product) (see [our roadmap](/roadmap) for what we're working on now). 
+PostHog's mission is to increase the number of successful products in the world. To achieve it, we're building a comprehensive [suite of dev tools](/product) (see [our roadmap](/roadmap) for what we're working on now). 
 
 Earlier in our history, users frequently asked us for ways to enrich and do more with their data. They wanted to add geographic data to events, get events from CRMs, export and import data from other sources, and more. 
 
@@ -214,13 +214,13 @@ It has evolved significantly. A high-level version of the ingestion pipeline now
 ```mermaid
 graph TD
     CLIENT[Client Library]
-    DECIDE["/decide API"]
+    FLAGS["/flags API"]
     CAPTURE[Capture API]
     PLUGINS[Plugin server]
     PERSONS["PostgreSQL (persons table)"]
     Kafka2[Kafka]
 
-    CLIENT -..-> DECIDE
+    CLIENT -..-> FLAGS
 
     CLIENT -..-> CAPTURE
     CAPTURE --> Kafka

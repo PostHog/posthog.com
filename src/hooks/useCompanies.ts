@@ -34,7 +34,7 @@ const query = (offset: number, companyFilters: Filters, jobFilters: Filters) => 
             sort: 'name:asc',
             populate: {
                 jobs: {
-                    sort: 'postedDate:desc',
+                    sort: ['department:asc', 'postedDate:desc'],
                     populate: {
                         company: {
                             fields: ['name'],

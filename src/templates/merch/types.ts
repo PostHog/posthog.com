@@ -25,8 +25,17 @@ export type MetafieldKey = string
 export type Metafield = {
     value: MetafieldValue
     key: MetafieldKey
+    namespace: string
 }
 type Metafields = Metafield[]
+
+export type ShopifyProductCategory = {
+    id: string
+    name: string
+    level: number
+    parentId?: string
+}
+
 export type ShopifyCollection = {
     handle: string
     id: string
@@ -56,6 +65,7 @@ export type ShopifyMedia = ShopifyMediaItem[]
 
 export type ShopifyProduct = {
     description: string
+    descriptionHtml: string
     featuredMedia: ShopifyMediaImage
     handle: string
     id: string
@@ -77,6 +87,9 @@ export type ShopifyProduct = {
     totalInventory: number
     variants: ShopifyProductVariant[]
     imageProducts: ShopifyProduct[]
+    createdAt: string
+    category?: ShopifyProductCategory
+    type?: string
 }
 
 export type ShopifyProductVariant = {
@@ -91,6 +104,7 @@ export type ShopifyProductVariant = {
     shopifyId: string
     sku: string
     title: string
+    kit?: boolean
 }
 
 interface Image {
@@ -151,7 +165,6 @@ export interface StorefrontProductVariantNode {
     }
     quantityAvailable: number
     selectedOptions: VariantSelectedOption[]
-    brilliantQuantity: number
 }
 
 export type StorefrontProductVariant = StorefrontProductVariantNode

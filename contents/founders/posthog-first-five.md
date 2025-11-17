@@ -38,7 +38,7 @@ James found Marius via a [hobby project](https://github.com/mariusandra/insights
 
 It didn’t take long to realize they should hire Marius full time. “Just from watching him do some actual work with us, it was really clear that he was very talented.”
 
-Today, Marius leads our [Product Analytics Team](/teams/product-analytics). He’s been instrumental in refactoring all our insights to use [SQL](/docs/sql), which fixes whole classes of bugs, and enables engineers to do [cool things in PostHog using SQL](/tutorials/hogql-sum-aggregation).
+Today, Marius leads our <SmallTeam slug="product-analytics" />. He’s been instrumental in refactoring all our insights to use [SQL](/docs/sql), which fixes whole classes of bugs, and enables engineers to do [cool things in PostHog using SQL](/tutorials/hogql-sum-aggregation).
 
 > **What we learned:** Great people will find ways to shine if you give them the chance. Contract work is a great way to do this, especially for early-stage companies. This initial trial with Marius was the genesis of our [SuperWeek / SuperDay process](/handbook/people/hiring-process#4-posthog-superday), which we use to make final decision on potential hires.
 
@@ -100,7 +100,7 @@ Lottie is responsible for all the cool artwork and [branding on our website](/),
 
 ![Michael](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/michael.png)
 
-[Michael](/community/profiles/124) found PostHog via a "Who's hiring?" thread on Hacker News when he was 18 and still at school.
+[Michael](/michael) found PostHog via a "Who's hiring?" thread on Hacker News when he was 18 and still at school.
 
 His was the first role where James and Tim interviewed multiple candidates. Despite being just two weeks from finishing high school, Michael stood out because:
 

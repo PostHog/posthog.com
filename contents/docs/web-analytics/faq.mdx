@@ -25,7 +25,7 @@ All good web analytics dashboards need to include a world map. Ours includes it 
 
 ## Do stats include bots and crawlers?
 
-No, we automatically block bots and crawlers. You can see exactly which ones [we block here](https://github.com/PostHog/posthog-js/blob/master/src/utils/blocked-uas.ts).
+No, we automatically block bots and crawlers. You can see exactly which ones [we block here](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/blocked-uas.ts).
 
 ## Why is my pageview/user count different on PostHog than my other analytics tool?
 
@@ -59,9 +59,11 @@ A [session](/docs/data/sessions) is a grouping of user activity, which starts on
 
 Some traffic to your site might be bots like search engines crawlers, archivers, or content scrapers. You may want some of these to be able to access your site, but you don't want them to appear in your analytics data. Different tools use different methods, which may result in different visitor or page view counts.
 
-Our client-side bot detection code is available on [GitHub](https://github.com/PostHog/posthog-js/blob/main/src/utils/blocked-uas.ts) (pull requests welcome!) and we automatically prevent detected bots from sending events.
+Our client-side bot detection code is available on [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/blocked-uas.ts) (pull requests welcome!) and we automatically prevent detected bots from sending events.
 
 You can also block custom user agents by setting the `custom_blocked_useragents` [config](/docs/libraries/js/config) option if there's a specific user agent that you don't want to track - your custom user agent or maybe a bad actor you want to block.
+
+> **Note:** If you use Ahrefs, you need to switch to use the "Desktop" user agent. In other modes, the user agent doesn't contain information PostHog can use to block their crawl from analytics.
 
 ## Why am I getting a lot of direct traffic?
 
@@ -80,7 +82,12 @@ This is called self-referral traffic, having a small amount (less than 5%) of se
 
 ### Cross-domain tracking
 
-If you track multiple domains or websites, you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed.
+For tracking users across different domains or websites, for example a marketing site at `marketing.com` and an app at `app.com`, or in some cases between subdomains, you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed. This typically means you need to pass the user's `distinct_id` and `session_id` between domains but check the guide for complete instructions.
+
+This ensures that:
+- Campaign attribution is preserved across domain transitions
+- User journeys are tracked accurately from first touch to conversion
+- Analytics data from both sites is associated with the same user profile
 
 ### Session timeout
 
@@ -131,3 +138,11 @@ At a more philosophical level, we question the premise of the question. PageSpee
 4. Utilize server-side tracking. We have a range of SDKs for backend languages and frameworks you can use to capture events and use the features of PostHog without needing to load any code on the client side.
 
 5. Keep an eye on your [web vitals](/docs/web-analytics/web-vitals) to see if there are any pages with worse performance.
+
+## I am online, but the online user count is not reflecting my user
+
+The recent online user count reflects the number of users we've seen in the last 30 seconds.
+
+If users are online but not sending events (e.g., reading a nicely written blog post), they won't be included in the count.
+
+Ingestion delays can also cause the count not to update as expected.

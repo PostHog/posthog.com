@@ -1,0 +1,222 @@
+---
+title: Controlling data collection
+sidebarTitle: Data collection
+sidebar: Docs
+showTitle: true
+---
+
+PostHog offers a range of controls to help you manage data collection. This guide covers data collection controls available to you **before** data reaches PostHog servers.
+
+You should consider the following tools to help you manage data collection:
+
+| Feature | Description |
+|---------|-------------|
+| [Asking for opt out](#asking-for-opt-out) | A top-level opt out of all data collection |
+| [Autocapture behavior](#autocapture) | Configure what elements and interactions are automatically captured |
+| [Masking sensitive information](#masking-sensitive-information) | Prevent specific sensitive data from being collected |
+| [Overriding captured events](#overriding-captured-events) | Modify or filter event data before it's sent to PostHog |
+| [Cookieless tracking](#cookieless-tracking) | Track users without using browser cookies |
+| [Identifying users](#identifying-users) | Set up user identification and manage user properties |
+
+If you require that certain data never reaches PostHog servers, you can use one of the tools below to prevent data from being captured.
+
+## Asking for opt out
+
+Before capturing data, you may need to ask your users for consent. PostHog provides a top level switch to control data collection. 
+
+Opting out on a PostHog client will prevent **all data** from being captured and sent to PostHog. This includes any autocaptures, manual captures, and session replays.
+
+### Opting in and out
+You can opt out the current device by calling `posthog.opt_out_capturing()`.
+
+import OptOutPerPerson from '../product-analytics/_snippets/multilanguage/opt-out-per-person.mdx'
+
+<OptOutPerPerson />
+
+Similarly, you can opt users in:
+
+import OptIn from '../product-analytics/_snippets/multilanguage/opt-in.mdx'
+
+<OptIn />
+
+### Checking if a user is opted out
+
+You can check if a user is opted out by calling `posthog.has_opted_out_capturing()`.
+
+import CheckOptOut from '../product-analytics/_snippets/multilanguage/check-opt-out.mdx'
+
+<CheckOptOut />
+
+### Opt out preference persistence
+
+Opting out status is persisted automatically using:
+- **local storage** or **cookies** for browsers
+- **shared preferences** for Android 
+- **`posthog.optOut`** file in your app's support directory for iOS
+- **`.posthog-rn.json`** for React Native
+
+For browsers, you can control how long the opt out state is persisted by setting `opt_out_capturing_persistence_type` to either `local_storage` or `cookies`.
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    opt_out_capturing_persistence_type: 'local_storage',
+});
+```
+
+To persist opt out across sessions and devices, you can save your user's opt out preferences in your app logic. On launch, you can check if the user has opted out and set the opt out state accordingly.
+
+### Opting out by default
+
+To opt users out by default, set `opt_out_capturing_by_default` to `true` in the `init` call.  
+
+import OptOutDefault from '../product-analytics/_snippets/multilanguage/opt-out-default.mdx'
+
+<OptOutDefault />
+
+## Autocapture
+
+PostHog has powerful autocapture features that capture data automatically on the client side. Autocapture is available for Web, iOS, and React Native, and is used by **product analytics**, **web vitals**, and **heatmaps**.
+
+### Project level autocapture controls
+
+You can control autocapture behavior at the project level in **Settings** > **Project** > [**Autocapture & heatmaps**](https://us.posthog.com/settings/project-autocapture). 
+
+import Tab from "components/Tab"
+import AutocaptureWeb from './_snippets/autocapture-web.mdx'
+import AutocaptureIOS from './_snippets/autocapture-ios.mdx'
+import AutocaptureReactNative from './_snippets/autocapture-react-native.mdx'
+
+### Session level autocapture controls
+
+You can also control autocapture behavior programmatically on the client side.
+
+<Tab.Group tabs={['Web', 'iOS', 'React Native']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>iOS</Tab>
+        <Tab>React Native</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <AutocaptureWeb />
+        </Tab.Panel>
+        <Tab.Panel>
+            <AutocaptureIOS />
+        </Tab.Panel>
+        <Tab.Panel>
+            <AutocaptureReactNative />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+### Hide sensitive information with autocapture
+
+You can also mask individual elements of the view hierarchy from being captured.
+
+import MaskingProductAnalytics from './_snippets/masking-product-analytics.mdx'
+
+<MaskingProductAnalytics />
+
+## Masking sensitive information
+
+You can safely capture [session replays](docs/session-replay) events without compromising your users' privacy. PostHog offers a range of masking techniques that let you mask over sensitive information.
+
+The following masking techniques are available:
+
+- [Masking inputs](/docs/session-replay/privacy#input-elements): Mask out sensitive inputs from being captured. Individual inputs can be unmasked.
+- [Masking text elements](/docs/session-replay/privacy#text-elements): Mask out sensitive text from being captured. Individual text elements can be unmasked.
+- [Masking other elements](/docs/session-replay/privacy#other-elements): Mask out any individual element from being captured.
+- [Redacting information on network captures](/docs/session-replay/network-recording#sensitive-information): Redact sensitive information from network captures.
+
+### Private by default 
+
+If you have data that should never be captured, a safe way to start with PostHog is to mask all inputs and text, only selectively unmasking elements that you need to capture.
+
+You can set specific [data attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/How_to/Use_data_attributes) on elements to control whether they are captured or not:
+
+```js-web
+{
+    // mask all inputs by default
+    maskAllInputs: true,
+    maskTextSelector: "*",
+    maskTextFn: (text, element) => {
+        // only elements with `data-capture="true"` will be captured
+        if (element?.dataset['capture'] === 'true') {
+            return text
+        }
+        return '*'.repeat(text.trim().length)
+    },
+}
+```
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox type="info" title="Mobile session replay masking">
+
+Selectively unmasking elements is not currently available for mobile session replay. You should be more selective about which screens you capture, and take care to mask out sensitive information.
+
+</CalloutBox>
+
+Masking all inputs and text by default in session replay ensures that data is only captured when explicitly unmasked, putting you in control of what's captured.
+
+## Overriding captured events
+
+Before an event is sent to PostHog, you have a final chance to modify it to remove sensitive information. You can do this by using the `before_send` hook. This hook is **only available for the JavaScript Web SDK**.
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',  
+  defaults: '<ph_posthog_js_defaults>', 
+  before_send: function(event) {
+        if (event.properties['$current_url']) {
+            event.properties['$current_url'] = null;
+        }
+
+        return event;
+    },
+})
+``` 
+
+## Cookieless tracking
+
+PostHog can be configured to do cookieless tracking by setting `cookieless_mode` to `always` or `on_reject`.
+
+First is `cookieless_mode: "always"`:
+- Doesn't require a cookie banner (unless something else on your website uses cookies)
+- Never stores PostHog data in cookies or local/session storage
+- Prevents you from calling `identify()`, as a distinct ID would be considered Personal Data under GDPR and other similar privacy regulations
+- Counts the number of users on your site using a privacy-preserving hash, calculated on PostHog's servers
+
+Second is `cookieless_mode: "on_reject"`:
+- Is useful if you do want to show a cookie banner and only enable cookies when the user consents with `posthog.opt_in_capturing()` or similar method
+- Never stores PostHog data in cookies or local/session storage until the user opts in
+- **No events are captured** until after consent is either given or denied
+- If consent is denied, still counts those users, using a privacy-preserving hash calculated on PostHog's servers
+
+<CalloutBox type="info" title="Cookieless tracking">
+
+Using `cookieless_mode` helps comply with cookie and consent requirements. You still need to configure data collection and [storage](/docs/privacy/data-storage) separately to comply with relevant regulations.
+
+Do not send data that could be used to identify users (e.g. setting an email address as a [person property](/docs/product-analytics/person-properties) if they have not given consent.
+
+</CalloutBox>
+
+For more information on how to set up cookieless audience measurement, you can follow our detailed tutorial on [cookieless tracking](/docs/tutorials/cookieless-tracking).
+
+## Identifying users
+
+To track users across sessions and devices, PostHog needs to identify them. This is done by calling `posthog.identify()`.
+
+Some features depend on [cohorts](/docs/data/cohorts) to work well. Some information beyond a basic `distinct_id` is required to use these features:
+
+- [Feature flags](/docs/feature-flags) - target specific user segments in experiments
+- [Surveys](/docs/surveys) - Enable for specific cohorts of users
+- [Insights](/docs/product-analytics/insights) - filter and breakdown by user characteristics
+
+import IdentifyFrontendCode from "../_snippets/identify-frontend-code.mdx"
+
+<IdentifyFrontendCode />
+
+Information you pass to `posthog.identify()` will be sent to PostHog servers. Depending on your compliance requirements, you may not be able to store some of this information.
+
+If you plan to use these features, consider how you can identify these groups of users without breaking compliance requirements.

@@ -27,3 +27,21 @@ To replace any type of `View` with a redacted version in the recording, set the 
     )
 ...
 ```
+
+### Handling sensitive third-party screens
+
+Third-party components (like payment forms or authentication screens) are often rendered in separate view hierarchies that can't be accessed or modified for masking.
+
+For these cases, manually controlling the recording state is the only reliable solution. For example:
+
+```android_kotlin
+// Stop session recording before showing a third-party payment sheet
+PostHog.stopSessionReplay()
+
+// Present third-party payment sheet
+presentPaymentSheet()
+
+// ... 
+// Some time later when the sheet is dismissed, resume recording
+PostHog.startSessionReplay()
+```

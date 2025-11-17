@@ -13,7 +13,7 @@ function DataAttributes() {
             <div className="flex flex-col lg:flex-row">
                 <div className="min-w-[300px]">
                     <h4 className="text-xl">Your website</h4>
-                    <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-4 space-y-2 font-os">
+                    <div className="bg-accent border border-primary rounded p-4 space-y-2 font-os">
                         <div className="text-center pb-2">
                             <svg
                                 className="mx-auto h-[30px]"

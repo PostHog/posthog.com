@@ -4,7 +4,7 @@ date: 2025-02-20
 author:
  - ian-vanagas
 tags:
- - LLM observability
+ - LLM analytics
 ---
 
 OpenRouter makes it easy to use a range of different LLMs. No matter which you use, understanding API usage, costs, and latency is crucial for understanding how users interact with your AI features. In this tutorial, we'll show you how to monitor important metrics such as:
@@ -169,7 +169,7 @@ Now, when you run `npm run dev` again, you can choose your model, enter your mes
 
 ## 3. Viewing generations in PostHog
 
-After generating a few responses with different models, go to PostHog and enable the [LLM observability feature preview](https://app.posthog.com/#panel=feature-previews%3Allm-observability). Once enabled, you can access the [LLM observability dashboard](https://us.posthog.com/llm-observability) to see:
+After generating a few responses with different models, go to PostHog to access the [LLM analytics dashboard](https://app.posthog.com/llm-analytics) to see:
 
 - Overview of all AI interactions
 - Cost breakdowns by model
@@ -184,7 +184,7 @@ After generating a few responses with different models, go to PostHog and enable
   classes="rounded"
 />
 
-Head to the [generations tab](https://us.posthog.com/llm-observability/generations) to get details on each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
+Head to the [generations tab](https://app.posthog.com/llm-analytics/generations) to get details on each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_20_at_14_47_59_2x_d4196d55f8.png"

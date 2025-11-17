@@ -8,10 +8,6 @@ tags:
   - product analytics
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
-export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-surveys/events-light.png"
-export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-surveys/events-dark.png"
-
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Vue.js app. To show you how to set up analytics, in this tutorial we create a basic Vue app, add PostHog, and use it to capture pageviews and custom events.
 
 ## Creating a Vue app
@@ -142,7 +138,7 @@ The basic setup is now complete. Run `npm run serve` to see your app.
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup). 
 
-First install `posthog-js`.
+First, install `posthog-js`:
 
 ```bash
 npm install posthog-js
@@ -156,24 +152,20 @@ cd plugins
 touch posthog.js
 ```
 
-Add the following code to your `posthog.js` file:
+In `posthog.js`, initialize PostHog with your project API key and host. You can find these in your [project settings](https://us.posthog.com/project/settings).
 
 ```js file=plugins/posthog.js
 import posthog from "posthog-js";
 
 export default {
   install(app) {
-    app.config.globalProperties.$posthog = posthog.init(
-      "<ph_project_api_key>",
-      {
-        api_host: "<ph_client_api_host>",
-      }
-    );
+    app.config.globalProperties.$posthog = posthog.init("<ph_project_api_key>", {
+      api_host: "<ph_client_api_host>",
+      defaults: "<ph_posthog_js_defaults>",
+    });
   },
 };
 ```
-
-Replace `<ph_project_api_key>` and `<ph_client_api_host>` with your your PostHog API key and host. You can find these in your [project settings](https://app.posthog.com/settings/project).
 
 Finally, activate your plugin in `main.js`:
 
@@ -189,83 +181,14 @@ createApp(App)
 .mount('#app');
 ```
 
-Once you’ve done this, reload your app and click the buttons a few times. You should see events appearing in the [PostHog events explorer](https://app.posthog.com/events).
+Once you’ve done this, reload your app and click the buttons a few times. You should see events and pageviews appearing in the [activity explorer](https://us.posthog.com/activity/explore).
 
 <ProductScreenshot
-  imageLight={EventsLight} 
-  imageDark={EventsDark} 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_15_39_57_2x_36315b0437.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_15_40_11_2x_16b1582321.png" 
   alt="Events in PostHog" 
   classes="rounded"
 />
-
-## Capturing pageviews
-
-You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Vue creates a single-page app, this only happens once, and the Vue router handles subsequent page changes.
-
-If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
-
-In `main.js`, set up PostHog to capture pageviews in the `router.afterEach` function. Additionally, you can use `nextTick` so that the capture event fires only after the page is mounted.
-
-```js main.js
-import { createApp, nextTick } from 'vue'
-import App from './App.vue'
-import router from './router'
-import posthogPlugin from '../plugins/posthog';
-
-const app = createApp(App);
-app.use(posthogPlugin)
-.use(router)
-.mount('#app');
-
-router.afterEach((to, from, failure) => {
-  if (!failure) {
-    nextTick(() => {
-      app.config.globalProperties.$posthog.capture('$pageview', { path: to.fullPath });
-    });
-  }
-});
-```
-
-Now, every time a user moves between pages, PostHog captures a `$pageview` event, not just the first page load.
-
-Lastly, go back to `plugins/posthog.js` and make sure to set `capture_pageview` in the PostHog initialization config to `false`. This turns off autocaptured pageviews and ensures you won’t double-capture pageviews on the first load.
-
-```js file=plugins/posthog.js
-import posthog from "posthog-js";
-
-export default {
-  install(app) {
-    app.config.globalProperties.$posthog = posthog.init(
-      "<ph_project_api_key>",
-      {
-        api_host: "<ph_client_api_host>",
-        capture_pageview: false,
-      }
-    );
-  },
-};
-```
-
-### Capturing pageleaves (optional)
-
-Note that once you disable automatic `$pageview` captures when calling `posthog.init` you'll be disabling automatic `$pageleave` capture as well. If you want to continue capturing `$pageleave`s automatically, you can re-enable it.
-
-```js file=plugins/posthog.js
-import posthog from "posthog-js";
-
-export default {
-  install(app) {
-    app.config.globalProperties.$posthog = posthog.init(
-      "<ph_project_api_key>",
-      {
-        api_host: "<ph_client_api_host>",
-        capture_pageview: false,
-        capture_pageleave: true, // Opt back in because disabling $pageview capture disables $pageleave events
-      }
-    );
-  },
-};
-```
 
 ## Capturing custom events
 

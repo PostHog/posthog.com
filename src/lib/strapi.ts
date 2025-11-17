@@ -74,6 +74,12 @@ export type ProfileData = {
         id: number
     }[]
     height: number | null
+    bookmarks: {
+        url: string
+        title: string
+        description: string
+        notes: string
+    }[]
 }
 
 export type UserData = {

@@ -46,11 +46,11 @@ export default function RecentChange({ team }) {
 
             <div className="flex gap-2">
                 {cta?.url && (
-                    <CallToAction to={cta.url} type="secondary" size="sm" className="mt-2">
+                    <CallToAction to={cta.url} type="secondary" size="sm" className="mt-2" state={{ newWindow: true }}>
                         {cta.label}
                     </CallToAction>
                 )}
-                <CallToAction to="/changelog" type="secondary" size="sm" className="mt-2">
+                <CallToAction to="/changelog" type="secondary" size="sm" className="mt-2" state={{ newWindow: true }}>
                     Visit changelog
                 </CallToAction>
             </div>

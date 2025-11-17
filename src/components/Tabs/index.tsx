@@ -26,8 +26,8 @@ const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', act
                                 active
                                     ? activeClass !== undefined
                                         ? activeClass
-                                        : 'font-bold z-[1] relative bg-white dark:bg-accent-dark border border-b-2 border-b-white dark:border-b-[#232429] border-light dark:border-dark rounded-br-none rounded-bl-none'
-                                    : 'rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
+                                        : 'font-bold z-[1] relative bg-primary border border-b-2 border-b-primary rounded-br-none rounded-bl-none'
+                                    : 'rounded hover:bg-primary hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
                             }`}
                         >
                             <div className="flex items-start mb-auto space-x-2">
@@ -51,7 +51,7 @@ const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', act
                                             </Tooltip>
                                         )}
                                     </h3>
-                                    <p className="m-0 mt-0.5 text-sm whitespace-nowrap text-primary/70 dark:text-primary-dark/70">
+                                    <p className="m-0 mt-0.5 text-sm whitespace-nowrap text-secondary">
                                         {tab.subtitle}
                                     </p>
                                 </div>
@@ -80,8 +80,8 @@ const Vertical = ({ tabs, onClick, activeTab, className = '', activeClass }) => 
                                 active
                                     ? activeClass !== undefined
                                         ? activeClass
-                                        : 'font-bold bg-accent dark:bg-accent/10'
-                                    : 'hover:bg-accent dark:hover:bg-accent/15'
+                                        : 'font-bold bg-accent'
+                                    : 'hover:bg-accent'
                             }`}
                         >
                             <div className="flex space-x-2 whitespace-nowrap items-center">

@@ -12,12 +12,14 @@ We maintain a robust security program that follows best practice in order to mee
 
 This page covers SOC 2, GDPR, and CCPA compliance.
 
+For information about security advisories and CVEs, see our [advisories & CVEs page](/handbook/company/security-advisories).
+
 ## Multi-factor authentication 
 
 We enforce the use of hardware security keys wherever we can. Every team members gets two of these, most commonly:
 
 - One [YubiKey 5C Nano](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nano/) for use with the work computer (can be left plugged in most of the time)
-- One [YubiKey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) for use with mobile devices, and as backup
+- One [YubiKey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) (or [YubiKey 5Ci](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5ci/) to be on the safe side, if you have an older iPhone model) for use with mobile devices, and as backup
 
 Please enable security keys for Google Workspace, MacOS, AWS, 1Password (or whatever password manager you use) and GitHub at the very least. You can also use the Yubikeys to protect personal accounts. If you are new, please do this within your first month so you don't get locked out.
 
@@ -26,41 +28,9 @@ Google recently changed its settings for 2FA and Yubikeys and you may struggle t
 > **YubiKey tip:** Avoid spamming OTPs if you accidentally touch your YubiKey by installing the [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) or by running `brew install ykman && ykman config usb --disable OTP`
 
 ## SOC 2
+import SOC2 from './_snippets/soc2.mdx'
 
-PostHog is certified as SOC 2 Type II compliant, following an external audit. 
-
-Our latest [security report](https://drive.google.com/file/d/1uLBE83_pN5q7p7IA-Ut85ArQh9BBzEdw/view?usp=drive_link) is publicly available (covering controls as of May 31st, 2024). Our [bridge letter](https://drive.google.com/file/d/1NYT0MNNDK-RXoQNIY_hqo5eygTTH5on7) is also available until we receive our next report.
-
-### Policies
-
-We have a number of policies in place to support SOC 2 compliance. All team members have been invited to Drata to review these and to complete security training and background checks as part of onboarding.
-
-All of these policies are available for viewing upon request:
-
-- Acceptable Use Policy
-- Application Logging & Monitoring Policy
-- Asset Management Policy
-- Backup Policy
-- Breach Notification Policy
-- Business Associate Policy
-- Business Continuity Plan
-- Code of Conduct
-- Data Classification Policy
-- Data Deletion Policy
-- Data Protection Policy
-- Disaster Recovery Plan
-- Encryption Policy
-- Incident Response Plan
-- Information Security Policy
-- Password Policy
-- Physical Security Policy
-- Privacy, Use, and Disclosure Policy
-- Responsible Disclosure Policy
-- Risk Assessment Policy
-- Software Development Lifecycle Policy
-- System Access Control Policy
-- Vendor Management Policy
-- Vulnerability Management Policy
+<SOC2 />
 
 These policies are also relevant for GDPR (see below). 
 
@@ -102,4 +72,35 @@ We receive data collected by our customers from end-users and allow them to unde
 
 ## Pen tests
 
-We conduct these annually, most recently in April 2024  - <PrivateLink url="https://github.com/PostHog/company-internal/issues/1577">see here</PrivateLink> for a link to the latest report and statuses. 
+We conduct these annually, most recently in May 2025 - you can find the report in [our Trust Center](https://trust.posthog.com/?itemUid=2aafaddd-5329-45e2-a37e-cf6979191ad4&source=search).
+
+## Responsible disclosure
+
+Security vulnerabilities and other security related findings can be reported via our [vulnerability disclosure program](https://bugcrowd.com/engagements/posthog-vdp-pro) or by emailing security-reports@posthog.com. Valid findings will be rewarded with PostHog swag.
+
+For information about current and past security advisories and CVEs, see our [advisories & CVEs page](/handbook/company/security-advisories).
+
+## Reporting phishing
+
+If you receive a phishing email/text/whatsapp, it's useful to report it to the security team so that they can make other employees aware. Take a screenshot and post it in `#phishing-attempts`. You may be asked to forward the email to [security-internal@posthog.com](mailto:security-internal@posthog.com) for further inspection.
+
+## Secure communication (aka preventing social engineering)
+
+We follow several best practices to combat social engineering attacks. See [Communication Methods](/handbook/company/communication#communication-methods) for more information.
+
+## Impersonating users
+
+To provide a great customer experience, PostHog employees may occasionally need to access customer data or log in as a user (i.e. *impersonate* them). We allow this access when it's necessary to deliver our service, following these guidelines:
+
+1. **Only impersonate when there’s a clear, demonstrable benefit for the customer.**  
+   For example, to investigate an incident, resolve a support issue, or review a customer’s setup to give recommendations on how to use PostHog more successfully.
+
+2. **Do not make any changes to a customer’s setup without explicit consent.**
+   Exceptions to this are cases where we are reacting to incidents or bad configurations that are negatively impacting PostHog services in order to protect ourselves _and_ the customer.
+
+3. **Ask for permission whenever possible.**  
+   While this isn’t always feasible, such as during an active incident, it’s best practice to inform the customer before accessing their account.
+   When a customer raises a support ticket, we take this as consent to be able to impersonate their account and investigate based on the contents of the ticket. Customers will not be actively asked for permission by our support engineers when they are investigating a ticket, and the customer should inform us in the ticket if they explicitly do not wish for our support engineers to access their account.
+
+4. **Use good judgment.**  
+   If you’re unsure whether impersonation is justified, or if a customer might object, either seek their consent or find another way to get the information (for example, by checking our internal PostHog instance).

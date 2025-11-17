@@ -16,7 +16,7 @@ crosspost:
 
 Over the past 12 months, we have:
 
-- Expanded our usage of [Temporal](/blog/temporal-exports) to power [warehouse syncs](/docs/data-warehouse/setup).
+- Expanded our usage of [Temporal](/blog/temporal-exports) to power [warehouse syncs](/docs/data-warehouse).
 
 - Moved destinations and transformations away from Node virtual machines to our home-built HogVM in our own language, Hog.
 
@@ -86,7 +86,7 @@ Every problem has its own set of evaluation criteria, but there are some recurri
 
 - **Performance** – We ingest billions of events per day and this will only grow. We need technology that can keep up and scale to 100x where we are today.
 
-- **Cost** – [Being the cheapest option](/handbook/how-we-make-money) is an important pricing principle for us. This means we always look for ways to reduce costs, such as using S3 for replay storage instead of ClickHouse, which helped us [make replays drastically cheaper](/blog/session-replay-pricing).
+- **Cost** – [Being the cheapest option](/handbook/how-we-make-money) is an important [pricing principle](/newsletter/pricing-advice) for us. This means we always look for ways to reduce costs, such as using S3 for replay storage instead of ClickHouse, which helped us [make replays drastically cheaper](/blog/session-replay-pricing).
 
 - **Reliability** – Companies rely on us to handle business-critical data. We need to maintain a high uptime and availability. Technologies we choose need to prove they are reliable and handle failures gracefully.
 
@@ -114,7 +114,7 @@ An RFC outlines the "why" behind a technology decision and helps facilitate inpu
 
 This isn't just a box to tick, it’s a core part of helping us choose the right technologies and [how we work asynchronously](https://newsletter.posthog.com/p/how-we-work-asynchronously).
 
-Our RFC for adopting [Temporal at PostHog](https://github.com/PostHog/meta/pull/99) had 2,594 words, roughly 1/4 of the company as reviewers, 46 comments, and quite a bit of debate before finally being adopted. It's now happily in use for [batch exports](/blog/temporal-exports) and [warehouse syncs](/docs/data-warehouse/setup).
+Our RFC for adopting [Temporal at PostHog](https://github.com/PostHog/meta/pull/99) had 2,594 words, roughly 1/4 of the company as reviewers, 46 comments, and quite a bit of debate before finally being adopted. It's now happily in use for [batch exports](/blog/temporal-exports) and [warehouse syncs](/docs/data-warehouse).
 
 ![Temporal RFC](https://res.cloudinary.com/dmukukwp6/image/upload/rfc_aa479e9db9.png)
 <Caption>The intro to James Greenhill’s RFC on adopting Temporal</Caption>

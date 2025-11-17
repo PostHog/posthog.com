@@ -84,7 +84,7 @@ export default function BeforeAndAfter() {
                         <div className="bg-primary">
                             <h4 className="text-white flex space-x-1 sm:space-x-4 justify-center text-sm sm:text-lg md:text-xl my-0 w-1/2 ml-auto bg-primary h-[67px] items-center md:items-start">
                                 <span>With</span>{' '}
-                                <Logo className="max-w-[25px] sm:max-w-[40px] md:w-auto" color="white" noText />{' '}
+                                <Logo className="max-w-[25px] sm:max-w-[40px] md:w-auto" fill="white" noText />{' '}
                                 <span>PostHog</span>
                             </h4>
                             <div className="w-full">

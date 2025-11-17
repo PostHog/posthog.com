@@ -5,16 +5,16 @@ const sizes = {
     sm: {
         quote: cntl`
             font-semibold
-            md:text-lg
-            md:leading-snug
+            @2xl:text-base
+            @2xl:leading-snug
             m-0
         `,
         name: cntl`
-            md:text-base
-            md:leading-tight
+            @2xl:text-sm
+            @2xl:leading-tight
         `,
         title: cntl`
-            md:text-sm
+            @2xl:text-xs
         `,
         image: cntl`
             w-[60px]
@@ -28,16 +28,16 @@ const sizes = {
     md: {
         quote: cntl`
             font-bold
-            md:text-[24px]
-            md:leading-[33.6px]
+            @2xl:text-lg
+            @2xl:leading-[33.6px]
             m-0
         `,
         name: cntl`
-            md:text-[20px]
-            md:leading-[21.88px]
+            @2xl:text-base
+            @2xl:leading-[21.88px]
         `,
         title: cntl`
-            md:text-[18px]
+            @2xl:text-sm
         `,
         image: cntl`
             w-[80px]
@@ -51,14 +51,14 @@ const sizes = {
     lg: {
         quote: cntl`
             font-bold
-            md:text-4xl
-            md:leading-tight
+            @2xl:text-xl
+            @2xl:leading-tight
         `,
         name: cntl`
-            md:text-xl
+            @2xl:text-lg
         `,
         title: cntl`
-            md:text-lg
+            @2xl:text-base
         `,
         image: cntl`
             w-[100px]

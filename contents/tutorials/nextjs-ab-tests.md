@@ -55,12 +55,13 @@ Next, create a `providers.js` file in your `app` folder. In it, initialize PostH
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 export function PHProvider({ children }) {
 	if (typeof window !== 'undefined') {
 	  posthog.init('<ph_project_api_key>', {
-	    api_host: '<ph_client_api_host>'
+	    api_host: '<ph_client_api_host>',
+      defaults: '<ph_posthog_js_defaults>',
 	  })
 	}
 
@@ -101,7 +102,7 @@ Name the action "Clicked Main CTA" and then click "Create action."
 
 ![Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-ab-tests/action.png)
 
-> **Note:** You can also use a custom event as a goal metric. See our [full Next.js analytics tutorial](/tutorials/nextjs-app-directory-analytics#capturing-custom-events) for how to set up custom event capture.
+> **Note:** You can also use a custom event as a goal metric. See our [full Next.js analytics tutorial](/tutorials/nextjs-analytics#capturing-custom-events) for how to set up custom event capture.
 
 ## 4. Creating an experiment
 
@@ -213,7 +214,7 @@ Finally, in `providers.js`, we handle the `bootstrapData` and add it to the Post
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 export default function PHProvider({ children, bootstrapData }) {
   if (typeof window !== 'undefined') {
@@ -248,7 +249,7 @@ To set up our A/B test in `app/page.js`:
 ```js
 // app/page.js
 'use client'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 import { useEffect, useState } from 'react'
 
 export default function Home() {
@@ -301,6 +302,6 @@ This shows your updated button text immediately on load. This method still uses 
 
 - [How, when, and where to run your first A/B test](/product-engineers/how-to-do-ab-testing)
 - [10 things we've learned about A/B testing for startups](/newsletter/what-we've-learned-about-ab-testing)
-- [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
+- [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
 
 <NewsletterForm />

@@ -36,7 +36,8 @@ If you're setting up a proxy to protect your PostHog instance and prevent access
 | Path               | Description                                                                                  |
 | ------------------ | -------------------------------------------------------------------------------------------- |
 | `/batch`           | Endpoint for ingesting/capturing events.                                                     |
-| `/decide`          | Endpoint that enables autocapture, session recording, feature flags & compression on events. |
+| `/flags`           | Endpoint that enables autocapture, session recording, feature flags & compression on events. |
+| `/decide`          | Legacy endpoint. Use `/flags` instead.                                                                                               |
 | `/i/v0/e`          | Endpoint for ingesting/capturing events.                                                     |
 | `/capture`         | Legacy endpoint for ingesting/capturing events. Use `/i/v0/e` instead.                       |
 | `/engage`          | Legacy endpoint for ingesting/capturing events. Use `/i/v0/e` instead.                       |

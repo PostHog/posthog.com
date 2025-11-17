@@ -1,0 +1,26 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Tailwind usage guide for PostHog.com
+
+- Don’t add new Tailwind styles or use stock colors
+- Use only colors defined in [tailwind.config.js](mdc:tailwind.config.js)
+- Two modes (light/dark), three schemes (primary/secondary/tertiary)
+
+Use these classes:
+- `bg-primary`, `bg-accent`
+- `border-primary`, `border-input`
+- `text-primary`, `text-secondary`, `text-muted`, `text-input`
+
+**Style guidance:**
+- Prefer inline Tailwind classes
+- Custom CSS → [global.css](mdc:src/styles/global.css) with `@apply`
+- JIT classes if needed
+- Fallback to nested regular CSS
+
+**Links:**
+- `font-semibold`
+- `text-right`
+- `dark:text-yellow`

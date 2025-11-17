@@ -1,21 +1,8 @@
 ---
 title: How Witty Works created open-source plugins with the PostHog community
 customer: Witty Works
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/wittyworks/logo.svg
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/wittyworks/logo_dark.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/wittyworks_posthog_7efa8c904e.png
-industries:
-  - SaaS
-  - Browser extension
-users:
-  - Marketing
-  - Engineering
-toolsUsed:
-  - Dashboards
-  - Apps
 date: 2022-03-15
 ---
 

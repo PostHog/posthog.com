@@ -1,0 +1,10 @@
+```sql
+SELECT
+    JSONExtractString(properties, 'organization_name') AS organization_name,
+    sum(JSONExtractInt(properties, 'exceptions_captured_in_period')) AS exception_events
+FROM events
+WHERE event = 'organization usage report' AND {filters} AND JSONExtractInt(properties, 'exceptions_captured_in_period') > 0
+group by organization_name
+order by exception_events desc
+limit 50
+```

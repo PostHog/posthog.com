@@ -21,9 +21,9 @@ Our "flavor" is effectively a wrapper around [ClickHouse SQL](https://clickhouse
 
 ## SQL expressions
 
-[SQL expressions](/docs/sql/expressions) enable you to use database identifiers and functions to directly access, [aggregate](/docs/sql/aggregations), filter, transform, and breakdown your data.
+[SQL expressions](/docs/sql/expressions) enable you to use database identifiers and functions to directly access, [aggregate](/docs/sql/aggregations), filter, transform, and break down your data.
 
-They can be used by selecting the **SQL** tab or **SQL expression** option in filters, breakdowns, dashboards, trends, funnels (aggregating by), user paths (event types), the activity tab (columns), and more.
+They can be used by selecting the **SQL** tab or **SQL expression** option in filters, breakdowns, dashboards, trends, funnels (aggregating by), user paths (event types), the [activity tab](/docs/activity) (columns), and more.
 
 For example, to group pageviews into "desktop" or "mobile," you can breakdown with the expression `multiIf(properties.$os == 'Android', 'mobile', properties.$os == 'iOS', 'mobile', 'desktop')`
 
@@ -71,7 +71,7 @@ You can use SQL insights within [notebooks](/docs/notebooks) and with external s
 To query events using SQL via the [PostHog API](/docs/api/queries), get [your project ID](https://us.posthog.com/settings/project-details#variables), a [personal API key](https://us.posthog.com/settings/user-api-keys) with the project query read permission and make a POST request to `/api/projects/:project_id/query` endpoint with the following JSON payload:
 
 ```json
-{"query": {"kind": "HogQLQuery", "query": "select * from events"}}
+{"query": {"kind": "HogQLQuery", "query": "select * from events", "name": "get all events"}}
 ```
 Why HogQL? Because HogQL is the name we use for SQL access internally.
 
@@ -87,7 +87,8 @@ curl -X POST "<ph_app_host>/api/projects/:project_id/query" \
             "query": {
               "kind": "HogQLQuery", 
               "query": "SELECT event, COUNT() FROM events GROUP BY event ORDER BY COUNT() DESC"
-            }
+            },
+            "name": "get count of most common events"
          }'
 ```
 
@@ -103,7 +104,8 @@ data = {
     "query": {
         "kind": "HogQLQuery",
         "query": "SELECT event, COUNT() FROM events GROUP BY event ORDER BY COUNT() DESC"
-    }
+    },
+    "name": "get count of most common events"
 }
 
 response = requests.post(
@@ -141,7 +143,7 @@ While in the public beta, the response format may still change.
 
 ## Data warehouse
 
-To get a list of all the sources you can query with SQL, check out the ["Data warehouse" tab](https://us.posthog.com/data-warehouse). You can click on every table listed to see the data included and query them.
+To get a list of all the sources you can query with SQL, check out the ["SQL" tab](https://us.posthog.com/sql). You can click on every table listed to see the data included and query them.
 
 <DataWarehouseScreenshot
   imageLight={WarehouseLight}

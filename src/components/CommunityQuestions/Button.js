@@ -6,7 +6,7 @@ export default function Button({ children, disabled, loading, ...other }) {
             disabled={disabled || loading}
             {...other}
             className={`text-base font-bold py-2 px-5 border-2 rounded-md ${
-                disabled ? 'border-gray-accent-light text-gray' : 'bg-red text-white border-red'
+                disabled ? 'border-primary text-gray' : 'bg-red text-white border-red'
             }`}
         >
             {loading ? 'Updating...' : children}

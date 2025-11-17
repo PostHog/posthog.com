@@ -177,7 +177,8 @@ def get_person_properties(row):
   return person_properties
 
 def get_properties(row):
-  for key, value in flat_row.items():
+  properties = {}
+  for key, value in row.items():
     if value == None:
       continue
     elif key in omitted_keys:

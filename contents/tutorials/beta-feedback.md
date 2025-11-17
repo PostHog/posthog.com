@@ -18,7 +18,7 @@ This tutorial shows you how to combine PostHog’s [early access management](/do
 
 To create a beta feature in PostHog, go to the [early access management tab](https://app.posthog.com/early_access_features) and click "Create feature". Add a name like "new page beta," click "Save as draft," and then "Release beta." This also automatically creates a [feature flag](/docs/feature-flags) we use to control the display of the feature.
 
-On the draft page, click "Implement public opt-in" and go to the [opt-in app page](https://app.posthog.com/project/apps/574). Enable the app and set "Show features button on the page" to "Yes." This adds a modal to control early access features with no extra setup.
+On the draft page, click "Implement public opt-in" and go to the [opt-in app page](https://app.posthog.com/pipeline/new/site-app/hog-template-early-access-features). Enable the app and set "Show features button on the page" to "Yes." This adds a modal to control early access features with no extra setup.
 
 ![Creating beta feature video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/beta-feedback/beta.mp4)
 
@@ -45,16 +45,18 @@ Once installed, go into the `app` folder and create a `providers.js` file. In th
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
+      defaults: '<ph_posthog_js_defaults>',
       opt_in_site_apps: true
     })
   }, []);
+
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -86,7 +88,7 @@ Next, we add a button that goes to a `/beta` page. It conditionally shows based 
 ```js
 // app/page.js
 'use client'
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+import { useFeatureFlagEnabled } from '@posthog/react'
 import Link from 'next/link'
 
 export default function Page() {

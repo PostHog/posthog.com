@@ -39,6 +39,14 @@
         "profile_id": 29070
     },
     {
+        "handle": "sara-miteva",
+        "name": "Sara Miteva",
+        "role": "Product Marketer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/sara-miteva/",
+        "profile_id": 35224
+    },
+    {
         "handle": "michael-matloka",
         "name": "Michael Matloka",
         "role": "Software Engineer",
@@ -129,7 +137,7 @@
         "name": "Charles Cook",
         "role": "Generic Exec Person",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/charlescook1/",
+        "link_url": "https://www.linkedin.com/in/wololo/",
         "profile_id": 28625
     },
     {
@@ -381,5 +389,77 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/kevangilbert/",
         "profile_id": 32499
+    },
+    {
+        "handle": "vincent-ge",
+        "name": "Vincent Ge",
+        "role": "Technical Content Marketer",
+        "link_type": "github",
+        "link_url": "https://github.com/gewenyu99",
+        "profile_id": 34100
+    },
+    {
+        "handle": "edwin-lim",
+        "name": "Edwin Lim",
+        "role": "Technical Content Marketer",
+        "link_type": "github",
+        "link_url": "https://github.com/edwinyjlim",
+        "profile_id": 33938
+    },
+    {
+        "handle": "dylan-martin",
+        "name": "Dylan Martin",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/dmarticus",
+        "profile_id": 30455
+    },
+    {
+        "handle": "robbie-coomber",
+        "name": "Robbie Coomber",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/robbie-c",
+        "profile_id": 29292
+    },
+    {
+        "handle": "abe-basu",
+        "name": "Abe Basu",
+        "role": "Product Manager",
+        "link_type": "github",
+        "link_url": "https://github.com/abheek9",
+        "profile_id": 34044
+    },
+    {
+        "handle": "arda-eren",
+        "name": "Arda Eren",
+        "role": "Community contributor",
+        "link_type": "github",
+        "link_url": "https://github.com/arda-e",
+        "profile_id": 37690
+    },
+    {
+        "handle": "natalia-amorim",
+        "name": "Natalia Amorim",
+        "role": "Content Marketing Manager",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/nataliahelenaamorim/",
+        "profile_id": 35321
+    },
+    {
+        "handle": "dustin-byrne",
+        "name": "Dustin Byrne",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/dustinbyrne",
+        "profile_id": 35043
+    },
+    {
+        "handle": "natalia-amorim",
+        "name": "Natalia Amorim",
+        "role": "Content Marketing Manager",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/nataliahelenaamorim/",
+        "profile_id": 35321
     }
 ]

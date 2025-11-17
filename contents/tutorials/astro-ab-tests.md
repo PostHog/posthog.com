@@ -70,12 +70,10 @@ In this file, add your `Web snippet` which you can find in [your project setting
 ---
 <script>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-  posthog.init(
-    '<ph_project_api_key>',
-    {
-      api_host:'<ph_client_api_host>',
-    }
-  )
+  posthog.init('<ph_project_api_key>', {
+	api_host:'<ph_client_api_host>',
+	defaults: '<ph_posthog_js_defaults>',
+  })
 </script>
 ```
 
@@ -207,22 +205,20 @@ Update the code in `/components/posthog.astro` to implement `posthog.onFeatureFl
 ---
 <script>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-  posthog.init(
-    '<ph_project_api_key>',
-    {
-      api_host:'<ph_client_api_host>',
-      loaded: (posthog) => {
-        posthog.onFeatureFlags(() => {
-          const button = document.querySelector('.main-button');
-          if (posthog.getFeatureFlag('my-cool-experiment') === 'control') {
-            button.innerText = 'Control variant';
-          } else if (posthog.getFeatureFlag('my-cool-experiment') === 'test') {
-            button.innerText = 'Test variant';
-          }
-        });
-      }
-    }
-  )
+  posthog.init('<ph_project_api_key>', {
+	api_host:'<ph_client_api_host>',
+	defaults: '<ph_posthog_js_defaults>',
+	loaded: (posthog) => {
+	  posthog.onFeatureFlags(() => {
+	    const button = document.querySelector('.main-button');
+	    if (posthog.getFeatureFlag('my-cool-experiment') === 'control') {
+		  button.innerText = 'Control variant';
+	    } else if (posthog.getFeatureFlag('my-cool-experiment') === 'test') {
+		  button.innerText = 'Test variant';
+	    }
+	  });
+	}
+  })
 </script>
 ```
 
@@ -234,7 +230,7 @@ Notice that when you refresh the page, the button text flickers between `Click m
 
 Server-side rendering is a way to avoid this. This fetches the feature flag before the page loads on the client.
 
-To set this up, we must install and use [PostHog’s Node library](/libraries/node) (because we are making server-side requests).
+To set this up, we must install and use [PostHog’s Node library](/docs/libraries/node) (because we are making server-side requests).
 
 ```bash
 npm install posthog-node
@@ -309,13 +305,11 @@ Lastly, you can remove the code in `posthog.astro` which we added for the client
 ---
 <script>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-  posthog.init(
-    '<ph_project_api_key>',
-    {
-      api_host:'<ph_client_api_host>'
-      // the "loaded" argument has been removed
-    }
-  )
+  posthog.init(ph_project_api_key>', {
+	api_host:'<ph_client_api_host>'
+	defaults: '<ph_posthog_js_defaults>',
+	// the "loaded" argument has been removed
+  })
 </script>
 ```
 

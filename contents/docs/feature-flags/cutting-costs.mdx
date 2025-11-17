@@ -3,20 +3,86 @@ title: Cutting feature flag costs
 sidebar: Docs
 showTitle: true
 ---
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-We aim to be significantly cheaper than our competitors. In addition to our [ridiculously cheap pricing](/pricing), below are tips to reduce your feature flag costs:
+We aim to be significantly cheaper than our competitors. In addition to our [pay-as-you-go pricing](/pricing), below are tips to reduce your feature flag costs.
 
-## Reduce client-side feature flag requests
+## Understanding your bill
+
+Feature flags are charged based on requests made to our `/flags` endpoint, which is used to evaluate feature flags for a given user. This endpoint is called in several scenarios:
+
+- When explicitly requesting feature flags via server-side SDK methods like `getFeatureFlag()`, `getAllFlags()`, or `isFeatureEnabled()`
+- When using client-side SDK methods like `onFeatureFlags()` or when flags are automatically fetched
+- Automatically on SDK initialization (unless disabled, see below)
+- When evaluating survey targeting, which checks **all active feature flags** in your project
+
+<CalloutBox icon="IconInfo" title="Client-side vs server-side billing" type="info">
+
+For **client-side SDKs** (JavaScript, React Native), methods like `getFeatureFlag()` don't necessarily create billable events due to caching. Requests are made when the SDK initializes, when users are identified, or when `reloadFeatureFlags()` is called.
+
+For **server-side SDKs** (Node, Python, PHP, etc.), each call to `getFeatureFlag()`, `getAllFlags()`, or `isFeatureEnabled()` makes a request to the `/flags` endpoint and incurs a billable event.
+
+</CalloutBox>
+
+
+Feature flags are **not** billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation. 
+
+The number of `/flags` requests and the number of `$feature_flag_called` events are **not** directly related.
+
+<CalloutBox icon="IconWarning" title="Unused flags still incur charges" type="caution">
+
+  Active feature flags you're not using in your code are still evaluated (and charged) every time the `/flags` endpoint is called. This includes when surveys are loaded, as survey targeting evaluates all active flags to determine eligibility.
+  
+  To stop charges for unused flags, you must **disable, delete, or archive** them in the PostHog UI – simply removing them from your code is not enough.
+
+</CalloutBox>
+
+### Creating a billable usage dashboard
+
+import PostHogBillableUsageTemplate from "../_snippets/posthog-billable-usage-template.mdx"
+
+<PostHogBillableUsageTemplate />
+
+import FlagChargeEstimate from "./snippets/flag-charge-estimate.mdx"
+
+<details>
+  <summary>Estimating your bill manually (with math!)</summary>
+
+  <FlagChargeEstimate />
+
+</details>
+
+
+## Reducing client-side feature flag requests
 
 In our [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs, you can reduce the cost of feature flags by reducing the number of requests your client makes to fetch feature flag values for your users.
 
-1. Using the the [advanced configuration](/docs/libraries/js/config#advanced-configuration), set `advanced_disable_feature_flags_on_first_load` to `true`. This stops automatically requesting feature flags whenever a page loads. This is useful when you're immediately calling `posthog.identify()` anyway, which requests flags again.
+You can do the following using the [advanced configuration](/docs/libraries/js/config#advanced-configuration):
 
-2. Using the the [advanced configuration](/docs/libraries/js/config#advanced-configuration), set `advanced_disable_feature_flags` to `true`. This stops PostHog automatically requesting feature flags. Instead, use [bootstrapping](/docs/feature-flags/bootstrapping) to load flags exactly once.
+1. Set `advanced_disable_feature_flags_on_first_load` to `true`. This stops automatically requesting feature flags whenever a page loads. This is useful when you're immediately calling `posthog.identify()` anyway, which requests flags again.
 
-> **Note:** Use of `advanced_disable_feature_flags` will disable surveys for all users, as surveys rely on feature flags internally.
+2. Set `advanced_disable_feature_flags` to `true`. This stops PostHog automatically requesting feature flags. Instead, use [bootstrapping](/docs/feature-flags/bootstrapping) to load flags exactly once.
 
-## Reduce local evaluation costs
+3. Set `advanced_only_evaluate_survey_feature_flags` to `true`. When enabled, only survey-related feature flags are evaluated, which significantly reduces costs if you primarily use PostHog for surveys. This disables evaluation of regular feature flags while still allowing surveys to function properly.
+
+<CalloutBox icon="IconInfo" title="Surveys and feature flag billing" type="info">
+
+  If you plan to use PostHog primarily for surveys, consider either:
+  
+  - Setting `advanced_only_evaluate_survey_feature_flags` to `true` to only evaluate survey-related flags
+  - Disabling or archiving all non-survey feature flags in your PostHog project
+  
+  This prevents charges from evaluating unused feature flags when surveys are loaded.
+
+</CalloutBox>
+
+<CalloutBox icon="IconWarning" title="Note" type="caution">
+
+  Use of `advanced_disable_feature_flags` will disable surveys for all users, as surveys rely on feature flags internally. You should use `advanced_only_evaluate_survey_feature_flags` instead if you use surveys.
+
+</CalloutBox>
+
+## Reducing local evaluation costs
 
 If you're using [local evaluation](/docs/feature-flags/local-evaluation), your bill may be high because of too many requests to fetch feature flag definitions. By default, PostHog fetches these every 30 seconds.
 
@@ -26,11 +92,15 @@ You can reduce this by increasing the [feature flag polling interval](/docs/feat
 
 The drawback of this approach is that whenever you make an update to a feature flag using the PostHog UI, it takes 5 minutes (instead of 30 seconds) for that change to roll to your server.
 
-> **Note:** Do not use local evaluation in an edge / lambda environment, as this initializes a PostHog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation instead.
+<CalloutBox icon="IconWarning" title="Edge/Lambda environments" type="caution">
+
+  Do not use local evaluation in an edge or Lambda environment, as this initializes a PostHog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation instead.
+
+</CalloutBox>
 
 ## Quota limiting
 
-Like all PostHog products, you can set a [billing limit](https://us.posthog.com/organization/billing) for feature flags. When a project exceeds this limit, the `/decide` endpoint will return a `quota_limited` response like this:
+Like all PostHog products, you can set a [billing limit](https://us.posthog.com/organization/billing) for feature flags. When a project exceeds this limit, the `/flags` endpoint will return a `quota_limited` response like this:
 
 ```json
 {
@@ -46,3 +116,33 @@ In this case, SDKs will:
 3. Log a warning message if debug mode is enabled
 
 This ensures that your application continues to function even when feature flag quotas are exceeded, falling back to default behavior rather than failing.
+
+## Audit environments to catch unexpected `/decide` calls
+
+<CalloutBox icon="IconWarning" title="Watch out for forgotten environments" type="caution">
+
+  Forgotten environments, like old demos, test apps, or staging servers, and other PostHog SDKs, can silently rack up costs. Even if they don't send events, they may still be polling and making `/flags` calls for feature flags, session replay, and surveys.
+
+  These environments often get overlooked, especially if they're not part of your main deployment flow.
+
+</CalloutBox>
+
+To identify where PostHog is still running:
+
+1. Create a [trends insight](https://us.posthog.com/insights/new#insight=TRENDS)  
+2. Choose a high-signal event that occurs across SDKs: like `$feature_flag_called`, `$identify`, or a common custom event  
+3. Set the chart type to **Table**  
+4. Breakdown by `$lib`, `$lib_version`, and experiment with breakdowns on `$host`, `$device_name`, and `$app_version` as these can clue you into what environments are running PostHog  
+5. Set the time range to **Last 30 days**
+
+This shows you every SDK, domain, and version currently making requests, so you can spot any forgotten environments.
+
+If you find environments that don't need feature flags, replays, or surveys, disable them entirely using `advanced_disable_feature_flags`:
+
+```js
+posthog.init('<ph_project_api_key>', {
+  advanced_disable_feature_flags: true // Disables feature flags, surveys, and session recording
+})
+```
+
+See [advanced configuration options](/docs/libraries/js/config#advanced-configuration) for details.

@@ -35,7 +35,7 @@ Once done, set up a PostHog provider by creating a new file in the `app` folder 
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
   posthog.init("<ph_project_api_key>", {
@@ -77,7 +77,7 @@ Back in your app, set up the base `page.js` file to check the flag:
 ```js
 // app/page.js
 'use client'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 export default function Home() {
 
@@ -136,7 +136,7 @@ export async function middleware(request) {
 //...
 ```
 
-With the distinct ID, we can make an API request to evaluate flags for the user. This requires making a request to `https://us.i.posthog.com/decide?v=4` (or `https://eu.i.posthog.com/decide?v=4`) with the `api_key` and `distinct_id`. 
+With the distinct ID, we can make an API request to evaluate flags for the user. This requires making a request to `https://us.i.posthog.com/flags?v=2` (or `https://eu.i.posthog.com/flags?v=2`) with the `api_key` and `distinct_id`. 
 
 > **Note:** We use the API because [Vercel edge middleware](https://vercel.com/docs/concepts/functions/edge-middleware) (which optimizes the speed of this request in your app) has a limited number of packages and `posthog-node` isn’t one of them.
 
@@ -154,7 +154,7 @@ const requestOptions = {
 };
 
 const ph_request = await fetch(
-	'<ph_client_api_host>/decide?v=4',
+	'<ph_client_api_host>/flags?v=2',
 	requestOptions
 );
 const data = await ph_request.json();
@@ -192,7 +192,7 @@ export async function middleware(request) {
   };
   
   const ph_request = await fetch(
-		'<ph_client_api_host>/decide?v=4', // or eu
+		'<ph_client_api_host>/flags?v=2', // or eu
 		requestOptions
 	);
   const data = await ph_request.json();
@@ -229,7 +229,7 @@ Once installed, go back to `providers.js` to get the cookie data and bootstrap i
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import cookieCutter from 'cookie-cutter'
 
 if (typeof window !== 'undefined') {
@@ -256,7 +256,7 @@ Finally, rework our `page.js` file to check that the flag isn’t undefined befo
 ```js
 // app/page.js
 'use client'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 import { useEffect, useState } from 'react'
 
 export default function Home() {

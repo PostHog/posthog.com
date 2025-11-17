@@ -12,6 +12,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
 import AskMax from 'components/AskMax'
+import ReaderView from 'components/ReaderView'
 
 type SurveysProps = {
     data: {
@@ -105,7 +106,7 @@ export const Content = ({ quickLinks = false }) => {
                     type="custom"
                     size="md"
                     className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
-                    childClassName="text-primary/75 dark:text-primary-dark/75 group-hover:text-primary/100 dark:group-hover:text-primary-dark/100 !bg-white dark:!bg-dark !border-light dark:!border-dark"
+                    childClassName="text-secondary group-hover:text-primary !bg-white dark:!bg-dark !border-light dark:!border-dark"
                     width="[calc(100%_+_3px)]"
                 >
                     Browse templates
@@ -117,31 +118,29 @@ export const Content = ({ quickLinks = false }) => {
 
 const Surveys: React.FC<SurveysProps> = () => {
     return (
-        <Layout>
+        <ReaderView>
             <SEO title="Surveys - Docs - PostHog" />
 
-            <PostLayout title={'Surveys'} hideSurvey hideSidebar>
-                <Intro
-                    subheader="Getting started"
-                    title="Surveys"
-                    description="Collect feedback from your users."
-                    buttonText="Create your first survey"
-                    buttonLink="/docs/surveys/installation"
-                    imageColumnClasses="mt-8 md:mt-0 max-w-96"
-                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
-                    imageClasses=""
-                />
+            <Intro
+                subheader="Getting started"
+                title="Surveys"
+                description="Collect feedback from your users."
+                buttonText="Create your first survey"
+                buttonLink="/docs/surveys/installation"
+                imageColumnClasses="mt-8 md:mt-0 max-w-96"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
+                imageClasses=""
+            />
 
-                <AskMax
-                    quickQuestions={[
-                        'Can I target a survey based on user behavior?',
-                        'How do I create my own survey UI?',
-                        "Why won't my survey appear?",
-                    ]}
-                />
-                <Content />
-            </PostLayout>
-        </Layout>
+            <AskMax
+                quickQuestions={[
+                    'Can I target a survey based on user behavior?',
+                    'How do I create my own survey UI?',
+                    "Why won't my survey appear?",
+                ]}
+            />
+            <Content />
+        </ReaderView>
     )
 }
 

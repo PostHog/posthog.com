@@ -28,7 +28,7 @@ function SalesSlider({ slides }) {
                         key={index}
                         className={`slide-${
                             index + 1
-                        } bg-accent dark:bg-accent-dark rounded p-4 absolute top-0 left-0 w-full h-full transition-all duration-500 ease-in-out ${
+                        } bg-accent rounded p-4 absolute top-0 left-0 w-full h-full transition-all duration-500 ease-in-out ${
                             currentSlide === index ? 'opacity-100' : 'opacity-0'
                         }`}
                     >

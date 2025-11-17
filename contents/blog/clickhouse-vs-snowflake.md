@@ -118,11 +118,11 @@ Overall, ClickHouse's close-metal optimizations enable it to return aggregate va
 
 ### Who uses Snowflake and ClickHouse?
 
-Part of Snowflake’s value prop is the broad appeal to both technical and non-technical users. Snowflake’s marketplace makes connecting business intelligence tools with warehouse data easy, which appeals to teams wanting explore their data. ClickHouse Cloud has a growing competitive offering, but the current integrations are less numerous.
+Part of Snowflake’s value prop is the broad appeal to both technical and non-technical users. Snowflake’s marketplace makes connecting [business intelligence tools](/blog/best-open-source-business-intelligence-tools) with warehouse data easy, which appeals to teams wanting explore their data. ClickHouse Cloud has a growing competitive offering, but the current integrations are less numerous.
 
 ClickHouse and Snowflake are both used for analytics, but ClickHouse is more focused on analytical queries. 
 
-ClickHouse is a great fit for PostHog because we are an analytics platform – we need to be able to answer questions like “what is the average time to convert for users who saw a certain feature?” in *real time* and *at speed of click*.
+ClickHouse is a great fit for PostHog because we are an developer platform – we need to be able to answer questions like “what is the average time to convert for users who saw a certain feature?” in *real time* and *at speed of click*.
 
 Traditionally, Snowflake can be considered more of a standard data warehouse or data lake where you can store all your data and then query it. This is a great fit for companies that want to store all their data in one place and then query it.
 

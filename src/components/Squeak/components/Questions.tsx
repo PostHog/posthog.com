@@ -15,9 +15,13 @@ type QuestionsProps = {
     subject?: boolean
     initialView?: string
     disclaimer?: boolean
+    autoFocus?: boolean
+    noQuestionsMessage?: React.ReactNode
+    className?: string
 }
 
 export const Questions = ({
+    className = '',
     slug,
     limit,
     topicId,
@@ -29,16 +33,18 @@ export const Questions = ({
     subject,
     initialView,
     disclaimer,
+    autoFocus,
+    noQuestionsMessage,
 }: QuestionsProps) => {
     const containerRef = useRef<HTMLDivElement>(null)
 
-    const { questions, fetchMore, refresh } = useQuestions({ slug, limit, topicId, profileId })
+    const { questions, fetchMore, refresh, isLoading } = useQuestions({ slug, limit, topicId, profileId })
     const hasQuestions = questions.data && questions.data.length > 0
     return (
-        <div>
+        <div className={className}>
             {hasQuestions && title && <h3>{title}</h3>}
             {hasQuestions && (
-                <ul className="m-0 p-0 list-none mb-6">
+                <ul className="not-prose m-0 p-0 list-none mb-6">
                     {questions.data.map((question) => {
                         return (
                             <li key={question.id} className="py-4 first:pt-0">
@@ -48,6 +54,7 @@ export const Questions = ({
                     })}
                 </ul>
             )}
+            {!isLoading && !hasQuestions && noQuestionsMessage}
 
             {/*start + limit < count && (
                     <button disabled={loading} className="squeak-show-more-questions-button" onClick={fetchMore}>
@@ -58,6 +65,7 @@ export const Questions = ({
             {/* TODO: Pass refresh for now questions */}
             {showForm && (
                 <QuestionForm
+                    autoFocus={autoFocus}
                     buttonText={buttonText}
                     parentName={parentName}
                     initialView={initialView}

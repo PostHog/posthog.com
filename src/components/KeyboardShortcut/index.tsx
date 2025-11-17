@@ -5,23 +5,23 @@ export default function KeyboardShortcut({
     className,
     size = 'md',
 }: {
-    text: string
+    text: string | React.ReactNode
     className?: string
     size?: 'xs' | 'sm' | 'md' | 'lg'
 }): JSX.Element {
     const sizeClasses =
         size === 'lg'
-            ? 'text-base py-1'
+            ? 'text-base py-1 ml-0'
             : size === 'md'
-            ? 'text-sm py-0.5'
-            : size === 'sm'
-            ? 'text-xs py-1'
-            : 'text-[11px] p-0'
+                ? 'text-sm py-0.5 ml-1'
+                : size === 'sm'
+                    ? 'text-xs py-[2px] ml-0.5'
+                    : 'text-[11px] py-0.5 ml-0.5'
     return (
         <kbd
-            className={`border border-b-2 border-light dark:border-dark rounded-sm px-1.5 text-primary/50 dark:text-primary-dark/50 bg-accent-light dark:bg-accent-dark font-code ${sizeClasses} ${className}`}
+            className={`border border-b-2 border-input rounded-sm px-1 leading-none text-secondary font-code ${sizeClasses} ${className}`}
         >
-            {text}
+            {typeof text === 'string' ? text : text}
         </kbd>
     )
 }

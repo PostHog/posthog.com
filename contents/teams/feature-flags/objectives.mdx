@@ -1,53 +1,63 @@
-## Q2 2025 Objectives
+### Q4 2025 Objectives
+This quarter we're making feature flags faster, more reliable, and way more automated. That means better (and more!) SDKs, more powerful local evaluation, supporting real-time use cases, and using AI to handle the tedious stuff. We're also talking to a bunch of users to figure out what to build next, fixing the foundations so nothing breaks, and shipping features that make flags easier to wrangle when you have thousands of them.
 
-### Flag Stability, Consistency, and Resiliency
-*Goal: Create a highly stable, consistent, and resilient feature flag system capable of supporting 10x growth*
+#### Awesome documentation <TeamMember name="Dylan Martin" photo />
 
-- Scale `/flags` service
-  - Complete 100% worldwide rollout of `/flags` endpoint to all customers
-  - Measure and validate improved query performance metrics
-  - Document infrastructure cost savings achieved
-  - Stretch: Investigate feasibility of decoupling flag evaluation from Postgres entirely
+Our docs should be as good as the <SmallTeam slug="experiment" />'s. We're partnering with the <SmallTeam slug="content" /> to refresh everything, writing real-world walkthroughs, and making it easier to jump from the app to the right docs.
 
-- Standardize SDK Error Handling and UX
-  - Move more SDK functionality to the server wherever possible ([reference](https://github.com/PostHog/posthog/issues/30466))
-  - Implement unified error handling framework across all SDKs
-  - Create consistent fallback and default behaviors across platforms
-  - Ensure all SDKs utilize the latest (v2) flags response format
+#### Make local evaluation the default server-side evaluation strategy <TeamMember name="Dylan Martin" photo /> <TeamMember name="Phil Haack" photo />
 
-- Enhance System Resilience
-  - Decouple flag service from writer database
-  - Deploy flags on differentiated infrastructure aligned with varying scale needs
-  - Implement circuit breakers for graceful degradation during upstream failures
-  - Establish reliability SLAs and monitoring for flag delivery
-  
-### Behavioral Cohort Targeting
-*Goal: Enable customers to target feature flags based on user behaviors*
+Local eval means faster, cheaper, and more reliable flags. We want to make it the default for server-side SDKs by:
+- Finishing HyperCache integration to decouple `/local_evaluation` from Postgres
+- Solving the properties problem that's been blocking adoption (it's not very ergonomic to bring your own properties to everything, we'd love to improve this experience)
+- Rewriting the endpoint in Rust for better performance
+- Adding ETag support for efficient caching
+- Writing better docs and guides
 
-- Ship Beta Release
-  - Develop core behavioral targeting functionality
-  - Create intuitive UI for defining behavioral cohorts
-  - Implement backend services to process and apply cohort rules
+#### Ship a Java SDK <TeamMember name="Dustin Byrne" photo />
 
-- Customer Adoption
-  - Identify and onboard 5-10 key customers for beta testing
-  - Establish success metrics and collect usage data
-  - Document use cases and implementation patterns
-  - Create support resources for customer implementation
+Java developers need an official SDK. We're shipping one and iterating based on feedback.
 
-## AI IDE Integration
-*Goal: Streamline developer workflow with AI-powered flag implementation*
+#### Improve SDK standardization <TeamMember name="Dustin Byrne" photo />
 
-- Create Intelligent Code Snippets
-  - Develop context-aware SDK snippet generation system for feature flags
-  - Ensure generated code follows best practices for each language/framework
+Inconsistent SDKs lead to bugs. We're burning down the [SDK standardization meta-issue](https://github.com/PostHog/posthog/issues/31425) to create a consistent experience across the stack.
 
-- IDE Integration
-  - Build plugins/extensions for AI IDEs (Cursor, Windsurf, potentially our own)
-  - Create seamless workflow from flag creation to code implementation
-  - Implement AI-assisted troubleshooting for flag implementation issues
+#### Mature the Cohorts UI/UX <TeamMember name="Gustavo Henrique Strassburger" photo />
 
-- Developer Experience
-  - Measure time-to-implementation improvements
-  - Collect developer feedback on integration experience
-  - Iterate based on usage patterns and pain points
+Cohorts has been neglected. We're clearing the backlog and fixing UI bugs so cohorts is actually pleasant to use by end of Q4.
+
+#### Real-time feature flags <TeamMember name="Gustavo Henrique Strassburger" photo />
+
+Some use cases need instant flag updates without refreshes or restarts. We're adding WebSocket/SSE-based real-time updates to key SDKs.
+
+#### Finish behavioral cohort targeting <TeamMember name="Dylan Martin" photo />
+
+We started building a system to track behavioral cohort membership in a fast data store. We're finishing it so you can target flags based on behavioral cohorts.
+
+#### Flag staleness cleanup system <TeamMember name="Phil Haack" photo />
+
+Stale flags are tech debt. We're building tools to:
+- Detect and surface stale flags in the UI
+- Make cleanup easy with in-app tools
+- Generate prompts for Cursor/Claude Code to remove flags from your codebase
+- (Stretch) Automated actions like creating cleanup PRs
+
+#### Natural language flag creation <TeamMember name="Phil Haack" photo />
+
+Building flags with AI. You describe what you want in plain English, Max builds the flag.
+
+#### Enhanced flag evaluation debugging capabilities <TeamMember name="Dylan Martin" photo />
+
+Better visibility into why flags evaluate the way they do. We're adding evaluation properties to `$feature_flag_called` events and [showing flag evaluation history for each person](https://github.com/PostHog/posthog/issues/38669).
+
+#### Platform improvements <TeamMember name="Dylan Martin" photo />
+
+Fixing the foundations:
+- Finishing the persons database split (shared with ingestion team)
+- Decoupling `/flags` from the writer database so flags stay up even when the database is down
+- Rewriting `/evaluation_reasons` in Rust
+- Deprecating the legacy `/decide` endpoint
+
+#### Customer interviews around UI/UX improvements (Shared goal across the team)
+
+We're doing 10+ user interviews about flags UI and cohorts to figure out what to build next. This feeds directly into our roadmap for both products.

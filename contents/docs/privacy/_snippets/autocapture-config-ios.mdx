@@ -1,0 +1,11 @@
+By default, the iOS SDK will make a best effort to avoid capturing password, credit card, OTP, and any other fields related to Personally Identifiable Information (PII).
+
+If there are other elements of the view hierarchy that you don't want to be captured, you can add an `accessibilityLabel` or `accessibilityIdentifier` of  `ph-no-capture`
+
+```swift
+// This view will be excluded from autocapture
+let view = UIView()
+view.accessibilityLabel = "ph-no-capture"
+``` 
+
+These elements will be ignored or masked in product analytics.

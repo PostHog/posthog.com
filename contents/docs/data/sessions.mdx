@@ -155,11 +155,23 @@ This is useful for understanding entry URLs or UTMs. For example, to break down 
 
 ## Server SDKs and sessions
 
-Our server-side SDKs do not send `$session_id` by default. If you want to use sessions with server-side events, you can manually set the `$session_id` property. This lets you use session aggregations for these events and can be useful if you want to connect server-side events to session replays or web analytics sessions.
+Our server-side SDKs do not send `$session_id` by default. If you want to use sessions with server-side events, you can manually set the `$session_id` property. This lets you use session aggregations for these events and can be useful if you want to connect server-side events to session replays, exceptions, or web analytics sessions.
 
 You can either pass the session ID from posthog-js into your back end, or generate a new session ID. You can then use this session ID in your server-side events.
 
 If the events are logically part of the same session, e.g. a user starts a purchase on the front end and you receive confirmation on the back end, it's better to re-use the session ID from the front end. On the other hand, if the events have no corresponding front-end session, you can generate a new session ID.
+
+### Automatically sending session IDs
+
+If you enable tracing headers within the JavaScript SDK, the session ID will be sent on every request.
+
+```ts
+posthog.init('<ph_project_api_key>', {
+    __add_tracing_headers: true
+})
+```
+
+If you are using the Python SDK with Django, you can add [the middleware integration](/docs/libraries/django#django-contexts-middleware) which correctly extracts the session ID and adds it to every captured event.
 
 ### Passing Session IDs from client-side code into server-side events
 

@@ -30,7 +30,7 @@ function Install() {
         h5: (props) => Heading({ as: 'h5', ...props }),
         h6: (props) => Heading({ as: 'h6', ...props }),
         img: ZoomImage,
-        a: (props) => <Link {...props} className="text-red hover:text-red font-semibold" />,
+        a: (props) => <Link {...props} />,
         ...shortcodes,
     }
     return (

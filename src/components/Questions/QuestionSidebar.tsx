@@ -24,7 +24,7 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                             <img className="w-8 h-8 rounded-full" src={avatar} />
                         ) : (
                             <svg
-                                className="w-8 h-8 rounded-full bg-gray-accent-light shrink-0"
+                                className="w-8 h-8 rounded-full bg-accent-light shrink-0"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 40 40"

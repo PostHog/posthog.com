@@ -143,3 +143,32 @@ The pie chart shows the relative distribution of the values of different series 
 />
 
 The world map chart displays values in an interactive map of the world, broken down by country code. This display option can't be selected if you're already breaking down by a property other than country code.
+
+### Calendar heatmap
+
+> **Important:** This feature is currently an opt-in beta. You can enable it on the [feature previews settings page](https://app.posthog.com/settings/user-feature-previews#calendar-heatmap-insight).
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_08_22_at_11_47_06_AM_545abbeb38.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_08_22_at_11_47_50_AM_2f91837123.png"
+  alt="Calendar heatmap showing user activity patterns" 
+  classes="rounded"
+/>
+
+The **Calendar heatmap** insight displays a heatmap showing either the number of **unique users** or **total events** for **any selected event**, broken down by hour of the day and day of the week.
+
+#### What the heatmap shows
+
+- Each **cell** represents the number of unique users or total events during a specific hour of a specific day. Numbers are formatted for readability (e.g., 1.73K for 1,730).
+
+- The **"All" column** on the right aggregates the total for each day across all hours, and is highlighted in a different color.
+
+- The **bottom row ("All")** aggregates the total for each hour across all days, also highlighted in a different color.
+
+- The **bottom-right cell** shows the grand total for the selected metric (unique users or total events) across all days and hours in the selected time range, with a distinct color.
+
+- Use the **"Show more"** button to expand the heatmap and view additional details if available.
+
+- The displayed time for each cell and the starting day of the week are based on your project's date and time settings. By default, the time is UTC, but you can change the timezone in [your project settings](https://app.posthog.com/settings/project-product-analytics#date-and-time).
+
+> **Note:** Selecting a time range longer than 7 days will include additional occurrences of weekdays and hours, potentially increasing the counts in those buckets. For best results, select 7 closed days or a multiple of 7 closed day ranges.

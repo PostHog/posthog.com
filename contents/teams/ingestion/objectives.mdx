@@ -1,34 +1,28 @@
-## Q2 objectives
+## Q4 objectives
 
-### Fix property definitions service
+### Implement the LLM Analytics Pipeline
 
-We identified several problems with the current implementation of property-defs, which we want to fix in Q2:
+- Build a new endpoint to handle LLM analytics events with large contexts
+- Include support for multi-modal models
 
-- Improve scalability
-- Improve data consistency
-- Break out its data store
-- Reduce the troubleshooting effort
+### Define the event ingestion boundaries and enforce them
 
-### Finish moving to capture-rs
+- Make it clear which use cases and traffic patterns are supported
+- Enforce boundaries to improve the resilience of the ingestion pipeline
 
-We are still running the Django capture service, and we need to transition away from it. In Q2, we will:
+### Prototype Persons API
 
-- Move all capture endpoints to capture-rs
-- Improve team's confidence in maintaining the capture layer
+- Encapsulate database access to improve maintainability, scalability and performance
+- Enable more frequent and granular updates of person profiles
 
-### Develop ownership of ingestion incidents
+### Prototype multi-threaded ingestion
 
-As the product has matured and the traffic has increased, we need to improve our incident response process. This quarter we'll focus on:
+- Increase the maximum per-partition event throughput of the ingestion pipeline in Node.js
+- Prepare for a possible future rewrite
 
-- Developing a solid process for managing incidents and followups
-- Bring more discipline to handling alerts, and exceptions
-- Improve documentation on troubleshooting ingestion problems
-- Reducing the incident response times
+### Do at least one thing that improves data quality for customers
 
-### Improve infrastructure for deployments
-
-We're too slow and have too little confidence in the ingestion deployment process. Our plan is to:
-
-- Switch to a more feature-flag-oriented development process
-- Move all ingestion components to ArgoCD
-- Investigate other mechanisms to reduce the risk of deployments, e.g. blue/green, faster rollbacks
+Potential options:
+- Schema management
+- Authorized events
+- Better timestamp handling

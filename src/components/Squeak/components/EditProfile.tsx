@@ -20,7 +20,7 @@ const UnitButton = ({ unit, onClick, active, className = '' }) => {
     return (
         <button
             type="button"
-            className={`w-12 text-sm ${active ? 'bg-gray-accent-light/50' : ''} ${className}`}
+            className={`w-12 text-sm ${active ? 'bg-accent-light/50' : ''} ${className}`}
             onClick={onClick}
         >
             {unit}
@@ -33,7 +33,7 @@ const HeightField = ({ values, setFieldValue }) => {
     const [height, setHeight] = useState(values.height)
 
     return (
-        <div className="flex border-gray-accent-light border rounded-md overflow-hidden">
+        <div className="flex border-primary border rounded-md overflow-hidden">
             <input
                 onChange={(e) => {
                     const value = Number(e.target.value)
@@ -51,7 +51,7 @@ const HeightField = ({ values, setFieldValue }) => {
                     active={unit === 'in'}
                     unit="in"
                     onClick={() => setUnit('in')}
-                    className="border-x border-gray-accent-light"
+                    className="border-x border-primary"
                 />
                 <UnitButton active={unit === 'cm'} unit="cm" onClick={() => setUnit('cm')} />
             </div>
@@ -102,7 +102,7 @@ const fields = {
                 type="text"
                 name="biography"
                 placeholder="280 characters or less..."
-                className="py-2 px-4 text-lg rounded-md w-full dark:text-primary border-gray-accent-light border mb-2"
+                className="py-2 px-4 text-lg rounded-md w-full dark:text-primary border-primary border mb-2"
             />
         ),
         className: 'w-full',
@@ -168,7 +168,7 @@ function Avatar({ values, setFieldValue }) {
     }, [values.avatar])
 
     return (
-        <div className="relative w-full aspect-square rounded-full flex justify-center items-center border border-gray-accent-light dark:border-gray-accent-dark text-black/50 dark:text-white/50 overflow-hidden group">
+        <div className="relative w-full aspect-square rounded-full flex justify-center items-center border border-primary dark: text-black/50 dark:text-white/50 overflow-hidden group">
             {imageURL ? (
                 <img className="w-full absolute inset-0 object-cover" src={imageURL} />
             ) : (
@@ -324,7 +324,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
                 return (
                     <Form className="m-0">
                         <h2>Update profile</h2>
-                        <p className=" dark:border-gray-accent-dark p-4 rounded-md mb-4">
+                        <p className=" dark: p-4 rounded-md mb-4">
                             <strong>Tip:</strong> Be sure to use full URLs when adding links to your website, GitHub,
                             LinkedIn and Twitter (start with https)
                         </p>
@@ -339,7 +339,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
                                         {!field?.hideLabel && <label htmlFor={key}>{label}</label>}
                                         {(field?.component && field.component({ values, setFieldValue })) || (
                                             <Field
-                                                className="py-2 px-4 text-lg rounded-md w-full dark:text-primary border-gray-accent-light border m-0"
+                                                className="py-2 px-4 text-lg rounded-md w-full dark:text-primary border-primary border m-0"
                                                 type={field?.type || 'text'}
                                                 name={key}
                                                 placeholder={label}

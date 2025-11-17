@@ -7,7 +7,7 @@ interface ProductSectionHeaderProps {
 
 export const ProductSectionHeader = ({ id, name }: ProductSectionHeaderProps) => {
     return (
-        <h2 id={id} className={`text-center text-gray text-sm uppercase bg-gray-accent-light mb-0 p-2 header-${id}`}>
+        <h2 id={id} className={`text-center text-gray text-sm uppercase bg-accent-light mb-0 p-2 header-${id}`}>
             {name}
         </h2>
     )

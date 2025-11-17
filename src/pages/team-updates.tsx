@@ -79,7 +79,7 @@ export default function TeamUpdates() {
         <Layout parent={companyMenu}>
             <SEO title="Team updates - PostHog" noindex />
             <section className="max-w-[700px] mx-auto px-5 mt-8">
-                <div className="relative pb-6 mb-6 border-b border-border dark:border-dark flex justify-between items-end">
+                <div className="relative pb-6 mb-6 border-b border-input flex justify-between items-end">
                     <div>
                         <h1 className="font-bold text-5xl my-0">Team updates</h1>
                         <p className="my-0 font-semibold opacity-70 mt-2">

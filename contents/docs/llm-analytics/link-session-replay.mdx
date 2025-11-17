@@ -1,0 +1,105 @@
+---
+title: Link session replay
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+Connecting your backend LLM events to frontend session replays provides complete visibility into the user journey, helping you understand the full context around AI interactions in your application.
+
+## Why link to session replay?
+
+By including session IDs in your LLM events, you can:
+- **See the full user journey**: Navigate from an LLM trace directly to the session replay to see user actions before, during, and after AI interactions
+- **Debug issues faster**: Quickly find and watch the exact session where problems occurred
+- **Understand user behavior**: See how users interact with AI features and what prompts they use
+- **Correlate performance**: Match slow AI responses with actual user experience impact
+
+## Implementation
+
+To link LLM events to session replays, you need to pass the session ID from your frontend to your backend, then include it in your LLM tracking.
+
+### Frontend: Get the session ID
+
+In your frontend code, retrieve the current session ID and send it with your API requests:
+
+```javascript
+// In your frontend code
+import posthog from 'posthog-js'
+
+// Get the current session ID
+const sessionId = posthog.getSessionId()
+
+// Send it with your API request
+const response = await fetch('/api/chat', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    message: userInput,
+    sessionId: sessionId  // Include session ID
+  })
+})
+```
+
+### Backend: Include session ID in LLM events
+
+Once you have the session ID, include it in your LLM tracking using the `$session_id` property:
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+app.post('/api/chat', async (req, res) => {
+  const { message, sessionId } = req.body
+  
+  const response = await openai.responses.create({
+    model: 'gpt-5',
+    messages: [{ role: 'user', content: message }],
+    posthogDistinctId: req.userId,
+    posthogProperties: {
+      $session_id: sessionId,  // Links to session replay
+      endpoint: '/api/chat',
+      request_id: generateRequestId()
+    }
+  })
+  
+  res.json({ response: response.choices[0].message.content })
+})
+```
+
+```python file=Python
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    data = request.json
+    message = data['message']
+    session_id = data.get('sessionId')
+    
+    response = client.responses.create(
+        model="gpt-5",
+        messages=[{"role": "user", "content": message}],
+        posthog_distinct_id=current_user.id,
+        posthog_properties={
+            "$session_id": session_id,  # Links to session replay
+            "endpoint": "/api/chat",
+            "request_id": generate_request_id()
+        }
+    )
+    
+    return jsonify({
+        "response": response.choices[0].message.content
+    })
+```
+
+</MultiLanguage>
+
+## Viewing linked replays
+
+Once you've set up session linking, you can navigate from LLM generations to their corresponding session replays:
+
+1. In the [LLM analytics dashboard](https://app.posthog.com/llm-analytics), find the generation or trace you're interested in
+2. Click the session replay button to jump directly to the replay
+3. Watch the user's interaction with your AI features in context
+
+This linking helps you understand not just what your AI is doing, but how users are experiencing it in your application.

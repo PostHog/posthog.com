@@ -125,7 +125,7 @@ Exceptions include:
 - You’re building some kind of mission critical infrastructure.
 - Your product is a design-led take on a product that already exists (e.g [Linear](https://linear.app/)), where design and polish are the reason to use it over alternatives. 
 
-> **What we’ve learned:** [Product engineers](/blog/what-is-a-product-engineer) who can work autonomously are essential, as is a “[no design by default](/handbook/design/process#no-design-by-default)” approach, so engineers can ship basic UX on their own. We use feature flags to [test in production](/product-engineers/testing-in-production), and we avoid innovating on MVPs, so we don’t get bogged down in minutiae.
+> **What we’ve learned:** [Product engineers](/blog/what-is-a-product-engineer) who can work autonomously are essential, as is a “[no design by default](/handbook/brand/process#no-design-by-default)” approach, so engineers can ship basic UX on their own. We use feature flags to [test in production](/product-engineers/testing-in-production), and we avoid innovating on MVPs, so we don’t get bogged down in minutiae.
 
 ## 7. Not following-up with customers
 
@@ -137,7 +137,7 @@ When someone gives you feedback about your product, respond with something usefu
 
 Failing to do so will teach them not to share more feedback in the future. If and when you do ship a fix, or the new feature they wanted, let them know.
 
-> **What we’ve learned:** Don’t outsource this to a specific team – make it everyone’s responsibility. Reward helpful users with merch store discounts (also, have [a merch store](/merch!)) and early access to new features. We pull all feedback into a single Slack channel, so everyone sees it.
+> **What we’ve learned:** Don’t outsource this to a specific team – make it everyone’s responsibility. Reward helpful users with merch store discounts (also, have [a merch store](/merch)) and early access to new features. We pull all feedback into a single Slack channel, so everyone sees it.
 
 ## 8. Obsessing over competitors
 
@@ -170,6 +170,6 @@ _Words by Andy Vandervell, mechanical pencil enthusiast._
 
 [^1]: Want to work for PostHog? Read [How to get a job at a startup](https://newsletter.posthog.com/p/how-to-get-a-job-at-a-startup), then head to [our careers page](https://posthog.com/careers) – we’re always hiring.
 
-[^2]: We’ve since split this team into three dedicated teams for [feature flags](/teams/feature-flags), [experiments](/teams/experiments), and [surveys](/teams/surveys) because of the magic of small engineering teams. We’ll be hiring for these teams soon so, you know, see above.
+[^2]: We’ve since split this team into three dedicated teams – <SmallTeam slug="feature-flags" />, <SmallTeam slug="experiments" />, and <SmallTeam slug="surveys" /> – because of the magic of small engineering teams. We’ll be hiring for these teams soon so, you know, see above.
 
 [^3]: We find charging for a specific product increases usage because people see you’re taking it more seriously. One of our goals for pricing is to make experiments cheaper, so users can run more of them without fear of running up a big bill.

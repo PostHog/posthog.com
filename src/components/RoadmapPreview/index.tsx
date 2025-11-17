@@ -41,9 +41,9 @@ const RoadmapRow: React.FC<RoadmapRowProps> = ({ roadmap }) => {
     const shouldShowExpandButton = plainDescription.length > 125
 
     return (
-        <tr className="border-b last:border-b-0 border-light dark:border-dark">
+        <tr className="border-b last:border-b-0 border-primary">
             <td className="p-2 !pl-5 md:!pl-2 align-top text-center">
-                <div className="leading-none text-xl font-bold bg-accent dark:bg-accent-dark flex flex-col items-center justify-center p-2">
+                <div className="leading-none text-xl font-bold bg-accent flex flex-col items-center justify-center p-2">
                     {attributes.likes?.data?.length || 0}
                     <div className="text-sm opacity-80 font-normal">votes</div>
                 </div>
@@ -127,17 +127,17 @@ const RoadmapPreview = () => {
 
     return isLoading ? (
         <div className="space-y-2">
-            <div className="h-6 bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
-            <div className="h-6 bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
-            <div className="h-6 bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
-            <div className="h-6 bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
-            <div className="h-6 bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
+            <div className="h-6 bg-accent rounded w-full animate-pulse" />
+            <div className="h-6 bg-accent rounded w-full animate-pulse" />
+            <div className="h-6 bg-accent rounded w-full animate-pulse" />
+            <div className="h-6 bg-accent rounded w-full animate-pulse" />
+            <div className="h-6 bg-accent rounded w-full animate-pulse" />
         </div>
     ) : (
         <div className="overflow-x-auto -mx-5 md:mx-0">
             <table className="w-full border-collapse !mb-1">
                 <thead>
-                    <tr className="bg-accent dark:bg-accent-dark">
+                    <tr className="bg-accent">
                         <th className="p-2 !pl-5 md:!pl-2 w-18 text-center">Votes</th>
                         <th className="p-2 text-left">Feature</th>
                         <th className="p-2 text-left hidden sm:table-cell">Team</th>

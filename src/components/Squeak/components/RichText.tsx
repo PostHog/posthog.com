@@ -5,14 +5,16 @@ import Spinner from 'components/Spinner'
 import Markdown from './Markdown'
 import slugify from 'slugify'
 import { Edit } from 'components/Icons'
-import Tooltip from 'components/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 import { isURL } from 'lib/utils'
 import { CurrentQuestionContext } from './Question'
 import Avatar from './Avatar'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IconFeatures, IconX } from '@posthog/icons'
+import { IconFeatures, IconImage, IconX } from '@posthog/icons'
 import { graphql, useStaticQuery } from 'gatsby'
 import groupBy from 'lodash.groupby'
+import OSTextarea from 'components/OSForm/textarea'
+import OSButton from 'components/OSButton'
 
 const buttons = [
     {
@@ -90,25 +92,29 @@ const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) =
     const isAI = profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
 
     return (
-        <li className="border-b border-border dark:border-dark p-1">
-            <button
+        <li className="border-b border-input p-1">
+            <OSButton
                 onClick={() => onSelect?.(profile, selectionStart)}
                 type="button"
-                className={`click text-left flex space-x-2 font-bold px-3 py-1 items-center rounded-sm hover:bg-accent hover:dark:bg-accent-dark w-full outline-none ${
-                    focused === index ? 'bg-accent dark:bg-accent-dark' : ''
-                }`}
+                variant="default"
+                width="full"
+                align="left"
+                className={`!px-3 !py-1 !justify-start ${focused === index ? 'bg-accent' : ''}`}
+                active={focused === index}
             >
-                <div className="size-6 overflow-hidden rounded-full">
-                    <Avatar className="w-full" image={avatar?.data?.attributes?.url || gravatarURL} />
-                </div>
-                <div>
-                    {!isAI && <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>}
-                    <div className="flex space-x-1 items-center">
-                        <p className="m-0 leading-none text-sm line-clamp-1">{name}</p>
-                        {isAI && <IconFeatures className="size-4 text-primary dark:text-primary-dark opacity-50" />}
+                <div className="flex space-x-2 items-center w-full">
+                    <div className="size-6 overflow-hidden rounded-full">
+                        <Avatar className="w-full" image={avatar?.data?.attributes?.url || gravatarURL} />
+                    </div>
+                    <div>
+                        {!isAI && <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>}
+                        <div className="flex space-x-1 items-center">
+                            <p className="m-0 leading-none text-sm line-clamp-1">{name}</p>
+                            {isAI && <IconFeatures className="size-4 text-primary dark:text-primary-dark opacity-50" />}
+                        </div>
                     </div>
                 </div>
-            </button>
+            </OSButton>
         </li>
     )
 }
@@ -194,16 +200,17 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
             exit={{ opacity: 0, translateX: '100%' }}
             className="w-[200px] h-full absolute right-0 top-0 z-50 pt-2.5 pr-2.5"
         >
-            <button
+            <OSButton
                 type="button"
-                className="p-1 rounded-full bg-white dark:bg-dark border border-border dark:border-dark absolute top-0.5 right-0.5 z-20"
+                variant="default"
+                size="xs"
+                icon={<IconX className="w-3" />}
+                className="!p-1 rounded-full absolute top-0.5 right-0.5 z-20"
                 onClick={onClose}
-            >
-                <IconX className="w-3" />
-            </button>
+            />
             <ul
                 ref={listRef}
-                className="m-0 p-0 list-none border border-border dark:border-dark bg-light dark:bg-dark h-full rounded-md overflow-auto"
+                className="m-0 p-0 list-none border border-input bg-light dark:bg-dark h-full rounded-md overflow-auto"
             >
                 {mentionProfiles.map((profile, index) => (
                     <MentionProfile
@@ -230,6 +237,9 @@ export default function RichText({
     preview = true,
     label = '',
     mentions = false,
+    bodyKey = 'body',
+    className = '',
+    cta = React.ReactNode,
 }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
@@ -328,7 +338,7 @@ export default function RichText({
     }, [cursor])
 
     useEffect(() => {
-        setFieldValue('body', value)
+        setFieldValue(bodyKey, value)
     }, [value])
 
     const handleKeyDown = (e) => {
@@ -365,7 +375,7 @@ export default function RichText({
         const mention =
             profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
                 ? `@max `
-                : `@${profile.attributes.firstName.trim().toLowerCase()}/${profile.id} `
+                : `@${profile.attributes.firstName.trim().toLowerCase().replace(' ', '_')}/${profile.id} `
         setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, mention, prevValue))
         setShowMentionProfiles(false)
         textarea.current?.focus()
@@ -375,140 +385,67 @@ export default function RichText({
         <div className="relative" {...getRootProps()}>
             <div onClick={handleContainerClick}>
                 <input className="hidden" {...getInputProps()} />
-                {showPreview ? (
-                    <div className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0 overflow-auto">
-                        <Markdown
-                            transformImageUri={(fakeImagePath) => {
-                                const objectURL = values.images.find(
-                                    (image) => image.fakeImagePath === fakeImagePath
-                                )?.objectURL
-                                return objectURL || fakeImagePath
-                            }}
-                        >
-                            {value}
-                        </Markdown>
-                    </div>
-                ) : (
-                    <div className="relative">
-                        {mentions && (
-                            <AnimatePresence>
-                                {showMentionProfiles && (
-                                    <div ref={mentionProfilesRef} onClick={(e) => e.stopPropagation()}>
-                                        <MentionProfiles
-                                            body={value}
-                                            selectionStart={textarea.current?.selectionStart}
-                                            onClose={() => {
-                                                setShowMentionProfiles(false)
-                                                textarea.current?.focus()
-                                            }}
-                                            onSelect={handleProfileSelect}
-                                        />
-                                    </div>
-                                )}
-                            </AnimatePresence>
-                        )}
-                        <label htmlFor="body" className="py-3 px-4 pb-8 block">
-                            {label && !!value && <span className="text-sm opacity-60 block">{label}</span>}
-                            <textarea
-                                onPaste={handlePaste}
-                                disabled={imageLoading}
-                                autoFocus={autoFocus}
-                                className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] resize-none w-full text-black outline-none focus:ring-0 p-0"
-                                onBlur={(e) => e.preventDefault()}
-                                name="body"
-                                value={value}
-                                onChange={handleChange}
-                                ref={textarea}
-                                required
-                                id="body"
-                                placeholder={'Type more details...'}
-                                maxLength={maxLength}
-                                onKeyDown={handleKeyDown}
-                            />
-                        </label>
-                        {isDragActive && (
-                            <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-gray-accent-light after:dark:border-gray-accent-dark after:rounded-md">
-                                <p className="m-0 font-semibold">Drop image here</p>
-                            </div>
-                        )}
-                        <span className="bg-white dark:bg-accent-dark absolute right-4 bottom-2 px-1 rounded-sm">
-                            <span className="text-xs opacity-70">
-                                {values.body.length} / {maxLength}
-                            </span>
-                        </span>
-                    </div>
-                )}
-                <div className="flex items-center justify-between py-1">
+                <div
+                    data-scheme="secondary"
+                    className="not-prose bg-primary flex items-center justify-between py-0.5 border border-primary rounded-t"
+                >
                     <ul className="flex items-center list-none p-0 mx-2 space-x-1 w-full !mb-0">
                         {buttons.map((button, index) => {
                             return (
                                 <li key={index}>
-                                    <Tooltip content={button.tooltipContent} placement="top">
-                                        <button
-                                            className="flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative"
-                                            onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
-                                        >
-                                            {button.icon}
-                                        </button>
-                                    </Tooltip>
+                                    <OSButton
+                                        type="button"
+                                        variant="default"
+                                        size="md"
+                                        icon={button.icon}
+                                        iconClassName="size-5 justify-center items-center flex"
+                                        className="!text-secondary hover:!text-primary"
+                                        tooltip={!imageLoading && !showPreview ? button.tooltipContent : undefined}
+                                        tooltipDelay={500}
+                                        disabled={imageLoading || showPreview}
+                                        onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
+                                    />
                                 </li>
                             )
                         })}
                         <li>
-                            <Tooltip content="Image" placement="top">
-                                <button
-                                    className="flex items-center bg-none border-none rounded-sm text-primary/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] relative hover:border hover:border-light dark:hover:border-dark hover:bg-light dark:hover:bg-dark hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15]"
-                                    onClick={(e) => {
-                                        e.preventDefault()
-                                        open()
-                                    }}
-                                >
-                                    <svg
-                                        className="w-4"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 16 14"
-                                    >
-                                        <path
-                                            d="M12 5.714a1.715 1.715 0 1 0 0-3.43 1.715 1.715 0 0 0 0 3.43Z"
-                                            fill="currentColor"
-                                        />
-                                        <path
-                                            d="M15 0H1C.443 0 0 .454 0 1.01v11.694c0 .557.443 1.01 1 1.01h14c.557 0 1-.453 1-1.01V1.01C16 .454 15.557 0 15 0Zm-3.682 7.06a.614.614 0 0 0-.457-.22c-.183 0-.311.085-.458.203l-.667.564c-.14.1-.25.168-.411.168a.59.59 0 0 1-.393-.146 4.668 4.668 0 0 1-.154-.147L6.857 5.404a.788.788 0 0 0-.596-.268c-.24 0-.461.118-.6.278l-4.518 5.45V1.561a.47.47 0 0 1 .468-.418h12.775c.246 0 .446.182.46.428l.011 9.3-3.54-3.81Z"
-                                            fill="currentColor"
-                                        />
-                                    </svg>
-                                </button>
-                            </Tooltip>
+                            <OSButton
+                                type="button"
+                                variant="default"
+                                size="md"
+                                disabled={imageLoading || showPreview}
+                                icon={<IconImage />}
+                                iconClassName="size-5 justify-center items-center flex"
+                                className="!text-secondary hover:!text-primary"
+                                tooltip={!imageLoading && !showPreview ? 'Image' : undefined}
+                                tooltipDelay={500}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    open()
+                                }}
+                            />
                         </li>
                         {preview && (
                             <>
                                 <li className="!ml-auto">
-                                    <Tooltip content="Edit">
-                                        <button
-                                            onClick={() => setShowPreview(false)}
-                                            type="button"
-                                            className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 justify-center w-[32px] h-[32px] hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15] relative ${
-                                                showPreview
-                                                    ? ''
-                                                    : '!border border-light dark:border-dark bg-light dark:bg-dark'
-                                            }`}
-                                        >
-                                            <Edit />
-                                        </button>
-                                    </Tooltip>
+                                    <OSButton
+                                        type="button"
+                                        variant="default"
+                                        size="md"
+                                        icon={<Edit />}
+                                        iconClassName="size-5 justify-center items-center flex"
+                                        tooltip="Edit"
+                                        onClick={() => setShowPreview(false)}
+                                        active={!showPreview}
+                                        type="button"
+                                    />
                                 </li>
                                 <li>
-                                    <Tooltip content="Preview">
-                                        <button
-                                            onClick={() => setShowPreview(true)}
-                                            type="button"
-                                            className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
-                                                showPreview
-                                                    ? 'border border-light dark:border-dark bg-light dark:bg-dark'
-                                                    : ''
-                                            }`}
-                                        >
+                                    <OSButton
+                                        type="button"
+                                        variant="default"
+                                        size="md"
+                                        icon={
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="none"
@@ -528,22 +465,94 @@ export default function RichText({
                                                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                                                 />
                                             </svg>
-                                        </button>
-                                    </Tooltip>
+                                        }
+                                        tooltip="Preview"
+                                        onClick={() => setShowPreview(true)}
+                                        active={showPreview}
+                                        iconClassName="size-5 justify-center items-center flex"
+                                        type="button"
+                                    />
                                 </li>
                             </>
                         )}
                     </ul>
                 </div>
+                {showPreview ? (
+                    <div className="bg-primary text-primary text-base h-[200px] px-3 py-2 resize-none w-full outline-none focus:ring-0 overflow-auto border border-primary border-t-0">
+                        <Markdown
+                            transformImageUri={(fakeImagePath) => {
+                                const objectURL = values.images.find(
+                                    (image) => image.fakeImagePath === fakeImagePath
+                                )?.objectURL
+                                return objectURL || fakeImagePath
+                            }}
+                        >
+                            {value}
+                        </Markdown>
+                    </div>
+                ) : (
+                    <div className="relative border border-primary border-t-0 rounded-b">
+                        {mentions && (
+                            <AnimatePresence>
+                                {showMentionProfiles && (
+                                    <div ref={mentionProfilesRef} onClick={(e) => e.stopPropagation()}>
+                                        <MentionProfiles
+                                            body={value}
+                                            selectionStart={textarea.current?.selectionStart}
+                                            onClose={() => {
+                                                setShowMentionProfiles(false)
+                                                textarea.current?.focus()
+                                            }}
+                                            onSelect={handleProfileSelect}
+                                        />
+                                    </div>
+                                )}
+                            </AnimatePresence>
+                        )}
+                        {label && !!value && (
+                            <label className="text-sm opacity-60 block font-medium mb-1">{label}</label>
+                        )}
+                        <OSTextarea
+                            onPaste={handlePaste}
+                            disabled={imageLoading}
+                            autoFocus={autoFocus}
+                            className={`w-full [field-sizing:content] border-none rounded-b min-h-40 markdown prose dark:prose-invert prose-sm max-w-full text-primary [&_a]:font-semibold max-h-[500px] ${className}`}
+                            onBlur={(e) => e.preventDefault()}
+                            name="body"
+                            value={value}
+                            onChange={handleChange}
+                            ref={textarea}
+                            required
+                            id="body"
+                            placeholder={'Type more details...'}
+                            maxLength={maxLength}
+                            onKeyDown={handleKeyDown}
+                            showLabel={false}
+                        />
+
+                        {isDragActive && (
+                            <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-primary after:dark: after:rounded-md">
+                                <p className="m-0 font-semibold">Drop image here</p>
+                            </div>
+                        )}
+                    </div>
+                )}
+
                 {imageLoading && (
                     <div className="w-full h-full inset-0 bg-white/50 dark:bg-black/50 absolute flex justify-center items-center">
                         <Spinner className="w-10 h-10" />
                     </div>
                 )}
-                {!value && (
-                    <div className="absolute top-4 right-4">
+
+                <div className="flex justify-between items-center mt-2">
+                    <div className="flex gap-2 items-center">{typeof cta === 'function' ? cta() : cta}</div>
+                    <aside className="flex items-center gap-2">
+                        <span className="text-xs opacity-70 text-primary">
+                            {values[bodyKey]?.length} / {maxLength}
+                        </span>
+
                         <a
-                            className="!text-primary/30 hover:!text-primary/50 dark:!text-primary-dark/30 dark:hover:!text-primary-dark/50"
+                            className="text-muted hover:text-secondary"
                             href="https://www.markdownguide.org/cheat-sheet/"
                             target="_blank"
                             rel="noreferrer"
@@ -551,8 +560,8 @@ export default function RichText({
                         >
                             <MarkdownLogo />
                         </a>
-                    </div>
-                )}
+                    </aside>
+                </div>
             </div>
         </div>
     )

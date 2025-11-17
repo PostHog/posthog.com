@@ -7,41 +7,41 @@ showTitle: true
 
 ## Managing billing
 
+> This section explains how PostHog's billing system works. Most billing operations described below are handled exclusively by the <SmallTeam slug="billing" /> and are not self serve. Sales should coordinate with the billing team for any billing modifications, pricing changes, or technical billing tasks rather than attempting to implement these directly.
+
 All PostHog instances talk to a common external **Billing Service**. This service is the single point for managing billing across PostHog Cloud US, PostHog Cloud EU (and ,formerly, self-hosted customers). 
 
 The Billing Service is the source of truth for product information, what plans are offered on those products (eg a free vs a paid plan on Session Replay), and feature entitlements on those plans. Our payment provider Stripe is the source of truth for customer information, invoices, and payments. The billing service communicates with Stripe to pull all the relevant information together before responding to customer requests.
 
-### Annual Plan Automation
+### Credit-based Plan Automation
 
-To ensure consistency in the setup of annual plans we have [Zapier Automation](https://zapier.com/app/zaps/folder/1809976) to take care of all of the Stripe-related object setup.
+
+To ensure consistency in the setup of credit-based plans we have [Zapier Automation](https://zapier.com/app/zaps/folder/1809976) to take care of all of the Stripe-related object setup.
 
 #### Loading contract details
 
-Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01H9QPTRYEZVGFTJ84XMCYQFSK) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
-
-#### Upfront vs Monthly Payment Schedule
-
-Customers can choose to pay their subscription fee upfront or in monthly installments. The setup process differs for each option, outlined below.
+Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Credit-based Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
 
 ##### Upfront Payment Setup
 
-###### Step 1: Update zapier table with existing Stripe ID
+###### Step 1: Update Zapier table with existing Stripe ID
 
 If this is a new contract for an existing customer, you will need to add their existing Stripe Customer ID manually to the table. You can find this information in Vitally under Traits. If this is a brand new customer, click “Create Stripe Customer” button to assign them a new ID.
 
 ###### Step 2: Create invoice
-- Go to the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) and click “Create Invoice - Upfront”. This will:
+- Go to the [Credit-based Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) and click “Create Invoice - Upfront”. This will:
   - Create a draft Invoice object against the Stripe Customer Object.
   - Add the ID of the Invoice to the table (for easy review later on). The due date of the invoice will be the Contract Start Date + 30 days which are our standard payment terms. You might need to manually change this if we have different terms with the customer.
 
 ###### Step 3: Verify invoice details and send
-- Use the Invoice ID recorded in the table to locate the invoice in Stripe.
+- Click the invoice link in the table to open it in Stripe, or use the Invoice ID to locate the invoice in Stripe. 
 - Ensure all details are correct, particularly the Customer’s Billing/Shipping addresses and Tax ID on the Customer object.
-- Send the invoice to the customer and wait for the payment to be completed.  Ensure that the customer is aware that payment is via Bank Transfer only (no checks).
+- If the customer has an existing credit balance in Stripe (common for renewals), remove the credit before sending the invoice. Otherwise, Stripe will automatically apply the credit balance to the invoice. After the invoice is sent, you can reapply the credit. 
+- Send the invoice to the customer and wait for the payment to be completed. Ensure that the customer is aware that payment is via Bank Transfer only (no checks).
 
-**Do not proceed to the next steps until payment is confirmed.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
+**Do not proceed to the next steps until invoice is finalized.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 
-> For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform.  In case they don't do this we have a default customer account on [Stripe](https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU) which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
+> For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform. The account details is provided in the invoice sent over. They'll need to make sure they use the original contact information and not your email if you're set as signer on the contract so we can process payments in the right account.  In case they don't do this, we have a default customer account on [Stripe](https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU) which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
 
 ###### Step 4: Apply credits
 - Make sure that the payment is fully processed to avoid any automatic deductions.
@@ -57,42 +57,57 @@ If this is a new contract for an existing customer, you will need to add their e
     - Create a Subscription Schedule (as it may start in the future) containing all of the prices. We calculate the number of iterations based on the term of the contract. An iteration in this case is 1 year, the maximum allowed by Stripe.
     - Add the ID of the Subscription Schedule to the table
 
-##### Monthly Payment Setup
 
-###### Step 1: Update zapier table with existing Stripe ID
-- Add the existing Stripe customer ID to the column labeled "Stripe ID - existing" in your Zapier table. It's crucial to start with this step as you will add credits to this ID while creating a subscription on a new ID to correctly capture payment.
+### Failed/late payments
 
-###### Step 2: Create new Stripe ID
-- Click the "Create Stripe Customer" button to generate a new Stripe customer ID for the same customer.
+We define late payments as follows:
 
-###### Step 3: Create new subscription
-- Click the “Create and Add - Monthly Sub” button in the Zapier sheet. This will do the following:
-  - Retrieve the annual cost from the "Price" column of your table.
-  - Calculate monthly payment by dividing the annual cost by 12.
-  - Under the "PostHog Credit" product category in Stripe, create a new custom pricing.
-  - Assign this new pricing plan to the customer’s account.
-  - Create a draft invoice for the first payment that is scheduled to go out in an hour.
+1. For credit-based customers, that have not made payment on an invoice and their due date has passed.  The first invoice is usually 30 days from the contract start date (Net 30) although can differ based on other contractual terms. This rule applies to all payment terms, including and not limited to annual and quarterly, regardless whether there are still credits available or not.
+2. For pay-as-you-go usage-based customers, we will attempt 4 automated payments using the card we have on file.  Each failed payment sends an alert to the #sales-alerts Slack channel.  After 4 failed payments we will stop attempting to take further payments.
 
-###### Step 4: Verify subscription and invoice details
-- Use the customer ID stored in the table to locate the customer's subscription in Stripe.
-- Ensure the subscription details, including start date and associated pricing plan, are accurate.
-- Verify the correctness of customer details such as billing/shipping addresses and Tax ID on the customer object.
+In either of the above scenarios the account owner as defined in Vitally needs to take action to ensure that payment is made. If there is no owner in Vitally, Simon will handle this process. If you are an AE, remember this also has impact on your commission, as we don't pay out until the customer has paid their invoice.
 
-###### Step 5: Apply credits
-- **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve completed verifying subscription and invoice details, and click the "Apply credit - monthly" button.
-- **If customer wishes to begin using credits in the next billing cycle:** ask the RevOps team to apply the credits at the end of the current billing cycle.
+You can find a list of failed and overdue payments <PrivateLink url='https://us.posthog.com/project/2/insights/qEt5N1xg'>in PostHog</PrivateLink>
 
-> If a customer is paying us by bank transfer, the default is to receive these through Stripe. Each customer will receive individual virtual account information to send these payments for Stripe to reconcile. If you create a new customer profile on Stripe, this virtual account information will change so it's important to update the customer. Although these bank details are automatically included on the annual invoices sometimes customers will ask for the bank details as part of their vendor onboarding process, and you can generate them by viewing the Stripe customer record and then adding a new Bank Transfer Account in the Payments section.  You can then click through on that payment method to download a PDF with the bank details to share with the customer.  If a customer is requesting to send us a transfer outside of Stripe, eg directly to us, please post in #team-people-ops to request the correct banking info to share with the customer. 
+#### Step 1 - On the day their payment becomes late
 
-###### Step 6: Update Django Admin
-- Navigate to the billing admin detail page for the customer (should add a column for this in the zap table?)
-- Create a new Customer to stripe customer
-  - Copy and paste the new stripe customer id and new stripe subscription id
-  - Save!
+As the account owner you will be assigned a risk indicator in Vitally, as well as being tagged in an alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink>.  For unmanaged accounts with a failed payment of $1500 or more Simon and Dana are tagged instead.
+
+You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For credit-based customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page. To get a payment update link, click on the subscription, then click actions in the top right corner and choose share payment update link. Make it easy for them to make payment by including these details in your email.
+
+> Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they come back to you with genuine reasons why they need more time, use your discretion with the next steps. 
+
+#### Step 2 - 1 day before suspending user access
+
+Reach out to all active users on the account, and let them know that access will be suspended tomorrow due to the failed payment.  This often creates urgency and will get any late payment resolved.
+
+#### Step 3 - Suspending user access
+
+To prevent users from being able to log in you need to go to the Django admin panel for their organization, then for each user account listed there open the user, uncheck the `Is Active` box and then save the user.
+
+After completing this, email or Slack all users in the organization letting them know that access has been suspended and what they can do to rectify the situation.  Also make it clear that if this isn't resolved within the next 7 days we will revert them back to the Free tier and they be subjected to the usage limits of that tier (e.g. they are likely to lose tracking data).
+
+> If they do pay after this point make sure to re-enable user access by reversing the above in Django admin.
+
+#### Step 4 - 1 day before cancelling their subscription
+
+Reach out to all contacts letting them know that due to the failed payment we will be terminating their subscription tomorrow.
+
+> Make it clear in this outreach that once the subscription is terminated they will be subject to the free tier usage limits and we won't store any data above that limit.
+
+#### Step 5 - Cancelling their subscription
+
+You can cancel their subscription in Stripe - navigate to their Stripe customer page, and then click the `...` next to their active subscription to find the Cancel option.
+
+At this point they will be notified about this automatically via the billing service.
+
+#### Repeated failed payments
+
+After three consecutive missed payment periods, the customer must provide advance payment covering three months of service based on their typical usage before account access is restored. If the customer disagrees or fails to make the advance payment, the account may be reverted to the Free Tier. 
 
 ### Stripe Products & Prices
 
-> ⚠️ Modifying products and prices should be done carefully. If you aren't sure at any point contact the #growth team to check what you are doing
+> ⚠️ Product and price modifications are restricted and handled exclusively by the <SmallTeam slug="billing" />. These changes are only made in rare cases and require billing team approval and implementation. Do not attempt to modify products or prices directly - contact the billing team for any pricing-related requests.
 
 Each of our billable Products has an entry in Stripe with each Product having multiple Prices.
 We use a billing config file to determine what is shown in the UI and how billing should behave.
@@ -130,7 +145,7 @@ We generally support the following types of billing plans:
 - Up-front payment, $0 first tier, metered after
 - Flat up-front, no metering (renegotiate contract if they go over)
 
-If at all possible, it's best to stay with these types of billing plans because we already support them, and adding extra stuff will increase complexity. If you do need to add a different type of billing plan, chat with the growth team before agreeing to anything with a customer to make sure it's possible!
+If at all possible, it's best to stay with these types of billing plans because we already support them, and adding extra stuff will increase complexity. If you do need to add a different type of billing plan, chat with the <SmallTeam slug="billing" /> before agreeing to anything with a customer to make sure it's possible!
 
 #### Coupons and Discounts
 As much as possible the existing prices should be used in combination with `Coupons` to offer custom deals to customers. Coupons are applied to the _Customer_ in Stripe, not to the customer's subscription. 
@@ -158,7 +173,7 @@ When calculating usage limits, discounts are taken into consideration _before_ t
 1. Add custom metadata if needed.
 
 ### Plans
-> ⚠️ Modifying plans should be done carefully. If you aren't sure at any point contact the #growth team to check what you are doing
+> ⚠️ Plan modifications are handled exclusively by the <SmallTeam slug="billing" />. Do not attempt to modify plans directly, contact the billing team for any plan related requests.
 
 You can find a list of available plans in the billing repo. These are found inside `costants/plans`, divided by folder.
 Each plan can have a list of features, and a price.
@@ -188,3 +203,6 @@ Stripe subscriptions can be modified relatively freely for example if moving to 
 
 Self-hosted billing is no longer supported except for legacy customers who were using the paid kubernetes deployment.
 
+## Billing for data pipelines
+
+For information about data pipeline pricing and billing, please visit our [pricing page](https://posthog.com/pricing).

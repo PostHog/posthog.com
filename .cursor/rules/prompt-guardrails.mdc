@@ -1,0 +1,15 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# AI code editing, prompt guardrails, and syntax
+
+-   Always check for any code changes in files you've edited before making further edits. I often make changes to files in between prompts and don't want my changes to get overwritten.
+-   Assume user may have manually changed the file mid-flow
+-   Always use double quotes (unless something different is necessated by content)
+-   Always use sentence casing, even when writing internal documentation in Markdown
+-   Add a `README.md` file for large, structural changes or new features
+-   Always use best practices – if you're having to duplicate code or hard code values, ask before implementing because often times we can simplify or change our approach rather than ending up with unnecessary duplication
+-   When implementing based on reference data, don't include a fallback value that's hard coded based on reference data. If a field is required, there's no need for a fallback. (For example if I provide an example image like <img src="value.jpg" width="800" height="400" />, don't hard code the width and height in the code)

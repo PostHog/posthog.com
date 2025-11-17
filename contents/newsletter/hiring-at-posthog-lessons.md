@@ -4,7 +4,7 @@ title: Everything we've learned about hiring for startups (so far)
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/feature-images/hiring.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/353483136_5f00599e_346c_44d4_a94c_2cd85c9031a0_3c65d69b45.jpg
 featuredImageType: full
 tags:
   - People

@@ -1,0 +1,60 @@
+---
+title: Project-wide settings
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+You can configure project-wide feature flag settings to establish defaults and maintain safety measures for your team. These settings apply to all feature flags in your project and help maintain consistency across your flag management practices.
+
+To access these settings, navigate to [Settings > Feature Flags](https://app.posthog.com/settings/project-feature-flags)
+
+## Flag persistence default
+
+When enabled, all new feature flags will have persistence enabled by default. This ensures consistent user experiences across authentication steps where users might have different properties before and after login.
+
+> **Note:** Modifying this setting will only affect **new** feature flags. Existing flags retain their current persistence settings.
+
+Learn more about flag persistence in our [creating feature flags documentation](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps).
+
+## Flag change confirmation
+
+When enabled, editing existing feature flags will show a confirmation modal before saving changes. This helps prevent accidental changes to flag release conditions that could impact your users' experience.
+
+### Why use change confirmation?
+
+Feature flag changes can have immediate impact on your users. The confirmation modal helps prevent:
+
+- Accidental changes to release conditions
+- Unintended rollout percentage modifications
+- Mistaken flag enablement/disablement
+
+### Custom confirmation messages
+
+You can set a custom message to display in the confirmation modal. If no custom message is provided, the default message will be:
+
+> ⚠️ These changes will immediately affect users matching the release conditions. Please ensure you understand the consequences before proceeding.
+
+Custom messages are limited to 500 characters and can help provide context specific to your team or project needs.
+
+## Feature flags secure API key
+
+Use secure API keys to retrieve feature flag definitions for [local evaluation](/docs/feature-flags/local-evaluation) or [remote config settings](/docs/feature-flags/remote-config). These keys replace personal API keys for flag-related operations.
+
+### Key management
+
+- **Primary key**: The currently active key used for API requests
+- **Backup key**: Created when you rotate keys to support safe migration
+- **Key rotation**: Generate new keys while keeping the old one temporarily active
+
+### Best practices
+
+1. **Keep keys private**: Never expose these keys in client-side code
+2. **Rotate regularly**: Generate new keys periodically for security
+3. **Clean up backups**: Delete backup keys once you've migrated all systems
+4. **Use project-specific keys**: Each PostHog project should use its own secure API key
+
+The secure API key system enables you to safely rotate keys without downtime by maintaining both primary and backup keys during the transition period.

@@ -13,7 +13,7 @@ We have an awesome, diverse, and inclusive community. In order to maintain and g
 
 ## Reporting bugs or issues
 
-Bug reports help us make PostHog better for everyone. When you [report a bug](https://github.com/PostHog/posthog/issues/new/choose), the description will automatically be filled with a template that makes is very clear what we'd like you to add.
+Bug reports help us make PostHog better for everyone. When you [report a bug](https://github.com/PostHog/posthog/issues/new/choose), the description will automatically be filled with a template that makes it very clear what we'd like you to add.
 
 Before raising a new issue, please [search within existing ones](https://github.com/PostHog/posthog/issues) to make sure you're not creating a duplicate.
 
@@ -23,7 +23,7 @@ Before raising a new issue, please [search within existing ones](https://github.
 
 ## Deciding what to work on
 
-We maintain [a list of good first issues](https://github.com/PostHog/posthog/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are a great way to get started contributing to the PostHog open-source product analytics platform. You can also pick up any other open tickets, though they may be more complicated to work with. If in doubt, just leave a comment for the author of the issue! Outside of tickets, if there are small improvements to layout, text, or functionality, feel free to create a pull request directly.
+We maintain [a list of good first issues](https://github.com/PostHog/posthog/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are a great way to get started contributing to the PostHog open-source developer platform. You can also pick up any other open tickets, though they may be more complicated to work with. If in doubt, just leave a comment for the author of the issue! Outside of tickets, if there are small improvements to layout, text, or functionality, feel free to create a pull request directly.
 
 You can also [update PostHog's documentation, handbook, or write a blog post](/handbook/engineering/posthog-com/developing-the-website). We maintain [a list of good first issues](https://github.com/PostHog/posthog.com/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) here too. Take a look at our [style guide](https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md) before getting started.
 

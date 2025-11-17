@@ -13,7 +13,7 @@ const sizes = {
 export const circle = (size = 'lg', className = '') => cntl`
     rounded-full 
     relative 
-    border-gray-accent-light 
+    border-primary 
     border-solid 
     inline-block 
     bg-white
@@ -38,7 +38,7 @@ export const Avatar = ({ size = 'lg', className = '', image, country, name, colo
                         imgClassName="w-full h-full border border-solid border-white box-border rounded-full"
                     />
                 )}
-                <div className="absolute -right-2 -bottom-1 bg-white w-8 h-8 rounded-full border-2 text-lg border-gray-accent-light border-solid flex items-center justify-center">
+                <div className="absolute -right-2 -bottom-1 bg-white w-8 h-8 rounded-full border-2 text-lg border-primary border-solid flex items-center justify-center">
                     <ReactCountryFlag svg countryCode={country} />
                 </div>
             </div>

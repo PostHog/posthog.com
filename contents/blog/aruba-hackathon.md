@@ -31,6 +31,8 @@ Here's what we built during our Aruba hackathon.
 
 ## MaxAI: Our friendly, PostHog support AI
 
+> **Note**: MaxAI is now [PostHog AI](/docs/posthog-ai).
+
 - **Team Bandwaggoners:** James Greenhill, Paul Hultgren, Eric Duong, Raquel Smith and Neil Kakkar
 
 Deployed on our Slack, app, website, and GitHub repos, MaxAI was the inevitable result of everyone wanting to play with GPT. 

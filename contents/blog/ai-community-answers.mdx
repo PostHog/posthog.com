@@ -48,7 +48,7 @@ After all, if you interact with an AI chatbot and don't get the answer you're lo
 
 ## Where we decided to implement AI
 
-The most natural place to include an AI chatbot would be in our [docs](/docs). But I was hesitant to start here, as the conversational nature of AI meant we'd lack control over the quality and accuracy of the responses. So I decided to try something different.
+The most [natural place to include an AI chatbot](/newsletter/building-ai-features) would be in our [docs](/docs). But I was hesitant to start here, as the conversational nature of AI meant we'd lack control over the quality and accuracy of the responses. So I decided to try something different.
 
 Our [community questions](/questions) section is where users can ask questions directly in the docs. And we currently have... a lot of open (unanswered) questions. But because they're posted in a forum-style format, there's no expectation of a live chat experience. And this presented an opportunity...
 
@@ -109,7 +109,7 @@ To vet the quality of the answers, I started copy/pasting unanswered community q
     ]);
     ```
 
-    <p><strong className="text-green">If the confidence score is high enough,</strong> we show the answer to the user, credited to our hedgehog mascot, <TeamMember name="Max AI" photo />.</p>
+    <p><strong className="text-green">If the confidence score is high enough,</strong> we show the answer to the user.</p>
     <p><strong className="text-red">If Inkeep <em>isn't</em> confident in the answer,</strong> we show a message that says we couldn't find an answer, and that a human will appear as soon as possible.</p>
 
 When an AI answer is presented, we show feedback buttons so the original poster can tell us if the answer was helpful. We use this information to improve the quality of the answers.

@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Context } from '../context/toast'
+import { Context } from '../context/Toast'
 
 export interface IToast {
     error?: boolean

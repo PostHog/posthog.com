@@ -9,6 +9,9 @@ import { toJpeg } from 'html-to-image'
 import { IconDownload } from '@posthog/icons'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
+import Explorer from 'components/Explorer'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import { AppIcon } from 'components/OSIcons'
 
 const numImages = 4
 const initialCount = 3
@@ -244,16 +247,34 @@ const Camera = ({
 
     const checkCameraPermission = async () => {
         try {
-            await navigator.mediaDevices.getUserMedia({ video: true })
+            // Try with minimal constraints for better Android compatibility
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode: 'user' },
+                audio: false,
+            })
+            // Stop the stream immediately as we're just checking permission
+            stream.getTracks().forEach((track) => track.stop())
             setPermissionError(undefined)
+            return true
         } catch (err) {
             if (err instanceof Error) {
-                setPermissionError(
-                    err.name === 'NotAllowedError'
-                        ? 'Camera access was denied. Please enable camera access to use the photobooth.'
-                        : 'Unable to access camera. Please make sure your camera is connected and try again.'
-                )
+                let errorMessage = 'Unable to access camera. Please make sure your camera is connected and try again.'
+
+                if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+                    errorMessage =
+                        'Camera access was denied. Please enable camera permissions in your browser settings and try again.'
+                } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+                    errorMessage = 'No camera found. Please connect a camera and try again.'
+                } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
+                    errorMessage =
+                        'Camera is already in use by another application. Please close other apps using the camera and try again.'
+                } else if (err.name === 'OverconstrainedError' || err.name === 'ConstraintNotSatisfiedError') {
+                    errorMessage = 'Camera does not support required settings. Please try a different camera.'
+                }
+
+                setPermissionError(errorMessage)
             }
+            return false
         }
     }
 
@@ -317,7 +338,16 @@ const Camera = ({
             {permissionError ? (
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 text-white p-8 text-center">
                     <p className="text-xl mb-4">{permissionError}</p>
-                    <CallToAction onClick={checkCameraPermission} type="outline" size="absurd">
+                    <CallToAction
+                        onClick={async () => {
+                            const success = await checkCameraPermission()
+                            if (success) {
+                                setPermissionError(undefined)
+                            }
+                        }}
+                        type="outline"
+                        size="absurd"
+                    >
                         <span>Try Again</span>
                     </CallToAction>
                 </div>
@@ -339,9 +369,6 @@ const Camera = ({
                             imageSmoothing={false}
                             videoConstraints={{
                                 facingMode: 'user',
-                                aspectRatio: 0.75,
-                                width: { min: 640, ideal: 810, max: 1920 },
-                                height: { min: 480, ideal: 1080, max: 1920 },
                             }}
                             className="absolute h-full w-full object-cover [transform:scale(1.8)]"
                             onUserMedia={onUserMedia}
@@ -391,11 +418,11 @@ const PhotoStrip = ({
     }, [videoRef, showLivePreview])
 
     return (
-        <div className="grid grid-rows-4 gap-2 bg-white rounded-md p-2 h-full rounded shadow-xl w-[170px]">
+        <div className="grid grid-rows-4 gap-2 bg-white p-2 h-full rounded shadow-xl w-[170px]">
             {Array.from({ length: numImages }).map((_, index) => {
                 const image = images[index]
                 return (
-                    <div key={index} className="relative aspect-[3/4] w-full bg-accent dark:bg-accent-dark">
+                    <div key={index} className="relative aspect-[3/4] w-full bg-accent">
                         {showLivePreview && (
                             <video
                                 ref={(el) => (videoRefs.current[index] = el)}
@@ -466,16 +493,18 @@ const VerticalPhotoStrip = ({
             <div className="absolute top-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-sm z-10">
                 {templateIndex} of {totalTemplates}
             </div>
-            <PhotoStrip
-                images={images.map((image, index) => ({
-                    src: active ? image.src : undefined,
-                    overlay: overlays[index],
-                }))}
-                onRetake={onRetake}
-                retaking={retaking}
-                videoRef={videoRef}
-                showLivePreview={showLivePreview}
-            />
+            <div className="shrink">
+                <PhotoStrip
+                    images={images.map((image, index) => ({
+                        src: active ? image.src : undefined,
+                        overlay: overlays[index],
+                    }))}
+                    onRetake={onRetake}
+                    retaking={retaking}
+                    videoRef={videoRef}
+                    showLivePreview={showLivePreview}
+                />
+            </div>
         </div>
     )
 }
@@ -488,7 +517,7 @@ const TemplateSelector = ({
     videoRef?: HTMLVideoElement
 }) => {
     return (
-        <div className="flex justify-center items-stretch gap-8 p-4 max-w-7xl mx-auto">
+        <div className="flex justify-center items-stretch gap-4 @3xl:gap-8 p-4 max-w-7xl mx-auto">
             {Object.keys(templates).map((key) => (
                 <button
                     key={key}
@@ -523,12 +552,12 @@ const NameInput = ({ onSubmit, onBack }: { onSubmit: (name: string) => void; onB
     }
 
     return (
-        <div className="flex flex-col items-center justify-center">
-            <h2 className="text-3xl">What's your name?</h2>
+        <div className="flex flex-col items-center justify-center py-4">
+            <h2 className="text-xl mb-4">What's your name?</h2>
             <form className="flex flex-col items-center space-y-4" onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    className="bg-white dark:bg-accent-dark rounded border border-light dark:border-dark outline-none focus:ring-0 text-center w-full"
+                    className="bg-white dark:bg-accent-dark rounded border border-primary outline-none focus:ring-0 text-center w-full"
                     placeholder="Enter your name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -578,10 +607,14 @@ const PhotoModal = ({
 
     const checkCameraPermission = async () => {
         try {
-            await navigator.mediaDevices.getUserMedia({ video: true })
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true })
+            // Stop the stream immediately as we're just checking permission
+            stream.getTracks().forEach((track) => track.stop())
             setCameraPermission(true)
+            return true
         } catch (err) {
             setCameraPermission(false)
+            return false
         }
     }
 
@@ -667,7 +700,7 @@ const PhotoModal = ({
 
     return (
         <motion.div
-            className="flex justify-center items-center"
+            className="not-prose flex justify-center items-center"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -676,14 +709,19 @@ const PhotoModal = ({
             {cameraPermission === false ? (
                 <div
                     onClick={(e) => e.stopPropagation()}
-                    className="text-center bg-accent dark:bg-accent-dark p-4 rounded border border-light dark:border-dark max-w-xl"
+                    className="text-center bg-accent p-4 rounded border border-primary max-w-xl"
                 >
                     <h2 className="text-2xl font-bold mb-4">Camera access required</h2>
-                    <p className="mb-6">
-                        Please enable camera access to use the photobooth. Once enabled, click the button below to try
-                        again.
-                    </p>
-                    <CallToAction onClick={checkCameraPermission} type="outline">
+                    <p className="mb-6">Please enable camera access to use the photobooth.</p>
+                    <CallToAction
+                        onClick={async () => {
+                            const success = await checkCameraPermission()
+                            if (success) {
+                                setCameraPermission(true)
+                            }
+                        }}
+                        type="outline"
+                    >
                         <span>Try again</span>
                     </CallToAction>
                 </div>
@@ -707,7 +745,7 @@ const PhotoModal = ({
 
                     {step === 'capture' && (
                         <div className="flex gap-8 items-center justify-center h-full w-full max-w-7xl mx-auto px-4">
-                            <div className="aspect-[3/4] w-[645px]">
+                            <div className="aspect-[3/4] w-[645px] flex-1">
                                 <Camera
                                     onWebcamReady={handleWebcamReady}
                                     onUserReady={() => setCapturing(true)}
@@ -729,7 +767,7 @@ const PhotoModal = ({
                     )}
                 </div>
             ) : (
-                <div className="bg-accent dark:bg-accent-dark pt-4 px-8 rounded border border-light dark:border-dark max-w-xl flex flex-col items-center">
+                <div className="bg-accent pt-4 px-8 rounded border border-primary max-w-xl flex flex-col items-center">
                     <h3 className="text-xl font-bold mt-2 mb-0">Is this thing on?!</h3>
                     <p className="text-[15px]">Please enable camera access to continue.</p>
 
@@ -892,7 +930,7 @@ const Card = ({
             </button>
             <div
                 ref={cardRef}
-                className="relative w-[800px] aspect-video flex-shrink-0 flex snap-center border border-light dark:border-dark shadow-xl rounded overflow-hidden"
+                className="relative w-[800px] aspect-video flex-shrink-0 flex snap-center border border-primary shadow-xl rounded overflow-hidden"
             >
                 <div className={`absolute inset-0 bg-accent overflow-hidden ${className}`}>
                     <img
@@ -958,30 +996,32 @@ export default function Photobooth(): JSX.Element {
     }
 
     useEffect(() => {
-        setMobile(typeof window !== 'undefined' && window.innerWidth < 768)
+        setMobile(typeof window !== 'undefined' && window.innerWidth < 7.68)
     }, [])
 
     return (
-        <Layout>
+        <Explorer template="generic" slug="photobooth" fullScreen>
             <SEO
-                title="PostHog photo booth"
-                description="A Valentine's Day photo booth"
+                title="Photo booth - PostHog"
+                description="A photo booth with Max the hedgehog"
                 image={`/images/og/photobooth.png`}
             />
 
-            <div className="pt-12 pb-24 px-5">
+            <div className="pt-4 pb-12">
                 <div className="flex flex-col items-center">
-                    <h2 className="text-3xl font-bold inline-flex bg-red-2-dark text-white rounded-sm py-1 px-2 -rotate-2 mb-0">
+                    {/* <h2 className="text-3xl font-bold inline-flex bg-red-2-dark text-white rounded-sm py-1 px-2 -rotate-2 mb-0">
                         Valentine's Day edition
-                    </h2>
-                    <h1 className="text-5xl font-bold md:px-4 mb-3 mt-3 text-center">
+                    </h2> */}
+                    <AppIcon name="photobooth" className="!size-10" />
+
+                    <h1 className="text-2xl @3xl:text-4xl font-bold md:px-4 mb-3 mt-3 text-center">
                         Welcome to the <span className="text-red dark:text-yellow">PostHog photo booth</span>
                     </h1>
                 </div>
                 <AnimatePresence>
                     {mobile ? (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                            <div className="bg-accent dark:bg-accent-dark p-4 rounded border border-light dark:border-dark max-w-xl mx-auto mt-4">
+                            <div className="bg-accent p-4 rounded border border-primary max-w-xl mx-auto mt-4">
                                 <h1 className="text-3xl font-bold text-center">Mobile devices not supported</h1>
                                 <p className="text-center text-[15px] max-w-md mx-auto mt-4">
                                     Sorry! The PostHog photo booth is designed for desktop use only. Please visit this
@@ -1045,20 +1085,22 @@ export default function Photobooth(): JSX.Element {
                     ) : (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                             <p className="font-medium opacity-80 text-center md:px-4">
-                                We've assembled four Valentines-themed photo booth templates. Click your favorite and
+                                We've assembled four photo booth templates for your enjoyment. Click your favorite and
                                 get to snappin'.
                             </p>
-                            <PhotoModal
-                                onClose={() => setModalOpen(false)}
-                                template={template}
-                                onDone={handleDone}
-                                onSelectTemplate={setTemplate}
-                                onNameChange={setName}
-                            />
+                            <ScrollArea>
+                                <PhotoModal
+                                    onClose={() => setModalOpen(false)}
+                                    template={template}
+                                    onDone={handleDone}
+                                    onSelectTemplate={setTemplate}
+                                    onNameChange={setName}
+                                />
+                            </ScrollArea>
                         </motion.div>
                     )}
                 </AnimatePresence>
             </div>
-        </Layout>
+        </Explorer>
     )
 }

@@ -4,13 +4,11 @@ templateId:
     - template-june
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 You can send analytics events to June to enrich your customer data in real-time.
 
-<Requirements />
 
 ## Configuring June
 
@@ -27,7 +25,7 @@ We'll use the new key in the next step.
 ## Configuring PostHog’s June destination
 
 1. In PostHog, click the "[Data pipelines](https://us.posthog.com/pipeline/overview)" tab in the left sidebar.
-2. Click the **Destinations** tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=june) tab.
 3. Click **New destination** and choose June's **Create** button.
 
 Drop in the API key you created in the previous step.

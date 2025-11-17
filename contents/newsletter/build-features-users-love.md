@@ -41,7 +41,7 @@ Here’s that process in more detail:
 
 1. **Decide to build a feature.** We use quantitative data, qualitative feedback, and personal experience to decide what to build. It must also be feasible, and worth doing now, to move to the next stage.
 
-2. **Build an MVP and test it.** We build a simple version of the feature, and ship it behind a feature flag for internal use. Success here is the feature working as intended and can scale up.
+2. **Build an MVP and test it.** We build a simple version of the feature, and ship it behind a feature flag for internal use. Success here is the feature working as intended and [can scale up](/newsletter/building-a-startup-that-scales).
 
 3. **Beta testing and gathering feedback.** We use the feature internally and give each other feedback. We also find relevant users to try it, and ask for their feedback. Positive feedback is a success; a common goal here is “5 happy customers”
 

@@ -1,0 +1,11 @@
+For PostHog to work optimally, we store a small amount of information about the user on the user's browser. This ensures we identify users properly if they navigate away from your site and come back later. 
+
+The information we store includes:
+
+-   Their `distinct_id`
+-   Session ID & Device ID
+-   Active & enabled feature flags
+-   Any super properties you have defined
+-   Some PostHog configuration options (e.g. whether session recording is enabled)
+
+By default, we store all this information in both a `cookie` and `localStorage`, which means PostHog can identify your users across subdomains. By default, the name of the cookie PostHog sets is `ph_<project_api_key>_posthog` and it expires after `365` days. 

@@ -90,7 +90,7 @@ export default function Enterprise({ setOpen, open }: { setOpen: (open: boolean)
                         return (
                             <li
                                 key={section.title}
-                                className="border-t first:border-t-0 border-dashed border-gray-accent mt-4 pt-2 first:mt-0"
+                                className="border-t first:border-t-0 border-dashed border-primary-accent mt-4 pt-2 first:mt-0"
                             >
                                 <h4 className="text-xl m-0 mt-4">{section.title}</h4>
                                 <p className="text-[15px] font-medium m-0 leading-snug text-black/50">

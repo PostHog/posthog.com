@@ -1,0 +1,13 @@
+---
+title: Linking Temporal.io as a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import Temporal from './_snippets/source-temporal.mdx'
+
+<Temporal />

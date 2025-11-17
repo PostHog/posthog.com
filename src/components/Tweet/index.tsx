@@ -5,7 +5,7 @@ import Link from 'components/Link'
 
 const DontClickButton = ({ alertMessage, children, ...props }) => (
     <button
-        className="dont-click flex items-center space-x-1 opacity-60"
+        className="dont-click flex items-center space-x-1 text-muted text-sm @xl:text-[15px]"
         onClick={(e) => {
             e.preventDefault()
             alert(alertMessage)
@@ -18,10 +18,10 @@ const DontClickButton = ({ alertMessage, children, ...props }) => (
 export const Tweet = ({ children, className = '', alertMessage }) => {
     return (
         <div
-            className={`tw-tweet max-w-xl bg-white dark:bg-accent-dark border border-transparent dark:border-dark rounded-md shadow-md p-4 mb-8 relative ${className}`}
+            className={`not-prose tw-tweet max-w-xl bg-white dark:bg-dark border border-primary rounded-md p-4 mb-8 relative ${className}`}
         >
             <div className="flex items-center space-x-3">
-                <div className="rounded-full border border-light dark:border-dark hover:border-red dark:hover:border-yellow bg-white dark:bg-dark">
+                <div className="rounded-full border border-primary hover:border-red dark:hover:border-yellow bg-light dark:bg-dark">
                     <Link
                         href="https://x.com/james406"
                         externalNoIcon
@@ -35,21 +35,19 @@ export const Tweet = ({ children, className = '', alertMessage }) => {
                     </Link>
                 </div>
                 <div>
-                    <div className="text-lg font-semibold leading-tight">James Hawkins</div>
+                    <div className="text-base @xl:text-lg font-semibold leading-tight">James Hawkins</div>
                     <div className="text-gray-500 text-sm">
                         <Link
                             href="https://x.com/james406"
                             externalNoIcon
-                            className="text-primary/70 dark:text-primary-dark/70 hover:text-red dark:hover:text-yellow"
+                            className="text-secondary hover:text-red dark:hover:text-yellow"
                         >
                             @james406
                         </Link>
                     </div>
                 </div>
             </div>
-            <div className="mt-3 [&_*]:!leading-normal">
-                {children}
-            </div>
+            <div className="mt-3 [&_*]:!leading-normal text-sm @xl:text-base">{children}</div>
             <div className="mt-3 flex justify-between items-center text-gray-500">
                 <div className="flex space-x-4">
                     <DontClickButton alertMessage={alertMessage}>

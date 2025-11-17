@@ -105,6 +105,25 @@ import HowToCaptureIdentifiedEventsFlutter from '../product-analytics/_snippets/
     </Tab.Panels>
 </Tab.Group>
 
+
+import JSIdentifyWhenToCall from "../_snippets/identify-when-to-call.mdx"
+import JSIdentifyUseUniqueIds from "../_snippets/identify-use-unique-ids.mdx"
+import JSIdentifySetUserProperties from "../_snippets/identify-setting-user-properties.mdx"
+
+## Identify best practices
+
+### 1. Call `identify` as soon as you're able to
+
+<JSIdentifyWhenToCall/>
+
+### 2. Use unique strings for distinct IDs
+
+<JSIdentifyUseUniqueIds/>
+
+### 3. Set up person profiles and properties
+
+<JSIdentifySetUserProperties/>
+
 ## Mobile SDK version considerations
 
 When using PostHog's mobile SDKs, any changes made to `personProfiles` configuration will only apply to users who have updated their app to the latest version. This is because mobile SDKs are bundled with your app and cannot be updated dynamically.
@@ -143,7 +162,7 @@ You **cannot**:
 - Use Lifecycle insights
 - Filter on person properties
 - Use person properties for targeting feature flags, A/B tests, or surveys
-- Query the `persons` table using [SQL insights](/docs/product-analytics/sql)
+- Query the [`persons` table](/docs/data-warehouse/sources/posthog#persons) using the [SQL editor](/docs/data-warehouse/query)
 - Use group analytics
 
 </details>

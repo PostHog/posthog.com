@@ -5,13 +5,11 @@ templateId:
     - template-klaviyo-user
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 You can use your PostHog event data to create and update contacts in Klaviyo. Here's everything you need to get started.
 
-<Requirements />
 
 ## Configuring Klaviyo
 
@@ -25,7 +23,7 @@ Make sure to set `Read/Write Access` for:
 ## Configuring PostHog’s Klaviyo destination
 
 1. In PostHog, click the **[Data pipeline](https://us.posthog.com/pipeline/overview)** tab in the left sidebar.
-2. Click the **Destinations** tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=klaviyo) tab.
 3. Click **New destination** and choose a Klaviyo option for either creating/updating contacts or sending events.
 
 Insert your API key. You can also choose a different property to use as the contact's email; PostHog will default to `person.properties.email`.

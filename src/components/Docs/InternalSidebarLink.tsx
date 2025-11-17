@@ -19,7 +19,7 @@ export default function InternalSidebarLink({ url, name, depth, onClick, classNa
                 smooth
                 duration={300}
                 to={url}
-                className={`relative block py-1 pr-4 text-primary dark:text-primary-dark hover:bg-accent dark:hover:bg-accent-dark leading-tight font-medium hover:text-primary dark:hover:text-primary-dark cursor-pointer ${className} ${
+                className={`relative block py-1 pr-4 text-primary dark:text-primary-dark hover:bg-accent leading-tight font-medium hover:text-primary dark:hover:text-primary-dark cursor-pointer ${className} ${
                     depth === 0 ? 'font-semibold' : ''
                 }`}
                 spy

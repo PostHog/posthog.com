@@ -2,24 +2,23 @@
 title: 'The best Sprig alternatives & competitors, compared'
 date: 2024-06-18
 author:
-  - lior-neu-ner
+    - lior-neu-ner
 rootpage: /blog
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
 featuredImageType: full
 category: General
 tags:
-  - Comparisons
+    - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
-- **Founded:** 2020
-- **Similar to:** Hotjar, Pendo
-- **Typical users:** Engineers and product teams
+-   **Founded:** 2020
+-   **Similar to:** Hotjar, Pendo
+-   **Typical users:** Engineers and product teams
 
 ![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/feature-flags.png)
 
@@ -31,15 +30,15 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of 
 
 #### Key features
 
-- 💬 **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+-   💬 **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
 
-- 📈 **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
+-   📈 **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
 
-- 📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
+-   📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
 
-- 🧪 **A/B tests:** Experiment in your app with up to nine test variations and track impact on primary and secondary metrics. Auto-calculate test duration, sample size, and statistical significance.
+-   🧪 **A/B tests:** Experiment in your app with up to nine test variations and track impact on primary and secondary metrics. Auto-calculate test duration, sample size, and statistical significance.
 
-- 🚩 **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
+-   🚩 **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
 
 ### How does PostHog compare to Sprig?
 
@@ -47,20 +46,24 @@ PostHog and Sprig have similar capabilities when it comes to surveys and replays
 
 They also differ on support for mobile apps. All of Sprig's features are available for mobile apps, whereas PostHog doesn't yet offer surveys on mobile – although it does support replays and heatmaps on apps.
 
-<ComparisonTable column1="PostHog" column2="Sprig">
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={true} column2={false} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={false} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
-  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={false} column2={true} feature="AI analysis" description="Surface user pain points using AI" />
-  <ComparisonRow column1="No surveys" column2={true} feature="Mobile support" description="Pre-built SDKs and support for iOS, Android, and React Native" />
-  <ComparisonRow column1={true} column2={true} feature="Cookieless tracking option" description="Use session replays and analytics without cookie consent banners" />
-  <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'sprig']}
+    rows={[
+        'surveys',
+        'session_replay',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'product_analytics',
+        'experiments',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'feature_flags',
+        'product_analytics.features.ai_analysis',
+        'surveys.platforms.features.mobile',
+        'platform.security.cookieless_tracking',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use PostHog?
 
@@ -73,15 +76,14 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 3. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
 
 > #### Bottom line
-> 
+>
 > For teams looking for all the tools they need to improve their products, PostHog makes for a great alternative. This is especially true for startups and scaleups thanks to it having a generous free tier.
-<br />
 
 ## 2. Hotjar
 
-- **Founded:** 2014
-- **Most similar to:** Pendo, PostHog
-- **Typical users:** Product designers, researchers, and marketers
+-   **Founded:** 2014
+-   **Most similar to:** Pendo, PostHog
+-   **Typical users:** Product designers, researchers, and marketers
 
 ![Hotjar](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-pendo-alternatives/hotjar.png)
 
@@ -93,34 +95,38 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Hotjar), Hotjar 
 
 ### Key features
 
-- 📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
+-   📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
 
-- 🔥 **Heatmaps:** See what parts of your pages get attention and how far down the page users get.
+-   🔥 **Heatmaps:** See what parts of your pages get attention and how far down the page users get.
 
-- 🎥 **Recordings:** Replay real user sessions and see what they see; discover hidden friction.
+-   🎥 **Recordings:** Replay real user sessions and see what they see; discover hidden friction.
 
-- 🗣️ **Feedback:** Learn what your users are thinking. Find out their likes, dislikes, and satisfaction.
+-   🗣️ **Feedback:** Learn what your users are thinking. Find out their likes, dislikes, and satisfaction.
 
-- 👔 **Interviews:** Talk to real users to share ideas, test designs, and get live feedback.
+-   👔 **Interviews:** Talk to real users to share ideas, test designs, and get live feedback.
 
 ### How does Hotjar compare to Sprig?
 
 Hotjar and Sprig have comparable features when it comes uncovering insights on marketing sites and web apps. Hotjar lacks supports for mobile apps, though.
 
-<ComparisonTable column1="Hotjar" column2="Sprig">
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={true} column2={false} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={false} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={false} column2={true} feature="AI analysis" description="Surface user pain points using AI" />
-  <ComparisonRow column1={false} column2={true} feature="Mobile support" description="Pre-built SDKs and support for iOS, Android, and React Native" />
-  <ComparisonRow column1={false} column2={true} feature="Cookieless tracking option" description="Use session replays and analytics without cookie consent banners" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['hotjar', 'sprig']}
+    rows={[
+        'surveys',
+        'session_replay',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'product_analytics',
+        'experiments',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'feature_flags',
+        'product_analytics.features.ai_analysis',
+        'surveys.platforms.features.mobile',
+        'platform.security.cookieless_tracking',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Hotjar?
 
@@ -133,16 +139,14 @@ According to G2 reviews, users are fans of Hotjar because:
 3. **Heatmaps and scrollmaps:** Seeing clicks and scroll depth down works well and creates actionable insights for design, marketing, and content teams. Helps improve UX and page designs.
 
 > #### Bottom line
-> 
+>
 > Hotjar is a good option for product and marketing teams who want to do in-depth analysis on user journeys within products, especially compared to other Sprig alternatives like Crazy Egg that are more focused on e-commerce and small business users.
-
-<br />
 
 ## 3. Pendo
 
-- **Founded:** 2013
-- **Similar to:** PostHog, Hotjar
-- **Typical users:** Product managers and customer success teams
+-   **Founded:** 2013
+-   **Similar to:** PostHog, Hotjar
+-   **Typical users:** Product managers and customer success teams
 
 ![Pendo](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-fullstory-alternatives/pendo.png)
 
@@ -154,36 +158,40 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Pendo), 3,166 of
 
 #### Key features
 
-- 📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
+-   📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
 
-- 📘 **In-app guides:** Deliver personalized guidance to customers inside your app, without changing the code.
+-   📘 **In-app guides:** Deliver personalized guidance to customers inside your app, without changing the code.
 
-- 📣 **User feedback:** A centralized location to capture product feedback. Capture manually or with in-app prompts.
+-   📣 **User feedback:** A centralized location to capture product feedback. Capture manually or with in-app prompts.
 
-- 📊 **Product analytics:** Learn how users are using your app with event autocapture. Analyze with funnels, trends, and retention analysis.
+-   📊 **Product analytics:** Learn how users are using your app with event autocapture. Analyze with funnels, trends, and retention analysis.
 
-- 📹 **Session replay:** Watch real users use your product and understand the behavior behind your analytics data.
+-   📹 **Session replay:** Watch real users use your product and understand the behavior behind your analytics data.
 
-- 🛣️ **Product validation and roadmaps:** Manage your backlog and plan your roadmap to create alignment.
+-   🛣️ **Product validation and roadmaps:** Manage your backlog and plan your roadmap to create alignment.
 
 ### How does Pendo compare to Sprig?
 
-Pendo is the most similar alternative to Sprig. It includes all of the key features and more (like analytics and funnels).  
+Pendo is the most similar alternative to Sprig. It includes all of the key features and more (like analytics and funnels).
 
-<ComparisonTable column1="Hotjar" column2="Sprig">
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={false} column2={false} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={false} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={true} column2={true} feature="AI analysis" description="Surface user pain points using AI" />
-  <ComparisonRow column1={true} column2={true} feature="Mobile support" description="Pre-built SDKs and support for iOS, Android, and React Native" />
-  <ComparisonRow column1={false} column2={true} feature="Cookieless tracking option" description="Use session replays and analytics without cookie consent banners" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['pendo', 'sprig']}
+    rows={[
+        'surveys',
+        'session_replay',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'product_analytics',
+        'experiments',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'feature_flags',
+        'product_analytics.features.ai_analysis',
+        'surveys.platforms.features.mobile',
+        'platform.security.cookieless_tracking',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Pendo?
 
@@ -196,16 +204,14 @@ According to G2 reviews, customers use Pendo for:
 3. **Product planning:** Pendo's data tools, product validation, and roadmap features help align internal teams and stakeholders on product development.
 
 > #### Bottom line
-> 
+>
 > Pendo makes for a solid alternative to Sprig thanks to its matching feature set while also being self-serve. Pendo's opaque pricing can be a turnoff to some, though.
-
-<br />
 
 ## 4. FullStory
 
-- **Founded:** 2012
-- **Similar to:** 
-- **Typical users:** Product managers, customer success, and support teams
+-   **Founded:** 2012
+-   **Similar to:**
+-   **Typical users:** Product managers, customer success, and support teams
 
 ![FullStory](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-logrocket-alternatives/fullstory.png)
 
@@ -217,34 +223,38 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/FullStory), as o
 
 #### Key features
 
-- 📺 **Session replay:** Watch and analyze real user sessions on web and mobile apps. Understand the full context of a user's experience.
+-   📺 **Session replay:** Watch and analyze real user sessions on web and mobile apps. Understand the full context of a user's experience.
 
-- 📊 **Product analytics:** Understand user paths, funnels, retention, journeys, and struggle points. Combine them all on a dashboard and get notified of changes requiring attention.
+-   📊 **Product analytics:** Understand user paths, funnels, retention, journeys, and struggle points. Combine them all on a dashboard and get notified of changes requiring attention.
 
-- 🏷️ **Event autocapture:** Tagless event capture that ensures the tracking of all events. Get the data you need ASAP and discover issues you didn't know existed.
+-   🏷️ **Event autocapture:** Tagless event capture that ensures the tracking of all events. Get the data you need ASAP and discover issues you didn't know existed.
 
-- 🔥 **Heatmaps:** Find out where users click and scroll as well as areas they are frustrated by.
+-   🔥 **Heatmaps:** Find out where users click and scroll as well as areas they are frustrated by.
 
-- 📱 **Mobile app analytics:** Automatically capture everything from screen recordings to events to crashes to optimize your app.
+-   📱 **Mobile app analytics:** Automatically capture everything from screen recordings to events to crashes to optimize your app.
 
 ### How does FullStory compare to Sprig?
 
-One of the biggest downsides of FullStory is its lack of surveys. FullStory foccuses more on extracting quantative data rather than qualitive.
+One of the biggest downsides of FullStory is its lack of surveys. FullStory focuses more on extracting quantitative data rather than qualitative.
 
-<ComparisonTable column1="FullStory" column2="Sprig">
-  <ComparisonRow column1={false} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={true} column2={false} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={false} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={false} column2={true} feature="AI analysis" description="Surface user pain points using AI" />
-  <ComparisonRow column1={true} column2={true} feature="Mobile support" description="Pre-built SDKs and support for iOS, Android, and React Native" />
-  <ComparisonRow column1={false} column2={true} feature="Cookieless tracking option" description="Use session replays and analytics without cookie consent banners" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['fullstory', 'sprig']}
+    rows={[
+        'surveys',
+        'session_replay',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'product_analytics',
+        'experiments',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'feature_flags',
+        'product_analytics.features.ai_analysis',
+        'surveys.platforms.features.mobile',
+        'platform.security.cookieless_tracking',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use FullStory?
 
@@ -257,57 +267,59 @@ According to [G2 reviews](https://www.g2.com/products/fullstory/reviews), people
 3. **Improving conversion:** FullStory users like to combine funnel insights with replays of user sessions to understand pain points and improve conversion.
 
 > #### Bottom line
+>
 > For a complete behavioral analytics suite, FullStory is a good choice, especially for mobile apps. However, surveys is a sorely missed feature.
-
-<br />
 
 ## 5. Crazy Egg
 
-- **Founded:** 2006
-- **Similar to:** Lucky Orange, Hotjar
-- **Typical users:** Marketers and UX designers
+-   **Founded:** 2006
+-   **Similar to:** Lucky Orange, Hotjar
+-   **Typical users:** Marketers and UX designers
 
 ![Lucky Orange](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clarity-alternatives/luckyorange.png)
 
 ### What is Crazy Egg?
 
-Crazy Egg is a heatmap and optimization platform tool for small business owners and marketers. A big user group is e-commerce businesses who run Shopify stores. 
+Crazy Egg is a heatmap and optimization platform tool for small business owners and marketers. A big user group is e-commerce businesses who run Shopify stores.
 
 It's best used for heatmaps and surveys, but also includes basic replay, A/B testing, and website analytics tools. It's ideal for non-technical users who want to optimize their websites and drive conversions.
 
 According to [BuiltWith](https://trends.builtwith.com/analytics/CrazyEgg), as of June 2024, 10,861 of the top million websites use Crazy Egg. This is significantly more than Sprig's 378.
 
-
 #### Key features
 
-- 🔥 **Heatmaps:** See where users move, click, and scroll. Get reports on their interactions with your website.
+-   🔥 **Heatmaps:** See where users move, click, and scroll. Get reports on their interactions with your website.
 
-- 📺 **Session replay:** Watch recordings of actual visitors using your website. Figure out where they get stuck or where they avoid.
+-   📺 **Session replay:** Watch recordings of actual visitors using your website. Figure out where they get stuck or where they avoid.
 
-- 🧪 **A/B testing:** Use the visual page editor or URL selector to run A/B tests.
+-   🧪 **A/B testing:** Use the visual page editor or URL selector to run A/B tests.
 
-- 💬 **Surveys:** Fully customizable surveys help you get qualitative feedback at all stages of the customer journey.
+-   💬 **Surveys:** Fully customizable surveys help you get qualitative feedback at all stages of the customer journey.
 
-- 🐞 **Errors tracking:** Find out if errors are preventing your visitors from converting.
+-   🐞 **Errors tracking:** Find out if errors are preventing your visitors from converting.
 
-### How does Lucky Orange compare to Sprig?
+### How does Crazy Egg compare to Sprig?
 
 Crazy Egg has a few features Sprig doesn't, including basic analytics and A/B tests, but doesn't support mobile apps. Other than that, they are very similar.
 
-<ComparisonTable column1="Crazy Egg" column2="Sprig">
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={true} column2={false} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1="Basic web analytics" column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={false} column2={true} feature="AI analysis" description="Surface user pain points using AI" />
-  <ComparisonRow column1={false} column2={true} feature="Mobile support" description="Pre-built SDKs and support for iOS, Android, and React Native" />
-  <ComparisonRow column1={false} column2={true} feature="Cookieless tracking option" description="Use session replays and analytics without cookie consent banners" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['crazy_egg', 'sprig']}
+    rows={[
+        'surveys',
+        'session_replay',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'product_analytics',
+        'experiments',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'feature_flags',
+        'product_analytics.features.ai_analysis',
+        'surveys.platforms.features.mobile',
+        'platform.security.cookieless_tracking',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Crazy Egg?
 
@@ -318,19 +330,16 @@ According to G2 reviews, people use Crazy Egg because:
 2. **They want to improve content and conversions:** Crazy Egg's heatmaps and session replay features enable people to gather valuable insights for optimizing their content, increasing conversions, and understanding how users navigate their websites.
 
 3. **Gathering feedback** Users like that they can combine data with the qualitative feedback from users and customer CTAs.
-   
+
 > #### Bottom line
-> 
+>
 > If you're looking for an option to optimize your marketing or e-commerce site, Crazy Egg is a solid choice. If you're looking for product analytics, funnels, or mobile app support, it's best to look elsewhere.
-
-<br />
-
 
 ## 6. Lucky Orange
 
-- **Founded:** 2010
-- **Similar to:** Crazy Egg, Hotjar
-- **Typical users:** Marketers and consultants
+-   **Founded:** 2010
+-   **Similar to:** Crazy Egg, Hotjar
+-   **Typical users:** Marketers and consultants
 
 ![Lucky Orange](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clarity-alternatives/luckyorange.png)
 
@@ -342,34 +351,38 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Lucky-Orange), a
 
 #### Key features
 
-- 📺 **Session replay:** Watch how real users navigate your website and figure out what is stopping them from converting.
+-   📺 **Session replay:** Watch how real users navigate your website and figure out what is stopping them from converting.
 
-- 🔥 **Heatmaps:** See where users click, move, and scroll to find out what areas drive conversion.
+-   🔥 **Heatmaps:** See where users click, move, and scroll to find out what areas drive conversion.
 
-- 📋 **Surveys:** Get real feedback from your customers about your website, product, and ideas. 
+-   📋 **Surveys:** Get real feedback from your customers about your website, product, and ideas.
 
-- 📊 **Conversion funnels:** Figure out where you are losing customers in your funnels.
+-   📊 **Conversion funnels:** Figure out where you are losing customers in your funnels.
 
-- 👤 **Visitor profiles:** See all of the data you have about a specific user and group users into segments. 
+-   👤 **Visitor profiles:** See all of the data you have about a specific user and group users into segments.
 
 ### How does Lucky Orange compare to Sprig?
 
 Lucky Orange does many of the same things that Sprig does, but it's designed specifically for optimizing conversion on e-commerce websites. It offers enough analytics features to make it useful for small businesses, but isn't comprehensive enough for more complicated SaaS apps.
 
-<ComparisonTable column1="Lucky Orange" column2="Sprig">
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={true} column2={false} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1="Basic web analytics only" column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={false} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={false} column2={true} feature="AI analysis" description="Surface user pain points using AI" />
-  <ComparisonRow column1={false} column2={true} feature="Mobile support" description="Pre-built SDKs and support for iOS, Android, and React Native" />
-  <ComparisonRow column1={false} column2={true} feature="Cookieless tracking option" description="Use session replays and analytics without cookie consent banners" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['lucky_orange', 'sprig']}
+    rows={[
+        'surveys',
+        'session_replay',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'product_analytics',
+        'experiments',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'feature_flags',
+        'product_analytics.features.ai_analysis',
+        'surveys.platforms.features.mobile',
+        'platform.security.cookieless_tracking',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Lucky Orange?
 
@@ -382,16 +395,14 @@ According to G2 reviews, customers use Lucky Orange because:
 3. **It doesn't impact page speed:** Users report Lucky Orange has negligible impact on website performance, which they value highly.
 
 > #### Bottom line
-> 
+>
 > Lucky Orange is ideal for small businesses owners who want actionable insights without much effort, though its streamlined interface may be too limiting for larger teams who want more powerful tools.
-
-<br />
 
 ## 7. Survicate
 
-- **Founded:** 2015
-- **Similar to:** Pendo
-- **Typical users:** Product managers and customer success teams
+-   **Founded:** 2015
+-   **Similar to:** Pendo
+-   **Typical users:** Product managers and customer success teams
 
 ![Survicate](https://res.cloudinary.com/dmukukwp6/image/upload/v1718191236/posthog.com/contents/survicate.png)
 
@@ -403,31 +414,34 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Lucky-Orange), a
 
 #### Key features
 
-- 📋 **Surveys:** Get real feedback from your customers about your website, product, and ideas. 
+-   📋 **Surveys:** Get real feedback from your customers about your website, product, and ideas.
 
-- 📱 **Multi-platform support:** Share surveys in websites, mobile apps, emails, links, and more.
+-   📱 **Multi-platform support:** Share surveys in websites, mobile apps, emails, links, and more.
 
-- 🔌 **Integrations:** Connects with analytics tools and other tools you already using for your workflow, like Slack, Teams, and Hubspot.
-
+-   🔌 **Integrations:** Connects with analytics tools and other tools you already using for your workflow, like Slack, Teams, and Hubspot.
 
 ### How does Survicate compare to Sprig?
 
 While Survicate offers comprehensive survey support, it lacks many of the features Sprig offers, like session replays and heatmaps.
 
-<ComparisonTable column1="Survicate" column2="Sprig">
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={false} column2={false} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={false} column2={true} feature="AI analysis" description="Surface user pain points using AI" />
-  <ComparisonRow column1={true} column2={true} feature="Mobile support" description="Pre-built SDKs and support for iOS, Android, and React Native" />
-  <ComparisonRow column1={false} column2={true} feature="Cookieless tracking option" description="Use session replays and analytics without cookie consent banners" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['survicate', 'sprig']}
+    rows={[
+        'surveys',
+        'session_replay',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'product_analytics',
+        'experiments',
+        'product_analytics.funnels',
+        'product_analytics.user_paths',
+        'feature_flags',
+        'product_analytics.features.ai_analysis',
+        'surveys.platforms.features.mobile',
+        'platform.security.cookieless_tracking',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### Why do companies use Survicate?
 
@@ -440,10 +454,8 @@ According to G2 reviews, customers use Survicate because:
 3. **Integration Capabilities:** Survicate seamlessly integrates with a wide range of popular tools and platforms, such as Slack, HubSpot, and Google Analytics. These integrations make it easy to incorporate survey data into existing workflows.
 
 > #### Bottom line
-> 
+>
 > If you're only looking to collect feedback with surveys, Survicate is an great choice for a fair price. If you need gather more insights beyond surveys, it's best to look elsewhere.
-
-<br />
 
 ## Is PostHog right for you?
 
@@ -451,8 +463,8 @@ Here's the (short) sales pitch.
 
 We're biased, obviously, but we think PostHog is the perfect Sprig replacement if:
 
-- You value transparency. We're open source and open core.
-- You want more than just surveys and heatmaps. We have a full suite of product analytics, A/B testing, and feature flags.
-- You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
+-   You value transparency. We're open source and open core.
+-   You want more than just surveys and heatmaps. We have a full suite of product analytics, A/B testing, and feature flags.
+-   You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
 
 Check out [our product pages](/feature-flags) and [read our docs](/docs) to learn more.

@@ -1,73 +1,99 @@
-import CommunityLayout from 'components/Community/Layout'
-import { topicIcons } from 'components/Questions/TopicsTable'
-import React, { useEffect, useMemo, useState } from 'react'
-import Markdown from 'components/Squeak/components/Markdown'
-import { CallToAction } from 'components/CallToAction'
-import groupBy from 'lodash.groupby'
-import get from 'lodash.get'
-import slugify from 'slugify'
-import { Listbox } from '@headlessui/react'
-import { Chevron } from 'components/Icons'
-import { Heading } from 'components/Heading'
-import { ZoomImage } from 'components/ZoomImage'
-import { companyMenu } from '../navs'
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
 import { navigate } from 'gatsby'
-import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
-import { Video } from 'cloudinary-react'
-import RoadmapForm from 'components/RoadmapForm'
 import { useUser } from 'hooks/useUser'
-import Tooltip from 'components/Tooltip'
-import { IconShieldLock } from '@posthog/icons'
-import { useRoadmaps } from 'hooks/useRoadmaps'
+import { IconDownload, IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
+import SEO from 'components/seo'
+import Editor from 'components/Editor'
+import OSButton from 'components/OSButton'
+import { useApp } from '../context/App'
+import RoadmapWindow from 'components/Roadmap/RoadmapWindow'
+import Tooltip from 'components/RadixUI/Tooltip'
+import Timeline from 'components/Timeline'
+import { useVirtualizer } from '@tanstack/react-virtual'
 import CloudinaryImage from 'components/CloudinaryImage'
-import uniqBy from 'lodash/uniqBy'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import { AnimatePresence, motion, PanInfo } from 'framer-motion'
+import Markdown from 'components/Squeak/components/Markdown'
+import Link from 'components/Link'
+import Filters from 'components/Changelog/Filters'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import type { IGatsbyImageData } from 'gatsby-plugin-image'
+import { useWindow } from '../context/Window'
+import { ZoomImage } from 'components/ZoomImage'
+import { CallToAction } from 'components/CallToAction'
+import { Heading } from 'components/Heading'
+import slugify from 'slugify'
+import { Video } from 'cloudinary-react'
+import { useLocation } from '@reach/router'
 
-const Select = ({ onChange, values, ...other }) => {
-    const defaultValue = values[0]
-    return (
-        <div className="relative">
-            <Listbox onChange={onChange} defaultValue={defaultValue}>
-                {({ open }) => (
-                    <>
-                        <Listbox.Button
-                            className={`group py-1 px-2 hover:bg-accent dark:hover:bg-accent-dark rounded-sm text-left border hover:border-light dark:hover:border-dark flex justify-between items-center font-semibold text-sm text-primary/75 hover:text-primary/100 dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
-                                open
-                                    ? 'scale-[1.02] bg-accent dark:bg-accent-dark border-light dark:border-dark text-primary/100 dark:text-primary-dark/100'
-                                    : 'border-transparent'
-                            }`}
-                        >
-                            {({ value }) => (
-                                <>
-                                    <span>{other.value || value.label}</span>
-                                    <Chevron className="w-2.5 ml-2 opacity-30 group-hover:opacity-50" />
-                                </>
-                            )}
-                        </Listbox.Button>
-                        <Listbox.Options className="absolute right-0 min-w-full shadow-xl bg-white dark:bg-accent-dark border border-light dark:border-dark list-none m-0 p-0.5 rounded-md mt-1 z-20 grid">
-                            {values.map((value) => (
-                                <Listbox.Option key={value.label} value={value} as={React.Fragment}>
-                                    {({ selected }) => {
-                                        return (
-                                            <li
-                                                className={`!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap ${
-                                                    (other.value ? value.label === other.value : selected)
-                                                        ? 'font-bold'
-                                                        : ''
-                                                }`}
-                                            >
-                                                {value.label}
-                                            </li>
-                                        )
-                                    }}
-                                </Listbox.Option>
-                            ))}
-                        </Listbox.Options>
-                    </>
-                )}
-            </Listbox>
-        </div>
-    )
+dayjs.extend(utc)
+
+type RoadmapNode = {
+    id: number | string
+    date: string
+    title: string
+    description?: string
+    cta?: {
+        label?: string
+        url?: string
+    }
+    media?: {
+        gatsbyImageData?: IGatsbyImageData
+    }
+    profiles?: {
+        data?: Array<{
+            id?: number | string
+            attributes?: {
+                firstName?: string
+                lastName?: string
+                avatar?: {
+                    data?: {
+                        attributes?: {
+                            url?: string
+                        }
+                    }
+                }
+                color?: string
+                teams?: {
+                    data?: Array<{
+                        attributes?: {
+                            name?: string
+                            miniCrest?: {
+                                data?: {
+                                    attributes?: {
+                                        url?: string
+                                    }
+                                }
+                            }
+                        }
+                    }>
+                }
+            }
+        }>
+    }
+    teams?: {
+        data?: Array<{
+            attributes?: {
+                name?: string
+                miniCrest?: {
+                    data?: {
+                        attributes?: {
+                            url?: string
+                        }
+                    }
+                }
+            }
+        }>
+    }
+    topic?: {
+        data?: {
+            attributes?: {
+                label?: string
+            }
+        }
+    }
 }
 
 export const Change = ({ title, teamName, media, description, cta }) => {
@@ -110,251 +136,783 @@ export const Change = ({ title, teamName, media, description, cta }) => {
     )
 }
 
-export const Skeleton = () => {
+const Roadmap = ({
+    roadmap,
+    onClose,
+    initialActiveRoadmap,
+}: {
+    roadmap: RoadmapNode
+    onClose: () => void
+    initialActiveRoadmap: RoadmapNode | null
+}) => {
+    const { appWindow } = useWindow()
+    const { isModerator } = useUser()
+    const { addWindow } = useApp()
+    const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
+    const [width, setWidth] = useState(450)
+    const [isResizing, setIsResizing] = useState(false)
+
+    const handleDragResize = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+        setIsResizing(true)
+        setWidth((prev) => Math.max(300, Math.min(800, prev - info.delta.x)))
+    }
+
+    const handleEditRoadmap = () => {
+        addWindow(
+            <RoadmapWindow
+                location={{ pathname: `edit-roadmap-${roadmap.id}` }}
+                key={`edit-roadmap`}
+                newWindow
+                id={roadmap.id}
+                status="complete"
+            />
+        )
+    }
+
+    const handleClose = () => {
+        onClose()
+    }
+
+    const containerWidth = (appWindow?.size?.width || 0) <= width ? '100%' : width
+
     return (
-        <div className="space-y-2">
-            <div className="animate-pulse bg-accent dark:bg-accent-dark h-8 w-full rounded-md" />
-            <div className="animate-pulse bg-accent dark:bg-accent-dark h-44 w-full rounded-md" />
-        </div>
+        <motion.div
+            className="h-full border-l border-primary bg-white dark:bg-dark flex-shrink-0 relative overflow-hidden shadow-2xl"
+            initial={{ width: 0 }}
+            animate={{ width: containerWidth }}
+            exit={{ width: 0 }}
+            transition={{ duration: isResizing || !!initialActiveRoadmap ? 0 : 0.3, ease: 'easeInOut' }}
+        >
+            <motion.div
+                className="h-full flex flex-col"
+                style={{ width: containerWidth }}
+                initial={{ x: width }}
+                animate={{ x: 0 }}
+                exit={{ x: width }}
+                transition={{ duration: isResizing || !!initialActiveRoadmap ? 0 : 0.3, ease: 'easeInOut' }}
+            >
+                <div className="flex justify-between space-x-2 p-4 border-b border-primary">
+                    <div className="flex-1">
+                        <h4 className="m-0 text-lg leading-tight">{roadmap.title}</h4>
+                        <p className="m-0 opacity-50 text-sm mt-1">{dayjs.utc(roadmap.date).format('MMMM D, YYYY')}</p>
+                    </div>
+                    <aside className="">
+                        {isModerator && (
+                            <Tooltip
+                                trigger={<OSButton size="md" icon={<IconPencil />} onClick={handleEditRoadmap} />}
+                                delay={0}
+                            >
+                                <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" /> Edit
+                                roadmap item
+                            </Tooltip>
+                        )}
+                        <OSButton size="md" icon={<IconX />} onClick={handleClose} />
+                    </aside>
+                </div>
+                <div className="flex-1 min-h-0">
+                    <ScrollArea className="h-full min-h-0 [&>div]:min-h-0">
+                        {roadmap.media?.gatsbyImageData && (
+                            <div className="mt-4 px-4 not-prose">
+                                <ZoomImage>
+                                    <GatsbyImage
+                                        image={roadmap.media.gatsbyImageData}
+                                        alt={roadmap.title}
+                                        className="rounded"
+                                    />
+                                </ZoomImage>
+                            </div>
+                        )}
+                        {hasProfiles && (
+                            <div
+                                data-scheme="secondary"
+                                className="py-2 mx-4 px-4 border border-primary rounded-md bg-primary mt-2"
+                            >
+                                {roadmap.profiles?.data?.map((profile) => {
+                                    const avatar = profile.attributes?.avatar?.data?.attributes?.url
+                                    const name = [profile.attributes?.firstName, profile.attributes?.lastName]
+                                        .filter(Boolean)
+                                        .join(' ')
+                                    const team = profile.attributes?.teams?.data?.[0]
+                                    return (
+                                        <Link
+                                            to={`/community/profiles/${profile.id}`}
+                                            state={{ newWindow: true }}
+                                            key={profile.id}
+                                            className="group flex gap-2 items-center justify-between !no-underline"
+                                        >
+                                            <div className="flex gap-2 items-center">
+                                                {avatar && (
+                                                    <div
+                                                        className={`size-10 rounded-full overflow-hidden bg-${profile.attributes?.color}`}
+                                                    >
+                                                        <CloudinaryImage
+                                                            className={`w-full`}
+                                                            src={avatar as `https://res.cloudinary.com/${string}`}
+                                                            alt={profile.attributes?.firstName}
+                                                        />
+                                                    </div>
+                                                )}
+                                                <div>
+                                                    <h5 className="m-0 leading-tight group-hover:!underline">{name}</h5>
+                                                    <p className="!m-0 text-sm leading-tight">
+                                                        {team?.attributes?.name}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                {team?.attributes?.miniCrest?.data?.attributes?.url && (
+                                                    <CloudinaryImage
+                                                        className="w-10"
+                                                        src={
+                                                            team.attributes.miniCrest.data.attributes
+                                                                .url as `https://res.cloudinary.com/${string}`
+                                                        }
+                                                        alt={team.attributes.name}
+                                                    />
+                                                )}
+                                            </div>
+                                        </Link>
+                                    )
+                                })}
+                            </div>
+                        )}
+                        {roadmap.description && (
+                            <div className="py-2 px-4">
+                                <Markdown>{roadmap.description}</Markdown>
+                            </div>
+                        )}
+                    </ScrollArea>
+                </div>
+
+                {roadmap.cta?.url && (
+                    <div className="mt-auto py-2 px-4 border-t border-primary">
+                        <OSButton
+                            asLink
+                            to={roadmap.cta.url}
+                            variant="secondary"
+                            width="full"
+                            state={{ newWindow: true }}
+                        >
+                            {roadmap.cta.label}
+                        </OSButton>
+                    </div>
+                )}
+
+                {/* Resize handle */}
+                <motion.div
+                    className="group absolute left-0 top-0 w-1.5 bottom-0 cursor-ew-resize !transform-none z-10"
+                    drag="x"
+                    dragMomentum={false}
+                    dragConstraints={{ left: 0, right: 0 }}
+                    onDrag={handleDragResize}
+                    onDragEnd={() => setIsResizing(false)}
+                >
+                    <div className="relative w-full h-full">
+                        <div className="hidden group-hover:block absolute inset-y-0 left-0 w-[2px] bg-primary opacity-50" />
+                    </div>
+                </motion.div>
+            </motion.div>
+        </motion.div>
     )
 }
 
-export default function Changelog({ pageContext }) {
-    const { user } = useUser()
-    const [filters, setFilters] = useState({})
-    const [adding, setAdding] = useState(false)
-    const [roadmaps, setRoadmaps] = useState([])
-    const {
-        roadmaps: initialRoadmaps,
-        isLoading,
-        mutate,
-        hasMore,
-        fetchMore,
-    } = useRoadmaps({
-        limit: 100,
-        params: {
-            sort: 'dateCompleted:desc',
-            filters: {
-                $and: [
-                    {
-                        dateCompleted: {
-                            $gte: `${pageContext.year}-01-01`,
-                        },
-                    },
-                    {
-                        dateCompleted: {
-                            $lt: `${pageContext.year + 1}-01-01`,
-                        },
-                    },
-                    {
-                        complete: {
-                            $eq: true,
-                        },
-                    },
-                ],
-            },
-        },
-    })
+interface RoadmapCardsProps {
+    roadmaps: RoadmapNode[]
+    setPercentageOfScrollInView: (percentage: number) => void
+    windowPercentageFromLeft: number
+    setRoadmapsPercentageFromLeft: (percentage: number) => void
+    onRoadmapClick: (roadmap: RoadmapNode) => void
+    containerWidth: number
+    startYear: number
+    endYear: number
+    activeRoadmap: RoadmapNode | null
+    hideEmpty: boolean
+    initialActiveRoadmap: RoadmapNode | null
+}
 
-    const filterOptions = useMemo(() => {
-        return {
-            topics: uniqBy(initialRoadmaps, 'attributes.topic.data.attributes.label')
-                .map((roadmap) => ({
-                    field: 'attributes.topic.data.attributes.label',
-                    value: roadmap.attributes.topic.data?.attributes.label,
-                    label: roadmap.attributes.topic.data?.attributes.label,
-                }))
-                .filter((topic) => topic.value),
-            types: uniqBy(initialRoadmaps, 'attributes.category')
-                .map((roadmap) => ({
-                    field: 'attributes.category',
-                    value: roadmap.attributes.category,
-                    label: roadmap.attributes.category,
-                }))
-                .filter((category) => category.value),
-        }
-    }, [initialRoadmaps])
+const RoadmapCards = ({
+    startYear,
+    endYear,
+    roadmaps,
+    setPercentageOfScrollInView,
+    windowPercentageFromLeft,
+    setRoadmapsPercentageFromLeft,
+    onRoadmapClick,
+    containerWidth,
+    activeRoadmap,
+    hideEmpty,
+    initialActiveRoadmap,
+}: RoadmapCardsProps) => {
+    const width = 350
 
-    useEffect(() => {
-        if (hasMore) {
-            fetchMore()
-        }
-    }, [hasMore])
+    const containerRef = useRef<HTMLDivElement>(null)
 
-    const handleChange = (key, { value }, field) => {
-        const newFilters = { ...filters }
-        if (value === null) {
-            delete newFilters[key]
-        } else {
-            newFilters[key] = { value, field }
-        }
-        setFilters(newFilters)
+    const getWeekOfMonth = (date: string) => {
+        return Math.min(4, Math.ceil(dayjs.utc(date).date() / 7))
     }
 
-    useEffect(() => {
-        const filterKeys = Object.keys(filters)
-        const newRoadmaps =
-            filterKeys.length <= 0
-                ? initialRoadmaps
-                : initialRoadmaps.filter((roadmap) =>
-                      filterKeys.every((filter) => {
-                          const { value, field } = filters[filter]
-                          return get(roadmap, field) === value
-                      })
-                  )
-        setRoadmaps(newRoadmaps)
-    }, [filters])
+    const toRomanNumeral = (num: number): string => {
+        const romanNumerals: Record<number, string> = { 1: 'I', 2: 'II', 3: 'III', 4: 'IV' }
+        return romanNumerals[num] || num.toString()
+    }
 
-    useEffect(() => {
-        setRoadmaps(initialRoadmaps)
-    }, [initialRoadmaps])
+    const weeks = useMemo(() => {
+        const monthWeeks: Array<{ roadmaps: RoadmapNode[]; year: number; month: number; week: number }> = []
+        const now = dayjs.utc()
+        const currentYear = now.year()
+        const currentMonthIndex = now.month() // 0-based
+        for (let y = startYear; y <= endYear && y <= currentYear; y++) {
+            const lastMonthIndexForYear = y === currentYear ? currentMonthIndex : 11
+            for (let m = 0; m <= lastMonthIndexForYear; m++) {
+                const items = roadmaps.filter((r) => {
+                    const d = dayjs.utc(r.date)
+                    return d.year() === y && d.month() === m
+                })
+                const buckets: Record<number, RoadmapNode[]> = {}
+                items.forEach((item) => {
+                    const week = getWeekOfMonth(item.date)
+                    if (!buckets[week]) buckets[week] = []
+                    buckets[week].push(item)
+                })
+                // Create week entries with metadata
+                if (y === currentYear && m === currentMonthIndex) {
+                    const latestNonEmptyWeek = [4, 3, 2, 1].find((w) => (buckets[w] || []).length > 0)
+                    if (latestNonEmptyWeek) {
+                        monthWeeks.push({
+                            roadmaps: buckets[latestNonEmptyWeek] || [],
+                            year: y,
+                            month: m,
+                            week: latestNonEmptyWeek,
+                        })
+                    }
+                } else {
+                    for (let w = 1; w <= 4; w++) {
+                        monthWeeks.push({
+                            roadmaps: buckets[w] || [],
+                            year: y,
+                            month: m, // 0-based
+                            week: w,
+                        })
+                    }
+                }
+            }
+        }
+        return hideEmpty ? monthWeeks.filter((week) => week.roadmaps.length > 0) : monthWeeks
+    }, [roadmaps, startYear, endYear])
 
-    const changesByMonth = groupBy(roadmaps, (roadmap) => dayjs(roadmap.attributes.dateCompleted).format('MMM'))
+    const virtualizer = useVirtualizer({
+        horizontal: true,
+        count: weeks.length,
+        getScrollElement: () => {
+            // Get the ScrollArea viewport element
+            const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+            return viewport
+        },
+        estimateSize: () => width,
 
-    const tableOfContents = Object.keys(
-        groupBy(roadmaps, (roadmap) => dayjs(roadmap.attributes.dateCompleted).format('MMMM'))
-    ).map((month) => {
-        return { url: month, value: month, depth: 0 }
+        overscan: 5,
+        gap: 15,
     })
 
-    const isModerator = user?.role?.type === 'moderator'
+    const handleRoadmapClick = (roadmap: RoadmapNode) => {
+        navigate(`?id=${roadmap.id}`)
+        onRoadmapClick(roadmap)
+    }
+
+    const scrollToIndex = (index: number) => {
+        virtualizer.scrollToIndex(index, { align: 'center' })
+    }
+
+    useLayoutEffect(() => {
+        virtualizer.measure()
+    }, [width])
+
+    useEffect(() => {
+        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        if (!viewport) return
+
+        const percentageOfScrollInView = (containerWidth / viewport.scrollWidth) * 100
+        setPercentageOfScrollInView(percentageOfScrollInView)
+        virtualizer.measure()
+    }, [containerWidth])
+
+    useEffect(() => {
+        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        if (!viewport) return
+        viewport.scrollTo({
+            left: (windowPercentageFromLeft / 100) * viewport.scrollWidth,
+        })
+    }, [windowPercentageFromLeft])
+
+    useEffect(() => {
+        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        if (!viewport) return
+
+        const handleScroll = () => {
+            setRoadmapsPercentageFromLeft(((viewport.scrollLeft || 0) / (viewport.scrollWidth || 0)) * 100)
+        }
+
+        viewport.addEventListener('scroll', handleScroll)
+        return () => {
+            viewport.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
+
+    // Scroll to latest week with roadmaps on mount
+    useEffect(() => {
+        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        if (!viewport) return
+
+        // Find the last week that has roadmap items
+        const lastNonEmptyWeekIndex = weeks.reduce((lastIndex, week, index) => {
+            return week.roadmaps.length > 0 ? index : lastIndex
+        }, -1)
+
+        if (lastNonEmptyWeekIndex === -1) return
+
+        // Wait for content to be rendered and measured
+        const scrollToLastWeek = () => {
+            const virtualItems = virtualizer.getVirtualItems()
+            if (virtualItems.length === 0) return
+
+            // Calculate scroll position for the last week with content
+            // We want to show the last few weeks, not scroll all the way to the absolute end
+            const targetIndex = Math.max(0, lastNonEmptyWeekIndex)
+            const scrollLeft = targetIndex * (width + 15) // width + gap
+
+            viewport.scrollTo({
+                left: scrollLeft,
+            })
+        }
+
+        const handleInitialScroll = () => {
+            if (initialActiveRoadmap) {
+                const index = weeks.findIndex((week) => week.roadmaps.some((r) => r.id === initialActiveRoadmap.id))
+                if (index >= 0) {
+                    scrollToIndex(index)
+                    return
+                }
+            }
+            scrollToLastWeek()
+        }
+
+        // Delay to ensure virtualizer has measured content
+        const timer = setTimeout(handleInitialScroll, 100)
+        return () => clearTimeout(timer)
+    }, [weeks, width])
+
+    // Map vertical scroll to horizontal scroll
+    useEffect(() => {
+        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        if (!viewport) return
+
+        const handleWheel = (e: WheelEvent) => {
+            const targetViewport =
+                e.target instanceof Element
+                    ? (e.target.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null)
+                    : null
+            const targetViewportChild = targetViewport?.querySelector('div') as HTMLElement | null
+
+            if (
+                targetViewport &&
+                targetViewportChild &&
+                targetViewport !== viewport &&
+                targetViewportChild.getBoundingClientRect().height > targetViewport.getBoundingClientRect().height
+            )
+                return
+
+            // Only handle vertical scrolling (deltaY)
+            if (e.deltaY !== 0) {
+                e.preventDefault()
+                viewport.scrollLeft += e.deltaY
+            }
+        }
+
+        viewport.addEventListener('wheel', handleWheel, { passive: false })
+        return () => {
+            viewport.removeEventListener('wheel', handleWheel)
+        }
+    }, [])
 
     return (
-        <CommunityLayout
-            parent={companyMenu}
-            activeInternalMenu={companyMenu.children.find((child) => child.name.toLowerCase() === 'changelog')}
-            title="Changelog"
-            tableOfContents={tableOfContents}
-        >
-            <section className="mb-4 flex justify-between md:items-center md:flex-row flex-col md:space-y-0 space-y-4">
-                <div>
-                    <div className="flex gap-4 items-center">
-                        <div>
-                            <h1 className="m-0 text-3xl sm:text-4xl">Changelog</h1>
-                        </div>
-                        <div>
-                            {isModerator && !adding && (
-                                <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
-                                    <Tooltip content="Only moderators can see this" placement="top">
-                                        <IconShieldLock className="w-6 h-6 inline-block mr-1" />
-                                    </Tooltip>
-                                    Add entry
-                                </CallToAction>
-                            )}
-                        </div>
-                    </div>
+        <ScrollArea className="size-full [&>div>div]:size-full [&>div>div]:!flex">
+            <div className="h-full px-4">
+                <div
+                    ref={containerRef}
+                    style={{
+                        width: `${virtualizer.getTotalSize()}px`,
+                    }}
+                    className="h-full relative"
+                >
+                    {virtualizer.getVirtualItems().map((virtualColumn) => {
+                        const weekData = weeks[virtualColumn.index]
+                        const monthName = dayjs.utc().year(weekData.year).month(weekData.month).format('MMMM')
+                        const weekRoman = toRomanNumeral(weekData.week)
+                        const count = weekData.roadmaps.length
 
-                    <p className="m-0 mt-2">
-                        <em>"All the updates that are fit to print"</em>
-                    </p>
-                </div>
-                <div className="flex space-x-1 items-center relative z-[50]">
-                    <Select
-                        value={pageContext.year}
-                        onChange={({ value }) => navigate(value)}
-                        values={[
-                            { label: 2025, value: '/changelog/2025' },
-                            { label: 2024, value: '/changelog/2024' },
-                            { label: 2023, value: '/changelog/2023' },
-                            { label: 2022, value: '/changelog/2022' },
-                            { label: 2021, value: '/changelog/2021' },
-                            { label: 2020, value: '/changelog/2020' },
-                        ]}
-                    />
-                    {Object.keys(filterOptions).map((filter) => {
-                        const { field } = filterOptions[filter][0] ?? {}
-                        if (!field) return null
                         return (
-                            <Select
-                                key={filter}
-                                onChange={(value) => handleChange(filter, value, field)}
-                                values={[{ label: `All ${filter}`, value: null }, ...filterOptions[filter]]}
-                            />
+                            <div
+                                key={virtualColumn.index}
+                                className="flex justify-center"
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    height: '100%',
+                                    width: `${virtualColumn.size}px`,
+                                    transform: `translateX(${virtualColumn.start}px)`,
+                                }}
+                            >
+                                <div className="w-full h-full flex flex-col bg-white dark:bg-dark rounded border border-primary overflow-hidden">
+                                    <div className="flex items-center justify-between p-4 border-b border-primary">
+                                        <h4 className="m-0 text-lg font-semibold">
+                                            {monthName} {weekData.year} - Week {weekRoman}
+                                        </h4>
+                                        <div className="size-7 flex items-center justify-center bg-accent rounded-full text-sm font-semibold">
+                                            {count}
+                                        </div>
+                                    </div>
+                                    <div className="w-full flex-1 min-h-0">
+                                        <ScrollArea className="h-full">
+                                            <ul className="p-0 m-0 list-none">
+                                                {weekData.roadmaps.map((roadmap) => {
+                                                    const active = activeRoadmap?.id === roadmap.id
+                                                    return (
+                                                        <li
+                                                            key={roadmap.id}
+                                                            className="p-0 m-0 border-b border-primary"
+                                                        >
+                                                            <button
+                                                                data-scheme="secondary"
+                                                                className={`group w-full text-left py-2 px-4 flex justify-between gap-1 ${
+                                                                    active ? 'bg-primary' : 'hover:bg-primary'
+                                                                }`}
+                                                                onClick={() => handleRoadmapClick(roadmap)}
+                                                            >
+                                                                <div>
+                                                                    <h5
+                                                                        className={`m-0  text-[15px] leading-tight mb-1 ${
+                                                                            active ? '' : 'group-hover:underline'
+                                                                        }`}
+                                                                    >
+                                                                        {roadmap.title}
+                                                                    </h5>
+                                                                    <p className="!m-0 text-[13px]">
+                                                                        {roadmap.teams?.data?.[0]?.attributes?.name}{' '}
+                                                                        Team
+                                                                    </p>
+                                                                </div>
+                                                                {roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data
+                                                                    ?.attributes?.url && (
+                                                                    <div className="shrink-0 leading-[0]">
+                                                                        <CloudinaryImage
+                                                                            className="w-10"
+                                                                            width={80}
+                                                                            src={
+                                                                                roadmap.teams.data[0].attributes
+                                                                                    .miniCrest.data.attributes
+                                                                                    .url as `https://res.cloudinary.com/${string}`
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                )}
+                                                            </button>
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        </ScrollArea>
+                                    </div>
+                                </div>
+                            </div>
                         )
                     })}
                 </div>
-            </section>
+            </div>
+        </ScrollArea>
+    )
+}
 
-            {isModerator && (
-                <>
-                    {adding && (
-                        <div className="mb-6 border-border dark:border-dark">
-                            <RoadmapForm
-                                status="complete"
-                                onSubmit={() => {
-                                    setAdding(false)
-                                    mutate()
-                                }}
+export default function Changelog({
+    data,
+}: {
+    data: {
+        allRoadmap: {
+            nodes: RoadmapNode[]
+        }
+    }
+}): JSX.Element {
+    const timelineContainerRef = useRef<HTMLDivElement>(null)
+    const resizeObserverRef = useRef<HTMLDivElement>(null)
+    const { href } = useLocation()
+    const [initialActiveRoadmap, setInitialActiveRoadmap] = useState(() => {
+        if (!href) return null
+        const urlObj = new URL(href)
+        const id = urlObj.searchParams.get('id')
+        if (!id) return null
+        return data.allRoadmap.nodes.find((roadmap: RoadmapNode) => roadmap.id === parseInt(id)) || null
+    })
+    const { addWindow } = useApp()
+    const { isModerator } = useUser()
+    const [windowX, setWindowX] = useState(0)
+    const [percentageOfScrollInView, setPercentageOfScrollInView] = useState(0)
+    const [windowPercentageFromLeft, setWindowPercentageFromLeft] = useState(0)
+    const [roadmapsPercentageFromLeft, setRoadmapsPercentageFromLeft] = useState(0)
+    const [activeRoadmap, setActiveRoadmap] = useState<RoadmapNode | null>(initialActiveRoadmap)
+    const [containerWidth, setContainerWidth] = useState(0)
+    const [teamFilter, setTeamFilter] = useState('all')
+    const [categoryFilter, setCategoryFilter] = useState('all')
+    const hideEmpty = useMemo(() => teamFilter !== 'all' || categoryFilter !== 'all', [teamFilter, categoryFilter])
+
+    const handleAddFeature = () => {
+        addWindow(
+            React.createElement(RoadmapWindow, {
+                location: { pathname: `add-roadmap` },
+                key: `add-roadmap`,
+                newWindow: true,
+                status: 'complete',
+            }) as unknown as never
+        )
+    }
+
+    const handleDrag = (percentageFromLeft: number) => {
+        setWindowPercentageFromLeft(percentageFromLeft)
+    }
+
+    const filteredData = useMemo(() => {
+        let filtered = data.allRoadmap.nodes
+
+        if (teamFilter !== 'all') {
+            filtered = filtered.filter((roadmap: RoadmapNode) =>
+                roadmap.teams?.data?.some((team) => team.attributes?.name === teamFilter)
+            )
+        }
+
+        if (categoryFilter !== 'all') {
+            filtered = filtered.filter(
+                (roadmap: RoadmapNode) => roadmap.topic?.data?.attributes?.label === categoryFilter
+            )
+        }
+
+        return filtered
+    }, [teamFilter, categoryFilter, data.allRoadmap.nodes])
+
+    const roadmapsGrouped = useMemo(() => {
+        const grouped: {
+            [year: number]: {
+                [month: number]: {
+                    [week: number]: { count: number }
+                }
+            }
+        } = {}
+
+        filteredData.forEach((roadmap: { date: string }) => {
+            const d = dayjs.utc(roadmap.date)
+            const year = d.year()
+            const month = d.month() + 1 // 1-12
+            const dayOfMonth = d.date() // 1-31
+            // Bucket into 4 week-like groups per month
+            const week = Math.min(4, Math.floor((dayOfMonth - 1) / 7) + 1) // 1-4
+
+            if (!grouped[year]) grouped[year] = {}
+            if (!grouped[year][month]) grouped[year][month] = {}
+            if (!grouped[year][month][week]) grouped[year][month][week] = { count: 0 }
+            grouped[year][month][week].count += 1
+        })
+
+        return grouped
+    }, [filteredData])
+
+    useEffect(() => {
+        if (!resizeObserverRef.current) return
+
+        const resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                setContainerWidth(entry.contentRect.width)
+            }
+        })
+
+        resizeObserver.observe(resizeObserverRef.current)
+
+        // Set initial width
+        setContainerWidth(resizeObserverRef.current.clientWidth)
+
+        return () => {
+            resizeObserver.disconnect()
+        }
+    }, [])
+
+    // Scroll timeline to the end on mount
+    useEffect(() => {
+        if (!timelineContainerRef.current) return
+
+        const timelineViewport = timelineContainerRef.current.closest(
+            '[data-radix-scroll-area-viewport]'
+        ) as HTMLElement | null
+        if (!timelineViewport) return
+
+        const scrollToEnd = () => {
+            timelineViewport.scrollTo({
+                left: timelineViewport.scrollWidth,
+            })
+        }
+
+        // Delay to ensure timeline is rendered
+        const timer = setTimeout(scrollToEnd, 100)
+        return () => clearTimeout(timer)
+    }, [])
+
+    useEffect(() => {
+        if (href) {
+            const urlObj = new URL(href)
+            const team = urlObj.searchParams.get('team')
+            const category = urlObj.searchParams.get('category')
+            if (team) setTeamFilter(team)
+            if (category) setCategoryFilter(category)
+        }
+    }, [href])
+
+    useEffect(() => {
+        if (initialActiveRoadmap) {
+            setInitialActiveRoadmap(null)
+        }
+    }, [])
+
+    const filterNavigate = (key: string, value: string) => {
+        if (href) {
+            const urlObj = new URL(href)
+            urlObj.searchParams.set(key, value)
+            const params = urlObj.searchParams.toString()
+            navigate(`?${params}`)
+        }
+    }
+
+    const handleDownloadCSV = () => {
+        const headers = ['Title', 'Date', 'Team', 'Description']
+        const escapeCSV = (value: unknown) => {
+            const str = value == null ? '' : String(value)
+            return `"${str.replace(/"/g, '""')}"`
+        }
+        const rows: Array<[string, string, string, string]> = filteredData.map((item: RoadmapNode) => [
+            item.title,
+            item.date,
+            item.teams?.data?.[0]?.attributes?.name || '',
+            item.description || '',
+        ])
+        const csv = [
+            headers.join(','),
+            ...rows.map((row: [string, string, string, string]) => row.map(escapeCSV).join(',')),
+        ].join('\n')
+
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = 'roadmap.csv'
+        document.body.appendChild(link)
+        link.click()
+        link.remove()
+        URL.revokeObjectURL(url)
+    }
+
+    const handleRoadmapClose = () => {
+        setActiveRoadmap(null)
+        navigate('')
+    }
+
+    return (
+        <>
+            <SEO title="Changelog - PostHog" />
+            <Editor
+                hideToolbar
+                hasTabs
+                type="changelog"
+                maxWidth="100%"
+                bookmark={{
+                    title: 'Changelog',
+                    description: 'Latest updates and releases',
+                }}
+            >
+                <div data-scheme="secondary" className="bg-primary text-primary relative h-full flex">
+                    <div ref={resizeObserverRef} className="flex flex-col flex-1 min-w-0 h-full">
+                        <div className="min-h-0 flex-shrink-0 flex justify-between items-center px-4 mt-2">
+                            <Filters
+                                onTeamChange={(value) => filterNavigate('team', value)}
+                                teamFilterValue={teamFilter}
+                                onCategoryChange={(value) => filterNavigate('category', value)}
+                                categoryFilterValue={categoryFilter}
+                            />
+                            {isModerator && (
+                                <div className="space-x-1">
+                                    <Tooltip
+                                        trigger={<OSButton size="md" icon={<IconPlus />} onClick={handleAddFeature} />}
+                                        delay={0}
+                                    >
+                                        <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                        Add roadmap item
+                                    </Tooltip>
+                                    <Tooltip
+                                        trigger={
+                                            <OSButton size="md" icon={<IconDownload />} onClick={handleDownloadCSV} />
+                                        }
+                                        delay={0}
+                                    >
+                                        <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                        Download as CSV
+                                    </Tooltip>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className={`min-h-0 flex-grow pt-2 ${hideEmpty ? 'mb-4' : ''}`}>
+                            <RoadmapCards
+                                startYear={2020}
+                                endYear={2025}
+                                roadmaps={filteredData}
+                                setPercentageOfScrollInView={setPercentageOfScrollInView}
+                                windowPercentageFromLeft={windowPercentageFromLeft}
+                                setRoadmapsPercentageFromLeft={setRoadmapsPercentageFromLeft}
+                                onRoadmapClick={setActiveRoadmap}
+                                containerWidth={containerWidth}
+                                activeRoadmap={activeRoadmap}
+                                hideEmpty={hideEmpty}
+                                initialActiveRoadmap={initialActiveRoadmap}
                             />
                         </div>
-                    )}
-                </>
-            )}
-
-            <section className="grid article-content">
-                {isLoading ? (
-                    <Skeleton />
-                ) : (
-                    Object.keys(changesByMonth).map((month, index) => {
-                        const nodes = changesByMonth[month]
-                        return (
-                            <div key={`${month}-${index}`} id={tableOfContents[index].url} className="flex gap-4">
-                                <div className="shrink-0 basis-[50px] relative after:w-[1px] after:absolute after:top-0 after:bottom-0 after:left-[25px] after:bg-border dark:after:bg-border-dark after:content-['']">
-                                    <div className="inline-flex flex-col items-center rounded bg-light dark:bg-dark border border-light dark:border-dark py-1 px-2 relative z-30">
-                                        <h2 className="!text-sm font-bold uppercase !m-0">{month}</h2>
-                                        <div className="text-xs font-semibold">{pageContext.year}</div>
-                                    </div>
-                                </div>
-                                <ul className="list-none m-0 p-0 grid gap-y-8 flex-1 pb-12">
-                                    {nodes.map(
-                                        ({
-                                            id: strapiID,
-                                            attributes: { description, image: media, topic, teams, title, cta },
-                                        }) => {
-                                            const team = teams?.data[0]
-                                            const topicName = topic?.data?.attributes.label
-                                            const teamName = team?.attributes?.name
-                                            const Icon = topicIcons[topicName?.toLowerCase()]
-                                            return (
-                                                <li
-                                                    id={slugify(title, { lower: true })}
-                                                    className="scroll-mt-[108px]"
-                                                    key={strapiID}
-                                                >
-                                                    {topicName && (
-                                                        <p className="font-bold flex mt-3 !-mb-2 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
-                                                            <span className="inline-flex space-x-2 bg-light dark:bg-dark px-2 z-20">
-                                                                {Icon && <Icon className="w-5" />}
-                                                                <span>{topicName}</span>
-                                                            </span>
-                                                        </p>
-                                                    )}
-                                                    <UpdateWrapper
-                                                        status="complete"
-                                                        formClassName="mt-8"
-                                                        editButtonClassName="absolute -top-4 md:top-0 right-0 z-20"
-                                                        roundButton={false}
-                                                        id={strapiID}
-                                                        onSubmit={() => mutate()}
-                                                    >
-                                                        <Change
-                                                            cta={cta}
-                                                            description={description}
-                                                            media={media}
-                                                            teamName={teamName}
-                                                            title={title}
-                                                        />
-                                                    </UpdateWrapper>
-                                                </li>
-                                            )
-                                        }
-                                    )}
-                                </ul>
-                            </div>
-                        )
-                    })
-                )}
-            </section>
-        </CommunityLayout>
+                        <AnimatePresence>
+                            {!hideEmpty && (
+                                <motion.div
+                                    initial={{ height: 0 }}
+                                    animate={{ height: 'auto' }}
+                                    exit={{ height: 0 }}
+                                    className="min-h-0 flex-shrink-0 mt-auto overflow-hidden"
+                                >
+                                    <Timeline
+                                        startYear={2020}
+                                        endYear={2025}
+                                        data={roadmapsGrouped}
+                                        onDrag={handleDrag}
+                                        windowX={windowX}
+                                        setWindowX={setWindowX}
+                                        containerRef={timelineContainerRef}
+                                        percentageOfScrollInView={percentageOfScrollInView}
+                                        roadmapsPercentageFromLeft={roadmapsPercentageFromLeft}
+                                    />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                    <AnimatePresence>
+                        {activeRoadmap && (
+                            <Roadmap
+                                roadmap={activeRoadmap}
+                                onClose={handleRoadmapClose}
+                                initialActiveRoadmap={initialActiveRoadmap}
+                            />
+                        )}
+                    </AnimatePresence>
+                </div>
+            </Editor>
+        </>
     )
 }

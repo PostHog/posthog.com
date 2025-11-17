@@ -6,7 +6,7 @@ sidebar: Handbook
 #### Logging
 As a general rule, we should have logs for every expected and unexpected actions of the application, using the appropriate _log level_.
 
-We should also be logging these exceptions to [Sentry](https://sentry.io/organizations/posthog2/issues/) with the [Sentry Python SDK](https://docs.sentry.io/platforms/python/). Python exceptions should almost always be captured automatically without extra instrumentation, but custom ones (such as failed requests to external services, query errors, or Celery task failures) can be tracked using `capture_exception()`.
+We should also be logging these exceptions to Posthog. Python exceptions should almost always be captured automatically without extra instrumentation, but custom ones (such as failed requests to external services, query errors, or Celery task failures) can be tracked using `capture_exception()`.
 
 ##### Levels
 A _log level_ or _log severity_ is a piece of information telling how important a given log message is:
@@ -45,15 +45,37 @@ Don’t log sensitive information. Make sure you never log:
 * PII (Personal Identifiable Information)
 
 ### Testing
+
 * All new packages and most new significant functionality should come with unit tests
 * Significant features should come with integration and/or end-to-end tests
 * Analytics-related queries should be covered by snapshot tests for ease of reviewing
+* For pytest use the `assert x == y` instead of the `self.assertEqual(x, y)` format of tests
+    * it's recommended in the pytest docs
+    * and you get better output when the test fails
+* prefer assertions like `assert ['x', 'y'] == response.json()["results"]` over `assert len(response.json()["results"]) == 2`
+    * that's because you want test output to give you the information you need to fix a failure
+    * and because you want your assertions to be as concrete as possible it shouldn't be possible to break the code and the test pass
 
-#### Unit tests
-A good unit test should:
+#### Fast developer ("unit") tests
+
+A good test should:
+
 * focus on a single use-case at a time
 * have a minimal set of assertions per test
-* demonstrate every use case. The rule of thumb is: if it can happen, it should be covered
+* explain itself well
+* help you understand the system
+* make good use of parameterized testing to show behavior with a range of inputs
+* help us have confidence that the impossible is unrepresentable
+* help us have confidence that the system will work as expected
 
 #### Integration tests
-Integration tests should ensure that the feature works end-to-end. They must cover all the important use cases of the feature.
+
+* Integration tests should ensure that the feature works in the running system
+* They give greater confidence (because you avoid the mistake of just testing a mock) but they're slower
+* They are generally less brittle in response to changes because they test at a higher level than developer tests (e.g. they test a Django API not a class used inside it)
+
+### To ee or not to ee?
+
+We default to open but when adding a new feature we should consider if it should be MIT licensed or Enterprise edition licensed. Everything in the `ee` folder is covered by [a different license](https://github.com/PostHog/posthog/blob/master/ee/LICENSE). It's easy to move things from `ee` to open, but not the other way.
+
+All the open source code is copied to [the posthog-foss repo](https://github.com/posthog/posthog-foss) with the `ee` code stripped out.  You need to consider whether your code will work if imports to `ee` are unavailable

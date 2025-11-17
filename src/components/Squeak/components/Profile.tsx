@@ -12,7 +12,8 @@ type ProfileProps = {
 export const Profile = ({ className, profile }: ProfileProps) => {
     return profile?.attributes ? (
         <Link
-            className={`flex items-center !text-black dark:!text-white relative ${className}`}
+            state={{ newWindow: true }}
+            className={`flex items-center relative !no-underline hover:!underline ${className}`}
             to={`/community/profiles/${profile.id}`}
         >
             <div className="w-[44px] h-[44px] ml-[-2px] rounded-full mr-[10px] overflow-hidden">

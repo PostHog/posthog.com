@@ -12,7 +12,6 @@ import SectionLinks, { SectionLinksProps } from 'components/SectionLinks'
 import StickySidebar from './StickySidebar'
 import { Blockquote } from 'components/BlockQuote'
 import { MdxCodeBlock } from 'components/CodeBlock'
-import { OverflowXSection } from 'components/OverflowXSection'
 import CommunityQuestions from 'components/CommunityQuestions'
 import { Heading } from 'components/Heading'
 import { push as Menu } from 'react-burger-menu'
@@ -25,7 +24,7 @@ import Navigation from './Navigation'
 import Footer from './Footer'
 
 const Iframe = (props: React.IframeHTMLAttributes<HTMLIFrameElement>) => {
-    if (props.src && props.src.indexOf('youtube.com') !== -1) {
+    if (props.src && new URL(props.src).hostname === 'youtube.com') {
         return (
             <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
                 <iframe {...props} className="absolute top-0 left-0 w-full h-full" />

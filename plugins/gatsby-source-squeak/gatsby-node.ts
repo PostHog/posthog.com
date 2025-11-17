@@ -186,6 +186,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                         image: true,
                     },
                 },
+                tagline: true,
             },
         },
         {
@@ -298,7 +299,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             if (githubUrls?.length > 0 && process.env.GITHUB_API_KEY) {
                 node.githubPages = await Promise.all(
                     githubUrls
-                        .filter((url) => url.includes('github.com'))
+                        .filter((url) => new URL(url).hostname === 'github.com')
                         .map((url) => {
                             const [owner, repo, type, issueNum] = url.split('/').slice(3)
                             const ghURL = `https://api.github.com/repos/${owner}/${repo}/issues/${issueNum}`
@@ -392,6 +393,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             title: String!
             description: String!
             image: StrapiImage
+            tagline: String!
             slug: String!
             dateCompleted: Date @dateformat
             projectedCompletion: Date @dateformat

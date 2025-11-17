@@ -1,23 +1,8 @@
 ---
 title: How Netdata uses PostHog and BigQuery to build modern devtools
 customer: Netdata
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/netdata/netdata_logo.svg
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/netdata/netdata_logo_dark.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/netdata_posthog_1ea718b951.png
-industries:
-  - SaaS
-  - Developer tool
-users:
-  - Product
-  - Engineering
-toolsUsed:
-  - Session replay
-  - Autocapture
-  - PostHog Cloud
-  - Apps
 date: 2022-08-23
 ---
 

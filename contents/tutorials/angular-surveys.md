@@ -65,12 +65,10 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import posthog from 'posthog-js'
 
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_client_api_host>'
-  }
-)
+posthog.init('<ph_project_api_key>', {
+  api_host:'<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>'
+})
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));

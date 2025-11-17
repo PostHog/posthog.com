@@ -1,0 +1,167 @@
+---
+title: Link error tracking
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+Connect your LLM events to error tracking to debug failures and monitor exceptions in your AI workflows. This integration helps you correlate errors with specific LLM traces and understand what went wrong in your AI features.
+
+## Why link to error tracking?
+
+Linking LLM events to error tracking enables you to:
+- **Navigate between products**: Click from an error in Error Tracking to view the full LLM trace that caused it
+- **Debug faster**: See the exact prompts, model responses, and metadata associated with failed LLM operations  
+- **Monitor reliability**: Track error rates for specific LLM models, prompt versions, or user segments
+- **Set up alerts**: Create alerts for when LLM-related errors exceed thresholds
+- **Analyze patterns**: Identify common failure modes in your AI features
+
+## Capturing LLM-related exceptions
+
+When an LLM operation fails or encounters an error, you can link the exception to the LLM trace using the `$ai_trace_id` property:
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+app.post('/api/chat', async (req, res) => {
+  const { message } = req.body
+  const traceId = generateTraceId() // Your trace ID generation logic
+  
+  try {
+    const response = await openai.responses.create({
+      model: 'gpt-5',
+      messages: [{ role: 'user', content: message }],
+      posthogDistinctId: req.userId,
+      posthogTraceId: traceId,  // Sets the trace ID for this LLM call
+      posthogProperties: {
+        endpoint: '/api/chat'
+      }
+    })
+    
+    res.json({ response: response.choices[0].message.content })
+  } catch (error) {
+    // Capture the exception with the same trace ID
+    posthog.captureException(error, {
+      $ai_trace_id: traceId,  // Links exception to the LLM trace
+      endpoint: '/api/chat',
+      user_id: req.userId,
+      llm_model: 'gpt-5',
+      error_type: 'llm_api_error'
+    })
+    
+    res.status(500).json({ error: 'Failed to generate response' })
+  }
+})
+```
+
+```python file=Python
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    data = request.json
+    message = data['message']
+    trace_id = generate_trace_id()  # Your trace ID generation logic
+    
+    try:
+        response = client.responses.create(
+            model="gpt-5",
+            messages=[{"role": "user", "content": message}],
+            posthog_distinct_id=current_user.id,
+            posthog_trace_id=trace_id,  # Sets the trace ID for this LLM call
+            posthog_properties={
+                "endpoint": "/api/chat"
+            }
+        )
+        
+        return jsonify({
+            "response": response.choices[0].message.content
+        })
+    except Exception as e:
+        # Capture the exception with the same trace ID
+        posthog.capture_exception(
+            e,
+            distinct_id=current_user.id,
+            properties={
+                "$ai_trace_id": trace_id,  # Links exception to the LLM trace
+                "endpoint": "/api/chat",
+                "user_id": current_user.id,
+                "llm_model": "gpt-5",
+                "error_type": "llm_api_error"
+            }
+        )
+        
+        return jsonify({"error": "Failed to generate response"}), 500
+```
+
+</MultiLanguage>
+
+## Tracking validation and processing errors
+
+You can also track errors that occur during prompt validation, response processing, or any other part of your LLM pipeline:
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+async function processLLMResponse(response, traceId) {
+  try {
+    // Validate response structure
+    if (!response.choices?.[0]?.message?.content) {
+      throw new Error('Invalid response structure from LLM')
+    }
+    
+    // Process the response
+    const processedContent = await parseAndValidate(response.choices[0].message.content)
+    
+    return processedContent
+  } catch (error) {
+    // Capture processing errors with context
+    posthog.captureException(error, {
+      $ai_trace_id: traceId,
+      stage: 'response_processing',
+      error_details: error.message
+    })
+    
+    throw error
+  }
+}
+```
+
+```python file=Python
+def process_llm_response(response, trace_id):
+    try:
+        # Validate response structure
+        if not response.choices or not response.choices[0].message.content:
+            raise ValueError("Invalid response structure from LLM")
+        
+        # Process the response
+        processed_content = parse_and_validate(response.choices[0].message.content)
+        
+        return processed_content
+    except Exception as e:
+        # Capture processing errors with context
+        posthog.capture_exception(
+            e,
+            distinct_id=current_user.id,
+            properties={
+                "$ai_trace_id": trace_id,
+                "stage": "response_processing",
+                "error_details": str(e)
+            }
+        )
+        
+        raise
+```
+
+</MultiLanguage>
+
+## Viewing linked traces
+
+Once you've set up error linking, you can navigate from errors to their corresponding LLM traces:
+
+1. In the error tracking dashboard, find the error you want to investigate
+2. Click the LLM trace button to jump directly to the full trace
+3. View the complete context including prompts, responses, and metadata that led to the error
+
+This linking helps you quickly understand what went wrong in your AI features by providing the full context around any error.

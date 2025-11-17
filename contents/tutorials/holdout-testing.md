@@ -38,7 +38,7 @@ With the experiment and flag setup, you can implement it in your app. Add the fl
 
 ```js
 'use client'
-import { useFeatureFlagVariantKey } from 'posthog-js/react'
+import { useFeatureFlagVariantKey } from '@posthog/react'
 
 export default function Home() {
 

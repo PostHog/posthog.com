@@ -1,21 +1,8 @@
 ---
 title: How 4DayWeek increased conversion by 4% with one A/B experiment
 customer: 4DayWeek
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/4dayweek/4dayweek-logo.png
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/4dayweek/4dayweek-logo-dark.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/4_day_week_posthog_1d6e6cdf06.png
-industries:
-  - Recruitment
-users:
-  - Marketing
-  - Leadership
-  - Founder
-toolsUsed:
-  - Experimentation
-  - Product analytics
 date: 2023-09-15
 ---
 

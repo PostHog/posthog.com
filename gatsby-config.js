@@ -16,8 +16,25 @@ const getQuestionPages = async (base) => {
             },
         })
 
-        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${questionQuery}`)
-        return response.json()
+        for (let attempt = 1; attempt <= 3; attempt++) {
+            try {
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${questionQuery}`)
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}, Text: ${await response.text()}`)
+                }
+
+                return response.json()
+            } catch (error) {
+                if (attempt === 3) {
+                    console.error(`Failed to fetch questions after 3 attempts: ${error.message}`)
+                    throw error
+                }
+                console.log(`Attempt ${attempt} failed: ${error.message}. Retrying...`)
+                // Simple delay between retries (1 second)
+                await new Promise((resolve) => setTimeout(resolve, 1000))
+            }
+        }
     }
 
     const initialResponse = await fetchQuestions(1)
@@ -33,13 +50,16 @@ const getQuestionPages = async (base) => {
 }
 
 module.exports = {
+    flags: {
+        DEV_SSR: false,
+    },
     siteMetadata: {
         title: 'PostHog',
         titleTemplate: '%s',
         description:
             'The single platform for engineers to analyze, test, observe, and deploy new features. Product analytics, session replay, feature flags, experiments, CDP, and more.',
         url: 'https://posthog.com', // No trailing slash allowed!
-        image: '/banner.png', // Path to your image you placed in the 'static' folder
+        image: '/images/og/default.png', // Path to your image you placed in the 'static' folder
         twitterUsername: '@PostHog',
         siteUrl: 'https://posthog.com', // required by gatsby-plugin-sitemap
     },
@@ -84,7 +104,6 @@ module.exports = {
             },
         },
         'gatsby-plugin-react-helmet',
-        `gatsby-plugin-sass`,
         `gatsby-plugin-smoothscroll`,
         {
             resolve: `gatsby-source-filesystem`,
@@ -100,7 +119,7 @@ module.exports = {
                 shouldBlockNodeFromTransformation: (node) =>
                     node.internal.type === 'File' &&
                     node.url &&
-                    node.url.includes('https://raw.githubusercontent.com/'),
+                    new URL(node.url).hostname === 'raw.githubusercontent.com',
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
@@ -365,8 +384,17 @@ module.exports = {
             },
         },
         {
-            resolve: 'gatsby-plugin-no-sourcemaps',
+            resolve: `gatsby-source-git`,
+            options: {
+                name: `posthog-main-repo`,
+                remote: `https://github.com/posthog/posthog.git`,
+                branch: process.env.GATSBY_POSTHOG_BRANCH || 'master',
+                patterns: `docs/published/**`,
+            },
         },
+        // {
+        //     resolve: 'gatsby-plugin-no-sourcemaps',
+        // },
         ...(!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.GATSBY_ALGOLIA_INDEX_NAME
             ? []
             : [algoliaConfig]),

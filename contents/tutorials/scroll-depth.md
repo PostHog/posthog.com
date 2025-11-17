@@ -131,11 +131,10 @@ import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 
 if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>',
-    {
-      api_host: '<ph_client_api_host>'
-    }
-  )
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+  })
 }
 
 export default function App({ Component, pageProps }) {
@@ -200,12 +199,11 @@ The changed pieces of our code look like this.
 ```js
 // pages/_app.js
 if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>',
-    {
-      api_host: '<ph_client_api_host>',
-      capture_pageleave: false,
-    }
-  )
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    capture_pageleave: false,
+  })
 }
 
 export default function App({ Component, pageProps }) {

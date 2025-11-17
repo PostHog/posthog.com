@@ -17,7 +17,7 @@ export default function TeamImage({
     }
 
     return !!teamImage?.image?.data || editing ? (
-        <figure className="rotate-2 max-w-sm w-full flex flex-col gap-2 mt-8 md:mt-0 ml-auto">
+        <figure className="rotate-2 max-w-md w-full flex flex-col gap-2 mx-auto @2xl/reader-content:mr-0">
             <div className="bg-accent flex justify-center items-center shadow-xl border-8 border-white rounded-md">
                 {editing ? (
                     <div className="w-96">
@@ -37,7 +37,7 @@ export default function TeamImage({
                     onChange={(e) => setFieldValue('teamImageCaption', e.target.value)}
                     value={values.teamImageCaption}
                     placeholder="Caption"
-                    className="p-2 text-[13px] rounded-md bg-white dark:bg-accent-dark border border-border dark:border-dark"
+                    className="p-2 text-[13px] rounded-md bg-white dark:bg-accent-dark border border-input"
                 />
             ) : (
                 <div className="text-right text-[13px] mr-2">{teamImage?.caption}</div>

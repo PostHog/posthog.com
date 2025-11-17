@@ -1,0 +1,197 @@
+---
+title: Revenue analytics dashboard
+sidebar: Docs
+showTitle: true
+---
+
+import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
+
+<RevAnalyticsBetaWarning />
+
+The revenue analytics dashboard provides an overview of your revenue data. 
+
+For the selected time range, it starts with the total revenue made alongside how many paying customers you have and the average revenue for each of them in that period.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_05_35_288e8e0d6c.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_06_29_e4fe61d678.png"
+  alt="Revenue analytics dashboard" 
+  classes="rounded"
+/>
+
+## Filters and breakdowns
+Like other dashboards in PostHog, the revenue analytics dashboard is filterable. This means you can filter for data with certain event or person property values. Some options include:
+- Product name
+- Initial coupon
+- Customer ID
+- Transaction amount. 
+
+You can filter by clicking the **Add filter** button next to the date range at the top of the dashboard.
+
+For more complex queries, you can still use [product analytics insights](/docs/product-analytics/insights) or the [SQL editor](/docs/data-warehouse/query) as usual.
+
+You can also break down your revenue by different properties to see what your revenue looks like for each of your individual products/plans/customers, etc..
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_17_26_03_12faf2da1c.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_17_26_33_17f5406845.png"
+  alt="Revenue analytics country breakdown" 
+  classes="rounded"
+/>
+
+## MRR and ARR
+
+The first metric you can see is your Monthly Recurring Revenue (MRR) for each of the data points. This is how much money you're making from customers with active subscriptions.
+
+This is automatically calculated by PostHog based on the revenue data you send us. For [event sources](/docs/revenue-analytics/capture-revenue-events), the MRR is only included if you configure a revenue event with a **subscription property**.
+
+When breaking down your data per month, we report what that amount was on the last day of the month.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_39_49_535d7ac546.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_39_40_56f31c997d.png"
+  alt="Revenue analytics MRR/ARR" 
+  classes="rounded"
+/>
+
+You can toggle the selector to display the Annual Running Rate (ARR) instead.
+
+### What's MRR?
+
+MRR stands for Monthly Recurring Revenue. It's a metric that measures how much revenue you're making from customers with active subscriptions.
+
+This is automatically calculated by PostHog based on the revenue data you've sent us. For event sources it'll only be included in case you've configured a revenue event with a subscription property.
+
+When looking at your data per month we report what that amount was on the last day of the month.
+
+### What's ARR?
+
+ARR stands for Annual Run Rate, it's your current revenue projected out over 12 months - `MRR * 12`. 
+
+This number does not try and predict what your revenue will be in the future, it assumes you'll keep the exact same customers paying the exact same amount for the next 12 months.
+
+This metric is unlikely to reflect the actual revenue 12 months from now, but it's usually the first number your investors will ask you about.
+
+### MRR Breakdown
+
+Besides seeing a global overview of your MRR, you can also break it down by the different components that make up your MRR:
+
+| Component | Description |
+| --- | --- |
+| **New MRR** | MRR from new customers |
+| **Expansion** | MRR from existing customers who have paid more in the current subscription period than the previous one |
+| **Contraction** | MRR from existing customers who have paid less in the current subscription period than the previous one |
+| **Churn** | MRR from existing customers who cancel their subscription OR whose charge was 0 in the current subscription period |
+
+This is calculated day by day. If you're looking at a timeframe where we display monthly data then we'll display the aggregated data for the whole month.
+
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_42_23_72bb1db21f.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_42_44_4fd7ed9d33.png"
+  alt="Revenue analytics MRR breakdown" 
+  classes="rounded"
+/>
+
+## Gross Revenue
+
+This is all the revenue you made regardless of whether it's a recurring charge or not, including one-time purchases. It will also include negative charges in case you've refunded a customer.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_51_41_fdb96ca7c8.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_51_37_5252a7fcce.png"
+  alt="Revenue analytics gross revenue" 
+  classes="rounded"
+/>
+
+## Subscriptions and customers
+
+These two charts help you understand how many active subscriptions and customers you have. These will include all the subscriptions and customers you have, regardless of whether they're paying or not.
+
+We'll also include a count of how many customers/subscriptions you're gaining (new customers) or losing (churned customers) on each period.
+
+These charts will only have meaningful information in case you've configured a subscription property in your revenue data source.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_53_49_5056ed583f.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_54_04_4b12b7d42a.png"
+  alt="Revenue analytics subscriptions and customers" 
+  classes="rounded"
+/>
+
+This is automatically calculated by PostHog based on the revenue data you've sent us. For event sources it'll only be included in case you've configured a revenue event with a subscription property.
+
+We'll use the number of churned customers to calculate your churn rate `# churned_customers / # total customers`. This will then be used to calculate your [LTV](#ltv).
+
+## ARPU
+
+Average Revenue Per User (APRU) is a measure of how much revenue you're making from each user on average during that period. It's not restricted to subscriptions only and includes all revenue you're making.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_55_02_1340b5405d.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_54_48_3b2b2a2201.png"
+  alt="Revenue analytics ARPU" 
+  classes="rounded"
+/>
+
+## LTV
+
+Lifetime Value (LTV) is a measure of how much you should expect to make in revenue from all your customers through their entire lifetime as a customer. This is calculated as ARPU / churn rate.
+
+If you don't have any churn rate we'll not display any datapoints. If you have a churn rate but don't have any revenue then we'll display 0.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_57_36_54837f40d4.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_57_49_1d5c3d4880.png"
+  alt="Revenue analytics LTV" 
+  classes="rounded"
+/>
+
+
+## Top customers
+
+The last chart identifies your top customers and how much revenue they're generating for you.
+This will use [deferred revenue](/docs/revenue-analytics/deferred-revenue) to calculate the revenue for each customer which means that if someone's paid a lump sum for a multi-month subscription you'll see it properly split in months if you've set the charge period accordingly in your data source.
+
+For data warehouse sources we'll use the data source identifier. We'll only be able to display the name if you've connected your source to `persons` or `groups` table in the [revenue analytics settings](/docs/revenue-analytics/connect-to-customers).
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_15_03_45_eb050d6def.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_15_03_30_da49c9c499.png"
+  alt="Revenue analytics top customers" 
+  classes="rounded"
+/>
+
+## Revenue goals
+
+You can configure revenue goals to track your revenue targets in the [revenue analytics settings](https://app.posthog.com/data-management/revenue).
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_15_19_16_13644fd357.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_15_19_10_83adfecf20.png"
+  alt="Revenue analytics goals" 
+  classes="rounded"
+/>
+
+These goals will then be displayed in the [revenue analytics dashboard](https://app.posthog.com/revenue_analytics) on the [MRR/ARR](#mrr-and-arr) or [gross revenue](#gross-revenue) charts ⁠–⁠ you get to decide where they show up.
+
+We'll only display goals that are within the selected time range **OR** if they're past but you haven't achieved them yet.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_15_54_18_bdd63c5b82.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_15_54_36_b64037ce20.png"
+  alt="Revenue analytics goals in the dashboard" 
+  classes="rounded"
+/>
+
+## Using revenue data in product analytics
+
+You can use your revenue data for deeper product analytics insights beyond the revenue analytics dashboard, too. This allows you to:
+
+- Create custom revenue funnels
+- Analyze user journeys that lead to purchases
+- Segment users by revenue contribution
+
+When working with revenue data in product analytics, you may want to use the [`convertCurrency` function](/docs/revenue-analytics/common-questions#can-i-query-converted-rates) for accurate reporting across different currencies.
+
+We also expose streamlined views of your revenue data. You can find them under the `views` tab in our [SQL Editor](https://app.posthog.com/sql).

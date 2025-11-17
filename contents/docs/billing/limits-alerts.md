@@ -17,3 +17,5 @@ You’ll need to do this for each of the products. You can also remove limits by
 ## Billing alerts
 
 When you set billing limits, the owner of the organization will automatically get alert emails when product usage nears the billing limits. These emails are sent at **80%** and **100%** of the limit. These emails are also sent when you reach **80%** and **100%** of the free allotment.
+
+Spike detection complements other billing and usage monitoring features, such as [spike detection](/docs/billing/spike-detection) and [usage dashboards](/templates/posthog-billable-usage).

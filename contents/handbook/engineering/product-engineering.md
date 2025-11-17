@@ -71,7 +71,7 @@ Products at PostHog generically go through three phases, and considering your ph
 * This is where we're scaling the number of free and paid users.
 
 * Features at this stage either fall into:
-  * (i) gaps with competitive products that we've not prioritized so far, probably based on feature requests from users, in which case the risk of them not being useful for users is prettty low or...
+  * (i) gaps with competitive products that we've not prioritized so far, probably based on feature requests from users, in which case the risk of them not being useful for users is pretty low or...
   * (ii) totally innovative things like new UX driven by our take on AI, or a new way to access data (like Hog or SQL), or an integrated experience that no one else can offer because they don't have all the tools in one. In these cases, it is _more important_ to consider how your products are being used as you are more likely to build something that isn't useful (but at this stage, it's fine and encouraged to innovate)
 
 There are plenty of other techniques, that you can do in parallel to get a signal on a new idea:
@@ -80,7 +80,7 @@ There are plenty of other techniques, that you can do in parallel to get a signa
 
 * **Ask internally for help.** There are lots of people that can help you. The CS team talk to users all the time, the support team have a strong sense of pain points, other product engineers have all talked to users, James and Tim have a broader view of how PostHog is doing, the marketing team can help you get usage or validate demand.
 
-* **Interviews.** Our Product Managers regularly run interviews, ask to be included and give a heads up what you're trying to learn about, or just message users directly! You can even embed your calendar in our surveys product to book your own user interviews. You will need lots of existing potentially relevant customers for this to make sense, since response rates are typically low.
+* **Interviews.** Our Product Managers regularly run interviews, ask to be included and give a heads up what you're trying to learn about, or just message users directly! You can even embed your calendar in our surveys app to book your own user interviews. You will need lots of existing potentially relevant customers for this to make sense, since response rates are typically low.
 
 * **Listen to the internet.** We have a #brand-mentions channel in Slack that monitors for social mentions by customers, or get us to post a question here if you need.
 

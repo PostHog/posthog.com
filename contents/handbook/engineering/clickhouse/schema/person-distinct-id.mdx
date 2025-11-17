@@ -18,7 +18,7 @@ The semantics of this have changed significantly with [person-on-events](/blog/p
 
 ## Schema
 
-```sql
+```sql runInPostHog=false
 CREATE TABLE person_distinct_id
 (
     distinct_id VARCHAR,
@@ -36,7 +36,7 @@ The `is_deleted` column is not actually being written to, it is dynamically calc
 
 This table was queried often joined with `events` table along the following lines:
 
-```sql
+```sql runInPostHog=false
 SELECT avg(count())
 FROM events
 INNER JOIN (
@@ -101,7 +101,7 @@ The problem was two-fold:
 
 To fix both problems, a new table was created:
 
-```sql
+```sql runInPostHog=false
 CREATE TABLE person_distinct_id2
 (
     team_id Int64,
@@ -121,7 +121,7 @@ SETTINGS index_granularity = 512
 
 JOINs with this table look something like this:
 
-```sql
+```sql runInPostHog=false
 SELECT avg(count())
 FROM events
 INNER JOIN (

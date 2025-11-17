@@ -11,7 +11,7 @@ dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
 const Skeleton = () => {
-    return <div className="animate-pulse bg-accent dark:bg-accent-dark h-[160px] w-full rounded-md" />
+    return <div className="animate-pulse bg-accent h-[160px] w-full rounded-md" />
 }
 
 const ThreadHeaderRow = ({ columns }: { columns: string[] }) => {
@@ -21,7 +21,7 @@ const ThreadHeaderRow = ({ columns }: { columns: string[] }) => {
                 return (
                     <div
                         key={index}
-                        className="font-medium text-[13px] pb-1 mb-1 text-left border-b border-border dark:border-dark text-primary/60 dark:text-primary-dark/60 even:pl-2 even:hidden even:text-right @2xs:even:block"
+                        className="font-medium text-[13px] pb-1 mb-1 text-left border-b border-input text-secondary even:pl-2 even:hidden even:text-right @2xs:even:block"
                     >
                         {column}
                     </div>
@@ -31,11 +31,15 @@ const ThreadHeaderRow = ({ columns }: { columns: string[] }) => {
     )
 }
 
-const Thread = ({ title, status, url }: { title: string; status: string; url: string }) => {
+const Thread = ({ title, status, url, state }: { title: string; status: string; url: string; state: any }) => {
     return (
         <>
             <div>
-                <Link to={`/questions/${url}`} className="font-semibold text-sm @2xs:py-1 leading-tight line-clamp-3">
+                <Link
+                    to={`/questions/${url}`}
+                    className="font-medium hover:underline text-sm @2xs:py-1 leading-tight line-clamp-3"
+                    state={state}
+                >
                     {title}
                 </Link>
             </div>
@@ -94,7 +98,7 @@ export default function Questions(): JSX.Element {
                 ) : (
                     <div>
                         <div className="flex gap-4 w-full items-baseline">
-                            <h3 className="flex-1 text-lg mb-2">
+                            <h3 className="flex-1 text-base mb-2">
                                 My discussions
                                 <Tooltip content="Subscribed threads with recent activity" placement="top">
                                     <IconInfo className="w-4 h-4 opacity-75 inline-block ml-1 relative -top-px" />
@@ -103,7 +107,7 @@ export default function Questions(): JSX.Element {
                             <div>
                                 <Link
                                     to="/community/dashboard"
-                                    className="text-[13px] font-bold flex items-center bg-accent dark:bg-accent-dark rounded-lg px-2 py-1"
+                                    className="text-[13px] font-bold flex items-center bg-accent rounded-lg px-2 py-1"
                                 >
                                     View all
                                     <IconArrowRight className="inline-block w-4 h-4 ml-1" />
@@ -125,7 +129,7 @@ export default function Questions(): JSX.Element {
             ) : (
                 <div className="">
                     <div className="flex gap-4 w-full items-baseline">
-                        <h3 className="flex-1 text-lg mb-2">
+                        <h3 className="flex-1 text-base mb-2">
                             Latest questions
                             <Tooltip content="Questions posted to the community forums" placement="top">
                                 <IconInfo className="w-4 h-4 opacity-75 inline-block ml-1 relative -top-px" />
@@ -134,7 +138,8 @@ export default function Questions(): JSX.Element {
                         <div>
                             <Link
                                 to="/questions"
-                                className="text-[13px] font-bold flex items-center bg-accent dark:bg-accent-dark rounded-lg px-2 py-1"
+                                className="text-[13px] font-bold flex items-center bg-accent rounded-lg px-2 py-1"
+                                state={{ newWindow: true }}
                             >
                                 View all
                                 <IconArrowRight className="inline-block w-4 h-4 ml-1" />
@@ -146,7 +151,15 @@ export default function Questions(): JSX.Element {
                         <ThreadHeaderRow columns={['Topic', 'Last reply']} />
                         {newestQuestions?.data?.map(({ attributes: { subject, activeAt, permalink }, id }) => {
                             const status = dayjs(activeAt).fromNow()
-                            return <Thread key={id} title={subject} status={status} url={permalink} />
+                            return (
+                                <Thread
+                                    key={id}
+                                    title={subject}
+                                    status={status}
+                                    url={permalink}
+                                    state={{ newWindow: true }}
+                                />
+                            )
                         })}
                     </div>
                 </div>

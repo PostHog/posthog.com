@@ -25,7 +25,7 @@ MergeTree engine family tables are intended for ingesting large amounts of data,
 
 Consider the following (simplified) table for storing sensor events:
 
-```sql
+```sql runInPostHog=false
 CREATE TABLE sensor_values (
     timestamp DateTime,
     site_id UInt32,
@@ -55,7 +55,7 @@ This assumes you're using a docker-based ClickHouse installation and have `click
 
 ##### Seeding data
 
-```sql
+```sql runInPostHog=false
 INSERT INTO sensor_values
 SELECT *
 FROM generateRandom('timestamp DateTime, site_id UInt8, event VARCHAR, uuid UUID, metric_value Int32', NULL, 10)
@@ -68,7 +68,7 @@ LIMIT 200000000
 
 To find out what type each part is, its size, and where on disk it's located, you can run the following query:
 
-```sql
+```sql runInPostHog=false
 SELECT
     name,
     part_type,
@@ -152,7 +152,7 @@ Merges can be monitored using the [`system.merges` table](https://clickhouse.com
 
 Our `sensor_values` table is set up in a way that queries similar to the following are really fast to execute.
 
-```sql
+```sql runInPostHog=false
 SELECT
     toStartOfDay(timestamp),
     event,
@@ -175,7 +175,7 @@ Why can it be fast? Because ClickHouse:
 
 Let's dig into how the primary index for this query is used by using [`EXPLAIN`](https://clickhouse.com/docs/en/sql-reference/statements/explain/).
 
-```sql
+```sql runInPostHog=false
 EXPLAIN indexes=1, header=1 SELECT
     toStartOfDay(timestamp),
     event,
@@ -274,7 +274,7 @@ See [this documentation](https://kb.altinity.com/engines/mergetree-table-engine-
 
 Consider this query:
 
-```sql
+```sql runInPostHog=false
 SELECT * FROM sensor_values WHERE uuid = '69028f26-768f-afef-1816-521b22d281ca'
 ```
 
@@ -298,7 +298,7 @@ Thus, it's important to make sure the ClickHouse schema is aligned with queries 
 
 Another tool to make queries faster is `PARTITION BY`. Consider the updated table definition:
 
-```sql
+```sql runInPostHog=false
 CREATE TABLE sensor_values (
     timestamp DateTime,
     site_id UInt32,
@@ -323,7 +323,7 @@ can also set up rules to automatically move older parts and partitions to cheape
 
 Let's use an identical query as before to explain with the new dataset:
 
-```sql
+```sql runInPostHog=false
 SELECT
     toStartOfDay(timestamp),
     event,

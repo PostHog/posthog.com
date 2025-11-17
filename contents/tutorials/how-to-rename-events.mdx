@@ -18,7 +18,7 @@ tags:
 
 After you've started capturing events, you might decide that the original name you've given an event doesn't quite suit it. For example, you might have an event called `register_button_clicked` and you want to rename it to `signup_button_clicked`.
 
-However, it's not possible to rename events in PostHog. Instead, you should use [actions](/docs/data/actions) to group the old and new events together. This tutorial shows you how.
+It's not possible to rename events in PostHog. Renaming is very resource intensive because it requires updating every existing event in the database. Instead, we recommend using [actions](/docs/data/actions) to group the old and new events together. This tutorial shows you how.
 
 ## How to create an action
 

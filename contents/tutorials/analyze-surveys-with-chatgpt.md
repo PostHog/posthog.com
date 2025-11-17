@@ -9,7 +9,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-14.png
 tags:
   - surveys
-  - LLM observability
+  - LLM analytics
 ---
 
 Surveys are a great way of collecting feedback from your users, especially if you ask your users like "How can we improve our product?". However, they can be hard to analyze if you receive hundreds or more answers. Fortunately, [OpenAI's ChatGPT](https://openai.com/chatgpt) is great at doing this.

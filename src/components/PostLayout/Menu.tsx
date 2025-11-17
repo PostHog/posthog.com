@@ -7,6 +7,7 @@ import { Link as ScrollLink } from 'react-scroll'
 import { AnimatePresence, motion } from 'framer-motion'
 import * as NotProductIcons from '../NotProductIcons'
 import * as NewIcons from '@posthog/icons'
+import * as OSIcons from '../OSIcons'
 import { usePost } from './hooks'
 
 const Chevron = ({ open, className = '' }: { open: boolean; className?: string }) => {
@@ -33,7 +34,7 @@ const Chevron = ({ open, className = '' }: { open: boolean; className?: string }
 }
 
 const getIcon = (name: string) => {
-    const Icon = NewIcons[name] || NotProductIcons[name]
+    const Icon = NewIcons[name] || NotProductIcons[name] || OSIcons[name]
     return Icon && <Icon className="w-5" />
 }
 
@@ -50,28 +51,26 @@ export const Icon = ({ color, icon }: { color?: string; icon: string | React.Rea
         </span>
     )
 }
-export const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
+export const badgeClasses = `bg-accent text-secondary  text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
 
-export const MenuItem = ({ icon, color, badge, name }) => {
+export const MenuItem = ({ icon, color, badge, name, isActive, isOpen }) => {
     return icon ? (
         <span
-            className={`cursor-pointer w-full flex space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${
+            className={`cursor-pointer w-full flex space-x-2 font-medium text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${
                 color ? 'items-center' : 'items-center'
             }`}
         >
             <Icon icon={icon} color={color} />
-            <span className={`${color ? '' : 'opacity-100'} group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}>
-                {name}
+            <span className={`${badge?.title ? 'mr-1.5' : ''}`}>
+                <span className={isActive || isOpen ? '' : ' menu-item-placeholder-class'}>{name}</span>
             </span>
             {badge?.title && <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>}
         </span>
     ) : (
         <>
             <span>
-                <span
-                    className={`${color ? '' : 'opacity-50'} group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}
-                >
-                    {name}
+                <span className={`${badge?.title ? 'mr-1.5' : ''}`}>
+                    <span className={isActive || isOpen ? '' : 'opacity-50'}>{name}</span>
                 </span>
                 {badge?.title && <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>}
             </span>
@@ -118,9 +117,9 @@ export default function Menu({
     const [open, setOpen] = useState<boolean | undefined>(false)
     const buttonClasses = `group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full justify-between items-center relative text-[15px] pl-3 py-0.5 rounded border border-b-3 border-transparent cursor-pointer ${
         children || topLevel
-            ? 'hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
+            ? 'hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
             : ''
-    } ${children && open ? 'bg-accent dark:bg-accent-dark font-bold !border-light dark:!border-dark' : ''}`
+    } ${children && open ? 'bg-accent font-bold !border-light dark:!border-dark' : ''}`
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
             return (
@@ -178,7 +177,7 @@ export default function Menu({
                             }
                         }}
                         className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${color ? '!py-1' : ''} ${
-                            isActive || isWithChild ? 'active' : ''
+                            isActive ? 'active' : ''
                         }`}
                         to={menuType === 'scroll' ? url.replace(pathname + '#', '') : url}
                         {...menuLinkProps}
@@ -194,7 +193,14 @@ export default function Menu({
                                 />
                             )}
                         </AnimatePresence>
-                        <MenuItem badge={badge} color={color} icon={icon} name={name} />
+                        <MenuItem
+                            badge={badge}
+                            color={color}
+                            icon={icon}
+                            name={name}
+                            isActive={isActive}
+                            isOpen={open}
+                        />
                         {isWithChild && <Chevron open={open ?? false} />}
                     </MenuLink>
                 ) : (

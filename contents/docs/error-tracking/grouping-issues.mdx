@@ -1,0 +1,104 @@
+---
+title: Grouping exceptions into issues
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+Issues are created by grouping together similar exception events. When **no custom grouping behavior is configured**, exceptions are grouped together automatically based on their [fingerprint](/docs/error-tracking/fingerprints). 
+
+> We're working on improving our grouping algorithm. If you spot two issues that you think should have been one, or one issue that you think should have been split into two, please [let us know in-app](https://app.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
+
+PostHog's default grouping logic may not work for every use case, making custom grouping a useful option. For example, you may want to group exceptions into issues by:
+
+- Business logic, like all errors that occur at checkout
+- Specific service, like all error messages containing `postgres`
+- Specific feature, like all error messages containing `feature_flag_variant_a`
+
+## Custom issue grouping
+
+PostHog attempts to group similar exceptions into issues automatically. If you want more control over issue grouping, you can use custom grouping rules during ingestion or define a client-side fingerprint.
+
+### Option 1: Custom grouping rule
+
+You can group exceptions as a single issue based on their properties using custom grouping rules. As with [auto assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment), you have access to properties of the unminified stack trace because the rules run during ingestion. 
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/custom_grouping_light_f3e99a56b5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/custom_grouping_dark_927e7c5774.png"
+  alt="Error tracking custom issue grouping"
+  classes="rounded"
+/>
+
+To create a **custom grouping rule** in the [error tracking settings](https://app.posthog.com/error_tracking/configuration?tab=error-tracking-custom-grouping#selectedSetting=error-tracking-custom-grouping):
+
+1. Click the **Add rule** button to create a new grouping rule.
+2. Select **Any** to match any of the criteria, or **All** to match all of the criteria.
+3. Click the **+ Add filter** button to add a new filter. These filters can be configured to match any [event property](/docs/data/events) in PostHog. 
+4. Click **Save** to create the rule.
+
+Here are some common exception event properties you can filter on:
+
+| Property | Event property | Description |
+| --- | --- | --- |
+| Exception type | `$exception_types` | The type of exception that occurred. |
+| Exception message | `$exception_values` | The message detected on the error. |
+| Exception source | `$exception_sources` | The source file(s) where the exception occurred. |
+| Exception level | `$exception_level` | The level of the severity of the error. |
+| Exception was handled | `$exception_handled` | Whether the exception was handled by the application. |
+
+You can also set custom properties on the error tracking event to filter on. You can find more about custom properties on exception capture in the [capture guide](/docs/error-tracking/capture).
+
+Grouping rules are evaluated in the order they are configured and can be reordered. The first rule that matches will be used to group exceptions into an issue. This means you should configure the most specific rules first, and then the more general rules. If you configure a catch-all rule first, it will always match and block other rules from being evaluated.
+
+### Option 2: Client-side fingerprint
+
+Every captured exception is assigned a [fingerprint](/docs/error-tracking/fingerprints) by PostHog during ingestion, which is used for grouping. You can override this by setting the `$exception_fingerprint` property when capturing exceptions.
+
+```js
+posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
+```
+
+If the exception is autocaptured, you need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) hook that fires for each event which you can use to alter event and add the property:
+
+```javascript
+posthog.init("<ph_project_api_key>", {
+  before_send: (event) => {
+    if (event.event === "$exception") {
+      const exceptionList = event.properties["$exception_list"] || []
+      const exception = exceptionList.length > 0 ? exceptionList[0] : null;
+
+      if (exception && exception["$exception_type"] == "SyntaxError") {
+        event.properties["$exception_fingerprint"] = "MyCustomGroup"
+      }    
+    }
+    return event
+  }
+})
+```
+
+## Issue grouping best practices
+
+Exceptions can only be grouped under a single issue. Every issue is meant to represent a single problem that can be fixed by a single change. You should only group issues when the default grouping algorithm is creating a lot of noise.
+
+Some examples of this could be:
+
+- A common issue like `ClickHouseTimeout` that occurs in many different places, but are mistakenly labeled as different issues.
+- A specific error message that shouldn't account for any differences in stack traces, such as "Failed to send billing status to SQS for customer".
+
+You should avoid using grouping to address problems that can be otherwise solved by [auto assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment) or filtering by [custom properties](/docs/error-tracking/capture#customizing-exception-properties). When you over-group issues, they lack specificity and become meaningless.
+
+## How PostHog prioritizes issue grouping logic
+
+PostHog prioritizes issue grouping logic in the following order:
+
+1. Client-side defined custom fingerprint using `$exception_fingerprint`
+2. Match custom grouping rules defined in PostHog
+3. If no user defined logic, fall back to grouping as issues based on automatic fingerprinting
+
+Read more about how PostHog prioritizes grouping logic in the [issues and exceptions guide](/docs/error-tracking/issues-and-exceptions#how-exceptions-are-grouped-into-issues).
+
+## Merging separate issues
+
+import MergingIssues from './_snippets/merging-issues.mdx'
+
+<MergingIssues />

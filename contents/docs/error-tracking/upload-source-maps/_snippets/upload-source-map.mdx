@@ -1,0 +1,11 @@
+import CLIUpload from '../../_snippets/cli/upload.mdx'
+
+You will then need to upload the modified assets to PostHog.
+
+<CLIUpload path="./path/to/assets" />
+
+#### Serve injected assets
+
+You *must* serve the injected assets in deployed production app. The injected metadata is used during error capture to identify the correct source map to use. We suggest you upload source maps right after your production build in CI.
+
+If you serve a copy of the bundled assets as they were prior to running `posthog-cli sourcemap inject`, we won't be able to use the uploaded sourcemap to unminify or demangle your stack traces.

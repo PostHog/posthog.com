@@ -4,30 +4,28 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 import { ProductVideo } from 'components/ProductVideo'
 import Link from 'components/Link'
 import { PrivateLink } from 'components/PrivateLink'
+import ImageSlider from 'components/ImageSlider'
 import { Hero } from 'components/Hero'
 import { Check, Close } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import { Section } from 'components/Section'
 import { SEO } from 'components/seo'
 import TutorialsSlider from 'components/TutorialsSlider'
+import TutorialsList from 'components/TutorialsList'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { OverflowXSection } from '../components/OverflowXSection'
 import { Tweet } from 'components/Tweet'
+import ReaderView from 'components/ReaderView'
+import { useApp } from '../context/App'
 
-const articleWidth = {
-    lg: 'max-w-screen-2xl',
-    md: 'max-w-5xl',
-    sm: 'max-w-2xl',
-    full: 'w-full px-0',
-}
-
-const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+const A = (props) => <Link {...props} />
 
 export default function Plain({ data }) {
+    const { updateSiteSettings, siteSettings } = useApp()
     const { pageData } = data
     const { body, excerpt } = pageData
     const { title, featuredImage, showTitle, width = 'sm', noindex, images, isInFrame, seo } = pageData?.frontmatter
@@ -44,13 +42,22 @@ export default function Plain({ data }) {
         Close,
         a: A,
         TutorialsSlider,
+        TutorialsList,
+        ImageSlider,
         ...shortcodes,
     }
 
-    const Wrapper = isInFrame ? 'div' : Layout
+    useEffect(() => {
+        if (isInFrame) {
+            updateSiteSettings({
+                ...siteSettings,
+                experience: 'boring',
+            })
+        }
+    }, [])
 
     return (
-        <Wrapper className={isInFrame ? 'flex justify-center items-center h-screen' : undefined}>
+        <ReaderView hideLeftSidebar showQuestions={!isInFrame}>
             <SEO
                 title={seo?.metaTitle || title + ' - PostHog'}
                 description={seo?.metaDescription || excerpt}
@@ -58,13 +65,13 @@ export default function Plain({ data }) {
                 image={featuredImage?.publicURL}
                 noindex={isInFrame || noindex}
             />
-            <article className={`mx-auto my-12 md:my-24 px-4 article-content ${articleWidth[width || 'sm']}`}>
+            <section className="py-12">
                 {showTitle && <h1 className="text-center">{title}</h1>}
                 <MDXProvider components={components}>
                     <MDXRenderer images={images}>{body}</MDXRenderer>
                 </MDXProvider>
-            </article>
-        </Wrapper>
+            </section>
+        </ReaderView>
     )
 }
 

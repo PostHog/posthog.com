@@ -59,6 +59,7 @@ const query = (id: string | number, isModerator: boolean) =>
                 },
                 replies: {
                     sort: ['createdAt:asc'],
+                    publicationState: isModerator ? 'preview' : 'live',
                     populate: {
                         edits: {
                             sort: ['date:desc'],
@@ -152,6 +153,41 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
             const token = await getJwt()
 
+            if (questionData) {
+                const now = new Date().toISOString()
+                const optimisticReply = {
+                    id: Date.now(),
+                    attributes: {
+                        body,
+                        createdAt: now,
+                        updatedAt: now,
+                        publishedAt: now,
+                        profile: {
+                            data: user?.profile
+                                ? {
+                                      id: user.profile.id,
+                                      attributes: user.profile,
+                                  }
+                                : null,
+                        },
+                        upvoteProfiles: { data: [] },
+                        downvoteProfiles: { data: [] },
+                    },
+                }
+
+                const optimisticData = {
+                    ...questionData,
+                    attributes: {
+                        ...questionData.attributes,
+                        replies: {
+                            data: [...(questionData.attributes.replies?.data || []), optimisticReply],
+                        },
+                    },
+                }
+
+                mutate(optimisticData, false)
+            }
+
             const data = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
                 method: 'POST',
                 headers: {
@@ -193,6 +229,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 error: JSON.stringify(error),
             })
 
+            await mutate()
+
             throw error
         }
     }
@@ -219,7 +257,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             })
 
             if (!replyRes.ok) {
-                throw new Error('Failed to update reply data')
+                const errorText = await replyRes.text()
+                throw new Error(`Failed to update reply data: ${replyRes.status} ${errorText}`)
             }
 
             await replyRes.json()

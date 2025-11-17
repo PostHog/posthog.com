@@ -52,8 +52,8 @@ export const FounderNote = () => {
     }
 
     return (
-        <section className="@container px-4 max-w-7xl mx-auto mb-16">
-            <h2 className="text-center text-4xl mb-8">This message brought to you by our co-founder</h2>
+        <section id="note" className="@container max-w-7xl mx-auto mb-16">
+            <h2 className="text-center text-2xl @3xl:text-4xl mb-8">This message brought to you by our co-founder</h2>
             <div className="grid justify-center">
                 <div className="col-span-3">
                     <Tweet alertMessage="yo, just apply already!">
@@ -108,7 +108,7 @@ export const FounderNote = () => {
                         </p>
                     </Tweet>
                     <Tweet alertMessage="yo, just apply already!">
-                        <p>come work with people that are truly great at, and focused on, what they do</p>
+                        <p>come work with people that are truly great at, and focused on, what they do.</p>
                     </Tweet>
                 </div>
             </div>

@@ -78,7 +78,7 @@ datasets across the network. Being aware of which is done is crucial for perform
 
 Consider the following tables:
 
-```sql
+```sql runInPostHog=false
 CREATE TABLE sharded_sensor_values ON CLUSTER 'my_cluster' (
     timestamp DateTime,
     site_id UInt32,
@@ -104,7 +104,7 @@ Writes and queries should be made against table `distributed_sensor_values` in t
 
 <details><summary>See query to populate data</summary>
 
-```sql
+```sql runInPostHog=false
 INSERT INTO distributed_sensor_values
 SELECT *
 FROM generateRandom('timestamp DateTime, site_id UInt8, event VARCHAR, uuid UUID, metric_value Int32', NULL, 10)
@@ -114,7 +114,7 @@ LIMIT 100000000
 
 Consider this simple aggregation query executed against `clickhouse01`:
 
-```sql
+```sql runInPostHog=false
 SELECT hostName(), sum(metric_value) FROM distributed_sensor_values GROUP BY hostName()
 
 -- Results:
@@ -178,7 +178,7 @@ Header: hostname() String
 
 Consider this query:
 
-```sql
+```sql runInPostHog=false
 SELECT
     site_id,
     uniq(event)
@@ -192,7 +192,7 @@ LIMIT 20
 In this case, the query sent to other shards cannot do all the work on its own. Instead, the query being sent to the other shard
 would look something like the following:
 
-```sql
+```sql runInPostHog=false
 SELECT
     site_id,
     uniqState(event)
@@ -274,7 +274,7 @@ This query can be made faster by setting the
 [`distributed_group_by_no_merge`](https://clickhouse.com/docs/en/operations/settings/settings/#distributed-group-by-no-merge)
 setting, like so:
 
-```sql
+```sql runInPostHog=false
 SELECT
     site_id,
     uniq(event)
@@ -362,7 +362,7 @@ It's sometimes useful to query data from across the cluster without setting up D
 
 This can be done as such:
 
-```sql
+```sql runInPostHog=false
 SELECT hostName(), shardNum(), *
 FROM clusterAllReplicas('my_cluster', 'system', 'metrics')
 ```

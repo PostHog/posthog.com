@@ -12,7 +12,7 @@ We’re an international bunch of weirdos, but one thing us weirdos have in comm
 
 We have tried many different tactics over the years, and these are the things we have found _actually_ make a difference. 
 
-- We are all remote. At the time of writing, [we employ people in 17 countries](/people) across 3 continents.
+- We are all remote. At the time of writing, [we employ people in 23 countries](/people) across 3 continents.
 - Asynchronous and transparent [communication](/handbook/company/communication) - so people can get the context they need to work effectively no matter what their schedule.
 - We offer near complete flexibility over working hours. You can do the school run, or schedule that dentist appointment you’ve been avoiding!
 - An [anti-meeting culture](/handbook/getting-started/meetings). Ever had someone schedule a meeting over family time because they couldn’t find a slot in your schedule? That doesn’t happen here. 
@@ -27,7 +27,7 @@ We have tried many different tactics over the years, and these are the things we
 - We pay people for [SuperDays](/handbook/people/hiring-process#4-posthog-superday) because we think this is the right thing to do and it enables those who could not otherwise take a day off work to participate in our recruitment process. 
 - [Unlimited vacation policy](/handbook/people/time-off) with a mandatory minimum time off - so you can fit work around your life.
 - We discourage heavy drinking at company events - you’ll need to join another company if you’re a bro, alas.
-- Political issues can be more important to people than work, and they are frequently divisive and distract from our purpose. We therefore don’t stand for any political cause.
+- Political issues can be more important to people than work, and they are frequently divisive and distract from our purpose. We therefore don’t stand for any political cause and don't tolerate or allow political discussions in Slack, GitHub, or any other PostHog-owned or sponsored tools or events.
 - We don’t care about college degrees. We care about what you’ve achieved.
 - We expect people to act kindly and inclusively towards each other. We take a very [strict stance](/handbook/people/grievances) on people behaving inappropriately towards others.
 

@@ -147,7 +147,7 @@ It's also great for marketing and website teams. For example, we know visitors c
 
 ## 11. Track errors as events
 
-You can track any sort of event in PostHog, including failures or other sorts of errors. All you need to do is put an [action](/docs/data/actions) or [event](/docs/user-guides/events) next to the error, find some other unique identifier you can use - such as views of a /404 page – or use our [Sentry Connector](/apps/sentry-connector) to track errors as events.  
+You can track any sort of event in PostHog, including failures or other sorts of errors. All you need to do is put an [action](/docs/data/actions) or [event](/docs/user-guides/events) next to the error, find some other unique identifier you can use - such as views of a /404 page.
 
 Tracking errors can be enormously useful for deciding where to invest engineering time, or when to prioritize areas of your product. [Phantom](https://posthog.com/customers/phantom), for example, used this to prioritize updates to their infrastructure by tracking failure rates for payments across their platform.
 
@@ -161,7 +161,7 @@ Simply click on the number of users who completed the step, or dropped off, and 
 
 ## 13. Analyze retrospective data
 
-With some analytics platforms, you can only look at data once you've started collecting it – you have to define an action, then wait months to gather data for it. In PostHog, you can look at retroactive data easily as we capture information automatically and enable you to make faster decisions. 
+With some analytics tools, you can only look at data once you've started collecting it – you have to define an action, then wait months to gather data for it. In PostHog, you can look at retroactive data easily as we capture information automatically and enable you to make faster decisions. 
 
 Quoting [MentionMe Software Engineer Lleo Harress](https://posthog.com/customers/mention-me): 
 

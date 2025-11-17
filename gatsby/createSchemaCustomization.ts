@@ -15,6 +15,18 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       slug: String
       contributors: [Contributors]
       appConfig: [AppConfig]
+      commits: [Commit]
+    }
+    type Commit {
+      author: GitHubUser
+      date: Date
+      message: String
+      url: String
+    }
+    type GitHubUser {
+      avatar_url: String
+      html_url: String
+      login: String
     }
     type AshbyJobPostingTableOfContents {
       value: String,
@@ -257,6 +269,184 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type PostHogPipeline implements Node {
       mdx: Mdx @link(by: "frontmatter.templateId", from: "pipelineId")
+      introSnippet: String
+      installationSnippet: String
+      inputs_schema: [PostHogPipelineInputSchema]
+      name: String
+      slug: String
+      type: String
+      category: [String]
+      description: String
+      icon_url: String
+      status: String
+    }
+    type PostHogPipelineInputSchema {
+      key: String
+      type: String
+      label: String
+      secret: Boolean
+      required: Boolean
+      description: String
+    }
+    type SdkReferences implements Node {
+      info: SdkReferencesInfo
+      referenceId: String
+      hogRef: String
+      id: String
+      categories: [String]
+      classes: [SdkReferencesClass]
+      types: [SdkReferencesType]
+      version: String
+    }
+    type SdkReferencesInfo {
+      description: String
+      id: String
+      specUrl: String
+      slugPrefix: String
+      title: String
+      version: String
+    }
+    type SdkReferencesClass {
+      description: String
+      functions: [SdkReferencesFunction]
+      id: String
+      title: String
+    }
+    type SdkReferencesFunction {
+      category: String
+      description: String
+      details: String
+      examples: [SdkReferencesFunctionExample]
+      id: String
+      params: [SdkReferencesFunctionParam]
+      path: String
+      releaseTag: String
+      showDocs: Boolean
+      returnType: SdkReferencesFunctionReturnType
+      title: String
+    }
+    type SdkReferencesFunctionExample {
+      code: String
+      name: String
+      id: String
+    }
+    type SdkReferencesFunctionParam {
+      description: String
+      isOptional: Boolean
+      name: String
+      type: String
+    }
+    type SdkReferencesFunctionReturnType {
+      id: String
+      name: String
+    }
+    type SdkReferencesType {
+      example: String
+      id: String
+      name: String
+      path: String
+      properties: [SdkReferencesTypeProperty]
+    }
+    type SdkReferencesTypeProperty {
+      description: String
+      name: String
+      type: String
+    }
+    type GitHubStats implements Node {
+      owner: String
+      repo: String
+      stars: Int
+      forks: Int
+      commits: Int
+      contributors: Int
+    }
+    type ProductDataProductsAddons {
+      legacy_product: Boolean
+    }
+    type ProductDataProducts {
+      legacy_product: Boolean
+    }
+    type ProductDataProductsAddonsFeatures {
+        category: String
+        limit: String
+        note: String
+        entitlement_only: Boolean
+        is_plan_default: Boolean
+        unit: String
+    }
+    type ProductDataProductsAddonsPlansFeatures {
+        category: String
+        limit: String
+        note: String
+        entitlement_only: Boolean
+        is_plan_default: Boolean
+        unit: String
+    }
+    type ProductDataProductsPlansFeatures {
+        category: String
+        limit: String
+        note: String
+        entitlement_only: Boolean
+        is_plan_default: Boolean
+        unit: String
+    }
+    type SqueakTeam implements Node {
+        tagline: String
+        description: String
+        createdAt: Date
+    }
+    type EventVenue {
+        name: String
+    }
+    type EventLocation {
+        label: String
+        lat: Float
+        lng: Float
+        venue: EventVenue
+    }
+    type EventPartner {
+        name: String
+        url: String
+    }
+    type EventPhotoAttributes {
+        url: String
+    }
+    type EventPhotoData {
+        attributes: EventPhotoAttributes
+    }
+    type EventPhoto {
+        data: [EventPhotoData]
+    }
+    type EventSpeakerAttributes {
+        firstName: String
+        lastName: String
+    }
+    type EventSpeakerData {
+        attributes: EventSpeakerAttributes
+    }
+    type EventSpeaker {
+        data: [EventSpeakerData]
+    }
+    type EventAttributes {
+        name: String
+        description: String
+        date: Date
+        private: Boolean
+        format: [String]
+        audience: [String]
+        speakerTopic: String
+        attendees: Int
+        vibeScore: Float
+        video: String
+        presentation: String
+        link: String
+        location: EventLocation
+        partners: [EventPartner]
+        photos: EventPhoto
+        speakers: EventSpeaker
+    }
+    type Event implements Node {
+        attributes: EventAttributes
     }
   `)
     createTypes([
@@ -290,6 +480,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             type ShopifyMetafield implements Node {
               key: String!
               value: String!
+              namespace: String!
             }
             type ShopifyProductVariant implements Node {
               availableForSale: Boolean!
@@ -301,6 +492,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               shopifyId: String!
               title: String!
               selectedOptions: [ShopifySelectedOption!]!
+              inventoryPolicy: String
             }
             type ShopifyImage {
               width: Int
@@ -328,6 +520,12 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               height: Int
               originalSrc: String
             }
+            type ShopifyProductCategory {
+              id: String!
+              name: String!
+              level: Int!
+              parentId: String
+            }
             type ShopifyProduct implements Node {
               descriptionHtml: String
               description: String!
@@ -346,6 +544,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               totalInventory: Int!
               featuredImage: ShopifyImage @proxy(from: "featuredMedia.preview.image")
               imageProducts: [ShopifyProduct]
+              createdAt: Date
+              category: ShopifyProductCategory
             }
           `
     )

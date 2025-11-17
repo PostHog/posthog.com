@@ -39,7 +39,7 @@ Among the many perks and benefits which are available to teams in Y Combinator a
 
 “A lot of the content you get in Y Combinator is just available to everyone on [YouTube](https://www.youtube.com/@ycombinator). But the community and the connections you make with other founders? You can only get that in the batch. It’s important to make the most of it.”
 
-> **Putting it into practice:** In addition to connecting with other founders it’s worth keeping an eye on Bookface for exclusive offers. [Like this one](/yc-onboarding).
+> **Putting it into practice:** In addition to connecting with other founders it’s worth keeping an eye on Bookface for exclusive offers. [Like this one](https://app.posthog.com/startups/yc).
 
 ### Go where you have the home-turf advantage
 

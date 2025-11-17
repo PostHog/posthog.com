@@ -1,0 +1,16 @@
+```sql
+SELECT 
+    COUNT(*) AS customer_count, 
+    toStartOfMonth(fromUnixTimestamp(toInt(metadata.startup_plan_start_at))) AS month_start,
+    SUM(metadata.startup_plan_label = 'YC') AS yc_customer_count,
+    SUM(metadata.startup_plan_label != 'YC') AS non_yc_customer_count
+FROM 
+    stripe_customer 
+WHERE 
+    metadata.is_current_startup_plan_customer = 'true' 
+    OR metadata.is_previous_startup_plan_customer = 'true'
+GROUP BY 
+    month_start
+ORDER BY 
+    month_start ASC
+```

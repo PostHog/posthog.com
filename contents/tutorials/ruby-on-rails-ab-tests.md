@@ -179,7 +179,7 @@ Notice that when you refresh the page, the button text flickers between `No vari
 
 Server-side rendering is a way to avoid this. This fetches the feature flag before the page loads on the client.
 
-To set this up, we must install and use [PostHog’s Ruby SDK](/libraries/ruby) (because we are making server-side requests). Add `posthog-ruby` to your `Gemfile`:
+To set this up, we must install and use [PostHog’s Ruby SDK](/docs/libraries/ruby) (because we are making server-side requests). Add `posthog-ruby` to your `Gemfile`:
 
 ```Gemfile
 gem "posthog-ruby"

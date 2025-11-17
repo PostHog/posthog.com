@@ -1,23 +1,8 @@
 ---
 title: How Juicebox tracks AI latency using PostHog and LangFuse
 customer: Juicebox
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1715094646/posthog.com/contents/juicebox_work_logo.jpg
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1715094646/posthog.com/contents/juicebox_work_logo.jpg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/juicebox_posthog_170c0f1b6c.png
-industries:
-  - AI
-users:
-  - Engineering
-  - Leadership
-  - Founder
-toolsUsed:
-  - Feature flags
-  - Product analytics
-  - Session replay
-  - LLM observability
 date: 2024-05-24
 ---
 
@@ -27,7 +12,7 @@ date: 2024-05-24
 
 ## Tackling latency with PostHog and LangFuse
 
-Juicebox already utilizes PostHog's [analytics](/product-analytics) and [feature flags](/feature-flags) extensively, but the new [Langfuse integration](/docs/ai-engineering/langfuse-posthog) has been a game changer. It enables them to monitor latency across various stages of their LLM chain and pinpoint performance bottlenecks.
+Juicebox already utilizes PostHog's [analytics](/product-analytics) and [feature flags](/feature-flags) extensively, but the new [Langfuse integration](/docs/llm-analytics/integrations/langfuse-posthog) has been a game changer. It enables them to monitor latency across various stages of their LLM chain and pinpoint performance bottlenecks.
 
 "By using PostHog and LangFuse together, we've consolidated our LLM usage data from multiple platforms into a single PostHog dashboard. This simplifies our workflow and decision-making process for performance optimizations and cost management," Paffenholz adds.
 

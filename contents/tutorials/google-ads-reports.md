@@ -157,7 +157,7 @@ ORDER BY
     cost_per_user ASC
 ```
 
-Another way to do this is to join the `sessions` and `events` table using `session_id` and then . This also enables more flexibility on what events you can count as a conversion.
+Another way to do this is to join PostHog's [`sessions` and `events` table](/docs/data-warehouse/sources/posthog) using `session_id` and then filter for the events you want. This also enables more flexibility on what events you can count as a conversion.
 
 ### Cost per click
 

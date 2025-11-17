@@ -5,8 +5,8 @@ sidebar: Docs
 showTitle: true
 ---
 
-import Disclaimer from './\_snippets/disclaimer.mdx'
-import Sunset from '../self-host/\_snippets/sunset-disclaimer.mdx'
+import Disclaimer from './_snippets/disclaimer.mdx'
+import Sunset from '../self-host/_snippets/sunset-disclaimer.mdx'
 
 PostHog is open-source and freely available for anyone to host themselves. We offer a free Docker Compose deployment under an MIT license. Essentially, self-hosting PostHog means you run or purchase your own infrastructure, manage deployments, choose your own URLs to expose it on, and deal with any scaling issues yourself.
 
@@ -21,10 +21,10 @@ Good question! We've found that PostHog Cloud is far and away the best experienc
 ```mermaid
 flowchart TD
     start["What makes you interested in <br/>self-hosting PostHog?"] --> diehard["I'm a die-hard self-hoster"] & privacy["I have data privacy requirements / desires"] & worried["I'm worried about cost"]
-    diehard --> B["Do you expect to ingest more than 300k events, 1k recordings, 300k /decide API calls into the instance?"]
+    diehard --> B["Do you expect to ingest more than 300k events, 1k recordings, 300k /flags API calls into the instance?"]
     worried --> events["Will you have more than 1M events, 5k recordings etc per month?"]
     events -- No --> cloud_free["`PostHog Cloud is free for 1M events, 
-5k recordings, 250 surveys, 
+5k recordings, 1500 survey responses, 
 and more every single month. 
 See posthog.com/pricing for more.`"]
     cloud_free --> better_cloud["You'll probably be better off with PostHog Cloud"]
