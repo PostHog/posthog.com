@@ -16,7 +16,11 @@ interface ReelProps {
 function Reel({ rotation, teeth = true, spindle = true }: ReelProps): JSX.Element {
     return (
         <div className="relative w-1/5 aspect-square">
-            <div className="absolute inset-0 border-2 border-primary rounded-full bg-accent shadow-inner" />
+            <div
+                className={`absolute inset-0 border-2 border-primary rounded-full shadow-inner ${
+                    spindle ? 'bg-accent' : 'bg-primary'
+                }`}
+            />
 
             {spindle && (
                 <div
@@ -51,6 +55,7 @@ interface CassetteTapeProps {
     labelColor?: string
     teeth?: boolean
     spindle?: boolean
+    minimal?: boolean
 }
 
 export default function CassetteTape({
@@ -60,8 +65,7 @@ export default function CassetteTape({
     labelBackground,
     cassetteColor,
     labelColor,
-    teeth = true,
-    spindle = true,
+    minimal = false,
 }: CassetteTapeProps): JSX.Element {
     const labelBackgroundStyle = labelBackground?.url
         ? {
@@ -79,25 +83,29 @@ export default function CassetteTape({
 
     return (
         <div
-            className="flex-1 border-2 border-primary shadow-inner aspect-[100/63] rounded-[0.5rem] bg-accent"
+            className={`flex-1 border-2 border-primary shadow-inner aspect-[100/63] bg-accent ${
+                minimal ? 'rounded' : ' rounded-[0.5rem]'
+            }`}
             style={{ backgroundColor: cassetteColor }}
         >
             <div
-                className="border-2 border-primary m-[5%] mb-0 p-[3.5%] pb-0 h-[70%] flex flex-col justify-between rounded bg-primary"
+                className="border-2 border-primary m-[5%] mb-0 pb-0 h-[70%] flex flex-col justify-between rounded bg-primary"
                 style={labelStyle}
             >
                 {/* Tape label */}
                 {(title || artist) && (
-                    <div className="bg-accent/90 border-2 border-primary text-center flex flex-col justify-center rounded py-[3%]">
-                        {title && <div className="font-bold text-sm text-primary truncate">{title}</div>}
-                        {artist && <div className="text-xs text-secondary truncate">{artist}</div>}
+                    <div className="p-[3.5%] pb-0">
+                        <div className="bg-accent/90 border-2 border-primary text-center flex flex-col justify-center rounded py-[3%]">
+                            {title && <div className="font-bold text-sm text-primary truncate">{title}</div>}
+                            {artist && <div className="text-xs text-secondary truncate">{artist}</div>}
+                        </div>
                     </div>
                 )}
 
                 {/* Tape reels */}
-                <div className="flex items-center justify-around gap-4 my-auto">
-                    <Reel rotation={rotation} teeth={teeth} spindle={spindle} />
-                    <Reel rotation={-rotation} teeth={teeth} spindle={spindle} />
+                <div className={`flex items-center gap-4 my-auto ${minimal ? 'justify-evenly' : 'justify-around'}`}>
+                    <Reel rotation={rotation} teeth={!minimal} spindle={!minimal} />
+                    <Reel rotation={-rotation} teeth={!minimal} spindle={!minimal} />
                 </div>
             </div>
         </div>

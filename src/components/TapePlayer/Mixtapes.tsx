@@ -91,11 +91,11 @@ export default function Mixtapes(): JSX.Element {
                     <div className="animate-pulse bg-accent border-2 border-primary rounded aspect-[100/63]" />
                 </div>
             ) : mixtapes.length === 0 && !user ? (
-                <div className="flex items-center justify-center w-full h-full text-center">
+                <div className="flex items-center justify-center w-full h-full text-center font-semibold">
                     <p className="text-secondary">No mixtapes yet. Sign in to create one!</p>
                 </div>
             ) : mixtapes.length === 0 ? (
-                <div className="flex items-center justify-center w-full h-full text-center">
+                <div className="flex items-center justify-center w-full h-full text-center font-semibold">
                     <p className="text-secondary">No mixtapes yet.</p>
                 </div>
             ) : (

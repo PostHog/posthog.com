@@ -5,10 +5,11 @@ import TapeButton from './TapeButton'
 import CassetteTape from './CassetteTape'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
-import { IconNotebook, IconPencil, IconPlus } from '@posthog/icons'
+import { IconCheck, IconNotebook, IconPencil, IconPlus } from '@posthog/icons'
 import { CassetteLabelBackground } from '../../data/cassetteBackgrounds'
 import MixtapeEditor from './MixtapeEditor'
 import { useApp } from '../../context/App'
+import { useToast } from '../../context/Toast'
 import Mixtapes from './Mixtapes'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { navigate } from 'gatsby'
@@ -21,18 +22,25 @@ interface TapePlayerProps {
 }
 
 export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
-    const { getJwt, user } = useUser()
+    const { getJwt, user, isModerator } = useUser()
     const { addWindow } = useApp()
+    const { addToast } = useToast()
     const [isPoweredOn, setIsPoweredOn] = useState(true)
     const [isPlaying, setIsPlaying] = useState(false)
+    const [isSpinningFast, setIsSpinningFast] = useState(false)
     const [danceMode, setDanceMode] = useState(false)
     const [currentSongIndex, setCurrentSongIndex] = useState(0)
     const [rotation, setRotation] = useState(0)
+    const [copied, setCopied] = useState(false)
     const [waveformBars, setWaveformBars] = useState<number[]>(() => getRandomWaveformBars())
     const animationRef = useRef<number>()
     const waveformRef = useRef<number>()
     const playerRef = useRef<YTPlayer | null>(null)
     const playerReadyRef = useRef(false)
+    const insertAudioRef = useRef<HTMLAudioElement | null>(null)
+    const clickAudioRef = useRef<HTMLAudioElement | null>(null)
+    const switchAudioRef = useRef<HTMLAudioElement | null>(null)
+    const rewindAudioRef = useRef<HTMLAudioElement | null>(null)
     const [mixtapeSongs, setMixtapeSongs] = useState<Track[]>([])
     const [metadata, setMetadata] = useState<{
         cassetteColor?: string
@@ -110,6 +118,98 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
         }
     }, [mixtapeSongs])
 
+    const playRewindSound = useCallback(() => {
+        if (!rewindAudioRef.current) {
+            return Promise.resolve()
+        }
+
+        return new Promise<void>((resolve) => {
+            const audio = rewindAudioRef.current
+            if (!audio) {
+                resolve()
+                return
+            }
+
+            const cleanup = () => {
+                audio.removeEventListener('timeupdate', handleTimeUpdate)
+                audio.removeEventListener('ended', handleEnded)
+            }
+
+            const handleResolve = () => {
+                cleanup()
+                resolve()
+            }
+
+            const handleTimeUpdate = () => {
+                if (!audio.duration) {
+                    return
+                }
+                if (audio.currentTime / audio.duration >= 0.5) {
+                    handleResolve()
+                }
+            }
+
+            const handleEnded = () => {
+                handleResolve()
+            }
+
+            audio.addEventListener('timeupdate', handleTimeUpdate)
+            audio.addEventListener('ended', handleEnded)
+            audio.currentTime = 0
+            audio.play().catch(() => null)
+        })
+    }, [])
+
+    const playInsertSound = useCallback(() => {
+        if (!insertAudioRef.current) {
+            return
+        }
+        insertAudioRef.current.currentTime = 0
+        insertAudioRef.current.play().catch(() => null)
+    }, [])
+
+    useEffect(() => {
+        if (typeof Audio === 'undefined') {
+            return
+        }
+
+        const sounds: Array<{ ref: React.MutableRefObject<HTMLAudioElement | null>; src: string }> = [
+            { ref: rewindAudioRef, src: '/sounds/rewind.mp3' },
+            { ref: insertAudioRef, src: '/sounds/insert.mp3' },
+            { ref: clickAudioRef, src: '/sounds/click.mp3' },
+            { ref: switchAudioRef, src: '/sounds/switch.mp3' },
+        ]
+
+        sounds.forEach(({ ref, src }) => {
+            ref.current = new Audio(src)
+        })
+
+        return () => {
+            sounds.forEach(({ ref }) => {
+                if (ref.current) {
+                    ref.current.pause()
+                    ref.current = null
+                }
+            })
+        }
+    }, [])
+
+    const playClickSound = useCallback(() => {
+        if (!clickAudioRef.current) {
+            return
+        }
+        clickAudioRef.current.currentTime = 0
+        clickAudioRef.current.play().catch(() => null)
+    }, [])
+
+    const playSwitchSound = useCallback(() => {
+        if (!switchAudioRef.current) {
+            return
+        }
+        switchAudioRef.current.currentTime = 0
+        switchAudioRef.current.play().catch(() => null)
+    }, [])
+
     const initializePlayer = useCallback(() => {
         if (typeof window === 'undefined' || !window.YT || playerRef.current || mixtapeSongs.length <= 0) return
 
@@ -155,11 +255,11 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
         }
     }, [currentSongIndex, mixtapeSongs])
 
-    // Animate the tape reels when playing
+    // Animate the tape reels when playing or fast-spinning
     useEffect(() => {
-        if (isPlaying && isPoweredOn) {
+        if ((isPlaying || isSpinningFast) && isPoweredOn) {
             const animate = () => {
-                setRotation((prev) => (prev + 2) % 360)
+                setRotation((prev) => (prev + (isSpinningFast ? 16 : 2)) % 360)
                 animationRef.current = requestAnimationFrame(animate)
             }
             animationRef.current = requestAnimationFrame(animate)
@@ -173,7 +273,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                 cancelAnimationFrame(animationRef.current)
             }
         }
-    }, [isPlaying, isPoweredOn])
+    }, [isPlaying, isSpinningFast, isPoweredOn])
 
     // Animate the waveform when playing
     useEffect(() => {
@@ -206,42 +306,49 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
 
     const handlePlay = () => {
         if (isPoweredOn && playerRef.current && playerReadyRef.current) {
+            playClickSound()
             playerRef.current.playVideo()
         }
     }
 
     const handlePause = () => {
         if (playerRef.current && playerReadyRef.current) {
+            playClickSound()
             playerRef.current.pauseVideo()
         }
     }
 
-    const handlePrev = () => {
-        if (isPoweredOn) {
-            const wasPlaying = isPlaying
-            setCurrentSongIndex((prev) => (prev === 0 ? mixtapeSongs.length - 1 : prev - 1))
-            if (wasPlaying && playerRef.current && playerReadyRef.current) {
-                setTimeout(() => {
-                    if (playerRef.current) {
-                        playerRef.current.playVideo()
-                    }
-                }, 100)
+    const changeTrack = async (direction: 1 | -1) => {
+        if (!isPoweredOn || !playerRef.current || !playerReadyRef.current || mixtapeSongs.length === 0) {
+            return
+        }
+        setIsSpinningFast(true)
+        const wasPlaying = isPlaying
+        playerRef.current.pauseVideo()
+        try {
+            await playRewindSound()
+        } finally {
+            setIsSpinningFast(false)
+        }
+        setCurrentSongIndex((prev) => {
+            if (direction === -1) {
+                return prev === 0 ? mixtapeSongs.length - 1 : prev - 1
             }
+            return prev === mixtapeSongs.length - 1 ? 0 : prev + 1
+        })
+        if (wasPlaying) {
+            setTimeout(() => {
+                playerRef.current?.playVideo()
+            }, 100)
         }
     }
 
+    const handlePrev = () => {
+        void changeTrack(-1)
+    }
+
     const handleSkip = () => {
-        if (isPoweredOn) {
-            const wasPlaying = isPlaying
-            setCurrentSongIndex((prev) => (prev === mixtapeSongs.length - 1 ? 0 : prev + 1))
-            if (wasPlaying && playerRef.current && playerReadyRef.current) {
-                setTimeout(() => {
-                    if (playerRef.current) {
-                        playerRef.current.playVideo()
-                    }
-                }, 100)
-            }
-        }
+        void changeTrack(1)
     }
 
     const handleEject = () => {
@@ -250,21 +357,39 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
             setCreators([])
             playerRef.current?.stopVideo()
             setMixtapeSongs([])
+            if (mixtapeSongs.length > 0) {
+                playInsertSound()
+            }
         }
     }
 
-    const handleShare = () => {
-        if (isPoweredOn && navigator.share) {
-            const videoId = extractVideoId(mixtapeSongs[currentSongIndex].youtubeUrl)
-            navigator.share({
-                title: mixtapeSongs[currentSongIndex].title,
-                text: `Check out ${mixtapeSongs[currentSongIndex].title} by ${mixtapeSongs[currentSongIndex].artist}`,
-                url: `https://www.youtube.com/watch?v=${videoId}`,
+    const handleShare = async () => {
+        if (!isPoweredOn || typeof window === 'undefined' || typeof navigator === 'undefined') {
+            return
+        }
+        playClickSound()
+        const url = window.location.href
+        try {
+            if (navigator.clipboard?.writeText) {
+                await navigator.clipboard.writeText(url)
+            }
+            setCopied(true)
+            setTimeout(() => {
+                setCopied(false)
+            }, 3000)
+            addToast({
+                description: 'Link copied to clipboard',
+            })
+        } catch (error) {
+            addToast({
+                error: true,
+                description: 'Unable to copy link. Please try again.',
             })
         }
     }
 
     const handleEdit = () => {
+        playClickSound()
         if (mixtapeId) {
             addWindow(
                 (
@@ -283,11 +408,39 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
     }
 
     const handleMixtapeLibraryClick = () => {
+        playClickSound()
         addWindow(<Mixtapes key={`fm/mixtapes`} location={{ pathname: `fm/mixtapes` }} newWindow />)
     }
 
     const handleNewMixtapeClick = () => {
+        playClickSound()
         navigate(`/fm/mixtapes/new`, { state: { newWindow: true } })
+    }
+
+    const handlePowerToggle = () => {
+        playSwitchSound()
+        setIsPoweredOn((prev) => {
+            if (prev) {
+                if (playerRef.current && playerReadyRef.current) {
+                    playerRef.current.pauseVideo()
+                }
+                setIsPlaying(false)
+            }
+            return !prev
+        })
+    }
+
+    const handleDanceModeToggle = () => {
+        playSwitchSound()
+        setDanceMode((prev) => !prev)
+    }
+
+    const handleToggleTrackList = () => {
+        playClickSound()
+        if (!isPoweredOn) {
+            return
+        }
+        setShowTrackList((prev) => !prev)
     }
 
     const currentSong = mixtapeSongs[currentSongIndex]
@@ -303,12 +456,16 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                     }♫ PostHog FM`}
                 />
                 <div className="flex items-start">
-                    <div className="p-4 w-[700px] sticky top-0">
+                    <div className="p-4 w-full sticky top-0">
                         {/* Hidden YouTube player */}
                         <div id="youtube-player" className="hidden" />
 
                         {/* Waveform */}
-                        <div className="mb-4 h-20 flex items-end justify-between gap-[2px] border-2 border-primary bg-white dark:bg-primary p-2 rounded">
+                        <div
+                            className={`mb-4 h-20 flex items-end justify-between gap-[2px] border-2 border-primary dark:bg-primary p-2 rounded transition-colors ${
+                                isPoweredOn ? 'bg-white' : ''
+                            }`}
+                        >
                             {waveformBars.map((height, i) => (
                                 <div
                                     key={i}
@@ -325,20 +482,17 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                         <div className="flex items-stretch gap-3 mb-4">
                             <div className="flex flex-col items-center gap-2">
                                 {/* Power button */}
-                                <Switch
-                                    label="Power"
-                                    isOn={isPoweredOn}
-                                    onToggle={() => {
-                                        setIsPoweredOn(!isPoweredOn)
-                                        if (isPoweredOn) {
-                                            // Pause the music when turning off
-                                            if (playerRef.current && playerReadyRef.current) {
-                                                playerRef.current.pauseVideo()
-                                            }
-                                            setIsPlaying(false)
-                                        }
-                                    }}
-                                />
+                                <Switch label="Power" isOn={isPoweredOn} onToggle={handlePowerToggle} />
+                                {creators?.some((creator) => creator.id === user?.profile?.id) && (
+                                    <div className="w-full aspect-square mt-auto">
+                                        <TapeButton
+                                            label="Edit"
+                                            icon={<IconPencil className="size-5" />}
+                                            onClick={handleEdit}
+                                            disabled={!isPoweredOn}
+                                        />
+                                    </div>
+                                )}
                             </div>
 
                             {/* Flippable Cassette tape */}
@@ -354,10 +508,15 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                         opacity: mixtapeSongs.length > 0 ? 0 : 1,
                                         translateY: mixtapeSongs.length > 0 ? '-100%' : '0%',
                                     }}
-                                    transition={{ duration: 0.5 }}
+                                    transition={{ type: 'tween' }}
+                                    onAnimationStart={() => {
+                                        playInsertSound()
+                                    }}
                                     onAnimationComplete={() => {
                                         if (mixtapeSongs.length <= 0) {
-                                            navigate(`/fm`)
+                                            setTimeout(() => {
+                                                navigate(`/fm`)
+                                            }, 300)
                                         }
                                     }}
                                 >
@@ -470,8 +629,8 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                         </>
                                     }
                                     isOn={danceMode}
-                                    onToggle={() => setDanceMode(!danceMode)}
-                                    disabled={!isPoweredOn}
+                                    onToggle={handleDanceModeToggle}
+                                    disabled={!isPoweredOn || !mixtapeSongs.length}
                                 />
                                 {/* Track list button */}
                                 {mixtapeSongs.length > 0 && (
@@ -479,19 +638,9 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                         <TapeButton
                                             label="Track list"
                                             icon={<IconNotebook className="size-5" />}
-                                            onClick={() => setShowTrackList(!showTrackList)}
+                                            onClick={handleToggleTrackList}
                                             disabled={!isPoweredOn}
                                             isPressed={showTrackList}
-                                        />
-                                    </div>
-                                )}
-                                {creators?.some((creator) => creator.id === user?.profile?.id) && (
-                                    <div className="w-full aspect-square">
-                                        <TapeButton
-                                            label="Edit"
-                                            icon={<IconPencil className="size-5" />}
-                                            onClick={handleEdit}
-                                            disabled={!isPoweredOn}
                                         />
                                     </div>
                                 )}
@@ -499,46 +648,68 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                         </div>
 
                         {/* Control buttons */}
-                        <div className="gap-2 grid grid-cols-6 h-20">
-                            <TapeButton label="Eject" icon="⏏" onClick={handleEject} disabled={!isPoweredOn} />
-                            <TapeButton label="Prev" icon="◁◁" onClick={handlePrev} disabled={!isPoweredOn} />
+                        <div className="gap-2 grid grid-cols-6 h-20 w-full">
+                            <TapeButton
+                                label="Eject"
+                                icon="⏏"
+                                onClick={handleEject}
+                                disabled={!isPoweredOn || !mixtapeSongs.length}
+                            />
+                            <TapeButton
+                                label="Prev"
+                                icon="◁◁"
+                                onClick={handlePrev}
+                                disabled={!isPoweredOn || !mixtapeSongs.length}
+                            />
                             <TapeButton
                                 label="Play"
                                 icon="▷"
                                 onClick={handlePlay}
-                                disabled={!isPoweredOn || isPlaying}
+                                disabled={!isPoweredOn || isPlaying || !mixtapeSongs.length}
                                 isPressed={isPlaying}
                             />
                             <TapeButton
                                 label="Pause"
                                 icon="||"
                                 onClick={handlePause}
-                                disabled={!isPoweredOn || !isPlaying}
+                                disabled={!isPoweredOn || !isPlaying || !mixtapeSongs.length}
                             />
-                            <TapeButton label="Skip" icon="▷▷" onClick={handleSkip} disabled={!isPoweredOn} />
-                            <TapeButton label="Share" icon="↗" onClick={handleShare} disabled={!isPoweredOn} />
+                            <TapeButton
+                                label="Skip"
+                                icon="▷▷"
+                                onClick={handleSkip}
+                                disabled={!isPoweredOn || !mixtapeSongs.length}
+                            />
+                            <TapeButton
+                                label="Share"
+                                icon={copied ? <IconCheck className="size-5" /> : '↗'}
+                                onClick={handleShare}
+                                disabled={!isPoweredOn || !mixtapeSongs.length}
+                            />
                         </div>
                     </div>
                 </div>
-                <div className="p-3 mt-4 border-t border-primary flex items-center space-x-3">
+                <div className="p-3 border-t border-primary flex items-center space-x-3">
                     <div className="w-[90px] h-[80px]">
                         <TapeButton
                             icon={
                                 <div className="w-[70px]">
-                                    <CassetteTape teeth={false} spindle={false} />
+                                    <CassetteTape minimal />
                                 </div>
                             }
                             label="Mixtape library"
                             onClick={handleMixtapeLibraryClick}
                         />
                     </div>
-                    <div className="w-[90px] h-[80px]">
-                        <TapeButton
-                            icon={<IconPlus className="size-5" />}
-                            label="Create mixtape"
-                            onClick={handleNewMixtapeClick}
-                        />
-                    </div>
+                    {isModerator && (
+                        <div className="w-[90px] h-[80px]">
+                            <TapeButton
+                                icon={<IconPlus className="size-5" />}
+                                label="Create mixtape"
+                                onClick={handleNewMixtapeClick}
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
         </ScrollArea>

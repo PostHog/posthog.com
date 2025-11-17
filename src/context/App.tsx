@@ -961,12 +961,12 @@ const appSettings: AppSettings = {
     '/fm': {
         size: {
             min: {
-                width: 720,
-                height: 709,
+                width: 650,
+                height: 660,
             },
             max: {
-                width: 720,
-                height: 709,
+                width: 650,
+                height: 660,
             },
             fixed: true,
         },
