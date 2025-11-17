@@ -273,7 +273,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'AI compliance and grant writing',
         featured: false,
         logo: GrantableLogo,
-        height: 8,
+        height: 6,
         quotes: {
             evan_ralliss: {
                 name: 'Evan Ralliss',
