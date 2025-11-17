@@ -1,12 +1,11 @@
 ### Boolean feature flags
 
 ```java
-
 if (posthog.isFeatureEnabled("distinct_id_of_your_user", "flag-key")) {
     // Do something differently for this user
 
     // Optional: fetch the payload
-    Object matchedFlagPayload = PostHog.getFeatureFlagPayload("distinct_id_of_your_user", "flag-key")
+    Object matchedFlagPayload = posthog.getFeatureFlagPayload("distinct_id_of_your_user", "flag-key");
 }
 ```
 
@@ -17,7 +16,7 @@ if ("variant-key".equals(posthog.getFeatureFlag("distinct_id_of_your_user", "fla
     // Do something differently for this user
 
     // Optional: fetch the payload
-    Object matchedFlagPayload = PostHog.getFeatureFlagPayload("distinct_id_of_your_user", "flag-key")
+    Object matchedFlagPayload = posthog.getFeatureFlagPayload("distinct_id_of_your_user", "flag-key");
 }
 ```
 
