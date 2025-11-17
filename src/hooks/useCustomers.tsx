@@ -17,7 +17,8 @@ import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
-import GetCroissantLogo from '../components/CustomerLogos/GetCroissantLogo'
+import CroissantLogo from '../images/customers/croissant-light.png'
+import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
@@ -58,11 +59,11 @@ export interface Customer {
     users?: string[]
     notes?: React.ReactNode
     logo?:
-        | React.ComponentType<any>
-        | {
-              light: string
-              dark: string
-          }
+    | React.ComponentType<any>
+    | {
+        light: string
+        dark: string
+    }
     height?: number
     quotes?: Record<
         string,
@@ -87,11 +88,11 @@ interface BaseCustomer {
     users?: string[]
     notes?: React.ReactNode
     logo?:
-        | React.ComponentType<any>
-        | {
-              light: string
-              dark: string
-          }
+    | React.ComponentType<any>
+    | {
+        light: string
+        dark: string
+    }
     legacyLogo?: string // Temporary until SVG component created
     legacyLogoDark?: string // Temporary until SVG component created
     height?: number
@@ -267,7 +268,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'llm_analytics',
             'data_warehouse',
         ],
-        industries: ['Business', 'SaaS'],
+        industries: ['SaaS'],
         users: ['Data', 'Product', 'Marketing'],
         notes: 'AI compliance and grant writing',
         featured: false,
@@ -288,14 +289,17 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         },
     },
     croissant: {
-        name: 'Get Croissant',
+        name: 'Croissant',
         toolsUsed: ['workflows', 'product_analytics', 'surveys', 'web_analytics'],
-        industries: ['Business', 'SaaS'],
+        industries: ['SaaS'],
         users: ['Growth', 'Product', 'Marketing'],
-        notes: 'Find coworking and meeting spaces anywhere in the world',
+        notes: 'Workspace finder',
         featured: false,
-        logo: GetCroissantLogo,
-        height: 8,
+        logo: {
+            light: CroissantLogo,
+            dark: CroissantLogoDark,
+        },
+        height: 6,
         quotes: {
             jorge_lopez: {
                 name: 'Jorge López',
