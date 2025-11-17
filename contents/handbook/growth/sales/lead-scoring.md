@@ -22,7 +22,7 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 **New business sales team**
 1. Completed the book a demo form (organic inbound or via paid ads campaign or outbound)
 2. Emailed sales@ 
-3. Onboarding specialist referral
+3. [Onboarding specialist referral](/handbook/onboarding/sales-handover)
 4. Customers who have used 50% or more of their startup credits and had a last invoice greater than $5000
 5. Automated 'cool company' flag in Ocean.io
 6. Using PostHog but not spending money and trigger a signal for: hiring increase in engineers, web/social traffic hike, and/or recently fundraised
