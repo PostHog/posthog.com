@@ -124,7 +124,7 @@ Some things to consider before your call:
 3. Q&A on product
 4. Next steps and ideal catch-up cadence.
 
-#### Addition questions to consider for your call
+#### Additional questions to consider for your call
 
 Here are some recommended questions you could use. Please do not simply interrogate a customer with each of these questions; this is more of a question bank to use for inspiration!
 
@@ -145,7 +145,7 @@ Here are some recommended questions you could use. Please do not simply interrog
 - Do you feel you are set up for success with your current PostHog setup?
 - Which teams are currently active in using PostHog at your company?
 - Are there opportunities for other teams to adopt PostHog?
-- Would you mind making introductions to champions on other teams to learn about their use case.
+- Would you mind making introductions to champions on other teams to learn about their use case?
 - [Review and discuss their current implementation](/handbook/cs-and-onboarding/foundation-check) and if they have any concerns.
 - Would training or workshop sessions be useful for you and your team?
 - How do you feel about PostHog overall?
