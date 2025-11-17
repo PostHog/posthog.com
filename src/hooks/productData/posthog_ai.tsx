@@ -29,11 +29,11 @@ export const posthog_ai = {
     slug: 'ai',
     status: 'beta',
     slider: {
-        marks: [2500, 10000, 50000, 100000],
-        min: 2500,
+        marks: [2000, 10000, 50000, 100000],
+        min: 2000,
         max: 100000,
     },
-    volume: 2500,
+    volume: 2000,
     seo: {
         title: 'PostHog AI – Your copilot for PostHog data and insights',
         description:
