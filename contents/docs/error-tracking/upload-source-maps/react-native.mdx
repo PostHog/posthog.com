@@ -1,0 +1,69 @@
+---
+title: Upload source maps with CLI
+showStepsToc: true
+---
+
+import CLIDownload from "../_snippets/cli/download.mdx"
+import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
+import CLIInject from "../_snippets/cli/inject.mdx"
+import CLIUpload from "../_snippets/cli/upload.mdx"
+import StepVerifySourceMapUpload from './_snippets/step-verify-source-map-upload.mdx'
+
+
+<Steps>
+
+<Step title="Download CLI" badge="required">
+
+  <CLIDownload/>
+
+</Step>
+
+<Step title="Authenticate" badge="required">
+
+  <CLIAuthenticate />
+
+</Step>
+
+<Step title="Inject" badge="required">
+
+  > Automatic source map injection works only in React Native apps using Expo 50 or later, as it relies on Expo’s built-in [debug ID](https://docs.expo.dev/versions/latest/config/metro/#source-map-debug-id) injection.
+
+  1. Create or update the [metro.config.js](https://docs.expo.dev/versions/latest/config/metro/) file in your app’s root directory so that it looks like this:
+
+  ```javascript
+  const { getPostHogExpoConfig } = require('posthog-react-native/metro')
+
+  const config = getPostHogExpoConfig(__dirname)
+  module.exports = config
+  ```
+
+  2. Update the `/android/app/build.gradle` file from your app's root directory so that it looks like this:
+
+  ```groovy
+  // This must be placed directly above the following `android` block.
+  apply from: "../../node_modules/posthog-react-native/tooling/posthog.gradle"
+
+  android {
+    ...
+  }
+  ```
+
+  3. Update the `/ios/$yourProjectName.xcodeproj/project.pbxproj` file (replace `$yourProjectName` with your project’s actual name). You need to locate the `Bundle React Native code and images` build step.
+
+  To do this through Xcode, open your project in Xcode, go to the project settings, navigate to Build Phases, select Bundle React Native code and images, and apply the changes shown below.
+
+  ```shell
+  ...
+
+  // This must be placed at the end of this shell script.
+  WITH_ENVIRONMENT="../node_modules/react-native/scripts/xcode/with-environment.sh"
+  POSTHOG_XCODE="../node_modules/posthog-react-native/tooling/posthog-xcode.sh"
+
+  /bin/sh -c "$WITH_ENVIRONMENT \"$POSTHOG_XCODE\""
+  ```
+
+</Step>
+
+<StepVerifySourceMapUpload />
+
+</Steps>
