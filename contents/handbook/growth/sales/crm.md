@@ -136,7 +136,7 @@ This will [automatically create a ticket](https://zapier.com/editor/274433115/pu
 
 If you determine a lead is not a fit for hands on sales engagement, you can mark the task as **Below Sales Assist Threshold - Auto Emails**.
 
-When you do this, it triggers an automated onboarding flow in <PrivateLink url="[https://fly.customer.io/workspaces/127208/journeys/campaigns/109/overview/workflow/actions?actionId=2189](https://fly.customer.io/workspaces/127208/journeys/campaigns/109/overview)">customer.io</PrivateLink>. These emails help guide them through a self-serve onboarding path without requiring manual outreach.
+When you do this, it triggers an automated onboarding flow in <PrivateLink url="https://fly.customer.io/workspaces/127208/journeys/campaigns/109/overview">customer.io</PrivateLink>. These emails help guide them through a self-serve onboarding path without requiring manual outreach.
 
 ### Spam
 
