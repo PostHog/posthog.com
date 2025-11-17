@@ -34,6 +34,8 @@ export const posthog_ai = {
         max: 100000,
     },
     volume: 2000,
+    customPricingContent: <div data-scheme="secondary" className="prose prose-sm text-lg mt-8 mb-12 leading-normal"><h3 className="text-xl font-bold text-primary mb-4">How credits work</h3><p>AI credits are based on the underlying token costs, which reflect the effort required to complete your request.</p><ul><li><strong>Simple queries</strong> like "What were my daily active users in October?" use very few tokens, and therefore very few credits.</li><li><strong>More complex tasks</strong> like analyzing hundreds of session recordings or rewriting a SQL query multiple times use more tokens and consume more credits.
+        While exact usage varies, credit consumption usually scales with complexity – more advanced tasks cost more but can deliver deeper insights and time savings. You’ll always see real-time cost information while using AI features.</li></ul><p>PostHog automatically selects the most efficient model for each AI feature. We apply a simple, consistent 20% markup over the underlying LLM provider’s cost: So 1 PostHog AI credit equals $0.8333 of raw inference, and 1,000 credits cost $10.</p></div>,
     seo: {
         title: 'PostHog AI – Your copilot for PostHog data and insights',
         description:
