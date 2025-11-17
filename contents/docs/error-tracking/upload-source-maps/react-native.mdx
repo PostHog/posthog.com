@@ -35,20 +35,20 @@ Automatic source map injection works only in React Native apps using Expo 50 or 
   1. Create or update the [metro.config.js](https://docs.expo.dev/versions/latest/config/metro/) file in your app’s root directory so that it looks like this:
 
   ```diff
-  - const { getDefaultConfig } = require("expo/metro-config");
-  + const { getPostHogExpoConfig } = require('posthog-react-native/metro')
+  -const { getDefaultConfig } = require("expo/metro-config");
+  +const { getPostHogExpoConfig } = require('posthog-react-native/metro')
 
-  - const config = getDefaultConfig(__dirname);
-  + const config = getPostHogExpoConfig(__dirname)
+  -const config = getDefaultConfig(__dirname);
+  +const config = getPostHogExpoConfig(__dirname)
 
   module.exports = config
   ```
 
   2. Update the `/android/app/build.gradle` file from your app's root directory so that it looks like this:
 
-  ```groovy
+  ```diff
   // This must be placed directly above the following `android` block.
-  + apply from: "../../node_modules/posthog-react-native/tooling/posthog.gradle"
+  +apply from: "../../node_modules/posthog-react-native/tooling/posthog.gradle"
 
   android {
     ...
@@ -64,11 +64,11 @@ Automatic source map injection works only in React Native apps using Expo 50 or 
 
   // This must be placed at the end of this shell script.
   WITH_ENVIRONMENT="../node_modules/react-native/scripts/xcode/with-environment.sh"
-  - REACT_NATIVE_XCODE="../node_modules/react-native/scripts/react-native-xcode.sh"
-  + POSTHOG_XCODE="../node_modules/posthog-react-native/tooling/posthog-xcode.sh"
+  -REACT_NATIVE_XCODE="../node_modules/react-native/scripts/react-native-xcode.sh"
+  +POSTHOG_XCODE="../node_modules/posthog-react-native/tooling/posthog-xcode.sh"
 
-  - /bin/sh -c "$WITH_ENVIRONMENT $REACT_NATIVE_XCODE"
-  + /bin/sh -c "$WITH_ENVIRONMENT \"$POSTHOG_XCODE\""
+  -/bin/sh -c "$WITH_ENVIRONMENT $REACT_NATIVE_XCODE"
+  +/bin/sh -c "$WITH_ENVIRONMENT \"$POSTHOG_XCODE\""
   ```
 
 </Step>
