@@ -11,6 +11,15 @@ showTitle: true
 - There are no major open issues with their PostHog implementation. They have implemented PostHog Analytics (and Session Replay) into their application(s) and are actively using those features. They are happy with their current setup and aren’t voicing major frustrations.
 - There is no active risk to their renewal, and you aren’t already negotiating that renewal.
 - You know which teams to talk to regarding Error Tracking, you have identified the people best suited to successfully implement Error Tracking.
+  - Ask your current champion who the interesting likely people would be to talk to
+  - Ask PostHog PMs who the ICPs for error tracking are, and see if you can identify those within the customer team
+  - Identify teams that are responsible for critical paths/functions within their codebase, some examples are
+    - Billing teams
+    - Authentication & authorization teams
+    - Data API teams (e.g. REST or GraphQL teams, that see a high volume of queries)
+    - Management API teams (who have to deal with orchestration failures across projects)
+    - Support tooling teams
+  - Job titles that would be interesting are e.g. Platform Engineers, Backend Engineers (especially if they are on one of the teams mentioned above), anybody owning reliability or infrastructure
 - You understand their engineering processes and timelines (at least on a high level) and expect them to have resources available to look into Error Tracking.
 - They are using one of the [supported platforms for Error Tracking](/docs/error-tracking/start-here)
 - **Ideally**: They have expressed pain points that Error Tracking can help resolve.
