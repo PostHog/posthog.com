@@ -64,6 +64,8 @@ posthog = Posthog("<ph_project_api_key>", enable_exception_autocapture=True, ...
 
 We recommend setting up and using [contexts](/docs/libraries/python#contexts) so that exceptions automatically include distinct IDs, session IDs, and other properties you can set up with tags.
 
+You can also enable [code variables capture](/docs/error-tracking/code-variables/python) to automatically capture the state of local variables when exceptions occur, giving you a debugger-like view of your application.
+
 </Step>
 
 <Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your Python application." badge="optional">

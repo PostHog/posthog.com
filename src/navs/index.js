@@ -627,6 +627,10 @@ export const handbookSidebar = [
                 url: '/handbook/content',
             },
             {
+                name: 'Brand guidelines and messaging',
+                url: '/handbook/content/brand-message',
+            },
+            {
                 name: 'Docs',
                 url: '/handbook/content/docs',
                 children: [
@@ -687,10 +691,6 @@ export const handbookSidebar = [
             {
                 name: 'Writing metadata',
                 url: '/handbook/content/metadata',
-            },
-            {
-                name: 'Content components',
-                url: '/handbook/content/components',
             },
         ],
     },
@@ -1084,6 +1084,10 @@ export const handbookSidebar = [
         url: '',
         children: [
             {
+                name: 'Overview',
+                url: '/handbook/engineering/posthog-com/overview',
+            },
+            {
                 name: 'Developing the website',
                 url: '/handbook/engineering/posthog-com/developing-the-website',
             },
@@ -1285,9 +1289,13 @@ export const handbookSidebar = [
                                 name: 'Cross sell motions',
                                 url: '/handbook/growth/sales/cross-sell-motions',
                             },
-                             {
+                            {
                                 name: 'Communications templates',
                                 url: '/handbook/growth/sales/communications-templates',
+                            },
+                            {
+                                name: 'User event streams',
+                                url: '/handbook/growth/sales/user-event-streams',
                             },
                         ],
                     },
@@ -1491,7 +1499,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'New customer onboarding',
-                        url: '/handbook/growth/sales/customer-onboarding.md',
+                        url: '/handbook/growth/sales/customer-onboarding',
                     },
                 ],
             },
@@ -1541,7 +1549,7 @@ export const handbookSidebar = [
                 children: [
                     {
                         name: 'Refunds',
-                        url: '/handbook/growth/revops/refunds',
+                        url: '/handbook/growth/sales/refunds',
                     },
                     {
                         name: 'Lead assignment during time off',
@@ -2929,6 +2937,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Schema management',
+                    url: '/docs/product-analytics/schema-management',
+                    icon: 'IconDatabase',
+                    color: 'blue',
+                },
+                {
                     name: 'Creating insights',
                     url: '/docs/product-analytics/insights',
                     icon: 'IconGraph',
@@ -3937,6 +3951,23 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Code variables',
+                    url: '/docs/error-tracking/code-variables',
+                    icon: 'IconBrackets',
+                    color: 'purple',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/code-variables',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/error-tracking/code-variables/python',
+                        },
+                    ],
+                },
+                {
                     name: 'AI',
                 },
                 {
@@ -4748,6 +4779,12 @@ export const docsMenu = {
                     url: '/docs/workflows/email-drip-campaign',
                     icon: 'IconDatabase',
                     color: 'orange',
+                },
+                {
+                    name: 'Import opt-out lists from Customer.io',
+                    url: '/docs/workflows/import-customerio-optouts',
+                    icon: 'IconDatabase',
+                    color: 'blue',
                 },
                 {
                     name: 'Resources',

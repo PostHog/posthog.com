@@ -165,7 +165,7 @@ The alternative we recommend is making your pricing more predictable and transpa
 
 ![Spend limits](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Frame_6_2b103471fc.png)
 
-- **Help users tune their spend** to what they’re actually using. Our [customer success team](/teams/customer-success) helps a lot with this and we provide docs pages on cutting costs for most of our products like [product analytics](/docs/product-analytics/cutting-costs), [session replay](/docs/session-replay/cutting-costs), and [feature flags](/docs/feature-flags/cutting-costs). Data infrastructure companies like Snowflake, Supabase, and PlanetScale all offer ways to identify costly queries and resources to optimize their spend.
+- **Help users tune their spend** to what they’re actually using. Our <SmallTeam slug="customer-success" /> helps a lot with this and we provide docs pages on cutting costs for most of our products like [product analytics](/docs/product-analytics/cutting-costs), [session replay](/docs/session-replay/cutting-costs), and [feature flags](/docs/feature-flags/cutting-costs). Data infrastructure companies like Snowflake, Supabase, and PlanetScale all offer ways to identify costly queries and resources to optimize their spend.
 
 - **Be generous with refunds.** For example, we have [side project insurance](/side-project-insurance) that protects customers from huge bills if their product goes viral.
 

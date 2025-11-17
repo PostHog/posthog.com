@@ -360,18 +360,18 @@ const OSTable: React.FC<OSTableProps> = ({
                             ) : null}
                         </div>
                     )}
-                    {pagination && (
-                        <Pagination
-                            currentPage={pagination.currentPage}
-                            totalPages={pagination.totalPages}
-                            goToPage={pagination.goToPage}
-                            nextPage={pagination.nextPage}
-                            prevPage={pagination.prevPage}
-                            hasNextPage={pagination.hasNextPage}
-                            hasPrevPage={pagination.hasPrevPage}
-                        />
-                    )}
                 </div>
+                {pagination && (
+                    <Pagination
+                        currentPage={pagination.currentPage}
+                        totalPages={pagination.totalPages}
+                        goToPage={pagination.goToPage}
+                        nextPage={pagination.nextPage}
+                        prevPage={pagination.prevPage}
+                        hasNextPage={pagination.hasNextPage}
+                        hasPrevPage={pagination.hasPrevPage}
+                    />
+                )}
             </ScrollArea>
         </div>
     )

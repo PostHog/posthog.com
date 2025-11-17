@@ -86,6 +86,11 @@ The below table summarizes the discount levels contained in points 2-4:
 </table>
 
 Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. Pre-paid discounts must be paid up-front. We do not offer monthly or quarterly payment plans for discounted contracts. If a customer prefers quarterly or monthly payments, we can offer them a lower credit value, which will reduce their discount.
+
+### Why we require up-front payment for credit purchases
+
+We've found that split payment terms create friction for both teams – customers chasing internal approvals, us chasing invoices, nobody focused on delivering value. When customers pay quarterly or monthly, they often consume credits faster than they pay for them, effectively turning us into a line of credit. We are vendors, not lenders. Our focus is on [building the best product](/handbook/how-we-make-money), not managing accounts receivable. Up-front payments keep everyone focused on customer success and let us invest cash immediately into building features and support. If a customer needs payment flexibility, we're happy to adjust the credit amount and discount, per guidelines above, to fit their budget while maintaining up-front payment.
+
 ### Credit for case studies
 
 We don't offer additional discounts in exchange for a case study, as paying for case studies can devalue them. We should be working to get our customers to a state of happiness such that they are willing to tell everyone how great PostHog is without needing to pay for it.
@@ -138,6 +143,8 @@ You should follow the same [inbound sales process](https://posthog.com/handbook/
 6. If the customer wants to purchase fewer credits than either option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
 
 All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional, one-time credit (offered to customers in exchange for rolling off the Startup plan) in the amount of USD XXXXX will be applied upon contract start date with the same expiration date."
+
+For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date.
 
 ## Additional credit purchase
 
