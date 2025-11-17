@@ -240,15 +240,6 @@ export default function PostHogAI(): JSX.Element {
         },
     })
 
-    // Override the pricing slide with our custom component
-    const pricingSlideIndex = slides.slides.findIndex((slide) => slide.slug === 'pricing')
-    if (pricingSlideIndex !== -1) {
-        slides.slides[pricingSlideIndex] = {
-            ...slides.slides[pricingSlideIndex],
-            component: CustomPricingSlide,
-        }
-    }
-
     const mergedData = {
         ...data,
         ...contentData,
