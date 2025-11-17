@@ -10,7 +10,7 @@ Generally speaking, companies already using PostHog and spending money will be r
 
 > We frequently tweak these rules and experiment with different signals to see which work best. Generally you should be aiming for a 20% conversion rate from these types of leads. 
 
-They follow the [normal territory assignment rules](https://posthog.com/handbook/growth/sales/crm#how-we-do-lead-assignments) in Salesforce, and are routed either to Account Executives or Technical Account Managers depending on the type.
+They follow the [normal territory assignment rules](https://posthog.com/handbook/growth/sales/crm#how-we-do-lead-assignments) in Salesforce, and are routed either to Technical Account Executives or Technical Account Managers depending on the type.
 
 **Product-led sales team**
 
