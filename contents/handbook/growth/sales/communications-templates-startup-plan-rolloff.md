@@ -81,7 +81,7 @@ I wanted to let you know that you are on track to burn through your startup cred
 |Example recommendation| One thing I noticed about your implementation is that you are [calling identify / set more than once per session](https://posthog.com/docs/product-analytics/cutting-costs#only-call-identify-once-per-session). We recommend only calling it once.
 
 
-Finally, as a part of rolling off our start up plan, we are offering 2 months free if you decide to |pre-purchase a bucket of credits|. This would end up saving you almost $XXK over the next year ($XXk on a XX% discount + $XXk on the free months).
+Finally, as a part of rolling off our startup plan, we are offering 2 months free if you decide to |pre-purchase a bucket of credits|. This would end up saving you almost $XXK over the next year ($XXk on a XX% discount + $XXk on the free months).
 
 
 Let me know if you have any questions.
