@@ -3857,6 +3857,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-source-maps/node',
                         },
                         {
+                            name: 'React Native',
+                            url: '/docs/error-tracking/upload-source-maps/react-native',
+                        },
+                        {
                             name: 'CLI',
                             url: '/docs/error-tracking/upload-source-maps/cli',
                         },
