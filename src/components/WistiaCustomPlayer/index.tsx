@@ -150,10 +150,11 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                     }
                                 },
                                 play: () => {
-                                    if (playerRef.current && playerRef.current.play) {
-                                        playerRef.current.play()
-                                    } else if (video && video.play) {
-                                        video.play()
+                                    const playPromise = playerRef.current?.play ? playerRef.current.play() : video?.play()
+                                    if (playPromise && typeof playPromise.catch === 'function') {
+                                        playPromise.catch((error: any) => {
+                                            console.warn('Play was prevented:', error)
+                                        })
                                     }
                                 },
                                 time: (seconds?: number) => {
@@ -496,7 +497,12 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
 
                         // Set initial states using refs
                         if (autoPlayRef.current) {
-                            video.play()
+                            const playPromise = video.play()
+                            if (playPromise && typeof playPromise.catch === 'function') {
+                                playPromise.catch((error: any) => {
+                                    console.warn('Autoplay was prevented:', error)
+                                })
+                            }
                         }
                         if (mutedRef.current) {
                             video.volume(0)
@@ -567,7 +573,12 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                 if (isPlaying) {
                     playerRef.current.pause()
                 } else {
-                    playerRef.current.play()
+                    const playPromise = playerRef.current.play()
+                    if (playPromise && typeof playPromise.catch === 'function') {
+                        playPromise.catch((error: any) => {
+                            console.warn('Play was prevented:', error)
+                        })
+                    }
                 }
             }
         }, [isPlaying, isReady])
