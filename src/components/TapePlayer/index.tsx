@@ -521,7 +521,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
 
                             {/* Flippable Cassette tape */}
                             <div className="flex-1 relative">
-                                <div className="border-2 border-primary shadow-inner aspect-[100/63] rounded-[0.5rem] bg-accent w-full h-full absolute inset-0" />
+                                <div className="border-2 border-primary shadow-inner aspect-[100/63] rounded-[0.5rem] bg-accent w-full h-auto absolute inset-0" />
                                 <motion.div
                                     initial={{ opacity: 0, translateY: '-100%' }}
                                     animate={{
