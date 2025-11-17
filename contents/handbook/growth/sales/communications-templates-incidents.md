@@ -30,7 +30,7 @@ Use a consistent structure and timing so customers know what to expect.
 
 Reach out before customers ask, even if it’s just to say, “We’re aware and investigating.”
 
-## **⚙️ Severity levels**
+## **Severity levels**
 
 | Level | Description | Examples | Channels | Cadence |
 | ----- | ----- | ----- | ----- | ----- |
@@ -43,7 +43,7 @@ Reach out before customers ask, even if it’s just to say, “We’re aware and
 
 ### **Critical**
 
-**Subject:** 🛑 PostHog Outage – We’re investigating
+**Subject:** PostHog Outage – We’re investigating
 
 Hey \[Name/Team\],
 
@@ -61,7 +61,7 @@ We’re monitoring and will share a full write-up within 48 hours.
 
 ### **Major**
 
-**Subject:** ⚠️ Performance issues in \[Feature\]
+**Subject:** Performance issues in \[Feature\]
 
 Hey \[Name\],
 
@@ -70,23 +70,17 @@ We’re seeing performance issues in \[component\]. You might notice \[impact\].
 Thanks for your patience\!
 — \[Your Name\], PostHog
 
----
-
 ### **Minor**
 
-**Subject:** 🟡 Slower performance in \\\[area\\\]
+**Subject:** Slower performance in \\\[area\\\]
 
 FYI — This shouldn’t block you, but we’re monitoring closely. I’ll update once it’s stable.
 
----
-
 ### **Planned maintenance**
 
-**Subject:** 🛠 Maintenance – \[Service/Region\]
+**Subject:** Maintenance – \[Service/Region\]
 
 Heads up — maintenance on \[system\] from \[time window\]. No downtime expected, but queries or replays may be briefly delayed. We’ll confirm once complete.
-
----
 
 ## **Tone and voice**
 
@@ -96,8 +90,6 @@ Heads up — maintenance on \[system\] from \[time window\]. No downtime expecte
 | **Empathetic** | “I know this blocks work; it’s our top priority.” | “We apologize for the inconvenience.” |
 | **Plain English** | “Dashboards might not update.” | “You may experience degraded query latency.” |
 | **Ownership** | “We identified a config issue on our side.” | “A third-party dependency caused an issue.” |
-
----
 
 ## **Coordination within GTM**
 
