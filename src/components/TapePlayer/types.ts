@@ -6,6 +6,7 @@ export interface YTPlayer {
     pauseVideo: () => void
     stopVideo: () => void
     loadVideoById: (videoId: string) => void
+    destroy?: () => void
 }
 
 export interface YTPlayerConfig {
@@ -20,6 +21,7 @@ export interface YTPlayerConfig {
         fs: number
         modestbranding: number
         rel: number
+        playsinline?: number
     }
     events: {
         onReady: () => void
@@ -43,6 +45,7 @@ export interface YTNamespace {
 // Extend Window interface for YouTube API
 declare global {
     interface Window {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         YT: YTNamespace | any
         onYouTubeIframeAPIReady: (() => void) | null
     }

@@ -1465,10 +1465,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
 
         if (siteSettings.experience === 'boring') {
+            if (existingWindow) {
+                return bringToFront(existingWindow, element.props.location)
+            }
             if (newWindow.key.startsWith('/')) {
                 return replaceFocusedWindow(newWindow)
             } else {
-                return setWindows([...windows, newWindow])
+                return setWindows([...windows?.filter((w) => w.key !== newWindow.key), newWindow])
             }
         }
 
@@ -2059,6 +2062,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             })
         }
     }, [stateWindows])
+
+    console.log('windows', windows)
 
     return (
         <Context.Provider
