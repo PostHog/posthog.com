@@ -73,14 +73,44 @@ const CustomPricingSlide = () => {
             data-scheme="primary"
             className="flex flex-col p-12 justify-start @2xl:justify-center items-center h-full bg-primary text-primary"
         >
-            <h2 className="text-4xl font-bold mb-8">Pricing</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-8">Usage-based pricing</h2>
 
-            <div className="bg-accent border border-primary max-w-xl mx-auto rounded p-8 text-center">
-                <div className="text-2xl font-bold mb-4">PostHog AI is free during beta.</div>
-                <p className="text-xl">
-                    Eventually we'll charge usage-based pricing and will offer a generous monthly free tier, as we do
-                    with all of our paid products.
+            <div className="bg-accent border border-primary rounded p-8 text-left max-w-3xl mx-auto">
+                <p className="text-lg mb-6">
+                    AI credits are consumed whenever PostHog performs intelligent work for you. You'll spot these
+                    features by the ✨ icon or when using the in-app chat.
                 </p>
+                <ul className="space-y-4 mb-6 text-lg">
+                    <li className="flex items-start">
+                        <span className="text-red mr-2">•</span>
+                        <div>
+                            <strong>First 2,000 credits ($20) every month:</strong> Free
+                        </div>
+                    </li>
+                    <li className="flex items-start">
+                        <span className="text-red mr-2">•</span>
+                        <div>
+                            <strong>After 2,000 credits/mo:</strong> Usage is billed through PostHog AI credit
+                            consumption. See our AI{' '}
+                            <Link
+                                to="/docs/posthog-ai/pricing-faq"
+                                className="underline font-medium"
+                                state={{ newWindow: true }}
+                            >
+                                pricing FAQ
+                            </Link>
+                            .
+                        </div>
+                    </li>
+
+                    <li className="flex items-start">
+                        <span className="text-red mr-2">•</span>
+                        <div>
+                            <strong>What doesn't cost credits:</strong> Getting help on how to use PostHog, usage of AI
+                            features in beta
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     )
@@ -176,15 +206,7 @@ export default function PostHogAI(): JSX.Element {
 
     // Configure slides with custom ProductOS Benefits slide
     const slides = createSlideConfig({
-        exclude: [
-            'customers',
-            'ai',
-            'comparison-summary',
-            'feature-comparison',
-            'docs',
-            'pairs-with',
-            'answers',
-        ],
+        exclude: ['customers', 'ai', 'comparison-summary', 'feature-comparison', 'docs', 'pairs-with', 'answers'],
         custom: [
             {
                 slug: 'roadmap',
