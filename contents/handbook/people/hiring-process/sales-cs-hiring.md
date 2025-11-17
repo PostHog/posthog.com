@@ -49,7 +49,7 @@ The technical interview with the relevant team lead usually lasts 45 minutes.  F
 
 #### Technical and Sales Skill interview
 
-In this 45-minute interview, you'll be meeting with [Simon](https://posthog.com/community/profiles/28895) who will be trying to answer "Do they have the right customer acumen?" and "Do they have the technical depth required to do the role?".  
+In this 45-minute interview, you'll be meeting with [Simon](/community/profiles/28895) who will be trying to answer "Do they have the right customer acumen?" and "Do they have the technical depth required to do the role?".  
 
 > As part of this stage, you're expected to give a 15-minute demo on the product you currently sell or work on.  If you don't have a product to demo, pick a product you are familiar with and be prepared to explain how it works and the benefits of using it to someone who hasn't used it before.
 
