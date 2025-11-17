@@ -6,7 +6,7 @@ showTitle: true
 
 ## Lead routing
 
-Generally speaking, companies already using PostHog and spending money will be routed to the product-led sales team. Leads where the customer is earlier in their lifecyle with us, e.g. using PostHog but not spending money, will go to the new business sales team. 
+Generally speaking, companies already using PostHog and spending money will be routed to the product-led sales team. Leads where the customer is earlier in their lifecycle with us, e.g. using PostHog but not spending money, will go to the new business sales team. 
 
 > We frequently tweak these rules and experiment with different signals to see which work best. Generally you should be aiming for a 20% conversion rate from these types of leads. 
 
