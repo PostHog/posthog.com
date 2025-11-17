@@ -3812,6 +3812,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/flutter',
                         },
                         {
+                            name: 'React Native',
+                            url: '/docs/error-tracking/installation/react-native',
+                        },
+                        {
                             name: 'Manual/API',
                             url: '/docs/error-tracking/installation/manual',
                         },
