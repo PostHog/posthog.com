@@ -192,8 +192,8 @@ export default function PostHogAI(): JSX.Element {
                 component: CustomRoadmapSlide,
             },
             {
-                slug: 'personas',
-                name: 'Personas',
+                slug: 'you',
+                name: 'PostHog AI for you',
                 component: CustomPersonasSlide,
             },
             {
@@ -207,7 +207,7 @@ export default function PostHogAI(): JSX.Element {
             //     component: CustomManifestoSlide,
             // },
         ],
-        order: ['overview', 'features', 'demo', 'videos', 'personas', 'roadmap', 'pricing', 'getting-started'],
+        order: ['overview', 'features', 'demo', 'videos', 'you', 'roadmap', 'pricing', 'getting-started'],
         templates: {
             overview: 'max',
             features: 'ai',

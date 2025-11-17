@@ -92,36 +92,39 @@ const content = {
 export default function CustomPersonasSlide(): JSX.Element {
 
   return (
-    <div data-scheme="primary" className="h-full bg-primary text-primary p-4 @md:p-8 overflow-auto">
-
+    <div data-scheme="primary" className="h-full bg-primary text-primary p-4 @md:p-8 overflow-auto flex flex-col">
+      <h2 className="text-5xl mb-8 text-center">What PostHog AI can do for <span className="text-red underline">[you]</span></h2>
       <OSTabs
-        border={false}
-        padding={false}
-        className=""
+        className="flex-1"
+        centerTabs
         orientation="horizontal"
         tabTriggerClassName="flex-1 h-full"
+        tabContainerClassName="[&>div>div]:items-baseline"
+        tabContentClassName="bg-primary"
+        tabContentDataScheme="secondary"
+        scrollAreaClasses="[&>div]:h-full [&>div>div]:h-full"
         tabs={Object.entries(content).map(([key, data]) => ({
           label: (
-            <div className="flex flex-col justify-between w-full gap-2">
+            <div className="flex flex-col justify-between w-full gap-2 py-4">
               <div className="flex-1">
-                <CloudinaryImage src={data.image as `https://res.cloudinary.com/${string}`} width={120} />
+                <CloudinaryImage src={data.image as `https://res.cloudinary.com/${string}`} imgClassName="h-[90px] @2xl:h-[120px]" />
               </div>
-              <div className="text-2xl font-bold">{data.role}</div>
+              <div className="text-xl text-[1.4rem] font-bold p-2">{data.role}</div>
             </div>
           ),
           value: key,
           content: (
-            <div className="grid grid-cols-5 gap-4">
+            <div className="grid grid-cols-5 gap-8 @2xl:gap-16 p-4">
               <div className="col-span-full @2xl:col-span-2">
-                <h2 className="text-4xl mb-2">{data.title}</h2>
-                <p className="text-2xl">{data.description}</p>
+                <h2 className="text-5xl @2xl:text-4xl mb-4">{data.title}</h2>
+                <p className="text-4xl @2xl:text-2xl leading-snug">{data.description}</p>
               </div>
               <div className="col-span-full @2xl:col-span-3">
-                <ul>
+                <ul className="space-y-8">
                   {data.features.map((feature, index) => (
                     <li key={index}>
-                      <strong className="text-2xl mb-2">{feature.title}</strong>
-                      <p className="text-xl">{feature.description}</p>
+                      <h3 className="text-4xl @2xl:text-2xl mb-2">{feature.title}</h3>
+                      <p className="text-3xl @2xl:text-xl leading-snug">{feature.description}</p>
                     </li>
                   ))}
                 </ul>
