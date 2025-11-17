@@ -41,7 +41,7 @@ Building flags with AI. You describe what you want in plain English, Max builds 
 
 Fixing the foundations:
 - Finishing the persons database split (shared with ingestion team)
-- move our deployment progress from a rollout (this experience was buggy at scale) to a k8s deployment
+- Move our deployment progress from a rollout (this experience was buggy at scale) to a k8s deployment
 - Right-size our k8s infrastructure with better alerting on nodepool usage and CPU utilization
 - Decouple the flags service from the production redis so that we can have 100% redis usage for flag/team reads AND we can isolate flags redis usage from main app redis usage (useful for any future incidents; minimizes the blast radius)
 - Decoupling `/flags` from the writer database so flags stay up even when the database is down
