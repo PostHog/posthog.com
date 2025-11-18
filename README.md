@@ -43,7 +43,7 @@ This is the repository for the PostHog website. It contains:
     Clone the repo, navigate into the directory, and activate the flox environment:
 
     ```bash
-    git clone git@github.com:PostHog/posthog.com.git && cd posthog.com/
+    git clone https://github.com/PostHog/posthog.com.git && cd posthog.com/
     flox activate
     ```
 
