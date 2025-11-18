@@ -4439,6 +4439,10 @@ export const docsMenu = {
                             name: 'LiteLLM',
                             url: '/docs/llm-analytics/installation/litellm',
                         },
+                        {
+                            name: 'Manual capture',
+                            url: '/docs/llm-analytics/installation/manual-capture',
+                        },
                     ],
                 },
                 {
@@ -4520,13 +4524,6 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/link-error-tracking',
                     icon: 'IconWarning',
                     color: 'red',
-                },
-                {
-                    name: 'Manual capture',
-                    url: '/docs/llm-analytics/manual-capture',
-                    icon: 'IconCode',
-                    color: 'green',
-                    featured: true,
                 },
                 {
                     name: 'Resources',
