@@ -1377,6 +1377,10 @@ export const handbookSidebar = [
                         name: 'How we upsell and cross-sell',
                         url: '/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell',
                     },
+                    {
+                        name: 'Error tracking cross-sell',
+                        url: '/handbook/cs-and-onboarding/error-tracking-cross-sell',
+                    },
                 ],
             },
             {
