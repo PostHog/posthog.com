@@ -69,45 +69,21 @@ Here's how some of the most popular session replay tools compare:
         'heatmaps',
         'heatmaps.features.rage_clicks',
         'session_replay.features.crash_reports',
-        {
-            label: 'Built-in A/B testing',
-            description: 'Run experiments and A/B tests natively in the platform',
-            values: {
-                posthog: true,
-                logrocket: false,
-                fullstory: false,
-                hotjar: false,
-                openreplay: false,
-                microsoft_clarity: false,
-                'replay.io': false,
-            },
-        },
-        {
-            label: 'In-app surveys',
-            description: 'Collect user feedback with native survey tools',
-            values: {
-                posthog: true,
-                logrocket: false,
-                fullstory: false,
-                hotjar: true,
-                openreplay: false,
-                microsoft_clarity: false,
-                'replay.io': false,
-            },
-        },
-        {
-            label: 'Export recordings to video',
-            description: 'Export session recordings as video files',
-            values: {
-                posthog: 'Beta',
-                logrocket: false,
-                fullstory: false,
-                hotjar: false,
-                openreplay: false,
-                microsoft_clarity: false,
-                'replay.io': false,
-            },
-        },
+    {
+    label: 'Built-in A/B testing',
+    description: 'Run experiments and A/B tests natively in the platform',
+    values: [true, false, false, false, false, false, false],
+},
+{
+    label: 'In-app surveys',
+    description: 'Collect user feedback with native survey tools',
+    values: [true, false, false, true, false, false, false],
+},
+{
+    label: 'Export recordings to video',
+    description: 'Export session recordings as video files',
+    values: ['Beta', false, false, false, false, false, false],
+},
         'session_replay.ai.features.ai_summaries',
     ]}
 />
