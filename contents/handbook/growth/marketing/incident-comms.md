@@ -53,7 +53,7 @@ These are principles to keep in mind during any incident:
 -   **Aim not to send broad customer comms until an incident is resolved or a post-mortem is published**/
     Major or critical incidents will often have a public post-mortem-- this should usually be the backbone of any wider comms. Don't communicate before resolution unless there is a strong need.
 
-> **When handling a security incident:** align with the incident lead in the incident slack channel about public communication of security issues before proceeding. E.g. it could make sense to hold back communication of an attack publicly, as this could make the attacker aware that we are investigating already. This could it make harder for us to stop this attack for good.
+> **When handling a security incident:** align with the incident lead in the incident Slack channel about public communication of security issues before proceeding. E.g. it could make sense to hold back communication of an attack publicly, as this could make the attacker aware that we are investigating already. This could it make harder for us to stop this attack for good.
 
 What does the Comms Lead do?
 ----------------------------
