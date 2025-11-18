@@ -45,6 +45,19 @@ In the case of involuntary departure, we will aim to be as transparent as possib
 
 Please be aware that PostHog cannot always provide context around why people are leaving when they do.
 
+## References and employment verification
+
+At PostHog, we keep things simple: we don’t give personal or professional references for former team members. When someone asks about a past or current employee, the only information we share is their dates of employment.
+
+**Expectations for current employees:**
+If someone contacts you directly about a current or former employee:
+
+-   Don’t answer the request yourself — just forward it to the People & Ops team.
+-   Don’t share opinions or details about someone’s performance or why they left.
+-   Don’t speak (or appear to speak) on behalf of PostHog.
+
+This helps us keep things consistent and protects everyone’s privacy.
+
 ## The offboarding process
 
 ## For team leads

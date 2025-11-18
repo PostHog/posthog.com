@@ -1,0 +1,105 @@
+---
+title: Upload source maps for React Native
+showStepsToc: true
+---
+
+import CLIDownload from "../_snippets/cli/download.mdx"
+import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
+import StepVerifySourceMapUpload from './_snippets/step-verify-source-map-upload.mdx'
+
+
+<Steps>
+
+<Step title="Download CLI" badge="required">
+
+<CLIDownload/>
+
+</Step>
+
+<Step title="Authenticate" badge="required">
+
+<CLIAuthenticate />
+
+</Step>
+
+<Step title="Inject" badge="required">
+
+<CalloutBox icon="IconInfo" title="Expo 50 or later" type="fyi">
+
+Automatic source map injection works only in React Native apps using Expo 50 or later, as it relies on Expo’s built-in [debug ID](https://docs.expo.dev/versions/latest/config/metro/#source-map-debug-id) injection.
+
+</CalloutBox>
+
+Create or update the [metro.config.js](https://docs.expo.dev/versions/latest/config/metro/) file in your app's root directory so that it looks like this:
+
+```diff
+
+-const { getDefaultConfig } = require("expo/metro-config");
++const { getPostHogExpoConfig } = require('posthog-react-native/metro')
+
+
+-const config = getDefaultConfig(__dirname);
++const config = getPostHogExpoConfig(__dirname)
+
+
+module.exports = config
+```
+
+</Step>
+
+<Step title="Upload" badge="required">
+
+<CalloutBox icon="IconInfo" title="No automatic source map uploads on React Native web" type="action">
+
+Automatic source map uploading is handled through the Gradle build process on Android and the Xcode build process on iOS. For React Native web, please use our [CLI](/docs/error-tracking/upload-source-maps/cli#upload) instead.
+
+</CalloutBox>
+
+1. Android: Update the `/android/app/build.gradle` file from your app's root directory so that it looks like this:
+
+```diff
+
+...
+
+// This must be placed directly above the following `android` block.
++apply from: "../../node_modules/posthog-react-native/tooling/posthog.gradle"
+
+
+android {
+  ...
+}
+```
+
+2. iOS: Update the `/ios/$yourProjectName.xcodeproj/project.pbxproj` file (replace `$yourProjectName` with your project's actual name). You need to locate the `Bundle React Native code and images` build step.
+
+To do this through Xcode, open your project in Xcode, go to the project settings, navigate to Build Phases, select Bundle React Native code and images, and apply the changes shown below.
+
+```diff
+
+...
+
+// This must be placed at the end of this shell script.
+WITH_ENVIRONMENT="../node_modules/react-native/scripts/xcode/with-environment.sh"
+
+
+-REACT_NATIVE_XCODE="../node_modules/react-native/scripts/react-native-xcode.sh"
++POSTHOG_XCODE="../node_modules/posthog-react-native/tooling/posthog-xcode.sh"
+
+
+-/bin/sh -c "$WITH_ENVIRONMENT $REACT_NATIVE_XCODE"
++/bin/sh -c "$WITH_ENVIRONMENT \"$POSTHOG_XCODE\""
+```
+
+3. Web: Ensure that your React Native web build generates source maps.
+
+```bash
+# Example using React Native and Expo with the --source-maps flag.
+# Files are usually under the '$buildFolder/_expo/static/js/web' folder ($name.js and $name.js.map)
+npx expo export --source-maps --platform web
+```
+
+</Step>
+
+<StepVerifySourceMapUpload />
+
+</Steps>
