@@ -4515,7 +4515,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Manual capture',
-                    url: '/docs/llm-analytics/manual-capture',
+                    url: '/docs/llm-analytics/installation/manual-capture',
                     icon: 'IconCode',
                     color: 'green',
                     featured: true,
