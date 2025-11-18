@@ -68,13 +68,6 @@ else
   echo -e "    \033[32m✅ Dependencies installed\033[0m"
 fi
 echo -e "    \033[1;33m🚀 Ready to run: yarn start\033[0m"
-
-# The block below only runs when in an interactive shell
-if [[ -t 0 ]]; then
-  echo -e "
-💡 Need a clean slate? Run: \033[32myarn clean-slate\033[0m
-"
-fi
 '''
 
 
