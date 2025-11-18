@@ -65,6 +65,16 @@ Engage with users. Look for cues that signal gaps that Error Tracking can fill:
 * Asking PostHog AI about error tracking
 * Asking MCP about error tracking
 
+### Discovery questions
+
+When reviewing accounts, ask:
+
+* **Product feedback**: "How have you been using session replays and is there anything you would like this product to do differently?" This can reveal gaps that Error Tracking might fill.
+* **Incomplete implementations**: Are there any products a customer started to configure but didn't finish? Understanding why can highlight pain points Error Tracking could address.
+* **Product churn**: Are there any products a customer used and then stopped? Understanding why can help identify if Error Tracking could solve the underlying issues.
+* **Decision-making timeline**: Are they doing annual engineering roadmaps or quarterly goals? This helps you time cross-sell conversations appropriately.
+* **Competitive landscape**: Use the [SDK scanner](https://sdk-scanner.posthog.dev/) to check if they're using a competitor for error tracking, which can help you position PostHog's integrated approach.
+
 ## Demonstrate the value
 
 Once you've identified customers who'd benefit from Error Tracking, show them value in ways relevant to them.
