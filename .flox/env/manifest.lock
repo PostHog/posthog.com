@@ -1,0 +1,238 @@
+{
+  "lockfile-version": 1,
+  "manifest": {
+    "version": 1,
+    "install": {
+      "nodejs_22": {
+        "pkg-path": "nodejs_22"
+      },
+      "yarn": {
+        "pkg-path": "yarn-berry",
+        "version": "4.11.0"
+      }
+    },
+    "hook": {
+      "on-activate": "echo -e \"\\033[1;36m🔧 PostHog.com dev environment\\033[0m\"\n\n# Check if node_modules exists\necho -e \"  \\033[1;34m📦 Node packages\\033[0m\"\nif [ ! -d \"node_modules\" ]; then\n  echo -e \"    \\033[31m❌ No node_modules folder found\\033[0m\"\n  echo -e \"    \\033[1;33m📦 First run: yarn install\\033[0m\"\n  echo -e \"    \\033[1;33m🚀 Then run: yarn start\\033[0m\"\nelse\n  echo -e \"    \\033[32m✅ Dependencies installed\\033[0m\"\n  echo -e \"    \\033[1;33m🚀 Run: yarn start\\033[0m\"\nfi\n\n# The block below only runs when in an interactive shell\nif [[ -t 0 ]]; then\n  echo -e \"\n💡 Need a clean slate? Run: \\033[32myarn clean-slate\\033[0m\n\"\nfi\n"
+    },
+    "profile": {},
+    "options": {}
+  },
+  "packages": [
+    {
+      "attr_path": "nodejs_22",
+      "broken": false,
+      "derivation": "/nix/store/93cj1w7ydhz8ckrn3s0b37zcv0pbia6f-nodejs-22.21.1.drv",
+      "description": "Event-driven I/O framework for the V8 JavaScript engine",
+      "install_id": "nodejs_22",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "name": "nodejs-22.21.1",
+      "pname": "nodejs_22",
+      "rev": "50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "rev_count": 896953,
+      "rev_date": "2025-11-16T09:02:56Z",
+      "scrape_date": "2025-11-18T04:34:00.517442Z",
+      "unfree": false,
+      "version": "22.21.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dev": "/nix/store/hpfdffjb9p086asq1hgv235sz90bynri-nodejs-22.21.1-dev",
+        "libv8": "/nix/store/imfna1m7xj0q1rr35l8aqad93y8hhnsb-nodejs-22.21.1-libv8",
+        "out": "/nix/store/icgwxxfs13q1y864dd9ln86scp5659mw-nodejs-22.21.1"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "nodejs_22",
+      "broken": false,
+      "derivation": "/nix/store/6p2fd447igb9b3sbazphzsx0721q4q45-nodejs-22.21.1.drv",
+      "description": "Event-driven I/O framework for the V8 JavaScript engine",
+      "install_id": "nodejs_22",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "name": "nodejs-22.21.1",
+      "pname": "nodejs_22",
+      "rev": "50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "rev_count": 896953,
+      "rev_date": "2025-11-16T09:02:56Z",
+      "scrape_date": "2025-11-18T05:04:18.798931Z",
+      "unfree": false,
+      "version": "22.21.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dev": "/nix/store/343wn58m93zq3m82kn4g8nzida40m6zy-nodejs-22.21.1-dev",
+        "libv8": "/nix/store/0vxmmjcw3kja0b0w58vx26znyf33dkh7-nodejs-22.21.1-libv8",
+        "out": "/nix/store/9b428w9j0hjps917a083s0r72dxbif7h-nodejs-22.21.1"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "nodejs_22",
+      "broken": false,
+      "derivation": "/nix/store/lm776ggnxirfndq3px4fbzsm7257ax9y-nodejs-22.21.1.drv",
+      "description": "Event-driven I/O framework for the V8 JavaScript engine",
+      "install_id": "nodejs_22",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "name": "nodejs-22.21.1",
+      "pname": "nodejs_22",
+      "rev": "50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "rev_count": 896953,
+      "rev_date": "2025-11-16T09:02:56Z",
+      "scrape_date": "2025-11-18T05:31:50.310731Z",
+      "unfree": false,
+      "version": "22.21.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dev": "/nix/store/mvc3fvfn3pjncwxyi7hzqznznpkyl4xz-nodejs-22.21.1-dev",
+        "libv8": "/nix/store/knw783mlgj59nxblzmgijb7imx78vd38-nodejs-22.21.1-libv8",
+        "out": "/nix/store/q25l18bdmlnpxprrfwmka60vsjfnvjym-nodejs-22.21.1"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "nodejs_22",
+      "broken": false,
+      "derivation": "/nix/store/hh3hwm18sabcm72blv8qlc49pa2v5yzv-nodejs-22.21.1.drv",
+      "description": "Event-driven I/O framework for the V8 JavaScript engine",
+      "install_id": "nodejs_22",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "name": "nodejs-22.21.1",
+      "pname": "nodejs_22",
+      "rev": "50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "rev_count": 896953,
+      "rev_date": "2025-11-16T09:02:56Z",
+      "scrape_date": "2025-11-18T06:04:14.554494Z",
+      "unfree": false,
+      "version": "22.21.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dev": "/nix/store/61w4bgs70fym8zawhmsi9a1jblhr7x6w-nodejs-22.21.1-dev",
+        "libv8": "/nix/store/2khjr21kaaaivpd6rmqcd51nln1x5d03-nodejs-22.21.1-libv8",
+        "out": "/nix/store/fpksy87c7p8b0bp2s7qlxmn0mnrh392k-nodejs-22.21.1"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "yarn-berry",
+      "broken": false,
+      "derivation": "/nix/store/6b3mirx9vxab07dgvm499bc0f8cvmsfg-yarn-berry-4.11.0.drv",
+      "description": "Fast, reliable, and secure dependency management",
+      "install_id": "yarn",
+      "license": "BSD-2-Clause",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "name": "yarn-berry-4.11.0",
+      "pname": "yarn-berry",
+      "rev": "50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "rev_count": 896953,
+      "rev_date": "2025-11-16T09:02:56Z",
+      "scrape_date": "2025-11-18T04:36:24.914337Z",
+      "unfree": false,
+      "version": "4.11.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/drb89i2s1n2hhbik58fpw917l2d4b4wi-yarn-berry-4.11.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "yarn-berry",
+      "broken": false,
+      "derivation": "/nix/store/ai4innwkgzlkbzwcp82p0lk7ckk62qh6-yarn-berry-4.11.0.drv",
+      "description": "Fast, reliable, and secure dependency management",
+      "install_id": "yarn",
+      "license": "BSD-2-Clause",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "name": "yarn-berry-4.11.0",
+      "pname": "yarn-berry",
+      "rev": "50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "rev_count": 896953,
+      "rev_date": "2025-11-16T09:02:56Z",
+      "scrape_date": "2025-11-18T05:07:10.205191Z",
+      "unfree": false,
+      "version": "4.11.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/vq41n8d5l0hk13sqcrsqcqc0dp00c3c7-yarn-berry-4.11.0"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "yarn-berry",
+      "broken": false,
+      "derivation": "/nix/store/x9d3jaa8wbdh2r3z3w3pvnl0rmch97h4-yarn-berry-4.11.0.drv",
+      "description": "Fast, reliable, and secure dependency management",
+      "install_id": "yarn",
+      "license": "BSD-2-Clause",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "name": "yarn-berry-4.11.0",
+      "pname": "yarn-berry",
+      "rev": "50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "rev_count": 896953,
+      "rev_date": "2025-11-16T09:02:56Z",
+      "scrape_date": "2025-11-18T05:34:08.511098Z",
+      "unfree": false,
+      "version": "4.11.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/p9x17hw2zslxpsj6zwfaw5m3g8a9zk1l-yarn-berry-4.11.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "yarn-berry",
+      "broken": false,
+      "derivation": "/nix/store/86q5aqv522jk666cgj07hbb7nfcbdlqq-yarn-berry-4.11.0.drv",
+      "description": "Fast, reliable, and secure dependency management",
+      "install_id": "yarn",
+      "license": "BSD-2-Clause",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "name": "yarn-berry-4.11.0",
+      "pname": "yarn-berry",
+      "rev": "50a96edd8d0db6cc8db57dab6bb6d6ee1f3dc49a",
+      "rev_count": 896953,
+      "rev_date": "2025-11-16T09:02:56Z",
+      "scrape_date": "2025-11-18T06:07:12.860549Z",
+      "unfree": false,
+      "version": "4.11.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/374izi15dcs9jwngk83cdabmnx298csm-yarn-berry-4.11.0"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    }
+  ]
+}

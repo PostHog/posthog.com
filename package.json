@@ -22,6 +22,7 @@
         "serve": "gatsby serve",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "clean": "gatsby clean",
+        "clean-slate": "rm -rf node_modules .cache && yarn install && mkdir -p .cache",
         "test": "echo \"Error: no test specified\" && exit 1",
         "typegen": "kea-typegen write .",
         "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg",
@@ -221,6 +222,7 @@
         "husky": "^4.2.5",
         "jest": "^27.0.6",
         "lint-staged": "^10.2.12",
+        "node-gyp": "^12.1.0",
         "postcss": "^8.4.14",
         "postinstall-postinstall": "^2.1.0",
         "prettier": "^2.1.0",
@@ -239,7 +241,8 @@
         }
     },
     "resolutions": {
-        "undici": "5.26.3"
+        "undici": "5.26.3",
+        "node-addon-api": "^8.2.1"
     },
     "workspaces": [
         "plugins/*"
@@ -248,5 +251,5 @@
         "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
         "*.{js,ts,tsx}": "eslint"
     },
-    "packageManager": "yarn@1.22.19"
+    "packageManager": "yarn@4.11.0"
 }
