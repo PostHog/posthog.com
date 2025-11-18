@@ -47,10 +47,9 @@ This is the repository for the PostHog website. It contains:
     flox activate
     ```
 
-    Then install the site dependencies and start it up:
+    Flox will automatically install dependencies on first activation. Then start the site:
 
     ```bash
-    yarn
     yarn start
     ```
 
