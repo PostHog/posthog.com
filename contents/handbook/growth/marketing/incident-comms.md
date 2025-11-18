@@ -48,7 +48,7 @@ These are principles to keep in mind during any incident:
     We shouldn't send comms unless there's a definite impact and a clear story to tell. If we do send external comms, target **owners and admins in impacted orgs** where possible, rather than being too noisy.
 
 -   **Use the status page as the primary public channel.**\
-    The status page should be the main place we direct users to during an incident. Extra channels (emails, social posts) are the exception, not the rule. If a post-mortem is created, this supercedes the status page.
+    The status page should be the main place we direct users to during an incident. Extra channels (emails, social posts) are the exception, not the rule. If a post-mortem is created, this supersedes the status page.
 
 -   **Aim not to send broad customer comms until an incident is resolved or a post-mortem is published**/
     Major or critical incidents will often have a public post-mortem-- this should usually be the backbone of any wider comms. Don't communicate before resolution unless there is a strong need.
