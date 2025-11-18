@@ -99,7 +99,7 @@ export default function CustomPersonasSlide(): JSX.Element {
         centerTabs
         orientation="horizontal"
         tabTriggerClassName="flex-1 h-full"
-        tabContainerClassName="[&>div>div]:items-baseline"
+        tabContainerClassName="[&>div>div]:items-baseline [&>div]:flex-row [&>div]:w-full [&>div]:space-evenly [&>div>div]:w-full"
         tabContentClassName="bg-primary"
         tabContentDataScheme="secondary"
         scrollAreaClasses="[&>div]:h-full [&>div>div]:h-full"
