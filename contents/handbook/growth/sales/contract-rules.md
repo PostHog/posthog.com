@@ -15,7 +15,8 @@ Although our standard monthly [pricing](/pricing) has volume discounts built in,
 1. In our consumption-based pricing model, the easiest way to reduce spend is to ensure that the customer is only sending data to us which is valuable to them. There is [different guidance here](/docs/billing/estimating-usage-costs) depending on which product(s) they are looking at.
 2. **Prepaid credit:** We offer a 20% discount on a paid-up-front plan of >$20k, because it's beneficial to PostHog to have a customer committed.
 3. **Higher spend:** We offer an additional 5% and then 15% on top of the prepaid credit plans when the customer spends above $60k and $100k respectively.
-4. **Multi-purchase commitments:** We offer an additional 5% for each successive credit purchase commitment (up to 3), as longer relationships are beneficial to PostHog (see table below). Credits rollover in-between for multi-purchase contracts.
+4. **Multi-purchase commitments:** We offer an additional 5% for each successive credit purchase commitment (up to 3), as longer relationships are beneficial to PostHog (see table below). Credits are good for 1 year for multi-purchase contracts, but purchase amounts must be equal to annualized current consumption.
+5. **Up-front payment:** We offer an additional 2.5% when a multi-purchase contract is paid upfront. Purchase amounts must be >= annualizefd current consumption. Otherwise it would just be a single credit purchase with additional discount. E.g. if customer is spending $40K today, they cannot buy a 2x 20K purchase "upfront" and save an additional 5% for the 2x commitment, plus an additional 2.5% for "paying upfront". They need to commit to their current/historically calibrated spend for several years into the future to get the discounts. 
 
 > We don't offer a discount for signing a contract by some fixed date (e.g so the deal closes in a specific quarter).
 
