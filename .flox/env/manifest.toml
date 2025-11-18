@@ -35,6 +35,19 @@ nodejs_22.pkg-path = "nodejs_22"
 on-activate = '''
 echo -e "\033[1;36m🔧 PostHog.com dev environment\033[0m"
 
+# Check if this is the first time running flox
+FIRST_RUN_MARKER=".flox/.first-run-complete"
+if [ ! -f "$FIRST_RUN_MARKER" ]; then
+  # Only clean up if node_modules or .cache exist
+  if [ -d "node_modules" ] || [ -d ".cache" ]; then
+    echo -e "  \033[1;35m🎉 First time setup - removing old node_modules and cache folder...\033[0m"
+    rm -rf node_modules .cache
+    echo -e "    \033[32m✅ Removed old node_modules and .cache\033[0m"
+  fi
+  # Create marker file to prevent this from running again
+  touch "$FIRST_RUN_MARKER"
+fi
+
 # Check if .cache folder exists, create it if not
 echo -e "  \033[1;34m🗂️  Build cache\033[0m"
 if [ ! -d ".cache" ]; then

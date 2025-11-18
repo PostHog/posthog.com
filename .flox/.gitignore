@@ -3,3 +3,4 @@ cache/
 lib/
 log/
 !env/
+.first-run-complete
