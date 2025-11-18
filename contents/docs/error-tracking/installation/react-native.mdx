@@ -52,17 +52,13 @@ These features will be added in future releases.
 
 <Step title="Install PostHog React Native SDK" badge="required">
 
-<CalloutBox icon="IconInfo" title="SDK version requirement" type="action">
-
-A minimum SDK version of [4.12.0](https://github.com/PostHog/posthog-js/releases/tag/posthog-react-native@4.12.0) is required, but we recommend [keeping up with the latest SDK version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
-
-</CalloutBox>
-
 <CalloutBox icon="IconInfo" title="Hermes engine" type="fyi">
 
 React Native error tracking is supported supported for Android and iOS apps compiled with the [Hermes engine](https://reactnative.dev/docs/hermes) enabled.
 
 </CalloutBox>
+
+A minimum SDK version of [4.12.0](https://github.com/PostHog/posthog-js/releases/tag/posthog-react-native@4.12.0) is required, but we recommend [keeping up with the latest SDK version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
 
 <InstallReactNative />
 
@@ -70,11 +66,7 @@ React Native error tracking is supported supported for Android and iOS apps comp
 
 <Step title="Set up exception autocapture" badge="recommended">
 
-<CalloutBox icon="IconInfo" title="Client-side configuration only" type="fyi">
-
 This configuration is client-side only. Support for remote configuration in the [error tracking settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture) will be added in a future release.
-
-</CalloutBox>
 
 You can autocapture exceptions by configuring the `errorTracking` when setting up PostHog:
 
