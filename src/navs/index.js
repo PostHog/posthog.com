@@ -1426,7 +1426,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/crm',
                     },
                     {
-                        name: 'Lead scoring',
+                        name: 'Lead routing & scoring',
                         url: '/handbook/growth/sales/lead-scoring',
                     },
                     {
