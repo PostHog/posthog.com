@@ -986,6 +986,10 @@ export const handbookSidebar = [
                 url: '/handbook/marketing/positioning',
             },
             {
+                name: 'Incident comms',
+                url: '/handbook/growth/marketing/incident-comms',
+            },
+            {
                 name: 'Events',
                 url: '/handbook/marketing/events',
             },
