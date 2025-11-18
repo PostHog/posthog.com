@@ -48,10 +48,15 @@ const handler = async (req, res) => {
         url: 'https://api.ashbyhq.com/applicationForm.submit',
         headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: `Basic ${Buffer.from(`${process.env.ASHBY_API_KEY}:`).toString('base64')}`,
+            Authorization: `Basic <REDACTED>`,
         },
         formData,
     }
+    console.log('[Ashby request]', options)
+    console.log('[Ashby request JSON]', JSON.stringify(options, null, 2))
+
+    options.headers.Authorization = `Basic ${Buffer.from(`${process.env.ASHBY_API_KEY}:`).toString('base64')}`
+
     const submission = await new Promise((resolve, reject) => {
         request(options, function (err, res) {
             if (err) throw new Error(err)
