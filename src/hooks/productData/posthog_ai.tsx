@@ -565,11 +565,55 @@ export const posthog_ai = {
             title: 'Maximizing data insights',
             author: 'Eric Duong',
             wistia: 'syysfftbzk',
+            chapters: [
+                {
+                    title: 'Last 10 Stripe charges',
+                    time: 18,
+                    copyable: true,
+                },
+                {
+                    title: 'All charges last 14 days with email',
+                    time: 41,
+                    copyable: true,
+                },
+                {
+                    title: 'Make this query a CTE and bring in refunds as another CTE. Match the select values and union them for the result.',
+                    time: 81,
+                    copyable: true,
+                },
+                {
+                    title: 'In Stripe data, what\'s the net amount charged and refunded in the last 7 days?',
+                    time: 140,
+                    copyable: true,
+                },
+            ]
         },
         answering_business_questions: {
             title: 'Answering business questions',
             author: 'Georgiy Tarasov',
             wistia: 'hjr4vq1py4',
+            chapters: [
+                {
+                    title: 'What\'s the cache hit rate for AI generations?',
+                    time: 30,
+                    copyable: true,
+                },
+                {
+                    title: 'Break down the chart by model',
+                    time: 45,
+                    copyable: true,
+                },
+                {
+                    title: 'Include customer feedback for AI generations from the last 7 days',
+                    time: 67,
+                    copyable: true,
+                },
+                {
+                    title: 'Summarize session recordings for the given filters',
+                    time: 104,
+                    copyable: true,
+                },
+            ]
         },
     },
     answers: [
