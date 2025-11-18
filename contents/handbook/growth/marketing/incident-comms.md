@@ -50,7 +50,7 @@ These are principles to keep in mind during any incident:
 -   **Use the status page as the primary public channel.**\
     The status page should be the main place we direct users to during an incident. Extra channels (emails, social posts) are the exception, not the rule. If a post-mortem is created, this supersedes the status page.
 
--   **Aim not to send broad customer comms until an incident is resolved or a post-mortem is published**/
+-   **Aim not to send broad customer comms until an incident is resolved or a post-mortem is published.**
     Major or critical incidents will often have a public post-mortem – this should usually be the backbone of any wider comms. Don't communicate before resolution unless there is a strong need.
 
 > **When handling a security incident:** align with the incident lead in the incident Slack channel about public communication of security issues before proceeding. E.g. it could make sense to hold back communication of an attack publicly, as this could make the attacker aware that we are investigating already. This could it make harder for us to stop this attack for good.
