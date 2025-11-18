@@ -1373,6 +1373,10 @@ export const handbookSidebar = [
                         name: 'Error tracking cross-sell',
                         url: '/handbook/cs-and-onboarding/error-tracking-cross-sell',
                     },
+                    {
+                        name: 'Customer industry segments',
+                        url: '/handbook/cs-and-onboarding/customer-industry-segments',
+                    },
                 ],
             },
             {
