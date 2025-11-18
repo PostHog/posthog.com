@@ -105,6 +105,12 @@ For offsites and onboardings in London, below is a list of hotels recommended in
 
 If hotel prices are above £200 per night, it is worth quickly looking for alternatives as ~£170 per night should be achievable midweek in London. If prices are high, you should optimise travel for total cost (flights & accom) so if you can get cheaper flights or hotel by moving dates +/- 1 day, then look into these options. 
 
+## Border Control
+
+Quite often you will be required to travel to places that some kind of visa is required even if just a visitor visa like an [ESTA](https://esta.cbp.dhs.gov/). When entering places like the US, for work purposes, border control agents may ask the purpose of your trip. In these instances it's best to avoid using PostHog terms like "onboarding" as this can be confusing. It's much better to more generally describe the purpose of your trip. In nearly all circumstances this will be to hang out with your colleagues and to take part in team building exercises. It's usually good to emphasis that you'll be on a short trip and that the company is paying for everything. You should be prepared with the exact addresses of where you are staying and the details of your flight out of the country. 
+
+For all company offsites, it's best to describe this as a company gathering where you will be hanging out with colleagues for the week. Generally, it is best to avoid using the phrase "training" as this can also be confusing. 
+
 ## Travel insurance
 
 Many of our company offsites involve team members traveling abroad, and although we hope that these trips are uneventful and safe for all, in the event of an accident or medical emergency, we carry travel insurance through as well as general & auto liability policies through our partner [Embroker](https://www.embroker.com). 
