@@ -30,6 +30,35 @@ This is the repository for the PostHog website. It contains:
 
 ## Quick start
 
+### Option A: Using flox (recommended)
+
+[Flox](https://flox.dev) manages all dependencies automatically, making setup much simpler.
+
+1. **Install flox**
+
+    Follow the [flox installation instructions](https://flox.dev/docs/install-flox/).
+
+2. **Start developing**
+
+    Clone the repo, navigate into the directory, and activate the flox environment:
+
+    ```bash
+    git clone https://github.com/PostHog/posthog.com.git && cd posthog.com/
+    flox activate
+    ```
+
+    Flox will automatically install dependencies on first activation. Then start the site:
+
+    ```bash
+    yarn start
+    ```
+
+    Your site is now running at `http://localhost:8001`!
+
+    > **Tip:** Seeing a discrepancy between local development and staging/production? Preview the production build locally by running `gatsby build && gatsby serve`
+
+### Option B: Manual setup
+
 1. **Pre-installation**
 
     Install [Node](https://nodejs.org/en/download/) (version 22) - if you installed Node using nvm, you can run `nvm use` to automatically switch to the correct version.
@@ -39,8 +68,6 @@ This is the repository for the PostHog website. It contains:
     ```bash
     npm install --global yarn
     ```
-
-
 
 2.  **Start developing**
 
