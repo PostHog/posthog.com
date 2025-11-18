@@ -131,7 +131,7 @@ When you have engineers on the call from a qualified company (ICP fit or otherwi
 
 **Structure:**
 1. **Intro & Qualification** (5-10 min)
-   - Friendly banter 
+   - [Follow these guidelines](https://github.com/PostHog/company-internal/blob/master/sales-internal/scripts/inbound/introductions.md)
    - Focused discovery on their use case
    - Articulate PostHog's vision and how it relates to their needs
    - Show PostHog in a technical demo as soon as possible
@@ -157,12 +157,12 @@ When engineers aren't on the call, your goal is to earn a second call with their
 
 **Structure:**
 1. **Intro** (5 min)
-   - Friendly banter
+   - [Follow these guidelines](https://github.com/PostHog/company-internal/blob/master/sales-internal/scripts/inbound/introductions.md)
    - Get [BANT](/handbook/growth/sales/new-sales#BANT) info upfront (Budget, Authority, Need, Timeline)
    - Articulate PostHog's vision
    - Scope their use case
 
-2. **Qualify or Disqualify** (10 min) - we do this politely and constructively. The customer's time is valuable and we know best who succeeds with PostHog, so we're driving the sale. 
+2. **Qualify or Disqualify** (10 min) - [we do this politely and constructively according to these guidelines](https://github.com/PostHog/company-internal/blob/master/sales-internal/scripts/inbound/techincal%20qualification.md). The customer's time is valuable and we know best who succeeds with PostHog, so we're driving the sale. 
    - **Qualify if:** They have technical capability to succeed, engineers will be involved in the sales process, and there's product/solution fit
    - **Disqualify if:** They're non-technical with no engineer involvement, or there's no product/solution fit
 
@@ -209,7 +209,7 @@ This call happens when engineers weren't on the first call. Your goal is to qual
 **Structure:**
 
 1. **Intro** (5 min)
-   - Friendly banter
+   - [Follow these guidelines](https://github.com/PostHog/company-internal/blob/master/sales-internal/scripts/inbound/introductions.md)
    - Confirm everyone's roles and responsibilities
    - Set context from the previous call
    - Reiterate PostHog's vision
@@ -242,10 +242,10 @@ This call happens when engineers weren't on the first call. Your goal is to qual
 #### BANT
 
 By the end of either the 1st or 2nd call with a customer, you should have a defined idea about:
-1. **Budget** - Calculate and share a rough ballpark figure based on which products they'll use and their expected usage. Articulate the process by which a sales-led trial will help them refine the estimate. 
-2. **Need** - Is PostHog a good fit? Be politely honest if we're not, to avoid wasting everyone's time.
-3. **Authority** - Who will make the decision at the customer organization? Who holds the budget? 
-4. **Timeline** - When does the trial start? When are they looking to make a decision/have a contract in place?
+1. [**Budget**](https://github.com/PostHog/company-internal/blob/master/sales-internal/scripts/inbound/BANT/budget.md) - Calculate and share a rough ballpark figure based on which products they'll use and their expected usage. Articulate the process by which a sales-led trial will help them refine the estimate. 
+2. [**Need**](https://github.com/PostHog/company-internal/blob/master/sales-internal/scripts/inbound/BANT/need.md) - Is PostHog a good fit? Be politely honest if we're not, to avoid wasting everyone's time.
+3. [**Authority**](https://github.com/PostHog/company-internal/blob/master/sales-internal/scripts/inbound/BANT/authority.md) - Who will make the decision at the customer organization? Who holds the budget? 
+4. [**Timeline**](https://github.com/PostHog/company-internal/blob/master/sales-internal/scripts/inbound/BANT/timeline.md) - When does the trial start? When are they looking to make a decision/have a contract in place?
 
 ### 5. Product evaluation
 
