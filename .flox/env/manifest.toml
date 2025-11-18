@@ -35,16 +35,26 @@ nodejs_22.pkg-path = "nodejs_22"
 on-activate = '''
 echo -e "\033[1;36m🔧 PostHog.com dev environment\033[0m"
 
-# Check if node_modules exists
+# Check if .cache folder exists, create it if not
+echo -e "  \033[1;34m🗂️  Build cache\033[0m"
+if [ ! -d ".cache" ]; then
+  echo -e "    \033[33m⚠️  No .cache folder found, creating...\033[0m"
+  mkdir -p .cache
+  echo -e "    \033[32m✅ .cache folder created\033[0m"
+else
+  echo -e "    \033[32m✅ .cache folder exists\033[0m"
+fi
+
+# Check if node_modules exists, install if missing
 echo -e "  \033[1;34m📦 Node packages\033[0m"
 if [ ! -d "node_modules" ]; then
-  echo -e "    \033[31m❌ No node_modules folder found\033[0m"
-  echo -e "    \033[1;33m📦 First run: yarn install\033[0m"
-  echo -e "    \033[1;33m🚀 Then run: yarn start\033[0m"
+  echo -e "    \033[33m⚠️  No node_modules folder found, installing...\033[0m"
+  yarn install
+  echo -e "    \033[32m✅ Dependencies installed\033[0m"
 else
   echo -e "    \033[32m✅ Dependencies installed\033[0m"
-  echo -e "    \033[1;33m🚀 Run: yarn start\033[0m"
 fi
+echo -e "    \033[1;33m🚀 Ready to run: yarn start\033[0m"
 
 # The block below only runs when in an interactive shell
 if [[ -t 0 ]]; then
