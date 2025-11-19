@@ -136,6 +136,8 @@ When updating the status page, make sure to mark the affected component appropri
 
 Significant incidents such as the app being partially or fully non-operational, as well as ingestion delays of 30 minutes or longer should be clearly communicated to our customers. They should get to know what is going on and what we are doing to resolve it. If the incident is minor this can usually be done by updating the status page, but it may be desirable to do additional customer communications, such as sending an email to impacted customers. When this is required, you should [involve a Comms Lead](/handbook/growth/marketing/incident-comms) and [ensure the Sales team are aware](/handbook/growth/sales/communications-templates-incidents).
 
+The best way to ask for support from a Comms Lead is to post in the incident channel and use the `@all-marketers` group tag. This will alert the all relevant marketing teams. 
+
 When handling a security incident, please align with the incident responder team in the incident Slack channel about public communication of security issues. For example, it may not make sense to immediately communicate an attack publicly, as this could make the attacker aware that we are already investigating. This could it make harder for us to stop this attack for good.
 
 #### When a customer is causing an incident
