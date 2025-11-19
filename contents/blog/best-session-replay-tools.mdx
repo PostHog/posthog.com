@@ -60,31 +60,46 @@ Here's how some of the most popular session replay tools compare:
 <ProductComparisonTable
     competitors={['posthog','logrocket','fullstory','hotjar','openreplay','microsoft_clarity','replay_io']}
     rows={[
-        'session_replay.analysis.features.console_logs',
-        'session_replay.analysis.features.network_monitor',
-        'session_replay.analysis.features.performance_monitoring',
-        'session_replay.features.event_timeline',
-        'session_replay.targeting.features.filter_by_user_or_event',
         'session_replay.privacy.features.privacy_masking',
+        'session_replay.features.event_timeline',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.performance_monitoring',
+        'session_replay.targeting.features.filter_by_user_or_event',
         'heatmaps',
         'heatmaps.features.rage_clicks',
         'session_replay.features.crash_reports',
-    {
-    label: 'Built-in A/B testing',
-    description: 'Run experiments and A/B tests natively in the platform',
-    values: [true, false, false, false, false, false, false],
-},
-{
-    label: 'In-app surveys',
-    description: 'Collect user feedback with native survey tools',
-    values: [true, false, false, true, false, false, false],
-},
-{
-    label: 'Export recordings to video',
-    description: 'Export session recordings as video files',
-    values: ['Beta', false, false, false, false, false, false],
-},
+        {
+            label: 'Mobile SDK support',
+            description: 'Native SDKs for iOS, Android, and React Native applications',
+            values: [true, true, true, false, true, true, false],
+        },
+        {
+            label: 'Built-in product analytics',
+            description: 'Native product analytics tools integrated in the platform',
+            values: [true, true, true, false, false, false, false],
+        },
+        {
+            label: 'Built-in error tracking',
+            description: 'Native error monitoring and tracking integrated in the platform',
+            values: [true, true, false, false, false, false, false],
+        },
+           {
+            label: 'Built-in A/B testing',
+            description: 'Run experiments and A/B tests natively in the platform',
+            values: [true, false, false, false, false, false, false],
+        },
+        {
+            label: 'Export recordings to video',
+            description: 'Export session recordings as video files',
+            values: ['Beta', false, false, false, false, false, false],
+        },
         'session_replay.ai.features.ai_summaries',
+        {
+            label: 'Free tier available',
+            description: 'Offers a free plan for session replay',
+            values: [true, true, true, true, true, true, false],
+        },
     ]}
 />
 
