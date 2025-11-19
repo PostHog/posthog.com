@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
@@ -10,7 +10,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
 import { useCustomers } from 'hooks/useCustomers'
-import { OSInput, OSTextarea, OSSelect, Combobox } from 'components/OSForm'
+import { OSInput, OSTextarea, OSSelect, Combobox, TeamMemberMultiSelect, SelectedMember } from 'components/OSForm'
 import { Fieldset } from 'components/OSFieldset'
 import { Checkbox } from 'components/RadixUI/Checkbox'
 import ProductComparisonTable from 'components/ProductComparisonTable'
@@ -66,6 +66,11 @@ const tableOfContents = [
         depth: 1,
     },
     {
+        value: 'TeamMemberMultiSelect',
+        url: 'teammembermultiselect',
+        depth: 1,
+    },
+    {
         value: 'Competitor feature matrix',
         url: 'competitor-matrix',
         depth: 0,
@@ -80,6 +85,79 @@ const tableOfContents = [
 export default function Components(): JSX.Element {
     const { customers } = useCustomers()
 
+    // Fetch real teams and profiles data
+    const data = useStaticQuery(graphql`
+        {
+            allTeams: allSqueakTeam(
+                filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }
+                sort: { fields: name, order: ASC }
+            ) {
+                nodes {
+                    id
+                    name
+                    slug
+                    miniCrest {
+                        data {
+                            attributes {
+                                url
+                            }
+                        }
+                    }
+                    profiles {
+                        data {
+                            id
+                            attributes {
+                                firstName
+                                lastName
+                                color
+                                avatar {
+                                    data {
+                                        attributes {
+                                            url
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            allProfiles: allSqueakProfile(
+                filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
+            ) {
+                nodes {
+                    id
+                    squeakId
+                }
+            }
+        }
+    `)
+
+    // Build a map of profile id -> squeakId
+    const profileIdToSqueakId = React.useMemo(() => {
+        const map = new Map<string, string>()
+        data.allProfiles.nodes.forEach((profile: any) => {
+            map.set(profile.id, profile.squeakId)
+        })
+        return map
+    }, [data.allProfiles.nodes])
+
+    // Use teams with squeakId added to each profile
+    const teams = React.useMemo(() => {
+        return data.allTeams.nodes.map((team: any) => ({
+            ...team,
+            profiles: {
+                data: team.profiles.data.map((profile: any) => ({
+                    ...profile,
+                    attributes: {
+                        ...profile.attributes,
+                        squeakId: profileIdToSqueakId.get(profile.id) || profile.id,
+                    },
+                })),
+            },
+        }))
+    }, [data.allTeams.nodes, profileIdToSqueakId])
+
     // State for Combobox examples
     const [comboboxTags, setComboboxTags] = useState<any[]>([])
     const [comboboxMembers, setComboboxMembers] = useState<any[]>([])
@@ -89,6 +167,10 @@ export default function Components(): JSX.Element {
     const [checkboxBasic, setCheckboxBasic] = useState(false)
     const [checkboxChecked, setCheckboxChecked] = useState(true)
     const [checkboxDisabled, setCheckboxDisabled] = useState(false)
+
+    // State for TeamMemberMultiSelect examples
+    const [teamMemberSelection, setTeamMemberSelection] = useState<SelectedMember[]>([])
+    const [teamMemberError, setTeamMemberError] = useState<SelectedMember[]>([])
 
     // Logo rendering logic from customers page
     const renderCustomerLogo = (customer: any) => {
@@ -2241,6 +2323,122 @@ export default function Components(): JSX.Element {
                                         <li>Keyboard accessible</li>
                                         <li>ARIA compliant</li>
                                     </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* TeamMemberMultiSelect Component Showcase */}
+                        <section id="teammembermultiselect">
+                            <h3 className="text-xl font-semibold mb-4">
+                                <code>&lt;TeamMemberMultiSelect /&gt;</code>
+                            </h3>
+
+                            <p className="mb-6 text-secondary">
+                                A complex multi-select component for choosing team members from small teams. Features
+                                collapsible team sections, search functionality, avatar display, and deduplication across
+                                teams.
+                            </p>
+
+                            {/* Basic Example */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Basic example</h4>
+                                <div className="space-y-4">
+                                    <TeamMemberMultiSelect
+                                        label="Team members"
+                                        description="Select team members for this project"
+                                        placeholder="Search teams and members..."
+                                        teams={teams}
+                                        value={teamMemberSelection}
+                                        onChange={setTeamMemberSelection}
+                                    />
+                                    {teamMemberSelection.length > 0 && (
+                                        <div className="text-sm text-secondary">
+                                            Selected: {teamMemberSelection.map((m) => `${m.firstName} ${m.lastName}`).join(', ')}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Error State */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Error state</h4>
+                                <div className="space-y-4">
+                                    <TeamMemberMultiSelect
+                                        label="Required team members"
+                                        description="At least one team member is required"
+                                        placeholder="Search teams and members..."
+                                        teams={teams}
+                                        value={teamMemberError}
+                                        onChange={setTeamMemberError}
+                                        touched={true}
+                                        error="Please select at least one team member"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Features */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Key features</h4>
+                                <div className="space-y-2 text-sm">
+                                    <ul className="list-disc list-inside space-y-1 text-secondary">
+                                        <li>Multi-select with avatar chips for selected members</li>
+                                        <li>"All members" checkbox to select/deselect everyone</li>
+                                        <li>Collapsible team sections using Radix UI Accordion</li>
+                                        <li>Team-level checkboxes to select/deselect all team members</li>
+                                        <li>Search functionality filtering team and member names</li>
+                                        <li>Auto-expand teams with matching members when searching</li>
+                                        <li>Member deduplication by squeakId across multiple teams</li>
+                                        <li>Avatar display with colored backgrounds (like TeamMember component)</li>
+                                        <li>Selection count badges on team headers (e.g., "2/3 selected")</li>
+                                        <li>Tooltip on chips showing team affiliations</li>
+                                        <li>Keyboard navigation (Escape to close, Backspace to remove last)</li>
+                                        <li>Receives data as props for flexibility</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            {/* Data Structure */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Data structure</h4>
+                                <div className="text-sm">
+                                    <p className="mb-2 text-secondary">
+                                        The component receives teams with nested profiles and returns selected members with
+                                        full metadata:
+                                    </p>
+                                    <div className="bg-accent p-4 rounded border border-primary">
+                                        <pre className="text-xs overflow-x-auto">
+                                            {`// Teams prop structure
+teams: Array<{
+  id: string
+  name: string
+  slug: string
+  miniCrest?: { data: { attributes: { url: string } } }
+  profiles: {
+    data: Array<{
+      id: string
+      attributes: {
+        squeakId: string
+        firstName: string
+        lastName: string
+        companyRole?: string
+        avatar?: { data: { attributes: { url: string } } }
+        color?: string
+      }
+    }>
+  }
+}>
+
+// Value/onChange structure
+SelectedMember: {
+  squeakId: string
+  firstName: string
+  lastName: string
+  avatar?: { url: string }
+  color?: string
+  teams: string[]  // Team names
+}`}
+                                        </pre>
+                                    </div>
                                 </div>
                             </div>
                         </section>
