@@ -27,7 +27,7 @@ const computeOffsets = (count: number, baseRadius: number): Array<{ dx: number; 
     let remaining = count
     for (let ring = 1; remaining > 0; ring++) {
         const inRing = Math.min(6, remaining)
-        const radius = baseRadius * ring
+        const radius = baseRadius * ring * 1.5
         for (let i = 0; i < inRing; i++) {
             const angle = (i / inRing) * Math.PI * 2
             const dx = radius * Math.cos(angle)
@@ -216,8 +216,8 @@ export default function HogMap({ layers }: { layers: string[] }): JSX.Element {
             }
 
             if (showPeople) {
-                // Jitter radius scales with zoom (more spread when zoomed out, less when zoomed in)
-                const jitterRadius = Math.max(0.003, 0.08 / Math.max(zoom, 1))
+                // Jitter radius scales with zoom (much more spread when zoomed out, tighter when zoomed in)
+                const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
                 // Group members by their geocode query so people in the same location are combined
                 const groups = members.reduce((acc, m) => {
                     const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
@@ -296,7 +296,7 @@ export default function HogMap({ layers }: { layers: string[] }): JSX.Element {
             }
 
             if (showEvents) {
-                const jitterRadius = Math.max(0.003, 0.08 / Math.max(zoom, 1))
+                const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
                 // Group events by coordinate (rounded) to combine overlapping markers
                 const groups = events.reduce((acc, e) => {
                     const coords = coordsByEventId[e.id]
