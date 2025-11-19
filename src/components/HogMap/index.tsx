@@ -1,6 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import React, { useEffect, useRef, useState } from 'react'
+import { usePeopleMapData, ProfileNode, Coordinates } from './PeopleLayer'
+import { useEventsMapData, EventItem } from './EventsLayer'
 import 'mapbox-gl/dist/mapbox-gl.css'
+
+export const LAYER_PEOPLE = 'layer-people'
+export const LAYER_EVENTS = 'layer-events'
 
 // Delay requiring mapbox-gl until client to avoid SSR issues
 const getMapbox = () => {
@@ -12,52 +16,9 @@ const getMapbox = () => {
     return mapboxgl
 }
 
-const QUERY = graphql`
-    query PeopleMapQuery {
-        allSqueakProfile(
-            filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
-            sort: { fields: startDate, order: ASC }
-        ) {
-            nodes {
-                id
-                squeakId
-                firstName
-                lastName
-                companyRole
-                color
-                country
-                location
-                avatar {
-                    url
-                }
-            }
-        }
-    }
-`
-
-interface Coordinates {
-    latitude: number
-    longitude: number
-}
-
-interface ProfileNode {
-    id: string
-    squeakId: string
-    firstName: string
-    lastName: string
-    companyRole: string
-    color: string
-    country: string
-    location: string
-    avatar?: {
-        url?: string
-    }
-}
-
 // Build a compact grouped avatar element for locations with multiple profiles
-function createAvatarGroupElement(profiles: ProfileNode[]): HTMLDivElement {
-    let containerSize = 86
-    const avatarSizeSmall = 48
+const createAvatarGroupElement = (profiles: ProfileNode[]): HTMLDivElement => {
+    const containerSize = 86
     const avatarSizeMedium = 48
     const avatarSizeLarge = 48
 
@@ -107,23 +68,45 @@ function createAvatarGroupElement(profiles: ProfileNode[]): HTMLDivElement {
             { left: centerCoord(size), top: centerCoord(size), size } // center
         )
     } else {
-        // 6+ — arrange in a ring around the center
-        containerSize = 15 * count
-        const size = avatarSizeSmall
-        const radius = (containerSize - size) / 2
-        const cx = containerSize / 2
-        const cy = containerSize / 2
-        const total = Math.min(count, 8) // keep it readable
-        for (let i = 0; i < total; i++) {
-            const angle = (2 * Math.PI * i) / total - Math.PI / 2 // start at top
-            const x = cx + radius * Math.cos(angle) - size / 2
-            const y = cy + radius * Math.sin(angle) - size / 2
-            positions.push({ left: Math.round(x), top: Math.round(y), size })
-        }
-        // If there are more than we can show nicely, add one in the center to hint more
-        if (count > total) {
-            positions.push({ left: centerCoord(size), top: centerCoord(size), size })
-        }
+        // 6+ — use a compact grid layout
+        const gap = 2
+        const columns = Math.ceil(Math.sqrt(count))
+        const rows = Math.ceil(count / columns)
+        // Derive a cell size to keep container roughly around containerSize
+        const cellSize = 48
+        const widthPx = cellSize * columns + gap * (columns - 1)
+        const heightPx = cellSize * rows + gap * (rows - 1)
+        container.style.display = 'grid'
+        container.style.gridTemplateColumns = `repeat(${columns}, ${cellSize}px)`
+        container.style.gridAutoRows = `${cellSize}px`
+        container.style.gap = `${gap}px`
+        container.style.width = `${widthPx}px`
+        container.style.height = `${heightPx}px`
+        container.style.borderRadius = '8px'
+        // Build grid items
+        profiles.forEach((profile) => {
+            const wrap = document.createElement('div')
+            wrap.classList.add(
+                `bg-${profile.color ?? 'white'}`,
+                'overflow-hidden',
+                'border-2',
+                'border-white',
+                'rounded-full',
+                'shadow-sm',
+                'object-cover'
+            )
+            wrap.style.width = `${cellSize}px`
+            wrap.style.height = `${cellSize}px`
+            const img = document.createElement('img')
+            img.src =
+                profile.avatar?.url ||
+                'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
+            img.alt = [profile.firstName, profile.lastName].filter(Boolean).join(' ') || 'Team member'
+            img.classList.add('w-full', 'h-full', 'object-cover')
+            wrap.appendChild(img)
+            container.appendChild(wrap)
+        })
+        return container
     }
 
     positions.slice(0, profiles.length).forEach((pos, idx) => {
@@ -157,11 +140,7 @@ function createAvatarGroupElement(profiles: ProfileNode[]): HTMLDivElement {
     return container
 }
 
-export default function HogMap(): JSX.Element {
-    const data = useStaticQuery(QUERY) as {
-        allSqueakProfile: { nodes: ProfileNode[] }
-    }
-
+export default function HogMap({ layers }: { layers: string[] }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
     useEffect(() => {
         setIsClient(true)
@@ -174,67 +153,8 @@ export default function HogMap(): JSX.Element {
     const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
     const styleUrl = 'mapbox://styles/mapbox/streets-v12'
 
-    const members = useMemo(
-        () => data.allSqueakProfile.nodes.filter((m) => (m.country || '').trim().toLowerCase() !== 'world'),
-        [data.allSqueakProfile.nodes]
-    )
-
-    // Client geocoding for member locations (simple and cached per render)
-    const [coordsByQuery, setCoordsByQuery] = useState<Record<string, Coordinates>>({})
-    const queries = useMemo(() => {
-        const set = new Set<string>()
-        members.forEach((m) => {
-            const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
-            if (q) {
-                set.add(q)
-            }
-        })
-        return Array.from(set)
-    }, [members])
-
-    useEffect(() => {
-        if (!isClient) {
-            return
-        }
-        if (!token) {
-            return
-        }
-        // Only fetch for unknown queries
-        const toFetch = queries.filter((q) => !coordsByQuery[q])
-        if (toFetch.length === 0) {
-            return
-        }
-        let cancelled = false
-        const fetchAll = async () => {
-            const results: Record<string, Coordinates> = {}
-            await Promise.all(
-                toFetch.map(async (q) => {
-                    try {
-                        const url = new URL('https://api.mapbox.com/search/geocode/v6/forward')
-                        url.searchParams.set('q', q)
-                        url.searchParams.set('types', 'place,region,country')
-                        url.searchParams.set('access_token', token)
-                        const resp = await fetch(url.toString())
-                        const json = await resp.json()
-                        const feature = json?.features?.[0]
-                        const coords = feature?.geometry?.coordinates
-                        if (Array.isArray(coords) && coords.length >= 2) {
-                            results[q] = { longitude: coords[0], latitude: coords[1] }
-                        }
-                    } catch (e) {
-                        // ignore single failure
-                    }
-                })
-            )
-            if (!cancelled && Object.keys(results).length > 0) {
-                setCoordsByQuery((prev) => ({ ...prev, ...results }))
-            }
-        }
-        fetchAll()
-        return () => {
-            cancelled = true
-        }
-    }, [isClient, token, queries, coordsByQuery])
+    const { members, coordsByQuery } = usePeopleMapData(isClient, token)
+    const { events, coordsByEventId } = useEventsMapData(isClient, token)
 
     useEffect(() => {
         if (!isClient) {
@@ -251,7 +171,7 @@ export default function HogMap(): JSX.Element {
             console.error('No token')
             return
         }
-        const DETAIL_ZOOM = 6.5
+        const DETAIL_ZOOM = 6
         const clearMarkers = () => {
             markersRef.current.forEach((m) => m.remove())
             markersRef.current = []
@@ -259,112 +179,231 @@ export default function HogMap(): JSX.Element {
         const renderMarkers = () => {
             if (!mapRef.current) return
             clearMarkers()
-            // Group members by their geocode query so people in the same location are combined
-            const groups = members.reduce((acc, m) => {
-                const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
-                if (!q) {
-                    return acc
-                }
-                const coords = coordsByQuery[q]
-                if (!coords) {
-                    return acc
-                }
-                if (!acc[q]) {
-                    acc[q] = { coords, profiles: [] as ProfileNode[], label: q }
-                }
-                acc[q].profiles.push(m)
-                return acc
-            }, {} as Record<string, { coords: Coordinates; profiles: ProfileNode[]; label: string }>)
-
             const zoom = mapRef.current.getZoom()
 
-            Object.values(groups).forEach(({ coords: { longitude, latitude }, profiles, label }) => {
-                const first = profiles[0]
-                const avatarFallback =
-                    'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
+            const showPeople = Array.isArray(layers) && layers.includes(LAYER_PEOPLE)
+            const showEvents = Array.isArray(layers) && layers.includes(LAYER_EVENTS)
 
-                // Popup lists all people in the location
-                const peopleList = profiles
-                    .map((p) => {
-                        const name = [p.firstName, p.lastName].filter(Boolean).join(' ')
-                        const role = p.companyRole || ''
-                        const href = p.squeakId ? `/community/profiles/${p.squeakId}` : ''
-                        return `<li class="mb-1"><a class="underline font-semibold" href="${href}">${name}</a>${
-                            role ? ` <span class="text-secondary">— ${role}</span>` : ''
-                        }</li>`
-                    })
-                    .join('')
-                const popupHtml = `
-                    <div class="text-sm max-w-[240px]">
-                        <div class="font-semibold mb-1">${label}</div>
-                        <ul class="m-0 p-0 list-none">${peopleList}</ul>
-                    </div>`
-
-                const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
-
-                // Marker element
-                const el = document.createElement('div')
-
-                const isClusterMode = profiles.length > 1 && zoom < DETAIL_ZOOM
-                if (isClusterMode) {
-                    // Show a circle with the count
-                    el.style.width = '36px'
-                    el.style.height = '36px'
-                    el.style.borderRadius = '18px'
-                    el.style.background = '#111827'
-                    el.style.color = '#ffffff'
-                    el.style.display = 'flex'
-                    el.style.alignItems = 'center'
-                    el.style.justifyContent = 'center'
-                    el.style.border = '2px solid #ffffff'
-                    el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
-                    el.style.fontWeight = '600'
-                    el.style.fontSize = '12px'
-                    el.textContent = String(profiles.length)
-                } else {
-                    el.style.width = profiles.length > 1 ? '56px' : '48px'
-                    el.style.height = '48px'
-                    el.style.borderRadius = '50%'
-                    el.style.display = 'flex'
-                    el.style.alignItems = 'center'
-                    el.style.justifyContent = 'center'
-                    el.style.overflow = 'hidden'
-
-                    if (profiles.length === 1) {
-                        // Single avatar
-                        const img = document.createElement('img')
-                        img.src = first.avatar?.url || avatarFallback
-                        img.alt = [first.firstName, first.lastName].filter(Boolean).join(' ') || 'Team member'
-                        img.classList.add(
-                            `bg-${first.color ?? 'white'}`,
-                            'border-2',
-                            'border-white',
-                            'rounded-full',
-                            'shadow-sm',
-                            'w-full',
-                            'h-full',
-                            'object-cover'
-                        )
-                        el.appendChild(img)
-                    } else {
-                        const groupEl = createAvatarGroupElement(profiles)
-                        el.style.borderRadius = '8px'
-                        el.style.overflow = 'visible'
-                        el.appendChild(groupEl)
+            if (showPeople) {
+                // Group members by their geocode query so people in the same location are combined
+                const groups = members.reduce((acc, m) => {
+                    const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
+                    if (!q) {
+                        return acc
                     }
-                }
+                    const coords = coordsByQuery[q]
+                    if (!coords) {
+                        return acc
+                    }
+                    if (!acc[q]) {
+                        acc[q] = { coords, profiles: [] as ProfileNode[], label: q }
+                    }
+                    acc[q].profiles.push(m)
+                    return acc
+                }, {} as Record<string, { coords: Coordinates; profiles: ProfileNode[]; label: string }>)
 
-                const marker = new mapboxgl.Marker({ element: el })
-                    .setLngLat([longitude, latitude])
-                    .setPopup(popup)
-                    .addTo(mapRef.current)
+                Object.values(groups).forEach(({ coords: { longitude, latitude }, profiles, label }) => {
+                    const first = profiles[0]
+                    const avatarFallback =
+                        'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
 
-                // Hover behavior
-                marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
-                marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                    // Popup lists all people in the location
+                    const peopleList = profiles
+                        .map((p) => {
+                            const name = [p.firstName, p.lastName].filter(Boolean).join(' ')
+                            const role = p.companyRole || ''
+                            const href = p.squeakId ? `/community/profiles/${p.squeakId}` : ''
+                            return `<li class="mb-1"><a class="underline font-semibold" href="${href}">${name}</a>${
+                                role ? ` <span class="text-secondary">— ${role}</span>` : ''
+                            }</li>`
+                        })
+                        .join('')
+                    const popupHtml = `
+                        <div class="text-sm max-w-[240px]">
+                            <div class="font-semibold mb-1">${label}</div>
+                            <ul class="m-0 p-0 list-none">${peopleList}</ul>
+                        </div>`
 
-                markersRef.current.push(marker)
-            })
+                    const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+
+                    // Marker element
+                    const el = document.createElement('div')
+
+                    const isClusterMode = profiles.length > 1 && zoom < DETAIL_ZOOM
+                    if (isClusterMode) {
+                        // Show a circle with the count
+                        el.style.width = '36px'
+                        el.style.height = '36px'
+                        el.style.borderRadius = '18px'
+                        el.style.background = '#111827'
+                        el.style.color = '#ffffff'
+                        el.style.display = 'flex'
+                        el.style.alignItems = 'center'
+                        el.style.justifyContent = 'center'
+                        el.style.border = '2px solid #ffffff'
+                        el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
+                        el.style.fontWeight = '600'
+                        el.style.fontSize = '12px'
+                        el.textContent = String(profiles.length)
+                    } else {
+                        el.style.width = profiles.length > 1 ? '56px' : '48px'
+                        el.style.height = '48px'
+                        el.style.borderRadius = '50%'
+                        el.style.display = 'flex'
+                        el.style.alignItems = 'center'
+                        el.style.justifyContent = 'center'
+                        el.style.overflow = 'hidden'
+
+                        if (profiles.length === 1) {
+                            // Single avatar
+                            const img = document.createElement('img')
+                            img.src = first.avatar?.url || avatarFallback
+                            img.alt = [first.firstName, first.lastName].filter(Boolean).join(' ') || 'Team member'
+                            img.classList.add(
+                                `bg-${first.color ?? 'white'}`,
+                                'border-2',
+                                'border-white',
+                                'rounded-full',
+                                'shadow-sm',
+                                'w-full',
+                                'h-full',
+                                'object-cover'
+                            )
+                            el.appendChild(img)
+                        } else {
+                            const groupEl = createAvatarGroupElement(profiles)
+                            el.style.borderRadius = '8px'
+                            el.style.overflow = 'visible'
+                            el.appendChild(groupEl)
+                        }
+                    }
+
+                    const marker = new mapboxgl.Marker({ element: el })
+                        .setLngLat([longitude, latitude])
+                        .setPopup(popup)
+                        .addTo(mapRef.current)
+
+                    // Hover behavior
+                    marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                    marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+
+                    markersRef.current.push(marker)
+                })
+            }
+
+            if (showEvents) {
+                // Group events by coordinate (rounded) to combine overlapping markers
+                const groups = events.reduce((acc, e) => {
+                    const coords = coordsByEventId[e.id]
+                    if (!coords) {
+                        return acc
+                    }
+                    const key = `${coords.longitude.toFixed(4)},${coords.latitude.toFixed(4)}`
+                    if (!acc[key]) {
+                        acc[key] = {
+                            coords,
+                            events: [] as EventItem[],
+                            label: e.location?.label || 'Event',
+                        }
+                    }
+                    acc[key].events.push(e)
+                    return acc
+                }, {} as Record<string, { coords: Coordinates; events: EventItem[]; label: string }>)
+
+                Object.values(groups).forEach(({ coords: { longitude, latitude }, events, label }) => {
+                    const popupList = events
+                        .map((ev) => {
+                            const date = ev.date
+                                ? new Date(ev.date).toLocaleDateString('en-US', {
+                                      month: 'short',
+                                      day: 'numeric',
+                                      year: 'numeric',
+                                  })
+                                : ''
+                            const href = ev.link || ''
+                            const name = ev.name || 'Event'
+                            return `<li class="mb-1"><a class="underline font-semibold" href="${href}">${name}</a>${
+                                date ? ` <span class="text-secondary">— ${date}</span>` : ''
+                            }</li>`
+                        })
+                        .join('')
+                    const popupHtml = `
+                        <div class="text-sm max-w-[260px]">
+                            <div class="font-semibold mb-1">${label}</div>
+                            <ul class="m-0 p-0 list-none">${popupList}</ul>
+                        </div>`
+                    const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+
+                    // Marker element
+                    const el = document.createElement('div')
+                    const isClusterMode = events.length > 1 && zoom < DETAIL_ZOOM
+                    if (isClusterMode) {
+                        // Cluster-style count bubble (match people styling)
+                        el.style.width = '36px'
+                        el.style.height = '36px'
+                        el.style.borderRadius = '18px'
+                        el.style.background = '#111827'
+                        el.style.color = '#ffffff'
+                        el.style.display = 'flex'
+                        el.style.alignItems = 'center'
+                        el.style.justifyContent = 'center'
+                        el.style.border = '2px solid #ffffff'
+                        el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
+                        el.style.fontWeight = '600'
+                        el.style.fontSize = '12px'
+                        el.textContent = String(events.length)
+                    } else {
+                        if (events.length === 1) {
+                            // Single event: small orange dot with white border
+                            el.style.width = '20px'
+                            el.style.height = '20px'
+                            el.style.borderRadius = '10px'
+                            el.style.background = '#FF9500'
+                            el.style.border = '2px solid #ffffff'
+                            el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
+                        } else {
+                            // Multiple events at same spot: compact grid of orange dots
+                            const container = document.createElement('div')
+                            const count = Math.min(events.length, 9)
+                            const columns = Math.ceil(Math.sqrt(count))
+                            const rows = Math.ceil(count / columns)
+                            const cell = 10
+                            const gap = 2
+                            container.style.display = 'grid'
+                            container.style.gridTemplateColumns = `repeat(${columns}, ${cell}px)`
+                            container.style.gridAutoRows = `${cell}px`
+                            container.style.gap = `${gap}px`
+                            container.style.padding = '2px'
+                            container.style.background = '#ffffff'
+                            container.style.border = '2px solid #ffffff'
+                            container.style.borderRadius = '6px'
+                            container.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
+                            container.style.width = `${columns * cell + gap * (columns - 1) + 4}px`
+                            container.style.height = `${rows * cell + gap * (rows - 1) + 4}px`
+                            for (let i = 0; i < count; i++) {
+                                const dot = document.createElement('div')
+                                dot.style.width = `${cell}px`
+                                dot.style.height = `${cell}px`
+                                dot.style.borderRadius = '50%'
+                                dot.style.background = '#FF9500'
+                                container.appendChild(dot)
+                            }
+                            el.appendChild(container)
+                        }
+                    }
+
+                    const marker = new mapboxgl.Marker({ element: el })
+                        .setLngLat([longitude, latitude])
+                        .setPopup(popup)
+                        .addTo(mapRef.current)
+
+                    // Hover behavior
+                    marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                    marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+
+                    markersRef.current.push(marker)
+                })
+            }
         }
 
         if (mapRef.current) {
@@ -423,7 +462,7 @@ export default function HogMap(): JSX.Element {
                 mapRef.current = null
             }
         }
-    }, [isClient, token, styleUrl, coordsByQuery, members])
+    }, [isClient, token, styleUrl, coordsByQuery, members, layers, events, coordsByEventId])
 
     return (
         <div className="box-border w-full h-full rounded border border-primary overflow-hidden">
