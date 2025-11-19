@@ -13,7 +13,7 @@ export const microsoft_clarity = {
             },
             features: {
                 canvas_recording: false, // Cannot render canvas elements
-                chat_with_recordings: false, // No AI chat feature
+                chat_with_recordings: true, // No AI chat feature
                 clickmaps: true, // Yes
                 conditional_recording: false, // No built-in conditional recording
                 crash_reports: false, // Not available

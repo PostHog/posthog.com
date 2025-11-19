@@ -21,7 +21,7 @@ export const openreplay = {
                 export_to_video: false, // Not mentioned
                 filter_by_user_or_event: true, // Yes, omni-search
                 identity_detection: true, // Yes, user identification
-                iframe_recording: false, // Not mentioned
+                iframe_recording: true, // https://docs.openreplay.com/en/installation/crossdomain-iframe/
                 minimum_duration: false, // Not mentioned
                 movement_maps: false, // Not available
                 notes_on_replays: true, // Yes, annotations
