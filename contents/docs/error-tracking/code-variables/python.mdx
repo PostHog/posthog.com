@@ -14,7 +14,7 @@ from posthog import Posthog
 posthog = Posthog(
     "<ph_project_api_key>",
     enable_exception_autocapture=True,
-    code_variables_enabled=True,
+    capture_exception_code_variables=True,
 )
 ```
 
@@ -66,7 +66,7 @@ DEFAULT_CODE_VARIABLES_MASK_PATTERNS = [
 posthog = Posthog(
     "<ph_project_api_key>",
     enable_exception_autocapture=True,
-    code_variables_enabled=True,
+    capture_exception_code_variables=True,
     code_variables_mask_patterns=[
         r".*password.*",    # Mask any variable containing "password"
         r".*token.*",       # Mask any variable containing "token"
@@ -99,7 +99,7 @@ By default, Python internal variables (starting with `__`) are ignored.
 posthog = Posthog(
     "<ph_project_api_key>",
     enable_exception_autocapture=True,
-    code_variables_enabled=True,
+    capture_exception_code_variables=True,
     code_variables_ignore_patterns=[
         r"^__.*",      # Python internals
         r"^_.*",       # Private variables
