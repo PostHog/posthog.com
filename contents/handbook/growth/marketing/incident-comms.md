@@ -7,8 +7,8 @@ showTitle: true
 Incident communication guidelines
 =================================
 
-> These guidelines are for marketers who support engineering during incidents.\
-> For engineers, we have additional guidance on [how to declare and handle an incident](/handbook/engineering/operations/incidents).\
+> These guidelines are for marketers who support engineering during incidents.
+> For engineers, we have additional guidance on [how to declare and handle an incident](/handbook/engineering/operations/incidents).
 > For GTM workflows and templates, see the [communication templates for incidents](/handbook/growth/sales/communications-templates-incidents).
 
 Incidents happen. Each one is different and not all incidents require comms, but when they do we need to have clear processes in mind.
@@ -30,7 +30,7 @@ The role of the Comms Lead typically involves planning how we will respond at a 
 -   Taking ownership of any large-scale communication to users.
 -   Coordinating with Support, Sales, and Success so we don't duplicate or contradict each other.
 
-> **Oh no --- all the PMMs are on holiday or asleep!**\
+> **Oh no --- all the PMMs are on holiday or asleep!**
 > If this happens, the incident lead may appoint a Comms Lead from [the Content Team](/teams) or another team. If the incident lead fails to appoint a Comms Lead, [Team Blitzscale](/teams) should appoint someone to lead Comms. 
 
 Guidelines for Comms Leads
@@ -38,16 +38,16 @@ Guidelines for Comms Leads
 
 These are principles to keep in mind during any incident:
 
--   **Identify the per-product impact.**\
+-   **Identify the per-product impact.**
     This helps scope the customer impact. Always clarify the impact on feature flags, experiments, and workflows especially. It's always worth asking how it impacts each product and if any data is lost, or merely delayed.
 
--   **Don't rush external comms.**\
+-   **Don't rush external comms.**
     It's better to be slower and correct than fast and wrong. The status page and support tickets usually cover the early phase while details are changing quickly.
 
--   **Default to transparency, not overcommunication.**\
+-   **Default to transparency, not overcommunication.**
     We shouldn't send comms unless there's a definite impact and a clear story to tell. If we do send external comms, target **owners and admins in impacted orgs** where possible, rather than being too noisy.
 
--   **Use the status page as the primary public channel.**\
+-   **Use the status page as the primary public channel.**
     The status page should be the main place we direct users to during an incident. Extra channels (emails, social posts) are the exception, not the rule. If a post-mortem is created, this supersedes the status page.
 
 -   **Aim not to send broad customer comms until an incident is resolved or a post-mortem is published.**
@@ -60,14 +60,14 @@ What does the Comms Lead do?
 
 At a high level, the Comms Lead is responsible for *how* we talk about the incident, not for fixing it. In practice, that usually means:
 
--   **Join the incident channel immediately and make your role clear.**\
--   **Stay in the loop without adding noise.**\
+-   **Join the incident channel immediately and make your role clear.**
+-   **Stay in the loop without adding noise.**
     Read the summaries and updates, follow the thread, and avoid asking for updates just to "check in". Only jump in when you need information for comms, or have a specific ask.
--   **Make sure the status page is accurate and up to date.**\
+-   **Make sure the status page is accurate and up to date.**
     Check-in periodically to ensure the status is updated at least once every six hours, that the current impact is accurately described, and that the incident is closed when needed. [The Incident Lead](/handbook/engineering/operations/incidents) is responsible for these updates. 
--   **Decide whether we actually need outbound comms.**\
+-   **Decide whether we actually need outbound comms.**
     If we do, you should put together a plan for doing so (below).
--   **Draft, coordinate, and send any messages.**\
+-   **Draft, coordinate, and send any messages.**
     When we *do* decide to communicate:
 
     -   Create a comms plan to coordinate the response. This should be an issue in an internal repo. [Here's an example comms plan for a critical incident](https://github.com/PostHog/company-internal/issues/2431).
@@ -76,11 +76,11 @@ At a high level, the Comms Lead is responsible for *how* we talk about the incid
     -   By default, communicate through email rather than in social posts. Social posts can exacerbate an issue.
     -   Direct users to the status page or post-mortem (if available) as the source of truth. 
 
--   **Support the post-mortem process.**\
+-   **Support the post-mortem process.**
     For major/critical incidents you may need to help shape and review the post-mortem with the incident lead and approvers (Tim and/or Ben, and Charles). Once published, use the post-mortem as the primary reference for any follow-up comms (emails, service messages, etc.), rather than rewriting multiple different explanations.
--   **Keep Sales and Support teams notified of impact.**\
+-   **Keep Sales and Support teams notified of impact.**
     Often these teams are dealing with the brunt of the customer response and your goal should be support them by giving them the information they need to respond effectively. 
--   **Handover to another Comms Lead, if needed.**\
+-   **Handover to another Comms Lead, if needed.**
     Most comms can be handled quickly, but in the event of a long-running issue you should develop a plan to handover or continue monitoring the incident status.
 
 These steps are a starting point, not a script. In practice, the Comms Lead's job is to keep communication **accurate, calm, and useful** --- and to reduce noise, not add to it.
