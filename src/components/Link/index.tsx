@@ -94,8 +94,7 @@ export default function Link({
     customMenuItems = [],
     ...other
 }: Props): JSX.Element {
-    const { compact } = useLayoutData()
-    const { openStart, siteSettings, posthogInstance } = useApp()
+    const { posthogInstance, compact } = useApp()
     const posthog = usePostHog()
     const url = to || href
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)

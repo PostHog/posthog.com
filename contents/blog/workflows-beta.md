@@ -1,6 +1,6 @@
 ---
 title: Workflows graduate to beta! Product data, meet automation
-date: 2025-11-09
+date: 2025-11-12
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -15,12 +15,12 @@ tags:
     - Workflows
 seo:
     {
-        metaTitle: 'Workflows graduate to beta, and they’re ready for real automations',
+        metaTitle: 'Workflows graduate to beta! Product data, meet automation',
         metaDescription: 'Workflows are now in Beta, bringing drip campaigns, new channels, and different automation opportunities. No syncing, no Zapier, just pure product-led automation.',
     }
 ---
 
-When we first introduced [Workflows (in alpha)](/blog/workflows-alpha), it was still a bit rough around the edges, and many of you were brave enough to test (and occasionally break) it. Since then, we’ve spent a lot of time fixing, refining, and adding power where it counts.
+When we first introduced [Workflows (in alpha)](/blog/workflows-alpha), it was still a bit rough around the edges, and many of you were brave enough to test it. Since then, we’ve spent a lot of time fixing, refining, and adding power where it counts.
 
 Now, Workflows has officially graduated to beta.
 
@@ -39,7 +39,7 @@ If you’ve used Zapier, Make, Brevo, Active Campaign or similar tools before, t
 
 Teams like [Grantable](/customers/grantable) are already seeing the benefits. Evan Rallis, who leads product & growth there, told us:
 
-**“PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.”**
+> “PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.”
 
 Evan said it's almost twice as fast to build automations in Workflows than with other tools, in part because he doesn't need to switch to a third-party tool and wait for data to sync.
 

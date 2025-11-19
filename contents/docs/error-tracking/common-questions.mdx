@@ -51,3 +51,35 @@ To see the actual error, the erroring script needs to be loaded `anonymously` wh
 It can be somewhat difficult to know which script is causing the error because the captured exception provides no context. There is no solution to this other than to work through a process of elimination.
 
 If the script is within your control, you also need to set the `Access-Control-Allow-Origin` response header to include the calling domain. This can be a comma separated list of valid domains or a global wildcard e.g `*`.
+
+### What is a 'Non-Error promise rejection' error with no stack traces?
+
+When you do not pass an `Error` object to a rejected promise, the resulting error captured will be a generic 'Non-Error promise rejection' and the stack trace context will not be included. An example of this is:
+
+```js
+new Promise((resolve, reject) => {
+    // the captured error will be 'Non-Error promise rejection' without a stack trace
+    reject('Something went wrong');
+});
+```
+
+The easiest way to resolve this is to always reject promises with an `Error` object:
+
+```js
+new Promise((resolve, reject) => {
+    // the captured error will be 'Something went wrong' with a stack trace
+    reject(new Error('Something went wrong'));
+});
+```
+
+### What is a 'Minified React error' with no stack traces?
+
+In order to reduce bundle size in production builds React removes useful debugging information from errors thrown by the framework. This results in errors that lack stack traces and look like the following:
+
+```
+Minified React error #123; visit https://reactjs.org/docs/error-decoder.html?invariant=123 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+```
+
+The link provided in the error message can be used to look up the full error message and understand the cause of the error. However, it will not tell you exactly where in your code the error originates from.
+
+One way to debug these kinds of issues is to watch session recordings to see what user actions lead up to the error occurring. From there you can try to reproduce the error by following the same steps in your development environment, where the full stack trace will be available.

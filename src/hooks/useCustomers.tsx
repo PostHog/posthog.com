@@ -17,6 +17,8 @@ import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
+import CroissantLogo from '../images/customers/croissant-light.png'
+import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
@@ -57,11 +59,11 @@ export interface Customer {
     users?: string[]
     notes?: React.ReactNode
     logo?:
-        | React.ComponentType<any>
-        | {
-              light: string
-              dark: string
-          }
+    | React.ComponentType<any>
+    | {
+        light: string
+        dark: string
+    }
     height?: number
     quotes?: Record<
         string,
@@ -86,11 +88,11 @@ interface BaseCustomer {
     users?: string[]
     notes?: React.ReactNode
     logo?:
-        | React.ComponentType<any>
-        | {
-              light: string
-              dark: string
-          }
+    | React.ComponentType<any>
+    | {
+        light: string
+        dark: string
+    }
     legacyLogo?: string // Temporary until SVG component created
     legacyLogoDark?: string // Temporary until SVG component created
     height?: number
@@ -266,12 +268,12 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'llm_analytics',
             'data_warehouse',
         ],
-        industries: ['Business', 'SaaS'],
+        industries: ['SaaS'],
         users: ['Data', 'Product', 'Marketing'],
         notes: 'AI compliance and grant writing',
         featured: false,
         logo: GrantableLogo,
-        height: 8,
+        height: 6,
         quotes: {
             evan_ralliss: {
                 name: 'Evan Ralliss',
@@ -282,6 +284,32 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 products: {
                     workflows:
                         'PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.',
+                },
+            },
+        },
+    },
+    croissant: {
+        name: 'Croissant',
+        toolsUsed: ['workflows', 'product_analytics', 'surveys', 'web_analytics'],
+        industries: ['SaaS'],
+        users: ['Growth', 'Product', 'Marketing'],
+        notes: 'Workspace finder',
+        featured: false,
+        logo: {
+            light: CroissantLogo,
+            dark: CroissantLogoDark,
+        },
+        height: 6,
+        quotes: {
+            jorge_lopez: {
+                name: 'Jorge López',
+                role: 'Growth',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jorge_lopez_sarry_a9197f790d.jpeg',
+                },
+                products: {
+                    workflows:
+                        'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
                 },
             },
         },

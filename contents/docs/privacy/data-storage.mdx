@@ -6,6 +6,7 @@ showTitle: true
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
+import DistinctIdReuseWarning from './_snippets/distinct-id-reuse-warning.mdx'
 
 This guide covers the various features available **after data reaches PostHog Cloud servers** to help you achieve your privacy goals. If you have data that cannot reach a third-party server like PostHog, please omit them during [data collection](/docs/privacy/data-collection).
 
@@ -96,13 +97,7 @@ You can remove unwanted data from PostHog by deleting groups and persons.
 
 ### Right to be forgotten
 
-<CalloutBox icon="IconWarning" title="Note" type="caution">
-
-You can reuse `distinct_id` values after deletion using the **Reset deleted person** tool, available from the dropdown at the top-right of the [**persons page**](https://app.posthog.com/persons). This tool allows you to reset a deleted `distinct_id` so that future events associated with it will create a new person profile.  
-
-If you instead want to split a person with multiple IDs (e.g. to isolate bad data tied to a specific `distinct_id`), use the **Split IDs** button on their person profile.
-
-</CalloutBox>
+<DistinctIdReuseWarning />
 
 Persons and events can be deleted using our API endpoints. This action requires a [personal API key](https://us.posthog.com/settings/user-api-keys).
 
