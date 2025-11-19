@@ -10,7 +10,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
 import { useCustomers } from 'hooks/useCustomers'
-import { OSInput, OSTextarea, OSSelect } from 'components/OSForm'
+import { OSInput, OSTextarea, OSSelect, Combobox } from 'components/OSForm'
 import { Fieldset } from 'components/OSFieldset'
 import ProductComparisonTable from 'components/ProductComparisonTable'
 import ReaderView from 'components/ReaderView'
@@ -55,6 +55,11 @@ const tableOfContents = [
         depth: 0,
     },
     {
+        value: 'Combobox',
+        url: 'combobox',
+        depth: 1,
+    },
+    {
         value: 'Competitor feature matrix',
         url: 'competitor-matrix',
         depth: 0,
@@ -68,6 +73,11 @@ const tableOfContents = [
 
 export default function Components(): JSX.Element {
     const { customers } = useCustomers()
+
+    // State for Combobox examples
+    const [comboboxTags, setComboboxTags] = useState<any[]>([])
+    const [comboboxMembers, setComboboxMembers] = useState<any[]>([])
+    const [comboboxCategories, setComboboxCategories] = useState<any[]>([])
 
     // Logo rendering logic from customers page
     const renderCustomerLogo = (customer: any) => {
@@ -1978,6 +1988,99 @@ export default function Components(): JSX.Element {
                                         size="lg"
                                         placeholder="Select your team..."
                                     />
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Combobox Component Showcase */}
+                        <section id="combobox">
+                            <h3 className="text-xl font-semibold mb-4">
+                                <code>&lt;Combobox /&gt;</code>
+                            </h3>
+
+                            <p className="mb-6 text-secondary">
+                                A multi-select combobox component with search, keyboard navigation, and optional creation of
+                                new options. Perfect for tags, categories, and multi-value selections.
+                            </p>
+
+                            {/* Basic Examples */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Basic example (with creation enabled)</h4>
+                                <div className="space-y-4">
+                                    <Combobox
+                                        label="Tags"
+                                        placeholder="Select or create tags..."
+                                        description="Type to search or create new tags"
+                                        options={[
+                                            { label: 'React', value: 'react' },
+                                            { label: 'TypeScript', value: 'typescript' },
+                                            { label: 'JavaScript', value: 'javascript' },
+                                            { label: 'Python', value: 'python' },
+                                            { label: 'Go', value: 'go' },
+                                        ]}
+                                        value={comboboxTags}
+                                        onChange={setComboboxTags}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Without Creation */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Without creation (predefined options only)</h4>
+                                <div className="space-y-4">
+                                    <Combobox
+                                        label="Team members"
+                                        placeholder="Select team members..."
+                                        description="Choose from existing team members"
+                                        options={[
+                                            { label: 'Alice Johnson', value: 'alice' },
+                                            { label: 'Bob Smith', value: 'bob' },
+                                            { label: 'Charlie Brown', value: 'charlie' },
+                                            { label: 'Diana Prince', value: 'diana' },
+                                        ]}
+                                        value={comboboxMembers}
+                                        onChange={setComboboxMembers}
+                                        allowCreate={false}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Error State */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Error state</h4>
+                                <div className="space-y-4">
+                                    <Combobox
+                                        label="Categories"
+                                        placeholder="Select at least one category..."
+                                        description="At least one category is required"
+                                        options={[
+                                            { label: 'Frontend', value: 'frontend' },
+                                            { label: 'Backend', value: 'backend' },
+                                            { label: 'DevOps', value: 'devops' },
+                                            { label: 'Design', value: 'design' },
+                                        ]}
+                                        value={comboboxCategories}
+                                        onChange={setComboboxCategories}
+                                        touched={true}
+                                        error="Please select at least one category"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Features */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Key features</h4>
+                                <div className="space-y-2 text-sm">
+                                    <ul className="list-disc list-inside space-y-1 text-secondary">
+                                        <li>Multi-select with visual chips for selected items</li>
+                                        <li>Search/filter options by typing</li>
+                                        <li>Keyboard navigation (Arrow Up/Down, Enter, Escape, Backspace)</li>
+                                        <li>Optional creation of new options (allowCreate prop)</li>
+                                        <li>Click to select/deselect items</li>
+                                        <li>Remove items by clicking X or using Backspace</li>
+                                        <li>Checkmark indicator for selected items in dropdown</li>
+                                        <li>Auto-scrolling for keyboard navigation</li>
+                                    </ul>
                                 </div>
                             </div>
                         </section>
