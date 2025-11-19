@@ -15,6 +15,7 @@ features:
   groupAnalytics: true
   surveys: true
   llmAnalytics: false
+  errorTracking: true
 ---
 
 import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
@@ -324,6 +325,10 @@ posthog.group('company', 'company_id_in_your_db', {
 ```
 
 The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
+
+## Error tracking
+
+To set up error tracking in your project, follow the [React Native installation guide](/docs/error-tracking/installation/react-native).
 
 ## Session replay
 
