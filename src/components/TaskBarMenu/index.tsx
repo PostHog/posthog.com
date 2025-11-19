@@ -11,14 +11,12 @@ import {
     IconBookmark,
     IconUpload,
     IconCode,
-    IconCheck,
-    IconCopy,
-    IconShare,
     IconFeatures,
+    IconMapPin,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
-import MenuBar, { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
+import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
 import OSButton from 'components/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -28,7 +26,6 @@ import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
-import { Popover } from 'components/RadixUI/Popover'
 
 export default function TaskBarMenu() {
     const {
@@ -201,6 +198,18 @@ export default function TaskBarMenu() {
                                     label: 'Feature matrix',
                                     link: '/feature-matrix',
                                     icon: <IconFeatures className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Place reviews',
+                                    link: '/places-reviews',
+                                    icon: <IconMapPin className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Offsites',
+                                    link: '/offsites',
+                                    icon: <IconMapPin className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                             ]
                           : []),
