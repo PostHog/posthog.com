@@ -13,7 +13,7 @@ export const openreplay = {
             features: {
                 canvas_recording: false, // Not mentioned
                 chat_with_recordings: false, // No AI chat feature
-                clickmaps: false, // Not available as separate feature
+                clickmaps: true, // With heatmaps
                 conditional_recording: true, // Yes, via filtering
                 crash_reports: true, // Yes, crash detection
                 event_timeline: true, // Yes
