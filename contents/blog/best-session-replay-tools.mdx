@@ -22,12 +22,12 @@ seo:
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Picture this: you've spent days building a feature. Staging looks perfect. You hit deploy, grab a coffee, and feel good about it.
+Picture this: you've spent days building a feature. It looks perfect on dev and checks are green. You hit deploy, grab a coffee, and feel good about it.
 
 Then your inbox starts lighting up with support tickets.
 
 You check the logs. Nothing.  
-You try to reproduce it yourself. Works perfectly.  
+You try to reproduce it yourself. Works on my machine.  
 You ask the user what they did. "I don't know, it just broke."
 
 ![Confusion illustration](https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/gettyimages_946339470_640x640_1d2c0e210e.jpg)
@@ -94,9 +94,9 @@ Here's how some of the most popular session replay tools compare:
 
 PostHog is an all-in-one developer platform that goes beyond session replay by combining [product analytics](/product-analytics), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and even [LLM analytics](/llm-analytics) in one place.
 
-Each recording connects automatically to the related user, events, feature flag variant, and any triggered errors, giving you complete context. You can watch what happened, inspect console logs and network calls, ship a fix behind a feature flag, then measure the impact without switching tools.
+Each recording gives you the complete context including the related user, events, feature flag variant, and any triggered errors. You can watch what happened, inspect console logs and network calls, identify the issue, ship a fix behind a feature flag, and measure the impact without switching tools.
 
-PostHog uses simple usage-based pricing with optional caps. The free tier includes 5,000 sessions per month, which is enough for most early teams.
+PostHog uses simple usage-based pricing with optional caps. The free tier includes 5,000 web sessions and 2,500 mobile sessions per month, which is enough for most early teams.
 
 **Strengths:**
 
@@ -189,6 +189,7 @@ Its recording quality is quite good, and the option to self-host makes it appeal
 
 **Strengths:**
 
+- Open source and self-hostable
 -   Full console and network capture  
 -   Plugin architecture and flexible integrations  
 -   Strong privacy and data ownership  
