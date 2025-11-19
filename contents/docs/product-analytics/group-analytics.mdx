@@ -13,25 +13,29 @@ import JSCreateGroups from "../_snippets/how-to-create-groups.mdx"
 import JSSetGroupProperties from "../_snippets/setting-group-properties.mdx"
 import JSLinkEventsToGroups from "../_snippets/how-to-link-events-to-groups.mdx"
 import JSGroupsUseCases from "../_snippets/groups-use-cases.mdx"
-export const viewGroupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/view-groups-light-mode.png"
-export const viewGroupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/view-groups-dark-mode.png"
+export const viewGroupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_18_at_4_32_28_PM_a50cde09dc.png"
+export const viewGroupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_18_at_4_33_15_PM_8327fc6d2f.png"
 export const relatedLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/related-people-and-groups-light-mode.png"
 export const relatedDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/related-people-and-groups-dark-mode.png"
-export const groupInsightsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/group-insights-light-mode.png"
-export const groupInsightsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/group-insights-dark-mode.png"
-export const funnelsGroupAggregationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/funnels-group-aggregation-light-mode.png"
-export const funnelsGroupAggregationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/funnels-group-aggregation-dark-mode.png"
+export const groupInsightsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_18_at_4_55_39_PM_3232c7d568.png"
+export const groupInsightsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_18_at_4_55_56_PM_aa78af1558.png"
+export const funnelsGroupAggregationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_18_at_4_58_31_PM_f36d3c1500.png"
+export const funnelsGroupAggregationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_18_at_4_58_05_PM_e0829fe567.png"
 export const groupsInFeatureLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-in-feature-flags-light-mode.mp4"
 export const groupsInFeatureDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-in-feature-flags-dark-mode.mp4"
 export const groupsProjectSettingLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-project-settings-light-mode.png"
 export const groupsProjectSettingDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-project-settings-dark-mode.png"
+export const deleteGroupsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_18_at_5_24_35_PM_dd4232b4cd.png"
+export const deleteGroupsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_18_at_5_25_09_PM_edbc66efd0.png"
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/9mCWbVNzn4c"
     className="rounded shadow-xl"
 />
 
-> 🎉 **New:** Group analytics is getting a makeover! Sign up for the [B2B analytics feature preview](https://app.posthog.com/settings/user-feature-previews#b2b-analytics) to get a sneak peek. [Let us know what you think in-app](https://us.posthog.com#panel=support%3Afeedback%3Acrm%3Alow).
+<CalloutBox icon="IconInfo" title="New: B2B analytics preview" type="fyi">
+Group analytics is getting a makeover! Sign up for the B2B analytics feature preview to get a sneak peek. Share your feedback.
+</CalloutBox>
 
 <JSGroupsIntro />
 
@@ -43,19 +47,19 @@ export const groupsProjectSettingDark = "https://res.cloudinary.com/dmukukwp6/im
 
 <JSGroupsVSCohorts />
 
-## How to create groups
+## Create groups
 
 <JSCreateGroups />
 
-## How to set group properties
+## Set up group properties
 
 <JSSetGroupProperties />
 
-## How to capture group events
+## Capture group events
 
 <JSLinkEventsToGroups />
 
-### Advanced (server-side only): Capturing group events without a user
+### Advanced (server-side only): Capture group events without a user
 
 If you want to capture group events but don't want to associate them with a specific user, we recommend using a single static string as the distinct ID to capture these events. This can be anything you want, as long as it's the same for every group event:
 
@@ -110,44 +114,40 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 Now that we have created our first group type, we can take a look at how to use groups within PostHog.
 
-### Viewing groups and their properties
+### View groups and their properties
 
-To view groups and their properties, head to the **People and groups** tab on the navigation bar.
+To view groups and their properties:
 
-From here, you can select the group type you are interested in and view the groups and properties (by clicking the chevrons on the left). The properties shown here can be customized by clicking **Configure columns**.
+1. Go to the **People** tab on the navigation bar.
+2. Select the **group type** you are interested in and view the groups and properties.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_02_at_13_34_37_2x_0e700b3bb8.png" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_02_at_13_34_49_2x_d92d58ce0d.png"
+    imageLight = {viewGroupLight}
+    imageDark = {viewGroupDark}
     classes="rounded"
     alt="View groups"
 />
 
-Clicking one of groups brings you to the group details page. Here, you can generate, view, and customize a dashboard for the group. Beyond this, you can see events, recordings, related people, and more. On the **properties** tab, you can add, update, and delete group properties.
-
-<ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_02_at_13_27_14_2x_faa9770710.png" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_02_at_13_26_02_2x_407c211ca9.png"
-    classes="rounded"
-    alt="View group details"
-/>
-
-### How to view group insights
+### View group insights
 
 You can use groups in [insights](/docs/product-analytics/insights) to view aggregated events based on group type.
 
 For example, let's say that we wanted to see a graph showing how many different organizations have signed up recently:
 
-To do this, expand the menu next to the event you've chosen. This lists of all the group types available. Next, select the option for "Unique" with your group type name, such as "Unique organizations." This shows a graph with the total number of groups (organizations) that have signed up (as opposed to individual users).
+1. Expand the menu next to the event you've chosen. This lists of all the group types 
+available. 
+2. Select the option for **Unique** with your group type name, such as 
+"Unique organizations." This shows a graph with the total number of groups (organizations) that 
+have signed up (as opposed to individual users).
 
 <ProductScreenshot
-    imageLight = {groupInsightsLight} 
+    imageLight = {groupInsightsLight}
     imageDark = {groupInsightsDark}
     classes="rounded"
     alt="Analyze group insights"
 />
 
-### Using groups with funnels
+### Use groups with funnels
 
 Another place where group analytics can be used is within funnels.
 
@@ -156,17 +156,17 @@ For example, you may want to understand how organizations move from their first 
 This shows how many organizations have made it through, as well as the percentage of organizations that dropped off. It's also possible to see exactly which specific groups dropped off at each step.
 
 <ProductScreenshot
-    imageLight = {funnelsGroupAggregationLight} 
+    imageLight = {funnelsGroupAggregationLight}
     imageDark = {funnelsGroupAggregationDark}
     classes="rounded"
     alt="Group funnels"
 />
 
-### Using groups with feature flags
+### Use groups with feature flags
 
 Groups in feature flags enable you to rollout a feature by group type (like `company`), instead of users.
 
-To do this, create a feature flag as you normally would, and select the group type you wish to "Match by", using the drop down in the "Release conditions" section:
+To do this, [create a feature flag](/docs/feature-flags/creating-feature-flags.mdx) as you normally would, and select the group type you wish to "Match by", using the drop down in the "Release conditions" section:
 
 <ProductVideo
     videoLight = {groupsInFeatureLight} 
@@ -208,16 +208,39 @@ if (isFlagEnabled) {
 
 </MultiLanguage>
 
-### Renaming group types
+### Rename group types
 
-You can change how group types are displayed in the insights interface and throughout PostHog by in project settings.
+You can change how group types are displayed in the insights interface and throughout PostHog by in **Settings** > **Customer analytics**.
 
 <ProductScreenshot
-    imageLight = {groupsProjectSettingLight} 
-    imageDark = {groupsProjectSettingDark}
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_18_at_5_05_01_PM_f6d855ed9e.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_18_at_5_05_28_PM_ad3b9f13b4.png"
     classes="rounded"
     alt="Groups in project settings"
 />
+
+## Delete groups
+
+To delete a group type:
+
+1. Go to the **People** tab in the navigation bar.
+2. Select **Menu options**, then **Delete group type**.
+
+<ProductScreenshot
+    imageLight = {deleteGroupsLight}
+    imageDark = {deleteGroupsDark}
+    classes="rounded"
+    alt="View groups"
+/>
+
+<CalloutBox icon="IconWarning" title="Important notes about deleting groups" type="caution">
+
+- When you delete a group, the underlying event data remains unchanged. The group data is filtered out from queries based on a deletion timestamp, which means deleted groups do not count toward your usage limits.
+- Historical events associated with the deleted group are preserved in the database. If new events come in with the same group key, the group will reappear in the interface.
+- The group key can be reused after deletion to create a new group, and any new events with that group key will cause it to show up again.
+- Deleting a group is permanent and cannot be undone through the interface.
+
+</CalloutBox>
 
 ## Limitations
 
@@ -226,9 +249,10 @@ You can change how group types are displayed in the insights interface and throu
 -   Groups are not currently supported for the following insights:
     -   Lifecycle - Expected soon.
     -   User paths - These only support user level analytics.
--   Only groups with known properties are shown under [People and groups](https://us.posthog.com/persons) .
-- Currently there is no functionality within the app to delete groups. If you need to delete a group for privacy or security reasons, please [use the support modal](https://app.posthog.com/home#supportModal=support%3Adata_management).
+- Only groups with known properties are shown under [People](https://us.posthog.com/persons).
 
 ## Further reading
 
 - [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
+- [Understanding group analytics: frontend vs backend implementations](/tutorials/frontend-vs-backend-group-analytics.md)
+
