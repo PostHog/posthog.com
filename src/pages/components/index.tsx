@@ -12,6 +12,7 @@ import OSButton from 'components/OSButton'
 import { useCustomers } from 'hooks/useCustomers'
 import { OSInput, OSTextarea, OSSelect, Combobox } from 'components/OSForm'
 import { Fieldset } from 'components/OSFieldset'
+import { Checkbox } from 'components/RadixUI/Checkbox'
 import ProductComparisonTable from 'components/ProductComparisonTable'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
@@ -60,6 +61,11 @@ const tableOfContents = [
         depth: 1,
     },
     {
+        value: 'Checkbox',
+        url: 'checkbox',
+        depth: 1,
+    },
+    {
         value: 'Competitor feature matrix',
         url: 'competitor-matrix',
         depth: 0,
@@ -78,6 +84,11 @@ export default function Components(): JSX.Element {
     const [comboboxTags, setComboboxTags] = useState<any[]>([])
     const [comboboxMembers, setComboboxMembers] = useState<any[]>([])
     const [comboboxCategories, setComboboxCategories] = useState<any[]>([])
+
+    // State for Checkbox examples
+    const [checkboxBasic, setCheckboxBasic] = useState(false)
+    const [checkboxChecked, setCheckboxChecked] = useState(true)
+    const [checkboxDisabled, setCheckboxDisabled] = useState(false)
 
     // Logo rendering logic from customers page
     const renderCustomerLogo = (customer: any) => {
@@ -2080,6 +2091,155 @@ export default function Components(): JSX.Element {
                                         <li>Remove items by clicking X or using Backspace</li>
                                         <li>Checkmark indicator for selected items in dropdown</li>
                                         <li>Auto-scrolling for keyboard navigation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Checkbox Component Showcase */}
+                        <section id="checkbox">
+                            <h3 className="text-xl font-semibold mb-4">
+                                <code>&lt;Checkbox /&gt;</code>
+                            </h3>
+
+                            <p className="mb-6 text-secondary">
+                                A checkbox component built with Radix UI. Supports controlled and uncontrolled states,
+                                disabled state, and custom styling.
+                            </p>
+
+                            {/* Basic Examples */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Basic examples</h4>
+                                <div className="space-y-4">
+                                    <div className="flex items-center gap-2">
+                                        <Checkbox
+                                            id="checkbox-basic"
+                                            checked={checkboxBasic}
+                                            onCheckedChange={setCheckboxBasic}
+                                        />
+                                        <label htmlFor="checkbox-basic" className="text-sm cursor-pointer">
+                                            Basic checkbox (click to toggle)
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <Checkbox
+                                            id="checkbox-checked"
+                                            checked={checkboxChecked}
+                                            onCheckedChange={setCheckboxChecked}
+                                        />
+                                        <label htmlFor="checkbox-checked" className="text-sm cursor-pointer">
+                                            Default checked
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <Checkbox id="checkbox-disabled" disabled checked={checkboxDisabled} />
+                                        <label htmlFor="checkbox-disabled" className="text-sm opacity-50">
+                                            Disabled checkbox
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <Checkbox id="checkbox-disabled-checked" disabled checked={true} />
+                                        <label htmlFor="checkbox-disabled-checked" className="text-sm opacity-50">
+                                            Disabled checked
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* With Different Schemes */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Data scheme variations</h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {/* Primary scheme on secondary background */}
+                                    <div
+                                        data-scheme="secondary"
+                                        className="border border-primary rounded p-6 bg-primary space-y-3"
+                                    >
+                                        <h5 className="font-semibold mb-3">Primary scheme</h5>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="checkbox-primary-1" dataScheme="primary" defaultChecked />
+                                            <label htmlFor="checkbox-primary-1" className="text-sm cursor-pointer">
+                                                Checked
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="checkbox-primary-2" dataScheme="primary" />
+                                            <label htmlFor="checkbox-primary-2" className="text-sm cursor-pointer">
+                                                Unchecked
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    {/* Secondary scheme on primary background */}
+                                    <div
+                                        data-scheme="primary"
+                                        className="border border-primary rounded p-6 bg-primary space-y-3"
+                                    >
+                                        <h5 className="font-semibold mb-3">Secondary scheme</h5>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="checkbox-secondary-1" dataScheme="secondary" defaultChecked />
+                                            <label htmlFor="checkbox-secondary-1" className="text-sm cursor-pointer">
+                                                Checked
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="checkbox-secondary-2" dataScheme="secondary" />
+                                            <label htmlFor="checkbox-secondary-2" className="text-sm cursor-pointer">
+                                                Unchecked
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Form Integration */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Form integration</h4>
+                                <div className="border border-primary rounded p-6 bg-accent">
+                                    <fieldset className="space-y-3">
+                                        <legend className="font-semibold mb-2">Select your preferences</legend>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="pref-1" name="newsletter" value="newsletter" />
+                                            <label htmlFor="pref-1" className="text-sm cursor-pointer">
+                                                Subscribe to newsletter
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="pref-2" name="updates" value="updates" defaultChecked />
+                                            <label htmlFor="pref-2" className="text-sm cursor-pointer">
+                                                Receive product updates
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="pref-3" name="marketing" value="marketing" />
+                                            <label htmlFor="pref-3" className="text-sm cursor-pointer">
+                                                Marketing communications
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="pref-4" name="terms" value="terms" required />
+                                            <label htmlFor="pref-4" className="text-sm cursor-pointer">
+                                                I agree to the terms and conditions{' '}
+                                                <span className="text-red dark:text-yellow">*</span>
+                                            </label>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            {/* Features */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Key features</h4>
+                                <div className="space-y-2 text-sm">
+                                    <ul className="list-disc list-inside space-y-1 text-secondary">
+                                        <li>Built on Radix UI for accessibility</li>
+                                        <li>Controlled and uncontrolled modes</li>
+                                        <li>Disabled state support</li>
+                                        <li>Data scheme variations (primary/secondary)</li>
+                                        <li>Required field support</li>
+                                        <li>Custom styling via className prop</li>
+                                        <li>Keyboard accessible</li>
+                                        <li>ARIA compliant</li>
                                     </ul>
                                 </div>
                             </div>
