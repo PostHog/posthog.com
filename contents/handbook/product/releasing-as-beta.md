@@ -52,7 +52,7 @@ All betas should follow the best practices below in order to provide a minimum a
 - Betas in the feature preview menu should have documentation (marked as beta) linked to them
 - Betas should have a [feature owner](/handbook/engineering/feature-ownership)
 
-Product teams are responsible for [writing documentation](/handbook/engineering/writing-docs), but the [Content team](/teams/content) can help, if needed. Titles, descriptions, and links can be added using [the early access menu](https://us.posthog.com/project/2/early_access_features).
+Product teams are responsible for [writing documentation](/handbook/engineering/writing-docs), but the <SmallTeam slug="content" /> can help, if needed. Titles, descriptions, and links can be added using [the early access menu](https://us.posthog.com/project/2/early_access_features).
 
 <CalloutBox icon="IconInfo" title="Launching a new beta?" type="fyi">
 

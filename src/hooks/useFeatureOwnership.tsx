@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import TeamMember from '../components/TeamMember'
 import { PrivateLink } from '../components/PrivateLink'
+import SmallTeam from 'components/SmallTeam'
 
 export interface Feature {
     slug: string
@@ -61,7 +62,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'base-currency': {
         feature: 'Base currency',
-        owner: ['revenue-analytics'],
+        owner: ['web-analytics'],
         label: 'feature/currency',
     },
     'batch-exports': {
@@ -103,7 +104,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'currency-rate-dataset': {
         feature: 'Currency rate dataset',
-        owner: ['revenue-analytics'],
+        owner: ['growth', 'customer-analytics'],
         label: 'feature/currency-rate',
     },
     'customer-analytics': {
@@ -198,19 +199,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Marketing analytics',
         owner: ['web-analytics'],
     },
-    'max-ai': {
-        feature: 'PostHog AI platform',
-        owner: ['posthog-ai'],
-        label: 'feature/max-ai',
-    },
     'mcp-server': {
         feature: 'MCP server',
-        owner: ['max-ai'],
+        owner: ['posthog-ai'],
         label: 'feature/mcp',
-    },
-    messaging: {
-        feature: 'Messaging',
-        owner: ['workflows'],
     },
     notebooks: {
         feature: 'Notebooks',
@@ -223,7 +215,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     onboarding: {
         feature: 'Onboarding',
-        owner: ['content'],
+        owner: ['growth'],
+    },
+    'organization-management-deletion': {
+        feature: 'Organization Management & Deletion',
+        owner: ['platform-features'],
     },
     'path-cleaning': {
         feature: 'Path cleaning',
@@ -268,6 +264,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['brand'],
         label: false,
     },
+    'posthog-ai': {
+        feature: 'PostHog AI platform',
+        owner: ['posthog-ai'],
+        label: 'feature/posthog-ai',
+    },
     'project-homepage': {
         feature: 'Project homepage',
         owner: ['platform-ux'],
@@ -299,11 +300,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'revenue-analytics': {
         feature: 'Revenue analytics',
-        owner: ['revenue-analytics'],
+        owner: ['customer-analytics', 'growth'],
     },
     'revenue-data-management': {
         feature: 'Revenue data management',
-        owner: ['revenue-analytics'],
+        owner: ['customer-analytics', 'growth'],
     },
     sdks: {
         feature: 'SDKs & client libraries (web, server-side)',
@@ -315,7 +316,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                     #support-client-libraries
                 </PrivateLink>
                 . There is an engineer assigned to SDK support on a rotating schedule. Check the{' '}
-                <PrivateLink url="https://posthog.pagerduty.com/schedules#P7B7NTR">Pager Duty schedule</PrivateLink>.
+                <PrivateLink url="https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MD6JK1TEGAK97450S">
+                    incident.io schedule
+                </PrivateLink>
+                .
                 <br />
                 <br />
                 <strong>For Mobile SDK issues, defer to the Mobile team first.</strong>
@@ -330,16 +334,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'sdks-mobile': {
         feature: 'SDKs (mobile)',
-        owner: [''],
+        owner: ['mobile'],
         notes: (
             <>
                 Shared responsibility with the relevant small team for feature-owned areas.
                 <br />
-                <br /> Start with the{' '}
-                <a href="https://github.com/orgs/PostHog/teams/team-mobile" target="_blank" rel="noopener noreferrer">
-                    Mobile team
-                </a>{' '}
-                for triage, loop in
+                <br /> Start with the <SmallTeam slug="mobile" /> for triage, loop in
                 <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink> as
                 needed.
             </>
@@ -413,7 +413,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     toolbar: {
         feature: 'Toolbar',
-        owner: ['replay'],
+        owner: ['growth'],
     },
     'usage-reports': {
         feature: 'Usage reports',
@@ -432,6 +432,15 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Webhook delivery service',
         owner: ['workflows'],
         label: 'feature/pipelines',
+    },
+    workflows: {
+        feature: 'Workflows',
+        owner: ['workflows'],
+        label: 'feature/workflows',
+    },
+    wizard: {
+        feature: 'Wizard',
+        owner: ['content'],
     },
 }
 

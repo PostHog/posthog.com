@@ -1,21 +1,22 @@
 ---
-title: Track external issues in GitHub and Linear
+title: Track external issues in GitHub, Linear, and GitLab
 ---
 
 import Tab from "components/Tab"
 
-Other than assigning issues to team members in PostHog, you can also create issues in other tracking systems you use like GitHub Issues or Linear. 
+Other than assigning issues to team members in PostHog, you can also create issues in other tracking systems you use like GitHub Issues, Linear, or GitLab. 
 
 > If you use another issue tracking system and would like to request it, [let us know in-app](https://app.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
 
 ## Setting up external tracking
 
-You can set up external tracking in the [error tracking settings](https://app.posthog.com/project/configuration?tab=error-tracking-integrations). Click **Connect workspace** and follow the prompts to connect your issue tracking system.
+You can set up external tracking in the [error tracking settings](https://app.posthog.com/error_tracking/configuration?tab=error-tracking-integrations#selectedSetting=error-tracking-integrations). Select your issue tracking system and follow the instructions.
 
-<Tab.Group tabs={['GitHub', 'Linear']}>
+<Tab.Group tabs={['GitHub', 'Linear', 'GitLab']}>
 <Tab.List>
   <Tab>GitHub</Tab>
   <Tab>Linear</Tab>
+  <Tab>GitLab</Tab>
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
@@ -32,6 +33,15 @@ PostHog connects to Linear using a [third-party app](https://linear.app/docs/thi
 
 - Create issues for your workspace
 - Read access to your workspace
+
+</Tab.Panel>
+<Tab.Panel>
+
+PostHog connects to GitLab using a [project access token](https://docs.gitlab.com/user/project/settings/project_access_tokens). PostHog needs the following from GitLab:
+
+- Hostname
+- Project ID
+- A project access token with the `api` scope
 
 </Tab.Panel>
 </Tab.Panels>

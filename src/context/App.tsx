@@ -96,12 +96,14 @@ interface AppContextType {
         quickQuestions,
         chatId,
         date,
+        initialQuestion,
     }: {
         path: string
         context?: ChatContext[]
         quickQuestions?: string[]
         chatId?: string
         date?: string
+        initialQuestion?: string
     }) => void
     isNotificationsPanelOpen: boolean
     setIsNotificationsPanelOpen: (isOpen: boolean) => void
@@ -229,26 +231,26 @@ const updateCursor = (cursor: string) => {
 
 export const Context = createContext<AppContextType>({
     windows: [],
-    closeWindow: () => {},
-    bringToFront: () => {},
+    closeWindow: () => { },
+    bringToFront: () => { },
     setWindowTitle: () => null,
     focusedWindow: undefined,
     location: {},
-    minimizeWindow: () => {},
+    minimizeWindow: () => { },
     taskbarHeight: 0,
-    addWindow: () => {},
-    updateWindowRef: () => {},
-    updateWindow: () => {},
+    addWindow: () => { },
+    updateWindowRef: () => { },
+    updateWindow: () => { },
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
-    openSearch: () => {},
-    handleSnapToSide: () => {},
+    openSearch: () => { },
+    handleSnapToSide: () => { },
     constraintsRef: { current: null },
     taskbarRef: { current: null },
-    expandWindow: () => {},
+    expandWindow: () => { },
     openSignIn: () => null,
-    openRegister: () => {},
-    openForgotPassword: () => {},
+    openRegister: () => { },
+    openForgotPassword: () => { },
     siteSettings: {
         theme: 'light',
         experience: 'posthog',
@@ -260,27 +262,27 @@ export const Context = createContext<AppContextType>({
         clickBehavior: 'double',
         performanceBoost: false,
     },
-    updateSiteSettings: () => {},
-    openNewChat: () => {},
+    updateSiteSettings: () => { },
+    openNewChat: () => { },
     isNotificationsPanelOpen: false,
-    setIsNotificationsPanelOpen: () => {},
+    setIsNotificationsPanelOpen: () => { },
     isActiveWindowsPanelOpen: false,
-    setIsActiveWindowsPanelOpen: () => {},
+    setIsActiveWindowsPanelOpen: () => { },
     isMobile: false,
     compact: false,
     menu: [],
-    openStart: () => {},
-    animateClosingAllWindows: () => {},
+    openStart: () => { },
+    animateClosingAllWindows: () => { },
     closingAllWindowsAnimation: false,
-    closeAllWindows: () => {},
-    setClosingAllWindowsAnimation: () => {},
+    closeAllWindows: () => { },
+    setClosingAllWindowsAnimation: () => { },
     screensaverPreviewActive: false,
-    setScreensaverPreviewActive: () => {},
-    setConfetti: () => {},
+    setScreensaverPreviewActive: () => { },
+    setConfetti: () => { },
     confetti: false,
     posthogInstance: undefined,
     desktopParams: undefined,
-    copyDesktopParams: () => {},
+    copyDesktopParams: () => { },
     desktopCopied: false,
     shareableDesktopURL: '',
 })
@@ -660,6 +662,7 @@ const appSettings: AppSettings = {
                 height: 682,
             },
             fixed: false,
+            autoHeight: true,
         },
         position: {
             center: true,
@@ -964,13 +967,13 @@ export interface SiteSettings {
     skinMode: 'modern' | 'classic'
     cursor: 'default' | 'xl' | 'james'
     wallpaper:
-        | 'keyboard-garden'
-        | 'hogzilla'
-        | 'startup-monopoly'
-        | 'office-party'
-        | '2001-bliss'
-        | 'parade'
-        | 'coding-at-night'
+    | 'keyboard-garden'
+    | 'hogzilla'
+    | 'startup-monopoly'
+    | 'office-party'
+    | '2001-bliss'
+    | 'parade'
+    | 'coding-at-night'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
@@ -1066,9 +1069,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 zIndex: win.zIndex,
             }))
 
-        return savedWindows.length > 0
-            ? `${location.pathname}?${qs.stringify({ windows: savedWindows }, { encode: false })}`
-            : undefined
+        if (savedWindows.length === 0) return undefined
+
+        // Preserve existing query parameters from the current URL
+        const currentParams = isSSR ? {} : qs.parse(location.search.substring(1))
+        const allParams = {
+            ...currentParams,
+            windows: savedWindows,
+        }
+
+        return `${location.pathname}?${qs.stringify(allParams, { encode: false })}`
     }, [windows, taskbarHeight, location, isSSR])
 
     const shareableDesktopURL = useMemo(() => {
@@ -1160,13 +1170,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     windows.map((w) =>
                         w === focusedWindow
                             ? {
-                                  ...w,
-                                  element: newWindow.element,
-                                  path: newWindow.path,
-                                  fromHistory: newWindow.fromHistory,
-                                  props: newWindow.props,
-                                  location: newWindow.location,
-                              }
+                                ...w,
+                                element: newWindow.element,
+                                path: newWindow.path,
+                                fromHistory: newWindow.fromHistory,
+                                props: newWindow.props,
+                                location: newWindow.location,
+                            }
                             : w
                     )
                 )
@@ -1262,9 +1272,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             (key?.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
                 : {
-                      width: isSSR ? 0 : window.innerWidth * 0.9,
-                      height: isSSR ? 0 : window.innerHeight * 0.9,
-                  })
+                    width: isSSR ? 0 : window.innerWidth * 0.9,
+                    height: isSSR ? 0 : window.innerHeight * 0.9,
+                })
         return {
             width: Math.min(defaultSize.width, isSSR ? 0 : window.innerWidth * 0.9),
             height: Math.min(defaultSize.height, isSSR ? 0 : window.innerHeight * 0.9),
@@ -1363,9 +1373,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             fixedSize: settings?.size.fixed || false,
             fromOrigin: lastClickedElementRect
                 ? {
-                      x: lastClickedElementRect.x - size.width / 2,
-                      y: lastClickedElementRect.y - size.height / 2,
-                  }
+                    x: lastClickedElementRect.x - size.width / 2,
+                    y: lastClickedElementRect.y - size.height / 2,
+                }
                 : undefined,
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[element.key],
@@ -1508,12 +1518,14 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         quickQuestions,
         chatId,
         date,
+        initialQuestion,
     }: {
         path: string
         context?: ChatContext[]
         quickQuestions?: string[]
         chatId?: string
         date?: string
+        initialQuestion?: string
     }) => {
         addWindow(
             <ChatProvider
@@ -1526,6 +1538,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 quickQuestions={quickQuestions}
                 chatId={chatId}
                 date={date}
+                initialQuestion={initialQuestion}
             />
         )
     }
@@ -1945,7 +1958,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (paramsWindows) {
             const [initialWindow, ...rest] = convertWindowsToPixels(parsed.windows)
 
-            navigate(initialWindow.path, {
+            // Preserve non-windows query parameters when navigating
+            const nonWindowsParams = { ...parsed }
+            delete nonWindowsParams.windows
+            const queryString =
+                Object.keys(nonWindowsParams).length > 0 ? `?${qs.stringify(nonWindowsParams, { encode: false })}` : ''
+
+            navigate(`${initialWindow.path}${queryString}`, {
                 state: {
                     newWindow: true,
                     size: initialWindow.size,
@@ -1958,7 +1977,14 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (stateWindows) {
             const [nextWindow, ...rest] = stateWindows
             if (!nextWindow) return
-            navigate(nextWindow.path, {
+
+            // Preserve query parameters from current URL when navigating to next window
+            const currentParams = qs.parse(location.search.substring(1))
+            delete currentParams.windows
+            const queryString =
+                Object.keys(currentParams).length > 0 ? `?${qs.stringify(currentParams, { encode: false })}` : ''
+
+            navigate(`${nextWindow.path}${queryString}`, {
                 state: {
                     newWindow: true,
                     size: nextWindow.size,

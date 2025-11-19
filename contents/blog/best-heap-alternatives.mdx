@@ -6,44 +6,43 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
-  - andy-vandervell
+    - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
 featuredImageType: full
 category: General
 tags:
-  - Comparisons
+    - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
-- **Founded:** 2020
-- **Similar to:** Heap, Amplitude
-- **Typical users:** Engineers and product teams
-- **Typical customers:** Mid-size B2Bs and startups 
+-   **Founded:** 2020
+-   **Similar to:** Heap, Amplitude
+-   **Typical users:** Engineers and product teams
+-   **Typical customers:** Mid-size B2Bs and startups
 
 ![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 
 ### What is PostHog?
 
-[PostHog](https://posthog.com/) (that's us 👋) is an [open-source analytics platform](/blog/best-open-source-analytics-tools) that combines product analytics, session replay, feature flags, A/B testing, and user surveys into one product. This means it's not just an alternative to Heap, but also tools like [LaunchDarkly](/blog/posthog-vs-launchdarkly) and [LogRocket](/blog/posthog-vs-logrocket).
+[PostHog](https://posthog.com/) (that's us 👋) is an open-source developer platform that combines [product analytics](/blog/best-open-source-analytics-tools), session replay, feature flags, A/B testing, and user surveys into one product. This means it's not just an alternative to Heap, but also tools like [LaunchDarkly](/blog/posthog-vs-launchdarkly) and [LogRocket](/blog/posthog-vs-logrocket).
 
 Typical PostHog users are engineers and product managers at startups and mid-size companies, particularly B2B companies. Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasura), [Vendasta](/customers/vendasta), and Airbus.
- 
+
 ### Key features
 
-- 📈 **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Also supports SQL insights for power users.
+-   📈 **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Also supports SQL insights for power users.
 
-- 📺 **Session replays:** Including event timelines, console logs, and network activity, and 90-day data retention.
+-   📺 **Session replays:** Including event timelines, console logs, and network activity, and 90-day data retention.
 
-- 🚩 **Feature flags** with local evaluation (for faster performance) and JSON payloads.
+-   🚩 **Feature flags** with local evaluation (for faster performance) and JSON payloads.
 
-- 🧪 **A/B tests:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
+-   🧪 **A/B tests:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
 
-- 💬 **Surveys:** Target surveys by event or person properties. Templates for Net Promoter Score (NPS), product-market fit (PMF) surveys, and more.
+-   💬 **Surveys:** Target surveys by event or person properties. Templates for Net Promoter Score (NPS), product-market fit (PMF) surveys, and more.
 
 ### How does PostHog compare to Heap?
 
@@ -53,20 +52,23 @@ Unlike Mixpanel and Amplitude, PostHog supports event autocapture, which means i
 
 You can also [create and label events using the PostHog toolbar](/tutorials/how-to-capture-events-the-easy-way). This is similar to Heap's visual labeling feature, though it's only supported on web apps.
 
-<ComparisonTable column1="PostHog" column2="Heap">
-  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={true} column2={true} feature="Visual labeling" description="Create and tag custom events without using code" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
-  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
-  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'heap']}
+    rows={[
+        'platform.pricing.self_serve',
+        'product_analytics',
+        'web_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.toolbar',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'surveys',
+        'heatmaps',
+        'product_analytics.group_analytics',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is PostHog?
 
@@ -84,17 +86,16 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 3. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and improve products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with A/B tests, and gathering feedback with user surveys.
 
-> #### Bottom line 
+> #### Bottom line
+>
 > PostHog is the only Heap alternative that offers product analytics with autocapture, session replay, and a visual labeling tool for creating events. This, combined with additional features like feature flags and surveys, makes it an excellent like-for-like replacement for Heap.
-
-<br />
 
 ## 2. FullStory
 
-- **Founded:** 2012
-- **Most similar to:** PostHog, Glassbox
-- **Typical users:** Product managers, customer success, and support
-- **Typical customers:** Online retailers and SaaS companies 
+-   **Founded:** 2012
+-   **Most similar to:** PostHog, Glassbox
+-   **Typical users:** Product managers, customer success, and support
+-   **Typical customers:** Online retailers and SaaS companies
 
 ![fullstory](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/heap-alternatives/fullstory.png)
 
@@ -104,33 +105,36 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 ### Key features
 
-- 📹 **Session replay:** Watch and analyze real user sessions on web and mobile apps.
+-   📹 **Session replay:** Watch and analyze real user sessions on web and mobile apps.
 
-- 📊 **Product analytics:** Understand user paths and struggle points.
+-   📊 **Product analytics:** Understand user paths and struggle points.
 
-- 📈 **Event autocapture:** Tagless event capture that ensures all events are tracked. 
+-   📈 **Event autocapture:** Tagless event capture that ensures all events are tracked.
 
-- 🔥 **Heatmaps:** Find out where users click and frustration points.
+-   🔥 **Heatmaps:** Find out where users click and frustration points.
 
-- 📱 **Mobile app analytics:** Crash analytics and users path analysis.
+-   📱 **Mobile app analytics:** Crash analytics and users path analysis.
 
 ### How does FullStory compare to Heap?
 
 FullStory offers both product analytics with autocapture and session replay. It also offers session replay for mobile apps, which Heap doesn't support.
 
-<ComparisonTable column1="FullStory" column2="Heap">
-  <ComparisonRow column1={false} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
-  <ComparisonRow column1={false} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={true} feature="Visual labeling" description="Create and tag custom events without using code" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['fullstory', 'heap']}
+    rows={[
+        'platform.pricing.self_serve',
+        'product_analytics',
+        'web_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.toolbar',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'surveys',
+        'heatmaps',
+        'product_analytics.group_analytics',
+    ]}
+/>
 
 ### How popular is FullStory?
 
@@ -147,14 +151,15 @@ According to reviews on G2, companies use FullStory for:
 3. **Improving conversion:** FullStory users like to combine funnel insights with replays of user sessions to understand pain points and improve conversion.
 
 > ### Bottom line
+>
 > FullStory is a good Heap alternative for non-technical teams, particularly customer success and support teams who need to diagnose user problems. It has superior session replay features, though arguably is less focused on analytics use cases than Heap or PostHog.
 
 ## 3. Glassbox
 
-- **Founded:** 2010
-- **Most similar to:** FullStory
-- **Typical users:** Business analysts, product support
-- **Typical customers:** Retail and financial services
+-   **Founded:** 2010
+-   **Most similar to:** FullStory
+-   **Typical users:** Business analysts, product support
+-   **Typical customers:** Retail and financial services
 
 ![glassbox](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/heap-alternatives/glassbox.png)
 
@@ -166,39 +171,42 @@ Unlike Heap, which is mainly used by product managers, G2 suggests Glassbox is p
 
 ### Key features
 
-- 📹 **Session replay:** Watch and analyze real user sessions on web and mobile apps.
+-   📹 **Session replay:** Watch and analyze real user sessions on web and mobile apps.
 
-- 📊 **Product analytics:** Understand user paths and struggle points.
+-   📊 **Product analytics:** Understand user paths and struggle points.
 
-- 🏎️ **Performance analytics:** Track app performance and their impact on conversion rates.
+-   🏎️ **Performance analytics:** Track app performance and their impact on conversion rates.
 
-- 🔥 **Click, scroll and heatmaps:** Understand where users interact with your app.
+-   🔥 **Click, scroll and heatmaps:** Understand where users interact with your app.
 
-- ✅ **User feedback:** Gather satisfaction and user feedback on app experience.
+-   ✅ **User feedback:** Gather satisfaction and user feedback on app experience.
 
 ### How does Glassbox compare to Heap?
 
 Glassbox offers similar core features to Heap, including product analytics with autocapture – Glassbox calls it tagless tracking. It doesn't offer visual labeling tool, however.
 
-<ComparisonTable column1="Glassbox" column2="Heap">
-  <ComparisonRow column1={false} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
-  <ComparisonRow column1={false} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={true} feature="Visual labeling" description="Create and tag custom events without using code" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['glassbox', 'heap']}
+    rows={[
+        'platform.pricing.self_serve',
+        'product_analytics',
+        'web_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.toolbar',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'surveys',
+        'heatmaps',
+        'product_analytics.group_analytics',
+    ]}
+/>
 
 ### How popular is Glassbox?
 
-According to data from [BuiltWith](https://trends.builtwith.com/analytics/GlassBox), Glassbox isn't as popular as Heap. 
+According to data from [BuiltWith](https://trends.builtwith.com/analytics/GlassBox), Glassbox isn't as popular as Heap.
 
-As of January 2024, it's deployed on just 386 of the top 1 million websites, compared to Heap's 4,221. 
+As of January 2024, it's deployed on just 386 of the top 1 million websites, compared to Heap's 4,221.
 
 That said, Glassbox's greater focus on mobile apps isn't reflected in these figures.
 
@@ -213,16 +221,15 @@ According to G2 reviews, customers use Glassbox for:
 3. **Fixing low conversion and abandonment:** Glassbox is popular among online retailers, who use it to solve issues around conversion and basket abandonment.
 
 > ### Bottom line
+>
 > Glassbox is a good Heap alternative for online retailers mostly interested in mobile app analytics and session replay, but SaaS companies should look elsewhere.
-
-<br />
 
 ## 4. Pendo
 
-- **Founded:** 2013
-- **Most similar to:** PostHog, Heap
-- **Typical users:** Product managers and customer success teams
-- **Typical customers:** Small and mid-market B2C companies
+-   **Founded:** 2013
+-   **Most similar to:** PostHog, Heap
+-   **Typical users:** Product managers and customer success teams
+-   **Typical customers:** Small and mid-market B2C companies
 
 ![pendo](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/heap-alternatives/pendo.png)
 
@@ -232,31 +239,39 @@ According to G2 reviews, customers use Glassbox for:
 
 ### Key features
 
-- 📊 **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
+-   📊 **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
 
-- 🦮 **In-app guides:** Deliver personalized guidance to customers, directly inside your app.
+-   🦮 **In-app guides:** Deliver personalized guidance to customers, directly inside your app.
 
-- 📝 **User feedback:** Capture and analyze customer feedback at scale.
+-   📝 **User feedback:** Capture and analyze customer feedback at scale.
 
-- 🗺️ **Product validation and roadmaps:** Plan your product improvements and roadmap using data from Pendo.
+-   🗺️ **Product validation and roadmaps:** Plan your product improvements and roadmap using data from Pendo.
 
 ### How does Pendo compare to Heap?
 
 Pendo offers similar features to Heap, including event autocapture and session replay. It lacks a visual labeling tool for events, however.
 
-<ComparisonTable column1="Pendo" column2="Heap">
-  <ComparisonRow column1="Starter plans only" column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
-  <ComparisonRow column1={false} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={true} feature="Visual labeling" description="Create and tag custom events without using code" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['pendo', 'heap']}
+    rows={[
+        {
+            path: 'platform.pricing.self_serve',
+            label: 'Self-serve',
+            description: 'Free to try, no mandatory sales calls',
+            values: ['Starter plans only', true],
+        },
+        'product_analytics',
+        'web_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.toolbar',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'surveys',
+        'heatmaps',
+        'product_analytics.group_analytics',
+    ]}
+/>
 
 ### How popular is Pendo?
 
@@ -273,50 +288,52 @@ According to G2 reviews, customers use Pendo for:
 3. **Product planning:** Customers to use Pendo's data tools, product validation, and roadmap features to align internal teams and stakeholders on product development.
 
 > ### Bottom line
+>
 > Pendo is similar to Heap in many ways. It's primarily designed for non-technical users, and supports event autocapture, making it viable alternative for product teams.
-
-<br />
 
 ## 5. Mixpanel
 
-- **Founded:** 2009
-- **Most similar to:** PostHog, Heap, and Amplitude
-- **Typical users:** Product managers, desginers and marketing teams
-- **Typical customers:** Mid-size B2C and B2B companies
+-   **Founded:** 2009
+-   **Most similar to:** PostHog, Heap, and Amplitude
+-   **Typical users:** Product managers, desginers and marketing teams
+-   **Typical customers:** Mid-size B2C and B2B companies
 
 ![mixpanel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/heap-alternatives/mixpanel.png)
 
 ### What is Mixpanel?
 
 [Mixpanel](/blog/posthog-vs-mixpanel) is one of the most popular product analytics tools on the market. Founded in 2009, in recent years it's deprecated additional features, such as A/B testing, to focus on product analytics alone.
- 
+
 ### Key features
 
-- 📊 **Product analytics:** Track user behavior, trends, and retention
+-   📊 **Product analytics:** Track user behavior, trends, and retention
 
-- 📝 **Collaborative notebooks:** Create analysis in notebooks and collaborate with colleagues
+-   📝 **Collaborative notebooks:** Create analysis in notebooks and collaborate with colleagues
 
-- 🚨 **Anomaly detection:** Get automated alerts when metrics fall outside a positive or negative range
+-   🚨 **Anomaly detection:** Get automated alerts when metrics fall outside a positive or negative range
 
-- 🔎 **Filtered data views:** Hide and filter data on a per-team basis to reduce noise
+-   🔎 **Filtered data views:** Hide and filter data on a per-team basis to reduce noise
 
 ### How does Mixpanel compare to Heap?
 
 Mixpanel and Heap are similar in many ways. They're both used mainly by product managers and offer product analytics. However, Mixpanel lacks several features Heap users rely on, such as event autocapture and session replay.
 
-<ComparisonTable column1="Mixpanel" column2="Heap">
-  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
-  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={true} feature="Visual labeling" description="Create and tag custom events without using code" />
-  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['mixpanel', 'heap']}
+    rows={[
+        'platform.pricing.self_serve',
+        'product_analytics',
+        'web_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.toolbar',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'surveys',
+        'heatmaps',
+        'product_analytics.group_analytics',
+    ]}
+/>
 
 ### How popular is Mixpanel?
 
@@ -330,53 +347,60 @@ According to [BuiltWith data compiled by Jason Packer](https://www.linkedin.com/
 
 3. **Understanding user behavior:** In common with most analytics tools, Mixpanel's users mostly want to understand user behavior, identify bottlenecks, and monitor core metrics like conversion rates, activation, and retention.
 
-> #### Bottom line 
+> #### Bottom line
+>
 > Mixpanel is a good option to replace Heap, but it has shortcomings. The lack of autocapture is a major drawback for Heap users reliant on that feature, and you'll need to find another session replay tool if you want that feature.
-
-<br />
 
 ## 6. Amplitude
 
-- **Founded:** 2012
-- **Most similar to:** Mixpanel
-- **Typical users:** Product managers, data analysts, marketing teams
-- **Typical customers:** Mid-size and large enterprises
+-   **Founded:** 2012
+-   **Most similar to:** Mixpanel
+-   **Typical users:** Product managers, data analysts, marketing teams
+-   **Typical customers:** Mid-size and large enterprises
 
 ### What is Amplitude?
 
-[Amplitude](/blog/best-amplitude-alternatives) is an analytics and testing tool with a particular focus on large enterprise customers, like Ford, NBCUniversal, and Walmart. 
+[Amplitude](/blog/best-amplitude-alternatives) is an analytics and testing tool with a particular focus on large enterprise customers, like Ford, NBCUniversal, and Walmart.
 
 ### Key features
 
-- 📈 **Product analytics:** Funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
+-   📈 **Product analytics:** Funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
 
-- 🧪 **A/B testing:** Support for JSON payloads, primary, secondary, and counter metrics.
+-   🧪 **A/B testing:** Support for JSON payloads, primary, secondary, and counter metrics.
 
-- 💁‍♂️ **Customer data platform:** Combine analytics data with third-party tools for data governance, identity resolution, and data federation.
+-   💁‍♂️ **Customer data platform:** Combine analytics data with third-party tools for data governance, identity resolution, and data federation.
 
-- 🤖 **AI insight builder:** Generate insights based on natural language requests, like "What is my purchase conversion rate?".
+-   🤖 **AI insight builder:** Generate insights based on natural language requests, like "What is my purchase conversion rate?".
 
 ### How does Amplitude compare to Heap?
 
 Like Mixpanel, Amplitude lacks features Heap users rely on, such as autocapture, visual labeling, and session replay. But its analytics features are arguably a little more mature, particularly the natural language and anomaly detection features.
 
-<ComparisonTable column1="Amplitude" column2="Heap">
-  <ComparisonRow column1="Starter plans only" column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
-  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={true} feature="Visual labeling" description="Create and tag custom events without using code" />
-  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
-  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['amplitude', 'heap']}
+    rows={[
+        {
+            path: 'platform.pricing.self_serve',
+            label: 'Self-serve',
+            description: 'Free to try, no mandatory sales calls',
+            values: ['Starter, Plus plans only', true],
+        },
+        'product_analytics',
+        'web_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.toolbar',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'surveys',
+        'heatmaps',
+        'product_analytics.group_analytics',
+    ]}
+/>
 
 ### How popular is Amplitude?
 
-Amplitude is more than twice as popular than Heap, according to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant. 
+Amplitude is more than twice as popular than Heap, according to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant.
 
 As of July 2023, Amplitude is deployed by 6,973 of the top 1 million websites in 2023. Heap is deployed by 3,200.
 
@@ -389,56 +413,58 @@ As of July 2023, Amplitude is deployed by 6,973 of the top 1 million websites in
 3. **Resolving data quality problems:** Companies that use Amplitude, particularly large ones, often migrate from outdated, self-built, tools that generate poor quality data. Amplitude helps them fix that while making analytics more accessible.
 
 > #### Bottom line
+>
 > The case for Amplitude is very similar to the case for Mixpanel. It's a well-established Heap alternative, but falls short of a like-for-like replacement due to is lack of autocapture and session replay.
-
-<br />
 
 ## 7. Google Analytics 4
 
-- **Released:** October 2020
-- **Most similar to:** Amplitude
-- **Typical users:** Marketing and content teams
-- **Typical customers:** Commerce websites and large enterprises
+-   **Released:** October 2020
+-   **Most similar to:** Amplitude
+-   **Typical users:** Marketing and content teams
+-   **Typical customers:** Commerce websites and large enterprises
 
 ![GA4](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/mixpanel-alternatives/GA4.png)
 
 ### What is Google Analytics 4?
 
-[Google Analytics 4](/blog/posthog-vs-ga4) (GA4) is a marketing and product analytics tool that's tightly integrated with other Google products, such as Ads, BigQuery, Looker Studio, and Firebase. 
+[Google Analytics 4](/blog/posthog-vs-ga4) (GA4) is a marketing and product analytics tool that's tightly integrated with other Google products, such as Ads, BigQuery, Looker Studio, and Firebase.
 
 Unlike its predecessor, Universal Analytics (GA3), it's event-based. It also introduces new report types, such as conversion funnels and retention tables. This makes it more useful to product teams than before.
 
 ### Key features
 
-- 🤖 **Predictive insights** alert you to trends you're not aware of, like an increase in traffic to a specific landing page, or an anomalous decline in conversion from one period to another.
+-   🤖 **Predictive insights** alert you to trends you're not aware of, like an increase in traffic to a specific landing page, or an anomalous decline in conversion from one period to another.
 
-- 🔁 **Integration with Google tools** means it's easy to analyze your GA4 data elsewhere, such as Google's dashboarding tool, Looker Studio.
+-   🔁 **Integration with Google tools** means it's easy to analyze your GA4 data elsewhere, such as Google's dashboarding tool, Looker Studio.
 
-- ⌨️ **Natural language search** means you can ask specific questions, like "MoM growth in users on iOS", rather searching existing reports.
+-   ⌨️ **Natural language search** means you can ask specific questions, like "MoM growth in users on iOS", rather searching existing reports.
 
 ### How does GA4 compare to Heap?
 
-GA4 is another tool that supports event autocapture, though confusingly Google calls this "enhanced analytics". 
+GA4 is another tool that supports event autocapture, though confusingly Google calls this "enhanced analytics".
 
 On paper, it offers similar feature to Heap, though GA4's product analytics are less mature than those of Heap and other more established event-based tools.
 
-<ComparisonTable column1="Google Analytics 4" column2="Heap">
-  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={true} feature="Visual labeling" description="Create and tag custom events without using code" />
-  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['ga4', 'heap']}
+    rows={[
+        'platform.pricing.self_serve',
+        'product_analytics',
+        'web_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.toolbar',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'surveys',
+        'heatmaps',
+        'product_analytics.group_analytics',
+    ]}
+/>
 
 ### How popular is GA4?
 
-Google Analytics remains the most-used analytics tool in the world by a large margin. 
+Google Analytics remains the most-used analytics tool in the world by a large margin.
 
 As of July 2023, [30.5% of the top 1 million websites](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/) run GA4 – another 35.7% were still running GA3.
 
@@ -451,19 +477,18 @@ As of July 2023, [30.5% of the top 1 million websites](https://www.linkedin.com/
 3. **To track marketing ROI:** GA4 is predominantly used by marketing and e-commerce teams to track campaign ROI. It's also popular among large content publishers for its scalability.
 
 > #### Bottom line
+>
 > Until recently, Google Analytics wasn't a viable Heap alternative. The launch of GA4 changed this, but switching from Heap to Google only makes sense if you're keen to integrate deeper into Google's ecosystem of data tools, like BigQuery and Looker Studio.
-
-<br />
 
 ## Is PostHog right for you?
 
-Here's the (short) sales pitch. 
+Here's the (short) sales pitch.
 
 We're biased, obviously, but we think PostHog is the perfect Heap replacement if:
 
-- You value transparency (we're open source and open core)
-- You want to use fewer tools (we can replace way more than just Heap)
-- You want try before you buy (we're self-serve with a [generous free tier](/pricing))
+-   You value transparency (we're open source and open core)
+-   You want to use fewer tools (we can replace way more than just Heap)
+-   You want try before you buy (we're self-serve with a [generous free tier](/pricing))
 
 Check out [our product pages](/product-analytics) and [read our docs](/docs) to learn more.
 

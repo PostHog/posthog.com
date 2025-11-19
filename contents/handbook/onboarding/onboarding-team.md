@@ -30,7 +30,7 @@ Since we primarily focus on customers who've signed up and have a forecasted bil
 
 ### Tooling
 
-Check out the list of [shared tools](https://posthog.com/handbook/growth/sales/sales-and-cs-tools). 
+Check out the list of [shared tools](https://posthog.com/handbook/growth/sales/sales-and-cs-tools).
 
 The team-specific tools for this team are:
 
@@ -62,7 +62,7 @@ A supplementary view that’s great for getting a general overview of progress.
 -   Use our docs, and link to relevant information.
 -   Check the [Matching PostHog to a business type](https://posthog.com/handbook/growth/sales/utilization-by-business-type) page to understand your customers better in general.
 
-## How to succeed 
+## How to succeed
 
 ### How to deal with complex technical issues
 

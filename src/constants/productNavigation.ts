@@ -15,6 +15,7 @@ export const categoryOrder = [
     'dataviz',
     'product',
     // 'engineering',
+    'automation',
     'communication',
     'product_os',
 ] as const
@@ -27,6 +28,7 @@ export const categoryDisplayNames: Record<string, string> = {
     dataviz: 'Data visualization',
     product: 'Product',
     // engineering: 'Engineering',
+    automation: 'Automation',
     communication: 'Communication',
     product_os: 'Utilities, add-ons, & packages',
 }
@@ -39,6 +41,7 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
     dataviz: { icon: 'IconTrends', color: 'yellow' },
     product: { icon: 'IconApps', color: 'red' },
     // engineering: { icon: 'IconWrench', color: 'gray' },
+    automation: { icon: 'IconBolt', color: 'blue' },
     communication: { icon: 'IconMessage', color: 'sky-blue' },
     product_os: { icon: 'IconGear', color: 'gray' },
 }
@@ -68,8 +71,9 @@ export const productOrder: Record<string, string[]> = {
         'sql',
         'bi',
     ],
+    automation: ['posthog_ai', 'workflows', 'webhooks'],
     communication: ['surveys', 'messaging', 'user-interviews'],
-    product_os: ['posthog_ai', 'api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
+    product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
 }
 
 // Non-product pages that appear in the product navigation

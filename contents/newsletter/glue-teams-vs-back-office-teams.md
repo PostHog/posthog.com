@@ -29,7 +29,7 @@ But then you grow. Areas need to be split up for ownership. Some bits get choppe
 
 ## Two types of teams
 
-As product-focused companies scale, you’ll hear calls for two kinds of engineering teams: **back-office teams** and **glue teams.** [^1]
+As product-focused companies [scale](/newsletter/building-a-startup-that-scales), you’ll hear calls for two kinds of engineering teams: **back-office teams** and **glue teams.** [^1]
 
 People think they’re the same because they both:
 
@@ -57,7 +57,7 @@ These folks do [glue work](https://www.noidea.dog/glue?utm_source=newsletter.pos
 
 Think, auth. Not flashy, not a standalone product line, yet it keeps the product together in one piece. It makes or breaks enterprise deals, or a user’s day.
 
-[Billing](/teams/billing)? The ultimate glue. That’s systems, UI, and accounting, all in one. The spice must flow.
+Billing? The ultimate glue. That’s systems, UI, and accounting, all in one. The spice must flow. That's <SmallTeam slug="billing" /> at PostHog.
 
 The folks owning these areas should be talking to users, they should be owning product metrics.
 
@@ -85,7 +85,8 @@ Distributed ownership is the name of the game for those internal aspects. It tak
 
 It’s not their full-time job, and it shouldn’t be yet. And, for the hairiest problems, you agree to spin up a **short-lived** project team to address that specifically.
 
-Obviously, some back-office work is an early must-have. You won’t get far without a clear [owner of data infra](/teams/infrastructure), especially if you run a data-intensive SaaS like we do at [PostHog](/).[^2]
+
+Obviously, some back-office work is an early must-have. You won’t get far without a clear owner of data infra, especially if you run a data-intensive SaaS like we do at [PostHog](/).[^2] That's <SmallTeam slug="infrastructure" /> at PostHog.
 
 But, beyond the absolute essentials, only start a back-office team when you can honestly call its resources a rounding error compared to product development. Backend infra at 20 engineers, anything else at 50+.
 

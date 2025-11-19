@@ -203,7 +203,7 @@ export const Accordion = ({ allExpanded, setAllExpanded }) => {
         () =>
             products.filter((item) => {
                 // Skip if explicitly hidden from pricing table
-                if (item.hideFromPricingTable) return false
+                if (item.hideFromPricingTableAndCalculator) return false
 
                 // Include if billed with another product OR has its own billing data
                 return item.billedWith || item.billingData

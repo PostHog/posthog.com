@@ -3,18 +3,17 @@ date: 2024-08-05
 title: 7 best session replay tools for mobile apps (iOS & Android)
 rootPage: /blog
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1721983244/posthog.com/contents/hog-mobile-replay.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/v1721983244/posthog.com/contents/hog-mobile-replay.jpg
 featuredImageType: full
 author:
-  - lior-neu-ner
+    - lior-neu-ner
 category: General
 tags:
-  - Guides
-  - Comparisons
+    - Guides
+    - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. LogRocket
 
@@ -28,17 +27,26 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 #### Supported features
 
-<ComparisonTable column1="LogRocket">
-  <ComparisonRow column1="Android, iOS, React Native" feature="Supported platforms" description="Mobile platforms where session replay is available" />
-  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
-  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
-  <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-  <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-  <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
-  <ComparisonRow column1={true} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
-  <ComparisonRow column1={true} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['logrocket']}
+    rows={[
+        {
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'session_replay.ai.ai_summaries',
+    ]}
+/>
 
 ### How much does LogRocket cost?
 
@@ -60,11 +68,10 @@ Reviewers on [G2](https://www.g2.com/products/logrocket/reviews) use LogRocket f
 >
 > LogRocket is great choice for teams whose top priority is identifying and mitigating issues.
 
-<br />
-
 ## 2. UXCam
+
 **Typical users:** Product managers in enterprise companies
-  
+
 ![UXCam](https://res.cloudinary.com/dmukukwp6/image/upload/v1722526111/posthog.com/contents/Analyze_event_in_session.jpg)
 
 ### What is UXCam?
@@ -75,24 +82,34 @@ It's designed to provide deep insights into user behavior, helping product manag
 
 #### Supported features
 
-<ComparisonTable column1="UXCam">
-  <ComparisonRow column1="Android, iOS, React Native, Flutter" feature="Supported platforms" description="Mobile platforms where session replay is available" />
-  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
-  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
-  <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-  <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-  <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
-  <ComparisonRow column1={true} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
-  <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['uxcam']}
+    rows={[
+        {
+            path: 'session_replay.platform_support',
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native, Flutter'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'session_replay.ai.ai_summaries',
+    ]}
+/>
 
 ### How much does UXCam cost?
 
 UXCam's pricing is sales-driven and completely opaque, so it's not clear how much it costs. The company's sales team will give you a quote after you've spoken to them.
 
 ### Why do companies use UXCam?
- 
+
 Looking at [G2 reviews](https://www.g2.com/products/uxcam/reviews), companies choose UXCam to:
 
 1. **Insights on user behavior:** Shows what they are doing, where their attention is going, and how they are spending their time. Users love the realizations they get with UXCam's tools.
@@ -102,10 +119,8 @@ Looking at [G2 reviews](https://www.g2.com/products/uxcam/reviews), companies ch
 3. **Heatmaps and scrollmaps:** Seeing clicks and scroll depth works well and creates actionable insights for design and product teams. Helps improve UX and page designs.
 
 > #### Bottom line
-> 
+>
 > UXCam is ideal for product managers who need in-depth insights into user behavior. Despite opaque pricing, its ease of use and actionable insights make it a valuable tool.
-
-<br/>
 
 ## 3. Microsoft Clarity
 
@@ -115,23 +130,33 @@ Looking at [G2 reviews](https://www.g2.com/products/uxcam/reviews), companies ch
 
 ### What is Microsoft Clarity?
 
-[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) is a 100% free session replay tool that supports most replay features and heatmaps. It integrates with [Google Analytics 4](/blog/posthog-vs-ga4), so you can view your GA data in Clarity. 
+[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) is a 100% free session replay tool that supports most replay features and heatmaps. It integrates with [Google Analytics 4](/blog/posthog-vs-ga4), so you can view your GA data in Clarity.
 
 It includes most of the session replay features you would expect, but doesn't support any additional features that some of the other choices on this list do, like crash reports or debug logs.
 
 #### Supported features
 
-<ComparisonTable column1="Microsoft Clarity">
-  <ComparisonRow column1="Android, iOS, React Native" feature="Supported platforms" description="Mobile platforms where session replay is available" />
-  <ComparisonRow column1={false} feature="Debug logs" description="View console logs, network logs" />
-  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
-  <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-  <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-  <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
-  <ComparisonRow column1={false} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
-  <ComparisonRow column1={true} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['clarity']}
+    rows={[
+        {
+            path: 'session_replay.platform_support',
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'session_replay.ai.ai_summaries',
+    ]}
+/>
 
 ### How much does Microsoft Clarity cost?
 
@@ -148,15 +173,13 @@ According to [reviews on G2](https://www.g2.com/products/microsoft-microsoft-cla
 3. **It's free:** The short 30-day retention limit is easy to forgive when it's free.
 
 > #### Bottom line
-> 
+>
 > If you only care about session replay and dont need other features, Clarity is the obvious choice - especially if you're already using Google Analytics. On the other hand, software engineers will find Clarity's lack of debug logs disappointing.
-
-<br />
 
 ## 4. PostHog
 
-**Typical users** Engineering and product teams
-  
+**Typical users:** Engineering and product teams
+
 ![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1722527045/posthog.com/contents/posthog-mobile-replay.png)
 
 ### What is PostHog?
@@ -167,17 +190,27 @@ It's designed for product-minded engineers, growth teams, and product managers w
 
 #### Supported features
 
-<ComparisonTable column1="PostHog">
-  <ComparisonRow column1="Android, iOS, React Native, Flutter" feature="Supported platforms" description="Mobile platforms where session replay is available" />
-  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
-  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={false} feature="Heatmaps" description="Highlight areas that get the most interaction" />
-  <ComparisonRow column1={false} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-  <ComparisonRow column1={false} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-  <ComparisonRow column1={false} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
-  <ComparisonRow column1={false} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
-  <ComparisonRow column1="Alpha" feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog']}
+    rows={[
+        {
+            path: 'session_replay.platform_support',
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native, Flutter'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'session_replay.ai.ai_summaries',
+    ]}
+/>
 
 ### How much does PostHog cost?
 
@@ -194,33 +227,42 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 3. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
 
 > #### Bottom line
-> 
+>
 > For teams looking for all the tools they need to improve their products, PostHog makes for a great choice. This is especially true for startups and scaleups thanks to it having a generous free tier.
 
-<br />
-
 ## 5. Smartlook
+
 **Typical users:** Engineers, business analysts, product managers
 
 ![Smartlook](https://res.cloudinary.com/dmukukwp6/image/upload/v1722526687/posthog.com/contents/smartlook-mobile.webp)
 
 ### What is Smartlook?
- 
+
 Smartlook combines session replays, product analytics, visualizations, and crash reports to generate an overall understanding of user experience. It focuses on mobile apps with specific tools like native rendering and wireframe mode.
 
 #### Supported features
 
-<ComparisonTable column1="Smartlook">
-  <ComparisonRow column1="Android, iOS, React Native, Flutter" feature="Supported platforms" description="Mobile platforms where session replay is available" />
-  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
-  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
-  <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-  <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-  <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
-  <ComparisonRow column1={true} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
-  <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['smartlook']}
+    rows={[
+        {
+            path: 'session_replay.platform_support',
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native, Flutter'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'session_replay.ai.ai_summaries',
+    ]}
+/>
 
 ### How much does Smartlook cost?
 
@@ -237,10 +279,8 @@ According to [G2](https://www.g2.com/products/smartlook/reviews) reviewers, Smar
 3. **Real user monitoring:** Smartlook shows how real users are using your app and monitors the quality of their experiences. Reviewers use it to figure out what areas are confusing or used improperly.
 
 > #### Bottom line
->  
+>
 > Smartlook's combination of analytics, session replay, and crash reports make it a good choice for teams who want a full picture of their user experience.
-
-<br />
 
 ## 6. FullStory
 
@@ -250,21 +290,31 @@ According to [G2](https://www.g2.com/products/smartlook/reviews) reviewers, Smar
 
 ### What is FullStory?
 
-[FullStory](/blog/best-fullstory-alternatives) describes itself as behavioral data analytics platform, which is code for session replay and [mobile app analytics](/blog/best-mobile-app-analytics-tools), with a side of product analytics. 
+[FullStory](/blog/best-fullstory-alternatives) describes itself as behavioral data analytics platform, which is code for session replay and [mobile app analytics](/blog/best-mobile-app-analytics-tools), with a side of product analytics.
 
 #### Supported features
 
-<ComparisonTable column1="FullStory">
-  <ComparisonRow column1="Android, iOS, React Native, Flutter" feature="Supported platforms" description="Mobile platforms where session replay is available" />
-  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
-  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
-  <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-  <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-  <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
-  <ComparisonRow column1={false} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
-  <ComparisonRow column1={true} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['fullstory']}
+    rows={[
+        {
+            path: 'session_replay.platform_support',
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native, Flutter'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'session_replay.ai.ai_summaries',
+    ]}
+/>
 
 ### How much does FullStory cost?
 
@@ -282,9 +332,7 @@ According to reviews on [G2](https://www.g2.com/products/fullstory/reviews), com
 
 > #### Bottom line
 >
-> For a complete behavioral analytics suite, FullStory is a solid choice. Users wanting more features, like error tracking or A/B testing should switch to other choices. 
-
-<br />
+> For a complete behavioral analytics suite, FullStory is a solid choice. Users wanting more features, like error tracking or A/B testing should switch to other choices.
 
 ## 7. Contentsquare
 
@@ -298,21 +346,31 @@ Contentsquare is an analytics platform that combines heatmaps, customer journey 
 
 #### Supported features
 
-<ComparisonTable column1="Contentsquare">
-  <ComparisonRow column1="Android, iOS, React Native" feature="Supported platforms" description="Mobile platforms where session replay is available" />
-  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
-  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
-  <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-  <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-  <ComparisonRow column1={false} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
-  <ComparisonRow column1={true} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
-  <ComparisonRow column1={true} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['contentsquare']}
+    rows={[
+        {
+            path: 'session_replay.platform_support',
+            label: 'Supported platforms',
+            description: 'Mobile platforms where session replay is available',
+            values: ['Android, iOS, React Native'],
+        },
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'heatmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.rage_taps',
+        'heatmaps.features.dead_taps',
+        'session_replay.features.crash_reports',
+        'session_replay.ai.ai_summaries',
+    ]}
+/>
 
 ### How much does Contentsquare cost?
 
-Since Contentsquare caters mostly to enterprise companies, its pricing is not available publicly and you need to speak to its  sales team to get a quote. According to [Capterra](https://www.capterra.co.uk/software/161591/contentsquare), pricing starts at $10,000/month, but no further information is given
+Since Contentsquare caters mostly to enterprise companies, its pricing is not available publicly and you need to speak to its sales team to get a quote. According to [Capterra](https://www.capterra.co.uk/software/161591/contentsquare), pricing starts at $10,000/month, but no further information is given
 
 ### Why do companies use Contentsquare?
 
@@ -325,12 +383,12 @@ According to [G2](https://www.g2.com/products/contentsquare/reviews) reviews, pe
 3. **Detailed session replays:** Users appreciate being able to match quantitative data with qualitative data, giving them a better understanding of how best to solve problems.
 
 > #### Bottom line
-> 
+>
 > From data visualizations, to behavior analysis, and detailed session replays, Contentsquare has a lot to offer, especially for larger companies.
-
 
 ## Further reading
 
-- [The 9 best mobile app A/B testing tools](/blog/best-mobile-app-ab-testing-tools)
-- [The 7 best mobile app analytics tools](/blog/best-mobile-app-analytics-tools)
-- [The best UXCam alternatives & competitors, compared](/blog/best-uxcam-alternatives)
+-   For a full breakdown of the top session replay platforms, see our guide to the [best session replay tools for developers](/blog/best-session-replay-tools).
+-   [The 9 best mobile app A/B testing tools](/blog/best-mobile-app-ab-testing-tools)
+-   [The 7 best mobile app analytics tools](/blog/best-mobile-app-analytics-tools)
+-   [The best UXCam alternatives & competitors, compared](/blog/best-uxcam-alternatives)

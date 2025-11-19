@@ -37,7 +37,7 @@ It is critical to A/A testing that you treat it like a standard A/B test. This m
 
 ```js
 'use client'
-import { useFeatureFlagVariantKey } from 'posthog-js/react'
+import { useFeatureFlagVariantKey } from '@posthog/react'
 import Link from 'next/link'
 
 export default function Home() {

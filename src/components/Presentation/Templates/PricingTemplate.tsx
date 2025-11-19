@@ -30,7 +30,7 @@ interface PricingTemplateProps {
     textColor?: string
     companyLogo?: string
     companyName?: string
-    salesRep?: SalesRep
+    salesRep?: SalesRep | null
     slideKey?: string
 }
 
