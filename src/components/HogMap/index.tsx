@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import SEO from 'components/seo'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 // Delay requiring mapbox-gl until client to avoid SSR issues
@@ -53,6 +52,109 @@ interface ProfileNode {
     avatar?: {
         url?: string
     }
+}
+
+// Build a compact grouped avatar element for locations with multiple profiles
+function createAvatarGroupElement(profiles: ProfileNode[]): HTMLDivElement {
+    let containerSize = 86
+    const avatarSizeSmall = 48
+    const avatarSizeMedium = 48
+    const avatarSizeLarge = 48
+
+    const count = profiles.length
+
+    const container = document.createElement('div')
+    container.style.position = 'relative'
+    container.style.width = `${containerSize}px`
+    container.style.height = `${containerSize}px`
+    container.style.borderRadius = '8px'
+    container.style.overflow = 'visible'
+    container.style.display = 'block'
+
+    type Pos = { left: number; top: number; size: number }
+    const positions: Pos[] = []
+
+    const centerCoord = (size: number) => (containerSize - size) / 2
+
+    if (count === 2) {
+        const size = avatarSizeLarge
+        positions.push(
+            { left: 0, top: centerCoord(size), size },
+            { left: containerSize - size, top: centerCoord(size), size }
+        )
+    } else if (count === 3) {
+        const size = avatarSizeMedium
+        positions.push(
+            { left: centerCoord(size), top: 0, size }, // top middle
+            { left: 0, top: containerSize - size, size }, // bottom left
+            { left: containerSize - size, top: containerSize - size, size } // bottom right
+        )
+    } else if (count === 4) {
+        const size = avatarSizeLarge
+        positions.push(
+            { left: 0, top: 0, size },
+            { left: containerSize - size, top: 0, size },
+            { left: 0, top: containerSize - size, size },
+            { left: containerSize - size, top: containerSize - size, size }
+        )
+    } else if (count === 5) {
+        const size = avatarSizeMedium
+        positions.push(
+            { left: centerCoord(size), top: 0, size }, // top
+            { left: 0, top: centerCoord(size), size }, // left
+            { left: containerSize - size, top: centerCoord(size), size }, // right
+            { left: centerCoord(size), top: containerSize - size, size }, // bottom
+            { left: centerCoord(size), top: centerCoord(size), size } // center
+        )
+    } else {
+        // 6+ — arrange in a ring around the center
+        containerSize = 15 * count
+        const size = avatarSizeSmall
+        const radius = (containerSize - size) / 2
+        const cx = containerSize / 2
+        const cy = containerSize / 2
+        const total = Math.min(count, 8) // keep it readable
+        for (let i = 0; i < total; i++) {
+            const angle = (2 * Math.PI * i) / total - Math.PI / 2 // start at top
+            const x = cx + radius * Math.cos(angle) - size / 2
+            const y = cy + radius * Math.sin(angle) - size / 2
+            positions.push({ left: Math.round(x), top: Math.round(y), size })
+        }
+        // If there are more than we can show nicely, add one in the center to hint more
+        if (count > total) {
+            positions.push({ left: centerCoord(size), top: centerCoord(size), size })
+        }
+    }
+
+    positions.slice(0, profiles.length).forEach((pos, idx) => {
+        const profile = profiles[idx]
+        const wrap = document.createElement('div')
+        wrap.classList.add(
+            `bg-${profile.color ?? 'white'}`,
+            'overflow-hidden',
+            'border-2',
+            'border-white',
+            'rounded-full',
+            'shadow-sm',
+            'object-cover'
+        )
+        wrap.style.position = 'absolute'
+        wrap.style.width = `${pos.size}px`
+        wrap.style.height = `${pos.size}px`
+        wrap.style.left = `${pos.left}px`
+        wrap.style.top = `${pos.top}px`
+
+        const img = document.createElement('img')
+        img.src =
+            profile.avatar?.url || 'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
+        img.alt = [profile.firstName, profile.lastName].filter(Boolean).join(' ') || 'Team member'
+        img.classList.add('w-full', 'h-full', 'object-cover')
+        wrap.appendChild(img)
+
+        container.appendChild(wrap)
+    })
+
+    return container
 }
 
 export default function HogMap(): JSX.Element {
@@ -149,7 +251,7 @@ export default function HogMap(): JSX.Element {
             console.error('No token')
             return
         }
-        const DETAIL_ZOOM = 3.5
+        const DETAIL_ZOOM = 6.5
         const clearMarkers = () => {
             markersRef.current.forEach((m) => m.remove())
             markersRef.current = []
@@ -158,7 +260,6 @@ export default function HogMap(): JSX.Element {
             if (!mapRef.current) return
             clearMarkers()
             // Group members by their geocode query so people in the same location are combined
-            console.log(members)
             const groups = members.reduce((acc, m) => {
                 const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
                 if (!q) {
@@ -221,7 +322,7 @@ export default function HogMap(): JSX.Element {
                     el.style.fontSize = '12px'
                     el.textContent = String(profiles.length)
                 } else {
-                    el.style.width = profiles.length > 1 ? `${profiles.length * 48}px` : '48px'
+                    el.style.width = profiles.length > 1 ? '56px' : '48px'
                     el.style.height = '48px'
                     el.style.borderRadius = '50%'
                     el.style.display = 'flex'
@@ -246,42 +347,10 @@ export default function HogMap(): JSX.Element {
                         )
                         el.appendChild(img)
                     } else {
-                        // Multi avatar stack
+                        const groupEl = createAvatarGroupElement(profiles)
                         el.style.borderRadius = '8px'
-                        el.style.gap = '0px'
-                        el.style.padding = '2px'
                         el.style.overflow = 'visible'
-                        const stack = document.createElement('div')
-                        stack.style.display = 'flex'
-                        stack.style.alignItems = 'center'
-                        stack.style.justifyContent = 'center'
-                        stack.style.width = '100%'
-                        stack.style.height = '100%'
-
-                        profiles.forEach((p, idx) => {
-                            const wrap = document.createElement('div')
-                            wrap.classList.add(
-                                `bg-${p.color ?? 'white'}`,
-                                'overflow-hidden',
-                                'border-2',
-                                'border-white',
-                                'rounded-full',
-                                'shadow-sm',
-                                'object-cover',
-                                'h-full'
-                            )
-                            if (idx > 0) {
-                                wrap.style.marginLeft = '-8px'
-                            }
-                            const img = document.createElement('img')
-                            img.src = p.avatar?.url || avatarFallback
-                            img.alt = [p.firstName, p.lastName].filter(Boolean).join(' ') || 'Team member'
-                            img.classList.add('w-full', 'h-full', 'object-cover')
-                            wrap.appendChild(img)
-                            stack.appendChild(wrap)
-                        })
-
-                        el.appendChild(stack)
+                        el.appendChild(groupEl)
                     }
                 }
 
