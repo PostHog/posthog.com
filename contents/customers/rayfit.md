@@ -1,5 +1,5 @@
 ---
-title: How Lovable builds better agents with LLM analytics and experimentation
+title: How Rayfit uses PostHog AI to make analytics self-serve
 customer: Rayfit
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/lovable_ca8b63c28c_ef5bcb4589.png
