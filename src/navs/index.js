@@ -1927,6 +1927,10 @@ export const docsMenu = {
                                     name: 'Configuration',
                                     url: '/docs/libraries/ios/configuration',
                                 },
+                                {
+                                    name: 'Reference',
+                                    url: '/docs/references/posthog-ios',
+                                },
                             ],
                         },
                         {
