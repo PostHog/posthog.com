@@ -1339,15 +1339,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Getting started with newly assigned customers',
-                        url: '/handbook/cs-and-onboarding/newly-assigned-customer',
-                    },
-                    {
-                        name: 'Saying hi to your customers',
-                        url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
-                    },
-                    {
-                        name: 'Getting to know your customers',
-                        url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
+                        url: '/handbook/cs-and-onboarding/getting-started-with-customers',
                     },
                     {
                         name: 'Basic account review checklist',
@@ -1376,6 +1368,10 @@ export const handbookSidebar = [
                     {
                         name: 'How we upsell and cross-sell',
                         url: '/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell',
+                    },
+                    {
+                        name: 'Error tracking cross-sell',
+                        url: '/handbook/cs-and-onboarding/error-tracking-cross-sell',
                     },
                 ],
             },
@@ -3816,6 +3812,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/flutter',
                         },
                         {
+                            name: 'React Native',
+                            url: '/docs/error-tracking/installation/react-native',
+                        },
+                        {
                             name: 'Manual/API',
                             url: '/docs/error-tracking/installation/manual',
                         },
@@ -3855,6 +3855,10 @@ export const docsMenu = {
                         {
                             name: 'Node.js',
                             url: '/docs/error-tracking/upload-source-maps/node',
+                        },
+                        {
+                            name: 'React Native',
+                            url: '/docs/error-tracking/upload-source-maps/react-native',
                         },
                         {
                             name: 'CLI',
@@ -4431,6 +4435,10 @@ export const docsMenu = {
                             name: 'LiteLLM',
                             url: '/docs/llm-analytics/installation/litellm',
                         },
+                        {
+                            name: 'Manual capture',
+                            url: '/docs/llm-analytics/installation/manual-capture',
+                        },
                     ],
                 },
                 {
@@ -4512,13 +4520,6 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/link-error-tracking',
                     icon: 'IconWarning',
                     color: 'red',
-                },
-                {
-                    name: 'Manual capture',
-                    url: '/docs/llm-analytics/manual-capture',
-                    icon: 'IconCode',
-                    color: 'green',
-                    featured: true,
                 },
                 {
                     name: 'Resources',
