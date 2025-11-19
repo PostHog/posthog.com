@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { usePeopleMapData, ProfileNode, Coordinates } from './PeopleLayer'
 import { useEventsMapData, EventItem } from './EventsLayer'
+import { navigate } from 'gatsby'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 export const LAYER_PEOPLE = 'layer-people'
@@ -16,128 +17,32 @@ const getMapbox = () => {
     return mapboxgl
 }
 
-// Build a compact grouped avatar element for locations with multiple profiles
-const createAvatarGroupElement = (profiles: ProfileNode[]): HTMLDivElement => {
-    const containerSize = 86
-    const avatarSizeMedium = 48
-    const avatarSizeLarge = 48
-
-    const count = profiles.length
-
-    const container = document.createElement('div')
-    container.style.position = 'relative'
-    container.style.width = `${containerSize}px`
-    container.style.height = `${containerSize}px`
-    container.style.borderRadius = '8px'
-    container.style.overflow = 'visible'
-    container.style.display = 'block'
-
-    type Pos = { left: number; top: number; size: number }
-    const positions: Pos[] = []
-
-    const centerCoord = (size: number) => (containerSize - size) / 2
-
-    if (count === 2) {
-        const size = avatarSizeLarge
-        positions.push(
-            { left: 0, top: centerCoord(size), size },
-            { left: containerSize - size, top: centerCoord(size), size }
-        )
-    } else if (count === 3) {
-        const size = avatarSizeMedium
-        positions.push(
-            { left: centerCoord(size), top: 0, size }, // top middle
-            { left: 0, top: containerSize - size, size }, // bottom left
-            { left: containerSize - size, top: containerSize - size, size } // bottom right
-        )
-    } else if (count === 4) {
-        const size = avatarSizeLarge
-        positions.push(
-            { left: 0, top: 0, size },
-            { left: containerSize - size, top: 0, size },
-            { left: 0, top: containerSize - size, size },
-            { left: containerSize - size, top: containerSize - size, size }
-        )
-    } else if (count === 5) {
-        const size = avatarSizeMedium
-        positions.push(
-            { left: centerCoord(size), top: 0, size }, // top
-            { left: 0, top: centerCoord(size), size }, // left
-            { left: containerSize - size, top: centerCoord(size), size }, // right
-            { left: centerCoord(size), top: containerSize - size, size }, // bottom
-            { left: centerCoord(size), top: centerCoord(size), size } // center
-        )
-    } else {
-        // 6+ — use a compact grid layout
-        const gap = 2
-        const columns = Math.ceil(Math.sqrt(count))
-        const rows = Math.ceil(count / columns)
-        // Derive a cell size to keep container roughly around containerSize
-        const cellSize = 48
-        const widthPx = cellSize * columns + gap * (columns - 1)
-        const heightPx = cellSize * rows + gap * (rows - 1)
-        container.style.display = 'grid'
-        container.style.gridTemplateColumns = `repeat(${columns}, ${cellSize}px)`
-        container.style.gridAutoRows = `${cellSize}px`
-        container.style.gap = `${gap}px`
-        container.style.width = `${widthPx}px`
-        container.style.height = `${heightPx}px`
-        container.style.borderRadius = '8px'
-        // Build grid items
-        profiles.forEach((profile) => {
-            const wrap = document.createElement('div')
-            wrap.classList.add(
-                `bg-${profile.color ?? 'white'}`,
-                'overflow-hidden',
-                'border-2',
-                'border-white',
-                'rounded-full',
-                'shadow-sm',
-                'object-cover'
-            )
-            wrap.style.width = `${cellSize}px`
-            wrap.style.height = `${cellSize}px`
-            const img = document.createElement('img')
-            img.src =
-                profile.avatar?.url ||
-                'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
-            img.alt = [profile.firstName, profile.lastName].filter(Boolean).join(' ') || 'Team member'
-            img.classList.add('w-full', 'h-full', 'object-cover')
-            wrap.appendChild(img)
-            container.appendChild(wrap)
-        })
-        return container
+// Compute small lat/lng offsets to spread overlapping markers
+const computeOffsets = (count: number, baseRadius: number): Array<{ dx: number; dy: number }> => {
+    if (count <= 1) {
+        return [{ dx: 0, dy: 0 }]
     }
-
-    positions.slice(0, profiles.length).forEach((pos, idx) => {
-        const profile = profiles[idx]
-        const wrap = document.createElement('div')
-        wrap.classList.add(
-            `bg-${profile.color ?? 'white'}`,
-            'overflow-hidden',
-            'border-2',
-            'border-white',
-            'rounded-full',
-            'shadow-sm',
-            'object-cover'
-        )
-        wrap.style.position = 'absolute'
-        wrap.style.width = `${pos.size}px`
-        wrap.style.height = `${pos.size}px`
-        wrap.style.left = `${pos.left}px`
-        wrap.style.top = `${pos.top}px`
-
-        const img = document.createElement('img')
-        img.src =
-            profile.avatar?.url || 'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
-        img.alt = [profile.firstName, profile.lastName].filter(Boolean).join(' ') || 'Team member'
-        img.classList.add('w-full', 'h-full', 'object-cover')
-        wrap.appendChild(img)
-
-        container.appendChild(wrap)
-    })
-
-    return container
+    const offsets: Array<{ dx: number; dy: number }> = []
+    const rings = Math.ceil((count - 1) / 6)
+    let remaining = count
+    for (let ring = 1; remaining > 0; ring++) {
+        const inRing = Math.min(6, remaining)
+        const radius = baseRadius * ring
+        for (let i = 0; i < inRing; i++) {
+            const angle = (i / inRing) * Math.PI * 2
+            const dx = radius * Math.cos(angle)
+            const dy = radius * Math.sin(angle)
+            offsets.push({ dx, dy })
+        }
+        remaining -= inRing
+        if (ring >= rings) {
+            break
+        }
+    }
+    while (offsets.length < count) {
+        offsets.push({ dx: 0, dy: 0 })
+    }
+    return offsets
 }
 
 export default function HogMap({ layers }: { layers: string[] }): JSX.Element {
@@ -171,20 +76,148 @@ export default function HogMap({ layers }: { layers: string[] }): JSX.Element {
             console.error('No token')
             return
         }
-        const DETAIL_ZOOM = 6
+        const CLUSTER_ZOOM = 4
         const clearMarkers = () => {
             markersRef.current.forEach((m) => m.remove())
             markersRef.current = []
         }
+        const ensureClusterSource = (id: string, data: any) => {
+            if (!mapRef.current) return
+            const existing = mapRef.current.getSource(id) as any
+            if (existing) {
+                existing.setData(data)
+                return
+            }
+            mapRef.current.addSource(id, {
+                type: 'geojson',
+                data,
+                cluster: true,
+                clusterMaxZoom: 12,
+                clusterRadius: 50,
+            } as any)
+        }
+        const ensureClusterLayers = (id: string) => {
+            if (!mapRef.current) return
+            const clustersId = `${id}-clusters`
+            const countId = `${id}-cluster-count`
+            if (!mapRef.current.getLayer(clustersId)) {
+                mapRef.current.addLayer({
+                    id: clustersId,
+                    type: 'circle',
+                    source: id,
+                    filter: ['has', 'point_count'],
+                    paint: {
+                        'circle-color': '#111827',
+                        'circle-stroke-color': '#ffffff',
+                        'circle-stroke-width': 2,
+                        'circle-radius': ['step', ['get', 'point_count'], 14, 10, 18, 25, 24],
+                    },
+                } as any)
+            }
+            if (!mapRef.current.getLayer(countId)) {
+                mapRef.current.addLayer({
+                    id: countId,
+                    type: 'symbol',
+                    source: id,
+                    filter: ['has', 'point_count'],
+                    layout: {
+                        'text-field': '{point_count_abbreviated}',
+                        'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+                        'text-size': 12,
+                    },
+                    paint: {
+                        'text-color': '#ffffff',
+                    },
+                } as any)
+            }
+            const clickHandler = (e: any) => {
+                const features = mapRef.current.queryRenderedFeatures(e.point, { layers: [clustersId] })
+                const clusterId = features?.[0]?.properties?.cluster_id
+                const source = mapRef.current.getSource(id) as any
+                if (clusterId && source && source.getClusterExpansionZoom) {
+                    source.getClusterExpansionZoom(clusterId, (err: any, zoom: number) => {
+                        if (err) return
+                        mapRef.current.easeTo({ center: features[0].geometry.coordinates, zoom })
+                    })
+                }
+            }
+            mapRef.current.off('click', clustersId, clickHandler)
+            mapRef.current.on('click', clustersId, clickHandler)
+        }
+        const setClusterVisibility = (id: string, visible: boolean) => {
+            if (!mapRef.current) return
+            const clustersId = `${id}-clusters`
+            const countId = `${id}-cluster-count`
+            ;[clustersId, countId].forEach((layerId) => {
+                if (mapRef.current.getLayer(layerId)) {
+                    mapRef.current.setLayoutProperty(layerId, 'visibility', visible ? 'visible' : 'none')
+                }
+            })
+        }
         const renderMarkers = () => {
             if (!mapRef.current) return
+            // Avoid manipulating sources/layers before the style is fully loaded
+            if (typeof mapRef.current.isStyleLoaded === 'function' && !mapRef.current.isStyleLoaded()) {
+                return
+            }
             clearMarkers()
             const zoom = mapRef.current.getZoom()
 
             const showPeople = Array.isArray(layers) && layers.includes(LAYER_PEOPLE)
             const showEvents = Array.isArray(layers) && layers.includes(LAYER_EVENTS)
 
+            // Use Mapbox clusters when zoomed out
+            if (zoom < CLUSTER_ZOOM) {
+                if (showPeople) {
+                    const peopleFeatures = members
+                        .map((m) => {
+                            const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
+                            if (!q) return null
+                            const coords = coordsByQuery[q]
+                            if (!coords) return null
+                            return {
+                                type: 'Feature',
+                                properties: { type: 'person' },
+                                geometry: { type: 'Point', coordinates: [coords.longitude, coords.latitude] },
+                            }
+                        })
+                        .filter(Boolean)
+                    const peopleData = { type: 'FeatureCollection', features: peopleFeatures as any[] }
+                    ensureClusterSource('people-source', peopleData)
+                    ensureClusterLayers('people-source')
+                    setClusterVisibility('people-source', true)
+                } else {
+                    setClusterVisibility('people-source', false)
+                }
+                if (showEvents) {
+                    const eventFeatures = events
+                        .map((e) => {
+                            const coords = coordsByEventId[e.id]
+                            if (!coords) return null
+                            return {
+                                type: 'Feature',
+                                properties: { type: 'event' },
+                                geometry: { type: 'Point', coordinates: [coords.longitude, coords.latitude] },
+                            }
+                        })
+                        .filter(Boolean)
+                    const eventsData = { type: 'FeatureCollection', features: eventFeatures as any[] }
+                    ensureClusterSource('events-source', eventsData)
+                    ensureClusterLayers('events-source')
+                    setClusterVisibility('events-source', true)
+                } else {
+                    setClusterVisibility('events-source', false)
+                }
+                // Skip HTML markers in clustered view
+                return
+            } else {
+                setClusterVisibility('people-source', false)
+                setClusterVisibility('events-source', false)
+            }
+
             if (showPeople) {
+                // Jitter radius scales with zoom (more spread when zoomed out, less when zoomed in)
+                const jitterRadius = Math.max(0.003, 0.08 / Math.max(zoom, 1))
                 // Group members by their geocode query so people in the same location are combined
                 const groups = members.reduce((acc, m) => {
                     const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
@@ -203,95 +236,67 @@ export default function HogMap({ layers }: { layers: string[] }): JSX.Element {
                 }, {} as Record<string, { coords: Coordinates; profiles: ProfileNode[]; label: string }>)
 
                 Object.values(groups).forEach(({ coords: { longitude, latitude }, profiles, label }) => {
-                    const first = profiles[0]
                     const avatarFallback =
                         'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
-
-                    // Popup lists all people in the location
-                    const peopleList = profiles
-                        .map((p) => {
-                            const name = [p.firstName, p.lastName].filter(Boolean).join(' ')
-                            const role = p.companyRole || ''
-                            const href = p.squeakId ? `/community/profiles/${p.squeakId}` : ''
-                            return `<li class="mb-1"><a class="underline font-semibold" href="${href}">${name}</a>${
-                                role ? ` <span class="text-secondary">— ${role}</span>` : ''
-                            }</li>`
-                        })
-                        .join('')
-                    const popupHtml = `
-                        <div class="text-sm max-w-[240px]">
-                            <div class="font-semibold mb-1">${label}</div>
-                            <ul class="m-0 p-0 list-none">${peopleList}</ul>
-                        </div>`
-
-                    const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
-
-                    // Marker element
-                    const el = document.createElement('div')
-
-                    const isClusterMode = profiles.length > 1 && zoom < DETAIL_ZOOM
-                    if (isClusterMode) {
-                        // Show a circle with the count
-                        el.style.width = '36px'
-                        el.style.height = '36px'
-                        el.style.borderRadius = '18px'
-                        el.style.background = '#111827'
-                        el.style.color = '#ffffff'
-                        el.style.display = 'flex'
-                        el.style.alignItems = 'center'
-                        el.style.justifyContent = 'center'
-                        el.style.border = '2px solid #ffffff'
-                        el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
-                        el.style.fontWeight = '600'
-                        el.style.fontSize = '12px'
-                        el.textContent = String(profiles.length)
-                    } else {
-                        el.style.width = profiles.length > 1 ? '56px' : '48px'
+                    const offsets = computeOffsets(profiles.length, jitterRadius)
+                    profiles.forEach((p, idx) => {
+                        const { dx, dy } = offsets[idx]
+                        const el = document.createElement('div')
+                        el.style.width = '48px'
                         el.style.height = '48px'
                         el.style.borderRadius = '50%'
                         el.style.display = 'flex'
                         el.style.alignItems = 'center'
                         el.style.justifyContent = 'center'
                         el.style.overflow = 'hidden'
-
-                        if (profiles.length === 1) {
-                            // Single avatar
-                            const img = document.createElement('img')
-                            img.src = first.avatar?.url || avatarFallback
-                            img.alt = [first.firstName, first.lastName].filter(Boolean).join(' ') || 'Team member'
-                            img.classList.add(
-                                `bg-${first.color ?? 'white'}`,
-                                'border-2',
-                                'border-white',
-                                'rounded-full',
-                                'shadow-sm',
-                                'w-full',
-                                'h-full',
-                                'object-cover'
-                            )
-                            el.appendChild(img)
-                        } else {
-                            const groupEl = createAvatarGroupElement(profiles)
-                            el.style.borderRadius = '8px'
-                            el.style.overflow = 'visible'
-                            el.appendChild(groupEl)
+                        const img = document.createElement('img')
+                        img.src = p.avatar?.url || avatarFallback
+                        img.alt = [p.firstName, p.lastName].filter(Boolean).join(' ') || 'Team member'
+                        img.classList.add(
+                            `bg-${p.color ?? 'white'}`,
+                            'border-2',
+                            'border-white',
+                            'rounded-full',
+                            'shadow-sm',
+                            'w-full',
+                            'h-full',
+                            'object-cover'
+                        )
+                        el.appendChild(img)
+                        const name = [p.firstName, p.lastName].filter(Boolean).join(' ')
+                        const role = p.companyRole || ''
+                        const href = p.squeakId ? `/community/profiles/${p.squeakId}` : ''
+                        const popupHtml = `
+                            <div class="text-sm max-w-[240px]">
+                                <div class="font-semibold mb-1">${name || 'Team member'}</div>
+                                ${role ? `<div class="text-secondary mb-1">${role}</div>` : ''}
+                                <div class="text-secondary">${label}</div>
+                                ${
+                                    href
+                                        ? `<span class="underline font-semibold cursor-pointer" onclick="window.open('${href}', '_blank', 'noopener,noreferrer')">Click to view profile →</span>`
+                                        : ''
+                                }
+                            </div>`
+                        const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+                        const marker = new mapboxgl.Marker({ element: el })
+                            .setLngLat([longitude + dx, latitude + dy])
+                            .setPopup(popup)
+                            .addTo(mapRef.current)
+                        marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                        marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                        if (href) {
+                            marker.getElement().style.cursor = 'pointer'
+                            marker.getElement().addEventListener('click', () => {
+                                navigate(href, { state: { newWindow: true } })
+                            })
                         }
-                    }
-
-                    const marker = new mapboxgl.Marker({ element: el })
-                        .setLngLat([longitude, latitude])
-                        .setPopup(popup)
-                        .addTo(mapRef.current)
-
-                    // Hover behavior
-                    marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
-                    marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
-
-                    markersRef.current.push(marker)
+                        markersRef.current.push(marker)
+                    })
                 })
             }
 
             if (showEvents) {
+                const jitterRadius = Math.max(0.003, 0.08 / Math.max(zoom, 1))
                 // Group events by coordinate (rounded) to combine overlapping markers
                 const groups = events.reduce((acc, e) => {
                     const coords = coordsByEventId[e.id]
@@ -311,97 +316,58 @@ export default function HogMap({ layers }: { layers: string[] }): JSX.Element {
                 }, {} as Record<string, { coords: Coordinates; events: EventItem[]; label: string }>)
 
                 Object.values(groups).forEach(({ coords: { longitude, latitude }, events, label }) => {
-                    const popupList = events
-                        .map((ev) => {
-                            const date = ev.date
-                                ? new Date(ev.date).toLocaleDateString('en-US', {
-                                      month: 'short',
-                                      day: 'numeric',
-                                      year: 'numeric',
-                                  })
-                                : ''
-                            const href = ev.link || ''
-                            const name = ev.name || 'Event'
-                            return `<li class="mb-1"><a class="underline font-semibold" href="${href}">${name}</a>${
-                                date ? ` <span class="text-secondary">— ${date}</span>` : ''
-                            }</li>`
-                        })
-                        .join('')
-                    const popupHtml = `
-                        <div class="text-sm max-w-[260px]">
-                            <div class="font-semibold mb-1">${label}</div>
-                            <ul class="m-0 p-0 list-none">${popupList}</ul>
-                        </div>`
-                    const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
-
-                    // Marker element
-                    const el = document.createElement('div')
-                    const isClusterMode = events.length > 1 && zoom < DETAIL_ZOOM
-                    if (isClusterMode) {
-                        // Cluster-style count bubble (match people styling)
-                        el.style.width = '36px'
-                        el.style.height = '36px'
-                        el.style.borderRadius = '18px'
-                        el.style.background = '#111827'
-                        el.style.color = '#ffffff'
-                        el.style.display = 'flex'
-                        el.style.alignItems = 'center'
-                        el.style.justifyContent = 'center'
+                    const offsets = computeOffsets(events.length, jitterRadius)
+                    events.forEach((ev, idx) => {
+                        const { dx, dy } = offsets[idx]
+                        const el = document.createElement('div')
+                        el.style.width = '20px'
+                        el.style.height = '20px'
+                        el.style.borderRadius = '10px'
+                        el.style.background = '#FF9500'
                         el.style.border = '2px solid #ffffff'
                         el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
-                        el.style.fontWeight = '600'
-                        el.style.fontSize = '12px'
-                        el.textContent = String(events.length)
-                    } else {
-                        if (events.length === 1) {
-                            // Single event: small orange dot with white border
-                            el.style.width = '20px'
-                            el.style.height = '20px'
-                            el.style.borderRadius = '10px'
-                            el.style.background = '#FF9500'
-                            el.style.border = '2px solid #ffffff'
-                            el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
+
+                        const date = ev.date
+                            ? new Date(ev.date).toLocaleDateString('en-US', {
+                                  month: 'short',
+                                  day: 'numeric',
+                                  year: 'numeric',
+                              })
+                            : ''
+                        const href = ev.link || ''
+                        const name = ev.name || 'Event'
+                        const popupHtml = `
+                            <div class="text-sm max-w-[240px]">
+                                <div class="font-semibold mb-1">${name}</div>
+                                ${date ? `<div class="text-secondary mb-1">${date}</div>` : ''}
+                                <div class="text-secondary">${label}</div>
+                                ${href ? `<a class="underline font-semibold" href="${href}">View details →</a>` : ''}
+                            </div>`
+                        const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+
+                        const marker = new mapboxgl.Marker({ element: el })
+                            .setLngLat([longitude + dx, latitude + dy])
+                            .setPopup(popup)
+                            .addTo(mapRef.current)
+                        if (href) {
+                            marker.getElement().style.cursor = 'pointer'
+                            marker.getElement().addEventListener('click', () => {
+                                if (href.startsWith('/')) {
+                                    navigate(href, { state: { newWindow: true } })
+                                } else if (typeof window !== 'undefined') {
+                                    window.open(href, '_blank', 'noopener,noreferrer')
+                                }
+                            })
                         } else {
-                            // Multiple events at same spot: compact grid of orange dots
-                            const container = document.createElement('div')
-                            const count = Math.min(events.length, 9)
-                            const columns = Math.ceil(Math.sqrt(count))
-                            const rows = Math.ceil(count / columns)
-                            const cell = 10
-                            const gap = 2
-                            container.style.display = 'grid'
-                            container.style.gridTemplateColumns = `repeat(${columns}, ${cell}px)`
-                            container.style.gridAutoRows = `${cell}px`
-                            container.style.gap = `${gap}px`
-                            container.style.padding = '2px'
-                            container.style.background = '#ffffff'
-                            container.style.border = '2px solid #ffffff'
-                            container.style.borderRadius = '6px'
-                            container.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
-                            container.style.width = `${columns * cell + gap * (columns - 1) + 4}px`
-                            container.style.height = `${rows * cell + gap * (rows - 1) + 4}px`
-                            for (let i = 0; i < count; i++) {
-                                const dot = document.createElement('div')
-                                dot.style.width = `${cell}px`
-                                dot.style.height = `${cell}px`
-                                dot.style.borderRadius = '50%'
-                                dot.style.background = '#FF9500'
-                                container.appendChild(dot)
-                            }
-                            el.appendChild(container)
+                            marker.getElement().style.cursor = 'pointer'
+                            marker.getElement().addEventListener('click', () => {
+                                navigate('/events', { state: { newWindow: true } })
+                            })
                         }
-                    }
-
-                    const marker = new mapboxgl.Marker({ element: el })
-                        .setLngLat([longitude, latitude])
-                        .setPopup(popup)
-                        .addTo(mapRef.current)
-
-                    // Hover behavior
-                    marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
-                    marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
-
-                    markersRef.current.push(marker)
+                        marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                        marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                        markersRef.current.push(marker)
+                    })
                 })
             }
         }
