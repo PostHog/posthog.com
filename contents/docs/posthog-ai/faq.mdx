@@ -26,7 +26,7 @@ Other providers that are not data subprocessors:
 
 - Perplexity – responsible for providing context about your product and/or company, has access to domain name (for websites) or application bundle ID (for mobile applications). We do not send any of your data.
 
-## How can I disable AI in PostHog?
+## How can I disable PostHog AI?
 
 With [admin permissions](/docs/settings/access-control) for your organization, you can disable PostHog AI and all AI data analysis in your [organization settings](https://app.posthog.com/settings/organization-details#organization-ai-consent).
 
@@ -39,3 +39,11 @@ When disabled, PostHog AI won't be available and no data will be shared with AI 
 ## Can I hide PostHog AI?
 
 There currently isn't a toggle to _hide_ AI features altogether. However, in any case, only org admins can approve AI features in the organization – so there's no risk of data being sent to any AI provider without explicit consent.
+
+## Is my chat history retained if I disable and re-enable PostHog AI? 
+
+Yes, PostHog AI retains your chat history.
+
+## Can I self-host PostHog AI and use my own models?
+
+No, PostHog AI is only available in the cloud-hosted [PostHog app](https://app.posthog.com), which uses third-party LLM providers. PostHog automatically selects the most efficient model for each AI feature. 
