@@ -12,7 +12,7 @@ Alan, Rayfit’s Full Stack Engineering Lead, manages product development and da
 
 "As an early stage startup, we're cost sensitive," Alan says. “Initially we planned to stitch together an analytics tool and Metabase, but then we looked at PostHog. It's just so cheap and easy. We connected our database and built our pipeline with almost no work."
 
-For a team deep in the technical trenches of machine learning and computer vision, PostHog’s “one-stop shop” setup meaningfully reduced the time and effort of building out their stack. [Analystics](/docs/product-analytics), [feature flags](/docs/feature-flags), and the [data warehouse](/docs/data-warehouse) could all live one in place.
+For a team deep in the technical trenches of machine learning and computer vision, PostHog's "one-stop shop" setup meaningfully reduced the time and effort of building out their stack. [Analytics](/docs/product-analytics), [feature flags](/docs/feature-flags), and the [data warehouse](/docs/data-warehouse) could all live one in place.
 
 That solved the infrastructure problem. Next was ensuring the entire team was on board.
 
