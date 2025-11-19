@@ -13,6 +13,7 @@ import useTheme from '../../hooks/useTheme'
 import { motion } from 'framer-motion'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
+import { useToast } from '../../context/Toast'
 
 declare global {
     interface Window {
@@ -204,6 +205,7 @@ export default function Desktop() {
         confetti,
         compact,
         posthogInstance,
+        updateSiteSettings,
     } = useApp()
     const [iconPositions, setIconPositions] = useState<IconPositions>(generateInitialPositions())
     const { isInactive, dismiss } = useInactivityDetection({
@@ -211,7 +213,7 @@ export default function Desktop() {
     })
     const [rendered, setRendered] = useState(false)
     const { getWallpaperClasses } = useTheme()
-
+    const { addToast } = useToast()
     function generateInitialPositions(columns = 2): IconPositions {
         const positions: IconPositions = {}
 
@@ -335,6 +337,28 @@ export default function Desktop() {
     }
 
     const allApps = [...productLinks, ...apps]
+
+    const handleScreensaverDismiss = () => {
+        addToast({
+            title: 'Screensaver dismissed',
+            description: 'Want to disable it permanently?',
+            duration: 3000,
+            actionLabel: 'Disable screensaver',
+            onAction: () => {
+                updateSiteSettings({ ...siteSettings, screensaverDisabled: true })
+                addToast({
+                    title: 'Screensaver disabled',
+                    description: 'The screensaver has been disabled.',
+                    duration: 3000,
+                    onUndo: () => {
+                        updateSiteSettings({ ...siteSettings, screensaverDisabled: false })
+                    },
+                })
+            },
+        })
+        setScreensaverPreviewActive(false)
+        dismiss()
+    }
 
     return (
         <>
@@ -554,10 +578,7 @@ export default function Desktop() {
                 {!compact && (
                     <Screensaver
                         isActive={isInactive || screensaverPreviewActive}
-                        onDismiss={() => {
-                            setScreensaverPreviewActive(false)
-                            dismiss()
-                        }}
+                        onDismiss={handleScreensaverDismiss}
                     />
                 )}
                 <HedgeHogModeEmbed />
