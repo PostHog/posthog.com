@@ -60,6 +60,17 @@ export interface Props {
     [key: string]: any // Allow spread props
 }
 
+function useSafeLocationHref(): string | undefined {
+    try {
+        return useLocation().href
+    } catch {
+        if (typeof window !== 'undefined') {
+            return window.location.href
+        }
+        return undefined
+    }
+}
+
 const MenuWrapper = ({
     children,
     menuItems,
@@ -113,7 +124,7 @@ export default function Link({
 }: Props): JSX.Element {
     const { posthogInstance, compact } = useApp()
     const posthog = usePostHog()
-    const { href: locationHref } = useLocation()
+    const locationHref = useSafeLocationHref()
     const initialUrl = to || href
     const url = resolveRelativeLink(initialUrl, locationHref)
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
