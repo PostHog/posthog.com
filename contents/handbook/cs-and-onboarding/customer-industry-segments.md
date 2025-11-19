@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We have thousands of customers in PostHog, many of which are in similar industries. As CSMs having an understanding of our customers' industries can help us better be an expert on PostHog works best for their specific use cases. This page serves a resource for us to be able to collect and share industry specific vocabulary, important metrics, PostHog best practices, etc. that allow us to quickly ramp up on the industry to better engage with those customers.
+We have thousands of customers in PostHog, many of which are in similar industries. As CSMs having an understanding of our customers' industries can help us better be an expert on PostHog works best for their specific use cases. This page serves as a resource for us to be able to collect and share industry specific vocabulary, important metrics, PostHog best practices, etc. that allow us to quickly ramp up on the industry to better engage with those customers.
 
 ## Industry segment list
 
