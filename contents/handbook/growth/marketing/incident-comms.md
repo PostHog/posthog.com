@@ -1,5 +1,5 @@
 ---
-title: Incident Comms
+title: Incident comms
 sidebar: Handbook
 showTitle: true
 ---

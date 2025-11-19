@@ -120,7 +120,7 @@ When an incident is declared, the person who raised the incident is the incident
 
 The incident lead role is not responsible for fixing the incident, they're responsible for managing it. Sometimes that will be the same person. But if it is too much work for one person, hand over the incident lead role to someone else not actively working on the fix.
 
-Sometimes, customer communication is required. In this case, the incident lead can [ask for a comms lead to support the responding team](/handbook/growth/marketing/incident-comms).
+Sometimes, customer communication is required. In this case, the incident lead can [ask for a comms lead to support the responding team](/handbook/growth/marketing/incident-comms). The best way to do this is to ask for support in the incident channel and use the `@all-marketers` group tag. Don't be shy. 
 
 [You can find further production runbooks + specific strategies for debugging outages here (internal)](https://runbooks.posthog.com)
 
@@ -136,7 +136,7 @@ When updating the status page, make sure to mark the affected component appropri
 
 Significant incidents such as the app being partially or fully non-operational, as well as ingestion delays of 30 minutes or longer should be clearly communicated to our customers. They should get to know what is going on and what we are doing to resolve it. If the incident is minor this can usually be done by updating the status page, but it may be desirable to do additional customer communications, such as sending an email to impacted customers. When this is required, you should [involve a Comms Lead](/handbook/growth/marketing/incident-comms) and [ensure the Sales team are aware](/handbook/growth/sales/communications-templates-incidents).
 
-When handling a security incident, please align with the incident responder team in the incident slack channel about public communication of security issues. E.g. it could not make sense to immediately communicate an attack publicly, as this could make the attacker aware that we are investigating already. This could it make harder for us to stop this attack for good.
+When handling a security incident, please align with the incident responder team in the incident Slack channel about public communication of security issues. For example, it may not make sense to immediately communicate an attack publicly, as this could make the attacker aware that we are already investigating. This could it make harder for us to stop this attack for good.
 
 #### When a customer is causing an incident
 
