@@ -95,7 +95,7 @@ Online retail businesses including direct-to-consumer brands, marketplace platfo
 ##### Event taxonomy
 
 - **Core events:** `product_viewed`, `product_added_to_cart`, `checkout_started`, `order_completed`
-- [**Detailed spec for Ecommerce event taxonomy**](https://posthog.com/docs/data/event-spec/ecommerce-events)
+- [**Detailed spec for Ecommerce event taxonomy**](/docs/data/event-spec/ecommerce-events)
 - **Key event properties:** product_id, product_name, price, currency, quantity, category, brand, variant (size/color), cart_value
 
 ##### Person profiles
