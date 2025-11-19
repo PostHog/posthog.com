@@ -4,13 +4,13 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We plan objectives every quarter. The exec team set the direction and overall objectives for PostHog, and then small teams set their own objectives that feed into these. Longer-term planning that the exec team does is covered separately [here](/handbook/exec/annual-planning). 
+We plan objectives every quarter. The <SmallTeam slug="blitzscale" /> set the direction and overall objectives for PostHog, and then small teams set their own objectives that feed into these. Longer-term planning that the Blitzscale team does is covered separately [here](/handbook/exec/annual-planning). 
 
 ## How quarterly planning works
 
-1. ~3 weeks before the end of each quarter, the Exec team meets to come up with larger goals for the company, which sometimes (but not always) trickle down to individual teams.
-2. ~2 weeks before the end of the quarter, team leads should schedule planning meetings to go through these - these will be run by the team lead and include the relevant Exec team member, following the template below. Each small team can change or propose alternate objectives, goals, and/or key results (we are not prescriptive about the exact terms used here - use these as a starting point). 
-3. After the planning meeting, the team lead creates a PR on their small team page with the new goals. Make sure you tag the relevant member of the Exec team for review at a minimum.
+1. ~3 weeks before the end of each quarter, the Blitzscale team meets to come up with larger goals for the company, which sometimes (but not always) trickle down to individual teams.
+2. ~2 weeks before the end of the quarter, team leads should schedule planning meetings to go through these - these will be run by the team lead and include the relevant Blitzscale team member, following the template below. Each small team can change or propose alternate objectives, goals, and/or key results (we are not prescriptive about the exact terms used here - use these as a starting point). 
+3. After the planning meeting, the team lead creates a PR on their small team page with the new goals. Make sure you tag the relevant member of the Blitzscale team for review at a minimum.
 4. Goal PRs need to be merged before the next quarter starts. We usually then run through the objectives in the first all hands of the next quarter.
 
 In terms of accountability, Scott will notify all the small teams and make sure that the quarterly meetings happen (and that each small team has a PR), but he will not schedule the meetings for you. 
