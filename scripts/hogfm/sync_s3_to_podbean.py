@@ -36,10 +36,6 @@ S3_BUCKET = os.getenv("S3_BUCKET")
 
 AWS_REGION = os.getenv("AWS_REGION", "us-east-1")
 
-# Supported audio extensions
-AUDIO_EXTENSIONS = {".mp3", ".m4a", ".wav", ".ogg", ".flac", ".aac"}
-
-
 def get_access_token() -> str:
     """Get OAuth2 access token from Podbean."""
     url = "https://api.podbean.com/v1/oauth/token"
@@ -73,7 +69,7 @@ def list_s3_audio_files(prefix: str) -> list[dict]:
             filename = Path(key).name
             ext = Path(filename).suffix.lower()
 
-            if ext in AUDIO_EXTENSIONS:
+            if ext == ".mp3":
                 files.append({
                     "key": key,
                     "filename": filename,
@@ -185,20 +181,6 @@ def download_s3_file(s3_key: str, local_path: str):
     """Download a file from S3 to local path."""
     s3 = boto3.client("s3", region_name=AWS_REGION)
     s3.download_file(S3_BUCKET, s3_key, local_path)
-
-
-def get_content_type(filename: str) -> str:
-    """Get content type based on file extension."""
-    ext = Path(filename).suffix.lower()
-    content_types = {
-        ".mp3": "audio/mpeg",
-        ".m4a": "audio/mp4",
-        ".wav": "audio/wav",
-        ".ogg": "audio/ogg",
-        ".flac": "audio/flac",
-        ".aac": "audio/aac",
-    }
-    return content_types.get(ext, "audio/mpeg")
 
 
 
@@ -331,13 +313,12 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft", kind: st
             download_s3_file(s3_key, tmp_path)
 
             # Get presigned URL
-            content_type = get_content_type(filename)
             print(f"   Getting upload authorization...")
-            auth = get_presigned_upload_url(token, filename, filesize, content_type)
+            auth = get_presigned_upload_url(token, filename, filesize)
 
             # Upload to Podbean
             print(f"   Uploading to Podbean...")
-            upload_file_to_presigned_url(auth["presigned_url"], tmp_path, content_type)
+            upload_file_to_presigned_url(auth["presigned_url"], tmp_path)
 
             # Publish episode
 
