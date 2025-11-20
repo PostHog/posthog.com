@@ -8,7 +8,10 @@ export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean 
     const [visible, setVisible] = useState(false)
     const location = useLocation()
     const relativeUrl = `${location.pathname}#${id}`
-    const absoluteUrl = `${location.href.replace(/#.*/, '')}#${id}`
+    const absoluteUrl =
+        typeof window !== 'undefined'
+            ? `${window.location.origin}${location.pathname}#${id}`
+            : `${location.pathname}#${id}`
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault()
@@ -35,11 +38,7 @@ export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean 
                     </motion.div>
                 )}
             </AnimatePresence>
-            <Link
-                to={relativeUrl}
-                className="hover:opacity-100 opacity-20 transition-opacity"
-                onClick={handleClick}
-            >
+            <Link to={relativeUrl} className="hover:opacity-100 opacity-20 transition-opacity" onClick={handleClick}>
                 <IconLink className="size-4" />
             </Link>
         </span>
