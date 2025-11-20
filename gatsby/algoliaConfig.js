@@ -36,7 +36,7 @@ const retrievePages = (type, regex) => {
                 .map(({ id, frontmatter, headings, fields, ...page }) => {
                     return {
                         ...page,
-                        rawBody: fields.contentWithSnippets || page.rawBody,
+                        rawBody: fields?.contentWithSnippets || page.rawBody,
                         headings: headings.map((heading) => ({
                             ...heading,
                             fragment: slugger.slug(heading.value),
