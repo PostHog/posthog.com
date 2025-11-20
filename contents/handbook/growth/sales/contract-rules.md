@@ -154,7 +154,7 @@ In exceptional circumstances, we may explore providing additional discounts whic
 2. We are taking their business from a competitor.
 3. We are preventing them from churning to a competitor.
 
-If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details with Simon.  If he's happy that it's the right thing to do, then you also need to seek approval from Charles and Raquel.
+If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details with Simon. If he's happy that it's the right thing to do, then you also need to seek approval from Charles and Raquel.
 
 ## Additional credit purchase
 
