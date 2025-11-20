@@ -222,11 +222,11 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
             if (!mapRef.current) return
             const clustersId = `${id}-clusters`
             const countId = `${id}-cluster-count`
-            ;[clustersId, countId].forEach((layerId) => {
-                if (mapRef.current.getLayer(layerId)) {
-                    mapRef.current.setLayoutProperty(layerId, 'visibility', visible ? 'visible' : 'none')
-                }
-            })
+                ;[clustersId, countId].forEach((layerId) => {
+                    if (mapRef.current.getLayer(layerId)) {
+                        mapRef.current.setLayoutProperty(layerId, 'visibility', visible ? 'visible' : 'none')
+                    }
+                })
         }
         const renderMarkers = () => {
             if (!mapRef.current) return
@@ -365,16 +365,23 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                         const name = [p.firstName, p.lastName].filter(Boolean).join(' ')
                         const role = p.companyRole || ''
                         const href = p.squeakId ? `/community/profiles/${p.squeakId}` : ''
+                        // Generate flag emoji from country code
+                        const getFlagEmoji = (countryCode: string) => {
+                            if (!countryCode) return ''
+                            if (countryCode.toLowerCase() === 'world') return '🌎'
+                            const codePoints = countryCode
+                                .toUpperCase()
+                                .split('')
+                                .map((char) => 127397 + char.charCodeAt(0))
+                            return String.fromCodePoint(...codePoints)
+                        }
+                        const flagEmoji = p.country ? getFlagEmoji(p.country) : ''
+                        const locationText = p.country === 'world' ? 'Planet Earth' : p.location || p.country || ''
                         const popupHtml = `
-                            <div class="text-sm max-w-[240px]">
-                                <div class="font-semibold mb-1">${name || 'Team member'}</div>
-                                ${role ? `<div class="text-secondary mb-1">${role}</div>` : ''}
-                                <div class="text-secondary">${label}</div>
-                                ${
-                                    href
-                                        ? `<span class="underline font-semibold cursor-pointer" onclick="window.open('${href}', '_blank', 'noopener,noreferrer')">Click to view profile →</span>`
-                                        : ''
-                                }
+                            <div class="text-sm max-w-xs text-center">
+                                <div class="font-semibold font-squeak text-xl uppercase leading-tight">${name || 'Team member'}</div>
+                                ${role ? `<div class="mt-1 text-secondary text-balance">${role}</div>` : ''}
+                                ${flagEmoji || locationText ? `<div class="mt-1 text-secondary justify-center flex gap-1 items-center">${flagEmoji ? `<span>${flagEmoji}</span>` : ''}${locationText ? `<span>${locationText}</span>` : ''}</div>` : `<div class="text-secondary">${label}</div>`}
                             </div>`
                         const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
                         const marker = new mapboxgl.Marker({ element: el })
@@ -415,62 +422,62 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                     return acc
                 }, {} as Record<string, { coords: Coordinates; events: EventItem[]; label: string }>)
 
-                ;(Object.values(groups) as Array<{ coords: Coordinates; events: EventItem[]; label: string }>).forEach(
-                    ({ coords: { longitude, latitude }, events, label }) => {
-                        const offsets = computeOffsets(events.length, jitterRadius)
-                        ;(events as EventItem[]).forEach((ev: EventItem, idx: number) => {
-                            const { dx, dy } = offsets[idx]
-                            const el = document.createElement('div')
-                            el.style.width = '20px'
-                            el.style.height = '20px'
-                            el.style.borderRadius = '10px'
-                            el.style.background = '#FF9500' // upcoming
-                            el.style.border = '2px solid #ffffff'
-                            el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
+                    ; (Object.values(groups) as Array<{ coords: Coordinates; events: EventItem[]; label: string }>).forEach(
+                        ({ coords: { longitude, latitude }, events, label }) => {
+                            const offsets = computeOffsets(events.length, jitterRadius)
+                                ; (events as EventItem[]).forEach((ev: EventItem, idx: number) => {
+                                    const { dx, dy } = offsets[idx]
+                                    const el = document.createElement('div')
+                                    el.style.width = '20px'
+                                    el.style.height = '20px'
+                                    el.style.borderRadius = '10px'
+                                    el.style.background = '#FF9500' // upcoming
+                                    el.style.border = '2px solid #ffffff'
+                                    el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
 
-                            const date = ev.date
-                                ? new Date(ev.date).toLocaleDateString('en-US', {
-                                      month: 'short',
-                                      day: 'numeric',
-                                      year: 'numeric',
-                                  })
-                                : ''
-                            const href = ev.link || ''
-                            const name = ev.name || 'Event'
-                            const popupHtml = `
-                            <div class="text-sm max-w-[240px]">
-                                <div class="font-semibold mb-1">${name}</div>
+                                    const date = ev.date
+                                        ? new Date(ev.date).toLocaleDateString('en-US', {
+                                            month: 'short',
+                                            day: 'numeric',
+                                            year: 'numeric',
+                                        })
+                                        : ''
+                                    const href = ev.link || ''
+                                    const name = ev.name || 'Event'
+                                    const popupHtml = `
+                            <div class="text-sm max-w-xs">
+                                <div class="font-semibold text-lg">${name}</div>
                                 ${date ? `<div class="text-secondary mb-1">${date}</div>` : ''}
                                 <div class="text-secondary">${label}</div>
                                 ${href ? `<a class="underline font-semibold" href="${href}">View details →</a>` : ''}
                             </div>`
-                            const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+                                    const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
 
-                            const marker = new mapboxgl.Marker({ element: el })
-                                .setLngLat([longitude + dx, latitude + dy])
-                                .setPopup(popup)
-                                .addTo(mapRef.current)
-                            if (href) {
-                                marker.getElement().style.cursor = 'pointer'
-                                marker.getElement().addEventListener('click', () => {
-                                    if (href.startsWith('/')) {
-                                        navigate(href, { state: { newWindow: true } })
-                                    } else if (typeof window !== 'undefined') {
-                                        window.open(href, '_blank', 'noopener,noreferrer')
+                                    const marker = new mapboxgl.Marker({ element: el })
+                                        .setLngLat([longitude + dx, latitude + dy])
+                                        .setPopup(popup)
+                                        .addTo(mapRef.current)
+                                    if (href) {
+                                        marker.getElement().style.cursor = 'pointer'
+                                        marker.getElement().addEventListener('click', () => {
+                                            if (href.startsWith('/')) {
+                                                navigate(href, { state: { newWindow: true } })
+                                            } else if (typeof window !== 'undefined') {
+                                                window.open(href, '_blank', 'noopener,noreferrer')
+                                            }
+                                        })
+                                    } else {
+                                        marker.getElement().style.cursor = 'pointer'
+                                        marker.getElement().addEventListener('click', () => {
+                                            navigate('/events', { state: { newWindow: true } })
+                                        })
                                     }
+                                    marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                                    marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                                    markersRef.current.push(marker)
                                 })
-                            } else {
-                                marker.getElement().style.cursor = 'pointer'
-                                marker.getElement().addEventListener('click', () => {
-                                    navigate('/events', { state: { newWindow: true } })
-                                })
-                            }
-                            marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
-                            marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
-                            markersRef.current.push(marker)
-                        })
-                    }
-                )
+                        }
+                    )
             }
             if (showPast) {
                 const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
@@ -493,65 +500,65 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                     return acc
                 }, {} as Record<string, { coords: Coordinates; events: EventItem[]; label: string }>)
 
-                ;(Object.values(groups) as Array<{ coords: Coordinates; events: EventItem[]; label: string }>).forEach(
-                    ({ coords: { longitude, latitude }, events, label }) => {
-                        const offsets = computeOffsets(events.length, jitterRadius)
-                        ;(events as EventItem[]).forEach((ev: EventItem, idx: number) => {
-                            const { dx, dy } = offsets[idx]
-                            const el = document.createElement('div')
-                            el.classList.add(
-                                'w-5',
-                                'h-5',
-                                'rounded-full',
-                                'bg-muted',
-                                'border-2',
-                                'border-white',
-                                'shadow'
-                            )
+                    ; (Object.values(groups) as Array<{ coords: Coordinates; events: EventItem[]; label: string }>).forEach(
+                        ({ coords: { longitude, latitude }, events, label }) => {
+                            const offsets = computeOffsets(events.length, jitterRadius)
+                                ; (events as EventItem[]).forEach((ev: EventItem, idx: number) => {
+                                    const { dx, dy } = offsets[idx]
+                                    const el = document.createElement('div')
+                                    el.classList.add(
+                                        'w-5',
+                                        'h-5',
+                                        'rounded-full',
+                                        'bg-muted',
+                                        'border-2',
+                                        'border-white',
+                                        'shadow'
+                                    )
 
-                            const date = ev.date
-                                ? new Date(ev.date).toLocaleDateString('en-US', {
-                                      month: 'short',
-                                      day: 'numeric',
-                                      year: 'numeric',
-                                  })
-                                : ''
-                            const href = ev.link || ''
-                            const name = ev.name || 'Event'
-                            const popupHtml = `
-                            <div class="text-sm max-w-[240px]">
-                                <div class="font-semibold mb-1">${name}</div>
+                                    const date = ev.date
+                                        ? new Date(ev.date).toLocaleDateString('en-US', {
+                                            month: 'short',
+                                            day: 'numeric',
+                                            year: 'numeric',
+                                        })
+                                        : ''
+                                    const href = ev.link || ''
+                                    const name = ev.name || 'Event'
+                                    const popupHtml = `
+                            <div class="text-sm max-w-xs">
+                                <div class="font-semibold mb-1 text-lg">${name}</div>
                                 ${date ? `<div class="text-secondary mb-1">${date}</div>` : ''}
                                 <div class="text-secondary">${label}</div>
                                 ${href ? `<a class="underline font-semibold" href="${href}">View details →</a>` : ''}
                             </div>`
-                            const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+                                    const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
 
-                            const marker = new mapboxgl.Marker({ element: el })
-                                .setLngLat([longitude + dx, latitude + dy])
-                                .setPopup(popup)
-                                .addTo(mapRef.current)
-                            if (href) {
-                                marker.getElement().style.cursor = 'pointer'
-                                marker.getElement().addEventListener('click', () => {
-                                    if (href.startsWith('/')) {
-                                        navigate(href, { state: { newWindow: true } })
-                                    } else if (typeof window !== 'undefined') {
-                                        window.open(href, '_blank', 'noopener,noreferrer')
+                                    const marker = new mapboxgl.Marker({ element: el })
+                                        .setLngLat([longitude + dx, latitude + dy])
+                                        .setPopup(popup)
+                                        .addTo(mapRef.current)
+                                    if (href) {
+                                        marker.getElement().style.cursor = 'pointer'
+                                        marker.getElement().addEventListener('click', () => {
+                                            if (href.startsWith('/')) {
+                                                navigate(href, { state: { newWindow: true } })
+                                            } else if (typeof window !== 'undefined') {
+                                                window.open(href, '_blank', 'noopener,noreferrer')
+                                            }
+                                        })
+                                    } else {
+                                        marker.getElement().style.cursor = 'pointer'
+                                        marker.getElement().addEventListener('click', () => {
+                                            navigate('/events', { state: { newWindow: true } })
+                                        })
                                     }
+                                    marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                                    marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                                    markersRef.current.push(marker)
                                 })
-                            } else {
-                                marker.getElement().style.cursor = 'pointer'
-                                marker.getElement().addEventListener('click', () => {
-                                    navigate('/events', { state: { newWindow: true } })
-                                })
-                            }
-                            marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
-                            marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
-                            markersRef.current.push(marker)
-                        })
-                    }
-                )
+                        }
+                    )
             }
             // Render saved places if their place-type layers are enabled
             const activePlaceTypes = Object.values(PlaceType).filter((pt) => currentEnabled.includes(pt))
@@ -600,8 +607,8 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                         iconWrapper.innerHTML = renderToStaticMarkup(icon)
                         el.appendChild(iconWrapper)
                         const popupHtml = `
-                            <div class="text-sm max-w-[240px]">
-                                <div class="font-semibold mb-1">${pl.name}</div>
+                            <div class="text-sm max-w-xs">
+                                <div class="font-semibold text-lg mb-1">${pl.name}</div>
                                 ${pl.address ? `<div class="text-secondary mb-1">${pl.address}</div>` : ''}
                                 <div class="text-secondary">Lat ${pl.latitude.toFixed(5)}, Lng ${pl.longitude.toFixed(
                             5
