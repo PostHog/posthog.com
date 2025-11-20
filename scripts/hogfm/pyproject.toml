@@ -7,5 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "boto3>=1.41.0",
     "elevenlabs>=2.23.0",
+    "gspread>=6.2.1",
     "python-dotenv>=1.2.1",
+    "structlog>=25.5.0",
 ]
