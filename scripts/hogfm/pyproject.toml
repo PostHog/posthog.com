@@ -1,11 +1,12 @@
 [project]
 name = "hogfm"
 version = "0.1.0"
-description = "Add your description here"
+description = "Podcast tools for HogFM - sync S3 to Podbean"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "boto3>=1.41.0",
     "elevenlabs>=2.23.0",
     "python-dotenv>=1.2.1",
+    "requests>=2.31.0",
 ]
