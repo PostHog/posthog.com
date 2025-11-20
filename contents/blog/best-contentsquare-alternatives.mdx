@@ -46,16 +46,20 @@ Pricing is transparent and usage-based, with 1 million events and 5,000 recordin
     competitors={['posthog','contentsquare']}
     rows={[
         'session_replay.available',
-        'session_replay.features.console_logs',
-        'session_replay.analysis.network_monitor',
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
         'heatmaps.features.clickmaps',
         'heatmaps.features.rage_clicks',
-        'product_analytics.features.funnels',
-        'product_analytics.features.user_paths',
+        'product_analytics.features.funnels.available',
+        'product_analytics.features.user_paths.available',
+        'product_analytics.features.cohorts',
         'feature_flags.available',
         'experiments.available',
+        'surveys.available',
+        'data_warehouse.available',
         'platform.deployment.open_source',
         'platform.pricing.transparent_pricing',
+        'platform.pricing.free_tier',
     ]}
 />
 
@@ -89,21 +93,6 @@ That said, FullStory sits firmly in enterprise territory. It's powerful, but you
 
 #### FullStory vs Contentsquare
 
-<ProductComparisonTable
-    competitors={['fullstory','contentsquare']}
-    rows={[
-        'session_replay.available',
-        'session_replay.features.console_logs',
-        'session_replay.analysis.network_monitor',
-        'heatmaps.features.clickmaps',
-        'heatmaps.features.rage_clicks',
-        'product_analytics.features.funnels',
-        'product_analytics.features.user_paths',
-        'platform.deployment.open_source',
-        'platform.pricing.transparent_pricing',
-    ]}
-/>
-
 <details>
   <summary>Main differences between FullStory and Contentsquare</summary>
 
@@ -134,19 +123,6 @@ That simplicity is also the tradeoff. Hotjar isn't designed for deep product ana
 
 #### Hotjar vs Contentsquare
 
-<ProductComparisonTable
-    competitors={['hotjar','contentsquare']}
-    rows={[
-        'session_replay.available',
-        'session_replay.features.console_logs',
-        'heatmaps.features.clickmaps',
-        'heatmaps.features.rage_clicks',
-        'product_analytics.features.funnels',
-        'surveys.available',
-        'platform.deployment.open_source',
-        'platform.pricing.transparent_pricing',
-    ]}
-/>
 
 <details>
   <summary>Main differences between Hotjar and Contentsquare</summary>
@@ -180,19 +156,6 @@ You also can't tie recordings to custom user properties or filter by feature fla
 
 #### Microsoft Clarity vs Contentsquare
 
-<ProductComparisonTable
-    competitors={['clarity','contentsquare']}
-    rows={[
-        'session_replay.available',
-        'heatmaps.features.clickmaps',
-        'heatmaps.features.rage_clicks',
-        'product_analytics.features.funnels',
-        'product_analytics.features.user_paths',
-        'platform.pricing.free_tier',
-        'platform.pricing.transparent_pricing',
-    ]}
-/>
-
 <details>
   <summary>Main differences between Clarity and Contentsquare</summary>
 
@@ -224,20 +187,6 @@ Similar to Contentsquare, it's enterprise software through and through. Expect d
 
 #### Glassbox vs Contentsquare
 
-<ProductComparisonTable
-    competitors={['glassbox','contentsquare']}
-    rows={[
-        'session_replay.available',
-        'session_replay.platform_support.mobile_app_recordings',
-        'heatmaps.features.clickmaps',
-        'product_analytics.features.funnels',
-        'product_analytics.features.user_paths',
-        'platform.security.gdpr_ready',
-        'platform.security.hipaa_ready',
-        'platform.pricing.transparent_pricing',
-    ]}
-/>
-
 <details>
   <summary>Main differences between Glassbox and Contentsquare</summary>
 
@@ -267,18 +216,6 @@ Like Contentsquare and Glassbox, Quantum Metric is built for the enterprise worl
 **Choose Quantum Metric if:** You want enterprise-level replay and journey analytics tied directly to revenue and performance impact.
 
 #### Quantum Metric vs Contentsquare
-
-<ProductComparisonTable
-    competitors={['quantum-metric','contentsquare']}
-    rows={[
-        'session_replay.available',
-        'heatmaps.features.clickmaps',
-        'heatmaps.features.rage_clicks',
-        'product_analytics.features.funnels',
-        'product_analytics.features.user_paths',
-        'platform.pricing.transparent_pricing',
-    ]}
-/>
 
 <details>
   <summary>Main differences between Quantum Metric and Contentsquare</summary>
