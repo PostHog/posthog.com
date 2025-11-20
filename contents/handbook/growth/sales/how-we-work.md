@@ -93,8 +93,10 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 - Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%.
 - Quota is based on $ amount sold, not credits/product usage, so you can't in theory sell a $500k deal with an 80% discount and claim the full $500k to your quota, for example. Ways to hit quota:
   - ARR from new annual deals sold
-  - ARR from monthly customers for the first _12 months_ after you sign them up as a monthly customer.
-  - For multiyear contracts we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
+  - The difference in ARR between an annual deal and the current credit burn rate, if they are consuming credit faster than expected.
+    - E.g. you sign an annual plan for $100k in credits and they consume the equivalent of $120k annualized credit, you get quota for $20k.
+  - ARR from monthly customers for the first _12 months_ after you sign them up as a monthly customer as long as you are the primary account owner.
+  - For multiyear contracts, we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
     - The way we work this out is by taking the annual credit purchased by the customer and applying the standard 1 year discount to it.
   - Your quota will depend on your OTE
 - Commission is paid out quarterly, and in any case after an invoice is paid
