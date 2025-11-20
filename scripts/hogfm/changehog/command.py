@@ -24,7 +24,7 @@ S3_BUCKET = os.getenv("S3_BUCKET")
 # google sheets
 GOOGLE_CREDENTIALS_FILE = os.getenv("GOOGLE_CREDENTIALS_FILE")
 GOOGLE_SHEET_ID = os.getenv("GOOGLE_SHEET_ID")
-GOOGLE_SHEET_NAME = "Sheet1"
+GOOGLE_SHEET_NAME = "Sheet2"
 GOOGLE_SHEET_CELL = "B2"
 
 # eleven labs voice ids
