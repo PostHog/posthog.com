@@ -26,14 +26,6 @@ To help the customer you should figure out whether they are B2B or could otherwi
 from sending group information.  If so, reach out with guidance.  If not, reach out telling 
 them that they can save by removing the Group Analytics add-on from the billing page.
 
-### Data pipelines
-
-[Data Pipelines](/docs/cdp) let users send their PostHog event and people data to other destinations, either in real-time or via batch exports to a warehouse.  This is a typical pattern in the modern data stack, however because Data Pipelines are an add-on to Product Analytics pricing, users may end up paying for Pipelines when they aren't using them.
-
-The Metabase customer usage dashboard shows active Batch Exports and Realtime (Hog) Destinations towards the bottom.  You can navigate to this from Vitally either via the PostHog Default Dashboard for an Account or the Trait under Vitally Analytics API.
-
-If they aren't using Data Pipelines then reach out to them to let them know how to use them, or that they can remove the add-on and save money if not interested.
-
 ### Autocapture
 
 [Autocapture](/docs/product-analytics/autocapture) is a great way for users to get up and running with event capture without a huge engineering effort.  Autocapture can however get very noisy very quickly, and if users aren't leveraging these events they may not be getting value out of them.  You can understand a customer's Autocapture event volume from their Metabase customer usage dashboard (instructions above on how to get there).  There is a breakdown of the Key event volume Last 30 days which shows the number and % of Autocapture events they are sending across all projects.  If that is high (>50%) then check the Actions (by type) visualization on the same dashboard to see if they have any Autocapture actions defined.  If not they are likely to not be benefitting from Autocapture events.
@@ -84,6 +76,13 @@ ORDER BY groupidentify_event_count DESC
 `Posthog.reset()` will generate a new anonymous distinct ID.  If this is called before a user is identified then two anonymous unlinked user may be created.  There is no easy way to proactively diagnose this however if a customer says that their tracking between web and app is off, this is a common culprit.
 
 We have guidance on when to call `posthog.reset()` [here](/docs/libraries/js/features#resetting-a-user).
+
+### Reverse Proxies 
+
+It is best practice for a customer to use PostHog's [Managed Reverse Proxy](/docs/advanced/proxy/managed-reverse-proxy) or to configure their own for events to be sent from their own domain. 
+
+When using either PostHog's managed reverse proxy or deploying a [non-managed reverse proxy](/docs/advanced/proxy#deploying-a-reverse-proxy), events should populate the "Library custom API host" property. Host mapping and domains can potentially be seen in Metabase. You should verify the setup with a customer.  
+
 
 ## Are feature flags resilient?
 

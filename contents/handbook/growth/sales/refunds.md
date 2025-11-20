@@ -41,14 +41,14 @@ Customer must meet the following criteria to get a refund:
 
 ## Repeat incidents
 
-For first incident response, we follow standard policy above and provide guidance for preventing future incidents (e.g. ask them to implement billing limits).
+For first incident response, we follow standard policy above and provide guidance for preventing future incidents (e.g. ask them to implement billing limits)
 
 Subsequent incidents:
-
--   Check if the user followed PostHog’s recommendations in the previous incident. For example, if a billing limit was suggested to prevent future spikes, was it implemented?
--   We issue up to 50% refund or up to 100% credits that can apply on future usage depending on the issue severity and previous actions taken to prevent spikes.
--   Provide warning that in the event that this happens again PostHog may not be able to support. Remind them of the measures necessary to take to avoid such issues going forward.
--   After 2 incidents, further refunds for similar issues may be declined unless there are extraordinary circumstances.
+- First, check if the customer has acted on PostHog’s earlier recommendations.
+- If they have not yet fixed the issue, refunds are conditional. Give them a window to implement the fix, and offer a partial refund (up to 50%) while they address it.
+- If they have made good faith fixes but the issue still occurred, then we issue a full or partial refund depending on severity.
+- Always warn that repeated incidents may not be refunded again.
+- For third incident and beyond, refunds may be declined unless there are extraordinary circumstances (e.g. a PostHog bug).
 
 ## Request channels and processing
 
@@ -101,7 +101,7 @@ What's "normal" vs "weird" usage:
 ### Refund or credit?
 
 -   Issue credits if the customer's period hasn't ended yet and the invoice isn't finalized. It is much easier and better for users and us to avoid payment if we can!
--   If invoice is finalized and this is a first time request, issue a refund.
+-   If invoice is finalized and this is a first time request, issue a refund via a credit note (do not use the refund button, this is important for correct revenue attribution).
 -   If the customer has overdue invoices and needs changes on that, we need to apply credit notes. Escalate such cases to RevOps.
 
 ## How to issue refunds or credits
@@ -122,14 +122,31 @@ You need Support specialist level access to Stripe, ask Simon for access.
 8. Click 'Save and view'
 9. Confirm that the credits were successfully added to the customer's balance in Stripe under 'Customer invoice balance'
 
-### Issuing refunds
+### Issuing a credit note refund
 
 1. Find customer profile in Stripe (you can search by organization id)
-2. Under payments, find the payment that corresponds to the usage period
-3. Click "Refund payment" **Be careful on this dialog box as pressing enter will automatically complete the refund. **
-4. Specify the refund amount (default is full refund, remember to change as needed using instructions above)
-5. Add brief comment to explain the reason and link to Zendesk ticket
-6. For partial refunds, you can view the partial refund amount by hovering over the 'Partial refund' box that now displays against the payment.
+2. Under Invoices, find the invoice corresponding to the usage period or product you want to refund.
+3. Click “Issue a credit note” in the top right corner of the invoice page.
+4. In the Reason field, select relevant reason from dropdown or select "Other" and add any relevant context (e.g. Zendesk ticket link, Slack message link, or short explanation)
+5. Under "Items to credit" select the corresponding products or charges you want to issue a refund for. If this is a full refund, you can select all products by checking the box at the very top of the list next to Description.
+6. Review the credit amount and confirm everything looks correct.
+7. Under "Amount to credit" field towards the bottom of the page you will see a dropdown that says "Select how to credit" Select "Refund to ... (customer's default payment method)" 
+8. Once you review everything and all looks good click "Issue credit note" this will finalize the process and send a notification email to the customer.
+
+### Fixed fee product refunds
+For fixed-fee subscriptions (e.g. Boost plan), Stripe’s default proration behavior can cause double crediting.
+
+Example: A customer subscribes to a fixed fee add on by accident and requests a refund. After we issue a credit note, they cancel their subscription. When this happens, Stripe automatically creates a prorated “unused time” line item on the next upcoming invoice. This results in the customer being credited twice:
+- once via the manual credit note
+- again via the prorated unused time credit
+
+To prevent overcrediting, we need to manually delete the pending invoice item that Stripe creates after the subscription cancellation.
+
+Steps:
+1. Find customer profile in Stripe (you can search by organization id)
+2. Locate the proration adjustment under Pending Invoice Items.
+3. Manually delete the line item.
+4. Add a note in Zendesk documenting that the proration line was removed to avoid double crediting.
 
 ### Spotting suspicious stuff - watch out for:
 

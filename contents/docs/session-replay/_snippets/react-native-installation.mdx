@@ -2,6 +2,8 @@
 title: React Native session replay
 ---
 
+> Session Replay is currently supported only on Android and iOS platforms.
+
 ## Step one: Add PostHog to your app
 
 import ReactNativeInstall from "../../integrate/_snippets/install-react-native.mdx"
@@ -12,7 +14,7 @@ export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/im
 
 <ReactNativeInstall />
 
-> Requires PostHog React Native SDK version >= [3.2.0](https://github.com/PostHog/posthog-js/releases), and it's recommended to always use the latest version.
+> Requires PostHog React Native SDK version >= [3.2.0](https://github.com/PostHog/posthog-js/releases), and it's recommended to always use [the latest version](/docs/sdk-doctor).
 
 ## Step two: Install the session replay plugin.
 
@@ -110,6 +112,7 @@ npx expo run:ios --no-build-cache --device
 - Wireframe mode isn't supported, only screenshot mode.
 - Expo Go isn't supported since it uses Native plugins, please use development build.
 - Masking individual view components within a WebView isn't supported, if your WebView displays sensitive view components, you've to [mask](/docs/session-replay/privacy?tab=React+Native) the whole WebView.
+- Session Replay is currently supported only on Android and iOS platforms.
 
 ## Troubleshooting
 

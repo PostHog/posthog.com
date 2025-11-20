@@ -9,7 +9,7 @@ showTitle: true
 ## Roles
 
 We have three types of role:
-- Technical Account Executives - closing new business from [inbound](/handbook/growth/sales/inbound-sales) and [outbound](/handbook/growth/sales/outbound-sales) leads
+- Technical Account Executives - closing new business from [inbound](/handbook/growth/sales/inbound-sales) and [outbound](/handbook/growth/sales/outbound-sales) leads and expanding their usage of PostHog in the next 12 months
 - Technical Account Managers - [expansion](/handbook/growth/sales/expansion-and-retention) from existing customers, closing new business from [product-led leads](/handbook/growth/sales/product-led-sales)
 - Technical Account Managers called Leon and Scott - [expansion](/handbook/growth/sales/expansion-and-retention) from a small set of very high potential existing customers
 
@@ -17,21 +17,46 @@ We have three types of role:
 
 TAEs work with:
 
-- People email sales@ directly
+- People who email sales@ directly
 - People who book a demo via contact sales
 - Other triggers we see in product, supplemented by data from Clay
 
 As we start to generate cold outbound leads, these will be routed to TAEs to work with as well. Customers move off of a TAE to a TAM or CSM 3 months after closing on a prepaid contract (usually annual) - you have to ensure they are well set up, not just contract signed!
 
+#### TAE Territory Review
+
+In addition to the weekly sprint planning meeting on a Monday, we do a weekly territory review standup on Wednesday. A Technical AE is picked at random, and we spend 30min going through:
+
+1. Recent Closed Won
+2. Where are you going to end up vs quota this quarter?   
+   - Confidence (scale of 1-5? a percentage out of 100? what's keeping it from being 5 or 100%?)
+3. Review deals (use this <PrivateLink url="https://posthog.lightning.force.com/lightning/r/Report/00OVx000003qcc9MAA/view">Salesforce view</PrivateLink>) for this quarter by Commit -> Best Case -> Pipeline 
+   - For "Commit", how could it possibly end up "closed lost?"
+   - For "Best Case", how does it advance to "Commit" (or what's keeping it from doing so?)
+   - For "Pipeline", 1-2 oops you're excited about or want to share with the group
+4. Outbound successes and failures
+
+> The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
+
 ### Technical Account Managers
 
-Each TAM is assigned up to 10 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 15 accounts, so staying extremely focused is important.
+Each TAM is assigned up to 15 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 25 accounts, so staying extremely focused is important.
 
 We use the "AM Managed" Segment in Vitally to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AMs should not assign this themselves (that's up to Simon or Charles), but can add themselves as the Account Executive in Vitally to make it easier to track things you're working on.
 
 For Product-led leads we will only add them to your book for quota purposes if you have a solid plan in place for conversion to prepaid credit or cross-product adoption. Account Owners can use the "Leads" Segment in Vitally to separately track these from the main managed book. 
 
 At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense.
+
+#### TAM Territory Review
+
+In addition to the weekly sprint planning meeting on a Monday, we do a weekly territory review standup on Wednesday. A Technical AM is picked at random and runs through the following for each customer in their book of business in Vitally:
+
+1. Rate your relationship with them (no connection yet/made contact/answering their questions in Slack/trusted advisor)
+2. What's your next step with that customer (annual plan, cross-sell etc).
+3. Are they a churn risk and why?
+
+> The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
 
 ### Handing off customers to Technical CSMs
 
@@ -51,27 +76,13 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 
 > A customer being negative/difficult to work with isn't a reason to remove them from your book.  It's your job to turn them around to being a happy customer (AKA be their favorite).
 
-## Weekly sales standup
-
-In addition to the weekly sprint planning meeting on a Monday, we do a weekly sales standups on Wednesday. A Technical AE is picked at random, and we spend 30 min on each going in depth through:
-
-- What has closed since you last reviewed your book?
-- What is your path to quota this quarter? Talk through your ops closing this quarter.
-- What is the plan for any customers over $100k?  Do you have a visit planned?
-- Which accounts are at risk? Look at red health score or sentiment in Vitally.
-- How is cross-adoption going in your existing accounts? Check against Vitally goals.
-
-Turns are taken randomly so that you are incentivized to turn up to every meeting fully prepared, in case you are selected!
-
-The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
-
 ## How commission works - Technical Account Executives
 
 **General principles**
 
 - When thinking about commission, we want to particularly incentivize:
-  - Closing annual contracts with payment up front - better retention, de-risks PostHog financially.
-  - Selling multiple products in a deal - all-in-one is how we will beat the competition.
+  - Landing new customers
+  - Quickly expanding them into new products using the relationship you've developed in onboarding them as customers.
 - We aim for a 50/50 split between base/commission when calculating OTE by default.
 
 > This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
@@ -81,10 +92,10 @@ The objective of the meeting is to hold each other to account, provide direct fe
 - Your quota is set for the year and then divided by 4 - this means you don't have to cram deals into the end of a quarter.
 - Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%.
 - Quota is based on $ amount sold, not credits/product usage, so you can't in theory sell a $500k deal with an 80% discount and claim the full $500k to your quota, for example. Ways to hit quota:
-  - ARR from new annual deals sold
-  - ARR from monthly customers for the first _3 months_ where you got them set up but they didn't commit to an annual contract
-    - After 3 months, either you can keep working them if you believe they'll go annual, or they'll get handed over to a TAM or CSM
-  - For multiyear contracts we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
+  - The invoice payment amount for any pre-purchased credit deals in the first 12 months after they become a paying customer.
+    - If the purchase is a renewal of an earlier credit purchase (i.e. at the end of the first year) then you'll get recognised on the difference between the initial purchase and renewal purchase.
+ - ARR from monthly customers for the first _12 months_ after you sign them up as a monthly customer as long as you are the primary account owner.
+  - For multiyear contracts, we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
     - The way we work this out is by taking the annual credit purchased by the customer and applying the standard 1 year discount to it.
   - Your quota will depend on your OTE
 - Commission is paid out quarterly, and in any case after an invoice is paid
@@ -95,14 +106,14 @@ The objective of the meeting is to hold each other to account, provide direct fe
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
   - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commmission into the above 4 buckets and how you did.
-- In your first 3 months you'll be paid 100% OTE fixed.
+- In your first 3 months, you'll be paid 100% OTE fixed.
 
 ## How commission works - Technical Account Managers
 
 **General principles**
 
 - When thinking about commission, we want to particularly incentivize:
-  - Cross selling new products - all-in-one is how we will beat the competition.
+  - Cross-selling new products - all-in-one is how we will beat the competition.
   - Closing prepaid credit contracts (often annual, but may not be) - better retention, de-risks PostHog financially.
 - We aim for a 50/50 split between base/commission when calculating OTE by default.
 
@@ -113,6 +124,8 @@ The objective of the meeting is to hold each other to account, provide direct fe
 - Your quota is set as _the additional $ on a usage basis you are expected to add to your book of business_ - ie. any new product usage counts. This is different from TAEs, because here we care about the invoiced usage _not_ the actual $ amount.
   - For example, if you start a quarter with $700k in ARR and are set a target to grow this by $200k ARR, your commission is based on your attainment towards the $200k figure based on amounts invoiced.
   - We measure the change in annualised quarterly ARR. Take Q1's usage ARR x4, compare it to Q2's usage ARR x4 - the different in these numbers is your attainment towards quota.
+     - Where a customer is new and has <3 periods in the previous quarter, we will use the number of periods to calculate the ARR. eg if it has one month it is that month multiplied by 12, if it has two invoices, then its the total of those two months multiplied by 6.
+     - When a customer has churned eg they have no revenue in the final period of the month and/or they have cancelled their subscription, then that quarter will count as $0 ARR.
 - This means you can hit quota by a combo of bringing in new business and expanding existing. Because your target is based on invoiced usage, this means that even if you have an annual customer in your book, you can still expand their usage and get recognized for that.
   - It also means that you are less likely to totally neglect existing customers because if they reduce usage, it hurts your overall ARR figure.
 - Commission is _uncapped_ and paid out based on the % of your quota you hit, on a sliding scale. Hit 100% commission, get 100% of commission. 0% for 0%. And 200% for 200%. Ways to hit quota:
@@ -135,16 +148,20 @@ The objective of the meeting is to hold each other to account, provide direct fe
 
 You can see how we are tracking on the [TAM Quota Tracker](https://us.posthog.com/project/2/dashboard/498582) dashboard.
 
-## Team target
+## Team lead quota
 
-To calculate the team quota we combine the quota of all team members, with proration applied if they are still ramping:
+From your first full quarter as a team lead in Sales, you will move to a 60% base 40% commission split in reflection of your new player/coach role.  This will be based on your team's quota attainment although you will still have your own individual quota target.
 
- - For fully-ramped team members we add 100% of their quota to the team quota.
+> Your individual quota will be lower than others in the team as you'll be spending more time on managing the team, but we still want you to demonstrate the sales individual contributor skills to your team.  You should aim for 80% team management, 20% IC work, and the quota will reflect that.
+
+To calculate the team quota, we combine the quota of all team members with proration applied if they are still ramping:
+
+ - For fully ramped team members we add 100% of their quota to the team quota.
  - For team members who begin the quarter still in their first three months in the role we add 50% of their quota to the team quota.
 
-Example: With a flat quota of $250,000 and 3 fully-ramped people, and 1 ramping, the team quota would be $875,000 (($250,000 * 3) + $125,000)
+Example: With a flat quota of $250,000 and 3 fully ramped people, and 1 ramping, the team quota would be $875,000 (($250,000 * 3) + $125,000)
 
-> If someone leaves the team we may recalculate the team quota depending on how their accounts and opportunities are reallocated to others in the team. If someone joins the team, we don't change the team target, and don't count their contribution towards the existing target, to keep it simple.
+> If someone leaves the team, we may recalculate the team quota depending on how their accounts and opportunities are reallocated to others in the team. If someone joins the team, we don't change the team target, and don't count their contribution towards the existing target, to keep it simple.
 
 ## Travel to see customers
 
@@ -168,7 +185,7 @@ Finally, if you are bringing engineers onto a call, brief them first - what is t
 
 You will run into questions that you don't know the answer to from time to time - this is ok! Some principles here:
 
-- Try to solve your own problems. Deep dive the docs, ask Max AI, ask the rest of the sales team first - a bit of digging is a valuable opportunity for you to learn.
+- Try to solve your own problems. Deep dive the docs, ask PostHog AI, ask the rest of the sales team first - a bit of digging is a valuable opportunity for you to learn.
 - Similar to the above, don't just copy and paste questions from Slack with no context. Add some commentary - 'they have asked X, their use case is generally Y, I think the answer might be Z - is that right?'. Do some of the lifting here, rather than putting all the mental load on an engineering team.
 - If you open a ticket in Zendesk and know which team the ticket needs to go to, make sure to select "escalated" on the ticket so that it will bypass support and go straight to that team.
 

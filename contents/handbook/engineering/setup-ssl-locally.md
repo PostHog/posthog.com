@@ -16,11 +16,17 @@ The easiest option is to use ngrok.
 
 ## Set up SSL via ngrok
 
-1. Make sure you [have ngrok installed](https://ngrok.com/download).
+1. Sign up for an ngrok account (or sign in with GitHub) and run `ngrok authtoken <TOKEN>`
 
-2. Sign up for an ngrok account (or sign in with GitHub) and run `ngrok authtoken <TOKEN>`
+2. Find your ngrok config file location:
 
-3. Edit `$HOME/.ngrok2/ngrok.yml` and add the following after the line with `authtoken: <TOKEN>`:
+```bash
+ngrok config check --log=stdout
+```
+
+On macOS, this will show `~/Library/Application Support/ngrok/ngrok.yml` (XDG location). The legacy location `~/.ngrok2/ngrok.yml` is deprecated.
+
+3. Edit your ngrok config file and add the following after the line with `authtoken: <TOKEN>`:
 
 ```
 tunnels:
@@ -32,7 +38,7 @@ tunnels:
     addr: 8234
 ```
 
-4. Start ngrok. This will give you tunnel URLs such as https://68f83839843a.ngrok.io
+4. Start ngrok. This will give you tunnel URLs such as https://68f83839843a.ngrok-free.dev
 
 ```bash
 ngrok start --all
@@ -52,7 +58,7 @@ pnpm start
 ```bash
 export DEBUG=1
 export LOCAL_HTTPS=1
-export JS_URL=https://68f83839843a.ngrok.io
+export JS_URL=https://68f83839843a.ngrok-free.dev
 python manage.py runserver
 ```
 

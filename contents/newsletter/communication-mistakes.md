@@ -77,7 +77,7 @@ The solution is to make communication legible: [write it down](/newsletter/remot
 
 This means avoiding closed door meetings, private Slack conversations, and email threads, whenever possible. Instead, move communication to public channels, have an accessible wiki or [handbook](/handbook), and default to giving everyone access to everything.
 
-But this only works if it comes from the top. At PostHog, the [Blitzscale Team](/teams/blitzscale) shares details that are often private at other companies, like [company finances](/handbook/people/finance), slides from [board meetings](/handbook/exec/annual-planning), or the reasons for [letting people go](/handbook/strong-team#a-small-group-of-stronger-people-and-compensation). In doing this, they encourage everyone else to do the same. Hiding engineering knowledge looks trivial in comparison.
+But this only works if it comes from the top. At PostHog, the <SmallTeam slug="blitzscale" /> shares details that are often private at other companies, like [company finances](/handbook/people/finance), slides from [board meetings](/handbook/exec/annual-planning), or the reasons for [letting people go](/handbook/strong-team#a-small-group-of-stronger-people-and-compensation). In doing this, they encourage everyone else to do the same. Hiding engineering knowledge looks trivial in comparison.
 
 We also take "working in public" a step further by sharing as much as possible publicly, outside our company. This includes our [code](https://github.com/PostHog/), [roadmap](/roadmap), and even [strategy](/handbook/why-does-posthog-exist).
 

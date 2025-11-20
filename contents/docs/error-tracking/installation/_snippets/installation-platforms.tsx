@@ -59,6 +59,21 @@ const InstallationPlatforms = ({ columns = 2 }: InstallationPlatformsProps) => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hono_9d80c0611c.svg',
         },
         {
+            label: 'Android',
+            url: '/docs/error-tracking/installation/android',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg',
+        },
+        {
+            label: 'Flutter',
+            url: '/docs/error-tracking/installation/flutter',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg',
+        },
+        {
+            label: 'React Native',
+            url: '/docs/error-tracking/installation/react-native',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg',
+        },
+        {
             label: 'Manual/API',
             url: '/docs/error-tracking/installation/manual',
             icon: 'IconCode',

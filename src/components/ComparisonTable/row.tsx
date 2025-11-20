@@ -7,10 +7,10 @@ export const ComparisonRow = ({ feature, description, column1, column2 }) => {
     return (
         <tr>
             <td>
-                <p className="!mb-0 pb-0.5 !leading-tight">
+                <p className="!my-0 pb-0.5 !leading-tight">
                     <strong>{feature}</strong>
                 </p>
-                {description && <p className="!mb-0 !text-sm text-opacity-75 leading-none">{description}</p>}
+                {description && <p className="!my-0 !text-sm text-opacity-75 leading-none">{description}</p>}
             </td>
             <td className="text-center">{typeof column1 === 'string' ? column1 : column1 ? <True /> : <False />}</td>
             {column2 !== undefined && (

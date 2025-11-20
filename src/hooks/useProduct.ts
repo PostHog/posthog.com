@@ -1,29 +1,19 @@
 import { useMemo } from 'react'
 import {
-    IconPieChart,
     IconThoughtBubble,
-    IconPlug,
-    IconMessage,
     IconDashboard,
     IconNotebook,
-    IconAI,
     IconMagicWand,
-    IconPiggyBank,
     IconToolbar,
-    IconBrackets,
-    IconAsterisk,
     IconWebhooks,
     IconClockRewind,
     IconRocket,
     IconLifecycle,
     IconClock,
     IconPeople,
-    IconDatabase,
     IconTerminal,
     IconGraph,
     IconFunnels,
-    IconBolt,
-    IconArrowUpRight,
     IconUserPaths,
     IconCorrelationAnalysis,
     IconRetention,
@@ -32,7 +22,6 @@ import {
     IconDecisionTree,
 } from '@posthog/icons'
 import useProducts from './useProducts'
-import { IconEnvelope } from 'components/OSIcons'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -58,19 +47,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         //     name: 'Product analytics',
         //     slug: 'product-analytics',
         // },
-
-        {
-            name: 'Messaging',
-            Icon: IconDecisionTree,
-            description: 'send messages to users.',
-            handle: 'messaging',
-            color: 'blue',
-            colorSecondary: 'sky-blue',
-            category: 'communication',
-            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: 'messaging',
-            status: 'WIP',
-        },
         {
             name: 'User interviews',
             Icon: IconThoughtBubble,
@@ -533,28 +509,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             seo: {
                 title: 'Unify external customer data with product usage data',
                 description: 'Analyze product and customer data in PostHog – no matter where it was generated.',
-            },
-        },
-        {
-            name: 'AI README.md',
-            // Icon: IconMagicWand,
-            parentIcon: 'doc',
-            description: 'AI suite',
-            handle: 'ai',
-            color: 'blue',
-            colorSecondary: 'lilac',
-            category: 'ai',
-            slug: 'ai',
-            seo: {
-                title: 'AI @ PostHog',
-                description: 'Your AI-powered product agents',
-            },
-            overview: {
-                title: 'Your AI product analyst and assistant',
-                description:
-                    'Max is an AI-powered product analyst that lives in PostHog. Research answers to product questions by querying data, get things done quickly in the PostHog UI, and learn all about PostHog features.',
-                textColor: 'text-white',
-                layout: 'columns',
             },
         },
         {
@@ -1769,7 +1723,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             handle: 'webhooks',
             color: 'red',
             colorSecondary: 'sky-blue',
-            category: 'product_os',
+            category: 'automation',
             slug: 'webhooks',
             seo: {
                 title: 'Webhooks - PostHog',

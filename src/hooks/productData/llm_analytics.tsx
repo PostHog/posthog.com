@@ -51,15 +51,20 @@ export const llmAnalytics = {
     },
     volume: 100000,
     seo: {
-        title: 'LLM analytics - PostHog',
+        title: 'LLM Analytics – Observe and optimize AI products in PostHog',
         description:
-            'Track every conversation, model performance, costs, and errors in your LLM applications. 10x cheaper than other LLM observability tools.',
+            'Monitor and optimize AI products with LLM Analytics. Get full observability across every conversation. See model performance, cost, and errors.',
     },
     overview: {
         title: 'Monitor and debug your AI products',
         description: 'Analyze traces, spans, per-user costs, latency, and usage of your AI features',
         textColor: 'text-white',
         layout: 'overlay',
+    },
+    videos: {
+        overview: {
+            wistia: 'bl174kpxu8',
+        },
     },
     screenshots: {
         overview: {
@@ -332,6 +337,35 @@ export const llmAnalytics = {
             ],
         },
     ],
+    postHogOnPostHog: {
+        title: 'How PostHog uses LLM Analytics',
+        benefits: [
+            {
+                title: 'Analyze costs',
+                description: 'by comparing models and analyzing usage',
+            },
+            {
+                title: 'Spot emergencies',
+                description: 'with latency and error rate alerting',
+            },
+            {
+                title: 'Monitor performance',
+                description: 'by comparing speed and reliability across models',
+            },
+            {
+                title: 'Muck about',
+                description: 'in the prompt playground (meaningfully)',
+            },
+            {
+                title: 'Integrate with other tools',
+                description: 'like Langfuse, Helicone, and more',
+            },
+            {
+                title: 'Build AI features',
+                description: 'like PostHog AI, obviously',
+            },
+        ],
+    },
     questions: [
         {
             question: 'What are my LLM costs by customer?',
@@ -409,98 +443,8 @@ export const llmAnalytics = {
                 key: 'posthog',
             },
         ],
-        features: [
-            {
-                feature: 'Generation tracking',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Latency tracking',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Cost tracking, incl. cost-per-user',
-                companies: {
-                    langfuse: true,
-                    langsmith: false,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Trace visualization',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Token tracking',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Prompt playground',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Prompt evaluations',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: false,
-                },
-            },
-            {
-                feature: 'Alerting',
-                companies: {
-                    langfuse: false,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'SOC 2 compliance',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'HIPAA and GDPR compliance',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-        ],
+        rows: ['llm_analytics'],
+        excluded_sections: ['platform'],
     },
     pairsWith: [
         {

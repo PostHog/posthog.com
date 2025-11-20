@@ -18,6 +18,7 @@ import { useUser } from 'hooks/useUser'
 import { navigate } from 'gatsby'
 import Lottie from 'lottie-react'
 import hourglassAnimation from 'images/icons8-hourglass.json'
+import hourglassAnimationWhite from 'images/icons8-hourglass-white.json'
 import { useInView } from 'react-intersection-observer'
 import useTopicsNav from '../../navs/useTopicsNav'
 import { useWindow } from '../../context/Window'
@@ -406,7 +407,7 @@ export default function Inbox(props) {
                                                             <div className="hidden @3xl:block w-24 text-center">
                                                                 {numReplies}
                                                             </div>
-                                                            <div className="order-2 basis-3/12 text-right @3xl:text-left @3xl:basis-auto @3xl:w-60 ">
+                                                            <div className="order-2 basis-3/12 text-right @3xl:text-left @3xl:basis-auto @3xl:w-60 font-normal">
                                                                 <Tooltip trigger={dayjs(activeAt).fromNow()}>
                                                                     {dayjs(activeAt).format('dddd, MMMM D, YYYY')} at{' '}
                                                                     {dayjs(activeAt).format('h:mm A')}
@@ -434,7 +435,13 @@ export default function Inbox(props) {
                                                 <div className="flex items-center justify-center py-8 h-full">
                                                     <Lottie
                                                         animationData={hourglassAnimation}
-                                                        className="size-6 opacity-75"
+                                                        className="size-6 opacity-75 text-secondary"
+                                                        className="size-6 opacity-75 dark:hidden"
+                                                        title="Loading questions..."
+                                                    />
+                                                    <Lottie
+                                                        animationData={hourglassAnimationWhite}
+                                                        className="size-6 opacity-75 hidden dark:block"
                                                         title="Loading questions..."
                                                     />
                                                 </div>
@@ -593,7 +600,7 @@ export default function Inbox(props) {
                                                 </div>
                                             </div>
                                             <ScrollArea>
-                                                <div className="p-5 pb-[64px]">
+                                                <div className="pb-[64px]">
                                                     <Question
                                                         key={permalink}
                                                         id={permalink}
@@ -601,6 +608,7 @@ export default function Inbox(props) {
                                                         subscribeButton={false}
                                                         showSlug
                                                         askMax={askMax}
+                                                        isInForum
                                                     />
                                                 </div>
                                             </ScrollArea>

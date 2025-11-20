@@ -4,6 +4,8 @@ import { BorderWrapper } from './components/BorderWrapper'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { ComparisonTable } from './components/ComparisonTable'
+import ProductComparisonTable from './components/ProductComparisonTable'
+import Snippet from '../contents/docs/integrate/snippet.mdx'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Emoji } from './components/Emoji'
 import { FeatureAvailability } from './components/FeatureAvailability'
@@ -26,14 +28,19 @@ import { Steps, Step } from './components/Docs/Steps'
 import AskMax from './components/AskMax'
 import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
 import FeatureOwnershipTable from './components/FeatureOwnershipTable'
+import TaskOwnershipTable from './components/TaskOwnershipTable'
 
+// Global MDX components
 export const shortcodes = {
     ArrayCTA,
     BasicHedgehogImage,
     BorderWrapper,
     CallToAction,
+    CalloutBox,
     Caption,
     ComparisonTable,
+    ProductComparisonTable,
+    Snippet,
     CompensationCalculator,
     Emoji,
     FeatureAvailability,
@@ -49,7 +56,6 @@ export const shortcodes = {
     ProductScreenshot,
     ProductVideo,
     StarRepoButton,
-    CalloutBox,
     Steps,
     Step,
     SmallTeam,
@@ -57,4 +63,5 @@ export const shortcodes = {
     AskMax,
     CountriesWeHireIn,
     FeatureOwnershipTable,
+    TaskOwnershipTable,
 }

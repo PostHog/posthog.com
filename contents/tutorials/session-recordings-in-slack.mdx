@@ -15,13 +15,13 @@ Sometimes it's important to watch recordings as soon as they are available. You 
 
 You'll need:
 
-* The [data pipelines add-on](/docs/cdp) in PostHog Cloud
+* PostHog Cloud or a self-hosted PostHog instance
 * A little custom code when you start `posthog-js`
 * A destination sending to Slack 
 
-## The data pipelines add-on
+## Data pipeline realtime destinations
 
-We'll be using [PostHog's CDP](/docs/cdp) data pipelines add-on. This enables you to react to events in realtime, sending messages to destinations like [Slack](https://us.posthog.com/pipeline/new/destination/hog-template-slack), [Airtable](https://us.posthog.com/pipeline/new/destination/hog-template-airtable), and many more.
+We'll be using [PostHog's data pipelines](/docs/cdp) to react to events in realtime, sending messages to destinations like [Slack](https://us.posthog.com/pipeline/new/destination/hog-template-slack), [Airtable](https://us.posthog.com/pipeline/new/destination/hog-template-airtable), and many more.
 
 This enables us to send an event to PostHog from a user's browser when we detect a recording that we want to act on and have that converted to a message to a Slack channel.
 
