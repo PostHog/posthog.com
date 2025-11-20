@@ -1,29 +1,9 @@
-import { EventItem, PlaceItem } from './types'
 import qs from 'qs'
-
-let _events: EventItem[] = []
-let _places: PlaceItem[] = []
-
-export const getEvents = (): EventItem[] => _events
-export const addEvent = (event: EventItem): void => {
-    _events.push(event)
-}
-export const setEvents = (next: EventItem[]): void => {
-    _events = Array.isArray(next) ? next : []
-}
-
-export const getPlaces = (): PlaceItem[] => _places
-export const addPlace = (place: PlaceItem): void => {
-    _places.push(place)
-}
-export const setPlaces = (next: PlaceItem[]): void => {
-    _places = Array.isArray(next) ? next : []
-}
 
 // API Functions
 
 // Fetch all events (offsites)
-export const fetchEvents = async (jwt: string): Promise<Record<string, unknown>[]> => {
+export const getEvents = async (jwt: string): Promise<Record<string, unknown>[]> => {
     const offsitesQuery = qs.stringify(
         {
             pagination: {
@@ -94,7 +74,7 @@ export const fetchEvents = async (jwt: string): Promise<Record<string, unknown>[
 }
 
 // Create a new event (offsite)
-export const createEvent = async (jwt: string, payload: Record<string, unknown>): Promise<Record<string, unknown>> => {
+export const addEvent = async (jwt: string, payload: Record<string, unknown>): Promise<Record<string, unknown>> => {
     const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/events`, {
         method: 'POST',
         body: JSON.stringify({ data: payload }),
@@ -112,7 +92,7 @@ export const createEvent = async (jwt: string, payload: Record<string, unknown>)
 }
 
 // Fetch all places
-export const fetchPlaces = async (jwt: string): Promise<Record<string, unknown>[]> => {
+export const getPlaces = async (jwt: string): Promise<Record<string, unknown>[]> => {
     const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/places`, {
         headers: {
             Authorization: `Bearer ${jwt}`,
@@ -137,7 +117,7 @@ export const fetchPlaces = async (jwt: string): Promise<Record<string, unknown>[
 }
 
 // Create a new place
-export const createPlace = async (
+export const addPlace = async (
     jwt: string,
     payload: { name: string; address: string; type: string }
 ): Promise<Record<string, unknown>> => {
@@ -158,7 +138,7 @@ export const createPlace = async (
 }
 
 // Fetch all place reviews
-export const fetchPlaceReviews = async (jwt: string): Promise<Record<string, unknown>[]> => {
+export const getPlaceReviews = async (jwt: string): Promise<Record<string, unknown>[]> => {
     const reviewsQuery = qs.stringify(
         {
             populate: ['place', 'tags'],
@@ -222,7 +202,7 @@ export const fetchPlaceReviews = async (jwt: string): Promise<Record<string, unk
 }
 
 // Create a new place review
-export const createPlaceReview = async (
+export const addPlaceReview = async (
     jwt: string,
     payload: Record<string, unknown>
 ): Promise<Record<string, unknown>> => {
