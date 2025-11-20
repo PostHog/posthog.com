@@ -51,25 +51,13 @@ s3_client = boto3.client(
 
 def download_s3_static_files():
   assert S3_BUCKET is not None, "S3_BUCKET is not set"
-  assert S3_PREFIX is not None, "S3_PREFIX is not set"
   if not os.path.exists("/tmp"):
     os.makedirs("/tmp", exist_ok=True)
-  logger.info(f"Downloading files from s3://{S3_BUCKET}/{S3_PREFIX} to /tmp")
-  paginator = s3_client.get_paginator("list_objects_v2")
-  page_iterator = paginator.paginate(Bucket=S3_BUCKET, Prefix=S3_PREFIX)
-  downloaded_count = 0
-  for page in page_iterator:
-    if "Contents" not in page:
-      logger.info(f"No files found at s3://{S3_BUCKET}/{S3_PREFIX}")
-      break
-    for obj in page["Contents"]:
-      s3_key = obj["Key"]
-      relative_path = s3_key[len(S3_PREFIX) :].lstrip("/")
-      local_file_path = os.path.join("/tmp", relative_path)
-      logger.info(f"Downloading: {s3_key} -> {local_file_path}")
-      s3_client.download_file(S3_BUCKET, s3_key, local_file_path)
-      downloaded_count += 1
-  logger.info(f"Download complete! {downloaded_count} files downloaded to /tmp")
+  logger.info(f"Downloading files from s3://{S3_BUCKET}/static to /tmp")
+  s3_client.download_file(S3_BUCKET, "static/intro.mp3", "/tmp/intro.mp3")
+  logger.info("Downloaded intro.mp3")
+  s3_client.download_file(S3_BUCKET, "static/outro.mp3", "/tmp/outro.mp3")
+  logger.info("Downloaded outro.mp3")
 
 
 def get_audio_duration(file_path: str):
@@ -180,18 +168,18 @@ def write_to_s3(file, bucket, key):
 def main():
   assert S3_BUCKET is not None, "S3_BUCKET is not set"
   assert S3_PREFIX is not None, "S3_PREFIX is not set"
-  logger.info("Fetching dialogue from Google Sheets...")
-  dialogue_text = fetch_dialogue_from_sheets()
-  if not dialogue_text:
-    logger.info("No audio retrieved from sheets. Exiting.")
-    return
-  audio = parse_dialogue(dialogue_text)
-  write_audio_body_to_file(audio)
-  download_s3_static_files()
-  merge_audio_files()
   now = datetime.now().strftime("%GW%V")
+  # logger.info("Fetching dialogue from Google Sheets...")
+  # dialogue_text = fetch_dialogue_from_sheets()
+  # if not dialogue_text:
+  #   logger.info("No audio retrieved from sheets. Exiting.")
+  #   return
+  # audio = parse_dialogue(dialogue_text)
+  # write_audio_body_to_file(audio)
   body_key = f"changehog-raw/{now}.mp3"
   write_to_s3("/tmp/body.mp3", S3_BUCKET, body_key)
+  download_s3_static_files()
+  merge_audio_files()
   final_key = f"changehog/{now}.mp3"
   write_to_s3("/tmp/final-output.mp3", S3_BUCKET, final_key)
 
