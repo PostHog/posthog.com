@@ -243,7 +243,7 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
     const handleFileClick = async (node: FileNode) => {
         if (node.type !== 'file') return
 
-        const supportedFormats = ['png', 'jpg', 'jpeg', 'webp', 'gif', 'mp4', 'mov']
+        const supportedFormats = ['png', 'jpg', 'jpeg', 'webp', 'gif', 'mp4', 'mov', 'mp3']
         const extension = node.name.split('.').pop()?.toLowerCase()
 
         if (!extension || !supportedFormats.includes(extension)) {
@@ -492,10 +492,10 @@ export default function MediaUploadModal() {
                                 {...getRootProps()}
                                 data-scheme="secondary"
                                 className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${isDragActive
-                                        ? 'bg-input border-primary'
-                                        : isPasting
-                                            ? 'bg-input border-primary animate-pulse'
-                                            : ''
+                                    ? 'bg-input border-primary'
+                                    : isPasting
+                                        ? 'bg-input border-primary animate-pulse'
+                                        : ''
                                     }`}
                             >
                                 <div
@@ -517,7 +517,7 @@ export default function MediaUploadModal() {
                                     <p className="text-sm text-secondary text-center mt-2 m-0">
                                         {isPasting
                                             ? 'Processing clipboard image...'
-                                            : 'PNG, JPG, WEBP, GIF, MP4, MOV, PDF, SVG'}
+                                            : 'PNG, JPG, WEBP, GIF, MP3, MP4, MOV, PDF, SVG'}
                                     </p>
                                     <p className="text-xs text-muted text-center mt-2 m-0">
                                         Cmd+V / Ctrl+V to paste from clipboard
