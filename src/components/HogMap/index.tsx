@@ -380,7 +380,7 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                         const flagEmoji = p.country ? getFlagEmoji(p.country) : ''
                         const locationText = p.country === 'world' ? 'Planet Earth' : p.location || p.country || ''
                         const popupHtml = `
-                            <div class="text-sm max-w-sm text-center">
+                            <div class="text-sm max-w-sm text-center text-primary bg-primary p-2 rounded shadow-2xl" data-scheme="primary">
                                 <div class="font-semibold font-squeak text-xl uppercase leading-tight">${
                                     name || 'Team member'
                                 }</div>
@@ -520,7 +520,7 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                                 'w-5',
                                 'h-5',
                                 'rounded-full',
-                                'bg-muted',
+                                'bg-gray',
                                 'border-2',
                                 'border-white',
                                 'shadow'
@@ -536,11 +536,15 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                             const href = ev.link || ''
                             const name = ev.name || 'Event'
                             const popupHtml = `
-                            <div class="text-sm max-w-sm">
+                            <div class="text-sm max-w-sm text-center text-primary bg-primary p-2 rounded shadow-2xl" data-scheme="primary">
                                 <div class="font-semibold mb-1 text-lg">${name}</div>
                                 ${date ? `<div class="text-secondary mb-1">${date}</div>` : ''}
                                 <div class="text-secondary">${label}</div>
-                                ${href ? `<a class="underline font-semibold" href="${href}">View details →</a>` : ''}
+                                ${
+                                    href
+                                        ? `<a class="underline font-semibold" href="${href}">Click to view details →</a>`
+                                        : ''
+                                }
                             </div>`
                             const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
 
@@ -582,8 +586,8 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                         )
                         const groups = (activePlaces as any[]).reduce(
                             (acc: Record<string, { coords: Coordinates; places: any[] }>, p: any) => {
-                                const lon = Number(p.long)
-                                const lat = Number(p.lat)
+                                const lon = Number(p.longitude)
+                                const lat = Number(p.latitude)
                                 const key = `${lon.toFixed(4)},${lat.toFixed(4)}`
                                 if (!acc[key]) {
                                     acc[key] = {
@@ -627,7 +631,7 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                                     iconWrapper.innerHTML = renderToStaticMarkup(icon)
                                     el.appendChild(iconWrapper)
                                     const popupHtml = `
-                                    <div class="text-sm max-w-[240px]">
+                                    <div class="text-sm max-w-sm text-center text-primary bg-primary p-2 rounded shadow-2xl" data-scheme="primary">
                                          <div class="font-semibold mb-1">${(pl as any).name}</div>
                                          ${
                                              (pl as any).address

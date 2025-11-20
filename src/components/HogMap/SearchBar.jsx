@@ -269,7 +269,7 @@ export function createSearchMarker({
     el.className = 'w-[18px] h-[18px] rounded-full bg-orange border-2 border-white shadow-md'
     // Build popup DOM with details + form
     const container = document.createElement('div')
-    container.className = 'text-sm max-w-[260px]'
+    container.className = 'text-sm max-w-sm text-center text-primary bg-primary p-2 rounded shadow-2xl'
     const title = document.createElement('div')
     title.className = 'font-semibold mb-1'
     title.textContent = label || 'Selected place'
@@ -282,7 +282,7 @@ export function createSearchMarker({
     const selectWrap = document.createElement('div')
     selectWrap.className = 'mb-2'
     const select = document.createElement('select')
-    ;['coffee', 'restaurant', 'airbnb', 'hotel', 'co-working', 'offsite'].forEach((opt) => {
+    ;['Coffee', 'Restaurant', 'Airbnb', 'Hotel', 'Co-working', 'Offsite'].forEach((opt) => {
         const o = document.createElement('option')
         o.value = opt
         o.textContent = opt
@@ -370,20 +370,27 @@ export function createSearchMarker({
     addBtn.onclick = async () => {
         try {
             const selected = (select && select.value) || PlaceType.COFFEE
+            console.log('selected', selected)
             const type =
                 Object.values(PlaceType).includes(selected) ? selected : PlaceType.COFFEE
+            console.log('type', type)
             const maybeOffsiteName =
                 type === 'offsite' && offsiteNameInput && typeof offsiteNameInput.value === 'string'
                     ? offsiteNameInput.value.trim()
                     : ''
+
+                    
             const item = {
                 id: Date.now(),
                 name: maybeOffsiteName || label || "Selected place",
                 address: address || "",
-                lat: latitude,
-                long: longitude,
+                lat: Number(latitude),
+                long: Number(longitude),
+                latitude: Number(latitude),
+                longitude: Number(longitude),
                 type: type.charAt(0).toUpperCase() + type.slice(1),
             }
+            console.log('item', item)
             try {
                 const jwt = typeof getJwt === 'function' ? await getJwt() : null
                 if (jwt) {

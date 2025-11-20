@@ -2581,7 +2581,7 @@ article.reader-view-content-container:has(.quest-sidebar) {
 }
 
 .mapboxgl-popup-content {
-    @apply !font-sans !shadow-2xl !rounded !pb-[10px];
+    @apply !font-sans !shadow-2xl !rounded !p-0;
 
     .mapboxgl-popup-close-button {
         @apply hidden text-[1.5rem] top-2 right-2;
