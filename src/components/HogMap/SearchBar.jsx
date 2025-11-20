@@ -230,4 +230,112 @@ const SearchBar = React.forwardRef(SearchBarImpl)
 SearchBar.displayName = "SearchBar"
 export default SearchBar
 
+// Helper to create and manage a one-off search marker with popup on a Mapbox map
+export function createSearchMarker({
+    map,
+    getMapbox,
+    longitude,
+    latitude,
+    label,
+    address,
+    prevMarker,
+    searchRef,
+}) {
+    if (!map) return null
+    // Recenter and zoom in a bit
+    try {
+        map.easeTo({
+            center: [longitude, latitude],
+            zoom: Math.max(10, map.getZoom ? map.getZoom() : 10),
+        })
+    } catch {}
+    const mapboxgl = getMapbox && getMapbox()
+    if (!mapboxgl) return null
+    // Remove previous marker if provided
+    if (prevMarker) {
+        try {
+            prevMarker.remove()
+        } catch {
+            console.error('Error removing previous search marker')
+        }
+    }
+    // Create marker element using Tailwind classes
+    const el = document.createElement('div')
+    el.className = 'w-[18px] h-[18px] rounded-full bg-orange border-2 border-white shadow-md'
+    // Build popup DOM with details + form
+    const container = document.createElement('div')
+    container.className = 'text-sm max-w-[260px]'
+    const title = document.createElement('div')
+    title.className = 'font-semibold mb-1'
+    title.textContent = label || 'Selected place'
+    const addr = document.createElement('div')
+    addr.className = 'text-secondary mb-1'
+    addr.textContent = address || ''
+    const coordsWrap = document.createElement('div')
+    coordsWrap.className = 'text-secondary mb-2'
+    coordsWrap.textContent = `Lat ${Number(latitude).toFixed(5)}, Lng ${Number(longitude).toFixed(5)}`
+    const selectWrap = document.createElement('div')
+    selectWrap.className = 'mb-2'
+    const select = document.createElement('select')
+    ;['cafe', 'restaurant', 'airbnb', 'hotel', 'co-working', 'offsite'].forEach((opt) => {
+        const o = document.createElement('option')
+        o.value = opt
+        o.textContent = opt
+        select.appendChild(o)
+    })
+    select.className = 'w-full border border-primary rounded px-2 py-1 bg-primary text-primary'
+    selectWrap.appendChild(select)
+    const buttons = document.createElement('div')
+    buttons.className = 'flex gap-2 justify-end'
+    const cancelBtn = document.createElement('button')
+    cancelBtn.className = 'px-2 py-1 rounded border border-primary bg-primary text-primary hover:bg-accent'
+    cancelBtn.textContent = 'Cancel'
+    const addBtn = document.createElement('button')
+    addBtn.className =
+        'px-2 py-1 rounded border border-primary bg-primary text-primary hover:bg-accent font-semibold'
+    addBtn.textContent = 'Add'
+    buttons.appendChild(cancelBtn)
+    buttons.appendChild(addBtn)
+    container.appendChild(title)
+    if (address) container.appendChild(addr)
+    container.appendChild(coordsWrap)
+    container.appendChild(selectWrap)
+    container.appendChild(buttons)
+    const popup = new mapboxgl.Popup({ offset: 12 }).setDOMContent(container)
+    const marker = new mapboxgl.Marker({ element: el }).setLngLat([longitude, latitude]).setPopup(popup)
+    marker.addTo(map)
+    try {
+        marker.togglePopup()
+    } catch {
+        console.error('Error opening popup')
+    }
+    // Wire buttons
+    cancelBtn.onclick = () => {
+        try {
+            marker.remove()
+        } catch {
+            console.error('Error removing search marker')
+        }
+        if (searchRef?.current?.clear) {
+            try {
+                searchRef.current.clear()
+            } catch {
+                console.error('Error clearing search bar')
+            }
+        }
+    }
+    addBtn.onclick = () => {
+        console.log('addBtn clicked')
+    }
+    // Also clear the search input after placing marker
+    if (searchRef?.current?.clear) {
+        try {
+            searchRef.current.clear()
+        } catch {
+            console.error('Error clearing search bar')
+        }
+    }
+    return marker
+}
+
 
