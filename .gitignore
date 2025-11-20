@@ -32,6 +32,7 @@ yarn.lock
 .env
 *Type.ts
 .env.development
+.env.*.local
 
 # Generated data files
 src/data/mcp-tools.json
