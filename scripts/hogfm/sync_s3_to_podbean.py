@@ -241,16 +241,12 @@ def find_matching_episode(s3_key: str, episodes: list[dict]) -> Optional[dict]:
     """
     Find a Podbean episode that matches the given S3 key.
 
-    Matches by checking if the S3 key path (without .mp3) appears in the episode content URL.
-    The content contains a URL like: https://posthog.com/handbook/engineering/deployments-support
+    Matches by checking for the ID code in the episode content.
     """
-    # Get the key path without extension (e.g., "handbook/engineering/deployments-support")
-    key_path = s3_key.replace(".mp3", "")
-
     for episode in episodes:
         content = episode.get("content", "")
-        # Check if the key path appears in the content URL
-        if f"posthog.com/{key_path}" in content:
+        # Check if the ID code appears in the content
+        if f"ID: {s3_key}" in content:
             return episode
 
     return None
@@ -267,7 +263,11 @@ def generate_episode_metadata(s3_key: str, kind: str) -> tuple[str, str]:
     # Get the chapter name from the S3 key like handbook/engineering/deployments-support.mp3...
     # becomes "Handbook | Engineering | Deployments Support"
     title = key_path.replace("/", " | ").replace("-", " ").replace("_", " ").strip().title()
-    content = f"AI generated audio for the '{title}' chapter of the PostHog {kind.capitalize()}. Read more about it at https://posthog.com/{key_path}"
+    content = f"""AI generated audio for the '{title}' chapter of the PostHog {kind.capitalize()}.
+
+Read more about it at https://posthog.com/{key_path}
+
+<code>ID: {s3_key}</code>"""
 
     return title, content
 
