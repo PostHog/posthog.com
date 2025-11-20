@@ -96,7 +96,7 @@ Add to your `.env` file in `scripts/hogfm/.env`:
 
 ```bash
 # Required for S3 uploads
-HANDBOOK_AUDIO_S3_BUCKET=your-bucket-name
+S3_BUCKET=your-bucket-name
 AWS_REGION=your-aws-region
 ```
 
@@ -268,7 +268,7 @@ To integrate audio files into the website:
 ```typescript
 // Get audio URL for a handbook page
 function getHandbookAudioUrl(slug: string): string {
-  const bucket = process.env.HANDBOOK_AUDIO_S3_BUCKET
+  const bucket = process.env.S3_BUCKET
   const region = process.env.AWS_REGION || 'us-east-1'
   return `https://${bucket}.s3.${region}.amazonaws.com/handbook-audio/${slug}.mp3`
 }

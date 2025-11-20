@@ -11,15 +11,6 @@ Usage:
     uv run python sync_s3_to_podbean.py
     uv run python sync_s3_to_podbean.py --dry-run
     uv run python sync_s3_to_podbean.py --status publish
-
-Environment variables required:
-    - AWS_ACCESS_KEY_ID
-    - AWS_SECRET_ACCESS_KEY
-    - AWS_REGION (default: us-east-1)
-    - S3_BUCKET
-    - S3_PREFIX (optional, default: "")
-    - PODBEAN_CLIENT_ID
-    - PODBEAN_CLIENT_SECRET
 """
 
 import os
@@ -28,6 +19,7 @@ import tempfile
 import argparse
 from pathlib import Path
 from typing import Optional
+from datetime import datetime, timezone
 
 import boto3
 import requests
@@ -42,12 +34,8 @@ PODBEAN_CLIENT_SECRET = os.getenv("PODBEAN_CLIENT_SECRET")
 
 # S3 configuration
 S3_BUCKET = os.getenv("S3_BUCKET")
-S3_PREFIX = os.getenv("S3_PREFIX", "")
+
 AWS_REGION = os.getenv("AWS_REGION", "us-east-1")
-
-# Supported audio extensions
-AUDIO_EXTENSIONS = {".mp3", ".m4a", ".wav", ".ogg", ".flac", ".aac"}
-
 
 def get_access_token() -> str:
     """Get OAuth2 access token from Podbean."""
@@ -63,7 +51,7 @@ def get_access_token() -> str:
     return r.json()["access_token"]
 
 
-def list_s3_audio_files() -> list[dict]:
+def list_s3_audio_files(prefix: str) -> list[dict]:
     """
     List all audio files in the S3 bucket/prefix.
 
@@ -74,7 +62,7 @@ def list_s3_audio_files() -> list[dict]:
     files = []
     paginator = s3.get_paginator("list_objects_v2")
 
-    prefix = S3_PREFIX.strip("/") + "/" if S3_PREFIX else ""
+    prefix = prefix.strip("/") + "/" if prefix else ""
 
     for page in paginator.paginate(Bucket=S3_BUCKET, Prefix=prefix):
         for obj in page.get("Contents", []):
@@ -82,7 +70,7 @@ def list_s3_audio_files() -> list[dict]:
             filename = Path(key).name
             ext = Path(filename).suffix.lower()
 
-            if ext in AUDIO_EXTENSIONS:
+            if ext == ".mp3":
                 files.append({
                     "key": key,
                     "filename": filename,
@@ -93,7 +81,7 @@ def list_s3_audio_files() -> list[dict]:
     return files
 
 
-def get_podbean_episodes() -> list[dict]:
+def get_podbean_episodes(kind: str) -> list[dict]:
     """
     Get all existing episodes from Podbean.
 
@@ -114,6 +102,9 @@ def get_podbean_episodes() -> list[dict]:
 
         data = r.json()
         batch = data.get("episodes", [])
+
+        # filter for the episode title to contain the kind
+        batch = [episode for episode in batch if episode.get("title", "").lower().startswith(kind.lower())]
         episodes.extend(batch)
 
         if len(batch) < limit:
@@ -150,28 +141,34 @@ def upload_file_to_presigned_url(presigned_url: str, file_path: str, content_typ
         r.raise_for_status()
 
 
-def publish_episode(
+def save_episode(
     token: str,
-    file_key: str,
     title: str,
     content: str = "",
     status: str = "publish",
     episode_type: str = "public",
+    file_key: Optional[str] = None,
+    episode_id: Optional[str] = None,
 ) -> dict:
     """
-    Publish an episode to Podbean.
+    Create or update an episode on Podbean.
 
     Args:
         token: Podbean access token
-        file_key: The file key from upload
         title: Episode title
         content: Episode description/show notes (HTML allowed)
         status: 'publish', 'draft', or 'scheduled'
         episode_type: 'public', 'premium', or 'private'
+        file_key: The file key from upload (required for create, optional for update)
+        episode_id: The ID of the episode to update (None for create)
 
-    Returns the created episode data.
+    Returns the episode data.
     """
-    url = "https://api.podbean.com/v1/episodes"
+    if episode_id:
+        url = f"https://api.podbean.com/v1/episodes/{episode_id}"
+    else:
+        url = "https://api.podbean.com/v1/episodes"
+
     headers = {"Authorization": f"Bearer {token}"}
 
     data = {
@@ -179,8 +176,10 @@ def publish_episode(
         "content": content,
         "status": status,
         "type": episode_type,
-        "media_key": file_key,
     }
+
+    if file_key:
+        data["media_key"] = file_key
 
     r = requests.post(url, headers=headers, data=data)
     r.raise_for_status()
@@ -193,58 +192,99 @@ def download_s3_file(s3_key: str, local_path: str):
     s3.download_file(S3_BUCKET, s3_key, local_path)
 
 
-def get_content_type(filename: str) -> str:
-    """Get content type based on file extension."""
-    ext = Path(filename).suffix.lower()
-    content_types = {
-        ".mp3": "audio/mpeg",
-        ".m4a": "audio/mp4",
-        ".wav": "audio/wav",
-        ".ogg": "audio/ogg",
-        ".flac": "audio/flac",
-        ".aac": "audio/aac",
-    }
-    return content_types.get(ext, "audio/mpeg")
-
-
-def extract_episode_title(filename: str) -> str:
+def parse_timestamp(timestamp_str: str) -> datetime:
     """
-    Extract episode title from filename.
+    Parse a timestamp string to datetime object.
 
-    Removes extension and replaces common separators with spaces.
-    Override this function for custom title extraction logic.
+    Handles both ISO format (from S3) and Unix timestamps (from Podbean).
     """
-    name = Path(filename).stem
-    # Replace common separators with spaces
-    for sep in ["-", "_"]:
-        name = name.replace(sep, " ")
-    return name.strip()
+    # Try parsing as ISO format first
+    try:
+        # Remove timezone info for comparison (S3 returns UTC)
+        if timestamp_str.endswith('Z'):
+            timestamp_str = timestamp_str[:-1] + '+00:00'
+        return datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
+    except (ValueError, AttributeError):
+        pass
+
+    # Try parsing as Unix timestamp (Podbean returns this)
+    try:
+        return datetime.fromtimestamp(int(timestamp_str), tz=timezone.utc)
+    except (ValueError, TypeError):
+        pass
+
+    # Return epoch if we can't parse
+    return datetime.fromtimestamp(0, tz=timezone.utc)
 
 
-def find_matching_episode(filename: str, episodes: list[dict]) -> Optional[dict]:
+def is_s3_newer(s3_file: dict, episode: dict) -> bool:
     """
-    Find a Podbean episode that matches the given filename.
+    Check if the S3 file is newer than the Podbean episode.
 
-    Matches by checking if the filename (without extension) appears in the episode title,
-    or if the episode title appears in the filename.
+    Returns True if S3 file should replace the episode.
     """
-    name_stem = Path(filename).stem.lower()
+    s3_time = parse_timestamp(s3_file["last_modified"])
+
+    # Podbean uses 'publish_time' or 'update_time'
+    episode_time_str = episode.get("update_time") or episode.get("publish_time")
+    if not episode_time_str:
+        return True  # No timestamp on episode, assume we should update
+
+    episode_time = parse_timestamp(str(episode_time_str))
+
+    return s3_time > episode_time
+
+
+
+
+def find_matching_episode(s3_key: str, episodes: list[dict]) -> Optional[dict]:
+    """
+    Find a Podbean episode that matches the given S3 key.
+
+    Matches by checking if the S3 key path (without .mp3) appears in the episode content URL.
+    The content contains a URL like: https://posthog.com/handbook/engineering/deployments-support
+    """
+    # Get the key path without extension (e.g., "handbook/engineering/deployments-support")
+    key_path = s3_key.replace(".mp3", "")
 
     for episode in episodes:
-        title = episode.get("title", "").lower()
-        # Check both directions for flexibility
-        if name_stem in title or title in name_stem:
-            return episode
-        # Also check if the title matches when normalized
-        title_normalized = title.replace(" ", "-").replace("_", "-")
-        name_normalized = name_stem.replace(" ", "-").replace("_", "-")
-        if title_normalized == name_normalized:
+        content = episode.get("content", "")
+        # Check if the key path appears in the content URL
+        if f"posthog.com/{key_path}" in content:
             return episode
 
     return None
 
 
-def sync_episodes(dry_run: bool = False, publish_status: str = "draft"):
+def generate_episode_metadata(s3_key: str, kind: str) -> tuple[str, str]:
+    """
+    Generate title and content for an episode based on S3 key.
+
+    Returns (title, content) tuple.
+    """
+    key_path = s3_key.replace(".mp3", "")
+
+    # Get the chapter name from the S3 key like handbook/engineering/deployments-support.mp3...
+    # becomes "Handbook | Engineering | Deployments Support"
+    title = key_path.replace("/", " | ").replace("-", " ").replace("_", " ").strip().title()
+    content = f"AI generated audio for the '{title}' chapter of the PostHog {kind.capitalize()}. Read more about it at https://posthog.com/{key_path}"
+
+    return title, content
+
+
+def needs_metadata_update(episode: dict, title: str, content: str) -> bool:
+    """
+    Check if the episode metadata differs from the expected title/content.
+
+    Returns True if the episode needs to be updated.
+    """
+    existing_title = episode.get("title", "")
+    existing_content = episode.get("content", "")
+
+    return existing_title != title or existing_content != content
+
+
+def sync_episodes(dry_run: bool = False, publish_status: str = "draft", kind: str = "handbook"):
     """
     Main sync function.
 
@@ -265,7 +305,7 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft"):
         sys.exit(1)
 
     print(f"S3 Bucket: {S3_BUCKET}")
-    print(f"S3 Prefix: {S3_PREFIX or '(root)'}")
+    print(f"S3 folder: {kind}")
     print(f"Publish status: {publish_status}")
     if dry_run:
         print("DRY RUN - no changes will be made")
@@ -273,7 +313,7 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft"):
 
     # Get S3 files
     print("Listing S3 audio files...")
-    s3_files = list_s3_audio_files()
+    s3_files = list_s3_audio_files(kind)
     print(f"   Found {len(s3_files)} audio file(s)")
 
     if not s3_files:
@@ -282,94 +322,146 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft"):
 
     # Get Podbean episodes
     print("Fetching Podbean episodes...")
-    episodes = get_podbean_episodes()
+    episodes = get_podbean_episodes(kind)
     print(f"   Found {len(episodes)} existing episode(s)")
     print()
 
-    # Find files that need to be synced
-    to_sync = []
-    already_exists = []
+    # Find files that need to be synced or updated
+    to_create = []
+    to_update_audio = []  # Need to upload new audio
+    to_update_metadata = []  # Only need to update title/content
+    up_to_date = []
 
     for s3_file in s3_files:
-        filename = s3_file["filename"]
-        match = find_matching_episode(filename, episodes)
+        s3_key = s3_file["key"]
+        match = find_matching_episode(s3_key, episodes)
 
         if match:
-            already_exists.append((s3_file, match))
+            title, content = generate_episode_metadata(s3_key, kind)
+            audio_changed = is_s3_newer(s3_file, match)
+            metadata_changed = needs_metadata_update(match, title, content)
+
+            if audio_changed:
+                to_update_audio.append((s3_file, match))
+            elif metadata_changed:
+                to_update_metadata.append((s3_file, match))
+            else:
+                up_to_date.append((s3_file, match))
         else:
-            to_sync.append(s3_file)
+            to_create.append(s3_file)
 
     # Report status
-    if already_exists:
-        print(f"Already synced ({len(already_exists)}):")
-        for s3_file, episode in already_exists:
+    if up_to_date:
+        print(f"Up to date ({len(up_to_date)}):")
+        for s3_file, episode in up_to_date:
             print(f"   - {s3_file['filename']} -> {episode['title']}")
         print()
 
-    if not to_sync:
-        print("All files are already synced!")
-        return
+    if to_update_audio:
+        print(f"To update (audio changed) ({len(to_update_audio)}):")
+        for s3_file, episode in to_update_audio:
+            size_mb = s3_file["size"] / (1024 * 1024)
+            print(f"   - {s3_file['filename']} ({size_mb:.1f} MB) -> {episode['title']}")
+        print()
 
-    print(f"To sync ({len(to_sync)}):")
-    for s3_file in to_sync:
-        size_mb = s3_file["size"] / (1024 * 1024)
-        print(f"   - {s3_file['filename']} ({size_mb:.1f} MB)")
-    print()
+    if to_update_metadata:
+        print(f"To update (metadata only) ({len(to_update_metadata)}):")
+        for s3_file, episode in to_update_metadata:
+            print(f"   - {s3_file['filename']} -> {episode['title']}")
+        print()
 
-    if dry_run:
-        print("Dry run complete. No files were uploaded.")
+    if to_create:
+        print(f"To create ({len(to_create)}):")
+        for s3_file in to_create:
+            size_mb = s3_file["size"] / (1024 * 1024)
+            print(f"   - {s3_file['filename']} ({size_mb:.1f} MB)")
+        print()
+
+    if not to_create and not to_update_audio and not to_update_metadata:
+        print("All files are already synced and up to date!")
         return
 
     # Get token for uploads
     token = get_access_token()
 
-    # Sync each file
-    for i, s3_file in enumerate(to_sync, 1):
+    # Combine operations: (s3_file, episode_id or None, operation_type)
+    # operation_type: 'create', 'update_audio', 'update_metadata'
+    operations = [(s3_file, None, 'create') for s3_file in to_create]
+    operations += [(s3_file, episode.get("id"), 'update_audio') for s3_file, episode in to_update_audio]
+    operations += [(s3_file, episode.get("id"), 'update_metadata') for s3_file, episode in to_update_metadata]
+
+    for i, (s3_file, episode_id, operation_type) in enumerate(operations, 1):
         filename = s3_file["filename"]
         s3_key = s3_file["key"]
         filesize = s3_file["size"]
 
-        print(f"[{i}/{len(to_sync)}] Uploading {filename}...")
+        title, content = generate_episode_metadata(s3_key, kind)
+        key_path = s3_key.replace(".mp3", "")
+
+        if operation_type == 'create':
+            action = "Creating"
+        elif operation_type == 'update_audio':
+            action = "Updating (audio)"
+        else:
+            action = "Updating (metadata)"
+
+        print(f"[{i}/{len(operations)}] {action} {filename}...")
+
+        if dry_run:
+            print(f"   Dry run. Would have {action.lower()} {key_path} on Podbean.")
+            if episode_id:
+                print(f"   Episode ID: {episode_id}")
+            print(f"   Title: {title}")
+            print(f"   Content: {content}")
+            print(f"   Publish status: {publish_status}")
+            print()
+            continue
 
         try:
-            # Create temp file for download
-            with tempfile.NamedTemporaryFile(suffix=Path(filename).suffix, delete=False) as tmp:
-                tmp_path = tmp.name
+            file_key = None
 
-            # Download from S3
-            print(f"   Downloading from S3...")
-            download_s3_file(s3_key, tmp_path)
+            # Only upload audio for create and update_audio operations
+            if operation_type in ('create', 'update_audio'):
+                # Create temp file for download
+                with tempfile.NamedTemporaryFile(suffix=Path(filename).suffix, delete=False) as tmp:
+                    tmp_path = tmp.name
 
-            # Get presigned URL
-            content_type = get_content_type(filename)
-            print(f"   Getting upload authorization...")
-            auth = get_presigned_upload_url(token, filename, filesize, content_type)
+                # Download from S3
+                print(f"   Downloading from S3...")
+                download_s3_file(s3_key, tmp_path)
 
-            # Upload to Podbean
-            print(f"   Uploading to Podbean...")
-            upload_file_to_presigned_url(auth["presigned_url"], tmp_path, content_type)
+                # Get presigned URL
+                print(f"   Getting upload authorization...")
+                auth = get_presigned_upload_url(token, filename, filesize)
 
-            # Publish episode
-            title = extract_episode_title(filename)
-            print(f"   Publishing episode: {title}")
-            episode = publish_episode(
+                # Upload to Podbean
+                print(f"   Uploading to Podbean...")
+                upload_file_to_presigned_url(auth["presigned_url"], tmp_path)
+
+                file_key = auth["file_key"]
+
+                # Clean up temp file
+                os.remove(tmp_path)
+
+            # Publish or update episode
+            action_verb = "Publishing" if operation_type == 'create' else "Updating"
+            print(f"   {action_verb} episode: {title}")
+
+            episode = save_episode(
                 token=token,
-                file_key=auth["file_key"],
                 title=title,
-                content="",  # Can be customized
+                content=content,
                 status=publish_status,
+                file_key=file_key,
+                episode_id=episode_id,
             )
 
-            print(f"   Published: {episode.get('episode', {}).get('permalink_url', 'N/A')}")
+            result_verb = "Published" if operation_type == 'create' else "Updated"
+            print(f"   {result_verb}: {episode.get('episode', {}).get('permalink_url', 'N/A')}")
 
         except Exception as e:
             print(f"   Error: {e}")
             raise
-
-        finally:
-            # Clean up temp file
-            if os.path.exists(tmp_path):
-                os.remove(tmp_path)
 
         print()
 
@@ -381,6 +473,12 @@ def main():
         description="Sync podcast episodes from S3 to Podbean"
     )
     parser.add_argument(
+        "--kind",
+        choices=["handbook", "changelog"],
+        required=True,
+        help="Kind of content to sync (default: handbook)",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Show what would be synced without actually uploading",
@@ -388,13 +486,13 @@ def main():
     parser.add_argument(
         "--status",
         choices=["publish", "draft", "scheduled"],
-        default="draft",
+        required=True,
         help="Status for new episodes (default: draft)",
     )
 
     args = parser.parse_args()
 
-    sync_episodes(dry_run=args.dry_run, publish_status=args.status)
+    sync_episodes(dry_run=args.dry_run, publish_status=args.status, kind=args.kind)
 
 
 if __name__ == "__main__":
