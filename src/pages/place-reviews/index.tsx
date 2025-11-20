@@ -93,10 +93,20 @@ const MapboxAutocomplete = ({
     const [query, setQuery] = React.useState(value)
     const [suggestions, setSuggestions] = React.useState<MapboxFeature[]>([])
     const [showSuggestions, setShowSuggestions] = React.useState(false)
+    const [sessionToken, setSessionToken] = React.useState('')
 
     React.useEffect(() => {
         setQuery(value)
     }, [value])
+
+    // Create a session token for Search Box API billing
+    React.useEffect(() => {
+        const newToken =
+            typeof crypto !== 'undefined' && crypto.randomUUID
+                ? crypto.randomUUID()
+                : Math.random().toString(36).slice(2) + Date.now().toString(36)
+        setSessionToken(newToken)
+    }, [])
 
     const handleSearch = async (searchText: string) => {
         setQuery(searchText)
@@ -112,7 +122,12 @@ const MapboxAutocomplete = ({
             url.searchParams.set('limit', '5')
             url.searchParams.set('types', 'place,city,locality,neighborhood,street,address,poi')
             url.searchParams.set('language', 'en')
-            url.searchParams.set('access_token', process.env.MAPBOX_TOKEN || '')
+            url.searchParams.set('session_token', sessionToken)
+            url.searchParams.set(
+                'access_token',
+                process.env.MAPBOX_TOKEN ||
+                    'pk.eyJ1IjoicG9zdGhvZyIsImEiOiJjbTZpcmRoNTMwMHdlMmpvZ205eWZ6c3NhIn0.cxMfQni21j552S1VgVcDkQ'
+            )
             const response = await fetch(url.toString())
             const data = await response.json()
             const suggestions = Array.isArray(data?.suggestions) ? data.suggestions : []
@@ -143,6 +158,7 @@ const MapboxAutocomplete = ({
             const url = new URL(
                 `https://api.mapbox.com/search/searchbox/v1/retrieve/${encodeURIComponent(place.mapbox_id)}`
             )
+            url.searchParams.set('session_token', sessionToken)
             url.searchParams.set('access_token', process.env.MAPBOX_TOKEN || '')
             const response = await fetch(url.toString())
             const data = await response.json()
@@ -153,6 +169,13 @@ const MapboxAutocomplete = ({
         } catch (error) {
             console.error('Mapbox retrieve error:', error)
             onChange(place.place_name, place.text)
+        } finally {
+            // Start a new session token after selection as per session semantics
+            const newToken =
+                typeof crypto !== 'undefined' && crypto.randomUUID
+                    ? crypto.randomUUID()
+                    : Math.random().toString(36).slice(2) + Date.now().toString(36)
+            setSessionToken(newToken)
         }
     }
 
