@@ -14,11 +14,23 @@ import dayjs from 'dayjs'
 import { Place } from 'pages/place-reviews'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useDropzone } from 'react-dropzone'
-import { fetchEvents, createEvent } from 'components/HogMap/data'
+import { addEvent, getEvents } from 'components/HogMap/data'
 
 interface MapboxFeature {
     place_name: string
     text: string
+    mapbox_id?: string
+}
+
+interface MapboxSuggestion {
+    mapbox_id?: string
+    feature_id?: string
+    id?: string
+    name?: string
+    full_address?: string
+    place_formatted?: string
+    place_name?: string
+    description?: string
 }
 
 interface Lodging {
@@ -105,24 +117,53 @@ const MapboxAutocomplete = ({
         }
 
         try {
-            const response = await fetch(
-                `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
-                    searchText
-                )}.json?access_token=${process.env.MAPBOX_TOKEN}&types=poi,address&limit=5`
-            )
+            const url = new URL('https://api.mapbox.com/search/searchbox/v1/suggest')
+            url.searchParams.set('q', searchText.trim())
+            url.searchParams.set('limit', '5')
+            url.searchParams.set('types', 'place,city,locality,neighborhood,street,address,poi')
+            url.searchParams.set('language', 'en')
+            url.searchParams.set('access_token', process.env.MAPBOX_TOKEN || '')
+            const response = await fetch(url.toString())
             const data = await response.json()
-            setSuggestions(data.features || [])
+            const suggestions = Array.isArray(data?.suggestions) ? data.suggestions : []
+            setSuggestions(
+                suggestions.map((s: MapboxSuggestion) => ({
+                    mapbox_id: s.mapbox_id || s.feature_id || s.id,
+                    place_name: s.place_formatted || s.full_address || s.place_name || s.description || '',
+                    text: s.name || s.full_address || s.place_formatted || 'Unknown',
+                }))
+            )
             setShowSuggestions(true)
         } catch (error) {
-            console.error('Mapbox geocoding error:', error)
+            console.error('Mapbox search error:', error)
         }
     }
 
-    const handleSelect = (place: MapboxFeature) => {
-        onChange(place.place_name)
-        setQuery(place.place_name)
+    const handleSelect = async (place: MapboxFeature) => {
+        setQuery(place.text)
         setShowSuggestions(false)
         setSuggestions([])
+
+        if (!place.mapbox_id) {
+            onChange(place.place_name)
+            return
+        }
+
+        try {
+            const url = new URL(
+                `https://api.mapbox.com/search/searchbox/v1/retrieve/${encodeURIComponent(place.mapbox_id)}`
+            )
+            url.searchParams.set('access_token', process.env.MAPBOX_TOKEN || '')
+            const response = await fetch(url.toString())
+            const data = await response.json()
+            const feat = (Array.isArray(data?.features) && data.features[0]) || data?.feature || null
+            const fullAddress =
+                feat?.properties?.place_formatted || feat?.properties?.full_address || place.place_name || ''
+            onChange(fullAddress)
+        } catch (error) {
+            console.error('Mapbox retrieve error:', error)
+            onChange(place.place_name)
+        }
     }
 
     return (
@@ -922,7 +963,7 @@ export default function Offsites(): JSX.Element {
                     throw new Error('No JWT found')
                 }
 
-                const formattedOffsites = await fetchEvents(jwt)
+                const formattedOffsites = await getEvents(jwt)
                 setOffsites(formattedOffsites as unknown as Event[])
             } catch (err) {
                 console.error('Error fetching data:', err)
@@ -1057,7 +1098,7 @@ export default function Offsites(): JSX.Element {
                 flightTracker: formData.flightTracker || undefined,
             }
 
-            const result = await createEvent(jwt, offsitePayload)
+            const result = await addEvent(jwt, offsitePayload)
             const resultData = result as { data: { id: number; attributes: Record<string, unknown> } }
             const newOffsite: Event = {
                 id: resultData.data.id,

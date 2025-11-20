@@ -20,11 +20,23 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useUser } from 'hooks/useUser'
 import { useToast } from '../../context/Toast'
 import { useDropzone } from 'react-dropzone'
-import { fetchPlaces, createPlace, fetchPlaceReviews, createPlaceReview } from 'components/HogMap/data'
+import { getPlaces, getPlaceReviews, addPlace, addPlaceReview } from 'components/HogMap/data'
 
 interface MapboxFeature {
     place_name: string
     text: string
+    mapbox_id?: string
+}
+
+interface MapboxSuggestion {
+    mapbox_id?: string
+    feature_id?: string
+    id?: string
+    name?: string
+    full_address?: string
+    place_formatted?: string
+    place_name?: string
+    description?: string
 }
 
 export interface Place {
@@ -95,24 +107,53 @@ const MapboxAutocomplete = ({
         }
 
         try {
-            const response = await fetch(
-                `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
-                    searchText
-                )}.json?access_token=${process.env.MAPBOX_TOKEN}&types=poi,address&limit=5`
-            )
+            const url = new URL('https://api.mapbox.com/search/searchbox/v1/suggest')
+            url.searchParams.set('q', searchText.trim())
+            url.searchParams.set('limit', '5')
+            url.searchParams.set('types', 'place,city,locality,neighborhood,street,address,poi')
+            url.searchParams.set('language', 'en')
+            url.searchParams.set('access_token', process.env.MAPBOX_TOKEN || '')
+            const response = await fetch(url.toString())
             const data = await response.json()
-            setSuggestions(data.features || [])
+            const suggestions = Array.isArray(data?.suggestions) ? data.suggestions : []
+            setSuggestions(
+                suggestions.map((s: MapboxSuggestion) => ({
+                    mapbox_id: s.mapbox_id || s.feature_id || s.id,
+                    place_name: s.place_formatted || s.full_address || s.place_name || s.description || '',
+                    text: s.name || s.full_address || s.place_formatted || 'Unknown',
+                }))
+            )
             setShowSuggestions(true)
         } catch (error) {
-            console.error('Mapbox geocoding error:', error)
+            console.error('Mapbox search error:', error)
         }
     }
 
-    const handleSelect = (place: MapboxFeature) => {
-        onChange(place.place_name, place.text)
+    const handleSelect = async (place: MapboxFeature) => {
         setQuery(place.text)
         setShowSuggestions(false)
         setSuggestions([])
+
+        if (!place.mapbox_id) {
+            onChange(place.place_name, place.text)
+            return
+        }
+
+        try {
+            const url = new URL(
+                `https://api.mapbox.com/search/searchbox/v1/retrieve/${encodeURIComponent(place.mapbox_id)}`
+            )
+            url.searchParams.set('access_token', process.env.MAPBOX_TOKEN || '')
+            const response = await fetch(url.toString())
+            const data = await response.json()
+            const feat = (Array.isArray(data?.features) && data.features[0]) || data?.feature || null
+            const fullAddress =
+                feat?.properties?.place_formatted || feat?.properties?.full_address || place.place_name || ''
+            onChange(fullAddress, place.text)
+        } catch (error) {
+            console.error('Mapbox retrieve error:', error)
+            onChange(place.place_name, place.text)
+        }
     }
 
     return (
@@ -492,11 +533,11 @@ export default function PlaceReviews(): JSX.Element {
                 }
 
                 // Fetch places
-                const fetchedPlaces = await fetchPlaces(jwt)
+                const fetchedPlaces = await getPlaces(jwt)
                 setPlaces(fetchedPlaces as unknown as Place[])
 
                 // Fetch place reviews
-                const fetchedReviews = await fetchPlaceReviews(jwt)
+                const fetchedReviews = await getPlaceReviews(jwt)
                 setReviews(fetchedReviews as unknown as PlaceReview[])
 
                 // Group reviews by place
@@ -560,7 +601,7 @@ export default function PlaceReviews(): JSX.Element {
                     type: formData.placeType,
                 }
 
-                const placeResult = await createPlace(jwt, newPlacePayload)
+                const placeResult = await addPlace(jwt, newPlacePayload)
                 const placeData = placeResult as {
                     data: { id: number; attributes: { name: string; address: string; type: Place['type'] } }
                 }
@@ -586,7 +627,7 @@ export default function PlaceReviews(): JSX.Element {
                 photos: formData.photos?.map((photo) => photo.id) || undefined,
             }
 
-            const result = await createPlaceReview(jwt, reviewPayload)
+            const result = await addPlaceReview(jwt, reviewPayload)
             const resultData = result as {
                 data: { id: number; attributes: { rating: number; review?: string; createdAt: string } }
             }
