@@ -386,8 +386,8 @@ export function createSearchMarker({
                 address: address || "",
                 lat: Number(latitude),
                 long: Number(longitude),
-                latitude: Number(latitude),
-                longitude: Number(longitude),
+                latitude: String(latitude),
+                longitude: String(longitude),
                 type: type.charAt(0).toUpperCase() + type.slice(1),
             }
             console.log('item', item)

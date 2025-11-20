@@ -420,6 +420,13 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
                             We're hiring.
                         </Link>
                     </p>
+
+                    <p>
+                        See where our team{' '}
+                        <Link to={`/people/map`} state={{ newWindow: true }}>
+                            is located.
+                        </Link>
+                    </p>
                 </div>
 
                 {/* 

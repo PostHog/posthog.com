@@ -10,7 +10,6 @@ import { getPlaces } from './data'
 import { EventItem } from './types'
 import { IconBuilding, IconBed, IconBurger, IconCoffee, IconLaptop, IconTelescope } from '@posthog/icons'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { createAlienSkyboxLayer, loadThreeJS } from './HogAlien'
 import { useUser } from 'hooks/useUser'
 
 export const LAYER_PEOPLE = 'layer-people'
@@ -587,8 +586,8 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                         )
                         const groups = (activePlaces as any[]).reduce(
                             (acc: Record<string, { coords: Coordinates; places: any[] }>, p: any) => {
-                                const lon = Number(p.longitude)
-                                const lat = Number(p.latitude)
+                                const lon = Number(p.long)
+                                const lat = Number(p.lat)
                                 const key = `${lon.toFixed(4)},${lat.toFixed(4)}`
                                 if (!acc[key]) {
                                     acc[key] = {
@@ -639,9 +638,9 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                                                  ? `<div class="text-secondary mb-1">${(pl as any).address}</div>`
                                                  : ''
                                          }
-                                         <div class="text-secondary">Lat ${Number((pl as any).latitude).toFixed(
+                                         <div class="text-secondary">Lat ${Number((pl as any).lat).toFixed(
                                              5
-                                         )}, Lng ${Number((pl as any).longitude).toFixed(5)}</div>
+                                         )}, Lng ${Number((pl as any).long).toFixed(5)}</div>
                                          <div class="mt-1 text-secondary capitalize">${(pl as any).type}</div>
                                     </div>`
                                     const mapboxgl = getMapbox()
@@ -677,49 +676,9 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
             center: [-0.1276, 51.5074], // London
             zoom: 4,
             attributionControl: true,
-            projection: { name: 'globe' },
         })
         mapRef.current.addControl(new mapboxgl.NavigationControl({ visualizePitch: true }), 'top-right')
-
-        // Load Three.js and add alien skybox layer
-        loadThreeJS()
-            .then(() => {
-                const alienSkyboxLayer = createAlienSkyboxLayer()
-                if (alienSkyboxLayer && mapRef.current && mapRef.current.isStyleLoaded()) {
-                    if (!mapRef.current.getLayer('alien-skybox')) {
-                        // Add before the first layer so it appears behind everything
-                        const layers = mapRef.current.getStyle()?.layers
-                        const firstLayerId = layers && layers.length > 0 ? layers[0].id : undefined
-                        mapRef.current.addLayer(alienSkyboxLayer, firstLayerId)
-                    }
-                }
-            })
-            .catch((err) => {
-                console.warn('Failed to load alien skybox:', err)
-            })
-
         mapRef.current.on('load', () => {
-            // Add the alien skybox layer when style is loaded
-            const alienSkyboxLayer = createAlienSkyboxLayer()
-            if (alienSkyboxLayer && mapRef.current && !mapRef.current.getLayer('alien-skybox')) {
-                const layers = mapRef.current.getStyle()?.layers
-                const firstLayerId = layers && layers.length > 0 ? layers[0].id : undefined
-                mapRef.current.addLayer(alienSkyboxLayer, firstLayerId)
-            }
-
-            // Configure sky layer for atmosphere
-            if (!mapRef.current.getLayer('sky')) {
-                mapRef.current.addLayer({
-                    id: 'sky',
-                    type: 'sky',
-                    paint: {
-                        'sky-type': 'atmosphere',
-                        'sky-atmosphere-sun': [0.0, 90.0],
-                        'sky-atmosphere-sun-intensity': 5,
-                    },
-                })
-            }
-
             renderMarkers()
         })
         mapRef.current.on('zoomend', () => {

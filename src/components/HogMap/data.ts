@@ -111,14 +111,16 @@ export const getPlaces = async (jwt: string): Promise<Record<string, unknown>[]>
     return data.data.map(
         (item: {
             id: number
-            attributes: { name: string; address: string; type: string; latitude: number; longitude: number }
+            attributes: { name: string; address: string; type: string; lat: number; long: number }
         }) => ({
             id: item.id,
             name: item.attributes.name,
             address: item.attributes.address,
             type: item.attributes.type,
-            lat: item.attributes.latitude,
-            long: item.attributes.longitude,
+            lat: item.attributes.lat,
+            long: item.attributes.long,
+            latitude: item.attributes.lat,
+            longitude: item.attributes.long,
         })
     )
 }
