@@ -2,16 +2,25 @@
 
 ## Setup
 
-Install dependencies with uv:
+Navigate to the hogfm project and install dependencies with uv:
 
 ```bash
-uv pip install -r scripts/handbook-audio/requirements.txt
+cd scripts/hogfm
+uv sync
 ```
 
-Set your ElevenLabs API key:
+Set your configuration in `.env` file in the hogfm directory:
 
 ```bash
-export ELEVENLABS_API_KEY="your-key-here"
+# In scripts/hogfm/.env
+
+# Required for audio generation
+ELEVENLABS_API_KEY=your-key-here
+ELEVENLABS_VOICE_ID=your-voice-id-here
+
+# Required only if using --upload-s3
+HANDBOOK_AUDIO_S3_BUCKET=your-bucket-name
+AWS_REGION=your-aws-region
 ```
 
 ---
@@ -21,7 +30,7 @@ export ELEVENLABS_API_KEY="your-key-here"
 ### Single file - dry run
 
 ```bash
-python scripts/handbook-audio/generate.py --dry-run contents/handbook/values.md
+uv run handbook-audio --dry-run contents/handbook/values.md
 ```
 
 **What it does:** Full pipeline (markdown → text → fake API call → fake save) without actually generating audio.
@@ -33,14 +42,8 @@ python scripts/handbook-audio/generate.py --dry-run contents/handbook/values.md
 ### Single file - real generation
 
 ```bash
-# Install dependencies with uv
-uv pip install -r scripts/handbook-audio/requirements.txt
-
-# Set your API key
-export ELEVENLABS_API_KEY="your-key-here"
-
 # Generate audio
-python scripts/handbook-audio/generate.py contents/handbook/values.md
+uv run handbook-audio contents/handbook/values.md
 ```
 
 **What it does:** Full pipeline with real API call. Saves MP3 to `public/handbook-audio/values.mp3`.
@@ -53,10 +56,10 @@ python scripts/handbook-audio/generate.py contents/handbook/values.md
 
 ```bash
 # Find and generate all "engineering" pages
-python scripts/handbook-audio/generate.py --search engineering
+uv run handbook-audio --search engineering
 
 # Dry run first to see what would be generated
-python scripts/handbook-audio/generate.py --dry-run --search engineering
+uv run handbook-audio --dry-run --search engineering
 ```
 
 **What it does:** Finds all files matching the pattern and generates audio for each.
@@ -69,10 +72,10 @@ python scripts/handbook-audio/generate.py --dry-run --search engineering
 
 ```bash
 # Dry run first (recommended)
-python scripts/handbook-audio/generate.py --dry-run --all
+uv run handbook-audio --dry-run --all
 
 # Then generate for real
-python scripts/handbook-audio/generate.py --all
+uv run handbook-audio --all
 ```
 
 **What it does:** Processes all 260 handbook files.
@@ -92,8 +95,7 @@ python scripts/handbook-audio/generate.py --all
 
 2. **Generate audio for that one file:**
    ```bash
-   export ELEVENLABS_API_KEY="your-key"
-   python scripts/handbook-audio/generate.py contents/handbook/values.md
+   uv run handbook-audio contents/handbook/values.md
    ```
 
 3. **Listen to the result:**
@@ -103,12 +105,12 @@ python scripts/handbook-audio/generate.py --all
 
 4. **If happy, generate more:**
    ```bash
-   python scripts/handbook-audio/generate.py --search engineering
+   uv run handbook-audio --search engineering
    ```
 
 5. **Or generate everything:**
    ```bash
-   python scripts/handbook-audio/generate.py --all
+   uv run handbook-audio --all
    ```
 
 ---

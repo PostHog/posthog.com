@@ -197,12 +197,13 @@ wheels = [
 [[package]]
 name = "hogfm"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "boto3" },
     { name = "elevenlabs" },
     { name = "gspread" },
     { name = "python-dotenv" },
+    { name = "requests" },
     { name = "structlog" },
 ]
 
@@ -212,6 +213,7 @@ requires-dist = [
     { name = "elevenlabs", specifier = ">=2.23.0" },
     { name = "gspread", specifier = ">=6.2.1" },
     { name = "python-dotenv", specifier = ">=1.2.1" },
+    { name = "requests", specifier = ">=2.31.0" },
     { name = "structlog", specifier = ">=25.5.0" },
 ]
 

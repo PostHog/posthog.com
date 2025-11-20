@@ -21,18 +21,18 @@ import sys
 import time
 from pathlib import Path
 
-# Add current directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
-
-from markdown_processor import process_markdown_file
-from file_selector import find_all_handbook_files, find_handbook_file_by_pattern
-from elevenlabs_client import generate_audio, check_api_available
-from audio_saver import save_audio_file, save_text_file
-from s3_uploader import upload_to_s3, check_s3_available
+from handbook_audio.markdown_processor import process_markdown_file
+from handbook_audio.file_selector import find_all_handbook_files, find_handbook_file_by_pattern
+from handbook_audio.elevenlabs_client import generate_audio, check_api_available
+from handbook_audio.audio_saver import save_audio_file, save_text_file
+from handbook_audio.s3_uploader import upload_to_s3, check_s3_available
 
 # Constants
-HANDBOOK_DIR = Path(__file__).parent.parent.parent / 'contents' / 'handbook'
-OUTPUT_DIR = Path(__file__).parent.parent.parent / 'public' / 'handbook-audio'
+# Navigate from scripts/hogfm/handbook_audio/generate.py to repo root
+# generate.py -> handbook_audio -> hogfm -> scripts -> repo_root
+REPO_ROOT = Path(__file__).parent.parent.parent.parent
+HANDBOOK_DIR = REPO_ROOT / 'contents' / 'handbook'
+OUTPUT_DIR = REPO_ROOT / 'public' / 'handbook-audio'
 
 
 def process_single_file(file_path, dry_run=False, upload_s3=False):

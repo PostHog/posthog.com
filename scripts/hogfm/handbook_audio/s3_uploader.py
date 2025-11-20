@@ -14,18 +14,21 @@ except ImportError:
     HAS_BOTO3 = False
 
 # S3 Configuration
-S3_BUCKET = os.environ.get('HANDBOOK_AUDIO_S3_BUCKET', 'posthog-handbook-audio')
-S3_REGION = os.environ.get('AWS_REGION', 'us-east-1')
+S3_BUCKET = os.environ.get('HANDBOOK_AUDIO_S3_BUCKET')
+S3_REGION = os.environ.get('AWS_REGION')
 S3_PREFIX = 'handbook-audio/'  # Prefix for all audio files in the bucket
 
 
 def check_s3_available():
     """Check if S3 upload is available"""
     if not HAS_BOTO3:
-        return False, 'boto3 not installed. Run: uv pip install boto3'
+        return False, 'boto3 not installed. Run: uv sync'
     
     if not S3_BUCKET:
         return False, 'HANDBOOK_AUDIO_S3_BUCKET environment variable not set'
+    
+    if not S3_REGION:
+        return False, 'AWS_REGION environment variable not set'
     
     # Check for AWS credentials
     try:
