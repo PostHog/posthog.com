@@ -1,7 +1,6 @@
 export const microsoft_clarity = {
     name: 'Microsoft Clarity',
     key: 'microsoft_clarity',
-    // ... existing assets ...
     products: {
         product_analytics: {
             available: false,
