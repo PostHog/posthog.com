@@ -9,7 +9,7 @@ showTitle: true
 ## Roles
 
 We have three types of role:
-- Technical Account Executives - closing new business from [inbound](/handbook/growth/sales/inbound-sales) and [outbound](/handbook/growth/sales/outbound-sales) leads
+- Technical Account Executives - closing new business from [inbound](/handbook/growth/sales/inbound-sales) and [outbound](/handbook/growth/sales/outbound-sales) leads and expanding their usage of PostHog in the next 12 months
 - Technical Account Managers - [expansion](/handbook/growth/sales/expansion-and-retention) from existing customers, closing new business from [product-led leads](/handbook/growth/sales/product-led-sales)
 - Technical Account Managers called Leon and Scott - [expansion](/handbook/growth/sales/expansion-and-retention) from a small set of very high potential existing customers
 
@@ -17,7 +17,7 @@ We have three types of role:
 
 TAEs work with:
 
-- People email sales@ directly
+- People who email sales@ directly
 - People who book a demo via contact sales
 - Other triggers we see in product, supplemented by data from Clay
 
@@ -81,8 +81,8 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 **General principles**
 
 - When thinking about commission, we want to particularly incentivize:
-  - Closing annual contracts with payment up front - better retention, de-risks PostHog financially.
-  - Selling multiple products in a deal - all-in-one is how we will beat the competition.
+  - Landing new customers
+  - Quickly expanding them into new products using the relationship you've developed in onboarding them as customers.
 - We aim for a 50/50 split between base/commission when calculating OTE by default.
 
 > This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
@@ -92,10 +92,10 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 - Your quota is set for the year and then divided by 4 - this means you don't have to cram deals into the end of a quarter.
 - Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%.
 - Quota is based on $ amount sold, not credits/product usage, so you can't in theory sell a $500k deal with an 80% discount and claim the full $500k to your quota, for example. Ways to hit quota:
-  - ARR from new annual deals sold
-  - ARR from monthly customers for the first _3 months_ where you got them set up but they didn't commit to an annual contract
-    - After 3 months, either you can keep working them if you believe they'll go annual, or they'll get handed over to a TAM or CSM
-  - For multiyear contracts we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
+  - The invoice payment amount for any pre-purchased credit deals in the first 12 months after they become a paying customer.
+    - If the purchase is a renewal of an earlier credit purchase (i.e. at the end of the first year) then you'll get recognised on the difference between the initial purchase and renewal purchase.
+ - ARR from monthly customers for the first _12 months_ after you sign them up as a monthly customer as long as you are the primary account owner.
+  - For multiyear contracts, we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
     - The way we work this out is by taking the annual credit purchased by the customer and applying the standard 1 year discount to it.
   - Your quota will depend on your OTE
 - Commission is paid out quarterly, and in any case after an invoice is paid
@@ -106,7 +106,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
   - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commmission into the above 4 buckets and how you did.
-- In your first 3 months you'll be paid 100% OTE fixed.
+- In your first 3 months, you'll be paid 100% OTE fixed.
 
 ## How commission works - Technical Account Managers
 
