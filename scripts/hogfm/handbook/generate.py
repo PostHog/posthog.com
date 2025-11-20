@@ -41,10 +41,22 @@ OUTPUT_DIR = REPO_ROOT / 'public' / 'handbook-audio'
 # Allowed files list (relative to HANDBOOK_DIR)
 # This list is used by the --allowed-only mode for cron jobs
 ALLOWED_FILES = [
-    # Core values and company docs
-    'values.md',
-    
-   # Add more files here as needed
+    # Core handbook pages (in order)
+    'why-does-posthog-exist.md',      # 1. Why does PostHog exist?
+    'story.md',                        # 2. How we got here
+    'how-we-get-users.md',             # 3. How we get users
+    'who-we-build-for.md',             # 4. Who we are building for
+    'making-users-happy.md',           # 5. How we make users happy
+    'how-we-make-money.md',            # 6. How we make money
+    'low-prices.md',                   # 7. Enduringly low prices
+    'which-products.md',               # 8. Deciding which products to build
+    'wide-company.md',                 # 9. A wide company with small teams
+    'strong-team.md',                  # 10. How we're building a world-class team
+    'values.md',                       # 11. What we value
+    'world-class-engineering.md',      # 12. Providing a world-class engineering environment
+    'finance.md',                      # 13. Not running out of money
+    'future.md',                       # 14. Where are we going?
+    'help.md',                         # 15. How you can help
 ]
 
 
@@ -108,7 +120,7 @@ def main():
         print('  python scripts/handbook-audio/generate.py --all')
         print('  python scripts/handbook-audio/generate.py --dir <directory>')
         print('  python scripts/handbook-audio/generate.py --search <pattern>')
-        print('  python scripts/handbook-audio/generate.py --allowed-only')
+        print('  python scripts/handbook-audio/generate.py --allowed-only [--limit N]')
         print('  python scripts/handbook-audio/generate.py --dry-run <file-path>')
         print('  python scripts/handbook-audio/generate.py --upload-s3 <file-path>')
         print('  python scripts/handbook-audio/generate.py --all --upload-s3')
@@ -117,11 +129,28 @@ def main():
         print('  python scripts/handbook-audio/generate.py --dir engineering')
         print('  python scripts/handbook-audio/generate.py --dir engineering/operations')
         print('  python scripts/handbook-audio/generate.py --allowed-only --upload-s3  # For cron jobs')
+        print('  python scripts/handbook-audio/generate.py --allowed-only --limit 2    # First 2 files only')
         sys.exit(1)
     
     # Check for flags
     dry_run = '--dry-run' in sys.argv
     upload_s3 = '--upload-s3' in sys.argv
+    limit = None
+    
+    # Check for --limit flag
+    if '--limit' in sys.argv:
+        limit_idx = sys.argv.index('--limit')
+        if limit_idx + 1 < len(sys.argv):
+            try:
+                limit = int(sys.argv[limit_idx + 1])
+                sys.argv.pop(limit_idx + 1)  # Remove the number
+                sys.argv.pop(limit_idx)      # Remove --limit
+            except (ValueError, IndexError):
+                print('❌ --limit requires a number')
+                sys.exit(1)
+        else:
+            print('❌ --limit requires a number')
+            sys.exit(1)
     
     if dry_run:
         sys.argv.remove('--dry-run')
@@ -274,13 +303,19 @@ def main():
         print(f'   Failed: {fail_count}')
     
     elif sys.argv[1] == '--allowed-only':
-        print(f'Processing allowed files list ({len(ALLOWED_FILES)} files)\n')
+        # Apply limit if specified
+        files_to_check = ALLOWED_FILES[:limit] if limit else ALLOWED_FILES
+        
+        if limit:
+            print(f'Processing allowed files list (first {limit} of {len(ALLOWED_FILES)} files)\n')
+        else:
+            print(f'Processing allowed files list ({len(ALLOWED_FILES)} files)\n')
         
         # Build full paths from allowed files list and track missing files
         files = []
         missing_files = []
         
-        for relative_path in ALLOWED_FILES:
+        for relative_path in files_to_check:
             file_path = HANDBOOK_DIR / relative_path
             if file_path.exists():
                 files.append(file_path)
