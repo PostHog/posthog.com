@@ -189,9 +189,11 @@ def main():
   write_audio_body_to_file(audio)
   download_s3_static_files()
   merge_audio_files()
-  key = f"changehog/{datetime.now().strftime('%GW%V')}.mp3"
-  write_to_s3("/tmp/body.mp3", S3_BUCKET, key)
-  write_to_s3("/tmp/final-output.mp3", S3_BUCKET, key)
+  now = datetime.now().strftime("%GW%V")
+  body_key = f"changehog-raw/{now}.mp3"
+  write_to_s3("/tmp/body.mp3", S3_BUCKET, body_key)
+  final_key = f"changehog/{now}.mp3"
+  write_to_s3("/tmp/final-output.mp3", S3_BUCKET, final_key)
 
 
 if __name__ == "__main__":
