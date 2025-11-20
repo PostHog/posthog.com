@@ -26,6 +26,7 @@ export const fullstory = {
                 ai_analysis: false,
                 autocapture: true,
                 cohorts: true,
+                conversion_funnels: true,
                 custom_events: true,
                 custom_properties: true,
                 monetization_analytics: false,

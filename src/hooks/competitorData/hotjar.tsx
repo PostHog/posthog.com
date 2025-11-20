@@ -17,6 +17,7 @@ export const hotjar = {
                 cohorts: false,
                 custom_events: true,
                 custom_properties: true,
+                conversion_funnels: true,
                 monetization_analytics: false,
                 predictive_insights: false,
                 real_time_view: false,

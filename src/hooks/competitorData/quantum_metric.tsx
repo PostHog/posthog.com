@@ -1,8 +1,8 @@
-export const contentsquare = {
-    name: 'Contentsquare',
-    key: 'contentsquare',
+export const quantum_metric = {
+    name: 'Quantum Metric',
+    key: 'quantum_metric',
     assets: {
-        icon: '/images/competitors/contentsquare.svg',
+        icon: '/images/competitors/quantum-metric.svg',
     },
     products: {
         product_analytics: {
@@ -11,6 +11,8 @@ export const contentsquare = {
                 autocapture: true,
                 cohorts: true,
                 conversion_funnels: true,
+                alerts: true,
+                anomaly_detection: true,
             },
             funnels: {
                 available: true,
@@ -18,16 +20,11 @@ export const contentsquare = {
             user_paths: {
                 available: true,
             },
-            group_analytics: {
-                available: false,
-            },
         },
         session_replay: {
             available: true,
-            features: {
-                crash_reports: true,
-                console_logs: true,
-                network_monitor: true,
+            pricing: {
+                free_tier: false,
             },
             platform_support: {
                 features: {
@@ -39,6 +36,7 @@ export const contentsquare = {
                 features: {
                     console_logs: true,
                     network_monitor: true,
+                    performance_monitoring: true,
                 },
             },
             ai: {
@@ -51,22 +49,17 @@ export const contentsquare = {
             available: true,
             features: {
                 clickmaps: true,
-                dead_taps: false,
-                rage_clicks: true,
-                rage_taps: false,
                 scrollmaps: true,
+                rage_clicks: true,
             },
-        },
-        experiments: {
-            available: false,
         },
         feature_flags: {
             available: false,
         },
-        surveys: {
+        experiments: {
             available: false,
         },
-        data_warehouse: {
+        surveys: {
             available: false,
         },
     },
@@ -75,15 +68,15 @@ export const contentsquare = {
             open_source: false,
         },
         pricing: {
-            self_serve: false,
-            transparent_pricing: false,
             free_tier: false,
+            transparent_pricing: false,
         },
         security: {
             gdpr_ready: true,
-            hipaa_ready: false,
             soc2_certified: true,
-            user_privacy_options: true,
         },
+    },
+    pricing: {
+        model: 'Quote-based',
     },
 }
