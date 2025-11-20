@@ -11,6 +11,7 @@ import { EventItem } from './types'
 import { IconBuilding, IconBed, IconBurger, IconCoffee, IconLaptop, IconTelescope } from '@posthog/icons'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { createAlienSkyboxLayer, loadThreeJS } from './HogAlien'
+import { useUser } from 'hooks/useUser'
 
 export const LAYER_PEOPLE = 'layer-people'
 export const LAYER_EVENTS_UPCOMING = 'layer-events-upcoming'
@@ -59,6 +60,7 @@ const computeOffsets = (count: number, baseRadius: number): Array<{ dx: number; 
 
 export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
+    const { getJwt } = useUser()
     useEffect(() => {
         setIsClient(true)
     }, [])
@@ -558,67 +560,84 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
             const activePlaceTypes = Object.values(PlaceType).filter((pt) => currentEnabled.includes(pt))
             if (activePlaceTypes.length > 0) {
                 const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
-                const allPlaces = getPlaces()
-                const activePlaces = allPlaces.filter((p) => activePlaceTypes.includes(p.type))
-                const groups = activePlaces.reduce((acc, p) => {
-                    const key = `${p.longitude.toFixed(4)},${p.latitude.toFixed(4)}`
-                    if (!acc[key]) {
-                        acc[key] = {
-                            coords: { longitude: p.longitude, latitude: p.latitude },
-                            places: [] as typeof allPlaces,
-                        }
-                    }
-                    acc[key].places.push(p)
-                    return acc
-                }, {} as Record<string, { coords: Coordinates; places: typeof allPlaces }>)
-                Object.values(groups).forEach(({ coords: { longitude, latitude }, places }) => {
-                    const offsets = computeOffsets(places.length, jitterRadius)
-                    places.forEach((pl, idx) => {
-                        const { dx, dy } = offsets[idx]
-                        const el = document.createElement('div')
-                        el.className =
-                            'w-[24px] h-[24px] rounded-full bg-orange border-2 border-white shadow-md flex items-center justify-center'
-                        // Icon based on place type
-                        const lowerType = String(pl.type || '').toLowerCase()
-                        const icon =
-                            lowerType === 'hotel' ? (
-                                <IconBuilding className="w-[24px] h-[24px] p-1" />
-                            ) : lowerType === 'airbnb' ? (
-                                <IconBed className="w-[24px] h-[24px] p-1" />
-                            ) : lowerType === 'restaurant' ? (
-                                <IconBurger className="w-[24px] h-[24px] p-1" />
-                            ) : lowerType === 'cafe' ? (
-                                <IconCoffee className="w-[24px] h-[24px] p-1" />
-                            ) : lowerType === 'co-working' ? (
-                                <IconLaptop className="w-[24px] h-[24px] p-1" />
-                            ) : lowerType === 'offsite' ? (
-                                <IconTelescope className="w-[24px] h-[24px] p-1" />
-                            ) : (
-                                <IconBuilding className="w-[24px] h-[24px] p-1" />
-                            )
-                        const iconWrapper = document.createElement('div')
-                        iconWrapper.className = 'text-white leading-none flex items-center justify-center'
-                        iconWrapper.innerHTML = renderToStaticMarkup(icon)
-                        el.appendChild(iconWrapper)
-                        const popupHtml = `
-                            <div class="text-sm max-w-[240px]">
-                                <div class="font-semibold mb-1">${pl.name}</div>
-                                ${pl.address ? `<div class="text-secondary mb-1">${pl.address}</div>` : ''}
-                                <div class="text-secondary">Lat ${pl.latitude.toFixed(5)}, Lng ${pl.longitude.toFixed(
-                            5
-                        )}</div>
-                                <div class="mt-1 text-secondary capitalize">${pl.type}</div>
-                            </div>`
-                        const mapboxgl = getMapbox()
-                        if (!mapboxgl) return
-                        const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
-                        const marker = new mapboxgl.Marker({ element: el })
-                            .setLngLat([longitude + dx, latitude + dy])
-                            .setPopup(popup)
-                            .addTo(mapRef.current)
-                        marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
-                        marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
-                        markersRef.current.push(marker)
+                getJwt().then((jwt) => {
+                    if (!jwt) return
+                    getPlaces(jwt).then((allPlaces: any[]) => {
+                        const activePlaces = (allPlaces as any[]).filter((p: any) =>
+                            activePlaceTypes.includes(p.type as PlaceType)
+                        )
+                        const groups = (activePlaces as any[]).reduce(
+                            (acc: Record<string, { coords: Coordinates; places: any[] }>, p: any) => {
+                                const lon = Number(p.longitude)
+                                const lat = Number(p.latitude)
+                                const key = `${lon.toFixed(4)},${lat.toFixed(4)}`
+                                if (!acc[key]) {
+                                    acc[key] = {
+                                        coords: { longitude: lon, latitude: lat },
+                                        places: [] as any[],
+                                    }
+                                }
+                                acc[key].places.push(p as any)
+                                return acc
+                            },
+                            {} as Record<string, { coords: Coordinates; places: any[] }>
+                        )
+                        ;(Object.values(groups) as Array<{ coords: Coordinates; places: any[] }>).forEach(
+                            ({ coords: { longitude, latitude }, places }) => {
+                                const offsets = computeOffsets(places.length, jitterRadius)
+                                ;(places as any[]).forEach((pl: any, idx: number) => {
+                                    const { dx, dy } = offsets[idx]
+                                    const el = document.createElement('div')
+                                    el.className =
+                                        'w-[24px] h-[24px] rounded-full bg-orange border-2 border-white shadow-md flex items-center justify-center'
+                                    // Icon based on place type
+                                    const lowerType = String((pl as any).type || '').toLowerCase()
+                                    const icon =
+                                        lowerType === 'hotel' ? (
+                                            <IconBuilding className="w-[24px] h-[24px] p-1" />
+                                        ) : lowerType === 'airbnb' ? (
+                                            <IconBed className="w-[24px] h-[24px] p-1" />
+                                        ) : lowerType === 'restaurant' ? (
+                                            <IconBurger className="w-[24px] h-[24px] p-1" />
+                                        ) : lowerType === 'cafe' ? (
+                                            <IconCoffee className="w-[24px] h-[24px] p-1" />
+                                        ) : lowerType === 'co-working' ? (
+                                            <IconLaptop className="w-[24px] h-[24px] p-1" />
+                                        ) : lowerType === 'offsite' ? (
+                                            <IconTelescope className="w-[24px] h-[24px] p-1" />
+                                        ) : (
+                                            <IconBuilding className="w-[24px] h-[24px] p-1" />
+                                        )
+                                    const iconWrapper = document.createElement('div')
+                                    iconWrapper.className = 'text-white leading-none flex items-center justify-center'
+                                    iconWrapper.innerHTML = renderToStaticMarkup(icon)
+                                    el.appendChild(iconWrapper)
+                                    const popupHtml = `
+                                    <div class="text-sm max-w-[240px]">
+                                         <div class="font-semibold mb-1">${(pl as any).name}</div>
+                                         ${
+                                             (pl as any).address
+                                                 ? `<div class="text-secondary mb-1">${(pl as any).address}</div>`
+                                                 : ''
+                                         }
+                                         <div class="text-secondary">Lat ${Number((pl as any).latitude).toFixed(
+                                             5
+                                         )}, Lng ${Number((pl as any).longitude).toFixed(5)}</div>
+                                         <div class="mt-1 text-secondary capitalize">${(pl as any).type}</div>
+                                    </div>`
+                                    const mapboxgl = getMapbox()
+                                    if (!mapboxgl) return
+                                    const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+                                    const marker = new mapboxgl.Marker({ element: el })
+                                        .setLngLat([longitude + dx, latitude + dy])
+                                        .setPopup(popup)
+                                        .addTo(mapRef.current)
+                                    marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                                    marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                                    markersRef.current.push(marker)
+                                })
+                            }
+                        )
                     })
                 })
             }
@@ -785,6 +804,7 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                                 address,
                                 prevMarker: searchMarkerRef.current,
                                 searchRef,
+                                getJwt,
                             })
                             if (newMarker) {
                                 searchMarkerRef.current = newMarker

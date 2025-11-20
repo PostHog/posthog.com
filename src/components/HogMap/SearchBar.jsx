@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState, useImperativeHandle } from "react"
-import { getPlaces, setPlaces } from "./data"
+import { addPlace } from "./data"
 import { PlaceType } from "./types"
 
 function SearchBarImpl({
@@ -110,6 +110,7 @@ function SearchBarImpl({
     }, [])
 
     const handleSelect = async (item) => {
+        console.log(item)
         try {
             setQuery(item.name)
             setIsOpen(false)
@@ -243,6 +244,7 @@ export function createSearchMarker({
     address,
     prevMarker,
     searchRef,
+    getJwt,
 }) {
     if (!map) return null
     // Recenter and zoom in a bit
@@ -365,7 +367,7 @@ export function createSearchMarker({
             }
         }
     }
-    addBtn.onclick = () => {
+    addBtn.onclick = async () => {
         try {
             const selected = (select && select.value) || PlaceType.CAFE
             const type =
@@ -382,8 +384,12 @@ export function createSearchMarker({
                 longitude: Number(longitude),
                 type,
             }
-            const nextPlaces = [...getPlaces(), item]
-            setPlaces(nextPlaces)
+            try {
+                const jwt = typeof getJwt === 'function' ? await getJwt() : null
+                if (jwt) {
+                    await addPlace(jwt, { name: item.name, address: item.address, type: item.type })
+                }
+            } catch {}
             try {
                 window.dispatchEvent(new CustomEvent('hogmap:places-updated'))
             } catch {}

@@ -121,6 +121,9 @@ export const addPlace = async (
     jwt: string,
     payload: { name: string; address: string; type: string }
 ): Promise<Record<string, unknown>> => {
+    console.log('addPlace', payload)
+    console.log('jwt', jwt)
+    console.log('process.env.GATSBY_SQUEAK_API_HOST', process.env.GATSBY_SQUEAK_API_HOST)
     const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/places`, {
         method: 'POST',
         body: JSON.stringify({ data: payload }),
