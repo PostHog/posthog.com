@@ -86,25 +86,7 @@ So you get conservative in ways that feel responsible but are actually corrosive
 
 I watched this happen to our process for building products. At the start, we would say “we need to ship this feature,” have *maybe* one conversation, and get it done.
 
-This evolved into a process of pitches, presentations, and approvals.
-
-1. Have an idea
-
-2. Put together a deck
-
-3. Present it to your manager
-
-4. Revise it
-
-5. Present it to their manager and get feedback
-
-6. Incorporate that feedback
-
-7. Present it to a cross-functional review
-
-8. Adjust based on legal’s concerns
-
-9. Get it approved?
+This evolved into a process of pitches, presentations, and approvals:
 
 ![Approval flow](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_11_18_at_18_21_15_2x_fc5afca6d8.png)
 
