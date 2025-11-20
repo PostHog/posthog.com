@@ -54,7 +54,6 @@ import { pendo } from '../../hooks/competitorData/pendo'
 import { piwik_pro } from '../../hooks/competitorData/piwik_pro'
 import { plausible } from '../../hooks/competitorData/plausible'
 import { posthog } from '../../hooks/competitorData/posthog'
-import { quantum_metric } from '../../hooks/competitorData/quantum_metric'
 import { raygun } from '../../hooks/competitorData/raygun'
 import { replay_io } from '../../hooks/competitorData/replay_io'
 import { rollbar } from '../../hooks/competitorData/rollbar'
@@ -95,7 +94,6 @@ import { revenueAnalyticsFeatures } from '../../hooks/featureDefinitions/revenue
 import { sessionReplayFeatures } from '../../hooks/featureDefinitions/session_replay'
 import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
 import { webAnalyticsFeatures } from '../../hooks/featureDefinitions/web_analytics'
-import { quantum_metric } from 'hooks/competitorData/quantum_metric'
 
 interface RowConfig {
     // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
@@ -626,7 +624,6 @@ export default function ProductComparisonTable({
         piwik_pro,
         plausible,
         posthog,
-        quantum_metric,
         raygun,
         replay_io,
         rollbar,
