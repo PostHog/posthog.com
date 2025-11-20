@@ -4569,10 +4569,10 @@
     react-shadow "^20.6.0"
     uuid "^12.0.0"
 
-"@posthog/icons@0.33.2":
-  version "0.33.2"
-  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.33.2.tgz#1e1226b9a188d051edb13f14a02c047c649b9e48"
-  integrity sha512-esTrM3cUChJwW/OsB4YEMMm0stHPyhaiaWxbKE8vaYdhfDw7ULSNsc16nM0TGFkhJ2VnPphxLT+YkAOloj92uw==
+"@posthog/icons@0.36.0":
+  version "0.36.0"
+  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.36.0.tgz#f951708cb2726fcd671029e49033e8e36eab1b0b"
+  integrity sha512-xP8OZqzQf9qYDJUMMy/176wMSpVDN8emgpwWYfYcCHcEsvZfI78650b2Qm1pBS8BSPN5YyqaXixK2iNMvrfBGw==
 
 "@preact/signals-core@^1.2.3":
   version "1.12.1"

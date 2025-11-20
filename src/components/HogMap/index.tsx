@@ -8,6 +8,8 @@ import SearchBar, { createSearchMarker } from './SearchBar'
 import { PlaceType, EventType } from './types'
 import { places as userPlaces } from './data'
 import { EventItem } from './types'
+import { IconBuilding, IconBed, IconBurger, IconCoffee, IconLaptop, IconTelescope } from '@posthog/icons'
+import { renderToStaticMarkup } from 'react-dom/server'
 
 export const LAYER_PEOPLE = 'layer-people'
 export const LAYER_EVENTS_UPCOMING = 'layer-events-upcoming'
@@ -573,24 +575,29 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                         const { dx, dy } = offsets[idx]
                         const el = document.createElement('div')
                         el.className =
-                            'w-[18px] h-[18px] rounded-full bg-orange border-2 border-white shadow-md flex items-center justify-center'
-                        // Two-letter code for type
-                        const typeToCode = (t: string) => {
-                            const map: Record<string, string> = {
-                                cafe: 'CO', // coffee
-                                'co-working': 'CW',
-                                hotel: 'HO',
-                                restaurant: 'RE',
-                                airbnb: 'AI',
-                                offsite: 'OF',
-                            }
-                            const lower = String(t || '').toLowerCase()
-                            return map[lower] || lower.slice(0, 2).toUpperCase() || 'PL'
-                        }
-                        const labelEl = document.createElement('span')
-                        labelEl.className = 'text-white text-[9px] font-bold leading-none select-none'
-                        labelEl.textContent = typeToCode(pl.type as unknown as string)
-                        el.appendChild(labelEl)
+                            'w-[24px] h-[24px] rounded-full bg-orange border-2 border-white shadow-md flex items-center justify-center'
+                        // Icon based on place type
+                        const lowerType = String(pl.type || '').toLowerCase()
+                        const icon =
+                            lowerType === 'hotel' ? (
+                                <IconBuilding className="w-[24px] h-[24px] p-1" />
+                            ) : lowerType === 'airbnb' ? (
+                                <IconBed className="w-[24px] h-[24px] p-1" />
+                            ) : lowerType === 'restaurant' ? (
+                                <IconBurger className="w-[24px] h-[24px] p-1" />
+                            ) : lowerType === 'cafe' ? (
+                                <IconCoffee className="w-[24px] h-[24px] p-1" />
+                            ) : lowerType === 'co-working' ? (
+                                <IconLaptop className="w-[24px] h-[24px] p-1" />
+                            ) : lowerType === 'offsite' ? (
+                                <IconTelescope className="w-[24px] h-[24px] p-1" />
+                            ) : (
+                                <IconBuilding className="w-[24px] h-[24px] p-1" />
+                            )
+                        const iconWrapper = document.createElement('div')
+                        iconWrapper.className = 'text-white leading-none flex items-center justify-center'
+                        iconWrapper.innerHTML = renderToStaticMarkup(icon)
+                        el.appendChild(iconWrapper)
                         const popupHtml = `
                             <div class="text-sm max-w-[240px]">
                                 <div class="font-semibold mb-1">${pl.name}</div>
