@@ -203,15 +203,24 @@ def generate_audio(content, dry_run=False):
         dry_run: If True, skip actual API call
     
     Returns:
-        bytes: Audio data (or fake data in dry-run mode)
+        tuple: (audio_data, cost_metrics) where cost_metrics contains:
+            - character_count: Number of characters processed
+            - request_ids: List of request IDs from API
+            - chunks_count: Number of chunks processed
         None: On error
     """
     if dry_run:
         print(f'  🎙️  [DRY RUN] Would generate audio for: {content["title"]}')
         full_text = f'{content["title"]}.\n\n{content["text"]}'
-        print(f'  ℹ️  Text length: {len(full_text)} characters')
+        character_count = len(full_text)
+        print(f'  ℹ️  Text length: {character_count} characters')
         print(f'  ℹ️  First 200 chars: {full_text[:200]}...')
-        return b'fake-audio-data'
+        cost_metrics = {
+            'character_count': character_count,
+            'request_ids': ['dry-run-request-id'],
+            'chunks_count': 1
+        }
+        return b'fake-audio-data', cost_metrics
     
     if not HAS_ELEVENLABS:
         print('❌ elevenlabs SDK not installed. Run: uv pip install elevenlabs')
@@ -224,6 +233,8 @@ def generate_audio(content, dry_run=False):
     try:
         # Add title at the beginning
         full_text = f'{content["title"]}.\n\n{content["text"]}'
+        character_count = len(full_text)
+        request_ids = []
         
         # Check if we need to chunk the text
         # Use sentence-based chunking to avoid timeouts with smaller, more manageable chunks
@@ -231,7 +242,7 @@ def generate_audio(content, dry_run=False):
         
         if len(sentences) > SENTENCES_PER_CHUNK:
             print(f'  🎙️  Generating audio for: {content["title"]} (long content, will chunk)')
-            print(f'      Text length: {len(full_text)} chars, {len(sentences)} sentences')
+            print(f'      Text length: {character_count} chars, {len(sentences)} sentences')
             
             # Split into chunks by sentences
             chunks = split_text_into_chunks_by_sentences(full_text, SENTENCES_PER_CHUNK)
@@ -242,21 +253,40 @@ def generate_audio(content, dry_run=False):
             for i, chunk in enumerate(chunks):
                 chunk_sentences = len(split_text_into_sentences(chunk))
                 print(f'      Chunk {i+1}/{len(chunks)}: {len(chunk)} chars, {chunk_sentences} sentences')
-                audio_data = _generate_audio_chunk(chunk, i+1, len(chunks))
-                if audio_data is None:
+                result = _generate_audio_chunk(chunk, i+1, len(chunks))
+                if result is None:
                     return None
+                audio_data, request_id = result
                 audio_parts.append(audio_data)
+                if request_id:
+                    request_ids.append(request_id)
             
             # Concatenate all audio parts
             combined_audio = b''.join(audio_parts)
             size_mb = len(combined_audio) / 1024 / 1024
             print(f'  ✓ Generated {size_mb:.2f} MB audio from {len(chunks)} chunks')
-            return combined_audio
+            
+            cost_metrics = {
+                'character_count': character_count,
+                'request_ids': request_ids,
+                'chunks_count': len(chunks)
+            }
+            return combined_audio, cost_metrics
         
         # Single request for short content
         print(f'  🎙️  Generating audio for: {content["title"]}')
-        print(f'      Text length: {len(full_text)} chars, {len(sentences)} sentences')
-        return _generate_audio_chunk(full_text, 1, 1)
+        print(f'      Text length: {character_count} chars, {len(sentences)} sentences')
+        result = _generate_audio_chunk(full_text, 1, 1)
+        if result is None:
+            return None
+        audio_data, request_id = result
+        
+        cost_metrics = {
+            'character_count': character_count,
+            'request_ids': [request_id] if request_id else [],
+            'chunks_count': 1
+        }
+        return audio_data, cost_metrics
     except Exception as e:
         print(f'  ❌ Error generating audio: {e}')
         return None
@@ -267,7 +297,9 @@ def _generate_audio_chunk(text, chunk_num, total_chunks):
     Generate audio for a single text chunk using the ElevenLabs SDK
     
     Returns:
-        bytes: Audio data
+        tuple: (audio_data, request_id) where:
+            - audio_data: bytes of audio
+            - request_id: request ID from response headers (for tracking)
         None: On error
     """
     # Try with retry on error
@@ -277,9 +309,9 @@ def _generate_audio_chunk(text, chunk_num, total_chunks):
             # Initialize the ElevenLabs client
             client = ElevenLabs(api_key=ELEVENLABS_API_KEY)
             
-            # Generate audio using the SDK
-            # The SDK returns an iterator of audio chunks
-            audio_generator = client.text_to_speech.convert(
+            # Generate audio using the SDK with raw response to capture headers
+            # Using with_raw_response allows us to access response headers including request-id
+            with client.text_to_speech.with_raw_response.convert(
                 voice_id=ELEVENLABS_VOICE_ID,
                 model_id="eleven_v3",
                 text=text,
@@ -287,10 +319,12 @@ def _generate_audio_chunk(text, chunk_num, total_chunks):
                     stability=0.5,
                     similarity_boost=0.75
                 )
-            )
-            
-            # Collect all audio chunks into bytes
-            audio_data = b''.join(audio_generator)
+            ) as response:
+                # Extract request-id from headers for tracking
+                request_id = response._response.headers.get("request-id")
+                
+                # Collect all audio chunks into bytes
+                audio_data = b''.join(chunk for chunk in response.data)
             
             size_mb = len(audio_data) / 1024 / 1024
             
@@ -299,7 +333,7 @@ def _generate_audio_chunk(text, chunk_num, total_chunks):
             else:
                 print(f'      ✓ Chunk {chunk_num}/{total_chunks}: {size_mb:.2f} MB')
             
-            return audio_data
+            return audio_data, request_id
             
         except Exception as e:
             if attempt < max_retries - 1:

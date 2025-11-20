@@ -44,6 +44,36 @@ def find_handbook_file_by_pattern(handbook_dir, pattern):
     return matching_files
 
 
+def find_handbook_files_in_directory(handbook_dir, target_dir):
+    """
+    Find all handbook files in a specific directory (and subdirectories)
+    
+    Args:
+        handbook_dir: Root handbook directory (e.g., contents/handbook)
+        target_dir: Target subdirectory relative to handbook_dir (e.g., 'engineering' or 'engineering/operations')
+    
+    Returns:
+        List of file paths in the target directory
+    """
+    # Resolve the full path to the target directory
+    target_path = handbook_dir / target_dir
+    
+    if not target_path.exists():
+        return []
+    
+    if not target_path.is_dir():
+        return []
+    
+    files = []
+    for file_path in target_path.rglob('*'):
+        if file_path.is_file() and file_path.suffix in ['.md', '.mdx']:
+            # Skip _snippets and _includes
+            if '_snippets' not in str(file_path) and '_includes' not in str(file_path):
+                files.append(file_path)
+    
+    return sorted(files)
+
+
 def get_handbook_file_info(handbook_dir):
     """Get summary information about handbook files"""
     files = find_all_handbook_files(handbook_dir)

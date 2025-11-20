@@ -97,6 +97,23 @@ uv run handbook-audio --dry-run contents/handbook/values.md
 uv run handbook-audio contents/handbook/values.md
 ```
 
+### Directory mode 🆕
+
+Generate all files in a specific directory (recursive):
+
+```bash
+# Generate all files in engineering/ai/
+uv run handbook-audio --dir engineering/ai
+
+# Generate all engineering docs (includes subdirectories)
+uv run handbook-audio --dir engineering
+
+# Test without API calls
+uv run handbook-audio --dry-run --dir engineering/operations
+```
+
+See [DIRECTORY_MODE.md](./DIRECTORY_MODE.md) for details.
+
 ### Search and generate
 
 ```bash
@@ -111,6 +128,23 @@ uv run handbook-audio --search "people"
 # Generate audio for all 260 handbook files
 uv run handbook-audio --all
 ```
+
+### Allowed files only (for cron jobs) 🆕
+
+Process a hardcoded list of allowed files - perfect for automated cron jobs:
+
+```bash
+# Process only files in the allowed list
+uv run handbook-audio --allowed-only
+
+# With S3 upload (typical for cron jobs)
+uv run handbook-audio --allowed-only --upload-s3
+
+# Dry run
+uv run handbook-audio --dry-run --allowed-only
+```
+
+The list is hardcoded in `generate.py` under `ALLOWED_FILES`. Edit the list to add/remove files. See [ALLOWED_FILES_MODE.md](./ALLOWED_FILES_MODE.md) for details on setting up cron jobs.
 
 ## How it works
 
@@ -142,7 +176,7 @@ uv run handbook-audio --all
 Converts Markdown/MDX files to speech-friendly text.
 
 ```python
-from handbook_audio.markdown_processor import process_markdown_file
+from handbook.markdown_processor import process_markdown_file
 
 result = process_markdown_file(
     file_path="/path/to/file.md",
@@ -159,7 +193,7 @@ result = process_markdown_file(
 ### `file_selector.py`
 
 ```python
-from handbook_audio.file_selector import (
+from handbook.file_selector import (
     find_all_handbook_files,
     find_handbook_file_by_pattern,
     get_handbook_file_info
@@ -180,7 +214,7 @@ info = get_handbook_file_info(handbook_dir)
 ElevenLabs API client with automatic chunking for long content.
 
 ```python
-from handbook_audio.elevenlabs_client import (
+from handbook.elevenlabs_client import (
     generate_audio,
     check_api_available,
     get_voice_info
@@ -191,7 +225,7 @@ available, message = check_api_available()
 
 # Generate audio (automatically chunks if needed)
 content = {'title': 'My Page', 'text': 'Some text...'}
-audio_data = generate_audio(content, dry_run=False)
+audio_data, cost_metrics = generate_audio(content, dry_run=False)
 ```
 
 **Chunking behavior:**
@@ -204,8 +238,9 @@ audio_data = generate_audio(content, dry_run=False)
 ### `audio_saver.py`
 
 ```python
-from handbook_audio.audio_saver import (
+from handbook.audio_saver import (
     save_audio_file,
+    save_cost_file,
     audio_file_exists
 )
 
@@ -213,6 +248,14 @@ from handbook_audio.audio_saver import (
 save_audio_file(
     slug="engineering/operations/on-call",
     audio_data=b"...",
+    output_dir=Path("public/handbook-audio"),
+    dry_run=False
+)
+
+# Save cost metrics
+save_cost_file(
+    slug="engineering/operations/on-call",
+    cost_metrics={'character_count': 1234, 'chunks_count': 1, 'request_ids': ['abc123']},
     output_dir=Path("public/handbook-audio"),
     dry_run=False
 )
@@ -263,7 +306,7 @@ python scripts/handbook-audio/generate.py --all
 
 ## S3 Upload Support
 
-Generated audio files can be automatically uploaded to S3 with the `--upload-s3` flag:
+Generated audio files and associated files can be automatically uploaded to S3 with the `--upload-s3` flag:
 
 ```bash
 # Generate and upload to S3
@@ -273,15 +316,26 @@ python scripts/handbook-audio/generate.py --upload-s3 contents/handbook/values.m
 python scripts/handbook-audio/generate.py --all --upload-s3
 ```
 
+### What gets uploaded
+
+For each handbook page, **three files** are uploaded to S3:
+- `.mp3` - Audio file
+- `.elevenlabs-input.txt` - Parsed text sent to ElevenLabs
+- `.cost.json` - Cost metrics and tracking data
+
 ### S3 File Structure
 
 Files are uploaded maintaining the same structure as the handbook:
 
 ```
-s3://your-bucket/handbook-audio/
+s3://your-bucket/handbook/
 ├── values.mp3
+├── values.elevenlabs-input.txt
+├── values.cost.json
 ├── product/
 │   ├── releasing-as-beta.mp3
+│   ├── releasing-as-beta.elevenlabs-input.txt
+│   ├── releasing-as-beta.cost.json
 │   └── metrics.mp3
 ├── engineering/
 │   ├── posthog-com/
@@ -293,6 +347,8 @@ s3://your-bucket/handbook-audio/
 
 This makes it easy to:
 - Map handbook pages to audio files
+- Access the parsed text used for generation
+- Track costs across all pages
 - Organize files by section
 - Generate CDN URLs programmatically
 
