@@ -29,7 +29,7 @@ The LLM analytics dashboard is fully customizable. You can add your own insights
 
 1. Head to the [LLM analytics dashboard](https://app.posthog.com/llm-analytics)
 2. Click the **Edit dashboard** button in the top right
-3. Click the **Add text card** button to add labels, or the **Add insight** button to import insights.
+3. Click the **Add text card** button to add labels, or the **Add insight** button to import insights
 
 Learn more about customizing dashboards in our [dashboard docs](/docs/product-analytics/dashboards).
 
