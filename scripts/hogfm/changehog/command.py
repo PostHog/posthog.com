@@ -101,6 +101,7 @@ def merge_audio_files() -> None:
     main_file,
     "-filter_complex",
     "[1]adelay=10000|10000[delayed];[0][delayed]amix=inputs=2:duration=longest:normalize=0",
+    "-y",
     intermediate_file,
   ]
   subprocess.run(intro_command, check=True, capture_output=False)
@@ -114,6 +115,7 @@ def merge_audio_files() -> None:
     outro_file,
     "-filter_complex",
     f"[1]adelay={delay_ms}|{delay_ms}[delayed];[0][delayed]amix=inputs=2:duration=longest:normalize=0",
+    "-y",
     output_file,
   ]
   subprocess.run(outro_command, check=True, capture_output=False)
