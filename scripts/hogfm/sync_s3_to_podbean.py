@@ -11,15 +11,6 @@ Usage:
     uv run python sync_s3_to_podbean.py
     uv run python sync_s3_to_podbean.py --dry-run
     uv run python sync_s3_to_podbean.py --status publish
-
-Environment variables required:
-    - AWS_ACCESS_KEY_ID
-    - AWS_SECRET_ACCESS_KEY
-    - AWS_REGION (default: us-east-1)
-    - S3_BUCKET
-    - S3_PREFIX (optional, default: "")
-    - PODBEAN_CLIENT_ID
-    - PODBEAN_CLIENT_SECRET
 """
 
 import os
@@ -207,18 +198,6 @@ def get_content_type(filename: str) -> str:
     return content_types.get(ext, "audio/mpeg")
 
 
-def extract_episode_title(filename: str) -> str:
-    """
-    Extract episode title from filename.
-
-    Removes extension and replaces common separators with spaces.
-    Override this function for custom title extraction logic.
-    """
-    name = Path(filename).stem
-    # Replace common separators with spaces
-    for sep in ["-", "_"]:
-        name = name.replace(sep, " ")
-    return name.strip()
 
 
 def find_matching_episode(filename: str, episodes: list[dict]) -> Optional[dict]:
@@ -350,13 +329,17 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft"):
             upload_file_to_presigned_url(auth["presigned_url"], tmp_path, content_type)
 
             # Publish episode
-            title = extract_episode_title(filename)
+
+            chapter = Path(filename).stem.replace("-", " ").replace("_", " ").strip()
+            title = f'Handbook | {chapter}'
+            content = f"AI generated audio for the {chapter} chapter of the PostHog Handbook."
+
             print(f"   Publishing episode: {title}")
             episode = publish_episode(
                 token=token,
                 file_key=auth["file_key"],
                 title=title,
-                content="",  # Can be customized
+                content=content,
                 status=publish_status,
             )
 
