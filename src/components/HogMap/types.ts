@@ -7,12 +7,12 @@ export enum EventType {
 }
 
 export enum PlaceType {
-    RESTAURANT = 'restaurant',
-    CAFE = 'cafe',
-    HOTEL = 'hotel',
-    AIRBNB = 'airbnb',
-    CO_WORKING = 'co-working',
-    OFFSITE = 'offsite',
+    RESTAURANT = 'Restaurant',
+    COFFEE = 'Coffee',
+    HOTEL = 'Hotel',
+    AIRBNB = 'Airbnb',
+    CO_WORKING = 'Co-working',
+    OFFSITE = 'Offsite',
 }
 export interface PlaceItem {
     id: number

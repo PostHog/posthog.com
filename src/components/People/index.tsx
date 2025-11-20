@@ -61,9 +61,9 @@ export const TeamMember = (props: any) => {
     // Format start date for tooltip
     const formattedStartDate = startDate
         ? new Date(startDate).toLocaleDateString('en-US', {
-            month: 'long',
-            year: 'numeric',
-        })
+              month: 'long',
+              year: 'numeric',
+          })
         : null
 
     // Check role for custom tooltip text (customer-facing roles take priority)
@@ -119,8 +119,8 @@ export const TeamMember = (props: any) => {
                                                 pineappleOnPizza === true
                                                     ? 'StickerPineappleYes'
                                                     : pineappleOnPizza === false
-                                                        ? 'StickerPineappleNo'
-                                                        : 'StickerPineappleUnknown'
+                                                    ? 'StickerPineappleNo'
+                                                    : 'StickerPineappleUnknown'
                                             }
                                         />
                                     }
@@ -128,8 +128,8 @@ export const TeamMember = (props: any) => {
                                     {pineappleOnPizza === true
                                         ? 'Loves'
                                         : pineappleOnPizza === false
-                                            ? 'Hates'
-                                            : 'Undecided about'}{' '}
+                                        ? 'Hates'
+                                        : 'Undecided about'}{' '}
                                     pineapple on pizza
                                 </Tooltip>
                             </ZoomHover>
@@ -391,9 +391,11 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
             <ScrollArea className="h-full">
                 <div className="@lg:columns-2 gap-4 mb-4">
                     <p className="mt-0">
-                        We're proud to be a team of <strong>{teamSize}</strong> misfits distributed <Link to={`/people/map`} state={{ newWindow: true }}>
+                        We're proud to be a team of <strong>{teamSize}</strong> misfits distributed{' '}
+                        <Link to={`/people/map`} state={{ newWindow: true }}>
                             all across the globe
-                        </Link>. Why?
+                        </Link>
+                        . Why?
                     </p>
 
                     <p>Building an unusually great company starts with an unusual team.</p>
