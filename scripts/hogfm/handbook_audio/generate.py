@@ -92,7 +92,7 @@ def main():
         s3_available, s3_message = check_s3_available()
         if not s3_available and not dry_run:
             print(f'⚠️  S3 upload disabled: {s3_message}')
-            print('   Set HANDBOOK_AUDIO_S3_BUCKET and configure AWS credentials')
+            print('   Set S3_BUCKET and configure AWS credentials')
             print('   Or run with --dry-run to test')
             upload_s3 = False
         elif s3_available:

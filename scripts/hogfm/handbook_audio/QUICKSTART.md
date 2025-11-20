@@ -19,7 +19,7 @@ ELEVENLABS_API_KEY=your-key-here
 ELEVENLABS_VOICE_ID=your-voice-id-here
 
 # Required only if using --upload-s3
-HANDBOOK_AUDIO_S3_BUCKET=your-bucket-name
+S3_BUCKET=your-bucket-name
 AWS_REGION=your-aws-region
 ```
 
