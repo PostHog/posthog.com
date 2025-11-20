@@ -14,7 +14,7 @@ except ImportError:
     HAS_BOTO3 = False
 
 # S3 Configuration
-S3_BUCKET = os.environ.get('HANDBOOK_AUDIO_S3_BUCKET')
+S3_BUCKET = os.environ.get('S3_BUCKET')
 S3_REGION = os.environ.get('AWS_REGION')
 S3_PREFIX = 'handbook-audio/'  # Prefix for all audio files in the bucket
 
@@ -25,7 +25,7 @@ def check_s3_available():
         return False, 'boto3 not installed. Run: uv sync'
     
     if not S3_BUCKET:
-        return False, 'HANDBOOK_AUDIO_S3_BUCKET environment variable not set'
+        return False, 'S3_BUCKET environment variable not set'
     
     if not S3_REGION:
         return False, 'AWS_REGION environment variable not set'

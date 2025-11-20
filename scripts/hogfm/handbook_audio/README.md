@@ -31,7 +31,7 @@ ELEVENLABS_API_KEY=your-api-key-here
 ELEVENLABS_VOICE_ID=your-voice-id-here
 
 # S3 Configuration (Required only if using --upload-s3)
-HANDBOOK_AUDIO_S3_BUCKET=your-bucket-name
+S3_BUCKET=your-bucket-name
 AWS_REGION=your-aws-region
 ```
 
@@ -303,7 +303,7 @@ This makes it easy to:
 - `ELEVENLABS_VOICE_ID` - Voice ID to use (optional, defaults to Sarah)
 
 **AWS S3 (optional for uploads):**
-- `HANDBOOK_AUDIO_S3_BUCKET` - S3 bucket name (e.g., 'posthog-handbook-audio')
+- `S3_BUCKET` - S3 bucket name (e.g., 'posthog-handbook-audio')
 - `AWS_REGION` - AWS region (optional, defaults to 'us-east-1')
 - `AWS_ACCESS_KEY_ID` - AWS access key (or use AWS CLI/IAM role)
 - `AWS_SECRET_ACCESS_KEY` - AWS secret key (or use AWS CLI/IAM role)
@@ -316,7 +316,7 @@ ELEVENLABS_API_KEY=your_key_here
 ELEVENLABS_VOICE_ID=your_voice_id_here
 
 # Required only if using S3 uploads
-HANDBOOK_AUDIO_S3_BUCKET=your-bucket-name
+S3_BUCKET=your-bucket-name
 AWS_REGION=your-aws-region
 ```
 
