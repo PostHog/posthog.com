@@ -146,6 +146,16 @@ All free credits associated with startup plan roll-offs are one-time only, and s
 
 For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date.
 
+### Margin negative deals
+
+In exceptional circumstances, we may explore providing additional discounts which eat into our operating margin for the following cases:
+
+1. They are a strategic logo we'd like to land as a brand-new customer.
+2. We are taking their business from a competitor.
+3. We are preventing them from churning to a competitor.
+
+If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details with Simon.  If he's happy that it's the right thing to do, then you also need to seek approval from Charles and Raquel.
+
 ## Additional credit purchase
 
 As it's often difficult to right-size the credit needed for a longer term plan as a standard we offer to honor the discount provided in the original purchase for any additional credit purchased in the first half of a contract term (e.g. 6 months for an annual plan). Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in #sales-alerts to help notify account owners about this.
