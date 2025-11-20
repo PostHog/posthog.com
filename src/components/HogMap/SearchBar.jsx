@@ -1,4 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState, useImperativeHandle } from "react"
+import { places } from "./data"
+import { PlaceType } from "./types"
 
 function SearchBarImpl({
     token,
@@ -325,7 +327,48 @@ export function createSearchMarker({
         }
     }
     addBtn.onclick = () => {
-        console.log('addBtn clicked')
+        try {
+            const selected = (select && select.value) || PlaceType.CAFE
+            const type =
+                Object.values(PlaceType).includes(selected) ? selected : PlaceType.CAFE
+            const item = {
+                id: Date.now(),
+                name: label || "Selected place",
+                address: address || "",
+                latitude: Number(latitude),
+                longitude: Number(longitude),
+                type,
+            }
+            places.push(item)
+            try {
+                window.dispatchEvent(new CustomEvent('hogmap:places-updated'))
+            } catch {}
+            // Close popup after adding
+            try {
+                const p = marker.getPopup && marker.getPopup()
+                if (p) {
+                    p.remove()
+                }
+            } catch {}
+            // Remove the temporary marker since place will render via places layer
+            try {
+                marker.remove()
+            } catch {}
+            // Ensure the corresponding place layer is enabled upstream
+            try {
+                window.dispatchEvent(new CustomEvent('hogmap:enable-layer', { detail: { layer: type } }))
+            } catch {}
+            // Clear search input
+            if (searchRef?.current?.clear) {
+                try {
+                    searchRef.current.clear()
+                } catch {
+                    console.error('Error clearing search bar')
+                }
+            }
+        } catch (e) {
+            console.error('Error adding place', e)
+        }
     }
     // Also clear the search input after placing marker
     if (searchRef?.current?.clear) {

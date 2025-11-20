@@ -5,7 +5,9 @@ import { navigate } from 'gatsby'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import Menu from './Menu'
 import SearchBar, { createSearchMarker } from './SearchBar'
-import { PlaceItem, EventItem } from './types'
+import { PlaceType, EventType } from './types'
+import { places as userPlaces } from './data'
+import { EventItem } from './types'
 
 export const LAYER_PEOPLE = 'layer-people'
 export const LAYER_EVENTS_UPCOMING = 'layer-events-upcoming'
@@ -13,9 +15,6 @@ export const LAYER_EVENTS_PAST = 'layer-events-past'
 export const LAYER_PLACES = 'layer-places'
 export const LAYER_OFFSITES_UPCOMING = 'layer-offsites-upcoming'
 export const LAYER_OFFSITES_PAST = 'layer-offsites-past'
-
-export const events: EventItem[] = []
-export const places: PlaceItem[] = []
 
 // Delay requiring mapbox-gl until client to avoid SSR issues
 const getMapbox = () => {
@@ -86,6 +85,10 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                 result.add(LAYER_EVENTS_UPCOMING)
             } else if (l === LAYER_EVENTS_PAST) {
                 result.add(LAYER_EVENTS_PAST)
+            } else if (Object.values(PlaceType).includes(l as PlaceType)) {
+                result.add(l)
+            } else if (Object.values(EventType).includes(l as EventType)) {
+                result.add(l)
             }
         })
         if (result.size === 0) {
@@ -93,6 +96,8 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
             result.add(LAYER_PEOPLE)
             result.add(LAYER_EVENTS_UPCOMING)
             result.add(LAYER_EVENTS_PAST)
+            Object.values(PlaceType).forEach((pt) => result.add(pt))
+            Object.values(EventType).forEach((et) => result.add(et))
         }
         return Array.from(result)
     }
@@ -517,6 +522,50 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                     })
                 })
             }
+            // Render saved places if their place-type layers are enabled
+            const activePlaceTypes = Object.values(PlaceType).filter((pt) => enabledLayers.includes(pt))
+            if (activePlaceTypes.length > 0) {
+                const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
+                const activePlaces = userPlaces.filter((p) => activePlaceTypes.includes(p.type))
+                const groups = activePlaces.reduce((acc, p) => {
+                    const key = `${p.longitude.toFixed(4)},${p.latitude.toFixed(4)}`
+                    if (!acc[key]) {
+                        acc[key] = {
+                            coords: { longitude: p.longitude, latitude: p.latitude },
+                            places: [] as typeof userPlaces,
+                        }
+                    }
+                    acc[key].places.push(p)
+                    return acc
+                }, {} as Record<string, { coords: Coordinates; places: typeof userPlaces }>)
+                Object.values(groups).forEach(({ coords: { longitude, latitude }, places }) => {
+                    const offsets = computeOffsets(places.length, jitterRadius)
+                    places.forEach((pl, idx) => {
+                        const { dx, dy } = offsets[idx]
+                        const el = document.createElement('div')
+                        el.className = 'w-[14px] h-[14px] rounded-full bg-orange border-2 border-white shadow-md'
+                        const popupHtml = `
+                            <div class="text-sm max-w-[240px]">
+                                <div class="font-semibold mb-1">${pl.name}</div>
+                                ${pl.address ? `<div class="text-secondary mb-1">${pl.address}</div>` : ''}
+                                <div class="text-secondary">Lat ${pl.latitude.toFixed(5)}, Lng ${pl.longitude.toFixed(
+                            5
+                        )}</div>
+                                <div class="mt-1 text-secondary capitalize">${pl.type}</div>
+                            </div>`
+                        const mapboxgl = getMapbox()
+                        if (!mapboxgl) return
+                        const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+                        const marker = new mapboxgl.Marker({ element: el })
+                            .setLngLat([longitude + dx, latitude + dy])
+                            .setPopup(popup)
+                            .addTo(mapRef.current)
+                        marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                        marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                        markersRef.current.push(marker)
+                    })
+                })
+            }
         }
 
         if (mapRef.current) {
@@ -541,6 +590,18 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
         mapRef.current.on('zoomend', () => {
             renderMarkers()
         })
+        // Re-render when places array is updated elsewhere
+        const onPlacesUpdated = () => renderMarkers()
+        window.addEventListener('hogmap:places-updated', onPlacesUpdated)
+        // Enable specific layer on demand (e.g., when adding a place)
+        const onEnableLayer = (e: any) => {
+            const layer = e?.detail?.layer as string | undefined
+            if (!layer) return
+            setEnabledLayers((prev) => (prev.includes(layer) ? prev : [...prev, layer]))
+            // Also re-render to reflect new visibility
+            renderMarkers()
+        }
+        window.addEventListener('hogmap:enable-layer', onEnableLayer)
         const handleResize = () => {
             if (mapRef.current) {
                 mapRef.current.resize()
@@ -565,6 +626,8 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
 
         return () => {
             window.removeEventListener('resize', handleResize)
+            window.removeEventListener('hogmap:places-updated', onPlacesUpdated)
+            window.removeEventListener('hogmap:enable-layer', onEnableLayer)
             if (resizeObserver) {
                 resizeObserver.disconnect()
                 resizeObserver = null

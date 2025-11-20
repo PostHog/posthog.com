@@ -26,6 +26,8 @@ export interface PlaceItem {
 export interface EventItem {
     id: number
     name: string
+    // Optional unified date field (for simplified consumers)
+    date?: string
     dateStart: string
     dateEnd: string
     type: EventType
