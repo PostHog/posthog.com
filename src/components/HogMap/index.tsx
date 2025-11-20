@@ -10,6 +10,7 @@ import { getPlaces } from './data'
 import { EventItem } from './types'
 import { IconBuilding, IconBed, IconBurger, IconCoffee, IconLaptop, IconTelescope } from '@posthog/icons'
 import { renderToStaticMarkup } from 'react-dom/server'
+import { createAlienSkyboxLayer, loadThreeJS } from './HogAlien'
 import { useUser } from 'hooks/useUser'
 
 export const LAYER_PEOPLE = 'layer-people'
@@ -676,9 +677,49 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
             center: [-0.1276, 51.5074], // London
             zoom: 4,
             attributionControl: true,
+            projection: { name: 'globe' },
         })
         mapRef.current.addControl(new mapboxgl.NavigationControl({ visualizePitch: true }), 'top-right')
+
+        // Load Three.js and add alien skybox layer
+        loadThreeJS()
+            .then(() => {
+                const alienSkyboxLayer = createAlienSkyboxLayer()
+                if (alienSkyboxLayer && mapRef.current && mapRef.current.isStyleLoaded()) {
+                    if (!mapRef.current.getLayer('alien-skybox')) {
+                        // Add before the first layer so it appears behind everything
+                        const layers = mapRef.current.getStyle()?.layers
+                        const firstLayerId = layers && layers.length > 0 ? layers[0].id : undefined
+                        mapRef.current.addLayer(alienSkyboxLayer, firstLayerId)
+                    }
+                }
+            })
+            .catch((err) => {
+                console.warn('Failed to load alien skybox:', err)
+            })
+
         mapRef.current.on('load', () => {
+            // Add the alien skybox layer when style is loaded
+            const alienSkyboxLayer = createAlienSkyboxLayer()
+            if (alienSkyboxLayer && mapRef.current && !mapRef.current.getLayer('alien-skybox')) {
+                const layers = mapRef.current.getStyle()?.layers
+                const firstLayerId = layers && layers.length > 0 ? layers[0].id : undefined
+                mapRef.current.addLayer(alienSkyboxLayer, firstLayerId)
+            }
+
+            // Configure sky layer for atmosphere
+            if (!mapRef.current.getLayer('sky')) {
+                mapRef.current.addLayer({
+                    id: 'sky',
+                    type: 'sky',
+                    paint: {
+                        'sky-type': 'atmosphere',
+                        'sky-atmosphere-sun': [0.0, 90.0],
+                        'sky-atmosphere-sun-intensity': 5,
+                    },
+                })
+            }
+
             renderMarkers()
         })
         mapRef.current.on('zoomend', () => {
