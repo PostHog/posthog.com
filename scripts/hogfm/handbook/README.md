@@ -129,6 +129,23 @@ uv run handbook-audio --search "people"
 uv run handbook-audio --all
 ```
 
+### Allowed files only (for cron jobs) 🆕
+
+Process a hardcoded list of allowed files - perfect for automated cron jobs:
+
+```bash
+# Process only files in the allowed list
+uv run handbook-audio --allowed-only
+
+# With S3 upload (typical for cron jobs)
+uv run handbook-audio --allowed-only --upload-s3
+
+# Dry run
+uv run handbook-audio --dry-run --allowed-only
+```
+
+The list is hardcoded in `generate.py` under `ALLOWED_FILES`. Edit the list to add/remove files. See [ALLOWED_FILES_MODE.md](./ALLOWED_FILES_MODE.md) for details on setting up cron jobs.
+
 ## How it works
 
 ### Markdown/MDX processing pipeline
@@ -289,7 +306,7 @@ python scripts/handbook-audio/generate.py --all
 
 ## S3 Upload Support
 
-Generated audio files can be automatically uploaded to S3 with the `--upload-s3` flag:
+Generated audio files and associated files can be automatically uploaded to S3 with the `--upload-s3` flag:
 
 ```bash
 # Generate and upload to S3
@@ -299,15 +316,26 @@ python scripts/handbook-audio/generate.py --upload-s3 contents/handbook/values.m
 python scripts/handbook-audio/generate.py --all --upload-s3
 ```
 
+### What gets uploaded
+
+For each handbook page, **three files** are uploaded to S3:
+- `.mp3` - Audio file
+- `.elevenlabs-input.txt` - Parsed text sent to ElevenLabs
+- `.cost.json` - Cost metrics and tracking data
+
 ### S3 File Structure
 
 Files are uploaded maintaining the same structure as the handbook:
 
 ```
-s3://your-bucket/handbook-audio/
+s3://your-bucket/handbook/
 ├── values.mp3
+├── values.elevenlabs-input.txt
+├── values.cost.json
 ├── product/
 │   ├── releasing-as-beta.mp3
+│   ├── releasing-as-beta.elevenlabs-input.txt
+│   ├── releasing-as-beta.cost.json
 │   └── metrics.mp3
 ├── engineering/
 │   ├── posthog-com/
@@ -319,6 +347,8 @@ s3://your-bucket/handbook-audio/
 
 This makes it easy to:
 - Map handbook pages to audio files
+- Access the parsed text used for generation
+- Track costs across all pages
 - Organize files by section
 - Generate CDN URLs programmatically
 

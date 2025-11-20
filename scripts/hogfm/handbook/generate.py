@@ -29,7 +29,7 @@ from handbook.file_selector import (
 )
 from handbook.elevenlabs_client import generate_audio, check_api_available
 from handbook.audio_saver import save_audio_file, save_text_file, save_cost_file
-from handbook.s3_uploader import upload_to_s3, check_s3_available
+from handbook.s3_uploader import upload_to_s3, check_s3_available, download_text_from_s3, delete_from_s3
 
 # Constants
 # Navigate from scripts/hogfm/handbook_audio/generate.py to repo root
@@ -37,6 +37,15 @@ from handbook.s3_uploader import upload_to_s3, check_s3_available
 REPO_ROOT = Path(__file__).parent.parent.parent.parent
 HANDBOOK_DIR = REPO_ROOT / 'contents' / 'handbook'
 OUTPUT_DIR = REPO_ROOT / 'public' / 'handbook-audio'
+
+# Allowed files list (relative to HANDBOOK_DIR)
+# This list is used by the --allowed-only mode for cron jobs
+ALLOWED_FILES = [
+    # Core values and company docs
+    'values.md',
+    
+   # Add more files here as needed
+]
 
 
 def process_single_file(file_path, dry_run=False, upload_s3=False):
@@ -46,8 +55,25 @@ def process_single_file(file_path, dry_run=False, upload_s3=False):
     if not content:
         return False
     
+    # Generate the full text that will be sent to ElevenLabs
+    full_text = f'{content["title"]}.\n\n{content["text"]}'
+    
+    # If upload_s3 is enabled, check S3 for existing text to detect changes
+    if upload_s3:
+        existing_text = download_text_from_s3(content['slug'], dry_run=dry_run)
+        
+        if existing_text is not None:
+            # Compare texts
+            if existing_text == full_text:
+                print(f'  ⏭️  Content unchanged, skipping generation')
+                return 'skipped'
+            else:
+                print(f'  🔄 Content changed, regenerating audio')
+        else:
+            print(f'  🆕 First generation (no existing file in S3)')
+    
     # Save parsed text FIRST so you can test with it before generating audio
-    save_text_file(content['slug'], content, OUTPUT_DIR, dry_run=dry_run)
+    text_file_path = save_text_file(content['slug'], content, OUTPUT_DIR, dry_run=dry_run)
     
     result = generate_audio(content, dry_run=dry_run)
     
@@ -60,11 +86,17 @@ def process_single_file(file_path, dry_run=False, upload_s3=False):
     audio_path, audio_duration_seconds = save_audio_file(content['slug'], audio_data, OUTPUT_DIR, dry_run=dry_run)
     
     # Save cost metrics (using actual audio duration for accurate cost calculation)
-    save_cost_file(content['slug'], cost_metrics, OUTPUT_DIR, audio_duration_seconds=audio_duration_seconds, dry_run=dry_run)
+    cost_file_path = save_cost_file(content['slug'], cost_metrics, OUTPUT_DIR, audio_duration_seconds=audio_duration_seconds, dry_run=dry_run)
     
-    # Optionally upload to S3
+    # Optionally upload to S3 (includes audio, text, and cost files)
     if upload_s3:
-        upload_to_s3(content['slug'], audio_data, dry_run=dry_run)
+        upload_to_s3(
+            content['slug'], 
+            audio_data, 
+            text_file_path=text_file_path,
+            cost_file_path=cost_file_path,
+            dry_run=dry_run
+        )
     
     return True
 
@@ -76,6 +108,7 @@ def main():
         print('  python scripts/handbook-audio/generate.py --all')
         print('  python scripts/handbook-audio/generate.py --dir <directory>')
         print('  python scripts/handbook-audio/generate.py --search <pattern>')
+        print('  python scripts/handbook-audio/generate.py --allowed-only')
         print('  python scripts/handbook-audio/generate.py --dry-run <file-path>')
         print('  python scripts/handbook-audio/generate.py --upload-s3 <file-path>')
         print('  python scripts/handbook-audio/generate.py --all --upload-s3')
@@ -83,6 +116,7 @@ def main():
         print('Examples:')
         print('  python scripts/handbook-audio/generate.py --dir engineering')
         print('  python scripts/handbook-audio/generate.py --dir engineering/operations')
+        print('  python scripts/handbook-audio/generate.py --allowed-only --upload-s3  # For cron jobs')
         sys.exit(1)
     
     # Check for flags
@@ -113,7 +147,7 @@ def main():
             print(f'☁️  S3 upload enabled: {s3_message}\n')
     
     if len(sys.argv) < 2:
-        print('❌ Please specify a file path, --all, --dir <directory>, or --search <pattern>')
+        print('❌ Please specify a file path, --all, --dir <directory>, --search <pattern>, or --allowed-only')
         sys.exit(1)
     
     if sys.argv[1] == '--all':
@@ -123,13 +157,17 @@ def main():
         
         success_count = 0
         fail_count = 0
+        skipped_count = 0
         
         for i, file_path in enumerate(files):
             relative_path = file_path.relative_to(HANDBOOK_DIR)
             print(f'\n[{i + 1}/{len(files)}] {relative_path}')
             
-            if process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3):
+            result = process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3)
+            if result == True:
                 success_count += 1
+            elif result == 'skipped':
+                skipped_count += 1
             else:
                 fail_count += 1
             
@@ -139,7 +177,8 @@ def main():
         
         print('\n✨ Done!')
         print(f'   Success: {success_count}')
-        print(f'   Failed/Skipped: {fail_count}')
+        print(f'   Skipped (unchanged): {skipped_count}')
+        print(f'   Failed: {fail_count}')
     
     elif sys.argv[1] == '--search':
         if len(sys.argv) < 3:
@@ -164,13 +203,17 @@ def main():
         
         success_count = 0
         fail_count = 0
+        skipped_count = 0
         
         for i, file_path in enumerate(files):
             relative_path = file_path.relative_to(HANDBOOK_DIR)
             print(f'\n[{i + 1}/{len(files)}] {relative_path}')
             
-            if process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3):
+            result = process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3)
+            if result == True:
                 success_count += 1
+            elif result == 'skipped':
+                skipped_count += 1
             else:
                 fail_count += 1
             
@@ -180,7 +223,8 @@ def main():
         
         print('\n✨ Done!')
         print(f'   Success: {success_count}')
-        print(f'   Failed/Skipped: {fail_count}')
+        print(f'   Skipped (unchanged): {skipped_count}')
+        print(f'   Failed: {fail_count}')
     
     elif sys.argv[1] == '--dir':
         if len(sys.argv) < 3:
@@ -206,13 +250,17 @@ def main():
         
         success_count = 0
         fail_count = 0
+        skipped_count = 0
         
         for i, file_path in enumerate(files):
             relative_path = file_path.relative_to(HANDBOOK_DIR)
             print(f'\n[{i + 1}/{len(files)}] {relative_path}')
             
-            if process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3):
+            result = process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3)
+            if result == True:
                 success_count += 1
+            elif result == 'skipped':
+                skipped_count += 1
             else:
                 fail_count += 1
             
@@ -222,7 +270,82 @@ def main():
         
         print('\n✨ Done!')
         print(f'   Success: {success_count}')
-        print(f'   Failed/Skipped: {fail_count}')
+        print(f'   Skipped (unchanged): {skipped_count}')
+        print(f'   Failed: {fail_count}')
+    
+    elif sys.argv[1] == '--allowed-only':
+        print(f'Processing allowed files list ({len(ALLOWED_FILES)} files)\n')
+        
+        # Build full paths from allowed files list and track missing files
+        files = []
+        missing_files = []
+        
+        for relative_path in ALLOWED_FILES:
+            file_path = HANDBOOK_DIR / relative_path
+            if file_path.exists():
+                files.append(file_path)
+            else:
+                missing_files.append(relative_path)
+        
+        # Handle missing files - delete from S3 if upload_s3 is enabled
+        deleted_count = 0
+        if missing_files and upload_s3:
+            print(f'Found {len(missing_files)} deleted files (will remove from S3):\n')
+            for relative_path in missing_files:
+                print(f'  - {relative_path}')
+            print()
+            
+            for relative_path in missing_files:
+                # Convert path to slug (remove .md/.mdx extension)
+                slug = str(Path(relative_path).with_suffix(''))
+                print(f'🗑️  Deleting S3 files for removed file: {relative_path}')
+                if delete_from_s3(slug, dry_run=dry_run):
+                    deleted_count += 1
+            print()
+        elif missing_files:
+            print(f'⚠️  Found {len(missing_files)} missing files (skipping, S3 upload not enabled):\n')
+            for relative_path in missing_files:
+                print(f'  - {relative_path}')
+            print()
+        
+        if not files and not missing_files:
+            print('❌ No files in the allowed list')
+            sys.exit(1)
+        
+        if files:
+            print(f'Found {len(files)} files to process:\n')
+            for file_path in files:
+                relative = file_path.relative_to(HANDBOOK_DIR)
+                print(f'  - {relative}')
+            
+            print('\nProcessing files...\n')
+        
+        success_count = 0
+        fail_count = 0
+        skipped_count = 0
+        
+        for i, file_path in enumerate(files):
+            relative_path = file_path.relative_to(HANDBOOK_DIR)
+            print(f'\n[{i + 1}/{len(files)}] {relative_path}')
+            
+            result = process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3)
+            if result == True:
+                success_count += 1
+            elif result == 'skipped':
+                skipped_count += 1
+            else:
+                fail_count += 1
+            
+            # Rate limiting
+            if not dry_run and i < len(files) - 1:
+                time.sleep(1)
+        
+        print('\n✨ Done!')
+        print(f'   Success: {success_count}')
+        print(f'   Skipped (unchanged): {skipped_count}')
+        if deleted_count > 0:
+            print(f'   Deleted from S3: {deleted_count}')
+        print(f'   Failed: {fail_count}')
     
     else:
         # Single file mode
