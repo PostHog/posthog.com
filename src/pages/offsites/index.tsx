@@ -8,13 +8,13 @@ import { TeamMemberMultiSelect, SelectedMember, TeamContext } from 'components/O
 import { IconPlus, IconMapPin, IconUpload } from '@posthog/icons'
 import { navigate } from 'gatsby'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import qs from 'qs'
 import { useUser } from 'hooks/useUser'
 import { useToast } from '../../context/Toast'
 import dayjs from 'dayjs'
 import { Place } from 'pages/place-reviews'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useDropzone } from 'react-dropzone'
+import { fetchEvents, createEvent } from 'components/HogMap/data'
 
 interface MapboxFeature {
     place_name: string
@@ -922,74 +922,8 @@ export default function Offsites(): JSX.Element {
                     throw new Error('No JWT found')
                 }
 
-                const offsitesQuery = qs.stringify(
-                    {
-                        pagination: {
-                            pageSize: 100,
-                        },
-                        sort: ['date:desc'],
-                        populate: {
-                            location: {
-                                populate: ['venue'],
-                            },
-                            photos: true,
-                            speakers: true,
-                            partners: true,
-                        },
-                    },
-                    { encodeValuesOnly: true }
-                )
-
-                const offsitesResponse = await fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/events?${offsitesQuery}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${jwt}`,
-                        },
-                    }
-                )
-                const offsitesData = await offsitesResponse.json()
-                if (offsitesData?.data) {
-                    const formattedOffsites = offsitesData.data.map(
-                        (item: { id: number; attributes: Record<string, unknown> }) => {
-                            const {
-                                private: isPrivate,
-                                speakers: speakersData,
-                                partners: partnersData,
-                                photos: photosData,
-                            } = item.attributes
-
-                            const photos =
-                                (
-                                    photosData as { data?: Array<{ id: number; attributes: { url: string } }> }
-                                )?.data?.map((photo) => ({
-                                    id: photo.id,
-                                    url: photo.attributes?.url,
-                                })) || []
-                            const speakers =
-                                (
-                                    speakersData as {
-                                        data?: Array<{ attributes: { firstName: string; lastName: string } }>
-                                    }
-                                )?.data?.map((s) => `${s.attributes?.firstName} ${s.attributes?.lastName}`) || []
-                            const partners =
-                                (partnersData as Array<{ name: string; url?: string }> | undefined)?.map((p) => ({
-                                    name: p.name,
-                                    url: p.url || undefined,
-                                })) || []
-
-                            return {
-                                id: item.id,
-                                ...item.attributes,
-                                private: isPrivate === true,
-                                speakers,
-                                partners,
-                                photos,
-                            }
-                        }
-                    )
-                    setOffsites(formattedOffsites)
-                }
+                const formattedOffsites = await fetchEvents(jwt)
+                setOffsites(formattedOffsites as unknown as Event[])
             } catch (err) {
                 console.error('Error fetching data:', err)
                 addToast({
@@ -1123,40 +1057,28 @@ export default function Offsites(): JSX.Element {
                 flightTracker: formData.flightTracker || undefined,
             }
 
-            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/events`, {
-                method: 'POST',
-                body: JSON.stringify({ data: offsitePayload }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${jwt}`,
-                },
-            })
-
-            if (!response.ok) {
-                throw new Error(`Failed to create offsite: ${response.statusText}`)
-            }
-
-            const result = await response.json()
+            const result = await createEvent(jwt, offsitePayload)
+            const resultData = result as { data: { id: number; attributes: Record<string, unknown> } }
             const newOffsite: Event = {
-                id: result.data.id,
-                name: result.data.attributes.name,
-                date: result.data.attributes.date,
-                description: result.data.attributes.description || '',
-                location: result.data.attributes.location,
-                private: result.data.attributes.private || false,
-                internal: result.data.attributes.internal || false,
-                format: result.data.attributes.format || [],
-                audience: result.data.attributes.audience || [],
+                id: resultData.data.id,
+                name: resultData.data.attributes.name as string,
+                date: resultData.data.attributes.date as string,
+                description: (resultData.data.attributes.description as string) || '',
+                location: resultData.data.attributes.location as Place | undefined,
+                private: (resultData.data.attributes.private as boolean) || false,
+                internal: (resultData.data.attributes.internal as boolean) || false,
+                format: (resultData.data.attributes.format as string[]) || [],
+                audience: (resultData.data.attributes.audience as string[]) || [],
                 speakers: [],
-                speakerTopic: result.data.attributes.speakerTopic || '',
+                speakerTopic: (resultData.data.attributes.speakerTopic as string) || '',
                 partners: [],
-                attendees: result.data.attributes.attendees || 0,
+                attendees: (resultData.data.attributes.attendees as number) || 0,
                 rsvps: formData.rsvps,
-                vibeScore: result.data.attributes.vibeScore || 0,
+                vibeScore: (resultData.data.attributes.vibeScore as number) || 0,
                 photos: [],
-                video: result.data.attributes.video || '',
-                presentation: result.data.attributes.presentation || '',
-                link: result.data.attributes.link || '',
+                video: (resultData.data.attributes.video as string) || '',
+                presentation: (resultData.data.attributes.presentation as string) || '',
+                link: (resultData.data.attributes.link as string) || '',
             }
 
             setOffsites([newOffsite, ...offsites])

@@ -17,10 +17,10 @@ import {
 } from '@posthog/icons'
 import { navigate } from 'gatsby'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import qs from 'qs'
 import { useUser } from 'hooks/useUser'
 import { useToast } from '../../context/Toast'
 import { useDropzone } from 'react-dropzone'
+import { fetchPlaces, createPlace, fetchPlaceReviews, createPlaceReview } from 'components/HogMap/data'
 
 interface MapboxFeature {
     place_name: string
@@ -492,85 +492,16 @@ export default function PlaceReviews(): JSX.Element {
                 }
 
                 // Fetch places
-                const placesResponse = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/places`, {
-                    headers: {
-                        Authorization: `Bearer ${jwt}`,
-                    },
-                })
-                const placesData = await placesResponse.json()
-                let fetchedPlaces: Place[] = []
-                if (placesData?.data) {
-                    fetchedPlaces = placesData.data.map(
-                        (item: { id: number; attributes: { name: string; address: string; type: Place['type'] } }) => ({
-                            id: item.id,
-                            name: item.attributes.name,
-                            address: item.attributes.address,
-                            type: item.attributes.type,
-                        })
-                    )
-                    setPlaces(fetchedPlaces)
-                }
+                const fetchedPlaces = await fetchPlaces(jwt)
+                setPlaces(fetchedPlaces as unknown as Place[])
 
-                // Fetch place reviews with place relationship populated
-                const reviewsQuery = qs.stringify(
-                    {
-                        populate: ['place', 'tags'],
-                        pagination: {
-                            pageSize: 1000,
-                        },
-                    },
-                    { encodeValuesOnly: true }
-                )
-                const reviewsResponse = await fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/place-reviews?${reviewsQuery}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${jwt}`,
-                        },
-                    }
-                )
-                const reviewsData = await reviewsResponse.json()
-                let fetchedReviews: PlaceReview[] = []
-                if (reviewsData?.data) {
-                    fetchedReviews = reviewsData.data.map(
-                        (item: {
-                            id: number
-                            attributes: {
-                                rating: number
-                                subcategoryRatings?: { ratingCategory: string; ratingValue: number }[]
-                                review?: string
-                                createdAt: string
-                                place?: {
-                                    data?: {
-                                        id: number
-                                        attributes: {
-                                            name: string
-                                            address: string
-                                            type: Place['type']
-                                        }
-                                    }
-                                }
-                            }
-                        }) => ({
-                            id: item.id,
-                            rating: item.attributes.rating,
-                            subcategoryRatings: item.attributes.subcategoryRatings || [],
-                            review: item.attributes.review || '',
-                            createdAt: item.attributes.createdAt,
-                            place: item.attributes.place?.data
-                                ? {
-                                      id: item.attributes.place.data.id,
-                                      name: item.attributes.place.data.attributes.name,
-                                      address: item.attributes.place.data.attributes.address,
-                                      type: item.attributes.place.data.attributes.type,
-                                  }
-                                : { id: 0, name: '', address: '', type: 'Airbnb' as const },
-                        })
-                    )
-                    setReviews(fetchedReviews)
+                // Fetch place reviews
+                const fetchedReviews = await fetchPlaceReviews(jwt)
+                setReviews(fetchedReviews as unknown as PlaceReview[])
 
-                    // Group reviews by place
-                    const grouped = fetchedReviews.reduce((acc: { [key: number]: LocationGroup }, review) => {
+                // Group reviews by place
+                const grouped = (fetchedReviews as unknown as PlaceReview[]).reduce(
+                    (acc: { [key: number]: LocationGroup }, review) => {
                         const placeId = review.place.id
                         if (!acc[placeId]) {
                             acc[placeId] = {
@@ -582,17 +513,18 @@ export default function PlaceReviews(): JSX.Element {
                         }
                         acc[placeId].reviews.push(review)
                         return acc
-                    }, {})
+                    },
+                    {}
+                )
 
-                    // Calculate average ratings
-                    const groups = Object.values(grouped).map((group) => ({
-                        ...group,
-                        totalReviews: group.reviews.length,
-                        averageRating: group.reviews.reduce((sum, r) => sum + r.rating, 0) / group.reviews.length,
-                    }))
+                // Calculate average ratings
+                const groups = Object.values(grouped).map((group) => ({
+                    ...group,
+                    totalReviews: group.reviews.length,
+                    averageRating: group.reviews.reduce((sum, r) => sum + r.rating, 0) / group.reviews.length,
+                }))
 
-                    setLocationGroups(groups)
-                }
+                setLocationGroups(groups)
             } catch (err) {
                 console.error('Error fetching data:', err)
                 addToast({
@@ -628,28 +560,18 @@ export default function PlaceReviews(): JSX.Element {
                     type: formData.placeType,
                 }
 
-                const placeResponse = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/places`, {
-                    method: 'POST',
-                    body: JSON.stringify({ data: newPlacePayload }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${jwt}`,
-                    },
-                })
-
-                if (!placeResponse.ok) {
-                    throw new Error(`Failed to create place: ${placeResponse.statusText}`)
+                const placeResult = await createPlace(jwt, newPlacePayload)
+                const placeData = placeResult as {
+                    data: { id: number; attributes: { name: string; address: string; type: Place['type'] } }
                 }
-
-                const placeResult = await placeResponse.json()
-                placeIdToUse = placeResult.data.id
+                placeIdToUse = placeData.data.id
 
                 // Update places list
                 const newPlace: Place = {
-                    id: placeResult.data.id,
-                    name: placeResult.data.attributes.name,
-                    address: placeResult.data.attributes.address,
-                    type: placeResult.data.attributes.type,
+                    id: placeData.data.id,
+                    name: placeData.data.attributes.name,
+                    address: placeData.data.attributes.address,
+                    type: placeData.data.attributes.type,
                 }
                 setPlaces([...places, newPlace])
                 // Update formData with the new place
@@ -664,26 +586,16 @@ export default function PlaceReviews(): JSX.Element {
                 photos: formData.photos?.map((photo) => photo.id) || undefined,
             }
 
-            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/place-reviews`, {
-                method: 'POST',
-                body: JSON.stringify({ data: reviewPayload }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${jwt}`,
-                },
-            })
-
-            if (!response.ok) {
-                throw new Error(`Failed to create place review: ${response.statusText}`)
+            const result = await createPlaceReview(jwt, reviewPayload)
+            const resultData = result as {
+                data: { id: number; attributes: { rating: number; review?: string; createdAt: string } }
             }
-
-            const result = await response.json()
             const selectedPlace = formData.place || places.find((p) => p.id === placeIdToUse)
             const newReview: PlaceReview = {
-                id: result.data.id,
-                rating: result.data.attributes.rating,
-                review: result.data.attributes.review || '',
-                createdAt: result.data.attributes.createdAt,
+                id: resultData.data.id,
+                rating: resultData.data.attributes.rating,
+                review: resultData.data.attributes.review || '',
+                createdAt: resultData.data.attributes.createdAt,
                 place: selectedPlace || { id: 0, name: '', address: '', type: 'Hotel' as const },
             }
 
