@@ -367,15 +367,30 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                         const name = [p.firstName, p.lastName].filter(Boolean).join(' ')
                         const role = p.companyRole || ''
                         const href = p.squeakId ? `/community/profiles/${p.squeakId}` : ''
+                        // Generate flag emoji from country code
+                        const getFlagEmoji = (countryCode: string) => {
+                            if (!countryCode) return ''
+                            if (countryCode.toLowerCase() === 'world') return '🌎'
+                            const codePoints = countryCode
+                                .toUpperCase()
+                                .split('')
+                                .map((char) => 127397 + char.charCodeAt(0))
+                            return String.fromCodePoint(...codePoints)
+                        }
+                        const flagEmoji = p.country ? getFlagEmoji(p.country) : ''
+                        const locationText = p.country === 'world' ? 'Planet Earth' : p.location || p.country || ''
                         const popupHtml = `
-                            <div class="text-sm max-w-[240px]">
-                                <div class="font-semibold mb-1">${name || 'Team member'}</div>
-                                ${role ? `<div class="text-secondary mb-1">${role}</div>` : ''}
-                                <div class="text-secondary">${label}</div>
+                            <div class="text-sm max-w-sm text-center">
+                                <div class="font-semibold font-squeak text-xl uppercase leading-tight">${
+                                    name || 'Team member'
+                                }</div>
+                                ${role ? `<div class="mt-1 text-secondary text-balance">${role}</div>` : ''}
                                 ${
-                                    href
-                                        ? `<span class="underline font-semibold cursor-pointer" onclick="window.open('${href}', '_blank', 'noopener,noreferrer')">Click to view profile →</span>`
-                                        : ''
+                                    flagEmoji || locationText
+                                        ? `<div class="mt-1 text-secondary justify-center flex gap-1 items-center">${
+                                              flagEmoji ? `<span>${flagEmoji}</span>` : ''
+                                          }${locationText ? `<span>${locationText}</span>` : ''}</div>`
+                                        : `<div class="text-secondary">${label}</div>`
                                 }
                             </div>`
                         const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
@@ -440,8 +455,8 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                             const href = ev.link || ''
                             const name = ev.name || 'Event'
                             const popupHtml = `
-                            <div class="text-sm max-w-[240px]">
-                                <div class="font-semibold mb-1">${name}</div>
+                            <div class="text-sm max-w-sm">
+                                <div class="font-semibold text-lg">${name}</div>
                                 ${date ? `<div class="text-secondary mb-1">${date}</div>` : ''}
                                 <div class="text-secondary">${label}</div>
                                 ${href ? `<a class="underline font-semibold" href="${href}">View details →</a>` : ''}
@@ -521,8 +536,8 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                             const href = ev.link || ''
                             const name = ev.name || 'Event'
                             const popupHtml = `
-                            <div class="text-sm max-w-[240px]">
-                                <div class="font-semibold mb-1">${name}</div>
+                            <div class="text-sm max-w-sm">
+                                <div class="font-semibold mb-1 text-lg">${name}</div>
                                 ${date ? `<div class="text-secondary mb-1">${date}</div>` : ''}
                                 <div class="text-secondary">${label}</div>
                                 ${href ? `<a class="underline font-semibold" href="${href}">View details →</a>` : ''}

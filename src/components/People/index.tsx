@@ -391,7 +391,11 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
             <ScrollArea className="h-full">
                 <div className="@lg:columns-2 gap-4 mb-4">
                     <p className="mt-0">
-                        We're proud to be a team of <strong>{teamSize}</strong> misfits. Why?
+                        We're proud to be a team of <strong>{teamSize}</strong> misfits distributed{' '}
+                        <Link to={`/people/map`} state={{ newWindow: true }}>
+                            all across the globe
+                        </Link>
+                        . Why?
                     </p>
 
                     <p>Building an unusually great company starts with an unusual team.</p>
@@ -414,12 +418,6 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
                         Interested in a hand-drawn sketch of your face?{' '}
                         <Link to={`/careers`} state={{ newWindow: true }}>
                             We're hiring.
-                        </Link>
-                    </p>
-                    <p>
-                        Prefer maps?{' '}
-                        <Link to={`/people/map`} state={{ newWindow: true }}>
-                            See the team map.
                         </Link>
                     </p>
                 </div>
