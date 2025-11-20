@@ -85,8 +85,12 @@ def get_podbean_episodes(kind: str) -> list[dict]:
     """
     Get all existing episodes from Podbean.
 
+    Filters episodes by checking if the ID in the content starts with the kind prefix.
+
     Returns a list of episode objects with title, status, etc.
     """
+    import re
+
     token = get_access_token()
     url = "https://api.podbean.com/v1/episodes"
     headers = {"Authorization": f"Bearer {token}"}
@@ -103,9 +107,18 @@ def get_podbean_episodes(kind: str) -> list[dict]:
         data = r.json()
         batch = data.get("episodes", [])
 
-        # filter for the episode title to contain the kind
-        batch = [episode for episode in batch if episode.get("title", "").lower().startswith(kind.lower())]
-        episodes.extend(batch)
+        # Filter episodes by checking if the ID in content starts with the kind
+        filtered_batch = []
+        for episode in batch:
+            content = episode.get("content", "")
+            match = re.search(r"ID: ([^\s<]+)", content)
+
+            if match:
+                episode_id = match.group(1)
+                if episode_id.startswith(kind):
+                    filtered_batch.append(episode)
+
+        episodes.extend(filtered_batch)
 
         if len(batch) < limit:
             break
@@ -139,6 +152,21 @@ def upload_file_to_presigned_url(presigned_url: str, file_path: str, content_typ
         headers = {"Content-Type": content_type}
         r = requests.put(presigned_url, data=f, headers=headers)
         r.raise_for_status()
+
+
+def delete_episode(token: str, episode_id: str) -> None:
+    """
+    Delete an episode from Podbean.
+
+    Args:
+        token: Podbean access token
+        episode_id: The ID of the episode to delete
+    """
+    url = f"https://api.podbean.com/v1/episodes/{episode_id}/delete"
+    headers = {"Authorization": f"Bearer {token}"}
+
+    r = requests.post(url, headers=headers)
+    r.raise_for_status()
 
 
 def save_episode(
@@ -241,18 +269,30 @@ def find_matching_episode(s3_key: str, episodes: list[dict]) -> Optional[dict]:
     """
     Find a Podbean episode that matches the given S3 key.
 
-    Matches by checking if the S3 key path (without .mp3) appears in the episode content URL.
-    The content contains a URL like: https://posthog.com/handbook/engineering/deployments-support
+    Matches by checking for the ID code in the episode content.
     """
-    # Get the key path without extension (e.g., "handbook/engineering/deployments-support")
     key_path = s3_key.replace(".mp3", "")
 
     for episode in episodes:
         content = episode.get("content", "")
-        # Check if the key path appears in the content URL
-        if f"posthog.com/{key_path}" in content:
+        # Check if the ID code appears in the content
+        if f"ID: {key_path}" in content:
             return episode
 
+    return None
+
+
+def extract_s3_key_from_episode(episode: dict) -> Optional[str]:
+    """
+    Extract the S3 key from an episode's content.
+
+    Looks for the ID code pattern in the content.
+    """
+    import re
+    content = episode.get("content", "")
+    match = re.search(r"ID: ([^\s<]+)", content)
+    if match:
+        return match.group(1)
     return None
 
 
@@ -267,8 +307,17 @@ def generate_episode_metadata(s3_key: str, kind: str) -> tuple[str, str]:
     # Get the chapter name from the S3 key like handbook/engineering/deployments-support.mp3...
     # becomes "Handbook | Engineering | Deployments Support"
     title = key_path.replace("/", " | ").replace("-", " ").replace("_", " ").strip().title()
-    content = f"AI generated audio for the '{title}' chapter of the PostHog {kind.capitalize()}. Read more about it at https://posthog.com/{key_path}"
 
+    if kind == "handbook":
+        content = f"""<p>AI generated audio for the '{title}' chapter of the PostHog handbook.</p>
+                    <p>Read more about it at <a href="https://posthog.com/{key_path}">https://posthog.com/{key_path}</a></p>
+                    <p><code>ID: {key_path}</code></p>"""
+    elif kind == "changehog":
+        content = f"""<p>AI generated audio for the changes to the PostHog handbook</p>
+                    <p>Find the full handbook here: <a href="https://posthog.com/handbook">https://posthog.com/handbook</a></p>
+                    <p><code>ID: {key_path}</code></p>"""
+    else:
+        raise NotImplementedError(f"Invalid kind: {kind}")
     return title, content
 
 
@@ -331,6 +380,10 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft", kind: st
     to_update_audio = []  # Need to upload new audio
     to_update_metadata = []  # Only need to update title/content
     up_to_date = []
+    to_delete = []  # Episodes without corresponding S3 files
+
+    # Build set of key paths (without extension) for quick lookup
+    key_paths = {s3_file["key"].replace(".mp3", "") for s3_file in s3_files}
 
     for s3_file in s3_files:
         s3_key = s3_file["key"]
@@ -349,6 +402,14 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft", kind: st
                 up_to_date.append((s3_file, match))
         else:
             to_create.append(s3_file)
+
+    # Find orphaned episodes (have ID but no corresponding S3 file)
+    for episode in episodes:
+        episode_key_path = extract_s3_key_from_episode(episode)
+        # Only delete if the ID starts with the kind we're syncing
+        if episode_key_path and episode_key_path.startswith(kind) and episode_key_path not in key_paths:
+            print(f"Deleting episode: {episode['title']}")
+            to_delete.append(episode)
 
     # Report status
     if up_to_date:
@@ -377,7 +438,13 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft", kind: st
             print(f"   - {s3_file['filename']} ({size_mb:.1f} MB)")
         print()
 
-    if not to_create and not to_update_audio and not to_update_metadata:
+    if to_delete:
+        print(f"To delete (no S3 file) ({len(to_delete)}):")
+        for episode in to_delete:
+            print(f"   - {episode['title']}")
+        print()
+
+    if not to_create and not to_update_audio and not to_update_metadata and not to_delete:
         print("All files are already synced and up to date!")
         return
 
@@ -465,6 +532,27 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft", kind: st
 
         print()
 
+    # Delete orphaned episodes
+    for i, episode in enumerate(to_delete, 1):
+        episode_id = episode.get("id")
+        episode_title = episode.get("title", "Unknown")
+
+        print(f"[{i}/{len(to_delete)}] Deleting {episode_title}...")
+
+        if dry_run:
+            print(f"   Dry run. Would have deleted episode {episode_id}.")
+            print()
+            continue
+
+        try:
+            delete_episode(token, episode_id)
+            print(f"   Deleted.")
+        except Exception as e:
+            print(f"   Error: {e}")
+            raise
+
+        print()
+
     print("Sync complete!")
 
 
@@ -474,7 +562,7 @@ def main():
     )
     parser.add_argument(
         "--kind",
-        choices=["handbook", "changelog"],
+        choices=["handbook", "changehog"],
         required=True,
         help="Kind of content to sync (default: handbook)",
     )

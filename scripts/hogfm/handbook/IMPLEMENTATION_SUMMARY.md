@@ -75,19 +75,19 @@ Updated references from `handbook_audio` to `handbook` to match the directory re
 For each handbook page processed, the system now generates **three files**:
 
 1. `{slug}.mp3` - Audio file
-2. `{slug}.txt` - Parsed text sent to API
+2. `{slug}.elevenlabs-input.txt` - Parsed text sent to API (ElevenLabs input)
 3. `{slug}.cost.json` - **NEW**: Cost metrics and tracking data
 
 Example:
 ```
 public/handbook-audio/
 ├── values.mp3
-├── values.txt
+├── values.elevenlabs-input.txt
 ├── values.cost.json  ← NEW
 ├── engineering/
 │   ├── ai/
 │   │   ├── ai-platform.mp3
-│   │   ├── ai-platform.txt
+│   │   ├── ai-platform.elevenlabs-input.txt
 │   │   └── ai-platform.cost.json  ← NEW
 ```
 

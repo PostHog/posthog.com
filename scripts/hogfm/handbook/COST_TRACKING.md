@@ -18,7 +18,7 @@ ElevenLabs charges based on the number of characters processed. The system:
 For each handbook page, the system now generates three files:
 
 - `{slug}.mp3` - The generated audio file
-- `{slug}.txt` - The parsed text that was sent to the API
+- `{slug}.elevenlabs-input.txt` - The parsed text that was sent to the API
 - `{slug}.cost.json` - **NEW**: Cost metrics and tracking data
 
 ### Cost metrics file format

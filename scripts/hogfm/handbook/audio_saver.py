@@ -104,11 +104,11 @@ def save_text_file(slug, content, output_dir, dry_run=False):
     Returns:
         Path to saved file
     """
-    output_path = output_dir / f'{slug}.txt'
+    output_path = output_dir / f'{slug}.elevenlabs-input.txt'
     
     if dry_run:
         relative_path = output_path.relative_to(Path.cwd()) if output_path.is_relative_to(Path.cwd()) else output_path
-        print(f'  📝 [DRY RUN] Would save text to: {relative_path}')
+        print(f'  📝 [DRY RUN] Would save parsed text to: {relative_path}')
         return output_path
     
     # Ensure directory exists
@@ -121,7 +121,7 @@ def save_text_file(slug, content, output_dir, dry_run=False):
         f.write(full_text)
     
     relative_path = output_path.relative_to(Path.cwd()) if output_path.is_relative_to(Path.cwd()) else output_path
-    print(f'  📝 Saved text to: {relative_path}')
+    print(f'  📝 Saved parsed text (ElevenLabs input) to: {relative_path}')
     return output_path
 
 
