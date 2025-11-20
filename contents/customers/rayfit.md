@@ -22,9 +22,9 @@ For Rayfit, the early friction wasn’t collecting data, it was making sure ever
 
 "PostHog can present as really technical," Alan explains. “Our CEO and designer had used Mixpanel and Amplitude before — which felt more approachable since PostHog is built for engineers.”
 
-Like many, their in-app data was also tricky to access. It requires SQL skills not everyone has. “A lot of the data we use for the generated workouts lives in the app itself,” Alan says. “It wouldn't make sense to send a unique event for each one. With the warehouse, we can join it to a person and learn more about their behaviors.”
+Like many, their in-app data was also tricky to access. It requires [SQL skills(/product-engineers/sql-for-analytics) not everyone has. “A lot of the data we use for the generated workouts lives in the app itself,” Alan says. “It wouldn't make sense to send a unique event for each one. With the warehouse, we can join it to a person and learn more about their behaviors.”
 
-That’s where [PostHog AI](/docs/posthog-ai) comes in. For Alan, SQL is second nature — AI just removes some friction. For the rest of the team, having AI draft and edit queries makes the whole workflow far more accessible. “PostHog AI has actually been a deciding factor in our decision to stick with PostHog,” he told us. “Without it, we probably would have moved to a different analytics package because the learning curve felt so steep.”
+That’s where [PostHog AI](/ai) comes in. For Alan, SQL is second nature — AI just removes some friction. For the rest of the team, having AI draft and edit queries makes the whole workflow far more accessible. “PostHog AI has actually been a deciding factor in our decision to stick with PostHog,” he told us. “Without it, we probably would have moved to a different analytics package because the learning curve felt so steep.”
 
 <OSQuote
   customer="rayfit"
