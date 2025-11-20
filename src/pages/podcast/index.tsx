@@ -48,6 +48,8 @@ export const usePodcastFeed = () => {
 
 export default function Podcast(): JSX.Element {
     const feed = usePodcastFeed()
+    const [episodeSelected, setEpisodeSelected] = useState<PodcastFeedItem | null>(null)
+    const mediaUrl = episodeSelected ? episodeSelected.enclosure.url : null
 
     return (
         <>
@@ -58,14 +60,18 @@ export default function Podcast(): JSX.Element {
             />
             <div>
                 {feed.map((item) => (
-                    <div key={item.guid} className="border-b border-accent-dark">
-                        <div className="bg-primary">
-                            <div>{item.title}</div>
-                            <div>{item.description}</div>
-                        </div>
+                    <div
+                        key={item.guid}
+                        className="bg-primary border-b border-primary p-2 hover:bg-accent cursor-pointer"
+                        onClick={() => {
+                            setEpisodeSelected(item)
+                        }}
+                    >
+                        <div className="text-lg font-semibold">{item.title}</div>
+                        <div className="text-sm text-muted" dangerouslySetInnerHTML={{ __html: item.description }} />
                     </div>
                 ))}
-                <MediaPlayer mp3="https://res.cloudinary.com/dmukukwp6/video/upload/values_26850deb2a.mp3" />
+                <MediaPlayer key={mediaUrl} mp3={mediaUrl || 'undefined'} />
             </div>
         </>
     )
