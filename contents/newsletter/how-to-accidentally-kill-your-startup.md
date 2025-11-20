@@ -1,5 +1,5 @@
 ---
-title: How to accidentally kill your startup
+title: Playing not to lose won't help you win
 date: 2025-11-19
 author:
  - posthog-team
@@ -15,25 +15,23 @@ crosspost:
   - Blog
 ---
 
-### Why successful startups shouldn’t start “playing not to lose”
+### Why protecting your startup's lead causes you to lose it
 
 > The following was written by a member of the PostHog team about their time at a past startup. We’ve removed identifying details as it’s not meant to bash the company, but be a lesson.
 
-In American football, there's a defensive strategy called "prevent defense" that coaches deploy when they're ahead late in the game. The logic is sound: give up small gains but prevent big plays, run out the clock, and protect your lead. It's conservative, it's textbook, and it almost never works.
+In American football, there's a strategy called "prevent defense" that teams use when they're leading late in the game. The logic is sound: give up small gains but prevent big plays, run out the clock, and protect your lead. A lot of successful startups do something similar. It's conservative, it's textbook, and although it works in football, it never works in startups.
 
-The problem isn't the strategy itself. It's that **you stop doing the things that got you ahead in the first place**. You're no longer playing to win, you're playing not to lose, and in sports, in startups, in anything competitive, that shift in mindset is how you hand the game to someone hungrier than you.
+The problem isn't the strategy itself. It's that **you stop doing the things that got you ahead in the first place**. You're no longer playing to win, you're playing not to lose, and in startups, that mindset shift is how you hand the lead to someone hungrier than you.
 
-I know because I saw this happen. I was one of the first 30 employees at a scrappy startup that went public and became unrecognizable.
-
-## From scrappy to sluggish
-
-When I joined, the company had something special: tight culture, developer-first mindset, and a PLG motion that got us to 9 figures of ARR before thinking about sales.
+I know because I saw this happen. I was one of the first 30 employees at a now public tech company you've probably heard of. When I joined, it had something special: tight culture, developer-first mindset, and a PLG motion that got us to **9 figures of ARR before thinking about sales**.
 
 Importantly, the founding team kept an iron grip on who got hired, the bar was high, and everyone who made it through understood what it meant to be part of the culture. But you can't scale to IPO with founders interviewing everyone. You have to let go. And when you let go, things start to change.
 
 You hire a bunch of people who meet your high bar. Those people hire more people who *they think* meet the bar. But everyone has their own interpretation, shaped by their backgrounds and biases.
 
-It's like a game of telephone. The message stays mostly the same, but with each repetition, it drifts just slightly. Over seven years, those slight drifts compounded into something unrecognizable.
+It's like a game of telephone. The message stays mostly the same, but with each repetition, it drifts just slightly. Over years, those slight drifts compound and alter the trajectory of the company into an outcome 5-10x lower than it could have been. 
+
+I don't want this to happen to your startup, so here's how to avoid it.
 
 ## When priorities shift
 
