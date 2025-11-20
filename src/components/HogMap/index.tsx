@@ -4,6 +4,7 @@ import { useEventsMapData, EventItem } from './EventsLayer'
 import { navigate } from 'gatsby'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import Menu from './Menu'
+import SearchBar from './SearchBar'
 
 export const LAYER_PEOPLE = 'layer-people'
 export const LAYER_EVENTS_UPCOMING = 'layer-events-upcoming'
@@ -56,6 +57,8 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
     const mapContainerRef = useRef<HTMLDivElement | null>(null)
     const mapRef = useRef<any>(null)
     const markersRef = useRef<any[]>([])
+    const searchMarkerRef = useRef<any>(null)
+    const searchRef = useRef<any>(null)
 
     const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
     const styleUrl = 'mapbox://styles/mapbox/streets-v12'
@@ -579,6 +582,129 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                         past: LAYER_EVENTS_PAST,
                     }}
                 />
+            )}
+            {token && (
+                <div className="absolute top-3 right-3 z-10">
+                    <SearchBar
+                        ref={searchRef}
+                        token={token}
+                        onSelect={({
+                            longitude,
+                            latitude,
+                            label,
+                            address,
+                        }: {
+                            longitude: number
+                            latitude: number
+                            label?: string
+                            address?: string
+                        }) => {
+                            if (mapRef.current) {
+                                mapRef.current.easeTo({
+                                    center: [longitude, latitude],
+                                    zoom: Math.max(10, mapRef.current.getZoom()),
+                                })
+                                const mapboxgl = getMapbox()
+                                if (mapboxgl) {
+                                    // Remove previous search marker
+                                    if (searchMarkerRef.current) {
+                                        try {
+                                            searchMarkerRef.current.remove()
+                                        } catch {
+                                            console.error('Error removing previous search marker')
+                                        }
+                                        searchMarkerRef.current = null
+                                    }
+                                    // Create a simple orange pin marker
+                                    const el = document.createElement('div')
+                                    el.style.width = '18px'
+                                    el.style.height = '18px'
+                                    el.style.borderRadius = '50%'
+                                    el.style.background = '#FF6F00'
+                                    el.style.border = '2px solid #ffffff'
+                                    el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
+                                    // Build popup DOM with details + form
+                                    const container = document.createElement('div')
+                                    container.className = 'text-sm max-w-[260px]'
+                                    const title = document.createElement('div')
+                                    title.className = 'font-semibold mb-1'
+                                    title.textContent = label || 'Selected place'
+                                    const addr = document.createElement('div')
+                                    addr.className = 'text-secondary mb-1'
+                                    addr.textContent = address || ''
+                                    const coordsWrap = document.createElement('div')
+                                    coordsWrap.className = 'text-secondary mb-2'
+                                    coordsWrap.textContent = `Lat ${latitude.toFixed(5)}, Lng ${longitude.toFixed(5)}`
+                                    const selectWrap = document.createElement('div')
+                                    selectWrap.className = 'mb-2'
+                                    const select = document.createElement('select')
+                                    ;['cafe', 'restaurant', 'airbnb', 'hotel', 'co-working', 'offsite'].forEach(
+                                        (opt) => {
+                                            const o = document.createElement('option')
+                                            o.value = opt
+                                            o.textContent = opt
+                                            select.appendChild(o)
+                                        }
+                                    )
+                                    select.className =
+                                        'w-full border border-primary rounded px-2 py-1 bg-primary text-primary'
+                                    selectWrap.appendChild(select)
+                                    const buttons = document.createElement('div')
+                                    buttons.className = 'flex gap-2 justify-end'
+                                    const cancelBtn = document.createElement('button')
+                                    cancelBtn.className =
+                                        'px-2 py-1 rounded border border-primary bg-primary text-primary hover:bg-accent'
+                                    cancelBtn.textContent = 'Cancel'
+                                    const addBtn = document.createElement('button')
+                                    addBtn.className =
+                                        'px-2 py-1 rounded border border-primary bg-primary text-primary hover:bg-accent font-semibold'
+                                    addBtn.textContent = 'Add'
+                                    buttons.appendChild(cancelBtn)
+                                    buttons.appendChild(addBtn)
+                                    container.appendChild(title)
+                                    if (address) container.appendChild(addr)
+                                    container.appendChild(coordsWrap)
+                                    container.appendChild(selectWrap)
+                                    container.appendChild(buttons)
+                                    const popup = new mapboxgl.Popup({ offset: 12 }).setDOMContent(container)
+                                    const marker = new mapboxgl.Marker({ element: el })
+                                        .setLngLat([longitude, latitude])
+                                        .setPopup(popup)
+                                    marker.addTo(mapRef.current)
+                                    // Open the popup immediately
+                                    try {
+                                        marker.togglePopup()
+                                    } catch {
+                                        console.error('Error opening popup')
+                                    }
+                                    // Clear the search bar input now that selection is applied
+                                    if (searchRef.current?.clear) {
+                                        try {
+                                            searchRef.current.clear()
+                                        } catch {
+                                            console.error('Error clearing search bar')
+                                        }
+                                    }
+                                    // Wire buttons
+                                    cancelBtn.onclick = () => {
+                                        try {
+                                            marker.remove()
+                                        } catch {
+                                            console.error('Error removing search marker')
+                                        }
+                                        if (searchRef.current?.clear) {
+                                            searchRef.current.clear()
+                                        }
+                                    }
+                                    addBtn.onclick = () => {
+                                        console.log('addBtn clicked')
+                                    }
+                                    searchMarkerRef.current = marker
+                                }
+                            }
+                        }}
+                    />
+                </div>
             )}
             <div ref={mapContainerRef} className="w-full h-full" />
         </div>
