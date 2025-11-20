@@ -22,16 +22,16 @@ export const CreateNewFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/im
 export const ReleaseConditionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/release-conditions-light-mode.png"
 export const ReleaseConditionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/release-conditions-dark-mode.png"
 
-Before you can evaluate a feature flag in your application code, you need to create it in PostHog. When you create a feature flag, you define the following behaviors:
-- The key you use in your code to evaluate the feature flag
-- In which [environments and runtimes](/tutorials/evaluation-runtimes-and-environments) the flag will be evaluated
-- Whether the flag is a boolean, multivariate, or remote config flag
-- The payload that will be returned when the flag is evaluated
-- Release conditions that determine which users will see the flag
+Before you can evaluate a feature flag in your application code, you need to create it in PostHog. You need to configure the following for a new flag:
+1. `required` [Create a new feature flag](#step-1-create-a-new-feature-flag-required)
+2. `required` [The key you use in your code to evaluate the feature flag](#step-2-feature-flag-key-and-description-required)
+3. `required` [The type of feature flag – boolean, multivariate, or remote config](#step-3-feature-flag-type-required)
+4. `optional` [Additional feature flag behaviors](#step-4-feature-flag-behavior-optional)
+5. `optional` [Evaluation runtime and environments](#step-5-evaluation-runtime-and-environments-optional)
 
 ## Step 1. Create a new feature flag (required)
 
-To create a new feature flag, navigate to the [feature flags tab](https://app.posthog.com/feature_flags) in your PostHog app and click **Create feature flag** button to create a new flag.
+To create a new feature flag, navigate to the [feature flags tab](https://app.posthog.com/feature_flags) in your PostHog app and click the **Create feature flag** button to create a new flag.
 
 This presents you with a form where you can complete the details of your new flag:
 
@@ -42,13 +42,13 @@ This presents you with a form where you can complete the details of your new fla
     classes="rounded"
 />
 
-Continue here in the steps below to configure your feature flag's behaviors.
-
 ## Step 2. Feature flag key and description (required)
 
 This is the **unique** key you use in your code to evaluate the feature flag. Some examples of feature flag keys are `new-landing-page`, `betaFeature`, or `bigger_callout_button`.
 
-You will later [evaluate the feature flag](/docs/feature-flags/adding-feature-flag-code) in your code using expressions like `posthog.isFeatureEnabled('new-landing-page')` or `posthog.getFeatureFlag('betaFeature')`.
+You will later [evaluate the feature flag](/docs/feature-flags/adding-feature-flag-code) in your code using expressions like
+- `posthog.isFeatureEnabled('new-landing-page')`
+- `posthog.getFeatureFlag('betaFeature')`
 
 Use a descriptive key that reads well in your code and is easy to understand. You should also include a **description** to help you and your team understand the purpose of the feature flag.
 
@@ -58,9 +58,9 @@ In the **Served value** section, you can configure the type of feature flag you 
 
 | Flag type | Description |
 |-----------|-------------|
-| **Boolean flags** | These return `false` if the flag is disabled, `true` if the flag is enabled and has a matching release condition, and `null` or `undefined` if no release condition matches. |
-| **Multiple variant flags** <br/> (multivariate flags) | Instead of indicating enabled vs. disabled, multivariate flags return a key – for example, `control` or `test`.<br/><br/>You can choose the rollout percentage for each variant key, where each is given a specific percentage of the total audience. Users will then be randomly assigned to each variant based on these percentages. |
-| **Remote config flags** | While boolean and multivariate flags can be set up to serve different values to different users, remote config flags are meant to pass static configuration values to your applications at runtime. The config value is **always** passed in the flag's payload.<br/><br/>You can use remote config flags to tweak application configs on the fly without deploying code changes. |
+| **Release toggle** <br/> <br/> (boolean) | These return `false` if the flag is disabled, `true` if the flag is enabled and has a matching release condition, and `null` or `undefined` if no release condition matches. |
+| **Multiple variants with rollout percentages** <br/> <br/> (A/B/n test) | Instead of indicating enabled vs. disabled, multivariate flags return a key – for example, `control` or `test`.<br/><br/>You can choose the rollout percentage for each variant key, where each is given a specific percentage of the total audience. Users will then be randomly assigned to each variant based on these percentages. |
+| **Remote config** <br/> <br/>(single payload) | While boolean and multivariate flags can be set up to serve different values to different users, remote config flags are meant to pass static configuration values to your applications at runtime. The config value is **always** passed in the flag's payload.<br/><br/>You can use remote config flags to tweak application configs on the fly without deploying code changes. |
 
 You can select the type of feature flag by toggling between the selectors. Then, configure the payload and release conditions for the flag if applicable.
 
@@ -107,23 +107,23 @@ Currently, [feature flag dependencies](docs/feature-flags/dependencies) are limi
 
 </CalloutBox>
 
-## 4. Feature flag behavior (optional)
+## Step 4. Feature flag behavior (optional)
 
 These are some _optional_ toggles for feature flag behavior. This section describes what they do and their default values.
 
-### Enable feature flag
+### Enable feature flag (optional)
 
 > Default: `Enabled`
 
 This determines whether your flag is enabled on creation. Disabled flags return `undefined` or `null` when evaluated. You can always re-enable or disable the flag later.
 
-### Create usage dashboard
+### Create usage dashboard (optional)
 
 > Default: `Enabled`
 
 Automatically track how often this flag is called and what values are returned. Creates a dashboard with call volume trends and variant distribution insights.
 
-### Persisting feature flags across authentication steps
+### Persisting feature flags across authentication steps (optional)
 
 > Default: `Disabled`
 >
@@ -175,10 +175,8 @@ If you override any of these during capture, evaluation may not be accurate.
 The system then filters which flags are returned based on their configured runtime, ensuring:
 - Smaller payload sizes for client applications
 - Reduced evaluation latency by eliminating irrelevant flags
-- Prevention of feature flag bloat in each environment
-- Improved performance by reducing unnecessary flag evaluations
+- Prevention of feature flag bloat and better organization by environment
 - Better security by keeping server-only flags away from client environments
-- Cleaner flag management with environment-specific organization
 
 If you're not sure which runtime to use, you can use the following guidelines:
 
@@ -199,21 +197,17 @@ If you're not sure which runtime to use, you can use the following guidelines:
 
 ### Tags and evaluation environments (optional)
 
-> By default, no tags are applied to a feature flag. This will only affect how your flags evaluation if you:
-> - Configure tags for your feature flag
-> - AND specify [`evaluation_environments`](/docs/feature-flags/evaluation-environments#step-2-configure-your-sdks) during capture.
+<CalloutBox icon="IconWarning" title="Evaluation environments are in alpha release" type="caution">
+
+Evaluation environments are currently in alpha release and require (at least) the **Boost add-on** for the resource tagging feature to function correctly. This feature may not be available in your PostHog instance yet. Contact support if you'd like early access to this feature.
+
+</CalloutBox>
 
 Tags are a way to categorize your feature flags. Use them to describe when/where the flag is used in your application. Some common examples are:
 
 - Application type (e.g., "main-app", "marketing-site", "docs")
 - Platform (e.g., "web", "mobile", "api")
 - Product area (e.g., "checkout", "onboarding", "admin")
-
-<CalloutBox icon="IconWarning" title="Evaluation environments are in alpha release" type="caution">
-
-Evaluation environments are currently in alpha release and require (at least) the **Boost add-on** for the resource tagging feature to function correctly. This feature may not be available in your PostHog instance yet. Contact support if you'd like early access to this feature.
-
-</CalloutBox>
 
 When evaluation environments are configured, the feature flag will only evaluate when the SDK provides matching evaluation environments in the `/flags` request.
 
