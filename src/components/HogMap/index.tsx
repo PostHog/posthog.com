@@ -520,8 +520,8 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current as HTMLDivElement,
             style: styleUrl,
-            center: [0, 20],
-            zoom: 1.1,
+            center: [-0.1276, 51.5074], // London
+            zoom: 4,
             attributionControl: true,
         })
         mapRef.current.addControl(new mapboxgl.NavigationControl({ visualizePitch: true }), 'top-right')
