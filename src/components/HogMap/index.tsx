@@ -1,14 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { usePeopleMapData, ProfileNode, Coordinates } from './PeopleLayer'
-import { useEventsMapData, EventItem } from './EventsLayer'
+import { useEventsMapData } from './EventsLayer'
 import { navigate } from 'gatsby'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import Menu from './Menu'
 import SearchBar, { createSearchMarker } from './SearchBar'
+import { PlaceItem, EventItem } from './types'
 
 export const LAYER_PEOPLE = 'layer-people'
 export const LAYER_EVENTS_UPCOMING = 'layer-events-upcoming'
 export const LAYER_EVENTS_PAST = 'layer-events-past'
+export const LAYER_PLACES = 'layer-places'
+export const LAYER_OFFSITES_UPCOMING = 'layer-offsites-upcoming'
+export const LAYER_OFFSITES_PAST = 'layer-offsites-past'
+
+export const events: EventItem[] = []
+export const places: PlaceItem[] = []
 
 // Delay requiring mapbox-gl until client to avoid SSR issues
 const getMapbox = () => {
@@ -584,7 +591,7 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                 />
             )}
             {token && (
-                <div className="absolute top-3 right-3 z-10">
+                <div className="absolute top-3 left-3 z-10">
                     <SearchBar
                         ref={searchRef}
                         token={token}

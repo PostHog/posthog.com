@@ -1,23 +1,9 @@
 import { useEffect, useState } from 'react'
+import { EventItem } from './types'
 
 export interface Coordinates {
     latitude: number
     longitude: number
-}
-
-export interface EventItem {
-    id: number
-    name: string
-    date: string
-    location: {
-        label: string
-        lat?: number
-        lng?: number
-        venue?: {
-            name?: string
-        }
-    }
-    link?: string
 }
 
 export const useEventsMapData = (isClient: boolean, token?: string) => {
