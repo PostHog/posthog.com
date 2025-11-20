@@ -58,10 +58,10 @@ export default function Podcast(): JSX.Element {
             />
             <div>
                 {feed.map((item) => (
-                    <div key={item.guid}>
-                        <div className="bg-accent">
-                            <h2>{item.title}</h2>
-                            <p>{item.description}</p>
+                    <div key={item.guid} className="border-b border-accent-dark">
+                        <div className="bg-primary">
+                            <div>{item.title}</div>
+                            <div>{item.description}</div>
                         </div>
                     </div>
                 ))}
