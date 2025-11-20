@@ -1266,6 +1266,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/new-hire-onboarding',
                     },
                     {
+                        name: 'How we work',
+                        url: '/handbook/growth/sales/how-we-work',
+                    },
+                    {
                         name: 'Why buy PostHog',
                         url: '/handbook/growth/sales/why-buy-posthog',
                     },
@@ -1324,8 +1328,8 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/utilization-by-business-type',
                     },
                     {
-                        name: 'How we work',
-                        url: '/handbook/growth/sales/how-we-work',
+                        name: 'Professional services',
+                        url: '/handbook/growth/sales/professional-services',
                     },
                     {
                         name: 'Hogpatch',
