@@ -16,6 +16,18 @@ on:
                 options:
                     - 'true'
                     - 'false'
+            upload_s3:
+                description: 'Upload handbook audio to S3'
+                required: false
+                default: 'true'
+                type: choice
+                options:
+                    - 'true'
+                    - 'false'
+            limit:
+                description: 'Limit number of handbook files to process (empty = all allowed files)'
+                required: false
+                type: string
             status:
                 description: 'Status for new episodes'
                 required: false
@@ -44,6 +56,34 @@ jobs:
               run: |
                   cd scripts/hogfm
                   uv sync
+
+            - name: Generate handbook audio
+              env:
+                  AWS_ACCESS_KEY_ID: ${{ secrets.PODCAST_AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.PODCAST_AWS_SECRET_ACCESS_KEY }}
+                  AWS_REGION: ${{ secrets.PODCAST_AWS_REGION || 'us-east-1' }}
+                  ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+                  ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+                  S3_BUCKET: ${{ secrets.S3_BUCKET }}
+              run: |
+                  cd scripts/hogfm
+
+                  # Build arguments based on inputs
+                  ARGS="--allowed-only"
+
+                  if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+                    ARGS="$ARGS --dry-run"
+                  fi
+
+                  if [ "${{ github.event.inputs.upload_s3 }}" != "false" ]; then
+                    ARGS="$ARGS --upload-s3"
+                  fi
+
+                  if [ -n "${{ github.event.inputs.limit }}" ]; then
+                    ARGS="$ARGS --limit ${{ github.event.inputs.limit }}"
+                  fi
+
+                  uv run handbook-audio $ARGS
 
             - name: Sync podcasts to Podbean
               env:
