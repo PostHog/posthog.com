@@ -33,7 +33,7 @@ GOOGLE_SHEET_NAME = "Sheet2"
 GOOGLE_SHEET_CELL = "B2"
 
 # eleven labs voice ids
-BEN_VOICE_ID = os.getenv("JAMES_VOICE_ID")
+BEN_VOICE_ID = os.getenv("BEN_VOICE_ID")
 JAMES_VOICE_ID = os.getenv("JAMES_VOICE_ID")
 MAX_VOICE_ID = os.getenv("MAX_VOICE_ID")
 
