@@ -60,7 +60,7 @@ ALLOWED_FILES = [
 ]
 
 
-def process_single_file(file_path, dry_run=False, upload_s3=False):
+def process_single_file(file_path, dry_run=False, upload_s3=False, force=False):
     """Process a single file with all steps"""
     content = process_markdown_file(file_path, HANDBOOK_DIR)
     
@@ -70,8 +70,8 @@ def process_single_file(file_path, dry_run=False, upload_s3=False):
     # Generate the full text that will be sent to ElevenLabs
     full_text = f'{content["title"]}.\n\n{content["text"]}'
     
-    # If upload_s3 is enabled, check S3 for existing text to detect changes
-    if upload_s3:
+    # If upload_s3 is enabled, check S3 for existing text to detect changes (unless force is enabled)
+    if upload_s3 and not force:
         existing_text = download_text_from_s3(content['slug'], dry_run=dry_run)
         
         if existing_text is not None:
@@ -83,6 +83,8 @@ def process_single_file(file_path, dry_run=False, upload_s3=False):
                 print(f'  🔄 Content changed, regenerating audio')
         else:
             print(f'  🆕 First generation (no existing file in S3)')
+    elif force and upload_s3:
+        print(f'  🔨 Force enabled, regenerating audio regardless of changes')
     
     # Save parsed text FIRST so you can test with it before generating audio
     text_file_path = save_text_file(content['slug'], content, OUTPUT_DIR, dry_run=dry_run)
@@ -124,17 +126,20 @@ def main():
         print('  python scripts/handbook-audio/generate.py --dry-run <file-path>')
         print('  python scripts/handbook-audio/generate.py --upload-s3 <file-path>')
         print('  python scripts/handbook-audio/generate.py --all --upload-s3')
+        print('  python scripts/handbook-audio/generate.py --force --upload-s3 <file-path>')
         print('')
         print('Examples:')
         print('  python scripts/handbook-audio/generate.py --dir engineering')
         print('  python scripts/handbook-audio/generate.py --dir engineering/operations')
         print('  python scripts/handbook-audio/generate.py --allowed-only --upload-s3  # For cron jobs')
         print('  python scripts/handbook-audio/generate.py --allowed-only --limit 2    # First 2 files only')
+        print('  python scripts/handbook-audio/generate.py --allowed-only --force --upload-s3  # Force regenerate all')
         sys.exit(1)
     
     # Check for flags
     dry_run = '--dry-run' in sys.argv
     upload_s3 = '--upload-s3' in sys.argv
+    force = '--force' in sys.argv
     limit = None
     
     # Check for --limit flag
@@ -175,6 +180,13 @@ def main():
         elif s3_available:
             print(f'☁️  S3 upload enabled: {s3_message}\n')
     
+    if force:
+        sys.argv.remove('--force')
+        if upload_s3:
+            print('🔨 Force mode enabled: will regenerate all audio regardless of changes\n')
+        else:
+            print('⚠️  Warning: --force flag has no effect without --upload-s3\n')
+    
     if len(sys.argv) < 2:
         print('❌ Please specify a file path, --all, --dir <directory>, --search <pattern>, or --allowed-only')
         sys.exit(1)
@@ -192,7 +204,7 @@ def main():
             relative_path = file_path.relative_to(HANDBOOK_DIR)
             print(f'\n[{i + 1}/{len(files)}] {relative_path}')
             
-            result = process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3)
+            result = process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3, force=force)
             if result == True:
                 success_count += 1
             elif result == 'skipped':
@@ -238,7 +250,7 @@ def main():
             relative_path = file_path.relative_to(HANDBOOK_DIR)
             print(f'\n[{i + 1}/{len(files)}] {relative_path}')
             
-            result = process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3)
+            result = process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3, force=force)
             if result == True:
                 success_count += 1
             elif result == 'skipped':
@@ -285,7 +297,7 @@ def main():
             relative_path = file_path.relative_to(HANDBOOK_DIR)
             print(f'\n[{i + 1}/{len(files)}] {relative_path}')
             
-            result = process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3)
+            result = process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3, force=force)
             if result == True:
                 success_count += 1
             elif result == 'skipped':
@@ -363,7 +375,7 @@ def main():
             relative_path = file_path.relative_to(HANDBOOK_DIR)
             print(f'\n[{i + 1}/{len(files)}] {relative_path}')
             
-            result = process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3)
+            result = process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3, force=force)
             if result == True:
                 success_count += 1
             elif result == 'skipped':
@@ -390,7 +402,7 @@ def main():
             print(f'❌ File not found: {file_path}')
             sys.exit(1)
         
-        process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3)
+        process_single_file(file_path, dry_run=dry_run, upload_s3=upload_s3, force=force)
         print('\n✨ Done!')
 
 
