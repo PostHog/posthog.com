@@ -13,6 +13,7 @@ import {
     IconCode,
     IconFeatures,
     IconMapPin,
+    IconPineapple,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
@@ -202,14 +203,14 @@ export default function TaskBarMenu() {
                                 {
                                     type: 'item' as const,
                                     label: 'Place reviews',
-                                    link: '/places-reviews',
+                                    link: '/place-reviews',
                                     icon: <IconMapPin className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                                 {
                                     type: 'item' as const,
                                     label: 'Offsites',
                                     link: '/offsites',
-                                    icon: <IconMapPin className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                    icon: <IconPineapple className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                             ]
                           : []),
