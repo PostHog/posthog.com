@@ -153,4 +153,4 @@ In some cases, prospective or current customers require a mutual Non-disclosure 
 - Access PandaDoc and Create a New Document
 - Use the current PostHog - NDA template
 - Add your desired contact as a recipient and follow the usual PandaDoc process
-- When document is complete, it will be stored in the Document libary and can also be attached to the Salesforce account for future reference
+- When document is complete, it will be stored in the Document library and can also be attached to the Salesforce account for future reference
