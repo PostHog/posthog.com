@@ -153,6 +153,7 @@ dependencies = [
     { name = "boto3" },
     { name = "elevenlabs" },
     { name = "python-dotenv" },
+    { name = "requests" },
 ]
 
 [package.metadata]
@@ -160,6 +161,7 @@ requires-dist = [
     { name = "boto3", specifier = ">=1.41.0" },
     { name = "elevenlabs", specifier = ">=2.23.0" },
     { name = "python-dotenv", specifier = ">=1.2.1" },
+    { name = "requests", specifier = ">=2.31.0" },
 ]
 
 [[package]]
