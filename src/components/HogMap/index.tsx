@@ -10,6 +10,7 @@ import { getPlaces } from './data'
 import { EventItem } from './types'
 import { IconBuilding, IconBed, IconBurger, IconCoffee, IconLaptop, IconTelescope } from '@posthog/icons'
 import { renderToStaticMarkup } from 'react-dom/server'
+import { useUser } from 'hooks/useUser'
 
 export const LAYER_PEOPLE = 'layer-people'
 export const LAYER_EVENTS_UPCOMING = 'layer-events-upcoming'
@@ -58,6 +59,7 @@ const computeOffsets = (count: number, baseRadius: number): Array<{ dx: number; 
 
 export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
+    const { getJwt } = useUser()
     useEffect(() => {
         setIsClient(true)
     }, [])
@@ -222,11 +224,11 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
             if (!mapRef.current) return
             const clustersId = `${id}-clusters`
             const countId = `${id}-cluster-count`
-                ;[clustersId, countId].forEach((layerId) => {
-                    if (mapRef.current.getLayer(layerId)) {
-                        mapRef.current.setLayoutProperty(layerId, 'visibility', visible ? 'visible' : 'none')
-                    }
-                })
+            ;[clustersId, countId].forEach((layerId) => {
+                if (mapRef.current.getLayer(layerId)) {
+                    mapRef.current.setLayoutProperty(layerId, 'visibility', visible ? 'visible' : 'none')
+                }
+            })
         }
         const renderMarkers = () => {
             if (!mapRef.current) return
@@ -379,9 +381,17 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                         const locationText = p.country === 'world' ? 'Planet Earth' : p.location || p.country || ''
                         const popupHtml = `
                             <div class="text-sm max-w-xs text-center">
-                                <div class="font-semibold font-squeak text-xl uppercase leading-tight">${name || 'Team member'}</div>
+                                <div class="font-semibold font-squeak text-xl uppercase leading-tight">${
+                                    name || 'Team member'
+                                }</div>
                                 ${role ? `<div class="mt-1 text-secondary text-balance">${role}</div>` : ''}
-                                ${flagEmoji || locationText ? `<div class="mt-1 text-secondary justify-center flex gap-1 items-center">${flagEmoji ? `<span>${flagEmoji}</span>` : ''}${locationText ? `<span>${locationText}</span>` : ''}</div>` : `<div class="text-secondary">${label}</div>`}
+                                ${
+                                    flagEmoji || locationText
+                                        ? `<div class="mt-1 text-secondary justify-center flex gap-1 items-center">${
+                                              flagEmoji ? `<span>${flagEmoji}</span>` : ''
+                                          }${locationText ? `<span>${locationText}</span>` : ''}</div>`
+                                        : `<div class="text-secondary">${label}</div>`
+                                }
                             </div>`
                         const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
                         const marker = new mapboxgl.Marker({ element: el })
@@ -422,62 +432,62 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                     return acc
                 }, {} as Record<string, { coords: Coordinates; events: EventItem[]; label: string }>)
 
-                    ; (Object.values(groups) as Array<{ coords: Coordinates; events: EventItem[]; label: string }>).forEach(
-                        ({ coords: { longitude, latitude }, events, label }) => {
-                            const offsets = computeOffsets(events.length, jitterRadius)
-                                ; (events as EventItem[]).forEach((ev: EventItem, idx: number) => {
-                                    const { dx, dy } = offsets[idx]
-                                    const el = document.createElement('div')
-                                    el.style.width = '20px'
-                                    el.style.height = '20px'
-                                    el.style.borderRadius = '10px'
-                                    el.style.background = '#FF9500' // upcoming
-                                    el.style.border = '2px solid #ffffff'
-                                    el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
+                ;(Object.values(groups) as Array<{ coords: Coordinates; events: EventItem[]; label: string }>).forEach(
+                    ({ coords: { longitude, latitude }, events, label }) => {
+                        const offsets = computeOffsets(events.length, jitterRadius)
+                        ;(events as EventItem[]).forEach((ev: EventItem, idx: number) => {
+                            const { dx, dy } = offsets[idx]
+                            const el = document.createElement('div')
+                            el.style.width = '20px'
+                            el.style.height = '20px'
+                            el.style.borderRadius = '10px'
+                            el.style.background = '#FF9500' // upcoming
+                            el.style.border = '2px solid #ffffff'
+                            el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
 
-                                    const date = ev.date
-                                        ? new Date(ev.date).toLocaleDateString('en-US', {
-                                            month: 'short',
-                                            day: 'numeric',
-                                            year: 'numeric',
-                                        })
-                                        : ''
-                                    const href = ev.link || ''
-                                    const name = ev.name || 'Event'
-                                    const popupHtml = `
+                            const date = ev.date
+                                ? new Date(ev.date).toLocaleDateString('en-US', {
+                                      month: 'short',
+                                      day: 'numeric',
+                                      year: 'numeric',
+                                  })
+                                : ''
+                            const href = ev.link || ''
+                            const name = ev.name || 'Event'
+                            const popupHtml = `
                             <div class="text-sm max-w-xs">
                                 <div class="font-semibold text-lg">${name}</div>
                                 ${date ? `<div class="text-secondary mb-1">${date}</div>` : ''}
                                 <div class="text-secondary">${label}</div>
                                 ${href ? `<a class="underline font-semibold" href="${href}">View details →</a>` : ''}
                             </div>`
-                                    const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+                            const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
 
-                                    const marker = new mapboxgl.Marker({ element: el })
-                                        .setLngLat([longitude + dx, latitude + dy])
-                                        .setPopup(popup)
-                                        .addTo(mapRef.current)
-                                    if (href) {
-                                        marker.getElement().style.cursor = 'pointer'
-                                        marker.getElement().addEventListener('click', () => {
-                                            if (href.startsWith('/')) {
-                                                navigate(href, { state: { newWindow: true } })
-                                            } else if (typeof window !== 'undefined') {
-                                                window.open(href, '_blank', 'noopener,noreferrer')
-                                            }
-                                        })
-                                    } else {
-                                        marker.getElement().style.cursor = 'pointer'
-                                        marker.getElement().addEventListener('click', () => {
-                                            navigate('/events', { state: { newWindow: true } })
-                                        })
+                            const marker = new mapboxgl.Marker({ element: el })
+                                .setLngLat([longitude + dx, latitude + dy])
+                                .setPopup(popup)
+                                .addTo(mapRef.current)
+                            if (href) {
+                                marker.getElement().style.cursor = 'pointer'
+                                marker.getElement().addEventListener('click', () => {
+                                    if (href.startsWith('/')) {
+                                        navigate(href, { state: { newWindow: true } })
+                                    } else if (typeof window !== 'undefined') {
+                                        window.open(href, '_blank', 'noopener,noreferrer')
                                     }
-                                    marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
-                                    marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
-                                    markersRef.current.push(marker)
                                 })
-                        }
-                    )
+                            } else {
+                                marker.getElement().style.cursor = 'pointer'
+                                marker.getElement().addEventListener('click', () => {
+                                    navigate('/events', { state: { newWindow: true } })
+                                })
+                            }
+                            marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                            marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                            markersRef.current.push(marker)
+                        })
+                    }
+                )
             }
             if (showPast) {
                 const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
@@ -500,131 +510,148 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                     return acc
                 }, {} as Record<string, { coords: Coordinates; events: EventItem[]; label: string }>)
 
-                    ; (Object.values(groups) as Array<{ coords: Coordinates; events: EventItem[]; label: string }>).forEach(
-                        ({ coords: { longitude, latitude }, events, label }) => {
-                            const offsets = computeOffsets(events.length, jitterRadius)
-                                ; (events as EventItem[]).forEach((ev: EventItem, idx: number) => {
-                                    const { dx, dy } = offsets[idx]
-                                    const el = document.createElement('div')
-                                    el.classList.add(
-                                        'w-5',
-                                        'h-5',
-                                        'rounded-full',
-                                        'bg-muted',
-                                        'border-2',
-                                        'border-white',
-                                        'shadow'
-                                    )
+                ;(Object.values(groups) as Array<{ coords: Coordinates; events: EventItem[]; label: string }>).forEach(
+                    ({ coords: { longitude, latitude }, events, label }) => {
+                        const offsets = computeOffsets(events.length, jitterRadius)
+                        ;(events as EventItem[]).forEach((ev: EventItem, idx: number) => {
+                            const { dx, dy } = offsets[idx]
+                            const el = document.createElement('div')
+                            el.classList.add(
+                                'w-5',
+                                'h-5',
+                                'rounded-full',
+                                'bg-muted',
+                                'border-2',
+                                'border-white',
+                                'shadow'
+                            )
 
-                                    const date = ev.date
-                                        ? new Date(ev.date).toLocaleDateString('en-US', {
-                                            month: 'short',
-                                            day: 'numeric',
-                                            year: 'numeric',
-                                        })
-                                        : ''
-                                    const href = ev.link || ''
-                                    const name = ev.name || 'Event'
-                                    const popupHtml = `
+                            const date = ev.date
+                                ? new Date(ev.date).toLocaleDateString('en-US', {
+                                      month: 'short',
+                                      day: 'numeric',
+                                      year: 'numeric',
+                                  })
+                                : ''
+                            const href = ev.link || ''
+                            const name = ev.name || 'Event'
+                            const popupHtml = `
                             <div class="text-sm max-w-xs">
                                 <div class="font-semibold mb-1 text-lg">${name}</div>
                                 ${date ? `<div class="text-secondary mb-1">${date}</div>` : ''}
                                 <div class="text-secondary">${label}</div>
                                 ${href ? `<a class="underline font-semibold" href="${href}">View details →</a>` : ''}
                             </div>`
-                                    const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+                            const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
 
-                                    const marker = new mapboxgl.Marker({ element: el })
-                                        .setLngLat([longitude + dx, latitude + dy])
-                                        .setPopup(popup)
-                                        .addTo(mapRef.current)
-                                    if (href) {
-                                        marker.getElement().style.cursor = 'pointer'
-                                        marker.getElement().addEventListener('click', () => {
-                                            if (href.startsWith('/')) {
-                                                navigate(href, { state: { newWindow: true } })
-                                            } else if (typeof window !== 'undefined') {
-                                                window.open(href, '_blank', 'noopener,noreferrer')
-                                            }
-                                        })
-                                    } else {
-                                        marker.getElement().style.cursor = 'pointer'
-                                        marker.getElement().addEventListener('click', () => {
-                                            navigate('/events', { state: { newWindow: true } })
-                                        })
+                            const marker = new mapboxgl.Marker({ element: el })
+                                .setLngLat([longitude + dx, latitude + dy])
+                                .setPopup(popup)
+                                .addTo(mapRef.current)
+                            if (href) {
+                                marker.getElement().style.cursor = 'pointer'
+                                marker.getElement().addEventListener('click', () => {
+                                    if (href.startsWith('/')) {
+                                        navigate(href, { state: { newWindow: true } })
+                                    } else if (typeof window !== 'undefined') {
+                                        window.open(href, '_blank', 'noopener,noreferrer')
                                     }
-                                    marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
-                                    marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
-                                    markersRef.current.push(marker)
                                 })
-                        }
-                    )
+                            } else {
+                                marker.getElement().style.cursor = 'pointer'
+                                marker.getElement().addEventListener('click', () => {
+                                    navigate('/events', { state: { newWindow: true } })
+                                })
+                            }
+                            marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                            marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                            markersRef.current.push(marker)
+                        })
+                    }
+                )
             }
             // Render saved places if their place-type layers are enabled
             const activePlaceTypes = Object.values(PlaceType).filter((pt) => currentEnabled.includes(pt))
             if (activePlaceTypes.length > 0) {
                 const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
-                const allPlaces = getPlaces()
-                const activePlaces = allPlaces.filter((p) => activePlaceTypes.includes(p.type))
-                const groups = activePlaces.reduce((acc, p) => {
-                    const key = `${p.longitude.toFixed(4)},${p.latitude.toFixed(4)}`
-                    if (!acc[key]) {
-                        acc[key] = {
-                            coords: { longitude: p.longitude, latitude: p.latitude },
-                            places: [] as typeof allPlaces,
-                        }
-                    }
-                    acc[key].places.push(p)
-                    return acc
-                }, {} as Record<string, { coords: Coordinates; places: typeof allPlaces }>)
-                Object.values(groups).forEach(({ coords: { longitude, latitude }, places }) => {
-                    const offsets = computeOffsets(places.length, jitterRadius)
-                    places.forEach((pl, idx) => {
-                        const { dx, dy } = offsets[idx]
-                        const el = document.createElement('div')
-                        el.className =
-                            'w-[24px] h-[24px] rounded-full bg-orange border-2 border-white shadow-md flex items-center justify-center'
-                        // Icon based on place type
-                        const lowerType = String(pl.type || '').toLowerCase()
-                        const icon =
-                            lowerType === 'hotel' ? (
-                                <IconBuilding className="w-[24px] h-[24px] p-1" />
-                            ) : lowerType === 'airbnb' ? (
-                                <IconBed className="w-[24px] h-[24px] p-1" />
-                            ) : lowerType === 'restaurant' ? (
-                                <IconBurger className="w-[24px] h-[24px] p-1" />
-                            ) : lowerType === 'cafe' ? (
-                                <IconCoffee className="w-[24px] h-[24px] p-1" />
-                            ) : lowerType === 'co-working' ? (
-                                <IconLaptop className="w-[24px] h-[24px] p-1" />
-                            ) : lowerType === 'offsite' ? (
-                                <IconTelescope className="w-[24px] h-[24px] p-1" />
-                            ) : (
-                                <IconBuilding className="w-[24px] h-[24px] p-1" />
-                            )
-                        const iconWrapper = document.createElement('div')
-                        iconWrapper.className = 'text-white leading-none flex items-center justify-center'
-                        iconWrapper.innerHTML = renderToStaticMarkup(icon)
-                        el.appendChild(iconWrapper)
-                        const popupHtml = `
-                            <div class="text-sm max-w-xs">
-                                <div class="font-semibold text-lg mb-1">${pl.name}</div>
-                                ${pl.address ? `<div class="text-secondary mb-1">${pl.address}</div>` : ''}
-                                <div class="text-secondary">Lat ${pl.latitude.toFixed(5)}, Lng ${pl.longitude.toFixed(
-                            5
-                        )}</div>
-                                <div class="mt-1 text-secondary capitalize">${pl.type}</div>
-                            </div>`
-                        const mapboxgl = getMapbox()
-                        if (!mapboxgl) return
-                        const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
-                        const marker = new mapboxgl.Marker({ element: el })
-                            .setLngLat([longitude + dx, latitude + dy])
-                            .setPopup(popup)
-                            .addTo(mapRef.current)
-                        marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
-                        marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
-                        markersRef.current.push(marker)
+                getJwt().then((jwt) => {
+                    if (!jwt) return
+                    getPlaces(jwt).then((allPlaces: any[]) => {
+                        const activePlaces = (allPlaces as any[]).filter((p: any) =>
+                            activePlaceTypes.includes(p.type as PlaceType)
+                        )
+                        const groups = (activePlaces as any[]).reduce(
+                            (acc: Record<string, { coords: Coordinates; places: any[] }>, p: any) => {
+                                const lon = Number(p.longitude)
+                                const lat = Number(p.latitude)
+                                const key = `${lon.toFixed(4)},${lat.toFixed(4)}`
+                                if (!acc[key]) {
+                                    acc[key] = {
+                                        coords: { longitude: lon, latitude: lat },
+                                        places: [] as any[],
+                                    }
+                                }
+                                acc[key].places.push(p as any)
+                                return acc
+                            },
+                            {} as Record<string, { coords: Coordinates; places: any[] }>
+                        )
+                        ;(Object.values(groups) as Array<{ coords: Coordinates; places: any[] }>).forEach(
+                            ({ coords: { longitude, latitude }, places }) => {
+                                const offsets = computeOffsets(places.length, jitterRadius)
+                                ;(places as any[]).forEach((pl: any, idx: number) => {
+                                    const { dx, dy } = offsets[idx]
+                                    const el = document.createElement('div')
+                                    el.className =
+                                        'w-[24px] h-[24px] rounded-full bg-orange border-2 border-white shadow-md flex items-center justify-center'
+                                    // Icon based on place type
+                                    const lowerType = String((pl as any).type || '').toLowerCase()
+                                    const icon =
+                                        lowerType === 'hotel' ? (
+                                            <IconBuilding className="w-[24px] h-[24px] p-1" />
+                                        ) : lowerType === 'airbnb' ? (
+                                            <IconBed className="w-[24px] h-[24px] p-1" />
+                                        ) : lowerType === 'restaurant' ? (
+                                            <IconBurger className="w-[24px] h-[24px] p-1" />
+                                        ) : lowerType === 'cafe' ? (
+                                            <IconCoffee className="w-[24px] h-[24px] p-1" />
+                                        ) : lowerType === 'co-working' ? (
+                                            <IconLaptop className="w-[24px] h-[24px] p-1" />
+                                        ) : lowerType === 'offsite' ? (
+                                            <IconTelescope className="w-[24px] h-[24px] p-1" />
+                                        ) : (
+                                            <IconBuilding className="w-[24px] h-[24px] p-1" />
+                                        )
+                                    const iconWrapper = document.createElement('div')
+                                    iconWrapper.className = 'text-white leading-none flex items-center justify-center'
+                                    iconWrapper.innerHTML = renderToStaticMarkup(icon)
+                                    el.appendChild(iconWrapper)
+                                    const popupHtml = `
+                                    <div class="text-sm max-w-[240px]">
+                                         <div class="font-semibold mb-1">${(pl as any).name}</div>
+                                         ${
+                                             (pl as any).address
+                                                 ? `<div class="text-secondary mb-1">${(pl as any).address}</div>`
+                                                 : ''
+                                         }
+                                         <div class="text-secondary">Lat ${Number((pl as any).latitude).toFixed(
+                                             5
+                                         )}, Lng ${Number((pl as any).longitude).toFixed(5)}</div>
+                                         <div class="mt-1 text-secondary capitalize">${(pl as any).type}</div>
+                                    </div>`
+                                    const mapboxgl = getMapbox()
+                                    if (!mapboxgl) return
+                                    const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+                                    const marker = new mapboxgl.Marker({ element: el })
+                                        .setLngLat([longitude + dx, latitude + dy])
+                                        .setPopup(popup)
+                                        .addTo(mapRef.current)
+                                    marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                                    marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                                    markersRef.current.push(marker)
+                                })
+                            }
+                        )
                     })
                 })
             }
@@ -751,6 +778,7 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                                 address,
                                 prevMarker: searchMarkerRef.current,
                                 searchRef,
+                                getJwt,
                             })
                             if (newMarker) {
                                 searchMarkerRef.current = newMarker
