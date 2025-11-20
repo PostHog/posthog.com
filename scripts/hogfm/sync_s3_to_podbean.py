@@ -33,7 +33,7 @@ PODBEAN_CLIENT_SECRET = os.getenv("PODBEAN_CLIENT_SECRET")
 
 # S3 configuration
 S3_BUCKET = os.getenv("S3_BUCKET")
-S3_PREFIX = os.getenv("S3_PREFIX", "handbook-audio")
+
 AWS_REGION = os.getenv("AWS_REGION", "us-east-1")
 
 # Supported audio extensions
@@ -54,7 +54,7 @@ def get_access_token() -> str:
     return r.json()["access_token"]
 
 
-def list_s3_audio_files() -> list[dict]:
+def list_s3_audio_files(prefix: str) -> list[dict]:
     """
     List all audio files in the S3 bucket/prefix.
 
@@ -65,7 +65,7 @@ def list_s3_audio_files() -> list[dict]:
     files = []
     paginator = s3.get_paginator("list_objects_v2")
 
-    prefix = S3_PREFIX.strip("/") + "/" if S3_PREFIX else ""
+    prefix = prefix.strip("/") + "/" if prefix else ""
 
     for page in paginator.paginate(Bucket=S3_BUCKET, Prefix=prefix):
         for obj in page.get("Contents", []):
@@ -84,7 +84,7 @@ def list_s3_audio_files() -> list[dict]:
     return files
 
 
-def get_podbean_episodes() -> list[dict]:
+def get_podbean_episodes(kind: str) -> list[dict]:
     """
     Get all existing episodes from Podbean.
 
@@ -105,6 +105,9 @@ def get_podbean_episodes() -> list[dict]:
 
         data = r.json()
         batch = data.get("episodes", [])
+
+        # filter for the episode title to contain the kind
+        batch = [episode for episode in batch if episode.get("title", "").lower().startswith(kind.lower())]
         episodes.extend(batch)
 
         if len(batch) < limit:
@@ -223,7 +226,7 @@ def find_matching_episode(filename: str, episodes: list[dict]) -> Optional[dict]
     return None
 
 
-def sync_episodes(dry_run: bool = False, publish_status: str = "draft"):
+def sync_episodes(dry_run: bool = False, publish_status: str = "draft", kind: str = "handbook"):
     """
     Main sync function.
 
@@ -244,7 +247,7 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft"):
         sys.exit(1)
 
     print(f"S3 Bucket: {S3_BUCKET}")
-    print(f"S3 Prefix: {S3_PREFIX or '(root)'}")
+    print(f"S3 folder: {kind}")
     print(f"Publish status: {publish_status}")
     if dry_run:
         print("DRY RUN - no changes will be made")
@@ -252,7 +255,7 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft"):
 
     # Get S3 files
     print("Listing S3 audio files...")
-    s3_files = list_s3_audio_files()
+    s3_files = list_s3_audio_files(kind)
     print(f"   Found {len(s3_files)} audio file(s)")
 
     if not s3_files:
@@ -261,7 +264,7 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft"):
 
     # Get Podbean episodes
     print("Fetching Podbean episodes...")
-    episodes = get_podbean_episodes()
+    episodes = get_podbean_episodes(kind)
     print(f"   Found {len(episodes)} existing episode(s)")
     print()
 
@@ -295,10 +298,6 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft"):
         print(f"   - {s3_file['filename']} ({size_mb:.1f} MB)")
     print()
 
-    if dry_run:
-        print("Dry run complete. No files were uploaded.")
-        return
-
     # Get token for uploads
     token = get_access_token()
 
@@ -308,7 +307,19 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft"):
         s3_key = s3_file["key"]
         filesize = s3_file["size"]
 
-        print(f"[{i}/{len(to_sync)}] Uploading {filename}...")
+        key_path = s3_key.replace(".mp3", "")
+
+        # Get the chapter name from the S3 key like handbook/engineering/deployments-support.mp3...
+        # becomes "Handbook | Engineering | Deployments Support"
+        title = key_path.replace("/", " | ").replace("-", " ").replace("_", " ").strip().title()
+        content = f"AI generated audio for the '{title}' chapter of the PostHog {kind.capitalize()}. Read more about it at https://posthog.com/{key_path}"
+
+        if dry_run:
+            print(f"Dry run. Would have uploaded {key_path} to Podbean.")
+            print(f"   Title: {title}")
+            print(f"   Content: {content}")
+            print(f"   Publish status: {publish_status}")
+            continue
 
         try:
             # Create temp file for download
@@ -329,10 +340,6 @@ def sync_episodes(dry_run: bool = False, publish_status: str = "draft"):
             upload_file_to_presigned_url(auth["presigned_url"], tmp_path, content_type)
 
             # Publish episode
-
-            chapter = Path(filename).stem.replace("-", " ").replace("_", " ").strip()
-            title = f'Handbook | {chapter}'
-            content = f"AI generated audio for the {chapter} chapter of the PostHog Handbook."
 
             print(f"   Publishing episode: {title}")
             episode = publish_episode(
@@ -364,6 +371,12 @@ def main():
         description="Sync podcast episodes from S3 to Podbean"
     )
     parser.add_argument(
+        "--kind",
+        default="handbook",
+        choices=["handbook", "changelog"],
+        help="Kind of content to sync (default: handbook)",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Show what would be synced without actually uploading",
@@ -377,7 +390,7 @@ def main():
 
     args = parser.parse_args()
 
-    sync_episodes(dry_run=args.dry_run, publish_status=args.status)
+    sync_episodes(dry_run=args.dry_run, publish_status=args.status, kind=args.kind)
 
 
 if __name__ == "__main__":
