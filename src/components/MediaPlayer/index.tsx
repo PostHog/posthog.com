@@ -13,10 +13,14 @@ declare global {
 }
 
 interface MediaPlayerProps {
-    videoId: string
+    videoId?: string
+    mp3?: string
 }
 
-export default function MediaPlayer({ videoId }: MediaPlayerProps) {
+export default function MediaPlayer({ videoId, mp3 }: MediaPlayerProps) {
+    const audioRef = useRef<HTMLAudioElement | null>(null)
+    const isAudioMode = !!mp3 && !videoId
+
     const [playerState, setPlayerState] = useState({
         isPlaying: true,
         player: null as any,
@@ -99,8 +103,81 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
         }
     }, [])
 
+    // Audio player setup
+    useEffect(() => {
+        if (!isAudioMode || !audioRef.current) return
+
+        const audio = audioRef.current
+
+        const handleLoadedMetadata = () => {
+            setPlayerState((prev) => ({
+                ...prev,
+                duration: audio.duration,
+                currentTime: audio.currentTime,
+                volume: audio.volume * 100,
+            }))
+        }
+
+        const handlePlay = () => {
+            setPlayerState((prev) => ({ ...prev, isPlaying: true }))
+        }
+
+        const handlePause = () => {
+            setPlayerState((prev) => ({ ...prev, isPlaying: false }))
+        }
+
+        const handleRateChange = () => {
+            setPlayerState((prev) => ({ ...prev, playbackRate: audio.playbackRate }))
+        }
+
+        audio.addEventListener('loadedmetadata', handleLoadedMetadata)
+        audio.addEventListener('play', handlePlay)
+        audio.addEventListener('pause', handlePause)
+        audio.addEventListener('ratechange', handleRateChange)
+
+        // Set initial volume
+        audio.volume = playerState.volume / 100
+
+        // Autoplay
+        audio.play().catch(() => {
+            // Autoplay might be blocked by browser
+            setPlayerState((prev) => ({ ...prev, isPlaying: false }))
+        })
+
+        return () => {
+            audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
+            audio.removeEventListener('play', handlePlay)
+            audio.removeEventListener('pause', handlePause)
+            audio.removeEventListener('ratechange', handleRateChange)
+        }
+    }, [isAudioMode])
+
+    // Time update for audio mode
+    useEffect(() => {
+        if (!isAudioMode || !audioRef.current) return
+
+        let interval: NodeJS.Timeout | null = null
+        const audio = audioRef.current
+
+        if (playerState.isPlaying && !isScrubbing && !isSeeking) {
+            interval = setInterval(() => {
+                setPlayerState((prev) => ({ ...prev, currentTime: audio.currentTime }))
+            }, 250)
+        }
+
+        return () => {
+            if (interval) clearInterval(interval)
+        }
+    }, [isAudioMode, playerState.isPlaying, isScrubbing, isSeeking])
+
     const handlePlayPause = () => {
-        if (playerState.player) {
+        if (isAudioMode && audioRef.current) {
+            if (playerState.isPlaying) {
+                audioRef.current.pause()
+            } else {
+                audioRef.current.play()
+            }
+        } else if (playerState.player) {
             if (playerState.isPlaying) {
                 playerState.player.pauseVideo()
             } else {
@@ -110,13 +187,16 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
     }
 
     const performSeek = (newTime: number) => {
-        if (!playerState.player) return
-
         const clamped = Math.max(0, Math.min(newTime, playerState.duration || newTime))
 
         setIsSeeking(true)
-        playerState.player.seekTo(clamped, true)
         setPlayerState((prev) => ({ ...prev, currentTime: clamped }))
+
+        if (isAudioMode && audioRef.current) {
+            audioRef.current.currentTime = clamped
+        } else if (playerState.player) {
+            playerState.player.seekTo(clamped, true)
+        }
 
         if (seekSuppressTimeout.current) clearTimeout(seekSuppressTimeout.current)
 
@@ -124,34 +204,41 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
     }
 
     const handleSeek = (seconds: number) => {
-        if (!playerState.player) return
-        const currentTime = playerState.player.getCurrentTime()
+        const currentTime = isAudioMode && audioRef.current
+            ? audioRef.current.currentTime
+            : playerState.player?.getCurrentTime() || 0
         performSeek(currentTime + seconds)
     }
 
     const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const volume = Number(event.target.value)
-        if (playerState.player) {
+        setPlayerState((prev: any) => ({
+            ...prev,
+            volume,
+            isMuted: volume === 0,
+        }))
+
+        if (isAudioMode && audioRef.current) {
+            audioRef.current.volume = volume / 100
+        } else if (playerState.player) {
             playerState.player.setVolume(volume)
-            setPlayerState((prev: any) => ({
-                ...prev,
-                volume,
-                isMuted: volume === 0,
-            }))
         }
     }
 
     const toggleMute = () => {
-        if (playerState.player) {
+        setPlayerState((prev: any) => ({
+            ...prev,
+            isMuted: !prev.isMuted,
+        }))
+
+        if (isAudioMode && audioRef.current) {
+            audioRef.current.muted = !playerState.isMuted
+        } else if (playerState.player) {
             if (playerState.isMuted) {
                 playerState.player.unMute()
             } else {
                 playerState.player.mute()
             }
-            setPlayerState((prev: any) => ({
-                ...prev,
-                isMuted: !prev.isMuted,
-            }))
         }
     }
 
@@ -169,12 +256,15 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
     }
 
     const handlePlaybackRateChange = (rate: number) => {
-        if (playerState.player) {
+        setPlayerState((prev: any) => ({
+            ...prev,
+            playbackRate: rate,
+        }))
+
+        if (isAudioMode && audioRef.current) {
+            audioRef.current.playbackRate = rate
+        } else if (playerState.player) {
             playerState.player.setPlaybackRate(rate)
-            setPlayerState((prev: any) => ({
-                ...prev,
-                playbackRate: rate,
-            }))
         }
     }
 
@@ -215,13 +305,20 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
                     data-scheme="primary"
                     className="@container flex-1 bg-primary relative h-full"
                 >
-                    <section className="bg-accent px-2 pb-2">
+                    <section className={`bg-accent px-2 pb-2 ${isAudioMode && mp3 && 'pt-2'}`}>
+                        {/* Audio element (hidden) */}
+                        {isAudioMode && mp3 && (
+                            <audio ref={audioRef} src={mp3} preload="metadata" />
+                        )}
+
                         {/* Main video area */}
-                        <div className="flex-1 flex flex-col justify-center items-center bg-primary mb-2">
-                            <div className="w-full aspect-video relative rounded overflow-hidden">
-                                <div id="youtube-player-demo" className="absolute inset-0 w-full h-full" />
+                        {!isAudioMode && (
+                            <div className="flex-1 flex flex-col justify-center items-center bg-primary mb-2">
+                                <div className="w-full aspect-video relative rounded overflow-hidden">
+                                    <div id="youtube-player-demo" className="absolute inset-0 w-full h-full" />
+                                </div>
                             </div>
-                        </div>
+                        )}
 
                         {/* Scrubbing bar */}
                         <div className="w-full px-2 py-1 bg-[#EFF7DE] border border-primary rounded-sm flex items-center gap-2">
@@ -252,11 +349,10 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
                                 <div
                                     className="absolute top-1/2 -translate-y-1/2 pointer-events-none"
                                     style={{
-                                        left: `calc(${
-                                            ((isScrubbing ? scrubTime : playerState.currentTime) /
-                                                playerState.duration) *
+                                        left: `calc(${((isScrubbing ? scrubTime : playerState.currentTime) /
+                                            playerState.duration) *
                                             100
-                                        }% + 5.5px)`,
+                                            }% + 5.5px)`,
                                     }}
                                 >
                                     <IconPlayhead className="w-[11px] h-[15px]" />
@@ -265,7 +361,7 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
                         </div>
 
                         {/* Control bar */}
-                        <div className="grid grid-cols-12 px-4 py-2 bg-accent border-t border-primary gap-2">
+                        <div className="grid grid-cols-12 px-4 py-2 bg-accent gap-2">
                             <div className="col-span-3 flex flex-row gap-2 items-center">
                                 <button
                                     onClick={toggleMute}
@@ -338,12 +434,14 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
                                     ]}
                                     className="text-sm font-semibold text-right dark:text-yellow"
                                 />
-                                <button
-                                    onClick={toggleFullscreen}
-                                    className="text-sm font-semibold text-right dark:text-yellow"
-                                >
-                                    <IconFullScreen className="size-5" />
-                                </button>
+                                {!isAudioMode && (
+                                    <button
+                                        onClick={toggleFullscreen}
+                                        className="text-sm font-semibold text-right dark:text-yellow"
+                                    >
+                                        <IconFullScreen className="size-5" />
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </section>

@@ -668,6 +668,20 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/podcast': {
+        size: {
+            min: {
+                width: 530,
+                height: 150,
+            },
+            max: {
+                width: 530,
+                height: 150,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+    },
     '/sales': {
         size: {
             min: {
