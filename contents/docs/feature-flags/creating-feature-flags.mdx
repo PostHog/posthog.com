@@ -23,11 +23,14 @@ export const ReleaseConditionLight = "https://res.cloudinary.com/dmukukwp6/image
 export const ReleaseConditionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/release-conditions-dark-mode.png"
 
 Before you can evaluate a feature flag in your application code, you need to create it in PostHog. You need to configure the following for a new flag:
-1. `required` [Create a new feature flag](#step-1-create-a-new-feature-flag-required)
-2. `required` [The key you use in your code to evaluate the feature flag](#step-2-feature-flag-key-and-description-required)
-3. `required` [The type of feature flag – boolean, multivariate, or remote config](#step-3-feature-flag-type-required)
-4. `optional` [Additional feature flag behaviors](#step-4-feature-flag-behavior-optional)
-5. `optional` [Evaluation runtime and environments](#step-5-evaluation-runtime-and-environments-optional)
+
+| Step | Configuration | Required |
+|------|---------------|----------|
+| 1 | [Create a new feature flag](#step-1-create-a-new-feature-flag-required) | Required |
+| 2 | [The key you use in your code to evaluate the feature flag](#step-2-feature-flag-key-and-description-required) | Required |
+| 3 | [The type of feature flag – boolean, multivariate, or remote config](#step-3-feature-flag-type-required) | Required |
+| 4 | [Additional feature flag behaviors](#step-4-feature-flag-behavior-optional) | Optional |
+| 5 | [Evaluation runtime and environments](#step-5-evaluation-runtime-and-environments-optional) | Optional |
 
 ## Step 1. Create a new feature flag (required)
 
