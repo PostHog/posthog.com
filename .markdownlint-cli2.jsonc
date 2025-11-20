@@ -35,7 +35,9 @@
     "MD052": false,
     "MD053": false,
     "MD055": false,
-    "MD058": false
+    "MD058": false,
+    "MD059": false,
+    "MD060": false
   },
   "ignores": [
     "**/fixtures/**"
