@@ -16,7 +16,7 @@ except ImportError:
 # S3 Configuration
 S3_BUCKET = os.environ.get('S3_BUCKET')
 S3_REGION = os.environ.get('AWS_REGION')
-S3_PREFIX = 'handbook-audio/'  # Prefix for all audio files in the bucket
+S3_PREFIX = 'handbook/'  # Prefix for all audio files in the bucket
 
 
 def check_s3_available():
