@@ -13,31 +13,25 @@ import {
     IconCoffee,
     IconLaptop,
     IconTelescope,
+    IconUpload,
 } from '@posthog/icons'
 import { navigate } from 'gatsby'
-import { AnimatePresence, motion } from 'framer-motion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import qs from 'qs'
 import { useUser } from 'hooks/useUser'
 import { useToast } from '../../context/Toast'
+import { useDropzone } from 'react-dropzone'
 
 interface MapboxFeature {
     place_name: string
     text: string
 }
 
-interface PlaceTag {
-    id: number
-    attributes: {
-        label: string
-    }
-}
-
 export interface Place {
     id: number
     name: string
     address: string
-    type: 'Hotel' | 'Airbnb' | 'Restaurant' | 'Co-working' | 'Activity'
+    type: 'Coffee' | 'Hotel' | 'Airbnb' | 'Restaurant' | 'Co-working' | 'Activity'
 }
 
 export interface PlaceReview {
@@ -47,10 +41,9 @@ export interface PlaceReview {
         ratingCategory: string
         ratingValue: number
     }[]
-    notes: string
-    events: string
-    tags: PlaceTag[]
+    review: string
     place: Place
+    photos?: { id: number; url: string }[]
     createdAt: string
 }
 
@@ -62,19 +55,18 @@ interface LocationGroup {
 }
 
 interface FormData {
-    placeId: number | null
+    place: Place | null
     placeName: string
     placeAddress: string
-    placeType: 'Hotel' | 'Airbnb' | 'Restaurant' | 'Coffee' | 'Co-working' | 'Activity'
+    placeType: 'Coffee' | 'Hotel' | 'Airbnb' | 'Restaurant' | 'Co-working' | 'Activity'
     rating: number
     subcategoryRatings: {
         ratingCategory: string
         ratingValue: number
     }[]
     wouldGoBack: boolean | null
-    notes: string
-    events: string
-    tags: PlaceTag[]
+    review: string
+    photos?: { id: number; url: string }[]
 }
 
 const MapboxAutocomplete = ({
@@ -159,24 +151,106 @@ const PlaceFormCard = ({
     handleSubmit,
     handleCancelAdd,
     submitting,
+    places,
 }: {
     formData: FormData
     handleInputChange: (field: string, value: unknown) => void
     handleSubmit: (e: React.FormEvent) => void
     handleCancelAdd: () => void
     submitting: boolean
+    places: Place[]
 }) => {
+    const { getJwt } = useUser()
+    const { addToast } = useToast()
+    const [uploadedPhotos, setUploadedPhotos] = React.useState<Array<{ file: File; id?: number; url?: string }>>([])
+    const [uploadingPhotos, setUploadingPhotos] = React.useState(false)
+
+    // Helper to find matching place by name and address
+    const findMatchingPlace = (name: string, address: string): Place | null => {
+        return (
+            places.find(
+                (p) => p.name.toLowerCase() === name.toLowerCase() && p.address.toLowerCase() === address.toLowerCase()
+            ) || null
+        )
+    }
+
+    const onPhotoDrop = async (acceptedFiles: File[]) => {
+        setUploadingPhotos(true)
+        try {
+            const jwt = await getJwt()
+            if (!jwt) {
+                throw new Error('No JWT found')
+            }
+
+            // Upload each photo to Strapi/Cloudinary
+            const uploadPromises = acceptedFiles.map(async (file) => {
+                const uploadFormData = new FormData()
+                uploadFormData.append('files', file)
+
+                const uploadedImage = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/upload`, {
+                    method: 'POST',
+                    body: uploadFormData,
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                }).then((res) => res.json())
+
+                if (uploadedImage?.length > 0) {
+                    return {
+                        file,
+                        id: uploadedImage[0].id,
+                        url: uploadedImage[0].url,
+                    }
+                }
+                return { file }
+            })
+
+            const uploadedImages = await Promise.all(uploadPromises)
+            setUploadedPhotos((prev) => [...prev, ...uploadedImages])
+
+            // Update formData with photo IDs
+            const newPhotos = uploadedImages
+                .filter((img): img is { file: File; id: number; url?: string } => img.id !== undefined)
+                .map((img) => ({ id: img.id, url: img.url || '' }))
+            handleInputChange('photos', [...(formData.photos || []), ...newPhotos])
+
+            addToast({
+                description: `${acceptedFiles.length} photo${acceptedFiles.length > 1 ? 's' : ''} uploaded`,
+            })
+        } catch (error) {
+            console.error('Error uploading photos:', error)
+            addToast({
+                description: 'Failed to upload photos',
+            })
+        } finally {
+            setUploadingPhotos(false)
+        }
+    }
+
+    const removePhoto = (index: number) => {
+        setUploadedPhotos((prev) => {
+            const updated = prev.filter((_, i) => i !== index)
+            // Update formData to remove the photo ID
+            const photoIds = updated
+                .filter((img): img is { file: File; id: number; url?: string } => img.id !== undefined)
+                .map((img) => ({ id: img.id, url: img.url || '' }))
+            handleInputChange('photos', photoIds)
+            return updated
+        })
+    }
+
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop: onPhotoDrop,
+        accept: {
+            'image/*': ['.png', '.jpg', '.jpeg', '.webp', '.gif'],
+        },
+        multiple: true,
+    })
     return (
-        <motion.div
-            initial={{ opacity: 0, translateX: '150%' }}
-            animate={{ opacity: 1, translateX: 0 }}
-            exit={{ opacity: 0, translateX: '150%' }}
-            transition={{ duration: 0.3 }}
-            className="absolute right-4 top-4 bottom-4 w-140 rounded bg-primary border border-primary shadow-lg z-10 overflow-hidden flex flex-col"
-        >
+        <div className="w-[500px] h-full bg-primary border-l border-primary flex flex-col">
             <button
                 onClick={handleCancelAdd}
-                className="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center rounded hover:bg-accent text-primary hover:text-primary text-xl leading-none"
+                className="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center rounded hover:bg-accent text-primary hover:text-primary text-xl leading-none"
             >
                 ✕
             </button>
@@ -194,6 +268,14 @@ const PlaceFormCard = ({
                                 onChange={(address, name) => {
                                     handleInputChange('placeName', name)
                                     handleInputChange('placeAddress', address)
+                                    // Check if this place already exists
+                                    const existingPlace = findMatchingPlace(name, address)
+                                    if (existingPlace) {
+                                        handleInputChange('place', existingPlace)
+                                        handleInputChange('placeType', existingPlace.type)
+                                    } else {
+                                        handleInputChange('place', null)
+                                    }
                                 }}
                                 placeholder="Search for place name..."
                             />
@@ -205,6 +287,15 @@ const PlaceFormCard = ({
                                 value={formData.placeAddress}
                                 onChange={(address) => {
                                     handleInputChange('placeAddress', address)
+                                    if (formData.placeName) {
+                                        const existingPlace = findMatchingPlace(formData.placeName, address)
+                                        if (existingPlace) {
+                                            handleInputChange('place', existingPlace)
+                                            handleInputChange('placeType', existingPlace.type)
+                                        } else {
+                                            handleInputChange('place', null)
+                                        }
+                                    }
                                 }}
                                 placeholder="Search for address..."
                             />
@@ -282,53 +373,73 @@ const PlaceFormCard = ({
                         </div>
 
                         <div className="flex flex-col space-y-2">
-                            <label className="text-[15px] font-semibold">Would you go back here?</label>
-                            <div className="flex gap-0 border border-border rounded overflow-hidden">
-                                <button
-                                    type="button"
-                                    onClick={() => handleInputChange('wouldGoBack', true)}
-                                    className={`flex-1 px-4 py-2.5 text-sm transition-colors ${
-                                        formData.wouldGoBack === true
-                                            ? 'bg-accent font-semibold'
-                                            : 'bg-primary hover:bg-accent/50'
-                                    }`}
-                                >
-                                    Yes
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => handleInputChange('wouldGoBack', false)}
-                                    className={`flex-1 px-4 py-2.5 text-sm transition-colors ${
-                                        formData.wouldGoBack === false
-                                            ? 'bg-accent font-semibold'
-                                            : 'bg-primary hover:bg-accent/50'
-                                    }`}
-                                >
-                                    No
-                                </button>
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col space-y-2">
-                            <label className="text-[15px] font-semibold">Notes</label>
+                            <label className="text-[15px] font-semibold">Review</label>
                             <textarea
                                 placeholder="What do you like about this place?"
-                                value={formData.notes}
-                                onChange={(e) => handleInputChange('notes', e.target.value)}
+                                value={formData.review}
+                                onChange={(e) => handleInputChange('review', e.target.value)}
                                 rows={4}
                                 className="px-4 py-2.5 rounded border border-border bg-primary text-primary resize-none"
                             />
                         </div>
 
                         <div className="flex flex-col space-y-2">
-                            <label className="text-[15px] font-semibold">Events that happened here</label>
-                            <input
-                                type="text"
-                                placeholder="Type a historical event..."
-                                value={formData.events}
-                                onChange={(e) => handleInputChange('events', e.target.value)}
-                                className="px-4 py-2.5 rounded border border-border bg-primary text-primary"
-                            />
+                            <label className="text-[15px] font-semibold">Photos (optional)</label>
+                            <div
+                                {...getRootProps()}
+                                className={`w-full px-6 py-8 border-2 border-dashed rounded transition-colors cursor-pointer ${
+                                    isDragActive
+                                        ? 'border-primary bg-accent'
+                                        : 'border-border bg-accent/50 hover:bg-accent'
+                                }`}
+                            >
+                                <input {...getInputProps()} />
+                                <div className="flex flex-col items-center justify-center text-center">
+                                    {uploadingPhotos ? (
+                                        <div className="animate-spin size-6 mb-2">
+                                            <IconUpload className="size-6" />
+                                        </div>
+                                    ) : (
+                                        <IconUpload className="size-6 mb-2 opacity-50" />
+                                    )}
+                                    <p className="text-sm text-secondary m-0">
+                                        {uploadingPhotos
+                                            ? 'Uploading photos...'
+                                            : isDragActive
+                                            ? 'Drop photos here'
+                                            : 'Click or drag photos here'}
+                                    </p>
+                                    <p className="text-xs text-secondary mt-1 m-0">PNG, JPG, WEBP, GIF</p>
+                                </div>
+                            </div>
+                            {uploadedPhotos.length > 0 && (
+                                <div className="flex flex-wrap gap-2 mt-2">
+                                    {uploadedPhotos.map((photo, index) => (
+                                        <div
+                                            key={index}
+                                            className="relative group border border-border rounded overflow-hidden"
+                                        >
+                                            <img
+                                                src={photo.url || URL.createObjectURL(photo.file)}
+                                                alt={photo.file.name}
+                                                className="size-20 object-cover"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => removePhoto(index)}
+                                                className="absolute top-1 right-1 size-5 bg-red text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-xs"
+                                            >
+                                                ✕
+                                            </button>
+                                            {!photo.id && (
+                                                <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-xs">
+                                                    Uploading...
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex gap-2 sticky bottom-0 bg-primary py-4">
@@ -343,7 +454,7 @@ const PlaceFormCard = ({
                     </form>
                 </div>
             </ScrollArea>
-        </motion.div>
+        </div>
     )
 }
 
@@ -357,7 +468,7 @@ export default function PlaceReviews(): JSX.Element {
     const [submitting, setSubmitting] = useState(false)
     const [loading, setLoading] = useState(true)
     const [formData, setFormData] = useState<FormData>({
-        placeId: null,
+        place: null,
         placeName: '',
         placeAddress: '',
         placeType: 'Hotel',
@@ -368,9 +479,8 @@ export default function PlaceReviews(): JSX.Element {
             { ratingCategory: 'Vibe', ratingValue: 0 },
         ],
         wouldGoBack: null,
-        notes: '',
-        events: '',
-        tags: [],
+        review: '',
+        photos: [],
     })
 
     useEffect(() => {
@@ -428,9 +538,7 @@ export default function PlaceReviews(): JSX.Element {
                             attributes: {
                                 rating: number
                                 subcategoryRatings?: { ratingCategory: string; ratingValue: number }[]
-                                notes?: string
-                                events?: string
-                                tags?: { data: PlaceTag[] }
+                                review?: string
                                 createdAt: string
                                 place?: {
                                     data?: {
@@ -447,9 +555,7 @@ export default function PlaceReviews(): JSX.Element {
                             id: item.id,
                             rating: item.attributes.rating,
                             subcategoryRatings: item.attributes.subcategoryRatings || [],
-                            notes: item.attributes.notes || '',
-                            events: item.attributes.events || '',
-                            tags: item.attributes.tags?.data || [],
+                            review: item.attributes.review || '',
                             createdAt: item.attributes.createdAt,
                             place: item.attributes.place?.data
                                 ? {
@@ -512,10 +618,10 @@ export default function PlaceReviews(): JSX.Element {
                 throw new Error('No JWT found')
             }
 
-            let placeIdToUse = formData.placeId
+            let placeIdToUse = formData.place?.id
 
-            // Create new place if needed
-            if (!formData.placeId && formData.placeName) {
+            // Create new place if needed (place is null and we have name/address)
+            if (!formData.place && formData.placeName && formData.placeAddress) {
                 const newPlacePayload = {
                     name: formData.placeName,
                     address: formData.placeAddress,
@@ -546,16 +652,16 @@ export default function PlaceReviews(): JSX.Element {
                     type: placeResult.data.attributes.type,
                 }
                 setPlaces([...places, newPlace])
+                // Update formData with the new place
+                setFormData((prev) => ({ ...prev, place: newPlace }))
             }
 
             const reviewPayload = {
                 place: placeIdToUse,
                 rating: formData.rating,
                 subcategoryRatings: formData.subcategoryRatings.filter((sr) => sr.ratingValue > 0),
-                wouldGoBack: formData.wouldGoBack,
-                notes: formData.notes || undefined,
-                events: formData.events || undefined,
-                tags: formData.tags.map((tag) => tag.id),
+                review: formData.review || undefined,
+                photos: formData.photos?.map((photo) => photo.id) || undefined,
             }
 
             const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/place-reviews`, {
@@ -572,15 +678,13 @@ export default function PlaceReviews(): JSX.Element {
             }
 
             const result = await response.json()
-            const selectedPlace = places.find((p) => p.id === placeIdToUse)
+            const selectedPlace = formData.place || places.find((p) => p.id === placeIdToUse)
             const newReview: PlaceReview = {
                 id: result.data.id,
                 rating: result.data.attributes.rating,
-                notes: result.data.attributes.notes || '',
-                events: result.data.attributes.events || '',
-                tags: result.data.attributes.tags?.data || [],
+                review: result.data.attributes.review || '',
                 createdAt: result.data.attributes.createdAt,
-                place: selectedPlace || { id: 0, name: '', address: '', type: 'Airbnb' as const },
+                place: selectedPlace || { id: 0, name: '', address: '', type: 'Hotel' as const },
             }
 
             const updatedReviews = [...reviews, newReview]
@@ -610,7 +714,7 @@ export default function PlaceReviews(): JSX.Element {
             setLocationGroups(groups)
 
             setFormData({
-                placeId: null,
+                place: null,
                 placeName: '',
                 placeAddress: '',
                 placeType: 'Hotel',
@@ -621,9 +725,8 @@ export default function PlaceReviews(): JSX.Element {
                     { ratingCategory: 'Vibe', ratingValue: 0 },
                 ],
                 wouldGoBack: null,
-                notes: '',
-                events: '',
-                tags: [],
+                review: '',
+                photos: [],
             })
             setIsAddingPlace(false)
             addToast({
@@ -642,7 +745,7 @@ export default function PlaceReviews(): JSX.Element {
     const handleCancelAdd = () => {
         setIsAddingPlace(false)
         setFormData({
-            placeId: null,
+            place: null,
             placeName: '',
             placeAddress: '',
             placeType: 'Hotel',
@@ -653,9 +756,8 @@ export default function PlaceReviews(): JSX.Element {
                 { ratingCategory: 'Vibe', ratingValue: 0 },
             ],
             wouldGoBack: null,
-            notes: '',
-            events: '',
-            tags: [],
+            review: '',
+            photos: [],
         })
     }
 
@@ -736,17 +838,16 @@ export default function PlaceReviews(): JSX.Element {
                         </div>
                     </div>
 
-                    <AnimatePresence>
-                        {isAddingPlace && (
-                            <PlaceFormCard
-                                formData={formData}
-                                handleInputChange={handleInputChange}
-                                handleSubmit={handleSubmit}
-                                handleCancelAdd={handleCancelAdd}
-                                submitting={submitting}
-                            />
-                        )}
-                    </AnimatePresence>
+                    {isAddingPlace && (
+                        <PlaceFormCard
+                            formData={formData}
+                            handleInputChange={handleInputChange}
+                            handleSubmit={handleSubmit}
+                            handleCancelAdd={handleCancelAdd}
+                            submitting={submitting}
+                            places={places}
+                        />
+                    )}
                 </div>
             </Explorer>
         </>

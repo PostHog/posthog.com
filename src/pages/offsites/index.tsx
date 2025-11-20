@@ -7,7 +7,6 @@ import { OSInput } from 'components/OSForm'
 import { TeamMemberMultiSelect, SelectedMember, TeamContext } from 'components/OSForm/TeamMemberMultiSelect'
 import { IconPlus, IconMapPin, IconUpload } from '@posthog/icons'
 import { navigate } from 'gatsby'
-import { AnimatePresence, motion } from 'framer-motion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import qs from 'qs'
 import { useUser } from 'hooks/useUser'
@@ -25,6 +24,14 @@ interface MapboxFeature {
 interface Lodging {
     location: string
     type: 'Hotel' | 'Airbnb'
+}
+
+interface RsvpProfile {
+    id: string
+    avatar?: { url: string }
+    firstName?: string
+    lastName?: string
+    color?: string
 }
 
 export interface Event {
@@ -46,7 +53,7 @@ export interface Event {
     speakerTopic?: string
     partners?: Array<{ name: string; url?: string }> // Component repeatable
     attendees?: number
-    rsvps?: SelectedMember[]
+    rsvps?: RsvpProfile[]
     internalTeams?: TeamContext[]
     vibeScore?: number // decimal in Strapi
     photos?: { id: number; url: string }[] // media multiple
@@ -190,23 +197,58 @@ const OffsiteFormCard = ({
     }>
 }) => {
     const { addToast } = useToast()
+    const { getJwt } = useUser()
     const isHistorical = formData.startDate ? new Date(formData.startDate) < new Date() : false
-    const [uploadedPhotos, setUploadedPhotos] = React.useState<File[]>([])
+    const [uploadedPhotos, setUploadedPhotos] = React.useState<Array<{ file: File; id?: number; url?: string }>>([])
     const [uploadingPhotos, setUploadingPhotos] = React.useState(false)
 
     const onPhotoDrop = async (acceptedFiles: File[]) => {
         setUploadingPhotos(true)
         try {
-            // For now, just store the files locally
-            // In a real implementation, you'd upload to Cloudinary or similar
-            setUploadedPhotos((prev) => [...prev, ...acceptedFiles])
+            const jwt = await getJwt()
+            if (!jwt) {
+                throw new Error('No JWT found')
+            }
+
+            // Upload each photo to Strapi/Cloudinary
+            const uploadPromises = acceptedFiles.map(async (file) => {
+                const formData = new FormData()
+                formData.append('files', file)
+
+                const uploadedImage = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/upload`, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                }).then((res) => res.json())
+
+                if (uploadedImage?.length > 0) {
+                    return {
+                        file,
+                        id: uploadedImage[0].id,
+                        url: uploadedImage[0].url,
+                    }
+                }
+                return { file }
+            })
+
+            const uploadedImages = await Promise.all(uploadPromises)
+            setUploadedPhotos((prev) => [...prev, ...uploadedImages])
+
+            // Update formData with photo IDs
+            const newPhotos = uploadedImages
+                .filter((img): img is { file: File; id: number; url?: string } => img.id !== undefined)
+                .map((img) => ({ id: img.id, url: img.url || '' }))
+            handleInputChange('photos', [...(formData.photos || []), ...newPhotos])
+
             addToast({
-                description: `${acceptedFiles.length} photo${acceptedFiles.length > 1 ? 's' : ''} added`,
+                description: `${acceptedFiles.length} photo${acceptedFiles.length > 1 ? 's' : ''} uploaded`,
             })
         } catch (error) {
-            console.error('Error handling photos:', error)
+            console.error('Error uploading photos:', error)
             addToast({
-                description: 'Failed to add photos',
+                description: 'Failed to upload photos',
             })
         } finally {
             setUploadingPhotos(false)
@@ -214,7 +256,15 @@ const OffsiteFormCard = ({
     }
 
     const removePhoto = (index: number) => {
-        setUploadedPhotos((prev) => prev.filter((_, i) => i !== index))
+        setUploadedPhotos((prev) => {
+            const updated = prev.filter((_, i) => i !== index)
+            // Update formData to remove the photo ID
+            const photoIds = updated
+                .filter((img): img is { file: File; id: number; url?: string } => img.id !== undefined)
+                .map((img) => ({ id: img.id, url: img.url || '' }))
+            handleInputChange('photos', photoIds)
+            return updated
+        })
     }
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -225,16 +275,10 @@ const OffsiteFormCard = ({
         multiple: true,
     })
     return (
-        <motion.div
-            initial={{ opacity: 0, translateX: '150%' }}
-            animate={{ opacity: 1, translateX: 0 }}
-            exit={{ opacity: 0, translateX: '150%' }}
-            transition={{ duration: 0.3 }}
-            className="absolute right-4 top-4 bottom-4 w-[768px] rounded bg-primary border border-primary shadow-lg z-10 overflow-hidden flex flex-col"
-        >
+        <div className="w-[768px] h-full bg-primary border-l border-primary flex flex-col">
             <button
                 onClick={handleCancelAdd}
-                className="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center rounded hover:bg-accent text-primary hover:text-primary text-xl leading-none"
+                className="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center rounded hover:bg-accent text-primary hover:text-primary text-xl leading-none"
             >
                 ✕
             </button>
@@ -334,20 +378,18 @@ const OffsiteFormCard = ({
                                     </div>
                                 ))}
 
-                                {formData.lodging && formData.lodging.length > 0 && formData.lodging[0]?.location && (
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            handleInputChange('lodging', [
-                                                ...(formData.lodging || []),
-                                                { location: '', type: 'Hotel' },
-                                            ])
-                                        }}
-                                        className="text-sm font-semibold underline hover:no-underline"
-                                    >
-                                        add another location
-                                    </button>
-                                )}
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        handleInputChange('lodging', [
+                                            ...(formData.lodging || []),
+                                            { location: '', type: 'Hotel' },
+                                        ])
+                                    }}
+                                    className="text-sm font-semibold underline hover:no-underline"
+                                >
+                                    add another location
+                                </button>
 
                                 <div className="grid grid-cols-2 gap-4">
                                     <OSInput
@@ -372,48 +414,49 @@ const OffsiteFormCard = ({
                                     />
                                 </div>
 
-                                {formData.type !== 'Whole company' && (
-                                    <>
-                                        <TeamMemberMultiSelect
-                                            label="Attendees"
-                                            description=""
-                                            placeholder="Robbie Coomer"
-                                            teams={teams as Parameters<typeof TeamMemberMultiSelect>[0]['teams']}
-                                            value={formData.rsvps || []}
-                                            onChange={handleRsvpChange}
-                                        />
+                                <TeamMemberMultiSelect
+                                    label="Attendees"
+                                    description=""
+                                    placeholder="Robbie Coomer"
+                                    teams={teams as Parameters<typeof TeamMemberMultiSelect>[0]['teams']}
+                                    value={(formData.rsvps || []).map(
+                                        (rsvp): SelectedMember => ({
+                                            firstName: rsvp.firstName || '',
+                                            lastName: rsvp.lastName || '',
+                                            avatar: rsvp.avatar,
+                                            color: rsvp.color,
+                                            squeakId: rsvp.id,
+                                            teams: [],
+                                        })
+                                    )}
+                                    onChange={handleRsvpChange}
+                                />
 
-                                        {formData.internalTeams && formData.internalTeams.length > 0 && (
-                                            <div className="flex flex-col space-y-2">
-                                                <label className="text-[15px] font-semibold">Team(s)</label>
-                                                <div className="flex flex-wrap gap-2">
-                                                    {formData.internalTeams.map((team) => (
-                                                        <span
-                                                            key={team.id}
-                                                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary text-sm bg-accent"
-                                                        >
-                                                            {team.miniCrest && (
-                                                                <img
-                                                                    src={team.miniCrest}
-                                                                    alt=""
-                                                                    className="size-4 shrink-0"
-                                                                />
-                                                            )}
-                                                            <span>{team.name}</span>
-                                                            <button
-                                                                type="button"
-                                                                aria-label={`Remove ${team.name}`}
-                                                                onClick={() => removeTeam(team.id)}
-                                                                className="text-secondary hover:text-primary size-4 flex items-center justify-center"
-                                                            >
-                                                                ✕
-                                                            </button>
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
-                                    </>
+                                {formData.internalTeams && formData.internalTeams.length > 0 && (
+                                    <div className="flex flex-col space-y-2">
+                                        <label className="text-[15px] font-semibold">Team(s)</label>
+                                        <div className="flex flex-wrap gap-2">
+                                            {formData.internalTeams.map((team) => (
+                                                <span
+                                                    key={team.id}
+                                                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary text-sm bg-accent"
+                                                >
+                                                    {team.miniCrest && (
+                                                        <img src={team.miniCrest} alt="" className="size-4 shrink-0" />
+                                                    )}
+                                                    <span>{team.name}</span>
+                                                    <button
+                                                        type="button"
+                                                        aria-label={`Remove ${team.name}`}
+                                                        onClick={() => removeTeam(team.id)}
+                                                        className="text-secondary hover:text-primary size-4 flex items-center justify-center"
+                                                    >
+                                                        ✕
+                                                    </button>
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
                                 )}
 
                                 <OSInput
@@ -536,14 +579,14 @@ const OffsiteFormCard = ({
                                     </div>
                                     {uploadedPhotos.length > 0 && (
                                         <div className="flex flex-wrap gap-2 mt-2">
-                                            {uploadedPhotos.map((file, index) => (
+                                            {uploadedPhotos.map((photo, index) => (
                                                 <div
                                                     key={index}
                                                     className="relative group border border-border rounded overflow-hidden"
                                                 >
                                                     <img
-                                                        src={URL.createObjectURL(file)}
-                                                        alt={file.name}
+                                                        src={photo.url || URL.createObjectURL(photo.file)}
+                                                        alt={photo.file.name}
                                                         className="size-20 object-cover"
                                                     />
                                                     <button
@@ -553,6 +596,11 @@ const OffsiteFormCard = ({
                                                     >
                                                         ✕
                                                     </button>
+                                                    {!photo.id && (
+                                                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-xs">
+                                                            Uploading...
+                                                        </div>
+                                                    )}
                                                 </div>
                                             ))}
                                         </div>
@@ -649,7 +697,7 @@ const OffsiteFormCard = ({
                                         </div>
                                         {(formData.rsvps || []).map((member, index) => (
                                             <div
-                                                key={member.squeakId}
+                                                key={member.id}
                                                 className="grid grid-cols-[200px,1fr,1fr,1fr] gap-4 px-4 py-3 border-b border-border last:border-b-0 items-center text-sm"
                                             >
                                                 <div className="flex items-center gap-2 min-w-0">
@@ -721,7 +769,7 @@ const OffsiteFormCard = ({
                     </form>
                 </div>
             </ScrollArea>
-        </motion.div>
+        </div>
     )
 }
 
@@ -993,7 +1041,11 @@ export default function Offsites(): JSX.Element {
         })
 
         const newInternalTeams = Array.from(teamContexts.values())
-        setFormData((prev) => ({ ...prev, rsvps: selected, internalTeams: newInternalTeams }))
+        setFormData((prev) => ({
+            ...prev,
+            rsvps: selected.map((member) => ({ id: member.squeakId })),
+            internalTeams: newInternalTeams,
+        }))
     }
 
     // Auto-populate displayLocation from first lodging
@@ -1051,15 +1103,24 @@ export default function Offsites(): JSX.Element {
 
             const offsitePayload = {
                 name: formData.name,
-                date: formData.date,
+                date: formData.startDate ? new Date(formData.startDate).toISOString() : new Date().toISOString(),
                 description: formData.description || undefined,
-                location: formData.location?.id,
-                private: formData.private,
-                internal: formData.internal,
+                private: formData.private || false,
+                internal: formData.internal || false,
                 vibeScore: formData.vibeScore || undefined,
                 attendees: formData.attendees || undefined,
-                rsvps: formData.rsvps?.map((rsvp: SelectedMember) => rsvp.squeakId),
+                rsvps: formData.rsvps || [],
+                internalTeams: formData.internalTeams?.map((team) => team.id) || [],
                 video: formData.video || undefined,
+                lodging: formData.lodging || undefined,
+                photos: formData.photos?.map((photo) => photo.id) || undefined,
+                photoGalleryUrl: formData.photoGalleryUrl || undefined,
+                summary: formData.summary || undefined,
+                hackathonPRs: formData.hackathonPRs || undefined,
+                slackChannel: formData.slackChannel || undefined,
+                schedule: formData.schedule || undefined,
+                notes: formData.notes || undefined,
+                flightTracker: formData.flightTracker || undefined,
             }
 
             const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/events`, {
@@ -1243,23 +1304,21 @@ export default function Offsites(): JSX.Element {
                         </div>
                     </div>
 
-                    <AnimatePresence>
-                        {isAddingOffsite && (
-                            <OffsiteFormCard
-                                formData={formData}
-                                handleInputChange={handleInputChange}
-                                handleRsvpChange={handleRsvpChange}
-                                removeTeam={removeTeam}
-                                handleSubmit={handleSubmit}
-                                handleCancelAdd={handleCancelAdd}
-                                handleContinue={handleContinue}
-                                handleBack={handleBack}
-                                formStep={formStep}
-                                submitting={submitting}
-                                teams={teams}
-                            />
-                        )}
-                    </AnimatePresence>
+                    {isAddingOffsite && (
+                        <OffsiteFormCard
+                            formData={formData}
+                            handleInputChange={handleInputChange}
+                            handleRsvpChange={handleRsvpChange}
+                            removeTeam={removeTeam}
+                            handleSubmit={handleSubmit}
+                            handleCancelAdd={handleCancelAdd}
+                            handleContinue={handleContinue}
+                            handleBack={handleBack}
+                            formStep={formStep}
+                            submitting={submitting}
+                            teams={teams}
+                        />
+                    )}
                 </div>
             </Explorer>
         </>
