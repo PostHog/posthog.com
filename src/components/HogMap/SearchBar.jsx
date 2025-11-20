@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState, useImperativeHandle } from "react"
-import { places } from "./data"
+import { getPlaces, setPlaces } from "./data"
 import { PlaceType } from "./types"
 
 function SearchBarImpl({
@@ -120,6 +120,7 @@ function SearchBarImpl({
             url.searchParams.set("access_token", token)
             const resp = await fetch(url.toString())
             const json = await resp.json()
+            console.log(json)
             const feat =
                 (Array.isArray(json?.features) && json.features[0]) ||
                 json?.feature ||
@@ -287,6 +288,43 @@ export function createSearchMarker({
     })
     select.className = 'w-full border border-primary rounded px-2 py-1 bg-primary text-primary'
     selectWrap.appendChild(select)
+    // Dynamic subform area
+    const subformSlot = document.createElement('div')
+    subformSlot.className = 'mb-2'
+    let offsiteNameInput = null
+    let offsiteDateInput = null
+    const renderSubform = (typeValue) => {
+        // Clear slot
+        while (subformSlot.firstChild) {
+            subformSlot.removeChild(subformSlot.firstChild)
+        }
+        offsiteNameInput = null
+        offsiteDateInput = null
+        if (typeValue === 'offsite') {
+            const label1 = document.createElement('label')
+            label1.className = 'block text-xs text-secondary mb-1'
+            label1.textContent = 'Offsite name'
+            offsiteNameInput = document.createElement('input')
+            offsiteNameInput.type = 'text'
+            offsiteNameInput.placeholder = 'Enter offsite name'
+            offsiteNameInput.className = 'w-full border border-primary rounded px-2 py-1 bg-primary text-primary mb-2'
+            const label2 = document.createElement('label')
+            label2.className = 'block text-xs text-secondary mb-1'
+            label2.textContent = 'Date'
+            offsiteDateInput = document.createElement('input')
+            offsiteDateInput.type = 'date'
+            offsiteDateInput.className = 'w-full border border-primary rounded px-2 py-1 bg-primary text-primary'
+            subformSlot.appendChild(label1)
+            subformSlot.appendChild(offsiteNameInput)
+            subformSlot.appendChild(label2)
+            subformSlot.appendChild(offsiteDateInput)
+        } else {
+            // Place subform (none for now)
+        }
+    }
+    select.addEventListener('change', () => renderSubform(select.value))
+    // Initial subform render
+    renderSubform(select.value)
     const buttons = document.createElement('div')
     buttons.className = 'flex gap-2 justify-end'
     const cancelBtn = document.createElement('button')
@@ -302,6 +340,7 @@ export function createSearchMarker({
     if (address) container.appendChild(addr)
     container.appendChild(coordsWrap)
     container.appendChild(selectWrap)
+    container.appendChild(subformSlot)
     container.appendChild(buttons)
     const popup = new mapboxgl.Popup({ offset: 12 }).setDOMContent(container)
     const marker = new mapboxgl.Marker({ element: el }).setLngLat([longitude, latitude]).setPopup(popup)
@@ -331,15 +370,20 @@ export function createSearchMarker({
             const selected = (select && select.value) || PlaceType.CAFE
             const type =
                 Object.values(PlaceType).includes(selected) ? selected : PlaceType.CAFE
+            const maybeOffsiteName =
+                type === 'offsite' && offsiteNameInput && typeof offsiteNameInput.value === 'string'
+                    ? offsiteNameInput.value.trim()
+                    : ''
             const item = {
                 id: Date.now(),
-                name: label || "Selected place",
+                name: maybeOffsiteName || label || "Selected place",
                 address: address || "",
                 latitude: Number(latitude),
                 longitude: Number(longitude),
                 type,
             }
-            places.push(item)
+            const nextPlaces = [...getPlaces(), item]
+            setPlaces(nextPlaces)
             try {
                 window.dispatchEvent(new CustomEvent('hogmap:places-updated'))
             } catch {}

@@ -6,7 +6,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import Menu from './Menu'
 import SearchBar, { createSearchMarker } from './SearchBar'
 import { PlaceType, EventType } from './types'
-import { places as userPlaces } from './data'
+import { getPlaces } from './data'
 import { EventItem } from './types'
 import { IconBuilding, IconBed, IconBurger, IconCoffee, IconLaptop, IconTelescope } from '@posthog/icons'
 import { renderToStaticMarkup } from 'react-dom/server'
@@ -557,18 +557,19 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
             const activePlaceTypes = Object.values(PlaceType).filter((pt) => currentEnabled.includes(pt))
             if (activePlaceTypes.length > 0) {
                 const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
-                const activePlaces = userPlaces.filter((p) => activePlaceTypes.includes(p.type))
+                const allPlaces = getPlaces()
+                const activePlaces = allPlaces.filter((p) => activePlaceTypes.includes(p.type))
                 const groups = activePlaces.reduce((acc, p) => {
                     const key = `${p.longitude.toFixed(4)},${p.latitude.toFixed(4)}`
                     if (!acc[key]) {
                         acc[key] = {
                             coords: { longitude: p.longitude, latitude: p.latitude },
-                            places: [] as typeof userPlaces,
+                            places: [] as typeof allPlaces,
                         }
                     }
                     acc[key].places.push(p)
                     return acc
-                }, {} as Record<string, { coords: Coordinates; places: typeof userPlaces }>)
+                }, {} as Record<string, { coords: Coordinates; places: typeof allPlaces }>)
                 Object.values(groups).forEach(({ coords: { longitude, latitude }, places }) => {
                     const offsets = computeOffsets(places.length, jitterRadius)
                     places.forEach((pl, idx) => {
