@@ -118,27 +118,29 @@ def markdown_to_speech_text(content):
     # Remove images
     text = IMAGE_PATTERN.sub(replace_image_with_hint, text)
     
-    # Replace headings with SSML breaks for natural pacing
-    # Use ElevenLabs SSML syntax: <break time="1.0s" />
+    # Replace headings with natural speech annotations for pacing
     # Process from most specific (H4+) to least specific (H1) to avoid partial matches
     
     # H4+ (####) - Minor headings, lighter pause
-    text = re.sub(r'^#{4,}\s+(.+)$', r'<break time="0.4s" />\1.<break time="0.3s" />', text, flags=re.MULTILINE)
+    text = re.sub(r'^#{4,}\s+(.+)$', r'\1. [pause]', text, flags=re.MULTILINE)
     
     # H3 (###) - Subsections, medium pause
-    text = re.sub(r'^#{3}\s+(.+)$', r'<break time="0.6s" />\1.<break time="0.5s" />', text, flags=re.MULTILINE)
+    text = re.sub(r'^#{3}\s+(.+)$', r'[pause] \1. [pause]', text, flags=re.MULTILINE)
     
     # H2 (##) - Major sections, good pause
-    text = re.sub(r'^#{2}\s+(.+)$', r'<break time="1.0s" />\1.<break time="0.8s" />', text, flags=re.MULTILINE)
+    text = re.sub(r'^#{2}\s+(.+)$', r'[inhales] \1. [pause]', text, flags=re.MULTILINE)
     
     # H1 (#) - Usually just title, major pause
-    text = re.sub(r'^#{1}\s+(.+)$', r'<break time="1.0s" />\1.<break time="1.0s" />', text, flags=re.MULTILINE)
+    text = re.sub(r'^#{1}\s+(.+)$', r'[inhales] \1. [pause]', text, flags=re.MULTILINE)
     
     # Remove bold/italic markers
     text = re.sub(r'\*\*([^\*]+)\*\*', r'\1', text)
     text = re.sub(r'\*([^\*]+)\*', r'\1', text)
     text = re.sub(r'__([^_]+)__', r'\1', text)
     text = re.sub(r'_([^_]+)_', r'\1', text)
+    
+    # Remove any remaining asterisks
+    text = text.replace('*', '')
     
     # Clean up list markers
     text = re.sub(r'^\s*[-*+]\s+', '', text, flags=re.MULTILINE)
@@ -155,6 +157,10 @@ def markdown_to_speech_text(content):
     
     # Remove lines with only whitespace
     text = '\n'.join(line for line in text.split('\n') if line.strip())
+    
+    # Fix common abbreviations that TTS might mispronounce
+    text = re.sub(r'\b(\d+)x\b', r'\1 times', text, flags=re.IGNORECASE)  # "6x" -> "6 times"
+    text = re.sub(r'\bftw\b', 'for the win', text, flags=re.IGNORECASE)
     
     return text.strip()
 
