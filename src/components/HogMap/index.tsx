@@ -3,9 +3,11 @@ import { usePeopleMapData, ProfileNode, Coordinates } from './PeopleLayer'
 import { useEventsMapData, EventItem } from './EventsLayer'
 import { navigate } from 'gatsby'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import Menu from './Menu'
 
 export const LAYER_PEOPLE = 'layer-people'
-export const LAYER_EVENTS = 'layer-events'
+export const LAYER_EVENTS_UPCOMING = 'layer-events-upcoming'
+export const LAYER_EVENTS_PAST = 'layer-events-past'
 
 // Delay requiring mapbox-gl until client to avoid SSR issues
 const getMapbox = () => {
@@ -45,7 +47,7 @@ const computeOffsets = (count: number, baseRadius: number): Array<{ dx: number; 
     return offsets
 }
 
-export default function HogMap({ layers }: { layers: string[] }): JSX.Element {
+export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
     useEffect(() => {
         setIsClient(true)
@@ -61,6 +63,40 @@ export default function HogMap({ layers }: { layers: string[] }): JSX.Element {
     const { members, coordsByQuery } = usePeopleMapData(isClient, token)
     const { events, coordsByEventId } = useEventsMapData(isClient, token)
 
+    const normalizeLayers = (input: string[] | undefined): string[] => {
+        const result = new Set<string>()
+        const items = Array.isArray(input) ? input : []
+        items.forEach((l) => {
+            if (l === LAYER_PEOPLE) {
+                result.add(LAYER_PEOPLE)
+            } else if (l === 'layer-events' /* backward compat */) {
+                result.add(LAYER_EVENTS_UPCOMING)
+                result.add(LAYER_EVENTS_PAST)
+            } else if (l === LAYER_EVENTS_UPCOMING) {
+                result.add(LAYER_EVENTS_UPCOMING)
+            } else if (l === LAYER_EVENTS_PAST) {
+                result.add(LAYER_EVENTS_PAST)
+            }
+        })
+        if (result.size === 0) {
+            // default to all layers when none provided
+            result.add(LAYER_PEOPLE)
+            result.add(LAYER_EVENTS_UPCOMING)
+            result.add(LAYER_EVENTS_PAST)
+        }
+        return Array.from(result)
+    }
+
+    const [enabledLayers, setEnabledLayers] = useState<string[]>(normalizeLayers(layers))
+    const toggleLayer = (layer: string) => {
+        setEnabledLayers((prev) => (prev.includes(layer) ? prev.filter((l) => l !== layer) : [...prev, layer]))
+    }
+
+    // Keep internal state in sync if the caller passes new layers prop
+    useEffect(() => {
+        const next = normalizeLayers(layers)
+        setEnabledLayers(next)
+    }, [layers])
     useEffect(() => {
         if (!isClient) {
             console.error('Not client')
@@ -163,8 +199,10 @@ export default function HogMap({ layers }: { layers: string[] }): JSX.Element {
             clearMarkers()
             const zoom = mapRef.current.getZoom()
 
-            const showPeople = Array.isArray(layers) && layers.includes(LAYER_PEOPLE)
-            const showEvents = Array.isArray(layers) && layers.includes(LAYER_EVENTS)
+            const showPeople = Array.isArray(enabledLayers) && enabledLayers.includes(LAYER_PEOPLE)
+            const showUpcoming = Array.isArray(enabledLayers) && enabledLayers.includes(LAYER_EVENTS_UPCOMING)
+            const showPast = Array.isArray(enabledLayers) && enabledLayers.includes(LAYER_EVENTS_PAST)
+            const today = new Date()
 
             // Use Mapbox clusters when zoomed out
             if (zoom < CLUSTER_ZOOM) {
@@ -189,30 +227,52 @@ export default function HogMap({ layers }: { layers: string[] }): JSX.Element {
                 } else {
                     setClusterVisibility('people-source', false)
                 }
-                if (showEvents) {
-                    const eventFeatures = events
+                if (showUpcoming) {
+                    const upcomingFeatures = events
+                        .filter((e) => (e.date ? new Date(e.date) >= today : false))
                         .map((e) => {
                             const coords = coordsByEventId[e.id]
                             if (!coords) return null
                             return {
                                 type: 'Feature',
-                                properties: { type: 'event' },
+                                properties: { type: 'event-upcoming' },
                                 geometry: { type: 'Point', coordinates: [coords.longitude, coords.latitude] },
                             }
                         })
                         .filter(Boolean)
-                    const eventsData = { type: 'FeatureCollection', features: eventFeatures as any[] }
-                    ensureClusterSource('events-source', eventsData)
-                    ensureClusterLayers('events-source')
-                    setClusterVisibility('events-source', true)
+                    const upcomingData = { type: 'FeatureCollection', features: upcomingFeatures as any[] }
+                    ensureClusterSource('events-upcoming-source', upcomingData)
+                    ensureClusterLayers('events-upcoming-source')
+                    setClusterVisibility('events-upcoming-source', true)
                 } else {
-                    setClusterVisibility('events-source', false)
+                    setClusterVisibility('events-upcoming-source', false)
+                }
+                if (showPast) {
+                    const pastFeatures = events
+                        .filter((e) => (e.date ? new Date(e.date) < today : false))
+                        .map((e) => {
+                            const coords = coordsByEventId[e.id]
+                            if (!coords) return null
+                            return {
+                                type: 'Feature',
+                                properties: { type: 'event-past' },
+                                geometry: { type: 'Point', coordinates: [coords.longitude, coords.latitude] },
+                            }
+                        })
+                        .filter(Boolean)
+                    const pastData = { type: 'FeatureCollection', features: pastFeatures as any[] }
+                    ensureClusterSource('events-past-source', pastData)
+                    ensureClusterLayers('events-past-source')
+                    setClusterVisibility('events-past-source', true)
+                } else {
+                    setClusterVisibility('events-past-source', false)
                 }
                 // Skip HTML markers in clustered view
                 return
             } else {
                 setClusterVisibility('people-source', false)
-                setClusterVisibility('events-source', false)
+                setClusterVisibility('events-upcoming-source', false)
+                setClusterVisibility('events-past-source', false)
             }
 
             if (showPeople) {
@@ -295,10 +355,11 @@ export default function HogMap({ layers }: { layers: string[] }): JSX.Element {
                 })
             }
 
-            if (showEvents) {
+            if (showUpcoming) {
                 const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
-                // Group events by coordinate (rounded) to combine overlapping markers
-                const groups = events.reduce((acc, e) => {
+                // Group upcoming events by coordinate
+                const upcomingEvents = events.filter((e) => (e.date ? new Date(e.date) >= today : false))
+                const groups = upcomingEvents.reduce((acc, e) => {
                     const coords = coordsByEventId[e.id]
                     if (!coords) {
                         return acc
@@ -323,7 +384,83 @@ export default function HogMap({ layers }: { layers: string[] }): JSX.Element {
                         el.style.width = '20px'
                         el.style.height = '20px'
                         el.style.borderRadius = '10px'
-                        el.style.background = '#FF9500'
+                        el.style.background = '#FF9500' // upcoming
+                        el.style.border = '2px solid #ffffff'
+                        el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
+
+                        const date = ev.date
+                            ? new Date(ev.date).toLocaleDateString('en-US', {
+                                  month: 'short',
+                                  day: 'numeric',
+                                  year: 'numeric',
+                              })
+                            : ''
+                        const href = ev.link || ''
+                        const name = ev.name || 'Event'
+                        const popupHtml = `
+                            <div class="text-sm max-w-[240px]">
+                                <div class="font-semibold mb-1">${name}</div>
+                                ${date ? `<div class="text-secondary mb-1">${date}</div>` : ''}
+                                <div class="text-secondary">${label}</div>
+                                ${href ? `<a class="underline font-semibold" href="${href}">View details →</a>` : ''}
+                            </div>`
+                        const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+
+                        const marker = new mapboxgl.Marker({ element: el })
+                            .setLngLat([longitude + dx, latitude + dy])
+                            .setPopup(popup)
+                            .addTo(mapRef.current)
+                        if (href) {
+                            marker.getElement().style.cursor = 'pointer'
+                            marker.getElement().addEventListener('click', () => {
+                                if (href.startsWith('/')) {
+                                    navigate(href, { state: { newWindow: true } })
+                                } else if (typeof window !== 'undefined') {
+                                    window.open(href, '_blank', 'noopener,noreferrer')
+                                }
+                            })
+                        } else {
+                            marker.getElement().style.cursor = 'pointer'
+                            marker.getElement().addEventListener('click', () => {
+                                navigate('/events', { state: { newWindow: true } })
+                            })
+                        }
+                        marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                        marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                        markersRef.current.push(marker)
+                    })
+                })
+            }
+            if (showPast) {
+                const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
+                // Group past events by coordinate
+                const pastEvents = events.filter((e) => (e.date ? new Date(e.date) < today : false))
+                const groups = pastEvents.reduce((acc, e) => {
+                    const coords = coordsByEventId[e.id]
+                    if (!coords) {
+                        return acc
+                    }
+                    const key = `${coords.longitude.toFixed(4)},${coords.latitude.toFixed(4)}`
+                    if (!acc[key]) {
+                        acc[key] = {
+                            coords,
+                            events: [] as EventItem[],
+                            label: e.location?.label || 'Event',
+                        }
+                    }
+                    acc[key].events.push(e)
+                    return acc
+                }, {} as Record<string, { coords: Coordinates; events: EventItem[]; label: string }>)
+
+                Object.values(groups).forEach(({ coords: { longitude, latitude }, events, label }) => {
+                    const offsets = computeOffsets(events.length, jitterRadius)
+                    events.forEach((ev, idx) => {
+                        const { dx, dy } = offsets[idx]
+                        const el = document.createElement('div')
+                        el.style.width = '20px'
+                        el.style.height = '20px'
+                        el.style.borderRadius = '10px'
+                        el.style.background = '#6B7280' // gray for past
                         el.style.border = '2px solid #ffffff'
                         el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
 
@@ -428,10 +565,21 @@ export default function HogMap({ layers }: { layers: string[] }): JSX.Element {
                 mapRef.current = null
             }
         }
-    }, [isClient, token, styleUrl, coordsByQuery, members, layers, events, coordsByEventId])
+    }, [isClient, token, styleUrl, coordsByQuery, members, layers, enabledLayers, events, coordsByEventId])
 
     return (
         <div className="box-border w-full h-full rounded border border-primary overflow-hidden">
+            {typeof layers === 'undefined' && (
+                <Menu
+                    enabledLayers={enabledLayers}
+                    onToggle={toggleLayer}
+                    ids={{
+                        people: LAYER_PEOPLE,
+                        upcoming: LAYER_EVENTS_UPCOMING,
+                        past: LAYER_EVENTS_PAST,
+                    }}
+                />
+            )}
             <div ref={mapContainerRef} className="w-full h-full" />
         </div>
     )
