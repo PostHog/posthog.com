@@ -16,6 +16,48 @@ export default function Menu({
             <div className="rounded border border-primary bg-primary px-3 py-2 shadow-sm group cursor-pointer">
                 <div className="text-primary dark:text-white font-semibold select-none">Layers</div>
                 <div className="hidden group-hover:block mt-2 dark:text-white">
+                    <div className="flex items-center gap-2 mb-2">
+                        <button
+                            type="button"
+                            className="px-2 py-1 rounded border border-primary bg-primary text-primary hover:bg-accent text-xs"
+                            onClick={() => {
+                                const allLayers = [
+                                    ids.people,
+                                    ids.upcoming,
+                                    ids.past,
+                                    ...Object.values(EventType),
+                                    ...Object.values(PlaceType),
+                                ]
+                                allLayers.forEach((layer) => {
+                                    if (!enabledLayers.includes(layer)) {
+                                        onToggle(layer)
+                                    }
+                                })
+                            }}
+                        >
+                            Select all
+                        </button>
+                        <button
+                            type="button"
+                            className="px-2 py-1 rounded border border-primary bg-primary text-primary hover:bg-accent text-xs"
+                            onClick={() => {
+                                const allLayers = [
+                                    ids.people,
+                                    ids.upcoming,
+                                    ids.past,
+                                    ...Object.values(EventType),
+                                    ...Object.values(PlaceType),
+                                ]
+                                allLayers.forEach((layer) => {
+                                    if (enabledLayers.includes(layer)) {
+                                        onToggle(layer)
+                                    }
+                                })
+                            }}
+                        >
+                            Unselect all
+                        </button>
+                    </div>
                     <div className="flex flex-row justify-start items-center gap-2 my-1">
                         <Checkbox
                             id="people"

@@ -65,6 +65,12 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
     const markersRef = useRef<any[]>([])
     const searchMarkerRef = useRef<any>(null)
     const searchRef = useRef<any>(null)
+    const renderMarkersRef = useRef<(() => void) | null>(null)
+    const enabledLayersRef = useRef<string[]>([])
+    const membersRef = useRef<ProfileNode[]>([])
+    const coordsByQueryRef = useRef<Record<string, Coordinates>>({})
+    const eventsRef = useRef<any[]>([])
+    const coordsByEventIdRef = useRef<Record<number, { latitude: number; longitude: number }>>({})
 
     const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
     const styleUrl = 'mapbox://styles/mapbox/streets-v12'
@@ -112,6 +118,21 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
         const next = normalizeLayers(layers)
         setEnabledLayers(next)
     }, [layers])
+    useEffect(() => {
+        enabledLayersRef.current = enabledLayers
+    }, [enabledLayers])
+    useEffect(() => {
+        membersRef.current = members
+    }, [members])
+    useEffect(() => {
+        coordsByQueryRef.current = coordsByQuery
+    }, [coordsByQuery])
+    useEffect(() => {
+        eventsRef.current = events as any[]
+    }, [events])
+    useEffect(() => {
+        coordsByEventIdRef.current = coordsByEventId
+    }, [coordsByEventId])
     useEffect(() => {
         if (!isClient) {
             console.error('Not client')
@@ -214,19 +235,20 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
             clearMarkers()
             const zoom = mapRef.current.getZoom()
 
-            const showPeople = Array.isArray(enabledLayers) && enabledLayers.includes(LAYER_PEOPLE)
-            const showUpcoming = Array.isArray(enabledLayers) && enabledLayers.includes(LAYER_EVENTS_UPCOMING)
-            const showPast = Array.isArray(enabledLayers) && enabledLayers.includes(LAYER_EVENTS_PAST)
+            const currentEnabled = enabledLayersRef.current
+            const showPeople = Array.isArray(currentEnabled) && currentEnabled.includes(LAYER_PEOPLE)
+            const showUpcoming = Array.isArray(currentEnabled) && currentEnabled.includes(LAYER_EVENTS_UPCOMING)
+            const showPast = Array.isArray(currentEnabled) && currentEnabled.includes(LAYER_EVENTS_PAST)
             const today = new Date()
 
             // Use Mapbox clusters when zoomed out
             if (zoom < CLUSTER_ZOOM) {
                 if (showPeople) {
-                    const peopleFeatures = members
+                    const peopleFeatures = membersRef.current
                         .map((m) => {
                             const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
                             if (!q) return null
-                            const coords = coordsByQuery[q]
+                            const coords = coordsByQueryRef.current[q]
                             if (!coords) return null
                             return {
                                 type: 'Feature',
@@ -243,10 +265,10 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                     setClusterVisibility('people-source', false)
                 }
                 if (showUpcoming) {
-                    const upcomingFeatures = events
+                    const upcomingFeatures = eventsRef.current
                         .filter((e) => (e.date ? new Date(e.date) >= today : false))
                         .map((e) => {
-                            const coords = coordsByEventId[e.id]
+                            const coords = coordsByEventIdRef.current[e.id]
                             if (!coords) return null
                             return {
                                 type: 'Feature',
@@ -263,10 +285,10 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                     setClusterVisibility('events-upcoming-source', false)
                 }
                 if (showPast) {
-                    const pastFeatures = events
+                    const pastFeatures = eventsRef.current
                         .filter((e) => (e.date ? new Date(e.date) < today : false))
                         .map((e) => {
-                            const coords = coordsByEventId[e.id]
+                            const coords = coordsByEventIdRef.current[e.id]
                             if (!coords) return null
                             return {
                                 type: 'Feature',
@@ -294,12 +316,12 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                 // Jitter radius scales with zoom (much more spread when zoomed out, tighter when zoomed in)
                 const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
                 // Group members by their geocode query so people in the same location are combined
-                const groups = members.reduce((acc, m) => {
+                const groups = membersRef.current.reduce((acc, m) => {
                     const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
                     if (!q) {
                         return acc
                     }
-                    const coords = coordsByQuery[q]
+                    const coords = coordsByQueryRef.current[q]
                     if (!coords) {
                         return acc
                     }
@@ -373,9 +395,9 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
             if (showUpcoming) {
                 const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
                 // Group upcoming events by coordinate
-                const upcomingEvents = events.filter((e) => (e.date ? new Date(e.date) >= today : false))
+                const upcomingEvents = eventsRef.current.filter((e) => (e.date ? new Date(e.date) >= today : false))
                 const groups = upcomingEvents.reduce((acc, e) => {
-                    const coords = coordsByEventId[e.id]
+                    const coords = coordsByEventIdRef.current[e.id]
                     if (!coords) {
                         return acc
                     }
@@ -391,67 +413,69 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                     return acc
                 }, {} as Record<string, { coords: Coordinates; events: EventItem[]; label: string }>)
 
-                Object.values(groups).forEach(({ coords: { longitude, latitude }, events, label }) => {
-                    const offsets = computeOffsets(events.length, jitterRadius)
-                    events.forEach((ev, idx) => {
-                        const { dx, dy } = offsets[idx]
-                        const el = document.createElement('div')
-                        el.style.width = '20px'
-                        el.style.height = '20px'
-                        el.style.borderRadius = '10px'
-                        el.style.background = '#FF9500' // upcoming
-                        el.style.border = '2px solid #ffffff'
-                        el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
+                ;(Object.values(groups) as Array<{ coords: Coordinates; events: EventItem[]; label: string }>).forEach(
+                    ({ coords: { longitude, latitude }, events, label }) => {
+                        const offsets = computeOffsets(events.length, jitterRadius)
+                        ;(events as EventItem[]).forEach((ev: EventItem, idx: number) => {
+                            const { dx, dy } = offsets[idx]
+                            const el = document.createElement('div')
+                            el.style.width = '20px'
+                            el.style.height = '20px'
+                            el.style.borderRadius = '10px'
+                            el.style.background = '#FF9500' // upcoming
+                            el.style.border = '2px solid #ffffff'
+                            el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
 
-                        const date = ev.date
-                            ? new Date(ev.date).toLocaleDateString('en-US', {
-                                  month: 'short',
-                                  day: 'numeric',
-                                  year: 'numeric',
-                              })
-                            : ''
-                        const href = ev.link || ''
-                        const name = ev.name || 'Event'
-                        const popupHtml = `
+                            const date = ev.date
+                                ? new Date(ev.date).toLocaleDateString('en-US', {
+                                      month: 'short',
+                                      day: 'numeric',
+                                      year: 'numeric',
+                                  })
+                                : ''
+                            const href = ev.link || ''
+                            const name = ev.name || 'Event'
+                            const popupHtml = `
                             <div class="text-sm max-w-[240px]">
                                 <div class="font-semibold mb-1">${name}</div>
                                 ${date ? `<div class="text-secondary mb-1">${date}</div>` : ''}
                                 <div class="text-secondary">${label}</div>
                                 ${href ? `<a class="underline font-semibold" href="${href}">View details →</a>` : ''}
                             </div>`
-                        const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+                            const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
 
-                        const marker = new mapboxgl.Marker({ element: el })
-                            .setLngLat([longitude + dx, latitude + dy])
-                            .setPopup(popup)
-                            .addTo(mapRef.current)
-                        if (href) {
-                            marker.getElement().style.cursor = 'pointer'
-                            marker.getElement().addEventListener('click', () => {
-                                if (href.startsWith('/')) {
-                                    navigate(href, { state: { newWindow: true } })
-                                } else if (typeof window !== 'undefined') {
-                                    window.open(href, '_blank', 'noopener,noreferrer')
-                                }
-                            })
-                        } else {
-                            marker.getElement().style.cursor = 'pointer'
-                            marker.getElement().addEventListener('click', () => {
-                                navigate('/events', { state: { newWindow: true } })
-                            })
-                        }
-                        marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
-                        marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
-                        markersRef.current.push(marker)
-                    })
-                })
+                            const marker = new mapboxgl.Marker({ element: el })
+                                .setLngLat([longitude + dx, latitude + dy])
+                                .setPopup(popup)
+                                .addTo(mapRef.current)
+                            if (href) {
+                                marker.getElement().style.cursor = 'pointer'
+                                marker.getElement().addEventListener('click', () => {
+                                    if (href.startsWith('/')) {
+                                        navigate(href, { state: { newWindow: true } })
+                                    } else if (typeof window !== 'undefined') {
+                                        window.open(href, '_blank', 'noopener,noreferrer')
+                                    }
+                                })
+                            } else {
+                                marker.getElement().style.cursor = 'pointer'
+                                marker.getElement().addEventListener('click', () => {
+                                    navigate('/events', { state: { newWindow: true } })
+                                })
+                            }
+                            marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                            marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                            markersRef.current.push(marker)
+                        })
+                    }
+                )
             }
             if (showPast) {
                 const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
                 // Group past events by coordinate
-                const pastEvents = events.filter((e) => (e.date ? new Date(e.date) < today : false))
+                const pastEvents = eventsRef.current.filter((e) => (e.date ? new Date(e.date) < today : false))
                 const groups = pastEvents.reduce((acc, e) => {
-                    const coords = coordsByEventId[e.id]
+                    const coords = coordsByEventIdRef.current[e.id]
                     if (!coords) {
                         return acc
                     }
@@ -467,63 +491,68 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                     return acc
                 }, {} as Record<string, { coords: Coordinates; events: EventItem[]; label: string }>)
 
-                Object.values(groups).forEach(({ coords: { longitude, latitude }, events, label }) => {
-                    const offsets = computeOffsets(events.length, jitterRadius)
-                    events.forEach((ev, idx) => {
-                        const { dx, dy } = offsets[idx]
-                        const el = document.createElement('div')
-                        el.style.width = '20px'
-                        el.style.height = '20px'
-                        el.style.borderRadius = '10px'
-                        el.style.background = '#6B7280' // gray for past
-                        el.style.border = '2px solid #ffffff'
-                        el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
+                ;(Object.values(groups) as Array<{ coords: Coordinates; events: EventItem[]; label: string }>).forEach(
+                    ({ coords: { longitude, latitude }, events, label }) => {
+                        const offsets = computeOffsets(events.length, jitterRadius)
+                        ;(events as EventItem[]).forEach((ev: EventItem, idx: number) => {
+                            const { dx, dy } = offsets[idx]
+                            const el = document.createElement('div')
+                            el.classList.add(
+                                'w-5',
+                                'h-5',
+                                'rounded-full',
+                                'bg-muted',
+                                'border-2',
+                                'border-white',
+                                'shadow'
+                            )
 
-                        const date = ev.date
-                            ? new Date(ev.date).toLocaleDateString('en-US', {
-                                  month: 'short',
-                                  day: 'numeric',
-                                  year: 'numeric',
-                              })
-                            : ''
-                        const href = ev.link || ''
-                        const name = ev.name || 'Event'
-                        const popupHtml = `
+                            const date = ev.date
+                                ? new Date(ev.date).toLocaleDateString('en-US', {
+                                      month: 'short',
+                                      day: 'numeric',
+                                      year: 'numeric',
+                                  })
+                                : ''
+                            const href = ev.link || ''
+                            const name = ev.name || 'Event'
+                            const popupHtml = `
                             <div class="text-sm max-w-[240px]">
                                 <div class="font-semibold mb-1">${name}</div>
                                 ${date ? `<div class="text-secondary mb-1">${date}</div>` : ''}
                                 <div class="text-secondary">${label}</div>
                                 ${href ? `<a class="underline font-semibold" href="${href}">View details →</a>` : ''}
                             </div>`
-                        const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+                            const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
 
-                        const marker = new mapboxgl.Marker({ element: el })
-                            .setLngLat([longitude + dx, latitude + dy])
-                            .setPopup(popup)
-                            .addTo(mapRef.current)
-                        if (href) {
-                            marker.getElement().style.cursor = 'pointer'
-                            marker.getElement().addEventListener('click', () => {
-                                if (href.startsWith('/')) {
-                                    navigate(href, { state: { newWindow: true } })
-                                } else if (typeof window !== 'undefined') {
-                                    window.open(href, '_blank', 'noopener,noreferrer')
-                                }
-                            })
-                        } else {
-                            marker.getElement().style.cursor = 'pointer'
-                            marker.getElement().addEventListener('click', () => {
-                                navigate('/events', { state: { newWindow: true } })
-                            })
-                        }
-                        marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
-                        marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
-                        markersRef.current.push(marker)
-                    })
-                })
+                            const marker = new mapboxgl.Marker({ element: el })
+                                .setLngLat([longitude + dx, latitude + dy])
+                                .setPopup(popup)
+                                .addTo(mapRef.current)
+                            if (href) {
+                                marker.getElement().style.cursor = 'pointer'
+                                marker.getElement().addEventListener('click', () => {
+                                    if (href.startsWith('/')) {
+                                        navigate(href, { state: { newWindow: true } })
+                                    } else if (typeof window !== 'undefined') {
+                                        window.open(href, '_blank', 'noopener,noreferrer')
+                                    }
+                                })
+                            } else {
+                                marker.getElement().style.cursor = 'pointer'
+                                marker.getElement().addEventListener('click', () => {
+                                    navigate('/events', { state: { newWindow: true } })
+                                })
+                            }
+                            marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                            marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                            markersRef.current.push(marker)
+                        })
+                    }
+                )
             }
             // Render saved places if their place-type layers are enabled
-            const activePlaceTypes = Object.values(PlaceType).filter((pt) => enabledLayers.includes(pt))
+            const activePlaceTypes = Object.values(PlaceType).filter((pt) => currentEnabled.includes(pt))
             if (activePlaceTypes.length > 0) {
                 const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
                 const activePlaces = userPlaces.filter((p) => activePlaceTypes.includes(p.type))
@@ -543,7 +572,25 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                     places.forEach((pl, idx) => {
                         const { dx, dy } = offsets[idx]
                         const el = document.createElement('div')
-                        el.className = 'w-[14px] h-[14px] rounded-full bg-orange border-2 border-white shadow-md'
+                        el.className =
+                            'w-[18px] h-[18px] rounded-full bg-orange border-2 border-white shadow-md flex items-center justify-center'
+                        // Two-letter code for type
+                        const typeToCode = (t: string) => {
+                            const map: Record<string, string> = {
+                                cafe: 'CO', // coffee
+                                'co-working': 'CW',
+                                hotel: 'HO',
+                                restaurant: 'RE',
+                                airbnb: 'AI',
+                                offsite: 'OF',
+                            }
+                            const lower = String(t || '').toLowerCase()
+                            return map[lower] || lower.slice(0, 2).toUpperCase() || 'PL'
+                        }
+                        const labelEl = document.createElement('span')
+                        labelEl.className = 'text-white text-[9px] font-bold leading-none select-none'
+                        labelEl.textContent = typeToCode(pl.type as unknown as string)
+                        el.appendChild(labelEl)
                         const popupHtml = `
                             <div class="text-sm max-w-[240px]">
                                 <div class="font-semibold mb-1">${pl.name}</div>
@@ -567,6 +614,7 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                 })
             }
         }
+        renderMarkersRef.current = renderMarkers
 
         if (mapRef.current) {
             // Map already exists: update markers and return
@@ -638,7 +686,17 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                 mapRef.current = null
             }
         }
-    }, [isClient, token, styleUrl, coordsByQuery, members, layers, enabledLayers, events, coordsByEventId])
+    }, [isClient, token, styleUrl])
+
+    useEffect(() => {
+        if (mapRef.current && (typeof mapRef.current.isStyleLoaded !== 'function' || mapRef.current.isStyleLoaded())) {
+            try {
+                renderMarkersRef.current && renderMarkersRef.current()
+            } catch {
+                console.error('Error rendering markers')
+            }
+        }
+    }, [coordsByQuery, members, enabledLayers, events, coordsByEventId])
 
     return (
         <div className="box-border w-full h-full rounded border border-primary overflow-hidden">
