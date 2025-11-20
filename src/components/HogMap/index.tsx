@@ -567,8 +567,8 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                         )
                         const groups = (activePlaces as any[]).reduce(
                             (acc: Record<string, { coords: Coordinates; places: any[] }>, p: any) => {
-                                const lon = Number(p.longitude)
-                                const lat = Number(p.latitude)
+                                const lon = Number(p.long)
+                                const lat = Number(p.lat)
                                 const key = `${lon.toFixed(4)},${lat.toFixed(4)}`
                                 if (!acc[key]) {
                                     acc[key] = {
@@ -598,7 +598,7 @@ export default function HogMap({ layers }: { layers?: string[] }): JSX.Element {
                                             <IconBed className="w-[24px] h-[24px] p-1" />
                                         ) : lowerType === 'restaurant' ? (
                                             <IconBurger className="w-[24px] h-[24px] p-1" />
-                                        ) : lowerType === 'cafe' ? (
+                                        ) : lowerType === 'coffee' ? (
                                             <IconCoffee className="w-[24px] h-[24px] p-1" />
                                         ) : lowerType === 'co-working' ? (
                                             <IconLaptop className="w-[24px] h-[24px] p-1" />

@@ -108,12 +108,19 @@ export const getPlaces = async (jwt: string): Promise<Record<string, unknown>[]>
         return []
     }
 
-    return data.data.map((item: { id: number; attributes: { name: string; address: string; type: string } }) => ({
-        id: item.id,
-        name: item.attributes.name,
-        address: item.attributes.address,
-        type: item.attributes.type,
-    }))
+    return data.data.map(
+        (item: {
+            id: number
+            attributes: { name: string; address: string; type: string; lat: number; long: number }
+        }) => ({
+            id: item.id,
+            name: item.attributes.name,
+            address: item.attributes.address,
+            type: item.attributes.type,
+            lat: item.attributes.lat,
+            long: item.attributes.long,
+        })
+    )
 }
 
 // Create a new place
@@ -121,9 +128,6 @@ export const addPlace = async (
     jwt: string,
     payload: { name: string; address: string; type: string }
 ): Promise<Record<string, unknown>> => {
-    console.log('addPlace', payload)
-    console.log('jwt', jwt)
-    console.log('process.env.GATSBY_SQUEAK_API_HOST', process.env.GATSBY_SQUEAK_API_HOST)
     const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/places`, {
         method: 'POST',
         body: JSON.stringify({ data: payload }),

@@ -282,7 +282,7 @@ export function createSearchMarker({
     const selectWrap = document.createElement('div')
     selectWrap.className = 'mb-2'
     const select = document.createElement('select')
-    ;['cafe', 'restaurant', 'airbnb', 'hotel', 'co-working', 'offsite'].forEach((opt) => {
+    ;['coffee', 'restaurant', 'airbnb', 'hotel', 'co-working', 'offsite'].forEach((opt) => {
         const o = document.createElement('option')
         o.value = opt
         o.textContent = opt
@@ -369,9 +369,9 @@ export function createSearchMarker({
     }
     addBtn.onclick = async () => {
         try {
-            const selected = (select && select.value) || PlaceType.CAFE
+            const selected = (select && select.value) || PlaceType.COFFEE
             const type =
-                Object.values(PlaceType).includes(selected) ? selected : PlaceType.CAFE
+                Object.values(PlaceType).includes(selected) ? selected : PlaceType.COFFEE
             const maybeOffsiteName =
                 type === 'offsite' && offsiteNameInput && typeof offsiteNameInput.value === 'string'
                     ? offsiteNameInput.value.trim()
@@ -380,14 +380,14 @@ export function createSearchMarker({
                 id: Date.now(),
                 name: maybeOffsiteName || label || "Selected place",
                 address: address || "",
-                latitude: Number(latitude),
-                longitude: Number(longitude),
-                type,
+                lat: latitude,
+                long: longitude,
+                type: type.charAt(0).toUpperCase() + type.slice(1),
             }
             try {
                 const jwt = typeof getJwt === 'function' ? await getJwt() : null
                 if (jwt) {
-                    await addPlace(jwt, { name: item.name, address: item.address, type: item.type })
+                    await addPlace(jwt, item)
                 }
             } catch {}
             try {
