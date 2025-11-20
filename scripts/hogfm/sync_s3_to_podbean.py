@@ -372,8 +372,8 @@ def main():
     )
     parser.add_argument(
         "--kind",
-        default="handbook",
         choices=["handbook", "changelog"],
+        required=True,
         help="Kind of content to sync (default: handbook)",
     )
     parser.add_argument(
@@ -384,7 +384,7 @@ def main():
     parser.add_argument(
         "--status",
         choices=["publish", "draft", "scheduled"],
-        default="draft",
+        required=True,
         help="Status for new episodes (default: draft)",
     )
 
