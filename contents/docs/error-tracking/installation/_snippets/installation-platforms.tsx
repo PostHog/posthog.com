@@ -69,6 +69,11 @@ const InstallationPlatforms = ({ columns = 2 }: InstallationPlatformsProps) => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg',
         },
         {
+            label: 'React Native',
+            url: '/docs/error-tracking/installation/react-native',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg',
+        },
+        {
             label: 'Manual/API',
             url: '/docs/error-tracking/installation/manual',
             icon: 'IconCode',
