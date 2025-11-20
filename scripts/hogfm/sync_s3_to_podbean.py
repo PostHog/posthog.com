@@ -33,7 +33,7 @@ PODBEAN_CLIENT_SECRET = os.getenv("PODBEAN_CLIENT_SECRET")
 
 # S3 configuration
 S3_BUCKET = os.getenv("S3_BUCKET")
-S3_PREFIX = os.getenv("S3_PREFIX", "")
+S3_PREFIX = os.getenv("S3_PREFIX", "handbook")
 AWS_REGION = os.getenv("AWS_REGION", "us-east-1")
 
 # Supported audio extensions
