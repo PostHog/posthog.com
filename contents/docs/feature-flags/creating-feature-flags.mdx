@@ -45,7 +45,7 @@ This presents you with a form where you can complete the details of your new fla
     classes="rounded"
 />
 
-## Step 2. Feature flag key and description (required)
+## Step 2. Add feature flag key and description (required)
 
 This is the **unique** key you use in your code to evaluate the feature flag. Some examples of feature flag keys are `new-landing-page`, `betaFeature`, or `bigger_callout_button`.
 
@@ -55,7 +55,7 @@ You will later [evaluate the feature flag](/docs/feature-flags/adding-feature-fl
 
 Use a descriptive key that reads well in your code and is easy to understand. You should also include a **description** to help you and your team understand the purpose of the feature flag.
 
-## Step 3. Feature flag type (required)
+## Step 3. Choose a feature flag type (required)
 
 In the **Served value** section, you can configure the type of feature flag you want to create. There are three types of feature flags:
 
@@ -110,7 +110,7 @@ Currently, [feature flag dependencies](docs/feature-flags/dependencies) are limi
 
 </CalloutBox>
 
-## Step 4. Feature flag behavior (optional)
+## Step 4. Configure feature flag behavior (optional)
 
 These are some _optional_ toggles for feature flag behavior. This section describes what they do and their default values.
 
@@ -144,7 +144,7 @@ In our experience, the tradeoffs to enabling this are **not** worthwhile for the
 2. **Incompatible with [local evaluation](/docs/feature-flags/local-evaluation):** It is necessary to perform the additional checks on the PostHog servers.
 3. **Incompatible with [bootstrapping](/docs/feature-flags/bootstrapping):** Bootstrapping relies on local evaluation, which cannot correctly calculate persistent flag values.
 
-## Step 5. Evaluation runtime and environments (optional)
+## Step 5. Configure evaluation runtime and environments (optional)
 
 You can control where your feature flags are evaluated using the **evaluation runtime** and **tags (evaluation environments)** sections of the form. You can find a detailed explanation of how evaluation environments work in the [evaluation environments documentation](docs/feature-flags/evaluation-environments).
 
@@ -232,6 +232,6 @@ You can use tags to accomplish:
 
 We recommend reading the [evaluation environments documentation](docs/feature-flags/evaluation-environments) in detail before using it in production.
 
-## Migrating feature flags from another tool
+## Migrate feature flags from another tool
 
 If you can pull feature flag data from them, you can use [our API](/docs/api/feature-flags) to migrate them. We even wrote guides for doing this with [LaunchDarkly](/docs/migrate/launchdarkly) and [Statsig](/docs/migrate/statsig).
