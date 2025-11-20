@@ -13,7 +13,9 @@ try:
 except ImportError:
     HAS_ELEVENLABS = False
 
-_ENV_FILE_PATH = Path(__file__).resolve().parents[2] / '.env'
+# Path to .env file in hogfm directory
+# elevenlabs_client.py -> handbook_audio -> hogfm
+_ENV_FILE_PATH = Path(__file__).resolve().parents[1] / '.env'
 _ENV_VARS_LOADED = False
 
 

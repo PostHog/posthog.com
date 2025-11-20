@@ -1,4 +1,6 @@
 name: HogFM
+permissions:
+    contents: read
 on:
     push:
         branches:

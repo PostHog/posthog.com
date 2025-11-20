@@ -1,21 +1,38 @@
 # Handbook audio generation (modular)
 
-This directory contains modular scripts for generating audio narration of handbook pages using ElevenLabs.
+This module (part of the `hogfm` project) generates audio narration of handbook pages using ElevenLabs.
 
 ## Quick setup
 
 ```bash
-# Install dependencies with uv
-uv pip install -r scripts/handbook-audio/requirements.txt
+# Navigate to the hogfm project
+cd scripts/hogfm
 
-# Set your API key
-export ELEVENLABS_API_KEY="your-key-here"
+# Install dependencies with uv
+uv sync
+
+# Set your API key in .env file at repo root
+# See .env template below
 
 # Test with a dry run
-python scripts/handbook-audio/generate.py --dry-run contents/handbook/values.md
+uv run handbook-audio --dry-run contents/handbook/values.md
 
 # Generate audio
-python scripts/handbook-audio/generate.py contents/handbook/values.md
+uv run handbook-audio contents/handbook/values.md
+```
+
+## Environment setup
+
+Create a `.env` file in the hogfm directory (`scripts/hogfm/.env`):
+
+```bash
+# ElevenLabs Configuration (Required for audio generation)
+ELEVENLABS_API_KEY=your-api-key-here
+ELEVENLABS_VOICE_ID=your-voice-id-here
+
+# S3 Configuration (Required only if using --upload-s3)
+HANDBOOK_AUDIO_S3_BUCKET=your-bucket-name
+AWS_REGION=your-aws-region
 ```
 
 ## Key features
@@ -46,10 +63,10 @@ The best file to test with is `contents/handbook/engineering/posthog-com/markdow
 
 ```bash
 # Dry run to see text processing without API calls
-python scripts/handbook-audio/generate.py --dry-run contents/handbook/engineering/posthog-com/markdown.mdx
+uv run handbook-audio --dry-run contents/handbook/engineering/posthog-com/markdown.mdx
 
 # Generate actual audio (requires API key)
-python scripts/handbook-audio/generate.py contents/handbook/engineering/posthog-com/markdown.mdx
+uv run handbook-audio contents/handbook/engineering/posthog-com/markdown.mdx
 ```
 
 This file exercises nearly every component type and edge case in the processor.
@@ -74,26 +91,25 @@ handbook-audio/
 
 ```bash
 # Dry run (no API call)
-python scripts/handbook-audio/generate.py --dry-run contents/handbook/values.md
+uv run handbook-audio --dry-run contents/handbook/values.md
 
 # Generate audio
-export ELEVENLABS_API_KEY="your-key"
-python scripts/handbook-audio/generate.py contents/handbook/values.md
+uv run handbook-audio contents/handbook/values.md
 ```
 
 ### Search and generate
 
 ```bash
 # Find and generate all files matching a pattern
-python scripts/handbook-audio/generate.py --search "engineering"
-python scripts/handbook-audio/generate.py --search "people"
+uv run handbook-audio --search "engineering"
+uv run handbook-audio --search "people"
 ```
 
 ### All files
 
 ```bash
 # Generate audio for all 260 handbook files
-python scripts/handbook-audio/generate.py --all
+uv run handbook-audio --all
 ```
 
 ## How it works
@@ -292,14 +308,16 @@ This makes it easy to:
 - `AWS_ACCESS_KEY_ID` - AWS access key (or use AWS CLI/IAM role)
 - `AWS_SECRET_ACCESS_KEY` - AWS secret key (or use AWS CLI/IAM role)
 
-You can set these in a `.env` file in the repo root:
+You can set these in a `.env` file in `scripts/hogfm/.env`:
 
 ```bash
+# Required for audio generation
 ELEVENLABS_API_KEY=your_key_here
-ELEVENLABS_VOICE_ID=lUTamkMw7gOzZbFIwmq4
+ELEVENLABS_VOICE_ID=your_voice_id_here
 
-HANDBOOK_AUDIO_S3_BUCKET=posthog-handbook-audio
-AWS_REGION=us-east-1
+# Required only if using S3 uploads
+HANDBOOK_AUDIO_S3_BUCKET=your-bucket-name
+AWS_REGION=your-aws-region
 ```
 
 ## Dependencies

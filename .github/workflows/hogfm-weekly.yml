@@ -1,5 +1,6 @@
 name: HogFM Weekly
-
+permissions:
+    contents: read
 on:
     schedule:
         - cron: '0 6 * * 1' # monday 6am utc (so its ready by monday 9am utc)

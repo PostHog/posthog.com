@@ -39,12 +39,11 @@ This structure:
 
 ## Prerequisites
 
-### 1. Install boto3
+### 1. Install dependencies
 
 ```bash
-uv pip install boto3
-# Or install all dependencies
-uv pip install -r scripts/handbook-audio/requirements.txt
+cd scripts/hogfm
+uv sync
 ```
 
 ### 2. Create S3 Bucket
@@ -93,11 +92,12 @@ export AWS_REGION=us-east-1
 
 ### 5. Set Environment Variables
 
-Add to your `.env` file:
+Add to your `.env` file in `scripts/hogfm/.env`:
 
 ```bash
-HANDBOOK_AUDIO_S3_BUCKET=posthog-handbook-audio
-AWS_REGION=us-east-1
+# Required for S3 uploads
+HANDBOOK_AUDIO_S3_BUCKET=your-bucket-name
+AWS_REGION=your-aws-region
 ```
 
 ## Usage
@@ -106,24 +106,24 @@ AWS_REGION=us-east-1
 
 ```bash
 # Generate and upload a single file
-python scripts/handbook-audio/generate.py --upload-s3 contents/handbook/values.md
+uv run handbook-audio --upload-s3 contents/handbook/values.md
 ```
 
 ### Batch Upload
 
 ```bash
 # Generate and upload all files
-python scripts/handbook-audio/generate.py --all --upload-s3
+uv run handbook-audio --all --upload-s3
 
 # Generate and upload files matching a pattern
-python scripts/handbook-audio/generate.py --search "engineering" --upload-s3
+uv run handbook-audio --search "engineering" --upload-s3
 ```
 
 ### Dry Run (Test Without Uploading)
 
 ```bash
 # Test S3 upload without actually uploading
-python scripts/handbook-audio/generate.py --dry-run --upload-s3 contents/handbook/values.md
+uv run handbook-audio --dry-run --upload-s3 contents/handbook/values.md
 ```
 
 ## Generated URLs
@@ -216,7 +216,8 @@ Each uploaded file includes metadata:
 
 ### "boto3 not installed"
 ```bash
-uv pip install boto3
+cd scripts/hogfm
+uv sync
 ```
 
 ### "AWS credentials not found"
