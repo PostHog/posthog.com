@@ -113,7 +113,6 @@ def get_podbean_episodes(kind: str) -> list[dict]:
             content = episode.get("content", "")
             match = re.search(r"ID: ([^\s<]+)", content)
 
-            print(f"Episode ID: {episode.get('id')} {content}, {match.group(1)}")
             if match:
                 episode_id = match.group(1)
                 if episode_id.startswith(kind):
