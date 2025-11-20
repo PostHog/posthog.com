@@ -19,11 +19,11 @@ crosspost:
 
 > The following was written by a member of the PostHog team about their time at a past startup. We’ve removed identifying details as it’s not meant to bash the company, but be a lesson.
 
-In American football, there's a defensive strategy called "prevent defense" that coaches deploy when they're ahead late in the game. The logic is sound: give up small gains but prevent big plays, run out the clock, and protect your lead. It's conservative, it's textbook, and it almost never works when you actually analyze the results.
+In American football, there's a defensive strategy called "prevent defense" that coaches deploy when they're ahead late in the game. The logic is sound: give up small gains but prevent big plays, run out the clock, and protect your lead. It's conservative, it's textbook, and it almost never works.
 
 The problem isn't the strategy itself. It's that **you stop doing the things that got you ahead in the first place**. You're no longer playing to win, you're playing not to lose, and in sports, in startups, in anything competitive, that shift in mindset is how you hand the game to someone hungrier than you.
 
-I know because I saw this happen, I was one of the first 30 employees at a scrappy startup that went public and became unrecognizable.
+I know because I saw this happen. I was one of the first 30 employees at a scrappy startup that went public and became unrecognizable.
 
 ## From scrappy to sluggish
 
