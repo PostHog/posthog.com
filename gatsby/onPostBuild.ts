@@ -15,12 +15,15 @@ import {
     generateSdkReferencesMarkdown,
 } from './rawMarkdownUtils'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
+import blogTemplate from '../src/templates/OG/blog.js'
+import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
+import customerTemplate from '../src/templates/OG/customer.js'
+import jobTemplate from '../src/templates/OG/job.js'
+import { flattenMenu } from './utils'
 
 const limit = pLimit(10)
 
-const createOGImages = async () => {
-    console.log('Creating OG images')
-
+const createCareersOG = async () => {
     const dir = path.resolve(__dirname, '../public/og-images')
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
 
@@ -87,7 +90,168 @@ const createOGImages = async () => {
 
     await createOG({ slug: 'careers-og' })
 
-    console.log('Finished creating OG images')
+    await browser.close()
+}
+
+const createOGImages = async (data) => {
+    const dir = path.resolve(__dirname, '../public/og-images')
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
+    const fontDir = path.resolve(__dirname, '../fonts')
+    if (!fs.existsSync(fontDir)) fs.mkdirSync(fontDir)
+    const res = await fetch('https://d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff', {
+        headers: {
+            Origin: 'https://posthog.com',
+        },
+    })
+    await new Promise((resolve, reject) => {
+        const fileStream = fs.createWriteStream(path.resolve(__dirname, '../fonts/matter.woff'))
+        res.body.pipe(fileStream)
+        res.body.on('error', (err) => {
+            reject(err)
+        })
+        fileStream.on('finish', function () {
+            resolve()
+        })
+    })
+
+    const font = fs.readFileSync(path.resolve(__dirname, '../fonts/matter.woff'), {
+        encoding: 'base64',
+    })
+
+    const browserFetcher = chromium.puppeteer.createBrowserFetcher()
+    const revisionInfo = await browserFetcher.download('982053')
+
+    const browser = await chromium.puppeteer.launch({
+        args: await chromium.args,
+        executablePath: revisionInfo.executablePath || process.env.PUPPETEER_EXECUTABLE_PATH,
+        headless: true,
+    })
+    const page = await browser.newPage()
+    await page.setViewport({
+        width: 1200,
+        height: 630,
+    })
+
+    async function createOG({ html, slug }) {
+        await page.setContent(html, {
+            waitUntil: ['domcontentloaded', 'networkidle0'],
+        })
+
+        await page.evaluateHandle('document.fonts.ready')
+
+        await page.screenshot({
+            type: 'jpeg',
+            path: `${dir}/${slug.replace(/\//g, '')}.jpeg`,
+            quality: 100,
+        })
+    }
+
+    // Blog post OG
+    for (const post of data.blog.nodes) {
+        const { title, authorData, featuredImage } = post.frontmatter
+        const image = featuredImage?.publicURL
+        const author =
+            authorData &&
+            authorData.map((author) => {
+                const image =
+                    author.profile?.avatar?.url ||
+                    `https://res.cloudinary.com/dmukukwp6/image/upload/contributor_posthog_e8c595ea3d.png`
+                return {
+                    ...author,
+                    image,
+                }
+            })[0]
+        await createOG({
+            html: blogTemplate({ title, authorData: author, image, font }),
+            slug: post.fields.slug,
+        })
+    }
+
+    const docsHandbookMenus = flattenMenu([...handbookSidebar, ...docsMenu.children])
+
+    // Docs and Handbook OG
+    for (const post of [...data.docsHandbook.nodes, ...data.tutorials.nodes]) {
+        const { title } = post.frontmatter
+        const { timeToRead, excerpt, fields, parent } = post
+        const lastUpdated = parent && parent.fields && parent.fields.lastUpdated
+        if (!title || !timeToRead || !excerpt || !lastUpdated || !fields?.contributors) continue
+        const contributors = fields?.contributors.map((contributor) => {
+            const { avatar, username } = contributor
+            return {
+                username,
+                avatar,
+            }
+        })
+        let breadcrumbs = null
+        docsHandbookMenus.some((item) => {
+            if (item.url === fields.slug) {
+                breadcrumbs = item.breadcrumb
+                return true
+            }
+        })
+        await createOG({
+            html: docsHandbookTemplate({
+                font,
+                title,
+                timeToRead,
+                excerpt,
+                lastUpdated,
+                contributors,
+                breadcrumbs: [
+                    {
+                        name: fields.slug.startsWith('/docs')
+                            ? 'Docs'
+                            : fields.slug.startsWith('/tutorials')
+                            ? 'Tutorials'
+                            : 'Handbook',
+                    },
+                    ...(breadcrumbs || []),
+                ],
+            }),
+            slug: fields.slug,
+        })
+    }
+
+    // Customers OG
+    for (const post of data.customers.nodes) {
+        const { frontmatter } = post
+        const featuredImage = frontmatter.featuredImage?.publicURL
+        const logo = frontmatter.logo?.publicURL
+        await createOG({
+            html: customerTemplate({
+                title: frontmatter.title,
+                featuredImage,
+                logo,
+                font,
+            }),
+            slug: post.fields.slug,
+        })
+    }
+
+    for (const job of data.careers.nodes) {
+        const {
+            title,
+            parent,
+            fields: { slug },
+        } = job
+        const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
+        await createOG({
+            html: jobTemplate({ role: title, font, timezone }),
+            slug,
+        })
+    }
+
+    // Tutorials OG
+    // for (const post of data.tutorials.nodes) {
+    //     const { featuredImage } = post.frontmatter
+    //     const image = fs.readFileSync(featuredImage.absolutePath, {
+    //         encoding: 'base64',
+    //     })
+    //     await createOG({
+    //         html: tutorialTemplate({ image }),
+    //         slug: post.fields.slug,
+    //     })
+    // }
 
     await browser.close()
 }
@@ -420,8 +584,6 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
 
     console.log('Running onPostBuild tasks')
 
-    await createOGImages()
-
     const { data } = await graphql(`
         query {
             allRoadmap(filter: { complete: { ne: false } }) {
@@ -589,6 +751,11 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
             }
         }
     `)
+
+    console.log('Creating OG images')
+    await createCareersOG()
+    await createOGImages(data)
+    console.log('Finished creating OG images')
 
     await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
 }

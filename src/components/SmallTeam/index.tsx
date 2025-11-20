@@ -6,11 +6,11 @@ import Link from 'components/Link'
 
 export interface SmallTeamProps {
     slug: string
+    children?: JSX.Element
     noMiniCrest?: boolean
-    className?: string
 }
 
-export default function SmallTeam({ slug, noMiniCrest = false, className = '' }: SmallTeamProps): JSX.Element | null {
+export default function SmallTeam({ slug, children, noMiniCrest = false }: SmallTeamProps): JSX.Element | null {
     const {
         allSqueakTeam: { nodes },
     } = useStaticQuery(graphql`
@@ -39,28 +39,51 @@ export default function SmallTeam({ slug, noMiniCrest = false, className = '' }:
     const team = nodes.find((node: any) => node.slug === slug)
 
     if (!team) {
-        // If team not found, just return the slug as text
-        return <span>{slug}</span>
+        // If team not found, just return the children or slug as text
+        return children ? children : <span>{slug}</span>
     }
 
     const miniCrestImage = getImage(team.miniCrest)
     const fullCrestUrl = team.crest?.data?.attributes?.url
 
+    // The invisible block is necessary to make sure we have the proper width
+    // with the `relative inline-block` parent when we include a mini crest
     const triggerContent = (
-        <Link
-            to={`/teams/${team.slug}`}
-            state={{ newWindow: true }}
-            className={`inline-flex items-center gap-1.5 ${
-                noMiniCrest
-                    ? className
-                    : `!no-underline hover:!underline p-0.5 pr-1.5 border border-primary rounded-full font-semibold ${className}`
-            }`}
-        >
-            {!noMiniCrest && miniCrestImage && (
-                <GatsbyImage image={miniCrestImage} alt={`${team.name} mini crest`} className="size-5 shrink-0" />
-            )}
-            <span className="font-semibold text-sm">{team.name} Team</span>
-        </Link>
+        <span className="relative inline-block">
+            <Link to={`/teams/${team.slug}`} state={{ newWindow: true }}>
+                {!noMiniCrest && miniCrestImage && (
+                    <span className="invisible max-h-4 inline-flex items-center gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full">
+                        <span className="h-6 shrink-0 rounded-full overflow-hidden">
+                            <GatsbyImage
+                                image={miniCrestImage}
+                                alt={`${team.name} mini crest`}
+                                className="size-5 shrink-0"
+                            />
+                        </span>
+                        <span className="!text-sm text-red dark:text-yellow font-semibold inline-block truncate">
+                            {children ? children : <>{team.name} Team</>}
+                        </span>
+                    </span>
+                )}
+                <span
+                    className={`inline-flex items-center ${!noMiniCrest && miniCrestImage
+                            ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
+                            : 'border-b border-primary border-dashed'
+                        }`}
+                >
+                    {!noMiniCrest && miniCrestImage && (
+                        <GatsbyImage
+                            image={miniCrestImage}
+                            alt={`${team.name} mini crest`}
+                            className="size-5 shrink-0"
+                        />
+                    )}
+                    <span className="!text-sm text-red dark:text-yellow font-semibold inline-block truncate">
+                        {children ? children : <>{team.name} Team</>}
+                    </span>
+                </span>
+            </Link>
+        </span>
     )
 
     const tooltipContent = () => {

@@ -43,3 +43,18 @@ Here are the common tools the Sales & CS teams use daily.
 - [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) (app) for configuring provided YubiKey
 - An IDE, like VS Code, Zed, or Cursor. It will come in handy for coding and development tasks.
 - Your next favorite tool!
+
+### Useful Slack channels
+
+- <PrivateLink url='https://posthog.slack.com/archives/C08M011SBCM'>#team-customer-success</PrivateLink> - the Customer Success team.
+- <PrivateLink url='https://posthog.slack.com/archives/C09677WV1GW'>#team-new-business-sales</PrivateLink> - the New Business sales team.
+- <PrivateLink url='https://posthog.slack.com/archives/C093XHYMGBE'>#team-product-led-sales</PrivateLink> - the Product-led sales team.
+- <PrivateLink url='https://posthog.slack.com/archives/C090RCG671C'>#cs-sales-support</PrivateLink> - cross-team discussion for everyone who owns customers.
+- <PrivateLink url='https://posthog.slack.com/archives/C01MGUHFH6G'>#sales</PrivateLink> - for general sales topics.
+- <PrivateLink url='https://posthog.slack.com/archives/C03V7SP3Z3K'>#incidents</PrivateLink> - for notifications of incidents which may impact customers.  Make sure you set this to alert you for every message so that you know when something is up.
+- <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink> - automated notifications from Vitally.
+- <PrivateLink url='https://posthog.slack.com/archives/C054BJSHG82'>#sales-leads</PrivateLink> -  automated notifications for new sales leads.
+- <PrivateLink url='https://posthog.slack.com/archives/C08MYQX74KH'>#legal</PrivateLink> - for requests from our legal folks.
+- <PrivateLink url='https://posthog.slack.com/archives/C08UNFX75ST'>#closed-won</PrivateLink> - yay!
+- <PrivateLink url='https://posthog.slack.com/archives/C096DC85NH5'>#closed-lost</PrivateLink> - boo!
+- <PrivateLink url='https://posthog.slack.com/archives/C09HKF565MZ'>#customer-churn-retros</PrivateLink> - retros from big churns.

@@ -90,7 +90,7 @@ We run a series of other, small campaigns with smaller volumes. These include:
 - **Startup & YC updates** is a series of campaigns for the startups and YC programs. These broadly notify users when they join the program, and use 50%, 75% and 100% of their available credit. 
 
 ## API triggered emails
-We maintain a series of API triggered emails by working with the Growth team. These are found in Customer.io's transactional tool and broadly encompass billing and security updates, such as an upcoming bill or a change to 2FA settings. These emails are triggered by API in order to keep them highly relevant and with high deliverability. 
+We maintain a series of API triggered emails by working with the <SmallTeam slug="growth" />. These are found in Customer.io's transactional tool and broadly encompass billing and security updates, such as an upcoming bill or a change to 2FA settings. These emails are triggered by API in order to keep them highly relevant and with high deliverability. 
 
 Transactional emails feature Liquid code to help personalize their content. All transactional emails should contain in the main body content the Liquid to clearly indicate to the user which project or organization the email is regarding, with suitable fallbacks. For example:
 

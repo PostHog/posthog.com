@@ -14,7 +14,7 @@ If as a new product manager or team lead you want to look at a wider range of me
 
 ### Revenue
 
-These queries are written and owned by the billing team. They are standardised across products, and match the combined PostHog revenue queries. If you are intending a change, please chat to the billing team first.
+These queries are written and owned by the <SmallTeam slug="billing" />. They are standardised across products, and match the combined PostHog revenue queries. If you are intending a change, please chat to the billing team first.
 
 - <PrivateLink url="https://us.posthog.com/project/2/dashboard/198672">Link to combined revenue dashboard</PrivateLink>
 - <PrivateLink url="https://us.posthog.com/project/2/dashboard/215472">Link to per-product revenue dashboard</PrivateLink>
