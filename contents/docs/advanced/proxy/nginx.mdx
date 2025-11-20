@@ -91,8 +91,8 @@ docker run --rm -p 8080:8080 -e POSTHOG_CLOUD_REGION=us posthog-nginx
 Now you can connect to PostHog through this proxy by configuring the PostHog client to use `http://localhost:8080`.
 
 ```js
-posthog.init(<ph_project_api_key>, {
-    api_host: localhost:8080,
+posthog.init('<ph_project_api_key>', {
+    api_host: 'http://localhost:8080',
     ui_host: 'https://us.posthog.com', // for the toolbar to work
     // for EU Cloud
     // ui_host: 'https://eu.posthog.com',
