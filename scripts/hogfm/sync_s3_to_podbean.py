@@ -202,9 +202,12 @@ def save_episode(
     data = {
         "title": title,
         "content": content,
-        "status": status,
         "type": episode_type,
     }
+
+    # Only set status for new episodes, not updates
+    if not episode_id:
+        data["status"] = status
 
     if file_key:
         data["media_key"] = file_key

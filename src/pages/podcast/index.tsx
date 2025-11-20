@@ -3,6 +3,7 @@ import Explorer from 'components/Explorer'
 import MediaPlayer from 'components/MediaPlayer'
 
 import SEO from 'components/seo'
+import clsx from 'clsx'
 
 export type PodcastFeedItem = {
     title: string
@@ -59,18 +60,25 @@ export default function Podcast(): JSX.Element {
                 image={`/images/og/default.png`}
             />
             <div>
-                {feed.map((item) => (
-                    <div
-                        key={item.guid}
-                        className="bg-primary border-b border-primary p-2 hover:bg-accent cursor-pointer"
-                        onClick={() => {
-                            setEpisodeSelected(item)
-                        }}
-                    >
-                        <div className="text-lg font-semibold">{item.title}</div>
-                        <div className="text-sm text-muted" dangerouslySetInnerHTML={{ __html: item.description }} />
-                    </div>
-                ))}
+                <div className="overflow-y-auto max-h-[60vh] border-b border-primary">
+                    {feed.map((item) => (
+                        <div
+                            key={item.guid}
+                            className={clsx('bg-primary border-b border-primary p-2 hover:bg-accent cursor-pointer', {
+                                'bg-accent': episodeSelected?.guid === item.guid,
+                            })}
+                            onClick={() => {
+                                setEpisodeSelected(item)
+                            }}
+                        >
+                            <div className="text-lg font-semibold">{item.title}</div>
+                            <div
+                                className="text-sm text-muted"
+                                dangerouslySetInnerHTML={{ __html: item.description }}
+                            />
+                        </div>
+                    ))}
+                </div>
                 <MediaPlayer key={mediaUrl} mp3={mediaUrl || 'undefined'} />
             </div>
         </>
