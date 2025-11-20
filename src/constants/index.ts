@@ -4,8 +4,8 @@ export const CUSTOMER_COUNT = 190254
 
 // screensaver
 export const INACTIVITY_TIMEOUTS = {
-    FOCUSED: 240000, // 240 seconds (4 minutes)
-    UNFOCUSED: 120000, // 120 seconds (2 minutes)
+    FOCUSED: 2000, // 240 seconds (4 minutes)
+    UNFOCUSED: 2000, // 120 seconds (2 minutes)
 } as const
 
 export const explorerGridColumns =
