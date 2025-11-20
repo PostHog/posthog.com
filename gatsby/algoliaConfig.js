@@ -15,6 +15,7 @@ const retrievePages = (type, regex) => {
                   }
                   fields {
                     pageViews
+                    contentWithSnippets
                   }
                   rawBody
                   excerpt
@@ -32,9 +33,10 @@ const retrievePages = (type, regex) => {
         transformer: ({ data }) =>
             data.docs.nodes
                 .filter(({ frontmatter }) => frontmatter.title)
-                .map(({ id, frontmatter, headings, ...page }) => {
+                .map(({ id, frontmatter, headings, fields, ...page }) => {
                     return {
                         ...page,
+                        rawBody: fields.contentWithSnippets || page.rawBody,
                         headings: headings.map((heading) => ({
                             ...heading,
                             fragment: slugger.slug(heading.value),
