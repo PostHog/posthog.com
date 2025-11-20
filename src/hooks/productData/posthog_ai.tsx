@@ -22,12 +22,12 @@ export const posthog_ai = {
     description: 'Your AI-powered product analyst and product manager',
     role: 'Helpful chatbot',
     handle: 'posthog_ai',
-    color: 'ai-blue',
+    color: 'blue',
     colorSecondary: 'lilac',
-    category: 'product_os',
+    category: 'automation',
     slug: 'ai',
     status: 'beta',
-    hideFromPricingTable: true,
+    hideFromPricingTableAndCalculator: true,
     seo: {
         title: 'PostHog AI – Your copilot for PostHog data and insights',
         description:
@@ -187,14 +187,14 @@ export const posthog_ai = {
                     percent: 30,
                 },
                 {
-                    name: 'Human annotations',
-                    description: 'Generate LLM-as-a-judge prompts from manually labeled traces',
+                    name: 'LLM evals generator',
+                    description: 'Create LLM-as-a-judge prompts from manually labeled traces',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
                 {
-                    name: 'Prompt experiments',
-                    description: 'Configure experiments to A/B test system prompts',
+                    name: 'Prompt experiments builder',
+                    description: 'Set up system prompt experiments in natural language',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
@@ -525,6 +525,11 @@ export const posthog_ai = {
             ],
         },
     ],
+    videos: {
+        overview: {
+            wistia: 'tgws1dixc0',
+        },
+    },
     answers: [
         {
             q: "What's my churn rate?",
@@ -557,6 +562,31 @@ export const posthog_ai = {
             q: 'Show me a signup funnel',
         },
     ],
+    postHogOnPostHog: {
+        title: 'How PostHog uses PostHog AI',
+        benefits: [
+            {
+                title: 'Build insights and dashboards',
+                description: 'using natural language',
+            },
+            {
+                title: 'Create SQL queries',
+                description: 'to use for detailed analysis',
+            },
+            {
+                title: 'Summarize session replays',
+                description: "so we don't have to watch them all",
+            },
+            {
+                title: 'Get product advice',
+                description: 'because we trained the AI on our blog too',
+            },
+            {
+                title: 'Fix bugs in our implementation',
+                description: 'way faster than reading all the docs',
+            },
+        ],
+    },
     comparison: {
         comparison_companies: {
             Segment: true,

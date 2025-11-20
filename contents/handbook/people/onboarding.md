@@ -24,7 +24,7 @@ We send an introductory email to all new hires to welcome them to the team and e
 
 The onboarding email is sent by the People team directly. We want to strike a balance between sending attractive, personalized emails and avoiding creating process or using overpowered tools, such as Customer.io or Mailchimp. So, we landed on a simple email with the necessary links.
 
-<PrivateLink url="https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing">This doc is a suggested template</PrivateLink> with important actions specified, though we recommend personalizing it to the individual. We've linked to these as docs and direct images to make the formatting easier for you, but here is an accompanying image for use in emails.
+<p><PrivateLink url="https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing">This doc is a suggested template</PrivateLink> with important actions specified, though we recommend personalizing it to the individual. We've linked to these as docs and direct images to make the formatting easier for you, but here is an accompanying image for use in emails.</p>
 
 ![onboarding image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/handbook-onboarding-email.jpg)
 
@@ -56,6 +56,7 @@ While there is no fixed budget for onboardings they should be relatively less ex
 -   Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible
 -   Consider doing more casual social activities that are less expensive: dinners, drinks etc
 -   You can request budget for the team lead +1 more team member as an onboarding budget, any other team members joining can use their working together budget (be mindful that onboardings are distracting so the more team members you have join, the less productive the team will be that week, you also have offsites for the team to all get together).
+    -   Create a Slack channel for the onboarding (`#onboarding-[who]-[team]-[month]-[year]-[where]`) add everyone who’s going 
 -   The new team member already has their own onboarding budget to book their flights and accommodation, so do not include them in the budget.
 -   See if there are any other onboardings at the same time you could pair up with
 

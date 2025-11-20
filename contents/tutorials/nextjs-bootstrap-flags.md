@@ -35,7 +35,7 @@ Once done, set up a PostHog provider by creating a new file in the `app` folder 
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
   posthog.init("<ph_project_api_key>", {
@@ -77,7 +77,7 @@ Back in your app, set up the base `page.js` file to check the flag:
 ```js
 // app/page.js
 'use client'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 export default function Home() {
 
@@ -229,7 +229,7 @@ Once installed, go back to `providers.js` to get the cookie data and bootstrap i
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import cookieCutter from 'cookie-cutter'
 
 if (typeof window !== 'undefined') {
@@ -256,7 +256,7 @@ Finally, rework our `page.js` file to check that the flag isn’t undefined befo
 ```js
 // app/page.js
 'use client'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 import { useEffect, useState } from 'react'
 
 export default function Home() {

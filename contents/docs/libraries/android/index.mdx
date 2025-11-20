@@ -285,6 +285,19 @@ The PostHog Android SDK will continue to capture events when the device is offli
 - The queue is flushed when the app is restarted and the device is online.
 - When you call [`flush()`](#flush) while the device is offline, it aborts early and the events are not flushed.
 
+## Debug mode 
+
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
+
+You can enable debug mode by setting the `debug` option to `true` in the `PostHogAndroidConfig` object. This will enable verbose logs about the inner workings of the SDK.
+
+```kotlin
+val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
+    debug = true
+    // ... other config options
+}
+```
+
 ## All configuration options
 
 When creating the PostHog client, there are many options you can set:

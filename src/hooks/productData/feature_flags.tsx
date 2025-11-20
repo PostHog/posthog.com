@@ -346,7 +346,7 @@ export const featureFlags = {
         },
     ],
     postHogOnPostHog: {
-        title: 'How PostHog uses feature flags',
+        title: 'How PostHog uses Feature Flags',
         benefits: [
             {
                 title: 'Test new ideas',
@@ -458,132 +458,17 @@ export const featureFlags = {
                 link: '/blog/posthog-vs-growthbook',
             },
             {
+                name: 'Statsig',
+                key: 'statsig',
+                link: '/blog/posthog-vs-statsig',
+            },
+            {
                 name: 'PostHog',
                 key: 'posthog',
             },
         ],
-        features: [
-            {
-                feature: 'Target by percentage',
-                companies: {
-                    launchdarkly: true,
-                    optimizely: true,
-                    flagsmith: true,
-                    growthbook: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Target by person properties',
-                companies: {
-                    launchdarkly: true,
-                    optimizely: true,
-                    flagsmith: true,
-                    growthbook: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Flag scheduling',
-                companies: {
-                    launchdarkly: true,
-                    optimizely: false,
-                    flagsmith: false,
-                    growthbook: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Experimentation',
-                companies: {
-                    launchdarkly: true,
-                    optimizely: true,
-                    flagsmith: true,
-                    growthbook: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Multivariate flags',
-                companies: {
-                    launchdarkly: true,
-                    optimizely: false,
-                    flagsmith: true,
-                    growthbook: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Unlimited flags for free',
-                companies: {
-                    launchdarkly: false,
-                    optimizely: true,
-                    flagsmith: true,
-                    growthbook: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Free third-party plugins',
-                companies: {
-                    launchdarkly: true,
-                    optimizely: false,
-                    flagsmith: true,
-                    growthbook: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Activity logs',
-                companies: {
-                    launchdarkly: true,
-                    optimizely: false,
-                    flagsmith: true,
-                    growthbook: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Data export',
-                companies: {
-                    launchdarkly: true,
-                    optimizely: true,
-                    flagsmith: false,
-                    growthbook: true,
-                    posthog: false,
-                },
-            },
-            {
-                feature: 'Multi-environment support',
-                companies: {
-                    launchdarkly: true,
-                    optimizely: true,
-                    flagsmith: true,
-                    growthbook: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Automatic IP resolution',
-                companies: {
-                    launchdarkly: false,
-                    optimizely: false,
-                    flagsmith: false,
-                    growthbook: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Recall person properties by default',
-                companies: {
-                    launchdarkly: false,
-                    optimizely: false,
-                    flagsmith: false,
-                    growthbook: false,
-                    posthog: true,
-                },
-            },
-        ],
+        rows: ['feature_flags'],
+        excluded_sections: ['platform.libraries', 'platform.developer', 'platform.integrations', 'platform.security'],
     },
     pairsWith: [
         {

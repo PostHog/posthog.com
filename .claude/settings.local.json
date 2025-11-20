@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx markdownlint-cli2:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

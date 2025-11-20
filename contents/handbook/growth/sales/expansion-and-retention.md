@@ -91,6 +91,8 @@ Generally speaking you should be trying to regularly see customers in your book 
 
 If you regularly visit customers, you can (and should) take some sweet merch. You can self-serve this using [a discount code pinned in our team Slack channel](https://posthog.slack.com/archives/C01MGUHFH6G/p1734015156043549) to get 100% off your order.
 
+Make sure to log notes in Vitally when customer visits take place. This can be done by creating a new note with the "On-site" category and describing any key details and takeaways.
+
 ## Steady state retention
 
 These are customers that are happily using PostHog long term, and are neither a churn risk nor likely to have expansion potential. Managing this group is much more automated and taken care of by CSMs, who do things like tracking usage and setting up alerts in Vitally to trigger outreach from us when a customer changes their usage behavior (either up or down). 

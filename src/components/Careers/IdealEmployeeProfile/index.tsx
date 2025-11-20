@@ -1,6 +1,6 @@
 import TeamMember from 'components/TeamMember'
 import React from 'react'
-import { Link } from 'gatsby'
+import SmallTeam from 'components/SmallTeam'
 
 const IdealEmployeeProfile: React.FC = () => {
     return (
@@ -30,8 +30,7 @@ const IdealEmployeeProfile: React.FC = () => {
 
                     <p className="text-[15px] border-l-3 border-primary pl-4 mb-6">
                         <TeamMember name="Joe Martin" photo /> worked as a clown, a morgue cleaner, and a chainsaw
-                        salesman before joining the Marketing team. He now leads the{' '}
-                        <Link href="/teams/brand">Brand & Vibes Team</Link>.
+                        salesman before joining the <SmallTeam slug="marketing" />, which he now leads.
                     </p>
                 </div>
 
@@ -44,8 +43,8 @@ const IdealEmployeeProfile: React.FC = () => {
 
                     <p className="text-[15px] border-l-3 border-primary pl-4 mb-6">
                         <TeamMember name="Thomas Obermüller" photo /> was CTO for his previous company of 120 people
-                        before joining PostHog as a software engineer on the{' '}
-                        <Link href="/teams/product-analytics">Product Analytics team</Link>.
+                        before joining PostHog as a software engineer on the <SmallTeam slug="product-analytics" />,
+                        which he – surprise! – leads.
                     </p>
                 </div>
 

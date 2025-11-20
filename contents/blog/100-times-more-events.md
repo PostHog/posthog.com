@@ -107,6 +107,6 @@ We've therefore already applied this increase to any customers who are paying pe
 
 After all, PostHog's mission is to increase the number of successful products in the world.
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />

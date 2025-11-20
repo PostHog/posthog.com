@@ -1603,6 +1603,10 @@
             "destination": "/docs/llm-analytics/integrations/traceloop-posthog"
         },
         {
+            "source": "/docs/llm-analytics/manual-capture",
+            "destination": "/docs/llm-analytics/installation/manual-capture"
+        },
+        {
             "source": "/why",
             "destination": "/about"
         },
@@ -1622,7 +1626,6 @@
             "source": "/teams/exec",
             "destination": "/teams/blitzscale"
         },
-        { "source": "/teams/growth", "destination": "/teams" },
         { "source": "/eu", "destination": "/pricing" },
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
@@ -1632,11 +1635,22 @@
             "destination": "/docs/posthog-ai"
         },
         {
+            "source": "/docs/libraries/js/features",
+            "destination": "/docs/libraries/js/usage"
+        },
+        {
             "source": "/handbook/engineering/on-call-rotation",
             "destination": "/handbook/engineering/operations/on-call-rotation"
         },
         { "source": "/handbook/engineering/incidents", "destination": "/handbook/engineering/operations/incidents" },
-        { "source": "/handbook/who-we-are-building-for", "destination": "/handbook/who-we-build-for" }
+        {
+            "source": "/handbook/engineering/support-hero",
+            "destination": "/handbook/engineering/operations/support-hero"
+        },
+        { "source": "/handbook/who-we-are-building-for", "destination": "/handbook/who-we-build-for" },
+        { "source": "/example-components", "destination": "/handbook/engineering/posthog-com/markdown" },
+        { "source": "/handbook/content/components", "destination": "/handbook/engineering/posthog-com/markdown" },
+        { "source": "/handbook/engineering/storybook", "destination": "/handbook/engineering/posthog-com/markdown" }
     ],
     "headers": [
         {

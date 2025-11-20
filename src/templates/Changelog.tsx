@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
+import { navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import { IconDownload, IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
 import SEO from 'components/seo'
@@ -26,6 +26,7 @@ import { CallToAction } from 'components/CallToAction'
 import { Heading } from 'components/Heading'
 import slugify from 'slugify'
 import { Video } from 'cloudinary-react'
+import { useLocation } from '@reach/router'
 
 dayjs.extend(utc)
 
@@ -135,7 +136,15 @@ export const Change = ({ title, teamName, media, description, cta }) => {
     )
 }
 
-const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => void }) => {
+const Roadmap = ({
+    roadmap,
+    onClose,
+    initialActiveRoadmap,
+}: {
+    roadmap: RoadmapNode
+    onClose: () => void
+    initialActiveRoadmap: RoadmapNode | null
+}) => {
     const { appWindow } = useWindow()
     const { isModerator } = useUser()
     const { addWindow } = useApp()
@@ -172,7 +181,7 @@ const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => vo
             initial={{ width: 0 }}
             animate={{ width: containerWidth }}
             exit={{ width: 0 }}
-            transition={{ duration: isResizing ? 0 : 0.3, ease: 'easeInOut' }}
+            transition={{ duration: isResizing || !!initialActiveRoadmap ? 0 : 0.3, ease: 'easeInOut' }}
         >
             <motion.div
                 className="h-full flex flex-col"
@@ -180,7 +189,7 @@ const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => vo
                 initial={{ x: width }}
                 animate={{ x: 0 }}
                 exit={{ x: width }}
-                transition={{ duration: isResizing ? 0 : 0.3, ease: 'easeInOut' }}
+                transition={{ duration: isResizing || !!initialActiveRoadmap ? 0 : 0.3, ease: 'easeInOut' }}
             >
                 <div className="flex justify-between space-x-2 p-4 border-b border-primary">
                     <div className="flex-1">
@@ -216,7 +225,7 @@ const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => vo
                         {hasProfiles && (
                             <div
                                 data-scheme="secondary"
-                                className="py-2 mx-4 px-4 border border-primary rounded-md bg-primary"
+                                className="py-2 mx-4 px-4 border border-primary rounded-md bg-primary mt-2"
                             >
                                 {roadmap.profiles?.data?.map((profile) => {
                                     const avatar = profile.attributes?.avatar?.data?.attributes?.url
@@ -318,6 +327,7 @@ interface RoadmapCardsProps {
     endYear: number
     activeRoadmap: RoadmapNode | null
     hideEmpty: boolean
+    initialActiveRoadmap: RoadmapNode | null
 }
 
 const RoadmapCards = ({
@@ -331,6 +341,7 @@ const RoadmapCards = ({
     containerWidth,
     activeRoadmap,
     hideEmpty,
+    initialActiveRoadmap,
 }: RoadmapCardsProps) => {
     const width = 350
 
@@ -364,13 +375,25 @@ const RoadmapCards = ({
                     buckets[week].push(item)
                 })
                 // Create week entries with metadata
-                for (let w = 1; w <= 4; w++) {
-                    monthWeeks.push({
-                        roadmaps: buckets[w] || [],
-                        year: y,
-                        month: m, // 0-based
-                        week: w,
-                    })
+                if (y === currentYear && m === currentMonthIndex) {
+                    const latestNonEmptyWeek = [4, 3, 2, 1].find((w) => (buckets[w] || []).length > 0)
+                    if (latestNonEmptyWeek) {
+                        monthWeeks.push({
+                            roadmaps: buckets[latestNonEmptyWeek] || [],
+                            year: y,
+                            month: m,
+                            week: latestNonEmptyWeek,
+                        })
+                    }
+                } else {
+                    for (let w = 1; w <= 4; w++) {
+                        monthWeeks.push({
+                            roadmaps: buckets[w] || [],
+                            year: y,
+                            month: m, // 0-based
+                            week: w,
+                        })
+                    }
                 }
             }
         }
@@ -390,6 +413,15 @@ const RoadmapCards = ({
         overscan: 5,
         gap: 15,
     })
+
+    const handleRoadmapClick = (roadmap: RoadmapNode) => {
+        navigate(`?id=${roadmap.id}`)
+        onRoadmapClick(roadmap)
+    }
+
+    const scrollToIndex = (index: number) => {
+        virtualizer.scrollToIndex(index, { align: 'center' })
+    }
 
     useLayoutEffect(() => {
         virtualizer.measure()
@@ -453,8 +485,19 @@ const RoadmapCards = ({
             })
         }
 
+        const handleInitialScroll = () => {
+            if (initialActiveRoadmap) {
+                const index = weeks.findIndex((week) => week.roadmaps.some((r) => r.id === initialActiveRoadmap.id))
+                if (index >= 0) {
+                    scrollToIndex(index)
+                    return
+                }
+            }
+            scrollToLastWeek()
+        }
+
         // Delay to ensure virtualizer has measured content
-        const timer = setTimeout(scrollToLastWeek, 100)
+        const timer = setTimeout(handleInitialScroll, 100)
         return () => clearTimeout(timer)
     }, [weeks, width])
 
@@ -492,7 +535,7 @@ const RoadmapCards = ({
     }, [])
 
     return (
-        <ScrollArea className="size-full [&>div>div]:size-full">
+        <ScrollArea className="size-full [&>div>div]:size-full [&>div>div]:!flex">
             <div className="h-full px-4">
                 <div
                     ref={containerRef}
@@ -544,7 +587,7 @@ const RoadmapCards = ({
                                                                 className={`group w-full text-left py-2 px-4 flex justify-between gap-1 ${
                                                                     active ? 'bg-primary' : 'hover:bg-primary'
                                                                 }`}
-                                                                onClick={() => onRoadmapClick(roadmap)}
+                                                                onClick={() => handleRoadmapClick(roadmap)}
                                                             >
                                                                 <div>
                                                                     <h5
@@ -590,93 +633,36 @@ const RoadmapCards = ({
     )
 }
 
-export default function Changelog(): JSX.Element {
+export default function Changelog({
+    data,
+}: {
+    data: {
+        allRoadmap: {
+            nodes: RoadmapNode[]
+        }
+    }
+}): JSX.Element {
     const timelineContainerRef = useRef<HTMLDivElement>(null)
     const resizeObserverRef = useRef<HTMLDivElement>(null)
+    const { href } = useLocation()
+    const [initialActiveRoadmap, setInitialActiveRoadmap] = useState(() => {
+        if (!href) return null
+        const urlObj = new URL(href)
+        const id = urlObj.searchParams.get('id')
+        if (!id) return null
+        return data.allRoadmap.nodes.find((roadmap: RoadmapNode) => roadmap.id === parseInt(id)) || null
+    })
     const { addWindow } = useApp()
-    const { appWindow } = useWindow()
     const { isModerator } = useUser()
     const [windowX, setWindowX] = useState(0)
     const [percentageOfScrollInView, setPercentageOfScrollInView] = useState(0)
     const [windowPercentageFromLeft, setWindowPercentageFromLeft] = useState(0)
     const [roadmapsPercentageFromLeft, setRoadmapsPercentageFromLeft] = useState(0)
-    const [activeRoadmap, setActiveRoadmap] = useState<RoadmapNode | null>(null)
+    const [activeRoadmap, setActiveRoadmap] = useState<RoadmapNode | null>(initialActiveRoadmap)
     const [containerWidth, setContainerWidth] = useState(0)
     const [teamFilter, setTeamFilter] = useState('all')
     const [categoryFilter, setCategoryFilter] = useState('all')
     const hideEmpty = useMemo(() => teamFilter !== 'all' || categoryFilter !== 'all', [teamFilter, categoryFilter])
-    const href = appWindow?.location?.href
-    const data = useStaticQuery(graphql`
-        {
-            allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }, sort: { fields: date }) {
-                nodes {
-                    id: strapiID
-                    date
-                    title
-                    description
-                    cta {
-                        label
-                        url
-                    }
-                    media {
-                        gatsbyImageData
-                    }
-                    profiles {
-                        data {
-                            id
-                            attributes {
-                                firstName
-                                lastName
-                                avatar {
-                                    data {
-                                        attributes {
-                                            url
-                                        }
-                                    }
-                                }
-                                color
-                                teams {
-                                    data {
-                                        attributes {
-                                            name
-                                            miniCrest {
-                                                data {
-                                                    attributes {
-                                                        url
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    teams {
-                        data {
-                            attributes {
-                                name
-                                miniCrest {
-                                    data {
-                                        attributes {
-                                            url
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    topic {
-                        data {
-                            attributes {
-                                label
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
 
     const handleAddFeature = () => {
         addWindow(
@@ -786,6 +772,12 @@ export default function Changelog(): JSX.Element {
         }
     }, [href])
 
+    useEffect(() => {
+        if (initialActiveRoadmap) {
+            setInitialActiveRoadmap(null)
+        }
+    }, [])
+
     const filterNavigate = (key: string, value: string) => {
         if (href) {
             const urlObj = new URL(href)
@@ -821,6 +813,11 @@ export default function Changelog(): JSX.Element {
         link.click()
         link.remove()
         URL.revokeObjectURL(url)
+    }
+
+    const handleRoadmapClose = () => {
+        setActiveRoadmap(null)
+        navigate('')
     }
 
     return (
@@ -879,6 +876,7 @@ export default function Changelog(): JSX.Element {
                                 containerWidth={containerWidth}
                                 activeRoadmap={activeRoadmap}
                                 hideEmpty={hideEmpty}
+                                initialActiveRoadmap={initialActiveRoadmap}
                             />
                         </div>
                         <AnimatePresence>
@@ -905,7 +903,13 @@ export default function Changelog(): JSX.Element {
                         </AnimatePresence>
                     </div>
                     <AnimatePresence>
-                        {activeRoadmap && <Roadmap roadmap={activeRoadmap} onClose={() => setActiveRoadmap(null)} />}
+                        {activeRoadmap && (
+                            <Roadmap
+                                roadmap={activeRoadmap}
+                                onClose={handleRoadmapClose}
+                                initialActiveRoadmap={initialActiveRoadmap}
+                            />
+                        )}
                     </AnimatePresence>
                 </div>
             </Editor>

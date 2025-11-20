@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { Select } from '../RadixUI/Select'
-import { Link } from 'gatsby'
-import { CallToAction } from 'components/CallToAction'
-import CloudinaryImage from 'components/CloudinaryImage'
-import { IconDice, IconFullScreen, IconVolumeFull, IconVolumeHalf, IconVolumeMuted } from 'components/OSIcons/Icons'
-import { Accordion } from 'components/RadixUI/Accordion'
 import { IconFastForward, IconPauseFilled, IconPlayFilled } from '@posthog/icons'
-import { IconPlayhead } from 'components/OSIcons/Icons'
-import ScrollArea from 'components/RadixUI/ScrollArea'
+import { IconFullScreen, IconPlayhead, IconVolumeFull, IconVolumeHalf, IconVolumeMuted } from 'components/OSIcons/Icons'
+import { Select } from 'components/RadixUI/Select'
 import ZoomHover from 'components/ZoomHover'
+import React, { useEffect, useRef, useState } from 'react'
 
 // Add types for YouTube API to avoid TS errors
 declare global {
@@ -34,10 +28,12 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
     })
     const [isScrubbing, setIsScrubbing] = useState(false)
     const [scrubTime, setScrubTime] = useState(0)
+    const [isSeeking, setIsSeeking] = useState(false)
+    const seekSuppressTimeout = useRef<NodeJS.Timeout | null>(null)
 
     useEffect(() => {
         let interval: NodeJS.Timeout | null = null
-        if (playerState.player && playerState.isPlaying && !isScrubbing) {
+        if (playerState.player && playerState.isPlaying && !isScrubbing && !isSeeking) {
             interval = setInterval(() => {
                 const currentTime = playerState.player.getCurrentTime()
                 setPlayerState((prev) => ({ ...prev, currentTime }))
@@ -46,7 +42,7 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
         return () => {
             if (interval) clearInterval(interval)
         }
-    }, [playerState.player, playerState.isPlaying, isScrubbing])
+    }, [playerState.player, playerState.isPlaying, isScrubbing, isSeeking])
 
     useEffect(() => {
         window.onYouTubeIframeAPIReady = () => {
@@ -58,6 +54,8 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
                     controls: 0,
                     modestbranding: 1,
                     rel: 0,
+                    iv_load_policy: 3,
+                    fs: 1,
                 },
                 events: {
                     onStateChange: (event: any) => {
@@ -111,11 +109,24 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
         }
     }
 
+    const performSeek = (newTime: number) => {
+        if (!playerState.player) return
+
+        const clamped = Math.max(0, Math.min(newTime, playerState.duration || newTime))
+
+        setIsSeeking(true)
+        playerState.player.seekTo(clamped, true)
+        setPlayerState((prev) => ({ ...prev, currentTime: clamped }))
+
+        if (seekSuppressTimeout.current) clearTimeout(seekSuppressTimeout.current)
+
+        seekSuppressTimeout.current = setTimeout(() => setIsSeeking(false), 400)
+    }
+
     const handleSeek = (seconds: number) => {
-        if (playerState.player) {
-            const currentTime = playerState.player.getCurrentTime()
-            playerState.player.seekTo(currentTime + seconds, true)
-        }
+        if (!playerState.player) return
+        const currentTime = playerState.player.getCurrentTime()
+        performSeek(currentTime + seconds)
     }
 
     const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -177,20 +188,24 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
     }
     const handleScrubEndMouse = (e: React.MouseEvent<HTMLInputElement>) => {
         const newTime = Number((e.target as HTMLInputElement).value)
-        setIsScrubbing(false)
         setScrubTime(newTime)
-        if (playerState.player) {
-            playerState.player.seekTo(newTime, true)
-        }
+        performSeek(newTime)
+        setIsScrubbing(false)
     }
     const handleScrubEndTouch = (e: React.TouchEvent<HTMLInputElement>) => {
         const newTime = Number((e.target as HTMLInputElement).value)
-        setIsScrubbing(false)
         setScrubTime(newTime)
-        if (playerState.player) {
-            playerState.player.seekTo(newTime, true)
-        }
+        performSeek(newTime)
+        setIsScrubbing(false)
     }
+
+    useEffect(() => {
+        return () => {
+            if (!seekSuppressTimeout.current) return
+
+            clearTimeout(seekSuppressTimeout.current)
+        }
+    }, [])
 
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
@@ -203,7 +218,9 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
                     <section className="bg-accent px-2 pb-2">
                         {/* Main video area */}
                         <div className="flex-1 flex flex-col justify-center items-center bg-primary mb-2">
-                            <div id="youtube-player-demo" className="rounded w-full aspect-video" />
+                            <div className="w-full aspect-video relative rounded overflow-hidden">
+                                <div id="youtube-player-demo" className="absolute inset-0 w-full h-full" />
+                            </div>
                         </div>
 
                         {/* Scrubbing bar */}

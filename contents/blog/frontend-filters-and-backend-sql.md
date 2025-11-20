@@ -774,7 +774,7 @@ And you can stop recording if you want, or you can keep recording. But the-
  
 Oh, I'm actually going to stop so I don't run out of space.
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />
  

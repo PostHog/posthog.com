@@ -23,7 +23,7 @@ We enforce the use of hardware security keys wherever we can. Every team members
 
 Please enable security keys for Google Workspace, MacOS, AWS, 1Password (or whatever password manager you use) and GitHub at the very least. You can also use the Yubikeys to protect personal accounts. If you are new, please do this within your first month so you don't get locked out.
 
-Google recently changed its settings for 2FA and Yubikeys and you may struggle to link your Yubikeys to your Google account. Review the [overview of Google's hardware key changes](https://joshua.hu/enrolling-hardware-keys-2fa-google-workspace) or use this direct link to head straight to the [two-step verification settings](https://myaccount.google.com/signinoptions/two-step-verification?flow=sk&opendialog=addsk) where you can register your Yubikeys.
+Google recently changed its settings for 2FA and Yubikeys and you may struggle to link your Yubikeys to your Google account. Go [here to find out about the change](https://joshua.hu/enrolling-hardware-keys-2fa-google-workspace) or use this direct link to head [straight to this page where](https://myaccount.google.com/signinoptions/two-step-verification?flow=sk&opendialog=addsk) you can register your Yubikeys. 
 
 > **YubiKey tip:** Avoid spamming OTPs if you accidentally touch your YubiKey by installing the [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) or by running `brew install ykman && ykman config usb --disable OTP`
 
@@ -72,7 +72,7 @@ We receive data collected by our customers from end-users and allow them to unde
 
 ## Pen tests
 
-We conduct these annually, most recently in May 2025 — you can find the report in the [May 2025 penetration test summary](https://drive.google.com/file/d/1JoR74x6U7Kh_0HA8sLDe0AN6YK5-OOZ5/view?usp=sharing)
+We conduct these annually, most recently in May 2025 - you can find the report in [our Trust Center](https://trust.posthog.com/?itemUid=2aafaddd-5329-45e2-a37e-cf6979191ad4&source=search).
 
 ## Responsible disclosure
 
@@ -87,3 +87,20 @@ If you receive a phishing email/text/whatsapp, it's useful to report it to the s
 ## Secure communication (aka preventing social engineering)
 
 We follow several best practices to combat social engineering attacks. See [Communication Methods](/handbook/company/communication#communication-methods) for more information.
+
+## Impersonating users
+
+To provide a great customer experience, PostHog employees may occasionally need to access customer data or log in as a user (i.e. *impersonate* them). We allow this access when it's necessary to deliver our service, following these guidelines:
+
+1. **Only impersonate when there’s a clear, demonstrable benefit for the customer.**  
+   For example, to investigate an incident, resolve a support issue, or review a customer’s setup to give recommendations on how to use PostHog more successfully.
+
+2. **Do not make any changes to a customer’s setup without explicit consent.**
+   Exceptions to this are cases where we are reacting to incidents or bad configurations that are negatively impacting PostHog services in order to protect ourselves _and_ the customer.
+
+3. **Ask for permission whenever possible.**  
+   While this isn’t always feasible, such as during an active incident, it’s best practice to inform the customer before accessing their account.
+   When a customer raises a support ticket, we take this as consent to be able to impersonate their account and investigate based on the contents of the ticket. Customers will not be actively asked for permission by our support engineers when they are investigating a ticket, and the customer should inform us in the ticket if they explicitly do not wish for our support engineers to access their account.
+
+4. **Use good judgment.**  
+   If you’re unsure whether impersonation is justified, or if a customer might object, either seek their consent or find another way to get the information (for example, by checking our internal PostHog instance).

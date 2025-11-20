@@ -89,10 +89,6 @@ More information, including any additional necessary permissions, schema informa
 
 ### Sessions model
 
-> **Note:** The sessions model is currently in `beta`. This means the schema of this model is subject to change.
->
-> You can request access via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue).
-
 A [session](/docs/data/sessions) in PostHog represents a series of events that make up a single use of your product or visit to your website. Each session is uniquely identified by its `session_id`.
 
 If you want to link events with sessions, you'll need to ensure you're capturing the `$session_id` in your events. This is done automatically by our JavaScript Web library and mobile SDKs. For server-side SDKs, refer to our [docs](/docs/data/sessions#server-sdks-and-sessions).

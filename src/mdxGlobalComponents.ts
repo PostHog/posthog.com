@@ -4,6 +4,8 @@ import { BorderWrapper } from './components/BorderWrapper'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { ComparisonTable } from './components/ComparisonTable'
+import ProductComparisonTable from './components/ProductComparisonTable'
+import Snippet from '../contents/docs/integrate/snippet.mdx'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Emoji } from './components/Emoji'
 import { FeatureAvailability } from './components/FeatureAvailability'
@@ -34,8 +36,11 @@ export const shortcodes = {
     BasicHedgehogImage,
     BorderWrapper,
     CallToAction,
+    CalloutBox,
     Caption,
     ComparisonTable,
+    ProductComparisonTable,
+    Snippet,
     CompensationCalculator,
     Emoji,
     FeatureAvailability,
@@ -51,7 +56,6 @@ export const shortcodes = {
     ProductScreenshot,
     ProductVideo,
     StarRepoButton,
-    CalloutBox,
     Steps,
     Step,
     SmallTeam,
