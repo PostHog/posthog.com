@@ -12,8 +12,6 @@ import {
     IconUpload,
     IconCode,
     IconFeatures,
-    IconMapPin,
-    IconPineapple,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
@@ -31,8 +29,6 @@ import KeyboardShortcut from 'components/KeyboardShortcut'
 export default function TaskBarMenu() {
     const {
         windows,
-        bringToFront,
-        focusedWindow,
         openSearch,
         openSignIn,
         siteSettings,
@@ -42,7 +38,6 @@ export default function TaskBarMenu() {
         addWindow,
         taskbarRef,
         posthogInstance,
-        copyDesktopParams,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
