@@ -115,6 +115,13 @@ export const apps: AppItem[] = [
         url: '/changelog',
         source: 'desktop',
     },
+            {
+            label: 'changelog.mov',
+            Icon: IconChangelogThumb,
+            url: '/demo',
+            className: 'size-14 -my-1',
+            source: 'desktop',
+        },
     // {
     //     label: 'Cool tech events',
     //     Icon: <AppIcon name="invite" />,
