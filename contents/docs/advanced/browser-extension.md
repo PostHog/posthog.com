@@ -98,6 +98,8 @@ posthog.init('<ph_project_api_key>', {
 });
 ```
 
+If you encounter UTF-8 encoding errors when loading your extension, you may need to configure your minifier to use ASCII-only output to ensure all non-ASCII characters are properly escaped.
+
 ## Persistence in browser extensions
 
 Browser extensions have unique constraints that affect how PostHog can store its data. Unlike regular web applications, extensions shouldn't use cookies and should use `localStorage`, `sessionStorage`, or `memory` instead.
