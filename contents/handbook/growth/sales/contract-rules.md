@@ -191,11 +191,19 @@ More details on how exactly the uptime SLA works can be found in our [terms](/te
 
 ## Payment method
 
-Our strong preference is for customers to pay by credit card, as this is easier to manage in Stripe and has a lower risk of the customer forgetting to make the payment (which means we have to spend more time chasing).
+For customers paying monthly, we only accept credit card payments, which will be taken automatically via Stripe at the end of their monthly billing period.
 
-If a customer wants to pay by ACH or bank transfer, we will usually only consider this if they are paying for 1 year or more up front. This is more likely to be the case for very large customers.
+For customers purchasing credits upfront, bank transfer is the default and highly preferred payment method for the following reasons:
 
-For customers in an annual contract but paying quarterly we require them to pay via credit card - ACH or bank transfer are not accepted.
+- For large payment amounts, the fees we incur are higher for credit card payments.
+- Our Sales Ops automations are set up to handle bank transfer payments.
+
+You should confirm ahead of the customer signing the order form that they are happy and set up to pay by bank transfer.  If they are absolutely unable to accommodate bank transfer we can accept credit card payments under the following conditions:
+
+- We have a card on file which we can immediately charge for the full invoice amount.
+- They pay immediately on the contract start date (i.e. no Net 30)
+
+If your customer must pay via credit card, you absolutely _need_ to let Mine (Simon as backup) know ahead of the order form being signed as there is a lot of manual work needed up front to make this work.
 
 > We absolutely do not allow payment by check.
 
