@@ -98,7 +98,11 @@ posthog.init('<ph_project_api_key>', {
 });
 ```
 
+<CalloutBox icon="IconInfo" title="ASCII output" type="fyi">
+
 If you encounter UTF-8 encoding errors when loading your extension, you may need to configure your minifier to use ASCII-only output to ensure all non-ASCII characters are properly escaped.
+
+</CalloutBox>
 
 ## Persistence in browser extensions
 
