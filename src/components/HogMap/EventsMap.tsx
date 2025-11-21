@@ -71,6 +71,7 @@ export default function EventsMap({
     const coordsByEventIdRef = useRef<Record<number, { latitude: number; longitude: number }>>({})
     const layersRef = useRef<string[] | undefined>(layers)
     const prevSelectedIdRef = useRef<number | null>(null)
+    const skipNextSelectionTransitionRef = useRef<boolean>(false)
 
     const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
     const styleUrl = 'mapbox://styles/mapbox/streets-v12'
@@ -324,6 +325,8 @@ export default function EventsMap({
                                 }
                                 if (typeof onEventClick === 'function') {
                                     try {
+                                        // Selection originated from map; skip external transition
+                                        skipNextSelectionTransitionRef.current = true
                                         onEventClick(ev.id as number)
                                     } catch {
                                         console.error('Error calling onEventClick')
@@ -413,6 +416,8 @@ export default function EventsMap({
                                 }
                                 if (typeof onEventClick === 'function') {
                                     try {
+                                        // Selection originated from map; skip external transition
+                                        skipNextSelectionTransitionRef.current = true
                                         onEventClick(ev.id as number)
                                     } catch {
                                         console.error('Error calling onEventClick')
@@ -505,6 +510,19 @@ export default function EventsMap({
         const coords = coordsByEventIdRef.current[id]
         if (!coords) return
         const targetZoom = 8
+        // If the selection originated from a map click, just ensure popup is open without camera transition
+        if (skipNextSelectionTransitionRef.current) {
+            skipNextSelectionTransitionRef.current = false
+            const marker = markerByEventIdRef.current[id]
+            if (marker) {
+                try {
+                    marker.togglePopup()
+                } catch {
+                    console.error('Error toggling popup')
+                }
+            }
+            return
+        }
         const openPopup = () => {
             try {
                 const marker = markerByEventIdRef.current[id]
@@ -524,7 +542,7 @@ export default function EventsMap({
                 mapRef.current.easeTo({
                     center: [coords.longitude, coords.latitude],
                     zoom: Math.max(mapRef.current.getZoom ? mapRef.current.getZoom() : targetZoom, targetZoom),
-                    duration: 900,
+                    duration: 2000,
                 })
             } catch {
                 console.error('Error easing to coordinates')
