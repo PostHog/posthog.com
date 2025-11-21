@@ -312,19 +312,21 @@ Like Contentsquare and Glassbox, Quantum Metric is built for the enterprise worl
     competitors={['quantum_metric','contentsquare']}
     rows={[
         'session_replay.features.canvas_recording',
-        'session_replay.analysis.heatmaps',
+        'heatmaps',
+        'heatmaps.features.rage_clicks',
+        'session_replay.features.crash_reports',        
         'session_replay.platform_support.mobile_app_recordings',
-        'session_replay.analysis.performance_monitoring',
+        'session_replay.privacy.features.privacy_masking',
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.performance_monitoring',
+        'session_replay.targeting.features.filter_by_user_or_event',
+        'session_replay.targeting.conditional_recording',
+        'session_replay.ai.features.ai_summaries',
         'product_analytics.funnels',
         'product_analytics.user_paths',
-        'session_replay.features.sentiment_scores',
-        'session_replay.features.console_logs',
-        {
-            label: 'Revenue impact tracking',
-            description: 'Quantify UX issues in dollar amounts',
-            values: [true, false],
-        },
-        'platform.deployment.self_host',
+        'platform.pricing.transparent_pricing',
+        'platform.security.gdpr_ready',
+        'platform.security.hipaa_ready',
     ]}
 />
 
