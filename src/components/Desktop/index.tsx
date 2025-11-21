@@ -118,7 +118,7 @@ export const apps: AppItem[] = [
     {
         label: 'changelog.mov',
         Icon: IconChangelogThumb,
-        url: '/demo',
+        url: '/changelog-video',
         className: 'size-14 -my-1',
         source: 'desktop',
     },
