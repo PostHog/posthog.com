@@ -1,14 +1,14 @@
 ---
-title: How Rayfit uses PostHog AI to make all their data accessible
-customer: Rayfit
+title: How RayFit uses PostHog AI to make all their data accessible
+customer: RayFit
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/lovable_ca8b63c28c_ef5bcb4589.png
 date: 2025-11-21
 ---
 
-[Rayfit](https://www.rayfit.com/) is building an AI personal training app that solves for the hardest part of fitness: showing up consistently. Their conversational AI coach, _Ray_, generates personalized workouts based on equipment, energy level, and available time.
+[RayFit](https://www.rayfit.com/) is building an AI personal training app that solves for the hardest part of fitness: showing up consistently. Their conversational AI coach, _Ray_, generates personalized workouts based on equipment, energy level, and available time.
 
-Alan, Rayfit’s Full Stack Engineering Lead, manages product development and data infrastructure. We asked him why he chose PostHog:
+Alan, RayFit’s Full Stack Engineering Lead, manages product development and data infrastructure. We asked him why he chose PostHog:
 
 "As an early stage startup, we're cost sensitive," Alan says. “Initially we planned to stitch together an analytics tool and Metabase, but then we looked at PostHog. It's just so cheap and easy. We connected our database and built our pipeline with almost no work."
 
@@ -18,7 +18,7 @@ That solved the infrastructure problem. Next was ensuring the entire team was on
 
 ## Making data accessible with PostHog AI
 
-For Rayfit, the early friction wasn’t collecting data, it was making sure everyone could access it. 
+For RayFit, the early friction wasn’t collecting data, it was making sure everyone could access it. 
 
 "PostHog can present as really technical," Alan explains. “Our CEO and designer had used Mixpanel and Amplitude before — which felt more approachable since PostHog is built for engineers.”
 
@@ -36,7 +36,7 @@ That’s where [PostHog AI](/ai) comes in. For Alan, SQL is second nature — AI
 
 As an early adopter of AI products (in and outside of PostHog), Alan is pragmatic about AI capabilities. “All LLMs right now are about 30–50%,” he says. “But it’s a nice problem space because that’s still a win when it gets it right.”
 
-So when PostHog AI doesn’t nail the syntax on the first try, he doesn’t see it as a failure — just part of the workflow. In fact, it mirrors how both Rayfit and PostHog operate. “We're shipping things before they're fully baked just like PostHog,” he says. “So when AI features don't work perfectly, everyone is willing to try again.”
+So when PostHog AI doesn’t nail the syntax on the first try, he doesn’t see it as a failure — just part of the workflow. In fact, it mirrors how both RayFit and PostHog operate. “We're shipping things before they're fully baked just like PostHog,” he says. “So when AI features don't work perfectly, everyone is willing to try again.”
 
 Even 30–50% accuracy is a win when the alternative is teammates getting stuck or pinging Alan for every question. “It’s saved me countless hours because the data we have is so much more self-serve,” he says. “Anyone on the team can ask questions to PostHog AI.”
 
@@ -61,6 +61,6 @@ Alan also uses PostHog AI to ask questions about the docs. “It’s really help
 
 ## So what’s the real superpower here?
 
-For Rayfit, PostHog AI solved a critical adoption problem: As powerful as data can be, it's not valuable if your team can't access it. “PostHog AI helps the rest of the team feel like the tool we've chosen is easy to use," Alan says.
+For RayFit, PostHog AI solved a critical adoption problem: As powerful as data can be, it's not valuable if your team can't access it. “PostHog AI helps the rest of the team feel like the tool we've chosen is easy to use," Alan says.
 
 And PostHog AI specifically? According to Alan, "It's definitely one of the better AI tools I've used so far." His recommendation to product engineers: "If you’re using PostHog, it's a no-brainer to use PostHog AI to help make business decisions." 
