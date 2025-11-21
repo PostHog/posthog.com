@@ -10,16 +10,15 @@ export const contentsquare = {
             features: {
                 autocapture: true,
                 cohorts: true,
-                conversion_funnels: true,
+            },
+            group_analytics: {
+                available: false,
             },
             funnels: {
                 available: true,
             },
             user_paths: {
                 available: true,
-            },
-            group_analytics: {
-                available: false,
             },
         },
         session_replay: {
@@ -29,16 +28,9 @@ export const contentsquare = {
                 console_logs: true,
                 network_monitor: true,
             },
-            platform_support: {
+            targeting: {
                 features: {
-                    web_app_recordings: true,
-                    mobile_app_recordings: true,
-                },
-            },
-            analysis: {
-                features: {
-                    console_logs: true,
-                    network_monitor: true,
+                    filter_by_user_or_event: true,
                 },
             },
             ai: {
@@ -50,7 +42,6 @@ export const contentsquare = {
         heatmaps: {
             available: true,
             features: {
-                clickmaps: true,
                 dead_taps: false,
                 rage_clicks: true,
                 rage_taps: false,
@@ -63,12 +54,6 @@ export const contentsquare = {
         feature_flags: {
             available: false,
         },
-        surveys: {
-            available: false,
-        },
-        data_warehouse: {
-            available: false,
-        },
     },
     platform: {
         deployment: {
@@ -77,12 +62,8 @@ export const contentsquare = {
         pricing: {
             self_serve: false,
             transparent_pricing: false,
-            free_tier: false,
         },
         security: {
-            gdpr_ready: true,
-            hipaa_ready: false,
-            soc2_certified: true,
             user_privacy_options: true,
         },
     },
