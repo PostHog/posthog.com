@@ -29,7 +29,7 @@ That’s where [PostHog AI](/ai) comes in. For Alan, SQL is second nature — AI
 <OSQuote
   customer="rayfit"
   author="alan_yang"
-  quote={0}
+  product="posthog_ai"
 />
 
 ## Realistic expectations, real results
@@ -42,12 +42,12 @@ Even 30–50% accuracy is a win when the alternative is teammates getting stuck 
 
 What surprised him most is how quickly others leaned into it. “Some of the engineers are using PostHog AI way more than me,” Alan admits. “They're building insights and dashboards, and each of them has workflows I never really thought about.”
 
-![rayfit moving average chart](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rayfit_rep_counting_chart_5a99280ef4.png)
+![screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_11_21_at_12_44_44_PM_8bbeaf8389.png)
 <Caption>How many exercises in a workout have their AI rep counting feature available</Caption>
 
 _PostHog AI helped me add a moving average to this insight. This was really cool to build because it quantifies that we're getting better over time._ 
 
-![rayfit available rep counting chart](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rayfit_exercises_chart_b8a00f06de.png)
+![screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rayfit_exercises_chart_b8a00f06de.png)
 <Caption>Rep Counting Performance (blue means high accuracy outcomes)</Caption>
 _One of our early computer vision features uses AI to count how many reps you're doing in an exercise. PostHog AI helped us build the visualization in seconds._
 
