@@ -148,6 +148,15 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 
 You can see how we are tracking on the [TAM Quota Tracker](https://us.posthog.com/project/2/dashboard/498582) dashboard.
 
+### TAM book of business rules
+
+1. Only accounts with the `AM Managed` segment in Vitally will be counted towards your quota.  Simon adds this manually after reviewing with you.
+2. If you are assigned an account with no previous owner, you have up to 3 months to figure out whether they should be in your book or not, don't ask for the `AM Managed` segment to be added until you're happy that there is growth potential there.
+3. If you are assigned an account with a previous owner, work with them on the handover process.  If the customer isn't in a healthy state usage and engagement-wise, feel free to push back and ask for the previous owner's help in getting them to a good state before taking ownership.  If you really can't resolve this, then escalate first to your team lead(s) and then Simon (Charles as backup) to figure things out.
+4. Accounts which you've previously been paid quota on need to stay in your `AM Managed` book until they are handed over as per 3 above, or until they churn/fall below $20K ARR.  In this case, we will keep them in the `AM Managed` segment for quota calculation purposes and then remove them after the quarterly calculations are complete.
+5. Nominally, you should have 15 accounts/around $1m in ARR in your `AM Managed` book.  There is some wiggle room here, however, if you find yourself with 25 or 30 accounts, then it's unlikely that you'll be able to give them the level of focus we expect from a TAM so you should be prepared to hand some over to another team member.
+6. You can have accounts added to your book at any time, if you are comfortable that there is growth potential there.  Removal of accounts should only happen at the end of the quarter so that quota can be calculated.
+
 ## Team lead quota
 
 From your first full quarter as a team lead in Sales, you will move to a 60% base 40% commission split in reflection of your new player/coach role.  This will be based on your team's quota attainment although you will still have your own individual quota target.
