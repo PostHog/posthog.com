@@ -70,6 +70,7 @@ export default function EventsMap({
     const eventsRef = useRef<any[]>([])
     const coordsByEventIdRef = useRef<Record<number, { latitude: number; longitude: number }>>({})
     const layersRef = useRef<string[] | undefined>(layers)
+    const prevSelectedIdRef = useRef<number | null>(null)
 
     const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
     const styleUrl = 'mapbox://styles/mapbox/streets-v12'
@@ -504,14 +505,6 @@ export default function EventsMap({
         const coords = coordsByEventIdRef.current[id]
         if (!coords) return
         const targetZoom = 8
-        try {
-            mapRef.current.easeTo({
-                center: [coords.longitude, coords.latitude],
-                zoom: Math.max(mapRef.current.getZoom ? mapRef.current.getZoom() : targetZoom, targetZoom),
-            })
-        } catch {
-            console.error('Error easing to coordinates')
-        }
         const openPopup = () => {
             try {
                 const marker = markerByEventIdRef.current[id]
@@ -526,15 +519,53 @@ export default function EventsMap({
                 console.error('Error opening popup')
             }
         }
-        // Try opening popup after move ends; fallback to timeout
-        try {
-            if (typeof mapRef.current.once === 'function') {
-                mapRef.current.once('moveend', openPopup)
-            } else {
-                setTimeout(openPopup, 250)
+        const goToTarget = () => {
+            try {
+                mapRef.current.easeTo({
+                    center: [coords.longitude, coords.latitude],
+                    zoom: Math.max(mapRef.current.getZoom ? mapRef.current.getZoom() : targetZoom, targetZoom),
+                    duration: 900,
+                })
+            } catch {
+                console.error('Error easing to coordinates')
             }
-        } catch {
-            setTimeout(openPopup, 250)
+            // Open popup after arriving at target
+            try {
+                if (typeof mapRef.current.once === 'function') {
+                    mapRef.current.once('moveend', openPopup)
+                } else {
+                    setTimeout(openPopup, 950)
+                }
+            } catch {
+                setTimeout(openPopup, 950)
+            }
+        }
+        const prevId = prevSelectedIdRef.current
+        prevSelectedIdRef.current = id
+        const prevCoords = prevId != null ? coordsByEventIdRef.current[prevId] : null
+        // If switching between two events, zoom out first for a nicer transition, then zoom in
+        if (prevCoords && (prevCoords.latitude !== coords.latitude || prevCoords.longitude !== coords.longitude)) {
+            // Midpoint between previous and new locations
+            const midLng = (prevCoords.longitude + coords.longitude) / 2
+            const midLat = (prevCoords.latitude + coords.latitude) / 2
+            const zoomOutLevel = 3
+            try {
+                mapRef.current.easeTo({
+                    center: [midLng, midLat],
+                    zoom: Math.min(mapRef.current.getZoom ? mapRef.current.getZoom() : zoomOutLevel, zoomOutLevel),
+                    duration: 800,
+                })
+                if (typeof mapRef.current.once === 'function') {
+                    mapRef.current.once('moveend', goToTarget)
+                } else {
+                    setTimeout(goToTarget, 850)
+                }
+            } catch {
+                goToTarget()
+            }
+        } else {
+            // No previous selection or same spot – just go to target
+            goToTarget()
         }
     }, [selectedEventId])
 
