@@ -35,16 +35,16 @@ import App from './App.jsx'
 import { PostHogProvider } from '@posthog/react'
 
 const options = {
-api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
-defaults: '<ph_posthog_js_defaults>',
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  defaults: '<ph_posthog_js_defaults>',
 }
 
 createRoot(document.getElementById('root')).render(
-<StrictMode>
+  <StrictMode>
     <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={options}>
-    <App />
+      <App />
     </PostHogProvider>
-</StrictMode>,
+  </StrictMode>,
 )
 ```
 
@@ -57,10 +57,10 @@ You need to set `posthog-js` and `@posthog/react` as external packages in your `
 // ... imports
 
 export default defineConfig({
-    plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
-    ssr: {
+  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  ssr: {
     noExternal: ['posthog-js', '@posthog/react']
-    }
+  }
 });
 ``` 
 
@@ -83,7 +83,7 @@ posthog?.capture('test_event')
 
 <Step title="Set up exception autocapture" badge="recommended">
 
-> **Note:** A minimum SDK version of v1.207.8 is required, but we recommend [keeping up to date with the latest version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
+> **Note:** A minimum SDK version of v1.207.8 is required, but we recommend [keeping up with the latest SDK version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
 
 You can enable exception autocapture for the JavaScript Web SDK in the **Error tracking** section of [your project settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture). 
 

@@ -1603,6 +1603,10 @@
             "destination": "/docs/llm-analytics/integrations/traceloop-posthog"
         },
         {
+            "source": "/docs/llm-analytics/manual-capture",
+            "destination": "/docs/llm-analytics/installation/manual-capture"
+        },
+        {
             "source": "/why",
             "destination": "/about"
         },
