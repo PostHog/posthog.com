@@ -24,6 +24,7 @@ showTitle: true
 
 - Frontend E2E tests: [Cypress](https://www.cypress.io/)
 - Backend tests: [Pytest](https://docs.pytest.org/en/stable/getting-started.html) and [Django's built-in test suite](https://docs.djangoproject.com/en/3.1/topics/testing/)
+
 ### Additional tools
 
 - CI/CD: [GitHub Actions](https://github.com/features/actions)
@@ -41,15 +42,17 @@ We use both **[Temporal](https://temporal.io/)** and **[Dagster](https://dagster
 
 We tend to use **Celery for lightweight ad-hoc tasks**, **Dagster for internal data jobs**, and **Temporal for user-facing workflows**. You can look at the problem from the requirements for your jobs:
 
-1. **Is it a tiny, low-latency, fire-and-forget task (e.g. send email)?** → Celery  
-2. **Is it mission-critical with complex failure scenarios?** → Temporal  
-3. **Do you need exactly-once guarantees?** → Temporal  
-4. **Do you need complex retry policies or long-running workflows?** → Temporal  
-5. **Is it primarily about scheduled data transformation?** → Dagster  
+1. **Is it a tiny, low-latency, fire-and-forget task (e.g. send email)?** → Celery
+2. **Is it mission-critical with complex failure scenarios?** → Temporal
+3. **Do you need exactly-once guarantees?** → Temporal
+4. **Do you need complex retry policies or long-running workflows?** → Temporal
+5. **Is it primarily about scheduled data transformation?** → Dagster
 6. **Do you need rich data lineage and testing?** → Dagster
 
 #### Where do we use each?
 
-**Celery**: Small, fast background tasks (e.g. sending email, minor async operations)  
-**Temporal**: Batch exports, data warehouse source syncing, AI platform task generation  
-**Dagster**: Exchange rate tracking, one-off production management commands, web analytics data pre-processing
+These are examples of where we use Temporal and Dagster at PostHog. Hopefully, these can serve as anecdotal examples to help you pick between Temporal and Dagster for your application. This list is not exhaustive.
+
+**Celery**: Small, fast background tasks (e.g. sending email, minor async operations)
+**Temporal**: Batch exports, data warehouse source syncing, AI platform task generation
+**Dagster**: Exchange rate tracking, one-off production management commands (better monitoring than Django's management commands), web analytics data pre-processing
