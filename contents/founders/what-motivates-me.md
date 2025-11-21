@@ -43,7 +43,7 @@ In the early days, we [pivoted many times](story-about-pivots), mostly without a
 
 The feeling when it started working was magical.
 
-Overnight (after [this](https://news.ycombinator.com/item?id=22376732)), we were flooded with people to talk to. Companies were getting real value out of the product. Since we grew a lot, we more or less went from no code existing, through Seed / Series A and B within 12 months (it was announced a little later).
+Overnight (after [our Hacker News launch](https://news.ycombinator.com/item?id=22376732)), we were flooded with people to talk to. Companies were getting real value out of the product. Since we grew a lot, we more or less went from no code existing, through Seed / Series A and B within 12 months (it was announced a little later).
 
 ## Now – taking pride in building a business that does stuff properly
 
