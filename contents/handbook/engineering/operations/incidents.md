@@ -146,7 +146,7 @@ In the case that we need to update a _specific_ customer, such as when an indivi
 
 - Look up the customer's org in Vitally to see if the org has an Account Exec assigned (`PostHog Default Dashboard` / righthand column, scroll down to `Key Roles`.) If so, let the AE know about the situation early.
 - Ensure you are always contacting the admins of the impacted organization
-- Communication is best done through Zendesk. The customer's assigned AE, or the Support team, can create tickets and handle the communication for you. 
+- Communication is best done through Zendesk. It's usually best for the customer's assigned person (check Vitally), or the Support team, to create tickets and handle the communication for you, but don't wait if it's really urgent. 
 - Before sending any comms, check with the incident lead. Then, share a ticket link in the incident channel. 
 - If action is needed, it's better to take that action and inform the user than to ask the user to do it.
 - If you're not able to take the required action, give the user deadlines for the changes they need to do and explain what will happen if they don't meet the deadline.
