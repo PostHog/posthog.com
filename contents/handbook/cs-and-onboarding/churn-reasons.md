@@ -20,7 +20,14 @@ Sometimes we connect and build a great relationship with a champion who truly lo
 
 ## Customer replaces PostHog (whether internally or with a competitor)
 
-There are a myriad of reasons a customer might be trying to replace PostHog. It could be that they need to build the service they're using internally, it could be that leadership is pushing to adopt another tool, or we lack key features they are looking for. Whatever the reason may be, the best way to combat churn in this situation is to increase the number of products a customer is using and the overall value the customer gets from having all their data live in one app. It doesn't necessarily prevent this from happening completely, but it does help decrease the risk.
+Customers may churn for a number of reasons, some examples are:
+
+- They needed to build feature parity internally
+- We lack a critical feature they need
+- Leadership loves using a competitor
+- They're very price conscious and got a sweetheart deal
+
+Whatever the reason may be, the best way to combat churn in this situation is to increase the number of products a customer is using and the overall value the customer gets from having all their data live in one app. It doesn't necessarily prevent this from happening completely, but it does help decrease the risk.
 
 Ideally we try to resolve the situation when customers are considering alternatives, and advocate for changes we think could help with decreasing churn risks, but in situations where that isn't possible, having customers use PostHog's other product offerings might help customers only churn for a specific product usage and not as a customer as a whole.
 
@@ -30,7 +37,9 @@ If you notice there has been a pattern where a customer has really struggled to 
 
 When there are opportunities to help a customer, it is recommended we provide the solution where possible, explain to the customer what we did so they have a clear understanding of the solution provided and how they can solve this themselves.
 
-In situations where it requires us to advocate for feature requests, follow up on bug fixes, or stay on top of something for the customer, it is incredibly helpful to be proactive and frequently circle back to the customer to keep them up to date when possible rather than wait for them to follow up again. By staying on top of things on behalf of the customer and proactively communicate, it will help develop a sense of trust, especially when customers have had a poor experience, in particular a lack of communication and follow up.
+In situations where it requires us to advocate for feature requests, follow up on bug fixes, or stay on top of something for the customer, it is incredibly helpful to be proactive and frequently circle back to the customer to keep them up to date when possible rather than wait for them to follow up again. 
+
+By staying on top of things on behalf of the customer and proactively communicate, it will help develop a sense of trust, especially when customers have had a poor experience, in particular a lack of communication and follow up.
 
 ## Customer hasn't been able to extract value out of PostHog
 
@@ -40,7 +49,9 @@ It is also possible their team may not understand how PostHog could be helpful. 
 
 ## Lack of features or speed of delivery for specific needs
 
-If the customer is an ICP fit, and there is risk of churn due to lacking critical features or speed in which we deliver certain results, it might be worth looping in the relevant engineering team and product manager to discuss what our options are for each specific situation that arises from this. Sometimes the key PM will want to jump on a call with the customer to learn about their specific needs. Use this opportunity as a way to help our PMs get direct feedback. We never want to lose a customer because we failed to deliver a key feature they need but these kinds of discussions are helpful to our team to learn what matters to our customers and helps us figure out if we can prioritize them or not.
+If the customer is an ICP fit, and there is risk of churn due to lacking critical features or speed in which we deliver certain results, it might be worth looping in the relevant engineering team and product manager to discuss what our options are for each specific situation that arises from this. Sometimes the key PM will want to jump on a call with the customer to learn about their specific needs.
+
+Openly communicate in the relevant teams channel that this is a churn risk if this feature is something we can't ship. Use this opportunity as a way to help our PMs get direct feedback. We never want to lose a customer because we failed to deliver a key feature they need but these kinds of discussions are helpful to our team to learn what matters to our customers and helps us figure out if we can prioritize them or not.
 
 ## Lack of trust for using PostHog as source of truth
 
