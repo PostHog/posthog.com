@@ -2,7 +2,7 @@
 title: How RayFit uses PostHog AI to make all their data accessible
 customer: RayFit
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/lovable_ca8b63c28c_ef5bcb4589.png
+    [https://res.cloudinary.com/dmukukwp6/image/upload/lovable_ca8b63c28c_ef5bcb4589.png](https://res.cloudinary.com/dmukukwp6/image/upload/Rayfit_1aa197cafd.png)
 date: 2025-11-21
 ---
 
@@ -24,7 +24,7 @@ For RayFit, the early friction wasn’t collecting data, it was making sure ever
 
 Like many, their in-app data was also tricky to access. It requires [SQL skills](/product-engineers/sql-for-analytics) not everyone has. "A lot of the data we use for the generated workouts lives in the app itself," Alan says. "It wouldn't make sense to send a unique event for each one. With the warehouse, we can join it to a person and learn more about their behaviors."
 
-That’s where [PostHog AI](/ai) comes in. For Alan, SQL is second nature — AI just removes some friction. For the rest of the team, having AI draft and edit queries makes the whole workflow far more accessible. “PostHog AI has actually been a deciding factor in our decision to stick with PostHog,” he told us. “Without it, we probably would have moved to a different analytics package because the learning curve felt so steep.”
+That’s where [PostHog AI](/ai) comes in. For Alan, SQL is second nature — AI just removes friction. For non-technical stakeholders, it's a game-changer. "PostHog AI has actually been a deciding factor in our decision to stick with PostHog," he told us. "It made analytics accessible to our non-technical stakeholders who just need answers to business questions. SQL is just a means to an end for them, and PostHog AI removes that barrier to entry."
 
 <OSQuote
   customer="rayfit"
@@ -36,7 +36,7 @@ That’s where [PostHog AI](/ai) comes in. For Alan, SQL is second nature — AI
 
 As an early adopter of AI products (in and outside of PostHog), Alan is pragmatic about AI capabilities. “All LLMs right now are about 30–50%,” he says. “But it’s a nice problem space because that’s still a win when it gets it right.”
 
-So when PostHog AI doesn’t nail the syntax on the first try, he doesn’t see it as a failure — just part of the workflow. In fact, it mirrors how both RayFit and PostHog operate. “We're shipping things before they're fully baked just like PostHog,” he says. “So when AI features don't work perfectly, everyone is willing to try again.”
+So when PostHog AI doesn’t nail the syntax on the first try, he doesn’t see it as a failure — just part of the workflow. In fact, it mirrors how both RayFit and PostHog operate. “We're shipping to learn, just like PostHog,” he says. “When AI features don't work perfectly, everyone is willing to try again.”
 
 Even 30–50% accuracy is a win when the alternative is teammates getting stuck or pinging Alan for every question. “It’s saved me countless hours because the data we have is so much more self-serve,” he says. “Anyone on the team can ask questions to PostHog AI.”
 
@@ -55,7 +55,7 @@ _One of our early computer vision features uses AI to count how many reps you're
 
 For his own work with SQL, Alan says "I usually know exactly what I want to write, so I hammer it out 75-80% of the way. If I run into something I don't know off the top of my head — extracting from JSON, complex aggregation — I'll have PostHog iterate on the query. I do that almost every time."
 
-About 25% of the time, he has PostHog start from scratch. "Usually when I just don't have time to really think about it and want to do something in parallel. I'll kick it off, come back, and then 
+About 25% of the time, he has PostHog start from scratch. "Usually when I just don't have time to really think about it and want to do something in parallel. I'll kick it off, come back, and then collaborate.” 
 
 Alan also uses PostHog AI to ask questions about the docs. “It’s really helpful that PostHog AI is context aware of the page or insight I’m looking at,” he says. “I can ask vague things like what does this mean or how do I configure this setting without having to explain much.”
 
