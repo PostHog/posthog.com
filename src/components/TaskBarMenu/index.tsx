@@ -200,18 +200,6 @@ export default function TaskBarMenu() {
                                     link: '/feature-matrix',
                                     icon: <IconFeatures className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
-                                {
-                                    type: 'item' as const,
-                                    label: 'Place reviews',
-                                    link: '/place-reviews',
-                                    icon: <IconMapPin className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                },
-                                {
-                                    type: 'item' as const,
-                                    label: 'Offsites',
-                                    link: '/offsites',
-                                    icon: <IconPineapple className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                },
                             ]
                           : []),
                       {
