@@ -48,6 +48,7 @@ interface ReaderViewProps {
         type: 'mdx' | 'plain'
         content: string
         featuredImage?: any
+        featuredImageCaption?: string
         contributors?: any[]
         date?: string
         featuredVideo?: string
@@ -596,6 +597,7 @@ function ReaderViewContent({
             })
         }
     }, [appWindow?.path, hash])
+    const image = getImage(body.featuredImage)
 
     return (
         <SearchProvider>
@@ -680,12 +682,23 @@ function ReaderViewContent({
                             >
                                 {/* <DebugContainerQuery /> */}
                                 {body.featuredImage && !body.featuredVideo && (
-                                    <div className="not-prose mb-4 text-center">
-                                        <GatsbyImage
-                                            image={getImage(body.featuredImage)}
-                                            alt={title}
-                                            className="rounded"
-                                        />
+                                    <div className="not-prose mb-6 relative">
+                                        <div className="text-center">
+                                            {image ? (
+                                                <GatsbyImage image={image} alt={title} className="rounded" />
+                                            ) : body.featuredImage?.publicURL ? (
+                                                <img
+                                                    src={body.featuredImage.publicURL}
+                                                    alt={title}
+                                                    className="rounded w-full"
+                                                />
+                                            ) : null}
+                                        </div>
+                                        {body.featuredImageCaption && (
+                                            <div className="absolute right-0 bottom-0 m-2 text-sm text-white bg-black bg-opacity-75 font-medium py-1 px-2 rounded-sm italic text-right">
+                                                {body.featuredImageCaption}
+                                            </div>
+                                        )}
                                     </div>
                                 )}
                                 {title && !hideTitle && (
@@ -701,7 +714,7 @@ function ReaderViewContent({
                                 )}
                                 {(body.date || body.contributors || body.tags) && (
                                     <div
-                                        className={`flex items-center space-x-2 mb-4 flex-wrap mx-auto transition-all ${
+                                        className={`flex items-center space-x-2 mt-4 flex-wrap mx-auto transition-all ${
                                             fullWidthContent || body?.type !== 'mdx'
                                                 ? 'max-w-full'
                                                 : contentMaxWidthClass || 'max-w-2xl'
