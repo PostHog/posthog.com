@@ -568,6 +568,10 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 
 While developing, there are times you may want to connect to the database to query the local database, make changes, etc. To connect to the database, use a tool like pgAdmin and enter these connection details: _host_:`localhost` _port_:`5432` _database_:`posthog`, _username_:`posthog`, _pwd_:`posthog`.
 
+## Extra: Accessing ClickHouse
+
+To connect to ClickHouse using a tool like DataGrip or PyCharm, use these connection details: _host_:`localhost` _port_:`8123` _database_:`default`, _username_:`app`, _pwd_:`apppass`.
+
 ## Extra: Accessing the Django Admin
 
 If you cannot access the Django admin <http://localhost:8000/admin/>, it could be that your local user is not set up as a staff user. You can connect to the database, find your `posthog_user` and set `is_staff` to `true`. This should make the admin page accessible.
