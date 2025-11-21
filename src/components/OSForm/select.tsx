@@ -362,71 +362,77 @@ const OSSelect = ({
                 {isOpen && (
                     <div
                         ref={selectRef}
-                        className={`absolute z-50 w-full mt-1 bg-primary border border-primary rounded shadow-lg ${maxHeight} overflow-hidden`}
+                        className={`absolute z-50 w-full mt-1 bg-primary border border-primary rounded shadow-lg min-h-0`}
                         role="listbox"
                         onKeyDown={handleKeyDown}
                     >
-                        <ScrollArea className={`min-h-0 ${height} ${maxHeight}`}>
-                            {searchable && (
-                                <div className="p-2 border-b border-primary">
-                                    <div className="relative">
-                                        <IconSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 size-4 text-muted" />
-                                        <input
-                                            ref={searchInputRef}
-                                            type="text"
-                                            placeholder={searchPlaceholder}
-                                            value={searchTerm}
-                                            onChange={(e) => setSearchTerm(e.target.value)}
-                                            onKeyDown={handleSearchKeyDown}
-                                            className="w-full pl-8 pr-3 py-1.5 text-sm bg-primary border border-primary rounded text-primary placeholder-muted focus:outline-none focus:ring-1 focus:ring-blue"
-                                        />
-                                    </div>
-                                </div>
-                            )}
-                            {filteredOptions.length > 0 ? (
-                                filteredOptions.map((option, index) =>
-                                    option.isHeader ? (
-                                        <div
-                                            data-scheme="secondary"
-                                            key={`header-${option.label}-${index}`}
-                                            className="px-3 py-1 text-sm text-muted bg-primary border-y border-primary"
-                                        >
-                                            {option.label}
+                        <ScrollArea>
+                            <div className={maxHeight}>
+                                {searchable && (
+                                    <div className="p-2 border-b border-primary">
+                                        <div className="relative">
+                                            <IconSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 size-4 text-muted" />
+                                            <input
+                                                ref={searchInputRef}
+                                                type="text"
+                                                placeholder={searchPlaceholder}
+                                                value={searchTerm}
+                                                onChange={(e) => setSearchTerm(e.target.value)}
+                                                onKeyDown={handleSearchKeyDown}
+                                                className="w-full pl-8 pr-3 py-1.5 text-sm bg-primary border border-primary rounded text-primary placeholder-muted focus:outline-none focus:ring-1 focus:ring-blue"
+                                            />
                                         </div>
-                                    ) : (
-                                        <button
-                                            key={`${option.value}-${index}`}
-                                            ref={(el) => (optionRefs.current[index] = el)}
-                                            type="button"
-                                            onClick={() => handleOptionSelect(option)}
-                                            disabled={option.disabled}
-                                            className={`w-full px-3 py-2 text-left text-sm hover:bg-accent focus:bg-accent focus:outline-none flex items-center justify-between ${
-                                                option.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
-                                            } ${option.value === value ? 'font-bold' : ''} ${
-                                                index === highlightedIndex ? 'bg-accent' : ''
-                                            }`}
-                                            role="option"
-                                            aria-selected={option.value === value}
-                                            onMouseEnter={() => setHighlightedIndex(index)}
-                                        >
-                                            <span className="flex items-center space-x-2">
-                                                {renderIcon(option.icon, option.color)}
-                                                <div>
-                                                    <div className="text-primary">{option.label}</div>
-                                                    {option.description && (
-                                                        <div className="text-xs text-muted">{option.description}</div>
-                                                    )}
-                                                </div>
-                                            </span>
-                                            {option.value === value && <IconCheck className="size-4 text-primary" />}
-                                        </button>
+                                    </div>
+                                )}
+                                {filteredOptions.length > 0 ? (
+                                    filteredOptions.map((option, index) =>
+                                        option.isHeader ? (
+                                            <div
+                                                data-scheme="secondary"
+                                                key={`header-${option.label}-${index}`}
+                                                className="px-3 py-1 text-sm text-muted bg-primary border-y border-primary"
+                                            >
+                                                {option.label}
+                                            </div>
+                                        ) : (
+                                            <button
+                                                key={`${option.value}-${index}`}
+                                                ref={(el) => (optionRefs.current[index] = el)}
+                                                type="button"
+                                                onClick={() => handleOptionSelect(option)}
+                                                disabled={option.disabled}
+                                                className={`w-full px-3 py-2 text-left text-sm hover:bg-accent focus:bg-accent focus:outline-none flex items-center justify-between ${
+                                                    option.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+                                                } ${option.value === value ? 'font-bold' : ''} ${
+                                                    index === highlightedIndex ? 'bg-accent' : ''
+                                                }`}
+                                                role="option"
+                                                aria-selected={option.value === value}
+                                                onMouseEnter={() => setHighlightedIndex(index)}
+                                            >
+                                                <span className="flex items-center space-x-2">
+                                                    {renderIcon(option.icon, option.color)}
+                                                    <div>
+                                                        <div className="text-primary">{option.label}</div>
+                                                        {option.description && (
+                                                            <div className="text-xs text-muted">
+                                                                {option.description}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </span>
+                                                {option.value === value && (
+                                                    <IconCheck className="size-4 text-primary" />
+                                                )}
+                                            </button>
+                                        )
                                     )
-                                )
-                            ) : (
-                                <div className="px-3 py-2 text-sm text-muted">
-                                    {searchTerm ? `No options found for "${searchTerm}"` : 'No options available'}
-                                </div>
-                            )}
+                                ) : (
+                                    <div className="px-3 py-2 text-sm text-muted">
+                                        {searchTerm ? `No options found for "${searchTerm}"` : 'No options available'}
+                                    </div>
+                                )}
+                            </div>
                         </ScrollArea>
                     </div>
                 )}

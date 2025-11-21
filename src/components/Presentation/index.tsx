@@ -12,6 +12,12 @@ import { useApp } from '../../context/App'
 import ContactSales from 'components/ContactSales'
 import PresentationForm from './Utilities/PresentationForm'
 
+// Mapping for team query parameter - makes URL less conspicuous
+const TEAM_QUERY_MAP: Record<string, string> = {
+    '1': 'sales-cs',
+    '2': 'sales-product-led',
+}
+
 interface AccordionItem {
     title: string
     content: React.ReactNode
@@ -106,6 +112,17 @@ const getPanelStateFromURL = (param: string, configDefault?: boolean): boolean =
     return value !== null ? value === 'true' : configDefault ?? true
 }
 
+// Get team slug from URL query param, with mapping for less conspicuous URLs
+const getTeamSlugFromURL = (configDefault?: string): string | undefined => {
+    if (typeof window === 'undefined') return configDefault
+    const params = new URLSearchParams(window.location.search)
+    const teamParam = params.get('t')
+    if (teamParam && TEAM_QUERY_MAP[teamParam]) {
+        return TEAM_QUERY_MAP[teamParam]
+    }
+    return configDefault
+}
+
 export default function Presentation({
     accentImage,
     sidebarContent,
@@ -133,6 +150,9 @@ export default function Presentation({
         getPanelStateFromURL('form', config?.form ?? false)
     )
     const [drawerHeight, setDrawerHeight] = useState<number>(90)
+
+    // Determine effective team slug - URL param overrides config
+    const effectiveTeamSlug = getTeamSlugFromURL(config?.teamSlug)
     const [lastOpenHeight, setLastOpenHeight] = useState<number>(90)
     const [isDragging, setIsDragging] = useState<boolean>(false)
     const [dragStartHeight, setDragStartHeight] = useState<number>(0)
@@ -475,7 +495,7 @@ export default function Presentation({
                             data-scheme="secondary"
                             className="w-80 h-full bg-primary border-l border-primary hidden @2xl:block"
                         >
-                            <PresentationForm teamSlug={config?.teamSlug} salesRep={salesRep} />
+                            <PresentationForm teamSlug={effectiveTeamSlug} salesRep={salesRep} />
                         </aside>
                     )}
                 </div>

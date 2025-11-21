@@ -336,7 +336,7 @@ export default function CDP(): JSX.Element {
                     and dashboards. One of the ways we use it ourselves is to track our support metrics, such as SLAs
                     and first response times. <TeamMember name="Abigail Richardson" photo /> writes up a summary based
                     on this data and shares it with the exec team weekly -&gt; and in the video above she explains how
-                    she gathers the data using SQL (and a little help from PostHog AI).
+                    she gathers the data using SQL.
                 </p>
                 <h3>🪦 RIP the modern data stack</h3>
                 <p>

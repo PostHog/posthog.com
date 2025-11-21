@@ -83,7 +83,7 @@ In the UK, we offer the [workplace nursery scheme](https://www.workplace-nursery
 If you are interested in this, first check with your nursery that they are part of the scheme, then message Kendal to get this set up.
 
 #### Cyclescheme
-In the UK we offer [Cyclescheme](https://www.cyclescheme.co.uk/) to save money on new cycling gear. To get started, activate your cyclescheme account [here](https://app.workplaceextras.com/employee-register/9a1bc53).
+In the UK we offer [Cyclescheme](https://www.cyclescheme.co.uk/) to save money on new cycling gear. To get started, activate your Cyclescheme account via the [Workplace Extras registration form](https://app.workplaceextras.com/employee-register/9a1bc53).
 
 ### Other countries
 

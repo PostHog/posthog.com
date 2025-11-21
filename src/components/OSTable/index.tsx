@@ -287,7 +287,7 @@ const OSTable: React.FC<OSTableProps> = ({
         >
             <ScrollArea fullWidth>
                 <div
-                    className={`md:@2xs/not-full-width:px-0 flex justify-center ${
+                    className={`md:@2xs/not-full-width:px-0 flex ${
                         width === 'full'
                             ? ''
                             : 'px-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
@@ -360,18 +360,18 @@ const OSTable: React.FC<OSTableProps> = ({
                             ) : null}
                         </div>
                     )}
-                    {pagination && (
-                        <Pagination
-                            currentPage={pagination.currentPage}
-                            totalPages={pagination.totalPages}
-                            goToPage={pagination.goToPage}
-                            nextPage={pagination.nextPage}
-                            prevPage={pagination.prevPage}
-                            hasNextPage={pagination.hasNextPage}
-                            hasPrevPage={pagination.hasPrevPage}
-                        />
-                    )}
                 </div>
+                {pagination && (
+                    <Pagination
+                        currentPage={pagination.currentPage}
+                        totalPages={pagination.totalPages}
+                        goToPage={pagination.goToPage}
+                        nextPage={pagination.nextPage}
+                        prevPage={pagination.prevPage}
+                        hasNextPage={pagination.hasNextPage}
+                        hasPrevPage={pagination.hasPrevPage}
+                    />
+                )}
             </ScrollArea>
         </div>
     )

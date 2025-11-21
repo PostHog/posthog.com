@@ -31,7 +31,7 @@ export const surveys = {
         },
     },
     postHogOnPostHog: {
-        title: 'How PostHog uses surveys',
+        title: 'How PostHog uses Surveys',
         benefits: [
             {
                 title: 'Track NPS scores',

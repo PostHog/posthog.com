@@ -8,6 +8,7 @@ import { useApp } from '../../context/App'
 // Competitor data imports
 import { ab_tasty } from '../../hooks/competitorData/ab_tasty'
 import { adobe_analytics } from '../../hooks/competitorData/adobe_analytics'
+import { airbrake } from '../../hooks/competitorData/airbrake'
 import { amplitude } from '../../hooks/competitorData/amplitude'
 import { appcues } from '../../hooks/competitorData/appcues'
 import { appsignal } from '../../hooks/competitorData/appsignal'
@@ -42,16 +43,19 @@ import { logrocket } from '../../hooks/competitorData/logrocket'
 import { lucky_orange } from '../../hooks/competitorData/lucky_orange'
 import { matomo } from '../../hooks/competitorData/matomo'
 import { mixpanel } from '../../hooks/competitorData/mixpanel'
+import { microsoft_clarity } from '../../hooks/competitorData/microsoft_clarity'
 import { mouseflow } from '../../hooks/competitorData/mouseflow'
 import { mparticle } from '../../hooks/competitorData/mparticle'
 import { mutiny } from '../../hooks/competitorData/mutiny'
 import { newrelic } from '../../hooks/competitorData/newrelic'
+import { openreplay } from '../../hooks/competitorData/openreplay'
 import { optimizely } from '../../hooks/competitorData/optimizely'
 import { pendo } from '../../hooks/competitorData/pendo'
 import { piwik_pro } from '../../hooks/competitorData/piwik_pro'
 import { plausible } from '../../hooks/competitorData/plausible'
 import { posthog } from '../../hooks/competitorData/posthog'
 import { raygun } from '../../hooks/competitorData/raygun'
+import { replay_io } from '../../hooks/competitorData/replay_io'
 import { rollbar } from '../../hooks/competitorData/rollbar'
 import { rudderstack } from '../../hooks/competitorData/rudderstack'
 import { segment } from '../../hooks/competitorData/segment'
@@ -574,6 +578,7 @@ export default function ProductComparisonTable({
     const competitorData: Record<string, any> = {
         ab_tasty,
         adobe_analytics,
+        airbrake,
         amplitude,
         appcues,
         appsignal,
@@ -608,16 +613,19 @@ export default function ProductComparisonTable({
         lucky_orange,
         matomo,
         mixpanel,
+        microsoft_clarity,
         mouseflow,
         mparticle,
         mutiny,
         newrelic,
+        openreplay,
         optimizely,
         pendo,
         piwik_pro,
         plausible,
         posthog,
         raygun,
+        replay_io,
         rollbar,
         rudderstack,
         segment,

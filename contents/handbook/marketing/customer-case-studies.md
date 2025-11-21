@@ -16,7 +16,7 @@ Case studies should make our users look smart, our products look useful, and Pos
 - that they represent [who we build for](/handbook/who-we-build-for)
 - that someone else might benefit from reading their story 
 
-> Case studies are typically owned by the [marketing team](/teams/marketing). They live in `/contents/customers/` and appear on [posthog.com/customers](/customers). If you have a suggestion for who we should interview, let us know in the <PrivateLink url="https://posthog.slack.com/archives/C08CG24E3SR">marketing channel</PrivateLink>.
+> Case studies are typically owned by the <SmallTeam slug="marketing" />. They live in `/contents/customers/` and appear on [posthog.com/customers](/customers). If you have a suggestion for who we should interview, let us know in the <PrivateLink url="https://posthog.slack.com/archives/C08CG24E3SR">marketing channel</PrivateLink>.
 
 
 ## Creating a case study

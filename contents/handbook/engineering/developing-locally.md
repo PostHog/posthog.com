@@ -65,8 +65,8 @@ This is a faster option to get up and running. If you don't want to or can't use
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
 5. Ensure that you are using the right Node version (`nvm install 22 && nvm use 22`) then, in another terminal, run `pnpm i` (and use the same terminal for the following commands).
 6. Then run `uv sync`
-    - If this doesn't activate your python virtual environment, run `uv venv` (install `uv` following instructions [here](https://docs.astral.sh/uv/getting-started/installation/#standalone-installer) if needed)
-7. Install `sqlx-cli` with `cargo install sqlx-cli` (install Cargo following instructions [here](https://doc.rust-lang.org/cargo/getting-started/installation.html) if needed)
+    - If this doesn't activate your python virtual environment, run `uv venv` (install `uv` following the [uv standalone installer guide](https://docs.astral.sh/uv/getting-started/installation/#standalone-installer) if needed)
+7. Install `sqlx-cli` with `cargo install sqlx-cli` (install Cargo following the [Cargo getting started guide](https://doc.rust-lang.org/cargo/getting-started/installation.html) if needed)
 8. Now run `DEBUG=1 ./bin/migrate`
 9. Install [mprocs](https://github.com/pvolok/mprocs#installation) (`cargo install mprocs`)
 10. Run `./bin/start`.
@@ -81,7 +81,7 @@ This is a faster option to get up and running. If you don't want to or can't use
 
 1. Install Xcode Command Line Tools if you haven't already: `xcode-select --install`.
 
-2. Install the package manager Homebrew by following the [instructions here](https://brew.sh/).
+2. Install the package manager Homebrew by following the [Homebrew installation instructions](https://brew.sh/).
 
     <blockquote class="warning-note">
         After installation, make sure to follow the instructions printed in your terminal to add Homebrew to your{' '}
@@ -96,7 +96,7 @@ This is a faster option to get up and running. If you don't want to or can't use
 
 > Note: Importantly, if you're internal to PostHog we are standardised on working on MacOS (not Linux). In part because of SOC2 auditing gains it gives us.
 
-1. Install Docker following [the official instructions here](https://docs.docker.com/engine/install/ubuntu/).
+1. Install Docker following the [official Docker installation guide for Ubuntu](https://docs.docker.com/engine/install/ubuntu/).
 
 2. Install the `build-essential` package:
 
@@ -644,6 +644,30 @@ When creating a new email, there are a few steps to take. It's important to add 
 ## Extra: Developing paid features (PostHog employees only)
 
 If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal billing guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
+
+## Extra: Resetting your local database
+
+If you need to start fresh with a clean database (for example, if your local data is corrupted or you want to test the initial setup), follow these steps:
+
+1. Stop all PostHog services and remove all Docker volumes:
+
+    ```bash
+    hogli dev:reset
+    ```
+
+    This will remove all data stored in Docker volumes, including your PostgreSQL, ClickHouse, and Redis data.
+
+2. Start PostHog again:
+
+    ```bash
+    hogli start
+    ```
+
+3. Wait for all migrations to complete. You can monitor the logs to ensure migrations have finished running.
+
+4. Once PostHog is running, click the **generate-demo-data** button in the UI, then type `r` to generate test data.
+
+> **Note:** This process will completely wipe your local database. Make sure you don't have any important local data before proceeding.
 
 ## Extra: Working with the data warehouse
 

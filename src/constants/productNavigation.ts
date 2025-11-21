@@ -71,7 +71,7 @@ export const productOrder: Record<string, string[]> = {
         'sql',
         'bi',
     ],
-    automation: ['posthog_ai', 'webhooks', 'workflows'],
+    automation: ['posthog_ai', 'workflows', 'webhooks'],
     communication: ['surveys', 'messaging', 'user-interviews'],
     product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
 }

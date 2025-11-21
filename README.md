@@ -34,12 +34,7 @@ This is the repository for the PostHog website. It contains:
 
     Install [Node](https://nodejs.org/en/download/) (version 22) - if you installed Node using nvm, you can run `nvm use` to automatically switch to the correct version.
 
-    Install [Yarn](https://classic.yarnpkg.com/en/). (If you're on a Mac with Apple Silicon and get an error with `-86` in it, you may need to [install Rosetta](https://osxdaily.com/2020/12/04/how-install-rosetta-2-apple-silicon-mac/).)
-
-    ```bash
-    npm install --global yarn
-    ```
-
+    Install [Yarn](https://yarnpkg.com/getting-started/install). (If you're on a Mac with Apple Silicon and get an error with `-86` in it, you may need to [install Rosetta](https://osxdaily.com/2020/12/04/how-install-rosetta-2-apple-silicon-mac/).)
 
 
 2.  **Start developing**
