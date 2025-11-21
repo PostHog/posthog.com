@@ -3,13 +3,30 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
-import { IconDownload, IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
+import {
+    IconDownload,
+    IconPencil,
+    IconPlus,
+    IconShieldLock,
+    IconX,
+    IconEmojiAdd,
+    IconGitBranch,
+    IconPerson,
+    IconCommit,
+    IconCode,
+    IconCode2,
+    IconGroups,
+    IconPeople,
+    IconDocument,
+    IconComment,
+} from '@posthog/icons'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import OSButton from 'components/OSButton'
 import { useApp } from '../context/App'
 import RoadmapWindow from 'components/Roadmap/RoadmapWindow'
 import Tooltip from 'components/RadixUI/Tooltip'
+import { Popover } from 'components/RadixUI/Popover'
 import Timeline from 'components/Timeline'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -136,6 +153,158 @@ export const Change = ({ title, teamName, media, description, cta }) => {
     )
 }
 
+const EmojiReactions = () => {
+    const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
+
+    const supportedEmojis = [
+        '🦔',
+        '🙌',
+        '👏',
+        '🤘',
+        '🤌',
+        '👍',
+        '💅',
+        '😮',
+        '😮‍💨',
+        '🫨',
+        '🤯',
+        '😂',
+        '😁',
+        '🤠',
+        '🤖',
+        '🧙',
+        '✨',
+        '🚀',
+        '👀',
+        '💯',
+        '🔥',
+        '❤️',
+        '💙',
+        '💥',
+        '✅',
+        '➕',
+        '🎉',
+        '🌶️',
+        '🧠',
+        '🚢',
+        '⚡️',
+        '🎀',
+        '🍻',
+        '🍾',
+        '💃',
+        '🪩',
+        '🎯',
+        '🚨',
+        '🦄',
+        '🐸',
+        '🌈',
+        '💐',
+    ]
+
+    const handleEmojiSelect = (emoji: string) => {
+        // TODO: Add logic to handle emoji selection
+        console.log('Selected emoji:', emoji)
+        setIsEmojiPickerOpen(false)
+    }
+
+    return (
+        <>
+            {supportedEmojis.slice(0, 3).map((emoji, index) => (
+                <div
+                    key={index}
+                    className="bg-accent/30 rounded-lg px-3 flex flex-row items-center gap-x-1 hover:cursor-pointer hover:bg-accent/50 border border-transparent hover:border-primary"
+                >
+                    <span className="text-lg">{emoji}</span>
+                    <span className="text-xs">3</span>
+                </div>
+            ))}
+            <Popover
+                trigger={
+                    <button className="bg-accent/30 rounded-lg px-3 py-1 flex flex-row items-center gap-x-1 hover:cursor-pointer hover:bg-accent/50 border border-transparent hover:border-primary mr-2">
+                        <IconEmojiAdd className="w-4 h-4" />
+                    </button>
+                }
+                contentClassName="border border-primary px-1 py-1"
+                dataScheme="secondary"
+                open={isEmojiPickerOpen}
+                onOpenChange={setIsEmojiPickerOpen}
+                side="top"
+            >
+                <div className="grid grid-cols-7 gap-1 px-2 max-h-[140px] overflow-y-auto scrollbar-hide">
+                    {supportedEmojis.map((emoji, index) => (
+                        <button
+                            key={index}
+                            onClick={() => handleEmojiSelect(emoji)}
+                            className="text-xl hover:bg-accent/50 rounded transition-colors py-1 px-1.5"
+                            title={emoji}
+                        >
+                            {emoji}
+                        </button>
+                    ))}
+                </div>
+            </Popover>
+        </>
+    )
+}
+
+const GitHubPRInfo = () => {
+    return (
+        <>
+            <div className="flex flex-row items-center">
+                <IconGitBranch className="w-4 h-4 opacity-50 mr-1" />
+                <a href="" className="opacity-50">
+                    #14324
+                </a>
+            </div>
+            <div className="flex flex-row items-center">
+                <IconPeople className="w-4 h-4 opacity-50 shrink-0 mr-1" />
+                <div className="flex flex-row items-center group">
+                    {[
+                        'https://github.com/edwinyjlim.png',
+                        'https://github.com/edwinyjlim.png',
+                        'https://github.com/edwinyjlim.png',
+                    ].map((avatar, index, array) => (
+                        <div
+                            key={`${avatar}-${index}`}
+                            className={`relative transition-all duration-200 ${
+                                index > 0 ? '-ml-2 group-hover:ml-0.5' : ''
+                            }`}
+                            style={{ zIndex: array.length - index }}
+                        >
+                            <img src={avatar} className="w-5 h-5 rounded-full border-primary border" />
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div className="flex flex-row items-center">
+                <IconCode className="w-4 h-4 opacity-50 shrink-0 mr-1" />
+                <div className="flex flex-row gap-x-1">
+                    <span className="text-green font-semibold">+13,402</span>{' '}
+                    <span className="text-red font-semibold">-20,004</span>
+                </div>
+            </div>
+            <div className="flex flex-row items-center">
+                <IconCommit className="w-4 h-4 opacity-50 mr-1" />
+                <a href="" className="opacity-50">
+                    20
+                </a>
+            </div>
+            <div className="flex flex-row items-center">
+                <IconDocument className="w-4 h-4 opacity-50 mr-1" />
+                <a href="" className="opacity-50">
+                    5
+                </a>
+            </div>
+            <div className="flex flex-row items-center">
+                <IconComment className="w-4 h-4 opacity-50 mr-1" />
+                <a href="" className="opacity-50">
+                    12
+                </a>
+            </div>
+        </>
+    )
+}
+
 const Roadmap = ({
     roadmap,
     onClose,
@@ -151,6 +320,8 @@ const Roadmap = ({
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
     const [width, setWidth] = useState(450)
     const [isResizing, setIsResizing] = useState(false)
+
+    console.log('ROADMAP', roadmap)
 
     const handleDragResize = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
         setIsResizing(true)
@@ -279,9 +450,16 @@ const Roadmap = ({
                         {roadmap.description && (
                             <div className="py-2 px-4">
                                 <Markdown>{roadmap.description}</Markdown>
+                                <div className="mt-8 mb-4 flex flex-row flex-wrap gap-1">
+                                    <EmojiReactions />
+                                </div>
                             </div>
                         )}
                     </ScrollArea>
+                </div>
+
+                <div className="px-4 py-4 grid grid-cols-3 gap-x-3 gap-y-2 text-sm bg-primary border-t border-primary">
+                    <GitHubPRInfo />
                 </div>
 
                 {roadmap.cta?.url && (
