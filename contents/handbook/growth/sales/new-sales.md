@@ -296,7 +296,7 @@ Most customers don't need this beyond sharing our existing documentation. This s
 
 If the customer requires a vendor questionnaire or security questionnaire then it's best for the AE involved to try and fill it out. If a company reaches out initially with this request, it's often best to try and understand if the customer has an intention to pay or at least grow into a paying customer before investing a lot of time filling it out. If there are any questions that are unclear post the specific question in #team-people-and-ops channel. It is easy to get driven into filling out security questionnaires for accounts that would come in below the sales assist threshold. If the lead is pushing security review without having had any commercial discussions, be transparent up front and let them know that we only do security review for accounts at $20k annual spend or greater. We are happy to work with them to understand their usage, and at that point, further entertain security discussions or point them towards a self serve path. 
 
-Some customers may need payment details up front as part of their vendor onboarding process.  Stripe allows you to generate these ahead of them signing the contract - you can see how to do it [here](/handbook/growth/sales/billing#step-5-apply-credits).
+Some customers may need payment details up front as part of their vendor onboarding process. Stripe allows you to generate these ahead of them signing the contract — you can see how to do it in the [billing guide for applying credits](/handbook/growth/sales/billing#step-5-apply-credits).
 
 If you need help with anything data privacy or [MSA-related](/handbook/growth/sales/contracts), ping Fraser for help.
 

@@ -30,7 +30,7 @@ them that they can save by removing the Group Analytics add-on from the billing 
 
 [Autocapture](/docs/product-analytics/autocapture) is a great way for users to get up and running with event capture without a huge engineering effort.  Autocapture can however get very noisy very quickly, and if users aren't leveraging these events they may not be getting value out of them.  You can understand a customer's Autocapture event volume from their Metabase customer usage dashboard (instructions above on how to get there).  There is a breakdown of the Key event volume Last 30 days which shows the number and % of Autocapture events they are sending across all projects.  If that is high (>50%) then check the Actions (by type) visualization on the same dashboard to see if they have any Autocapture actions defined.  If not they are likely to not be benefitting from Autocapture events.
 
-If they aren't benefitting from Autocapture you should reach out to the let them know how best to use it.  Alternatively, they can tune or turn it off by following the docs [here](/docs/product-analytics/autocapture#configuring-autocapture).
+If they aren't benefitting from Autocapture you should reach out to let them know how best to use it. Alternatively, they can tune or turn it off by following the [Autocapture configuration docs](/docs/product-analytics/autocapture#configuring-autocapture).
 
 ### Session replay targeting
 
@@ -75,7 +75,7 @@ ORDER BY groupidentify_event_count DESC
 
 `Posthog.reset()` will generate a new anonymous distinct ID.  If this is called before a user is identified then two anonymous unlinked user may be created.  There is no easy way to proactively diagnose this however if a customer says that their tracking between web and app is off, this is a common culprit.
 
-We have guidance on when to call `posthog.reset()` [here](/docs/libraries/js/features#resetting-a-user).
+We have guidance on when to call `posthog.reset()` in the [JavaScript library features guide](/docs/libraries/js/features#resetting-a-user).
 
 ### Reverse Proxies 
 
