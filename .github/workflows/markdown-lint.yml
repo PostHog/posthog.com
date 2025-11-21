@@ -8,6 +8,9 @@ on:
             - '.markdownlint-cli2.jsonc'
             - '.github/workflows/markdown-lint.yml'
 
+permissions:
+    contents: read
+
 jobs:
     markdownlint:
         name: Lint Markdown Files
