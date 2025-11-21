@@ -115,6 +115,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Dashboards',
         owner: ['product-analytics', 'analytics-platform'],
     },
+     'dashboard-templates': {
+        feature: 'Dashboard templates',
+        owner: ['analytics-platform'],
+    },
     'data-colors-themes': {
         feature: 'Data colors & themes',
         owner: ['analytics-platform'],
