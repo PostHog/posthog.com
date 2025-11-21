@@ -10,41 +10,36 @@ showTitle: true
 
 When starting out as a Technical Customer Success Manager (CSM) at PostHog, you are assigned a book of business with ~30 accounts to work with. It is helpful to think of customer engagement in stages to help us identify how we should connect with customers at each stage.
 
-## Stage 1: Introduction and discovery
+### Stage 1: Getting started with customers
 
-Whether the account is getting handed off from an existing contact or you are establishing contact for the first time, it is helpful to get connected with a champion quickly, ideally multiple champions if possible. Find someone who can serve as your primary point of contact, but also try to connect with people from other teams. If the account hasn't been actively managed before, it is even more crucial that we try establishing a connection with anyone who is willing to talk. There is some helpful guidance in our [getting started with newly assigned customers](/handbook/cs-and-onboarding/newly-assigned-customer) that can help you get started.
+We've written a lengthy guide on how to [get started with customers](/handbook/cs-and-onboarding/getting-started-with-customers), so rather than rehash some of that information here, go read that guide instead.
 
-Your goal at this stage is to learn more about the company, get to know your champion, and understand their goals so you can determine where you can add the most value. Some things to consider on your discovery call:
+### Stage 2: Establishing trust
 
-- Who is your champion? What role or team are they on?
-- What does their company do?
-- What are their immediate and overall goals?
-- What metrics do they deeply care about?
-- Are they established for success with their current PostHog setup?
-- What current PostHog products are they using, and how are they using them?
-- Why aren't they using other PostHog products?
-- Which teams are currently actively using PostHog at their company?
-- Are there opportunities for other teams to adopt PostHog?
-- Potential introductions to champions on another team to learn about their use case.
-- [Review and discuss their current implementation](/handbook/cs-and-onboarding/foundation-check) and if they have any concerns.
-- Would it be helpful for you to review their account with them?
-- Offer training and workshop sessions to see if their team would be interested.
-- How does the customer feel about PostHog overall?
+Once you've gone through your entire book of business and have completed stage 1, the next stage in our journey is to develop deep trust with our champions. Trust is built over time, based on our interactions and how we manage and nurture those relationships.
 
-There are some additional recommended questions on our [getting to know your customers](/handbook/cs-and-onboarding/getting-to-know-your-customers#getting-to-know-you-call) page that would also be helpful to consider. These are suggestions. You are the driver and can decide the best way to connect to the customer. The goal at this stage should be to learn as much as you can, so you know where you can add the most value, and to establish relationships with as many champions as you can. Not all of these questions need to be answered in a single discovery call or discussion, but ideally during this stage, you're spending time getting a good grasp on what matters most to your customers, whether they're setup for success or not, and if there are things you can do immediately to help optimize for their success, resolve implementation issues, or offer immediate training that their team can benefit from.
+Some key examples that really help with building trusts with your customers:
 
-## Stage 2: Establishing trust
+- **Show, not tell**: Whenever a customer has a support question, or indicates they are trying to accomplish a goal, if possible, help create the solution rather than simply sending them to our docs. It is an opportunity to create an insight or dashboard for the customer, confirm if this is what they wanted, and share with them how you were able to create such an insight or dashboard so they could do it themselves later. Be careful to balance this and not create a dependency situation where customers rely on you to create stuff for them.
 
-Once you've gone through your entire book of business and have completed stage 1, the next stage in our journey is to develop deep trust with our champions. Trust is built over time, based on our interactions and how we manage and nurture those relationships. This means being personable, helpful, and communicating in a timely manner when you think you have something to share, advocating for feature requests or following up on bugs, and keeping the customer up to date without them having to ask, staying on top of support questions, and, when possible, showing, not telling.
+- **Be timely on notifications**: We have automated alerts set up to flag unusual behavior on an account. This includes things like event spikes or decreases. Sometimes this is unexpected behavior for the customer. Being quick to draw this to their attention can be helpful for the customer to investigate and showcase your helpfulness. If there are other signals, act on it accordingly. If there's public news, such as the company just raised a new funding round, reach out to your champion on this to congratulate them earnestly. 
 
-An example of show, not tell, is when a customer asks a support question, and rather than simply telling the customer how they can do something to fix the issue, if the opportunity is available for you to resolve the issue for the customer, such as creating an insight or dashboard on their behalf, do that instead. Confirm with the customer that this is what they're thinking of, then explain what you did to help teach them how they can accomplish the same thing moving forward. By doing the work for them, rather than simply telling them what they can do and linking to some documentation, we're doing as much as we can to be helpful, which goes a long way in being helpful and establishing trust.
-
-To be clear, there is nothing wrong with having to inform them of what needs to be done or linking to our documentation, but if the opportunity presents itself to be extra helpful, do so. It's essential to note that we don't want to create a habit for our customers that makes them dependent on us to continually generate insights or dashboards for them, or write custom SQL queries on their behalf. You'll want to balance this when attempting to be helpful, so as not to create the impression that we'll always do this for them.
+- **Go beyond the basics**: In getting started with customers, you focused on getting to know your customers, understanding their business goals, helping with implementation, and optimizing their use. Now is a great time to focus on how you can help them optimize for success. This could be looking at how they're currently engaging with PostHog products, whether there are things they haven't done that might be helpful to implement. For example, have they set up custom tracking funnels for high value metrics, created alerts on customer actions to track, have they tried PostHog AI, or considered implementing other features to augment the data they have (such as error tracking to figure out why conversions drop off). This is a good opportunity to cross sell but also presents an opportunity to help customers understand where they can get more value out of PostHog.
 
 Establishing trust can take time, and your communication style and actions can play a significant role. It may be worth offering recurring calls with your champion to establish more face-to-face contact, as this can help you maintain an ongoing pulse on what's happening.
 
-## Stage 3: Getting deeply embedded with customers
+### Stage 3: Getting deeply embedded with customers
 
-At some point, you've gotten to know your champion well and have a fairly good understanding of their business goals, worked through implementation issues, and perhaps even tried cross-selling additional products to them. Now would be a great time to reach out and see if they're interested in conducting a deep dive and becoming more deeply embedded with their team to work through some of their goals. This could help establish new workflows or setups to gain deeper insights beyond what they've achieved.
+At this stage, we're interested in conducting a deep dive and becoming more deeply embedded with their team to work through some of their goals. This could help establish new workflows or setups to gain deeper insights beyond what they've achieved.
 
-Some customers may simply want a better way to understand specific statistics and are unsure of how to achieve this. Others may actually be looking to implement key changes and have PostHog be deeply embedded as a source of truth for what they're doing, and in some cases, re-imagine or re-architect their setup to be driven by PostHog data. This is a great opportunity to engage at a much deeper level with their team and explore how you can help them achieve true success with PostHog, as well as consider use cases they haven't thought of yet.
+Here are a couple examples that have came up previously:
+
+- **Building a custom recommendation engine**: An ecommerce customer we were working with had implemented PostHog to track key metrics they cared about but wanted to take it a step further and use us as source of truth in customizing visitor experiences to their site. Each returning visitor would see a custom feed just for them based on prior product views, searches, or purchases. This went way beyond the scope of simply tracking events and building dashboards, and there were potential opportunities to work with the customer here on how to custom track events, push data to their backend, and more.
+
+- **Real time alerts**: A couple customers had high value actions they wanted to track and get real time notifications on. One customer wanted to track product views, present related purchases for upsell, and get notified when a customer didn't complete a purchase. Another wanted to track downloads and figure out when visitors attempt to access a file but runs into an error. This presented opportunies to understand high value signals for our customer and how we can help them implement a custom solution using PostHog to accomplish their goals.
+
+The goal at this stage is to help our customers succeed by getting them the key metrics they care about, and often times, requires us to connect with their team to implement custom code changes at a deeper level to accomplish this. 
+
+If your champion is in a key decision making position who can get these changes through, that's great, but if not, this is also a great opportunity to ask your champion for an introduction to the key decision maker so you can work close with them to ensure changes can be prioritized. Another method is to reach out to the team lead, such as the head of engineering or head of product, armed with what their quarterly goals are, and offer your assistance directly. You may establish another strong connection this way.
+
+Companies have conflicting priorities but by demonstrating you understand what their core goal is, and how PostHog could solve the problem, and finding the key decision maker, you have a higher chance of convincing the team to prioritize the changes now rather than wait to add value.
