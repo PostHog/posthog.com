@@ -32,6 +32,12 @@ availability:
             boost: false
             scale: true
             enterprise: true
+        scim:
+            free: false
+            selfServe: false
+            boost: false
+            scale: false
+            enterprise: true
 ---
 
 SSO makes logging in easier for users to log and compliance easier for administrators.
@@ -42,7 +48,7 @@ Some SSO features are add-ons. Please review each section below for details.
 
 ## Authentication domains
 
-SSO configuration mostly occurs in your Organization settings and is based on authentication domains. You need to have a verified authentication domain in order to set Just-in-time provisioning, SSO enforcement and [SAML](#saml) configuration.
+SSO configuration mostly occurs in your Organization settings and is based on authentication domains. You need to have a verified authentication domain in order to set Just-in-time provisioning, SSO enforcement, [SAML](#saml) configuration, and [SCIM](#scim) provisioning.
 
 Authentication domains need to be verified if you are on PostHog Cloud.
 
@@ -326,5 +332,91 @@ Use this option if you want to add additional configurations to your app that ar
     - "Identity Provider Issuer" needs to be set as SAML Entity ID (use the complete URL).
     - "X.509 Certificate" needs to be set as SAML X.509 certificate.
 8. You're good to go! Click on "Login with SSO" in the login page.
+
+## SCIM
+
+<FeatureAvailability availability={_frontmatter.availability.features.scim} />
+
+SCIM lets you automatically sync users and their roles from your identity provider (IdP) into PostHog. This is useful for automatically creating accounts and assigning roles when someone joins your organization, and disabling accounts when they leave. 
+
+> SCIM is currently in beta and available on request for customers on the Enterprise plan. [Contact us](https://posthog.com/support) to enable it for your organization.
+
+### Prerequisites
+
+Before setting up SCIM, you need:
+
+1. A verified authentication domain in PostHog
+2. SAML SSO configured and working for your domain
+3. An Identity Provider that supports SCIM 2.0 (e.g., Okta, OneLogin, Azure AD)
+
+### Setting up SCIM
+
+1. In PostHog, navigate to [Organization settings](https://us.posthog.com/settings/organization-authentication) and go to Authentication domains.
+
+2. Click the (⋯) next to your domain and select "Configure SCIM".
+
+3. Copy the **SCIM Base URL** and **SCIM Token**. You'll need these for your IdP configuration.
+
+4. In your Identity Provider, configure SCIM for your PostHog application:
+
+    - Set the SCIM Base URL from PostHog
+    - Set the Bearer Token (SCIM Token) from PostHog
+    - Enable user provisioning
+
+5. Configure role mapping in your IdP. Map your IdP roles to PostHog roles:
+
+    - Admin
+    - Member
+    - (Other custom roles if applicable)
+
+6. Assign users and roles to the PostHog application in your IdP, verify that they appear in PostHog.
+
+### How SCIM works
+
+- When you assign a user to PostHog in your IdP, they're automatically created in PostHog with the mapped role.
+- Changes to user details or roles in your IdP automatically sync to PostHog.
+- When you remove a user from PostHog in your IdP, their PostHog account is deactivated.
+- If a user already exists in PostHog with the same email, SCIM updates their details and role to match your IdP.
+- If roles already exist in PostHog, they are matched by name (case sensitive).
+
+### Example: Okta
+
+1. In Okta admin, go to your PostHog application (the same one used for SAML).
+
+2. Navigate to the "Provisioning" tab and click "Configure API Integration".
+
+3. Check "Enable API integration" and enter:
+    - **SCIM Base URL** from PostHog
+    - **API Token** (the SCIM Token from PostHog)
+
+4. Click "Test API Credentials" to verify the connection.
+
+5. In the "Provisioning" settings, enable:
+    - Create Users
+    - Update User Attributes
+    - Deactivate Users
+
+6. Go to the "Assignments" tab and configure role mapping under "Provisioning to App".
+
+7. Assign users to the PostHog application. They'll be automatically provisioned in PostHog.
+
+### Example: OneLogin
+
+1. In OneLogin admin, go to your PostHog application.
+
+2. Navigate to the "Provisioning" tab.
+
+3. Check "Enable provisioning" and enter:
+    - **SCIM Base URL** from PostHog
+    - **SCIM Bearer Token** from PostHog
+
+4. Under "Provisioning Options", enable:
+    - Create user
+    - Delete user
+    - Update user
+
+5. Configure role mappings in the "Parameters" section to map OneLogin roles to PostHog roles.
+
+6. Save the configuration and assign users to the application.
 
 [env-vars]: /docs/self-host/configure/environment-variables
