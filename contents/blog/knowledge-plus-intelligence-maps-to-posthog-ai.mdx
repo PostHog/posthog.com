@@ -1,0 +1,100 @@
+---
+date: "2025-11-21"
+title: 'Knowledge + intelligence ⇢ PostHog AI is here'
+author:
+  - michael-matloka
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/515178785_18a6e619_601a_4758_aaaa_06deb2695902_4a267826d4.jpg
+featuredImageType: full
+featuredImageCaption: Knitting actionable insights out of the ramen of data.
+category: PostHog news
+tags:
+- Product updates
+- Startups
+---
+
+***Software has eaten the world, and now we're drowning in data.***  
+***I'm so sorry if you're a PostHog user. We're complicit – but I'm hoping we can make amends.***  
+***We've been building for you.***
+
+Today, I'm excited to announce the launch of **PostHog AI – the intelligence layer for product data**.
+
+Cut the crap? Sure: **PostHog AI is an [AI agent](https://simonwillison.net/2025/Sep/18/agents/) built into PostHog, with wide access to your data and setup via tool use, working tirelessly in a loop until it achieves the task you give it.** Like a friendly product analyst, it creates multi-step analyses of product usage, it writes SQL queries, it sets up new feature flags and experiments, it digs into impactful errors - and more, all across PostHog.
+
+Yes, investors _have_ been asking _"hey, are you AI-native?"_ We've tuned that noise out, then built out of genuine need. Here's why:
+
+## The knowledge curse
+
+The information age has been great – it's just also been **too much**. Too much information captured: business events, clicks, pageviews, feedback, entities, errors, entire user sessions.
+
+Of course you want to know all this - flying blind is a recipe for crashing hard. That's why we've built PostHog.
+
+How much of that data are you able to convert into action? Time is a flat circle, and we're right back to the <abbr title="Business Intelligence, for the innocent">BI</abbr> meme of "actionable insights". Always just one excellent dashboard away from finding diamonds.
+
+The truth is, raw knowledge creates analysis work. Then when you do learn from it, you need to actually _do_ something: build the new thing, roll it out, monitor whether it's actually successful. It's tasks all the way down.
+
+## The missing link
+
+What PostHog has been from the beginning: a really damn good **knowledge layer**. A dozen tools in one, each capturing a different part of the user journey.
+
+Even with all that data, even with powerful dashboards, you need heaps of work to slice it and dice it. The bottleneck hasn't been presentation or querying. It's been intelligence all along. With LLMs we have, for the first time, intelligence on demand.
+
+There's no waiting for AGI to be declared by a committee. Claude Code, Cursor, Codex – call them C4, because they've been explosive for software engineering. It's not the math exam skills that make LLMs productive, but something even more human-like: the ability to achieve goals by stringing together tools attempt by attempt.
+
+The intelligence age is here. We're here for it.
+
+## Intelligence in practice
+
+**"What changed across my product this week?"** PostHog AI examines your events, identifies the biggest shifts in user behavior, creates trend graphs, and explains the patterns. No more manually building twenty different queries to spot what you missed.
+
+(gif)
+
+**"Find sessions where users dropped off during checkout."** It searches through your session replays, filters by the checkout funnel, identifies drop-off points, and summarizes the common patterns. What would take hours of manual review happens in minutes.
+
+(gif)
+
+**"Create a dashboard for onboarding retention."** It builds the entire thing: retention cohorts, activation metrics, key user paths. All the insights you'd meticulously craft yourself, assembled and ready to monitor.
+
+(gif)
+
+**"Set up an A/B test with 70/30 split for the new pricing page."** The feature flag appears, configured with your exact specifications. What used to require clicking through multiple screens and double-checking settings? Done in one prompt.
+
+(gif)
+
+**"Which errors impact user sign-ups the most?"** PostHog AI correlates your error data with conversion events, ranks issues by impact, and surfaces the bugs actually hurting your business—not just the loudest ones.
+
+(gif)
+
+This is intelligence put to work.
+
+## How it works
+
+PostHog AI sits on top of your complete PostHog setup: product analytics, session replay, feature flags, experiments, error tracking, surveys, data warehouse—all of it. When you give it a task, it uses over 30 specialized tools to query data, navigate the UI, create insights, write SQL, set up flags, filter errors, and more.
+
+It's deeply connected to your product's event schema and taxonomy. It understands what `signup_completed` means in your system versus someone else's. It knows your user properties, your custom events, your dashboard structure.
+
+You interact with it through a chat interface that's always available in the PostHog app. But intelligence also appears throughout the platform—look for the sparkle icon when editing filters, writing SQL, or watching session replays. Same AI core, different entry points.
+
+The first time you use it, you run `/init` to give it context about your product. Think of it as onboarding your new product analyst—except this one works 24/7 and never forgets which metrics actually matter to your business.
+
+## Get started
+
+PostHog AI is available now for PostHog Cloud users. Open the AI chat in your PostHog project, grant access (requires admin permissions), run `/init`, and start asking it to do things.
+
+The interface is simple: type what you want, and it figures out how to get there. Natural language all the way. No special syntax, no rigid commands. Just describe the outcome and let intelligence handle the path.
+
+We've been using it ourselves for months while building it. The team asks it to debug SQL queries, investigate user behavior, set up experiments, analyze errors—anything that would normally require clicking through multiple screens or writing complex queries. It's become the first place we go when we need to understand what's happening in our product.
+
+## Up next
+
+This is the start. PostHog AI today handles the core workflows across the platform. What's coming: deeper research capabilities, more sophisticated session analysis, proactive insights (AI that tells you about problems before you ask), and tighter integration with development workflows.
+
+---
+
+**PostHog AI is [live in your PostHog project](https://app.posthog.com/ai) now.** Go build.
+
+PostHog AI. For builders, from builders.
