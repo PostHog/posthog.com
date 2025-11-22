@@ -1,7 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { useEventsMapData } from './EventsLayer'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { EventItem } from './types'
+type EventItem = {
+    id: number
+    date?: string
+    name?: string
+    link?: string
+    location?: { label?: string }
+}
+import {
+    computeOffsets,
+    getMapbox,
+    ensureClusterSource,
+    ensureClusterLayers,
+    setClusterVisibility,
+    CLUSTER_ZOOM,
+    computeJitterRadius,
+    isStyleReady,
+} from './hogMapUtils'
 
 export const LAYER_EVENTS_UPCOMING = 'layer-events-upcoming'
 export const LAYER_EVENTS_PAST = 'layer-events-past'
@@ -10,42 +26,31 @@ interface Coordinates {
     longitude: number
 }
 
-// Delay requiring mapbox-gl until client to avoid SSR issues
-const getMapbox = () => {
-    if (typeof window === 'undefined') {
-        return null
-    }
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const mapboxgl = require('mapbox-gl')
-    return mapboxgl
-}
-
-// Compute small lat/lng offsets to spread overlapping markers
-const computeOffsets = (count: number, baseRadius: number): Array<{ dx: number; dy: number }> => {
-    if (count <= 1) {
-        return [{ dx: 0, dy: 0 }]
-    }
-    const offsets: Array<{ dx: number; dy: number }> = []
-    const rings = Math.ceil((count - 1) / 6)
-    let remaining = count
-    for (let ring = 1; remaining > 0; ring++) {
-        const inRing = Math.min(6, remaining)
-        const radius = baseRadius * ring * 1.5
-        for (let i = 0; i < inRing; i++) {
-            const angle = (i / inRing) * Math.PI * 2
-            const dx = radius * Math.cos(angle)
-            const dy = radius * Math.sin(angle)
-            offsets.push({ dx, dy })
-        }
-        remaining -= inRing
-        if (ring >= rings) {
-            break
-        }
-    }
-    while (offsets.length < count) {
-        offsets.push({ dx: 0, dy: 0 })
-    }
-    return offsets
+const PopupHtml = ({
+    name,
+    dateText,
+    label,
+    desc,
+    href,
+    variant,
+}: {
+    name: string
+    dateText: string
+    label: string
+    desc: string
+    href: string
+    variant: 'upcoming' | 'past'
+}): string => {
+    const linkText = variant === 'past' ? 'Click to view details →' : 'View details →'
+    const nameClass = variant === 'past' ? 'font-semibold mb-1 text-lg' : 'font-semibold text-lg'
+    return `
+        <div class="text-sm max-w-sm text-center text-primary bg-primary p-2 rounded shadow-2xl" data-scheme="primary">
+            <div class="${nameClass}">${name}</div>
+            ${dateText ? `<div class="text-secondary mb-1">${dateText}</div>` : ''}
+            <div class="text-secondary">${label}</div>
+            ${desc ? `<div class="text-secondary mt-1">${desc}</div>` : ''}
+            ${href ? `<a class="underline font-semibold" href="${href}">${linkText}</a>` : ''}
+        </div>`
 }
 
 export default function EventsMap({
@@ -81,6 +86,7 @@ export default function EventsMap({
     useEffect(() => {
         eventsRef.current = events as any[]
     }, [events])
+
     useEffect(() => {
         coordsByEventIdRef.current = coordsByEventId
     }, [coordsByEventId])
@@ -95,7 +101,8 @@ export default function EventsMap({
             }
         }
     }, [layers])
-    useEffect(() => {
+
+    const setupMap = useCallback(() => {
         if (!isClient) {
             console.error('Not client')
             return
@@ -110,88 +117,14 @@ export default function EventsMap({
             console.error('No token')
             return
         }
-        const CLUSTER_ZOOM = 4
         const clearMarkers = () => {
             markersRef.current.forEach((m) => m.remove())
             markersRef.current = []
         }
-        const ensureClusterSource = (id: string, data: any) => {
-            if (!mapRef.current) return
-            const existing = mapRef.current.getSource(id) as any
-            if (existing) {
-                existing.setData(data)
-                return
-            }
-            mapRef.current.addSource(id, {
-                type: 'geojson',
-                data,
-                cluster: true,
-                clusterMaxZoom: 12,
-                clusterRadius: 50,
-            } as any)
-        }
-        const ensureClusterLayers = (id: string) => {
-            if (!mapRef.current) return
-            const clustersId = `${id}-clusters`
-            const countId = `${id}-cluster-count`
-            if (!mapRef.current.getLayer(clustersId)) {
-                mapRef.current.addLayer({
-                    id: clustersId,
-                    type: 'circle',
-                    source: id,
-                    filter: ['has', 'point_count'],
-                    paint: {
-                        'circle-color': '#111827',
-                        'circle-stroke-color': '#ffffff',
-                        'circle-stroke-width': 2,
-                        'circle-radius': ['step', ['get', 'point_count'], 14, 10, 18, 25, 24],
-                    },
-                } as any)
-            }
-            if (!mapRef.current.getLayer(countId)) {
-                mapRef.current.addLayer({
-                    id: countId,
-                    type: 'symbol',
-                    source: id,
-                    filter: ['has', 'point_count'],
-                    layout: {
-                        'text-field': '{point_count_abbreviated}',
-                        'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-                        'text-size': 12,
-                    },
-                    paint: {
-                        'text-color': '#ffffff',
-                    },
-                } as any)
-            }
-            const clickHandler = (e: any) => {
-                const features = mapRef.current.queryRenderedFeatures(e.point, { layers: [clustersId] })
-                const clusterId = features?.[0]?.properties?.cluster_id
-                const source = mapRef.current.getSource(id) as any
-                if (clusterId && source && source.getClusterExpansionZoom) {
-                    source.getClusterExpansionZoom(clusterId, (err: any, zoom: number) => {
-                        if (err) return
-                        mapRef.current.easeTo({ center: features[0].geometry.coordinates, zoom })
-                    })
-                }
-            }
-            mapRef.current.off('click', clustersId, clickHandler)
-            mapRef.current.on('click', clustersId, clickHandler)
-        }
-        const setClusterVisibility = (id: string, visible: boolean) => {
-            if (!mapRef.current) return
-            const clustersId = `${id}-clusters`
-            const countId = `${id}-cluster-count`
-            ;[clustersId, countId].forEach((layerId) => {
-                if (mapRef.current.getLayer(layerId)) {
-                    mapRef.current.setLayoutProperty(layerId, 'visibility', visible ? 'visible' : 'none')
-                }
-            })
-        }
         const renderMarkers = () => {
             if (!mapRef.current) return
             // Avoid manipulating sources/layers before the style is fully loaded
-            if (typeof mapRef.current.isStyleLoaded === 'function' && !mapRef.current.isStyleLoaded()) {
+            if (!isStyleReady(mapRef.current)) {
                 return
             }
             clearMarkers()
@@ -223,11 +156,11 @@ export default function EventsMap({
                         })
                         .filter(Boolean)
                     const upcomingData = { type: 'FeatureCollection', features: upcomingFeatures as any[] }
-                    ensureClusterSource('events-upcoming-source', upcomingData)
-                    ensureClusterLayers('events-upcoming-source')
-                    setClusterVisibility('events-upcoming-source', true)
+                    ensureClusterSource(mapRef.current, 'events-upcoming-source', upcomingData)
+                    ensureClusterLayers(mapRef.current, 'events-upcoming-source')
+                    setClusterVisibility(mapRef.current, 'events-upcoming-source', true)
                 } else {
-                    setClusterVisibility('events-upcoming-source', false)
+                    setClusterVisibility(mapRef.current, 'events-upcoming-source', false)
                 }
                 if (showPast) {
                     const pastFeatures = eventsRef.current
@@ -243,21 +176,21 @@ export default function EventsMap({
                         })
                         .filter(Boolean)
                     const pastData = { type: 'FeatureCollection', features: pastFeatures as any[] }
-                    ensureClusterSource('events-past-source', pastData)
-                    ensureClusterLayers('events-past-source')
-                    setClusterVisibility('events-past-source', true)
+                    ensureClusterSource(mapRef.current, 'events-past-source', pastData)
+                    ensureClusterLayers(mapRef.current, 'events-past-source')
+                    setClusterVisibility(mapRef.current, 'events-past-source', true)
                 } else {
-                    setClusterVisibility('events-past-source', false)
+                    setClusterVisibility(mapRef.current, 'events-past-source', false)
                 }
                 // Skip HTML markers in clustered view
                 return
             } else {
-                setClusterVisibility('events-upcoming-source', false)
-                setClusterVisibility('events-past-source', false)
+                setClusterVisibility(mapRef.current, 'events-upcoming-source', false)
+                setClusterVisibility(mapRef.current, 'events-past-source', false)
             }
 
             if (showUpcoming) {
-                const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
+                const jitterRadius = computeJitterRadius(zoom)
                 // Group upcoming events by coordinate
                 const upcomingEvents = eventsRef.current.filter((e) => (e.date ? new Date(e.date) >= today : false))
                 const groups = upcomingEvents.reduce((acc, e) => {
@@ -300,14 +233,14 @@ export default function EventsMap({
                             const href = ev.link || ''
                             const name = ev.name || 'Event'
                             const desc = (ev as any).description || ''
-                            const popupHtml = `
-                            <div class="text-sm max-w-sm text-center text-primary bg-primary p-2 rounded shadow-2xl" data-scheme="primary">
-                                <div class="font-semibold text-lg">${name}</div>
-                                ${date ? `<div class="text-secondary mb-1">${date}</div>` : ''}
-                                <div class="text-secondary">${label}</div>
-                                ${desc ? `<div class="text-secondary mt-1">${desc}</div>` : ''}
-                                ${href ? `<a class="underline font-semibold" href="${href}">View details →</a>` : ''}
-                            </div>`
+                            const popupHtml = PopupHtml({
+                                name,
+                                dateText: date,
+                                label,
+                                desc,
+                                href,
+                                variant: 'upcoming',
+                            })
                             const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
 
                             const marker = new mapboxgl.Marker({ element: el })
@@ -341,7 +274,7 @@ export default function EventsMap({
                 )
             }
             if (showPast) {
-                const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
+                const jitterRadius = computeJitterRadius(zoom)
                 // Group past events by coordinate
                 const pastEvents = eventsRef.current.filter((e) => (e.date ? new Date(e.date) < today : false))
                 const groups = pastEvents.reduce((acc, e) => {
@@ -387,18 +320,14 @@ export default function EventsMap({
                             const href = ev.link || ''
                             const name = ev.name || 'Event'
                             const desc = (ev as any).description || ''
-                            const popupHtml = `
-                            <div class="text-sm max-w-sm text-center text-primary bg-primary p-2 rounded shadow-2xl" data-scheme="primary">
-                                <div class="font-semibold mb-1 text-lg">${name}</div>
-                                ${date ? `<div class="text-secondary mb-1">${date}</div>` : ''}
-                                <div class="text-secondary">${label}</div>
-                                ${desc ? `<div class="text-secondary mt-1">${desc}</div>` : ''}
-                                ${
-                                    href
-                                        ? `<a class="underline font-semibold" href="${href}">Click to view details →</a>`
-                                        : ''
-                                }
-                            </div>`
+                            const popupHtml = PopupHtml({
+                                name,
+                                dateText: date,
+                                label,
+                                desc,
+                                href,
+                                variant: 'past',
+                            })
                             const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
 
                             const marker = new mapboxgl.Marker({ element: el })
@@ -494,6 +423,10 @@ export default function EventsMap({
     }, [isClient, token, styleUrl])
 
     useEffect(() => {
+        return setupMap()
+    }, [setupMap])
+
+    useEffect(() => {
         if (mapRef.current && (typeof mapRef.current.isStyleLoaded !== 'function' || mapRef.current.isStyleLoaded())) {
             try {
                 renderMarkersRef.current && renderMarkersRef.current()
@@ -503,8 +436,7 @@ export default function EventsMap({
         }
     }, [events, coordsByEventId])
 
-    // Focus a marker when an event is selected externally
-    useEffect(() => {
+    const handleExternalSelection = useCallback(() => {
         const id = selectedEventId
         if (!mapRef.current || id == null) return
         const coords = coordsByEventIdRef.current[id]
@@ -586,6 +518,11 @@ export default function EventsMap({
             goToTarget()
         }
     }, [selectedEventId])
+
+    // Focus a marker when an event is selected externally
+    useEffect(() => {
+        handleExternalSelection()
+    }, [handleExternalSelection])
 
     return (
         <div className="box-border w-full h-full rounded border border-primary overflow-hidden">

@@ -1,18 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { usePeopleMapData, ProfileNode, Coordinates } from './PeopleLayer'
 import { navigate } from 'gatsby'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { computeOffsets } from './hogMapUtils'
-
-// Delay requiring mapbox-gl until client to avoid SSR issues
-const getMapbox = () => {
-    if (typeof window === 'undefined') {
-        return null
-    }
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const mapboxgl = require('mapbox-gl')
-    return mapboxgl
-}
+import {
+    computeOffsets,
+    getMapbox,
+    ensureClusterSource,
+    ensureClusterLayers,
+    setClusterVisibility,
+    CLUSTER_ZOOM,
+    computeJitterRadius,
+    isStyleReady,
+} from './hogMapUtils'
 
 const PopupHtml = ({
     name,
@@ -59,13 +58,16 @@ export default function PeopleMap(): JSX.Element {
     const styleUrl = 'mapbox://styles/mapbox/streets-v12'
 
     const { members, coordsByQuery } = usePeopleMapData(isClient, token)
+
     useEffect(() => {
         membersRef.current = members
     }, [members])
+
     useEffect(() => {
         coordsByQueryRef.current = coordsByQuery
     }, [coordsByQuery])
-    useEffect(() => {
+
+    const setupMap = useCallback(() => {
         if (!isClient) {
             console.error('Not client')
             return
@@ -80,89 +82,15 @@ export default function PeopleMap(): JSX.Element {
             console.error('No token')
             return
         }
-        const CLUSTER_ZOOM = 4
         const clearMarkers = () => {
             markersRef.current.forEach((m) => m.remove())
             markersRef.current = []
-        }
-        const ensureClusterSource = (id: string, data: any) => {
-            if (!mapRef.current) return
-            const existing = mapRef.current.getSource(id) as any
-            if (existing) {
-                existing.setData(data)
-                return
-            }
-            mapRef.current.addSource(id, {
-                type: 'geojson',
-                data,
-                cluster: true,
-                clusterMaxZoom: 12,
-                clusterRadius: 50,
-            } as any)
-        }
-        const ensureClusterLayers = (id: string) => {
-            if (!mapRef.current) return
-            const clustersId = `${id}-clusters`
-            const countId = `${id}-cluster-count`
-            if (!mapRef.current.getLayer(clustersId)) {
-                mapRef.current.addLayer({
-                    id: clustersId,
-                    type: 'circle',
-                    source: id,
-                    filter: ['has', 'point_count'],
-                    paint: {
-                        'circle-color': '#111827',
-                        'circle-stroke-color': '#ffffff',
-                        'circle-stroke-width': 2,
-                        'circle-radius': ['step', ['get', 'point_count'], 14, 10, 18, 25, 24],
-                    },
-                } as any)
-            }
-            if (!mapRef.current.getLayer(countId)) {
-                mapRef.current.addLayer({
-                    id: countId,
-                    type: 'symbol',
-                    source: id,
-                    filter: ['has', 'point_count'],
-                    layout: {
-                        'text-field': '{point_count_abbreviated}',
-                        'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-                        'text-size': 12,
-                    },
-                    paint: {
-                        'text-color': '#ffffff',
-                    },
-                } as any)
-            }
-            const clickHandler = (e: any) => {
-                const features = mapRef.current.queryRenderedFeatures(e.point, { layers: [clustersId] })
-                const clusterId = features?.[0]?.properties?.cluster_id
-                const source = mapRef.current.getSource(id) as any
-                if (clusterId && source && source.getClusterExpansionZoom) {
-                    source.getClusterExpansionZoom(clusterId, (err: any, zoom: number) => {
-                        if (err) return
-                        mapRef.current.easeTo({ center: features[0].geometry.coordinates, zoom })
-                    })
-                }
-            }
-            mapRef.current.off('click', clustersId, clickHandler)
-            mapRef.current.on('click', clustersId, clickHandler)
-        }
-        const setClusterVisibility = (id: string, visible: boolean) => {
-            if (!mapRef.current) return
-            const clustersId = `${id}-clusters`
-            const countId = `${id}-cluster-count`
-            ;[clustersId, countId].forEach((layerId) => {
-                if (mapRef.current.getLayer(layerId)) {
-                    mapRef.current.setLayoutProperty(layerId, 'visibility', visible ? 'visible' : 'none')
-                }
-            })
         }
 
         const renderMarkers = () => {
             if (!mapRef.current) return
             // Avoid manipulating sources/layers before the style is fully loaded
-            if (typeof mapRef.current.isStyleLoaded === 'function' && !mapRef.current.isStyleLoaded()) {
+            if (!isStyleReady(mapRef.current)) {
                 return
             }
             clearMarkers()
@@ -185,18 +113,18 @@ export default function PeopleMap(): JSX.Element {
                     })
                     .filter(Boolean)
                 const peopleData = { type: 'FeatureCollection', features: peopleFeatures as any[] }
-                ensureClusterSource('people-source', peopleData)
-                ensureClusterLayers('people-source')
-                setClusterVisibility('people-source', true)
+                ensureClusterSource(mapRef.current, 'people-source', peopleData)
+                ensureClusterLayers(mapRef.current, 'people-source')
+                setClusterVisibility(mapRef.current, 'people-source', true)
                 // Skip HTML markers in clustered view
                 return
             } else {
-                setClusterVisibility('people-source', false)
+                setClusterVisibility(mapRef.current, 'people-source', false)
             }
 
             // Show individual people markers when zoomed in
             // Jitter radius scales with zoom (much more spread when zoomed out, tighter when zoomed in)
-            const jitterRadius = Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
+            const jitterRadius = computeJitterRadius(zoom)
             // Group members by their geocode query so people in the same location are combined
             const groups = membersRef.current.reduce((acc, m) => {
                 const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
@@ -329,6 +257,10 @@ export default function PeopleMap(): JSX.Element {
             }
         }
     }, [isClient, token, styleUrl])
+
+    useEffect(() => {
+        return setupMap()
+    }, [setupMap])
 
     useEffect(() => {
         if (mapRef.current && (typeof mapRef.current.isStyleLoaded !== 'function' || mapRef.current.isStyleLoaded())) {
