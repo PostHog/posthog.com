@@ -241,7 +241,9 @@ export default function EventsMap({
                                 href,
                                 variant: 'upcoming',
                             })
-                            const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+                            const popup = new mapboxgl.Popup({ offset: 12, className: 'ph-mapbox-popup' }).setHTML(
+                                popupHtml
+                            )
 
                             const marker = new mapboxgl.Marker({ element: el })
                                 .setLngLat([longitude + dx, latitude + dy])
@@ -328,7 +330,9 @@ export default function EventsMap({
                                 href,
                                 variant: 'past',
                             })
-                            const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+                            const popup = new mapboxgl.Popup({ offset: 12, className: 'ph-mapbox-popup' }).setHTML(
+                                popupHtml
+                            )
 
                             const marker = new mapboxgl.Marker({ element: el })
                                 .setLngLat([longitude + dx, latitude + dy])

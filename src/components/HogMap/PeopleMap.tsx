@@ -251,7 +251,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                     const locationText = p.country === 'world' ? 'Planet Earth' : p.location || p.country || ''
                     const popupHtml = PopupHtml({ name, role, flagEmoji, locationText, label })
 
-                    const popup = new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml)
+                    const popup = new mapboxgl.Popup({ offset: 12, className: 'ph-mapbox-popup' }).setHTML(popupHtml)
                     const marker = new mapboxgl.Marker({ element: el })
                         .setLngLat([longitude + dx, latitude + dy])
                         .setPopup(popup)

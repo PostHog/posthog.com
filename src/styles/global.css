@@ -2587,3 +2587,39 @@ article.reader-view-content-container:has(.quest-sidebar) {
         @apply hidden text-[1.5rem] top-2 right-2;
     }
 }
+
+.ph-mapbox-popup .mapboxgl-popup-content {
+    /* match bg-primary (data-scheme='primary') */
+    background: rgb(253 253 248);
+    color: inherit;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+/* Dark mode match for bg-primary in dark scheme */
+.dark .ph-mapbox-popup .mapboxgl-popup-content {
+    background: rgb(30 31 35);
+}
+/* Mapbox tip triangle uses border-* colors, not background */
+.ph-mapbox-popup.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+    border-bottom-color: rgb(253 253 248) !important;
+}
+.ph-mapbox-popup.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+    border-top-color: rgb(253 253 248) !important;
+}
+.ph-mapbox-popup.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+    border-right-color: rgb(253 253 248) !important;
+}
+.ph-mapbox-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+    border-left-color: rgb(253 253 248) !important;
+}
+.dark .ph-mapbox-popup.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+    border-bottom-color: rgb(30 31 35) !important;
+}
+.dark .ph-mapbox-popup.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+    border-top-color: rgb(30 31 35) !important;
+}
+.dark .ph-mapbox-popup.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+    border-right-color: rgb(30 31 35) !important;
+}
+.dark .ph-mapbox-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+    border-left-color: rgb(30 31 35) !important;
+}
