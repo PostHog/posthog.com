@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
-import { IconDemoThumb, AppIcon } from 'components/OSIcons'
+import { IconDemoThumb, AppIcon, IconChangelogThumb } from 'components/OSIcons'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -113,6 +113,13 @@ export const apps: AppItem[] = [
         label: 'Changelog',
         Icon: <AppIcon name="invite" />,
         url: '/changelog',
+        source: 'desktop',
+    },
+    {
+        label: 'changelog.mov',
+        Icon: IconChangelogThumb,
+        url: '/changelog-video',
+        className: 'size-14 -my-1',
         source: 'desktop',
     },
     // {

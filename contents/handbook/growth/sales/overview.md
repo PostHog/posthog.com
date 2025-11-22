@@ -71,7 +71,7 @@ We'd typically define a deal as a large deal if it has most of the following:
 
 ## Who the Sales team are
 
-Our small team page is maintained [here](/teams/sales-cs). In addition to people who share PostHog's culture, we also value:
+Our small team page is maintained on the [Sales & CS team page](/teams/sales-cs). In addition to people who share PostHog's culture, we also value:
 
 - People who have very high empathy with product teams and their needs
 - People who are happy to choose their own objectives if it meets a business goal

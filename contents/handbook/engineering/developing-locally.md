@@ -61,7 +61,7 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 1. Install Xcode Command Line Tools if you haven't already: `xcode-select --install`.
 
-2. Install the package manager Homebrew by following the [instructions here](https://brew.sh/).
+2. Install the package manager Homebrew by following the [Homebrew installation instructions](https://brew.sh/).
 
     <blockquote class="warning-note">
         After installation, make sure to follow the instructions printed in your terminal to add Homebrew to your{' '}
@@ -76,7 +76,7 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 > Note: Importantly, if you're internal to PostHog we are standardised on working on MacOS (not Linux). In part because of SOC2 auditing gains it gives us.
 
-1. Install Docker following [the official instructions here](https://docs.docker.com/engine/install/ubuntu/).
+1. Install Docker following the [official Docker installation guide for Ubuntu](https://docs.docker.com/engine/install/ubuntu/).
 
 2. Install the `build-essential` package:
 
@@ -568,6 +568,10 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 ## Extra: Accessing Postgres
 
 While developing, there are times you may want to connect to the database to query the local database, make changes, etc. To connect to the database, use a tool like pgAdmin and enter these connection details: _host_:`localhost` _port_:`5432` _database_:`posthog`, _username_:`posthog`, _pwd_:`posthog`.
+
+## Extra: Accessing ClickHouse
+
+To connect to ClickHouse using a tool like DataGrip or PyCharm, use these connection details: _host_:`localhost` _port_:`8123` _database_:`default`, _username_:`app`, _pwd_:`apppass`.
 
 ## Extra: Accessing the Django Admin
 
