@@ -1,6 +1,6 @@
 ---
 title: How to sync and query Supabase data in PostHog
-date: 2025-11-11T00:00:00.000Z
+date: 2025-11-11
 author:
   - ian-vanagas
 tags:
@@ -166,4 +166,5 @@ LIMIT 20
 - [How to set up Google Ads reports](/tutorials/google-ads-reports)
 
 <NewsletterForm />
+
 
