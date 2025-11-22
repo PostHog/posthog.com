@@ -8,7 +8,7 @@ tags:
 ---
 Combining your database and analytics data is a powerful way to understand your users. [Supabase](https://supabase.com/) is a popular choice for handling that app data, as it provides a database, auth, storage, and more all-in-one.
 
-Thanks to modern advances in <RainbowText>synergy</RainbowText>™, we can link and query your Supabase data in PostHog using our data warehouse. This tutorial shows you how to do that and provides some example insights you can create with the data afterward.
+Thanks to modern advances in <RainbowText>enterprise synergy</RainbowText>™, we can link and query your Supabase data in PostHog using our data warehouse. This tutorial shows you how to do that and provides some example insights you can create with the data afterward.
 
 ## Linking Supabase data to PostHog
 
@@ -166,3 +166,4 @@ LIMIT 20
 - [How to set up Google Ads reports](/tutorials/google-ads-reports)
 
 <NewsletterForm />
+
