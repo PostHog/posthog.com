@@ -8,7 +8,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/515178785_18a6e619_601a_4758_aaaa_06deb2695902_4a267826d4.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/515178785_18a6e619_601a_4758_aaaa_06deb2695902_4a267826d4.jpg
 featuredImageType: full
 featuredImageCaption: Knitting actionable insights out of the ramen of data.
 category: PostHog news
@@ -73,28 +73,24 @@ This is intelligence put to work.
 
 ## How it works
 
-PostHog AI sits on top of your complete PostHog setup: product analytics, session replay, feature flags, experiments, error tracking, surveys, data warehouse—all of it. When you give it a task, it uses over 30 specialized tools to query data, navigate the UI, create insights, write SQL, set up flags, filter errors, and more.
+Our number one learning: subagents are dangerous, as full context makes all the difference. We're rolling out PostHog AI as a single-loop agent that instead switches modes depending on the set of tools needed for the moment.
 
-It's deeply connected to your product's event schema and taxonomy. It understands what `signup_completed` means in your system versus someone else's. It knows your user properties, your custom events, your dashboard structure.
+In the coming weeks and months, we'll be sharing far more of what we've learned about building effective AI agents. Subscribe to our engineering blog, and stay tuned.
 
-You interact with it through a chat interface that's always available in the PostHog app. But intelligence also appears throughout the platform—look for the sparkle icon when editing filters, writing SQL, or watching session replays. Same AI core, different entry points.
+## Get started now
 
-The first time you use it, you run `/init` to give it context about your product. Think of it as onboarding your new product analyst—except this one works 24/7 and never forgets which metrics actually matter to your business.
+PostHog AI is available for PostHog Cloud users. Open the AI chat in your PostHog project, grant access (requires admin permissions), run `/init`, and start asking it to do things.
 
-## Get started
+The agent auto-detects what page you're on (dashboard, insight, session replay) and pulls in relevant data. You can manually add context: specific events, dashboards, or insights. It maintains a memory system (initialized via `/init`) with project-specific knowledge that persists across sessions.
 
-PostHog AI is available now for PostHog Cloud users. Open the AI chat in your PostHog project, grant access (requires admin permissions), run `/init`, and start asking it to do things.
-
-The interface is simple: type what you want, and it figures out how to get there. Natural language all the way. No special syntax, no rigid commands. Just describe the outcome and let intelligence handle the path.
+The interface is a chat panel, but PostHog AI appears throughout the platform. See the sparkle icon ✨ when editing SQL, watching replays, or configuring filters? Same agent, contextually aware of what you're working on.
 
 We've been using it ourselves for months while building it. The team asks it to debug SQL queries, investigate user behavior, set up experiments, analyze errors—anything that would normally require clicking through multiple screens or writing complex queries. It's become the first place we go when we need to understand what's happening in our product.
 
 ## Up next
 
-This is the start. PostHog AI today handles the core workflows across the platform. What's coming: deeper research capabilities, more sophisticated session analysis, proactive insights (AI that tells you about problems before you ask), and tighter integration with development workflows.
+This is just the start. PostHog AI today handles the core workflows across the platform. What's coming: deep research capabilities, more sophisticated session analysis, proactive insights from background analysis, and tighter integration with development workflows.
 
 ---
 
-**PostHog AI is [live in your PostHog project](https://app.posthog.com/ai) now.** Go build.
-
-PostHog AI. For builders, from builders.
+**PostHog AI is [live in your PostHog project](https://app.posthog.com/#panel=max).** For builders, from builders.
