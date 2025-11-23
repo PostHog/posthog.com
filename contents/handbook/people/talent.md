@@ -45,7 +45,7 @@ It is important that interviewers know that they need to maintain an up to date 
 
 # SuperDay 
 
-Talent partners are responsible for scheduling these, you can read more [here](https://posthog.com/handbook/people/hiring-process#4-posthog-superday). The people involved should be focused on assessing the candidate so talent partners need to be alert for helping with any logistics to make sure the SuperDay runs smoothly. 
+Talent partners are responsible for scheduling these, you can read more in the [hiring process SuperDay section](https://posthog.com/handbook/people/hiring-process#4-posthog-superday). The people involved should be focused on assessing the candidate so talent partners need to be alert for helping with any logistics to make sure the SuperDay runs smoothly.
 
 # Speed v quality
 

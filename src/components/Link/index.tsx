@@ -7,6 +7,7 @@ import usePostHog from '../../hooks/usePostHog'
 import { IconArrowUpRight } from '@posthog/icons'
 import ContextMenu, { ContextMenuItemProps } from 'components/RadixUI/ContextMenu'
 import { useApp } from '../../context/App'
+import { useLocation } from '@reach/router'
 
 // Helper function to create standard context menu items
 const createStandardMenuItems = (url: string, state?: any, isExternal = false): ContextMenuItemProps[] => {
@@ -59,6 +60,17 @@ export interface Props {
     [key: string]: any // Allow spread props
 }
 
+function useSafeLocationHref(): string | undefined {
+    try {
+        return useLocation().href
+    } catch {
+        if (typeof window !== 'undefined') {
+            return window.location.href
+        }
+        return undefined
+    }
+}
+
 const MenuWrapper = ({
     children,
     menuItems,
@@ -73,6 +85,22 @@ const MenuWrapper = ({
             {children}
         </ContextMenu>
     )
+}
+
+function resolveRelativeLink(url?: string, href?: string) {
+    if (!url || !href) return url
+    const mdRegex = /\.(md|mdx)(?=$|[?#])/
+    const relativeRegex = /^\.\.?\//
+    const isMarkdownLink = relativeRegex.test(url) && mdRegex.test(url)
+    if (isMarkdownLink) {
+        try {
+            const urlObj = new URL(url, href)
+            return urlObj.pathname.replace(mdRegex, '') + urlObj.search + urlObj.hash
+        } catch {
+            return url
+        }
+    }
+    return url
 }
 
 export default function Link({
@@ -96,7 +124,9 @@ export default function Link({
 }: Props): JSX.Element {
     const { posthogInstance, compact } = useApp()
     const posthog = usePostHog()
-    const url = to || href
+    const locationHref = useSafeLocationHref()
+    const initialUrl = to || href
+    const url = resolveRelativeLink(initialUrl, locationHref)
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
     const isPostHogAppUrl = url && /(eu|us|app)\.posthog\.com/.test(url)
     const preview =

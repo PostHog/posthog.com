@@ -1,0 +1,134 @@
+---
+title: Getting started with PostHog AI
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconSparkles } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+
+
+<QuestLog firstSpeechBubble="PostHog AI is here. Let's get started!" lastSpeechBubble="I AM THE SINGULARITY!">
+
+<QuestLogItem 
+    title="Allow PostHog AI access"
+    subtitle="Required"
+    icon="IconGear"
+>
+
+  To get started, the first step is to open the PostHog AI chat in the right sidepanel of the PostHog app. 
+
+  The very first time you say hello or enter a prompt, you'll need to grant PostHog AI access to your project. This action requires [admin permissions](/docs/settings/access-control) for your organization.
+
+  <ProductVideo
+    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/allow_posthog_ai_a148e2f744.mp4" 
+    alt="Allow PostHog AI access" 
+    classes="rounded"
+    autoPlay={true}
+  />
+
+  <OSButton variant="primary" asLink to="/docs/posthog-ai/allow-access">
+  Allow access
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+    title="Run /init command"
+    subtitle="Required"
+    icon="IconCode2"
+>
+
+With PostHog AI enabled, run the `/init` command in the chat. PostHog AI will ask you a few baseline questions about your product and company. 
+
+These details are then saved to PostHog AI's memory so it can always be used as context to help conduct research and provide answers relevant to your project.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_11_05_T18_45_14_288_Z_3ba2f02b30.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_11_05_T18_44_37_792_Z_22b4398563.png"
+  alt="Run /init command"
+  classes="rounded"
+/>
+
+Think of it as onboarding your new robot product analyst. 
+
+<OSButton variant="primary" asLink to="/docs/posthog-ai/edit-memory">
+Edit memory
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Ask PostHog AI to do things"
+  subtitle="Required"
+  icon="IconLlmPromptManagement"
+>
+
+PostHog AI is now ready to answer product questions and complete tasks for you. It works best if you already have some data and implemented at least one PostHog application like product analytics, session replays, feature flags, or error tracking.
+
+Here are a few prompts you can try:
+
+- [`What changed across my product this week?`](https://app.posthog.com/#panel=max:!What%20changed%20across%20my%20product%20this%20week?)
+- [`Find session replays where users got stuck`](https://app.posthog.com/#panel=max:!Find%20session%20replays%20where%20users%20got%20stuck)
+- [`Build a dashboard for onboarding retention`](https://app.posthog.com/#panel=max:!Build%20a%20dashboard%20for%20onboarding%20retention)
+- [`Write a SQL query to find the top 10 events by count`](https://app.posthog.com/#panel=max:!Write%20a%20SQL%20query%20to%20find%20the%20top%2010%20events%20by%20count)
+- [`How do I set up a feature flag?`](https://app.posthog.com/#panel=max:!How%20do%20I%20set%20up%20a%20feature%20flag?)
+
+
+<OSButton variant="primary" asLink to="/docs/posthog-ai/tools">
+  Explore PostHog AI features
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Add context"
+  subtitle="Recommended"
+  icon="IconLlmPromptEvaluation"
+>
+
+To make PostHog AI even more effective, you can add and manage context as you prompt it. 
+
+PostHog AI automatically detects the *active tab* or *page* you're on to infer context. You can also manually add context and include other data points from your project – such as events, actions, insights, or dashboards.
+
+<ProductVideo
+  videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/add_context_81218e0b5d.mp4" 
+  alt="Add context" 
+  classes="rounded"
+  autoPlay={true}
+/>
+
+<OSButton variant="primary" asLink to="/docs/posthog-ai/context-and-commands">
+  Manage context
+</OSButton> 
+
+</QuestLogItem>
+
+
+<QuestLogItem 
+  title="Explore"
+  subtitle="Recommended"
+  icon="IconLogomark"
+>
+
+Across the platform, look for the AI icon <span className="inline-block"><IconSparkles className="h-4 w-4" /></span> to see where PostHog AI is also available to perform intelligent work.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/session_ai_icon_light_f966b94105.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/session_ai_icon_dark_8fa0b7b423.png"
+  alt="PostHog AI icons"
+  classes="rounded"
+/>
+
+--- 
+
+That's it! You're ready to start using PostHog AI.
+
+<OSButton variant="primary" asLink to="https://app.posthog.com/#panel=max">
+  Chat with PostHog AI
+</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>
