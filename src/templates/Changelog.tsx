@@ -111,6 +111,40 @@ type RoadmapNode = {
             }
         }
     }
+    githubUrls?: any
+    githubPRMetadata?: any
+}
+
+const exampleGitHubData = {
+    url: 'https://api.github.com/repos/PostHog/posthog-js/pulls/2565',
+    html_url: 'https://github.com/PostHog/posthog-js/pull/2565',
+    review_comments_url: 'https://api.github.com/repos/PostHog/posthog.com/pulls/13819/comments',
+    comments_url: 'https://api.github.com/repos/PostHog/posthog.com/issues/13819/comments',
+    number: 2565,
+    comments: 5,
+    review_comments: 17,
+    maintainer_can_modify: false,
+    commits: 9,
+    additions: 85,
+    deletions: 4,
+    changed_files: 6,
+    user: {
+        login: 'pauldambra',
+        avatar_url: 'https://avatars.githubusercontent.com/u/984817?v=4',
+        html_url: 'https://github.com/pauldambra',
+    },
+    commenters: [
+        {
+            login: 'edwinyjlim',
+            avatar_url: 'https://avatars.githubusercontent.com/u/1308609?v=4',
+            html_url: 'https://github.com/edwinyjlim',
+        },
+        {
+            login: 'SaraMiteva',
+            avatar_url: 'https://avatars.githubusercontent.com/u/28488260?v=4',
+            html_url: 'https://github.com/SaraMiteva',
+        },
+    ],
 }
 
 export const Change = ({ title, teamName, media, description, cta }) => {
@@ -156,60 +190,62 @@ export const Change = ({ title, teamName, media, description, cta }) => {
 const EmojiReactions = () => {
     const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
 
-    const supportedEmojis = [
-        '🦔',
-        '🙌',
-        '👏',
-        '🤘',
-        '🤌',
-        '👍',
-        '💅',
-        '😮',
-        '😮‍💨',
-        '🫨',
-        '🤯',
-        '😂',
-        '😁',
-        '🤠',
-        '🤖',
-        '🧙',
-        '✨',
-        '🚀',
-        '👀',
-        '💯',
-        '🔥',
-        '❤️',
-        '💙',
-        '💥',
-        '✅',
-        '➕',
-        '🎉',
-        '🌶️',
-        '🧠',
-        '🚢',
-        '⚡️',
-        '🎀',
-        '🍻',
-        '🍾',
-        '💃',
-        '🪩',
-        '🎯',
-        '🚨',
-        '🦄',
-        '🐸',
-        '🌈',
-        '💐',
-    ]
+    const emojiMap = {
+        hedgehog: '🦔',
+        'raised-hands': '🙌',
+        clap: '👏',
+        'rock-on': '🤘',
+        'pinched-fingers': '🤌',
+        'thumbs-up': '👍',
+        'nail-polish': '💅',
+        surprised: '😮',
+        exhale: '😮‍💨',
+        shaking: '🫨',
+        'mind-blown': '🤯',
+        laugh: '😂',
+        grin: '😁',
+        cowboy: '🤠',
+        robot: '🤖',
+        wizard: '🧙',
+        sparkles: '✨',
+        rocket: '🚀',
+        eyes: '👀',
+        hundred: '💯',
+        fire: '🔥',
+        heart: '❤️',
+        'blue-heart': '💙',
+        boom: '💥',
+        check: '✅',
+        plus: '➕',
+        party: '🎉',
+        'hot-pepper': '🌶️',
+        brain: '🧠',
+        ship: '🚢',
+        zap: '⚡️',
+        ribbon: '🎀',
+        beers: '🍻',
+        champagne: '🍾',
+        dancer: '💃',
+        'disco-ball': '🪩',
+        target: '🎯',
+        siren: '🚨',
+        unicorn: '🦄',
+        frog: '🐸',
+        rainbow: '🌈',
+        bouquet: '💐',
+    }
 
-    const handleEmojiSelect = (emoji: string) => {
+    const exampleEmojis = Object.values(emojiMap).slice(4, 7)
+
+    const handleEmojiSelect = (emojiKey: keyof typeof emojiMap) => {
         // TODO: Add logic to handle emoji selection
-        console.log('Selected emoji:', emoji)
+        console.log('Selected emoji:', emojiKey, emojiMap[emojiKey])
         setIsEmojiPickerOpen(false)
     }
 
     return (
         <>
-            {supportedEmojis.slice(0, 3).map((emoji, index) => (
+            {exampleEmojis.map((emoji, index) => (
                 <div
                     key={index}
                     className="bg-accent/30 rounded-lg px-3 flex flex-row items-center gap-x-1 hover:cursor-pointer hover:bg-accent/50 border border-transparent hover:border-primary"
@@ -231,14 +267,14 @@ const EmojiReactions = () => {
                 side="top"
             >
                 <div className="grid grid-cols-7 gap-1 px-2 max-h-[140px] overflow-y-auto scrollbar-hide">
-                    {supportedEmojis.map((emoji, index) => (
+                    {(Object.keys(emojiMap) as Array<keyof typeof emojiMap>).map((emojiKey, index) => (
                         <button
                             key={index}
-                            onClick={() => handleEmojiSelect(emoji)}
+                            onClick={() => handleEmojiSelect(emojiKey)}
                             className="text-xl hover:bg-accent/50 rounded transition-colors py-1 px-1.5"
-                            title={emoji}
+                            title={emojiKey}
                         >
-                            {emoji}
+                            {emojiMap[emojiKey]}
                         </button>
                     ))}
                 </div>
@@ -247,58 +283,74 @@ const EmojiReactions = () => {
     )
 }
 
-const GitHubPRInfo = () => {
+const GitHubPRInfo = ({ roadmap }: { roadmap: RoadmapNode }) => {
+    console.log('ROADMAP@@@@@', roadmap)
+    const gitHubData = roadmap.githubPRMetadata ? roadmap.githubPRMetadata : exampleGitHubData
+
     return (
         <>
             <div className="flex flex-row items-center">
                 <IconGitBranch className="w-4 h-4 opacity-50 mr-1" />
-                <a href="" className="opacity-50">
-                    #14324
+                <a href={gitHubData.html_url} target="_blank" rel="noopener noreferrer" className="opacity-50">
+                    #{gitHubData.number}
                 </a>
             </div>
             <div className="flex flex-row items-center">
                 <IconPeople className="w-4 h-4 opacity-50 shrink-0 mr-1" />
                 <div className="flex flex-row items-center group">
-                    {[
-                        'https://github.com/edwinyjlim.png',
-                        'https://github.com/edwinyjlim.png',
-                        'https://github.com/edwinyjlim.png',
-                    ].map((avatar, index, array) => (
-                        <div
-                            key={`${avatar}-${index}`}
-                            className={`relative transition-all duration-200 ${
-                                index > 0 ? '-ml-2 group-hover:ml-0.5' : ''
-                            }`}
-                            style={{ zIndex: array.length - index }}
+                    {[gitHubData.user, ...gitHubData.commenters].map((commenter, index, array) => (
+                        <Tooltip
+                            key={`${commenter.login}`}
+                            trigger={
+                                <div
+                                    className={`relative transition-all duration-200 ${
+                                        index > 0 ? '-ml-2 group-hover:ml-0.5' : ''
+                                    }`}
+                                    style={{ zIndex: array.length - index }}
+                                >
+                                    <img
+                                        src={commenter.avatar_url}
+                                        className="w-5 h-5 rounded-full border-primary border"
+                                    />
+                                </div>
+                            }
+                            side="top"
                         >
-                            <img src={avatar} className="w-5 h-5 rounded-full border-primary border" />
-                        </div>
+                            <a
+                                href={commenter.html_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="opacity-50 font-semibold underline"
+                            >
+                                {commenter.login}
+                            </a>
+                        </Tooltip>
                     ))}
                 </div>
             </div>
             <div className="flex flex-row items-center">
                 <IconCode className="w-4 h-4 opacity-50 shrink-0 mr-1" />
                 <div className="flex flex-row gap-x-1">
-                    <span className="text-green font-semibold">+13,402</span>{' '}
-                    <span className="text-red font-semibold">-20,004</span>
+                    <span className="text-green font-semibold">+{gitHubData.additions.toLocaleString()}</span>{' '}
+                    <span className="text-red font-semibold">-{gitHubData.deletions.toLocaleString()}</span>
                 </div>
             </div>
             <div className="flex flex-row items-center">
                 <IconCommit className="w-4 h-4 opacity-50 mr-1" />
-                <a href="" className="opacity-50">
-                    20
+                <a href={gitHubData.html_url + '/commits'} className="opacity-50">
+                    {gitHubData.commits}
                 </a>
             </div>
             <div className="flex flex-row items-center">
                 <IconDocument className="w-4 h-4 opacity-50 mr-1" />
-                <a href="" className="opacity-50">
-                    5
+                <a href={gitHubData.html_url + '/files'} className="opacity-50">
+                    {gitHubData.changed_files}
                 </a>
             </div>
             <div className="flex flex-row items-center">
                 <IconComment className="w-4 h-4 opacity-50 mr-1" />
-                <a href="" className="opacity-50">
-                    12
+                <a href={gitHubData.html_url} className="opacity-50">
+                    {gitHubData.comments + gitHubData.review_comments}
                 </a>
             </div>
         </>
@@ -320,8 +372,6 @@ const Roadmap = ({
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
     const [width, setWidth] = useState(450)
     const [isResizing, setIsResizing] = useState(false)
-
-    console.log('ROADMAP', roadmap)
 
     const handleDragResize = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
         setIsResizing(true)
@@ -459,7 +509,7 @@ const Roadmap = ({
                 </div>
 
                 <div className="px-4 py-4 grid grid-cols-3 gap-x-3 gap-y-2 text-sm bg-primary border-t border-primary">
-                    <GitHubPRInfo />
+                    <GitHubPRInfo roadmap={roadmap} />
                 </div>
 
                 {roadmap.cta?.url && (
@@ -1020,7 +1070,7 @@ export default function Changelog({
                                 onCategoryChange={(value) => filterNavigate('category', value)}
                                 categoryFilterValue={categoryFilter}
                             />
-                            {isModerator && (
+                            {!isModerator && (
                                 <div className="space-x-1">
                                     <Tooltip
                                         trigger={<OSButton size="md" icon={<IconPlus />} onClick={handleAddFeature} />}
