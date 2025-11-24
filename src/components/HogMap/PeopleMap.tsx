@@ -53,12 +53,26 @@ type ProfileNode = {
     avatar?: { url?: string }
 }
 
+const buildMemberQuery = (m: ProfileNode): string | null => {
+    const location = m.location && m.location.trim()
+    const country = m.country && m.country.trim()
+    const parts: string[] = []
+    if (location) {
+        parts.push(location)
+    }
+    if (country) {
+        parts.push(country)
+    }
+    const q = parts.join(', ')
+    return q || null
+}
+
 const useCoordsByQuery = (isClient: boolean, token: string | undefined, members: ProfileNode[]) => {
     const [coordsByQuery, setCoordsByQuery] = useState<Record<string, Coordinates>>({})
     const queries = useMemo(() => {
         const set = new Set<string>()
         members.forEach((m) => {
-            const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
+            const q = buildMemberQuery(m)
             if (q) {
                 set.add(q)
             }
@@ -89,9 +103,13 @@ const useCoordsByQuery = (isClient: boolean, token: string | undefined, members:
                         const coords = feature?.geometry?.coordinates
                         if (Array.isArray(coords) && coords.length >= 2) {
                             results[q] = { longitude: coords[0], latitude: coords[1] }
+                        } else {
+                            // Fallback to London if geocoding fails
+                            results[q] = { longitude: -0.1276, latitude: 51.5074 }
                         }
                     } catch {
-                        // ignore single failure
+                        // On failure, fallback to London
+                        results[q] = { longitude: -0.1276, latitude: 51.5074 }
                     }
                 })
             )
@@ -128,6 +146,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
         () => (Array.isArray(membersProp) ? (membersProp as ProfileNode[]) : ([] as ProfileNode[])),
         [membersProp]
     )
+
     const coordsByQuery = useCoordsByQuery(isClient, token, members)
 
     useEffect(() => {
@@ -141,9 +160,9 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
     // Precompute static spread positions for members that share the same location query
     useEffect(() => {
         const next: Record<string, Array<{ longitude: number; latitude: number }>> = {}
-        // Build groups by geocode query with known coordinates
+        // Build groups by resolved coordinates (rounded) so similar queries share jitter set
         const groups = members.reduce((acc, m) => {
-            const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
+            const q = buildMemberQuery(m)
             if (!q) {
                 return acc
             }
@@ -151,15 +170,16 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
             if (!coords) {
                 return acc
             }
-            if (!acc[q]) {
-                acc[q] = { coords, profiles: [] as ProfileNode[] }
+            const key = `${coords.longitude.toFixed(4)},${coords.latitude.toFixed(4)}`
+            if (!acc[key]) {
+                acc[key] = { coords, profiles: [] as ProfileNode[] }
             }
-            acc[q].profiles.push(m)
+            acc[key].profiles.push(m)
             return acc
         }, {} as Record<string, { coords: Coordinates; profiles: ProfileNode[] }>)
-        Object.entries(groups).forEach(([q, { coords, profiles }]) => {
+        Object.entries(groups).forEach(([key, { coords, profiles }]) => {
             const offsets = computeOffsets(profiles.length, DEFAULT_SPREAD_RADIUS)
-            next[q] = offsets.map(({ dx, dy }) => ({
+            next[key] = offsets.map(({ dx, dy }) => ({
                 longitude: coords.longitude + dx,
                 latitude: coords.latitude + dy,
             }))
@@ -209,7 +229,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                 // People clusters
                 const peopleFeatures = membersRef.current
                     .map((m) => {
-                        const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
+                        const q = buildMemberQuery(m)
                         if (!q) return null
                         const coords = coordsByQueryRef.current[q]
                         if (!coords) return null
@@ -233,7 +253,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
             // Show individual people markers when zoomed in
             // Group members by their geocode query so people in the same location are combined
             const groups = membersRef.current.reduce((acc, m) => {
-                const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
+                const q = buildMemberQuery(m)
                 if (!q) {
                     return acc
                 }
@@ -241,17 +261,18 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                 if (!coords) {
                     return acc
                 }
-                if (!acc[q]) {
-                    acc[q] = { coords, profiles: [] as ProfileNode[], label: q }
+                const key = `${coords.longitude.toFixed(4)},${coords.latitude.toFixed(4)}`
+                if (!acc[key]) {
+                    acc[key] = { coords, profiles: [] as ProfileNode[], label: q, key }
                 }
-                acc[q].profiles.push(m)
+                acc[key].profiles.push(m)
                 return acc
-            }, {} as Record<string, { coords: Coordinates; profiles: ProfileNode[]; label: string }>)
+            }, {} as Record<string, { coords: Coordinates; profiles: ProfileNode[]; label: string; key: string }>)
 
-            Object.values(groups).forEach(({ coords: { longitude, latitude }, profiles, label }) => {
+            Object.values(groups).forEach(({ coords: { longitude, latitude }, profiles, label, key }) => {
                 const avatarFallback =
                     'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
-                const positions = jitteredPositionsByGroupRef.current[label] || []
+                const positions = jitteredPositionsByGroupRef.current[key] || []
                 profiles.forEach((p, idx) => {
                     const pos = positions[idx] || { longitude, latitude }
                     const el = document.createElement('div')
