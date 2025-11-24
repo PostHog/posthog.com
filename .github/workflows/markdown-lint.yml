@@ -1,0 +1,27 @@
+name: Markdown Lint
+
+on:
+    pull_request:
+        paths:
+            - '**.md'
+            - '**.mdx'
+            - '.markdownlint-cli2.jsonc'
+            - '.github/workflows/markdown-lint.yml'
+
+permissions:
+    contents: read
+
+jobs:
+    markdownlint:
+        name: Lint Markdown Files
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Run markdownlint-cli2
+              uses: DavidAnson/markdownlint-cli2-action@v21
+              with:
+                  globs: '**/*.{md,mdx}'
+                  config: '.markdownlint-cli2.jsonc'
