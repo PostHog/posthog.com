@@ -3,7 +3,7 @@ title: How RayFit uses PostHog AI to make all their data accessible
 customer: RayFit
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/Rayfit_1aa197cafd.png
-date: 2025-11-21
+date: 2025-11-24
 ---
 
 [RayFit](https://www.rayfit.com/) is building an AI personal training app that solves for the hardest part of fitness: showing up consistently. Their conversational AI coach, _Ray_, generates personalized workouts based on equipment, energy level, and available time.
@@ -45,11 +45,12 @@ What surprised him most is how quickly others leaned into it. “Some of the eng
 ![screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_11_21_at_12_44_44_PM_8bbeaf8389.png)
 <Caption>How many exercises in a workout have their AI rep counting feature available</Caption>
 
-_PostHog AI helped me add a moving average to this insight. This was really cool to build because it quantifies that we're getting better over time._ 
+_"PostHog AI helped us add a moving average to this insight. This was really cool to build because it quantifies that we're getting better over time."_ 
 
 ![screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rayfit_exercises_chart_b8a00f06de.png)
 <Caption>Rep Counting Performance (blue means high accuracy outcomes)</Caption>
-_One of our early computer vision features uses AI to count how many reps you're doing in an exercise. PostHog AI helped us build the visualization in seconds._
+
+_"One of our early computer vision features uses AI to count how many reps you're doing in an exercise. PostHog AI helped us build the visualization in seconds."_
 
 ## AI that gets out of your way
 
@@ -57,7 +58,7 @@ For his own work with SQL, Alan says "I usually know exactly what I want to writ
 
 About 25% of the time, he has PostHog start from scratch. "Usually when I just don't have time to really think about it and want to do something in parallel. I'll kick it off, come back, and then collaborate.” 
 
-Alan also uses PostHog AI to ask questions about the docs. “It’s really helpful that PostHog AI is context aware of the page or insight I’m looking at,” he says. “I can ask vague things like what does this mean or how do I configure this setting without having to explain much.”
+Alan also uses PostHog AI to ask questions about the docs. “It’s really helpful that PostHog AI is context aware of the page or insight I’m looking at,” he says. “I can ask vague things like _what does this mean_ or _how do I configure this setting_ without having to explain much.”
 
 ## So what’s the real superpower here?
 
