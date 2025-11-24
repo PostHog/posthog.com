@@ -10,7 +10,6 @@ import OSButton from 'components/OSButton'
 import useProduct from 'hooks/useProduct'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
-
 import Logo from 'components/Logo'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
@@ -129,6 +128,57 @@ const ProductCount = () => {
 
 const AppCount = () => {
   return <>{APP_COUNT}</>
+}
+
+const PersonasTabs = () => {
+  const [selectedStage, setSelectedStage] = React.useState('engineer')
+
+  const PersonasOptions: ToggleOption[] = [
+    {
+      label: 'Engineer',
+      value: 'engineer',
+      // icon: <IconLaptop className="size-5" />,
+    },
+    {
+      label: 'Vibe coder',
+      value: 'vibe-coder',
+      // icon: <IconLaptop className="size-5" />,
+    },
+    {
+      label: 'ELI5',
+      value: 'eli5',
+      // icon: <IconLaptop className="size-5" />,
+    },
+  ]
+
+  return (
+    <>
+      <ToggleGroup
+        hideTitle
+        title="Role"
+        options={PersonasOptions}
+        onValueChange={setSelectedStage}
+        value={selectedStage}
+        className="mb-2"
+      />
+
+      {selectedStage === 'engineer' && (
+        <div className="flex flex-col gap-2">
+          eng content
+        </div>
+      )}
+      {selectedStage === 'vibe-coder' && (
+        <div className="flex flex-col gap-2">
+          vibe content
+        </div>
+      )}
+      {selectedStage === 'eli5' && (
+        <div className="flex flex-col gap-2">
+          eli5 content
+        </div>
+      )}
+    </>
+  )
 }
 
 const Button = ({ url, children }: { url: string; children: React.ReactNode }) => {
@@ -296,6 +346,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     kind: 'flow',
     props: [],
     Editor: () => <AppCount />,
+  },
+  {
+    name: 'PersonasTabs',
+    kind: 'flow',
+    props: [],
+    Editor: () => <PersonasTabs />,
   },
   {
     name: 'CTAs',
