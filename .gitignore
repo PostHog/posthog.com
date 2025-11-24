@@ -35,3 +35,9 @@ yarn.lock
 
 # Generated data files
 src/data/mcp-tools.json
+
+# Python cache
+__pycache__
+*.pyc
+*.pyo
+

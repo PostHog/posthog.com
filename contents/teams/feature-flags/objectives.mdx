@@ -1,18 +1,17 @@
 ### Q4 2025 Objectives
 This quarter we're making feature flags faster, more reliable, and way more automated. That means better (and more!) SDKs, more powerful local evaluation, supporting real-time use cases, and using AI to handle the tedious stuff. We're also talking to a bunch of users to figure out what to build next, fixing the foundations so nothing breaks, and shipping features that make flags easier to wrangle when you have thousands of them.
 
-#### Awesome documentation <TeamMember name="Dylan Martin" photo />
+#### Awesome documentation <TeamMember name="Dylan Martin" photo /> driving, shared across the team
 
 Our docs should be as good as the <SmallTeam slug="experiment" />'s. We're partnering with the <SmallTeam slug="content" /> to refresh everything, writing real-world walkthroughs, and making it easier to jump from the app to the right docs.
 
-#### Make local evaluation the default server-side evaluation strategy <TeamMember name="Dylan Martin" photo /> <TeamMember name="Phil Haack" photo />
+#### Make local evaluation the default server-side evaluation strategy <TeamMember name="Phil Haack" photo />
 
 Local eval means faster, cheaper, and more reliable flags. We want to make it the default for server-side SDKs by:
 - Finishing HyperCache integration to decouple `/local_evaluation` from Postgres
-- Solving the properties problem that's been blocking adoption (it's not very ergonomic to bring your own properties to everything, we'd love to improve this experience)
 - Rewriting the endpoint in Rust for better performance
 - Adding ETag support for efficient caching
-- Writing better docs and guides
+- Writing better docs and guides; specifically around best practices for including relevant properties alongside the flag when calling e.g. `getFeatureFlag` or `isFeatureEnabled`
 
 #### Ship a Java SDK <TeamMember name="Dustin Byrne" photo />
 
@@ -30,34 +29,21 @@ Cohorts has been neglected. We're clearing the backlog and fixing UI bugs so coh
 
 Some use cases need instant flag updates without refreshes or restarts. We're adding WebSocket/SSE-based real-time updates to key SDKs.
 
-#### Finish behavioral cohort targeting <TeamMember name="Dylan Martin" photo />
+#### Finish behavioral cohort targeting <TeamMember name="Gustavo Henrique Strassburger" photo />
 
 We started building a system to track behavioral cohort membership in a fast data store. We're finishing it so you can target flags based on behavioral cohorts.
-
-#### Flag staleness cleanup system <TeamMember name="Phil Haack" photo />
-
-Stale flags are tech debt. We're building tools to:
-- Detect and surface stale flags in the UI
-- Make cleanup easy with in-app tools
-- Generate prompts for Cursor/Claude Code to remove flags from your codebase
-- (Stretch) Automated actions like creating cleanup PRs
 
 #### Natural language flag creation <TeamMember name="Phil Haack" photo />
 
 Building flags with AI. You describe what you want in plain English, Max builds the flag.
 
-#### Enhanced flag evaluation debugging capabilities <TeamMember name="Dylan Martin" photo />
-
-Better visibility into why flags evaluate the way they do. We're adding evaluation properties to `$feature_flag_called` events and [showing flag evaluation history for each person](https://github.com/PostHog/posthog/issues/38669).
-
-#### Platform improvements <TeamMember name="Dylan Martin" photo />
+#### Platform improvements <TeamMember name="Dylan Martin" photo /> and <TeamMember name="Phil Haack" photo />
 
 Fixing the foundations:
 - Finishing the persons database split (shared with ingestion team)
+- Move our deployment progress from a rollout (this experience was buggy at scale) to a k8s deployment
+- Right-size our k8s infrastructure with better alerting on nodepool usage and CPU utilization
+- Decouple the flags service from the production redis so that we can have 100% redis usage for flag/team reads AND we can isolate flags redis usage from main app redis usage (useful for any future incidents; minimizes the blast radius)
 - Decoupling `/flags` from the writer database so flags stay up even when the database is down
 - Rewriting `/evaluation_reasons` in Rust
 - Deprecating the legacy `/decide` endpoint
-
-#### Customer interviews around UI/UX improvements (Shared goal across the team)
-
-We're doing 10+ user interviews about flags UI and cohorts to figure out what to build next. This feeds directly into our roadmap for both products.

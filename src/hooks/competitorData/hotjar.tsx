@@ -81,6 +81,7 @@ export const hotjar = {
                 clickmaps: false,
                 conditional_recording: false,
                 event_timeline: true,
+                crash_reports: false,
                 export_to_json: true,
                 export_to_video: false,
                 filter_by_user_or_event: false,
