@@ -339,15 +339,15 @@ Use this option if you want to add additional configurations to your app that ar
 
 SCIM lets you automatically sync users and their roles from your identity provider (IdP) into PostHog. This is useful for automatically creating accounts and assigning roles when someone joins your organization, and disabling accounts when they leave. 
 
-> SCIM is currently in beta and available on request for customers on the Enterprise plan. [Contact us](https://posthog.com/support) to enable it for your organization.
+> SCIM is currently in beta and available on request for customers on the Enterprise plan. [Contact us](https://app.posthog.com/#panel=support) to enable it for your organization.
 
 ### Prerequisites
 
 Before setting up SCIM, you need:
 
-1. A verified authentication domain in PostHog
+1. Verified authentication domain in PostHog
 2. SAML SSO configured and working for your domain
-3. An Identity Provider that supports SCIM 2.0 (e.g., Okta, OneLogin)
+3. Identity Provider that supports SCIM 2.0 (e.g., Okta, Entra ID, OneLogin)
 
 ### Setting up SCIM
 
@@ -375,11 +375,10 @@ Before setting up SCIM, you need:
 
 ### How SCIM works
 
-- When you assign a user to PostHog in your IdP, they're automatically created in PostHog with the mapped role.
-- Changes to user details or roles in your IdP automatically sync to PostHog.
-- When you remove a user from PostHog in your IdP, their PostHog account is deactivated.
-- If a user already exists in PostHog with the same email, SCIM updates their details and role to match your IdP.
-- If roles already exist in PostHog, they are matched by name (case sensitive).
+- Assigning a user to the SCIM app in your IdP creates them in PostHog with the mapped role.
+- Removing a user from the app deactivates their PostHog account.
+- Users with matching emails in PostHog are updated to match the IdP details and roles.
+- Roles are matched by name (case-sensitive).
 
 ### Example: Okta
 
@@ -393,12 +392,11 @@ If your existing SAML app supports SCIM 2.0 provisioning, you can use it. Otherw
 
 4. In PostHog, open your existing SAML configuration for the domain and update it with the new values from Okta (SAML ACS URL, SAML Entity ID, and SAML X.509 certificate).
 
-
 5. Navigate to the "Provisioning" tab in Okta and click "Configure API Integration".
 
 6. Check "Enable API integration" and enter:
-    - **SCIM Base URL** from PostHog
-    - **API Token** (the SCIM Token from PostHog)
+    - `SCIM Base URL` from PostHog
+    - `API Token` (the SCIM Token from PostHog)
 
 7. Click "Test API Credentials" to verify the connection.
 
