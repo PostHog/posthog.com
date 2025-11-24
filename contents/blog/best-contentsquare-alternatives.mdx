@@ -204,20 +204,15 @@ You also can't tie recordings to custom user properties or filter by feature fla
 <ProductComparisonTable
     competitors={['microsoft_clarity','contentsquare']}
     rows={[
-        'session_replay.features.canvas_recording',
-        'heatmaps',
+        'session_replay.analysis.heatmaps',
+        'heatmaps.features.scrollmaps',
         'heatmaps.features.rage_clicks',
-        'session_replay.features.crash_reports',        
-        'session_replay.platform_support.mobile_app_recordings',
-        'session_replay.privacy.features.privacy_masking',
-        'session_replay.analysis.features.console_logs',
-        'session_replay.analysis.features.performance_monitoring',
-        'session_replay.targeting.features.filter_by_user_or_event',
-        'session_replay.targeting.conditional_recording',
-        'session_replay.ai.features.ai_summaries',
+        'session_replay.features.sentiment_scores',
+        'session_replay.ai.ai_summaries',
+        'session_replay.targeting.filter_by_user_or_event',
         'product_analytics.funnels',
         'product_analytics.user_paths',
-        'platform.pricing.transparent_pricing',
+        'session_replay.platform_support.mobile_app_recordings',
         {
             label: 'Pricing',
             description: 'Cost structure',
