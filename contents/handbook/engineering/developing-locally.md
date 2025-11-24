@@ -53,27 +53,9 @@ Windows isn't supported natively. But, Windows users can run a Linux virtual mac
 
 In case some steps here have fallen out of date, please tell us about it – feel free to [submit a patch](https://github.com/PostHog/posthog.com/blob/master/contents/handbook/engineering/developing-locally.md)!
 
-## Option 1: Developing with Codespaces
+## Option 1: Developing locally
 
-This is a faster option to get up and running. If you don't want to or can't use Codespaces, continue from the next section.
-
-1. Create your codespace.
-![](https://user-images.githubusercontent.com/890921/231489405-cb2010b4-d9e3-4837-bfdf-b2d4ef5c5d0b.png)
-2. Update it to 8-core machine type (the smallest is probably too small to get PostHog running properly).
-![](https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png)
-3. Open the codespace, using one of the "Open in" options from the list.
-4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
-5. Ensure that you are using the right Node version (`nvm install 22 && nvm use 22`) then, in another terminal, run `pnpm i` (and use the same terminal for the following commands).
-6. Then run `uv sync`
-    - If this doesn't activate your python virtual environment, run `uv venv` (install `uv` following the [uv standalone installer guide](https://docs.astral.sh/uv/getting-started/installation/#standalone-installer) if needed)
-7. Install `sqlx-cli` with `cargo install sqlx-cli` (install Cargo following the [Cargo getting started guide](https://doc.rust-lang.org/cargo/getting-started/installation.html) if needed)
-8. Now run `DEBUG=1 ./bin/migrate`
-9. Install [mprocs](https://github.com/pvolok/mprocs#installation) (`cargo install mprocs`)
-10. Run `./bin/start`.
-11. Open browser to <http://localhost:8010/>.
-12. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
-
-## Option 2: Developing locally
+This is the recommended option for most developers.
 
 ### Prerequisites
 
@@ -111,8 +93,10 @@ This is a faster option to get up and running. If you don't want to or can't use
 Clone the [PostHog repo](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
 
 ```bash
-git clone https://github.com/PostHog/posthog && cd posthog/
+git clone --filter=blob:none https://github.com/PostHog/posthog && cd posthog/
 ```
+
+**Performance tip:** The `--filter=blob:none` flag uses a blobless clone, which downloads only the current file contents (not historical versions). This reduces the clone from ~3 GB to a few hundred MB and makes the initial clone **15-17x faster**. You still get full git history for commands like `git log` and `git diff`.
 
 > The `feature-flags` container relies on the presence of the GeoLite cities
 > database in the `/share` directory. If you haven't run `./bin/start` this database may not exist.
@@ -121,11 +105,11 @@ git clone https://github.com/PostHog/posthog && cd posthog/
 >
 > `chmod 0755 ./share/GeoLite2-City.mmdb`
 
-### Instant setup
+### Setup with Flox (recommended)
 
-You can set your development environment up instantly using [Flox](https://flox.dev/).
+Set up your development environment instantly using [Flox](https://flox.dev/).
 
-Flox is a development environment manager – it ensures we all have the same right system-level dependencies when developing PostHog. It's pretty much an npm for runtimes and libraries: `.flox/env/manifest.toml` is like `package.json`, `.flox/env/manifest.lock` is akin to `package-lock.json`, and `.flox/cache/` resembles `node_modules/`.
+Flox is a development environment manager that ensures we all have the same system-level dependencies when developing PostHog. It's like npm for runtimes and libraries: `.flox/env/manifest.toml` is like `package.json`, `.flox/env/manifest.lock` is akin to `package-lock.json`, and `.flox/cache/` resembles `node_modules/`.
 
 To get PostHog running in a dev environment:
 
@@ -151,9 +135,9 @@ This is it – you should be seeing the PostHog app at <a href="http://localhost
 
 You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
 
-### Manual setup
+### Manual setup (advanced)
 
-Alternatively, if you'd prefer not to use [Flox-based instant setup](#instant-setup), you can set the environment up manually:
+If you prefer not to use Flox, you can set up the environment manually. Check `.flox/env/manifest.toml` in the repository to see what dependencies and versions are needed. The manual setup involves:
 
 #### 1. Spin up external services
 
@@ -444,6 +428,26 @@ To get some practical test data into your brand-new instance of PostHog, run `DE
 This is it – you should be seeing the PostHog app at <a href="http://localhost:8010" target="_blank">http://localhost:8010</a>.
 
 You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
+
+## Option 2: Developing with Codespaces
+
+This is a faster option to get up and running if you can't or don't want to set up locally.
+
+1. Create your codespace.
+![](https://user-images.githubusercontent.com/890921/231489405-cb2010b4-d9e3-4837-bfdf-b2d4ef5c5d0b.png)
+2. Update it to 8-core machine type (the smallest is probably too small to get PostHog running properly).
+![](https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png)
+3. Open the codespace, using one of the "Open in" options from the list.
+4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
+5. Ensure that you are using the right Node version (`nvm install 22 && nvm use 22`) then, in another terminal, run `pnpm i` (and use the same terminal for the following commands).
+6. Then run `uv sync`
+    - If this doesn't activate your python virtual environment, run `uv venv` (install `uv` following the [uv standalone installer guide](https://docs.astral.sh/uv/getting-started/installation/#standalone-installer) if needed)
+7. Install `sqlx-cli` with `cargo install sqlx-cli` (install Cargo following the [Cargo getting started guide](https://doc.rust-lang.org/cargo/getting-started/installation.html) if needed)
+8. Now run `DEBUG=1 ./bin/migrate`
+9. Install [mprocs](https://github.com/pvolok/mprocs#installation) (`cargo install mprocs`)
+10. Run `./bin/start`.
+11. Open browser to <http://localhost:8010/>.
+12. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
 ## Testing
 
