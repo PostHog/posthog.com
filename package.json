@@ -221,6 +221,7 @@
         "husky": "^4.2.5",
         "jest": "^27.0.6",
         "lint-staged": "^10.2.12",
+        "markdownlint-cli2": "0.19.0",
         "postcss": "^8.4.14",
         "postinstall-postinstall": "^2.1.0",
         "prettier": "^2.1.0",
@@ -246,7 +247,8 @@
     ],
     "lint-staged": {
         "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
-        "*.{js,ts,tsx}": "eslint"
+        "*.{js,ts,tsx}": "eslint",
+        "*.{md,mdx}": "markdownlint-cli2 --fix"
     },
     "packageManager": "yarn@1.22.19"
 }

@@ -71,7 +71,7 @@ There was no significant spend on marketing for the first 100K users - this all 
 
 ## Culture
 
-### How do you manage the product?
+### How do you manage the product?
 
 "Product have the final say. Engineering will have points of view, they need to raise these with Product. You end up with tons of huge meetings if you don't take this approach."
 

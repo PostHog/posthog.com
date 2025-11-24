@@ -1,5 +1,4 @@
 import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
-import { useLayoutData } from 'components/Layout/hooks'
 import Tooltip from 'components/Tooltip'
 import { Link as GatsbyLink } from 'gatsby'
 import React, { useMemo } from 'react'
@@ -7,7 +6,7 @@ import usePostHog from '../../hooks/usePostHog'
 import { IconArrowUpRight } from '@posthog/icons'
 import ContextMenu, { ContextMenuItemProps } from 'components/RadixUI/ContextMenu'
 import { useApp } from '../../context/App'
-import { useLocation } from '@reach/router'
+import { useWindow } from '../../context/Window'
 
 // Helper function to create standard context menu items
 const createStandardMenuItems = (url: string, state?: any, isExternal = false): ContextMenuItemProps[] => {
@@ -58,17 +57,6 @@ export interface Props {
     contextMenu?: boolean
     customMenuItems?: ContextMenuItemProps[]
     [key: string]: any // Allow spread props
-}
-
-function useSafeLocationHref(): string | undefined {
-    try {
-        return useLocation().href
-    } catch {
-        if (typeof window !== 'undefined') {
-            return window.location.href
-        }
-        return undefined
-    }
 }
 
 const MenuWrapper = ({
@@ -122,9 +110,10 @@ export default function Link({
     customMenuItems = [],
     ...other
 }: Props): JSX.Element {
+    const { appWindow } = useWindow()
     const { posthogInstance, compact } = useApp()
     const posthog = usePostHog()
-    const locationHref = useSafeLocationHref()
+    const locationHref = appWindow?.element?.props?.location?.href
     const initialUrl = to || href
     const url = resolveRelativeLink(initialUrl, locationHref)
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
