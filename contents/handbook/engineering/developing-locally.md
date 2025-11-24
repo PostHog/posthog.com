@@ -96,6 +96,8 @@ This is a faster option to get up and running. If you don't want to or can't use
 
 > Note: Importantly, if you're internal to PostHog we are standardised on working on MacOS (not Linux). In part because of SOC2 auditing gains it gives us.
 
+> Note: If you’re running PostHog on WSL2, make sure to change both $HOST_BIND and the debugpy IP to 0.0.0.0, and set the debugpy port to 0.0.0.0:5678.
+
 1. Install Docker following the [official Docker installation guide for Ubuntu](https://docs.docker.com/engine/install/ubuntu/).
 
 2. Install the `build-essential` package:
