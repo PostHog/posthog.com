@@ -132,6 +132,13 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     },
                     githubUrls: true,
                     githubPRMetadata: true,
+                    emojiReactions: {
+                        populate: {
+                            profiles: {
+                                fields: ['id'],
+                            },
+                        },
+                    },
                 },
             },
             {

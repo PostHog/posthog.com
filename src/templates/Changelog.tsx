@@ -113,6 +113,7 @@ type RoadmapNode = {
     }
     githubUrls?: any
     githubPRMetadata?: any
+    emojiReactions?: Array<any>
 }
 
 export const Change = ({ title, teamName, media, description, cta }) => {
@@ -155,7 +156,8 @@ export const Change = ({ title, teamName, media, description, cta }) => {
     )
 }
 
-const EmojiReactions = () => {
+const EmojiReactions = ({ roadmap }: { roadmap: RoadmapNode }) => {
+    const { user } = useUser()
     const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
 
     const emojiMap = {
@@ -203,7 +205,12 @@ const EmojiReactions = () => {
         bouquet: '💐',
     }
 
-    const exampleEmojis = Object.values(emojiMap).slice(4, 7)
+    const checkUserHasReacted = (reaction: any): boolean => {
+        return (
+            reaction.profiles?.data?.some((profile: { id?: number | string }) => profile.id === user?.profile?.id) ??
+            false
+        )
+    }
 
     const handleEmojiSelect = (emojiKey: keyof typeof emojiMap) => {
         // TODO: Add logic to handle emoji selection
@@ -213,15 +220,28 @@ const EmojiReactions = () => {
 
     return (
         <>
-            {exampleEmojis.map((emoji, index) => (
-                <div
-                    key={index}
-                    className="bg-accent/30 rounded-lg px-3 flex flex-row items-center gap-x-1 hover:cursor-pointer hover:bg-accent/50 border border-transparent hover:border-primary"
-                >
-                    <span className="text-lg">{emoji}</span>
-                    <span className="text-xs">3</span>
-                </div>
-            ))}
+            {roadmap.emojiReactions?.map((reaction, index) => {
+                const userHasReacted = checkUserHasReacted(reaction)
+                return (
+                    <div
+                        key={index}
+                        className={`rounded-lg px-2 flex flex-row items-center gap-x-1 hover:cursor-pointer border ${
+                            userHasReacted
+                                ? 'border-orange bg-orange/20 dark:bg-orange-dark dark:border-orange-dark'
+                                : 'bg-accent/30 hover:bg-accent/50 border-transparent hover:border-primary'
+                        }`}
+                    >
+                        <span className="text-lg">{emojiMap[reaction.emoji]}</span>
+                        <span
+                            className={`text-xs ${
+                                userHasReacted ? 'font-semibold text-orange-dark dark:text-white' : ''
+                            }`}
+                        >
+                            {reaction.profiles?.data?.length}
+                        </span>
+                    </div>
+                )
+            })}
             <Popover
                 trigger={
                     <button className="bg-accent/30 rounded-lg px-3 py-1 flex flex-row items-center gap-x-1 hover:cursor-pointer hover:bg-accent/50 border border-transparent hover:border-primary mr-2">
@@ -493,9 +513,11 @@ const Roadmap = ({
                         {roadmap.description && (
                             <div className="py-2 px-4">
                                 <Markdown>{roadmap.description}</Markdown>
-                                <div className="mt-8 mb-4 flex flex-row flex-wrap gap-1">
-                                    <EmojiReactions />
-                                </div>
+                                {roadmap.emojiReactions && (
+                                    <div className="mt-8 mb-4 flex flex-row flex-wrap gap-1">
+                                        <EmojiReactions roadmap={roadmap} />
+                                    </div>
+                                )}
                             </div>
                         )}
                     </ScrollArea>

@@ -96,6 +96,14 @@ export const query = graphql`
                         type
                     }
                 }
+                emojiReactions {
+                    emoji
+                    profiles {
+                        data {
+                            id
+                        }
+                    }
+                }
             }
         }
     }
