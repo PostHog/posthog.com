@@ -118,14 +118,11 @@ export const setClusterVisibility = (map: any, id: string, visible: boolean): vo
 
 // Shared cluster zoom threshold used across maps
 export const CLUSTER_ZOOM = 4
-
-// Compute jitter radius based on current zoom level
-export const computeJitterRadius = (zoom: number): number => {
-    return Math.max(0.0001, Math.min(1.8, 1.8 / Math.pow(Math.max(zoom, 1), 2.8)))
-}
-
 // Check if map style is ready for layer/source manipulation
 export const isStyleReady = (map: any): boolean => {
     if (!map) return false
     return typeof map.isStyleLoaded !== 'function' || map.isStyleLoaded()
 }
+
+// Fixed-radius used to spread overlapping markers once per dataset (in degrees)
+export const DEFAULT_SPREAD_RADIUS = 0.02

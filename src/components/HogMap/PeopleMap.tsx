@@ -8,8 +8,8 @@ import {
     ensureClusterLayers,
     setClusterVisibility,
     CLUSTER_ZOOM,
-    computeJitterRadius,
     isStyleReady,
+    DEFAULT_SPREAD_RADIUS,
 } from './hogMapUtils'
 
 const PopupHtml = ({
@@ -119,6 +119,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
     const renderMarkersRef = useRef<(() => void) | null>(null)
     const membersRef = useRef<ProfileNode[]>([])
     const coordsByQueryRef = useRef<Record<string, Coordinates>>({})
+    const jitteredPositionsByGroupRef = useRef<Record<string, Array<{ longitude: number; latitude: number }>>>({})
 
     const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
     const styleUrl = 'mapbox://styles/mapbox/streets-v12'
@@ -136,6 +137,43 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
     useEffect(() => {
         coordsByQueryRef.current = coordsByQuery
     }, [coordsByQuery])
+
+    // Precompute static spread positions for members that share the same location query
+    useEffect(() => {
+        const next: Record<string, Array<{ longitude: number; latitude: number }>> = {}
+        // Build groups by geocode query with known coordinates
+        const groups = members.reduce((acc, m) => {
+            const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
+            if (!q) {
+                return acc
+            }
+            const coords = coordsByQuery[q]
+            if (!coords) {
+                return acc
+            }
+            if (!acc[q]) {
+                acc[q] = { coords, profiles: [] as ProfileNode[] }
+            }
+            acc[q].profiles.push(m)
+            return acc
+        }, {} as Record<string, { coords: Coordinates; profiles: ProfileNode[] }>)
+        Object.entries(groups).forEach(([q, { coords, profiles }]) => {
+            const offsets = computeOffsets(profiles.length, DEFAULT_SPREAD_RADIUS)
+            next[q] = offsets.map(({ dx, dy }) => ({
+                longitude: coords.longitude + dx,
+                latitude: coords.latitude + dy,
+            }))
+        })
+        jitteredPositionsByGroupRef.current = next
+        // If map is ready, refresh markers to reflect the precomputed spread
+        if (mapRef.current && isStyleReady(mapRef.current)) {
+            try {
+                renderMarkersRef.current && renderMarkersRef.current()
+            } catch {
+                // ignore
+            }
+        }
+    }, [members, coordsByQuery])
 
     const setupMap = useCallback(() => {
         if (!isClient) {
@@ -193,8 +231,6 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
             }
 
             // Show individual people markers when zoomed in
-            // Jitter radius scales with zoom (much more spread when zoomed out, tighter when zoomed in)
-            const jitterRadius = computeJitterRadius(zoom)
             // Group members by their geocode query so people in the same location are combined
             const groups = membersRef.current.reduce((acc, m) => {
                 const q = (m.location && m.location.trim()) || (m.country && m.country.trim())
@@ -215,9 +251,9 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
             Object.values(groups).forEach(({ coords: { longitude, latitude }, profiles, label }) => {
                 const avatarFallback =
                     'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
-                const offsets = computeOffsets(profiles.length, jitterRadius)
+                const positions = jitteredPositionsByGroupRef.current[label] || []
                 profiles.forEach((p, idx) => {
-                    const { dx, dy } = offsets[idx]
+                    const pos = positions[idx] || { longitude, latitude }
                     const el = document.createElement('div')
                     el.className = 'size-12 rounded-full flex items-center justify-center overflow-hidden'
                     const img = document.createElement('img')
@@ -253,7 +289,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
 
                     const popup = new mapboxgl.Popup({ offset: 12, className: 'ph-mapbox-popup' }).setHTML(popupHtml)
                     const marker = new mapboxgl.Marker({ element: el })
-                        .setLngLat([longitude + dx, latitude + dy])
+                        .setLngLat([pos.longitude, pos.latitude])
                         .setPopup(popup)
                         .addTo(mapRef.current)
                     marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())

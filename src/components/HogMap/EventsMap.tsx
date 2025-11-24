@@ -15,8 +15,8 @@ import {
     ensureClusterLayers,
     setClusterVisibility,
     CLUSTER_ZOOM,
-    computeJitterRadius,
     isStyleReady,
+    DEFAULT_SPREAD_RADIUS,
 } from './hogMapUtils'
 
 export const LAYER_EVENTS_UPCOMING = 'layer-events-upcoming'
@@ -74,6 +74,7 @@ export default function EventsMap({
     const renderMarkersRef = useRef<(() => void) | null>(null)
     const eventsRef = useRef<any[]>([])
     const coordsByEventIdRef = useRef<Record<number, { latitude: number; longitude: number }>>({})
+    const jitteredCoordsByEventIdRef = useRef<Record<number, { latitude: number; longitude: number }>>({})
     const layersRef = useRef<string[] | undefined>(layers)
     const prevSelectedIdRef = useRef<number | null>(null)
     const skipNextSelectionTransitionRef = useRef<boolean>(false)
@@ -90,6 +91,42 @@ export default function EventsMap({
     useEffect(() => {
         coordsByEventIdRef.current = coordsByEventId
     }, [coordsByEventId])
+
+    // Precompute static spread positions for events that share the same exact coordinates
+    useEffect(() => {
+        const byKey: Record<string, { coords: Coordinates; eventIds: number[] }> = {}
+        ;(events as any[]).forEach((e) => {
+            const id = e?.id as number
+            if (id == null) return
+            const coords = coordsByEventId[id]
+            if (!coords) return
+            // Group by rounded lat/lng (consistent with previous grouping)
+            const key = `${coords.longitude.toFixed(4)},${coords.latitude.toFixed(4)}`
+            if (!byKey[key]) {
+                byKey[key] = { coords, eventIds: [] }
+            }
+            byKey[key].eventIds.push(id)
+        })
+        const next: Record<number, { latitude: number; longitude: number }> = {}
+        Object.values(byKey).forEach(({ coords, eventIds }) => {
+            // Stable ordering for deterministic assignment
+            const sortedIds = [...eventIds].sort((a, b) => a - b)
+            const offsets = computeOffsets(sortedIds.length, DEFAULT_SPREAD_RADIUS)
+            sortedIds.forEach((eid, idx) => {
+                const { dx, dy } = offsets[idx] || { dx: 0, dy: 0 }
+                next[eid] = { latitude: coords.latitude + dy, longitude: coords.longitude + dx }
+            })
+        })
+        jitteredCoordsByEventIdRef.current = next
+        // If map is ready, refresh markers to reflect the precomputed spread
+        if (mapRef.current && (typeof mapRef.current.isStyleLoaded !== 'function' || mapRef.current.isStyleLoaded())) {
+            try {
+                renderMarkersRef.current && renderMarkersRef.current()
+            } catch {
+                // ignore
+            }
+        }
+    }, [events, coordsByEventId])
     // Refresh markers when the visible layers change
     useEffect(() => {
         layersRef.current = layers
@@ -190,179 +227,119 @@ export default function EventsMap({
             }
 
             if (showUpcoming) {
-                const jitterRadius = computeJitterRadius(zoom)
-                // Group upcoming events by coordinate
                 const upcomingEvents = eventsRef.current.filter((e) => (e.date ? new Date(e.date) >= today : false))
-                const groups = upcomingEvents.reduce((acc, e) => {
-                    const coords = coordsByEventIdRef.current[e.id]
-                    if (!coords) {
-                        return acc
-                    }
-                    const key = `${coords.longitude.toFixed(4)},${coords.latitude.toFixed(4)}`
-                    if (!acc[key]) {
-                        acc[key] = {
-                            coords,
-                            events: [] as EventItem[],
-                            label: e.location?.label || 'Event',
+                ;(upcomingEvents as EventItem[]).forEach((ev: EventItem) => {
+                    const base = coordsByEventIdRef.current[ev.id]
+                    if (!base) return
+                    const jitter = jitteredCoordsByEventIdRef.current[ev.id] || base
+                    const el = document.createElement('div')
+                    el.classList.add('w-5', 'h-5', 'rounded-full', 'bg-accent', 'border-2', 'border-white', 'shadow')
+
+                    const date = ev.date
+                        ? new Date(ev.date).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric',
+                          })
+                        : ''
+                    const href = ev.link || ''
+                    const name = ev.name || 'Event'
+                    const desc = (ev as any).description || ''
+                    const label = (ev as any)?.location?.label || 'Event'
+                    const popupHtml = PopupHtml({
+                        name,
+                        dateText: date,
+                        label,
+                        desc,
+                        href,
+                        variant: 'upcoming',
+                    })
+                    const popup = new mapboxgl.Popup({ offset: 12, className: 'ph-mapbox-popup' }).setHTML(popupHtml)
+                    const marker = new mapboxgl.Marker({ element: el })
+                        .setLngLat([jitter.longitude, jitter.latitude])
+                        .setPopup(popup)
+                        .addTo(mapRef.current)
+                    // Clicking a marker should show the popup (no navigation)
+                    markerByEventIdRef.current[ev.id] = marker
+                    marker.getElement().style.cursor = 'pointer'
+                    marker.getElement().addEventListener('click', () => {
+                        try {
+                            marker.togglePopup()
+                        } catch {
+                            console.error('Error toggling popup')
                         }
-                    }
-                    acc[key].events.push(e)
-                    return acc
-                }, {} as Record<string, { coords: Coordinates; events: EventItem[]; label: string }>)
-
-                ;(Object.values(groups) as Array<{ coords: Coordinates; events: EventItem[]; label: string }>).forEach(
-                    ({ coords: { longitude, latitude }, events, label }) => {
-                        const offsets = computeOffsets(events.length, jitterRadius)
-                        ;(events as EventItem[]).forEach((ev: EventItem, idx: number) => {
-                            const { dx, dy } = offsets[idx]
-                            const el = document.createElement('div')
-                            el.style.width = '20px'
-                            el.style.height = '20px'
-                            el.style.borderRadius = '10px'
-                            el.style.background = '#FF9500' // upcoming
-                            el.style.border = '2px solid #ffffff'
-                            el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.25)'
-
-                            const date = ev.date
-                                ? new Date(ev.date).toLocaleDateString('en-US', {
-                                      month: 'short',
-                                      day: 'numeric',
-                                      year: 'numeric',
-                                  })
-                                : ''
-                            const href = ev.link || ''
-                            const name = ev.name || 'Event'
-                            const desc = (ev as any).description || ''
-                            const popupHtml = PopupHtml({
-                                name,
-                                dateText: date,
-                                label,
-                                desc,
-                                href,
-                                variant: 'upcoming',
-                            })
-                            const popup = new mapboxgl.Popup({ offset: 12, className: 'ph-mapbox-popup' }).setHTML(
-                                popupHtml
-                            )
-
-                            const marker = new mapboxgl.Marker({ element: el })
-                                .setLngLat([longitude + dx, latitude + dy])
-                                .setPopup(popup)
-                                .addTo(mapRef.current)
-                            // Clicking a marker should show the popup (no navigation)
-                            markerByEventIdRef.current[ev.id] = marker
-                            marker.getElement().style.cursor = 'pointer'
-                            marker.getElement().addEventListener('click', () => {
-                                try {
-                                    marker.togglePopup()
-                                } catch {
-                                    console.error('Error toggling popup')
-                                }
-                                if (typeof onEventClick === 'function') {
-                                    try {
-                                        // Selection originated from map; skip external transition
-                                        skipNextSelectionTransitionRef.current = true
-                                        onEventClick(ev.id as number)
-                                    } catch {
-                                        console.error('Error calling onEventClick')
-                                    }
-                                }
-                            })
-                            marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
-                            marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
-                            markersRef.current.push(marker)
-                        })
-                    }
-                )
+                        if (typeof onEventClick === 'function') {
+                            try {
+                                // Selection originated from map; skip external transition
+                                skipNextSelectionTransitionRef.current = true
+                                onEventClick(ev.id as number)
+                            } catch {
+                                console.error('Error calling onEventClick')
+                            }
+                        }
+                    })
+                    marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                    marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                    markersRef.current.push(marker)
+                })
             }
             if (showPast) {
-                const jitterRadius = computeJitterRadius(zoom)
-                // Group past events by coordinate
                 const pastEvents = eventsRef.current.filter((e) => (e.date ? new Date(e.date) < today : false))
-                const groups = pastEvents.reduce((acc, e) => {
-                    const coords = coordsByEventIdRef.current[e.id]
-                    if (!coords) {
-                        return acc
-                    }
-                    const key = `${coords.longitude.toFixed(4)},${coords.latitude.toFixed(4)}`
-                    if (!acc[key]) {
-                        acc[key] = {
-                            coords,
-                            events: [] as EventItem[],
-                            label: e.location?.label || 'Event',
+                ;(pastEvents as EventItem[]).forEach((ev: EventItem) => {
+                    const base = coordsByEventIdRef.current[ev.id]
+                    if (!base) return
+                    const jitter = jitteredCoordsByEventIdRef.current[ev.id] || base
+                    const el = document.createElement('div')
+                    el.classList.add('w-5', 'h-5', 'rounded-full', 'bg-gray', 'border-2', 'border-white', 'shadow')
+
+                    const date = ev.date
+                        ? new Date(ev.date).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric',
+                          })
+                        : ''
+                    const href = ev.link || ''
+                    const name = ev.name || 'Event'
+                    const desc = (ev as any).description || ''
+                    const label = (ev as any)?.location?.label || 'Event'
+                    const popupHtml = PopupHtml({
+                        name,
+                        dateText: date,
+                        label,
+                        desc,
+                        href,
+                        variant: 'past',
+                    })
+                    const popup = new mapboxgl.Popup({ offset: 12, className: 'ph-mapbox-popup' }).setHTML(popupHtml)
+
+                    const marker = new mapboxgl.Marker({ element: el })
+                        .setLngLat([jitter.longitude, jitter.latitude])
+                        .setPopup(popup)
+                        .addTo(mapRef.current)
+                    // Clicking a marker should show the popup (no navigation)
+                    markerByEventIdRef.current[ev.id] = marker
+                    marker.getElement().style.cursor = 'pointer'
+                    marker.getElement().addEventListener('click', () => {
+                        try {
+                            marker.togglePopup()
+                        } catch {
+                            console.error('Error toggling popup')
                         }
-                    }
-                    acc[key].events.push(e)
-                    return acc
-                }, {} as Record<string, { coords: Coordinates; events: EventItem[]; label: string }>)
-
-                ;(Object.values(groups) as Array<{ coords: Coordinates; events: EventItem[]; label: string }>).forEach(
-                    ({ coords: { longitude, latitude }, events, label }) => {
-                        const offsets = computeOffsets(events.length, jitterRadius)
-                        ;(events as EventItem[]).forEach((ev: EventItem, idx: number) => {
-                            const { dx, dy } = offsets[idx]
-                            const el = document.createElement('div')
-                            el.classList.add(
-                                'w-5',
-                                'h-5',
-                                'rounded-full',
-                                'bg-gray',
-                                'border-2',
-                                'border-white',
-                                'shadow'
-                            )
-
-                            const date = ev.date
-                                ? new Date(ev.date).toLocaleDateString('en-US', {
-                                      month: 'short',
-                                      day: 'numeric',
-                                      year: 'numeric',
-                                  })
-                                : ''
-                            const href = ev.link || ''
-                            const name = ev.name || 'Event'
-                            const desc = (ev as any).description || ''
-                            const popupHtml = PopupHtml({
-                                name,
-                                dateText: date,
-                                label,
-                                desc,
-                                href,
-                                variant: 'past',
-                            })
-                            const popup = new mapboxgl.Popup({ offset: 12, className: 'ph-mapbox-popup' }).setHTML(
-                                popupHtml
-                            )
-
-                            const marker = new mapboxgl.Marker({ element: el })
-                                .setLngLat([longitude + dx, latitude + dy])
-                                .setPopup(popup)
-                                .addTo(mapRef.current)
-                            // Clicking a marker should show the popup (no navigation)
-                            markerByEventIdRef.current[ev.id] = marker
-                            marker.getElement().style.cursor = 'pointer'
-                            marker.getElement().addEventListener('click', () => {
-                                try {
-                                    marker.togglePopup()
-                                } catch {
-                                    console.error('Error toggling popup')
-                                }
-                                if (typeof onEventClick === 'function') {
-                                    try {
-                                        // Selection originated from map; skip external transition
-                                        skipNextSelectionTransitionRef.current = true
-                                        onEventClick(ev.id as number)
-                                    } catch {
-                                        console.error('Error calling onEventClick')
-                                    }
-                                }
-                            })
-                            marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
-                            marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
-                            markersRef.current.push(marker)
-                        })
-                    }
-                )
+                        if (typeof onEventClick === 'function') {
+                            try {
+                                // Selection originated from map; skip external transition
+                                skipNextSelectionTransitionRef.current = true
+                                onEventClick(ev.id as number)
+                            } catch {
+                                console.error('Error calling onEventClick')
+                            }
+                        }
+                    })
+                    marker.getElement().addEventListener('mouseenter', () => marker.togglePopup())
+                    marker.getElement().addEventListener('mouseleave', () => marker.togglePopup())
+                    markersRef.current.push(marker)
+                })
             }
             // No places or people in EventsMap
         }
@@ -443,7 +420,7 @@ export default function EventsMap({
     const handleExternalSelection = useCallback(() => {
         const id = selectedEventId
         if (!mapRef.current || id == null) return
-        const coords = coordsByEventIdRef.current[id]
+        const coords = jitteredCoordsByEventIdRef.current[id] || coordsByEventIdRef.current[id]
         if (!coords) return
         const targetZoom = 8
         // If the selection originated from a map click, just ensure popup is open without camera transition
