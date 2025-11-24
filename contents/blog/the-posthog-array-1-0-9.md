@@ -73,7 +73,7 @@ Thank you [Tyler-Churchill](https://github.com/Tyler-Churchill).
 
 Thank you [SanketDG](https://github.com/SanketDG) for helping clean up our multiple users and invite team box – this was quite messy and is now much neater.
 
-## Repo round up
+## Repo round up
 
 Here is what we thought was cool and interesting in the last week:
 

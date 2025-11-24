@@ -36,7 +36,7 @@ If you accidentally set the wrong channel for a feed or mess up some other pylon
 
 ## Using MS Teams via Pylon
 
-Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, set up a Slack channel according to the instructions above. Then, follow these steps:
+Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon, or Dana for one. Then, set up a Slack channel according to the instructions above. Then, follow these steps:
 
 1. In Teams go to "See all your teams" and then "Create team". When naming the team the expected syntax is `[CustomerName-PostHog]. Make sure to set the team type to Public and name the first channel "Shared" then finish creating the team.
 2. Now, go to the team you created and go to the Apps tab. Click "Get more apps" and open the Posthog Team app that's under "Built for your org". Select the Shared channel from your newly created team.

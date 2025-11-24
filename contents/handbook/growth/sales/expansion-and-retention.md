@@ -27,7 +27,7 @@ Your objectives are to:
 
 ### 1. Get people to talk to you
 
-We have a handy guide to this [here](/handbook/growth/sales/getting-people-to-talk-to-you).
+We have a handy guide to this in the [getting people to talk to you playbook](/handbook/growth/sales/getting-people-to-talk-to-you).
 
 ### 2. Get a longer term commitment (maybe!)
 
