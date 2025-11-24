@@ -96,7 +96,7 @@ Clone the [PostHog repo](https://github.com/posthog/posthog). All future command
 git clone --filter=blob:none https://github.com/PostHog/posthog && cd posthog/
 ```
 
-**Performance tip:** The `--filter=blob:none` flag uses a blobless clone, which downloads only the current file contents (not historical versions). This reduces the clone from ~3 GB to a few hundred MB and makes the initial clone **15-17x faster**. You still get full git history for commands like `git log` and `git diff`.
+**Performance tip:** The `--filter=blob:none` flag downloads all commit history and tree structure, but defers file contents (blobs) until needed. This reduces the clone from ~3 GB to a few hundred MB and makes the initial clone **15-17x faster**. You still get full git history for commands like `git log` and `git diff` – blobs are fetched on demand as you use them.
 
 > The `feature-flags` container relies on the presence of the GeoLite cities
 > database in the `/share` directory. If you haven't run `./bin/start` this database may not exist.
@@ -137,7 +137,10 @@ You can now change PostHog in any way you want. See [Project structure](/handboo
 
 ### Manual setup (advanced)
 
-If you prefer not to use Flox, you can set up the environment manually. Check `.flox/env/manifest.toml` in the repository to see what dependencies and versions are needed. The manual setup involves:
+If you prefer not to use Flox, you can set up the environment manually. Check `.flox/env/manifest.toml` in the repository to see what dependencies and versions are needed.
+
+<details>
+<summary>Manual setup instructions</summary>
 
 #### 1. Spin up external services
 
@@ -428,6 +431,8 @@ To get some practical test data into your brand-new instance of PostHog, run `DE
 This is it – you should be seeing the PostHog app at <a href="http://localhost:8010" target="_blank">http://localhost:8010</a>.
 
 You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
+
+</details>
 
 ## Option 2: Developing with Codespaces
 
