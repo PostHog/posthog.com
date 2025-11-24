@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We plan objectives every quarter. The <SmallTeam slug="blitzscale" /> set the direction and overall objectives for PostHog, and then small teams set their own objectives that feed into these. Longer-term planning that the Blitzscale team does is covered separately [here](/handbook/exec/annual-planning). 
+We plan objectives every quarter. The <SmallTeam slug="blitzscale" /> set the direction and overall objectives for PostHog, and then small teams set their own objectives that feed into these. Longer-term planning that the Blitzscale team does is covered separately in the [annual planning guide](/handbook/exec/annual-planning). 
 
 ## How quarterly planning works
 

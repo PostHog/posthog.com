@@ -4,14 +4,14 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## The TL;DR 
+## The TL;DR
 
 * If you get paged, acknowledge the page and look at the associated metrics - if it looks even slightly bad and not recovering - **CREATE AN INCIDENT**
 * If you notice something broken with the app (not just a bug) - **CREATE AN INCIDENT**
 * If you are not sure - **CREATE AN INCIDENT**
-* _How?_ 
+* _How?_
   * Click the `Declare incident` button on an alert or do `/inc` in any slack channel
-* _What?_ 
+* _What?_
   * Join the incident channel
   * Assign yourself as lead (you can always re-assign later)
   * Share whatever info you have at that time
@@ -23,7 +23,7 @@ showTitle: true
 ![alert-example](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/incidentio_alert_343ed2062b.png)
 
 
-Incidents are going to happen. If you'd rather watch a Loom, check out an incident drill recording [here](https://www.loom.com/share/5603d887624f4981bc089677cb4b8611).
+Incidents are going to happen. If you'd rather watch a Loom, check out an [incident drill Loom recording](https://www.loom.com/share/5603d887624f4981bc089677cb4b8611).
 
 
 > **Anyone can declare an incident and, when in doubt, you should always raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong. It's _always_ better to sound an alarm than not.  
@@ -144,8 +144,9 @@ When handling a security incident, please align with the incident responder team
 
 In the case that we need to update a _specific_ customer, such as when an individual org is causing an incident, we should let them know as soon as possible. Use the following guidelines to ensure smooth communication:
 
+- Look up the customer's org in Vitally to see if the org has an Account Exec assigned (`PostHog Default Dashboard` / righthand column, scroll down to `Key Roles`.) If so, let the AE know about the situation early.
 - Ensure you are always contacting the admins of the impacted organization
-- Communication is best done through Zendesk. The Support team can create tickets and handle this for you. 
+- Communication is best done through Zendesk. It's usually best for the customer's assigned person (check Vitally), or the Support team, to create tickets and handle the communication for you, but don't wait if it's really urgent. 
 - Before sending any comms, check with the incident lead. Then, share a ticket link in the incident channel. 
 - If action is needed, it's better to take that action and inform the user than to ask the user to do it.
 - If you're not able to take the required action, give the user deadlines for the changes they need to do and explain what will happen if they don't meet the deadline.
