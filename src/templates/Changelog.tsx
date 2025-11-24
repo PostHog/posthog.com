@@ -115,38 +115,6 @@ type RoadmapNode = {
     githubPRMetadata?: any
 }
 
-const exampleGitHubData = {
-    url: 'https://api.github.com/repos/PostHog/posthog-js/pulls/2565',
-    html_url: 'https://github.com/PostHog/posthog-js/pull/2565',
-    review_comments_url: 'https://api.github.com/repos/PostHog/posthog.com/pulls/13819/comments',
-    comments_url: 'https://api.github.com/repos/PostHog/posthog.com/issues/13819/comments',
-    number: 2565,
-    comments: 5,
-    review_comments: 17,
-    maintainer_can_modify: false,
-    commits: 9,
-    additions: 85,
-    deletions: 4,
-    changed_files: 6,
-    user: {
-        login: 'pauldambra',
-        avatar_url: 'https://avatars.githubusercontent.com/u/984817?v=4',
-        html_url: 'https://github.com/pauldambra',
-    },
-    commenters: [
-        {
-            login: 'edwinyjlim',
-            avatar_url: 'https://avatars.githubusercontent.com/u/1308609?v=4',
-            html_url: 'https://github.com/edwinyjlim',
-        },
-        {
-            login: 'SaraMiteva',
-            avatar_url: 'https://avatars.githubusercontent.com/u/28488260?v=4',
-            html_url: 'https://github.com/SaraMiteva',
-        },
-    ],
-}
-
 export const Change = ({ title, teamName, media, description, cta }) => {
     return (
         <>
@@ -285,7 +253,27 @@ const EmojiReactions = () => {
 
 const GitHubPRInfo = ({ roadmap }: { roadmap: RoadmapNode }) => {
     console.log('ROADMAP@@@@@', roadmap)
-    const gitHubData = roadmap.githubPRMetadata ? roadmap.githubPRMetadata : exampleGitHubData
+    const gitHubData = roadmap.githubPRMetadata
+    const scrollContainerRef = React.useRef<HTMLDivElement>(null)
+
+    const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+        if (scrollContainerRef.current) {
+            const container = scrollContainerRef.current
+            const canScrollLeft = container.scrollLeft > 0
+            const canScrollRight = container.scrollLeft < container.scrollWidth - container.clientWidth
+
+            if ((e.deltaY > 0 && canScrollRight) || (e.deltaY < 0 && canScrollLeft)) {
+                e.preventDefault()
+                container.scrollLeft += e.deltaY
+            }
+        }
+    }
+
+    const handleMouseLeave = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollTo({ left: 0, behavior: 'smooth' })
+        }
+    }
 
     return (
         <>
@@ -295,22 +283,27 @@ const GitHubPRInfo = ({ roadmap }: { roadmap: RoadmapNode }) => {
                     #{gitHubData.number}
                 </a>
             </div>
-            <div className="flex flex-row items-center">
+            <div className="flex flex-row items-center overflow-hidden">
                 <IconPeople className="w-4 h-4 opacity-50 shrink-0 mr-1" />
-                <div className="flex flex-row items-center group">
+                <div
+                    ref={scrollContainerRef}
+                    onWheel={handleWheel}
+                    onMouseLeave={handleMouseLeave}
+                    className="flex flex-row items-center group overflow-x-auto scrollbar-hide"
+                >
                     {[gitHubData.user, ...gitHubData.commenters].map((commenter, index, array) => (
                         <Tooltip
-                            key={`${commenter.login}`}
+                            key={`${commenter.login}-${roadmap.id}-${index}`}
                             trigger={
                                 <div
-                                    className={`relative transition-all duration-200 ${
+                                    className={`relative transition-all duration-200 flex-none ${
                                         index > 0 ? '-ml-2 group-hover:ml-0.5' : ''
                                     }`}
                                     style={{ zIndex: array.length - index }}
                                 >
                                     <img
                                         src={commenter.avatar_url}
-                                        className="w-5 h-5 rounded-full border-primary border"
+                                        className="w-5 h-5 min-w-5 min-h-5 rounded-full border-primary border flex-none"
                                     />
                                 </div>
                             }
@@ -508,9 +501,11 @@ const Roadmap = ({
                     </ScrollArea>
                 </div>
 
-                <div className="px-4 py-4 grid grid-cols-3 gap-x-3 gap-y-2 text-sm bg-primary border-t border-primary">
-                    <GitHubPRInfo roadmap={roadmap} />
-                </div>
+                {roadmap.githubPRMetadata && (
+                    <div className="px-4 py-4 grid grid-cols-3 gap-x-3 gap-y-2 text-sm bg-primary border-t border-primary">
+                        <GitHubPRInfo roadmap={roadmap} />
+                    </div>
+                )}
 
                 {roadmap.cta?.url && (
                     <div className="mt-auto py-2 px-4 border-t border-primary">
@@ -1070,7 +1065,7 @@ export default function Changelog({
                                 onCategoryChange={(value) => filterNavigate('category', value)}
                                 categoryFilterValue={categoryFilter}
                             />
-                            {!isModerator && (
+                            {isModerator && (
                                 <div className="space-x-1">
                                     <Tooltip
                                         trigger={<OSButton size="md" icon={<IconPlus />} onClick={handleAddFeature} />}

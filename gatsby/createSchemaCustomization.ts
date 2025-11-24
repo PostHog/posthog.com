@@ -235,6 +235,29 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type Roadmap implements Node {
       year: Int
+      githubPRMetadata: GitHubPRMetadata
+    }
+    type GitHubPRMetadata {
+      url: String
+      html_url: String
+      review_comments_url: String
+      comments_url: String
+      commits_url: String
+      number: Int
+      comments: Int
+      review_comments: Int
+      commits: Int
+      additions: Int
+      deletions: Int
+      changed_files: Int
+      user: GitHubUser
+      commenters: [GitHubUser]
+    }
+    type GitHubUser {
+      login: String
+      avatar_url: String
+      html_url: String
+      type: String
     }
     type ProductDataProductsPlans {
       contact_support: Boolean
