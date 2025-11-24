@@ -7,8 +7,7 @@ import { IconArrowRight, IconCalendar, IconThumbsUp, IconUndo } from '@posthog/i
 import OSTabs from 'components/OSTabs'
 import Markdown from 'markdown-to-jsx'
 import { useRoadmaps } from 'hooks/useRoadmaps'
-import { Authentication } from 'components/Squeak/components/Authentication'
-import SideModal from 'components/Modal/SideModal'
+import { AuthModal } from 'components/Roadmap/AuthModal'
 import { CallToAction } from 'components/CallToAction'
 import { User, useUser } from 'hooks/useUser'
 import ProgressBar from 'components/ProgressBar'
@@ -54,21 +53,12 @@ const VoteButton = ({ roadmap, onLike }: { roadmap: any; onLike: () => void }) =
 
     return (
         <>
-            <SideModal title={roadmap.attributes.name} open={authModalOpen} setOpen={setAuthModalOpen}>
-                <h4 className="mb-4">Sign into PostHog.com</h4>
-                <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                    <p className="text-sm mb-2">
-                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                    </p>
-
-                    <p className="text-sm mb-0">
-                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
-                        account.
-                    </p>
-                </div>
-
-                <Authentication initialView="sign-in" onAuth={onAuth} showBanner={false} showProfile={false} />
-            </SideModal>
+            <AuthModal
+                authModalOpen={authModalOpen}
+                setAuthModalOpen={setAuthModalOpen}
+                onAuth={onAuth}
+                title={roadmap.attributes.name}
+            />
             <CallToAction
                 disabled={loading}
                 onClick={() => {

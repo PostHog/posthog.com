@@ -25,8 +25,7 @@ import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 import EditWrapper from './EditWrapper'
-import { Authentication } from '..'
-import SideModal from 'components/Modal/SideModal'
+import { AuthModal } from 'components/Roadmap/AuthModal'
 import ReportSpamButton from './ReportSpamButton'
 import OSButton from 'components/OSButton'
 import { useToast } from '../../../context/Toast'
@@ -199,34 +198,6 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
                 </ul>
             )}
         </div>
-    )
-}
-
-const AuthModal = ({
-    authModalOpen,
-    setAuthModalOpen,
-    onAuth,
-}: {
-    authModalOpen: boolean
-    setAuthModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-    onAuth: (user: User) => void
-}) => {
-    return (
-        <SideModal open={authModalOpen} setOpen={setAuthModalOpen}>
-            <h4 className="mb-4">Sign into PostHog.com</h4>
-            <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                <p className="text-sm mb-2">
-                    <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                </p>
-
-                <p className="text-sm mb-0">
-                    We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
-                    account.
-                </p>
-            </div>
-
-            <Authentication onAuth={onAuth} initialView="sign-in" showBanner={false} showProfile={false} />
-        </SideModal>
     )
 }
 

@@ -2,7 +2,9 @@ import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 're
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { navigate } from 'gatsby'
-import { useUser } from 'hooks/useUser'
+import { useUser, User } from 'hooks/useUser'
+import { addRoadmapEmojiReaction, useRoadmapEmojiReactions } from 'hooks/useRoadmaps'
+import { AuthModal } from 'components/Roadmap/AuthModal'
 import {
     IconDownload,
     IconPencil,
@@ -11,11 +13,8 @@ import {
     IconX,
     IconEmojiAdd,
     IconGitBranch,
-    IconPerson,
     IconCommit,
     IconCode,
-    IconCode2,
-    IconGroups,
     IconPeople,
     IconDocument,
     IconComment,
@@ -156,9 +155,17 @@ export const Change = ({ title, teamName, media, description, cta }) => {
     )
 }
 
-const EmojiReactions = ({ roadmap }: { roadmap: RoadmapNode }) => {
-    const { user } = useUser()
+const EmojiReactions = ({
+    roadmap,
+    onReactionUpdate,
+}: {
+    roadmap: RoadmapNode
+    onReactionUpdate?: (roadmapId: number | string) => void
+}) => {
+    const { user, getJwt } = useUser()
     const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
+    const [authModalOpen, setAuthModalOpen] = useState(false)
+    const [pendingEmoji, setPendingEmoji] = useState<string | null>(null)
 
     const emojiMap = {
         hedgehog: '🦔',
@@ -212,10 +219,58 @@ const EmojiReactions = ({ roadmap }: { roadmap: RoadmapNode }) => {
         )
     }
 
-    const handleEmojiSelect = (emojiKey: keyof typeof emojiMap) => {
-        // TODO: Add logic to handle emoji selection
-        console.log('Selected emoji:', emojiKey, emojiMap[emojiKey])
-        setIsEmojiPickerOpen(false)
+    const performEmojiReaction = async (emojiKey: string, authenticatedUser?: User) => {
+        const currentUser = authenticatedUser || user
+        if (!currentUser) return
+
+        try {
+            const existingReaction = roadmap.emojiReactions?.find((r) => r.emoji === emojiKey)
+            const userHasReacted = existingReaction
+                ? existingReaction.profiles?.data?.some(
+                      (profile: { id?: number | string }) => profile.id === currentUser?.profile?.id
+                  ) ?? false
+                : false
+
+            const jwt = await getJwt()
+
+            if (!jwt) {
+                console.error('No JWT token available')
+                return
+            }
+
+            await addRoadmapEmojiReaction({
+                roadmapId: typeof roadmap.id === 'string' ? parseInt(roadmap.id) : roadmap.id,
+                emoji: emojiKey,
+                remove: userHasReacted,
+                jwt,
+            })
+
+            setIsEmojiPickerOpen(false)
+
+            // Trigger a targeted refetch for only this roadmap
+            onReactionUpdate?.(roadmap.id)
+        } catch (error) {
+            console.error('Failed to update emoji reaction:', error)
+        }
+    }
+
+    const handleEmojiSelect = async (emojiKey: keyof typeof emojiMap) => {
+        if (!user) {
+            setPendingEmoji(emojiKey)
+            setAuthModalOpen(true)
+            setIsEmojiPickerOpen(false)
+            return
+        }
+
+        await performEmojiReaction(emojiKey)
+    }
+
+    const onAuth = async (authenticatedUser: User) => {
+        setAuthModalOpen(false)
+        if (pendingEmoji) {
+            await performEmojiReaction(pendingEmoji, authenticatedUser)
+            setPendingEmoji(null)
+        }
     }
 
     return (
@@ -223,11 +278,12 @@ const EmojiReactions = ({ roadmap }: { roadmap: RoadmapNode }) => {
             {roadmap.emojiReactions?.map((reaction, index) => {
                 const userHasReacted = checkUserHasReacted(reaction)
                 return (
-                    <div
+                    <button
                         key={index}
+                        onClick={() => handleEmojiSelect(reaction.emoji as keyof typeof emojiMap)}
                         className={`rounded-lg px-2 flex flex-row items-center gap-x-1 hover:cursor-pointer border ${
                             userHasReacted
-                                ? 'border-orange bg-orange/20 dark:bg-orange-dark dark:border-orange-dark'
+                                ? 'border-orange bg-orange/20 dark:bg-orange-dark/20 dark:border-orange-dark'
                                 : 'bg-accent/30 hover:bg-accent/50 border-transparent hover:border-primary'
                         }`}
                     >
@@ -237,9 +293,9 @@ const EmojiReactions = ({ roadmap }: { roadmap: RoadmapNode }) => {
                                 userHasReacted ? 'font-semibold text-orange-dark dark:text-white' : ''
                             }`}
                         >
-                            {reaction.profiles?.data?.length}
+                            {reaction.profiles?.data?.length.toLocaleString()}
                         </span>
-                    </div>
+                    </button>
                 )
             })}
             <Popover
@@ -254,7 +310,7 @@ const EmojiReactions = ({ roadmap }: { roadmap: RoadmapNode }) => {
                 onOpenChange={setIsEmojiPickerOpen}
                 side="top"
             >
-                <div className="grid grid-cols-7 gap-1 px-2 max-h-[140px] overflow-y-auto scrollbar-hide">
+                <div className="grid grid-cols-7 gap-1 px-2 max-h-[160px] overflow-y-auto scrollbar-hide">
                     {(Object.keys(emojiMap) as Array<keyof typeof emojiMap>).map((emojiKey, index) => (
                         <button
                             key={index}
@@ -267,12 +323,17 @@ const EmojiReactions = ({ roadmap }: { roadmap: RoadmapNode }) => {
                     ))}
                 </div>
             </Popover>
+            <AuthModal
+                authModalOpen={authModalOpen}
+                setAuthModalOpen={setAuthModalOpen}
+                onAuth={onAuth}
+                title="Sign in to add reaction"
+            />
         </>
     )
 }
 
 const GitHubPRInfo = ({ roadmap }: { roadmap: RoadmapNode }) => {
-    console.log('ROADMAP@@@@@', roadmap)
     const gitHubData = roadmap.githubPRMetadata
     const scrollContainerRef = React.useRef<HTMLDivElement>(null)
 
@@ -313,7 +374,7 @@ const GitHubPRInfo = ({ roadmap }: { roadmap: RoadmapNode }) => {
                 >
                     {[gitHubData.user, ...gitHubData.commenters].map((commenter, index, array) => (
                         <Tooltip
-                            key={`${commenter.login}-${roadmap.id}-${index}`}
+                            key={`avatar-${commenter.login}`}
                             trigger={
                                 <div
                                     className={`relative transition-all duration-200 flex-none ${
@@ -323,6 +384,10 @@ const GitHubPRInfo = ({ roadmap }: { roadmap: RoadmapNode }) => {
                                 >
                                     <img
                                         src={commenter.avatar_url}
+                                        alt={`${commenter.login} avatar`}
+                                        loading="lazy"
+                                        decoding="async"
+                                        referrerPolicy="no-referrer"
                                         className="w-5 h-5 min-w-5 min-h-5 rounded-full border-primary border flex-none"
                                     />
                                 </div>
@@ -374,10 +439,12 @@ const Roadmap = ({
     roadmap,
     onClose,
     initialActiveRoadmap,
+    onReactionUpdate,
 }: {
     roadmap: RoadmapNode
     onClose: () => void
     initialActiveRoadmap: RoadmapNode | null
+    onReactionUpdate?: (roadmapId: number | string) => void
 }) => {
     const { appWindow } = useWindow()
     const { isModerator } = useUser()
@@ -385,6 +452,11 @@ const Roadmap = ({
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
     const [width, setWidth] = useState(450)
     const [isResizing, setIsResizing] = useState(false)
+
+    // Fetch fresh emoji reactions when roadmap opens
+    useEffect(() => {
+        onReactionUpdate?.(roadmap.id)
+    }, [roadmap.id])
 
     const handleDragResize = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
         setIsResizing(true)
@@ -515,7 +587,7 @@ const Roadmap = ({
                                 <Markdown>{roadmap.description}</Markdown>
                                 {roadmap.emojiReactions && (
                                     <div className="mt-8 mb-4 flex flex-row flex-wrap gap-1">
-                                        <EmojiReactions roadmap={roadmap} />
+                                        <EmojiReactions roadmap={roadmap} onReactionUpdate={onReactionUpdate} />
                                     </div>
                                 )}
                             </div>
@@ -908,6 +980,19 @@ export default function Changelog({
     const [teamFilter, setTeamFilter] = useState('all')
     const [categoryFilter, setCategoryFilter] = useState('all')
     const hideEmpty = useMemo(() => teamFilter !== 'all' || categoryFilter !== 'all', [teamFilter, categoryFilter])
+    const { emojiReactionsMap, fetchRoadmapReactions } = useRoadmapEmojiReactions()
+
+    // Apply latest emoji reactions to a roadmap
+    const getRoadmapLatestReactions = (roadmap: RoadmapNode): RoadmapNode => {
+        const liveReactions = emojiReactionsMap.get(roadmap.id)
+        const staticReactions = roadmap.emojiReactions
+        const reactions = liveReactions || staticReactions || []
+
+        return {
+            ...roadmap,
+            emojiReactions: reactions,
+        }
+    }
 
     const handleAddFeature = () => {
         addWindow(
@@ -1023,6 +1108,17 @@ export default function Changelog({
         }
     }, [])
 
+    // Update activeRoadmap reactions when emojiReactionsMap changes
+    useEffect(() => {
+        if (activeRoadmap) {
+            const updatedRoadmap = getRoadmapLatestReactions(activeRoadmap)
+            // Only update if reactions actually changed
+            if (updatedRoadmap.emojiReactions !== activeRoadmap.emojiReactions) {
+                setActiveRoadmap(updatedRoadmap)
+            }
+        }
+    }, [emojiReactionsMap])
+
     const filterNavigate = (key: string, value: string) => {
         if (href) {
             const urlObj = new URL(href)
@@ -1063,6 +1159,12 @@ export default function Changelog({
     const handleRoadmapClose = () => {
         setActiveRoadmap(null)
         navigate('')
+    }
+
+    const handleRoadmapClick = (roadmap: RoadmapNode) => {
+        // Apply latest reactions when opening a roadmap
+        const roadmapWithReactions = getRoadmapLatestReactions(roadmap)
+        setActiveRoadmap(roadmapWithReactions)
     }
 
     return (
@@ -1117,7 +1219,7 @@ export default function Changelog({
                                 setPercentageOfScrollInView={setPercentageOfScrollInView}
                                 windowPercentageFromLeft={windowPercentageFromLeft}
                                 setRoadmapsPercentageFromLeft={setRoadmapsPercentageFromLeft}
-                                onRoadmapClick={setActiveRoadmap}
+                                onRoadmapClick={handleRoadmapClick}
                                 containerWidth={containerWidth}
                                 activeRoadmap={activeRoadmap}
                                 hideEmpty={hideEmpty}
@@ -1153,6 +1255,7 @@ export default function Changelog({
                                 roadmap={activeRoadmap}
                                 onClose={handleRoadmapClose}
                                 initialActiveRoadmap={initialActiveRoadmap}
+                                onReactionUpdate={fetchRoadmapReactions}
                             />
                         )}
                     </AnimatePresence>

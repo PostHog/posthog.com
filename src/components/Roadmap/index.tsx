@@ -18,10 +18,9 @@ import {
 } from '@posthog/icons'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import { Skeleton } from 'components/Questions/QuestionsTable'
-import SideModal from 'components/Modal/SideModal'
-import { Authentication } from 'components/Squeak'
 import groupBy from 'lodash.groupby'
 import UpdateWrapper from './UpdateWrapper'
+import { AuthModal } from './AuthModal'
 import RoadmapForm from 'components/RoadmapForm'
 import Link from 'components/Link'
 import slugify from 'slugify'
@@ -147,29 +146,14 @@ export const Feature = ({ id, title, teams, description, likeCount, onLike, onUp
 
     return (
         <>
-            <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
-                <h4 className="mb-4">Sign into PostHog.com</h4>
-                <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                    <p className="text-sm mb-2">
-                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                    </p>
-
-                    <p className="text-sm mb-0">
-                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
-                        account.
-                    </p>
-                </div>
-
-                <Authentication
-                    initialView="sign-in"
-                    onAuth={(user) => {
-                        setAuthModalOpen(false)
-                        like(user)
-                    }}
-                    showBanner={false}
-                    showProfile={false}
-                />
-            </SideModal>
+            <AuthModal
+                authModalOpen={authModalOpen}
+                setAuthModalOpen={setAuthModalOpen}
+                onAuth={(user) => {
+                    setAuthModalOpen(false)
+                    like(user)
+                }}
+            />
             <UpdateWrapper
                 id={id}
                 status="under-consideration"
@@ -735,31 +719,16 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
     return (
         <section>
             <>
-                <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
-                    <h4 className="mb-4">Sign into PostHog.com</h4>
-                    <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                        <p className="text-sm mb-2">
-                            <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                        </p>
-
-                        <p className="text-sm mb-0">
-                            We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
-                            account.
-                        </p>
-                    </div>
-
-                    <Authentication
-                        initialView="sign-in"
-                        onAuth={(user) => {
-                            setAuthModalOpen(false)
-                            if (selectedRoadmapId) {
-                                like(selectedRoadmapId.id, selectedRoadmapId.title)
-                            }
-                        }}
-                        showBanner={false}
-                        showProfile={false}
-                    />
-                </SideModal>
+                <AuthModal
+                    authModalOpen={authModalOpen}
+                    setAuthModalOpen={setAuthModalOpen}
+                    onAuth={(user) => {
+                        setAuthModalOpen(false)
+                        if (selectedRoadmapId) {
+                            like(selectedRoadmapId.id, selectedRoadmapId.title)
+                        }
+                    }}
+                />
                 {isLoading ? (
                     <ProgressBar title="roadmap" />
                 ) : (
