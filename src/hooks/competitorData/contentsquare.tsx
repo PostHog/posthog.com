@@ -1,3 +1,5 @@
+import { surveys } from 'hooks/productData/surveys'
+
 export const contentsquare = {
     name: 'Contentsquare',
     key: 'contentsquare',
@@ -69,6 +71,9 @@ export const contentsquare = {
             available: false,
         },
         feature_flags: {
+            available: false,
+        },
+        surveys: {
             available: false,
         },
     },

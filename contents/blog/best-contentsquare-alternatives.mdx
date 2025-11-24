@@ -59,7 +59,6 @@ Pricing is transparent and usage-based, with 1 million events and 5,000 recordin
         'product_analytics.funnels',
         'product_analytics.user_paths',
         'feature_flags',
-        'experiments',
         'platform.pricing.transparent_pricing',
     ]}
 />
@@ -147,10 +146,13 @@ That simplicity is also the tradeoff. Hotjar isn't designed for deep product ana
 <ProductComparisonTable
     competitors={['hotjar','contentsquare']}
     rows={[
-        'session_replay.analysis.heatmaps',
+        'heatmaps',
         'heatmaps.features.scrollmaps',
         'heatmaps.features.rage_clicks',
         'session_replay.ai.ai_summaries',
+        'session_replay.platform_support.mobile_app_recordings',
+        'session_replay.targeting.conditional_recording',
+        'session_replay.privacy.features.privacy_masking',
         'surveys',
         'product_analytics.funnels',
         {
@@ -204,7 +206,7 @@ You also can't tie recordings to custom user properties or filter by feature fla
 <ProductComparisonTable
     competitors={['microsoft_clarity','contentsquare']}
     rows={[
-        'session_replay.analysis.heatmaps',
+        'heatmaps',
         'heatmaps.features.scrollmaps',
         'heatmaps.features.rage_clicks',
         'session_replay.features.sentiment_scores',
@@ -388,7 +390,7 @@ For most teams, it's **PostHog**. You get product analytics, web analytics, sess
 
 **PostHog** is open source (MIT license) with a public roadmap. Most other digital experience platforms are closed-source and cloud-only.
 
-If you're exploring open source options more broadly, we also break them down in our guide to the [best open-source session replay tools](/blog/best-open-source-session-replay-tools).
+If you're exploring open source options, we also break them down in our guide to the [best open-source session replay tools](/blog/best-open-source-session-replay-tools).
 </details>
 
 <details>

@@ -36,6 +36,7 @@ export const quantum_metric = {
                 features: {
                     console_logs: true,
                     crash_reports: true,
+                    filter_by_user_or_event: true,
                     network_monitor: true,
                     performance_monitoring: true,
                 },
