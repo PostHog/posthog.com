@@ -44,6 +44,9 @@ importers:
       '@inkeep/uikit-js':
         specifier: ^0.3.20
         version: 0.3.20(@internationalized/date@3.9.0)(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(jsdom@20.0.3)(typescript@4.9.5)
+      '@mdx-js/react':
+        specifier: ^1.6.22
+        version: 1.6.22(react@18.3.1)
       '@mdxeditor/editor':
         specifier: ^3.32.3
         version: 3.45.1(@codemirror/language@6.11.3)(@lezer/highlight@1.2.1)(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.27)
