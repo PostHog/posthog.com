@@ -64,6 +64,7 @@ export const glassbox = {
             },
             features: {
                 canvas_recording: true,
+                conditional_recording: true,
                 crash_reports: true,
                 console_logs: true,
                 privacy_masking: true,

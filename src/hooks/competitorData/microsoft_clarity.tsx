@@ -6,6 +6,15 @@ export const microsoft_clarity = {
         comparisonArticle: 'blog/best-microsoft-clarity-alternatives',
     },
     products: {
+        product_analytics: {
+            available: false,
+            funnels: {
+                available: false,
+            },
+            user_paths: {
+                available: false,
+            },
+        },
         session_replay: {
             available: true,
             pricing: {
