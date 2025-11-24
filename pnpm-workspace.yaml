@@ -1,0 +1,4 @@
+packages:
+    - '.'
+    - plugins/*
+minimumReleaseAge: 1440
