@@ -32,6 +32,8 @@ import PryLogo from '../components/CustomerLogos/PryLogo'
 import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
 import QredLogo from '../components/CustomerLogos/QredLogo'
 import RaycastLogo from '../components/CustomerLogos/RaycastLogo'
+import RayfitLogoDark from '../images/customers/rayfitLogodark.png'
+import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
@@ -49,6 +51,7 @@ import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import Link from 'components/Link'
 import useProducts from './useProducts'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
+import { posthog_ai } from './productData/posthog_ai'
 
 export interface Customer {
     slug: string
@@ -59,11 +62,11 @@ export interface Customer {
     users?: string[]
     notes?: React.ReactNode
     logo?:
-    | React.ComponentType<any>
-    | {
-        light: string
-        dark: string
-    }
+        | React.ComponentType<any>
+        | {
+              light: string
+              dark: string
+          }
     height?: number
     quotes?: Record<
         string,
@@ -88,11 +91,11 @@ interface BaseCustomer {
     users?: string[]
     notes?: React.ReactNode
     logo?:
-    | React.ComponentType<any>
-    | {
-        light: string
-        dark: string
-    }
+        | React.ComponentType<any>
+        | {
+              light: string
+              dark: string
+          }
     legacyLogo?: string // Temporary until SVG component created
     legacyLogoDark?: string // Temporary until SVG component created
     height?: number
@@ -553,6 +556,32 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: RaycastLogo,
         featured: true,
         height: 12,
+    },
+    rayfit: {
+        name: 'Rayfit',
+        toolsUsed: ['product_analytics', 'experiments', 'feature_flags', 'data_warehouse', 'posthog_ai'],
+        industries: ['Fitness'],
+        users: ['Product', 'Engineering'],
+        notes: 'AI personal training app',
+        quotes: {
+            alan_yang: {
+                name: 'Alan Yang',
+                role: 'Full Stack Engineering Leader',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/alan_yang_1611287c98.png',
+                },
+                products: {
+                    posthog_ai:
+                        "We're evolving our data model and events all the time, so having an easy way to explore what's there is incredibly valuable. PostHog AI helps our product engineers build dashboards without needing to understand PostHog in depth — and it gives them real ownership over feature performance.",
+                },
+            },
+        },
+        logo: {
+            light: RayfitLogoLight,
+            dark: RayfitLogoDark,
+        },
+        featured: false,
+        height: 6,
     },
     rebtel: {
         name: 'Rebtel',
