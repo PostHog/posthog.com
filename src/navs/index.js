@@ -1428,6 +1428,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell',
                     },
                     {
+                        name: 'Error tracking cross-sell',
+                        url: '/handbook/cs-and-onboarding/error-tracking-cross-sell',
+                    },
+                    {
                         name: 'Common churn reasons',
                         url: '/handbook/cs-and-onboarding/churn-reasons',
                     },
