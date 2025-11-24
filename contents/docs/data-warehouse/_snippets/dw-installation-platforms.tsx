@@ -21,7 +21,7 @@ const DWInstallationPlatforms = () => {
         {
             label: 'Bing Ads',
             url: '/docs/data-warehouse/sources/bing-ads',
-            image: 'PLACEHOLDER_IMAGE_URL',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Bing_Ads_ce5e8e208f.svg',
         },
         {
             label: 'Chargebee',
