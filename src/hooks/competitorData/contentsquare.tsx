@@ -24,13 +24,30 @@ export const contentsquare = {
         session_replay: {
             available: true,
             features: {
+                canvas_recording: false,
                 crash_reports: true,
                 console_logs: true,
                 network_monitor: true,
             },
+            platform_support: {
+                features: {
+                    mobile_app_recordings: true,
+                },
+            },
+            analysis: {
+                features: {
+                    performance_monitoring: true,
+                },
+            },
             targeting: {
                 features: {
                     filter_by_user_or_event: true,
+                    conditional_recording: true,
+                },
+            },
+            privacy: {
+                features: {
+                    privacy_masking: true,
                 },
             },
             ai: {
@@ -65,6 +82,8 @@ export const contentsquare = {
         },
         security: {
             user_privacy_options: true,
+            gdpr_ready: true,
+            hipaa_ready: false,
         },
     },
 }
