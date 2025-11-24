@@ -156,7 +156,7 @@ Type the following into the command line and press return:
 pnpm install
 ```
 
-This runs the pnpm tool. When run standalone like this, it installs the dependency packages used by posthog.com. This may take a few minutes.
+This installs the dependency packages used by posthog.com. This may take a few minutes.
 
 After initial setup, use the following command to start the development server:
 
