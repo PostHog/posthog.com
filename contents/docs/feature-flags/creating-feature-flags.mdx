@@ -27,14 +27,14 @@ Before you can evaluate a feature flag in your application code, you need to cre
 | Step | Configuration | Required? |
 |------|---------------|----------|
 | 1 | [Create a new feature flag](#step-1-create-a-new-feature-flag-required) | Required |
-| 2 | [The key you use in your code to evaluate the feature flag](#step-2-feature-flag-key-and-description-required) | Required |
-| 3 | [The type of feature flag – boolean, multivariate, or remote config](#step-3-feature-flag-type-required) | Required |
-| 4 | [Additional feature flag behaviors](#step-4-feature-flag-behavior-optional) | Optional |
-| 5 | [Evaluation runtime and environments](#step-5-evaluation-runtime-and-environments-optional) | Optional |
+| 2 | [The key in your code used to evaluate the feature flag](#step-2-add-feature-flag-key-and-description-required) | Required |
+| 3 | [The type of feature flag – boolean, multivariate, or remote config](#step-3-choose-a-feature-flag-type-required) | Required |
+| 4 | [Additional feature flag behaviors](#step-4-configure-feature-flag-behavior-optional) | Optional |
+| 5 | [Evaluation runtime and environments](#step-5-configure-evaluation-runtime-and-environments-optional) | Optional |
 
 ## Step 1. Create a new feature flag (required)
 
-To create a new feature flag, navigate to the [feature flags tab](https://app.posthog.com/feature_flags) in your PostHog app and click the **Create feature flag** button to create a new flag.
+To create a new feature flag, navigate to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click the **Create feature flag** button to create a new flag.
 
 This presents you with a form where you can complete the details of your new flag:
 
@@ -45,15 +45,19 @@ This presents you with a form where you can complete the details of your new fla
     classes="rounded"
 />
 
+### Migrate feature flags from another tool
+
+If you can pull feature flag data from them, you can use [our API](/docs/api/feature-flags) to migrate them. We even wrote guides for doing this with [LaunchDarkly](/docs/migrate/launchdarkly) and [Statsig](/docs/migrate/statsig).
+
 ## Step 2. Add feature flag key and description (required)
 
-This is the **unique** key you use in your code to evaluate the feature flag. Some examples of feature flag keys are `new-landing-page`, `betaFeature`, or `bigger_callout_button`.
+This is the _unique_ key you use in your code to evaluate the feature flag. Some examples of feature flag keys are `new-landing-page`, `betaFeature`, or `bigger_callout_button`.
 
 You will later [evaluate the feature flag](/docs/feature-flags/adding-feature-flag-code) in your code using expressions like
 - `posthog.isFeatureEnabled('new-landing-page')`
 - `posthog.getFeatureFlag('betaFeature')`
 
-Use a descriptive key that reads well in your code and is easy to understand. You should also include a **description** to help you and your team understand the purpose of the feature flag.
+Use a descriptive key that fits your code and is easy to understand. You should also include a **description** to help you and your team understand the purpose of the feature flag.
 
 ## Step 3. Choose a feature flag type (required)
 
@@ -77,7 +81,9 @@ If you're using remote config flags, you can use payloads to pass configuration 
 
 ### Release conditions
 
-This specifies the conditions a user must meet to access the feature flag and receive a value. Condition sets are evaluated from **top to bottom**, and the **first** condition set that matches will be used. A condition matches when all property filters pass and the target falls within the rollout percentage.
+This specifies the conditions a user must meet to access the feature flag and receive a value. Release conditions do not apply to remote config flags.
+
+Condition sets are evaluated from **top to bottom**, and the **first** condition set that matches will be used. A condition matches when all property filters pass and the target falls within the rollout percentage.
 
 Percentage rollouts are available for all flags. More options depend on your PostHog setup:
 
@@ -94,7 +100,7 @@ Percentage rollouts are available for all flags. More options depend on your Pos
     classes="rounded"
 />
 
-### Advanced release conditions
+#### Advanced release conditions
 
 For more sophisticated feature rollouts, you can also create **feature flag dependencies** where one flag's activation depends on another flag's state. This enables complex scenarios like:
 
@@ -231,7 +237,3 @@ You can use tags to accomplish:
 </CalloutBox>
 
 We recommend reading the [evaluation environments documentation](docs/feature-flags/evaluation-environments) in detail before using it in production.
-
-## Migrate feature flags from another tool
-
-If you can pull feature flag data from them, you can use [our API](/docs/api/feature-flags) to migrate them. We even wrote guides for doing this with [LaunchDarkly](/docs/migrate/launchdarkly) and [Statsig](/docs/migrate/statsig).
