@@ -1,0 +1,72 @@
+---
+title: Getting started with customer analytics
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import OSButton from 'components/OSButton'
+import CustomerAnalyticsBetaWarning from './_snippets/customer-analytics-beta-warning.mdx'
+
+<CustomerAnalyticsBetaWarning />
+
+Customer analytics helps you understand your users without building dashboards from scratch. It tracks active users, signups, conversions, and engagement—the metrics that matter when you're building toward product-market fit.
+
+<QuestLog firstSpeechBubble="Let's understand your customers!" lastSpeechBubble="Now go talk to them!">
+
+<QuestLogItem
+    title="Configure dashboard events"
+    subtitle="Required"
+    icon="IconGraph"
+>
+
+The [customer analytics dashboard](https://us.posthog.com/customer_analytics) works immediately with `$pageview` events. To extract its full potential, configure it with your events in [customer analytics configurations](https://app.posthog.com/project/2/customer_analytics/configuration).
+
+<ProductScreenshot
+    imageLight="[TODO: Dashboard overview screenshot - light mode]"
+    imageDark="[TODO: Dashboard overview screenshot - dark mode]"
+    alt="Customer analytics dashboard showing active users and engagement metrics"
+    classes="rounded"
+/>
+
+Tips for nailing the setup:
+
+- Use PostHog AI to help you find the events
+- Create actions to group multiple events into a "single one"
+- Be as specific as possible in event definitions. Sloppy definitions = sloppy metrics.
+
+<OSButton variant="primary" asLink to="https://app.posthog.com/customer_analytics" external>
+    Open dashboard configurations
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Define usage metrics"
+    subtitle="Recommended"
+    icon="IconTrends"
+>
+
+Usage metrics let you track custom activity for each interaction they have with your produc. These appear on customer profiles and help you identify power users and churn risks.
+
+<OSButton variant="primary" asLink to="/docs/customer-analytics/usage-metrics">
+    Set up usage metrics
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Explore customer profiles"
+    subtitle="Optional"
+    icon="IconPerson"
+>
+
+Customer profiles consolidate everything about a customer in one place: their events, [errors](/docs/error-tracking), [LLM traces](/docs/ai-engineering/observability), and support tickets.
+
+<OSButton variant="primary" asLink to="/docs/customer-analytics/customer-profiles">
+    Explore customer profiles
+</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>
