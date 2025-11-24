@@ -3,19 +3,18 @@ import List from 'components/List'
 import useInstallationPlatforms from '../../../../../src/navs/useInstallationPlatforms'
 
 interface InstallationPlatformsProps {
-    urlFragment?: string
+    columns?: 2 | 3 | 4
 }
 
-const InstallationPlatforms = ({ urlFragment = '' }: InstallationPlatformsProps) => {
-    let platforms = useInstallationPlatforms('docs/experiments/installation', 'experiments installation')
-
-    if (urlFragment) {
-        platforms = platforms.map((platform) => ({
-            ...platform,
-            url: `${platform.url}${urlFragment}`,
-        }))
+const InstallationPlatforms = ({ columns = 2 }: InstallationPlatformsProps) => {
+    const columnClassMap = {
+        2: '@md:grid-cols-2',
+        3: '@md:grid-cols-3',
+        4: '@md:grid-cols-4',
     }
 
-    return <List className="grid gap-4 grid-cols-2 sm:grid-cols-2 mb-4 not-prose" items={platforms} />
+    const platforms = useInstallationPlatforms('docs/experiments/installation', 'experiments installation')
+
+    return <List className={`grid gap-4 grid-cols-2 ${columnClassMap[columns]} not-prose`} items={platforms} />
 }
 export default InstallationPlatforms
