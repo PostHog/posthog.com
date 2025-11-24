@@ -233,7 +233,7 @@ export default function EventsMap({
                     if (!base) return
                     const jitter = jitteredCoordsByEventIdRef.current[ev.id] || base
                     const el = document.createElement('div')
-                    el.classList.add('w-5', 'h-5', 'rounded-full', 'bg-accent', 'border-2', 'border-white', 'shadow')
+                    el.classList.add('w-5', 'h-5', 'rounded-full', 'bg-yellow', 'border-2', 'border-white', 'shadow')
 
                     const date = ev.date
                         ? new Date(ev.date).toLocaleDateString('en-US', {
