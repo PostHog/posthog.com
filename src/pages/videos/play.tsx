@@ -12,8 +12,8 @@ export default function VideoPlayer({ location }: { location: Location }): JSX.E
     const videoId = params.get('videoId') || params.get('id') || ''
     const startTime = parseInt(params.get('t') || params.get('startTime') || '0', 10)
 
-    // Find video info for better metadata
-    const video = videos.find((v) => v.videoId === videoId && v.source === source)
+    // Find video info for better metadata (with safety check for array)
+    const video = Array.isArray(videos) ? videos.find((v) => v.videoId === videoId && v.source === source) : null
     const title = video?.title || 'Video Player'
 
     return (

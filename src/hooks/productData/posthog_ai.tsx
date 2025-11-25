@@ -538,6 +538,7 @@ export const posthog_ai = {
             title: 'Investigating web traffic',
             author: 'Edwin Lim',
             wistia: 'tgws1dixc0',
+            customThumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_investigating_web_traffic_86c3caa67d.png',
             chapters: [
                 {
                     title: 'Add a graph series for unique users',
@@ -565,6 +566,7 @@ export const posthog_ai = {
             title: 'Maximizing data insights',
             author: 'Eric Duong',
             wistia: 'syysfftbzk',
+            customThumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_maximizing_data_insights_60ecdcb060.png',
             chapters: [
                 {
                     title: 'Last 10 Stripe charges',
@@ -592,6 +594,7 @@ export const posthog_ai = {
             title: 'Answering business questions',
             author: 'Georgiy Tarasov',
             wistia: 'hjr4vq1py4',
+            customThumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_answering_business_questions_aed4278f7a.png',
             chapters: [
                 {
                     title: 'What\'s the cache hit rate for AI generations?',

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { ASCIIBox } from './TerminalSection'
 import Link from 'components/Link'
+import { DebugContainerQuery } from "components/DebugContainerQuery"
 
 interface Chapter {
     title: string
@@ -13,6 +14,7 @@ interface Video {
     author: string
     wistia: string
     chapters: Chapter[]
+    customThumb?: string
 }
 
 interface TerminalVideosProps {
@@ -26,43 +28,8 @@ function formatTime(seconds: number): string {
 }
 
 function VideoThumbnail({ video, videoKey }: { video: Video; videoKey: string }): JSX.Element {
-    const width = 48
-    const border = '┌' + '─'.repeat(width - 2) + '┐'
-    const bottomBorder = '└' + '─'.repeat(width - 2) + '┘'
-    const emptyLine = '│' + ' '.repeat(width - 2) + '│'
-
-    // Create a URL to open the video in a new window
-    const videoUrl = `/videos/${videoKey}?wistia=${video.wistia}`
-
-    // ASCII art patterns for video content area
-    const asciiPattern = [
-        '│  ████████    ████████    ████████    ████████  │',
-        '│  ██    ██    ██    ██    ██    ██    ██    ██  │',
-        '│  ████████    ████████    ████████    ████████  │',
-        '│  ██  ██      ██  ██      ██  ██      ██  ██    │',
-        '│  ██    ██    ██    ██    ██    ██    ██    ██  │',
-    ]
-
-    // Word wrap for title
-    const wrapTitle = (title: string, maxWidth: number): string[] => {
-        const words = title.split(' ')
-        const lines: string[] = []
-        let currentLine = ''
-
-        words.forEach((word) => {
-            const testLine = currentLine ? `${currentLine} ${word}` : word
-            if (testLine.length <= maxWidth - 4) {
-                currentLine = testLine
-            } else {
-                if (currentLine) lines.push(currentLine)
-                currentLine = word
-            }
-        })
-        if (currentLine) lines.push(currentLine)
-        return lines
-    }
-
-    const titleLines = wrapTitle(video.title, width)
+    // Create a URL to open the video player with proper query parameters
+    const videoUrl = `/videos/play?source=wistia&videoId=${video.wistia}`
 
     return (
         <Link
@@ -70,43 +37,17 @@ function VideoThumbnail({ video, videoKey }: { video: Video; videoKey: string })
             state={{ newWindow: true }}
             className="block text-left transition-all hover:scale-[1.02]"
         >
-            <div className="font-mono text-[12px] leading-tight">
-                {/* Top border */}
-                <div className="text-[#F1A82C]">{border}</div>
-
-                {/* Video content area with ASCII pattern */}
-                <div className="text-[#666] bg-[rgba(0,0,0,0.5)] border-l border-r border-[#F1A82C]">
-                    {emptyLine && <div className="text-[#F1A82C]">{emptyLine}</div>}
-                    {asciiPattern.map((line, idx) => (
-                        <div key={idx} className="text-[#333]">
-                            {line}
-                        </div>
-                    ))}
-                    {/* Play button overlay */}
-                    <div className="text-center text-[#F1A82C] text-2xl py-2">
-                        │                     ▶                      │
-                    </div>
-                    {emptyLine && <div className="text-[#F1A82C]">{emptyLine}</div>}
+            {video.customThumb ? (
+                <img
+                    src={video.customThumb}
+                    alt={video.title}
+                    className="w-full h-auto block"
+                />
+            ) : (
+                <div className="text-[rgba(238,239,233,0.9)] text-sm">
+                    {video.title}
                 </div>
-
-                {/* Divider */}
-                <div className="text-[#F1A82C]">{'├' + '─'.repeat(width - 2) + '┤'}</div>
-
-                {/* Video title */}
-                <div className="text-[rgba(238,239,233,0.9)] border-l border-r border-[#F1A82C] px-2 py-2 min-h-[3em]">
-                    {titleLines.map((line, idx) => (
-                        <div key={idx}>{line}</div>
-                    ))}
-                </div>
-
-                {/* Author */}
-                <div className="text-[#666] border-l border-r border-[#F1A82C] px-2 py-1 text-[9px]">
-                    by {video.author}
-                </div>
-
-                {/* Bottom border */}
-                <div className="text-[#F1A82C]">{bottomBorder}</div>
-            </div>
+            )}
         </Link>
     )
 }
@@ -126,7 +67,7 @@ function VideoItem({ videoKey, video }: { videoKey: string; video: Video }): JSX
             <VideoThumbnail video={video} videoKey={videoKey} />
 
             {/* Show chapters inline for reference */}
-            <button
+            {/* <button
                 onClick={() => setExpanded(!expanded)}
                 className="text-[#666] hover:text-[#F1A82C] text-[12px] mt-2 ml-2 font-code bg-transparent border-none p-0 cursor-pointer"
             >
@@ -155,7 +96,7 @@ function VideoItem({ videoKey, video }: { videoKey: string; video: Video }): JSX
                         </div>
                     ))}
                 </div>
-            )}
+            )} */}
         </div>
     )
 }
@@ -163,14 +104,14 @@ function VideoItem({ videoKey, video }: { videoKey: string; video: Video }): JSX
 export default function TerminalVideos({ videos }: TerminalVideosProps): JSX.Element {
     return (
         <div className="space-y-6">
-            <div className="grid grid-cols-1 @2xl:grid-cols-2 @4xl:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 @4xl:grid-cols-2 gap-8">
                 {Object.entries(videos).map(([key, video]) => (
                     <VideoItem key={key} videoKey={key} video={video} />
                 ))}
             </div>
-            <div className="pt-4 border-t border-[#333] text-[13px] text-[#666] text-center">
+            {/* <div className="pt-4 border-t border-[#333] text-[13px] text-[#666] text-center">
                 Click thumbnails to watch videos in a new window. Expand chapters below to copy prompts.
-            </div>
+            </div> */}
         </div>
     )
 }
