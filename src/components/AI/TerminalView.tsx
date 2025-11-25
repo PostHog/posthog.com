@@ -22,7 +22,7 @@ const ASCII_HEADER = `    Welcome to
 export default function TerminalView(): JSX.Element {
     // Detect OS for terminal prompt
     const isMac = typeof navigator !== 'undefined' && navigator.platform.toUpperCase().indexOf('MAC') >= 0
-    const prompt = isMac ? '~/posthog/ai $' : 'C:\\POSTHOG\\AI>'
+    const prompt = isMac ? '~ $' : 'C:\\Users\\Me>'
 
     return (
         <>
@@ -34,14 +34,14 @@ export default function TerminalView(): JSX.Element {
             <TerminalLayout>
                 {/* ASCII Header */}
                 <div className="mb-12">
-                    <pre className="m-0 whitespace-pre overflow-x-auto [text-shadow:0_0_1px_rgba(238,239,233,0.4),0_0_2px_rgba(238,239,233,0.2)]">
+                    <pre className="m-0 whitespace-pre overflow-x-auto [text-shadow:0_0_1px_rgb(var(--bg)/0.4),0_0_2px_rgb(var(--bg)/0.2)]">
                         {ASCII_HEADER.split('\n').map((line, lineIdx) => {
                             // "Welcome to" line
                             if (line.includes('Welcome to')) {
                                 return (
                                     <div
                                         key={lineIdx}
-                                        className="text-[rgba(238,239,233,0.7)] [text-shadow:0_0_1px_rgba(238,239,233,0.4),0_0_2px_rgba(238,239,233,0.2)]"
+                                        className="text-bg [text-shadow:0_0_1px_rgb(var(--bg)/0.4),0_0_2px_rgb(var(--bg)/0.2)]"
                                     >
                                         {line}
                                     </div>
@@ -75,7 +75,7 @@ export default function TerminalView(): JSX.Element {
                                 return (
                                     <div
                                         key={lineIdx}
-                                        className="flex [text-shadow:0_0_1px_rgba(238,239,233,0.4),0_0_2px_rgba(238,239,233,0.2)]"
+                                        className="flex [text-shadow:0_0_1px_rgb(var(--bg)/0.4),0_0_2px_rgb(var(--bg)/0.2)]"
                                     >
                                         {line.split('').map((char, charIdx) => {
                                             // Find which letter this character belongs to
@@ -90,7 +90,7 @@ export default function TerminalView(): JSX.Element {
                                                 <span
                                                     key={charIdx}
                                                     style={{ color: colors[colorIdx] }}
-                                                    className="[text-shadow:0_0_1px_rgba(238,239,233,0.4),0_0_2px_rgba(238,239,233,0.2)]"
+                                                    className="[text-shadow:0_0_1px_rgb(var(--bg)/0.4),0_0_2px_rgb(var(--bg)/0.2)]"
                                                 >
                                                     {char}
                                                 </span>
@@ -102,13 +102,13 @@ export default function TerminalView(): JSX.Element {
                             return (
                                 <div
                                     key={lineIdx}
-                                    className="text-[rgba(238,239,233,0.9)] [text-shadow:0_0_1px_rgba(238,239,233,0.4),0_0_2px_rgba(238,239,233,0.2)]"
+                                    className="text-bg [text-shadow:0_0_1px_rgb(var(--bg)/0.4),0_0_2px_rgb(var(--bg)/0.2)]"
                                 >
                                     {line}
                                 </div>
                             )
                         })}
-                        <div className="text-[rgba(238,239,233,0.8)] [text-shadow:0_0_1px_rgba(238,239,233,0.4),0_0_2px_rgba(238,239,233,0.2)]">
+                        <div className="text-bg [text-shadow:0_0_1px_rgb(var(--bg)/0.4),0_0_2px_rgb(var(--bg)/0.2)]">
                             {' '.repeat(55)}
                             Your product assistant
                         </div>
@@ -117,10 +117,10 @@ export default function TerminalView(): JSX.Element {
 
                 {/* Intro with help command */}
                 <div className="mb-6 pt-4 border-t border-[#333]">
-                    <div className="text-[13px] space-y-1">
+                    <div className="text-[14px] space-y-1">
                         <div>
                             <span className="text-[#00FF00]">{prompt}</span>{' '}
-                            <span className="text-[rgba(238,239,233,0.9)]">posthog_ai --help</span>
+                            <span className="text-bg">posthog ai --help</span>
                         </div>
                         <div className="text-[#666] pl-4">
                             Your AI-powered product assistant. Ask questions, build insights, analyze data.
@@ -131,13 +131,9 @@ export default function TerminalView(): JSX.Element {
                 {/* Skills */}
                 <TerminalSection id="skills">
                     <ASCIIBox title={skillTitle} width={76}>
-                        <div className="py-2">
-                            {skills.map((skill, idx) => (
-                                <div key={idx} className="mb-1 text-[13px] leading-relaxed">
-                                    | • {skill}
-                                </div>
-                            ))}
-                        </div>
+                        {skills.map((skill, idx) => (
+                            <div key={idx}> • {skill}</div>
+                        ))}
                     </ASCIIBox>
                 </TerminalSection>
 
@@ -181,25 +177,25 @@ export default function TerminalView(): JSX.Element {
                 {/* Pricing */}
                 <TerminalSection id="pricing" title="Pricing & Credits">
                     <ASCIIBox title="How Credits Work" width={76}>
-                        <div className="py-3 px-2 space-y-3 text-[13px] leading-relaxed">
-                            <p className="text-[rgba(238,239,233,0.9)]">
+                        <div className="py-3 px-2 space-y-3 text-[14px] leading-relaxed">
+                            <p className="text-bg">
                                 | AI credits are based on the underlying token costs, which reflect
                                 <br />| the effort required to complete your request.
                             </p>
                             <div className="space-y-2">
-                                <p className="text-[rgba(238,239,233,0.9)]">
+                                <p className="text-bg">
                                     | <span className="text-[#00FF00]">SIMPLE QUERIES</span> like "What were my daily
                                     active users in October?"
                                     <br />| use very few tokens, and therefore very few credits.
                                 </p>
-                                <p className="text-[rgba(238,239,233,0.9)]">
-                                    | <span className="text-[#F54E00]">COMPLEX TASKS</span> like analyzing hundreds of
-                                    session recordings or
+                                <p className="text-bg">
+                                    | <span className="text-red">COMPLEX TASKS</span> like analyzing hundreds of session
+                                    recordings or
                                     <br />| rewriting SQL queries multiple times use more tokens and consume
                                     <br />| more credits.
                                 </p>
                             </div>
-                            <p className="text-[rgba(238,239,233,0.9)]">
+                            <p className="text-bg">
                                 | PostHog automatically selects the most efficient model for each AI
                                 <br />| feature. We apply a simple, consistent 20% markup over the underlying
                                 <br />| LLM provider's cost:
@@ -219,14 +215,14 @@ export default function TerminalView(): JSX.Element {
                     <div className="space-y-4">
                         <div className="pl-4 border-l-2 border-[#F1A82C] space-y-2">
                             <div className="text-[#F1A82C] text-sm font-bold">USAGE:</div>
-                            <div className="text-[rgba(238,239,233,0.8)] text-[13px] leading-relaxed">
+                            <div className="text-bg text-[14px] leading-relaxed">
                                 Open PostHog AI in your project and ask it to analyze data or build something
                             </div>
                         </div>
 
                         <div className="pl-4 border-l-2 border-[#1D4AFF] space-y-2">
                             <div className="text-[#1D4AFF] text-sm font-bold">EXAMPLES:</div>
-                            <div className="text-[rgba(238,239,233,0.8)] text-[13px] space-y-1">
+                            <div className="text-bg text-[14px] space-y-1">
                                 {posthog_ai.answers?.slice(0, 5).map((a, idx) => (
                                     <div key={idx}>
                                         <span className="text-[#00FF00]">$</span> {a.q}
@@ -236,14 +232,14 @@ export default function TerminalView(): JSX.Element {
                         </div>
 
                         <div className="mt-6 pt-4 border-t border-[#333]">
-                            <div className="text-[13px]">
+                            <div className="text-[14px]">
                                 <span className="text-[#00FF00]">{prompt}</span>{' '}
                                 <Link
                                     to="https://app.posthog.com/ai"
                                     external
-                                    className="text-[rgba(238,239,233,0.9)] underline hover:text-[#F1A82C]"
+                                    className="text-bg underline hover:text-[#F1A82C]"
                                 >
-                                    start
+                                    posthog ai start
                                 </Link>
                             </div>
                         </div>

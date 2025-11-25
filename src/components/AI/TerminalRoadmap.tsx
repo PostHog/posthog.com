@@ -49,9 +49,7 @@ export default function TerminalRoadmap(): JSX.Element {
     const underConsideration = roadmaps.nodes.filter(
         (roadmap: RoadmapItem) => !roadmap.projectedCompletion && !roadmap.complete
     )
-    const inProgress = roadmaps.nodes.filter(
-        (roadmap: RoadmapItem) => roadmap.projectedCompletion && !roadmap.complete
-    )
+    const inProgress = roadmaps.nodes.filter((roadmap: RoadmapItem) => roadmap.projectedCompletion && !roadmap.complete)
     const shipped = roadmaps.nodes.filter((roadmap: RoadmapItem) => roadmap.complete)
 
     const stripMarkdown = (text: string): string => {
@@ -119,9 +117,7 @@ export default function TerminalRoadmap(): JSX.Element {
 
                 {/* Shipped */}
                 <div className="space-y-3">
-                    <div className="text-[#00FF00] text-sm font-bold border-b border-[#00FF00] pb-2">
-                        [✓] SHIPPED
-                    </div>
+                    <div className="text-[#00FF00] text-sm font-bold border-b border-[#00FF00] pb-2">[✓] SHIPPED</div>
                     {shipped.slice(0, 3).map((roadmap: RoadmapItem) => (
                         <div key={roadmap.id} className="space-y-1">
                             <div className="text-[rgba(238,239,233,0.9)] text-sm font-bold leading-tight">
@@ -139,7 +135,7 @@ export default function TerminalRoadmap(): JSX.Element {
             </div>
 
             {/* Footer */}
-            <div className="pt-4 border-t border-[#333] text-[13px]">
+            <div className="pt-4 border-t border-[#333] text-[14px]">
                 <span className="text-[#666]">Have opinions about what we should build next? </span>
                 <Link
                     to="/roadmap"

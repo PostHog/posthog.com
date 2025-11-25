@@ -142,14 +142,11 @@ export default function TerminalPersonas(): JSX.Element {
                             {/* Features */}
                             <div className="space-y-6">
                                 {persona.features.map((feature, idx) => (
-                                    <div
-                                        key={idx}
-                                        className="pl-4 border-l-2 border-[#1D4AFF] space-y-2"
-                                    >
+                                    <div key={idx} className="pl-4 border-l-2 border-[#1D4AFF] space-y-2">
                                         <div className="text-[#1D4AFF] text-sm font-bold">
                                             [{idx + 1}] {feature.title}
                                         </div>
-                                        <div className="text-[13px] text-[rgba(238,239,233,0.8)] leading-relaxed">
+                                        <div className="text-[14px] text-[rgba(238,239,233,0.8)] leading-relaxed">
                                             {feature.description}
                                         </div>
                                     </div>

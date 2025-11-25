@@ -40,10 +40,7 @@ function FeatureContent({ feature }: { feature: Feature }): JSX.Element {
     return (
         <div className="space-y-4">
             {/* Description */}
-            <div
-                className="pl-4 border-l-2 text-sm leading-relaxed"
-                style={{ borderColor: accentColor }}
-            >
+            <div className="pl-4 border-l-2 text-sm leading-relaxed" style={{ borderColor: accentColor }}>
                 {feature.description}
             </div>
 
@@ -57,16 +54,16 @@ function FeatureContent({ feature }: { feature: Feature }): JSX.Element {
                                 <span style={{ color: accentColor }}>•</span>
                                 <span className="text-[rgba(238,239,233,0.9)] font-bold">{skill.name}</span>
                             </div>
-                            <div className="pl-4 text-[13px] text-[rgba(238,239,233,0.7)] leading-snug">
+                            <div className="pl-4 text-[14px] text-[rgba(238,239,233,0.7)] leading-snug">
                                 {skill.description}
                             </div>
                             <div className="pl-4 flex items-center gap-2">
                                 <div className="text-[12px] font-mono">
-                                    <span style={{ color: accentColor }}>{ProgressBar({ percent: skill.percent })}</span>
+                                    <span style={{ color: accentColor }}>
+                                        {ProgressBar({ percent: skill.percent })}
+                                    </span>
                                 </div>
-                                <span className="text-[#666] text-[12px]">
-                                    {skill.percent}% CONFIDENCE
-                                </span>
+                                <span className="text-[#666] text-[12px]">{skill.percent}% CONFIDENCE</span>
                             </div>
                         </div>
                     ))}
