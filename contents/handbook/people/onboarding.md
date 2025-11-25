@@ -65,7 +65,8 @@ Aim to keep things sensible and cheap. As always, use your best judgement when [
 > You should by default avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) as they serve different purposes. The focus of onboarding is generally on making the new team member successful, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time. However, it may occasionally make sense to combine the two - just use your judgement.
 
 It is important that you make the most out of the sync time with the new joiner on your team. You should not spend the whole week sitting next to them doing your usual work. Having something planned each day is sufficient, some ideas include:
-- An intro to PostHogs values & strategy, a history of your team, your current quarterly goals and a product demo of the features you own (product teams only)
+- An intro to PostHogs values & strategy
+- A history of your team, your current quarterly goals and a product demo of the features you own (product teams only)
 - Interview feedback session between the team lead and new joiner
 - Deep dive into a specific feature where you walk through the code (product teams only)
 - Mock demo (sales team only)
