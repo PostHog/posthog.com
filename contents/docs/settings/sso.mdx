@@ -259,27 +259,27 @@ For SAML to work your IdP and PostHog (SP) need to exchange information. To do t
 
 You can quickly connect OneLogin and PostHog by using the prebuilt integration.
 
-1. In OneLogin admin, go to Applications and click on "Add App". Search for "PostHog" and create your app.
+1. In OneLogin admin, go to Applications and click **Add App**. Search for `PostHog` and create your app.
 
-2. Go to the "Configuration" tab and where it says "PostHog domain name" enter your PostHog's instance domain (as it's also specified in the `SITE_URL` [environment variable][env-vars]), **but don't include any protocol or trailing slashes.** Examples: `playground.posthog.com`, `myposthog.mydomain.com`, `myposthogdomain.com`.
+2. Go to the **Configuration** tab and where it says "PostHog domain name" enter your PostHog's instance domain (as it's also specified in the `SITE_URL` [environment variable][env-vars]), **but don't include any protocol or trailing slashes.** Examples: `playground.posthog.com`, `myposthog.mydomain.com`, `myposthogdomain.com`.
 
-3. Go to the "SSO" tab. This is where you'll obtain the information you need to pass to PostHog.
+3. Go to the **SSO** tab. This is where you'll obtain the information you need to pass to PostHog.
 
     - "Issuer URL" needs to be set as SAML Entity ID.
     - "SAML 2.0 Endpoint (HTTP)" needs to be set as SAML ACS URL.
     - On "X.509 Certificate" click on "View Details". Copy the full certificate and set it as SAML X.509 certificate.
 
-4. You're good to go! Click on the "Login with SSO" in PostHog's login page.
+4. You're good to go! Click **Login with SSO** in PostHog's login page.
 
 #### OneLogin advanced
 
 Use this option if you want to add additional configurations to your app that are not supported with the default app catalog.
 
-1. In OneLogin admin, go to Applications and click on "Add App".
+1. In OneLogin admin, go to Applications and click **Add App**.
 
-2. Search for "SAML" and select "SAML Custom Connector (Advanced)". Set name to "PostHog".
+2. Search for `SAML` and select "SAML Custom Connector (Advanced)". Set name to `PostHog`.
 
-3. Go to the "Configuration" tab and edit the following attributes (leave everything else as default)
+3. Go to the **Configuration** tab and edit the following attributes (leave everything else as default)
 
     - Audience (EntityID): enter `https://us.posthog.com`.
         - If you are using our EU deployment, use `https://eu.posthog.com`.
@@ -289,25 +289,25 @@ Use this option if you want to add additional configurations to your app that ar
         - If you are using our EU deployment, use `https://eu.posthog.com/complete/saml/`.
         - If you are self-hosting, use `<yourdomain>/complete/saml/`.
 
-4. Go to the "Parameters" tab. You will add the following parameters. **Be sure to check "Include in SAML assertion"**.
+4. Go to the **Parameters** tab. You will add the following parameters. **Be sure to check "Include in SAML assertion"**.
 
     - `email` to match the user's email ("Email")
     - `first_name` to match the user's first name ("First Name")
     - `last_name` to match the user's last name ("Last Name")
 
-5. Go to the "SSO" tab. This is where you'll obtain the information you need to pass to PostHog.
+5. Go to the **SSO** tab. This is where you'll obtain the information you need to pass to PostHog.
 
     - "Issuer URL" needs to be set as SAML Entity ID.
     - "SAML 2.0 Endpoint (HTTP)" needs to be set as SAML ACS URL.
     - On "X.509 Certificate" click on "View Details". Copy the full certificate, removing the first and last lines and set it as SAML X.509 certificate.
 
-6. You're good to go! Click on "Login with SSO" in the login page.
+6. You're good to go! Click **Login with SSO** in the login page.
 
 ### Example: Okta
 
-1. In Okta admin, go to Applications and click on "Create App Integration".
+1. In Okta admin, go to Applications and click **Create App Integration**.
 
-2. Select the "SAML 2.0" option. In the next step, set "PostHog" as the name.
+2. Select the "SAML 2.0" option. In the next step, set `PostHog` as the name.
 
 3. Fill in the following attributes in the SAML settings. Do not click next yet.
     - In "Single sign on URL" enter `https://us.posthog.com/complete/saml/`.
@@ -318,7 +318,7 @@ Use this option if you want to add additional configurations to your app that ar
         - If you are self-hosting, enter the exact same value as your `SITE_URL` environment variable.
 4. In the Default Relay State field, enter the RelayState value you obtain from your [PostHog Organization Settings page](https://app.posthog.com/organization/settings) in the SAML configuration modal.
 
-5. In the "Attribute Statements" section, add the following attributes:
+5. In the **Attribute Statements** section, add the following attributes:
 
     - `email` with value `user.email`
     - `first_name` with value `user.firstName`
@@ -327,11 +327,11 @@ Use this option if you want to add additional configurations to your app that ar
 
 6. In the final step select the option "I'm an Okta customer adding an internal app".
 
-7. Navigate now to the "Sign On" tab of the application and click on "View Setup Instructions". This is where you'll obtain the information you need to pass to PostHog.
+7. Navigate now to the **Sign On** tab of the application and click **View Setup Instructions**. This is where you'll obtain the information you need to pass to PostHog.
     - "Identity Provider Single Sign-on URL" needs to be set as SAML ACS URL.
     - "Identity Provider Issuer" needs to be set as SAML Entity ID (use the complete URL).
     - "X.509 Certificate" needs to be set as SAML X.509 certificate.
-8. You're good to go! Click on "Login with SSO" in the login page.
+8. You're good to go! Click **Login with SSO** in the login page.
 
 ## SCIM
 
@@ -365,11 +365,7 @@ Before setting up SCIM, you need:
     - Set the Bearer Token (SCIM Token) from PostHog
     - Enable user provisioning
 
-5. Configure role mapping in your IdP. Map your IdP roles to PostHog roles:
-
-    - Admin
-    - Member
-    - (Other custom roles if applicable)
+5. Configure role mapping in your IdP. Map your IdP roles to PostHog roles. 
 
 6. Assign users and roles to the PostHog application in your IdP, verify that they appear in PostHog.
 
