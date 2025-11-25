@@ -376,11 +376,10 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                                 <div
                                     className="absolute top-1/2 -translate-y-1/2 pointer-events-none"
                                     style={{
-                                        left: `calc(${
-                                            ((isScrubbing ? scrubTime : playerState.currentTime) /
+                                        left: `calc(${((isScrubbing ? scrubTime : playerState.currentTime) /
                                                 playerState.duration) *
                                             100
-                                        }% + 5.5px)`,
+                                            }% + 5.5px)`,
                                     }}
                                 >
                                     <IconPlayhead className="w-[11px] h-[15px]" />

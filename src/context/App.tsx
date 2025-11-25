@@ -659,7 +659,7 @@ const appSettings: AppSettings = {
             },
             max: {
                 width: 960,
-                height: 1200,
+                height: 682,
             },
             fixed: false,
             autoHeight: true,
