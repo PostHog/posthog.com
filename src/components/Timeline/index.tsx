@@ -219,9 +219,19 @@ export default function Timeline({
                                             const now = dayjs()
                                             const isCurrentMonth = year === now.year() && month === now.month() + 1
                                             const currentWeek = Math.min(4, Math.ceil(now.date() / 7))
-                                            const weeksToRender = isCurrentMonth
-                                                ? Array.from({ length: currentWeek }, (_, i) => i + 1)
-                                                : [1, 2, 3, 4]
+                                            let weeksToRender: number[]
+
+                                            if (isCurrentMonth) {
+                                                // For current month: all weeks before current, plus current week if non-empty
+                                                weeksToRender = Array.from({ length: currentWeek - 1 }, (_, i) => i + 1)
+                                                const currentWeekCount =
+                                                    data?.[year]?.[month]?.[currentWeek]?.count || 0
+                                                if (currentWeekCount > 0) {
+                                                    weeksToRender.push(currentWeek)
+                                                }
+                                            } else {
+                                                weeksToRender = [1, 2, 3, 4]
+                                            }
 
                                             return weeksToRender.map((week) => {
                                                 const count = data?.[year]?.[month]?.[week]?.count || 0
