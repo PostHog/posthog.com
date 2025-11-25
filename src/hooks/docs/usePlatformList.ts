@@ -1,8 +1,8 @@
 /**
- * useInstallationPlatforms - Auto-populates installation platform cards from MDX files
+ * usePlatformList - Auto-populates platform cards from MDX files
  * PR example: https://github.com/PostHog/posthog.com/pull/13838
  *
- * Installation landing pages automatically display cards by reading MDX files and
+ * Landing pages automatically display cards by reading MDX files and
  * sidebar navigation at build time. No more manually maintaining hardcoded platform lists!
  *
  * Currently used in: error-tracking/installation, experiments/installation
@@ -22,23 +22,24 @@
  *
  * ADD PATTERN TO NEW SECTION:
  * 1. Add platformImageUrl/platformIconName to all platform MDX files
- * 2. Create _snippets/installation-platforms.tsx (see existing examples)
- * 3. Update sidebar with Installation children in src/navs/index.js
+ * 2. Create _snippets/[section]-platforms.tsx (see existing examples)
+ * 3. Update sidebar with section children in src/navs/index.js
  * 4. Import and use snippet in index.mdx
  *
  * FRONTMATTER:
- * - title: "[Platform] [product] installation" (suffix trimmed for display)
+ * - title: "[Platform] [section name]" (suffix trimmed for display)
  * - platformImageUrl: URL to logo (optional)
  * - platformIconName: Icon like "IconCode" (optional, fallback if no image)
  *
  * USAGE:
- * const platforms = useInstallationPlatforms('docs/error-tracking/installation', 'error tracking installation')
+ * const platforms = usePlatformList('docs/error-tracking/installation', 'error tracking installation')
+ * const platforms = usePlatformList('docs/revenue-analytics/payment-platforms', 'payment platform')
  */
 
 import { useStaticQuery, graphql } from 'gatsby'
 import { docsMenu } from '../../navs'
 
-interface InstallationPlatform {
+interface Platform {
     url: string
     label: string
     image?: string
@@ -47,7 +48,7 @@ interface InstallationPlatform {
 
 /**
  * Extracts platform URLs from sidebar navigation to determine display order.
- * Looks up the installation section within docsMenu and returns child URLs in order.
+ * Looks up the section within docsMenu and returns child URLs in order.
  */
 function getSidebarOrder(sidebarPath: string): string[] {
     const sections: any[] = (docsMenu as any).children || []
@@ -56,10 +57,10 @@ function getSidebarOrder(sidebarPath: string): string[] {
 
     for (const section of sections) {
         if (section.url === productPath) {
-            const installationSection = section.children?.find((child: any) => child.url === fullPath)
+            const targetSection = section.children?.find((child: any) => child.url === fullPath)
 
-            if (installationSection?.children) {
-                return installationSection.children
+            if (targetSection?.children) {
+                return targetSection.children
                     .filter((child: any) => child.url && child.url !== fullPath)
                     .map((child: any) => child.url)
             }
@@ -69,7 +70,7 @@ function getSidebarOrder(sidebarPath: string): string[] {
     return []
 }
 
-export default function useInstallationPlatforms(basePath: string, titleSuffix?: string): InstallationPlatform[] {
+export default function usePlatformList(basePath: string, titleSuffix?: string): Platform[] {
     const { allMdx } = useStaticQuery(graphql`
         query {
             allMdx(filter: { frontmatter: { title: { ne: null } } }) {
@@ -97,7 +98,7 @@ export default function useInstallationPlatforms(basePath: string, titleSuffix?:
             let label = node.frontmatter.title
 
             if (titleSuffix) {
-                // Extract versioning content in title
+                // Extract versioning content in title (ex: "(v3.6 and below)")
                 const parenMatch = label.match(/\(([^)]+)\)/)
                 const versionInfo = parenMatch ? ` ${parenMatch[0]}` : ''
 
@@ -106,7 +107,7 @@ export default function useInstallationPlatforms(basePath: string, titleSuffix?:
                 label = label.replace(suffixRegex, '').trim() + versionInfo
             }
 
-            const platform: InstallationPlatform = {
+            const platform: Platform = {
                 label,
                 url: `/${node.slug}`,
             }
@@ -123,7 +124,7 @@ export default function useInstallationPlatforms(basePath: string, titleSuffix?:
     const sidebarOrder = getSidebarOrder(basePath)
 
     if (sidebarOrder.length > 0) {
-        return result.sort((a: InstallationPlatform, b: InstallationPlatform) => {
+        return result.sort((a: Platform, b: Platform) => {
             const indexA = sidebarOrder.indexOf(a.url)
             const indexB = sidebarOrder.indexOf(b.url)
 
