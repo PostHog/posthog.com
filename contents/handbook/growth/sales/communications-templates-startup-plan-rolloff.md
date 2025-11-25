@@ -6,7 +6,7 @@ showTitle: true
 
 ## Purpose
 
-When a customer is coming to the end of their startup credits, this is a prime time to get connected and see if they are interested in pre-purchasing credits. The below examples are good starting points to initiate contact and demonstrate both helpfulness and an opening for commercial discussions.
+When a customer is coming to the end of their startup credits, this is a prime time to get connected and see if they are interested in pre-purchasing credits. The below examples are good starting points to initiate contact and demonstrate both helpfulness and an opening for commercial discussions. You should personalise these messages to the customer, their needs, and your own personal style.
 
 ## Startup plan roll off
 
