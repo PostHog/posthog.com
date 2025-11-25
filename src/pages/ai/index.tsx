@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
@@ -13,6 +13,7 @@ import ASCIISlide from 'components/AI/ASCIISlide'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { useWindow } from '../../context/Window'
 import TerminalView from 'components/AI/TerminalView'
+import usePostHog from 'hooks/usePostHog'
 const PRODUCT_HANDLE = 'posthog_ai'
 
 const CustomManifestoSlide = () => {
@@ -98,7 +99,9 @@ const CustomDemoSlide = () => {
 }
 
 export default function PostHogAI(): JSX.Element {
-    const { view, setHasDeveloperMode } = useWindow()
+    const posthog = usePostHog()
+    const { view, setHasDeveloperMode, setView } = useWindow()
+    const [loading, setLoading] = useState(true)
     const contentData = useContentData()
     const data = useStaticQuery(graphql`
         query {
@@ -212,11 +215,18 @@ export default function PostHogAI(): JSX.Element {
 
     useEffect(() => {
         setHasDeveloperMode(true)
+        const mode = posthog?.getFeatureFlag?.('mode-selection-test')
+        setView(mode === 'developer' ? 'developer' : 'marketing')
+        setLoading(false)
     }, [])
 
-    return view === 'developer' ? (
-        <TerminalView />
-    ) : (
-        <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
+    return (
+        <div className={loading ? 'opacity-0' : 'opacity-100'}>
+            {view === 'developer' ? (
+                <TerminalView />
+            ) : (
+                <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
+            )}
+        </div>
     )
 }
