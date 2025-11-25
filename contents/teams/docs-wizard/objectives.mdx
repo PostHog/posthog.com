@@ -1,0 +1,163 @@
+<details>
+  <summary>Even better SDK reference docs</summary>
+
+**Owner:** Vincent Ge
+
+**Motivation:** We’ve got all the infrastructure to keep shipping SDK references. Now we want them to be versioned, updated automatically on push to master, and hosted in each SDK’s repo.
+
+**What we'll ship**
+
+* References for Flutter, Android, iOS, GoLang. (still by popularity)  
+* CI workflows + website code to automatically keep references up to date.  
+* Selectors to view references by version. This is important for teams that choose to remain on older SDK versions.
+
+**We'll know we're successful when**
+
+* THE definitive source of truth for human and LLM readers for popular SDKs.  
+* Versioned references published when new SDK versions are released, without any human in-the-loop.
+
+</details>
+
+<details>
+  <summary>Usable API reference docs</summary>
+
+**Owner:** Vincent Ge
+
+**Motivation:** LLM based tools need these. Companies that want to deeply integrate with PostHog as a developer tool will need these. Doesn't need to be pretty, but information must be accurate.
+
+**What we'll ship:** 
+
+* Investigate how we generate SDK specs right now  
+* Examine past feedback about APIs  
+* Ship code and copy updates to correct *only* the parts that are wrong  
+* Make the website API references page slightly prettier
+
+**We'll know we're successful when**
+
+* A developer or LLM can use the API docs without being mislead.
+
+</details>
+
+<details>
+  <summary>Next-generation installation instructions</summary>
+
+**Owner:** Vincent Ge
+
+**Motivation:** We now own onboarding, wizard, and docs. They have a few problems:
+
+* They’re inconsistent. The information should be generally the exact same. You should be able to start in onboarding, move to docs, and then to wizard and see the same general instructions/approach. This builds trust and makes installation easier to follow.  
+* They’re hard to maintain. We have 3 copies of the same information.  
+* They lack clear checkpoints. No self-checking mechanisms that help readers/LLMs understand if they’re succeeding.
+
+**What we'll ship**
+
+* A standardized set of “instructions” for humans and machines. Similar to GitHub Spec-Kit, but less general. [See RFC](https://github.com/PostHog/meta/pull/362)  
+* A way to define clear checkpoints for humans and LLMs to follow. Including APIs and MCP tools if necessary.  
+* Website, monorepo, and wizard updates where applicable to consume this.
+
+**We'll know we're successful when**
+
+* A single source to update for instructions.  
+* LLMs and humans aren’t lost when they implement PostHog in their apps.  
+* Technical writing teams are jealous we built this first.
+
+</details>
+
+<details>
+  <summary>Next-generation wizard</summary>
+
+**Owner:** Danilo Campos
+
+**Motivation**: The wizard’s architecture is a dead-end. It’s too hard to maintain, and it can’t support more ambitious integrations in its current form. The code, prompts and context to support integrations are tightly coupled, making maintenance expensive. Error correction is non-existent, so our success comes down to luck. While that luck is overall good, with 80% or more wizard runs happy and healthy, there’s still thousands of people who end up with a bad outcome.
+
+**What we'll ship**
+
+* A wrapped Claude Code SDK CLI tool that uses our MCP for prompting and context provisioning, able to error correct its output in realtime.  
+* Fully-runnable example project code per framework
+
+**We'll know we're successful when**:
+
+* Users can’t believe how deep yet CORRECT our auto-integration is  
+* Feedback about poor integration experiences decreases dramatically  
+* We can easily support additional product integrations by adding high-level prompts and docs resources
+
+</details>
+
+<details>
+  <summary>Make the error tracking docs even better</summary>
+
+**Owner:** Edwin Lim
+
+**Motivation**: I know I know. I think it’s worth investing a bit more time into raising the product docs bar from "very good" to "holy shit". I don’t think we’re far away now that we’ve built the *foundation* (Hari Seldon would be proud). We won’t get the chance to do this with other products, at least not for a long while. A lot of this work can be reused for other Q4 projects. 
+
+**What we’ll ship:** 
+
+* Flagship use-case guides, example app, more docs components, robust troubleshooting, cross-product tutorials, deep-dive blog post, etc.
+
+**We'll know we're successful when**:
+
+* Other product teams want their docs to look like error tracking docs  
+* Users mention how good the error tracking docs are
+
+</details>
+
+<details>
+  <summary>Docs Markdown service</summary>
+
+**Owner:** Edwin Lim
+
+**Motivation**: AI agents need high-quality, focused context on demand in order to do all their work. LLMS.txt is actually an amazing dev tool instead of a AEO tool. Let’s turn all our docs into a context service. 
+
+**What we’ll ship:** 
+
+* Utility scripts or workflows that creates a versioned directory of our docs for download  
+* Multiple versions for different tokenized use cases (e.g., prose vs. just code snippets)
+
+**We'll know we're successful when**:
+
+* Agents like the Wizard or Claude Code perform better by using this context service
+
+</details>
+
+<details>
+  <summary>Example apps library + AI commandments</summary>  
+
+**Owner:** Edwin Lim, Danilo Campos
+
+**Motivation**: We need example apps. Even before the AI agent craze, our platform is starved for runnable applications with PostHog integrations that developers can learn from. Now AI agents need example apps for context. 
+
+**What we'll ship:** 
+
+* Example apps in multiple frameworks that are annotated with code comments   
+* Markdown file writeups that detail the application’s architecture, use cases,  and implementation for LLMs and humans to learn from  
+* End-to-end tests that verify the code is running even when PostHog SDKs update  
+* A maintained list of AI commandments: prompts with curated instructions for each example app that the agent can follow for best practices   
+* A docs component that quotes code snippets from the example apps, replacing ad-hoc code examples in the docs
+
+**We'll know we're successful when**:
+
+* Agents are performing better when using these example apps as context  
+* We're using the code   
+* Users mention how good the error tracking docs are
+
+</details>
+
+<details>
+<summary>Docs for new products and launches</summary> 
+
+**Owner:** Edwin Lim, Vincent Ge
+
+**Motivation**: We're shipping new, flagship products this quarter – especially developer and AI-focused ones like Array, logs, and Max AI with deep research. Marketing team also has upcoming product launches. These all need high-quality docs to go well.
+
+**What we'll ship:** 
+
+* MVP set of docs for each new product; overview, getting started, concepts, guides, AI, and resources, etc.
+* Potentially ship a new AI docs section to unify our collection of AI dev tools like Max AI, Array, Wizard, MCP, and more
+
+**We'll know we're successful when**:
+
+* Users adopt new products without friction
+* Positive feedback from users during and after each product launch
+* PostHog is better positioned as platform for dev tools and AI
+
+</details>
