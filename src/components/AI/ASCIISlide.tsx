@@ -201,7 +201,6 @@ export default function ASCIISlide(): JSX.Element {
                         <pre className="mt-5 mb-0 ml-0 mr-0 whitespace-pre overflow-x-auto [text-shadow:0_0_1px_rgba(238,239,233,0.4),0_0_2px_rgba(238,239,233,0.2)]">
                             <ASCIIBoxRow>
                                 <ASCIIBox
-                                    width={81}
                                     title={skillTitle.toUpperCase()}
                                     lines={(() => {
                                         const lines: string[] = []

@@ -116,7 +116,7 @@ export default function TerminalView(): JSX.Element {
                 </div>
 
                 {/* Intro with help command */}
-                <div className="mb-6 pt-4 border-t border-[#333]">
+                <div className="mb-6 pt-4">
                     <div className="text-[14px] space-y-1">
                         <div>
                             <span className="text-[#00FF00]">{prompt}</span>{' '}
@@ -130,7 +130,7 @@ export default function TerminalView(): JSX.Element {
 
                 {/* Skills */}
                 <TerminalSection id="skills">
-                    <ASCIIBox title={skillTitle} width={76}>
+                    <ASCIIBox title={skillTitle}>
                         {skills.map((skill, idx) => (
                             <div key={idx}> • {skill}</div>
                         ))}
@@ -176,35 +176,38 @@ export default function TerminalView(): JSX.Element {
 
                 {/* Pricing */}
                 <TerminalSection id="pricing" title="Pricing & Credits">
-                    <ASCIIBox title="How Credits Work" width={76}>
-                        <div className="py-3 px-2 space-y-3 text-[14px] leading-relaxed">
+                    <ASCIIBox title="How Credits Work">
+                        <div className="space-y-3 text-[14px] leading-relaxed">
                             <p className="text-bg">
-                                | AI credits are based on the underlying token costs, which reflect
-                                <br />| the effort required to complete your request.
+                                AI credits are based on the underlying token costs, which reflect
+                                <br />
+                                the effort required to complete your request
                             </p>
                             <div className="space-y-2">
                                 <p className="text-bg">
-                                    | <span className="text-[#00FF00]">SIMPLE QUERIES</span> like "What were my daily
+                                    <span className="text-[#00FF00]">SIMPLE QUERIES</span> like "What were my daily
                                     active users in October?"
-                                    <br />| use very few tokens, and therefore very few credits.
+                                    <br />
+                                    use very few tokens, and therefore very few credits.
                                 </p>
                                 <p className="text-bg">
-                                    | <span className="text-red">COMPLEX TASKS</span> like analyzing hundreds of session
+                                    <span className="text-red">COMPLEX TASKS</span> like analyzing hundreds of session
                                     recordings or
-                                    <br />| rewriting SQL queries multiple times use more tokens and consume
-                                    <br />| more credits.
+                                    <br />
+                                    rewriting SQL queries multiple times use more tokens and consume
+                                    <br />
+                                    more credits.
                                 </p>
                             </div>
                             <p className="text-bg">
-                                | PostHog automatically selects the most efficient model for each AI
-                                <br />| feature. We apply a simple, consistent 20% markup over the underlying
-                                <br />| LLM provider's cost:
+                                PostHog automatically selects the most efficient model for each AI
+                                <br />
+                                feature. We apply a simple, consistent 20% markup over the underlying
+                                <br />
+                                LLM provider's cost:
                             </p>
-                            <div className="mt-3 border-2 border-[#F1A82C] bg-[rgba(241,168,44,0.1)] p-3">
-                                <div className="text-[#F1A82C] font-mono text-[12px] space-y-1">
-                                    <div>1 PostHog AI credit = $0.8333 of raw inference</div>
-                                    <div>1,000 credits = $10</div>
-                                </div>
+                            <div className="font-semibold">
+                                1 PostHog AI credit = $0.1 of cost = $0.0083 of raw inference
                             </div>
                         </div>
                     </ASCIIBox>
@@ -231,7 +234,7 @@ export default function TerminalView(): JSX.Element {
                             </div>
                         </div>
 
-                        <div className="mt-6 pt-4 border-t border-[#333]">
+                        <div className="mt-6 pt-4">
                             <div className="text-[14px]">
                                 <span className="text-[#00FF00]">{prompt}</span>{' '}
                                 <Link
@@ -247,7 +250,7 @@ export default function TerminalView(): JSX.Element {
                 </TerminalSection>
 
                 {/* Footer */}
-                <div className="mt-12 pt-6 border-t border-[#333] text-[12px] text-[#666]">
+                <div className="pt-6 text-[12px] text-[#666]">
                     <p>
                         Report issues or share feedback at{' '}
                         <Link

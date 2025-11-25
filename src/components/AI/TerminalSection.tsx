@@ -26,14 +26,34 @@ export default function TerminalSection({ id, title, children, className = '' }:
 interface ASCIIBoxProps {
     title?: string
     children: ReactNode
-    width?: number
     className?: string
 }
 
-export function ASCIIBox({ title, children, width = 80, className = '' }: ASCIIBoxProps): JSX.Element {
-    const horizontalBorder = '='.repeat(width - 2)
+export function ASCIIBox({ title, children, className = '' }: ASCIIBoxProps): JSX.Element {
+    const measureRef = useRef<HTMLSpanElement>(null)
+    const [measuredDimensions, setMeasuredDimensions] = useState({ width: 20, numLines: 1 })
+
+    useLayoutEffect(() => {
+        if (measureRef.current) {
+            const text = measureRef.current.innerText ?? measureRef.current.textContent ?? ''
+            const lines = text.split('\n')
+            const maxLength = Math.max(...lines.map((line) => line.length), 1)
+            setMeasuredDimensions({
+                width: maxLength,
+                numLines: lines.length || 1,
+            })
+        }
+    }, [children])
+
+    // Calculate width based on widest of: title or content
+    const titleLength = title ? title.toUpperCase().length + 2 : 0 // +2 for spaces around title
+    const contentWidth = Math.max(measuredDimensions.width, titleLength)
+    const numLines = measuredDimensions.numLines
+    const totalWidth = contentWidth + 4 // +4 for `| ` and ` |`
+
+    const horizontalBorder = '='.repeat(totalWidth - 2)
     const titleContent = title ? ` ${title.toUpperCase()} ` : ''
-    const titlePadding = width - 2 - titleContent.length
+    const titlePadding = totalWidth - 2 - titleContent.length
     const paddedTitle = titleContent + ' '.repeat(Math.max(0, titlePadding))
 
     return (
@@ -45,7 +65,13 @@ export function ASCIIBox({ title, children, width = 80, className = '' }: ASCIIB
                     <div className="text-[#F1A82C]">|{horizontalBorder}|</div>
                 </>
             )}
-            <div className="text-bg">{children}</div>
+            <div className="flex">
+                <span className="text-[#F1A82C]">{Array(numLines).fill('| ').join('\n')}</span>
+                <span ref={measureRef} className="text-bg" style={{ minWidth: `${contentWidth}ch` }}>
+                    {children}
+                </span>
+                <span className="text-[#F1A82C]">{Array(numLines).fill(' |').join('\n')}</span>
+            </div>
             <div className="text-[#F1A82C]">|{horizontalBorder}|</div>
         </pre>
     )
