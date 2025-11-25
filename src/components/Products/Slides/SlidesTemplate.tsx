@@ -41,6 +41,7 @@ interface SlidesTemplateProps {
         description?: string
         image?: string
     }
+    rightActionButtons?: React.ReactNode
 }
 
 export const SlideContainer = ({ children }: { children: React.ReactNode }) => {
@@ -52,6 +53,7 @@ export default function SlidesTemplate({
     data,
     slideConfig = Object.values(defaultSlides),
     seoOverrides,
+    rightActionButtons,
 }: SlidesTemplateProps) {
     // Get product data early to check for AI section
     const productData = useProduct({ handle: productHandle }) as any
@@ -651,6 +653,7 @@ export default function SlidesTemplate({
                 image={seoOverrides?.image || `/images/og/${productData?.slug}.jpg`}
             />
             <Presentation
+                rightActionButtons={rightActionButtons}
                 template="generic"
                 slug={productData?.slug}
                 title=""
