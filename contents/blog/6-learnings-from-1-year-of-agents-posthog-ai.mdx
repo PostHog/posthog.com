@@ -31,14 +31,14 @@ The one constant of a year of building: model improvements change more than what
 
 The two model-related step changes in our implementation were:
 
-- introduction of cost-effective reasoning with o4-mini – this significantly improved and simplified creation of complex queries, especially those requiring data exploration to get right, ReAct BeGone!
+- introduction of cost-effective reasoning with OpenAI's o4-mini – this significantly improved and simplified creation of complex queries, especially those requiring data exploration to get right, ReAct BeGone!
 - reliable use of tools with the Claude 4 family from Anthropic – the agent could finally be let loose to use a wider variety of tools without going off track
 
 It remains hard to estimate what impact a model upgrade will really have! [A great post on this by Sean Goedecke](https://www.seangoedecke.com/are-new-models-good/). While the progress isn't so obvious as GPT-2 vs. GPT-3, it's still relentless.
 
 ## 2. Agents beat workflows
 
-Graph-style workflows seemed like the right choice for getting work done. In the GPT 4o era, calling tools in a loop with the same system prompt was a recipe for confusion, and so we've spent months chasing new graph-based ways of orchestrating tools. Just look at the architecture iterations we've cycled through. The initial one couldn't even answer questions with text, it could exclusively create queries, whatever the user input was!
+Graph-style workflows seemed like the right choice for getting work done. In the GPT-4o era, calling tools in a loop with the same system prompt was a recipe for confusion, and so we've spent months chasing new graph-based ways of orchestrating tools. Just look at the architecture iterations we've cycled through. The initial one couldn't even answer questions with text, it could exclusively create queries, whatever the user input was!
 
 ![https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_11_24_at_21_22_20_ddf57a0dd4.png]
 
@@ -70,7 +70,7 @@ Did I mention context matters? It really does, at every step of a task, because 
 
 Core context massively improves agent trajectories, but it's a new to-do for a user, and none us love it when a new tool creates setup work. We've found it critical for core context creation to be effortless, yet not forced. Ultimately, as all great artists do, we stole from the best – and implemented the `/init` command, snatched from Claude Code.
 
-In PostHog AI, `/init` learns about your product and business via multi-step web search (currently using GPT 5 mini). The results form the agent's project-level memory. In the case your data doesn't contain URLs to work with, a few questions are asked directly, but it's something we try to minimize.
+In PostHog AI, `/init` learns about your product and business via multi-step web search (currently using GPT-5-mini). The results form the agent's project-level memory. In the case your data doesn't contain URLs to work with, a few questions are asked directly, but it's something we try to minimize.
 
 Context is _everywhere_. It lives on the web, but it lives in your Slack too, in your email inbox, in your notes app. This is one of the problems in applied AI that already have a number of solutions, but aren't _solved_ yet. We have some ideas, stay tuned for those.
 
