@@ -1,8 +1,14 @@
 import React from 'react'
-import { IconX, IconCheck } from '@posthog/icons'
+import { IconX } from '@posthog/icons'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { Checkbox } from 'components/RadixUI/Checkbox'
 import Tooltip from 'components/RadixUI/Tooltip'
+
+export interface TeamContext {
+    id: string
+    name: string
+    miniCrest?: string
+}
 
 export interface SelectedMember {
     squeakId: string
@@ -11,9 +17,10 @@ export interface SelectedMember {
     avatar?: { url: string }
     color?: string
     teams: string[] // Team names for tooltip
+    teamContext?: TeamContext // The team from which this member was selected
 }
 
-interface TeamProfile {
+export interface TeamProfile {
     id: string
     attributes: {
         squeakId: string
@@ -25,7 +32,7 @@ interface TeamProfile {
     }
 }
 
-interface Team {
+export interface Team {
     id: string
     name: string
     slug: string
@@ -132,7 +139,7 @@ export function TeamMemberMultiSelect({
         }
     }, [query, filteredTeams])
 
-    const toggleMember = (profile: TeamProfile, teamNames: string[]) => {
+    const toggleMember = (profile: TeamProfile, teamNames: string[], currentTeam?: Team) => {
         const squeakId = profile.attributes.squeakId
         const isSelected = selectedIds.has(squeakId)
 
@@ -150,6 +157,13 @@ export function TeamMemberMultiSelect({
                     : undefined,
                 color: profile.attributes.color,
                 teams: teamNames,
+                teamContext: currentTeam
+                    ? {
+                          id: currentTeam.id,
+                          name: currentTeam.name,
+                          miniCrest: currentTeam.miniCrest?.data?.attributes?.url,
+                      }
+                    : undefined,
             }
             onChange([...value, newMember])
         }
@@ -195,6 +209,11 @@ export function TeamMemberMultiSelect({
                             : undefined,
                         color: profile.attributes.color,
                         teams: memberData.teamNames,
+                        teamContext: {
+                            id: team.id,
+                            name: team.name,
+                            miniCrest: team.miniCrest?.data?.attributes?.url,
+                        },
                     }
                 })
             onChange([...value, ...newMembers])
@@ -294,10 +313,7 @@ export function TeamMemberMultiSelect({
                     />
                 </div>
                 {focused && (
-                    <div
-                        ref={listRef}
-                        className="mt-2 max-h-96 overflow-auto rounded border border-primary bg-primary"
-                    >
+                    <div ref={listRef} className="mt-2 max-h-96 overflow-auto rounded border border-primary bg-primary">
                         {/* All members checkbox */}
                         <div className="flex items-center gap-2 px-3 py-2 border-b border-primary hover:bg-accent">
                             <Checkbox
@@ -353,11 +369,10 @@ export function TeamMemberMultiSelect({
                                         content: (
                                             <div className="space-y-2">
                                                 {team.profiles.data.map((profile) => {
-                                                    const memberData = allMembersMap.get(
-                                                        profile.attributes.squeakId
-                                                    )!
+                                                    const memberData = allMembersMap.get(profile.attributes.squeakId)!
                                                     const isSelected = selectedIds.has(profile.attributes.squeakId)
-                                                    const displayName = `${profile.attributes.firstName} ${profile.attributes.lastName}`.trim()
+                                                    const displayName =
+                                                        `${profile.attributes.firstName} ${profile.attributes.lastName}`.trim()
                                                     const avatarUrl = profile.attributes.avatar?.data?.attributes?.url
 
                                                     return (
@@ -369,7 +384,7 @@ export function TeamMemberMultiSelect({
                                                                 id={`member-${profile.attributes.squeakId}`}
                                                                 checked={isSelected}
                                                                 onCheckedChange={() =>
-                                                                    toggleMember(profile, memberData.teamNames)
+                                                                    toggleMember(profile, memberData.teamNames, team)
                                                                 }
                                                             />
                                                             <img
