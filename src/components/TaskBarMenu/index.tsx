@@ -11,14 +11,11 @@ import {
     IconBookmark,
     IconUpload,
     IconCode,
-    IconCheck,
-    IconCopy,
-    IconShare,
     IconFeatures,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
-import MenuBar, { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
+import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
 import OSButton from 'components/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -28,13 +25,10 @@ import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
-import { Popover } from 'components/RadixUI/Popover'
 
 export default function TaskBarMenu() {
     const {
         windows,
-        bringToFront,
-        focusedWindow,
         openSearch,
         openSignIn,
         siteSettings,
@@ -44,7 +38,6 @@ export default function TaskBarMenu() {
         addWindow,
         taskbarRef,
         posthogInstance,
-        copyDesktopParams,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
