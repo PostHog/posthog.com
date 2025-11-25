@@ -353,9 +353,9 @@ Before setting up SCIM, you need:
 
 1. In PostHog, navigate to Organization settings and go to [Authentication domains](https://app.posthog.com/settings/organization-authentication).
 
-2. Click the (⋯) next to your domain and select "Configure SCIM".
+2. Click the (⋯) next to your domain and select **Configure SCIM**.
 
-3. Copy the **SCIM Base URL** and **SCIM Token**. You'll need these for your IdP configuration.
+3. Copy the `SCIM Base URL` and `SCIM Token`. You'll need these for your IdP configuration.
 
 4. In your Identity Provider, configure SCIM for your PostHog application:
 
@@ -384,28 +384,28 @@ Before setting up SCIM, you need:
 
 If your existing SAML app supports SCIM 2.0 provisioning, you can use it. Otherwise, follow these steps to create a new app that supports both SAML and SCIM:
 
-1. In Okta admin, go to Applications and click "Create App Integration".
+1. In Okta admin, go to Applications and click **Create App Integration**.
 
 2. Search for `SCIM 2.0 Test App (Auth Bearer Token)` and select it.
-
-3. Leave "SAML sign-on method" enabled. Configure SAML following the steps in the [Okta SAML example](#example-okta).
+ 
+3. Leave **SAML sign-on** method enabled. Configure SAML following the steps in the [Okta SAML example](#example-okta).
 
 4. In PostHog, open your existing SAML configuration for the domain and update it with the new values from Okta (SAML ACS URL, SAML Entity ID, and SAML X.509 certificate).
 
-5. Navigate to the "Provisioning" tab in Okta and click "Configure API Integration".
+5. Navigate to the **Provisioning** tab in Okta and click **Configure API Integration**.
 
-6. Check "Enable API integration" and enter:
+6. Check **Enable API integration** and enter:
     - `SCIM Base URL` from PostHog
     - `API Token` (the SCIM Token from PostHog)
 
-7. Click "Test API Credentials" to verify the connection.
+7. Click **Test API Credentials** to verify the connection.
 
-8. In the "Provisioning to App" settings, enable:
+8. In the **Provisioning to App** settings, enable:
     - Create Users
     - Update User Attributes
     - Deactivate Users
 
-9. Go to the "Assignments" tab and configure role mapping. 
+9. Go to the **Assignments** tab and configure role mapping. 
 
 10. Assign users to the PostHog application. Their email, name, and groups will be automatically updated in PostHog.
 
@@ -415,26 +415,26 @@ If your existing SAML app supports SCIM 2.0 provisioning, you can use it. Otherw
 
 If you already have a SAML app configured, you'll need to migrate to an app that supports SCIM provisioning.
 
-1. In OneLogin admin, go to Applications and click "Add App".
+1. In OneLogin admin, go to Applications and click **Add App**.
 
 2. Search for `SCIM Provisioner with SAML (SCIM v2 Enterprise, full SAML)` and select it.
 
-3. In the "Configuration" tab, copy the settings from your existing SAML app: `SAML Audience URL`, `RelayState`, `ACS (Consumer) URL`.
+3. In the **Configuration** tab, copy the settings from your existing SAML app: `SAML Audience URL`, `RelayState`, `ACS (Consumer) URL`.
 
-4. Go to the "Parameters" tab and ensure the following attributes are created (they are required for SAML to work correctly):
+4. Go to the **Parameters** tab and ensure the following attributes are created (they are required for SAML to work correctly):
     - `email` (Email)
     - `first_name` (First Name)
     - `last_name` (Last Name)
 
-5. Navigate to the "Configuration" tab and paste the `SCIM Base URL` and `SCIM Bearer Token` from PostHog into the API Connection section. Click "Enable".
+5. Navigate to the **Configuration** tab and paste the `SCIM Base URL` and `SCIM Bearer Token` from PostHog into the API Connection section. Click **Enable**.
 
-6. Go to the "Provisioning" tab and check "Enable provisioning." Select whether you want admin approval for creating or deleting users.
+6. Go to the **Provisioning** tab and check **Enable provisioning**. Select whether you want admin approval for creating or deleting users.
 
-7. To sync roles, go to the "Rules" tab and create a rule to map OneLogin roles to PostHog roles. To sync all roles as-is:
-    - In **Actions**, select "Set Groups in SCIM v2 Provisioner with SAML".
-    - Select "Map from OneLogin".
-    - For "For each role with value that matches", enter `.*`.
+7. To sync roles, go to the **Rules** tab and create a rule to map OneLogin roles to PostHog roles. To sync all roles as-is:
+    - In **Actions**, select `Set Groups in SCIM v2 Provisioner with SAML`
+    - Select `Map from OneLogin`
+    - For each `role` with value that matches `.*`
 
-8. Go to the "SSO" tab and copy the new `Issuer URL`, `SAML 2.0 Endpoint`, and `X.509 Certificate`. Update your existing SAML configuration in PostHog with these new values.
+8. Go to the **SSO** tab and copy the new `Issuer URL`, `SAML 2.0 Endpoint`, and `X.509 Certificate`. Update your existing SAML configuration in PostHog with these new values.
 
-9. Assign users to the new application. Go to "Users," select a user, assign roles, and add them to the application.
+9. Assign users to the new application. Go to **Users**, select a user, assign roles, and add them to the application.
