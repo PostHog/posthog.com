@@ -16,62 +16,6 @@ import TerminalView from 'components/AI/TerminalView'
 import usePostHog from 'hooks/usePostHog'
 const PRODUCT_HANDLE = 'posthog_ai'
 
-const CustomManifestoSlide = () => {
-    return (
-        <div
-            data-scheme="primary"
-            className="flex flex-col p-12 justify-start @2xl:justify-center items-center h-full bg-primary text-primary"
-        >
-            <h2 className="text-4xl font-bold mb-8">Manifesto</h2>
-            <p>
-                <Link to="/ai" state={{ newWindow: true }}>
-                    PostHog AI
-                </Link>{' '}
-                is our product assistant that helps you build context, assemble insights, find areas for product
-                improvement, and even create pull requests after writing code (alpha).
-            </p>
-
-            <p>PostHog AI is free to use during beta. (After that, we may charge a nominal flat monthly fee.)</p>
-
-            <h2>Why don’t I just ask ChatGPT instead?</h2>
-
-            <p>
-                PostHog AI has a nuanced understanding of your customers - it has access to errors, replays, event data,
-                and everything in your data warehouse. You can ask ChatGPT questions based on data from one product at a
-                time, but that’s like trying to understand a painting when you can only see the color blue - you may get
-                a rough idea, but it’s hardly the Mona Lisa.
-            </p>
-
-            <h2>More than chatting with your data...</h2>
-
-            <p>
-                PostHog AI can read and write. He can find, watch sessions, explain and summarize replays for you. He
-                can create insights, write and edit SQL, conduct multi-step deep research, and more. The goal is to
-                generate a rich understanding of your customers’ broad range of data.
-            </p>
-
-            <h2>Product autonomy</h2>
-
-            <p>
-                The goal long term is to help every developer to ship a product autonomously. There are many steps to
-                get there, many of which we are still to take, but we believe the technology today exists to make very
-                meaningful progress.
-            </p>
-
-            <p>
-                Right now, you can meaningfully detect issues and understand user behavior to inform what you ship. As
-                we give PostHog AI access to more tools, he’ll get smarter, more accurate, and more intelligent.
-            </p>
-
-            <p>
-                Very shortly you’ll be able to detect and generate PRs for fixing UX issues and errors, before you even
-                wake up for the day. We’re working on the ability to generate ideas for what to work on, and to convert
-                these into pull requests agentically. Stay tuned.
-            </p>
-        </div>
-    )
-}
-
 const CustomDemoSlide = () => {
     return (
         <div
