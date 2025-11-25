@@ -62,7 +62,7 @@ export default function FeatureFlags(): JSX.Element {
     // Optional: Customize slides
     // See /components/Products/Slides/README.md for more details
     const slides = createSlideConfig({
-        // exclude: ['comparison-summary'],
+        exclude: ['videos'],
         // order: ['overview', 'pricing', 'features'],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
