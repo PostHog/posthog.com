@@ -37,7 +37,7 @@ export const Markdown = ({
             transformImageUri={transformImageUri}
             rehypePlugins={[rehypeSanitize]}
             className={cn(
-                'markdown prose dark:prose-invert prose-sm max-w-full text-primary [&_a]:font-semibold',
+                'markdown prose dark:prose-invert prose-sm max-w-full text-primary [&_a]:font-semibold break-words [overflow-wrap:anywhere]',
                 !regularText,
                 className
             )}

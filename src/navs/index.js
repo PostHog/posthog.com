@@ -83,6 +83,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/google-ads',
                 },
                 {
+                    name: 'Bing Ads',
+                    url: '/docs/cdp/sources/bing-ads',
+                },
+                {
                     name: 'LinkedIn Ads',
                     url: '/docs/cdp/sources/linkedin-ads',
                 },
@@ -4185,6 +4189,10 @@ export const docsMenu = {
                         {
                             name: 'Google Ads',
                             url: '/docs/data-warehouse/sources/google-ads',
+                        },
+                        {
+                            name: 'Bing Ads',
+                            url: '/docs/data-warehouse/sources/bing-ads',
                         },
                         {
                             name: 'LinkedIn Ads',

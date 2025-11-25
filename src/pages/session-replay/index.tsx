@@ -66,6 +66,7 @@ export default function SessionReplay(): JSX.Element {
         templates: {
             overview: 'columns', // Use the horizontal split layout
         },
+        exclude: ['videos'],
         content: {
             answersDescription:
                 'Understand user behavior, identify friction points, and improve your product experience',
