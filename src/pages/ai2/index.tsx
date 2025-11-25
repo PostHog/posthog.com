@@ -218,14 +218,14 @@ export default function AI2(): JSX.Element {
                 <TerminalSection id="getting-started" title="Getting Started">
                     <div className="space-y-4">
                         <div className="pl-4 border-l-2 border-[#F1A82C] space-y-2">
-                            <div className="text-[#F1A82C] text-xs font-bold">USAGE:</div>
+                            <div className="text-[#F1A82C] text-sm font-bold">USAGE:</div>
                             <div className="text-[rgba(238,239,233,0.8)] text-[13px] leading-relaxed">
                                 Open PostHog AI in your project and ask it to analyze data or build something
                             </div>
                         </div>
 
                         <div className="pl-4 border-l-2 border-[#1D4AFF] space-y-2">
-                            <div className="text-[#1D4AFF] text-xs font-bold">EXAMPLES:</div>
+                            <div className="text-[#1D4AFF] text-sm font-bold">EXAMPLES:</div>
                             <div className="text-[rgba(238,239,233,0.8)] text-[13px] space-y-1">
                                 {posthog_ai.answers?.slice(0, 5).map((a, idx) => (
                                     <div key={idx}>

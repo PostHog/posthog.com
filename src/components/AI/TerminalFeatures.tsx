@@ -50,26 +50,24 @@ function FeatureContent({ feature }: { feature: Feature }): JSX.Element {
             {/* Skills */}
             {feature.skills && feature.skills.length > 0 && (
                 <div className="space-y-3">
-                    <div className="text-[#F1A82C] text-xs font-bold">SKILLS:</div>
+                    <div className="text-[#F1A82C] text-sm font-bold">SKILLS:</div>
                     {feature.skills.map((skill, idx) => (
                         <div key={idx} className="space-y-1">
-                            <div className="flex items-center gap-2 text-xs">
+                            <div className="flex items-center gap-2 text-sm">
                                 <span style={{ color: accentColor }}>•</span>
                                 <span className="text-[rgba(238,239,233,0.9)] font-bold">{skill.name}</span>
-                                {skill.percent > 0 && (
-                                    <span className="text-[#666] text-[12px] ml-auto">
-                                        {skill.percent}% READY
-                                    </span>
-                                )}
                             </div>
                             <div className="pl-4 text-[13px] text-[rgba(238,239,233,0.7)] leading-snug">
                                 {skill.description}
                             </div>
-                            {skill.percent > 0 && (
-                                <div className="pl-4 text-[12px] font-mono">
+                            <div className="pl-4 flex items-center gap-2">
+                                <div className="text-[12px] font-mono">
                                     <span style={{ color: accentColor }}>{ProgressBar({ percent: skill.percent })}</span>
                                 </div>
-                            )}
+                                <span className="text-[#666] text-[12px]">
+                                    {skill.percent}% CONFIDENCE
+                                </span>
+                            </div>
                         </div>
                     ))}
                 </div>

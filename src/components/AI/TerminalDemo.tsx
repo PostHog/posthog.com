@@ -53,13 +53,13 @@ export default function TerminalDemo(): JSX.Element {
 
             <div className="flex items-center gap-2 mb-4">
                 <span className="text-xl">💡</span>
-                <div className="text-xs text-[#666]">
+                <div className="text-sm text-[#666]">
                     <strong className="text-[rgba(238,239,233,0.9)]">Signed into PostHog?</strong>
                     <span className="ml-2">Click any question to launch PostHog AI.</span>
                 </div>
             </div>
 
-            <div className="space-y-3 max-w-4xl">
+            <div className="space-y-4 max-w-4xl">
                 {demoQuestions.map((card, idx) => {
                     const encodedQuestion = encodeURIComponent(
                         JSON.stringify({
@@ -87,7 +87,7 @@ export default function TerminalDemo(): JSX.Element {
                                     <div className="text-[rgba(238,239,233,0.9)] text-sm font-mono border-b border-dashed border-[#666] group-hover:border-[#00FF00] pb-1">
                                         {card.top}
                                     </div>
-                                    <div className="text-[#666] text-xs mt-2 leading-relaxed">
+                                    <div className="text-[#666] text-sm mt-2 leading-relaxed">
                                         {card.bottom}
                                     </div>
                                 </div>

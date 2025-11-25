@@ -81,7 +81,7 @@ export default function TerminalRoadmap(): JSX.Element {
                                             </span>
                                         )}
                                         <div className="flex-1">
-                                            <div className="text-[rgba(238,239,233,0.9)] text-xs font-bold leading-tight">
+                                            <div className="text-[rgba(238,239,233,0.9)] text-sm font-bold leading-tight">
                                                 {roadmap.title.substring(0, 60)}
                                                 {roadmap.title.length > 60 ? '...' : ''}
                                             </div>
@@ -104,7 +104,7 @@ export default function TerminalRoadmap(): JSX.Element {
                     </div>
                     {inProgress.slice(0, 3).map((roadmap: RoadmapItem) => (
                         <div key={roadmap.id} className="space-y-1">
-                            <div className="text-[rgba(238,239,233,0.9)] text-xs font-bold leading-tight">
+                            <div className="text-[rgba(238,239,233,0.9)] text-sm font-bold leading-tight">
                                 {roadmap.title.substring(0, 60)}
                                 {roadmap.title.length > 60 ? '...' : ''}
                             </div>
@@ -124,7 +124,7 @@ export default function TerminalRoadmap(): JSX.Element {
                     </div>
                     {shipped.slice(0, 3).map((roadmap: RoadmapItem) => (
                         <div key={roadmap.id} className="space-y-1">
-                            <div className="text-[rgba(238,239,233,0.9)] text-xs font-bold leading-tight">
+                            <div className="text-[rgba(238,239,233,0.9)] text-sm font-bold leading-tight">
                                 {roadmap.title.substring(0, 60)}
                                 {roadmap.title.length > 60 ? '...' : ''}
                             </div>

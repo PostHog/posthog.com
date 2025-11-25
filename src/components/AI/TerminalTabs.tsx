@@ -31,7 +31,7 @@ export default function TerminalTabs({ tabs, defaultTab, onTabChange, children, 
                             key={tab.id}
                             onClick={() => handleTabChange(tab.id)}
                             className={`
-                                px-3 py-2 text-left font-code text-xs transition-colors border-l-2
+                                px-3 py-2 text-left font-code text-sm transition-colors border-l-2
                                 ${
                                     activeTab === tab.id
                                         ? 'border-[#00FF00] text-[#00FF00] bg-[#00FF00]/10'
@@ -59,7 +59,7 @@ export default function TerminalTabs({ tabs, defaultTab, onTabChange, children, 
                         key={tab.id}
                         onClick={() => handleTabChange(tab.id)}
                         className={`
-                            px-3 py-1 border-2 font-code text-xs transition-colors
+                            px-3 py-1 border-2 font-code text-sm transition-colors
                             ${
                                 activeTab === tab.id
                                     ? 'border-[#00FF00] text-[#00FF00] bg-[#00FF00]/10'
