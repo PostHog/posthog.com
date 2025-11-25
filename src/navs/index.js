@@ -1,3 +1,5 @@
+import { IconLink } from 'components/OSIcons'
+
 export const dataPipelines = {
     name: 'Data pipelines',
     url: '/docs/cdp',
@@ -3922,6 +3924,20 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Group exceptions into issues',
+                    url: '/docs/error-tracking/grouping-issues',
+                    icon: 'IconList',
+                    color: 'yellow',
+                    featured: true,
+                },
+                {
+                    name: 'Monitor and search issues',
+                    url: '/docs/error-tracking/monitoring',
+                    icon: 'IconSearch',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
                     name: 'Manage and resolve issues',
                     url: '/docs/error-tracking/managing-issues',
                     icon: 'IconDashboard',
@@ -3934,29 +3950,12 @@ export const docsMenu = {
                     icon: 'IconUser',
                     color: 'blue',
                     featured: true,
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/error-tracking/assigning-issues',
-                        },
-                        {
-                            name: 'Track in GitHub and Linear',
-                            url: '/docs/error-tracking/external-tracking',
-                        },
-                    ],
                 },
                 {
-                    name: 'Group exceptions into issues',
-                    url: '/docs/error-tracking/grouping-issues',
-                    icon: 'IconList',
-                    color: 'yellow',
-                    featured: true,
-                },
-                {
-                    name: 'Monitor and search issues',
-                    url: '/docs/error-tracking/monitoring',
-                    icon: 'IconSearch',
-                    color: 'seagreen',
+                    name: 'Set up integrations',
+                    url: '/docs/error-tracking/integrations',
+                    icon: 'IconGear',
+                    color: 'red',
                     featured: true,
                 },
                 {
