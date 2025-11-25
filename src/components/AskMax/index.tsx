@@ -1,7 +1,7 @@
 import React from 'react'
 import { useStaticQuery } from 'gatsby'
 import { graphql } from 'gatsby'
-import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
+import { IconLightBulb, IconChatHelp } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { useLayoutData } from 'components/Layout/hooks'
 import usePostHog from 'hooks/usePostHog'
@@ -69,11 +69,11 @@ export default function AskMax({
     }
 
     return (
-        <div>
+        <div className="mt-4 p-2">
             {compact ? null : (
                 <div className="@container">
                     <div
-                        className={`flex flex-col @lg:flex-row items-center justify-center @3xl:justify-start gap-4 @2xl:!gap-8 relative py-2 w-full @2xl:w-auto ${borderClasses} ${className}`}
+                        className={`flex flex-col @2xl:flex-row items-center justify-center @3xl:justify-start gap-4 @2xl:!gap-8 relative py-2 w-full @2xl:w-auto ${borderClasses} ${className}`}
                     >
                         <div className="flex-1 @2xl:flex-[0_0_auto] flex flex-col @lg:flex-row items-center justify-center gap-4">
                             <div>
@@ -82,11 +82,11 @@ export default function AskMax({
 
                             <div className="flex flex-col text-center @lg:text-left">
                                 <h3 className="m-0 !text-2xl @lg:!text-xl leading-tight">
-                                    {title} <span className="text-red dark:text-yellow">Ask Max AI.</span>
+                                    {title} <span className="text-red dark:text-yellow">Ask PostHog AI.</span>
                                 </h3>
                                 <p className="text-[15px] mb-0 opacity-75 text-balance">
                                     It's easier than reading through{' '}
-                                    <strong>{totalDocsCount} pages of documentation</strong>
+                                    <strong>{totalDocsCount} pages of documentation.</strong>
                                 </p>
                             </div>
                         </div>
@@ -98,8 +98,8 @@ export default function AskMax({
                                 childClassName="whitespace-nowrap"
                                 onClick={handleChatOpen}
                             >
-                                Chat with Max
-                                <IconSidebarOpen className="size-6 inline-block opacity-75 group-hover:opacity-100" />
+                                <IconChatHelp className="size-6 inline-block opacity-75 group-hover:opacity-100" />
+                                <span>Chat with PostHog AI</span>
                             </CallToAction>
                         </div>
                     </div>

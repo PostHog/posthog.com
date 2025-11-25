@@ -16,7 +16,7 @@ Although our standard monthly [pricing](/pricing) has volume discounts built in,
 2. **Prepaid credit:** We offer a 20% discount on a paid-up-front plan of >$20k, because it's beneficial to PostHog to have a customer committed.
 3. **Higher spend:** We offer an additional 5% and then 15% on top of the prepaid credit plans when the customer spends above $60k and $100k respectively.
 4. **Multi-year:** We offer an additional 5% for each additional committed credit renewal under a prepaid contract, as longer commitments are beneficial to PostHog (see table below). Credits rollover in-between for multi-year contracts.
-5. **Up-front payment:** We offer an additional 3% where a _multi-year_ contract is all **paid up-front**, as it's better for PostHog to have the money in the bank.
+5. **Up-front payment:** We offer an additional 2.5% per year where a _multi-year_ contract is all **paid up-front**, as it's better for PostHog to have the money in the bank.
 
 > We don't offer a discount for signing a contract by some fixed date (e.g so the deal closes in a specific quarter).
 
@@ -85,17 +85,15 @@ The below table summarizes the discount levels contained in points 2-4:
 </tbody>
 </table>
 
-Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. For this reason, discounts only apply if customers pay the whole year(s) up front.
+Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. Pre-paid discounts must be paid up-front. We do not offer monthly or quarterly payment plans for discounted contracts. If a customer prefers quarterly or monthly payments, we can offer them a lower credit value, which will reduce their discount.
 
-As an exception, a customer can choose to contract for a year but pay quarterly - in this case, they can get a discount, but it is halved. No discounts are available for customers paying monthly.
+### Why we require up-front payment for credit purchases
+
+We've found that split payment terms create friction for both teams – customers chasing internal approvals, us chasing invoices, nobody focused on delivering value. When customers pay quarterly or monthly, they often consume credits faster than they pay for them, effectively turning us into a line of credit. We are vendors, not lenders. Our focus is on [building the best product](/handbook/how-we-make-money), not managing accounts receivable. Up-front payments keep everyone focused on customer success and let us invest cash immediately into building features and support. If a customer needs payment flexibility, we're happy to adjust the credit amount and discount, per guidelines above, to fit their budget while maintaining up-front payment.
 
 ### Credit for case studies
 
-We don't offer additional discounts in exchange for a case study, but we can offer up to 5% additional year 1 credit in exchange for a _published_ case study on PostHog.com (ie. the credit is only applied after the case study goes live, not up front). Simon or Charles need to approve this before you offer it to the customer - most case studies are not going to be useful for us, so don't assume you can just offer this.
-
-This should be added as a special term into the order form as follows:
-
-> PostHog will add an additional $XXXXX of credit to Customer account upon successful publishing of a case study on Customer's usage of PostHog on PostHog.com.
+We don't offer additional discounts in exchange for a case study, as paying for case studies can devalue them. We should be working to get our customers to a state of happiness such that they are willing to tell everyone how great PostHog is without needing to pay for it.
 
 ### Self-serve discounts
 
@@ -134,21 +132,45 @@ You might see some customers with a 30% discount on their monthly Stripe subscri
 
 ### Startup plan discounts
 
-For customers on our [startup plan](/startups), we offer two months free credit when signing a prepaid deal. This encourages startups to use their credits to understand usage, and then commit to a longer term plan with PostHog. This offer is available until the first billing date after the credits expire. If a customer has used up their credits before the expiration date, they still have until the original expiration date to decide and claim the offer. The amount of free credits is determined by how much they purchase on a prepaid plan. By default, we work with customers on prepaid plans that will cover their usage for the next 12 months. 
+For customers on our [startup plan](/startups), we offer two months free credit when signing a prepaid deal. This encourages startups to use their credits to understand usage, and then commit to a longer term plan with PostHog. This offer is available until the first billing date after the credits expire. If a customer has used up their credits before the expiration date, they still have until the original expiration date to decide and claim the offer. The amount of free credits is determined by how much they purchase on a prepaid plan. By default, we work with customers on prepaid plans that will cover their usage for the next 12 months.
 
 You should follow the same [inbound sales process](https://posthog.com/handbook/growth/sales/new-sales) and work with the customer on understanding and optimizing their usage. Then follow these additional steps take to present the prepaid plan + free credits option(s):
 1. Review the customer's average monthly cost
 2. Estimate the prepaid equivalent for 12 months of coverage (e.g. [monthly cost x 12])
 3. Inform them they can take advantage of this offer, which gives them the option to purchase [monthly cost x 10] and still have 12-months of coverage.
-4. Check whether buying [monthly cost x 10] gives them a lower [discount rate](https://posthog.com/handbook/growth/sales/contract-rules#discounts) 
+4. Check whether buying [monthly cost x 10] gives them a lower [discount rate](https://posthog.com/handbook/growth/sales/contract-rules#discounts)
 5. If so, you should ALSO present the option to buy [monthly cost x12], and they'll receive [monthly cost x14] AND take advantage of the higher discount.
 6. If the customer wants to purchase fewer credits than either option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
 
 All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional, one-time credit (offered to customers in exchange for rolling off the Startup plan) in the amount of USD XXXXX will be applied upon contract start date with the same expiration date."
 
+For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date.
+
+### Margin negative deals
+
+In exceptional circumstances, we may explore providing additional discounts which eat into our operating margin for the following cases:
+
+1. They are a strategic logo we'd like to land as a brand-new customer.
+2. We are taking their business from a competitor.
+3. We are preventing them from churning to a competitor.
+
+If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details including margin calculation with Charles.  If he's happy that it's the right thing to do, then you also need to check with Raquel from a product support perspective.
+
 ## Additional credit purchase
 
 As it's often difficult to right-size the credit needed for a longer term plan as a standard we offer to honor the discount provided in the original purchase for any additional credit purchased in the first half of a contract term (e.g. 6 months for an annual plan). Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in #sales-alerts to help notify account owners about this.
+
+## Price Guarantees & Lock-ins
+
+Our default stance is to not offer price guarantees for the following reasons:
+
+1. We regularly *lower* prices, which would result in higher costs for customers who've locked in a price
+2. We occasionally split or restructure products (e.g. Data Pipelines unbundled), which makes guarantees administratively complex
+3. Customers are in full control of their usage and can thus adjust their spending patterns as needed
+
+This request most often comes from procurement teams unfamiliar with our pricing philosophy. Address it proactively in commercial discussions, but if there is push back, reference the above points. As an example:
+
+> "We've dropped Events pricing [X]% over [timeframe]. A price guarantee would have cost you more. We're committed to being the cheapest at every scale—if we're not, tell us. Our prepaid credits for usage based pricing gives budget control without betting against our commitment to low prices."
 
 ## Multi-year credit allocation
 
@@ -179,15 +201,25 @@ More details on how exactly the uptime SLA works can be found in our [terms](/te
 
 ## Payment method
 
-Our strong preference is for customers to pay by credit card, as this is easier to manage in Stripe and has a lower risk of the customer forgetting to make the payment (which means we have to spend more time chasing).
+For customers paying monthly, we only accept credit card payments, which will be taken automatically via Stripe at the end of their monthly billing period.
 
-If a customer wants to pay by ACH or bank transfer, we will usually only consider this if they are paying for 1 year or more up front. This is more likely to be the case for very large customers.
+For customers purchasing credits upfront, bank transfer is the default and highly preferred payment method for the following reasons:
 
-For customers in an annual contract but paying quarterly we require them to pay via credit card - ACH or bank transfer are not accepted.
+- For large payment amounts, the fees we incur are higher for credit card payments.
+- Our Sales Ops automations are set up to handle bank transfer payments.
+
+You should confirm ahead of the customer signing the order form that they are happy and set up to pay by bank transfer.  If they are absolutely unable to accommodate bank transfer we can accept credit card payments under the following conditions:
+
+- We have a card on file which we can immediately charge for the full invoice amount.
+- They pay immediately on the contract start date (i.e. no Net 30)
+
+If your customer must pay via credit card, you absolutely _need_ to let Mine (Simon as backup) know ahead of the order form being signed as there is a lot of manual work needed up front to make this work.
 
 > We absolutely do not allow payment by check.
 
 ## Contract buyouts
+
+> **Want to speak to us about a contract buyout?** Get in touch with the Sales team via your shared Slack channel, or [reach out directly](/talk-to-a-human).
 
 Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
 
@@ -232,6 +264,9 @@ For any of the above scenarios you should use our [discounting principles](contr
 ### When they will end the contract term with credit remaining
 
 We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher spend than the original contract.
+
+### When a customer doesn't renew their credit purchase
+When a customer chooses not to renew a prepaid credit contract we automatically remove any remaining credits on the expiry date. Their account will then roll onto our standard monthly plan and they'll be charged for usage. It's the customer's responsibility to stop sending us events or cancel their subscription and downgrade to the free tier if they don't want to keep paying.
 
 ## Varying contractual terms
 

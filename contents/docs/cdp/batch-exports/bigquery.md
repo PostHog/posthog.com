@@ -105,22 +105,25 @@ The schema of the model as created in BigQuery is:
 
 The BigQuery table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`. The `properties` field can be either `STRING` or `JSON`, depending on whether the corresponding checkbox is marked or not when creating the batch export.
 
+### Sessions model
+
+You can view the schema for the sessions model in the configuration form when creating a batch export (there are a few too many fields to display here!).
+
 ## Creating the batch export
 
-1. Subscribe to data pipelines add-on in [your billing settings](https://us.posthog.com/organization/billing) if you haven't already.
-2. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the exports tab in your PostHog instance.
-3. Click "Create export workflow".
-4. Select **BigQuery** as the batch export destination.
-5. Fill in the necessary [configuration details](#bigquery-configuration).
-6. Finalize the creation by clicking on "Create".
-7. Done! The batch export will schedule its first run on the start of the next period.
+1. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the **Destinations** tab.
+2. Click **+ New destination** in the top-right corner.
+3. Select **BigQuery** as the batch export destination.
+4. Fill in the necessary [configuration details](#bigquery-configuration).
+5. Finalize the creation by clicking on **Create**.
+6. Done! The batch export will schedule its first run on the start of the next period.
 
 ## BigQuery configuration
 
 Configuring a batch export targeting BigQuery requires the following BigQuery-specific configuration values:
 * **Table ID:** The ID of the destination BigQuery table. This is not the fully-qualified name of a table, so omit the dataset and project IDs. For example for the fully-qualified table name `project-123:dataset:MyExportTable`, use only `MyExportTable` as the table ID.
 * **Dataset ID:** The ID of the BigQuery dataset which contains the destination table. Only the dataset ID is required, so omit the project ID if present. For example for the fully-qualified dataset `project-123:my-dataset`, use only `my-dataset` as the dataset ID.
-* **Google Cloud JSON key file:** The JSON key file for your BigQuery Service Account to access your instance. Generated on Service Account creation. See [here](#setting-up-bigquery-access) for more information.
+* **Google Cloud JSON key file:** The JSON key file for your BigQuery Service Account to access your instance. Generated on Service Account creation. See the [BigQuery access setup section](#setting-up-bigquery-access) for more information.
 
 ## Examples
 
@@ -138,7 +141,7 @@ For the purposes of these examples, assume that these two batch exports have alr
 
 The following query can be used to count the number of unique persons that have triggered events:
 
-```sql
+```sql runInPostHog=false
 SELECT
   event,
   COUNT(persons.person_id) AS unique_persons_count

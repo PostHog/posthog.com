@@ -13,6 +13,9 @@ export const explorerGridColumns =
 
 export const TABLE_CLASSES = 'min-w-full overflow-x-auto -mx-5 px-5 lg:-mx-6 lg:px-6 xl:-mx-12 xl:px-12'
 
+export const getVideoClasses = (fullWidthContent: boolean) =>
+    `aspect-video rounded-sm mx-auto transition-all ${fullWidthContent ? 'w-full' : 'max-w-4xl'}`
+
 // Base prose classes without size modifiers
 export const PROSE_CORE = `prose dark:prose-invert
     prose-a:underline 

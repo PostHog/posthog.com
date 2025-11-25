@@ -28,7 +28,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 ## Rest of week 1
 
  - Confirm that you have been added as a member to the [PostHog organization in GitHub](https://github.com/PostHog?view_as=member). [Fraser](/community/profiles/30207) can add you if you haven't.
- - Work your way through your GitHub onboarding issue that a member of the [People & Ops Team](/teams/people) should have created and sent a link to.
+ - Work your way through your GitHub onboarding issue that a member of the <SmallTeam slug="people" /> should have created and sent a link to.
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
  - Check out some [BuildBetter](https://app.buildbetter.app/) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
@@ -57,7 +57,7 @@ Ideally, this will happen in Week 3 or 4, and will be with a few colleagues (dep
 - Toolkit and internal processes.
 - No stupid questions session.
 
-Detailed checklist [here](https://docs.google.com/document/d/1DvZm6o3mBeSxwgMh2X8JAuXCLrOCS8sJAVLjC0K9VT8/edit?tab=t.0).
+Detailed checklist available in the [new hire onboarding checklist](https://docs.google.com/document/d/1DvZm6o3mBeSxwgMh2X8JAuXCLrOCS8sJAVLjC0K9VT8/edit?tab=t.0).
 
 ## Weeks 3-4
 

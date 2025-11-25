@@ -4,7 +4,6 @@ templateId:
     - template-slack
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
@@ -49,6 +48,10 @@ You can see a full example of this in our tutorial on [how to send survey respon
 <TemplateParameters />
 
 ## FAQ
+
+### Why can't I see all my Slack channels in the dropdown?
+
+Slack integrations will only show channels that the authorizing user has access to.
 
 ### Is the source code for this destination available?
 

@@ -21,4 +21,5 @@ export const currencyData: Record<string, number> = {
     ILS: 3.113,
     PLN: 4.035,
     RSD: 107.5,
+    COP: 4925,
 }

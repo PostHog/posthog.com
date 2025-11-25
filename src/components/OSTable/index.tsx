@@ -20,6 +20,7 @@ interface Row {
     cells: {
         content: React.ReactNode
         className?: string
+        style?: React.CSSProperties
     }[]
 }
 
@@ -29,11 +30,13 @@ interface OSTableProps {
     className?: string
     rowAlignment?: 'top' | 'center'
     size?: 'sm' | 'md' | 'lg'
+    width?: string
     editable?: boolean
     onLastRowInView?: () => void
     loading?: boolean
     groupBy?: string
     fetchMore?: () => void
+    type?: string
     pagination?: {
         totalPages: number
         currentPage: number
@@ -165,6 +168,7 @@ const Row = ({
     editable,
     moreCount,
     onShowMore,
+    type,
 }: {
     row: Row
     lastRowRef: any
@@ -173,6 +177,7 @@ const Row = ({
     editable: boolean
     moreCount?: number
     onShowMore?: () => void
+    type?: string
 }) => {
     return (
         <>
@@ -192,37 +197,24 @@ const Row = ({
                     ? 'items-start'
                     : columns?.[cellIndex]?.align === 'right'
                     ? 'justify-end'
-                    : 'items-center'
+                    : 'items-center text-center'
             } ${cell.className || ''}`}
+                            style={cell.style}
                         >
                             {cell.content}
                         </div>
                     )
                 })}
-                {moreCount && moreCount > 0
-                    ? row.cells.map((cell, cellIndex) => {
-                          return (
-                              <div key={cellIndex} className={`!p-0 !border-none relative`}>
-                                  <button
-                                      className="absolute top-0 left-0 w-full h-full py-2 -translate-y-1/2"
-                                      onClick={onShowMore}
-                                  />
-                                  <button
-                                      className="absolute top-0 left-0 w-full border-t border-yellow z-[1]"
-                                      onClick={onShowMore}
-                                  />
-                                  {moreCount && cellIndex === row.cells.length - 1 ? (
-                                      <button
-                                          onClick={onShowMore}
-                                          className="leading-none text-[11px] absolute right-0 -translate-y-1/2 translate-x-1/2 size-6 rounded-full bg-yellow dark:text-black text-white flex items-center justify-center z-[1] border-white dark:border-black border font-semibold"
-                                      >
-                                          {`+${moreCount}`}
-                                      </button>
-                                  ) : null}
-                              </div>
-                          )
-                      })
-                    : null}
+                {moreCount && moreCount > 0 ? (
+                    <div className="col-span-full text-center !py-0 !border-r border-primary bg-accent/50 hover:bg-accent">
+                        <button
+                            onClick={onShowMore}
+                            className="text-primary hover:text-accent font-semibold text-[13px] w-full py-1"
+                        >
+                            Show {moreCount} more {moreCount === 1 ? type : `${type}s`}
+                        </button>
+                    </div>
+                ) : null}
             </React.Fragment>
         </>
     )
@@ -234,12 +226,14 @@ const GroupedRows = ({
     rowAlignment,
     columns,
     editable,
+    type,
 }: {
     rows: Row[]
     lastRowRef: any
     rowAlignment: 'top' | 'center'
     columns?: Column[]
     editable: boolean
+    type?: string
 }) => {
     const [showMore, setShowMore] = useState(false)
     return (
@@ -254,6 +248,7 @@ const GroupedRows = ({
                     editable={editable}
                     moreCount={showMore ? undefined : rows.length - 1}
                     onShowMore={() => setShowMore(true)}
+                    type={type}
                 />
             ))}
         </>
@@ -267,11 +262,13 @@ const OSTable: React.FC<OSTableProps> = ({
     rowAlignment = 'center',
     editable = true,
     size = 'md',
+    width = 'auto',
     onLastRowInView,
     loading,
     groupBy,
     fetchMore,
     pagination,
+    type,
 }) => {
     const gridClass = columns?.map((col) => col.width || 'auto').join(' ') || ''
     const [lastRowRef, lastRowInView] = useInView({ threshold: 0.1 })
@@ -282,13 +279,24 @@ const OSTable: React.FC<OSTableProps> = ({
             onLastRowInView?.()
         }
     }, [lastRowInView])
-
     return (
-        <div className="-mx-4 @xl:-mx-8">
+        <div
+            className={`OSTable md:@2xs/not-full-width:mx-0 mb-2 ${
+                width === 'full' ? '' : '-mx-4 @md/reader-content-container:-mx-6 @lg/reader-content-container:-mx-8'
+            }`}
+        >
             <ScrollArea fullWidth>
-                <div className="px-4 @xl:px-8">
+                <div
+                    className={`md:@2xs/not-full-width:px-0 flex ${
+                        width === 'full'
+                            ? ''
+                            : 'px-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
+                    }`}
+                >
                     <div
-                        className={`text-primary grid divide-x divide-y divide-border border-b border-primary text-[15px] min-w-full w-0 [&>div]:px-2 ${
+                        className={`text-primary inline-grid min-w-[42rem] max-w-full divide-x divide-y divide-border border-b border-primary text-[15px] [&>div]:px-2 ${
+                            width === 'full' ? 'w-full' : 'w-min'
+                        } ${
                             size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'
                         } ${className}`}
                         style={{ gridTemplateColumns: gridClass }}
@@ -326,6 +334,7 @@ const OSTable: React.FC<OSTableProps> = ({
                                       rowAlignment={rowAlignment}
                                       columns={columns}
                                       editable={editable}
+                                      type={_group ? `${_group.toLowerCase()} ${type}` : type}
                                   />
                               ))
                             : rows.map((row, rowIndex) => (
@@ -336,6 +345,7 @@ const OSTable: React.FC<OSTableProps> = ({
                                       rowAlignment={rowAlignment}
                                       columns={columns}
                                       editable={editable}
+                                      type={type}
                                   />
                               ))}
                     </div>
@@ -350,18 +360,18 @@ const OSTable: React.FC<OSTableProps> = ({
                             ) : null}
                         </div>
                     )}
-                    {pagination && (
-                        <Pagination
-                            currentPage={pagination.currentPage}
-                            totalPages={pagination.totalPages}
-                            goToPage={pagination.goToPage}
-                            nextPage={pagination.nextPage}
-                            prevPage={pagination.prevPage}
-                            hasNextPage={pagination.hasNextPage}
-                            hasPrevPage={pagination.hasPrevPage}
-                        />
-                    )}
                 </div>
+                {pagination && (
+                    <Pagination
+                        currentPage={pagination.currentPage}
+                        totalPages={pagination.totalPages}
+                        goToPage={pagination.goToPage}
+                        nextPage={pagination.nextPage}
+                        prevPage={pagination.prevPage}
+                        hasNextPage={pagination.hasNextPage}
+                        hasPrevPage={pagination.hasPrevPage}
+                    />
+                )}
             </ScrollArea>
         </div>
     )

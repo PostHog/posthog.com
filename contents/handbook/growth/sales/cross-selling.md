@@ -1,5 +1,5 @@
 ---
-title: Cross sell motions
+title: Cross selling tactics
 sidebar: Handbook
 showTitle: true
 ---

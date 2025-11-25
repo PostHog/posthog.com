@@ -57,7 +57,7 @@ We'll use PostHog to create and control our survey as well as monitor results. I
 First, set up PostHog for use on the [client-side](/docs/libraries/next-js#app-router) by installing the [JavaScript React SDK](/docs/libraries/react):
 
 ```bash
-npm install posthog-js
+npm install posthog-js @posthog/react
 ```
 
 Then integrate PostHog by creating a `providers.js` file in your app folder and exporting a `PHProvider` component:
@@ -67,7 +67,7 @@ Then integrate PostHog by creating a `providers.js` file in your app folder and 
 'use client'
 
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
@@ -263,7 +263,7 @@ To fetch the active surveys, we use the `usePostHog` hook to call `posthog.getAc
 import { useState, useEffect } from 'react'
 import styles from './page.module.css'
 import Survey from './Survey';
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 export default function Home() {
   // ... rest of your code ...
@@ -434,7 +434,7 @@ Altogether, your code should look like this:
 import { useState, useEffect } from 'react'
 import styles from './page.module.css'
 import Survey from './Survey';
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 export default function Home() {
   const [showSurvey, setShowSurvey] = useState(false);

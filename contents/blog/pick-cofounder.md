@@ -49,7 +49,7 @@ And, crucially, you need to like working with each other.
 
 If you're comfortable talking with strangers that often do not want to talk to you, then two developers is probably the best possible setup. One of the things that was noticeable during [PostHog's time at Y Combinator](moving-to-sf) was how outgoing many of the technical founders were.
 
-It has been _very_ important that James can do the basics of development. Optimally, both would be kick-ass developers, but that has been less important than selling and communication skills with external parties - users, customers, employees, and investors.
+It has been _very_ important that James can do the basics of development. Optimally, both would be kick-ass developers, but that has been less important than selling and [communication skills](/blog/ceo-diary-6) with external parties - users, customers, employees, and investors.
 
 ## Optimize for not breaking up
 

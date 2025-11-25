@@ -16,7 +16,7 @@ There are several ways to control which sessions you record with the Web JavaScr
 
 ## Programmatically start and stop recordings
 
-> Note: For mobile replay controls, see [iOS](/docs/session-replay/privacy?tab=iOS#handling-sensitive-third-party-screens), and [Android](/docs/session-replay/privacy?tab=Android#handling-sensitive-third-party-screens) privacy controls section. Support for this method in React Native and Flutter is planned — track progress [here](https://github.com/PostHog/posthog-js/issues/2169).
+> Note: For mobile replay controls, see [iOS](/docs/session-replay/privacy?tab=iOS#handling-sensitive-third-party-screens), and [Android](/docs/session-replay/privacy?tab=Android#handling-sensitive-third-party-screens) privacy controls section. Support for this method in React Native and Flutter is planned — track progress in [issue #2169](https://github.com/PostHog/posthog-js/issues/2169).
 
 1. For older projects, there is a section for 'Authorized domains for replay' in the [project replay settings](https://us.posthog.com/settings/environment-replay#replay-authorized-domains). Ensure your domain is added if the section is present.
 
@@ -70,6 +70,17 @@ The client keeps a short buffer in-memory, so you'll still be able to see how th
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/event_trigger_light_21a531edbb.png" 
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/event_trigger_dark_f67b3ffb30.png"
     alt="Adding event trigger to control session recordings" 
+    classes="rounded"
+/>
+
+### Triggering on exceptions
+
+If you use [error tracking](/docs/error-tracking), exceptions are captured as events. You can select the exception event as an event trigger to start session recording.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_on_exception_light_4a88e6f239.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_on_exception_dark_621ce757d3.png"
+    alt="Triggering session recordings on exceptions" 
     classes="rounded"
 />
 
@@ -128,16 +139,59 @@ In your [replay ingestion settings](https://us.posthog.com/settings/project-repl
     classes="rounded"
 />
 
-This is useful if you want to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
+There are two modes for how minimum duration is enforced, controlled by the `strictMinimumDuration` configuration option. This is useful if you want to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
 
-### Limitations
+### Legacy mode (default)
 
+In legacy mode (`strictMinimumDuration: false` or not set), the minimum duration is checked against the **total session age**. When a session starts, the browser records the start time. If the minimum duration has passed since the session start time, the recording data is sent to the backend.
 
-The minimum duration is set in seconds. Whenever a new session starts, the browser records the start time. If the minimum duration has passed since the start time, the session data is sent. If it hasn't, the session continues to be buffered in-memory. 
+```js-web
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  session_recording: {
+    strictMinimumDuration: false // +
+  }
+})
+```
 
-This means that if you set a high minimum duration and your user visits multiple pages each for a short time, the browser risks dropping the buffered data. The result is that the session is still recorded, but you miss the beginning.
+**Limitation**: If you set a high minimum duration and your user visits multiple pages (causing full page refreshes), the in-memory buffer may be cleared by navigation. When the session reaches the minimum age, we'll start sending data, but you might miss the beginning of the session because the buffer was cleared by the page refresh.
 
-If you find you are missing the beginning of sessions, reduce the minimum duration to fix this.
+For example, with a 12 second minimum:
+- User visits page A for 6 seconds, then navigates to page B
+- After 6 more seconds on page B (12 seconds total session age), we start sending the recording
+- Result: You get 6 seconds of recording from page B, but miss the 6 seconds from page A
+
+### Strict mode (available in 1.291.0+)
+
+In strict mode (`strictMinimumDuration: true`), the minimum duration is checked against the **actual buffered recording data** (from first to last timestamp), not the session age. We only start sending the recording once we have the minimum duration of continuous data in the buffer.
+
+**Note**: This will become the default behavior in a future release. To opt in now, add to your config:
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  session_recording: {
+    strictMinimumDuration: true // +
+  }
+})
+```
+
+**Key difference**: If the user navigates to a new page before reaching the minimum duration, the buffer is cleared and we start over. The recording will only be sent once we have enough **continuous data** on a single page.
+
+For example, with a 12 second minimum:
+- User visits page A for 6 seconds, then navigates to page B
+- The buffer is cleared on navigation
+- User must stay on page B for 12 seconds before we start sending the recording
+- Result: You get the full recording from page B once it reaches 12 seconds
+
+Once a session has passed the minimum duration threshold on any page, subsequent page navigations in the same session will continue to send recordings **immediately**.
+
+This mode is **more accurate** for filtering out short sessions, especially on sites with full page refreshes, but may result in missing more session data if users **bounce quickly** across multiple pages.
+
+### Choosing the right mode
+
+- **Use legacy mode** if you want to capture as much session data as possible and are okay with potentially missing early parts of sessions after page refreshes
+- **Use strict mode** if you want to ensure you only record sessions where users actually spend the minimum duration on a single page, accepting that you may miss more bouncing users
 
 ## Billing Limits
 

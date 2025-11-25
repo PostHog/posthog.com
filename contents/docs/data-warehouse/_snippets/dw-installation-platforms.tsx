@@ -19,6 +19,11 @@ const DWInstallationPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/bigquery_8546771248.svg',
         },
         {
+            label: 'Bing Ads',
+            url: '/docs/data-warehouse/sources/bing-ads',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Bing_Ads_ce5e8e208f.svg',
+        },
+        {
             label: 'Chargebee',
             url: '/docs/data-warehouse/sources/chargebee',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/cb_597858b354.svg',
@@ -125,6 +130,6 @@ const DWInstallationPlatforms = () => {
         },
     ]
 
-    return <List className="grid sm:grid-cols-2" items={platforms} />
+    return <List className="grid sm:grid-cols-2 mb-4" items={platforms} />
 }
 export default DWInstallationPlatforms

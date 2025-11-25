@@ -10,10 +10,14 @@ availability:
         jitUserProvisioning:
             free: false
             selfServe: false
+            boost: true
+            scale: true
             enterprise: true
         ssoEnforcement:
             free: false
             selfServe: false
+            boost: true
+            scale: true
             enterprise: true
         github: true
         gitlab: true
@@ -25,6 +29,8 @@ availability:
         saml:
             free: false
             selfServe: false
+            boost: false
+            scale: true
             enterprise: true
 ---
 
@@ -118,7 +124,7 @@ Looking for a provider that's not here? [Reach out to us](https://posthog.com/su
 
 <FeatureAvailability availability={_frontmatter.availability.features.gitlab} />
 
-1. Go to `Settings -> Applications` in your GitLab instance (<a href='https://gitlab.com/profile/applications' target='_blank'>click here for GitLab.com</a>)
+1. Go to `Settings -> Applications` in your GitLab instance (<a href='https://gitlab.com/profile/applications' target='_blank'>open the GitLab.com applications settings</a>)
 
 2. Register your application
 
@@ -158,7 +164,7 @@ SAML (Security Assertion Markup Language) enables users to have a single set of 
 
 PostHog supports multi-tenant SAML, which means you can have multiple SAML authentication servers within a single instance and even a single organization. The limitation is that you can only have one SAML provider per domain. So for instance, users with email address at `example.com` can log in with SAML provider A and users with email address at `anotherdomain.net` can use SAML provider B.
 
-> If you are self-hosting, please be sure to update PostHog to version 1.35.0+. Before this version, SAML used to work instance-based with environment variables and this behavior is fully deprecated.
+> If you are self-hosting, please be sure to [update PostHog](/docs/sdk-doctor) to version 1.35.0+. Before this version, SAML used to work instance-based with environment variables and this behavior is fully deprecated.
 
 ### Warnings
 

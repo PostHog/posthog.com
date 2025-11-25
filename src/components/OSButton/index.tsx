@@ -2,7 +2,7 @@ import React from 'react'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
 import ZoomHover from 'components/ZoomHover'
-import { IconExternal } from '@posthog/icons'
+import { IconArrowUpRight, IconExternal } from '@posthog/icons'
 
 // Basic usage
 // <OSButton>Click me</OSButton>
@@ -36,6 +36,7 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     icon?: React.ReactNode
     iconClassName?: string
     tooltip?: string | React.ReactNode
+    tooltipDelay?: number
     label?: string
     chip?: string
     chipColor?: string
@@ -61,6 +62,7 @@ export default function OSButton({
     icon,
     iconClassName,
     tooltip,
+    tooltipDelay = 0,
     label,
     chip,
     chipColor,
@@ -170,7 +172,9 @@ export default function OSButton({
                     )}
                     {children}
                     {label && <span className={`${labelSizeClasses[size]} text-secondary`}>{label}</span>}
-                    {external ? <IconExternal className="size-4 opacity-50 group-hover:opacity-100" /> : null}
+                    {external ? (
+                        <IconArrowUpRight className="size-4 text-accent group-hover:text-secondary -ml-1" />
+                    ) : null}
                     {chip && (
                         <span
                             className={`${labelSizeClasses[size]} border px-0.5 rounded-sm ${
@@ -191,6 +195,9 @@ export default function OSButton({
                     )}
                     {children}
                     {label && <span className={`${labelSizeClasses[size]} text-secondary`}>{label}</span>}
+                    {external ? (
+                        <IconArrowUpRight className="size-4 text-accent group-hover:text-secondary -ml-1" />
+                    ) : null}
                     {chip && (
                         <span
                             className={`${labelSizeClasses[size]} border px-0.5 rounded-sm ${
@@ -262,7 +269,7 @@ export default function OSButton({
     )
 
     return tooltip ? (
-        <Tooltip delay={0} sideOffset={tooltipSideOffset[size]} trigger={buttonElement}>
+        <Tooltip delay={tooltipDelay} sideOffset={tooltipSideOffset[size]} trigger={buttonElement}>
             {tooltip}
         </Tooltip>
     ) : (

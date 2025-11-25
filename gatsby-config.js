@@ -3,6 +3,10 @@ const algoliaConfig = require('./gatsby/algoliaConfig')
 const qs = require('qs')
 
 require('dotenv').config({
+    path: `.env.${process.env.NODE_ENV}.local`,
+})
+
+require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
 })
 
@@ -159,14 +163,6 @@ module.exports = {
             options: {
                 name: `testimonials`,
                 path: `${__dirname}/src/data/testimonials.json`,
-                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
-            },
-        },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `sdkReferences`,
-                path: `${__dirname}/src/data/sdkReferences`,
                 ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },
@@ -389,6 +385,15 @@ module.exports = {
                     `MdxFrontmatterLogoDarkChildImageSharp`,
                     `MdxFrontmatterIconChildImageSharp`,
                 ],
+            },
+        },
+        {
+            resolve: `gatsby-source-git`,
+            options: {
+                name: `posthog-main-repo`,
+                remote: `https://github.com/posthog/posthog.git`,
+                branch: process.env.GATSBY_POSTHOG_BRANCH || 'master',
+                patterns: `docs/published/**`,
             },
         },
         // {

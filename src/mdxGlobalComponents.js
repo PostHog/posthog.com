@@ -8,6 +8,8 @@ import { Caption } from './components/Caption'
 import CloudinaryImage from './components/CloudinaryImage'
 import { Images } from './components/Careers/Images'
 import { ComparisonTable } from './components/ComparisonTable'
+import ProductComparisonTable from './components/ProductComparisonTable'
+import Snippet from '../contents/docs/integrate/snippet.mdx'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { ContentViewer } from './components/ContentViewer'
 import { Drawer } from './components/Drawer'
@@ -60,17 +62,22 @@ import OSButton from './components/OSButton'
 import AskMax from './components/AskMax'
 import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
 import FeatureOwnershipTable from './components/FeatureOwnershipTable'
+import TaskOwnershipTable from './components/TaskOwnershipTable'
+import { CalloutBox } from './components/Docs/CalloutBox'
 
 export const shortcodes = {
     ArrayCTA,
     BasicHedgehogImage,
     BorderWrapper,
     CallToAction,
+    CalloutBox,
     Caption,
     CloudinaryImage,
     Images,
     ImageSlider,
     ComparisonTable,
+    ProductComparisonTable,
+    Snippet,
     CompensationCalculator,
     ContentViewer,
     Drawer,
@@ -123,4 +130,5 @@ export const shortcodes = {
     AskMax,
     CountriesWeHireIn,
     FeatureOwnershipTable,
+    TaskOwnershipTable,
 }

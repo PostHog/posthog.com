@@ -67,9 +67,14 @@ You can limit the impact of extreme values by capping metric data at specified p
 
 This technique is commonly known as **Winsorization** and is especially useful for metrics with highly skewed distributions, such as revenue or total event counts, where a small subset of users can produce unusually high values that distort overall results.
 
+### Ignoring zeros in percentile calculations
+
+When calculating the upper bound percentile, you can choose to ignore zero values. This is particularly useful when a large number of participants in your experiment don't have the event at all (resulting in a value of 0).
+By excluding these zeros from the percentile calculation, you can more accurately tune the upper bound to focus on the distribution of actual positive values, making it easier to identify and handle true outliers among participants who did engage with the feature.
+
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/outlier_handling_light_8139933041.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/outlier_handling_dark_c7c0d775d6.png"
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/outlier_handling_light_2_7ed0631f70.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/outlier_handling_dark_2_3914745be7.png"
   classes="rounded"
   alt="Screenshot of outlier handling"
 />

@@ -4,35 +4,32 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We know how crucial the early stages of using PostHog can be. It's easy to configure PostHog poorly, pay for products you don't use (e.g., Groups, Autocapture), or generally misconfigure and not see a decent ROI.
+Getting started with any new tool can be overwhelming, and PostHog is no exception. We want to make sure you're configured correctly, using the right features for your needs, and seeing real value.
 
-Nothing is more reassuring than having a human to connect with and talk things through. One 30-minute call discussing the customer's architecture and providing suggestions can go a long way to preventing issues down the road, especially for more complex setups. Misconfiguration, especially for analytics/identity merging, is a known churn risk.
+That's why we offer personalized onboarding. Whether you need help with initial setup, want to optimize your billing, or are looking to align PostHog with your business goals, we're here to help.
 
-### Principles
+### What to expect
 
-Our onboarding program was created to offer necessary help, increase the value our customers get from PostHog, and assist them in achieving their business goals.
+Our onboarding program spans **8 weeks** and includes:
 
-The program is guided by a few key principles:
+- **Account review and optimization tips** - We'll review your current setup and share recommendations to help you get the most value while minimizing costs.
+- **First call (30 minutes)** - Let's get hands-on! We'll walk through optimization practices together and answer any technical questions about integrating PostHog into your stack.
+- **Second call (30 minutes, optional but encouraged)** - Ready to go deeper? This follow-up call focuses on using PostHog to achieve your specific business goals and KPIs. Bring your team — the more, the merrier!
+- **Final check-in** - We'll do one last review to make sure everything is working smoothly, share additional resources, and point you to ongoing support options.
 
-- Help with initial configuration and billing, offer advice on usage.
-- Assist customers with any technical questions they have around fitting PostHog into their stack.
-- Act as strategic partners in achieving business goals.
-- Adapt to varied levels of engagement while ensuring value for everyone.
-- Encourage time spent in PostHog, trying things out. Adoption can be fun!
-- Share best practices to leverage PostHog tailored to specific use cases.
+### Timeline
 
-### Structure
+Here's a typical timeline, though we're flexible and can adjust to your schedule:
 
-The current program spans over **8 weeks** and involves the following:
+- **Week 1**: Initial account review and outreach
+- **Weeks 2-3**: First call scheduled
+- **Weeks 4-6**: Second call (if requested)
+- **Weeks 7-8**: Final check-in & onboarding graduation!
 
-- **Initial outreach** - We audit the account and share observations on current usage and optimization tips. We point out any configuration issues affecting their bill or ability to use the product properly. Our main objective is oriented towards trimming unnecessary spending, and communicating our position that [we are the cheapest for every product](/why). This step can also involve refunding/adjusting bills for misconfigurations, per our [policy](/handbook/growth/sales/refunds).
-- **First online meeting** - Hands-on implementation of optimization practices. During this call, we also offer the opportunity to schedule a second meeting if the customer is willing to dive deeper into any areas.
-- **Second online meeting** - This is an optional meeting for customers interested in a deeper dive into using PostHog to achieve their business goals. After they share their initial goals or KPIs, we schedule a call. More team members are welcome!
-- **PostHog homework** - It’s sent in the follow-up email to reinforce concepts we covered on the call.
-- **Final outreach** - A last check to ensure usage and configuration are solid. We share additional educational resources and highlight where to find ongoing help. 
 
-### Timeline (approximate)
+### Your success is our success
 
-Our customers enter the segment at different points in their journey (e.g., credits roll off, projecting a first bill). Our goal is to reach out to them within the first week since they enter our segment, schedule the first call within the second/third week, schedule the second call within their fourth/fifth week, offer homework within the fifth/sixth week, and check in with them one more time on the seventh/eighth week.
 
-We are very flexible with the engaged customers and would often extend the onboarding window to suit their needs. Ultimately, we want to ensure that they are onboarded and happy with the product.
+Here's the thing: most teams struggle with knowing *what* to track, not just *how* to track it. The first call gets you set up correctly. The second call is where the magic happens. We'll help you decide on the metrics that actually drive your business decisions and create a roadmap for using PostHog strategically.
+
+This is where customers see the biggest ROI, and it's completely free. We highly encourage you to take advantage of it.
