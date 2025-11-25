@@ -1,5 +1,5 @@
 ---
-title: Single sign-on authentication
+title: SSO, SAML, and SCIM
 sidebar: Docs
 showTitle: true
 availability:
@@ -339,13 +339,20 @@ Use this option if you want to add additional configurations to your app that ar
 
 SCIM enables you to automatically sync users and their roles from your identity provider (IdP) into PostHog. This is useful for automatically creating accounts and assigning roles when someone joins your organization, and disabling accounts when they leave. 
 
-> SCIM is currently in beta and available on request for customers on the Enterprise plan. [Contact us](https://app.posthog.com/#panel=support) to enable it for your organization.
+> SCIM is currently in beta and available on request for customers on the Enterprise plan. [Contact us](https://posthog.com/talk-to-a-human) to enable it for your organization.
+
+### How SCIM works
+
+- Assigning a user to the SCIM app in your IdP creates them in PostHog with the mapped role.
+- Removing a user from the app deactivates their PostHog account.
+- Users with matching emails in PostHog are updated to match the IdP details and roles.
+- Roles are matched by name (case-sensitive).
 
 ### Prerequisites
 
 Before setting up SCIM, you need:
 
-1. Verified authentication domain in PostHog
+1. Verified authentication domain in PostHog Cloud
 2. SAML SSO configured and working for your domain
 3. Identity Provider that supports SCIM 2.0 (e.g., Okta, Entra ID, OneLogin)
 
@@ -368,13 +375,6 @@ Before setting up SCIM, you need:
 5. Configure role mapping in your IdP. Map your IdP roles to PostHog roles. 
 
 6. Assign users and roles to the PostHog application in your IdP, verify that they appear in PostHog.
-
-### How SCIM works
-
-- Assigning a user to the SCIM app in your IdP creates them in PostHog with the mapped role.
-- Removing a user from the app deactivates their PostHog account.
-- Users with matching emails in PostHog are updated to match the IdP details and roles.
-- Roles are matched by name (case-sensitive).
 
 ### Example: Okta
 
