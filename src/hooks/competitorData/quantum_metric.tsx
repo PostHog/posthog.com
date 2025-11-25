@@ -26,6 +26,9 @@ export const quantum_metric = {
             pricing: {
                 free_tier: false,
             },
+            features: {
+                canvas_recording: false,
+            },
             platform_support: {
                 features: {
                     web_app_recordings: true,
@@ -39,6 +42,16 @@ export const quantum_metric = {
                     filter_by_user_or_event: true,
                     network_monitor: true,
                     performance_monitoring: true,
+                },
+            },
+            targeting: {
+                features: {
+                    conditional_recording: true,
+                },
+            },
+            privacy: {
+                features: {
+                    privacy_masking: true,
                 },
             },
             ai: {
@@ -76,6 +89,7 @@ export const quantum_metric = {
         security: {
             gdpr_ready: true,
             soc2_certified: true,
+            hipaa_ready: true,
         },
     },
     pricing: {

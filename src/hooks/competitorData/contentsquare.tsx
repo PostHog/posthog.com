@@ -84,6 +84,7 @@ export const contentsquare = {
         pricing: {
             self_serve: false,
             transparent_pricing: false,
+            free_tier: false,
         },
         security: {
             user_privacy_options: true,
