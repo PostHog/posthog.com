@@ -42,6 +42,8 @@ This program is similar to our startup program but has some key differences for 
 -   Access to HogPatch for the duration of their time in the batch
 -   Partner benefits with Speakeasy and Mintlify (50% off for 6 months)
 
+You can find the copy for the latest deal on Bookface [here](https://docs.google.com/document/d/1dmsMxrfWSVhKZY4bQp5QIRiXS2iCvLGJah5EKWOvoeI/edit?tab=t.0#heading=h.o7fhsqrlnheo). To post updates, you need to ask James or Tim to do it. 
+
 > ✅ Credits **can** be used to claim a BAA under the Boost plan.
 
 YC teams must apply via [our secret YC page](https://app.posthog.com/startups/yc). If we can’t immediately verify they’re part of YC, we ask for a screenshot from Bookface to prove their eligibility.
