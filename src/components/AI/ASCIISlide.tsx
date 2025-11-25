@@ -1,6 +1,9 @@
 import React from 'react'
 import Link from 'components/Link'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { posthog_ai } from 'hooks/productData/posthog_ai'
+import { skills, skillTitle } from 'components/Products/Slides/OverviewSlide/OverviewSlideMax'
+import { graphql, useStaticQuery } from 'gatsby'
 
 interface ASCIIBoxProps {
     title: string
@@ -60,10 +63,49 @@ const ASCII_HEADER = `    Welcome to
 ██████╔╝ ██║   ██║ ███████╗    ██║    ███████║ ██║   ██║ ██║  ███╗    ███████║ ██║
 ██╔═══╝  ██║   ██║ ╚════██║    ██║    ██╔══██║ ██║   ██║ ██║   ██║    ██╔══██║ ██║
 ██║      ╚██████╔╝ ███████║    ██║    ██║  ██║ ╚██████╔╝ ╚██████╔╝    ██║  ██║ ██║
-╚═╝       ╚═════╝  ╚══════╝    ╚═╝    ╚═╝  ╚═╝  ╚═════╝   ╚═════╝     ╚═╝  ╚═╝ ╚═╝
-                 The product analyst agent.`
+╚═╝       ╚═════╝  ╚══════╝    ╚═╝    ╚═╝  ╚═╝  ╚═════╝   ╚═════╝     ╚═╝  ╚═╝ ╚═╝`
 
+const wrapText = (text: string, maxWidth: number): string[] => {
+    const words = text.split(' ')
+    const lines: string[] = []
+    let currentLine = ''
+
+    words.forEach((word) => {
+        const testLine = currentLine ? `${currentLine} ${word}` : word
+        if (testLine.length <= maxWidth) {
+            currentLine = testLine
+        } else {
+            if (currentLine) lines.push(currentLine)
+            currentLine = word
+        }
+    })
+    if (currentLine) lines.push(currentLine)
+
+    return lines
+}
 export default function ASCIISlide(): JSX.Element {
+    const { roadmaps } = useStaticQuery(graphql`
+        {
+            roadmaps: allRoadmap(
+                filter: { teams: { data: { elemMatch: { attributes: { name: { eq: "PostHog AI" } } } } } }
+            ) {
+                nodes {
+                    id
+                    strapiID
+                    title
+                    description
+                    projectedCompletion
+                    complete
+                }
+            }
+        }
+    `)
+
+    const underConsideration = roadmaps.nodes.filter(
+        (roadmap: any) => !roadmap.projectedCompletion && !roadmap.complete
+    )
+    const inProgress = roadmaps.nodes.filter((roadmap: any) => roadmap.projectedCompletion && !roadmap.complete)
+    const shipped = roadmaps.nodes.filter((roadmap: any) => roadmap.complete)
     return (
         <div
             data-scheme="primary"
@@ -141,17 +183,6 @@ export default function ASCIISlide(): JSX.Element {
                                         </div>
                                     )
                                 }
-                                // Description lines right after ASCII art
-                                if (line.includes('Your product analyst')) {
-                                    return (
-                                        <div
-                                            key={lineIdx}
-                                            className="text-[rgba(238,239,233,0.8)] [text-shadow:0_0_1px_rgba(238,239,233,0.4),0_0_2px_rgba(238,239,233,0.2)]"
-                                        >
-                                            {line}
-                                        </div>
-                                    )
-                                }
                                 return (
                                     <div
                                         key={lineIdx}
@@ -161,70 +192,107 @@ export default function ASCIISlide(): JSX.Element {
                                     </div>
                                 )
                             })}
+                            <div className="text-[rgba(238,239,233,0.8)] [text-shadow:0_0_1px_rgba(238,239,233,0.4),0_0_2px_rgba(238,239,233,0.2)]">
+                                {' '.repeat(55)}
+                                Your product assistant
+                            </div>
                         </pre>
 
                         <pre className="mt-5 mb-0 ml-0 mr-0 whitespace-pre overflow-x-auto [text-shadow:0_0_1px_rgba(238,239,233,0.4),0_0_2px_rgba(238,239,233,0.2)]">
                             <ASCIIBoxRow>
                                 <ASCIIBox
-                                    title="WHY NOT JUST ASK CHATGPT INSTEAD?"
-                                    lines={[
-                                        'PostHog AI is an agent with native access',
-                                        'to your product data:',
-                                        '',
-                                        '  • Events, persons, sessions, groups',
-                                        '  • Actions, cohorts, properties',
-                                        '  • Data warehouse schema',
-                                        '  • Session replays and errors',
-                                        '',
-                                        'It understands your data taxonomy and',
-                                        'reasons about complex queries.',
-                                    ]}
-                                />
-                                <ASCIIBox
-                                    title="MORE THAN CHATTING WITH YOUR DATA"
-                                    lines={[
-                                        'Not just a chatbot - PostHog AI gets',
-                                        'things done in PostHog for you:',
-                                        '',
-                                        '  • Create insights and dashboards',
-                                        '  • Write and edit PostHog SQL queries',
-                                        '  • Filter recordings or errors',
-                                        '  • Create feature flags and experiments',
-                                        '  • Add data pipeline functions with Hog',
-                                        '  • Start surveys',
-                                    ]}
-                                />
-                            </ASCIIBoxRow>
-
-                            <ASCIIBoxRow>
-                                <ASCIIBox
-                                    title="PRODUCT AUTONOMY"
-                                    width={84}
-                                    lines={[
-                                        'Goal: Help every developer ship a product autonomously.',
-                                        'Now: Analyze your data, answer product questions, and automate PostHog workflows.',
-                                        'Soon: Detect and generate PRs for fixing UX issues and errors before you wake up.',
-                                        'Generate ideas for what to work on and convert them into PRs.',
-                                    ]}
+                                    width={81}
+                                    title={skillTitle.toUpperCase()}
+                                    lines={(() => {
+                                        const lines: string[] = []
+                                        skills.forEach((skill) => {
+                                            lines.push(wrapText(`  • ${skill}`, 80).join('\n'))
+                                        })
+                                        return lines
+                                    })()}
                                 />
                             </ASCIIBoxRow>
                         </pre>
 
-                        <div className="mt-5 text-[rgba(238,239,233,0.7)] [text-shadow:0_0_1px_rgba(238,239,233,0.4),0_0_2px_rgba(238,239,233,0.2)]">
-                            <div>
-                                GETTING STARTED: Open PostHog AI in your project and ask it to analyze data or build
-                                something
+                        <pre className="mt-5 mb-0 ml-0 mr-0 whitespace-pre overflow-x-auto [text-shadow:0_0_1px_rgba(238,239,233,0.4),0_0_2px_rgba(238,239,233,0.2)]">
+                            <div className="text-[#00FF00] mb-2">{'>'} DEVELOPMENT STATUS</div>
+                            <div className="text-[rgba(238,239,233,0.9)] font-code text-xs leading-tight">
+                                {/* Shipped items */}
+                                {shipped?.slice(0, 1).map((item, idx) => (
+                                    <div key={idx} className="mb-1">
+                                        <span className="text-[#00FF00]">[✓]</span>{' '}
+                                        <span className="text-[rgba(238,239,233,0.7)]">
+                                            {item.title.substring(0, 60)}
+                                        </span>{' '}
+                                        <span className="text-[#00FF00] text-[10px]">SHIPPED</span>
+                                    </div>
+                                ))}
+
+                                {/* In progress items */}
+                                {inProgress?.slice(0, 1).map((item, idx) => (
+                                    <div key={idx} className="mb-1">
+                                        <span className="text-[#F1A82C]">[→]</span>{' '}
+                                        <span className="text-[rgba(238,239,233,0.7)]">
+                                            {item.title.substring(0, 60)}
+                                        </span>{' '}
+                                        <span className="text-[#F1A82C] text-[10px]">IN PROGRESS</span>
+                                    </div>
+                                ))}
+
+                                {/* Planned items */}
+                                {underConsideration?.slice(0, 1).map((item, idx) => (
+                                    <div key={idx} className="mb-1">
+                                        <span className="text-[#666]">[?]</span>{' '}
+                                        <span className="text-[rgba(238,239,233,0.7)]">
+                                            {item.title.substring(0, 60)}
+                                        </span>{' '}
+                                        <span className="text-[#666] text-[10px]">PLANNED</span>
+                                    </div>
+                                ))}
                             </div>
-                            <div className="mt-2">
-                                EXAMPLES: "Show me users who churned" | "Create a funnel for signup" | "Make a survey"
+                            <div className="mt-3 text-[rgba(238,239,233,0.7)]">
+                                <span className="text-[#00FF00]">{'>'}</span>{' '}
+                                <button
+                                    onClick={() => {
+                                        const slideElement = document.querySelector(
+                                            '[data-slide-id="ai"][data-slide="5"]'
+                                        )
+                                        slideElement?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                    }}
+                                    className="text-[rgba(238,239,233,0.7)] hover:text-[#F1A82C] underline cursor-pointer bg-transparent border-none p-0 font-code"
+                                >
+                                    See the full roadmap
+                                </button>
                             </div>
-                            <div className="mt-2">
-                                NEXT UP: See other slides → or{' '}
-                                <Link to="https://app.posthog.com/ai" className="underline">
-                                    open PostHog AI now ↗
+                        </pre>
+
+                        <pre className="mt-5 mb-0 ml-0 mr-0 whitespace-pre-wrap text-[rgba(238,239,233,0.7)] [text-shadow:0_0_1px_rgba(238,239,233,0.4),0_0_2px_rgba(238,239,233,0.2)] font-code text-xs">
+                            <div className="mb-3 pl-4 border-l-2 border-[#F1A82C]">
+                                <div className="text-[#F1A82C] mb-1">USAGE:</div>
+                                <div className="text-[rgba(238,239,233,0.8)] pl-2">
+                                    Open PostHog AI in your project and ask it to analyze data or build something
+                                </div>
+                            </div>
+                            <div className="mb-3 pl-4 border-l-2 border-[#1D4AFF]">
+                                <div className="text-[#1D4AFF] mb-1">EXAMPLES:</div>
+                                <div className="text-[rgba(238,239,233,0.8)] pl-2 space-y-1">
+                                    {posthog_ai.answers?.slice(0, 3).map((a, idx) => (
+                                        <div key={idx}>
+                                            <span className="text-[#00FF00]">$</span> {a.q}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="mt-4">
+                                <span className="text-[#00FF00]">C:\POSTHOG\AI{'>'}</span>{' '}
+                                <Link
+                                    to="https://app.posthog.com/ai"
+                                    className="text-[rgba(238,239,233,0.9)] underline hover:text-[#F1A82C]"
+                                >
+                                    start
                                 </Link>
                             </div>
-                        </div>
+                        </pre>
                     </ScrollArea>
                 </div>
             </div>
