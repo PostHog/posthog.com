@@ -66,6 +66,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       price: String
       platformImageUrl: String
       platformIconName: String
+      featuredImageCaption: String
     }
     type TeamData {
       name: String
