@@ -204,13 +204,6 @@ export default function Timeline({
                         const lastMonthForYear = year === currentYear ? now.month() + 1 : 12 // month is 1-12 here
                         return Array.from({ length: lastMonthForYear }, (_, i) => i + 1).map((month) => {
                             const isFirstMonth = month === 1
-                            const isCurrentMonth = year === currentYear && month === now.month() + 1
-                            const latestNonEmptyWeek = [4, 3, 2, 1].find(
-                                (w) => (data?.[year]?.[month]?.[w]?.count || 0) > 0
-                            )
-                            if (isCurrentMonth && !latestNonEmptyWeek) {
-                                return null
-                            }
                             return (
                                 <button
                                     className="relative flex flex-col gap-1 items-center py-1 px-2 border-r border-primary"
@@ -225,13 +218,9 @@ export default function Timeline({
                                         {(() => {
                                             const now = dayjs()
                                             const isCurrentMonth = year === now.year() && month === now.month() + 1
-                                            const latestNonEmptyWeek = [4, 3, 2, 1].find(
-                                                (w) => (data?.[year]?.[month]?.[w]?.count || 0) > 0
-                                            )
+                                            const currentWeek = Math.min(4, Math.ceil(now.date() / 7))
                                             const weeksToRender = isCurrentMonth
-                                                ? latestNonEmptyWeek
-                                                    ? [latestNonEmptyWeek]
-                                                    : []
+                                                ? Array.from({ length: currentWeek }, (_, i) => i + 1)
                                                 : [1, 2, 3, 4]
 
                                             return weeksToRender.map((week) => {
