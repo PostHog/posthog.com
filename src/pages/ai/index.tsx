@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
@@ -98,7 +98,7 @@ const CustomDemoSlide = () => {
 }
 
 export default function PostHogAI(): JSX.Element {
-    const { view } = useWindow()
+    const { view, setHasDeveloperMode } = useWindow()
     const contentData = useContentData()
     const data = useStaticQuery(graphql`
         query {
@@ -209,6 +209,10 @@ export default function PostHogAI(): JSX.Element {
         ...data,
         ...contentData,
     }
+
+    useEffect(() => {
+        setHasDeveloperMode(true)
+    }, [])
 
     return view === 'developer' ? (
         <TerminalView />
