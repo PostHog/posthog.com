@@ -29,6 +29,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { Popover } from 'components/RadixUI/Popover'
+import MediaLibrary from 'components/MediaLibrary'
 
 export default function TaskBarMenu() {
     const {
