@@ -644,6 +644,12 @@ export function useMenuData(): MenuType[] {
                     ],
                 },
                 {
+                    type: 'item',
+                    label: 'Video library',
+                    link: '/videos',
+                    icon: <Icons.IconFolderOpenFilled className="size-4 text-orange" />,
+                },
+                {
                     type: 'submenu',
                     label: 'Sexy legal documents',
                     icon: <Icons.IconTie className="size-4 text-brown dark:text-creamsicle-dark" />,
