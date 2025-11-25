@@ -1,5 +1,42 @@
+/**
+ * useInstallationPlatforms - Auto-populates installation platform cards from MDX files
+ * PR example: https://github.com/PostHog/posthog.com/pull/13838
+ *
+ * Installation landing pages automatically display cards by reading MDX files and
+ * sidebar navigation at build time. No more manually maintaining hardcoded platform lists!
+ *
+ * Currently used in: error-tracking/installation, experiments/installation
+ *
+ * ADD A PLATFORM (to existing section):
+ * 1. Create MDX file with frontmatter:
+ *    ---
+ *    title: Elixir error tracking installation
+ *    platformImageUrl: https://res.cloudinary.com/.../elixir.svg
+ *    ---
+ * 2. Add to sidebar in src/navs/index.js (order there = order on page)
+ * 3. Done!
+ *
+ * REMOVE A PLATFORM:
+ * 1. Delete MDX file
+ * 2. Remove from sidebar in src/navs/index.js
+ *
+ * ADD PATTERN TO NEW SECTION:
+ * 1. Add platformImageUrl/platformIconName to all platform MDX files
+ * 2. Create _snippets/installation-platforms.tsx (see existing examples)
+ * 3. Update sidebar with Installation children in src/navs/index.js
+ * 4. Import and use snippet in index.mdx
+ *
+ * FRONTMATTER:
+ * - title: "[Platform] [product] installation" (suffix trimmed for display)
+ * - platformImageUrl: URL to logo (optional)
+ * - platformIconName: Icon like "IconCode" (optional, fallback if no image)
+ *
+ * USAGE:
+ * const platforms = useInstallationPlatforms('docs/error-tracking/installation', 'error tracking installation')
+ */
+
 import { useStaticQuery, graphql } from 'gatsby'
-import { docsMenu } from './index'
+import { docsMenu } from '../../navs'
 
 interface InstallationPlatform {
     url: string
@@ -8,6 +45,10 @@ interface InstallationPlatform {
     icon?: string
 }
 
+/**
+ * Extracts platform URLs from sidebar navigation to determine display order.
+ * Looks up the installation section within docsMenu and returns child URLs in order.
+ */
 function getSidebarOrder(sidebarPath: string): string[] {
     const sections: any[] = (docsMenu as any).children || []
     const fullPath = `/${sidebarPath}`
@@ -36,8 +77,8 @@ export default function useInstallationPlatforms(basePath: string, titleSuffix?:
                     slug
                     frontmatter {
                         title
-                        imageUrl
-                        iconName
+                        platformImageUrl
+                        platformIconName
                     }
                 }
             }
@@ -56,8 +97,13 @@ export default function useInstallationPlatforms(basePath: string, titleSuffix?:
             let label = node.frontmatter.title
 
             if (titleSuffix) {
-                const suffixRegex = new RegExp(`\\s+${titleSuffix}.*$`, 'i')
-                label = label.replace(suffixRegex, '').trim()
+                // Extract versioning content in title
+                const parenMatch = label.match(/\(([^)]+)\)/)
+                const versionInfo = parenMatch ? ` ${parenMatch[0]}` : ''
+
+                // Preserve versioning if applicable
+                const suffixRegex = new RegExp(`\\s+${titleSuffix}(\\s*\\([^)]+\\))?$`, 'i')
+                label = label.replace(suffixRegex, '').trim() + versionInfo
             }
 
             const platform: InstallationPlatform = {
@@ -65,10 +111,10 @@ export default function useInstallationPlatforms(basePath: string, titleSuffix?:
                 url: `/${node.slug}`,
             }
 
-            if (node.frontmatter.imageUrl) {
-                platform.image = node.frontmatter.imageUrl
-            } else if (node.frontmatter.iconName) {
-                platform.icon = node.frontmatter.iconName
+            if (node.frontmatter.platformImageUrl) {
+                platform.image = node.frontmatter.platformImageUrl
+            } else if (node.frontmatter.platformIconName) {
+                platform.icon = node.frontmatter.platformIconName
             }
 
             return platform

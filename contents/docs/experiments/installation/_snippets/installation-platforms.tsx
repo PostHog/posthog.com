@@ -1,6 +1,6 @@
 import React from 'react'
 import List from 'components/List'
-import useInstallationPlatforms from '../../../../../src/navs/useInstallationPlatforms'
+import useInstallationPlatforms from 'hooks/docs/useInstallationPlatforms'
 
 interface InstallationPlatformsProps {
     columns?: 2 | 3 | 4
