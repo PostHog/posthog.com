@@ -3954,7 +3954,7 @@ export const docsMenu = {
                 {
                     name: 'Set up integrations',
                     url: '/docs/error-tracking/integrations',
-                    icon: 'IconGear',
+                    icon: 'IconApps',
                     color: 'red',
                     featured: true,
                 },
