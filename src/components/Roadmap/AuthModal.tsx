@@ -19,7 +19,7 @@ export const AuthModal = ({
             <h4 className="mb-4">Sign into PostHog.com</h4>
             <div className="bg-border dark:bg-border-dark p-4 mb-2">
                 <p className="text-sm mb-2">
-                    <strong>Notezzz: PostHog.com authentication is separate from your PostHog app.</strong>
+                    <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
                 </p>
 
                 <p className="text-sm mb-0">
