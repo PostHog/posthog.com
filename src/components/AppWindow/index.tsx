@@ -10,6 +10,7 @@ import {
     IconSquare,
     IconArrowLeft,
     IconArrowRight,
+    IconTerminal,
 } from '@posthog/icons'
 import { Menu, MenuItem, useApp } from '../../context/App'
 import { Provider as WindowProvider, AppWindow as AppWindowType, useWindow } from '../../context/Window'
@@ -151,7 +152,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const [animating, setAnimating] = useState(true)
     const animationStartTimeRef = useRef<number | null>(null)
     const posthog = usePostHog()
-
+    const [view, setView] = useState<'marketing' | 'developer'>('marketing')
     const inView = useMemo(() => {
         const windowsAbove = windows.filter(
             (window) => window !== item && window.zIndex > item.zIndex && !window.minimized
@@ -542,6 +543,8 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             setActiveInternalMenu={setActiveInternalMenu}
             internalMenu={internalMenu}
             parent={parent}
+            view={view}
+            setView={setView}
         >
             <WindowContainer closing={closing}>
                 {!item.minimized && !closed && (
@@ -735,6 +738,25 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     <div className="flex justify-end">
                                         {siteSettings.experience !== 'boring' && (
                                             <>
+                                                <Tooltip
+                                                    trigger={
+                                                        <OSButton
+                                                            active={view === 'developer'}
+                                                            size="xs"
+                                                            onClick={() =>
+                                                                setView((prev) =>
+                                                                    prev === 'developer' ? 'marketing' : 'developer'
+                                                                )
+                                                            }
+                                                            className=""
+                                                        >
+                                                            <IconTerminal className="size-5" />
+                                                        </OSButton>
+                                                    }
+                                                >
+                                                    Developer mode ({view === 'developer' ? 'ON' : 'OFF'})
+                                                </Tooltip>
+
                                                 <OSButton size="xs" onClick={handleMinimize} className="">
                                                     <IconMinus className="size-4 relative top-1" />
                                                 </OSButton>

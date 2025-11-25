@@ -11,6 +11,8 @@ import CustomPersonasSlide from 'components/AI/CustomPersonasSlide'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import ASCIISlide from 'components/AI/ASCIISlide'
 import Tooltip from 'components/RadixUI/Tooltip'
+import { useWindow } from '../../context/Window'
+import TerminalView from 'components/AI/TerminalView'
 const PRODUCT_HANDLE = 'posthog_ai'
 
 const CustomManifestoSlide = () => {
@@ -96,7 +98,7 @@ const CustomDemoSlide = () => {
 }
 
 export default function PostHogAI(): JSX.Element {
-    const [view, setView] = useState<'marketing' | 'developer'>('marketing')
+    const { view } = useWindow()
     const contentData = useContentData()
     const data = useStaticQuery(graphql`
         query {
@@ -171,15 +173,6 @@ export default function PostHogAI(): JSX.Element {
             'posthog-on-posthog',
         ],
         custom: [
-            ...(view === 'marketing'
-                ? []
-                : [
-                      {
-                          slug: 'overview',
-                          name: 'Overview',
-                          component: ASCIISlide,
-                      },
-                  ]),
             {
                 slug: 'roadmap',
                 name: 'Roadmap',
@@ -217,33 +210,9 @@ export default function PostHogAI(): JSX.Element {
         ...contentData,
     }
 
-    return (
-        <SlidesTemplate
-            productHandle={PRODUCT_HANDLE}
-            data={mergedData}
-            slideConfig={slides}
-            rightActionButtons={
-                <ToggleGroup
-                    className="mr-2"
-                    hideTitle
-                    title="View"
-                    options={[
-                        {
-                            label: 'Marketing',
-                            value: 'marketing',
-                            icon: <Tooltip trigger={<IconMegaphone className="size-5" />}>Marketing mode</Tooltip>,
-                            default: true,
-                        },
-                        {
-                            label: 'Developer',
-                            value: 'developer',
-                            icon: <Tooltip trigger={<IconTerminal className="size-5" />}>Developer mode</Tooltip>,
-                        },
-                    ]}
-                    onValueChange={(value) => setView(value as 'marketing' | 'developer')}
-                    value={view}
-                />
-            }
-        />
+    return view === 'developer' ? (
+        <TerminalView />
+    ) : (
+        <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
     )
 }

@@ -19,7 +19,7 @@ const ASCII_HEADER = `    Welcome to
 ██║      ╚██████╔╝ ███████║    ██║    ██║  ██║ ╚██████╔╝ ╚██████╔╝    ██║  ██║ ██║
 ╚═╝       ╚═════╝  ╚══════╝    ╚═╝    ╚═╝  ╚═╝  ╚═════╝   ╚═════╝     ╚═╝  ╚═╝ ╚═╝`
 
-export default function AI2(): JSX.Element {
+export default function TerminalView(): JSX.Element {
     // Detect OS for terminal prompt
     const isMac = typeof navigator !== 'undefined' && navigator.platform.toUpperCase().indexOf('MAC') >= 0
     const prompt = isMac ? '~/posthog/ai $' : 'C:\\POSTHOG\\AI>'
