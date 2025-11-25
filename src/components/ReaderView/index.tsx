@@ -26,7 +26,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { Fieldset } from 'components/OSFieldset'
 import Slider from 'components/RadixUI/Slider'
 import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
@@ -597,7 +597,6 @@ function ReaderViewContent({
             })
         }
     }, [appWindow?.path, hash])
-    const image = getImage(body.featuredImage)
 
     return (
         <SearchProvider>
@@ -684,15 +683,11 @@ function ReaderViewContent({
                                 {body.featuredImage && !body.featuredVideo && (
                                     <div className="not-prose mb-6 relative">
                                         <div className="text-center">
-                                            {image ? (
-                                                <GatsbyImage image={image} alt={title} className="rounded" />
-                                            ) : body.featuredImage?.publicURL ? (
-                                                <img
-                                                    src={body.featuredImage.publicURL}
-                                                    alt={title}
-                                                    className="rounded w-full"
-                                                />
-                                            ) : null}
+                                            <GatsbyImage
+                                                image={getImage(body.featuredImage)}
+                                                alt={title}
+                                                className="rounded"
+                                            />
                                         </div>
                                         {body.featuredImageCaption && (
                                             <div className="absolute right-0 bottom-0 m-2 text-sm text-white bg-black bg-opacity-75 font-medium py-1 px-2 rounded-sm italic text-right">
