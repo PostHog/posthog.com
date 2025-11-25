@@ -9,11 +9,12 @@ import { darkTheme, lightTheme } from './theme'
 import languageMap from './languages'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
-import Tooltip from 'components/Tooltip'
 import Mermaid from 'components/Mermaid'
+import Tooltip from 'components/Tooltip'
 import usePostHog from 'hooks/usePostHog'
 import { useApp } from '../../context/App'
-import { IconArrowUpRight } from '@posthog/icons'
+import { IconArrowUpRight, IconLogomark } from '@posthog/icons'
+import { useLocation } from '@reach/router'
 
 type LanguageOption = {
     label?: string
@@ -30,6 +31,7 @@ type CodeBlockProps = {
     showLabel?: boolean
     showLineNumbers?: boolean
     showCopy?: boolean
+    showAskAI?: boolean
     focusOnLines?: string
     tooltips?: { lineNumber: number; content: string }[]
 
@@ -163,6 +165,7 @@ export const CodeBlock = ({
     selector = 'tabs',
     showLabel = true,
     showCopy = true,
+    showAskAI = true,
     showLineNumbers = false,
     children: languages,
     currentLanguage,
@@ -175,7 +178,8 @@ export const CodeBlock = ({
     }
 
     const codeBlockId = generateRandomHtmlId()
-    const { siteSettings } = useApp()
+    const { siteSettings, openNewChat } = useApp()
+    const location = useLocation()
     const [tooltipVisible, setTooltipVisible] = React.useState(false)
     const posthog = usePostHog()
     const [projectName, setProjectName] = React.useState<string | null>(null)
@@ -237,6 +241,25 @@ export const CodeBlock = ({
         setTimeout(() => {
             setTooltipVisible(false)
         }, 1000)
+    }
+
+    const handleAskAboutCode = (): void => {
+        const codeContent = replaceProjectInfo(
+            currentLanguage.code
+                .replace(tooltipKey, '//')
+                .replace(highlightKey, '')
+                .replace(diffAddKey, '')
+                .replace(diffRemoveKey, '')
+                .trim()
+        )
+        const language = currentLanguage.language || ''
+        const pagePath = location.pathname?.replace(/\/$/, '') || ''
+        const markdownUrl = `https://posthog.com${pagePath}.md`
+
+        openNewChat({
+            path: `ask-about-code-${codeBlockId}`,
+            initialQuestion: `Tell me about this code snippet in ${markdownUrl}:\n\n\`\`\`${language}\n${codeContent}\n\`\`\``,
+        })
     }
 
     const highlightLineNumbers: number[] = []
@@ -360,11 +383,24 @@ export const CodeBlock = ({
                             </div>
                         )}
 
+                        {showAskAI && (
+                            <div className="relative flex items-center justify-center px-1">
+                                <button
+                                    onClick={handleAskAboutCode}
+                                    className="text-muted hover:text-secondary px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                    title="Ask PostHog AI"
+                                >
+                                    <IconLogomark className="w-4 h-4 fill-current" />
+                                </button>
+                            </div>
+                        )}
+
                         {showCopy && (
                             <div className="relative flex items-center justify-center px-1">
                                 <button
                                     onClick={copyToClipboard}
                                     className="text-muted hover:text-secondary px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                    title="Copy to clipboard"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
