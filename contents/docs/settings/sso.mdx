@@ -72,7 +72,7 @@ Adding a `TXT` record depends on your DNS provider (e.g. Cloudflare, Google Doma
 
 Just-in-time user provisioning creates a new account whenever a first-time user logs in using any available SSO provider and an email address that matches your verified domain. PostHog Cloud supports GitHub, GitLab, Google, and SAML if you have configured it.
 
-To enable just-in-time user provisioning, navigate to Authentication domains in your Organization settings and use the 'Enable automatic provisioning' toggle.
+To enable just-in-time user provisioning, navigate to Authentication domains in your Organization settings and use the "Enable automatic provisioning" toggle.
 
 ## SSO enforcement
 
@@ -115,10 +115,10 @@ Looking for a provider that's not here? [Reach out to us](https://posthog.com/su
 
 2. Register your application
 
-    - `Homepage URL` needs to be the url of your PostHog instance
-    - `Authorization callback URL` needs to be the url of your PostHog instance + `/complete/github/`
+    - "Homepage URL" needs to be the url of your PostHog instance
+    - "Authorization callback URL" needs to be the url of your PostHog instance + `/complete/github/`
 
-3. Find your `Client ID` and `Client Secret`
+3. Find your "Client ID" and "Client Secret"
 
 4. Add those two settings as `SOCIAL_AUTH_GITHUB_KEY` and `SOCIAL_AUTH_GITHUB_SECRET` and restart your server.
 
@@ -130,14 +130,14 @@ Looking for a provider that's not here? [Reach out to us](https://posthog.com/su
 
 <FeatureAvailability availability={_frontmatter.availability.features.gitlab} />
 
-1. Go to `Settings -> Applications` in your GitLab instance (<a href='https://gitlab.com/profile/applications' target='_blank'>open the GitLab.com applications settings</a>)
+1. Go to **Settings** -> **Applications** in your GitLab instance (<a href='https://gitlab.com/profile/applications' target='_blank'>open the GitLab.com applications settings</a>)
 
 2. Register your application
 
     - Redirect URI needs to be the url of your PostHog instance + `/complete/gitlab/`
-    - Tick `read_user` as scope.
+    - Tick "read_user" as scope.
 
-3. Find your `Application ID` and `Secret`
+3. Find your "Application ID" and "Secret"
 
 4. Add those two settings as `SOCIAL_AUTH_GITLAB_KEY` and `SOCIAL_AUTH_GITLAB_SECRET`. If you're hosting GitLab yourself you'll also need to add `SOCIAL_AUTH_GITLAB_API_URL`, which is the full URL to your GitLab instance.
 
@@ -147,11 +147,11 @@ Looking for a provider that's not here? [Reach out to us](https://posthog.com/su
 
 To set up Google SSO please follow these instructions:
 
-1. Go to the "Google Developer Console" at <a href="https://console.cloud.google.com/apis/dashboard" target="_blank" rel="noopener noreferrer">https://console.cloud.google.com/apis/dashboard</a>. Be sure to select the proper Google account and the right project for your app (or create one if you don't have it).
+1. Go to the **Google Developer Console** at <a href="https://console.cloud.google.com/apis/dashboard" target="_blank" rel="noopener noreferrer">https://console.cloud.google.com/apis/dashboard</a>. Be sure to select the proper Google account and the right project for your app (or create one if you don't have it).
 
 2. Navigate to the [Credentials](https://console.cloud.google.com/projectselector2/apis/credentials) section.
 
-3. Click on "Create credentials" and select "OAuth client ID" to generate your credentials.
+3. Click on **Create credentials** and select "OAuth client ID" to generate your credentials.
 
     - On Application Type select "Web application" and enter a meaningful name (e.g. PostHog Self-hosted).
     - On the "Authorized JavaScript origins" section add the root domain (with protocol) for your PostHog instance (e.g. `https://us.posthog.com`)
@@ -281,11 +281,11 @@ Use this option if you want to add additional configurations to your app that ar
 
 3. Go to the **Configuration** tab and edit the following attributes (leave everything else as default)
 
-    - Audience (EntityID): enter `https://us.posthog.com`.
+    - In the "Audience (EntityID)" enter `https://us.posthog.com`.
         - If you are using our EU deployment, use `https://eu.posthog.com`.
         - If you are self-hosting, enter the exact same value as your `SITE_URL` [environment variable][env-vars].
-    - ACS (Consumer) URL Validator: Set to a regex that only matches `<yourdomain>/complete/saml/`. For instance: `^https:\/\/us.posthog.com\/complete\/saml\/$` (or use `eu` for an EU instance)
-    - ACS (Consumer) URL: Set to `https://us.posthog.com/complete/saml/`.
+    - Set the "ACS (Consumer) URL Validator" to a regex that only matches `<yourdomain>/complete/saml/`. For instance: `^https:\/\/us.posthog.com\/complete\/saml\/$` (or use `eu` for an EU instance)
+    - Set the "ACS (Consumer) URL" to `https://us.posthog.com/complete/saml/`.
         - If you are using our EU deployment, use `https://eu.posthog.com/complete/saml/`.
         - If you are self-hosting, use `<yourdomain>/complete/saml/`.
 
@@ -355,7 +355,7 @@ Before setting up SCIM, you need:
 
 2. Click the (⋯) next to your domain and select **Configure SCIM**.
 
-3. Copy the `SCIM Base URL` and `SCIM Token`. You'll need these for your IdP configuration.
+3. Copy the "SCIM Base URL" and "SCIM Token". You'll need these for your IdP configuration.
 
 4. In your Identity Provider, configure SCIM for your PostHog application:
 
@@ -390,9 +390,9 @@ If your existing SAML app supports SCIM 2.0 provisioning, you can use it. Otherw
 
 5. Navigate to the **Provisioning** tab in Okta and click **Configure API Integration**.
 
-6. Check **Enable API integration** and enter:
-    - `SCIM Base URL` from PostHog
-    - `API Token` (the SCIM Token from PostHog)
+6. Check "Enable API integration" and enter:
+    - "SCIM Base URL" from PostHog
+    - "API Token" (the SCIM Token from PostHog)
 
 7. Click **Test API Credentials** to verify the connection.
 
@@ -415,22 +415,22 @@ If you already have a SAML app configured, you'll need to migrate to an app that
 
 2. Search for `SCIM Provisioner with SAML (SCIM v2 Enterprise, full SAML)` and select it.
 
-3. In the **Configuration** tab, copy the settings from your existing SAML app: `SAML Audience URL`, `RelayState`, `ACS (Consumer) URL`.
+3. In the **Configuration** tab, copy the settings from your existing SAML app: SAML Audience URL, RelayState, ACS (Consumer) URL.
 
 4. Go to the **Parameters** tab and ensure the following attributes are created (they are required for SAML to work correctly):
     - `email` (Email)
     - `first_name` (First Name)
     - `last_name` (Last Name)
 
-5. Navigate to the **Configuration** tab and paste the `SCIM Base URL` and `SCIM Bearer Token` from PostHog into the API Connection section. Click **Enable**.
+5. Navigate to the **Configuration** tab and paste the "SCIM Base URL" and "SCIM Bearer Token" from PostHog into the API Connection section. Click "Enable".
 
-6. Go to the **Provisioning** tab and check **Enable provisioning**. Select whether you want admin approval for creating or deleting users.
+6. Go to the **Provisioning** tab and check "Enable provisioning". Select whether you want admin approval for creating or deleting users.
 
 7. To sync roles, go to the **Rules** tab and create a rule to map OneLogin roles to PostHog roles. To sync all roles as-is:
-    - In **Actions**, select `Set Groups in SCIM v2 Provisioner with SAML`
-    - Select `Map from OneLogin`
-    - For each `role` with value that matches `.*`
+    - In **Actions**, select "Set Groups in SCIM v2 Provisioner with SAML"
+    - Select "Map from OneLogin"
+    - For each "role" with value that matches `.*`
 
-8. Go to the **SSO** tab and copy the new `Issuer URL`, `SAML 2.0 Endpoint`, and `X.509 Certificate`. Update your existing SAML configuration in PostHog with these new values.
+8. Go to the **SSO** tab and copy the new "Issuer URL", "SAML 2.0 Endpoint", and "X.509 Certificate". Update your existing SAML configuration in PostHog with these new values.
 
 9. Assign users to the new application. Go to **Users**, select a user, assign roles, and add them to the application.
