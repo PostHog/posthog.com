@@ -416,6 +416,12 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
                             We're hiring.
                         </Link>
                     </p>
+                    <p>
+                        Prefer maps?{' '}
+                        <Link to={`/people/map`} state={{ newWindow: true }}>
+                            See the team map.
+                        </Link>
+                    </p>
                 </div>
 
                 {/* 
