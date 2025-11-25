@@ -742,16 +742,14 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                                     trigger={
                                                         <OSButton
                                                             active={view === 'developer'}
-                                                            size="xs"
+                                                            size="md"
                                                             onClick={() =>
                                                                 setView((prev) =>
                                                                     prev === 'developer' ? 'marketing' : 'developer'
                                                                 )
                                                             }
-                                                            className=""
-                                                        >
-                                                            <IconTerminal className="size-5" />
-                                                        </OSButton>
+                                                            icon={<IconTerminal />}
+                                                        />
                                                     }
                                                 >
                                                     Developer mode ({view === 'developer' ? 'ON' : 'OFF'})
