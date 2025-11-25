@@ -24,6 +24,9 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
             password: true,
         },
     },
+    error_tracking: {
+        __capturePostHogExceptions: true,
+    },
     person_profiles: 'identified_only',
     __preview_heatmaps: true,
     opt_in_site_apps: true,

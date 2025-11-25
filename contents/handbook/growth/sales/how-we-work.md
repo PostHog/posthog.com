@@ -9,7 +9,7 @@ showTitle: true
 ## Roles
 
 We have three types of role:
-- Technical Account Executives - closing new business from [inbound](/handbook/growth/sales/inbound-sales) and [outbound](/handbook/growth/sales/outbound-sales) leads
+- Technical Account Executives - closing new business from [inbound](/handbook/growth/sales/inbound-sales) and [outbound](/handbook/growth/sales/outbound-sales) leads and expanding their usage of PostHog in the next 12 months
 - Technical Account Managers - [expansion](/handbook/growth/sales/expansion-and-retention) from existing customers, closing new business from [product-led leads](/handbook/growth/sales/product-led-sales)
 - Technical Account Managers called Leon and Scott - [expansion](/handbook/growth/sales/expansion-and-retention) from a small set of very high potential existing customers
 
@@ -17,7 +17,7 @@ We have three types of role:
 
 TAEs work with:
 
-- People email sales@ directly
+- People who email sales@ directly
 - People who book a demo via contact sales
 - Other triggers we see in product, supplemented by data from Clay
 
@@ -81,8 +81,8 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 **General principles**
 
 - When thinking about commission, we want to particularly incentivize:
-  - Closing annual contracts with payment up front - better retention, de-risks PostHog financially.
-  - Selling multiple products in a deal - all-in-one is how we will beat the competition.
+  - Landing new customers
+  - Quickly expanding them into new products using the relationship you've developed in onboarding them as customers.
 - We aim for a 50/50 split between base/commission when calculating OTE by default.
 
 > This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
@@ -92,10 +92,10 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 - Your quota is set for the year and then divided by 4 - this means you don't have to cram deals into the end of a quarter.
 - Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%.
 - Quota is based on $ amount sold, not credits/product usage, so you can't in theory sell a $500k deal with an 80% discount and claim the full $500k to your quota, for example. Ways to hit quota:
-  - ARR from new annual deals sold
-  - ARR from monthly customers for the first _3 months_ where you got them set up but they didn't commit to an annual contract
-    - After 3 months, either you can keep working them if you believe they'll go annual, or they'll get handed over to a TAM or CSM
-  - For multiyear contracts we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
+  - The invoice payment amount for any pre-purchased credit deals in the first 12 months after they become a paying customer.
+    - If the purchase is a renewal of an earlier credit purchase (i.e. at the end of the first year) then you'll get recognised on the difference between the initial purchase and renewal purchase.
+ - ARR from monthly customers for the first _12 months_ after you sign them up as a monthly customer as long as you are the primary account owner.
+  - For multiyear contracts, we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
     - The way we work this out is by taking the annual credit purchased by the customer and applying the standard 1 year discount to it.
   - Your quota will depend on your OTE
 - Commission is paid out quarterly, and in any case after an invoice is paid
@@ -106,7 +106,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
   - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commmission into the above 4 buckets and how you did.
-- In your first 3 months you'll be paid 100% OTE fixed.
+- In your first 3 months, you'll be paid 100% OTE fixed.
 
 ## How commission works - Technical Account Managers
 
@@ -147,6 +147,15 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 > If you have customer you converted from monthly to annual under the old, non-usage-based commission plan, you won't _also_ get recognized for additional usage beyond their annual run rate in the first year - no double dipping!
 
 You can see how we are tracking on the [TAM Quota Tracker](https://us.posthog.com/project/2/dashboard/498582) dashboard.
+
+### TAM book of business rules
+
+1. Only accounts with the `AM Managed` segment in Vitally will be counted towards your quota.  Simon adds this manually after reviewing with you.
+2. If you are assigned an account with no previous owner, you have up to 3 months to figure out whether they should be in your book or not. Don't ask for the `AM Managed` segment to be added until you're happy that there is growth potential there.
+3. If you are assigned an account with a previous owner, work with them on the handover process.  If the customer isn't in a healthy state usage and engagement-wise, feel free to push back and ask for the previous owner's help in getting them to a good state before taking ownership.  If you really can't resolve this, then talk first to your team lead. If you can't resolve it, Simon will be the tie breaker.
+4. Accounts which you've previously been paid quota on need to stay in your `AM Managed` book until they are handed over as per 3 above, or until they churn/fall below $20K ARR.  In this case, we will keep them in the `AM Managed` segment for quota calculation purposes and then remove them after the quarterly calculations are complete.
+5. Nominally, you should have 15 accounts/around $1m in ARR in your `AM Managed` book.  There is some wiggle room here, but if you find yourself with 25+ accounts, it's unlikely that you'll be able to give them the level of focus we expect from a TAM, so you should be prepared to hand some over to another team member.
+6. You can have accounts added to your book at any time, if you are comfortable that there is growth potential there.  Removal of accounts should only happen at the end of the quarter so that quota can be calculated.
 
 ## Team lead quota
 
