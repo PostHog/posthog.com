@@ -109,14 +109,14 @@ git clone --filter=blob:none https://github.com/PostHog/posthog && cd posthog/
 
 Set up your development environment instantly using [Flox](https://flox.dev/).
 
-Flox is a development environment manager that ensures we all have the same system-level dependencies when developing PostHog. It's like npm for runtimes and libraries: `.flox/env/manifest.toml` is like `package.json`, `.flox/env/manifest.lock` is akin to `package-lock.json`, and `.flox/cache/` resembles `node_modules/`.
+Flox manages your development environment. The `manifest.toml` file declares all dependencies (similar to `package.json`), and Flox automatically provides the correct versions for your system.
 
 To get PostHog running in a dev environment:
 
-1. Once you have cloned the repo and installed OrbStack, now install Flox (plus `ruff` and `rustup` for pre-commit checks outside the Flox env).
+1. Once you have cloned the repo and installed OrbStack, install Flox:
 
     ```bash
-    brew install flox ruff rustup && rustup-init && rustup default stable
+    brew install flox
     ```
 
 2. From the root of the repository, activate the environment. (On first activation, you'll be prompted if you'd like the environment to be activated automatically using `direnv`.)
