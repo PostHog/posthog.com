@@ -28,6 +28,7 @@ export const quantum_metric = {
             },
             features: {
                 canvas_recording: false,
+                crash_reports: true,
             },
             platform_support: {
                 features: {
@@ -38,8 +39,6 @@ export const quantum_metric = {
             analysis: {
                 features: {
                     console_logs: true,
-                    crash_reports: true,
-                    filter_by_user_or_event: true,
                     network_monitor: true,
                     performance_monitoring: true,
                 },
@@ -47,6 +46,7 @@ export const quantum_metric = {
             targeting: {
                 features: {
                     conditional_recording: true,
+                    filter_by_user_or_event: true,
                 },
             },
             privacy: {
