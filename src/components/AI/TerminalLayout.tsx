@@ -19,7 +19,7 @@ export default function TerminalLayout({ children }: TerminalLayoutProps): JSX.E
             {/* Content */}
             <div className="relative z-0 h-full">
                 <ScrollArea className="h-full">
-                    <div className="max-w-[1200px] p-8">
+                    <div className="p-8">
                         {children}
                     </div>
                 </ScrollArea>

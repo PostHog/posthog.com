@@ -377,7 +377,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                                     className="absolute top-1/2 -translate-y-1/2 pointer-events-none"
                                     style={{
                                         left: `calc(${((isScrubbing ? scrubTime : playerState.currentTime) /
-                                                playerState.duration) *
+                                            playerState.duration) *
                                             100
                                             }% + 5.5px)`,
                                     }}

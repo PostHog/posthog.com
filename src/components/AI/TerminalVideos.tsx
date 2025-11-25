@@ -104,7 +104,7 @@ function VideoItem({ videoKey, video }: { videoKey: string; video: Video }): JSX
 export default function TerminalVideos({ videos }: TerminalVideosProps): JSX.Element {
     return (
         <div className="space-y-6">
-            <div className="grid grid-cols-1 @4xl:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 @4xl:grid-cols-2 @7xl:grid-cols-3 gap-8">
                 {Object.entries(videos).map(([key, video]) => (
                     <VideoItem key={key} videoKey={key} video={video} />
                 ))}
