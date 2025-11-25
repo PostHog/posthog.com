@@ -70,7 +70,7 @@ Cheers,
 
 **Who:** Active users in the company + Stripe email
 
-**Subject:** Hi From PostHog | Startup Credits Exhausted Next Month
+**Subject:** XXXX$ Posthog Bill | Startup Credits Now Exhausted
 
 Hey Team,
 
