@@ -116,7 +116,7 @@ export default function TerminalView(): JSX.Element {
                 </div>
 
                 {/* Intro with help command */}
-                <div className="mb-6 pt-4">
+                <div className="mb-6 pt-4 border-t border-[#333]">
                     <div className="text-[14px] space-y-1">
                         <div>
                             <span className="text-[#00FF00]">{prompt}</span>{' '}
@@ -234,7 +234,7 @@ export default function TerminalView(): JSX.Element {
                             </div>
                         </div>
 
-                        <div className="mt-6 pt-4">
+                        <div className="mt-6 pt-8 border-t border-[#333]">
                             <div className="text-[14px]">
                                 <span className="text-[#00FF00]">{prompt}</span>{' '}
                                 <Link
@@ -250,7 +250,7 @@ export default function TerminalView(): JSX.Element {
                 </TerminalSection>
 
                 {/* Footer */}
-                <div className="pt-6 text-[12px] text-[#666]">
+                <div className="pt-6 text-[12px] text-[#666] border-t border-[#333]">
                     <p>
                         Report issues or share feedback at{' '}
                         <Link
