@@ -35,14 +35,14 @@ These components rely on a few external services:
 - Redis – for caching and inter-service communication
 - Zookeeper – for coordinating Kafka and ClickHouse clusters
 
-When spinning up an instance of PostHog for development, we recommend the following configuration:
+When spinning up an instance of PostHog for development, we recommend the following hybrid configuration:
 
-- the external services run in Docker over `docker compose`
-- PostHog itself runs on the host (your system)
+- External services (ClickHouse, Kafka, PostgreSQL, Redis, etc.) run in Docker via `docker compose`
+- PostHog apps (Django, frontend, plugin-server, Celery) run on the host using `hogli start` (which uses mprocs, a terminal UI, to manage and display logs from all processes simultaneously)
 
-This is what we'll be using in the guide below.
+This approach gives you fast iteration on the code you're developing while keeping infrastructure isolated.
 
-> It is also technically possible to run PostHog in Docker completely, but syncing changes is then much slower, and for development you need PostHog dependencies installed on the host anyway (such as formatting or typechecking tools).
+> It is also technically possible to run PostHog in Docker completely, but syncing code changes is then much slower, and for development you need PostHog dependencies installed on the host anyway (such as formatting or typechecking tools).
 > The other way around – everything on the host, is not practical due to significant complexities involved in instantiating Kafka or ClickHouse from scratch.
 
 The instructions here assume you're running macOS or the current Ubuntu Linux LTS (24.04).
