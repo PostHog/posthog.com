@@ -101,7 +101,6 @@ const CustomDemoSlide = () => {
 export default function PostHogAI(): JSX.Element {
     const posthog = usePostHog()
     const { view, setHasDeveloperMode, setView } = useWindow()
-    const [loading, setLoading] = useState(true)
     const contentData = useContentData()
     const data = useStaticQuery(graphql`
         query {
@@ -217,16 +216,11 @@ export default function PostHogAI(): JSX.Element {
         setHasDeveloperMode(true)
         const mode = posthog?.getFeatureFlag?.('mode-selection-test')
         setView(mode === 'developer' ? 'developer' : 'marketing')
-        setLoading(false)
     }, [])
 
-    return (
-        <div className={loading ? 'opacity-0' : 'opacity-100'}>
-            {view === 'developer' ? (
-                <TerminalView />
-            ) : (
-                <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
-            )}
-        </div>
+    return view === 'developer' ? (
+        <TerminalView />
+    ) : (
+        <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
     )
 }
