@@ -83,6 +83,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/google-ads',
                 },
                 {
+                    name: 'Bing Ads',
+                    url: '/docs/cdp/sources/bing-ads',
+                },
+                {
                     name: 'LinkedIn Ads',
                     url: '/docs/cdp/sources/linkedin-ads',
                 },
@@ -1394,10 +1398,6 @@ export const handbookSidebar = [
                     {
                         name: 'Onboarding team',
                         url: '/handbook/onboarding/onboarding-team',
-                    },
-                    {
-                        name: 'YC onboarding',
-                        url: '/handbook/growth/sales/yc-onboarding',
                     },
                     {
                         name: 'Onboarding program',
@@ -4185,6 +4185,10 @@ export const docsMenu = {
                         {
                             name: 'Google Ads',
                             url: '/docs/data-warehouse/sources/google-ads',
+                        },
+                        {
+                            name: 'Bing Ads',
+                            url: '/docs/data-warehouse/sources/bing-ads',
                         },
                         {
                             name: 'LinkedIn Ads',

@@ -12,8 +12,8 @@ It's a static website built on Gatsby and hosted with Vercel.
 
 ## Resources and servers
 
--   Use yarn instead of npm
--   Run the app with `yarn start`. To make sure everything is fresh, run `yarn clean && yarn && yarn start`.
+-   Use pnpm instead of npm
+-   Run the app with `pnpm start`. To make sure everything is fresh, run `pnpm clean && pnpm && pnpm start`.
 -   The site runs on port `8001`. If you need to test something, check if it's already running on that port – no need to spin up a new server if so.
 -   Sometimes the project is run inside a parent folder so a VS Code Workspace can include the squeak-strapi repo in another subfolder. Always verify your directory when searching for files or trying to run commands.
 
