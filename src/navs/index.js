@@ -1400,10 +1400,6 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-team',
                     },
                     {
-                        name: 'YC onboarding',
-                        url: '/handbook/growth/sales/yc-onboarding',
-                    },
-                    {
                         name: 'Onboarding program',
                         url: '/handbook/onboarding/onboarding-program',
                     },
