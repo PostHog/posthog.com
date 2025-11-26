@@ -19,9 +19,9 @@ type ChangelogPlaylistVideo = {
 }
 
 const fetchChangelogPlaylistVideos = async (): Promise<ChangelogPlaylistVideo[]> => {
-    const apiKey = process.env.YOUTUBE_API_KEY
+    const apiKey = process.env.YOUTUBE_API_KEY_CHANGELOG
     if (!apiKey) {
-        console.warn('YOUTUBE_API_KEY not set. Skipping changelog playlist ingestion.')
+        console.warn('YOUTUBE_API_KEY_CHANGELOG not set. Skipping changelog playlist ingestion.')
         return []
     }
 
