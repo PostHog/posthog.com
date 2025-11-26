@@ -639,7 +639,7 @@ const RoadmapCards = ({
                                             <div className="border-b border-primary divide-y divide-primary bg-primary/20">
                                                 {periodVideos.map((video) => (
                                                     <div key={video.id} className="p-2">
-                                                        <div className="aspect-video rounded border border-primary overflow-hidden w-full bg-black">
+                                                        <div className="aspect-video rounded border border-primary overflow-hidden w-full bg-black max-w-screen">
                                                             <iframe
                                                                 title={video.title}
                                                                 src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
@@ -680,22 +680,20 @@ const RoadmapCards = ({
                                                                         >
                                                                             <button
                                                                                 data-scheme="secondary"
-                                                                                className={`group w-full text-left py-2 px-4 flex justify-between gap-1 ${
-                                                                                    active
+                                                                                className={`group w-full text-left py-2 px-4 flex justify-between gap-1 ${active
                                                                                         ? 'bg-primary'
                                                                                         : 'hover:bg-primary'
-                                                                                }`}
+                                                                                    }`}
                                                                                 onClick={() =>
                                                                                     handleRoadmapClick(roadmap)
                                                                                 }
                                                                             >
                                                                                 <div>
                                                                                     <h5
-                                                                                        className={`m-0  text-[15px] leading-tight mb-1 ${
-                                                                                            active
+                                                                                        className={`m-0  text-[15px] leading-tight mb-1 ${active
                                                                                                 ? ''
                                                                                                 : 'group-hover:underline'
-                                                                                        }`}
+                                                                                            }`}
                                                                                     >
                                                                                         {roadmap.title}
                                                                                     </h5>
