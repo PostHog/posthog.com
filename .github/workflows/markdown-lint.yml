@@ -32,7 +32,6 @@ jobs:
               uses: DavidAnson/markdownlint-cli2-action@v21
               with:
                   globs: ${{ steps.changed-files.outputs.all_changed_files }}
-                  separator: ','
                   config: '.markdownlint-cli2.jsonc'
 
             - name: Skip if no markdown files changed
