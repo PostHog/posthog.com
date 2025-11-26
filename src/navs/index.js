@@ -1392,14 +1392,6 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/newly-assigned-customer',
                     },
                     {
-                        name: 'Saying hi to your customers',
-                        url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
-                    },
-                    {
-                        name: 'Getting to know your customers',
-                        url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
-                    },
-                    {
                         name: 'Basic account review checklist',
                         url: '/handbook/cs-and-onboarding/foundation-check',
                     },
@@ -1430,6 +1422,18 @@ export const handbookSidebar = [
                     {
                         name: 'How we upsell and cross-sell',
                         url: '/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell',
+                    },
+                    {
+                        name: 'Error tracking cross-sell',
+                        url: '/handbook/cs-and-onboarding/error-tracking-cross-sell',
+                    },
+                    {
+                        name: 'Customer industry segments',
+                        url: '/handbook/cs-and-onboarding/customer-industry-segments',
+                    },
+                    {
+                        name: 'Common churn reasons',
+                        url: '/handbook/cs-and-onboarding/churn-reasons',
                     },
                 ],
             },
