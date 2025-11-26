@@ -15,7 +15,7 @@ template: team
 -   Enterprise features
     -   SAML and SSO
     -   Organization domains
-    -   SCIM (coming soon)
+    -   SCIM
 -   Platform features
     -   Organization settings
     -   Access control and RBAC
@@ -25,8 +25,53 @@ template: team
     -   Activity logs (audit logs)
     -   Approvals (coming soon)
     -   Emails / notifications
--   Maybe more?!?
 
-## Slack channel
+## Who we're building for
 
-[#team-platform-features](https://posthog.slack.com/messages/team-platform-features)
+We've built 3 [platform packages](/platform-packages) for companies at different stages of growth.
+
+### Boost
+
+**Boost is a good fit for:**
+
+- Startups that are gaining traction: 
+    - More experiments are running, feature flags are used for critical parts of the product -> need to control access
+    - Want to run more surveys to collect feedback and remove PostHog branding -> white labeling
+    - User data protection becomes critical -> 2FA and SSO enforcement
+- Companies with strict access policies that need to limit access to sensitive dashboards and/or specific projects
+- Health companies that need to be HIPAA compliant -> BAA agreement
+- Agencies or embedded analytics products that need unlimited projects to separate their customers' data
+
+**Persona:** Technical founders
+
+### Scale
+
+**Scale is a good fit for:**
+
+
+- Orgs with multiple teams using PostHog:
+    - Need to control who can access what -> role-based access control
+    - Want visibility into changes -> activity logs and approvals
+    - Require centralized authentication -> SAML via identity provider
+- Companies that need to meet SOC 2 compliance -> activity logs for audit trails
+- Companies with strict internal support SLAs that need to ensure their providers meet them too
+- Orgs where analysts and data engineers are responsible for data quality and need to control which events are sent -> ingestion taxonomy, schema validation
+
+**Persona:** Managers and team leads
+
+### Enterprise
+
+**Enterprise is a good fit for:**
+
+- Orgs that have outgrown manual user management and need to automate admin processes:
+    - Automated identity management -> SAML with SCIM provisioning
+    - Centralized access control -> role-based permissions
+    - Full visibility into who did what and when -> audit trails and automatic alerts
+
+**Persona:** IT Security Officers and IT Admins
+
+## Who we're NOT building for
+
+- **Solo builders and hobbyists** using PostHog for personal projects, don't need collaboration features, don't have budgets for platform packages
+- **Small teams (<10 people) at early-stage startups** without compliance requirements, happy managing users manually, and prefer everyone-has-full-access setup
+- **Traditional enterprises** requiring dedicated one-off feature development, or on-premise deployments
