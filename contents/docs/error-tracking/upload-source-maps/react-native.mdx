@@ -103,7 +103,7 @@ To do this through Xcode, open your project in Xcode, go to the project settings
 +/bin/sh `"$NODE_BINARY" --print "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog-xcode.sh')"` `"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
 ```
 
-3. Web: Ensure that your React Native web build generates source maps.
+4. Web: Ensure that your React Native web build generates source maps.
 
 ```bash
 # Example using React Native and Expo with the --source-maps flag.
