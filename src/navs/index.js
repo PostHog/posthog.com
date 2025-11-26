@@ -1400,10 +1400,6 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-team',
                     },
                     {
-                        name: 'YC onboarding',
-                        url: '/handbook/growth/sales/yc-onboarding',
-                    },
-                    {
                         name: 'Onboarding program',
                         url: '/handbook/onboarding/onboarding-program',
                     },
@@ -4704,8 +4700,8 @@ export const docsMenu = {
         },
         {
             name: 'PostHog AI',
-            icon: 'IconLogomark',
-            color: 'black',
+            icon: 'IconSparkles',
+            color: 'blue',
             url: '/docs/posthog-ai',
             description: 'AI-powered product analyst and assistant',
             children: [
