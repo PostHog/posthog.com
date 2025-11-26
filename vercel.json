@@ -1650,7 +1650,8 @@
         { "source": "/handbook/who-we-are-building-for", "destination": "/handbook/who-we-build-for" },
         { "source": "/example-components", "destination": "/handbook/engineering/posthog-com/markdown" },
         { "source": "/handbook/content/components", "destination": "/handbook/engineering/posthog-com/markdown" },
-        { "source": "/handbook/engineering/storybook", "destination": "/handbook/engineering/posthog-com/markdown" }
+        { "source": "/handbook/engineering/storybook", "destination": "/handbook/engineering/posthog-com/markdown" },
+        { "source": "/startups/[...slug]", "destination": "/startups" }
     ],
     "headers": [
         {
