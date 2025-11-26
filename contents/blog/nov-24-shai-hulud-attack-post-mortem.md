@@ -33,7 +33,9 @@ The attack only affected our Javascript SDKs published in npm. The most relevant
 
 ## What should you do?
 
-Our recommendations are to:
+If you are using the `script` version of PostHog **you were not affected** since the worm spread via the `preinstall` step when installing your dependencies on your development/CI/production machines.
+
+If you are using one of our Javascript SDKs, our recommendations are to:
 
 1. Look for the malicious files locally, in your home folder, or your document roots:
 
