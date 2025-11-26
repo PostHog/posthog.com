@@ -158,10 +158,10 @@ Configure how PostHog maps campaign data from your advertising sources to your c
 
 For each advertising platform, you can choose whether to map campaigns using the **campaign name** or **campaign ID**:
 
-- **Campaign Name**: Uses the human-readable campaign name from your ad platform (e.g., "Summer Sale 2025")
+- **Campaign name**: Uses the human-readable campaign name from your ad platform (e.g., "Summer Sale 2025")
 - **Campaign ID**: Uses the platform's unique campaign identifier (e.g., "123456789")
 
-This setting determines which field is matched against the `utm_campaign` parameter in your conversion events. Choose the option that matches how you structure your UTM parameters.
+This setting determines which field is matched against the `utm_campaign` parameter in your [conversion events](/docs/web-analytics/marketing-analytics#conversion-goals). Choose the option that matches how you structure your UTM parameters.
 
 #### UTM campaign manual mappings
 
@@ -172,11 +172,11 @@ This setting determines which field is matched against the `utm_campaign` parame
     classes="rounded"
 />
 
-Map arbitrary `utm_campaign` values to specific campaign names or IDs from your advertising platforms. This is useful when:
+Map arbitrary `utm_campaign` values to specific campaign names or IDs from your [advertising platforms](/docs/web-analytics/marketing-analytics#data-source-configuration). This is useful when:
 
-- Your UTM parameters use different naming conventions than your campaign name or id
+- Your UTM parameters use different naming conventions than your campaign name or ID
 - You want to consolidate multiple campaign variations under a single campaign
-- You're tracking campaigns across multiple channels with different utm campaign naming
+- You're tracking campaigns across multiple channels with different UTM campaign naming
 
 For example, you can map `utm_campaign=summer-promo` to the Google Ads campaign named "Summer Sale 2025" or to campaign ID "123456789", depending on your campaign field preference.
 
@@ -189,7 +189,7 @@ For example, you can map `utm_campaign=summer-promo` to the Google Ads campaign 
     classes="rounded"
 />
 
-Control which UTM sources are attributed to each advertising platform integration. For each platform (Google Ads, LinkedIn, Meta, etc.), you can:
+Control which UTM sources are attributed to each [advertising platform integration](/docs/web-analytics/marketing-analytics#native-sources). For each platform (Google Ads, LinkedIn Ads, Meta Ads, etc.), you can:
 
 - **Whitelist specific sources**: Define which `utm_source` values should be attributed to this platform
 - **Support multiple sources**: Map multiple UTM source values to a single advertising platform
@@ -199,9 +199,9 @@ This is particularly useful when:
 - A single campaign spans multiple traffic sources
 
 **Example configuration:**
-- Google Ads integration: Whitelist sources `google`, `google_ads`, `paid_search`
-- LinkedIn Ads integration: Whitelist sources `linkedin`, `li`, `linkedin_paid`
-- Meta Ads integration: Whitelist sources `facebook`, `instagram`, `meta`
+- [Google Ads](/docs/cdp/sources/google-ads) integration: Whitelist sources `google`, `google_ads`, `paid_search`
+- [LinkedIn Ads](/docs/cdp/sources/linkedin-ads) integration: Whitelist sources `linkedin`, `li`, `linkedin_paid`
+- [Meta Ads](/docs/cdp/sources/meta-ads) integration: Whitelist sources `facebook`, `instagram`, `meta`
 
 ### Base currency
 
