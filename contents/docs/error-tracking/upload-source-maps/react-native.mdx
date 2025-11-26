@@ -55,7 +55,11 @@ Automatic source map uploading is handled through the Gradle build process on An
 
 </CalloutBox>
 
-1. Expo: Update the [app.json](https://docs.expo.dev/versions/latest/config/app/#plugins) file in your app's root directory so that it looks like this:
+1. Expo: Update the [app.json](https://docs.expo.dev/versions/latest/config/app/#plugins) file in your app's root directory.
+
+Expo Plugins that add modifications can only be used with [prebuilding](https://docs.expo.dev/workflow/continuous-native-generation/) and managed [EAS Build](https://docs.expo.dev/build/introduction/).
+
+If you can use the `posthog-react-native/expo` plugin, skip steps 2 and 3. If not, proceed with steps 2 and 3.
 
 Add the `posthog-react-native/expo` plugin under the `expo.plugins`.
 
@@ -78,10 +82,6 @@ Add the `posthog-react-native/expo` plugin under the `expo.plugins`.
   }
 }
 ```
-
-Plugins that add modifications can only be used with [prebuilding](https://docs.expo.dev/workflow/continuous-native-generation/) and managed [EAS Build](https://docs.expo.dev/build/introduction/).
-
-If you can use the `posthog-react-native/expo` plugin, skip steps 2 and 3.
 
 2. Android: Update the `/android/app/build.gradle` file from your app's root directory so that it looks like this:
 
