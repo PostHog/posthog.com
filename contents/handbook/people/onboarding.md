@@ -191,6 +191,7 @@ In this call the support engineer will be able to answer any questions, as well 
 -   [ ] [How to use macros to answer questions quickly](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets)
 -   [ ] How to avoid duplication of effort in ZenDesk
 -   [ ] [How to create and use personal views in ZenDesk](https://support.zendesk.com/hc/en-us/articles/4408832792986-Managing-your-views)
+-   [ ] How to use [side conversations](https://support.zendesk.com/hc/en-us/articles/4604286879642-Creating-side-conversations) in Zendesk
 
 It can be especially helpful for new hires if support engineers demonstrate how to solve a few simple tickets from start to finish, through shadowing.
 
