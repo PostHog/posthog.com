@@ -97,6 +97,7 @@ interface AppContextType {
         chatId,
         date,
         initialQuestion,
+        codeSnippet,
     }: {
         path: string
         context?: ChatContext[]
@@ -104,6 +105,7 @@ interface AppContextType {
         chatId?: string
         date?: string
         initialQuestion?: string
+        codeSnippet?: { code: string; language: string; sourceUrl: string }
     }) => void
     isNotificationsPanelOpen: boolean
     setIsNotificationsPanelOpen: (isOpen: boolean) => void
@@ -1553,6 +1555,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         chatId,
         date,
         initialQuestion,
+        codeSnippet,
     }: {
         path: string
         context?: ChatContext[]
@@ -1560,6 +1563,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         chatId?: string
         date?: string
         initialQuestion?: string
+        codeSnippet?: { code: string; language: string; sourceUrl: string }
     }) => {
         addWindow(
             <ChatProvider
@@ -1573,6 +1577,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 chatId={chatId}
                 date={date}
                 initialQuestion={initialQuestion}
+                codeSnippet={codeSnippet}
             />
         )
     }

@@ -251,6 +251,33 @@ gap: .5rem;
     max-height: initial !important;
     border-radius: 0 !important;
 }
+
+/* User message code block styling */
+.ikp-chat-bubble__wrapper[data-role="user"] .ikp-ai-chat-message-content {
+    white-space: pre-wrap;
+    font-family: inherit;
+}
+
+.ikp-chat-bubble__wrapper[data-role="user"] .ikp-ai-chat-message-content .ikp-codeblock-container,
+.ikp-chat-bubble__wrapper[data-role="user"] .ikp-ai-chat-message-content pre,
+.ikp-chat-bubble__wrapper[data-role="user"] .ikp-ai-chat-message-content code {
+    font-family: 'Source Code Pro', 'Menlo', 'Consolas', 'monaco', monospace;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+    padding: 0.75rem 1rem;
+    overflow-x: auto;
+    display: block;
+    margin-top: 0.5rem;
+
+    [data-theme="light"] & {
+        background: #f1f3f0;
+        border: 1px solid #D0D1C9;
+    }
+    [data-theme="dark"] & {
+        background: #1d1f27;
+        border: 1px solid #4A4C52;
+    }
+}
                 `,
             },
         ],

@@ -20,6 +20,7 @@ interface ChatContextType {
     addContext: (newContext: { type: 'page'; value: { path: string; label: string } }) => void
     firstResponse: string | null
     initialQuestion?: string
+    codeSnippet?: { code: string; language: string; sourceUrl: string }
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
@@ -30,12 +31,14 @@ export function ChatProvider({
     chatId,
     date,
     initialQuestion,
+    codeSnippet,
 }: {
     context?: { type: 'page'; value: { path: string; label: string } }[]
     quickQuestions?: string[]
     chatId?: string
     date?: string
     initialQuestion?: string
+    codeSnippet?: { code: string; language: string; sourceUrl: string }
 }): JSX.Element {
     const { windows, setWindowTitle } = useApp()
     const { appWindow } = useWindow()
@@ -140,14 +143,18 @@ export function ChatProvider({
     }, [])
 
     useEffect(() => {
-        const prompts = context.map((c) =>
+        const contextPrompts = context.map((c) =>
             c.type === 'page' ? `The user is currently viewing the page ${c.value.label} at ${c.value.path}` : ``
         )
+        const codePrompt = codeSnippet
+            ? `The user is asking about the following ${codeSnippet.language} code snippet from ${codeSnippet.sourceUrl}:\n\n\`\`\`${codeSnippet.language}\n${codeSnippet.code}\n\`\`\`\n\nPlease explain this code in your response.`
+            : ''
+        const prompts = codePrompt ? [codePrompt, ...contextPrompts] : contextPrompts
         setAiChatSettings({
             ...aiChatSettings,
             prompts,
         })
-    }, [context])
+    }, [context, codeSnippet])
 
     useEffect(() => {
         setAiChatSettings({
@@ -196,6 +203,7 @@ export function ChatProvider({
                 addContext,
                 firstResponse,
                 initialQuestion,
+                codeSnippet,
             }}
         >
             <Chat />

@@ -13,7 +13,8 @@ import Mermaid from 'components/Mermaid'
 import Tooltip from 'components/Tooltip'
 import usePostHog from 'hooks/usePostHog'
 import { useApp } from '../../context/App'
-import { IconArrowUpRight, IconLogomark } from '@posthog/icons'
+import { useWindow } from '../../context/Window'
+import { IconArrowUpRight, IconSparkles } from '@posthog/icons'
 import { useLocation } from '@reach/router'
 
 type LanguageOption = {
@@ -179,6 +180,7 @@ export const CodeBlock = ({
 
     const codeBlockId = generateRandomHtmlId()
     const { siteSettings, openNewChat } = useApp()
+    const { appWindow } = useWindow()
     const location = useLocation()
     const [tooltipVisible, setTooltipVisible] = React.useState(false)
     const posthog = usePostHog()
@@ -253,12 +255,22 @@ export const CodeBlock = ({
                 .trim()
         )
         const language = currentLanguage.language || ''
-        const pagePath = location.pathname?.replace(/\/$/, '') || ''
-        const markdownUrl = `https://posthog.com${pagePath}.md`
+        const pagePath = appWindow?.path || location.pathname?.replace(/\/$/, '') || ''
+        const sourceUrl = `https://posthog.com${pagePath}`
+
+        posthog?.capture('ask_posthog_ai_code_snippet', {
+            page_path: pagePath,
+            language: language,
+        })
 
         openNewChat({
-            path: `ask-about-code-${codeBlockId}`,
-            initialQuestion: `Tell me about this code snippet in ${markdownUrl}:\n\n\`\`\`${language}\n${codeContent}\n\`\`\``,
+            path: `ask-max-${pagePath}`,
+            initialQuestion: 'Explain this code snippet',
+            codeSnippet: {
+                code: codeContent,
+                language: language,
+                sourceUrl: sourceUrl,
+            },
         })
     }
 
@@ -390,7 +402,7 @@ export const CodeBlock = ({
                                     className="text-muted hover:text-secondary px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                     title="Ask PostHog AI"
                                 >
-                                    <IconLogomark className="w-4 h-4 fill-current" />
+                                    <IconSparkles className="w-4 h-4" />
                                 </button>
                             </div>
                         )}
@@ -419,16 +431,9 @@ export const CodeBlock = ({
                                 </button>
 
                                 {tooltipVisible && (
-                                    <AnimatePresence>
-                                        <motion.div
-                                            className="absolute top-full mt-2 -right-2 bg-black text-white font-semibold px-2 py-1 rounded z-10"
-                                            initial={{ translateY: '-50%', opacity: 0 }}
-                                            animate={{ translateY: 0, opacity: 1 }}
-                                            exit={{ opacity: 0 }}
-                                        >
-                                            Copied!
-                                        </motion.div>
-                                    </AnimatePresence>
+                                    <div className="absolute top-full mt-2 -right-2 bg-black text-white font-semibold px-2 py-1 rounded z-10">
+                                        Copied!
+                                    </div>
                                 )}
                             </div>
                         )}
