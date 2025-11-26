@@ -1400,10 +1400,6 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-team',
                     },
                     {
-                        name: 'YC onboarding',
-                        url: '/handbook/growth/sales/yc-onboarding',
-                    },
-                    {
                         name: 'Onboarding program',
                         url: '/handbook/onboarding/onboarding-program',
                     },
@@ -2574,7 +2570,7 @@ export const docsMenu = {
                             url: '/docs/settings/access-control',
                         },
                         {
-                            name: 'SSO & SAML',
+                            name: 'SSO, SAML, & SCIM',
                             url: '/docs/settings/sso',
                         },
                         {
@@ -3922,6 +3918,20 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Group exceptions into issues',
+                    url: '/docs/error-tracking/grouping-issues',
+                    icon: 'IconList',
+                    color: 'yellow',
+                    featured: true,
+                },
+                {
+                    name: 'Monitor and search issues',
+                    url: '/docs/error-tracking/monitoring',
+                    icon: 'IconSearch',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
                     name: 'Manage and resolve issues',
                     url: '/docs/error-tracking/managing-issues',
                     icon: 'IconDashboard',
@@ -3934,29 +3944,12 @@ export const docsMenu = {
                     icon: 'IconUser',
                     color: 'blue',
                     featured: true,
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/error-tracking/assigning-issues',
-                        },
-                        {
-                            name: 'Track in GitHub and Linear',
-                            url: '/docs/error-tracking/external-tracking',
-                        },
-                    ],
                 },
                 {
-                    name: 'Group exceptions into issues',
-                    url: '/docs/error-tracking/grouping-issues',
-                    icon: 'IconList',
-                    color: 'yellow',
-                    featured: true,
-                },
-                {
-                    name: 'Monitor and search issues',
-                    url: '/docs/error-tracking/monitoring',
-                    icon: 'IconSearch',
-                    color: 'seagreen',
+                    name: 'Set up integrations',
+                    url: '/docs/error-tracking/integrations',
+                    icon: 'IconApps',
+                    color: 'green',
                     featured: true,
                 },
                 {
@@ -4704,8 +4697,8 @@ export const docsMenu = {
         },
         {
             name: 'PostHog AI',
-            icon: 'IconLogomark',
-            color: 'black',
+            icon: 'IconSparkles',
+            color: 'blue',
             url: '/docs/posthog-ai',
             description: 'AI-powered product analyst and assistant',
             children: [
