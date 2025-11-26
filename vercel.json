@@ -910,6 +910,10 @@
             "source": "/docs/error-tracking/filter-and-search-issues",
             "destination": "/docs/error-tracking/managing-issues"
         },
+        {
+            "source": "/docs/error-tracking/external-tracking",
+            "destination": "/docs/error-tracking/integrations"
+        },
         { "source": "/blog/how-we-do-hiring-and-hr-at-posthog", "destination": "/handbook/people/hiring-process" },
         { "source": "/api", "destination": "/docs/api" },
         { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
