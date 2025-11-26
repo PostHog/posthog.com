@@ -5,6 +5,7 @@ import SEO from 'components/seo'
 import People from 'components/People'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import { graphql, useStaticQuery } from 'gatsby'
+import { useApp } from '../context/App'
 
 const PeoplePage = () => {
     const [searchTerm, setSearchTerm] = useState('')
@@ -12,10 +13,12 @@ const PeoplePage = () => {
     const [nameFilter, setNameFilter] = useState(null)
     const [pizzaFilter, setPizzaFilter] = useState(null)
 
+    const { websiteMode } = useApp()
+
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/people',
         content: (
-            <div className="max-w-screen-6xl mx-auto">
+            <div className={` ${websiteMode && 'max-w-7xl mx-auto'}`}>
                 <h1>People</h1>
                 <People searchTerm={searchTerm} filteredMembers={filteredPeople} />
             </div>

@@ -30,6 +30,7 @@ import { SlideConfig, SlideConfigResult, defaultSlides, aiSlide } from './create
 import ProgressBar from 'components/ProgressBar'
 import DemoSlide from './DemoSlide'
 import PostHogOnPostHogSlide from './PostHogOnPostHogSlide'
+import { useApp } from "../../../context/App"
 
 interface SlidesTemplateProps {
     productHandle: string
@@ -54,6 +55,7 @@ export default function SlidesTemplate({
 }: SlidesTemplateProps) {
     // Get product data early to check for AI section
     const productData = useProduct({ handle: productHandle }) as any
+    const { websiteMode } = useApp()
 
     // Process slide configuration
     let processedSlideConfig = slideConfig
@@ -664,7 +666,7 @@ export default function SlidesTemplate({
             >
                 <div
                     data-scheme="primary"
-                    className="bg-accent grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden p-2 @md:p-4"
+                    className={`${websiteMode ? '' : 'bg-accent px-2 @md:px-4'} grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden py-2 @md:py-4`}
                 >
                     {slides.map((slide, index) => (
                         <div

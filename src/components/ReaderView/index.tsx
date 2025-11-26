@@ -155,18 +155,16 @@ const ContributorsSmall = ({ contributors }) => {
                                 {typeof image === 'string' ? (
                                     <CloudinaryImage
                                         width={50}
-                                        className={`w-6 h-6 border border-primary rounded-full overflow-hidden bg-${
-                                            color ? color : 'red'
-                                        }`}
+                                        className={`w-6 h-6 border border-primary rounded-full overflow-hidden bg-${color ? color : 'red'
+                                            }`}
                                         src={image}
                                     />
                                 ) : gatsbyImage ? (
                                     <GatsbyImage
                                         image={gatsbyImage}
                                         alt={name}
-                                        className={`w-6 h-6 border border-primary rounded-full overflow-hidden bg-${
-                                            color ? color : 'red'
-                                        }`}
+                                        className={`w-6 h-6 border border-primary rounded-full overflow-hidden bg-${color ? color : 'red'
+                                            }`}
                                     />
                                 ) : (
                                     ''
@@ -481,9 +479,8 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                         }}
                     >
                         <motion.div
-                            className={`h-full bg-primary rounded @2xl/app-reader:rounded-none pt-4  ${
-                                !websiteMode ? '@2xl/app-reader:pt-0' : ''
-                            }`}
+                            className={`h-full rounded @2xl/app-reader:rounded-none pt-4  ${websiteMode ? '' : 'bg-primary @2xl/app-reader:pt-0'
+                                }`}
                             initial={{ opacity: 1 }}
                             animate={{
                                 opacity: 1,
@@ -494,7 +491,7 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                                 transition: { duration: 0.05 },
                             }}
                         >
-                            <ScrollArea className={websiteMode ? 'px-4' : 'px-4'}>{children}</ScrollArea>
+                            <ScrollArea className={websiteMode ? '' : 'px-4'}>{children}</ScrollArea>
                         </motion.div>
                     </motion.div>
                 </>
@@ -604,9 +601,8 @@ function ReaderViewContent({
         <SearchProvider>
             <div
                 data-scheme="secondary"
-                className={`@container/app-reader w-full h-full flex flex-col transition-all duration-300 ${
-                    websiteMode ? 'max-w-7xl mx-auto' : 'max-w-full'
-                }`}
+                className={`@container/app-reader w-full h-full flex flex-col transition-all duration-300 ${websiteMode ? 'max-w-7xl mx-auto' : 'max-w-full'
+                    }`}
             >
                 {/* <DebugContainerQuery /> */}
                 {/* First row - Header */}
@@ -636,36 +632,33 @@ function ReaderViewContent({
                 {/* Second row - Main Content */}
                 <div
                     data-scheme="secondary"
-                    className={`bg-primary flex w-full gap-2 min-h-0 flex-grow ${websiteMode && ''}`}
+                    className={`flex w-full gap-2 min-h-0 flex-grow ${websiteMode ? '' : 'bg-primary'}`}
                 >
                     {renderLeftSidebar && <LeftSidebar>{leftSidebar || <Menu parent={parent} />}</LeftSidebar>}
                     <ScrollArea
                         dataScheme="primary"
                         className={`bg-primary border border-primary flex-grow  
-                            ${
-                                !websiteMode
-                                    ? renderLeftSidebar && isNavVisible
-                                        ? '@2xl/app-reader:rounded-l'
-                                        : 'border-l-0'
-                                    : 'border-t-0'
+                            ${!websiteMode
+                                ? renderLeftSidebar && isNavVisible
+                                    ? '@2xl/app-reader:rounded-l'
+                                    : 'border-l-0'
+                                : 'border-t-0 border-l-0'
                             }
-                            ${
-                                showSidebar && isTocVisible
-                                    ? 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
-                                    : 'border-r-0'
-                            } ${
-                            selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
+                            ${showSidebar && isTocVisible
+                                ? 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
+                                : 'border-r-0'
+                            } ${selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
                                 ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75'
                                 : ''
-                        }`}
+                            }`}
                         style={
                             selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
                                 ? {
-                                      backgroundImage: `url(${selectedBackgroundOption.backgroundImage})`,
-                                      backgroundRepeat: selectedBackgroundOption.backgroundRepeat || 'repeat',
-                                      backgroundSize: selectedBackgroundOption.backgroundSize || 'auto',
-                                      backgroundPosition: selectedBackgroundOption.backgroundPosition || 'center',
-                                  }
+                                    backgroundImage: `url(${selectedBackgroundOption.backgroundImage})`,
+                                    backgroundRepeat: selectedBackgroundOption.backgroundRepeat || 'repeat',
+                                    backgroundSize: selectedBackgroundOption.backgroundSize || 'auto',
+                                    backgroundPosition: selectedBackgroundOption.backgroundPosition || 'center',
+                                }
                                 : undefined
                         }
                     >
@@ -691,11 +684,10 @@ function ReaderViewContent({
                             )}
                             <div
                                 ref={contentRef}
-                                className={`@container/reader-content relative ${
-                                    padding
-                                        ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
-                                        : ''
-                                }`}
+                                className={`@container/reader-content relative ${padding
+                                    ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
+                                    : ''
+                                    }`}
                             >
                                 {/* <DebugContainerQuery /> */}
                                 {body.featuredImage && !body.featuredVideo && (
@@ -709,22 +701,20 @@ function ReaderViewContent({
                                 )}
                                 {title && !hideTitle && (
                                     <h1
-                                        className={`mx-auto transition-all ${
-                                            fullWidthContent || body?.type !== 'mdx'
-                                                ? 'max-w-full'
-                                                : contentMaxWidthClass || 'max-w-2xl'
-                                        }`}
+                                        className={`mx-auto transition-all ${fullWidthContent || body?.type !== 'mdx'
+                                            ? 'max-w-full'
+                                            : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
                                     >
                                         {title}
                                     </h1>
                                 )}
                                 {(body.date || body.contributors || body.tags) && (
                                     <div
-                                        className={`flex items-center space-x-2 mb-4 flex-wrap mx-auto transition-all ${
-                                            fullWidthContent || body?.type !== 'mdx'
-                                                ? 'max-w-full'
-                                                : contentMaxWidthClass || 'max-w-2xl'
-                                        }`}
+                                        className={`flex items-center space-x-2 mb-4 flex-wrap mx-auto transition-all ${fullWidthContent || body?.type !== 'mdx'
+                                            ? 'max-w-full'
+                                            : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
                                     >
                                         {body.contributors && <ContributorsSmall contributors={body.contributors} />}
                                         {body.date && <p className="text-sm text-secondary m-0">{body.date}</p>}
@@ -749,11 +739,10 @@ function ReaderViewContent({
                                     !hideRightSidebar && (
                                         <div
                                             data-scheme="secondary"
-                                            className={`@4xl/app-reader:hidden mt-4 mx-auto transition-all ${
-                                                fullWidthContent || body?.type !== 'mdx'
-                                                    ? 'max-w-full'
-                                                    : contentMaxWidthClass || 'max-w-2xl'
-                                            }`}
+                                            className={`@4xl/app-reader:hidden mt-4 mx-auto transition-all ${fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                                }`}
                                         >
                                             <TableOfContents
                                                 tableOfContents={tableOfContents}
@@ -768,12 +757,11 @@ function ReaderViewContent({
                                 <div className="reader-content-container">
                                     {body.type === 'mdx' ? (
                                         <div
-                                            className={`@container [&>*:not(.OSTable):not(.Table)]:mx-auto [&>*:not(.OSTable):not(.Table)]:transition-all ${
-                                                fullWidthContent || body?.type !== 'mdx'
-                                                    ? '[&>*:not(.OSTable):not(.Table)]:max-w-full'
-                                                    : contentMaxWidthClass ||
-                                                      '[&>*:not(.OSTable):not(.Table)]:max-w-2xl'
-                                            }`}
+                                            className={`@container [&>*:not(.OSTable):not(.Table)]:mx-auto [&>*:not(.OSTable):not(.Table)]:transition-all ${fullWidthContent || body?.type !== 'mdx'
+                                                ? '[&>*:not(.OSTable):not(.Table)]:max-w-full'
+                                                : contentMaxWidthClass ||
+                                                '[&>*:not(.OSTable):not(.Table)]:max-w-2xl'
+                                                }`}
                                         >
                                             {/* Display customer metadata if this is a customer page */}
                                             {isCustomerPage && customerKey && (
@@ -790,11 +778,10 @@ function ReaderViewContent({
                                 </div>
                                 {showQuestions && (
                                     <div
-                                        className={`mt-8 mx-auto transition-all ${
-                                            fullWidthContent || body?.type !== 'mdx'
-                                                ? 'max-w-full'
-                                                : contentMaxWidthClass || 'max-w-2xl'
-                                        }`}
+                                        className={`mt-8 mx-auto transition-all ${fullWidthContent || body?.type !== 'mdx'
+                                            ? 'max-w-full'
+                                            : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
                                     >
                                         <h3 id="squeak-questions" className="mb-4">
                                             Community questions
@@ -802,21 +789,19 @@ function ReaderViewContent({
                                         <Questions
                                             slug={appWindow?.path}
                                             parentName={activeInternalMenu?.name}
-                                            className={`mx-auto transition-all ${
-                                                fullWidthContent || body?.type !== 'mdx'
-                                                    ? 'max-w-full'
-                                                    : contentMaxWidthClass || 'max-w-2xl'
-                                            }`}
+                                            className={`mx-auto transition-all ${fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                                }`}
                                         />
                                     </div>
                                 )}
                                 {showSurvey && (
                                     <div
-                                        className={`mt-8 mx-auto transition-all ${
-                                            fullWidthContent || body?.type !== 'mdx'
-                                                ? 'max-w-full'
-                                                : contentMaxWidthClass || 'max-w-2xl'
-                                        }`}
+                                        className={`mt-8 mx-auto transition-all ${fullWidthContent || body?.type !== 'mdx'
+                                            ? 'max-w-full'
+                                            : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
                                     >
                                         <DocsPageSurvey filePath={filePath} />
                                     </div>
@@ -868,9 +853,8 @@ function ReaderViewContent({
                 {/* Third row - Footer */}
                 <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0 rounded-b">
                     <motion.div
-                        className={`flex-shrink-0 transition-all min-w-0 ${
-                            renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
-                        }`}
+                        className={`flex-shrink-0 transition-all min-w-0 ${renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
+                            }`}
                     >
                         {/* this space intentionally left blank */}
                     </motion.div>
@@ -920,9 +904,8 @@ function ReaderViewContent({
                         </div>
                     )}
                     <motion.div
-                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${
-                            showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[250px]' : 'w-auto'
-                        }`}
+                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[250px]' : 'w-auto'
+                            }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
                         {(markdownContent || body?.type === 'mdx') && (

@@ -28,9 +28,9 @@ export default function Wrapper() {
     }, [closingAllWindowsAnimation])
 
     return (
-        <div className={`${websiteMode ? '' : 'fixed inset-0 size-full'} flex flex-col`}>
+        <div className={`${websiteMode ? 'max-w-7xl mx-auto' : 'fixed inset-0 size-full'} flex flex-col`}>
             {!compact && <TaskBarMenu />}
-            <div ref={constraintsRef} className="flex-grow relative">
+            <div ref={constraintsRef} className={`flex-grow relative ${websiteMode && 'py-4'}`}>
                 <Desktop />
                 <AnimatePresence>
                     {windows.map((item, index) => {
@@ -40,14 +40,14 @@ export default function Wrapper() {
                                 animate={
                                     shakeReady
                                         ? {
-                                              x: [0, (Math.random() - 0.5) * 45],
-                                              y: [0, (Math.random() - 0.5) * 22],
-                                              rotate: [0, (Math.random() - 0.5) * 15],
-                                              transition: {
-                                                  delay: index * 0.05,
-                                                  duration: 0.1,
-                                              },
-                                          }
+                                            x: [0, (Math.random() - 0.5) * 45],
+                                            y: [0, (Math.random() - 0.5) * 22],
+                                            rotate: [0, (Math.random() - 0.5) * 15],
+                                            transition: {
+                                                delay: index * 0.05,
+                                                duration: 0.1,
+                                            },
+                                        }
                                         : {}
                                 }
                                 exit={{
@@ -64,6 +64,7 @@ export default function Wrapper() {
                     })}
                 </AnimatePresence>
             </div>
+            {websiteMode && <footer data-scheme="secondary" className="text-primary bg-primary border border-primary rounded p-4 @xl:p-8 mb-8">This is a footer.</footer>}
             {/*             
             {!compact && <Dock />}
             */}

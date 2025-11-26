@@ -1,6 +1,7 @@
 import React from 'react'
 import { Dialog as RadixDialog } from 'radix-ui'
 import { IconX } from '@posthog/icons'
+import { useApp } from '../../context/App'
 
 interface ModalProps {
     trigger?: React.ReactNode
@@ -14,6 +15,7 @@ interface ModalProps {
     showCloseButton?: boolean
 }
 
+
 const Modal = ({
     trigger,
     children,
@@ -23,6 +25,7 @@ const Modal = ({
     contentClassName = '',
     showCloseButton = true,
 }: ModalProps): JSX.Element => {
+    const { websiteMode } = useApp()
     return (
         <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
             {trigger && (
@@ -35,7 +38,7 @@ const Modal = ({
                 <RadixDialog.Content
                     className={`data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded bg-primary text-primary z-50 ${contentClassName}`}
                 >
-                    <div data-scheme="primary">
+                    <div data-scheme="primary" className={`${websiteMode && 'min-w-96 min-h-96 max-w-full'}`}>
                         {showCloseButton && (
                             <div className="flex items-center justify-between absolute right-0 top-0 translate-x-1/2 -translate-y-1/2">
                                 <RadixDialog.Close asChild>

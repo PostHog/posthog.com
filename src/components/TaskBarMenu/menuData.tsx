@@ -797,52 +797,52 @@ export function useMenuData(): MenuType[] {
     // On mobile, include main navigation items in the logo menu
     const logoMenuItems = isMobile
         ? [
-              {
-                  type: 'item' as const,
-                  label: 'home.mdx',
-                  link: '/',
-              },
-              { type: 'separator' as const },
-              // Main navigation items processed for mobile
-              ...processMobileNavItems(),
-              { type: 'separator' as const },
-              // System items
-              ...baseLogoMenuItems,
-          ]
+            {
+                type: 'item' as const,
+                label: 'home.mdx',
+                link: '/',
+            },
+            { type: 'separator' as const },
+            // Main navigation items processed for mobile
+            ...processMobileNavItems(),
+            { type: 'separator' as const },
+            // System items
+            ...baseLogoMenuItems,
+        ]
         : [
-              // Desktop: only show system items
-              ...baseLogoMenuItems,
-              ...(!websiteMode
-                  ? [
-                        { type: 'separator' as const },
-                        {
-                            type: 'item' as const,
-                            label: 'Start screensaver',
-                            onClick: () => {
-                                setScreensaverPreviewActive(true)
-                            },
-                            shortcut: ['Shift', 'Z'],
+            // Desktop: only show system items
+            ...baseLogoMenuItems,
+            ...(!websiteMode
+                ? [
+                    { type: 'separator' as const },
+                    {
+                        type: 'item' as const,
+                        label: 'Start screensaver',
+                        onClick: () => {
+                            setScreensaverPreviewActive(true)
                         },
-                        {
-                            type: 'item' as const,
-                            label: 'Close all windows',
-                            disabled: windows.length < 1,
-                            onClick: () => {
-                                animateClosingAllWindows()
-                            },
-                            shortcut: ['Shift', 'X'],
+                        shortcut: ['Shift', 'Z'],
+                    },
+                    {
+                        type: 'item' as const,
+                        label: 'Close all windows',
+                        disabled: windows.length < 1,
+                        onClick: () => {
+                            animateClosingAllWindows()
                         },
-                    ]
-                  : []),
-          ]
+                        shortcut: ['Shift', 'X'],
+                    },
+                ]
+                : []),
+        ]
 
     return [
         {
             trigger: (
                 <>
                     <div className="flex items-center">
-                        <Logo noText className="size-8 2xs:hidden md:block md:size-6" fill="primary" classic />
-                        <Logo className="hidden 2xs:flex md:hidden h-5 w-auto" fill="primary" classic />
+                        <Logo noText className={`2xs:hidden md:block ${websiteMode ? 'size-10' : 'size-8 md:size-6'}`} fill="primary" classic />
+                        <Logo className={`hidden 2xs:flex md:hidden w-auto ${websiteMode ? 'h-7' : ' h-5'} `} fill="primary" classic />
                         <IconChevronDown className="size-6 inline-block md:hidden text-muted" />
                     </div>
                 </>

@@ -25,13 +25,13 @@ import MobileDrawer from 'components/MobileDrawer'
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
 
 const categoryConfig: Record<CategoryKey, { label: string; icon: string; color: string; order: number; slug: string }> =
-    {
-        all: { label: 'All products', icon: 'IconShop', color: 'blue', order: 1, slug: 'all' },
-        Apparel: { label: 'Apparel', icon: 'IconShirt', color: 'purple', order: 2, slug: 'apparel' },
-        Stickers: { label: 'Stickers', icon: 'IconSticker', color: 'yellow', order: 3, slug: 'stickers' },
-        Goods: { label: 'Goods', icon: 'IconMug', color: 'orange', order: 4, slug: 'goods' },
-        Novelty: { label: 'Novelty', icon: 'IconCouch', color: 'teal', order: 5, slug: 'novelty' },
-    }
+{
+    all: { label: 'All products', icon: 'IconShop', color: 'blue', order: 1, slug: 'all' },
+    Apparel: { label: 'Apparel', icon: 'IconShirt', color: 'purple', order: 2, slug: 'apparel' },
+    Stickers: { label: 'Stickers', icon: 'IconSticker', color: 'yellow', order: 3, slug: 'stickers' },
+    Goods: { label: 'Goods', icon: 'IconMug', color: 'orange', order: 4, slug: 'goods' },
+    Novelty: { label: 'Novelty', icon: 'IconCouch', color: 'teal', order: 5, slug: 'novelty' },
+}
 
 type CollectionProps = {
     pageContext: CollectionPageContext
@@ -193,7 +193,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const [asideWidth, setAsideWidth] = useState(defaultAsideWidth)
     const [orders, setOrders] = useState([])
     const { appWindow } = useWindow()
-    const { isMobile: appIsMobile } = useApp()
+    const { isMobile: appIsMobile, websiteMode } = useApp()
     const { getJwt, user } = useUser()
     const isMobile = appIsMobile || (appWindow?.size?.width && appWindow.size.width <= 768)
 
@@ -411,6 +411,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             <HeaderBar
                 showBack
                 showForward
+                showCustomLeft={<h2 className="text-primary">Merch store</h2>}
                 onCartOpen={handleCartOpen}
                 onCartClose={handleCartClose}
                 isCartOpen={cartIsOpen}
@@ -422,12 +423,14 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 showSearch
                 onSearch={handleSearch}
             />
-            <AddressBar
-                selectOptions={selectOptions}
-                currentPath={currentPath}
-                handleValueChange={handleValueChange}
-                selectedCategory={selectedCategory}
-            />
+            {!websiteMode &&
+                <AddressBar
+                    selectOptions={selectOptions}
+                    currentPath={currentPath}
+                    handleValueChange={handleValueChange}
+                    selectedCategory={selectedCategory}
+                />
+            }
             {/* <DebugContainerQuery /> */}
             <ContentWrapper>
                 <div data-scheme="secondary" className="flex flex-col @3xl:flex-row-reverse flex-grow min-h-0">
@@ -488,8 +491,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                 cartIsOpen
                                     ? 'Cart'
                                     : orderHistoryIsOpen
-                                    ? 'Order History'
-                                    : selectedProduct?.title || 'Product'
+                                        ? 'Order History'
+                                        : selectedProduct?.title || 'Product'
                             }
                         >
                             {cartIsOpen ? (
@@ -536,8 +539,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                         </ScrollArea>
                     </main>
                     {leftSidebarContent && (
-                        <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
-                            <ScrollArea className="p-2">
+                        <aside data-scheme="secondary" className={`w-64 h-full ${!websiteMode && 'bg-primary border-r border-primary'}`}>
+                            <ScrollArea className={`py-2 ${websiteMode ? '' : 'px-2'}`}>
                                 <div className="space-y-3">
                                     <SidebarContent content={leftSidebarContent} />
                                 </div>
