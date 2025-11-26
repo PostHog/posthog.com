@@ -96,6 +96,13 @@ type RoadmapNode = {
     }
 }
 
+type ChangelogVideo = {
+    id: string
+    videoId: string
+    publishedAt: string
+    title: string
+}
+
 export const Change = ({ title, teamName, media, description, cta }) => {
     return (
         <>
@@ -328,6 +335,7 @@ interface RoadmapCardsProps {
     activeRoadmap: RoadmapNode | null
     hideEmpty: boolean
     initialActiveRoadmap: RoadmapNode | null
+    videos: ChangelogVideo[]
 }
 
 const RoadmapCards = ({
@@ -342,9 +350,10 @@ const RoadmapCards = ({
     activeRoadmap,
     hideEmpty,
     initialActiveRoadmap,
+    videos,
 }: RoadmapCardsProps) => {
     // Two-week buckets need to preserve the same overall per-month width, so each card spans two former week widths.
-    const width = 700
+    const width = 600
 
     const containerRef = useRef<HTMLDivElement>(null)
 
@@ -419,6 +428,25 @@ const RoadmapCards = ({
         }
         return hideEmpty ? monthPeriods.filter((period) => period.roadmaps.length > 0) : monthPeriods
     }, [roadmaps, startYear, endYear, hideEmpty])
+
+    const videosByPeriod = useMemo(() => {
+        const map = new Map<string, ChangelogVideo[]>()
+        videos.forEach((video) => {
+            if (!video.publishedAt) return
+            const date = dayjs.utc(video.publishedAt)
+            const year = date.year()
+            const month = date.month()
+            const period = getBiweeklyBucket(video.publishedAt)
+            const key = `${year}-${month}-${period}`
+            const existing = map.get(key) || []
+            existing.push(video)
+            map.set(
+                key,
+                existing.sort((a, b) => dayjs.utc(b.publishedAt).valueOf() - dayjs.utc(a.publishedAt).valueOf())
+            )
+        })
+        return map
+    }, [videos])
 
     const virtualizer = useVirtualizer({
         horizontal: true,
@@ -581,6 +609,8 @@ const RoadmapCards = ({
                                 (roadmap) => getWeekOfMonth(roadmap.date) === weekNumber
                             ),
                         }))
+                        const periodKey = `${periodData.year}-${periodData.month}-${periodData.period}`
+                        const periodVideos = videosByPeriod.get(periodKey) || []
 
                         return (
                             <div
@@ -604,15 +634,33 @@ const RoadmapCards = ({
                                             {count}
                                         </div>
                                     </div>
-                                    <div className="w-full flex-1 min-h-0">
-                                        <div className="flex h-full divide-x divide-primary">
+                                    <div className="w-full flex-1 min-h-0 flex flex-col">
+                                        {periodVideos.length > 0 && (
+                                            <div className="border-b border-primary divide-y divide-primary bg-primary/20">
+                                                {periodVideos.map((video) => (
+                                                    <div key={video.id} className="p-2">
+                                                        <div className="aspect-video rounded border border-primary overflow-hidden w-full bg-black">
+                                                            <iframe
+                                                                title={video.title}
+                                                                src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
+                                                                loading="lazy"
+                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                                allowFullScreen
+                                                                className="w-full h-full"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                        <div className="grid grid-cols-2 h-full divide-x divide-primary min-h-0">
                                             {columns.map((column) => (
-                                                <div key={column.weekNumber} className="flex-1 flex flex-col min-h-0">
+                                                <div key={column.weekNumber} className="flex flex-col min-h-0">
                                                     <div className="border-b border-primary px-4 py-2 text-sm font-semibold bg-primary/30">
                                                         {column.label}
                                                     </div>
                                                     <ScrollArea className="flex-1">
-                                                        <ul className="p-0 m-0 list-none">
+                                                        <ul className="p-0 m-0 list-none min-h-0">
                                                             {column.roadmaps.length === 0 ? (
                                                                 <li className="p-4 text-center text-sm text-secondary opacity-70">
                                                                     No updates
@@ -628,7 +676,7 @@ const RoadmapCards = ({
                                                                     return (
                                                                         <li
                                                                             key={roadmap.id}
-                                                                            className="p-0 m-0 border-b border-primary"
+                                                                            className="p-0 m-0 border-b last:border-b-0 border-primary"
                                                                         >
                                                                             <button
                                                                                 data-scheme="secondary"
@@ -696,6 +744,9 @@ export default function Changelog({
         allRoadmap: {
             nodes: RoadmapNode[]
         }
+        allChangelogVideo: {
+            nodes: ChangelogVideo[]
+        }
     }
 }): JSX.Element {
     const timelineContainerRef = useRef<HTMLDivElement>(null)
@@ -719,6 +770,7 @@ export default function Changelog({
     const [teamFilter, setTeamFilter] = useState('all')
     const [categoryFilter, setCategoryFilter] = useState('all')
     const hideEmpty = useMemo(() => teamFilter !== 'all' || categoryFilter !== 'all', [teamFilter, categoryFilter])
+    const playlistVideos = data.allChangelogVideo?.nodes || []
 
     const handleAddFeature = () => {
         addWindow(
@@ -934,6 +986,7 @@ export default function Changelog({
                                 activeRoadmap={activeRoadmap}
                                 hideEmpty={hideEmpty}
                                 initialActiveRoadmap={initialActiveRoadmap}
+                                videos={playlistVideos}
                             />
                         </div>
                         <AnimatePresence>
