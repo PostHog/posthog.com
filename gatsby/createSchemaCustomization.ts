@@ -449,6 +449,11 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type Event implements Node {
         attributes: EventAttributes
     }
+    type ChangelogVideo implements Node {
+        videoId: String!
+        publishedAt: Date! @dateformat
+        title: String!
+    }
   `)
     createTypes([
         schema.buildObjectType({
