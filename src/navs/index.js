@@ -1,5 +1,3 @@
-import { IconLink } from 'components/OSIcons'
-
 export const dataPipelines = {
     name: 'Data pipelines',
     url: '/docs/cdp',
