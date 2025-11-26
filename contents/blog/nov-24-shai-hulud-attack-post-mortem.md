@@ -101,7 +101,7 @@ For external contributions, we want to automatically assign reviewers depending 
 
 We had a workflow, `auto-assign-reviewers.yaml`, which was supposed to do this, but it never really worked for external contributions since it required manual approval defeating the purpose of automatically tagging the right people without manual interference.
 
-One of our engineers figured out this was because it triggered `on: pull_request` which means external contributions (which come from forks, rather than branches in the repo like internal contributions) would not have the workflow automatically run. The [fix for this](https://github.com/PostHog/posthog/pull/37915) was changing the trigger to be `on: pull_request_target`, which runs the workflow _as it's defined in the PR target repo/branch_, and is therefore considered safe to auto-run. 
+One of our engineers figured out this was because it triggered `on: pull_request` which means external contributions (which come from forks, rather than branches in the repo like internal contributions) would not have the workflow automatically run. The fix for this was changing the trigger to be `on: pull_request_target`, which runs the workflow _as it's defined in the PR target repo/branch_, and is therefore considered safe to auto-run. 
 
 Our engineer opened a PR to make this change, and also make some fixes to the script, including checking out the current branch, rather than the PR base branch, so that the diffing would work properly. This change seemed safe, as our understanding of `on: pull_request_target` was, roughly, "ok, this runs the code as it is in master/the target repo". 
 
@@ -145,4 +145,4 @@ PostHog is, in many of our engineers minds, first and foremost a data company. W
 
 At a higher level, we've started to take broad security a lot more seriously, even prior to this incident. In July, we hired [Tom P](/community/profiles/34651), who's been fully dedicated to improving our overall security posture. Both our incident response and the analysis in this post-mortem simply wouldn't have been possible without the tools and practices he's put in place, and while there's a huge amount still to do, we feel good about the progress we're making. We have to do better here, and we feel confident we will.
 
-If you'd like to write post-mortems like these (or, better still, write analysis like this about attacks you stopped), we're always looking for new talent. Email `tom.p at posthog dot com`, or apply directly on our [careers page](/careers).
+Given the prominence of this attack and our desire to take this work seriously, we wanted to use this as a chance to say that if you'd like to work in our security team, and write post-mortems like these (or, better still, write analysis like this about attacks you stopped), we're always looking for new talent. Email `tom.p at posthog dot com`, or apply directly on our [careers page](/careers).
