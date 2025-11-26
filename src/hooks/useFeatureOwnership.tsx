@@ -115,7 +115,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Dashboards',
         owner: ['product-analytics', 'analytics-platform'],
     },
-     'dashboard-templates': {
+    'dashboard-templates': {
         feature: 'Dashboard templates',
         owner: ['analytics-platform'],
     },
@@ -449,7 +449,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     wizard: {
         feature: 'Wizard',
-        owner: ['content'],
+        owner: ['docs-wizard'],
     },
 }
 
