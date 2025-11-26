@@ -3955,7 +3955,7 @@ export const docsMenu = {
                     name: 'Set up integrations',
                     url: '/docs/error-tracking/integrations',
                     icon: 'IconApps',
-                    color: 'red',
+                    color: 'green',
                     featured: true,
                 },
                 {

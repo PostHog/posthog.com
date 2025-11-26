@@ -4,13 +4,13 @@ title: Set up integrations
 
 PostHog integrates with GitHub, GitLab, and Linear to enhance error tracking with source code context, commit information, and external issue tracking.
 
+| Integration | Capabilities |
+|-------------|-----------------|
+| [GitHub](#github-integration) | Pinpoint Git commits that cause issues, open files in GitHub directly from stack traces, and create GitHub issues from erors |
+| [GitLab](#gitlab-integration) | Pinpoint Git commits that cause issues, open files in GitLab directly from stack traces, and create GitLab issues from erors |
+| [Linear](#linear-integration) | Create Linear issues directly from errors and track fixes in your existing Linear workflows |
+
 ## GitHub integration
-
-Connect your GitHub repository to enable:
-
-- [Source linking](/docs/error-tracking/stack-traces#source-linking) in stack traces
-- Commit details in error reports
-- External issue tracking
 
 To set up the GitHub integration:
 
@@ -28,12 +28,6 @@ Once connected, create a [release](/docs/error-tracking/releases) to start using
 
 ## GitLab integration
 
-Connect your GitLab repository to enable:
-
-- [Source linking](/docs/error-tracking/stack-traces#source-linking) in stack traces
-- Commit details in error reports
-- External issue tracking
-
 To set up the GitLab integration:
 
 1. Go to [Error tracking settings](https://app.posthog.com/settings/project-error-tracking) in the PostHog app and find **Integrations**
@@ -49,9 +43,7 @@ Once connected, create a [release](/docs/error-tracking/releases) to start using
 
 ## Linear integration
 
-Connect your Linear workspace to enable:
-
-- External issue tracking
+Connect your Linear workspace to create and track Linear issues directly from error tracking.
 
 To set up the Linear integration:
 
@@ -68,6 +60,6 @@ PostHog connects to Linear using a [third-party app](https://linear.app/docs/thi
 
 After setting up an integration:
 
-1. [Create releases](/docs/error-tracking/releases) to link errors to specific deployments
-2. [Upload source maps](/docs/error-tracking/upload-source-maps) for better stack traces
+1. [Upload source maps](/docs/error-tracking/upload-source-maps) for better stack traces
+2. [Create releases](/docs/error-tracking/releases) to link errors to specific deployments
 3. [Create external issues](/docs/error-tracking/assigning-issues#creating-external-issues) from PostHog
