@@ -34,7 +34,7 @@ export const posthog_ai = {
     },
     volume: 2000,
     customPricingContent: (
-        <div data-scheme="secondary" className="prose prose-sm text-lg mt-8 mb-12 leading-normal">
+        <div data-scheme="secondary" className="prose prose-sm text-lg mt-8 mb-12 leading-normal text-primary">
             <h3 className="text-xl font-bold text-primary mb-4">How credits work</h3>
             <p>
                 AI credits are based on the underlying token costs, which reflect the effort required to complete your
@@ -42,14 +42,15 @@ export const posthog_ai = {
             </p>
             <ul>
                 <li>
-                    <strong>Simple queries</strong> like "What were my daily active users in October?" use very few
-                    tokens, and therefore very few credits.
+                    <strong className="text-primary">Simple queries</strong> like "What were my daily active users in
+                    October?" use very few tokens, and therefore very few credits.
                 </li>
                 <li>
-                    <strong>More complex tasks</strong> like analyzing hundreds of session recordings or rewriting a SQL
-                    query multiple times use more tokens and consume more credits. While exact usage varies, credit
-                    consumption usually scales with complexity – more advanced tasks cost more but can deliver deeper
-                    insights and time savings. You’ll always see real-time cost information while using AI features.
+                    <strong className="text-primary">More complex tasks</strong> like analyzing hundreds of session
+                    recordings or rewriting a SQL query multiple times use more tokens and consume more credits. While
+                    exact usage varies, credit consumption usually scales with complexity – more advanced tasks cost
+                    more but can deliver deeper insights and time savings. You’ll always see real-time cost information
+                    while using AI features.
                 </li>
             </ul>
             <p>
