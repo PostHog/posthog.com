@@ -55,14 +55,42 @@ Automatic source map uploading is handled through the Gradle build process on An
 
 </CalloutBox>
 
-1. Android: Update the `/android/app/build.gradle` file from your app's root directory so that it looks like this:
+1. Expo: Update the [app.json](https://docs.expo.dev/versions/latest/config/app/#plugins) file in your app's root directory so that it looks like this:
+
+Add the `posthog-react-native/expo` plugin under the `expo.plugins`.
+
+```diff
+
+...
+
+{
+  "expo": {
+    ...
+
+
+    "plugins": [
+      ...
++      "posthog-react-native/expo"
+    ]
+
+
+    ...
+  }
+}
+```
+
+Plugins that add modifications can only be used with [prebuilding](https://docs.expo.dev/workflow/continuous-native-generation/) and managed [EAS Build](https://docs.expo.dev/build/introduction/).
+
+If you can use the `posthog-react-native/expo` plugin, skip steps 2 and 3.
+
+2. Android: Update the `/android/app/build.gradle` file from your app's root directory so that it looks like this:
 
 ```diff
 
 ...
 
 // This must be placed directly above the following `android` block.
-+apply from: "../../node_modules/posthog-react-native/tooling/posthog.gradle"
++apply from: new File(["node", "--print", "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog.gradle')"].execute().text.trim())
 
 
 android {
@@ -70,7 +98,7 @@ android {
 }
 ```
 
-2. iOS: Update the `/ios/$yourProjectName.xcodeproj/project.pbxproj` file (replace `$yourProjectName` with your project's actual name). You need to locate the `Bundle React Native code and images` build step.
+3. iOS: Update the `/ios/$yourProjectName.xcodeproj/project.pbxproj` file (replace `$yourProjectName` with your project's actual name). You need to locate the `Bundle React Native code and images` build step.
 
 To do this through Xcode, open your project in Xcode, go to the project settings, navigate to Build Phases, select Bundle React Native code and images, and apply the changes shown below.
 
@@ -78,16 +106,8 @@ To do this through Xcode, open your project in Xcode, go to the project settings
 
 ...
 
-// This must be placed at the end of this shell script.
-WITH_ENVIRONMENT="../node_modules/react-native/scripts/xcode/with-environment.sh"
-
-
--REACT_NATIVE_XCODE="../node_modules/react-native/scripts/react-native-xcode.sh"
-+POSTHOG_XCODE="../node_modules/posthog-react-native/tooling/posthog-xcode.sh"
-
-
--/bin/sh -c "$WITH_ENVIRONMENT $REACT_NATIVE_XCODE"
-+/bin/sh -c "$WITH_ENVIRONMENT \"$POSTHOG_XCODE\""
+-`"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
++/bin/sh `"$NODE_BINARY" --print "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog-xcode.sh')"` `"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
 ```
 
 3. Web: Ensure that your React Native web build generates source maps.
