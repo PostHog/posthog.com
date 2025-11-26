@@ -263,9 +263,13 @@ export const CodeBlock = ({
             language: language,
         })
 
+        // Include code in the question so the AI can see it
+        // The codeSnippet is used for visual display in the chat UI
+        const questionWithCode = `Explain this ${language || 'code'} code:\n\n${codeContent}`
+
         openNewChat({
             path: `ask-max-${pagePath}`,
-            initialQuestion: 'Explain this code snippet',
+            initialQuestion: questionWithCode,
             codeSnippet: {
                 code: codeContent,
                 language: language,
