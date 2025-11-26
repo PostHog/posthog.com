@@ -47,6 +47,7 @@ type SingleCodeBlockProps = {
     showLabel?: boolean
     showLineNumbers?: boolean
     showCopy?: boolean
+    showAskAI?: boolean
     language: string
     children: string
 }
@@ -151,6 +152,15 @@ const removeQuotes = (str?: string | null): string | null | undefined => {
     return str?.replace(/['"]/g, '')
 }
 
+const stripAnnotationComments = (code: string): string => {
+    return code
+        .replace(tooltipKey, '//')
+        .replace(highlightKey, '')
+        .replace(diffAddKey, '')
+        .replace(diffRemoveKey, '')
+        .trim()
+}
+
 const getLinesToShow = (lines: string): number[] => {
     const lineBounds = lines.split('-').map((line) => {
         return parseInt(line.trim())
@@ -228,53 +238,23 @@ export const CodeBlock = ({
     }
 
     const copyToClipboard = (): void => {
-        navigator.clipboard.writeText(
-            replaceProjectInfo(
-                currentLanguage.code
-                    .replace(tooltipKey, '//')
-                    .replace(highlightKey, '')
-                    .replace(diffAddKey, '')
-                    .replace(diffRemoveKey, '')
-                    .trim()
-            )
-        )
-
+        navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(currentLanguage.code)))
         setTooltipVisible(true)
-        setTimeout(() => {
-            setTooltipVisible(false)
-        }, 1000)
+        setTimeout(() => setTooltipVisible(false), 1000)
     }
 
     const handleAskAboutCode = (): void => {
-        const codeContent = replaceProjectInfo(
-            currentLanguage.code
-                .replace(tooltipKey, '//')
-                .replace(highlightKey, '')
-                .replace(diffAddKey, '')
-                .replace(diffRemoveKey, '')
-                .trim()
-        )
+        const code = replaceProjectInfo(stripAnnotationComments(currentLanguage.code))
         const language = currentLanguage.language || ''
         const pagePath = appWindow?.path || location.pathname?.replace(/\/$/, '') || ''
         const sourceUrl = `https://posthog.com${pagePath}`
 
-        posthog?.capture('ask_posthog_ai_code_snippet', {
-            page_path: pagePath,
-            language: language,
-        })
-
-        // Include code in the question so the AI can see it
-        // The codeSnippet is used for visual display in the chat UI
-        const questionWithCode = `Explain this ${language || 'code'} code:\n\n${codeContent}`
+        posthog?.capture('ask_posthog_ai_code_snippet', { page_path: pagePath, language })
 
         openNewChat({
             path: `ask-max-${pagePath}`,
-            initialQuestion: questionWithCode,
-            codeSnippet: {
-                code: codeContent,
-                language: language,
-                sourceUrl: sourceUrl,
-            },
+            initialQuestion: `Explain this ${language || 'code'} code from ${sourceUrl}:\n\n${code}`,
+            codeSnippet: { code, language, sourceUrl },
         })
     }
 

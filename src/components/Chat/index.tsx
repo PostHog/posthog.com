@@ -105,34 +105,21 @@ export default function Chat(): JSX.Element | null {
             </div>
             <Context />
             {codeSnippet && showCodeSnippet && (
-                <div className="border-b border-light dark:border-dark flex-shrink-0">
-                    <div className="p-2">
-                        <div className="flex items-center justify-between mb-1">
-                            <div className="flex items-center gap-1.5 text-xs text-primary/60 dark:text-primary-dark/60">
-                                <IconCode className="size-3.5" />
-                                <span className="font-semibold">Code snippet</span>
-                                {codeSnippet.language && (
-                                    <span className="opacity-60">({codeSnippet.language})</span>
-                                )}
-                            </div>
-                            <button
-                                onClick={() => setShowCodeSnippet(false)}
-                                className="text-primary/40 hover:text-primary/70 dark:text-primary-dark/40 dark:hover:text-primary-dark/70 transition-colors"
-                                title="Hide code snippet"
-                            >
-                                <IconX className="size-3.5" />
-                            </button>
-                        </div>
-                        <div className="max-h-[200px] overflow-auto rounded text-sm">
-                            <SingleCodeBlock
-                                language={codeSnippet.language}
-                                showLabel={false}
-                                showCopy={true}
-                                showAskAI={false}
-                            >
-                                {codeSnippet.code}
-                            </SingleCodeBlock>
-                        </div>
+                <div className="border-b border-light dark:border-dark p-2">
+                    <div className="flex items-center justify-between mb-1 text-xs text-primary/60 dark:text-primary-dark/60">
+                        <span className="flex items-center gap-1.5">
+                            <IconCode className="size-3.5" />
+                            <strong>Code snippet</strong>
+                            {codeSnippet.language && <span className="opacity-60">({codeSnippet.language})</span>}
+                        </span>
+                        <button onClick={() => setShowCodeSnippet(false)} title="Hide code snippet">
+                            <IconX className="size-3.5 opacity-60 hover:opacity-100" />
+                        </button>
+                    </div>
+                    <div className="max-h-[200px] overflow-auto rounded text-sm">
+                        <SingleCodeBlock language={codeSnippet.language} showLabel={false} showAskAI={false}>
+                            {codeSnippet.code}
+                        </SingleCodeBlock>
                     </div>
                 </div>
             )}
