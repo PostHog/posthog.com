@@ -388,8 +388,8 @@ module.exports = {
             options: {
                 name: `posthog-main-repo`,
                 remote: `https://github.com/posthog/posthog.git`,
-                branch: process.env.GATSBY_POSTHOG_BRANCH || 'master',
-                patterns: `docs/published/**`,
+                branch: 'feat/onboarding-jsx',
+                patterns: ['docs/published/**', 'docs/onboarding/**'],
             },
         },
         // {

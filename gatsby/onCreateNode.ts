@@ -58,6 +58,10 @@ const REPO_CONFIGS = {
         stripPrefix: '/docs/published/',
         pathPrefix: '/handbook/engineering',
     },
+    'posthog-onboarding': {
+        stripPrefix: '/docs/onboarding/',
+        pathPrefix: '/onboarding',
+    },
 }
 
 export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {

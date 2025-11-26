@@ -68,6 +68,11 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
         },
         resolve: {
             extensions: ['.js', '.ts', '.tsx'],
+            modules: [
+                path.resolve(__dirname, '.cache', 'gatsby-source-git', 'posthog-main-repo', 'docs'),
+                path.resolve(__dirname, 'contents', 'docs'),
+                'node_modules',
+            ],
             alias: {
                 '~': path.resolve(__dirname, 'src'),
                 lib: path.resolve(__dirname, 'src', 'lib'),
@@ -76,6 +81,15 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
                 components: path.resolve(__dirname, 'src', 'components'),
                 logic: path.resolve(__dirname, 'src', 'logic'),
                 hooks: path.resolve(__dirname, 'src', 'hooks'),
+                onboarding: path.resolve(
+                    __dirname,
+                    '.cache',
+                    'gatsby-source-git',
+                    'posthog-main-repo',
+                    'docs',
+                    'onboarding'
+                ),
+                'onboarding-installation': path.resolve(__dirname, 'contents', 'docs', 'llm-analytics', 'installation'),
             },
         },
     })
