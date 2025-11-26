@@ -2570,7 +2570,7 @@ export const docsMenu = {
                             url: '/docs/settings/access-control',
                         },
                         {
-                            name: 'SSO & SAML',
+                            name: 'SSO, SAML, & SCIM',
                             url: '/docs/settings/sso',
                         },
                         {
