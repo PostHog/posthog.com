@@ -30,6 +30,7 @@
         "storybook": "start-storybook -s ./static -p 6006",
         "build-storybook": "build-storybook",
         "postinstall": "patch-package",
+        "prepare": "husky",
         "format:docs": "git diff --name-only --diff-filter=AM \"*.mdx\" \"*.md\" | xargs node scripts/fix-mdx.js"
     },
     "dependencies": {
@@ -241,7 +242,7 @@
         "eslint": "^7.9.0",
         "eslint-plugin-react": "^7.20.6",
         "hastscript": "^7.0.2",
-        "husky": "^4.2.5",
+        "husky": "9.1.7",
         "jest": "^27.0.6",
         "lint-staged": "^10.2.12",
         "markdownlint-cli2": "0.19.0",
@@ -256,11 +257,6 @@
         "style-loader": "^3.3.0",
         "tailwindcss": "^3.4.14",
         "webpack": "5"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
     },
     "resolutions": {
         "undici": "5.26.3"

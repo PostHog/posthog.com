@@ -72,5 +72,13 @@ export const query = graphql`
                 }
             }
         }
+        allChangelogVideo(sort: { fields: publishedAt, order: DESC }) {
+            nodes {
+                id
+                videoId
+                publishedAt
+                title
+            }
+        }
     }
 `
