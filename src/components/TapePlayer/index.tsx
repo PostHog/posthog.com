@@ -52,13 +52,14 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
         labelColor?: string
         labelBackground?: CassetteLabelBackground
     }>()
-    const [mixtapeId, setMixtapeId] = useState<string | null>(null)
+    const [mixtapeId, setMixtapeId] = useState<number | null>(null)
     const [creators, setCreators] = useState<Array<{ id: number }>>([])
     const [showTrackList, setShowTrackList] = useState(false)
     const [fetchingMixtape, setFetchingMixtape] = useState(true)
     const [rewinding, setRewinding] = useState(false)
     const [fastForwarding, setFastForwarding] = useState(false)
     const [mixtapeDrawerOpen, setMixtapeDrawerOpen] = useState(true)
+    const [mixtapeTitle, setMixtapeTitle] = useState<string>()
 
     const extractVideoId = (url: string): string => {
         // Handle various YouTube URL formats
@@ -75,7 +76,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
         return url // Return as-is if no pattern matches
     }
 
-    const fetchMixtapeSongs = async (mixtapeId: string) => {
+    const fetchMixtapeSongs = async (mixtapeId: number) => {
         setMixtapeId(mixtapeId)
         if (!mixtapeId) {
             setFetchingMixtape(false)
@@ -109,6 +110,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
             setMixtapeSongs(tracks)
             setMetadata(data.attributes.metadata)
             setCreators(data.attributes.creator?.data)
+            setMixtapeTitle(data.attributes.title)
         } catch (error) {
             console.error(error)
             addToast({
@@ -128,7 +130,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
             setFetchingMixtape(false)
             return
         }
-        fetchMixtapeSongs(id)
+        fetchMixtapeSongs(Number(id))
     }, [id])
 
     useEffect(() => {
@@ -331,8 +333,9 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
 
     // Handle song changes and mixtape changes
     useEffect(() => {
-        if (playerRef.current && playerReadyRef.current && mixtapeSongs.length > 0) {
-            playerRef.current.loadVideoById(extractVideoId(mixtapeSongs[currentSongIndex].youtubeUrl))
+        const song = mixtapeSongs[currentSongIndex]
+        if (playerRef.current && playerReadyRef.current && mixtapeSongs.length > 0 && song) {
+            playerRef.current.loadVideoById(extractVideoId(song.youtubeUrl))
             if (isPlaying) {
                 playerRef.current.playVideo()
             }
@@ -476,10 +479,10 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
             return
         }
         playClickSound()
-        const url = window.location.href
+        const mixtapeUrl = `${window.location.origin}/fm?mixtapeId=${mixtapeId}`
         try {
             if (navigator.clipboard?.writeText) {
-                await navigator.clipboard.writeText(url)
+                await navigator.clipboard.writeText(mixtapeUrl)
             }
             setCopied(true)
             setTimeout(() => {
@@ -576,6 +579,15 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
         }
     }, [mixtapeDrawerOpen])
 
+    const handleMixtapePlay = (id: number) => {
+        fetchMixtapeSongs(id)
+    }
+
+    const handleTrackClick = ({ mixtapeId, trackIndex }: { mixtapeId: number; trackIndex: number }) => {
+        setCurrentSongIndex(trackIndex)
+        fetchMixtapeSongs(mixtapeId)
+    }
+
     const currentSong = mixtapeSongs[currentSongIndex]
 
     return (
@@ -587,7 +599,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                         : ''
                 }♫ PostHog FM`}
             />
-            <div className="flex items-start">
+            <div className="flex items-start h-full">
                 <div className="w-[650px] flex-shrink-0 border-r border-primary">
                     <div className="flex items-start">
                         <div className="p-4 w-full sticky top-0">
@@ -693,6 +705,33 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                     >
                                                         {/* Notebook paper style */}
                                                         <div
+                                                            className="relative bg-[#fffef0]"
+                                                            style={{
+                                                                backgroundImage: `
+                                                        repeating-linear-gradient(
+                                                            transparent,
+                                                            transparent 47px,
+                                                            #94a9cf 47px,
+                                                            #94a9cf 48px
+                                                        ),
+                                                        linear-gradient(
+                                                            90deg,
+                                                            transparent 0,
+                                                            transparent 45px,
+                                                            #ef9a9a 45px,
+                                                            #ef9a9a 47px,
+                                                            transparent 47px
+                                                        )
+                                                    `,
+                                                            }}
+                                                        >
+                                                            <div className="pl-[54px] pr-2 py-2">
+                                                                <h3 className="text-2xl font-bold text-primary line-clamp-1">
+                                                                    {mixtapeTitle}
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                        <div
                                                             className="h-full w-full relative bg-[#fffef0]"
                                                             style={{
                                                                 backgroundImage: `
@@ -718,7 +757,6 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                                     className="text-[13px] font-mono text-primary"
                                                                     style={{
                                                                         lineHeight: '28px',
-                                                                        paddingTop: '28px',
                                                                     }}
                                                                 >
                                                                     {mixtapeSongs.map((song, index) => (
@@ -854,8 +892,8 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                         )}
                     </div>
                 </div>
-                <div className="w-full w-[450px] flex-shrink-0">
-                    <Mixtapes />
+                <div className="w-full w-[450px] flex-shrink-0 h-full">
+                    <Mixtapes onPlay={handleMixtapePlay} onTrackClick={handleTrackClick} />
                 </div>
             </div>
         </div>

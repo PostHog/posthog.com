@@ -94,7 +94,7 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
 }
 
 interface MixtapeEditorProps {
-    id?: string
+    id?: number
     onSubmit?: () => void
     location?: { pathname: string }
     newWindow?: boolean
