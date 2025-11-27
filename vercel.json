@@ -910,6 +910,10 @@
             "source": "/docs/error-tracking/filter-and-search-issues",
             "destination": "/docs/error-tracking/managing-issues"
         },
+        {
+            "source": "/docs/error-tracking/external-tracking",
+            "destination": "/docs/error-tracking/integrations"
+        },
         { "source": "/blog/how-we-do-hiring-and-hr-at-posthog", "destination": "/handbook/people/hiring-process" },
         { "source": "/api", "destination": "/docs/api" },
         { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
@@ -1650,7 +1654,8 @@
         { "source": "/handbook/who-we-are-building-for", "destination": "/handbook/who-we-build-for" },
         { "source": "/example-components", "destination": "/handbook/engineering/posthog-com/markdown" },
         { "source": "/handbook/content/components", "destination": "/handbook/engineering/posthog-com/markdown" },
-        { "source": "/handbook/engineering/storybook", "destination": "/handbook/engineering/posthog-com/markdown" }
+        { "source": "/handbook/engineering/storybook", "destination": "/handbook/engineering/posthog-com/markdown" },
+        { "source": "/startups/[...slug]", "destination": "/startups" }
     ],
     "headers": [
         {
