@@ -91,8 +91,10 @@ In case some steps here have fallen out of date, please tell us about it – fee
 Clone the [PostHog repo](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
 
 ```bash
-git clone https://github.com/PostHog/posthog && cd posthog/
+git clone --filter=blob:none https://github.com/PostHog/posthog && cd posthog/
 ```
+
+**Performance tip:** The `--filter=blob:none` flag downloads all commit history and tree structure, but defers file contents (blobs) until needed. This reduces the clone from ~3 GB to a few hundred MB and makes the initial clone **15-17x faster**. You still get full git history for commands like `git log` and `git diff` – blobs are fetched on demand as you use them.
 
 > The `feature-flags` container relies on the presence of the GeoLite cities
 > database in the `/share` directory. If you haven't run `./bin/start` this database may not exist.
@@ -130,6 +132,49 @@ To get PostHog running in a dev environment:
 This is it – you should be seeing the PostHog app at <a href="http://localhost:8010" target="_blank">http://localhost:8010</a>.
 
 You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
+
+#### Common gotchas
+**Docker/OrbStack resource limits**
+If you see "Exit Code 137" or out-of-memory errors, your Docker container doesn't have enough resources. In OrbStack settings, allocate **at least 4 GB RAM** (8 GB recommended) and **at least 4 CPU cores** (400%).
+
+**Docker not running**
+If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version`, make sure Docker (or OrbStack) is actually running.
+
+**Port conflicts**
+If you see a port binding error for 5432, you have Postgres running locally. Use `lsof -i :5432` to find the process, then `sudo service postgresql stop` to stop it.
+
+**GeoLite database missing**
+The feature-flags container needs the GeoLite database in `/share`. If it's missing, run `./bin/download-mmdb` and then `chmod 0755 ./share/GeoLite2-City.mmdb`.
+
+**ClickHouse "get_mempolicy" warning**
+You might see `get_mempolicy: Operation not permitted` in the ClickHouse logs. This is harmless and can be ignored. To verify ClickHouse started properly, run `docker exec -it posthog-clickhouse-1 bash` then `clickhouse-client --query "SELECT 1"`.
+
+**Database migration errors**
+If you see `fe_sendauth: no password supplied`, set `DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog` and ensure containers are running. On ARM machines, you may also hit `psycopg2` errors – see [this comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) for fixes.
+
+**Frontend typegen stuck in loop**
+The first time you run typegen, it may get stuck. Cancel it (`Ctrl+C`), run `git reset --hard`, then try again. You may need to discard changes once more when the second round completes.
+
+**"layout.html is not defined" error**
+This happens on first startup. Wait for the frontend to finish compiling and try accessing the app again.
+
+**Kafka segfaults on ARM**
+Kafka is an x86 container and may segfault randomly on ARM machines. Simply restart it when that happens.
+
+**Apple Silicon OpenSSL issues**
+On Apple Silicon Macs, you may get build errors related to OpenSSL. For plugin-server: set `CPPFLAGS=-I/opt/homebrew/opt/openssl/include` and `LDFLAGS=-L/opt/homebrew/opt/openssl/lib` before installing. For Python packages, you may need custom OpenSSL headers – consult the [xmlsec issue](https://github.com/xmlsec/python-xmlsec/issues/254) for details.
+
+**Plugin server rebuild**
+If the plugin server won't start, try `cd plugin-server && pnpm rebuild && pnpm i`.
+
+**Python setuptools error**
+If you see `import gyp  # noqa: E402` during plugin-server install, run `brew install python-setuptools`.
+
+**OpenSSL certificate verification error**
+If you get `Configuration property "enable.ssl.certificate.verification" not supported in this build: OpenSSL not available at build time` when running `./bin/start`, set the right OpenSSL environment variables as described in [this issue](https://github.com/xmlsec/python-xmlsec/issues/261#issuecomment-1630889826) and try again.
+
+**pyproject.toml parse warnings**
+When running `uv sync`, you may see a `Failed to parse` warning related to `pyproject.toml`. This is usually harmless – if you see the `Activate with:` line at the end, your environment was created successfully.
 
 ### Manual setup
 
@@ -427,7 +472,7 @@ You can now change PostHog in any way you want. See [Project structure](/handboo
 
 ## Option 2: Developing with Codespaces
 
-This is a faster option to get up and running. If you don't want to or can't use Codespaces, continue from the next section.
+# If you don't want to develop locally, you can use Codespaces.
 
 1. Create your codespace.
 ![](https://user-images.githubusercontent.com/890921/231489405-cb2010b4-d9e3-4837-bfdf-b2d4ef5c5d0b.png)
