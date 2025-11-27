@@ -892,7 +892,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                         )}
                     </div>
                 </div>
-                <div className="w-full w-[450px] flex-shrink-0 h-full">
+                <div className="w-full w-[450px] h-full">
                     <Mixtapes onPlay={handleMixtapePlay} onTrackClick={handleTrackClick} />
                 </div>
             </div>
