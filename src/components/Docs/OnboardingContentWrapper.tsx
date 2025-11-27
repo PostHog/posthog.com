@@ -7,6 +7,7 @@ import OSButton from 'components/OSButton'
 import { Markdown } from 'components/Squeak/components/Markdown'
 import { Blockquote } from 'components/BlockQuote'
 import { dedent } from '~/utils'
+import Tab from 'components/Tab'
 
 type CodeBlockItem = {
     language: string
@@ -63,8 +64,9 @@ interface DocsComponents {
     OSButton: MDXComponent
     Markdown: MDXComponent
     Blockquote: MDXComponent
+    Tab: typeof Tab
     dedent: (strings: TemplateStringsArray | string, ...values: unknown[]) => string
-    snippets?: Record<string, MDXComponent>
+    snippets?: Record<string, React.ComponentType<Record<string, never>>>
 }
 
 const MDXComponentsContext = createContext<DocsComponents>({
@@ -77,6 +79,7 @@ const MDXComponentsContext = createContext<DocsComponents>({
     OSButton,
     Markdown,
     Blockquote,
+    Tab,
     dedent,
 })
 
@@ -86,7 +89,7 @@ export const useMDXComponents = (): DocsComponents => {
 
 interface OnboardingContentWrapperProps {
     children: React.ReactNode
-    snippets?: Record<string, MDXComponent>
+    snippets?: Record<string, React.ComponentType<Record<string, never>>>
 }
 
 export const OnboardingContentWrapper: React.FC<OnboardingContentWrapperProps> = ({ children, snippets }) => {
@@ -102,6 +105,7 @@ export const OnboardingContentWrapper: React.FC<OnboardingContentWrapperProps> =
                 OSButton,
                 Markdown,
                 Blockquote,
+                Tab,
                 dedent,
                 snippets,
             }}
