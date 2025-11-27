@@ -5,7 +5,7 @@ import { Fieldset } from 'components/OSFieldset'
 import { OSInput } from 'components/OSForm'
 import CassetteTape from './CassetteTape'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { IconArrowUpRight, IconSpinner, IconTrash } from '@posthog/icons'
+import { IconArrowUpRight, IconCheck, IconSpinner, IconTrash } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CreatableMultiSelect from 'components/CreatableMultiSelect'
 import {
@@ -109,6 +109,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
     const isEditMode = !!id
     const [isLoading, setIsLoading] = React.useState(isEditMode)
     const [showErrors, setShowErrors] = React.useState(false)
+    const [copiedShareUrl, setCopiedShareUrl] = React.useState(false)
     const sensors = useSensors(
         useSensor(PointerSensor),
         useSensor(KeyboardSensor, {
@@ -436,9 +437,18 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                                         addToast({
                                             description: 'Share URL copied to clipboard',
                                         })
+                                        setCopiedShareUrl(true)
+                                        setTimeout(() => {
+                                            setCopiedShareUrl(false)
+                                        }, 3000)
                                     }}
                                 >
-                                    Copy
+                                    <span className="relative flex items-center justify-center">
+                                        <span className={copiedShareUrl ? 'invisible' : 'visible'}>Copy</span>
+                                        <span className={`absolute ${copiedShareUrl ? '' : 'hidden'}`}>
+                                            <IconCheck className="size-5" />
+                                        </span>
+                                    </span>
                                 </OSButton>
                             </div>
                         </Fieldset>
