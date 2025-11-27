@@ -84,6 +84,27 @@ export const microsoft_clarity = {
                 scrollmaps: true,
             },
         },
+        surveys: {
+            available: false,
+        },
+        feature_flags: {
+            available: false,
+        },
+        experiments: {
+            available: false,
+        },
+        error_tracking: {
+            available: false,
+        },
+    },
+    platform: {
+        deployment: {
+            open_source: false,
+        },
+        pricing: {
+            free_tier: true,
+            transparent_pricing: true, // It's free, so pricing is clear
+        },
     },
     pricing: {
         model: 'Free',

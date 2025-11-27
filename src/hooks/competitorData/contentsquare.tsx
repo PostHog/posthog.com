@@ -76,6 +76,9 @@ export const contentsquare = {
         surveys: {
             available: false,
         },
+        error_tracking: {
+            available: true,
+        }
     },
     platform: {
         deployment: {
