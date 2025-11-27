@@ -169,8 +169,7 @@ export default function Mixtapes({
                                                                             }
                                                                             className="line-clamp-1 text-left"
                                                                         >
-                                                                            {index + 1}. {track.title} -{' '}
-                                                                            <strong>{track.artist}</strong>
+                                                                            {index + 1}. {track.title}
                                                                         </button>
                                                                     </li>
                                                                 ))}

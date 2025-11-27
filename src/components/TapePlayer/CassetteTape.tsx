@@ -48,7 +48,6 @@ function Reel({ rotation, teeth = true, spindle = true }: ReelProps): JSX.Elemen
 
 interface CassetteTapeProps {
     title?: string
-    artist?: string
     rotation?: number
     labelBackground?: CassetteLabelBackground
     cassetteColor?: string
@@ -60,7 +59,6 @@ interface CassetteTapeProps {
 
 export default function CassetteTape({
     title,
-    artist,
     rotation = 0,
     labelBackground,
     cassetteColor,
@@ -93,11 +91,10 @@ export default function CassetteTape({
                 style={labelStyle}
             >
                 {/* Tape label */}
-                {(title || artist) && (
+                {title && (
                     <div className="p-[3.5%] pb-0">
                         <div className="bg-accent/90 border-2 border-primary text-center flex flex-col justify-center rounded py-[3%]">
                             {title && <div className="font-bold text-sm text-primary truncate">{title}</div>}
-                            {artist && <div className="text-xs text-secondary truncate">{artist}</div>}
                         </div>
                     </div>
                 )}

@@ -16,6 +16,7 @@ import { navigate } from 'gatsby'
 import { motion } from 'framer-motion'
 import DanceMode from 'components/DanceMode'
 import { useWindow } from '../../context/Window'
+import { extractVideoId } from './utils'
 
 const getRandomWaveformBars = () => Array.from({ length: 60 }, () => Math.random() * 80 + 20)
 
@@ -61,21 +62,6 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
     const [mixtapeDrawerOpen, setMixtapeDrawerOpen] = useState(true)
     const [mixtapeTitle, setMixtapeTitle] = useState<string>()
 
-    const extractVideoId = (url: string): string => {
-        // Handle various YouTube URL formats
-        const patterns = [
-            /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
-            /^([a-zA-Z0-9_-]{11})$/, // Direct video ID
-        ]
-
-        for (const pattern of patterns) {
-            const match = url.match(pattern)
-            if (match) return match[1]
-        }
-
-        return url // Return as-is if no pattern matches
-    }
-
     const fetchMixtapeSongs = async (mixtapeId: number) => {
         setMixtapeId(mixtapeId)
         if (!mixtapeId) {
@@ -99,14 +85,11 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                 throw new Error(`Failed to fetch mixtape: ${response.status}`)
             }
             const { data } = await response.json()
-            const tracks = data.attributes.tracks.map(
-                (track: { id: string; artist: string; title: string; youtubeUrl: string }) => ({
-                    id: track.id,
-                    artist: track.artist,
-                    title: track.title,
-                    youtubeUrl: track.youtubeUrl,
-                })
-            )
+            const tracks = data.attributes.tracks.map((track: { id: string; title: string; youtubeUrl: string }) => ({
+                id: track.id,
+                title: track.title,
+                youtubeUrl: track.youtubeUrl,
+            }))
             setMixtapeSongs(tracks)
             setMetadata(data.attributes.metadata)
             setCreators(data.attributes.creator?.data)
@@ -592,13 +575,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
 
     return (
         <div data-scheme="secondary" className="size-full bg-[#e4e3d8] dark:bg-primary">
-            <SEO
-                title={`${
-                    currentSong?.title && currentSong?.artist
-                        ? `${currentSong?.title} by ${currentSong?.artist} - `
-                        : ''
-                }♫ PostHog FM`}
-            />
+            <SEO title={`${currentSong?.title ? `${currentSong?.title} - ` : ''}♫ PostHog FM`} />
             <div className="flex items-start h-full">
                 <div className="w-[650px] flex-shrink-0 border-r border-primary">
                     <div className="flex items-start">
@@ -681,7 +658,6 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                 >
                                                     <CassetteTape
                                                         title={currentSong?.title}
-                                                        artist={currentSong?.artist}
                                                         rotation={rotation}
                                                         cassetteColor={metadata?.cassetteColor}
                                                         labelColor={metadata?.labelColor}
@@ -779,7 +755,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                                                 }
                                                                             }}
                                                                         >
-                                                                            {index + 1}. {song.artist} - {song.title}
+                                                                            {index + 1}. {song.title}
                                                                         </div>
                                                                     ))}
                                                                 </div>

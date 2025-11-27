@@ -10,7 +10,6 @@ export interface Mixtape {
         genres?: string[]
         tracks: Array<{
             id: string
-            artist: string
             title: string
             youtubeUrl: string
         }>

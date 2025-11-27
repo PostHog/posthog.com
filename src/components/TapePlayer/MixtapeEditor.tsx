@@ -1,6 +1,6 @@
 import React from 'react'
 import { useFormik } from 'formik'
-import { MixtapeFormValues } from './types'
+import { MixtapeFormValues, YTPlayer, Track } from './types'
 import { Fieldset } from 'components/OSFieldset'
 import { OSInput } from 'components/OSForm'
 import CassetteTape from './CassetteTape'
@@ -25,7 +25,6 @@ import {
     arrayMove,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { Track } from './types'
 import { cassetteLabelBackgrounds } from '../../data/cassetteBackgrounds'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
@@ -33,16 +32,128 @@ import { useToast } from '../../context/Toast'
 import { Link, navigate } from 'gatsby'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
+import { extractVideoId } from './utils'
+import debounce from 'lodash.debounce'
 
 interface SortableTrackProps {
     track: Track
     index: number
     onRemove: () => void
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onTitleFetch: (title: string) => void
 }
 
-function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps) {
+function SortableTrack({ track, index, onRemove, onChange, onTitleFetch }: SortableTrackProps) {
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: track.id })
+    const [isFetchingTitle, setIsFetchingTitle] = React.useState(false)
+    const playerRef = React.useRef<YTPlayer | null>(null)
+
+    const fetchYouTubeTitle = React.useCallback(
+        async (youtubeUrl: string) => {
+            if (!youtubeUrl || isFetchingTitle) return
+
+            const videoId = extractVideoId(youtubeUrl)
+            if (!videoId || videoId === youtubeUrl.trim()) return
+
+            setIsFetchingTitle(true)
+
+            try {
+                // Ensure YouTube API is loaded
+                if (typeof window === 'undefined' || !window.YT) {
+                    // Load the API if not already loaded
+                    const tag = document.createElement('script')
+                    tag.src = 'https://www.youtube.com/iframe_api'
+                    const firstScriptTag = document.getElementsByTagName('script')[0]
+                    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag)
+
+                    // Wait for API to load
+                    await new Promise<void>((resolve) => {
+                        window.onYouTubeIframeAPIReady = () => resolve()
+                        // Timeout after 5 seconds
+                        setTimeout(() => resolve(), 5000)
+                    })
+                }
+
+                // Create a hidden container for the player
+                const container = document.createElement('div')
+                container.id = `yt-title-fetcher-${track.id}`
+                container.style.display = 'none'
+                document.body.appendChild(container)
+
+                // Create player to fetch video data
+                playerRef.current = new window.YT.Player(container.id, {
+                    height: '0',
+                    width: '0',
+                    videoId: videoId,
+                    host: 'https://www.youtube-nocookie.com',
+                    events: {
+                        onReady: (event: { target: YTPlayer }) => {
+                            try {
+                                const videoData = event.target.getVideoData()
+                                if (videoData && videoData.title) {
+                                    onTitleFetch(videoData.title)
+                                }
+                            } catch (error) {
+                                console.error('Error fetching YouTube title:', error)
+                            } finally {
+                                // Clean up
+                                if (playerRef.current) {
+                                    playerRef.current.destroy?.()
+                                    playerRef.current = null
+                                }
+                                container.remove()
+                                setIsFetchingTitle(false)
+                            }
+                        },
+                        onError: () => {
+                            if (playerRef.current) {
+                                playerRef.current.destroy?.()
+                                playerRef.current = null
+                            }
+                            container.remove()
+                            setIsFetchingTitle(false)
+                        },
+                    },
+                })
+            } catch (error) {
+                console.error('Error loading YouTube API:', error)
+                setIsFetchingTitle(false)
+            }
+        },
+        [track.id, onTitleFetch, isFetchingTitle]
+    )
+
+    // Create debounced version of fetchYouTubeTitle
+    const debouncedFetchTitle = React.useMemo(
+        () => debounce((url: string) => fetchYouTubeTitle(url), 1000),
+        [fetchYouTubeTitle]
+    )
+
+    // Fetch title when YouTube URL changes
+    React.useEffect(() => {
+        // Only fetch if we have a URL and no title
+        if (track.youtubeUrl && !track.title) {
+            debouncedFetchTitle(track.youtubeUrl)
+        }
+
+        return () => {
+            debouncedFetchTitle.cancel()
+        }
+    }, [track.youtubeUrl, track.title, debouncedFetchTitle])
+
+    // Cleanup on unmount
+    React.useEffect(() => {
+        return () => {
+            if (playerRef.current) {
+                try {
+                    playerRef.current.destroy?.()
+                } catch (error) {
+                    // Ignore cleanup errors
+                }
+                playerRef.current = null
+            }
+        }
+    }, [])
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -68,25 +179,20 @@ function SortableTrack({ track, index, onRemove, onChange }: SortableTrackProps)
                     <IconTrash className="size-5 opacity-70 group-hover:opacity-100" />
                 </button>
                 <OSInput
-                    label="Artist"
-                    name={`tracks.${index}.artist`}
-                    direction="column"
-                    value={track.artist}
-                    onChange={onChange}
-                />
-                <OSInput
-                    label="Title"
-                    name={`tracks.${index}.title`}
-                    direction="column"
-                    value={track.title}
-                    onChange={onChange}
-                />
-                <OSInput
                     label="YouTube URL"
                     name={`tracks.${index}.youtubeUrl`}
                     direction="column"
                     value={track.youtubeUrl}
                     onChange={onChange}
+                />
+                <OSInput
+                    label="Label"
+                    name={`tracks.${index}.title`}
+                    direction="column"
+                    value={track.title}
+                    onChange={onChange}
+                    placeholder={isFetchingTitle ? 'Fetching title...' : 'Come Together - The Beatles'}
+                    disabled={isFetchingTitle}
                 />
             </Fieldset>
         </div>
@@ -146,7 +252,6 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                             title: values.title,
                             genres: values.genres,
                             tracks: values.tracks.map((track) => ({
-                                artist: track.artist,
                                 title: track.title,
                                 youtubeUrl: track.youtubeUrl,
                             })),
@@ -201,10 +306,6 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                 const trackErrors: Record<number, Record<string, string>> = {}
                 values.tracks.forEach((track, index) => {
                     const trackError: Record<string, string> = {}
-
-                    if (!track.artist) {
-                        trackError.artist = 'Artist is required'
-                    }
 
                     if (!track.title) {
                         trackError.title = 'Title is required'
@@ -262,14 +363,11 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                 formik.setValues({
                     title: attributes.title || '',
                     genres: attributes.genres || [],
-                    tracks: attributes.tracks.map(
-                        (track: { artist: string; title: string; youtubeUrl: string }, index: number) => ({
-                            id: `${Date.now()}-${index}`,
-                            artist: track.artist || '',
-                            title: track.title || '',
-                            youtubeUrl: track.youtubeUrl || '',
-                        })
-                    ),
+                    tracks: attributes.tracks.map((track: { title: string; youtubeUrl: string }, index: number) => ({
+                        id: `${Date.now()}-${index}`,
+                        title: track.title || '',
+                        youtubeUrl: track.youtubeUrl || '',
+                    })),
                     labelBackground: attributes.metadata?.labelBackground || cassetteLabelBackgrounds[0],
                     cassetteColor: attributes.metadata?.cassetteColor || '#d2d3cc',
                     labelColor: attributes.metadata?.labelColor || '#eeefea',
@@ -290,7 +388,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
     const addTrack = () => {
         formik.setFieldValue('tracks', [
             ...formik.values.tracks,
-            { id: Date.now().toString(), artist: '', title: '', youtubeUrl: '' },
+            { id: Date.now().toString(), title: '', youtubeUrl: '' },
         ])
     }
 
@@ -311,7 +409,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
 
     if (isLoading) {
         return (
-            <div className="flex items-center justify-center p-8">
+            <div data-scheme="secondary" className="flex items-center justify-center p-8 h-full bg-primary">
                 <IconSpinner className="size-8 animate-spin" />
             </div>
         )
@@ -477,6 +575,9 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                                             index={index}
                                             onRemove={() => removeTrack(index)}
                                             onChange={formik.handleChange}
+                                            onTitleFetch={(title) =>
+                                                formik.setFieldValue(`tracks.${index}.title`, title)
+                                            }
                                         />
                                     ))}
                                 </div>

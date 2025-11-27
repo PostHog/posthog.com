@@ -6,6 +6,7 @@ export interface YTPlayer {
     pauseVideo: () => void
     stopVideo: () => void
     loadVideoById: (videoId: string) => void
+    getVideoData: () => { title: string; video_id: string; author: string }
     destroy?: () => void
 }
 
@@ -54,7 +55,6 @@ declare global {
 // Mixtape types for Strapi
 export interface Track {
     id: string
-    artist: string
     title: string
     youtubeUrl: string
 }
