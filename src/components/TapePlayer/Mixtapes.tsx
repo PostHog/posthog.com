@@ -4,23 +4,13 @@ import { useMixtapes } from '../../hooks/useMixtapes'
 import { navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import Link from 'components/Link'
-import { useApp } from '../../context/App'
-import { useWindow } from '../../context/Window'
 import { OSSelect } from 'components/OSForm'
 
 export default function Mixtapes(): JSX.Element {
-    const { appWindow } = useWindow()
-    const { setWindowTitle } = useApp()
     const { user } = useUser()
     const { mixtapes, isLoading } = useMixtapes()
     const [selectedGenre, setSelectedGenre] = useState<string>('all')
     const [selectedCreator, setSelectedCreator] = useState<string>('all')
-
-    useEffect(() => {
-        if (appWindow) {
-            setWindowTitle(appWindow, 'Mixtapes - ♫ PostHog FM')
-        }
-    }, [])
 
     // Extract unique genres from all mixtapes
     const genreOptions = useMemo(() => {

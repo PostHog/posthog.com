@@ -15,6 +15,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { navigate } from 'gatsby'
 import { motion } from 'framer-motion'
 import DanceMode from 'components/DanceMode'
+import { useWindow } from '../../context/Window'
 
 const getRandomWaveformBars = () => Array.from({ length: 60 }, () => Math.random() * 80 + 20)
 
@@ -24,7 +25,8 @@ interface TapePlayerProps {
 
 export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
     const { getJwt, user, isModerator } = useUser()
-    const { addWindow, windows, closeWindow } = useApp()
+    const { appWindow } = useWindow()
+    const { addWindow, windows, closeWindow, updateWindow } = useApp()
     const { addToast } = useToast()
     const [isPoweredOn, setIsPoweredOn] = useState(true)
     const [isPlaying, setIsPlaying] = useState(false)
@@ -56,6 +58,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
     const [fetchingMixtape, setFetchingMixtape] = useState(true)
     const [rewinding, setRewinding] = useState(false)
     const [fastForwarding, setFastForwarding] = useState(false)
+    const [mixtapeDrawerOpen, setMixtapeDrawerOpen] = useState(true)
 
     const extractVideoId = (url: string): string => {
         // Handle various YouTube URL formats
@@ -514,11 +517,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
 
     const handleMixtapeLibraryClick = () => {
         playClickSound()
-        addWindow(
-            (<Mixtapes key={`fm/mixtapes`} location={{ pathname: `fm/mixtapes` }} newWindow />) as Parameters<
-                typeof addWindow
-            >[0]
-        )
+        setMixtapeDrawerOpen((prev) => !prev)
     }
 
     const handleNewMixtapeClick = () => {
@@ -567,6 +566,16 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
         setShowTrackList((prev) => !prev)
     }
 
+    useEffect(() => {
+        if (appWindow) {
+            updateWindow(appWindow, {
+                size: {
+                    width: mixtapeDrawerOpen ? 1100 : 650,
+                },
+            })
+        }
+    }, [mixtapeDrawerOpen])
+
     const currentSong = mixtapeSongs[currentSongIndex]
 
     return (
@@ -579,112 +588,114 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                 }♫ PostHog FM`}
             />
             <div className="flex items-start">
-                <div className="p-4 w-full sticky top-0">
-                    {/* Hidden YouTube player */}
-                    <div id="youtube-player" className="hidden" />
+                <div className="w-[650px] flex-shrink-0 border-r border-primary">
+                    <div className="flex items-start">
+                        <div className="p-4 w-full sticky top-0">
+                            {/* Hidden YouTube player */}
+                            <div id="youtube-player" className="hidden" />
 
-                    {/* Waveform */}
-                    <div
-                        className={`mb-4 h-20 flex items-end justify-between gap-[2px] border-2 border-primary dark:bg-primary p-2 rounded transition-colors ${
-                            isPoweredOn ? 'bg-white' : ''
-                        }`}
-                    >
-                        {waveformBars.map((height, i) => (
+                            {/* Waveform */}
                             <div
-                                key={i}
-                                className="flex-1 bg-secondary border-l border-r border-primary transition-all duration-100"
-                                style={{
-                                    height: isPlaying && isPoweredOn ? `${height}%` : '10%',
-                                    opacity: isPoweredOn ? (isPlaying ? 1 : 0.4) : 0.2,
-                                }}
-                            />
-                        ))}
-                    </div>
-
-                    {/* Main player area */}
-                    <div className="flex items-stretch gap-3 mb-4">
-                        <div className="flex flex-col items-center gap-2">
-                            {/* Power button */}
-                            <Switch label="Power" isOn={isPoweredOn} onToggle={handlePowerToggle} />
-                            {creators?.some((creator) => creator.id === user?.profile?.id) && (
-                                <div className="w-full aspect-square mt-auto">
-                                    <TapeButton
-                                        label="Edit"
-                                        icon={<IconPencil className="size-5" />}
-                                        onClick={handleEdit}
-                                        disabled={!isPoweredOn}
-                                    />
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Flippable Cassette tape */}
-                        <div className="flex-1 relative">
-                            <div className="border-2 border-primary shadow-inner aspect-[100/63] rounded-[0.5rem] bg-accent w-full h-auto absolute inset-0" />
-                            <motion.div
-                                initial={{ opacity: 0, translateY: '-100%' }}
-                                animate={{
-                                    opacity: mixtapeSongs.length > 0 ? 1 : 0,
-                                    translateY: mixtapeSongs.length > 0 ? '0%' : '-100%',
-                                }}
-                                exit={{
-                                    opacity: mixtapeSongs.length > 0 ? 0 : 1,
-                                    translateY: mixtapeSongs.length > 0 ? '-100%' : '0%',
-                                }}
-                                transition={{ type: 'tween' }}
-                                onAnimationStart={() => {
-                                    playInsertSound()
-                                }}
-                                onAnimationComplete={() => {
-                                    if (!fetchingMixtape && mixtapeSongs.length <= 0) {
-                                        setTimeout(() => {
-                                            navigate(`/fm`)
-                                        }, 300)
-                                    }
-                                }}
+                                className={`mb-4 h-20 flex items-end justify-between gap-[2px] border-2 border-primary dark:bg-primary p-2 rounded transition-colors ${
+                                    isPoweredOn ? 'bg-white' : ''
+                                }`}
                             >
-                                <div className="perspective-1000">
+                                {waveformBars.map((height, i) => (
                                     <div
-                                        className="relative w-full transition-transform duration-700 preserve-3d"
+                                        key={i}
+                                        className="flex-1 bg-secondary border-l border-r border-primary transition-all duration-100"
                                         style={{
-                                            transformStyle: 'preserve-3d',
-                                            transform: showTrackList ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                                            height: isPlaying && isPoweredOn ? `${height}%` : '10%',
+                                            opacity: isPoweredOn ? (isPlaying ? 1 : 0.4) : 0.2,
                                         }}
-                                    >
-                                        {/* Front - Cassette */}
-                                        <div
-                                            className="w-full backface-hidden"
-                                            style={{ backfaceVisibility: 'hidden' }}
-                                        >
-                                            <CassetteTape
-                                                title={currentSong?.title}
-                                                artist={currentSong?.artist}
-                                                rotation={rotation}
-                                                cassetteColor={metadata?.cassetteColor}
-                                                labelColor={metadata?.labelColor}
-                                                labelBackground={metadata?.labelBackground}
+                                    />
+                                ))}
+                            </div>
+
+                            {/* Main player area */}
+                            <div className="flex items-stretch gap-3 mb-4">
+                                <div className="flex flex-col items-center gap-2">
+                                    {/* Power button */}
+                                    <Switch label="Power" isOn={isPoweredOn} onToggle={handlePowerToggle} />
+                                    {creators?.some((creator) => creator.id === user?.profile?.id) && (
+                                        <div className="w-full aspect-square mt-auto">
+                                            <TapeButton
+                                                label="Edit"
+                                                icon={<IconPencil className="size-5" />}
+                                                onClick={handleEdit}
+                                                disabled={!isPoweredOn}
                                             />
                                         </div>
+                                    )}
+                                </div>
 
-                                        {/* Back - Track list */}
-                                        <div
-                                            className="absolute inset-0 w-full backface-hidden"
-                                            style={{
-                                                backfaceVisibility: 'hidden',
-                                                transform: 'rotateY(180deg)',
-                                            }}
-                                        >
+                                {/* Flippable Cassette tape */}
+                                <div className="flex-1 relative">
+                                    <div className="border-2 border-primary shadow-inner aspect-[100/63] rounded-[0.5rem] bg-accent w-full h-auto absolute inset-0" />
+                                    <motion.div
+                                        initial={{ opacity: 0, translateY: '-100%' }}
+                                        animate={{
+                                            opacity: mixtapeSongs.length > 0 ? 1 : 0,
+                                            translateY: mixtapeSongs.length > 0 ? '0%' : '-100%',
+                                        }}
+                                        exit={{
+                                            opacity: mixtapeSongs.length > 0 ? 0 : 1,
+                                            translateY: mixtapeSongs.length > 0 ? '-100%' : '0%',
+                                        }}
+                                        transition={{ type: 'tween' }}
+                                        onAnimationStart={() => {
+                                            playInsertSound()
+                                        }}
+                                        onAnimationComplete={() => {
+                                            if (!fetchingMixtape && mixtapeSongs.length <= 0) {
+                                                setTimeout(() => {
+                                                    navigate(`/fm`)
+                                                }, 300)
+                                            }
+                                        }}
+                                    >
+                                        <div className="perspective-1000">
                                             <div
-                                                className="w-full h-full border-2 border-primary shadow-inner aspect-[100/63] rounded overflow-hidden"
+                                                className="relative w-full transition-transform duration-700 preserve-3d"
                                                 style={{
-                                                    backgroundColor: metadata?.cassetteColor || '#e8e8e8',
+                                                    transformStyle: 'preserve-3d',
+                                                    transform: showTrackList ? 'rotateY(180deg)' : 'rotateY(0deg)',
                                                 }}
                                             >
-                                                {/* Notebook paper style */}
+                                                {/* Front - Cassette */}
                                                 <div
-                                                    className="h-full w-full relative bg-[#fffef0]"
+                                                    className="w-full backface-hidden"
+                                                    style={{ backfaceVisibility: 'hidden' }}
+                                                >
+                                                    <CassetteTape
+                                                        title={currentSong?.title}
+                                                        artist={currentSong?.artist}
+                                                        rotation={rotation}
+                                                        cassetteColor={metadata?.cassetteColor}
+                                                        labelColor={metadata?.labelColor}
+                                                        labelBackground={metadata?.labelBackground}
+                                                    />
+                                                </div>
+
+                                                {/* Back - Track list */}
+                                                <div
+                                                    className="absolute inset-0 w-full backface-hidden"
                                                     style={{
-                                                        backgroundImage: `
+                                                        backfaceVisibility: 'hidden',
+                                                        transform: 'rotateY(180deg)',
+                                                    }}
+                                                >
+                                                    <div
+                                                        className="w-full h-full border-2 border-primary shadow-inner aspect-[100/63] rounded overflow-hidden"
+                                                        style={{
+                                                            backgroundColor: metadata?.cassetteColor || '#e8e8e8',
+                                                        }}
+                                                    >
+                                                        {/* Notebook paper style */}
+                                                        <div
+                                                            className="h-full w-full relative bg-[#fffef0]"
+                                                            style={{
+                                                                backgroundImage: `
                                                         repeating-linear-gradient(
                                                             transparent,
                                                             transparent 27px,
@@ -700,141 +711,152 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                             transparent 47px
                                                         )
                                                     `,
-                                                    }}
-                                                >
-                                                    <div className="pl-[54px] pr-2 h-full overflow-y-auto">
-                                                        <div
-                                                            className="text-[13px] font-mono text-primary"
-                                                            style={{
-                                                                lineHeight: '28px',
-                                                                paddingTop: '28px',
                                                             }}
                                                         >
-                                                            {mixtapeSongs.map((song, index) => (
+                                                            <div className="pl-[54px] pr-2 h-full overflow-y-auto">
                                                                 <div
-                                                                    key={song.id}
-                                                                    className={`cursor-pointer !text-accent-dark transition-colors ${
-                                                                        index === currentSongIndex ? 'font-bold' : ''
-                                                                    }`}
-                                                                    onClick={() => {
-                                                                        if (isPoweredOn) {
-                                                                            setCurrentSongIndex(index)
-                                                                            if (
-                                                                                playerRef.current &&
-                                                                                playerReadyRef.current
-                                                                            ) {
-                                                                                playerRef.current.playVideo()
-                                                                            }
-                                                                        }
+                                                                    className="text-[13px] font-mono text-primary"
+                                                                    style={{
+                                                                        lineHeight: '28px',
+                                                                        paddingTop: '28px',
                                                                     }}
                                                                 >
-                                                                    {index + 1}. {song.artist} - {song.title}
+                                                                    {mixtapeSongs.map((song, index) => (
+                                                                        <div
+                                                                            key={song.id}
+                                                                            className={`cursor-pointer !text-accent-dark transition-colors ${
+                                                                                index === currentSongIndex
+                                                                                    ? 'font-bold'
+                                                                                    : ''
+                                                                            }`}
+                                                                            onClick={() => {
+                                                                                if (isPoweredOn) {
+                                                                                    setCurrentSongIndex(index)
+                                                                                    if (
+                                                                                        playerRef.current &&
+                                                                                        playerReadyRef.current
+                                                                                    ) {
+                                                                                        playerRef.current.playVideo()
+                                                                                    }
+                                                                                }
+                                                                            }}
+                                                                        >
+                                                                            {index + 1}. {song.artist} - {song.title}
+                                                                        </div>
+                                                                    ))}
                                                                 </div>
-                                                            ))}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 </div>
-                            </motion.div>
-                        </div>
-                        <div className="flex flex-col items-center gap-2">
-                            {/* Dance mode switch */}
-                            <Switch
-                                label={
-                                    <>
-                                        Dance <br />
-                                        mode
-                                    </>
-                                }
-                                isOn={danceMode}
-                                onToggle={handleDanceModeToggle}
-                                disabled={!isPoweredOn || !mixtapeSongs.length}
-                            />
-                            {/* Track list button */}
-                            {mixtapeSongs.length > 0 && (
-                                <div className="w-full aspect-square mt-auto">
-                                    <TapeButton
-                                        label="Track list"
-                                        icon={<IconNotebook className="size-5" />}
-                                        onClick={handleToggleTrackList}
-                                        disabled={!isPoweredOn}
-                                        isPressed={showTrackList}
+                                <div className="flex flex-col items-center gap-2">
+                                    {/* Dance mode switch */}
+                                    <Switch
+                                        label={
+                                            <>
+                                                Dance <br />
+                                                mode
+                                            </>
+                                        }
+                                        isOn={danceMode}
+                                        onToggle={handleDanceModeToggle}
+                                        disabled={!isPoweredOn || !mixtapeSongs.length}
                                     />
+                                    {/* Track list button */}
+                                    {mixtapeSongs.length > 0 && (
+                                        <div className="w-full aspect-square mt-auto">
+                                            <TapeButton
+                                                label="Track list"
+                                                icon={<IconNotebook className="size-5" />}
+                                                onClick={handleToggleTrackList}
+                                                disabled={!isPoweredOn}
+                                                isPressed={showTrackList}
+                                            />
+                                        </div>
+                                    )}
                                 </div>
-                            )}
+                            </div>
+
+                            {/* Control buttons */}
+                            <div className="gap-2 grid grid-cols-6 h-20 w-full">
+                                <TapeButton
+                                    label="Eject"
+                                    icon="⏏"
+                                    onClick={handleEject}
+                                    disabled={!isPoweredOn || !mixtapeSongs.length}
+                                />
+                                <TapeButton
+                                    label="Prev"
+                                    icon="◁◁"
+                                    onClick={handlePrev}
+                                    disabled={!isPoweredOn || !mixtapeSongs.length || rewinding}
+                                    isPressed={rewinding}
+                                />
+                                <TapeButton
+                                    label="Play"
+                                    icon="▷"
+                                    onClick={handlePlay}
+                                    disabled={
+                                        !isPoweredOn ||
+                                        isPlaying ||
+                                        !mixtapeSongs.length ||
+                                        pendingPlayerAction === 'play'
+                                    }
+                                    isPressed={isPlaying || pendingPlayerAction === 'play'}
+                                />
+                                <TapeButton
+                                    label="Pause"
+                                    icon="||"
+                                    onClick={handlePause}
+                                    disabled={!isPoweredOn || !isPlaying || !mixtapeSongs.length}
+                                />
+                                <TapeButton
+                                    label="Skip"
+                                    icon="▷▷"
+                                    onClick={handleSkip}
+                                    disabled={!isPoweredOn || !mixtapeSongs.length || fastForwarding}
+                                    isPressed={fastForwarding}
+                                />
+                                <TapeButton
+                                    label="Share"
+                                    icon={copied ? <IconCheck className="size-5" /> : '↗'}
+                                    onClick={handleShare}
+                                    disabled={!isPoweredOn || !mixtapeSongs.length}
+                                />
+                            </div>
                         </div>
                     </div>
-
-                    {/* Control buttons */}
-                    <div className="gap-2 grid grid-cols-6 h-20 w-full">
-                        <TapeButton
-                            label="Eject"
-                            icon="⏏"
-                            onClick={handleEject}
-                            disabled={!isPoweredOn || !mixtapeSongs.length}
-                        />
-                        <TapeButton
-                            label="Prev"
-                            icon="◁◁"
-                            onClick={handlePrev}
-                            disabled={!isPoweredOn || !mixtapeSongs.length || rewinding}
-                            isPressed={rewinding}
-                        />
-                        <TapeButton
-                            label="Play"
-                            icon="▷"
-                            onClick={handlePlay}
-                            disabled={
-                                !isPoweredOn || isPlaying || !mixtapeSongs.length || pendingPlayerAction === 'play'
-                            }
-                            isPressed={isPlaying || pendingPlayerAction === 'play'}
-                        />
-                        <TapeButton
-                            label="Pause"
-                            icon="||"
-                            onClick={handlePause}
-                            disabled={!isPoweredOn || !isPlaying || !mixtapeSongs.length}
-                        />
-                        <TapeButton
-                            label="Skip"
-                            icon="▷▷"
-                            onClick={handleSkip}
-                            disabled={!isPoweredOn || !mixtapeSongs.length || fastForwarding}
-                            isPressed={fastForwarding}
-                        />
-                        <TapeButton
-                            label="Share"
-                            icon={copied ? <IconCheck className="size-5" /> : '↗'}
-                            onClick={handleShare}
-                            disabled={!isPoweredOn || !mixtapeSongs.length}
-                        />
-                    </div>
-                </div>
-            </div>
-            <div className="p-3 border-t border-primary flex items-center space-x-3">
-                <div className="w-[90px] h-[80px]">
-                    <TapeButton
-                        icon={
-                            <div className="w-[70px]">
-                                <CassetteTape minimal />
+                    <div className="p-3 border-t border-primary flex items-center space-x-3">
+                        <div className="w-[90px] h-[80px]">
+                            <TapeButton
+                                icon={
+                                    <div className="w-[70px]">
+                                        <CassetteTape minimal />
+                                    </div>
+                                }
+                                label="Mixtape library"
+                                onClick={handleMixtapeLibraryClick}
+                                isPressed={mixtapeDrawerOpen}
+                            />
+                        </div>
+                        {isModerator && (
+                            <div className="w-[90px] h-[80px]">
+                                <TapeButton
+                                    icon={<IconPlus className="size-5" />}
+                                    label="Create mixtape"
+                                    onClick={handleNewMixtapeClick}
+                                />
                             </div>
-                        }
-                        label="Mixtape library"
-                        onClick={handleMixtapeLibraryClick}
-                    />
-                </div>
-                {isModerator && (
-                    <div className="w-[90px] h-[80px]">
-                        <TapeButton
-                            icon={<IconPlus className="size-5" />}
-                            label="Create mixtape"
-                            onClick={handleNewMixtapeClick}
-                        />
+                        )}
                     </div>
-                )}
+                </div>
+                <div className="w-full w-[450px] flex-shrink-0">
+                    <Mixtapes />
+                </div>
             </div>
         </div>
     )
