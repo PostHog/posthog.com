@@ -272,7 +272,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 2. Install the latest Node.js 22 (the version used by PostHog in production) with `nvm install 22`. You can start using it in the current shell with `nvm use 22`.
 
-3. Install pnpm by running `corepack enable` and then running `corepack prepare pnpm@9 --activate`. Validate the installation with `pnpm --version`.
+3. Install pnpm by running `corepack enable` and then running `corepack prepare pnpm@10 --activate`. Validate the installation with `pnpm --version`.
 
 4. Install Node packages by running `pnpm i`.
 
