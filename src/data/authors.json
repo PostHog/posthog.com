@@ -47,6 +47,14 @@
         "profile_id": 35224
     },
     {
+        "handle": "cleo-lant",
+        "name": "Cleo Lant",
+        "role": "Product Marketer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/cleolant/",
+        "profile_id": 36864
+    },
+    {
         "handle": "michael-matloka",
         "name": "Michael Matloka",
         "role": "Software Engineer",
@@ -465,9 +473,17 @@
     {
         "handle": "posthog-team",
         "name": "PostHog Team",
-        "role": "Being cool",
+        "role": "Equip every developer to build successful products",
         "link_type": "twitter",
         "link_url": "https://twitter.com/posthog",
         "profile_id": 28378
+    },
+    {
+        "handle": "oliver-browne",
+        "name": "Oliver Browne",
+        "role": "Software Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/oliver-browne-6a37a513a/",
+        "profile_id": 30942
     }
 ]

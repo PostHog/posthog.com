@@ -101,7 +101,7 @@ jobs:
                 node-version: 14
 
           - name: Install dependencies
-            run: yarn
+            run: pnpm install
 
           - name: Build and start application
             run: echo "This is where you boot your application for testing"
@@ -150,14 +150,14 @@ jobs:
               with:
                   node-version: 14
 
-            - name: Install package.json dependencies with Yarn
-              run: yarn
+            - name: Install package.json dependencies with Pnpm
+              run: pnpm
 
             - name: Check formatting with prettier
-              run: yarn prettier .
+              run: pnpm prettier .
 
             - name: Lint with ESLint
-              run: yarn eslint .
+              run: pnpm eslint .
 ```
 
 > One thing we've not covered yet is what running jobs on every PR gives us in practice.

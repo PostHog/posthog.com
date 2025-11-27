@@ -668,6 +668,40 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/changelog-video': {
+        size: {
+            min: {
+                width: 960,
+                height: 682,
+            },
+            max: {
+                width: 960,
+                height: 682,
+            },
+            fixed: false,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/videos/play': {
+        size: {
+            min: {
+                width: 960,
+                height: 480,
+            },
+            max: {
+                width: 1440,
+                height: 810,
+            },
+            fixed: false,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/sales': {
         size: {
             min: {
