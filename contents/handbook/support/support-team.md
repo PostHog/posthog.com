@@ -8,6 +8,10 @@ The <SmallTeam slug="support">support team</SmallTeam> exists to help our users 
 
 We're not a ticket-routing operation. We're a deeply technical team that takes pride in solving problems ourselves. We write code, ship fixes, update docs, and genuinely care about making our users' experience exceptional. We move fast, stay humble, and believe that great support is about empowering users, not just answering questions.
 
+## What Makes Us Great
+
+We communicate clearly and don't hide behind jargon. We're relentlessly curious - pulling at every thread when investigating an issue, and seeing the bigger picture beyond the immediate problem. We're always looking for ways to improve, whether that's our processes, our docs, or our own skills. We're thorough without being slow, thoughtful without overthinking, and we genuinely care about getting things right for our users.
+
 ## Our Values
 
 ### Take Ownership
