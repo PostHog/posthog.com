@@ -141,7 +141,7 @@ It's best that communications are shared directly from the account owner; howeve
 4. Enter the message you want to send, ensuring the formatting looks correct in the preview on the right-hand side.
 5. Ensure the Send as option is set to PostHog, not your own user (unless you want to handle 450+ potential separate threads)
 6. Click _Next_ in the top right-hand corner of the UI.
-7. Select your audience. You can use the filters to select all channels now owned by specific people, e.g., those who are currently online and communicating 1:1 with customers.
+7. Select your audience. You can use the filters to select all channels not owned by specific people, e.g., those who are currently online and communicating 1:1 with customers.
 8. Make sure you click _Add to Audience_ to add the selected channels to the broadcast.
 9. Click _Next_ in the top right-hand corner of the UI.
 10. Set the engagement notification channel to be [#support-customer-success](https://posthog.slack.com/archives/C05MUMZLC13)
