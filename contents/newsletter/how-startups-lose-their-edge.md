@@ -23,7 +23,7 @@ The problem isn’t the strategy itself. It’s that **you stop doing the things
 
 I know because *I saw this happen*. I was one of the first 30 employees at a now public tech company you’ve probably heard of. When I joined, it had something special: tight culture, developer-first mindset, and a product-led motion that got us to **hundreds of millions of annual revenue before thinking about sales**.
 
-Importantly, the founding team kept an iron grip on [who got hired](/43-lessons-about-hiring-for-startups), the bar was high, and everyone who made it through understood what it meant to be part of the culture. But you can’t scale to IPO with founders interviewing everyone. You have to let go.
+Importantly, the founding team kept an iron grip on [who got hired](/newsletter/43-lessons-about-hiring-for-startups), the bar was high, and everyone who made it through understood what it meant to be part of the culture. But you can’t scale to IPO with founders interviewing everyone. You have to let go.
 
 Culture becomes a game of telephone. The message stays mostly the same, but with each repetition, it drifts just slightly. Over years, those slight drifts compound and alter the trajectory of the company into an outcome 5-10x lower than it could have been.
 
@@ -61,15 +61,15 @@ Culture isn’t some abstract value statement printed on office walls (that’s 
 
 - When you’re 200, managers are making calls based on [what they *think* the founders would want](/blog/ceo-diary-6), filtered through their own experience and priorities.
 
-- When you’re 2,000, you have [managers managing managers](/tech-lead-failure-modes), and now you’re playing telephone across multiple layers where each person is adding their own interpretation of “what we value here.”
+- When you’re 2,000, you have [managers managing managers](/newsletter/tech-lead-failure-modes), and now you’re playing telephone across multiple layers where each person is adding their own interpretation of “what we value here.”
 
-It’s not that people are bad at their jobs or don’t care. It’s that culture is transmitted through observation and osmosis, not through [documentation](/what-nobody-tells-devs-about-docs).
+It’s not that people are bad at their jobs or don’t care. It’s that culture is transmitted through observation and osmosis, not through [documentation](/newsletter/what-nobody-tells-devs-about-docs).
 
 Across enough managers and interpretations, the culture becomes distorted. The edges get sanded down, the things that made you special start to feel risky or off-brand. Suddenly, you’re optimizing for what feels safe rather than what actually works.
 
 ## Playing not to lose
 
-There’s a scarcity mindset that creeps in [as you scale](/building-a-startup-that-scales), often without anyone noticing it’s happening. You become afraid of:
+There’s a scarcity mindset that creeps in [as you scale](/newsletter/building-a-startup-that-scales), often without anyone noticing it’s happening. You become afraid of:
 
 - Losing your culture, market position, and momentum
 - Making the wrong hire
@@ -84,7 +84,7 @@ So you get conservative in ways that feel responsible but are actually corrosive
 
 - You optimize for not-screwing-up instead of for winning, and the irony is that this is exactly how you screw up.
 
-I watched this happen to our process for building products. At the start, we would say “[we need to ship this feature](/this-is-why-youre-not-shipping),” have *maybe* one conversation, and get it done.
+I watched this happen to our process for building products. At the start, we would say “[we need to ship this feature](/newsletter/this-is-why-youre-not-shipping),” have *maybe* one conversation, and get it done.
 
 This evolved into a process of pitches, presentations, and approvals:
 
@@ -108,7 +108,7 @@ But I think there are a few things that matter:
 
 - **Understand the trickle-down effect.** Every hire you make will hire people who are slightly different from what you meant. Every layer of management adds interpretation. This is hard to solve, but promoting from within can help.
 
-- **Keep [teams small](/small-teams) and autonomous.** With fewer management layers, more of the original DNA is preserved because there are fewer layers of interpretation between the founders and the people doing the work. You can “just do it” rather than running it up the chain.
+- **Keep [teams small](/newsletter/small-teams) and autonomous.** With fewer management layers, more of the original DNA is preserved because there are fewer layers of interpretation between the founders and the people doing the work. You can “just do it” rather than running it up the chain.
 
 This means your startup is likely going to be messier and more chaotic. It’s not going to be “proper” or “grown up,” but you need to live with it to become exceptional.
 
