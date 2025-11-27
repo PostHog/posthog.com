@@ -103,7 +103,7 @@ git clone https://github.com/PostHog/posthog && cd posthog/
 
 ### Instant setup
 
-You should set your development environment up instantly using [Flox](https://flox.dev/). In particular, if you're reading this as part of your onboarding, **you are expected to use Flox**. Alternative workflows documented below are unsupported by our devex efforts, and actively discouraged.
+You should set your development environment up instantly using [Flox](https://flox.dev/). In particular, if you're reading this as part of your onboarding, **you are expected to use Flox**. Alternative workflows documented below are unsupported by our internal developer experience team, and actively discouraged.
 
 Flox is a development environment manager – it ensures we all have the same right system-level dependencies when developing PostHog. It's pretty much an npm for runtimes and libraries: `.flox/env/manifest.toml` is like `package.json`, `.flox/env/manifest.lock` is akin to `package-lock.json`, and `.flox/cache/` resembles `node_modules/`.
 
