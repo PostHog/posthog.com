@@ -94,4 +94,4 @@ End-to-end tests using [Playwright](https://playwright.dev/). Tests live in the 
 
 ### `livestream`
 
-Golang service powering the live events feed in the Activity tab.
+Golang service powering the live events feed in the **Activity** tab.
