@@ -11,8 +11,8 @@ showTitle: true
 ```
 .
 ├── bin              # Shell scripts for building, testing, and running PostHog
-├── common           # Shared code: HogQL parser, HogVM, shared UI packages
-├── ee               # Enterprise Edition features (separate license)
+├── common           # Shared code: PostHog SQL parser, HogVM, shared UI packages
+├── ee               # Enterprise platform package features (separate license)
 ├── frontend         # React/TypeScript frontend application
 │   └── src
 │       └── layout   # App layout components (navigation, sidebars)
@@ -52,7 +52,7 @@ The Django backend application. Key subdirectories:
 
 - `api` – REST API endpoints and serializers
 - `clickhouse` – ClickHouse schema definitions and migrations
-- `hogql` – HogQL query language compiler and executor
+- `hogql` – PostHog SQL query language compiler and executor
 - `models` – Django ORM models (PostgreSQL)
 - `tasks` – Celery background tasks
 
@@ -80,13 +80,13 @@ High-performance Rust services including:
 ### `common`
 
 Shared code used across the codebase:
-- `hogql_parser` – HogQL parser (C++)
+- `hogql_parser` – PostHog SQL parser (C++)
 - `hogvm` – Hog virtual machine
 - `tailwind` – Shared Tailwind configuration
 
 ### `ee`
 
-Enterprise Edition features. This directory has a [separate license](https://github.com/PostHog/posthog/blob/master/ee/LICENSE) - not MIT. For 100% FOSS code, see [PostHog/posthog-foss](https://github.com/PostHog/posthog-foss).
+Enterprise platform package features. This directory has a [separate license](https://github.com/PostHog/posthog/blob/master/ee/LICENSE) - not MIT. For 100% FOSS code, see [PostHog/posthog-foss](https://github.com/PostHog/posthog-foss).
 
 ### `playwright`
 
