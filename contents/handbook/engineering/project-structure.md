@@ -86,7 +86,7 @@ Shared code used across the codebase:
 
 ### `ee`
 
-Enterprise platform package features. This directory has a [separate license](https://github.com/PostHog/posthog/blob/master/ee/LICENSE) - not MIT. For 100% FOSS code, see [PostHog/posthog-foss](https://github.com/PostHog/posthog-foss).
+Enterprise edition licensed features. This directory has a [separate license](https://github.com/PostHog/posthog/blob/master/ee/LICENSE) - not MIT. For 100% FOSS code, see [PostHog/posthog-foss](https://github.com/PostHog/posthog-foss).
 
 ### `playwright`
 
