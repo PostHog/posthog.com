@@ -629,7 +629,11 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                     <div className="border-2 border-primary shadow-inner aspect-[100/63] rounded-[0.5rem] bg-accent w-full h-auto absolute inset-0" />
 
                                     {/* Video player overlay - separate overflow container */}
-                                    <div className="absolute inset-0 z-10 overflow-hidden rounded-md">
+                                    <div
+                                        className={`absolute inset-0 z-10 overflow-hidden rounded-md ${
+                                            showVideo ? 'pointer-events-auto' : 'pointer-events-none'
+                                        }`}
+                                    >
                                         <motion.div
                                             className="size-full bg-primary overflow-hidden"
                                             initial={{ translateY: '100%' }}
@@ -704,7 +708,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                     >
                                                         {/* Notebook paper style */}
                                                         <div
-                                                            className="relative bg-[#fffef0]"
+                                                            className="relative bg-[#fffef0] flex flex-col"
                                                             style={{
                                                                 backgroundImage: `
                                                         repeating-linear-gradient(
@@ -759,9 +763,9 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                                     }}
                                                                 >
                                                                     {mixtapeSongs.map((song, index) => (
-                                                                        <div
+                                                                        <button
                                                                             key={song.id}
-                                                                            className={`cursor-pointer !text-accent-dark transition-colors ${
+                                                                            className={`cursor-pointer !text-accent-dark transition-colors w-full text-left ${
                                                                                 index === currentSongIndex
                                                                                     ? 'font-bold'
                                                                                     : ''
@@ -779,7 +783,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                                             }}
                                                                         >
                                                                             {index + 1}. {song.title}
-                                                                        </div>
+                                                                        </button>
                                                                     ))}
                                                                 </div>
                                                             </div>
