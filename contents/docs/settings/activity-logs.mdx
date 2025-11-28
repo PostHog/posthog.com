@@ -1,0 +1,517 @@
+---
+title: Activity logs
+sidebar: Docs
+showTitle: true
+availability:
+    free: partial
+    selfServe: partial
+    enterprise: full
+    features:
+        basicLogs:
+            free: true
+            selfServe: true
+            enterprise: true
+        extendedRetention:
+            free: false
+            selfServe: false
+            boost: true
+            scale: true
+            enterprise: true
+        apiAccess:
+            free: false
+            selfServe: false
+            boost: false
+            scale: true
+            enterprise: true
+        exportCapabilities:
+            free: false
+            selfServe: false
+            boost: true
+            scale: true
+            enterprise: true
+---
+
+export const activityLogsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/activity_logs_main_light_placeholder.png"
+export const activityLogsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/activity_logs_main_dark_placeholder.png"
+export const activityLogsFilterLight = "https://res.cloudinary.com/dmukukwp6/image/upload/activity_logs_filter_light_placeholder.png"
+export const activityLogsFilterDark = "https://res.cloudinary.com/dmukukwp6/image/upload/activity_logs_filter_dark_placeholder.png"
+export const activityLogsDetailLight = "https://res.cloudinary.com/dmukukwp6/image/upload/activity_logs_detail_light_placeholder.png"
+export const activityLogsDetailDark = "https://res.cloudinary.com/dmukukwp6/image/upload/activity_logs_detail_dark_placeholder.png"
+
+Activity logs provide a comprehensive record of actions taken within your PostHog organization and its projects. This enables administrators to track user activity, maintain security compliance, investigate changes to critical resources, and support audit requirements.
+
+## What gets logged
+
+Activity logs capture events at three levels: organization, project, and resource. Each log entry records who performed an action, what changed, and when it occurred.
+
+### Organization-level events
+
+These events track changes to organization-wide settings and membership.
+
+| Event type | Description |
+| --- | --- |
+| Member invited | A new member was invited to the organization |
+| Member joined | A member accepted an invitation and joined |
+| Member removed | A member was removed from the organization |
+| Member role changed | A member's organization role was updated |
+| Role created | A new RBAC role was created |
+| Role updated | An existing role's permissions were modified |
+| Role deleted | A role was removed |
+| SSO configured | SAML or SSO settings were changed |
+| Domain verified | An authentication domain was verified |
+| Organization settings changed | Organization name, logo, or other settings were updated |
+| 2FA enforcement changed | Two-factor authentication requirements were modified |
+
+### Project-level events
+
+These events track changes within individual projects.
+
+| Event type | Description |
+| --- | --- |
+| Project created | A new project was created |
+| Project deleted | A project was deleted |
+| Project settings changed | Project configuration was modified |
+| Access control changed | Project access permissions were updated |
+| API key created | A new project API key was generated |
+| API key revoked | An API key was revoked |
+| Environment created | A new environment was created |
+| Environment deleted | An environment was deleted |
+
+### Resource-level events
+
+These events track changes to individual resources within projects.
+
+| Resource type | Tracked actions |
+| --- | --- |
+| Feature flags | Created, updated, deleted, enabled, disabled, rollout changed |
+| Experiments | Created, launched, stopped, archived, results viewed |
+| Dashboards | Created, updated, deleted, shared, access changed |
+| Insights | Created, updated, deleted, shared |
+| Surveys | Created, updated, launched, stopped, deleted |
+| Actions | Created, updated, deleted |
+| Cohorts | Created, updated, deleted |
+| Notebooks | Created, updated, deleted, shared |
+| Annotations | Created, updated, deleted |
+
+## Log entry details
+
+Each activity log entry contains the following information:
+
+| Field | Description |
+| --- | --- |
+| Timestamp | When the action occurred (UTC) |
+| Actor | The user who performed the action (name, email) |
+| Action | The type of action performed |
+| Scope | Whether this is an organization, project, or resource event |
+| Target | The resource that was affected (type, ID, name) |
+| Changes | Before and after states for modifications |
+| IP address | The IP address from which the action was performed |
+| Result | Whether the action succeeded or failed |
+
+### Example log entry
+
+Here's an example of what a log entry looks like when retrieved via the API:
+
+```json
+{
+  "id": "01234567-89ab-cdef-0123-456789abcdef",
+  "activity": "updated",
+  "scope": "FeatureFlag",
+  "item_id": "12345",
+  "detail": {
+    "name": "new-checkout-flow",
+    "short_id": "checkout-v2",
+    "changes": [
+      {
+        "field": "active",
+        "before": false,
+        "after": true
+      },
+      {
+        "field": "rollout_percentage",
+        "before": 0,
+        "after": 50
+      }
+    ]
+  },
+  "user": {
+    "id": 42,
+    "uuid": "user-uuid-here",
+    "email": "jane@example.com",
+    "first_name": "Jane",
+    "last_name": "Doe"
+  },
+  "created_at": "2024-01-15T10:30:00.000000Z",
+  "is_system": false
+}
+```
+
+## Accessing activity logs
+
+Activity logs can be accessed from the PostHog settings interface. The location depends on whether you want to view organization-level or project-level events.
+
+### Organization activity logs
+
+1. Click on **Settings** in the left sidebar
+2. Navigate to **Organization** settings
+3. Click on **Activity log**
+
+This view shows all organization-level events including member changes, role modifications, SSO configuration, and organization settings.
+
+### Project activity logs
+
+1. Click on **Settings** in the left sidebar
+2. Navigate to **Project** settings
+3. Click on **Activity log**
+
+This view shows all project-level and resource-level events for the current project.
+
+<ProductScreenshot
+    imageLight = {activityLogsLight}
+    imageDark = {activityLogsDark}
+    alt="Activity logs interface showing recent events"
+    classes="rounded"
+/>
+
+### Resource history
+
+You can also view activity logs for individual resources. When viewing a feature flag, dashboard, or other supported resource, click the **History** tab or icon to see all changes made to that specific resource.
+
+## Filtering and searching
+
+Activity logs support filtering to help you find specific events.
+
+### Available filters
+
+| Filter | Description |
+| --- | --- |
+| Date range | Filter events by time period |
+| User | Filter by the user who performed the action |
+| Action type | Filter by action (created, updated, deleted, etc.) |
+| Resource type | Filter by resource (feature flags, dashboards, etc.) |
+| Search | Free-text search across event details |
+
+<ProductScreenshot
+    imageLight = {activityLogsFilterLight}
+    imageDark = {activityLogsFilterDark}
+    alt="Activity log filters"
+    classes="rounded"
+/>
+
+### Common filter combinations
+
+**Finding who changed a specific feature flag:**
+1. Filter by resource type: Feature flags
+2. Search for the flag name or key
+3. Review the timeline of changes
+
+**Investigating access changes in the last week:**
+1. Set date range to last 7 days
+2. Filter by action type: Access control changed
+3. Review which resources had permissions modified
+
+**Auditing a specific user's activity:**
+1. Filter by user: Select the user
+2. Optionally set a date range
+3. Export results for compliance documentation
+
+## Exporting and retention
+
+### Retention periods
+
+Activity logs are retained for different periods based on your plan:
+
+| Plan | Retention period |
+| --- | --- |
+| Free / Pay-as-you-go | 7 days |
+| Boost | 30 days |
+| Scale | 30 days |
+| Enterprise | 90 days (configurable) |
+
+> **Note**: Once logs exceed the retention period, they are permanently deleted and cannot be recovered. Export your logs regularly if you need to maintain records beyond your plan's retention period.
+
+### Export options
+
+<FeatureAvailability availability={_frontmatter.availability.features.exportCapabilities} />
+
+Activity logs can be exported for offline analysis, compliance reporting, or integration with external SIEM systems.
+
+**To export activity logs:**
+
+1. Navigate to the activity logs view
+2. Apply any filters to narrow down the events you want to export
+3. Click **Export**
+4. Select your preferred format (CSV or JSON)
+5. The export file will be downloaded to your computer
+
+Exports include all log entry fields and respect any filters you have applied.
+
+## Common use cases
+
+### Investigating unauthorized access
+
+**Scenario**: You notice unexpected changes to a critical feature flag and need to determine who made the changes and when.
+
+**Steps**:
+1. Navigate to Settings → Project → Activity log
+2. Filter by resource type: Feature flags
+3. Search for the specific feature flag name
+4. Review the log entries to see who modified the flag, what changes were made, and the timestamp
+5. Check the IP address to verify the access location
+
+### Compliance audit preparation
+
+**Scenario**: Your security team needs documentation of all access control changes for a SOC 2 audit.
+
+**Steps**:
+1. Navigate to Settings → Organization → Activity log
+2. Set the date range to cover the audit period
+3. Filter by action types: Member role changed, Role created, Role updated, Access control changed
+4. Export the filtered results as CSV
+5. Provide the export to your compliance team
+
+### Tracking feature flag rollouts
+
+**Scenario**: A feature rollout caused issues and you need to identify exactly when and how the flag was changed.
+
+**Steps**:
+1. Navigate to the feature flag in question
+2. Click the **History** tab to see all changes
+3. Review the timeline of rollout percentage changes
+4. Identify which change correlates with the reported issues
+5. Contact the user who made the change for more context
+
+### Monitoring API key usage
+
+**Scenario**: You want to ensure API keys are being created and managed according to your security policies.
+
+**Steps**:
+1. Navigate to Settings → Project → Activity log
+2. Filter by action types: API key created, API key revoked
+3. Review who is creating keys and whether old keys are being properly rotated
+4. Export regular reports for security review
+
+## Feature availability
+
+### Free / Pay-as-you-go
+
+Basic activity logging is available on all plans with limited retention.
+
+**What's included:**
+- View activity logs in the UI
+- 7-day retention
+- Basic filtering by date and user
+
+### Boost or Scale
+
+<FeatureAvailability availability={_frontmatter.availability.features.extendedRetention} />
+
+Extended retention and export capabilities are included with platform packages.
+
+**What's included:**
+- Everything in Free
+- 30-day retention
+- Export to CSV and JSON
+- Advanced filtering by resource type and action
+- API access (Scale only)
+
+### Enterprise
+
+Enterprise plans include full activity logging capabilities with configurable retention.
+
+**What's included:**
+- Everything in Boost/Scale
+- 90-day retention (configurable up to 1 year)
+- Full API access for programmatic log retrieval
+- Integration support for external SIEM systems
+- Priority support for compliance requirements
+
+## API support
+
+<FeatureAvailability availability={_frontmatter.availability.features.apiAccess} />
+
+PostHog provides API endpoints for programmatic access to activity logs. This enables integration with external monitoring systems, custom dashboards, and automated compliance workflows.
+
+### Authentication
+
+To use the activity log API endpoints, you need to authenticate using one of PostHog's [authentication methods](/docs/api). Personal API keys require specific scopes:
+
+- **Read operations**: `activity_log:read` scope
+
+### Available endpoints
+
+#### Organization activity logs
+
+**Endpoint**: `GET /api/organizations/@current/activity_log`
+
+Retrieves activity logs for the current organization. This includes organization-level events and aggregated project events.
+
+#### Project activity logs
+
+**Endpoint**: `GET /api/projects/@current/activity_log`
+
+Retrieves activity logs for the current project. This includes project-level and resource-level events.
+
+### Query parameters
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `scope` | string | Filter by scope (e.g., `FeatureFlag`, `Dashboard`, `Experiment`) |
+| `user` | integer | Filter by user ID |
+| `activity` | string | Filter by action type (e.g., `created`, `updated`, `deleted`) |
+| `search` | string | Free-text search across event details |
+| `after` | datetime | Return events after this timestamp (ISO 8601) |
+| `before` | datetime | Return events before this timestamp (ISO 8601) |
+| `limit` | integer | Number of results to return (default: 100, max: 1000) |
+| `offset` | integer | Pagination offset |
+
+### Request and response formats
+
+#### Retrieving organization activity logs
+
+**Request**: `GET /api/organizations/@current/activity_log?limit=10`
+
+**Response**:
+```json
+{
+  "results": [
+    {
+      "id": "01234567-89ab-cdef-0123-456789abcdef",
+      "activity": "member_invited",
+      "scope": "OrganizationMember",
+      "item_id": "member-uuid",
+      "detail": {
+        "name": "Jane Doe",
+        "email": "jane@example.com",
+        "role": "member"
+      },
+      "user": {
+        "id": 1,
+        "uuid": "admin-uuid",
+        "email": "admin@example.com",
+        "first_name": "Admin",
+        "last_name": "User"
+      },
+      "created_at": "2024-01-15T10:30:00.000000Z",
+      "is_system": false
+    }
+  ],
+  "next": "https://app.posthog.com/api/organizations/@current/activity_log?offset=10&limit=10",
+  "previous": null,
+  "count": 150
+}
+```
+
+#### Retrieving project activity logs with filters
+
+**Request**: `GET /api/projects/@current/activity_log?scope=FeatureFlag&activity=updated&limit=5`
+
+**Response**:
+```json
+{
+  "results": [
+    {
+      "id": "fedcba98-7654-3210-fedc-ba9876543210",
+      "activity": "updated",
+      "scope": "FeatureFlag",
+      "item_id": "12345",
+      "detail": {
+        "name": "new-checkout-flow",
+        "short_id": "checkout-v2",
+        "changes": [
+          {
+            "field": "active",
+            "before": false,
+            "after": true
+          }
+        ]
+      },
+      "user": {
+        "id": 42,
+        "uuid": "user-uuid",
+        "email": "developer@example.com",
+        "first_name": "Dev",
+        "last_name": "User"
+      },
+      "created_at": "2024-01-14T15:45:00.000000Z",
+      "is_system": false
+    }
+  ],
+  "next": null,
+  "previous": null,
+  "count": 1
+}
+```
+
+### Code examples
+
+**Python example using requests:**
+
+```python
+import requests
+
+api_key = "phx_your_personal_api_key"
+base_url = "https://app.posthog.com"
+
+headers = {
+    "Authorization": f"Bearer {api_key}"
+}
+
+# Get recent feature flag changes
+response = requests.get(
+    f"{base_url}/api/projects/@current/activity_log",
+    headers=headers,
+    params={
+        "scope": "FeatureFlag",
+        "limit": 50
+    }
+)
+
+logs = response.json()
+for entry in logs["results"]:
+    print(f"{entry['created_at']}: {entry['user']['email']} {entry['activity']} {entry['detail'].get('name', 'N/A')}")
+```
+
+**cURL example:**
+
+```bash
+curl -X GET "https://app.posthog.com/api/organizations/@current/activity_log?limit=10" \
+  -H "Authorization: Bearer phx_your_personal_api_key"
+```
+
+## Security and privacy considerations
+
+### Who can view activity logs
+
+Access to activity logs is controlled by organization and project roles:
+
+| Role | Organization logs | Project logs |
+| --- | --- | --- |
+| Member | <span className="text-red text-lg">✖</span> | <span className="text-red text-lg">✖</span> |
+| Project Admin | <span className="text-red text-lg">✖</span> | <span className="text-green text-lg">✔</span> |
+| Organization Admin | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
+| Organization Owner | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
+
+### What is not logged
+
+To protect user privacy and reduce noise, the following actions are not recorded in activity logs:
+
+- Query executions and data views (these don't modify state)
+- Session replay views
+- Dashboard views (only modifications are logged)
+- Failed login attempts (handled separately in authentication logs)
+- Event ingestion and data capture
+
+### Data residency
+
+Activity logs follow the same data residency rules as your PostHog instance:
+
+- **US Cloud**: Logs are stored in US data centers
+- **EU Cloud**: Logs are stored in EU data centers
+- **Self-hosted**: Logs are stored in your own infrastructure
+
+### Log integrity
+
+Activity logs are append-only and cannot be modified or deleted by users. This ensures the integrity of the audit trail for compliance purposes.
+
+> **Important**: Activity logs are retained according to your plan's retention period. Once logs are deleted due to retention policies, they cannot be recovered. If you require long-term log retention for compliance, export logs regularly or upgrade to an Enterprise plan with extended retention.
