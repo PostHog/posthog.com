@@ -173,4 +173,4 @@ This process creates enough direction to make both the company and the small tea
 
 5. **Being dependent on other teams.** I've found that almost every time a goal is dependent on another team, it gets delayed or doesn't get done. The beauty of small teams is that they are autonomous. Dependency breaks this. Flag these in your plans before they become a problem.
 
-<NewsletterCTA />
+<NewsletterForm />
