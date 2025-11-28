@@ -46,6 +46,7 @@ interface SortableTrackProps {
 function SortableTrack({ track, index, onRemove, onChange, onTitleFetch }: SortableTrackProps) {
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: track.id })
     const [isFetchingTitle, setIsFetchingTitle] = React.useState(false)
+    const [fetchedTitle, setFetchedTitle] = React.useState(false)
     const playerRef = React.useRef<YTPlayer | null>(null)
 
     const fetchYouTubeTitle = React.useCallback(
@@ -132,8 +133,9 @@ function SortableTrack({ track, index, onRemove, onChange, onTitleFetch }: Sorta
     // Fetch title when YouTube URL changes
     React.useEffect(() => {
         // Only fetch if we have a URL and no title
-        if (track.youtubeUrl && !track.title) {
+        if (!fetchedTitle && track.youtubeUrl && !track.title) {
             debouncedFetchTitle(track.youtubeUrl)
+            setFetchedTitle(true)
         }
 
         return () => {
@@ -191,7 +193,7 @@ function SortableTrack({ track, index, onRemove, onChange, onTitleFetch }: Sorta
                     direction="column"
                     value={track.title}
                     onChange={onChange}
-                    placeholder={isFetchingTitle ? 'Fetching title...' : 'Come Together - The Beatles'}
+                    placeholder={isFetchingTitle ? 'Fetching title...' : 'The Beatles - Come Together'}
                     disabled={isFetchingTitle}
                 />
             </Fieldset>
