@@ -21,9 +21,9 @@ tags:
 
 ![Organizing fantastic amounts of data](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/519290681_b3c074ed_f976_4e91_8c37_498387c9dbe1_a48312c745.png)
 
-We have tons of user behavior data - what pages they visit, what buttons they click, and so, stored as sessions. And by tons I mean billions of events and terabytes of stored Replay snapshots. The problem is obvious - there are too many user sessions to watch manually. So, we created a tool to watch them for you and highlight the issues. It's called Session summaries, we release it in beta today, and you can use it right now for free with PostHog AI.
+-----
 
-![Session group summary](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/group_report_placeholder_716229a677.png)
+We have tons of user behavior data - what pages they visit, what buttons they click, and so, stored as sessions. And by tons I mean billions of events and terabytes of stored Replay snapshots. The problem is obvious - there are too many user sessions to watch manually. So, we created a tool to watch them for you and highlight the issues. It's called Session summaries, we release it in beta today, and you can use it right now for free with PostHog AI.
 
 Here I'll list step-by-step what we learned, where we messed up, and lots of practical tips on how to make user behavior analysis to work in production.
 
@@ -33,7 +33,7 @@ Here I'll list step-by-step what we learned, where we messed up, and lots of pra
 
 Let's forget about scaling for a moment, and focus just on a single user session - user visited a website or app, navigated a bit, did something useful, and left. The logic seems straightforward - take all the session events, send to LLM, get the summary.
 
-![Single session summary](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/modal_with_single_session_report_placeholder_bf0a38b6f8.png)
+![Single session summary](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_11_28_at_23_08_45_da3c208641.png)
 
 > (under the image text) _Here's how you can get a summary of a single session from chat, or Replay player_
 
@@ -77,7 +77,7 @@ Even with noise reduction, the core problem remained - we couldn't be sure if th
 
 {{ scheme/graph of the video validation logic }}
 
-> (under the image text) _For each blocking issue, we generate a short video clip and ask the multi-modal LLM to verify what actually happened_
+![Video validation](https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/video_transcription_f447cd8f2a.jpeg)
 
 When the single-session summary flags something as a "blocking error" - an exception that supposedly prevented the user from completing their goal - we don't trust it blindly. Instead, we:
 
