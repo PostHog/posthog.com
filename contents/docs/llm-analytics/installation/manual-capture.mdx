@@ -2,22 +2,13 @@
 title: Manual capture
 ---
 
-import { EmbeddingEvent } from "onboarding/llm-analytics/_snippets/embedding-event.tsx"
-import { GenerationEvent } from "onboarding/llm-analytics/_snippets/generation-event.tsx"
-import { TraceEvent } from "onboarding/llm-analytics/_snippets/trace-event.tsx"
-import { SpanEvent } from "onboarding/llm-analytics/_snippets/span-event.tsx"
-
 import { ManualInstallation } from 'onboarding/llm-analytics/manual.tsx'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
+import GenerationEvent from '../_snippets/generation-event.mdx'
+import TraceEvent from '../_snippets/trace-event.mdx'
+import SpanEvent from '../_snippets/span-event.mdx'
+import EmbeddingEvent from '../_snippets/embedding-event.mdx'
 
-
-export const snippets = {
-    "GenerationEvent": GenerationEvent,
-    "TraceEvent": TraceEvent,
-    "SpanEvent": SpanEvent,
-    "EmbeddingEvent": EmbeddingEvent,
-}
-
-<OnboardingContentWrapper snippets={snippets}>
+<OnboardingContentWrapper snippets={{ GenerationEvent, TraceEvent, SpanEvent, EmbeddingEvent }}>
     <ManualInstallation />
 </OnboardingContentWrapper>
