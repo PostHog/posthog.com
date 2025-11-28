@@ -630,7 +630,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
 
                                     {/* Video player overlay - separate overflow container */}
                                     <div
-                                        className={`absolute inset-0 z-10 overflow-hidden rounded-md ${
+                                        className={`absolute inset-0 z-10 overflow-hidden rounded-[0.5rem] ${
                                             showVideo ? 'pointer-events-auto' : 'pointer-events-none'
                                         }`}
                                     >
@@ -701,7 +701,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                     }}
                                                 >
                                                     <div
-                                                        className="w-full h-full border-2 border-primary shadow-inner aspect-[100/63] rounded overflow-hidden"
+                                                        className="w-full h-full border-2 border-primary shadow-inner aspect-[100/63] rounded-[0.5rem] overflow-hidden"
                                                         style={{
                                                             backgroundColor: metadata?.cassetteColor || '#e8e8e8',
                                                         }}
