@@ -638,7 +638,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                             className="size-full bg-primary overflow-hidden"
                                             initial={{ translateY: '100%' }}
                                             animate={{
-                                                translateY: showVideo ? '0%' : '100%',
+                                                translateY: showVideo && mixtapeSongs.length > 0 ? '0%' : '100%',
                                             }}
                                             transition={{ type: 'tween' }}
                                         >

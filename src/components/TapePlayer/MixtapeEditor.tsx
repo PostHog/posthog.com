@@ -46,7 +46,7 @@ interface SortableTrackProps {
 function SortableTrack({ track, index, onRemove, onChange, onTitleFetch }: SortableTrackProps) {
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: track.id })
     const [isFetchingTitle, setIsFetchingTitle] = React.useState(false)
-    const [fetchedTitle, setFetchedTitle] = React.useState(false)
+    const [fetchedTitle, setFetchedTitle] = React.useState(!!track.title)
     const playerRef = React.useRef<YTPlayer | null>(null)
 
     const fetchYouTubeTitle = React.useCallback(
@@ -119,6 +119,8 @@ function SortableTrack({ track, index, onRemove, onChange, onTitleFetch }: Sorta
             } catch (error) {
                 console.error('Error loading YouTube API:', error)
                 setIsFetchingTitle(false)
+            } finally {
+                setFetchedTitle(true)
             }
         },
         [track.id, onTitleFetch, isFetchingTitle]
@@ -135,7 +137,6 @@ function SortableTrack({ track, index, onRemove, onChange, onTitleFetch }: Sorta
         // Only fetch if we have a URL and no title
         if (!fetchedTitle && track.youtubeUrl && !track.title) {
             debouncedFetchTitle(track.youtubeUrl)
-            setFetchedTitle(true)
         }
 
         return () => {
@@ -195,6 +196,18 @@ function SortableTrack({ track, index, onRemove, onChange, onTitleFetch }: Sorta
                     onChange={onChange}
                     placeholder={isFetchingTitle ? 'Fetching title...' : 'The Beatles - Come Together'}
                     disabled={isFetchingTitle}
+                    actionButton={
+                        fetchedTitle
+                            ? {
+                                  label: isFetchingTitle ? 'Fetching...' : 'Fetch from YouTube',
+                                  onClick: () => {
+                                      setFetchedTitle(false)
+                                      fetchYouTubeTitle(track.youtubeUrl)
+                                  },
+                                  disabled: isFetchingTitle || !track.youtubeUrl,
+                              }
+                            : undefined
+                    }
                 />
             </Fieldset>
         </div>
