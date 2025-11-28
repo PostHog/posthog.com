@@ -80,4 +80,4 @@ We default to open but when adding a new feature we should consider if it should
 
 All the open source code is copied to [the posthog-foss repo](https://github.com/posthog/posthog-foss) with the `ee` code stripped out. You need to consider whether your code will work if imports to `ee` are unavailable.
 
-<!-- Sync note: This file is also copied to posthog/posthog/.claude/commands/conventions.md for Claude Code. When updating this file, please also update the copy there. -->
+> Sync note: This file is also copied to posthog/posthog/.claude/commands/conventions.md for Claude Code. When updating this file, please also update the copy there.
