@@ -604,7 +604,15 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                             </OSButton>
                         </div>
                     </Fieldset>
-                    <Fieldset legend="Genres" className="mb-0">
+                    <Fieldset
+                        legend={
+                            <span className="flex items-baseline gap-1">
+                                <span>Genres</span>
+                                <span className="text-xs text-secondary">(Optional)</span>
+                            </span>
+                        }
+                        className="mb-0"
+                    >
                         <CreatableMultiSelect
                             label="Genres"
                             placeholder="Add genres..."
