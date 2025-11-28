@@ -75,8 +75,6 @@ Fast-growing products (startups specifically) have a bad habit of generating lot
 
 Even with noise reduction, the core problem remained - we couldn't be sure if the issues LLM highlighted actually impacted users. A TypeError in logs looks scary, but if a retry succeeded in 200ms, the user never noticed. But what if we generate a video of the session? What if we could see what the user saw?
 
-{{ scheme/graph of the video validation logic }}
-
 ![Video validation](https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/video_transcription_f447cd8f2a.jpeg)
 
 When the single-session summary flags something as a "blocking error" - an exception that supposedly prevented the user from completing their goal - we don't trust it blindly. Instead, we:
