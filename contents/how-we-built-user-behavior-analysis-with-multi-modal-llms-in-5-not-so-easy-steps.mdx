@@ -8,7 +8,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/519290681_b3c074ed_f976_4e91_8c37_498387c9dbe1_a48312c745.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/519290681_b3c074ed_f976_4e91_8c37_498387c9dbe1_a48312c745.png
 featuredImageType: Organizing fantastic amounts of data
 featuredImageCaption: todo-add-caption
 category: PostHog news
@@ -25,7 +25,7 @@ So, we created a tool to watch and analyze user sessions. It highlights the issu
 
 Here's a quick demo of how it works:
 
-![Video placeholder](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_11_29_at_19_06_21_13ff31bd67.png)
+![Video placeholder](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_11_29_at_19_06_21_13ff31bd67.png)
 
 ---
 
@@ -37,7 +37,7 @@ In this post, I'll list step by step what we learned, where we messed up, and lo
 
 Let's forget about scaling for a moment and focus just on a single user session: a user visited a website or app, navigated a bit, did something useful, and left. The logic seems straightforward: take all the session events, send them to the LLM, and get the summary.
 
-![Single session summary](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_11_28_at_23_08_45_da3c208641.png)
+![Single session summary](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_11_28_at_23_08_45_da3c208641.png)
 > _Here's how you can get a summary of a single session from chat, or Replay player_
 
 However...
@@ -125,7 +125,7 @@ Even with all the optimizations above, video files add up. A 10-second clip at 1
 
 A single session summary is useful enough, true, but watching one session at a time doesn't solve the original problem - there are thousands of sessions, and we need to find issues across them. As it's a beta, we decided to start small, with 100-session batches. It won't cover all the sessions, but it can cover a good enough sample (or a specific org), and already saves tons of time.
 
-![Session group summary](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_11_28_at_23_13_11_203c4282d4.png)
+![Session group summary](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_11_28_at_23_13_11_203c4282d4.png)
 > _You can check the pattern based on severity and issue types_
 
 The session group summary surfaces patterns across sessions, including severity, the number of affected sessions, and specific examples. The hard part, obviously, is how to extract these patterns.
@@ -144,7 +144,7 @@ We use a four-phase pipeline instead of a single prompt:
 3. Combine patterns extracted from each chunk by either joining similar ones or extending the list
 4. Iterate over chunks of single-session summaries to assign events back to patterns for concrete examples
 
-![Four-phase pipeline](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/78071c82_b7bf_4883_b806_2a0fc1aa72db_06154e7b68.jpeg)
+![Four-phase pipeline](https://res.cloudinary.com/dmukukwp6/image/upload/78071c82_b7bf_4883_b806_2a0fc1aa72db_06154e7b68.jpeg)
 
 ### Crying wolf effect (now with patterns)
 
@@ -174,7 +174,7 @@ To make it work, we needed a way to easily display the whole story to the user a
 
 Now we have a pipeline that works: single-session summaries, video validation, and pattern extraction across 100 sessions. The problem? It's fragile. We're making ~150 LLM calls per report, any of which can fail. Timeouts, rate limits, malformed responses, and hallucinated output that fails validation. If the whole thing falls apart because of one bad response, the feature is unusable.
 
-![Temporal logic](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_11_29_at_20_52_52_3177a60a33.png)
+![Temporal logic](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_11_29_at_20_52_52_3177a60a33.png)
 > __Temporal workflow logic on a small sample of sessions__
 
 ### LLM calls fail, and that's fine
