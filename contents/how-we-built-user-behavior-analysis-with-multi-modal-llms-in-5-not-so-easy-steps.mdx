@@ -176,10 +176,8 @@ To make it work, we needed a way to easily display the whole story to the user a
 
 Now we have a pipeline that works: single-session summaries, video validation, and pattern extraction across 100 sessions. The problem? It's fragile. We're making ~150 LLM calls per report, any of which can fail. Timeouts, rate limits, malformed responses, and hallucinated output that fails validation. If the whole thing falls apart because of one bad response, the feature is unusable.
 
-{{ diagram of the Temporal workflow architecture }}
-
 ![Temporal logic](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_11_29_at_20_52_52_3177a60a33.png)
-> __Example of the Temporal workflow logic on a small sample of sessions__
+> __Temporal workflow logic on a small sample of sessions__
 
 ### LLM calls fail, and that's fine
 
