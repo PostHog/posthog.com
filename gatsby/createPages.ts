@@ -51,6 +51,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     frontmatter {
                         template
                     }
+                    parent {
+                        ... on File {
+                            sourceInstanceName
+                        }
+                    }
                 }
             }
             handbook: allMdx(
@@ -510,6 +515,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     result.data.allMdx.nodes.forEach((node) => {
+        if (node.parent?.sourceInstanceName === 'posthog-main-repo') return
         createPage({
             path: replacePath(node.slug),
             component: PlainTemplate,

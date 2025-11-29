@@ -83,6 +83,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/google-ads',
                 },
                 {
+                    name: 'Bing Ads',
+                    url: '/docs/cdp/sources/bing-ads',
+                },
+                {
                     name: 'LinkedIn Ads',
                     url: '/docs/cdp/sources/linkedin-ads',
                 },
@@ -1266,6 +1270,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/new-hire-onboarding',
                     },
                     {
+                        name: 'How we work',
+                        url: '/handbook/growth/sales/how-we-work',
+                    },
+                    {
                         name: 'Why buy PostHog',
                         url: '/handbook/growth/sales/why-buy-posthog',
                     },
@@ -1324,8 +1332,8 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/utilization-by-business-type',
                     },
                     {
-                        name: 'How we work',
-                        url: '/handbook/growth/sales/how-we-work',
+                        name: 'Professional services',
+                        url: '/handbook/growth/sales/professional-services',
                     },
                     {
                         name: 'Hogpatch',
@@ -1377,6 +1385,10 @@ export const handbookSidebar = [
                         name: 'Error tracking cross-sell',
                         url: '/handbook/cs-and-onboarding/error-tracking-cross-sell',
                     },
+                    {
+                        name: 'Customer industry segments',
+                        url: '/handbook/cs-and-onboarding/customer-industry-segments',
+                    },
                 ],
             },
             {
@@ -1386,10 +1398,6 @@ export const handbookSidebar = [
                     {
                         name: 'Onboarding team',
                         url: '/handbook/onboarding/onboarding-team',
-                    },
-                    {
-                        name: 'YC onboarding',
-                        url: '/handbook/growth/sales/yc-onboarding',
                     },
                     {
                         name: 'Onboarding program',
@@ -2495,13 +2503,9 @@ export const docsMenu = {
                 },
                 {
                     name: 'Tools and features',
-                    url: '/docs/posthog-ai',
+                    url: '/docs/toolbar',
                     icon: 'IconToolbar',
                     children: [
-                        {
-                            name: 'PostHog AI',
-                            url: '/docs/posthog-ai',
-                        },
                         {
                             name: 'Toolbar',
                             url: '/docs/toolbar',
@@ -2566,7 +2570,7 @@ export const docsMenu = {
                             url: '/docs/settings/access-control',
                         },
                         {
-                            name: 'SSO & SAML',
+                            name: 'SSO, SAML, & SCIM',
                             url: '/docs/settings/sso',
                         },
                         {
@@ -3914,6 +3918,20 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Group exceptions into issues',
+                    url: '/docs/error-tracking/grouping-issues',
+                    icon: 'IconList',
+                    color: 'yellow',
+                    featured: true,
+                },
+                {
+                    name: 'Monitor and search issues',
+                    url: '/docs/error-tracking/monitoring',
+                    icon: 'IconSearch',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
                     name: 'Manage and resolve issues',
                     url: '/docs/error-tracking/managing-issues',
                     icon: 'IconDashboard',
@@ -3926,29 +3944,12 @@ export const docsMenu = {
                     icon: 'IconUser',
                     color: 'blue',
                     featured: true,
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/error-tracking/assigning-issues',
-                        },
-                        {
-                            name: 'Track in GitHub and Linear',
-                            url: '/docs/error-tracking/external-tracking',
-                        },
-                    ],
                 },
                 {
-                    name: 'Group exceptions into issues',
-                    url: '/docs/error-tracking/grouping-issues',
-                    icon: 'IconList',
-                    color: 'yellow',
-                    featured: true,
-                },
-                {
-                    name: 'Monitor and search issues',
-                    url: '/docs/error-tracking/monitoring',
-                    icon: 'IconSearch',
-                    color: 'seagreen',
+                    name: 'Set up integrations',
+                    url: '/docs/error-tracking/integrations',
+                    icon: 'IconApps',
+                    color: 'green',
                     featured: true,
                 },
                 {
@@ -4181,6 +4182,10 @@ export const docsMenu = {
                         {
                             name: 'Google Ads',
                             url: '/docs/data-warehouse/sources/google-ads',
+                        },
+                        {
+                            name: 'Bing Ads',
+                            url: '/docs/data-warehouse/sources/bing-ads',
                         },
                         {
                             name: 'LinkedIn Ads',
@@ -4692,8 +4697,8 @@ export const docsMenu = {
         },
         {
             name: 'PostHog AI',
-            icon: 'IconLogomark',
-            color: 'black',
+            icon: 'IconSparkles',
+            color: 'blue',
             url: '/docs/posthog-ai',
             description: 'AI-powered product analyst and assistant',
             children: [
@@ -4708,20 +4713,82 @@ export const docsMenu = {
                 },
                 {
                     name: 'Getting started',
-                    url: '/docs/posthog-ai#how-do-i-access-posthog-ai',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/posthog-ai/start-here',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
                 },
                 {
-                    name: 'Data access',
-                    url: '/docs/posthog-ai#what-access-does-posthog-ai-have-to-my-data',
-                    icon: 'IconDatabase',
+                    name: 'Allow access',
+                    url: '/docs/posthog-ai/allow-access',
+                    icon: 'IconCheckCircle',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'Edit memory',
+                    url: '/docs/posthog-ai/edit-memory',
+                    icon: 'IconMemory',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Features',
+                },
+                {
+                    name: 'Platform and chat UI',
+                    url: '/docs/posthog-ai/platform-and-chat-ui',
+                    icon: 'IconLlmPromptManagement',
                     color: 'orange',
                 },
                 {
-                    name: 'Security',
-                    url: '/docs/posthog-ai#is-my-data-shared-with-third-parties',
+                    name: 'Context and commands',
+                    url: '/docs/posthog-ai/context-and-commands',
+                    icon: 'IconChat',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Tools and capabilities',
+                    url: '/docs/posthog-ai/tools',
+                    icon: 'IconWrench',
+                    color: 'blue',
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Example prompts',
+                    url: '/docs/posthog-ai/example-prompts',
+                    icon: 'IconShield',
+                    color: 'red',
+                },
+                {
+                    name: 'Write and edit SQL',
+                    url: '/docs/posthog-ai/write-and-edit-sql',
+                    icon: 'IconShield',
+                    color: 'red',
+                },
+                {
+                    name: 'Investigate web traffic',
+                    url: '/docs/posthog-ai/investigate-web-traffic',
+                    icon: 'IconShield',
+                    color: 'red',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/posthog-ai/pricing',
+                    icon: 'IconShield',
+                    color: 'red',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/posthog-ai/faq',
                     icon: 'IconShield',
                     color: 'red',
                 },
@@ -4998,8 +5065,8 @@ export const productMenu = {
         },
         {
             name: 'PostHog AI',
-            icon: 'IconMagicWand',
-            color: 'purple',
+            icon: 'IconLogomark',
+            color: 'black',
             url: '/ai',
         },
         {

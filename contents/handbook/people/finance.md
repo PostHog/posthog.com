@@ -23,4 +23,4 @@ This is how we think about financing PostHog as a business:
 
 ## Finance runbooks
 
-These can be found in the `company-internal` repo [here](https://github.com/PostHog/company-internal/tree/master/finance). 
+These can be found in the `company-internal` repo within the [finance directory](https://github.com/PostHog/company-internal/tree/master/finance).
