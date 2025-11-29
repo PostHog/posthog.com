@@ -197,7 +197,7 @@ Temporal is great for orchestrating complex workflows, but it has limits. Event 
 - Gzip compression before storing. Large JSON summaries compress well, and Redis memory isn't free.
 - Clear TTLs (24 hours) so we're not paying for stale data, but long enough to retry failed workflows without re-fetching everything.
 
-## Retries shouldn't redo everything
+### Retries shouldn't redo everything
 
 A pattern extraction call fails after we've already summarized 100 sessions. Do we start over? That's 100 wasted LLM calls, plus minutes of user wait time. The pipeline has natural checkpoints - we should use them.
 
