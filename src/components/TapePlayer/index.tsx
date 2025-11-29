@@ -891,7 +891,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                         {isModerator && (
                             <div className="w-[90px] h-[80px]">
                                 <TapeButton
-                                    icon={<IconPlus className="size-5" />}
+                                    icon={<IconPlus className="size-6" />}
                                     label="Create mixtape"
                                     onClick={handleNewMixtapeClick}
                                 />
