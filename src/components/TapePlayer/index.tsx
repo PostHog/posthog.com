@@ -304,11 +304,15 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                     // Update playing state based on YouTube player state
                     if (event.data === window.YT.PlayerState.PLAYING) {
                         setIsPlaying(true)
-                    } else if (
-                        event.data === window.YT.PlayerState.PAUSED ||
-                        event.data === window.YT.PlayerState.ENDED
-                    ) {
+                    } else if (event.data === window.YT.PlayerState.PAUSED) {
                         setIsPlaying(false)
+                    } else if (event.data === window.YT.PlayerState.ENDED) {
+                        setIsPlaying(false)
+                        // Auto-advance to next track
+                        setCurrentSongIndex((prev) => {
+                            const nextIndex = prev === mixtapeSongs.length - 1 ? 0 : prev + 1
+                            return nextIndex
+                        })
                     }
                 },
             },
@@ -672,7 +676,9 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                     />
                                                     <div
                                                         className={`absolute inset-0 z-10 overflow-hidden rounded-[0.5rem] ${
-                                                            showVideo ? 'pointer-events-auto' : 'pointer-events-none'
+                                                            showVideo && !showTrackList
+                                                                ? 'pointer-events-auto'
+                                                                : 'pointer-events-none'
                                                         }`}
                                                     >
                                                         <motion.div
