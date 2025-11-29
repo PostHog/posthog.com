@@ -33,7 +33,7 @@ In this post, I'll list step by step what we learned, where we messed up, and lo
 
 ## Step 1: "Analyzing a single user session should be easy"
 
-Let's forget about scaling for a moment and focus just on a single user session: the user visited a website or app, navigated a bit, did something useful, and left. The logic seems straightforward: take all the session events, send them to the LLM, and get the summary.
+Let's forget about scaling for a moment and focus just on a single user session: a user visited a website or app, navigated a bit, did something useful, and left. The logic seems straightforward: take all the session events, send them to the LLM, and get the summary.
 
 ![Single session summary](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_11_28_at_23_08_45_da3c208641.png)
 > _Here's how you can get a summary of a single session from chat, or Replay player_
@@ -46,7 +46,10 @@ Usually, each user-generated event has lots of metadata attached to it. User inf
 
 **Our approach:**
 
-- We start with the "what I need 100%" approach, keeping a minimal set of events and fields, adding new ones only if they increase the quality of the summary.- Mappings for everything. If event data includes URLs, we use a `url_N` alias and attach a mapping. Same for tab IDs, and any repeating parameters.- CSV input. Neither JSON nor TOON (heh) will provide the same generation quality per input token.- We don't return JSON either. If it works with free text - awesome, if not - we return YAML or CSV.
+- We start with the "what I need 100%" approach, keeping a minimal set of events and fields, adding new ones only if they increase the quality of the summary.
+- Mappings for everything. If event data includes URLs, we use a `url_N` alias and attach a mapping. Same for tab IDs, and any repeating parameters.
+- CSV input. Neither JSON nor TOON (heh) will provide the same generation quality per input token.
+- We don't return JSON either. If it works with free text - awesome, if not - we return YAML or CSV.
 
 ![Inputs](https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/init_single_session_schema_0c00da4398.jpeg)
 > _Carefully select what data goes into the pipeline_
@@ -57,14 +60,17 @@ If the user spent multiple hours on the website, their session could be huge. If
 
 **Our approach:**
 
-- As stupid as it sounds, we process the data for the entire session in one large call, so the LLM has full context.- If you must segment, go sequential. When analyzing segment #2, pass the context from segment #1. You'll still lose the "what happened next" context, and it'll be slow, but it's still better than pure parallel.- Hope that users are ok with waiting for a couple of minutes. Using faster models (like OpenAI `nano` ones) can allow streaming the summary after 10-15s, but thinking models on "high" provide better results quality-wise, and quality is the goal.
+- As stupid as it sounds, we process the data for the entire session in one large call, so the LLM has full context.
+- If you must segment, go sequential. When analyzing segment #2, pass the context from segment #1. You'll still lose the "what happened next" context, and it'll be slow, but it's still better than pure parallel.
+- Hope that users are ok with waiting for a couple of minutes. Using faster models (like OpenAI `nano` ones) can allow streaming the summary after 10-15s, but thinking models on "high" provide better results quality-wise, and quality is the goal.
 
 ### Crying wolf effect
 
 Fast-growing products (startups specifically) have a bad habit of generating lots of exceptions, especially frontend ones. LLM sees them, panics, and generates a summary of the session in which the user completely failed on all their goals. In reality, the user successfully got what they came for and didn't even notice these exceptions.
 
 **Our approach:**
-- We programmatically pre-filter events that look like exceptions, especially if one causes multiple others as an avalanche, and they create a context that LLM can't ignore. For example, drop all JS exceptions that aren't API errors.- - It won't save us anyway (Check Step 2).
+- We programmatically pre-filter events that look like exceptions, especially if one causes multiple others as an avalanche, and they create a context that LLM can't ignore. For example, drop all JS exceptions that aren't API errors.
+- It won't save us anyway (Check Step 2).
 
 ## Step 2: See what the user sees
 
