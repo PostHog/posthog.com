@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
 import { useUser } from './useUser'
@@ -80,57 +80,30 @@ export const useRoadmaps = ({ params = {}, limit }: { params?: any; limit?: numb
     }
 }
 
-// Hook to manage on-demand emoji reactions for individual roadmaps
-export const useRoadmapEmojiReactions = () => {
-    const { getJwt } = useUser()
-    const [emojiReactionsMap, setEmojiReactionsMap] = useState<Map<number | string, any>>(new Map())
+// Emoji reaction type matching the new API structure
+export type EmojiReaction = {
+    emoji: string
+    profiles: Array<{
+        id: number
+        firstName?: string
+        lastName?: string
+    }>
+}
 
-    // Fetch fresh emoji reactions for a single roadmap (on-demand)
-    const fetchRoadmapReactions = async (roadmapId: number | string) => {
-        try {
-            const jwt = await getJwt()
+// Fetch emoji reactions for a single roadmap
+export const fetchRoadmapReactions = async (roadmapId: number | string): Promise<EmojiReaction[]> => {
+    try {
+        const url = `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${roadmapId}/emoji-reactions`
+        const response = await fetch(url)
 
-            const query = {
-                populate: {
-                    emojiReactions: {
-                        populate: ['profiles'],
-                    },
-                },
-                filters: {
-                    id: {
-                        $eq: roadmapId,
-                    },
-                },
-            }
-
-            const queryString = qs.stringify(query, { encodeValuesOnly: true })
-            const url = `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps?${queryString}`
-
-            const response = await fetch(url, jwt ? { headers: { Authorization: `Bearer ${jwt}` } } : undefined)
-
-            if (!response.ok) {
-                throw new Error(`Failed to fetch roadmap emoji reactions: ${response.status}`)
-            }
-
-            const result = await response.json()
-
-            // Update only this roadmap in the map
-            if (result.data?.[0]) {
-                const reactions = result.data[0].attributes?.emojiReactions || []
-                setEmojiReactionsMap((prev) => {
-                    const newMap = new Map(prev)
-                    newMap.set(roadmapId, reactions)
-                    return newMap
-                })
-            }
-        } catch (error) {
-            console.error('❌ Error fetching roadmap emoji reactions:', error)
+        if (!response.ok) {
+            throw new Error(`Failed to fetch roadmap emoji reactions: ${response.status}`)
         }
-    }
 
-    return {
-        emojiReactionsMap,
-        fetchRoadmapReactions,
+        return await response.json()
+    } catch (error) {
+        console.error('Error fetching roadmap emoji reactions:', error)
+        return []
     }
 }
 
@@ -150,7 +123,7 @@ export const addRoadmapEmojiReaction = async ({
     }
 
     const endpoint = remove ? 'remove' : 'add'
-    const url = `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${roadmapId}/emoji-reaction/${endpoint}`
+    const url = `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${roadmapId}/emoji-reactions/${endpoint}`
 
     try {
         const response = await fetch(url, {

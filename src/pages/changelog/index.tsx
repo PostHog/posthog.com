@@ -96,14 +96,6 @@ export const query = graphql`
                         type
                     }
                 }
-                emojiReactions {
-                    emoji
-                    profiles {
-                        data {
-                            id
-                        }
-                    }
-                }
             }
         }
         allChangelogVideo(sort: { fields: publishedAt, order: DESC }) {
