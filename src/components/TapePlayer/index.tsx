@@ -741,11 +741,11 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                                 </h3>
                                                             </div>
                                                         </div>
-                                                        <ScrollArea>
-                                                            <div
-                                                                className="h-full w-full relative bg-[#fffef0]"
-                                                                style={{
-                                                                    backgroundImage: `
+
+                                                        <div
+                                                            className="h-full w-full relative bg-[#fffef0] min-h-0"
+                                                            style={{
+                                                                backgroundImage: `
                                                         repeating-linear-gradient(
                                                             transparent,
                                                             transparent 27px,
@@ -761,8 +761,9 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                             transparent 47px
                                                         )
                                                     `,
-                                                                }}
-                                                            >
+                                                            }}
+                                                        >
+                                                            <ScrollArea>
                                                                 <div className="pl-[54px] pr-2 h-full">
                                                                     <div
                                                                         className="text-[13px] font-mono text-primary"
@@ -795,8 +796,8 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                                         ))}
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </ScrollArea>
+                                                            </ScrollArea>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
