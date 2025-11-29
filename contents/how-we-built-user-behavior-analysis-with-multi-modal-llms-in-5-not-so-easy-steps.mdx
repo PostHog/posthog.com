@@ -19,17 +19,17 @@ tags:
 
 # How we built user behavior analysis with multi-modal LLMs in 5 not-so-easy steps
 
-![Organizing fantastic amounts of data](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/519290681_b3c074ed_f976_4e91_8c37_498387c9dbe1_a48312c745.png)
+We, at PostHog, have a lot of user behavior data - what pages they visit, what buttons they click, and so, stored as sessions. And by "a lot" I mean billions of events and terabytes of S3 snapshots. We (and our clients) love watching these sessions, to understand how our product is used. However, there's an obvious problem - too many user sessions to watch manually. 
 
------
+So, we created a tool to watch and analyze user sessions, highlighting the issues - so you can find what's broken without watching hundreds of hours of recordings yourself. It's called Session summaries, we release it in beta today. You can use it right now, for free, with PostHog AI. 
 
-We have tons of user behavior data - what pages they visit, what buttons they click, and so, stored as sessions. And by tons I mean billions of events and terabytes of stored Replay snapshots. The problem is obvious - there are too many user sessions to watch manually. 
+Here's a quick demo of how it works:
 
-So, we created a tool to watch them for you and highlight the issues. It's called Session summaries, we release it in beta today, and you can use it right now for free with PostHog AI.
+{{ 15s video demo URL here }}
 
-Here I'll list step-by-step what we learned, where we messed up, and lots of practical tips on how to make user behavior analysis to work in production.
+In this post, I'll list step-by-step what we learned, where we messed up, and lots of practical tips on how to make user behavior analysis work in production.
 
-> The steps below assume that you use (or develop) a user behavior analytics service (like PostHog, Hotjar, Microsoft Clarity, and similar), so you have access to user-generated events, and recordings of what the user did on your website.
+> The steps below assume that you use (or develop) a user behavior analytics service (like PostHog, Hotjar, Microsoft Clarity, and similar), so you have access to user-generated events, and session recordings of what the user did on your website.
 
 ## Step 1: "Analyzing a single user session should be easy"
 
@@ -61,12 +61,12 @@ If the user spent multiple hours on the website, their session could be huge. If
 **Our approach:**
 
 - As stupid as it sounds, we just do segmenting and analysis in one very large call, so LLM knows everything.
-- If to decide to go with segmenting - go sequential, so when analyzing segment #2, it has context on what happened in segment #1. "what happened next" part will be lost anyway, and it will be crazy slow though.
+- If segmenting is required - go sequential, so when analyzing segment #2, it has context on what happened in segment #1. "what happened next" part will be lost anyway, and it will be crazy slow though.
 - Hope that users are ok with waiting for a couple of minutes. Using faster models (like OpenAI `nano` ones) can allow streaming the summary after 10-15s, but thinking models on "high" provide better results quality-wise, and quality is the goal.
 
 ### Crying wolf effect
 
-Fast-growing products (startups specifically) have a bad habit of generating lots of exceptions, especially frontend ones. LLMs sees them, panics, and generates a summary of the session where the user completely failed in all their goals. In reality the user successfully got what they came for, and didn't even notice these exceptions.
+Fast-growing products (startups specifically) have a bad habit of generating lots of exceptions, especially frontend ones. LLM sees them, panics, and generates a summary of the session where the user completely failed in all their goals. In reality the user successfully got what they came for, and didn't even notice these exceptions.
 
 **Our approach:**
 
@@ -75,7 +75,7 @@ Fast-growing products (startups specifically) have a bad habit of generating lot
 
 ## Step 2: See what the user sees
 
-Even with noise reduction, the core problem remained - we couldn't be sure if the issues LLM highlighted actually impacted users. A TypeError in logs looks scary, but if a retry succeeded in 200ms, the user never noticed. But what if we generate a video of the session? What if we could see what the user saw?
+Even with noise reduction, the core problem remained - we couldn't be sure if the issues LLM highlighted actually impacted users. A TypeError in logs looks scary, but if a retry succeeded in 200ms, the user never noticed. As we have lots of snapshots, we can generate videos of the sessios and see what the user saw.
 
 ![Video validation](https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/video_transcription_f447cd8f2a.jpeg)
 
@@ -111,7 +111,7 @@ Also these models are this cheap because they aren't exactly clever. We can ask 
 - Don't analyze the whole video - there are at least 40-50-60% of inactivity that we can skip, and pay to transcribe only parts where the user did something. Though, we need either events or snapshots to find these parts.
 - Don't analyze all the videos - there's a clear set of parameters (like event count, active duration) that can be used to decide if it's worthwhile to check the session
 
-### Videos are heavy (one more time)
+### Videos are heavy (part two)
 
 Even with all the optimizations above, video files add up. A 10-second clip at 1080p can be 7-10MB. Multiply by hundreds of thousands of sessions and we're looking at terabytes of storage costs daily. The example is obviously laughable, but even with regular `.mp4` format (tens of times smaller) it easy to get to terabytes pretty fast.
 
@@ -122,7 +122,7 @@ Even with all the optimizations above, video files add up. A 10-second clip at 1
 
 ## Step 3: Analyze lots of sessions at once
 
-A single session summary is useful enough, true, but watching one session at a time doesn't solve the original problem - there are thousands of sessions, and we need to find issues across them. As it's a beta, we decided to start small, with 100-session chunks. It won't cover all the sessions, but it can cover a good enough sample (or a specific org), and already saves tons of time.
+A single session summary is useful enough, true, but watching one session at a time doesn't solve the original problem - there are thousands of sessions, and we need to find issues across them. As it's a beta, we decided to start small, with 100-session batches. It won't cover all the sessions, but it can cover a good enough sample (or a specific org), and already saves tons of time.
 
 ![Session group summary](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_11_28_at_23_13_11_203c4282d4.png)
 > _You can check pattern based on severity and issue types_
@@ -145,7 +145,7 @@ We use a four-phase pipeline instead of a single prompt:
 
 ![Four-phase pipeline](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/78071c82_b7bf_4883_b806_2a0fc1aa72db_06154e7b68.jpeg)
 
-### Crying wolf effect - Patterns edition
+### Crying wolf effect (now with patterns)
 
 Even if we got patterns - there's just too much data to process easily, so we need to rank them properly. For example, a blocking error that happens once in 100 sessions is annoying. The same error in 80 sessions is critical. Or, the exception could happen 10 times, but just for a single user out of 100, and saying "issue X happened 15 times" could cause a false alarm.
 
