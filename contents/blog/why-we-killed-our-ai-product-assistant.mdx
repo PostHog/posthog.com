@@ -1,0 +1,118 @@
+---
+date: "2025-11-19"
+title: "Why we killed our AI product assistant"
+author:
+- cleo-lant
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/why_we_killed_our_ai_assistant_9e9565192e.png
+featuredImageType: full
+category: PostHog news
+tags: 
+- PostHog news
+- Inside Posthog
+seo:
+    {
+        metaTitle: 'Why we killed our AI product assistant',
+        metaDescription: 'The story behind repositioning our chat bot into system-level agent architecture',
+    }
+---
+
+_jk, we didn't really do that._
+
+Like everyone else, our AI journey started with a chatbot. From the first “you're absolutely right!” it crawled, then walked, then became a lanky teenager with confidently wrong opinions.
+
+Our beloved hedgehog, Max, was the face that greeted you at every AI interaction. It kept learning, and eventually grew into a very capable product assistant. We learned a lot about [building AI-powered features](/newsletter/building-ai-features) along the way. 
+
+**The problem:** Even as we added AI capabilities across the platform, people still thought of Max AI as "the chat bot." The broader vision (AI woven through every product) wasn’t landing.
+
+We didn't want to be another company with [hand-wavy marketing](https://posthog.com/newsletter/marketing-for-devs) like “it's not just a chat bot, it's… [insert amazing AI capability here]”, which meant we needed to rethink how we positioned our AI capabilities in the minds of our users.  
+
+## The assistant becomes the architect 
+Lots of beta users loved Max, but a comparison that kept coming up internally was Clippy; a paperclip animated assistant from Microsoft Office in the late 90’s, known for its intrusive, and unhelpful pop-ups (It was widely disliked and was removed in Office 2007).
+
+![automation screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/0822_SM_Clippy_help_o6nlh3_49954d3c4c.webp)
+<Caption>Clippy was ahead of its time. Prove me wrong.</Caption>
+
+Clippy was the Kool-Aid Man busting through your wall; Max AI was opt-in and useful, but still it's an important lession in perception. Product assistants don’t work when they feel like a novelty UI. Whether users see your AI as a gimmick or a genuine tool is something you have to own, especially if you're building an AI-native product. 
+
+Deciding how to address this was a hot topic at PostHog. A single Slack thread blew up with over 90 comments! The discussion was pretty intense, hitting on all the key angles from engineering to marketing. Did the mascot add to the user experience, or did it doom perception of PostHog AI as [‘just a chat bot'](/blog/ai-community-answers).
+
+![automation screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_10_at_3_05_26_PM_b886c5699e.png)
+
+In the end, we decided to axe Max. Not because we hate joy (we like it so much we [risked tanking our conversion rate](/blog/why-os)). We did it because the mascot was a limiting factor.
+
+Max AI became PostHog AI. Not just a character that lives in one corner, but the underlying architecture of PostHog product intelligence (sorry for sneaking a ‘not just’ statement in there).
+
+![automation screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Operation_Axe_Max_dcde574e08.png)
+<Caption>Don’t worry, we asked Max if he was ok with it. He said it was our call</Caption>
+
+## Why our AI got noticeably better since beta
+Long before this pivot, and as it was happening, the real work of improving PostHog AI was happening deep within PostHog. The <SmallTeam slug="posthog-ai"/> was building a shared infrastructure with the same philosophy as [PostHog SQL](/docs/sql): a single system for each small team to extend.
+
+**Without it:** 
+- fragmented experience
+- duplicated effort
+- maintenance nightmare
+- Teams stuck building simple features from scratch instead of advanced stuff by default
+
+**With it:** 
+- shared agent system any product can extend
+- reusable components that work everywhere
+- consistent UX patterns
+- platform-level improvements that benefit everyone automatically
+
+Overhauling the guts was a good move. It enables deterministic tool‑calling, tighter context packing, and fine-tuned reasoning. 
+
+Translation: fewer “sorry I can’t do that yet” moments, faster replies, cheaper inference. 
+
+Key differences from older architectures:
+- **Less hallucination**: The agent always checks your data before giving an answer
+- **Full visibility**: All tool calls are visible to the agent throughout the conversation
+- **Maintained context**: The agent remembers every decision it made and can build on them
+- **Explainable**: Chain-of-thought is visible and easy for you to investigate
+
+What PostHog AI can do now:
+- **Search and filter**: Find insights, filter session recordings, search documentation
+- **Create and modify**: Build dashboards, create insights, set up surveys
+- **Write SQL**: Generate and debug PostHog SQL queries for custom analysis
+- **Configure and Test** Set up and validate feature flags and experiments
+- **Teach you PostHog**: Explain how features work, recommend best practices, and clarify terms
+
+_Interested in a technical deep-dive? Peep our [AI platform architecture](/handbook/engineering/ai/architecture)_
+
+## How this changes who can use PostHog
+As a company, we’re well known for our [ICP discipline](/newsletter/ideal-customer-profile-framework). Knowing who you’re building for is important — it keeps teams focused, docs clean, and marketing honest. But as PostHog AI matures, we need to keep an eye on the expanding circle.
+
+Tools like Cursor, Replit, and automation platforms such as Make or n8n are built with technical users in mind. Yet their intuitive interfaces also draw in less technical users — people who might not code every day but still have real [problems to solve](/newsletter/how-to-uncover-your-users-real-problems) and [workflows to automate](/blog/workflows-alpha).
+
+That’s not exactly our goal with PostHog AI.
+
+We’re doubling down on technical users. PostHog AI helps them move faster by automating the tedious parts, connecting insights across products, and turning analysis into “what should I work on next?”
+
+**A nice side effect**: it also makes PostHog easier for everyone around them. PMs can self-serve data, marketers can ask smarter questions, and analysts can spend less time as human middleware.
+
+<div className="flex justify-center">
+    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/Post_Hog_AI_ICP_9d952d17ae.png" alt="PostHog AI ICP" className="rounded" />
+</div>
+
+<Caption>A common piece of feedback we hear during user interviews is that PostHog AI helps with adoption of PostHog across the org.</Caption> 
+
+## Build systems, not assistants
+Assistants are what you build when intelligence sits _next_ to your product. Systems are what you build when intelligence becomes _part of it_.
+
+For us, that meant letting go of Max as a mascot in order to shape the perception of PostHog AI as an architecture that connects everything together. It reasons across data, automates work, and makes each part of the product a little smarter.
+
+Some folks miss the personality:
+
+![automation screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/Post_Hog_AI_name_crit_9b7a2449b6.png)
+
+But most people won’t care, so long as the tool makes their workflow better:
+
+![automation screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hype_example_e74c3fed7c.png)
+
+## Try it
+[Enable PostHog AI](/docs/posthog-ai/allow-access) and ask it a question you actually care about this week. Need some inspiration? Check out our [example prompts](/docs/posthog-ai/example-prompts).

@@ -16,6 +16,20 @@ This means our docs should be:
 
 The below is a style guide for writing good docs based on the above assumptions. It's not exhaustive, but it's a good starting point.
 
+## How to refer to PostHog Cloud vs self-hosted
+
+When writing docs, use the following terminology:
+
+- **PostHog**: Use this by default. This refers to our cloud product. Most users are on cloud, so we don't need to specify "Cloud" unless we're differentiating from self-hosted.
+- **PostHog Cloud**: Only use this when you need to explicitly differentiate cloud features from self-hosted deployments. For example, when a feature works differently or isn't available in self-hosted.
+- **Self-hosted PostHog** or **hobby deployments**": Use these when referring to self-hosted installations.
+
+> **Do:** "To create an insight in PostHog, go to the insights tab..."
+
+> **Do:** "This feature is only available in PostHog Cloud."
+
+> **Don't:** "To create an insight in PostHog Cloud, go to the insights tab..."
+
 ## Wikipedia-style internal links
 
 The first mention on a page of a PostHog term, feature, or SDK should link to its docs page.
@@ -350,7 +364,7 @@ To debug, check for the common issues below:
 You can also try running the formatter script to fix some of the issues:
 
 ```bash
-yarn format:docs
+pnpm format:docs
 ```
 
 This will run the formatter against the current changes.
