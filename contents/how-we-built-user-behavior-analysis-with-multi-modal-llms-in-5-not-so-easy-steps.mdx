@@ -53,7 +53,7 @@ Usually, each user-generated event has lots of metadata attached to it. User inf
 - CSV input. Neither JSON nor TOON (heh) will provide the same generation quality per input token.
 - We don't return JSON either. If it works with free text - awesome, if not - we return YAML or CSV.
 
-![Inputs](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/single_session_filter_1_ceec2db1d8.jpeg)
+![Inputs](https://res.cloudinary.com/dmukukwp6/image/upload/single_session_filter_1_ceec2db1d8.jpeg)
 > _Carefully select what data goes into the pipeline_
 
 ### Parallelization breaks the narrative
@@ -78,7 +78,7 @@ Fast-growing products (startups specifically) have a bad habit of generating lot
 
 Even with noise reduction, the core problem remained: we couldn't be sure whether the issues the LLM highlighted actually affected users. A TypeError in logs looks scary, but if a retry succeeded in 200ms, the user never noticed. Since we have lots of snapshots, we can generate videos of the sessions and see what the user saw.
 
-![Video validation](https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/video_transcription_f447cd8f2a.jpeg)
+![Video validation](https://res.cloudinary.com/dmukukwp6/image/upload/video_validatio_6d1a0375aa.jpeg)
 
 When the single-session summary flags something as a "blocking error" - an exception that supposedly prevented the user from completing their goal - we don't trust it blindly. Instead, we:
 
