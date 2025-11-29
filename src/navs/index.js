@@ -1309,6 +1309,10 @@ export const handbookSidebar = [
                                 name: 'User event streams',
                                 url: '/handbook/growth/sales/user-event-streams',
                             },
+                            {
+                                name: 'Customer on-sites',
+                                url: '/handbook/growth/sales/customer-onsites',
+                            },
                         ],
                     },
                     {
