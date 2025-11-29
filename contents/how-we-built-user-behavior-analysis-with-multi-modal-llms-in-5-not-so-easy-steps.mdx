@@ -209,6 +209,8 @@ A pattern extraction call fails after we've already summarized 100 sessions. Do 
 - If pattern extraction fails, we don't re-summarize sessions - we retry from the extraction step using cached summaries.
 - Same for video validation - if it fails, the base summary is still saved. We can retry validation separately.
 
+![Basic retry logic](https://res.cloudinary.com/dmukukwp6/image/upload/2dc9059b_5887_4ae1_9cd2_e03da961609f_6b45fa47be.jpeg)
+
 ## Step 5: Ship the beta, learn, iterate (We are here) (RAW STEP, EDITING)
 
 We have a pipeline that analyzes single sessions, validates issues with video, extracts patterns across 100 sessions, and survives LLM failures gracefully. It works. But "works" and "done" are different things.
