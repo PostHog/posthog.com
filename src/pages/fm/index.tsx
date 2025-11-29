@@ -5,7 +5,7 @@ import { useWindow } from '../../context/Window'
 export default function FMPage(): JSX.Element {
     const { appWindow } = useWindow()
     const searchParams = new URLSearchParams(appWindow?.location?.search || '')
-    const mixtapeId = searchParams.get('mixtapeId')
+    const mixtapeId = searchParams.get('mixtape')
 
-    return <TapePlayer id={mixtapeId || undefined} key={`fm?mixtapeId=${mixtapeId}`} />
+    return <TapePlayer id={mixtapeId || undefined} key={`fm?mixtape=${mixtapeId}`} />
 }

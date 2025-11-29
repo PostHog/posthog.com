@@ -10,7 +10,7 @@ interface SwitchProps {
 export default function Switch({ label, isOn, onToggle, disabled = false }: SwitchProps): JSX.Element {
     return (
         <div className="flex flex-col items-center">
-            <div className="text-[10px] font-bold text-primary uppercase tracking-wider text-center leading-tight mb-2 h-[25px]">
+            <div className="text-[10px] font-bold text-primary uppercase tracking-wider text-center leading-tight mb-1 h-[25px]">
                 {label}
             </div>
             <div className="relative w-16 h-32 border-2 border-primary bg-primary rounded shadow-inner p-2">

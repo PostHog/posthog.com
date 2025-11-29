@@ -463,7 +463,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
             return
         }
         playClickSound()
-        const mixtapeUrl = `${window.location.origin}/fm?mixtapeId=${mixtapeId}`
+        const mixtapeUrl = `${window.location.origin}/fm?mixtape=${mixtapeId}`
         try {
             if (navigator.clipboard?.writeText) {
                 await navigator.clipboard.writeText(mixtapeUrl)
@@ -572,7 +572,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
     }, [mixtapeDrawerOpen])
 
     const handleMixtapePlay = (id: number) => {
-        fetchMixtapeSongs(id)
+        navigate(`/fm?mixtape=${id}`)
     }
 
     const handleTrackClick = ({ mixtapeId, trackIndex }: { mixtapeId: number; trackIndex: number }) => {
@@ -628,26 +628,6 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                 <div className="flex-1 relative h-full">
                                     <div className="border-2 border-primary shadow-inner aspect-[100/63] rounded-[0.5rem] bg-accent w-full h-auto absolute inset-0" />
 
-                                    {/* Video player overlay - separate overflow container */}
-                                    <div
-                                        className={`absolute inset-0 z-10 overflow-hidden rounded-[0.5rem] ${
-                                            showVideo ? 'pointer-events-auto' : 'pointer-events-none'
-                                        }`}
-                                    >
-                                        <motion.div
-                                            className="size-full bg-primary overflow-hidden"
-                                            initial={{ translateY: '100%' }}
-                                            animate={{
-                                                translateY: showVideo && mixtapeSongs.length > 0 ? '0%' : '100%',
-                                            }}
-                                            transition={{ type: 'tween' }}
-                                        >
-                                            <div className="size-full flex items-center justify-center">
-                                                <div id="youtube-player" className="w-full aspect-video" />
-                                            </div>
-                                        </motion.div>
-                                    </div>
-
                                     <motion.div
                                         initial={{ opacity: 0, translateY: '-100%' }}
                                         animate={{
@@ -690,6 +670,27 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                         labelColor={metadata?.labelColor}
                                                         labelBackground={metadata?.labelBackground}
                                                     />
+                                                    <div
+                                                        className={`absolute inset-0 z-10 overflow-hidden rounded-[0.5rem] ${
+                                                            showVideo ? 'pointer-events-auto' : 'pointer-events-none'
+                                                        }`}
+                                                    >
+                                                        <motion.div
+                                                            className="size-full bg-primary overflow-hidden"
+                                                            initial={{ translateY: '100%' }}
+                                                            animate={{
+                                                                translateY: showVideo ? '0%' : '100%',
+                                                            }}
+                                                            transition={{ type: 'tween' }}
+                                                        >
+                                                            <div className="size-full flex items-center justify-center">
+                                                                <div
+                                                                    id="youtube-player"
+                                                                    className="w-full aspect-video"
+                                                                />
+                                                            </div>
+                                                        </motion.div>
+                                                    </div>
                                                 </div>
 
                                                 {/* Back - Track list */}
@@ -819,15 +820,6 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                     isPressed={showTrackList}
                                                 />
                                             </div>
-                                            <div className="w-full aspect-square">
-                                                <TapeButton
-                                                    label="Video"
-                                                    icon={<IconVideoCamera className="size-5" />}
-                                                    onClick={handleToggleVideo}
-                                                    disabled={!isPoweredOn}
-                                                    isPressed={showVideo}
-                                                />
-                                            </div>
                                         </div>
                                     )}
                                 </div>
@@ -874,10 +866,11 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                     isPressed={fastForwarding}
                                 />
                                 <TapeButton
-                                    label="Share"
-                                    icon={copied ? <IconCheck className="size-5" /> : '↗'}
-                                    onClick={handleShare}
+                                    label="Video"
+                                    icon={<IconVideoCamera className="size-6" />}
+                                    onClick={handleToggleVideo}
                                     disabled={!isPoweredOn || !mixtapeSongs.length}
+                                    isPressed={showVideo}
                                 />
                             </div>
                         </div>

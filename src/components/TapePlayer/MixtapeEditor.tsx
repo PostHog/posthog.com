@@ -300,7 +300,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
                 if (appWindow) {
                     closeWindow(appWindow)
                 }
-                navigate(`/fm?mixtapeId=${data.id}`, { state: { newWindow: true } })
+                navigate(`/fm?mixtape=${data.id}`, { state: { newWindow: true } })
             } catch (error) {
                 console.error('Error saving mixtape:', error)
                 addToast({
@@ -430,7 +430,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
         )
     }
 
-    const shareUrl = isEditMode && typeof window !== 'undefined' ? `/fm?mixtapeId=${id}` : ''
+    const shareUrl = isEditMode && typeof window !== 'undefined' ? `/fm?mixtape=${id}` : ''
 
     return (
         <ScrollArea>
