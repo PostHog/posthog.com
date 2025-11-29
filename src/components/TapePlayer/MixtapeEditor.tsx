@@ -33,7 +33,7 @@ import { Link, navigate } from 'gatsby'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { extractVideoId } from './utils'
-import debounce from 'lodash.debounce'
+import { debounce } from 'lodash'
 
 interface SortableTrackProps {
     track: Track
