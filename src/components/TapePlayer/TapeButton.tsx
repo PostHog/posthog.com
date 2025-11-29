@@ -33,7 +33,7 @@ export default function TapeButton({
                             : '-translate-y-1 hover:-translate-y-1.5 active:translate-y-0 rounded bg-primary active:bg-[#dcdcd3] dark:active:bg-[#2d2d36] border-primary/80 active:border-primary'
                     }`}
                 >
-                    <div className="text-xl font-bold text-secondary leading-none">{icon}</div>
+                    <div className="text-xl text-secondary leading-none">{icon}</div>
                 </div>
             </div>
             {label && <div className="text-[9px] font-bold text-secondary uppercase tracking-wide">{label}</div>}
