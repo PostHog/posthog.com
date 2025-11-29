@@ -708,7 +708,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                     }}
                                                 >
                                                     <div
-                                                        className="w-full h-full border-2 border-primary shadow-inner aspect-[100/63] rounded-[0.5rem] overflow-hidden"
+                                                        className="w-full h-full border-2 border-primary shadow-inner aspect-[100/63] rounded-[0.5rem] overflow-hidden flex flex-col"
                                                         style={{
                                                             backgroundColor: metadata?.cassetteColor || '#e8e8e8',
                                                         }}
@@ -741,10 +741,11 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                                 </h3>
                                                             </div>
                                                         </div>
-                                                        <div
-                                                            className="h-full w-full relative bg-[#fffef0]"
-                                                            style={{
-                                                                backgroundImage: `
+                                                        <ScrollArea>
+                                                            <div
+                                                                className="h-full w-full relative bg-[#fffef0]"
+                                                                style={{
+                                                                    backgroundImage: `
                                                         repeating-linear-gradient(
                                                             transparent,
                                                             transparent 27px,
@@ -760,41 +761,42 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
                                                             transparent 47px
                                                         )
                                                     `,
-                                                            }}
-                                                        >
-                                                            <div className="pl-[54px] pr-2 h-full overflow-y-auto">
-                                                                <div
-                                                                    className="text-[13px] font-mono text-primary"
-                                                                    style={{
-                                                                        lineHeight: '28px',
-                                                                    }}
-                                                                >
-                                                                    {mixtapeSongs.map((song, index) => (
-                                                                        <button
-                                                                            key={song.id}
-                                                                            className={`cursor-pointer !text-accent-dark transition-colors w-full text-left ${
-                                                                                index === currentSongIndex
-                                                                                    ? 'font-bold'
-                                                                                    : ''
-                                                                            }`}
-                                                                            onClick={() => {
-                                                                                if (isPoweredOn) {
-                                                                                    setCurrentSongIndex(index)
-                                                                                    if (
-                                                                                        playerRef.current &&
-                                                                                        playerReadyRef.current
-                                                                                    ) {
-                                                                                        playerRef.current.playVideo()
+                                                                }}
+                                                            >
+                                                                <div className="pl-[54px] pr-2 h-full">
+                                                                    <div
+                                                                        className="text-[13px] font-mono text-primary"
+                                                                        style={{
+                                                                            lineHeight: '28px',
+                                                                        }}
+                                                                    >
+                                                                        {mixtapeSongs.map((song, index) => (
+                                                                            <button
+                                                                                key={song.id}
+                                                                                className={`cursor-pointer !text-accent-dark transition-colors w-full text-left ${
+                                                                                    index === currentSongIndex
+                                                                                        ? 'font-bold'
+                                                                                        : ''
+                                                                                }`}
+                                                                                onClick={() => {
+                                                                                    if (isPoweredOn) {
+                                                                                        setCurrentSongIndex(index)
+                                                                                        if (
+                                                                                            playerRef.current &&
+                                                                                            playerReadyRef.current
+                                                                                        ) {
+                                                                                            playerRef.current.playVideo()
+                                                                                        }
                                                                                     }
-                                                                                }
-                                                                            }}
-                                                                        >
-                                                                            {index + 1}. {song.title}
-                                                                        </button>
-                                                                    ))}
+                                                                                }}
+                                                                            >
+                                                                                {index + 1}. {song.title}
+                                                                            </button>
+                                                                        ))}
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </ScrollArea>
                                                     </div>
                                                 </div>
                                             </div>
