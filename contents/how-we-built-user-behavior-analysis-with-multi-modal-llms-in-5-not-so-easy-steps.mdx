@@ -221,17 +221,17 @@ We have a pipeline that analyzes single sessions, validates issues with video, e
 The honest truth: analyzing 100 sessions takes 5-7 minutes. We wanted 30 seconds. We tried faster models, smaller context windows, and aggressive parallelization. The result was either slow or bad, never both fast and good.
 
 **Our approach:**
-- We picked quality. A report worth reading in 5 minutes beats a useless report in 30 seconds.
+- We picked better quality. A report worth reading in 5 minutes beats a useless report in 30 seconds.
 - We show progress as it happens - which sessions are being analyzed, which patterns are emerging - so waiting doesn't feel like staring at a spinner.
 - We're exploring background processing for the future: analyze sessions continuously, surface issues proactively, no waiting required.
 
 ### It only finds issues
 
-Right now, if you ask "what happened in these sessions?" - we'll tell you what went wrong. We focused on issue detection first: blocking errors, confusion, and abandonments. General summarization ("user browsed products, added to cart, checked out successfully") isn't supported yet.
+Right now, if you ask "what happened in these sessions?" - we'll tell you what went wrong. We focused on issue detection first: blocking errors, confusion, and abandonments. General summarization ("user browsed products, added to cart, checked out successfully") is the priority number two.
 
 **Our approach:**
 - Do one thing well before expanding scope. Issue detection is the highest-value use case - it's what saves hours of manual session review.
-- General summarization is coming. The architecture supports it; we just need to tune the prompts and output format.
+- General summarization is coming. The architecture supports it, we just need to tune our infra and output format a bit.
 
 ### What's next
 
@@ -244,5 +244,5 @@ This beta is step one. Here's where we're heading:
 
 The code is open source - you can see exactly how it works, including all the prompts.
 
-## TODO - Ending par
+## TODO - Ending part
 
