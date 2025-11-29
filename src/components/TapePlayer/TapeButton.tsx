@@ -29,8 +29,8 @@ export default function TapeButton({
                         disabled
                             ? 'translate-y- border-primary'
                             : isPressed
-                            ? 'translate-y-0 bg-[#dcdcd3] border-primary'
-                            : '-translate-y-1 hover:-translate-y-1.5 active:translate-y-0 rounded bg-primary active:bg-[#dcdcd3] border-primary/80 active:border-primary'
+                            ? 'translate-y-0 bg-[#dcdcd3] dark:bg-[#2d2d36] border-primary'
+                            : '-translate-y-1 hover:-translate-y-1.5 active:translate-y-0 rounded bg-primary active:bg-[#dcdcd3] dark:active:bg-[#2d2d36] border-primary/80 active:border-primary'
                     }`}
                 >
                     <div className="text-xl font-bold text-secondary leading-none">{icon}</div>
