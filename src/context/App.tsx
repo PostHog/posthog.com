@@ -2063,8 +2063,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [stateWindows])
 
-    console.log('windows', windows)
-
     return (
         <Context.Provider
             value={{
