@@ -133,7 +133,7 @@ A single session summary is useful enough, true, but watching one session at a t
 ![Session group summary](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_11_28_at_23_13_11_203c4282d4.png)
 > _You can check the pattern based on severity and issue types_
 
-The session group summary surfaces patterns across sessions, including severity, the number of affected sessions, and specific examples. The hard part, obviously, is how to extract these patterns.
+The session group summary surfaces patterns across sessions, including severity, the number of affected sessions, and specific examples. The complex part, obviously, is how to extract these patterns.
 
 ### Patterns are hard to catch
 
@@ -171,47 +171,52 @@ To make it work, we needed a way to easily display the whole story to the user a
 
 - We display not just the issue, but also the segment that the issue was part of, what happened before the issue, and what happened after
 - Timestamp and event type of the issue are clear and easy to validate
-- Even easier, as we load the video of the session at the moment it happened (actually, a couple of seconds before)
+- Or even easier, as we load the video of the session at the moment it happened (actually, a couple of seconds before)
 
 ![Issue example](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_11_29_at_21_01_27_26a86978c8.png)
 
-## Step 4: Make it work reliably with (RAW STEP, EDITING)
+## Step 4: Make it work reliably
 
-Now we have a pipeline that works: single-session summaries, video validation, and pattern extraction across 100 sessions. The problem? It's fragile. We're making ~150 LLM calls per report, any of which can fail. Timeouts, rate limits, malformed responses, and hallucinated output that fails validation. If the whole thing falls apart because of one bad response, the feature is unusable.
+Now we have a pipeline that works  across 100 sessions: single-session summaries → video validation → pattern extraction → pattern enrichment. The problem? It's fragile. If the whole thing falls apart because of one bad response, the feature is unusable.
+
+To make it more predictable, we use Temporal workflows, with each workflow spawning hundreds of atomic and easily retriable activities, so we’ll get a proper result - sooner or later.
 
 ![Temporal logic](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_11_29_at_20_52_52_3177a60a33.png)
 > __Temporal workflow logic on a small sample of sessions__
 
-### LLM calls fail, and that's fine
+### Expect every one of the LLM calls to fail
 
-When you're calling LLMs at scale, failures aren't edge cases - they're expected behavior. A model might timeout. A response might be malformed JSON (or YAML, in our case). The output might hallucinate event IDs that don't exist. Treating every failure as fatal means your feature never works in production.
-
-**Our approach:**
-- We set failure thresholds instead of failing on the first error:
-- Session summaries: if less than 50% succeed, abort. Otherwise, continue with what we have.
-- Pattern extraction: if less than 75% of chunks succeed, abort.
-- Pattern assignment: same 75% threshold.
-- A report based on 85 sessions instead of 100 is usually good enough to find patterns. We surface this in the UI so users know exactly what they're looking at.
-
-### State doesn't fit in memory
-
-Temporal is great for orchestrating complex workflows, but it has limits. Event history size is capped at around 2MB. When you're processing 100 sessions with rich metadata, summaries, and pattern data, you blow past that limit fast. Passing large objects between activities causes the workflow to fail.
+We're making ~150-200 LLM calls per a single report, any of which can (and often will) fail. Timeouts, rate limits, malformed responses, hallucinations, and lots of other creative reasons my human mind isn’t capable of predicting. Treating every such failure as fatal means the feature never works in production.
 
 **Our approach:**
-- Redis as a state bridge. We store all intermediate results (session data, summaries, extracted patterns) in Redis with TTLs, and pass only keys through Temporal.
-- Gzip compression before storing. Large JSON summaries compress well, and Redis memory isn't free.
-- Clear TTLs (24 hours) so we're not paying for stale data, but long enough to retry failed workflows without re-fetching everything.
 
-### Retries shouldn't redo everything
+- We set failure thresholds instead of failing on the first error. Each stage allows ~20-25% of requests to fail (after exceeding the retries), so the process can move on.
+- A report based on 80 sessions instead of 100 is usually good enough to find patterns, compared to not getting a report at all.
+- It gets even more creative with streaming, as incomplete chunks will raise lots of false alarms. So, we have conditional tracking and logging to handle such cases.
 
-A pattern extraction call fails after we've already summarized 100 sessions. Do we start over? That's 100 wasted LLM calls, plus minutes of user wait time. The pipeline has natural checkpoints - we should use them.
+### Aggressive caching
+
+If any analysis step fails, but you have proper atomic activities and cache the results, you can even retry the whole workflow for cheap. Storage is cheap and fast (especially non-persistent ones, like Redis), while LLM calls are not and take time. 
 
 **Our approach:**
-- Temporal activities are our checkpoints. Each phase (fetch data, summarize sessions, extract patterns, assign events) is a separate activity.
-- If pattern extraction fails, we don't re-summarize sessions - we retry from the extraction step using cached summaries.
-- Same for video validation - if it fails, the base summary is still saved. We can retry validation separately.
+
+- If it’s an isolated step (like a single session summary that can be used as-is), we use DB. 
+- If it’s an intermediate step (like pattern extraction), we use Redis. 
+- The main logic is “will it change the result if I add one more session to the input?”
 
 ![Basic retry logic](https://res.cloudinary.com/dmukukwp6/image/upload/2dc9059b_5887_4ae1_9cd2_e03da961609f_6b45fa47be.jpeg)
+
+### “Phenomenal cosmic power, ity bity living space”
+
+Temporal is amazing for orchestrating complex workflows, but it has limits. Event history size is capped at around 2MB. When we tried to use it as-is, we hit the limit even before making a single LLM call, just by getting the data to analyze from the DB (an obvious anti-pattern).
+
+Redis, as a stateful bridge, provides plenty of opportunities for workarounds. Firstly, we can store all the intermediate steps there without the need to calculate space (and just pass the keys). Secondly, we use Redis to stream the progress, LLM calls, combined data, and whatever else we want, with great latency.
+
+**Our approach:**
+
+- Clear Redis TTLs (24 hours tops), as even with seemingly unlimited memory, we slow it down significantly if not paying attention.
+- Gzip compression for everything (on the input/output)
+- If storing in the DB, the Redis step is skipped explicitly to avoid duplicating data for nothing
 
 ## Step 5: Ship the beta, learn, iterate (We are here) (RAW STEP, EDITING)
 
