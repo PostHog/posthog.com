@@ -17,7 +17,7 @@ Sometimes you'll be the driver for the visit happening, whether by pitching a sp
 
 Sometimes the purpose of an onsite is defined clearly by the customer, for example overcoming a specific technical challenge, or building an analytical framework for a new product. In this situation, definitely schedule significant time to address their primary goal, but do not underestimate the opportunity to create less formal contexts with smaller audiences, especially your champions.
 
-## Sessions
+## Formal Sessions
 
 This section will cover the length, audience, purpose and content of sessions that you could include as part of your onsite - pick and choose like a menu. At a minimum you'll want a broader session with a big audience and a narrow session with the key stakeholder(s) and champions to progress a relationship with an account.
 
@@ -81,6 +81,16 @@ A punchy, direct delivery of information focused on value that connects PostHog 
 
 Example:
 Connect PostHog usage to a metric the exec cares about: "Your team shipped 12 features last quarter. Using PostHog's feature flags and analytics together, the product team can now measure impact within 24 hours instead of waiting for your monthly business review. This means faster iteration and less risk of shipping things that don't move the needle on [their key metric]."
+
+##Manufacturing Informal Access
+
+#Why this matters
+The formal sessions are theater - everyone is in meeting mode, and the group is usually to large for real candor. Deeper information comes out over lunch, walking between buildings, or after a drink: you need to create contexts where people forget you're "the vendor" and just talk to you like a colleague.
+
+#Making the invitation
+Bad: "I'd love to take you to dinner to discuss PostHog's roadmap"
+Good: "I'm grabbing dinner at [specific place] after our session - you're welcome to join if you're around"
+Notice: You're doing it anyway, specific location, low pressure, no stated agenda.
 
 ## Common mistakes to avoid
 
