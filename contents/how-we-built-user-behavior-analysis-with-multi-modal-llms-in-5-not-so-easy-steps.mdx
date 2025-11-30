@@ -76,7 +76,7 @@ Fast-growing products (startups specifically) have a bad habit of generating lot
 
 ## Step 2: See what the user sees
 
-Even with noise reduction, the core problem remained: we couldn't be sure whether the issues the LLM highlighted actually affected users. A TypeError in logs looks scary, but if a retry succeeded in 200ms, the user never noticed. Since we have lots of snapshots, we can generate videos of the sessions and see what the user saw.
+Even with noise reduction, the core problem remained: we couldn't be sure whether the issues the LLM highlighted actually affected users. A TypeError in logs looks scary, but if a retry succeeded in 200ms - the user never noticed. Since we have lots of snapshots, we can generate videos of the sessions and see what the user saw.
 
 ![Video validation](https://res.cloudinary.com/dmukukwp6/image/upload/video_validatio_6d1a0375aa.jpeg)
 
@@ -90,7 +90,7 @@ And it works pretty well. But it also leads to the question: why not use only vi
 
 ### Video explains the issue, but not the reason
 
-If we use only video, we can see that the user visited the page, waited for 5 seconds, and left. But we don't see a Clickhouse timeout error. Or an outdated Redis cache being hit. Or a malformed query parameter in the user URL. So, we know what happened, but we can't create a proper issue because it would require extensive manual investigation. Then why read the summary in the first place?
+If we use only video, we can see that the user visited the page, waited for 5 seconds at the loading state, and left. But we don't see a Clickhouse timeout error. Or an outdated Redis cache being hit. Or a malformed query parameter in the user URL. So, we know what happened, but we can't create a proper issue because it would require extensive manual investigation. Then why read the summary in the first place?
 
 **Our approach:**
 
@@ -103,23 +103,28 @@ Option #2 is in progress (not yet in production) mostly because...
 
 At first glance, transcribing all the user session videos seems like a no-brainer. For example, Gemini Flash multi-modal models cost 10-20 times cheaper than thinking LLMs from Anthropic or OpenAI (or even Gemini's own). It can go even lower with open-source models.
 
-However, let's try basic math, using numbers from now (end of 2025). One frame of video at a good-enough resolution costs 258 Gemini Flash tokens. If `1 frame per second * 60 seconds in a minute * 60 minutes in a hour * 258 tokens = 929k tokens`. Meaning, analyzing just one large-ish session already costs a million tokens. We can even use lighter models and lower resolutions, but at some point, the quality drop is too much.
+However, let's try basic math, using numbers from now (end of 2025). 
 
-Also, these models are this cheap because they aren't exactly clever. We can ask it to transcribe what's on the screen well enough, but it won't be able to make meaningful conclusions. So, either we need to use a much more expensive model from the start, or we need another model to analyze transcription afterward.
+- One frame of video at a good-enough resolution costs 258 Gemini Flash tokens. 
+- If `1 frame per second * 60 seconds in a minute * 60 minutes in a hour * 258 tokens = 929k tokens`. 
+- Meaning, analyzing just one large-ish session already costs a million tokens. 
+
+We can even use lighter models and lower resolutions, but at some point, the quality drop is too much. Also, these models are this cheap because they aren't exactly clever. We can ask it to transcribe what's on the screen, but it won't be able to make meaningful conclusions on the whole journey. So, either we need to use a much more expensive model from the start, or we need another model to analyze transcription afterward.
 
 **Our approach:**
 
 - Don't analyze the whole video - there are at least 40-50-60% of inactivity that we can skip, and pay to transcribe only parts where the user did something. Though we need either events or snapshots to find these parts.
-- Don't analyze all the videos - there's a clear set of parameters (like event count, active duration) that can be used to decide if it's worthwhile to check the session
+- Don't analyze all the videos - there's a clear set of parameters (like event count, or active duration) that can be used to decide if it's worthwhile to check this session.
 
 ### Videos are heavy (part two)
 
-Even with all the optimizations above, video files add up. A 10-second clip at 1080p can be 7-10MB. Multiply by hundreds of thousands of sessions, and we're looking at terabytes of storage costs daily. The example is obviously laughable, but even with the regular `.mp4` format (tens of times smaller), it's easy to reach terabytes pretty quickly.
+Even with all the optimizations above, video files add up. A 10-second GIF clip at 1080p can be 7-15MB. Multiply by hundreds of thousands of sessions, and we're looking at terabytes of storage costs daily. The example is obviously laughable, but even with the regular `.mp4` format (tens of times smaller), it's easy to reach terabytes pretty quickly.
 
 **Our approach:**
 
 - We use `.webm`. It's roughly half the size of the `.mp4`, supported by most multimodal models, and can be played in most browsers by default (in the UI or not).
-- We render videos at 8-10x - 1 frame per second is usually enough for LLM to understand the context well. However, `puppeteer` and `playwright` have different keyframe settings, so after a certain point, speeding up will result in data loss.
+- We render videos at 8-10x - 1 frame per second is usually enough for LLM to understand the context well. 
+- Keep in mind that `puppeteer`, `playwright`, and similar libraries have different keyframe settings, so after a certain point, speeding up will result in data loss.
 
 ## Step 3: Analyze lots of sessions at once
 
