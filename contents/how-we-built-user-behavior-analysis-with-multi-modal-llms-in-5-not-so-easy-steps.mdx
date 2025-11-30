@@ -63,7 +63,7 @@ If the user spent multiple hours on the website, their session could be huge. If
 **Our approach:**
 
 - As stupid as it sounds, we process the data for the entire session in one large call, so the LLM has full context.
-- If you must segment, go sequential. When analyzing segment #2, pass the context from segment #1. You'll still lose the "what happened next" context, and it'll be slow, but it's still better than pure parallel.
+- If you must segment, do it in one step, and then provide the context on all segments to each parallel call. Lots of context for the current segment, minimal context for the previous/next segments to keep LLM grounded.
 - Hope that users are ok with waiting for a couple of minutes. Using faster models (like OpenAI `nano` ones) can allow streaming the summary after 10-15s, but thinking models on "high" provide better results quality-wise, and quality is the goal.
 
 ### Crying wolf effect
