@@ -219,41 +219,28 @@ Redis, as a stateful bridge, provides plenty of opportunities for workarounds. F
 - Gzip compression for everything (on the input/output)
 - If storing in the DB, the Redis step is skipped explicitly to avoid duplicating data for nothing
 
-## Step 5: Ship the beta, learn, iterate (We are here) (RAW STEP, EDITING)
+## Step 5: Ship the beta, learn, iterate (We are here)
 
-We have a pipeline that analyzes single sessions, validates issues with video, extracts patterns across 100 sessions, and survives LLM failures gracefully. It works. But "works" and "done" are different things.
+The beta of Session summaries has been released and is available to everyone right now. So, if you want to check our findings above, give it a try. Just ask PostHog AI to summarise your sessions. Worst case: you’ll notice where we messed up. Best case: you’ll learn something useful about your users and your product.
 
-{{ screenshot of the chat interface with session summaries }}
+**What the feature can do:**
 
-(under the image text) Session summaries are available now in PostHog AI chat - try it on your own sessions
+- Find issues: Surface recurring problems that actually impact users
+- Chat: Ask follow-up questions to dig deeper
+- Video validation: Confirm issues with the visual proof
 
-### It's not fast
+It’s still a beta, so we have lots of plans on how to make it better. Our goal is to ship a tool that does one thing well, then iterate. Expect the logic to evolve as we learn what gives the best results.
 
-The honest truth: analyzing 100 sessions takes 5-7 minutes. We wanted 30 seconds. We tried faster models, smaller context windows, and aggressive parallelization. The result was either slow or bad, never both fast and good.
+**What it will be able to do soon:**
 
-**Our approach:**
-- We picked better quality. A report worth reading in 5 minutes beats a useless report in 30 seconds.
-- We show progress as it happens - which sessions are being analyzed, which patterns are emerging - so waiting doesn't feel like staring at a spinner.
-- We're exploring background processing for the future: analyze sessions continuously, surface issues proactively, no waiting required.
+- Full video understanding: Find sessions with a specific behaviour and answer free-form questions
+- Proactive alerts: Analyse thousands of sessions in the background and provide signals on where to look
+- Go beyond sessions: make it work with Error tracking, Support tickets, LLM traces, you name it
 
-### It only finds issues
+We’ll share more updates and learnings down the road. Or we'll get distracted by something shiny. Probably both. 
 
-Right now, if you ask "what happened in these sessions?" - we'll tell you what went wrong. We focused on issue detection first: blocking errors, confusion, and abandonments. General summarization ("user browsed products, added to cart, checked out successfully") is the priority number two.
+In the meantime, try it, break it, and let us know. Thank you for reading.
 
-**Our approach:**
-- Do one thing well before expanding scope. Issue detection is the highest-value use case - it's what saves hours of manual session review.
-- General summarization is coming. The architecture supports it, we just need to tune our infra and output format a bit.
+---
 
-### What's next
-
-This beta is step one. Here's where we're heading:
-- Scale: Thousands of sessions, processed continuously in the background
-- Proactive alerts: Issues find you, not the other way around
-- Full video understanding: Transcribe entire sessions, not just validation clips
-- Beyond Replay: Apply the same pattern extraction to error tracking, LLM traces, and support tickets
-- Free-text queries: "Find sessions where users looked confused for more than 30 seconds."
-
-The code is open source - you can see exactly how it works, including all the prompts.
-
-## TODO - Ending part
-
+P.S. If you are still reading and find it interesting, we're hiring [AI Product Engineers](https://posthog.com/careers/ai-product-engineer). We have tons of ideas to ship, and we would love to hear yours. Ping me if you have any questions, or [apply right here](https://posthog.com/careers/ai-product-engineer).
