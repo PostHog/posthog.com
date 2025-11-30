@@ -19,13 +19,11 @@ tags:
 
 # How we built user behavior analysis with multimodal LLMs in 5 not-so-easy steps
 
-We, at PostHog, have a lot of user behavior data - what pages they visit, what buttons they click, and so on, stored as sessions. And by "a lot," I mean billions of events and terabytes of S3 snapshots. We (and our clients) love watching these sessions to understand how the product is used. However, there's an obvious problem - too many user sessions to watch manually. 
+We, at PostHog, have a lot of user behavior data - what pages they visit, what buttons they click, and so on, stored as sessions. And by "a lot," I mean billions of events and terabytes of S3 snapshots. We and our customers love watching these sessions to understand how the product is used. However, there's an obvious problem - too many user sessions to watch manually. 
 
-So, we created a tool to watch and analyze user sessions. It highlights the issues - so you can find what's broken without watching hundreds of hours of recordings yourself. It's called Session summaries, **we release it in beta today**. You can use it right now, for free, with PostHog AI. 
+So, we created a tool to watch and analyze user sessions. It highlights the issues - so you can find what's broken without watching hundreds of hours of recordings yourself. It's called Session summaries, **we release it in beta today**. You can use it right now, for free, with PostHog AI.
 
-In this post, I'll list step by step what we learned, where we messed up, and lots of practical tips on how to make user behavior analysis work in production.
-
-All the code is open-source, and here's a 36-second [demo](https://res.cloudinary.com/sortafreel/video/upload/v1764510391/minivied-v2_onrxvy.mov) of how it works:
+In this post, I'll walk through step by step what we learned, where we messed up, and lots of practical tips on how to make user behavior analysis work in production. All the code is open-source, and here's a 36-second [demo](https://res.cloudinary.com/sortafreel/video/upload/v1764510391/minivied-v2_onrxvy.mov) of how it works:
 
 ![Demo video](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_11_30_145133_70c7081276.png)
 
