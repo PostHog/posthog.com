@@ -24,6 +24,10 @@ flowchart TB
     n8 --> n9["$20k+ potential? (Onboarding/BDR decides)"]
     n9 -- Yes --> C
     n9 -- No --> n3
+    n3 -- "Organic growth to<br>$2k+ MRR" --> n14["Account review<br>(Simon decides)"]
+    n14 -- "TAM criteria met" --> D
+    n14 -- "Not yet" --> n3
+    
     D --> n10["Expanded to full potential? (TAM proposes, Simon signs off)"]
     n10 -- Yes --> n6
     n11["BDR"] --> n9
