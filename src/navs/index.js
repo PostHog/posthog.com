@@ -2210,6 +2210,10 @@ export const docsMenu = {
                             url: '/docs/api/early-access-feature',
                         },
                         {
+                            name: 'Endpoints',
+                            url: '/docs/api/endpoints',
+                        },
+                        {
                             name: 'Environments',
                             url: '/docs/api/environments',
                         },
@@ -4866,6 +4870,43 @@ export const docsMenu = {
                     url: '/docs/workflows/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
+                },
+            ],
+        },
+        {
+            name: 'Endpoints',
+            icon: 'IconBrackets',
+            color: 'blue',
+            url: '/docs/endpoints',
+            description: 'Create predefined queries from Insights or SQL and expose them as optimized API endpoints.',
+            children: [
+                {
+                    name: 'Endpoints',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/endpoints',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/endpoints/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Resources',
+                    url: '/docs/endpoints/resources',
+                    icon: 'IconBook',
+                    color: 'blue',
                 },
             ],
         },

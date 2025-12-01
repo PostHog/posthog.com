@@ -1,0 +1,178 @@
+---
+title: Getting started with endpoints
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconCode, IconGraph, IconRocket } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to create your first endpoint!">
+
+<QuestLogItem 
+  title="Create an Insight or SQL query"
+  subtitle="Required"
+  icon="IconGraph"
+>
+
+Endpoints are created from existing Insights or SQL queries in PostHog. Start by creating the query that defines the data you want to expose.
+
+### Option 1: Create an Insight
+
+Create an Insight in PostHog that shows the data you want to expose. This could be:
+- A trend showing daily active users
+- A funnel tracking user conversion
+- A retention analysis
+- Any other Insight type
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1716976005/posthog.com/contents/Screenshot_2024-05-29_at_10.46.15_AM.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1716976005/posthog.com/contents/Screenshot_2024-05-29_at_10.46.03_AM.png"
+  alt="Create an Insight in PostHog" 
+  classes="rounded"
+/>
+
+### Option 2: Write a SQL query
+
+Alternatively, you can create a SQL query in the [SQL editor](https://us.posthog.com/sql) that returns the data you need.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_11_34_23_2x_a36e4b0bea.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_11_34_05_2x_50d26bf304.png"
+  alt="Write a SQL query" 
+  classes="rounded"
+/>
+
+<OSButton variant="primary" asLink to="/docs/product-analytics/insights">
+  Learn about Insights
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Create an endpoint"
+  subtitle="Required"
+  icon="IconRocket"
+>
+
+Once you have your Insight or SQL query, create an endpoint from it. This will give you a stable API endpoint you can call to retrieve the data.
+
+1. Open your Insight or SQL query
+2. Click the **Create endpoint** button (or similar action in the UI)
+3. Give your endpoint a name (e.g., `daily_active_users` or `account_users_activity`)
+4. Save the endpoint
+
+<CalloutBox icon="IconInfo" type="fyi" title="Endpoint names">
+
+Choose descriptive names for your endpoints. They'll appear in the URL:
+- Good: `daily_active_users`, `account_users_activity`, `signup_funnel`
+- Avoid: `endpoint1`, `test`, `query`
+
+Endpoint names should be URL-friendly (lowercase, hyphens instead of spaces).
+
+</CalloutBox>
+
+Your endpoint will be available at:
+```
+/api/environments/[team_id]/endpoints/[your_endpoint_name]/run
+```
+
+<OSButton variant="primary" asLink to="/docs/endpoints/resources">
+  View endpoint examples
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Call your endpoint"
+  subtitle="Required"
+  icon="IconCode"
+>
+
+Now you can call your endpoint from your application. You'll need:
+
+1. **Your team ID**: Found in your project settings
+2. **Your personal API key**: With appropriate permissions. Create one in [your user settings](https://us.posthog.com/settings/user-api-keys#personal-api-keys)
+3. **Your endpoint name**: The name you chose when creating the endpoint
+
+<MultiLanguage>
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/environments/[team_id]/endpoints/[endpoint_name]/run
+```
+
+```python
+import requests
+
+url = "<ph_app_host>/api/environments/{team_id}/endpoints/{endpoint_name}/run"
+headers = {
+    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+}
+
+response = requests.get(url, headers=headers)
+data = response.json()
+print(data)
+```
+
+```node
+import fetch from "node-fetch";
+
+async function callEndpoint() {
+  const url = "<ph_app_host>/api/environments/{team_id}/endpoints/{endpoint_name}/run";
+  const headers = {
+    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+  };
+
+  const response = await fetch(url, { headers });
+  const data = await response.json();
+  console.log(data);
+}
+
+callEndpoint();
+```
+
+</MultiLanguage>
+
+<OSButton variant="primary" asLink to="/docs/api/endpoints">
+  View API reference
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Use in your application"
+  subtitle="Recommended"
+  icon="IconLogomark"
+>
+
+Endpoints are perfect for embedding analytics in your own application. You can:
+
+- **Show analytics to your customers**: Display dashboards with PostHog data in your app
+- **Build custom reports**: Create reports tailored to your customers' needs
+- **Power internal tools**: Use endpoints to power internal dashboards and tools
+
+<CalloutBox icon="IconLightBulb" type="fyi" title="Best practices">
+
+- **Cache responses**: Endpoints return cached data when available, but you can also implement your own caching layer
+- **Handle errors gracefully**: Always check response status codes and handle errors appropriately
+- **Respect rate limits**: While endpoints have higher limits than standard queries, be mindful of your usage
+- **Use meaningful names**: Choose endpoint names that clearly describe what data they return
+
+</CalloutBox>
+
+---
+
+That's it! You're ready to start using endpoints.
+
+<OSButton variant="primary" asLink to="/docs/endpoints/resources">
+  Explore more resources
+</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>
+
