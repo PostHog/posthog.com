@@ -75,6 +75,17 @@ posthog.capture_exception(
 )
 ```
 
+```ruby
+posthog.capture_exception(
+  e,
+  distinct_id: 'user_distinct_id',
+  properties: {
+    custom_property: 'custom_value',
+    custom_list: ['custom_value_1', 'custom_value_2']
+  }
+)
+```
+
 </MultiLanguage>
 
 ## Customizing exception capture
@@ -149,6 +160,22 @@ posthog.capture_exception(
         "custom_property": "custom_value",
     },
 )
+```
+
+```ruby
+begin
+  # ...
+rescue => e
+  posthog.capture_exception(
+    e,
+    distinct_id: 'user_123',
+    properties: {
+      custom_property: 'custom_value',
+      # You can also *optionally* override generated properties like fingerprint
+      '$exception_fingerprint': 'CustomExceptionGroup'
+    }
+  )
+end
 ```
 
 </MultiLanguage>

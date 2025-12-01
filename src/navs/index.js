@@ -1260,7 +1260,7 @@ export const handbookSidebar = [
             {
                 name: 'Overview',
                 url: '/handbook/growth/sales/accounts-overview',
-            }, 
+            },
             {
                 name: 'Sales',
                 url: '',
@@ -1532,7 +1532,7 @@ export const handbookSidebar = [
             {
                 name: 'Customer FAQs',
                 url: '/handbook/growth/sales/customer-faqs',
-            }, 
+            },
         ],
     },
     {
@@ -3778,6 +3778,10 @@ export const docsMenu = {
                         {
                             name: 'Node.js',
                             url: '/docs/error-tracking/installation/node',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/error-tracking/installation/ruby',
                         },
                         {
                             name: 'React',
