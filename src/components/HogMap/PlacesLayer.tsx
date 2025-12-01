@@ -20,10 +20,7 @@ export const usePlacesMapData = (isClient: boolean, getJwt: () => Promise<string
 
         const fetchData = async () => {
             try {
-                const jwt = await getJwt()
-                if (!jwt) return
-
-                const data = await getPlaces(jwt)
+                const data = await getPlaces()
 
                 if (!cancelled) {
                     // The API returns latitude/longitude fields

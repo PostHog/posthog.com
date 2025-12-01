@@ -1,12 +1,8 @@
 // API Functions
 
-// Fetch all places
-export const getPlaces = async (jwt: string): Promise<Record<string, unknown>[]> => {
-    const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/places`, {
-        headers: {
-            Authorization: `Bearer ${jwt}`,
-        },
-    })
+// Fetch all places (public endpoint, no JWT required)
+export const getPlaces = async (): Promise<Record<string, unknown>[]> => {
+    const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/places`)
 
     if (!response.ok) {
         throw new Error(`Failed to fetch places: ${response.statusText}`)
