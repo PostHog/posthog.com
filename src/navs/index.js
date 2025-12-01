@@ -4763,6 +4763,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Session summaries',
+                    url: '/docs/posthog-ai/session-summaries',
+                    icon: 'IconEye',
+                    color: 'purple',
+                },
+                {
                     name: 'Guides',
                 },
                 {
