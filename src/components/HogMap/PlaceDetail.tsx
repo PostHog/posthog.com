@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { PlaceItem } from './types'
+import OSButton from 'components/OSButton'
+import { useUser } from 'hooks/useUser'
+import { PlaceItem, PlaceReview } from './types'
 import { getPlaceIcon } from './PlacesMap'
+import { getPlaceReviews, addPlaceReview } from './data'
+import dayjs from 'dayjs'
 
 interface PlaceDetailProps {
     place: PlaceItem
@@ -11,7 +15,64 @@ interface PlaceDetailProps {
 
 export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
     const { icon, colorClass } = getPlaceIcon(place.type, 'size-6')
-    const hasCoordinates = place.latitude !== null && place.longitude !== null
+    const { user, getJwt } = useUser()
+    const [reviews, setReviews] = useState<PlaceReview[]>([])
+    const [loading, setLoading] = useState(true)
+    const [showReviewForm, setShowReviewForm] = useState(false)
+    const [rating, setRating] = useState(5)
+    const [reviewText, setReviewText] = useState('')
+    const [wouldGoBack, setWouldGoBack] = useState(true)
+    const [submitting, setSubmitting] = useState(false)
+
+    // Fetch reviews for this place
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const allReviews = (await getPlaceReviews()) as any[]
+                // Filter reviews for this specific place
+                const placeReviews = allReviews.filter((r) => r.place?.id === place.id) as PlaceReview[]
+                setReviews(placeReviews)
+            } catch (error) {
+                console.error('Failed to fetch reviews:', error)
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        fetchReviews()
+    }, [place.id])
+
+    const handleSubmitReview = async () => {
+        if (!reviewText.trim()) return
+
+        try {
+            setSubmitting(true)
+            const jwt = await getJwt()
+            if (!jwt) return
+
+            await addPlaceReview(jwt, {
+                rating,
+                review: reviewText,
+                wouldGoBack,
+                place: place.id,
+            })
+
+            // Refresh reviews
+            const allReviews = (await getPlaceReviews()) as any[]
+            const placeReviews = allReviews.filter((r) => r.place?.id === place.id) as PlaceReview[]
+            setReviews(placeReviews)
+
+            // Reset form
+            setReviewText('')
+            setRating(5)
+            setWouldGoBack(true)
+            setShowReviewForm(false)
+        } catch (error) {
+            console.error('Failed to submit review:', error)
+        } finally {
+            setSubmitting(false)
+        }
+    }
 
     return (
         <motion.div
@@ -53,6 +114,121 @@ export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
                                 <div>{place.address}</div>
                             </div>
                         )}
+
+                        {/* Reviews Section */}
+                        <div className="pt-4 border-t border-primary">
+                            <div className="flex items-center justify-between mb-3">
+                                <h3 className="text-base font-semibold">Reviews ({reviews.length})</h3>
+                                {user && !showReviewForm && (
+                                    <OSButton size="sm" variant="secondary" onClick={() => setShowReviewForm(true)}>
+                                        Add review
+                                    </OSButton>
+                                )}
+                            </div>
+
+                            {/* Review Form */}
+                            {showReviewForm && user && (
+                                <div className="mb-4 p-3 rounded border border-primary bg-accent/50">
+                                    <div className="mb-3">
+                                        <label className="text-[13px] text-secondary mb-1 block">Rating</label>
+                                        <div className="flex gap-1">
+                                            {[1, 2, 3, 4, 5].map((star) => (
+                                                <button
+                                                    key={star}
+                                                    onClick={() => setRating(star)}
+                                                    className="text-2xl hover:scale-110 transition-transform"
+                                                >
+                                                    {star <= rating ? '⭐' : '☆'}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="mb-3">
+                                        <label className="text-[13px] text-secondary mb-1 block">Your review</label>
+                                        <textarea
+                                            value={reviewText}
+                                            onChange={(e) => setReviewText(e.target.value)}
+                                            placeholder="Share your thoughts..."
+                                            className="w-full border border-primary rounded px-3 py-2 bg-primary text-primary text-sm resize-none"
+                                            rows={4}
+                                        />
+                                    </div>
+
+                                    <div className="mb-3">
+                                        <label className="flex items-center gap-2 cursor-pointer">
+                                            <input
+                                                type="checkbox"
+                                                checked={wouldGoBack}
+                                                onChange={(e) => setWouldGoBack(e.target.checked)}
+                                                className="w-4 h-4 rounded border-primary"
+                                            />
+                                            <span className="text-[13px] text-primary">I would go back</span>
+                                        </label>
+                                    </div>
+
+                                    <div className="flex gap-2 justify-end">
+                                        <OSButton
+                                            size="sm"
+                                            variant="secondary"
+                                            onClick={() => {
+                                                setShowReviewForm(false)
+                                                setReviewText('')
+                                                setRating(5)
+                                                setWouldGoBack(true)
+                                            }}
+                                            disabled={submitting}
+                                        >
+                                            Cancel
+                                        </OSButton>
+                                        <OSButton
+                                            size="sm"
+                                            variant="primary"
+                                            onClick={handleSubmitReview}
+                                            disabled={!reviewText.trim() || submitting}
+                                        >
+                                            {submitting ? 'Submitting...' : 'Submit'}
+                                        </OSButton>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Reviews List */}
+                            {loading ? (
+                                <div className="text-[13px] text-secondary">Loading reviews...</div>
+                            ) : reviews.length > 0 ? (
+                                <div className="space-y-3">
+                                    {reviews.map((review) => (
+                                        <div key={review.id} className="p-3 rounded border border-primary bg-accent/20">
+                                            <div className="flex items-center justify-between mb-2">
+                                                <div className="flex gap-1">
+                                                    {Array.from({ length: review.rating }).map((_, i) => (
+                                                        <span key={i}>⭐</span>
+                                                    ))}
+                                                </div>
+                                                <div className="text-[11px] text-secondary">
+                                                    {dayjs(review.createdAt).format('MMM D, YYYY')}
+                                                </div>
+                                            </div>
+                                            {review.notes && (
+                                                <div className="text-[13px] text-primary leading-relaxed">
+                                                    {review.notes}
+                                                </div>
+                                            )}
+                                            {review.wouldGoBack !== undefined && (
+                                                <div className="text-[11px] text-secondary mt-2">
+                                                    {review.wouldGoBack ? '✅ Would go back' : '❌ Would not go back'}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="text-[13px] text-secondary italic">
+                                    No reviews yet. {user ? 'Be the first to review!' : 'Sign in to add a review.'}
+                                </div>
+                            )}
+                        </div>
 
                         <div className="pt-4 border-t border-primary">
                             <p className="text-[13px] text-secondary italic">Recommended by the PostHog team</p>

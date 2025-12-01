@@ -14,3 +14,25 @@ export interface PlaceItem {
     longitude: number | null
     type: PlaceType
 }
+
+export interface PlaceTag {
+    id: number
+    attributes: {
+        label: string
+    }
+}
+
+export interface PlaceReview {
+    id: number
+    rating: number
+    subcategoryRatings?: {
+        ratingCategory: string
+        ratingValue: number
+    }[]
+    notes: string
+    events: string
+    tags: PlaceTag[]
+    place: PlaceItem
+    createdAt: string
+    wouldGoBack?: boolean
+}
