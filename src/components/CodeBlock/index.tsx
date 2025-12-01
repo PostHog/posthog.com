@@ -441,8 +441,8 @@ export const CodeBlock = ({
                 {({ className, tokens, getLineProps, getTokenProps }) => (
                     <pre
                         data-scheme="primary"
-                        className={`w-full m-0 p-0 rounded-t-none rounded-b bg-primary border-primary ${
-                            showLabel ? 'border-t' : ''
+                        className={`w-full m-0 p-0 rounded-b bg-primary border-primary ${
+                            showLabel ? 'rounded-t-none border-t' : 'rounded-t'
                         }`}
                     >
                         <ScrollArea>
