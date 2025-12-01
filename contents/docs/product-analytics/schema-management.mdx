@@ -208,13 +208,13 @@ def main():
         host=POSTHOG_HOST,
     )
 
-    # Base captures are still possible as well
-    posthog.capture("capture_raw_example", distinct_id="distinct_id", properties={"test": "property"})
     # Capture with required properties
     posthog.capture_downloaded_file(file_size_b=2048, file_name="file_name", distinct_id="distinct_id",
                                     extra_properties={"test": "property"})
     # Capture with no required properties
     posthog.capture_user_logged_in(extra_properties={"test": "property"}, distinct_id="distinct_id")
+    # Base captures are still possible
+    posthog.capture("capture_raw_example", distinct_id="distinct_id", properties={"test": "property"})
 
 ```
 
