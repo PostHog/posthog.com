@@ -1,22 +1,34 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 import SEO from 'components/seo'
 import Explorer from 'components/Explorer'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Checkbox } from 'components/RadixUI/Checkbox'
 import { useUser } from 'hooks/useUser'
 import PlacesMap, { getPlaceIcon } from 'components/HogMap/PlacesMap'
+import PlaceDetail from 'components/HogMap/PlaceDetail'
 import { PlaceType, PlaceItem } from 'components/HogMap/types'
+import { AnimatePresence } from 'framer-motion'
 
 function Places() {
     const { isModerator } = useUser()
     // Initialize with all place types selected
     const [selectedLayers, setSelectedLayers] = useState<string[]>(Object.values(PlaceType))
     const [places, setPlaces] = useState<PlaceItem[]>([])
-    const [selectedPlaceId, setSelectedPlaceId] = useState<number | null>(null)
+    const [selectedPlace, setSelectedPlace] = useState<PlaceItem | null>(null)
+    const placesRef = useRef<PlaceItem[]>([])
 
     // Receive places data from PlacesMap component
     const handlePlacesLoaded = useCallback((loadedPlaces: PlaceItem[]) => {
         setPlaces(loadedPlaces)
+        placesRef.current = loadedPlaces
+    }, [])
+
+    // Show place detail overlay when a marker is clicked
+    const handlePlaceClick = useCallback((placeId: number) => {
+        const place = placesRef.current.find((p) => p.id === placeId)
+        if (place) {
+            setSelectedPlace(place)
+        }
     }, [])
 
     // Count places by type
@@ -118,10 +130,16 @@ function Places() {
                     </aside>
 
                     <div className="flex-1 relative h-full border-primary border-t @xl:border-t-0">
+                        <AnimatePresence>
+                            {selectedPlace && (
+                                <PlaceDetail place={selectedPlace} onClose={() => setSelectedPlace(null)} />
+                            )}
+                        </AnimatePresence>
+
                         <PlacesMap
                             layers={selectedLayers.length > 0 ? selectedLayers : undefined}
-                            onPlaceClick={setSelectedPlaceId}
-                            selectedPlaceId={selectedPlaceId}
+                            onPlaceClick={handlePlaceClick}
+                            selectedPlaceId={selectedPlace?.id || null}
                             onPlacesLoaded={handlePlacesLoaded}
                         />
                     </div>
