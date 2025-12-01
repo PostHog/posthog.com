@@ -1355,7 +1355,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Getting started with newly assigned customers',
-                        url: '/handbook/cs-and-onboarding/newly-assigned-customer',
+                        url: '/handbook/cs-and-onboarding/getting-started-with-customers',
                     },
                     {
                         name: 'Basic account review checklist',
