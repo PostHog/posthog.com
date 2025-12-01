@@ -178,44 +178,26 @@ export default function PlacesMap({
 
             // Use Mapbox clusters when zoomed out
             if (zoom < CLUSTER_ZOOM) {
-                // Group places by type for clustering
-                const placesByType: Record<string, PlaceItem[]> = {}
-                filteredPlaces.forEach((p) => {
-                    if (!placesByType[p.type]) {
-                        placesByType[p.type] = []
-                    }
-                    placesByType[p.type].push(p)
-                })
-
-                Object.entries(placesByType).forEach(([type, typePlaces]) => {
-                    const features = typePlaces
-                        .map((p) => {
-                            const coords = coordsByPlaceIdRef.current[p.id]
-                            if (!coords) return null
-                            return {
-                                type: 'Feature',
-                                properties: { type: `place-${type}` },
-                                geometry: { type: 'Point', coordinates: [coords.longitude, coords.latitude] },
-                            }
-                        })
-                        .filter(Boolean)
-                    const data = { type: 'FeatureCollection', features: features as any[] }
-                    ensureClusterSource(mapRef.current, `places-${type}-source`, data)
-                    ensureClusterLayers(mapRef.current, `places-${type}-source`)
-                    setClusterVisibility(mapRef.current, `places-${type}-source`, true)
-                })
-                // Hide clusters for types not in filteredPlaces
-                Object.values(PlaceType).forEach((type) => {
-                    if (!placesByType[type]) {
-                        setClusterVisibility(mapRef.current, `places-${type}-source`, false)
-                    }
-                })
+                // Create a single cluster for all places together
+                const features = filteredPlaces
+                    .map((p) => {
+                        const coords = coordsByPlaceIdRef.current[p.id]
+                        if (!coords) return null
+                        return {
+                            type: 'Feature',
+                            properties: { type: 'place' },
+                            geometry: { type: 'Point', coordinates: [coords.longitude, coords.latitude] },
+                        }
+                    })
+                    .filter(Boolean)
+                const data = { type: 'FeatureCollection', features: features as any[] }
+                ensureClusterSource(mapRef.current, 'places-source', data)
+                ensureClusterLayers(mapRef.current, 'places-source')
+                setClusterVisibility(mapRef.current, 'places-source', true)
                 return
             } else {
-                // Hide all place clusters when zoomed in
-                Object.values(PlaceType).forEach((type) => {
-                    setClusterVisibility(mapRef.current, `places-${type}-source`, false)
-                })
+                // Hide place clusters when zoomed in
+                setClusterVisibility(mapRef.current, 'places-source', false)
             }
 
             // Render individual markers
