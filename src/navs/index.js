@@ -3581,7 +3581,7 @@ export const docsMenu = {
                     name: 'Analyzing results',
                     url: '/docs/experiments/analyzing-results',
                     featured: true,
-                    icon: 'IconChartBar',
+                    icon: 'IconGraph',
                     color: 'purple',
                 },
                 {
@@ -3638,12 +3638,6 @@ export const docsMenu = {
                     name: 'Holdouts',
                     url: '/docs/experiments/holdouts',
                     icon: 'IconPeople',
-                    color: 'green',
-                },
-                {
-                    name: 'New experimentation engine',
-                    url: '/docs/experiments/new-experimentation-engine',
-                    icon: 'IconTestTube',
                     color: 'green',
                 },
                 {
