@@ -1355,7 +1355,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Getting started with newly assigned customers',
-                        url: '/handbook/cs-and-onboarding/getting-started-with-customers',
+                        url: '/handbook/cs-and-onboarding/newly-assigned-customer',
                     },
                     {
                         name: 'Basic account review checklist',
@@ -1378,6 +1378,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                     {
+                        name: 'Lifecycle of CSM engagement',
+                        url: '/handbook/cs-and-onboarding/lifecycle-csm',
+                    },
+                    {
                         name: 'How we use automation',
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
                     },
@@ -1392,6 +1396,10 @@ export const handbookSidebar = [
                     {
                         name: 'Customer industry segments',
                         url: '/handbook/cs-and-onboarding/customer-industry-segments',
+                    },
+                    {
+                        name: 'Common churn reasons',
+                        url: '/handbook/cs-and-onboarding/churn-reasons',
                     },
                 ],
             },
