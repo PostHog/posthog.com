@@ -278,6 +278,125 @@ gap: .5rem;
         border: 1px solid #4A4C52;
     }
 }
+
+/* AI response code block styling */
+.ikp-codeblock-container {
+    border-radius: 6px;
+    margin: 12px 0;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Source Code Pro', 'Menlo', 'Consolas', 'Monaco', monospace;
+
+    [data-theme="light"] & {
+        border: 1px solid #e5e7eb;
+    }
+    [data-theme="dark"] & {
+        border: 1px solid #374151;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+}
+
+.ikp-codeblock-header {
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 36px;
+
+    [data-theme="light"] & {
+        background: #f9fafb;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    [data-theme="dark"] & {
+        background: #1f2937;
+        border-bottom: 1px solid #374151;
+    }
+}
+
+.ikp-codeblock-header-language {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    [data-theme="light"] & {
+        color: #6b7280;
+    }
+    [data-theme="dark"] & {
+        color: #9ca3af;
+    }
+}
+
+.ikp-codeblock-copy-button {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    [data-theme="light"] & {
+        border: 1px solid #d1d5db;
+        background: white;
+        color: #4b5563;
+
+        &:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+        }
+    }
+    [data-theme="dark"] & {
+        background: #374151;
+        border: 1px solid #4b5563;
+        color: #d1d5db;
+
+        &:hover {
+            background: #4b5563;
+            border-color: #6b7280;
+        }
+    }
+}
+
+.ikp-codeblock-highlighter-wrapper {
+    padding: 14px;
+    overflow-x: auto;
+    max-height: 400px;
+
+    [data-theme="light"] & {
+        background: #ffffff;
+    }
+    [data-theme="dark"] & {
+        background: #111827;
+    }
+}
+
+.ikp-codeblock-highlighter {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.ikp-codeblock-code {
+    font-family: 'Source Code Pro', 'Menlo', 'Consolas', 'Monaco', monospace !important;
+}
+
+/* Fallback for any plain pre tags in AI responses */
+.ikp-ai-chat-message-content pre:not(.ikp-codeblock-highlighter) {
+    border-radius: 6px;
+    padding: 14px;
+    overflow-x: auto;
+    font-family: 'Source Code Pro', 'Menlo', 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+
+    [data-theme="light"] & {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+    }
+    [data-theme="dark"] & {
+        background: #111827;
+        border: 1px solid #374151;
+    }
+}
                 `,
             },
         ],

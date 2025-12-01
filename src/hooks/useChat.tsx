@@ -146,15 +146,12 @@ export function ChatProvider({
         const contextPrompts = context.map((c) =>
             c.type === 'page' ? `The user is currently viewing the page ${c.value.label} at ${c.value.path}` : ``
         )
-        const codePrompt = codeSnippet
-            ? `The user is asking about the following ${codeSnippet.language} code snippet from ${codeSnippet.sourceUrl}:\n\n\`\`\`${codeSnippet.language}\n${codeSnippet.code}\n\`\`\`\n\nPlease explain this code in your response.`
-            : ''
-        const prompts = codePrompt ? [codePrompt, ...contextPrompts] : contextPrompts
+        // codePrompt is now handled in Chat/index.tsx and passed through Inkeep.tsx
         setAiChatSettings({
             ...aiChatSettings,
-            prompts,
+            prompts: contextPrompts,
         })
-    }, [context, codeSnippet])
+    }, [context])
 
     useEffect(() => {
         setAiChatSettings({

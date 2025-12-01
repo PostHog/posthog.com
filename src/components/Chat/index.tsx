@@ -1,10 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import InkeepEmbeddedChat from './Inkeep'
 import { useChat } from 'hooks/useChat'
-import { IconDocument, IconX, IconCode } from '@posthog/icons'
+import { IconDocument, IconRewind, IconX, IconCode } from '@posthog/icons'
+import { motion } from 'framer-motion'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { SingleCodeBlock } from 'components/CodeBlock'
+
+const ConversationHistoryButton = ({ onClick }: { onClick: () => void }) => {
+    return (
+        <motion.div>
+            <motion.button
+                onClick={(e) => {
+                    e.stopPropagation()
+                    onClick()
+                }}
+                className="border border-light-7 rounded p-1.5 flex items-center space-x-1 click overflow-hidden group h-[28px]"
+                whileHover={{ width: 'auto' }}
+                initial={{ width: '28px' }}
+            >
+                <IconRewind className="size-3.5 flex-shrink-0 opacity-60 group-hover:opacity-100 transition-opacity" />
+                <span className="text-xs whitespace-nowrap group-hover:opacity-100 opacity-0 transition-opacity font-semibold">
+                    Conversation history
+                </span>
+            </motion.button>
+        </motion.div>
+    )
+}
 
 const Context = () => {
     return null
@@ -15,6 +37,14 @@ export default function Chat(): JSX.Element | null {
     const { setWindowTitle, openNewChat } = useApp()
     const { appWindow, setPageOptions } = useWindow()
     const [showCodeSnippet, setShowCodeSnippet] = useState(true)
+
+    const codePrompt = codeSnippet
+        ? `The user is asking about this ${codeSnippet.language || 'code'} snippet from ${codeSnippet.sourceUrl}:
+
+\`\`\`${codeSnippet.language || 'javascript'}
+${codeSnippet.code}
+\`\`\``
+        : undefined
 
     useEffect(() => {
         if (firstResponse && appWindow) {
@@ -116,15 +146,18 @@ export default function Chat(): JSX.Element | null {
                             <IconX className="size-3.5 opacity-60 hover:opacity-100" />
                         </button>
                     </div>
-                    <div className="max-h-[200px] overflow-auto rounded text-sm">
+                    <div className="max-h-[100px] overflow-auto rounded text-sm [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                         <SingleCodeBlock language={codeSnippet.language} showLabel={false} showAskAI={false}>
                             {codeSnippet.code}
                         </SingleCodeBlock>
                     </div>
+                    <div className="text-xs text-primary/50 dark:text-primary-dark/50 mt-2 italic">
+                        Asking: "Explain this code snippet"
+                    </div>
                 </div>
             )}
             <div className="flex-1 min-h-0">
-                <InkeepEmbeddedChat />
+                <InkeepEmbeddedChat codePrompt={codePrompt} />
             </div>
         </div>
     )

@@ -240,7 +240,7 @@ export const CodeBlock = ({
     const copyToClipboard = (): void => {
         navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(currentLanguage.code)))
         setTooltipVisible(true)
-        setTimeout(() => setTooltipVisible(false), 1000)
+        setTimeout(() => setTooltipVisible(false), 500)
     }
 
     const handleAskAboutCode = (): void => {
@@ -249,11 +249,9 @@ export const CodeBlock = ({
         const pagePath = appWindow?.path || location.pathname?.replace(/\/$/, '') || ''
         const sourceUrl = `https://posthog.com${pagePath}`
 
-        posthog?.capture('ask_posthog_ai_code_snippet', { page_path: pagePath, language })
-
         openNewChat({
             path: `ask-max-${pagePath}`,
-            initialQuestion: `Explain this ${language || 'code'} code from ${sourceUrl}:\n\n${code}`,
+            initialQuestion: `Explain this ${language || 'code'} snippet`,
             codeSnippet: { code, language, sourceUrl },
         })
     }
@@ -380,12 +378,14 @@ export const CodeBlock = ({
                         )}
 
                         {showAskAI && (
-                            <div className="relative flex items-center justify-center px-1">
+                            <div className="relative flex items-center justify-center px-1 group/askai">
                                 <button
                                     onClick={handleAskAboutCode}
-                                    className="text-muted hover:text-secondary px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
-                                    title="Ask PostHog AI"
+                                    className="ask-posthog-ai-code-snippet inline-flex items-center gap-1 text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                 >
+                                    <span className="hidden group-hover/askai:inline whitespace-nowrap text-sm">
+                                        PostHog AI
+                                    </span>
                                     <IconSparkles className="w-4 h-4" />
                                 </button>
                             </div>
