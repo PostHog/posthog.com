@@ -97,39 +97,39 @@ function Places() {
                                     </div>
                                 </div>
                             </div>
-                        </ScrollArea>
 
-                        <div className="border-b border-primary px-4 pt-4 pb-4">
-                            <h3 className="text-base font-semibold mb-2">Filter by type</h3>
-                            <div className="space-y-3">
-                                {Object.values(PlaceType).map((type) => {
-                                    const { icon, colorClass } = getPlaceIcon(type, 'size-3')
-                                    return (
-                                        <label
-                                            key={type}
-                                            className="flex items-center gap-3 cursor-pointer group"
-                                            htmlFor={`place-type-${type}`}
-                                        >
-                                            <Checkbox
-                                                id={`place-type-${type}`}
-                                                checked={selectedLayers.includes(type)}
-                                                onCheckedChange={(checked) => handleLayerToggle(type, checked)}
-                                            />
-                                            <span className="flex items-center gap-2 flex-1">
-                                                <span
-                                                    className={`flex items-center justify-center w-6 h-6 rounded-full ${colorClass} border border-white shadow`}
-                                                >
-                                                    {icon}
+                            <div className="px-4 pt-4 pb-4">
+                                <h3 className="text-base font-semibold mb-2">Filter by type</h3>
+                                <div className="space-y-3">
+                                    {Object.values(PlaceType).map((type) => {
+                                        const { icon, colorClass } = getPlaceIcon(type, 'size-3')
+                                        return (
+                                            <label
+                                                key={type}
+                                                className="flex items-center gap-3 cursor-pointer group"
+                                                htmlFor={`place-type-${type}`}
+                                            >
+                                                <Checkbox
+                                                    id={`place-type-${type}`}
+                                                    checked={selectedLayers.includes(type)}
+                                                    onCheckedChange={(checked) => handleLayerToggle(type, checked)}
+                                                />
+                                                <span className="flex items-center gap-2 flex-1">
+                                                    <span
+                                                        className={`flex items-center justify-center w-6 h-6 rounded-full ${colorClass} border border-white shadow`}
+                                                    >
+                                                        {icon}
+                                                    </span>
+                                                    <span className="text-sm">
+                                                        {type} ({placesByType[type] || 0})
+                                                    </span>
                                                 </span>
-                                                <span className="text-sm">
-                                                    {type} ({placesByType[type] || 0})
-                                                </span>
-                                            </span>
-                                        </label>
-                                    )
-                                })}
+                                            </label>
+                                        )
+                                    })}
+                                </div>
                             </div>
-                        </div>
+                        </ScrollArea>
                     </aside>
 
                     <div className="flex-1 relative h-full border-primary border-t @xl:border-t-0">
