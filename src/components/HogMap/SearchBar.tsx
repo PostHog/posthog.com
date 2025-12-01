@@ -353,16 +353,18 @@ export function createSearchMarker({
                 longitude: Number(longitude),
                 type: type.charAt(0).toUpperCase() + type.slice(1),
             }
+            let newPlaceId: number | null = null
             try {
                 const jwt = typeof getJwt === 'function' ? await getJwt() : null
                 if (jwt) {
-                    await addPlace(jwt, item)
+                    const response = await addPlace(jwt, item)
+                    newPlaceId = (response as any)?.data?.id || null
                 }
             } catch (e) {
                 console.error('Error adding place', e)
             }
             try {
-                window.dispatchEvent(new CustomEvent('hogmap:places-updated'))
+                window.dispatchEvent(new CustomEvent('hogmap:places-updated', { detail: { placeId: newPlaceId } }))
             } catch {
                 console.error('Error dispatching places updated event')
             }

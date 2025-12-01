@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react'
+import React, { useState, useCallback, useRef, useEffect } from 'react'
 import SEO from 'components/seo'
 import Explorer from 'components/Explorer'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -21,6 +21,25 @@ function Places() {
     const handlePlacesLoaded = useCallback((loadedPlaces: PlaceItem[]) => {
         setPlaces(loadedPlaces)
         placesRef.current = loadedPlaces
+    }, [])
+
+    // Listen for new places being added and auto-open their detail
+    useEffect(() => {
+        const handlePlaceAdded = (event: CustomEvent) => {
+            const placeId = event.detail?.placeId
+            if (placeId && placesRef.current.length > 0) {
+                // Wait a bit for the places to refresh, then open the detail
+                setTimeout(() => {
+                    const place = placesRef.current.find((p) => p.id === placeId)
+                    if (place) {
+                        setSelectedPlace(place)
+                    }
+                }, 500)
+            }
+        }
+
+        window.addEventListener('hogmap:places-updated', handlePlaceAdded as EventListener)
+        return () => window.removeEventListener('hogmap:places-updated', handlePlaceAdded as EventListener)
     }, [])
 
     // Show place detail overlay when a marker is clicked
