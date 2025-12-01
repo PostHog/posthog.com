@@ -2,7 +2,16 @@ import qs from 'qs'
 
 // Fetch all places (public endpoint, no JWT required)
 export const getPlaces = async (): Promise<Record<string, unknown>[]> => {
-    const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/places`)
+    const placesQuery = qs.stringify(
+        {
+            pagination: {
+                pageSize: 1000,
+            },
+        },
+        { encodeValuesOnly: true }
+    )
+
+    const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/places?${placesQuery}`)
 
     if (!response.ok) {
         throw new Error(`Failed to fetch places: ${response.statusText}`)
