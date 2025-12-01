@@ -3637,12 +3637,6 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'New experimentation engine',
-                    url: '/docs/experiments/new-experimentation-engine',
-                    icon: 'IconTestTube',
-                    color: 'green',
-                },
-                {
                     name: 'Guides',
                 },
                 {
