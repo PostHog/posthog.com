@@ -6,7 +6,7 @@ availability:
   enterprise: full
 ---
 
-import {ProductVideo} from'components/ProductVideo'
+import { ProductVideo } from 'components/ProductVideo'
 export const watchRecordingsLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/how-to-watch-recordings-light-mode.mp4"
 export const watchRecordingsDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/how-to-watch-recordings-dark-mode.mp4"
 export const createPlaylistLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/create-playlist-light-mode.mp4"
@@ -15,11 +15,15 @@ export const createPlaylistDark = "https://res.cloudinary.com/dmukukwp6/video/up
 To watch recordings, you can visit the [Replay](https://us.posthog.com/replay) page or click on any data point in an insight. This opens a list of persons and displays a **Watch recording** button or **Recordings** tab if available. This is especially useful in [funnels](/docs/product-analytics/funnels), where you can drill down and [watch recordings of users who converted or dropped off](/tutorials/explore-insights-session-recordings).
 
 <ProductVideo
-    videoLight={watchRecordingsLight} 
+    videoLight={watchRecordingsLight}
     videoDark={watchRecordingsDark}
-    alt="How to watch recordings via insights" 
+    alt="How to watch recordings via insights"
     classes="rounded"
 />
+
+<Caption>
+    How to watch recordings via insights
+</Caption>
 
 When watching replays, you can:
 
@@ -40,17 +44,25 @@ When watching replays, you can:
   classes="rounded"
 />
 
+<Caption>
+    Everything you can do in session replay
+</Caption>
+
 ## Triage recordings with PostHog AI
 
 Have too many recordings to watch? PostHog AI can help you triage them for you.
 
 <ProductVideo
-    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/session_summaries_664cfbb85d.mp4" 
-    alt="PostHog AI chat summarizing session recordings" 
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/session_summaries_664cfbb85d.mp4"
+    alt="PostHog AI chat summarizing session recordings"
     classes="rounded border border-primary @md:max-w-[80%] mx-auto"
     autoPlay={true}
     background={false}
 />
+
+<Caption>
+    PostHog AI summarizes your session recordings for you
+</Caption>
 
 You can ask PostHog AI to do the following:
 - [`Find sessions where users dropped off during checkout`](https://app.posthog.com/#panel=max:!Find%20sessions%20where%20users%20dropped%20off%20during%20checkout)
@@ -65,7 +77,7 @@ To do so:
 
 1. Click **Show filters**.
 2. Create your filter with options for date, active duration, events, properties, console logs, and more.
-3. Once done, click **Add to "Saved filters"**. 
+3. Once done, click **Add to "Saved filters"**.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_11_39_38_2x_6f98a05cfb.png"
@@ -73,6 +85,10 @@ To do so:
   alt="Saved filters in session replay"
   classes="rounded"
 />
+
+<Caption>
+    Saved filters in session replay
+</Caption>
 
 This will then be accessible to anyone in your project via the **Shared filters** tab and new replays will automatically be added to it.
 
@@ -88,6 +104,10 @@ To do so, click **+ Add to collection** next to the **Share** button on a replay
   alt="Session replay collection"
   classes="rounded"
 />
+
+<Caption>
+    Session replay collection
+</Caption>
 
 ## Capturing and sharing moments
 
@@ -105,6 +125,9 @@ Both features are available in the bottom right corner of the recording player a
   classes="rounded"
 />
 
+<Caption>
+    Screen capture and clip capture features in session replay
+</Caption>
 
 ## Further reading
 
