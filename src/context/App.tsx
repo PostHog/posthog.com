@@ -685,6 +685,23 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/videos/play': {
+        size: {
+            min: {
+                width: 960,
+                height: 480,
+            },
+            max: {
+                width: 1440,
+                height: 810,
+            },
+            fixed: false,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/sales': {
         size: {
             min: {
@@ -975,6 +992,71 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/fm': {
+        size: {
+            min: {
+                width: 1100,
+                height: 660,
+            },
+            max: {
+                width: 1100,
+                height: 660,
+            },
+            fixed: true,
+        },
+    },
+    'fm/mixtapes': {
+        size: {
+            min: {
+                width: 450,
+                height: 709,
+            },
+            max: {
+                width: 450,
+                height: 709,
+            },
+            fixed: true,
+        },
+    },
+    '/fm/mixtapes/new': {
+        size: {
+            min: {
+                width: 850,
+                height: 597,
+            },
+            max: {
+                width: 850,
+                height: 597,
+            },
+            fixed: true,
+        },
+    },
+    '/fm/mixtapes/edit/:id': {
+        size: {
+            min: {
+                width: 850,
+                height: 597,
+            },
+            max: {
+                width: 850,
+                height: 597,
+            },
+            fixed: true,
+        },
+    },
+    'fm/dance-mode': {
+        size: {
+            min: {
+                width: 500,
+                height: 500,
+            },
+            max: {
+                width: 500,
+                height: 500,
+            },
+            fixed: true,
+        },
+    },
 } as const
 
 export interface SiteSettings {
@@ -1155,7 +1237,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 )
                 if (nextFocusedWindow && !nextFocusedWindow.minimized) {
                     if (nextFocusedWindow.path.startsWith('/')) {
-                        navigate(nextFocusedWindow.path)
+                        navigate(`${nextFocusedWindow.path}${nextFocusedWindow.location?.search || ''}`)
                     } else {
                         bringToFront(nextFocusedWindow)
                     }
@@ -1417,10 +1499,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
 
         if (siteSettings.experience === 'boring') {
+            if (existingWindow) {
+                return bringToFront(existingWindow, element.props.location)
+            }
             if (newWindow.key.startsWith('/')) {
                 return replaceFocusedWindow(newWindow)
             } else {
-                return setWindows([...windows, newWindow])
+                return setWindows([...windows?.filter((w) => w.key !== newWindow.key), newWindow])
             }
         }
 
@@ -1816,7 +1901,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
                     // Navigate to the next window
                     if (nextWindow.path.startsWith('/')) {
-                        navigate(nextWindow.path)
+                        navigate(`${nextWindow.path}${nextWindow.location?.search || ''}`)
                     } else {
                         bringToFront(nextWindow)
                     }

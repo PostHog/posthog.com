@@ -3,6 +3,10 @@ const algoliaConfig = require('./gatsby/algoliaConfig')
 const qs = require('qs')
 
 require('dotenv').config({
+    path: `.env.${process.env.NODE_ENV}.local`,
+})
+
+require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
 })
 

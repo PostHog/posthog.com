@@ -83,6 +83,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/google-ads',
                 },
                 {
+                    name: 'Bing Ads',
+                    url: '/docs/cdp/sources/bing-ads',
+                },
+                {
                     name: 'LinkedIn Ads',
                     url: '/docs/cdp/sources/linkedin-ads',
                 },
@@ -1250,9 +1254,13 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Sales & CS',
+        name: 'Sales, CS & Onboarding',
         url: '',
         children: [
+            {
+                name: 'Overview',
+                url: '/handbook/growth/sales/accounts-overview',
+            }, 
             {
                 name: 'Sales',
                 url: '',
@@ -1370,6 +1378,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                     {
+                        name: 'Lifecycle of CSM engagement',
+                        url: '/handbook/cs-and-onboarding/lifecycle-csm',
+                    },
+                    {
                         name: 'How we use automation',
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
                     },
@@ -1385,6 +1397,10 @@ export const handbookSidebar = [
                         name: 'Customer industry segments',
                         url: '/handbook/cs-and-onboarding/customer-industry-segments',
                     },
+                    {
+                        name: 'Common churn reasons',
+                        url: '/handbook/cs-and-onboarding/churn-reasons',
+                    },
                 ],
             },
             {
@@ -1394,10 +1410,6 @@ export const handbookSidebar = [
                     {
                         name: 'Onboarding team',
                         url: '/handbook/onboarding/onboarding-team',
-                    },
-                    {
-                        name: 'YC onboarding',
-                        url: '/handbook/growth/sales/yc-onboarding',
                     },
                     {
                         name: 'Onboarding program',
@@ -1528,7 +1540,7 @@ export const handbookSidebar = [
             {
                 name: 'Customer FAQs',
                 url: '/handbook/growth/sales/customer-faqs',
-            },
+            }, 
         ],
     },
     {
@@ -2570,7 +2582,7 @@ export const docsMenu = {
                             url: '/docs/settings/access-control',
                         },
                         {
-                            name: 'SSO & SAML',
+                            name: 'SSO, SAML, & SCIM',
                             url: '/docs/settings/sso',
                         },
                         {
@@ -3577,7 +3589,7 @@ export const docsMenu = {
                     name: 'Analyzing results',
                     url: '/docs/experiments/analyzing-results',
                     featured: true,
-                    icon: 'IconChartBar',
+                    icon: 'IconGraph',
                     color: 'purple',
                 },
                 {
@@ -3634,12 +3646,6 @@ export const docsMenu = {
                     name: 'Holdouts',
                     url: '/docs/experiments/holdouts',
                     icon: 'IconPeople',
-                    color: 'green',
-                },
-                {
-                    name: 'New experimentation engine',
-                    url: '/docs/experiments/new-experimentation-engine',
-                    icon: 'IconTestTube',
                     color: 'green',
                 },
                 {
@@ -3918,6 +3924,20 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Group exceptions into issues',
+                    url: '/docs/error-tracking/grouping-issues',
+                    icon: 'IconList',
+                    color: 'yellow',
+                    featured: true,
+                },
+                {
+                    name: 'Monitor and search issues',
+                    url: '/docs/error-tracking/monitoring',
+                    icon: 'IconSearch',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
                     name: 'Manage and resolve issues',
                     url: '/docs/error-tracking/managing-issues',
                     icon: 'IconDashboard',
@@ -3930,29 +3950,12 @@ export const docsMenu = {
                     icon: 'IconUser',
                     color: 'blue',
                     featured: true,
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/error-tracking/assigning-issues',
-                        },
-                        {
-                            name: 'Track in GitHub and Linear',
-                            url: '/docs/error-tracking/external-tracking',
-                        },
-                    ],
                 },
                 {
-                    name: 'Group exceptions into issues',
-                    url: '/docs/error-tracking/grouping-issues',
-                    icon: 'IconList',
-                    color: 'yellow',
-                    featured: true,
-                },
-                {
-                    name: 'Monitor and search issues',
-                    url: '/docs/error-tracking/monitoring',
-                    icon: 'IconSearch',
-                    color: 'seagreen',
+                    name: 'Set up integrations',
+                    url: '/docs/error-tracking/integrations',
+                    icon: 'IconApps',
+                    color: 'green',
                     featured: true,
                 },
                 {
@@ -4185,6 +4188,10 @@ export const docsMenu = {
                         {
                             name: 'Google Ads',
                             url: '/docs/data-warehouse/sources/google-ads',
+                        },
+                        {
+                            name: 'Bing Ads',
+                            url: '/docs/data-warehouse/sources/bing-ads',
                         },
                         {
                             name: 'LinkedIn Ads',
@@ -4696,8 +4703,8 @@ export const docsMenu = {
         },
         {
             name: 'PostHog AI',
-            icon: 'IconLogomark',
-            color: 'black',
+            icon: 'IconSparkles',
+            color: 'blue',
             url: '/docs/posthog-ai',
             description: 'AI-powered product analyst and assistant',
             children: [
@@ -4754,6 +4761,12 @@ export const docsMenu = {
                     url: '/docs/posthog-ai/tools',
                     icon: 'IconWrench',
                     color: 'blue',
+                },
+                {
+                    name: 'Session summaries',
+                    url: '/docs/posthog-ai/session-summaries',
+                    icon: 'IconEye',
+                    color: 'purple',
                 },
                 {
                     name: 'Guides',
