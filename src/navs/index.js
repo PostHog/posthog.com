@@ -4759,7 +4759,7 @@ export const docsMenu = {
                 {
                     name: 'Session summaries',
                     url: '/docs/posthog-ai/session-summaries',
-                    icon: 'IconEyes',
+                    icon: 'IconEye',
                     color: 'purple',
                 },
                 {
