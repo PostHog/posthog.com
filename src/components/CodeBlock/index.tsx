@@ -251,7 +251,7 @@ export const CodeBlock = ({
 
         openNewChat({
             path: `ask-max-${pagePath}`,
-            initialQuestion: `Explain this ${language || 'code'} snippet`,
+            initialQuestion: `Explain this ${language || 'code'} code from ${sourceUrl}`,
             codeSnippet: { code, language, sourceUrl },
         })
     }
