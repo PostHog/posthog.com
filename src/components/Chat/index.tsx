@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import InkeepEmbeddedChat from './Inkeep'
 import { useChat } from 'hooks/useChat'
-import { IconDocument, IconRewind, IconX } from '@posthog/icons'
-import usePostHog from 'hooks/usePostHog'
-import { groupBy } from 'lodash'
-import dayjs from 'dayjs'
+import { IconDocument, IconRewind, IconX, IconCode } from '@posthog/icons'
+import { motion } from 'framer-motion'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
+import { SingleCodeBlock } from 'components/CodeBlock'
 
 const ConversationHistoryButton = ({ onClick }: { onClick: () => void }) => {
     return (
@@ -35,9 +33,18 @@ const Context = () => {
 }
 
 export default function Chat(): JSX.Element | null {
-    const { conversationHistory, resetConversationHistory, context, setContext, firstResponse } = useChat()
+    const { conversationHistory, resetConversationHistory, context, setContext, firstResponse, codeSnippet } = useChat()
     const { setWindowTitle, openNewChat } = useApp()
     const { appWindow, setPageOptions } = useWindow()
+    const [showCodeSnippet, setShowCodeSnippet] = useState(true)
+
+    const codePrompt = codeSnippet
+        ? `The user is asking about this ${codeSnippet.language || 'code'} snippet from ${codeSnippet.sourceUrl}:
+
+\`\`\`${codeSnippet.language || 'javascript'}
+${codeSnippet.code}
+\`\`\``
+        : undefined
 
     useEffect(() => {
         if (firstResponse && appWindow) {
@@ -89,7 +96,7 @@ export default function Chat(): JSX.Element | null {
     }, [appWindow, conversationHistory])
 
     return (
-        <div className="h-full relative">
+        <div className="h-full flex flex-col relative">
             <div data-scheme="secondary">
                 {context?.length > 0 && (
                     <ul className="m-0 list-none p-2 flex space-x-1 overflow-auto snap-x snap-mandatory absolute left-0 w-full z-10 top-0">
@@ -127,7 +134,31 @@ export default function Chat(): JSX.Element | null {
                 )}
             </div>
             <Context />
-            <InkeepEmbeddedChat />
+            {codeSnippet && showCodeSnippet && (
+                <div className="border-b border-light dark:border-dark p-2">
+                    <div className="flex items-center justify-between mb-1 text-xs text-primary/60 dark:text-primary-dark/60">
+                        <span className="flex items-center gap-1.5">
+                            <IconCode className="size-3.5" />
+                            <strong>Code snippet</strong>
+                            {codeSnippet.language && <span className="opacity-60">({codeSnippet.language})</span>}
+                        </span>
+                        <button onClick={() => setShowCodeSnippet(false)} title="Hide code snippet">
+                            <IconX className="size-3.5 opacity-60 hover:opacity-100" />
+                        </button>
+                    </div>
+                    <div className="max-h-[100px] overflow-auto rounded text-sm [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                        <SingleCodeBlock language={codeSnippet.language} showLabel={false} showAskAI={false}>
+                            {codeSnippet.code}
+                        </SingleCodeBlock>
+                    </div>
+                    <div className="text-xs text-primary/50 dark:text-primary-dark/50 mt-2 italic">
+                        Asking: "Explain this code snippet"
+                    </div>
+                </div>
+            )}
+            <div className="flex-1 min-h-0">
+                <InkeepEmbeddedChat codePrompt={codePrompt} />
+            </div>
         </div>
     )
 }
