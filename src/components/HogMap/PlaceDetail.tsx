@@ -5,7 +5,8 @@ import OSButton from 'components/OSButton'
 import { useUser } from 'hooks/useUser'
 import { PlaceItem, PlaceReview } from './types'
 import { getPlaceIcon } from './PlacesMap'
-import { getPlaceReviews, addPlaceReview } from './data'
+import { getPlaceReviews, addPlaceReview, deletePlaceReview, deletePlace } from './data'
+import { IconTrash } from '@posthog/icons'
 import dayjs from 'dayjs'
 
 interface PlaceDetailProps {
@@ -15,7 +16,7 @@ interface PlaceDetailProps {
 
 export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
     const { icon, colorClass } = getPlaceIcon(place.type, 'size-6')
-    const { user, getJwt } = useUser()
+    const { user, isModerator, getJwt } = useUser()
     const [reviews, setReviews] = useState<PlaceReview[]>([])
     const [loading, setLoading] = useState(true)
     const [showReviewForm, setShowReviewForm] = useState(false)
@@ -74,6 +75,43 @@ export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
         }
     }
 
+    const handleDeleteReview = async (reviewId: number) => {
+        if (!confirm('Are you sure you want to delete this review?')) return
+
+        try {
+            const jwt = await getJwt()
+            if (!jwt) return
+
+            await deletePlaceReview(jwt, reviewId)
+
+            // Refresh reviews
+            const allReviews = (await getPlaceReviews()) as any[]
+            const placeReviews = allReviews.filter((r) => r.place?.id === place.id) as PlaceReview[]
+            setReviews(placeReviews)
+        } catch (error) {
+            console.error('Failed to delete review:', error)
+        }
+    }
+
+    const handleDeletePlace = async () => {
+        if (!confirm(`Are you sure you want to delete "${place.name}"? This will also delete all reviews.`)) return
+
+        try {
+            const jwt = await getJwt()
+            if (!jwt) return
+
+            await deletePlace(jwt, place.id)
+
+            // Dispatch event to refresh places list
+            window.dispatchEvent(new CustomEvent('hogmap:places-updated'))
+
+            // Close the detail view
+            onClose()
+        } catch (error) {
+            console.error('Failed to delete place:', error)
+        }
+    }
+
     return (
         <motion.div
             initial={{ opacity: 0, translateX: '-50%' }}
@@ -105,6 +143,15 @@ export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
                                 {place.type}
                             </div>
                         </div>
+                        {isModerator && (
+                            <OSButton
+                                size="sm"
+                                variant="secondary"
+                                icon={<IconTrash />}
+                                onClick={handleDeletePlace}
+                                tooltip="Delete this place"
+                            />
+                        )}
                     </div>
 
                     <div className="space-y-4 text-sm">
@@ -206,8 +253,19 @@ export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
                                                         <span key={i}>⭐</span>
                                                     ))}
                                                 </div>
-                                                <div className="text-[11px] text-secondary">
-                                                    {dayjs(review.createdAt).format('MMM D, YYYY')}
+                                                <div className="flex items-center gap-2">
+                                                    <div className="text-[11px] text-secondary">
+                                                        {dayjs(review.createdAt).format('MMM D, YYYY')}
+                                                    </div>
+                                                    {isModerator && (
+                                                        <button
+                                                            onClick={() => handleDeleteReview(review.id)}
+                                                            className="text-red hover:text-red/80 transition-colors"
+                                                            title="Delete review"
+                                                        >
+                                                            <IconTrash className="size-3" />
+                                                        </button>
+                                                    )}
                                                 </div>
                                             </div>
                                             {review.notes && (

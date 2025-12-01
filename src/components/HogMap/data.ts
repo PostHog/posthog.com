@@ -37,7 +37,7 @@ export const getPlaces = async (): Promise<Record<string, unknown>[]> => {
     )
 }
 
-// Create a new place
+// Create a new place (requires authentication)
 export const addPlace = async (
     jwt: string,
     payload: { name: string; address: string; type: string; latitude: number; longitude: number }
@@ -56,6 +56,20 @@ export const addPlace = async (
     }
 
     return response.json()
+}
+
+// Delete a place (moderators only)
+export const deletePlace = async (jwt: string, placeId: number): Promise<void> => {
+    const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/places/${placeId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+        },
+    })
+
+    if (!response.ok) {
+        throw new Error(`Failed to delete place: ${response.statusText}`)
+    }
 }
 
 // Fetch all place reviews (public endpoint, no JWT required)
@@ -124,7 +138,7 @@ export const getPlaceReviews = async (): Promise<Record<string, unknown>[]> => {
     )
 }
 
-// Create a new place review
+// Create a new place review (requires authentication)
 export const addPlaceReview = async (
     jwt: string,
     payload: Record<string, unknown>
@@ -143,4 +157,18 @@ export const addPlaceReview = async (
     }
 
     return response.json()
+}
+
+// Delete a place review (moderators only)
+export const deletePlaceReview = async (jwt: string, reviewId: number): Promise<void> => {
+    const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/place-reviews/${reviewId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+        },
+    })
+
+    if (!response.ok) {
+        throw new Error(`Failed to delete place review: ${response.statusText}`)
+    }
 }

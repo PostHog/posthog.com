@@ -80,8 +80,27 @@ function Places() {
                         data-scheme="secondary"
                         className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary h-full flex flex-col"
                     >
+                        <ScrollArea className="flex-1">
+                            <div className="p-4">
+                                <div className="space-y-4">
+                                    <div>
+                                        <h2 className="text-lg font-semibold mb-3">HogMaps</h2>
+                                        <p className="text-sm text-secondary">
+                                            Recommended places discovered by the PostHog team around the world.
+                                            {isModerator && (
+                                                <span className="block mt-2 font-semibold">
+                                                    As a moderator, you can add new places using the search bar on the
+                                                    map.
+                                                </span>
+                                            )}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </ScrollArea>
+
                         <div className="border-b border-primary px-4 pt-4 pb-4">
-                            <h2 className="text-lg font-semibold mb-3">Filter by type</h2>
+                            <h3 className="text-base font-semibold mb-2">Filter by type</h3>
                             <div className="space-y-3">
                                 {Object.values(PlaceType).map((type) => {
                                     const { icon, colorClass } = getPlaceIcon(type, 'size-3')
@@ -111,41 +130,6 @@ function Places() {
                                 })}
                             </div>
                         </div>
-
-                        <ScrollArea className="flex-1">
-                            <div className="p-4">
-                                <div className="space-y-4">
-                                    <div>
-                                        <h3 className="text-base font-semibold mb-2">About</h3>
-                                        <p className="text-sm text-secondary">
-                                            Recommended places discovered by the PostHog team around the world.
-                                            {isModerator && (
-                                                <span className="block mt-2 font-semibold">
-                                                    As a moderator, you can add new places using the search bar on the
-                                                    map.
-                                                </span>
-                                            )}
-                                        </p>
-                                    </div>
-
-                                    <div>
-                                        <h3 className="text-base font-semibold mb-2">Statistics</h3>
-                                        <div className="space-y-1 text-sm text-secondary">
-                                            <p>
-                                                Total places:{' '}
-                                                <span className="font-semibold text-primary">{places.length}</span>
-                                            </p>
-                                            <p>
-                                                Selected types:{' '}
-                                                <span className="font-semibold text-primary">
-                                                    {selectedLayers.length}
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </ScrollArea>
                     </aside>
 
                     <div className="flex-1 relative h-full border-primary border-t @xl:border-t-0">
