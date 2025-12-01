@@ -42,7 +42,7 @@ Sometimes you don't know what you're looking for, or you don't know where to sta
 
 To aid serendipitous discoveries, we've created a project homepage to surface helpful insights you may not have considered. By making it the default page on PostHog, our aim is to help users make quick discoveries. We'll surface your most important product and company metrics here as well as popular insights, and we're leveraging social proof from what other teammates are doing in your app to help you discover more product improvements.
 
-In addition, if your team uses the [Session Recording](/product/session-recording) feature, we'll also surface the most recent recordings here. We've found that users who return to Session Recordings make 3x more discoveries than other users (more context [here](https://github.com/PostHog/posthog/issues/8595#issuecomment-1056916848)). This should also help drive qualitative discoveries about your product.
+In addition, if your team uses the [Session Recording](/product/session-recording) feature, we'll also surface the most recent recordings here. We've found that users who return to Session Recordings make 3x more discoveries than other users (more context in [issue #8595](https://github.com/PostHog/posthog/issues/8595#issuecomment-1056916848)). This should also help drive qualitative discoveries about your product.
 
 ![Concept of project home page](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/collaborating-on-posthog_4.png)
 
@@ -88,7 +88,7 @@ As always, we welcome and highly encourage you to share any feedback you may hav
 
 <div style="border: 1px solid #D9D9D9; margin-bottom: 16px; margin-top: 16px;"></div>
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />
 

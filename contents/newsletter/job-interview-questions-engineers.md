@@ -127,7 +127,7 @@ In contrast, a question like "What will I be working on?" indicates you're looki
 
 You could also ask:
 
-* "What's the hardest problem you're trying to solve right now?
+* "What's the hardest problem you're trying to solve right now?"
 * "What problem are you ignoring at the moment?"
 * "What's the biggest complaint your users have right now?"
 
@@ -174,7 +174,7 @@ You're looking for specific, thoughtful answers that show a level of intentional
 * There's an [excess of meetings and processes](/newsletter/this-is-why-youre-not-shipping).
 * It's obvious no one is thinking about the type of company they want to build.
 
->  **Remember:** Culture eats strategy for breakfast. A winning culture can overcome all sorts of disadvantages. It's also the biggest advantage a startup has over larger, more established competitors. A startup that can't tap into this is likely to fail.
+>  **Remember:** Culture eats strategy for breakfast. A winning culture can overcome all sorts of disadvantages. It's also the biggest advantage a startup has over larger, more established competitors. A startup that can't tap into this is [likely to fail](/newsletter/how-startups-lose-their-edge).
 
 ## What does the future look like?
 

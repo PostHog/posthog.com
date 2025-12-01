@@ -1,12 +1,12 @@
 import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
-import { useLayoutData } from 'components/Layout/hooks'
 import Tooltip from 'components/Tooltip'
 import { Link as GatsbyLink } from 'gatsby'
-import React from 'react'
+import React, { useMemo } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { IconArrowUpRight } from '@posthog/icons'
 import ContextMenu, { ContextMenuItemProps } from 'components/RadixUI/ContextMenu'
 import { useApp } from '../../context/App'
+import { useWindow } from '../../context/Window'
 
 // Helper function to create standard context menu items
 const createStandardMenuItems = (url: string, state?: any, isExternal = false): ContextMenuItemProps[] => {
@@ -75,6 +75,22 @@ const MenuWrapper = ({
     )
 }
 
+function resolveRelativeLink(url?: string, href?: string) {
+    if (!url || !href) return url
+    const mdRegex = /\.(md|mdx)(?=$|[?#])/
+    const relativeRegex = /^\.\.?\//
+    const isMarkdownLink = relativeRegex.test(url) && mdRegex.test(url)
+    if (isMarkdownLink) {
+        try {
+            const urlObj = new URL(url, href)
+            return urlObj.pathname.replace(mdRegex, '') + urlObj.search + urlObj.hash
+        } catch {
+            return url
+        }
+    }
+    return url
+}
+
 export default function Link({
     to,
     children,
@@ -94,10 +110,12 @@ export default function Link({
     customMenuItems = [],
     ...other
 }: Props): JSX.Element {
-    const { compact } = useLayoutData()
-    const { openStart, siteSettings, posthogInstance } = useApp()
+    const { appWindow } = useWindow()
+    const { posthogInstance, compact } = useApp()
     const posthog = usePostHog()
-    const url = to || href
+    const locationHref = appWindow?.element?.props?.location?.href
+    const initialUrl = to || href
+    const url = resolveRelativeLink(initialUrl, locationHref)
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
     const isPostHogAppUrl = url && /(eu|us|app)\.posthog\.com/.test(url)
     const preview =
@@ -105,20 +123,19 @@ export default function Link({
         glossary?.find((glossaryItem) => {
             return glossaryItem?.slug === url?.replace(/https:\/\/posthog.com/gi, '')
         })
+    const isSignupUrl = useMemo(() => {
+        if (!url) return false
+        try {
+            const urlObj = new URL(url)
+            return isPostHogAppUrl && urlObj.pathname === '/signup'
+        } catch {
+            return false
+        }
+    }, [url, isPostHogAppUrl])
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
         if (isPostHogAppUrl && !posthogInstance) {
             posthog?.createPersonProfile?.()
-            const urlObj = new URL(url)
-            const path = urlObj.pathname
-            if (path === '/signup') {
-                e.preventDefault()
-                const subdomain = urlObj.hostname.split('.')[0]
-                openStart({
-                    subdomain,
-                    initialTab: siteSettings.experience === 'boring' ? 'signup' : state?.initialTab,
-                })
-            }
         }
         if (event && posthog) {
             posthog.capture(event)
@@ -126,7 +143,7 @@ export default function Link({
         onClick && onClick(e)
         if (compact && url && !internal) {
             e.preventDefault()
-            if (/(eu|app)\.posthog\.com/.test(url)) {
+            if (/(eu|us|app)\.posthog\.com/.test(url)) {
                 window.parent.postMessage(
                     {
                         type: 'external-navigation',
@@ -192,7 +209,7 @@ export default function Link({
                     {...other}
                     href={url}
                     className={`${className} group`}
-                    target={external || externalNoIcon ? '_blank' : ''}
+                    target={isSignupUrl || external || externalNoIcon ? '_blank' : ''}
                 >
                     {external ? (
                         <span className="inline-flex justify-center items-center group">
@@ -245,7 +262,7 @@ export default function Link({
                     {...other}
                     href={url}
                     className={`${className} group`}
-                    target={external || externalNoIcon ? '_blank' : ''}
+                    target={isSignupUrl || external || externalNoIcon ? '_blank' : ''}
                 >
                     {external ? (
                         <span className="inline-flex justify-center items-center group">

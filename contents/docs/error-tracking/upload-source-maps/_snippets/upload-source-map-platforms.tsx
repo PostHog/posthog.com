@@ -34,6 +34,11 @@ const UploadSourceMapPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nuxt.svg',
         },
         {
+            label: 'React Native',
+            url: '/docs/error-tracking/upload-source-maps/react-native',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg',
+        },
+        {
             label: 'CLI',
             url: '/docs/error-tracking/upload-source-maps/cli',
             icon: 'IconCode',
@@ -45,6 +50,6 @@ const UploadSourceMapPlatforms = () => {
         },
     ]
 
-    return <List className="grid sm:grid-cols-2" items={platforms} />
+    return <List className="grid sm:grid-cols-2 mb-4" items={platforms} />
 }
 export default UploadSourceMapPlatforms

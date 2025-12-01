@@ -3,7 +3,7 @@ import * as am5 from '@amcharts/amcharts5'
 import * as am5map from '@amcharts/amcharts5/map'
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
-type ExclusionReason = 'sanctions' | 'high-cost' | 'possible-high-cost' | 'germany' | 'timezone'
+type ExclusionReason = 'sanctions' | 'high-cost' | 'contractors' | 'timezone'
 
 interface CountryRestriction {
     code: string
@@ -30,12 +30,9 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     Sweden: { code: 'SE', reason: 'high-cost' },
     Switzerland: { code: 'CH', reason: 'high-cost' },
 
-    // Possible with more research
-    Brazil: { code: 'BR', reason: 'possible-high-cost' },
-    Uruguay: { code: 'UY', reason: 'possible-high-cost' },
-
-    // Germany (10 employee limit)
-    Germany: { code: 'DE', reason: 'germany' },
+    // Contractors only
+    Brazil: { code: 'BR', reason: 'contractors' },
+    Uruguay: { code: 'UY', reason: 'contractors' },
 
     // Outside timezone range (UTC+3 and beyond, or UTC-9 and beyond)
     Afghanistan: { code: 'AF', reason: 'timezone' },
@@ -54,6 +51,7 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     Eritrea: { code: 'ER', reason: 'timezone' },
     Ethiopia: { code: 'ET', reason: 'timezone' },
     Fiji: { code: 'FJ', reason: 'timezone' },
+    'French Polynesia': { code: 'PF', reason: 'timezone' },
     Georgia: { code: 'GE', reason: 'timezone' },
     India: { code: 'IN', reason: 'timezone' },
     Indonesia: { code: 'ID', reason: 'timezone' },
@@ -74,6 +72,7 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     Myanmar: { code: 'MM', reason: 'timezone' },
     Nauru: { code: 'NR', reason: 'timezone' },
     Nepal: { code: 'NP', reason: 'timezone' },
+    'New Caledonia': { code: 'NC', reason: 'timezone' },
     'New Zealand': { code: 'NZ', reason: 'timezone' },
     Oman: { code: 'OM', reason: 'timezone' },
     Pakistan: { code: 'PK', reason: 'timezone' },
@@ -88,6 +87,7 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     Somalia: { code: 'SO', reason: 'timezone' },
     'South Korea': { code: 'KR', reason: 'timezone' },
     'Sri Lanka': { code: 'LK', reason: 'timezone' },
+    Taiwan: { code: 'TW', reason: 'timezone' },
     Tajikistan: { code: 'TJ', reason: 'timezone' },
     Tanzania: { code: 'TZ', reason: 'timezone' },
     Thailand: { code: 'TH', reason: 'timezone' },
@@ -107,16 +107,14 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
 const reasonColors: { [key in ExclusionReason]: number } = {
     sanctions: 0xf35454, // Red
     'high-cost': 0xb62ad9, // Purple
-    'possible-high-cost': 0xf7a501, // Orange (will have pattern)
-    germany: 0x3b2b26, // Dark brown
+    contractors: 0xf7a501, // Orange (will have pattern)
     timezone: 0xaaaaaa, // Light gray
 }
 
 const reasonLabels: { [key in ExclusionReason]: string } = {
     sanctions: 'Restricted due to US sanctions',
     'high-cost': 'High employer costs',
-    'possible-high-cost': 'Unlikely to hire (high employer costs)',
-    germany: 'No longer hiring (limited to 10 employees)',
+    contractors: 'Hired as contractors',
     timezone: 'Outside of timezones we currently hire in',
 }
 
@@ -252,7 +250,9 @@ export default function CountriesWeHireIn({
 
             const restriction = restrictionMap.get(id)
             if (restriction) {
-                return `${xIcon}<strong>${name}</strong><br/><span style="margin-left: 28px;">${
+                const icon = restriction.reason === 'contractors' ? '' : xIcon
+                const marginStyle = restriction.reason === 'contractors' ? '' : 'margin-left: 28px;'
+                return `${icon}<strong>${name}</strong><br/><span style="${marginStyle}">${
                     reasonLabels[restriction.reason]
                 }</span>`
             }
@@ -277,20 +277,16 @@ export default function CountriesWeHireIn({
                     <span>Countries we hire from</span>
                 </div>
                 <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-yellow rounded-sm" />
+                    <span>Hired as contractors</span>
+                </div>
+                <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-red rounded-sm" />
                     <span>US sanctions</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-purple rounded-sm" />
                     <span>High employer costs</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-yellow rounded-sm" />
-                    <span>Unlikely to hire (high employer costs)</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-brown rounded-sm" />
-                    <span>Limited to 10 employees</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-gray rounded-sm" />

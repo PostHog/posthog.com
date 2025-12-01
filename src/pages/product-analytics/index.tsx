@@ -61,11 +61,11 @@ export default function ProductAnalytics(): JSX.Element {
     // Optional: Customize slides
     // See /components/Products/Slides/README.md for more details
     const slides = createSlideConfig({
-        exclude: ['posthog-on-posthog'],
         // order: ['overview', 'pricing', 'features'],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },
+        exclude: ['videos'],
     })
 
     // Merge content data with product data

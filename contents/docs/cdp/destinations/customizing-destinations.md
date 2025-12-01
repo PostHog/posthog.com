@@ -59,7 +59,7 @@ Or to construct a custom JSON payload that conforms to an existing API specifica
 }
 ```
 
-> You can see the full capabilities of templating with our Hog programming language [here](/docs/hog)
+> You can see the full capabilities of templating with our Hog programming language in the [Hog documentation](/docs/hog)
 
 ### Global object
 

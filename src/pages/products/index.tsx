@@ -189,7 +189,7 @@ export default function Products(): JSX.Element {
         <>
             <SEO
                 title="Product OS suite - PostHog"
-                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
+                description="PostHog is the only developer platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/default.png`}
             />
             <Explorer
@@ -340,7 +340,8 @@ export default function Products(): JSX.Element {
                                     <li>Product engineering tools</li>
                                     <li>Analytics/data viz</li>
                                     <li>
-                                        AI <Icons.IconSparkles className="inline-block size-4 relative -top-px" />
+                                        Automation & AI{' '}
+                                        <Icons.IconSparkles className="inline-block size-4 relative -top-px" />
                                     </li>
                                 </ul>
                                 {/* 

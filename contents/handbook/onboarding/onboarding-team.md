@@ -8,7 +8,7 @@ showTitle: true
 
 ### What does this team do?
 
-The north star metric for the Onboarding team is 3-month logo retention at 90% from the first $100+ forecasted bill, which can be tracked here ([link](https://app.posthog.com/project/2/dashboard/363452)).
+The north star metric for the Onboarding team is 3-month logo retention at 90% from the first $100+ forecasted bill, which can be tracked in the [onboarding team retention dashboard](https://app.posthog.com/project/2/dashboard/363452).
 
 We also care about net dollar retention for this segment, but we treat it as an auxiliary metric.
 
@@ -30,7 +30,7 @@ Since we primarily focus on customers who've signed up and have a forecasted bil
 
 ### Tooling
 
-Check out the list of [shared tools](https://posthog.com/handbook/growth/sales/sales-and-cs-tools). 
+Check out the list of [shared tools](https://posthog.com/handbook/growth/sales/sales-and-cs-tools).
 
 The team-specific tools for this team are:
 
@@ -62,19 +62,19 @@ A supplementary view that’s great for getting a general overview of progress.
 -   Use our docs, and link to relevant information.
 -   Check the [Matching PostHog to a business type](https://posthog.com/handbook/growth/sales/utilization-by-business-type) page to understand your customers better in general.
 
-## How to succeed 
+## How to succeed
 
 ### How to deal with complex technical issues
 
 Our role is pretty hybrid and lives at the intersection of other teams. As much as we love solving our own problems, escalations may happen. Here’s a brief guide on how to handle them:
 
--   Do your homework – check our docs, ask Max AI, and search Slack and Zendesk for similar questions. You can also check GitHub to see whether we have a bug or enhancement logged. If that doesn’t bring you closer to a solution, ask in the team Slack channel.
+-   Do your homework – check our docs, ask PostHog AI, and search Slack and Zendesk for similar questions. You can also check GitHub to see whether we have a bug or enhancement logged. If that doesn’t bring you closer to a solution, ask in the team Slack channel.
 -   Don’t be afraid to admit when you don’t know something. Note it down and circle back once you’ve found the answer! Honesty goes a long way.
 -   Consider sharing a Loom recording in your reply to the user – It might be more efficient than a written instruction.
 -   If the issue requires in-depth troubleshooting, you can direct the user to create a ticket from the app, or you can do so on their behalf. Just remember to let them know before you do, so they’re not surprised when they see it in the UI!
 -   Before escalating the issue to Support, gather as much information and context as possible so your handover is informative and thorough. You can also share a recording of the call with the team, highlighting the relevant timestamp.
 -   If a support issue lands in your inbox, forwarding it to supportreply@posthog.com should do the trick. Make sure to double-check in Zendesk that the ticket is not marked as Solved.
-- Ideally, after the meeting with the user, they should know how to seek further help. That includes using Max, consulting the docs, and reaching out to our Support team.
+- Ideally, after the meeting with the user, they should know how to seek further help. That includes using PostHog AI, consulting the docs, and reaching out to our Support team.
 
 ### How to deepen your knowledge
 

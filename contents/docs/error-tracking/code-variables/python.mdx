@@ -1,0 +1,121 @@
+---
+title: Code variables in Python
+---
+
+The Python SDK (v6.9.1+) supports automatic code variables capture, allowing you to see the state of local variables when exceptions occur.
+
+## Enabling code variables capture
+
+Code variables capture can be enabled globally during PostHog initialization:
+
+```python
+from posthog import Posthog
+
+posthog = Posthog(
+    "<ph_project_api_key>",
+    enable_exception_autocapture=True,
+    capture_exception_code_variables=True,
+)
+```
+
+### Scoped capture with contexts
+
+You can enable or disable code variables capture for specific code blocks using contexts:
+
+```python
+from posthog import new_context
+
+# Enable for a specific block (when disabled globally)
+with new_context():
+    set_capture_exception_code_variables_context(True)
+    will_capture_variables()
+
+# Disable for a specific block (when enabled globally)
+with new_context():
+    set_capture_exception_code_variables_context(False)
+    will_not_capture_variables()
+```
+
+## Configuration options
+
+### Masking sensitive variables
+
+Variable names matching mask patterns will have their values replaced with `***` in the UI.
+
+The SDK includes sensible defaults for common sensitive variable names:
+
+```python
+DEFAULT_CODE_VARIABLES_MASK_PATTERNS = [
+    r"(?i).*password.*",
+    r"(?i).*secret.*",
+    r"(?i).*passwd.*",
+    r"(?i).*pwd.*",
+    r"(?i).*api_key.*",
+    r"(?i).*apikey.*",
+    r"(?i).*auth.*",
+    r"(?i).*credentials.*",
+    r"(?i).*privatekey.*",
+    r"(?i).*private_key.*",
+    r"(?i).*token.*",
+]
+```
+
+#### Customizing mask patterns
+
+```python
+posthog = Posthog(
+    "<ph_project_api_key>",
+    enable_exception_autocapture=True,
+    capture_exception_code_variables=True,
+    code_variables_mask_patterns=[
+        r".*password.*",    # Mask any variable containing "password"
+        r".*token.*",       # Mask any variable containing "token"
+        r".*secret.*",      # Mask any variable containing "secret"
+        r"client_secret",   # Mask specific variable names
+        r"private_key",     # Mask specific variable names
+    ],
+)
+```
+
+#### Scoped mask patterns
+
+You can set mask patterns for specific code blocks using contexts:
+
+```python
+with new_context():
+    set_code_variables_mask_patterns_context([r".*password.*"])
+    mask_patterns_will_only_apply_to_this_method()
+```
+
+### Ignoring variables
+
+Variable names matching ignore patterns are not captured at all. This is useful for excluding internal variables, temporary data, or framework-specific variables that don't provide debugging value.
+
+By default, Python internal variables (starting with `__`) are ignored.
+
+#### Customizing ignore patterns
+
+```python
+posthog = Posthog(
+    "<ph_project_api_key>",
+    enable_exception_autocapture=True,
+    capture_exception_code_variables=True,
+    code_variables_ignore_patterns=[
+        r"^__.*",      # Python internals
+        r"^_.*",       # Private variables
+        r"temp_.*",    # Temporary variables
+        r"cache_.*",   # Cache variables
+        r"debug_.*",   # Debug variables
+    ],
+)
+```
+
+#### Scoped ignore patterns
+
+You can set ignore patterns for specific code blocks using contexts:
+
+```python
+with new_context():
+    set_code_variables_ignore_patterns_context([r"cache_.*"])
+    ignore_patterns_will_only_apply_to_this_method()
+```

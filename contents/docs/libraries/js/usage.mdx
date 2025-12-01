@@ -1,0 +1,730 @@
+---
+title: JavaScript web usage
+sidebar: Docs
+showTitle: true
+---
+
+## Capturing events
+
+import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web.mdx'
+
+<WebSendEvents />
+
+## Anonymous and identified events
+
+import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
+
+<IdentifiedVsAnonymousIntro />
+
+### Capturing anonymous events
+
+import HowToCaptureAnonymousEventsWeb from '../../product-analytics/_snippets/how-to-capture-anonymous-events-web.mdx'
+
+<HowToCaptureAnonymousEventsWeb />
+
+### Capturing identified events
+
+import HowToCaptureIdentifiedEventsWeb from '../../product-analytics/_snippets/how-to-capture-identified-events-frontend.mdx'
+
+<HowToCaptureIdentifiedEventsWeb />
+
+#### Identifying users
+
+The most useful of these methods is `identify`. We strongly recommend reading our doc on [identifying users](/docs/product-analytics/identify) to better understand how to correctly use it.
+
+import JSIdentify from './_snippets/identify.mdx'
+
+<JSIdentify />
+
+## Setting person properties
+
+To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+
+```js-web
+posthog.capture(
+  'event_name',
+  {
+    $set: { name: 'Max Hedgehog'  },
+    $set_once: { initial_url: '/blog' },
+  }
+)
+```
+
+Typically, person properties are set when an event occurs like `user updated email` but there may be occasions where you want to set person properties as its own event.
+
+```js
+posthog.setPersonProperties(
+  { name: "Max Hedgehog" }, // These properties are like the `$set` from above
+  { initial_url: "/blog" }  // These properties are like the `$set_once` from above
+)
+```
+
+This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+
+## Resetting a user
+
+If a user logs out or switches accounts, you should call `reset` to unlink any future events made on that device with that user. This prevents multiple users from being grouped together due to shared cookies between sessions. **We recommend you call `reset` on logout even if you don't expect users to share a computer.**
+
+You can do that like so:
+
+```js-web
+posthog.reset()
+```
+
+If you _also_ want to reset `device_id`, you can pass `true` as a parameter:
+
+```js-web
+posthog.reset(true)
+```
+
+This also resets group analytics.
+
+## Alias
+
+Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend.
+
+In this case, you can use `alias` to assign another distinct ID to the same user.
+
+```js-web
+posthog.alias('alias_id', 'distinct_id');
+```
+
+We recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+
+## Group analytics
+
+[Group analytics](/docs/product-analytics/group-analytics) enables you to associate the events for that person's session with a group (e.g. teams, organizations, etc.).
+
+> **Note:** This is a paid feature and is not available on the open-source or free cloud plan. Learn more on the [pricing page](/pricing).
+
+This is done by calling the `group` method with a group type and group ID.
+
+```js-web
+posthog.group('company', 'company_id_in_your_db')
+
+posthog.capture('upgraded_plan') // this event is associated with company ID `company_id_in_your_db`
+```
+
+You can also set group properties by passing a third argument to the `group` method.
+
+```js-web
+posthog.group('company', 'company_id_in_your_db', {
+    name: 'Awesome Inc.',
+    employees: 11,
+})
+```
+
+The `name` is a special property used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID is used instead.
+
+## Super properties
+
+Super properties are properties associated with events that are set once and then sent with every `capture` call across sessions, be it a `$pageview`, an autocaptured button click, or anything else.
+
+They are set using `posthog.register`, which takes a properties object as a parameter like this:
+
+```js-web
+posthog.register({
+    'icecream_pref': 'vanilla',
+})
+```
+
+The call above ensures that every event sent includes a `"icecream pref": "vanilla"` property. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified super property.
+
+This does **not** set a person or group property. It only sets the properties on events.
+
+Furthermore, if you register the same property multiple times, the next event will use the new value of that property. If you want to register a property only once (e.g. for ad campaign properties), you can use `register_once`, like so:
+
+```js-web
+posthog.register_once({
+    'campaign_source': 'twitter',
+})
+```
+
+Using `register_once` ensures that if a property is already set, it is not set again. For example, if the user already has property `"icecream_pref": "vanilla"`, calling `posthog.register_once({"icecream_pref": "chocolate"})` will **not** update the property.
+
+### Removing stored super properties
+
+Setting super properties creates a cookie on the client with the respective properties and their values. To stop sending a super property with events and remove the cookie, you can use `posthog.unregister`, like so:
+
+```js-web
+posthog.unregister('icecream_pref')
+```
+
+This removes the super property and subsequent events will not include it.
+
+## Feature flags
+
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
+
+<FeatureFlagsLibsIntro />
+
+import WebFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-web.mdx'
+
+<WebFeatureFlagsCode />
+
+### Bootstrapping flags
+
+import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
+
+<BootstrappingIntro />
+
+For details on how to implement bootstrapping, see our [bootstrapping guide](/docs/feature-flags/bootstrapping).
+
+### Enriched flag analytics
+
+You can send enriched analytics data for feature flags to help uncover replays where people interact with a flag, target people who've interacted with a feature, or build cohorts of people who've viewed a feature.
+
+To enable this, you can either use our `<PosthogFeature>` [React component](/docs/libraries/react#feature-flags-react-component) (which implements this for you), or implement it yourself.
+
+To do it yourself, there are 3 things you need to do:
+
+1. Whenever a feature is viewed, send the `$feature_view` event with the property `feature_flag` set to the name of the flag.
+
+```javascript
+posthog.capture('$feature_view', { feature_flag: flag })
+```
+2. Whenever someone interacts with a feature, send a `$feature_interaction` event with the property `feature_flag` set to the name of the flag.
+
+3. At the same time, set the person property `$feature_interaction/<flag-key>` to true.
+
+```javascript
+posthog.capture('$feature_interaction', {
+    feature_flag: flag,
+    $set: { [`$feature_interaction/${flag}`]: true }
+})
+```
+
+See [the React component](https://github.com/PostHog/posthog-js/blob/master/react/src/components/PostHogFeature.tsx#L48C10-L48C35) for another example.
+
+## Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```js-web
+// Ensure flags are loaded before usage.
+// You'll only need to call this on the code the first time a user visits.
+// See this doc for more details: /docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
+posthog.onFeatureFlags(function() {
+  // feature flags should be available at this point
+  if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+    // do something
+  }
+})
+
+// Otherwise, you can just do:
+if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+  // do something
+}
+
+// You can also test your code by overriding the feature flag:
+// e.g., posthog.featureFlags.overrideFeatureFlags({ flags: {'experiment-feature-flag-key': 'test'}})
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
+## Early access feature management
+
+Early access features give you the option to release feature flags that can be controlled by your users. More information on this can be found in the [early access feature management guide](/docs/feature-flags/early-access-feature-management).
+
+```js-web
+posthog.getEarlyAccessFeatures((previewItemData) => {
+  // do something with early access feature
+})
+```
+
+```js-web
+posthog.updateEarlyAccessFeatureEnrollment(flagKey, 'true')
+```
+
+## Surveys
+
+[Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
+
+You can also [render *unstyled* surveys programmatically](/docs/surveys/implementing-custom-surveys) with the `renderSurvey` method.
+
+```js-web
+posthog.renderSurvey('survey_id', '#survey-container')
+```
+
+To disable loading surveys in a specific client, you can set the `disable_surveys` [config option](/docs/libraries/js/config).
+
+Surveys using the **API** presentation enables you to implement your own survey UI and use PostHog to handle display logic, capturing results, and analytics.
+
+To implement **API** surveys, start by fetching active surveys for a user using either of the methods below:
+
+```js-web
+// Fetch enabled surveys for the current user
+posthog.getActiveMatchingSurveys(callback, forceReload)
+
+// Fetch all surveys
+posthog.getSurveys(callback, forceReload)
+```
+
+The response returns an array of survey objects and is cached by default. To force a reload, pass `true` as the `forceReload` argument.
+
+The survey objects look like this:
+
+```json
+[{
+  "id": "your_survey_id",
+  "name": "Your survey name",
+  "description": "Metadata describing your survey",
+  "type": "api", // either "api", "popover", or "widget"
+  "linked_flag_key": null, // linked feature flag key, if any.
+  "targeting_flag_key": "your_survey_targeting_flag_key",
+  "questions": [
+    {
+      "type": "single_choice",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "question": "Are you enjoying PostHog?"
+    }
+  ],
+  "conditions": null,
+  "start_date": "2023-09-19T13:10:49.505000Z",
+  "end_date": null
+}]
+```
+
+### Capturing survey events
+
+To capture survey results properly in PostHog, you need to capture 3 types of events:
+
+```js-web
+// 1. When a user is shown a survey
+posthog.capture("survey shown", {
+  $survey_id: survey.id // required
+})
+
+// 2. When a user has dismissed a survey
+posthog.capture("survey dismissed", {
+  $survey_id: survey.id // required
+})
+
+// 3. When a user has responded to a survey
+posthog.capture("survey sent", {
+  $survey_id: survey.id, // required
+  $survey_questions: [
+    {
+      id: "d8462827-1575-4e1e-ab1d-b5fddd9f829c",
+      question: "What is your favorite color?",
+    }
+  ],
+  '$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c': survey_response // required. `survey_response` must be a text value.
+  // Convert numbers to text e.g. 8 should be converted to "8".
+  // For multiple choice select surveys, `survey_response` must be an array of values with the selected choices.
+  // e.g., '$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c': ["response_1", "response_2"]
+})
+```
+
+## Session replay
+
+To set up [session replay](/docs/session-replay) in your project, all you need to do is install the JavaScript web library and enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay).
+
+For [fine-tuning control](/docs/session-replay/how-to-control-which-sessions-you-record) of which sessions you record, you can use [feature flags](/docs/session-replay/how-to-control-which-sessions-you-record#with-feature-flags), [sampling](/docs/session-replay/how-to-control-which-sessions-you-record#sampling), [minimum duration](/docs/session-replay/how-to-control-which-sessions-you-record#minimum-duration), or set the `disable_session_recording` [config option](/docs/libraries/js/config) and use the following methods:
+
+```js-web
+// Turns session recording on
+posthog.startSessionRecording()
+
+// Turns session recording off
+posthog.stopSessionRecording()
+
+// Check if session recording is currently running
+posthog.sessionRecordingStarted()
+```
+
+If you are using feature flags or sampling to control which sessions you record, you can override the default behavior (and start a recording regardless) by passing the `linked_flag` or `sampling` overrides. The following would start a recording for all users, even if they don't match the flag or aren't in the sample:
+
+```js-web
+posthog.startSessionRecording({ linked_flag: true, sampling: true })
+```
+
+To get the playback URL of the current session replay, you can use the following method:
+
+```js-web
+posthog.get_session_replay_url(
+  { withTimestamp: true, timestampLookBack: 30 }
+)
+```
+
+It has two optional parameters:
+
+- `withTimestamp` (default: `false`): When set to `true`, the URL includes a timestamp that takes you to the session at the time of the event.
+- `timestampLookBack` (default: `10`): The number of seconds back the timestamp links to.
+
+Session replay uses [rrweb](https://github.com/rrweb-io/rrweb) under the hood, which is configurable with the `session_recording` parameter.
+
+The documentation and defaults for these options can be found in the [rrweb docs](https://github.com/rrweb-io/rrweb/blob/master/guide.md#options).
+
+The defaults are the same as in rrweb, except for these fields:
+
+| key                      | PostHog default    | description                                                                                                                                                                                   |
+| ------------------------ | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| blockClass               | 'ph-no-capture'    | Use a string or RegExp to configure which elements should be blocked, refer to the [privacy](https://github.com/rrweb-io/rrweb/blob/master/guide.md#privacy) chapter                          |
+| ignoreClass              | 'ph-ignore-input'  | Use a string or RegExp to configure which elements should be ignored, refer to the [privacy](https://github.com/rrweb-io/rrweb/blob/master/guide.md#privacy) chapter                          |
+| maskTextClass            | 'ph-mask'          | Use a string or RegExp to configure which elements should be masked, refer to the [privacy](https://github.com/rrweb-io/rrweb/blob/master/guide.md#privacy) chapter                           |
+| maskAllInputs            | true               | mask all input content as \*                                                                                                                                                                  |
+
+The defaults for `maskAllInputs`, `maskTextSelector` and `blockSelector` will change depending on your masking configuration in the session replay section of [your project settings](https://us.posthog.com/settings/project-replay#replay-masking).
+
+## Error tracking
+
+You can enable [exception autocapture](/docs/error-tracking/installation) in the **Autocapture & heatmaps** section of [your project settings](https://us.posthog.com/settings/project-autocapture#exception-autocapture). When enabled, this automatically captures `$exception` events when errors are thrown.
+
+It is also possible to manually capture exceptions using the `captureException` method:
+
+```js
+posthog.captureException(error, additionalProperties)
+```
+
+## Amending or sampling events
+
+Since version 1.187.0, you can provide a `before_send` function when initializing the SDK to amend, filter, sample, or reject events before they are sent to PostHog.
+
+> **🚨 Warning:** Amending and sampling events is advanced functionality that requires careful implementation. Core PostHog features may require 100% of unmodified events to function properly. We recommend only modifying or sampling your own custom events if possible, and preserving all PostHog internal events in their original form.
+
+### Redacting information in events
+
+`before_send` gives you one place to edit or redact information before it is sent to PostHog. For example:
+
+<details>
+<summary>Redact URLs in event properties</summary>
+
+```ts
+posthog.init('<ph_project_api_key>', {
+    before_send: (event: CaptureResult | null): CaptureResult | null => {
+        if (!event) {
+            return null
+        }
+
+        // redacting URLs will be specific to your site structure
+        function redactUrl(value: string): string {
+            return value.replace(/project\/\d+/, 'project/1234567');
+        }
+
+        // NB these functions are examples and you should implement something specific to your site
+        // redacting information can impact features that rely on it, e.g. heatmaps are keyed by URL
+        function redactArray(value: any[]) {
+            return value.map((v) => {
+                if (typeof v === 'string') {
+                    return redactUrl(v)
+                } else if (Array.isArray(v)) {
+                    return redactArray(v)
+                } else if (typeof v === 'object' && v) {
+                    return redactObject(v)
+                } else {
+                    return v
+                }
+            })
+        }
+
+        // NB these functions are examples and you should implement something specific to your site
+        // redacting information can impact features that rely on it, e.g. heatmaps are keyed by URL
+        function redactObject(objectToRedact: Record<string, any>): Record<string, any> {
+            return Object.entries(objectToRedact).reduce((acc, [key, value]) => {
+                if ((key.includes('url') || key.includes('href')) && typeof value === 'string') {
+                    acc[key] = redactUrl(value)
+                } else if (Array.isArray(value)) {
+                    acc[key] = redactArray(value)
+                } else if (typeof value === 'object' && value) {
+                    acc[key] = redactObject(value)
+                } else {
+                    acc[key] = value
+                }
+                return acc
+            }, {});
+        }
+
+        const redactedProperties = redactObject(event.properties || {});
+        event.properties = redactedProperties
+
+        const redactedSet = redactObject(event.$set || {});
+        event.$set = redactedSet
+
+        const redactedSetOnce = redactObject(event.$set_once || {});
+        event.$set_once = redactedSetOnce
+
+        return event
+    }
+})
+```
+
+</details>
+
+<details>
+<summary>Redact person properties in $set or $set_once</summary>
+
+```ts
+posthog.init('<ph_project_api_key>', {
+    before_send: (event: CaptureResult | null): CaptureResult | null => {
+        if (!event) {
+            return null
+        }
+
+        event.$set = {
+            ...event.$set,
+            name: 'secret name'
+        }
+        event.$set_once = {
+            ...event.$set_once,
+            initial_name: 'secret name'
+        }
+
+        return event
+    }
+})
+```
+
+</details>
+
+### Sampling events
+
+Sampling lets you choose to send only a percentage of events to PostHog. It is a good way to control your costs without having to completely turn off features of the SDK.
+
+Some functions of PostHog, for example much of web analytics, rely on receiving all events. Sampling `$pageview` or `$pageleave` events in particular can cause unexpected results.
+
+#### Sampling events using our provided customization
+
+We offer a pre-built `sampleByEvent` function to sample by event name. You can import this using a package manager, or add the customization script to your site.
+
+<MultiLanguage>
+
+```ts file=Import
+import { sampleByEvent } from 'posthog-js/lib/src/customizations'
+
+posthog.init('<ph_project_api_key>', {
+  // capture only half of dead click and web vitals events
+  before_send: sampleByEvent(['$dead_click', '$web_vitals'], 0.5)
+})
+```
+
+```tsx file=Script
+// Add this script to your site, may need to change the script src to match your API host:
+// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
+
+posthog.init('<ph_project_api_key>', {
+  // capture only half of dead click and web vitals events
+  before_send: posthogCustomizations.sampleByEvent(['$dead_click', '$web_vitals'], 0.5)
+})
+```
+
+</MultiLanguage>
+
+This can be used to sample events by name, distinct ID, session ID, or custom function.
+
+<details>
+<summary>Send no events while developing</summary>
+
+When working locally it can be useful to see what PostHog would do, without actually sending the data to PostHog
+
+```ts
+posthog.init('<ph_project_api_key>', {
+  before_send: (event: CaptureResult | null): CaptureResult | null => {
+    if (event) {
+      console.log('posthog event: ' + event.event, event)
+    }
+    return null
+  }
+})
+```
+
+</details>
+
+<details>
+<summary>Sampling by person distinct ID</summary>
+
+We offer a pre-built `sampleByDistinctId` function to sample a percentage of events by person distinct ID (in the example below, 40% of events). You can import this using a package manager, or add the customization script to your site.
+
+> **Note:** A particular distinct ID will always either send all events or no events.
+
+<MultiLanguage>
+
+```ts file=Import
+import { sampleByDistinctId } from 'posthog-js/lib/src/customizations'
+
+posthog.init('<ph_project_api_key>', {
+  before_send: sampleByDistinctId(0.4)
+})
+```
+
+```ts file=Script
+// Add this script to your site, may need to change the script src to match your API host:
+// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
+
+posthog.init('<ph_project_api_key>', {
+  before_send: posthogCustomizations.sampleByDistinctId(0.4)
+})
+```
+
+</MultiLanguage>
+
+</details>
+
+<details>
+<summary>Sampling by session ID</summary>
+
+We offer a pre-built `sampleBySessionId` function to sample a percentage of events by session ID (in the example below, 25% of events). You can import this using a package manager, or add the customization script to your site.
+
+> **Note:** A particular session ID will always either send all events or no events.
+
+<MultiLanguage>
+
+```ts file=Import
+import { sampleBySessionId } from 'posthog-js/lib/src/customizations'
+
+posthog.init('<ph_project_api_key>', {
+  before_send: sampleBySessionId(0.25)
+})
+```
+
+```ts file=Script
+// Add this script to your site, may need to change the script src to match your API host:
+// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
+
+posthog.init('<ph_project_api_key>', {
+  before_send: posthogCustomizations.sampleBySessionId(0.25)
+})
+```
+
+</MultiLanguage>
+
+</details>
+
+<details>
+<summary>Sampling events using a custom function</summary>
+
+If none of the provided sampling functions meet your needs, you can provide a custom function to sample events.
+
+```ts
+posthog.init('<ph_project_api_key>', {
+  before_send: (event: CaptureResult | null): CaptureResult | null => {
+    if (!event) {
+      return null
+    }
+
+    let sampleRate = 1.0 // default to always returning the event
+    if (event.event === '$heatmap') {
+      sampleRate = 0.1
+    }
+    if (event.event === '$dead_click') {
+      sampleRate = 0.01
+    }
+    return Math.random() < sampleRate ? event : null
+  }
+})
+```
+
+</details>
+
+### Chaining before_send functions
+
+You can provide an array of functions to be called one after the other:
+
+```ts
+posthog.init('<ph_project_api_key>', {
+  before_send: [
+    sampleByDistinctId(0.5), // only half of people
+    sampleByEvent(['$web_vitals'], 0.1), // and they capture all events except 10% of web vitals
+    sampleByEvent(['$$heatmap'], 0.5), // and 50% of heatmaps
+  ]
+})
+```
+
+## Blocking bad actors
+
+PostHog tries to automatically block known crawlers and web/AI agents. It's a fact, however, that not every crawler will advertise themselves as a crawler.
+
+If you see an unusual number of visitors in your project, you can try and understand where they're coming from by using [web analytics](https://us.posthog.com/web). It's common, however, that they will all contain the exact same user agent string. You can verify the most common user agents by using [this trend insight](https://app.posthog.com/insights/new#q=%7B%22kind%22%3A%22InsightVizNode%22%2C%22source%22%3A%7B%22kind%22%3A%22TrendsQuery%22%2C%22series%22%3A%5B%7B%22kind%22%3A%22EventsNode%22%2C%22name%22%3A%22%24pageview%22%2C%22event%22%3A%22%24pageview%22%2C%22math%22%3A%22total%22%7D%5D%2C%22trendsFilter%22%3A%7B%7D%2C%22breakdownFilter%22%3A%7B%22breakdowns%22%3A%5B%7B%22property%22%3A%22%24raw_user_agent%22%2C%22type%22%3A%22event%22%7D%5D%7D%7D%7D%20).
+
+If a specific user agent is causing problems (many more events than other user agents), you can block it by adding it to `custom_blocked_useragents` in your PostHog initialization:
+
+```ts
+posthog.init('<ph_project_api_key>', {
+  custom_blocked_useragents: ['<user_agent_string>']
+})
+```
+
+### Lighthouse audits
+
+Lighthouse is known for not advertising itself. If you're using a tool that uses Lighthouse to monitor your website (or if a competitor does), PostHog won't be able to prevent those events by default, which might skew your numbers. Ahrefs and Semrush are examples of this.
+
+Lighthouse user agents are well-known but they're not blocked by default because they represent possibly legitimate users. If you're experiencing a high number of events from these sources, you can block them by adding them to your `custom_blocked_useragents` list in your PostHog initialization:
+
+```ts
+const LIGHTHOUSE_USER_AGENTS = [
+  'Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36',
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+]
+
+posthog.init('<ph_project_api_key>', {
+  custom_blocked_useragents: LIGHTHOUSE_USER_AGENTS
+})
+```
+
+### Removing already ingested events
+
+Deleting already ingested events is complicated, but you can add user agents to the [internal and test accounts filter](https://us.posthog.com/settings/project-product-analytics#internal-user-filtering) in your project settings to filter them from your analytics.
+
+## Debug mode
+
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening.
+
+### Enabling debug mode
+
+You can enable debug mode by setting the `debug` option to `true` in the `init` call. A common pattern is to set this to `true` in development environments only using environment variables.
+
+```ts
+posthog.init('<ph_project_api_key>', {
+  debug: true // Set this to true in development environments only using environment variables
+})
+```
+
+This will enable verbose logs about the inner workings of the SDK.
+
+You can also call `posthog.debug()` in your code or in the dev console like Chrome DevTools or Firefox Developer Tools at runtime.
+
+```ts
+posthog.debug()
+```
+
+If you can't access or update your code, you can enable debug mode on your website by appending this query to the URL `?__posthog_debug=true`.
+
+You can try this on the PostHog website:
+
+```url
+https://posthog.com/?__posthog_debug=true
+```
+
+### Exposing the `posthog` global object to the browser console
+
+> This has been tested in Chrome and Firefox. Safari doesn't have this feature, but other Chromium and Gecko/Firefox browsers do.
+
+Sometimes, you may want to test PostHog directly in the browser's dev console. This lets you run commands like `posthog.capture('test event')` directly in the console.
+
+The SDK will expose the `window.posthog` global object to the browser console on some sites, but most modern web app like React and Vue will not.
+
+To expose PostHog in the browser:
+
+1. Enable debug mode by setting `debug: true` in your config
+2. In the browser console, search for the console log message `[PostHog.js] Starting in debug mode`
+3. Expand the logged object
+4. Right-click on `this` and pick **Store as global variable**
+
+You can then access `posthog` as `temp0` in Firefox and `temp1` in Chrome. You can then do stuff like `temp1.capture('test event')` in the console.
+
+### View logs in the developer console
+
+After enabling debug mode, you should see logs in the developer console like this:
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2025_11_04_at_3_32_58_PM_4ed3c4300f.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2025_11_04_at_3_32_58_PM_4ed3c4300f.png"
+  alt="View logs in the developer console"
+/>
+
+<Caption>Chrome DevTools console showing PostHog logs</Caption>
+
+When you reach out to support, please include debug logs from the developer console to help us diagnose the issue faster.

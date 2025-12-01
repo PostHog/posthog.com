@@ -165,7 +165,7 @@ With these, create a `provider.tsx` file in the `app` folder. In it, set up the 
 // app/provider.tsx
 import { useEffect, useState } from "react";
 import posthog from "posthog-js";
-import { PostHogProvider } from "posthog-js/react";
+import { PostHogProvider } from "@posthog/react";
 
 export function PHProvider({ children }: { children: React.ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
@@ -219,7 +219,7 @@ export default function App() {
 }
 ```
 
-Finally, go to `vite.config.ts` and add `posthog-js` and `posthog-js/react` as external packages. This ensures you app builds correctly when you're ready to deploy.
+Finally, go to `vite.config.ts` and add `posthog-js` and `@posthog/react` as external packages. This ensures you app builds correctly when you're ready to deploy.
 
 ```ts
 // vite.config.ts
@@ -230,7 +230,7 @@ export default defineConfig({
     // ... plugins
   ],
   ssr: {
-    noExternal: ["posthog-js", "posthog-js/react"],
+    noExternal: ["posthog-js", "@posthog/react"],
   },
 });
 ```
@@ -253,7 +253,7 @@ To do this, go to `routes/posts.$slug.tsx`, import the `usePostHog` hook, and th
 ```ts
 // app/routes/posts.$slug.tsx
 // ... imports
-import { usePostHog } from "posthog-js/react";
+import { usePostHog } from "@posthog/react";
 
 // ... type, loader
 
@@ -304,7 +304,7 @@ import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { promises as fs } from "fs";
 import path from 'path';
-import { usePostHog } from "posthog-js/react";
+import { usePostHog } from "@posthog/react";
 import { useEffect, useState } from "react";
 
 // ... type, loader

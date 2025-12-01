@@ -16,6 +16,7 @@ import ReaderView from 'components/ReaderView'
 
 import PurchasedWith from 'components/Pricing/Test/PurchasedWith'
 import { SectionLayout } from 'components/Pricing/Test/Sections'
+import { scrollToElement } from 'components/ScrollToElement'
 
 export default function Pricing() {
     const [activePlan, setActivePlan] = useState('free')
@@ -145,6 +146,10 @@ export default function Pricing() {
         if (tab) {
             setDefaultTab(tab)
         }
+        const calculator = params.get('calculator')
+        if (calculator) {
+            scrollToElement('calculator')
+        }
     }, [search])
 
     return (
@@ -154,7 +159,10 @@ export default function Pricing() {
             showQuestions={false}
             hideMobileTableOfContents
         >
-            <SEO title="Pricing - PostHog" description="Find out how much it costs to use PostHog" />
+            <SEO
+                title="PostHog pricing – Transparent, usage-based, generous free tier"
+                description="Find out exactly how much it costs to use PostHog (spoiler: it's cheaper than every major competitor). Generous free tiers and no unexpected bills."
+            />
 
             <PricingExperiment
                 activePlan={activePlan}

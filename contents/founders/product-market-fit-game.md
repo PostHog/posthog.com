@@ -12,6 +12,10 @@ tags:
   - Product-market fit
 crosspost:
   - Blog
+seo: {
+  metaTitle: "How to find product-market fit (PMF): A 5 level framework",
+  metaDescription: "A product market fit framework designed for founders. Learn the five levels of product market fit validation, from finding a problem to work on to onboarding customers."
+}
 ---
 
 In a startup, the _only_ objective that matters _before_ you have product-market fit, is _finding_ product-market fit. 
@@ -364,7 +368,7 @@ The five levels of product-market fit should help you work out when you need to 
 
 - **Be decisive.** During our YC batch, we saw a few companies have one founder work on X, while another worked on Y. Finding product-market fit is already complex, so don't make it harder by dividing your effort. Pick one idea and go all in. If you fail, quickly move to the other idea.[^3]
 
-- ** _Do not_ become a solution looking for a problem.** It's easy to become attached to your existing code or problem. Be especially wary of very fractional pivots. One of our first ideas was a tool to monitor tech debt – it inserted a survey as a GitHub check asking the engineer where they encountered problems, and how much time was wasted. We had to pivot when it was impossible to sell it. When then moved into using the same surveys to monitor engineering happiness, re-using our code. The result? A week of wasted meetings.
+- **_Do not_ become a solution looking for a problem.** It's easy to become attached to your existing code or problem. Be especially wary of very fractional pivots. One of our first ideas was a tool to monitor tech debt – it inserted a survey as a GitHub check asking the engineer where they encountered problems, and how much time was wasted. We had to pivot when it was impossible to sell it. When then moved into using the same surveys to monitor engineering happiness, re-using our code. The result? A week of wasted meetings.
 
 ## Final thoughts
 

@@ -78,7 +78,7 @@ To get buy-in, it was crucial for me to share the draft with the entire company 
 
 But you can't just assume everyone will buy into the strategy because you posted it somewhere and they gave it a thumbs up. You have to talk people through it 1:1 and communicate the message via different channels. We discussed the new strategy in all our small team standups, company all-hands, and uploaded it to our website.
 
-Read more about our strategy [here](/handbook/strategy/overview).
+Read more about our strategy in the [strategy overview](/handbook/strategy/overview).
 
 <NewsletterForm />
 

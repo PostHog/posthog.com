@@ -12,9 +12,9 @@ type MaxQuestionInputProps = {
 
 const placeholderQuestions = ['What do hedgehogs eat?', 'What is my bounce rate?', 'Where are my users located?']
 
-export const MaxQuestionInput = ({
+export const PostHogAIQuestionInput = ({
     className = '',
-    placeholder = 'Ask Max anything about your product data...',
+    placeholder = 'Ask PostHog AI anything about your product data...',
 }: MaxQuestionInputProps): JSX.Element => {
     const [question, setQuestion] = useState('')
     const [currentPlaceholder, setCurrentPlaceholder] = useState(0)
@@ -62,9 +62,9 @@ export const MaxQuestionInput = ({
                             Did we mention the free beta?
                         </h3>
                         <p className="text-primary dark:text-primary-dark font-serif">
-                            If you've already got data in PostHog, you can try Max right now for free. He can advise on
-                            best practices, generate insights, write SQL for you, filter replays, compose haikus, and
-                            more. Ask him anything, like:
+                            If you've already got data in PostHog, you can try PostHog AI right now for free. He can
+                            advise on best practices, generate insights, write SQL for you, filter replays, compose
+                            haikus, and more. Ask him anything, like:
                         </p>
                         <ul className="list-disc list-inside text-primary dark:text-primary-dark space-y-1 font-serif">
                             <li>"What's our most popular feature?"</li>
@@ -94,7 +94,7 @@ export const MaxQuestionInput = ({
                                 disabled={!question.trim()}
                                 onClick={handleSubmit}
                             >
-                                Ask Max
+                                Ask PostHog AI
                             </CallToAction>
                         </div>
                     </div>

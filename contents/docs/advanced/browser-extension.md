@@ -44,7 +44,7 @@ import { PostHog } from 'posthog-js/dist/module.no-external'
 
 // Additional features (import only what you need in a given context)
 import 'posthog-js/dist/posthog-recorder' // For session replay
-import 'posthog-js/dist/surveys' // For surveys  
+import 'posthog-js/dist/surveys' // For surveys
 import 'posthog-js/dist/exception-autocapture' // For error tracking
 import 'posthog-js/dist/tracing-headers' // For tracking across client and server
 import 'posthog-js/dist/web-vitals' // For web vitals tracking
@@ -54,7 +54,7 @@ You can also use `import 'posthog-js/dist/array.no-external.js'` as the core imp
 
 ### 2. Import a compatible session recording module if required
 
-Session recording is the most common cause of extension store rejections due to potential obfuscation concerns. The recording library `rrweb` that is bundled with PostHog by default contains parts of its code encoded in base64. 
+Session recording is the most common cause of extension store rejections due to potential obfuscation concerns. The recording library `rrweb` that is bundled with PostHog by default contains parts of its code encoded in base64.
 
 To avoid issues, explicitly load `posthog-js/dist/posthog-recorder` instead of `posthog-js/dist/recorder` as explained in [this Github comment](https://github.com/PostHog/posthog-js/issues/1464#issuecomment-2792093981).
 
@@ -98,6 +98,12 @@ posthog.init('<ph_project_api_key>', {
 });
 ```
 
+<CalloutBox icon="IconInfo" title="ASCII output" type="fyi">
+
+If you encounter UTF-8 encoding errors when loading your extension, you may need to configure your minifier to use ASCII-only output to ensure all non-ASCII characters are properly escaped. See [this issue](https://github.com/PostHog/posthog-js/issues/2604) for more information on how to do this.
+
+</CalloutBox>
+
 ## Persistence in browser extensions
 
 Browser extensions have unique constraints that affect how PostHog can store its data. Unlike regular web applications, extensions shouldn't use cookies and should use `localStorage`, `sessionStorage`, or `memory` instead.
@@ -122,13 +128,15 @@ The default `localStorage+cookie`, and `cookie` persistence methods are problema
 
 Since PostHog instances in different contexts can't share the same storage for persistence, you should manage `distinct_id` values on your own to maintain continuity across contexts. See below for details.
 
+> **Note**: Improper distinct ID management in extensions can lead to billing issues due to repeated `identify()` calls and feature flag requests. See our [Chrome extension billing case study](/handbook/onboarding/chrome-extension-billing-case-study-wildfire) for details on how to avoid these problems.
+
 ## PostHog usage across extension contexts
 
 Browser extensions run in multiple contexts, each with different capabilities and limitations. Here's how to use PostHog effectively across them:
 
 ### Context-specific persistence considerations
 
-For contexts like popup, sidepanel, background, and most other, `localStorage` or `sessionStorage` is recommended since they are shared across all contexts that have access to the `chrome.storage` API. In content scripts, as they use origin's storage, there is no advantage to them over `memory` as data wouldn't be shared between different websites.
+For contexts like popup, sidepanel, and most other, `localStorage` or `sessionStorage` is recommended since they are shared across all contexts that have access to the `chrome.storage` API. In content scripts, as they use origin's storage, there is no advantage to them over `memory` as data wouldn't be shared between different websites. In background service workers, use `memory` since `localStorage` and `sessionStorage` are not available.
 
 ### Distinct ID synchronization
 
@@ -143,7 +151,7 @@ export async function getSharedDistinctId() {
     if (stored.posthog_distinct_id) {
         return stored.posthog_distinct_id;
     }
-    
+
     // Generate new distinct ID and store it
     const distinctId = uuidv7();
     await chrome.storage.local.set({ posthog_distinct_id: distinctId });
@@ -203,7 +211,7 @@ posthog.init('<ph_project_api_key>', {
         distinctID: distinctId
     },
     api_host: '<ph_client_api_host>',
-    persistence: 'localStorage',
+    persistence: 'memory', // No localStorage or sessionStorage in service workers
     disable_external_dependency_loading: true,
     capture_pageview: false, // No DOM in service workers
     autocapture: false, // No DOM events to capture

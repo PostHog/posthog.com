@@ -39,6 +39,7 @@ import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CustomerMetadata from './CustomerMetadata'
+import { getVideoClasses } from '../../constants'
 
 dayjs.extend(relativeTime)
 
@@ -47,6 +48,7 @@ interface ReaderViewProps {
         type: 'mdx' | 'plain'
         content: string
         featuredImage?: any
+        featuredImageCaption?: string
         contributors?: any[]
         date?: string
         featuredVideo?: string
@@ -281,7 +283,7 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
     return (
         <ScrollSpyProvider>
             <div className={`not-prose ${className}`}>
-                <div className="@4xl/app-reader:hidden">
+                <div className="@4xl/app-reader:hidden mb-4">
                     <Accordion
                         items={[
                             {
@@ -310,6 +312,7 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
                         ]}
                         defaultValue="table-of-contents"
                         skin={true}
+                        dataScheme="secondary"
                     />
                 </div>
                 <div className="hidden @4xl/app-reader:block">
@@ -526,7 +529,7 @@ function ReaderViewContent({
     showQuestions = true,
 }) {
     const { openNewChat, compact } = useApp()
-    const { appWindow } = useWindow()
+    const { appWindow, activeInternalMenu } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef(null)
 
@@ -674,21 +677,44 @@ function ReaderViewContent({
                                     padding
                                         ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
                                         : ''
-                                } mx-auto transition-all ${
-                                    fullWidthContent || body?.type !== 'mdx'
-                                        ? 'max-w-full'
-                                        : contentMaxWidthClass || 'max-w-2xl'
                                 }`}
                             >
                                 {/* <DebugContainerQuery /> */}
                                 {body.featuredImage && !body.featuredVideo && (
-                                    <div className="not-prose mb-4">
-                                        <GatsbyImage image={getImage(body.featuredImage)} alt={title} />
+                                    <div className="not-prose mb-6 relative">
+                                        <div className="text-center">
+                                            <GatsbyImage
+                                                image={getImage(body.featuredImage)}
+                                                alt={title}
+                                                className="rounded"
+                                            />
+                                        </div>
+                                        {body.featuredImageCaption && (
+                                            <div className="absolute right-0 bottom-0 m-2 text-sm text-white bg-black bg-opacity-75 font-medium py-1 px-2 rounded-sm italic text-right">
+                                                {body.featuredImageCaption}
+                                            </div>
+                                        )}
                                     </div>
                                 )}
-                                {title && !hideTitle && <h1>{title}</h1>}
+                                {title && !hideTitle && (
+                                    <h1
+                                        className={`mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
+                                        {title}
+                                    </h1>
+                                )}
                                 {(body.date || body.contributors || body.tags) && (
-                                    <div className="flex items-center space-x-2 mb-4 flex-wrap">
+                                    <div
+                                        className={`flex items-center space-x-2 mt-4 flex-wrap mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
                                         {body.contributors && <ContributorsSmall contributors={body.contributors} />}
                                         {body.date && <p className="text-sm text-secondary m-0">{body.date}</p>}
                                         {body.tags && (
@@ -710,7 +736,14 @@ function ReaderViewContent({
                                     tableOfContents.length > 0 &&
                                     !hideMobileTableOfContents &&
                                     !hideRightSidebar && (
-                                        <div data-scheme="secondary" className="@4xl/app-reader:hidden mt-4">
+                                        <div
+                                            data-scheme="secondary"
+                                            className={`@4xl/app-reader:hidden mt-4 mx-auto transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? 'max-w-full'
+                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
+                                        >
                                             <TableOfContents
                                                 tableOfContents={tableOfContents}
                                                 contentRef={contentRef}
@@ -718,10 +751,19 @@ function ReaderViewContent({
                                             />
                                         </div>
                                     )}
-                                {body.featuredVideo && <iframe src={body.featuredVideo} />}
+                                {body.featuredVideo && (
+                                    <iframe src={body.featuredVideo} className={getVideoClasses(fullWidthContent)} />
+                                )}
                                 <div className="reader-content-container">
                                     {body.type === 'mdx' ? (
-                                        <div className={'@container'}>
+                                        <div
+                                            className={`@container [&>*:not(.OSTable):not(.Table)]:mx-auto [&>*:not(.OSTable):not(.Table)]:transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? '[&>*:not(.OSTable):not(.Table)]:max-w-full'
+                                                    : contentMaxWidthClass ||
+                                                      '[&>*:not(.OSTable):not(.Table)]:max-w-2xl'
+                                            }`}
+                                        >
                                             {/* Display customer metadata if this is a customer page */}
                                             {isCustomerPage && customerKey && (
                                                 <CustomerMetadata customerKey={customerKey} />
@@ -736,15 +778,35 @@ function ReaderViewContent({
                                     )}
                                 </div>
                                 {showQuestions && (
-                                    <div className="mt-8">
+                                    <div
+                                        className={`mt-8 mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
                                         <h3 id="squeak-questions" className="mb-4">
                                             Community questions
                                         </h3>
-                                        <Questions slug={appWindow?.path} />
+                                        <Questions
+                                            slug={appWindow?.path}
+                                            parentName={activeInternalMenu?.name}
+                                            className={`mx-auto transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? 'max-w-full'
+                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
+                                        />
                                     </div>
                                 )}
                                 {showSurvey && (
-                                    <div className="mt-8">
+                                    <div
+                                        className={`mt-8 mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
                                         <DocsPageSurvey filePath={filePath} />
                                     </div>
                                 )}
@@ -823,7 +885,7 @@ function ReaderViewContent({
                                             })
                                         }
                                     >
-                                        Ask Max AI
+                                        Ask PostHog AI
                                     </button>{' '}
                                     or{' '}
                                     <Link
