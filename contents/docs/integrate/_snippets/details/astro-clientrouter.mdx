@@ -24,6 +24,6 @@ Update your `posthog.astro` file to wrap the snippet with a check:
 </script>
 ```
 
-Without this guard, ClientRouter's soft navigation can re-execute the inline script during page transitions, causing a stack overflow error. The `capture_pageview: 'history_change'` option ensures pageviews are tracked automatically as users navigate.
+Without this guard, `ClientRouter`'s soft navigation can re-execute the inline script during page transitions, causing a stack overflow error. The `capture_pageview: 'history_change'` option ensures pageviews are tracked automatically as users navigate.
 
 </details>
