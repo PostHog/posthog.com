@@ -1254,9 +1254,13 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Sales & CS',
+        name: 'Sales, CS & Onboarding',
         url: '',
         children: [
+            {
+                name: 'Overview',
+                url: '/handbook/growth/sales/accounts-overview',
+            }, 
             {
                 name: 'Sales',
                 url: '',
@@ -1528,7 +1532,7 @@ export const handbookSidebar = [
             {
                 name: 'Customer FAQs',
                 url: '/handbook/growth/sales/customer-faqs',
-            },
+            }, 
         ],
     },
     {
