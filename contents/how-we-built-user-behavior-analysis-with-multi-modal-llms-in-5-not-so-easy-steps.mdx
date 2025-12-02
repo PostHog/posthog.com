@@ -51,7 +51,7 @@ Usually, each user-generated event has lots of metadata attached to it. User inf
 
 ### Parallelization breaks the narrative
 
-If the user spent multiple hours on the website, their session could be huge. If you have lots of such users (like we do), it makes sense to start with splitting such sessions into segments and analyzing each one in parallel to improve latency. It's a trap. If the LLM doesn't know what happened before or after, it loses critical context on what the current segment's events actually mean, so the combined result is worthless.
+If a user spends hours on your site, their session could be huge. If you have lots of such users (like we do), it’s tempting to split each session into segments and analyze them in parallel to cut latency. It's a trap. If the LLM doesn't know what happened before or after, it loses critical context on what the current segment's events actually mean, so the combined result is worthless.
 
 **Our approach:**
 
