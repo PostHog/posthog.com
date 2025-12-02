@@ -1081,6 +1081,7 @@ export interface SiteSettings {
 const isLabel = (item: any) => !item?.url && item?.name
 
 const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
+    const lastReset = typeof window !== 'undefined' ? localStorage.getItem('lastReset') : null
     const siteSettings = {
         experience: 'posthog',
         colorMode: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
@@ -1091,6 +1092,7 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         clickBehavior: 'double',
         performanceBoost: false,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
+        ...(!lastReset ? { experience: 'posthog' } : {}),
     }
 
     if (isMobile || compact) {
@@ -1671,8 +1673,19 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     const updateSiteSettings = (settings: SiteSettings) => {
-        setSiteSettings(settings)
-        localStorage.setItem('siteSettings', JSON.stringify(settings))
+        try {
+            setSiteSettings(settings)
+            const savedSettings = JSON.parse(localStorage.getItem('siteSettings') || '{}')
+            localStorage.setItem(
+                'siteSettings',
+                JSON.stringify({
+                    ...settings,
+                    experience: compact ? savedSettings.experience || 'posthog' : settings.experience || 'posthog',
+                })
+            )
+        } catch (error) {
+            console.error('Failed to update site settings:', error)
+        }
     }
 
     const animateClosingAllWindows = () => {
@@ -1944,17 +1957,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     ])
 
     useEffect(() => {
-        const savedSettings = localStorage.getItem('siteSettings')
-        if (savedSettings) {
-            const settings = JSON.parse(savedSettings)
-            if (isMobile && settings.experience === 'posthog') {
-                settings.experience = 'boring'
-            }
-            setSiteSettings({ ...siteSettings, ...settings })
-        }
-    }, [])
-
-    useEffect(() => {
         if (siteSettings.skinMode) {
             document.body.setAttribute('data-skin', siteSettings.skinMode)
         }
@@ -2096,6 +2098,20 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             })
         }
     }, [stateWindows])
+
+    useEffect(() => {
+        try {
+            const lastReset = localStorage.getItem('lastReset')
+            if (!lastReset) {
+                const currentSiteSettings = JSON.parse(localStorage.getItem('siteSettings') || '{}')
+                currentSiteSettings.experience = 'posthog'
+                localStorage.setItem('lastReset', new Date().toISOString())
+                localStorage.setItem('siteSettings', JSON.stringify(currentSiteSettings))
+            }
+        } catch (error) {
+            console.error('Failed to reset site settings:', error)
+        }
+    }, [])
 
     return (
         <Context.Provider
