@@ -1234,13 +1234,14 @@ export const handbookSidebar = [
                 url: '/handbook/support/customer-support',
             },
             {
-                name: 'Incidents & maintenance',
-                url: '/handbook/engineering/operations/incidents#customer-communications',
+                name: 'Support team incident response',
+                url: '/handbook/support/support-incident-response',
             },
             {
-                name: 'Internal processes',
+                name: 'How we work',
                 url: '',
                 children: [
+
                     {
                         name: 'Support zero weeks',
                         url: '/handbook/support/support-zero',
