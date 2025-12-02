@@ -29,7 +29,7 @@ In this post, I'll walk through what we learned through the process of building 
 
 ## Step 1: "Analyzing a single user session should be easy"
 
-Let's forget about scaling for a moment and focus just on a single user session: a user visited a website or app, navigated a bit, did something useful, and left. The logic seems straightforward: take all the session events, send them to the LLM, and get the summary.
+Let's forget about scaling for a moment and focus just on a single user session: a user visited a website or app, navigated a bit, did something useful, and left. The logic seems straightforward: take all the session events, send them to an LLM, and get a summary.
 
 However...
 
@@ -39,7 +39,7 @@ Usually, each user-generated event has lots of metadata attached to it. User inf
 
 **Our approach:**
 
-- We start with the "what I need 100%" approach, keeping a minimal set of events and fields, adding new ones only if they increase the quality of the summary.
+- We start with what's essential: keeping a minimal set of events and fields, and adding new ones only if they increase the quality of the summary.
 - Mappings for everything. If event data includes URLs, we use a `url_N` alias and attach a mapping. Same for tab IDs, and any repeating parameters.
 - CSV input. Neither JSON nor TOON (heh) will provide the same generation quality per input token.
 - We don't return JSON either. If it works with free text - awesome, if not - we return YAML or CSV.
@@ -53,8 +53,7 @@ If the user spent multiple hours on the website, their session could be huge. If
 
 **Our approach:**
 
-- As stupid as it sounds, we process the data for the entire session in one large call, so the LLM has full context.
-- If you must segment, do it in one step, and then provide the context on all segments to each parallel call. Lots of context for the current segment, minimal context for the previous/next segments to keep LLM grounded.
+- Wherever possible, process the data for the entire session in one large call, so the LLM has full context (up to 200k tokens). If you must segment (the context too large), do it in a separate step, then provide each parallel call with full context for its own segment and just minimal context for the previous and next ones. Lots of context for the current slice, a little for its neighbors to keep the LLM grounded.
 - Hope that users are ok with waiting for a couple of minutes. Using faster models (like OpenAI `nano` ones) can allow streaming the summary after 10-15s, but thinking models on "high" provide better results quality-wise, and quality is the goal.
 
 ![Single session summary](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_11_29_at_21_20_57_fb0e292e9d.png)
