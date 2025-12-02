@@ -195,7 +195,7 @@ If any analysis step fails, but you have proper atomic activities and cache the 
 
 - If it’s an isolated step (like a single session summary that can be used as-is), we use DB. 
 - If it’s an intermediate step (like pattern extraction), we use Redis. 
-- The main logic is “will it change the result if I add one more session to the input?”
+- The main logic is “will it change the result if I add one more session to the input?”.
 
 ![Basic retry logic](https://res.cloudinary.com/dmukukwp6/image/upload/2dc9059b_5887_4ae1_9cd2_e03da961609f_6b45fa47be.jpeg)
 
