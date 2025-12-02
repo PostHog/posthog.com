@@ -112,7 +112,7 @@ We can even use lighter models and lower resolutions, but at some point, the qua
 - Don't analyze the whole video - there are at least 40-50-60% of inactivity that we can skip, and pay to transcribe only parts where the user did something. Though we need either events or snapshots to find these parts.
 - Don't analyze all the videos - there's a clear set of parameters (like event count, or active duration) that can be used to decide if it's worthwhile to check this session.
 
-### Videos are heavy (part two)
+### Videos are _really_ heavy
 
 Even with all the optimizations above, video files add up. A 10-second GIF clip at 1080p can be 7-15MB. Multiply by hundreds of thousands of sessions, and we're looking at terabytes of storage costs daily. The example is obviously laughable, but even with the regular `.mp4` format (tens of times smaller), it's easy to reach terabytes pretty quickly.
 
