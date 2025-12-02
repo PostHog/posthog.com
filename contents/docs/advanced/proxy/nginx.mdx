@@ -1,25 +1,117 @@
 ---
-title: Using nginx as a reverse proxy
+title: Use nginx as a reverse proxy
 sidebar: Docs
 showTitle: true
 ---
 
-import RegionWarning from "../_snippets/region-warning.mdx"
-import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
-import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import ProxyCallout from "../_snippets/proxy-callout.mdx"
+import { Steps, Step } from 'components/Docs/Steps'
 
-<CalloutBox icon="IconWarning" title="Warning" type="fyi">
+<ProxyCallout />
 
-  1. <ProxyWarning />
-  2. <RegionWarning />
-  3. <ProxyPathNamesWarning />
+This guide shows you how to use [nginx](https://nginx.org/en/docs/) as a reverse proxy for PostHog.
 
-</CalloutBox>
+There are two options:
 
-## Creating a nginx container
+1. **Run nginx directly:** Install and configure nginx on your server
+2. **Run nginx with Docker:** Use a containerized nginx setup with environment variables for the region
 
-You can use nginx as a reverse proxy. To do this, first create a `Dockerfile` to build a nginx container:
+## Option 1: Run nginx directly
+
+<Steps>
+
+<Step title="Install nginx">
+
+Follow [nginx's installation guide](https://nginx.org/en/docs/install.html) for your operating system.
+
+</Step>
+
+<Step title="Configure nginx">
+
+Create or edit your nginx configuration file. Common locations are `/etc/nginx/nginx.conf` or `/etc/nginx/sites-available/default`:
+
+```nginx
+server {
+    listen 80;
+    listen [::]:80;
+    server_name e.yourdomain.com;  # Change to your subdomain
+
+    location /static/ {
+        proxy_pass https://us-assets.i.posthog.com/static/;
+        proxy_set_header Host us-assets.i.posthog.com;
+        proxy_ssl_server_name on;
+        proxy_ssl_name us-assets.i.posthog.com;
+    }
+
+    location / {
+        proxy_pass https://us.i.posthog.com/;
+        proxy_set_header Host us.i.posthog.com;
+        proxy_ssl_server_name on;
+        proxy_ssl_name us.i.posthog.com;
+    }
+}
+```
+
+Replace `e.yourdomain.com` with your subdomain. Replace `us` with `eu` for EU region.
+
+See [nginx proxy documentation](https://nginx.org/en/docs/http/ngx_http_proxy_module.html) for more details.
+
+</Step>
+
+<Step title="Test and reload nginx">
+
+Test your configuration:
+
+```bash
+sudo nginx -t
+```
+
+If the test passes, reload nginx:
+
+```bash
+sudo nginx -s reload
+```
+
+</Step>
+
+<Step title="Add SSL/TLS" badge="recommended">
+
+Use [Certbot](https://certbot.eff.org/) to add free SSL certificates from Let's Encrypt:
+
+```bash
+sudo certbot --nginx -d e.yourdomain.com
+```
+
+Replace `e.yourdomain.com` with your subdomain.
+
+Certbot will automatically update your nginx configuration to use HTTPS.
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+Use your subdomain as the API host:
+
+```js
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://us.posthog.com' // Use https://eu.posthog.com for EU region
+})
+```
+
+Replace `e.yourdomain.com` with your actual subdomain.
+
+</Step>
+
+</Steps>
+
+## Option 2: Run nginx with Docker
+
+<Steps>
+
+<Step title="Create a Dockerfile">
+
+Create a file named `Dockerfile`:
 
 ```dockerfile
 FROM nginx:alpine
@@ -29,27 +121,35 @@ COPY nginx.conf /etc/nginx/nginx.conf.template
 CMD ["sh", "-c", "envsubst '\\$POSTHOG_CLOUD_REGION' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"]
 ```
 
-Next, create the `nginx.conf` file with the reverse proxy configuration.
+This uses environment variables to configure the region dynamically.
 
-```nginx.conf
+</Step>
+
+<Step title="Create nginx.conf">
+
+Create a file named `nginx.conf`:
+
+```nginx
 worker_processes auto;
 events { worker_connections 1024; }
 http {
     sendfile on;
+    
     server {
         listen 8080;
         server_name _;
         
-        # DNS resolver - increased cache time for stability
-        resolver 8.8.8.8 8.8.4.4 [2001:4860:4860::8888] [2001:4860:4860::8844] valid=300s;
+        # DNS resolver with increased cache time
+        resolver 8.8.8.8 8.8.4.4 valid=300s;
         resolver_timeout 5s;
         
-        # Static assets - trailing slashes preserve path mapping
+        # Static assets
         location /static/ {
             proxy_pass https://${POSTHOG_CLOUD_REGION}-assets.i.posthog.com/static/;
             proxy_set_header Host "${POSTHOG_CLOUD_REGION}-assets.i.posthog.com";
             proxy_ssl_server_name on;
             
+            # Remove and set CORS headers
             proxy_hide_header 'Access-Control-Allow-Origin';
             proxy_hide_header 'Access-Control-Allow-Methods';
             proxy_hide_header 'Access-Control-Allow-Headers';
@@ -67,6 +167,7 @@ http {
             proxy_set_header Host "${POSTHOG_CLOUD_REGION}.i.posthog.com";
             proxy_ssl_server_name on;
             
+            # Remove and set CORS headers
             proxy_hide_header 'Access-Control-Allow-Origin';
             proxy_hide_header 'Access-Control-Allow-Methods';
             proxy_hide_header 'Access-Control-Allow-Headers';
@@ -81,20 +182,76 @@ http {
 }
 ```
 
-## Running the nginx container
+</Step>
+
+<Step title="Build and run the container">
+
+Build the Docker image:
 
 ```bash
-docker build -t posthog-nginx . 
+docker build -t posthog-nginx .
+```
+
+Run the container:
+
+```bash
 docker run --rm -p 8080:8080 -e POSTHOG_CLOUD_REGION=us posthog-nginx
 ```
 
-Now you can connect to PostHog through this proxy by configuring the PostHog client to use `http://localhost:8080`.
+Replace `us` with `eu` for EU region.
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+Use your container's host as the API host:
 
 ```js
-posthog.init(<ph_project_api_key>, {
-    api_host: localhost:8080,
-    ui_host: 'https://us.posthog.com', // for the toolbar to work
-    // for EU Cloud
-    // ui_host: 'https://eu.posthog.com',
-});
+posthog.init('<ph_project_api_key>', {
+  api_host: 'http://localhost:8080',
+  ui_host: 'https://us.posthog.com' // Use https://eu.posthog.com for EU region
+})
 ```
+
+Replace `localhost:8080` with your actual host and port.
+
+</Step>
+
+</Steps>
+
+## Troubleshooting
+
+For common issues like region mismatches, `ui_host` configuration, and 405 errors, see [best practices and common issues](/docs/advanced/proxy#best-practices-and-common-issues).
+
+### 502 Bad Gateway errors
+
+This usually means nginx can't reach PostHog's servers. Check:
+
+1. Your server can make HTTPS requests to PostHog domains.
+2. The `proxy_ssl_server_name on` directive is set.
+3. DNS resolution is working. In the Docker setup, ensure the `resolver` directive is configured.
+
+### CORS errors
+
+If you see `Access-Control-Allow-Origin` errors:
+
+1. Verify the CORS headers are configured correctly in your nginx config.
+2. Check that the `proxy_hide_header` directives are removing PostHog's default CORS headers before your `add_header` directives set new ones.
+
+### Configuration file location
+
+Common nginx configuration locations:
+
+- **Ubuntu/Debian:** `/etc/nginx/sites-available/default`
+- **CentOS/RHEL:** `/etc/nginx/nginx.conf`
+- **Docker:** Defined in your Dockerfile
+
+Use `nginx -t` to test your configuration and see which files nginx is loading.
+
+### SSL certificate issues
+
+If using Certbot and getting certificate errors:
+
+1. Make sure ports 80 and 443 are open.
+2. Your domain's DNS records point to your server.
+3. Try running Certbot in verbose mode: `sudo certbot --nginx -d yourdomain.com -v`

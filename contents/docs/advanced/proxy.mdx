@@ -1,57 +1,72 @@
 ---
-title: Deploying a reverse proxy to PostHog Cloud
+title: Deploying a reverse proxy
 sidebar: Docs
 showTitle: true
 ---
 
-import ProxyPathNamesWarning from './_snippets/proxy-path-names-warning.mdx'
+import ProxyCallout from './_snippets/proxy-callout.mdx'
 
-A reverse proxy enables you to send events to PostHog Cloud using your own domain.
+<ProxyCallout />
 
-This means setting up a service to redirect requests from a subdomain you choose (like `e.yourdomain.com`) to PostHog.
+After installing PostHog, we recommend setting up a reverse proxy to capture more events.
 
-You then use this subdomain as your `api_host` in the initialization of PostHog instead of `us.i.posthog.com` or `eu.i.posthog.com`.
+A reverse proxy routes events from your domain to PostHog. Instead of sending events directly to PostHog's domain, you'll send them through your own subdomain like `e.yourdomain.com`.
 
-## Why do we recommend deploying one?
+## Why use a reverse proxy?
 
-Using a reverse proxy means that events are less likely to be intercepted by tracking blockers.
+Ad blockers target well-known analytics domains. They miss events sent through your own domain.
 
-You'll be able to capture more usage data without having to self-host PostHog, ensuring you get a complete view of your users.
+A reverse proxy helps you capture more complete data about how people use your product.
 
-## Deploying a reverse proxy
+## Choose your proxy option
 
-Using our [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) is the easiest way to do this.
+### Managed reverse proxy (recommended)
 
-It's available as part of our [platforms add-ons](/platform-packages), which includes automatic provisioning, SSO and 2FA enforcement, priority support, and additional collaboration features.
+Let us handle everything. Point a subdomain to PostHog and we'll provision SSL certificates and routing automatically.
 
-Other documented options for deploying a reverse proxy include:
+This is the fastest option with minimal maintenance. Requires our [platforms add-ons](/platform-packages).
 
--   [AWS CloudFront](/docs/advanced/proxy/cloudfront)
--   [Caddy](/docs/advanced/proxy/caddy)
--   [Cloudflare](/docs/advanced/proxy/cloudflare)
--   [Kubernetes Ingress Controller](/docs/advanced/proxy/kubernetes-ingress-controller)
--   [Netlify](/docs/advanced/proxy/netlify)
--   [Next.js rewrites](/docs/advanced/proxy/nextjs)
--   [Next.js middleware](/docs/advanced/proxy/nextjs-middleware)
--   [nginx](/docs/advanced/proxy/nginx)
--   [node](/docs/advanced/proxy/node)
--   [Railway](/docs/advanced/proxy/railway)
--   [Remix](/docs/advanced/proxy/remix)
--   [SvelteKit](/docs/advanced/proxy/sveltekit)
--   [Vercel](/docs/advanced/proxy/vercel)
--   [Nuxt](/docs/advanced/proxy/nuxt)
--   [Pomerium](/docs/advanced/proxy/pomerium)
+[Set up managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy)
 
-## Best practices
+### Deploy your own proxy
 
--   We require that the proxy sets the `Host` header to the same host it's calling. Check the guides above on how to do that for several proxies.
--   Don't use a subdomain that includes `posthog`, `analytics`, `tracking`, or other similar words which might cause events to be blocked.
--   Make sure to [pass the proper `ui_host` parameter](/docs/libraries/js/config) when initializing PostHog, so that links to PostHog point to the correct host (like `us.posthog.com`). This is required for tasks like authenticating the toolbar.
--   <ProxyPathNamesWarning />
+If you need full control or have infrastructure in place already, you can also deploy your own reverse proxy:
 
-## Reverse proxy requirements
+- [AWS CloudFront](/docs/advanced/proxy/cloudfront)
+- [Cloudflare Workers](/docs/advanced/proxy/cloudflare)
+- [Railway](/docs/advanced/proxy/railway)
+- [Next.js rewrites](/docs/advanced/proxy/nextjs) or [middleware](/docs/advanced/proxy/nextjs-middleware)
+- [Netlify](/docs/advanced/proxy/netlify)
+- [Nuxt](/docs/advanced/proxy/nuxt)
+- [Remix](/docs/advanced/proxy/remix)
+- [SvelteKit](/docs/advanced/proxy/sveltekit)
+- [Vercel](/docs/advanced/proxy/vercel)
+- [Caddy](/docs/advanced/proxy/caddy)
+- [nginx](/docs/advanced/proxy/nginx)
+- [node:http](/docs/advanced/proxy/node)
+- [Kubernetes Ingress Controller](/docs/advanced/proxy/kubernetes-ingress-controller)
+- [Pomerium](/docs/advanced/proxy/pomerium)
 
-If you want to use an alternative reverse proxy that we have not documented, it must meet the following requirements:
+## After you deploy
+
+1. Choose a subtle subdomain. Avoid words like `posthog`, `analytics`, or `tracking`. Try `e.yourdomain.com` or `ph.yourdomain.com`.
+
+2. Set the `Host` header to match the PostHog domain your proxy is calling. Check your specific guide for instructions.
+
+3. Update your PostHog SDK to point to your proxy domain:
+
+```js
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://us.posthog.com' // Use https://eu.posthog.com for EU region
+})
+```
+
+4. Check your proxy's size limits. PostHog events can be up to 1MB and session recordings up to 64MB per message.
+
+## Technical requirements
+
+If you're using a tool we haven't documented, your reverse proxy needs to route requests like this:
 
 ```yaml
 - route: e.yourdomain.com/static/*
@@ -63,47 +78,81 @@ If you want to use an alternative reverse proxy that we have not documented, it 
   host_header: us.i.posthog.com
 ```
 
-<CalloutBox icon="IconWarning" title="Beware of size limits" type="caution">
-    Some systems have size limits (e.g. AWS WAF defaults to 8kb) which can cause problems if they are used as or with a
-    reverse proxy. PostHog events can be up to 1MB and session recordings can be up to 64MB per message, so you may need
-    to adjust your limits.
-</CalloutBox>
+Replace `us` with `eu` for EU region.
+
+## Best practices and common issues
+
+### Always set `ui_host`
+
+When using a reverse proxy, set `ui_host` to your PostHog region so features like the toolbar link correctly:
+
+```js
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://us.posthog.com' // Use https://eu.posthog.com for EU region
+})
+```
+
+Without this, links from the toolbar and other features will incorrectly point to your proxy domain.
+
+### Use the correct region
+
+A common cause of `401` or `no_api_key` errors is mismatched regions. Make sure your proxy points to the same region as your PostHog project:
+
+- **US region:** `us.i.posthog.com` and `us-assets.i.posthog.com`
+- **EU region:** `eu.i.posthog.com` and `eu-assets.i.posthog.com`
+
+### Avoid obvious tracking terms in your proxy path
+
+Ad blockers may still block requests if your proxy path contains obvious tracking-related terms. Avoid paths like:
+
+- `/analytics`
+- `/tracking`
+- `/telemetry`
+- `/posthog`
+
+Use neutral paths like `/ingest`, `/e`, or `/ph` instead.
+
+### 405 Method Not Allowed errors in console
+
+You may see 405 errors in your browser console originating from PostHog's session replay network plugin. These are typically benign and don't affect data capture.
+
+If your events and session replays appear correctly in PostHog, you can safely ignore these console errors.
+
+### Verify events are reaching PostHog
+
+After setting up your proxy:
+
+1. Open your browser's network tab
+2. Trigger an event (like a page view)
+3. Look for requests to your proxy domain
+4. Check that responses return `200 OK`, not redirects or errors
+5. Verify events appear in your PostHog dashboard
 
 ## FAQ
 
 ### Why doesn't PostHog use its own proxy?
 
-We do use a proxy for our own analytics! However, ad blockers specifically target well-known analytics and tracking domains. When ad blockers visit `posthog.com`, they identify and catalog the tracking scripts and domains we use, then add them to their block lists.
+We do. But ad blockers specifically target well-known analytics domains. When they visit `posthog.com`, they catalog our tracking scripts and add them to block lists.
 
-This means that even if we proxy our own tracking through a subdomain like `e.posthog.com`, ad blockers will still block it because they've specifically identified it as a PostHog tracking endpoint. You might notice this if you use an ad blocker on `us.posthog.com` - some of our internal feature flags may not load properly because the ad blocker is intercepting those requests.
+Your proxy works because ad blockers haven't visited your domain to catalog your setup.
 
-Your proxy works differently because ad blockers haven't specifically visited your domain to catalog your tracking setup. When you use a domain like `e.yourdomain.com`, it appears to ad blockers as just another part of your application rather than a known tracking service.
+### Does PostHog provide static IP addresses?
 
-### Does PostHog Cloud provide static IP addresses for firewall allowlisting?
+No. Our domains use AWS infrastructure with load balancing, which rotates IPs for better performance.
 
-No, PostHog Cloud does not provide static IP addresses for its public API endpoints. These domains handle event ingestion, feature flag evaluation, session replay, and asset delivery. They use AWS infrastructure with load balancing, which rotates IPs for scalability and performance.
+If your firewall requires IP allowlisting, you have two options:
 
-**Domains that require access:**
+**Option 1: Use domain-based filtering instead**
 
-- **US Cloud:** `us.i.posthog.com`, `us-assets.i.posthog.com`
-- **EU Cloud:** `eu.i.posthog.com`, `eu-assets.i.posthog.com`
-- **Toolbar/internal metrics:** `internal-t.posthog.com`
+Allow outbound HTTPS traffic on port 443 to `*.posthog.com`, or allow specific domains: `us.i.posthog.com` and `us-assets.i.posthog.com`. Replace `us` with `eu` for EU region.
 
-We recommend one of two approaches:
+**Option 2: Set up a reverse proxy with a static IP**
 
-**1. Domain-based filtering (if your firewall supports FQDN resolution)**
+This is the recommended approach for enterprise firewalls.
 
-Allow outbound HTTPS (port 443) traffic to:
-- `*.posthog.com` (covers all PostHog domains), or
-- Specific domains listed above for your region
+1. Deploy a [reverse proxy](#choose-your-proxy-option) in your infrastructure.
+2. Assign your proxy a static IP.
+3. Allowlist only your proxy's IP in your firewall.
 
-**2. Reverse proxy with static IP (most reliable)**
-
-- Set up a [reverse proxy](/docs/advanced/proxy) in your infrastructure with a known static IP
-- Configure that proxy to forward requests to PostHog Cloud domains
-- Allowlist only your own proxy's IP in your firewall
-- This gives you full control over the IP addressing
-
-The reverse proxy solution is particularly useful for enterprise firewalls (like F5 BIG-IP, Palo Alto, etc.) that require IP-based rules, since you maintain complete control over the network path.
-
-> **Note:** PostHog does provide static IP addresses for [data warehouse sources](/docs/cdp/sources) that need to connect to your databases, but these are separate from the public API endpoints.
+This gives you full control over network routing and avoids dependence on PostHog's rotating IPs.

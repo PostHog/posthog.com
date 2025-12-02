@@ -1,25 +1,38 @@
 ---
-title: Using Netlify redirects as a reverse proxy
+title: Use Netlify redirects as a reverse proxy
 sidebar: Docs
 showTitle: true
 ---
 
-import RegionWarning from "../_snippets/region-warning.mdx"
-import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
-import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import ProxyCallout from "../_snippets/proxy-callout.mdx"
+import { Steps, Step } from 'components/Docs/Steps'
 
-<CalloutBox icon="IconWarning" title="Warning" type="fyi">
+<ProxyCallout />
 
-  1. <ProxyWarning />
-  2. <RegionWarning />
-  3. <ProxyPathNamesWarning />
+This guide shows you how to use [Netlify redirects](https://docs.netlify.com/routing/redirects/) as a reverse proxy for PostHog.
+
+There are two options depending on your framework:
+
+1. **netlify.toml:** The standard approach for most Netlify projects
+2. **_redirects file:** Required for SvelteKit projects due to Netlify limitations
+
+<CalloutBox icon="IconWarning" title="Custom domains only" type="caution">
+
+This proxy configuration works with custom domains but may not work correctly with the default `.netlify.app` domain. If you're experiencing issues with PostHog requests being blocked, make sure you're using a custom domain rather than the default Netlify domain.
 
 </CalloutBox>
 
-Netlify supports [redirects and rewrites](https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file) which we can use as a reverse proxy from a custom route. In your `netlify.toml` file, add a redirect like this:
+## Option 1: Use netlify.toml
 
-```js
+This is the standard approach for most Netlify projects.
+
+<Steps>
+
+<Step title="Add redirects to netlify.toml">
+
+In your project root, add these redirects to your `netlify.toml` file:
+
+```toml
 [[redirects]]
   from = "/<ph_proxy_path>/static/*"
   to = "https://us-assets.i.posthog.com/static/:splat"
@@ -35,23 +48,114 @@ Netlify supports [redirects and rewrites](https://docs.netlify.com/routing/redir
   force = true
 ```
 
-> **Note:** If deploying SvelteKit on Netlify use `_redirects` file and place it in the project root, as redirects in `netlify.toml` configuration [are not supported](https://docs.netlify.com/frameworks/sveltekit/#limitations).
+Replace `<ph_proxy_path>` with your chosen path (like `ph`). Replace `us` with `eu` for EU region.
+
+See [Netlify's redirects documentation](https://docs.netlify.com/routing/redirects/) for more details.
+
+</Step>
+
+<Step title="Deploy your changes">
+
+Deploy your site to Netlify. The redirects will be active once deployed.
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+Use your proxy path as the API host:
 
 ```js
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://yourdomain.com/<ph_proxy_path>',
+  ui_host: 'https://us.posthog.com' // Use https://eu.posthog.com for EU region
+})
+```
+
+Replace `yourdomain.com` with your custom domain and `<ph_proxy_path>` with your chosen path.
+
+</Step>
+
+</Steps>
+
+## Option 2: Use _redirects file (for SvelteKit)
+
+If you're using SvelteKit on Netlify, use a `_redirects` file instead. Netlify [doesn't support](https://docs.netlify.com/frameworks/sveltekit/#limitations) redirects in `netlify.toml` for SvelteKit.
+
+<Steps>
+
+<Step title="Create a _redirects file">
+
+In your project root, create a file named `_redirects` with this content:
+
+```
 /<ph_proxy_path>/static/*  https://us-assets.i.posthog.com/static/:splat  200!
 /<ph_proxy_path>/*         https://us.i.posthog.com/:splat  200!
 ```
 
-> **Note:** This proxy configuration works with custom domains but may not work correctly with the default `.netlify.app` domain. If you're experiencing issues with PostHog requests being blocked, ensure you're using a custom domain rather than the default Netlify domain.
+Replace `<ph_proxy_path>` with your chosen path. Replace `us` with `eu` for EU region.
 
-Once done, set the `/<ph_proxy_path>` route of your domain as the API host in your PostHog initialization like this:
+See [Netlify's redirects file documentation](https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file) for more details.
+
+</Step>
+
+<Step title="Deploy your changes">
+
+Deploy your site to Netlify. The redirects will be active once deployed.
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+Use your proxy path as the API host:
 
 ```js
 posthog.init('<ph_project_api_key>', {
-  api_host: 'https://www.your-domain.com/<ph_proxy_path>',
-  ui_host: '<ph_app_host>',
-  defaults: '<ph_posthog_js_defaults>',
+  api_host: 'https://yourdomain.com/<ph_proxy_path>',
+  ui_host: 'https://us.posthog.com' // Use https://eu.posthog.com for EU region
 })
 ```
 
-Once updated, deploy your changes on Netlify and check that PostHog requests are going to `https://www.your-domain.com/<ph_proxy_path>` by checking the network tab on your domain.
+Replace `yourdomain.com` with your custom domain and `<ph_proxy_path>` with your chosen path.
+
+</Step>
+
+</Steps>
+
+## Verify your setup
+
+Once deployed, check that PostHog requests are going to your proxy:
+
+1. Open your website in a browser.
+2. Open the browser's **Network** tab in developer tools.
+3. Look for requests to `https://yourdomain.com/<ph_proxy_path>`.
+4. They should show status `200` and be proxying to PostHog.
+
+## Troubleshooting
+
+### Requests blocked on .netlify.app domain
+
+Netlify modifies the `Content-Encoding` header when using redirects on `.netlify.app` domains, which causes PostHog to fail parsing requests. Use a custom domain instead.
+
+### 404 errors on proxy path
+
+Make sure your `netlify.toml` or `_redirects` file is in your project root and is being deployed with your site. Check your Netlify deploy logs to confirm the redirects are being processed.
+
+### CORS errors with "missing allow origin"
+
+If you're getting CORS errors about a missing `Access-Control-Allow-Origin` header, try using a relative path instead of the full URL:
+
+```js
+posthog.init('<ph_project_api_key>', {
+  api_host: '/<ph_proxy_path>',  // Use relative path, not full URL
+  ui_host: 'https://us.posthog.com' // Use https://eu.posthog.com for EU region
+})
+```
+
+This often happens when your primary Netlify domain differs from the one you're using in the `api_host`. For example, if your primary domain is `mydomain.com` but you set `api_host` to `https://www.mydomain.com/<ph_proxy_path>`, you'll get CORS errors. Using a relative path avoids this.
+
+### Which file should I use?
+
+- **Most projects:** Use `netlify.toml`
+- **SvelteKit projects:** Use `_redirects` file
+
+If you're unsure, start with `netlify.toml`. If that doesn't work, try the `_redirects` file.

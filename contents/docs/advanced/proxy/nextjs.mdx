@@ -1,23 +1,38 @@
 ---
-title: Using Next.js rewrites as a reverse proxy
+title: Use Next.js rewrites as a reverse proxy
 sidebar: Docs
 showTitle: true
 ---
 
-import RegionWarning from "../_snippets/region-warning.mdx"
-import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
-import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import ProxyCallout from "../_snippets/proxy-callout.mdx"
+import { Steps, Step } from 'components/Docs/Steps'
 
-<CalloutBox icon="IconWarning" title="Warning" type="fyi">
+<ProxyCallout />
 
-  1. <ProxyWarning />
-  2. <RegionWarning />
-  3. <ProxyPathNamesWarning />
+This guide shows you how to use [Next.js rewrites](https://nextjs.org/docs/app/api-reference/next-config-js/rewrites) as a reverse proxy for PostHog.
+
+Next.js rewrites let you proxy requests from your domain to PostHog without changing the URL in the browser.
+
+<iframe
+  src="https://www.youtube-nocookie.com/embed/MD-jI2moPV0"
+  className="rounded shadow-xl"
+/>
+
+<CalloutBox icon="IconWarning" title="Note on hosting compatibility" type="fyi">
+
+This method works best when self-hosting Next.js or using Vercel. Some hosting services (like Heroku or Netlify) modify headers when using rewrites, which can cause `503` or `400` errors.
+
+If you're experiencing issues, try [Next.js middleware](/docs/advanced/proxy/nextjs-middleware) or a host-specific proxy like [Netlify](/docs/advanced/proxy/netlify) instead.
 
 </CalloutBox>
 
-If you are using Next.js, you can take advantage of [rewrites](https://nextjs.org/docs/api-reference/next.config.js/rewrites) to behave like a reverse proxy. To do so, add a `rewrites()` function and the `skipTrailingSlashRedirect` option to your `next.config.js` file: 
+## Setup
+
+<Steps>
+
+<Step title="Add rewrites to next.config.js">
+
+Add a `rewrites()` function and the `skipTrailingSlashRedirect` option to your `next.config.js` file:
 
 ```js
 // next.config.js
@@ -37,24 +52,70 @@ const nextConfig = {
   // This is required to support PostHog trailing slash API requests
   skipTrailingSlashRedirect: true, 
 }
+
 module.exports = nextConfig
 ```
 
-Then configure the PostHog client to send requests via your rewrite.
+Replace `<ph_proxy_path>` with your chosen path (like `ph`). Replace `us` with `eu` for EU region.
+
+See [Next.js rewrites documentation](https://nextjs.org/docs/app/api-reference/next-config-js/rewrites) for more details.
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+Use your rewrite path as the API host:
 
 ```js
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
   api_host: "/<ph_proxy_path>",
-  ui_host: '<ph_app_host>'
+  ui_host: "https://us.posthog.com" // Use https://eu.posthog.com for EU region
 })
 ```
 
-> If this isn't working for you (returning `503` or `400` errors), it may be an issue with how your hosting service (such as Heroku or Netlify) handles rewrites. You can write [Next.js middleware](/docs/advanced/proxy/nextjs-middleware) or use a host-specific proxy (like [Netlify](/docs/advanced/proxy/netlify)) instead.
-> For example, Netlify modifies the `Content-Encoding` header when using `rewrites()`, which causes PostHog to fail to parse the request. This doesn't happen if you use their `_redirects` file or `netlify.toml` options.
+Replace `<ph_proxy_path>` with your chosen path.
 
-## Setup video
+</Step>
 
-<iframe
-  src="https://www.youtube-nocookie.com/embed/MD-jI2moPV0"
-  className="rounded shadow-xl"
-/>
+<Step title="Deploy your changes">
+
+Deploy your Next.js app. The rewrites will be active once deployed.
+
+</Step>
+
+</Steps>
+
+## Troubleshooting
+
+For common issues like region mismatches, `ui_host` configuration, and 405 errors, see [best practices and common issues](/docs/advanced/proxy#best-practices-and-common-issues).
+
+### 503 or 400 errors
+
+Some hosting services modify headers when using rewrites, which causes errors. This commonly happens with:
+- Heroku
+- Netlify (modifies `Content-Encoding` header)
+
+Solutions:
+1. Use [Next.js middleware](/docs/advanced/proxy/nextjs-middleware) instead
+2. Use a host-specific proxy (like [Netlify redirects](/docs/advanced/proxy/netlify))
+3. Self-host Next.js or use Vercel
+
+### Rewrites not working
+
+Make sure:
+1. Your `next.config.js` is in your project root.
+2. You've restarted your dev server after changing the config.
+3. The rewrites are listed in the correct order (static assets first, then catch-all).
+
+### Trailing slash conflicts with SEO
+
+The `skipTrailingSlashRedirect: true` setting is required for PostHog API requests to work correctly, but it can cause SEO issues if your site becomes accessible at both `/page` and `/page/`.
+
+Solutions:
+1. **Use middleware for redirects**: Handle trailing slash redirects in your [Next.js middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) for non-PostHog routes while keeping `skipTrailingSlashRedirect: true`.
+2. **Set canonical URLs**: Use the `<link rel="canonical">` tag to specify the preferred URL version for search engines.
+3. **Configure in robots.txt or sitemap**: Ensure your sitemap only includes the canonical version of each URL.
+
+### Request body not forwarded (401 errors)
+
+Some hosting platforms strip the request body during rewrites, causing authentication errors. If you see `No project API key provided` errors and have verified your region is correct, try [Next.js middleware](/docs/advanced/proxy/nextjs-middleware) instead.

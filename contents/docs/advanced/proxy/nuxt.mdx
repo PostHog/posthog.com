@@ -1,41 +1,194 @@
 ---
-title: Using Nuxt routeRules as a reverse proxy
+title: Use Pomerium as a reverse proxy
 sidebar: Docs
 showTitle: true
 ---
 
-import RegionWarning from "../_snippets/region-warning.mdx"
-import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
-import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import ProxyCallout from "../_snippets/proxy-callout.mdx"
+import { Steps, Step } from 'components/Docs/Steps'
 
-<CalloutBox icon="IconWarning" title="Warning" type="fyi">
+<ProxyCallout />
 
-  1. <ProxyWarning />
-  2. <RegionWarning />
-  3. <ProxyPathNamesWarning />
+This guide shows you how to use [Pomerium](https://www.pomerium.com/) as a reverse proxy for PostHog.
 
-</CalloutBox>
+Pomerium is an identity-aware proxy that can securely proxy traffic to PostHog. There are two options:
 
-Nuxt 3 uses [Nitro](https://nuxt.com/docs/guide/concepts/server-engine) under the hood, which provides the [routeRules](https://nitro.unjs.io/config#routerules) config that can be used to proxy requests from one route to another. 
+1. **Pomerium Zero:** Managed service with a web UI
+2. **Pomerium Core:** Self-hosted with configuration files
 
-To do this, add the following `routeRules` to your `nuxt.config.ts` file:
+## Option 1: Pomerium Zero
+
+Pomerium Zero is the managed service with a web-based interface.
+
+### Prerequisites
+
+- A [Pomerium Zero](https://www.pomerium.com/zero) account
+
+### Setup
+
+<Steps>
+
+<Step title="Create an allow all policy">
+
+1. Log in to [Pomerium Zero](https://console.pomerium.app/).
+2. Go to **Manage** in the sidebar, then click **Policies**.
+3. Click **New Policy**.
+4. Name the policy `allow all`.
+5. Set **Policy Enforcement** to **Optional**.
+6. In the **Overrides** section, enable **Public Access**.
+7. Click **Save Policy**.
+
+This policy allows public access to your PostHog proxy, so analytics work for everyone.
+
+See [Pomerium's policy documentation](https://www.pomerium.com/docs/capabilities/authorization) for more details on policy configuration.
+
+</Step>
+
+<Step title="Create the main PostHog route">
+
+1. Click **New Route** to create a new route.
+2. Select **Custom Route**.
+3. Name the route `PostHog`.
+4. Set **From** to your subdomain, like `https://e.yourdomain.com`.
+5. Set **To** to `https://us.i.posthog.com` (or `https://eu.i.posthog.com` for EU region).
+6. In the **Policies** dropdown, select the `allow all` policy.
+7. Click **Save Route**.
+
+</Step>
+
+<Step title="Create the PostHog assets route">
+
+1. Click **New Route** to create another route.
+2. Select **Custom Route**.
+3. Name the route `PostHog Assets`.
+4. Set **From** to the same subdomain: `https://e.yourdomain.com`.
+5. Set **To** to `https://us-assets.i.posthog.com` (or `https://eu-assets.i.posthog.com` for EU region).
+6. In the **Policies** dropdown, select the `allow all` policy.
+7. Click **Path Matching** in the sidebar.
+8. Set **Prefix** to `/static`.
+9. Click **Save Route**.
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+Use your Pomerium domain as the API host:
 
 ```js
-// nuxt.config.ts
-export default defineNuxtConfig({
-    routeRules: {
-        '/<ph_proxy_path>/static/**': { proxy: 'https://us-assets.i.posthog.com/static/**' },
-        '/<ph_proxy_path>/**': { proxy: 'https://us.i.posthog.com/**' },
-    },
-});
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://app.posthog.com'
+})
 ```
 
-Then configure the PostHog client to send requests via your new proxy:
+Replace `e.yourdomain.com` with your actual subdomain.
+
+</Step>
+
+</Steps>
+
+## Option 2: Pomerium Core
+
+Pomerium Core is the self-hosted version configured with YAML files.
+
+### Prerequisites
+
+- [Pomerium Core](https://www.pomerium.com/docs/deploy/core) installed and configured
+
+### Setup
+
+<Steps>
+
+<Step title="Add routes to your config.yaml">
+
+Add these routes to your Pomerium `config.yaml` file:
+
+```yaml
+routes:
+  - from: https://e.yourdomain.com
+    to: https://us.i.posthog.com
+    policy:
+      - allow:
+          or:
+            - public: true
+    name: "PostHog"
+
+  - from: https://e.yourdomain.com
+    to: https://us-assets.i.posthog.com
+    prefix: "/static"
+    policy:
+      - allow:
+          or:
+            - public: true
+    name: "PostHog Assets"
+
+# rest of your configuration
+```
+
+Replace `e.yourdomain.com` with your subdomain. Replace `us` with `eu` for EU region.
+
+See [Pomerium's routes documentation](https://www.pomerium.com/docs/reference/routes) for more details on route configuration.
+
+</Step>
+
+<Step title="Restart Pomerium">
+
+Restart Pomerium to apply the configuration changes:
+
+```bash
+pomerium restart
+```
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+Use your Pomerium domain as the API host:
 
 ```js
-const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
-    api_host: 'https://your-host.com/<ph_proxy_path>',
-    ui_host: '<ph_app_host>',
-});
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://app.posthog.com'
+})
 ```
+
+Replace `e.yourdomain.com` with your actual subdomain.
+
+</Step>
+
+</Steps>
+
+## Troubleshooting
+
+### Routes not accessible
+
+Make sure:
+1. Your DNS records point to your Pomerium instance.
+2. The `allow all` policy is configured correctly with **Public Access** enabled.
+3. Both routes (main and assets) are configured and active.
+
+### 404 errors on static assets
+
+Check that:
+1. The assets route has the `/static` prefix configured.
+2. The assets route points to the correct assets domain (`us-assets.i.posthog.com` or `eu-assets.i.posthog.com`).
+3. The assets route is listed before or after the main route (order usually doesn't matter, but try reordering if issues persist).
+
+### Authentication prompts appearing
+
+If users are being prompted to authenticate:
+1. Make sure the policy is set to **Optional** enforcement.
+2. Verify **Public Access** is enabled in the policy overrides.
+3. Check that the policy is applied to both routes.
+
+## Pomerium Zero vs Core
+
+**Use Pomerium Zero if:**
+- You want a managed service
+- You prefer a web UI for configuration
+- You don't want to manage infrastructure
+
+**Use Pomerium Core if:**
+- You need full control over your deployment
+- You prefer configuration as code (YAML)
+- You're already self-hosting Pomerium

@@ -1,27 +1,32 @@
 ---
-title: Using SvelteKit server hooks as a reverse proxy
+title: Use SvelteKit server hooks as a reverse proxy
 sidebar: Docs
 showTitle: true
 ---
 
-import RegionWarning from "../_snippets/region-warning.mdx"
-import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
-import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
+import ProxyCallout from "../_snippets/proxy-callout.mdx"
 import { CalloutBox } from 'components/Docs/CalloutBox'
+import { Steps, Step } from 'components/Docs/Steps'
 
-<CalloutBox icon="IconWarning" title="Warning" type="fyi">
+<ProxyCallout />
 
-  1. <ProxyWarning />
-  2. <RegionWarning />
-  3. <ProxyPathNamesWarning />
+This guide shows you how to use [SvelteKit server hooks](https://kit.svelte.dev/docs/hooks#server-hooks) as a reverse proxy for PostHog.
+
+SvelteKit server hooks let you intercept requests and proxy them to PostHog. This approach works in SSR (server-side rendering) mode but not with static site generation.
+
+<CalloutBox icon="IconInfo" title="Note on static sites" type="fyi">
+
+This method only works with SSR enabled. If your site is statically generated, SvelteKit ignores `hooks.server.ts`. Use a different proxy method for static sites.
 
 </CalloutBox>
 
-For SvelteKit, you can use [server hooks](https://svelte.dev/docs/kit/hooks#Server-hooks) to proxy requests to PostHog. We've tested this (and it works) with Cloudflare Workers. 
+## Setup
 
-To do this, create a file named `hooks.server.ts` in your `src` directory (or the `dir` you configured to contain source files). In this file, set up code to match requests to a custom route, adjust the relevant headers, change the URL to point to PostHog, and rewrite the response. 
+<Steps>
 
-> **Note:** This only works in SSR mode. If your site is statically generated, SvelteKit ignores `hooks.server.ts`. 
+<Step title="Create hooks.server.ts">
+
+Create a file named `hooks.server.ts` in your `src` directory:
 
 ```ts
 import type { Handle } from '@sveltejs/kit';
@@ -32,8 +37,8 @@ export const handle: Handle = async ({ event, resolve }) => {
   if (pathname.startsWith('/<ph_proxy_path>')) {
     // Determine target hostname based on static or dynamic ingestion
     const hostname = pathname.startsWith('/<ph_proxy_path>/static/')
-      ? 'us-assets.i.posthog.com' // change us to eu for EU Cloud
-      : 'us.i.posthog.com';  // change us to eu for EU Cloud
+      ? 'us-assets.i.posthog.com' // Change to eu-assets.i.posthog.com for EU region
+      : 'us.i.posthog.com';  // Change to eu.i.posthog.com for EU region
 
     // Build external URL
     const url = new URL(event.request.url);
@@ -63,7 +68,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 };
 ```
 
-Once done, configure the PostHog client to send requests via your rewrite like we do in this sample: 
+Replace `<ph_proxy_path>` with your chosen path. Replace `us` with `eu` for EU region.
+
+See [SvelteKit's hooks documentation](https://kit.svelte.dev/docs/hooks#server-hooks) for more details on server hooks.
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+Use your proxy path as the API host:
 
 ```ts
 // src/routes/+layout.ts
@@ -75,11 +88,65 @@ export function initTelemetry() {
   if (!browser) return;
   posthog.init(POSTHOG_KEY, {
     api_host: '/<ph_proxy_path>',
-    ui_host: 'https://us.posthog.com', // change us to eu for EU Cloud
+    ui_host: 'https://app.posthog.com',
     person_profiles: 'always',
     persistence: 'localStorage'
-	});
+  });
 }
 
 initTelemetry();
 ```
+
+Replace `<ph_proxy_path>` with your chosen path.
+
+</Step>
+
+</Steps>
+
+## Troubleshooting
+
+For common issues like region mismatches, `ui_host` configuration, and 405 errors, see [best practices and common issues](/docs/advanced/proxy#best-practices-and-common-issues).
+
+### Hooks not running
+
+Make sure:
+
+1. Your `hooks.server.ts` file is in the `src` directory, not `src/routes`.
+2. You're running in SSR mode, not static site generation.
+3. You've restarted your dev server after creating the file.
+
+### Static site generation not working
+
+SvelteKit server hooks don't run for statically generated pages. If you need a proxy with static generation, use a CDN-level proxy like [Cloudflare Workers](/docs/advanced/proxy/cloudflare) or platform-specific options like [Netlify redirects](/docs/advanced/proxy/netlify) or [Vercel rewrites](/docs/advanced/proxy/vercel).
+
+### All events show the same IP address
+
+If your SvelteKit server runs behind another reverse proxy like Traefik or Cloudflare Tunnel, all events may appear to come from your server's IP instead of the user's actual IP.
+
+To fix this, forward the original client IP by passing the `X-Forwarded-For` header to PostHog. Update the headers section in your hooks file:
+
+```ts
+// Clone and adjust headers
+const headers = new Headers(event.request.headers);
+headers.set("Accept-Encoding", "");
+headers.set('host', hostname);
+
+// Forward the original client IP if behind another proxy
+const clientIp = event.request.headers.get('x-forwarded-for') || event.getClientAddress();
+if (clientIp) {
+  headers.set('x-forwarded-for', clientIp);
+}
+```
+
+The `event.getClientAddress()` method returns the client IP as seen by SvelteKit. If you're behind multiple proxies, the `x-forwarded-for` header from the incoming request contains the original client IP.
+
+## Deployment notes
+
+This proxy works with:
+
+- **SvelteKit Adapter Node:** Works out of the box
+- **SvelteKit Adapter Vercel:** Works with SSR enabled
+- **SvelteKit Adapter Netlify:** Works with SSR enabled
+- **SvelteKit Adapter Cloudflare:** Works with SSR enabled
+
+For static adapters like `adapter-static`, use a different proxy method.

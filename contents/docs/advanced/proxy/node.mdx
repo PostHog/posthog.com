@@ -1,61 +1,66 @@
 ---
-title: Using node:http as a reverse proxy
+title: Use node:http as a reverse proxy
 sidebar: Docs
 showTitle: true
+showStepsToc: true
 ---
 
-import RegionWarning from "../_snippets/region-warning.mdx"
-import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
-import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import ProxyCallout from "../_snippets/proxy-callout.mdx"
+import { Steps, Step } from 'components/Docs/Steps'
 
-<CalloutBox icon="IconWarning" title="Warning" type="fyi">
+<ProxyCallout />
 
-  1. <ProxyWarning />
-  2. <RegionWarning />
-  3. <ProxyPathNamesWarning />
+This guide shows you how to use Node's built-in [http module](https://nodejs.org/api/http.html) as a reverse proxy for PostHog.
 
-</CalloutBox>
+This is a lightweight option if you're already using Node.js and don't want to add a separate proxy tool.
 
-You can use Node's built-in `http` module to proxy requests to PostHog. This is a simple and lightweight way to proxy requests. 
+## When to use this method
 
-```ts
+Use Node's http module if:
+
+- You're already running a Node.js server
+- You want a simple, dependency-free proxy
+- You need to customize the proxy logic with JavaScript
+
+For most cases, using a dedicated proxy like [nginx](/docs/advanced/proxy/nginx) or [Caddy](/docs/advanced/proxy/caddy) is more performant.
+
+## Setup
+
+<Steps>
+
+<Step title="Create the proxy module">
+
+Create a file named `proxy.js` with this code:
+
+```js
 import http from "node:http";
 
-const API_HOST = "eu.i.posthog.com"; // Change to "us.i.posthog.com" for the US region
-const ASSET_HOST = "eu-assets.i.posthog.com"; // Change to "us-assets.i.posthog.com" for the US region
-
+const API_HOST = "us.i.posthog.com"; // Change to "eu.i.posthog.com" for EU region
+const ASSET_HOST = "us-assets.i.posthog.com"; // Change to "eu-assets.i.posthog.com" for EU region
 
 // Convert Node.js headers to Fetch API headers
-const toHeaders = (headers: Record<string, string[] | undefined>): Headers =>
+const toHeaders = (headers) =>
   Object.entries(headers).reduce((acc, [name, values]) => {
     values?.forEach((value) => acc.append(name, value));
     return acc;
   }, new Headers());
 
 // Convert Fetch API headers to Node.js headers
-const fromHeaders = (headers: Headers): Record<string, string[] | undefined> =>
-  [...headers].reduce<Record<string, string[] | undefined>>(
-    (acc, [name, value]) => {
-      if (acc[name]) {
-        acc[name] = [...acc[name], value];
-      } else {
-        acc[name] = [value];
-      }
-      return acc;
-    },
-    {},
-  );
+const fromHeaders = (headers) =>
+  [...headers].reduce((acc, [name, value]) => {
+    if (acc[name]) {
+      acc[name] = [...acc[name], value];
+    } else {
+      acc[name] = [value];
+    }
+    return acc;
+  }, {});
 
 /**
  * Proxies an incoming HTTP request to the appropriate PostHog endpoint.
  */
-export default function proxy({ prefix }: { prefix: string }) {
-  return (
-    request: http.IncomingMessage,
-    response: http.ServerResponse,
-    next: (err?: Error) => void,
-  ): void => {
+export default function proxy({ prefix }) {
+  return (request, response, next) => {
     if (!request.url?.startsWith(prefix)) {
       next();
       return;
@@ -77,7 +82,7 @@ export default function proxy({ prefix }: { prefix: string }) {
 
     // Remove sensitive or hop-by-hop headers
     headers.delete("cookie");
-    headers.delete("connection"); // https://datatracker.ietf.org/doc/html/rfc7230#section-6.1
+    headers.delete("connection");
 
     fetch(new URL(pathname, `https://${posthogHost}`), {
       method: request.method ?? "",
@@ -90,11 +95,11 @@ export default function proxy({ prefix }: { prefix: string }) {
           }
         : {}),
     })
-      .then(async (res: Response) => {
+      .then(async (res) => {
         const headers = new Headers(res.headers);
         const body = await res.text();
 
-        // See https://github.com/nodejs/undici/issues/2514
+        // Handle content encoding
         if (headers.has("content-encoding")) {
           headers.delete("content-encoding");
           headers.delete("content-length");
@@ -103,50 +108,138 @@ export default function proxy({ prefix }: { prefix: string }) {
         response.writeHead(res.status, fromHeaders(headers));
         response.end(body);
       })
-      .catch((e: unknown) => {
+      .catch((e) => {
         next(new Error("Bad gateway", { cause: e }));
       });
   };
 }
 ```
 
-To use this proxy, you can create a server like this:
+See [Node.js http documentation](https://nodejs.org/api/http.html) for details on request/response handling and server configuration.
+
+</Step>
+
+<Step title="Create a server">
+
+Create a file named `server.js` to use the proxy:
 
 ```js
 import http from "node:http";
 import cors from "cors";
 import proxy from "./proxy.js";
 
-const corsMiddleware = cors({ origin: 'https://<your_app_domain>' });
+const corsMiddleware = cors({ origin: 'https://yourdomain.com' });
 const posthogMiddleware = proxy({ prefix: "/<ph_proxy_path>" });
 
 const server = http.createServer((req, res) => {
   corsMiddleware(req, res, (err) => {
     if (err) {
-      // Some error handling for errors returned by the CORS middleware.
+      res.writeHead(500);
+      res.end("CORS error");
     } else {
       posthogMiddleware(req, res, (err) => {
         if (err) {
-          // Some error handling for errors returned by the posthog middleware.
+          res.writeHead(502);
+          res.end("Proxy error");
         } else {
-          // Your next handler ...
-          // handler(req, res);
+          // Your other routes here
+          res.writeHead(200);
+          res.end("OK");
         }
       });
     }
   });
 });
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 ```
 
-Once done, you can initialize the PostHog client with the proxy path:
+Replace:
+
+- `https://yourdomain.com` with your domain
+- `<ph_proxy_path>` with your chosen path like `/ph`
+
+</Step>
+
+<Step title="Install dependencies">
+
+Install the CORS package:
+
+```bash
+npm install cors
+```
+
+</Step>
+
+<Step title="Start your server">
+
+Run your server:
+
+```bash
+node server.js
+```
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+Use your proxy path as the API host:
 
 ```js
 import { PostHog } from 'posthog-node'
 
 const client = new PostHog(
-    '<ph_project_api_key>',
-    { host: '/<ph_proxy_path>' }
+  '<ph_project_api_key>',
+  { host: 'http://localhost:3000/<ph_proxy_path>' }
 )
 ```
 
-> Thank you to [SimonSimCity](https://github.com/SimonSimCity) for this method.
+Replace `localhost:3000` with your actual server address and `<ph_proxy_path>` with your chosen path.
+
+</Step>
+
+</Steps>
+
+## Production considerations
+
+For production use:
+
+1. **Add rate limiting:** Prevent abuse by limiting requests per IP
+2. **Implement error logging:** Log proxy errors for debugging
+3. **Use a process manager:** Tools like [PM2](https://pm2.keymetrics.io/) keep your server running
+4. **Consider nginx in front:** A dedicated reverse proxy like nginx handles high traffic better
+5. **Add health checks:** Create endpoints for monitoring your proxy's status
+
+## Troubleshooting
+
+### CORS errors
+
+If you see `Access-Control-Allow-Origin` errors:
+
+1. Make sure the `origin` in `cors()` matches your website's domain
+2. For multiple origins, use an array: `cors({ origin: ['https://yourdomain.com', 'http://localhost:3000'] })`
+
+### 502 Bad Gateway errors
+
+This means the proxy couldn't reach PostHog's servers. Check:
+
+1. Your server can make HTTPS requests to PostHog domains
+2. The `API_HOST` and `ASSET_HOST` values are correct for your region
+3. No firewall is blocking outbound HTTPS traffic
+
+### Headers not forwarding correctly
+
+If you're missing user data or geolocation:
+
+1. Make sure the `X-Forwarded-For` and `X-Real-IP` headers are being set
+2. Check that you're not behind another proxy that strips these headers
+3. Verify the `X-Forwarded-Host` header is set if you're using a custom domain
+
+### Content encoding issues
+
+The proxy removes `content-encoding` headers to avoid issues with compressed responses. If you need to preserve encoding, modify the `fetch().then()` block in `proxy.js`.
+
+> **Note:** This implementation is based on work by [SimonSimCity](https://github.com/SimonSimCity).
