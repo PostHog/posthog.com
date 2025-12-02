@@ -30,7 +30,7 @@ For better performance, consider creating [materialized views](/docs/data-wareho
 
 ### Cache responses
 
-Endpoints return cached data when available. You can also implement your own caching layer in your application to reduce API calls.
+Endpoints return cached data when available. You can configure the TTL of cached results based on your requirements. If the cache is older than your desired freshness, the endpoint will execute the query again. Endpoints should eliminate the need for you to implement your own caching layer.
 
 ### Optimize your queries
 
