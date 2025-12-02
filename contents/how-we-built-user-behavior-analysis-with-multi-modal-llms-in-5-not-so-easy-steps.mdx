@@ -183,7 +183,7 @@ We're making ~150-200 LLM calls per a single report, any of which can (and often
 
 **Our approach:**
 
-- We set failure thresholds instead of failing on the first error. Each stage allows ~20-25% of requests to fail (after exceeding the retries), so the process can move on.
+- We set failure thresholds instead of stopping at the first error. Each stage lets roughly 20–25% of requests fail (after exceeding the retries) so the process can keep moving.
 - A report based on 80 sessions instead of 100 is usually good enough to find patterns, compared to not getting a report at all.
 - It gets even more creative with streaming, as incomplete chunks will raise lots of false alarms. So, we have conditional tracking and logging to handle such cases.
 
