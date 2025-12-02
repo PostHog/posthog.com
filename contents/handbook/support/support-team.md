@@ -6,7 +6,7 @@ showTitle: true
 
 The <SmallTeam slug="support">support team</SmallTeam> exists to help our users succeed with PostHog, and we do that differently than most support teams.
 
-We're not a ticket-routing operation. We're a deeply technical team that takes pride in solving problems ourselves. We write code, ship fixes, update docs, and genuinely care about making our users' experience exceptional. We move fast, stay humble, and believe that great support is about empowering users, not just answering questions.
+We're not a ticket-routing operation. We genuinely care about making our users' experience exceptional, which we do by being a deeply technical team that takes pride in solving problems ourselves. We write code, ship fixes, update docs, and build internal tooling to deliver that experience. We move fast, stay humble, and believe that great support is about empowering users, not just answering questions.
 
 ## What makes us great
 
