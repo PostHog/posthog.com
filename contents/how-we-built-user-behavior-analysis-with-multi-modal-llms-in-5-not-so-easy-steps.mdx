@@ -19,15 +19,13 @@ tags:
 
 # How we built user behavior analysis with multimodal LLMs in 5 not-so-easy steps
 
-PostHog captures a lot of user behavior data — the pages people visit, the buttons they click, and everything in between, all captured as sessions. By “a lot,” I mean billions of events and terabytes of S3 snapshots. Watching those sessions is incredibly useful for understanding how products are actually used, but there’s an obvious problem: there are far too many to review manually.
+PostHog captures a lot of user behavior data — the pages people visit, the buttons they click, and everything in between, all captured as events and [session recordings](https://posthog.com/session-replay). By “a lot,” I mean billions of events and terabytes of S3 snapshots. Watching those sessions is incredibly useful for understanding how products are actually used, but there’s an obvious problem: there are far too many to review manually.
 
 So, we created a tool to watch and analyze user sessions. It highlights the issues - so you can find what's broken without watching hundreds of hours of recordings yourself. It's called [Session summaries](/docs/posthog-ai/session-summaries), **we release it in beta today**. You can use it right now, for free, with PostHog AI.
 
-In this post, I'll walk through step by step what we learned, where we messed up, and lots of practical tips on how to make user behavior analysis work in production. All the code is open-source, and here's a 36-second [demo](https://res.cloudinary.com/sortafreel/video/upload/v1764510391/minivied-v2_onrxvy.mov) of how it works:
+In this post, I'll walk through what we learned through the process of building it, where we messed up, and lots of practical tips on how to make user behavior analysis work in production. All the code is [open-source](https://github.com/PostHog/posthog), and here's a 36-second [demo](https://res.cloudinary.com/sortafreel/video/upload/v1764510391/minivied-v2_onrxvy.mov) of how it works:
 
 ![Demo video](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_11_30_145133_70c7081276.png)
-
-> The steps below assume that you use (or develop) a user behavior analytics service (like PostHog, Hotjar, Microsoft Clarity, and similar), so you have access to user-generated events and session recordings of what the user did on your website.
 
 ## Step 1: "Analyzing a single user session should be easy"
 
