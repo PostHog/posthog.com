@@ -1260,7 +1260,7 @@ export const handbookSidebar = [
             {
                 name: 'Overview',
                 url: '/handbook/growth/sales/accounts-overview',
-            }, 
+            },
             {
                 name: 'Sales',
                 url: '',
@@ -1540,7 +1540,7 @@ export const handbookSidebar = [
             {
                 name: 'Customer FAQs',
                 url: '/handbook/growth/sales/customer-faqs',
-            }, 
+            },
         ],
     },
     {
@@ -4912,6 +4912,13 @@ export const docsMenu = {
                     url: '/docs/logs/installation',
                     icon: 'IconCode',
                     color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Search logs',
+                    url: '/docs/logs/search',
+                    icon: 'IconSearch',
+                    color: 'purple',
                     featured: true,
                 },
                 {
