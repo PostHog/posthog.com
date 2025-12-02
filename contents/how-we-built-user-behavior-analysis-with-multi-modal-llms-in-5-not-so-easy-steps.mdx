@@ -201,7 +201,7 @@ If any analysis step fails, but you have proper atomic activities and cache the 
 
 ### “Phenomenal cosmic power, itty bitty living space”
 
-Temporal is amazing for orchestrating complex workflows, but it has limits. Event history size is capped at around 2MB. When we tried to use it as-is, we hit the limit even before making a single LLM call, just by getting the data to analyze from the DB (an obvious anti-pattern).
+Temporal is amazing for orchestrating complex workflows, but it has limits. Event history is capped at around 2MB. When we tried to use it as-is, we hit the limit even before making a single LLM call – just by pulling the data to analyze from the DB (an obvious anti-pattern).
 
 Redis, as a stateful bridge, provides plenty of opportunities for workarounds. Firstly, we can store all the intermediate steps there without the need to calculate space (and just pass the keys). Secondly, we use Redis to stream the progress, LLM calls, combined data, and whatever else we want, with great latency.
 
