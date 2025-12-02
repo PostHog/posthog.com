@@ -45,7 +45,7 @@ export const Content = () => {
                                 padding={false}
                                 classes="rounded @md:max-w-2xl"
                             />
-                            <Caption>Create an Endpoint</Caption>
+                            <Caption>Create an endpoint</Caption>
                         </div>
                     </div>
                 </div>
