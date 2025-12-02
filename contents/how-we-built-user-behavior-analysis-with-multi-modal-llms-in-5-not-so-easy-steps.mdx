@@ -173,7 +173,7 @@ To make it work, we needed a way to easily display the whole story to the user a
 
 ## Step 4: Make it work reliably
 
-Now we have a pipeline that works  across 100 sessions: single-session summaries → video validation → pattern extraction → pattern enrichment. The problem? It's fragile. If the whole thing falls apart because of one bad response, the feature is unusable.
+Now we have a pipeline that works across 100 sessions: single-session summaries → video validation → pattern extraction → pattern enrichment. The problem? It's fragile. If the whole thing falls apart because of one bad response, the feature is unusable.
 
 To make it more predictable, we use Temporal workflows, with each workflow spawning hundreds of atomic and easily retriable activities, so we’ll get a proper result - sooner or later.
 
