@@ -5,6 +5,8 @@ showTitle: true
 ---
 
 import ProxyCallout from './_snippets/proxy-callout.mdx'
+import ProxyPlatforms from './proxy/_snippets/proxy-platforms'
+import ProxyDecisionTree from './proxy/_snippets/proxy-decision-tree'
 
 <ProxyCallout />
 
@@ -26,26 +28,19 @@ Let us handle everything. Point a subdomain to PostHog and we'll provision SSL c
 
 This is the fastest option with minimal maintenance. Requires our [platforms add-ons](/platform-packages).
 
-[Set up managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy)
+<div>
+<CallToAction to="/docs/advanced/proxy/managed-reverse-proxy">Set up managed reverse proxy</CallToAction>
+</div>
 
 ### Deploy your own proxy
 
 If you need full control or have infrastructure in place already, you can also deploy your own reverse proxy:
 
-- [AWS CloudFront](/docs/advanced/proxy/cloudfront)
-- [Cloudflare Workers](/docs/advanced/proxy/cloudflare)
-- [Railway](/docs/advanced/proxy/railway)
-- [Next.js rewrites](/docs/advanced/proxy/nextjs) or [middleware](/docs/advanced/proxy/nextjs-middleware)
-- [Netlify](/docs/advanced/proxy/netlify)
-- [Nuxt](/docs/advanced/proxy/nuxt)
-- [Remix](/docs/advanced/proxy/remix)
-- [SvelteKit](/docs/advanced/proxy/sveltekit)
-- [Vercel](/docs/advanced/proxy/vercel)
-- [Caddy](/docs/advanced/proxy/caddy)
-- [nginx](/docs/advanced/proxy/nginx)
-- [node:http](/docs/advanced/proxy/node)
-- [Kubernetes Ingress Controller](/docs/advanced/proxy/kubernetes-ingress-controller)
-- [Pomerium](/docs/advanced/proxy/pomerium)
+<ProxyPlatforms />
+
+### Need help choosing?
+
+<ProxyDecisionTree />
 
 ## After you deploy
 

@@ -2728,7 +2728,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Reverse proxy',
-                    url: '/docs/advanced/proxy/managed-reverse-proxy',
+                    url: '/docs/advanced/proxy',
                     children: [
                         {
                             name: 'Managed reverse proxy',
