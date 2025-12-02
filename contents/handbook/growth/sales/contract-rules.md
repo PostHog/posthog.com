@@ -199,6 +199,14 @@ An uptime SLA are not available to customers outside of these cases. You should 
 
 More details on how exactly the uptime SLA works can be found in our [terms](/terms).
 
+## Enterprise support for month-to-month customers
+
+> Enterprise-level support (8-hour response times) is only available with volume credit purchase or the Enterprise add-on purchase.
+
+Customers on month-to-month plans receive a 24-hour response time guarantee (though we always do our best to be as timely as possible). To receive 8-hour response time SLA, customers must purchase a volume credit plan or the [Enterprise support add-on](https://posthog.com/platform-addons).
+
+This is beneficial to PostHog because our small support team requires predictable capacity to deliver fast response times. We focus our highest support tiers on customers with mutual long-term commitment.
+
 ## Payment method
 
 For customers paying monthly, we only accept credit card payments, which will be taken automatically via Stripe at the end of their monthly billing period.
