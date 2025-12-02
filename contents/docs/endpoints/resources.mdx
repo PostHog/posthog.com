@@ -18,15 +18,15 @@ If you need to show a subset of your analytics to your own customers, endpoints 
 
 ### Predefined queries
 
-For queries you run frequently, endpoints provide a stable, optimized way to access the data without reconstructing the query each time.
+For queries you run frequently, endpoints provide a stable, optimized way to programmatically access the data without reconstructing the query each time.
 
 **Example**: Create an endpoint for "Top 10 events this week" that your team can call regularly.
 
 ## Performance tips
 
-### Use materialized views
+### Use materialization
 
-For better performance, consider creating [materialized views](/docs/data-warehouse/views/materialize) for the data your endpoints query. Materialized views are precomputed, which can significantly improve endpoint response times.
+For better performance, consider materializing your endpoints query. Materialized queries are precomputed, which can significantly improve endpoint response times.
 
 ### Cache responses
 
@@ -44,6 +44,10 @@ The performance of your endpoints depends on the underlying queries. Follow best
 ## Rate limits
 
 Endpoints have higher rate limits than standard API queries, making them suitable for production use cases. Check the [API reference](/docs/api/endpoints) for current rate limit information.
+
+## Versioning
+
+It's possible to update the version of an endpoint - this happens when the underlying query changes. Default /run API calls will use the latest version of a query, but if you want to run an older version you can specify that in the body of the request.
 
 ## Security
 
@@ -70,8 +74,9 @@ If you get authentication errors:
 ### Slow responses
 
 If endpoints are slow:
+- Look at the Usage tab of the Endpoints product with the filter for the slow endpoint
 - Check if the underlying query is optimized
-- Consider using materialized views
+- Consider materializing your endpoint
 - Review the query performance in the query log
 
 ## Further reading
