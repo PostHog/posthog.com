@@ -101,7 +101,7 @@ export default function CassetteTape({
 
                 {/* Tape reels */}
                 <div className={`flex items-center gap-4 my-auto ${minimal ? 'justify-evenly' : 'justify-around'}`}>
-                    <Reel rotation={rotation} teeth={!minimal} spindle={!minimal} />
+                    <Reel rotation={-rotation} teeth={!minimal} spindle={!minimal} />
                     <Reel rotation={-rotation} teeth={!minimal} spindle={!minimal} />
                 </div>
             </div>
