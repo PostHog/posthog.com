@@ -21,7 +21,7 @@ tags:
 
 PostHog captures a lot of user behavior data — the pages people visit, the buttons they click, and everything in between, all captured as events and [session recordings](https://posthog.com/session-replay). By “a lot,” I mean billions of events and terabytes of S3 snapshots. Watching those sessions is incredibly useful for understanding how products are actually used, but there’s an obvious problem: there are far too many to review manually.
 
-So, we created a tool to watch and analyze user sessions. It highlights the issues - so you can find what's broken without watching hundreds of hours of recordings yourself. It's called [Session summaries](/docs/posthog-ai/session-summaries), **we release it in beta today**. You can use it right now, for free, with PostHog AI.
+So, we created a tool to watch and analyze user sessions. It highlights the issues - so you can find what's broken without watching hundreds of hours of recordings yourself. It's called [Session Summaries](/docs/posthog-ai/session-summaries), **we release it in beta today**. You can use it right now, for free, with PostHog AI.
 
 In this post, I'll walk through what we learned through the process of building it, where we messed up, and lots of practical tips on how to make user behavior analysis work in production. All the code is [open-source](https://github.com/PostHog/posthog), and here's a 36-second [demo](https://res.cloudinary.com/sortafreel/video/upload/v1764510391/minivied-v2_onrxvy.mov) of how it works:
 
@@ -213,7 +213,7 @@ Redis, as a stateful bridge, provides plenty of opportunities for workarounds. F
 
 ## Step 5: Ship the beta, learn, iterate (We are here)
 
-The beta of Session summaries has been released and is available to everyone right now. So, if you want to check our findings above, give it a try. Just ask PostHog AI to summarise your sessions. Worst case: you’ll notice where we messed up. Best case: you’ll learn something useful about your users and your product.
+The beta of Session Summaries has been released and is available to everyone right now. So, if you want to check our findings above, give it a try. Just ask PostHog AI to summarise your sessions. Worst case: you’ll notice where we messed up. Best case: you’ll learn something useful about your users and your product.
 
 **What the feature can do:**
 
