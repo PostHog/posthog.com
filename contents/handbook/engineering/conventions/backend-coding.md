@@ -35,6 +35,23 @@ will produce:
 ```
 As you can see above, the log contains all the information needed to understand the app behaviour.
 
+##### Enabling INFO logs for your module
+
+By default, most `posthog.*` loggers only output WARNING and above. This keeps production logs clean but means your `logger.info()` calls won't appear.
+
+To enable INFO logging for a specific module, add it to `posthog/settings/logs.py`:
+
+```python
+"loggers": {
+    # ... existing loggers ...
+    "posthog.tasks.my_module": {"level": "INFO", "handlers": ["console"], "propagate": False},
+}
+```
+
+Note: calling `logger.setLevel(logging.INFO)` in your code doesn't work with structlog - you must add the config entry above.
+
+Celery task lifecycle events (`task_started`, `task_succeeded`, etc.) are logged automatically by `django-structlog` at INFO level and are already enabled.
+
 ##### Security
 Don’t log sensitive information. Make sure you never log:
 
