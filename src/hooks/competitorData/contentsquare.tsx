@@ -80,9 +80,9 @@ export const contentsquare = {
             available: true,
              },
             monitoring: {
-                features: {
-                    performance_monitoring: true,
-                },
+            features: {
+                performance_monitoring: true,
+            },
         }
     },
     platform: {
