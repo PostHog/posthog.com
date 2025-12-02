@@ -195,25 +195,25 @@ If any analysis step fails, but you have proper atomic activities and cache the 
 
 - If it’s an isolated step (like a single session summary that can be used as-is), we use DB. 
 - If it’s an intermediate step (like pattern extraction), we use Redis. 
-- The main logic is “will it change the result if I add one more session to the input?”
+- The main logic is “will it change the result if I add one more session to the input?”.
 
-![Basic retry logic](https://res.cloudinary.com/dmukukwp6/image/upload/2dc9059b_5887_4ae1_9cd2_e03da961609f_6b45fa47be.jpeg)
+![Basic retry logic](https://res.cloudinary.com/dmukukwp6/image/upload/Frame_3_2a8ed7a277.png)
 
-### “Phenomenal cosmic power, ity bity living space”
+### “Phenomenal cosmic power, itty bitty living space”
 
-Temporal is amazing for orchestrating complex workflows, but it has limits. Event history size is capped at around 2MB. When we tried to use it as-is, we hit the limit even before making a single LLM call, just by getting the data to analyze from the DB (an obvious anti-pattern).
+Temporal is amazing for orchestrating complex workflows, but it has limits. Event history is capped at around 2MB. When we tried to use it as-is, we hit the limit even before making a single LLM call – just by pulling the data to analyze from the DB (an obvious anti-pattern).
 
 Redis, as a stateful bridge, provides plenty of opportunities for workarounds. Firstly, we can store all the intermediate steps there without the need to calculate space (and just pass the keys). Secondly, we use Redis to stream the progress, LLM calls, combined data, and whatever else we want, with great latency.
 
 **Our approach:**
 
 - Clear Redis TTLs (24 hours tops), as even with seemingly unlimited memory, we slow it down significantly if not paying attention.
-- Gzip compression for everything (on the input/output)
-- If storing in the DB, the Redis step is skipped explicitly to avoid duplicating data for nothing
+- Gzip compression for everything (on the input/output).
+- If storing in the DB, the Redis step is skipped explicitly to avoid duplicating data for nothing.
 
 ## Step 5: Ship the beta, learn, iterate (We are here)
 
-The beta of Session Summaries has been released and is available to everyone right now. So, if you want to check our findings above, give it a try. Just ask PostHog AI to summarise your sessions. Worst case: you’ll notice where we messed up. Best case: you’ll learn something useful about your users and your product.
+Session Summaries are available now in free, public beta. So, if you want to check our findings above, give it a try. Just ask [PostHog AI ](/blog/8-learnings-from-1-year-of-agents-posthog-ai)to summarize your sessions. Worst case: you’ll notice where we messed up. Best case: you’ll learn something useful about your users and your product.
 
 **What the feature can do:**
 
