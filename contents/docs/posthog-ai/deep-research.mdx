@@ -3,7 +3,6 @@ title: Deep research with PostHog AI
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
-import { isUnparsedSource } from 'typescript'
 
 <CalloutBox icon="IconInfo" title="Deep research is in beta" type="warning">
 
@@ -11,16 +10,32 @@ Deep research is currently in beta. Results may not be accurate or complete. If 
 
 </CalloutBox>
 
-Some questions can't be answered in just a sentence or two. Deep research is PostHog AI's way of digging deep into your data to answer complex questions. You can enable deep research in the [in-app chat](/docs/posthog-ai/chat) by toggling the **Think harder**.
+Some questions can't be answered in just a sentence or two. Deep research is PostHog AI's way of digging deep into your data to answer complex questions. You can enable deep research in the [in-app chat](/docs/posthog-ai/platform-and-chat-ui) by toggling the **Think harder**.
+
+## When to use deep research
+
+Use PostHog AI's standard mode for quick, straightforward questions:
+
+- "How many users signed up last week?"
+- "Show me a funnel for checkout"
+- "Create a dashboard for web analytics"
+
+Use deep research when you need multi-step analysis or investigation:
+
+- Understanding the *why* behind metrics. For example: *Why is churn increasing?*
+- Investigating impact across multiple data sources. For example: *How did a feature flag affect conversion, errors, and user behavior?*
+- Generating comprehensive reports that combine insights, session recordings, and user profiles
+
+Deep research is best suited for questions that would normally require you to manually create multiple insights, cross-reference data, and synthesize findings.
 
 ## How it works
 
-When you ask PostHog AI to **think harder**, PostHog AI will do the following:
+When you ask PostHog AI to **think harder**, it will do the following:
 
 1. Break down your question into a plan
-2. Select the right tools to execute each step of the plan
+2. Select the right [tools](/docs/posthog-ai/tools) to execute each step of the plan
 3. Collect the information from the queries and insights
-3. Create a report from the findings as a notebook
+4. Create a report from the findings as a notebook
 
 <ProductVideo
     videoLight="PLACEHOLDER"
@@ -35,6 +50,18 @@ PostHog AI creates a notebook as a report of the research
 </Caption>
 
 After the research is complete, PostHog AI will return the notebook to you. Feel free to keep asking PostHog AI questions about the research, or to edit the notebook to your liking.
+
+## What deep research can access
+
+Deep research uses PostHog's [built-in tools](/docs/posthog-ai/tools) to analyze your data, including Product Analytics, Session Replay, Error Tracking, Experiments, and Surveys.
+
+Unlike general-purpose AI research tools, PostHog AI does **not** browse the web or access external data sources. It can search [PostHog's documentation](/docs) to help answer questions about the platform, but deep research focuses exclusively on your PostHog project data.
+
+## Credits
+
+Deep research consumes more [credits](/docs/posthog-ai/pricing) than regular queries because it executes multiple tools and analysis steps. The exact cost depends on the complexity of your question and how many data sources need to be queried.
+
+You can check your credit usage at any time by typing `/usage` in the chat.
 
 ## Example prompts
 
