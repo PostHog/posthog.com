@@ -78,6 +78,11 @@ export const contentsquare = {
         },
         error_tracking: {
             available: true,
+             },
+            monitoring: {
+                features: {
+                    performance_monitoring: true,
+                },
         }
     },
     platform: {

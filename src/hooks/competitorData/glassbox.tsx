@@ -118,6 +118,8 @@ export const glassbox = {
             available: false,
             features: {
                 issue_management: true,
+                performance_monitoring: true,
+
             },
         },
         dashboards: {

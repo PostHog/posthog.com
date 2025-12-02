@@ -95,6 +95,11 @@ export const microsoft_clarity = {
         },
         error_tracking: {
             available: false,
+                },
+            monitoring: {
+                features: {
+                    performance_monitoring: false,
+                },
         },
     },
     platform: {

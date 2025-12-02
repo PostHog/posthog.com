@@ -77,6 +77,14 @@ export const quantum_metric = {
         surveys: {
             available: false,
         },
+        error_tracking: {
+            available: true,
+             },
+            monitoring: {
+                features: {
+                    performance_monitoring: true,
+                },
+        }
     },
     platform: {
         deployment: {

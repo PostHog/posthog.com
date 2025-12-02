@@ -172,6 +172,7 @@ export const fullstory = {
             available: false,
             features: {
                 issue_management: false,
+                performance_monitoring: false,
             },
         },
         dashboards: {
