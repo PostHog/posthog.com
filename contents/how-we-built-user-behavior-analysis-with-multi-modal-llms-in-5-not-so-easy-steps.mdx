@@ -86,7 +86,7 @@ And it works pretty well, but it raises the question: why not use only the sessi
 
 ### Video explains the issue, but not the reason
 
-If we use only video, we can see that the user visited the page, waited for 5 seconds at the loading state, and left. But we don't see a Clickhouse timeout error. Or an outdated Redis cache being hit. Or a malformed query parameter in the user URL. So, we know what happened, but we can't create a proper issue because it would require extensive manual investigation. Then why read the summary in the first place?
+If we use only video, we can see that the user visited the page, waited for 5 seconds at the loading state, and left. We don't see the Clickhouse timeout error, outdated data cached in Redis, or malformed query parameter in the users URL. We know what happened, but creating a detailed report would require extensive manual investigation - so why read the summary in the first place?
 
 **Our approach:**
 
