@@ -67,7 +67,7 @@ If a user spends hours on your site, their session could be huge. If you have lo
 Fast-growing products (startups specifically) have a bad habit of generating lots of exceptions spurious, especially frontend ones. LLMs see this, panic, and hallucinate a summary of the session in which the user completely failed on all their goals. In reality, the user successfully got what they came for and didn't even notice these exceptions.
 
 **Our approach:**
-- We programmatically pre-filter events that look like exceptions, especially if one causes multiple others as an avalanche, and they create a context that LLM can't ignore. For example, drop all JS exceptions that aren't API errors.
+- We programmatically pre-filter events that look like [exceptions](/docs/error-tracking/issues-and-exceptions), especially if one causes multiple others as an avalanche, and they create a context that LLM can't ignore. For example, drop all JS exceptions that aren't API errors.
 - It won't save us anyway (Check Step 2).
 
 ## Step 2: See what the user sees
