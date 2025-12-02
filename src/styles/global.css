@@ -1973,6 +1973,14 @@ li.squeak-left-border {
     transform-style: preserve-3d;
 }
 
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.backface-hidden {
+    backface-visibility: hidden;
+}
+
 .tw-tweet + .tw-tweet {
     @apply before:absolute before:w-px before:bg-border before:bottom-[calc(100%_+_1px)] before:-top-8 before:left-10;
 }
