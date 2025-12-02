@@ -14,7 +14,7 @@ Declaring an incident doesn't trigger any external notifications. It just create
 
 If you're seeing multiple tickets about the same issue, or if something seems seriously broken, type `/incident` in any Slack channel to declare one. See the [full guide on raising an incident](https://posthog.com/handbook/engineering/operations/incidents#raising-an-incident) for more details.
 
-Once you've raised the incident, you can raise your hand to watch it from a support perspective, or someone else on the team can volunteer.
+Once you've raised the incident, you should raise your hand to watch it from a support perspective, or actively hand it over to someone else on the team.
 
 ## Your role during an incident
 
@@ -29,15 +29,19 @@ Once you've raised the incident, you can raise your hand to watch it from a supp
 
 ## When an incident is declared
 
-When an incident gets declared, our [incident.io workflow](https://app.incident.io/posthog/settings/workflows/01J90ZX25Z3TR822JJCDKD572S) automatically posts to #team-support. This post asks for someone from support to raise their hand and take ownership of watching the incident.
+When an incident gets declared, our [incident.io workflow](https://app.incident.io/posthog/settings/workflows/01J90ZX25Z3TR822JJCDKD572S) automatically posts to #team-support. This post asks for someone from support to raise their hand and take ownership of watching the incident. All members of the support team are responsible for making sure that an incident has a Support Watcher assigned during business hours.
 
 Support team members aren't automatically added to incident channels. You can keep an eye on #incidents for an overview of what's currently open. When you raise your hand in #team-support to watch an incident, join the incident channel using the link in the workflow post.
+
+When you join the incident channel, you'll be [automatically assigned](https://app.incident.io/posthog/settings/workflows/01KBG1T8DHEFQXQQ0KJ1AVR002) the [Support Watcher role](https://app.incident.io/posthog/settings/incident-roles) in incident.io. This makes it clear and visible to both the support team and the incident team who is managing the incident from a support perspective.
+
+If nobody from support joins the incident channel, the incident lead will get a [nudge](https://app.incident.io/posthog/settings/nudges/01KBG0YDAFEEHBW1PGNPJX09TC/edit) reminding them to assign the Support Watcher role, along with a note that support only watches incidents during business hours.
 
 If you're online and available during your normal working hours, raise your hand on that thread. This is informal - it's just whoever can do it. If nobody responds after a few minutes and you're around, go ahead and volunteer even if you're in the middle of something else.
 
 **We don't have on-call support coverage.** You're only expected to raise your hand for incidents during your normal working hours. If an incident is declared outside of working hours, support tickets will either need to wait until support working hours resume, or be handled by the @on-call-global person from engineering.
 
-Once you've raised your hand, you own:
+Once you've raised your hand and joined the incident channel, you'll be assigned the Support Watcher role. You own:
 
 - Following the incident channel and keeping up with status updates
 - Ensuring the status page has clear, customer-friendly messaging about the impact
@@ -127,7 +131,8 @@ As the support team member watching the incident, you should coordinate with the
 - If you need help with a particularly complex or sensitive customer communication
 - When you update the macro - let them know what changed
 
-If you think external comms are required but there isn't a Comms lead assigned, you can request one by asking in #team-marketing or using the @all-marketers tag in Slack. 
+If you think external comms are required but there isn't a Comms lead assigned, you can request one by asking in #team-marketing or using the @all-marketers tag in Slack.
+
 ## Coordinating with TAMs and CSMs
 
 Enterprise customers often have dedicated TAMs (Technical Account Managers) or CSMs (Customer Success Managers) from the Sales/CS team. When these customers reach out about an incident - either through their Slack channels or via tickets - we need to coordinate our response.
