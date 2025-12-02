@@ -5316,6 +5316,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Deep research',
+                    url: '/docs/posthog-ai/deep-research',
+                    icon: 'IconBrain',
+                    color: 'red',
+                },
+                {
                     name: 'Session summaries',
                     url: '/docs/posthog-ai/session-summaries',
                     icon: 'IconEye',
