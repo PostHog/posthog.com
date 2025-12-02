@@ -106,8 +106,8 @@ We can even use lighter models and lower resolutions, but at some point, the qua
 
 **Our approach:**
 
-- Don't analyze the whole video - there are at least 40-50-60% of inactivity that we can skip, and pay to transcribe only parts where the user did something. Though we need either events or snapshots to find these parts.
-- Don't analyze all the videos - there's a clear set of parameters (like event count, or active duration) that can be used to decide if it's worthwhile to check this session.
+- We don’t analyze the whole video — at least 40–60% is usually inactivity we can skip. We only need to transcribe the parts where the user actually did something. But we still need events or snapshots to identify those moments.
+- We don't analyze all the videos - there's a clear set of parameters (like event count, or active duration) that can be used to decide if it's worthwhile to check this session.
 
 ### Videos are heavy (part two)
 
