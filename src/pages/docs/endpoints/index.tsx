@@ -126,22 +126,10 @@ export const Content = () => {
                         url="/docs/endpoints/start-here"
                     />
                     <ResourceItem
-                        type="API reference"
-                        title="API reference"
-                        description="Learn how to call endpoints programmatically"
-                        url="/docs/api/endpoints"
-                    />
-                    <ResourceItem
                         type="Resources"
                         title="Use cases and tips"
                         description="Common use cases and performance tips"
                         url="/docs/endpoints/use-cases-and-tips"
-                    />
-                    <ResourceItem
-                        type="Resources"
-                        title="Additional features"
-                        description="Versioning and security"
-                        url="/docs/endpoints/additional-features"
                     />
                     <ResourceItem
                         type="Resources"
