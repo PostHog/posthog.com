@@ -1260,7 +1260,7 @@ export const handbookSidebar = [
             {
                 name: 'Overview',
                 url: '/handbook/growth/sales/accounts-overview',
-            }, 
+            },
             {
                 name: 'Sales',
                 url: '',
@@ -1540,7 +1540,7 @@ export const handbookSidebar = [
             {
                 name: 'Customer FAQs',
                 url: '/handbook/growth/sales/customer-faqs',
-            }, 
+            },
         ],
     },
     {
@@ -4886,43 +4886,6 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Endpoints',
-            icon: 'IconBrackets',
-            color: 'blue',
-            url: '/docs/endpoints',
-            description: 'Create predefined queries from Insights or SQL and expose them as optimized API endpoints.',
-            children: [
-                {
-                    name: 'Endpoints',
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/endpoints',
-                    icon: 'IconHome',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Getting started',
-                },
-                {
-                    name: 'Start here',
-                    url: '/docs/endpoints/start-here',
-                    icon: 'IconListCheck',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
-                    name: 'Resources',
-                },
-                {
-                    name: 'Resources',
-                    url: '/docs/endpoints/resources',
-                    icon: 'IconBook',
-                    color: 'blue',
-                },
-            ],
-        },
-        {
             name: 'Logs',
             icon: 'IconSearch',
             color: 'blue',
@@ -4963,6 +4926,37 @@ export const docsMenu = {
                     url: '/docs/logs/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
+                },
+            ],
+        },
+        {
+            name: 'Endpoints',
+            icon: 'IconCode2',
+            color: 'blue',
+            url: '/docs/endpoints',
+            description: 'Create predefined queries from Insights or SQL and expose them as optimized API endpoints.',
+            children: [
+                {
+                    name: 'Endpoints',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/endpoints',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/endpoints/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Resources',
+                    url: '/docs/endpoints/resources',
+                    icon: 'IconBook',
+                    color: 'blue',
                 },
             ],
         },
