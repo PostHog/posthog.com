@@ -1,6 +1,6 @@
 ---
 date: "2025-12-02"
-title: 'How we built user behavior analysis with multi-modal LLMs in 5 not-so-easy steps'
+title: 'How we built user behavior analysis with multi-modal LLMs (in 5 not-so-easy steps)'
 author:
   - alex-lebedev
 rootPage: /blog
@@ -9,8 +9,8 @@ showTitle: true
 hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/519290681_b3c074ed_f976_4e91_8c37_498387c9dbe1_a48312c745.png
-featuredImageType: Organizing fantastic amounts of data
-featuredImageCaption: todo-add-caption
+featuredImageType: full
+featuredImageCaption: Organizing fantastic amounts of data
 category: PostHog news
 tags:
 - Product updates
@@ -19,9 +19,9 @@ tags:
 
 # How we built user behavior analysis with multimodal LLMs in 5 not-so-easy steps
 
-We, at PostHog, have a lot of user behavior data - what pages they visit, what buttons they click, and so on, stored as sessions. And by "a lot," I mean billions of events and terabytes of S3 snapshots. We and our customers love watching these sessions to understand how the product is used. However, there's an obvious problem - too many user sessions to watch manually. 
+PostHog captures a lot of user behavior data — the pages people visit, the buttons they click, and everything in between, all captured as sessions. By “a lot,” I mean billions of events and terabytes of S3 snapshots. Watching those sessions is incredibly useful for understanding how products are actually used, but there’s an obvious problem: there are far too many to review manually.
 
-So, we created a tool to watch and analyze user sessions. It highlights the issues - so you can find what's broken without watching hundreds of hours of recordings yourself. It's called Session summaries, **we release it in beta today**. You can use it right now, for free, with PostHog AI.
+So, we created a tool to watch and analyze user sessions. It highlights the issues - so you can find what's broken without watching hundreds of hours of recordings yourself. It's called [Session summaries](/docs/posthog-ai/session-summaries), **we release it in beta today**. You can use it right now, for free, with PostHog AI.
 
 In this post, I'll walk through step by step what we learned, where we messed up, and lots of practical tips on how to make user behavior analysis work in production. All the code is open-source, and here's a 36-second [demo](https://res.cloudinary.com/sortafreel/video/upload/v1764510391/minivied-v2_onrxvy.mov) of how it works:
 
