@@ -44,12 +44,12 @@ Usually, each user-generated event has lots of metadata attached to it. User inf
 - CSV input. Neither JSON nor TOON (heh) will provide the same generation quality per input token.
 - We don't return JSON either. If it works with free text - awesome, if not - we return YAML or CSV.
 
-![Inputs](https://res.cloudinary.com/dmukukwp6/image/upload/single_session_filter_1_ceec2db1d8.jpeg)
+![Inputs](https://res.cloudinary.com/dmukukwp6/image/upload/Frame_1_609e3c3e7e.png)
 > _Carefully select what data goes into the pipeline_
 
 ### Parallelization breaks the narrative
 
-If the user spent multiple hours on the website, their session could be huge. If you have lots of such users (like we do), it makes sense to start with splitting such sessions into segments and analyzing each one in parallel to improve latency. It's a trap. If the LLM doesn't know what happened before or after, it loses critical context on what the current segment's events actually mean, so the combined result is worthless.
+If a user spends hours on your site, their session could be huge. If you have lots of such users (like we do), it’s tempting to split each session into segments and analyze them in parallel to cut latency. It's a trap. If the LLM doesn't know what happened before or after, it loses critical context on what the current segment's events actually mean, so the combined result is worthless.
 
 **Our approach:**
 
@@ -61,17 +61,17 @@ If the user spent multiple hours on the website, their session could be huge. If
 
 ### Crying wolf effect
 
-Fast-growing products (startups specifically) have a bad habit of generating lots of exceptions, especially frontend ones. LLM sees them, panics, and generates a summary of the session in which the user completely failed on all their goals. In reality, the user successfully got what they came for and didn't even notice these exceptions.
+Fast-growing products (startups specifically) have a bad habit of generating lots of exceptions spurious, especially frontend ones. LLMs see this, panic, and hallucinate a summary of the session in which the user completely failed on all their goals. In reality, the user successfully got what they came for and didn't even notice these exceptions.
 
 **Our approach:**
-- We programmatically pre-filter events that look like exceptions, especially if one causes multiple others as an avalanche, and they create a context that LLM can't ignore. For example, drop all JS exceptions that aren't API errors.
+- We programmatically pre-filter events that look like [exceptions](/docs/error-tracking/issues-and-exceptions), especially if one causes multiple others as an avalanche, and they create a context that LLM can't ignore. For example, drop all JS exceptions that aren't API errors.
 - It won't save us anyway (Check Step 2).
 
 ## Step 2: See what the user sees
 
-Even with noise reduction, the core problem remained: we couldn't be sure whether the issues the LLM highlighted actually affected users. A TypeError in logs looks scary, but if a retry succeeded in 200ms - the user never noticed. Since we have lots of snapshots, we can generate videos of the sessions and see what the user saw.
+Even with noise reduction, the core problem remains: we can't be sure whether the issues highlighted by the LLM actually affected users. A TypeError in logs looks scary, but if a retry succeeded in 200ms - the user never noticed. Since we have lots of snapshots, we can generate videos of the sessions and see what the user saw.
 
-![Video validation](https://res.cloudinary.com/dmukukwp6/image/upload/video_validatio_6d1a0375aa.jpeg)
+![Video validation](https://res.cloudinary.com/dmukukwp6/image/upload/Frame_4_2466b126e7.png)
 
 When the single-session summary flags something as a "blocking error" - an exception that supposedly prevented the user from completing their goal - we don't trust it blindly. Instead, we:
 
@@ -79,18 +79,18 @@ When the single-session summary flags something as a "blocking error" - an excep
 - Send the clip to a multi-modal LLM to transcribe the video
 - Confirm or deny the issue, and update the summary
 
-And it works pretty well. But it also leads to the question: why not use only video? Why use events at all?
+And it works pretty well, but it raises the question: why not use only the session recording? Why use events at all?
 
 ### Video explains the issue, but not the reason
 
-If we use only video, we can see that the user visited the page, waited for 5 seconds at the loading state, and left. But we don't see a ClickHouse timeout error. Or an outdated Redis cache being hit. Or a malformed query parameter in the user URL. So, we know what happened, but we can't create a proper issue because it would require extensive manual investigation. Then why read the summary in the first place?
+If we use only video, we can see that the user visited the page, waited for 5 seconds at the loading state, and left. We don't see the ClickHouse timeout error, outdated data cached in Redis, or malformed query parameter in the users URL. We know what happened, but creating a detailed report would require extensive manual investigation - so why read the summary in the first place?
 
 **Our approach:**
 
-- Option #1 (current): We combine videos with issues highlighted by LLM from the events, to triage them before surfacing
-- Option #2 (in progress): Transcribe all the videos of user sessions and combine them with events, creating complete blobs of data that will (almost) never hallucinate when summarized
+- Approach #1 (what we're doing now): Combine videos with issues highlighted by LLM from the events, to triage them before surfacing
+- Option #2 (in progress): We transcribe all the videos of user sessions and combine them with events, creating complete blobs of data that will (almost) never hallucinate when summarized
 
-Option #2 is in progress (not yet in production) mostly because...
+We haven't shipped option 2 (yet) because...
 
 ### Videos are heavy
 
