@@ -370,7 +370,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const handleMouseDown = () => {
         if (focusedWindow === item) return
         if (item.path.startsWith('/')) {
-            navigate(item.path, { state: { newWindow: true } })
+            navigate(`${item.path}${item.location?.search || ''}`, { state: { newWindow: true } })
         } else {
             bringToFront(item)
         }

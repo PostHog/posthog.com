@@ -85,7 +85,7 @@ export const Content = () => {
 
             <section className="mb-8">
                 <h2 className="mb-4">Next steps</h2>
-                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid grid-cols-1 @md:grid-cols-3">
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid grid-cols-1 @md:grid-cols-2">
                     <ResourceItem
                         type="Getting started"
                         title="Start here"
@@ -97,6 +97,12 @@ export const Content = () => {
                         title="Installation"
                         description="An overview of installing an OpenTelemetry client"
                         url="/docs/logs/installation"
+                    />
+                    <ResourceItem
+                        type="Using logs"
+                        title="Search logs"
+                        description="Learn how to search logs using multiple tokens, negative filters, and exact phrases"
+                        url="/docs/logs/search"
                     />
                     <ResourceItem
                         type="Troubleshooting"

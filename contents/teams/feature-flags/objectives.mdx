@@ -1,11 +1,15 @@
 ### Q4 2025 Objectives
 This quarter we're making feature flags faster, more reliable, and way more automated. That means better (and more!) SDKs, more powerful local evaluation, supporting real-time use cases, and using AI to handle the tedious stuff. We're also talking to a bunch of users to figure out what to build next, fixing the foundations so nothing breaks, and shipping features that make flags easier to wrangle when you have thousands of them.
 
-#### Awesome documentation <TeamMember name="Dylan Martin" photo /> driving, shared across the team
+#### Awesome documentation 🚧 <TeamMember name="Dylan Martin" photo /> driving, shared across the team
+
+**Status: In progress** — Improved usage docs, but new how-to guides still needed
 
 Our docs should be as good as the <SmallTeam slug="experiment" />'s. We're partnering with the <SmallTeam slug="content" /> to refresh everything, writing real-world walkthroughs, and making it easier to jump from the app to the right docs.
 
-#### Make local evaluation the default server-side evaluation strategy <TeamMember name="Phil Haack" photo />
+#### Make local evaluation the default server-side evaluation strategy 🔄 <TeamMember name="Phil Haack" photo />
+
+**Status: Partially complete** — Stretch goal: ETag support and better docs/guides
 
 Local eval means faster, cheaper, and more reliable flags. We want to make it the default for server-side SDKs by:
 - Finishing HyperCache integration to decouple `/local_evaluation` from Postgres
@@ -13,31 +17,45 @@ Local eval means faster, cheaper, and more reliable flags. We want to make it th
 - Adding ETag support for efficient caching
 - Writing better docs and guides; specifically around best practices for including relevant properties alongside the flag when calling e.g. `getFeatureFlag` or `isFeatureEnabled`
 
-#### Ship a Java SDK <TeamMember name="Dustin Byrne" photo />
+#### Ship a Java SDK ✅ <TeamMember name="Dustin Byrne" photo />
+
+**Status: Complete**
 
 Java developers need an official SDK. We're shipping one and iterating based on feedback.
 
-#### Improve SDK standardization <TeamMember name="Dustin Byrne" photo />
+#### Improve SDK standardization 🚧 <TeamMember name="Dustin Byrne" photo />
+
+**Status: In progress**
 
 Inconsistent SDKs lead to bugs. We're burning down the [SDK standardization meta-issue](https://github.com/PostHog/posthog/issues/31425) to create a consistent experience across the stack.
 
-#### Mature the Cohorts UI/UX <TeamMember name="Gustavo Henrique Strassburger" photo />
+#### Mature the Cohorts UI/UX ✅ <TeamMember name="Gustavo Henrique Strassburger" photo />
+
+**Status: Complete**
 
 Cohorts has been neglected. We're clearing the backlog and fixing UI bugs so cohorts is actually pleasant to use by end of Q4.
 
-#### Real-time feature flags <TeamMember name="Gustavo Henrique Strassburger" photo />
+#### Real-time feature flags 🚧 <TeamMember name="Gustavo Henrique Strassburger" photo />
+
+**Status: In progress**
 
 Some use cases need instant flag updates without refreshes or restarts. We're adding WebSocket/SSE-based real-time updates to key SDKs.
 
-#### Finish behavioral cohort targeting <TeamMember name="Gustavo Henrique Strassburger" photo />
+#### Finish behavioral cohort targeting 🚧 <TeamMember name="Gustavo Henrique Strassburger" photo />
+
+**Status: In progress**
 
 We started building a system to track behavioral cohort membership in a fast data store. We're finishing it so you can target flags based on behavioral cohorts.
 
-#### Natural language flag creation <TeamMember name="Phil Haack" photo />
+#### Natural language flag creation ✅ <TeamMember name="Phil Haack" photo />
+
+**Status: Complete**
 
 Building flags with AI. You describe what you want in plain English, Max builds the flag.
 
-#### Platform improvements <TeamMember name="Dylan Martin" photo /> and <TeamMember name="Phil Haack" photo />
+#### Platform improvements 🚧 <TeamMember name="Dylan Martin" photo /> and <TeamMember name="Phil Haack" photo />
+
+**Status: In progress**
 
 Fixing the foundations:
 - Finishing the persons database split (shared with ingestion team)
