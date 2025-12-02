@@ -1260,7 +1260,7 @@ export const handbookSidebar = [
             {
                 name: 'Overview',
                 url: '/handbook/growth/sales/accounts-overview',
-            }, 
+            },
             {
                 name: 'Sales',
                 url: '',
@@ -1540,7 +1540,7 @@ export const handbookSidebar = [
             {
                 name: 'Customer FAQs',
                 url: '/handbook/growth/sales/customer-faqs',
-            }, 
+            },
         ],
     },
     {
@@ -4761,6 +4761,12 @@ export const docsMenu = {
                     url: '/docs/posthog-ai/tools',
                     icon: 'IconWrench',
                     color: 'blue',
+                },
+                {
+                    name: 'Deep research',
+                    url: '/docs/posthog-ai/deep-research',
+                    icon: 'IconBrain',
+                    color: 'red',
                 },
                 {
                     name: 'Session summaries',
