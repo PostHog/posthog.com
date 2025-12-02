@@ -4,6 +4,8 @@ import ResourceItem from 'components/Docs/ResourceItem'
 import Intro from 'components/Docs/Intro'
 import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import { Caption } from 'components/Caption'
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import Beta from '../../../../contents/docs/endpoints/_snippets/beta.mdx'
 
@@ -33,6 +35,19 @@ export const Content = () => {
                         Endpoints offers a number of advantages over our query api, such as materialization (giving you
                         better performance) and higher rate limits.
                     </p>
+                    <div className="flex justify-center mb-8">
+                        <div className="text-center">
+                            {' '}
+                            <ProductScreenshot
+                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/sql_query_from_endpoints_606a61f4c6.png"
+                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/sql_query_from_endpoints_606a61f4c6.png"
+                                alt="Example workflow"
+                                padding={false}
+                                classes="rounded @md:max-w-2xl"
+                            />
+                            <Caption>Create an Endpoint</Caption>
+                        </div>
+                    </div>
                 </div>
             </section>
 

@@ -17,7 +17,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
   icon="IconGraph"
 >
 
-Endpoints are created from existing Insights or SQL queries in PostHog. Start by creating the query that defines the data you want to expose.
+Endpoints are created from existing Insights or SQL queries in PostHog. Start by creating the query that defines the data you want to expose. You can do this directly from the endpoints page by clicking new or directly from the query / insight.
 
 ### Option 1: Create an Insight
 
@@ -28,8 +28,8 @@ Create an Insight in PostHog that shows the data you want to expose. This could 
 - Any other Insight type
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1716976005/posthog.com/contents/Screenshot_2024-05-29_at_10.46.15_AM.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1716976005/posthog.com/contents/Screenshot_2024-05-29_at_10.46.03_AM.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/abe_insight_funnel_example_r_eb45dee714.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/abe_insight_funnel_example_r_eb45dee714.png"
   alt="Create an Insight in PostHog" 
   classes="rounded"
 />
@@ -39,8 +39,8 @@ Create an Insight in PostHog that shows the data you want to expose. This could 
 Alternatively, you can create a SQL query in the [SQL editor](https://us.posthog.com/sql) that returns the data you need.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_11_34_23_2x_a36e4b0bea.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_11_34_05_2x_50d26bf304.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/abe_sql_example_ae774fd7c4.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/abe_sql_example_ae774fd7c4.png"
   alt="Write a SQL query" 
   classes="rounded"
 />
@@ -60,9 +60,22 @@ Alternatively, you can create a SQL query in the [SQL editor](https://us.posthog
 Once you have your Insight or SQL query, create an endpoint from it. This will give you a stable API endpoint you can call to retrieve the data.
 
 1. Open your Insight or SQL query
-2. Click the **Create endpoint** button (or similar action in the UI)
-3. Give your endpoint a name (e.g., `daily_active_users` or `account_users_activity`)
-4. Save the endpoint
+2. If you created an insight, click on the three dots button and navigage to the `create endpoint` option
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoint_from_insight_b9567d7ef7.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoint_from_insight_b9567d7ef7.png"
+  alt="Write a SQL query" 
+  classes="rounded"
+/>
+3. If you created a SQL query, you can click on the endpoint tab:
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoint_from_sql_6489b78d7c.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoint_from_sql_6489b78d7c.png"
+  alt="Write a SQL query" 
+  classes="rounded"
+/>
+4. Give your endpoint a name (e.g., `daily_active_users` or `account_users_activity`)
+5. Save the endpoint
 
 <CalloutBox icon="IconInfo" type="fyi" title="Endpoint names">
 
