@@ -109,7 +109,7 @@ We can even use lighter models and lower resolutions, but at some point, the qua
 - We don’t analyze the whole video — at least 40–60% is usually inactivity we can skip. We only need to transcribe the parts where the user actually did something. But we still need events or snapshots to identify those moments.
 - We don't analyze all the videos - there's a clear set of parameters (like event count, or active duration) that can be used to decide if it's worthwhile to check this session.
 
-### Videos are heavy (part two)
+### Videos are _really_ heavy
 
 Even with all the optimizations above, video files add up. A 10-second GIF clip at 1080p can be 7-15MB. Multiply by hundreds of thousands of sessions, and we're looking at terabytes of storage costs daily. The example is obviously laughable, but even with the regular `.mp4` format (tens of times smaller), it's easy to reach terabytes pretty quickly.
 
@@ -121,7 +121,7 @@ Even with all the optimizations above, video files add up. A 10-second GIF clip 
 
 ## Step 3: Analyze lots of sessions at once
 
-A single session summary is useful enough, true, but watching one session at a time doesn't solve the original problem - there are thousands of sessions, and we need to find issues across them. As it's a beta, we decided to start small, with 100-session batches. It won't cover all the sessions, but it can cover a good enough sample (or a specific org), and already saves tons of time.
+A single session summary is useful enough, but watching one session at a time doesn't solve the original problem - there are thousands of sessions, and we need to find issues across them. We decided to start small, with 100-session batches. It won't cover all the sessions, but it can cover a good enough sample (or a specific org), and already saves tons of time.
 
 ![Session group summary](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_11_28_at_23_13_11_203c4282d4.png)
 > _You can check the pattern based on severity and issue types_
@@ -142,7 +142,7 @@ We use a four-phase pipeline instead of a single prompt:
 3. Combine patterns extracted from each chunk by either joining similar ones or extending the list
 4. Iterate over chunks of single-session summaries to assign events back to patterns for concrete examples
 
-![Four-phase pipeline](https://res.cloudinary.com/dmukukwp6/image/upload/78071c82_b7bf_4883_b806_2a0fc1aa72db_06154e7b68.jpeg)
+![Four-phase pipeline](https://res.cloudinary.com/dmukukwp6/image/upload/Frame_2_57724cfa0e.png)
 
 ### Crying wolf effect (now with patterns)
 
@@ -151,8 +151,8 @@ Even if we got patterns, there's just too much data to process easily, so we nee
 **Our approach:**
 
 - We limit 1 example per session per pattern. So, if the report says "happened 15 times," you can be sure it happened in 15 different sessions, not one user rage-clicking the same broken button.
-- We calculate detailed pattern statistics: occurrence count, affected sessions, percentage of total, and severity
-- The default report shows only issues with blocking errors by default, but you can show other types if you want to dig deeper
+- We calculate detailed pattern statistics: occurrence count, affected sessions, percentage of total, and severity.
+- The default report shows only issues with blocking errors by default, but you can show other types if you want to dig deeper.
 
 ### Patterns need to be verifiable
 
@@ -162,15 +162,15 @@ To make it work, we needed a way to easily display the whole story to the user a
 
 **Our approach:**
 
-- We display not just the issue, but also the segment that the issue was part of, what happened before the issue, and what happened after
-- Timestamp and event type of the issue are clear and easy to validate
-- Or even easier, as we load the video of the session at the moment it happened (actually, a couple of seconds before)
+- We display not just the issue, but also the segment that the issue was part of, what happened before the issue, and what happened after.
+- We ensure the timestamp and event type of the issue are clear and easy to validate.
+- Or even easier, we load the video of the session at the moment it happened (actually, a couple of seconds before).
 
 ![Issue example](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_11_29_at_21_01_27_26a86978c8.png)
 
 ## Step 4: Make it work reliably
 
-Now we have a pipeline that works  across 100 sessions: single-session summaries → video validation → pattern extraction → pattern enrichment. The problem? It's fragile. If the whole thing falls apart because of one bad response, the feature is unusable.
+Now we have a pipeline that works across 100 sessions: single-session summaries → video validation → pattern extraction → pattern enrichment. The problem? It's fragile. If the whole thing falls apart because of one bad response, the feature is unusable.
 
 To make it more predictable, we use Temporal workflows, with each workflow spawning hundreds of atomic and easily retriable activities, so we’ll get a proper result - sooner or later.
 
