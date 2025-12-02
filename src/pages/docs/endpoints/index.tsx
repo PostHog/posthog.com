@@ -95,7 +95,7 @@ export const Content = () => {
                     Endpoints vs API queries
                 </h2>
                 <CalloutBox icon="IconInfo" type="fyi" title="Endpoints vs API queries">
-                    <p>You should use Endpoints when you need:</p>
+                    <p>You should use endpoints when you need:</p>
                     <ul>
                         <li>
                             <b>Better performance</b>: Optimized for predefined queries
