@@ -117,7 +117,7 @@ Even with all the optimizations above, video files add up. A 10-second GIF clip 
 
 - We use `.webm`. It's roughly half the size of the `.mp4`, supported by most multimodal models, and can be played in most browsers by default (in the UI or not).
 - We render videos at 8-10x - 1 frame per second is usually enough for LLM to understand the context well. 
-- Keep in mind that `puppeteer`, `playwright`, and similar libraries have different keyframe settings, so after a certain point, speeding up will result in data loss.
+- Keep in mind that `puppeteer`, `playwright`, and similar libraries have different recording settings, and speeding up can result in data loss.
 
 ## Step 3: Analyze lots of sessions at once
 
