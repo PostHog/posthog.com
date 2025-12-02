@@ -1,0 +1,20 @@
+---
+title: Additional features
+sidebar: Docs
+showTitle: true
+---
+
+## Versioning
+
+It's possible to update the version of an endpoint - this happens when the underlying query changes. Default `/run` API calls will use the latest version of a query, but if you want to run an older version you can specify that in the body of the request.
+
+## Materialization
+
+For better performance, you can materialize your endpoints query. Materialized queries are precomputed, which can significantly improve endpoint response times. Endpoints will return cached data when available. You can configure the TTL of cached results based on your requirements. If the cache is older than your desired freshness, the endpoint will execute the query again. Endpoints should eliminate the need for you to implement your own caching layer.
+
+## Security
+
+- **Authentication**: All endpoint requests require authentication with a personal API key
+- **Permissions**: Ensure your API keys have the appropriate permissions for the data you're accessing
+- **Team isolation**: Endpoints are scoped to your team, so you can only access endpoints in your own team
+
