@@ -119,7 +119,7 @@ You don't need to copy every single update from the incident channel. Just share
 
 ## Working with the Comms Lead
 
-For any incident that impacts users, Marketing will appoint a [Comms Lead](https://posthog.com/handbook/growth/marketing/incident-comms). They own external communication strategy. We don't.
+For an incident that requires external comms, Marketing will appoint a [Comms Lead](https://posthog.com/handbook/growth/marketing/incident-comms). They own external communication strategy. We don't.
 
 As the support team member watching the incident, you should coordinate with the Comms Lead:
 - Share your macro draft with them before using it - we want to make sure we're saying consistent things across all channels
@@ -127,6 +127,7 @@ As the support team member watching the incident, you should coordinate with the
 - If you need help with a particularly complex or sensitive customer communication
 - When you update the macro - let them know what changed
 
+If you think external comms are required but there isn't a Comms lead assigned, you can request one by asking in #team-marketing or using the @all-marketers tag in Slack. 
 ## Coordinating with TAMs and CSMs
 
 Enterprise customers often have dedicated TAMs (Technical Account Managers) or CSMs (Customer Success Managers) from the Sales/CS team. When these customers reach out about an incident - either through their Slack channels or via tickets - we need to coordinate our response.
@@ -150,7 +151,7 @@ Post in #team-support via the original workflow thread with:
 - Any key information the next person needs to know
 - Anything you told users in tickets that the team should be consistent about
 
-If you're US West Coast based and logging off for the day, write detailed handover notes even if nobody in EU is online yet. This way they can pick it up smoothly when they start their day.
+If you're US West Coast based and logging off for the day, write detailed handover notes given that nobody in EU will be online yet. This way they can pick it up smoothly when they start their day.
 
 If you're picking up an incident from someone in a previous timezone, read their notes, scan the incident channel for updates since those notes were written, and jump in. Raise your hand on the original #team-support workflow post if you haven't already.
 
