@@ -209,7 +209,7 @@ Redis, as a stateful bridge, provides plenty of opportunities for workarounds. F
 
 - Clear Redis TTLs (24 hours tops), as even with seemingly unlimited memory, we slow it down significantly if not paying attention.
 - Gzip compression for everything (on the input/output).
-- If storing in the DB, the Redis step is skipped explicitly to avoid duplicating data for nothing
+- If storing in the DB, the Redis step is skipped explicitly to avoid duplicating data for nothing.
 
 ## Step 5: Ship the beta, learn, iterate (We are here)
 
