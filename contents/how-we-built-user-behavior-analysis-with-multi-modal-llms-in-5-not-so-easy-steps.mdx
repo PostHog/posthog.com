@@ -130,7 +130,7 @@ The session group summary surfaces patterns across sessions, including severity,
 
 ### Patterns are hard to catch
 
-In the ideal world, we would just send 100 single-session summaries in a single LLM call and get back a summary for all the patterns. Sadly, it doesn't work on multiple levels. Firstly, we will hit the context limits of LLMs, as enriched summaries are pretty heavy on metadata. Secondly, even if they fit, we would hit exactly the same lost-in-the-middle problem, with start/end sessions getting way more attention.
+In an ideal world, we’d send 100 single-session summaries in one LLM call and get back an extracted set of patterns. Sadly, that breaks down on multiple levels. First, we’d hit the model’s context limits — enriched summaries are heavy on metadata. Second, even if they did fit, we’d run into the same lost-in-the-middle problem, with the first and last sessions getting far more attention than everything in between.
 
 Also, we could've just picked a sample of sessions and selected patterns from them, but then the quality of the final report would be too dependent on our luck in picking the initial sessions. LLMs love finding patterns, but without proper control, we would've gotten either duplicates or incredibly insightful "wow, users clicked buttons" ones.
 
