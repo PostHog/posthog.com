@@ -4919,6 +4919,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Search logs',
+                    url: '/docs/logs/search',
+                    icon: 'IconSearch',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
                     name: 'Resources',
                 },
                 {
