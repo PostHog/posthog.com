@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, useState, useRef, useEffect } from 'react'
-import { User, useUser } from 'hooks/useUser'
+import { useUser } from 'hooks/useUser'
 import Days from './Days'
 import Markdown from './Markdown'
 import { StrapiRecord, ReplyData } from 'lib/strapi'
@@ -25,7 +25,7 @@ import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 import EditWrapper from './EditWrapper'
-import { AuthModal } from 'components/Roadmap/AuthModal'
+import { useApp } from '../../../context/App'
 import ReportSpamButton from './ReportSpamButton'
 import OSButton from 'components/OSButton'
 import { useToast } from '../../../context/Toast'
@@ -214,63 +214,51 @@ const VoteButton = ({
     votes: number
     onVote: () => void
 }) => {
-    const [authModalOpen, setAuthModalOpen] = useState(false)
     const { voteReply, user } = useUser()
+    const { openSignIn } = useApp()
 
-    const vote = async (user: User) => {
+    const vote = async () => {
         await voteReply(id, type, user)
         onVote?.()
     }
 
     const handleClick = () => {
         if (!user) {
-            setAuthModalOpen(true)
+            openSignIn()
         } else {
-            vote(user)
+            vote()
         }
     }
 
     return (
-        <>
-            <AuthModal
-                authModalOpen={authModalOpen}
-                setAuthModalOpen={setAuthModalOpen}
-                onAuth={(user) => {
-                    if (user) {
-                        vote(user)
-                        setAuthModalOpen(false)
-                    }
-                }}
-            />
-            <OSButton
-                onClick={handleClick}
-                icon={
-                    type === 'up' ? (
-                        voted ? (
-                            <IconThumbsUpFilled className="text-white" />
-                        ) : (
-                            <IconThumbsUp />
-                        )
-                    ) : voted ? (
-                        <IconThumbsDownFilled className="text-white" />
+        <OSButton
+            onClick={handleClick}
+            icon={
+                type === 'up' ? (
+                    voted ? (
+                        <IconThumbsUpFilled className="text-white" />
                     ) : (
-                        <IconThumbsDown />
+                        <IconThumbsUp />
                     )
-                }
-                size="md"
-                className={
-                    type === 'up'
-                        ? voted
-                            ? '!bg-green !text-white !border-green'
-                            : ''
-                        : voted
-                        ? '!bg-red !text-white !border-red'
+                ) : voted ? (
+                    <IconThumbsDownFilled className="text-white" />
+                ) : (
+                    <IconThumbsDown />
+                )
+            }
+            size="md"
+            className={
+                type === 'up'
+                    ? voted
+                        ? '!bg-green !text-white !border-green'
                         : ''
-                }
-            >
-                <strong>{votes}</strong>
-            </OSButton>
-        </>
+                    : voted
+                    ? '!bg-red !text-white !border-red'
+                    : ''
+            }
+        >
+            <strong>{votes}</strong>
+        </OSButton>
     )
 }
 

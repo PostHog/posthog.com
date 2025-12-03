@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { IRoadmap } from '.'
 import { Question } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
-import { AuthModal } from './AuthModal'
+import { useApp } from '../../context/App'
 import Spinner from 'components/Spinner'
 import { useToast } from '../../context/Toast'
 import useSWR from 'swr'
@@ -103,8 +103,8 @@ export function InProgress(
     const posthog = usePostHog()
     const [updates, setUpdates] = useState([])
     const [modalOpen, setModalOpen] = useState(false)
-    const [authModalOpen, setAuthModalOpen] = useState(false)
     const [addingUpdate, setAddingUpdate] = useState(false)
+    const { openSignIn } = useApp()
     const isModerator = user?.role?.type === 'moderator'
 
     const [more, setMore] = useState(props.more ?? false)
@@ -164,7 +164,8 @@ export function InProgress(
             const token = await getJwt()
 
             if (!token) {
-                setAuthModalOpen(true)
+                openSignIn()
+                setLoading(false)
                 return
             }
 
@@ -179,8 +180,7 @@ export function InProgress(
             })
 
             if (res.ok) {
-                setAuthModalOpen(false)
-                addToast({ message: `Subscribed to ${title}. We’ll email you with updates!` })
+                addToast({ message: `Subscribed to ${title}. We'll email you with updates!` })
                 mutate({
                     data: {
                         id: roadmapData?.id,
@@ -232,7 +232,8 @@ export function InProgress(
             const token = await getJwt()
 
             if (!token) {
-                setAuthModalOpen(true)
+                openSignIn()
+                setLoading(false)
                 return
             }
 
@@ -247,7 +248,6 @@ export function InProgress(
             })
 
             if (res.ok) {
-                setAuthModalOpen(false)
                 addToast({ message: `Unsubscribed from ${title}. You will no longer receive updates.` })
                 mutate({
                     data: {
@@ -347,12 +347,6 @@ export function InProgress(
                     )}
                 </ul>
             </SideModal>
-            <AuthModal
-                authModalOpen={authModalOpen}
-                setAuthModalOpen={setAuthModalOpen}
-                onAuth={() => subscribe()}
-                title={title}
-            />
             <li className={`pb-4 border border-primary rounded-md ${props?.className ?? ''}`}>
                 <div className="flex sm:flex-row sm:space-x-4 flex-col-reverse space-y-reverse sm:space-y-0 space-y-4 p-4 bg-accent rounded-t-md">
                     <div className="sm:flex-grow">

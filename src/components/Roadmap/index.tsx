@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import Markdown from 'markdown-to-jsx'
-import { User, useUser } from 'hooks/useUser'
+import { useUser } from 'hooks/useUser'
 import { CallToAction } from 'components/CallToAction'
 import { useRoadmaps } from 'hooks/useRoadmaps'
 import {
@@ -20,7 +20,6 @@ import { graphql, navigate, useStaticQuery } from 'gatsby'
 import { Skeleton } from 'components/Questions/QuestionsTable'
 import groupBy from 'lodash.groupby'
 import UpdateWrapper from './UpdateWrapper'
-import { AuthModal } from './AuthModal'
 import RoadmapForm from 'components/RoadmapForm'
 import Link from 'components/Link'
 import slugify from 'slugify'
@@ -116,8 +115,8 @@ export const VoteBox = ({ likeCount, liked }) => {
 
 export const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate, githubUrls }) => {
     const { user, likeRoadmap } = useUser()
+    const { openSignIn } = useApp()
     const { search } = useLocation()
-    const [authModalOpen, setAuthModalOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const teamName = teams?.data?.[0]?.attributes?.name
     const liked = user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === id)
@@ -126,15 +125,10 @@ export const Feature = ({ id, title, teams, description, likeCount, onLike, onUp
         setLoading(false)
     }, [liked])
 
-    const like = async (user?: User) => {
+    const like = async () => {
         setLoading(true)
         await likeRoadmap({ id, title, user, unlike: liked })
         onLike?.()
-    }
-
-    const onAuth = (user: User) => {
-        like(user)
-        setAuthModalOpen(false)
     }
 
     useEffect(() => {
@@ -146,14 +140,6 @@ export const Feature = ({ id, title, teams, description, likeCount, onLike, onUp
 
     return (
         <>
-            <AuthModal
-                authModalOpen={authModalOpen}
-                setAuthModalOpen={setAuthModalOpen}
-                onAuth={(user) => {
-                    setAuthModalOpen(false)
-                    like(user)
-                }}
-            />
             <UpdateWrapper
                 id={id}
                 status="under-consideration"
@@ -188,7 +174,7 @@ export const Feature = ({ id, title, teams, description, likeCount, onLike, onUp
                                     if (user) {
                                         like()
                                     } else {
-                                        setAuthModalOpen(true)
+                                        openSignIn()
                                     }
                                 }}
                                 size="sm"
@@ -273,14 +259,9 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
     const [selectedTeam, setSelectedTeam] = useState('All teams')
     const [roadmapSearch, setRoadmapSearch] = useState('')
     const [loading, setLoading] = useState(false)
-    const [authModalOpen, setAuthModalOpen] = useState(false)
     const [expandedDescriptions, setExpandedDescriptions] = useState<Record<number, boolean>>({})
-    const [selectedRoadmapId, setSelectedRoadmapId] = useState<{
-        id: number
-        title: string
-    } | null>(null)
     const [localFilteredRoadmaps, setLocalFilteredRoadmaps] = useState()
-    const { addWindow } = useApp()
+    const { addWindow, openSignIn } = useApp()
     const isModerator = user?.role?.type === 'moderator'
 
     // Get search context if available (from Editor)
@@ -514,11 +495,7 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                                     if (user) {
                                         like(roadmap.id, roadmap.attributes.title)
                                     } else {
-                                        setSelectedRoadmapId({
-                                            id: roadmap.id,
-                                            title: roadmap.attributes.title,
-                                        })
-                                        setAuthModalOpen(true)
+                                        openSignIn()
                                     }
                                 }}
                                 size="xs"
@@ -719,16 +696,6 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
     return (
         <section>
             <>
-                <AuthModal
-                    authModalOpen={authModalOpen}
-                    setAuthModalOpen={setAuthModalOpen}
-                    onAuth={(user) => {
-                        setAuthModalOpen(false)
-                        if (selectedRoadmapId) {
-                            like(selectedRoadmapId.id, selectedRoadmapId.title)
-                        }
-                    }}
-                />
                 {isLoading ? (
                     <ProgressBar title="roadmap" />
                 ) : (

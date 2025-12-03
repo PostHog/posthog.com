@@ -7,9 +7,9 @@ import { IconArrowRight, IconCalendar, IconThumbsUp, IconUndo } from '@posthog/i
 import OSTabs from 'components/OSTabs'
 import Markdown from 'markdown-to-jsx'
 import { useRoadmaps } from 'hooks/useRoadmaps'
-import { AuthModal } from 'components/Roadmap/AuthModal'
+import { useApp } from '../../../context/App'
 import { CallToAction } from 'components/CallToAction'
-import { User, useUser } from 'hooks/useUser'
+import { useUser } from 'hooks/useUser'
 import ProgressBar from 'components/ProgressBar'
 import { preparePreviewText } from 'components/Editor/SearchUtils'
 const Table = ({ columns, rows }: { columns: any; rows: any }) => {
@@ -32,60 +32,47 @@ const VoteButton = ({ roadmap, onLike }: { roadmap: any; onLike: () => void }) =
         attributes: { title },
     } = roadmap
     const { likeRoadmap, user } = useUser()
+    const { openSignIn } = useApp()
     const [loading, setLoading] = React.useState(false)
-    const [authModalOpen, setAuthModalOpen] = React.useState(false)
     const liked = user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === id)
 
     useEffect(() => {
         setLoading(false)
     }, [liked])
 
-    const like = async (user?: User) => {
+    const like = async () => {
         setLoading(true)
         await likeRoadmap({ id, title, user, unlike: liked })
         onLike?.()
     }
 
-    const onAuth = (user: User) => {
-        like(user)
-        setAuthModalOpen(false)
-    }
-
     return (
-        <>
-            <AuthModal
-                authModalOpen={authModalOpen}
-                setAuthModalOpen={setAuthModalOpen}
-                onAuth={onAuth}
-                title={roadmap.attributes.name}
-            />
-            <CallToAction
-                disabled={loading}
-                onClick={() => {
-                    if (user) {
-                        like(user)
-                    } else {
-                        setAuthModalOpen(true)
-                    }
-                }}
-                size="sm"
-                type={liked ? 'outline' : 'primary'}
-            >
-                <span className="flex items-center space-x-1">
-                    {liked ? (
-                        <>
-                            <IconUndo className="w-4 h-4" />
-                            <span>Unvote</span>
-                        </>
-                    ) : (
-                        <>
-                            <IconThumbsUp className="w-4 h-4" />
-                            <span>Vote</span>
-                        </>
-                    )}
-                </span>
-            </CallToAction>
-        </>
+        <CallToAction
+            disabled={loading}
+            onClick={() => {
+                if (user) {
+                    like()
+                } else {
+                    openSignIn()
+                }
+            }}
+            size="sm"
+            type={liked ? 'outline' : 'primary'}
+        >
+            <span className="flex items-center space-x-1">
+                {liked ? (
+                    <>
+                        <IconUndo className="w-4 h-4" />
+                        <span>Unvote</span>
+                    </>
+                ) : (
+                    <>
+                        <IconThumbsUp className="w-4 h-4" />
+                        <span>Vote</span>
+                    </>
+                )}
+            </span>
+        </CallToAction>
     )
 }
 

@@ -4,7 +4,6 @@ import utc from 'dayjs/plugin/utc'
 import { navigate } from 'gatsby'
 import { useUser, User } from 'hooks/useUser'
 import { addRoadmapEmojiReaction, fetchRoadmapReactions, EmojiReaction } from 'hooks/useRoadmaps'
-import { AuthModal } from 'components/Roadmap/AuthModal'
 import {
     IconDownload,
     IconPencil,
@@ -163,10 +162,9 @@ export const Change = ({ title, teamName, media, description, cta }) => {
 
 const EmojiReactions = ({ roadmapId }: { roadmapId: number | string }) => {
     const { user, getJwt } = useUser()
+    const { openSignIn } = useApp()
     const [reactions, setReactions] = useState<EmojiReaction[]>([])
     const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
-    const [authModalOpen, setAuthModalOpen] = useState(false)
-    const [pendingEmoji, setPendingEmoji] = useState<string | null>(null)
 
     // Fetch reactions on mount and when roadmapId changes
     useEffect(() => {
@@ -266,21 +264,12 @@ const EmojiReactions = ({ roadmapId }: { roadmapId: number | string }) => {
 
     const handleEmojiSelect = async (emojiKey: keyof typeof emojiMap) => {
         if (!user) {
-            setPendingEmoji(emojiKey)
-            setAuthModalOpen(true)
+            openSignIn()
             setIsEmojiPickerOpen(false)
             return
         }
 
         await performEmojiReaction(emojiKey)
-    }
-
-    const onAuth = async (authenticatedUser: User) => {
-        setAuthModalOpen(false)
-        if (pendingEmoji) {
-            await performEmojiReaction(pendingEmoji, authenticatedUser)
-            setPendingEmoji(null)
-        }
     }
 
     return (
@@ -333,12 +322,6 @@ const EmojiReactions = ({ roadmapId }: { roadmapId: number | string }) => {
                     ))}
                 </div>
             </Popover>
-            <AuthModal
-                authModalOpen={authModalOpen}
-                setAuthModalOpen={setAuthModalOpen}
-                onAuth={onAuth}
-                title="Sign in to add reaction"
-            />
         </>
     )
 }
