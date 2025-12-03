@@ -61,6 +61,15 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
     }
 }
 
+export const onCreateBabelConfig: GatsbyNode['onCreateBabelConfig'] = ({ actions }) => {
+    actions.setBabelPlugin({
+        name: '@babel/plugin-transform-react-jsx',
+        options: {
+            runtime: 'automatic',
+        },
+    })
+}
+
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ stage, actions }) => {
     actions.setWebpackConfig({
         cache: process.env.NODE_ENV === 'development' || {
