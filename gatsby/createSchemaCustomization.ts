@@ -16,12 +16,27 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       contributors: [Contributors]
       appConfig: [AppConfig]
       commits: [Commit]
+      templateConfigs: [TemplateConfig]
     }
     type Commit {
       author: GitHubUser
       date: Date
       message: String
       url: String
+    }
+    type TemplateConfigField {
+      key: String
+      type: String
+      label: String
+      required: Boolean
+      description: String
+      default: JSON
+    }
+    type TemplateConfig {
+      templateId: String
+      name: String
+      type: String
+      inputs_schema: [TemplateConfigField]
     }
     type GitHubUser {
       avatar_url: String
