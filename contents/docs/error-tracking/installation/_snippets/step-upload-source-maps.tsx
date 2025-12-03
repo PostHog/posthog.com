@@ -1,12 +1,20 @@
 import React from 'react'
 import { CallToAction } from 'components/CallToAction'
 
-const StepUploadSourceMaps = ({ urlPath, framework }: { urlPath: string; framework: string }) => {
+const StepUploadSourceMaps = ({
+    urlPath,
+    framework,
+    symbolType = 'source maps',
+}: {
+    urlPath: string
+    framework: string
+    symbolType?: string
+}) => {
     return (
         <>
             <p>
-                Great, you're capturing exceptions! If you serve minified bundles, the next step is to upload source
-                maps to generate accurate stack traces.
+                Great, you're capturing exceptions! If you serve minified bundles, the next step is to upload{' '}
+                {symbolType} to generate accurate stack traces.
             </p>
             <p>Let's continue to the next section.</p>
             <CallToAction
@@ -15,7 +23,7 @@ const StepUploadSourceMaps = ({ urlPath, framework }: { urlPath: string; framewo
                 to={`/docs/error-tracking/upload-source-maps/${urlPath}`}
                 external={true}
             >
-                Upload source maps {framework ? `for ${framework}` : ''}
+                Upload {symbolType} {framework ? `for ${framework}` : ''}
             </CallToAction>
         </>
     )
