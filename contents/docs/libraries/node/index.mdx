@@ -93,6 +93,8 @@ We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assi
 
 ## Contexts
 
+> Requires `posthog-node` version >= 5.17.0.
+
 The Node SDK uses nested contexts for managing state that's shared across events. Contexts are useful for adding properties to multiple events (including exceptions) during a single user's interaction with your product.
 
 You can enter a context using `withContext`:
