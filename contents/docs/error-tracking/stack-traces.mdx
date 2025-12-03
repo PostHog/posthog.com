@@ -17,7 +17,7 @@ Stack traces are available for all languages and can be found in the details pag
 
 ## Resolving stack traces
 
-If you use a compiled language or server minified bundles, you'll need to [upload source maps](/docs/error-tracking/upload-source-maps) to get stack traces. Compiled or minified code obfuscates the original source code, so PostHog uses the source map to resolve the stack trace to the original source code.
+If you use a compiled language or server minified bundles, you'll need to [upload symbols](/docs/error-tracking/upload-symbols) to get stack traces. Compiled or minified code obfuscates the original source code, so PostHog uses the source map to resolve the stack trace to the original source code.
 
 For languages like Python, the stack trace and code context can be gathered by the PostHog client and requires no additional processing.
 
@@ -31,7 +31,7 @@ import UploadSymbolsPlatforms from  './_snippets/upload-symbols-platforms.tsx'
 
 ## Release context in stack traces
 
-Error tracking displays release information over stack traces to help you track down the root cause of an issue, down to the commit and version that produced it. This context can be defined when you [upload sourcemaps](/docs/error-tracking/upload-source-maps/).
+Error tracking displays release information over stack traces to help you track down the root cause of an issue, down to the commit and version that produced it. This context can be defined when you [upload sourcemaps](/docs/error-tracking/upload-symbols/).
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/release_light_d5955d3b5e.png"
@@ -70,4 +70,4 @@ You can see the symbol sets fetched by PostHog and the associated frames within 
     classes="rounded"
 />
 
-We strongly recommend you follow the [upload source maps](/docs/error-tracking/upload-source-maps) guide to ensure your stack traces are uploaded automatically in CI instead of manually debugging the process. If you're still having issues, [let us know in-app](https://us.posthog.com/project/2#panel=support%3Afeedback%3Aerror_tracking%3A%3Afalse).
+We strongly recommend you follow the [upload symbols](/docs/error-tracking/upload-symbols) guide to ensure your stack traces are uploaded automatically in CI instead of manually debugging the process. If you're still having issues, [let us know in-app](https://us.posthog.com/project/2#panel=support%3Afeedback%3Aerror_tracking%3A%3Afalse).

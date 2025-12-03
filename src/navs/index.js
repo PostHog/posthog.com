@@ -3840,55 +3840,55 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Upload source maps',
-                    url: '/docs/error-tracking/upload-source-maps',
+                    name: 'Upload symbols',
+                    url: '/docs/error-tracking/upload-symbols',
                     icon: 'IconCode',
                     color: 'green',
                     featured: true,
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/error-tracking/upload-source-maps',
+                            url: '/docs/error-tracking/upload-symbols',
                         },
                         {
                             name: 'Next.js',
-                            url: '/docs/error-tracking/upload-source-maps/nextjs',
+                            url: '/docs/error-tracking/upload-symbols/nextjs',
                         },
                         {
                             name: 'Nuxt',
-                            url: '/docs/error-tracking/upload-source-maps/nuxt',
+                            url: '/docs/error-tracking/upload-symbols/nuxt',
                         },
                         {
                             name: 'React',
-                            url: '/docs/error-tracking/upload-source-maps/react',
+                            url: '/docs/error-tracking/upload-symbols/react',
                         },
                         {
                             name: 'Angular',
-                            url: '/docs/error-tracking/upload-source-maps/angular',
+                            url: '/docs/error-tracking/upload-symbols/angular',
                         },
                         {
                             name: 'Web',
-                            url: '/docs/error-tracking/upload-source-maps/web',
+                            url: '/docs/error-tracking/upload-symbols/web',
                         },
                         {
                             name: 'Node.js',
-                            url: '/docs/error-tracking/upload-source-maps/node',
+                            url: '/docs/error-tracking/upload-symbols/node',
                         },
                         {
                             name: 'React Native',
-                            url: '/docs/error-tracking/upload-source-maps/react-native',
+                            url: '/docs/error-tracking/upload-symbols/react-native',
                         },
                         {
                             name: 'Android',
-                            url: '/docs/error-tracking/upload-mappings/android',
+                            url: '/docs/error-tracking/upload-symbols/android',
                         },
                         {
                             name: 'CLI',
-                            url: '/docs/error-tracking/upload-source-maps/cli',
+                            url: '/docs/error-tracking/upload-symbols/cli',
                         },
                         {
                             name: 'GitHub Action',
-                            url: '/docs/error-tracking/upload-source-maps/github-actions',
+                            url: '/docs/error-tracking/upload-symbols/github-actions',
                         },
                     ],
                 },
