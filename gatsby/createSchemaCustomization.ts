@@ -16,6 +16,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       contributors: [Contributors]
       appConfig: [AppConfig]
       commits: [Commit]
+      templateConfigs: [TemplateConfig]
     }
     type Commit {
       author: GitHubUser
@@ -43,6 +44,12 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       type: String
       hint: String
       description: String
+    }
+    type TemplateConfig {
+      templateId: String
+      inputs_schema: [PostHogPipelineInputSchema]
+      name: String
+      type: String
     }
     type Contributors {
       avatar: String
@@ -290,6 +297,12 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       secret: Boolean
       required: Boolean
       description: String
+      integration: String
+      requiredScopes: [String]
+      hidden: Boolean
+      integration_key: String
+      integration_field: String
+      hint: String
     }
     type SdkReferences implements Node {
       info: SdkReferencesInfo
