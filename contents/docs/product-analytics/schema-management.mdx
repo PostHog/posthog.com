@@ -122,7 +122,7 @@ The CLI will:
 
 When prompted for the output path, choose a location that's accessible from your application code (e.g., `src/lib/posthog-typed.ts` or `app/lib/posthog-typed.ts` for TypeScript).
 
-**Important:** Commit both `posthog.json` and `posthog-typed.<extension>` to your git repository. This ensures your team has consistent types and tracks schema changes over time.
+> **Important:** Commit both `posthog.json` and `posthog-typed.<extension>` to your git repository. This ensures your team has consistent types and tracks schema changes over time.
 
 On subsequent runs, the CLI only updates the file if your schema has changed.
 
@@ -164,13 +164,13 @@ import (
 )
 
 func captureEventWithRequiredProperties(client posthog.Client) error {
-	return client.Enqueue(typed.DashboardModeToggledCapture("distinct_id", 2048,
-		typed.DashboardModeToggledWithFileName("file_name"),
-		typed.DashboardModeToggledWithFileType(".pdf"),
-		typed.DashboardModeToggledWithExtraProps(posthog.Properties{
-			"extra": "property",
-		}),
-	))
+    return client.Enqueue(typed.DashboardModeToggledCapture("distinct_id", 2048,
+        typed.DashboardModeToggledWithFileName("file_name"),
+        typed.DashboardModeToggledWithFileType(".pdf"),
+        typed.DashboardModeToggledWithExtraProps(posthog.Properties{
+            "extra": "property",
+        }),
+    ))
 }
 
 func captureEventWithNoRequiredProperties(client posthog.Client) error {
@@ -181,17 +181,17 @@ func captureEventWithNoRequiredProperties(client posthog.Client) error {
 }
 
 func captureEventWithFullCaptureControl(client posthog.Client) error {
-	return client.Enqueue(typed.DashboardLoadingTimeCaptureFromBase(
-		// Event should be omitted here as it will be retrieved from the typed function.
-		posthog.Capture{
-			DistinctId: "distinct_id",
-			Timestamp:  time.Now(),
-			// ... Any additional properties
-		},
-		posthog.Properties{
-			"test": "property",
-		},
-	))
+    return client.Enqueue(typed.DashboardLoadingTimeCaptureFromBase(
+        // Event should be omitted here as it will be retrieved from the typed function.
+        posthog.Capture{
+            DistinctId: "distinct_id",
+            Timestamp:  time.Now(),
+            // ... Any additional properties
+        },
+        posthog.Properties{
+            "test": "property",
+        },
+    ))
 }
 
 ```
@@ -225,7 +225,7 @@ The generated typed file provides:
 - **Type safety**: Properties are validated against your schema
 - **Autocomplete**: Your IDE suggests event names and properties
 - **Documentation**: Inline types show required properties and descriptions
-- **Flexibility**: The standard SDK functionality remains available, allowing gradual migrations
+- **Flexibility**: The standard SDK functionality remains available (capture / identify / experiments / ...), allowing gradual migrations
 
 ![TypeScript type checking in action](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/typescript_type_checking_a5318b2d7e.png)
 
