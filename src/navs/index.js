@@ -934,6 +934,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/development-process',
             },
             {
+                name: 'Security best practices',
+                url: '/handbook/engineering/security',
+            },
+            {
                 name: 'Setting up SSL locally',
                 url: '/handbook/engineering/setup-ssl-locally',
             },
@@ -1034,6 +1038,10 @@ export const handbookSidebar = [
                     {
                         name: 'Testimonials & G2',
                         url: '/handbook/brand/testimonials',
+                    },
+                    {
+                        name: 'Campaigns & coupons',
+                        url: '/handbook/growth/marketing/campaigns-and-coupons',
                     },
                 ],
             },
@@ -3790,6 +3798,10 @@ export const docsMenu = {
                         {
                             name: 'Node.js',
                             url: '/docs/error-tracking/installation/node',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/error-tracking/installation/ruby',
                         },
                         {
                             name: 'React',
