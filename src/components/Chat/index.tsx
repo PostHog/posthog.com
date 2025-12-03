@@ -15,7 +15,7 @@ const ConversationHistoryButton = ({ onClick }: { onClick: () => void }) => {
                     e.stopPropagation()
                     onClick()
                 }}
-                className="border border-light-7 rounded p-1.5 flex items-center space-x-1 click overflow-hidden group h-[28px]"
+                className="border border-primary rounded p-1.5 flex items-center space-x-1 click overflow-hidden group h-[28px]"
                 whileHover={{ width: 'auto' }}
                 initial={{ width: '28px' }}
             >
@@ -108,7 +108,7 @@ ${codeSnippet.code}
                             return (
                                 <li
                                     key={path}
-                                    className={`font-semibold p-1.5 border border-light-7 rounded flex justify-between bg-primary ${
+                                    className={`font-semibold p-1.5 border border-primary rounded flex justify-between bg-primary ${
                                         context.length === 1 ? 'w-full' : ' w-[80%]'
                                     } flex-shrink-0 transition-all text-primary`}
                                 >
@@ -135,7 +135,7 @@ ${codeSnippet.code}
             </div>
             <Context />
             {codeSnippet && showCodeSnippet && (
-                <div className="border-b border-light dark:border-dark p-2">
+                <div className="border-b border-primary p-2">
                     <div className="flex items-center justify-between mb-1 text-xs text-primary/60 dark:text-primary-dark/60">
                         <span className="flex items-center gap-1.5">
                             <IconCode className="size-3.5" />
