@@ -17,7 +17,7 @@ export const ProductVideo = ({
                 muted={muted}
                 playsInline
                 src={videoLight}
-                className={`${videoDark ? 'dark:hidden' : ''} ${classes}`}
+                className={`my-0 ${videoDark ? 'dark:hidden' : ''} ${classes}`}
                 controls={!autoPlay}
             ></video>
             {videoDark && (
