@@ -934,6 +934,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/development-process',
             },
             {
+                name: 'Security best practices',
+                url: '/handbook/engineering/security',
+            },
+            {
                 name: 'Setting up SSL locally',
                 url: '/handbook/engineering/setup-ssl-locally',
             },
@@ -3786,6 +3790,10 @@ export const docsMenu = {
                         {
                             name: 'Node.js',
                             url: '/docs/error-tracking/installation/node',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/error-tracking/installation/ruby',
                         },
                         {
                             name: 'React',
