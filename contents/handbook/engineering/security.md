@@ -10,8 +10,7 @@ showTitle: true
 
 Connecting to GitHub generally requires the use of an SSH key (unless connecting over https). Keys stored on your filesystem are susceptible to theft and misuse by malware.
 
-Generate a new key reserved only for use with GitHub. The key should be generated with [Secretive](https://github.com/maxgoedjen/secretive/) or [1Password](https://developer.1password.com/docs/ssh/manage-keys/). Ed25519 is preferable to RSA - don't use RSA.
-Generate your GitHub
+Generate a new key reserved only for use with GitHub. The key should be generated with [Secretive](https://github.com/maxgoedjen/secretive/) or [1Password](https://developer.1password.com/docs/ssh/manage-keys/). ECDSA/Ed25519 is preferable to RSA - don't use RSA.
 
 ### Commit signing
 
@@ -27,7 +26,7 @@ Great care should be taken when writing or modifying a GitHub Actions workflow. 
 
 Note: GitHub will be [altering this behavior](https://github.blog/changelog/2025-11-07-actions-pull_request_target-and-environment-branch-protections-changes/) on Dec 8, 2025.
 
-Actions that run on the `pull_request_target` event will run on external contributors' PRs, without requiring prior approval. This can allow an attacker to run arbitrary code with full access to a repo's GitHub Action secrets. Only use `pull_request_target` when a workflow explicitly requires access to secrets
+Actions that run on the `pull_request_target` event will run on external contributors' PRs, with full access to secrets, without requiring prior approval. This can allow an attacker to run arbitrary code with full access to a repo's GitHub Action secrets. Only use `pull_request_target` when a workflow explicitly requires access to secrets
 
 If your workflow does not require access to secrets when run against an external contributor's PR, use the `pull_request` event instead.
 

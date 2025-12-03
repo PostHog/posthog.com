@@ -1,10 +1,8 @@
-import { surveys } from 'hooks/productData/surveys'
-
-export const contentsquare = {
-    name: 'Contentsquare',
-    key: 'contentsquare',
+export const quantum_metric = {
+    name: 'Quantum Metric',
+    key: 'quantum_metric',
     assets: {
-        icon: '/images/competitors/contentsquare.svg',
+        icon: '/images/competitors/quantum-metric.svg',
     },
     products: {
         product_analytics: {
@@ -12,9 +10,9 @@ export const contentsquare = {
             features: {
                 autocapture: true,
                 cohorts: true,
-            },
-            group_analytics: {
-                available: false,
+                conversion_funnels: true,
+                alerts: true,
+                anomaly_detection: true,
             },
             funnels: {
                 available: true,
@@ -25,26 +23,30 @@ export const contentsquare = {
         },
         session_replay: {
             available: true,
+            pricing: {
+                free_tier: false,
+            },
             features: {
                 canvas_recording: false,
                 crash_reports: true,
-                console_logs: true,
-                network_monitor: true,
             },
             platform_support: {
                 features: {
+                    web_app_recordings: true,
                     mobile_app_recordings: true,
                 },
             },
             analysis: {
                 features: {
+                    console_logs: true,
+                    network_monitor: true,
                     performance_monitoring: true,
                 },
             },
             targeting: {
                 features: {
-                    filter_by_user_or_event: true,
                     conditional_recording: true,
+                    filter_by_user_or_event: true,
                 },
             },
             privacy: {
@@ -61,16 +63,15 @@ export const contentsquare = {
         heatmaps: {
             available: true,
             features: {
-                dead_taps: false,
-                rage_clicks: true,
-                rage_taps: false,
+                clickmaps: true,
                 scrollmaps: true,
+                rage_clicks: true,
             },
         },
-        experiments: {
+        feature_flags: {
             available: false,
         },
-        feature_flags: {
+        experiments: {
             available: false,
         },
         surveys: {
@@ -80,9 +81,9 @@ export const contentsquare = {
             available: true,
              },
             monitoring: {
-            features: {
-                performance_monitoring: true,
-            },
+                features: {
+                    performance_monitoring: true,
+                },
         }
     },
     platform: {
@@ -90,14 +91,16 @@ export const contentsquare = {
             open_source: false,
         },
         pricing: {
-            self_serve: false,
+            free_tier: false,
             transparent_pricing: false,
-            free_tier: true,
         },
         security: {
-            user_privacy_options: true,
             gdpr_ready: true,
-            hipaa_ready: false,
+            soc2_certified: true,
+            hipaa_ready: true,
         },
+    },
+    pricing: {
+        model: 'Quote-based',
     },
 }
