@@ -277,16 +277,10 @@ const ProxyDecisionTree: React.FC = () => {
 
     if (!currentQuestion) return null
 
-    const activeQuestions = questions.filter((q) => !q.condition || q.condition(answers))
-    const currentIndex = activeQuestions.findIndex((q) => q.id === currentQuestion.id)
-
     return (
         <div className="border border-light dark:border-dark rounded-md p-5 bg-accent dark:bg-accent-dark my-4">
             <div className="mb-4">
-                <span className="text-sm font-semibold opacity-60">
-                    Question {currentIndex + 1} of {activeQuestions.length}
-                </span>
-                <h4 className="text-lg font-bold m-0 mt-1">{currentQuestion.question}</h4>
+                <h4 className="text-lg font-bold m-0">{currentQuestion.question}</h4>
                 <p className="text-[15px] opacity-75 m-0 mt-1">{currentQuestion.description}</p>
             </div>
 
