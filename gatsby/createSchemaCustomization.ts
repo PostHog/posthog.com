@@ -24,6 +24,20 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       message: String
       url: String
     }
+    type TemplateConfigField {
+      key: String
+      type: String
+      label: String
+      required: Boolean
+      description: String
+      default: JSON
+    }
+    type TemplateConfig {
+      templateId: String
+      name: String
+      type: String
+      inputs_schema: [TemplateConfigField]
+    }
     type GitHubUser {
       avatar_url: String
       html_url: String
@@ -44,12 +58,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       type: String
       hint: String
       description: String
-    }
-    type TemplateConfig {
-      templateId: String
-      inputs_schema: [PostHogPipelineInputSchema]
-      name: String
-      type: String
     }
     type Contributors {
       avatar: String
@@ -297,12 +305,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       secret: Boolean
       required: Boolean
       description: String
-      integration: String
-      requiredScopes: [String]
-      hidden: Boolean
-      integration_key: String
-      integration_field: String
-      hint: String
     }
     type SdkReferences implements Node {
       info: SdkReferencesInfo
