@@ -83,7 +83,14 @@ export const query = graphql`
                     deletions
                     review_comments
                     review_comments_url
+                    reviews_url
                     commenters {
+                        avatar_url
+                        html_url
+                        login
+                        type
+                    }
+                    reviewers {
                         avatar_url
                         html_url
                         login

@@ -303,7 +303,7 @@ const EmojiReactions = ({ roadmapId }: { roadmapId: number | string }) => {
                                 userHasReacted ? 'font-semibold text-orange-dark dark:text-white' : ''
                             }`}
                         >
-                            {reaction.profiles?.length.toLocaleString()}
+                            {(reaction.profiles?.length ?? 0).toLocaleString()}
                         </span>
                     </button>
                 )
@@ -382,45 +382,47 @@ const GitHubPRInfo = ({ roadmap }: { roadmap: RoadmapNode }) => {
                     onMouseLeave={handleMouseLeave}
                     className="flex flex-row items-center group overflow-x-auto scrollbar-hide"
                 >
-                    {[gitHubData.user, ...gitHubData.commenters].map((commenter, index, array) => (
-                        <Tooltip
-                            key={`avatar-${commenter.login}`}
-                            trigger={
-                                <div
-                                    className={`relative transition-all duration-200 flex-none ${
-                                        index > 0 ? '-ml-2 group-hover:ml-0.5' : ''
-                                    }`}
-                                    style={{ zIndex: array.length - index }}
-                                >
-                                    <img
-                                        src={commenter.avatar_url}
-                                        alt={`${commenter.login} avatar`}
-                                        loading="lazy"
-                                        decoding="async"
-                                        referrerPolicy="no-referrer"
-                                        className="w-5 h-5 min-w-5 min-h-5 rounded-full border-primary border flex-none"
-                                    />
-                                </div>
-                            }
-                            side="top"
-                        >
-                            <a
-                                href={commenter.html_url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="opacity-50 font-semibold underline"
+                    {[gitHubData.user, ...(gitHubData.reviewers || []), ...(gitHubData.commenters || [])]
+                        .filter(Boolean)
+                        .map((commenter, index, array) => (
+                            <Tooltip
+                                key={`avatar-${commenter.login}`}
+                                trigger={
+                                    <div
+                                        className={`relative transition-all duration-200 flex-none ${
+                                            index > 0 ? '-ml-2 group-hover:ml-0.5' : ''
+                                        }`}
+                                        style={{ zIndex: array.length - index }}
+                                    >
+                                        <img
+                                            src={commenter.avatar_url}
+                                            alt={`${commenter.login} avatar`}
+                                            loading="lazy"
+                                            decoding="async"
+                                            referrerPolicy="no-referrer"
+                                            className="w-5 h-5 min-w-5 min-h-5 rounded-full border-primary border flex-none"
+                                        />
+                                    </div>
+                                }
+                                side="top"
                             >
-                                {commenter.login}
-                            </a>
-                        </Tooltip>
-                    ))}
+                                <a
+                                    href={commenter.html_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="opacity-50 font-semibold underline"
+                                >
+                                    {commenter.login}
+                                </a>
+                            </Tooltip>
+                        ))}
                 </div>
             </div>
             <div className="flex flex-row items-center">
                 <IconCode className="w-4 h-4 opacity-50 shrink-0 mr-1" />
                 <div className="flex flex-row gap-x-1">
-                    <span className="text-green font-semibold">+{gitHubData.additions.toLocaleString()}</span>{' '}
-                    <span className="text-red font-semibold">-{gitHubData.deletions.toLocaleString()}</span>
+                    <span className="text-green font-semibold">+{(gitHubData.additions ?? 0).toLocaleString()}</span>{' '}
+                    <span className="text-red font-semibold">-{(gitHubData.deletions ?? 0).toLocaleString()}</span>
                 </div>
             </div>
             <div className="flex flex-row items-center">
@@ -448,7 +450,7 @@ const GitHubPRInfo = ({ roadmap }: { roadmap: RoadmapNode }) => {
             <div className="flex flex-row items-center">
                 <IconComment className="w-4 h-4 opacity-50 mr-1" />
                 <a href={gitHubData.html_url} target="_blank" rel="noopener noreferrer" className="opacity-50">
-                    {gitHubData.comments + gitHubData.review_comments}
+                    {(gitHubData.comments ?? 0) + (gitHubData.review_comments ?? 0)}
                 </a>
             </div>
         </>

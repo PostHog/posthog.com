@@ -255,6 +255,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       changed_files: Int
       user: GitHubUser
       commenters: [GitHubUser]
+      reviewers: [GitHubUser]
+      reviews_url: String
     }
     type GitHubUser {
       login: String
