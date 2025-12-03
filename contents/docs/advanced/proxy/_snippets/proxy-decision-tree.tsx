@@ -118,9 +118,9 @@ const getRecommendation = (answers: Answer): Recommendation => {
 
     if (answers.framework === 'nuxt') {
         return {
-            method: 'Nuxt routeRules',
+            method: 'Nuxt server routes',
             path: '/docs/advanced/proxy/nuxt',
-            reason: "The routeRules configuration is Nuxt's built-in way to handle proxying through Nitro.",
+            reason: "Server routes are Nuxt's way to intercept and handle requests on the server side.",
         }
     }
 
@@ -134,9 +134,9 @@ const getRecommendation = (answers: Answer): Recommendation => {
 
     if (answers.framework === 'remix') {
         return {
-            method: 'Remix API routes',
+            method: 'Remix resource routes',
             path: '/docs/advanced/proxy/remix',
-            reason: "Remix's API routes with splat routing provide a clean, server-side way to proxy requests.",
+            reason: "Remix's resource routes with splat routing provide a clean, server-side way to proxy requests.",
         }
     }
 

@@ -6,35 +6,115 @@ platformImageUrl: https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_aut
 ---
 
 import ProxyCallout from "../_snippets/proxy-callout.mdx"
+import { Steps, Step } from 'components/Docs/Steps'
 
 <ProxyCallout />
 
 This guide shows you how to use [Pomerium](https://www.pomerium.com/) as a reverse proxy for PostHog.
 
-Pomerium is an identity-aware proxy with two deployment options:
+## How it works
 
-- **Pomerium Zero:** Managed service with a web UI
-- **Pomerium Core:** Self-hosted with YAML configuration
+Pomerium is an identity-aware proxy that sits between your users and backend services. For PostHog, you configure Pomerium to route requests from your domain to PostHog's servers with public access enabled (no authentication required).
 
-Both require creating two routes and a public access policy.
+Here's the request flow:
+
+1. User triggers an event in your app
+2. Request goes to your Pomerium proxy (e.g., `e.yourdomain.com`)
+3. Pomerium matches the request to a route and checks the policy
+4. With public access enabled, Pomerium forwards the request to PostHog
+5. PostHog's response is returned to the user under your domain
+
+**Why public access?** Unlike typical Pomerium use cases where you want to authenticate users, PostHog analytics should work for all visitors including anonymous users. You'll create a policy that allows unauthenticated access.
+
+## Prerequisites
+
+- A domain with DNS pointing to your Pomerium instance
+- Either a [Pomerium Zero](https://www.pomerium.com/zero) account or [Pomerium Core](https://www.pomerium.com/docs/deploy/core) installed
+
+## Choose your setup option
+
+Both options accomplish the same goal. Choose based on your Pomerium deployment:
+
+- [**Pomerium Zero:**](#option-1-pomerium-zero) The managed service with a web-based UI. Use this if you want the simplest setup without managing infrastructure.
+- [**Pomerium Core:**](#option-2-pomerium-core) The self-hosted version configured with YAML files. Use this if you're already running Pomerium Core or prefer configuration as code.
 
 ## Option 1: Pomerium Zero
 
-For the managed service:
+Pomerium Zero uses a web-based console for configuration. You'll create a policy and two routes.
 
-1. Create an "allow all" policy with **Public Access** enabled. See [Pomerium's policy docs](https://www.pomerium.com/docs/capabilities/authorization).
-2. Create two routes using the values below. See [Pomerium's routing docs](https://www.pomerium.com/docs/capabilities/routing).
+<Steps>
+
+<Step title="Create a public access policy">
+
+In the Pomerium Zero console, create a new policy with public access enabled. This allows unauthenticated requests to pass through, which is required for PostHog analytics to work for all visitors.
+
+Configure these settings:
+
+| Setting | Value |
+|---------|-------|
+| Name | `allow-all` (or similar) |
+| Policy Enforcement | Optional |
+| Public Access | Enabled (in Overrides section) |
+
+See [Pomerium's policy documentation](https://www.pomerium.com/docs/capabilities/authorization) for detailed instructions.
+
+</Step>
+
+<Step title="Create the PostHog routes">
+
+Create two routes in the Pomerium Zero console, both using the public access policy you created:
 
 | Route | From | To | Path prefix |
 |-------|------|-----|-------------|
-| Main | `https://e.yourdomain.com` | `https://us.i.posthog.com` | N/A |
-| Assets | `https://e.yourdomain.com` | `https://us-assets.i.posthog.com` | `/static` |
+| PostHog | `https://e.yourdomain.com` | `https://us.i.posthog.com` | (none) |
+| PostHog Assets | `https://e.yourdomain.com` | `https://us-assets.i.posthog.com` | `/static` |
 
-Replace `us` with `eu` for EU region. Apply the "allow all" policy to both routes.
+Replace `e.yourdomain.com` with your subdomain. Replace `us` with `eu` for EU region.
+
+The assets route needs the `/static` prefix so it only matches requests for PostHog's JavaScript SDK and other static files. All other requests go to the main route.
+
+See [Pomerium's routing documentation](https://www.pomerium.com/docs/capabilities/routing) for detailed instructions.
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+In your application code, update your PostHog initialization:
+
+```js
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+})
+```
+
+Replace `e.yourdomain.com` with your actual subdomain.
+
+</Step>
+
+<Step checkpoint title="Verify your setup">
+
+Confirm events are flowing through your proxy:
+
+1. Open your browser's developer tools and go to the **Network** tab
+2. Trigger an event in your app
+3. Look for requests to your subdomain (e.g., `e.yourdomain.com`)
+4. Verify the response status is `200 OK` and you're not prompted to authenticate
+5. Check the [PostHog app](https://app.posthog.com) to confirm events appear
+
+If you see errors, check [troubleshooting](#troubleshooting) below.
+
+</Step>
+
+</Steps>
 
 ## Option 2: Pomerium Core
 
-For self-hosted Pomerium, add these routes to your `config.yaml`:
+<Steps>
+
+<Step title="Add routes to your config">
+
+Add these routes to your Pomerium `config.yaml`:
 
 ```yaml
 routes:
@@ -58,27 +138,71 @@ routes:
 
 Replace `e.yourdomain.com` with your subdomain. Replace `us` with `eu` for EU region.
 
+The `public: true` policy allows unauthenticated access. The `prefix: "/static"` ensures the assets route only matches static file requests.
+
 See [Pomerium's routes documentation](https://www.pomerium.com/docs/reference/routes) for more configuration options.
 
-## Update your PostHog SDK
+</Step>
 
-Use your Pomerium domain as the API host:
+<Step title="Reload Pomerium">
+
+Apply the configuration changes:
+
+```bash
+pomerium-cli config check  # Validate your config
+systemctl reload pomerium  # Or your preferred restart method
+```
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+In your application code, update your PostHog initialization:
 
 ```js
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://us.posthog.com' // Use https://eu.posthog.com for EU region
+  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
 })
 ```
 
-## Troubleshooting
+Replace `e.yourdomain.com` with your actual subdomain.
 
-For common issues like region mismatches, `ui_host` configuration, and 405 errors, see [best practices and common issues](/docs/advanced/proxy#best-practices-and-common-issues).
+</Step>
+
+<Step checkpoint title="Verify your setup">
+
+Confirm events are flowing through your proxy:
+
+1. Test the proxy directly:
+
+    ```bash
+    curl -I https://e.yourdomain.com/decide?v=3
+    ```
+
+    You should see a `200 OK` response without authentication prompts.
+
+2. Open your browser's developer tools and go to the **Network** tab
+3. Trigger an event in your app
+4. Look for requests to your subdomain
+5. Check the [PostHog app](https://app.posthog.com) to confirm events appear
+
+If you see errors, check [troubleshooting](#troubleshooting) below.
+
+</Step>
+
+</Steps>
+
+## Troubleshooting
 
 ### Authentication prompts appearing
 
-If users are being prompted to authenticate, make sure the policy has **Public Access** enabled and is applied to both routes.
+If users are prompted to log in when accessing your proxy, verify your policy has public access enabled and is applied to both routes. See [Pomerium's authorization documentation](https://www.pomerium.com/docs/capabilities/authorization) for policy configuration details.
 
 ### 404 errors on static assets
 
-Check that the assets route has the `/static` prefix configured and points to the correct assets domain.
+If the PostHog SDK fails to load, verify the assets route has the `/static` prefix configured and points to the correct domain (`us-assets.i.posthog.com` or `eu-assets.i.posthog.com`).
+
+### DNS not resolving
+
+If your subdomain doesn't resolve, verify your DNS records point to your Pomerium instance. For Pomerium Zero, check [Pomerium's networking documentation](https://www.pomerium.com/docs/capabilities/routing) to ensure the subdomain is configured correctly.

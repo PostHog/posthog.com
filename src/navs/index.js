@@ -2755,11 +2755,11 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/netlify',
                         },
                         {
-                            name: 'Next.js',
+                            name: 'Next.js rewrites',
                             url: '/docs/advanced/proxy/nextjs',
                         },
                         {
-                            name: 'Next.js middleware',
+                            name: 'Next.js proxy file',
                             url: '/docs/advanced/proxy/nextjs-middleware',
                         },
                         {
@@ -2793,6 +2793,10 @@ export const docsMenu = {
                         {
                             name: 'Vercel',
                             url: '/docs/advanced/proxy/vercel',
+                        },
+                        {
+                            name: 'Troubleshooting',
+                            url: '/docs/advanced/proxy/troubleshooting',
                         },
                     ],
                 },

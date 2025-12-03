@@ -3,7 +3,7 @@ title: Caddy reverse proxy
 sidebar: Docs
 showTitle: true
 showStepsToc: true
-platformImageUrl: https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/caddysquare_cd0e535312.png
+platformImageUrl: https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/caddylogo_9a7a28e702.png
 ---
 
 import ProxyCallout from "../_snippets/proxy-callout.mdx"
@@ -13,21 +13,25 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 This guide shows you how to configure [Caddy](https://caddyserver.com/) as a reverse proxy for PostHog.
 
-Caddy automatically handles TLS certificates, making setup simple. There are three options:
-
-1. **Basic setup:** Proxy PostHog through a dedicated subdomain like `e.yourdomain.com`
-2. **Use a subpath:** Proxy PostHog through a path on an existing domain like `yourdomain.com/ph-proxy`. Useful when running other services on the same domain or for local testing.
-3. **Run with Docker:** Same as Option 1, but runs Caddy in a Docker container
+Caddy automatically handles TLS certificates via Let's Encrypt, making setup simple compared to other web servers. You don't need to manually configure SSL - Caddy provisions and renews certificates for you.
 
 ## Prerequisites
 
-- [Caddy installed](https://caddyserver.com/docs/install) on your server or via Docker
+- [Caddy installed](https://caddyserver.com/docs/install) on your server or Docker
 - A domain with DNS records pointing to your server
-- Ports 80 and 443 open and directed toward Caddy
+- Ports 80 and 443 open if using a public subdomain
+
+## Choose your setup option
+
+All three options accomplish the same goal of routing PostHog through your domain to bypass ad blockers. Choose the one that fits your infrastructure:
+
+- [Option 1: Basic setup](#option-1-basic-setup): Routes all PostHog traffic through a dedicated subdomain like `e.yourdomain.com`. Use this for production deployments where you want a clean, simple proxy.
+- [Option 2: Subpath routing](#option-2-subpath-routing): Routes PostHog through a path on an existing domain like `yourdomain.com/ph-proxy`. Use this when you're running multiple services on the same domain or for local development and testing.
+- [Option 3: Docker deployment](#option-3-docker-deployment): Same as Option 1, but runs Caddy in a Docker container. Use this if your infrastructure is containerized or you prefer container management.
 
 ## Option 1: Basic setup
 
-This setup proxies all PostHog requests through your own subdomain.
+This setup proxies all PostHog requests through a dedicated subdomain.
 
 <Steps>
 
@@ -36,7 +40,7 @@ This setup proxies all PostHog requests through your own subdomain.
 In your working directory, create a file named `Caddyfile`:
 
 ```caddy
-${YOUR_TRACKING_DOMAIN} {
+e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
@@ -52,7 +56,11 @@ ${YOUR_TRACKING_DOMAIN} {
 }
 ```
 
-Replace `${YOUR_TRACKING_DOMAIN}` with your subdomain, like `e.yourdomain.com`. Replace `us` with `eu` for EU region.
+Replace `e.yourdomain.com` with your chosen subdomain. Replace `us` with `eu` for EU region.
+
+The `header_up Host` directive tells PostHog which domain the request is for. Without this, PostHog won't know how to route your request and you'll get 401 errors.
+
+The `header_down -Access-Control-Allow-Origin` directive removes CORS headers from PostHog's response. This prevents conflicts with your own CORS configuration.
 
 </Step>
 
@@ -64,34 +72,53 @@ Run this command from the same directory as your `Caddyfile`:
 caddy start
 ```
 
+Caddy will automatically request a TLS certificate from [Let's Encrypt](https://letsencrypt.org) for your subdomain. The first start may take a minute while it provisions the certificate.
+
 See [Caddy's quick start guide](https://caddyserver.com/docs/quick-starts/reverse-proxy) for more details.
 
 </Step>
 
 <Step title="Update your PostHog SDK">
 
-Point PostHog to your tracking domain:
-
+In your application code, update your PostHog initialization to use your tracking subdomain:
 ```js
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://us.posthog.com' // Use https://eu.posthog.com for EU region
+  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
 })
 ```
 
-Replace `e.yourdomain.com` with your actual tracking domain.
+Replace `e.yourdomain.com` with your actual subdomain.
+
+The `ui_host` must point to PostHog's actual domain so features like the toolbar link correctly.
+
+</Step>
+
+<Step checkpoint title="Verify your setup">
+
+Confirm events are flowing through your proxy:
+
+1. Open your browser's developer tools and go to the Network tab
+2. Trigger an event in your app, like a page view
+3. Look for a request to your subdomain (e.g., `e.yourdomain.com`)
+4. Verify the response is `200 OK`
+5. Check the [PostHog app](https://app.posthog.com) to confirm events appear
+
+If you see errors, check [troubleshooting](#troubleshooting) below.
 
 </Step>
 
 </Steps>
 
-## Option 2: Use a subpath
+## Option 2: Subpath routing
 
-If you're running other services on the same domain, you can proxy PostHog through a subpath like `/ph-proxy`.
+If you're running other services on the same domain or testing locally, you can proxy PostHog through a subpath like `/ph-proxy`.
 
 <Steps>
 
 <Step title="Create a Caddyfile with subpath routing">
+
+In your working directory, create a file named `Caddyfile`:
 
 ```caddy
 :2015 {
@@ -115,16 +142,23 @@ If you're running other services on the same domain, you can proxy PostHog throu
 }
 ```
 
+Replace `us` with `eu` for EU region.
+
 This configuration:
-- Routes PostHog requests through `/ph-proxy`
-- Serves local files from the same directory
-- Listens on port 2015 for local testing
+
+- Listens on port 2015 for local testing (no TLS certificate needed)
+- Routes requests from `/ph-proxy` to PostHog
+- Uses `handle_path` to strip the `/ph-proxy` prefix before forwarding
+- Uses `rewrite` to reconstruct the correct path for PostHog
+- Serves local files from the same directory for testing
+
+The `rewrite` directive is necessary because PostHog expects requests like `/static/array.js`, not `/ph-proxy/static/array.js`. The `handle_path` directive strips the prefix, then `rewrite` reconstructs the path.
 
 </Step>
 
-<Step title="Create a test HTML file">
+<Step title="Create a test HTML file " badge="optional">
 
-In the same directory, create `home.html` to test your proxy:
+If you want to test your proxy locally, create a file named `home.html` in the same directory:
 
 ```html
 <!DOCTYPE html>
@@ -140,39 +174,74 @@ In the same directory, create `home.html` to test your proxy:
 
     posthog.init('<ph_project_api_key>', {
       api_host: 'http://localhost:2015/ph-proxy',
-      ui_host: 'https://us.posthog.com' // Use https://eu.posthog.com for EU region
+      ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
     })
   </script>
 </body>
 </html>
 ```
 
+This file includes the PostHog snippet configured to use your local proxy. You'll use it to verify the proxy works before deploying to production.
+
 </Step>
 
-<Step title="Test your setup">
+<Step title="Start Caddy and test locally">
 
-1. Start Caddy: `caddy start`
-2. Open `http://localhost:2015/home.html` in your browser
-3. Check your browser's network tab to verify requests go to `/ph-proxy`
+Start Caddy from your working directory:
+
+```bash
+caddy start
+```
+
+Open `http://localhost:2015/home.html` in your browser. Check the **Network** tab to verify requests go to `localhost:2015/ph-proxy`. You should see `200 OK` responses.
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+For production deployment, update your application code to use your proxy path:
+
+```js
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://yourdomain.com/ph-proxy',
+  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+})
+```
+
+Replace `yourdomain.com` with your actual domain and adjust the Caddyfile to listen on ports 80/443 instead of 2015.
+
+</Step>
+
+<Step checkpoint title="Verify your setup">
+
+Confirm events are flowing through your proxy:
+
+1. Open your browser's developer tools and go to the Network tab
+2. Trigger an event in your app, like a page view
+3. Look for a request to your domain with `/ph-proxy` path
+4. Verify the response is `200 OK`
+5. Check the [PostHog app](https://app.posthog.com) to confirm events appear
+
+If you see errors, check [troubleshooting](#troubleshooting) below.
 
 </Step>
 
 </Steps>
 
-## Option 3: Run Caddy with Docker
+## Option 3: Docker deployment
 
-You can also run Caddy in a Docker container if you prefer containerized deployments.
+If you prefer containerized deployments, you can run Caddy in Docker with the same configuration as option 1.
 
 <Steps>
 
 <Step title="Create your Caddyfile">
 
-On your server, create a Caddyfile in `/etc/caddy`:
+On your server, create a file named `Caddyfile` in a directory like `/etc/caddy`:
 
 ```caddy
-${YOUR_TRACKING_DOMAIN} {
+e.yourdomain.com {
   header {
-    Access-Control-Allow-Origin https://${YOUR_TRACKING_DOMAIN}
+    Access-Control-Allow-Origin https://yourdomain.com
   }
 
   handle /static/* {
@@ -190,7 +259,9 @@ ${YOUR_TRACKING_DOMAIN} {
 }
 ```
 
-Replace `${YOUR_TRACKING_DOMAIN}` with your domain. If you want to test from `localhost` or other domains, adjust the `Access-Control-Allow-Origin` header accordingly.
+Replace `e.yourdomain.com` with your subdomain and `yourdomain.com` with your application domain. Replace `us` with `eu` for EU region.
+
+The `Access-Control-Allow-Origin` header allows your application domain to make requests to the proxy. Adjust this if you need to allow requests from multiple domains or `localhost` for testing.
 
 </Step>
 
@@ -205,22 +276,43 @@ docker run -p 80:80 -p 443:443 \
   caddy
 ```
 
-This mounts your Caddyfile and persists Caddy's data, including certificates, in a Docker volume.
+This command:
 
-See the [Caddy Docker documentation](https://hub.docker.com/_/caddy) for more details about persisting data in the `/data` folder.
+- Mounts your Caddyfile into the container
+- Persists Caddy's data (including TLS certificates) in a Docker volume named `caddy_data`
+
+The volume persistence is critical. Without it, Caddy will request new certificates every time the container restarts, which can hit [Let's Encrypt's](https://letsencrypt.org) rate limits and cause your proxy to fail.
+
+See the [Caddy Docker documentation](https://hub.docker.com/_/caddy) for more details.
 
 </Step>
 
 <Step title="Update your PostHog SDK">
 
-Use your tracking domain as the API host:
+In your application code, update your PostHog initialization to use your tracking subdomain:
 
 ```js
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://us.posthog.com' // Use https://eu.posthog.com for EU region
+  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
 })
 ```
+
+Replace `e.yourdomain.com` with your actual subdomain.
+
+</Step>
+
+<Step checkpoint title="Verify your setup">
+
+Confirm events are flowing through your proxy:
+
+1. Open your browser's developer tools and go to the Network tab
+2. Trigger an event in your app, like a page view
+3. Look for a request to your subdomain (e.g., `e.yourdomain.com`)
+4. Verify the response is `200 OK`
+5. Check the [PostHog app](https://app.posthog.com) to confirm events appear
+
+If you see errors, check [troubleshooting](#troubleshooting) below.
 
 </Step>
 
@@ -228,12 +320,37 @@ posthog.init('<ph_project_api_key>', {
 
 ## Troubleshooting
 
-### CORS errors
+### TLS certificate provisioning fails
 
-If you see "has been blocked by CORS" errors in your browser console, add explicit CORS headers to your Caddyfile:
+If Caddy can't obtain a TLS certificate:
+
+1. Verify your DNS records point to your server's IP address
+2. Check that ports 80 and 443 are open and accessible from the internet
+3. Ensure no other service is using ports 80 or 443
+4. Check Caddy's logs with `caddy logs` for specific errors
+
+Caddy needs port 80 temporarily during certificate provisioning, even if you only serve traffic on 443. Let's Encrypt uses HTTP-01 challenges to verify domain ownership.
+
+If you hit Let's Encrypt's rate limits of 5 failed attempts per hour, wait an hour and try again. Using a Docker volume prevents this by persisting certificates.
+
+### 401 Unauthorized errors
+
+If PostHog returns `401 Unauthorized` when capturing events:
+
+1. Verify you set `header_up Host` to the correct PostHog domain
+2. Check that your PostHog region matches
+3. Confirm your project API key is correct in the SDK initialization
+
+The `header_up Host` directive is essential. PostHog uses the Host header to identify which project the request belongs to. Without it, PostHog can't authenticate your events.
+
+### CORS errors in browser console
+
+If you see `No 'Access-Control-Allow-Origin' header` errors:
+
+Add explicit CORS headers to your Caddyfile:
 
 ```caddy
-${YOUR_TRACKING_DOMAIN} {
+e.yourdomain.com {
   @options method OPTIONS
   handle @options {
     header Access-Control-Allow-Origin "https://yourdomain.com"
@@ -263,4 +380,24 @@ ${YOUR_TRACKING_DOMAIN} {
 }
 ```
 
-Replace `https://yourdomain.com` with the origin of your website where PostHog is installed.
+Replace `https://yourdomain.com` with your application's origin. For multiple origins or testing, use `*` instead, but be aware this is less secure.
+
+### Static assets return 404
+
+If the PostHog SDK fails to load or you see 404 errors for `/static/*` requests:
+
+1. Verify your Caddyfile has a `handle /static/*` block
+2. Check that it points to the correct assets domain, `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`
+3. Confirm the assets domain matches your PostHog region
+
+The `/static/*` route must be defined before the catch-all `handle` block. Caddy evaluates handlers in order, so place specific paths before generic ones.
+
+### Port conflicts
+
+If Caddy fails to start with "address already in use":
+
+1. Check what's using ports 80 and 443: `sudo lsof -i :80 -i :443`
+2. Stop the conflicting service or configure Caddy to use different ports
+3. If using different ports, you'll need to include the port in your `api_host` (e.g., `https://e.yourdomain.com:8443`)
+
+Common conflicts include Apache, Nginx, or other Caddy instances.

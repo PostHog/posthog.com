@@ -10,150 +10,145 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 <ProxyCallout />
 
-This guide shows you how to use [Pomerium](https://www.pomerium.com/) as a reverse proxy for PostHog.
+This guide shows you how to use [Nuxt server routes](https://nuxt.com/docs/guide/directory-structure/server) as a reverse proxy for PostHog.
 
-Pomerium is an identity-aware proxy that can securely proxy traffic to PostHog. There are two options:
+## How it works
 
-1. **Pomerium Zero:** Managed service with a web UI
-2. **Pomerium Core:** Self-hosted with configuration files
+Nuxt server routes run on the server and can intercept requests before they reach the client. When a request matches your proxy path, the server route fetches the response from PostHog and returns it under your domain.
 
-## Option 1: Pomerium Zero
+Here's the request flow:
 
-Pomerium Zero is the managed service with a web-based interface.
+1. User triggers an event in your app
+2. Request goes to your domain (e.g., `yourdomain.com/ph/e`)
+3. Nuxt's server middleware intercepts requests matching your proxy path
+4. The server route fetches the response from PostHog's servers
+5. PostHog's response is returned to the user under your domain
 
-### Prerequisites
+This works because the proxy runs server-side, so the browser only sees requests to your domain. Ad blockers that filter by domain won't block these requests.
 
-- A [Pomerium Zero](https://www.pomerium.com/zero) account
+## Prerequisites
 
-### Setup
+This guide requires a Nuxt 3 project with server-side rendering enabled (the default).
+
+## Setup
 
 <Steps>
 
-<Step title="Create an allow all policy">
+<Step title="Create the server route">
 
-1. Log in to [Pomerium Zero](https://console.pomerium.app/).
-2. Go to **Manage** in the sidebar, then click **Policies**.
-3. Click **New Policy**.
-4. Name the policy `allow all`.
-5. Set **Policy Enforcement** to **Optional**.
-6. In the **Overrides** section, enable **Public Access**.
-7. Click **Save Policy**.
+Create a file at `server/routes/ph/[...path].ts`:
 
-This policy allows public access to your PostHog proxy, so analytics work for everyone.
+```ts
+export default defineEventHandler(async (event) => {
+  const path = event.context.params?.path || ''
 
-See [Pomerium's policy documentation](https://www.pomerium.com/docs/capabilities/authorization) for more details on policy configuration.
+  const hostname = path.startsWith('static/')
+    ? 'us-assets.i.posthog.com'
+    : 'us.i.posthog.com'
 
-</Step>
+  const targetUrl = `https://${hostname}/${path}`
 
-<Step title="Create the main PostHog route">
+  const headers = new Headers()
+  headers.set('host', hostname)
 
-1. Click **New Route** to create a new route.
-2. Select **Custom Route**.
-3. Name the route `PostHog`.
-4. Set **From** to your subdomain, like `https://e.yourdomain.com`.
-5. Set **To** to `https://us.i.posthog.com` (or `https://eu.i.posthog.com` for EU region).
-6. In the **Policies** dropdown, select the `allow all` policy.
-7. Click **Save Route**.
+  // Forward relevant headers
+  const contentType = getHeader(event, 'content-type')
+  if (contentType) {
+    headers.set('content-type', contentType)
+  }
 
-</Step>
+  // Forward client IP for geolocation
+  const clientIp = getHeader(event, 'x-forwarded-for') || getRequestIP(event)
+  if (clientIp) {
+    headers.set('x-forwarded-for', clientIp)
+  }
 
-<Step title="Create the PostHog assets route">
+  const body = event.method !== 'GET' && event.method !== 'HEAD'
+    ? await readRawBody(event)
+    : undefined
 
-1. Click **New Route** to create another route.
-2. Select **Custom Route**.
-3. Name the route `PostHog Assets`.
-4. Set **From** to the same subdomain: `https://e.yourdomain.com`.
-5. Set **To** to `https://us-assets.i.posthog.com` (or `https://eu-assets.i.posthog.com` for EU region).
-6. In the **Policies** dropdown, select the `allow all` policy.
-7. Click **Path Matching** in the sidebar.
-8. Set **Prefix** to `/static`.
-9. Click **Save Route**.
+  const response = await fetch(targetUrl, {
+    method: event.method,
+    headers,
+    body,
+  })
+
+  // Copy response headers
+  const responseHeaders: Record<string, string> = {}
+  response.headers.forEach((value, key) => {
+    if (key.toLowerCase() !== 'content-encoding' && key.toLowerCase() !== 'content-length') {
+      responseHeaders[key] = value
+    }
+  })
+
+  setResponseHeaders(event, responseHeaders)
+  setResponseStatus(event, response.status)
+
+  return response.text()
+})
+```
+
+Replace `us` with `eu` for EU region.
+
+The `[...path]` in the filename is a Nuxt [catch-all route](https://nuxt.com/docs/guide/directory-structure/server#catch-all-route) that matches any path after `/ph/`. This handles all PostHog endpoints like `/ph/e`, `/ph/decide`, and `/ph/static/array.js`.
+
+Here's what the code does:
+
+- Routes `/static/*` requests to PostHog's asset server and everything else to the main API
+- Sets the `host` header so PostHog can route the request correctly
+- Forwards the client's IP address for accurate geolocation
+- Strips content encoding headers to avoid issues with compressed responses
 
 </Step>
 
 <Step title="Update your PostHog SDK">
 
-Use your Pomerium domain as the API host:
+In your Nuxt app, update your PostHog initialization to use your proxy path:
 
-```js
-posthog.init('<ph_project_api_key>', {
-  api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://app.posthog.com'
+```ts
+// plugins/posthog.client.ts
+import { defineNuxtPlugin } from '#app'
+import posthog from 'posthog-js'
+
+export default defineNuxtPlugin(() => {
+  const runtimeConfig = useRuntimeConfig()
+
+  posthog.init(runtimeConfig.public.posthogKey, {
+    api_host: '/ph',
+    ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  })
+
+  return {
+    provide: {
+      posthog
+    }
+  }
 })
 ```
 
-Replace `e.yourdomain.com` with your actual subdomain.
+The `api_host` tells the SDK where to send events. Using a relative path ensures requests go to your domain. The `ui_host` must point to PostHog's actual domain so features like the toolbar link correctly.
 
 </Step>
 
-</Steps>
+<Step title="Deploy your changes">
 
-## Option 2: Pomerium Core
+Commit and push your changes. The server route will be active once deployed.
 
-Pomerium Core is the self-hosted version configured with YAML files.
-
-### Prerequisites
-
-- [Pomerium Core](https://www.pomerium.com/docs/deploy/core) installed and configured
-
-### Setup
-
-<Steps>
-
-<Step title="Add routes to your config.yaml">
-
-Add these routes to your Pomerium `config.yaml` file:
-
-```yaml
-routes:
-  - from: https://e.yourdomain.com
-    to: https://us.i.posthog.com
-    policy:
-      - allow:
-          or:
-            - public: true
-    name: "PostHog"
-
-  - from: https://e.yourdomain.com
-    to: https://us-assets.i.posthog.com
-    prefix: "/static"
-    policy:
-      - allow:
-          or:
-            - public: true
-    name: "PostHog Assets"
-
-# rest of your configuration
-```
-
-Replace `e.yourdomain.com` with your subdomain. Replace `us` with `eu` for EU region.
-
-See [Pomerium's routes documentation](https://www.pomerium.com/docs/reference/routes) for more details on route configuration.
+In development, restart your dev server after creating the server route.
 
 </Step>
 
-<Step title="Restart Pomerium">
+<Step checkpoint title="Verify your setup">
 
-Restart Pomerium to apply the configuration changes:
+Confirm events are flowing through your proxy:
 
-```bash
-pomerium restart
-```
+1. Open your browser's developer tools and go to the **Network** tab
+2. Navigate to your site or trigger an event
+3. Look for requests to your domain with your proxy path (e.g., `yourdomain.com/ph`)
+4. Verify the response status is `200 OK`
+5. Check the [PostHog app](https://app.posthog.com) to confirm events appear in your activity feed
 
-</Step>
-
-<Step title="Update your PostHog SDK">
-
-Use your Pomerium domain as the API host:
-
-```js
-posthog.init('<ph_project_api_key>', {
-  api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://app.posthog.com'
-})
-```
-
-Replace `e.yourdomain.com` with your actual subdomain.
+If you see errors, check [troubleshooting](#troubleshooting) below.
 
 </Step>
 
@@ -161,35 +156,18 @@ Replace `e.yourdomain.com` with your actual subdomain.
 
 ## Troubleshooting
 
-### Routes not accessible
+### Server route not matching
 
-Make sure:
-1. Your DNS records point to your Pomerium instance.
-2. The `allow all` policy is configured correctly with **Public Access** enabled.
-3. Both routes (main and assets) are configured and active.
+If requests to your proxy path return 404:
 
-### 404 errors on static assets
+1. Verify the file is at `server/routes/ph/[...path].ts` (not `server/api/`)
+2. Check the file extension is `.ts` not `.js` if you're using TypeScript
+3. Restart your dev server after creating the file
 
-Check that:
-1. The assets route has the `/static` prefix configured.
-2. The assets route points to the correct assets domain (`us-assets.i.posthog.com` or `eu-assets.i.posthog.com`).
-3. The assets route is listed before or after the main route (order usually doesn't matter, but try reordering if issues persist).
+### Static site generation
 
-### Authentication prompts appearing
+If you're using `nuxt generate` for static site generation, server routes won't be available. Use a CDN-level proxy like [Cloudflare Workers](/docs/advanced/proxy/cloudflare) or a platform-specific option like [Netlify redirects](/docs/advanced/proxy/netlify) or [Vercel rewrites](/docs/advanced/proxy/vercel) instead.
 
-If users are being prompted to authenticate:
-1. Make sure the policy is set to **Optional** enforcement.
-2. Verify **Public Access** is enabled in the policy overrides.
-3. Check that the policy is applied to both routes.
+### All users show same location
 
-## Pomerium Zero vs Core
-
-**Use Pomerium Zero if:**
-- You want a managed service
-- You prefer a web UI for configuration
-- You don't want to manage infrastructure
-
-**Use Pomerium Core if:**
-- You need full control over your deployment
-- You prefer configuration as code (YAML)
-- You're already self-hosting Pomerium
+If geolocation data is wrong or all users appear in the same location, verify the `x-forwarded-for` header is being set correctly. If you're behind multiple proxies, you may need to adjust which header value is forwarded.

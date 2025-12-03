@@ -1,0 +1,170 @@
+---
+title: Troubleshooting reverse proxies
+sidebar: Docs
+showTitle: true
+---
+
+This guide covers common issues that apply to all reverse proxy setups. For platform-specific problems, check the troubleshooting section in your specific proxy guide.
+
+## Events not appearing in PostHog
+
+If your proxy seems to be working (returning `200 OK`) but events don't appear in PostHog:
+
+### Check your API key
+
+Verify your API key is correct and matches your project. You can find your project API key in [PostHog settings](https://us.posthog.com/settings/project#variables) (or [EU settings](https://eu.posthog.com/settings/project#variables)).
+
+A mismatched API key sends events to the wrong project or nowhere at all. Double-check you're using the project API key, not a personal API key.
+
+### Verify the region matches
+
+Your proxy must point to the same region as your PostHog project:
+
+| Region | API domain | Assets domain |
+|--------|------------|---------------|
+| US | `us.i.posthog.com` | `us-assets.i.posthog.com` |
+| EU | `eu.i.posthog.com` | `eu-assets.i.posthog.com` |
+
+Check your project URL in the [PostHog app](https://app.posthog.com). If it starts with `eu.posthog.com`, you're on EU. If it starts with `us.posthog.com` or just `app.posthog.com`, you're on US.
+
+### Wait for ingestion
+
+Events can take a few minutes to appear in PostHog. Check the [activity feed](https://us.posthog.com/activity/explore) (or [EU activity feed](https://eu.posthog.com/activity/explore)) for recent events before assuming something is broken.
+
+## 401 Unauthorized errors
+
+A `401` error means PostHog rejected your request. Common causes:
+
+### Missing or incorrect Host header
+
+Your proxy must set the `Host` header to the PostHog domain you're proxying to. Without it, PostHog can't route your request.
+
+For example, if proxying to `us.i.posthog.com`, set `Host: us.i.posthog.com`.
+
+### Region mismatch
+
+If your proxy points to US but your project is on EU (or vice versa), you'll get `401` errors. See [verify the region matches](#verify-the-region-matches) above.
+
+### Request body stripped
+
+Some hosting platforms strip the request body during proxying, removing your API key. If you've verified everything else is correct, try a different proxy method or platform.
+
+## 405 Method Not Allowed errors
+
+A `405` error means your proxy is rejecting the HTTP method. PostHog uses both `GET` and `POST` requests:
+
+- `GET` for loading the JavaScript SDK and configuration
+- `POST` for sending events and session recordings
+
+Ensure your proxy allows both methods on all paths.
+
+## 502 Bad Gateway errors
+
+A `502` error means your proxy can't reach PostHog's servers. Common causes:
+
+### Network connectivity
+
+Verify your server can reach PostHog:
+
+```bash
+curl -I https://us.i.posthog.com/decide?v=3
+```
+
+You should see a `200 OK` response. If not, check:
+
+1. DNS resolution is working
+2. No firewall is blocking outbound HTTPS (port 443)
+3. Your server has internet access
+
+### SSL/TLS issues
+
+If you see SSL handshake errors, your proxy may not be configured for SNI (Server Name Indication). PostHog uses virtual hosting, so you must send the correct hostname during the TLS handshake.
+
+Most proxy tools have an option like `proxy_ssl_server_name` (nginx) or SNI settings to enable this.
+
+## CORS errors
+
+If you see `Access-Control-Allow-Origin` errors in your browser console:
+
+### Using a relative path
+
+The simplest fix is to use a relative path for `api_host`:
+
+```js
+posthog.init('<ph_project_api_key>', {
+  api_host: '/ph',
+  ui_host: 'https://us.posthog.com'
+})
+```
+
+This avoids cross-origin issues because requests go to the same domain as your page.
+
+### Domain mismatch
+
+CORS errors often occur when your `api_host` domain doesn't match your page domain. For example, if your site is `www.example.com` but you set `api_host` to `https://example.com/ph`, browsers treat this as cross-origin.
+
+Either use a relative path or ensure the domains match exactly.
+
+## Toolbar or recordings not working
+
+If events work but the toolbar doesn't load or session recordings won't play:
+
+### Missing ui_host
+
+When using a proxy, you must set `ui_host` to PostHog's actual domain:
+
+```js
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+})
+```
+
+Without `ui_host`, these features try to load from your proxy domain instead of PostHog, breaking them.
+
+## All users show the same location
+
+If geolocation is wrong or everyone appears in one location:
+
+### Missing IP forwarding
+
+PostHog uses the client IP address for geolocation. When using a proxy, you must forward the original client IP using the `X-Forwarded-For` header.
+
+Your proxy should set:
+
+```
+X-Forwarded-For: <original-client-ip>
+```
+
+Check your proxy configuration to ensure this header is being set and not stripped.
+
+### Multiple proxies
+
+If you're behind multiple proxies (like Cloudflare + your own proxy), the `X-Forwarded-For` header may contain multiple IPs. Ensure you're forwarding the original client IP, not your proxy's IP.
+
+## Large events or recordings failing
+
+If small events work but large ones fail silently:
+
+### Size limits
+
+PostHog accepts events up to 1MB and session recordings up to 64MB per message. Check if your proxy or hosting platform has lower limits.
+
+Common places to check:
+
+- Web server body size limits (nginx: `client_max_body_size`, Apache: `LimitRequestBody`)
+- CDN/WAF request size limits
+- Serverless function payload limits
+
+### Compression issues
+
+Some proxies mishandle compressed responses. If you see truncated data or decoding errors, try:
+
+1. Removing `Accept-Encoding` from the request so PostHog sends uncompressed data
+2. Removing `Content-Encoding` and `Content-Length` from the response
+
+## Still having issues?
+
+If you're using the [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy), [contact PostHog support](mailto:support@posthog.com) for help.
+
+For self-hosted proxies, PostHog can't debug your specific configuration. Check your proxy's logs and documentation, or ask in the [PostHog community](/community).
