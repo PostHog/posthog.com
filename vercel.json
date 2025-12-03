@@ -1659,6 +1659,10 @@
         { "source": "/example-components", "destination": "/handbook/engineering/posthog-com/markdown" },
         { "source": "/handbook/content/components", "destination": "/handbook/engineering/posthog-com/markdown" },
         { "source": "/handbook/engineering/storybook", "destination": "/handbook/engineering/posthog-com/markdown" },
+        {
+            "source": "/docs/error-tracking/upload-source-maps/:path*",
+            "destination": "/docs/error-tracking/upload-symbols/:path*"
+        },
         { "source": "/startups/[...slug]", "destination": "/startups" }
     ],
     "headers": [
