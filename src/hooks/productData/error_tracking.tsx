@@ -82,7 +82,7 @@ export const errorTracking = {
             title: 'Stack traces',
             headline: 'Stack traces',
             description:
-                "Get code context automatically with PostHog's server-side libraries, or upload source maps for front-end frameworks",
+                "Get code context automatically with PostHog's server-side libraries, or upload symbols for front-end frameworks",
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_trace_3fc569059c.png',

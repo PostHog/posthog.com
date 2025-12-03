@@ -5,12 +5,10 @@ const StepUploadSymbols = ({
     urlPath,
     framework,
     symbolType = 'source maps',
-    basePath = 'upload-source-maps',
 }: {
     urlPath: string
     framework: string
     symbolType?: string
-    basePath?: string
 }) => {
     return (
         <>
@@ -19,7 +17,12 @@ const StepUploadSymbols = ({
                 {symbolType} to generate accurate stack traces.
             </p>
             <p>Let's continue to the next section.</p>
-            <CallToAction className="my-2" size="sm" to={`/docs/error-tracking/${basePath}/${urlPath}`} external={true}>
+            <CallToAction
+                className="my-2"
+                size="sm"
+                to={`/docs/error-tracking/upload-symbols/${urlPath}`}
+                external={true}
+            >
                 Upload {symbolType} {framework ? `for ${framework}` : ''}
             </CallToAction>
         </>
