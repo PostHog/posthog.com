@@ -934,6 +934,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/development-process',
             },
             {
+                name: 'Security best practices',
+                url: '/handbook/engineering/security',
+            },
+            {
                 name: 'Setting up SSL locally',
                 url: '/handbook/engineering/setup-ssl-locally',
             },
