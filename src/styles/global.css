@@ -2631,3 +2631,7 @@ article.reader-view-content-container:has(.quest-sidebar) {
 .dark .ph-mapbox-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
     border-left-color: rgb(30 31 35) !important;
 }
+
+* {
+    @apply !shadow-none !backdrop-blur-none;
+}
