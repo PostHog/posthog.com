@@ -22,97 +22,24 @@ import StepVerifySymbolsUpload from '../_snippets/step-verify-symbols-upload.mdx
 
 </Step>
 
-<Step title="Inject" badge="required">
+<Step title="Inject and upload" badge="required">
 
-<CalloutBox icon="IconInfo" title="Expo 50 or later" type="fyi">
+<CalloutBox icon="IconInfo" title="[AGP 8](https://developer.android.com/build/releases/gradle-plugin) or later" type="fyi">
 
-Automatic source map injection works only in React Native apps using Expo 50 or later, as it relies on Expo’s built-in [debug ID](https://docs.expo.dev/versions/latest/config/metro/#source-map-debug-id) injection.
+Automatic mappings uploading is handled through the Gradle build process on Android.
 
-</CalloutBox>
+Install the [PostHog Android Gradle Plugin](https://github.com/PostHog/posthog-android/blob/main/posthog-android-gradle-plugin/CHANGELOG.md).
 
-Create or update the [metro.config.js](https://docs.expo.dev/versions/latest/config/metro/) file in your app's root directory so that it looks like this:
-
-```diff
-
--const { getDefaultConfig } = require("expo/metro-config");
-+const { getPostHogExpoConfig } = require('posthog-react-native/metro')
-
-
--const config = getDefaultConfig(__dirname);
-+const config = getPostHogExpoConfig(__dirname)
-
-
-module.exports = config
-```
-
-</Step>
-
-<Step title="Upload" badge="required">
-
-<CalloutBox icon="IconInfo" title="No automatic source map uploads on React Native web" type="action">
-
-Automatic source map uploading is handled through the Gradle build process on Android and the Xcode build process on iOS. For React Native web, please use our [CLI](/docs/error-tracking/upload-source-maps/cli#upload) instead.
-
-</CalloutBox>
-
-1. Expo: Update the [app.json](https://docs.expo.dev/versions/latest/config/app/#plugins) file in your app's root directory.
-
-Expo Plugins that add modifications can only be used with [prebuilding](https://docs.expo.dev/workflow/continuous-native-generation/) and managed [EAS Build](https://docs.expo.dev/build/introduction/).
-
-If you can use the `posthog-react-native/expo` plugin, skip steps 2 and 3. If not, proceed with steps 2 and 3.
-
-Add the `posthog-react-native/expo` plugin under the `expo.plugins`.
-
-```diff
-
-{
-  "expo": {
+```kotlin
+// Available through mavenCentral()
+plugins {
+    id("com.posthog.android") version "$version"
     ...
-    "plugins": [
-      ...
-+     "posthog-react-native/expo"
-    ]
-  }
 }
-```
-
-2. Android: Update the `/android/app/build.gradle` file from your app's root directory so that it looks like this:
-
-```diff
-
-...
-
-// This must be placed directly above the following `android` block.
-+apply from: new File(["node", "--print", "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog.gradle')"].execute().text.trim())
-
-
-android {
-  ...
-}
-```
-
-3. iOS: Update the `/ios/$yourProjectName.xcodeproj/project.pbxproj` file (replace `$yourProjectName` with your project's actual name). You need to locate the `Bundle React Native code and images` build step.
-
-To do this through Xcode, open your project in Xcode, go to the project settings, navigate to Build Phases, select Bundle React Native code and images, and apply the changes shown below.
-
-```diff
-
-...
-
--`"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
-+/bin/sh `"$NODE_BINARY" --print "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog-xcode.sh')"` `"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
-```
-
-4. Web: Ensure that your React Native web build generates source maps.
-
-```bash
-# Example using React Native and Expo with the --source-maps flag.
-# Files are usually under the '$buildFolder/_expo/static/js/web' folder ($name.js and $name.js.map)
-npx expo export --source-maps --platform web
 ```
 
 </Step>
 
-<StepVerifySymbolsUpload />
+<StepVerifySymbolsUpload symbolType="mappings"/>
 
 </Steps>
