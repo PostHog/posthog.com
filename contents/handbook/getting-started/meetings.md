@@ -31,7 +31,7 @@ The Monday all-hands features a few regular sections and is recorded in [this do
 - **Q&A with James & Tim:** Ask the founders anything you want
 - **Demos:** Show us what you've worked on last week
 
-### No recurring meeting days (Tuesdays & Thursdays)
+### No meeting days (Tuesdays & Thursdays)
 
 We try to keep these days focused on deep work. Therefore, we run no planned meetings on these days.
 
