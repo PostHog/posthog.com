@@ -1767,7 +1767,7 @@ export const companyMenu = {
             name: 'Changelog',
             icon: 'IconCalendar',
             color: 'red',
-            url: '/changelog/2025',
+            url: '/changelog',
         },
         { name: 'People', icon: 'IconPeople', color: 'blue', url: '/people' },
         { name: 'Handbook', icon: 'IconBook', color: 'seagreen', url: '/handbook', children: handbookSidebar },
