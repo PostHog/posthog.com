@@ -16,21 +16,22 @@ tags:
 - Product updates
 - Startups
 ---
+<!-- 
 import {ProductVideo} from 'components/ProductVideo'
 export const sessionsummariesdark = "https://res.cloudinary.com/sortafreel/video/upload/v1764510391/minivied-v2_onrxvy.mov"
-
+ -->
 PostHog captures a lot of user behavior data — the pages people visit, the buttons they click, and everything in between, all captured as events and [session recordings](/session-replay). By “a lot,” I mean billions of events and terabytes of S3 snapshots. Watching those sessions is incredibly useful for understanding how products are actually used, but there’s an obvious problem: there are far too many to review manually.
 
 So, we created a tool to watch and analyze user sessions. It highlights the issues - so you can find what's broken without watching hundreds of hours of recordings yourself. It's called [Session Summaries](/docs/posthog-ai/session-summaries), **we release it in beta today**. You can use it right now, for free, with PostHog AI.
 
 In this post, I'll walk through what we learned through the process of building it, where we messed up, and lots of practical tips on how to make user behavior analysis work in production. All the code is [open-source](https://github.com/PostHog/posthog), and here's a 36-second demo of how it works:
-
+<!-- 
 <ProductVideo 
     videoDark={sessionsummariesdark}
     alt="Session summaries demo" 
     classes="rounded"
 />
-
+ -->
 ## Step 1: "Analyzing a single user session should be easy"
 
 Let's forget about scaling for a moment and focus just on a single user session: a user visited a website or app, navigated a bit, did something useful, and left. The logic seems straightforward: take all the session events, send them to an LLM, and get a summary.
