@@ -3792,6 +3792,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/node',
                         },
                         {
+                            name: 'Ruby',
+                            url: '/docs/error-tracking/installation/ruby',
+                        },
+                        {
                             name: 'React',
                             url: '/docs/error-tracking/installation/react',
                         },
