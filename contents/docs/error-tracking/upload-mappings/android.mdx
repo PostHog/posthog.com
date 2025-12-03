@@ -28,11 +28,12 @@ import StepVerifySymbolsUpload from '../_snippets/step-verify-symbols-upload.mdx
 
 Automatic mappings uploading is handled through the Gradle build process on Android.
 
-Install the [PostHog Android Gradle Plugin](https://github.com/PostHog/posthog-android/blob/main/posthog-android-gradle-plugin/CHANGELOG.md).
+Install the [PostHog Android Gradle Plugin](https://github.com/PostHog/posthog-android/blob/main/posthog-android-gradle-plugin/CHANGELOG.md) on your app's `build.gradle.kts` file.
 
 ```kotlin
 // Available through mavenCentral()
 plugins {
+    id("com.android.application")
     id("com.posthog.android") version "$version"
     ...
 }
