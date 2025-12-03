@@ -54,15 +54,17 @@ const wrapWithParagraph = (value) => {
     return `${leadingWhitespace}<p>${trimmedValue}</p>${trailingWhitespace}`
 }
 
+const isTopLevelNode = (parent) => !parent || parent.type === 'root'
+
 module.exports = ({ markdownAST }) => {
-    visit(markdownAST, (node) => {
+    visit(markdownAST, (node, _index, parent) => {
         if (!node || typeof node.value !== 'string') {
             return
         }
 
         const isHtmlNode = node.type === 'html' || node.type === 'jsx'
 
-        if (!isHtmlNode || !shouldWrapLine(node.value)) {
+        if (!isHtmlNode || !isTopLevelNode(parent) || !shouldWrapLine(node.value)) {
             return
         }
 
