@@ -1039,6 +1039,10 @@ export const handbookSidebar = [
                         name: 'Testimonials & G2',
                         url: '/handbook/brand/testimonials',
                     },
+                    {
+                        name: 'Campaigns & coupons',
+                        url: '/handbook/growth/marketing/campaigns-and-coupons',
+                    },
                 ],
             },
             {
