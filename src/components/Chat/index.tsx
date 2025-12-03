@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import InkeepEmbeddedChat from './Inkeep'
 import { useChat } from 'hooks/useChat'
-import { IconDocument, IconRewind, IconX, IconCode } from '@posthog/icons'
+import { IconDocument, IconRewind, IconX, IconCode, IconChevronDown } from '@posthog/icons'
 import { motion } from 'framer-motion'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
@@ -37,6 +37,7 @@ export default function Chat(): JSX.Element | null {
     const { setWindowTitle, openNewChat } = useApp()
     const { appWindow, setPageOptions } = useWindow()
     const [showCodeSnippet, setShowCodeSnippet] = useState(true)
+    const [codeExpanded, setCodeExpanded] = useState(false)
 
     const codePrompt = codeSnippet
         ? `The user is asking about this ${codeSnippet.language || 'code'} snippet from ${codeSnippet.sourceUrl}:
@@ -136,24 +137,32 @@ ${codeSnippet.code}
             <Context />
             {codeSnippet && showCodeSnippet && (
                 <div className="border-b border-primary p-2">
-                    <div className="flex items-center justify-between mb-1 text-xs text-primary/60 dark:text-primary-dark/60">
-                        <span className="flex items-center gap-1.5">
+                    <div className="flex items-center justify-between text-xs text-muted">
+                        <button
+                            onClick={() => setCodeExpanded(!codeExpanded)}
+                            className="flex items-center gap-1.5 hover:text-secondary transition-colors"
+                        >
+                            <IconChevronDown
+                                className={`size-3.5 transition-transform ${codeExpanded ? 'rotate-180' : ''}`}
+                            />
                             <IconCode className="size-3.5" />
                             <strong>Code snippet</strong>
                             {codeSnippet.language && <span className="opacity-60">({codeSnippet.language})</span>}
-                        </span>
+                            <span className="opacity-50 font-normal">
+                                · {codeSnippet.code.split('\n').length} lines
+                            </span>
+                        </button>
                         <button onClick={() => setShowCodeSnippet(false)} title="Hide code snippet">
                             <IconX className="size-3.5 opacity-60 hover:opacity-100" />
                         </button>
                     </div>
-                    <div className="max-h-[100px] overflow-auto rounded text-sm [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                        <SingleCodeBlock language={codeSnippet.language} showLabel={false} showAskAI={false}>
-                            {codeSnippet.code}
-                        </SingleCodeBlock>
-                    </div>
-                    <div className="text-xs text-primary/50 dark:text-primary-dark/50 mt-2 italic">
-                        Asking: "Explain this code snippet"
-                    </div>
+                    {codeExpanded && (
+                        <div className="max-h-[200px] overflow-auto rounded text-sm mt-2">
+                            <SingleCodeBlock language={codeSnippet.language} showLabel={false} showAskAI={false}>
+                                {codeSnippet.code}
+                            </SingleCodeBlock>
+                        </div>
+                    )}
                 </div>
             )}
             <div className="flex-1 min-h-0">
