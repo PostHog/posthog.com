@@ -1571,6 +1571,10 @@
             "destination": "/docs/error-tracking/issues-and-exceptions"
         },
         {
+            "source": "/docs/error-tracking/nextjs",
+            "destination": "/docs/error-tracking/installation/nextjs"
+        },
+        {
             "source": "/docs/ai-engineering/observability",
             "destination": "/docs/llm-analytics/start-here"
         },

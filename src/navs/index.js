@@ -934,6 +934,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/development-process',
             },
             {
+                name: 'Security best practices',
+                url: '/handbook/engineering/security',
+            },
+            {
                 name: 'Setting up SSL locally',
                 url: '/handbook/engineering/setup-ssl-locally',
             },
@@ -1254,9 +1258,13 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Sales & CS',
+        name: 'Sales, CS & Onboarding',
         url: '',
         children: [
+            {
+                name: 'Overview',
+                url: '/handbook/growth/sales/accounts-overview',
+            },
             {
                 name: 'Sales',
                 url: '',
@@ -1374,6 +1382,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                     {
+                        name: 'Lifecycle of CSM engagement',
+                        url: '/handbook/cs-and-onboarding/lifecycle-csm',
+                    },
+                    {
                         name: 'How we use automation',
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
                     },
@@ -1388,6 +1400,10 @@ export const handbookSidebar = [
                     {
                         name: 'Customer industry segments',
                         url: '/handbook/cs-and-onboarding/customer-industry-segments',
+                    },
+                    {
+                        name: 'Common churn reasons',
+                        url: '/handbook/cs-and-onboarding/churn-reasons',
                     },
                 ],
             },
@@ -3577,7 +3593,7 @@ export const docsMenu = {
                     name: 'Analyzing results',
                     url: '/docs/experiments/analyzing-results',
                     featured: true,
-                    icon: 'IconChartBar',
+                    icon: 'IconGraph',
                     color: 'purple',
                 },
                 {
@@ -3634,12 +3650,6 @@ export const docsMenu = {
                     name: 'Holdouts',
                     url: '/docs/experiments/holdouts',
                     icon: 'IconPeople',
-                    color: 'green',
-                },
-                {
-                    name: 'New experimentation engine',
-                    url: '/docs/experiments/new-experimentation-engine',
-                    icon: 'IconTestTube',
                     color: 'green',
                 },
                 {
@@ -4757,6 +4767,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Session summaries',
+                    url: '/docs/posthog-ai/session-summaries',
+                    icon: 'IconEye',
+                    color: 'purple',
+                },
+                {
                     name: 'Guides',
                 },
                 {
@@ -4900,6 +4916,13 @@ export const docsMenu = {
                     url: '/docs/logs/installation',
                     icon: 'IconCode',
                     color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Search logs',
+                    url: '/docs/logs/search',
+                    icon: 'IconSearch',
+                    color: 'purple',
                     featured: true,
                 },
                 {
