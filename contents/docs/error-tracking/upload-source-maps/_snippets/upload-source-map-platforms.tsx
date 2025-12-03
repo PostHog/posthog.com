@@ -40,7 +40,7 @@ const UploadSourceMapPlatforms = () => {
         },
         {
             label: 'Android',
-            url: '/docs/error-tracking/upload-source-maps/android',
+            url: '/docs/error-tracking/upload-mappings/android',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg',
         },
         {

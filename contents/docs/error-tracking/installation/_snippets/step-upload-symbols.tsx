@@ -1,14 +1,16 @@
 import React from 'react'
 import { CallToAction } from 'components/CallToAction'
 
-const StepUploadSourceMaps = ({
+const StepUploadSymbols = ({
     urlPath,
     framework,
     symbolType = 'source maps',
+    basePath = 'upload-source-maps',
 }: {
     urlPath: string
     framework: string
     symbolType?: string
+    basePath?: string
 }) => {
     return (
         <>
@@ -17,16 +19,11 @@ const StepUploadSourceMaps = ({
                 {symbolType} to generate accurate stack traces.
             </p>
             <p>Let's continue to the next section.</p>
-            <CallToAction
-                className="my-2"
-                size="sm"
-                to={`/docs/error-tracking/upload-source-maps/${urlPath}`}
-                external={true}
-            >
+            <CallToAction className="my-2" size="sm" to={`/docs/error-tracking/${basePath}/${urlPath}`} external={true}>
                 Upload {symbolType} {framework ? `for ${framework}` : ''}
             </CallToAction>
         </>
     )
 }
 
-export default StepUploadSourceMaps
+export default StepUploadSymbols

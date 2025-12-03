@@ -3884,7 +3884,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Android',
-                            url: '/docs/error-tracking/upload-source-maps/android',
+                            url: '/docs/error-tracking/upload-mappings/android',
                         },
                         {
                             name: 'CLI',
