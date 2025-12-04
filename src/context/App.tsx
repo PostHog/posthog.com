@@ -1395,6 +1395,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         return {
             x: rect.left,
             y: rect.top,
+            width: rect.width,
+            height: rect.height,
         }
     }
 
@@ -1481,8 +1483,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             fixedSize: settings?.size.fixed || false,
             fromOrigin: lastClickedElementRect
                 ? {
-                      x: lastClickedElementRect.x - size.width / 2,
-                      y: lastClickedElementRect.y - size.height / 2,
+                      x: lastClickedElementRect.x + lastClickedElementRect.width / 2,
+                      y: lastClickedElementRect.y + lastClickedElementRect.height / 2,
                   }
                 : undefined,
             minimal: element.props.minimal ?? false,

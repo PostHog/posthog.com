@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo, useRef, useCallback } from 'react'
-import { AnimatePresence, motion, useDragControls } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
     IconChevronDown,
     IconDocument,
@@ -130,7 +130,6 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         taskbarRef,
     } = useApp()
     const isSSR = typeof window === 'undefined'
-    const controls = useDragControls()
     const sizeConstraints = item.sizeConstraints
     const size = item.size
     const previousSize = item.previousSize
@@ -142,15 +141,14 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const [history, setHistory] = useState<string[]>([])
     const [activeHistoryIndex, setActiveHistoryIndex] = useState(0)
     const windowRef = useRef<HTMLDivElement>(null)
-    const [rendered, setRendered] = useState(false)
+    const [opening, setOpening] = useState(siteSettings.experience === 'posthog' && !siteSettings.performanceBoost)
     const [dragging, setDragging] = useState(false)
-    const [leftDragResizing, setLeftDragResizing] = useState(false)
     const contentRef = useRef<HTMLDivElement>(null)
     const [pageOptions, setPageOptions] = useState<MenuItemType[]>()
     const [closing, setClosing] = useState(false)
     const [closed, setClosed] = useState(false)
     const [minimizing, setMinimizing] = useState(false)
-    const [animating, setAnimating] = useState(true)
+    const [animating, setAnimating] = useState(siteSettings.experience === 'posthog' && !siteSettings.performanceBoost)
     const animationStartTimeRef = useRef<number | null>(null)
     const posthog = usePostHog()
     const [view, setView] = useState<'marketing' | 'developer'>('marketing')
@@ -197,7 +195,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         )
     }
 
-    // Resize preview - pure DOM manipulation, no React during drag
+    // Resize/drag preview - pure DOM manipulation, no React during drag
     const resizeRef = useRef<{
         x: number
         y: number
@@ -207,7 +205,14 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         py: number
         left: boolean
     } | null>(null)
+    const dragRef = useRef<{
+        startX: number
+        startY: number
+        startPosX: number
+        startPosY: number
+    } | null>(null)
     const previewRef = useRef<HTMLDivElement>(null)
+    const openingPreviewRef = useRef<HTMLDivElement>(null)
 
     const startResize = useCallback(
         (e: React.PointerEvent, left = false) => {
@@ -233,7 +238,6 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                 py: position.y,
                 left,
             }
-            if (left) setLeftDragResizing(true)
         },
         [size.width, size.height, position.x, position.y]
     )
@@ -278,7 +282,6 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             })
 
             resizeRef.current = null
-            setLeftDragResizing(false)
         },
         [item, updateWindow]
     )
@@ -318,60 +321,93 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         setMinimizing(true)
     }
 
-    const handleDragStart = () => {
-        setDragging(true)
-    }
+    // Drag preview - pure DOM manipulation, no React during drag
+    const startDrag = useCallback(
+        (e: React.PointerEvent) => {
+            if (siteSettings.experience === 'boring') return
+            e.preventDefault()
+            ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
+            document.body.classList.add('window-dragging')
 
-    const handleDrag = (_event: any, info: any) => {
-        if (item.fixedSize) return
-        if (!constraintsRef.current) return
+            const preview = previewRef.current
+            if (preview) {
+                preview.style.display = 'block'
+                preview.style.left = `${position.x}px`
+                preview.style.top = `${position.y}px`
+                preview.style.width = `${size.width}px`
+                preview.style.height = `${size.height}px`
+            }
 
-        const bounds = constraintsRef.current.getBoundingClientRect()
-        const newX = position.x + info.offset.x
+            dragRef.current = {
+                startX: e.clientX,
+                startY: e.clientY,
+                startPosX: position.x,
+                startPosY: position.y,
+            }
+            setDragging(true)
+        },
+        [position.x, position.y, size.width, size.height, siteSettings.experience]
+    )
 
-        const newSnapIndicator =
-            newX < snapThreshold ? 'left' : newX > bounds.width - size.width - snapThreshold ? 'right' : null
-
-        if (newSnapIndicator !== snapIndicator) {
-            setSnapIndicator(newSnapIndicator)
-        }
-    }
-
-    const handleDragEnd = (_event: any, info: any) => {
-        if (dragging) setDragging(false)
-        if (!item.fixedSize && snapIndicator !== null) {
-            handleSnapToSide(snapIndicator)
-            setSnapIndicator(null)
-            return
-        } else {
-            if (!constraintsRef.current) return
+    const onDrag = useCallback(
+        (e: React.PointerEvent) => {
+            const d = dragRef.current
+            const preview = previewRef.current
+            if (!d || !preview || !constraintsRef.current) return
 
             const bounds = constraintsRef.current.getBoundingClientRect()
-            const newX = position.x + info?.offset?.x
-            const newY = position.y + info?.offset?.y
+            const dx = e.clientX - d.startX
+            const dy = e.clientY - d.startY
 
-            if (newX >= 0 && newY >= 0 && newX + size.width <= bounds.width && newY + size.height <= bounds.height) {
+            // Constrain to bounds
+            const newX = Math.max(0, Math.min(d.startPosX + dx, bounds.width - size.width))
+            const newY = Math.max(0, Math.min(d.startPosY + dy, bounds.height - size.height))
+
+            preview.style.left = `${newX}px`
+            preview.style.top = `${newY}px`
+
+            // Check for snap indicators
+            if (!item.fixedSize) {
+                const newSnapIndicator =
+                    newX < -snapThreshold ? 'left' : newX > bounds.width - size.width + snapThreshold ? 'right' : null
+
+                if (newSnapIndicator !== snapIndicator) {
+                    setSnapIndicator(newSnapIndicator)
+                }
+            }
+        },
+        [size.width, size.height, item.fixedSize, snapIndicator, constraintsRef]
+    )
+
+    const endDrag = useCallback(
+        (e: React.PointerEvent) => {
+            const d = dragRef.current
+            const preview = previewRef.current
+            if (!d) return
+            ;(e.target as HTMLElement).releasePointerCapture(e.pointerId)
+            document.body.classList.remove('window-dragging')
+
+            // Get final position from preview
+            const newX = parseInt(preview?.style.left || '0')
+            const newY = parseInt(preview?.style.top || '0')
+
+            if (preview) preview.style.display = 'none'
+
+            // Handle snap
+            if (!item.fixedSize && snapIndicator !== null) {
+                handleSnapToSide(snapIndicator)
+                setSnapIndicator(null)
+            } else {
                 updateWindow(item, {
                     position: { x: newX, y: newY },
                 })
             }
-        }
-    }
 
-    const handleDragTransitionEnd = () => {
-        if (!constraintsRef.current || !item.ref?.current) return
-
-        const containerBounds = constraintsRef.current.getBoundingClientRect()
-        const windowBounds = item.ref.current.getBoundingClientRect()
-
-        const newX = windowBounds.left - containerBounds.left
-        const newY = windowBounds.top - containerBounds.top
-
-        if (!dragging) setDragging(false)
-        updateWindow(item, {
-            position: { x: newX, y: newY },
-        })
-    }
+            dragRef.current = null
+            setDragging(false)
+        },
+        [item, updateWindow, snapIndicator, handleSnapToSide]
+    )
 
     const windowPosition = useMemo(() => {
         if (isSSR) return { x: 0, y: 0 }
@@ -462,7 +498,69 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     }, [item])
 
     useEffect(() => {
-        setRendered(true)
+        // If no origin position available, skip opening animation
+        if (opening && !item.fromOrigin && !windowPosition) {
+            setOpening(false)
+            setAnimating(false)
+            return
+        }
+
+        // Run opening animation via DOM
+        if (opening && openingPreviewRef.current) {
+            const preview = openingPreviewRef.current
+            const smallSize = 48 // Initial small square size
+
+            // Get origin position (from item.fromOrigin or windowPosition as fallback)
+            const originX = item.fromOrigin?.x ?? windowPosition?.x ?? position.x
+            const originY = item.fromOrigin?.y ?? windowPosition?.y ?? position.y
+
+            // Calculate the translation needed from origin to final position
+            const translateX = position.x - (originX - smallSize / 2)
+            const translateY = position.y - (originY - smallSize / 2)
+
+            // Calculate animation speed based on window size
+            // Bigger windows = slower animation (more distance to travel visually)
+            // Base: 100ms for small windows, up to 250ms for large windows
+            const windowArea = size.width * size.height
+            const minArea = 300 * 200 // Small window
+            const maxArea = 1200 * 800 // Large window
+            const normalizedSize = Math.min(1, Math.max(0, (windowArea - minArea) / (maxArea - minArea)))
+            const moveDuration = 60 + normalizedSize * 100 // 60ms to 160ms
+            const expandDuration = 80 + normalizedSize * 100 // 80ms to 180ms
+
+            // Phase 1: Start as small square at origin (centered on click)
+            preview.style.display = 'block'
+            preview.style.left = `${originX - smallSize / 2}px`
+            preview.style.top = `${originY - smallSize / 2}px`
+            preview.style.width = `${smallSize}px`
+            preview.style.height = `${smallSize}px`
+            preview.style.transform = 'translate3d(0, 0, 0)'
+            preview.style.transition = 'none'
+            preview.style.willChange = 'transform, width, height'
+
+            // Force reflow
+            preview.offsetHeight
+
+            // Phase 2: Move to final position using transform (GPU accelerated)
+            preview.style.transition = `transform ${moveDuration}ms cubic-bezier(0.2, 0.2, 0.8, 1)`
+            preview.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`
+
+            // Use timeout instead of transitionend (more reliable)
+            setTimeout(() => {
+                // Phase 3: Expand to full size
+                preview.style.transition = `width ${expandDuration}ms cubic-bezier(0.2, 0.2, 0.8, 1), height ${expandDuration}ms cubic-bezier(0.2, 0.2, 0.8, 1)`
+                preview.style.width = `${size.width}px`
+                preview.style.height = `${size.height}px`
+
+                // Wait for expand to finish, then show window
+                setTimeout(() => {
+                    preview.style.display = 'none'
+                    preview.style.willChange = 'auto'
+                    setOpening(false)
+                    setAnimating(false)
+                }, expandDuration)
+            }, moveDuration) // Wait for move to finish
+        }
     }, [])
 
     useEffect(() => {
@@ -599,7 +697,6 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             goForward={goForward}
             canGoBack={canGoBack}
             canGoForward={canGoForward}
-            dragControls={controls}
             setPageOptions={setPageOptions}
             activeInternalMenu={activeInternalMenu}
             setActiveInternalMenu={setActiveInternalMenu}
@@ -625,9 +722,15 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 visibility: snapIndicator ? 'visible' : 'hidden',
                             }}
                         />
-                        {/* Resize preview outline - always mounted, toggled via display */}
+                        {/* Resize/drag preview outline - always mounted, toggled via display */}
                         <div
                             ref={previewRef}
+                            className="absolute border-2 border-blue rounded pointer-events-none"
+                            style={{ display: 'none', zIndex: item.zIndex + 1 }}
+                        />
+                        {/* Opening animation outline - controlled via DOM */}
+                        <div
+                            ref={openingPreviewRef}
                             className="absolute border-2 border-blue rounded pointer-events-none"
                             style={{ display: 'none', zIndex: item.zIndex + 1 }}
                         />
@@ -644,7 +747,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     ? 'border-b border-primary'
                                     : `${
                                           dragging
-                                              ? '!shadow-none border-primary [&_*]:!select-none [&_*]:!transition-none'
+                                              ? '!shadow-none border-primary'
                                               : focusedWindow === item
                                               ? 'shadow-2xl border-primary'
                                               : 'shadow-lg border-input'
@@ -659,29 +762,11 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             style={{
                                 zIndex: item.zIndex,
                                 willChange: 'transform',
+                                transform: 'translateZ(0)',
+                                backfaceVisibility: 'hidden',
+                                visibility: opening ? 'hidden' : 'visible',
                             }}
                             initial={{
-                                scale: 0.08,
-                                x: rendered
-                                    ? siteSettings.experience === 'boring' || !windowPosition
-                                        ? 0
-                                        : windowPosition.x
-                                    : item.fromOrigin?.x || windowPosition?.x || Math.round(position.x),
-                                y: rendered
-                                    ? siteSettings.experience === 'boring' || !windowPosition
-                                        ? 0
-                                        : windowPosition.y
-                                    : item.fromOrigin?.y || windowPosition?.y || Math.round(position.y),
-                                width: siteSettings.experience === 'boring' ? '100%' : size.width,
-                                height:
-                                    siteSettings.experience === 'boring'
-                                        ? '100%'
-                                        : item.appSettings?.size?.autoHeight
-                                        ? 'auto'
-                                        : size.height,
-                            }}
-                            animate={{
-                                scale: 1,
                                 x: siteSettings.experience === 'boring' ? 0 : Math.round(position.x),
                                 y: siteSettings.experience === 'boring' ? 0 : Math.round(position.y),
                                 width: siteSettings.experience === 'boring' ? '100%' : size.width,
@@ -691,37 +776,20 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         : item.appSettings?.size?.autoHeight
                                         ? 'auto'
                                         : size.height,
-                                transition: dragging
-                                    ? { duration: 0 }
-                                    : {
-                                          duration:
-                                              siteSettings.experience === 'boring' ||
-                                              siteSettings.performanceBoost ||
-                                              leftDragResizing
-                                                  ? 0
-                                                  : 0.2,
-                                          scale: {
-                                              duration:
-                                                  siteSettings.experience === 'boring' ||
-                                                  siteSettings.performanceBoost ||
-                                                  !windowPosition
-                                                      ? 0
-                                                      : 0.2,
-                                              delay:
-                                                  siteSettings.experience === 'boring' ||
-                                                  siteSettings.performanceBoost ||
-                                                  !windowPosition
-                                                      ? 0
-                                                      : 0.2,
-                                              ease: [0.2, 0.2, 0.8, 1],
-                                          },
-                                          width: {
-                                              duration: 0,
-                                          },
-                                          height: {
-                                              duration: 0,
-                                          },
-                                      },
+                            }}
+                            animate={{
+                                x: siteSettings.experience === 'boring' ? 0 : Math.round(position.x),
+                                y: siteSettings.experience === 'boring' ? 0 : Math.round(position.y),
+                                width: siteSettings.experience === 'boring' ? '100%' : size.width,
+                                height:
+                                    siteSettings.experience === 'boring'
+                                        ? '100%'
+                                        : item.appSettings?.size?.autoHeight
+                                        ? 'auto'
+                                        : size.height,
+                                transition: {
+                                    duration: 0,
+                                },
                             }}
                             exit={{
                                 scale: 0.005,
@@ -744,17 +812,6 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     },
                                 },
                             }}
-                            drag={siteSettings.experience === 'posthog'}
-                            dragControls={controls}
-                            dragListener={false}
-                            dragMomentum={false}
-                            dragElastic={0}
-                            dragTransition={{ power: 0, timeConstant: 0 }}
-                            dragConstraints={constraintsRef}
-                            onDragStart={handleDragStart}
-                            onDrag={handleDrag}
-                            onDragEnd={handleDragEnd}
-                            onDragTransitionEnd={handleDragTransitionEnd}
                             onMouseDown={handleMouseDown}
                             onAnimationStart={onAnimationStart}
                             onAnimationComplete={onAnimationComplete}
@@ -766,7 +823,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     className={`flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary/50 backdrop-blur-3xl skin-classic:bg-primary border-b border-input ${
                                         siteSettings.experience === 'boring' ? '' : 'cursor-move'
                                     }`}
-                                    onPointerDown={(e) => controls.start(e)}
+                                    onPointerDown={startDrag}
+                                    onPointerMove={onDrag}
+                                    onPointerUp={endDrag}
                                 >
                                     <MenuBar
                                         menus={[

@@ -2649,3 +2649,9 @@ article.reader-view-content-container:has(.quest-sidebar) {
     -webkit-user-select: none !important;
     cursor: inherit !important;
 }
+
+/* Window dragging - prevent text selection on the window itself */
+.window-dragging [data-app='AppWindow'] {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+}
