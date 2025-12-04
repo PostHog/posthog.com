@@ -34,7 +34,7 @@ Be deeply technical and hands-on. Don't just log bugs or pass tickets along - wr
 
 We help users through in-app support (which routes to Zendesk), community questions, and Slack channels for enterprise customers. But we don't stop at answering questions:
 
-- **Ship fixes:** We write and merge fixes for small bugs ourselves.
+- **Ship code:** We write and merge small bug fixes and improvements ourselves.
 - **Improve docs:** We contribute fixes, clarify sections, and add missing information.
 - **Build internal tools:** We create tools like HogHero for internal efficiency, SDK Doctor for proactive customer help, and automations to streamline our work.
 - **Share product feedback:** We surface patterns and pain points we see from users.
