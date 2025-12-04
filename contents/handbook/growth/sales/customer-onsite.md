@@ -11,7 +11,7 @@ This outline of what to consider and how to plan an in-person visit is designed 
 
 ### Account manager driven
 
-Sometimes you'll be the driver for the visit happening, whether by pitching a specific outcome, or offering to 'drop in' when you're around. When this is the case, it's important that you have a tight, well defined schedule and some goals (whether shared with customer or not) for the visit. Don't leave your champion(s) to do the work of planning and scheduling the sessions - you want them to be able to swan in, have a positive and productive experience, and continue evangelising us without adding to their to-do list.
+Sometimes you'll be the driver for the visit happening, whether by pitching a specific outcome, or offering to 'drop in' when you're around. When this is the case, it's important that you have a tight, well defined schedule and some goals (whether shared with customer or not) for the visit. Don't leave your champion(s) to do the work of planning and scheduling the sessions - you want them to be able to join the session, have a positive and productive experience, and continue evangelising us without adding to their to-do list.
 
 ### Customer driven
 
