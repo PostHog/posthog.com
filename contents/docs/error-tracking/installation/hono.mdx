@@ -5,7 +5,7 @@ platformImageUrl: https://res.cloudinary.com/dmukukwp6/image/upload/hono_9d80c06
 ---
 
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
-import StepUploadSymbols from "./_snippets/step-upload-symbols.tsx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 
 <Steps>
@@ -47,7 +47,7 @@ app.onError(async (err, c) => {
 
 <Step title="Upload source maps" badge="required">
 
-<StepUploadSymbols urlPath="cli" />
+<StepUploadSymbolSets urlPath="cli" />
 
 </Step>
 

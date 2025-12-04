@@ -1,7 +1,7 @@
 import React from 'react'
 import { CallToAction } from 'components/CallToAction'
 
-const StepUploadSymbols = ({
+const StepUploadSymbolSets = ({
     urlPath,
     framework,
     symbolType = 'source maps',
@@ -26,4 +26,4 @@ const StepUploadSymbols = ({
     )
 }
 
-export default StepUploadSymbols
+export default StepUploadSymbolSets

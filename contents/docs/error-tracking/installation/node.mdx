@@ -6,7 +6,7 @@ platformImageUrl: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/
 
 import InstallNodePackageManagers from "../../integrate/_snippets/install-node-package-managers.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
-import StepUploadSymbols from "./_snippets/step-upload-symbols.tsx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 <Steps>
 <Step title="Install PostHog Node.js SDK" badge="required">
@@ -87,7 +87,7 @@ This is helpful if you've built your own error handling logic or want to capture
 
 <Step title="Upload source maps" badge="optional">
 
-<StepUploadSymbols urlPath="node" framework="Node.js" />
+<StepUploadSymbolSets urlPath="node" framework="Node.js" />
 
 </Step>
 

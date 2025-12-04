@@ -6,7 +6,7 @@ platformImageUrl: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/
 
 import InstallReactPackageManagers from "../../integrate/_snippets/install-react-package-managers.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
-import StepUploadSymbols from "./_snippets/step-upload-symbols.tsx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 > For Next.js, we recommend following the [Next.js integration guide](/docs/integrate/next-js) instead.
 
@@ -133,7 +133,7 @@ posthog.captureException(error, additionalProperties)
 
 <Step title="Upload source maps" badge="required">
 
-<StepUploadSymbols urlPath="react" framework="React" />
+<StepUploadSymbolSets urlPath="react" framework="React" />
 
 </Step>
 
