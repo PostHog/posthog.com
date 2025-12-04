@@ -5,7 +5,7 @@ showTitle: true
 ---
 In-person visits work best for accounts paying or likely to pay $50k+/year where you've identified specific opportunities for expansion, are navigating renewal conversations, or need to overcome significant technical or organizational hurdles. They're a high-effort, high-reward play - use them strategically.
 
-This outline of what to consider and how to plan an in-person visit is designed to provide ideas, inspiration and avoid common pitfalls. It is not a framework nor a definitive guide - your nous and experience should ultimately guide the who, what and how of in-person meetings.
+This outline of what to consider and how to plan an in-person visit is designed to provide ideas, inspiration and avoid common pitfalls. It is not a framework nor a definitive guide - your intuition and experience should ultimately guide the who, what and how of in-person meetings.
 
 ## Account manager driven vs customer driven visits
 
