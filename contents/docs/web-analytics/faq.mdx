@@ -103,7 +103,7 @@ If your users are typically inactive for longer than 30 minutes within one perio
 
 ## Why does PostHog impact my PageSpeed score?
 
-The simple answer: PostHog, like any other web analytics tool, consumes resources (CPU) and execution time to load the resources that make it work. This isn't without cost, but PageSpeed Insights makes this cost seem larger than it actually is. 
+The simple answer: PostHog, like any other web analytics tool, consumes resources (CPU) and execution time to load the resources that make it work. This isn't without cost, but PageSpeed Insights [may make this cost seem larger than it actually is](https://infrequently.org/2025/11/performance-inequality-gap-2026/#networks). You can use PostHog to [autocapture web vitals](/docs/web-analytics/web-vitals) to give you a more realistic picture of your users' experiences.
 
 ### How do we optimize how PostHog loads on your website?
 
@@ -113,21 +113,11 @@ We load most of these assets from an external `.js` file **asynchronously**. Thi
 
 We also optimize our assets specifically for PageSpeed Insights whenever possible. For example, we recently [removed legacy JavaScript](https://github.com/PostHog/posthog-js/pull/1480) required to support IE 11, which PageSpeed Insights generated a warning about.
 
-### Why you shouldn't care about PageSpeed score
+### How can you optimize your PageSpeed score?
 
-At a more philosophical level, we question the premise of the question. PageSpeed score isn't an objective judge of quality or performance for the following reasons:
+It's worth noting that the PageSpeed score doesn't directly impact search rankings. Although speed matters for user experience, there is no evidence to suggest Google uses data from PageSpeed Insight directly in its search ranking algorithm. [Leaks about the search ranking algorithm](https://ipullrank.com/google-algo-leak) don't mention PageSpeed as important to search rankings. Optimizing your site speed can improve your user experience and lead to more clicks and fewer bounces, which can improve your search rankings, but any positive or negative impact on rankings is based on user behavior, not this arbitrary score.
 
-1. **It's not realistic.** PageSpeed judges your website on its performance for an underpowered device with a bad internet connection. For example, on mobile, it uses a broadband speed of ~1.6 Mbps, which is significantly slower than the typical 5-50 Mbps (5G can be faster than this too)**.
-    - You can use PostHog to [autocapture web vitals](/docs/web-analytics/web-vitals) to give you a more realistic picture of your users' experiences.  
-
-2. **It doesn't directly impact search rankings.** Although speed matters for user experience, there is no evidence to suggest Google uses data from PageSpeed Insight directly in its search ranking algorithm. [Leaks about the search ranking algorithm](https://ipullrank.com/google-algo-leak) don't mention PageSpeed as important to search rankings. Optimizing your site speed can improve your user experience and lead to more clicks and fewer bounces, which can improve your search rankings, but any positive or negative impact on rankings is based on user behavior, not this arbitrary score.
-  - Google Ads' [Quality Score](https://support.google.com/google-ads/answer/6167118?hl=en) is a similar situation where loading speed and user experience impact your CPC, CTR, impressions, paid ranking, and more. This doesn't mean your PageSpeed score directly impacts these either.
-
-3. **Nearly everyone has “failing” PageSpeed scores.** Large and popular sites, from the New York Times to Shopify have failing PageSpeed scores. For example, the NYT loads 43,906 ms worth of scripts, nearly 100x more than the execution time of PostHog.
-
-4. **Other things matter more.** PageSpeed score is not revenue, profit, conversion, retention, or product-market fit. [Talk to users and build something they actually want](/handbook/making-users-happy).
-
-### Sorry, you didn't convince me. I still care about PageSpeed score. What do I do?
+Here are some tips:
 
 1. Update your PostHog version and/or check you have the latest version of the snippet (by copying and pasting it from your project settings). We continually ship improvements and optimizations that you need to update to take advantage of.
 
@@ -138,6 +128,8 @@ At a more philosophical level, we question the premise of the question. PageSpee
 4. Utilize server-side tracking. We have a range of SDKs for backend languages and frameworks you can use to capture events and use the features of PostHog without needing to load any code on the client side.
 
 5. Keep an eye on your [web vitals](/docs/web-analytics/web-vitals) to see if there are any pages with worse performance.
+
+6. Try running PostHog's script in a web worker thanks to [partytown](https://partytown.qwik.dev/).
 
 ## I am online, but the online user count is not reflecting my user
 
