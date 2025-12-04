@@ -4872,6 +4872,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Content library and message templates',
+                    url: '/docs/workflows/library',
+                    icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
                     name: 'Guides',
                 },
                 {
