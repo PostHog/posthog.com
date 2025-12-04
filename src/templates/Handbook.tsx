@@ -472,6 +472,19 @@ export const query = graphql`
                         }
                     }
                 }
+                templateConfigs {
+                    templateId
+                    inputs_schema {
+                        key
+                        type
+                        label
+                        required
+                        description
+                        default
+                    }
+                    name
+                    type
+                }
             }
             frontmatter {
                 tableOfContents {

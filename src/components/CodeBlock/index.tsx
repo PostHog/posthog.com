@@ -9,11 +9,13 @@ import { darkTheme, lightTheme } from './theme'
 import languageMap from './languages'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
-import Tooltip from 'components/Tooltip'
 import Mermaid from 'components/Mermaid'
+import Tooltip from 'components/Tooltip'
 import usePostHog from 'hooks/usePostHog'
 import { useApp } from '../../context/App'
-import { IconArrowUpRight } from '@posthog/icons'
+import { useWindow } from '../../context/Window'
+import { IconArrowUpRight, IconSparkles } from '@posthog/icons'
+import { useLocation } from '@reach/router'
 
 type LanguageOption = {
     label?: string
@@ -30,6 +32,7 @@ type CodeBlockProps = {
     showLabel?: boolean
     showLineNumbers?: boolean
     showCopy?: boolean
+    showAskAI?: boolean
     focusOnLines?: string
     tooltips?: { lineNumber: number; content: string }[]
 
@@ -44,6 +47,7 @@ type SingleCodeBlockProps = {
     showLabel?: boolean
     showLineNumbers?: boolean
     showCopy?: boolean
+    showAskAI?: boolean
     language: string
     children: string
 }
@@ -148,6 +152,15 @@ const removeQuotes = (str?: string | null): string | null | undefined => {
     return str?.replace(/['"]/g, '')
 }
 
+const stripAnnotationComments = (code: string): string => {
+    return code
+        .replace(tooltipKey, '//')
+        .replace(highlightKey, '')
+        .replace(diffAddKey, '')
+        .replace(diffRemoveKey, '')
+        .trim()
+}
+
 const getLinesToShow = (lines: string): number[] => {
     const lineBounds = lines.split('-').map((line) => {
         return parseInt(line.trim())
@@ -163,6 +176,7 @@ export const CodeBlock = ({
     selector = 'tabs',
     showLabel = true,
     showCopy = true,
+    showAskAI = true,
     showLineNumbers = false,
     children: languages,
     currentLanguage,
@@ -175,7 +189,9 @@ export const CodeBlock = ({
     }
 
     const codeBlockId = generateRandomHtmlId()
-    const { siteSettings } = useApp()
+    const { siteSettings, openNewChat } = useApp()
+    const { appWindow } = useWindow()
+    const location = useLocation()
     const [tooltipVisible, setTooltipVisible] = React.useState(false)
     const posthog = usePostHog()
     const [projectName, setProjectName] = React.useState<string | null>(null)
@@ -222,21 +238,23 @@ export const CodeBlock = ({
     }
 
     const copyToClipboard = (): void => {
-        navigator.clipboard.writeText(
-            replaceProjectInfo(
-                currentLanguage.code
-                    .replace(tooltipKey, '//')
-                    .replace(highlightKey, '')
-                    .replace(diffAddKey, '')
-                    .replace(diffRemoveKey, '')
-                    .trim()
-            )
-        )
-
+        navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(currentLanguage.code)))
         setTooltipVisible(true)
-        setTimeout(() => {
-            setTooltipVisible(false)
-        }, 1000)
+        setTimeout(() => setTooltipVisible(false), 500)
+    }
+
+    const handleAskAboutCode = (): void => {
+        const code = replaceProjectInfo(stripAnnotationComments(currentLanguage.code))
+        const language = currentLanguage.language || ''
+        const pagePath = appWindow?.path || location.pathname?.replace(/\/$/, '') || ''
+        const sourceUrl = `https://posthog.com${pagePath}`
+
+        // Use a timestamp so window opens fresh each time
+        openNewChat({
+            path: `ask-max-${pagePath}-code-${Date.now()}`,
+            initialQuestion: `Explain this ${language || 'code'} code from ${sourceUrl}`,
+            codeSnippet: { code, language, sourceUrl },
+        })
     }
 
     const highlightLineNumbers: number[] = []
@@ -360,11 +378,26 @@ export const CodeBlock = ({
                             </div>
                         )}
 
+                        {showAskAI && (
+                            <div className="relative flex items-center justify-center px-1 group/askai">
+                                <button
+                                    onClick={handleAskAboutCode}
+                                    className="ask-posthog-ai-code-snippet inline-flex items-center gap-1 text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                >
+                                    <span className="hidden group-hover/askai:inline whitespace-nowrap text-sm">
+                                        PostHog AI
+                                    </span>
+                                    <IconSparkles className="w-4 h-4" />
+                                </button>
+                            </div>
+                        )}
+
                         {showCopy && (
                             <div className="relative flex items-center justify-center px-1">
                                 <button
                                     onClick={copyToClipboard}
                                     className="text-muted hover:text-secondary px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                    title="Copy to clipboard"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -409,8 +442,8 @@ export const CodeBlock = ({
                 {({ className, tokens, getLineProps, getTokenProps }) => (
                     <pre
                         data-scheme="primary"
-                        className={`w-full m-0 p-0 rounded-t-none rounded-b bg-primary border-primary ${
-                            showLabel ? 'border-t' : ''
+                        className={`w-full m-0 p-0 rounded-b bg-primary border-primary ${
+                            showLabel ? 'rounded-t-none border-t' : 'rounded-t'
                         }`}
                     >
                         <ScrollArea>
