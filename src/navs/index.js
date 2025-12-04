@@ -3887,6 +3887,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-source-maps/react-native',
                         },
                         {
+                            name: 'Android',
+                            url: '/docs/error-tracking/upload-mappings/android',
+                        },
+                        {
                             name: 'CLI',
                             url: '/docs/error-tracking/upload-source-maps/cli',
                         },
