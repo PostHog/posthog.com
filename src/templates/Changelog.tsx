@@ -945,14 +945,14 @@ const RoadmapCards = ({
                                             <div className="border-b border-primary divide-y divide-primary bg-primary/20">
                                                 {periodVideos.map((video) => (
                                                     <div key={video.id} className="p-2">
-                                                        <div className="aspect-video rounded border border-primary overflow-hidden w-full bg-black max-w-screen">
+                                                        <div className="aspect-video rounded border border-primary overflow-hidden w-full bg-black max-w-screen group/video">
                                                             <iframe
                                                                 title={video.title}
                                                                 src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
                                                                 loading="lazy"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                                 allowFullScreen
-                                                                className="w-full h-full"
+                                                                className="w-full h-full pointer-events-none group-hover/video:pointer-events-auto"
                                                             />
                                                         </div>
                                                     </div>
