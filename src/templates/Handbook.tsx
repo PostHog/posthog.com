@@ -478,15 +478,9 @@ export const query = graphql`
                         key
                         type
                         label
-                        secret
                         required
                         description
-                        integration
-                        requiredScopes
-                        hidden
-                        integration_key
-                        integration_field
-                        hint
+                        default
                     }
                     name
                     type
