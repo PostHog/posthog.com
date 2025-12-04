@@ -52,7 +52,7 @@ Critically, you can't do the work of a product engineer without the four essenti
 
 So what makes product engineering more fun than those other roles? In my opinion, it comes down to the _intensity_ of each ingredient.
 
-Let's look at two other roles, specifically two that have been combined to create the product engineer: product management and software engineering.
+Let's look at two other roles, specifically two that have been combined to create the product engineer: [product management and software engineering](/blog/product-engineer-vs-software-engineer).
 
 ### How fun is product management?
 
