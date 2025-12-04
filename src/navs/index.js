@@ -2230,6 +2230,10 @@ export const docsMenu = {
                             url: '/docs/api/early-access-feature',
                         },
                         {
+                            name: 'Endpoints',
+                            url: '/docs/api/endpoints',
+                        },
+                        {
                             name: 'Environments',
                             url: '/docs/api/environments',
                         },
@@ -4943,6 +4947,49 @@ export const docsMenu = {
                 {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/logs/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'red',
+                },
+            ],
+        },
+        {
+            name: 'Endpoints',
+            icon: 'IconCode2',
+            color: 'blue',
+            url: '/docs/endpoints',
+            description: 'Create predefined queries from Insights or SQL and expose them as optimized API endpoints.',
+            children: [
+                {
+                    name: 'Endpoints',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/endpoints',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/endpoints/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Use cases and tips',
+                    url: '/docs/endpoints/use-cases-and-tips',
+                    icon: 'IconBook',
+                    color: 'blue',
+                },
+                {
+                    name: 'Additional features',
+                    url: '/docs/endpoints/additional-features',
+                    icon: 'IconBook',
+                    color: 'blue',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/endpoints/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
                 },
