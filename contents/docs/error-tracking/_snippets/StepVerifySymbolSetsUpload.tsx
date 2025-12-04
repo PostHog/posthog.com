@@ -2,11 +2,13 @@ import React from 'react'
 import { Step } from '../../../../src/components/Docs/Steps'
 import { CallToAction } from '../../../../src/components/CallToAction'
 
-interface StepVerifySymbolsUploadProps {
+interface StepVerifySymbolSetsUploadProps {
     symbolType?: 'source maps' | 'mappings'
 }
 
-export const StepVerifySymbolsUpload: React.FC<StepVerifySymbolsUploadProps> = ({ symbolType = 'source maps' }) => {
+export const StepVerifySymbolSetsUpload: React.FC<StepVerifySymbolSetsUploadProps> = ({
+    symbolType = 'source maps',
+}) => {
     return (
         <Step checkpoint title={`Verify ${symbolType} upload`}>
             Confirm that {symbolType} are successfully uploaded to PostHog.
@@ -23,4 +25,4 @@ export const StepVerifySymbolsUpload: React.FC<StepVerifySymbolsUploadProps> = (
     )
 }
 
-export default StepVerifySymbolsUpload
+export default StepVerifySymbolSetsUpload
