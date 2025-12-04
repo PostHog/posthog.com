@@ -149,7 +149,8 @@ const MenuItem: React.FC<{
     item: MenuItemType
     forceIconIndent?: boolean
     menuIndex: number
-}> = ({ item, forceIconIndent, menuIndex }) => {
+    portalContainer?: HTMLElement | null
+}> = ({ item, forceIconIndent, menuIndex, portalContainer }) => {
     if (item.type === 'separator') {
         return <RadixMenubar.Separator className={SeparatorClasses} />
     }
@@ -185,7 +186,7 @@ const MenuItem: React.FC<{
                             {MenuItemContent(item, forceIconIndent)}
                         </RadixMenubar.SubTrigger>
                     )}
-                    <RadixMenubar.Portal>
+                    <RadixMenubar.Portal container={portalContainer ?? undefined}>
                         <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
                             <ScrollArea className="max-h-screen !overflow-y-auto">
                                 {item.items.map((subItem, subIndex) => (
@@ -194,6 +195,7 @@ const MenuItem: React.FC<{
                                         item={subItem}
                                         forceIconIndent={anyChildHasIcon}
                                         menuIndex={menuIndex}
+                                        portalContainer={portalContainer}
                                     />
                                 ))}
                             </ScrollArea>
@@ -217,7 +219,7 @@ const MenuItem: React.FC<{
                             <IconChevronRight className="size-4" />
                         </div>
                     </RadixMenubar.SubTrigger>
-                    <RadixMenubar.Portal>
+                    <RadixMenubar.Portal container={portalContainer ?? undefined}>
                         <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
                             {item.items}
                         </RadixMenubar.SubContent>
@@ -292,6 +294,16 @@ export interface MenuBarProps {
 
 const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, customTriggerClasses }) => {
     const { isMobile } = useApp()
+    const rootRef = React.useRef<HTMLDivElement | null>(null)
+    const [portalContainer, setPortalContainer] = React.useState<HTMLElement | null>(null)
+
+    React.useEffect(() => {
+        if (!rootRef.current) {
+            return
+        }
+        const container = rootRef.current.closest('[data-menu-container]')
+        setPortalContainer(container instanceof HTMLElement ? container : null)
+    }, [])
 
     // Process menus for mobile if needed
     const processedMenus = React.useMemo(() => {
@@ -311,7 +323,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
     }, [menus, isMobile])
 
     return (
-        <RadixMenubar.Root data-scheme="tertiary" className={`${RootClasses} ${className || ''}`}>
+        <RadixMenubar.Root ref={rootRef} data-scheme="tertiary" className={`${RootClasses} ${className || ''}`}>
             {processedMenus.map((menu, menuIndex) => {
                 // On mobile, if menu has mobileLink, make it a direct link
                 if (isMobile && menu.mobileLink) {
@@ -339,7 +351,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                         >
                             {menu.trigger}
                         </RadixMenubar.Trigger>
-                        <RadixMenubar.Portal>
+                        <RadixMenubar.Portal container={portalContainer ?? undefined}>
                             <RadixMenubar.Content
                                 className={ContentClasses}
                                 align="start"
@@ -348,7 +360,12 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                                 data-scheme="primary"
                             >
                                 {menu.items.map((item, itemIndex) => (
-                                    <MenuItem key={`${menuIndex}-${itemIndex}`} item={item} menuIndex={menuIndex} />
+                                    <MenuItem
+                                        key={`${menuIndex}-${itemIndex}`}
+                                        item={item}
+                                        menuIndex={menuIndex}
+                                        portalContainer={portalContainer}
+                                    />
                                 ))}
                             </RadixMenubar.Content>
                         </RadixMenubar.Portal>

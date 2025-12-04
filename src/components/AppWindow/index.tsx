@@ -550,6 +550,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             ref={windowRef}
                             data-app="AppWindow"
                             data-scheme="tertiary"
+                            data-menu-container
                             suppressHydrationWarning
                             className={`@container absolute !select-auto flex flex-col ${
                                 item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-transparent'
@@ -567,7 +568,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                                     siteSettings.experience === 'boring' ? '' : 'border rounded'
                                                 }`
                                       }`
-                            } ${chrome ? 'overflow-hidden' : ''}`}
+                            } ${chrome ? 'overflow-hidden' : ''} [contain:style]`}
                             style={{
                                 zIndex: item.zIndex,
                             }}
