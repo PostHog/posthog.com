@@ -84,7 +84,7 @@
         "deepmerge": "^4.3.1",
         "dotenv": "^10.0.0",
         "formik": "^2.2.9",
-        "framer-motion": "^4.1.17",
+        "framer-motion": "^12.23.25",
         "fs-extra": "^10.1.0",
         "fuse.js": "^6.6.2",
         "gatsby": "4.25.9",

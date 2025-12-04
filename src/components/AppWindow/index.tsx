@@ -56,7 +56,7 @@ const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean 
 
 const snapThreshold = -50
 
-const Router = (props) => {
+const Router = React.memo(function Router(props: any) {
     const { minimizeWindow } = useApp()
     const { appWindow } = useWindow()
     const { children, path, minimizing, onExit } = props
@@ -90,7 +90,7 @@ const Router = (props) => {
         return <Legal defaultTab={path}>{children}</Legal>
     }
     return (!props.minimizing || appWindow?.appSettings?.size?.autoHeight) && children
-}
+})
 
 const WindowContainer = ({ children, closing }: { children: React.ReactNode; closing: boolean }) => {
     const { closeWindow } = useApp()
@@ -248,20 +248,22 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         setMinimizing(true)
     }
 
+    const handleDragStart = () => {
+        setDragging(true)
+    }
+
     const handleDrag = (_event: any, info: any) => {
-        if (!dragging) setDragging(true)
         if (item.fixedSize) return
         if (!constraintsRef.current) return
 
         const bounds = constraintsRef.current.getBoundingClientRect()
         const newX = position.x + info.offset.x
 
-        if (newX < snapThreshold) {
-            setSnapIndicator('left')
-        } else if (newX > bounds.width - size.width - snapThreshold) {
-            setSnapIndicator('right')
-        } else {
-            setSnapIndicator(null)
+        const newSnapIndicator =
+            newX < snapThreshold ? 'left' : newX > bounds.width - size.width - snapThreshold ? 'right' : null
+
+        if (newSnapIndicator !== snapIndicator) {
+            setSnapIndicator(newSnapIndicator)
         }
     }
 
@@ -287,7 +289,6 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     }
 
     const handleDragTransitionEnd = () => {
-        if (!dragging) setDragging(false)
         if (!constraintsRef.current || !item.ref?.current) return
 
         const containerBounds = constraintsRef.current.getBoundingClientRect()
@@ -296,6 +297,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         const newX = windowBounds.left - containerBounds.left
         const newY = windowBounds.top - containerBounds.top
 
+        if (!dragging) setDragging(false)
         updateWindow(item, {
             position: { x: newX, y: newY },
         })
@@ -354,6 +356,15 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             bringToFront(item)
         }
     }
+
+    const handleRouterExit = useCallback(() => {
+        if (minimizing) {
+            setMinimizing(false)
+            if (siteSettings.experience === 'posthog') {
+                setAnimating(true)
+            }
+        }
+    }, [minimizing, siteSettings.experience])
 
     useEffect(() => {
         const handleResize = () => {
@@ -532,20 +543,18 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             <WindowContainer closing={closing}>
                 {!item.minimized && !closed && (
                     <>
-                        {snapIndicator && (
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 0.3 }}
-                                exit={{ opacity: 0 }}
-                                className="fixed inset-4 border-2 border-blue bg-blue/40 pointer-events-none rounded-md"
-                                style={{
-                                    left: snapIndicator === 'left' ? 0 : '50%',
-                                    width: '50%',
-                                    top: taskbarHeight,
-                                    height: `calc(100% - ${taskbarHeight}px)`,
-                                }}
-                            />
-                        )}
+                        <div
+                            className={`fixed inset-4 border-2 border-blue bg-blue/40 pointer-events-none rounded-md transition-opacity duration-150 ${
+                                snapIndicator ? 'opacity-30' : 'opacity-0 pointer-events-none'
+                            }`}
+                            style={{
+                                left: snapIndicator === 'left' ? 0 : '50%',
+                                width: '50%',
+                                top: taskbarHeight,
+                                height: `calc(100% - ${taskbarHeight}px)`,
+                                visibility: snapIndicator ? 'visible' : 'hidden',
+                            }}
+                        />
                         <motion.div
                             ref={windowRef}
                             data-app="AppWindow"
@@ -558,19 +567,22 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
                                     ? 'border-b border-primary'
                                     : `${
-                                          focusedWindow === item
+                                          dragging
+                                              ? '!shadow-none border-primary [&_*]:!select-none [&_*]:!transition-none'
+                                              : focusedWindow === item
                                               ? 'shadow-2xl border-primary'
                                               : 'shadow-lg border-input'
-                                      } ${dragging ? '[&_*]:select-none' : ''} ${
+                                      } ${
                                           item.minimal
                                               ? '!shadow-none'
                                               : `flex flex-col ${
                                                     siteSettings.experience === 'boring' ? '' : 'border rounded'
                                                 }`
                                       }`
-                            } ${chrome ? 'overflow-hidden' : ''} [contain:style]`}
+                            } ${chrome ? 'overflow-hidden' : ''} [contain: strict]`}
                             style={{
                                 zIndex: item.zIndex,
+                                willChange: 'transform',
                             }}
                             initial={{
                                 scale: 0.08,
@@ -603,35 +615,37 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         : item.appSettings?.size?.autoHeight
                                         ? 'auto'
                                         : size.height,
-                                transition: {
-                                    duration:
-                                        siteSettings.experience === 'boring' ||
-                                        siteSettings.performanceBoost ||
-                                        leftDragResizing
-                                            ? 0
-                                            : 0.2,
-                                    scale: {
-                                        duration:
-                                            siteSettings.experience === 'boring' ||
-                                            siteSettings.performanceBoost ||
-                                            !windowPosition
-                                                ? 0
-                                                : 0.2,
-                                        delay:
-                                            siteSettings.experience === 'boring' ||
-                                            siteSettings.performanceBoost ||
-                                            !windowPosition
-                                                ? 0
-                                                : 0.2,
-                                        ease: [0.2, 0.2, 0.8, 1],
-                                    },
-                                    width: {
-                                        duration: 0,
-                                    },
-                                    height: {
-                                        duration: 0,
-                                    },
-                                },
+                                transition: dragging
+                                    ? { duration: 0 }
+                                    : {
+                                          duration:
+                                              siteSettings.experience === 'boring' ||
+                                              siteSettings.performanceBoost ||
+                                              leftDragResizing
+                                                  ? 0
+                                                  : 0.2,
+                                          scale: {
+                                              duration:
+                                                  siteSettings.experience === 'boring' ||
+                                                  siteSettings.performanceBoost ||
+                                                  !windowPosition
+                                                      ? 0
+                                                      : 0.2,
+                                              delay:
+                                                  siteSettings.experience === 'boring' ||
+                                                  siteSettings.performanceBoost ||
+                                                  !windowPosition
+                                                      ? 0
+                                                      : 0.2,
+                                              ease: [0.2, 0.2, 0.8, 1],
+                                          },
+                                          width: {
+                                              duration: 0,
+                                          },
+                                          height: {
+                                              duration: 0,
+                                          },
+                                      },
                             }}
                             exit={{
                                 scale: 0.005,
@@ -658,7 +672,10 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             dragControls={controls}
                             dragListener={false}
                             dragMomentum={false}
+                            dragElastic={0}
+                            dragTransition={{ power: 0, timeConstant: 0 }}
                             dragConstraints={constraintsRef}
+                            onDragStart={handleDragStart}
                             onDrag={handleDrag}
                             onDragEnd={handleDragEnd}
                             onDragTransitionEnd={handleDragTransitionEnd}
@@ -873,20 +890,12 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 className={`size-full flex-grow ${
                                     chrome ? 'bg-light dark:bg-dark overflow-hidden' : ''
                                 }`}
+                                style={{
+                                    pointerEvents: dragging ? 'none' : 'auto',
+                                }}
                             >
                                 {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
-                                    <Router
-                                        minimizing={minimizing}
-                                        onExit={() => {
-                                            if (minimizing) {
-                                                setMinimizing(false)
-                                                if (siteSettings.experience === 'posthog') {
-                                                    setAnimating(true)
-                                                }
-                                            }
-                                        }}
-                                        {...item.props}
-                                    >
+                                    <Router minimizing={minimizing} onExit={handleRouterExit} {...item.props}>
                                         {item.element}
                                     </Router>
                                 )}
