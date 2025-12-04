@@ -134,11 +134,10 @@ We have a defined [process for proposing changes to teams](/handbook/company/tea
 
 Once a decision is made, the following happens:
 
--   [ ] Ops team updates the [Org Chart](https://app.deel.com/organization-chart/organization/834ac289-7c04-4d93-91f0-8922c5664b77?groupBy=group-by-report) in Deel.
--   [ ] Ops creates an issue with [the small teams template](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/new-small-team.md) and assigns the team lead
+-   [ ] Team Lead creates an issue with [the Org Change template](https://github.com/PostHog/company-internal/blob/93a7efadd180c477a5ef1e88c940774d56edbfc4/.github/ISSUE_TEMPLATE/org-change.yml) and assigns themselves and People Ops
 -   [ ] Exec informs everyone else in the company in the next all hands session.
 
-The small teams template contains a list of tasks for the Ops team and the team lead. 
+The Org Change template contains a list of tasks for the Ops team and the team lead. 
 
 These include standard tasks, such as creating Slack groups and a team page to ensure the team can communicate efficiently.
 
