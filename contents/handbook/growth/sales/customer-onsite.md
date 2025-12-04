@@ -47,7 +47,7 @@ Audience:
 The champions of PostHog at your account
 
 Purpose:
-To level set about PostHog's reputation and role within the customer, and unearth any opportunities or risks, while building stronger relationships with champions. Also a chance to test the water for any cross-sell proposals, and ensure champions are aware of all our products.
+To level set about PostHog's reputation and role within the customer, and unearth any opportunities or risks, while building stronger relationships with champions. Also a chance to test the water for any cross-sell proposals, and ensure champions are aware of all of our products.
 
 Content:
 Discovery and planning with the champions, potentially over a meal or in another less formal context - certainly not in front of their teams or boss, if relevant. Give the champions time to air any frustrations, and ask direct questions about renewal, their roadmap, any current or future needs in their team or beyond. This is a  good time to find out where you really are with a customer and what organizational challenges you may need to navigate, as well as expand their perception of what we can do.
