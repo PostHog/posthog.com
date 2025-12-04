@@ -106,7 +106,7 @@ export default function Link({
     event = '',
     href,
     glossary,
-    contextMenu = true,
+    contextMenu = false,
     customMenuItems = [],
     ...other
 }: Props): JSX.Element {
@@ -225,7 +225,7 @@ export default function Link({
             )}
         </>
     ) : (
-        <MenuWrapper menuItems={menuItems} className={wrapperClassName}>
+        <>
             {onClick && !url ? (
                 <button onClick={handleClick} className={className} disabled={disabled}>
                     {children}
@@ -276,6 +276,6 @@ export default function Link({
                     )}
                 </a>
             )}
-        </MenuWrapper>
+        </>
     )
 }

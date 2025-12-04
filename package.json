@@ -114,6 +114,7 @@
         "github-slugger": "^1.4.0",
         "glob": "^10.3.10",
         "html-to-image": "^1.11.11",
+        "immer": "^11.0.1",
         "instantsearch.js": "^4.49.1",
         "is-relative": "^1.0.0",
         "jsdom": "^20.0.0",

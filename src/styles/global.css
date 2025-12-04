@@ -2635,6 +2635,7 @@ article.reader-view-content-container:has(.quest-sidebar) {
 /* Safari-only performance fix */
 @supports (-webkit-hyphens: none) {
     * {
-        @apply !backdrop-blur-none;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
     }
 }

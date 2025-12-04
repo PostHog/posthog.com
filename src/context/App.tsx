@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useMemo, useState, useCallback, useRef } from 'react'
+import { produce } from 'immer'
 import { AppWindow } from './Window'
 import { WindowSearchUI } from 'components/SearchUI'
 import { navigate } from 'gatsby'
@@ -73,7 +74,7 @@ interface AppContextType {
             previousSize?: { width?: number; height?: number }
             element?: any
         }
-    ) => void
+    ) => AppWindow
     getPositionDefaults: (
         key: string,
         size: { width: number; height: number },
@@ -242,7 +243,7 @@ export const Context = createContext<AppContextType>({
     taskbarHeight: 0,
     addWindow: () => {},
     updateWindowRef: () => {},
-    updateWindow: () => {},
+    updateWindow: () => ({} as AppWindow),
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
     openSearch: () => {},
@@ -1543,28 +1544,15 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             element?: any
         }
     ) => {
-        const newAppWindow = {
-            ...appWindow,
-            position: {
-                ...appWindow.position,
-                ...(updates.position || {}),
-            },
-            size: {
-                ...appWindow.size,
-                ...(updates.size || {}),
-            },
-            previousPosition: {
-                ...appWindow.previousPosition,
-                ...(updates.previousPosition || {}),
-            },
-            previousSize: {
-                ...appWindow.previousSize,
-                ...(updates.previousSize || {}),
-            },
-            ...(updates.element ? { element: updates.element } : {}),
-        }
-        setWindows((windows) => windows.map((w) => (w === appWindow ? newAppWindow : w)))
-        return newAppWindow
+        const updatedWindow = produce(appWindow, (draft) => {
+            if (updates.position) Object.assign(draft.position, updates.position)
+            if (updates.size) Object.assign(draft.size, updates.size)
+            if (updates.previousPosition) Object.assign(draft.previousPosition, updates.previousPosition)
+            if (updates.previousSize) Object.assign(draft.previousSize, updates.previousSize)
+            if (updates.element) draft.element = updates.element
+        })
+        setWindows((windows) => windows.map((w) => (w.key === appWindow.key ? updatedWindow : w)))
+        return updatedWindow
     }
 
     const openSearch = (initialFilter?: string) => {
