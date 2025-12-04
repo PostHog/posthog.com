@@ -940,33 +940,33 @@ const RoadmapCards = ({
                                             {count}
                                         </div>
                                     </div>
-                                    <div className="w-full flex-1 min-h-0 flex flex-col">
-                                        {periodVideos.length > 0 && (
-                                            <div className="border-b border-primary divide-y divide-primary bg-primary/20">
-                                                {periodVideos.map((video) => (
-                                                    <div key={video.id} className="p-2">
-                                                        <div className="aspect-video rounded border border-primary overflow-hidden w-full bg-black max-w-screen group/video">
-                                                            <iframe
-                                                                title={video.title}
-                                                                src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
-                                                                loading="lazy"
-                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                allowFullScreen
-                                                                className="w-full h-full pointer-events-none group-hover/video:pointer-events-auto"
-                                                            />
+                                    <ScrollArea className="w-full flex-1 min-h-0">
+                                        <div className="flex flex-col">
+                                            {periodVideos.length > 0 && (
+                                                <div className="border-b border-primary divide-y divide-primary bg-primary/20">
+                                                    {periodVideos.map((video) => (
+                                                        <div key={video.id} className="p-2">
+                                                            <div className="aspect-video rounded border border-primary overflow-hidden w-full bg-black max-w-screen group/video">
+                                                                <iframe
+                                                                    title={video.title}
+                                                                    src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
+                                                                    loading="lazy"
+                                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                                    allowFullScreen
+                                                                    className="w-full h-full pointer-events-none group-hover/video:pointer-events-auto"
+                                                                />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        )}
-                                        <div className="grid grid-cols-2 h-full divide-x divide-primary min-h-0">
-                                            {columns.map((column) => (
-                                                <div key={column.weekNumber} className="flex flex-col min-h-0">
-                                                    <div className="border-b border-primary px-4 py-2 text-sm font-semibold bg-primary/30">
-                                                        {column.label}
-                                                    </div>
-                                                    <ScrollArea className="flex-1">
-                                                        <ul className="p-0 m-0 list-none min-h-0">
+                                                    ))}
+                                                </div>
+                                            )}
+                                            <div className="grid grid-cols-2 divide-x divide-primary">
+                                                {columns.map((column) => (
+                                                    <div key={column.weekNumber} className="flex flex-col">
+                                                        <div className="border-b border-primary px-4 py-2 text-sm font-semibold bg-primary/30">
+                                                            {column.label}
+                                                        </div>
+                                                        <ul className="p-0 m-0 list-none">
                                                             {column.roadmaps.length === 0 ? (
                                                                 <li className="p-4 text-center text-sm text-secondary opacity-70">
                                                                     No updates
@@ -1028,11 +1028,11 @@ const RoadmapCards = ({
                                                                 })
                                                             )}
                                                         </ul>
-                                                    </ScrollArea>
-                                                </div>
-                                            ))}
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
-                                    </div>
+                                    </ScrollArea>
                                 </div>
                             </div>
                         )
