@@ -16,8 +16,8 @@ const CustomPricingSlide = () => {
             <div className="bg-accent border border-primary max-w-xl mx-auto rounded p-8 text-center">
                 <div className="text-2xl font-bold mb-4">Workflows is free during beta</div>
                 <p className="text-xl">
-                    Eventually we'll offer usage-based pricing with a generous monthly free tier – like we do
-                    with all of our paid products.
+                    Eventually we'll offer usage-based pricing with a generous monthly free tier – like we do with all
+                    of our paid products.
                 </p>
             </div>
         </div>
@@ -99,7 +99,7 @@ export default function Workflows(): JSX.Element {
         templates: {
             overview: 'stacked',
         },
-        exclude: ['answers', 'posthog-on-posthog', 'feature-comparison'],
+        exclude: ['answers', 'posthog-on-posthog', 'feature-comparison', 'videos'],
         content: {
             answersDescription: '',
             answersHeadline: '',
