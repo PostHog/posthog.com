@@ -33,7 +33,7 @@ export const Content = () => {
                     </ul>
                     <p>
                         Endpoints offers a number of advantages over our query API, such as materialization (giving you
-                        better performance) and higher rate limits.
+                        better performance) and through the use of isolated resources.
                     </p>
                     <div className="flex justify-center mb-8">
                         <div className="text-center">
