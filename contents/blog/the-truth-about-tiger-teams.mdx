@@ -1,6 +1,6 @@
 ---
-title: What no one tells you about tiger teams
-date: 2025-12-02
+title: Why small teams crush tiger teams
+date: 2025-12-04
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -15,7 +15,7 @@ tags:
     - Culture
     - Product
 seo:
-    metaTitle: 'What no one tells you about tiger teams'
+    metaTitle: 'Why small teams crush tiger teams'
     metaDescription: "Tiger teams sound great in theory, but they rarely deliver. Here's why small teams beat tiger teams every time, and how to structure your org for speed."
 ---
 
@@ -47,17 +47,35 @@ A tiger team is typically a group of specialists and subject matter experts pull
 
 The intent behind it is good. The execution rarely is.
 
-## Why tiger teams sound great but often aren't
+## How small teams at PostHog are different
 
-### 1. It's performative autonomy
+PostHog is organized into organizational units called "[small teams](/handbook/company/small-teams)". Each small team is a multi-disciplinary, self-sufficient group of 2-6 people who own an area of the product or company. We have small teams spanning product, engineering, and operations ([see the full list here](/teams)).
+
+Small teams at PostHog operate like their own tiny startups. They have their own goals, their own roadmap, their own retrospectives. They make their own decisions about what to build and how to build it.
+
+And crucially: they actually _can_ make their own decisions.
+
+Here's why that matters:
+
+## 1. Tiger teams get performative autonomy
 
 Someone somewhere recognized that the normal way of doing things (i.e. the endless approvals, the alignment meetings, the death-by-committee) was too slow to solve urgent problems. So they thought: what if we pulled together our best people, gave them a focused mission, and let them move fast?
 
 Good instinct. Makes sense.
 
-The problem is that tiger teams rarely get what they *actually* need to succeed: real autonomy. Instead, they get the aesthetics of autonomy: a cool name, a "war room" (aka a sad corner office with a big table, post-its, and fluorescent lights), and maybe some pizza budget. What they don't get is the actual authority to make decisions without playing telephone across the org.
+The problem is that tiger teams don't always get what they *actually* need to succeed: real, self-contained autonomy. Instead, they get the aesthetics of authority: a cool name, a "war room" (aka a sad corner office with a big table, post-its, and fluorescent lights), and maybe some pizza budget. 
 
-### 2. It's a band-aid
+If autonomy isn't already part of the culture, fully letting go can feel like too big a leap, even for the most open-minded leaders. What if they make the wrong call? So leadership holds on to the steering wheel, even if they loosen the grip a little. Someone created this tiger team, which means someone is accountable for its success. Approval chains might get shortened, but there's still a leash.
+
+### Small teams get real autonomy
+
+At PostHog, small teams have final call on what ships – no external QA, no approval chains, no waiting for someone three levels up to sign off. The team lead isn't a manager; they're responsible for making sure the team ships, not for telling people what to do.
+
+This is usually how tiger team defenders push back: "but what about cross-functional collaboration?" Small teams don't mean siloed teams. At PostHog, toe-stepping is actively encouraged. You can (and should) raise PRs for things outside your team's domain, and we consult each other whenever it makes sense to do so. 
+
+The difference is that we treat collaboration as a resource to pull from, not a process to comply with.
+
+## 2. Tiger teams are band-aids
 
 Tiger teams are the corporate equivalent of calling in a SWAT team to fix your leaky faucet. Sure, they'll get the job done, but at what cost? And more importantly, what happens when the faucet starts leaking again next month?
 
@@ -65,70 +83,35 @@ Here's the fundamental issue: tiger teams are designed around problems, not prod
 
 Tiger teams are, therefore, a symptom of organizational dysfunction – a sign that your normal operating mode can't handle important problems in its "normal state". They exist because someone realized that day-to-day operations are too [bogged down by collaboration](/newsletter/collaboration-sucks) to actually ship anything urgent. 
 
-### 3. It's deceptively inefficient
+### Small teams are long-term solutions
 
-They feel fast because there's urgency and focus and probably some executive breathing down everyone's necks, but it's an inefficient approach.
-
-These are people who don't usually work together, which means they're spending the first chunk of their time building context, learning each other's working styles, and figuring out who actually makes decisions (see: performative autonomy). Half the early meetings for newly assembled tiger teams are just getting everyone on the same page about how to get on the same page. 
-
-Then, once they ship their fix, high-fives all around, and everyone goes back to their regular jobs. But where does the knowledge go? Who maintains the thing they built? Who remembers why certain decisions were made six months from now when something breaks again? The answer is usually "nobody" or "some poor soul who wasn't even on the original team." 
-
-Then the next fire starts, and you do it all over again.
-
-### 4. It breeds resentment
-
-Here's what usually doesn't make it into the tiger team retro: the people left behind.
-
-While they gets the shiny title, the exec attention, and the mandate to "move fast and break things," everyone else is still stuck in the slow(er) lane. Often, they're the ones who identified the problem in the first place, but instead of getting the green light to fix it, they get to watch someone else parachute in and take it from here.
-
-The implicit message is: you're not trusted to handle the important stuff. 
-
-Tiger teams create a two-tier system, the "elite squad" and everyone else. And everyone else notices. 
-
-Great for morale, as you can imagine.
-
-![Spongebob meme](https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/pasted_image_2025_12_02_T22_09_32_293_Z_3418de753c.png)
-
-## How are small teams different
-
-PostHog is organized into organizational units called "[small teams](/handbook/company/small-teams)". Each small team is a multi-disciplinary, self-sufficient group of 2-6 people who own an area of the product or company. We have small teams spanning product, engineering, and operations ([see the full list here](/teams)).
-
-Small teams at PostHog operate like their own tiny startups. They have their own goals, their own roadmap, their own retrospectives. The team lead isn't a manager in the traditional sense; they're responsible for making sure the team ships, not for telling people what to do. They make their own decisions about what to build and how to build it.
-
-And crucially: they actually _can_ make those decisions.
-
-| Tiger teams | Small teams |
-|-------------|-------------|
-| Own a problem | Own an area of the product |
-| Designed to find solutions | Built to ship, maintain, and improve solutions |
-| Report to someone else's boss' boss | Have final call on what ships |
-| Disband after the fix | Stick around, and so does the institutional knowledge |
-
-## What makes small teams better?
-
-### Ownership changes behaviour (and leads to higher quality work)
-
-When you own something permanently, you think about it differently; this changes behavior in subtle but important ways. 
+When you own something permanently, you think about it differently. This changes behavior in subtle but important ways. 
 
 A tiger team might ship a quick fix that technically solves the problem but creates technical debt. Why wouldn't they? They won't be around to pay it off. Worse, they can have an incentive to *not* fix things too permanently. Why make themselves obsolete? It's a self-reinforcing loop of misaligned incentives: the people with the most power to fix the system are the same people who benefit from it staying broken.
+
+A former organization of one of our engineers was in a constant state of "red alert" (their version of a tiger team). The folks involved had no incentive to improve how the organization worked. This was because, if they solved the upstream problem of organization dysfunction, they'd lose their autonomy (and special status) as a tiger team.
 
 A small team, on the other hand, doesn't benefit from problems – and knows that every shortcut taken is a loan against their own future productivity. So they think long-term by default, and the quality of work tends to be higher, because Future Them is going to deal with it if it's not.
 
 Tiger teams are renters putting a bucket under the leak. Small teams are owners fixing the pipe.
 
-### You _can_ spell collaboration without bureaucracy
+## 3. Tiger teams are deceptively inefficient
 
-This is usually how tiger team defenders push back: "but what about cross-functional collaboration?"
+They feel fast because there's urgency and focus and probably some executive breathing down everyone's necks, but it's an inefficient approach.
 
-Small teams don't mean siloed teams. At PostHog, toe-stepping is actively encouraged. You can (and should) raise PRs for things outside your team's domain, and we consult each other whenever it makes sense to do so. 
+These are people who don't usually work together, which means they're spending the first chunk of their time building context, learning each other's working styles, and figuring out who actually makes decisions (see: performative autonomy). 
 
-The difference is that we treat collaboration as a resource to pull from, not a process to comply with. 
+Then, once they ship their fix, high-fives all around, and everyone goes back to their regular jobs. But where does the knowledge go? Who maintains the thing they built? Who remembers why certain decisions were made six months from now when something breaks again? The answer is usually "nobody" or "some poor soul who wasn't even on the original team." 
 
-### Nimble by default
+Then the next fire starts, and you do it all over again.
+
+### Small teams are nimble by default
 
 Knowing that smaller, more autonomous units move faster, but only applying that insight when there's a fire to put out is akin to knowing that exercise is good for you, but only working out when you're already having a heart attack.
 
 Having an organizational structure grounded in velocity and autonomy isn't something we switch on during emergencies, it's [how we operate all the time](/founders/how-come-we-ship-so-much) – whether we're responding to an outage or building a new feature on a random Tuesday.
+
+Small teams skip the startup costs that make tiger teams slow. The context is already there. The relationships are already built. The codebase is already familiar. When something needs to ship, they just... ship it.
 
 ## TL;DR
 
