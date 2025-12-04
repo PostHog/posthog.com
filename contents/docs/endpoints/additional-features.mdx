@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 ## Versioning
 
 It's possible to update the version of an endpoint - this happens when the underlying query changes. Default `/run` API calls will use the latest version of a query, but if you want to run an older version you can specify that in the body of the request. You can find example usage in the Playground tab of an endpoint that has more than one version.
@@ -15,6 +17,12 @@ Endpoints have a couple of configuration options that enable better performance 
 ### Materialization
 
 For better performance, you can materialize your HogQL based endpoint. Materialized queries are precomputed on a desired frequency, significantly improving the response time of the API since we don't need to re-run the query on every request.
+
+<CalloutBox icon="IconStarFilled" type="fyi" title="Endpoints supporting materialization">
+
+We currently only support materializing a SQL based endpoint, and are actively working on supporting insight based endpoints too.
+
+</CalloutBox>
 
 ### Caching
 
