@@ -65,7 +65,7 @@ Detailed checklist available in the [new hire onboarding checklist](https://docs
 - Focus on taking more and more ownership on calls so that team members are just there as a safety net.  
 - Continue to meet with customers - very quickly, you should be doing these solo. The customers you are working with will mostly just be getting started, so you'll see a lot of very familiar patterns emerge.
 - Make sure all your tooling is fully set up.
-- Set up a call with [Daniel](https://posthog.com/community/profiles/34722) to get to know more about Vitally playbooks, updating Metabase queries, and our internal metrics.
+- Set up a call with [Daniel](https://posthog.com/community/profiles/34722) to get a "soft intro" to Vitally playbooks, segments, and our internal metrics. It's not a deep-dive - just getting familiar.
 
 
 ## How do I know if I'm on track?
