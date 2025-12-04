@@ -934,6 +934,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/development-process',
             },
             {
+                name: 'Security best practices',
+                url: '/handbook/engineering/security',
+            },
+            {
                 name: 'Setting up SSL locally',
                 url: '/handbook/engineering/setup-ssl-locally',
             },
@@ -1034,6 +1038,10 @@ export const handbookSidebar = [
                     {
                         name: 'Testimonials & G2',
                         url: '/handbook/brand/testimonials',
+                    },
+                    {
+                        name: 'Campaigns & coupons',
+                        url: '/handbook/growth/marketing/campaigns-and-coupons',
                     },
                 ],
             },
@@ -1759,7 +1767,7 @@ export const companyMenu = {
             name: 'Changelog',
             icon: 'IconCalendar',
             color: 'red',
-            url: '/changelog/2025',
+            url: '/changelog',
         },
         { name: 'People', icon: 'IconPeople', color: 'blue', url: '/people' },
         { name: 'Handbook', icon: 'IconBook', color: 'seagreen', url: '/handbook', children: handbookSidebar },
@@ -3792,6 +3800,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/node',
                         },
                         {
+                            name: 'Ruby',
+                            url: '/docs/error-tracking/installation/ruby',
+                        },
+                        {
                             name: 'React',
                             url: '/docs/error-tracking/installation/react',
                         },
@@ -3877,6 +3889,10 @@ export const docsMenu = {
                         {
                             name: 'React Native',
                             url: '/docs/error-tracking/upload-source-maps/react-native',
+                        },
+                        {
+                            name: 'Android',
+                            url: '/docs/error-tracking/upload-mappings/android',
                         },
                         {
                             name: 'CLI',

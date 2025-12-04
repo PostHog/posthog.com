@@ -1246,7 +1246,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                         bringToFront(nextFocusedWindow)
                     }
                 } else {
-                    window.history.pushState({}, '', '/')
+                    navigate('/', { state: { skipPageUpdate: true } })
                 }
                 setWindows(windowsFiltered)
             }, 0)
@@ -1720,7 +1720,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     useEffect(() => {
-        if ((location.key === 'initial' && location.pathname === '/' && isMobile) || paramsWindows) {
+        if (
+            (location.key === 'initial' && location.pathname === '/' && isMobile) ||
+            paramsWindows ||
+            location.state?.skipPageUpdate
+        ) {
             return
         }
         updatePages(element)
