@@ -77,7 +77,7 @@ export const Content = () => {
                 </h2>
                 <div>
                     <p>Endpoints follow this URL pattern:</p>
-                    <code>/api/environments/[team_id]/endpoints/[user_chosen_name]/run</code>
+                    <code>/api/environments/:project_id/endpoints/:endpoint_name/run</code>
                     <p>For example:</p>
                     <ul>
                         <li>
