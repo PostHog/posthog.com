@@ -514,7 +514,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'Changelog',
-                    link: '/changelog/2025',
+                    link: '/changelog',
                 },
                 {
                     type: 'item',
