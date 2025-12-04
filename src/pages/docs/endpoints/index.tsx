@@ -19,7 +19,7 @@ export const Content = () => {
                 <Beta />
                 <div>
                     <p>
-                        Endpoints enable you to create predefined queries from PostHog Insights or SQL queries and
+                        Endpoints enable you to create predefined queries from PostHog insights or SQL queries and
                         expose them as API endpoints. You could use endpoints to:
                     </p>
                     <ul>
@@ -59,10 +59,10 @@ export const Content = () => {
                     <p>Endpoints follow a simple workflow:</p>
                     <ol>
                         <li>
-                            <b>Create an Insight or SQL query</b> in PostHog that defines the data you want to expose
+                            <b>Create an insight or SQL query</b> in PostHog that defines the data you want to expose
                         </li>
                         <li>
-                            <b>Create an endpoint</b> from that Insight or query, giving it a custom name
+                            <b>Create an endpoint</b> from that insight or query, giving it a custom name
                         </li>
                         <li>
                             <b>Access the data</b> via a simple API endpoint with improved performance and rate limits
@@ -109,7 +109,7 @@ export const Content = () => {
                     </ul>
                     <p>
                         If you need to run ad-hoc queries or don't have predefined queries,{' '}
-                        <Link to="/docs/api/queries">API queries</Link> may be a better fit.
+                        <Link to="/docs/api/queries">API queries</Link> may be a better fit, but it will come at a cost.
                     </p>
                 </CalloutBox>
             </section>
@@ -153,7 +153,7 @@ const Endpoints: React.FC = () => {
                     <Intro
                         subheader="Getting started"
                         title="Endpoints"
-                        description="Create predefined queries from Insights or SQL and expose them as optimized API endpoints."
+                        description="Create predefined queries from insights or SQL and expose them as optimized API endpoints."
                         buttonText="Get started"
                         buttonLink="/docs/endpoints/start-here"
                     />
