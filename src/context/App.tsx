@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useEffect, useMemo, useState, useCallback, useRef } from 'react'
-import { produce } from 'immer'
+import { produce, setAutoFreeze } from 'immer'
+
+// Disable Immer's auto-freeze to prevent refs stored in window state from becoming read-only
+// This fixes "Cannot assign to read only property 'current'" errors with framer-motion
+setAutoFreeze(false)
 import { AppWindow } from './Window'
 import { WindowSearchUI } from 'components/SearchUI'
 import { navigate } from 'gatsby'
@@ -1232,25 +1236,28 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     const menu = injectDynamicChildren(initialMenu)
 
-    const closeWindow = (item: AppWindow) => {
-        setTimeout(() => {
-            const windowsFiltered = windows.filter((el) => el.path !== item.path)
-            const nextFocusedWindow = windowsFiltered.reduce<AppWindow | undefined>(
-                (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
-                undefined
-            )
-            if (nextFocusedWindow && !nextFocusedWindow.minimized) {
-                if (nextFocusedWindow.path.startsWith('/')) {
-                    navigate(`${nextFocusedWindow.path}${nextFocusedWindow.location?.search || ''}`)
+    const closeWindow = useCallback(
+        (item: AppWindow) => {
+            setTimeout(() => {
+                const windowsFiltered = windows.filter((el) => el.path !== item.path)
+                const nextFocusedWindow = windowsFiltered.reduce<AppWindow | undefined>(
+                    (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
+                    undefined
+                )
+                if (nextFocusedWindow && !nextFocusedWindow.minimized) {
+                    if (nextFocusedWindow.path.startsWith('/')) {
+                        navigate(`${nextFocusedWindow.path}${nextFocusedWindow.location?.search || ''}`)
+                    } else {
+                        bringToFront(nextFocusedWindow)
+                    }
                 } else {
-                    bringToFront(nextFocusedWindow)
+                    navigate('/', { state: { skipPageUpdate: true } })
                 }
-            } else {
-                navigate('/', { state: { skipPageUpdate: true } })
-            }
-            setWindows(windowsFiltered)
-        }, 0)
-    }
+                setWindows(windowsFiltered)
+            }, 0)
+        },
+        [windows]
+    )
 
     const bringToFront = useCallback((item: AppWindow, location?: Location, position?: { x: number; y: number }) => {
         setWindows((windows) =>
