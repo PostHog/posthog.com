@@ -2641,3 +2641,11 @@ article.reader-view-content-container:has(.quest-sidebar) {
         backdrop-filter: none !important;
     }
 }
+
+/* Window resize - prevent text selection */
+.resizing-window,
+.resizing-window * {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    cursor: inherit !important;
+}

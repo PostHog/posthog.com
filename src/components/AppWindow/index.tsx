@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo, useRef, useCallback } from 'react'
-import { AnimatePresence, motion, PanInfo, useDragControls } from 'framer-motion'
+import { AnimatePresence, motion, useDragControls } from 'framer-motion'
 import {
     IconChevronDown,
     IconDocument,
@@ -197,21 +197,91 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         )
     }
 
-    const handleDragResize = (
-        item: AppWindowType,
-        info: PanInfo,
-        change: { x: boolean } | { y: boolean } | { x: boolean; y: boolean }
-    ) => {
-        const update: { size?: { height?: number; width?: number }; position?: { x: number } } = {}
-        if ('y' in change) update.size = { height: Math.max(size.height + info.delta.y, sizeConstraints.min.height) }
-        if ('x' in change) {
-            update.size ||= {}
-            const delta = leftDragResizing ? -1 * info.delta.x : info.delta.x
-            update.size.width = Math.max(size.width + delta, sizeConstraints.min.width)
-            if (leftDragResizing) update.position = { x: item.position.x + size.width - update.size.width }
-        }
-        updateWindow(item, update)
-    }
+    // Resize preview - pure DOM manipulation, no React during drag
+    const resizeRef = useRef<{
+        x: number
+        y: number
+        w: number
+        h: number
+        px: number
+        py: number
+        left: boolean
+    } | null>(null)
+    const previewRef = useRef<HTMLDivElement>(null)
+
+    const startResize = useCallback(
+        (e: React.PointerEvent, left = false) => {
+            e.preventDefault()
+            ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
+            document.body.classList.add('resizing-window')
+
+            const preview = previewRef.current
+            if (preview) {
+                preview.style.display = 'block'
+                preview.style.left = `${position.x}px`
+                preview.style.top = `${position.y}px`
+                preview.style.width = `${size.width}px`
+                preview.style.height = `${size.height}px`
+            }
+
+            resizeRef.current = {
+                x: e.clientX,
+                y: e.clientY,
+                w: size.width,
+                h: size.height,
+                px: position.x,
+                py: position.y,
+                left,
+            }
+            if (left) setLeftDragResizing(true)
+        },
+        [size.width, size.height, position.x, position.y]
+    )
+
+    const onResize = useCallback(
+        (e: React.PointerEvent) => {
+            const r = resizeRef.current
+            const preview = previewRef.current
+            if (!r || !preview) return
+
+            const dx = e.clientX - r.x
+            const dy = e.clientY - r.y
+            const w = Math.max(r.left ? r.w - dx : r.w + dx, sizeConstraints.min.width)
+            const h = Math.max(r.h + dy, sizeConstraints.min.height)
+            const x = r.left ? r.px + r.w - w : r.px
+
+            preview.style.left = `${x}px`
+            preview.style.width = `${w}px`
+            preview.style.height = `${h}px`
+        },
+        [sizeConstraints.min.width, sizeConstraints.min.height]
+    )
+
+    const endResize = useCallback(
+        (e: React.PointerEvent) => {
+            const r = resizeRef.current
+            const preview = previewRef.current
+            if (!r) return
+            ;(e.target as HTMLElement).releasePointerCapture(e.pointerId)
+            document.body.classList.remove('resizing-window')
+
+            // Get final values from DOM
+            const w = parseInt(preview?.style.width || '0')
+            const h = parseInt(preview?.style.height || '0')
+            const x = parseInt(preview?.style.left || '0')
+
+            if (preview) preview.style.display = 'none'
+
+            updateWindow(item, {
+                size: { width: w, height: h },
+                ...(r.left && { position: { x } }),
+            })
+
+            resizeRef.current = null
+            setLeftDragResizing(false)
+        },
+        [item, updateWindow]
+    )
 
     const handleDoubleClick = () => {
         const newSize = beyondViewport(sizeConstraints.max)
@@ -555,6 +625,12 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 visibility: snapIndicator ? 'visible' : 'hidden',
                             }}
                         />
+                        {/* Resize preview outline - always mounted, toggled via display */}
+                        <div
+                            ref={previewRef}
+                            className="absolute border-2 border-blue rounded pointer-events-none"
+                            style={{ display: 'none', zIndex: item.zIndex + 1 }}
+                        />
                         <motion.div
                             ref={windowRef}
                             data-app="AppWindow"
@@ -890,9 +966,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 className={`size-full flex-grow ${
                                     chrome ? 'bg-light dark:bg-dark overflow-hidden' : ''
                                 }`}
-                                style={{
-                                    pointerEvents: dragging ? 'none' : 'auto',
-                                }}
+                                style={{ pointerEvents: dragging ? 'none' : 'auto' }}
                             >
                                 {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
                                     <Router minimizing={minimizing} onExit={handleRouterExit} {...item.props}>
@@ -902,71 +976,41 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             </div>
                             {!item.fixedSize && !item.minimal && (
                                 <>
-                                    <motion.div
-                                        data-scheme="tertiary"
-                                        className="group absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize !transform-none"
-                                        drag="x"
-                                        dragMomentum={false}
-                                        dragConstraints={{ left: 0, right: 0 }}
-                                        onDrag={(_event, info) => handleDragResize(item, info, { x: true })}
-                                    >
-                                        <div className="relative w-full h-full">
-                                            <div className="hidden group-hover:block absolute inset-y-0 right-0 w-[2px] bg-light-8" />
-                                            <div className="hidden group-hover:block absolute -bottom-6 h-6 right-0 w-[2px] bg-light-8" />
-                                        </div>
-                                    </motion.div>
-                                    <motion.div
-                                        data-scheme="tertiary"
-                                        className="group absolute left-0 top-0 w-1.5 bottom-6 cursor-ew-resize !transform-none"
-                                        drag="x"
-                                        dragMomentum={false}
-                                        dragConstraints={{ left: 0, right: 0 }}
-                                        onDragStart={() => setLeftDragResizing(true)}
-                                        onDrag={(_event, info) => handleDragResize(item, info, { x: true })}
-                                        onDragEnd={() => setLeftDragResizing(false)}
-                                    >
-                                        <div className="relative w-full h-full">
-                                            <div className="hidden group-hover:block absolute inset-y-0 left-0 w-[2px] bg-light-8" />
-                                            <div className="hidden group-hover:block absolute -bottom-6 h-6 left-0 w-[2px] bg-light-8" />
-                                        </div>
-                                    </motion.div>
-                                    <motion.div
-                                        data-scheme="tertiary"
-                                        className="group absolute bottom-0 left-0 right-6 h-1.5 cursor-ns-resize !transform-none"
-                                        drag="y"
-                                        dragMomentum={false}
-                                        dragConstraints={{ top: 0, bottom: 0 }}
-                                        onDrag={(_event, info) => handleDragResize(item, info, { y: true })}
-                                    >
-                                        <div className="relative w-full h-full">
-                                            <div className="hidden group-hover:block absolute inset-x-0 bottom-0 h-[2px] bg-light-8" />
-                                            <div className="hidden group-hover:block absolute bottom-0 -right-6 w-6 h-[2px] bg-light-8" />
-                                        </div>
-                                    </motion.div>
-                                    <motion.div
-                                        className="group absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex items-center justify-center !transform-none"
-                                        drag
-                                        dragMomentum={false}
-                                        dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-                                        onDrag={(_event, info) => handleDragResize(item, info, { x: true, y: true })}
-                                    >
-                                        <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
-                                            <div className="absolute -bottom-10 -right-10 group-hover:-bottom-5 group-hover:-right-5 transition-all h-8 w-8 bg-accent-2 border-t border-light-8 -rotate-45" />
-                                        </div>
-                                    </motion.div>
-                                    <motion.div
-                                        className="group absolute bottom-0 left-0 w-6 h-6 cursor-sw-resize flex items-center justify-center !transform-none"
-                                        drag
-                                        dragMomentum={false}
-                                        dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-                                        onDragStart={() => setLeftDragResizing(true)}
-                                        onDrag={(_event, info) => handleDragResize(item, info, { x: true, y: true })}
-                                        onDragEnd={() => setLeftDragResizing(false)}
-                                    >
-                                        <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
-                                            <div className="absolute -bottom-10 -left-10 group-hover:-bottom-5 group-hover:-left-5 transition-all h-8 w-8 bg-accent-2 border-t border-light-8 rotate-45" />
-                                        </div>
-                                    </motion.div>
+                                    {/* Right edge */}
+                                    <div
+                                        className="absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize touch-none"
+                                        onPointerDown={(e) => startResize(e)}
+                                        onPointerMove={onResize}
+                                        onPointerUp={endResize}
+                                    />
+                                    {/* Left edge */}
+                                    <div
+                                        className="absolute left-0 top-0 w-1.5 bottom-6 cursor-ew-resize touch-none"
+                                        onPointerDown={(e) => startResize(e, true)}
+                                        onPointerMove={onResize}
+                                        onPointerUp={endResize}
+                                    />
+                                    {/* Bottom edge */}
+                                    <div
+                                        className="absolute bottom-0 left-6 right-6 h-1.5 cursor-ns-resize touch-none"
+                                        onPointerDown={(e) => startResize(e)}
+                                        onPointerMove={onResize}
+                                        onPointerUp={endResize}
+                                    />
+                                    {/* Bottom-right corner */}
+                                    <div
+                                        className="absolute bottom-0 right-0 w-6 h-6 cursor-se-resize touch-none"
+                                        onPointerDown={(e) => startResize(e)}
+                                        onPointerMove={onResize}
+                                        onPointerUp={endResize}
+                                    />
+                                    {/* Bottom-left corner */}
+                                    <div
+                                        className="absolute bottom-0 left-0 w-6 h-6 cursor-sw-resize touch-none"
+                                        onPointerDown={(e) => startResize(e, true)}
+                                        onPointerMove={onResize}
+                                        onPointerUp={endResize}
+                                    />
                                 </>
                             )}
                         </motion.div>
