@@ -105,7 +105,7 @@ Our customers are always central to our work. There’s time and space to work o
 - Be yourself and stay human. Don’t send AI-generated emails to customers. 
 - Set an autoresponder in your inbox whenever you take a longer time off, and direct your customers to `onboarding@posthog.com` so that we can pick up your conversations.
 - Share your knowledge! Share what you learnt, or found out - the whole team will benefit from it.
-- Share and ask for feedback. Remember that it should be kind and factual, not based on assumptions. More on that [here](https://posthog.com/handbook/people/feedback).
+- Share and ask for feedback. Remember that it should be kind and factual, not based on assumptions. More on that [in the Handbook](https://posthog.com/handbook/people/feedback).
 - Don’t be late for calls. It’s rude, the same as eating on them. 
 - Use the Time Off tool to communicate your absence in advance.
 - Keep your promises. If you promised to follow up with a customer or colleague, or work on a project, do it.
