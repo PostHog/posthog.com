@@ -30,16 +30,6 @@ The longest available retention period depends on your PostHog plan:
 
 > **Note:** When a recording expires, the deletion is not immediate. Recordings may still appear for a short time after the retention period expires or when manually deleted via the UI. Once a recording has been deleted we are unable to restore it - this makes data retention a useful feature if you are subject to data protection regulations.
 
-## Long-term storage
-
-Regardless of your data retention settings, some recordings are stored for a full year:
-
-* recordings pinned to a playlist
-* recordings shared publicly
-* recordings added to a notebook
-
->  🧠 **Heads up:** This isn't meant to be a storage hack! We limit storage to keep replay prices low for everyone. If it looks like someone's gaming the system (e.g. automating these actions to stockpile recordings), we might apply a fair-use limitation and block automation against these endpoints for their project.
-
 ## Self-hosted installations
 
 The original version of session replay stored recordings in ClickHouse. At a higher scale, this was impractical and expensive. To make PostHog cheaper and easier to run and maintain, we have deprecated storing recordings in ClickHouse. We now only support [blob storage backed recordings](/docs/how-posthog-works/recordings-ingestion). In PostHog Cloud, we use AWS S3 as a blob store. Self-hosted versions include [MINIO](https://min.io/) to enable you to use whichever blob storage you prefer.

@@ -71,36 +71,36 @@ module.exports = {
             retrievePages('newsletter', '/^newsletter/'),
             retrievePages('product-engineers', '/^product-engineers/'),
             retrievePages('templates', '/^templates/'),
-            {
-                query: `
-                            {
-                              endpoints: allApiEndpoint {
-                                nodes {
-                                  id
-                                  url
-                                  title: name
-                                  schema {
-                                    httpVerb
-                                    path
-                                  }
-                                  internal {
-                                    contentDigest
-                                  }
-                                }
-                              }
-                            }
-                        `,
-                transformer: ({ data }) => {
-                    return data.endpoints.nodes.map(({ url, ...endpoint }) => {
-                        return {
-                            ...endpoint,
-                            slug: url.slice(1),
-                            type: 'api',
-                            path_ranking: 1,
-                        }
-                    })
-                },
-            },
+            // {
+            //     query: `
+            //                 {
+            //                   endpoints: allApiEndpoint {
+            //                     nodes {
+            //                       id
+            //                       url
+            //                       title: name
+            //                       schema {
+            //                         httpVerb
+            //                         path
+            //                       }
+            //                       internal {
+            //                         contentDigest
+            //                       }
+            //                     }
+            //                   }
+            //                 }
+            //             `,
+            //     transformer: ({ data }) => {
+            //         return data.endpoints.nodes.map(({ url, ...endpoint }) => {
+            //             return {
+            //                 ...endpoint,
+            //                 slug: url.slice(1),
+            //                 type: 'api',
+            //                 path_ranking: 1,
+            //             }
+            //         })
+            //     },
+            // },
             {
                 query: `{ query: sitePage { id } }`,
                 transformer: () => {
