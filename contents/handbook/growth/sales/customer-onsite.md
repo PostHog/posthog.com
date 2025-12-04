@@ -41,7 +41,7 @@ The goal set to the audience is to build a set of actions and dashboards that re
 ### Check-in and planning with champions
 
 Length:
-half an hour to an hour
+30 minutes to an hour
 
 Audience:
 The champions of PostHog at your account
