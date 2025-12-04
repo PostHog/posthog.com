@@ -249,8 +249,9 @@ export const CodeBlock = ({
         const pagePath = appWindow?.path || location.pathname?.replace(/\/$/, '') || ''
         const sourceUrl = `https://posthog.com${pagePath}`
 
+        // Use a timestamp so window opens fresh each time
         openNewChat({
-            path: `ask-max-${pagePath}`,
+            path: `ask-max-${pagePath}-code-${Date.now()}`,
             initialQuestion: `Explain this ${language || 'code'} code from ${sourceUrl}`,
             codeSnippet: { code, language, sourceUrl },
         })
