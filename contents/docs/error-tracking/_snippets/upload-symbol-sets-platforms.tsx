@@ -1,7 +1,7 @@
 import React from 'react'
 import List from 'components/List'
 
-const UploadSourceMapPlatforms = () => {
+const UploadSymbolSetsPlatforms = () => {
     const platforms = [
         {
             label: 'Web',
@@ -57,4 +57,4 @@ const UploadSourceMapPlatforms = () => {
 
     return <List className="grid sm:grid-cols-2 mb-4" items={platforms} />
 }
-export default UploadSourceMapPlatforms
+export default UploadSymbolSetsPlatforms
