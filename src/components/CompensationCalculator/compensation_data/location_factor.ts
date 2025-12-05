@@ -1069,7 +1069,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
         country: 'Bulgaria',
         area: 'All',
         locationFactor: 0.6,
-        currency: 'BGN',
+        currency: 'EUR',
     },
     {
         country: 'Moldova',
