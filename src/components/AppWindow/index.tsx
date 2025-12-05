@@ -714,31 +714,27 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         : item.appSettings?.size?.autoHeight
                                         ? 'auto'
                                         : size.height,
-                                transition: dragging
-                                    ? { duration: 0 }
-                                    : {
-                                          duration:
-                                              siteSettings.experience === 'boring' || siteSettings.performanceBoost
-                                                  ? 0
-                                                  : 0.2,
-                                          scale: {
-                                              duration:
-                                                  siteSettings.experience === 'boring' ||
-                                                  siteSettings.performanceBoost ||
-                                                  !windowPosition
-                                                      ? 0
-                                                      : 0.2,
-                                              delay:
-                                                  siteSettings.experience === 'boring' ||
-                                                  siteSettings.performanceBoost ||
-                                                  !windowPosition
-                                                      ? 0
-                                                      : 0.2,
-                                              ease: [0.2, 0.2, 0.8, 1],
-                                          },
-                                          width: { duration: 0 },
-                                          height: { duration: 0 },
-                                      },
+                                transition: {
+                                    x: { duration: 0 },
+                                    y: { duration: 0 },
+                                    width: { duration: 0 },
+                                    height: { duration: 0 },
+                                    scale: {
+                                        duration:
+                                            siteSettings.experience === 'boring' ||
+                                            siteSettings.performanceBoost ||
+                                            !windowPosition
+                                                ? 0
+                                                : 0.2,
+                                        delay:
+                                            siteSettings.experience === 'boring' ||
+                                            siteSettings.performanceBoost ||
+                                            !windowPosition
+                                                ? 0
+                                                : 0.2,
+                                        ease: [0.2, 0.2, 0.8, 1],
+                                    },
+                                },
                             }}
                             exit={{
                                 scale: 0.005,
