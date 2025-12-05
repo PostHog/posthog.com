@@ -52,7 +52,7 @@ Product engineers still spend the majority of their time coding, but they have r
 
 Product engineers spend time talking to customers, digging into usage data, and researching the competitive landscape. They test other products, build prototypes, and brainstorm experiments to make their product better. They use this research to prioritize a roadmap that they own, and take responsibility for explaining the roadmap and gathering feedback from users and the company.
 
-Product engineering also tends to be more fast-paced, scrappy, and independent than software engineering. This is especially true as [AI coding tools](/newsletter/ai-coding-mistakes) are on the rise; product engineers can move even quicker by using LLMs to handle less-critical implementation details.
+Product engineering also tends to be more fast-paced, scrappy, and independent than software engineering. This is especially true as [AI coding tools](/newsletter/ai-coding-mistakes) are on the rise; product engineers can use LLMs to quickly move features from 0->1 without getting bogged down by implementation details. 
 
 Software engineers code too, of course, but they also spend lots of time designing, testing, and maintaining what they build. They look for ways to optimize systems, improve scalability, and solve bugs. They are deeply focused on specific areas of technology, whether those are databases, data pipelines, backend APIs, or client-side app frameworks.
 
@@ -62,11 +62,13 @@ Software engineering projects also [move slower](/newsletter/this-is-why-youre-n
 
 There's no single reason, but it's often simply because companies want to ship faster. Product engineers are popular among startups and early-stage companies for this reason, even if they don’t say it. Many software engineers at these companies behave like product engineers, even if it's not their job title.
 
-For example, Linear, the wildly popular modern project management tool, is built [almost entirely by product engineers](https://linear.app/now/how-we-run-projects-at-linear). Engineers rotate through project leadership roles and talk directly to users through their beta program to make decisions based on user feedback rather than traditional metrics. 
+For example, Linear, the wildly popular modern project management tool, is built [almost entirely by product engineers](https://linear.app/now/how-we-run-projects-at-linear). Instead of having PMs, small teams of product engineers speak directly with customers, run user interviews, and plan feature roadmaps. Most project meetings focus on product decisions rather than implementation details, and engineering discussions are efficient thanks to internal trust among developers who have a good sense of the technical direction.
 
-At larger companies, product engineers are less common, but they do exist. They're often seen as a way to drive innovation and inject urgency through smaller teams that have more freedom to ideate and execute independently.
+For example, Linear, the wildly popular modern project management tool, is built [almost entirely by product engineers](https://linear.app/now/how-we-run-projects-at-linear). Instead of hiring PMs, small teams of product engineers speak directly with customers and own product roadmaps. When the person talking to users is the same one writing the code, less time gets spent on handoff. Teams can also make product decisions on the spot since, when everyone is a developer, there's no need to cover what's technically feasible first.
 
-Finally, as more dev tool companies emerge, demand for product engineers will continue to grow (after all, developers understand developers best). Vercel's [job listings](https://vercel.com/careers) for a product engineer role describes the ideal candidate as someone with "a strong passion for developer experience and a deep understanding of how AI can enhance productivity".
+At larger companies, product engineers are less common, but they do exist. They're often seen as a way to drive innovation and inject urgency through smaller teams that have more freedom to ideate and execute independently. For example, at the time of writing, [Microsoft](https://microsoft.ai/careers/) is hiring for a team of "Product Engineers to help build the Copilot web experiences" – a high velocity project in a huge enterprise organization.
+
+Finally, as more dev tool companies emerge, demand for product engineers will continue to grow (after all, developers understand developers best). Startups like [Vercel](https://vercel.com/careers) and [PostHog](/careers/product-engineer) are always seeking product engineers with "a strong passion for developer experience" who can "think like a product builder".
 
 ## Is product engineering right for you?
 
