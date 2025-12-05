@@ -39,7 +39,7 @@ In contrast, software engineers "own" **the code they write**. They care more ab
 
 The top priority of a product engineers is to solving users' problems.
 
-They are willing to build fast, iterate, or even from scratch if needed. The tradeoffs they consider in a solution go beyond technical constraints and might include more holistic factors like the user experience, business deadlines, and product roadmap. In this way, they tend to be more pragmatic.
+They build fast, even from scratch if needed, and then iterate. The tradeoffs they consider go beyond technical constraints and include more holistic factors like the user experience, business deadlines, and product roadmap. In this way, they tend to be more pragmatic.
 
 Software engineers prioritize achieving the ideal technical solution.
 
