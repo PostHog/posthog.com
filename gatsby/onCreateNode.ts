@@ -6,7 +6,7 @@ import slugify from 'slugify'
 import { JSDOM } from 'jsdom'
 import { GatsbyNode } from 'gatsby'
 import { PAGEVIEW_CACHE_KEY } from './onPreBootstrap'
-import { resolveSnippets } from './snippetUtils'
+import { resolveSnippets, resolveJsxSnippetsToMarkdown } from './snippetUtils'
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -271,7 +271,15 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         }
 
         const contentWithoutFrontmatter = stripFrontmatter(node.rawBody)
-        const contentWithSnippets = resolveSnippets(contentWithoutFrontmatter, node.fileAbsolutePath)
+        let contentWithSnippets
+        try {
+            contentWithSnippets = resolveJsxSnippetsToMarkdown(
+                resolveSnippets(contentWithoutFrontmatter, node.fileAbsolutePath)
+            )
+        } catch (error) {
+            console.error(`Error resolving snippets for ${node.fileAbsolutePath}:`, error)
+            contentWithSnippets = contentWithoutFrontmatter
+        }
 
         // Prepend title as H1 if it exists
         const title = node.frontmatter?.title
