@@ -1,5 +1,5 @@
 ---
-title: How to validate new product ideas
+title: Your product idea probably sucks (that's ok)
 date: 2025-11-27
 author:
   - ian-vanagas
@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-### Why working to abandoned ideas will help you create more successful startups
+### How to validate new product ideas
 
 You have a new product idea you think is really, really good…
 
@@ -26,9 +26,24 @@ I wouldn’t be writing this newsletter without the success of the validation pr
 
 ## Step 0: Have a list of ideas
 
-The prerequisite to all of this is having a bunch of ideas you want validated. Specifically, these should be in the form of **problems**, jobs-to-be-done by your product for a specific customer. 
+The prerequisite to all of this is having an idea you want validated, ideally multiple. These should be in the form of **problems**, jobs-to-be-done by your product for a specific customer.
 
-At the start of PostHog, this was a 3 page Google Doc of ideas based on problems he encountered in his career up until then. Validation started when he started working through them with Tim, when more ideas were added to it.
+Often, the specific customer is **you** and the problem is **one you've had**. 
+
+- The [GrubHub founders](https://mixergy.com/interviews/grubhub-michael-evans-interview/) were fed up not knowing which restaurants near them could deliver food.
+- [Mecury's founder](https://tearsheet.co/podcasts/there-were-all-these-other-great-services-but-banking-was-kind-of-static-mercurys-immad-akhund-on-banking-startups/), Immad Akhund, "was just really frustrated as an entrepreneur that I had all these great other services, which improved over time, but banking was this kind of static thing that I was forced to use and rely on."
+- The [ElevenLabs founders](https://concept.vc/news/founder-stories-elevenlabs) felt dubbing (voiceovers) into their native Polish "were flat and monotonous."
+- The [Deel founders](https://www.backscoop.com/newsletter-posts/deel-the-founding-story-of-the-17b-company-that-makes-global-work-possible) faced repeated problems hiring internationally in past startups.
+- [Tope Awotona of Calendly](https://www.linkedin.com/posts/guyrazpodcasts_three-lessons-about-entrepreneurship-from-activity-7383418746020745216-k3Sy) was tired of endless back and forth emails trying to schedule meetings.
+
+At the start of PostHog, James had a [3 page Google Doc of ideas](/founders/story-about-pivots) based on problems he encountered in his career up until then. More were added as he worked through validating them with Tim. Some of the ideas were:
+
+1. Sales territory management tool.
+2. CRM with predictive analytics for small companies.
+3. 1:1 tool for managers with predictive analytics.
+4. Technical debt management using surveys after pull requests.
+5. Engineering retention tool using surveys after pull requests.
+6. Open source project analytics platform (that's us!!!)
 
 ## Step 0.5: Things to not do
 
@@ -38,17 +53,19 @@ Before you Leeroy Jenkins into validation, there are some pitfalls to avoid like
 
 - **Telling people what they need:** If you are reading advice on how to validate your product, you probably don’t have a product or design sense to “just make it work” like Steve Jobs. Validation fills in for this.
 
-- **Doing big business validation:** You don’t need to run focus groups, start product managing, or spend weeks on competitor research.
+- **Doing big business validation:** You don’t need to run focus groups, start product managing, build a pitch deck, or spend weeks on competitor research.
 
 - **Just asking people if they like your idea:** Most people will just say “yes” or “it’s interesting” to get you to stop talking to them. This does not mean your product is validated.
+
+- **Asking the wrong audience:** Your friends (or mom) might like your idea, but they're probably not the right people to validate it.
 
 - **Going slow.** James once said “the quicker you are, the worse you can be at product. If you are bad at product and slow, you are doomed.” Don’t worry about looking dumb because you are dead by default.
 
 ## Step 1: Validate your problem is real by talking to users
 
-With your list of problems and pitfalls to avoid, we can finally get to the real part of validation: learning users’ problems. Unfortunately, this is harder than both the previous (non-)steps.
+With your list of problems and pitfalls to avoid, we can finally get to the real part of validation: learning users’ *real* problems. You may think you know what their problems are, but you don't yet. 
 
-This is because not working hard enough is a serious failure mode. No one else is doing this for you. James got at least 2 meetings a day, 5 days a week while doing other random tasks like building the website.
+Unfortunately, this is harder than both the previous (non-)steps because not working hard enough is a serious failure mode. No one else is doing this for you. James got at least 2 meetings a day, 5 days a week while doing other random tasks like building the website.
 
 Another risk is caring too much too soon. You don’t need to care about audience, solution, or even that it’s unique yet. If people have a burning problem, these details sort themselves out.
 
@@ -81,7 +98,13 @@ For inspiration, you can look at how now successful founders got their meetings:
 
 3. **Get into the details.** Go beyond “it’s hard.” Listen and get into the details. Search for big challenges (and pain points). Open-ended questions can reveal why you’re close but *not quite* right.
 
-If you’ve done all this and your problem’s not there. [Pivot](/newsletter/pivot-your-startup).
+You can tell you're problem isn't there if:
+
+- It's not a burning problem for them.
+- They're not excited to talk about it.
+- You're not excited to work on it.
+
+These are signs [it's time to pivot](/newsletter/pivot-your-startup). 
 
 ## Step 2: Validate users want your solution
 
