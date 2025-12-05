@@ -83,7 +83,12 @@ The macro should include:
 
 Keep it simple and factual.
 
-If the incident has a Comms Lead from Marketing, share the macro draft with them before using it. We want to make sure we're saying consistent things across all channels. The Comms Lead should review the macro to ensure the messaging aligns with broader customer communications.
+**If there's a Comms Lead assigned:**
+- For major or security incidents, share the macro draft with them before using it. We want to make sure we're saying consistent things across all channels. The Comms Lead should review the macro to ensure the messaging aligns with broader customer communications.
+- For minor incidents, share the macro with them after you've created it so they're aware of what messaging we're using.
+
+**If there's no Comms Lead assigned:**
+Use your best judgement to create a clear, factual macro. If you think the incident warrants coordination with Marketing, mention it in the incident channel - but don't let that block you from responding to customers.
 
 Update the macro if the situation changes significantly. If you do update it, let the Comms Lead know (if there is one). Delete the macro once the incident is resolved.
 
@@ -126,7 +131,7 @@ You don't need to copy every single update from the incident channel. Just share
 For an incident that requires external comms, Marketing will appoint a [Comms Lead](https://posthog.com/handbook/growth/marketing/incident-comms). They own external communication strategy. We don't.
 
 As the support team member watching the incident, you should coordinate with the Comms Lead:
-- Share your macro draft with them before using it - we want to make sure we're saying consistent things across all channels
+- Coordinate on macro creation (see 'Creating a macro for the incident' above)
 - If you're seeing patterns in support tickets that might inform their messaging
 - If you need help with a particularly complex or sensitive customer communication
 - When you update the macro - let them know what changed
