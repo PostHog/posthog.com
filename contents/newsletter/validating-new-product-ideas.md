@@ -61,6 +61,8 @@ Before you Leeroy Jenkins into validation, there are some pitfalls to avoid like
 
 - **Going slow.** James once said “the quicker you are, the worse you can be at product. If you are bad at product and slow, you are doomed.” Don’t worry about looking dumb because you are dead by default.
 
+- **Pursue bad ideas:** There are just so many ways to have bad startup ideas, it is impossible to explain them all. More importantly, a lot of bad sounding ideas are actually good ones. That is what validation is for 😎.
+
 ## Step 1: Validate your problem is real by talking to users
 
 With your list of problems and pitfalls to avoid, we can finally get to the real part of validation: learning users’ *real* problems. You may think you know what their problems are, but you don't yet. 
