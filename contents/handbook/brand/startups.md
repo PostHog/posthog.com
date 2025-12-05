@@ -44,7 +44,7 @@ This program is similar to our startup program but has some key differences for 
 
 You can find the copy for the latest deal on Bookface in this [doc](https://docs.google.com/document/d/1dmsMxrfWSVhKZY4bQp5QIRiXS2iCvLGJah5EKWOvoeI/edit?tab=t.0#heading=h.o7fhsqrlnheo). To post updates, you need to ask James or Tim to do it. 
 
-> ✅ This deal is also available to YC alumni, provided they are the founders of the new company.
+> This deal is not available to YC alumni, who started another company - if they're eligible, they can apply for PostHog for Startups instead
 
 > ✅ Credits **can** be used to claim a BAA under the Boost plan.
 
