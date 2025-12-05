@@ -33,52 +33,55 @@ export const Markdown = ({
     components?: Partial<Components>
 }) => {
     return (
-        <ReactMarkdown
-            allowedElements={allowedElements}
-            remarkPlugins={[remarkGfm]}
-            transformImageUri={transformImageUri}
-            rehypePlugins={[rehypeSanitize]}
-            className={cn(
-                'markdown prose dark:prose-invert prose-sm max-w-full text-primary [&_a]:font-semibold break-words [overflow-wrap:anywhere]',
-                !regularText,
-                className
-            )}
-            components={{
-                pre: ({ children }) => {
-                    return (
-                        <>
-                            <Highlight
-                                {...defaultProps}
-                                code={(children[0] as any)?.props?.children[0]}
-                                language={'js' as Language}
-                            >
-                                {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                                    <pre className={`${className} whitespace-pre-wrap`} style={style}>
-                                        {tokens.map((line, i) => (
-                                            <div key={i} {...getLineProps({ line, key: i })}>
-                                                {line.map((token, key) => (
-                                                    <span key={key} {...getTokenProps({ token, key })} />
-                                                ))}
-                                            </div>
-                                        ))}
-                                    </pre>
-                                )}
-                            </Highlight>
-                        </>
-                    )
-                },
-                code: ({ node, ...props }) => {
-                    return <code {...props} className="break-all inline-block" />
-                },
-                a: ({ node, ...props }) => {
-                    return <Link rel="nofollow noopener noreferrer" {...props} state={{ newWindow: true }} />
-                },
-                img: ZoomImage,
-                ...components,
-            }}
-        >
-            {replaceMentions(children)}
-        </ReactMarkdown>
+        console.log(children),
+        (
+            <ReactMarkdown
+                allowedElements={allowedElements}
+                remarkPlugins={[remarkGfm]}
+                transformImageUri={transformImageUri}
+                rehypePlugins={[rehypeSanitize]}
+                className={cn(
+                    'markdown prose dark:prose-invert prose-sm max-w-full text-primary [&_a]:font-semibold break-words [overflow-wrap:anywhere]',
+                    !regularText,
+                    className
+                )}
+                components={{
+                    pre: ({ children }) => {
+                        return (
+                            <>
+                                <Highlight
+                                    {...defaultProps}
+                                    code={(children[0] as any)?.props?.children[0]}
+                                    language={'js' as Language}
+                                >
+                                    {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                                        <pre className={`${className} whitespace-pre-wrap`} style={style}>
+                                            {tokens.map((line, i) => (
+                                                <div key={i} {...getLineProps({ line, key: i })}>
+                                                    {line.map((token, key) => (
+                                                        <span key={key} {...getTokenProps({ token, key })} />
+                                                    ))}
+                                                </div>
+                                            ))}
+                                        </pre>
+                                    )}
+                                </Highlight>
+                            </>
+                        )
+                    },
+                    code: ({ node, ...props }) => {
+                        return <code {...props} className="break-all inline-block" />
+                    },
+                    a: ({ node, ...props }) => {
+                        return <Link rel="nofollow noopener noreferrer" {...props} state={{ newWindow: true }} />
+                    },
+                    img: ZoomImage,
+                    ...components,
+                }}
+            >
+                {replaceMentions(children)}
+            </ReactMarkdown>
+        )
     )
 }
 
