@@ -47,27 +47,32 @@ interface Platform {
 }
 
 /**
+ * Recursively searches for a section with the given URL and returns its children URLs.
+ */
+function findSectionChildren(sections: any[], targetUrl: string): string[] {
+    for (const section of sections) {
+        if (section.url === targetUrl && section.children) {
+            return section.children
+                .filter((child: any) => child.url && child.url !== targetUrl)
+                .map((child: any) => child.url)
+        }
+        if (section.children) {
+            const result = findSectionChildren(section.children, targetUrl)
+            if (result.length > 0) return result
+        }
+    }
+    return []
+}
+
+/**
  * Extracts platform URLs from sidebar navigation to determine display order.
  * Looks up the section within docsMenu and returns child URLs in order.
  */
 function getSidebarOrder(sidebarPath: string): string[] {
     const sections: any[] = (docsMenu as any).children || []
     const fullPath = `/${sidebarPath}`
-    const productPath = `/${sidebarPath.split('/').slice(0, 2).join('/')}`
 
-    for (const section of sections) {
-        if (section.url === productPath) {
-            const targetSection = section.children?.find((child: any) => child.url === fullPath)
-
-            if (targetSection?.children) {
-                return targetSection.children
-                    .filter((child: any) => child.url && child.url !== fullPath)
-                    .map((child: any) => child.url)
-            }
-        }
-    }
-
-    return []
+    return findSectionChildren(sections, fullPath)
 }
 
 export default function usePlatformList(basePath: string, titleSuffix?: string): Platform[] {
