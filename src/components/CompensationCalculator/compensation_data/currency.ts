@@ -5,6 +5,7 @@
 // we update the location factor (location_factor.ts) instead.
 export const currencyData: Record<string, number> = {
     CAD: 1.264,
+    DKK: 6.539,
     HUF: 324.71,
     CZK: 21.872,
     GBP: 0.733,
