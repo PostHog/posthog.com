@@ -16,7 +16,9 @@ With managed migrations, you can import data from multiple sources:
 - **Direct imports**: Connect directly to Mixpanel or Amplitude using your API credentials
 - **S3 imports**: Upload your event data to an S3 bucket in JSONL format for automatic ingestion
 
-Customers with large datasets or who need custom event transformations/event enrichment, may need to export and preprocess data before it can be ingested. For these use cases, the migration is not fully automated/managed.
+Always [run a test batch](#run-a-test-batch-first) in a test project before migrating events into your production project.
+
+Customers with large datasets or who need custom event transformations/event enrichment will need to export and preprocess data before it can be ingested.
 
 ## Limitations
 
