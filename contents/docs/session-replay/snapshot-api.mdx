@@ -59,7 +59,7 @@ You can also request multiple blobs at once using `?source=blob_v2&start_blob_ke
 
 > **Note:** You can request a maximum of 20 blob keys at a time. You will need to tune this for your application as 20 blobs could be a lot of data and timeout. For example, `?source=blob_v2&start_blob_key=0&end_blob_key=20` is invalid as it requests 21 keys.
 
-### The `decompress` parameter
+#### The `decompress` parameter
 
 By default, the API decompresses data before returning it. You can control this behavior using the `decompress` query parameter:
 
