@@ -90,12 +90,23 @@ See [Next.js rewrites documentation](https://nextjs.org/docs/app/api-reference/n
 
 In your application code, update your PostHog initialization to use your proxy path:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
   api_host: '/ph',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+  api_host: '/ph',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 The `api_host` tells the SDK where to send events. Using a relative path ensures requests go to your domain. The `ui_host` must point to PostHog's actual domain so features like the toolbar link correctly.
 

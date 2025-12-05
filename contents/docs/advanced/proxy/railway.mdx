@@ -71,12 +71,23 @@ Once deployed, Railway provides you with a domain like `your-project-name.up.rai
 
 In your application code, update your PostHog initialization to use your Railway domain:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://your-project-name.up.railway.app',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://your-project-name.up.railway.app',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 Replace `your-project-name.up.railway.app` with your actual Railway domain.
 
@@ -92,12 +103,23 @@ For better blocking resistance, use your own domain instead of Railway's default
 
 Then update your SDK to use your custom domain:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 </Step>
 

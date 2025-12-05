@@ -663,6 +663,8 @@
         { "source": "/docs/integrate/browser-extension", "destination": "/docs/advanced/browser-extension" },
         { "source": "/docs/integrate/cdp", "destination": "/docs/advanced/cdp" },
         { "source": "/docs/integrate/proxy", "destination": "/docs/advanced/proxy" },
+        { "source": "/docs/advanced/proxy/managed-reverse-proxy", "destination": "/docs/advanced/proxy" },
+        { "source": "/docs/advanced/proxy/troubleshooting", "destination": "/docs/advanced/proxy/proxy-reference" },
         { "source": "/docs/integrate/badge", "destination": "/docs/contribute/badge" },
         { "source": "/docs/integrate/libraries", "destination": "/docs/libraries" },
         { "source": "/docs/data/notifications-and-alerts", "destination": "/docs/product-analytics/subscriptions" },

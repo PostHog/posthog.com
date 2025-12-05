@@ -40,11 +40,13 @@ This guide requires a Remix project with a server runtime (Node.js, Deno, or Clo
 
 Create a file at `app/routes/ph.$.tsx`:
 
-```tsx
+<MultiLanguage>
+
+```tsx file=US
 import type { ActionFunction, LoaderFunction } from "@remix-run/node"
 
-const API_HOST = "us.i.posthog.com" // or eu.i.posthog.com
-const ASSET_HOST = "us-assets.i.posthog.com" // or eu-assets.i.posthog.com
+const API_HOST = "us.i.posthog.com"
+const ASSET_HOST = "us-assets.i.posthog.com"
 
 const posthogProxy = async (request: Request) => {
   const url = new URL(request.url)
@@ -90,7 +92,57 @@ export const action: ActionFunction = async ({ request }) =>
   posthogProxy(request)
 ```
 
-Replace `us` with `eu` for EU region.
+```tsx file=EU
+import type { ActionFunction, LoaderFunction } from "@remix-run/node"
+
+const API_HOST = "eu.i.posthog.com"
+const ASSET_HOST = "eu-assets.i.posthog.com"
+
+const posthogProxy = async (request: Request) => {
+  const url = new URL(request.url)
+  const hostname = url.pathname.startsWith("/ph/static/")
+    ? ASSET_HOST
+    : API_HOST
+
+  const newUrl = new URL(url)
+  newUrl.protocol = "https"
+  newUrl.hostname = hostname
+  newUrl.port = "443"
+  newUrl.pathname = newUrl.pathname.replace(/^\/ph/, "")
+
+  const headers = new Headers(request.headers)
+  headers.set("host", hostname)
+  headers.delete("accept-encoding")
+
+  const response = await fetch(newUrl, {
+    method: request.method,
+    headers,
+    body: request.body,
+    // @ts-ignore - duplex is required for streaming request bodies
+    duplex: 'half',
+  })
+
+  const responseHeaders = new Headers(response.headers)
+  responseHeaders.delete("content-encoding")
+  responseHeaders.delete("content-length")
+
+  const data = await response.arrayBuffer()
+
+  return new Response(data, {
+    status: response.status,
+    statusText: response.statusText,
+    headers: responseHeaders,
+  })
+}
+
+export const loader: LoaderFunction = async ({ request }) =>
+  posthogProxy(request)
+
+export const action: ActionFunction = async ({ request }) =>
+  posthogProxy(request)
+```
+
+</MultiLanguage>
 
 Here's what the code does:
 
@@ -108,12 +160,23 @@ The `@ts-ignore` comment is needed because TypeScript's fetch types don't includ
 
 In your application code, update your PostHog initialization:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: '/ph',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: '/ph',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 The `api_host` tells the SDK where to send events. Using a relative path ensures requests go to your domain. The `ui_host` must point to PostHog's actual domain so features like the toolbar link correctly.
 

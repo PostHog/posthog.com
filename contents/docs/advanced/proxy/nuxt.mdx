@@ -38,7 +38,9 @@ This guide requires a Nuxt 3 project with server-side rendering enabled (the def
 
 Create a file at `server/routes/ph/[...path].ts`:
 
-```ts
+<MultiLanguage>
+
+```ts file=US
 export default defineEventHandler(async (event) => {
   const path = event.context.params?.path || ''
 
@@ -88,7 +90,57 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
-Replace `us` with `eu` for EU region.
+```ts file=EU
+export default defineEventHandler(async (event) => {
+  const path = event.context.params?.path || ''
+
+  const hostname = path.startsWith('static/')
+    ? 'eu-assets.i.posthog.com'
+    : 'eu.i.posthog.com'
+
+  const targetUrl = `https://${hostname}/${path}`
+
+  const headers = new Headers()
+  headers.set('host', hostname)
+
+  // Forward relevant headers
+  const contentType = getHeader(event, 'content-type')
+  if (contentType) {
+    headers.set('content-type', contentType)
+  }
+
+  // Forward client IP for geolocation
+  const clientIp = getHeader(event, 'x-forwarded-for') || getRequestIP(event)
+  if (clientIp) {
+    headers.set('x-forwarded-for', clientIp)
+  }
+
+  const body = event.method !== 'GET' && event.method !== 'HEAD'
+    ? await readRawBody(event)
+    : undefined
+
+  const response = await fetch(targetUrl, {
+    method: event.method,
+    headers,
+    body,
+  })
+
+  // Copy response headers
+  const responseHeaders: Record<string, string> = {}
+  response.headers.forEach((value, key) => {
+    if (key.toLowerCase() !== 'content-encoding' && key.toLowerCase() !== 'content-length') {
+      responseHeaders[key] = value
+    }
+  })
+
+  setResponseHeaders(event, responseHeaders)
+  setResponseStatus(event, response.status)
+
+  return response.text()
+})
+```
+
+</MultiLanguage>
 
 The `[...path]` in the filename is a Nuxt [catch-all route](https://nuxt.com/docs/guide/directory-structure/server#catch-all-route) that matches any path after `/ph/`. This handles all PostHog endpoints like `/ph/e`, `/ph/decide`, and `/ph/static/array.js`.
 
@@ -105,7 +157,9 @@ Here's what the code does:
 
 In your Nuxt app, update your PostHog initialization to use your proxy path:
 
-```ts
+<MultiLanguage>
+
+```ts file=US
 // plugins/posthog.client.ts
 import { defineNuxtPlugin } from '#app'
 import posthog from 'posthog-js'
@@ -115,7 +169,7 @@ export default defineNuxtPlugin(() => {
 
   posthog.init(runtimeConfig.public.posthogKey, {
     api_host: '/ph',
-    ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+    ui_host: 'https://us.posthog.com'
   })
 
   return {
@@ -125,6 +179,29 @@ export default defineNuxtPlugin(() => {
   }
 })
 ```
+
+```ts file=EU
+// plugins/posthog.client.ts
+import { defineNuxtPlugin } from '#app'
+import posthog from 'posthog-js'
+
+export default defineNuxtPlugin(() => {
+  const runtimeConfig = useRuntimeConfig()
+
+  posthog.init(runtimeConfig.public.posthogKey, {
+    api_host: '/ph',
+    ui_host: 'https://eu.posthog.com'
+  })
+
+  return {
+    provide: {
+      posthog
+    }
+  }
+})
+```
+
+</MultiLanguage>
 
 The `api_host` tells the SDK where to send events. Using a relative path ensures requests go to your domain. The `ui_host` must point to PostHog's actual domain so features like the toolbar link correctly.
 

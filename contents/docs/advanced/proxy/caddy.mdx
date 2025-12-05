@@ -39,7 +39,9 @@ This setup proxies all PostHog requests through a dedicated subdomain.
 
 In your working directory, create a file named `Caddyfile`:
 
-```caddy
+<MultiLanguage>
+
+```caddy file=US
 e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
@@ -56,7 +58,26 @@ e.yourdomain.com {
 }
 ```
 
-Replace `e.yourdomain.com` with your chosen subdomain. Replace `us` with `eu` for EU region.
+```caddy file=EU
+e.yourdomain.com {
+  handle /static/* {
+    reverse_proxy https://eu-assets.i.posthog.com:443 {
+      header_up Host eu-assets.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+  handle {
+    reverse_proxy https://eu.i.posthog.com:443 {
+      header_up Host eu.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+}
+```
+
+</MultiLanguage>
+
+Replace `e.yourdomain.com` with your chosen subdomain.
 
 The `header_up Host` directive tells PostHog which domain the request is for. Without this, PostHog won't know how to route your request and you'll get 401 errors.
 
@@ -81,12 +102,24 @@ See [Caddy's quick start guide](https://caddyserver.com/docs/quick-starts/revers
 <Step title="Update your PostHog SDK">
 
 In your application code, update your PostHog initialization to use your tracking subdomain:
-```js
+
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 Replace `e.yourdomain.com` with your actual subdomain.
 
@@ -120,7 +153,9 @@ If you're running other services on the same domain or testing locally, you can 
 
 In your working directory, create a file named `Caddyfile`:
 
-```caddy
+<MultiLanguage>
+
+```caddy file=US
 :2015 {
   handle_path /ph-proxy/static* {
     rewrite * /static/{path}
@@ -142,7 +177,29 @@ In your working directory, create a file named `Caddyfile`:
 }
 ```
 
-Replace `us` with `eu` for EU region.
+```caddy file=EU
+:2015 {
+  handle_path /ph-proxy/static* {
+    rewrite * /static/{path}
+    reverse_proxy https://eu-assets.i.posthog.com:443 {
+      header_up Host eu-assets.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+
+  handle_path /ph-proxy* {
+    rewrite * {path}
+    reverse_proxy https://eu.i.posthog.com:443 {
+      header_up Host eu.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+
+  file_server browse
+}
+```
+
+</MultiLanguage>
 
 This configuration:
 
@@ -174,7 +231,7 @@ If you want to test your proxy locally, create a file named `home.html` in the s
 
     posthog.init('<ph_project_api_key>', {
       api_host: 'http://localhost:2015/ph-proxy',
-      ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+      ui_host: 'https://us.posthog.com' // US, or https://eu.posthog.com for EU
     })
   </script>
 </body>
@@ -201,12 +258,23 @@ Open `http://localhost:2015/home.html` in your browser. Check the **Network** ta
 
 For production deployment, update your application code to use your proxy path:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://yourdomain.com/ph-proxy',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://yourdomain.com/ph-proxy',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 Replace `yourdomain.com` with your actual domain and adjust the Caddyfile to listen on ports 80/443 instead of 2015.
 
@@ -238,7 +306,9 @@ If you prefer containerized deployments, you can run Caddy in Docker with the sa
 
 On your server, create a file named `Caddyfile` in a directory like `/etc/caddy`:
 
-```caddy
+<MultiLanguage>
+
+```caddy file=US
 e.yourdomain.com {
   header {
     Access-Control-Allow-Origin https://yourdomain.com
@@ -259,7 +329,30 @@ e.yourdomain.com {
 }
 ```
 
-Replace `e.yourdomain.com` with your subdomain and `yourdomain.com` with your application domain. Replace `us` with `eu` for EU region.
+```caddy file=EU
+e.yourdomain.com {
+  header {
+    Access-Control-Allow-Origin https://yourdomain.com
+  }
+
+  handle /static/* {
+    reverse_proxy https://eu-assets.i.posthog.com:443 {
+      header_up Host eu-assets.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+  handle {
+    reverse_proxy https://eu.i.posthog.com:443 {
+      header_up Host eu.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+}
+```
+
+</MultiLanguage>
+
+Replace `e.yourdomain.com` with your subdomain and `yourdomain.com` with your application domain.
 
 The `Access-Control-Allow-Origin` header allows your application domain to make requests to the proxy. Adjust this if you need to allow requests from multiple domains or `localhost` for testing.
 
@@ -291,12 +384,23 @@ See the [Caddy Docker documentation](https://hub.docker.com/_/caddy) for more de
 
 In your application code, update your PostHog initialization to use your tracking subdomain:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 Replace `e.yourdomain.com` with your actual subdomain.
 
@@ -349,7 +453,9 @@ If you see `No 'Access-Control-Allow-Origin' header` errors:
 
 Add explicit CORS headers to your Caddyfile:
 
-```caddy
+<MultiLanguage>
+
+```caddy file=US
 e.yourdomain.com {
   @options method OPTIONS
   handle @options {
@@ -379,6 +485,39 @@ e.yourdomain.com {
   }
 }
 ```
+
+```caddy file=EU
+e.yourdomain.com {
+  @options method OPTIONS
+  handle @options {
+    header Access-Control-Allow-Origin "https://yourdomain.com"
+    header Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    header Access-Control-Allow-Headers "*"
+    respond 204
+  }
+
+  header {
+    Access-Control-Allow-Origin "https://yourdomain.com"
+    Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers "*"
+  }
+
+  handle /static/* {
+    reverse_proxy https://eu-assets.i.posthog.com:443 {
+      header_up Host eu-assets.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+  handle {
+    reverse_proxy https://eu.i.posthog.com:443 {
+      header_up Host eu.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+}
+```
+
+</MultiLanguage>
 
 Replace `https://yourdomain.com` with your application's origin. For multiple origins or testing, use `*` instead, but be aware this is less secure.
 

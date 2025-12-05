@@ -134,12 +134,23 @@ If you encounter CORS errors after setup, you may need to create a custom respon
 
 In your application code, update your PostHog initialization to use your CloudFront distribution domain:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://d111111abcdef8.cloudfront.net',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://d111111abcdef8.cloudfront.net',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 Replace `d111111abcdef8.cloudfront.net` with your actual CloudFront distribution domain. Find this in the CloudFront console under **distribution domain name**.
 

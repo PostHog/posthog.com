@@ -4,45 +4,109 @@ sidebar: Docs
 showTitle: true
 ---
 
-import ProxyCallout from './_snippets/proxy-callout.mdx'
 import ProxyPlatforms from './proxy/_snippets/proxy-platforms'
 import ProxyDecisionTree from './proxy/_snippets/proxy-decision-tree'
+import { Steps, Step } from 'components/Docs/Steps'
 
-<CalloutBox icon="IconWarning" title="Before you start" type="fyi">
+A reverse proxy helps you capture more complete usage data. Ad blockers maintain lists of known analytics domains and block requests to them. A reverse proxy bypasses this by routing events through your own domain, which ad blockers haven't cataloged. This typically increases event capture by 10-30% depending on your user base.
 
-If you use a self-hosted proxy, PostHog can't help troubleshoot. Use [our managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) if you want support.
+A reverse proxy sends events to PostHog through your own subdomain (like `e.yourdomain.com`) instead of directly to PostHog's domain.
+
+You don't need a reverse proxy to start using PostHog. We recommend setting one up before going to production for more reliable data capture.
+
+## Set up managed reverse proxy
+
+PostHog's managed reverse proxy routes traffic through our infrastructure. We handle SSL certificates, routing, and maintenance automatically.
+
+This option requires our [platforms add-ons](https://posthog.com/platform-packages) and access to your domain's DNS settings.
+
+<Steps>
+
+<Step title="Create your proxy">
+
+1. Go to [organization proxy settings](https://app.posthog.com/settings/organization-proxy)
+2. Click **new managed proxy**
+3. Enter a subdomain you control. For example, if your app runs on `myapp.com`, use `ph.myapp.com`
+
+Choose a neutral subdomain that doesn't include words like `analytics`, `tracking`, or `posthog`. Ad blockers target obvious terms.
+
+</Step>
+
+<Step title="Create a DNS record">
+
+Go to your DNS provider and create a new **CNAME record**:
+
+1. Set the **Name** to your chosen subdomain (just the subdomain part, like `ph`)
+2. Set the **Target** to the proxy domain PostHog generated in the previous step. You'll see it in your proxy settings, it looks like `4854cf84789d8596ad01.proxy-us.posthog.com`
+3. Save the record
+
+> **Note:** If you're using Cloudflare, disable proxying on this CNAME record by clicking the cloud icon and set it to **DNS only**. Cloudflare's proxy interferes with PostHog's SSL certificate provisioning.
+
+</Step>
+
+<Step title="Wait for provisioning">
+
+Your proxy status will change from **waiting** → **issuing** → **live**. This typically takes 2-5 minutes but can take up to 30 minutes if DNS propagation is slow.
+
+PostHog will automatically detect your DNS record and provision an SSL certificate. No further action needed.
+
+> **Note:** If your proxy stays in **issuing** for more than 30 minutes, see [troubleshooting](/docs/advanced/proxy/proxy-reference#troubleshooting).
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+Update your PostHog initialization to use your new subdomain:
+
+<MultiLanguage>
+
+```js file=US
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://ph.myapp.com',
+  ui_host: 'https://us.posthog.com'
+})
+```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://ph.myapp.com',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
+
+Replace `ph.myapp.com` with your actual subdomain, and provide your **project API key**.
+
+Always set both `api_host` (your proxy) and `ui_host` (PostHog's actual domain) so features like the toolbar work correctly.
+
+</Step>
+
+<Step checkpoint title="Verify your setup">
+
+Confirm events are flowing through your proxy:
+
+1. Open your browser's developer tools and go to the **Network** tab
+2. Trigger an event in your app, like a page view
+3. Look for a request to your proxy subdomain (e.g., `ph.myapp.com`)
+4. Verify the response is `200 OK`
+5. Check the [PostHog app](https://app.posthog.com) to confirm events appear
+
+If you see errors or events aren't appearing, see [troubleshooting](/docs/advanced/proxy/proxy-reference#troubleshooting).
+
+</Step>
+
+</Steps>
+
+## Deploy your own proxy
+
+If the managed proxy doesn't work for your use case, you can deploy your own reverse proxy.
+
+<CalloutBox icon="IconWarning" title="Self-hosted proxies" type="fyi">
+
+If you use a self-hosted proxy, PostHog can't help troubleshoot configuration issues.
 
 </CalloutBox>
-
-A reverse proxy routes events from your domain to PostHog. Instead of sending events directly to PostHog's domain, you send them through your own subdomain like `e.yourdomain.com`.
-
-Setting up a reverse proxy helps you capture more complete data about how people use your product. Ad blockers target well-known analytics domains but miss events sent through your own domain.
-
-You can set up a reverse proxy before or after installing PostHog. If you set it up first, configure your SDK to use your proxy domain from the start. If you add it later, update your existing configuration.
-
-## Why use a reverse proxy?
-
-Ad blockers maintain lists of known analytics domains. When they visit `posthog.com` or similar services, they catalog tracking scripts and add them to block lists. This means a significant portion of your events never reach PostHog.
-
-A reverse proxy bypasses this by routing events through your own domain. Ad blockers haven't visited your domain to catalog your setup, so your events go through. This typically increases event capture by 10-30% depending on your user base.
-
-## Choose your proxy option
-
-### Managed reverse proxy (recommended)
-
-Point a subdomain to PostHog and we handle SSL certificates, routing, and maintenance automatically. If you run into issues, we provide support.
-
-This option requires our [platforms add-ons](/platform-packages) and is the fastest way to get a proxy running.
-
-<div>
-
-<CallToAction to="/docs/advanced/proxy/managed-reverse-proxy">Set up managed reverse proxy</CallToAction>
-
-</div>
-
-### Deploy your own proxy
-
-If you need full control or have existing infrastructure you want to use, you can deploy your own reverse proxy. If you use a self-hosted proxy, PostHog can't help troubleshoot configuration issues.
 
 Choose your platform and follow the setup guide:
 
@@ -52,92 +116,7 @@ Choose your platform and follow the setup guide:
 
 <ProxyDecisionTree />
 
-## Configuration overview
-
-After your proxy is running, you'll need to configure a few things. Each setup guide covers these steps in detail, but here's what to expect:
-
-1. **Choose your subdomain carefully**. Ad blockers look for obvious terms. Avoid words like `posthog`, `analytics`, `tracking`, or `telemetry` in your subdomain or paths. Use something neutral like `e.yourdomain.com` or `ph.yourdomain.com`.
-2. **Update your PostHog SDK configuration**. Point your SDK to your proxy domain instead of PostHog's domain. Always set both `api_host` (your proxy) and `ui_host` (PostHog's actual domain) so features like the toolbar work correctly:
-
-  ```js
-  posthog.init('<ph_project_api_key>', {
-    api_host: 'https://e.yourdomain.com',
-    ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
-  })
-  ```
-
-3. **Verify events are flowing**. Open your browser's network tab, trigger an event, and confirm requests to your proxy return `200 OK`. Then check your PostHog dashboard to verify events appear.
-
-## Technical requirements
-
-Your reverse proxy must route two types of requests to PostHog. Static assets go to one domain, and API requests go to another.
-
-Here's the routing structure you need:
-
-```yaml
-- route: e.yourdomain.com/static/*
-  reverse_proxy: https://us-assets.i.posthog.com/static/* # or https://eu-assets.i.posthog.com/static/*
-  host_header: us-assets.i.posthog.com # or eu-assets.i.posthog.com
-
-- route: e.yourdomain.com/*
-  reverse_proxy: https://us.i.posthog.com/* # or https://eu.i.posthog.com/*
-  host_header: us.i.posthog.com # or us.i.posthog.com
-```
-
-The `host_header` tells PostHog which domain the request is for. Without it, PostHog won't know how to route your request and you'll get 401 errors.
-
-### Size limits
-
-PostHog events can be up to 1MB per message and session recordings up to 64MB per message. Make sure your proxy doesn't set lower limits, or large recordings will fail silently.
-
-### Using a different tool?
-
-If you're using a proxy tool we haven't documented, follow the routing structure above. The key requirements are:
-
-- Route `/static/*` to `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`
-- Route everything else to `us.i.posthog.com` or `eu.i.posthog.com`
-- Set the `Host` header to match the PostHog domain
-- Don't modify request bodies or headers, except `Host`
-- Support both `GET` and `POST` requests
-
-## Best practices
-
-### Always set ui_host
-
-When using a reverse proxy, you must set `ui_host` to PostHog's actual domain. This ensures the toolbar, recordings player, and other features link correctly:
-
-```js
-posthog.init('<ph_project_api_key>', {
-  api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
-})
-```
-
-Without `ui_host`, features will try to link to your proxy domain instead of PostHog, breaking navigation.
-
-### Match your PostHog region
-
-Your proxy must point to the same region as your PostHog project:
-
-- **US region:** `us.i.posthog.com` and `us-assets.i.posthog.com`
-- **EU region:** `eu.i.posthog.com` and `eu-assets.i.posthog.com`
-
-Mismatched regions cause `401` or `no_api_key` errors. Check your project URL in the [PostHog app](https://app.posthog.com) to confirm your region.
-
-### Avoid obvious tracking terms everywhere
-
-Ad blockers scan more than just your subdomain. They also check request paths. Don't use paths like:
-
-- `/analytics/*`
-- `/tracking/*`
-- `/telemetry/*`
-- `/posthog/*`
-
-Use neutral paths like `/e` or `/ph` instead.
-
-## Troubleshooting
-
-Having issues? See [Troubleshooting reverse proxies](/docs/advanced/proxy/troubleshooting) for help with common errors like 401s, 405s, and events not appearing.
+For technical requirements, routing configuration, and best practices when running your own proxy, see the [self-hosted proxy reference](/docs/advanced/proxy/proxy-reference).
 
 ## FAQ
 
@@ -161,7 +140,7 @@ Allow outbound HTTPS traffic on port 443 to `*.posthog.com`, or allow specific d
 
 This is the recommended approach for enterprise environments with strict firewall policies.
 
-1. Deploy a [reverse proxy](#choose-your-proxy-option) in your infrastructure
+1. Deploy a reverse proxy in your infrastructure
 2. Assign your proxy a static IP address
 3. Allowlist only your proxy's IP in your firewall
 

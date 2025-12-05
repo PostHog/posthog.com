@@ -49,9 +49,11 @@ For high-traffic production sites, consider a dedicated reverse proxy like [ngin
 
 Create a file named `proxy.js`:
 
-```js
-const API_HOST = 'us.i.posthog.com' // or eu.i.posthog.com
-const ASSET_HOST = 'us-assets.i.posthog.com' // or eu-assets.i.posthog.com
+<MultiLanguage>
+
+```js file=US
+const API_HOST = 'us.i.posthog.com'
+const ASSET_HOST = 'us-assets.i.posthog.com'
 
 const toHeaders = (headers) =>
   Object.entries(headers).reduce((acc, [name, values]) => {
@@ -118,6 +120,78 @@ export default function proxy({ prefix }) {
   }
 }
 ```
+
+```js file=EU
+const API_HOST = 'eu.i.posthog.com'
+const ASSET_HOST = 'eu-assets.i.posthog.com'
+
+const toHeaders = (headers) =>
+  Object.entries(headers).reduce((acc, [name, values]) => {
+    values?.forEach((value) => acc.append(name, value))
+    return acc
+  }, new Headers())
+
+const fromHeaders = (headers) =>
+  [...headers].reduce((acc, [name, value]) => {
+    if (acc[name]) {
+      acc[name] = [...acc[name], value]
+    } else {
+      acc[name] = [value]
+    }
+    return acc
+  }, {})
+
+export default function proxy({ prefix }) {
+  return (request, response, next) => {
+    if (!request.url?.startsWith(prefix)) {
+      next()
+      return
+    }
+
+    const pathname = (request.url ?? '').slice(prefix.length)
+    const posthogHost = pathname.startsWith('/static/') ? ASSET_HOST : API_HOST
+
+    const headers = toHeaders(request.headersDistinct)
+    headers.set('host', posthogHost)
+
+    if (request.headers.host) {
+      headers.set('X-Forwarded-Host', request.headers.host)
+    }
+    if (request.socket.remoteAddress) {
+      headers.set('X-Real-IP', request.socket.remoteAddress)
+      headers.set('X-Forwarded-For', request.socket.remoteAddress)
+    }
+
+    headers.delete('cookie')
+    headers.delete('connection')
+
+    fetch(new URL(pathname, `https://${posthogHost}`), {
+      method: request.method ?? '',
+      headers,
+      ...(!['HEAD', 'GET'].includes(request.method ?? '')
+        ? { body: request, duplex: 'half' }
+        : {}),
+    })
+      .then(async (res) => {
+        const headers = new Headers(res.headers)
+        const body = await res.text()
+
+        if (headers.has('content-encoding')) {
+          headers.delete('content-encoding')
+          headers.delete('content-length')
+        }
+
+        response.writeHead(res.status, fromHeaders(headers))
+        response.end(body)
+      })
+      .catch((e) => {
+        next(new Error('Bad gateway', { cause: e }))
+      })
+  }
+}
+```
+
+</MultiLanguage>
 
 This module exports middleware that:
 
@@ -197,12 +271,23 @@ node server.js
 
 In your application code, update your PostHog initialization:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: 'http://localhost:3000/ph',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'http://localhost:3000/ph',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 Replace `localhost:3000` with your actual server address in production.
 

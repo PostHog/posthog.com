@@ -45,9 +45,11 @@ Cloudflare Workers are serverless functions that run on Cloudflare's edge networ
 
 Replace the default worker code with this:
 
-```javascript
-const API_HOST = "us.i.posthog.com" // or eu.i.posthog.com
-const ASSET_HOST = "us-assets.i.posthog.com" // or eu-assets.i.posthog.com
+<MultiLanguage>
+
+```javascript file=US
+const API_HOST = "us.i.posthog.com"
+const ASSET_HOST = "us-assets.i.posthog.com"
 
 async function handleRequest(request, ctx) {
   const url = new URL(request.url)
@@ -94,6 +96,57 @@ export default {
 };
 ```
 
+```javascript file=EU
+const API_HOST = "eu.i.posthog.com"
+const ASSET_HOST = "eu-assets.i.posthog.com"
+
+async function handleRequest(request, ctx) {
+  const url = new URL(request.url)
+  const pathname = url.pathname
+  const search = url.search
+  const pathWithParams = pathname + search
+
+  if (pathname.startsWith("/static/")) {
+    return retrieveStatic(request, pathWithParams, ctx)
+  } else {
+    return forwardRequest(request, pathWithParams)
+  }
+}
+
+async function retrieveStatic(request, pathname, ctx) {
+  let response = await caches.default.match(request)
+  if (!response) {
+    response = await fetch(`https://${ASSET_HOST}${pathname}`)
+    ctx.waitUntil(caches.default.put(request, response.clone()))
+  }
+  return response
+}
+
+async function forwardRequest(request, pathWithSearch) {
+  const ip = request.headers.get("CF-Connecting-IP") || ""
+  const originHeaders = new Headers(request.headers)
+  originHeaders.delete("cookie")
+  originHeaders.set("X-Forwarded-For", ip)
+
+  const originRequest = new Request(`https://${API_HOST}${pathWithSearch}`, {
+    method: request.method,
+    headers: originHeaders,
+    body: request.body,
+    redirect: request.redirect
+  })
+
+  return await fetch(originRequest)
+}
+
+export default {
+  async fetch(request, env, ctx) {
+    return handleRequest(request, ctx);
+  }
+};
+```
+
+</MultiLanguage>
+
 This code does three things:
 
 - **Routes requests:** The `handleRequest` function checks if the request is for static assets (`/static/*`) or API calls. Static assets go to PostHog's asset server, everything else goes to the main API.
@@ -116,12 +169,23 @@ Avoid obvious terms like `tracking`, `analytics`, `posthog`, or `telemetry` in y
 
 In your application code, update your PostHog initialization to use your worker's domain:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 Replace `e.yourdomain.com` with your actual subdomain.
 
@@ -185,12 +249,23 @@ The Host Header Override tells PostHog which domain the request is for. Without 
 
 In your application code, update your PostHog initialization to use your CNAME domain:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 Replace `e.yourdomain.com` with your actual subdomain.
 

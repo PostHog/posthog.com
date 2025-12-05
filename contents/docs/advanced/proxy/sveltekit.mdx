@@ -44,7 +44,9 @@ This guide requires a SvelteKit project with SSR enabled (the default).
 
 Create a file at `src/hooks.server.ts`:
 
-```ts
+<MultiLanguage>
+
+```ts file=US
 import type { Handle } from '@sveltejs/kit'
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -86,7 +88,49 @@ export const handle: Handle = async ({ event, resolve }) => {
 }
 ```
 
-Replace `us` with `eu` for EU region.
+```ts file=EU
+import type { Handle } from '@sveltejs/kit'
+
+export const handle: Handle = async ({ event, resolve }) => {
+  const { pathname } = event.url
+
+  if (pathname.startsWith('/ph')) {
+    const hostname = pathname.startsWith('/ph/static/')
+      ? 'eu-assets.i.posthog.com'
+      : 'eu.i.posthog.com'
+
+    const url = new URL(event.request.url)
+    url.protocol = 'https:'
+    url.hostname = hostname
+    url.port = '443'
+    url.pathname = pathname.replace(/^\/ph/, '')
+
+    const headers = new Headers(event.request.headers)
+    headers.set('host', hostname)
+    headers.set('accept-encoding', '')
+
+    // Forward client IP for geolocation
+    const clientIp = event.request.headers.get('x-forwarded-for') || event.getClientAddress()
+    if (clientIp) {
+      headers.set('x-forwarded-for', clientIp)
+    }
+
+    const response = await fetch(url.toString(), {
+      method: event.request.method,
+      headers,
+      body: event.request.body,
+      // @ts-ignore - duplex is required for streaming request bodies
+      duplex: 'half'
+    })
+
+    return response
+  }
+
+  return resolve(event)
+}
+```
+
+</MultiLanguage>
 
 Here's what the code does:
 
@@ -104,7 +148,9 @@ See [SvelteKit's hooks documentation](https://kit.svelte.dev/docs/hooks#server-h
 
 In your SvelteKit app, initialize PostHog with your proxy path. Create or update your PostHog setup:
 
-```ts
+<MultiLanguage>
+
+```ts file=US
 // src/lib/posthog.ts
 import posthog from 'posthog-js'
 import { browser } from '$app/environment'
@@ -114,11 +160,29 @@ export function initPostHog() {
 
   posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
     api_host: '/ph',
-    ui_host: 'https://us.posthog.com', // or https://eu.posthog.com
+    ui_host: 'https://us.posthog.com',
     persistence: 'localStorage'
   })
 }
 ```
+
+```ts file=EU
+// src/lib/posthog.ts
+import posthog from 'posthog-js'
+import { browser } from '$app/environment'
+
+export function initPostHog() {
+  if (!browser) return
+
+  posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
+    api_host: '/ph',
+    ui_host: 'https://eu.posthog.com',
+    persistence: 'localStorage'
+  })
+}
+```
+
+</MultiLanguage>
 
 Then call it from your root layout:
 

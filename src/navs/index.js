@@ -2735,13 +2735,9 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Reverse proxy',
+                    name: 'Self-hosted reverse proxy',
                     url: '/docs/advanced/proxy',
                     children: [
-                        {
-                            name: 'Managed reverse proxy',
-                            url: '/docs/advanced/proxy/managed-reverse-proxy',
-                        },
                         {
                             name: 'AWS CloudFront',
                             url: '/docs/advanced/proxy/cloudfront',
@@ -2803,8 +2799,8 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/vercel',
                         },
                         {
-                            name: 'Troubleshooting',
-                            url: '/docs/advanced/proxy/troubleshooting',
+                            name: 'Reference',
+                            url: '/docs/advanced/proxy/proxy-reference',
                         },
                     ],
                 },

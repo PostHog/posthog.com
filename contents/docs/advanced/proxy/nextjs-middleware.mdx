@@ -56,7 +56,9 @@ This guide works with any Next.js project using the app router or pages router. 
 
 Create a file named `proxy.js` (or `proxy.ts` for TypeScript) in your project root, at the same level as your `app` or `pages` folder:
 
-```js
+<MultiLanguage>
+
+```js file=US
 import { NextResponse } from 'next/server'
 
 export function proxy(request) {
@@ -83,12 +85,41 @@ export const config = {
 }
 ```
 
-Replace `us` with `eu` for EU region.
+```js file=EU
+import { NextResponse } from 'next/server'
+
+export function proxy(request) {
+  const url = request.nextUrl.clone()
+  const hostname = url.pathname.startsWith('/ph/static/')
+    ? 'eu-assets.i.posthog.com'
+    : 'eu.i.posthog.com'
+
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('host', hostname)
+
+  url.protocol = 'https'
+  url.hostname = hostname
+  url.port = '443'
+  url.pathname = url.pathname.replace(/^\/ph/, '')
+
+  return NextResponse.rewrite(url, {
+    headers: requestHeaders,
+  })
+}
+
+export const config = {
+  matcher: '/ph/:path*',
+}
+```
+
+</MultiLanguage>
 
 <details>
 <summary>Using Next.js 15 or earlier? Use middleware.js instead</summary>
 
-```js
+<MultiLanguage>
+
+```js file=US
 import { NextResponse } from 'next/server'
 
 export function middleware(request) {
@@ -114,6 +145,35 @@ export const config = {
   matcher: '/ph/:path*',
 }
 ```
+
+```js file=EU
+import { NextResponse } from 'next/server'
+
+export function middleware(request) {
+  const url = request.nextUrl.clone()
+  const hostname = url.pathname.startsWith('/ph/static/')
+    ? 'eu-assets.i.posthog.com'
+    : 'eu.i.posthog.com'
+
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('host', hostname)
+
+  url.protocol = 'https'
+  url.hostname = hostname
+  url.port = '443'
+  url.pathname = url.pathname.replace(/^\/ph/, '')
+
+  return NextResponse.rewrite(url, {
+    headers: requestHeaders,
+  })
+}
+
+export const config = {
+  matcher: '/ph/:path*',
+}
+```
+
+</MultiLanguage>
 
 The only differences are the filename (`middleware.js`) and the exported function name (`middleware` instead of `proxy`).
 
@@ -151,12 +211,23 @@ PostHog's API endpoints use trailing slashes (like `/e/`). Without this setting,
 
 In your application code, update your PostHog initialization to use your proxy path:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
   api_host: '/ph',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+  api_host: '/ph',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 The `api_host` tells the SDK where to send events. Using a relative path ensures requests go to your domain. The `ui_host` must point to PostHog's actual domain so features like the toolbar link correctly.
 
@@ -200,7 +271,9 @@ If requests to your proxy path return 404 or don't get proxied:
 
 If you're using Clerk or similar auth solutions, handle PostHog routes before authentication. Add the proxy logic to your `beforeAuth` function and exclude the proxy path from auth:
 
-```js
+<MultiLanguage>
+
+```js file=US
 export default authMiddleware({
   beforeAuth(req) {
     if (req.nextUrl.pathname.startsWith('/ph')) {
@@ -225,6 +298,34 @@ export default authMiddleware({
   ignoredRoutes: ['/ph(.*)'],
 })
 ```
+
+```js file=EU
+export default authMiddleware({
+  beforeAuth(req) {
+    if (req.nextUrl.pathname.startsWith('/ph')) {
+      const url = req.nextUrl.clone()
+      const hostname = url.pathname.startsWith('/ph/static/')
+        ? 'eu-assets.i.posthog.com'
+        : 'eu.i.posthog.com'
+
+      const requestHeaders = new Headers(req.headers)
+      requestHeaders.set('host', hostname)
+
+      url.protocol = 'https'
+      url.hostname = hostname
+      url.port = '443'
+      url.pathname = url.pathname.replace(/^\/ph/, '')
+
+      return NextResponse.rewrite(url, {
+        headers: requestHeaders,
+      })
+    }
+  },
+  ignoredRoutes: ['/ph(.*)'],
+})
+```
+
+</MultiLanguage>
 
 ### Cookies being forwarded to PostHog
 

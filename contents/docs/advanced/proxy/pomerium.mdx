@@ -52,9 +52,9 @@ Configure these settings:
 
 | Setting | Value |
 |---------|-------|
-| Name | `allow-all` (or similar) |
+| Name | `allow-all` or similar |
 | Policy Enforcement | Optional |
-| Public Access | Enabled (in Overrides section) |
+| Public Access | Enabled in overrides section |
 
 See [Pomerium's policy documentation](https://www.pomerium.com/docs/capabilities/authorization) for detailed instructions.
 
@@ -66,7 +66,7 @@ Create two routes in the Pomerium Zero console, both using the public access pol
 
 | Route | From | To | Path prefix |
 |-------|------|-----|-------------|
-| PostHog | `https://e.yourdomain.com` | `https://us.i.posthog.com` | (none) |
+| PostHog | `https://e.yourdomain.com` | `https://us.i.posthog.com` | none |
 | PostHog Assets | `https://e.yourdomain.com` | `https://us-assets.i.posthog.com` | `/static` |
 
 Replace `e.yourdomain.com` with your subdomain. Replace `us` with `eu` for EU region.
@@ -81,12 +81,23 @@ See [Pomerium's routing documentation](https://www.pomerium.com/docs/capabilitie
 
 In your application code, update your PostHog initialization:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 Replace `e.yourdomain.com` with your actual subdomain.
 
@@ -116,7 +127,9 @@ If you see errors, check [troubleshooting](#troubleshooting) below.
 
 Add these routes to your Pomerium `config.yaml`:
 
-```yaml
+<MultiLanguage>
+
+```yaml file=US
 routes:
   - from: https://e.yourdomain.com
     to: https://us.i.posthog.com
@@ -136,7 +149,29 @@ routes:
     name: "PostHog Assets"
 ```
 
-Replace `e.yourdomain.com` with your subdomain. Replace `us` with `eu` for EU region.
+```yaml file=EU
+routes:
+  - from: https://e.yourdomain.com
+    to: https://eu.i.posthog.com
+    policy:
+      - allow:
+          or:
+            - public: true
+    name: "PostHog"
+
+  - from: https://e.yourdomain.com
+    to: https://eu-assets.i.posthog.com
+    prefix: "/static"
+    policy:
+      - allow:
+          or:
+            - public: true
+    name: "PostHog Assets"
+```
+
+</MultiLanguage>
+
+Replace `e.yourdomain.com` with your subdomain.
 
 The `public: true` policy allows unauthenticated access. The `prefix: "/static"` ensures the assets route only matches static file requests.
 
@@ -159,12 +194,23 @@ systemctl reload pomerium  # Or your preferred restart method
 
 In your application code, update your PostHog initialization:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 Replace `e.yourdomain.com` with your actual subdomain.
 

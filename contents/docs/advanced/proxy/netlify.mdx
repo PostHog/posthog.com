@@ -103,12 +103,23 @@ You can verify the redirects were processed by checking your deploy logs in the 
 
 In your application code, update your PostHog initialization to use your proxy path:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://yourdomain.com/ph',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://yourdomain.com/ph',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 Replace `yourdomain.com` with your custom domain.
 
@@ -116,12 +127,23 @@ The `api_host` tells the SDK where to send events. The `ui_host` must point to P
 
 You can also use a relative path if you prefer:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: '/ph',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: '/ph',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 Using a relative path avoids CORS issues when your primary domain differs from the one you're using in the SDK (e.g., `mydomain.com` vs `www.mydomain.com`).
 
@@ -193,12 +215,23 @@ You can verify the redirects were processed by checking your deploy logs in the 
 
 In your application code, update your PostHog initialization to use your proxy path:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://yourdomain.com/ph',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://yourdomain.com/ph',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 Replace `yourdomain.com` with your custom domain.
 
@@ -206,12 +239,23 @@ The `api_host` tells the SDK where to send events. The `ui_host` must point to P
 
 You can also use a relative path:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: '/ph',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: '/ph',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 Using a relative path avoids CORS issues when your primary domain differs from the one you're using in the SDK.
 
@@ -249,12 +293,23 @@ For redirects files, make sure the file is in your publish directory after the b
 
 If you see CORS errors about a missing `Access-Control-Allow-Origin` header, try using a relative path instead of the full URL:
 
-```js
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
   api_host: '/ph',
-  ui_host: 'https://us.posthog.com' // or https://eu.posthog.com
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: '/ph',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
 
 This often happens when your primary Netlify domain differs from the one in `api_host`. For example, if your primary domain is `mydomain.com` but you set `api_host` to `https://www.mydomain.com/ph`, browsers will treat this as a cross-origin request.
 
