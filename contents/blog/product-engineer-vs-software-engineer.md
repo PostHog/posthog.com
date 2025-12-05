@@ -55,7 +55,7 @@ Product engineering also tends to be more fast-paced, scrappy, and independent t
 
 Software engineers code too, of course, but they also spend lots of time designing, testing, and maintaining what they build. They look for ways to optimize systems, improve scalability, and solve bugs. They are deeply focused on specific areas of technology, whether those are databases, data pipelines, backend APIs, or client-side app frameworks.
 
-Software engineering projects also tend to have longer timelines and cross-functional collaboration because of their specialization.
+Software engineering projects also tend to have longer timelines and cross-functional collaboration because of their specialization. A software engineering team might include a frontend engineer, backend engineer, tester, designer, and product manager. A product engineering team most often just includes product engineers.
 
 ## Why is demand for product engineers growing?
 
