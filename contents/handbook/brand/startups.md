@@ -50,6 +50,8 @@ YC teams must apply via [our secret YC page](https://app.posthog.com/startups/yc
 
 We track all PostHog for YC applications in [this Zapier table](https://tables.zapier.com/app/tables/t/01JRCYMWYAJNP3K0B6GTYKKBQB).
 
+This deal is also available to YC alumni, provided they are the founders of the new company.
+
 ## What happens after companies apply?
 
 1. **Application**  
