@@ -92,6 +92,14 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
                 hooks: path.resolve(__dirname, 'src', 'hooks'),
                 // Mapping
                 docs: path.resolve(__dirname, '.cache', 'gatsby-source-git', 'posthog-main-repo', 'docs'),
+                onboarding: path.resolve(
+                    __dirname,
+                    '.cache',
+                    'gatsby-source-git',
+                    'posthog-main-repo',
+                    'docs',
+                    'onboarding'
+                ),
                 'scenes/onboarding/OnboardingDocsContentWrapper': path.resolve(
                     __dirname,
                     'src',

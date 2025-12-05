@@ -4,10 +4,32 @@ import { MdxCodeBlock, CodeBlock, SingleCodeBlock } from 'components/CodeBlock'
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import OSButton from 'components/OSButton'
-import { Markdown } from 'components/Squeak/components/Markdown'
 import { Blockquote } from 'components/BlockQuote'
-import { dedent } from '~/utils'
+import { dedent } from '../../utils'
 import Tab from 'components/Tab'
+import { Markdown } from 'components/Squeak/components/Markdown'
+import Link from 'components/Link'
+
+const transformPosthogLink = (href: string | undefined): string | undefined => {
+    if (!href) return href
+
+    try {
+        const url = new URL(href)
+        if (url.hostname === 'posthog.com' || url.hostname === 'www.posthog.com') {
+            return url.pathname + url.search + url.hash
+        }
+    } catch {
+        return href
+    }
+
+    return href
+}
+
+// This transforms absolute posthog.com links defined in app as relative links
+const InAppLink = ({ node, href, ...props }: any) => {
+    const transformedHref = transformPosthogLink(href) || href || ''
+    return <Link to={transformedHref} state={{ newWindow: true }} {...props} />
+}
 
 type CodeBlockItem = {
     language: string
@@ -103,7 +125,14 @@ export const OnboardingContentWrapper: React.FC<OnboardingContentWrapperProps> =
                 CalloutBox,
                 ProductScreenshot,
                 OSButton,
-                Markdown,
+                Markdown: (props: any) => (
+                    <Markdown
+                        {...props}
+                        components={{
+                            a: InAppLink,
+                        }}
+                    />
+                ),
                 Blockquote,
                 Tab,
                 dedent,
