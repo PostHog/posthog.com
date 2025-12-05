@@ -282,9 +282,7 @@ export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
                                     ))}
                                 </div>
                             ) : (
-                                <div className="text-[13px] text-secondary italic">
-                                    No reviews yet. {user ? 'Be the first to review!' : 'Sign in to add a review.'}
-                                </div>
+                                <div className="text-[13px] text-secondary italic">No reviews yet.</div>
                             )}
                         </div>
 
