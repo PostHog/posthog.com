@@ -31,6 +31,7 @@ Product engineers are changing the way companies think about engineering. To exp
 > **Wait, what about growth engineers?** A [growth engineer](/blog/what-is-a-growth-engineer) is a type of software engineer who focuses on projects that drive growth metrics like signups, subscriptions, and revenue. They share many characteristics with product engineers, but have a broader focus on growth across the company rather than a specific product.
 
 ## How are product and software engineers different?
+
 Product engineers – sometimes referred to as product-minded engineers – "own" **the product** and are responsible for its successes and failures. They're empathetic towards users and care about solving their problems. They build with the user in mind and create what users need to succeed.
 
 In contrast, software engineers "own" **the code they write**. They care more about solving technical problems, optimizing systems, and writing clean code. Since they focus more on the implementation, they usually aren’t the ones making product decisions (they rely on [product managers](/blog/product-engineer-vs-product-manager) for that). 
