@@ -104,6 +104,11 @@ const DWInstallationPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Salesforce_com_logo_2e650322bc.svg',
         },
         {
+            label: 'Shopify',
+            url: '/docs/data-warehouse/sources/shopify',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/shopify_1aa4658e01.png',
+        },
+        {
             label: 'Snowflake',
             url: '/docs/data-warehouse/sources/snowflake',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/snowflake_color_517158afd5.svg',
@@ -112,6 +117,11 @@ const DWInstallationPlatforms = () => {
             label: 'Stripe',
             url: '/docs/data-warehouse/sources/stripe',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Stripe_Logo_revised_2016_24183d3284.svg',
+        },
+        {
+            label: 'Supabase',
+            url: '/tutorials/supabase-query',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/supabase_2fbe7c54ee.png',
         },
         {
             label: 'Temporal.io',
