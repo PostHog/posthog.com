@@ -33,7 +33,7 @@ const getRecommendation = (answers: Answer): Recommendation => {
     if (answers.managed === 'yes') {
         return {
             method: 'Managed reverse proxy',
-            path: '/docs/advanced/proxy/managed-reverse-proxy',
+            path: '/docs/advanced/proxy/',
             reason: "PostHog's managed proxy requires zero maintenance, handles SSL automatically, and stays up-to-date without any work on your part.",
         }
     }

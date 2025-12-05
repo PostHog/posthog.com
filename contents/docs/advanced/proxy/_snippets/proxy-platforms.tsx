@@ -15,7 +15,9 @@ const ProxyPlatforms = ({ columns = 2 }: ProxyPlatformsProps) => {
 
     const platforms = usePlatformList('docs/advanced/proxy', 'reverse proxy').filter(
         (platform: { url: string }) =>
-            !platform.url.includes('managed-reverse-proxy') && !platform.url.includes('troubleshooting')
+            !platform.url.includes('managed-reverse-proxy') &&
+            !platform.url.includes('troubleshooting') &&
+            !platform.url.includes('proxy-reference')
     )
 
     return <List className={`grid gap-4 grid-cols-2 ${columnClassMap[columns]} not-prose`} items={platforms} />

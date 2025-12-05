@@ -2740,9 +2740,17 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Self-hosted reverse proxy',
+                    name: 'Reverse proxy',
                     url: '/docs/advanced/proxy',
                     children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/advanced/proxy',
+                        },
+                        {
+                            name: 'Managed reverse proxy',
+                            url: '/docs/advanced/proxy/managed-reverse-proxy',
+                        },
                         {
                             name: 'AWS CloudFront',
                             url: '/docs/advanced/proxy/cloudfront',
