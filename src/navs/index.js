@@ -1249,7 +1249,6 @@ export const handbookSidebar = [
                 name: 'How we work',
                 url: '',
                 children: [
-
                     {
                         name: 'Support zero weeks',
                         url: '/handbook/support/support-zero',
@@ -4229,6 +4228,14 @@ export const docsMenu = {
                         {
                             name: 'Tiktok Ads',
                             url: '/docs/data-warehouse/sources/tiktok-ads',
+                        },
+                        {
+                            name: 'Shopify',
+                            url: '/docs/data-warehouse/sources/shopify',
+                        },
+                        {
+                            name: 'Supabase',
+                            url: '/tutorials/supabase-query',
                         },
                         {
                             name: 'Google Sheets',
