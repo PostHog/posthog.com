@@ -65,7 +65,7 @@ For example, Linear, the wildly popular modern project management tool, is built
 
 At larger companies, product engineers are less common, but they do exist. They're often seen as a way to drive innovation and inject urgency through smaller teams that have more freedom to ideate and execute independently.
 
-Finally, as more dev tool companies emerge, demand for product engineers will continue to grow. (After all, developers understand developers best.) Vercel's [job listings](https://vercel.com/careers) for a Product Engineer role describes the ideal candidate as someone with "a strong passion for developer experience and a deep understanding of how AI can enhance productivity".
+Finally, as more dev tool companies emerge, demand for product engineers will continue to grow (after all, developers understand developers best). Vercel's [job listings](https://vercel.com/careers) for a product engineer role describes the ideal candidate as someone with "a strong passion for developer experience and a deep understanding of how AI can enhance productivity".
 
 ## Is product engineering right for you?
 
