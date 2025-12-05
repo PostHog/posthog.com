@@ -1314,6 +1314,10 @@ export const handbookSidebar = [
                                 url: '/handbook/growth/sales/cross-sell-motions',
                             },
                             {
+                                name: 'Onsite customer visits',
+                                url: '/handbook/growth/sales/customer-onsite-visits',
+                            },
+                            {
                                 name: 'Communications templates',
                                 url: '/handbook/growth/sales/communications-templates',
                             },
