@@ -195,10 +195,10 @@ In this call the support engineer will be able to answer any questions, as well 
 -   [ ] [Advice on how to communicate with customers](/handbook/engineering/support-hero#how-do-i-communicate) and [prioritize tickets](/handbook/engineering/support-hero#how-do-i-prioritize)
 -   [ ] [How and when to mark tickets as 'On Hold' or 'Pending'](/handbook/engineering/support-hero#ticket-status)
 -   [ ] [What our SLAs](/handbook/support/customer-support#response-targets) are and [what ticket severity indicates](/docs/support-options#severity-levels)
--   [ ] How to deal with bug reports and feature requests
--   [ ] [How to use macros to answer questions quickly](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets)
--   [ ] How to avoid duplication of effort in ZenDesk
--   [ ] [How to create and use personal views in ZenDesk](https://support.zendesk.com/hc/en-us/articles/4408832792986-Managing-your-views)
+-   [ ] HogHero - how to deal with bug reports and feature requests, and how to merch customers (including [macros](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets))
+-   [ ] How to avoid duplication of effort in Zendesk
+-   [ ] [Which views should be used in Zendesk](https://support.zendesk.com/hc/en-us/articles/4408832792986-Managing-your-views)
+-   [ ] How to use [side conversations](https://support.zendesk.com/hc/en-us/articles/4604286879642-Creating-side-conversations) in Zendesk
 
 It can be especially helpful for new hires if support engineers demonstrate how to solve a few simple tickets from start to finish, through shadowing.
 
