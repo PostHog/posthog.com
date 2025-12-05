@@ -96,3 +96,20 @@ A good test should:
 We default to open but when adding a new feature we should consider if it should be MIT licensed or Enterprise edition licensed. Everything in the `ee` folder is covered by [a different license](https://github.com/PostHog/posthog/blob/master/ee/LICENSE). It's easy to move things from `ee` to open, but not the other way.
 
 All the open source code is copied to [the posthog-foss repo](https://github.com/posthog/posthog-foss) with the `ee` code stripped out.  You need to consider whether your code will work if imports to `ee` are unavailable
+
+### Querying ClickHouse
+
+**Always use HogQL instead of raw ClickHouse queries in product code.**
+
+Querying ClickHouse directly from product code is a bad idea for several reasons:
+
+1. **Data safety**: HogQL automatically scopes queries to the current team, preventing accidental cross-team data access. Raw queries that fetch data for multiple teams and separate it in code are risky—even if correct now, future changes could introduce data breaches.
+
+2. **Consistency**: HogQL handles property access, person mapping, and other PostHog-specific concerns correctly and consistently.
+
+3. **Query attribution**: If you must query ClickHouse directly for a valid reason, ensure you [tag your queries appropriately](/handbook/engineering/clickhouse/query-attribution) with the right product tag and ClickHouse user.
+
+The only case where raw ClickHouse queries might be justified is cross-team queries, but even then consider alternatives:
+- Can you detect what you need via PostgreSQL instead? (e.g., checking feature usage via team settings)
+- Can you use one simple ClickHouse query to get team IDs, then run HogQL queries per-team for the actual data?
+- Can you leverage existing cross-team infrastructure like usage reports?

@@ -14,6 +14,22 @@ The self-hosted version is the same exact product we run on PostHog Cloud, thoug
 
 Because we don't manage self-hosted instances or provide paid support plans for them, [we don't offer any sort of guarantees](/docs/self-host/open-source/disclaimer) around it working in certain ways on your infrastructure, and you assume all responsibility and risk for your use of the product and the stack.
 
+## TLDR;
+
+There are warnings and useful information below, so we recommend reading the whole document... but there are two commands for interacting with the hobby deploy
+
+### Installing
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/deploy-hobby)"
+```
+
+### Upgrading
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/upgrade-hobby)"
+```
+
 ## Should I use self-hosted PostHog or PostHog Cloud?
 
 Good question! We've found that PostHog Cloud is far and away the best experience for the vast majority of our users. However, some people still want to self-host, and we're here for that! Here's a quick flow chart to help you understand if self-hosting PostHog is for you:
