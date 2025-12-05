@@ -186,6 +186,7 @@ function Events() {
     const [creatingEvent, setCreatingEvent] = useState(false)
     const [editingEvent, setEditingEvent] = useState<boolean>(false)
     const [pendingSelectedId, setPendingSelectedId] = useState<number | null>(null)
+    const [isInitialized, setIsInitialized] = useState(false)
 
     // Generate unique event key
     const getEventKey = (event: Event) => {
@@ -204,10 +205,14 @@ function Events() {
 
     const displayEvents = activeTab === 'past' ? pastEvents : upcomingEvents
 
-    const handleEventClick = (event: Event) => {
+    const handleEventClick = (event: Event, updateHash = true) => {
         setSelectedEvent(event)
         setEditingEvent(false)
         setCreatingEvent(false)
+
+        if (updateHash) {
+            window.history.replaceState(null, '', `#eventId=${event.id}`)
+        }
     }
     const handleMapEventClick = (eventOrId: number) => {
         const event = eventsData.find((e) => e.id === eventOrId)
@@ -219,11 +224,16 @@ function Events() {
         }
     }
 
+    const handleCloseEvent = () => {
+        setSelectedEvent(null)
+        window.history.replaceState(null, '', window.location.pathname)
+    }
+
     // Handle ESC key to close detail panel
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'Escape' && selectedEvent) {
-                setSelectedEvent(null)
+                handleCloseEvent()
             }
         }
 
@@ -250,6 +260,31 @@ function Events() {
             }
         }
     }, [eventsData, pendingSelectedId])
+
+    // Initialize from URL hash on page load
+    useEffect(() => {
+        if (!isInitialized && eventsData.length > 0) {
+            const hash = window.location.hash
+            const match = hash.match(/#eventId=(\d+)/)
+
+            if (match) {
+                const eventId = parseInt(match[1], 10)
+                const event = eventsData.find((e) => e.id === eventId)
+
+                if (event) {
+                    // Determine if event is past or upcoming and switch tab
+                    const today = new Date()
+                    const isUpcoming = new Date(event.date) >= today
+                    setActiveTab(isUpcoming ? 'upcoming' : 'past')
+
+                    // Select event without updating hash (since we're reading from it)
+                    handleEventClick(event, false)
+                }
+            }
+
+            setIsInitialized(true)
+        }
+    }, [eventsData, isInitialized])
 
     return (
         <>
@@ -364,7 +399,7 @@ function Events() {
                                     onClose={() => {
                                         setCreatingEvent(false)
                                         setEditingEvent(false)
-                                        setSelectedEvent(null)
+                                        handleCloseEvent()
                                     }}
                                 >
                                     <div className="p-4">
@@ -383,7 +418,7 @@ function Events() {
                                 </EventCard>
                             ) : (
                                 selectedEvent && (
-                                    <EventCard onClose={() => setSelectedEvent(null)}>
+                                    <EventCard onClose={handleCloseEvent}>
                                         <div className="p-4">
                                             <h2 className="text-xl font-bold mb-1 pr-12">{selectedEvent.name}</h2>
                                             <div className="mb-2 text-secondary">
@@ -593,7 +628,7 @@ function Events() {
                                                             icon={<IconTrash />}
                                                             onClick={() => {
                                                                 deleteEvent(selectedEvent.id)
-                                                                setSelectedEvent(null)
+                                                                handleCloseEvent()
                                                             }}
                                                         />
                                                     </div>

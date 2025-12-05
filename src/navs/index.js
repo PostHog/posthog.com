@@ -1242,13 +1242,14 @@ export const handbookSidebar = [
                 url: '/handbook/support/customer-support',
             },
             {
-                name: 'Incidents & maintenance',
-                url: '/handbook/engineering/operations/incidents#customer-communications',
+                name: 'Support team incident response',
+                url: '/handbook/support/support-incident-response',
             },
             {
-                name: 'Internal processes',
+                name: 'How we work',
                 url: '',
                 children: [
+
                     {
                         name: 'Support zero weeks',
                         url: '/handbook/support/support-zero',
@@ -4872,6 +4873,12 @@ export const docsMenu = {
                 {
                     name: 'Workflow builder',
                     url: '/docs/workflows/workflow-builder',
+                    icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
+                    name: 'Content library and message templates',
+                    url: '/docs/workflows/library',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
