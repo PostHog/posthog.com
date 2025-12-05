@@ -141,7 +141,6 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const [history, setHistory] = useState<string[]>([])
     const [activeHistoryIndex, setActiveHistoryIndex] = useState(0)
     const windowRef = useRef<HTMLDivElement>(null)
-    const [opening, setOpening] = useState(siteSettings.experience === 'posthog' && !siteSettings.performanceBoost)
     const [dragging, setDragging] = useState(false)
     const contentRef = useRef<HTMLDivElement>(null)
     const [pageOptions, setPageOptions] = useState<MenuItemType[]>()
@@ -212,7 +211,6 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         startPosY: number
     } | null>(null)
     const previewRef = useRef<HTMLDivElement>(null)
-    const openingPreviewRef = useRef<HTMLDivElement>(null)
 
     const startResize = useCallback(
         (e: React.PointerEvent, left = false) => {
@@ -498,72 +496,6 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     }, [item])
 
     useEffect(() => {
-        // If no origin position available, skip opening animation
-        if (opening && !item.fromOrigin && !windowPosition) {
-            setOpening(false)
-            setAnimating(false)
-            return
-        }
-
-        // Run opening animation via DOM
-        if (opening && openingPreviewRef.current) {
-            const preview = openingPreviewRef.current
-            const smallSize = 48 // Initial small square size
-
-            // Get origin position (from item.fromOrigin or windowPosition as fallback)
-            const originX = item.fromOrigin?.x ?? windowPosition?.x ?? position.x
-            const originY = item.fromOrigin?.y ?? windowPosition?.y ?? position.y
-
-            // Calculate the translation needed from origin to final position
-            const translateX = position.x - (originX - smallSize / 2)
-            const translateY = position.y - (originY - smallSize / 2)
-
-            // Calculate animation speed based on window size
-            // Bigger windows = slower animation (more distance to travel visually)
-            // Base: 100ms for small windows, up to 250ms for large windows
-            const windowArea = size.width * size.height
-            const minArea = 300 * 200 // Small window
-            const maxArea = 1200 * 800 // Large window
-            const normalizedSize = Math.min(1, Math.max(0, (windowArea - minArea) / (maxArea - minArea)))
-            const moveDuration = 60 + normalizedSize * 100 // 60ms to 160ms
-            const expandDuration = 80 + normalizedSize * 100 // 80ms to 180ms
-
-            // Phase 1: Start as small square at origin (centered on click)
-            preview.style.display = 'block'
-            preview.style.left = `${originX - smallSize / 2}px`
-            preview.style.top = `${originY - smallSize / 2}px`
-            preview.style.width = `${smallSize}px`
-            preview.style.height = `${smallSize}px`
-            preview.style.transform = 'translate3d(0, 0, 0)'
-            preview.style.transition = 'none'
-            preview.style.willChange = 'transform, width, height'
-
-            // Force reflow
-            preview.offsetHeight
-
-            // Phase 2: Move to final position using transform (GPU accelerated)
-            preview.style.transition = `transform ${moveDuration}ms cubic-bezier(0.2, 0.2, 0.8, 1)`
-            preview.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`
-
-            // Use timeout instead of transitionend (more reliable)
-            setTimeout(() => {
-                // Phase 3: Expand to full size
-                preview.style.transition = `width ${expandDuration}ms cubic-bezier(0.2, 0.2, 0.8, 1), height ${expandDuration}ms cubic-bezier(0.2, 0.2, 0.8, 1)`
-                preview.style.width = `${size.width}px`
-                preview.style.height = `${size.height}px`
-
-                // Wait for expand to finish, then show window
-                setTimeout(() => {
-                    preview.style.display = 'none'
-                    preview.style.willChange = 'auto'
-                    setOpening(false)
-                    setAnimating(false)
-                }, expandDuration)
-            }, moveDuration) // Wait for move to finish
-        }
-    }, [])
-
-    useEffect(() => {
         const handleWindowClose = (event: CustomEvent) => {
             if (event.detail.windowKey === item.key) {
                 handleClose()
@@ -728,12 +660,6 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             className="absolute border-2 border-blue rounded pointer-events-none"
                             style={{ display: 'none', zIndex: item.zIndex + 1 }}
                         />
-                        {/* Opening animation outline - controlled via DOM */}
-                        <div
-                            ref={openingPreviewRef}
-                            className="absolute border-2 border-blue rounded pointer-events-none"
-                            style={{ display: 'none', zIndex: item.zIndex + 1 }}
-                        />
                         <motion.div
                             ref={windowRef}
                             data-app="AppWindow"
@@ -764,11 +690,11 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 willChange: 'transform',
                                 transform: 'translateZ(0)',
                                 backfaceVisibility: 'hidden',
-                                visibility: opening ? 'hidden' : 'visible',
                             }}
                             initial={{
-                                x: siteSettings.experience === 'boring' ? 0 : Math.round(position.x),
-                                y: siteSettings.experience === 'boring' ? 0 : Math.round(position.y),
+                                scale: 0.08,
+                                x: item.fromOrigin?.x || windowPosition?.x || Math.round(position.x),
+                                y: item.fromOrigin?.y || windowPosition?.y || Math.round(position.y),
                                 width: siteSettings.experience === 'boring' ? '100%' : size.width,
                                 height:
                                     siteSettings.experience === 'boring'
@@ -778,6 +704,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         : size.height,
                             }}
                             animate={{
+                                scale: 1,
                                 x: siteSettings.experience === 'boring' ? 0 : Math.round(position.x),
                                 y: siteSettings.experience === 'boring' ? 0 : Math.round(position.y),
                                 width: siteSettings.experience === 'boring' ? '100%' : size.width,
@@ -787,9 +714,31 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         : item.appSettings?.size?.autoHeight
                                         ? 'auto'
                                         : size.height,
-                                transition: {
-                                    duration: 0,
-                                },
+                                transition: dragging
+                                    ? { duration: 0 }
+                                    : {
+                                          duration:
+                                              siteSettings.experience === 'boring' || siteSettings.performanceBoost
+                                                  ? 0
+                                                  : 0.2,
+                                          scale: {
+                                              duration:
+                                                  siteSettings.experience === 'boring' ||
+                                                  siteSettings.performanceBoost ||
+                                                  !windowPosition
+                                                      ? 0
+                                                      : 0.2,
+                                              delay:
+                                                  siteSettings.experience === 'boring' ||
+                                                  siteSettings.performanceBoost ||
+                                                  !windowPosition
+                                                      ? 0
+                                                      : 0.2,
+                                              ease: [0.2, 0.2, 0.8, 1],
+                                          },
+                                          width: { duration: 0 },
+                                          height: { duration: 0 },
+                                      },
                             }}
                             exit={{
                                 scale: 0.005,
