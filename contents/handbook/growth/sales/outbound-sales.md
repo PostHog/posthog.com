@@ -58,4 +58,4 @@ Most SaaS companies would likely just blast you with emails, calls and DMs witho
 
 ## What we're doing next
 
-We are hiring a founding BDR and are going to run a bunch of experiments in Q1. By the end of Q1, we want to have a v1 outbound playbook, filled with repeatable things that we know work. As with all our sales processes, this will probably be a combination of existing playbook stuff and totally unique PostHog things. But the choice isn't entirely between one or the other - we need to find the right balance. 
+We are hiring a founding BDR and are going to run a bunch of experiments in Q1. By the end of Q1, we want to have a v1 outbound playbook, filled with repeatable things that we know work, and working closely with the <SmallTeam slug="billing" /> to build out a proper GTM engineering machine. As with all our sales processes, this will probably be a combination of existing playbook stuff and totally unique PostHog things. But the choice isn't entirely between one or the other - we need to find the right balance.
