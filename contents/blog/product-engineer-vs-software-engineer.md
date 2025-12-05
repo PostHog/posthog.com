@@ -1,5 +1,5 @@
 ---
-date: 2025-12-03
+date: 2025-12-08
 title: 'Product engineer vs software engineer: How are they different?'
 author:
   - ian-vanagas
@@ -22,7 +22,7 @@ Want proof? [Look at this graph](https://www.youtube.com/watch?v=oMRgdpXLElE):
 
 ![product-engineer-trends](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_12_04_at_17_54_03_2x_9fbbb74dc7.png)
 
-Online searches for product engineers have grown by 80% since 2021 as startups like [ourselves](https://newsletter.posthog.com/p/beyond-the-10x-engineer), [incident.io](http://incident.io/), and [Ghost](https://ghost.org/), prioritize engineers who are customer-obsessed, talk to users directly, and comfortable working autonomously. 
+Online searches for product engineers have grown by 89% since 2021 as startups like [ourselves](https://newsletter.posthog.com/p/beyond-the-10x-engineer), [incident.io](http://incident.io/), and [Ghost](https://ghost.org/), prioritize engineers who are customer-obsessed, talk to users directly, and comfortable working autonomously. 
 
 Product engineers are changing the way companies think about engineering. To explain why, we’ll compare the role of product engineer with the traditional (and still very necessary) role of the full-stack software engineer.
 
@@ -52,11 +52,11 @@ Product engineers still spend the majority of their time coding, but they have r
 
 Product engineers spend time talking to customers, digging into usage data, and researching the competitive landscape. They test other products, build prototypes, and brainstorm experiments to make their product better. They use this research to prioritize a roadmap that they own, and take responsibility for explaining the roadmap and gathering feedback from users and the company.
 
-Product engineering also tends to be more fast-paced, scrappy, and independent than software engineering. This is especially true as AI tools are on the rise; product engineers can move even quicker by using LLMs to handle less-critical implementation details.
+Product engineering also tends to be more fast-paced, scrappy, and independent than software engineering. This is especially true as [AI coding tools](/newsletter/ai-coding-mistakes) are on the rise; product engineers can move even quicker by using LLMs to handle less-critical implementation details.
 
 Software engineers code too, of course, but they also spend lots of time designing, testing, and maintaining what they build. They look for ways to optimize systems, improve scalability, and solve bugs. They are deeply focused on specific areas of technology, whether those are databases, data pipelines, backend APIs, or client-side app frameworks.
 
-Software engineering projects also tend to have longer timelines and cross-functional collaboration because of their specialization. A software engineering team might include a frontend engineer, backend engineer, tester, designer, and product manager. A product engineering team most often just includes product engineers.
+Software engineering projects also [move slower](/newsletter/this-is-why-youre-not-shipping) because, as specialists, they must collaborate cross-functionally. A software engineering team might include a frontend engineer, backend engineer, tester, designer, and product manager. A product engineering team most often just includes product engineers.
 
 ## Why is demand for product engineers growing?
 
@@ -78,7 +78,7 @@ Good product engineers need to:
 - Be flexible about exact implementation.
 - Thrive in fast-paced environments.
 
-If this sounds like you, product engineering might be for you.
+If that [sounds like fun](/blog/why-product-engineering-is-so-fun), then [product engineering](https://posthog.com/newsletter/finding-a-job-product-engineer) might be for you. 
 
 If, however, you want to focus on solving difficult technical problems and optimizing existing technologies and processes, then more traditional software engineering roles are a better choice.
 
@@ -86,7 +86,7 @@ Just remember that product engineering is more a way of working and thinking tha
 
 ## When should companies hire product engineers?
 
-Product engineers are ideal for startups and companies that want to be agile and move fast, such as B2B SaaS or consumer subscription services. They take a holistic view of the product and have the ability to move fast when needed. They're less effective for companies with large, technically complex products, like a data tool, or platforms for large enterprises.
+Product engineers are ideal for startups and companies that want to be agile and move fast, such as B2B SaaS or consumer subscription services. They take a holistic view of the product and have the ability to ship quickly when needed. They're less effective for companies with large, technically complex products, like a data tool, or platforms for large enterprises.
 
 Picking what's right is up to the company and its goals. If you're a small team focusing on building great products, multi-skilled product engineers who can [talk to users](/newsletter/talk-to-users) are a great choice. If your larger product requires specialization to scale and maintain, software engineers are the better choice. Companies with both types of roles have succeeded, and more will continue to succeed.
 
