@@ -59,7 +59,7 @@ Software engineering projects also tend to have longer timelines and cross-funct
 
 ## Why is demand for product engineers growing?
 
-There's no single reason, but it's often simply because people want to ship faster. Product engineers are popular among startups and early-stage companies for this reason, even if they don’t say it. Many software engineers behave like product engineers, even if it's not their job title.
+There's no single reason, but it's often simply because companies want to ship faster. Product engineers are popular among startups and early-stage companies for this reason, even if they don’t say it. Many software engineers at these companies behave like product engineers, even if it's not their job title.
 
 For example, Linear, the wildly popular modern project management tool, is built [almost entirely by product engineers](https://linear.app/now/how-we-run-projects-at-linear). Engineers rotate through project leadership roles and talk directly to users through their beta program to make decisions based on user feedback rather than traditional metrics. 
 
