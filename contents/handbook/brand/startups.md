@@ -44,13 +44,13 @@ This program is similar to our startup program but has some key differences for 
 
 You can find the copy for the latest deal on Bookface in this [doc](https://docs.google.com/document/d/1dmsMxrfWSVhKZY4bQp5QIRiXS2iCvLGJah5EKWOvoeI/edit?tab=t.0#heading=h.o7fhsqrlnheo). To post updates, you need to ask James or Tim to do it. 
 
+> ✅ This deal is also available to YC alumni, provided they are the founders of the new company.
+
 > ✅ Credits **can** be used to claim a BAA under the Boost plan.
 
 YC teams must apply via [our secret YC page](https://app.posthog.com/startups/yc). If we can’t immediately verify they’re part of YC, we ask for a screenshot from Bookface to prove their eligibility.
 
 We track all PostHog for YC applications in [this Zapier table](https://tables.zapier.com/app/tables/t/01JRCYMWYAJNP3K0B6GTYKKBQB).
-
-This deal is also available to YC alumni, provided they are the founders of the new company.
 
 ## What happens after companies apply?
 
