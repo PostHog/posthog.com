@@ -26,7 +26,7 @@ Online searches for product engineers have grown by 80% since 2021 as startups l
 
 Product engineers are changing the way companies think about engineering. To explain why, we’ll compare the role of product engineer with the traditional (and still very necessary) role of the full-stack software engineer.
 
-#### TL;DR – Product engineers focus on building great products while software engineers focus on building reliable software. Both of them write code, but with different priorities in mind.
+**TL;DR – Product engineers focus on building great products while software engineers focus on building reliable software. Both of them write code, but with different priorities in mind.**
 
 > **Wait, what about growth engineers?** A [growth engineer](/blog/what-is-a-growth-engineer) is a type of software engineer who focuses on projects that drive growth metrics like signups, subscriptions, and revenue. They share many characteristics with product engineers, but have a broader focus on growth across the company rather than a specific product.
 
