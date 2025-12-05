@@ -20,7 +20,7 @@ Software companies were once dominated by two types of roles: product managers a
 
 Want proof? [Look at this graph](https://www.youtube.com/watch?v=oMRgdpXLElE):
 
-![product-engineer-trends](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer-trend.png)
+![product-engineer-trends](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_12_04_at_17_54_03_2x_9fbbb74dc7.png)
 
 Online searches for product engineers have grown by 80% since 2021 as startups like [ourselves](https://newsletter.posthog.com/p/beyond-the-10x-engineer), [incident.io](http://incident.io/), and [Ghost](https://ghost.org/), prioritize engineers who are customer-obsessed, talk to users directly, and comfortable working autonomously. 
 
