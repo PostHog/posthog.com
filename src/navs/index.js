@@ -1249,7 +1249,6 @@ export const handbookSidebar = [
                 name: 'How we work',
                 url: '',
                 children: [
-
                     {
                         name: 'Support zero weeks',
                         url: '/handbook/support/support-zero',
@@ -1313,6 +1312,10 @@ export const handbookSidebar = [
                             {
                                 name: 'Cross sell motions',
                                 url: '/handbook/growth/sales/cross-sell-motions',
+                            },
+                            {
+                                name: 'Onsite customer visits',
+                                url: '/handbook/growth/sales/customer-onsite-visits',
                             },
                             {
                                 name: 'Communications templates',
