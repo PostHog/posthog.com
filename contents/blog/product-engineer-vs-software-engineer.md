@@ -41,7 +41,7 @@ The top priority of a product engineers is to solving users' problems.
 
 They build fast, even from scratch if needed, and then iterate. The tradeoffs they consider go beyond technical constraints and include more holistic factors like the user experience, business deadlines, and product roadmap. In this way, they tend to be more pragmatic.
 
-Software engineers prioritize achieving the ideal technical solution.
+Software engineers prioritize the ideal technical solution.
 
 They look for the best solution to the problem currently in front of them, focusing on best practices and building off prior work. This means they're usually more specialized and idealistic. Their projects usually involve more backend and system design work, and they're constantly thinking about optimizing security, reliability, and scale.
 
