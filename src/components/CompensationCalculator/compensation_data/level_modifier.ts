@@ -3,4 +3,5 @@ export const levelModifier: Record<string, number> = {
     Intermediate: 0.78,
     Senior: 1,
     Staff: 1.2,
+    Principal_Director: 1.4,
 }
