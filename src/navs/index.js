@@ -1249,7 +1249,6 @@ export const handbookSidebar = [
                 name: 'How we work',
                 url: '',
                 children: [
-
                     {
                         name: 'Support zero weeks',
                         url: '/handbook/support/support-zero',
@@ -4881,6 +4880,12 @@ export const docsMenu = {
                     url: '/docs/workflows/library',
                     icon: 'IconDatabase',
                     color: 'orange',
+                },
+                {
+                    name: 'Best practices',
+                    url: '/docs/workflows/best-practices',
+                    icon: 'IconStar',
+                    color: 'red',
                 },
                 {
                     name: 'Guides',
