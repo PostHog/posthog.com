@@ -27,16 +27,15 @@ Length:
 An hour, possibly longer with a small focused audience
 
 Audience:
-Users of PostHog, the more the better
+Users of PostHog, the more the better, armed with laptops and logged in
 
 Purpose:
 To level-up how users engage with our platform, spark new ideas and inspiration for customer teams, and expand usage and impact by enabling the audience on our tools.
 
 Content:
-Set an explicit goal that you think is achievable within the session for you to work towards with the users. Invite ideas and suggestions to get the jam going, but make sure you have some solid ideas in your back pocket to get things started.  Make sure everyone has a laptop and is actively building towards the goal. Do not start demoing features unless in the context of achieving the goal. Do show users useful shortcuts (PostHogAI, Actions, Cohorts, Workflows, Realtime destinations etc) if relevant. Conclude by showing where you've got to for the broader audience, and suggesting some follow-up and continuation tasks to take it to the next level.
+Set an explicit goal that you think is achievable within the session for you to work towards with the users. Invite ideas and suggestions to get the jam going, but make sure you have some solid ideas in your back pocket to get things started. Building a compound score (i.e Customer effort score, time to value, onboarding friction) can be a good one if the customer has no ideas. Do not start demoing, but do show users useful shortcuts (PostHogAI, Actions, Cohorts, Workflows, Realtime destinations etc) if relevant. Conclude by summarising progress, and suggesting some follow-up and continuation tasks to take it to the next level.
 
-Example:
-The goal set to the audience is to build a set of actions and dashboards that represent the effort for a customer to complete a "valuable action" in their app, using Product Analytics. The audience is solicited for events that are considered valuable, to make an action that combines those events. From there, some key metrics are created collaboratively - time to valuable action, events to valuable action, valuable actions/session. These are put into dashboards and checked against various recent launches for impact, which triggers much discussion about the impact seen. From there, a conclusion and some followup tasks are suggested to use these as part of the customer's product launch process, and possibly also as a north star metric for the broader team.
+
 
 ### Check-in and planning with champions
 
@@ -50,7 +49,11 @@ Purpose:
 To level set about PostHog's reputation and role within the customer, and unearth any opportunities or risks, while building stronger relationships with champions. Also a chance to test the water for any cross-sell proposals, and ensure champions are aware of all of our products.
 
 Content:
-Discovery and planning with the champions, potentially over a meal or in another less formal context - certainly not in front of their teams or boss, if relevant. Give the champions time to air any frustrations, and ask direct questions about renewal, their roadmap, any current or future needs in their team or beyond. This is a  good time to find out where you really are with a customer and what organizational challenges you may need to navigate, as well as expand their perception of what we can do.
+Discovery and planning with the champions, potentially over a meal or in another less formal context - certainly not in front of their teams or boss, if relevant. Give the champions time to air any frustrations, and ask direct questions about renewal, their roadmap, any current or future needs in their team or beyond. This is a  good time to find out where you really are with a customer and what organizational challenges you may need to navigate, as well as expand their perception of what we can do. Some good questions to ask:
+
+-"Do you intend to renew with PostHog? If not, why not?"
+-"What tools are other teams using alongside PostHog data to get the full picture of user behaviour?"
+-"What goals and focus areas are on the table for the next year? How does PostHog fit into those?"
 
 ### New user demo on your own data
 
