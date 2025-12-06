@@ -16,6 +16,10 @@ const FILE_EXTENSIONS = ['.mdx', '.md'] as const
 const IMPORT_REGEX = /^import\s+(?:(?:\{([^}]+)\}|\w+)\s+from\s+)?['"]([^'"]+)['"];?\s*$/gm
 const DEFAULT_IMPORT_NAME_REGEX = /import\s+(\w+)/
 
+const normalizeEmptyLines = (content: string): string => {
+    return content.replace(/\n{3,}/g, '\n\n')
+}
+
 export function resolveMDXSnippets(rawBody: string, filePath: string | undefined, slug?: string): string {
     if (!rawBody || !filePath) return rawBody || ''
 
@@ -23,12 +27,12 @@ export function resolveMDXSnippets(rawBody: string, filePath: string | undefined
         const visited = new Set<string>()
         const resolved = resolveMdxImports(filePath, visited)
         if (!resolved) {
-            return stripFrontmatter(rawBody)
+            return normalizeEmptyLines(stripFrontmatter(rawBody))
         }
-        return resolved
+        return normalizeEmptyLines(resolved)
     } catch (error) {
         console.error(`❌ Error resolving snippets for ${slug || filePath}:`, error)
-        return stripFrontmatter(rawBody)
+        return normalizeEmptyLines(stripFrontmatter(rawBody))
     }
 }
 
