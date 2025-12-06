@@ -14,6 +14,7 @@ import {
     generateLlmsTxt,
     generateSdkReferencesMarkdown,
 } from './rawMarkdownUtils'
+import { resolveJsxSnippets } from './snippetUtils'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
 import blogTemplate from '../src/templates/OG/blog.js'
 import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
@@ -575,6 +576,30 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     `)
 
     const filteredPages = await generateRawMarkdownPages(markdownQuery.data.allMdx.nodes)
+
+    // Resolve JSX snippets in generated markdown files (TSX files are now available from gatsby-source-git)
+    const docsDir = path.resolve(__dirname, '../public/docs')
+    if (fs.existsSync(docsDir)) {
+        const resolveJsxInDirectory = (dirPath: string) => {
+            const entries = fs.readdirSync(dirPath, { withFileTypes: true })
+            for (const entry of entries) {
+                const fullPath = path.join(dirPath, entry.name)
+                if (entry.isDirectory()) {
+                    resolveJsxInDirectory(fullPath)
+                } else if (entry.name.endsWith('.md')) {
+                    const content = fs.readFileSync(fullPath, 'utf-8')
+                    const slug = fullPath.replace(path.resolve(__dirname, '../public'), '').replace('.md', '')
+                    const resolvedContent = resolveJsxSnippets(content, fullPath, slug)
+                    if (resolvedContent !== content) {
+                        fs.writeFileSync(fullPath, resolvedContent)
+                        console.log(`Resolved JSX in: ${fullPath}`)
+                    }
+                }
+            }
+        }
+        resolveJsxInDirectory(docsDir)
+    }
+
     generateLlmsTxt(filteredPages)
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
