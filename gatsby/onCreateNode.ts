@@ -6,7 +6,7 @@ import slugify from 'slugify'
 import { JSDOM } from 'jsdom'
 import { GatsbyNode } from 'gatsby'
 import { PAGEVIEW_CACHE_KEY } from './onPreBootstrap'
-import { resolveSnippets, resolveJsxSnippetsToMarkdown } from './snippetUtils'
+import { resolveMDXSnippets } from './snippetUtils'
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -270,16 +270,8 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             }
         }
 
-        const contentWithoutFrontmatter = stripFrontmatter(node.rawBody)
-        let contentWithSnippets
-        try {
-            contentWithSnippets = resolveJsxSnippetsToMarkdown(
-                resolveSnippets(contentWithoutFrontmatter, node.fileAbsolutePath)
-            )
-        } catch (error) {
-            console.error(`Error resolving snippets for ${node.fileAbsolutePath}:`, error)
-            contentWithSnippets = contentWithoutFrontmatter
-        }
+        // Resolve MDX snippets (TSX imports resolved in post-build)
+        const contentWithSnippets = resolveMDXSnippets(node.rawBody, node.fileAbsolutePath, slug)
 
         // Prepend title as H1 if it exists
         const title = node.frontmatter?.title
