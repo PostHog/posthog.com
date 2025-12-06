@@ -165,8 +165,8 @@ export const dataWarehouse = {
                     description: (
                         <>
                             If you know SQL, you already know most of{' '}
-                            <Link to="/docs/hog" state={{ newWindow: true }}>
-                                Hog
+                            <Link to="/docs/sql" state={{ newWindow: true }}>
+                                HogQL
                             </Link>
                             . Built to feel natural for data analysis.
                         </>
