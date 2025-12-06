@@ -400,8 +400,14 @@ export const AppLink = ({
     const themeSpecificColors = getThemeSpecificBackgroundColors()
     const backgroundMatchedColors = `${baseBackgroundColors} ${themeSpecificColors}`
 
+    const isDesktop = source === 'desktop'
+
     // Only apply theme-specific background colors if source is "desktop"
-    const finalBackground = background || (source === 'desktop' ? backgroundMatchedColors : '')
+    const finalBackground = background || (isDesktop ? backgroundMatchedColors : '')
+
+    const baseLabelClasses = `skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] wallpaper-parade:bg-white dark:wallpaper-parade:bg-black ${finalBackground} rounded-[2px] px-0.5 py-0`
+    // Apply other desktop only colors
+    const finalLabelClasses = isDesktop ? `${baseLabelClasses} wallpaper-coding-at-night:text-white` : baseLabelClasses
 
     const content = (
         <>
@@ -416,9 +422,7 @@ export const AppLink = ({
                 }`}
             >
                 <span className={`inline-block leading-snug`}>
-                    <span
-                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] wallpaper-parade:bg-white dark:wallpaper-parade:bg-black wallpaper-coding-at-night:text-white ${finalBackground}  rounded-[2px] px-0.5 py-0`}
-                    >
+                    <span className={finalLabelClasses}>
                         {label}
                         {extension && <span className="opacity-75">.{extension}</span>}
                     </span>
