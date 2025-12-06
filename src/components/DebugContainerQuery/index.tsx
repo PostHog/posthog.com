@@ -7,7 +7,7 @@ import React from 'react'
 
 export const DebugContainerQuery = ({ name = '' }: { name?: string }) => {
     return (
-        <div data-scheme="primary" className="bg-white text-xs border border-red text-center rounded">
+        <div data-scheme="primary" className="bg-white dark:bg-accent text-xs border border-red text-center text-primary rounded">
             <div className={`@xs${name && '/' + name}:hidden bg-red/10 p-2`}>
                 Size: &lt;@xs{name && '/' + name} (&lt;320px)
             </div>

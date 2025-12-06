@@ -41,7 +41,8 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
-import SmallTeam from 'components/SmallTeam'
+import Tagline from 'components/Home/Tagline'
+import ELI5Blurb from 'components/Home/ELI5Blurb'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -1195,14 +1196,16 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         ),
     },
     {
-        name: 'SupportSmallTeamLink',
+        name: 'Tagline',
         kind: 'flow',
         props: [],
-        Editor: () => (
-            <SmallTeam slug="support" noMiniCrest>
-                support folks
-            </SmallTeam>
-        ),
+        Editor: () => <Tagline />,
+    },
+    {
+        name: 'ELI5Blurb',
+        kind: 'flow',
+        props: [],
+        Editor: () => <ELI5Blurb />,
     },
 ]
 
@@ -1241,9 +1244,8 @@ export default function Home() {
                 body={rawBody}
                 mdxBody={mdxBody}
                 cta={{
-                    url: `https://${
-                        posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
-                    }.posthog.com/signup`,
+                    url: `https://${posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
+                        }.posthog.com/signup`,
                     label: 'Get started - free',
                 }}
             />
