@@ -8,7 +8,28 @@ PostHog offers a range of controls to limit what data is captured by product ana
 
 PostHog offers hosting on EU cloud. To use this, sign up at [eu.posthog.com](https://eu.posthog.com).
 
-If you've already created a US cloud instance and wish to migrate ticket, you must raise a [support ticket in-app](https://us.posthog.com/home#supportModal) with the **Data pipelines** topic for the PostHog team to do this migration for you. This option is **only available to customers on the boost, scale or enterprise** as it requires significant engineering time.  
+If you've already created a US cloud instance and wish to migrate ticket, you must raise a [support ticket in-app](https://us.posthog.com/home#supportModal) with the **Data pipelines** topic for the PostHog team to do this migration for you. This option is **only available to customers on the boost, scale or enterprise** as it requires significant engineering time.
+
+## IP data capture
+
+You can control whether client IP addresses are captured or discarded at both the organization and project levels. This helps ensure consistent privacy controls across all environments.
+
+### Organization-level defaults
+
+Organizations can set a default IP data capture policy that automatically applies to all new projects. This eliminates the need to manually configure IP data capture settings for each new environment.
+
+- **EU organizations**: Automatically default to IP data capture disabled for GDPR compliance
+- **US organizations**: Can manually configure the default setting based on their privacy requirements
+- **New projects**: Automatically inherit the organization's IP data capture default setting
+- **Existing projects**: Are not affected by organization-level changes - they retain their current configuration
+
+Configure this setting in **Settings** > **Organization** > **General** under the **IP data capture default** setting.
+
+### Project-level configuration
+
+Individual projects can override the organization default by configuring their own IP data capture setting. This is useful when you have specific privacy requirements for a particular project or environment.
+
+Configure at the project level in **Settings** > **Project** > **General** under the **IP data capture configuration** setting.  
 
 ## Disable sensitive information with autocapture
 
