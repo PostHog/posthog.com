@@ -130,3 +130,20 @@ Heads up — maintenance on \[system\] from \[time window\]. No downtime expecte
 4. **Account Owner sends the message** to their customers. Example outbound: “We’re investigating an outage affecting event ingestion. Updates every 30 minutes.”
 5. **During:** “Root cause identified (Redis queue saturation). Fix in progress.”
 6. **Resolution:** “Resolved at 11:42 UTC. Write-up soon.”
+
+## Using Pylon for broadcasts
+
+It's best that communications are shared directly from the account owner; however, if speed is of the essence, i.e. for a SEV 1 or security issue, and some folks are not yet working or on PTO, the CMOC can use Pylon to send a broadcast to all customer Slack channels en masse:
+
+1. Log into app.usepylon.com with your PostHog Slack account.
+2. Go to the _Broadcasts_ link on the left-hand side of the navigation.
+3. Click _Create Broadcast_ in the top right-hand corner of the UI.
+4. Enter the message you want to send, ensuring the formatting looks correct in the preview on the right-hand side.
+5. Ensure the Send as option is set to PostHog, not your own user (unless you want to handle 450+ potential separate threads)
+6. Click _Next_ in the top right-hand corner of the UI.
+7. Select your audience. You can use the filters to select all channels not owned by specific people, e.g., those who are currently online and communicating 1:1 with customers.
+8. Make sure you click _Add to Audience_ to add the selected channels to the broadcast.
+9. Click _Next_ in the top right-hand corner of the UI.
+10. Set the engagement notification channel to be [#support-customer-success](https://posthog.slack.com/archives/C05MUMZLC13)
+11. Check that you're happy with the message and audience and click _Send Now_ in the top right of the UI.
+12. Ask everyone online to monitor [#support-customer-success](https://posthog.slack.com/archives/C05MUMZLC13) for replies and respond where necessary.

@@ -30,7 +30,8 @@ import { SlideConfig, SlideConfigResult, defaultSlides, aiSlide } from './create
 import ProgressBar from 'components/ProgressBar'
 import DemoSlide from './DemoSlide'
 import PostHogOnPostHogSlide from './PostHogOnPostHogSlide'
-import { useApp } from "../../../context/App"
+import { useApp } from '../../../context/App'
+import VideosSlide from './VideosSlide'
 
 interface SlidesTemplateProps {
     productHandle: string
@@ -41,6 +42,7 @@ interface SlidesTemplateProps {
         description?: string
         image?: string
     }
+    rightActionButtons?: React.ReactNode
 }
 
 export const SlideContainer = ({ children }: { children: React.ReactNode }) => {
@@ -52,6 +54,7 @@ export default function SlidesTemplate({
     data,
     slideConfig = Object.values(defaultSlides),
     seoOverrides,
+    rightActionButtons,
 }: SlidesTemplateProps) {
     // Get product data early to check for AI section
     const productData = useProduct({ handle: productHandle }) as any
@@ -376,6 +379,9 @@ export default function SlidesTemplate({
             case 'posthog-on-posthog':
                 return <PostHogOnPostHogSlide productData={productData} {...props} />
 
+            case 'videos':
+                return <VideosSlide productData={productData} {...props} />
+
             case 'comparison-summary':
                 return (
                     <ComparisonSummarySlide
@@ -649,6 +655,7 @@ export default function SlidesTemplate({
                 image={seoOverrides?.image || `/images/og/${productData?.slug}.jpg`}
             />
             <Presentation
+                rightActionButtons={rightActionButtons}
                 template="generic"
                 slug={productData?.slug}
                 title=""
@@ -666,7 +673,9 @@ export default function SlidesTemplate({
             >
                 <div
                     data-scheme="primary"
-                    className={`${websiteMode ? '' : 'bg-accent px-2 @md:px-4'} grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden py-2 @md:py-4`}
+                    className={`${
+                        websiteMode ? '' : 'bg-accent px-2 @md:px-4'
+                    } grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden py-2 @md:py-4`}
                 >
                     {slides.map((slide, index) => (
                         <div

@@ -38,8 +38,8 @@ And then it is down to the Team Leads to figure out which team member is taking 
 
 To help the new owner of a customer hit the ground running, we should make sure that the customer is in a good state and that a warm introduction happens.  Typical handoffs between roles are:
 
-- TAE -> TAM 1-3 months after the initial contract is signed and the customer is onboarded into 1 or 2 primary products.
-- TAE -> CSM 1-3 months after the initial contract is signed and the customer is onboarded into 3 or more primary products.
+- TAE -> TAM 12 months after the initial contract is signed and the customer is onboarded into 1 or 2 primary products.
+- TAE -> CSM 12 months after the initial contract is signed and the customer is onboarded into 3 or more primary products.
 - TAM -> CSM after sufficient cross-product expansion has take place.
 
 > For accounts who will be landing at $100k+ a year or have high expansion potential after the initial contract, we should involve a TAM early in the process to ensure a smooth transition.  See the section further down this page on how this works. 

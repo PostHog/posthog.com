@@ -10,6 +10,7 @@ import {
     IconSquare,
     IconArrowLeft,
     IconArrowRight,
+    IconTerminal,
 } from '@posthog/icons'
 import { Menu, MenuItem, useApp } from '../../context/App'
 import { Provider as WindowProvider, AppWindow as AppWindowType, useWindow } from '../../context/Window'
@@ -31,6 +32,7 @@ import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useToast } from '../../context/Toast'
 import usePostHog from '../../hooks/usePostHog'
 import Modal from 'components/RadixUI/Modal'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 
 const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
     if (!array) return false
@@ -163,7 +165,8 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const [animating, setAnimating] = useState(true)
     const animationStartTimeRef = useRef<number | null>(null)
     const posthog = usePostHog()
-
+    const [view, setView] = useState<'marketing' | 'developer'>('marketing')
+    const [hasDeveloperMode, setHasDeveloperMode] = useState(false)
     const inView = useMemo(() => {
         const windowsAbove = windows.filter(
             (window) => window !== item && window.zIndex > item.zIndex && !window.minimized
@@ -379,7 +382,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const handleMouseDown = () => {
         if (focusedWindow === item) return
         if (item.path.startsWith('/')) {
-            navigate(item.path, { state: { newWindow: true } })
+            navigate(`${item.path}${item.location?.search || ''}`, { state: { newWindow: true } })
         } else {
             bringToFront(item)
         }
@@ -554,6 +557,10 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             setActiveInternalMenu={setActiveInternalMenu}
             internalMenu={internalMenu}
             parent={parent}
+            view={view}
+            setView={setView}
+            hasDeveloperMode={hasDeveloperMode}
+            setHasDeveloperMode={setHasDeveloperMode}
         >
             {websiteMode ? (
                 <div className="relative">

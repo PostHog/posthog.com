@@ -55,6 +55,7 @@ interface PresentationProps {
         teamSlug?: string
     }
     salesRep?: SalesRep | null
+    rightActionButtons?: React.ReactNode
 }
 
 const SidebarContent = ({
@@ -133,6 +134,7 @@ export default function Presentation({
     presenterNotes,
     config,
     salesRep,
+    rightActionButtons,
 }: PresentationProps) {
     const { siteSettings, websiteMode } = useApp()
     const { appWindow } = useWindow()
@@ -405,6 +407,7 @@ export default function Presentation({
                         {!fullScreen && (
                             <>
                                 <HeaderBar
+                                    rightActionButtons={rightActionButtons}
                                     hasLeftSidebar={sidebarContent ? { enabled: true, alwaysShow: true } : false}
                                     showSidebar
                                     showSearch
