@@ -57,6 +57,24 @@ const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean 
 
 const snapThreshold = -50
 
+const PageModal = ({ children }: { children: React.ReactNode }) => {
+    const [open, setOpen] = useState(true)
+    const { appWindow } = useWindow()
+    const { closeWindow } = useApp()
+
+    useEffect(() => {
+        if (!open) {
+            closeWindow(appWindow)
+        }
+    }, [open])
+
+    return (
+        <Modal open={open} onOpenChange={setOpen}>
+            {children}
+        </Modal>
+    )
+}
+
 const Router = (props) => {
     const { minimizeWindow, closeWindow } = useApp()
     const { appWindow } = useWindow()
@@ -93,9 +111,7 @@ const Router = (props) => {
     return (
         <>
             {appWindow?.modal?.type === 'standard' ? (
-                <Modal open onOpenChange={(open) => closeWindow(appWindow)}>
-                    {appWindow.element}
-                </Modal>
+                <PageModal>{children}</PageModal>
             ) : (
                 (!props.minimizing || appWindow?.appSettings?.size?.autoHeight) && children
             )}

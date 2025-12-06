@@ -2,6 +2,7 @@ import React from 'react'
 import { Dialog as RadixDialog } from 'radix-ui'
 import { IconX } from '@posthog/icons'
 import { useApp } from '../../context/App'
+import { useWindow } from '../../context/Window'
 
 interface ModalProps {
     trigger?: React.ReactNode
@@ -15,7 +16,6 @@ interface ModalProps {
     showCloseButton?: boolean
 }
 
-
 const Modal = ({
     trigger,
     children,
@@ -26,6 +26,7 @@ const Modal = ({
     showCloseButton = true,
 }: ModalProps): JSX.Element => {
     const { websiteMode } = useApp()
+    const { appWindow } = useWindow()
     return (
         <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
             {trigger && (
@@ -38,7 +39,19 @@ const Modal = ({
                 <RadixDialog.Content
                     className={`data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded bg-primary text-primary z-50 ${contentClassName}`}
                 >
-                    <div data-scheme="primary" className={`${websiteMode && 'min-w-96 min-h-96 max-w-full'}`}>
+                    <div
+                        data-scheme="primary"
+                        style={
+                            websiteMode
+                                ? {
+                                      maxWidth: appWindow?.size?.width || '100%',
+                                      maxHeight: appWindow?.size?.height || '100%',
+                                      width: '100vw',
+                                      height: '100vh',
+                                  }
+                                : {}
+                        }
+                    >
                         {showCloseButton && (
                             <div className="flex items-center justify-between absolute right-0 top-0 translate-x-1/2 -translate-y-1/2">
                                 <RadixDialog.Close asChild>
@@ -51,7 +64,7 @@ const Modal = ({
                                 </RadixDialog.Close>
                             </div>
                         )}
-                        <div className="rounded overflow-hidden border border-primary">{children}</div>
+                        <div className="rounded overflow-hidden border border-primary size-full">{children}</div>
                     </div>
                 </RadixDialog.Content>
             </RadixDialog.Portal>

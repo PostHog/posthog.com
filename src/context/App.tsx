@@ -1244,14 +1244,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 )
                 if (nextFocusedWindow && !nextFocusedWindow.minimized) {
                     if (nextFocusedWindow.path.startsWith('/')) {
-                        navigate(`${nextFocusedWindow.path}${nextFocusedWindow.location?.search || ''}`)
+                        navigate(`${nextFocusedWindow.path}${nextFocusedWindow.location?.search || ''}`, {
+                            state: { preventScroll: websiteMode },
+                        })
                     } else {
                         bringToFront(nextFocusedWindow)
                     }
                 } else {
-                    if (websiteMode) {
-                        navigate('/')
-                    }
                     navigate('/', { state: { skipPageUpdate: true } })
                 }
                 setWindows(windowsFiltered)
