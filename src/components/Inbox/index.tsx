@@ -108,7 +108,7 @@ const layoutOptions = [
     },
 ]
 
-const AskAQuestion = ({ onSubmit }: { onSubmit: () => void }) => {
+const AskAQuestion = ({ onSubmit }: { onSubmit: (data: StrapiRecord<QuestionData>) => void }) => {
     const { addToast } = useToast()
     const { appWindow } = useWindow()
     const { closeWindow, setWindowTitle } = useApp()
@@ -122,23 +122,8 @@ const AskAQuestion = ({ onSubmit }: { onSubmit: () => void }) => {
             <QuestionForm
                 showTopicSelector
                 onSubmit={(_values, _type, data) => {
-                    onSubmit()
-                    addToast({
-                        title: 'Question posted',
-                        description: (
-                            <>
-                                Your question has been posted.
-                                <br />
-                                <Link
-                                    className="text-red dark:text-yellow font-semibold"
-                                    to={`/questions/${data.attributes.permalink}`}
-                                >
-                                    View it here
-                                </Link>
-                            </>
-                        ),
-                    })
                     closeWindow(appWindow)
+                    onSubmit(data)
                 }}
                 initialView="question-form"
                 slug="/questions"
@@ -189,6 +174,7 @@ export default function Inbox(props) {
     const { questions: subscribedQuestions } = useSubscribedQuestions()
     const [menuValue, setMenuValue] = useState('')
     const isMobile = useMemo(() => appWindow?.size.width < 896, [appWindow?.size.width])
+    const askMax = useMemo(() => props.children.props.location.state?.askMax, [props.children.props.location.state])
 
     const expandable = useMemo(() => {
         if (!containerRef.current) return true
@@ -230,6 +216,13 @@ export default function Inbox(props) {
         const containerWidth = containerRef.current.getBoundingClientRect().width
         const newSideWidth = Math.min(Math.max(dragStartWidth - info.offset.x, 400), containerWidth)
         setSideWidth(newSideWidth)
+    }
+
+    const handleAskAQuestionSubmit = (data: StrapiRecord<QuestionData>) => {
+        refresh()
+        setTimeout(() => {
+            navigate(`/questions/${data.attributes.permalink}`, { state: { askMax: true } })
+        }, 0)
     }
 
     useEffect(() => {
@@ -310,7 +303,7 @@ export default function Inbox(props) {
                                                 newWindow
                                                 location={{ pathname: `ask-a-question` }}
                                                 key={`ask-a-question`}
-                                                onSubmit={refresh}
+                                                onSubmit={handleAskAQuestionSubmit}
                                             />
                                         )
                                     }
@@ -614,7 +607,8 @@ export default function Inbox(props) {
                                                         onQuestionReady={(question) => setQuestion(question)}
                                                         subscribeButton={false}
                                                         showSlug
-                                                        isInForum={true}
+                                                        askMax={askMax}
+                                                        isInForum
                                                     />
                                                 </div>
                                             </ScrollArea>
