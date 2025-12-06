@@ -270,7 +270,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             }
         }
 
-        // Resolve MDX snippets (TSX imports resolved in post-build)
+        // Resolve MDX snippets (JSX resolution happens in onPostBuild when source files are available)
         const contentWithSnippets = resolveMDXSnippets(node.rawBody, node.fileAbsolutePath, slug)
 
         // Prepend title as H1 if it exists
