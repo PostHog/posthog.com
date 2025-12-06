@@ -45,9 +45,11 @@ const Modal = ({
                             websiteMode
                                 ? {
                                       maxWidth: appWindow?.size?.width || '100%',
-                                      maxHeight: appWindow?.size?.height || '100%',
+                                      maxHeight: appWindow?.appSettings?.size?.autoHeight
+                                          ? '100%'
+                                          : appWindow?.size?.height || '100%',
                                       width: '100vw',
-                                      height: '100vh',
+                                      height: appWindow?.appSettings?.size?.autoHeight ? '100%' : '100vh',
                                   }
                                 : {}
                         }
