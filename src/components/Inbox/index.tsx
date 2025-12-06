@@ -42,12 +42,12 @@ const Menu = ({ onValueChange }: { onValueChange: (value: string) => void }) => 
         return [
             ...(user
                 ? [
-                      {
-                          name: 'My subscriptions',
-                          url: '/questions/subscriptions',
-                          icon: <IconNotification />,
-                      },
-                  ]
+                    {
+                        name: 'My subscriptions',
+                        url: '/questions/subscriptions',
+                        icon: <IconNotification />,
+                    },
+                ]
                 : []),
             ...topicsNav,
         ]
@@ -289,6 +289,8 @@ export default function Inbox(props) {
         }
     }, [isMobile, sideBySide, containerRef.current, appWindow?.size.width])
 
+    const { websiteMode } = useApp()
+
     return (
         <>
             <SEO title={(permalink && question?.attributes.subject) || data?.topic?.label || 'Forums'} />
@@ -333,11 +335,11 @@ export default function Inbox(props) {
 
                     <div
                         data-scheme="secondary"
-                        className="flex @2xl:flex-row flex-col flex-grow border-t border-primary min-h-0"
+                        className={`flex @2xl:flex-row flex-col flex-grow min-h-0 ${websiteMode ? 'gap-4' : 'border-t border-primary'}`}
                     >
                         <aside
                             data-scheme="secondary"
-                            className="w-full @2xl:w-64 bg-primary @2xl:border-r border-primary @2xl:h-full flex-shrink-0"
+                            className={`w-full @2xl:w-64 bg-primary @2xl:h-full flex-shrink-0 ${websiteMode ? 'rounded' : '@2xl:border-r border-primary'}`}
                         >
                             <ScrollArea className="h-full">
                                 <Menu onValueChange={setMenuValue} />
@@ -403,11 +405,10 @@ export default function Inbox(props) {
                                                                 </span>
                                                             </div>
                                                             <div
-                                                                className={`order-3 @3xl:order-none flex-[1_0_100%] @3xl:flex-1 ${
-                                                                    active
-                                                                        ? 'font-medium @3xl:font-bold'
-                                                                        : 'font-medium'
-                                                                }`}
+                                                                className={`order-3 @3xl:order-none flex-[1_0_100%] @3xl:flex-1 ${active
+                                                                    ? 'font-medium @3xl:font-bold'
+                                                                    : 'font-medium'
+                                                                    }`}
                                                             >
                                                                 {subject}
                                                             </div>
@@ -429,7 +430,7 @@ export default function Inbox(props) {
                                                 )
                                             })}
                                             {!isLoading && (!questions.data || questions.data.length === 0) && (
-                                                <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
+                                                <div className="flex flex-col items-center justify-center py-12 px-4 text-center text-primary">
                                                     <div className="text-lg mb-2 font-semibold">No questions found</div>
                                                     <div className="text-secondary text-sm">
                                                         {props.path === '/questions/subscriptions'
@@ -460,9 +461,8 @@ export default function Inbox(props) {
                                     {permalink && (
                                         <motion.div
                                             ref={bottomContainerRef}
-                                            className={`flex-none relative min-h-0 min-w-0 ${
-                                                !isDragging ? 'transition-all duration-200 ease-out' : ''
-                                            } ${sideBySide ? '@4xl:border-l border-primary' : ''}`}
+                                            className={`flex-none relative min-h-0 min-w-0 ${!isDragging ? 'transition-all duration-200 ease-out' : ''
+                                                } ${sideBySide ? '@4xl:border-l border-primary' : ''}`}
                                             initial={{
                                                 width: 0,
                                             }}
@@ -511,9 +511,8 @@ export default function Inbox(props) {
                                             )}
 
                                             <div
-                                                className={`bg-accent border-y border-primary px-4 py-2 flex gap-2 items-center sticky top-0 z-10 ${
-                                                    sideBySide ? 'border-t-0' : ''
-                                                }`}
+                                                className={`bg-accent border-y border-primary px-4 py-2 flex gap-2 items-center sticky top-0 z-10 ${sideBySide ? 'border-t-0' : ''
+                                                    }`}
                                             >
                                                 <OSButton
                                                     variant="secondary"
@@ -579,15 +578,14 @@ export default function Inbox(props) {
                                                                         style={{ width: 26, height: 26 }}
                                                                         icon={
                                                                             <IconChevronDown
-                                                                                className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
-                                                                                    sideBySide
-                                                                                        ? expandable
-                                                                                            ? 'rotate-90'
-                                                                                            : '-rotate-90'
-                                                                                        : expandable
+                                                                                className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${sideBySide
+                                                                                    ? expandable
+                                                                                        ? 'rotate-90'
+                                                                                        : '-rotate-90'
+                                                                                    : expandable
                                                                                         ? 'rotate-180'
                                                                                         : ''
-                                                                                }`}
+                                                                                    }`}
                                                                             />
                                                                         }
                                                                         onClick={() => {

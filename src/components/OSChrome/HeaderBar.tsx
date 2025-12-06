@@ -33,7 +33,6 @@ import { Popover } from 'components/RadixUI/Popover'
 import { FileMenu } from 'components/RadixUI/FileMenu'
 import BookmarkButton from 'components/BookmarkButton'
 import KeyboardShortcut from 'components/KeyboardShortcut'
-
 interface HeaderBarProps {
     isNavVisible?: boolean
     isTocVisible?: boolean
@@ -41,6 +40,7 @@ interface HeaderBarProps {
     onToggleToc?: () => void
     showBack?: boolean
     showForward?: boolean
+    showCustomLeft?: React.ReactNode
     showSearch?: boolean
     showToc?: boolean
     showSidebar?: boolean
@@ -80,6 +80,7 @@ export default function HeaderBar({
     onToggleToc,
     showBack = false,
     showForward = false,
+    showCustomLeft = false,
     showSearch = false,
     showToc = false,
     showSidebar = false,
@@ -107,7 +108,7 @@ export default function HeaderBar({
     onOrderHistoryOpen,
     onOrderHistoryClose,
 }: HeaderBarProps) {
-    const { compact, focusedWindow, posthogInstance } = useApp()
+    const { compact, focusedWindow, posthogInstance, websiteMode } = useApp()
     const { goBack, goForward, canGoBack, canGoForward, appWindow, menu } = useWindow()
     const [searchOpen, setSearchOpen] = useState(false)
     const [animateCartCount, setAnimateCartCount] = useState(false)
@@ -172,13 +173,12 @@ export default function HeaderBar({
 
     return (
         <>
-            <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0 items-center">
+            <div data-scheme="secondary" className={`${websiteMode ? '' : 'bg-primary'} flex w-full gap-px p-2 flex-shrink-0 items-center`}>
                 {!compact && (
                     <div>
                         <motion.div
-                            className={`flex-shrink-0 flex items-center gap-px transition-all min-w-0 ${
-                                hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
-                            }`}
+                            className={`flex-shrink-0 flex items-center gap-px transition-all min-w-0 ${hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
+                                }`}
                         >
                             {homeURL && <OSButton size="md" icon={<IconHome />} to={homeURL} asLink />}
                             <div>
@@ -220,6 +220,7 @@ export default function HeaderBar({
                                 icon={<IconChevronRight />}
                             />
                         )}
+                        {showCustomLeft && showCustomLeft}
                     </div>
                     {compact &&
                         (menu && menu.length > 0 ? (
@@ -294,9 +295,8 @@ export default function HeaderBar({
                                         </svg>
                                         {count && count > 0 && (
                                             <span
-                                                className={`absolute -top-1 -right-1 bg-red text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold ${
-                                                    animateCartCount ? 'animate-wiggle' : ''
-                                                }`}
+                                                className={`absolute -top-1 -right-1 bg-red text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold ${animateCartCount ? 'animate-wiggle' : ''
+                                                    }`}
                                             >
                                                 {count}
                                             </span>
@@ -322,9 +322,8 @@ export default function HeaderBar({
                 </div>
                 {showSidebar && (
                     <motion.div
-                        className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${
-                            isTocVisible ? '@4xl:min-w-[250px]' : 'w-auto'
-                        }`}
+                        className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${isTocVisible ? '@4xl:min-w-[250px]' : 'w-auto'
+                            }`}
                         animate={isTocVisible ? 'open' : 'closed'}
                     >
                         {showToc && (
@@ -348,15 +347,17 @@ export default function HeaderBar({
                 <div className="flex items-center gap-1">
                     {showDrawerToggle && (
                         <>
-                            <OSButton
-                                variant="secondary"
-                                size="md"
-                                asLink
-                                to="https://app.posthog.com/signup"
-                                className="mr-1"
-                            >
-                                Get started – free
-                            </OSButton>
+                            {!websiteMode &&
+                                <OSButton
+                                    variant="secondary"
+                                    size="md"
+                                    asLink
+                                    to="https://app.posthog.com/signup"
+                                    className="mr-1"
+                                >
+                                    Get started – free
+                                </OSButton>
+                            }
                             <Tooltip
                                 trigger={
                                     <OSButton

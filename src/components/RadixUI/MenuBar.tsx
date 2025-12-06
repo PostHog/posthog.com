@@ -5,6 +5,7 @@ import Link from 'components/Link'
 import ScrollArea from './ScrollArea'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useApp } from '../../context/App'
+import { navigate } from 'gatsby'
 
 // Types
 export type MenuItemType = {
@@ -29,9 +30,11 @@ export type MenuType = {
     mobileLink?: string // Direct link for the menu trigger on mobile
 }
 
+// const { websiteMode } = useApp()
+// websiteMode ? 'text-base' : 'text-[13px]'
 const RootClasses = 'flex gap-px py-0.5 h-full'
 const TriggerClasses =
-    'group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent'
+    `group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent`
 const ItemClasses =
     'hover:bg-accent group relative flex h-[25px] select-none justify-between items-center rounded text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted [&>span]:inline-flex [&>span]:w-full'
 const SubTriggerClasses =
@@ -291,7 +294,9 @@ export interface MenuBarProps {
 }
 
 const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, customTriggerClasses }) => {
-    const { isMobile } = useApp()
+    const { isMobile, websiteMode } = useApp()
+
+    const [openMenuIndex, setOpenMenuIndex] = React.useState<number | null>(null)
 
     // Process menus for mobile if needed
     const processedMenus = React.useMemo(() => {
@@ -320,9 +325,8 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                             key={menuIndex}
                             to={menu.mobileLink}
                             state={{ newWindow: true }}
-                            className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'} ${
-                                customTriggerClasses || ''
-                            }`}
+                            className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'} ${customTriggerClasses || ''
+                                }`}
                         >
                             {menu.trigger}
                         </Link>
@@ -330,12 +334,40 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                 }
 
                 return (
-                    <RadixMenubar.Menu key={menuIndex} data-scheme="primary">
+                    <RadixMenubar.Menu
+                        key={menuIndex}
+                        data-scheme="primary"
+                        {...(websiteMode
+                            ? {
+                                open: openMenuIndex === menuIndex,
+                                onOpenChange: (open: boolean) => {
+                                    setOpenMenuIndex(open ? menuIndex : null)
+                                },
+                            }
+                            : {})}
+                    >
                         <RadixMenubar.Trigger
                             asChild={triggerAsChild}
-                            className={`${triggerAsChild ? '' : TriggerClasses} ${
-                                menu.bold ? 'font-bold' : 'font-medium'
-                            } ${customTriggerClasses}`}
+                            className={`${triggerAsChild ? '' : TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'
+                                } ${customTriggerClasses} ${websiteMode ? (openMenuIndex === menuIndex ? '!bg-accent' : '!bg-transparent') : ''
+                                }`}
+                            onMouseEnter={
+                                websiteMode
+                                    ? () => {
+                                        setOpenMenuIndex(menuIndex)
+                                    }
+                                    : undefined
+                            }
+                            onClick={
+                                websiteMode
+                                    ? () => {
+                                        const url = menu.mobileLink || menu.items.find((item) => item.link)?.link
+                                        if (url) {
+                                            navigate(url, { state: { newWindow: true } })
+                                        }
+                                    }
+                                    : undefined
+                            }
                         >
                             {menu.trigger}
                         </RadixMenubar.Trigger>
@@ -346,6 +378,13 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                                 sideOffset={5}
                                 alignOffset={-3}
                                 data-scheme="primary"
+                                onMouseLeave={
+                                    websiteMode
+                                        ? () => {
+                                            setOpenMenuIndex(null)
+                                        }
+                                        : undefined
+                                }
                             >
                                 {menu.items.map((item, itemIndex) => (
                                     <MenuItem key={`${menuIndex}-${itemIndex}`} item={item} menuIndex={menuIndex} />

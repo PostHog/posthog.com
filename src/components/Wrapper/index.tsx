@@ -16,6 +16,7 @@ export default function Wrapper() {
         closingAllWindowsAnimation,
         setClosingAllWindowsAnimation,
         closeAllWindows,
+        websiteMode,
     } = useApp()
     const [shakeReady, setShakeReady] = useState(false)
     const dotLottieRef = useRef<any>(null)
@@ -27,9 +28,9 @@ export default function Wrapper() {
     }, [closingAllWindowsAnimation])
 
     return (
-        <div className="fixed inset-0 size-full flex flex-col">
+        <div className={`${websiteMode ? 'max-w-7xl mx-auto' : 'fixed inset-0 size-full'} flex flex-col`}>
             {!compact && <TaskBarMenu />}
-            <div ref={constraintsRef} className="flex-grow relative">
+            <div ref={constraintsRef} className={`flex-grow relative ${websiteMode && 'pb-4'}`}>
                 <Desktop />
                 <AnimatePresence>
                     {windows.map((item, index) => {
@@ -63,6 +64,14 @@ export default function Wrapper() {
                     })}
                 </AnimatePresence>
             </div>
+            {websiteMode && (
+                <footer
+                    data-scheme="secondary"
+                    className="text-primary bg-primary border border-primary rounded p-4 @xl:p-8 mb-8"
+                >
+                    This is a footer.
+                </footer>
+            )}
             {/*             
             {!compact && <Dock />}
             */}
