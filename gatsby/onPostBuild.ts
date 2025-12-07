@@ -592,7 +592,6 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                     const resolvedContent = resolveJsxSnippets(content, fullPath, slug)
                     if (resolvedContent !== content) {
                         fs.writeFileSync(fullPath, resolvedContent)
-                        console.log(`Resolved JSX in: ${fullPath}`)
                     }
                 }
             }

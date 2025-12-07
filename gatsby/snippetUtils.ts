@@ -62,8 +62,14 @@ const escapeRegex = (str: string): string => str.replace(/[.*+?^${}()|[\]\\]/g, 
 
 const createComponentTagRegex = (componentName: string): RegExp => {
     const escapedName = escapeRegex(componentName)
+    const propsPattern = '(?:\\s+[^>]*)?'
+    const selfClosing = `<${escapedName}${propsPattern}\\s*/>`
+    const openingClosing = `<${escapedName}${propsPattern}>[\\s\\S]*?<\\/${escapedName}>`
+    const conditionalSelfClosing = `\\{${escapedName}\\s+&&\\s*${selfClosing}\\}`
+    const conditionalOpeningClosing = `\\{${escapedName}\\s+&&\\s*${openingClosing}\\}`
+
     return new RegExp(
-        `(<${escapedName}(?:\\s+[^>]*)?\\s*/>)|(<${escapedName}(?:\\s+[^>]*)?>([\\s\\S]*?)<\\/${escapedName}>)`,
+        `(${conditionalSelfClosing})|(${conditionalOpeningClosing})|(${selfClosing})|(${openingClosing})`,
         'g'
     )
 }
@@ -197,115 +203,46 @@ const resolveMdxImports = (filePath: string, visited: ReadonlySet<string> = new 
     return removeImportStatements(resolvedContent, remainingImports)
 }
 
-/**
- * ============================================================================
- * JSX/TSX snippet handling
- * ============================================================================
- */
-
 const TSX_FILE_EXTENSIONS = ['.tsx', '.ts', '.jsx', '.js'] as const
 
-const getIndentationLevel = (content: string, componentName: string): number => {
-    const escapedName = escapeRegex(componentName)
-    const selfClosingPattern = new RegExp(`^\\s*<${escapedName}(?:\\s+[^>]*)?\\s*/>`, 'm')
-    const openingPattern = new RegExp(`^\\s*<${escapedName}(?:\\s+[^>]*)?>`, 'm')
+const isJsxTsxImport = (importPath: string): boolean => {
+    const cleanPath = removeQuotes(importPath)
+    return cleanPath.includes('onboarding/') || cleanPath.includes('_snippets/')
+}
 
-    const lines = content.split('\n')
+const hasJsxTsxExtension = (filePath: string): boolean => {
+    return /\.(tsx|ts|jsx|js)$/.test(filePath)
+}
 
-    for (let i = 0; i < lines.length; i++) {
-        const line = lines[i]
-        if (selfClosingPattern.test(line) || openingPattern.test(line)) {
-            const match = line.match(/^(\s*)/)
-            return match ? match[1].length : 0
+const extractJsxTsxImportName = (
+    importStatement: string,
+    namedImport?: string,
+    isDefault?: boolean
+): { name: string; isDefault: boolean } | null => {
+    if (namedImport) {
+        const names = namedImport.split(',').map((n) => n.trim())
+        if (names.length > 0) {
+            return { name: names[0], isDefault: false }
         }
     }
 
-    return 0
-}
-
-const dedentToLevel = (content: string, targetLevel: number): string => {
-    if (!content || !content.trim()) return content
-
-    const lines = content.split('\n')
-    if (lines.length === 0) return content
-
-    const line0 = lines[0].trimStart()
-    const line1Indent = lines.length > 1 && lines[1].trim() ? lines[1].match(/^(\s*)/)?.[1]?.length || 0 : 0
-
-    const restLines = lines.slice(1).map((line) => {
-        if (!line.trim()) return ''
-        const currentIndent = line.match(/^(\s*)/)?.[1]?.length || 0
-        const relativeIndent = currentIndent - line1Indent
-        const lineContent = line.trimStart()
-        return relativeIndent >= 0 ? ' '.repeat(relativeIndent) + lineContent : lineContent
-    })
-
-    const result = [line0, ...restLines].join('\n')
-
-    if (targetLevel === 0) return result
-
-    const indent = ' '.repeat(targetLevel)
-    return result
-        .split('\n')
-        .map((line) => (line.trim() ? `${indent}${line}` : ''))
-        .join('\n')
-}
-
-const preserveIndentationAndInsert = (
-    originalContent: string,
-    componentName: string,
-    replacementContent: string
-): string => {
-    const indentLevel = getIndentationLevel(originalContent, componentName)
-    const dedentedReplacement = dedentToLevel(replacementContent, indentLevel)
-
-    const regex = createComponentTagRegex(componentName)
-    return originalContent.replace(regex, dedentedReplacement)
-}
-
-export function resolveJsxSnippets(content: string, filePath: string | undefined, slug?: string): string {
-    if (!content || !filePath) return content || ''
-
-    const logFile = path.resolve(process.cwd(), 'test_bench', 'logs', 'jsx-resolution.log')
-    const logFn = (message: string) => {
-        const timestamp = new Date().toISOString()
-        const logMessage = `[${timestamp}] ${message}\n`
-        fs.appendFileSync(logFile, logMessage)
+    const match = importStatement.match(DEFAULT_IMPORT_NAME_REGEX)
+    if (match) {
+        return { name: match[1], isDefault: true }
     }
 
-    try {
-        logFn(`\n${'='.repeat(60)}`)
-        logFn(`Resolving JSX snippets for: ${slug || filePath}`)
-        logFn(`${'='.repeat(60)}\n`)
-
-        const visited = new Set<string>()
-        const resolved = resolveJsxImportsInContent(content, filePath, visited, logFn)
-
-        logFn(`\n✓ Resolved content (${resolved.length} chars)`)
-
-        return normalizeEmptyLines(resolved)
-    } catch (error) {
-        const errorMsg = `❌ Error resolving JSX snippets for ${slug || filePath}: ${error}`
-        console.error(errorMsg)
-        fs.appendFileSync(logFile, `[${new Date().toISOString()}] ${errorMsg}\n`)
-        return normalizeEmptyLines(content)
-    }
+    return null
 }
 
-const isJsxImport = (filePath: string): boolean =>
-    filePath.endsWith('.tsx') || filePath.endsWith('.jsx') || filePath.endsWith('.ts') || filePath.endsWith('.js')
-
-const isOnboardingOrDocsImport = (filePath: string): boolean =>
-    filePath.startsWith('onboarding/') || filePath.startsWith('docs/')
-
-type JsxImport = {
+type JsxTsxImport = {
     readonly name: string
     readonly path: string
     readonly fullMatch: string
+    readonly isDefault: boolean
 }
 
-const findJsxImports = (content: string): ReadonlyArray<JsxImport> => {
-    const imports: JsxImport[] = []
+const findJsxTsxImports = (content: string): ReadonlyArray<JsxTsxImport> => {
+    const imports: JsxTsxImport[] = []
 
     IMPORT_REGEX.lastIndex = 0
     let match: RegExpMatchArray | null
@@ -313,24 +250,21 @@ const findJsxImports = (content: string): ReadonlyArray<JsxImport> => {
     while ((match = IMPORT_REGEX.exec(content)) !== null) {
         const importPath = match[2]
 
-        if (!isJsxImport(importPath)) {
+        if (!isJsxTsxImport(importPath)) {
             continue
         }
 
-        if (!isOnboardingOrDocsImport(importPath)) {
+        if (!hasJsxTsxExtension(importPath)) {
             continue
         }
 
-        if (isComponentImport(importPath)) {
-            continue
-        }
-
-        const name = extractImportName(match[0], match[1])
-        if (name) {
+        const importInfo = extractJsxTsxImportName(match[0], match[1])
+        if (importInfo) {
             imports.push({
-                name,
+                name: importInfo.name,
                 path: importPath,
                 fullMatch: match[0],
+                isDefault: importInfo.isDefault,
             })
         }
     }
@@ -338,7 +272,7 @@ const findJsxImports = (content: string): ReadonlyArray<JsxImport> => {
     return imports
 }
 
-const resolveTsxPathWithExtensions = (basePath: string, hasExtension: boolean): string | null => {
+const resolveJsxTsxPathWithExtensions = (basePath: string, hasExtension: boolean): string | null => {
     if (hasExtension && fs.existsSync(basePath)) {
         return basePath
     }
@@ -353,29 +287,32 @@ const resolveTsxPathWithExtensions = (basePath: string, hasExtension: boolean): 
     return fs.existsSync(basePath) ? basePath : null
 }
 
-const resolveTsxPath = (importPath: string, baseFilePath: string): string | null => {
+const resolveJsxTsxPath = (importPath: string, baseFilePath: string): string | null => {
     if (!importPath || !baseFilePath) return null
 
     try {
         const cleanPath = removeQuotes(importPath)
         if (!cleanPath) return null
 
-        const hasExt = isJsxImport(cleanPath)
+        const hasExt = hasJsxTsxExtension(cleanPath)
 
-        for (const [alias, aliasPath] of Object.entries(ALIAS_MAPPINGS)) {
-            if (cleanPath.startsWith(`${alias}/`)) {
-                const relativePath = cleanPath.replace(`${alias}/`, '')
-                const resolvedPath = path.resolve(aliasPath, relativePath)
-                const result = resolveTsxPathWithExtensions(resolvedPath, hasExt)
+        if (cleanPath.startsWith('onboarding/')) {
+            const onboardingPath = ALIAS_MAPPINGS.onboarding
+            if (onboardingPath) {
+                const relativePath = cleanPath.replace('onboarding/', '')
+                const resolvedPath = path.resolve(onboardingPath, relativePath)
+                const result = resolveJsxTsxPathWithExtensions(resolvedPath, hasExt)
                 if (result) return result
             }
         }
 
-        if (isRelativePath(cleanPath)) {
-            const baseDir = path.dirname(baseFilePath)
-            const resolvedPath = path.resolve(baseDir, cleanPath)
-            const result = resolveTsxPathWithExtensions(resolvedPath, hasExt)
-            if (result) return result
+        if (cleanPath.includes('_snippets/')) {
+            if (isRelativePath(cleanPath)) {
+                const baseDir = path.dirname(baseFilePath)
+                const resolvedPath = path.resolve(baseDir, cleanPath)
+                const result = resolveJsxTsxPathWithExtensions(resolvedPath, hasExt)
+                if (result) return result
+            }
         }
 
         return null
@@ -384,171 +321,439 @@ const resolveTsxPath = (importPath: string, baseFilePath: string): string | null
     }
 }
 
-const extractJsxContent = (
-    filePath: string,
-    componentName: string,
-    logFn?: (message: string) => void
-): string | null => {
-    if (!fs.existsSync(filePath)) {
-        logFn?.(`      ❌ File does not exist: ${filePath}`)
+const extractReturnValue = (functionBody: string): string | null => {
+    const returnRegex = /\breturn\s+/
+    const returnMatch = functionBody.match(returnRegex)
+    if (!returnMatch) {
         return null
     }
 
-    try {
-        const content = fs.readFileSync(filePath, 'utf-8')
-        logFn?.(`      Reading file (${content.length} chars)`)
+    const returnIndex = functionBody.indexOf(returnMatch[0]) + returnMatch[0].length
+    const returnContent = functionBody.substring(returnIndex)
 
-        const exportPattern = new RegExp(
-            `export\\s+(?:const|function)\\s+${escapeRegex(
-                componentName
-            )}\\s*[=:]\\s*(?:\\([^)]*\\)\\s*[:=]\\s*)?(?:JSX\\.Element|React\\.Element|React\\.ReactElement)?\\s*=>\\s*\\{`,
-            's'
-        )
+    let i = 0
+    while (i < returnContent.length && /\s/.test(returnContent[i])) {
+        i++
+    }
 
-        const exportMatch = content.match(exportPattern)
-        if (!exportMatch) {
-            logFn?.(`      ❌ Export pattern not found for ${componentName}`)
-            return null
+    if (i >= returnContent.length) {
+        return null
+    }
+
+    if (returnContent[i] === '(') {
+        let parenCount = 1
+        let inString = false
+        let stringChar = ''
+        i++
+
+        while (i < returnContent.length && parenCount > 0) {
+            const char = returnContent[i]
+
+            if (!inString && (char === '"' || char === "'" || char === '`')) {
+                inString = true
+                stringChar = char
+            } else if (inString && char === stringChar && (i === 0 || returnContent[i - 1] !== '\\')) {
+                inString = false
+            } else if (!inString) {
+                if (char === '(') parenCount++
+                if (char === ')') parenCount--
+            }
+
+            i++
         }
 
-        logFn?.(`      ✓ Export pattern found at index ${exportMatch.index}`)
-
-        const functionStart = exportMatch.index! + exportMatch[0].length
-
-        const returnPattern = /return\s+(?:\(|<>)?/s
-        const returnMatch = content.substring(functionStart).match(returnPattern)
-        if (!returnMatch) {
-            logFn?.(`      ❌ Return statement not found`)
-            return null
+        if (parenCount === 0) {
+            const innerContent = returnContent.substring(1, i - 1).trim()
+            return innerContent
         }
+    } else if (returnContent[i] === '<') {
+        let braceCount = 0
+        let inString = false
+        let stringChar = ''
+        let lastBraceIndex = -1
 
-        logFn?.(`      ✓ Return statement found`)
+        while (i < returnContent.length) {
+            const char = returnContent[i]
 
-        const returnStart = functionStart + returnMatch.index! + returnMatch[0].length
-        let returnContent = content.substring(returnStart).trim()
-
-        logFn?.(`      Return content starts with: ${returnContent.substring(0, 50)}...`)
-
-        if (returnContent.startsWith('(')) {
-            logFn?.(`      Extracting from parenthesis`)
-            let depth = 1
-            let i = 1
-            let inString = false
-            let stringChar = ''
-            let inTemplate = false
-
-            while (i < returnContent.length && depth > 0) {
-                const char = returnContent[i]
-
-                if (!inString && !inTemplate) {
-                    if (char === '(') {
-                        depth++
-                    } else if (char === ')') {
-                        depth--
-                    } else if (char === '"' || char === "'") {
-                        inString = true
-                        stringChar = char
-                    } else if (char === '`') {
-                        inTemplate = true
-                    }
-                } else if (inString) {
-                    if (char === stringChar && (i === 0 || returnContent[i - 1] !== '\\')) {
-                        inString = false
-                    }
-                } else if (inTemplate) {
-                    if (char === '`' && (i === 0 || returnContent[i - 1] !== '\\')) {
-                        inTemplate = false
+            if (!inString && (char === '"' || char === "'" || char === '`')) {
+                inString = true
+                stringChar = char
+            } else if (inString && char === stringChar && (i === 0 || returnContent[i - 1] !== '\\')) {
+                inString = false
+            } else if (!inString) {
+                if (char === '{') braceCount++
+                if (char === '}') {
+                    braceCount--
+                    if (braceCount === 0) {
+                        lastBraceIndex = i
+                        let j = i + 1
+                        while (j < returnContent.length && /\s/.test(returnContent[j])) {
+                            j++
+                        }
+                        if (j >= returnContent.length || returnContent[j] === ';' || returnContent[j] === '\n') {
+                            return returnContent.substring(0, lastBraceIndex + 1).trim()
+                        }
                     }
                 }
+            }
 
+            i++
+        }
+
+        if (lastBraceIndex !== -1) {
+            return returnContent.substring(0, lastBraceIndex + 1).trim()
+        }
+    }
+
+    return null
+}
+
+const extractComponentDefinition = (content: string, componentName: string, isDefault: boolean): string | null => {
+    const importRegex = /^import\s+.*?from\s+['"].*?['"];?\s*$/gm
+    let cleanedContent = content.replace(importRegex, '')
+
+    if (isDefault) {
+        const componentPatterns = [
+            new RegExp(`const\\s+${escapeRegex(componentName)}\\s*[=:]`, 'g'),
+            new RegExp(`function\\s+${escapeRegex(componentName)}\\s*\\(`, 'g'),
+            new RegExp(`export\\s+const\\s+${escapeRegex(componentName)}\\s*[=:]`, 'g'),
+            new RegExp(`export\\s+function\\s+${escapeRegex(componentName)}\\s*\\(`, 'g'),
+        ]
+
+        let componentStart = -1
+        for (const pattern of componentPatterns) {
+            const match = cleanedContent.match(pattern)
+            if (match) {
+                componentStart = cleanedContent.indexOf(match[0])
+                break
+            }
+        }
+
+        if (componentStart === -1) {
+            return null
+        }
+
+        const exportDefaultRegex = new RegExp(`export\\s+default\\s+${escapeRegex(componentName)}`, 'g')
+        const exportDefaultMatch = cleanedContent.match(exportDefaultRegex)
+        const exportDefaultIndex = exportDefaultMatch
+            ? cleanedContent.indexOf(exportDefaultMatch[0])
+            : cleanedContent.length
+
+        let componentCode = cleanedContent.substring(componentStart, exportDefaultIndex)
+
+        const arrowIndex = componentCode.indexOf('=>')
+        if (arrowIndex !== -1) {
+            let i = arrowIndex + 2
+            while (i < componentCode.length && /\s/.test(componentCode[i])) {
                 i++
             }
 
-            if (depth === 0) {
-                returnContent = returnContent.substring(1, i - 1).trim()
-                logFn?.(`      ✓ Extracted JSX content (${returnContent.length} chars)`)
-                return returnContent
-            } else {
-                logFn?.(`      ❌ Parenthesis depth mismatch (depth: ${depth})`)
-                return null
+            if (i < componentCode.length && componentCode[i] === '{') {
+                let braceCount = 1
+                let inString = false
+                let stringChar = ''
+                i++
+
+                while (i < componentCode.length && braceCount > 0) {
+                    const char = componentCode[i]
+
+                    if (!inString && (char === '"' || char === "'" || char === '`')) {
+                        inString = true
+                        stringChar = char
+                    } else if (inString && char === stringChar && (i === 0 || componentCode[i - 1] !== '\\')) {
+                        inString = false
+                    } else if (!inString) {
+                        if (char === '{') braceCount++
+                        if (char === '}') braceCount--
+                    }
+
+                    i++
+                }
+
+                if (braceCount === 0) {
+                    return componentCode.substring(0, i).trim()
+                }
             }
-        } else if (returnContent.startsWith('<>')) {
-            logFn?.(`      Extracting from fragment`)
-            const fragmentEnd = returnContent.lastIndexOf('</>')
-            if (fragmentEnd === -1) {
-                logFn?.(`      ❌ Could not find closing fragment tag`)
-                return null
+        } else {
+            let i = 0
+            while (i < componentCode.length && componentCode[i] !== '{') {
+                i++
             }
 
-            returnContent = returnContent.substring(2, fragmentEnd).trim()
-            logFn?.(`      ✓ Extracted JSX content (${returnContent.length} chars)`)
-            return returnContent
-        } else {
-            logFn?.(`      ❌ Return content does not start with ( or <>`)
+            if (i < componentCode.length) {
+                let braceCount = 1
+                let inString = false
+                let stringChar = ''
+                i++
+
+                while (i < componentCode.length && braceCount > 0) {
+                    const char = componentCode[i]
+
+                    if (!inString && (char === '"' || char === "'" || char === '`')) {
+                        inString = true
+                        stringChar = char
+                    } else if (inString && char === stringChar && (i === 0 || componentCode[i - 1] !== '\\')) {
+                        inString = false
+                    } else if (!inString) {
+                        if (char === '{') braceCount++
+                        if (char === '}') braceCount--
+                    }
+
+                    i++
+                }
+
+                if (braceCount === 0) {
+                    const bodyStart = componentCode.indexOf('{') + 1
+                    const bodyEnd = i - 1
+                    const functionBody = componentCode.substring(bodyStart, bodyEnd)
+                    const returnValue = extractReturnValue(functionBody)
+                    return returnValue || functionBody.trim()
+                }
+            }
+        }
+
+        const returnValue = extractReturnValue(componentCode)
+        return returnValue || componentCode.trim()
+    } else {
+        const namedExportRegex = new RegExp(`export\\s+(const|function)\\s+${escapeRegex(componentName)}\\s*[=:(]`, 'g')
+
+        const match = cleanedContent.match(namedExportRegex)
+        if (!match) {
             return null
         }
-    } catch (error) {
-        logFn?.(`      ❌ Error extracting JSX: ${error}`)
-        return null
+
+        const startIndex = cleanedContent.indexOf(match[0])
+        const componentCode = cleanedContent.substring(startIndex)
+
+        const arrowIndex = componentCode.indexOf('=>')
+        if (arrowIndex !== -1) {
+            let i = arrowIndex + 2
+            while (i < componentCode.length && /\s/.test(componentCode[i])) {
+                i++
+            }
+
+            if (i < componentCode.length && componentCode[i] === '{') {
+                const braceStart = i
+                let braceCount = 1
+                let inString = false
+                let stringChar = ''
+                i++
+
+                while (i < componentCode.length && braceCount > 0) {
+                    const char = componentCode[i]
+
+                    if (!inString && (char === '"' || char === "'" || char === '`')) {
+                        inString = true
+                        stringChar = char
+                    } else if (inString && char === stringChar && (i === 0 || componentCode[i - 1] !== '\\')) {
+                        inString = false
+                    } else if (!inString) {
+                        if (char === '{') braceCount++
+                        if (char === '}') braceCount--
+                    }
+
+                    i++
+                }
+
+                if (braceCount === 0) {
+                    const bodyStart = braceStart + 1
+                    const bodyEnd = i - 1
+                    const functionBody = componentCode.substring(bodyStart, bodyEnd)
+                    const returnValue = extractReturnValue(functionBody)
+                    return returnValue || functionBody.trim()
+                }
+            }
+        } else {
+            let i = 0
+            while (i < componentCode.length && componentCode[i] !== '{') {
+                i++
+            }
+
+            if (i < componentCode.length) {
+                const braceStart = i
+                let braceCount = 1
+                let inString = false
+                let stringChar = ''
+                i++
+
+                while (i < componentCode.length && braceCount > 0) {
+                    const char = componentCode[i]
+
+                    if (!inString && (char === '"' || char === "'" || char === '`')) {
+                        inString = true
+                        stringChar = char
+                    } else if (inString && char === stringChar && (i === 0 || componentCode[i - 1] !== '\\')) {
+                        inString = false
+                    } else if (!inString) {
+                        if (char === '{') braceCount++
+                        if (char === '}') braceCount--
+                    }
+
+                    i++
+                }
+
+                if (braceCount === 0) {
+                    const bodyStart = braceStart + 1
+                    const bodyEnd = i - 1
+                    const functionBody = componentCode.substring(bodyStart, bodyEnd)
+                    const returnValue = extractReturnValue(functionBody)
+                    return returnValue || functionBody.trim()
+                }
+            }
+        }
+
+        const returnValue = extractReturnValue(componentCode)
+        return returnValue || componentCode.trim()
     }
 }
 
-const resolveJsxImportsInContent = (
-    content: string,
-    baseFilePath: string,
-    visited: ReadonlySet<string> = new Set(),
-    logFn?: (message: string) => void
-): string => {
-    const imports = findJsxImports(content)
+const findComponentUsage = (componentName: string): RegExp => {
+    const escapedName = escapeRegex(componentName)
+    const propsPattern = '(?:\\s+[^>]*)?'
+    const selfClosing = `<${escapedName}${propsPattern}\\s*/>`
+    const openingClosing = `<${escapedName}${propsPattern}>[\\s\\S]*?<\\/${escapedName}>`
+    const conditionalSelfClosing = `\\{${escapedName}\\s+&&\\s*${selfClosing}\\}`
+    const conditionalOpeningClosing = `\\{${escapedName}\\s+&&\\s*${openingClosing}\\}`
 
-    if (imports.length === 0) {
-        return content
+    return new RegExp(
+        `(${conditionalSelfClosing})|(${conditionalOpeningClosing})|(${selfClosing})|(${openingClosing})`,
+        'g'
+    )
+}
+
+const replaceComponentUsage = (content: string, componentName: string, replacement: string): string => {
+    const regex = findComponentUsage(componentName)
+    return content.replace(regex, replacement)
+}
+
+const removeJsxTsxImportStatements = (content: string, imports: ReadonlyArray<JsxTsxImport>): string => {
+    return imports.reduce((acc, imp) => {
+        const importLine = imp.fullMatch.replace(/\n$/, '')
+        return acc.replace(new RegExp(escapeRegex(importLine) + '\\s*\\n?', 'g'), '')
+    }, content)
+}
+
+const resolveJsxTsxImportsFromFile = (filePath: string, visited: ReadonlySet<string> = new Set()): string => {
+    const normalizedPath = path.resolve(filePath)
+
+    if (visited.has(normalizedPath)) {
+        return ''
     }
 
-    logFn?.(`  Found ${imports.length} JSX import(s)`)
+    const newVisited = new Set(visited).add(normalizedPath)
 
-    let resolvedContent = content
+    if (!fs.existsSync(filePath)) {
+        return ''
+    }
+
+    const content = fs.readFileSync(filePath, 'utf-8')
+    return resolveJsxTsxImports(content, filePath, newVisited)
+}
+
+const resolveJsxTsxImports = (
+    content: string,
+    baseFilePath: string,
+    visited: ReadonlySet<string> = new Set()
+): string => {
+    const imports = findJsxTsxImports(content)
+
+    let resolvedContent = removeJsxTsxImportStatements(content, imports)
 
     resolvedContent = imports.reduce((acc, imp) => {
-        logFn?.(`  Resolving import: ${imp.name} from ${imp.path}`)
-
-        const resolvedPath = resolveTsxPath(imp.path, baseFilePath)
+        const resolvedPath = resolveJsxTsxPath(imp.path, baseFilePath)
         if (!resolvedPath) {
-            logFn?.(`    ❌ Could not resolve path: ${imp.path}`)
             return acc
         }
 
-        const normalizedPath = path.resolve(resolvedPath)
+        const importedFileContent = resolveJsxTsxImportsFromFile(resolvedPath, visited)
+        const originalFileContent = fs.readFileSync(resolvedPath, 'utf-8')
+        const componentDef = extractComponentDefinition(originalFileContent, imp.name, imp.isDefault)
 
-        if (visited.has(normalizedPath)) {
-            logFn?.(`    ⚠️  Already visited, skipping to prevent infinite loop: ${resolvedPath}`)
-            return acc
-        }
+        if (componentDef) {
+            const tempDir = path.dirname(resolvedPath)
+            const tempFilePath = path.join(tempDir, `__temp_${imp.name}.tsx`)
 
-        const newVisited = new Set(visited).add(normalizedPath)
+            try {
+                fs.writeFileSync(tempFilePath, componentDef, 'utf-8')
+                const resolvedComponentDef = resolveJsxTsxImports(componentDef, tempFilePath, visited)
+                fs.unlinkSync(tempFilePath)
 
-        logFn?.(`    → Resolved to: ${resolvedPath}`)
-
-        if (!fs.existsSync(resolvedPath)) {
-            logFn?.(`    ❌ File not found: ${resolvedPath}`)
-            return acc
-        }
-
-        const tsxContent = fs.readFileSync(resolvedPath, 'utf-8')
-        const nestedResolved = resolveJsxImportsInContent(tsxContent, resolvedPath, newVisited, logFn)
-
-        const extractedJsx = extractJsxContent(resolvedPath, imp.name, logFn)
-        if (extractedJsx) {
-            const finalJsx = resolveJsxImportsInContent(extractedJsx, resolvedPath, newVisited, logFn)
-            logFn?.(`    ✓ Extracted and resolved JSX content (${finalJsx.length} chars)`)
-            return preserveIndentationAndInsert(acc, imp.name, finalJsx)
-        } else {
-            logFn?.(`    ⚠️  Could not extract JSX content for ${imp.name}`)
+                return replaceComponentUsage(acc, imp.name, resolvedComponentDef || componentDef)
+            } catch (error) {
+                try {
+                    const resolvedComponentDef = resolveJsxTsxImports(componentDef, resolvedPath, visited)
+                    return replaceComponentUsage(acc, imp.name, resolvedComponentDef || componentDef)
+                } catch {
+                    return replaceComponentUsage(acc, imp.name, componentDef)
+                }
+            }
         }
 
         return acc
     }, resolvedContent)
 
-    const remainingImports = findJsxImports(resolvedContent)
-    return removeImportStatements(resolvedContent, remainingImports)
+    const remainingImports = findJsxTsxImports(resolvedContent)
+    return removeJsxTsxImportStatements(resolvedContent, remainingImports)
+}
+
+const resolveMdxComponentUsages = (content: string, baseFilePath: string): string => {
+    const mdxImportRegex = /^import\s+(\w+)\s+from\s+['"]([^'"]*\/_snippets\/[^'"]*\.mdx)['"]\s*;?\s*$/gm
+    const imports: Array<{ name: string; path: string; fullMatch: string }> = []
+
+    let match
+    while ((match = mdxImportRegex.exec(content)) !== null) {
+        imports.push({
+            name: match[1],
+            path: match[2],
+            fullMatch: match[0],
+        })
+    }
+
+    if (imports.length === 0) return content
+
+    let resolved = content
+
+    for (const imp of imports) {
+        const mdxPath = resolveMdxPath(imp.path, baseFilePath)
+        if (!mdxPath || !fs.existsSync(mdxPath)) continue
+
+        const mdxContent = fs.readFileSync(mdxPath, 'utf-8')
+        const strippedContent = stripFrontmatter(mdxContent)
+        // Only strip MDX imports, preserve TSX imports for later resolution
+        const mdxOnlyImportRegex = /^import\s+.*?from\s+['"].*?\.mdx?['"]\s*;?\s*$/gm
+        const cleanContent = strippedContent.replace(mdxOnlyImportRegex, '').trim()
+
+        if (cleanContent) {
+            resolved = replaceComponentTags(resolved, imp.name, cleanContent)
+        }
+
+        resolved = resolved.replace(new RegExp(escapeRegex(imp.fullMatch) + '\\s*\\n?', 'g'), '')
+    }
+
+    return resolved
+}
+
+export function resolveJsxSnippets(content: string, filePath: string, slug?: string): string {
+    if (!content || !filePath) return content || ''
+
+    try {
+        const visited = new Set<string>()
+
+        // First pass: resolve TSX imports
+        let resolved = resolveJsxTsxImports(content, filePath, visited)
+        if (!resolved) {
+            return normalizeEmptyLines(content)
+        }
+
+        // Second pass: resolve MDX component usages (preserves TSX imports)
+        resolved = resolveMdxComponentUsages(resolved, filePath)
+
+        // Third pass: resolve any TSX imports that were in the inlined MDX
+        resolved = resolveJsxTsxImports(resolved, filePath, visited)
+
+        return normalizeEmptyLines(resolved)
+    } catch (error) {
+        console.error(`❌ Error resolving JSX snippets for ${slug || filePath}:`, error)
+        return normalizeEmptyLines(content)
+    }
 }
