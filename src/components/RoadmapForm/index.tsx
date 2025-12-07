@@ -716,16 +716,16 @@ export default function RoadmapForm({
                         searchable={false}
                     />
                 )}
-                {(status === 'in-progress' || status === 'under-consideration') && (
-                    <GitHubURLs
-                        urls={values.githubUrls}
-                        onChange={(githubUrls) => setFieldValue('githubUrls', githubUrls)}
-                        multiple={status === 'in-progress'}
-                        placeholder={`https://github.com/PostHog/posthog/${
-                            status === 'under-consideration' ? 'issues' : 'pull'
-                        }/1`}
-                    />
-                )}
+
+                <GitHubURLs
+                    urls={values.githubUrls}
+                    onChange={(githubUrls) => setFieldValue('githubUrls', githubUrls)}
+                    multiple={status === 'in-progress'}
+                    placeholder={`https://github.com/PostHog/posthog/${
+                        status === 'under-consideration' ? 'issues' : 'pull'
+                    }/1`}
+                />
+
                 {status !== 'under-consideration' && (
                     <div className="p-4 border border-primary">
                         <label className="text-sm text-secondary pt-4 block mb-2">Options</label>

@@ -72,12 +72,12 @@ export default function WebAnalytics({ data }: any): JSX.Element {
     const contentData = useContentData()
 
     const slides = createSlideConfig({
-        exclude: ['posthog-on-posthog'],
         order: [
             'overview',
             'customers',
             'features',
             'comparison-summary',
+            'posthog-on-posthog',
             'feature-comparison',
             'answers',
             'pricing',
@@ -85,6 +85,7 @@ export default function WebAnalytics({ data }: any): JSX.Element {
             'pairs-with',
             'getting-started',
         ],
+        exclude: ['posthog-on-posthog', 'videos'],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },

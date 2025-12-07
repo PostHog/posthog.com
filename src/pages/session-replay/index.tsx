@@ -15,11 +15,11 @@ export default function SessionReplay({ data }: any): JSX.Element {
     // Optional: Customize slides
     // See /components/Products/Slides/README.md for more details
     const slides = createSlideConfig({
-        exclude: ['posthog-on-posthog'],
         // order: ['overview', 'pricing', 'features'],
         templates: {
             overview: 'columns', // Use the horizontal split layout
         },
+        exclude: ['videos'],
         content: {
             answersDescription:
                 'Understand user behavior, identify friction points, and improve your product experience',

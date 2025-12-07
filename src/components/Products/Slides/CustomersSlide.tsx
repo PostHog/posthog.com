@@ -11,11 +11,11 @@ interface Customer {
     slug: string
     name: string
     logo?:
-    | React.ComponentType<any>
-    | {
-        light: string
-        dark: string
-    }
+        | React.ComponentType<any>
+        | {
+              light: string
+              dark: string
+          }
     height?: number
 }
 
@@ -206,7 +206,12 @@ export default function CustomersSlide({ productName, customers, customerData, h
                 </div>
 
                 <div className="hidden @2xl:block">
-                    <OSTable columns={customerTableColumns} rows={customerTableRows} className="bg-primary" />
+                    <OSTable
+                        columns={customerTableColumns}
+                        rows={customerTableRows}
+                        className="bg-primary"
+                        width="full"
+                    />
                 </div>
             </ScrollArea>
         </SlideContainer>

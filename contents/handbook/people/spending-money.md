@@ -8,7 +8,7 @@ There are many occasions when you will need to spend company money.
 
 PostHog is a lean organization - the less we spend, the more time we have to make sure the company takes off. However, it is more important you are productive, healthy, and happy.
 
-**Please spend money in a way that you think is in the best interests of the company. **
+**Please spend money in a way that you think is in the best interests of the company.**
 
 If it's a trivial expense, just buy it. We provide you with a company card to cover 99% of the spending you might need to do. We use Brex for everyone, and also provide UK team members with an additional Revolut card. 
 
@@ -61,7 +61,7 @@ If you have some invoice/receipt to share with the Finance team, send it to fina
 
 Personal expenses should be submitted within 90 days of incurring the expense, otherwise these will not be repaid.
 
-Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! If you used your brex card you can login to Brex, find the charge and use the repay function - more details [here](https://www.brex.com/support/employee-repayments). If it was on Revolut, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog. 
+Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! If you used your brex card you can login to Brex, find the charge and use the repay function — see the [Brex employee repayments guide](https://www.brex.com/support/employee-repayments) for more details. If it was on Revolut, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog.
 
 ## Making larger purchases
 
@@ -109,7 +109,7 @@ For monitors, we suggest you pick one that supports 4K. This means you'll get a 
 
 We would expect to spend $250 to $350 on a monitor. Philips have a [great value model](https://www.amazon.com/Philips-276E8VJSB-3840x2160-UltraNarrow-DispalyPort/dp/B07JXCR263). It comes with an HDMI cable, but you'll need an adaptor to USB-C with most Apple laptops.
 
-For engineers (because of the high density screen) and sales people (because of the in built high quality webcam and microphone), we recommend a Mac Studio Display ([Amazon US](https://www.amazon.com/Apple-Studio-Display-Standard-Tilt-Adjustable/dp/B0DZDDWSBG/ref=sr_1_1_sspa), [Amazon UK](https://www.amazon.co.uk/dp/B0DZDC2Q1N?tag=georiot-trd-21&th=1&ascsubtag=dcw-gb-1631306176175088319-21&geniuslink=true), as long as you can get them for < $2k. If you buy one and leave PostHog, we do expect you to ship these back.
+For engineers (because of the high density screen) and sales people (because of the in built high quality webcam and microphone), we recommend a Mac Studio Display ([Amazon US](https://www.amazon.com/Apple-Studio-Display-Standard-Tilt-Adjustable/dp/B0DZDDWSBG/ref=sr_1_1_sspa), [Amazon UK](https://www.amazon.co.uk/dp/B0DZDC2Q1N?tag=georiot-trd-21&th=1&ascsubtag=dcw-gb-1631306176175088319-21&geniuslink=true)), as long as you can get them for < $2k. If you buy one and leave PostHog, we do expect you to ship these back.
 
 ### Keyboard, mouse, and laptop stand
 

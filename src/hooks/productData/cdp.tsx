@@ -14,7 +14,7 @@ export const cdp = {
     color: 'sky-blue',
     colorSecondary: 'blue',
     // category: 'data',
-    hideFromPricingTable: true,
+    hideFromPricingTableAndCalculator: true,
     seo: {
         title: 'CDP sources & destinations - PostHog',
         description: 'Get all your data into PostHog with 60+ sources & destinations',
@@ -155,68 +155,7 @@ export const cdp = {
             RudderStack: true,
             Fivetran: true,
         },
-        comparison_rows: [
-            {
-                feature: 'Number of integrations',
-                companies: {
-                    Segment: '300+',
-                    mParticle: '300+',
-                    RudderStack: '200+',
-                    Fivetran: '500+',
-                    PostHog: '60+',
-                },
-            },
-            {
-                feature: 'Real-time streaming',
-                companies: {
-                    Segment: true,
-                    mParticle: true,
-                    RudderStack: true,
-                    Fivetran: false,
-                    PostHog: true,
-                },
-            },
-            {
-                feature: 'Batch exports',
-                companies: {
-                    Segment: true,
-                    mParticle: true,
-                    RudderStack: true,
-                    Fivetran: true,
-                    PostHog: true,
-                },
-            },
-            {
-                feature: 'Data warehouse sources',
-                companies: {
-                    Segment: false,
-                    mParticle: false,
-                    RudderStack: true,
-                    Fivetran: true,
-                    PostHog: true,
-                },
-            },
-            {
-                feature: 'Built-in analytics',
-                companies: {
-                    Segment: false,
-                    mParticle: false,
-                    RudderStack: false,
-                    Fivetran: false,
-                    PostHog: true,
-                },
-            },
-            {
-                feature: 'Starting price',
-                companies: {
-                    Segment: '$120/mo',
-                    mParticle: 'Contact',
-                    RudderStack: '$500/mo',
-                    Fivetran: '$120/mo',
-                    PostHog: 'Free sources',
-                },
-            },
-        ],
+        rows: ['cdp'],
     },
     pairsWith: [
         {

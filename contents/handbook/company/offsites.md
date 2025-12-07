@@ -42,7 +42,7 @@ Here’s how it works:
 - The team lead should message Kendal with their proposed dates and location.
 - Kendal will then go away and find suitable accommodation for the group.
 - Once that’s sorted, she’ll:
-  - Create a Slack channel for the offsite and add everyone who’s going.
+  - Create a Slack channel for the offsite (use `#offsite-[team]-[month]-[year]-[where]`) and add everyone who’s going.
   - Set up the offsite budget in Brex.
   - Update the team’s Canvas with:
     - Accommodation details and a handy map
@@ -104,6 +104,14 @@ For offsites and onboardings in London, below is a list of hotels recommended in
 - [Ruby Stella hotel](https://www.ruby-hotels.com/en/destinations/london/ruby-stella)
 
 If hotel prices are above £200 per night, it is worth quickly looking for alternatives as ~£170 per night should be achievable midweek in London. If prices are high, you should optimise travel for total cost (flights & accom) so if you can get cheaper flights or hotel by moving dates +/- 1 day, then look into these options. 
+
+## Border Control
+
+Quite often you will be required to travel to places where some kind of visa is required even if just a visitor visa like an [ESTA](https://esta.cbp.dhs.gov/). When entering places like the US, for work purposes, border control agents may ask the purpose of your trip. In these instances it's best to avoid using PostHog terms like "onboarding" as this can be confusing. It's much better to more generally describe the purpose of your trip. In nearly all circumstances this will be to hang out with your colleagues and to take part in team building exercises. It's usually good to emphasize that you'll be on a short trip and that the company is paying for everything. You should be prepared with the exact addresses of where you are staying and the details of your flight out of the country. 
+
+A successful strategy is usually to start off with a high-level purpose of your trip which is usually something like "hanging out with colleauges" or "I am here for a business meeting with colleauges", it is also usually advisable to only respond with a minimal amount, saying only what is necessary. If the agent asks for more details it's usually good to go into a bit more detail about the company structure "I work for a US tech company and I am based in [Insert your country] where I work remotely. I am here to do some in-person meetings with my colleagues for the next few days and I fly back on [insert date]". Sometimes the border patrol agent will ask more about the business, it's fine to give these details and be as honest about that as you would anybody else. If further details are required of the content of the trip, you can again give some context of how we like to lean into the benefits of in-person working and since most of your colleagues are based in the US, you are travelling their for a few days to meet in-person and will be returning home afterwards. 
+
+For all company offsites, it's best to describe this as a company gathering where you will be hanging out with colleagues for the week. Generally, it is best to avoid using the phrase "training" as this can also be confusing. 
 
 ## Travel insurance
 

@@ -41,6 +41,7 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
+import SmallTeam from 'components/SmallTeam'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -1191,6 +1192,16 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
             >
                 <p className="text-sm mb-0">You can also connect your own!</p>
             </Tooltip>
+        ),
+    },
+    {
+        name: 'SupportSmallTeamLink',
+        kind: 'flow',
+        props: [],
+        Editor: () => (
+            <SmallTeam slug="support" noMiniCrest>
+                support folks
+            </SmallTeam>
         ),
     },
 ]

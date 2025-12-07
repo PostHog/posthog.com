@@ -344,7 +344,7 @@ export default function Experiments({ data }: any): JSX.Element {
     // Optional: Customize slides
     // See /components/Products/Slides/README.md for more details
     const slides = createSlideConfig({
-        exclude: ['answers'],
+        exclude: ['answers', 'videos'],
         custom: [
             {
                 slug: 'statistical-methods',

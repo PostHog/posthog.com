@@ -2,25 +2,24 @@
 title: 'The best LogRocket alternatives & competitors, compared'
 date: 2023-11-14
 author:
-  - ian-vanagas
+    - ian-vanagas
 rootpage: /blog
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
 featuredImageType: full
 category: General
 tags:
-  - Comparisons
+    - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
-- **Founded:** 2020
-- **Similar to:** LogRocket, Smartlook
-- **Typical users:** Engineers and product teams
-- **Typical customers:** Mid-size B2Bs and startups
+-   **Founded:** 2020
+-   **Similar to:** LogRocket, Smartlook
+-   **Typical users:** Engineers and product teams
+-   **Typical customers:** Mid-size B2Bs and startups
 
 ![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/session-replay.png)
 
@@ -32,34 +31,37 @@ Typical PostHog users are engineers and product managers at startups and mid-siz
 
 ### Key features
 
-- 📈 **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Also supports SQL insights for power users.
+-   📈 **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Also supports SQL insights for power users.
 
-- 📺 **Session replays:** Including event timelines, console logs, network activity, and 90-day data retention.
+-   📺 **Session replays:** Including event timelines, console logs, network activity, and 90-day data retention.
 
-- 🚩 **Feature flags** with local evaluation (for faster performance) and JSON payloads.
+-   🚩 **Feature flags** with local evaluation (for faster performance) and JSON payloads.
 
-- 🧪 **A/B tests:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
+-   🧪 **A/B tests:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
 
-- 💬 **Surveys:** Target surveys by event or person properties. Templates for Net Promoter Score (NPS), product-market fit (PMF) surveys, and more.
+-   💬 **Surveys:** Target surveys by event or person properties. Templates for Net Promoter Score (NPS), product-market fit (PMF) surveys, and more.
 
 ### How does PostHog compare to LogRocket?
 
 PostHog has more tools for shipping new features and understanding their impact, while LogRocket focuses on surfacing issues and errors with your app's experience.
 
-<ComparisonTable column1="PostHog" column2="LogRocket">
-  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
-  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={true} feature="Performance monitoring" description="Track web vitals, server usage, and network performance." />
-  <ComparisonRow column1={false} column2={true} feature="Error monitoring" description="Capture exceptions and failures automatically" />
-  <ComparisonRow column1={false} column2={true} feature="Issue management" description="Score issues, triage, monitor app health" />
-  <ComparisonRow column1={false} column2={true} feature="Alerting" description="Set alerts on metric thresholds or anomalies" />
-  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'logrocket']}
+    rows={[
+        'platform.pricing.self_serve',
+        'session_replay',
+        'heatmaps',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+        'experiments',
+        'session_replay.analysis.performance_monitoring',
+        'error_tracking',
+        'error_tracking.features.issue_management',
+        'product_analytics.insights.alerts',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is PostHog?
 
@@ -79,14 +81,12 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 >
 > LogRocket focuses on helping teams fix issues with their product, while PostHog focuses on helping teams build a successful product. PostHog is a great alternative because it includes most of the features of LogRocket, with less of a focus on errors and more on A/B testing and surveys.
 
-<br />
-
 ## 2. Glassbox
 
-- **Founded:** 2010
-- **Most similar to:** FullStory, PostHog
-- **Typical users:** Business analysts, product support, marketers
-- **Typical customers:** Enterprise B2C companies, retail, and financial services
+-   **Founded:** 2010
+-   **Most similar to:** FullStory, PostHog
+-   **Typical users:** Business analysts, product support, marketers
+-   **Typical customers:** Enterprise B2C companies, retail, and financial services
 
 ![Glassbox](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-logrocket-alternatives/glassbox.png)
 
@@ -94,38 +94,41 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 Glassbox is a session replay and analytics platform with a particular focus on mobile apps and e-commerce use cases. Customers include UK retailer Sainsbury's, Marriott, and Experian.
 
-Glassbox is predominantly used by business analysts and support teams in enterprise B2C companies. 
+Glassbox is predominantly used by business analysts and support teams in enterprise B2C companies.
 
 ### Key features
 
-- 📹 **Session replay:** Watch and analyze real user sessions on web and mobile apps.
+-   📹 **Session replay:** Watch and analyze real user sessions on web and mobile apps.
 
-- 📊 **Product analytics:** Understand user paths and struggle points.
+-   📊 **Product analytics:** Understand user paths and struggle points.
 
-- 🏎️ **Performance analytics:** Track app performance and its impact on conversion rates.
+-   🏎️ **Performance analytics:** Track app performance and its impact on conversion rates.
 
-- 🔥 **Click, scroll, and heatmaps:** Understand where users interact with your app.
+-   🔥 **Click, scroll, and heatmaps:** Understand where users interact with your app.
 
-- ✅ **User feedback:** Gather satisfaction and user feedback on the app experience.
+-   ✅ **User feedback:** Gather satisfaction and user feedback on the app experience.
 
 ### How does Glassbox compare to LogRocket?
 
-On a feature-by-feature basis, Glassbox and LogRocket are nearly identical. Glassbox even automatically identifies trouble areas in your app, similar to LogRocket's issue monitoring and triaging. The big difference is Glassbox's focus on mobile and lack of error tracking. 
+On a feature-by-feature basis, Glassbox and LogRocket are nearly identical. Glassbox even automatically identifies trouble areas in your app, similar to LogRocket's issue monitoring and triaging. The big difference is Glassbox's focus on mobile and lack of error tracking.
 
-<ComparisonTable column1="Glassbox" column2="LogRocket">
-  <ComparisonRow column1={false} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={true} feature="Performance monitoring" description="Track web vitals, server usage, and network performance." />
-  <ComparisonRow column1={false} column2={true} feature="Error monitoring" description="Capture exceptions and failures automatically" />
-  <ComparisonRow column1={true} column2={true} feature="Issue management" description="Score issues, triage, monitor app health" />
-  <ComparisonRow column1={true} column2={true} feature="Alerting" description="Set alerts on metric thresholds or anomalies" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Build your own apps and contribute code" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['glassbox', 'logrocket']}
+    rows={[
+        'platform.pricing.self_serve',
+        'session_replay',
+        'heatmaps',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+        'experiments',
+        'session_replay.analysis.performance_monitoring',
+        'error_tracking',
+        'error_tracking.features.issue_management',
+        'product_analytics.insights.alerts',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is Glassbox?
 
@@ -147,14 +150,12 @@ According to G2 reviews, customers use Glassbox for:
 >
 > Glassbox is the closest feature-for-feature alternative to LogRocket with more of a focus on mobile. Glassbox makes sense for large B2C and ecommerce companies looking for similar functionality to LogRocket.
 
-<br />
-
 ## 3. Sentry
 
-- **Founded:** 2012
-- **Most similar to:** LogRocket, Glassbox
-- **Typical users:** Developers, infrastructure teams
-- **Typical customers:** B2C and B2B SaaS software with complicated products.
+-   **Founded:** 2012
+-   **Most similar to:** LogRocket, Glassbox
+-   **Typical users:** Developers, infrastructure teams
+-   **Typical customers:** B2C and B2B SaaS software with complicated products.
 
 ![Sentry](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-logrocket-alternatives/sentry.png)
 
@@ -164,34 +165,37 @@ According to G2 reviews, customers use Glassbox for:
 
 ### Key features
 
-- 📹 **Session replay:** See all the details of an issue with context like DOM events, console logs, and network calls.
+-   📹 **Session replay:** See all the details of an issue with context like DOM events, console logs, and network calls.
 
-- ➡️ **Tracing:** Identify performance issues with an end-to-end distributed trace to see how calls and queries do across the stack.
+-   ➡️ **Tracing:** Identify performance issues with an end-to-end distributed trace to see how calls and queries do across the stack.
 
-- ⚠️ **Error tracking:** Capture errors and events leading up to them to make reproduction and fixes simpler.
+-   ⚠️ **Error tracking:** Capture errors and events leading up to them to make reproduction and fixes simpler.
 
-- 🏎️ **Performance monitoring:** See how your app and queries perform. Find and fix slow areas.
+-   🏎️ **Performance monitoring:** See how your app and queries perform. Find and fix slow areas.
 
-- 1️⃣ **Release tracking:** Connect issues to releases. Gives the context to making debugging easier.
+-   1️⃣ **Release tracking:** Connect issues to releases. Gives the context to making debugging easier.
 
 ### How does Sentry compare to LogRocket?
 
 Both [Sentry](/blog/best-sentry-alternatives) and LogRocket focus on mitigating and fixing issues with your application. LogRocket has more tools for non-technical users to do this, like heatmaps and product analytics.
 
-<ComparisonTable column1="Sentry" column2="LogRocket">
-  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={false} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={true} feature="Performance monitoring" description="Track web vitals, server usage, and network performance." />
-  <ComparisonRow column1={true} column2={true} feature="Error monitoring" description="Capture exceptions and failures automatically" />
-  <ComparisonRow column1={true} column2={true} feature="Issue management" description="Score issues, triage, monitor app health" />
-  <ComparisonRow column1={true} column2={true} feature="Alerting" description="Set alerts on metric thresholds or anomalies" />
-  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['sentry', 'logrocket']}
+    rows={[
+        'platform.pricing.self_serve',
+        'session_replay',
+        'heatmaps',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+        'experiments',
+        'session_replay.analysis.performance_monitoring',
+        'error_tracking',
+        'error_tracking.features.issue_management',
+        'product_analytics.insights.alerts',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is Sentry?
 
@@ -203,7 +207,7 @@ G2 reviews are big fans of these three benefits of Sentry:
 
 1. **Fix bugs fast:** Understand where issues are happening and get the context to solve them fast. Sentry enables developers to figure out what is happening and where.
 
-2. **Auto tracking:** Track performance, errors, crashes, and performance automatically. Developers are more confident they understand when errors and performance issues are happening. 
+2. **Auto tracking:** Track performance, errors, crashes, and performance automatically. Developers are more confident they understand when errors and performance issues are happening.
 
 3. **Comprehensive:** All the tools developers need to debug, find issues, and improve their applications. All this information is invaluable for developers when it comes to building a high-quality app.
 
@@ -211,14 +215,12 @@ G2 reviews are big fans of these three benefits of Sentry:
 >
 > Sentry focuses entirely on error tracking and application monitoring tools, it doesn't include the product tools LogRocket has and isn't as friendly to non-technical users.
 
-<br />
-
 ## 4. Smartlook
 
-- **Founded:** 2016
-- **Most similar to:** LogRocket, Glassbox
-- **Typical users:** Engineers, business analysts, product managers
-- **Typical customers:** Enterprise retail and ecommerce websites and apps
+-   **Founded:** 2016
+-   **Most similar to:** LogRocket, Glassbox
+-   **Typical users:** Engineers, business analysts, product managers
+-   **Typical customers:** Enterprise retail and ecommerce websites and apps
 
 ![Smartlook](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-logrocket-alternatives/smartlook.png)
 
@@ -228,34 +230,37 @@ Smartlook is an analytics platform combining session replays with product analyt
 
 ### Key features
 
-- 📹 **Session recordings:** Understand how users are actually using your app and where issues occur.
+-   📹 **Session recordings:** Understand how users are actually using your app and where issues occur.
 
-- 📊 **Event-based analytics:** See how often users behave in the ways important to you.
+-   📊 **Event-based analytics:** See how often users behave in the ways important to you.
 
-- 🔥 **Heatmaps:** Figure out what parts of the page users click and scroll to.
+-   🔥 **Heatmaps:** Figure out what parts of the page users click and scroll to.
 
-- 🛣️ **Funnels and paths:** See how users move through your app with custom visuals for key flows.
+-   🛣️ **Funnels and paths:** See how users move through your app with custom visuals for key flows.
 
-- 📉 **Crash reports:** Learn what happens before a crash without reproduction.
+-   📉 **Crash reports:** Learn what happens before a crash without reproduction.
 
 ### How does Smartlook compare to LogRocket?
 
 Smartlook's combination of session replay and analytics with a focus on issues is very similar to LogRocket. LogRocket has more tools for monitoring and error tracking, however.
 
-<ComparisonTable column1="Smartlook" column2="LogRocket">
-  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={true} feature="Performance monitoring" description="Track web vitals, server usage, and network performance." />
-  <ComparisonRow column1={false} column2={true} feature="Error monitoring" description="Capture exceptions and failures automatically" />
-  <ComparisonRow column1={false} column2={true} feature="Issue management" description="Score issues, triage, monitor app health" />
-  <ComparisonRow column1={true} column2={true} feature="Alerting" description="Set alerts on metric thresholds or anomalies" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Build your own apps and contribute code" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['smartlook', 'logrocket']}
+    rows={[
+        'platform.pricing.self_serve',
+        'session_replay',
+        'heatmaps',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+        'experiments',
+        'session_replay.analysis.performance_monitoring',
+        'error_tracking',
+        'error_tracking.features.issue_management',
+        'product_analytics.insights.alerts',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is Smartlook?
 
@@ -267,7 +272,7 @@ According to G2 reviewers, Smartlook users benefit from:
 
 1. **The integration between replays and events:** Smartlook connects event-based analytics and sessions. This enables users to dive deeper into user behavior than a single tool would provide.
 
-2. **Understanding visitor pain points:** The analytics and visualizations make it easy to understand where users are running into trouble. Fixing these areas improves user experience and conversion. 
+2. **Understanding visitor pain points:** The analytics and visualizations make it easy to understand where users are running into trouble. Fixing these areas improves user experience and conversion.
 
 3. **Real user monitoring:** See how real users are using your app and monitor the quality of their experiences. Figure out what areas are confusing or not being used properly.
 
@@ -275,14 +280,12 @@ According to G2 reviewers, Smartlook users benefit from:
 >
 > Smartlook focuses on a subset of LogRocket's functionality, but it is a strong alternative for apps and websites looking for session replay and product analytics.
 
-<br />
-
 ## 5. FullStory
 
-- **Founded:** 2012
-- **Most similar to:** PostHog, Glassbox
-- **Typical users:** Product managers, customer success, and support
-- **Typical customers:** Online retailers and SaaS companies
+-   **Founded:** 2012
+-   **Most similar to:** PostHog, Glassbox
+-   **Typical users:** Product managers, customer success, and support
+-   **Typical customers:** Online retailers and SaaS companies
 
 ![FullStory](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-logrocket-alternatives/fullstory.png)
 
@@ -292,34 +295,37 @@ According to G2 reviewers, Smartlook users benefit from:
 
 ### Key features
 
-- 📹 **Session replay:** Watch and analyze real user sessions on web and mobile apps.
+-   📹 **Session replay:** Watch and analyze real user sessions on web and mobile apps.
 
-- 📊 **Product analytics:** Understand user paths and struggle points.
+-   📊 **Product analytics:** Understand user paths and struggle points.
 
-- 📈 **Event autocapture:** Tagless event capture that ensures the tracking of all events.
+-   📈 **Event autocapture:** Tagless event capture that ensures the tracking of all events.
 
-- 🔥 **Heatmaps:** Find out where users click and frustration points.
+-   🔥 **Heatmaps:** Find out where users click and frustration points.
 
-- 📱 **Mobile app analytics:** Crash analytics and user path analysis.
+-   📱 **Mobile app analytics:** Crash analytics and user path analysis.
 
 ### How does FullStory compare to LogRocket?
 
 Both FullStory and LogRocket have tools to understand user experience, but LogRocket captures more data on errors and issues.
 
-<ComparisonTable column1="FullStory" column2="LogRocket">
-  <ComparisonRow column1={false} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={true} feature="Performance monitoring" description="Track web vitals, server usage, and network performance." />
-  <ComparisonRow column1={false} column2={true} feature="Error monitoring" description="Capture exceptions and failures automatically" />
-  <ComparisonRow column1={false} column2={true} feature="Issue management" description="Score issues, triage, monitor app health" />
-  <ComparisonRow column1={true} column2={true} feature="Alerting" description="Set alerts on metric thresholds or anomalies" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Build your own apps and contribute code" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['fullstory', 'logrocket']}
+    rows={[
+        'platform.pricing.self_serve',
+        'session_replay',
+        'heatmaps',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+        'experiments',
+        'session_replay.analysis.performance_monitoring',
+        'error_tracking',
+        'error_tracking.features.issue_management',
+        'product_analytics.insights.alerts',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is FullStory?
 
@@ -339,14 +345,12 @@ According to reviews on G2, companies use FullStory for:
 >
 > FullStory is a mature product with many of the same features as LogRocket. It's great for ecommerce companies who care less about the error tracking depth of LogRocket.
 
-<br />
-
 ## 6. Pendo
 
-- **Founded:** 2013
-- **Most similar to:** PostHog, Hotjar
-- **Typical users:** Product managers and customer success teams
-- **Typical customers:** Small and mid-market B2C apps
+-   **Founded:** 2013
+-   **Most similar to:** PostHog, Hotjar
+-   **Typical users:** Product managers and customer success teams
+-   **Typical customers:** Small and mid-market B2C apps
 
 ![Pendo](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-logrocket-alternatives/pendo.png)
 
@@ -356,32 +360,35 @@ According to reviews on G2, companies use FullStory for:
 
 ### Key features
 
-- 📊 **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
+-   📊 **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
 
-- 🦮 **In-app guides:** Deliver personalized guidance to customers, directly inside your app.
+-   🦮 **In-app guides:** Deliver personalized guidance to customers, directly inside your app.
 
-- 📝 **User feedback:** Capture and analyze customer feedback at scale.
+-   📝 **User feedback:** Capture and analyze customer feedback at scale.
 
-- 🗺️ **Product validation and roadmaps:** Plan your product improvements and roadmap using data from Pendo.
+-   🗺️ **Product validation and roadmaps:** Plan your product improvements and roadmap using data from Pendo.
 
 ### How does Pendo compare to LogRocket?
 
 Pendo focuses more on in-app guides and feedback. It doesn't have the monitoring and error tracking LogRocket has.
 
-<ComparisonTable column1="Pendo" column2="LogRocket">
-  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={true} feature="Performance monitoring" description="Track web vitals, server usage, and network performance." />
-  <ComparisonRow column1={false} column2={true} feature="Error monitoring" description="Capture exceptions and failures automatically" />
-  <ComparisonRow column1={false} column2={true} feature="Issue management" description="Score issues, triage, monitor app health" />
-  <ComparisonRow column1={false} column2={true} feature="Alerting" description="Set alerts on metric thresholds or anomalies" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Build your own apps and contribute code" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['pendo', 'logrocket']}
+    rows={[
+        'platform.pricing.self_serve',
+        'session_replay',
+        'heatmaps',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+        'experiments',
+        'session_replay.analysis.performance_monitoring',
+        'error_tracking',
+        'error_tracking.features.issue_management',
+        'product_analytics.insights.alerts',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is Pendo?
 
@@ -401,14 +408,12 @@ According to G2 reviews, customers use Pendo for:
 >
 > Although both have analytics and session replay, Pendo focuses on in-app guides and feedback. It falls short on the monitoring and error tracking fronts though.
 
-<br />
-
 ## 7. Hotjar
 
-- **Founded:** 2014
-- **Most similar to:** Pendo, Glassbox
-- **Typical users:** Product designers, researchers, and marketers
-- **Typical customers:** Ecommerce and content-driven sites
+-   **Founded:** 2014
+-   **Most similar to:** Pendo, Glassbox
+-   **Typical users:** Product designers, researchers, and marketers
+-   **Typical customers:** Ecommerce and content-driven sites
 
 ![Hotjar](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-logrocket-alternatives/hotjar.png)
 
@@ -418,34 +423,37 @@ According to G2 reviews, customers use Pendo for:
 
 ### Key features
 
-- 🔥 **Heatmaps:** See what parts of your pages get attention and how far down the page users get.
+-   🔥 **Heatmaps:** See what parts of your pages get attention and how far down the page users get.
 
-- 🎥 **Recordings:** Replay real user sessions and see what they see.
+-   🎥 **Recordings:** Replay real user sessions and see what they see.
 
-- 🗣️ **Feedback:** Learn what your users are thinking. Find out their likes and dislikes.
+-   🗣️ **Feedback:** Learn what your users are thinking. Find out their likes and dislikes.
 
-- 📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
+-   📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
 
-- 👔 **Interviews:** Talk to real users to share ideas, test designs, and get live feedback.
+-   👔 **Interviews:** Talk to real users to share ideas, test designs, and get live feedback.
 
 ### How does Hotjar compare to LogRocket?
 
 LogRocket focuses on analytics and error tracking, while Hotjar focuses on tools for talking to users like feedback, surveys, and interviews.
 
-<ComparisonTable column1="Hotjar" column2="LogRocket">
-  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
-  <ComparisonRow column1={false} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={true} feature="Performance monitoring" description="Track web vitals, server usage, and network performance." />
-  <ComparisonRow column1={false} column2={true} feature="Error monitoring" description="Capture exceptions and failures automatically" />
-  <ComparisonRow column1={false} column2={true} feature="Issue management" description="Score issues, triage, monitor app health" />
-  <ComparisonRow column1={false} column2={true} feature="Alerting" description="Set alerts on metric thresholds or anomalies" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Build your own apps and contribute code" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['hotjar', 'logrocket']}
+    rows={[
+        'platform.pricing.self_serve',
+        'session_replay',
+        'heatmaps',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+        'experiments',
+        'session_replay.analysis.performance_monitoring',
+        'error_tracking',
+        'error_tracking.features.issue_management',
+        'product_analytics.insights.alerts',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 ### How popular is Hotjar?
 
@@ -465,17 +473,15 @@ According to G2 reviews, users are fans of Hotjar because:
 >
 > Hotjar and LogRocket are on opposite sides of the qualitative vs quantitative analytics spectrum. Hotjar has tools to get qualitative user behavioral insights, while LogRocket focuses on the metrics and issue-driven quantitative ones.
 
-<br />
-
 ## Is PostHog right for you?
 
 Here's the (short) sales pitch.
 
 We're biased, obviously, but we think PostHog is the perfect LogRocket replacement if:
 
-- You value transparency (we're open source and open core)
-- You want tools to help you build a better product, rather than just fix issues (we added A/B testing, feature flags, surveys, and more on top of LogRocket's feature set)
-- You want to try before you buy (we're self-serve with a [generous free tier](/pricing))
+-   You value transparency (we're open source and open core)
+-   You want tools to help you build a better product, rather than just fix issues (we added A/B testing, feature flags, surveys, and more on top of LogRocket's feature set)
+-   You want to try before you buy (we're self-serve with a [generous free tier](/pricing))
 
 Check out [our product pages](/product-analytics) and [read our docs](/docs) to learn more.
 

@@ -259,7 +259,7 @@ export const ProductOS = () => {
 
                             <p>
                                 This includes utilities like downtime banners, pop-up survey widgets, geo-location
-                                notices, and more. (It even powers our own Surveys product.)
+                                notices, and more. (It even powers our own Surveys app.)
                             </p>
 
                             <p>

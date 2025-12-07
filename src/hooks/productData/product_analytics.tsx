@@ -31,7 +31,7 @@ export const productAnalytics = {
     overview: {
         title: 'Product analytics with autocapture',
         description:
-            'PostHog is the only product analytics platform built to natively work with session replay, feature flags, experiments, and surveys.',
+            'PostHog is the only developer platform built to natively work with session replay, feature flags, experiments, and surveys.',
         textColor: 'text-white', // tw
     },
     screenshots: {
@@ -50,6 +50,12 @@ export const productAnalytics = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/funnel_vertical_light_3909cad637.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/funnel_vertical_dark_e0854a4c86.png',
             alt: 'Product analytics funnel',
+        },
+    },
+    videos: {
+        overview: {
+            youtube: '',
+            wistia: '0be67lqiau',
         },
     },
     hog: {
@@ -504,485 +510,41 @@ export const productAnalytics = {
                 link: '/blog/posthog-vs-pendo',
             },
             {
+                name: 'Statsig',
+                key: 'statsig',
+                link: '/blog/posthog-vs-statsig',
+            },
+            {
                 name: 'PostHog',
                 key: 'posthog',
             },
         ],
-        features: [
+        rows: ['product_analytics'],
+        excluded_sections: ['platform.integrations'],
+        require_complete_data: true,
+    },
+    postHogOnPostHog: {
+        title: 'How PostHog uses Product Analytics',
+        benefits: [
             {
-                feature: 'Insights',
-                type: 'header',
-                companies: {
-                    amplitude: '',
-                    mixpanel: '',
-                    heap: '',
-                    pendo: '',
-                    posthog: '',
-                },
+                title: 'Track metrics',
+                description: 'and monitor feature usage trends',
             },
             {
-                feature: 'Ready-made insight types',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
+                title: 'Understand user behavior',
+                description: 'by analyzing funnels and retention',
             },
             {
-                feature: 'SQL mode',
-                companies: {
-                    amplitude: 'Exports only',
-                    mixpanel: 'JQL only',
-                    heap: 'Exports only',
-                    pendo: 'Exports only',
-                    posthog: true,
-                },
+                title: 'Identify opportunities',
+                description: 'by filtering based on drop-offs and conversion rates',
             },
             {
-                feature: 'Funnels',
-                type: 'header',
-                companies: {
-                    amplitude: '',
-                    mixpanel: '',
-                    heap: '',
-                    pendo: '',
-                    posthog: '',
-                },
+                title: 'Find out when things change',
+                description: 'by setting up dashboards and alerts',
             },
             {
-                feature: 'Conversion funnels',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Historical trends',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Time to convert insights',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Sequential step order',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Strict step order',
-                companies: {
-                    amplitude: true,
-                    mixpanel: false,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Any step order',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Exclusion events',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Conversion windows',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Reveal user paths between steps',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Anomaly detection',
-                companies: {
-                    amplitude: true,
-                    mixpanel: false,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Filter internal and test users',
-                companies: {
-                    amplitude: false,
-                    mixpanel: false,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Filter by cohort',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Filter by person property',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Breakdown by person property',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Correlation analysis',
-                companies: {
-                    amplitude: true,
-                    mixpanel: false,
-                    heap: true,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Path analysis',
-                type: 'header',
-                companies: {
-                    amplitude: '',
-                    mixpanel: '',
-                    heap: '',
-                    pendo: '',
-                    posthog: '',
-                },
-            },
-            {
-                feature: 'Reveal paths from a start point',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Reveal paths from an end point',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Reveal paths between points',
-                companies: {
-                    amplitude: false,
-                    mixpanel: true,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Reveal paths within funnels',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Zoom in/out',
-                companies: {
-                    amplitude: true,
-                    mixpanel: false,
-                    heap: false,
-                    pendo: false,
-                    posthog: false,
-                },
-            },
-            {
-                feature: 'Define number of users on path',
-                companies: {
-                    amplitude: false,
-                    mixpanel: false,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Track pageviews',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Track custom events',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Filter internal and test users',
-                companies: {
-                    amplitude: false,
-                    mixpanel: false,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Filter by cohort',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Filter by events or person property',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Include and exclude Wildcards',
-                companies: {
-                    amplitude: false,
-                    mixpanel: false,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Exclusion events',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Hide repeating steps',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: false,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Regex for path cleaning',
-                companies: {
-                    amplitude: false,
-                    mixpanel: false,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Max number of steps',
-                companies: {
-                    amplitude: '50',
-                    mixpanel: '120+',
-                    heap: '10',
-                    pendo: '20',
-                    posthog: '20',
-                },
-            },
-            {
-                feature: 'Dashboards',
-                type: 'header',
-                companies: {
-                    amplitude: '',
-                    mixpanel: '',
-                    heap: '',
-                    pendo: '',
-                    posthog: '',
-                },
-            },
-            {
-                feature: 'User-level permissions',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Project-level permissions',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Dashboard-level permissions',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Share dashboards externally',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Embed dashboards anywhere',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Subscribe to dashboards',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Pinned dashboards',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Dashboard & insight tags',
-                companies: {
-                    amplitude: false,
-                    mixpanel: false,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-
-            {
-                feature: 'Annotations',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: false,
-                    pendo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Private insights',
-                companies: {
-                    amplitude: true,
-                    mixpanel: true,
-                    heap: true,
-                    pendo: true,
-                    posthog: false,
-                },
+                title: 'Make data-driven decisions',
+                description: 'by linking insights to session replays',
             },
         ],
     },

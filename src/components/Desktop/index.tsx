@@ -1,7 +1,7 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
-import { IconDemoThumb, AppIcon } from 'components/OSIcons'
+import { IconDemoThumb, AppIcon, IconChangelogThumb } from 'components/OSIcons'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -264,23 +264,23 @@ export const useProductLinks = (): AppItem[] => {
         },
         ...(posthogInstance
             ? [
-                  {
-                      label: 'Open app ↗',
-                      Icon: <AppIcon name="computerCoffee" />,
-                      url: 'https://app.posthog.com',
-                      external: true,
-                      source: 'desktop',
-                  },
-              ]
+                {
+                    label: 'Open app ↗',
+                    Icon: <AppIcon name="computerCoffee" />,
+                    url: 'https://app.posthog.com',
+                    external: true,
+                    source: 'desktop',
+                },
+            ]
             : [
-                  {
-                      label: 'Sign up ↗',
-                      Icon: <AppIcon name="compass" />,
-                      url: 'https://app.posthog.com/signup',
-                      external: true,
-                      source: 'desktop',
-                  },
-              ]),
+                {
+                    label: 'Sign up ↗',
+                    Icon: <AppIcon name="compass" />,
+                    url: 'https://app.posthog.com/signup',
+                    external: true,
+                    source: 'desktop',
+                },
+            ]),
     ]
 }
 

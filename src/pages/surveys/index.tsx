@@ -12,7 +12,7 @@ export default function Surveys({ data }: any): JSX.Element {
     // Optional: Customize slides
     // See /components/Products/Slides/README.md for more details
     const slides = createSlideConfig({
-        exclude: ['answers'],
+        exclude: ['answers', 'videos'],
         // order: ['overview', 'pricing', 'features'],
         templates: {
             overview: 'stacked', // Use the horizontal split layout

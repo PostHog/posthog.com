@@ -41,6 +41,8 @@ const PeoplePage = ({ data }) => {
                     { label: 'Any', value: 'any' },
                     { label: 'Ben', value: 'Ben' },
                     { label: 'Daniel', value: 'Daniel' },
+                    { label: 'Alex', value: 'Alex' },
+                    { label: 'Pawel', value: 'Pawel' },
                 ],
                 filter: (person, value) => value === 'any' || person.firstName === value,
             },

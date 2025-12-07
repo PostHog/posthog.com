@@ -53,6 +53,6 @@ If you have a question which isn’t answered here or in the Eventbrite page, yo
 
 > Join us in London,UK  on February 24th, 2022 for our first ever community meetup. It’s a free event, but spaces are limited — [RSVP to secure your spot](https://www.eventbrite.com/e/hosthog-london-2022-tickets-259372428917). 
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />

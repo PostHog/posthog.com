@@ -81,3 +81,7 @@ The schema of the model as created in Redshift is:
 | created_at                 | `TIMESTAMP WITH TIME ZONE`    | The timestamp when the person was created                                                                                          |
 
 The Redshift table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`.
+
+### Sessions model
+
+You can view the schema for the sessions model in the configuration form when creating a batch export (there are a few too many fields to display here!).

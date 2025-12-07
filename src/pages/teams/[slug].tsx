@@ -28,7 +28,6 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { Fieldset } from 'components/OSFieldset'
 import ZoomHover from 'components/ZoomHover'
 import Link from 'components/Link'
-import TeamPatch from 'components/TeamPatch'
 import Header from 'components/Team/Header'
 import Profile, { ProfileData } from 'components/Team/Profile'
 import Roadmap from 'components/Team/Roadmap'
@@ -39,8 +38,9 @@ import {
     StickerPineappleUnknown,
     StickerPineapple,
 } from 'components/Stickers/Index'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import TeamFeatures from 'components/TeamFeatures'
+import SpiritAnimal from 'components/Team/SpiritAnimal'
+import SmallTeam from 'components/SmallTeam'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -195,6 +195,7 @@ export default function TeamPage(props: TeamPageProps) {
             teamMembers: team?.attributes?.profiles?.data || [],
             teamLeads: team?.attributes?.leadProfiles?.data || [],
             miniCrest: miniCrest?.data ? { file: null, objectURL: miniCrest?.data?.attributes?.url } : undefined,
+            spiritAnimal: team?.attributes?.spiritAnimal,
         },
         onSubmit: async ({
             name,
@@ -206,6 +207,7 @@ export default function TeamPage(props: TeamPageProps) {
             teamMembers,
             teamLeads,
             miniCrest,
+            spiritAnimal,
             ...other
         }) => {
             const jwt = await getJwt()
@@ -237,6 +239,7 @@ export default function TeamPage(props: TeamPageProps) {
                 name,
                 description,
                 tagline,
+                spiritAnimal,
                 teamImage: {
                     image: uploadedTeamImage
                         ? uploadedTeamImage.id
@@ -539,6 +542,12 @@ export default function TeamPage(props: TeamPageProps) {
 
                                 <TeamFeatures teamSlug={slug} />
 
+                                <SpiritAnimal
+                                    spiritAnimal={values.spiritAnimal}
+                                    editing={editing}
+                                    setFieldValue={setFieldValue}
+                                />
+
                                 <div>
                                     {teamEmojis?.length > 0 && (
                                         <Fieldset legend="Custom emojis">
@@ -716,7 +725,7 @@ export default function TeamPage(props: TeamPageProps) {
                 {objectives && (
                     <>
                         <h2>Goals</h2>
-                        <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember }}>
+                        <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember, SmallTeam }}>
                             <MDXRenderer>{objectives}</MDXRenderer>
                         </MDXProvider>
                     </>
@@ -725,7 +734,7 @@ export default function TeamPage(props: TeamPageProps) {
                 {body && (
                     <>
                         <h2>Handbook</h2>
-                        <MDXProvider components={{ PrivateLink }}>
+                        <MDXProvider components={{ PrivateLink, SmallTeam }}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </>
