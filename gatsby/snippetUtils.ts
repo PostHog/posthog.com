@@ -753,12 +753,7 @@ export function resolveJsxSnippets(content: string, filePath: string, slug?: str
 
         resolved = stripImports(resolved)
         resolved = stripFrontmatter(resolved)
-
-        console.log('resolved before prettier')
-        console.log(resolved)
         resolved = prettier.format(resolved, { parser: 'babel', printWidth: 120, tabWidth: 2 })
-        console.log('resolved after prettier')
-        console.log(resolved)
         return normalizeEmptyLines(resolved)
     } catch (error) {
         console.error(`❌ Error resolving JSX snippets for ${slug || filePath}:`, error)
