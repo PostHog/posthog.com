@@ -1,7 +1,6 @@
 import path from 'path'
 import fs from 'fs'
 import { stripFrontmatter } from './utils'
-import prettier from 'prettier'
 
 // ============================================================================
 // MDX RESOLUTION (Gatsby onCreateNode)
@@ -752,14 +751,6 @@ export function resolveJsxSnippets(content: string, filePath: string, slug?: str
         resolved = resolveJsxTsxImports(resolved, filePath, visited)
 
         resolved = stripImports(resolved)
-
-        // Call prettier to format the resolved content
-        resolved = prettier.format(resolved, {
-            parser: 'babel',
-            printWidth: 120,
-            tabWidth: 2,
-            useTabs: false,
-        })
 
         return normalizeEmptyLines(resolved)
     } catch (error) {
