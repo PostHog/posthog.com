@@ -682,10 +682,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         })
     }
 
-    useEffect(() => {
-        localStorage.setItem('user', JSON.stringify(user))
-    }, [user])
-
     const contextValue = {
         user,
         setUser,
