@@ -2,6 +2,7 @@ import path from 'path'
 import fs from 'fs'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference'
 import { getLanguageFromSdkId } from '../src/components/SdkReferences/utils'
+import { resolveJsxSnippets } from './snippetUtils'
 
 // Function to generate raw markdown files
 export const generateRawMarkdownPages = async (pages) => {
@@ -29,9 +30,16 @@ export const generateRawMarkdownPages = async (pages) => {
 
     for (const doc of filteredPages) {
         try {
-            const { slug, contentWithSnippets } = doc.fields
+            const { slug } = doc.fields
             const { title } = doc.frontmatter
-            const body = contentWithSnippets || doc.rawBody
+            const fileAbsolutePath = doc.fileAbsolutePath
+            // Use rawBody instead of contentWithSnippets to preserve all imports for resolveJsxSnippets
+            let body = doc.rawBody
+
+            // Resolve JSX snippets using the original source file path
+            if (body && fileAbsolutePath) {
+                body = resolveJsxSnippets(body, fileAbsolutePath, slug)
+            }
 
             // Create the frontmatter, so it always has the page title
             let markdownContent = `---\ntitle: ${title}\nslug: ${slug}\n---\n`

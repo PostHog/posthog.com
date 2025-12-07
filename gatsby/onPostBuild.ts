@@ -566,6 +566,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         date
                     }
                     rawBody
+                    fileAbsolutePath
                     fields {
                         slug
                         contentWithSnippets
@@ -576,28 +577,6 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     `)
 
     const filteredPages = await generateRawMarkdownPages(markdownQuery.data.allMdx.nodes)
-
-    // Resolve JSX snippets in generated markdown files (TSX files are now available from gatsby-source-git)
-    const docsDir = path.resolve(__dirname, '../public/docs')
-    if (fs.existsSync(docsDir)) {
-        const resolveJsxInDirectory = (dirPath: string) => {
-            const entries = fs.readdirSync(dirPath, { withFileTypes: true })
-            for (const entry of entries) {
-                const fullPath = path.join(dirPath, entry.name)
-                if (entry.isDirectory()) {
-                    resolveJsxInDirectory(fullPath)
-                } else if (entry.name.endsWith('.md')) {
-                    const content = fs.readFileSync(fullPath, 'utf-8')
-                    const slug = fullPath.replace(path.resolve(__dirname, '../public'), '').replace('.md', '')
-                    const resolvedContent = resolveJsxSnippets(content, fullPath, slug)
-                    if (resolvedContent !== content) {
-                        fs.writeFileSync(fullPath, resolvedContent)
-                    }
-                }
-            }
-        }
-        resolveJsxInDirectory(docsDir)
-    }
 
     generateLlmsTxt(filteredPages)
 
