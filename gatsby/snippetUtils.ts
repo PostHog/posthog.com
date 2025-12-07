@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 import { stripFrontmatter } from './utils'
-import { dedent } from '../src/utils'
+import prettier from 'prettier'
 
 // ============================================================================
 // MDX RESOLUTION (Gatsby onCreateNode)
@@ -19,6 +19,9 @@ const DEFAULT_IMPORT_NAME_REGEX = /import\s+(\w+)/
 
 const normalizeEmptyLines = (content: string): string => {
     return content.replace(/\n{3,}/g, '\n\n')
+}
+const stripImports = (content: string): string => {
+    return content.replace(/^import\s+.*?['"].*?['"]\s*;?\s*$/gm, '').trim()
 }
 
 export function resolveMDXSnippets(rawBody: string, filePath: string | undefined, slug?: string): string {
@@ -76,7 +79,7 @@ const createComponentTagRegex = (componentName: string): RegExp => {
 
 const replaceComponentTags = (content: string, componentName: string, replacement: string): string => {
     const regex = createComponentTagRegex(componentName)
-    return content.replace(regex, replacement)
+    return content.replace(regex, `\n${replacement}\n`)
 }
 
 const removeImportStatements = (content: string, imports: ReadonlyArray<{ fullMatch: string }>): string => {
@@ -623,7 +626,7 @@ const findComponentUsage = (componentName: string): RegExp => {
 
 const replaceComponentUsage = (content: string, componentName: string, replacement: string): string => {
     const regex = findComponentUsage(componentName)
-    return content.replace(regex, replacement)
+    return content.replace(regex, `\n${extractJSXReturn(replacement)}\n`)
 }
 
 const removeJsxTsxImportStatements = (content: string, imports: ReadonlyArray<JsxTsxImport>): string => {
@@ -739,21 +742,214 @@ export function resolveJsxSnippets(content: string, filePath: string, slug?: str
     try {
         const visited = new Set<string>()
 
-        // First pass: resolve TSX imports
         let resolved = resolveJsxTsxImports(content, filePath, visited)
         if (!resolved) {
             return normalizeEmptyLines(content)
         }
 
-        // Second pass: resolve MDX component usages (preserves TSX imports)
         resolved = resolveMdxComponentUsages(resolved, filePath)
 
-        // Third pass: resolve any TSX imports that were in the inlined MDX
         resolved = resolveJsxTsxImports(resolved, filePath, visited)
+
+        resolved = stripImports(resolved)
+
+        // Call prettier to format the resolved content
+        resolved = prettier.format(resolved, {
+            parser: 'babel',
+            printWidth: 120,
+            tabWidth: 2,
+            useTabs: false,
+        })
 
         return normalizeEmptyLines(resolved)
     } catch (error) {
         console.error(`❌ Error resolving JSX snippets for ${slug || filePath}:`, error)
         return normalizeEmptyLines(content)
     }
+}
+
+// Stuff to deal with JSX snippet return content
+
+function extractJSXReturn(code) {
+    const cleaned = removeComments(code)
+    const returnContent = findReturnContent(cleaned)
+    return returnContent
+}
+
+function removeComments(code) {
+    let result = '',
+        i = 0,
+        inString = false,
+        stringChar = '',
+        inTemplate = false
+    while (i < code.length) {
+        if (code[i] === '`' && !inString) {
+            inTemplate = !inTemplate
+            result += code[i++]
+            continue
+        }
+        if ((code[i] === '"' || code[i] === "'") && !inTemplate) {
+            if (!inString) {
+                inString = true
+                stringChar = code[i]
+            } else if (code[i] === stringChar && code[i - 1] !== '\\') inString = false
+            result += code[i++]
+            continue
+        }
+        if (!inString && !inTemplate) {
+            if (code[i] === '/' && code[i + 1] === '/') {
+                while (i < code.length && code[i] !== '\n') i++
+                continue
+            }
+            if (code[i] === '/' && code[i + 1] === '*') {
+                i += 2
+                while (i < code.length - 1 && !(code[i] === '*' && code[i + 1] === '/')) i++
+                i += 2
+                continue
+            }
+        }
+        result += code[i++]
+    }
+    return result
+}
+
+function findReturnContent(code) {
+    const explicit = findExplicitReturn(code)
+    if (explicit) return explicit
+    const implicit = findImplicitArrowReturn(code)
+    if (implicit) return implicit
+    return null
+}
+
+function findExplicitReturn(code) {
+    let candidates = [],
+        i = 0
+    while (i < code.length) {
+        if (code.substring(i, i + 6) === 'return') {
+            const before = i === 0 ? ' ' : code[i - 1]
+            const after = code[i + 6] || ' '
+            if (/[\s{;(]/.test(before) && /[\s(<{]/.test(after)) {
+                let j = i + 6
+                while (j < code.length && /\s/.test(code[j])) j++
+                const content = extractJSXFromPosition(code, j)
+                if (content?.trim() && (content.trim().startsWith('<') || content.trim().startsWith('(')))
+                    candidates.push(content)
+                i = j + (content?.length || 0)
+                continue
+            }
+        }
+        i++
+    }
+    if (candidates.length > 0) {
+        const jsx = candidates.filter((c) => c.trim().startsWith('<') || c.trim().startsWith('('))
+        return jsx.length > 0 ? jsx.reduce((a, b) => (a.length > b.length ? a : b)) : candidates[candidates.length - 1]
+    }
+    return null
+}
+
+function findImplicitArrowReturn(code) {
+    const match = code.match(/=>\s*(\(?\s*<)/)
+    if (match) {
+        const beforeJsx = code.substring(code.indexOf(match[0]) + 2).trim()
+        if (beforeJsx.startsWith('(')) return extractParenContent(code, code.indexOf('(', code.indexOf('=>')))
+        return extractJSXFromPosition(code, code.indexOf(match[0]) + match[0].length - 1)
+    }
+    return null
+}
+
+function extractJSXFromPosition(code, startIndex) {
+    let i = startIndex
+    while (i < code.length && /\s/.test(code[i])) i++
+    if (i >= code.length) return null
+    if (code[i] === '(') return extractParenContent(code, i)
+    if (code[i] === '<') return extractJSXElement(code, i)
+    return null
+}
+
+function extractParenContent(code, startIndex) {
+    let depth = 0,
+        content = '',
+        i = startIndex,
+        started = false
+    while (i < code.length) {
+        if (code[i] === '(') {
+            depth++
+            if (started) content += code[i]
+            started = true
+        } else if (code[i] === ')') {
+            depth--
+            if (depth === 0) return content.trim()
+            content += code[i]
+        } else if (started) content += code[i]
+        i++
+    }
+    return content.trim()
+}
+
+function extractJSXElement(code, startIndex) {
+    let i = startIndex,
+        result = '',
+        depth = 0,
+        inString = false,
+        stringChar = '',
+        inExpr = 0
+    while (i < code.length) {
+        const char = code[i],
+            next = code[i + 1] || ''
+        if ((char === '"' || char === "'" || char === '`') && inExpr === 0) {
+            if (!inString) {
+                inString = true
+                stringChar = char
+            } else if (char === stringChar && code[i - 1] !== '\\') inString = false
+            result += char
+            i++
+            continue
+        }
+        if (char === '{' && !inString) {
+            inExpr++
+            result += char
+            i++
+            continue
+        }
+        if (char === '}' && !inString) {
+            inExpr--
+            result += char
+            i++
+            continue
+        }
+        if (!inString && inExpr === 0) {
+            if (char === '<') {
+                if (next === '/') {
+                    result += char
+                    i++
+                    while (i < code.length && code[i] !== '>') {
+                        result += code[i]
+                        i++
+                    }
+                    if (i < code.length) {
+                        result += '>'
+                        depth--
+                        i++
+                        if (depth === 0) return result
+                    }
+                    continue
+                } else if (/[a-zA-Z]/.test(next) || next === '>') depth++
+            }
+            if (char === '/' && next === '>') {
+                depth--
+                result += '/>'
+                i += 2
+                if (depth === 0) return result
+                continue
+            }
+            if (char === '>' && result.length > 0) {
+                result += char
+                i++
+                continue
+            }
+        }
+        result += char
+        i++
+    }
+    return result
 }

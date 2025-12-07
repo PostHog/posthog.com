@@ -3,6 +3,7 @@ import fs from 'fs'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference'
 import { getLanguageFromSdkId } from '../src/components/SdkReferences/utils'
 import { resolveJsxSnippets } from './snippetUtils'
+import { stripFrontmatter } from './utils'
 
 // Function to generate raw markdown files
 export const generateRawMarkdownPages = async (pages) => {
@@ -41,13 +42,15 @@ export const generateRawMarkdownPages = async (pages) => {
                 body = resolveJsxSnippets(body, fileAbsolutePath, slug)
             }
 
-            // Create the frontmatter, so it always has the page title
-            let markdownContent = `---\ntitle: ${title}\nslug: ${slug}\n---\n`
+            // Strip frontmatter from body and use H1 title instead
+            let markdownContent = title ? `# ${title}\n\n` : ''
 
-            // Add the content
+            // Add the content (strip frontmatter first)
             if (body) {
+                let processedBody = stripFrontmatter(body)
+
                 // Process internal links to point to .md equivalents
-                let processedBody = body.replace(/\[([^\]]+)\]\(\/([^)]+)\)/g, (match, text, path) => {
+                processedBody = processedBody.replace(/\[([^\]]+)\]\(\/([^)]+)\)/g, (match, text, path) => {
                     // Only convert if the path doesn't already end with .md
                     if (!path.endsWith('.md')) {
                         return `[${text}](/${path}.md)`
