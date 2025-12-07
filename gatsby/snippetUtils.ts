@@ -700,7 +700,7 @@ const resolveJsxTsxImports = (
 }
 
 const resolveMdxComponentUsages = (content: string, baseFilePath: string): string => {
-    const mdxImportRegex = /^import\s+(\w+)\s+from\s+['"]([^'"]*\/_snippets\/[^'"]*\.mdx)['"]\s*;?\s*$/gm
+    const mdxImportRegex = /^import\s+(\w+)\s+from\s+['"]([^'"]*_snippets\/[^'"]*\.mdx)['"]\s*;?\s*$/gm
     const imports: Array<{ name: string; path: string; fullMatch: string }> = []
 
     let match
@@ -753,7 +753,17 @@ export function resolveJsxSnippets(content: string, filePath: string, slug?: str
 
         resolved = stripImports(resolved)
         resolved = stripFrontmatter(resolved)
-        resolved = prettier.format(resolved, { parser: 'babel', printWidth: 120, tabWidth: 2 })
+
+        // Only format with prettier if content looks like JSX (not markdown)
+        const trimmed = resolved.trim()
+        if (trimmed.startsWith('<') || trimmed.startsWith('(')) {
+            try {
+                resolved = prettier.format(resolved, { parser: 'babel', printWidth: 120, tabWidth: 2 })
+            } catch {
+                // Ignore prettier errors, return unformatted
+            }
+        }
+
         return normalizeEmptyLines(resolved)
     } catch (error) {
         console.error(`❌ Error resolving JSX snippets for ${slug || filePath}:`, error)
@@ -766,6 +776,9 @@ export function resolveJsxSnippets(content: string, filePath: string, slug?: str
 function extractJSXReturn(code) {
     const cleaned = removeComments(code)
     const returnContent = findReturnContent(cleaned)
+    if (!returnContent) {
+        return code
+    }
     return returnContent
 }
 
