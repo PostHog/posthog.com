@@ -1,6 +1,6 @@
 import { OSInput, OSSelect } from 'components/OSForm'
 import { Checkbox } from 'components/RadixUI/Checkbox'
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Image from './Image'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useMediaLibrary } from 'hooks/useMediaLibrary'
@@ -17,16 +17,21 @@ export default function MediaLibrary({ mediaUploading }: { mediaUploading: numbe
     const [debouncedSearch, setDebouncedSearch] = useState('')
     const [tags, setTags] = useState<{ id: string; attributes: { label: string } }[]>([])
 
-    const debouncedSetSearch = useCallback(
-        debounce((value: string) => {
-            setDebouncedSearch(value)
-        }, 500),
+    const debouncedSetSearch = useMemo(
+        () =>
+            debounce((value: string) => {
+                setDebouncedSearch(value)
+            }, 500),
         []
     )
 
     useEffect(() => {
         debouncedSetSearch(search)
     }, [search, debouncedSetSearch])
+
+    useEffect(() => {
+        return () => debouncedSetSearch.cancel()
+    }, [debouncedSetSearch])
 
     const { images, isLoading, hasMore, fetchMore } = useMediaLibrary({
         showAll,
