@@ -55,11 +55,19 @@ export const useMediaLibrary = (options?: UseMediaLibraryOptions) => {
         (offset) => (showAll ? `${process.env.GATSBY_SQUEAK_API_HOST}/api/upload/all?${query(offset, options)}` : null),
         async (url: string) => {
             const jwt = await getJwt()
-            return fetch(url, {
+            const response = await fetch(url, {
                 headers: {
                     Authorization: `Bearer ${jwt}`,
                 },
-            }).then((r) => r.json())
+            })
+
+            if (!response.ok) {
+                const body = await response.json().catch(() => null)
+                const message = body?.error?.message || `Request failed with status ${response.status}`
+                throw new Error(message)
+            }
+
+            return response.json()
         },
         {
             revalidateOnFocus: options?.revalidateOnFocus ?? false,
