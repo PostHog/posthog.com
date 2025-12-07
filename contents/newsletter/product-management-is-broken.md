@@ -115,7 +115,7 @@ Now, the outcome of our quarterly planning sessions is a list of things teams ar
 
 2. **Engineers brainstorm what they should build to achieve them**. If needed, they ask for advice or guidance from the exec team, but it’s ultimately up to engineers to decide what they build.
 
-3. **Product teams meet to decide goals**. The output will be a list of things they want to build, and who is owning them. Here’s an example from our product analytics team’s Q4 objectives:
+3. **Product teams meet to decide goals**. The output will be a list of things they want to build, and who is owning them. Here’s an example from our <SmallTeam slug="product-analytics" />’s Q4 objectives:
 
 ![Example of product analytics team's Q4 objectives](https://res.cloudinary.com/dmukukwp6/image/upload/d36eb308_0253_46b1_919e_cf0270cbf02d_1584x1818_b0379e47e4.png)
 
@@ -175,7 +175,7 @@ It looks something like this:
 
 ![Design at PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/86068163_7f95_41cf_9028_5eb4aa799db9_1295x1040_9247e766ee.webp)
 
-We also have a [design system](https://storybook.posthog.net/?path=/story/exporter-exporter--trends-bar-breakdown-insight) to help engineers self-serve their design needs and move faster.
+We also have a [design system](https://storybook.dev.posthog.dev/?path=/story/exporter-exporter--trends-bar-breakdown-insight) to help engineers self-serve their design needs and move faster.
 
 ### b. Radically transparent communication
 

@@ -20,6 +20,7 @@ export default function CreatableMultiSelect({
     allowCreate = true,
     onCreate,
     hideLabel = false,
+    required = true,
 }: {
     label: string
     placeholder?: string
@@ -33,6 +34,7 @@ export default function CreatableMultiSelect({
     allowCreate?: boolean
     hideLabel?: boolean
     onCreate?: (value: string) => void
+    required?: boolean
 }): JSX.Element {
     const [query, setQuery] = React.useState('')
     const [focused, setFocused] = React.useState(false)
@@ -113,7 +115,7 @@ export default function CreatableMultiSelect({
                     <label className="text-[15px]">
                         <span>
                             {label}
-                            <span className="text-red dark:text-yellow ml-0.5">*</span>
+                            {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
                         </span>
                     </label>
                     {description && <p className="text-sm text-secondary m-0 mt-0.5">{description}</p>}

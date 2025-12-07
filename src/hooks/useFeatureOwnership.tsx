@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import TeamMember from '../components/TeamMember'
 import { PrivateLink } from '../components/PrivateLink'
+import SmallTeam from 'components/SmallTeam'
 
 export interface Feature {
     slug: string
@@ -114,6 +115,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Dashboards',
         owner: ['product-analytics', 'analytics-platform'],
     },
+    'dashboard-templates': {
+        feature: 'Dashboard templates',
+        owner: ['analytics-platform'],
+    },
     'data-colors-themes': {
         feature: 'Data colors & themes',
         owner: ['analytics-platform'],
@@ -215,6 +220,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     onboarding: {
         feature: 'Onboarding',
         owner: ['growth'],
+    },
+    'organization-management-deletion': {
+        feature: 'Organization Management & Deletion',
+        owner: ['platform-features'],
     },
     'path-cleaning': {
         feature: 'Path cleaning',
@@ -334,11 +343,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
             <>
                 Shared responsibility with the relevant small team for feature-owned areas.
                 <br />
-                <br /> Start with the{' '}
-                <a href="https://github.com/orgs/PostHog/teams/team-mobile" target="_blank" rel="noopener noreferrer">
-                    Mobile team
-                </a>{' '}
-                for triage, loop in
+                <br /> Start with the <SmallTeam slug="mobile" /> for triage, loop in
                 <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink> as
                 needed.
             </>
@@ -369,6 +374,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Session analytics',
         owner: ['web-analytics'],
         label: 'feature/sessions',
+    },
+    'session-explorer': {
+        feature: 'Session explorer',
+        owner: ['web-analytics'],
+        label: 'feature/session-explorer',
     },
     settings: {
         feature: 'Settings structure (personal & project)',
@@ -439,7 +449,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     wizard: {
         feature: 'Wizard',
-        owner: ['content'],
+        owner: ['docs-wizard'],
     },
 }
 

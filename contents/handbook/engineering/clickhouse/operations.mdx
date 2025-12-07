@@ -71,6 +71,17 @@ be useful to grant read-only access to some users or otherwise limit resource us
 Read more in documentation:
 - [Settings Profiles](https://clickhouse.com/docs/en/operations/settings/settings-profiles)
 - [Settings](https://clickhouse.com/docs/en/operations/settings/settings/)
+- [Creating Clickhouse users, roles and profiles runbook](https://runbooks.posthog.com/clickhouse/users-roles).
+
+### Querying ClickHouse from the app
+
+While not currently the case, all PostHog products and features that query ClickHouse _should_ use a specific ClickHouse user for the use case.
+We have a bunch of product-specific ClickHouse users that are specified when running a query with the ClickHouse client. For example, see [this](https://github.com/PostHog/posthog/blob/d06b55a764704ed3e60594981a40c19bb8f7f05c/posthog/models/cohort/util.py#L635).
+
+When developing a new product or feature, using a dedicated ClickHouse user is important for multiple reasons:
+- we need to be able to monitor different workloads and see what queries are potentially hurting our ClickHouse clusters
+- we should be able to set appropriate resource constraints for different products and avoid hurting other products' performance by cheekily using a random user that already exists
+- we should be able to scope privileges on the ClickHouse user to what it really needs, limiting the blast radius of a compromised credential
 
 ## Mutations
 
@@ -346,6 +357,6 @@ Having established this problem, the way to fix it is as follows:
 
 More information for ClickHouse operations can be found in:
 - [Altinity knowledgebase](https://kb.altinity.com/)
-- [Tinybird knowledgebase](https://www.tinybird.co/clickhouse/knowledge-base/)
+- [Tinybird knowledgebase](https://github.com/tinybirdco/clickhouse_knowledge_base)
 
 Next in the ClickHouse manual: [Schema case studies](/handbook/engineering/clickhouse/schema)

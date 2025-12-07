@@ -35,7 +35,7 @@ PostHog logs works with any OpenTelemetry-compatible client. You don't need any 
 <Tab.Panel>
 
 ```bash
-npm install @opentelemetry/sdk-node @opentelemetry/exporter-logs-otlp-http @opentelemetry/api-logs
+npm install @opentelemetry/sdk-node @opentelemetry/exporter-logs-otlp-http @opentelemetry/api-logs @opentelemetry/resources
 ```
 
 </Tab.Panel>
@@ -126,10 +126,14 @@ Set up the OpenTelemetry SDK to send logs to PostHog.
 ```javascript
 import { NodeSDK } from '@opentelemetry/sdk-node';
 import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-http';
-import { SimpleLogRecordProcessor } from '@opentelemetry/sdk-logs';
+import { BatchLogRecordProcessor } from '@opentelemetry/sdk-logs';
+import { resourceFromAttributes } from '@opentelemetry/resources';
 
 const sdk = new NodeSDK({
-  logRecordProcessor: new SimpleLogRecordProcessor(
+  resource: resourceFromAttributes({
+    'service.name': 'my-node-service',
+  }),
+  logRecordProcessor: new BatchLogRecordProcessor(
     new OTLPLogExporter({
       url: 'https://us.i.posthog.com/i/v1/logs',
       headers: {
@@ -146,7 +150,7 @@ Alternatively, you can pass the token as a query parameter:
 
 ```javascript
 const sdk = new NodeSDK({
-  logRecordProcessor: new SimpleLogRecordProcessor(
+  logRecordProcessor: new BatchLogRecordProcessor(
     new OTLPLogExporter({
       url: `https://us.i.posthog.com/i/v1/logs?token=${YOUR_PROJECT_TOKEN}`
     })
@@ -312,10 +316,10 @@ import { logs } from '@opentelemetry/api-logs';
 
 const logger = logs.getLogger('my-app');
 
-// Log with different levels
-logger.info('User action', { userId: '123', action: 'login' });
-logger.warn('Deprecated API used', { endpoint: '/old-api' });
-logger.error('Database connection failed', { error: 'Connection timeout' });
+// Log with different levels and attributes
+logger.emit({ severityText: 'trace', body: 'log data', attributes: {'my_attribute': 'stringValue'} });
+logger.emit({ severityText: 'warn', body: 'log data', attributes: {'warning_count': 3} });
+logger.emit({ severityText: 'error', body: 'log data', attributes: {'json_attribute': [1,2,3]} });
 ```
 
 </Tab.Panel>

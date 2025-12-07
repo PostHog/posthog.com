@@ -1,0 +1,50 @@
+---
+title: Allow PostHog AI access
+---
+
+You can pop PostHog AI open wherever you are in PostHog. Click on the [PostHog AI](https://app.posthog.com/#panel=max) icon in the right-hand sidebar of the app to open the chat.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/us_posthog_com_project_2_ai_3_58e32c5eaf.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/us_posthog_com_project_2_ai_2_16416a4436.png"
+    alt="Open PostHog AI in the right-hand sidebar"
+    classes="rounded max-h-[480px]"
+/>
+
+<Caption>
+PostHog AI chat is always available in the sidebar
+</Caption>
+
+## Allow access 
+
+In order to use PostHog AI, you need to grant access to your project. This action requires [admin permissions](/docs/settings/access-control) for your organization.
+
+Because PostHog AI features use third-party LLM providers, we require organizations to opt in with admin approval. In most cases, this is just a formality, but we've made it explicit as we take data governance seriously.
+
+There are two ways to grant PostHog AI access to your project as an organization admin.
+
+### Option 1: PostHog AI chat
+
+The very first time you enter a prompt in the chat, PostHog AI will ask you to grant it access to your project. As an admin, you can enable it directly within the chat. 
+
+<ProductVideo
+  videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/allow_posthog_ai_a148e2f744.mp4" 
+  alt="Allow PostHog AI access" 
+  classes="rounded"
+  autoPlay={true}
+/>
+
+### Option 2: Organization settings
+
+Alternatively, you can enable PostHog AI in your [organization settings](https://app.posthog.com/settings/organization-details#organization-ai-consent).
+
+1. Go to **Settings** > **Organization** > **General**
+2. Find the **PostHog AI data analysis** section
+3. Toggle the switch to "on"
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20251107_nmhv_aafc81cdbb.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20251107_nmkd_ad9d7dbe15.png"
+    alt="PostHog AI settings"
+    classes="rounded"
+/>
