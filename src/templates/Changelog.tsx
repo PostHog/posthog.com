@@ -495,7 +495,7 @@ const Roadmap = ({
                 exit={{ x: width }}
                 transition={{ duration: isResizing || !!initialActiveRoadmap ? 0 : 0.3, ease: 'easeInOut' }}
             >
-                <div className="flex justify-between space-x-2 p-4 border-b border-primary">
+                <div className="flex justify-between space-x-2 px-4 pt-4 pb-3.5 border-b border-primary">
                     <div className="flex-1">
                         <h4 className="m-0 text-lg leading-tight">{roadmap.title}</h4>
                         <p className="m-0 opacity-50 text-sm mt-1">{dayjs.utc(roadmap.date).format('MMMM D, YYYY')}</p>
@@ -592,7 +592,7 @@ const Roadmap = ({
                 </div>
 
                 {roadmap.githubPRMetadata && (
-                    <div className="px-4 py-4 grid grid-cols-3 gap-x-3 gap-y-2 text-sm bg-primary border-t border-primary">
+                    <div className="px-4 pb-4 pt-4.5 grid grid-cols-3 gap-x-3 gap-y-2 text-sm bg-primary border-t border-primary">
                         <GitHubPRInfo roadmap={roadmap} />
                     </div>
                 )}
