@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import Link from 'components/Link'
-import { IconCheck, IconX, IconArrowRight, IconRevert } from '@posthog/icons'
+import { IconCheck, IconArrowRight, IconRevert } from '@posthog/icons'
+import OSButton from 'components/OSButton'
 
 interface Answer {
-    managed?: string
     platform?: string
     framework?: string
     server?: string
@@ -18,7 +17,6 @@ interface Recommendation {
 interface Option {
     value: string
     label: string
-    icon?: React.FC<{ className?: string }>
 }
 
 interface Question {
@@ -30,14 +28,6 @@ interface Question {
 }
 
 const getRecommendation = (answers: Answer): Recommendation => {
-    if (answers.managed === 'yes') {
-        return {
-            method: 'Managed reverse proxy',
-            path: '/docs/advanced/proxy/',
-            reason: "PostHog's managed proxy requires zero maintenance, handles SSL automatically, and stays up-to-date without any work on your part.",
-        }
-    }
-
     if (answers.platform === 'vercel') {
         if (answers.framework === 'nextjs') {
             return {
@@ -149,19 +139,9 @@ const getRecommendation = (answers: Answer): Recommendation => {
 
 const questions: Question[] = [
     {
-        id: 'managed',
-        question: 'Do you want a managed solution?',
-        description: 'PostHog offers a managed reverse proxy as a product add-on with zero maintenance.',
-        options: [
-            { value: 'yes', label: 'Yes, managed', icon: IconCheck },
-            { value: 'no', label: 'No, self-hosted', icon: IconX },
-        ],
-    },
-    {
         id: 'platform',
         question: 'Where are you deploying?',
         description: 'Select your hosting platform or deployment target.',
-        condition: (answers) => answers.managed === 'no',
         options: [
             { value: 'vercel', label: 'Vercel' },
             { value: 'netlify', label: 'Netlify' },
@@ -177,8 +157,7 @@ const questions: Question[] = [
         question: 'What framework are you using?',
         description: 'Some frameworks have built-in proxy capabilities.',
         condition: (answers) =>
-            answers.managed === 'no' &&
-            (answers.platform === 'vercel' || answers.platform === 'netlify' || answers.platform === 'other'),
+            answers.platform === 'vercel' || answers.platform === 'netlify' || answers.platform === 'other',
         options: [
             { value: 'nextjs', label: 'Next.js' },
             { value: 'nuxt', label: 'Nuxt' },
@@ -244,30 +223,34 @@ const ProxyDecisionTree: React.FC = () => {
 
     if (recommendation) {
         return (
-            <div className="border border-light dark:border-dark rounded-md p-5 bg-accent dark:bg-accent-dark my-4">
+            <div className="border border-primary rounded-md p-5 bg-accent my-4">
                 <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-green/20 flex items-center justify-center flex-shrink-0">
-                        <IconCheck className="w-5 h-5 text-green" />
+                    <div className="w-10 h-10 rounded-full bg-green flex items-center justify-center flex-shrink-0">
+                        <IconCheck className="w-5 h-5 text-white" />
                     </div>
                     <div className="flex-1">
                         <h4 className="text-lg font-bold m-0 mb-2">We recommend: {recommendation.method}</h4>
                         <p className="text-[15px] opacity-75 m-0 mb-4">{recommendation.reason}</p>
 
                         <div className="flex flex-wrap gap-2">
-                            <Link
+                            <OSButton
+                                asLink
                                 to={recommendation.path}
-                                className="inline-flex items-center gap-1.5 bg-orange text-primary dark:text-primary font-semibold px-4 py-2 rounded-md text-sm hover:opacity-90 transition-opacity"
+                                variant="primary"
+                                size="md"
+                                icon={<IconArrowRight className="w-4 h-4" />}
+                                iconPosition="right"
                             >
                                 Follow the guide
-                                <IconArrowRight className="w-4 h-4" />
-                            </Link>
-                            <button
+                            </OSButton>
+                            <OSButton
                                 onClick={reset}
-                                className="inline-flex items-center gap-1.5 border border-light dark:border-dark hover:bg-light dark:hover:bg-dark px-4 py-2 rounded-md font-semibold text-sm transition-colors"
+                                variant="secondary"
+                                size="md"
+                                icon={<IconRevert className="w-4 h-4" />}
                             >
-                                <IconRevert className="w-4 h-4" />
                                 Start over
-                            </button>
+                            </OSButton>
                         </div>
                     </div>
                 </div>
@@ -278,36 +261,37 @@ const ProxyDecisionTree: React.FC = () => {
     if (!currentQuestion) return null
 
     return (
-        <div className="border border-light dark:border-dark rounded-md p-5 bg-accent dark:bg-accent-dark my-4">
+        <div className="border border-primary rounded-md p-5 bg-accent my-4">
+            {step > 0 && (
+                <OSButton
+                    onClick={() => setStep(step - 1)}
+                    variant="default"
+                    size="sm"
+                    className="mb-3 opacity-60 hover:opacity-100"
+                >
+                    ← Back
+                </OSButton>
+            )}
+
             <div className="mb-4">
                 <h4 className="text-lg font-bold m-0">{currentQuestion.question}</h4>
                 <p className="text-[15px] opacity-75 m-0 mt-1">{currentQuestion.description}</p>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-2">
-                {currentQuestion.options.map((option) => {
-                    const Icon = option.icon
-                    return (
-                        <button
-                            key={option.value}
-                            onClick={() => handleAnswer(currentQuestion.id, option.value)}
-                            className="flex items-center gap-2 p-3 border-2 border-light dark:border-dark hover:border-orange dark:hover:border-orange rounded-md transition-colors text-left bg-white dark:bg-dark"
-                        >
-                            {Icon && <Icon className="w-5 h-5 flex-shrink-0 opacity-60" />}
-                            <span className="font-semibold text-sm">{option.label}</span>
-                        </button>
-                    )
-                })}
+                {currentQuestion.options.map((option) => (
+                    <OSButton
+                        key={option.value}
+                        onClick={() => handleAnswer(currentQuestion.id, option.value)}
+                        variant="secondary"
+                        size="md"
+                        width="full"
+                        align="left"
+                    >
+                        {option.label}
+                    </OSButton>
+                ))}
             </div>
-
-            {step > 0 && (
-                <button
-                    onClick={() => setStep(step - 1)}
-                    className="mt-3 text-sm opacity-60 hover:opacity-100 transition-opacity"
-                >
-                    ← Back
-                </button>
-            )}
         </div>
     )
 }
