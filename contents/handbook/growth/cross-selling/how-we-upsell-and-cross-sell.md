@@ -56,7 +56,7 @@ Here is a general checklist that should be met before putting a plan to cross-se
 * Provide trial access for evaluation  
 * Share relevant case studies and documentation  
 * Set clear success criteria before expansion 
-* Optimize their implmentation before introducing new things 
+* Optimize their implementation before introducing new things 
 * Follow up on product experiments, even small ones
 
 Generally, this is all to provide them with a solution that will make their life better (and make them look better!). It’s a win-win.
