@@ -80,7 +80,7 @@ Good product engineers need to:
 - Be flexible about exact implementation.
 - Thrive in fast-paced environments.
 
-If that [sounds like fun](/blog/why-product-engineering-is-so-fun), then [product engineering](https://posthog.com/newsletter/finding-a-job-product-engineer) might be for you. 
+If that [sounds like fun](/blog/why-product-engineering-is-so-fun), then [product engineering](/newsletter/finding-a-job-product-engineer) might be for you. 
 
 If, however, you want to focus on solving difficult technical problems and optimizing existing technologies and processes, then more traditional software engineering roles are a better choice.
 
