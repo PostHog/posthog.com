@@ -6,14 +6,14 @@ import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { Caption } from 'components/Caption'
-import Beta from '../../../../contents/docs/logs/_snippets/beta.mdx'
+import LogsBeta from '../../../../contents/docs/logs/_snippets/logs-beta.mdx'
 
 export const Content = () => {
     return (
         <>
             <section className="mb-8">
                 <h2 className="mb-4">Overview</h2>
-                <Beta />
+                <LogsBeta />
                 <div>
                     <p>
                         PostHog logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP).
