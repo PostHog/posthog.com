@@ -162,7 +162,7 @@ function Places(): JSX.Element {
                         </AnimatePresence>
 
                         <PlacesMap
-                            layers={selectedLayers.length > 0 ? selectedLayers : undefined}
+                            layers={selectedLayers}
                             onPlaceClick={handlePlaceClick}
                             selectedPlaceId={selectedPlace?.id || null}
                             onPlacesLoaded={handlePlacesLoaded}
