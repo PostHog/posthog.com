@@ -201,10 +201,21 @@ export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
                                     </div>
 
                                     <div className="mb-3">
-                                        <label className="text-[13px] text-secondary mb-1 block">Your review</label>
+                                        <label className="text-[13px] text-secondary mb-1 block">
+                                            Your review
+                                            <span className="text-[11px] text-muted ml-2">(⌘+Enter to submit)</span>
+                                        </label>
                                         <textarea
                                             value={reviewText}
                                             onChange={(e) => setReviewText(e.target.value)}
+                                            onKeyDown={(e) => {
+                                                if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+                                                    e.preventDefault()
+                                                    if (reviewText.trim() && !submitting) {
+                                                        handleSubmitReview()
+                                                    }
+                                                }
+                                            }}
                                             placeholder="Share your thoughts..."
                                             className="w-full border border-primary rounded px-3 py-2 bg-primary text-primary text-sm resize-none"
                                             rows={4}
