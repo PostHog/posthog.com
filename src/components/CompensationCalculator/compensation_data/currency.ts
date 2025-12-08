@@ -12,7 +12,6 @@ export const currencyData: Record<string, number> = {
     RON: 4.351,
     BRL: 5.571,
     EUR: 0.879,
-    BGN: 1.718,
     TRY: 13.321,
     NOK: 8.818,
     ZAR: 15.951,
