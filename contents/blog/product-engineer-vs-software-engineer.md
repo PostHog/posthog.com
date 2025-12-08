@@ -38,7 +38,7 @@ In contrast, software engineers "own" **the code they write**. They care more ab
 
 ## What are their priorities?
 
-The top priority of a product engineers is to solving users' problems.
+The top priority of a product engineer is to solve users' problems.
 
 They build fast, even from scratch if needed, and then iterate. The tradeoffs they consider go beyond technical constraints and include more holistic factors like the user experience, business deadlines, and product roadmap. In this way, they tend to be more pragmatic.
 
@@ -54,15 +54,15 @@ Product engineers talk to customers, dig into usage data, and research the compe
 
 Product engineering also tends to be more fast-paced, scrappy, and independent than software engineering. This is especially true as [AI coding tools](/newsletter/ai-coding-mistakes) are on the rise; product engineers can use LLMs to quickly move features from 0->1 without getting bogged down by implementation details. 
 
-Software engineers code too, of course, but they also spend lots of time designing, testing, and maintaining what they build. They look for ways to optimize systems, improve scalability, and solve bugs. They are deeply focused on specific areas of technology, whether those are databases, data pipelines, backend APIs, or client-side app frameworks.
+Software engineers code too (of course) but they also spend lots of time designing, testing, and maintaining what they build. They look for ways to optimize systems, improve scalability, and solve bugs. They are deeply focused on specific areas of technology, whether those are databases, data pipelines, backend APIs, or client-side app frameworks.
 
-Software engineering projects also [move slower](/newsletter/this-is-why-youre-not-shipping) because, as specialists, they must collaborate cross-functionally. A software engineering team might include a frontend engineer, backend engineer, tester, designer, and product manager. A product engineering team most often just includes product engineers.
+Software engineering projects also [move slower](/newsletter/this-is-why-youre-not-shipping) because, as specialists, they must collaborate cross-functionally. A software engineering team might include a frontend engineer, backend engineer, tester, designer, and product manager. A product engineering team usually includes just product engineers.
 
 ## Why is demand for product engineers growing?
 
 There's no single reason, but it's often simply because companies want to ship faster. Product engineers are popular among startups and early-stage companies for this reason, even if they don’t say it. Many software engineers at these companies behave like product engineers, even if it's not their job title.
 
-For example, Linear, the wildly popular modern project management tool, is built [almost entirely by product engineers](https://linear.app/now/how-we-run-projects-at-linear). Instead of hiring PMs, small teams of product engineers speak directly with customers and own product roadmaps. When the person talking to users is the same one writing the code, less time gets spent on handoff. Teams can also make product decisions on the spot since, when everyone is a developer, there's no need to cover what's technically feasible first.
+For example, Linear, the wildly popular modern project management tool, is built [almost entirely by product engineers](https://linear.app/now/how-we-run-projects-at-linear). Instead of hiring PMs, small teams of product engineers speak directly with customers and own product roadmaps. When the person talking to users is the same one writing the code, less time gets spent on handoff. Product engineering teams can also make product decisions on the spot since there's no need to cover what's technically feasible first.
 
 At larger companies, product engineers are less common, but they do exist. They're often seen as a way to drive innovation and inject urgency through smaller teams that have more freedom to ideate and execute independently. For example, at the time of writing, [Microsoft](https://microsoft.ai/careers/) is hiring for a team of "Product Engineers to help build the Copilot web experiences" – a high velocity project in a huge enterprise organization.
 
