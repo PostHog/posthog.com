@@ -12,7 +12,7 @@ const tabs = [
         content: null,
     },
     {
-        value: '/changelog/2025',
+        value: '/changelog',
         label: 'Changelog',
         content: null,
     },
