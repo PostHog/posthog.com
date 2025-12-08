@@ -26,7 +26,7 @@ This migration has 3 steps:
 
 2. [Migrate your events](#migrate-your-events). This also creates the necessary person, person distinct ID, and related records.
 
-3. [Switch tracking in your product](#switching-tracking-in-you-product) to set up replication from the old project if needed and to start sending events to the new project.
+3. [Switch tracking in your product](#switching-tracking-in-your-product) to set up replication from the old project if needed and to start sending events to the new project.
 
 ## Migrate your metadata
 
@@ -126,7 +126,7 @@ Now that we've migrated our events, the next step is to switch over tracking wit
 
 For custom transformations:
 
-1. Check if we already have a transform that does what you need (fastest option). You can see the list of transformations [here](/docs/cdp).
+1. Check if we already have a transform that does what you need (fastest option). You can see the list of transformations in the [CDP overview](/docs/cdp).
 
 2. Move this logic to your app before you send the event (also fast).
 
@@ -134,7 +134,7 @@ For custom transformations:
 
 For custom destinations:
 
-1. Check to see if we already have a destination or batch export that does what you need (fastest option). You can see the list of destinations and batch exports [here](/docs/cdp).
+1. Check to see if we already have a destination or batch export that does what you need (fastest option). You can see the list of destinations and batch exports in the [CDP overview](/docs/cdp).
 
 2. Convert your app to work as a webhook (also fast). These are currently in beta. See the [details here](https://github.com/PostHog/posthog/issues/16976).
 
