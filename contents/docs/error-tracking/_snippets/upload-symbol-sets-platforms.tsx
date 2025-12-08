@@ -1,7 +1,7 @@
 import React from 'react'
 import List from 'components/List'
 
-const UploadSourceMapPlatforms = () => {
+const UploadSymbolSetsPlatforms = () => {
     const platforms = [
         {
             label: 'Web',
@@ -39,6 +39,11 @@ const UploadSourceMapPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg',
         },
         {
+            label: 'Android',
+            url: '/docs/error-tracking/upload-mappings/android',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg',
+        },
+        {
             label: 'CLI',
             url: '/docs/error-tracking/upload-source-maps/cli',
             icon: 'IconCode',
@@ -52,4 +57,4 @@ const UploadSourceMapPlatforms = () => {
 
     return <List className="grid sm:grid-cols-2 mb-4" items={platforms} />
 }
-export default UploadSourceMapPlatforms
+export default UploadSymbolSetsPlatforms
