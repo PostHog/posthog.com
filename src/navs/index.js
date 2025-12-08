@@ -1242,11 +1242,11 @@ export const handbookSidebar = [
                 url: '/handbook/support/customer-support',
             },
             {
-                name: 'Incidents & maintenance',
-                url: '/handbook/engineering/operations/incidents#customer-communications',
+                name: 'Support team incident response',
+                url: '/handbook/support/support-incident-response',
             },
             {
-                name: 'Internal processes',
+                name: 'How we work',
                 url: '',
                 children: [
                     {
@@ -2740,8 +2740,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Reverse proxy',
-                    url: '/docs/advanced/proxy/managed-reverse-proxy',
+                    url: '/docs/advanced/proxy',
                     children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/advanced/proxy',
+                        },
                         {
                             name: 'Managed reverse proxy',
                             url: '/docs/advanced/proxy/managed-reverse-proxy',
@@ -2767,11 +2771,11 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/netlify',
                         },
                         {
-                            name: 'Next.js',
+                            name: 'Next.js rewrites',
                             url: '/docs/advanced/proxy/nextjs',
                         },
                         {
-                            name: 'Next.js middleware',
+                            name: 'Next.js proxy file',
                             url: '/docs/advanced/proxy/nextjs-middleware',
                         },
                         {
@@ -2805,6 +2809,10 @@ export const docsMenu = {
                         {
                             name: 'Vercel',
                             url: '/docs/advanced/proxy/vercel',
+                        },
+                        {
+                            name: 'Reference',
+                            url: '/docs/advanced/proxy/proxy-reference',
                         },
                     ],
                 },
@@ -4228,6 +4236,14 @@ export const docsMenu = {
                         {
                             name: 'Tiktok Ads',
                             url: '/docs/data-warehouse/sources/tiktok-ads',
+                        },
+                        {
+                            name: 'Shopify',
+                            url: '/docs/data-warehouse/sources/shopify',
+                        },
+                        {
+                            name: 'Supabase',
+                            url: '/tutorials/supabase-query',
                         },
                         {
                             name: 'Google Sheets',
