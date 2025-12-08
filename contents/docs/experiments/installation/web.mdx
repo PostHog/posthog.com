@@ -41,7 +41,7 @@ Once PostHog is initialized, you should be able to capture events. For your expe
 
 For this tutorial, let's capture a conversion event on a `<button id="cta">` click. 
 
-```js-web
+```js-web edit
 <button id="cta">Click me</button>
 
 <script>
@@ -75,7 +75,7 @@ For this tutorial, let's capture a conversion event on a `<button id="cta">` cli
 
 Use the PostHog SDK to call the experiment flag and change the `<button id="cta">` text based on the assigned variant. 
 
-```js-web
+```js-web edit
 // Ensure flags are loaded before usage.
 // You only need to call this on the code the first time a user visits.
 // See this doc for more details: /docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage

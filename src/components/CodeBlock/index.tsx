@@ -40,6 +40,8 @@ type CodeBlockProps = {
     currentLanguage: LanguageOption
     children: LanguageOption[]
     lineNumberStart?: number
+    edit?: boolean
+    onCodeChange?: (code: string) => void
 }
 
 type SingleCodeBlockProps = {
@@ -50,12 +52,16 @@ type SingleCodeBlockProps = {
     showAskAI?: boolean
     language: string
     children: string
+    edit?: boolean
+    onCodeChange?: (code: string) => void
 }
 
 type MdxCodeBlock = {
     selector?: 'dropdown' | 'tabs'
     showTitle?: boolean
     showCopy?: boolean
+    edit?: boolean
+    onCodeChange?: (code: string) => void
     children: MdxCodeBlockChildren[] | MdxCodeBlockChildren
 }
 
@@ -68,6 +74,7 @@ type MetaStringProps = {
     unavailable?: boolean
     focusOnLines?: string
     runInPostHog?: string
+    edit?: boolean
 }
 
 type MdxCodeBlockChildren = {
@@ -91,6 +98,11 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock): JSX.Element 
         return <Mermaid>{children.props.children}</Mermaid>
     }
     const childArray = Array.isArray(children) ? children : [children]
+
+    // Extract edit prop from first child
+    const firstChild = childArray.find((child) => child.props.mdxType === 'pre' || child.props.mdxType === 'code')
+    const firstChildProps = firstChild?.props.mdxType === 'code' ? firstChild?.props : firstChild?.props.children.props
+    const edit = firstChildProps?.edit
 
     const languages = childArray
         .filter((child) => child.props.mdxType === 'pre' || child.props.mdxType === 'code')
@@ -124,7 +136,7 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock): JSX.Element 
 
     const [currentLanguage, setCurrentLanguage] = React.useState<LanguageOption>(languages[0])
     return (
-        <CodeBlock currentLanguage={currentLanguage} onChange={setCurrentLanguage} {...props}>
+        <CodeBlock currentLanguage={currentLanguage} onChange={setCurrentLanguage} edit={edit} {...props}>
             {languages}
         </CodeBlock>
     )
@@ -183,10 +195,57 @@ export const CodeBlock = ({
     onChange,
     lineNumberStart = 1,
     tooltips,
+    edit = false,
+    onCodeChange,
 }: CodeBlockProps): JSX.Element | null => {
     if (languages.length < 0 || !currentLanguage) {
         return null
     }
+
+    const [editedCode, setEditedCode] = React.useState(currentLanguage.code)
+    const originalCode = React.useRef(currentLanguage.code)
+    const textareaRef = React.useRef<HTMLTextAreaElement>(null)
+    const codeBlockRef = React.useRef<HTMLDivElement>(null)
+    const [isEditing, setIsEditing] = React.useState(false)
+
+    React.useEffect(() => {
+        setEditedCode(currentLanguage.code)
+        originalCode.current = currentLanguage.code
+    }, [currentLanguage.code])
+
+    React.useEffect(() => {
+        if (isEditing && textareaRef.current) {
+            textareaRef.current.focus()
+        }
+    }, [isEditing])
+
+    // Close editor when clicking outside the code block
+    React.useEffect(() => {
+        if (!isEditing) return
+
+        const handleClickOutside = (e: MouseEvent) => {
+            if (codeBlockRef.current && !codeBlockRef.current.contains(e.target as Node)) {
+                setIsEditing(false)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [isEditing])
+
+    const handleCodeChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const newCode = e.target.value
+        setEditedCode(newCode)
+        onCodeChange?.(newCode)
+    }
+
+    const handleReset = () => {
+        setEditedCode(originalCode.current)
+        onCodeChange?.(originalCode.current)
+    }
+
+    const hasChanges = edit && editedCode !== originalCode.current
+    const displayCode = edit ? editedCode : currentLanguage.code
 
     const codeBlockId = generateRandomHtmlId()
     const { siteSettings, openNewChat } = useApp()
@@ -238,7 +297,7 @@ export const CodeBlock = ({
     }
 
     const copyToClipboard = (): void => {
-        navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(currentLanguage.code)))
+        navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(displayCode)))
         setTooltipVisible(true)
         setTimeout(() => setTooltipVisible(false), 500)
     }
@@ -283,7 +342,7 @@ export const CodeBlock = ({
     }
 
     return (
-        <div className="code-block relative mt-2 mb-4 border border-primary rounded">
+        <div ref={codeBlockRef} className="code-block relative mt-2 mb-4 border border-primary rounded">
             {showLabel && (
                 <div className="bg-accent text-sm flex items-center w-full rounded-t">
                     {selector === 'tabs' && languages.length > 1 ? (
@@ -336,9 +395,31 @@ export const CodeBlock = ({
                     ) : null}
 
                     <div className="shrink-0 ml-auto flex items-center divide-x divide-border dark:divide-border-dark">
+                        {edit && !isEditing && (
+                            <div className="relative flex items-center justify-center px-1">
+                                <button
+                                    onClick={() => setIsEditing(true)}
+                                    className="text-muted hover:text-secondary text-sm px-1 py-1 hover:bg-accent border border-transparent hover:border-primary rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                >
+                                    Edit
+                                </button>
+                            </div>
+                        )}
+
+                        {hasChanges && (
+                            <div className="relative flex items-center justify-center px-1">
+                                <button
+                                    onClick={handleReset}
+                                    className="text-muted hover:text-secondary text-sm px-1 py-1 hover:bg-accent border border-transparent hover:border-primary rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                >
+                                    Reset
+                                </button>
+                            </div>
+                        )}
+
                         {selector === 'dropdown' && languages.length > 1 ? (
                             <div className="relative mr-2">
-                                <Listbox value={currentLanguage} onChange={(language) => onChange(language)}>
+                                <Listbox value={currentLanguage} onChange={(language) => onChange?.(language)}>
                                     <Listbox.Button className="flex items-center space-x-1.5 text-gray">
                                         <span>
                                             {currentLanguage.label ||
@@ -370,7 +451,7 @@ export const CodeBlock = ({
                                     href={`${generateSQLEditorLink(currentLanguage.code)}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1 whitespace-nowrap text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                    className="inline-flex items-center gap-1 whitespace-nowrap text-muted hover:text-secondary px-1 py-1 hover:bg-accent border border-transparent hover:border-primary rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                 >
                                     Run in PostHog
                                     <IconArrowUpRight className="w-4 h-4" />
@@ -382,7 +463,7 @@ export const CodeBlock = ({
                             <div className="relative flex items-center justify-center px-1 group/askai">
                                 <button
                                     onClick={handleAskAboutCode}
-                                    className="ask-posthog-ai-code-snippet inline-flex items-center gap-1 text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                    className="ask-posthog-ai-code-snippet inline-flex items-center gap-1 text-muted hover:text-secondary px-1 py-1 hover:bg-accent border border-transparent hover:border-primary rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                 >
                                     <span className="hidden group-hover/askai:inline whitespace-nowrap text-sm">
                                         PostHog AI
@@ -396,7 +477,8 @@ export const CodeBlock = ({
                             <div className="relative flex items-center justify-center px-1">
                                 <button
                                     onClick={copyToClipboard}
-                                    className="text-muted hover:text-secondary px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                    onMouseDown={(e) => e.preventDefault()}
+                                    className="text-muted hover:text-secondary px-1 py-1 hover:bg-accent border border-transparent hover:border-primary rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                     title="Copy to clipboard"
                                 >
                                     <svg
@@ -435,7 +517,7 @@ export const CodeBlock = ({
 
             <Highlight
                 {...defaultProps}
-                code={replaceProjectInfo(currentLanguage.code.trim())}
+                code={replaceProjectInfo(displayCode.trim())}
                 language={(languageMap[currentLanguage.language]?.language || currentLanguage.language) as Language}
                 theme={websiteTheme === 'dark' ? darkTheme : lightTheme}
             >
@@ -496,97 +578,116 @@ export const CodeBlock = ({
                                 <code
                                     className={`not-prose block rounded-none !m-0 p-4 shrink-0 flex-1 font-code font-medium text-sm ${className}`}
                                 >
-                                    {!expanded && linesToShow.length > 0 && linesToShow[0] >= 0 && (
-                                        <div className="flex border-b border-dashed border-primary w-full mb-2 -mt-2">
-                                            <button
-                                                onClick={() => setExpanded(!expanded)}
-                                                className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
-                                            >
-                                                Show full example
-                                            </button>
-                                        </div>
-                                    )}
-                                    {tokens.map((line, i) => {
-                                        if (linesToShow.length > 0 && !linesToShow.includes(i) && !expanded) {
-                                            return
-                                        }
-                                        const { className, ...props } = getLineProps({ line, key: i })
-                                        const tooltipContent =
-                                            tooltips?.find((tooltip) => tooltip.lineNumber === i + lineNumberStart)
-                                                ?.content ||
-                                            line
-                                                .find((token) => token.content.startsWith(tooltipKey))
-                                                ?.content.replace(tooltipKey, '')
-                                        line.forEach((token) => {
-                                            if (token.content.includes(highlightKey)) {
-                                                token.content = token.content.replace(highlightKey, '')
-                                            }
-                                            if (token.content.includes(diffAddKey)) {
-                                                token.content = token.content.replace(diffAddKey, '')
-                                            }
-                                            if (token.content.includes(diffRemoveKey)) {
-                                                token.content = token.content.replace(diffRemoveKey, '')
-                                            }
-                                        })
+                                    {edit && isEditing ? (
+                                        <textarea
+                                            ref={textareaRef}
+                                            value={editedCode}
+                                            onChange={handleCodeChange}
+                                            className="w-full bg-transparent border-none outline-none resize-none font-code font-medium text-sm leading-relaxed text-primary"
+                                            style={{ minHeight: `${tokens.length * 1.5}em` }}
+                                            spellCheck={false}
+                                        />
+                                    ) : (
+                                        <>
+                                            {!expanded && linesToShow.length > 0 && linesToShow[0] >= 0 && (
+                                                <div className="flex border-b border-dashed border-primary w-full mb-2 -mt-2">
+                                                    <button
+                                                        onClick={() => setExpanded(!expanded)}
+                                                        className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                                    >
+                                                        Show full example
+                                                    </button>
+                                                </div>
+                                            )}
+                                            {tokens.map((line, i) => {
+                                                if (linesToShow.length > 0 && !linesToShow.includes(i) && !expanded) {
+                                                    return
+                                                }
+                                                const { className, ...props } = getLineProps({ line, key: i })
+                                                const tooltipContent =
+                                                    tooltips?.find(
+                                                        (tooltip) => tooltip.lineNumber === i + lineNumberStart
+                                                    )?.content ||
+                                                    line
+                                                        .find((token) => token.content.startsWith(tooltipKey))
+                                                        ?.content.replace(tooltipKey, '')
+                                                line.forEach((token) => {
+                                                    if (token.content.includes(highlightKey)) {
+                                                        token.content = token.content.replace(highlightKey, '')
+                                                    }
+                                                    if (token.content.includes(diffAddKey)) {
+                                                        token.content = token.content.replace(diffAddKey, '')
+                                                    }
+                                                    if (token.content.includes(diffRemoveKey)) {
+                                                        token.content = token.content.replace(diffRemoveKey, '')
+                                                    }
+                                                })
 
-                                        const firstContentIndex = line.findIndex((token) => !!token.content.trim())
-                                        return (
-                                            <div
-                                                key={i}
-                                                className={`${className} relative
+                                                const firstContentIndex = line.findIndex(
+                                                    (token) => !!token.content.trim()
+                                                )
+                                                return (
+                                                    <div
+                                                        key={i}
+                                                        className={`${className} relative
                                             ${highlightLineNumbers.includes(i) ? 'bg-yellow/10' : ''}
                                             ${diffAddLineNumbers.includes(i) ? 'bg-green/10' : ''}
                                             ${diffRemoveLineNumbers.includes(i) ? 'bg-red/10' : ''}
                                             `}
-                                                {...props}
-                                            >
-                                                {line
-                                                    .filter((token) => !token.content.startsWith(tooltipKey))
-                                                    .map((token, key) => {
-                                                        const { className, children, ...props } = getTokenProps({
-                                                            token,
-                                                            key,
-                                                        })
-                                                        return (
-                                                            <span className="relative" key={key}>
-                                                                {firstContentIndex === key && tooltipContent && (
-                                                                    <Tooltip
-                                                                        content={() => (
-                                                                            <div className="text-center max-w-[200px]">
-                                                                                {tooltipContent.trim()}
-                                                                            </div>
-                                                                        )}
-                                                                    >
-                                                                        <span className="absolute -left-1 -translate-x-full top-1/2 -translate-y-1/2 flex h-3 w-3">
-                                                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue/80 opacity-75"></span>
-                                                                            <span className="relative inline-flex rounded-full h-3 w-3 bg-blue"></span>
+                                                        {...props}
+                                                    >
+                                                        {line
+                                                            .filter((token) => !token.content.startsWith(tooltipKey))
+                                                            .map((token, key) => {
+                                                                const { className, children, ...props } = getTokenProps(
+                                                                    {
+                                                                        token,
+                                                                        key,
+                                                                    }
+                                                                )
+                                                                return (
+                                                                    <span className="relative" key={key}>
+                                                                        {firstContentIndex === key &&
+                                                                            tooltipContent && (
+                                                                                <Tooltip
+                                                                                    content={() => (
+                                                                                        <div className="text-center max-w-[200px]">
+                                                                                            {tooltipContent.trim()}
+                                                                                        </div>
+                                                                                    )}
+                                                                                >
+                                                                                    <span className="absolute -left-1 -translate-x-full top-1/2 -translate-y-1/2 flex h-3 w-3">
+                                                                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue/80 opacity-75"></span>
+                                                                                        <span className="relative inline-flex rounded-full h-3 w-3 bg-blue"></span>
+                                                                                    </span>
+                                                                                </Tooltip>
+                                                                            )}
+                                                                        <span
+                                                                            className={`${className} text-shadow-none `}
+                                                                            {...props}
+                                                                        >
+                                                                            {children}
                                                                         </span>
-                                                                    </Tooltip>
-                                                                )}
-                                                                <span
-                                                                    className={`${className} text-shadow-none `}
-                                                                    {...props}
-                                                                >
-                                                                    {children}
-                                                                </span>
-                                                            </span>
-                                                        )
-                                                    })}
-                                            </div>
-                                        )
-                                    })}
-                                    {!expanded &&
-                                        linesToShow.length > 0 &&
-                                        linesToShow[linesToShow.length - 1] <= tokens.length - 1 && (
-                                            <div className="flex border-t border-dashed border-primary w-full mt-2 -mb-2">
-                                                <button
-                                                    onClick={() => setExpanded(!expanded)}
-                                                    className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
-                                                >
-                                                    Show full example
-                                                </button>
-                                            </div>
-                                        )}
+                                                                    </span>
+                                                                )
+                                                            })}
+                                                    </div>
+                                                )
+                                            })}
+                                            {!expanded &&
+                                                linesToShow.length > 0 &&
+                                                linesToShow[linesToShow.length - 1] <= tokens.length - 1 && (
+                                                    <div className="flex border-t border-dashed border-primary w-full mt-2 -mb-2">
+                                                        <button
+                                                            onClick={() => setExpanded(!expanded)}
+                                                            className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                                        >
+                                                            Show full example
+                                                        </button>
+                                                    </div>
+                                                )}
+                                        </>
+                                    )}
                                 </code>
                             </div>
                         </ScrollArea>
