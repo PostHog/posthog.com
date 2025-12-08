@@ -1661,6 +1661,18 @@
         { "source": "/example-components", "destination": "/handbook/engineering/posthog-com/markdown" },
         { "source": "/handbook/content/components", "destination": "/handbook/engineering/posthog-com/markdown" },
         { "source": "/handbook/engineering/storybook", "destination": "/handbook/engineering/posthog-com/markdown" },
+        {
+            "source": "/handbook/growth/sales/cross-sell-motions",
+            "destination": "/handbook/growth/cross-selling/cross-sell-motions"
+        },
+        {
+            "source": "/handbook/cs-and-onboarding/error-tracking-cross-sell",
+            "destination": "/handbook/growth/cross-selling/error-tracking-cross-sell"
+        },
+        {
+            "source": "/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell",
+            "destination": "/handbook/growth/cross-selling/how-we-upsell-and-cross-sell"
+        },
         { "source": "/startups/[...slug]", "destination": "/startups" }
     ],
     "headers": [
