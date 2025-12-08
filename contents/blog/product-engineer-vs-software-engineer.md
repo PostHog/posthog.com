@@ -50,7 +50,7 @@ They look for the best solution to the problem in front of them, focus on best p
 
 Product engineers still spend the majority of their time coding, but they have responsibilities outside of coding that software engineers don't.
 
-Product engineers spend time talking to customers, digging into usage data, and researching the competitive landscape. They test other products, build prototypes, and brainstorm experiments to make their product better. They use this research to prioritize a roadmap that they own, and take responsibility for explaining the roadmap and gathering feedback from users and the company.
+Product engineers talk to customers, dig into usage data, and research the competitive landscape. They test other products, build prototypes, and brainstorm experiments to make their product better. They use this research to prioritize a roadmap that they own, and take responsibility for explaining the roadmap and gathering feedback from users and the company.
 
 Product engineering also tends to be more fast-paced, scrappy, and independent than software engineering. This is especially true as [AI coding tools](/newsletter/ai-coding-mistakes) are on the rise; product engineers can use LLMs to quickly move features from 0->1 without getting bogged down by implementation details. 
 
