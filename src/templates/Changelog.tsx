@@ -42,8 +42,22 @@ import { Heading } from 'components/Heading'
 import slugify from 'slugify'
 import { Video } from 'cloudinary-react'
 import { useLocation } from '@reach/router'
+import MediaPlayer from 'components/MediaPlayer'
 
 dayjs.extend(utc)
+
+const updateDescriptors = [
+    'mind-blowing',
+    'earth-shattering',
+    'game-changing',
+    'jaw-dropping',
+    'awe-inspiring',
+    'groundbreaking',
+    'revolutionary',
+    'show-stopping',
+    'spectacular',
+    'legendary',
+]
 
 type RoadmapNode = {
     id: number | string
@@ -644,6 +658,16 @@ interface RoadmapCardsProps {
     videos: ChangelogVideo[]
 }
 
+const ChangelogVideo = ({ videoId, title }: { videoId: string; title: string }) => {
+    const { appWindow } = useWindow()
+    const { setWindowTitle } = useApp()
+
+    useEffect(() => {
+        if (!appWindow) return
+        setWindowTitle(appWindow, title)
+    }, [])
+    return <MediaPlayer videoId={videoId} source="youtube" />
+}
 const RoadmapCards = ({
     startYear,
     endYear,
@@ -658,6 +682,7 @@ const RoadmapCards = ({
     initialActiveRoadmap,
     videos,
 }: RoadmapCardsProps) => {
+    const { addWindow } = useApp()
     // Two-week buckets need to preserve the same overall per-month width, so each card spans two former week widths.
     const width = 600
 
@@ -890,6 +915,35 @@ const RoadmapCards = ({
         }
     }, [])
 
+    const handlePlayVideo = (video: ChangelogVideo) => {
+        const size = {
+            width: 500,
+            height: 467,
+        }
+        const appSettings = {
+            size: {
+                min: size,
+                max: size,
+                autoHeight: true,
+            },
+        }
+        addWindow(
+            <ChangelogVideo
+                videoId={video.videoId}
+                title={video.title}
+                newWindow
+                location={{ pathname: `changelog-video-${video.videoId}` }}
+                key={`changelog-video-${video.videoId}`}
+                appSettings={appSettings}
+                position={{
+                    x: window.innerWidth - size.width - 20,
+                    y: window.innerHeight - size.height - 20,
+                }}
+                size={size}
+            />
+        )
+    }
+
     return (
         <ScrollArea className="size-full [&>div>div]:size-full [&>div>div]:!flex">
             <div className="h-full px-4">
@@ -916,7 +970,7 @@ const RoadmapCards = ({
                             ),
                         }))
                         const periodKey = `${periodData.year}-${periodData.month}-${periodData.period}`
-                        const periodVideos = videosByPeriod.get(periodKey) || []
+                        const periodVideo = videosByPeriod.get(periodKey)?.[0] || null
 
                         return (
                             <div
@@ -932,33 +986,41 @@ const RoadmapCards = ({
                                 }}
                             >
                                 <div className="w-full h-full flex flex-col bg-white dark:bg-dark rounded border border-primary overflow-hidden">
-                                    <div className="flex items-center justify-between p-4 border-b border-primary">
-                                        <h4 className="m-0 text-lg font-semibold">
-                                            {monthName} {periodData.year} - {periodLabel}
-                                        </h4>
-                                        <div className="size-7 flex items-center justify-center bg-accent rounded-full text-sm font-semibold">
-                                            {count}
+                                    <div className="flex items-center justify-between p-2 border-b border-primary gap-4">
+                                        <div className="pl-2">
+                                            <h4 className="m-0 text-lg font-semibold">
+                                                {monthName} {periodData.year} - {periodLabel}
+                                            </h4>
+                                            <p className="m-0 text-sm text-secondary">
+                                                {count}{' '}
+                                                {
+                                                    updateDescriptors[
+                                                        (periodData.month * 2 +
+                                                            periodData.year * 24 +
+                                                            periodData.period) %
+                                                            updateDescriptors.length
+                                                    ]
+                                                }{' '}
+                                                update{count !== 1 ? 's' : ''}
+                                            </p>
                                         </div>
+                                        {periodVideo && (
+                                            <button
+                                                onClick={() => handlePlayVideo(periodVideo)}
+                                                className="shrink-0 w-[140px] aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.01] active:scale-[0.99] transition-all duration-100"
+                                            >
+                                                <img
+                                                    src={`https://img.youtube.com/vi/${periodVideo.videoId}/hqdefault.jpg`}
+                                                    alt={periodVideo.title}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                                <div className="absolute inset-0 flex items-center justify-center">
+                                                    <span className="text-white text-2xl">▶</span>
+                                                </div>
+                                            </button>
+                                        )}
                                     </div>
                                     <div className="w-full flex-1 min-h-0 flex flex-col">
-                                        {periodVideos.length > 0 && (
-                                            <div className="border-b border-primary divide-y divide-primary bg-primary/20">
-                                                {periodVideos.map((video) => (
-                                                    <div key={video.id} className="p-2">
-                                                        <div className="aspect-video rounded border border-primary overflow-hidden w-full bg-black max-w-screen">
-                                                            <iframe
-                                                                title={video.title}
-                                                                src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
-                                                                loading="lazy"
-                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                allowFullScreen
-                                                                className="w-full h-full"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        )}
                                         <div className="grid grid-cols-2 h-full divide-x divide-primary min-h-0">
                                             {columns.map((column) => (
                                                 <div key={column.weekNumber} className="flex flex-col min-h-0">
