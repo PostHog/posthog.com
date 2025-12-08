@@ -8,7 +8,7 @@ import Link from 'components/Link'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { Caption } from 'components/Caption'
 import ChannelPlatforms from '../../../../contents/docs/workflows/_snippets/channel-platforms'
-import Beta from '../../../../contents/docs/workflows/_snippets/beta.mdx'
+import WorkflowsBeta from '../../../../contents/docs/workflows/_snippets/workflows-beta.mdx'
 
 export const Content = () => {
     return (
@@ -17,7 +17,7 @@ export const Content = () => {
                 <h2 className="mb-4" id="overview">
                     Overview
                 </h2>
-                <Beta />
+                <WorkflowsBeta />
                 <div>
                     <p>
                         Workflows is PostHog's no-code, drag-and-drop tool for building logic that automates processes

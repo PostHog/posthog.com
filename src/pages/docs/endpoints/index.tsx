@@ -7,7 +7,7 @@ import Link from 'components/Link'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { Caption } from 'components/Caption'
 import { CalloutBox } from 'components/Docs/CalloutBox'
-import Beta from '../../../../contents/docs/endpoints/_snippets/beta.mdx'
+import EndpointsBeta from '../../../../contents/docs/endpoints/_snippets/endpoints-beta.mdx'
 
 export const Content = () => {
     return (
@@ -16,7 +16,7 @@ export const Content = () => {
                 <h2 className="mb-4" id="overview">
                     Overview
                 </h2>
-                <Beta />
+                <EndpointsBeta />
                 <div>
                     <p>
                         Endpoints enable you to create predefined queries from PostHog insights or SQL queries and
