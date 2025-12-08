@@ -1111,7 +1111,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const taskbarRef = useRef<HTMLDivElement>(null)
     const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
     const [taskbarHeight, setTaskbarHeight] = useState(38)
-    const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
+    const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
     const [desktopCopied, setDesktopCopied] = useState(false)
     const urlObj = isSSR ? null : new URL(location.href)
     const queryString = isSSR ? '' : urlObj?.search.substring(1)
@@ -1385,12 +1385,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     function getLastClickedElementRect() {
-        const rect = lastClickedElement?.getBoundingClientRect()
-        if (!rect) return undefined
-        return {
-            x: rect.left,
-            y: rect.top,
-        }
+        return lastClickedElementRect || undefined
     }
 
     function getInitialWindows(element: any) {
@@ -1751,7 +1746,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             const button = target.closest('button')
             const isClickable = link || button
             if (isClickable) {
-                setLastClickedElement(target)
+                // Capture immediately on click to avoid forced reflow during window creation
+                const rect = target.getBoundingClientRect()
+                setLastClickedElementRect({ x: rect.left, y: rect.top })
             }
         }
         document.addEventListener('click', handleClick)
