@@ -592,7 +592,7 @@ const Roadmap = ({
                 </div>
 
                 {roadmap.githubPRMetadata && (
-                    <div className="px-4 py-4 grid grid-cols-3 gap-x-3 gap-y-2 text-sm bg-primary border-t border-primary">
+                    <div className="px-4 pb-4 pt-[1.15rem] grid grid-cols-3 gap-x-3 gap-y-2 text-sm bg-primary border-t border-primary">
                         <GitHubPRInfo roadmap={roadmap} />
                     </div>
                 )}
