@@ -171,10 +171,11 @@ export default function PlacesMap({
             const currentLayers = layersRef.current
 
             // Filter places by layer if specified
-            const filteredPlaces =
-                !Array.isArray(currentLayers) || currentLayers.length === 0
-                    ? placesRef.current
-                    : placesRef.current.filter((p) => currentLayers.includes(p.type))
+            const filteredPlaces = !Array.isArray(currentLayers)
+                ? placesRef.current // Show all if layers is undefined
+                : currentLayers.length === 0
+                ? [] // Show none if layers is empty array
+                : placesRef.current.filter((p) => currentLayers.includes(p.type))
 
             // Use Mapbox clusters when zoomed out
             if (zoom < CLUSTER_ZOOM) {
