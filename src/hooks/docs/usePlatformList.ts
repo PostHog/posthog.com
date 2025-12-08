@@ -44,6 +44,7 @@ interface Platform {
     label: string
     image?: string
     icon?: string
+    badge?: string
 }
 
 /**
@@ -85,6 +86,7 @@ export default function usePlatformList(basePath: string, titleSuffix?: string):
                         title
                         platformImageUrl
                         platformIconName
+                        platformBadge
                     }
                 }
             }
@@ -121,6 +123,10 @@ export default function usePlatformList(basePath: string, titleSuffix?: string):
                 platform.image = node.frontmatter.platformImageUrl
             } else if (node.frontmatter.platformIconName) {
                 platform.icon = node.frontmatter.platformIconName
+            }
+
+            if (node.frontmatter.platformBadge) {
+                platform.badge = node.frontmatter.platformBadge
             }
 
             return platform
