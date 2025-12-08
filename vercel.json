@@ -156,7 +156,7 @@
             "destination": "/handbook/people/hiring-process"
         },
         {
-            "source": "/handbook/growth/sales/hiring-process",
+            "source": "/handbook/growth/sales/hogpatch",
             "destination": "/handbook/people/hogpatch"
         },
         { "source": "/docs/integrate/client/ios/index", "destination": "/docs/libraries/ios" },
