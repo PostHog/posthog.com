@@ -264,7 +264,29 @@ const ProxyDecisionTree: React.FC = () => {
         <div className="border border-primary rounded-md p-5 bg-accent my-4">
             {step > 0 && (
                 <OSButton
-                    onClick={() => setStep(step - 1)}
+                    onClick={() => {
+                        // Find the previous question that was actually answered
+                        let prevStep = step - 1
+                        while (prevStep >= 0) {
+                            const prevQuestion = questions[prevStep]
+                            if (!prevQuestion.condition || prevQuestion.condition(answers)) {
+                                break
+                            }
+                            prevStep--
+                        }
+                        // Clear the answer for the question we're going back to
+                        const prevQuestion = questions[prevStep]
+                        if (prevQuestion) {
+                            const newAnswers = { ...answers }
+                            delete newAnswers[prevQuestion.id]
+                            // Also clear any answers from questions after this one
+                            questions.slice(prevStep + 1).forEach((q) => {
+                                delete newAnswers[q.id]
+                            })
+                            setAnswers(newAnswers)
+                        }
+                        setStep(prevStep)
+                    }}
                     variant="default"
                     size="sm"
                     icon={<IconArrowLeft className="size-4" />}
