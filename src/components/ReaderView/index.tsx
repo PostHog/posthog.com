@@ -40,7 +40,7 @@ import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
-import { Blockquote } from 'components/Blockquote'
+import { Blockquote } from 'components/BlockQuote'
 
 dayjs.extend(relativeTime)
 
