@@ -342,14 +342,26 @@ export default function Desktop() {
         addToast({
             title: 'Screensaver dismissed',
             description: 'Want to disable it permanently?',
-            duration: 3000,
+            duration: 10000,
             actionLabel: 'Disable screensaver',
             onAction: () => {
                 updateSiteSettings({ ...siteSettings, screensaverDisabled: true })
                 addToast({
                     title: 'Screensaver disabled',
-                    description: 'The screensaver has been disabled.',
-                    duration: 3000,
+                    description: (
+                        <>
+                            Change this setting in{' '}
+                            <Link
+                                to="/display-options"
+                                className="text-red dark:text-yellow font-semibold"
+                                state={{ newWindow: true }}
+                            >
+                                Display options
+                            </Link>
+                            .
+                        </>
+                    ),
+                    duration: 10000,
                     onUndo: () => {
                         updateSiteSettings({ ...siteSettings, screensaverDisabled: false })
                     },
