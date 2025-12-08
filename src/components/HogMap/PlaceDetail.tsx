@@ -6,7 +6,7 @@ import { useUser } from 'hooks/useUser'
 import { PlaceItem, PlaceReview } from './types'
 import { getPlaceIcon } from './PlacesMap'
 import { getPlaceReviews, addPlaceReview, deletePlaceReview, deletePlace } from './data'
-import { IconTrash } from '@posthog/icons'
+import { IconTrash, IconCheck, IconX, IconStar, IconStarFilled } from '@posthog/icons'
 import dayjs from 'dayjs'
 
 interface PlaceDetailProps {
@@ -21,6 +21,7 @@ export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
     const [loading, setLoading] = useState(true)
     const [showReviewForm, setShowReviewForm] = useState(false)
     const [rating, setRating] = useState(5)
+    const [hoverRating, setHoverRating] = useState(0)
     const [reviewText, setReviewText] = useState('')
     const [wouldGoBack, setWouldGoBack] = useState(true)
     const [submitting, setSubmitting] = useState(false)
@@ -146,7 +147,6 @@ export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
                         {isModerator && (
                             <OSButton
                                 size="sm"
-                                variant="secondary"
                                 icon={<IconTrash />}
                                 onClick={handleDeletePlace}
                                 tooltip="Delete this place"
@@ -179,15 +179,24 @@ export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
                                     <div className="mb-3">
                                         <label className="text-[13px] text-secondary mb-1 block">Rating</label>
                                         <div className="flex gap-1">
-                                            {[1, 2, 3, 4, 5].map((star) => (
-                                                <button
-                                                    key={star}
-                                                    onClick={() => setRating(star)}
-                                                    className="text-2xl hover:scale-110 transition-transform"
-                                                >
-                                                    {star <= rating ? '⭐' : '☆'}
-                                                </button>
-                                            ))}
+                                            {[1, 2, 3, 4, 5].map((star) => {
+                                                const isFilled = star <= (hoverRating || rating)
+                                                return (
+                                                    <button
+                                                        key={star}
+                                                        onClick={() => setRating(star)}
+                                                        onMouseEnter={() => setHoverRating(star)}
+                                                        onMouseLeave={() => setHoverRating(0)}
+                                                        className="hover:scale-110 transition-transform text-yellow"
+                                                    >
+                                                        {isFilled ? (
+                                                            <IconStarFilled className="size-6" />
+                                                        ) : (
+                                                            <IconStar className="size-6" />
+                                                        )}
+                                                    </button>
+                                                )
+                                            })}
                                         </div>
                                     </div>
 
@@ -216,7 +225,7 @@ export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
 
                                     <div className="flex gap-2 justify-end">
                                         <OSButton
-                                            size="sm"
+                                            size="md"
                                             variant="secondary"
                                             onClick={() => {
                                                 setShowReviewForm(false)
@@ -229,7 +238,7 @@ export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
                                             Cancel
                                         </OSButton>
                                         <OSButton
-                                            size="sm"
+                                            size="md"
                                             variant="primary"
                                             onClick={handleSubmitReview}
                                             disabled={!reviewText.trim() || submitting}
@@ -248,9 +257,9 @@ export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
                                     {reviews.map((review) => (
                                         <div key={review.id} className="p-3 rounded border border-primary bg-accent/20">
                                             <div className="flex items-center justify-between mb-2">
-                                                <div className="flex gap-1">
+                                                <div className="flex gap-0.5">
                                                     {Array.from({ length: review.rating }).map((_, i) => (
-                                                        <span key={i}>⭐</span>
+                                                        <IconStarFilled key={i} className="size-4 text-yellow" />
                                                     ))}
                                                 </div>
                                                 <div className="flex items-center gap-2">
@@ -274,16 +283,26 @@ export default function PlaceDetail({ place, onClose }: PlaceDetailProps) {
                                                 </div>
                                             )}
                                             {review.wouldGoBack !== undefined && (
-                                                <div className="text-[11px] text-secondary mt-2">
-                                                    {review.wouldGoBack ? '✅ Would go back' : '❌ Would not go back'}
+                                                <div className="flex items-center gap-1 text-[11px] text-secondary mt-2">
+                                                    {review.wouldGoBack ? (
+                                                        <>
+                                                            <IconCheck className="size-3 text-green" />
+                                                            <span>Would go back</span>
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <IconX className="size-3 text-red" />
+                                                            <span>Would not go back</span>
+                                                        </>
+                                                    )}
                                                 </div>
                                             )}
                                         </div>
                                     ))}
                                 </div>
-                            ) : (
+                            ) : !showReviewForm ? (
                                 <div className="text-[13px] text-secondary italic">No reviews yet.</div>
-                            )}
+                            ) : null}
                         </div>
 
                         <div className="pt-4 border-t border-primary">

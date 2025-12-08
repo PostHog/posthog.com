@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState, useImperativeHandle } from 'react'
+import { createRoot } from 'react-dom/client'
+import type mapboxgl from 'mapbox-gl'
 import { addPlace } from './data'
 import { PlaceType } from './types'
+import OSButton from 'components/OSButton'
 
 interface SearchBarProps {
     token?: string
@@ -87,14 +90,53 @@ function SearchBarImpl(
                 const json = await resp.json()
                 const feats = Array.isArray(json?.suggestions) ? json.suggestions : []
                 setResults(
-                    feats.map((f: any) => ({
-                        id: f.mapbox_id || f.feature_id || f.id,
-                        name:
-                            f.name || f.full_address || f.place_formatted || f.description || f.place_name || 'Unknown',
-                        subtitle: f.place_formatted || f.full_address || f.place_name || f.description || '',
-                        // coordinates will be retrieved via /retrieve
-                        coordinates: null,
-                    }))
+                    feats.map((f: Record<string, unknown>) => {
+                        // Build comprehensive address from multiple fields
+                        const buildFullAddress = () => {
+                            // Start with the most complete formatted address if available
+                            if (f.full_address) return f.full_address
+                            if (f.place_formatted) return f.place_formatted
+
+                            // Otherwise build from parts
+                            const parts: string[] = []
+
+                            // Add address/street if available
+                            if (f.address && typeof f.address === 'string') parts.push(f.address)
+
+                            // Add context information (neighborhood, place, region, etc.)
+                            if (f.context && typeof f.context === 'object' && f.context !== null) {
+                                const context = f.context as Record<string, { name?: string }>
+                                const contextParts = [
+                                    context.neighborhood?.name,
+                                    context.place?.name,
+                                    context.region?.name,
+                                    context.country?.name,
+                                    context.postcode?.name,
+                                ].filter(Boolean) as string[]
+                                parts.push(...contextParts)
+                            }
+
+                            // Fallback to place_name or description
+                            if (parts.length === 0) {
+                                return f.place_name || f.description || ''
+                            }
+
+                            return parts.join(', ')
+                        }
+
+                        return {
+                            id: f.mapbox_id || f.feature_id || f.id,
+                            name:
+                                f.name ||
+                                f.full_address ||
+                                f.place_formatted ||
+                                f.description ||
+                                f.place_name ||
+                                'Unknown',
+                            subtitle: buildFullAddress(),
+                            coordinates: null,
+                        }
+                    })
                 )
                 setIsOpen(true)
                 setHighlightIndex(-1)
@@ -137,12 +179,36 @@ function SearchBarImpl(
                 (Array.isArray(json?.features) && json.features[0]) || json?.feature || json?.results?.[0] || null
             const coords = feat?.coordinates || feat?.geometry?.coordinates || null
             const resolvedName = feat?.name || feat?.properties?.name || feat?.place_name || item.name
-            const resolvedAddress =
-                feat?.properties?.place_formatted ||
-                feat?.properties?.full_address ||
-                feat?.place_name ||
-                item.subtitle ||
-                ''
+
+            // Build comprehensive address from retrieve response
+            const buildResolvedAddress = () => {
+                const props = feat?.properties || {}
+
+                // Try formatted addresses first
+                if (props.full_address) return props.full_address
+                if (props.place_formatted) return props.place_formatted
+                if (feat?.place_name) return feat.place_name
+
+                // Build from individual components
+                const parts: string[] = []
+                if (props.address) parts.push(props.address)
+
+                // Add context fields
+                if (props.context) {
+                    const contextParts = [
+                        props.context.neighborhood?.name,
+                        props.context.place?.name,
+                        props.context.region?.name,
+                        props.context.country?.name,
+                        props.context.postcode?.name,
+                    ].filter(Boolean)
+                    parts.push(...contextParts)
+                }
+
+                return parts.length > 0 ? parts.join(', ') : item.subtitle || ''
+            }
+
+            const resolvedAddress = buildResolvedAddress()
             let longitude = null
             let latitude = null
             if (coords) {
@@ -220,7 +286,9 @@ function SearchBarImpl(
                             title={item.subtitle || item.name}
                         >
                             <div className="text-sm font-semibold text-primary">{item.name}</div>
-                            {item.subtitle && <div className="text-xs text-secondary">{item.subtitle}</div>}
+                            <div className="text-xs text-secondary mt-0.5">
+                                {item.subtitle || 'No address available'}
+                            </div>
                         </li>
                     ))}
                 </ul>
@@ -234,13 +302,13 @@ SearchBar.displayName = 'SearchBar'
 export default SearchBar
 
 interface CreateSearchMarkerParams {
-    map: any
-    getMapbox: () => any
+    map: mapboxgl.Map
+    getMapbox: () => typeof mapboxgl
     longitude: number
     latitude: number
     label: string
     address: string
-    prevMarker: any
+    prevMarker: mapboxgl.Marker | null
     searchRef: React.RefObject<SearchBarHandle>
     getJwt: () => Promise<string | null>
 }
@@ -256,7 +324,7 @@ export function createSearchMarker({
     prevMarker,
     searchRef,
     getJwt,
-}: CreateSearchMarkerParams) {
+}: CreateSearchMarkerParams): mapboxgl.Marker | null {
     if (!map) return null
     // Recenter and zoom in a bit
     try {
@@ -282,18 +350,26 @@ export function createSearchMarker({
     el.className = 'w-[18px] h-[18px] rounded-full bg-orange border-2 border-white shadow-md'
     // Build popup DOM with details + form
     const container = document.createElement('div')
-    container.className = 'text-sm max-w-sm text-center text-primary bg-primary p-2 rounded shadow-2xl'
+    container.className = 'text-sm max-w-sm text-left text-primary bg-primary p-4 rounded shadow-2xl relative'
+
+    // Close button in top-right
+    const closeBtn = document.createElement('button')
+    closeBtn.className =
+        'absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded hover:bg-accent text-primary text-lg leading-none'
+    closeBtn.innerHTML = '✕'
+    closeBtn.setAttribute('aria-label', 'Close')
+
     const title = document.createElement('div')
-    title.className = 'font-semibold mb-1'
+    title.className = 'font-semibold mb-2 pr-6'
     title.textContent = label || 'Selected place'
     const addr = document.createElement('div')
-    addr.className = 'text-secondary mb-1'
+    addr.className = 'text-secondary mb-3 text-xs'
     addr.textContent = address || ''
-    const coordsWrap = document.createElement('div')
-    coordsWrap.className = 'text-secondary mb-2'
-    coordsWrap.textContent = `Lat ${Number(latitude).toFixed(5)}, Lng ${Number(longitude).toFixed(5)}`
     const selectWrap = document.createElement('div')
-    selectWrap.className = 'mb-2'
+    selectWrap.className = 'mb-3'
+    const selectLabel = document.createElement('label')
+    selectLabel.className = 'block text-xs text-secondary mb-1'
+    selectLabel.textContent = 'Place type'
     const select = document.createElement('select')
     ;['Coffee', 'Restaurant', 'Airbnb', 'Hotel', 'Co-working'].forEach((opt) => {
         const o = document.createElement('option')
@@ -302,22 +378,32 @@ export function createSearchMarker({
         select.appendChild(o)
     })
     select.className = 'w-full border border-primary rounded px-2 py-1 bg-primary text-primary'
+    selectWrap.appendChild(selectLabel)
     selectWrap.appendChild(select)
-    const buttons = document.createElement('div')
-    buttons.className = 'flex gap-2 justify-end'
-    const cancelBtn = document.createElement('button')
-    cancelBtn.className = 'px-2 py-1 rounded border border-primary bg-primary text-primary hover:bg-accent'
-    cancelBtn.textContent = 'Cancel'
-    const addBtn = document.createElement('button')
-    addBtn.className = 'px-2 py-1 rounded border border-primary bg-primary text-primary hover:bg-accent font-semibold'
-    addBtn.textContent = 'Add'
-    buttons.appendChild(cancelBtn)
-    buttons.appendChild(addBtn)
+
+    // Button container with OSButton
+    const buttonWrap = document.createElement('div')
+    buttonWrap.className = 'flex justify-end'
+
+    container.appendChild(closeBtn)
     container.appendChild(title)
     if (address) container.appendChild(addr)
-    container.appendChild(coordsWrap)
     container.appendChild(selectWrap)
-    container.appendChild(buttons)
+    container.appendChild(buttonWrap)
+
+    // Render OSButton using createRoot
+    const root = createRoot(buttonWrap)
+    root.render(
+        <OSButton
+            size="sm"
+            variant="primary"
+            onClick={() => {
+                /* Will be wired up after render */
+            }}
+        >
+            Add place
+        </OSButton>
+    )
     const popup = new mapboxgl.Popup({ offset: 12 }).setDOMContent(container)
     const marker = new mapboxgl.Marker({ element: el }).setLngLat([longitude, latitude]).setPopup(popup)
     marker.addTo(map)
@@ -326,8 +412,8 @@ export function createSearchMarker({
     } catch {
         console.error('Error opening popup')
     }
-    // Wire buttons
-    cancelBtn.onclick = () => {
+    // Wire close button
+    closeBtn.onclick = () => {
         try {
             marker.remove()
         } catch {
@@ -341,66 +427,106 @@ export function createSearchMarker({
             }
         }
     }
-    addBtn.onclick = async () => {
-        try {
-            const selected = (select && select.value) || PlaceType.COFFEE
-            const type = (Object.values(PlaceType) as string[]).includes(selected) ? selected : PlaceType.COFFEE
 
-            const item = {
-                name: label || 'Selected place',
-                address: address || '',
-                latitude: Number(latitude),
-                longitude: Number(longitude),
-                type: type.charAt(0).toUpperCase() + type.slice(1),
-            }
-            let newPlaceId: number | null = null
+    // Wire add button - need to wait for ReactDOM render, then attach handler
+    setTimeout(() => {
+        const addBtn = buttonWrap.querySelector('button')
+        if (!addBtn) return
+
+        addBtn.onclick = async () => {
+            // Show loading state by disabling button and changing text
+            root.render(
+                <OSButton
+                    size="sm"
+                    variant="primary"
+                    disabled
+                    onClick={() => {
+                        /* Disabled during loading */
+                    }}
+                >
+                    Adding...
+                </OSButton>
+            )
+
             try {
-                const jwt = typeof getJwt === 'function' ? await getJwt() : null
-                if (jwt) {
-                    const response = await addPlace(jwt, item)
-                    newPlaceId = (response as any)?.data?.id || null
+                const selected = (select && select.value) || PlaceType.COFFEE
+                const type = (Object.values(PlaceType) as string[]).includes(selected) ? selected : PlaceType.COFFEE
+
+                const item = {
+                    name: label || 'Selected place',
+                    address: address || '',
+                    latitude: Number(latitude),
+                    longitude: Number(longitude),
+                    type: type.charAt(0).toUpperCase() + type.slice(1),
+                }
+                let newPlaceId: number | null = null
+                try {
+                    const jwt = typeof getJwt === 'function' ? await getJwt() : null
+                    if (jwt) {
+                        const response = await addPlace(jwt, item)
+                        const data = (response as { data?: { id?: number } })?.data
+                        newPlaceId = data?.id ?? null
+                    }
+                } catch (e) {
+                    console.error('Error adding place', e)
+                    // Restore button state on error
+                    root.render(
+                        <OSButton
+                            size="sm"
+                            variant="primary"
+                            onClick={() => {
+                                /* Will be re-wired */
+                            }}
+                        >
+                            Add place
+                        </OSButton>
+                    )
+                    // Re-wire the button after restore
+                    setTimeout(() => {
+                        const btn = buttonWrap.querySelector('button')
+                        if (btn) btn.onclick = addBtn.onclick
+                    }, 0)
+                    return
+                }
+                try {
+                    window.dispatchEvent(new CustomEvent('hogmap:places-updated', { detail: { placeId: newPlaceId } }))
+                } catch {
+                    console.error('Error dispatching places updated event')
+                }
+                // Close popup after adding
+                try {
+                    const p = marker.getPopup && marker.getPopup()
+                    if (p) {
+                        p.remove()
+                    }
+                } catch {
+                    console.error('Error removing popup')
+                }
+                // Remove the temporary marker since place will render via places layer
+                try {
+                    marker.remove()
+                } catch {
+                    console.error('Error removing marker')
+                }
+                // Ensure the corresponding place layer is enabled upstream
+                try {
+                    window.dispatchEvent(new CustomEvent('hogmap:enable-layer', { detail: { layer: type } }))
+                } catch {
+                    console.error('Error dispatching enable layer event')
+                }
+                // Clear search input
+                if (searchRef?.current?.clear) {
+                    try {
+                        searchRef.current.clear()
+                    } catch {
+                        console.error('Error clearing search bar')
+                    }
                 }
             } catch (e) {
                 console.error('Error adding place', e)
             }
-            try {
-                window.dispatchEvent(new CustomEvent('hogmap:places-updated', { detail: { placeId: newPlaceId } }))
-            } catch {
-                console.error('Error dispatching places updated event')
-            }
-            // Close popup after adding
-            try {
-                const p = marker.getPopup && marker.getPopup()
-                if (p) {
-                    p.remove()
-                }
-            } catch {
-                console.error('Error removing popup')
-            }
-            // Remove the temporary marker since place will render via places layer
-            try {
-                marker.remove()
-            } catch {
-                console.error('Error removing marker')
-            }
-            // Ensure the corresponding place layer is enabled upstream
-            try {
-                window.dispatchEvent(new CustomEvent('hogmap:enable-layer', { detail: { layer: type } }))
-            } catch {
-                console.error('Error dispatching enable layer event')
-            }
-            // Clear search input
-            if (searchRef?.current?.clear) {
-                try {
-                    searchRef.current.clear()
-                } catch {
-                    console.error('Error clearing search bar')
-                }
-            }
-        } catch (e) {
-            console.error('Error adding place', e)
         }
-    }
+    }, 0)
     // Also clear the search input after placing marker
     if (searchRef?.current?.clear) {
         try {

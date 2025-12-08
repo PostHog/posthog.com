@@ -263,7 +263,9 @@ export default function PlacesMap({
             zoom: 4,
             attributionControl: true,
         })
-        mapRef.current.addControl(new mapboxgl.NavigationControl({ visualizePitch: true }), 'top-right')
+        mapRef.current.dragRotate.disable()
+        mapRef.current.touchZoomRotate.disableRotation()
+        mapRef.current.addControl(new mapboxgl.NavigationControl({ showCompass: false, showZoom: true }), 'top-right')
         mapRef.current.on('load', () => {
             renderMarkers()
         })
@@ -424,7 +426,7 @@ export default function PlacesMap({
     )
 
     return (
-        <div className="box-border w-full h-full rounded border border-primary overflow-hidden relative">
+        <div className="box-border w-full h-full overflow-hidden relative">
             <div ref={mapContainerRef} className="w-full h-full" />
             {isModerator && (
                 <div className="absolute top-4 left-4 z-10">
