@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { IconCheck, IconArrowRight, IconRevert } from '@posthog/icons'
+import { IconCheck, IconArrowLeft, IconArrowRight, IconRevert } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 
 interface Answer {
@@ -267,9 +267,10 @@ const ProxyDecisionTree: React.FC = () => {
                     onClick={() => setStep(step - 1)}
                     variant="default"
                     size="sm"
+                    icon={<IconArrowLeft className="size-4" />}
                     className="mb-3 opacity-60 hover:opacity-100"
                 >
-                    ← Back
+                    Back
                 </OSButton>
             )}
 
