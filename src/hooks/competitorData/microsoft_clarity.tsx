@@ -6,6 +6,15 @@ export const microsoft_clarity = {
         comparisonArticle: 'blog/best-microsoft-clarity-alternatives',
     },
     products: {
+        product_analytics: {
+            available: false,
+            funnels: {
+                available: false,
+            },
+            user_paths: {
+                available: false,
+            },
+        },
         session_replay: {
             available: true,
             pricing: {
@@ -74,6 +83,32 @@ export const microsoft_clarity = {
                 rage_taps: true,
                 scrollmaps: true,
             },
+        },
+        surveys: {
+            available: false,
+        },
+        feature_flags: {
+            available: false,
+        },
+        experiments: {
+            available: false,
+        },
+        error_tracking: {
+            available: false,
+                },
+            monitoring: {
+                features: {
+                    performance_monitoring: false,
+                },
+        },
+    },
+    platform: {
+        deployment: {
+            open_source: false,
+        },
+        pricing: {
+            free_tier: true,
+            transparent_pricing: true, // It's free, so pricing is clear
         },
     },
     pricing: {

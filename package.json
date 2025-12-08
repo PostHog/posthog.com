@@ -36,6 +36,9 @@
     "dependencies": {
         "@amcharts/amcharts5": "^5.13.6",
         "@amcharts/amcharts5-geodata": "^5.1.5",
+        "@dnd-kit/core": "^6.3.1",
+        "@dnd-kit/sortable": "^10.0.0",
+        "@dnd-kit/utilities": "^3.2.2",
         "@dotlottie/react-player": "^1.6.6",
         "@fontsource/source-code-pro": "^4.5.4",
         "@gatsbyjs/reach-router": "^1.3.9",

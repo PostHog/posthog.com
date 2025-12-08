@@ -58,6 +58,9 @@ export const ensureClusterLayers = (map: any, id: string): void => {
     if (!map) return
     const clustersId = `${id}-clusters`
     const countId = `${id}-cluster-count`
+    const unclusteredId = `${id}-unclustered`
+
+    // Layer for clustered points (2+ points grouped together)
     if (!map.getLayer(clustersId)) {
         map.addLayer({
             id: clustersId,
@@ -72,6 +75,8 @@ export const ensureClusterLayers = (map: any, id: string): void => {
             },
         } as any)
     }
+
+    // Layer for cluster count text
     if (!map.getLayer(countId)) {
         map.addLayer({
             id: countId,
@@ -88,6 +93,42 @@ export const ensureClusterLayers = (map: any, id: string): void => {
             },
         } as any)
     }
+
+    // Layer for unclustered individual points (single person not in a cluster)
+    if (!map.getLayer(unclusteredId)) {
+        map.addLayer({
+            id: unclusteredId,
+            type: 'circle',
+            source: id,
+            filter: ['!', ['has', 'point_count']],
+            paint: {
+                'circle-color': '#111827',
+                'circle-stroke-color': '#ffffff',
+                'circle-stroke-width': 2,
+                'circle-radius': 14,
+            },
+        } as any)
+    }
+
+    // Layer for unclustered point count text (shows "1")
+    const unclusteredCountId = `${id}-unclustered-count`
+    if (!map.getLayer(unclusteredCountId)) {
+        map.addLayer({
+            id: unclusteredCountId,
+            type: 'symbol',
+            source: id,
+            filter: ['!', ['has', 'point_count']],
+            layout: {
+                'text-field': '1',
+                'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+                'text-size': 12,
+            },
+            paint: {
+                'text-color': '#ffffff',
+            },
+        } as any)
+    }
+
     const clickHandler = (e: any) => {
         const features = map.queryRenderedFeatures(e.point, { layers: [clustersId] })
         const clusterId = features?.[0]?.properties?.cluster_id
@@ -104,12 +145,14 @@ export const ensureClusterLayers = (map: any, id: string): void => {
     map.on('click', clustersId, clickHandler)
 }
 
-// Toggle cluster layer visibility pair
+// Toggle cluster layer visibility (including unclustered points)
 export const setClusterVisibility = (map: any, id: string, visible: boolean): void => {
     if (!map) return
     const clustersId = `${id}-clusters`
     const countId = `${id}-cluster-count`
-    ;[clustersId, countId].forEach((layerId) => {
+    const unclusteredId = `${id}-unclustered`
+    const unclusteredCountId = `${id}-unclustered-count`
+    ;[clustersId, countId, unclusteredId, unclusteredCountId].forEach((layerId) => {
         if (map.getLayer(layerId)) {
             map.setLayoutProperty(layerId, 'visibility', visible ? 'visible' : 'none')
         }
