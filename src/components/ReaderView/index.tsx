@@ -40,6 +40,7 @@ import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
+import { Blockquote } from 'components/Blockquote'
 
 dayjs.extend(relativeTime)
 
@@ -776,6 +777,21 @@ function ReaderViewContent({
                                     ) : (
                                         children
                                     )}
+                                </div>
+                                <div
+                                    className={`mt-8 mx-auto transition-all ${
+                                        fullWidthContent || body?.type !== 'mdx'
+                                            ? 'max-w-full'
+                                            : contentMaxWidthClass || 'max-w-2xl'
+                                    }`}
+                                >
+                                    <Blockquote>
+                                        PostHog is an all-in-one developer platform for building successful products. We
+                                        provide product analytics, web analytics, session replay, error tracking,
+                                        feature flags, experimentation, surveys, LLM analytics, data warehouse, a CDP,
+                                        and an AI product assistant to help debug your code, ship features faster, and
+                                        keep all your usage and customer data in one stack.
+                                    </Blockquote>
                                 </div>
                                 {showQuestions && (
                                     <div
