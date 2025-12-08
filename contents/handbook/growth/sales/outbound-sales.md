@@ -33,7 +33,7 @@ Outbound is helpful because it is a good way to generate more leads in a semi-pr
 
 We’ll call 1-3 ‘warm’ outbound and 4-6 ‘cold’ outbound. Technical Account Managers are responsible for managing leads from warm outbound, in addition to their book of business. Technical Account Executives are responsible for managing leads from cold outbound, in addition to inbound leads (which comprise 90% of leads today).
 
-We are building a BDR function that will generate leads, mainly focused on cold outbound to start. 
+We are building a BDR function that will generate leads, mainly focused on cold outbound to start. (A BDR, or business development rep, is someone who gets leads for sales by doing outbound activities.)
 
 ## What we're doing today
 
