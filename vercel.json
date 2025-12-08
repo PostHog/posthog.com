@@ -155,6 +155,10 @@
             "source": "/handbook/people/hiring-process/hiring-process",
             "destination": "/handbook/people/hiring-process"
         },
+        {
+            "source": "/handbook/growth/sales/hiring-process",
+            "destination": "/handbook/people/hogpatch"
+        },
         { "source": "/docs/integrate/client/ios/index", "destination": "/docs/libraries/ios" },
         { "source": "/docs/integrate/client/ios", "destination": "/docs/libraries/ios" },
         { "source": "/docs/integrate/client/js/index", "destination": "/docs/libraries/js" },
