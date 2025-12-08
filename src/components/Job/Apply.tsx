@@ -444,12 +444,7 @@ const ApplicationSuccess = ({ isInExcludedCountry }: { isInExcludedCountry?: boo
                                     )}
                                 </button>
                             </div>
-                            <CallToAction
-                                to="/merch?product=posthog-sticker"
-                                size="sm"
-                                className="!w-full"
-                                state={{ newWindow: true }}
-                            >
+                            <CallToAction href="/merch?product=posthog-sticker" size="sm" className="!w-full" external>
                                 <span>Open merch store</span>
                             </CallToAction>
                         </div>
