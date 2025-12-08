@@ -44,7 +44,7 @@ They build fast, even from scratch if needed, and then iterate. The tradeoffs th
 
 Software engineers prioritize the ideal technical solution.
 
-They look for the best solution to the problem in front of them, focus on best practices and build on prior work. This means they're usually more specialized and idealistic. Their projects often involve more backend and system design work, and they're constantly thinking about optimizing security, reliability, and scale.
+They look for the best solution to the problem in front of them, focus on best practices, and build on prior work. This means they're usually more specialized and idealistic. Their projects often involve more backend and system design work, and they're constantly thinking about optimizing security, reliability, and scale.
 
 ## How do they spend their time?
 
