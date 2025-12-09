@@ -204,7 +204,7 @@ export default function CDP(): JSX.Element {
                                 imgClassName="max-w-[542px] w-full mx-auto"
                             />
                             <h2 className="text-xl @md/reader-content-container:text-2xl font-bold m-4 text-center pb-4">
-                                Unify external customer data with product usage data
+                                Your modern data stack on <span className="line-through">crack</span> DuckDB
                             </h2>
                         </>
                     ),
@@ -247,12 +247,19 @@ export default function CDP(): JSX.Element {
                         </div>
                     </Fieldset>
                 </div>
-                <p className="text-lg font-bold">
-                    Analyze product and customer data in PostHog – <em>no matter where it was generated.</em>
+                <h3>
+                    The most flexible integrated modern data stack – powered by PostHog, built on DuckDB, and designed
+                    to scale
+                </h3>
+                <p>
+                    Your data needs flexibility, tooling, and portability. We provide it all, in the most seamless data
+                    warehousing experience available.
                 </p>
                 <p>
-                    Whether you're looking for an ETL, reverse ETL, a data warehouse, event pipelines, a CDP built for
-                    product engineers, or another ambiguous industry term – it's all here.
+                    <span className="font-bold">Bring your own tools</span> like DBT and Hex to customize your
+                    experience, or <span className="font-bold">use our built-in tooling</span> to get started quickly.
+                    Anything that connects to Postgres can connect to your PostHog DuckDB warehouse using our{' '}
+                    <Link to="https://github.com/posthog/duckgres">Duckgres wrapper</Link>.
                 </p>
 
                 {/* <h3>data integrations</h3> */}
@@ -286,47 +293,129 @@ export default function CDP(): JSX.Element {
                     view data connectors.db &rarr;
                 </OSButton> 
                 */}
-                <h3>Built for product engineers</h3>
+                <h3>
+                    A modern data stack that is{' '}
+                    <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">
+                        built for data engineers
+                    </span>{' '}
+                    and{' '}
+                    <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">
+                        loved by product teams
+                    </span>
+                </h3>
                 <p>
-                    PostHog's customer data infrastructure is built for product engineers who want to{' '}
-                    <em>understand how product usage</em> (tracked with PostHog) <em>correlates with business data</em>{' '}
-                    (generated elsewhere).
+                    PostHog's data infrastructure is built for data engineers who need to build a{' '}
+                    <span className="font-bold">robust and flexible data stack</span> to house all their business data.
                 </p>
+
+                <p>
+                    And because the data is <span className="italic">seamlessly connected</span> to PostHog's product
+                    ecosystem, product teams get to continue using the tools they love - like product analytics, feature
+                    flags, and surveys - <span className="font-bold">all powered up by your clean & modeled data</span>.
+                    It's, quite literally, the best of both worlds.
+                </p>
+
+                <h3>As flexible as you are</h3>
+                <p>
+                    You get the keys to the (data) castle. Use our built-in tools to get started quickly, or bring your
+                    own favorite tools to customize your experience.
+                </p>
+
+                <h3>Data stack products</h3>
 
                 <ul className="list-none pl-0">
                     <li className="relative pl-8">
                         <IconArrowUpRight className="-scale-y-1 size-6 inline-block text-muted absolute top-0 left-0" />
-                        <Link to="/customer-data-infrastructure/sources">Get data IN</Link>
+                        <Link to="TODO">Managed DuckDB warehouse</Link>
+                        <span className="rounded-sm bg-highlight py-0.5 ml-2 px-1 text-xs font-bold text-red dark:text-yellow">
+                            Beta
+                        </span>
+
                         <br />
-                        <span className="text-sm text-secondary">SDKs, warehouse sources, webhooks</span>
+                        <span className="text-sm text-secondary">
+                            A single-tenant DuckDB warehouse that's automatically filled with your PostHog data - and
+                            anything else you sync in.
+                        </span>
+                        <br />
+                        <span className="text-sm text-secondary">Perfect for: data engineers and analysts</span>
+                        <br />
+                        <span className="text-sm text-secondary">TODO: waitlist entry</span>
                     </li>
                     <li className="relative pl-8">
                         <IconDatabaseBolt className="size-6 inline-block text-muted absolute top-0 left-0" />
-                        <Link to="/customer-data-infrastructure/transformations">Transform data</Link>
+                        <Link to="TODO">Shared Clickhouse warehouse</Link>
                         <br />
-                        <span className="text-sm text-secondary">HogQL, API, webhooks</span>
+                        <span className="text-sm text-secondary">
+                            Shared warehouse infrastructure for basic warehousing and analysis.
+                        </span>
+                        <br />
+                        <span className="text-sm text-secondary">
+                            Perfect for: founders, product teams, and product analysts
+                        </span>
+                    </li>
+                    <li className="relative pl-8">
+                        <IconDatabaseBolt className="size-6 inline-block text-muted absolute top-0 left-0" />
+                        <Link to="TODO">Data import</Link>
+                        <br />
+                        <span className="text-sm text-secondary">
+                            Use our 60+ sources to get data into your warehouse, including direct warehouse sources,
+                            SDKs, and webhooks.
+                        </span>
+                        <br />
+                        <span className="text-sm text-secondary">
+                            Perfect for: product teams, data engineers, and analysts
+                        </span>
+                    </li>
+                    <li className="relative pl-8">
+                        <IconDatabaseBolt className="size-6 inline-block text-muted absolute top-0 left-0" />
+                        <Link to="TODO">Modeling & transformation</Link>
+                        <br />
+                        <span className="text-sm text-secondary">
+                            Build modular, testable data tables that load in an instant.
+                        </span>
+                        <br />
+                        <span className="text-sm text-secondary">Perfect for: data analysts and product teams</span>
+                        <br />
+                        <span className="text-sm text-secondary">
+                            Not quite ready for: data engineers. We recommend bringing your favorite tools like DBT for
+                            now until our tooling is more mature.
+                        </span>
                     </li>
                     <li className="relative pl-8">
                         <IconAsterisk className="size-6 inline-block text-muted absolute top-0 left-0" />
-                        <Link to="/data-warehouse">Query & visualize data</Link>
+                        <Link to="/data-warehouse">Queries & visualization</Link>
                         <br />
-                        <span className="text-sm text-secondary">SQL editor, BI, data viz</span>
+                        <span className="text-sm text-secondary">
+                            Explore your data with SQL, build business intelligence dashboards, and visualize key
+                            metrics.
+                        </span>
+                        <br />
+                        <span className="text-sm text-secondary">Perfect for: product teams</span>
+                        <br />
+                        <span className="text-sm text-secondary">
+                            Not quite ready for: data analysts. We recommend bringing your favorite tools like Hex for
+                            now until our tooling is more mature.
+                        </span>
                     </li>
                     <li className="relative pl-8">
                         <IconArrowUpRight className="size-6 inline-block text-muted absolute top-0 left-0" />
-                        <Link to="/customer-data-infrastructure/destinations">Send data OUT</Link>
+                        <Link to="/customer-data-infrastructure/destinations">Reverse ETL</Link>
                         <br />
                         <span className="text-sm text-secondary">
-                            Realtime event streaming pipelines, batch exports, webhooks
+                            Get data out to the tools that run your business with realtime event streaming pipelines,
+                            batch exports, and webhooks.
                         </span>
                     </li>
                 </ul>
-                <h3>How it works</h3>
+
+                {/* TODO: we might want to keep this diagram? */}
+                {/* <h3>How it works</h3>
                 <p>
                     Here's how data flows in and out of PostHog, and how you can transform and analyze it all in one
                     place.
                 </p>
-                <CDPDiagram className="max-w-lg fill-primary mx-auto" />
+                <CDPDiagram className="max-w-lg fill-primary mx-auto" /> */}
+
                 <h3>How our support engineers use the data warehouse</h3>
                 <div>
                     <WistiaCustomPlayer mediaId="1cv9e1aimw" aspectRatio={16 / 9} className="max-w-4xl mx-auto" />
@@ -338,60 +427,6 @@ export default function CDP(): JSX.Element {
                     on this data and shares it with the exec team weekly -&gt; and in the video above she explains how
                     she gathers the data using SQL.
                 </p>
-                <h3>🪦 RIP the modern data stack</h3>
-                <p>
-                    It was a great idea, but as the stage of your company changes, the “modern data stack” inevitably
-                    devolves into a complicated mess of tools and integrations.
-                </p>
-                <p>
-                    <strong>What’s worse:</strong> it usually means hiring someone to manage it all – and at that point,
-                    the data becomes less accessible to the product engineers and product managers responsible for
-                    building products.
-                </p>
-                <blockquote>
-                    If you’re interested in reading more about how we feel about the modern data stack, read our{' '}
-                    <em>definitely not-opinionated</em> blog post on it:{' '}
-                    <Link to="/blog/modern-data-stack-sucks" state={{ newWindow: true }}>
-                        The modern data stack sucks <IconArrowUpRight className="size-4 inline-block" />{' '}
-                    </Link>
-                </blockquote>
-                <p>So what if it didn’t have to be this way?</p>
-                <p>
-                    That’s the idea with PostHog’s customer data infrastructure. Everything can finally live in one
-                    place, and can be analyzed with any of PostHog’s insight tools or BI visualizations. It doesn’t
-                    require a data engineer, and it scales with you as you grow.
-                </p>
-                <p>
-                    A customer data platform isn't just event pipelines and destinations. It’s not a regurgitated feed
-                    of user activity. it’s not just a SQL editor and some transformations.
-                </p>
-                <p>
-                    A true CDP is when you combine an ETL solution, event pipelines, modeling, data exporting and
-                    realtime event streaming, <em>and</em> a way to analyze and visualize it (insights, product
-                    analytics, BI) – all in a single place.
-                </p>
-                <p>
-                    That's why we call it customer data infrastructure – as it's specifically built with the needs of
-                    product engineers in mind – to help you get the data points you need to build success products –
-                    without having to hire a dedicated team to handle it all.
-                </p>
-                {/* 
-                <h3>Roadmap</h3>
-                <p>
-                    PostHog is always a work in progress. here’s what we’re working on next, and what we’re thinking
-                    about building soon:
-                </p>
-                <h4>WIP</h4>
-                <ul>
-                    <li>item 1</li>
-                    <li>item 2</li>
-                </ul>
-                <h4>Backlog</h4>
-                <ul>
-                    <li>item 1</li>
-                    <li>item 2</li>
-                </ul>
-                 */}
             </ReaderView>
         </>
     )
