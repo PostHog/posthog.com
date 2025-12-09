@@ -35,40 +35,20 @@ function ProductLink({ link, icon: Icon, productName, color }: ProductLinkProps)
     )
 }
 
-function FlagshipUseCases() {
+function ExampleContentHeader() {
     return (
-        <Editor
-            type="mdx"
-            slug="/flagship-use-cases"
-            bookmark={{
-                title: 'Flagship use cases',
-                description: 'Scale your startup with data-driven product development.',
-            }}
-        >
-            <div className="prose mt-4 @xl:mt-12 pb-6 @xl:pb-20">
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/computer_fbcb8c1c5d.png"
-                    alt="Hogzilla coding"
-                    className="@xl:float-right max-w-sm"
-                />
-                <h1 className="!text-4xl">
-                    Scale your startup with PostHog{' '}
-                    <span className="text-red dark:text-yellow">flagship uses cases</span>
-                </h1>
-                <h2>A learning track for building your productd with PostHog</h2>
-                <p>
-                    As your startup grows, so do the challenges. This learning track walks you through the flagship use
-                    cases that help you track your business, build better features, improve what you've shipped, and
-                    manage your data at scale.
-                </p>
+        <div className="container py-12">
+            <h1 className="!text-4xl">
+                Scale your startup with PostHog <span className="text-red dark:text-yellow">flagship uses cases</span>
+            </h1>
+            <h2>A learning track for building your productd with PostHog</h2>
+        </div>
+    )
+}
 
-                <div className="flex flex-wrap gap-2 mt-6">
-                    <CallToAction to="https://app.posthog.com/signup" className="mt-2">
-                        Get started - free
-                    </CallToAction>
-                </div>
-            </div>
-
+function ExampleContent() {
+    return (
+        <div className="container">
             <div className="grid @xl:grid-cols-2 gap-y-4 @xl:gap-y-8 pb-8">
                 <h3 className="text-xl font-bold mt-0 @xl:pr-12 border-b border-primary pb-4 @xl:pb-8 mb-0">
                     1. Track your product business
@@ -229,7 +209,17 @@ function FlagshipUseCases() {
                     Get started - free
                 </CallToAction>
             </div>
-        </Editor>
+        </div>
+    )
+}
+
+function FlagshipUseCases() {
+    return (
+        <div className="container mx-auto max-w-screen-md my-12">
+            <ExampleContentHeader />
+
+            <ExampleContent />
+        </div>
     )
 }
 
