@@ -7,9 +7,8 @@ import { TreeMenu } from 'components/TreeMenu'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Question, QuestionForm } from 'components/Squeak'
-import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
-import { IconSidePanel, IconBottomPanel, IconChevronDown, IconNotification, IconSearch } from '@posthog/icons'
+import { IconSidePanel, IconBottomPanel, IconChevronDown, IconNotification, IconSearch, IconPin } from '@posthog/icons'
 import Switch from 'components/RadixUI/Switch'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useToast } from '../../context/Toast'
@@ -95,6 +94,83 @@ const Menu = ({ onValueChange }: { onValueChange: (value: string) => void }) => 
 
 const SIDE_WIDTH_DEFAULT = 600
 
+interface QuestionRowProps {
+    question: any
+    lastQuestionRef: (node?: Element | null) => void
+    appWindowPath?: string
+    bottomHeight: number
+    setBottomHeight: (height: number) => void
+    containerRef: React.RefObject<HTMLDivElement>
+    pinned?: boolean
+    hasPinnedQuestions?: boolean
+}
+
+const QuestionRow = ({
+    question,
+    lastQuestionRef,
+    appWindowPath,
+    bottomHeight,
+    setBottomHeight,
+    containerRef,
+    pinned = false,
+    hasPinnedQuestions = false,
+}: QuestionRowProps) => {
+    const { subject, numReplies, activeAt, replies, profile, permalink } = question
+    const latestAuthor = replies?.data?.[replies.data.length - 1]?.profile || profile
+    const active = `/questions/${permalink}` === appWindowPath
+
+    return (
+        <div key={question.id} ref={lastQuestionRef}>
+            <OSButton
+                asLink
+                to={`/questions/${permalink}`}
+                align="left"
+                width="full"
+                hover="background"
+                size="md"
+                key={question.id}
+                className={` 
+                    flex-wrap @3xl:flex-nowrap !gap-0 @3xl:!gap-1 !items-start
+                    ${active ? 'font-bold bg-accent' : ''}
+                    ${pinned ? 'bg-accent border-b border-primary' : ''}
+                `}
+                onClick={() => {
+                    if (!containerRef.current) return
+                    if (bottomHeight <= 45) {
+                        setBottomHeight(containerRef.current.getBoundingClientRect().height * 0.8)
+                    }
+                }}
+            >
+                {hasPinnedQuestions ? (
+                    <div className="shrink-0 w-7">
+                        {pinned ? <Tooltip trigger={<IconPin className="size-5" />}>Pinned</Tooltip> : null}
+                    </div>
+                ) : null}
+                <div className="basis-9/12 @3xl:basis-auto order-1 @3xl:order-none @3xl:w-48 @3xl:block">
+                    {profile?.firstName} {profile?.lastName}
+                    <span className="text-muted text-sm ml-1 @3xl:hidden">{numReplies}</span>
+                </div>
+                <div
+                    className={`order-3 @3xl:order-none flex-[1_0_100%] @3xl:flex-1 ${
+                        active ? 'font-medium @3xl:font-bold' : 'font-medium'
+                    }`}
+                >
+                    {subject}
+                </div>
+                <div className="hidden @3xl:block w-24 text-center">{numReplies}</div>
+                <div className="order-2 basis-3/12 text-right @3xl:text-left @3xl:basis-auto @3xl:w-60 font-normal">
+                    <Tooltip trigger={dayjs(activeAt).fromNow()}>
+                        {dayjs(activeAt).format('dddd, MMMM D, YYYY')} at {dayjs(activeAt).format('h:mm A')}
+                    </Tooltip>{' '}
+                    <span className="hidden @3xl:inline-block">
+                        by {latestAuthor?.firstName} {latestAuthor?.lastName}
+                    </span>
+                </div>
+            </OSButton>
+        </div>
+    )
+}
+
 const layoutOptions = [
     {
         label: 'Stacked view',
@@ -166,7 +242,7 @@ export default function Inbox(props) {
     const [filters, setFilters] = useState(defaultFilters)
     const { addToast } = useToast()
     const { user, setSubscription, isSubscribed, isValidating } = useUser()
-    const { questions, isLoading, fetchMore, hasMore, refresh } = useQuestions({
+    const { questions, isLoading, fetchMore, hasMore, refresh, pinnedQuestions } = useQuestions({
         limit: 20,
         sortBy: 'activity',
         filters,
@@ -189,6 +265,7 @@ export default function Inbox(props) {
     const { questions: subscribedQuestions } = useSubscribedQuestions()
     const [menuValue, setMenuValue] = useState('')
     const isMobile = useMemo(() => appWindow?.size.width < 896, [appWindow?.size.width])
+    const hasPinnedQuestions = useMemo(() => pinnedQuestions?.length > 0, [pinnedQuestions])
 
     const expandable = useMemo(() => {
         if (!containerRef.current) return true
@@ -354,6 +431,7 @@ export default function Inbox(props) {
                                 <div className={`@container flex-1 min-h-0 text-sm ${sideBySide ? 'w-0' : 'w-full'}`}>
                                     <ScrollArea className="h-full">
                                         <div className="flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary z-10 whitespace-nowrap">
+                                            {hasPinnedQuestions ? <div className="w-8 shrink-0" /> : null}
                                             <div className="hidden @3xl:block w-48">Author</div>
                                             <div className="flex-1">
                                                 <span className="@3xl:hidden">Author / Replies</span>
@@ -363,71 +441,36 @@ export default function Inbox(props) {
                                             <div className="w-60 text-right @3xl:text-left">Last activity</div>
                                         </div>
                                         <div className="px-1 py-1 space-y-px">
+                                            {pinnedQuestions?.map((question) => (
+                                                <QuestionRow
+                                                    key={question.id}
+                                                    question={question}
+                                                    lastQuestionRef={lastQuestionRef}
+                                                    appWindowPath={appWindow?.path}
+                                                    bottomHeight={bottomHeight}
+                                                    setBottomHeight={setBottomHeight}
+                                                    containerRef={containerRef}
+                                                    pinned
+                                                    hasPinnedQuestions={hasPinnedQuestions}
+                                                />
+                                            ))}
                                             {(showSubscribedQuestions
                                                 ? subscribedQuestions
-                                                : flattenStrapiResponse(questions.data)
-                                            )?.map((question) => {
-                                                const { subject, numReplies, activeAt, replies, profile, permalink } =
-                                                    question
-                                                const latestAuthor =
-                                                    replies?.data?.[replies.data.length - 1]?.profile || profile
-                                                const active = `/questions/${permalink}` === appWindow?.path
-                                                return (
-                                                    <div key={question.id} ref={lastQuestionRef}>
-                                                        <OSButton
-                                                            asLink
-                                                            to={`/questions/${permalink}`}
-                                                            align="left"
-                                                            width="full"
-                                                            hover="background"
-                                                            size="md"
-                                                            key={question.id}
-                                                            className={` 
-                                                        flex-wrap @3xl:flex-nowrap !gap-0 @3xl:!gap-1 !items-start
-                                                        ${active ? 'font-bold bg-accent' : ''}
-                                                    `}
-                                                            onClick={() => {
-                                                                if (!containerRef.current) return
-                                                                if (bottomHeight <= 45) {
-                                                                    setBottomHeight(
-                                                                        containerRef.current.getBoundingClientRect()
-                                                                            .height * 0.8
-                                                                    )
-                                                                }
-                                                            }}
-                                                        >
-                                                            <div className="basis-9/12 @3xl:basis-auto order-1 @3xl:order-none @3xl:w-48 @3xl:block">
-                                                                {profile?.firstName} {profile?.lastName}
-                                                                <span className="text-muted text-sm ml-1 @3xl:hidden">
-                                                                    {numReplies}
-                                                                </span>
-                                                            </div>
-                                                            <div
-                                                                className={`order-3 @3xl:order-none flex-[1_0_100%] @3xl:flex-1 ${
-                                                                    active
-                                                                        ? 'font-medium @3xl:font-bold'
-                                                                        : 'font-medium'
-                                                                }`}
-                                                            >
-                                                                {subject}
-                                                            </div>
-                                                            <div className="hidden @3xl:block w-24 text-center">
-                                                                {numReplies}
-                                                            </div>
-                                                            <div className="order-2 basis-3/12 text-right @3xl:text-left @3xl:basis-auto @3xl:w-60 font-normal">
-                                                                <Tooltip trigger={dayjs(activeAt).fromNow()}>
-                                                                    {dayjs(activeAt).format('dddd, MMMM D, YYYY')} at{' '}
-                                                                    {dayjs(activeAt).format('h:mm A')}
-                                                                </Tooltip>{' '}
-                                                                <span className="hidden @3xl:inline-block">
-                                                                    by {latestAuthor?.firstName}{' '}
-                                                                    {latestAuthor?.lastName}
-                                                                </span>
-                                                            </div>
-                                                        </OSButton>
-                                                    </div>
-                                                )
-                                            })}
+                                                : flattenStrapiResponse(questions.data)?.filter(
+                                                      (question) => !question?.pinnedTopics?.[0]
+                                                  )
+                                            )?.map((question) => (
+                                                <QuestionRow
+                                                    key={question.id}
+                                                    question={question}
+                                                    lastQuestionRef={lastQuestionRef}
+                                                    appWindowPath={appWindow?.path}
+                                                    bottomHeight={bottomHeight}
+                                                    setBottomHeight={setBottomHeight}
+                                                    containerRef={containerRef}
+                                                    hasPinnedQuestions={hasPinnedQuestions}
+                                                />
+                                            ))}
                                             {!isLoading && (!questions.data || questions.data.length === 0) && (
                                                 <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
                                                     <div className="text-lg mb-2 font-semibold">No questions found</div>
