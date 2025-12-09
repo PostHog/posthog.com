@@ -54,6 +54,10 @@ Hence the explicit separation between the data and view layers.
   - Where it's not possible:
     - We use regular SCSS files for styling to keep things simple and maintainable, instead of adopting the CSS-in-JS flavor of the month.
     - Inside `MyBlogComponent.tsx`, import `MyBlogComponent.scss`.
+
+    - Namespace all your CSS rules under globally unique classes that match the component's name and case, for example `.DashboardMenu { ... }`.
+    - Follow BEM conventions loosely. If an element can't be namespaced inside a container class (e.g. modals that break out of the containing DOM element), use BEM-style names like `.DashboardMenu__modal` to keep styles isolated.
+    - Keep an eye out for custom styles in SCSS files that can be replaced with Tailwind classes—prefer Tailwind whenever possible.
     - All CSS modules must follow this format, wrapping declarations within an `@layer base { ... }` block:
 
       ```scss
@@ -67,7 +71,7 @@ Hence the explicit separation between the data and view layers.
       }
       ```
 
-    - If you need to import SCSS variables or mixins (like breakpoints), you must place the import inside the `@layer` block and add a stylelint directive to prevent Prettier from moving it:
+      If you need to import SCSS variables or mixins (like breakpoints), you must place the import inside the `@layer` block and add a stylelint directive to prevent Prettier from moving it:
 
       ```scss
       /* stylelint-disable order/order */
@@ -83,14 +87,11 @@ Hence the explicit separation between the data and view layers.
       }
       ```
 
-      - `stylelint-disable order/order` prevents Prettier from moving the import to the bottom and breaking SCSS imports.
-      - Always ensure `@import` statements are inside the `@layer base { ... }` wrapper.
+      `stylelint-disable order/order` prevents Prettier from moving the import to the bottom and breaking SCSS imports.
+      
+      Always ensure `@import` statements are inside the `@layer base { ... }` wrapper.
       > We use CSS @layer base in our CSS modules because we need to tell the CSS cascade what takes precedence; our CSS layers are as follows: `@layer theme, base, components, utilities;` (later = higher). Tailwind styles should take precedence over CSS modules, and are in the layer `utilities`, therefor they are last in our list.
 
-    - Namespace all your CSS rules under globally unique classes that match the component's name and case, for example `.DashboardMenu { ... }`.
-    - Follow BEM conventions loosely. If an element can't be namespaced inside a container class (e.g. modals that break out of the containing DOM element), use BEM-style names like `.DashboardMenu__modal` to keep styles isolated.
-
-  - Keep an eye out for custom styles in SCSS files that can be replaced with Tailwind classes—prefer Tailwind whenever possible.
 - Testing
   - Write [logic tests](https://keajs.org/docs/intro/testing) for all logic files. 
   - If your component is in the `lib/` folder, and has some interactivity, write a [react testing library](https://testing-library.com/docs/react-testing-library/intro/) test for it.
