@@ -1,7 +1,7 @@
 import React from 'react'
 import Editor from 'components/Editor'
-import { useJourneyStore } from '../../store/journeyStore'
-import { WorldMap, ContentPanel } from '../../components/Journey'
+import { useJourneyStore } from './Journey/journeyStore'
+import { WorldMap, ContentPanel } from './Journey/component'
 
 function FlagshipUseCases() {
     const {

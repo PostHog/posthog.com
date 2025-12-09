@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { type Region, type Space, getRegionById, getSpaceById } from '../data/journeyData'
+import { type Region, type Space, getRegionById, getSpaceById } from './journeyData'
 
 interface JourneyState {
     // Selection state

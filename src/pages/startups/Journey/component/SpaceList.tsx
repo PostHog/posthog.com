@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { IconCheck, IconArrowRight } from '@posthog/icons'
-import { type Region, type Space } from '../../data/journeyData'
+import { type Region, type Space } from '../journeyData'
 
 interface SpaceListProps {
     region: Region

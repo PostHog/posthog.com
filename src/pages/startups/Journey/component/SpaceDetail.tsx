@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconCheck } from '@posthog/icons'
 import Link from 'components/Link'
-import { type Region, type Space } from '../../data/journeyData'
+import { type Region, type Space } from '../journeyData'
 
 interface SpaceDetailProps {
     space: Space

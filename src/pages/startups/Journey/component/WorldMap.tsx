@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { regions, type Region, iconMap } from '../../data/journeyData'
+import { regions, type Region, iconMap } from '../journeyData'
 
 interface WorldMapProps {
     selectedRegion: Region | null

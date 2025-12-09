@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { regions, type Region, type Space } from '../../data/journeyData'
+import { regions, type Region, type Space } from '../journeyData'
 import SpaceList from './SpaceList'
 import SpaceDetail from './SpaceDetail'
 
