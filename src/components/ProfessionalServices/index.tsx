@@ -104,40 +104,70 @@ export const ProfessionalServices = () => {
                     <div className="grid gap-4 sm:gap-6 md:gap-8 mb-6">
                         <h3>Instrumentation</h3>
                         <p>
-                            Here we make sure that PostHog is correctly integrated into the codebase using one or more
-                            of our SDKs. We should also:
+                            Here, we make sure that PostHog is correctly integrated into your app using one or more of
+                            our SDKs. We can also:
                             <ul>
-                                <li>Implement any user identification or privacy controls that are required.</li>
                                 <li>
-                                    Ensure they are only tracking the events which they need to (including implementing
-                                    custom events where necessary).
+                                    Implement any user identification or privacy controls that you need based on your
+                                    privacy requirements.
                                 </li>
-                                <li>Integrate the first set of feature flags into their application.</li>
+                                <li>
+                                    Ensure that event capture is tuned so that you are only tracking the events which
+                                    you need to (including implementing custom events where necessary).
+                                </li>
+                                <li>Integrate the first set of feature flags into your application.</li>
                                 <li>Ensure that everything is set up according to our best practice guidance.</li>
                             </ul>
                         </p>
 
                         <h3>Onboarding</h3>
+                        <p>
+                            This is where we create the relevant dashboards, reports and other key items in PostHog to
+                            allow you to see value quickly. First, we will help you define what you need here, and then
+                            can also:
+                        </p>
                         <ul>
-                            <li>Define what they need in terms of dashboards and insights</li>
-                            <li>Build initial reports</li>
-                            <li>Define feature flag and a/b testing strategy</li>
-                            <li>Cohorts</li>
-                            <li>Surveys</li>
+                            <li>Build initial reports and dashboards for you</li>
+                            <li>Define and implement a feature flag and a/b testing strategy</li>
+                            <li>
+                                Create the right cohorts to allow you to gain a deeper understanding of certain segments
+                                of your user base
+                            </li>
+                            <li>Implement no-code surveys and ensure the results are available in the right way</li>
                         </ul>
 
                         <h3>Integration</h3>
+                        <p>
+                            PostHog exists in a wider data ecosystem, and we can help you integrate it into your current
+                            data stack. Our team will first of all define your current and desired data architecture and
+                            then the plumbing required for PostHog to integrate into it. We can then also:
+                        </p>
                         <ul>
-                            <li>Sources</li>
-                            <li>Views</li>
-                            <li>Destinations</li>
-                            <li>Workflows</li>
+                            <li>Implement sources, pulling data into PostHog to be used in the platform</li>
+                            <li>Define views which will make it easier for you to work with data at scale</li>
+                            <li>
+                                Ensure that data is flowing from PostHog into downstream tools such as CRM systems or a
+                                warehouse
+                            </li>
+                            <li>Implement workflows to take real-time actions in response to data in PostHog</li>
                         </ul>
                         <h3>Migration</h3>
+                        <p>
+                            If you're coming to us from an existing provider, you'll want to bring along your historical
+                            data, and we make that easy.
+                        </p>
                         <ul>
-                            <li>Historic data</li>
-                            <li>Dashboards</li>
-                            <li>Flags</li>
+                            <li>
+                                We can orchestrate the import of historic analytics data using our automated migrators
+                                from common vendors
+                            </li>
+                            <li>
+                                We'll implement the dashboards you have defined already in PostHog, optimising them in
+                                line with your requirements where required
+                            </li>
+                            <li>
+                                We can also switch feature flags you have already implemented to use PostHog's library
+                            </li>
                         </ul>
                     </div>
                 </section>
