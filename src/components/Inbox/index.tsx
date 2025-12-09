@@ -147,7 +147,7 @@ const QuestionRow = ({
                     }
                 }}
             >
-                <div className="shrink-0 w-7">
+                <div className="shrink-0 @3xl:basis-auto @3xl:w-7 basis-[5%]">
                     {pinned ? (
                         <Tooltip trigger={<IconPin className="size-5" />}>Pinned</Tooltip>
                     ) : resolved ? (
@@ -155,7 +155,7 @@ const QuestionRow = ({
                     ) : null}
                 </div>
 
-                <div className="basis-9/12 @3xl:basis-auto order-1 @3xl:order-none @3xl:w-48 @3xl:block">
+                <div className="basis-[65%] @3xl:basis-auto order-1 @3xl:order-none @3xl:w-48 @3xl:block">
                     {profile?.firstName} {profile?.lastName}
                     <span className="text-muted text-sm ml-1 @3xl:hidden">{numReplies}</span>
                 </div>
@@ -167,7 +167,7 @@ const QuestionRow = ({
                     {subject}
                 </div>
                 <div className="hidden @3xl:block w-24 text-center">{numReplies}</div>
-                <div className="order-2 basis-3/12 text-right @3xl:text-left @3xl:basis-auto @3xl:w-60 font-normal">
+                <div className="order-2 basis-[30%] text-right @3xl:text-left @3xl:basis-auto @3xl:w-60 font-normal">
                     <Tooltip trigger={dayjs(activeAt).fromNow()}>
                         {dayjs(activeAt).format('dddd, MMMM D, YYYY')} at {dayjs(activeAt).format('h:mm A')}
                     </Tooltip>{' '}
@@ -439,7 +439,7 @@ export default function Inbox(props) {
                                 <div className={`@container flex-1 min-h-0 text-sm ${sideBySide ? 'w-0' : 'w-full'}`}>
                                     <ScrollArea className="h-full">
                                         <div className="flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary z-10 whitespace-nowrap">
-                                            <div className="w-8 shrink-0" />
+                                            <div className="w-8 shrink-0 " />
                                             <div className="hidden @3xl:block w-48">Author</div>
                                             <div className="flex-1">
                                                 <span className="@3xl:hidden">Author / Replies</span>
