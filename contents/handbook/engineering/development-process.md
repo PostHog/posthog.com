@@ -267,7 +267,11 @@ There are a few different ways to release code here:
     * you don't know what impact it will have and want to measure it 
 * release it behind a flag and put it in a feature preview (we call this an open beta)
     *  when you want to slowly release this to people who know they'll likely need to give feedback
-    * you know it isn't 100% and you need feedback 
+    * you know it isn't 100% and you need feedback
+* run old and new at the same time
+    * sometimes called the strangler fig https://martinfowler.com/bliki/StranglerFigApplication.html
+    * run both old and new and compare the output / effect
+    * you can then cut across (sometimes in stages) before removing the old code  
 
 ### Best practices for full releases
 
