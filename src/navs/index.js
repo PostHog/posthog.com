@@ -1321,14 +1321,6 @@ export const handbookSidebar = [
                                 name: 'Communications templates',
                                 url: '/handbook/growth/sales/communications-templates',
                             },
-                            {
-                                name: 'User event streams',
-                                url: '/handbook/growth/sales/user-event-streams',
-                            },
-                            {
-                                name: 'Customer on-sites',
-                                url: '/handbook/growth/sales/customer-onsites',
-                            },
                         ],
                     },
                     {
@@ -1494,6 +1486,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/automations',
                     },
                     {
+                        name: 'User event streams',
+                        url: '/handbook/growth/sales/user-event-streams',
+                    },
+                    {
                         name: 'Who we do business with',
                         url: '/handbook/growth/sales/who-we-do-business-with',
                     },
@@ -1532,6 +1528,10 @@ export const handbookSidebar = [
                     {
                         name: 'New customer onboarding',
                         url: '/handbook/growth/sales/customer-onboarding',
+                    },
+                    {
+                        name: 'Customer on-sites',
+                        url: '/handbook/growth/sales/customer-onsites',
                     },
                 ],
             },
