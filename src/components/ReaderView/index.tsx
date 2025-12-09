@@ -787,10 +787,16 @@ function ReaderViewContent({
                                 >
                                     <Blockquote>
                                         PostHog is an all-in-one developer platform for building successful products. We
-                                        provide product analytics, web analytics, session replay, error tracking,
-                                        feature flags, experimentation, surveys, LLM analytics, data warehouse, a CDP,
-                                        and an AI product assistant to help debug your code, ship features faster, and
-                                        keep all your usage and customer data in one stack.
+                                        provide <a href="/product-analytics">product analytics</a>,{' '}
+                                        <a href="/web-analytics">web analytics</a>,{' '}
+                                        <a href="/session-replay">session replay</a>,{' '}
+                                        <a href="/error-tracking">error tracking</a>,
+                                        <a href="/feature-flags">feature flags</a>,{' '}
+                                        <a href="/experiments">experiments</a>, <a href="/surveys">surveys</a>,{' '}
+                                        <a href="/llm-analytics">LLM analytics</a>,{' '}
+                                        <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an
+                                        <a href="/ai">AI product assistant</a> to help debug your code, ship features
+                                        faster, and keep all your usage and customer data in one stack.
                                     </Blockquote>
                                 </div>
                                 {showQuestions && (
