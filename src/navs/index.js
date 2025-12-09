@@ -1298,16 +1298,6 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/new-sales',
                     },
                     {
-                        name: 'Product-led sales',
-                        url: '/handbook/growth/sales/product-led-sales',
-                        children: [
-                            {
-                                name: 'Expansion, cross-sell & retention',
-                                url: '/handbook/growth/sales/expansion-and-retention',
-                            },
-                        ],
-                    },
-                    {
                         name: 'Outbound sales',
                         url: '/handbook/growth/sales/outbound-sales',
                     },
@@ -1330,6 +1320,16 @@ export const handbookSidebar = [
                     {
                         name: 'Professional services',
                         url: '/handbook/growth/sales/professional-services',
+                    },
+                    {
+                        name: 'Product-led sales',
+                        url: '/handbook/growth/sales/product-led-sales',
+                        children: [
+                            {
+                                name: 'Expansion, cross-sell & retention',
+                                url: '/handbook/growth/sales/expansion-and-retention',
+                            },
+                        ],
                     },
                 ],
             },
