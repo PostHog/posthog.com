@@ -52,7 +52,9 @@ function FlagshipUseCases() {
                         Scale your startup with PostHog{' '}
                         <span className="text-red dark:text-yellow">flagship use cases</span>
                     </h1>
-                    <p className="text-lg opacity-70">A learning journey through the key stages of startup growth</p>
+                    <p className="text-lg text-secondary">
+                        A learning journey through the key stages of startup growth
+                    </p>
                 </div>
 
                 {/* World Map */}
