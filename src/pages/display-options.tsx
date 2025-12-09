@@ -75,9 +75,9 @@ const experienceOptions = [
     {
         label: (
             <span>
-                Squirrel mode{' '}
+                Website mode{' '}
                 <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
-                    <p className="max-w-sm my-0">Too many windows? Limit yourself to one window at a time.</p>
+                    <p className="max-w-sm my-0">Browse one page at a time like a regular website.</p>
                 </Tooltip>
             </span>
         ),
@@ -86,9 +86,9 @@ const experienceOptions = [
     {
         label: (
             <span>
-                Multi-window{' '}
+                OS mode{' '}
                 <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
-                    <p className="max-w-sm my-0">Like a desktop OS, open as many windows as you like.</p>
+                    <p className="max-w-sm my-0">Open multiple pages in draggable windows.</p>
                 </Tooltip>
             </span>
         ),

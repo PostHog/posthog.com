@@ -11,6 +11,8 @@ import { Accordion } from '../RadixUI/Accordion'
 import { useWindow } from '../../context/Window'
 import { getProseClasses } from '../../constants'
 import AddressBar from 'components/OSChrome/AddressBar'
+import { useApp } from '../../context/App'
+
 
 interface AccordionItem {
     title: string
@@ -93,6 +95,7 @@ export default function Explorer({
     onSearch,
     viewportClasses = '',
 }: ExplorerProps) {
+    const { websiteMode } = useApp()
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
     const searchContainerRef = useRef<HTMLDivElement>(null)
@@ -137,7 +140,7 @@ export default function Explorer({
 
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
-            {!fullScreen && (
+            {!fullScreen || !websiteMode && (
                 <>
                     <HeaderBar
                         {...getHeaderBarProps()}
@@ -156,7 +159,7 @@ export default function Explorer({
             <ContentWrapper>
                 <div
                     data-scheme="secondary"
-                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? ' ' : 'h-full'}`}
+                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? ' ' : 'h-full'} ${websiteMode && 'max-w-7xl'}`}
                 >
                     {/* Static right sidebar content (original) */}
                     {rightSidebarContent && (
@@ -217,9 +220,8 @@ export default function Explorer({
                                 )}
                                 <div
                                     ref={searchContainerRef}
-                                    className={`${getProseClasses()} max-w-none h-full ${
-                                        padding ? 'relative @md:p-4' : ''
-                                    } `}
+                                    className={`${getProseClasses()} max-w-none h-full ${padding ? 'relative @md:p-4' : ''
+                                        } `}
                                 >
                                     {!fullScreen && showTitle && <h1>{title}</h1>}
                                     {children}
