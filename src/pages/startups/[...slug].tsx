@@ -46,11 +46,10 @@ const partnerConfigs = [
             <>
                 <IconX className="size-8 text-white inline-block relative top-1" />
                 <img
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/incident_io_ec45f21fff.svg"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/wordmark_colour_light_7d9d5205c6.svg"
                     alt="Incident.io"
                     className="inline-block h-9 relative top-[.2rem]"
                 />
-                <span>Incident.io</span>
             </>
         ),
         value: '$50,000',
