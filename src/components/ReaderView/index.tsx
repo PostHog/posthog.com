@@ -790,11 +790,11 @@ function ReaderViewContent({
                                         provide <a href="/product-analytics">product analytics</a>,{' '}
                                         <a href="/web-analytics">web analytics</a>,{' '}
                                         <a href="/session-replay">session replay</a>,{' '}
-                                        <a href="/error-tracking">error tracking</a>,
+                                        <a href="/error-tracking">error tracking</a>,{' '}
                                         <a href="/feature-flags">feature flags</a>,{' '}
                                         <a href="/experiments">experiments</a>, <a href="/surveys">surveys</a>,{' '}
                                         <a href="/llm-analytics">LLM analytics</a>,{' '}
-                                        <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an
+                                        <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an{' '}
                                         <a href="/ai">AI product assistant</a> to help debug your code, ship features
                                         faster, and keep all your usage and customer data in one stack.
                                     </Blockquote>
