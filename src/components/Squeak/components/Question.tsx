@@ -104,7 +104,7 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
                         data-scheme="primary"
                         className={`list-none p-0 m-0 absolute z-20 max-h-[500px] divide-y divide-primary mt-2 bg-primary shadow-xl border border-primary rounded min-w-52`}
                     >
-                        <div className="relative">
+                        <div className="relative w-full">
                             <ScrollArea className="min-h-0 h-[500px] max-h-[500px]">
                                 {topicGroups
                                     .sort(
