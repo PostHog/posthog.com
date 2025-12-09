@@ -11,7 +11,6 @@ import { IconCheck, IconX } from '@posthog/icons'
 import OSTable from 'components/OSTable'
 import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
 import StripeLogo from '../../images/stripe.svg'
-import IncidentLogo from '../../images/incident.io.svg'
 import ODFLogo from '../../images/odf.svg'
 import Logo from 'components/Logo'
 import OSButton from 'components/OSButton'
@@ -46,7 +45,11 @@ const partnerConfigs = [
         title: (
             <>
                 <IconX className="size-8 text-white inline-block relative top-1" />
-                <img src={IncidentLogo} alt="Incident.io" className="inline-block h-9 relative top-[.2rem]" />
+                <img
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/incident_io_ec45f21fff.svg"
+                    alt="Incident.io"
+                    className="inline-block h-9 relative top-[.2rem]"
+                />
                 <span>Incident.io</span>
             </>
         ),
