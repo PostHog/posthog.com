@@ -282,7 +282,7 @@ A/B tests make sense when:
 
 If you're not sure something should be A/B tested, run one anyway. Feature flags (which experiments run on top of) are a great kill-switch for rolling back features in case something goes sidwways. And it's always nice to know how your metrics move the numbers! 
 
-It's easy to just think "this makes more sense, let's just roll it out." Sometimes that's okay, sometimes that's being arrogant. We obviously can't and shouldn't test everything, but running A/B tests frequently gets your comfortable with being wrong, which is a _very_ handy skill to have.
+It's easy to just think "this makes more sense, let's just roll it out." Sometimes that's okay, sometimes that's being arrogant. We obviously can't and shouldn't test everything, but running A/B tests frequently gets you comfortable with being wrong, which is a _very_ handy skill to have.
 
 #### A/B test metrics
 
