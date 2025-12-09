@@ -11,16 +11,16 @@ Product engineers, our ICP, are very self-serve and happy to implement PostHog t
 The reasons have to be _genuinely helpful_ ones - just 'having a point of contact' is not enough. Reasons include:
 
 - You can save them money:
-  - They've implemented PostHog in a silly way and are consuming stuff they don't need
-  - They can pre-commit and get a discount on credit
-- You can help them get more out of PostHog for the same amount of money, e.g. if they're ingesting loads of events but not using features to their fullest
-- You can train their team on how to use PostHog, so they don't have to
-- You can make them aware of upcoming or new products that are specifically useful for their use case
-- You can be a shortcut to premium support, if they are in your book of business
+  - They've implemented PostHog in a silly way and are consuming stuff they don't need.
+  - They can pre-commit and get a discount on credit.
+- You can help them get more out of PostHog for the same amount of money, e.g. if they're ingesting loads of events but not using features to their fullest.
+- You can train their team on how to use PostHog, so they don't have to.
+- You can make them aware of upcoming or new products that are specifically useful for their use case.
+- You can be a shortcut to premium support, if they are in your book of business.
 
 If you go down the 'saving money' route, bear in mind two things:
-- Prepaid credit never works as an opener - 'save money by fixing implementation' >>> 'save money by committing to credit at a discount'
-- Buying a bunch of credits at a nice discount is much nicer to hear than 'please commit to a scary annual plan' - they can commit for a year, 6 months, whatever so long as they buy >$20k up front 
+- Prepaid credit never works as an opener - 'save money by fixing implementation' >>> 'save money by committing to credit at a discount'.
+- Buying a bunch of credits at a nice discount is much nicer to hear than 'please commit to a scary annual plan' - they can commit for a year, 6 months, whatever so long as they buy >$20k up front. 
 
 ## How to get people to talk to you
 
