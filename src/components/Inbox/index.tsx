@@ -664,6 +664,7 @@ export default function Inbox(props) {
                                                         subscribeButton={false}
                                                         showSlug
                                                         isInForum={true}
+                                                        onPinTopics={refresh}
                                                     />
                                                 </div>
                                             </ScrollArea>
