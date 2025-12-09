@@ -247,6 +247,10 @@ await client.reloadFeatureFlags()
 // Do something with feature flags here
 ```
 
+#### External caching
+
+In multi-worker or edge environments, you can implement custom caching for flag definitions using Redis, Cloudflare KV, or other storage backends. This enables sharing definitions across workers and coordinating fetches. See the [external caching guide](/tutorials/node-external-cache) for details.
+
 ## Experiments (A/B tests)
 
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:

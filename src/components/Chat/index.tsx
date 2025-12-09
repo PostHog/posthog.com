@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import InkeepEmbeddedChat from './Inkeep'
 import { useChat } from 'hooks/useChat'
-import { IconDocument, IconRewind, IconX, IconCode } from '@posthog/icons'
+import { IconDocument, IconRewind, IconX, IconCode, IconChevronDown } from '@posthog/icons'
 import { motion } from 'framer-motion'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
@@ -15,7 +15,7 @@ const ConversationHistoryButton = ({ onClick }: { onClick: () => void }) => {
                     e.stopPropagation()
                     onClick()
                 }}
-                className="border border-light-7 rounded p-1.5 flex items-center space-x-1 click overflow-hidden group h-[28px]"
+                className="border border-primary rounded p-1.5 flex items-center space-x-1 click overflow-hidden group h-[28px]"
                 whileHover={{ width: 'auto' }}
                 initial={{ width: '28px' }}
             >
@@ -37,6 +37,7 @@ export default function Chat(): JSX.Element | null {
     const { setWindowTitle, openNewChat } = useApp()
     const { appWindow, setPageOptions } = useWindow()
     const [showCodeSnippet, setShowCodeSnippet] = useState(true)
+    const [codeExpanded, setCodeExpanded] = useState(false)
 
     const codePrompt = codeSnippet
         ? `The user is asking about this ${codeSnippet.language || 'code'} snippet from ${codeSnippet.sourceUrl}:
@@ -108,7 +109,7 @@ ${codeSnippet.code}
                             return (
                                 <li
                                     key={path}
-                                    className={`font-semibold p-1.5 border border-light-7 rounded flex justify-between bg-primary ${
+                                    className={`font-semibold p-1.5 border border-primary rounded flex justify-between bg-primary ${
                                         context.length === 1 ? 'w-full' : ' w-[80%]'
                                     } flex-shrink-0 transition-all text-primary`}
                                 >
@@ -135,25 +136,33 @@ ${codeSnippet.code}
             </div>
             <Context />
             {codeSnippet && showCodeSnippet && (
-                <div className="border-b border-light dark:border-dark p-2">
-                    <div className="flex items-center justify-between mb-1 text-xs text-primary/60 dark:text-primary-dark/60">
-                        <span className="flex items-center gap-1.5">
+                <div className="border-b border-primary p-2">
+                    <div className="flex items-center justify-between text-xs text-muted">
+                        <button
+                            onClick={() => setCodeExpanded(!codeExpanded)}
+                            className="flex items-center gap-1.5 hover:text-secondary transition-colors"
+                        >
+                            <IconChevronDown
+                                className={`size-3.5 transition-transform ${codeExpanded ? 'rotate-180' : ''}`}
+                            />
                             <IconCode className="size-3.5" />
                             <strong>Code snippet</strong>
                             {codeSnippet.language && <span className="opacity-60">({codeSnippet.language})</span>}
-                        </span>
+                            <span className="opacity-50 font-normal">
+                                · {codeSnippet.code.split('\n').length} lines
+                            </span>
+                        </button>
                         <button onClick={() => setShowCodeSnippet(false)} title="Hide code snippet">
                             <IconX className="size-3.5 opacity-60 hover:opacity-100" />
                         </button>
                     </div>
-                    <div className="max-h-[100px] overflow-auto rounded text-sm [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                        <SingleCodeBlock language={codeSnippet.language} showLabel={false} showAskAI={false}>
-                            {codeSnippet.code}
-                        </SingleCodeBlock>
-                    </div>
-                    <div className="text-xs text-primary/50 dark:text-primary-dark/50 mt-2 italic">
-                        Asking: "Explain this code snippet"
-                    </div>
+                    {codeExpanded && (
+                        <div className="max-h-[200px] overflow-auto rounded text-sm mt-2">
+                            <SingleCodeBlock language={codeSnippet.language} showLabel={false} showAskAI={false}>
+                                {codeSnippet.code}
+                            </SingleCodeBlock>
+                        </div>
+                    )}
                 </div>
             )}
             <div className="flex-1 min-h-0">
