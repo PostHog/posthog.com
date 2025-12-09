@@ -109,6 +109,7 @@ By the end of month 3:
 
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
  - Check out some Buildbetter calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
+ - Shadow other TAMs and observe *how* they solve customer questions, not just the answer they give. Pay attention to the specific data points they check (like library versions or flushing behavior), how they reproduce the issue, and how they explain the technical "why" back to the customer.
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
  - Read all of the Sales section in the Handbook, and update it as you learn more.
  - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales.
