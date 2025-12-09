@@ -4,27 +4,25 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## What should the relationship look like before you attempt cross-sell?
+## Identifying Error Tracking cross-sell opportunities
 
-- You have an active relationship with the customer – there are regular touchpoints and they are responsive to your outreach.
-- You understand their product and PostHog implementation. You know which technologies they are using, and how PostHog fits into their setup.
-- There are no major open issues with their PostHog implementation. They have implemented PostHog Analytics (and Session Replay) into their application(s) and are actively using those features. They are happy with their current setup and aren’t voicing major frustrations.
-- There is no active risk to their renewal, and you aren’t already negotiating that renewal.
-- You know which teams to talk to regarding Error Tracking, you have identified the people best suited to successfully implement Error Tracking.
-  - Ask your current champion who the interesting likely people would be to talk to
-  - Ask PostHog PMs who the ICPs for error tracking are, and see if you can identify those within the customer team
-  - Identify teams that are responsible for critical paths/functions within their codebase, some examples are
-    - Billing teams
-    - Authentication & authorization teams
-    - Data API teams (e.g. REST or GraphQL teams, that see a high volume of queries)
-    - Management API teams (who have to deal with orchestration failures across projects)
-    - Support tooling teams
-  - Job titles that would be interesting are e.g. Platform Engineers, Backend Engineers (especially if they are on one of the teams mentioned above), anybody owning reliability or infrastructure
+Our first example here is for cross-selling Error tracking, which generally has the below requirements.  Feel free to copy this as a format for other bundle motions where applicable. 
+
+### Product specific pre-reqs
 - You understand their engineering processes and timelines (at least on a high level) and expect them to have resources available to look into Error Tracking.
+- They have implemented PostHog Analytics (and ideally Session Replay) into their application(s) and are actively using those features.
 - They are using one of the [supported platforms for Error Tracking](/docs/error-tracking/start-here)
-- **Ideally**: They have expressed pain points that Error Tracking can help resolve.
+- You know which teams to talk to regarding Error Tracking, you have identified the people best suited to successfully implement Error Tracking.
+- They have expressed pain points that Error Tracking can help resolve.
 
-## Identify Error Tracking cross-sell opportunities
+## Motion
+
+1. Qualify if an account is suitable for this motion by understanding how they detect, prioritise, and fix errors today. If your stakeholder can't answer or isn't interested, find another stakeholder. If the answer is that don't have a tool to do this, don't link their errors to impact on key user actions within their app or that they prioritise based on error volume or another metric that is equally uncorrelated with impact on UX, this is a good opportunity for this motion. 
+2. Suggest that they turn on exception capture for the relevant environment, with a billing limit or free trial set so there is no cost. In exchange offer to find the impactful errors they are missing and help them move towards a UX based methodology for error prioritisation by combining errors with PostHog product analytics data.
+3. Create dashboards of the new error data that correlates errors with drop-offs in [conversion events](/docs/data/actions) (signups, checkouts, whatever is relevant here)
+4. Share your analysis as a Loom or other low time commitment format for review, emphasising the uplift in conversion events if these errors were prioritised. If required present these findings back to the stakeholders.
+5. If required help your stakeholder build a business case for the additional spend by linking the missed conversion events to value.  For example, if the average LTV of a signed up user is 50$, multiply the dropoff in sign up events by 50 to get a rough ROI of finding and fixing these errors.
+6. Pitch this value as a reason to remove the billing limit and expand usage of error tracking.
 
 ### Product usage signals
 
@@ -79,7 +77,7 @@ When reviewing accounts, ask:
 
 Once you've identified customers who'd benefit from Error Tracking, show them value in ways relevant to them.
 
-#### Product Analytics
+### Product Analytics
 
 A few good starting points:
 1. **Track error trends over time**: Create a trends insight for `$exception` events and create alerts when errors hit specific thresholds. You can get both historical trends and real-time notifications on high-impact exceptions to prioritize engineering work.
@@ -88,22 +86,24 @@ A few good starting points:
 
 For all of these, you can layer on data like `$exception_types`, `$exception_values`, or `$exception_sources` to figure out which errors are most common and how they're impacting users.
 
-#### Session Replay
+### Session Replay
 
 Session Replay and Error Tracking work wonderfully together – probably the strongest integration we have. You can watch recordings of what users are doing in your app and get clear signals of errors they're hitting. You can search for specific events, jump straight to a given issue, and see what happened before and after – all of which provide valuable context for debugging.
 
 When viewing a session, use the "Only show matching events" toggle to filter by exception-related events. You can use `$rageclick` to identify UI frustration that correlate with errors – this helps highlight silent frustrations users are experiencing that otherwise aren't communicated. You can also create dynamic cohorts of impacted users and take actions on them.
 
-#### Other use cases
+### Other use cases
 
 - **Feature Flags**: Roll out or revert code updates based on users who've hit specific exceptions. This lets you quickly respond to errors by targeting affected user cohorts and minimize impact if users are having a bad experience. Feature flags can act as kill switches – quickly turn off problematic features without deploying changes.
 - **Data Pipeline**: Set up custom destinations to send your error tracking exceptions to other sources if the built-in alert function isn't enough.
 - **AI**: Leverage PostHog AI or Claude Code to help diagnose, summarize, and prioritize issues based on impact.
+- **Surveys**: Use the capture exception template to request feedback from the user when they encounter errors. 
+- **Error tracking integrations**: strengthen adoption of PostHog's error tracking by integrating with [external issue tracking](/docs/error-tracking/integrations) the customer is already using. 
 
-#### PostHog vs other error tracking
+### PostHog vs other error tracking
 Historically, error tracking is something only engineering teams use. With PostHog, there's deliberate value for other teams. For example, marketing can figure out why conversions dipped and look at Session Replays tied to errors. This is incredibly valuable to quickly identify blockers. Other error tracking tools might give you clarity on bugs and errors, but PostHog gives you the complete picture of the user journey.
 
-# Common blockers
+## Common blockers
 ### **“This increases costs that we didn’t budget for”**
 
 We should proactively give credits so customers can trial a new product. For example:

@@ -1302,20 +1302,12 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/product-led-sales',
                         children: [
                             {
-                                name: 'Expansion, cross-sell & retention',
-                                url: '/handbook/growth/sales/expansion-and-retention',
-                            },
-                            {
                                 name: 'Account planning',
                                 url: '/handbook/growth/sales/account-planning',
                             },
                             {
-                                name: 'Cross selling tactics',
-                                url: '/handbook/growth/sales/cross-selling',
-                            },
-                            {
-                                name: 'Cross sell motions',
-                                url: '/handbook/growth/sales/cross-sell-motions',
+                                name: 'Expansion, cross-sell & retention',
+                                url: '/handbook/growth/sales/expansion-and-retention',
                             },
                             {
                                 name: 'Communications templates',
@@ -1346,6 +1338,24 @@ export const handbookSidebar = [
                     {
                         name: 'Professional services',
                         url: '/handbook/growth/sales/professional-services',
+                    },
+                ],
+            },
+            {
+                name: 'Cross-selling',
+                url: '',
+                children: [
+                    {
+                        name: 'How we upsell and cross-sell',
+                        url: '/handbook/growth/cross-selling/how-we-upsell-and-cross-sell',
+                    },
+                    {
+                        name: 'Cross sell motions',
+                        url: '/handbook/growth/cross-selling/cross-sell-motions',
+                    },
+                    {
+                        name: 'Error tracking cross-sell',
+                        url: '/handbook/growth/cross-selling/error-tracking-cross-sell',
                     },
                 ],
             },
@@ -1388,14 +1398,6 @@ export const handbookSidebar = [
                     {
                         name: 'How we use automation',
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
-                    },
-                    {
-                        name: 'How we upsell and cross-sell',
-                        url: '/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell',
-                    },
-                    {
-                        name: 'Error tracking cross-sell',
-                        url: '/handbook/cs-and-onboarding/error-tracking-cross-sell',
                     },
                     {
                         name: 'Customer industry segments',
