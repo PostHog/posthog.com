@@ -236,8 +236,14 @@ function MaxWisdom({ wisdom, animation = 'random' }: { wisdom: string; animation
     const [hasStartedTyping, setHasStartedTyping] = React.useState(false)
     const plainText = React.useMemo(() => {
         // Strip HTML tags for character counting
-        // Use regex for SSR compatibility (document doesn't exist on server)
-        return wisdom.replace(/<[^>]*>/g, '')
+        // Use iterative replacement to handle nested/malformed tags (for CodeQL security)
+        let text = wisdom
+        let previous = ''
+        while (text !== previous) {
+            previous = text
+            text = text.replace(/<[^>]*>/g, '')
+        }
+        return text
     }, [wisdom])
 
     React.useEffect(() => {
