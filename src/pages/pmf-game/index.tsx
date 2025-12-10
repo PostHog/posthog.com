@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import SEO from 'components/seo'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { GameState, GameActions, SceneId, Resource, SavedResource } from '../../data/pmf-game/types'
@@ -8,14 +8,66 @@ import Sidenav from './components/Sidenav'
 import OverworldScene from './components/OverworldScene'
 import LevelScene from './components/LevelScene'
 
+const STORAGE_KEY = 'posthog-pmf-game-state'
+
+const loadGameState = (): GameState | null => {
+    // Using manual localStorage instead of kea-localstorage for now because kea is harder to work with than useState
+    // And we don't need that complexity just yet
+    if (typeof window === 'undefined') return null
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY)
+        if (!saved) return null
+        const parsed = JSON.parse(saved)
+
+        if (parsed.inventory && Array.isArray(parsed.inventory)) {
+            parsed.inventory = parsed.inventory.map((item: SavedResource) => ({
+                ...item,
+                savedAt: item.savedAt ? new Date(item.savedAt) : new Date(),
+            }))
+        }
+        return parsed
+    } catch (error) {
+        console.warn('Failed to load game state from localStorage:', error)
+        return null
+    }
+}
+
+const saveGameState = (state: GameState): void => {
+    if (typeof window === 'undefined') return
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+    } catch (error) {
+        console.warn('Failed to save game state to localStorage:', error)
+    }
+}
+
 export default function PMFGame(): JSX.Element {
-    const [gameState, setGameState] = useState<GameState>({
-        currentScene: 'title',
-        levels: getInitialLevelProgress(),
-        lives: 3,
-        inventory: [],
-        selectedCharacter: 'default',
+    const [gameState, setGameState] = useState<GameState>(() => {
+        const saved = loadGameState()
+        if (saved) {
+            // Ensure all levels exist (in case new levels were added)
+            const initialProgress = getInitialLevelProgress()
+            return {
+                ...saved,
+                levels: {
+                    ...initialProgress,
+                    ...saved.levels,
+                },
+            }
+        }
+        return {
+            currentScene: 'title',
+            levels: getInitialLevelProgress(),
+            lives: 3,
+            inventory: [],
+            selectedCharacter: 'default',
+        }
     })
+
+    // Save to localStorage whenever gameState changes
+    useEffect(() => {
+        saveGameState(gameState)
+    }, [gameState])
 
     // Navigation actions
     const navigateToScene = useCallback((scene: SceneId) => {
