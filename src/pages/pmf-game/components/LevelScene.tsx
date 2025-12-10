@@ -1,5 +1,6 @@
 import React from 'react'
 import { LevelData, Resource, LevelProgress } from '../data/types'
+import PixelBorder from './PixelBorder'
 
 interface LevelSceneProps {
     level: LevelData
@@ -11,7 +12,7 @@ interface LevelSceneProps {
 
 function QuestCard({ quest }: { quest: LevelData['quest'] }) {
     return (
-        <div className="border-4 border-black bg-yellow-50 p-6">
+        <PixelBorder backgroundColor="#fefce8" className="p-6">
             <h3 className="font-game text-xl font-bold mb-2">{quest.title}</h3>
             <p className="text-sm mb-4">{quest.description}</p>
             {quest.command && (
@@ -19,13 +20,13 @@ function QuestCard({ quest }: { quest: LevelData['quest'] }) {
                     <code>{quest.command}</code>
                 </div>
             )}
-        </div>
+        </PixelBorder>
     )
 }
 
 function BlogCard({ resource, onSave }: { resource: Resource; onSave: () => void }) {
     return (
-        <div className="border-4 border-black bg-white p-4 flex gap-4">
+        <PixelBorder className="p-4 flex gap-4">
             <div className="w-24 h-24 bg-gray-200 border-2 border-black flex-shrink-0" />
             <div className="flex-1">
                 <div className="text-xs font-bold opacity-60 mb-1">Blog</div>
@@ -33,44 +34,35 @@ function BlogCard({ resource, onSave }: { resource: Resource; onSave: () => void
                 <p className="text-sm opacity-70 line-clamp-2">{resource.description}</p>
             </div>
             <div className="flex flex-col gap-2 flex-shrink-0">
-                <button
-                    onClick={onSave}
-                    className="px-3 py-1 border-2 border-black bg-white hover:bg-yellow-100 text-sm flex items-center gap-1"
-                >
+                <PixelBorder as="button" onClick={onSave} className="px-3 py-1 text-sm hover:bg-yellow-100">
                     📑 Read later
-                </button>
-                <a
-                    href={resource.url}
-                    className="px-3 py-1 border-2 border-black bg-white hover:bg-yellow-100 text-sm flex items-center gap-1"
-                >
+                </PixelBorder>
+                <PixelBorder as="a" href={resource.url} className="px-3 py-1 text-sm hover:bg-yellow-100">
                     → Read now
-                </a>
+                </PixelBorder>
             </div>
-        </div>
+        </PixelBorder>
     )
 }
 
 function CustomerStoryCard({ resource }: { resource: Resource }) {
     return (
-        <div className="border-4 border-black bg-white p-4">
+        <PixelBorder className="p-4">
             <div className="flex items-center gap-2 mb-2">
                 <span className="font-bold">{resource.company}</span>
             </div>
             <h4 className="font-game font-bold mb-2">{resource.title}</h4>
             {resource.quote && <p className="text-sm italic opacity-70 mb-3">{resource.quote}</p>}
-            <a
-                href={resource.url}
-                className="inline-block px-3 py-1 border-2 border-black bg-white hover:bg-yellow-100 text-sm"
-            >
+            <PixelBorder as="a" href={resource.url} className="px-3 py-1 text-sm hover:bg-yellow-100">
                 Read the story
-            </a>
-        </div>
+            </PixelBorder>
+        </PixelBorder>
     )
 }
 
 function VideoCard({ resource }: { resource: Resource }) {
     return (
-        <div className="border-4 border-black bg-white p-4 flex gap-4">
+        <PixelBorder className="p-4 flex gap-4">
             <div className="w-24 h-24 bg-gray-200 border-2 border-black flex-shrink-0 flex items-center justify-center">
                 <span className="text-2xl">▶️</span>
             </div>
@@ -80,24 +72,21 @@ function VideoCard({ resource }: { resource: Resource }) {
                 <p className="text-sm opacity-70 line-clamp-2">{resource.description}</p>
             </div>
             <div className="flex-shrink-0">
-                <a
-                    href={resource.url}
-                    className="px-3 py-1 border-2 border-black bg-white hover:bg-yellow-100 text-sm flex items-center gap-1"
-                >
+                <PixelBorder as="a" href={resource.url} className="px-3 py-1 text-sm hover:bg-yellow-100">
                     → Watch now
-                </a>
+                </PixelBorder>
             </div>
-        </div>
+        </PixelBorder>
     )
 }
 
 function MaxWisdom({ wisdom }: { wisdom: string }) {
     return (
-        <div className="absolute bottom-4 right-4 flex items-end gap-2">
-            <div className="bg-white border-2 border-black p-2 rounded-lg text-sm max-w-xs">{wisdom}</div>
-            <div className="w-12 h-12 bg-gray-200 border-2 border-black rounded-full flex items-center justify-center">
+        <div className="flex items-end gap-2 items-center">
+            <div className="w-12 h-12 bg-gray-200 border-2 border-black rounded-full flex items-center justify-center flex-shrink-0 bg-white">
                 🦔
             </div>
+            <div className="p-2 text-sm max-w-xs bg-white border-2 border-black">{wisdom}</div>
         </div>
     )
 }
@@ -114,67 +103,105 @@ export default function LevelScene({
     const videos = level.resources.filter((r) => r.type === 'video')
 
     return (
-        <div className="max-w-screen-lg mx-auto p-8">
-            {/* Level Header */}
-            <div className="mb-6">
-                <button className="px-4 py-2 bg-white border-4 border-black font-game text-lg hover:bg-yellow-100">
-                    LEVEL {String(levelNumber).padStart(2, '0')} ▶
-                </button>
-            </div>
+        <div className="max-w-screen-lg mx-auto">
+            {/* Hero Image with Overlaid Header */}
+            <div className="relative w-full h-80 overflow-hidden">
+                {level.illustration ? (
+                    <div
+                        className="absolute inset-0"
+                        style={{
+                            backgroundImage: `url(${level.illustration})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                        }}
+                    />
+                ) : (
+                    <div className="absolute inset-0 bg-accent dark:bg-accent-dark" />
+                )}
 
-            {/* Level Illustration */}
-            <div className="relative mb-8 border-4 border-black bg-gradient-to-b from-blue-200 to-green-200 h-64 flex items-center justify-center">
-                <h2 className="font-game text-4xl font-bold text-center drop-shadow-lg">{level.name}</h2>
-                {level.maxWisdom && <MaxWisdom wisdom={level.maxWisdom} />}
-            </div>
+                {/* Dark overlay for text legibility */}
+                <div className="absolute inset-0 bg-black/40" />
 
-            {/* Quest Section */}
-            <div className="mb-8">
-                <div className="inline-block px-4 py-2 bg-red-500 text-white font-game text-lg border-4 border-black mb-4 -rotate-2">
-                    Quest
-                </div>
-                <QuestCard quest={level.quest} />
-            </div>
-
-            {/* Resources Section */}
-            {level.resources.length > 0 && (
-                <div className="mb-8">
-                    <div className="inline-block px-4 py-2 bg-green-500 text-white font-game text-lg border-4 border-black mb-4 -rotate-2">
-                        Resources
+                {/* Overlay content */}
+                <div className="absolute inset-0 flex flex-col justify-between p-6">
+                    {/* Top left: Level number and name */}
+                    <div className="w-1/2 flex flex-col items-start gap-2 pl-6 py-6">
+                        <PixelBorder as="button" className="px-4 py-2 font-game text-lg hover:bg-yellow-100 bg-white">
+                            LEVEL {String(levelNumber).padStart(2, '0')} ▶
+                        </PixelBorder>
+                        <h1 className="font-game text-5xl font-bold text-white">{level.name}</h1>
                     </div>
 
-                    {/* Blog Posts */}
-                    {blogs.length > 0 && (
-                        <div className="space-y-4 mb-6">
-                            {blogs.map((resource) => (
-                                <BlogCard
-                                    key={resource.id}
-                                    resource={resource}
-                                    onSave={() => onSaveResource(resource)}
-                                />
-                            ))}
-                        </div>
-                    )}
-
-                    {/* Customer Stories */}
-                    {customerStories.length > 0 && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            {customerStories.map((resource) => (
-                                <CustomerStoryCard key={resource.id} resource={resource} />
-                            ))}
-                        </div>
-                    )}
-
-                    {/* Videos */}
-                    {videos.length > 0 && (
-                        <div className="space-y-4">
-                            {videos.map((resource) => (
-                                <VideoCard key={resource.id} resource={resource} />
-                            ))}
+                    {/* Bottom right: Max Wisdom */}
+                    {level.maxWisdom && (
+                        <div className="self-end">
+                            <MaxWisdom wisdom={level.maxWisdom} />
                         </div>
                     )}
                 </div>
-            )}
+            </div>
+
+            <div className="p-8">
+                {/* Quest Section */}
+                <div className="mb-8">
+                    <PixelBorder
+                        inline
+                        borderColor="#ef4444"
+                        backgroundColor="#ef4444"
+                        className="px-4 py-2 text-white font-game text-lg"
+                    >
+                        Quest
+                    </PixelBorder>
+                    <div className="mt-4">
+                        <QuestCard quest={level.quest} />
+                    </div>
+                </div>
+
+                {/* Resources Section */}
+                {level.resources.length > 0 && (
+                    <div className="mb-8">
+                        <PixelBorder
+                            inline
+                            borderColor="#22c55e"
+                            backgroundColor="#22c55e"
+                            className="px-4 py-2 text-white font-game text-lg"
+                        >
+                            Resources
+                        </PixelBorder>
+
+                        {/* Blog Posts */}
+                        {blogs.length > 0 && (
+                            <div className="space-y-4 mb-6 mt-4">
+                                {blogs.map((resource) => (
+                                    <BlogCard
+                                        key={resource.id}
+                                        resource={resource}
+                                        onSave={() => onSaveResource(resource)}
+                                    />
+                                ))}
+                            </div>
+                        )}
+
+                        {/* Customer Stories */}
+                        {customerStories.length > 0 && (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                {customerStories.map((resource) => (
+                                    <CustomerStoryCard key={resource.id} resource={resource} />
+                                ))}
+                            </div>
+                        )}
+
+                        {/* Videos */}
+                        {videos.length > 0 && (
+                            <div className="space-y-4">
+                                {videos.map((resource) => (
+                                    <VideoCard key={resource.id} resource={resource} />
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

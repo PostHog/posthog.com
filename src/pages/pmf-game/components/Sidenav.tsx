@@ -125,9 +125,9 @@ export default function Sidenav({ gameState, actions }: SidenavProps): JSX.Eleme
         <div className="flex flex-col h-full">
             <button
                 onClick={() => actions.navigateToScene('title')}
-                className="p-2 text-sm font-bold border-b-2 border-black hover:bg-yellow-100 flex items-center gap-2 text-left"
+                className="p-2 text-sm font-bold flex items-center gap-2 text-left opacity-50 hover:opacity-100 transition-opacity"
             >
-                ← Back to Title
+                ← Exit game
             </button>
 
             <div className="flex flex-col gap-2 p-2">
@@ -143,7 +143,7 @@ export default function Sidenav({ gameState, actions }: SidenavProps): JSX.Eleme
                 <NavButton icon="📍" title="You are here" subtitle="Jump ahead at any time" />
             </div>
 
-            <div className="flex-1 overflow-auto border-t-2 border-black">
+            <div className="flex-1 overflow-auto">
                 {currentScene === 'overworld' ? (
                     // Overworld: Show level list
                     <div className="p-2">
@@ -165,6 +165,7 @@ export default function Sidenav({ gameState, actions }: SidenavProps): JSX.Eleme
                 ) : isInLevel && currentLevel ? (
                     // In level: Show checklist
                     <div className="p-2">
+                        <div className="font-semibold text-sm opacity-50">Checklist</div>
                         {currentLevel.checklistItems.map((item, index) => (
                             <ChecklistItem
                                 key={item.id}
@@ -176,7 +177,7 @@ export default function Sidenav({ gameState, actions }: SidenavProps): JSX.Eleme
                 ) : null}
             </div>
 
-            <div className="p-3 border-t-2 border-black space-y-2">
+            <div className="p-3 space-y-2">
                 <ProgressBar progress={isInLevel ? currentLevelProgress : overallProgress} />
                 <Lives count={lives} />
                 <div className="text-xs opacity-60">

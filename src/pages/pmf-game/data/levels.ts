@@ -6,6 +6,8 @@ export const LEVELS: LevelData[] = [
         name: 'Product Market Fit Valley',
         theme: 'Finding your first users and validating the problem',
         description: 'Begin your journey by setting up the foundations for understanding your users.',
+        illustration:
+            'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Untitled_Artwork_295_1_edf203e3b0.png',
         quest: {
             id: 'install-posthog',
             title: 'Install PostHog with the Wizard',

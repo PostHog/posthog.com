@@ -65,8 +65,10 @@ export default function OverworldScene({ levels, onSelectLevel }: OverworldScene
     return (
         <div className="max-w-screen-lg mx-auto p-8">
             <div className="text-center mb-8">
-                <h1 className="font-game text-4xl font-bold mb-2">World Map</h1>
-                <p className="text-lg opacity-70">Select a level to continue your journey</p>
+                <h1 className="font-game text-4xl font-bold mb-2">
+                    <strike>Office</strike> World Map
+                </h1>
+                <p className="text-lg opacity-70">Select a level to continue your journey towards PMF</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
