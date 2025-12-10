@@ -19,6 +19,8 @@ While talking with customers or analyzing the account, do some discovery to unde
 
 We typically hand the account over to Sales when a customer is interested in the annual plan, requires additional contractual or legal support, or we notice potential ourselves.
 
+Make sure to mention our point of contact, i.e., the person you've been in touch with, while handing over the account to Sales.
+
 #### Unresponsive customers during onboarding
 
 Historically, there's still a good chance that they'll talk with Sales after passing them on! AEs have been successful in reaching out and securing long-term commitments. **You don't have to wait for the customer to complete the onboarding program** - you can pass them earlier on, if you see that it makes sense. If there are any pending config issues that you raised before but the customer didn't respond to, just provide relevant context to the fellow AE/TAM - sometimes it might be a good conversation starter!
