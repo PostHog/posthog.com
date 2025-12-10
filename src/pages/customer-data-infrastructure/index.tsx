@@ -1,26 +1,30 @@
 import React, { useEffect } from 'react'
 import { Fieldset } from 'components/OSFieldset'
-import OSTable from 'components/OSTable'
-import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
-import OSButton from 'components/OSButton'
-import CDPDiagram from './CDPDiagram'
 import Link from 'components/Link'
-import { IconArrowUpRight, IconAsterisk, IconDatabaseBolt } from '@posthog/icons'
+import {
+    IconArrowRight,
+    IconArrowUpRight,
+    IconAsterisk,
+    IconClock,
+    IconDatabase,
+    IconDatabaseBolt,
+    IconPlug,
+    IconShuffle,
+    IconX,
+} from '@posthog/icons'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { TreeMenu } from 'components/TreeMenu'
-import ZoomHover from 'components/ZoomHover'
-import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
+import { AppLink } from 'components/OSIcons/AppIcon'
 import { IconPresentation } from 'components/OSIcons'
 import { useApp } from '../../context/App'
 import useProduct from '../../hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { TextureTan } from 'components/Textures'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { useWindow } from '../../context/Window'
 import TeamMember from 'components/TeamMember'
 import WistiaCustomPlayer from 'components/WistiaCustomPlayer'
+import DuckDBWaitlistSurvey from 'components/DuckDBWaitlistSurvey'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -150,16 +154,6 @@ export default function CDP(): JSX.Element {
                 },
             ],
         },
-        // {
-        //   cells: [
-        //     { content: 'app integrations' },
-        //     { content: 'sync data to customer-facing platforms' },
-        //     {
-        //       content: 'Salesforce, HubSpot, Customer.io, Braze, Amplitude, Mixpanel',
-        //       className: '',
-        //     },
-        //   ],
-        // },
     ]
 
     // Define the specific data products we want to display in order
@@ -178,9 +172,81 @@ export default function CDP(): JSX.Element {
 
     useEffect(() => {
         if (appWindow) {
-            setWindowTitle(appWindow, 'warehouse vs ETL vs CDP??.md')
+            setWindowTitle(appWindow, 'posthog data stack.md')
         }
     }, [])
+
+    const dataStackProducts: Array<{
+        id: string
+        title: string
+        description: string
+        url: string
+        perfectFor?: string
+        notReadyFor?: string
+        badge?: string
+        icon: string
+        showWaitlist?: boolean
+    }> = [
+        {
+            id: 'managed-duckdb',
+            icon: 'IconDatabaseBolt',
+            title: 'Managed DuckDB warehouse',
+            url: 'TODO',
+            badge: 'Beta',
+            description:
+                "A single-tenant DuckDB warehouse that's automatically filled with your PostHog data - and anything else you sync in.",
+            perfectFor: 'data engineers and analysts',
+            showWaitlist: true,
+        },
+        {
+            id: 'shared-clickhouse',
+            icon: 'IconDatabase',
+            title: 'Shared Clickhouse warehouse',
+            url: 'TODO',
+            description: 'Shared warehouse infrastructure for basic warehousing and analysis.',
+            perfectFor: 'founders, product teams, and product analysts',
+        },
+        {
+            id: 'data-import',
+            icon: 'IconPlug',
+            title: 'Data import',
+            url: 'TODO',
+            description:
+                'Use our 60+ sources to get data into your warehouse, including direct warehouse sources, SDKs, and webhooks.',
+            perfectFor: 'product teams, data engineers, and analysts',
+        },
+        {
+            id: 'modeling-transformation',
+            icon: 'IconShuffle',
+            title: 'Modeling & transformation',
+            url: 'TODO',
+            description: 'Build modular, testable data tables that load in an instant.',
+            perfectFor: 'data analysts and product teams',
+            notReadyFor:
+                'data engineers. We recommend bringing your favorite tools like DBT for now until our tooling is more mature.',
+        },
+        {
+            id: 'queries-visualization',
+            icon: 'IconAsterisk',
+            title: 'Queries & visualization',
+            url: '/data-warehouse',
+            description:
+                'Explore your data with SQL, build business intelligence dashboards, and visualize key metrics.',
+            perfectFor: 'product teams',
+            notReadyFor:
+                'data analysts. We recommend bringing your favorite tools like Hex for now until our tooling is more mature.',
+        },
+        {
+            id: 'reverse-etl',
+            icon: 'IconArrowUpRight',
+            title: 'Reverse ETL',
+            badge: 'Beta',
+            url: '/customer-data-infrastructure/destinations',
+            description:
+                'Get data out to the tools that run your business with realtime event streaming pipelines, batch exports, and webhooks.',
+            perfectFor: 'data engineers, product teams, and marketing teams',
+        },
+    ]
 
     return (
         <>
@@ -192,7 +258,7 @@ export default function CDP(): JSX.Element {
             />
             <ReaderView
                 leftSidebar={<LeftSidebarContent />}
-                title="warehouse vs ETL vs CDP??.md"
+                title="posthog-data-stack.md"
                 hideTitle={true}
                 {...({
                     header: (
@@ -261,40 +327,8 @@ export default function CDP(): JSX.Element {
                     Anything that connects to Postgres can connect to your PostHog DuckDB warehouse using our{' '}
                     <Link to="https://github.com/posthog/duckgres">Duckgres wrapper</Link>.
                 </p>
-
-                {/* <h3>data integrations</h3> */}
-                {/* 
-                <OSTabs
-                    frame={true}
-                    className="my-6"
-                    triggerDataScheme="primary"
-                    tabs={[
-                        {
-                            value: 'data-in',
-                            label: 'data in',
-                            content: <OSTable columns={dataInColumns} rows={dataInRows} editable={false} />,
-                        },
-                        {
-                            value: 'transformation',
-                            label: 'transformation',
-                            content: (
-                                <OSTable columns={transformationColumns} rows={transformationRows} editable={false} />
-                            ),
-                        },
-                        {
-                            value: 'data-out',
-                            label: 'data out',
-                            content: <OSTable columns={dataOutColumns} rows={dataOutRows} editable={false} />,
-                        },
-                    ]}
-                    defaultValue="data-in"
-                />
-                <OSButton to="/cdp" variant="secondary" asLink>
-                    view data connectors.db &rarr;
-                </OSButton> 
-                */}
                 <h3>
-                    A modern data stack that is{' '}
+                    A modern data stack that's{' '}
                     <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">
                         built for data engineers
                     </span>{' '}
@@ -324,88 +358,55 @@ export default function CDP(): JSX.Element {
                 <h3>Data stack products</h3>
 
                 <ul className="list-none pl-0">
-                    <li className="relative pl-8">
-                        <IconArrowUpRight className="-scale-y-1 size-6 inline-block text-muted absolute top-0 left-0" />
-                        <Link to="TODO">Managed DuckDB warehouse</Link>
-                        <span className="rounded-sm bg-highlight py-0.5 ml-2 px-1 text-xs font-bold text-red dark:text-yellow">
-                            Beta
-                        </span>
+                    {dataStackProducts.map((product) => {
+                        const iconMap: Record<string, typeof IconDatabase> = {
+                            IconDatabaseBolt,
+                            IconDatabase,
+                            IconPlug,
+                            IconShuffle,
+                            IconAsterisk,
+                            IconArrowUpRight,
+                        }
+                        const Icon = iconMap[product.icon]
 
-                        <br />
-                        <span className="text-sm text-secondary">
-                            A single-tenant DuckDB warehouse that's automatically filled with your PostHog data - and
-                            anything else you sync in.
-                        </span>
-                        <br />
-                        <span className="text-sm text-secondary">Perfect for: data engineers and analysts</span>
-                        <br />
-                        <span className="text-sm text-secondary">TODO: waitlist entry</span>
-                    </li>
-                    <li className="relative pl-8">
-                        <IconDatabaseBolt className="size-6 inline-block text-muted absolute top-0 left-0" />
-                        <Link to="TODO">Shared Clickhouse warehouse</Link>
-                        <br />
-                        <span className="text-sm text-secondary">
-                            Shared warehouse infrastructure for basic warehousing and analysis.
-                        </span>
-                        <br />
-                        <span className="text-sm text-secondary">
-                            Perfect for: founders, product teams, and product analysts
-                        </span>
-                    </li>
-                    <li className="relative pl-8">
-                        <IconDatabaseBolt className="size-6 inline-block text-muted absolute top-0 left-0" />
-                        <Link to="TODO">Data import</Link>
-                        <br />
-                        <span className="text-sm text-secondary">
-                            Use our 60+ sources to get data into your warehouse, including direct warehouse sources,
-                            SDKs, and webhooks.
-                        </span>
-                        <br />
-                        <span className="text-sm text-secondary">
-                            Perfect for: product teams, data engineers, and analysts
-                        </span>
-                    </li>
-                    <li className="relative pl-8">
-                        <IconDatabaseBolt className="size-6 inline-block text-muted absolute top-0 left-0" />
-                        <Link to="TODO">Modeling & transformation</Link>
-                        <br />
-                        <span className="text-sm text-secondary">
-                            Build modular, testable data tables that load in an instant.
-                        </span>
-                        <br />
-                        <span className="text-sm text-secondary">Perfect for: data analysts and product teams</span>
-                        <br />
-                        <span className="text-sm text-secondary">
-                            Not quite ready for: data engineers. We recommend bringing your favorite tools like DBT for
-                            now until our tooling is more mature.
-                        </span>
-                    </li>
-                    <li className="relative pl-8">
-                        <IconAsterisk className="size-6 inline-block text-muted absolute top-0 left-0" />
-                        <Link to="/data-warehouse">Queries & visualization</Link>
-                        <br />
-                        <span className="text-sm text-secondary">
-                            Explore your data with SQL, build business intelligence dashboards, and visualize key
-                            metrics.
-                        </span>
-                        <br />
-                        <span className="text-sm text-secondary">Perfect for: product teams</span>
-                        <br />
-                        <span className="text-sm text-secondary">
-                            Not quite ready for: data analysts. We recommend bringing your favorite tools like Hex for
-                            now until our tooling is more mature.
-                        </span>
-                    </li>
-                    <li className="relative pl-8">
-                        <IconArrowUpRight className="size-6 inline-block text-muted absolute top-0 left-0" />
-                        <Link to="/customer-data-infrastructure/destinations">Reverse ETL</Link>
-                        <br />
-                        <span className="text-sm text-secondary">
-                            Get data out to the tools that run your business with realtime event streaming pipelines,
-                            batch exports, and webhooks.
-                        </span>
-                    </li>
+                        return (
+                            <li key={product.id} className="relative pl-8 mb-4">
+                                <Icon className="size-6 inline-block text-muted absolute top-0 left-0" />
+                                <Link to={product.url}>{product.title}</Link>
+                                {product.badge && (
+                                    <span className="rounded-sm bg-highlight py-0.5 ml-2 px-1 text-xs font-bold text-red dark:text-yellow">
+                                        {product.badge}
+                                    </span>
+                                )}
+                                <p className="text-sm text-secondary !my-0.5">{product.description}</p>
+                                {product.perfectFor && (
+                                    <>
+                                        <p className="text-xs text-secondary ml-4 !my-0">
+                                            <span className="font-bold">
+                                                <IconArrowRight className="size-3 inline -mt-0.5" /> Perfect for:
+                                            </span>{' '}
+                                            {product.perfectFor}
+                                        </p>
+                                    </>
+                                )}
+                                {product.notReadyFor && (
+                                    <>
+                                        <p className="text-xs text-secondary ml-4 !my-0">
+                                            <span className="font-bold">
+                                                <IconClock className="size-3 inline -mt-0.5" /> Not quite ready for:
+                                            </span>{' '}
+                                            {product.notReadyFor}
+                                        </p>
+                                    </>
+                                )}
+                                {product.showWaitlist && (
+                                    <div className="mt-2 max-w-sm">
+                                        <DuckDBWaitlistSurvey />
+                                    </div>
+                                )}
+                            </li>
+                        )
+                    })}
                 </ul>
 
                 {/* TODO: we might want to keep this diagram? */}
