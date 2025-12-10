@@ -31,7 +31,7 @@ The prerequisite to all of this is having an idea you want validated, ideally mu
 Often, the specific customer is **you** and the problem is **one you've had**. 
 
 - The [GrubHub founders](https://mixergy.com/interviews/grubhub-michael-evans-interview/) were fed up not knowing which restaurants near them could deliver food.
-- [Mecury's founder](https://tearsheet.co/podcasts/there-were-all-these-other-great-services-but-banking-was-kind-of-static-mercurys-immad-akhund-on-banking-startups/), Immad Akhund, "was just really frustrated as an entrepreneur that I had all these great other services, which improved over time, but banking was this kind of static thing that I was forced to use and rely on."
+- [Mercury's founder](https://tearsheet.co/podcasts/there-were-all-these-other-great-services-but-banking-was-kind-of-static-mercurys-immad-akhund-on-banking-startups/), Immad Akhund, "was just really frustrated as an entrepreneur that I had all these great other services, which improved over time, but banking was this kind of static thing that I was forced to use and rely on."
 - The [ElevenLabs founders](https://concept.vc/news/founder-stories-elevenlabs) felt dubbing (voiceovers) into their native Polish "were flat and monotonous."
 - The [Deel founders](https://www.backscoop.com/newsletter-posts/deel-the-founding-story-of-the-17b-company-that-makes-global-work-possible) faced repeated problems hiring internationally in past startups.
 - [Tope Awotona of Calendly](https://www.linkedin.com/posts/guyrazpodcasts_three-lessons-about-entrepreneurship-from-activity-7383418746020745216-k3Sy) was tired of endless back and forth emails trying to schedule meetings.
