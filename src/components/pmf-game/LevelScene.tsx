@@ -1,5 +1,5 @@
 import React from 'react'
-import { LevelData, Resource, LevelProgress } from '../../../data/pmf-game/types'
+import { LevelData, Resource, LevelProgress } from '../../data/pmf-game/types'
 import PixelBorder from './PixelBorder'
 import OSButton from 'components/OSButton'
 import * as Icons from '@posthog/icons'

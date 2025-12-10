@@ -154,6 +154,10 @@ export const LEVELS: LevelData[] = [
             { id: 'read-resources', label: 'Read resources', completed: false },
         ],
         maxWisdom: `Uh oh. It looks like you need to find some PMF... like <em>ASAP</em>! But don't panic. It's out there.`,
+        hoverCharacter: {
+            image: '/images/pmf-game/sweaty.png',
+            dialogue: "We need to find PMF before we run out of runway! Let's figure out what our users actually want.",
+        },
     },
     {
         id: 'level2',

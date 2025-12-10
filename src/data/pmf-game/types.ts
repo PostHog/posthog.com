@@ -34,6 +34,11 @@ export interface Quest {
     completed: boolean
 }
 
+export interface HoverCharacter {
+    image: string
+    dialogue: string
+}
+
 export interface LevelData {
     id: string
     name: string
@@ -45,6 +50,7 @@ export interface LevelData {
     resources: Resource[]
     checklistItems: ChecklistItem[]
     maxWisdom?: string // Tip from Max the hedgehog
+    hoverCharacter?: HoverCharacter // Character that appears on hover in overworld
 }
 
 export interface SavedResource extends Resource {

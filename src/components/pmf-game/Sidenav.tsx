@@ -1,6 +1,6 @@
 import React from 'react'
-import { GameState, GameActions } from '../../../data/pmf-game/types'
-import { LEVELS } from '../../../data/pmf-game/levels'
+import { GameState, GameActions } from '../../data/pmf-game/types'
+import { LEVELS } from '../../data/pmf-game/levels'
 import PixelBorder from './PixelBorder'
 
 interface SidenavProps {
