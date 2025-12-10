@@ -2972,7 +2972,6 @@ export const docsMenu = {
                     children: [
                         { name: 'Overview', url: '/docs/product-analytics/installation' },
                         { name: 'Web', url: '/docs/product-analytics/installation/web' },
-                        { name: 'AI wizard', url: '/docs/product-analytics/installation/wizard' },
                         { name: 'React', url: '/docs/product-analytics/installation/react' },
                         { name: 'Node.js', url: '/docs/product-analytics/installation/nodejs' },
                         { name: 'Python', url: '/docs/product-analytics/installation/python' },
@@ -2987,7 +2986,6 @@ export const docsMenu = {
                         { name: 'Elixir', url: '/docs/product-analytics/installation/elixir' },
                         { name: 'Flutter', url: '/docs/product-analytics/installation/flutter' },
                         { name: '.NET', url: '/docs/product-analytics/installation/dotnet' },
-                        { name: 'Framework guides', url: '/docs/product-analytics/installation/frameworks' },
                         { name: 'API', url: '/docs/product-analytics/installation/api' },
                     ],
                 },
@@ -3238,7 +3236,6 @@ export const docsMenu = {
                     color: 'blue',
                     children: [
                         { name: 'Overview', url: '/docs/web-analytics/installation' },
-                        { name: 'AI wizard', url: '/docs/web-analytics/installation/wizard' },
                         { name: 'Web', url: '/docs/web-analytics/installation/web' },
                         { name: 'React', url: '/docs/web-analytics/installation/react' },
                         { name: 'Next.js', url: '/docs/web-analytics/installation/nextjs' },
@@ -3446,7 +3443,6 @@ export const docsMenu = {
                     children: [
                         { name: 'Overview', url: '/docs/feature-flags/installation' },
                         { name: 'Web', url: '/docs/feature-flags/installation/web' },
-                        { name: 'AI wizard', url: '/docs/feature-flags/installation/wizard' },
                         { name: 'React', url: '/docs/feature-flags/installation/react' },
                         { name: 'Node.js', url: '/docs/feature-flags/installation/nodejs' },
                         { name: 'Python', url: '/docs/feature-flags/installation/python' },
@@ -3457,7 +3453,6 @@ export const docsMenu = {
                         { name: 'Android', url: '/docs/feature-flags/installation/android' },
                         { name: 'iOS', url: '/docs/feature-flags/installation/ios' },
                         { name: 'Java', url: '/docs/feature-flags/installation/java' },
-                        { name: 'Rust', url: '/docs/feature-flags/installation/rust' },
                         { name: 'Flutter', url: '/docs/feature-flags/installation/flutter' },
                         { name: 'Elixir', url: '/docs/feature-flags/installation/elixir' },
                         { name: '.NET', url: '/docs/feature-flags/installation/dotnet' },
