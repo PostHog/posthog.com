@@ -9,12 +9,14 @@ interface SidenavProps {
 
 function NavButton({
     icon,
+    iconUrl,
     title,
     subtitle,
     onClick,
     active = false,
 }: {
-    icon: string
+    icon?: string
+    iconUrl?: string
     title: string
     subtitle: string
     onClick?: () => void
@@ -23,16 +25,21 @@ function NavButton({
     return (
         <button
             onClick={onClick}
-            className={`w-full text-left p-2 border-2 border-black bg-white hover:bg-yellow-100 transition-colors ${
+            className={`w-full text-left py-1 px-2 border-2 border-black bg-white hover:bg-yellow-100 transition-colors ${
                 active ? 'bg-yellow-200' : ''
             }`}
         >
-            <div className="flex items-center gap-2">
-                <span className="text-2xl">{icon}</span>
+            <div className="flex items-center justify-between">
                 <div>
                     <div className="font-bold text-sm font-game">{title}</div>
                     <div className="text-xs opacity-70">{subtitle}</div>
                 </div>
+
+                {iconUrl ? (
+                    <img src={iconUrl} alt="" className="m-0 ml-auto" />
+                ) : (
+                    <span className="text-2xl ml-auto">{icon}</span>
+                )}
             </div>
         </button>
     )
@@ -132,15 +139,27 @@ export default function Sidenav({ gameState, actions }: SidenavProps): JSX.Eleme
 
             <div className="flex flex-col gap-2 p-2">
                 <NavButton
-                    icon="🗺️"
+                    iconUrl="https://res.cloudinary.com/dmukukwp6/image/upload/map_d480208b70.svg"
                     title="World Map"
                     subtitle="Select another track"
                     onClick={() => actions.navigateToOverworld()}
                     active={currentScene === 'overworld'}
                 />
-                <NavButton icon="📦" title="Inventory" subtitle="Open your saved resources" />
-                <NavButton icon="🦔" title="Character" subtitle="Change your hedgehog skin" />
-                <NavButton icon="📍" title="You are here" subtitle="Jump ahead at any time" />
+                <NavButton
+                    iconUrl="https://res.cloudinary.com/dmukukwp6/image/upload/folder_b86a35bb72.svg"
+                    title="Inventory"
+                    subtitle="Open your saved resources"
+                />
+                <NavButton
+                    iconUrl="https://res.cloudinary.com/dmukukwp6/image/upload/classic_5f0ab23b3d.svg"
+                    title="Character"
+                    subtitle="Change your hedgehog skin"
+                />
+                <NavButton
+                    iconUrl="https://res.cloudinary.com/dmukukwp6/image/upload/compass2_1b70fa4b99.svg"
+                    title="You are here"
+                    subtitle="Jump ahead at any time"
+                />
             </div>
 
             <div className="flex-1 overflow-auto">

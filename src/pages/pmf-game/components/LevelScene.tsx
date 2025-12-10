@@ -24,21 +24,37 @@ function QuestCard({ quest }: { quest: LevelData['quest'] }) {
     )
 }
 
-function BlogCard({ resource, onSave }: { resource: Resource; onSave: () => void }) {
+function ContentCard({
+    resource,
+    onSave,
+    actionLabel = 'Read now',
+    saveLabel,
+    label,
+}: {
+    resource: Resource
+    onSave?: () => void
+    actionLabel?: string
+    saveLabel?: string
+    label?: string
+}) {
     return (
         <PixelBorder className="p-4 flex gap-4">
-            <div className="w-24 h-24 bg-gray-200 border-2 border-black flex-shrink-0" />
+            <div className="w-24 h-24 bg-gray-200 border-2 border-black flex-shrink-0 flex items-center justify-center">
+                {resource.type === 'video' && <span className="text-2xl">▶️</span>}
+            </div>
             <div className="flex-1">
-                <div className="text-xs font-bold opacity-60 mb-1">Blog</div>
+                {label && <div className="text-xs font-bold opacity-60 mb-1">{label}</div>}
                 <h4 className="font-game font-bold text-orange-600 mb-1">{resource.title}</h4>
                 <p className="text-sm opacity-70 line-clamp-2">{resource.description}</p>
             </div>
             <div className="flex flex-col gap-2 flex-shrink-0">
-                <PixelBorder as="button" onClick={onSave} className="px-3 py-1 text-sm hover:bg-yellow-100">
-                    📑 Read later
-                </PixelBorder>
+                {saveLabel && onSave && (
+                    <PixelBorder as="button" onClick={onSave} className="px-3 py-1 text-sm hover:bg-yellow-100">
+                        📑 {saveLabel}
+                    </PixelBorder>
+                )}
                 <PixelBorder as="a" href={resource.url} className="px-3 py-1 text-sm hover:bg-yellow-100">
-                    → Read now
+                    → {actionLabel}
                 </PixelBorder>
             </div>
         </PixelBorder>
@@ -47,35 +63,15 @@ function BlogCard({ resource, onSave }: { resource: Resource; onSave: () => void
 
 function CustomerStoryCard({ resource }: { resource: Resource }) {
     return (
-        <PixelBorder className="p-4">
+        <PixelBorder className="p-4 h-full flex flex-col">
             <div className="flex items-center gap-2 mb-2">
                 <span className="font-bold">{resource.company}</span>
             </div>
             <h4 className="font-game font-bold mb-2">{resource.title}</h4>
-            {resource.quote && <p className="text-sm italic opacity-70 mb-3">{resource.quote}</p>}
+            {resource.quote && <p className="text-sm italic opacity-70 mb-3 flex-1">{resource.quote}</p>}
             <PixelBorder as="a" href={resource.url} className="px-3 py-1 text-sm hover:bg-yellow-100">
                 Read the story
             </PixelBorder>
-        </PixelBorder>
-    )
-}
-
-function VideoCard({ resource }: { resource: Resource }) {
-    return (
-        <PixelBorder className="p-4 flex gap-4">
-            <div className="w-24 h-24 bg-gray-200 border-2 border-black flex-shrink-0 flex items-center justify-center">
-                <span className="text-2xl">▶️</span>
-            </div>
-            <div className="flex-1">
-                <div className="text-xs font-bold opacity-60 mb-1">Video</div>
-                <h4 className="font-game font-bold text-orange-600 mb-1">{resource.title}</h4>
-                <p className="text-sm opacity-70 line-clamp-2">{resource.description}</p>
-            </div>
-            <div className="flex-shrink-0">
-                <PixelBorder as="a" href={resource.url} className="px-3 py-1 text-sm hover:bg-yellow-100">
-                    → Watch now
-                </PixelBorder>
-            </div>
         </PixelBorder>
     )
 }
@@ -122,23 +118,20 @@ export default function LevelScene({
                 {/* Dark overlay for text legibility */}
                 <div className="absolute inset-0 bg-black/40" />
 
-                {/* Overlay content */}
-                <div className="absolute inset-0 flex flex-col justify-between p-6">
-                    {/* Top left: Level number and name */}
-                    <div className="w-1/2 flex flex-col items-start gap-2 pl-6 py-6">
-                        <PixelBorder as="button" className="px-4 py-2 font-game text-lg hover:bg-yellow-100 bg-white">
-                            LEVEL {String(levelNumber).padStart(2, '0')} ▶
-                        </PixelBorder>
-                        <h1 className="font-game text-5xl font-bold text-white">{level.name}</h1>
-                    </div>
-
-                    {/* Bottom right: Max Wisdom */}
-                    {level.maxWisdom && (
-                        <div className="self-end">
-                            <MaxWisdom wisdom={level.maxWisdom} />
-                        </div>
-                    )}
+                {/* Top left: Level number and name */}
+                <div className="absolute top-0 left-0 w-1/2 flex flex-col items-start gap-2 p-6">
+                    <PixelBorder as="button" className="px-4 py-2 font-game text-lg hover:bg-yellow-100 bg-white">
+                        LEVEL {String(levelNumber).padStart(2, '0')} ▶
+                    </PixelBorder>
+                    <h1 className="font-game text-5xl font-bold text-white">{level.name}</h1>
                 </div>
+
+                {/* Bottom right: Max Wisdom */}
+                {level.maxWisdom && (
+                    <div className="absolute bottom-8 right-8">
+                        <MaxWisdom wisdom={level.maxWisdom} />
+                    </div>
+                )}
             </div>
 
             <div className="p-8">
@@ -173,10 +166,13 @@ export default function LevelScene({
                         {blogs.length > 0 && (
                             <div className="space-y-4 mb-6 mt-4">
                                 {blogs.map((resource) => (
-                                    <BlogCard
+                                    <ContentCard
                                         key={resource.id}
                                         resource={resource}
                                         onSave={() => onSaveResource(resource)}
+                                        label="Blog"
+                                        actionLabel="Read now"
+                                        saveLabel="Read later"
                                     />
                                 ))}
                             </div>
@@ -195,7 +191,14 @@ export default function LevelScene({
                         {videos.length > 0 && (
                             <div className="space-y-4">
                                 {videos.map((resource) => (
-                                    <VideoCard key={resource.id} resource={resource} />
+                                    <ContentCard
+                                        key={resource.id}
+                                        resource={resource}
+                                        onSave={() => onSaveResource(resource)}
+                                        label="Video"
+                                        actionLabel="Watch now"
+                                        saveLabel="Watch later"
+                                    />
                                 ))}
                             </div>
                         )}

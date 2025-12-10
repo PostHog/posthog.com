@@ -86,8 +86,10 @@ export default function PixelBorder({
         )
     }
 
+    const hasHeightClass = className.includes('h-full') || className.includes('h-')
+
     return (
-        <div style={wrapperStyle} className={inline ? 'inline-block' : ''}>
+        <div style={wrapperStyle} className={`${inline ? 'inline-block' : ''} ${hasHeightClass ? 'h-full' : ''}`}>
             <div style={innerStyle} className={`${inline ? 'inline-block' : ''} ${className}`}>
                 {children}
             </div>
