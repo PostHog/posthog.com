@@ -1,7 +1,11 @@
-import React from 'react'
-import { GameState, GameActions } from '../../data/pmf-game/types'
+import React, { useState } from 'react'
+import { createPortal } from 'react-dom'
+import { GameState, GameActions, SavedResource } from '../../data/pmf-game/types'
 import { LEVELS } from '../../data/pmf-game/levels'
 import PixelBorder from './PixelBorder'
+import * as Icons from '@posthog/icons'
+
+const { IconX, IconExternal } = Icons
 
 interface SidenavProps {
     gameState: GameState
@@ -154,8 +158,121 @@ function ChecklistItem({
     )
 }
 
+function InventoryItem({
+    item,
+    onRemove,
+    isPermanent = false,
+}: {
+    item: SavedResource
+    onRemove?: () => void
+    isPermanent?: boolean
+}) {
+    const isHandbook = item.id === 'posthog-handbook'
+
+    return (
+        <div className="flex items-center gap-2 py-2 px-2 hover:bg-accent/50 rounded transition-colors group">
+            {isHandbook && item.image && (
+                <img src={item.image} alt="" className="size-5 flex-shrink-0 object-contain" />
+            )}
+            <a
+                href={item.url}
+                className="flex-1 min-w-0 text-sm font-medium truncate hover:text-orange flex items-center gap-1"
+            >
+                {item.title}
+                <IconExternal className="size-3 opacity-50 flex-shrink-0" />
+            </a>
+            {!isPermanent && onRemove && (
+                <button
+                    onClick={onRemove}
+                    className="p-1 hover:bg-red-100 rounded transition-colors flex-shrink-0"
+                    title="Remove from inventory"
+                >
+                    <IconX className="size-4 opacity-40 group-hover:opacity-100" />
+                </button>
+            )}
+        </div>
+    )
+}
+
+function InventorySlideout({
+    inventory,
+    onRemove,
+    onClose,
+    isOpen,
+}: {
+    inventory: SavedResource[]
+    onRemove: (id: string) => void
+    onClose: () => void
+    isOpen: boolean
+}) {
+    // Use portal to render into the main game area
+    if (typeof document === 'undefined') return null
+
+    const container = document.getElementById('pmf-game-main')
+    if (!container) return null
+
+    const hasHandbook = inventory.some((item) => item.id === 'posthog-handbook')
+
+    return createPortal(
+        <>
+            {/* Backdrop to close when clicking outside */}
+            <div
+                className={`absolute inset-0 z-40 bg-black/20 transition-opacity duration-300 ${
+                    isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                }`}
+                onClick={onClose}
+            />
+
+            {/* Slideout panel - slides from left edge */}
+            <div
+                className={`absolute top-0 bottom-0 left-0 z-50 transform transition-transform duration-300 ease-in-out ${
+                    isOpen ? 'translate-x-0' : '-translate-x-[calc(100%+10px)]'
+                }`}
+            >
+                <div className="h-full bg-white w-72 flex flex-col border-r-2 border-black shadow-lg">
+                    <div className="flex items-center justify-between px-4 py-3 border-b border-black/10">
+                        <span className="font-bold">Inventory</span>
+                        <button onClick={onClose} className="p-1 hover:bg-accent rounded">
+                            <IconX className="size-4" />
+                        </button>
+                    </div>
+
+                    <div className="flex-1 overflow-auto p-3">
+                        {/* Handbook - shown if user accepted it */}
+                        {inventory
+                            .filter((i) => i.id === 'posthog-handbook')
+                            .map((handbookItem) => (
+                                <InventoryItem key={handbookItem.id} item={handbookItem} isPermanent />
+                            ))}
+
+                        {/* Divider if there are other items */}
+                        {hasHandbook && inventory.length > 1 && <div className="border-t border-black/10 my-2" />}
+
+                        {/* Regular saved items */}
+                        {inventory
+                            .filter((item) => item.id !== 'posthog-handbook')
+                            .map((item) => (
+                                <InventoryItem key={item.id} item={item} onRemove={() => onRemove(item.id)} />
+                            ))}
+
+                        {inventory.length === 0 && (
+                            <p className="text-sm opacity-50 text-center py-4">
+                                Your inventory is empty.
+                                <br />
+                                Save resources with "Read later"
+                            </p>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </>,
+        container
+    )
+}
+
 export default function Sidenav({ gameState, actions }: SidenavProps): JSX.Element {
-    const { currentScene, levels } = gameState
+    const [showInventory, setShowInventory] = useState(false)
+    const { currentScene, levels, inventory } = gameState
     const isInLevel = currentScene.startsWith('level')
     const currentLevelId = isInLevel ? currentScene : null
     const currentLevel = currentLevelId ? LEVELS.find((l) => l.id === currentLevelId) : null
@@ -183,13 +300,24 @@ export default function Sidenav({ gameState, actions }: SidenavProps): JSX.Eleme
                     iconUrl="https://res.cloudinary.com/dmukukwp6/image/upload/map_d480208b70.svg"
                     title="World Map"
                     subtitle="Select another track"
-                    onClick={() => actions.navigateToOverworld()}
+                    onClick={() => {
+                        setShowInventory(false)
+                        actions.navigateToOverworld()
+                    }}
                     active={currentScene === 'overworld'}
                 />
                 <NavButton
                     iconUrl="https://res.cloudinary.com/dmukukwp6/image/upload/folder_b86a35bb72.svg"
                     title="Inventory"
-                    subtitle="Open your saved resources"
+                    subtitle={`${inventory.length} saved`}
+                    onClick={() => setShowInventory(!showInventory)}
+                    active={showInventory}
+                />
+                <InventorySlideout
+                    inventory={inventory}
+                    onRemove={actions.removeFromInventory}
+                    onClose={() => setShowInventory(false)}
+                    isOpen={showInventory}
                 />
                 <NavButton
                     iconUrl="https://res.cloudinary.com/dmukukwp6/image/upload/classic_5f0ab23b3d.svg"

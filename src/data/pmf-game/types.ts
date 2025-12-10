@@ -15,7 +15,7 @@ export interface LevelProgress {
 
 export interface Resource {
     id: string
-    type: 'blog' | 'video' | 'customer-story' | 'product'
+    type: 'blog' | 'video' | 'customer-story' | 'product' | 'handbook'
     title: string
     description: string
     url: string

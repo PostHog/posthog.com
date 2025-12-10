@@ -86,7 +86,7 @@ export const LEVELS: LevelData[] = [
                 title: 'The Product-Market Fit Game',
                 description:
                     'In a startup, the only objective that matters before you have product-market fit, is finding product-market fit.',
-                url: '/blog/product-market-fit-game',
+                url: '/founders/product-market-fit-game',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/pmf-game-guide/pmf-guide.png',
             },
             {
