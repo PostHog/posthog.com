@@ -8,7 +8,7 @@ There are many occasions when you will need to spend company money.
 
 PostHog is a lean organization - the less we spend, the more time we have to make sure the company takes off. However, it is more important you are productive, healthy, and happy.
 
-**Please spend money in a way that you think is in the best interests of the company. **
+**Please spend money in a way that you think is in the best interests of the company.**
 
 If it's a trivial expense, just buy it. We provide you with a company card to cover 99% of the spending you might need to do. We use Brex for everyone, and also provide UK team members with an additional Revolut card. 
 
@@ -26,9 +26,9 @@ This means expenses that are under $75 one off or under $20/month recurring that
 
 ## Saving receipts
 
-Make sure you *keep copies for all receipts $75 or more* for charges **on Brex**. You must save _all_ receipts for charges on Revolut. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay. You are required to upload your receipt(s)/invoice(s) to Brex within 14 days; if you're unable to meet this deadline, speak with <TeamMember name="Janani K" photo />.
+Make sure you *keep copies of invoices/receipts for charges $75 or more on Brex* and *GBP 75 on Revolut*. If you expense something on a company card and cannot provide an invoice/receipt, this may be deducted from your pay. You are required to upload your receipt(s)/invoice(s) to Brex within 14 days; if you're unable to meet this deadline, speak with <TeamMember name="Janani K" photo />. For charges on Revolut, send a picture of the invoice/receipt to ukinvoices@posthog.com.
 
-You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please save receipts and request a reimbursement through Brex.
+You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please save receipts, and request a reimbursement through Brex, providing full context on the expense (what is it for, why your Brex wasn't used).
 
 ### Brex
 
@@ -37,10 +37,8 @@ We now use Brex Empower. This allows the People and Ops team to effectively trac
 - Before spending money on your Brex card, you’ll need to log into your account either through the app or desktop, and assign a ‘spend limit’ to your card. The spend limit you pick from should relate to the transaction you are about to complete. For example, if you are buying a book for BookHog, this should come out of your ‘Books stipend’ spend limit. When you then complete your purchase, the money will be taken from that specific spend limit and you will easily be able to see how much of your spend limit you have remaining.
 - For subscriptions, you can [create a virtual card](https://dashboard.brex.com/p/wallet?expenses.wallet.view=all&walletCreateCard=true) and assign your subscriptions to that virtual card so all those charges will come from that spend limit and not your default card limit.
 - If you forget to assign a spend limit before completing the purchase, you can retroactively go into your Brex account and assign the transaction to the related spend limit. 
-- For the vast majority of transactions, you now will not need to upload a receipt as Brex Empower does this automatically. The exception to this is if they have requirements to provide the IRS with itemized receipts. If this is the case and it’s a digital invoice, just forward it to receipts@brex.com with a note explaining what it is for. If it’s a physical receipt, take a picture and upload it with a note: you can use the Brex app, email or reply to the SMS notification.
-- You only need to submit receipts for purchases of $75 or more, within 14 days. You don’t need to keep receipts below this amount.
-
-By default, the email forwarding feature only accepts emails from your PostHog address. You can contact Brex support to enable forwarding from your personal email address if needed.
+- You only need to submit receipts for purchases of $75 or more, within 14 days. You don’t need to keep receipts below this amount. You can either upload the receipt/invoice to Brex using their web app, phone app, Slack, email receipts@brex.com or text/SMS it to Brex. By default, the email forwarding feature only accepts emails from your PostHog address. You can contact Brex support to enable forwarding from your personal email address if needed.
+- We need an itemized invoice/receipt (for example, the full booking confirmation email PDF for flights/hotels) - because Brex auto-verifies these using the information on the file. Please do not upload cropped images that show just the amount - without context, the receipt is pointless.
 
 To ensure complete financials, we ask that you provide a reasoning/justification for the expense being incurred in detail eg, if requesting a spend limit to onboard a team mate, when raising the request on Brex, provide an explanation on the approx. breakdown for flights/hotel/other costs. For example, if you're incurring software spend beyond the limit assigned, explain why that is the case - like, the number of team members for whom you're paying, the upgraded plan you're paying for, etc.
 
@@ -50,18 +48,18 @@ If you have some invoice/receipt to share with the Finance team, send it to fina
 
 ### Revolut
 
-- Buy something on your Revolut card.
+- Buy something on your Revolut card that costs more than GBP 75, and has UK VAT on it.
 - If it's a digital invoice, just forward it to ukinvoices@posthog.com with a note explaining what it is for. If it's a physical receipt, take a picture and forward it to the same place with a note. 
-- You need to submit receipts for _all_ purchases. This should be an itemised receipt. not a receipt from a credit card machine. We need to know what was purchased. 
+- You need to submit itemized receipts (not a credit card machine receipt) for purchases exceeding GBP 75. We need to know what was purchased. 
 
 ### Your personal card
 
 - You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Fraser to purchase it for you on theirs in the first instance. Please avoid using your personal card over your Brex card. The company get points which we use towards billboard campaigns, we also can't process lots of reimbursement requests for people looking to get their own points. 
-- If you do need to use your personal card, please use the request reimbursement function in Brex.
+- If you do need to use your personal card, please use the request reimbursement function in Brex, and provide full context on what the expense is for, and why you didn't use your Brex.
 
 Personal expenses should be submitted within 90 days of incurring the expense, otherwise these will not be repaid.
 
-Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! If you used your brex card you can login to Brex, find the charge and use the repay function - more details [here](https://www.brex.com/support/employee-repayments). If it was on Revolut, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog. 
+Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! If you used your brex card you can login to Brex, find the charge and use the repay function — see the [Brex employee repayments guide](https://www.brex.com/support/employee-repayments) for more details. If it was on Revolut, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog.
 
 ## Making larger purchases
 

@@ -97,6 +97,7 @@ interface AppContextType {
         chatId,
         date,
         initialQuestion,
+        codeSnippet,
     }: {
         path: string
         context?: ChatContext[]
@@ -104,6 +105,7 @@ interface AppContextType {
         chatId?: string
         date?: string
         initialQuestion?: string
+        codeSnippet?: { code: string; language: string; sourceUrl: string }
     }) => void
     isNotificationsPanelOpen: boolean
     setIsNotificationsPanelOpen: (isOpen: boolean) => void
@@ -231,26 +233,26 @@ const updateCursor = (cursor: string) => {
 
 export const Context = createContext<AppContextType>({
     windows: [],
-    closeWindow: () => { },
-    bringToFront: () => { },
+    closeWindow: () => {},
+    bringToFront: () => {},
     setWindowTitle: () => null,
     focusedWindow: undefined,
     location: {},
-    minimizeWindow: () => { },
+    minimizeWindow: () => {},
     taskbarHeight: 0,
-    addWindow: () => { },
-    updateWindowRef: () => { },
-    updateWindow: () => { },
+    addWindow: () => {},
+    updateWindowRef: () => {},
+    updateWindow: () => {},
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
-    openSearch: () => { },
-    handleSnapToSide: () => { },
+    openSearch: () => {},
+    handleSnapToSide: () => {},
     constraintsRef: { current: null },
     taskbarRef: { current: null },
-    expandWindow: () => { },
+    expandWindow: () => {},
     openSignIn: () => null,
-    openRegister: () => { },
-    openForgotPassword: () => { },
+    openRegister: () => {},
+    openForgotPassword: () => {},
     siteSettings: {
         theme: 'light',
         experience: 'posthog',
@@ -262,27 +264,27 @@ export const Context = createContext<AppContextType>({
         clickBehavior: 'double',
         performanceBoost: false,
     },
-    updateSiteSettings: () => { },
-    openNewChat: () => { },
+    updateSiteSettings: () => {},
+    openNewChat: () => {},
     isNotificationsPanelOpen: false,
-    setIsNotificationsPanelOpen: () => { },
+    setIsNotificationsPanelOpen: () => {},
     isActiveWindowsPanelOpen: false,
-    setIsActiveWindowsPanelOpen: () => { },
+    setIsActiveWindowsPanelOpen: () => {},
     isMobile: false,
     compact: false,
     menu: [],
-    openStart: () => { },
-    animateClosingAllWindows: () => { },
+    openStart: () => {},
+    animateClosingAllWindows: () => {},
     closingAllWindowsAnimation: false,
-    closeAllWindows: () => { },
-    setClosingAllWindowsAnimation: () => { },
+    closeAllWindows: () => {},
+    setClosingAllWindowsAnimation: () => {},
     screensaverPreviewActive: false,
-    setScreensaverPreviewActive: () => { },
-    setConfetti: () => { },
+    setScreensaverPreviewActive: () => {},
+    setConfetti: () => {},
     confetti: false,
     posthogInstance: undefined,
     desktopParams: undefined,
-    copyDesktopParams: () => { },
+    copyDesktopParams: () => {},
     desktopCopied: false,
     shareableDesktopURL: '',
 })
@@ -668,6 +670,40 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/changelog-video': {
+        size: {
+            min: {
+                width: 960,
+                height: 682,
+            },
+            max: {
+                width: 960,
+                height: 682,
+            },
+            fixed: false,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/videos/play': {
+        size: {
+            min: {
+                width: 960,
+                height: 480,
+            },
+            max: {
+                width: 1440,
+                height: 810,
+            },
+            fixed: false,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/sales': {
         size: {
             min: {
@@ -974,6 +1010,71 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/fm': {
+        size: {
+            min: {
+                width: 1100,
+                height: 660,
+            },
+            max: {
+                width: 1100,
+                height: 660,
+            },
+            fixed: true,
+        },
+    },
+    'fm/mixtapes': {
+        size: {
+            min: {
+                width: 450,
+                height: 709,
+            },
+            max: {
+                width: 450,
+                height: 709,
+            },
+            fixed: true,
+        },
+    },
+    '/fm/mixtapes/new': {
+        size: {
+            min: {
+                width: 850,
+                height: 597,
+            },
+            max: {
+                width: 850,
+                height: 597,
+            },
+            fixed: true,
+        },
+    },
+    '/fm/mixtapes/edit/:id': {
+        size: {
+            min: {
+                width: 850,
+                height: 597,
+            },
+            max: {
+                width: 850,
+                height: 597,
+            },
+            fixed: true,
+        },
+    },
+    'fm/dance-mode': {
+        size: {
+            min: {
+                width: 500,
+                height: 500,
+            },
+            max: {
+                width: 500,
+                height: 500,
+            },
+            fixed: true,
+        },
+    },
 } as const
 
 export interface SiteSettings {
@@ -983,13 +1084,13 @@ export interface SiteSettings {
     skinMode: 'modern' | 'classic'
     cursor: 'default' | 'xl' | 'james'
     wallpaper:
-    | 'keyboard-garden'
-    | 'hogzilla'
-    | 'startup-monopoly'
-    | 'office-party'
-    | '2001-bliss'
-    | 'parade'
-    | 'coding-at-night'
+        | 'keyboard-garden'
+        | 'hogzilla'
+        | 'startup-monopoly'
+        | 'office-party'
+        | '2001-bliss'
+        | 'parade'
+        | 'coding-at-night'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
@@ -998,6 +1099,7 @@ export interface SiteSettings {
 const isLabel = (item: any) => !item?.url && item?.name
 
 const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
+    const lastReset = typeof window !== 'undefined' ? localStorage.getItem('lastReset') : null
     const siteSettings = {
         experience: 'posthog',
         colorMode: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
@@ -1008,6 +1110,7 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         clickBehavior: 'double',
         performanceBoost: false,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
+        ...(!lastReset ? { experience: 'posthog' } : {}),
     }
 
     if (isMobile || compact) {
@@ -1024,7 +1127,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const taskbarRef = useRef<HTMLDivElement>(null)
     const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
     const [taskbarHeight, setTaskbarHeight] = useState(38)
-    const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
+    const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
     const [desktopCopied, setDesktopCopied] = useState(false)
     const urlObj = isSSR ? null : new URL(location.href)
     const queryString = isSSR ? '' : urlObj?.search.substring(1)
@@ -1154,12 +1257,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 )
                 if (nextFocusedWindow && !nextFocusedWindow.minimized) {
                     if (nextFocusedWindow.path.startsWith('/')) {
-                        navigate(nextFocusedWindow.path)
+                        navigate(`${nextFocusedWindow.path}${nextFocusedWindow.location?.search || ''}`)
                     } else {
                         bringToFront(nextFocusedWindow)
                     }
                 } else {
-                    window.history.pushState({}, '', '/')
+                    navigate('/', { state: { skipPageUpdate: true } })
                 }
                 setWindows(windowsFiltered)
             }, 0)
@@ -1186,13 +1289,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     windows.map((w) =>
                         w === focusedWindow
                             ? {
-                                ...w,
-                                element: newWindow.element,
-                                path: newWindow.path,
-                                fromHistory: newWindow.fromHistory,
-                                props: newWindow.props,
-                                location: newWindow.location,
-                            }
+                                  ...w,
+                                  element: newWindow.element,
+                                  path: newWindow.path,
+                                  fromHistory: newWindow.fromHistory,
+                                  props: newWindow.props,
+                                  location: newWindow.location,
+                              }
                             : w
                     )
                 )
@@ -1288,9 +1391,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             (key?.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
                 : {
-                    width: isSSR ? 0 : window.innerWidth * 0.9,
-                    height: isSSR ? 0 : window.innerHeight * 0.9,
-                })
+                      width: isSSR ? 0 : window.innerWidth * 0.9,
+                      height: isSSR ? 0 : window.innerHeight * 0.9,
+                  })
         return {
             width: Math.min(defaultSize.width, isSSR ? 0 : window.innerWidth * 0.9),
             height: Math.min(defaultSize.height, isSSR ? 0 : window.innerHeight * 0.9),
@@ -1298,12 +1401,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     function getLastClickedElementRect() {
-        const rect = lastClickedElement?.getBoundingClientRect()
-        if (!rect) return undefined
-        return {
-            x: rect.left,
-            y: rect.top,
-        }
+        return lastClickedElementRect || undefined
     }
 
     function getInitialWindows(element: any) {
@@ -1389,9 +1487,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             fixedSize: settings?.size.fixed || false,
             fromOrigin: lastClickedElementRect
                 ? {
-                    x: lastClickedElementRect.x - size.width / 2,
-                    y: lastClickedElementRect.y - size.height / 2,
-                }
+                      x: lastClickedElementRect.x - size.width / 2,
+                      y: lastClickedElementRect.y - size.height / 2,
+                  }
                 : undefined,
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[element.key],
@@ -1416,10 +1514,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
 
         if (siteSettings.experience === 'boring') {
+            if (existingWindow) {
+                return bringToFront(existingWindow, element.props.location)
+            }
             if (newWindow.key.startsWith('/')) {
                 return replaceFocusedWindow(newWindow)
             } else {
-                return setWindows([...windows, newWindow])
+                return setWindows([...windows?.filter((w) => w.key !== newWindow.key), newWindow])
             }
         }
 
@@ -1535,6 +1636,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         chatId,
         date,
         initialQuestion,
+        codeSnippet,
     }: {
         path: string
         context?: ChatContext[]
@@ -1542,6 +1644,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         chatId?: string
         date?: string
         initialQuestion?: string
+        codeSnippet?: { code: string; language: string; sourceUrl: string }
     }) => {
         addWindow(
             <ChatProvider
@@ -1555,6 +1658,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 chatId={chatId}
                 date={date}
                 initialQuestion={initialQuestion}
+                codeSnippet={codeSnippet}
             />
         )
     }
@@ -1585,8 +1689,19 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     const updateSiteSettings = (settings: SiteSettings) => {
-        setSiteSettings(settings)
-        localStorage.setItem('siteSettings', JSON.stringify(settings))
+        try {
+            setSiteSettings(settings)
+            const savedSettings = JSON.parse(localStorage.getItem('siteSettings') || '{}')
+            localStorage.setItem(
+                'siteSettings',
+                JSON.stringify({
+                    ...settings,
+                    experience: compact ? savedSettings.experience || 'posthog' : settings.experience || 'posthog',
+                })
+            )
+        } catch (error) {
+            console.error('Failed to update site settings:', error)
+        }
     }
 
     const animateClosingAllWindows = () => {
@@ -1616,7 +1731,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     useEffect(() => {
-        if ((location.key === 'initial' && location.pathname === '/' && isMobile) || paramsWindows) {
+        if (
+            (location.key === 'initial' && location.pathname === '/' && isMobile) ||
+            paramsWindows ||
+            location.state?.skipPageUpdate
+        ) {
             return
         }
         updatePages(element)
@@ -1643,7 +1762,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             const button = target.closest('button')
             const isClickable = link || button
             if (isClickable) {
-                setLastClickedElement(target)
+                // Capture immediately on click to avoid forced reflow during window creation
+                const rect = target.getBoundingClientRect()
+                setLastClickedElementRect({ x: rect.left, y: rect.top })
             }
         }
         document.addEventListener('click', handleClick)
@@ -1815,7 +1936,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
                     // Navigate to the next window
                     if (nextWindow.path.startsWith('/')) {
-                        navigate(nextWindow.path)
+                        navigate(`${nextWindow.path}${nextWindow.location?.search || ''}`)
                     } else {
                         bringToFront(nextWindow)
                     }
@@ -1856,17 +1977,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         setConfetti,
         confetti,
     ])
-
-    useEffect(() => {
-        const savedSettings = localStorage.getItem('siteSettings')
-        if (savedSettings) {
-            const settings = JSON.parse(savedSettings)
-            if (isMobile && settings.experience === 'posthog') {
-                settings.experience = 'boring'
-            }
-            setSiteSettings({ ...siteSettings, ...settings })
-        }
-    }, [])
 
     useEffect(() => {
         if (siteSettings.skinMode) {
@@ -2010,6 +2120,20 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             })
         }
     }, [stateWindows])
+
+    useEffect(() => {
+        try {
+            const lastReset = localStorage.getItem('lastReset')
+            if (!lastReset) {
+                const currentSiteSettings = JSON.parse(localStorage.getItem('siteSettings') || '{}')
+                currentSiteSettings.experience = 'posthog'
+                localStorage.setItem('lastReset', new Date().toISOString())
+                localStorage.setItem('siteSettings', JSON.stringify(currentSiteSettings))
+            }
+        } catch (error) {
+            console.error('Failed to reset site settings:', error)
+        }
+    }, [])
 
     return (
         <Context.Provider

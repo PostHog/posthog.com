@@ -8,20 +8,9 @@ A large proportion of our paying customer base sign up to a paid plan without ev
 
 ## Product-led lead generation
 
-Product-led leads can be generated in different ways:
+Product-led leads can be generated in different ways - see [this page](/handbook/growth/sales/lead-scoring) for more info. 
 
-1. Customers with MRR between $500-1,667, employee count > 50, user count > 7, based in ICP country, and has been paying for at least 3 months
-2. Customers who have high ICP score and subscribe to the Scale plan
-3. Customers who have used 50% or more of their startup credits and had a last invoice greater than $5000
-4. Customers who are set to roll off the startup plan in the next two months and had a last invoice greater than $1500
-5. Onboarding specialist referral
-6. Manual referrals: anyone at PostHog can manually flag an account as a high potential lead. This includes new or low spend accounts with strong net new potential or existing paying customers with credible expansion potential.
-
-> We frequently tweak these rules and experiment with different signals to see which work best. Generally you should be aiming for a 20% conversion rate from these types of leads. 
-
-They follow the [normal territory assignment rules](https://posthog.com/handbook/growth/sales/crm#how-we-do-lead-assignments) in Salesforce, and are routed either to Account Executives or Technical Account Managers depending on the type.
-
-**Note:** Some product-led leads might have already chatted with someone on our team. Before reaching out, take a quick look in Vitally to see if there’s any prior activity, and check in with the AE or team member who was involved to get the full picture if needed. Every lead has a "Vitally account URL" field in Salesforce which links directly to their Vitally profile for easy review.
+> Some product-led leads might have already chatted with someone on our team. Before reaching out, take a quick look in Vitally to see if there’s any prior activity, and check in with the AE or team member who was involved to get the full picture if needed. Every lead has a "Vitally account URL" field in Salesforce which links directly to their Vitally profile for easy review.
 
 ## Working with the customer
 

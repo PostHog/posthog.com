@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), and [PHP](/docs/libraries/php) SDKs.
+> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), [PHP](/docs/libraries/php), and [Java](/docs/libraries/java) SDKs.
 
 > **Note:** Do not use local evaluation in edge/lambda environments and stateless PHP applications, as per-request initialization causes performance issues and unnecessarily inflated costs. Use regular flag evaluation instead.
 
@@ -184,6 +184,20 @@ await posthog.GetFeatureFlagAsync(
 );
 ```
 
+```java
+posthog.getFeatureFlag(
+    "distinct_id_of_the_user",
+    "flag-key",
+    PostHogFeatureFlagOptions
+        .builder()
+        .personProperty("property_name", "value")
+        .group("your_group_type", "your_group_id")
+        .group("another_group_type", "another_group_id")
+        .groupProperty("your_group_type", "group_property_name", "value")
+        .groupProperty("another_group_type", "group_property_name", "another value")
+        .build());
+```
+
 </MultiLanguage>
 
 ## Reloading flags
@@ -210,6 +224,10 @@ posthog.load_feature_flags()
 
 ```php
 PostHog::loadFlags()
+```
+
+```java
+posthog.reloadFeatureFlags()
 ```
 
 </MultiLanguage>

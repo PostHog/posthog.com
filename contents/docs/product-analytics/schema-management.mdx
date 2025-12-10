@@ -17,7 +17,7 @@ Schema management lets you define and enforce the structure of your events using
 You can create event definitions before any events are actually captured. This is useful when planning your analytics implementation upfront, allowing you to:
 
 - Define your event schema before writing instrumentation code
-- Generate TypeScript types for events that haven't been captured yet
+- Generate typed definitions for events that haven't been captured yet
 - Document expected events for your team
 - Ensure consistency across your codebase from day one
 
@@ -88,13 +88,7 @@ Events can have multiple property groups, and each group's properties will be in
 
 ## Downloading your schema with the CLI
 
-The PostHog CLI generates TypeScript definitions from your configured schemas.
-
-<CalloutBox icon="IconInfo" title="TypeScript support" type="fyi">
-    
-    TypeScript is currently the only supported language for schema generation.
-    
-</CalloutBox>
+The PostHog CLI generates language definitions from your configured schemas.
 
 ### Install the CLI
 
@@ -114,19 +108,21 @@ This opens your browser to authorize the CLI with your PostHog account.
 
 ### Download your schema
 
+> **Note:** Schema management is currently an experimental feature. The `exp` prefix will be removed once the feature is stable.
+
 ```bash
 posthog-cli exp schema pull
 ```
 
 The CLI will:
 1. Fetch your event schemas
-2. Generate TypeScript definitions
-3. Save them to a file (default: `posthog-typed.ts`)
+2. Prompt you for the output file path
+3. Generate typed definitions and save them to the specified file
 4. Update `posthog.json` with the schema hash
 
-When prompted for the output path, choose a location that's accessible from your application code (e.g., `src/lib/posthog-typed.ts` or `app/lib/posthog-typed.ts`).
+When prompted for the output path, choose a location that's accessible from your application code (e.g., `src/lib/posthog-typed.ts` or `app/lib/posthog-typed.ts` for TypeScript).
 
-**Important:** Commit both `posthog.json` and `posthog-typed.ts` to your git repository. This ensures your team has consistent types and tracks schema changes over time.
+> **Important:** Commit both `posthog.json` and `posthog-typed.<extension>` to your git repository. This ensures your team has consistent types and tracks schema changes over time.
 
 On subsequent runs, the CLI only updates the file if your schema has changed.
 
@@ -142,25 +138,94 @@ This shows your current sync status, including the schema hash, last updated tim
 
 Once you've downloaded your schema, import and use the generated PostHog client:
 
-```typescript
+
+<MultiLanguage selector="tabs">
+
+```typescript file=TypeScript
+
 import posthog from './posthog-typed'
 
-// Typed events with autocomplete and validation
-posthog.captureTyped('button_clicked', {
+// Use typed events with autocomplete and type safety on known events:
+posthog.capture('button_clicked', {
   button_name: 'signup',      // ✓ Type-checked
   click_count: 5,             // ✓ Type-checked
   // missing_required: ...    // ✗ TypeScript error if required
 })
 
-// Regular capture() still works for flexibility
-posthog.capture('dynamic_event', { any: 'data' })
+// Use captureRaw() when you need to bypass type checking:
+posthog.captureRaw('dynamic_event', { whatever: 'data' })
 ```
 
-The generated client provides:
+```go file=Go
+
+import (
+    "github.com/posthog/posthog-go"
+    typed "your-project/posthog-typed"
+)
+
+func captureEventWithRequiredProperties(client posthog.Client) error {
+    return client.Enqueue(typed.DashboardModeToggledCapture("distinct_id", 2048,
+        typed.DashboardModeToggledWithFileName("file_name"),
+        typed.DashboardModeToggledWithFileType(".pdf"),
+        typed.DashboardModeToggledWithExtraProps(posthog.Properties{
+            "extra": "property",
+        }),
+    ))
+}
+
+func captureEventWithNoRequiredProperties(client posthog.Client) error {
+    return client.Enqueue(typed.DashboardLoadingTimeCapture("distinct_id", posthog.Properties{
+        "test":           "property",
+        "two_and_two_is": 4,
+    }))
+}
+
+func captureEventWithFullCaptureControl(client posthog.Client) error {
+    return client.Enqueue(typed.DashboardLoadingTimeCaptureFromBase(
+        // Event should be omitted here as it will be retrieved from the typed function.
+        posthog.Capture{
+            DistinctId: "distinct_id",
+            Timestamp:  time.Now(),
+            // ... Any additional properties
+        },
+        posthog.Properties{
+            "test": "property",
+        },
+    ))
+}
+
+```
+
+```python file=Python
+
+import os
+
+from posthog_typed import PosthogTyped
+
+def main():
+    posthog = PosthogTyped(
+        POSTHOG_API_KEY,
+        host=POSTHOG_HOST,
+    )
+
+    # Capture with required properties
+    posthog.capture_downloaded_file(file_size_b=2048, file_name="file_name", distinct_id="distinct_id",
+                                    extra_properties={"test": "property"})
+    # Capture with no required properties
+    posthog.capture_user_logged_in(extra_properties={"test": "property"}, distinct_id="distinct_id")
+    # Base captures are still possible
+    posthog.capture("capture_raw_example", distinct_id="distinct_id", properties={"test": "property"})
+
+```
+
+</MultiLanguage>
+
+
+The generated typed file provides:
 - **Type safety**: Properties are validated against your schema
 - **Autocomplete**: Your IDE suggests event names and properties
 - **Documentation**: Inline types show required properties and descriptions
-- **Flexibility**: `capture()` remains available for dynamic events
+- **Flexibility**: The standard SDK functionality remains available (capture / identify / experiments / ...), allowing gradual migrations
 
 ![TypeScript type checking in action](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/typescript_type_checking_a5318b2d7e.png)
 
@@ -170,4 +235,4 @@ The generated client provides:
 - **Start with your most important events**: Define schemas for critical conversion events first
 - **Use descriptive property groups**: Name groups by their purpose (e.g., "E-commerce Properties", "User Context")
 - **Don't over-schema**: Not every event needs a schema—use them where type safety adds value
-- **Commit generated types**: Always commit `posthog-typed.ts` and `posthog.json` to version control so your team stays in sync
+- **Commit generated types**: Always commit `posthog.json` and `posthog-typed.<extension>` to version control so your team stays in sync

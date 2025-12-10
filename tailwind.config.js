@@ -277,6 +277,11 @@ module.exports = {
                 'fluid-video': '56.25%',
                 '1/2': '50%',
             },
+            spacing: {
+                4.5: '1.125rem',
+                5.5: '1.375rem',
+                6.5: '1.625rem',
+            },
             maxWidth: {
                 '2xs': '16rem',
             },

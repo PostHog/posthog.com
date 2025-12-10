@@ -1,0 +1,81 @@
+---
+title: PostHog AI example prompts
+---
+
+import {IconGraph, IconPieChart,IconRewindPlay, IconDatabase, IconToggle, IconFlask, IconWarning, IconMessage, IconPlug, IconLogomark, IconBook, IconPiggyBank, IconLlmAnalytics} from '@posthog/icons'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+PostHog AI can be used in many ways. Because it works directly with your project's data, its responses and actions are unique to your setup. There is no single "correct" way of using PostHog AI.
+
+As a starting point, here are some example chat prompts you can use to explore what's possible with PostHog AI.
+
+<CalloutBox icon="IconInfo" title="LLMs" type="fyi">
+  PostHog AI's responses and findings highly depend on the product data, context, and prompts you provide it. As with all LLM-based systems, its non-deterministic nature means the same prompt can potentially produce different outputs.
+</CalloutBox>
+
+## <span className="inline-block"><IconGraph className="w-6 h-6 -mb-1 text-blue" /></span> Product analytics
+
+- [`Create an insight showing daily active users for the past week`](https://app.posthog.com/#panel=max:!Create%20an%20insight%20showing%20daily%20active%20users%20for%20the%20past%20week)
+- [`Build a dashboard for onboarding retention`](https://app.posthog.com/#panel=max:!Build%20a%20dashboard%20for%20onboarding%20retention)
+- [`What changed across my product this week?`](https://app.posthog.com/#panel=max:!What%20changed%20across%20my%20product%20this%20week?)
+
+## <span className="inline-block"><IconPieChart className="w-6 h-6 -mb-1 text-green-2" /></span> Web analytics
+
+- [`Create a dashboard showing web traffic by source and campaign`](https://app.posthog.com/#panel=max:!Create%20a%20dashboard%20showing%20web%20traffic%20by%20source%20and%20campaign)
+- [`Which landing pages have the highest bounce rate this week?`](https://app.posthog.com/#panel=max:!Which%20landing%20pages%20have%20the%20highest%20bounce%20rate%20this%20week?)
+- [`Find the most common paths users take after visiting the blog`](https://app.posthog.com/#panel=max:!Find%20the%20most%20common%20paths%20users%20take%20after%20visiting%20the%20blog)
+
+## <span className="inline-block"><IconRewindPlay className="w-6 h-6 -mb-1 text-yellow" /></span> Session replay
+
+- [`Find sessions where users dropped off during checkout`](https://app.posthog.com/#panel=max:!Find%20sessions%20where%20users%20dropped%20off%20during%20checkout)
+- [`Summarize session replays where users got stuck`](https://app.posthog.com/#panel=max:!Summarize%20session%20replays%20where%20users%20got%20stuck)
+- [`Show recordings for users who triggered the rage click event`](https://app.posthog.com/#panel=max:!Show%20recordings%20for%20users%20who%20triggered%20the%20rage%20click%20event)
+
+## <span className="inline-block"><IconDatabase className="w-6 h-6 -mb-1 text-lilac" /></span> Data warehouse
+
+- [`List all available tables and their columns`](https://app.posthog.com/#panel=max:!List%20all%20available%20tables%20and%20their%20columns)
+- [`Write a query to join event data with user properties`](https://app.posthog.com/#panel=max:!Write%20a%20query%20to%20join%20event%20data%20with%20user%20properties)
+- [`Fix the syntax for the query I have open in the SQL editor`](https://app.posthog.com/#panel=max:!Fix%20the%20syntax%20for%20the%20query%20I%20have%20open%20in%20the%20SQL%20editor)
+
+## <span className="inline-block"><IconToggle className="w-6 h-6 -mb-1 text-seagreen" /></span> Feature flags
+
+- [`Create a new multivariate feature flag for dark mode`](https://app.posthog.com/#panel=max:!Create%20a%20new%20multivariate%20feature%20flag%20for%20dark%20mode)
+- [`Show me which flags are currently active in production`](https://app.posthog.com/#panel=max:!Show%20me%20which%20flags%20are%20currently%20active%20in%20production)
+
+## <span className="inline-block"><IconFlask className="w-6 h-6 -mb-1 text-purple" /></span> Experiments
+
+- [`Set up an A/B test with a 70/30 split for a new red button on the homepage`](https://app.posthog.com/#panel=max:!Set%20up%20an%20A/B%20test%20with%20a%2070/30%20split%20for%20a%20new%20red%20button%20on%20the%20homepage)
+- [`Summarize experiment results for my latest feature rollout`](https://app.posthog.com/#panel=max:!Summarize%20experiment%20results%20for%20my%20latest%20feature%20rollout)
+
+## <span className="inline-block"><IconWarning className="w-6 h-6 -mb-1 text-yellow" /></span> Error tracking
+
+- [`Find the most common frontend errors this week`](https://app.posthog.com/#panel=max:!Find%20the%20most%20common%20frontend%20errors%20this%20week)
+- [`Which errors impact user sign-ups the most?`](https://app.posthog.com/#panel=max:!Which%20errors%20impact%20user%20sign-ups%20the%20most?)
+- [`Summarize new issues introduced after the latest release`](https://app.posthog.com/#panel=max:!Summarize%20new%20issues%20introduced%20after%20the%20latest%20release)
+
+## <span className="inline-block"><IconPlug className="w-6 h-6 -mb-1 text-seagreen" /></span> Data pipelines
+
+- [`Create a Hog function that filters out internal traffic`](https://app.posthog.com/#panel=max:!Create%20a%20Hog%20function%20that%20filters%20out%20internal%20traffic)
+- [`Parse event timestamps into day, week, and month properties`](https://app.posthog.com/#panel=max:!Parse%20event%20timestamps%20into%20day,%20week,%20and%20month%20properties)
+- [`Drop events where test_mode = true or the environment is staging`](https://app.posthog.com/#panel=max:!Drop%20events%20where%20test_mode%20=%20true%20or%20the%20environment%20is%20staging)
+
+## <span className="inline-block"><IconLlmAnalytics className="w-6 h-6 -mb-1 text-fuchsia-dark" /></span> LLM analytics
+
+- [`Analyze LLM token usage over the past 7 days`](https://app.posthog.com/#panel=max:!Analyze%20LLM%20token%20usage%20over%20the%20past%207%20days)
+- [`Summarize traces for the latest model deployment`](https://app.posthog.com/#panel=max:!Summarize%20traces%20for%20the%20latest%20model%20deployment)
+
+## <span className="inline-block"><IconPiggyBank className="w-6 h-6 -mb-1 text-green-2" /></span> Revenue analytics
+
+- [`Show my revenue for the past year`](https://app.posthog.com/#panel=max:!Show%20my%20revenue%20for%20the%20past%20year)
+- [`Create a dashboard that breaks down revenue by product or feature`](https://app.posthog.com/#panel=max:!Create%20a%20dashboard%20that%20breaks%20down%20revenue%20by%20product%20or%20feature)
+
+## <span className="inline-block"><IconMessage className="w-6 h-6 -mb-1 text-red" /></span> Surveys
+
+- [`Create a new survey to collect feedback on pricing`](https://app.posthog.com/#panel=max:!Create%20a%20new%20survey%20to%20collect%20feedback%20on%20pricing)
+- [`Analyze responses from the latest NPS survey`](https://app.posthog.com/#panel=max:!Analyze%20responses%20from%20the%20latest%20NPS%20survey)
+
+## <span className="inline-block"><IconBook className="w-6 h-6 -mb-1 text-blue" /></span> Docs
+
+- [`Explain how feature flags work in PostHog`](https://app.posthog.com/#panel=max:!Explain%20how%20feature%20flags%20work%20in%20PostHog)
+- [`Find setup instructions for Next.js SDK`](https://app.posthog.com/#panel=max:!Find%20setup%20instructions%20for%20Next.js%20SDK)
+- [`Summarize the differences between trends and funnels`](https://app.posthog.com/#panel=max:!Summarize%20the%20differences%20between%20trends%20and%20funnels)

@@ -1,0 +1,65 @@
+---
+title: Set up integrations
+---
+
+PostHog integrates with GitHub, GitLab, and Linear to enhance error tracking with source code context, commit information, and external issue tracking.
+
+| Integration | Capabilities |
+|-------------|-----------------|
+| [GitHub](#github-integration) | Pinpoint Git commits that cause issues, open files in GitHub directly from stack traces, and create GitHub issues from errors |
+| [GitLab](#gitlab-integration) | Pinpoint Git commits that cause issues, open files in GitLab directly from stack traces, and create GitLab issues from errors |
+| [Linear](#linear-integration) | Create Linear issues directly from errors and track fixes in your existing Linear workflows |
+
+## GitHub integration
+
+To set up the GitHub integration:
+
+1. Go to [Error tracking settings](https://app.posthog.com/settings/project-error-tracking) in the PostHog app and find **Integrations**
+2. Under **GitHub**, click **Connect organization**
+3. Authorize PostHog to access your repositories
+4. Select the repositories you want to link
+
+PostHog connects to GitHub by installing a GitHub application. PostHog needs the following permissions:
+
+- Read access to metadata
+- Read and write access to code, issues, and pull requests
+
+Once connected, create a [release](/docs/error-tracking/releases) to start using source linking.
+
+## GitLab integration
+
+To set up the GitLab integration:
+
+1. Go to [Error tracking settings](https://app.posthog.com/settings/project-error-tracking) in the PostHog app and find **Integrations**
+2. Under **GitLab**, click **Connect project**
+3. Provide the following information:
+   - Hostname
+   - Project ID
+   - A project access token with the `api` scope
+
+PostHog connects to GitLab using a [project access token](https://docs.gitlab.com/user/project/settings/project_access_tokens).
+
+Once connected, create a [release](/docs/error-tracking/releases) to start using source linking.
+
+## Linear integration
+
+Connect your Linear workspace to create and track Linear issues directly from error tracking.
+
+To set up the Linear integration:
+
+1. Go to [Error tracking settings](https://app.posthog.com/settings/project-error-tracking) in the PostHog app and find **Integrations**
+2. Under **Linear**, click **Connect workspace**
+3. Authorize PostHog to access your Linear workspace
+
+PostHog connects to Linear using a [third-party app](https://linear.app/docs/third-party-application-approvals). PostHog needs the following permissions:
+
+- Create issues for your workspace
+- Read access to your workspace
+
+## What's next?
+
+After setting up an integration:
+
+1. [Upload source maps](/docs/error-tracking/upload-source-maps) for better stack traces
+2. [Create releases](/docs/error-tracking/releases) to link errors to specific deployments
+3. [Create external issues](/docs/error-tracking/assigning-issues#creating-external-issues) from PostHog
