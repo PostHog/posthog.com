@@ -11,9 +11,6 @@ import {
     categoryDisplayNames,
     categoryIcons,
     buildCategoryMenuItems,
-    buildProductMenuItems,
-    popularProducts,
-    newestProducts,
 } from '../../constants/productNavigation'
 import useProduct from '../../hooks/useProduct'
 import {
@@ -247,28 +244,11 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
             mobileDestination: '/products',
         },
         {
-            type: 'separator',
-        },
-        {
-            type: 'submenu' as const,
+            type: 'item',
             label: 'Search apps',
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
             icon: <Icons.IconSearch className="size-4 text-gray" />,
-            mobileDestination: '/products',
-        },
-        {
-            type: 'submenu',
-            label: 'Popular products',
-            items: buildProductMenuItems(popularProducts, allProducts),
-            icon: <Icons.IconTrending className="size-4 text-green" />,
-            mobileDestination: '/products',
-        },
-        {
-            type: 'submenu',
-            label: 'New products',
-            items: buildProductMenuItems(newestProducts, allProducts),
-            icon: <Icons.IconPresent className="size-4 text-blue" />,
             mobileDestination: '/products',
         },
         {

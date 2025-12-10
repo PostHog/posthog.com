@@ -1,12 +1,6 @@
 import React from 'react'
 import * as Icons from '@posthog/icons'
 
-// Popular products to highlight in the menu
-export const popularProducts = ['web_analytics', 'product_analytics', 'session_replay', 'feature_flags', 'experiments']
-
-// Newest products to highlight in the menu
-export const newestProducts = ['posthog_ai', 'llm_analytics', 'error_tracking', 'revenue_analytics', 'web_analytics']
-
 // Category ordering for display
 export const categoryOrder = [
     'data',
@@ -120,11 +114,11 @@ export const nonProductPages = {
 
 // Helper function to get products for a category in the correct order
 export function getProductsForCategory(category: string, allProducts: any[]): any[] {
-    const products = allProducts.filter((product: any) => product.category === category)
+    const products = allProducts.filter((product) => product.category === category)
     const customOrder = productOrder[category]
 
     if (customOrder && customOrder.length > 0) {
-        return products.sort((a: any, b: any) => {
+        return products.sort((a, b) => {
             const aIndex = customOrder.indexOf(a.handle)
             const bIndex = customOrder.indexOf(b.handle)
 
@@ -141,56 +135,7 @@ export function getProductsForCategory(category: string, allProducts: any[]): an
     }
 
     // Fall back to alphabetical sorting
-    return products.sort((a: any, b: any) => a.name.localeCompare(b.name))
-}
-
-// Helper function to build menu items for specific product handles
-export function buildProductMenuItems(handles: string[], allProducts: any[]): any[] {
-    return handles
-        .map((handle) => {
-            const product = allProducts.find((p: any) => p.handle === handle)
-            if (!product) return null
-
-            // Check if it's a non-product page
-            const nonProductPage = Object.values(nonProductPages).find((p) => p.slug === product.slug)
-
-            if (nonProductPage) {
-                // Handle icon for non-product pages
-                let iconElement = null
-                if (nonProductPage.icon) {
-                    const IconComponent = Icons[nonProductPage.icon as keyof typeof Icons]
-                    if (IconComponent) {
-                        iconElement = React.createElement(IconComponent, {
-                            className: `text-${nonProductPage.color || product.color || 'gray'} size-4`,
-                        })
-                    }
-                }
-
-                return {
-                    type: 'item' as const,
-                    label: product.name,
-                    link: nonProductPage.url,
-                    icon: iconElement,
-                }
-            }
-
-            // Regular product with icon
-            const isDisabled = product.status === 'WIP'
-            const iconElement = product.Icon
-                ? React.createElement(product.Icon, {
-                      className: isDisabled ? 'text-muted size-4' : `text-${product.color || 'gray'} size-4`,
-                  })
-                : null
-
-            return {
-                type: 'item' as const,
-                label: product.name,
-                ...(!isDisabled && { link: `/${product.slug}` }),
-                icon: iconElement,
-                ...(isDisabled && { disabled: true }),
-            }
-        })
-        .filter(Boolean) // Remove any null items
+    return products.sort((a, b) => a.name.localeCompare(b.name))
 }
 
 // Helper function to build menu items for a category
