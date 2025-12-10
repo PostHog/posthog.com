@@ -45,7 +45,7 @@ function LevelCard({
             )}
 
             <div className="flex flex-col gap-2">
-                <h3 className="font-game text-lg font-bold">{level.name}</h3>
+                <h3 className="text-lg font-bold">{level.name}</h3>
                 <p className="text-sm opacity-70">{level.theme}</p>
 
                 {isUnlocked && (
@@ -65,7 +65,7 @@ export default function OverworldScene({ levels, onSelectLevel }: OverworldScene
     return (
         <div className="max-w-screen-lg mx-auto p-8">
             <div className="text-center mb-8">
-                <h1 className="font-game text-4xl font-bold mb-2">
+                <h1 className="text-4xl font-bold mb-2">
                     <span className="line-through italic">Your office</span> World map
                 </h1>
                 <p className="text-lg opacity-70">Select a level to continue your journey towards PMF</p>
@@ -84,7 +84,7 @@ export default function OverworldScene({ levels, onSelectLevel }: OverworldScene
 
             {/* Decorative map illustration placeholder */}
             <div className="mt-12 p-8 border-4 border-dashed border-gray-300 text-center">
-                <p className="text-gray-400 font-game">🗺️ Isometric world map illustration goes here</p>
+                <p className="text-gray-400 ">🗺️ Isometric world map illustration goes here</p>
             </div>
         </div>
     )

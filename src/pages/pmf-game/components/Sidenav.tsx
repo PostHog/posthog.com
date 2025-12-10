@@ -25,13 +25,13 @@ function NavButton({
     return (
         <button
             onClick={onClick}
-            className={`w-full text-left py-1 px-2 border-2 border-black bg-white hover:bg-yellow-100 transition-colors ${
-                active ? 'bg-yellow-200' : ''
+            className={`w-full text-left py-1 px-2 border-2 border-black bg-white transition-all ${
+                active ? '' : 'hover:scale-[1.02]'
             }`}
         >
             <div className="flex items-center justify-between">
                 <div>
-                    <div className="font-bold text-sm font-game">{title}</div>
+                    <div className={`font-bold text-sm ${active ? 'text-orange' : ''}`}>{title}</div>
                     <div className="text-xs opacity-70">{subtitle}</div>
                 </div>
 

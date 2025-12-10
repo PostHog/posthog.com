@@ -2,7 +2,9 @@ import React from 'react'
 import { LevelData, Resource, LevelProgress } from '../data/types'
 import PixelBorder from './PixelBorder'
 import OSButton from 'components/OSButton'
-import { IconArrowRight, IconBookmark } from '@posthog/icons'
+import * as Icons from '@posthog/icons'
+
+const { IconArrowRight, IconBookmark } = Icons
 
 interface LevelSceneProps {
     level: LevelData
@@ -14,14 +16,9 @@ interface LevelSceneProps {
 
 function QuestCard({ quest }: { quest: LevelData['quest'] }) {
     return (
-        <PixelBorder backgroundColor="#fefce8" className="p-6">
-            <h3 className="font-game text-xl font-bold mb-2">{quest.title}</h3>
-            <p className="text-sm mb-4">{quest.description}</p>
-            {quest.command && (
-                <div className="bg-gray-900 text-green-400 p-4 font-mono text-sm rounded">
-                    <code>{quest.command}</code>
-                </div>
-            )}
+        <PixelBorder className="p-6">
+            <h3 className=" text-xl font-bold mb-2">{quest.title}</h3>
+            <div className="mb-4" dangerouslySetInnerHTML={{ __html: quest.description }} />
         </PixelBorder>
     )
 }
@@ -46,7 +43,7 @@ function ContentCard({
             </div>
             <div className="flex-1">
                 {label && <div className="text-xs font-bold opacity-60 mb-1">{label}</div>}
-                <h4 className="font-game font-bold text-orange-600 mb-1">{resource.title}</h4>
+                <h4 className=" font-bold text-orange-600 mb-1">{resource.title}</h4>
                 <p className="text-sm opacity-70 line-clamp-2">{resource.description}</p>
             </div>
             <div className="flex flex-col gap-2 flex-shrink-0">
@@ -69,10 +66,31 @@ function CustomerStoryCard({ resource }: { resource: Resource }) {
             <div className="flex items-center gap-2 mb-2">
                 <span className="font-bold">{resource.company}</span>
             </div>
-            <h4 className="font-game font-bold mb-2">{resource.title}</h4>
+            <h4 className=" font-bold mb-2">{resource.title}</h4>
             {resource.quote && <p className="text-sm italic opacity-70 mb-3 flex-1">{resource.quote}</p>}
             <OSButton variant="secondary" size="sm" asLink to={resource.url}>
                 Read the story
+            </OSButton>
+        </PixelBorder>
+    )
+}
+
+function ProductCard({ resource }: { resource: Resource }) {
+    const Icon = resource.icon
+        ? (Icons as Record<string, React.ComponentType<{ className?: string }>>)[resource.icon]
+        : null
+
+    return (
+        <PixelBorder className="p-4 h-full flex flex-col">
+            <div className="flex items-center gap-2 mb-2">
+                {Icon && <Icon className={`size-6 ${resource.iconColor || ''}`} />}
+                <span className="text-md font-bold">{resource.title}</span>
+            </div>
+            {resource.description && (
+                <div className="text-sm mb-3 flex-1" dangerouslySetInnerHTML={{ __html: resource.description }} />
+            )}
+            <OSButton variant="secondary" size="sm" asLink to={resource.url}>
+                Learn more
             </OSButton>
         </PixelBorder>
     )
@@ -84,6 +102,7 @@ const X_FRAMES = SPRITE_SHEET_WIDTH / SPRITE_SIZE
 const FPS = 24
 
 type AnimationName = 'wave' | 'flag' | 'phone'
+type AnimationOption = AnimationName | 'random'
 
 const animations: Record<AnimationName, { img: string; frames: number }> = {
     wave: { img: 'wave', frames: 26 },
@@ -91,13 +110,28 @@ const animations: Record<AnimationName, { img: string; frames: number }> = {
     phone: { img: 'phone', frames: 28 },
 }
 
-const INITIAL_DELAY = 3000
+const animationNames: AnimationName[] = ['wave', 'flag', 'phone']
 
-function MaxWisdom({ wisdom, animation = 'flag' }: { wisdom: string; animation?: AnimationName }) {
+const getRandomAnimation = (): AnimationName => {
+    return animationNames[Math.floor(Math.random() * animationNames.length)]
+}
+
+const INITIAL_DELAY = 5000
+
+function MaxWisdom({ wisdom, animation = 'random' }: { wisdom: string; animation?: AnimationOption }) {
     const [frame, setFrame] = React.useState(0)
     const [hasPlayedInitial, setHasPlayedInitial] = React.useState(false)
     const [isPlaying, setIsPlaying] = React.useState(false)
-    const currentAnimation = animations[animation]
+    const [currentAnimationName, setCurrentAnimationName] = React.useState<AnimationName>(
+        animation === 'random' ? getRandomAnimation() : animation
+    )
+    const currentAnimation = animations[currentAnimationName]
+
+    React.useEffect(() => {
+        if (animation !== 'random') {
+            setCurrentAnimationName(animation)
+        }
+    }, [animation])
 
     React.useEffect(() => {
         // Reset when animation changes
@@ -141,10 +175,71 @@ function MaxWisdom({ wisdom, animation = 'flag' }: { wisdom: string; animation?:
 
     const handleClick = () => {
         if (!isPlaying) {
+            if (animation === 'random') {
+                setCurrentAnimationName(getRandomAnimation())
+            }
             setFrame(0)
             setIsPlaying(true)
         }
     }
+
+    // Typewriter effect - character by character
+    const [displayedChars, setDisplayedChars] = React.useState(0)
+    const [hasStartedTyping, setHasStartedTyping] = React.useState(false)
+    const plainText = React.useMemo(() => {
+        // Strip HTML tags for character counting, but we'll reveal the actual HTML
+        const temp = document.createElement('div')
+        temp.innerHTML = wisdom
+        return temp.textContent || ''
+    }, [wisdom])
+
+    React.useEffect(() => {
+        if (hasStartedTyping) return
+
+        const delayTimer = setTimeout(() => {
+            setHasStartedTyping(true)
+        }, 1000)
+        return () => clearTimeout(delayTimer)
+    }, [hasStartedTyping])
+
+    React.useEffect(() => {
+        if (!hasStartedTyping || displayedChars >= plainText.length) return
+
+        const charTimer = setTimeout(() => {
+            setDisplayedChars((c) => c + 1)
+        }, 30) // 30ms per character
+        return () => clearTimeout(charTimer)
+    }, [hasStartedTyping, displayedChars, plainText.length])
+
+    // Build the displayed HTML by counting visible characters
+    const displayedHtml = React.useMemo(() => {
+        if (displayedChars >= plainText.length) return wisdom
+
+        let visibleCount = 0
+        let result = ''
+        let inTag = false
+
+        for (let i = 0; i < wisdom.length; i++) {
+            const char = wisdom[i]
+            if (char === '<') {
+                inTag = true
+                result += char
+            } else if (char === '>') {
+                inTag = false
+                result += char
+            } else if (inTag) {
+                result += char
+            } else {
+                if (visibleCount < displayedChars) {
+                    result += char
+                    visibleCount++
+                } else {
+                    break
+                }
+            }
+        }
+        return result
+    }, [wisdom, displayedChars, plainText.length])
 
     return (
         <div className="flex items-end gap-2 items-center">
@@ -167,10 +262,9 @@ function MaxWisdom({ wisdom, animation = 'flag' }: { wisdom: string; animation?:
                     }}
                 />
             </div>
-            <div
-                className="p-2 text-sm max-w-xs bg-white border-2 border-black"
-                dangerouslySetInnerHTML={{ __html: wisdom }}
-            />
+            <div className="p-2 text-sm bg-white border-2 border-black" style={{ width: '20rem' }}>
+                <div dangerouslySetInnerHTML={{ __html: displayedHtml }} />
+            </div>
         </div>
     )
 }
@@ -185,11 +279,12 @@ export default function LevelScene({
     const blogs = level.resources.filter((r) => r.type === 'blog')
     const customerStories = level.resources.filter((r) => r.type === 'customer-story')
     const videos = level.resources.filter((r) => r.type === 'video')
+    const products = level.products || []
 
     return (
         <div className="max-w-screen-lg mx-auto">
             {/* Hero Image with Overlaid Header */}
-            <div className="relative w-full h-80 overflow-hidden">
+            <div className="relative w-full h-96 overflow-hidden">
                 {level.illustration ? (
                     <div
                         className="absolute inset-0"
@@ -207,11 +302,11 @@ export default function LevelScene({
                 <div className="absolute inset-0 bg-black/40" />
 
                 {/* Top left: Level number and name */}
-                <div className="absolute top-0 left-0 w-1/2 flex flex-col items-start gap-2 p-6">
-                    <PixelBorder as="button" className="px-4 py-2 font-game text-lg hover:bg-yellow-100 bg-white">
+                <div className="absolute top-0 left-0 w-1/2 flex flex-col items-start gap-2 pl-10 py-14">
+                    <PixelBorder as="button" className="px-4 py-2 text-lg hover:bg-yellow-100 bg-white">
                         LEVEL {String(levelNumber).padStart(2, '0')} ▶
                     </PixelBorder>
-                    <h1 className="font-game text-5xl font-bold text-white">{level.name}</h1>
+                    <h1 className=" text-5xl font-bold text-white">{level.name}</h1>
                 </div>
 
                 {/* Bottom right: Max Wisdom */}
@@ -229,7 +324,7 @@ export default function LevelScene({
                         inline
                         borderColor="#ef4444"
                         backgroundColor="#ef4444"
-                        className="px-4 py-2 text-white font-game text-lg"
+                        className="px-4 py-2 text-white  text-lg"
                     >
                         Quest
                     </PixelBorder>
@@ -238,6 +333,25 @@ export default function LevelScene({
                     </div>
                 </div>
 
+                {/* Products */}
+                {products.length > 0 && (
+                    <div className="mb-8">
+                        <PixelBorder
+                            inline
+                            borderColor="#3b82f6"
+                            backgroundColor="#3b82f6"
+                            className="px-4 py-2 text-white  text-lg"
+                        >
+                            Dev tools
+                        </PixelBorder>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 mt-4">
+                            {products.map((resource) => (
+                                <ProductCard key={resource.id} resource={resource} />
+                            ))}
+                        </div>
+                    </div>
+                )}
+
                 {/* Resources Section */}
                 {level.resources.length > 0 && (
                     <div className="mb-8">
@@ -245,7 +359,7 @@ export default function LevelScene({
                             inline
                             borderColor="#22c55e"
                             backgroundColor="#22c55e"
-                            className="px-4 py-2 text-white font-game text-lg"
+                            className="px-4 py-2 text-white  text-lg"
                         >
                             Resources
                         </PixelBorder>

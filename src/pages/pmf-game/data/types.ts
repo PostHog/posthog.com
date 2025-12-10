@@ -15,12 +15,14 @@ export interface LevelProgress {
 
 export interface Resource {
     id: string
-    type: 'blog' | 'video' | 'customer-story'
+    type: 'blog' | 'video' | 'customer-story' | 'product'
     title: string
     description: string
     url: string
     image?: string
-    company?: string // For customer stories
+    icon?: string // Icon name from @posthog/icons (e.g., 'IconGraph')
+    iconColor?: string // CSS color for the icon (e.g., '#3b82f6')
+    company?: string // For customer stories and products
     quote?: string // For customer stories
 }
 
@@ -39,6 +41,7 @@ export interface LevelData {
     description: string
     illustration?: string
     quest: Quest
+    products?: Resource[]
     resources: Resource[]
     checklistItems: ChecklistItem[]
     maxWisdom?: string // Tip from Max the hedgehog
