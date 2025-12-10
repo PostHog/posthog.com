@@ -19,7 +19,7 @@ export const customerDataInfrastructureNav = {
             url: '/customer-data-infrastructure/sources',
         },
         {
-            name: 'Transformations & modeling',
+            name: 'Data modeling',
             url: '/customer-data-infrastructure/transformations',
         },
         {

@@ -218,7 +218,7 @@ export default function CDP(): JSX.Element {
         {
             id: 'modeling-transformation',
             icon: 'IconShuffle',
-            title: 'Modeling & transformation',
+            title: 'Data Modeling',
             url: 'customer-data-infrastructure/transformations',
             description: 'Build modular, testable data tables that load in an instant.',
             perfectFor: 'data analysts and product teams',

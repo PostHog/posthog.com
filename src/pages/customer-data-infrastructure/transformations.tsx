@@ -4,40 +4,96 @@ import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfras
 import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'
 import Link from 'components/Link'
-import { IconArrowUpRight } from '@posthog/icons'
+import { ProductScreenshot } from 'components/ProductScreenshot'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
 }
 
 export default function Transformations(): JSX.Element {
+    // TODO: change the name of this file to modeling.tsx and the path from /transformations to /modeling
     return (
         <>
             <SEO
-                title="Transform data - Customer data infrastructure - PostHog"
-                description="Learn how to transform and enrich your data in PostHog"
+                title="Data modeling - Customer data infrastructure - PostHog"
+                description="Learn how to model your data in PostHog"
                 image="images/og/cdp.jpg"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title="Transform data">
+            <ReaderView leftSidebar={<LeftSidebarContent />} title="Data modeling">
                 <p>
-                    PostHog provides powerful tools to transform, enrich, and model your data to get in the exact shape
-                    you need it.
+                    PostHog provides powerful tools to shape, enrich, and model your data to get in the exact form you
+                    need it. Modeling primarily happens in two places: modeling in the data warehouse, and in event
+                    transformations using Hog functions.
+                </p>
+                <h2>1. Data modeling in PostHog's data warehouse</h2>
+
+                <p>
+                    PostHog's modeling workflow starts with creating <Link to="/docs/data-warehouse/views">views</Link>{' '}
+                    for your data. This allows you to define custom transformations, joins, and aggregations using HogQL
+                    (PostHog's SQL dialect), which can be used as reliable, structured foundations for data analysis.
                 </p>
 
-                <h2>1. Events transformations</h2>
                 <p>
-                    Transform event data as it flows through PostHog using our transformation apps and{' '}
+                    Then, save those views into <Link to="/docs/data-warehouse/views/materialize">models</Link> (aka
+                    materialized views) in the data warehouse for fast querying, cost saving, and integration with BI
+                    tools.
+                </p>
+
+                <p>
+                    Models are refreshed on a schedule, as frequently as every 5 minutes or as long as monthly. You can
+                    view your models in a DAG, or a visual graph of all model dependencies.
+                </p>
+                <ProductScreenshot
+                    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_10_2x_88dc4ae252.png"
+                    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_31_2x_16e9dbe683.png"
+                    alt="Materialize view"
+                    classes="rounded"
+                    zoom={false}
+                />
+
+                <h3>Features</h3>
+                <ul>
+                    <li>
+                        <strong>Join multiple sources:</strong> Combine data from different tables and sources
+                    </li>
+                    <li>
+                        <strong>Create calculated fields:</strong> Add derived metrics and computed columns
+                    </li>
+                    <li>
+                        <strong>Build aggregations:</strong> Create summary tables and rollups
+                    </li>
+                    <li>
+                        <strong>Save as models:</strong> Store complex queries as reusable views, materialized for speed
+                    </li>
+                    <li>
+                        <strong>Version control:</strong> Track changes to your data models over time
+                    </li>
+                </ul>
+                <p>
+                    <Link to="/docs/data-warehouse/views/materialize" state={{ newWindow: true }}>
+                        Learn how to model your data →
+                    </Link>
+                </p>
+
+                {/* 
+                
+                // TODO: move this to new CDP page
+                
+                <h2>2. Realtime event transformations</h2>
+                <p>
+                    While not a standard warehousing use-case, our realtime event transformations show the power &
+                    simplicity in using PostHog's integrated data warehouse.
+                </p>
+                <p>
+                    Our realtime transformation apps and{' '}
                     <Link to="/docs/hog" state={{ newWindow: true }}>
                         Hog functions
-                    </Link>
-                    .
+                    </Link>{' '}
+                    allow you to transform event data before it is saved to your PostHog events store. This means event
+                    data can be cleaned and curated at ingestion time, ensuring high data quality from the start.
                 </p>
 
-                <h3>
-                    <IconArrowUpRight className="size-6 inline-block text-muted -scale-y-1 mr-1" /> Data in: Pipeline
-                    transformations (built with Hog)
-                </h3>
-                <p>Apply transformations to incoming event data before it's stored:</p>
+                <p>Apply realtime transformations to incoming event data before it's stored for:</p>
                 <ul>
                     <li>
                         <strong>Data enrichment:</strong> Add context like GeoIP location, user agent parsing, or
@@ -59,9 +115,12 @@ export default function Transformations(): JSX.Element {
                 </ul>
                 <p>
                     <Link to="/docs/cdp/transformations" state={{ newWindow: true }}>
-                        Learn about transformations &rarr;
+                        Learn about realtime transformations &rarr;
                     </Link>
-                </p>
+                </p> */}
+                {/* 
+                
+                TODO: this needs to be removed from this file, but leaving it here for reference on the export page
 
                 <h3>
                     <IconArrowUpRight className="size-6 inline-block text-muted mr-1" />
@@ -98,37 +157,10 @@ export default function Transformations(): JSX.Element {
                     <Link to="/docs/hog" state={{ newWindow: true }}>
                         Learn about Hog functions →
                     </Link>
-                </p>
+                </p> */}
+                <hr />
 
-                <h2>2. Warehouse source transformations</h2>
-                <p>Transform and model data from your connected warehouse sources using SQL.</p>
-
-                <h3>In SQL editor: Data modeling in saved views</h3>
-                <p>Create reusable data models and transformations using PostHog's SQL editor:</p>
-                <ul>
-                    <li>
-                        <strong>Join multiple sources:</strong> Combine data from different tables and sources
-                    </li>
-                    <li>
-                        <strong>Create calculated fields:</strong> Add derived metrics and computed columns
-                    </li>
-                    <li>
-                        <strong>Build aggregations:</strong> Create summary tables and rollups
-                    </li>
-                    <li>
-                        <strong>Save as views:</strong> Store complex queries as reusable views
-                    </li>
-                    <li>
-                        <strong>Version control:</strong> Track changes to your data models over time
-                    </li>
-                </ul>
-                <p>
-                    <Link to="/docs/data-warehouse/views" state={{ newWindow: true }}>
-                        Learn about saved views →
-                    </Link>
-                </p>
-
-                <h2>Common transformation use cases</h2>
+                <h2>Common modeling use cases</h2>
 
                 <h3>User identity resolution</h3>
                 <ul>
@@ -158,27 +190,10 @@ export default function Transformations(): JSX.Element {
                     <li>Apply GDPR/CCPA compliance rules</li>
                 </ul>
 
-                <h2>Best practices</h2>
-                <ul>
-                    <li>
-                        <strong>Test transformations:</strong> Always test with a small sample before applying to all
-                        data
-                    </li>
-                    <li>
-                        <strong>Document your logic:</strong> Add clear descriptions to saved views and transformations
-                    </li>
-                    <li>
-                        <strong>Monitor performance:</strong> Watch for slow queries and optimize as needed
-                    </li>
-                    <li>
-                        <strong>Version control:</strong> Keep track of changes to critical transformations
-                    </li>
-                    <li>
-                        <strong>Error handling:</strong> Build in fallbacks for when transformations fail
-                    </li>
-                </ul>
-
-                <hr />
+                {/* 
+                
+                TODO: this FAQ belongs in the export page, but leaving it here for reference
+                
                 <h2>FAQ</h2>
 
                 <ul>
@@ -230,7 +245,7 @@ export default function Transformations(): JSX.Element {
                         Hog is SQL-compatible, and SQL has always used 1-indexed arrays. While it might feel odd coming
                         from other languages, it ensures consistency with our SQL expressions.
                     </li>
-                </ul>
+                </ul> */}
             </ReaderView>
         </>
     )
