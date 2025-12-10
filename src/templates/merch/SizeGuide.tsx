@@ -9,6 +9,7 @@ const sizeGuides = {
         'https://res.cloudinary.com/dmukukwp6/image/upload/IMG_3315_b6230804cf.png',
         'https://res.cloudinary.com/dmukukwp6/image/upload/IMG_3316_3d564f9e41.png',
     ],
+    'posthog_xmas.sweater': ['https://res.cloudinary.com/dmukukwp6/image/upload/sweater_sizes_efd7c22922.jpg'],
 }
 
 export default function SizeGuide({ title }: { title: string }): React.ReactElement | null {

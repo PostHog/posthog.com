@@ -11,7 +11,7 @@ showTitle: true
 We have three types of role:
 - Technical Account Executives - closing new business from [inbound](/handbook/growth/sales/inbound-sales) and [outbound](/handbook/growth/sales/outbound-sales) leads and expanding their usage of PostHog in the next 12 months
 - Technical Account Managers - [expansion](/handbook/growth/sales/expansion-and-retention) from existing customers, closing new business from [product-led leads](/handbook/growth/sales/product-led-sales)
-- Technical Account Managers called Leon and Scott - [expansion](/handbook/growth/sales/expansion-and-retention) from a small set of very high potential existing customers
+- COMING SOON: Business Development Reps, aka BDRs - generating leads for team new business
 
 ### Technical Account Executives
 
@@ -156,6 +156,25 @@ You can see how we are tracking on the [TAM Quota Tracker](https://us.posthog.co
 4. Accounts which you've previously been paid quota on need to stay in your `AM Managed` book until they are handed over as per 3 above, or until they churn/fall below $20K ARR.  In this case, we will keep them in the `AM Managed` segment for quota calculation purposes and then remove them after the quarterly calculations are complete.
 5. Nominally, you should have 15 accounts/around $1m in ARR in your `AM Managed` book.  There is some wiggle room here, but if you find yourself with 25+ accounts, it's unlikely that you'll be able to give them the level of focus we expect from a TAM, so you should be prepared to hand some over to another team member.
 6. You can have accounts added to your book at any time, if you are comfortable that there is growth potential there.  Removal of accounts should only happen at the end of the quarter so that quota can be calculated.
+
+## How commission works - BDRs
+
+**General principles**
+
+- When thinking about commission, we want to particularly incentivize:
+  - Generating high quality leads
+  - Getting people in who fit our ICP, ie. are easier for us to sell to
+- We aim for a 70/30 split between base/commission when calculating OTE by default.
+
+> This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
+
+**Variables**
+
+- Quota is based on the number of sales qualified opportunities you generate - basically when an account moves into the Opportunity stage in SFDC
+- Your quota is set for the year and then divided by 4 - this means you don't have to cram meetings into the end of a quarter.
+- Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%.
+- Commission is paid out quarterly.
+- There is no guaranteed commission during ramp, as the ramp period for BDRs is much shorter than for TAMs/TAEs. 
 
 ## Team lead quota
 
