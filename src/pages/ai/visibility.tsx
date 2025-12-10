@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import SEO from 'components/seo'
 import { CallToAction } from 'components/CallToAction'
-import Logo from 'components/Logo'
 
 export default function AIVisibility(): JSX.Element {
     const [domain, setDomain] = useState('')
@@ -29,8 +28,8 @@ export default function AIVisibility(): JSX.Element {
             return
         }
 
-        // Redirect to localhost:8010/viz/[domain]
-        window.location.href = `http://localhost:8010/viz/${encodeURIComponent(processedDomain)}`
+        // Open report in new tab
+        window.open(`http://localhost:8010/viz/${encodeURIComponent(processedDomain)}`, '_blank')
     }
 
     return (
@@ -41,26 +40,6 @@ export default function AIVisibility(): JSX.Element {
                 image="/images/og/ai-visibility.jpg"
             />
             <div data-scheme="primary" className="min-h-screen bg-accent dark:bg-dark">
-                {/* Header */}
-                <header className="border-b border-primary bg-light dark:bg-dark">
-                    <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-                        <a href="/" className="flex items-center gap-2">
-                            <Logo className="h-8" />
-                        </a>
-                        <nav className="flex gap-4 items-center">
-                            <a href="/pricing" className="text-sm text-primary hover:text-red dark:hover:text-yellow">
-                                Pricing
-                            </a>
-                            <a href="/docs" className="text-sm text-primary hover:text-red dark:hover:text-yellow">
-                                Docs
-                            </a>
-                            <CallToAction href="https://app.posthog.com/signup" size="sm" type="primary">
-                                Get started
-                            </CallToAction>
-                        </nav>
-                    </div>
-                </header>
-
                 {/* Hero Section */}
                 <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
                     <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -72,9 +51,23 @@ export default function AIVisibility(): JSX.Element {
                             <p className="text-xl md:text-2xl text-primary/80 leading-relaxed">
                                 See where you stand and start optimizing your AI search performance, all for free.
                             </p>
-                            <p className="text-lg text-primary/70">
-                                Your customers aren't googling anymore. They're asking AI.
-                            </p>
+                            <div className="space-y-4 text-lg text-primary/70">
+                                <p>
+                                    Your customers aren't googling anymore. They're asking AI. When someone asks
+                                    ChatGPT, Claude, or Perplexity about your industry, does your brand come up?
+                                </p>
+                                <p>
+                                    AI visibility is the new SEO. Just like you optimized for Google search rankings,
+                                    you now need to understand and improve how AI platforms mention, recommend, and
+                                    position your brand. This matters because AI assistants are becoming the primary way
+                                    people discover products, research solutions, and make purchase decisions.
+                                </p>
+                                <p>
+                                    Our free report analyzes your brand's presence across major AI platforms, shows you
+                                    how you stack up against competitors, and reveals the questions and topics where
+                                    you're being mentioned—or ignored.
+                                </p>
+                            </div>
 
                             {/* Form */}
                             <div className="pt-4">
@@ -116,14 +109,11 @@ export default function AIVisibility(): JSX.Element {
                         {/* Right Column - Visual */}
                         <div className="relative">
                             <div className="bg-light dark:bg-dark border border-primary rounded-lg p-6 shadow-xl">
-                                <div className="aspect-video bg-accent dark:bg-dark rounded flex items-center justify-center">
-                                    <div className="text-center space-y-4 p-8">
-                                        <div className="text-6xl">📊</div>
-                                        <p className="text-primary/60 text-sm">
-                                            Dashboard preview - Your AI visibility metrics across platforms
-                                        </p>
-                                    </div>
-                                </div>
+                                <img
+                                    src="/images/ai-visibility-preview.png"
+                                    alt="AI visibility dashboard showing brand rankings and mention percentages"
+                                    className="w-full rounded"
+                                />
                             </div>
                             {/* Decorative element */}
                             <div className="absolute -top-4 -right-4 w-24 h-24 bg-red/10 dark:bg-yellow/10 rounded-full blur-2xl" />
