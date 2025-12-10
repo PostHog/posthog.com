@@ -2613,7 +2613,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         {
             parentIcon: 'SQL',
             // Icon: IconAsterisk,
-            name: 'Query & visualize data',
+            name: 'SQL data exploration',
             handle: 'visualize',
             type: 'visualize',
             slug: 'data-warehouse',
@@ -2621,8 +2621,23 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'lilac',
             category: 'data',
             seo: {
-                title: 'Query & visualize product and third party data together',
+                title: 'Explore your data with SQL',
                 description: 'Unify and query data from any source and analyze it alongside your product data.',
+            },
+        },
+        {
+            parentIcon: 'SQL',
+            // Icon: IconAsterisk,
+            name: 'Business Intelligence (BI)',
+            handle: 'visualize',
+            type: 'visualize',
+            slug: 'data-warehouse',
+            color: 'purple',
+            colorSecondary: 'lilac',
+            category: 'data',
+            seo: {
+                title: 'Business Intelligence (BI)',
+                description: 'Analyze your data and create dashboards to share insights across your organization.',
             },
         },
         {

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Fieldset } from 'components/OSFieldset'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
@@ -12,12 +11,9 @@ import {
     IconDatabaseBolt,
     IconPlug,
     IconShuffle,
-    IconX,
 } from '@posthog/icons'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { TreeMenu } from 'components/TreeMenu'
-import { AppLink } from 'components/OSIcons/AppIcon'
-import { IconPresentation } from 'components/OSIcons'
 import { useApp } from '../../context/App'
 import useProduct from '../../hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -31,135 +27,8 @@ const LeftSidebarContent = () => {
 }
 
 export default function CDP(): JSX.Element {
-    // Define table columns for each tab
-    const dataInColumns = [
-        { name: 'source type', width: 'minmax(170px, 1fr)', align: 'left' as const },
-        { name: 'type of data', width: 'minmax(200px, 1fr)', align: 'left' as const },
-        { name: 'example sources', width: 'minmax(100px, 2fr)', align: 'left' as const },
-    ]
-
-    const transformationColumns = [
-        { name: 'transform type', width: 'minmax(170px, 1fr)', align: 'left' as const },
-        { name: 'purpose', width: 'minmax(200px, 1fr)', align: 'left' as const },
-        { name: 'example sources', width: 'minmax(100px, 2fr)', align: 'left' as const },
-    ]
-
-    const dataOutColumns = [
-        { name: 'destination method', width: 'minmax(170px, 1fr)', align: 'left' as const },
-        { name: 'type of data', width: 'minmax(200px, 1fr)', align: 'left' as const },
-        { name: 'example destinations', width: 'minmax(100px, 2fr)', align: 'left' as const },
-    ]
-
-    // Data In tab rows
-    const dataInRows = [
-        {
-            cells: [
-                {
-                    content: <Link to="/cdp?type=source">warehouse sources</Link>,
-                },
-                { content: 'import data from databases and SaaS tools' },
-                {
-                    content: 'Popular databases, Stripe, Salesforce, Snowflake, Zendesk, etc',
-                    className: '',
-                },
-            ],
-        },
-        {
-            cells: [
-                {
-                    content: <Link to="/docs/libraries">PostHog SDKs</Link>,
-                },
-                { content: 'customer activity in your product' },
-                {
-                    content: 'JS event tracking with autocapture, front end, server-side, and mobile libraries',
-                    className: '',
-                },
-            ],
-        },
-        {
-            cells: [
-                {
-                    content: <Link to="/cdp?type=source">incoming webhooks / event pipelines</Link>,
-                },
-                { content: 'send realtime data as events' },
-                {
-                    content: 'Stripe, HubSpot, Customer.io, Braze, Amplitude, Mixpanel',
-                    className: '',
-                },
-            ],
-        },
-    ]
-
-    // Transformation tab rows
-    const transformationRows = [
-        {
-            cells: [
-                {
-                    content: <Link to="/cdp?type=transformation">data enrichment</Link>,
-                },
-                { content: 'add context and metadata to events' },
-                {
-                    content: 'GeoIP plugins, user agent parsing, property mapping, data validation apps',
-                    className: '',
-                },
-            ],
-        },
-        {
-            cells: [
-                {
-                    content: <Link to="/cdp?type=transformation">filtering & routing</Link>,
-                },
-                { content: 'control data flow and reduce noise' },
-                {
-                    content: 'Event filtering apps, PII scrubbing, conditional routing, sampling plugins',
-                    className: '',
-                },
-            ],
-        },
-        {
-            cells: [
-                { content: 'custom transformations' },
-                { content: 'apply business logic to your data' },
-                {
-                    content: 'Custom JavaScript apps, webhook transformations, API enrichment, normalization',
-                    className: '',
-                },
-            ],
-        },
-    ]
-
-    // Data Out tab rows
-    const dataOutRows = [
-        {
-            cells: [
-                {
-                    content: <Link to="/cdp?type=destination">event pipelines</Link>,
-                },
-                { content: 'realtime event streaming to external systems' },
-                {
-                    content: 'Webhooks, Kafka, Amazon Kinesis, real-time dashboards',
-                    className: '',
-                },
-            ],
-        },
-        {
-            cells: [
-                {
-                    content: <Link to="/cdp?type=destination">batch exports</Link>,
-                },
-                { content: 'scheduled exports to data warehouses' },
-                {
-                    content: 'BigQuery, Snowflake, S3, PostgreSQL, ClickHouse',
-                    className: '',
-                },
-            ],
-        },
-    ]
-
     // Define the specific data products we want to display in order
     const dataProducts = ['sql', 'data_warehouse', 'cdp', 'api', 'webhooks']
-
-    // cdp, hog
 
     // Get all products and filter to only the data category ones we want
     const allProducts = useProduct()
@@ -201,10 +70,18 @@ export default function CDP(): JSX.Element {
         {
             id: 'data-import',
             icon: 'IconPlug',
-            title: 'Data import + CDP',
-            url: 'TODO',
+            title: 'Data sources & import (ELT)',
+            url: 'customer-data-infrastructure/sources',
             description:
-                'Use our 60+ sources to get data into your warehouse, including direct warehouse sources, SDKs, and webhooks.',
+                'Use our bulk import sources to get data into your warehouse, including data from databases, ad platforms, SaaS tools, and more.',
+            perfectFor: 'product teams, data engineers, and analysts',
+        },
+        {
+            id: 'data-import',
+            icon: 'IconPlug',
+            title: 'CDP',
+            url: '/cdp',
+            description: 'Stream data through our 60+ sources send data wherever you need it.',
             perfectFor: 'product teams, data engineers, and analysts',
         },
         {
@@ -221,10 +98,20 @@ export default function CDP(): JSX.Element {
         {
             id: 'queries-visualization',
             icon: 'IconAsterisk',
-            title: 'Queries & visualization',
+            title: 'SQL editor',
             url: '/data-warehouse',
             description:
                 'Explore your data with SQL, build business intelligence dashboards, and visualize key metrics.',
+            perfectFor: 'product teams',
+            notReadyFor:
+                'data analysts. We recommend bringing your favorite tools like Hex for now until our tooling is more mature.',
+        },
+        {
+            id: 'queries-visualization',
+            icon: 'IconAsterisk',
+            title: 'Business intelligence (BI)',
+            url: '/customer-data-infrastructure/business-intelligence',
+            description: 'Visualize your data with interactive dashboards and ad-hoc analyses right in PostHog.',
             perfectFor: 'product teams',
             notReadyFor:
                 'data analysts. We recommend bringing your favorite tools like Hex for now until our tooling is more mature.',
@@ -269,6 +156,10 @@ export default function CDP(): JSX.Element {
                     ),
                 } as any)}
             >
+                {/* 
+                
+                TODO: Re-add this product grid later? I like it but don't have time to make it show the correct things right now.
+                
                 <div className="@2xl:float-right @2xl:w-[23.5rem] @2xl:ml-4 @3xl:ml-12">
                     <Fieldset legend="Customer data infrastructure">
                         <div
@@ -305,7 +196,7 @@ export default function CDP(): JSX.Element {
                             ))}
                         </div>
                     </Fieldset>
-                </div>
+                </div> */}
                 <h3>
                     The most flexible integrated modern data stack – powered by PostHog, built on DuckDB, and designed
                     to scale

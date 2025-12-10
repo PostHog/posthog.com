@@ -23,7 +23,7 @@ export const customerDataInfrastructureNav = {
             url: '/customer-data-infrastructure/sources',
         },
         {
-            name: 'CDP - TODO',
+            name: 'CDP',
             url: '/cdp',
         },
         {
@@ -31,12 +31,12 @@ export const customerDataInfrastructureNav = {
             url: '/customer-data-infrastructure/data-modeling',
         },
         {
-            name: 'SQL data exploration - TODO',
+            name: 'SQL editor',
             url: '/data-warehouse',
         },
         {
-            name: 'Business intelligence (BI) - TODO',
-            url: '/data-warehouse',
+            name: 'Business intelligence (BI)',
+            url: '/customer-data-infrastructure/business-intelligence',
         },
         {
             name: 'Export & reverse ETL',
