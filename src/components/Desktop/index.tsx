@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import CloudinaryImage from 'components/CloudinaryImage'
+import HedgeHogModeEmbed from 'components/HedgehogMode'
 import Link from 'components/Link'
-import { useApp } from '../../context/App'
-import { IconDemoThumb, AppIcon, IconChangelogThumb } from 'components/OSIcons'
+import NotificationsPanel from 'components/NotificationsPanel'
+import { AppIcon, IconDemoThumb } from 'components/OSIcons'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
-import CloudinaryImage from 'components/CloudinaryImage'
-import DraggableDesktopIcon from './DraggableDesktopIcon'
-import { Screensaver } from '../Screensaver'
-import { useInactivityDetection } from '../../hooks/useInactivityDetection'
-import NotificationsPanel from 'components/NotificationsPanel'
-import useTheme from '../../hooks/useTheme'
 import { motion } from 'framer-motion'
-import HedgeHogModeEmbed from 'components/HedgehogMode'
+import { useVideoPlayingState } from 'hooks/useVideoPlayingState'
+import React, { useEffect, useMemo, useState } from 'react'
 import ReactConfetti from 'react-confetti'
+import { useApp } from '../../context/App'
+import { useInactivityDetection } from '../../hooks/useInactivityDetection'
+import useTheme from '../../hooks/useTheme'
+import { Screensaver } from '../Screensaver'
+import DraggableDesktopIcon from './DraggableDesktopIcon'
 
 declare global {
     interface Window {
@@ -82,23 +83,23 @@ export const useProductLinks = () => {
         },
         ...(posthogInstance
             ? [
-                {
-                    label: 'Open app ↗',
-                    Icon: <AppIcon name="computerCoffee" />,
-                    url: 'https://app.posthog.com',
-                    external: true,
-                    source: 'desktop',
-                },
-            ]
+                  {
+                      label: 'Open app ↗',
+                      Icon: <AppIcon name="computerCoffee" />,
+                      url: 'https://app.posthog.com',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]
             : [
-                {
-                    label: 'Sign up ↗',
-                    Icon: <AppIcon name="compass" />,
-                    url: 'https://app.posthog.com/signup',
-                    external: true,
-                    source: 'desktop',
-                },
-            ]),
+                  {
+                      label: 'Sign up ↗',
+                      Icon: <AppIcon name="compass" />,
+                      url: 'https://app.posthog.com/signup',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]),
     ]
 }
 
@@ -204,13 +205,18 @@ export default function Desktop() {
         confetti,
         compact,
         posthogInstance,
+        windows,
     } = useApp()
     const [iconPositions, setIconPositions] = useState<IconPositions>(generateInitialPositions())
+    const { isVideoPlaying } = useVideoPlayingState()
     const { isInactive, dismiss } = useInactivityDetection({
         enabled: !siteSettings.screensaverDisabled,
     })
     const [rendered, setRendered] = useState(false)
     const { getWallpaperClasses } = useTheme()
+
+    const isDemoWindowOpen = useMemo(() => windows.some((window) => window.path === '/demo'), [windows])
+    const disableScreensaverForDemo = isDemoWindowOpen && isVideoPlaying
 
     function generateInitialPositions(columns = 2): IconPositions {
         const positions: IconPositions = {}
@@ -553,7 +559,7 @@ export default function Desktop() {
                 </div>
                 {!compact && (
                     <Screensaver
-                        isActive={isInactive || screensaverPreviewActive}
+                        isActive={(isInactive || screensaverPreviewActive) && !disableScreensaverForDemo}
                         onDismiss={() => {
                             setScreensaverPreviewActive(false)
                             dismiss()

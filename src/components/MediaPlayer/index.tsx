@@ -2,6 +2,7 @@ import { IconFastForward, IconPauseFilled, IconPlayFilled } from '@posthog/icons
 import { IconFullScreen, IconPlayhead, IconVolumeFull, IconVolumeHalf, IconVolumeMuted } from 'components/OSIcons/Icons'
 import { Select } from 'components/RadixUI/Select'
 import ZoomHover from 'components/ZoomHover'
+import { useVideoPlayingState } from 'hooks/useVideoPlayingState'
 import React, { useEffect, useRef, useState } from 'react'
 
 // Add types for YouTube and Wistia APIs to avoid TS errors
@@ -35,6 +36,8 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
     const [isSeeking, setIsSeeking] = useState(false)
     const seekSuppressTimeout = useRef<NodeJS.Timeout | null>(null)
     const containerRef = React.useRef<HTMLDivElement>(null)
+
+    const { dispatchVideoPlayingState } = useVideoPlayingState()
 
     useEffect(() => {
         let interval: NodeJS.Timeout | null = null
@@ -73,10 +76,12 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                     height: undefined,
                     events: {
                         onStateChange: (event: any) => {
-                            setPlayerState((prev: any) => ({
+                            const isPlaying = event.data === window.YT.PlayerState.PLAYING
+                            setPlayerState((prev) => ({
                                 ...prev,
-                                isPlaying: event.data === window.YT.PlayerState.PLAYING,
+                                isPlaying,
                             }))
+                            dispatchVideoPlayingState(isPlaying)
                         },
                         onReady: (event: any) => {
                             setPlayerState((prev: any) => ({
@@ -86,6 +91,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                                 currentTime: event.target.getCurrentTime(),
                             }))
                             event.target.playVideo()
+                            dispatchVideoPlayingState(true)
                         },
                         onPlaybackRateChange: (event: any) => {
                             setPlayerState((prev: any) => ({
@@ -159,15 +165,25 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                         }
 
                         video.play()
+                        dispatchVideoPlayingState(true)
 
-                        video.bind('play', () => setPlayerState((prev: any) => ({ ...prev, isPlaying: true })))
-                        video.bind('pause', () => setPlayerState((prev: any) => ({ ...prev, isPlaying: false })))
-                        video.bind('end', () => setPlayerState((prev: any) => ({ ...prev, isPlaying: false })))
+                        video.bind('play', () => {
+                            setPlayerState((prev) => ({ ...prev, isPlaying: true }))
+                            dispatchVideoPlayingState(true)
+                        })
+                        video.bind('pause', () => {
+                            setPlayerState((prev) => ({ ...prev, isPlaying: false }))
+                            dispatchVideoPlayingState(false)
+                        })
+                        video.bind('end', () => {
+                            setPlayerState((prev) => ({ ...prev, isPlaying: false }))
+                            dispatchVideoPlayingState(false)
+                        })
                         video.bind('timechange', (t: number) => {
-                            setPlayerState((prev: any) => ({ ...prev, currentTime: t }))
+                            setPlayerState((prev) => ({ ...prev, currentTime: t }))
                         })
                         video.bind('volumechange', (v: number) => {
-                            setPlayerState((prev: any) => ({
+                            setPlayerState((prev) => ({
                                 ...prev,
                                 volume: v * 100,
                                 isMuted: v === 0,
