@@ -156,7 +156,8 @@ export const LEVELS: LevelData[] = [
         maxWisdom: `Uh oh. It looks like you need to find some PMF... like <em>ASAP</em>! But don't panic. It's out there.`,
         hoverCharacter: {
             image: '/images/pmf-game/sweaty.png',
-            dialogue: "We need to find PMF before we run out of runway! Let's figure out what our users actually want.",
+            name: 'Sweaty CEO',
+            dialogue: 'Where is the PMF?!!',
         },
     },
     {
@@ -179,6 +180,11 @@ export const LEVELS: LevelData[] = [
             { id: 'identify-users', label: 'Identify your users', completed: false },
         ],
         maxWisdom: 'Data without action is just trivia.',
+        hoverCharacter: {
+            image: '/images/pmf-game/yes.png',
+            name: 'Marketing Bro',
+            dialogue: 'Hey buddy. Quick call?',
+        },
     },
     {
         id: 'level3',
@@ -199,6 +205,11 @@ export const LEVELS: LevelData[] = [
             { id: 'run-experiment', label: 'Run your first A/B test', completed: false },
         ],
         maxWisdom: 'Every step in your funnel is a chance to lose or delight a user.',
+        hoverCharacter: {
+            image: '/images/pmf-game/this-is-fine.png',
+            name: 'Product (Micro) Manager',
+            dialogue: 'Did you see my tickets?',
+        },
     },
     {
         id: 'level4',
@@ -332,6 +343,11 @@ export const LEVELS: LevelData[] = [
             { id: 'test-improvement', label: 'A/B test an activation change', completed: false },
         ],
         maxWisdom: `It's okay to have favorites. Find the users who love (and pay) you the most.`,
+        hoverCharacter: {
+            image: '/images/pmf-game/shocked.png',
+            name: 'Burnt Out Engineer',
+            dialogue: 'I think we should refactor...',
+        },
     },
     {
         id: 'level5',
@@ -456,6 +472,11 @@ export const LEVELS: LevelData[] = [
             { id: 'identify-channels', label: 'Find best acquisition channels', completed: false },
         ],
         maxWisdom: "10x-ing once isn't the finish line - it's where the real journey begins. Time to do it again.",
+        hoverCharacter: {
+            image: '/images/pmf-game/money.png',
+            name: 'VC Investor',
+            dialogue: 'Ready to talk Series B?',
+        },
     },
 ]
 

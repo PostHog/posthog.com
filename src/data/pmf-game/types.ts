@@ -37,6 +37,7 @@ export interface Quest {
 export interface HoverCharacter {
     image: string
     dialogue: string
+    name?: string // Character name for the dialogue
 }
 
 export interface LevelData {

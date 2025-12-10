@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { SceneId, LevelProgress, HoverCharacter } from '../../data/pmf-game/types'
 import { LEVELS } from '../../data/pmf-game/levels'
 
-const SHOW_HOVER_CHARACTERS = false // Toggle to enable/disable hover characters
+const SHOW_HOVER_CHARACTERS = true // Toggle to enable/disable hover characters
 
 interface OverworldSceneProps {
     levels: Record<string, LevelProgress>
@@ -32,21 +32,38 @@ function LevelCard({
 
     return (
         <div className="relative">
-            {/* Hover character popup */}
-            {SHOW_HOVER_CHARACTERS && hoverCharacter && isHovered && (
-                <div className="absolute bottom-full left-0 mb-2 flex items-end gap-2 z-10 animate-fade-in">
-                    <img src={hoverCharacter.image} alt="" className="w-16 h-16 object-contain flex-shrink-0" />
-                    <div className="p-2 text-sm bg-white border-2 border-black max-w-[200px]">
-                        {hoverCharacter.dialogue}
+            {/* Hover character - slides up from behind the card */}
+            {SHOW_HOVER_CHARACTERS && hoverCharacter && (
+                <>
+                    <div
+                        className={`absolute left-4 z-0 transition-all duration-300 ease-out ${
+                            isHovered ? '-top-16 opacity-100' : 'top-0 opacity-0'
+                        }`}
+                    >
+                        <img src={hoverCharacter.image} alt="" className="w-20 h-20 object-contain" />
                     </div>
-                </div>
+                    {/* Dialogue bubble - appears with character */}
+                    <div
+                        className={`absolute -top-16 left-24 z-20 transition-all duration-300 ease-out ${
+                            isHovered ? 'opacity-100' : 'opacity-0'
+                        }`}
+                    >
+                        <div className="p-2 text-sm bg-white border-2 border-black max-w-[200px] relative">
+                            {hoverCharacter.name && <div className="font-bold text-xs mb-1">{hoverCharacter.name}</div>}
+                            {hoverCharacter.dialogue}
+                            {/* Speech bubble tail - pointing left toward sprite */}
+                            <div className="absolute top-4 -left-2 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[8px] border-r-black" />
+                            <div className="absolute top-[17px] -left-1 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-r-[6px] border-r-white" />
+                        </div>
+                    </div>
+                </>
             )}
             <button
                 onClick={onSelect}
                 disabled={!isUnlocked}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                className={`relative p-4 border-4 border-black text-left transition-all w-full ${
+                className={`relative z-10 p-4 border-4 border-black text-left transition-all w-full ${
                     isUnlocked
                         ? 'bg-white hover:bg-yellow-100 hover:shadow-[4px_4px_0_0_#000] cursor-pointer'
                         : 'bg-gray-200 opacity-60 cursor-not-allowed'
@@ -103,14 +120,14 @@ export default function OverworldScene({ levels, onSelectLevel }: OverworldScene
             />
             {/* Content */}
             <div className="relative max-w-screen-lg mx-auto p-8">
-                <div className="text-center mb-12">
+                <div className="text-center mb-20">
                     <h1 className="text-4xl font-bold mb-2">
                         <span className="line-through italic">Your office</span> World map
                     </h1>
                     <p className="text-lg opacity-70">Select a level to continue your journey towards PMF</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-20">
                     {LEVELS.map((level) => (
                         <LevelCard
                             key={level.id}
