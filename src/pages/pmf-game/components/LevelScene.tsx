@@ -1,5 +1,5 @@
 import React from 'react'
-import { LevelData, Resource, LevelProgress } from '../data/types'
+import { LevelData, Resource, LevelProgress } from '../_data/types'
 import PixelBorder from './PixelBorder'
 import OSButton from 'components/OSButton'
 import * as Icons from '@posthog/icons'

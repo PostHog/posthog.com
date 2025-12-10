@@ -1,6 +1,6 @@
 import React from 'react'
-import { SceneId, LevelProgress } from '../data/types'
-import { LEVELS } from '../data/levels'
+import { SceneId, LevelProgress } from '../_data/types'
+import { LEVELS } from '../_data/levels'
 
 interface OverworldSceneProps {
     levels: Record<string, LevelProgress>

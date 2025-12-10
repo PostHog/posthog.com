@@ -1,6 +1,6 @@
 import React from 'react'
-import { GameState, GameActions } from '../data/types'
-import { LEVELS } from '../data/levels'
+import { GameState, GameActions } from '../_data/types'
+import { LEVELS } from '../_data/levels'
 
 interface SidenavProps {
     gameState: GameState
