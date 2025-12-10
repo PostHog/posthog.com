@@ -1535,6 +1535,10 @@ export const handbookSidebar = [
                         name: 'New customer onboarding',
                         url: '/handbook/growth/sales/customer-onboarding',
                     },
+                    {
+                        name: 'Metabase account analysis',
+                        url: '/handbook/onboarding/metabase-account-analysis',
+                    },
                 ],
             },
             {
@@ -1544,10 +1548,6 @@ export const handbookSidebar = [
                     {
                         name: 'Chrome Extension Billing Issues',
                         url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
-                    },
-                    {
-                        name: 'Metabase account analysis',
-                        url: '/handbook/onboarding/metabase-account-analysis',
                     },
                 ],
             },
