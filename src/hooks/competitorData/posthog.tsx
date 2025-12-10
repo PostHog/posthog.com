@@ -374,7 +374,7 @@ export const posthog = {
                     results_visualization: true,
                     side_effect_monitoring: true,
                     statistical_significance: true,
-                    statistics_engine: 'Bayesian or Sequential',
+                    statistics_engine: 'Bayesian or Frequentist',
                 },
             },
             platforms: {

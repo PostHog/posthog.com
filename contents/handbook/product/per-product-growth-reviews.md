@@ -29,7 +29,7 @@ Here are some examples:
 
 As mentioned before, we aim to analyse the same set of metrics month over month, so we can see trends and anomalies. However, there can be cases where we decide to change a metric if it’s a better indicator of long-term success, particularly for product activation and key product actions.
 
-We’ve found that the best way to review what is a quite long list of metrics is to combine all numbers (revenue as well as usage) in one spreadsheet with a new column for each month, and only open individual graphs where required. Below is a screenshot that shows a part of our growth review document. [Here](https://docs.google.com/spreadsheets/d/1Q_hibP9Pv4b8H_9guceKXNrTUP0B_5hWvmiM-EJ2LrU/edit#gid=541742743) is the link to the document for internal users. 
+We’ve found that the best way to review what is a quite long list of metrics is to combine all numbers (revenue as well as usage) in one spreadsheet with a new column for each month, and only open individual graphs where required. Below is a screenshot that shows a part of our growth review document. [View the internal growth review spreadsheet](https://docs.google.com/spreadsheets/d/1Q_hibP9Pv4b8H_9guceKXNrTUP0B_5hWvmiM-EJ2LrU/edit#gid=541742743) for internal users.
 
 ![Growth review template](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/growth-review-template.png)
 

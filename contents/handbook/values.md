@@ -26,6 +26,8 @@ Internally, a culture of transparency looks like managers telling you to raise f
 
 Being transparent externally helps us achieve our mission - we write about what we're working on so the world can take advantage of the lessons we're learning, and so they know how to work with us better. Knowing that thousands of people will read our handbook pages forces clearer thinking. And, for free, we can build trust in a way other vendors just choose not to.
 
+> There are a few things that we are internally transparent about, but that should not be shared publicly. Anything related to our company financials is strictly confidential and should not be shared externally, including our current revenue numbers, ACV, burn rate, etc. Anything in a public press release is fine to share!
+
 ## Do more weird
 
 So much about how we work is different.

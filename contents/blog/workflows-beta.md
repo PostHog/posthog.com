@@ -15,7 +15,7 @@ tags:
     - Workflows
 seo:
     {
-        metaTitle: 'Workflows graduate to beta, and they’re ready for real automations',
+        metaTitle: 'Workflows graduate to beta! Product data, meet automation',
         metaDescription: 'Workflows are now in Beta, bringing drip campaigns, new channels, and different automation opportunities. No syncing, no Zapier, just pure product-led automation.',
     }
 ---

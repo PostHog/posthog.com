@@ -95,7 +95,7 @@ We recommend reading our docs on [alias](/docs/data/identify#alias-assigning-mul
 
 [Group analytics](/docs/product-analytics/group-analytics) enables you to associate the events for that person's session with a group (e.g. teams, organizations, etc.).
 
-> **Note:** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+> **Note:** This is a paid feature and is not available on the open-source or free cloud plan. Learn more on the [pricing page](/pricing).
 
 This is done by calling the `group` method with a group type and group ID.
 
@@ -224,7 +224,7 @@ It's also possible to [run experiments without using feature flags](/docs/experi
 
 ## Early access feature management
 
-Early access features give you the option to release feature flags that can be controlled by your users. More information on this can be found [here](/docs/feature-flags/early-access-feature-management).
+Early access features give you the option to release feature flags that can be controlled by your users. More information on this can be found in the [early access feature management guide](/docs/feature-flags/early-access-feature-management).
 
 ```js-web
 posthog.getEarlyAccessFeatures((previewItemData) => {
@@ -311,11 +311,11 @@ posthog.capture("survey sent", {
       id: "d8462827-1575-4e1e-ab1d-b5fddd9f829c",
       question: "What is your favorite color?",
     }
-  ]
-  $survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c: survey_response // required. `survey_response` must be a text value.
+  ],
+  '$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c': survey_response // required. `survey_response` must be a text value.
   // Convert numbers to text e.g. 8 should be converted to "8".
   // For multiple choice select surveys, `survey_response` must be an array of values with the selected choices.
-  // e.g., $survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c: ["response_1", "response_2"]
+  // e.g., '$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c': ["response_1", "response_2"]
 })
 ```
 
@@ -484,7 +484,7 @@ posthog.init('<ph_project_api_key>', {
 
 Sampling lets you choose to send only a percentage of events to PostHog. It is a good way to control your costs without having to completely turn off features of the SDK.
 
-Some functions of PostHog, for example much of web analytics, rely on receiving all events. Sampling `$pageview ` or `$pageleave` events in particular can cause unexpected results.
+Some functions of PostHog, for example much of web analytics, rely on receiving all events. Sampling `$pageview` or `$pageleave` events in particular can cause unexpected results.
 
 #### Sampling events using our provided customization
 

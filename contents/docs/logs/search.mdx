@@ -1,0 +1,56 @@
+---
+title: Search logs
+---
+
+import LogsBetaSnippet from './_snippets/beta.mdx'
+
+<LogsBetaSnippet />
+
+The logs search accepts multiple tokens and quoted phrases to help you find the exact log lines you need.
+
+- **Space-separated words** are combined with implicit AND: the log must contain all positive tokens
+- **Prefix a token with `!`** to exclude logs that contain that token. You can use multiple negative tokens to exclude several different terms
+- **Wrap text in double quotes** to search for an exact phrase (an exact substring match)
+
+## How to use search
+
+### Require multiple words
+
+**Type:** `bug frontend`
+
+**Result:** Shows logs that contain both the words `bug` and `frontend` anywhere in the line.
+
+### Exclude words
+
+**Type:** `error !timeout`
+
+**Result:** Shows logs that contain `error` but excludes any log that also contains `timeout`.
+
+### Combine require + exclude
+
+**Type:** `api "server error" !403 !timeout`
+
+**Result:** Must contain `api` and the exact phrase `server error`, and must not contain `403` or `timeout`.
+
+### Search exact phrases
+
+**Type:** `"failed to connect"`
+
+**Result:** Matches logs that include the substring `failed to connect` exactly as written.
+
+## More examples
+
+| Query | What it finds |
+|-------|---------------|
+| `login timeout` | Logs that contain both `login` and `timeout` |
+| `login !debug` | Logs that contain `login` and excludes logs that contain `debug` |
+| `"database error"` | Logs with the exact phrase `database error` |
+| `"payment failed" !trace !debug` | Logs that contain the exact phrase `payment failed` and excludes any that contain `trace` or `debug` |
+
+## Tips
+
+- **Special characters:** If a token contains spaces or special characters, wrap it in double quotes to treat it as a single search item
+- **Standalone exclamation mark:** A standalone `!` by itself is ignored — use `!` followed by text to exclude that text
+- **Multiple negative tokens:** List multiple `!tokens` (e.g., `!debug !trace`) to exclude logs that contain any of those tokens
+- **Punctuation:** Quotes and escapes are handled using shell-like parsing rules, so complex tokens should be quoted if they contain spaces or special characters
+
