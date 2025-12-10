@@ -27,7 +27,7 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products 
     const hiddenSlugs = [
         'ai',
         'customer-data-infrastructure/sources',
-        'customer-data-infrastructure/destinations',
+        'customer-data-infrastructure/export-reverse-etl',
         'customer-data-infrastructure/data-modeling',
         'customer-data-infrastructure',
     ]

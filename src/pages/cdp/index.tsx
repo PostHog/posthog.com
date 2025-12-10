@@ -453,6 +453,94 @@ export default function CDP(): JSX.Element {
                     </Link>
                 </p>
 
+                <h2>Realtime event streaming</h2>
+                <p>Stream events to external systems in real-time as they are ingested into PostHog.</p>
+                <ul>
+                    <li>
+                        <strong>Webhooks:</strong> Send events to any HTTP endpoint in real-time
+                    </li>
+                    <li>
+                        <strong>Slack:</strong> Send events to Slack channels
+                    </li>
+                    <li>
+                        <strong>SaaS tools:</strong> Send events to SaaS tools like Braze, Customer.io, and more
+                    </li>
+                    <li>
+                        <strong>Custom destinations:</strong> Build your own destination using our plugin framework
+                    </li>
+                </ul>
+                <p>Real-time streaming is ideal for:</p>
+                <ul>
+                    <li>Triggering immediate actions based on user behavior</li>
+                    <li>Keeping external systems synchronized with PostHog</li>
+                    <li>Building real-time dashboards and monitoring</li>
+                    <li>Feeding machine learning models with fresh data</li>
+                </ul>
+                <p>
+                    <Link to="/docs/cdp/destinations" state={{ newWindow: true }}>
+                        Explore event destinations →
+                    </Link>
+                </p>
+
+                <h2>Webhooks</h2>
+                <p>Configure webhooks to notify external systems when specific events or conditions occur.</p>
+                <ul>
+                    <li>
+                        <strong>Event webhooks:</strong> Trigger on specific user actions or system events
+                    </li>
+                    <li>
+                        <strong>Threshold alerts:</strong> Send notifications when metrics exceed limits
+                    </li>
+                    <li>
+                        <strong>Scheduled webhooks:</strong> Regular updates on key metrics
+                    </li>
+                    <li>
+                        <strong>Custom payloads:</strong> Format data to match your destination's requirements
+                    </li>
+                </ul>
+                <p>Common webhook use cases:</p>
+                <ul>
+                    <li>Sync user properties to CRM systems like Salesforce or HubSpot</li>
+                    <li>Trigger marketing automation workflows in tools like Braze or Customer.io</li>
+                    <li>Update customer success platforms like Vitally or Gainsight</li>
+                    <li>Send alerts to Slack, PagerDuty, or monitoring tools</li>
+                </ul>
+                <p>
+                    <Link to="/docs/webhooks" state={{ newWindow: true }}>
+                        Learn about webhooks →
+                    </Link>
+                </p>
+
+                <h2>Common CDP use-cases</h2>
+
+                <h3>Marketing activation</h3>
+                <ul>
+                    <li>Sync product usage data to marketing automation tools</li>
+                    <li>Create behavioral segments for targeted campaigns</li>
+                    <li>Trigger personalized emails based on user actions</li>
+                </ul>
+
+                <h3>Sales enablement</h3>
+                <ul>
+                    <li>Update CRM with product usage insights</li>
+                    <li>Alert sales teams about high-value user activities</li>
+                    <li>Score leads based on product engagement</li>
+                </ul>
+
+                <h3>Data science & analytics</h3>
+                <ul>
+                    <li>Feed ML models with behavioral data</li>
+                    <li>Export to data lakes for advanced analysis</li>
+                    <li>Combine with other data sources in warehouses</li>
+                </ul>
+
+                <h3>Operations & monitoring</h3>
+                <ul>
+                    <li>Send alerts for critical user behaviors</li>
+                    <li>Monitor system health and usage patterns</li>
+                    <li>Automate support ticket creation</li>
+                </ul>
+
                 <h2>Integrations library</h2>
 
                 {/* Inline filter controls */}

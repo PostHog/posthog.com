@@ -95,6 +95,13 @@ export default function BusinessIntelligence(): JSX.Element {
                     insights from their data. With integrated BI tools, teams can create interactive dashboards, perform
                     ad-hoc analyses, and visualize key metrics to drive informed decision-making.
                 </p>
+                <div className="dark:bg-dark bg-accent border border-input p-4 rounded mb-4">
+                    <p className="!my-0">
+                        <strong>Note:</strong> Looking for product analytics insights like timeseries trends and product
+                        usage funnels? You're in the wrong place. Check out{' '}
+                        <Link to="/product-analytics">Product analytics</Link>.
+                    </p>
+                </div>
                 <div className="dark:bg-dark bg-accent border border-input p-4 rounded">
                     <p className="!mt-0">
                         <strong>Note:</strong> PostHog business intelligence is great for product teams and analysts who

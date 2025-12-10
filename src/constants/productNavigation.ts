@@ -110,9 +110,9 @@ export const nonProductPages = {
         icon: 'IconRefresh',
         color: 'green',
     },
-    'customer-data-infrastructure/destinations': {
-        slug: 'customer-data-infrastructure/destinations',
-        url: '/customer-data-infrastructure/destinations',
+    'customer-data-infrastructure/export-reverse-etl': {
+        slug: 'customer-data-infrastructure/export-reverse-etl',
+        url: '/customer-data-infrastructure/export-reverse-etl',
         icon: 'IconDecisionTree',
         color: 'purple',
     },

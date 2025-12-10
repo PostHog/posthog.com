@@ -119,11 +119,10 @@ export default function CDP(): JSX.Element {
         {
             id: 'reverse-etl',
             icon: 'IconArrowUpRight',
-            title: 'Reverse ETL',
+            title: 'Export & Reverse ETL',
             badge: 'Beta',
-            url: '/customer-data-infrastructure/destinations',
-            description:
-                'Get data out to the tools that run your business with realtime event streaming pipelines, batch exports, and webhooks.',
+            url: '/customer-data-infrastructure/export-reverse-etl',
+            description: 'Get data out to the tools that run your business with reverse ETL & batch exports.',
             perfectFor: 'data engineers, product teams, and marketing teams',
         },
     ]

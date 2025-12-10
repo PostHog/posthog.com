@@ -40,7 +40,7 @@ export const customerDataInfrastructureNav = {
         },
         {
             name: 'Export & reverse ETL',
-            url: '/customer-data-infrastructure/destinations',
+            url: '/customer-data-infrastructure/export-reverse-etl',
         },
     ],
 }

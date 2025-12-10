@@ -19,7 +19,7 @@ import {
     IconRetention,
     IconStickiness,
     IconHogQL,
-    IconDecisionTree,
+    IconDatabaseBolt,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -2559,6 +2559,21 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             worksWith: ['product_analytics', 'session_replay', 'cohorts', 'experiments'],
         },
         {
+            name: 'Managed DuckDB warehouse',
+            parentIcon: 'dataIn',
+            Icon: IconDatabaseBolt,
+            description: 'Managed DuckDB warehouse',
+            handle: 'data_in',
+            color: 'purple',
+            colorSecondary: 'lilac',
+            category: 'data',
+            slug: 'customer-data-infrastructure/managed-warehouse',
+            seo: {
+                title: 'Managed DuckDB warehouse - PostHog',
+                description: 'Fast, scalable, and easy-to-use data warehouse managed by PostHog.',
+            },
+        },
+        {
             name: 'CDP integrations library (145+)',
             parentIcon: 'spreadsheetSearch',
             // Icon: IconPlug,
@@ -2581,10 +2596,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
-            name: 'Get data into PostHog',
+            name: 'Data import & sources (ELT)',
             parentIcon: 'dataIn',
             // Icon: IconArrowUpRight,
-            description: 'Get data into PostHog',
+            description: 'Data import & sources (ELT)',
             handle: 'data_in',
             color: 'green',
             colorSecondary: 'lilac',
@@ -2613,7 +2628,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         {
             parentIcon: 'SQL',
             // Icon: IconAsterisk,
-            name: 'SQL data exploration',
+            name: 'SQL editor',
             handle: 'visualize',
             type: 'visualize',
             slug: 'data-warehouse',
@@ -2626,13 +2641,12 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
-            parentIcon: 'SQL',
-            // Icon: IconAsterisk,
+            Icon: IconGraph,
             name: 'Business Intelligence (BI)',
             handle: 'visualize',
             type: 'visualize',
-            slug: 'data-warehouse',
-            color: 'purple',
+            slug: 'customer-data-infrastructure/business-intelligence',
+            color: 'light-blue',
             colorSecondary: 'lilac',
             category: 'data',
             seo: {
@@ -2641,15 +2655,15 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
-            name: 'Send data out of PostHog',
+            name: 'Export & reverse ETL',
             parentIcon: 'dataOut',
             // Icon: IconArrowUpRight,
-            description: 'Send data out of PostHog',
+            description: 'Send data out of PostHog to other tools',
             handle: 'data_out',
             color: 'green',
             colorSecondary: 'lilac',
             category: 'data',
-            slug: 'customer-data-infrastructure/destinations',
+            slug: 'customer-data-infrastructure/export-reverse-etl',
             seo: {
                 title: 'Export and stream your data to external systems',
                 description: 'Activate your product data across your entire tech stack.',
