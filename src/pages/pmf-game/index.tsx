@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import SEO from 'components/seo'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { GameState, GameActions, SceneId, Resource, SavedResource } from '../../data/pmf-game/types'
+import { GameState, GameActions, SceneId, Resource, SavedResource, ChecklistItem } from '../../data/pmf-game/types'
 import { LEVELS, getLevelById, getInitialLevelProgress } from '../../data/pmf-game/levels'
 import TitleScene from './components/TitleScene'
 import Sidenav from './components/Sidenav'
@@ -41,6 +41,26 @@ const saveGameState = (state: GameState): void => {
     }
 }
 
+// Find checklist item data including level ID and completeness state
+const findChecklistItemWithLevel = (
+    itemId: string,
+    gameState: GameState
+): { levelId: string; item: ChecklistItem } | null => {
+    for (const level of LEVELS) {
+        const item = level.checklistItems.find((item) => item.id === itemId)
+        if (item) {
+            const levelProgress = gameState.levels[level.id]
+            const currentItem = levelProgress?.checklistItems.find((i) => i.id === itemId)
+
+            return {
+                levelId: level.id,
+                item: currentItem || item,
+            }
+        }
+    }
+    return null
+}
+
 export default function PMFGame(): JSX.Element {
     const [gameState, setGameState] = useState<GameState>(() => {
         const saved = loadGameState()
@@ -63,6 +83,41 @@ export default function PMFGame(): JSX.Element {
             selectedCharacter: 'default',
         }
     })
+
+    // Parse URL parameters and mark checklist items as completed (triggered by clicking "complete quest" buttons in the app)
+    useEffect(() => {
+        if (typeof window === 'undefined') return
+
+        const params = new URLSearchParams(window.location.search)
+        const completedParam = params.get('completed')
+
+        if (!completedParam) return
+
+        // Handle multiple values (comma-separated or multiple params)
+        const completedIds = params
+            .getAll('completed')
+            .flatMap((val) => val.split(','))
+            .map((id) => id.trim())
+
+        if (completedIds.length === 0) return
+        const completedItemsWithLevelId = completedIds
+            .map((id) => findChecklistItemWithLevel(id, gameState))
+            .filter((item) => item !== null)
+
+        completedItemsWithLevelId.forEach((itemWithLevelid) => {
+            if (itemWithLevelid.item.completed) return
+            completeChecklistItem(itemWithLevelid.levelId, itemWithLevelid.item.id)
+        })
+
+        // Remove completed parameters from URL after processing
+        params.delete('completed')
+        const newSearch = params.toString()
+        const newUrl = newSearch
+            ? `${window.location.pathname}?${newSearch}${window.location.hash}`
+            : `${window.location.pathname}${window.location.hash}`
+
+        window.history.replaceState({}, '', newUrl)
+    }, [])
 
     // Save to localStorage whenever gameState changes
     useEffect(() => {
