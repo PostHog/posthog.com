@@ -413,6 +413,48 @@ export default function CDP(): JSX.Element {
                     your stack.
                 </p>
 
+                <h2>Realtime event transformations</h2>
+                <p>
+                    While not a standard warehousing use-case, our realtime event transformations show the power &
+                    simplicity in using PostHog's integrated data warehouse.
+                </p>
+                <p>
+                    Our realtime transformation apps and{' '}
+                    <Link to="/docs/hog" state={{ newWindow: true }}>
+                        Hog functions
+                    </Link>{' '}
+                    allow you to transform event data before it is saved to your PostHog events store. This means event
+                    data can be cleaned and curated at ingestion time, ensuring high data quality from the start.
+                </p>
+
+                <p>Apply realtime transformations to incoming event data before it's stored for:</p>
+                <ul>
+                    <li>
+                        <strong>Data enrichment:</strong> Add context like GeoIP location, user agent parsing, or
+                        company data
+                    </li>
+                    <li>
+                        <strong>Property mapping:</strong> Standardize property names and formats across different
+                        sources
+                    </li>
+                    <li>
+                        <strong>Data validation:</strong> Ensure data quality by validating and cleaning incoming events
+                    </li>
+                    <li>
+                        <strong>PII scrubbing:</strong> Remove or hash sensitive information before storage
+                    </li>
+                    <li>
+                        <strong>Event filtering:</strong> Drop unwanted events or filter by specific criteria
+                    </li>
+                </ul>
+                <p>
+                    <Link to="/docs/cdp/transformations" state={{ newWindow: true }}>
+                        Learn about realtime transformations &rarr;
+                    </Link>
+                </p>
+
+                <h2>Integrations library</h2>
+
                 {/* Inline filter controls */}
                 <div className="flex flex-wrap gap-2 mb-4">
                     <input
