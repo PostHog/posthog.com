@@ -1,6 +1,7 @@
 import React from 'react'
 import { GameState, GameActions } from '../../../data/pmf-game/types'
 import { LEVELS } from '../../../data/pmf-game/levels'
+import PixelBorder from './PixelBorder'
 
 interface SidenavProps {
     gameState: GameState
@@ -23,11 +24,11 @@ function NavButton({
     active?: boolean
 }) {
     return (
-        <button
+        <PixelBorder
+            as="button"
             onClick={onClick}
-            className={`w-full text-left py-1 px-2 border-2 border-black bg-white transition-all ${
-                active ? '' : 'hover:scale-[1.02]'
-            }`}
+            className={`w-full text-left py-1 px-2 transition-all ${active ? '' : 'hover:scale-[1.02]'}`}
+            backgroundColor={active ? '#FEF3C7' : 'white'}
         >
             <div className="flex items-center justify-between">
                 <div>
@@ -41,29 +42,84 @@ function NavButton({
                     <span className="text-2xl ml-auto">{icon}</span>
                 )}
             </div>
-        </button>
+        </PixelBorder>
     )
 }
 
-function ProgressBar({ progress }: { progress: number }) {
+function PixelHeart({ fillPercent }: { fillPercent: number }) {
+    const filledColor = '#F54E00'
+    const emptyColor = '#e5e7eb'
+    const borderColor = '#1d1d1d'
+
+    // Fill from bottom to top based on %
+    const fillHeight = (fillPercent / 100) * 9
+    const fillY = 10 - fillHeight
+
     return (
-        <div className="flex items-center gap-2">
-            <div className="flex-1 h-4 bg-gray-200 border-2 border-black overflow-hidden">
-                <div className="h-full bg-green transition-all" style={{ width: `${progress}%` }} />
+        <svg width="36" height="33" viewBox="0 0 12 11" style={{ imageRendering: 'pixelated' }}>
+            {/* Black border - outer edge */}
+            <rect x="2" y="0" width="2" height="1" fill={borderColor} />
+            <rect x="6" y="0" width="2" height="1" fill={borderColor} />
+            <rect x="1" y="1" width="1" height="1" fill={borderColor} />
+            <rect x="4" y="1" width="2" height="1" fill={borderColor} />
+            <rect x="8" y="1" width="1" height="1" fill={borderColor} />
+            <rect x="0" y="2" width="1" height="2" fill={borderColor} />
+            <rect x="9" y="2" width="1" height="2" fill={borderColor} />
+            <rect x="0" y="4" width="1" height="1" fill={borderColor} />
+            <rect x="9" y="4" width="1" height="1" fill={borderColor} />
+            <rect x="1" y="5" width="1" height="1" fill={borderColor} />
+            <rect x="8" y="5" width="1" height="1" fill={borderColor} />
+            <rect x="2" y="6" width="1" height="1" fill={borderColor} />
+            <rect x="7" y="6" width="1" height="1" fill={borderColor} />
+            <rect x="3" y="7" width="1" height="1" fill={borderColor} />
+            <rect x="6" y="7" width="1" height="1" fill={borderColor} />
+            <rect x="4" y="8" width="1" height="1" fill={borderColor} />
+            <rect x="5" y="8" width="1" height="1" fill={borderColor} />
+
+            {/* Empty heart fill */}
+            <rect x="2" y="1" width="2" height="1" fill={emptyColor} />
+            <rect x="6" y="1" width="2" height="1" fill={emptyColor} />
+            <rect x="1" y="2" width="8" height="2" fill={emptyColor} />
+            <rect x="1" y="4" width="8" height="1" fill={emptyColor} />
+            <rect x="2" y="5" width="6" height="1" fill={emptyColor} />
+            <rect x="3" y="6" width="4" height="1" fill={emptyColor} />
+            <rect x="4" y="7" width="2" height="1" fill={emptyColor} />
+
+            {/* Filled portion */}
+            <clipPath id={`heartFill-${fillPercent}`}>
+                <rect x="0" y={fillY} width="12" height={fillHeight + 1} />
+            </clipPath>
+            <g clipPath={`url(#heartFill-${fillPercent})`}>
+                <rect x="2" y="1" width="2" height="1" fill={filledColor} />
+                <rect x="6" y="1" width="2" height="1" fill={filledColor} />
+                <rect x="1" y="2" width="8" height="2" fill={filledColor} />
+                <rect x="1" y="4" width="8" height="1" fill={filledColor} />
+                <rect x="2" y="5" width="6" height="1" fill={filledColor} />
+                <rect x="3" y="6" width="4" height="1" fill={filledColor} />
+                <rect x="4" y="7" width="2" height="1" fill={filledColor} />
+            </g>
+        </svg>
+    )
+}
+
+function ProgressHearts({ progress }: { progress: number }) {
+    // 3 hearts, 33.33 progress per heart
+    const getHeartFill = (heartIndex: number) => {
+        const heartStart = heartIndex * 33.33
+        const heartEnd = (heartIndex + 1) * 33.33
+        if (progress >= heartEnd) return 100
+        if (progress <= heartStart) return 0
+        return ((progress - heartStart) / 33.33) * 100
+    }
+
+    return (
+        <div className="flex items-center gap-1">
+            <div className="flex gap-0.5">
+                {[0, 1, 2].map((i) => (
+                    <PixelHeart key={i} fillPercent={getHeartFill(i)} />
+                ))}
             </div>
-            <span className="text-xs font-bold">{progress}%</span>
-        </div>
-    )
-}
-
-function Lives({ count }: { count: number }) {
-    return (
-        <div className="flex gap-1">
-            {[...Array(3)].map((_, i) => (
-                <span key={i} className={i < count ? 'text-red-500' : 'text-gray-300'}>
-                    ❤️
-                </span>
-            ))}
+            <span className="text-sm font-bold ml-1">{progress}% complete</span>
         </div>
     )
 }
@@ -99,7 +155,7 @@ function ChecklistItem({
 }
 
 export default function Sidenav({ gameState, actions }: SidenavProps): JSX.Element {
-    const { currentScene, levels, lives } = gameState
+    const { currentScene, levels } = gameState
     const isInLevel = currentScene.startsWith('level')
     const currentLevelId = isInLevel ? currentScene : null
     const currentLevel = currentLevelId ? LEVELS.find((l) => l.id === currentLevelId) : null
@@ -165,10 +221,8 @@ export default function Sidenav({ gameState, actions }: SidenavProps): JSX.Eleme
             </div>
 
             {isInLevel && (
-                <div className="p-3 space-y-2">
-                    <ProgressBar progress={currentLevelProgress} />
-                    <Lives count={lives} />
-                    <div className="text-xs opacity-60">{currentLevelProgress}% complete</div>
+                <div className="p-3">
+                    <ProgressHearts progress={currentLevelProgress} />
                 </div>
             )}
         </div>
