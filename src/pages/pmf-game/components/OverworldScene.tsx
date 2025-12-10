@@ -18,7 +18,12 @@ function LevelCard({
 }) {
     const isUnlocked = progress?.unlocked || false
     const isCompleted = progress?.completed || false
-    const progressPercent = progress?.progress || 0
+
+    // Calculate progress from checklist items
+    const checklistItems = progress?.checklistItems || []
+    const completedCount = checklistItems.filter((item) => item.completed).length
+    const totalCount = checklistItems.length
+    const progressPercent = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0
 
     return (
         <button
@@ -50,8 +55,8 @@ function LevelCard({
 
                 {isUnlocked && (
                     <div className="mt-2">
-                        <div className="h-2 bg-gray-300 border border-black">
-                            <div className="h-full bg-green-500" style={{ width: `${progressPercent}%` }} />
+                        <div className="h-2 bg-gray-200 border border-black overflow-hidden">
+                            <div className="h-full bg-green transition-all" style={{ width: `${progressPercent}%` }} />
                         </div>
                         <div className="text-xs mt-1">{progressPercent}% complete</div>
                     </div>
@@ -80,11 +85,6 @@ export default function OverworldScene({ levels, onSelectLevel }: OverworldScene
                         onSelect={() => onSelectLevel(level.id as SceneId)}
                     />
                 ))}
-            </div>
-
-            {/* Decorative map illustration placeholder */}
-            <div className="mt-12 p-8 border-4 border-dashed border-gray-300 text-center">
-                <p className="text-gray-400 ">🗺️ Isometric world map illustration goes here</p>
             </div>
         </div>
     )

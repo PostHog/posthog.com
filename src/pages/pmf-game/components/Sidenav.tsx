@@ -1,5 +1,5 @@
 import React from 'react'
-import { GameState, GameActions, SceneId } from '../data/types'
+import { GameState, GameActions } from '../data/types'
 import { LEVELS } from '../data/levels'
 
 interface SidenavProps {
@@ -48,8 +48,8 @@ function NavButton({
 function ProgressBar({ progress }: { progress: number }) {
     return (
         <div className="flex items-center gap-2">
-            <div className="flex-1 h-4 bg-gray-300 border-2 border-black">
-                <div className="h-full bg-green-500 transition-all" style={{ width: `${progress}%` }} />
+            <div className="flex-1 h-4 bg-gray-200 border-2 border-black overflow-hidden">
+                <div className="h-full bg-green transition-all" style={{ width: `${progress}%` }} />
             </div>
             <span className="text-xs font-bold">{progress}%</span>
         </div>
@@ -68,48 +68,34 @@ function Lives({ count }: { count: number }) {
     )
 }
 
-function LevelListItem({
-    level,
-    isUnlocked,
-    isCompleted,
-    isCurrent,
-    onClick,
-}: {
-    level: { id: string; name: string }
-    isUnlocked: boolean
-    isCompleted: boolean
-    isCurrent: boolean
-    onClick: () => void
-}) {
-    return (
-        <button
-            onClick={onClick}
-            disabled={!isUnlocked}
-            className={`w-full text-left p-2 flex items-center gap-2 text-sm transition-colors ${
-                isCurrent
-                    ? 'bg-yellow-200 font-bold'
-                    : isUnlocked
-                    ? 'hover:bg-yellow-100'
-                    : 'opacity-50 cursor-not-allowed'
-            }`}
-        >
-            <span>{isCompleted ? '■' : isCurrent ? '▶' : isUnlocked ? '□' : '🔒'}</span>
-            <span>{level.name}</span>
-        </button>
-    )
-}
-
 function ChecklistItem({
     item,
     isCurrent,
+    isLast,
+    onClick,
 }: {
     item: { id: string; label: string; completed: boolean }
     isCurrent: boolean
+    isLast: boolean
+    onClick: () => void
 }) {
     return (
-        <div className={`p-2 flex items-center gap-2 text-sm ${isCurrent ? 'bg-yellow-200 font-bold' : ''}`}>
-            <span>{item.completed ? '■' : '□'}</span>
-            <span>{item.label}</span>
+        <div className="flex">
+            {/* Checkbox column with connecting line */}
+            <div className="flex flex-col items-center mr-2 w-4">
+                <button
+                    onClick={onClick}
+                    className={`w-4 h-4 border-2 border-black flex-shrink-0 cursor-pointer hover:bg-red-200 transition-colors ${
+                        item.completed ? 'bg-red' : 'bg-white'
+                    }`}
+                />
+                {/* Connecting line to next item */}
+                {!isLast && <div className="w-0.5 flex-1 min-h-6 bg-black" />}
+            </div>
+            {/* Label */}
+            <div className={`text-sm leading-4 ${isCurrent ? 'font-bold' : ''}`}>
+                <span className={item.completed ? 'line-through opacity-50' : ''}>{item.label}</span>
+            </div>
         </div>
     )
 }
@@ -120,13 +106,14 @@ export default function Sidenav({ gameState, actions }: SidenavProps): JSX.Eleme
     const currentLevelId = isInLevel ? currentScene : null
     const currentLevel = currentLevelId ? LEVELS.find((l) => l.id === currentLevelId) : null
 
-    // Calculate overall progress
-    const totalLevels = LEVELS.length
-    const completedLevels = Object.values(levels).filter((l) => l.completed).length
-    const overallProgress = Math.round((completedLevels / totalLevels) * 100)
-
-    // Calculate current level progress
-    const currentLevelProgress = currentLevelId ? levels[currentLevelId]?.progress || 0 : 0
+    // Calculate current level progress based on completed checklist items
+    const currentLevelProgress = (() => {
+        if (!currentLevelId || !currentLevel) return 0
+        const checklistItems = levels[currentLevelId]?.checklistItems || []
+        const completedCount = checklistItems.filter((item) => item.completed).length
+        const totalCount = checklistItems.length
+        return totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0
+    })()
 
     return (
         <div className="flex flex-col h-full">
@@ -163,46 +150,30 @@ export default function Sidenav({ gameState, actions }: SidenavProps): JSX.Eleme
             </div>
 
             <div className="flex-1 overflow-auto">
-                {currentScene === 'overworld' ? (
-                    // Overworld: Show level list
-                    <div className="p-2">
-                        {LEVELS.map((level) => (
-                            <LevelListItem
-                                key={level.id}
-                                level={level}
-                                isUnlocked={levels[level.id]?.unlocked || false}
-                                isCompleted={levels[level.id]?.completed || false}
-                                isCurrent={false}
-                                onClick={() => {
-                                    if (levels[level.id]?.unlocked) {
-                                        actions.navigateToScene(level.id as SceneId)
-                                    }
-                                }}
-                            />
-                        ))}
-                    </div>
-                ) : isInLevel && currentLevel ? (
+                {isInLevel && currentLevel ? (
                     // In level: Show checklist
                     <div className="p-2">
-                        <div className="font-semibold text-sm opacity-50">Checklist</div>
+                        <div className="font-semibold text-sm opacity-50 mb-2">Checklist</div>
                         {currentLevel.checklistItems.map((item, index) => (
                             <ChecklistItem
                                 key={item.id}
                                 item={levels[currentLevelId!]?.checklistItems[index] || item}
-                                isCurrent={index === 0} // First uncompleted item is current
+                                isCurrent={index === 0}
+                                isLast={index === currentLevel.checklistItems.length - 1}
+                                onClick={() => actions.completeChecklistItem(currentLevelId!, item.id)}
                             />
                         ))}
                     </div>
                 ) : null}
             </div>
 
-            <div className="p-3 space-y-2">
-                <ProgressBar progress={isInLevel ? currentLevelProgress : overallProgress} />
-                <Lives count={lives} />
-                <div className="text-xs opacity-60">
-                    {isInLevel ? `${currentLevelProgress}% complete` : `${overallProgress}% complete`}
+            {isInLevel && (
+                <div className="p-3 space-y-2">
+                    <ProgressBar progress={currentLevelProgress} />
+                    <Lives count={lives} />
+                    <div className="text-xs opacity-60">{currentLevelProgress}% complete</div>
                 </div>
-            </div>
+            )}
         </div>
     )
 }

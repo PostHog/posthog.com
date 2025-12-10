@@ -33,7 +33,7 @@ export default function PMFGame(): JSX.Element {
             if (!levelProgress) return prev
 
             const updatedItems = levelProgress.checklistItems.map((item) =>
-                item.id === itemId ? { ...item, completed: true } : item
+                item.id === itemId ? { ...item, completed: !item.completed } : item
             )
             const completedCount = updatedItems.filter((item) => item.completed).length
             const progress = Math.round((completedCount / updatedItems.length) * 100)
