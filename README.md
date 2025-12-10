@@ -45,7 +45,7 @@ This is the repository for the PostHog website. It contains:
     git clone git@github.com:PostHog/posthog.com.git && cd posthog.com/
     ```
 
-    If you're using an Apple Silicon Mac (M1) you'll need to run the following commands:
+    If you're using an Apple Silicon Mac (M1 or later) you'll need to run the following commands:
 
     ```bash
     rm -rf ./node_modules
