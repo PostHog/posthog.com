@@ -1535,6 +1535,10 @@ export const handbookSidebar = [
                         name: 'New customer onboarding',
                         url: '/handbook/growth/sales/customer-onboarding',
                     },
+                    {
+                        name: 'Metabase account analysis',
+                        url: '/handbook/onboarding/metabase-account-analysis',
+                    },
                 ],
             },
             {
@@ -2206,6 +2210,10 @@ export const docsMenu = {
                         {
                             name: 'Actions',
                             url: '/docs/api/actions',
+                        },
+                        {
+                            name: 'Alerts',
+                            url: '/docs/api/alerts',
                         },
                         {
                             name: 'Activity log',
