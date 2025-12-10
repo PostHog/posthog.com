@@ -96,7 +96,7 @@ export default function AIVisibility(): JSX.Element {
                         <div className="relative">
                             <div className="bg-light dark:bg-dark border border-primary rounded-lg p-6 shadow-xl">
                                 <img
-                                    src={require('../images/ai-visibility-preview.png').default}
+                                    src={'src/images/ai-visibility-preview.png'}
                                     alt="AI visibility dashboard showing brand rankings and mention percentages"
                                     className="w-full rounded"
                                 />
