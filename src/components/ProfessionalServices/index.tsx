@@ -4,7 +4,7 @@ import Link from 'components/Link'
 import { IconWrench, IconCode2, IconGraph, IconPlay } from '@posthog/icons'
 
 import { CallToAction } from 'components/CallToAction'
-import { Hero } from 'components/Products/Hero'
+import { Hero } from 'components/Hero'
 import { Subfeature } from 'components/Products/Subfeature'
 import CTA from 'components/Home/CTA'
 import { FAQ } from 'components/Products/FAQ'
@@ -58,9 +58,13 @@ export const ProfessionalServices = () => {
             >
                 <Hero
                     title="Hire a PostHog human to get your team up and running."
-                    description="We do the heavy lifting so that you can get on with delighting your users."
+                    subtitle="We do the heavy lifting so that you can get on with delighting your users."
                 />
-                <p>It would be nice to have a picture of some PostHog humans here right?</p>
+                <div className="flex justify-center gap-2 mb-12">
+                    <CallToAction href="/talk-to-a-human" type="primary">
+                        Talk to a human
+                    </CallToAction>
+                </div>
             </div>
 
             <div id="features">
@@ -91,8 +95,8 @@ export const ProfessionalServices = () => {
                         </div>
                         <aside className="shrink-0 w-full md:w-auto md:basis-[500px] flex justify-center">
                             <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_73b822a689.png"
-                                alt="DeskHog is a beast"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/0d38287aac5596b1a7e59998d61f341b92893db0_3a6af62939.png"
+                                alt="Hogs around the world"
                                 className="w-full max-w-[350px] sm:max-w-[400px] md:max-w-[470px]"
                             />
                         </aside>
@@ -106,7 +110,7 @@ export const ProfessionalServices = () => {
                         <p>
                             Here, we make sure that PostHog is correctly integrated into your app using one or more of
                             our SDKs. We can also:
-                            <ul>
+                            <ul className={`list-disc m-4`}>
                                 <li>
                                     Implement any user identification or privacy controls that you need based on your
                                     privacy requirements.
@@ -125,55 +129,60 @@ export const ProfessionalServices = () => {
                             This is where we create the relevant dashboards, reports and other key items in PostHog to
                             allow you to see value quickly. First, we will help you define what you need here, and then
                             can also:
+                            <ul className={`list-disc m-4`}>
+                                <li>Build initial reports and dashboards for you</li>
+                                <li>Define and implement a feature flag and a/b testing strategy</li>
+                                <li>
+                                    Create the right cohorts to allow you to gain a deeper understanding of certain
+                                    segments of your user base
+                                </li>
+                                <li>Implement no-code surveys and ensure the results are available in the right way</li>
+                            </ul>
                         </p>
-                        <ul>
-                            <li>Build initial reports and dashboards for you</li>
-                            <li>Define and implement a feature flag and a/b testing strategy</li>
-                            <li>
-                                Create the right cohorts to allow you to gain a deeper understanding of certain segments
-                                of your user base
-                            </li>
-                            <li>Implement no-code surveys and ensure the results are available in the right way</li>
-                        </ul>
 
                         <h3>Integration</h3>
                         <p>
                             PostHog exists in a wider data ecosystem, and we can help you integrate it into your current
                             data stack. Our team will first of all define your current and desired data architecture and
                             then the plumbing required for PostHog to integrate into it. We can then also:
+                            <ul className={`list-disc m-4`}>
+                                <li>Implement sources, pulling data into PostHog to be used in the platform</li>
+                                <li>Define views which will make it easier for you to work with data at scale</li>
+                                <li>
+                                    Ensure that data is flowing from PostHog into downstream tools such as CRM systems
+                                    or a warehouse
+                                </li>
+                                <li>Implement workflows to take real-time actions in response to data in PostHog</li>
+                            </ul>
                         </p>
-                        <ul>
-                            <li>Implement sources, pulling data into PostHog to be used in the platform</li>
-                            <li>Define views which will make it easier for you to work with data at scale</li>
-                            <li>
-                                Ensure that data is flowing from PostHog into downstream tools such as CRM systems or a
-                                warehouse
-                            </li>
-                            <li>Implement workflows to take real-time actions in response to data in PostHog</li>
-                        </ul>
                         <h3>Migration</h3>
                         <p>
                             If you're coming to us from an existing provider, you'll want to bring along your historical
                             data, and we make that easy.
+                            <ul className={`list-disc m-4`}>
+                                <li>
+                                    We can orchestrate the import of historic analytics data using our automated
+                                    migrators from common vendors
+                                </li>
+                                <li>
+                                    We'll implement the dashboards you have defined already in PostHog, optimising them
+                                    in line with your requirements where required
+                                </li>
+                                <li>
+                                    We can also switch feature flags you have already implemented to use PostHog's
+                                    library
+                                </li>
+                            </ul>
                         </p>
-                        <ul>
-                            <li>
-                                We can orchestrate the import of historic analytics data using our automated migrators
-                                from common vendors
-                            </li>
-                            <li>
-                                We'll implement the dashboards you have defined already in PostHog, optimising them in
-                                line with your requirements where required
-                            </li>
-                            <li>
-                                We can also switch feature flags you have already implemented to use PostHog's library
-                            </li>
-                        </ul>
                     </div>
                 </section>
             </div>
 
-            <CallToAction>Talk to a Human</CallToAction>
+            <div className="flex justify-center gap-2 mb-12">
+                <CallToAction href="/talk-to-a-human" type="primary">
+                    Talk to a human
+                </CallToAction>
+            </div>
         </>
     )
 }
