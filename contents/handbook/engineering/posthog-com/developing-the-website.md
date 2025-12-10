@@ -548,6 +548,27 @@ Because Vercel charges per seat, we don't automatically invite all team members 
 
 To get changes into production, the website deploys automatically from `master`. The build takes up to an hour, but can be delayed if other preview builds are in the queue.
 
+## Product interest tracking for onboarding
+
+We track which products users have shown interest in by visiting product landing pages or docs. This data is stored in a cross-subdomain cookie that can be read by app.posthog.com during onboarding to personalize the experience.
+
+### How it works
+
+When a user visits a product-specific page (like `/product-analytics` or `/docs/session-replay`), we record that product's slug in a cookie - `ph_product_interest_onboarding` - for 14 days as a JSON array. This can be found in `src/lib/productInterest.ts`.
+
+### Code structure
+
+The tracking is implemented in:
+
+- `src/lib/productInterest.ts` - Core utilities for reading/writing the cookie
+- `src/hooks/useProductInterest.ts` - React hooks for tracking
+- `src/components/Products/Slides/SlidesTemplate.tsx` - Integration for product landing pages
+- `src/templates/Handbook.tsx` - Integration for docs pages
+
+### Expanding usage
+
+Everything is usually automatically handled because our website is well-structured but if you want to start tracking interest for new products you'll need to add a new entry to `PRODUCT_SLUGS` in `src/lib/productInterest.ts`
+
 #### Acknowledgements
 
 This website is based on [Gatsby](https://gatsbyjs.org) and is hosted with [Vercel](https://vercel.com).

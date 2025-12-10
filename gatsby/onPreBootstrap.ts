@@ -37,7 +37,6 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     __preview_flags_v2: true,
     __preview_lazy_load_replay: true,
     __preview_capture_bot_pageviews: true,
-    cookieless_mode: navigator.userAgent.includes("Firefox/") ? "on_reject" : undefined,
     __preview_disable_xhr_credentials: true,
 })`
         const scriptsDir = path.resolve(__dirname, '../static/scripts')
