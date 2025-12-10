@@ -86,7 +86,7 @@ export const LEVELS: LevelData[] = [
             { id: 'other-thing', label: 'Other thing', completed: false },
             { id: 'hyper-growth', label: 'Hyper growth castle', completed: false },
         ],
-        maxWisdom: 'some little piece of wisdom from Max',
+        maxWisdom: `Uh oh. It looks like you need some PMF... <em>fast</em>!`,
     },
     {
         id: 'level2',

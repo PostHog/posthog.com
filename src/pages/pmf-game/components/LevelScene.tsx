@@ -1,6 +1,8 @@
 import React from 'react'
 import { LevelData, Resource, LevelProgress } from '../data/types'
 import PixelBorder from './PixelBorder'
+import OSButton from 'components/OSButton'
+import { IconArrowRight, IconBookmark } from '@posthog/icons'
 
 interface LevelSceneProps {
     level: LevelData
@@ -49,13 +51,13 @@ function ContentCard({
             </div>
             <div className="flex flex-col gap-2 flex-shrink-0">
                 {saveLabel && onSave && (
-                    <PixelBorder as="button" onClick={onSave} className="px-3 py-1 text-sm hover:bg-yellow-100">
-                        📑 {saveLabel}
-                    </PixelBorder>
+                    <OSButton variant="secondary" size="sm" onClick={onSave}>
+                        <IconBookmark className="size-4" /> {saveLabel}
+                    </OSButton>
                 )}
-                <PixelBorder as="a" href={resource.url} className="px-3 py-1 text-sm hover:bg-yellow-100">
-                    → {actionLabel}
-                </PixelBorder>
+                <OSButton variant="secondary" size="sm" asLink to={resource.url}>
+                    <IconArrowRight className="size-4" /> {actionLabel}
+                </OSButton>
             </div>
         </PixelBorder>
     )
@@ -69,20 +71,106 @@ function CustomerStoryCard({ resource }: { resource: Resource }) {
             </div>
             <h4 className="font-game font-bold mb-2">{resource.title}</h4>
             {resource.quote && <p className="text-sm italic opacity-70 mb-3 flex-1">{resource.quote}</p>}
-            <PixelBorder as="a" href={resource.url} className="px-3 py-1 text-sm hover:bg-yellow-100">
+            <OSButton variant="secondary" size="sm" asLink to={resource.url}>
                 Read the story
-            </PixelBorder>
+            </OSButton>
         </PixelBorder>
     )
 }
 
-function MaxWisdom({ wisdom }: { wisdom: string }) {
+const SPRITE_SIZE = 80
+const SPRITE_SHEET_WIDTH = SPRITE_SIZE * 8
+const X_FRAMES = SPRITE_SHEET_WIDTH / SPRITE_SIZE
+const FPS = 24
+
+type AnimationName = 'wave' | 'flag' | 'phone'
+
+const animations: Record<AnimationName, { img: string; frames: number }> = {
+    wave: { img: 'wave', frames: 26 },
+    flag: { img: 'flag', frames: 25 },
+    phone: { img: 'phone', frames: 28 },
+}
+
+const INITIAL_DELAY = 3000
+
+function MaxWisdom({ wisdom, animation = 'flag' }: { wisdom: string; animation?: AnimationName }) {
+    const [frame, setFrame] = React.useState(0)
+    const [hasPlayedInitial, setHasPlayedInitial] = React.useState(false)
+    const [isPlaying, setIsPlaying] = React.useState(false)
+    const currentAnimation = animations[animation]
+
+    React.useEffect(() => {
+        // Reset when animation changes
+        setFrame(0)
+        setHasPlayedInitial(false)
+        setIsPlaying(false)
+    }, [animation])
+
+    // Initial auto-play after delay (plays once)
+    React.useEffect(() => {
+        if (hasPlayedInitial) {
+            return
+        }
+
+        const delayTimer = setTimeout(() => {
+            setIsPlaying(true)
+            setHasPlayedInitial(true)
+        }, INITIAL_DELAY)
+        return () => clearTimeout(delayTimer)
+    }, [hasPlayedInitial])
+
+    // Hover animation - plays once
+    React.useEffect(() => {
+        if (!isPlaying) {
+            return
+        }
+
+        const timer = setInterval(() => {
+            setFrame((f) => {
+                const nextFrame = f + 1
+                if (nextFrame >= currentAnimation.frames) {
+                    clearInterval(timer)
+                    setIsPlaying(false)
+                    return 0
+                }
+                return nextFrame
+            })
+        }, 1000 / FPS)
+        return () => clearInterval(timer)
+    }, [isPlaying, currentAnimation.frames])
+
+    const handleClick = () => {
+        if (!isPlaying) {
+            setFrame(0)
+            setIsPlaying(true)
+        }
+    }
+
     return (
         <div className="flex items-end gap-2 items-center">
-            <div className="w-12 h-12 bg-gray-200 border-2 border-black rounded-full flex items-center justify-center flex-shrink-0 bg-white">
-                🦔
+            <div
+                className="w-16 h-16 rounded-full border-2 border-black bg-white flex-shrink-0 overflow-hidden flex items-center justify-center cursor-pointer"
+                onClick={handleClick}
+            >
+                <div
+                    className="rendering-pixelated"
+                    style={{
+                        width: SPRITE_SIZE,
+                        height: SPRITE_SIZE,
+                        backgroundImage: `url(/images/pmf-game/${currentAnimation.img}.png)`,
+                        backgroundPosition: `-${(frame % X_FRAMES) * SPRITE_SIZE}px -${
+                            Math.floor(frame / X_FRAMES) * SPRITE_SIZE
+                        }px`,
+                        backgroundSize: `${SPRITE_SIZE * X_FRAMES}px auto`,
+                        backgroundRepeat: 'no-repeat',
+                        transform: 'scale(1.1) translateY(5%) translateX(-8%)',
+                    }}
+                />
             </div>
-            <div className="p-2 text-sm max-w-xs bg-white border-2 border-black">{wisdom}</div>
+            <div
+                className="p-2 text-sm max-w-xs bg-white border-2 border-black"
+                dangerouslySetInnerHTML={{ __html: wisdom }}
+            />
         </div>
     )
 }
