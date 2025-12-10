@@ -51,29 +51,15 @@ export default function AIVisibility(): JSX.Element {
                             <p className="text-xl md:text-2xl text-primary/80 leading-relaxed">
                                 See where you stand and start optimizing your AI search performance, all for free.
                             </p>
-                            <div className="space-y-4 text-lg text-primary/70">
-                                <p>
-                                    Your customers aren't googling anymore. They're asking AI. When someone asks
-                                    ChatGPT, Claude, or Perplexity about your industry, does your brand come up?
-                                </p>
-                                <p>
-                                    AI visibility is the new SEO. Just like you optimized for Google search rankings,
-                                    you now need to understand and improve how AI platforms mention, recommend, and
-                                    position your brand. This matters because AI assistants are becoming the primary way
-                                    people discover products, research solutions, and make purchase decisions.
-                                </p>
-                                <p>
-                                    Our free report analyzes your brand's presence across major AI platforms, shows you
-                                    how you stack up against competitors, and reveals the questions and topics where
-                                    you're being mentioned—or ignored.
-                                </p>
-                            </div>
+                            <p className="text-lg text-primary/70">
+                                Your customers aren't googling anymore. They're asking AI.
+                            </p>
 
                             {/* Form */}
-                            <div className="pt-4">
+                            <div className="pt-8 mt-8 border-t border-primary">
                                 <form onSubmit={handleSubmit} className="space-y-4">
                                     <div>
-                                        <label htmlFor="domain" className="block text-lg font-semibold mb-3">
+                                        <label htmlFor="domain" className="block text-2xl font-bold mb-4">
                                             Analyze my brand
                                         </label>
                                         <div className="flex flex-col sm:flex-row gap-3">
@@ -110,7 +96,7 @@ export default function AIVisibility(): JSX.Element {
                         <div className="relative">
                             <div className="bg-light dark:bg-dark border border-primary rounded-lg p-6 shadow-xl">
                                 <img
-                                    src="/images/ai-visibility-preview.png"
+                                    src={require('../images/ai-visibility-preview.png').default}
                                     alt="AI visibility dashboard showing brand rankings and mention percentages"
                                     className="w-full rounded"
                                 />
