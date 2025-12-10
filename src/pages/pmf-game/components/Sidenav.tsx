@@ -1,6 +1,6 @@
 import React from 'react'
-import { GameState, GameActions } from '../_data/types'
-import { LEVELS } from '../_data/levels'
+import { GameState, GameActions } from '../../../data/pmf-game/types'
+import { LEVELS } from '../../../data/pmf-game/levels'
 
 interface SidenavProps {
     gameState: GameState
@@ -70,12 +70,10 @@ function Lives({ count }: { count: number }) {
 
 function ChecklistItem({
     item,
-    isCurrent,
     isLast,
     onClick,
 }: {
     item: { id: string; label: string; completed: boolean }
-    isCurrent: boolean
     isLast: boolean
     onClick: () => void
 }) {
@@ -93,7 +91,7 @@ function ChecklistItem({
                 {!isLast && <div className="w-0.5 flex-1 min-h-6 bg-black" />}
             </div>
             {/* Label */}
-            <div className={`text-sm leading-4 ${isCurrent ? 'font-bold' : ''}`}>
+            <div className="text-sm leading-4">
                 <span className={item.completed ? 'line-through opacity-50' : ''}>{item.label}</span>
             </div>
         </div>
@@ -158,7 +156,6 @@ export default function Sidenav({ gameState, actions }: SidenavProps): JSX.Eleme
                             <ChecklistItem
                                 key={item.id}
                                 item={levels[currentLevelId!]?.checklistItems[index] || item}
-                                isCurrent={index === 0}
                                 isLast={index === currentLevel.checklistItems.length - 1}
                                 onClick={() => actions.completeChecklistItem(currentLevelId!, item.id)}
                             />

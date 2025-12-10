@@ -1,5 +1,5 @@
 import React from 'react'
-import { LevelData, Resource, LevelProgress } from '../_data/types'
+import { LevelData, Resource, LevelProgress } from '../../../data/pmf-game/types'
 import PixelBorder from './PixelBorder'
 import OSButton from 'components/OSButton'
 import * as Icons from '@posthog/icons'
@@ -282,7 +282,7 @@ export default function LevelScene({
     const products = level.products || []
 
     return (
-        <div className="max-w-screen-lg mx-auto">
+        <div className="max-w-screen-xl mx-auto">
             {/* Hero Image with Overlaid Header */}
             <div className="relative w-full h-96 overflow-hidden">
                 {level.illustration ? (

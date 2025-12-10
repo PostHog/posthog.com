@@ -3,9 +3,10 @@ import { LevelData } from './types'
 export const LEVELS: LevelData[] = [
     {
         id: 'level1',
-        name: 'Product Market Fit Valley',
+        name: 'Looking for Product-Market Fit',
         theme: 'Finding your first users and validating the problem',
-        description: 'Begin your journey by setting up the foundations for understanding your users.',
+        description:
+            'Your CEO is panicking about runway. Convince them PMF is out there to be found if you can focus on building the right things.',
         illustration:
             'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Untitled_Artwork_295_1_edf203e3b0.png',
         quest: {
@@ -145,13 +146,14 @@ export const LEVELS: LevelData[] = [
             { id: 'error-tracking', label: 'Error Tracking', completed: false },
             { id: 'read-resources', label: 'Read resources', completed: false },
         ],
-        maxWisdom: `Uh oh. It looks like you need to find some PMF... like <em>ASAP</em>! But don't panic. I'm here to help. `,
+        maxWisdom: `Uh oh. It looks like you need to find some PMF... like <em>ASAP</em>! But don't panic. It's out there.`,
     },
     {
         id: 'level2',
-        name: 'Data Docks',
+        name: 'Finding signal in your product',
         theme: 'Setting up analytics and understanding user behavior',
-        description: 'Learn to collect and organize the data that will guide your product decisions.',
+        description:
+            'The team wants to launch 5 campaigns at once. Help them understand which product metrics actually matter before they burn through the budget.',
         quest: {
             id: 'create-dashboard',
             title: 'Set up your first dashboard',
@@ -169,9 +171,10 @@ export const LEVELS: LevelData[] = [
     },
     {
         id: 'level3',
-        name: 'Conversion Cove',
+        name: 'Shipping fast',
         theme: 'Optimizing funnels and improving conversion rates',
-        description: 'Master the art of understanding where users drop off and how to improve your conversion rates.',
+        description:
+            'Your PM keeps adding "one more thing" to the roadmap. Show them how feature flags and quick experiments can validate ideas before building everything.',
         quest: {
             id: 'create-funnel',
             title: 'Create a funnel analysis',
@@ -188,9 +191,10 @@ export const LEVELS: LevelData[] = [
     },
     {
         id: 'level4',
-        name: 'Tourist Island',
+        name: 'Iterating on what works',
         theme: 'Understanding different user segments',
-        description: 'Discover who your users really are and what makes each segment unique.',
+        description:
+            'A senior engineer wants to rewrite everything from scratch. Convince them to use data to double down on what users actually love instead.',
         quest: {
             id: 'define-segments',
             title: 'Define user segments',
@@ -207,9 +211,10 @@ export const LEVELS: LevelData[] = [
     },
     {
         id: 'level5',
-        name: 'Hyper Growth Castle',
+        name: 'Hyper growth & 10x-ing',
         theme: 'Scaling and achieving true PMF',
-        description: 'Reach the ultimate goal: true product-market fit and the path to hyper growth.',
+        description:
+            'The board wants 10x growth yesterday. Rally your whole team around your product improvements and prove you can scale.',
         quest: {
             id: 'pmf-survey',
             title: 'Achieve 40% "very disappointed" score',

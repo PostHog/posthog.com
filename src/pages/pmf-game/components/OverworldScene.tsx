@@ -1,6 +1,6 @@
 import React from 'react'
-import { SceneId, LevelProgress } from '../_data/types'
-import { LEVELS } from '../_data/levels'
+import { SceneId, LevelProgress } from '../../../data/pmf-game/types'
+import { LEVELS } from '../../../data/pmf-game/levels'
 
 interface OverworldSceneProps {
     levels: Record<string, LevelProgress>
@@ -51,7 +51,7 @@ function LevelCard({
 
             <div className="flex flex-col gap-2">
                 <h3 className="text-lg font-bold">{level.name}</h3>
-                <p className="text-sm opacity-70">{level.theme}</p>
+                <p className="text-sm opacity-70">{level.description}</p>
 
                 {isUnlocked && (
                     <div className="mt-2">
@@ -66,25 +66,39 @@ function LevelCard({
     )
 }
 
+const OVERWORLD_BG_URL = 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/again2_614c81fc67.png'
+
 export default function OverworldScene({ levels, onSelectLevel }: OverworldSceneProps): JSX.Element {
     return (
-        <div className="max-w-screen-lg mx-auto p-8">
-            <div className="text-center mb-8">
-                <h1 className="text-4xl font-bold mb-2">
-                    <span className="line-through italic">Your office</span> World map
-                </h1>
-                <p className="text-lg opacity-70">Select a level to continue your journey towards PMF</p>
-            </div>
+        <div className="relative min-h-screen">
+            {/* Background image - absolute positioned */}
+            <div
+                className="absolute inset-0 bg-no-repeat pointer-events-none"
+                style={{
+                    backgroundImage: `url(${OVERWORLD_BG_URL})`,
+                    backgroundPosition: 'center top',
+                    backgroundSize: '130%',
+                }}
+            />
+            {/* Content */}
+            <div className="relative max-w-screen-lg mx-auto p-8">
+                <div className="text-center mb-8">
+                    <h1 className="text-4xl font-bold mb-2">
+                        <span className="line-through italic">Your office</span> World map
+                    </h1>
+                    <p className="text-lg opacity-70">Select a level to continue your journey towards PMF</p>
+                </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {LEVELS.map((level, index) => (
-                    <LevelCard
-                        key={level.id}
-                        level={level}
-                        progress={levels[level.id]}
-                        onSelect={() => onSelectLevel(level.id as SceneId)}
-                    />
-                ))}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {LEVELS.map((level, index) => (
+                        <LevelCard
+                            key={level.id}
+                            level={level}
+                            progress={levels[level.id]}
+                            onSelect={() => onSelectLevel(level.id as SceneId)}
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     )
