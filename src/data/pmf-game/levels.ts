@@ -28,11 +28,11 @@ export const LEVELS: LevelData[] = [
                 title: 'Product Analytics',
                 icon: 'IconGraph',
                 iconColor: 'text-blue',
-                description: `Track events and analyze user behavior.
+                description: `See if anyone is actually using what you built.
                 <ul class="list-disc pl-4 space-y-1 mt-2">
-                    <li>Build funnels to measure conversion rates</li>
-                    <li>Create trends to visualize key metrics over time</li>
-                    <li>Segment users to understand different cohorts</li>
+                    <li>Track signups, activation, and where users drop off</li>
+                    <li>Find out which features get used vs ignored</li>
+                    <li>Stop guessing - see actual user behavior</li>
                 </ul>`,
                 url: '/product-analytics',
             },
@@ -42,11 +42,11 @@ export const LEVELS: LevelData[] = [
                 title: 'Feature Flags',
                 icon: 'IconToggle',
                 iconColor: 'text-seagreen',
-                description: `Control feature visibility and roll out new features with confidence.
+                description: `Ship to 10 users before you ship to 10,000.
                 <ul class="list-disc pl-4 space-y-1 mt-2">
-                    <li>Target specific users or groups</li>
-                    <li>Roll out gradually with percentage-based releases</li>
-                    <li>Run A/B tests to validate product changes</li>
+                    <li>Release to beta users first, expand when it works</li>
+                    <li>Kill a broken feature instantly without a deploy</li>
+                    <li>Test two versions and see which one wins</li>
                 </ul>`,
                 url: '/feature-flags',
             },
@@ -56,11 +56,11 @@ export const LEVELS: LevelData[] = [
                 title: 'Session Replay',
                 icon: 'IconRewindPlay',
                 iconColor: 'text-yellow',
-                description: `Watch user sessions and see how users interact with your product.
+                description: `Watch a real user try your product. Cringe. Fix it.
                 <ul class="list-disc pl-4 space-y-1 mt-2">
-                    <li>View recordings of user sessions to see exactly what they do</li>
-                    <li>Debug issues by replaying problematic interactions</li>
-                    <li>Understand friction points in your UX</li>
+                    <li>See exactly where users get confused and give up</li>
+                    <li>Watch the signup flow - is it actually easy?</li>
+                    <li>Find the bugs users hit but never reported</li>
                 </ul>`,
                 url: '/session-replay',
             },
@@ -70,11 +70,11 @@ export const LEVELS: LevelData[] = [
                 title: 'Error Tracking',
                 icon: 'IconWarning',
                 iconColor: 'text-orange',
-                description: `Track errors and exceptions in your code.
+                description: `Find out your app is broken before your users tell you.
                 <ul class="list-disc pl-4 space-y-1 mt-2">
-                    <li>Catch frontend and backend errors automatically</li>
-                    <li>Get stack traces and context for faster debugging</li>
-                    <li>Link errors to session replays for full visibility</li>
+                    <li>Get alerted when errors spike after a deploy</li>
+                    <li>See which errors affect the most users</li>
+                    <li>Watch the session replay of the user who hit the bug</li>
                 </ul>`,
                 url: '/error-tracking',
             },
@@ -205,10 +205,74 @@ export const LEVELS: LevelData[] = [
         illustration: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/game_4_8d799b7547.png',
         quest: {
             id: 'define-segments',
-            title: 'Define user segments',
-            description: 'Create cohorts to understand different types of users and their behaviors.',
+            title: 'Double down on what works',
+            description: `<p>You have users. Some love you, some churn. The difference between success and failure is figuring out <em>why</em> - then doing more of what works.</p>
+
+<p>The trap most startups fall into: building new features instead of improving existing ones. The senior engineer wants to rewrite everything. The PM has 47 ideas. But your best users are trying to tell you exactly what they need - if you listen.</p>
+
+<p>This level is about segmentation: splitting your users into groups and understanding what makes retained users different from churned ones. What do power users do in their first week that others don't? What's the "aha moment" that predicts retention?</p>
+
+<p>Find the pattern, then make it easier for everyone to follow that path.</p>`,
             completed: false,
         },
+        products: [
+            {
+                id: 'product-analytics-cohorts',
+                type: 'product',
+                title: 'Product Analytics',
+                icon: 'IconGraph',
+                iconColor: 'text-blue',
+                description: `Find what retained users do differently from churned users.
+                <ul class="list-disc pl-4 space-y-1 mt-2">
+                    <li>Compare Day 1 behavior of retained vs churned users</li>
+                    <li>Find which features correlate with long-term retention</li>
+                    <li>Build a cohort of "users who did X in first week" and track them</li>
+                </ul>`,
+                url: '/product-analytics',
+            },
+            {
+                id: 'session-replay-segments',
+                type: 'product',
+                title: 'Session Replay',
+                icon: 'IconRewindPlay',
+                iconColor: 'text-yellow',
+                description: `Watch a power user's session, then a churned user's. Spot the difference.
+                <ul class="list-disc pl-4 space-y-1 mt-2">
+                    <li>Filter replays to "users who converted" vs "users who didn't"</li>
+                    <li>See exactly where confused users give up</li>
+                    <li>Find the moment retained users "get it"</li>
+                </ul>`,
+                url: '/session-replay',
+            },
+            {
+                id: 'surveys-feedback',
+                type: 'product',
+                title: 'Surveys',
+                icon: 'IconMessage',
+                iconColor: 'text-red',
+                description: `Ask your best users what would make them recommend you to a friend.
+                <ul class="list-disc pl-4 space-y-1 mt-2">
+                    <li>Survey users right after they complete a key action</li>
+                    <li>Ask churned users why they left (before it's too late)</li>
+                    <li>Find the words your best users use to describe your product</li>
+                </ul>`,
+                url: '/surveys',
+            },
+            {
+                id: 'experiments-iterate',
+                type: 'product',
+                title: 'A/B Testing',
+                icon: 'IconFlask',
+                iconColor: 'text-purple',
+                description: `Test if making X easier actually improves retention.
+                <ul class="list-disc pl-4 space-y-1 mt-2">
+                    <li>A/B test onboarding changes and measure 7-day retention</li>
+                    <li>Test removing friction vs adding features</li>
+                    <li>Prove (or disprove) your intuition with data</li>
+                </ul>`,
+                url: '/ab-testing',
+            },
+        ],
         resources: [
             {
                 id: 'feedback-loops',
@@ -257,9 +321,11 @@ export const LEVELS: LevelData[] = [
             },
         ],
         checklistItems: [
-            { id: 'create-cohort', label: 'Create your first cohort', completed: false },
-            { id: 'compare-segments', label: 'Compare segment behaviors', completed: false },
-            { id: 'find-power-users', label: 'Identify power users', completed: false },
+            { id: 'retained-vs-churned', label: 'Compare retained vs churned users', completed: false },
+            { id: 'find-aha-moment', label: 'Find your "aha moment"', completed: false },
+            { id: 'watch-sessions', label: 'Watch power user sessions', completed: false },
+            { id: 'survey-power-users', label: 'Survey your best users', completed: false },
+            { id: 'test-improvement', label: 'A/B test an activation change', completed: false },
         ],
         maxWisdom: `It's okay to have favorites. Find the users who love (and pay) you the most.`,
     },
@@ -271,12 +337,75 @@ export const LEVELS: LevelData[] = [
             'The board wants 10x growth yesterday. Rally your whole team around your product improvements and prove you can scale.',
         illustration: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/game_5_2e6f486bc3.png',
         quest: {
-            id: 'pmf-survey',
-            title: 'Achieve 40% "very disappointed" score',
-            description:
-                'Run the PMF survey and achieve the magic 40% threshold of users who would be very disappointed without your product.',
+            id: 'scale-growth',
+            title: 'To the moon',
+            description: `<p>You found product-market fit. Users love you. Now the board wants 10x growth. This is where most startups fail - not because they can't grow, but because they break what made them special in the first place.</p>
+
+<p>Hyper-growth requires different muscles: you need dashboards the whole team can rally around, not just metrics you check alone. You need to connect revenue data to product data so you know which users actually pay. You need to find which acquisition channels produce customers who stick, not just signups who churn.</p>
+
+<p>The PMF survey isn't about proving you have PMF anymore - it's about making sure you <em>keep</em> it as you scale. Run it regularly. If "very disappointed" drops below 40%, you're growing faster than you're delivering value.</p>
+
+<p>This level is about building the systems, dashboards, and habits that let you 10x without losing the magic.</p>`,
             completed: false,
         },
+        products: [
+            {
+                id: 'surveys-pmf',
+                type: 'product',
+                title: 'Surveys',
+                icon: 'IconMessage',
+                iconColor: 'text-red',
+                description: `Track your PMF score as you scale - make sure growth doesn't outpace value.
+                <ul class="list-disc pl-4 space-y-1 mt-2">
+                    <li>Run the PMF survey regularly - if "very disappointed" drops below 40%, you're growing too fast</li>
+                    <li>Find which new user segments love you vs just tolerate you</li>
+                    <li>Catch PMF erosion before it becomes churn</li>
+                </ul>`,
+                url: '/surveys',
+            },
+            {
+                id: 'product-analytics-scale',
+                type: 'product',
+                title: 'Product Analytics',
+                icon: 'IconGraph',
+                iconColor: 'text-blue',
+                description: `Build the growth dashboard your whole team rallies around.
+                <ul class="list-disc pl-4 space-y-1 mt-2">
+                    <li>Track weekly active users, not vanity metrics</li>
+                    <li>Monitor retention curves - are new cohorts retaining better?</li>
+                    <li>Set up Slack alerts when activation rate drops</li>
+                </ul>`,
+                url: '/product-analytics',
+            },
+            {
+                id: 'data-warehouse',
+                type: 'product',
+                title: 'Data Warehouse',
+                icon: 'IconDatabase',
+                iconColor: 'text-seagreen',
+                description: `Calculate real revenue per user by combining Stripe + product data.
+                <ul class="list-disc pl-4 space-y-1 mt-2">
+                    <li>Join Stripe revenue data with product usage</li>
+                    <li>Find which user behaviors predict upgrade to paid</li>
+                    <li>Calculate real LTV by cohort, not guesswork</li>
+                </ul>`,
+                url: '/data-warehouse',
+            },
+            {
+                id: 'web-analytics-growth',
+                type: 'product',
+                title: 'Web Analytics',
+                icon: 'IconPieChart',
+                iconColor: 'text-purple',
+                description: `Find which acquisition channels actually convert to paying users.
+                <ul class="list-disc pl-4 space-y-1 mt-2">
+                    <li>Track signups by source - organic, paid, referral?</li>
+                    <li>Find your best converting landing pages</li>
+                    <li>See where visitors drop off before signing up</li>
+                </ul>`,
+                url: '/web-analytics',
+            },
+        ],
         resources: [
             {
                 id: 'startup-that-scales',
@@ -316,9 +445,11 @@ export const LEVELS: LevelData[] = [
             },
         ],
         checklistItems: [
-            { id: 'run-pmf-survey', label: 'Run PMF survey', completed: false },
-            { id: 'analyze-responses', label: 'Analyze survey responses', completed: false },
-            { id: 'iterate-product', label: 'Iterate based on feedback', completed: false },
+            { id: 'setup-pmf-monitoring', label: 'Set up recurring PMF survey', completed: false },
+            { id: 'segment-responses', label: 'Segment users by PMF score', completed: false },
+            { id: 'build-dashboard', label: 'Build a team growth dashboard', completed: false },
+            { id: 'connect-revenue', label: 'Connect revenue to product data', completed: false },
+            { id: 'identify-channels', label: 'Find best acquisition channels', completed: false },
         ],
         maxWisdom: "10x-ing once isn't the finish line - it's where the real journey begins. Time to do it again.",
     },
