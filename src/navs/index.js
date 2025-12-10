@@ -1545,6 +1545,10 @@ export const handbookSidebar = [
                         name: 'Chrome Extension Billing Issues',
                         url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
                     },
+                    {
+                        name: 'Metabase account analysis',
+                        url: '/handbook/onboarding/metabase-account-analysis',
+                    },
                 ],
             },
             {
