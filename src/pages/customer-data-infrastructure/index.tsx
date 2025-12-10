@@ -172,7 +172,7 @@ export default function CDP(): JSX.Element {
 
     useEffect(() => {
         if (appWindow) {
-            setWindowTitle(appWindow, 'posthog data stack.md')
+            setWindowTitle(appWindow, 'PostHog data stack.md')
         }
     }, [])
 
@@ -209,7 +209,7 @@ export default function CDP(): JSX.Element {
         {
             id: 'data-import',
             icon: 'IconPlug',
-            title: 'Data import',
+            title: 'Data import + CDP',
             url: 'TODO',
             description:
                 'Use our 60+ sources to get data into your warehouse, including direct warehouse sources, SDKs, and webhooks.',
@@ -219,7 +219,7 @@ export default function CDP(): JSX.Element {
             id: 'modeling-transformation',
             icon: 'IconShuffle',
             title: 'Modeling & transformation',
-            url: 'TODO',
+            url: 'customer-data-infrastructure/transformations',
             description: 'Build modular, testable data tables that load in an instant.',
             perfectFor: 'data analysts and product teams',
             notReadyFor:

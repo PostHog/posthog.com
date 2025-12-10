@@ -2559,7 +2559,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             worksWith: ['product_analytics', 'session_replay', 'cohorts', 'experiments'],
         },
         {
-            name: 'Integrations library (145+)',
+            name: 'CDP integrations library (145+)',
             parentIcon: 'spreadsheetSearch',
             // Icon: IconPlug,
             handle: 'integrations',
@@ -2575,7 +2575,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             screenshots: {
                 overview: {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pasted_image_2025_09_03_T13_24_20_613_Z_5ce971dd31.png',
-                    alt: 'Integrations library',
+                    alt: 'CDP integrations library',
                     classes: '',
                 },
             },

@@ -12,28 +12,40 @@ export const customerDataInfrastructureNav = {
             url: '/customer-data-infrastructure',
         },
         {
-            name: 'Integrations library',
+            name: 'Data tools',
+        },
+        {
+            name: 'Data sources & import (ELT)',
+            url: '/customer-data-infrastructure/sources',
+        },
+        {
+            name: 'Transformations & modeling',
+            url: '/customer-data-infrastructure/transformations',
+        },
+        {
+            name: 'SQL data exploration - TODO',
+            url: '/data-warehouse',
+        },
+        {
+            name: 'Business intelligence (BI) - TODO',
+            url: '/data-warehouse',
+        },
+        {
+            name: 'Export & reverse ETL',
+            url: '/customer-data-infrastructure/destinations',
+        },
+        {
+            name: 'All integrations',
+        },
+        {
+            name: 'CDP integrations library',
             url: '/cdp',
             icon: 'IconPlug',
         },
         {
-            name: 'Data flow',
-        },
-        {
-            name: 'Get data into PostHog',
-            url: '/customer-data-infrastructure/sources',
-        },
-        {
-            name: 'Transform data',
-            url: '/customer-data-infrastructure/transformations',
-        },
-        {
-            name: 'Query & visualize data',
-            url: '/data-warehouse',
-        },
-        {
-            name: 'Send data out of PostHog',
-            url: '/customer-data-infrastructure/destinations',
+            name: 'Warehouse source library',
+            url: '/docs/data-warehouse/sources',
+            icon: 'IconPlug',
         },
     ],
 }
