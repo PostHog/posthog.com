@@ -87,30 +87,34 @@ export const LEVELS: LevelData[] = [
                 description:
                     'In a startup, the only objective that matters before you have product-market fit, is finding product-market fit.',
                 url: '/blog/product-market-fit-game',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/pmf-game-guide/pmf-guide.png',
             },
             {
                 id: 'first-time-founders',
                 type: 'blog',
                 title: 'How first-time founders fail',
                 description:
-                    "PostHog and Statsig both offer A/B testing and feature flags, but they're different in two important ways: Statsig is a dedicated tes...",
-                url: '/blog/first-time-founders-fail',
+                    'Why do so many first-time founders fail? They confuse activity with progress, growth with product-market fit, and fall prey to ego.',
+                url: '/newsletter/first-time-founders',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1713521535/posthog.com/contents/blog/evolution-of-founders.jpg',
             },
             {
                 id: 'not-boring',
                 type: 'blog',
                 title: 'How not to be boring',
                 description:
-                    "The world would be more fun if most startups hadn't undergone a personality bypass. But, sadly, most software companies look an...",
-                url: '/blog/how-not-to-be-boring',
+                    "The world would be more fun if most startups hadn't undergone a personality bypass. But, sadly, most software companies look alike.",
+                url: '/blog/brand',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/brand_startup_1aa2b151d6.png',
             },
             {
                 id: 'defining-icp',
                 type: 'blog',
-                title: 'Defining our ICP is the most important thing we ever did',
+                title: 'How we found our Ideal Customer Profile',
                 description:
-                    "Defining our ideal customer profile (ICP) is one of the most important things we've ever done. We wish we'd done it sooner. M...",
-                url: '/blog/defining-icp',
+                    "Defining our ideal customer profile (ICP) is one of the most important things we've ever done. We wish we'd done it sooner.",
+                url: '/founders/creating-ideal-customer-profile',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png',
             },
             {
                 id: 'ycombinator-story',
@@ -120,6 +124,7 @@ export const LEVELS: LevelData[] = [
                 quote: '"We could autocapture... events using the JS snippet and... configure custom events."',
                 description: 'Read the story',
                 url: '/customers/ycombinator',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_YC_68ed8fa1bb.png',
             },
             {
                 id: 'hasura-story',
@@ -129,14 +134,16 @@ export const LEVELS: LevelData[] = [
                 quote: '"we observed drop-offs at very particular stages of our onboarding flow."',
                 description: 'Read the story',
                 url: '/customers/hasura',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hasura_posthog_efc51e8a25.png',
             },
             {
                 id: 'natural-language-video',
                 type: 'video',
                 title: 'Querying data with natural language - How PostHog uses PostHog AI',
                 description:
-                    "Defining our ideal customer profile (ICP) is one of the most important things we've ever done. We wish we'd done it sooner. M...",
-                url: '/tutorials/natural-language-queries',
+                    'Learn how to use natural language queries in PostHog to ask questions about your data using AI.',
+                url: 'https://www.youtube.com/watch?v=WPjJLpNxI6s',
+                image: 'https://img.youtube.com/vi/WPjJLpNxI6s/maxresdefault.jpg',
             },
         ],
         checklistItems: [
@@ -195,13 +202,60 @@ export const LEVELS: LevelData[] = [
         theme: 'Understanding different user segments',
         description:
             'A senior engineer wants to rewrite everything from scratch. Convince them to use data to double down on what users actually love instead.',
+        illustration: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/game_4_8d799b7547.png',
         quest: {
             id: 'define-segments',
             title: 'Define user segments',
             description: 'Create cohorts to understand different types of users and their behaviors.',
             completed: false,
         },
-        resources: [],
+        resources: [
+            {
+                id: 'feedback-loops',
+                type: 'blog',
+                title: 'How I learned to love feedback loops (and make better products)',
+                description:
+                    'How feedback loops between each stage lead to much better decisions, and how to actively seek iterative gains from these loops.',
+                url: '/blog/feedback-loops',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png',
+            },
+            {
+                id: 'measuring-feature-success',
+                type: 'blog',
+                title: 'How we build features users love (really fast)',
+                description:
+                    "A successful new feature solves a real user problem and is actually used. Here's how we measure feature success at PostHog.",
+                url: '/product-engineers/measuring-feature-success',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/green-blog-image.jpg',
+            },
+            {
+                id: 'dogfooding',
+                type: 'blog',
+                title: 'How we do dogfooding at PostHog (with examples)',
+                description:
+                    'Dogfooding helps you get fast feedback, ship a higher-quality product, and maintain customer empathy.',
+                url: '/product-engineers/dogfooding',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/dogfood_531145ada2.jpg',
+            },
+            {
+                id: 'product-at-posthog',
+                type: 'blog',
+                title: "What's the true role of a product team at an engineering-led organization?",
+                description:
+                    "We don't have PMs dictating a roadmap - it all comes from engineering. Here's how product development works at PostHog.",
+                url: '/founders/product-at-posthog',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/product-at-posthog.png',
+            },
+            {
+                id: '50-product-learnings',
+                type: 'blog',
+                title: "50 things we've learned about building successful products",
+                description:
+                    'To celebrate 50k subscribers to Product for Engineers, here are the 50 most important lessons about building successful products.',
+                url: '/newsletter/50-product-learnings',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/50k2_d6698f08c5.png',
+            },
+        ],
         checklistItems: [
             { id: 'create-cohort', label: 'Create your first cohort', completed: false },
             { id: 'compare-segments', label: 'Compare segment behaviors', completed: false },
@@ -215,6 +269,7 @@ export const LEVELS: LevelData[] = [
         theme: 'Scaling and achieving true PMF',
         description:
             'The board wants 10x growth yesterday. Rally your whole team around your product improvements and prove you can scale.',
+        illustration: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/game_5_2e6f486bc3.png',
         quest: {
             id: 'pmf-survey',
             title: 'Achieve 40% "very disappointed" score',
@@ -222,7 +277,44 @@ export const LEVELS: LevelData[] = [
                 'Run the PMF survey and achieve the magic 40% threshold of users who would be very disappointed without your product.',
             completed: false,
         },
-        resources: [],
+        resources: [
+            {
+                id: 'startup-that-scales',
+                type: 'blog',
+                title: "32 things we've learned about building a startup that scales",
+                description:
+                    "I joined PostHog when we were 11 people and had sold nothing. 5 years later, we're now over 150 people and $$$ ARR. Here are 32 things I've learned.",
+                url: '/newsletter/building-a-startup-that-scales',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/learning_f933d64857.png',
+            },
+            {
+                id: 'startups-lose-edge',
+                type: 'blog',
+                title: 'How startups lose their edge',
+                description:
+                    "You stop doing the things that got you ahead in the first place. You're no longer playing to win, you're playing not to lose.",
+                url: '/newsletter/how-startups-lose-their-edge',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/preventd_4592de12f6.jpg',
+            },
+            {
+                id: 'small-teams',
+                type: 'blog',
+                title: 'The magic of small engineering teams',
+                description:
+                    'Startups ship more per person than big companies. Small teams are speedy, innovative, and autonomous - enabling you to scale while retaining startup speed.',
+                url: '/newsletter/small-teams',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/345390691_746f2b83_6290_4d68_b612_dd9360b43515_20e0f385a7.jpg',
+            },
+            {
+                id: 'bad-behaviors',
+                type: 'blog',
+                title: 'Non-obvious behaviors that will kill your startup',
+                description:
+                    'Teams that praise highly visible contributions more than day-to-day excellence foster resentment, cynicism, and success theater.',
+                url: '/newsletter/bad-behaviors',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/glengarry_glen_hog_b952c1fc80.jpg',
+            },
+        ],
         checklistItems: [
             { id: 'run-pmf-survey', label: 'Run PMF survey', completed: false },
             { id: 'analyze-responses', label: 'Analyze survey responses', completed: false },

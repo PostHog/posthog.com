@@ -38,13 +38,23 @@ function ContentCard({
 }) {
     return (
         <PixelBorder className="p-4 flex gap-4">
-            <div className="w-24 h-24 bg-gray-200 border-2 border-black flex-shrink-0 flex items-center justify-center">
-                {resource.type === 'video' && <span className="text-2xl">▶️</span>}
+            <div className="w-32 h-20 bg-gray-200 border-2 border-black flex-shrink-0 flex items-center justify-center overflow-hidden">
+                {resource.image ? (
+                    <img src={resource.image} alt="" className="w-full h-full object-cover" />
+                ) : resource.type === 'video' ? (
+                    <div className="w-full h-full bg-dark flex items-center justify-center">
+                        <span className="text-3xl">▶️</span>
+                    </div>
+                ) : (
+                    <div className="w-full h-full bg-accent flex items-center justify-center">
+                        <span className="text-2xl">📄</span>
+                    </div>
+                )}
             </div>
-            <div className="flex-1">
-                {label && <div className="text-xs font-bold opacity-60 mb-1">{label}</div>}
-                <h4 className=" font-bold text-orange-600 mb-1">{resource.title}</h4>
-                <p className="text-sm opacity-70 line-clamp-2">{resource.description}</p>
+            <div className="flex-1 min-w-0">
+                {label && <div className="text-xs font-bold opacity-60">{label}</div>}
+                <h4 className="font-bold text-orange-600">{resource.title}</h4>
+                <p className="text-sm opacity-70 line-clamp-2 mt-0.5">{resource.description}</p>
             </div>
             <div className="flex flex-col gap-2 flex-shrink-0">
                 {saveLabel && onSave && (
