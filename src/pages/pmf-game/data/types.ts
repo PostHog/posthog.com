@@ -1,0 +1,69 @@
+export type SceneId = 'title' | 'overworld' | 'level1' | 'level2' | 'level3' | 'level4' | 'level5'
+
+export interface ChecklistItem {
+    id: string
+    label: string
+    completed: boolean
+}
+
+export interface LevelProgress {
+    unlocked: boolean
+    completed: boolean
+    progress: number // 0-100
+    checklistItems: ChecklistItem[]
+}
+
+export interface Resource {
+    id: string
+    type: 'blog' | 'video' | 'customer-story'
+    title: string
+    description: string
+    url: string
+    image?: string
+    company?: string // For customer stories
+    quote?: string // For customer stories
+}
+
+export interface Quest {
+    id: string
+    title: string
+    description: string
+    command?: string // For CLI commands like npx wizard
+    completed: boolean
+}
+
+export interface LevelData {
+    id: string
+    name: string
+    theme: string
+    description: string
+    illustration?: string
+    quest: Quest
+    resources: Resource[]
+    checklistItems: ChecklistItem[]
+    maxWisdom?: string // Tip from Max the hedgehog
+}
+
+export interface SavedResource extends Resource {
+    savedAt: Date
+}
+
+export interface GameState {
+    currentScene: SceneId
+    levels: Record<string, LevelProgress>
+    lives: number
+    inventory: SavedResource[]
+    selectedCharacter: string
+}
+
+export interface GameActions {
+    navigateToScene: (scene: SceneId) => void
+    navigateToOverworld: () => void
+    completeChecklistItem: (levelId: string, itemId: string) => void
+    completeLevel: (levelId: string) => void
+    unlockLevel: (levelId: string) => void
+    saveResource: (resource: Resource) => void
+    removeFromInventory: (resourceId: string) => void
+    loseLife: () => void
+    gainLife: () => void
+}
