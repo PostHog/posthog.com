@@ -2208,6 +2208,10 @@ export const docsMenu = {
                             url: '/docs/api/actions',
                         },
                         {
+                            name: 'Alerts',
+                            url: '/docs/api/alerts',
+                        },
+                        {
                             name: 'Activity log',
                             url: '/docs/api/activity-log',
                         },
