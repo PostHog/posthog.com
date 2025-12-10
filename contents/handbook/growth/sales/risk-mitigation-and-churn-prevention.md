@@ -247,7 +247,3 @@ Not every at-risk account can be saved. When a customer churns, write a retro an
 The best churn prevention is never needing to prevent churn. Build the habits, check implementation health, drive behavioral product adoption, and catch problems early.
 
 
-
-
-- [How we work (TAMs)](/handbook/growth/sales/how-we-work)
-- [Account allocation and handover](/handbook/growth/sales/account-allocation)
