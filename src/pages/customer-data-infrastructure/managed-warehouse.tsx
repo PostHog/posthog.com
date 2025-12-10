@@ -4,8 +4,8 @@ import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfras
 import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'
 import Link from 'components/Link'
-import DWInstallationPlatforms from '../../../contents/docs/data-warehouse/_snippets/dw-installation-platforms'
 import OSTable from 'components/OSTable'
+import DuckDBWaitlistSurvey from 'components/DuckDBWaitlistSurvey'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -75,6 +75,18 @@ export default function ManagedWarehouse(): JSX.Element {
                     is <span className="italic">all the rage</span>. And we make it incredibly easy to start using it
                     for your analytics workloads.
                 </p>
+                <div className="dark:bg-dark bg-accent border border-input p-4 rounded">
+                    <p className="!mt-0">
+                        <strong>Note:</strong> PostHog managed DuckDB warehouse is in{' '}
+                        <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
+                            Beta
+                        </span>
+                        . Join the waitlist to get early access.
+                    </p>
+                    <div className="max-w-md">
+                        <DuckDBWaitlistSurvey />
+                    </div>
+                </div>
                 <p>
                     Each warehouse customer receives a <span className="font-bold">dedicated DuckDB instance</span>{' '}
                     managed by PostHog. This means you get the performance, reliability, and simplicity of DuckDB

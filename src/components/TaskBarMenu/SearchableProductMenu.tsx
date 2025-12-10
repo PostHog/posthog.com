@@ -28,7 +28,7 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products 
         'ai',
         'customer-data-infrastructure/sources',
         'customer-data-infrastructure/destinations',
-        'customer-data-infrastructure/transformations',
+        'customer-data-infrastructure/data-modeling',
         'customer-data-infrastructure',
     ]
 

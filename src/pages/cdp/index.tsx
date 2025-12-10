@@ -1,6 +1,5 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useStaticQuery, graphql, navigate } from 'gatsby'
-import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 import OSTable from 'components/OSTable'
 import SEO from 'components/seo'
@@ -9,8 +8,6 @@ import Link from 'components/Link'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { TreeMenu } from 'components/TreeMenu'
 import { Select } from 'components/RadixUI/Select'
-import OSButton from 'components/OSButton'
-import { IconFilter } from '@posthog/icons'
 
 const PRODUCT_HANDLE = 'cdp'
 

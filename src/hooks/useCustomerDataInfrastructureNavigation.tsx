@@ -28,7 +28,7 @@ export const customerDataInfrastructureNav = {
         },
         {
             name: 'Data modeling',
-            url: '/customer-data-infrastructure/transformations',
+            url: '/customer-data-infrastructure/data-modeling',
         },
         {
             name: 'SQL data exploration - TODO',

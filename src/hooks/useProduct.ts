@@ -496,7 +496,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             worksWith: ['product_analytics', 'web_analytics', 'data_warehouse', 'session_replay'],
         },
         {
-            name: 'README: Data warehouse / CDP / ETL.md',
+            name: 'README: PostHog data stack.md',
             // Icon: IconDatabase,
             parentIcon: 'documentCanvas',
             description: 'CDP manifesto',
@@ -2596,15 +2596,15 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
-            name: 'Transform data',
+            name: 'Data modeling',
             parentIcon: 'dataBlender',
             // Icon: IconArrowUpRight,
-            description: 'Transform data',
-            handle: 'transformations',
+            description: 'Model data',
+            handle: 'data_modeling',
             color: 'red',
             colorSecondary: 'lilac',
             category: 'data',
-            slug: 'customer-data-infrastructure/transformations',
+            slug: 'customer-data-infrastructure/data-modeling',
             seo: {
                 title: 'Transform, enrich, and model your data',
                 description: 'Get your data in the exact shape you need it.',

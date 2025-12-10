@@ -212,7 +212,7 @@ export default function CDP(): JSX.Element {
             icon: 'IconShuffle',
             title: 'Data Modeling',
             badge: 'Beta',
-            url: 'customer-data-infrastructure/transformations',
+            url: 'customer-data-infrastructure/data-modeling',
             description: 'Build modular, testable data tables that load in an instant.',
             perfectFor: 'data analysts and product teams',
             notReadyFor:

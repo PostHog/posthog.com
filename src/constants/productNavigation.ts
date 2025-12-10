@@ -104,9 +104,9 @@ export const nonProductPages = {
         icon: 'IconArrowRight',
         color: 'orange',
     },
-    'customer-data-infrastructure/transformations': {
-        slug: 'customer-data-infrastructure/transformations',
-        url: '/customer-data-infrastructure/transformations',
+    'customer-data-infrastructure/data-modeling': {
+        slug: 'customer-data-infrastructure/data-modeling',
+        url: '/customer-data-infrastructure/data-modeling',
         icon: 'IconRefresh',
         color: 'green',
     },

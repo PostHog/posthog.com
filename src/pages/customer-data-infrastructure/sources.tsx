@@ -25,11 +25,11 @@ export default function Sources(): JSX.Element {
                     automatically available in your warehouse as well.
                 </p>
                 <div className="max-w-2xl">
-                    <DWInstallationPlatforms showFiltering={true} maxItems={10} />
+                    <DWInstallationPlatforms showFiltering={true} />
                 </div>
                 <p>
-                    <Link to="/docs/data-warehouse/sources" state={{ newWindow: true }}>
-                        View all import sources →
+                    <Link to="/docs/data-warehouse/start-here" state={{ newWindow: true }}>
+                        View our get started docs →
                     </Link>
                 </p>
             </ReaderView>

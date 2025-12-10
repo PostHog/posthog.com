@@ -10,7 +10,7 @@ const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
 }
 
-export default function Transformations(): JSX.Element {
+export default function DataModeling(): JSX.Element {
     // TODO: change the name of this file to modeling.tsx and the path from /transformations to /modeling
     return (
         <>
@@ -21,17 +21,37 @@ export default function Transformations(): JSX.Element {
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="Data modeling">
                 <p>
-                    PostHog provides powerful tools to shape, enrich, and model your data to get in the exact form you
-                    need it. Modeling primarily happens in two places: modeling in the data warehouse, and in event
-                    transformations using Hog functions.
+                    PostHog provides powerful tools to shape, enrich, and model your data into the exact form you need
+                    it.
                 </p>
-                <h2>1. Data modeling in PostHog's data warehouse</h2>
+                <div className="dark:bg-dark bg-accent border border-input p-4 rounded">
+                    <p className="!mt-0">
+                        <strong>Note:</strong> PostHog modeling is in{' '}
+                        <span className="rounded-sm bg-highlight py-0.5 ml-2 px-1 text-xs font-bold text-red dark:text-yellow">
+                            Beta
+                        </span>
+                        . It's great for product teams who have light modeling workloads today, with support for
+                        advanced use-cases in active development.
+                    </p>
+                    <p className="!mb-0">
+                        If you have advanced modeling needs, we recommend you connect your favorite modeling tooling
+                        such as{' '}
+                        <Link to="https://www.getdbt.com/" external>
+                            DBT
+                        </Link>{' '}
+                        to your PostHog DuckDB warehouse.
+                    </p>
+                </div>
+
+                <h3>Step 1: Create reusable queries with views</h3>
 
                 <p>
                     PostHog's modeling workflow starts with creating <Link to="/docs/data-warehouse/views">views</Link>{' '}
                     for your data. This allows you to define custom transformations, joins, and aggregations using HogQL
                     (PostHog's SQL dialect), which can be used as reliable, structured foundations for data analysis.
                 </p>
+
+                <h3>Step 2: Create models for scalability</h3>
 
                 <p>
                     Then, save those views into <Link to="/docs/data-warehouse/views/materialize">models</Link> (aka
@@ -67,6 +87,20 @@ export default function Transformations(): JSX.Element {
                     </li>
                     <li>
                         <strong>Version control:</strong> Track changes to your data models over time
+                    </li>
+                    <li>
+                        <strong>Git & vcs integrations:</strong> Sync your models with your Git repository for
+                        collaboration{' '}
+                        <span className="rounded-sm bg-highlight py-0.5 ml-2 px-1 text-xs font-bold text-red dark:text-yellow">
+                            Coming soon
+                        </span>
+                    </li>
+                    <li>
+                        <strong>DAG visualizations:</strong> view a graph of all model node relationships, and execute
+                        workflows based on lineage{' '}
+                        <span className="rounded-sm bg-highlight py-0.5 ml-2 px-1 text-xs font-bold text-red dark:text-yellow">
+                            Coming soon
+                        </span>
                     </li>
                 </ul>
                 <p>
