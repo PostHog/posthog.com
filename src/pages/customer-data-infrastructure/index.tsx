@@ -191,20 +191,12 @@ export default function CDP(): JSX.Element {
             id: 'managed-duckdb',
             icon: 'IconDatabaseBolt',
             title: 'Managed DuckDB warehouse',
-            url: 'TODO',
+            url: '/customer-data-infrastructure/managed-warehouse',
             badge: 'Beta',
             description:
                 "A single-tenant DuckDB warehouse that's automatically filled with your PostHog data - and anything else you sync in.",
             perfectFor: 'data engineers and analysts',
             showWaitlist: true,
-        },
-        {
-            id: 'shared-clickhouse',
-            icon: 'IconDatabase',
-            title: 'Shared Clickhouse warehouse',
-            url: 'TODO',
-            description: 'Shared warehouse infrastructure for basic warehousing and analysis.',
-            perfectFor: 'founders, product teams, and product analysts',
         },
         {
             id: 'data-import',
@@ -219,6 +211,7 @@ export default function CDP(): JSX.Element {
             id: 'modeling-transformation',
             icon: 'IconShuffle',
             title: 'Data Modeling',
+            badge: 'Beta',
             url: 'customer-data-infrastructure/transformations',
             description: 'Build modular, testable data tables that load in an instant.',
             perfectFor: 'data analysts and product teams',
@@ -349,10 +342,11 @@ export default function CDP(): JSX.Element {
                     It's, quite literally, the best of both worlds.
                 </p>
 
-                <h3>As flexible as you are</h3>
+                <h3>You get the keys to the (data) castle</h3>
                 <p>
-                    You get the keys to the (data) castle. Use our built-in tools to get started quickly, or bring your
-                    own favorite tools to customize your experience.
+                    We give you the credentials to directly access your DuckDB data store for complete flexibility, so
+                    you can bring whatever tooling fits your workflow. We also offer built-in tooling for CDP, data
+                    modeling, and more so you can get started quickly.
                 </p>
 
                 <h3>Data stack products</h3>

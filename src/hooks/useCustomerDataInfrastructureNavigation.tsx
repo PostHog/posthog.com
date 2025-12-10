@@ -15,8 +15,16 @@ export const customerDataInfrastructureNav = {
             name: 'Data tools',
         },
         {
+            name: 'Managed DuckDB warehouse',
+            url: '/customer-data-infrastructure/managed-warehouse',
+        },
+        {
             name: 'Data sources & import (ELT)',
             url: '/customer-data-infrastructure/sources',
+        },
+        {
+            name: 'CDP - TODO',
+            url: '/cdp',
         },
         {
             name: 'Data modeling',
@@ -33,19 +41,6 @@ export const customerDataInfrastructureNav = {
         {
             name: 'Export & reverse ETL',
             url: '/customer-data-infrastructure/destinations',
-        },
-        {
-            name: 'All integrations',
-        },
-        {
-            name: 'CDP integrations library',
-            url: '/cdp',
-            icon: 'IconPlug',
-        },
-        {
-            name: 'Warehouse source library',
-            url: '/docs/data-warehouse/sources',
-            icon: 'IconPlug',
         },
     ],
 }
