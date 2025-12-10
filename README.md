@@ -74,7 +74,8 @@ See full instructions on [developing PostHog.com locally in our manual](https://
 ### Debugging errors on start
 1. Pull the latest changes from `master`
 2. Run `gatsby clean && mkdir .cache & pnpm start` or delete `node_modules` and `.cache`
-3. Check builds are passing in [deployment to Vercel](https://github.com/PostHog/posthog.com/deployments)
+3. Make sure you're not in an activated flox environment for a different project
+4. Check builds are passing in [deployment to Vercel](https://github.com/PostHog/posthog.com/deployments)
 
 ### Working on `/docs/api`?
 
