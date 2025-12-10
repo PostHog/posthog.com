@@ -2596,10 +2596,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
-            name: 'Data import & sources (ELT)',
+            name: 'Data sources & import (ELT)',
             parentIcon: 'dataIn',
             // Icon: IconArrowUpRight,
-            description: 'Data import & sources (ELT)',
+            description: 'Data sources & import (ELT)',
             handle: 'data_in',
             color: 'green',
             colorSecondary: 'lilac',

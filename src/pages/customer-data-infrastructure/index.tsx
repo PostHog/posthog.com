@@ -9,6 +9,7 @@ import {
     IconClock,
     IconDatabase,
     IconDatabaseBolt,
+    IconGraph,
     IconPlug,
     IconShuffle,
 } from '@posthog/icons'
@@ -69,7 +70,7 @@ export default function CDP(): JSX.Element {
         },
         {
             id: 'data-import',
-            icon: 'IconPlug',
+            icon: 'IconArrowRight',
             title: 'Data sources & import (ELT)',
             url: 'customer-data-infrastructure/sources',
             description:
@@ -108,7 +109,7 @@ export default function CDP(): JSX.Element {
         },
         {
             id: 'queries-visualization',
-            icon: 'IconAsterisk',
+            icon: 'IconGraph',
             title: 'Business intelligence (BI)',
             url: '/customer-data-infrastructure/business-intelligence',
             description: 'Visualize your data with interactive dashboards and ad-hoc analyses right in PostHog.',
@@ -250,6 +251,8 @@ export default function CDP(): JSX.Element {
                             IconShuffle,
                             IconAsterisk,
                             IconArrowUpRight,
+                            IconArrowRight,
+                            IconGraph,
                         }
                         const Icon = iconMap[product.icon]
 
