@@ -65,14 +65,41 @@ export default function PMFGame(): JSX.Element {
     const [gameState, setGameState] = useState<GameState>(() => {
         const saved = loadGameState()
         if (saved) {
-            // Ensure all levels exist (in case new levels were added)
+            // Ensure all levels exist and checklist items are up-to-date
             const initialProgress = getInitialLevelProgress()
+            const mergedLevels: typeof initialProgress = {}
+
+            // Merge saved progress with current level definitions
+            for (const levelId of Object.keys(initialProgress)) {
+                const initial = initialProgress[levelId]
+                const savedLevel = saved.levels[levelId]
+
+                if (!savedLevel) {
+                    // New level that wasn't in saved state
+                    mergedLevels[levelId] = initial
+                } else {
+                    // Merge checklist items: use current definitions but preserve completion state
+                    const mergedChecklistItems = initial.checklistItems.map((item) => {
+                        const savedItem = savedLevel.checklistItems.find((s) => s.id === item.id)
+                        return savedItem ? { ...item, completed: savedItem.completed } : item
+                    })
+                    const completedCount = mergedChecklistItems.filter((item) => item.completed).length
+                    const progress =
+                        mergedChecklistItems.length > 0
+                            ? Math.round((completedCount / mergedChecklistItems.length) * 100)
+                            : 0
+
+                    mergedLevels[levelId] = {
+                        ...savedLevel,
+                        checklistItems: mergedChecklistItems,
+                        progress,
+                    }
+                }
+            }
+
             return {
                 ...saved,
-                levels: {
-                    ...initialProgress,
-                    ...saved.levels,
-                },
+                levels: mergedLevels,
             }
         }
         return {
