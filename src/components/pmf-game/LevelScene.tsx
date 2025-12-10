@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { LevelData, Resource, LevelProgress } from '../../data/pmf-game/types'
 import PixelBorder from './PixelBorder'
 import OSButton from 'components/OSButton'
 import * as Icons from '@posthog/icons'
 
-const { IconArrowRight, IconBookmark } = Icons
+const { IconArrowRight, IconBookmark, IconCheck } = Icons
+
+const HANDBOOK_SHOWN_KEY = 'posthog-pmf-game-handbook-shown'
 
 interface LevelSceneProps {
     level: LevelData
@@ -12,6 +14,35 @@ interface LevelSceneProps {
     progress: LevelProgress
     onSaveResource: (resource: Resource) => void
     onCompleteChecklist: (itemId: string) => void
+    savedResourceIds: string[]
+}
+
+function HandbookPopup({ onAccept, onClose }: { onAccept: () => void; onClose: () => void }) {
+    return (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+            <PixelBorder className="bg-white max-w-md p-6 text-center">
+                <img
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Classic_99d80b3b01.png"
+                    alt="Handbook"
+                    className="w-20 h-20 mx-auto mb-4"
+                />
+                <h2 className="text-2xl font-bold mb-2">It's dangerous to go alone!</h2>
+                <p className="text-lg mb-4">Take this.</p>
+                <p className="text-sm opacity-70 mb-6">
+                    The PostHog Handbook contains everything you need to know about building products, running a
+                    startup, and finding product-market fit.
+                </p>
+                <div className="flex flex-col gap-2">
+                    <OSButton variant="primary" size="lg" width="full" onClick={onAccept}>
+                        Add to inventory
+                    </OSButton>
+                    <button onClick={onClose} className="text-sm opacity-50 hover:opacity-100 transition-opacity">
+                        No thanks
+                    </button>
+                </div>
+            </PixelBorder>
+        </div>
+    )
 }
 
 function QuestCard({ quest }: { quest: LevelData['quest'] }) {
@@ -29,12 +60,14 @@ function ContentCard({
     actionLabel = 'Read now',
     saveLabel,
     label,
+    isSaved = false,
 }: {
     resource: Resource
     onSave?: () => void
     actionLabel?: string
     saveLabel?: string
     label?: string
+    isSaved?: boolean
 }) {
     return (
         <PixelBorder className="p-4 flex gap-4">
@@ -57,10 +90,15 @@ function ContentCard({
                 <p className="text-sm opacity-70 line-clamp-2 mt-0.5">{resource.description}</p>
             </div>
             <div className="flex flex-col gap-2 flex-shrink-0">
-                {saveLabel && onSave && (
+                {saveLabel && onSave && !isSaved && (
                     <OSButton variant="secondary" size="sm" onClick={onSave}>
                         <IconBookmark className="size-4" /> {saveLabel}
                     </OSButton>
+                )}
+                {isSaved && (
+                    <span className="text-sm text-green font-medium flex items-center gap-1">
+                        <IconCheck className="size-4" /> Saved
+                    </span>
                 )}
                 <OSButton variant="secondary" size="sm" asLink to={resource.url}>
                     <IconArrowRight className="size-4" /> {actionLabel}
@@ -198,8 +236,14 @@ function MaxWisdom({ wisdom, animation = 'random' }: { wisdom: string; animation
     const [hasStartedTyping, setHasStartedTyping] = React.useState(false)
     const plainText = React.useMemo(() => {
         // Strip HTML tags for character counting
-        // Use regex for SSR compatibility (document doesn't exist on server)
-        return wisdom.replace(/<[^>]*>/g, '')
+        // Use iterative replacement to handle nested/malformed tags (for CodeQL security)
+        let text = wisdom
+        let previous = ''
+        while (text !== previous) {
+            previous = text
+            text = text.replace(/<[^>]*>/g, '')
+        }
+        return text
     }, [wisdom])
 
     React.useEffect(() => {
@@ -278,144 +322,184 @@ function MaxWisdom({ wisdom, animation = 'random' }: { wisdom: string; animation
     )
 }
 
+const HANDBOOK_RESOURCE: Resource = {
+    id: 'posthog-handbook',
+    type: 'handbook',
+    title: 'The PostHog Handbook',
+    description: 'Everything you need to know about building products and finding PMF.',
+    url: '/handbook',
+    image: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Classic_99d80b3b01.png',
+}
+
 export default function LevelScene({
     level,
     levelNumber,
     progress,
     onSaveResource,
     onCompleteChecklist,
+    savedResourceIds,
 }: LevelSceneProps): JSX.Element {
+    const [showHandbookPopup, setShowHandbookPopup] = useState(false)
+
+    // Show handbook popup on first visit to level 1
+    useEffect(() => {
+        if (levelNumber === 1 && typeof window !== 'undefined') {
+            const hasSeenPopup = localStorage.getItem(HANDBOOK_SHOWN_KEY)
+            if (!hasSeenPopup) {
+                // Small delay so it feels intentional
+                const timer = setTimeout(() => setShowHandbookPopup(true), 500)
+                return () => clearTimeout(timer)
+            }
+        }
+    }, [levelNumber])
+
+    const handleAcceptHandbook = () => {
+        onSaveResource(HANDBOOK_RESOURCE)
+        localStorage.setItem(HANDBOOK_SHOWN_KEY, 'true')
+        setShowHandbookPopup(false)
+    }
+
+    const handleCloseHandbook = () => {
+        localStorage.setItem(HANDBOOK_SHOWN_KEY, 'true')
+        setShowHandbookPopup(false)
+    }
+
     const blogs = level.resources.filter((r) => r.type === 'blog')
     const customerStories = level.resources.filter((r) => r.type === 'customer-story')
     const videos = level.resources.filter((r) => r.type === 'video')
     const products = level.products || []
 
     return (
-        <div className="max-w-screen-xl mx-auto">
-            {/* Hero Image with Overlaid Header */}
-            <div className="relative w-full h-96 overflow-hidden">
-                {level.illustration ? (
-                    <div
-                        className="absolute inset-0"
-                        style={{
-                            backgroundImage: `url(${level.illustration})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                        }}
-                    />
-                ) : (
-                    <div className="absolute inset-0 bg-accent dark:bg-accent-dark" />
-                )}
+        <>
+            {showHandbookPopup && <HandbookPopup onAccept={handleAcceptHandbook} onClose={handleCloseHandbook} />}
+            <div className="max-w-screen-xl mx-auto">
+                {/* Hero Image with Overlaid Header */}
+                <div className="relative w-full h-96 overflow-hidden">
+                    {level.illustration ? (
+                        <div
+                            className="absolute inset-0"
+                            style={{
+                                backgroundImage: `url(${level.illustration})`,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                            }}
+                        />
+                    ) : (
+                        <div className="absolute inset-0 bg-accent dark:bg-accent-dark" />
+                    )}
 
-                {/* Dark overlay for text legibility */}
-                <div className="absolute inset-0 bg-black/40" />
+                    {/* Dark overlay for text legibility */}
+                    <div className="absolute inset-0 bg-black/40" />
 
-                {/* Top left: Level number and name */}
-                <div className="absolute top-0 left-0 w-1/2 flex flex-col items-start gap-2 pl-10 py-14">
-                    <PixelBorder as="button" className="px-4 py-2 text-lg hover:bg-yellow-100 bg-white">
-                        LEVEL {String(levelNumber).padStart(2, '0')} ▶
-                    </PixelBorder>
-                    <h1 className=" text-5xl font-bold text-white">{level.name}</h1>
+                    {/* Top left: Level number and name */}
+                    <div className="absolute top-0 left-0 w-1/2 flex flex-col items-start gap-2 pl-10 py-14">
+                        <PixelBorder as="button" className="px-4 py-2 text-lg hover:bg-yellow-100 bg-white">
+                            LEVEL {String(levelNumber).padStart(2, '0')} ▶
+                        </PixelBorder>
+                        <h1 className=" text-5xl font-bold text-white">{level.name}</h1>
+                    </div>
+
+                    {/* Bottom right: Max Wisdom */}
+                    {level.maxWisdom && (
+                        <div className="absolute bottom-8 right-8">
+                            <MaxWisdom wisdom={level.maxWisdom} />
+                        </div>
+                    )}
                 </div>
 
-                {/* Bottom right: Max Wisdom */}
-                {level.maxWisdom && (
-                    <div className="absolute bottom-8 right-8">
-                        <MaxWisdom wisdom={level.maxWisdom} />
-                    </div>
-                )}
-            </div>
-
-            <div className="p-8">
-                {/* Quest Section */}
-                <div className="mb-8">
-                    <PixelBorder
-                        inline
-                        borderColor="#ef4444"
-                        backgroundColor="#ef4444"
-                        className="px-4 py-2 text-white  text-lg"
-                    >
-                        Quest
-                    </PixelBorder>
-                    <div className="mt-4">
-                        <QuestCard quest={level.quest} />
-                    </div>
-                </div>
-
-                {/* Products */}
-                {products.length > 0 && (
+                <div className="p-8">
+                    {/* Quest Section */}
                     <div className="mb-8">
                         <PixelBorder
                             inline
-                            borderColor="#3b82f6"
-                            backgroundColor="#3b82f6"
+                            borderColor="#ef4444"
+                            backgroundColor="#ef4444"
                             className="px-4 py-2 text-white  text-lg"
                         >
-                            Dev tools
+                            Quest
                         </PixelBorder>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 mt-4">
-                            {products.map((resource) => (
-                                <ProductCard key={resource.id} resource={resource} />
-                            ))}
+                        <div className="mt-4">
+                            <QuestCard quest={level.quest} />
                         </div>
                     </div>
-                )}
 
-                {/* Resources Section */}
-                {level.resources.length > 0 && (
-                    <div className="mb-8">
-                        <PixelBorder
-                            inline
-                            borderColor="#22c55e"
-                            backgroundColor="#22c55e"
-                            className="px-4 py-2 text-white  text-lg"
-                        >
-                            Resources
-                        </PixelBorder>
-
-                        {/* Blog Posts */}
-                        {blogs.length > 0 && (
-                            <div className="space-y-4 mb-6 mt-4">
-                                {blogs.map((resource) => (
-                                    <ContentCard
-                                        key={resource.id}
-                                        resource={resource}
-                                        onSave={() => onSaveResource(resource)}
-                                        label="Blog"
-                                        actionLabel="Read now"
-                                        saveLabel="Read later"
-                                    />
+                    {/* Products */}
+                    {products.length > 0 && (
+                        <div className="mb-8">
+                            <PixelBorder
+                                inline
+                                borderColor="#3b82f6"
+                                backgroundColor="#3b82f6"
+                                className="px-4 py-2 text-white  text-lg"
+                            >
+                                Dev tools
+                            </PixelBorder>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 mt-4">
+                                {products.map((resource) => (
+                                    <ProductCard key={resource.id} resource={resource} />
                                 ))}
                             </div>
-                        )}
+                        </div>
+                    )}
 
-                        {/* Customer Stories */}
-                        {customerStories.length > 0 && (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                                {customerStories.map((resource) => (
-                                    <CustomerStoryCard key={resource.id} resource={resource} />
-                                ))}
-                            </div>
-                        )}
+                    {/* Resources Section */}
+                    {level.resources.length > 0 && (
+                        <div className="mb-8">
+                            <PixelBorder
+                                inline
+                                borderColor="#22c55e"
+                                backgroundColor="#22c55e"
+                                className="px-4 py-2 text-white  text-lg"
+                            >
+                                Resources
+                            </PixelBorder>
 
-                        {/* Videos */}
-                        {videos.length > 0 && (
-                            <div className="space-y-4">
-                                {videos.map((resource) => (
-                                    <ContentCard
-                                        key={resource.id}
-                                        resource={resource}
-                                        onSave={() => onSaveResource(resource)}
-                                        label="Video"
-                                        actionLabel="Watch now"
-                                        saveLabel="Watch later"
-                                    />
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                )}
+                            {/* Blog Posts */}
+                            {blogs.length > 0 && (
+                                <div className="space-y-4 mb-6 mt-4">
+                                    {blogs.map((resource) => (
+                                        <ContentCard
+                                            key={resource.id}
+                                            resource={resource}
+                                            onSave={() => onSaveResource(resource)}
+                                            label="Blog"
+                                            actionLabel="Read now"
+                                            saveLabel="Read later"
+                                            isSaved={savedResourceIds.includes(resource.id)}
+                                        />
+                                    ))}
+                                </div>
+                            )}
+
+                            {/* Customer Stories */}
+                            {customerStories.length > 0 && (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                    {customerStories.map((resource) => (
+                                        <CustomerStoryCard key={resource.id} resource={resource} />
+                                    ))}
+                                </div>
+                            )}
+
+                            {/* Videos */}
+                            {videos.length > 0 && (
+                                <div className="space-y-4">
+                                    {videos.map((resource) => (
+                                        <ContentCard
+                                            key={resource.id}
+                                            resource={resource}
+                                            onSave={() => onSaveResource(resource)}
+                                            label="Video"
+                                            actionLabel="Watch now"
+                                            saveLabel="Watch later"
+                                            isSaved={savedResourceIds.includes(resource.id)}
+                                        />
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     )
 }

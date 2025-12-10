@@ -282,6 +282,7 @@ export default function PMFGame(): JSX.Element {
                         progress={levels[currentScene]}
                         onSaveResource={saveResource}
                         onCompleteChecklist={(itemId) => completeChecklistItem(currentScene, itemId)}
+                        savedResourceIds={gameState.inventory.map((r) => r.id)}
                     />
                 )
             }
@@ -314,7 +315,11 @@ export default function PMFGame(): JSX.Element {
                     )}
 
                     {/* Main Content */}
-                    <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
+                    <main
+                        data-scheme="primary"
+                        className="@container flex-1 bg-primary relative h-full overflow-hidden"
+                        id="pmf-game-main"
+                    >
                         <ScrollArea className="h-full">{renderScene()}</ScrollArea>
                     </main>
                 </div>
