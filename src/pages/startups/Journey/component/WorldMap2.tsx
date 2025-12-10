@@ -398,7 +398,7 @@ function WorldMap({ config, onLocationVisit, onLocationClick, showDebug = false,
         onLocationClick?.(location)
 
         if (location.id === currentLocation) {
-            // Already at location - show modal
+            // Already at location - show modal and trigger visit callback
             setModalLocation(location)
             onLocationVisit?.(location)
             location.onVisit?.()
@@ -428,7 +428,6 @@ function WorldMap({ config, onLocationVisit, onLocationClick, showDebug = false,
         // If we arrived at a location, trigger callbacks
         if (arrivedLoc) {
             setDebugInfo(`At: ${arrivedLoc.name}`)
-            setModalLocation(arrivedLoc)
             onLocationVisit?.(arrivedLoc)
             arrivedLoc.onVisit?.()
         }
