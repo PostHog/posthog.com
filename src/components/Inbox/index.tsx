@@ -153,9 +153,9 @@ const QuestionRow = ({
                     }`}
                 >
                     {pinned ? (
-                        <Tooltip trigger={<IconPin className="size-5" />}>Pinned</Tooltip>
+                        <Tooltip trigger={<IconPin className="size-full max-w-5" />}>Pinned</Tooltip>
                     ) : resolved ? (
-                        <Tooltip trigger={<IconCheck className="size-5 text-green" />}>Resolved</Tooltip>
+                        <Tooltip trigger={<IconCheck className="size-full max-w-5 text-green" />}>Resolved</Tooltip>
                     ) : null}
                 </div>
 
