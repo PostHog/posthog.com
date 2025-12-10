@@ -74,7 +74,11 @@ Always link to the status page in ticket responses. Users should be able to chec
 
 ## Creating a macro for the incident
 
-If the incident is likely to generate multiple support tickets (most incidents do), create a [macro](https://posthoghelp.zendesk.com/admin/workspaces/agent-workspace/macros) so the whole team can respond consistently.
+If the incident is likely to generate multiple support tickets (most incidents do), create a [macro](https://posthoghelp.zendesk.com/admin/workspaces/agent-workspace/macros) so the whole team can respond consistently. To create the macro:
+
+1. Clone the [Incident information](https://posthoghelp.zendesk.com/admin/workspaces/agent-workspace/macros/24914978630939) macro as your starting template
+2. Look at the incident number in incident.io (e.g., INC-123)
+3. Add the tag incident/[number] to the macro (e.g., incident/123). This ensures all tickets using this macro are automatically tagged with the incident number for tracking.
 
 The macro should include:
 - A brief description of what we currently understand about the incident
