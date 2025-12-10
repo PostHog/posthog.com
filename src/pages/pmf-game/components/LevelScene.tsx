@@ -197,10 +197,9 @@ function MaxWisdom({ wisdom, animation = 'random' }: { wisdom: string; animation
     const [displayedChars, setDisplayedChars] = React.useState(0)
     const [hasStartedTyping, setHasStartedTyping] = React.useState(false)
     const plainText = React.useMemo(() => {
-        // Strip HTML tags for character counting, but we'll reveal the actual HTML
-        const temp = document.createElement('div')
-        temp.innerHTML = wisdom
-        return temp.textContent || ''
+        // Strip HTML tags for character counting
+        // Use regex for SSR compatibility (document doesn't exist on server)
+        return wisdom.replace(/<[^>]*>/g, '')
     }, [wisdom])
 
     React.useEffect(() => {

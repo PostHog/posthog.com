@@ -66,30 +66,30 @@ function LevelCard({
     )
 }
 
-const OVERWORLD_BG_URL = 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/again2_614c81fc67.png'
+const OVERWORLD_BG_URL = 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Group_10017_8103dadb0f.png'
 
 export default function OverworldScene({ levels, onSelectLevel }: OverworldSceneProps): JSX.Element {
     return (
-        <div className="relative min-h-screen">
+        <div className="relative pb-16">
             {/* Background image - absolute positioned */}
             <div
-                className="absolute inset-0 bg-no-repeat pointer-events-none"
+                className="absolute inset-0 w-full h-full bg-no-repeat pointer-events-none"
                 style={{
                     backgroundImage: `url(${OVERWORLD_BG_URL})`,
-                    backgroundPosition: 'center top',
-                    backgroundSize: '130%',
+                    backgroundPosition: 'center 30%',
+                    backgroundSize: '100% 120%',
                 }}
             />
             {/* Content */}
             <div className="relative max-w-screen-lg mx-auto p-8">
-                <div className="text-center mb-8">
+                <div className="text-center mb-12">
                     <h1 className="text-4xl font-bold mb-2">
                         <span className="line-through italic">Your office</span> World map
                     </h1>
                     <p className="text-lg opacity-70">Select a level to continue your journey towards PMF</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14">
                     {LEVELS.map((level, index) => (
                         <LevelCard
                             key={level.id}
