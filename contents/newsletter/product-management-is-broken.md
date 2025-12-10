@@ -175,7 +175,7 @@ It looks something like this:
 
 ![Design at PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/86068163_7f95_41cf_9028_5eb4aa799db9_1295x1040_9247e766ee.webp)
 
-We also have a [design system](https://storybook.posthog.net/?path=/story/exporter-exporter--trends-bar-breakdown-insight) to help engineers self-serve their design needs and move faster.
+We also have a [design system](https://storybook.dev.posthog.dev/?path=/story/exporter-exporter--trends-bar-breakdown-insight) to help engineers self-serve their design needs and move faster.
 
 ### b. Radically transparent communication
 

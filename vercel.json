@@ -155,6 +155,10 @@
             "source": "/handbook/people/hiring-process/hiring-process",
             "destination": "/handbook/people/hiring-process"
         },
+        {
+            "source": "/handbook/growth/sales/hogpatch",
+            "destination": "/handbook/people/hogpatch"
+        },
         { "source": "/docs/integrate/client/ios/index", "destination": "/docs/libraries/ios" },
         { "source": "/docs/integrate/client/ios", "destination": "/docs/libraries/ios" },
         { "source": "/docs/integrate/client/js/index", "destination": "/docs/libraries/js" },
@@ -663,6 +667,8 @@
         { "source": "/docs/integrate/browser-extension", "destination": "/docs/advanced/browser-extension" },
         { "source": "/docs/integrate/cdp", "destination": "/docs/advanced/cdp" },
         { "source": "/docs/integrate/proxy", "destination": "/docs/advanced/proxy" },
+        { "source": "/docs/advanced/proxy/managed-reverse-proxy", "destination": "/docs/advanced/proxy" },
+        { "source": "/docs/advanced/proxy/troubleshooting", "destination": "/docs/advanced/proxy/proxy-reference" },
         { "source": "/docs/integrate/badge", "destination": "/docs/contribute/badge" },
         { "source": "/docs/integrate/libraries", "destination": "/docs/libraries" },
         { "source": "/docs/data/notifications-and-alerts", "destination": "/docs/product-analytics/subscriptions" },
@@ -695,9 +701,9 @@
         { "source": "/ab-testing/features", "destination": "/experiments" },
         { "source": "/product-os/features", "destination": "/product-os" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/cdp/destinations/webhook" },
-        { "source": "/roadmap/changelog", "destination": "/changelog/2025" },
-        { "source": "/blog/posthog-changelog", "destination": "/changelog/2025" },
-        { "source": "/roadmap/changelog/2023", "destination": "/changelog/2025" },
+        { "source": "/roadmap/changelog", "destination": "/changelog" },
+        { "source": "/blog/posthog-changelog", "destination": "/changelog" },
+        { "source": "/roadmap/changelog/2023", "destination": "/changelog" },
         { "source": "/changelog/2025", "destination": "/changelog" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/apps/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
@@ -1571,6 +1577,10 @@
             "destination": "/docs/error-tracking/issues-and-exceptions"
         },
         {
+            "source": "/docs/error-tracking/nextjs",
+            "destination": "/docs/error-tracking/installation/nextjs"
+        },
+        {
             "source": "/docs/ai-engineering/observability",
             "destination": "/docs/llm-analytics/start-here"
         },
@@ -1655,6 +1665,18 @@
         { "source": "/example-components", "destination": "/handbook/engineering/posthog-com/markdown" },
         { "source": "/handbook/content/components", "destination": "/handbook/engineering/posthog-com/markdown" },
         { "source": "/handbook/engineering/storybook", "destination": "/handbook/engineering/posthog-com/markdown" },
+        {
+            "source": "/handbook/growth/sales/cross-sell-motions",
+            "destination": "/handbook/growth/cross-selling/cross-sell-motions"
+        },
+        {
+            "source": "/handbook/cs-and-onboarding/error-tracking-cross-sell",
+            "destination": "/handbook/growth/cross-selling/error-tracking-cross-sell"
+        },
+        {
+            "source": "/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell",
+            "destination": "/handbook/growth/cross-selling/how-we-upsell-and-cross-sell"
+        },
         { "source": "/startups/[...slug]", "destination": "/startups" }
     ],
     "headers": [
