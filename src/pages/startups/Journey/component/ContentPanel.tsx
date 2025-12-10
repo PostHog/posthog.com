@@ -28,7 +28,7 @@ export default function ContentPanel({
     onCompleteSpace,
 }: ContentPanelProps) {
     return (
-        <div className="border border-light dark:border-dark rounded-lg p-6 min-h-[400px]">
+        <div className="border border-light dark:border-dark rounded-lg min-h-[400px]">
             <AnimatePresence>
                 {!selectedRegion ? (
                     // Welcome state

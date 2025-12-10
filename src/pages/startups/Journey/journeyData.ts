@@ -167,7 +167,7 @@ export const regions: Region[] = [
         theme: 'valley',
         iconName: 'IconGraph',
         iconColor: 'blue',
-        svgCoordinates: { x: 50, y: 400, width: 200, height: 150 },
+        svgCoordinates: { x: 675, y: 650, width: 200, height: 150 },
         order: 1,
         spaces: [
             {
@@ -372,7 +372,7 @@ export const regions: Region[] = [
         theme: 'island',
         iconName: 'IconPerson',
         iconColor: 'teal',
-        svgCoordinates: { x: 300, y: 350, width: 180, height: 140 },
+        svgCoordinates: { x: 900, y: 400, width: 180, height: 140 },
         order: 2,
         spaces: [
             {
@@ -537,7 +537,7 @@ export const regions: Region[] = [
         theme: 'cove',
         iconName: 'IconFunnels',
         iconColor: 'green',
-        svgCoordinates: { x: 520, y: 280, width: 190, height: 160 },
+        svgCoordinates: { x: 225, y: 350, width: 190, height: 160 },
         order: 3,
         spaces: [
             {
@@ -701,7 +701,7 @@ export const regions: Region[] = [
         theme: 'mountain',
         iconName: 'IconTrends',
         iconColor: 'salmon',
-        svgCoordinates: { x: 750, y: 200, width: 200, height: 180 },
+        svgCoordinates: { x: 1000, y: 100, width: 200, height: 180 },
         order: 4,
         spaces: [
             {
@@ -866,7 +866,7 @@ export const regions: Region[] = [
         theme: 'castle',
         iconName: 'IconDatabase',
         iconColor: 'purple',
-        svgCoordinates: { x: 950, y: 100, width: 220, height: 200 },
+        svgCoordinates: { x: 650, y: 10, width: 220, height: 200 },
         order: 5,
         spaces: [
             {

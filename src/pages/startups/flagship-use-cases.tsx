@@ -2,6 +2,7 @@ import React from 'react'
 import Editor from 'components/Editor'
 import { useJourneyStore } from './Journey/journeyStore'
 import { WorldMap, ContentPanel } from './Journey/component'
+import WorldMap2 from './Journey/component/WorldMap2'
 
 function FlagshipUseCases() {
     const {
@@ -58,13 +59,15 @@ function FlagshipUseCases() {
                 </div>
 
                 {/* World Map */}
-                <div className="mb-8">
+                <div className="">
                     <WorldMap
                         selectedRegion={selectedRegion}
                         onSelectRegion={handleSelectRegion}
                         completedSpaces={completedSpaces}
                     />
                 </div>
+
+                <WorldMap2 />
 
                 {/* Content Panel */}
                 <ContentPanel
