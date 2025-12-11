@@ -678,7 +678,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Canada',
         area: 'Vancouver, British Columbia',
-        locationFactor: 0.65,
+        locationFactor: 0.7,
         currency: 'CAD',
     },
     {
@@ -804,7 +804,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Bermuda',
         area: 'All',
-        locationFactor: 0.95,
+        locationFactor: 0.6,
         currency: 'BMD',
     },
     {
@@ -1069,7 +1069,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
         country: 'Bulgaria',
         area: 'All',
         locationFactor: 0.6,
-        currency: 'BGN',
+        currency: 'EUR',
     },
     {
         country: 'Moldova',
@@ -1278,6 +1278,18 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Montenegro',
         area: 'All',
+        locationFactor: 0.6,
+        currency: 'EUR',
+    },
+    {
+        country: 'Belgium',
+        area: 'Everywhere else',
+        locationFactor: 0.6,
+        currency: 'EUR',
+    },
+    {
+        country: 'Belgium',
+        area: 'Brussels',
         locationFactor: 0.6,
         currency: 'EUR',
     },

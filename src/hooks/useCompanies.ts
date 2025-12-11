@@ -3,7 +3,7 @@ import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
 import { Job } from './useJobs'
 import Fuse from 'fuse.js'
-import debounce from 'lodash.debounce'
+import debounce from 'lodash/debounce'
 import { useUser } from './useUser'
 
 export type Filters = Array<

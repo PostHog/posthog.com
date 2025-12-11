@@ -91,6 +91,130 @@ client.alias({
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
+## Contexts
+
+> Requires `posthog-node` version >= 5.17.0.
+
+The Node SDK uses nested contexts for managing state that's shared across events. Contexts are useful for adding properties to multiple events (including exceptions) during a single user's interaction with your product.
+
+You can enter a context using `withContext`:
+
+```node
+posthog.withContext(
+  {
+    distinctId: 'user-123',
+    properties: { transactionId: 'abc123' }
+  },
+  () => {
+    // This event is captured with the distinct ID and properties set above
+    posthog.capture({ event: 'order_processed' })
+  }
+)
+```
+
+Contexts are persisted across function calls. If you enter one and then call a function and capture an event in the called function, it uses the context properties set in the parent context:
+
+```node
+function someFunction() {
+  // When called from `outerFunction`, this event is captured
+  // with transactionId='abc123'
+  posthog.capture({ event: 'order_processed' })
+}
+
+function outerFunction() {
+  posthog.withContext(
+    { properties: { transactionId: 'abc123' } },
+    () => {
+      someFunction()
+    }
+  )
+}
+```
+
+By default, each context inherits from parent contexts. To disable nesting (where child contexts is fresh and has no properties), pass `{ fresh: true }`:
+
+```node
+posthog.withContext( // HIGHLIGHT
+  {
+    properties: {
+      someKey: 'value-1',
+      someOtherKey: 'another-value'
+    }
+  },
+  () => {
+    posthog.withContext( // HIGHLIGHT
+      { properties: { someKey: 'value-2' } },
+      () => {
+        // Captured with someKey='value-2', someOtherKey='another-value'
+        posthog.capture({ event: 'order_processed' })
+      },
+    )
+
+    // Captured with someKey='value-1', someOtherKey='another-value'
+    posthog.capture({ event: 'order_completed' })
+  }
+)
+```
+
+> **Note:** Properties passed directly to `capture` calls override context state in the final event.
+
+### Identification context
+
+Contexts can be associated with a distinct ID:
+
+```node
+posthog.withContext(
+  { distinctId: 'user-123' },
+  () => {
+    // Associated with "user-123"
+    posthog.capture({ event: 'order_processed' })
+
+    // Overrides to "another-user"
+    posthog.capture({
+      distinctId: 'another-user',
+      event: 'order_processed'
+    })
+  }
+)
+```
+
+### Session context
+
+```node
+posthog.withContext(
+  { sessionId: 'some-session' },
+  () => {
+    // Associated with session "some-session"
+    posthog.capture({ event: 'image_uploaded' })
+
+    // Overrides to "next-session"
+    posthog.capture({
+      event: 'image_uploaded',
+      properties: { $sessionId: 'next-session' }
+    })
+  }
+)
+```
+
+### Custom context parameters
+
+```node
+posthog.withContext(
+  { flightNumber: 'TAC313' },
+  () => {
+    // Associated with flightNumber TAC313
+    posthog.capture({ event: 'flight_cancelled' })
+
+    // Overrides to PL7714
+    posthog.capture({
+      event: 'flight_cancelled',
+      properties: { flightNumber: 'PL7714' }
+    })
+  }
+)
+```
+
+
 ## Feature flags
 
 import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
@@ -122,6 +246,10 @@ await client.reloadFeatureFlags()
 
 // Do something with feature flags here
 ```
+
+#### External caching
+
+In multi-worker or edge environments, you can implement custom caching for flag definitions using Redis, Cloudflare KV, or other storage backends. This enables sharing definitions across workers and coordinating fetches. See the [external caching guide](/tutorials/node-external-cache) for details.
 
 ## Experiments (A/B tests)
 

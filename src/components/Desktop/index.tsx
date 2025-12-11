@@ -82,23 +82,23 @@ export const useProductLinks = () => {
         },
         ...(posthogInstance
             ? [
-                  {
-                      label: 'Open app ↗',
-                      Icon: <AppIcon name="computerCoffee" />,
-                      url: 'https://app.posthog.com',
-                      external: true,
-                      source: 'desktop',
-                  },
-              ]
+                {
+                    label: 'Open app ↗',
+                    Icon: <AppIcon name="computerCoffee" />,
+                    url: 'https://app.posthog.com',
+                    external: true,
+                    source: 'desktop',
+                },
+            ]
             : [
-                  {
-                      label: 'Sign up ↗',
-                      Icon: <AppIcon name="compass" />,
-                      url: 'https://app.posthog.com/signup',
-                      external: true,
-                      source: 'desktop',
-                  },
-              ]),
+                {
+                    label: 'Sign up ↗',
+                    Icon: <AppIcon name="compass" />,
+                    url: 'https://app.posthog.com/signup',
+                    external: true,
+                    source: 'desktop',
+                },
+            ]),
     ]
 }
 
@@ -113,13 +113,6 @@ export const apps: AppItem[] = [
         label: 'Changelog',
         Icon: <AppIcon name="invite" />,
         url: '/changelog',
-        source: 'desktop',
-    },
-    {
-        label: 'changelog.mov',
-        Icon: IconChangelogThumb,
-        url: '/changelog-video',
-        className: 'size-14 -my-1',
         source: 'desktop',
     },
     // {

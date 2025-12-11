@@ -159,9 +159,8 @@ export const Content = () => {
                     No credit card is required to get started. You can also set billing limits to avoid any surprise
                     charges.
                 </p>
-                <div className="px-8 rounded-md border-primary border">
-                    <Pricing productType="error_tracking" />
-                </div>
+
+                <Pricing productType="error_tracking" />
 
                 <p>
                     See our <a href="/pricing">pricing page</a> for more details.

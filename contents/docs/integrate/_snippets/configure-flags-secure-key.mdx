@@ -74,4 +74,18 @@ var client = new PostHogClient(
     });
 ```
 
+```java
+import com.posthog.server.PostHog;
+import com.posthog.server.PostHogConfig;
+import com.posthog.server.PostHogInterface;
+
+PostHogConfig config = PostHogConfig.builder("<ph_project_api_key>")
+    .host("<ph_client_api_host>")
+    .personalApiKey("your feature flags secure API key from step 1")
+    .pollIntervalSeconds(30)  // Optional. Measured in seconds. Defaults to 30.
+    .build();
+
+PostHogInterface posthog = PostHog.with(config);
+```
+
 </MultiLanguage>
