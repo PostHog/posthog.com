@@ -52,10 +52,11 @@ export default function DuckDBWaitlistSurvey(): JSX.Element {
             <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-accent dark:bg-dark border border-green rounded-md p-2"
+                className="bg-primary dark:bg-accent border border-green rounded-md p-2"
             >
                 <p className="!m-0 text-green text-xs flex items-center gap-2">
-                    <IconCheckCircle className="h-4 w-4" /> Thanks! You're on the waitlist. We'll be in touch soon.
+                    <IconCheckCircle className="h-4 w-4" />{' '}
+                    <span className="text-primary">Thanks! You're on the waitlist. We'll be in touch soon.</span>
                 </p>
             </motion.div>
         )
@@ -85,7 +86,7 @@ export default function DuckDBWaitlistSurvey(): JSX.Element {
                         placeholder="Enter your email"
                         className={`w-full px-1 py-0.5 text-sm rounded-sm border ${
                             error ? 'border-red' : 'border-primary'
-                        } bg-light outline-none ring-0 focus:ring-0`}
+                        } bg-light outline-none ring-0 focus:ring-0 text-black`}
                         autoComplete="email"
                         autoFocus
                     />
