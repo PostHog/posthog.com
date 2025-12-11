@@ -19,6 +19,11 @@ import { motion } from 'framer-motion'
 const subfeaturesItemCount = 4
 const subfeatures = [
     {
+        title: 'Migration',
+        description: 'Ditch the legacy tools in double quick time with our fully-managed migration services.',
+        icon: <IconPlay />,
+    },
+    {
         title: 'Instrumentation',
         description:
             'Ensure that PostHog is instrumented correctly with your product in line with your tracking and privacy requirements, guided by our experts.',
@@ -34,11 +39,6 @@ const subfeatures = [
         title: 'Integration',
         description: 'Our team will get PostHog integrated into your existing data stack via sources and destinations.',
         icon: <IconWrench />,
-    },
-    {
-        title: 'Migration',
-        description: 'Ditch the legacy tools in double quick time with our fully-managed migration services.',
-        icon: <IconPlay />,
     },
 ]
 
@@ -106,6 +106,40 @@ export const ProfessionalServices = () => {
                     </h2>
                     <h3 className="text-lg sm:text-xl text-center font-medium mb-8 sm:mb-12 px-4">AKA Scope of Work</h3>
                     <div className="grid gap-4 sm:gap-6 md:gap-8 mb-6">
+                        <h3>Migration</h3>
+                        <p>
+                            If you're coming to us from an existing provider, you'll want to bring along your historical
+                            data, and we make that easy.
+                            <ul className={`list-disc m-4`}>
+                                <li>
+                                    We can orchestrate the import of historic analytics data using our automated
+                                    migrators from common vendors
+                                </li>
+                                <li>
+                                    We'll implement the dashboards you have defined already in PostHog, optimising them
+                                    in line with your needs where required
+                                </li>
+                                <li>
+                                    We can also switch feature flags you have already implemented to use PostHog's
+                                    library
+                                </li>
+                            </ul>
+                        </p>
+                        <p>
+                            Here's a non-exhaustive list of the tools we typically migrate users from:
+                            <ul className={`list-disc m-4`}>
+                                <li>Amplitude</li>
+                                <li>Mixpanel</li>
+                                <li>Heap</li>
+                                <li>Fullstory</li>
+                                <li>Hotjar</li>
+                                <li>Pendo</li>
+                                <li>LaunchDarkly</li>
+                                <li>Statsig</li>
+                            </ul>
+                            If your current tool isn't listed - that's not a problem! We can figure out the best
+                            approach for you here.
+                        </p>
                         <h3>Instrumentation</h3>
                         <p>
                             Here, we make sure that PostHog is correctly integrated into your app using one or more of
@@ -155,33 +189,34 @@ export const ProfessionalServices = () => {
                                 <li>Implement workflows to take real-time actions in response to data in PostHog</li>
                             </ul>
                         </p>
-                        <h3>Migration</h3>
-                        <p>
-                            If you're coming to us from an existing provider, you'll want to bring along your historical
-                            data, and we make that easy.
-                            <ul className={`list-disc m-4`}>
-                                <li>
-                                    We can orchestrate the import of historic analytics data using our automated
-                                    migrators from common vendors
-                                </li>
-                                <li>
-                                    We'll implement the dashboards you have defined already in PostHog, optimising them
-                                    in line with your requirements where required
-                                </li>
-                                <li>
-                                    We can also switch feature flags you have already implemented to use PostHog's
-                                    library
-                                </li>
-                            </ul>
-                        </p>
+                    </div>
+                    <div className="flex flex-col-reverse items-center md:flex-row gap-6 md:gap-8 pt-12 sm:pt-16 md:pt-20 mb-12 sm:mb-16 md:mb-20">
+                        <div className="flex-1 text-center md:text-left">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4">
+                                How much, though?
+                                <br />
+                                <span className="text-red dark:text-yellow">Transparent pricing.</span>
+                            </h2>
+                            <p>
+                                Whilst the final amount is dependent on how much help you need from us, you should
+                                expect to add around 20% of your first year credit purchase on top, with a $5k minimum
+                                spend.
+                            </p>
+                        </div>
+                        <aside className="shrink-0 w-full md:w-auto md:basis-[500px] flex justify-center">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/9aa7587cac5d4a105afaf5b34358207fa05c7d1f_202edb1ddc.png"
+                                alt="Thinking hog"
+                                className="w-full max-w-[350px] sm:max-w-[400px] md:max-w-[470px]"
+                            />
+                        </aside>
+                    </div>
+                    <div className="flex justify-center gap-2 mb-12">
+                        <CallToAction href="/talk-to-a-human" type="primary">
+                            Talk to a human
+                        </CallToAction>
                     </div>
                 </section>
-            </div>
-
-            <div className="flex justify-center gap-2 mb-12">
-                <CallToAction href="/talk-to-a-human" type="primary">
-                    Talk to a human
-                </CallToAction>
             </div>
         </>
     )
