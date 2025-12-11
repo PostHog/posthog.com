@@ -2,6 +2,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import * as parser from '@babel/parser'
 import traverse from '@babel/traverse'
+import { dedent } from '../../src/utils'
 
 const INPUT_DIR = './ast-output/mdast'
 const OUTPUT_DIR = './public/docs'
@@ -65,25 +66,6 @@ function loadAst(jsonPath: string) {
     } catch {
         return null
     }
-}
-
-function dedent(str: string): string {
-    const lines = str.split('\n')
-    const nonEmptyLines = lines.filter((l) => l.trim())
-    if (nonEmptyLines.length === 0) return str
-
-    const minIndent = nonEmptyLines.reduce((min, l) => {
-        const indent = l.match(/^\s*/)?.[0].length || 0
-        return Math.min(min, indent)
-    }, Infinity)
-
-    if (minIndent < Infinity && minIndent > 0) {
-        return lines
-            .map((l) => l.slice(minIndent))
-            .join('\n')
-            .trim()
-    }
-    return str.trim()
 }
 
 function extractStringValue(node: any): string | null {
@@ -492,8 +474,18 @@ function nodeToMarkdown(
 
         case 'code': {
             const lang = node.lang || ''
-            const meta = node.meta ? ` ${node.meta}` : ''
-            return `\`\`\`${lang}${meta}\n${node.value}\n\`\`\``
+            let meta = node.meta || ''
+            let prefix = ''
+
+            // Extract file=xxx from meta and use as bold heading
+            const fileMatch = meta.match(/file=(\S+)/)
+            if (fileMatch) {
+                prefix = `**${fileMatch[1]}**\n\n`
+                meta = meta.replace(/file=\S+\s*/, '').trim()
+            }
+
+            const metaSuffix = meta ? ` ${meta}` : ''
+            return `${prefix}\`\`\`${lang}${metaSuffix}\n${node.value}\n\`\`\``
         }
 
         case 'link': {
@@ -622,6 +614,20 @@ function nodeToMarkdown(
                         } catch {
                             // Ignore
                         }
+                    } else {
+                        console.warn(
+                            `[TSX Import] Could not resolve: ${componentName} from "${imports.tsx[componentName]}" (current: ${currentFile})`
+                        )
+                    }
+                }
+
+                // Log if component not found in any imports
+                if (!imports.mdx[componentName] && !imports.tsx[componentName]) {
+                    // Only log if it looks like a custom component (starts with uppercase)
+                    if (componentName[0] === componentName[0].toUpperCase() && componentName !== 'Fragment') {
+                        console.warn(
+                            `[Unknown Component] <${componentName} /> not found in imports (current: ${currentFile})`
+                        )
                     }
                 }
             }
@@ -647,20 +653,6 @@ function nodeToMarkdown(
             }
             return ''
     }
-}
-
-function extractFrontmatter(ast: any) {
-    for (const node of ast.children || []) {
-        if (node.type === 'export' && node.value?.includes('_frontmatter')) {
-            try {
-                const match = node.value.match(/_frontmatter\s*=\s*(\{[^}]+\})/)
-                if (match) return JSON.parse(match[1])
-            } catch {
-                // Ignore
-            }
-        }
-    }
-    return {}
 }
 
 function processFile(jsonPath: string, relativePath: string) {
