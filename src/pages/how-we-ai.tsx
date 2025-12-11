@@ -17,11 +17,11 @@ const them = [
         title: 'The three laws of AI',
         children: (
             <>
-                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10">
+                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10 @3xl:pb-20">
                     <p>
                         <strong>
-                            1. An AI must not obscure its reasoning or, through opacity, allow a user to trust false
-                            outputs
+                            1. PostHog AI must not obscure its reasoning or, through opacity, allow a user to trust
+                            false outputs
                         </strong>
                     </p>
                     <p>
@@ -30,17 +30,17 @@ const them = [
                     </p>
                     <p>
                         <strong>
-                            2. An AI must yield to human judgment, except where such judgment would conflict with the
-                            First Law
+                            2. PostHog AI must yield to human judgment, except where such judgment would conflict with
+                            the First Law
                         </strong>
                     </p>
                     <p>
-                        Treat AI like a really smart intern, not your CTO. You're the expert on your product and users.
+                        Treat it like a really smart intern, not your CTO. You're the expert on your product and users.
                     </p>
                     <p>
                         <strong>
-                            3. An AI must serve to expand human context, as long as such service does not conflict with
-                            the First or Second Laws
+                            3. PostHog AI must serve to expand human context, as long as such service does not conflict
+                            with the First or Second Laws
                         </strong>
                     </p>
                     <p>
@@ -55,7 +55,7 @@ const them = [
                             quality={100}
                             placeholder="blurred"
                             loading="eager"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/demo-form-light.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/404_8e60d94aeb.png"
                             width={270}
                         />
                     </div>
@@ -64,7 +64,7 @@ const them = [
                             quality={100}
                             placeholder="blurred"
                             loading="eager"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/demo-form-dark.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/404_8e60d94aeb.png"
                             width={270}
                         />
                     </div>
@@ -82,8 +82,8 @@ const them = [
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10">
                     <p>
-                        Simply put, we have more data. PostHog captures signals from analytics, session replays, feature
-                        flags, A/B tests, and more.
+                        PostHog AI doesn't run on hunches. It connects the dots across actual data — analytics, event
+                        names, feature flags, session replays.
                     </p>
                     <p>PostHog AI can connect dots across your entire product to arrive at richer conclusions. </p>
                 </div>
@@ -549,45 +549,29 @@ export default function HowWeAI() {
         {
             content: (
                 <div className="prose dark:prose-invert text-primary flex-1 p-8">
-                    <h1 className="m-0 p-0 text-2xl text-secondary">Compare the AI process:</h1>
                     <h2 className="text-4xl !m-0 p-0">
-                        <span className="text-red dark:text-yellow">[Everyone else]</span> vs.{' '}
+                        {' '}
+                        How we do AI at{' '}
                         <span className="inline-flex items-center gap-2 whitespace-nowrap relative top-3">
                             <Logo noText className="h-12 inline-block" /> PostHog
                         </span>
                     </h2>
                     <div className="grid @3xl:grid-cols-2 @3xl:gap-8 items-center @3xl:items-start">
                         <div className="order-2 @3xl:order-1">
-                            <h3>
-                                Call us unhinged, but we believe AI should be transparent, um, <em>transparent?</em>
-                            </h3>
+                            <h3>Put AI to work for you</h3>
                             <p>
-                                Most companies want to feel out how much they can squeeze out of you with AI.{' '}
-                                <strong>PostHog operates differently.</strong> We're more like a utility where you pay
-                                for what you use. No extra markup - everyone pays the same rates (unless you{' '}
-                                <Tooltip
-                                    trigger={
-                                        <span className="relative cursor-help border-b border-dashed border-primary">
-                                            qualify for a discount
-                                        </span>
-                                    }
-                                    delay={0}
-                                >
-                                    <p className="max-w-xs leading-normal pb-0 mb-0">
-                                        Discounts available to early-stage startups, non-profits, and customers who pay
-                                        annually.
-                                    </p>
-                                </Tooltip>
-                                )!
+                                Most AI products promise to automate everything and make you obsolete. PostHog AI works
+                                differently. We're building tools that expand what you can think about, not replace your
+                                thinking.
                             </p>
 
                             <p>
-                                Go with us on a short journey to compare the AI process that most companies follow with
-                                how we do things 'round here.
+                                See how we think about AI at PostHog, and a glimpse of the future we’re building
+                                towards.
                             </p>
 
                             <p className="text-sm text-secondary">
-                                <strong>Next up:</strong> <em>See How PostHog does AI</em>
+                                <strong>Next up:</strong> <em>How PostHog does AI</em>
                             </p>
 
                             <OSButton variant="primary" onClick={() => setSlideIndex(1)}>
@@ -599,7 +583,7 @@ export default function HowWeAI() {
                                 <CloudinaryImage
                                     quality={100}
                                     placeholder="none"
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-light.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_laptop_f21eabc727.png"
                                     loading="eager"
                                     objectPosition="left top"
                                     objectFit="cover"
@@ -609,7 +593,7 @@ export default function HowWeAI() {
                                 <CloudinaryImage
                                     quality={100}
                                     placeholder="none"
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-dark.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_laptop_f21eabc727.png"
                                     loading="eager"
                                     objectPosition="left top"
                                     objectFit="cover"
