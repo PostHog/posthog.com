@@ -11,7 +11,6 @@ const LeftSidebarContent = () => {
 }
 
 export default function DataModeling(): JSX.Element {
-    // TODO: change the name of this file to modeling.tsx and the path from /transformations to /modeling
     return (
         <>
             <SEO

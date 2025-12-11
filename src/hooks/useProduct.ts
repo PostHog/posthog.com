@@ -20,6 +20,7 @@ import {
     IconStickiness,
     IconHogQL,
     IconDatabaseBolt,
+    IconAsterisk,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -2627,11 +2628,11 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             parentIcon: 'SQL',
-            // Icon: IconAsterisk,
+            Icon: IconAsterisk,
             name: 'SQL editor',
             handle: 'visualize',
             type: 'visualize',
-            slug: 'data-warehouse',
+            slug: 'data-stack/sql-editor',
             color: 'purple',
             colorSecondary: 'lilac',
             category: 'data',

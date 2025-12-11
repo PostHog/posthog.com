@@ -32,7 +32,7 @@ export const customerDataInfrastructureNav = {
         },
         {
             name: 'SQL editor',
-            url: '/data-warehouse',
+            url: '/data-stack/sql-editor',
         },
         {
             name: 'Business intelligence (BI)',
