@@ -395,13 +395,13 @@ export const CodeBlock = ({
                     ) : null}
 
                     <div className="shrink-0 ml-auto flex items-center divide-x divide-border dark:divide-border-dark">
-                        {edit && !isEditing && (
+                        {edit && (
                             <div className="relative flex items-center justify-center px-1">
                                 <button
-                                    onClick={() => setIsEditing(true)}
+                                    onClick={() => setIsEditing(!isEditing)}
                                     className="text-muted hover:text-secondary text-sm px-1 py-1 hover:bg-accent border border-transparent hover:border-primary rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                 >
-                                    Edit
+                                    {isEditing ? 'Done' : 'Edit'}
                                 </button>
                             </div>
                         )}
@@ -477,7 +477,6 @@ export const CodeBlock = ({
                             <div className="relative flex items-center justify-center px-1">
                                 <button
                                     onClick={copyToClipboard}
-                                    onMouseDown={(e) => e.preventDefault()}
                                     className="text-muted hover:text-secondary px-1 py-1 hover:bg-accent border border-transparent hover:border-primary rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                     title="Copy to clipboard"
                                 >
