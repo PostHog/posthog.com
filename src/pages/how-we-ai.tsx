@@ -3,8 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
-import { IconArrowRight, IconMinus, IconPlus, IconRedo } from '@posthog/icons'
-import { CSSTransition } from 'react-transition-group'
+import { IconArrowRight, IconMinus, IconPlus } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import Logo from 'components/Logo'
 import { motion } from 'framer-motion'
@@ -15,16 +14,39 @@ import SuggestedLinksBlock from 'components/SuggestedLinksBlock'
 
 const them = [
     {
-        title: 'Extract more info than a stalker',
+        title: 'The three laws of AI',
         children: (
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10">
                     <p>
-                        You click 'contact us' and type in a bunch of personal information that has nothing to do with
-                        your use of the product.
+                        <strong>
+                            1. An AI must not obscure its reasoning or, through opacity, allow a user to trust false
+                            outputs
+                        </strong>
                     </p>
-                    <p>Often times, there's no place to even ask your question.</p>
-                    <p>Your phone number is required, even though they'll respond by email.</p>
+                    <p>
+                        If you can't see how it works, you shouldn't trust it. Chain-of-thought takes up space, but we
+                        show it because sometimes AI gets things wrong.
+                    </p>
+                    <p>
+                        <strong>
+                            2. An AI must yield to human judgment, except where such judgment would conflict with the
+                            First Law
+                        </strong>
+                    </p>
+                    <p>
+                        Treat AI like a really smart intern, not your CTO. You're the expert on your product and users.
+                    </p>
+                    <p>
+                        <strong>
+                            3. An AI must serve to expand human context, as long as such service does not conflict with
+                            the First or Second Laws
+                        </strong>
+                    </p>
+                    <p>
+                        PostHog AI doesn't make decisions for you or act without permission. It exists as a tool to use
+                        at your discretion.
+                    </p>
                 </div>
 
                 <div className="col-span-3 rotate-2 -mt-6 mb-6 relative left-3 @3xl:left-0">
@@ -46,17 +68,24 @@ const them = [
                             width={270}
                         />
                     </div>
+                    <p className="text-xs text-secondary mt-2 text-center">
+                        Isaac Asimov was a science fiction writer a century ahead of his time. His Three Laws of
+                        Robotics governed how robots should behave.
+                    </p>
                 </div>
             </>
         ),
     },
     {
-        title: 'The discovery call of shame',
+        title: 'Get answers you can investigate',
         children: (
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10">
-                    <p>Get booked with a junior rep who decides if you are a worthy human being.</p>
-                    <p>They will ask you the same questions you already filled out on the form.</p>
+                    <p>
+                        Simply put, we have more data. PostHog captures signals from analytics, session replays, feature
+                        flags, A/B tests, and more.
+                    </p>
+                    <p>PostHog AI can connect dots across your entire product to arrive at richer conclusions. </p>
                 </div>
 
                 <div className="col-span-3 -mt-12">
@@ -140,14 +169,15 @@ const them = [
         ),
     },
     {
-        title: '"We don\'t usually do this, but..."',
+        title: 'What makes this possible',
         children: (
             <>
                 <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-12 @3xl:pb-20">
                     <p>
-                        Any legal questions require a ton of time seeking 'approval' and coming back with amazing
-                        special exceptions they made that were 'really painful' when you know it's all BS.
+                        Simply put, we have more data. PostHog captures signals from analytics, session replays, feature
+                        flags, A/B tests, and more.
                     </p>
+                    <p>PostHog AI can connect dots across your entire product to arrive at richer conclusions. </p>
                 </div>
 
                 <div className="col-span-4 -mt-12 pb-4 text-center">
@@ -157,62 +187,6 @@ const them = [
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/decision-makers.png"
                         width={286}
                     />
-                </div>
-            </>
-        ),
-    },
-    {
-        title: 'SaaS contract or War and Peace?',
-        children: (
-            <>
-                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-8 @3xl:pb-20">
-                    <p>
-                        Eventually sign the contract - hopefully you saw the auto-renewal and mandatory price increases
-                        in there! 'Professional services'? Yeah that's just a fancy word for onboarding, but they'll
-                        charge you $$$ for it.
-                    </p>
-                </div>
-
-                <div className="col-span-3 -mt-6">
-                    <CloudinaryImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/contract-negotiation.png"
-                        width={369}
-                    />
-                </div>
-            </>
-        ),
-    },
-    {
-        title: 'The implementation phase of regret',
-        children: (
-            <>
-                <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-12 @3xl:pb-20">
-                    <p>
-                        Spend <strong>a few months (!!)</strong> on implementation with yet another person on their
-                        team, because the person who demoed isn't technical but has to be the person through whom all
-                        comms must flow.
-                    </p>
-                </div>
-
-                <div className="col-span-4 -mt-8 pb-8 -mx-2 @3xl:mx-0">
-                    <div className="dark:hidden">
-                        <CloudinaryImage
-                            quality={90}
-                            placeholder="blurred"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/gantt-chart-light.png"
-                            width={555}
-                        />
-                    </div>
-                    <div className="hidden dark:block">
-                        <CloudinaryImage
-                            quality={90}
-                            placeholder="blurred"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/gantt-chart-dark.png"
-                            width={555}
-                        />
-                    </div>
                 </div>
             </>
         ),
@@ -566,40 +540,6 @@ export default function HowWeAI() {
     const keyboardContainerRef = useRef(null)
     const [closing, setClosing] = useState(false)
 
-    const companies = [
-        'BureaucraticSoft Inc.',
-        'Monolith Enterprises',
-        'RigidWorks Technologies',
-        'StuffyCorp Solutions',
-        'TopDown Tech',
-        'Antiquated Systems Inc.',
-        'DinosaurTech Industries',
-        'HierarchiSoft',
-        'CommandAndControl Systems',
-        'RedTape Solutions',
-    ]
-
-    const [companyName, setCompanyName] = useState('')
-    const [show, setShow] = useState(false)
-    const companyNameRef = useRef(null)
-
-    const updateCompanyName = () => {
-        setShow(false)
-        setTimeout(() => {
-            let newCompanyName
-            do {
-                const randomIndex = Math.floor(Math.random() * companies.length)
-                newCompanyName = companies[randomIndex]
-            } while (newCompanyName === companyName)
-            setCompanyName(newCompanyName)
-            setShow(true)
-        }, 100)
-    }
-
-    useEffect(() => {
-        updateCompanyName()
-    }, [])
-
     const totalSlides = 4
     const isFirst = slideIndex === 0
     const isLast = slideIndex === totalSlides - 1
@@ -642,12 +582,12 @@ export default function HowWeAI() {
                             </p>
 
                             <p>
-                                Go with us on a short journey to compare the AI process that most companies follow
-                                with how we do things 'round here.
+                                Go with us on a short journey to compare the AI process that most companies follow with
+                                how we do things 'round here.
                             </p>
 
                             <p className="text-sm text-secondary">
-                                <strong>Next up:</strong> <em>How [everyone else] does AI</em>
+                                <strong>Next up:</strong> <em>See How PostHog does AI</em>
                             </p>
 
                             <OSButton variant="primary" onClick={() => setSlideIndex(1)}>
@@ -680,35 +620,12 @@ export default function HowWeAI() {
                 </div>
             ),
         },
-        // Slide 2: How AI works at typical companies
+        // Slide 2: How we think about AI
         {
             content: (
                 <div className="flex-1 px-8 py-8">
                     <div className="max-w-5xl mx-auto">
-                        <h2 className="mb-6 text-center text-2xl font-bold">
-                            How the AI process works at{' '}
-                            <div className="inline-block relative after:absolute after:-bottom-5 after:left-0 after:right-8 after:content-['[Typical_bland_enterprise_SaaS_company]'] after:text-xs after:text-secondary after:font-normal after:tracking-normal">
-                                <button
-                                    onClick={updateCompanyName}
-                                    className="absolute right-0.5 bottom-[.15rem] hover:bottom-[0.2rem] active:bottom-[.1rem] z-10 bg-red/15 dark:bg-white/20 p-1 rounded inline-flex cursor-pointer group hover:bg-red/20 dark:hover:bg-white/30 hover:scale-[1.02] active:scale-[.99] transition-transform"
-                                >
-                                    <IconRedo className="size-5 inline-block text-red/90 hover:text-red/100 dark:text-white/70 dark:group-hover:text-white/100" />
-                                </button>
-                                <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mr-8 w-[calc(100vw_-_6rem)] xs:max-w-sm inline-flex gap-2 justify-center relative overflow-hidden">
-                                    <CSSTransition
-                                        in={show}
-                                        timeout={500}
-                                        classNames="company-name"
-                                        unmountOnExit
-                                        nodeRef={companyNameRef}
-                                    >
-                                        <span ref={companyNameRef} className="cursor-default">
-                                            {companyName}
-                                        </span>
-                                    </CSSTransition>
-                                </span>
-                            </div>
-                        </h2>
+                        <h2 className="mb-6 text-center text-2xl font-bold">How we think about AI at PostHog</h2>
                         <div className="not-prose">
                             <Accordion key="them-accordion" items={them} keyboardContainerRef={keyboardContainerRef} />
                         </div>
@@ -716,13 +633,13 @@ export default function HowWeAI() {
                 </div>
             ),
         },
-        // Slide 3: How PostHog does AI
+        // Slide 3: The future we're building towards
         {
             content: (
                 <div className="flex-1 px-8 py-8">
                     <div className="max-w-5xl mx-auto">
                         <h2 className="flex justify-center items-center mb-6 text-2xl font-bold">
-                            How <Logo noText className="inline-block mt-[-2px] ml-2 mr-1.5" /> PostHog does AI
+                            The future we're building towards
                         </h2>
                         <div className="not-prose">
                             <Accordion key="us-accordion" items={us} keyboardContainerRef={keyboardContainerRef} />
@@ -779,9 +696,9 @@ export default function HowWeAI() {
                         {!isLast ? (
                             <CallToAction type="primary" size="sm" onClick={() => setSlideIndex(slideIndex + 1)}>
                                 {slideIndex === 0
-                                    ? 'See how [everyone else] does AI'
-                                    : slideIndex === 1
                                     ? 'See how PostHog does AI'
+                                    : slideIndex === 1
+                                    ? "See the future we're building towards"
                                     : 'Next'}
                             </CallToAction>
                         ) : (
