@@ -249,7 +249,7 @@
     "lint-staged": {
         "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
         "*.{js,ts,tsx}": "eslint",
-        "*.{md,mdx}": "npx markdownlint-cli2 --fix"
+        "*.{md,mdx}": "markdownlint-cli2 --fix"
     },
     "packageManager": "yarn@1.22.19"
 }
