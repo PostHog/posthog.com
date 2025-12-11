@@ -52,15 +52,7 @@ const CodeBlockWrapper = (props: CodeBlockWrapperProps) => {
 
     // Handle blocks array format
     const { blocks } = props
-    const [currentLanguage, setCurrentLanguage] = useState<CodeBlockItem | null>(
-        blocks && blocks.length > 0 ? blocks[0] : null
-    )
-
-    React.useEffect(() => {
-        if (blocks && blocks.length > 0 && (!currentLanguage || !blocks.includes(currentLanguage))) {
-            setCurrentLanguage(blocks[0])
-        }
-    }, [blocks, currentLanguage])
+    const [currentLanguage, setCurrentLanguage] = useState<CodeBlockItem | null>(blocks?.[0] ?? null)
 
     if (!blocks || blocks.length === 0 || !currentLanguage) {
         return null
