@@ -14,64 +14,27 @@ import SuggestedLinksBlock from 'components/SuggestedLinksBlock'
 
 const them = [
     {
-        title: 'The three laws of AI',
+        title: 'Why PostHog AI exists',
         children: (
             <>
-                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10 @3xl:pb-20">
+                <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
+                    <p>Humans have limited working memory (4-7 items).</p>
+                    <p>Products generate overwhelming amounts of data.</p>
+                    <p>Holding all that context in your head is hard - maybe bordeline impossible.</p>
                     <p>
-                        <strong>
-                            1. PostHog AI must not obscure its reasoning or, through opacity, allow a user to trust
-                            false outputs
-                        </strong>
-                    </p>
-                    <p>
-                        If you can't see how it works, you shouldn't trust it. Chain-of-thought takes up space, but we
-                        show it because sometimes AI gets things wrong.
-                    </p>
-                    <p>
-                        <strong>
-                            2. PostHog AI must yield to human judgment, except where such judgment would conflict with
-                            the First Law
-                        </strong>
-                    </p>
-                    <p>
-                        Treat it like a really smart intern, not your CTO. You're the expert on your product and users.
-                    </p>
-                    <p>
-                        <strong>
-                            3. PostHog AI must serve to expand human context, as long as such service does not conflict
-                            with the First or Second Laws
-                        </strong>
-                    </p>
-                    <p>
-                        PostHog AI doesn't make decisions for you or act without permission. It exists as a tool to use
-                        at your discretion.
+                        PostHog AI expands the amount of information a product engineer can consider. Outsourcing some
+                        of your mental load frees up mental capacity for the human stuff:{' '}
+                        <strong>creativity, intuition, and deciding what to build next.</strong>
                     </p>
                 </div>
 
-                <div className="col-span-3 rotate-2 -mt-6 mb-6 relative left-3 @3xl:left-0">
-                    <div className="dark:hidden">
-                        <CloudinaryImage
-                            quality={100}
-                            placeholder="blurred"
-                            loading="eager"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/404_8e60d94aeb.png"
-                            width={270}
-                        />
-                    </div>
-                    <div className="hidden dark:block">
-                        <CloudinaryImage
-                            quality={100}
-                            placeholder="blurred"
-                            loading="eager"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/404_8e60d94aeb.png"
-                            width={270}
-                        />
-                    </div>
-                    <p className="text-xs text-secondary mt-2 text-center">
-                        Isaac Asimov was a science fiction writer a century ahead of his time. His Three Laws of
-                        Robotics governed how robots should behave.
-                    </p>
+                <div className="col-span-4 -mt-4 pb-6 rotate-2">
+                    <CloudinaryImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Untitled_Artwork_560_a6b8f4f9a4.png"
+                        width={436}
+                    />
                 </div>
             </>
         ),
@@ -100,37 +63,20 @@ const them = [
         ),
     },
     {
-        title: 'Finally, a generic demo!',
-        children: (
-            <>
-                <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
-                    <p>
-                        Deemed worthy? They will book you into a further call for a demo with a different person, five
-                        minutes of which will cover what you are specifically interested in.
-                    </p>
-                    <p>No pricing will be revealed. You will be asked the same questions for a third time.</p>
-                </div>
-
-                <div className="col-span-4 -mt-4 pb-6 rotate-2">
-                    <CloudinaryImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/sdr-on-zoom.png"
-                        width={436}
-                    />
-                </div>
-            </>
-        ),
-    },
-    {
-        title: 'The follow up meeting of no hope',
+        title: 'Ask your question (anywhere)',
         children: (
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
-                    <p>It's now time to talk about your usage so they can put together a commercial proposal.</p>
                     <p>
-                        A quote will be provided at a later date because they need to "circle back with the team" to
-                        "see what they can do for you."
+                        You're already in PostHog looking at a dashboard or SQL query. PostHog AI sees what you see, so
+                        you can just... ask.{' '}
+                    </p>
+                    <p>
+                        Watching a session replay where someone's clearly stuck? Ask "are other users having this
+                        problem?"
+                    </p>
+                    <p>
+                        Wondering what happened with that feature flag? Ask "how did this rollout affect conversions?"
                     </p>
                 </div>
 
@@ -146,7 +92,7 @@ const them = [
         ),
     },
     {
-        title: 'Sticker shock',
+        title: 'Who this is for',
         children: (
             <>
                 <div className="col-span-3 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-12 @3xl:pb-20">
@@ -221,6 +167,69 @@ const them = [
                     Get a demo (but not like this one!)
                 </CallToAction>
             </div>
+        ),
+    },
+    {
+        title: 'The three laws of AI',
+        children: (
+            <>
+                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10 @3xl:pb-20">
+                    <p>
+                        <strong>
+                            1. PostHog AI must not obscure its reasoning or, through opacity, allow a user to trust
+                            false outputs
+                        </strong>
+                    </p>
+                    <p>
+                        If you can't see how it works, you shouldn't trust it. Chain-of-thought takes up space, but we
+                        show it because sometimes AI gets things wrong.
+                    </p>
+                    <p>
+                        <strong>
+                            2. PostHog AI must yield to human judgment, except where such judgment would conflict with
+                            the First Law
+                        </strong>
+                    </p>
+                    <p>
+                        Treat it like a really smart intern, not your CTO. You're the expert on your product and users.
+                    </p>
+                    <p>
+                        <strong>
+                            3. PostHog AI must serve to expand human context, as long as such service does not conflict
+                            with the First or Second Laws
+                        </strong>
+                    </p>
+                    <p>
+                        PostHog AI doesn't make decisions for you or act without permission. It exists as a tool to use
+                        at your discretion.
+                    </p>
+                </div>
+
+                <div className="col-span-3 rotate-2 -mt-6 mb-6 relative left-3 @3xl:left-0">
+                    <div className="dark:hidden">
+                        <CloudinaryImage
+                            quality={100}
+                            placeholder="blurred"
+                            loading="eager"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/404_8e60d94aeb.png"
+                            width={270}
+                        />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage
+                            quality={100}
+                            placeholder="blurred"
+                            loading="eager"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/404_8e60d94aeb.png"
+                            width={270}
+                        />
+                    </div>
+                    <p className="text-xs text-secondary mt-2 text-center">
+                        Isaac Asimov was a science fiction writer a century ahead of his time. His Three Laws of
+                        Robotics governed how robots should behave.
+                    </p>
+                </div>
+            </>
         ),
     },
 ]
@@ -566,7 +575,7 @@ export default function HowWeAI() {
                             </p>
 
                             <p>
-                                See how we think about AI at PostHog, and a glimpse of the future we’re building
+                                See how we think about AI at PostHog, and a get glimpse of the future we’re building
                                 towards.
                             </p>
 
