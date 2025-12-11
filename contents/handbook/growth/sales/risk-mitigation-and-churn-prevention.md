@@ -242,7 +242,7 @@ Not every at-risk account can be saved. When a customer churns, write a retro an
 | #customer-churn posts | As needed when flagging risk |
 | At-risk account review meeting | Weekly |
 | Recovery calls with at-risk accounts | Within 48 hours of flagging |
-| Churn retros in #customer-churn-retros | Within 1 week of churn |
+| Churn retros in #customer-churn | Within 1 week of churn |
 
 The best churn prevention is never needing to prevent churn. Build the habits, check implementation health, drive behavioral product adoption, and catch problems early.
 
