@@ -20,7 +20,7 @@ Risk mitigation is about building habits that surface problems before they becom
 
 ### Quarterly account planning
 
-Every AM Managed account should have an Account Plan note created in Vitally once per quarter. This forces you to step back and evaluate the account holistically rather than just reacting to whatever's in front of you.
+Every AM Managed account should have an Account Plan note created in Vitally once per quarter. You should also review this weekly with your manager.  This forces you to step back and evaluate the account holistically rather than just reacting to whatever's in front of you.
 
 **Title format:** `Q[X] Account Plan - [Company Name]`
 
