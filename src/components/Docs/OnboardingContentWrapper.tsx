@@ -50,7 +50,6 @@ const CodeBlockWrapper = (props: CodeBlockWrapperProps) => {
         )
     }
 
-    // Handle blocks array format (same pattern as MdxCodeBlock)
     const { blocks } = props
 
     if (!blocks || blocks.length === 0) {
