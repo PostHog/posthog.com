@@ -415,10 +415,6 @@ export default function CDP(): JSX.Element {
 
                 <h2>Realtime event transformations</h2>
                 <p>
-                    While not a standard warehousing use-case, our realtime event transformations show the power &
-                    simplicity in using PostHog's integrated data warehouse.
-                </p>
-                <p>
                     Our realtime transformation apps and{' '}
                     <Link to="/docs/hog" state={{ newWindow: true }}>
                         Hog functions
