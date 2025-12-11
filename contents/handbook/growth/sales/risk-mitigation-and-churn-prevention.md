@@ -227,7 +227,7 @@ Once flagged, your job is to diagnose and act:
 
 ### When churn happens
 
-Not every at-risk account can be saved. When a customer churns, write a retro and share it in #customer-churn-retros as soon as possible while the details are fresh. See [learn from churn](/handbook/cs-and-onboarding/customer-churn-retros) for the template and guidance.
+Not every at-risk account can be saved. When a customer churns, write a retro and share it in #customer-churn as soon as possible while the details are fresh. See [learn from churn](/handbook/cs-and-onboarding/customer-churn-retros) for the template and guidance.
 
 ---
 
