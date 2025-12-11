@@ -139,63 +139,6 @@ export default function DataModeling(): JSX.Element {
                     <li>Implement data retention policies</li>
                     <li>Apply GDPR/CCPA compliance rules</li>
                 </ul>
-
-                {/* 
-                
-                TODO: this FAQ belongs in the export page, but leaving it here for reference
-                
-                <h2>FAQ</h2>
-
-                <ul>
-                    <li>
-                        <strong>What's the difference between webhooks and batch exports?</strong>
-                        <br />
-                        Webhooks send data in real-time as events happen, perfect for alerts and automation. Batch
-                        exports send data in scheduled chunks, ideal for data warehouses and large-scale processing.
-                    </li>
-                    <li>
-                        <strong>Can I send data to multiple destinations?</strong>
-                        <br />
-                        Yes! Create as many webhook destinations as you need. Each can have different filters and
-                        transformations. Many teams use separate webhooks for alerts, CRM sync, and marketing
-                        automation.
-                    </li>
-                    <li>
-                        <strong>How reliable are webhooks?</strong>
-                        <br />
-                        PostHog automatically retries failed requests up to 3 times. We monitor destination performance
-                        and alert you to issues. For critical data, combine webhooks with batch exports as a backup.
-                    </li>
-                    <li>
-                        <strong>Can I customize the webhook payload?</strong>
-                        <br />
-                        Absolutely. Use our template syntax to shape data exactly how your destination expects it. For
-                        advanced cases, write custom Hog code to transform data however you need.
-                    </li>
-                </ul>
-
-                <h2>Hog FAQ</h2>
-                <ul>
-                    <li>
-                        <strong>How is Hog different from HogQL?</strong>
-                        <br />
-                        HogQL is our SQL dialect for querying data. Hog is a full programming language for transforming
-                        and routing data in real-time. While HogQL queries your data, Hog processes it as it flows
-                        through your pipeline.
-                    </li>
-                    <li>
-                        <strong>Can I test Hog code locally?</strong>
-                        <br />
-                        Yes! Clone the PostHog repo and use `bin/hog` to run .hog files locally. You can also compile to
-                        bytecode with `bin/hoge` for debugging.
-                    </li>
-                    <li>
-                        <strong>Why 1-indexed arrays?</strong>
-                        <br />
-                        Hog is SQL-compatible, and SQL has always used 1-indexed arrays. While it might feel odd coming
-                        from other languages, it ensures consistency with our SQL expressions.
-                    </li>
-                </ul> */}
             </ReaderView>
         </>
     )
