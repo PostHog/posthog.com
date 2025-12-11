@@ -149,7 +149,7 @@ Most churn follows predictable patterns. See [common churn reasons](/handbook/cs
 | **Customer builds internally or switches to competitor** | Drive multi-product adoption. Harder to replace five products than one. |
 | **Poor customer experience** | Stay on top of open issues proactively. Circle back before they have to follow up. Rebuild trust through responsiveness. |
 | **Customer can't extract value** | Offer workshops, training, or hands-on help building specific insights. Don't wait for them to ask. |
-| **Missing critical feature** | Loop in the relevant PM and engineering team. Be transparent about what we can and can't do. |
+| **Missing critical feature** | Loop in the relevant PM and engineering team. Be transparent about what we can and can't do. Make sure the request is also [tracked in Vitally](/handbook/cs-and-onboarding/feature-requests) |
 | **PostHog isn't trusted as source of truth** | Dig into data discrepancies. Often an implementation issue. If they're exporting everything to another tool, they're one step from leaving. |
 | **Privacy/compliance concerns** | Help them understand [data controls](/docs/privacy/data-collection), [masking](/docs/cdp/transformations/template-url-masking), [privacy controls](/docs/session-replay/privacy), [cookieless tracking](/tutorials/cookieless-tracking), and [data deletion](/docs/privacy/data-storage#data-deletion) options. Often they assume they can't use features when they actually can. |
 
