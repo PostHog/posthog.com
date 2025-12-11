@@ -6,7 +6,7 @@ availability:
     enterprise: full
 ---
 
-The [LLM analytics dashboard](https://app.posthog.com/llm-analytics) provides an overview of your LLM usage and performance. It includes insights on:
+The [LLM analytics dashboard](https://app.posthog.com/llm-analytics) provides an overview of your LLM usage and performance. Out of the box, it includes insights on:
 
 - Users
 - Traces
@@ -22,6 +22,18 @@ The [LLM analytics dashboard](https://app.posthog.com/llm-analytics) provides an
 />
 
 It can be filtered like any dashboard in PostHog, including by event, person, and group properties. Our SDKs autocapture especially useful properties like provider, tokens, cost, model, and more.
+
+## Customizing the dashboard
+
+The LLM analytics dashboard is fully customizable. You can add your own insights, add text cards, and more. To customize the dashboard:
+
+1. Head to the [LLM analytics dashboard](https://app.posthog.com/llm-analytics)
+2. Click the **Edit dashboard** button in the top right
+3. Click the **Add text card** button to add labels, or the **Add insight** button to import insights
+
+Learn more about customizing dashboards in our [dashboard docs](/docs/product-analytics/dashboards).
+
+## What can you do with the dashboard?
 
 This dashboard is a great starting point for understanding your LLM usage and performance. You can use it to answer questions like:
 

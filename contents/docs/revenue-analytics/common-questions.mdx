@@ -73,6 +73,29 @@ If your revenue isn't appearing in your revenue analytics dashboard, there are a
 1. **Make sure Revenue tracking is enabled for your Data warehouse source**: Legacy data warehouse sources have revenue tracking disabled by default. Make sure you enable them in the [Revenue tab](https://app.posthog.com/data-management/revenue) in data management. Also, make sure they've finished syncing for the first time.
 1. **Check your filters**: you can choose to filter revenue events in the Revenue analytics dashboard filter, make sure you have selected the desired entries.
 
+## Why isn't currency being converted in my Trends insight?
+
+Currency conversion only happens automatically within **Revenue Analytics** and in the [managed views](/docs/revenue-analytics/managed-views). If you're using Product Analytics (Trends, Funnels, Experiments) with "Sum of Revenue", the raw values are summed without any currency conversion.
+
+**Your options:**
+
+1. **Use the SQL editor** - Query the managed views directly, which have currency already converted in the `amount` field:
+
+```sql
+SELECT
+  toDate(timestamp) as day,
+  sum(amount) as revenue_usd
+FROM revenue_analytics.events.Order_Completed.revenue_analytics_revenue_item
+GROUP BY day
+ORDER BY day
+```
+
+2. **Use a SQL expression in Trends** - Select "SQL expression" as your aggregation and use the `convertCurrency()` function:
+
+```
+sum(convertCurrency(upper(properties.currency), 'USD', toDecimal(properties.revenue, 10), toDate(timestamp)))
+```
+
 ## Can I query converted rates?
 
 Yes, you can query converted rates yourself in SQL using the `convertCurrency` function. This is useful for custom queries and advanced analytics.
