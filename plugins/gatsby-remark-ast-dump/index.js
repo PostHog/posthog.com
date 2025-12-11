@@ -22,6 +22,12 @@ module.exports = ({ markdownAST, markdownNode }, pluginOptions) => {
 
     const outputPath = path.join(outputDir, relativePath.replace(/\.mdx?$/, '.json'))
 
+    // Include frontmatter in output
+    const output = {
+        frontmatter: markdownNode.frontmatter || {},
+        ast: markdownAST,
+    }
+
     fs.ensureDirSync(path.dirname(outputPath))
-    fs.writeFileSync(outputPath, JSON.stringify(markdownAST, null, 2))
+    fs.writeFileSync(outputPath, JSON.stringify(output, null, 2))
 }

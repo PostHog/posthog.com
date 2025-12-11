@@ -57,9 +57,11 @@ function loadAst(jsonPath: string) {
     if (astCache.has(jsonPath)) return astCache.get(jsonPath)
     try {
         const content = fs.readFileSync(jsonPath, 'utf-8')
-        const ast = JSON.parse(content)
-        astCache.set(jsonPath, ast)
-        return ast
+        const parsed = JSON.parse(content)
+        // Handle both old format (just AST) and new format (frontmatter + ast)
+        const result = parsed.ast ? parsed : { frontmatter: {}, ast: parsed }
+        astCache.set(jsonPath, result)
+        return result
     } catch {
         return null
     }
@@ -251,10 +253,25 @@ function extractTsxContent(source: string): any[] {
                             if (content) sections.push({ type: 'markdown', content: dedent(content) })
                         }
                     }
+                } else if (name === 'Step') {
+                    // Extract Step title as H2
+                    const attrs = path.node.openingElement.attributes
+                    for (const attr of attrs) {
+                        if (
+                            attr.type === 'JSXAttribute' &&
+                            attr.name.type === 'JSXIdentifier' &&
+                            attr.name.name === 'title' &&
+                            attr.value?.type === 'StringLiteral'
+                        ) {
+                            sections.push({ type: 'markdown', content: `## ${attr.value.value}` })
+                            break
+                        }
+                    }
                 } else if (name === 'CodeBlock') {
                     const attrs = path.node.openingElement.attributes
                     let language = ''
                     let code = ''
+                    let blocks: any[] = []
 
                     for (const attr of attrs) {
                         if (attr.type !== 'JSXAttribute' || attr.name.type !== 'JSXIdentifier') continue
@@ -267,10 +284,47 @@ function extractTsxContent(source: string): any[] {
                             } else if (attr.value?.type === 'JSXExpressionContainer') {
                                 code = extractStringValue(attr.value.expression) || ''
                             }
+                        } else if (attrName === 'blocks' && attr.value?.type === 'JSXExpressionContainer') {
+                            // Handle blocks={[{language, file, code}, ...]} format
+                            const expr = attr.value.expression
+                            if (expr.type === 'ArrayExpression') {
+                                for (const el of expr.elements) {
+                                    if (el?.type === 'ObjectExpression') {
+                                        let blockLang = ''
+                                        let blockFile = ''
+                                        let blockCode = ''
+                                        for (const prop of el.properties) {
+                                            if (prop.type !== 'ObjectProperty' || prop.key.type !== 'Identifier')
+                                                continue
+                                            const key = prop.key.name
+                                            if (key === 'language' && prop.value.type === 'StringLiteral') {
+                                                blockLang = prop.value.value
+                                            } else if (key === 'file' && prop.value.type === 'StringLiteral') {
+                                                blockFile = prop.value.value
+                                            } else if (key === 'code') {
+                                                blockCode = extractStringValue(prop.value) || ''
+                                            }
+                                        }
+                                        if (blockLang && blockCode) {
+                                            blocks.push({ language: blockLang, file: blockFile, code: blockCode })
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
 
-                    if (language && code) sections.push({ type: 'code', language, content: dedent(code) })
+                    // Handle blocks array format
+                    if (blocks.length > 0) {
+                        for (const block of blocks) {
+                            if (block.file) {
+                                sections.push({ type: 'markdown', content: `### ${block.file}` })
+                            }
+                            sections.push({ type: 'code', language: block.language, content: dedent(block.code) })
+                        }
+                    } else if (language && code) {
+                        sections.push({ type: 'code', language, content: dedent(code) })
+                    }
                 } else if (name === 'table') {
                     const table = extractTable(path.node)
                     if (table) sections.push(table)
@@ -518,9 +572,9 @@ function nodeToMarkdown(
                 if (imports.mdx[componentName]) {
                     const resolved = resolveImportPath(imports.mdx[componentName], currentFile)
                     if (resolved?.type === 'ast') {
-                        const importedAst = loadAst(resolved.path)
-                        if (importedAst) {
-                            results.push(nodeToMarkdown(importedAst, { mdx: {}, tsx: {} }, resolved.path, depth))
+                        const importedData = loadAst(resolved.path)
+                        if (importedData?.ast) {
+                            results.push(nodeToMarkdown(importedData.ast, { mdx: {}, tsx: {} }, resolved.path, depth))
                         }
                     }
                 }
@@ -538,10 +592,15 @@ function nodeToMarkdown(
                                 if (imports.mdx[usedName]) {
                                     const resolved = resolveImportPath(imports.mdx[usedName], currentFile)
                                     if (resolved?.type === 'ast') {
-                                        const snippetAst = loadAst(resolved.path)
-                                        if (snippetAst) {
+                                        const snippetData = loadAst(resolved.path)
+                                        if (snippetData?.ast) {
                                             results.push(
-                                                nodeToMarkdown(snippetAst, { mdx: {}, tsx: {} }, resolved.path, depth)
+                                                nodeToMarkdown(
+                                                    snippetData.ast,
+                                                    { mdx: {}, tsx: {} },
+                                                    resolved.path,
+                                                    depth
+                                                )
                                             )
                                         }
                                     }
@@ -592,18 +651,27 @@ function extractFrontmatter(ast: any) {
 }
 
 function processFile(jsonPath: string, relativePath: string) {
-    const ast = loadAst(jsonPath)
-    if (!ast) return
+    const data = loadAst(jsonPath)
+    if (!data) return
 
-    const frontmatter = extractFrontmatter(ast)
+    const { frontmatter, ast } = data
     const markdown = nodeToMarkdown(ast, { mdx: {}, tsx: {} }, relativePath)
 
     let cleaned = markdown.replace(/\n{3,}/g, '\n\n').trim()
-    if (frontmatter.title && !cleaned.startsWith('# ')) {
-        cleaned = `# ${frontmatter.title}\n\n${cleaned}`
+
+    // Add H1 title from frontmatter if not already present
+    const title = frontmatter?.title || frontmatter?.sidebarTitle
+    if (title && !cleaned.startsWith('# ')) {
+        cleaned = `# ${title}\n\n${cleaned}`
     }
 
-    const outputPath = path.join(OUTPUT_DIR, relativePath.replace(/\.json$/, '.md'))
+    // Convert dir/index.json -> dir.md (not dir/index.md)
+    let outputRelPath = relativePath.replace(/\.json$/, '.md')
+    if (outputRelPath.endsWith('/index.md')) {
+        outputRelPath = outputRelPath.replace(/\/index\.md$/, '.md')
+    }
+
+    const outputPath = path.join(OUTPUT_DIR, outputRelPath)
     fs.ensureDirSync(path.dirname(outputPath))
     fs.writeFileSync(outputPath, cleaned)
 }
