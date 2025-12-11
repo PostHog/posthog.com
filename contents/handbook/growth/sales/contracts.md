@@ -160,4 +160,4 @@ In some cases, prospective or current customers require a mutual Non-disclosure 
 - When document is complete, it will be stored in the Document library and can also be attached to the Salesforce account for future reference
 
 ### Trust center approvals
-Requests that originate from the [Trust Center](https://trust.posthog.com/) automatically get sent an NDA in the request from SafeBase to PandaDoc. Follow the agreement until signing and access should automatically be approved once completed. 
+Requests that originate from the [Trust Center](https://trust.posthog.com/) automatically get sent an NDA in the request from SafeBase to PandaDoc. Once the document is fully signed, access will automatically be granted. 
