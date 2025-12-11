@@ -22,7 +22,7 @@ export const categoryOrder = [
 
 // Display names for categories
 export const categoryDisplayNames: Record<string, string> = {
-    data: 'Customer data infrastructure',
+    data: 'PostHog data stack',
     product_engineering: 'Product engineering',
     analytics: 'Analytics dashboards',
     dataviz: 'Data visualization',
@@ -49,7 +49,7 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
 // Product ordering within categories
 // Products not listed here will be sorted alphabetically
 export const productOrder: Record<string, string[]> = {
-    data: ['customer-data-infrastructure', 'integrations', 'data_in', 'transformations', 'visualize', 'data_out'],
+    data: ['data-stack', 'integrations', 'data_in', 'transformations', 'visualize', 'data_out'],
     product_engineering: ['session_replay', 'experiments', 'feature_flags', 'error_tracking', 'early_access'],
     analytics: [
         'web_analytics',
@@ -91,28 +91,28 @@ export const nonProductPages = {
         icon: 'IconAsterisk',
         color: 'purple',
     },
-    'customer-data-infrastructure': {
-        slug: 'customer-data-infrastructure',
-        url: '/customer-data-infrastructure',
+    'data-stack': {
+        slug: 'data-stack',
+        url: '/data-stack',
         icon: 'IconDocument',
         color: 'blue',
         description: 'CDP manifesto',
     },
-    'customer-data-infrastructure/sources': {
-        slug: 'customer-data-infrastructure/sources',
-        url: '/customer-data-infrastructure/sources',
+    'data-stack/sources': {
+        slug: 'data-stack/sources',
+        url: '/data-stack/sources',
         icon: 'IconArrowRight',
         color: 'orange',
     },
-    'customer-data-infrastructure/data-modeling': {
-        slug: 'customer-data-infrastructure/data-modeling',
-        url: '/customer-data-infrastructure/data-modeling',
+    'data-stack/data-modeling': {
+        slug: 'data-stack/data-modeling',
+        url: '/data-stack/data-modeling',
         icon: 'IconRefresh',
         color: 'green',
     },
-    'customer-data-infrastructure/export-reverse-etl': {
-        slug: 'customer-data-infrastructure/export-reverse-etl',
-        url: '/customer-data-infrastructure/export-reverse-etl',
+    'data-stack/export-reverse-etl': {
+        slug: 'data-stack/export-reverse-etl',
+        url: '/data-stack/export-reverse-etl',
         icon: 'IconDecisionTree',
         color: 'purple',
     },
@@ -242,7 +242,7 @@ export function buildCategoryMenuItems(category: string, allProducts: any[]): an
 // Helper function to build menu items for all products sorted alphabetically
 export function buildAllProductsMenuItems(allProducts: any[]): any[] {
     // Handles to filter out
-    const filteredHandles = ['ai', 'annika', 'marius', 'customer-data-infrastructure', 'data_in', 'data_out']
+    const filteredHandles = ['ai', 'annika', 'marius', 'data-stack', 'data_in', 'data_out']
 
     // Label overrides by slug
     const labelOverrides: Record<string, string> = {

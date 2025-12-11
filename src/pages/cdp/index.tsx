@@ -405,8 +405,8 @@ export default function CDP(): JSX.Element {
                     className="not-prose @lg:float-right @lg:max-w-[250px] @xl:max-w-[300px] @lg:ml-4"
                 />
                 <p>
-                    PostHog's customer data infrastructure (or you can call it our CDP or customer data platform) makes
-                    it easy to import data from a warehouse, sync with event data, and export to other products.
+                    PostHog's CDP makes it easy to transform events as they arrive, and sync them over to other services
+                    that you use to run your business.
                 </p>
                 <p>
                     Any event or action in PostHog can update user records or trigger workflows in other products in

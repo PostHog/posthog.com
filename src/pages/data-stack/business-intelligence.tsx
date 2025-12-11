@@ -85,7 +85,7 @@ export default function BusinessIntelligence(): JSX.Element {
     return (
         <>
             <SEO
-                title="Business Intelligence (BI) - Customer data infrastructure - PostHog"
+                title="Business Intelligence (BI) - PostHog data stack"
                 description="Learn about our business intelligence capabilities."
                 image="images/og/cdp.jpg"
             />

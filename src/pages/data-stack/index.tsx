@@ -61,7 +61,7 @@ export default function CDP(): JSX.Element {
             id: 'managed-duckdb',
             icon: 'IconDatabaseBolt',
             title: 'Managed DuckDB warehouse',
-            url: '/customer-data-infrastructure/managed-warehouse',
+            url: '/data-stack/managed-warehouse',
             badge: 'Beta',
             description:
                 "A single-tenant DuckDB warehouse that's automatically filled with your PostHog data - and anything else you sync in.",
@@ -72,7 +72,7 @@ export default function CDP(): JSX.Element {
             id: 'data-import',
             icon: 'IconArrowRight',
             title: 'Data sources & import (ELT)',
-            url: 'customer-data-infrastructure/sources',
+            url: 'data-stack/sources',
             description:
                 'Use our bulk import sources to get data into your warehouse, including data from databases, ad platforms, SaaS tools, and more.',
             perfectFor: 'product teams, data engineers, and analysts',
@@ -90,7 +90,7 @@ export default function CDP(): JSX.Element {
             icon: 'IconShuffle',
             title: 'Data Modeling',
             badge: 'Beta',
-            url: 'customer-data-infrastructure/data-modeling',
+            url: 'data-stack/data-modeling',
             description: 'Build modular, testable data tables that load in an instant.',
             perfectFor: 'data analysts and product teams',
             notReadyFor:
@@ -111,7 +111,7 @@ export default function CDP(): JSX.Element {
             id: 'queries-visualization',
             icon: 'IconGraph',
             title: 'Business intelligence (BI)',
-            url: '/customer-data-infrastructure/business-intelligence',
+            url: '/data-stack/business-intelligence',
             description: 'Visualize your data with interactive dashboards and ad-hoc analyses right in PostHog.',
             perfectFor: 'product teams',
             notReadyFor:
@@ -122,7 +122,7 @@ export default function CDP(): JSX.Element {
             icon: 'IconArrowUpRight',
             title: 'Export & Reverse ETL',
             badge: 'Beta',
-            url: '/customer-data-infrastructure/export-reverse-etl',
+            url: '/data-stack/export-reverse-etl',
             description: 'Get data out to the tools that run your business with reverse ETL & batch exports.',
             perfectFor: 'data engineers, product teams, and marketing teams',
         },
@@ -131,9 +131,9 @@ export default function CDP(): JSX.Element {
     return (
         <>
             <SEO
-                title="Customer data infrastructure - PostHog"
+                title="PostHog data stack"
                 updateWindowTitle={false}
-                description="Get all your data into PostHog with 60+ sources & destinations"
+                description="Your modern data stack, powered by PostHog and built on DuckDB"
                 image={`images/og/cdp.jpg`}
             />
             <ReaderView
@@ -150,7 +150,7 @@ export default function CDP(): JSX.Element {
                                 imgClassName="max-w-[542px] w-full mx-auto"
                             />
                             <h2 className="text-xl @md/reader-content-container:text-2xl font-bold m-4 text-center pb-4">
-                                Your modern data stack on <span className="line-through">crack</span> DuckDB
+                                Your modern data stack on <span className="line-through">quack</span> DuckDB
                             </h2>
                         </>
                     ),
@@ -161,7 +161,7 @@ export default function CDP(): JSX.Element {
                 TODO: Re-add this product grid later? I like it but don't have time to make it show the correct things right now.
                 
                 <div className="@2xl:float-right @2xl:w-[23.5rem] @2xl:ml-4 @3xl:ml-12">
-                    <Fieldset legend="Customer data infrastructure">
+                    <Fieldset legend="PostHog data stack">
                         <div
                             className={`not-prose grid grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-y-4 gap-x-1 relative [&>div]:mx-auto [&_figure]:text-center`}
                         >

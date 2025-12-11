@@ -1,26 +1,26 @@
 import { navigate } from 'gatsby'
 
 export const customerDataInfrastructureNav = {
-    name: 'Customer data infrastructure',
-    url: '/customer-data-infrastructure',
+    name: 'PostHog data stack',
+    url: '/data-stack',
     children: [
         {
-            name: 'Customer data infrastructure',
+            name: 'PostHog data stack',
         },
         {
             name: 'Overview',
-            url: '/customer-data-infrastructure',
+            url: '/data-stack',
         },
         {
             name: 'Data tools',
         },
         {
             name: 'Managed DuckDB warehouse',
-            url: '/customer-data-infrastructure/managed-warehouse',
+            url: '/data-stack/managed-warehouse',
         },
         {
             name: 'Data sources & import (ELT)',
-            url: '/customer-data-infrastructure/sources',
+            url: '/data-stack/sources',
         },
         {
             name: 'CDP',
@@ -28,7 +28,7 @@ export const customerDataInfrastructureNav = {
         },
         {
             name: 'Data modeling',
-            url: '/customer-data-infrastructure/data-modeling',
+            url: '/data-stack/data-modeling',
         },
         {
             name: 'SQL editor',
@@ -36,11 +36,11 @@ export const customerDataInfrastructureNav = {
         },
         {
             name: 'Business intelligence (BI)',
-            url: '/customer-data-infrastructure/business-intelligence',
+            url: '/data-stack/business-intelligence',
         },
         {
             name: 'Export & reverse ETL',
-            url: '/customer-data-infrastructure/export-reverse-etl',
+            url: '/data-stack/export-reverse-etl',
         },
     ],
 }
