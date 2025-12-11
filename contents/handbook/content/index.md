@@ -122,4 +122,4 @@ You can promote your post by buying sponsored slots in newsletters. <TeamMember 
 
 If you want to run a paid ad campaign on Reddit, Google, or Twitter, see the [paid ads page](/handbook/growth/marketing/paid-ads).
 
-It's a good idea to create an issue highlighting what you'd like to achieve in your campaign. Here's an [example](https://github.com/PostHog/posthog.com/issues/9646)
+It's a good idea to create an issue highlighting what you'd like to achieve in your campaign. Here's an [example](https://github.com/PostHog/posthog.com/issues/9646).

@@ -94,9 +94,19 @@ Or in the same modal, click **Edit the selector** to use our element picker to b
 <ProductVideo
     videoLight = {toolbarSelectEditLight}
     videoDark = {toolbarSelectEditDark}
-    alt="The selector modal being used to discover the more meaningful selector" 
+    alt="The selector modal being used to discover the more meaningful selector"
     classes = {"rounded"}
 />
+
+#### Using data attributes for stable selectors
+
+Selectors based on CSS classes or element position (like `:nth-child`) can break when your site's markup changes. For more reliable tracking, add a `data-*` attribute to elements you want to track:
+
+```html
+<button data-ph-capture="signup-button">Sign up</button>
+```
+
+You can use any `data-*` attribute name you prefer, such as `data-analytics`, `data-track`, or `data-ph-capture`. PostHog will detect these and use them to build more stable selectors.
 
 ## Viewing your existing actions
 

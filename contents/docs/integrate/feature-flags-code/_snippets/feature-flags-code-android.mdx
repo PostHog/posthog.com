@@ -38,7 +38,7 @@ import com.posthog.android.PostHogAndroidConfig
 import com.posthog.PostHogOnFeatureFlags
 
 // During SDK initialization
-val config = PostHogAndroidConfig("<ph_project_api_key>").apply {
+val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
     onFeatureFlags = PostHogOnFeatureFlags {
         if (PostHog.isFeatureEnabled("flag-key")) {
             // do something

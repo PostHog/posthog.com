@@ -189,6 +189,14 @@
         "profile_id": 27755
     },
     {
+        "handle": "alex-lebedev",
+        "name": "Alex Lebedev",
+        "role": "Product Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/nightowlcoder/",
+        "profile_id": 33371
+    },
+    {
         "handle": "harry-waye",
         "name": "Harry Waye",
         "role": "Software Engineer",
@@ -485,5 +493,13 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/oliver-browne-6a37a513a/",
         "profile_id": 30942
+    },
+    {
+        "handle": "jina-yoon",
+        "name": "Jina Yoon",
+        "role": "Technical Content Marketer",
+        "link_type": "linkedin",
+        "link_url": "https://linkedin.com/in/jinayoon963",
+        "profile_id": 38655
     }
 ]

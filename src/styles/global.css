@@ -1973,6 +1973,14 @@ li.squeak-left-border {
     transform-style: preserve-3d;
 }
 
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.backface-hidden {
+    backface-visibility: hidden;
+}
+
 .tw-tweet + .tw-tweet {
     @apply before:absolute before:w-px before:bg-border before:bottom-[calc(100%_+_1px)] before:-top-8 before:left-10;
 }
@@ -2577,6 +2585,17 @@ article.reader-view-content-container:has(.quest-sidebar) {
 .reader-content-container {
     iframe {
         @apply w-full aspect-video; /* attempt to make youtube videos full width with hopefully no negative consequences... */
+    }
+}
+
+.product-description {
+    ul,
+    ol {
+        @apply mb-3 pl-4;
+
+        li {
+            @apply list-disc;
+        }
     }
 }
 
