@@ -50,21 +50,14 @@ const CodeBlockWrapper = (props: CodeBlockWrapperProps) => {
         )
     }
 
-    // Handle blocks array format
+    // Handle blocks array format (same pattern as MdxCodeBlock)
     const { blocks } = props
-    const [currentLanguage, setCurrentLanguage] = useState<CodeBlockItem | null>(
-        blocks && blocks.length > 0 ? blocks[0] : null
-    )
 
-    React.useEffect(() => {
-        if (blocks && blocks.length > 0 && (!currentLanguage || !blocks.includes(currentLanguage))) {
-            setCurrentLanguage(blocks[0])
-        }
-    }, [blocks, currentLanguage])
-
-    if (!blocks || blocks.length === 0 || !currentLanguage) {
+    if (!blocks || blocks.length === 0) {
         return null
     }
+
+    const [currentLanguage, setCurrentLanguage] = useState(blocks[0])
 
     return (
         <CodeBlock currentLanguage={currentLanguage} onChange={setCurrentLanguage}>
