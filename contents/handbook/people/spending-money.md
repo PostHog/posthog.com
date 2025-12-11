@@ -81,25 +81,19 @@ We enforce the use of hardware security keys wherever we can. Every team member 
 
 ### Laptop
 
-We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. You should use an Apple laptop unless there is an exceptional reason why you can't, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.  
+We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. We will issue you with an Apple laptop unless there is an exceptional reason why you can't use one, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.  
 
-Below are general guidelines for the laptop configurations currently recommended, by role. The most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines please ask Fraser for approval prior to making the purchase.
+Below are general guidelines for the laptop configurations currently recommended, by role. If your requirements are different or you feel that the model is not appropriate for your needs please reach out to the People & Ops team
 
-* For engineering roles (product & support), we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. We recommend the 1TB SSD drive in order to make sure you have enough space to run the full stack locally.
-* For sales roles, we recommend a Macbook Pro 14-inch M4, with 10-core GPU, 16-core and the 32GB RAM upgrade. Again, grab the smallest SSD (512gb)
-* All other roles, we currently recommend a Macbook Air with the latest Apple Silicon processor and 16GB of RAM.
+* For engineering roles we provide a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. We also get the 1TB SSD drive in order to make sure you have enough space to run the full stack locally.
+* For sales roles, we provide a Macbook Pro 14-inch M4, with 10-core GPU, 16-core and the 32GB RAM upgrade, with 512GB SSD.
+* All other roles, we provide a Macbook Air with the latest Apple Silicon processor and 16GB of RAM.
 
-Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen that meets our suggested monitor specs below. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
+The larger screen sizes (15 inches +), are disproportionately more expensive and are not required if supported by a second screen that meets our suggested monitor specs below. 
 
-> You need to purchase a laptop with an English keyboard configuration (US, International or British is fine) - this enables us to easily pass your laptop on to someone else if you upgrade or leave. Please do not purchase any other type.
+We supply all laptops with an English keyboard configuration (US, International or British) - this enables us to easily pass your laptop on to someone else if you upgrade or leave. 
 
-If you are in the US only, make Apple purchases through Brex as we can get 3% cashback on the amount. This happens automatically on the backend. Don't do this if you're in the UK though - use your Revolut card as we claim back the VAT. 
-
-Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple. If you buy from Apple, you may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
-
-> You can request a spend limit to buy a new laptop if your laptop is over 4 years old or significantly impacting your productivity - you can do this in Brex. We do ask that you do some diligence to make sure it's not a setup issue though - ie other applications aren't hogging the memory, etc.
->
-> If you are having issues with your laptop before your laptop is old enough and a genuine exception needs to be made, drop a note in the #team-people-and-ops channel. 
+If your laptop is over 4 years old or significantly impacting your productivity - you can reach out to the #team-people-and-ops channel to request an upgrade. We do ask that you do some diligence to make sure it's not a setup issue though - ie other applications aren't hogging the memory, etc. 
 
 ### Monitor
 
