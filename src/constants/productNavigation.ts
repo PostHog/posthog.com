@@ -85,18 +85,11 @@ export const nonProductPages = {
         icon: 'IconPlug',
         color: 'sky-blue',
     },
-    'data-warehouse': {
-        slug: 'data-warehouse',
-        url: '/data-warehouse',
-        icon: 'IconAsterisk',
-        color: 'purple',
-    },
     'data-stack': {
         slug: 'data-stack',
         url: '/data-stack',
-        icon: 'IconDocument',
-        color: 'blue',
-        description: 'CDP manifesto',
+        icon: 'IconAsterisk',
+        color: 'purple',
     },
     'data-stack/sources': {
         slug: 'data-stack/sources',

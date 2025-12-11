@@ -100,7 +100,7 @@ export default function CDP(): JSX.Element {
             id: 'queries-visualization',
             icon: 'IconAsterisk',
             title: 'SQL editor',
-            url: '/data-warehouse',
+            url: '/data-stack/sql-editor',
             description:
                 'Explore your data with SQL, build business intelligence dashboards, and visualize key metrics.',
             perfectFor: 'product teams',

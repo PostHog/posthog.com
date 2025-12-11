@@ -5160,10 +5160,10 @@ export const productMenu = {
             category: 'tools',
         },
         {
-            name: 'Data warehouse',
+            name: 'Data Stack',
             icon: 'IconDatabase',
             color: 'lilac',
-            url: '/data-warehouse',
+            url: '/data-stack',
             slug: 'data-warehouse',
         },
         {
