@@ -389,14 +389,21 @@ function tsxSectionsToMarkdown(sections: any[]): string {
 
 function resolveImportPath(importPath: string, currentFile: string) {
     let normalized = importPath.replace(/^['"]|['"]$/g, '').replace(/\.(mdx|md)$/, '')
+
+    // Convert currentFile to relative path if it's a full path
+    let currentRelative = currentFile
+    if (currentFile.includes(INPUT_DIR)) {
+        currentRelative = currentFile.replace(INPUT_DIR + '/', '').replace(/\.json$/, '')
+    }
+
     if (normalized.startsWith('.')) {
-        const currentDir = path.dirname(currentFile)
+        const currentDir = path.dirname(currentRelative)
         normalized = path.normalize(path.join(currentDir, normalized))
     }
 
     for (const ext of ['', '.mdx', '.md']) {
         const key = normalized + ext
-        if (astIndex.has(key)) return { type: 'ast', path: astIndex.get(key)! }
+        if (astIndex.has(key)) return { type: 'ast', path: astIndex.get(key)!, relativePath: normalized }
     }
 
     const parts = normalized.split('/')
@@ -404,7 +411,7 @@ function resolveImportPath(importPath: string, currentFile: string) {
     const snippetPath = [...parts, '_snippets', filename].join('/')
     for (const ext of ['', '.mdx', '.md']) {
         const key = snippetPath + ext
-        if (astIndex.has(key)) return { type: 'ast', path: astIndex.get(key)! }
+        if (astIndex.has(key)) return { type: 'ast', path: astIndex.get(key)!, relativePath: snippetPath }
     }
 
     return null
@@ -574,8 +581,14 @@ function nodeToMarkdown(
                     if (resolved?.type === 'ast') {
                         const importedData = loadAst(resolved.path)
                         if (importedData?.ast) {
-                            results.push(nodeToMarkdown(importedData.ast, { mdx: {}, tsx: {} }, resolved.path, depth))
+                            results.push(
+                                nodeToMarkdown(importedData.ast, { mdx: {}, tsx: {} }, resolved.relativePath, depth)
+                            )
                         }
+                    } else {
+                        console.warn(
+                            `[MDX Import] Could not resolve: ${componentName} from "${imports.mdx[componentName]}" (current: ${currentFile})`
+                        )
                     }
                 }
 
@@ -598,7 +611,7 @@ function nodeToMarkdown(
                                                 nodeToMarkdown(
                                                     snippetData.ast,
                                                     { mdx: {}, tsx: {} },
-                                                    resolved.path,
+                                                    resolved.relativePath,
                                                     depth
                                                 )
                                             )
