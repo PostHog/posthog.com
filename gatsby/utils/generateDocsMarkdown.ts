@@ -200,11 +200,41 @@ function extractTable(tableNode: any): { type: string; rows: string[][] } | null
     return null
 }
 
+function extractTabKey(expr: any): string | null {
+    // Match patterns like: l.key === 'Node.js'
+    if (
+        expr.type === 'BinaryExpression' &&
+        expr.operator === '===' &&
+        expr.left?.type === 'MemberExpression' &&
+        expr.left?.property?.name === 'key' &&
+        expr.right?.type === 'StringLiteral'
+    ) {
+        return expr.right.value
+    }
+    return null
+}
+
 function extractTsxContent(source: string): any[] {
     const sections: any[] = []
     try {
         const ast = parser.parse(source, { sourceType: 'module', plugins: ['jsx', 'typescript'] })
         traverse(ast, {
+            // Handle conditional tab panels: {l.key === 'Node.js' && (<>...</>)}
+            LogicalExpression(path) {
+                if (path.node.operator !== '&&') return
+
+                const tabKey = extractTabKey(path.node.left)
+                if (!tabKey) return
+
+                // Add H2 header for tab
+                sections.push({ type: 'markdown', content: `## ${tabKey}` })
+
+                // Extract content from the right side (the JSX)
+                const right = path.node.right
+                if (right.type === 'JSXElement' || right.type === 'JSXFragment') {
+                    // Will be processed by JSXElement visitor
+                }
+            },
             JSXElement(path) {
                 const elementName = path.node.openingElement.name
                 if (elementName.type !== 'JSXIdentifier') return
