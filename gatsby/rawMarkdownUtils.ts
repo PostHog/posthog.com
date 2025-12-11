@@ -3,75 +3,6 @@ import fs from 'fs'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference'
 import { getLanguageFromSdkId } from '../src/components/SdkReferences/utils'
 
-// Function to generate raw markdown files
-export const generateRawMarkdownPages = async (pages) => {
-    console.log('Generating markdown files for LLMs...')
-
-    // Filter out any pages with certain slugs
-    const excludeTerms = [
-        '/_snippets',
-        '/snippets/',
-        '/_includes',
-        '/thanks',
-        '/notes/test-note',
-        '/service-error',
-        '/service-message',
-        '/services',
-        '/request-received',
-        '/teams/',
-        '/hosthog',
-        '/startups',
-        '/example-components',
-    ]
-    const filteredPages = pages.filter((doc) => !excludeTerms.some((term) => doc.fields.slug.includes(term)))
-
-    console.log(`Found ${filteredPages.length} docs to generate markdown for (filtered from ${pages.length} total)`)
-
-    for (const doc of filteredPages) {
-        try {
-            const { slug, contentWithSnippets } = doc.fields
-            const { title } = doc.frontmatter
-            const body = contentWithSnippets || doc.rawBody
-
-            // Create the frontmatter, so it always has the page title
-            let markdownContent = `---\ntitle: ${title}\nslug: ${slug}\n---\n`
-
-            // Add the content
-            if (body) {
-                // Process internal links to point to .md equivalents
-                let processedBody = body.replace(/\[([^\]]+)\]\(\/([^)]+)\)/g, (match, text, path) => {
-                    // Only convert if the path doesn't already end with .md
-                    if (!path.endsWith('.md')) {
-                        return `[${text}](/${path}.md)`
-                    }
-                    return match
-                })
-
-                markdownContent += processedBody
-            }
-
-            // Create the directory structure
-            const publicPath = path.resolve(__dirname, '../public')
-            const filePath = path.join(publicPath, `${slug}.md`)
-            const dirPath = path.dirname(filePath)
-
-            // Ensure directory exists
-            if (!fs.existsSync(dirPath)) {
-                fs.mkdirSync(dirPath, { recursive: true })
-            }
-
-            // Write the file
-            fs.writeFileSync(filePath, markdownContent, 'utf8')
-            console.log(`Generated: ${slug}.md`)
-        } catch (error) {
-            console.error(`Error generating markdown for ${doc.fields.slug}:`, error)
-        }
-    }
-
-    // Return filtered pages for use in generateLlmsTxt
-    return filteredPages
-}
-
 // Function to generate individual API endpoint markdown files from the OpenAPI spec
 export const generateApiSpecMarkdown = (spec: any) => {
     console.log('Generating API endpoint markdown files...')
@@ -324,90 +255,76 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 }
 
 // Function to generate llms.txt file according to spec
-export const generateLlmsTxt = (pages) => {
+export const generateLlmsTxt = () => {
     console.log('Generating llms.txt file...')
 
-    // Group pages by their first URL segment
-    const pagesBySection = {}
+    const publicPath = path.resolve(__dirname, '../public')
+    const docsPath = path.join(publicPath, 'docs')
 
-    for (const doc of pages) {
-        const { slug } = doc.fields
-        const { title } = doc.frontmatter
+    // Collect all .md files from public/docs
+    const pages: { title: string; slug: string; url: string }[] = []
+
+    const walkDir = (dir: string, baseSlug: string) => {
+        if (!fs.existsSync(dir)) return
+
+        const entries = fs.readdirSync(dir, { withFileTypes: true })
+        for (const entry of entries) {
+            const fullPath = path.join(dir, entry.name)
+            if (entry.isDirectory()) {
+                walkDir(fullPath, `${baseSlug}/${entry.name}`)
+            } else if (entry.name.endsWith('.md')) {
+                const slug = `${baseSlug}/${entry.name.replace(/\.md$/, '')}`
+                // Extract title from first line if it's a heading
+                const content = fs.readFileSync(fullPath, 'utf8')
+                const firstLine = content.split('\n')[0]
+                const title = firstLine.startsWith('# ') ? firstLine.slice(2).trim() : entry.name.replace(/\.md$/, '')
+
+                pages.push({
+                    title,
+                    slug,
+                    url: `https://posthog.com${slug}.md`,
+                })
+            }
+        }
+    }
+
+    walkDir(docsPath, '/docs')
+
+    // Group pages by their first URL segment after /docs/
+    const pagesBySection: Record<string, typeof pages> = {}
+
+    for (const page of pages) {
+        const segments = page.slug.split('/').filter(Boolean)
 
         // Filter out auto-generated API endpoint pages but allow specific API subdirectories
-        const segments = slug.split('/').filter(Boolean)
         if (segments.length > 2 && segments[0] === 'docs' && segments[1] === 'api') {
-            // Allow specific API subdirectories
             const allowedApiSubdirs = ['queries', 'flags', 'capture']
             const apiSubdir = segments[2]
-
-            // If it's not an allowed subdirectory, filter it out
             if (!allowedApiSubdirs.includes(apiSubdir)) {
                 continue
             }
         }
 
         // Extract section from slug for docs subsections
-        let section = segments.length > 0 ? segments[0] : 'root'
-
-        // Special handling for docs subsections - split by second parameter
-        if (section === 'docs' && segments.length > 1) {
-            section = `docs-${segments[1]}`
-        }
+        let section = segments.length > 1 ? segments[1] : 'root'
 
         if (!pagesBySection[section]) {
             pagesBySection[section] = []
         }
 
-        pagesBySection[section].push({
-            title,
-            slug,
-            url: `https://posthog.com${slug}.md`,
-        })
+        pagesBySection[section].push(page)
     }
 
-    // Add API spec files to docs-api-reference section
-    const apiSpecDir = path.join(process.cwd(), 'public', 'docs', 'open-api-spec')
-
-    if (fs.existsSync(apiSpecDir)) {
-        pagesBySection['docs-api-reference'] = []
-
-        const apiSpecFiles = fs.readdirSync(apiSpecDir).filter((file) => file.endsWith('.md'))
-        for (const file of apiSpecFiles) {
-            const operationId = file.replace('.md', '')
-            pagesBySection['docs-api-reference'].push({
-                title: `${operationId}`,
-                slug: `/docs/open-api-spec/${operationId}`,
-                url: `https://posthog.com/docs/open-api-spec/${operationId}.md`,
-            })
-        }
-    }
-
-    // Sort sections with docs subsections first, then tutorials, then alphabetical
+    // Sort sections with libraries and api first, then alphabetical
     const sections = Object.keys(pagesBySection).sort((a, b) => {
-        // All docs sections come first
-        const aIsDocs = a.startsWith('docs')
-        const bIsDocs = b.startsWith('docs')
-
-        if (aIsDocs && !bIsDocs) return -1
-        if (!aIsDocs && bIsDocs) return 1
-
-        // Among docs sections, prioritize libraries and api first
-        if (aIsDocs && bIsDocs) {
-            if (a === 'docs-libraries') return -1
-            if (b === 'docs-libraries') return 1
-            if (a === 'docs-api') return -1
-            if (b === 'docs-api') return 1
-            if (a === 'docs-api-reference') return -1
-            if (b === 'docs-api-reference') return 1
-            return a.localeCompare(b)
-        }
-
-        // Tutorials come next
-        if (a === 'tutorials') return -1
-        if (b === 'tutorials') return 1
-
-        // Everything else alphabetically
+        if (a === 'libraries') return -1
+        if (b === 'libraries') return 1
+        if (a === 'api') return -1
+        if (b === 'api') return 1
+        if (a === 'open-api-spec') return -1
+        if (b === 'open-api-spec') return 1
+        if (a === 'references') return -1
+        if (b === 'references') return 1
         return a.localeCompare(b)
     })
 
@@ -420,19 +337,12 @@ export const generateLlmsTxt = (pages) => {
 
     // Add sections with file lists
     for (const section of sections) {
-        let sectionTitle = section.charAt(0).toUpperCase() + section.slice(1)
+        const formattedSection = section
+            .split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
 
-        // Special handling for docs subsection titles
-        if (section.startsWith('docs-')) {
-            const subsection = section.replace('docs-', '')
-            const formattedSubsection = subsection
-                .split('-')
-                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ')
-            sectionTitle = `Docs - ${formattedSubsection}`
-        }
-
-        llmsTxtContent += `## ${sectionTitle}\n\n`
+        llmsTxtContent += `## ${formattedSection}\n\n`
 
         // Sort pages within section by title
         const sortedPages = pagesBySection[section].sort((a, b) => a.title.localeCompare(b.title))
@@ -445,10 +355,8 @@ export const generateLlmsTxt = (pages) => {
     }
 
     // Write llms.txt to public directory
-    const publicPath = path.resolve(__dirname, '../public')
     const llmsTxtPath = path.join(publicPath, 'llms.txt')
 
-    // Ensure public directory exists
     if (!fs.existsSync(publicPath)) {
         fs.mkdirSync(publicPath, { recursive: true })
     }

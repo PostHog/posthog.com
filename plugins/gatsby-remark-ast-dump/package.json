@@ -1,0 +1,6 @@
+{
+    "name": "gatsby-remark-ast-dump",
+    "version": "1.0.0",
+    "description": "Dumps MDAST to JSON files for /docs/ pages",
+    "main": "index.js"
+}
