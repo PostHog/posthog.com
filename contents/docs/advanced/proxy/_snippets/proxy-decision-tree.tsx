@@ -209,6 +209,30 @@ const ProxyDecisionTree: React.FC = () => {
         setRecommendation(null)
     }
 
+    const handleBack = () => {
+        // Find the previous question that was actually answered
+        let prevStep = step - 1
+        while (prevStep >= 0) {
+            const prevQuestion = questions[prevStep]
+            if (!prevQuestion.condition || prevQuestion.condition(answers)) {
+                break
+            }
+            prevStep--
+        }
+        // Clear the answer for the question we're going back to
+        const prevQuestion = questions[prevStep]
+        if (prevQuestion) {
+            const newAnswers = { ...answers }
+            delete newAnswers[prevQuestion.id]
+            // Also clear any answers from questions after this one
+            questions.slice(prevStep + 1).forEach((q) => {
+                delete newAnswers[q.id]
+            })
+            setAnswers(newAnswers)
+        }
+        setStep(prevStep)
+    }
+
     useEffect(() => {
         if (currentQuestion && currentQuestion.condition && !currentQuestion.condition(answers)) {
             const nextStep = questions.findIndex((q, i) => i > step && (!q.condition || q.condition(answers)))
@@ -264,29 +288,7 @@ const ProxyDecisionTree: React.FC = () => {
         <div className="border border-primary rounded-md p-5 bg-accent my-4">
             {step > 0 && (
                 <OSButton
-                    onClick={() => {
-                        // Find the previous question that was actually answered
-                        let prevStep = step - 1
-                        while (prevStep >= 0) {
-                            const prevQuestion = questions[prevStep]
-                            if (!prevQuestion.condition || prevQuestion.condition(answers)) {
-                                break
-                            }
-                            prevStep--
-                        }
-                        // Clear the answer for the question we're going back to
-                        const prevQuestion = questions[prevStep]
-                        if (prevQuestion) {
-                            const newAnswers = { ...answers }
-                            delete newAnswers[prevQuestion.id]
-                            // Also clear any answers from questions after this one
-                            questions.slice(prevStep + 1).forEach((q) => {
-                                delete newAnswers[q.id]
-                            })
-                            setAnswers(newAnswers)
-                        }
-                        setStep(prevStep)
-                    }}
+                    onClick={handleBack}
                     variant="default"
                     size="sm"
                     icon={<IconArrowLeft className="size-4" />}
