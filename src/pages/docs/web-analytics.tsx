@@ -34,7 +34,7 @@ export const Content = ({ quickLinks = false }) => {
             )}
             <section className="mb-12">
                 <h3 className="mb-2 text-xl">FAQ</h3>
-                <Link href="/docs/web-analytics/web-vs-product-analytics">
+                <Link to="/docs/web-analytics/web-vs-product-analytics">
                     What's the difference between web and product analytics?
                 </Link>
             </section>
@@ -82,6 +82,22 @@ const WebAnalytics: React.FC<WebAnalyticsProps> = ({ data }) => {
                 imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_hog_f6db3a01c9.png"
                 imageClasses="max-h-48 md:max-h-64"
             />
+
+            <section className="mb-8">
+                <p>
+                    Unlike <Link to="/docs/product-analytics">product analytics</Link>, web analytics offers a more
+                    streamlined and focused experience. This is especially useful for marketers, content creators, or
+                    anyone used to tools like <Link to="/blog/google-analytics-to-posthog">Google Analytics</Link>. It
+                    includes a <Link to="/docs/web-analytics/dashboard">dashboard</Link> that offers essential metrics,
+                    such as visitors, views, sessions, session duration, bounce rate,{' '}
+                    <Link to="/docs/web-analytics/conversion-goals">conversions</Link>, paths, referrers, and more.
+                </p>
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_light_mode_2024_10_d830a26db4.png"
+                    alt="Web analytics"
+                    className="rounded"
+                />
+            </section>
 
             <AskMax
                 quickQuestions={[
