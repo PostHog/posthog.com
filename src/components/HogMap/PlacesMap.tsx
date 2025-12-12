@@ -60,7 +60,7 @@ export default function PlacesMap({
 }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
     const { isModerator, getJwt } = useUser()
-    const userLocation = useUserLocation()
+    const { location: userLocation, isLoading: isLocationLoading } = useUserLocation()
 
     useEffect(() => {
         setIsClient(true)
@@ -147,6 +147,10 @@ export default function PlacesMap({
     const setupMap = useCallback(() => {
         if (!isClient) {
             console.error('Not client')
+            return
+        }
+        if (isLocationLoading) {
+            // Wait for location to load before initializing map
             return
         }
         const mapboxgl = getMapbox()
@@ -309,7 +313,7 @@ export default function PlacesMap({
                 mapRef.current = null
             }
         }
-    }, [isClient, token, styleUrl])
+    }, [isClient, token, styleUrl, isLocationLoading, userLocation])
 
     useEffect(() => {
         return setupMap()
@@ -430,6 +434,11 @@ export default function PlacesMap({
 
     return (
         <div className="box-border w-full h-full overflow-hidden relative">
+            {isLocationLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-primary/50 z-20">
+                    <div className="text-primary text-sm">Loading map...</div>
+                </div>
+            )}
             <div ref={mapContainerRef} className="w-full h-full" />
             {isModerator && (
                 <div className="absolute top-4 left-4 z-10">

@@ -14,30 +14,41 @@ const DEFAULT_LOCATION: UserLocation = {
     city: 'London',
 }
 
+// Module-level cache (in-memory only, not persisted to storage)
+let cachedLocation: UserLocation | null = null
+let fetchPromise: Promise<UserLocation> | null = null
+
 /**
  * Hook to get the user's approximate location based on their IP address.
+ * Caches the result in memory for the browser session (no persistent storage).
  * Falls back to London if geolocation fails or is unavailable.
  */
-export function useUserLocation(): UserLocation {
-    const [location, setLocation] = useState<UserLocation>(DEFAULT_LOCATION)
+export function useUserLocation(): { location: UserLocation; isLoading: boolean } {
+    const [location, setLocation] = useState<UserLocation>(cachedLocation || DEFAULT_LOCATION)
+    const [isLoading, setIsLoading] = useState<boolean>(!cachedLocation)
 
     useEffect(() => {
         // Only run on client side
         if (typeof window === 'undefined') return
 
-        // Check if we've already fetched and cached the location
-        const cachedLocation = sessionStorage.getItem('userLocation')
+        // If we already have a cached location, use it
         if (cachedLocation) {
-            try {
-                setLocation(JSON.parse(cachedLocation))
-                return
-            } catch {
-                // Invalid cache, continue to fetch
-            }
+            setLocation(cachedLocation)
+            setIsLoading(false)
+            return
         }
 
-        // Fetch user's approximate location from ipapi.co (free tier: 1000 requests/day)
-        fetch('https://ipapi.co/json/')
+        // If a fetch is already in progress, wait for it
+        if (fetchPromise) {
+            fetchPromise.then((loc) => {
+                setLocation(loc)
+                setIsLoading(false)
+            })
+            return
+        }
+
+        // Start a new fetch
+        fetchPromise = fetch('https://ipapi.co/json/')
             .then((response) => response.json())
             .then((data) => {
                 if (data.latitude && data.longitude) {
@@ -47,16 +58,23 @@ export function useUserLocation(): UserLocation {
                         country: data.country_code,
                         city: data.city,
                     }
-                    setLocation(userLocation)
-                    // Cache for the session
-                    sessionStorage.setItem('userLocation', JSON.stringify(userLocation))
+                    cachedLocation = userLocation
+                    return userLocation
                 }
+                cachedLocation = DEFAULT_LOCATION
+                return DEFAULT_LOCATION
             })
             .catch((error) => {
                 console.log('Could not determine user location, using default:', error)
-                // Use default location (London) if geolocation fails
+                cachedLocation = DEFAULT_LOCATION
+                return DEFAULT_LOCATION
             })
+
+        fetchPromise.then((loc) => {
+            setLocation(loc)
+            setIsLoading(false)
+        })
     }, [])
 
-    return location
+    return { location, isLoading }
 }
