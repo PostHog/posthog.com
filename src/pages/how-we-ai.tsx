@@ -260,30 +260,22 @@ const them = [
 
 const us = [
     {
-        title: '"I have a question about the product."',
+        title: '"Not another IDE"',
 
         children: (
             <>
                 <div className="col-span-6 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-8 @3xl:pb-20">
-                    <p className="leading-relaxed">
-                        <em>"How much does it cost?"</em> <Link href="/pricing">It's on our website.</Link>
-                        <br />
-                        <em>"How does it work?"</em>{' '}
-                        <Link href="https://app.posthog.com/signup">
-                            Just sign up and try it - no credit card required.
-                        </Link>
-                        <br />
-                        <em>"Do you do discounts?"</em>{' '}
-                        <Link href="/handbook/growth/sales/contracts">It's in our handbook.</Link>
-                        <br />
-                        <em>"Can I get a quick demo?"</em>{' '}
-                        <Link href="/demo">Watch a pre-recorded demo on our website.</Link>
-                    </p>
+                    <p>A lot of companies are building AI IDEs (also known as ADEs).</p>
+                    <p>Most of them optimize for:</p>
                     <p>
-                        Still need a personalized demo after all that?{' '}
-                        <Link href="/talk-to-a-human">Book a call with a technical account exec</Link> - no SDRs, no
-                        qualifying calls, no BS.
+                        <span className="text-primary mr-2">•</span>Generating snippets
+                        <br />
+                        <span className="text-primary mr-2">•</span>Writing code faster
+                        <br />
+                        <span className="text-primary mr-2">•</span>Filling in gaps
+                        <br />
                     </p>
+                    <p>That’s not what we’re optimizing for (though it will do those things).</p>
                 </div>
 
                 <div className="col-span-2 -mt-6 pb-8 text-center">
@@ -300,7 +292,7 @@ const us = [
         ),
     },
     {
-        title: 'Personalized demo with technical person',
+        title: 'Speed without understanding is fragile',
 
         children: (
             <>
@@ -328,7 +320,39 @@ const us = [
         ),
     },
     {
-        title: 'Zero to implementation in a week',
+        title: 'Product autonomy (without losing control)',
+        children: (
+            <>
+                <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
+                    <p>We believe in autonomy (but not the theatrical kind). In our world:</p>
+                    <p>
+                        <span className="text-primary mr-2">•</span>AI observes your product data continuously
+                        <br />
+                        <span className="text-primary mr-2">•</span>It connects signals across data, behavior, and code
+                        <br />
+                        <span className="text-primary mr-2">•</span>It prepares concrete, well-formed proposals
+                        <br />
+                        <span className="text-primary mr-2">•</span>It opens pull requests with context and intent )
+                        <br />
+                    </p>
+                    <p>
+                        Nothing ships without a human decision. <strong>You control the autonomy slider.</strong>
+                    </p>
+                </div>
+
+                <div className="col-span-4">
+                    <CloudinaryImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-follow-up.png"
+                        width={600}
+                    />
+                </div>
+            </>
+        ),
+    },
+    {
+        title: 'Two modes. Same mental model',
         children: (
             <>
                 <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
@@ -360,8 +384,7 @@ const us = [
         ),
     },
     {
-        title: 'Choose your own discount',
-
+        title: 'Fragile vs antifragile AI',
         children: (
             <>
                 <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
@@ -388,17 +411,25 @@ const us = [
         ),
     },
     {
-        title: 'Besties forever?',
+        title: 'Why this future feels calm',
         children: (
             <>
                 <div className="col-span-8 pl-1 @3xl:pl-9 [&_p]:mb-2">
                     <p>
-                        Contract signed - now you get passed onto… wait is that still the same person who did the
-                        initial demo and knows everything about me? And they will be my main point of contact for
-                        anything support-related?!
+                        Most serious thinkers about AGI agree on one thing: intelligence isn't just output. It's
+                        judgment, context, values, and knowing when not to act. Systems that try to automate your
+                        qualitative research are brittle as a result.
                     </p>
-                    <p>This is going to work out well.</p>
-
+                    <p>The future of PostHog AI is pleasingly simple: </p>
+                    <p>
+                        <strong>1. AI should do continuous, mechanical work: watching, summarizing, proposing.</strong>
+                    </p>
+                    <p>
+                        <strong>
+                            2. Humans should do irreducible work: choosing direction, weighing trade-offs, setting
+                            taste.
+                        </strong>
+                    </p>
                     <div className="flex flex-col @3xl:flex-row gap-3 my-4">
                         <CallToAction href="/start" size="md" state={{ newWindow: true }}>
                             Get started - free
@@ -420,6 +451,57 @@ const us = [
             </>
         ),
         cta: <></>,
+    },
+    {
+        title: 'Bonus: The three laws of AI',
+        children: (
+            <>
+                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10 @3xl:pb-20">
+                    <p>
+                        <strong>
+                            1. PostHog AI must not obscure its reasoning or, through opacity, allow a user to trust
+                            false outputs
+                        </strong>
+                    </p>
+                    <p>
+                        If you can't see how it works, you shouldn't trust it. Chain-of-thought takes up space, but we
+                        show it because sometimes AI gets things wrong.
+                    </p>
+                    <p>
+                        <strong>
+                            2. PostHog AI must yield to human judgment, except where such judgment would conflict with
+                            the First Law
+                        </strong>
+                    </p>
+                    <p>
+                        Treat it like a really smart intern, not your CTO. You're the expert on your product and users.
+                    </p>
+                    <p>
+                        <strong>
+                            3. PostHog AI must serve to expand human context, as long as such service does not conflict
+                            with the First or Second Laws
+                        </strong>
+                    </p>
+                    <p>
+                        PostHog AI doesn't make decisions for you or act without permission. It exists as a tool to use
+                        at your discretion.
+                    </p>
+                </div>
+
+                <div className="col-span-3 -mt-4 @3xl:-mt-8 @3xl:pb-8 text-center">
+                    <CloudinaryImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/404_e01bb2c910.png"
+                        width={300}
+                    />
+                    <p className="text-xs text-secondary mt-2 text-center">
+                        Isaac Asimov was a science fiction writer a century ahead of his time. His Three Laws of
+                        Robotics governed how robots should behave.
+                    </p>
+                </div>
+            </>
+        ),
     },
 ]
 
