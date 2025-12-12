@@ -4,7 +4,7 @@ import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import Tooltip from 'components/Tooltip'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import slugify from 'slugify'
 import TeamPatch from 'components/TeamPatch'
 import { CallToAction } from 'components/CallToAction'
@@ -23,68 +23,14 @@ interface TeamsProps {
     searchTerm?: string
 }
 
-const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
+const Teams: React.FC<any> = ({ searchTerm: propSearchTerm, data }) => {
     const { appWindow } = useWindow()
     const [localSearchTerm, setLocalSearchTerm] = useState('')
     const searchTerm = propSearchTerm !== undefined ? propSearchTerm : localSearchTerm
     const [selectedIndex, setSelectedIndex] = useState(0)
 
     const { isModerator } = useUser()
-    const { allTeams } = useStaticQuery(graphql`
-        {
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
-                nodes {
-                    id
-                    name
-                    slug
-                    createdAt
-                    tagline
-                    description
-                    profiles {
-                        data {
-                            id
-                            attributes {
-                                color
-                                firstName
-                                lastName
-                                avatar {
-                                    data {
-                                        attributes {
-                                            url
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    leadProfiles {
-                        data {
-                            id
-                        }
-                    }
-                    crest {
-                        data {
-                            attributes {
-                                url
-                            }
-                        }
-                    }
-                    crestOptions {
-                        textColor
-                        textShadow
-                        fontSize
-                        frame
-                        frameColor
-                        plaque
-                        plaqueColor
-                        imageScale
-                        imageXOffset
-                        imageYOffset
-                    }
-                }
-            }
-        }
-    `)
+    const { allTeams } = data
 
     // Filter teams based on search term
     const filteredTeams = useMemo(() => {
@@ -380,3 +326,59 @@ const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
 }
 
 export default Teams
+
+export const query = graphql`
+    {
+        allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
+            nodes {
+                id
+                name
+                slug
+                createdAt
+                tagline
+                description
+                profiles {
+                    data {
+                        id
+                        attributes {
+                            color
+                            firstName
+                            lastName
+                            avatar {
+                                data {
+                                    attributes {
+                                        url
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                leadProfiles {
+                    data {
+                        id
+                    }
+                }
+                crest {
+                    data {
+                        attributes {
+                            url
+                        }
+                    }
+                }
+                crestOptions {
+                    textColor
+                    textShadow
+                    fontSize
+                    frame
+                    frameColor
+                    plaque
+                    plaqueColor
+                    imageScale
+                    imageXOffset
+                    imageYOffset
+                }
+            }
+        }
+    }
+`

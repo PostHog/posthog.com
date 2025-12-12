@@ -9,7 +9,7 @@ import { IconBold, IconLink } from 'components/OSIcons'
 import TeamMember from 'components/TeamMember'
 import { useApp } from '../../context/App'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CUSTOMER_COUNT } from '../../constants'
 
@@ -26,17 +26,19 @@ type Fieldset = {
     layoutStyle: 'simple' | 'table'
 }
 
-export default function Credits({ pageContext }: { pageContext?: { buildTime?: string } }): JSX.Element {
+export default function Credits({
+    pageContext,
+    data,
+}: {
+    pageContext?: { buildTime?: string }
+    data: any
+}): JSX.Element {
     const { focusedWindow, updateWindow, getDesktopCenterPosition } = useApp()
     const [isExpanded, setIsExpanded] = useState(false)
-
     const {
         team: { totalCount },
-        allTeams,
-    } = useStaticQuery(teamQuery)
-
-    const [activeProfile, setActiveProfile] = useState<any>(null)
-
+        allTeams: { totalCount: allTeamsCount },
+    } = data
     const teamSize = totalCount - 1
 
     const handleMoreInfo = () => {
@@ -73,7 +75,7 @@ export default function Credits({ pageContext }: { pageContext?: { buildTime?: s
             items: [
                 { label: 'Established', value: 'January 2020' },
                 { label: 'Employees', value: teamSize },
-                { label: 'Small teams', value: allTeams.nodes.length },
+                { label: 'Small teams', value: allTeamsCount },
                 { label: 'Customers', value: CUSTOMER_COUNT.toLocaleString() },
                 { label: 'Revenue', value: 'Lots' },
                 { label: 'Funding', value: '$182,000,000' },
@@ -245,7 +247,7 @@ export default function Credits({ pageContext }: { pageContext?: { buildTime?: s
     )
 }
 
-const teamQuery = graphql`
+export const query = graphql`
     query CreditsTeamQuery {
         team: allSqueakProfile(
             filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
@@ -254,13 +256,7 @@ const teamQuery = graphql`
             totalCount
         }
         allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
-            nodes {
-                id
-                name
-                miniCrest {
-                    gatsbyImageData(width: 20, height: 20)
-                }
-            }
+            totalCount
         }
     }
 `

@@ -1,23 +1,15 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import { graphql, useStaticQuery } from 'gatsby'
-import React, { useState, useMemo, useCallback, useEffect } from 'react'
+import React from 'react'
 import Link from 'components/Link'
-import { SEO } from '../seo'
 import ReactMarkdown from 'react-markdown'
-import ScrollArea from 'components/RadixUI/ScrollArea'
 import Stickers from 'components/Stickers/Index'
 import Tooltip from 'components/RadixUI/Tooltip'
 import ZoomHover from 'components/ZoomHover'
 import rehypeRaw from 'rehype-raw'
 import useTeamCrestMap from 'hooks/useTeamCrestMap'
-import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
-import Fuse from 'fuse.js'
-import debounce from 'lodash/debounce'
 import { useInView } from 'react-intersection-observer'
-import PeopleMap from 'components/HogMap/PeopleMap'
-import { IconMapPin, IconList } from '@posthog/icons'
 
-export const TeamMember = (props: any) => {
+export default function TeamMember(props: any) {
     const {
         avatar,
         lastName,
@@ -278,182 +270,6 @@ export const TeamMember = (props: any) => {
                     </>
                 )}
             </Link>
-        </div>
-    )
-}
-
-interface PeopleProps {
-    searchTerm?: string
-    filteredMembers?: any[] | null
-    teamMembers: any[]
-    allTeams: any[]
-}
-
-export default function People({ searchTerm, filteredMembers, teamMembers, allTeams }: PeopleProps = {}) {
-    const [activeTab, setActiveTab] = useState<'list' | 'map'>('list')
-    const [filteredTeamMembers, setFilteredTeamMembers] = useState(teamMembers)
-
-    // Use filteredMembers from props if provided
-    const baseMembers = filteredMembers !== null && filteredMembers !== undefined ? filteredMembers : teamMembers
-
-    const teamSize = teamMembers.length - 1
-
-    // Create a map of team names to crest data for quick lookup
-    const teamCrestMap = allTeams.nodes.reduce((acc: any, team: any) => {
-        acc[team.name] = team.crest?.data?.attributes?.url
-        return acc
-    }, {})
-
-    const fuse = useMemo(() => {
-        return new Fuse(baseMembers, {
-            keys: [
-                {
-                    name: 'fullName',
-                    getFn: (member: any) => `${member.firstName} ${member.lastName}`.trim(),
-                },
-                'teams.data.attributes.name',
-                'companyRole',
-                'location',
-                'country',
-            ],
-            threshold: 0.3,
-        })
-    }, [baseMembers])
-
-    const debouncedSearch = useCallback(
-        debounce((query: string) => {
-            if (!query.trim()) {
-                setFilteredTeamMembers(baseMembers)
-                return
-            }
-
-            const results = fuse.search(query)
-            const filtered = results.map((result) => result.item)
-            setFilteredTeamMembers(filtered)
-        }, 300),
-        [fuse, baseMembers]
-    )
-
-    // Effect to handle search term changes from prop
-    useEffect(() => {
-        if (searchTerm !== undefined) {
-            debouncedSearch(searchTerm)
-        }
-    }, [searchTerm, debouncedSearch])
-
-    // Effect to handle filtered members changes
-    useEffect(() => {
-        if (filteredMembers !== null && filteredMembers !== undefined) {
-            // If we have filtered members from props, apply search on those
-            if (searchTerm && searchTerm.trim()) {
-                const fuse = new Fuse(filteredMembers, {
-                    keys: [
-                        {
-                            name: 'fullName',
-                            getFn: (member: any) => `${member.firstName} ${member.lastName}`.trim(),
-                        },
-                        'teams.data.attributes.name',
-                        'companyRole',
-                        'location',
-                        'country',
-                    ],
-                    threshold: 0.3,
-                })
-                const results = fuse.search(searchTerm)
-                const filtered = results.map((result) => result.item)
-                setFilteredTeamMembers(filtered)
-            } else {
-                setFilteredTeamMembers(filteredMembers)
-            }
-        }
-    }, [filteredMembers, searchTerm])
-
-    // handleSearch removed since we use prop-based search
-
-    return (
-        <div data-scheme="primary" className="bg-primary h-full relative">
-            <SEO title="Team - PostHog" />
-            <ToggleGroup
-                className="absolute top-[-44px] right-0 z-10"
-                title=""
-                hideTitle
-                options={[
-                    {
-                        label: (
-                            <>
-                                <IconList className="size-4 mr-1" />
-                                List
-                            </>
-                        ),
-                        value: 'list',
-                    },
-                    {
-                        label: (
-                            <>
-                                <IconMapPin className="size-4 mr-1" />
-                                Map
-                            </>
-                        ),
-                        value: 'map',
-                    },
-                ]}
-                onValueChange={(value) => setActiveTab(value as 'list' | 'map')}
-                value={activeTab}
-            />
-            <ScrollArea className="h-full">
-                {activeTab === 'list' && (
-                    <>
-                        <div className="@lg:columns-2 gap-4 mb-4">
-                            <p className="mt-0">
-                                We're proud to be a team of <strong>{teamSize}</strong> misfits. Why?
-                            </p>
-
-                            <p>Building an unusually great company starts with an unusual team.</p>
-
-                            <p>
-                                We don't care if you haven't finished (or attended) school, if you were super important
-                                at a "Big Tech" company, or if you ran a startup that crashed and burned.
-                            </p>
-
-                            <p>
-                                What we <em>do</em> care about is your ability to learn, iterate, and ship.
-                            </p>
-
-                            <p>
-                                That's why we've hired in Belgium, the East and West coasts of the US, Canada, Germany,
-                                the United Kingdom, Finland, Poland, and Colombia (among other places).
-                            </p>
-
-                            <p>
-                                Interested in a hand-drawn sketch of your face?{' '}
-                                <Link to={`/careers`} state={{ newWindow: true }}>
-                                    We're hiring.
-                                </Link>
-                            </p>
-                        </div>
-                        <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 @6xl:grid-cols-5 @[84rem]:grid-cols-6 @[104rem]:grid-cols-7 @[112rem]:grid-cols-8 @[120rem]:grid-cols-9 gap-4 @md:gap-x-6 gap-y-12">
-                            {filteredTeamMembers.map((teamMember: any) => {
-                                // Calculate if this person is a team lead of any team
-                                const isTeamLead = teamMember.leadTeams?.data?.length > 0
-
-                                return (
-                                    <TeamMember
-                                        key={teamMember.squeakId}
-                                        {...teamMember}
-                                        isTeamLead={isTeamLead}
-                                        teamCrestMap={teamCrestMap}
-                                    />
-                                )
-                            })}
-                        </ul>
-                    </>
-                )}
-                {activeTab === 'map' && (
-                    <div className="h-[70vh] min-h-[480px] mt-2">
-                        <PeopleMap members={filteredTeamMembers} />
-                    </div>
-                )}
-            </ScrollArea>
         </div>
     )
 }

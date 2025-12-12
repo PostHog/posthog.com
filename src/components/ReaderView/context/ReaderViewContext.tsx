@@ -39,14 +39,15 @@ const ReaderViewContext = createContext<ReaderViewContextType | undefined>(undef
 const isLabel = (item: any) => !item?.url && item?.name
 
 export function ReaderViewProvider({ children }: { children: React.ReactNode }) {
+    const isSSR = typeof window === 'undefined'
     const { appWindow } = useWindow()
     // @2xl breakpoint for sidebar visibility (equivalent to @2xl/app-reader used in CSS)
     const isWideEnoughForSidebar = appWindow?.size?.width && appWindow?.size?.width >= 672 // 42rem = 672px
-    const [isNavVisible, setIsNavVisible] = useState(isWideEnoughForSidebar)
+    const [isNavVisible, setIsNavVisible] = useState(isSSR || isWideEnoughForSidebar)
     const [navUserToggled, setNavUserToggled] = useState(false)
     // @6xl breakpoint is 72rem = 1152px
     const isLarge = appWindow?.size?.width && appWindow?.size?.width >= 1152
-    const [isTocVisible, setIsTocVisible] = useState(isLarge)
+    const [isTocVisible, setIsTocVisible] = useState(isSSR || isLarge)
     const [tocUserToggled, setTocUserToggled] = useState(false)
     const [fullWidthContent, setFullWidthContent] = useState(false)
     const [lineHeightMultiplier, setLineHeightMultiplier] = useState<number>(1)

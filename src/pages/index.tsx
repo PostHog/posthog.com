@@ -28,7 +28,7 @@ import Logo from 'components/Logo'
 import { useApp } from '../context/App'
 import { useWindow } from '../context/Window'
 import MDXEditor from 'components/MDXEditor'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -1206,17 +1206,10 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     },
 ]
 
-export default function Home() {
+export default function Home({ data }: any) {
     const {
         mdx: { rawBody, mdxBody },
-    } = useStaticQuery(graphql`
-        query {
-            mdx(slug: { eq: "" }) {
-                rawBody
-                mdxBody: body
-            }
-        }
-    `)
+    } = data
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
     const posthog = usePostHog()
@@ -1250,3 +1243,12 @@ export default function Home() {
         </>
     )
 }
+
+export const query = graphql`
+    query {
+        mdx(slug: { eq: "" }) {
+            rawBody
+            mdxBody: body
+        }
+    }
+`

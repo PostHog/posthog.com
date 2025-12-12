@@ -4,7 +4,7 @@ import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import Tooltip from 'components/Tooltip'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 import slugify from 'slugify'
 import TeamPatch from 'components/TeamPatch'
 import { CallToAction } from 'components/CallToAction'
@@ -15,66 +15,8 @@ import { productMenu } from '../navs'
 import RoadmapPreview from 'components/RoadmapPreview'
 import { PRODUCT_COUNT } from '../constants'
 
-const Teams: React.FC = () => {
-    const { james, supportTeam } = useStaticQuery(graphql`
-        {
-            james: squeakProfile(squeakId: { eq: 27732 }) {
-                squeakId
-                firstName
-                lastName
-                avatar {
-                    url
-                }
-                companyRole
-            }
-            supportTeam: squeakTeam(squeakId: { eq: 128 }) {
-                id
-                name
-                slug
-                profiles {
-                    data {
-                        id
-                        attributes {
-                            color
-                            firstName
-                            lastName
-                            avatar {
-                                data {
-                                    attributes {
-                                        url
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                crest {
-                    data {
-                        attributes {
-                            url
-                        }
-                    }
-                }
-                crestOptions {
-                    textColor
-                    textShadow
-                    fontSize
-                    frame
-                    frameColor
-                    plaque
-                    plaqueColor
-                    imageScale
-                    imageXOffset
-                    imageYOffset
-                }
-                leadProfiles {
-                    data {
-                        id
-                    }
-                }
-            }
-        }
-    `)
+const Teams: React.FC<any> = ({ data }) => {
+    const { james, supportTeam } = data
 
     return (
         <Layout>
@@ -409,3 +351,63 @@ const Teams: React.FC = () => {
 }
 
 export default Teams
+
+export const query = graphql`
+    {
+        james: squeakProfile(squeakId: { eq: 27732 }) {
+            squeakId
+            firstName
+            lastName
+            avatar {
+                url
+            }
+            companyRole
+        }
+        supportTeam: squeakTeam(squeakId: { eq: 128 }) {
+            id
+            name
+            slug
+            profiles {
+                data {
+                    id
+                    attributes {
+                        color
+                        firstName
+                        lastName
+                        avatar {
+                            data {
+                                attributes {
+                                    url
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            crest {
+                data {
+                    attributes {
+                        url
+                    }
+                }
+            }
+            crestOptions {
+                textColor
+                textShadow
+                fontSize
+                frame
+                frameColor
+                plaque
+                plaqueColor
+                imageScale
+                imageXOffset
+                imageYOffset
+            }
+            leadProfiles {
+                data {
+                    id
+                }
+            }
+        }
+    }
+`

@@ -1,6 +1,6 @@
 import Roadmap from 'components/Roadmap'
 import Layout from 'components/Layout'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 import React from 'react'
 import groupBy from 'lodash.groupby'
 import Link from 'components/Link'

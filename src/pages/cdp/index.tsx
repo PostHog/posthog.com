@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react'
-import { useStaticQuery, graphql, navigate } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 import OSTable from 'components/OSTable'
@@ -156,102 +156,9 @@ const unslugifyCategory = (slug: string, categories: string[]): string | null =>
     return slugToCategory[slug] || null
 }
 
-export default function CDP(): JSX.Element {
+export default function CDP({ data }: any): JSX.Element {
     const contentData = useContentData()
     const [searchQuery, setSearchQuery] = useState('')
-    const data = useStaticQuery(graphql`
-        query {
-            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    rawBody
-                    frontmatter {
-                        title
-                        description
-                    }
-                }
-            }
-            allProductData {
-                nodes {
-                    products {
-                        name
-                        type
-                        unit
-                        addons {
-                            name
-                            type
-                            unit
-                            plans {
-                                name
-                                plan_key
-                                included_if
-                                features {
-                                    key
-                                    name
-                                    description
-                                    limit
-                                    note
-                                }
-                            }
-                        }
-                        plans {
-                            name
-                            plan_key
-                            free_allocation
-                            included_if
-                            features {
-                                key
-                                name
-                                description
-                                limit
-                                note
-                            }
-                            tiers {
-                                unit_amount_usd
-                                up_to
-                            }
-                        }
-                    }
-                }
-            }
-            destinations: allPostHogPipeline(filter: { type: { eq: "destination" } }) {
-                nodes {
-                    id
-                    slug
-                    name
-                    category
-                    description
-                    icon_url
-                    type
-                    mdx {
-                        fields {
-                            slug
-                        }
-                    }
-                    status
-                }
-            }
-            transformations: allPostHogPipeline(filter: { type: { eq: "transformation" } }) {
-                nodes {
-                    id
-                    slug
-                    name
-                    category
-                    description
-                    icon_url
-                    type
-                    mdx {
-                        fields {
-                            slug
-                        }
-                    }
-                    status
-                }
-            }
-        }
-    `)
 
     // Combine all pipelines data - ensure consistent structure and type field
     const allPipelines = [
@@ -486,3 +393,97 @@ export default function CDP(): JSX.Element {
         </>
     )
 }
+
+export const query = graphql`
+    query {
+        allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
+            nodes {
+                fields {
+                    slug
+                }
+                rawBody
+                frontmatter {
+                    title
+                    description
+                }
+            }
+        }
+        allProductData {
+            nodes {
+                products {
+                    name
+                    type
+                    unit
+                    addons {
+                        name
+                        type
+                        unit
+                        plans {
+                            name
+                            plan_key
+                            included_if
+                            features {
+                                key
+                                name
+                                description
+                                limit
+                                note
+                            }
+                        }
+                    }
+                    plans {
+                        name
+                        plan_key
+                        free_allocation
+                        included_if
+                        features {
+                            key
+                            name
+                            description
+                            limit
+                            note
+                        }
+                        tiers {
+                            unit_amount_usd
+                            up_to
+                        }
+                    }
+                }
+            }
+        }
+        destinations: allPostHogPipeline(filter: { type: { eq: "destination" } }) {
+            nodes {
+                id
+                slug
+                name
+                category
+                description
+                icon_url
+                type
+                mdx {
+                    fields {
+                        slug
+                    }
+                }
+                status
+            }
+        }
+        transformations: allPostHogPipeline(filter: { type: { eq: "transformation" } }) {
+            nodes {
+                id
+                slug
+                name
+                category
+                description
+                icon_url
+                type
+                mdx {
+                    fields {
+                        slug
+                    }
+                }
+                status
+            }
+        }
+    }
+`

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PricingExperiment from 'components/Pricing/PricingExperiment'
-import { graphql, Link, useStaticQuery } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { Calculator } from 'components/Pricing/Test/Calculator'
 import { SidebarList, SidebarListItem, Discounts } from 'components/Pricing/PricingExperiment'
 import { Addons } from 'components/Pricing/Test/Addons'
@@ -18,7 +18,7 @@ import PurchasedWith from 'components/Pricing/Test/PurchasedWith'
 import { SectionLayout } from 'components/Pricing/Test/Sections'
 import { scrollToElement } from 'components/ScrollToElement'
 
-export default function Pricing() {
+export default function Pricing({ data }: any) {
     const [activePlan, setActivePlan] = useState('free')
     const [animateFreeTiers, setAnimateFreeTiers] = useState(false)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
@@ -36,101 +36,7 @@ export default function Pricing() {
         { url: 'cta', value: 'Shameless CTA', depth: 0 },
     ]
 
-    const {
-        allProductData: {
-            nodes: [{ products: billingProducts }],
-        },
-    } = useStaticQuery(graphql`
-        query {
-            allProductData {
-                nodes {
-                    products {
-                        description
-                        docs_url
-                        image_url
-                        icon_key
-                        inclusion_only
-                        contact_support
-                        addons {
-                            contact_support
-                            description
-                            docs_url
-                            image_url
-                            icon_key
-                            inclusion_only
-                            name
-                            type
-                            unit
-                            plans {
-                                description
-                                docs_url
-                                image_url
-                                name
-                                plan_key
-                                product_key
-                                unit
-                                flat_rate
-                                unit_amount_usd
-                                features {
-                                    key
-                                    name
-                                    description
-                                    category
-                                    limit
-                                    note
-                                    entitlement_only
-                                    is_plan_default
-                                    unit
-                                }
-                                tiers {
-                                    current_amount_usd
-                                    current_usage
-                                    flat_amount_usd
-                                    unit_amount_usd
-                                    up_to
-                                }
-                            }
-                        }
-                        name
-                        type
-                        unit
-                        usage_key
-                        plans {
-                            description
-                            docs_url
-                            features {
-                                key
-                                name
-                                description
-                                category
-                                limit
-                                note
-                                entitlement_only
-                                is_plan_default
-                                unit
-                            }
-                            free_allocation
-                            image_url
-                            included_if
-                            name
-                            plan_key
-                            product_key
-                            contact_support
-                            unit_amount_usd
-                            tiers {
-                                current_amount_usd
-                                current_usage
-                                flat_amount_usd
-                                unit_amount_usd
-                                up_to
-                            }
-                            unit
-                        }
-                    }
-                }
-            }
-        }
-    `)
+    const billingProducts = data?.allProductData?.nodes?.[0]?.products || []
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search)
@@ -201,3 +107,95 @@ export default function Pricing() {
         </ReaderView>
     )
 }
+
+export const query = graphql`
+    query {
+        allProductData {
+            nodes {
+                products {
+                    description
+                    docs_url
+                    image_url
+                    icon_key
+                    inclusion_only
+                    contact_support
+                    addons {
+                        contact_support
+                        description
+                        docs_url
+                        image_url
+                        icon_key
+                        inclusion_only
+                        name
+                        type
+                        unit
+                        plans {
+                            description
+                            docs_url
+                            image_url
+                            name
+                            plan_key
+                            product_key
+                            unit
+                            flat_rate
+                            unit_amount_usd
+                            features {
+                                key
+                                name
+                                description
+                                category
+                                limit
+                                note
+                                entitlement_only
+                                is_plan_default
+                                unit
+                            }
+                            tiers {
+                                current_amount_usd
+                                current_usage
+                                flat_amount_usd
+                                unit_amount_usd
+                                up_to
+                            }
+                        }
+                    }
+                    name
+                    type
+                    unit
+                    usage_key
+                    plans {
+                        description
+                        docs_url
+                        features {
+                            key
+                            name
+                            description
+                            category
+                            limit
+                            note
+                            entitlement_only
+                            is_plan_default
+                            unit
+                        }
+                        free_allocation
+                        image_url
+                        included_if
+                        name
+                        plan_key
+                        product_key
+                        contact_support
+                        unit_amount_usd
+                        tiers {
+                            current_amount_usd
+                            current_usage
+                            flat_amount_usd
+                            unit_amount_usd
+                            up_to
+                        }
+                        unit
+                    }
+                }
+            }
+        }
+    }
+`

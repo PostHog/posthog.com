@@ -42,69 +42,10 @@ const CustomDemoSlide = () => {
     )
 }
 
-export default function PostHogAI(): JSX.Element {
+export default function PostHogAI({ data }: any): JSX.Element {
     const posthog = usePostHog()
     const { view, setHasDeveloperMode, setView } = useWindow()
     const contentData = useContentData()
-    const data = useStaticQuery(graphql`
-        query {
-            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    rawBody
-                    frontmatter {
-                        title
-                        description
-                    }
-                }
-            }
-            allProductData {
-                nodes {
-                    products {
-                        name
-                        type
-                        unit
-                        addons {
-                            name
-                            type
-                            unit
-                            plans {
-                                name
-                                plan_key
-                                included_if
-                                features {
-                                    key
-                                    name
-                                    description
-                                    limit
-                                    note
-                                }
-                            }
-                        }
-                        plans {
-                            name
-                            plan_key
-                            free_allocation
-                            included_if
-                            features {
-                                key
-                                name
-                                description
-                                limit
-                                note
-                            }
-                            tiers {
-                                unit_amount_usd
-                                up_to
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
 
     // Configure slides with custom ProductOS Benefits slide
     const slides = createSlideConfig({
@@ -168,3 +109,63 @@ export default function PostHogAI(): JSX.Element {
         <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
     )
 }
+
+export const query = graphql`
+    query {
+        allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
+            nodes {
+                fields {
+                    slug
+                }
+                rawBody
+                frontmatter {
+                    title
+                    description
+                }
+            }
+        }
+        allProductData {
+            nodes {
+                products {
+                    name
+                    type
+                    unit
+                    addons {
+                        name
+                        type
+                        unit
+                        plans {
+                            name
+                            plan_key
+                            included_if
+                            features {
+                                key
+                                name
+                                description
+                                limit
+                                note
+                            }
+                        }
+                    }
+                    plans {
+                        name
+                        plan_key
+                        free_allocation
+                        included_if
+                        features {
+                            key
+                            name
+                            description
+                            limit
+                            note
+                        }
+                        tiers {
+                            unit_amount_usd
+                            up_to
+                        }
+                    }
+                }
+            }
+        }
+    }
+`

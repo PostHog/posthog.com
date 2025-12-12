@@ -35,13 +35,6 @@ export const onRenderBody = function ({ setPreBodyComponents, setPostBodyCompone
             src: '/scripts/theme-init.js',
         }),
     ])
-
-    setPostBodyComponents([
-        React.createElement('script', {
-            key: 'initial-loader',
-            src: '/scripts/initial-loader.js',
-        }),
-    ])
 }
 
 export const onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {

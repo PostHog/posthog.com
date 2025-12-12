@@ -4,68 +4,32 @@ import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
 import People from 'components/People'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 
-const PeoplePage = () => {
+const PeoplePage = ({ data }) => {
     const [searchTerm, setSearchTerm] = useState('')
     const [filteredPeople, setFilteredPeople] = useState(null)
     const [nameFilter, setNameFilter] = useState(null)
     const [pizzaFilter, setPizzaFilter] = useState(null)
+    const {
+        team: { teamMembers },
+        allTeams,
+    } = data
 
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/people',
         content: (
             <div className="max-w-screen-6xl mx-auto">
                 <h1>People</h1>
-                <People searchTerm={searchTerm} filteredMembers={filteredPeople} />
+                <People
+                    searchTerm={searchTerm}
+                    filteredMembers={filteredPeople}
+                    teamMembers={teamMembers}
+                    allTeams={allTeams}
+                />
             </div>
         ),
     })
-
-    // Get team members data - include all fields needed by TeamMember component
-    const {
-        team: { teamMembers },
-    } = useStaticQuery(graphql`
-        query PeoplePageQuery {
-            team: allSqueakProfile(
-                filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
-                sort: { fields: startDate, order: ASC }
-            ) {
-                teamMembers: nodes {
-                    squeakId
-                    avatar {
-                        url
-                    }
-                    biography
-                    lastName
-                    firstName
-                    companyRole
-                    country
-                    color
-                    location
-                    pronouns
-                    pineappleOnPizza
-                    startDate
-                    teams {
-                        data {
-                            id
-                            attributes {
-                                name
-                                slug
-                            }
-                        }
-                    }
-                    leadTeams {
-                        data {
-                            attributes {
-                                name
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
 
     // Create filter options for names
     const availableFilters = useMemo(
@@ -143,3 +107,61 @@ const PeoplePage = () => {
 }
 
 export default PeoplePage
+
+export const query = graphql`
+    {
+        team: allSqueakProfile(
+            filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
+            sort: { fields: startDate, order: ASC }
+        ) {
+            teamMembers: nodes {
+                squeakId
+                avatar {
+                    url
+                }
+                biography
+                lastName
+                firstName
+                companyRole
+                country
+                color
+                location
+                pronouns
+                pineappleOnPizza
+                startDate
+                teams {
+                    data {
+                        id
+                        attributes {
+                            name
+                            slug
+                        }
+                    }
+                }
+                leadTeams {
+                    data {
+                        attributes {
+                            name
+                        }
+                    }
+                }
+            }
+        }
+        allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
+            nodes {
+                id
+                name
+                crest {
+                    data {
+                        attributes {
+                            url
+                        }
+                    }
+                }
+                miniCrest {
+                    gatsbyImageData(width: 20, height: 20)
+                }
+            }
+        }
+    }
+`

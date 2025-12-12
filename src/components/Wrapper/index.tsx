@@ -5,7 +5,6 @@ import TaskBarMenu from 'components/TaskBarMenu'
 import AppWindow from 'components/AppWindow'
 import { AnimatePresence, motion } from 'framer-motion'
 import CookieBannerToast from 'components/CookieBanner/ToastVersion'
-import Dock from 'components/Desktop/Dock'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
 
 export default function Wrapper() {
@@ -16,9 +15,12 @@ export default function Wrapper() {
         closingAllWindowsAnimation,
         setClosingAllWindowsAnimation,
         closeAllWindows,
+        rendered,
+        siteSettings,
     } = useApp()
     const [shakeReady, setShakeReady] = useState(false)
     const dotLottieRef = useRef<any>(null)
+    const [ready, setReady] = useState(false)
 
     useEffect(() => {
         if (closingAllWindowsAnimation) {
@@ -26,11 +28,19 @@ export default function Wrapper() {
         }
     }, [closingAllWindowsAnimation])
 
+    useEffect(() => {
+        setReady(true)
+    }, [])
+
     return (
-        <div className="fixed inset-0 size-full flex flex-col">
+        <div
+            data-app-rendered={rendered}
+            data-app-experience={siteSettings.experience}
+            className="fixed inset-0 size-full flex flex-col"
+        >
             {!compact && <TaskBarMenu />}
             <div ref={constraintsRef} className="flex-grow relative">
-                <Desktop />
+                {ready && <Desktop />}
                 <AnimatePresence>
                     {windows.map((item, index) => {
                         return (
@@ -67,33 +77,37 @@ export default function Wrapper() {
             {!compact && <Dock />}
             */}
             <CookieBannerToast />
-            <AnimatePresence>
-                <motion.div
-                    exit={{ opacity: 0 }}
-                    className={`fixed inset-0 size-full z-[999999] ${closingAllWindowsAnimation ? 'block' : 'hidden'}`}
-                >
-                    <DotLottiePlayer
-                        className="size-full"
-                        src="/lotties/hogzilla-swipe.lottie"
-                        ref={dotLottieRef}
-                        onEvent={(event) => {
-                            if (event === PlayerEvents.Play) {
-                                setTimeout(() => {
-                                    setShakeReady(true)
+            {ready && (
+                <AnimatePresence>
+                    <motion.div
+                        exit={{ opacity: 0 }}
+                        className={`fixed inset-0 size-full z-[999999] ${
+                            closingAllWindowsAnimation ? 'block' : 'hidden'
+                        }`}
+                    >
+                        <DotLottiePlayer
+                            className="size-full"
+                            src="/lotties/hogzilla-swipe.lottie"
+                            ref={dotLottieRef}
+                            onEvent={(event) => {
+                                if (event === PlayerEvents.Play) {
                                     setTimeout(() => {
-                                        closeAllWindows()
-                                        setShakeReady(false)
-                                    }, 500)
-                                }, 2200)
-                            }
-                            if (event === PlayerEvents.Complete) {
-                                setClosingAllWindowsAnimation(false)
-                                dotLottieRef.current.stop()
-                            }
-                        }}
-                    />
-                </motion.div>
-            </AnimatePresence>
+                                        setShakeReady(true)
+                                        setTimeout(() => {
+                                            closeAllWindows()
+                                            setShakeReady(false)
+                                        }, 500)
+                                    }, 2200)
+                                }
+                                if (event === PlayerEvents.Complete) {
+                                    setClosingAllWindowsAnimation(false)
+                                    dotLottieRef.current.stop()
+                                }
+                            }}
+                        />
+                    </motion.div>
+                </AnimatePresence>
+            )}
         </div>
     )
 }
