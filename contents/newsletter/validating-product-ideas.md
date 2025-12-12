@@ -1,6 +1,6 @@
 ---
 title: Your product ideas probably suck (that's ok)
-date: 2025-12-10
+date: 2025-12-09
 author:
   - ian-vanagas
 featuredImage: >-
