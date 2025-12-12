@@ -6,7 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
-  - jina-yoon, hanna-crombie
+  - jina-yoon
+  - hanna-crombie
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/lw-queries.png
 featuredImageType: full
