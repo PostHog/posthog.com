@@ -1113,7 +1113,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'ButtonCDI',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/customer-data-infrastructure">README: Data warehouse / CDP / ETL.md</Button>,
+        Editor: () => <Button url="/data-stack">README: PostHog data stack.md</Button>,
     },
     {
         name: 'ButtonPricing',

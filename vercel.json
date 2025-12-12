@@ -1677,7 +1677,9 @@
             "source": "/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell",
             "destination": "/handbook/growth/cross-selling/how-we-upsell-and-cross-sell"
         },
-        { "source": "/startups/[...slug]", "destination": "/startups" }
+        { "source": "/startups/[...slug]", "destination": "/startups" },
+        { "source": "/customer-data-infrastructure/:path*", "destination": "/data-stack" },
+        { "source": "/data-warehouse", "destination": "/data-stack" }
     ],
     "headers": [
         {

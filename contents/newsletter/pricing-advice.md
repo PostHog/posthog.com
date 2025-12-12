@@ -101,7 +101,7 @@ All of your favorite companies who aren’t called PostHog change their pricing 
 
 - Intercom reinvigorated and [doubled its growth](https://lennysvault.com/insights/growth-scaling-tactics/fba11d05-3cf2-4591-a811-995a1fcb325c) by launching its AI agent, Fin, with outcome-based pricing.
 
-Ultimately, changing your pricing when needed means you'll better align the value you create with how you charge for it. For example, we recently changed how we charge for [data pipelines](/customer-data-infrastructure/destinations) from events ingested to [rows exported and triggered events](/blog/data-pipeline-pricing) because it aligns better with that users actually used.
+Ultimately, changing your pricing when needed means you'll better align the value you create with how you charge for it. For example, we recently changed how we charge for [data pipelines](/docs/cdp) from events ingested to [rows exported and triggered events](/blog/data-pipeline-pricing) because it aligns better with that users actually used.
 
 > **Remember this:** Pricing changes require good communication. Give customers:
 >
