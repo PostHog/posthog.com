@@ -9,7 +9,7 @@ showTitle: true
 
 Use a single well-defined trigger per workflow (e.g. “user sign-up”, “purchase completed”, or a webhook), so the logic is clear. PostHog defines that every workflow starts with a trigger and ends with an exit. 
 
-Avoid multiple workflows that respond to the same event and perform overlapping actions as this can cause duplicated messages or conflicting side-effects.
+Avoid multiple workflows that respond to the same event and perform overlapping actions as this can cause duplicate messages or conflicting side-effects.
 
 If you really need multiple workflows on the same event, consider whether a single workflow with [audience splits](/docs/workflows/workflow-builder#audience-splits)/branching logic would serve better. 
 
