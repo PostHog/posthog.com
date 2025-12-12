@@ -30,8 +30,6 @@ It has **three simple steps**, but you’re going to need something first…
 
 ## A list of problems to solve
 
-![Problems](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/validating_cc82010724.jpg)
-
 One idea is good; many are better.
 
 Your ideas should be in the form of **problems**: jobs-to-be-done by your product for a specific customer.
@@ -82,11 +80,11 @@ Many guides to validation focus on analysis, but anyone who’s actually done va
 
 ### What to ask people
 
-Validate that they’ve actually had the problem. Focus on their situation and get specific. The clearer the problem, the simpler it’ll be for you to validate.
+1. **Validate that they’ve actually had the problem.** Focus on their situation and get specific. The clearer the problem, the simpler it’ll be for you to validate.
 
-1. **Figure out how they have tried to solve it.** What have they done and what are they doing now? If they have a crappy self-built system, there’s probably a good business in providing that thing for them.[^1]
+2. **Figure out how they have tried to solve it.** What have they done and what are they doing now? If they have a crappy self-built system, there’s probably a good business in providing that thing for them.[^1]
 
-Get into the details. Go beyond “it’s hard.” Listen and get into the details. Open-ended questions can reveal why you’re close but not quite right.
+3. **Get into the details.** Go beyond “it’s hard.” Listen and get into the details. Open-ended questions can reveal why you’re close but not quite right.
 
 If it’s not a “hair on fire” problem for them, or they’re not excited to talk about it with you, it’s probably [time to pivot](/newsletter/pivot-your-startup) to a new problem.
 
@@ -207,3 +205,5 @@ The nice part is that this gets easier when you have existing users. It’s easi
 Validation is thought of as a skill of only the earliest of startups, but it shouldn’t be. It’s a fundamental one that is useful at all stages of a company’s journey. Even if you’re not a founder, getting better at validation (and practicing it) will create dividends.
 
 <NewsletterForm />
+
+[^1]: Credit to Y Combinator legend Dalton Caldwell for this insight. This was ultimately what helped solidify James and Tim’s decision to build PostHog.
