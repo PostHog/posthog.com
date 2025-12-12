@@ -265,8 +265,8 @@ const us = [
         children: (
             <>
                 <div className="col-span-6 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-8 @3xl:pb-20">
-                    <p>A lot of companies are building AI IDEs (also known as ADEs).</p>
-                    <p>Most of them optimize for:</p>
+                    <p>A lot of companies are building AI-powered integrated development environments.</p>
+                    <p>Most of them are designed for:</p>
                     <p>
                         <span className="text-primary mr-2">•</span>Generating snippets
                         <br />
@@ -293,18 +293,35 @@ const us = [
     },
     {
         title: 'Speed without understanding is fragile',
-
         children: (
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl @3xl:pb-24">
                     <p>
-                        Get booked on a demo call with a technical person who will spend 90% of the call in the PostHog
-                        app, not chatting about our vision. They will use the info you've shared to customize the demo.
+                        Engineers don’t want AI slop. They want the full context and reasoning behind a suggestion. But
+                        they also want things to 'just work'.
                     </p>
                     <p>
-                        Yes, we'll even talk to you about how to manage your costs! If it turns out we can help you over
-                        a couple of emails, we'll do that instead - less time in meetings for you, means more time
-                        building.
+                        <strong>Fragile AI:</strong>
+                    </p>
+                    <p>
+                        <span className="text-primary mr-2">•</span>Depends on high quality inputs
+                        <br />
+                        <span className="text-primary mr-2">•</span>Hides uncertainty
+                        <br />
+                        <span className="text-primary mr-2">•</span>Forces humans to clean up after the fact
+                        <br />
+                    </p>
+                    <p>
+                        <strong>Antifragile AI:</strong>
+                    </p>
+                    <p>
+                        <span className="text-primary mr-2">•</span>Expects things to go wrong
+                        <br />
+                        <span className="text-primary mr-2">•</span>Surfaces uncertainty early
+                        <br />
+                        <span className="text-primary mr-2">•</span>Fails in small, cheap ways
+                        <br />
+                        <span className="text-primary mr-2">•</span>Improves through friction
                     </p>
                 </div>
 
@@ -315,6 +332,12 @@ const us = [
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-ae.png"
                         width={436}
                     />
+                    <p className="text-xs text-secondary mt-2 text-center">
+                        Antifragile is a term coined by Nassim Nicholas Taleb. Unlike fragile systems, which break under
+                        stress, or robust systems, which merely resist it, antifragile systems improve because of
+                        stress. Errors, randomness, and volatility aren’t just tolerated — they actively improve the
+                        system.
+                    </p>
                 </div>
             </>
         ),
@@ -324,7 +347,7 @@ const us = [
         children: (
             <>
                 <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
-                    <p>We believe in autonomy (but not the theatrical kind). In our world:</p>
+                    <p>We believe in agentic AI that 'just works' (but not the theatrical kind). In our world:</p>
                     <p>
                         <span className="text-primary mr-2">•</span>AI observes your product data continuously
                         <br />
@@ -352,24 +375,24 @@ const us = [
         ),
     },
     {
-        title: 'Two modes. Same mental model',
+        title: 'Why it will get better over time',
         children: (
             <>
                 <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
+                    <p>An antifragile system improves because:</p>
                     <p>
-                        After the call, the same person will quickly follow up with targeted, useful information about
-                        your specific use case.
+                        <span className="text-primary mr-2">•</span>It sees more edge cases
+                        <br />
+                        <span className="text-primary mr-2">•</span>It gets corrected often
+                        <br />
+                        <span className="text-primary mr-2">•</span>It accumulates real-world context (failure mode in
+                        this case would be playing it too safe)
+                        <br />
                     </p>
                     <p>
-                        If you're looking at spending $20k+ annually with us, we'll get you into a shared Slack channel
-                        with our team. <strong>The goal is to get you into a short trial period</strong> where you're
-                        implementing and seeing value from PostHog{' '}
-                        <em>
-                            <strong>within a week</strong>
-                        </em>{' '}
-                        - still free!
+                        This same philosophy should apply to every AI tool we build at PostHog. Every time a PR is
+                        rejected, a suggestion is edited, a shortcut is not taken, AI should learn and adjust.{' '}
                     </p>
-                    <p>If PostHog isn't the right fit for you, we'll let you know our honest opinion!</p>
                 </div>
 
                 <div className="col-span-4">
@@ -384,19 +407,21 @@ const us = [
         ),
     },
     {
-        title: 'Fragile vs antifragile AI',
+        title: 'The future (this is it)',
         children: (
             <>
                 <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
                     <p>
-                        Want to negotiate a discount for longer commitment? Sure thing - take your pick{' '}
-                        <Link href="/handbook/growth/sales/contracts">from our website</Link>! We believe this should be
-                        transparent too.
+                        If we get this right, PostHog AI, Signals, and Array will change how a product engineer starts
+                        their day. Right now, it starts with hunting: errors, tickets, replays, traces. You scan
+                        everything and guess what matters.
                     </p>
-                    <p className="text-xs text-secondary">
-                        P.S. If you ask for free <Link href="/merch">merch</Link>, our team is legally obliged to say
-                        yes.
+                    <p>That’s not product work. It’s prioritization.</p>
+                    <p>
+                        In the future, obvious fixes will happen automatically. Everything else will be presented with
+                        context. The engineer’s job shifts from fixing problems to deciding what’s worth working on.
                     </p>
+                    <p>That’s the direction we’re heading. And it’s already starting to work.</p>
                 </div>
 
                 <div className="col-span-4 -mt-8 @3xl:-mt-12 text-center">
@@ -420,7 +445,7 @@ const us = [
                         judgment, context, values, and knowing when not to act. Systems that try to automate your
                         qualitative research are brittle as a result.
                     </p>
-                    <p>The future of PostHog AI is pleasingly simple: </p>
+                    <p>How we think about the future of AI at PostHog is pleasingly simple:</p>
                     <p>
                         <strong>1. AI should do continuous, mechanical work: watching, summarizing, proposing.</strong>
                     </p>
@@ -673,7 +698,7 @@ export default function HowWeAI() {
                     </h2>
                     <div className="grid @3xl:grid-cols-2 @3xl:gap-8 items-center @3xl:items-start">
                         <div className="order-2 @3xl:order-1">
-                            <h3>Put AI to work for you</h3>
+                            <h3>Confused by AI marketing? Same.</h3>
                             <p>
                                 Most AI products promise to automate everything and make you obsolete. PostHog AI works
                                 differently. We're building tools that expand what you can think about, not replace your
