@@ -14,7 +14,8 @@ const ProductAnalyticsInstallationPlatforms = ({ columns = 3 }: InstallationPlat
     }
 
     const platforms = usePlatformList('docs/product-analytics/installation', 'product analytics installation')
+    const filteredPlatforms = platforms.filter((platform) => !platform.url.includes('ai-wizard'))
 
-    return <List className={`grid gap-4 grid-cols-2 ${columnClassMap[columns]} not-prose`} items={platforms} />
+    return <List className={`grid gap-4 grid-cols-2 ${columnClassMap[columns]} not-prose`} items={filteredPlatforms} />
 }
 export default ProductAnalyticsInstallationPlatforms
