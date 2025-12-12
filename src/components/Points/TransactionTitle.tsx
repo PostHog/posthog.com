@@ -39,36 +39,36 @@ export default function TransactionTitle({ type, metadata }: { type: string; met
                 ) : null}
             </span>
             <div className="min-w-0 flex-1">
-                <div className="flex items-baseline gap-2">
-                    <p className="text-sm capitalize m-0 font-semibold truncate">
-                        {type.replace(/_/g, ' ').toLowerCase()}
-                    </p>
-                    {isRedemption && code && !showCode && (
-                        <button
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                setShowCode(true)
-                            }}
-                            className="text-xs text-muted hover:text-primary transition-colors shrink-0 font-semibold"
-                        >
-                            Show code
-                        </button>
-                    )}
-                    {isRedemption && code && showCode && (
-                        <button
-                            onClick={handleCopyCode}
-                            className="inline-flex items-center gap-0.5 text-xs font-mono text-muted hover:text-primary transition-colors shrink-0"
-                        >
-                            <span>{code}</span>
-                            {copied ? (
-                                <IconCheck className="size-3 text-green" />
-                            ) : (
-                                <IconCopy className="size-3 text-primary" />
-                            )}
-                        </button>
-                    )}
+                <p className="text-sm capitalize m-0 font-semibold truncate">{type.replace(/_/g, ' ').toLowerCase()}</p>
+                <div className="flex items-baseline gap-1">
+                    {description && <p className="text-xs text-muted m-0 truncate">{description}</p>}
+
+                    {isRedemption && code ? (
+                        showCode ? (
+                            <button
+                                onClick={handleCopyCode}
+                                className="inline-flex items-center gap-0.5 text-xs font-mono text-muted hover:text-primary transition-colors shrink-0 font-semibold group"
+                            >
+                                <span>{code}</span>
+                                {copied ? (
+                                    <IconCheck className="size-3 text-green" />
+                                ) : (
+                                    <IconCopy className="size-3 text-muted group-hover:text-primary" />
+                                )}
+                            </button>
+                        ) : (
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    setShowCode(true)
+                                }}
+                                className="text-xs text-muted hover:text-primary transition-colors shrink-0 font-semibold"
+                            >
+                                Show code
+                            </button>
+                        )
+                    ) : null}
                 </div>
-                {description && <p className="text-xs text-muted m-0 truncate">{description}</p>}
             </div>
         </div>
     )

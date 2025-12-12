@@ -175,7 +175,7 @@ export default function RewardCard({ reward, total }: { reward: Reward; total: n
                             <span className="bg-green text-white text-xs font-bold px-2 py-1 rounded">It's yours!</span>
                         </div>
                     </div>
-                    <div className="rounded bg-accent border border-primary py-2 px-2 flex justify-between items-center mb-2">
+                    <div className="rounded bg-accent border border-primary py-1 px-2 flex justify-between items-center mb-2">
                         <p className="font-bold font-code m-0 text-xs tracking-wide truncate">{couponCode}</p>
                         <CopyButton text={couponCode} />
                     </div>
