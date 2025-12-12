@@ -187,7 +187,6 @@ If you can clear all three stages, congratulations: your idea is validated and y
 The next step is really to turn your validated idea into a successful startup (this makes it seem easy, doesn’t it?). Some of our other posts will be helpful now like:
 
 - [The Product-Market Fit Game (Level 5)](/founders/product-market-fit-game#level-5---onboard-your-first-5-reference-paying-customers)
-
 - [50 things we’ve learned about building successful products](/newsletter/50-product-learnings)
 - [How we got our first 1,000 users](/founders/first-1000-users)
 - [An engineer’s guide to talking to users](/newsletter/talk-to-users)
