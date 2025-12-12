@@ -118,8 +118,8 @@ const them = [
                     <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/shocked-hog.png"
-                        width={200}
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10346_8043a91132.png"
+                        width={220}
                     />
                     <p className="text-xs text-secondary mt-2 text-center">
                         Context switching takes about 23 minutes to recover from.
@@ -154,8 +154,8 @@ const them = [
                     <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/decision-makers.png"
-                        width={286}
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Untitled_Artwork_8_4e700c89f4.png"
+                        width={400}
                     />
                 </div>
             </>
@@ -166,17 +166,17 @@ const them = [
         children: (
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
-                    <p>
-                        All the sales people who got you on board immediately disappear and you are passed onto yet
-                        another team who ask you the same questions again...
-                    </p>
+                    <p>Builders, tinkerers, skeptics of hype.</p>
+                    <p>People who don't want their intuition to atrophy. People who like to see how things work.</p>
+                    <p>People who want leverage without sacrificing understanding.</p>
+                    <p>PostHog AI is a no-brainer for product teams that love to think.</p>
                 </div>
 
                 <div className="col-span-3 -mt-4 @3xl:-mt-8 @3xl:pb-8 text-center">
                     <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/shocked-hog.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_9514_d562b785cc.png"
                         width={200}
                     />
                 </div>
@@ -189,8 +189,8 @@ const them = [
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
                     <p>
-                        All the sales people who got you on board immediately disappear and you are passed onto yet
-                        another team who ask you the same questions again...
+                        We're not married to one model. Other companies built their own AI or locked into partnerships.
+                        We switch models to give you the best results for each use case.
                     </p>
                 </div>
 
@@ -198,7 +198,7 @@ const them = [
                     <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/shocked-hog.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/h_1000,c_limit,q_auto,f_auto/keyboard_garden_light_33abf319fe.png"
                         width={200}
                     />
                 </div>
@@ -241,25 +241,13 @@ const them = [
                     </p>
                 </div>
 
-                <div className="col-span-3 rotate-2 -mt-6 mb-6 relative left-3 @3xl:left-0">
-                    <div className="dark:hidden">
-                        <CloudinaryImage
-                            quality={100}
-                            placeholder="blurred"
-                            loading="eager"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/404_8e60d94aeb.png"
-                            width={270}
-                        />
-                    </div>
-                    <div className="hidden dark:block">
-                        <CloudinaryImage
-                            quality={100}
-                            placeholder="blurred"
-                            loading="eager"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/404_8e60d94aeb.png"
-                            width={270}
-                        />
-                    </div>
+                <div className="col-span-3 -mt-4 @3xl:-mt-8 @3xl:pb-8 text-center">
+                    <CloudinaryImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/404_e01bb2c910.png"
+                        width={300}
+                    />
                     <p className="text-xs text-secondary mt-2 text-center">
                         Isaac Asimov was a science fiction writer a century ahead of his time. His Three Laws of
                         Robotics governed how robots should behave.
