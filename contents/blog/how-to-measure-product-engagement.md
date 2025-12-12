@@ -75,7 +75,7 @@ These are derived by doing math on the raw metrics above to answer specific ques
 
 - **Engagement scores:** Sometimes called Product Engagement Score (PES). Weighted composites of multiple metrics meant to represent per user/account engagement in a single number. 
 
-> **Product Engagement Scores (PES)** are popular among the interwebz because having a single representative number sounds nice and looks pretty on dashboards. In practice, i's extremely reductive and rarely useful since you lose so much context when combining these numbers arbitrarily, so we don't recommend using them.
+> **Product Engagement Scores (PES)** are popular among the interwebz because having a single representative number sounds nice and looks pretty on dashboards. In practice, it's extremely reductive and rarely useful since you lose so much context when combining these numbers arbitrarily, so we don't recommend using them.
 
 ## How to measure product engagement for startups
 
