@@ -82,6 +82,7 @@ PostHog autocapture can automatically track the following events for you:
 -   **Application Updated** - when the app is updated.
 -   **$screen** - when the user navigates (if using `@react-navigation/native` (v6 or lower) or `react-native-navigation`), check out the [capturing screen views](/docs/libraries/react-native#capturing-screen-views) section
 -   **$autocapture** - touch events when the user interacts with the screen
+-   **$exception** - when the app throws exceptions.
 
 With autocapture, all touch events for children of `PosthogProvider` are tracked, capturing a snapshot of the view hierarchy at that point. This enables you to create [insights](/docs/product-analytics/insights) in PostHog without having to add custom events.
 
