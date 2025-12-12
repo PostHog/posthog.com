@@ -594,7 +594,7 @@ function Privacy() {
                             </li>
                             <li>Where you give us consent to place cookies or similar technologies;</li>
                             <li>
-                                To deliver marketing or advertisements via third-party platforms such as Linkedin;
+                                To deliver marketing or advertisements via third-party platforms such as LinkedIn;
                             </li>
                             <li>
                                 On other occasions where we ask for your consent, for the purpose we explain at the
@@ -605,7 +605,7 @@ function Privacy() {
                             You may withdraw your consent to marketing emails at any time through the unsubscribe feature provided with the
                             relevant marketing email or by contacting us using the details in the ‘Contacting PostHog
                             About Your Privacy’ section of this Privacy Policy. You may withdraw your consent for us to 
-                            use your personal information to market or advertise to you via third-party platforms at any time by sending an email to Brian@GetPostHog.com.
+                            use your personal information to market or advertise to you via third-party platforms at any time by sending an email to <a href="mailto:Brian@GetPostHog.com">Brian@GetPostHog.com</a>.
                         </p>
                     </div>
                     <div>
@@ -627,7 +627,7 @@ function Privacy() {
                     <div></div>
                     <div>
                         <p>
-                            PostHog may share your personal information with certain trusted third parties listed below for the
+                            PostHog may share your personal information with certain trusted third parties for the
                             purposes that are described in this Privacy Policy or otherwise with your consent.
                         </p>
                         <p>
@@ -656,10 +656,10 @@ function Privacy() {
                             We may also share certain account information (including email addresses) with third-party advertising 
                             platforms to create or target marketing and advertising audiences on our behalf. We do not share any of your 
                             user content that you have uploaded or have enabled our products to access for these purposes. You have the 
-                            option to opt out of your personal information being sent to third-party platforms for targeted marketing or advertising purposes by sending an email to Brian@GetPostHog.com.
+                            option to opt out of your personal information being sent to third-party platforms for targeted marketing or advertising purposes by sending an email to <a href="mailto:Brian@GetPostHog.com">Brian@GetPostHog.com</a>.
                         </p>
                         <p>
-                            Examples of the service providers and partners we use include:
+                            Examples of the service providers and partners we currently use include:
                         </p>
                         <ul>
                             <li>Amazon Web Services (AWS) - cloud data hosting</li>
@@ -672,7 +672,7 @@ function Privacy() {
                             <li>Zendesk - customer support tool</li>
                         </ul>
                         <p>
-                            **This list is representatitve and not exhaustive.** We may engage additional or different service providers and partners over time as we see fit to support our business needs. 
+                          <strong>This list is representatitve and not exhaustive.</strong> We may engage additional or different service providers and partners over time as we see fit to support our business needs. 
                             Our service providers and partners are required by contract to safeguard any personal
                             information they receive from us and are prohibited from using the personal information for
                             any purpose other than to perform the services as instructed by PostHog.
