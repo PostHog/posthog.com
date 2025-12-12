@@ -36,7 +36,7 @@ Keep records/logs where possible, especially for later debugging (e.g. knowing t
 
 Before sending emails or other messages, [set up and verify your channels](/docs/workflows/configure-channels). For email: configure "from" name, from-address, and DNS (SPF/DKIM) to avoid spam/folder issues. 
 
-Use templating/personalization carefully (e.g. with placeholders like `{{ person.name }}`), but also verify that placeholders resolve and avoid sending messages with unresolved variables. 
+Use templating and personalization carefully (e.g. with placeholders like `{{ person.name }}`), but also verify that placeholders resolve and avoid sending messages with unresolved variables. 
 
 If sending to external channels (e.g. Slack, SMS, webhooks), treat them as equally important as email: ensure you have fallback or error handling logic (e.g. when a webhook endpoint fails).
 
