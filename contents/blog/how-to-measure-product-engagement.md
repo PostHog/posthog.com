@@ -1,5 +1,5 @@
 ---
-date: 2025-12-11
+date: 2025-12-12
 title: How to actually measure product engagement
 rootPage: /blog
 sidebar: Blog
