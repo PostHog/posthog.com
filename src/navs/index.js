@@ -2981,6 +2981,7 @@ export const docsMenu = {
                     featured: true,
                     children: [
                         { name: 'Overview', url: '/docs/product-analytics/installation' },
+                        { name: 'AI wizard', url: '/docs/product-analytics/installation/ai-wizard' },
                         { name: 'Web', url: '/docs/product-analytics/installation/web' },
                         { name: 'React', url: '/docs/product-analytics/installation/react' },
                         { name: 'Node.js', url: '/docs/product-analytics/installation/nodejs' },
@@ -3246,6 +3247,7 @@ export const docsMenu = {
                     color: 'blue',
                     children: [
                         { name: 'Overview', url: '/docs/web-analytics/installation' },
+                        { name: 'AI wizard', url: '/docs/web-analytics/installation/ai-wizard' },
                         { name: 'Web', url: '/docs/web-analytics/installation/web' },
                         { name: 'React', url: '/docs/web-analytics/installation/react' },
                         { name: 'Next.js', url: '/docs/web-analytics/installation/nextjs' },

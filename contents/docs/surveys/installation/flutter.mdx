@@ -1,19 +1,25 @@
 ---
 title: Flutter surveys installation
-platformImageUrl: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg
+platformLogo: flutter
+showStepsToc: true
 ---
 
-## Step one: Add PostHog to your app
+import { Steps, Step } from 'components/Docs/Steps'
+import FlutterInstallManual from "../../integrate/_snippets/install-flutter-manual.mdx"
+
+<Steps>
+
+<Step title="Add PostHog to your app" badge="required">
 
 Using it requires PostHog's Flutter SDK version >= 5.8.0, but it's recommended to always use [the latest version](/docs/sdk-doctor).
-
-import FlutterInstallManual from "../../integrate/_snippets/install-flutter-manual.mdx"
 
 > **Note:** For mobile surveys, you must setup the SDK manually.
 
 <FlutterInstallManual />
 
-## Step two: Install PosthogObserver
+</Step>
+
+<Step title="Install PosthogObserver" badge="required">
 
 For surveys to be shown, you need to add the `PosthogObserver` to your app. The observer allows PostHog to determine the appropriate context for displaying surveys.
 
@@ -49,6 +55,10 @@ class _MyAppState extends State<MyApp> {
 ```
 
 If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing-screen-views) to learn how to set up the `PosthogObserver`.
+
+</Step>
+
+</Steps>
 
 ## Configuration
 

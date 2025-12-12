@@ -1,6 +1,7 @@
 import React from 'react'
 import List from 'components/List'
 import usePlatformList from 'hooks/docs/usePlatformList'
+import { getLogo } from 'constants/logos'
 
 interface PaymentPlatformsProps {
     columns?: 2 | 3 | 4
@@ -20,19 +21,19 @@ const PaymentPlatforms = ({ columns = 2 }: PaymentPlatformsProps) => {
         {
             label: 'Chargebee',
             url: '#',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/chargebee_DYJTQLJ_4_61eab736bc.png',
+            image: getLogo('chargebee'),
             badge: 'Coming soon',
         },
         {
             label: 'Polar',
             url: '#',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/polar_AOGZF_3_CR_261be8507a.png',
+            image: getLogo('polar'),
             badge: 'Coming soon',
         },
         {
             label: 'RevenueCat',
             url: '#',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/revenuecat_WQJWO_62_R_b8d6cc4f49.png',
+            image: getLogo('revenuecat'),
             badge: 'Coming soon',
         },
     ]

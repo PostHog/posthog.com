@@ -1,17 +1,23 @@
 ---
 title: React Native surveys installation
-platformImageUrl: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg
+platformLogo: react
+showStepsToc: true
 ---
 
-## Step one: Add PostHog to your app
+import { Steps, Step } from 'components/Docs/Steps'
+import ReactNativeInstall from "../../integrate/_snippets/install-react-native.mdx"
+
+<Steps>
+
+<Step title="Add PostHog to your app" badge="required">
 
 Using surveys requires PostHog's React Native SDK version >= [4.5.0](https://github.com/PostHog/posthog-js/releases). It's recommended to always use the latest version.
 
-import ReactNativeInstall from "../../integrate/_snippets/install-react-native.mdx"
-
 <ReactNativeInstall />
 
-## Step two: Install surveys dependencies
+</Step>
+
+<Step title="Install surveys dependencies" badge="required">
 
 ```bash
 yarn add react-native-safe-area-context react-native-svg
@@ -19,7 +25,9 @@ yarn add react-native-safe-area-context react-native-svg
 npm i -s react-native-safe-area-context react-native-svg
 ```
 
-## Step three: Add the surveys provider
+</Step>
+
+<Step title="Add the surveys provider" badge="required">
 
 Add `PostHogSurveyProvider` to your app anywhere inside `PostHogProvider`. This component fetches surveys. It also acts as the root for where popover surveys are rendered.
 
@@ -42,6 +50,10 @@ You can also pass your `client` instance to the `PostHogSurveyProvider`.
 ```ts
 <PostHogSurveyProvider client={posthog}>
 ```
+
+</Step>
+
+</Steps>
 
 ## Supported Features
 

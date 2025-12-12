@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import { CDPManagedSources, CDPSelfManagedSources } from '../_snippets/cdp-sources'
+import { ManagedSources, SelfHostedSources } from '../../_snippets/data-sources'
 export const SettingsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_08_30_at_10_45_12_ef06f67105.png"
 export const SettingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_08_30_at_10_47_20_f6c1d42503.png"
 
@@ -20,13 +20,13 @@ To link a source, go to the Integrations tab, and click the **Sources** tab.
 
 Provide your credentials and PostHog handles the entire extract and load process. Data syncs automatically from your source to PostHog's storage.
 
-<CDPManagedSources />
+<ManagedSources />
 
-## Self-managed sources
+## Self-hosted sources
 
 Upload CSV or Parquet files to your own object storage and link them as a source. PostHog reads directly from your storage on every query. You control data freshness and can store as much data as you want.
 
-<CDPSelfManagedSources />
+<SelfHostedSources />
 
 import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
 
@@ -89,4 +89,3 @@ When you expand each source, you can see:
     alt="Source settings in PostHog"
     classes="rounded"
   />
-

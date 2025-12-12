@@ -1,8 +1,8 @@
 ---
-title: Linking sources for PostHog's data warehouse
+title: Data warehouse sources
 ---
 
-import { ManagedSources, SelfManagedSources } from '../_snippets/dw-installation-platforms'
+import { ManagedSources, SelfHostedSources } from '../../_snippets/data-sources'
 
 ## PostHog data
 
@@ -14,10 +14,10 @@ Provide your credentials and PostHog handles the entire extract and load process
 
 <ManagedSources />
 
-## Self-managed sources
+## Self-hosted sources
 
 Upload CSV or Parquet files to your own object storage and link them as a source. PostHog reads directly from your storage on every query. You control data freshness and can store as much data as you want.
 
-<SelfManagedSources />
+<SelfHostedSources />
 
 You can also learn more about sources in the [data pipeline docs](/docs/cdp/sources).
