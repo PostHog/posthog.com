@@ -1516,6 +1516,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/customer-churn-retros',
                     },
                     {
+                        name: 'Risk mitigation and churn prevention',
+                        url: '/handbook/growth/sales/risk-mitigation-and-churn-prevention',
+                    },
+                    {
                         name: 'Historical imports',
                         url: '/handbook/growth/sales/historical-import',
                     },
