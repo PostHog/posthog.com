@@ -1517,7 +1517,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Risk mitigation and churn prevention',
-                        url: '/handbook/sales/risk-mitigation-and-churn-prevention',
+                        url: '/handbook/growth/sales/risk-mitigation-and-churn-prevention',
                     },
                     {
                         name: 'Historical imports',
