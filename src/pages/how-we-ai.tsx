@@ -18,13 +18,12 @@ const them = [
         children: (
             <>
                 <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
-                    <p>Humans have limited working memory (4-7 items).</p>
-                    <p>Products generate overwhelming amounts of data.</p>
-                    <p>Holding all that context in your head is hard - maybe bordeline impossible.</p>
+                    <p>Humans can hold about 4–7 things in working memory.</p>
+                    <p>Products generate trillions of data points per day.</p>
+                    <p>Trying to hold all that context at once would cook your brain.</p>
                     <p>
-                        PostHog AI expands the amount of information a product engineer can consider. Outsourcing some
-                        of your mental load frees up space for the human stuff:{' '}
-                        <strong>creativity, intuition, and deciding what to build next.</strong>
+                        PostHog AI widens your mental bandwidth. It carries the data load so you can focus on the parts
+                        that matter: <strong>creativity, intuition, and deciding what to build next.</strong>
                     </p>
                 </div>
 
@@ -104,6 +103,69 @@ const them = [
         children: (
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
+                    <p>Hopping between tabs and tools is the opposite of a workflow.</p>
+                    <p>
+                        Every time you jump from PostHog to ChatGPT to ask about your data, then back to PostHog to
+                        verify it, you're burning half an hour of deep work.
+                    </p>
+                    <p>
+                        When AI is native to the product, it keeps you in flow. Ask a question, get an answer,
+                        investigate the data, ask a follow-up. Add it up, and that’s real time savings.
+                    </p>
+                </div>
+
+                <div className="col-span-3 -mt-4 @3xl:-mt-8 @3xl:pb-8 text-center">
+                    <CloudinaryImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/shocked-hog.png"
+                        width={200}
+                    />
+                    <p className="text-xs text-secondary mt-2 text-center">
+                        Context switching takes about 23 minutes to recover from.
+                    </p>
+                </div>
+            </>
+        ),
+    },
+    {
+        title: 'What makes this possible',
+        children: (
+            <>
+                <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-12 @3xl:pb-20">
+                    <p>Simply put, we have more data. PostHog captures signals from:</p>
+                    <p>
+                        <span className="text-primary mr-2">•</span>Analytics (what users do)
+                        <br />
+                        <span className="text-primary mr-2">•</span>Session replays (how they do it)
+                        <br />
+                        <span className="text-primary mr-2">•</span>Feature flags (what changed)
+                        <br />
+                        <span className="text-primary mr-2">•</span>A/B tests (what worked)
+                        <br />
+                        <span className="text-primary mr-2">•</span>Error logs (what broke)
+                        <br />
+                        <span className="text-primary mr-2">•</span>Surveys (what they said)
+                    </p>
+                    <p>PostHog AI then connects the dots across your entire product to arrive at richer conclusions.</p>
+                </div>
+
+                <div className="col-span-4 -mt-12 pb-4 text-center">
+                    <CloudinaryImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/decision-makers.png"
+                        width={286}
+                    />
+                </div>
+            </>
+        ),
+    },
+    {
+        title: 'Who this is for',
+        children: (
+            <>
+                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
                     <p>
                         All the sales people who got you on board immediately disappear and you are passed onto yet
                         another team who ask you the same questions again...
@@ -122,32 +184,7 @@ const them = [
         ),
     },
     {
-        title: 'What makes this possible',
-        children: (
-            <>
-                <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-12 @3xl:pb-20">
-                    <p>
-                        Simply put, we have more data. PostHog captures signals from analytics, error tracking, user
-                        sessions, feature flags, A/B tests, and more.
-                    </p>
-                    <p>
-                        PostHog AI then connects the dots across your entire product to arrive at richer conclusions.{' '}
-                    </p>
-                </div>
-
-                <div className="col-span-4 -mt-12 pb-4 text-center">
-                    <CloudinaryImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/decision-makers.png"
-                        width={286}
-                    />
-                </div>
-            </>
-        ),
-    },
-    {
-        title: 'Who this is for',
+        title: "How we're different",
         children: (
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
