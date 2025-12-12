@@ -1,10 +1,10 @@
 ---
-title: Your product idea probably sucks (that's ok)
-date: 2025-11-27
+title: Your product ideas probably suck (that's ok)
+date: 2025-12-10
 author:
   - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/validation_cover_3d3ffffcaa.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/validating_cc82010724.jpg
 featuredImageType: full
 tags:
   - Engineering
@@ -14,163 +14,161 @@ crosspost:
   - Blog
 ---
 
-### How to validate new product ideas
+You have an idea for a new product and you think it’s really, really good. You’re tempted to dive straight into building it. “People are going to LOVE this!”
 
-You have a new product idea you think is really, really good…
+This is a trap.
 
-Before you start browsing Lamborghinis, you need to figure out if other people (AKA “the market”) think it is good too. This is known as “validation” in the biz.
+Many founders learn this the hard way by spending weeks, months (maybe even years?!) building something people don’t want because they never stopped to do something very simple from the outset.
 
-We know a bit about this, James and Tim pivoted five times before settling on PostHog. In the words of James, “We’ve had a lot of terrible ideas in our time” and validation was there to tell them just how bad they were.
+**Validate their idea.**
 
-I wouldn’t be writing this newsletter without the success of the validation process James and Tim did back in the day. In an effort to make more newsletters like this one (or just successful products), we’re sharing this process here.
+We know a bit about this. PostHog’s co-founders, James and Tim, [pivoted five times](/founders/story-about-pivots) before settling on [PostHog](/). James admits “we had a lot of terrible ideas” and validation was there to tell them just how bad they were.
 
-## Step 0: Have a list of ideas
+I wouldn’t be writing this newsletter without the success of the validation process they did back in the day, so I’m sharing their playbook here.
 
-The prerequisite to all of this is having an idea you want validated, ideally multiple. These should be in the form of **problems**, jobs-to-be-done by your product for a specific customer.
+It has **three simple steps**, but you’re going to need something first…
 
-Often, the specific customer is **you** and the problem is **one you've had**. 
+## A list of problems to solve
 
-- The [GrubHub founders](https://mixergy.com/interviews/grubhub-michael-evans-interview/) were fed up not knowing which restaurants near them could deliver food.
-- [Mercury's founder](https://tearsheet.co/podcasts/there-were-all-these-other-great-services-but-banking-was-kind-of-static-mercurys-immad-akhund-on-banking-startups/), Immad Akhund, "was just really frustrated as an entrepreneur that I had all these great other services, which improved over time, but banking was this kind of static thing that I was forced to use and rely on."
-- The [ElevenLabs founders](https://concept.vc/news/founder-stories-elevenlabs) felt dubbing (voiceovers) into their native Polish "were flat and monotonous."
-- The [Deel founders](https://www.backscoop.com/newsletter-posts/deel-the-founding-story-of-the-17b-company-that-makes-global-work-possible) faced repeated problems hiring internationally in past startups.
-- [Tope Awotona of Calendly](https://www.linkedin.com/posts/guyrazpodcasts_three-lessons-about-entrepreneurship-from-activity-7383418746020745216-k3Sy) was tired of endless back and forth emails trying to schedule meetings.
+![Problems](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/validating_cc82010724.jpg)
 
-At the start of PostHog, James had a [3 page Google Doc of ideas](/founders/story-about-pivots) based on problems he encountered in his career up until then. More were added as he worked through validating them with Tim. Some of the ideas were:
+One idea is good; many are better.
 
-1. Sales territory management tool.
-2. CRM with predictive analytics for small companies.
-3. 1:1 tool for managers with predictive analytics.
-4. Technical debt management using surveys after pull requests.
-5. Engineering retention tool using surveys after pull requests.
-6. Open source project analytics platform (that's us!!!)
+Your ideas should be in the form of **problems**: jobs-to-be-done by your product for a specific customer.
 
-## Step 0.5: Things to not do
+Often, the specific customer is **you** and the problem is **one you’ve had**:
 
-Before you Leeroy Jenkins into validation, there are some pitfalls to avoid like:
+- [Mercury’s founder](https://tearsheet.co/podcasts/there-were-all-these-other-great-services-but-banking-was-kind-of-static-mercurys-immad-akhund-on-banking-startups/) “was just really frustrated” that, as an entrepreneur, “banking was this kind of static thing that I was forced to use and rely on.”
 
-- **Building your product first:** As tempting as it is to spend weeks or months coding up your product first, without validation, this risks being a huge time waste. [Christina Cacioppo of Vanta](https://review.firstround.com/vantas-path-to-product-market-fit/) built multiple products that failed before deciding to “just talk to users.”
+- [Deel’s founders](https://www.backscoop.com/newsletter-posts/deel-the-founding-story-of-the-17b-company-that-makes-global-work-possible) had faced repeated problems hiring internationally in past startups, such as a lack of legal legitimacy and high costs.
 
-- **Telling people what they need:** If you are reading advice on how to validate your product, you probably don’t have a product or design sense to “just make it work” like Steve Jobs. Validation fills in for this.
+- [ElevenLabs’ founders](https://concept.vc/news/founder-stories-elevenlabs) thought movies dubbed into their native Polish “were flat and monotonous” and thought they could do better using AI.
 
-- **Doing big business validation:** You don’t need to run focus groups, start product managing, build a pitch deck, or spend weeks on competitor research.
+James started with a [three-page Google Doc of ideas](/founders/story-about-pivots) based on problems he encountered in his career up until then. More were added as he worked through validating them with Tim.
 
-- **Just asking people if they like your idea:** Most people will just say “yes” or “it’s interesting” to get you to stop talking to them. This does not mean your product is validated.
+Many of their ideas were bad and never got past the first step of validation – seriously guys, a “1:1 tool for managers with predictive analytics?”
 
-- **Asking the wrong audience:** Your friends (or mom) might like your idea, but they're probably not the right people to validate it.
+Others got further before being invalidated. Only PostHog, AKA “open-source product analytics built for engineers,” made it to the end. Ironically, they landed on this idea through the process of validating their other ideas.
 
-- **Going slow:** James once said “the quicker you are, the worse you can be at product. If you are bad at product and slow, you are doomed.” Don’t worry about looking dumb because you are dead by default.
+Every time they built something and tried to deploy analytics, they were frustrated by hard-to-implement tools not designed for builders. They literally stumbled on the right idea by failing multiple times.
 
-- **Pursue bad ideas:** There are just so many ways to have bad startup ideas, it is impossible to explain them all. More importantly, a lot of bad sounding ideas are actually good ones. That is what validation is for 😎.
+So, once you have some problems like these to solve (or at least one), you’re ready for…
 
-## Step 1: Validate your problem is real by talking to users
+## Step 1: Validate your problem is real
 
-With your list of problems and pitfalls to avoid, we can finally get to the real part of validation: learning users’ *real* problems. You may think you know what their problems are, but you don't yet. 
+You do this by talking to potential users.
 
-Unfortunately, this is harder than both the previous (non-)steps because not working hard enough is a serious failure mode. No one else is doing this for you. James got at least 2 meetings a day, 5 days a week while doing other random tasks like building the website.
+No one else is going to do this for you and not working hard enough is a common failure mode here.
 
-Another risk is caring too much too soon. You don’t need to care about audience, solution, or even that it’s unique yet. If people have a burning problem, these details sort themselves out.
+James got at least two meetings a day, five days a week while doing other random tasks, like building a website. He was constantly asking for intros and doing cold outreach via his network.
+
+Another risk is caring too much too soon.
+
+You don’t need to care about audience, solution, or even that it’s unique yet. If people have a burning problem, these details sort themselves out.
 
 ### How to get meetings
 
-Many other guides focus on the analysis part of this step, but anyone who’s actually done validation will tell you that getting people to talk to you is often the hardest part. Here’s our advice:
+Many guides to validation focus on analysis, but anyone who’s actually done validation will tell you that *getting people to talk to you* is the hardest part:
 
-- **Ask the right people.** The people who want to respond to you. Friends, family, former teammates, followers, former coworkers, communities you’re a part of, cold outreach. Keep digging, Mercury’s founder Immad Akhund found that “some of the most useful people were four intro chains down.”
+1. **Use your network.** Find people who want to respond to you, such as friends, former teammates, followers, members of communities you’re a part of.
 
-- **Be concise and clear about what you want.** 2-3 sentences, not walls of text. Be clear if you want feedback (say it’s an interview) or you want to sell.
+2. **Ask for intros.** Sometimes the people you know can introduce you to other relevant people. Mercury’s founder, Immad Akhund, says “some of the most useful people were four intro chains down.”
 
-- **Be quick**. Follow up fast. Startups [win on speed](/founders/how-come-we-ship-so-much), be glued to your messages.
+3. **Be concise.** Two to three sentences, not walls of text. Be clear you want feedback on your idea – say it’s an interview. Don’t try to sell to them yet.
 
-- **Do them in-person (if possible).** This helps you better understand their context and you can catch more non-verbal cues. Video calls are second best.
+4. **Be quick.** Follow up fast. Startups [win on speed](/founders/how-come-we-ship-so-much), be glued to your messages.
 
-For inspiration, you can look at how now successful founders got their meetings:
-
-- Canva’s Melanie Perkins [taught design](https://synergystartup.substack.com/i/163771155/connecting-the-dots) and noticed students were struggling with Photoshop.
-- Stripe’s Collison Brothers talked to [fellow founders while in YC](https://paulgraham.com/ds.html), as did [Retool’s founder](https://review.firstround.com/retools-path-to-product-market-fit-lessons-for-getting-to-100-happy-customers-faster/).
-- Airtable’s Howie Liu learned from [everyone he worked with while at Salesforce](https://nira.com/airtable-history/).
-- The founders of DoorDash literally went [door to door interviewing restaurant owners](https://futurestartup.com/2021/06/10/future-startup-dossier-doordash).
+5. **Do interviews in-person (if possible).** This helps you better understand their context and you can catch more non-verbal cues. Video calls are second best.
 
 ### What to ask people
 
-1. **Validate that they’ve actually had the problem.** Focus on their situation and get specific. The clearer the problem, the simpler it’ll be for you to validate and solve it.
+Validate that they’ve actually had the problem. Focus on their situation and get specific. The clearer the problem, the simpler it’ll be for you to validate.
 
-2. **Figure out how they have tried to solve it.** What have they done and what are they doing now? In the words of Dalton Caldwell:
+1. **Figure out how they have tried to solve it.** What have they done and what are they doing now? If they have a crappy self-built system, there’s probably a good business in providing that thing for them.[^1]
 
-> "If a company has a crappy self-built system that they're reliant on, there's probably a good business to be built providing exactly that product."
+Get into the details. Go beyond “it’s hard.” Listen and get into the details. Open-ended questions can reveal why you’re close but not quite right.
 
-3. **Get into the details.** Go beyond “it’s hard.” Listen and get into the details. Search for big challenges (and pain points). Open-ended questions can reveal why you’re close but *not quite* right.
+If it’s not a “hair on fire” problem for them, or they’re not excited to talk about it with you, it’s probably [time to pivot](/newsletter/pivot-your-startup) to a new problem.
 
-You can tell you're problem isn't there if:
+If you can see people are desperate for a solution, and you’re excited to work on the problem, then you’re ready to move on to Step 2.
 
-- It's not a burning problem for them.
-- They're not excited to talk about it.
-- You're not excited to work on it.
+## Common failure modes
 
-These are signs [it's time to pivot](/newsletter/pivot-your-startup). 
+- **Just asking people if they like your idea:** Most people will just say “yes” or “it’s interesting” to get you to stop talking to them. This doesn’t equal validation. You need to know if they’ve encountered the problem and tried to solve it.
+
+- **Asking the wrong people:** Sometimes the problem is right and the audience is wrong. Double check your assumptions here before pivoting to a new idea.
+
+- **Telling people what they need:** If you are reading advice on how to validate your product, you probably don’t have a product or design sense to “just make it work” like Steve Jobs. Validation fills in for this.
+
+- **Doing big business validation:** You don’t need to run focus groups, [start product managing](/newsletter/product-management-is-broken), build a pitch deck, or spend weeks on competitor research. Validating your problem exists isn’t like writing an academic research paper.
+
+- **Going slow:** James once said “the quicker you are, the worse you can be at product. If you are bad at product and slow, you are doomed.” Don’t worry about looking dumb because you are dead by default.
 
 ## Step 2: Validate users want your solution
 
-Once you’ve validated your problem is real, building a solution and getting users should be the main thing you are doing. This is the beauty of having [two cofounders](/newsletter/how-to-not-breakup-with-your-cofounder). One can focus entirely on building, while the other does everything else necessary for validation.
+This phase is similar to the first, but now you’re validating **your solution** to the problem, not whether it’s a real problem or not.
 
-Tim built it, James sold it. One of the first products they built leveraged James’ experience as a salesperson. It was a complicated sales territory management tool to help reps move on from accounts that weren’t moving forward.
+Having [two co-founders](/newsletter/how-to-not-breakup-with-your-cofounder) helps here. One can focus entirely on building, while the other does everything else necessary for validation.
 
-After 15 sales leaders said they would use it, they built it and sent it to them. Unfortunately, 14 didn’t click the link. The final person clicked the link and didn’t log in. This was a clear sign this wasn’t what users wanted and it was time to build something else.
+In the early days of PostHog, Tim built it, James sold it. One of the first products they built leveraged James’ experience as a salesperson. It was a complicated sales territory management tool to help reps move on from accounts that weren’t moving forward.
 
-![Validating](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/validation_cover_3d3ffffcaa.png)
+After 15 sales leaders said they would use it, they built it and sent them a link. Only one person clicked the link and they didn’t even log in. This was a clear sign this wasn’t what users wanted and it was time to build something else.
 
-Beyond just building the wrong thing like the above example, there are two big problems you could run into at this phase.
+Beyond just building the wrong thing, there are two other big problems you can run into at this phase:
 
-### Not explaining your solution clearly
+### Problem #1: Not explaining your solution clearly
 
-Articulating the problem is only half battle. You need to articulate your solution too. Square the circle and explain how your solution solves their problem. 
+![Not explaining your solution clearly](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Image_2_911c37becc.jpg)
 
-![Rest of the owl](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/image_52db934af2.png)
+Articulating the problem is only half the battle. You need to articulate your solution, too. Square the circle and explain how your solution solves their problem.
 
-<Caption>Average startup founder explaining how their solution solves user problems</Caption>
+If you do this well, you might not need to do anything else. Many startups have built huge waitlists before their product even launches, validating demand.
 
-Sometimes, articulating your solution well is all you need. Take the thousands of startups who have built huge waitlists before their product launches, like Dropbox, whose [viral demo video](https://www.alexanderjarvis.com/dropbox-doing-things-that-dont-scale/) led to thousands of signups before they built anything.
+A classic example is Dropbox, whose [viral demo video](https://www.alexanderjarvis.com/dropbox-doing-things-that-dont-scale/) led to thousands of signups before they built anything.
 
-### Lacking credibility
+### Problem #2: You lack credibility
 
-If you’re still struggling to convince users of your solution, it may be because you don’t have enough “street cred.” 
+![Founders when it's time to build credibility](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/image_3_33b8805b27.jpg)
+
+If you’re still struggling to convince users of your solution, it may be because you don’t have enough “street cred.”
 
 There is a reason every YC founder brags about their past startup and schooling successes. Even though they might not be successful yet, this gives them the credibility to convince others they can pull it off.
 
-![Founders when it’s time to build credibility](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/image_1_c40130a49b.png)
+For PostHog, James and Tim thought of reasons why people wouldn’t want to use it:
 
-<Caption>Founders when it’s time to build credibility</Caption>
-
-For PostHog, James and Tim thought of reasons why people wouldn’t want to use it: 
-
-1. **Users might not believe there was a real company behind it.** Publishing the [handbook](/handbook) gave the company some legitimacy (we copied this from GitLab). 
+1. **Users might not believe there was a real company behind it.** Publishing the [handbook](/handbook) gave the company some legitimacy. They took inspiration from GitLab.
 
 2. **Users might not trust others with their data.** Making PostHog [open source](/newsletter/open-source-benefits) and self-hostable was the solution to this.
 
-Airbnb hosts famously weren’t getting bookings because their photos sucked. Brian Chesky and Joe Gebbia flew to New York to [take better photos for them](https://www.mousencheese.design/post/the-30-photo-that-built-a-billion-dollar-brand-how-airbnb-s-ux-pivot-changed-everything) (while doing more validation). The [GOAT founders did something similar](https://review.firstround.com/goats-path-to-product-market-fit/) with sneakers, buying some and taking photos on different types of flooring to make their stock look more robust. 
+Airbnb hosts famously weren’t getting bookings because their photos sucked. Brian Chesky and Joe Gebbia flew to New York to [take better photos for them](https://www.mousencheese.design/post/the-30-photo-that-built-a-billion-dollar-brand-how-airbnb-s-ux-pivot-changed-everything) (while doing more validation).
+
+The [GOAT founders did something similar](https://review.firstround.com/goats-path-to-product-market-fit/) with sneakers, buying some and taking photos on different types of flooring to make their stock look more robust.
 
 A bit of polish in the right places goes a long way at the early stage.
 
-## Step 3: Validate your solution is a real business by retaining users
+## Step 3: Validate your solution works
 
-If you can retain users, you are repeatedly solving their problems.  This is rare, valuable, and a sign you should start investing more into product development. 
+You do this by retaining users.
+
+If you can retain users, you are repeatedly solving their problems. This is rare, valuable, and a sign you should start investing more into product development.
 
 At an early stage, this doesn’t need to be complicated. You can follow this simple product improvement loop:
 
-![Improvement loop](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/image_2_1f77c1ae2f.png)
+![Product improvement loop](https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Image_4_4a865acc14.jpg)
 
 Closing the loop above is the way to cement your product-market fit because:
 
-1. **Your product improves fast.** Weight user feedback very heavily compared to your instincts around what to build.
+1. **Your product improves fast.** Weight user feedback very heavily compared to your instincts around what to build.
 
-2. **It generates word of mouth growth.** The one thing you can compete on is speed. You can outperform any competitors by providing an excellent experience to your early users so they tell their friends.
+2. **It generates word of mouth growth.** The one thing you can compete on is speed. You can outperform any competitors by providing an excellent experience to your early users so they tell their friends.
 
-3. **Listening to users’ compounds.** The more you listen to users and act on their feedback, the more useful feedback they'll share with you.
+3. **Listening to users compounds.** The more you listen to users and act on their feedback, the more useful feedback they’ll share with you.
 
-### What feedback to get and how?
+You should have deployed some analytics by now to track how people use your product, and you can create [retention insights](/docs/product-analytics/retention) (like the one below) to track this.
 
-There are infinite bits of feedback you can care about: Twitter replies, Product Hunt upvotes, sales conversations, button clicks, proud mom Facebook posts. Which ones should you care about?
+![Retention](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/image_5_bea79c5346.jpg)
 
-Beyond [retention](/docs/new-to-posthog/retention), the most important bits are:
+You’re looking for a retention curve that flattens out like the one above. Other useful signals include:
 
 1. **Qualitative feedback.** [Talk to users](/newsletter/talk-to-users). Run a [feedback survey](/templates/in-app-feedback-survey). Ask the [PMF question](/product-engineers/product-survey-questions#using-surveys-to-find-product-market-fit) → “How would you feel if you could no longer use the product?”
 
@@ -178,25 +176,24 @@ Beyond [retention](/docs/new-to-posthog/retention), the most important bits are:
 
 3. **Activation.** Before you can retain a user, they have to [activate](/newsletter/wtf-is-activation). If they don’t, they can’t experience the value of your product. Get them to this point faster if you can, even [activate them yourself if you have to](http://paulgraham.com/ds.html#Manual).
 
-> **Getting conflicting feedback?** You might be further along then you think and have multiple user personas using your product. Clarifying your [ideal customer profile](/founders/creating-ideal-customer-profile) can help you figure out what feedback to listen to. 
+4. **Revenue.** As long as you’re not selling dollar bills for 50 cents, having people pay you (or desperately want to pay you) is clear evidence.
 
-## Step ♾️: What’s after validation?
+If you’re getting conflicting feedback, you might have multiple user personas using your product. Defining your [ideal customer profile](/founders/creating-ideal-customer-profile) can help you figure out whose feedback to listen to.
 
-By this point, you can safely say your idea is validated and you’re on your way to the promised land of product-market fit. This is a superpower. As [Christina Cacioppo of Vanta](https://review.firstround.com/vantas-path-to-product-market-fit/) said:
+## What’s after validation?
 
-> I'd spent a year validating the idea. And because I'd spent so much time validating, whenever I got a rejection from an investor, I was like, “Cool, I look forward to proving you wrong.”
+If you can clear all three stages, congratulations: your idea is validated and you’re on your way to the promised land of product-market fit.
 
 The next step is really to turn your validated idea into a successful startup (this makes it seem easy, doesn’t it?). Some of our other posts will be helpful now like:
 
 - [The Product-Market Fit Game (Level 5)](/founders/product-market-fit-game#level-5---onboard-your-first-5-reference-paying-customers)
+
 - [50 things we’ve learned about building successful products](/newsletter/50-product-learnings)
 - [How we got our first 1,000 users](/founders/first-1000-users)
 - [An engineer’s guide to talking to users](/newsletter/talk-to-users)
 - [How first-time founders fail](/newsletter/first-time-founders)
 
-## Validation doesn’t stop being important after PMF
-
-Already reached product-market fit? This doesn’t mean your validation skills are useless. You still need to:
+But the reality is you never stop validating. You still need to:
 
 - Validate the features and products on your roadmap
 - Talk to users and figure out their real problems
@@ -204,8 +201,10 @@ Already reached product-market fit? This doesn’t mean your validation skills a
 - Activate and retain them
 - Iterate on feedback
 
-This can all be clouded in the success of the larger business, so you’ll probably need to work harder to find the real signal too.
+This can all be clouded by the success of the larger business, so you’ll probably need to work harder to find the real signal.
 
-The nice part is that this gets easier when you have existing users. It’s easier to recruit them, they want to help you as it helps them. As Ali Rowghani once said “As you get more users, you can start to see around corners.”
+The nice part is that this gets easier when you have existing users. It’s easier to recruit them, they want to help you as it helps them. As [Ali Rowghani](https://x.com/ROWGHANI) once said “As you get more users, you can start to see around corners.”
 
-Validation is thought of as a skill of only the earliest of startups, but it shouldn’t be. It’s a fundamental one that is useful at all stages of a company’s journey. Even if you’re not a founder, getting better at validation (and practicing it) will provide career dividends.
+Validation is thought of as a skill of only the earliest of startups, but it shouldn’t be. It’s a fundamental one that is useful at all stages of a company’s journey. Even if you’re not a founder, getting better at validation (and practicing it) will create dividends.
+
+<NewsletterForm />
