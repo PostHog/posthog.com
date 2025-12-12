@@ -4,49 +4,54 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We've built out extensive tooling to help us write docs. This page is a guide to help you use it.
+import HogRefSchema from './_snippets/hogref-schema.mdx'
+
+We've built out extensive tooling to help us write docs. This page records how these tools work and how to use them.
 
 ## Onboarding docs
 
-Onboarding docs are special because these instructions are **shared** between the [in-app onboarding](https://github.com/PostHog/posthog/tree/master/frontend/src/scenes/onboarding) flow and the getting started pages on the [posthog.com repository](https://github.com/PostHog/posthog.com). These are the first pieces of docs a new user will see, so they need to be up to date and accurate. 
+Onboarding docs are special because these instructions are **shared** between the [in-app onboarding](https://github.com/PostHog/posthog/tree/master/frontend/src/scenes/onboarding) flow and the getting started pages on the [posthog.com website](https://github.com/PostHog/posthog.com). These are the first pieces of docs a new user will see, so they need to be up to date and accurate. 
 
-To help with this, there is a single source of truth for the onboarding docs in the [posthog/posthog](https://github.com/PostHog/posthog) repository under the [`docs/onboarding`](https://github.com/PostHog/posthog/tree/master/docs/onboarding) directory. This means you only need to update the in-app onboarding docs in the `posthog/posthog` repository, and the website docs will be updated automatically.
+To help keep in-app and website onboarding docs in sync, there is a **single source** of truth for the onboarding docs in the [`posthog/posthog`](https://github.com/PostHog/posthog) repository under the [`docs/onboarding`](https://github.com/PostHog/posthog/tree/master/docs/onboarding) directory. This means you only need to update the in-app onboarding docs in the `posthog/posthog` repository, and the website docs will be updated automatically.
 
-### Which product's onboarding are shared
+### Which products have shared onboarding docs
 
-This is a relatively new feature, so we're still migrating old onboarding docs to the new system. As of December 2025, this is the migration status:
-- [ ] Product analytics
-- [ ] Web analytics
-- [ ] Session replay
-- [ ] Feature flags
-- [ ] Experiments
-- [ ] Error tracking
-- [ ] Surveys
-- [ ] Data pipelines
-- [ ] Data warehouse
-- [x] LLM analytics
-- [ ] Revenue analytics
-- [ ] PostHog AI
-- [ ] Workflows
-- [ ] Logs
-- [ ] Endpoints 
+This is a relatively new feature, so we're still migrating old onboarding docs to the new system. As of December 2025:
+
+| Product | Status |
+|---------|--------|
+| LLM analytics | ✅ Migrated |
+| Product analytics | ⏳ Not yet migrated |
+| Web analytics | ⏳ Not yet migrated |
+| Session replay | ⏳ Not yet migrated |
+| Feature flags | ⏳ Not yet migrated |
+| Experiments | ⏳ Not yet migrated |
+| Error tracking | ⏳ Not yet migrated |
+| Surveys | ⏳ Not yet migrated |
+| Data pipelines | ⏳ Not yet migrated |
+| Data warehouse | ⏳ Not yet migrated |
+| Revenue analytics | ⏳ Not yet migrated |
+| PostHog AI | ⏳ Not yet migrated |
+| Workflows | ⏳ Not yet migrated |
+| Logs | ⏳ Not yet migrated |
+| Endpoints | ⏳ Not yet migrated | 
 
 ### How to update onboarding docs
 
-1. **Find the shared content file** in the PostHog main repository under [`docs/onboarding`](https://github.com/PostHog/posthog/tree/master/docs/onboarding). For example, `docs/onboarding/llm-analytics/openai.tsx`.
-2. **Edit the `.tsx` file** directly in the `posthog/posthog` repository. Make your changes to the component.
-3. **Test locally** by running the app in development mode and verifying the changes in the in-app onboarding. (You can trigger onboarding by navigating to `localhost:8010/products`).
-4. **Commit and open a PR** to merge your changes into `master` in `posthog/posthog`. This will trigger a Vercel preview build of the website. Verify these changes and merge the PR.
-5. **Verify the website locally** if the preview doesn't give you confidence. You can do this by setting the `GATSBY_POSTHOG_BRANCH` environment variable to your PR branch and rebuilding the website locally.
-6. **Verify on website**: The website will automatically pull the changes on its next build.
+1. Find the shared content file in the [`posthog/posthog`](https://github.com/PostHog/posthog) repository under [`docs/onboarding`](https://github.com/PostHog/posthog/tree/master/docs/onboarding). For example, `docs/onboarding/llm-analytics/openai.tsx`.
+2. Edit the `.tsx` file directly in the `posthog/posthog` repository. Make your changes to the component.
+3. Test locally by running the app in development mode and verifying the changes in the in-app onboarding. You can trigger onboarding by navigating to `localhost:8010/products`.
+4. Commit and open a PR to merge your changes into `master` in `posthog/posthog`. This will trigger a Vercel preview build of the website. Verify these changes and merge the PR.
+5. If you need more confidence, verify the website locally by setting the `GATSBY_POSTHOG_BRANCH` environment variable to your PR branch and rebuilding the website locally.
+6. Verify on website: The website will automatically pull the changes on its next build.
 
 ### How to create/migrate onboarding docs
 
-#### Step 1: Create the shared component in `posthog/posthog`
+**Step 1: Create the shared component in `posthog/posthog`**
 
-1. **Navigate to the product directory** in `docs/onboarding/`. If it doesn't exist, create it (e.g., `docs/onboarding/your-product/`).
-2. **Create a new `.tsx` file** (e.g., `docs/onboarding/your-product/filename.tsx`).
-3. **Export a named component** that contains your onboarding content. Use the `useMDXComponents` hook to access shared components:
+1. Navigate to the product directory in `docs/onboarding/`. If it doesn't exist, create it (e.g., `docs/onboarding/your-product/`).
+2. Create a new `.tsx` file (e.g., `docs/onboarding/your-product/filename.tsx`).
+3. Export a named component that contains your onboarding content. Use the `useMDXComponents` hook to access shared components:
 
 ```tsx file=docs/onboarding/llm-analytics/google.tsx
 import { useMDXComponents } from 'scenes/onboarding/OnboardingDocsContentWrapper'
@@ -98,25 +103,25 @@ export const GoogleInstallation = (): JSX.Element => {
 }
 ```
 
-4. **For reusable snippets**, create them in `docs/onboarding/<product>/_snippets/` (e.g., `docs/onboarding/your-product/_snippets/example-snippet.tsx`). Export a named component.
-5. **Reference existing examples** in [`docs/onboarding/llm-analytics`](https://github.com/PostHog/posthog/tree/master/docs/onboarding/llm-analytics) for patterns.
-6. **Create/update a scene** in the `posthog/posthog` repository to import and use your new component. See [example](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/sdks/llm-analytics/LLMAnalyticsSDKInstructions.tsx).
-7. **Test in the app**: Update the in-app onboarding scene to import and use your new component. See [example](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/sdks/llm-analytics/8LMAnalyticsSDKInstructions.tsx).
+4. For reusable snippets, create them in `docs/onboarding/<product>/_snippets/` (e.g., `docs/onboarding/your-product/_snippets/example-snippet.tsx`). Export a named component.
+5. Create or update a scene in the `posthog/posthog` repository to import and use your new component. See [example](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/sdks/llm-analytics/LLMAnalyticsSDKInstructions.tsx).
+6. Test in the app by updating the in-app onboarding scene to import and use your new component. See [example](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/sdks/llm-analytics/8LMAnalyticsSDKInstructions.tsx).
+7. Reference existing examples in [`docs/onboarding/llm-analytics`](https://github.com/PostHog/posthog/tree/master/docs/onboarding/llm-analytics) for patterns.
 
-#### Step 2: Create the website stub in `posthog/posthog.com`
+**Step 2: Create the website stub in `posthog/posthog.com`**
 
-1. **Run a build** to pull the latest from `posthog/posthog` with the `GATSBY_POSTHOG_BRANCH` environment variable set to your PR branch:
+1. Run a build to pull the latest from `posthog/posthog` with the `GATSBY_POSTHOG_BRANCH` environment variable set to your PR branch:
    ```bash
    pnpm clean && pnpm && GATSBY_POSTHOG_BRANCH=<your-pr-branch> pnpm start
    ```
    This will fetch the shared content into `.cache/gatsby-source-git/posthog-main-repo/docs/onboarding/`.
 
-2. **Create the MDX stub file** in the appropriate docs location:
+2. Create the MDX stub file in the appropriate docs location:
    - For installation pages: `contents/docs/<product>/installation/<name>.mdx`
    - For other pages: `contents/docs/<product>/<path>.mdx`
    - Example: `contents/docs/llm-analytics/installation/openai.mdx`
 
-3. **Add frontmatter** with title, `tableOfContents`, etc.:
+3. Add frontmatter with title, `tableOfContents`, etc.:
 
 ```mdx
 ---
@@ -132,7 +137,7 @@ tableOfContents: [
 ---
 ```
 
-4. **Add the source comment** at the top (after frontmatter), this helps us track the source of the content:
+4. Add the source comment at the top (after frontmatter) to track the source of the content:
 
 ```html
 <!--
@@ -142,7 +147,7 @@ See the docs runbook for more info: https://posthog.com/handbook/content/docs-ru
 -->
 ```
 
-5. **Import and render the shared component**:
+5. Import and render the shared component:
 
 ```mdx
 import { YourProductInstallation } from 'onboarding/your-product/installation.tsx'
@@ -153,7 +158,7 @@ import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapp
 </OnboardingContentWrapper>
 ```
 
-6. **If you need snippets**, import them and pass to the wrapper:
+6. If you need snippets, import them and pass to the wrapper:
    - First, create snippet stubs in `contents/docs/<product>/_snippets/` (e.g., `contents/docs/llm-analytics/_snippets/example-snippet.mdx`):
 
 ```mdx
@@ -170,15 +175,69 @@ import { ExampleSnippet } from "onboarding/your-product/_snippets/example-snippe
 </OnboardingContentWrapper>
 ```
 
-7. **Test locally**: Run `pnpm start` and verify the page renders correctly at the expected URL.
-8. **Commit and merge** both the `posthog/posthog` and `posthog/posthog.com` PRs.
+7. Test locally: Run `pnpm start` and verify the page renders correctly at the expected URL.
+8. Commit and merge both the `posthog/posthog` and `posthog/posthog.com` PRs.
 
 ### How changes propagate to the website
 
-1. Content is written in the `posthog/posthog` repository's [`docs/onboarding`](https://github.com/PostHog/posthog/tree/master/docs/onboarding) directory. This is a shared directory that can be imported from the `PostHog/posthog` repo and used in the `PostHog/posthog.com` repo.
-2. Onboarding scenes ([example](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/sdks/llm-analytics/LLMAnalyticsSDKInstructions.tsx)) in the `posthog/posthog` repository import the shared onboarding docs from the `PostHog/posthog` repository. This wrapper passes in snippets and components through a context to the shared onboarding docs.
-3. Because the component and snippet implementations are different between the app and website, the in-app onboarding docs use a [wrapper component](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/OnboardingDocsContentWrapper.tsx) that renders the shared onboarding docs with the appropriate components and snippets.
-4. The website uses `gatsby-source-git` to import the shared onboarding docs from the `PostHog/posthog` repository. You can find them after running build in the `.cache/gatsby-source-git/posthog-main-repo/docs/onboarding` directory.
+1. Content is written in the `posthog/posthog` repository's [`docs/onboarding`](https://github.com/PostHog/posthog/tree/master/docs/onboarding) directory. This shared directory can be imported from the `posthog/posthog` repo and used in the `posthog/posthog.com` repo.
+2. Onboarding scenes ([example](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/sdks/llm-analytics/LLMAnalyticsSDKInstructions.tsx)) in the `posthog/posthog` repository import the shared onboarding docs. The [wrapper component](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/OnboardingDocsContentWrapper.tsx) passes snippets and components through a context to the shared onboarding docs.
+3. Because component and snippet implementations differ between the app and website, the in-app onboarding docs use a [wrapper component](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/OnboardingDocsContentWrapper.tsx) that renders the shared onboarding docs with the appropriate components and snippets.
+4. The website uses `gatsby-source-git` to import the shared onboarding docs from the `posthog/posthog` repository. You can find them after running build in the `.cache/gatsby-source-git/posthog-main-repo/docs/onboarding` directory.
 5. The website uses aliases to map the import paths to `onboarding/*` (e.g. [`onboarding/llm-analytics/google.mdx`](https://github.com/PostHog/posthog.com/blob/master/contents/docs/llm-analytics/installation/google.mdx)).
-6. The website also uses the same [`OnboardingContentWrapper`](https://github.com/PostHog/posthog.com/blob/master/src/components/Docs/OnboardingContentWrapper.tsx) component to render the onboarding docs. This wrapper also passes in snippets and components through a context to the shared onboarding docs. Usage example: [`onboarding/llm-analytics/google.mdx`](https://github.com/PostHog/posthog.com/blob/master/contents/docs/llm-analytics/installation/google.mdx).
-7. To avoid confusion and allow for different implementations such as front matter, different title, and additional content, the website uses MDX stubs like [`contents/docs/llm-analytics/google.mdx`](https://github.com/PostHog/posthog.com/blob/master/contents/docs/llm-analytics/installation/google.mdx) and snippet stubs like [`contents/docs/llm-analytics/_snippets/embedding-event.mdx`) with comments to indicate the source of the content.
+6. The website uses the same [`OnboardingContentWrapper`](https://github.com/PostHog/posthog.com/blob/master/src/components/Docs/OnboardingContentWrapper.tsx) component to render the onboarding docs. This wrapper passes snippets and components through a context to the shared onboarding docs. Usage example: [`onboarding/llm-analytics/google.mdx`](https://github.com/PostHog/posthog.com/blob/master/contents/docs/llm-analytics/installation/google.mdx).
+7. To allow for different implementations such as front matter, different titles, and additional content, the website uses MDX stubs like [`contents/docs/llm-analytics/google.mdx`](https://github.com/PostHog/posthog.com/blob/master/contents/docs/llm-analytics/installation/google.mdx) and snippet stubs like [`contents/docs/llm-analytics/_snippets/embedding-event.mdx`](https://github.com/PostHog/posthog.com/blob/master/contents/docs/llm-analytics/_snippets/embedding-event.mdx) with comments to indicate the source of the content.
+
+## SDK reference docs
+
+SDK references document class, method signatures, and type interfaces for each SDK. They complement examples in tutorials and guides by providing a comprehensive reference with all the details. They're important for deep understanding of PostHog SDKs and as context for LLM-based tools. Tutorials and guides reference them for parameter and return type details.
+
+### Which SDKs have reference docs
+
+It's an ongoing effort to create SDK reference docs for all our SDKs, starting with popular SDKs. Here's the current status:
+
+| SDK | Status |
+|-----|--------|
+| JavaScript Web SDK | ✅ Completed |
+| Python SDK | ✅ Completed |
+| Node.js SDK | ✅ Completed |
+| React Native SDK | ✅ Completed |
+| iOS SDK | 🚧 In progress |
+| Flutter SDK | ⏳ Not started |
+| Android SDK | ⏳ Not started |
+| Go SDK | ⏳ Not started |
+| Java SDK | ⏳ Not started |
+| Rust SDK | ⏳ Not started |
+| PHP SDK | ⏳ Not started |
+| .NET SDK | ⏳ Not started |
+
+### How the SDK reference docs work
+
+1. SDKs are parsed for basic information like class names, method names, and type interfaces.
+2. Descriptions, parameters, return types, and examples are extracted from the SDKs or SDK doc comments.
+3. The information is rewritten into a standardized JSON format (HogRef). They're stored in each SDK's repository under a `references` directory. For example, the JavaScript Web SDK reference is [stored here](https://github.com/PostHog/posthog-js/tree/main/packages/browser/references).
+4. When an SDK releases a new version, the reference docs are generated automatically. Here's an [example workflow](https://github.com/PostHog/posthog-js/blob/main/.github/workflows/generate-references.yml).
+5. The Strapi instance behind the website is configured to [fetch the HogRef JSON files](https://github.com/PostHog/squeak-strapi/blob/main/config/cron-tasks.ts) from the SDK's repository and display them on the website via a cron job.
+6. The website renders the HogRef JSON files as a table on the SDK reference page.
+
+Each language works slightly differently, but the general process is the same.
+
+<details>
+<summary>HogRef JSON schema specification</summary>
+<HogRefSchema />
+</details>
+
+### How to create new SDK reference docs
+
+To contribute a new SDK reference doc:
+
+1. Create a script to parse the SDK's documentation and extract the information into a HogRef JSON file. The script should:
+   - Parse for class names, method names, and type interfaces
+   - Extract descriptions, parameters, return types, and examples from the SDK or SDK doc comments
+   - Format the information according to the [HogRef JSON schema specification](#hogref-json-schema-specification)
+   - Store the HogRef JSON file in a `references` directory in the SDK's repository
+   - See existing SDK repositories for examples, such as the [JavaScript Web SDK reference](https://github.com/PostHog/posthog-js/tree/main/packages/browser/references)
+2. Create a workflow to generate the HogRef JSON file when a new version of the SDK is released. See an [example workflow](https://github.com/PostHog/posthog-js/blob/main/.github/workflows/generate-references.yml).
+3. Update the [`cron-tasks.ts`](https://github.com/PostHog/squeak-strapi/blob/main/config/cron-tasks.ts) file to fetch the HogRef JSON file from the SDK's repository and display it on the website.
+4. Once the HogRef is ingested into the Strapi instance via the cron job, a new page should be created automatically on the website. The website will render the HogRef JSON file as a table on the SDK reference page. 
+5. Find existing links to the SDK's GitHub repository source code and point them to the new HogRef JSON file instead.
