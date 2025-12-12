@@ -23,7 +23,7 @@ const them = [
                     <p>Holding all that context in your head is hard - maybe bordeline impossible.</p>
                     <p>
                         PostHog AI expands the amount of information a product engineer can consider. Outsourcing some
-                        of your mental load frees up mental capacity for the human stuff:{' '}
+                        of your mental load frees up space for the human stuff:{' '}
                         <strong>creativity, intuition, and deciding what to build next.</strong>
                     </p>
                 </div>
@@ -34,29 +34,6 @@ const them = [
                         placeholder="blurred"
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/Untitled_Artwork_560_a6b8f4f9a4.png"
                         width={436}
-                    />
-                </div>
-            </>
-        ),
-    },
-    {
-        title: 'Get answers you can investigate',
-        children: (
-            <>
-                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10">
-                    <p>
-                        PostHog AI doesn't run on hunches. It connects the dots across actual data — analytics, event
-                        names, feature flags, session replays.
-                    </p>
-                    <p>PostHog AI can connect dots across your entire product to arrive at richer conclusions. </p>
-                </div>
-
-                <div className="col-span-3 -mt-12">
-                    <CloudinaryImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/sdr.png"
-                        width={338}
                     />
                 </div>
             </>
@@ -78,13 +55,17 @@ const them = [
                     <p>
                         Wondering what happened with that feature flag? Ask "how did this rollout affect conversions?"
                     </p>
+                    <p>
+                        Instead of trying to figure out which events, properties, and filters to use, just ask PostHog
+                        AI to run the analysis.
+                    </p>
                 </div>
 
                 <div className="col-span-3 -mt-6 @3xl:-mt-12 pb-4">
                     <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/no-hope.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Untitled_Artwork_420_3f6e1b29d1.png"
                         width={352}
                     />
                 </div>
@@ -92,53 +73,34 @@ const them = [
         ),
     },
     {
-        title: 'Who this is for',
+        title: 'Get answers you can investigate',
         children: (
             <>
-                <div className="col-span-3 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-12 @3xl:pb-20">
+                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10">
                     <p>
-                        There will be a long period of commercial wrangling because they massively inflated the price so
-                        they can then discount it heavily.
+                        PostHog AI doesn't run on hunches. It connects the dots across actual data — analytics, event
+                        names, feature flags, session replays.
                     </p>
-                    <p>They will bundle a bunch of value add-stuff you don't need. 3 year contract is standard.</p>
+                    <p>
+                        Chain of thought takes up space, but we show it anyway because sometimes AI gets things wrong.
+                        See the exact queries being run. Click through to debug (or to be amazed by the wizard behind
+                        the curtain).
+                    </p>
                 </div>
 
-                <div className="col-span-5 text-center -mt-12">
+                <div className="col-span-3 -mt-12">
                     <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/receipt.png"
-                        width={613}
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_hog_2_6e85a07ff1.png"
+                        width={500}
                     />
                 </div>
             </>
         ),
     },
     {
-        title: 'What makes this possible',
-        children: (
-            <>
-                <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-12 @3xl:pb-20">
-                    <p>
-                        Simply put, we have more data. PostHog captures signals from analytics, session replays, feature
-                        flags, A/B tests, and more.
-                    </p>
-                    <p>PostHog AI can connect dots across your entire product to arrive at richer conclusions. </p>
-                </div>
-
-                <div className="col-span-4 -mt-12 pb-4 text-center">
-                    <CloudinaryImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/decision-makers.png"
-                        width={286}
-                    />
-                </div>
-            </>
-        ),
-    },
-    {
-        title: '"Wait, who\'s my point of contact now??"',
+        title: 'AI that gets out of your way',
         children: (
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
@@ -158,15 +120,52 @@ const them = [
                 </div>
             </>
         ),
-        cta: (
-            <div className="flex flex-col @3xl:flex-row gap-3 my-4">
-                <CallToAction href="/start" size="md" state={{ newWindow: true }}>
-                    Ew, take me to PostHog, please!
-                </CallToAction>
-                <CallToAction href="/talk-to-a-human" type="secondary" size="md" state={{ newWindow: true }}>
-                    Get a demo (but not like this one!)
-                </CallToAction>
-            </div>
+    },
+    {
+        title: 'What makes this possible',
+        children: (
+            <>
+                <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-12 @3xl:pb-20">
+                    <p>
+                        Simply put, we have more data. PostHog captures signals from analytics, error tracking, user
+                        sessions, feature flags, A/B tests, and more.
+                    </p>
+                    <p>
+                        PostHog AI then connects the dots across your entire product to arrive at richer conclusions.{' '}
+                    </p>
+                </div>
+
+                <div className="col-span-4 -mt-12 pb-4 text-center">
+                    <CloudinaryImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/decision-makers.png"
+                        width={286}
+                    />
+                </div>
+            </>
+        ),
+    },
+    {
+        title: 'Who this is for',
+        children: (
+            <>
+                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
+                    <p>
+                        All the sales people who got you on board immediately disappear and you are passed onto yet
+                        another team who ask you the same questions again...
+                    </p>
+                </div>
+
+                <div className="col-span-3 -mt-4 @3xl:-mt-8 @3xl:pb-8 text-center">
+                    <CloudinaryImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/shocked-hog.png"
+                        width={200}
+                    />
+                </div>
+            </>
         ),
     },
     {
