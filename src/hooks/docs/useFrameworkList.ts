@@ -73,8 +73,16 @@ export default function useFrameworkList(): Framework[] {
             return frameworkUrls.includes(url)
         })
         .map((node: any) => {
+            let label = node.frontmatter.title
+
+            // Strip "How to set up X analytics with PostHog" pattern to just "X"
+            const howToMatch = label.match(/^How to set up (.+?) analytics with PostHog$/i)
+            if (howToMatch) {
+                label = howToMatch[1]
+            }
+
             const framework: Framework = {
-                label: node.frontmatter.title,
+                label,
                 url: `/${node.slug}`,
             }
 
