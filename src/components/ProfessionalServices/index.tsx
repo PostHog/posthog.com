@@ -200,7 +200,13 @@ export const ProfessionalServices = () => {
                             <p>
                                 Whilst the final amount is dependent on how much help you need from us, you should
                                 expect to add around 20% of your first year credit purchase on top, with a $5k minimum
-                                spend.
+                                spend. If this is too much for your budget, you can also{' '}
+                                <Link
+                                    to="/merch?product=30-min-onboarding-consultation"
+                                    className="underline font-medium"
+                                >
+                                    get help from our onboarding specialist team.
+                                </Link>
                             </p>
                         </div>
                         <aside className="shrink-0 w-full md:w-auto md:basis-[500px] flex justify-center">
