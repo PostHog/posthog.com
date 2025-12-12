@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState, useCallback } from 'react'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { PlaceType, PlaceItem } from './types'
 import { useUser } from '../../hooks/useUser'
-import { useUserLocation } from '../../hooks/useUserLocation'
 import SearchBar, { createSearchMarker } from './SearchBar'
 import { usePlacesMapData, Coordinates } from './PlacesLayer'
 import { renderToString } from 'react-dom/server'
@@ -60,7 +59,6 @@ export default function PlacesMap({
 }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
     const { isModerator, getJwt } = useUser()
-    const { location: userLocation, isLoading: isLocationLoading } = useUserLocation()
 
     useEffect(() => {
         setIsClient(true)
@@ -147,10 +145,6 @@ export default function PlacesMap({
     const setupMap = useCallback(() => {
         if (!isClient) {
             console.error('Not client')
-            return
-        }
-        if (isLocationLoading) {
-            // Wait for location to load before initializing map
             return
         }
         const mapboxgl = getMapbox()
@@ -266,7 +260,7 @@ export default function PlacesMap({
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current as HTMLDivElement,
             style: styleUrl,
-            center: [userLocation.longitude, userLocation.latitude],
+            center: [-0.1276, 51.5074], // London
             zoom: 4,
             attributionControl: true,
         })
@@ -313,7 +307,7 @@ export default function PlacesMap({
                 mapRef.current = null
             }
         }
-    }, [isClient, token, styleUrl, isLocationLoading, userLocation])
+    }, [isClient, token, styleUrl])
 
     useEffect(() => {
         return setupMap()
@@ -434,11 +428,6 @@ export default function PlacesMap({
 
     return (
         <div className="box-border w-full h-full overflow-hidden relative">
-            {isLocationLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-primary/50 z-20">
-                    <div className="text-primary text-sm">Loading map...</div>
-                </div>
-            )}
             <div ref={mapContainerRef} className="w-full h-full" />
             {isModerator && (
                 <div className="absolute top-4 left-4 z-10">

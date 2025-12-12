@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { useEventsMapData } from './EventsLayer'
-import { useUserLocation } from '../../hooks/useUserLocation'
 import 'mapbox-gl/dist/mapbox-gl.css'
 type EventItem = {
     id: number
@@ -64,8 +63,6 @@ export default function EventsMap({
     selectedEventId?: number | null
 }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
-    const { location: userLocation, isLoading: isLocationLoading } = useUserLocation()
-
     useEffect(() => {
         setIsClient(true)
     }, [])
@@ -145,10 +142,6 @@ export default function EventsMap({
     const setupMap = useCallback(() => {
         if (!isClient) {
             console.error('Not client')
-            return
-        }
-        if (isLocationLoading) {
-            // Wait for location to load before initializing map
             return
         }
         const mapboxgl = getMapbox()
@@ -363,7 +356,7 @@ export default function EventsMap({
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current as HTMLDivElement,
             style: styleUrl,
-            center: [userLocation.longitude, userLocation.latitude],
+            center: [-0.1276, 51.5074], // London
             zoom: 4,
             attributionControl: true,
         })
@@ -408,7 +401,7 @@ export default function EventsMap({
                 mapRef.current = null
             }
         }
-    }, [isClient, token, styleUrl, isLocationLoading, userLocation])
+    }, [isClient, token, styleUrl])
 
     useEffect(() => {
         return setupMap()
@@ -513,12 +506,7 @@ export default function EventsMap({
     }, [handleExternalSelection])
 
     return (
-        <div className="box-border w-full h-full rounded border border-primary overflow-hidden relative">
-            {isLocationLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-primary/50 z-20">
-                    <div className="text-primary text-sm">Loading map...</div>
-                </div>
-            )}
+        <div className="box-border w-full h-full rounded border border-primary overflow-hidden">
             <div ref={mapContainerRef} className="w-full h-full" />
         </div>
     )

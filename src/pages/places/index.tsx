@@ -15,7 +15,6 @@ function Places(): JSX.Element {
     const [selectedLayers, setSelectedLayers] = useState<string[]>(Object.values(PlaceType))
     const [places, setPlaces] = useState<PlaceItem[]>([])
     const [selectedPlace, setSelectedPlace] = useState<PlaceItem | null>(null)
-    const [isInitialized, setIsInitialized] = useState(false)
     const placesRef = useRef<PlaceItem[]>([])
 
     // Receive places data from PlacesMap component
@@ -33,7 +32,7 @@ function Places(): JSX.Element {
                 setTimeout(() => {
                     const place = placesRef.current.find((p) => p.id === placeId)
                     if (place) {
-                        handlePlaceSelect(place)
+                        setSelectedPlace(place)
                     }
                 }, 500)
             }
@@ -43,63 +42,13 @@ function Places(): JSX.Element {
         return () => window.removeEventListener('hogmap:places-updated', handlePlaceAdded as EventListener)
     }, [])
 
-    // Select a place and update URL hash
-    const handlePlaceSelect = useCallback((place: PlaceItem, updateHash = true) => {
-        setSelectedPlace(place)
-
-        if (updateHash) {
-            window.history.replaceState(null, '', `#placeId=${place.id}`)
-        }
-    }, [])
-
     // Show place detail overlay when a marker is clicked
-    const handlePlaceClick = useCallback(
-        (placeId: number) => {
-            const place = placesRef.current.find((p) => p.id === placeId)
-            if (place) {
-                handlePlaceSelect(place)
-            }
-        },
-        [handlePlaceSelect]
-    )
-
-    // Close place detail and clear URL hash
-    const handleClosePlace = useCallback(() => {
-        setSelectedPlace(null)
-        window.history.replaceState(null, '', window.location.pathname)
+    const handlePlaceClick = useCallback((placeId: number) => {
+        const place = placesRef.current.find((p) => p.id === placeId)
+        if (place) {
+            setSelectedPlace(place)
+        }
     }, [])
-
-    // Initialize from URL hash on page load
-    useEffect(() => {
-        if (!isInitialized && places.length > 0) {
-            const hash = window.location.hash
-            const match = hash.match(/#placeId=(\d+)/)
-
-            if (match) {
-                const placeId = parseInt(match[1], 10)
-                const place = places.find((p) => p.id === placeId)
-
-                if (place) {
-                    // Select place without updating hash (since we're reading from it)
-                    handlePlaceSelect(place, false)
-                }
-            }
-
-            setIsInitialized(true)
-        }
-    }, [places, isInitialized, handlePlaceSelect])
-
-    // Handle ESC key to close detail panel
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'Escape' && selectedPlace) {
-                handleClosePlace()
-            }
-        }
-
-        window.addEventListener('keydown', handleKeyDown)
-        return () => window.removeEventListener('keydown', handleKeyDown)
-    }, [selectedPlace, handleClosePlace])
 
     // Count places by type
     const placesByType = places.reduce((acc, place) => {
@@ -207,7 +156,9 @@ function Places(): JSX.Element {
 
                     <div className="flex-1 relative h-full border-primary border-t @xl:border-t-0">
                         <AnimatePresence>
-                            {selectedPlace && <PlaceDetail place={selectedPlace} onClose={handleClosePlace} />}
+                            {selectedPlace && (
+                                <PlaceDetail place={selectedPlace} onClose={() => setSelectedPlace(null)} />
+                            )}
                         </AnimatePresence>
 
                         <PlacesMap

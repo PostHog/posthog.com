@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import { navigate } from 'gatsby'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { useUserLocation } from '../../hooks/useUserLocation'
 import {
     computeOffsets,
     getMapbox,
@@ -128,8 +127,6 @@ const useCoordsByQuery = (isClient: boolean, token: string | undefined, members:
 
 export default function PeopleMap({ members: membersProp }: { members?: any[] }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
-    const { location: userLocation, isLoading: isLocationLoading } = useUserLocation()
-
     useEffect(() => {
         setIsClient(true)
     }, [])
@@ -201,10 +198,6 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
     const setupMap = useCallback(() => {
         if (!isClient) {
             console.error('Not client')
-            return
-        }
-        if (isLocationLoading) {
-            // Wait for location to load before initializing map
             return
         }
         const mapboxgl = getMapbox()
@@ -345,7 +338,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current as HTMLDivElement,
             style: styleUrl,
-            center: [userLocation.longitude, userLocation.latitude],
+            center: [-0.1276, 51.5074], // London
             zoom: 4,
             attributionControl: true,
         })
@@ -390,7 +383,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                 mapRef.current = null
             }
         }
-    }, [isClient, token, styleUrl, isLocationLoading, userLocation])
+    }, [isClient, token, styleUrl])
 
     useEffect(() => {
         return setupMap()
@@ -407,12 +400,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
     }, [coordsByQuery, members])
 
     return (
-        <div className="box-border w-full h-full rounded border border-primary overflow-hidden relative">
-            {isLocationLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-primary/50 z-20">
-                    <div className="text-primary text-sm">Loading map...</div>
-                </div>
-            )}
+        <div className="box-border w-full h-full rounded border border-primary overflow-hidden">
             <div ref={mapContainerRef} className="w-full h-full" />
         </div>
     )
