@@ -83,6 +83,21 @@ It is best practice for a customer to use PostHog's [Managed Reverse Proxy](/doc
 
 When using either PostHog's managed reverse proxy or deploying a [non-managed reverse proxy](/docs/advanced/proxy#deploying-a-reverse-proxy), events should populate the "Library custom API host" property. Host mapping and domains can potentially be seen in Metabase. You should verify the setup with a customer.  
 
+### Cookieless tracking
+
+If a customer mentions they are missing a lot of events on their website and have a cookie banner, ask them to share the part of their code where PostHog is initialized. Some customers may not be aware that we have specific recommendations for how to initiatlize PostHog for [cookieless tracking](/tutorials/cookieless-tracking). 
+
+For example, if they implement PostHog on their website similar to as follows: 
+```
+posthog.init(...,
+    opt_out_capturing_by_default: true
+)
+
+if (cookiePreference === 'accepted') {
+    posthog.opt_in_capturing()
+}
+```
+They will not be capturing anything, even anonymized aggregated data, for customers who visit their website and opt-out of cookies or ignore the cookie banner completely. We recommend instead they use the `cookieless_mode` parameter in their initializer as outlined in the [cookieless tracking tutorial](/tutorials/cookieless-tracking). This can help them have more accurate tracking totals.
 
 ## Are feature flags resilient?
 
