@@ -85,7 +85,7 @@ When using either PostHog's managed reverse proxy or deploying a [non-managed re
 
 ### Cookieless tracking
 
-If a customer mentions they are missing a lot of events on their website and have a cookie banner, ask them to share the part of their code where PostHog is initialized. Some customers may not be aware that we have specific recommendations for how to initiatlize PostHog for [cookieless tracking](/tutorials/cookieless-tracking). 
+If a customer mentions their user/event count seems to be missing a lot of data from their website, ask them if they have implemented cookie opt-in and to share the part of their code where PostHog is initialized. Some customers may not be aware that we have specific recommendations for how to initiatlize PostHog for [cookieless tracking](/tutorials/cookieless-tracking). 
 
 For example, if they implement PostHog on their website similar to as follows: 
 ```
@@ -97,7 +97,10 @@ if (cookiePreference === 'accepted') {
     posthog.opt_in_capturing()
 }
 ```
-They will not be capturing anything, even anonymized aggregated data, for customers who visit their website and opt-out of cookies or ignore the cookie banner completely. We recommend instead they use the `cookieless_mode` parameter in their initializer as outlined in the [cookieless tracking tutorial](/tutorials/cookieless-tracking). This can help them have more accurate tracking totals.
+
+They will not be capturing anything for customers who visit their website and opt-out of cookies or ignore the cookie banner completely. We recommend instead they use the `cookieless_mode` parameter in their initializer as outlined in the [cookieless tracking tutorial](/tutorials/cookieless-tracking). If the customer wants to move forward with implementating cookieless mode, ensure they enable "Cookieless server hash mode" in their project settings under Project Settings > Web analytics.
+
+Cookieless mode can help them have more accurate tracking totals because when using cookieless tracking, the PostHog SDK will generate a privacy-preserving hash, calculated on our servers.
 
 ## Are feature flags resilient?
 
