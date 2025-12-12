@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { useEventsMapData } from './EventsLayer'
+import { useUserLocation } from '../../hooks/useUserLocation'
 import 'mapbox-gl/dist/mapbox-gl.css'
 type EventItem = {
     id: number
@@ -63,6 +64,8 @@ export default function EventsMap({
     selectedEventId?: number | null
 }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
+    const userLocation = useUserLocation()
+
     useEffect(() => {
         setIsClient(true)
     }, [])
@@ -356,7 +359,7 @@ export default function EventsMap({
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current as HTMLDivElement,
             style: styleUrl,
-            center: [-0.1276, 51.5074], // London
+            center: [userLocation.longitude, userLocation.latitude],
             zoom: 4,
             attributionControl: true,
         })

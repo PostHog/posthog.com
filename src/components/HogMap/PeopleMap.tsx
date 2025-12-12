@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import { navigate } from 'gatsby'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import { useUserLocation } from '../../hooks/useUserLocation'
 import {
     computeOffsets,
     getMapbox,
@@ -127,6 +128,8 @@ const useCoordsByQuery = (isClient: boolean, token: string | undefined, members:
 
 export default function PeopleMap({ members: membersProp }: { members?: any[] }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
+    const userLocation = useUserLocation()
+
     useEffect(() => {
         setIsClient(true)
     }, [])
@@ -338,7 +341,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current as HTMLDivElement,
             style: styleUrl,
-            center: [-0.1276, 51.5074], // London
+            center: [userLocation.longitude, userLocation.latitude],
             zoom: 4,
             attributionControl: true,
         })

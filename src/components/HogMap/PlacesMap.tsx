@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { PlaceType, PlaceItem } from './types'
 import { useUser } from '../../hooks/useUser'
+import { useUserLocation } from '../../hooks/useUserLocation'
 import SearchBar, { createSearchMarker } from './SearchBar'
 import { usePlacesMapData, Coordinates } from './PlacesLayer'
 import { renderToString } from 'react-dom/server'
@@ -59,6 +60,7 @@ export default function PlacesMap({
 }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
     const { isModerator, getJwt } = useUser()
+    const userLocation = useUserLocation()
 
     useEffect(() => {
         setIsClient(true)
@@ -260,7 +262,7 @@ export default function PlacesMap({
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current as HTMLDivElement,
             style: styleUrl,
-            center: [-0.1276, 51.5074], // London
+            center: [userLocation.longitude, userLocation.latitude],
             zoom: 4,
             attributionControl: true,
         })
