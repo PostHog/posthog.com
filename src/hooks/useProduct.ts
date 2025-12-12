@@ -2565,7 +2565,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             Icon: IconDatabaseBolt,
             description: 'Managed DuckDB warehouse',
             handle: 'data_in',
-            color: 'purple',
+            color: 'salmon',
             colorSecondary: 'lilac',
             category: 'data',
             slug: 'data-stack/managed-warehouse',
@@ -2618,7 +2618,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             description: 'Model data',
             handle: 'data_modeling',
             color: 'red',
-            colorSecondary: 'lilac',
+            colorSecondary: 'red',
             category: 'data',
             slug: 'data-stack/data-modeling',
             seo: {
@@ -2633,7 +2633,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             handle: 'visualize',
             type: 'visualize',
             slug: 'data-stack/sql-editor',
-            color: 'purple',
+            color: 'seagreen',
             colorSecondary: 'lilac',
             category: 'data',
             seo: {
@@ -2661,8 +2661,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             // Icon: IconArrowUpRight,
             description: 'Send data out of PostHog to other tools',
             handle: 'data_out',
-            color: 'green',
-            colorSecondary: 'lilac',
+            color: 'orange',
+            colorSecondary: 'orange',
             category: 'data',
             slug: 'data-stack/export-reverse-etl',
             seo: {
