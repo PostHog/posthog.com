@@ -22,6 +22,7 @@ import { useWindow } from '../../context/Window'
 import TeamMember from 'components/TeamMember'
 import WistiaCustomPlayer from 'components/WistiaCustomPlayer'
 import DuckDBWaitlistSurvey from 'components/DuckDBWaitlistSurvey'
+import { CallToAction } from 'components/CallToAction'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -201,6 +202,10 @@ export default function CDP(): JSX.Element {
                     The most flexible integrated modern data stack – powered by PostHog, built on DuckDB, and designed
                     to scale
                 </h3>
+
+                <CallToAction to="https://app.posthog.com/signup" size="sm">
+                    Get started - free
+                </CallToAction>
                 <p>
                     Your data needs flexibility, tooling, and portability. We provide it all, in the most seamless data
                     warehousing experience available.
@@ -209,7 +214,10 @@ export default function CDP(): JSX.Element {
                     <span className="font-bold">Bring your own tools</span> like DBT and Hex to customize your
                     experience, or <span className="font-bold">use our built-in tooling</span> to get started quickly.
                     Anything that connects to Postgres can connect to your PostHog DuckDB warehouse using our{' '}
-                    <Link to="https://github.com/posthog/duckgres">Duckgres wrapper</Link>.
+                    <Link to="https://github.com/posthog/duckgres" external>
+                        Duckgres wrapper
+                    </Link>
+                    .
                 </p>
                 <h3>
                     A modern data stack that's{' '}
