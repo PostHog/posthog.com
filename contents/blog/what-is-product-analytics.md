@@ -114,7 +114,7 @@ There are a variety of product analytics tools available to choose from however,
 
 - [An introduction to customer retention](/blog/introduction-to-customer-retention): Customer retention metrics are vital to the long term success of any product
 
-- [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
+- [How to actually measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
 - [How to achieve B2B product market fit](/blog/how-to-product-market-fit): How to approach finding market fit for a B2B product
 
