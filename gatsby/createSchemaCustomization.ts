@@ -253,6 +253,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type Roadmap implements Node {
       year: Int
+      githubUrls: [String]
       githubPRMetadata: GitHubPRMetadata
     }
     type GitHubPRMetadata {

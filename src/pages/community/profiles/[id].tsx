@@ -22,7 +22,6 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import OSTabs from 'components/OSTabs'
-import OSTable from 'components/OSTable'
 import { TeamMember } from 'components/People'
 import {
     IconThumbsUpFilled,
@@ -47,95 +46,9 @@ import { useToast } from '../../../context/Toast'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import OSButton from 'components/OSButton'
 import { IconNoEntry, IconStrapi } from 'components/OSIcons'
-import CloudinaryImage from 'components/CloudinaryImage'
+import Points from 'components/Points'
 
 dayjs.extend(relativeTime)
-
-const TransactionTitle = ({ type, metadata }) => {
-    const iconURL = metadata?.achievement?.iconURL
-    return (
-        <div className="flex space-x-2 items-center">
-            {iconURL && <CloudinaryImage width={32} height={32} src={iconURL} />}
-            <div>
-                <p className="text-sm capitalize m-0 font-bold">{type.replace(/_/g, ' ').toLowerCase()}</p>
-                {metadata?.achievement?.title && (
-                    <p className="text-sm text-primary m-0 mb-0.5">{metadata.achievement.title}</p>
-                )}
-            </div>
-        </div>
-    )
-}
-
-const Points = () => {
-    const { user } = useUser()
-    const transactions = user?.wallet?.transactions || []
-    const total = transactions.reduce((sum, t) => sum + t.amount, 0) || 0
-
-    return (
-        <div>
-            {transactions.length > 0 && (
-                <div>
-                    <OSTable
-                        columns={[
-                            { name: 'Date', align: 'left', width: 'auto' },
-                            { name: 'Description', align: 'left', width: '1fr' },
-                            { name: 'Amount', align: 'center', width: 'auto' },
-                        ]}
-                        rows={[
-                            ...transactions.map(({ id, amount, date, type, metadata }) => ({
-                                key: String(id),
-                                cells: [
-                                    {
-                                        content: <p className="text-sm m-0">{dayjs(date).format('MMM D, YYYY')}</p>,
-                                    },
-                                    {
-                                        content: <TransactionTitle type={type} metadata={metadata} />,
-                                    },
-                                    {
-                                        content: (
-                                            <p className={`m-0 ${amount > 0 ? 'text-green' : 'text-red'}`}>
-                                                <span>{amount > 0 ? '+' : '-'}</span>
-                                                <span className="font-bold">{amount}</span>
-                                            </p>
-                                        ),
-                                        className: 'text-right',
-                                    },
-                                ],
-                            })),
-                            {
-                                key: 'total',
-                                cells: [
-                                    {
-                                        content: null,
-                                        className: 'bg-accent',
-                                    },
-                                    {
-                                        content: <p className="text-sm m-0 font-bold">Total</p>,
-                                        className: 'bg-accent',
-                                    },
-                                    {
-                                        content: (
-                                            <p
-                                                className={`m-0 font-bold text-right ${
-                                                    total > 0 ? 'text-green' : 'text-red'
-                                                }`}
-                                            >
-                                                <span className="font-bold">{total}</span>
-                                            </p>
-                                        ),
-                                        className: 'text-right bg-accent',
-                                    },
-                                ],
-                            },
-                        ]}
-                        size="md"
-                        width="full"
-                    />
-                </div>
-            )}
-        </div>
-    )
-}
 
 const WebsiteIcon = () => {
     return (
