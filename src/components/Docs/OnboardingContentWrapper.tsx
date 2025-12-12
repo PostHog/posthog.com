@@ -50,13 +50,13 @@ const CodeBlockWrapper = (props: CodeBlockWrapperProps) => {
         )
     }
 
-    // Handle blocks array format
     const { blocks } = props
-    const [currentLanguage, setCurrentLanguage] = useState<CodeBlockItem | null>(blocks?.[0] ?? null)
 
-    if (!blocks || blocks.length === 0 || !currentLanguage) {
+    if (!blocks || blocks.length === 0) {
         return null
     }
+
+    const [currentLanguage, setCurrentLanguage] = useState(blocks[0])
 
     return (
         <CodeBlock currentLanguage={currentLanguage} onChange={setCurrentLanguage}>
