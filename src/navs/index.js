@@ -1310,6 +1310,10 @@ export const handbookSidebar = [
                                 url: '/handbook/growth/sales/expansion-and-retention',
                             },
                             {
+                                name: 'Onsite customer visits',
+                                url: '/handbook/growth/sales/customer-onsite-visits',
+                            },
+                            {
                                 name: 'Communications templates',
                                 url: '/handbook/growth/sales/communications-templates',
                             },
