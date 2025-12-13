@@ -4985,6 +4985,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Best practices',
+                    url: '/docs/workflows/best-practices',
+                    icon: 'IconStar',
+                    color: 'red',
+                },
+                {
                     name: 'Guides',
                 },
                 {
