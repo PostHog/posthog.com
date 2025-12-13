@@ -11,21 +11,27 @@ import { useWindow } from '../../context/Window'
 // Helper function to create standard context menu items
 const createStandardMenuItems = (url: string, state?: any, isExternal = false): ContextMenuItemProps[] => {
     const fullUrl = url?.startsWith('/') ? `https://posthog.com${url}` : url
+    const isAnchorLink = url?.includes('#')
 
     return [
+        // PostHog windows don't play nicely with anchor links
+        ...(!isAnchorLink
+            ? [
+                  {
+                      type: 'item' as const,
+                      disabled: isExternal,
+                      children: isExternal ? (
+                          <span>Open in new PostHog window</span>
+                      ) : (
+                          <Link to={url} state={{ ...state, newWindow: true }} contextMenu={false}>
+                              Open in new PostHog window
+                          </Link>
+                      ),
+                  },
+              ]
+            : []),
         {
-            type: 'item',
-            disabled: isExternal,
-            children: isExternal ? (
-                <span>Open in new PostHog window</span>
-            ) : (
-                <Link to={url} state={{ ...state, newWindow: true }} contextMenu={false}>
-                    Open in new PostHog window
-                </Link>
-            ),
-        },
-        {
-            type: 'item',
+            type: 'item' as const,
             children: (
                 <a href={url} target="_blank" rel="noreferrer">
                     Open in new browser tab
@@ -33,7 +39,7 @@ const createStandardMenuItems = (url: string, state?: any, isExternal = false): 
             ),
         },
         {
-            type: 'item',
+            type: 'item' as const,
             children: <span onClick={() => navigator.clipboard.writeText(fullUrl)}>Copy link address</span>,
         },
     ]
