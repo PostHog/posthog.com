@@ -8,12 +8,7 @@ import qs from 'qs'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
 import { docsMenu, handbookSidebar } from '../src/navs/index.js'
-import {
-    generateRawMarkdownPages,
-    generateApiSpecMarkdown,
-    generateLlmsTxt,
-    generateSdkReferencesMarkdown,
-} from './rawMarkdownUtils'
+import { generateApiSpecMarkdown, generateSdkReferencesMarkdown, generateLlmsTxt } from './rawMarkdownUtils'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
 import blogTemplate from '../src/templates/OG/blog.js'
 import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
@@ -483,7 +478,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
-    // Generate API spec markdown files first
+    // Generate API spec markdown files
     try {
         const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
         const spec = await fetch(openApiSpecUrl, {
@@ -498,7 +493,6 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     }
 
     // Generate SDK references markdown files
-
     const sdkReferencesQuery = (await graphql(`
         query {
             allSdkReferences {
@@ -555,30 +549,11 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         generateSdkReferencesMarkdown(node)
     })
 
-    // Generate markdown files for llms.txt file and LLM ingestion (after API spec files exist)
-    const markdownQuery = await graphql(`
-        query pagesForMarkdown {
-            allMdx {
-                nodes {
-                    frontmatter {
-                        title
-                        date
-                    }
-                    rawBody
-                    fields {
-                        slug
-                        contentWithSnippets
-                    }
-                }
-            }
-        }
-    `)
-
-    const filteredPages = await generateRawMarkdownPages(markdownQuery.data.allMdx.nodes)
-    generateLlmsTxt(filteredPages)
+    // Generate llms.txt (after docs markdown files exist)
+    generateLlmsTxt()
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
-        console.log('Skipping onPostBuild tasks')
+        console.log('Skipping remaining onPostBuild tasks')
         return
     }
 

@@ -130,6 +130,10 @@ module.exports = {
                     {
                         resolve: require.resolve('./plugins/gatsby-remark-video'),
                     },
+                    {
+                        resolve: require.resolve('./plugins/gatsby-remark-ast-dump'),
+                        options: { outputDir: './ast-output/mdast' },
+                    },
                 ],
             },
         },

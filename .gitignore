@@ -28,6 +28,8 @@ static/scripts/posthog-init.js
 
 # Generated data files
 src/data/mcp-tools.json
+ast-output/
+docs-markdown/
 
 # Python cache
 __pycache__
