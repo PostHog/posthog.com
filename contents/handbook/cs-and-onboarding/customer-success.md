@@ -29,6 +29,32 @@ In order of priority, your objectives should be:
 
 - Add yourself to all your existing customer Slack channels and invite customers who are not in Slack yet to offer them an easier way to communicate with our team for their needs. Make sure to add Pylon and relevant team members on our side. Adding customers to Slack has the added benefit of giving us an additional communication channel, as email is usually one of the worst ways to reach our ICP (though you should start with email). We've found that informing customers you'll be sending them a Slack Connect invite, then sending the invite, works significantly better than asking customers if they'd like to join us on Slack. A couple of tips to set up [Shared Slack Channels with Customers](/handbook/growth/sales/slack-channels)
 
+## Churn risk identification and prevention
+
+Churn rarely happens suddenly. It is usually preceded by gradual changes in value perception. Identifying these signals early allows CSMs to intervene proactively. Out goal is to ensure that there are no surprises when a customer renews or churns. To do this effectively, churn risk should be identified early and addressed intentionally. 
+
+Churn risk typically falls into one or more of the following categories: 
+
+- **Value alignment risk** - Signals that usage exists, but value is unclear: no documented definition of success, customers collecting data but not acting on insights, high usage with unclear business outcomes, customers unsure of how PostHog fits into their decision-making workflows.
+- **Relationship risks** - Signals that communication or ownership is weak: no clear champion or disengaged stakeholders, lack of responsiveness, no proactive conversations or recurring touchpoints
+- **Commercial risk** - Signals that churn may occur for non-product reasons: rapid and unexpected increases in billing, plan and pricing misalignment with actual usage, cost sensitivity without clear value
+
+Understanding which type of risk is present helps CSMs focus conversations on the customer's situation. 
+
+## Proactive churn risk assessment
+
+To avoid reactive churn management, CSMs should regularely assess churn risk across their BOB based on direction of change over time, not isolated events.
+
+A simple way to do this is to regularely ask yourself:
+- Is this customer's usage expanding, stable or narrowing? 
+- If the value becoming clearer?
+- Is engagement broadening across all stakeholders?
+- Are cost increasing in a way that is understood and intentional? 
+
+Negative answers in one of these areas should be treated as an early sign to engage and understand deeper, even if their overall usage appears healthy. 
+
+Our goal is not to score customers or predict churn with certainty, but to identify risk early enough for CS to intervene while value and trust are still intact.
+
 ## Tips on success engagement
 
 - Highly recommend reviewing our section on [getting people to talk to you](/handbook/growth/sales/getting-people-to-talk-to-you). What we’ve found works really well when establishing an initial connection is to be candid about wanting to learn more about your customer’s business, how they are currently utilizing PostHog, and to get a better understanding of where you may be able to add value for them. Most customers are pretty receptive to wanting to help, especially if it can benefit them in some way, so don’t be afraid to ask directly.
