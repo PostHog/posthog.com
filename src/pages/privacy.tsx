@@ -279,9 +279,6 @@ function Privacy() {
                         <p className="text-sm opacity-75 md:hidden">
                             (with handy summaries at the end of each section)
                         </p>
-                        <p>
-                            Last Updated: December __, 2025
-                        </p>
                         <h2 id="introduction">
                             <strong>Introduction</strong>
                         </h2>
@@ -291,15 +288,15 @@ function Privacy() {
                     </div>
                     <div className="md:pb-12">
                         <p>
-                            This privacy policy ("Privacy Policy") applies to all visitors, users and customers of the
-                            PostHog.com hosted services and websites (collectively, the "Website" or "Websites") and
-                            self-managed installations, which are offered by PostHog Inc. (formerly Hiberly Inc) and/or
-                            any of its subsidiares and/or affiliates ("PostHog" or "we" or "us") and describes how we process your personal
+                            This privacy policy ("<b>Privacy Policy</b>") applies to all visitors, users and customers of the
+                            PostHog.com hosted services and websites (collectively, the "<b>Website</b>" or "<b>Websites</b>") and
+                            self-managed installations, which are offered by PostHog Inc. (formerly known as Hiberly Inc.) and/or
+                            any of its subsidiares and/or affiliates ("<b>PostHog</b>" or "<b>we</b>" or "<b>us</b>") and describes how we process your personal
                             information in connection with those Websites or self managed installations, customer events
                             and demos, and how we collect information through the use of cookies and related
                             technologies. It also tells you how you can access and update your personal information and
                             describes the data protection rights that may be available under your country’s or state's
-                            laws, including (in the European Economic Area ("EEA"), and UK), a right to object to some
+                            laws, including (in the European Economic Area ("<b>EEA</b>"), and UK), a right to object to some
                             processing that we carry out or, where we rely on consent, how to withdraw that consent.
                             Please read this Privacy Policy carefully. By accessing or using any part of the Websites or
                             self-managed installations, you acknowledge you have been informed of and consent to our
@@ -653,7 +650,7 @@ function Privacy() {
                             cloud hosting, analytics, marketing, advertising, customer support, communication, or internal operations.
                         </p>
                         <p>
-                            We may also share certain account information (including email addresses) with third-party advertising 
+                            We may also share some of your account information that you provide to us (including email addresses) with third-party advertising 
                             platforms to create or target marketing and advertising audiences on our behalf. We do not share any of your 
                             user content that you have uploaded or have enabled our products to access for these purposes. You have the 
                             option to opt out of your personal information being sent to third-party platforms for targeted marketing or advertising purposes by sending an email to <a href="mailto:Brian@GetPostHog.com">Brian@GetPostHog.com</a>.
@@ -672,7 +669,7 @@ function Privacy() {
                             <li>Zendesk - customer support tool</li>
                         </ul>
                         <p>
-                          <strong>This list is representatitve and not exhaustive.</strong> We may engage additional or different service providers and partners over time as we see fit to support our business needs. 
+                          <strong>This list is meant to be representatitve and not exhaustive</strong>. We may engage additional or different service providers and partners over time as we see fit to support our business needs. 
                             Our service providers and partners are required by contract to safeguard any personal
                             information they receive from us and are prohibited from using the personal information for
                             any purpose other than to perform the services as instructed by PostHog.
@@ -680,7 +677,7 @@ function Privacy() {
                     </div>
                     <div>
                         <p>
-                            Here is a list of examples of the types of companies we use. This applies to your personal data, not the data of
+                            Here is a list of examples of the types of companies we use to manage and support our business. This applies to your personal data, not the data of
                             your users.
                         </p>
                     </div>
@@ -691,7 +688,7 @@ function Privacy() {
                             States. Your personal information collected by us in accordance with this Privacy Policy is
                             used and shared by PostHog with our subsidiares and affiliates, including our subsidiaries based in the UK (Hiberly Ltd) and in Germany (PostHog GmbH) for
                             the purposes of providing the Websites, delivering our Products and services, managing your
-                            accounts, hosting, IT, security, support, billing, marketing, and communications.
+                            accounts, hosting, IT, security, support, billing, marketing, advertising and communications.
                         </p>
                     </div>
                     <div>
@@ -748,14 +745,14 @@ function Privacy() {
                             where this is to a country which is not subject to an adequacy decision by the EU Commission
                             or considered adequate as determined by applicable data protection laws, we will take steps
                             to ensure your personal information is adequately protected by safeguards such as Standard
-                            Contractual Clauses ("SCCs") approved by the EU Commission or by the UK Government. A copy
+                            Contractual Clauses approved by the EU Commission or by the UK Government ("<b>SCCs</b>"). A copy
                             of the relevant mechanism can be obtained for your review on request by using the contact
                             details in the ‘Contacting PostHog About Your Privacy’ section of this Privacy Policy.
                         </p>
                         <p>
-                            Posthog complies with the EU-U.S. Data Privacy Framework ("EU-U.S. DPF"), the UK Extension
-                            to the EU-U.S. Data Privacy Framework ("UK Extension to the EU-U.S. DPF"), and the
-                            Swiss-U.S. Data Privacy Framework ("Swiss-U.S. DPF") as set forth by the U.S. Department of
+                            Posthog complies with the EU-U.S. Data Privacy Framework ("<b>EU-U.S. DPF</b>"), the UK Extension
+                            to the EU-U.S. Data Privacy Framework ("<b>UK Extension to the EU-U.S. DPF</b>"), and the
+                            Swiss-U.S. Data Privacy Framework ("<b>Swiss-U.S. DPF</b>") as set forth by the U.S. Department of
                             Commerce. Posthog has certified to the U.S. Department of Commerce that it adheres to the
                             EU-U.S. DPF Principles with regard to the processing of personal data received from the
                             European Union in reliance on the EU-U.S. DPF and that it adheres to the UK Extension to the
@@ -765,8 +762,8 @@ function Privacy() {
                             Principles with regard to the processing of personal data received from Switzerland in
                             reliance on the Swiss-U.S. DPF. If there is any conflict between the terms in this privacy
                             policy and the EU-U.S. DPF Principles, the UK Extension to the EU-U.S. DPF Principles,
-                            and/or the Swiss-U.S. DPF Principles (together, the "DPF Principles"), the DPF Principles
-                            shall govern. To learn more about the Data Privacy Framework ("DPF") program, and to view
+                            and/or the Swiss-U.S. DPF Principles (together, the "<b>DPF Principles</b>"), the DPF Principles
+                            shall govern. To learn more about the Data Privacy Framework ("<b>DPF</b>") program, and to view
                             our certification, please visit&nbsp;
                             <Link href="https://www.dataprivacyframework.gov/" externalNoIcon>
                                 <u>https://www.dataprivacyframework.gov/</u>
@@ -1091,9 +1088,9 @@ function Privacy() {
                     <div className="md:pb-12">
                         <h3>Introduction</h3>
                         <p>
-                            This Addendum (“Addendum”) forms part of the Privacy Policy, and of any superseding written
+                            This Addendum (“<b>Addendum</b>”) forms part of the Privacy Policy, and of any superseding written
                             agreement, entered by and between you, the Customer (as defined in the Agreement)
-                            (“Customer”), and PostHog Inc. (“PostHog”; and collectively – the “Agreement”).
+                            (“<b>Customer</b>”), and PostHog Inc. (“<b>PostHog</b>”; and collectively – the “<b>Agreement</b>”).
                         </p>
                         <p>
                             This Addendum reflects the parties’ desire and intent to modify and amend the Agreement, in
@@ -1113,7 +1110,7 @@ function Privacy() {
                         </p>
                         <p>
                             This Addendum shall become effective as of the commencement of processing of Customer
-                            Personal Information under the Agreement (“Addendum Effective Date”).
+                            Personal Information under the Agreement (“<b>Addendum Effective Date</b>”).
                         </p>
                         <p>
                             If you need a signed copy of this Addendum you can download a{' '}
@@ -1235,7 +1232,7 @@ function Privacy() {
                             Where you apply for a job opening posted by us, these provisions will apply to our
                             processing of your personal information. When you apply for a job opening via the
                             application function on a job site like LinkedIn or similar online service provider
-                            (referred to below as a “Partner”), you should note that the relevant Partner may retain
+                            (referred to below as a “<b>Partner</b>”), you should note that the relevant Partner may retain
                             your personal data and may also collect data from us in respect of the progress of your
                             application. Any use by the Partner of your data will be in accordance with the Partner’s
                             privacy policy.
@@ -1309,7 +1306,7 @@ function Privacy() {
                             Lawful basis and purposes for processing applicant personal information
                         </h3>
                         <p>
-                            If you are a national of countries in the European Economic Area (EEA), United Kingdom, or
+                            If you are a national of countries in the EEA, United Kingdom, or
                             Switzerland, we collect and process your personal information on the following legal bases
                             set out by applicable law:
                         </p>
@@ -1349,10 +1346,9 @@ function Privacy() {
                         </p>
                         <p>
                             PostHog may transfer, store, or process your personal information in a country outside your
-                            jurisdiction, including countries outside the European Economic Area (“EEA”), Switzerland,
+                            jurisdiction, including countries outside the EEA, Switzerland,
                             and the United Kingdom. If we transfer personal information from the EEA, Switzerland, or
-                            United Kingdom to a country outside it, such as the United States, we will enter into
-                            Standard Contractual Clauses (“SCCs”) approved by the EU Commission or by the UK Government,
+                            United Kingdom to a country outside it, such as the United States, we will enter into SCCs, 
                             with the data importer, or take other measures to provide an adequate level of data
                             protection.
                         </p>
@@ -1496,6 +1492,9 @@ function Privacy() {
                             frequently check this page for any minor changes to its Privacy Policy. Your continued use
                             of this site, any of the Websites, self-managed installations, deployments, or other PostHog products after any change in this Privacy Policy will constitute your acceptance of such
                             change and acknowledgement of the updated Policy.
+                        </p>
+                        <p>
+                            Last Updated: December __, 2025
                         </p>
                     </div>
                     <div>
