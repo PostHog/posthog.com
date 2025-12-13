@@ -103,7 +103,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
 
         // Find the selected item to get its icon
         const selectedItem = React.useMemo(() => {
-            const currentValue = value ?? defaultValue
+            const currentValue = value !== undefined ? value : defaultValue
             if (currentValue === undefined) return null
 
             for (const group of groups) {
