@@ -650,6 +650,10 @@ export const handbookSidebar = [
                         name: 'Docs style guide',
                         url: '/handbook/content/docs-style-guide',
                     },
+                    {
+                        name: 'Docs runbook',
+                        url: '/handbook/content/docs-runbook',
+                    },
                 ],
             },
             {
