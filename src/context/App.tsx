@@ -128,6 +128,7 @@ interface AppContextType {
     copyDesktopParams: () => void
     desktopCopied: boolean
     shareableDesktopURL: string
+    windowsInView: AppWindow[]
 }
 
 interface AppProviderProps {
@@ -287,6 +288,7 @@ export const Context = createContext<AppContextType>({
     copyDesktopParams: () => {},
     desktopCopied: false,
     shareableDesktopURL: '',
+    windowsInView: [],
 })
 
 export interface AppSetting {
@@ -1113,6 +1115,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
     const [desktopCopied, setDesktopCopied] = useState(false)
+    const [windowsInView, setWindowsInView] = useState<AppWindow[]>([])
     const urlObj = isSSR ? null : new URL(location.href)
     const queryString = isSSR ? '' : urlObj?.search.substring(1)
     const parsed = isSSR ? {} : qs.parse(queryString)
@@ -2119,6 +2122,39 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [])
 
+    useEffect(() => {
+        const visibleWindows = windows.filter((window) => {
+            if (window.minimized) return false
+
+            const windowsAbove = windows.filter((w) => w !== window && w.zIndex > window.zIndex && !w.minimized)
+
+            let coveredArea = 0
+            const currentArea = window.size.width * window.size.height
+
+            for (const windowAbove of windowsAbove) {
+                const left = Math.max(window.position.x, windowAbove.position.x)
+                const right = Math.min(
+                    window.position.x + window.size.width,
+                    windowAbove.position.x + windowAbove.size.width
+                )
+                const top = Math.max(window.position.y, windowAbove.position.y)
+                const bottom = Math.min(
+                    window.position.y + window.size.height,
+                    windowAbove.position.y + windowAbove.size.height
+                )
+
+                if (left < right && top < bottom) {
+                    coveredArea += (right - left) * (bottom - top)
+                }
+            }
+
+            const coverageRatio = currentArea > 0 ? coveredArea / currentArea : 0
+            return coverageRatio < 0.8
+        })
+
+        setWindowsInView(visibleWindows)
+    }, [windows])
+
     return (
         <Context.Provider
             value={{
@@ -2167,6 +2203,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 copyDesktopParams,
                 desktopCopied,
                 shareableDesktopURL,
+                windowsInView,
             }}
         >
             {children}
