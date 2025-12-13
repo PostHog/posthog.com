@@ -132,23 +132,34 @@ export default function Home2() {
             <Wizard
                 leftNavigation={
                     <>
+                        <OSButton asLink to="/demo" variant="primary" size="md" state={{ newWindow: true }}>
+                            Get started - free
+                        </OSButton>
                         <CallToAction type="secondary" size="sm">
-                            Previous
+                            Start with AI
                         </CallToAction>
                     </>
                 }
                 rightNavigation={
                     <>
-                        <OSButton asLink to="/demo" variant="primary" size="md" state={{ newWindow: true }}>
-                            Watch a demo
+                        <OSButton asLink to="/demo" size="md" state={{ newWindow: true }}>
+                            Talk to a human
                         </OSButton>
                     </>
                 }
             >
-                <ScrollArea className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:py-4">
-                    <div className="flex  gap-2">
+                <ScrollArea
+                    data-scheme="primary"
+                    className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:py-4 bg-primary"
+                >
+                    <div className="flex flex-col @3xl:flex-row px-4 gap-2">
                         <div>
-                            <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
+                            <div className="mb-4">
+                                <Logo
+                                    className="inline-block"
+                                    fill={siteSettings.theme === 'dark' ? 'white' : undefined}
+                                />
+                            </div>
                             <h1>The AI platform for engineers</h1>
                             <p>Debug products. Ship features faster. With all user and product data in one stack.</p>
 
@@ -165,7 +176,7 @@ export default function Home2() {
                                 ref={videoRef}
                                 videoId={currentVideoId}
                                 onEnd={handleVideoEnd}
-                                className="w-[500px]"
+                                className="w-full @3xl:w-[400px] @4xl:w-[540px]"
                             />
                             <p className="mt-4 text-center italic">"{currentPrompt.text}"</p>
                             <p className="text-sm text-center opacity-70">
