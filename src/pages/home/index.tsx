@@ -14,7 +14,10 @@ import useProduct from 'hooks/useProduct'
 const PROMPTS = [
     { slide: 'analytics', text: 'Why has my traffic decreased?', videoId: 'pmh9dvfgj4' },
     { slide: 'analytics', text: 'Create an SEO/SEM dashboard for my marketing team', videoId: '79pshye67k' },
-    { slide: 'analytics', text: "What's my activation rate?", videoId: 'pmh9dvfgj4' },
+    { slide: 'analytics', text: 'Find issues with page performance', videoId: '1fxx4escag' },
+
+    { slide: 'replay', text: 'Watch user sessions to find UX issues', videoId: '39pr1b86tw' },
+
     { slide: 'feature-flags', text: 'Add a feature flag to my product', videoId: '79pshye67k' },
     { slide: 'feature-flags', text: 'Roll out a feature flag to 50% of users', videoId: 'pmh9dvfgj4' },
     { slide: 'feature-flags', text: 'Create a feature flag for my marketing team', videoId: '79pshye67k' },
@@ -23,6 +26,7 @@ const PROMPTS = [
 // Map slide values to product handles
 const SLIDE_TO_PRODUCT: Record<string, string> = {
     analytics: 'product_analytics',
+    replay: 'session_replay',
     'feature-flags': 'feature_flags',
 }
 
@@ -92,6 +96,10 @@ export default function Home2() {
         {
             handle: 'product_analytics',
             value: 'analytics',
+        },
+        {
+            handle: 'session_replay',
+            value: 'replay',
         },
         {
             handle: 'feature_flags',
