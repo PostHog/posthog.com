@@ -706,7 +706,7 @@ export default function HowWeAI() {
                             </p>
 
                             <p>
-                                See how we think about AI at PostHog, and a get glimpse of the future we’re building
+                                See how we think about AI at PostHog, and get a glimpse of the future we’re building
                                 towards.
                             </p>
 
