@@ -62,7 +62,7 @@ These are raw numbers from what users are doing with your product.
 
 - **Depth of engagement:** How far your users get. Someone who completes onboarding and uses 3 features is more engaged than someone who signs up and bounces.
 
-### **Calculated metrics**
+### Calculated metrics
 
 These are derived by doing math on the raw metrics above to answer specific questions.
 
