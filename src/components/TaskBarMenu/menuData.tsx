@@ -688,6 +688,12 @@ export function useMenuData(): MenuType[] {
                     ],
                 },
                 {
+                    type: 'item',
+                    label: 'Professional Services',
+                    link: '/professional-services',
+                    icon: <Icons.IconPerson className="size-4 text-seagreen" />,
+                },
+                {
                     type: 'separator',
                 },
                 {
