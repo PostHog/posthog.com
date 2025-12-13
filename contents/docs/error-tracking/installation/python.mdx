@@ -1,7 +1,7 @@
 ---
 title: Python error tracking installation
 showStepsToc: true
-platformImageUrl: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/python.svg
+platformLogo: python
 ---
 
 
@@ -10,7 +10,7 @@ import DjangoContextMiddleware from '../../libraries/python/_snippets/django-con
 import PythonFlaskExceptionAutocapture from '../../libraries/python/_snippets/python-flask-exception-autocapture.mdx'
 import PythonFastAPIExceptionAutocapture from '../../libraries/python/_snippets/python-fastapi-exception-autocapture.mdx'
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
-import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 <Steps>
 <Step title="Install PostHog Python SDK" badge="required">
@@ -110,7 +110,7 @@ Python frameworks often have built-in error handlers. This means PostHog's defau
 
 <Step title="Upload source maps" badge="optional">
 
-<StepUploadSourceMaps urlPath="cli" />
+<StepUploadSymbolSets urlPath="cli" />
 
 </Step>
 </Steps> 
