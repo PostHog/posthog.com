@@ -76,6 +76,7 @@ interface ReaderViewProps {
     parent?: MenuItem
     markdownContent?: string
     showQuestions?: boolean
+    sourceInstanceName?: string
 }
 
 interface BackgroundImageOption {
@@ -366,6 +367,7 @@ export default function ReaderView({
     parent,
     markdownContent,
     showQuestions = true,
+    sourceInstanceName,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -394,6 +396,7 @@ export default function ReaderView({
                 parent={parent}
                 markdownContent={markdownContent}
                 showQuestions={showQuestions}
+                sourceInstanceName={sourceInstanceName}
             >
                 {children}
             </ReaderViewContent>
@@ -527,6 +530,7 @@ function ReaderViewContent({
     parent,
     markdownContent,
     showQuestions = true,
+    sourceInstanceName,
 }) {
     const { openNewChat, compact } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
@@ -923,7 +927,11 @@ function ReaderViewContent({
                         {filePath && (
                             <OSButton
                                 asLink
-                                to={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                to={`https://github.com/PostHog/${
+                                    sourceInstanceName === 'posthog-main-repo'
+                                        ? 'posthog/blob/master'
+                                        : 'posthog.com/blob/master/contents'
+                                }/${filePath}`}
                                 icon={<IconPencil />}
                             />
                         )}
