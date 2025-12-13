@@ -1,0 +1,85 @@
+PostHog is available for Unity via the [Unity Package Manager](https://docs.unity3d.com/Manual/upm-ui.html).
+
+### Requirements
+
+- Unity 2021.3 LTS or later
+- .NET Standard 2.1 API Compatibility Level
+
+### Via Unity Package Manager (Git URL)
+
+1. Open **Window > Package Manager**
+2. Click the **+** button and select **Add package from git URL**
+3. Enter: `https://github.com/PostHog/posthog-unity.git?path=com.posthog.unity`
+
+### Via local package
+
+1. Clone or download the [posthog-unity repository](https://github.com/PostHog/posthog-unity)
+2. Open **Window > Package Manager**
+3. Click the **+** button and select **Add package from disk**
+4. Navigate to `com.posthog.unity/package.json`
+
+### Configuration
+
+There are two ways to configure PostHog in Unity:
+
+#### Option 1: Unity Inspector (recommended)
+
+The easiest way to configure PostHog is through the Unity Inspector:
+
+1. Go to **Edit > Project Settings > PostHog** (this creates a settings asset if one doesn't exist)
+2. Enter your **API Key** and select your **Host** (US or EU Cloud)
+3. Configure other options as needed
+
+The settings asset is created at `Assets/Resources/PostHogSettings.asset`. PostHog automatically initializes when your game starts using these settings.
+
+You can also create the settings asset manually via **Assets > Create > PostHog > Settings in Resources**.
+
+> **Tip:** Click **Test Connection** in the Inspector to verify your API key is valid.
+
+#### Option 2: Code-based initialization
+
+For more control, initialize PostHog in your game's startup script:
+
+```csharp
+using PostHog;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    void Start()
+    {
+        PostHog.Setup(new PostHogConfig
+        {
+            ApiKey = "<ph_project_api_key>",
+            Host = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+        });
+    }
+}
+```
+
+> **Note:** If you use code-based initialization, remove any `PostHogSettings.asset` from your Resources folder to avoid double initialization.
+
+### Configuration options
+
+All options below can be set via the Unity Inspector or in code:
+
+```csharp
+PostHog.Setup(new PostHogConfig
+{
+    // Required
+    ApiKey = "<ph_project_api_key>",
+
+    // Optional
+    Host = "<ph_client_api_host>",         // PostHog instance URL (default: https://us.i.posthog.com)
+    FlushAt = 20,                           // Events before auto-flush (default: 20)
+    FlushIntervalSeconds = 30,              // Seconds between flushes (default: 30)
+    MaxQueueSize = 1000,                    // Max queued events (default: 1000)
+    MaxBatchSize = 50,                      // Max events per request (default: 50)
+    CaptureApplicationLifecycleEvents = true, // Auto-capture app lifecycle events (default: true)
+    CaptureExceptions = true,               // Auto-capture unhandled exceptions (default: true)
+    PersonProfiles = PersonProfiles.IdentifiedOnly, // When to create person profiles
+    PreloadFeatureFlags = true,             // Fetch flags on init (default: true)
+    SendFeatureFlagEvent = true,            // Track flag usage (default: true)
+    LogLevel = PostHogLogLevel.Warning      // Log verbosity (default: Warning)
+});
+```

@@ -1,0 +1,101 @@
+### Boolean feature flags
+
+```csharp
+if (PostHog.IsFeatureEnabled("flag-key"))
+{
+    // Do something differently for this user
+}
+```
+
+### Multivariate feature flags
+
+```csharp
+var flag = PostHog.GetFeatureFlag("flag-key");
+if (flag.IsEnabled)
+{
+    string variant = flag.GetVariant("control"); // "control" is the default value
+    if (variant == "variant-key") // Replace with your variant key
+    {
+        // Do something for this variant
+    }
+}
+```
+
+### Feature flag payloads
+
+Access payloads through the feature flag object:
+
+```csharp
+// Define your payload class (must use [Serializable] and public fields for JsonUtility)
+[Serializable]
+public class CheckoutConfig
+{
+    public string theme;
+    public int maxItems;
+    public bool showBanner;
+}
+
+// Get flag and access payload
+var flag = PostHog.GetFeatureFlag("checkout-config");
+if (flag.IsEnabled)
+{
+    var config = flag.GetPayload<CheckoutConfig>();
+    Debug.Log($"Theme: {config.theme}, Max items: {config.maxItems}");
+}
+
+// For dynamic/nested payloads, use PostHogJson
+var payload = flag.GetPayloadJson();
+string theme = payload["theme"].GetString("light");
+int maxItems = payload["settings"]["maxItems"].GetInt(10);
+```
+
+### Ensuring flags are loaded before usage
+
+Every time a user opens the app, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in storage.
+
+This means that for most screens, the feature flags are available immediately – **except for the first time a user visits**.
+
+To be notified when flags are loaded:
+
+```csharp
+// Via callback during setup
+PostHog.Setup(new PostHogConfig
+{
+    ApiKey = "<ph_project_api_key>",
+    OnFeatureFlagsLoaded = () => Debug.Log("Flags ready!")
+});
+
+// Or via event
+PostHog.OnFeatureFlagsLoaded += () => UpdateUI();
+```
+
+### Reloading feature flags
+
+Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call:
+
+```csharp
+await PostHog.ReloadFeatureFlagsAsync();
+```
+
+### Overriding server properties for flags
+
+You can set properties used for flag evaluation:
+
+```csharp
+// Set person properties for targeting
+PostHog.SetPersonPropertiesForFlags(new Dictionary<string, object>
+{
+    { "plan", "premium" },
+    { "beta_user", true }
+});
+
+// Set group properties for targeting
+PostHog.SetGroupPropertiesForFlags("company", new Dictionary<string, object>
+{
+    { "size", "enterprise" }
+});
+
+// Reset properties
+PostHog.ResetPersonPropertiesForFlags();
+PostHog.ResetGroupPropertiesForFlags();
+```
