@@ -8,7 +8,7 @@ const isCloudinaryImage = (url: string): boolean => {
 
 const getCloudinaryPublicId = (url: string): string | null => {
     const cloudinaryUrlPattern =
-        /https:\/\/res\.cloudinary\.com\/[^/]+\/(?:image|video)\/upload\/(?:v\d+\/)?(.+?)(?:\.[^.]+)?$/
+        /https:\/\/res\.cloudinary\.com\/[^/]+\/(?:image|video)\/upload\/(?:.*\/)?([^/]+?)(?:\.[^.]+)?$/
     const match = url.match(cloudinaryUrlPattern)
     return match ? match[1] : null
 }
