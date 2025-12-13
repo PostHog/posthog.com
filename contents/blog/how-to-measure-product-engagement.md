@@ -46,7 +46,7 @@ This also means startups should prioritize different engagement metrics than est
 
 There are a ton of different ways to measure how people interact with your product. Here are the most common metrics people track.
 
-### **Raw behavioral metrics**
+### Raw behavioral metrics
 
 These are raw numbers from what users are doing with your product.
 
