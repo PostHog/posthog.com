@@ -20,6 +20,16 @@ const PROMPTS = [
     { slide: 'feature-flags', text: 'Create a feature flag for my marketing team', videoId: '79pshye67k' },
 ]
 
+// Map slide values to product handles
+const SLIDE_TO_PRODUCT: Record<string, string> = {
+    analytics: 'product_analytics',
+    'feature-flags': 'feature_flags',
+}
+
+// Get prompts with their global indices for dot navigation
+const getPromptsForSlide = (slide: string) =>
+    PROMPTS.map((p, i) => ({ ...p, globalIndex: i })).filter((p) => p.slide === slide)
+
 // Helper component to use hooks for product data
 function ProductTrigger({ handle }: { handle: string }) {
     const product = useProduct({ handle }) as
@@ -32,6 +42,12 @@ function ProductTrigger({ handle }: { handle: string }) {
             <h2 className="!m-0">{product?.name}</h2>
         </div>
     )
+}
+
+// Helper component for product name in video caption
+function ProductName({ handle }: { handle: string }) {
+    const product = useProduct({ handle }) as { name?: string } | undefined
+    return <>{product?.name || ''}</>
 }
 
 export default function Home2() {
@@ -144,13 +160,32 @@ export default function Home2() {
                                 onValueChange={handleAccordionChange}
                             />
                         </div>
-                        <div>
+                        <div className="flex flex-col items-center">
                             <WistiaVideo
                                 ref={videoRef}
                                 videoId={currentVideoId}
                                 onEnd={handleVideoEnd}
                                 className="w-[500px]"
                             />
+                            <p className="mt-4 text-center italic">"{currentPrompt.text}"</p>
+                            <p className="text-sm text-center opacity-70">
+                                PostHog AI + <ProductName handle={SLIDE_TO_PRODUCT[currentPrompt.slide]} />
+                            </p>
+                            <div className="flex gap-2 mt-4">
+                                {getPromptsForSlide(currentPrompt.slide).map((prompt) => {
+                                    const isActive = activePromptIndex === prompt.globalIndex
+                                    return (
+                                        <button
+                                            key={prompt.globalIndex}
+                                            onClick={() => setActivePromptIndex(prompt.globalIndex)}
+                                            className={`size-3 rounded-full transition-colors ${
+                                                isActive ? 'bg-blue' : 'bg-accent hover:opacity-80'
+                                            }`}
+                                            aria-label={`Go to prompt: ${prompt.text}`}
+                                        />
+                                    )
+                                })}
+                            </div>
                         </div>
                     </div>
                 </ScrollArea>
