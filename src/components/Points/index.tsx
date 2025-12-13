@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import dayjs from 'dayjs'
 import { Fieldset } from 'components/OSFieldset'
 import { useUser } from 'hooks/useUser'
 import RewardCard from './RewardCard'
@@ -21,6 +20,7 @@ export default function Points() {
                     price
                     image
                     merchStoreHandle
+                    discountAmount
                 }
             }
         }
@@ -40,7 +40,7 @@ export default function Points() {
             <div className="space-y-2">
                 <div className="flex items-baseline justify-between">
                     <div className="flex items-baseline gap-2">
-                        <span className="text-4xl font-bold tabular-nums">{total.toLocaleString()}</span>
+                        <span className="text-4xl font-bold tabular-nums text-green">{total.toLocaleString()}</span>
                         <span className="text-lg text-muted">points</span>
                     </div>
                     {nextReward && (
@@ -61,7 +61,7 @@ export default function Points() {
             </div>
 
             <Fieldset legend="Redeem points">
-                <div className="grid grid-cols-2 @lg:grid-cols-4 gap-3 pt-2">
+                <div className="grid @md:grid-cols-2 @2xl:grid-cols-4 gap-3 pt-2">
                     {rewards.map((reward) => (
                         <RewardCard key={reward.handle} reward={reward} total={total} />
                     ))}
@@ -95,16 +95,17 @@ export default function Points() {
                                             }) => (
                                                 <div
                                                     key={id}
-                                                    className="flex items-center py-2 first:pt-0 last:pb-0 gap-1"
+                                                    className="flex items-center py-2 first:pt-0 last:pb-0 gap-3"
                                                 >
-                                                    <span className="text-xs text-muted w-10 shrink-0">
-                                                        {dayjs(date).format('MMM D')}
-                                                    </span>
                                                     <div className="flex-1 min-w-0">
-                                                        <TransactionTitle type={type} metadata={metadata as any} />
+                                                        <TransactionTitle
+                                                            type={type}
+                                                            metadata={metadata as any}
+                                                            date={date}
+                                                        />
                                                     </div>
                                                     <span
-                                                        className={`font-mono font-bold text-base w-16 text-right shrink-0 whitespace-nowrap ${
+                                                        className={`font-mono font-bold text-base text-right shrink-0 whitespace-nowrap ${
                                                             amount > 0 ? 'text-green' : 'text-red'
                                                         }`}
                                                     >

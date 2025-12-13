@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { IconPresent, IconReceipt, IconBadge, IconCheck, IconCopy } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
+import dayjs from 'dayjs'
 import type { TransactionMetadata } from './types'
 
 const transactionTypeIcons: Record<string, React.ReactNode> = {
@@ -9,7 +10,15 @@ const transactionTypeIcons: Record<string, React.ReactNode> = {
     achievement: <IconBadge className="size-5 text-yellow" />,
 }
 
-export default function TransactionTitle({ type, metadata }: { type: string; metadata?: TransactionMetadata }) {
+export default function TransactionTitle({
+    type,
+    metadata,
+    date,
+}: {
+    type: string
+    metadata?: TransactionMetadata
+    date?: Date
+}) {
     const iconURL = metadata?.achievement?.iconURL as `https://res.cloudinary.com/${string}` | undefined
     const typeKey = type.toLowerCase().replace(/_/g, '')
     const fallbackIcon = transactionTypeIcons[typeKey]
@@ -30,7 +39,7 @@ export default function TransactionTitle({ type, metadata }: { type: string; met
     }
 
     return (
-        <div className="flex gap-1 items-center min-w-0">
+        <div className="flex gap-2 items-center min-w-0">
             <span className="shrink-0 w-6 h-6 flex items-center justify-center mt-px">
                 {iconURL ? (
                     <CloudinaryImage width={24} height={24} src={iconURL} className="w-full" />
@@ -41,7 +50,11 @@ export default function TransactionTitle({ type, metadata }: { type: string; met
             <div className="min-w-0 flex-1">
                 <p className="text-sm capitalize m-0 font-semibold truncate">{type.replace(/_/g, ' ').toLowerCase()}</p>
                 <div className="flex items-baseline gap-1">
-                    {description && <p className="text-xs text-muted m-0 truncate">{description}</p>}
+                    <p className="text-xs text-muted m-0 truncate">
+                        <span className="text-primary">{description}</span>
+                        {description && date && ' - '}
+                        {date && dayjs(date).format('MMM D, YYYY')}
+                    </p>
 
                     {isRedemption && code ? (
                         showCode ? (

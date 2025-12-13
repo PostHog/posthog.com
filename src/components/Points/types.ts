@@ -6,6 +6,7 @@ export interface Reward {
     price: number
     image: string
     merchStoreHandle: string | null
+    discountAmount: number | null
 }
 
 export type RewardCardState = 'idle' | 'confirming' | 'loading' | 'success' | 'error'
