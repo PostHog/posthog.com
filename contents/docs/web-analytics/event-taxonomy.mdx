@@ -1,0 +1,133 @@
+---
+title: Web analytics event taxonomy
+sidebar: Docs
+showTitle: true
+---
+
+PostHog automatically captures detailed engagement data on every pageview including time spent, scroll depth, and navigation paths. This reference explains what properties are captured on `$pageview` and `$pageleave` events.
+
+## Core event types
+
+- **`$pageview`** - Fired when a user views a page
+- **`$pageleave`** - Fired when a user leaves a page (on page unload)
+
+Both events include properties about the **previous** page, not the current one. This design captures engagement metrics (duration, scroll depth) when users navigate away.
+
+## Event properties
+
+### Pageview identification
+
+| Property | Type | Description | Available on |
+|----------|------|-------------|--------------|
+| `$pageview_id` | string | Unique identifier for this pageview | `$pageview`, `$pageleave`, all events |
+| `$prev_pageview_id` | string | Identifier of the previous pageview | `$pageview`, `$pageleave` |
+
+### Page metadata
+
+These properties describe the **previous** page (not the current one):
+
+| Property | Type | Description | Available on |
+|----------|------|-------------|--------------|
+| `$prev_pageview_pathname` | string | Path of the previous page (e.g., `/blog/my-post`) | `$pageview`, `$pageleave` |
+| `$prev_pageview_duration` | number | Time spent on previous page in seconds | `$pageview`, `$pageleave` |
+
+### Scroll tracking properties
+
+All scroll properties measure engagement with the **previous** page:
+
+| Property | Type | Description | Available on |
+|----------|------|-------------|--------------|
+| `$prev_pageview_last_scroll` | number | Last scroll position in pixels | `$pageview`, `$pageleave` |
+| `$prev_pageview_last_scroll_percentage` | number | Last scroll position as percentage (0-1) | `$pageview`, `$pageleave` |
+| `$prev_pageview_max_scroll` | number | Maximum scroll position reached in pixels | `$pageview`, `$pageleave` |
+| `$prev_pageview_max_scroll_percentage` | number | Maximum scroll position as percentage (0-1) | `$pageview`, `$pageleave` |
+| `$prev_pageview_last_content` | number | Last content position in pixels | `$pageview`, `$pageleave` |
+| `$prev_pageview_last_content_percentage` | number | Last content position as percentage (0-1) | `$pageview`, `$pageleave` |
+| `$prev_pageview_max_content` | number | Maximum content position in pixels | `$pageview`, `$pageleave` |
+| `$prev_pageview_max_content_percentage` | number | Maximum content position as percentage (0-1) | `$pageview`, `$pageleave` |
+
+> **Note:** "Scroll" refers to overall page scroll, while "content" refers to how much content has scrolled into view.
+
+### Standard event properties
+
+In addition to the properties above, pageview events include standard properties like:
+
+- `$current_url` - Full URL of the current page
+- `$pathname` - Path of the current page
+- `$host` - Host domain
+- `$referrer` - Referring URL
+- `$session_id` - Session identifier
+- Browser, device, and location properties
+
+## How the data model works
+
+The `$prev_pageview_*` prefix indicates these properties describe the **previous** page, not the current one. PostHog captures engagement metrics when the user navigates away.
+
+**Example flow:**
+
+1. User views Page A → `$pageview` event fires with `$pageview_id: "abc123"`
+2. User scrolls on Page A
+3. User navigates to Page B → `$pageview` event fires with:
+   - `$pageview_id: "xyz789"` (new pageview ID)
+   - `$prev_pageview_id: "abc123"` (references Page A)
+   - `$prev_pageview_pathname: "/page-a"`
+   - `$prev_pageview_duration: 45` (seconds spent on Page A)
+   - `$prev_pageview_max_scroll_percentage: 0.8` (scrolled 80% on Page A)
+
+To get metrics for a specific pageview, look at the next event (either `$pageview` or `$pageleave`) where `$prev_pageview_id` matches the target pageview's ID.
+
+### SPA vs traditional sites
+
+**Single-page applications:**
+- `$pageview` fires on navigation within the app
+- `$pageleave` only fires when leaving the site entirely
+- State persists in memory between navigations
+- Previous page data is included in the next `$pageview` event
+
+**Traditional multi-page sites:**
+- Page reload clears JavaScript state
+- `$pageleave` fires on every navigation (before unload)
+- Both event types capture complete data
+
+### Configuration
+
+```javascript
+posthog.init('<ph_project_api_key>', {
+  capture_pageleave: 'if_capture_pageview'  // Default
+  // Options: true | false | 'if_capture_pageview'
+})
+```
+
+- `true` - Always capture pageleave events
+- `false` - Never capture pageleave events
+- `'if_capture_pageview'` - Only capture if pageview capture is enabled (default)
+
+## Properties in the web analytics dashboard
+
+The [web analytics dashboard](/docs/web-analytics/dashboard) uses these properties to calculate:
+
+**Time on page**
+- Uses `$prev_pageview_duration` from both `$pageview` and `$pageleave` events
+- Session duration aggregates this across all pageviews in a session
+
+**Scroll depth**
+- **Average scroll** - Average of `$prev_pageview_max_scroll_percentage`
+- **Deep scroll rate** - Percentage of users who reach 80%+ of `$prev_pageview_max_content_percentage`
+- Only includes events where `$prev_pageview_pathname` matches the page being analyzed
+
+**Bounce rate**
+- Calculated from the `$is_bounce` property on the sessions table
+- Requires both `$pageview` and `$autocapture` events to function accurately
+
+**Navigation paths**
+- Entry paths use the first `$pageview` event in a session
+- Exit paths use `$prev_pageview_pathname` from the last event in a session
+- Previous page breakdown uses `$prev_pageview_pathname` to show where users came from
+
+## Related resources
+
+- [Web analytics dashboard](/docs/web-analytics/dashboard)
+- [Sessions in PostHog](/docs/data/sessions)
+- [How to calculate time on page](/tutorials/time-on-page)
+- [Scroll depth tutorial](/tutorials/scroll-depth)
+- [JavaScript SDK configuration](/docs/libraries/js/config)
