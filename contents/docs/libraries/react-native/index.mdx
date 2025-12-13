@@ -82,6 +82,7 @@ PostHog autocapture can automatically track the following events for you:
 -   **Application Updated** - when the app is updated.
 -   **$screen** - when the user navigates (if using `@react-navigation/native` (v6 or lower) or `react-native-navigation`), check out the [capturing screen views](/docs/libraries/react-native#capturing-screen-views) section
 -   **$autocapture** - touch events when the user interacts with the screen
+-   **$exception** - when the app throws exceptions.
 
 With autocapture, all touch events for children of `PosthogProvider` are tracked, capturing a snapshot of the view hierarchy at that point. This enables you to create [insights](/docs/product-analytics/insights) in PostHog without having to add custom events.
 
@@ -332,11 +333,11 @@ To set up error tracking in your project, follow the [React Native installation 
 
 ## Session replay
 
-To set up [session replay](/docs/session-replay/mobile) in your project, all you need to do is install the React Native SDK and the Session replay plugin, then follow the [instructions to enable Session Replay](/docs/session-replay/installation?tab=React+Native) for React Native.
+To set up [session replay](/docs/session-replay/mobile) in your project, all you need to do is install the React Native SDK and the Session replay plugin, then follow the [instructions to enable Session Replay](/docs/session-replay/installation/react-native) for React Native.
 
 ## Surveys
 
-To set up surveys, follow the [additional installation instructions for React Native](/docs/surveys/installation?tab=React+Native). Surveys launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
+To set up surveys, follow the [additional installation instructions for React Native](/docs/surveys/installation/react-native). Surveys launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
 
 > Note: URL and CSS selector targeting are not supported in React Native. Surveys that rely on these conditions will not appear.
 

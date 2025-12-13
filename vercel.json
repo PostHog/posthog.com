@@ -1311,12 +1311,12 @@
             "source": "/questions/automatically-merge-users",
             "destination": "/docs/product-analytics/identify#how-to-merge-users"
         },
-        { "source": "/docs/session-replay/android", "destination": "/docs/session-replay/installation?tab=Android" },
+        { "source": "/docs/session-replay/android", "destination": "/docs/session-replay/installation/android" },
         {
             "source": "/questions/how-to-get-current-user-identity",
             "destination": "/docs/product-analytics/identify#get-the-current-users-distinct-id"
         },
-        { "source": "/docs/session-replay/ios", "destination": "/docs/session-replay/installation?tab=iOS" },
+        { "source": "/docs/session-replay/ios", "destination": "/docs/session-replay/installation/ios" },
         {
             "source": "/questions/how-to-group-events",
             "destination": "/docs/product-analytics/troubleshooting#how-do-i-group-or-combine-events"
@@ -1335,10 +1335,10 @@
         },
         {
             "source": "/docs/session-replay/react-native",
-            "destination": "/docs/session-replay/installation?tab=React+Native"
+            "destination": "/docs/session-replay/installation/react-native"
         },
         { "source": "/teams/comms", "destination": "/teams/support" },
-        { "source": "/docs/session-replay/flutter", "destination": "/docs/session-replay/installation?tab=Flutter" },
+        { "source": "/docs/session-replay/flutter", "destination": "/docs/session-replay/installation/flutter" },
         { "source": "/teams/customer-comms", "destination": "/teams/support" },
         { "source": "/apps", "destination": "/cdp", "statusCode": 302 },
         { "source": "/docs/data-warehouse/setup/azure-blob", "destination": "/docs/cdp/sources/azure-blob" },
