@@ -812,7 +812,7 @@ export default function Home2() {
                     <>
                         <OSButton
                             asLink
-                            to="/demo"
+                            to="/talk-to-a-human"
                             size="md"
                             variant="underline"
                             className="font-semibold underline"
