@@ -15,6 +15,7 @@ import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { themeOptions } from '../hooks/useTheme'
 import ContactSales from 'components/ContactSales'
 import qs from 'qs'
+import usePostHog from '../hooks/usePostHog'
 
 declare global {
     interface Window {
@@ -234,26 +235,26 @@ const updateCursor = (cursor: string) => {
 
 export const Context = createContext<AppContextType>({
     windows: [],
-    closeWindow: () => { },
-    bringToFront: () => { },
+    closeWindow: () => {},
+    bringToFront: () => {},
     setWindowTitle: () => null,
     focusedWindow: undefined,
     location: {},
-    minimizeWindow: () => { },
+    minimizeWindow: () => {},
     taskbarHeight: 0,
-    addWindow: () => { },
-    updateWindowRef: () => { },
-    updateWindow: () => { },
+    addWindow: () => {},
+    updateWindowRef: () => {},
+    updateWindow: () => {},
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
-    openSearch: () => { },
-    handleSnapToSide: () => { },
+    openSearch: () => {},
+    handleSnapToSide: () => {},
     constraintsRef: { current: null },
     taskbarRef: { current: null },
-    expandWindow: () => { },
+    expandWindow: () => {},
     openSignIn: () => null,
-    openRegister: () => { },
-    openForgotPassword: () => { },
+    openRegister: () => {},
+    openForgotPassword: () => {},
     siteSettings: {
         theme: 'light',
         experience: 'posthog',
@@ -265,33 +266,37 @@ export const Context = createContext<AppContextType>({
         clickBehavior: 'double',
         performanceBoost: false,
     },
-    updateSiteSettings: () => { },
-    openNewChat: () => { },
+    updateSiteSettings: () => {},
+    openNewChat: () => {},
     isNotificationsPanelOpen: false,
-    setIsNotificationsPanelOpen: () => { },
+    setIsNotificationsPanelOpen: () => {},
     isActiveWindowsPanelOpen: false,
-    setIsActiveWindowsPanelOpen: () => { },
+    setIsActiveWindowsPanelOpen: () => {},
     isMobile: false,
     compact: false,
     menu: [],
-    openStart: () => { },
-    animateClosingAllWindows: () => { },
+    openStart: () => {},
+    animateClosingAllWindows: () => {},
     closingAllWindowsAnimation: false,
-    closeAllWindows: () => { },
-    setClosingAllWindowsAnimation: () => { },
+    closeAllWindows: () => {},
+    setClosingAllWindowsAnimation: () => {},
     screensaverPreviewActive: false,
-    setScreensaverPreviewActive: () => { },
-    setConfetti: () => { },
+    setScreensaverPreviewActive: () => {},
+    setConfetti: () => {},
     confetti: false,
     posthogInstance: undefined,
     desktopParams: undefined,
-    copyDesktopParams: () => { },
+    copyDesktopParams: () => {},
     desktopCopied: false,
     shareableDesktopURL: '',
     windowsInView: [],
 })
 
 export interface AppSetting {
+    experiment?: {
+        variant: 'control' | 'test'
+        flag: string
+    }
     size: {
         min: { width: number; height: number }
         max: { width: number; height: number }
@@ -315,6 +320,10 @@ export interface AppSettings {
 
 const appSettings: AppSettings = {
     '/': {
+        experiment: {
+            variant: 'control',
+            flag: 'homepage-test',
+        },
         size: {
             min: {
                 width: 700,
@@ -351,7 +360,11 @@ const appSettings: AppSettings = {
             },
         },
     },
-    '/home': {
+    'home-test': {
+        experiment: {
+            variant: 'test',
+            flag: 'homepage-test',
+        },
         size: {
             min: {
                 width: 700,
@@ -1107,13 +1120,13 @@ export interface SiteSettings {
     skinMode: 'modern' | 'classic'
     cursor: 'default' | 'xl' | 'james'
     wallpaper:
-    | 'keyboard-garden'
-    | 'hogzilla'
-    | 'startup-monopoly'
-    | 'office-party'
-    | '2001-bliss'
-    | 'parade'
-    | 'coding-at-night'
+        | 'keyboard-garden'
+        | 'hogzilla'
+        | 'startup-monopoly'
+        | 'office-party'
+        | '2001-bliss'
+        | 'parade'
+        | 'coding-at-night'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
@@ -1158,6 +1171,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const parsed = isSSR ? {} : qs.parse(queryString)
     const paramsWindows = parsed?.windows
     const stateWindows = element.props?.location?.state?.savedWindows
+    const posthog = usePostHog()
 
     const [windows, setWindows] = useState<AppWindow[]>(
         (location.key === 'initial' && location.pathname === '/' && isMobile) || !!paramsWindows
@@ -1313,13 +1327,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     windows.map((w) =>
                         w === focusedWindow
                             ? {
-                                ...w,
-                                element: newWindow.element,
-                                path: newWindow.path,
-                                fromHistory: newWindow.fromHistory,
-                                props: newWindow.props,
-                                location: newWindow.location,
-                            }
+                                  ...w,
+                                  element: newWindow.element,
+                                  path: newWindow.path,
+                                  fromHistory: newWindow.fromHistory,
+                                  props: newWindow.props,
+                                  location: newWindow.location,
+                              }
                             : w
                     )
                 )
@@ -1415,9 +1429,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             (key?.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
                 : {
-                    width: isSSR ? 0 : window.innerWidth * 0.9,
-                    height: isSSR ? 0 : window.innerHeight * 0.9,
-                })
+                      width: isSSR ? 0 : window.innerWidth * 0.9,
+                      height: isSSR ? 0 : window.innerHeight * 0.9,
+                  })
         return {
             width: Math.min(defaultSize.width, isSSR ? 0 : window.innerWidth * 0.9),
             height: Math.min(defaultSize.height, isSSR ? 0 : window.innerHeight * 0.9),
@@ -1466,6 +1480,19 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         return [createNewWindow(element, [], location, isSSR, taskbarHeight)]
     }
 
+    function getKey(key: string) {
+        const experiment = appSettings[key]?.experiment
+        if (!experiment?.flag) return key
+        const assignedVariant = posthog?.getFeatureFlag?.(experiment?.flag)
+        if (!assignedVariant) return key
+        const keyToUse = Object.keys(appSettings).find(
+            (key) =>
+                appSettings[key]?.experiment?.flag === experiment?.flag &&
+                appSettings[key]?.experiment?.variant === assignedVariant
+        )
+        return keyToUse || key
+    }
+
     function createNewWindow(
         element: WindowElement,
         windows: AppWindow[],
@@ -1478,13 +1505,14 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             zIndex?: number
         }
     ) {
-        const size = element.props?.location?.state?.size || element.props.size || getInitialSize(element.key)
+        const keyToUse = getKey(element.key)
+        const size = element.props?.location?.state?.size || element.props.size || getInitialSize(keyToUse)
         const position =
             element.props?.location?.state?.position ||
             element.props.position ||
-            appSettings[element.key]?.position?.getPositionDefaults?.(size, windows, getDesktopCenterPosition) ||
-            getPositionDefaults(element.key, size, windows)
-        const settings = appSettings[element.key]
+            appSettings[keyToUse]?.position?.getPositionDefaults?.(size, windows, getDesktopCenterPosition) ||
+            getPositionDefaults(keyToUse, size, windows)
+        const settings = appSettings[keyToUse]
         const lastClickedElementRect = getLastClickedElementRect()
 
         const newWindow: AppWindow = {
@@ -1511,12 +1539,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             fixedSize: settings?.size.fixed || false,
             fromOrigin: lastClickedElementRect
                 ? {
-                    x: lastClickedElementRect.x - size.width / 2,
-                    y: lastClickedElementRect.y - size.height / 2,
-                }
+                      x: lastClickedElementRect.x - size.width / 2,
+                      y: lastClickedElementRect.y - size.height / 2,
+                  }
                 : undefined,
             minimal: element.props.minimal ?? false,
-            appSettings: appSettings[element.key],
+            appSettings: appSettings[keyToUse],
             location,
         }
 
