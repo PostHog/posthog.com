@@ -889,7 +889,7 @@ export default function Home2() {
                                     ref={videoRef}
                                     videoId={currentVideoId}
                                     onEnd={handleVideoEnd}
-                                    className="w-full @3xl:w-[400px] @4xl:w-[540px] [&_.w-chrome]:!rounded-none [&_.w-vulcan-v2]:!rounded-none"
+                                    className="w-full @3xl:w-[400px] @4xl:w-[540px] [&_.w-chrome]:!rounded-none [&_.w-vulcan-v2]:!rounded-none [&_.w-chrome]:![clip-path:none]"
                                 />
                                 <p className="mt-4 mb-2 text-center italic">"{currentPrompt.text}"</p>
                                 <p className="text-sm text-center opacity-70 mt-0 mb-2">
