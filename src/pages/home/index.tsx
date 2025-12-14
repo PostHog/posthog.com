@@ -755,7 +755,7 @@ export default function Home2() {
             value,
             trigger: <ProductTrigger handle={handle} />,
             content: (
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col px-6 gap-px -mt-2">
                     {slidePrompts.map((prompt) => (
                         <OSButton
                             key={prompt.globalIndex}
@@ -801,34 +801,38 @@ export default function Home2() {
             >
                 <ScrollArea
                     data-scheme="primary"
-                    className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:py-4 [&_.w-vulcan-v2]:!rounded-none bg-primary"
+                    className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:p-8 [&_.w-vulcan-v2]:!rounded-none bg-primary"
                 >
                     {/* Video Hero Section */}
-                    <div className="flex flex-col @3xl:flex-row px-4 gap-2">
-                        <div>
-                            <div className="mb-4">
+                    <div className="flex flex-col @3xl:flex-row gap-8">
+                        <div className="flex-1">
+                            <div className="mb-8">
                                 <Logo
                                     className="inline-block"
                                     fill={siteSettings.theme === 'dark' ? 'white' : undefined}
                                 />
                             </div>
-                            <h1>The AI platform for engineers</h1>
-                            <p>Debug products. Ship features faster. With all user and product data in one stack.</p>
+                            <h1 className="text-xl font-bold mb-1">The AI platform for engineers</h1>
+                            <p className="text-[15px]">
+                                Debug products. Ship features faster. With all user and product data in one stack.
+                            </p>
 
-                            <Accordion
-                                key={activeAccordion}
-                                skin={false}
-                                items={accordionItems}
-                                defaultValue={activeAccordion}
-                                onValueChange={handleAccordionChange}
-                            />
+                            <div className="max-w-md">
+                                <Accordion
+                                    key={activeAccordion}
+                                    skin={false}
+                                    items={accordionItems}
+                                    defaultValue={activeAccordion}
+                                    onValueChange={handleAccordionChange}
+                                />
+                            </div>
                         </div>
                         <div className="flex flex-col items-center">
                             <WistiaVideo
                                 ref={videoRef}
                                 videoId={currentVideoId}
                                 onEnd={handleVideoEnd}
-                                className="w-full @3xl:w-[400px] @4xl:w-[540px]"
+                                className="w-full @3xl:w-[400px] @4xl:w-[540px] [&_.w-chrome]:!rounded-none [&_.w-vulcan-v2]:!rounded-none"
                             />
                             <p className="mt-4 text-center italic">"{currentPrompt.text}"</p>
                             <p className="text-sm text-center opacity-70">
@@ -852,15 +856,12 @@ export default function Home2() {
                         </div>
                     </div>
 
-                    {/* MDX Content Section */}
-                    <div className="px-4 mt-8">
-                        <MDXEditor
-                            noEditorWrapper
-                            jsxComponentDescriptors={jsxComponentDescriptors}
-                            body={rawBody}
-                            mdxBody={mdxBody}
-                        />
-                    </div>
+                    <MDXEditor
+                        noEditorWrapper
+                        jsxComponentDescriptors={jsxComponentDescriptors}
+                        body={rawBody}
+                        mdxBody={mdxBody}
+                    />
                 </ScrollArea>
             </Wizard>
         </>
