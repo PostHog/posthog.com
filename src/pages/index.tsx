@@ -6,5 +6,7 @@ import usePostHog from '../hooks/usePostHog'
 export default function Home() {
     const posthog = usePostHog()
 
-    return posthog?.getFeatureFlag?.('homepage-test') === 'control' ? <Control /> : <Test />
+    // TODO: Uncomment this before launch
+    // return posthog?.getFeatureFlag?.('homepage-test') === 'control' ? <Control /> : <Test />
+    return <Test />
 }
