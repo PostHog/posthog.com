@@ -791,11 +791,20 @@ export default function Home2() {
             <Wizard
                 leftNavigation={
                     <div className="flex gap-x-2">
-                        <OSButton asLink to="/demo" variant="primary" size="md" state={{ newWindow: true }}>
+                        <CallToAction
+                            to="https://app.posthog.com/signup"
+                            size="md"
+                            state={{ newWindow: true, initialTab: 'signup' }}
+                        >
                             Get started - free
-                        </OSButton>
-                        <CallToAction type="secondary" size="sm">
-                            Start with AI
+                        </CallToAction>
+                        <CallToAction
+                            type="secondary"
+                            size="md"
+                            to="/docs/getting-started/install?tab=wizard"
+                            state={{ newWindow: true }}
+                        >
+                            Install with AI
                         </CallToAction>
                     </div>
                 }
