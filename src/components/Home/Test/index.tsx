@@ -816,7 +816,7 @@ export default function Home2() {
             >
                 <ScrollArea
                     data-scheme="primary"
-                    className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:p-4 @lg:[&>div>div]:p-8 [&>div>div]:pt-2 [&_.w-vulcan-v2]:!rounded-none bg-primary"
+                    className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:p-4 @lg:[&>div>div]:p-8 [&>div>div]:!pt-2 [&_.w-vulcan-v2]:!rounded-none bg-primary"
                 >
                     <article className={getProseClasses()}>
                         {/* Video Hero Section */}
