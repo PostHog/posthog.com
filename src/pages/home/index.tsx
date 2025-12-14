@@ -17,10 +17,11 @@ const PROMPTS = [
     { slide: 'analytics', text: 'Find issues with page performance', videoId: '1fxx4escag' },
 
     { slide: 'replay', text: 'Watch user sessions to find UX issues', videoId: '39pr1b86tw' },
+    { slide: 'replay', text: 'Show me recordings of visitors using a feature', videoId: '1bct5lkhxh' },
 
-    { slide: 'feature-flags', text: 'Add a feature flag to my product', videoId: '79pshye67k' },
-    { slide: 'feature-flags', text: 'Roll out a feature flag to 50% of users', videoId: 'pmh9dvfgj4' },
-    { slide: 'feature-flags', text: 'Create a feature flag for my marketing team', videoId: '79pshye67k' },
+    { slide: 'feature-flags', text: 'Create a feature flag', videoId: 'lqo8v51lw6' },
+
+    { slide: 'data-warehouse', text: 'Write a SQL query', videoId: 'lw11gbdm03' },
 ]
 
 // Map slide values to product handles
@@ -28,6 +29,7 @@ const SLIDE_TO_PRODUCT: Record<string, string> = {
     analytics: 'product_analytics',
     replay: 'session_replay',
     'feature-flags': 'feature_flags',
+    'data-warehouse': 'data_warehouse',
 }
 
 // Get prompts with their global indices for dot navigation
@@ -104,6 +106,10 @@ export default function Home2() {
         {
             handle: 'feature_flags',
             value: 'feature-flags',
+        },
+        {
+            handle: 'data_warehouse',
+            value: 'data-warehouse',
         },
     ].map(({ handle, value }) => {
         const slidePrompts = promptsWithIndex.filter((p) => p.slide === value)
