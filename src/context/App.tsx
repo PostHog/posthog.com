@@ -234,26 +234,26 @@ const updateCursor = (cursor: string) => {
 
 export const Context = createContext<AppContextType>({
     windows: [],
-    closeWindow: () => {},
-    bringToFront: () => {},
+    closeWindow: () => { },
+    bringToFront: () => { },
     setWindowTitle: () => null,
     focusedWindow: undefined,
     location: {},
-    minimizeWindow: () => {},
+    minimizeWindow: () => { },
     taskbarHeight: 0,
-    addWindow: () => {},
-    updateWindowRef: () => {},
-    updateWindow: () => {},
+    addWindow: () => { },
+    updateWindowRef: () => { },
+    updateWindow: () => { },
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
-    openSearch: () => {},
-    handleSnapToSide: () => {},
+    openSearch: () => { },
+    handleSnapToSide: () => { },
     constraintsRef: { current: null },
     taskbarRef: { current: null },
-    expandWindow: () => {},
+    expandWindow: () => { },
     openSignIn: () => null,
-    openRegister: () => {},
-    openForgotPassword: () => {},
+    openRegister: () => { },
+    openForgotPassword: () => { },
     siteSettings: {
         theme: 'light',
         experience: 'posthog',
@@ -265,27 +265,27 @@ export const Context = createContext<AppContextType>({
         clickBehavior: 'double',
         performanceBoost: false,
     },
-    updateSiteSettings: () => {},
-    openNewChat: () => {},
+    updateSiteSettings: () => { },
+    openNewChat: () => { },
     isNotificationsPanelOpen: false,
-    setIsNotificationsPanelOpen: () => {},
+    setIsNotificationsPanelOpen: () => { },
     isActiveWindowsPanelOpen: false,
-    setIsActiveWindowsPanelOpen: () => {},
+    setIsActiveWindowsPanelOpen: () => { },
     isMobile: false,
     compact: false,
     menu: [],
-    openStart: () => {},
-    animateClosingAllWindows: () => {},
+    openStart: () => { },
+    animateClosingAllWindows: () => { },
     closingAllWindowsAnimation: false,
-    closeAllWindows: () => {},
-    setClosingAllWindowsAnimation: () => {},
+    closeAllWindows: () => { },
+    setClosingAllWindowsAnimation: () => { },
     screensaverPreviewActive: false,
-    setScreensaverPreviewActive: () => {},
-    setConfetti: () => {},
+    setScreensaverPreviewActive: () => { },
+    setConfetti: () => { },
     confetti: false,
     posthogInstance: undefined,
     desktopParams: undefined,
-    copyDesktopParams: () => {},
+    copyDesktopParams: () => { },
     desktopCopied: false,
     shareableDesktopURL: '',
     windowsInView: [],
@@ -323,6 +323,43 @@ const appSettings: AppSettings = {
             max: {
                 width: 850,
                 height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
+                if (typeof window === 'undefined') {
+                    return {
+                        x: 0,
+                        y: 0,
+                    }
+                }
+
+                const { x, y } = getDesktopCenterPosition(size)
+                const keyboardGardenImageWidth = 700
+                const keyboardGardenImageLeft = window.innerWidth - keyboardGardenImageWidth
+                const windowRight = x + size.width
+                if (windowRight > keyboardGardenImageLeft) {
+                    const newX = x - (windowRight - keyboardGardenImageLeft)
+                    return {
+                        x: newX < 115 ? x : newX,
+                        y,
+                    }
+                }
+                return { x, y }
+            },
+        },
+    },
+    '/home': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 900,
             },
             fixed: false,
         },
@@ -1070,13 +1107,13 @@ export interface SiteSettings {
     skinMode: 'modern' | 'classic'
     cursor: 'default' | 'xl' | 'james'
     wallpaper:
-        | 'keyboard-garden'
-        | 'hogzilla'
-        | 'startup-monopoly'
-        | 'office-party'
-        | '2001-bliss'
-        | 'parade'
-        | 'coding-at-night'
+    | 'keyboard-garden'
+    | 'hogzilla'
+    | 'startup-monopoly'
+    | 'office-party'
+    | '2001-bliss'
+    | 'parade'
+    | 'coding-at-night'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
@@ -1276,13 +1313,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     windows.map((w) =>
                         w === focusedWindow
                             ? {
-                                  ...w,
-                                  element: newWindow.element,
-                                  path: newWindow.path,
-                                  fromHistory: newWindow.fromHistory,
-                                  props: newWindow.props,
-                                  location: newWindow.location,
-                              }
+                                ...w,
+                                element: newWindow.element,
+                                path: newWindow.path,
+                                fromHistory: newWindow.fromHistory,
+                                props: newWindow.props,
+                                location: newWindow.location,
+                            }
                             : w
                     )
                 )
@@ -1378,9 +1415,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             (key?.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
                 : {
-                      width: isSSR ? 0 : window.innerWidth * 0.9,
-                      height: isSSR ? 0 : window.innerHeight * 0.9,
-                  })
+                    width: isSSR ? 0 : window.innerWidth * 0.9,
+                    height: isSSR ? 0 : window.innerHeight * 0.9,
+                })
         return {
             width: Math.min(defaultSize.width, isSSR ? 0 : window.innerWidth * 0.9),
             height: Math.min(defaultSize.height, isSSR ? 0 : window.innerHeight * 0.9),
@@ -1474,9 +1511,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             fixedSize: settings?.size.fixed || false,
             fromOrigin: lastClickedElementRect
                 ? {
-                      x: lastClickedElementRect.x - size.width / 2,
-                      y: lastClickedElementRect.y - size.height / 2,
-                  }
+                    x: lastClickedElementRect.x - size.width / 2,
+                    y: lastClickedElementRect.y - size.height / 2,
+                }
                 : undefined,
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[element.key],
