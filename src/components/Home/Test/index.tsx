@@ -15,7 +15,7 @@ import MDXEditor from 'components/MDXEditor'
 import OSTable from 'components/OSTable'
 import { useCustomers } from 'hooks/useCustomers'
 import CTA from 'components/Home/CTA'
-import { IconInfo, IconRefresh } from '@posthog/icons'
+import { IconCheck, IconCopy, IconInfo, IconRefresh, IconSparkles } from '@posthog/icons'
 import Pricing from 'components/Home/New/Pricing'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { APP_COUNT, getProseClasses, PRODUCT_COUNT } from '../../../constants'
@@ -255,6 +255,7 @@ const CompanyStageTabs = () => {
                         productHandles={[
                             'session_replay',
                             'web_analytics',
+                            'llm_analytics',
                             'product_analytics',
                             'error_tracking',
                             'experiments',
@@ -685,6 +686,13 @@ export default function Home2() {
     const { siteSettings } = useApp()
     const videoRef = useRef<WistiaVideoRef>(null)
     const [activePromptIndex, setActivePromptIndex] = useState(0)
+    const [copied, setCopied] = useState(false)
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText('npx -y @posthog/wizard@latest')
+        setCopied(true)
+        setTimeout(() => setCopied(false), 3000)
+    }
 
     // GraphQL query for MDX content
     const {
@@ -755,7 +763,7 @@ export default function Home2() {
             value,
             trigger: <ProductTrigger handle={handle} />,
             content: (
-                <div className="flex flex-col px-6 gap-px -mt-2">
+                <div data-scheme="secondary" className="flex flex-col px-6 gap-px -mt-2">
                     {slidePrompts.map((prompt) => (
                         <OSButton
                             key={prompt.globalIndex}
@@ -763,7 +771,7 @@ export default function Home2() {
                             width="full"
                             align="left"
                             onClick={() => handlePromptClick(prompt.globalIndex)}
-                            className={activePromptIndex === prompt.globalIndex ? 'bg-accent font-bold' : ''}
+                            className={activePromptIndex === prompt.globalIndex ? 'bg-primary font-bold' : ''}
                         >
                             "{prompt.text}"
                         </OSButton>
@@ -782,18 +790,25 @@ export default function Home2() {
             />
             <Wizard
                 leftNavigation={
-                    <>
+                    <div className="flex gap-x-2">
                         <OSButton asLink to="/demo" variant="primary" size="md" state={{ newWindow: true }}>
                             Get started - free
                         </OSButton>
                         <CallToAction type="secondary" size="sm">
                             Start with AI
                         </CallToAction>
-                    </>
+                    </div>
                 }
                 rightNavigation={
                     <>
-                        <OSButton asLink to="/demo" size="md" state={{ newWindow: true }}>
+                        <OSButton
+                            asLink
+                            to="/demo"
+                            size="md"
+                            variant="underline"
+                            className="font-semibold underline"
+                            state={{ newWindow: true }}
+                        >
                             Talk to a human
                         </OSButton>
                     </>
@@ -801,7 +816,7 @@ export default function Home2() {
             >
                 <ScrollArea
                     data-scheme="primary"
-                    className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:p-8 [&_.w-vulcan-v2]:!rounded-none bg-primary"
+                    className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:p-8 [&>div>div]:pt-2 [&_.w-vulcan-v2]:!rounded-none bg-primary"
                 >
                     <article className={getProseClasses()}>
                         {/* Video Hero Section */}
@@ -828,6 +843,37 @@ export default function Home2() {
                                         triggerClassName="[&_h2]:text-sm"
                                     />
                                 </div>
+
+                                <div
+                                    data-scheme="secondary"
+                                    className="mt-4 border border-primary bg-primary p-4 rounded"
+                                >
+                                    <p className="mt-0 mb-2">
+                                        <strong>
+                                            Install PostHog with AI{' '}
+                                            <IconSparkles className="inline-block size-4 relative -top-px" />{' '}
+                                        </strong>
+                                    </p>
+
+                                    <pre className="m-0 relative">
+                                        npx -y @posthog/wizard@latest
+                                        <button
+                                            onClick={handleCopy}
+                                            className="absolute right-1.5 top-1.5 p-0.5 border border-transparent hover:border-white rounded transition-colors"
+                                            aria-label="Copy to clipboard"
+                                        >
+                                            {copied ? (
+                                                <IconCheck className="size-5 text-green" />
+                                            ) : (
+                                                <IconCopy className="size-5" />
+                                            )}
+                                        </button>
+                                    </pre>
+
+                                    <p className="text-xs mt-2 mb-0">
+                                        Works with Next.js and AI coding tools like Cursor and Bolt
+                                    </p>
+                                </div>
                             </div>
                             <div className="flex flex-col items-center">
                                 <WistiaVideo
@@ -837,7 +883,7 @@ export default function Home2() {
                                     className="w-full @3xl:w-[400px] @4xl:w-[540px] [&_.w-chrome]:!rounded-none [&_.w-vulcan-v2]:!rounded-none"
                                 />
                                 <p className="mt-4 mb-2 text-center italic">"{currentPrompt.text}"</p>
-                                <p className="text-sm text-center opacity-70 mb-2">
+                                <p className="text-sm text-center opacity-70 mt-0 mb-2">
                                     PostHog AI + <ProductName handle={SLIDE_TO_PRODUCT[currentPrompt.slide]} />
                                 </p>
                                 <div className="flex gap-2">
