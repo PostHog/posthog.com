@@ -18,7 +18,7 @@ import CTA from 'components/Home/CTA'
 import { IconInfo, IconRefresh } from '@posthog/icons'
 import Pricing from 'components/Home/New/Pricing'
 import Tooltip from 'components/RadixUI/Tooltip'
-import { APP_COUNT, PRODUCT_COUNT } from '../../../constants'
+import { APP_COUNT, getProseClasses, PRODUCT_COUNT } from '../../../constants'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import ProductTabs from 'components/ProductTabs'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -803,65 +803,68 @@ export default function Home2() {
                     data-scheme="primary"
                     className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:p-8 [&_.w-vulcan-v2]:!rounded-none bg-primary"
                 >
-                    {/* Video Hero Section */}
-                    <div className="flex flex-col @3xl:flex-row gap-8">
-                        <div className="flex-1">
-                            <div className="mb-8">
-                                <Logo
-                                    className="inline-block"
-                                    fill={siteSettings.theme === 'dark' ? 'white' : undefined}
-                                />
-                            </div>
-                            <h1 className="text-xl font-bold mb-1">The AI platform for engineers</h1>
-                            <p className="text-[15px]">
-                                Debug products. Ship features faster. With all user and product data in one stack.
-                            </p>
+                    <article className={getProseClasses()}>
+                        {/* Video Hero Section */}
+                        <div className="flex flex-col @3xl:flex-row gap-8">
+                            <div className="flex-1 pt-8">
+                                <div className="mb-8">
+                                    <Logo
+                                        className="inline-block"
+                                        fill={siteSettings.theme === 'dark' ? 'white' : undefined}
+                                    />
+                                </div>
+                                <h1 className="!text-xl font-bold !mb-1">The AI platform for engineers</h1>
+                                <p className="text-[15px]">
+                                    Debug products. Ship features faster. With all user and product data in one stack.
+                                </p>
 
-                            <div className="max-w-md">
-                                <Accordion
-                                    key={activeAccordion}
-                                    skin={false}
-                                    items={accordionItems}
-                                    defaultValue={activeAccordion}
-                                    onValueChange={handleAccordionChange}
+                                <div className="max-w-md">
+                                    <Accordion
+                                        key={activeAccordion}
+                                        skin={false}
+                                        items={accordionItems}
+                                        defaultValue={activeAccordion}
+                                        onValueChange={handleAccordionChange}
+                                        triggerClassName="[&_h2]:text-sm"
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex flex-col items-center">
+                                <WistiaVideo
+                                    ref={videoRef}
+                                    videoId={currentVideoId}
+                                    onEnd={handleVideoEnd}
+                                    className="w-full @3xl:w-[400px] @4xl:w-[540px] [&_.w-chrome]:!rounded-none [&_.w-vulcan-v2]:!rounded-none"
                                 />
+                                <p className="mt-4 mb-2 text-center italic">"{currentPrompt.text}"</p>
+                                <p className="text-sm text-center opacity-70 mb-2">
+                                    PostHog AI + <ProductName handle={SLIDE_TO_PRODUCT[currentPrompt.slide]} />
+                                </p>
+                                <div className="flex gap-2">
+                                    {getPromptsForSlide(currentPrompt.slide).map((prompt) => {
+                                        const isActive = activePromptIndex === prompt.globalIndex
+                                        return (
+                                            <button
+                                                key={prompt.globalIndex}
+                                                onClick={() => setActivePromptIndex(prompt.globalIndex)}
+                                                className={`size-3 rounded-full transition-colors ${
+                                                    isActive ? 'bg-blue' : 'bg-accent hover:opacity-80'
+                                                }`}
+                                                aria-label={`Go to prompt: ${prompt.text}`}
+                                            />
+                                        )
+                                    })}
+                                </div>
                             </div>
                         </div>
-                        <div className="flex flex-col items-center">
-                            <WistiaVideo
-                                ref={videoRef}
-                                videoId={currentVideoId}
-                                onEnd={handleVideoEnd}
-                                className="w-full @3xl:w-[400px] @4xl:w-[540px] [&_.w-chrome]:!rounded-none [&_.w-vulcan-v2]:!rounded-none"
-                            />
-                            <p className="mt-4 text-center italic">"{currentPrompt.text}"</p>
-                            <p className="text-sm text-center opacity-70">
-                                PostHog AI + <ProductName handle={SLIDE_TO_PRODUCT[currentPrompt.slide]} />
-                            </p>
-                            <div className="flex gap-2 mt-4">
-                                {getPromptsForSlide(currentPrompt.slide).map((prompt) => {
-                                    const isActive = activePromptIndex === prompt.globalIndex
-                                    return (
-                                        <button
-                                            key={prompt.globalIndex}
-                                            onClick={() => setActivePromptIndex(prompt.globalIndex)}
-                                            className={`size-3 rounded-full transition-colors ${
-                                                isActive ? 'bg-blue' : 'bg-accent hover:opacity-80'
-                                            }`}
-                                            aria-label={`Go to prompt: ${prompt.text}`}
-                                        />
-                                    )
-                                })}
-                            </div>
-                        </div>
-                    </div>
 
-                    <MDXEditor
-                        noEditorWrapper
-                        jsxComponentDescriptors={jsxComponentDescriptors}
-                        body={rawBody}
-                        mdxBody={mdxBody}
-                    />
+                        <MDXEditor
+                            noEditorWrapper
+                            jsxComponentDescriptors={jsxComponentDescriptors}
+                            body={rawBody}
+                            mdxBody={mdxBody}
+                        />
+                    </article>
                 </ScrollArea>
             </Wizard>
         </>
