@@ -48,7 +48,7 @@ Start by sending a message in the shared Slack channel. Things will change in a 
 
 As you make progress in the renewal discussions, [update the renewal opportunity](/handbook/growth/sales/crm#renewal-pipeline) in Salesforce. 
 
-### Renewal principals
+### Renewal principles
 Being on a prepaid credit plan - usually annual - is a win-win solution for both PostHog and the customer. Customers get discounts on the credits they purchase and PostHog gets confirmed revenue.
 
 When estimating renewal amount, we want to make sure we accurately determine the amount of credits the customer will need in the next 12 months (or equivalent period, e.g. if they prepaid for 6 months). This is not an opportunity to upsell - do that later by encouraging product usage. 
