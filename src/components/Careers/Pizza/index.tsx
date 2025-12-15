@@ -181,6 +181,15 @@ const pizzaImages = [
         ),
         pineapple: true,
     },
+    {
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dqzblgwes/image/upload/IMG_2647_mvywoz.jpg"
+                alt="Pizza 17"
+            />
+        ),
+        pineapple: false,
+    },
 ]
 
 const PizzaBox = ({ children }: { children: React.ReactNode }) => {
