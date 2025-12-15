@@ -221,9 +221,7 @@ export default function CDP(): JSX.Element {
                 </p>
                 <h3>
                     A modern data stack that's{' '}
-                    <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">
-                        built for data engineers
-                    </span>{' '}
+                    <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">built for data teams</span>{' '}
                     and{' '}
                     <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">
                         loved by product teams
