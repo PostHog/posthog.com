@@ -30,7 +30,8 @@ export default function ReverseETLExport(): JSX.Element {
                 </h2>
                 <p>
                     Deliver cleaned and modeled data from your PostHog data warehouse to your operational tools for
-                    marketing, sales, and customer success via our CDP destinations.
+                    marketing, sales, and customer success via our{' '}
+                    <Link to="/cdp#integrations-library">CDP destinations</Link>.
                 </p>
 
                 <h2>Batch exports</h2>

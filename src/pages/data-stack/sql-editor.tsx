@@ -44,6 +44,7 @@ const sqlEditorFeatures: SQLEditorFeature[] = [
     {
         title: 'Draft queries',
         description: 'Save draft queries for later without cluttering the saved views list',
+        comingSoon: true,
     },
     {
         title: 'DuckDB syntax support',
@@ -69,10 +70,6 @@ const sqlEditorFeatures: SQLEditorFeature[] = [
     {
         title: 'Product functions',
         description: 'Built-in functions for cohorts, feature flags, and more',
-    },
-    {
-        title: 'ClickHouse power',
-        description: 'Full access to ClickHouse functions and performance',
     },
     {
         title: 'Time zone handling',
@@ -115,8 +112,8 @@ export default function SQLEditor(): JSX.Element {
             <ReaderView leftSidebar={<LeftSidebarContent />} title="SQL editor">
                 <p>
                     PostHog's SQL editor allows you to run ad-hoc queries directly against your data warehouse using
-                    PostHog SQL - a ClickHouse-like dialect optimized for analytics. Analyze and model your product data
-                    alongside data from any source, all within PostHog.
+                    PostHog SQL - a SQL dialect optimized for analytics. Analyze and model your product data alongside
+                    data from any source, all within PostHog.
                 </p>
 
                 <ProductScreenshot

@@ -537,7 +537,7 @@ export default function CDP(): JSX.Element {
                     <li>Automate support ticket creation</li>
                 </ul>
 
-                <h2>Integrations library</h2>
+                <h2 id="integrations-library">Integrations library</h2>
 
                 {/* Inline filter controls */}
                 <div className="flex flex-wrap gap-2 mb-4">

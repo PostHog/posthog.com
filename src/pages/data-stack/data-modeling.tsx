@@ -20,8 +20,8 @@ export default function DataModeling(): JSX.Element {
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="Data modeling">
                 <p>
-                    PostHog provides powerful tools to clean, enrich, and model your data into the exact shape 
-                    you need for downstream use.
+                    PostHog provides powerful tools to clean, enrich, and model your data into the exact shape you need
+                    for downstream use.
                 </p>
                 <div className="dark:bg-dark bg-accent border border-input p-4 rounded">
                     <p className="!mt-0">
@@ -85,7 +85,10 @@ export default function DataModeling(): JSX.Element {
                         <strong>Save as models:</strong> Store complex queries as reusable views, materialized for speed
                     </li>
                     <li>
-                        <strong>Version control:</strong> Track changes to your data models over time
+                        <strong>Version control:</strong> Track changes to your data models over time{' '}
+                        <span className="rounded-sm bg-highlight py-0.5 ml-2 px-1 text-xs font-bold text-red dark:text-yellow">
+                            Coming soon
+                        </span>
                     </li>
                     <li>
                         <strong>Git & vcs integrations:</strong> Sync your models with your Git repository for
