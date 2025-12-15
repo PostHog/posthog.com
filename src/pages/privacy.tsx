@@ -291,7 +291,7 @@ function Privacy() {
                             This privacy policy ("<b>Privacy Policy</b>") applies to all visitors, users and customers of the
                             PostHog.com hosted services and websites (collectively, the "<b>Website</b>" or "<b>Websites</b>") and
                             self-managed installations, which are offered by PostHog Inc. (formerly known as Hiberly Inc.) and/or
-                            any of its subsidiares and/or affiliates ("<b>PostHog</b>" or "<b>we</b>" or "<b>us</b>") and describes how we process your personal
+                            any of its subsidiaries and/or affiliates ("<b>PostHog</b>" or "<b>we</b>" or "<b>us</b>") and describes how we process your personal
                             information in connection with those Websites or self managed installations, customer events
                             and demos, and how we collect information through the use of cookies and related
                             technologies. It also tells you how you can access and update your personal information and
@@ -445,7 +445,7 @@ function Privacy() {
                             we ask visitors who use our community group to provide a username and email address. We 
                             also collect the information you provide to us in connection with creating an account on
                             the Websites. You may voluntarily provide personal information when you fill in forms on our 
-                            Websites, such as when you request a demo, contact sales, subscribe to our newletter, or participate 
+                            Websites, such as when you request a demo, contact sales, subscribe to our newsletter, or participate 
                             in other marketing activities or events. The information you provide may include, but is not limited 
                             to, email addresses, names, organization or company names, and roles and titles at such organizations 
                             or companies. If you use a single sign-on partner like Google, we'll collect the information from them that you authorize.&nbsp;
@@ -506,7 +506,7 @@ function Privacy() {
                             person, health information, or religious information.
                         </p>
                         <p>
-                            PostHog does not knowingly collect information from or direct any of our Website or content
+                            PostHog does not knowingly collect information from or direct any of our Websites or content
                             specifically to children under the age of 18. If we learn or have reason to suspect that a
                             customer is under the age of 18, we will close that account.
                         </p>
@@ -669,7 +669,7 @@ function Privacy() {
                             <li>Zendesk - customer support tool</li>
                         </ul>
                         <p>
-                          <strong>This list is meant to be representatitve and not exhaustive</strong>. We may engage additional or different service providers and partners over time as we see fit to support our business needs. 
+                          <strong>This list is meant to be representative and not exhaustive</strong>. We may engage additional or different service providers and partners over time as we see fit to support our business needs. 
                             Our service providers and partners are required by contract to safeguard any personal
                             information they receive from us and are prohibited from using the personal information for
                             any purpose other than to perform the services as instructed by PostHog.
@@ -686,7 +686,7 @@ function Privacy() {
                         <p>
                             <strong>Subsidiaries and Affiliates.</strong> PostHog is a global business, headquartered in the United
                             States. Your personal information collected by us in accordance with this Privacy Policy is
-                            used and shared by PostHog with our subsidiares and affiliates, including our subsidiaries based in the UK (Hiberly Ltd) and in Germany (PostHog GmbH) for
+                            used and shared by PostHog with our subsidiaries and affiliates, including our subsidiaries based in the UK (Hiberly Ltd) and in Germany (PostHog GmbH) for
                             the purposes of providing the Websites, delivering our Products and services, managing your
                             accounts, hosting, IT, security, support, billing, marketing, advertising and communications.
                         </p>
