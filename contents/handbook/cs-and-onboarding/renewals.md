@@ -6,14 +6,14 @@ showTitle: true
 
 ## Pre-renewal risk mitigation
 
-### Account Audit
-Renewals should be seen as the final step of the customer relationship, and are an outcome from ongoing efforts. They should be planned for throughout interactions with the customer across the entirety of their contract. If you feel asking the question "If your contract expired today, would you renew?" is uncomfortable, the customer is likely at risk, and this risk should be mitigated. As a side note, asking that question as part of business reviews isn't a bad idea!
+### Account audit
+Renewals should be seen as the final step of the customer relationship and are an outcome from ongoing efforts. They should be planned for throughout interactions with the customer across the entirety of their contract. If you feel asking the question "If your contract expired today, would you renew?" is uncomfortable, the customer is likely at risk, and this risk should be mitigated. As a side note, asking that question as part of business reviews isn't a bad idea!
 
 A healthy renewal cycle begins with an account audit well ahead of any renewal conversation. In practice, this should happen roughly 6 months before contract end date. This audit should include an analysis of the current state of the customer, identifying potential risks or reasons for a non-renewal. A document of [potential churn risks](/handbook/growth/sales/risk-mitigation-and-churn-prevention) has already been written and should be leveraged as part of the review. Some ones to look out for include:
 
 - **Reduced Usage/Single User**: Has usage decreased over the last 6 months or since your previous renewal? Is there only one user present in the platform (and more concerningly, are they not the point of signature)? 
 
-- **Existing Product Gaps**: Are there documented or known gaps your customer is trying to work around? This can also include signs of potential gaps that have not been discussed before (i.e. Complex SQL queries, Large amounts of data exports)
+- **Existing Product Gaps**: Are there documented or known gaps your customer is trying to work around? This can also include signs of potential gaps that have not been discussed before (i.e. Complex SQL queries, large amounts of data exports)
 
 - **Changed Stakeholders**: Has the point of signature for this renewal changed from last year? If so, do they understand the value PostHog is providing their team?
 
@@ -23,7 +23,7 @@ A healthy renewal cycle begins with an account audit well ahead of any renewal c
 
 - **Company Performance**: Is your customer's product doing well? Unfortunately, sometimes this is not the case, and customers can turn to cost cutting on softwares to help save money. PostHog is designed to be an invaluable tool, and you should work to ensure your customer understands that PostHog has positively impacted their financial performance.
 
-Performing this review, and ensuring all aspects of the customer relationship are strong will make the upcoming renewal conversation much simpler. More importantly, it will allow you to identify churn risks, create mitigation plans, and action them, prior to the risk materializing to a churn request. Leverage the previously provided churn risk documentation to attack these outstanding issues, and improve the customer relationship before reaching out for conversations. If you are unable to resolve the issue with the customer 2 months before the renewal, the renewal is at risk.
+Performing this review, and ensuring all aspects of the customer relationship are strong will make the upcoming renewal conversation much simpler. More importantly, it will allow you to identify churn risks, create mitigation plans, and action them, prior to the risk materializing to a churn request. Leverage the previously provided churn risk documentation to attack these outstanding issues and improve the customer relationship before reaching out for conversations. If you are unable to resolve the issue with the customer 2 months before the renewal, the renewal is at risk.
 
 ### Help the customer with their [North Star Metric](/contents/docs/new-to-posthog/getting-hogpilled)
 
@@ -33,9 +33,9 @@ The goal at this stage is to align with the key stakeholders of your customer on
 
 For customers you have frequent contact with, book a meeting to discuss KPIs, objectives, and how PostHog is being leveraged to reach them. Layer the discussion into your product demos. Speak less to the What ("What does this product do", "What can we pull") and more to the Why ("Why does this product matter", "Why does this data impact your business"). 
 
-If your champion is not able to speak to wider business strategy, you may need to pull in a more senior team member. Expanding your relationship to include leadership, executive stakeholders, or key decision makers will allow PostHog to remain relevant and impactful as businesses continue to grow. As mentioned above, a warm introduction, or an offer to help with their quarterly goals, will likely pull them in. Additionally, try to coordinate a meeting to demonstrate how this Stakeholder can leverage PostHog going forward. Often times super users want to look good for their leadership, and demonstrating how PostHog helped them pull insights and increase efficiency will be a welcomed idea.
+If your champion is not able to speak to wider business strategy, you may need to pull in a more senior team member. Expanding your relationship to include leadership, executive stakeholders, or key decision makers will allow PostHog to remain relevant and impactful as businesses continue to grow. As mentioned above, a warm introduction, or an offer to help with their quarterly goals, will likely pull them in. Additionally, try to coordinate a meeting to demonstrate how this Stakeholder can leverage PostHog going forward. Often super users want to look good for leadership, and demonstrating how PostHog helped them pull insights and increase efficiency will be a welcomed idea.
 
-Having this relationship, and being able to demonstrate PostHog's impact on these North Star Metrics, will make PostHog a non-negotiable for customers. Aim to be at this point ahead of the renewal conversation
+Having this relationship and being able to demonstrate PostHog's impact on these North Star Metrics, will make PostHog a non-negotiable for customers. Aim to be at this point ahead of the renewal conversation
 
 
 ## When to start the renewal conversation
