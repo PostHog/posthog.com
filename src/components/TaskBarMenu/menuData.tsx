@@ -452,6 +452,12 @@ export function useMenuData(): MenuType[] {
                     icon: <Icons.IconLaptop className="size-4 text-blue" />,
                 },
                 {
+                    type: 'item',
+                    label: 'Places',
+                    link: '/places',
+                    icon: <Icons.IconMap className="size-4 text-red" />,
+                },
+                {
                     type: 'separator',
                 },
                 {

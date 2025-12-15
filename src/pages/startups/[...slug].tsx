@@ -68,8 +68,8 @@ export default function Startups(): JSX.Element {
     return (
         <>
             <SEO
-                title="Startups - PostHog"
-                description="PostHog is the only developer platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
+                title="PostHog for Startups | $50K credits + free merch + partner perks"
+                description="Join thousands of early stage teams using PostHog to ship better products. Get 50k in credits, exclusive merch, and partner perks. Apply in just 2 minutes."
                 image={`/images/og/default.png`}
             />
             <Explorer
