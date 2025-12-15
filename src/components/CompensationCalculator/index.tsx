@@ -199,7 +199,12 @@ export const CompensationCalculator = ({
                             .filter((location) => location.country === country)
                             .map((location) => location.area)
                             .sort()}
-                        display={(area) => (area ? area : '')}
+                        display={(area) => {
+                            if (!area) return ''
+                            const thisLocation = locationFactor.find((location) => location.area === area)
+                            if (!thisLocation) return area
+                            return `${area} (${thisLocation.locationFactor})`
+                        }}
                     />
                 </div>
             </Section>
@@ -253,15 +258,14 @@ export const CompensationCalculator = ({
                         {!hideFormula && job && country && currentLocation && level && step && (
                             <ol className="ml-0 !mb-2 p-0 border-b-2 border-primary">
                                 <Factor>
+                                    <span>Benchmark (United States - San Francisco, California)</span>{' '}
+                                    <span>{formatCur(sfBenchmark[job], currentLocation?.currency)}</span>
+                                </Factor>
+                                <Factor>
                                     <span>
-                                        Benchmark ({currentLocation.country} - {currentLocation.area})
+                                        <IconMultiply className="w-6 h-6 inline-flex -ml-1" /> Location modifier
                                     </span>{' '}
-                                    <span>
-                                        {formatCur(
-                                            sfBenchmark[job] * (currentLocation.locationFactor || 1),
-                                            currentLocation?.currency
-                                        )}
-                                    </span>
+                                    <span>{currentLocation.locationFactor}</span>
                                 </Factor>
                                 <Factor>
                                     <span>
