@@ -12,6 +12,7 @@ interface WistiaVideoProps {
     className?: string
     onEnd?: () => void
     hideInitialControls?: boolean
+    hideAudioControls?: boolean
 }
 
 export interface WistiaVideoRef {
@@ -21,7 +22,7 @@ export interface WistiaVideoRef {
 }
 
 const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
-    ({ videoId, className = '', onEnd, hideInitialControls = false }, ref) => {
+    ({ videoId, className = '', onEnd, hideInitialControls = false, hideAudioControls = false }, ref) => {
         const containerRef = useRef<HTMLDivElement>(null)
         const playerRef = useRef<any>(null)
         const endHandlerRef = useRef<(() => void) | null>(null)
@@ -71,7 +72,7 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
                 const embedDiv = document.createElement('div')
                 embedDiv.className = `wistia_embed wistia_async_${videoId} videoFoam=true ${
                     hideInitialControls ? 'controlsVisibleOnLoad=false playButtonVisible=false' : ''
-                }`
+                } ${hideAudioControls ? 'volumeControl=false' : ''}`
                 embedDiv.style.width = '100%'
                 embedDiv.style.height = '100%'
                 containerRef.current.appendChild(embedDiv)
