@@ -22,6 +22,7 @@
         "react/no-unescaped-entities": "off",
         "react/prop-types": "off",
         "no-const-assign": "off",
-        "no-undef": "off"
+        "no-undef": "off",
+        "@typescript-eslint/no-empty-function": ["error", { "allow": ["arrowFunctions"] }]
     }
 }

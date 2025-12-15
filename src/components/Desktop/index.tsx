@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
-import { IconDemoThumb, AppIcon, IconChangelogThumb } from 'components/OSIcons'
+import { IconDemoThumb, AppIcon } from 'components/OSIcons'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -10,6 +10,7 @@ import { Screensaver } from '../Screensaver'
 import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
 import useTheme from '../../hooks/useTheme'
+import useWallpaperCycler from '../../hooks/useWallpaperCycler'
 import { motion } from 'framer-motion'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
@@ -19,13 +20,6 @@ declare global {
     interface Window {
         __desktopLoaded?: boolean
     }
-}
-
-interface Product {
-    name: string
-    slug: string
-    Icon: React.ComponentType<any>
-    color?: string
 }
 
 export const useProductLinks = () => {
@@ -83,23 +77,23 @@ export const useProductLinks = () => {
         },
         ...(posthogInstance
             ? [
-                {
-                    label: 'Open app ↗',
-                    Icon: <AppIcon name="computerCoffee" />,
-                    url: 'https://app.posthog.com',
-                    external: true,
-                    source: 'desktop',
-                },
-            ]
+                  {
+                      label: 'Open app ↗',
+                      Icon: <AppIcon name="computerCoffee" />,
+                      url: 'https://app.posthog.com',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]
             : [
-                {
-                    label: 'Sign up ↗',
-                    Icon: <AppIcon name="compass" />,
-                    url: 'https://app.posthog.com/signup',
-                    external: true,
-                    source: 'desktop',
-                },
-            ]),
+                  {
+                      label: 'Sign up ↗',
+                      Icon: <AppIcon name="compass" />,
+                      url: 'https://app.posthog.com/signup',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]),
     ]
 }
 
@@ -214,6 +208,8 @@ export default function Desktop() {
     const [rendered, setRendered] = useState(false)
     const { getWallpaperClasses } = useTheme()
     const { addToast } = useToast()
+
+    useWallpaperCycler()
     function generateInitialPositions(columns = 2): IconPositions {
         const positions: IconPositions = {}
 

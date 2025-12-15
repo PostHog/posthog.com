@@ -277,6 +277,24 @@ export default function DisplayOptions() {
                     </div>
                     <div className="bg-primary grid grid-cols-2 gap-2">
                         <div className="flex items-center gap-1 mb-1">
+                            <span className="text-sm">Cycle background every 5 minutes</span>
+                        </div>
+                        <div>
+                            <ToggleGroup
+                                title=""
+                                options={[
+                                    { label: 'Disabled', value: 'false' },
+                                    { label: 'Enabled', value: 'true' },
+                                ]}
+                                onValueChange={(value) => {
+                                    updateSiteSettings({ ...siteSettings, cycleWallpaper: value === 'true' })
+                                }}
+                                value={siteSettings.cycleWallpaper ? 'true' : 'false'}
+                            />
+                        </div>
+                    </div>
+                    <div className="bg-primary grid grid-cols-2 gap-2">
+                        <div className="flex items-center gap-1 mb-1">
                             <span className="text-sm">Screensaver</span>
                             <button
                                 onClick={(e) => {
