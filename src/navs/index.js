@@ -5160,7 +5160,7 @@ export const productMenu = {
             category: 'tools',
         },
         {
-            name: 'Data Stack',
+            name: 'Data stack',
             icon: 'IconDatabase',
             color: 'lilac',
             url: '/data-stack',

@@ -37,19 +37,19 @@ export default function ExportReverseETL(): JSX.Element {
                 <p>Schedule regular exports of your data to data warehouses and cloud storage.</p>
                 <ul>
                     <li>
-                        <strong>BigQuery:</strong> Export to Google BigQuery for advanced analytics
+                        <strong>BigQuery</strong>
                     </li>
                     <li>
-                        <strong>Snowflake:</strong> Send data to Snowflake data warehouse
+                        <strong>Snowflake</strong>
                     </li>
                     <li>
-                        <strong>Amazon S3:</strong> Store data in S3-compatible object storage for flexible processing
+                        <strong>Amazon S3</strong>
                     </li>
                     <li>
-                        <strong>PostgreSQL:</strong> Export to PostgreSQL databases
+                        <strong>PostgreSQL</strong>
                     </li>
                     <li>
-                        <strong>Redshift:</strong> Send data to Redshift data warehouse
+                        <strong>Redshift</strong>
                     </li>
                 </ul>
                 <p>Batch export features:</p>
@@ -61,7 +61,7 @@ export default function ExportReverseETL(): JSX.Element {
                         <strong>Incremental updates:</strong> Only export new or changed data
                     </li>
                     <li>
-                        <strong>Historical backfills:</strong> Export historical data ranges
+                        <strong>Historical backfills:</strong> Export historical data
                     </li>
                     <li>
                         <strong>Custom schemas:</strong> Define the structure of exported data

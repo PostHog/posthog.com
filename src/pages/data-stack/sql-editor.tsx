@@ -56,7 +56,7 @@ const sqlEditorFeatures: SQLEditorFeature[] = [
     },
     {
         title: 'Write SQL without knowing SQL',
-        description: 'Nobody likes writing SQL, except for PostHog AI',
+        description: 'Let PostHog AI write SQL for you',
     },
     {
         title: 'Simplified syntax',
@@ -96,7 +96,7 @@ export default function SQLEditor(): JSX.Element {
             {
                 content: feature.comingSoon ? (
                     <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
-                        Soon
+                        Coming soon
                     </span>
                 ) : (
                     '✅'
@@ -115,7 +115,7 @@ export default function SQLEditor(): JSX.Element {
             <ReaderView leftSidebar={<LeftSidebarContent />} title="SQL editor">
                 <p>
                     PostHog's SQL editor allows you to run ad-hoc queries directly against your data warehouse using
-                    PostHog SQL - a clickhouse-like dialect optimized for analytics. Analyze and model your product data
+                    PostHog SQL - a ClickHouse-like dialect optimized for analytics. Analyze and model your product data
                     alongside data from any source, all within PostHog.
                 </p>
 

@@ -20,8 +20,8 @@ export default function DataModeling(): JSX.Element {
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="Data modeling">
                 <p>
-                    PostHog provides powerful tools to shape, enrich, and model your data into the exact form you need
-                    it.
+                    PostHog provides powerful tools to clean, enrich, and model your data into the exact shape 
+                    you need for downstream use.
                 </p>
                 <div className="dark:bg-dark bg-accent border border-input p-4 rounded">
                     <p className="!mt-0">
@@ -36,7 +36,7 @@ export default function DataModeling(): JSX.Element {
                         If you have advanced modeling needs, we recommend you connect your favorite modeling tooling
                         such as{' '}
                         <Link to="https://www.getdbt.com/" external>
-                            DBT
+                            dbt
                         </Link>{' '}
                         to your PostHog DuckDB warehouse.
                     </p>

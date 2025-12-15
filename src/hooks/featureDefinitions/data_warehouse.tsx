@@ -1,7 +1,7 @@
 export const dataWarehouseFeatures = {
     summary: {
         name: 'Data Stack',
-        description: 'Import, query & visualize product and third party data together',
+        description: 'Import, query, model & visualize product and third party data together',
         url: '/data-stack',
         docsUrl: '/docs/data-warehouse',
     },

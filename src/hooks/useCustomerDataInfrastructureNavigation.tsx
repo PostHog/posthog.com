@@ -39,7 +39,7 @@ export const customerDataInfrastructureNav = {
             url: '/data-stack/business-intelligence',
         },
         {
-            name: 'Export & reverse ETL',
+            name: 'Reverse ETL & export',
             url: '/data-stack/export-reverse-etl',
         },
     ],

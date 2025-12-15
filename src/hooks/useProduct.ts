@@ -2656,7 +2656,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
-            name: 'Export & reverse ETL',
+            name: 'Reverse ETL & export',
             parentIcon: 'dataOut',
             // Icon: IconArrowUpRight,
             description: 'Send data out of PostHog to other tools',

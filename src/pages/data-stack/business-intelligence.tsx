@@ -30,7 +30,7 @@ const biFeatures: BIFeature[] = [
     },
     {
         title: 'Line chart',
-        description: 'You kow what it does.',
+        description: 'You know what it does.',
         status: 'available',
     },
     {
@@ -72,7 +72,7 @@ export default function BusinessIntelligence(): JSX.Element {
                 content:
                     feature.status === 'coming_soon' ? (
                         <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
-                            Soon
+                            Coming soon
                         </span>
                     ) : (
                         '✅'
@@ -108,7 +108,7 @@ export default function BusinessIntelligence(): JSX.Element {
                         have light visualization needs today, with support for advanced use-cases in active development.
                     </p>
                     <p className="!mb-0">
-                        If you have advanced BI needs, we recommend you connect your favorite modeling tooling such as{' '}
+                        If you have advanced BI needs, we recommend you connect your favorite BI tooling such as{' '}
                         <Link to="https://hex.tech/" external>
                             Hex
                         </Link>{' '}
