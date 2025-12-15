@@ -42,6 +42,13 @@ export const customerDataInfrastructureNav = {
             name: 'Reverse ETL & export',
             url: '/data-stack/reverse-etl-export',
         },
+        {
+            name: 'Integrations',
+        },
+        {
+            name: 'Integration library',
+            url: '/data-stack/integration-library',
+        },
     ],
 }
 
