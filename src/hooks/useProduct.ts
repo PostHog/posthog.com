@@ -2664,7 +2664,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'orange',
             colorSecondary: 'orange',
             category: 'data',
-            slug: 'data-stack/export-reverse-etl',
+            slug: 'data-stack/reverse-etl-export',
             seo: {
                 title: 'Export and stream your data to external systems',
                 description: 'Activate your product data across your entire tech stack.',

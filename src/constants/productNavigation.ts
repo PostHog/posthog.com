@@ -103,9 +103,9 @@ export const nonProductPages = {
         icon: 'IconRefresh',
         color: 'green',
     },
-    'data-stack/export-reverse-etl': {
-        slug: 'data-stack/export-reverse-etl',
-        url: '/data-stack/export-reverse-etl',
+    'data-stack/reverse-etl-export': {
+        slug: 'data-stack/reverse-etl-export',
+        url: '/data-stack/reverse-etl-export',
         icon: 'IconDecisionTree',
         color: 'purple',
     },

@@ -9,15 +9,15 @@ const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
 }
 
-export default function ExportReverseETL(): JSX.Element {
+export default function ReverseETLExport(): JSX.Element {
     return (
         <>
             <SEO
-                title="Export & reverse ETL - PostHog data stack"
+                title="Reverse ETL & export - PostHog data stack"
                 description="Learn about all the ways to export data from PostHog"
                 image="images/og/cdp.jpg"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title="Export & reverse ETL">
+            <ReaderView leftSidebar={<LeftSidebarContent />} title="Reverse ETL & export">
                 <p>
                     PostHog provides multiple methods to export and stream your data to external systems, enabling you
                     to activate your product data across your entire tech stack.

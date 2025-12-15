@@ -40,7 +40,7 @@ export const customerDataInfrastructureNav = {
         },
         {
             name: 'Reverse ETL & export',
-            url: '/data-stack/export-reverse-etl',
+            url: '/data-stack/reverse-etl-export',
         },
     ],
 }
