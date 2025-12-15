@@ -14,16 +14,19 @@ import SuggestedLinksBlock from 'components/SuggestedLinksBlock'
 
 const them = [
     {
-        title: 'Why PostHog AI exists',
+        title: 'The problem with product work today',
         children: (
             <>
                 <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
-                    <p>Humans can hold about 4–7 things in working memory.</p>
-                    <p>Products generate trillions of data points per day.</p>
-                    <p>Trying to hold all that context at once would cook your brain.</p>
+                    <p>Even with AI everywhere, product teams still spend hours answering basic questions. </p>
                     <p>
-                        PostHog AI widens your mental bandwidth. It carries the data load so you can focus on the parts
-                        that matter: <strong>creativity, intuition, and deciding what to build next.</strong>
+                        Not because the answers are hard, but because the data is split across tools. Analytics,
+                        replays, errors, flags, experiments, surveys - each shows a slice of reality, none show the
+                        whole thing.
+                    </p>
+                    <p>
+                        When AI is native to the product, it keeps you in flow. Ask a question, get an answer,
+                        investigate the data, ask a follow-up. Add it up, and that’s real time savings.
                     </p>
                 </div>
 
@@ -39,24 +42,30 @@ const them = [
         ),
     },
     {
-        title: 'Ask your question (anywhere)',
+        title: 'Our objective function (literally)',
         children: (
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
+                    <p>PostHog is a developer platform that brings your product and customer data into one stack.</p>
+                    <p>That includes:</p>
                     <p>
-                        You're already in PostHog looking at a dashboard or SQL query. PostHog AI sees what you see, so
-                        you can just... ask.{' '}
+                        <span className="text-primary mr-2">•</span>Product and web analytics
+                        <br />
+                        <span className="text-primary mr-2">•</span>Session replay
+                        <br />
+                        <span className="text-primary mr-2">•</span>Error tracking
+                        <br />
+                        <span className="text-primary mr-2">•</span>Feature flags and experiments
+                        <br />
+                        <span className="text-primary mr-2">•</span>In-app surveys
+                        <br />
+                        <span className="text-primary mr-2">•</span>A data warehouse connecting other tools
+                        <br />
+                        <span className="text-primary mr-2">•</span>LLM analytics for AI products
                     </p>
+                    <p>Each tool is useful on its own. Together, they form a complete picture.</p>
                     <p>
-                        Watching a session replay where someone's clearly stuck? Ask "are other users having this
-                        problem?"
-                    </p>
-                    <p>
-                        Wondering what happened with that feature flag? Ask "how did this rollout affect conversions?"
-                    </p>
-                    <p>
-                        Instead of trying to figure out which events, properties, and filters to use, just ask PostHog
-                        AI to run the analysis.
+                        This matters because <strong>AI is only as good as the context you give it.</strong>
                     </p>
                 </div>
 
@@ -72,18 +81,24 @@ const them = [
         ),
     },
     {
-        title: 'Get answers you can investigate',
+        title: 'Ask questions where the work already is',
         children: (
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10">
                     <p>
-                        PostHog AI doesn't run on hunches. It connects the dots across actual data — analytics, event
-                        names, feature flags, session replays.
+                        You're already in PostHog looking at a dashboard or SQL query. PostHog AI sees what you see, so
+                        you can just... ask.
                     </p>
                     <p>
-                        Chain of thought takes up space, but we show it anyway because sometimes AI gets things wrong.
-                        See the exact queries being run. Click through to debug (or to be amazed by the wizard behind
-                        the curtain).
+                        <span className="text-primary mr-2">•</span>“Are other users hitting this issue?”
+                        <br />
+                        <span className="text-primary mr-2">•</span>“What happened after this flag rollout?”
+                        <br />
+                        <span className="text-primary mr-2">•</span>“Where are users dropping off in onboarding?”
+                    </p>
+                    <p>
+                        No guessing which events or properties to use. No rebuilding context in another tool. Just ask
+                        PostHog AI to run the analysis.
                     </p>
                 </div>
 
@@ -99,18 +114,29 @@ const them = [
         ),
     },
     {
-        title: 'AI that gets out of your way',
+        title: 'What makes this possible',
         children: (
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
-                    <p>Hopping between tabs and tools is the opposite of a workflow.</p>
+                    <p>Simply put, we have more data. PostHog captures more signals than point solutions: </p>
                     <p>
-                        Every time you jump from PostHog to ChatGPT to ask about your data, then back to PostHog to
-                        verify it, you're burning half an hour of deep work.
+                        <span className="text-primary mr-2">•</span>What users do (analytics)
+                        <br />
+                        <span className="text-primary mr-2">•</span>How they do it (session replays)
+                        <br />
+                        <span className="text-primary mr-2">•</span>How they feel about it (surveys)
+                        <br />
+                        <span className="text-primary mr-2">•</span>What changed (feature flags)
+                        <br />
+                        <span className="text-primary mr-2">•</span>What worked (A/B tests)
+                        <br />
+                        <span className="text-primary mr-2">•</span>What broke (error logs)
+                        <br />
+                        <span className="text-primary mr-2">•</span>AI output (LLM analytics)
                     </p>
                     <p>
-                        When AI is native to the product, it keeps you in flow. Ask a question, get an answer,
-                        investigate the data, ask a follow-up. Add it up, and that’s real time savings.
+                        PostHog AI then connects these into a single view of reality. And with ‘modes’ we’re building
+                        agentive systems that do specific things really well (not just general purpose AI).
                     </p>
                 </div>
 
@@ -129,25 +155,26 @@ const them = [
         ),
     },
     {
-        title: 'What makes this possible',
+        title: 'Signal, solution, ship it',
         children: (
             <>
                 <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-12 @3xl:pb-20">
-                    <p>Simply put, we have more data. PostHog captures signals from:</p>
                     <p>
-                        <span className="text-primary mr-2">•</span>Analytics (what users do)
-                        <br />
-                        <span className="text-primary mr-2">•</span>Session replays (how they do it)
-                        <br />
-                        <span className="text-primary mr-2">•</span>Feature flags (what changed)
-                        <br />
-                        <span className="text-primary mr-2">•</span>A/B tests (what worked)
-                        <br />
-                        <span className="text-primary mr-2">•</span>Error logs (what broke)
-                        <br />
-                        <span className="text-primary mr-2">•</span>Surveys (what they said)
+                        PostHog AI surfaces real signals about user engagement and product performance. From there, the
+                        loop is simple:
                     </p>
-                    <p>PostHog AI then connects the dots across your entire product to arrive at richer conclusions.</p>
+                    <p>
+                        <strong>1. Singal</strong>
+                    </p>
+                    <p>Something changes: an error spikes, users struggle, an experiment underperforms.</p>
+                    <p>
+                        <strong>2. Solution</strong>
+                    </p>
+                    <p>PostHog AI helps investigate, explains what’s happening, and proposes concrete fixes.</p>
+                    <p>
+                        <strong>3. Ship it</strong>
+                    </p>
+                    <p>You ship behind a flag, measure impact, and learn — all in the same system.</p>
                 </div>
 
                 <div className="col-span-4 -mt-12 pb-4 text-center">
@@ -167,9 +194,19 @@ const them = [
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
                     <p>Builders, tinkerers, skeptics of hype.</p>
-                    <p>People who don't want their intuition to atrophy. People who like to see how things work.</p>
-                    <p>People who want leverage without sacrificing understanding.</p>
-                    <p>PostHog AI is a no-brainer for product teams that love to think.</p>
+                    <p>People who:</p>
+                    <p>
+                        <span className="text-primary mr-2">•</span>Want leverage without losing understanding
+                        <br />
+                        <span className="text-primary mr-2">•</span>Like seeing how things work
+                        <br />
+                        <span className="text-primary mr-2">•</span>Don’t want their intuition to atrophy
+                    </p>
+                    <p>If you want AI to run on autopilot, we’re not your company. </p>
+                    <p>
+                        If you want systems that make you sharper, not redundant - you might be interested in what we’re
+                        building next.{' '}
+                    </p>
                 </div>
 
                 <div className="col-span-3 -mt-4 @3xl:-mt-8 @3xl:pb-8 text-center">
@@ -179,79 +216,6 @@ const them = [
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_9514_d562b785cc.png"
                         width={200}
                     />
-                </div>
-            </>
-        ),
-    },
-    {
-        title: "How we're different",
-        children: (
-            <>
-                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
-                    <p>
-                        We're not married to one model. Other companies built their own AI or locked into partnerships.
-                        We switch models to give you the best results for each use case.
-                    </p>
-                </div>
-
-                <div className="col-span-3 -mt-4 @3xl:-mt-8 @3xl:pb-8 text-center">
-                    <CloudinaryImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/h_1000,c_limit,q_auto,f_auto/keyboard_garden_light_33abf319fe.png"
-                        width={200}
-                    />
-                </div>
-            </>
-        ),
-    },
-    {
-        title: 'The three laws of AI',
-        children: (
-            <>
-                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10 @3xl:pb-20">
-                    <p>
-                        <strong>
-                            1. PostHog AI must not obscure its reasoning or, through opacity, allow a user to trust
-                            false outputs
-                        </strong>
-                    </p>
-                    <p>
-                        If you can't see how it works, you shouldn't trust it. Chain-of-thought takes up space, but we
-                        show it because sometimes AI gets things wrong.
-                    </p>
-                    <p>
-                        <strong>
-                            2. PostHog AI must yield to human judgment, except where such judgment would conflict with
-                            the First Law
-                        </strong>
-                    </p>
-                    <p>
-                        Treat it like a really smart intern, not your CTO. You're the expert on your product and users.
-                    </p>
-                    <p>
-                        <strong>
-                            3. PostHog AI must serve to expand human context, as long as such service does not conflict
-                            with the First or Second Laws
-                        </strong>
-                    </p>
-                    <p>
-                        PostHog AI doesn't make decisions for you or act without permission. It exists as a tool to use
-                        at your discretion.
-                    </p>
-                </div>
-
-                <div className="col-span-3 -mt-4 @3xl:-mt-8 @3xl:pb-8 text-center">
-                    <CloudinaryImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/404_e01bb2c910.png"
-                        width={300}
-                    />
-                    <p className="text-xs text-secondary mt-2 text-center">
-                        Isaac Asimov was a science fiction writer a century ahead of his time. His Three Laws of
-                        Robotics governed how robots should behave.
-                    </p>
                 </div>
             </>
         ),
@@ -355,7 +319,7 @@ const us = [
                         <br />
                         <span className="text-primary mr-2">•</span>It prepares concrete, well-formed proposals
                         <br />
-                        <span className="text-primary mr-2">•</span>It opens pull requests with context and intent )
+                        <span className="text-primary mr-2">•</span>It opens pull requests with context and intent
                         <br />
                     </p>
                     <p>
@@ -412,9 +376,9 @@ const us = [
             <>
                 <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
                     <p>
-                        If we get this right, PostHog AI, Signals, and Array will change how a product engineer starts
-                        their day. Right now, it starts with hunting: errors, tickets, replays, traces. You scan
-                        everything and guess what matters.
+                        If we get this right, PostHog AI will change how a product engineer starts their day. Right now,
+                        it starts with hunting: errors, tickets, replays, traces. You scan everything and guess what
+                        matters.
                     </p>
                     <p>That’s not product work. It’s prioritization.</p>
                     <p>
