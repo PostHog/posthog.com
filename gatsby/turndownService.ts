@@ -267,7 +267,7 @@ export const createTurndownService = (title: string) => {
                 if (headerRow) {
                     const headers = Array.from(headerRow.querySelectorAll('th, td')).map((cell) => {
                         const text = (cell as HTMLElement).textContent?.trim() || ''
-                        return text.replace(/\|/g, '\\|')
+                        return text.replace(/\\/g, '\\\\').replace(/\|/g, '\\|')
                     })
                     if (headers.length > 0) {
                         rows.push('| ' + headers.join(' | ') + ' |')
@@ -280,7 +280,7 @@ export const createTurndownService = (title: string) => {
             bodyRows.forEach((row) => {
                 const cells = Array.from(row.querySelectorAll('td, th')).map((cell) => {
                     const text = (cell as HTMLElement).textContent?.trim() || ''
-                    return text.replace(/\|/g, '\\|').replace(/\n+/g, ' ')
+                    return text.replace(/\\/g, '\\\\').replace(/\|/g, '\\|').replace(/\n+/g, ' ')
                 })
                 if (cells.length > 0) {
                     rows.push('| ' + cells.join(' | ') + ' |')
