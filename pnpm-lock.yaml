@@ -693,8 +693,6 @@ importers:
         specifier: ^0.15.3
         version: 0.15.6
 
-  plugins/gatsby-remark-inline-jsx-paragraphs: {}
-
   plugins/gatsby-remark-video: {}
 
   plugins/gatsby-source-squeak:
