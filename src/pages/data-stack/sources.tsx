@@ -4,7 +4,7 @@ import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfras
 import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'
 import Link from 'components/Link'
-import DWInstallationPlatforms from '../../../contents/docs/data-warehouse/_snippets/dw-installation-platforms'
+import DWInstallationPlatforms from './dw-installation-platforms'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
