@@ -9,15 +9,15 @@ const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
 }
 
-export default function IntegrationLibrary(): JSX.Element {
+export default function IntegrationsLibraryPage(): JSX.Element {
     return (
         <>
             <SEO
-                title="Integration library - PostHog data stack"
+                title="Integrations library - PostHog data stack"
                 description="All sources, destinations, and integrations available in PostHog"
                 image="images/og/cdp.jpg"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title="Integration library">
+            <ReaderView leftSidebar={<LeftSidebarContent />} title="Integrations library">
                 <p>
                     <span className="font-bold">Sources</span> bring data from other services into your PostHog data
                     warehouse. <span className="font-bold">Destinations</span> send data out to other services.{' '}

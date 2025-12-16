@@ -47,7 +47,7 @@ export const customerDataInfrastructureNav = {
         },
         {
             name: 'Integration library',
-            url: '/data-stack/integration-library',
+            url: '/data-stack/integrations-library',
         },
     ],
 }
