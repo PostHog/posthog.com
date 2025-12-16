@@ -1013,8 +1013,14 @@ export default function Home2() {
                 image={`/images/og/default.png`}
             />
             <Wizard
+                navigationPosition="top"
                 leftNavigation={
-                    <div className="flex gap-x-2">
+                    <div className="flex gap-x-2 pl-2 @lg:pl-6">
+                        <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
+                    </div>
+                }
+                rightNavigation={
+                    <div className="flex gap-x-2 pr-2 @lg:pr-6">
                         <CallToAction
                             to="https://app.posthog.com/signup"
                             size="md"
@@ -1032,11 +1038,7 @@ export default function Home2() {
                                 Install with AI
                             </CallToAction>
                         </div>
-                    </div>
-                }
-                rightNavigation={
-                    <>
-                        <OSButton
+                        {/* <OSButton
                             asLink
                             to="/talk-to-a-human"
                             size="md"
@@ -1045,8 +1047,8 @@ export default function Home2() {
                             state={{ newWindow: true }}
                         >
                             Talk to a human
-                        </OSButton>
-                    </>
+                        </OSButton> */}
+                    </div>
                 }
             >
                 <ScrollArea
@@ -1056,16 +1058,17 @@ export default function Home2() {
                     <article className={`${getProseClasses()} max-w-7xl mx-auto`}>
                         {/* Video Hero Section */}
                         <div className="flex flex-col @3xl:flex-row gap-8">
-                            <div className="flex-1 @3xl:pt-2 @4xl:pt-8">
-                                <div className="mb-8">
+                            <div className="flex-1 @3xl:pt-8 @4xl:pt-12">
+                                {/* <div className="mb-8">
                                     <Logo
                                         className="inline-block"
                                         fill={siteSettings.theme === 'dark' ? 'white' : undefined}
                                     />
-                                </div>
-                                <h1 className="!text-xl font-bold">The AI platform for engineers</h1>
-                                <p className="text-[15px] mt-0">
-                                    Debug products. Ship features faster. With all user and product data in one stack.
+                                </div> */}
+                                <h1 className="!text-2xl font-bold">The AI platform for engineers</h1>
+                                <p className="text-base mt-0">
+                                    Debug products. Ship features faster. <br />
+                                    With all user and product data in one stack.
                                 </p>
                                 <div className="@3xl:max-w-md mb-6">
                                     <Accordion
