@@ -653,6 +653,24 @@ export const handbookSidebar = [
                     {
                         name: 'Docs runbook',
                         url: '/handbook/content/docs-runbook',
+                        children: [
+                            {
+                                name: 'Overview',
+                                url: '/handbook/content/docs-runbook',
+                            },
+                            {
+                                name: 'Onboarding docs',
+                                url: '/handbook/content/docs-runbook/onboarding-docs',
+                            },
+                            {
+                                name: 'SDK reference docs',
+                                url: '/handbook/content/docs-runbook/sdk-reference-docs',
+                            },
+                            {
+                                name: 'API specification',
+                                url: '/handbook/content/docs-runbook/api-specification',
+                            },
+                        ],
                     },
                 ],
             },
