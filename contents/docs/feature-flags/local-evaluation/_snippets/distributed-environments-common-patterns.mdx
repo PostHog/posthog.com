@@ -13,9 +13,7 @@ The recommended pattern:
 
 #### Redis example
 
-> **Note:** The following example is written in Python
-
-A complete working example using Redis with distributed locking is available in the [posthog-python repository](https://github.com/PostHog/posthog-python/blob/main/examples/redis_flag_cache.py). It implements the locking pattern described above.
+A complete working example written in Python using Redis with distributed locking is available in the [posthog-python repository](https://github.com/PostHog/posthog-python/blob/main/examples/redis_flag_cache.py). It implements the locking pattern described above.
 
 ### Caches without locking
 
@@ -28,8 +26,6 @@ This separates the concerns entirely. One process writes, all others read.
 
 #### Cloudflare Workers example
 
-> **Note:** The following example uses Node.js
-
-A complete working example is available in the [posthog-js repository](https://github.com/PostHog/posthog-js/tree/main/examples/example-cloudflare-kv-cache). It uses the split read/write pattern described above. The worker's scheduled job writes flag definitions to KV, and request handlers read from it.
+A complete working example written in TypeScript is available in the [posthog-js repository](https://github.com/PostHog/posthog-js/tree/main/examples/example-cloudflare-kv-cache). It uses the split read/write pattern described above. The worker's scheduled job writes flag definitions to KV, and request handlers read from it.
 
 This pattern is ideal for high-traffic edge applications where flag evaluation must be extremely fast and you can tolerate flag updates being slightly delayed.
