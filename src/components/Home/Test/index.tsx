@@ -9,7 +9,7 @@ import { useApp } from '../../../context/App'
 import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
 import { Accordion } from 'components/RadixUI/Accordion'
 import useProduct from 'hooks/useProduct'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
 import MDXEditor from 'components/MDXEditor'
 import OSTable from 'components/OSTable'
@@ -101,7 +101,7 @@ const AppCount = () => {
 const CTAs = () => {
     const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
-        <div>
+        <div className="mb-4">
             <div className="flex flex-col @xs:flex-row @xs:justify-center @xl:justify-start gap-3 @sm:gap-2">
                 <CallToAction
                     to="https://app.posthog.com/signup"
@@ -788,7 +788,7 @@ export default function Home2() {
             value,
             trigger: <ProductTrigger handle={handle} />,
             content: (
-                <div data-scheme="secondary" className="flex flex-col px-6 gap-px -mt-2">
+                <div data-scheme="secondary" className="flex flex-col px-6 gap-px">
                     {slidePrompts.map((prompt) => (
                         <OSButton
                             key={prompt.globalIndex}
@@ -796,7 +796,11 @@ export default function Home2() {
                             width="full"
                             align="left"
                             onClick={() => handlePromptClick(prompt.globalIndex)}
-                            className={activePromptIndex === prompt.globalIndex ? 'bg-primary font-bold' : ''}
+                            className={`before:opacity-0 hover:!border-transparent before:content-["►"] before:text-base before:absolute before:-left-4 before:top-0.5 active:!bg-transparent focus:!border-transparent ${
+                                activePromptIndex === prompt.globalIndex
+                                    ? 'font-bold before:opacity-100'
+                                    : 'hover:underline hover:font-medium hover:before:opacity-25'
+                            }`}
                         >
                             "{prompt.text}"
                         </OSButton>
@@ -862,21 +866,29 @@ export default function Home2() {
                                         fill={siteSettings.theme === 'dark' ? 'white' : undefined}
                                     />
                                 </div>
-                                <h1 className="!text-xl font-bold !mb-1">The AI platform for engineers</h1>
-                                <p className="text-[15px]">
+                                <h1 className="!text-xl font-bold">The AI platform for engineers</h1>
+                                <p className="text-[15px] mt-0">
                                     Debug products. Ship features faster. With all user and product data in one stack.
                                 </p>
-
-                                <div className="@3xl:max-w-md">
+                                <div className="@3xl:max-w-md mb-6">
                                     <Accordion
                                         key={activeAccordion}
-                                        skin={false}
+                                        // skin={false}
                                         items={accordionItems}
                                         defaultValue={activeAccordion}
                                         onValueChange={handleAccordionChange}
-                                        triggerClassName="[&_h2]:text-sm"
+                                        triggerClassName="[&_h2]:text-sm !bg-transparent"
                                     />
                                 </div>
+                                <CTAs />
+                                Questions?{' '}
+                                <Link to="/demo" state={{ newWindow: true }}>
+                                    Watch a demo
+                                </Link>{' '}
+                                or{' '}
+                                <Link to="/talk-to-a-human" className="underline" state={{ newWindow: true }}>
+                                    talk to a human
+                                </Link>
                             </div>
                             <div className="flex flex-col items-center">
                                 <TVScreen
