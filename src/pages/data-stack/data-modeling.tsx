@@ -58,14 +58,19 @@ export default function DataModeling(): JSX.Element {
                     tools.
                 </p>
 
-                <p>
-                    Models are refreshed on a schedule, as frequently as every 5 minutes or as long as monthly. You can
-                    view your models in a DAG, or a visual graph of all model dependencies.
-                </p>
+                <p>Models are refreshed on a schedule, as frequently as every 5 minutes or as long as monthly.</p>
                 <ProductScreenshot
                     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_10_2x_88dc4ae252.png"
                     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_31_2x_16e9dbe683.png"
                     alt="Materialize view"
+                    classes="rounded"
+                    zoom={false}
+                />
+                <p>You can view your models in a DAG, or a visual graph of all model dependencies.</p>
+                <ProductScreenshot
+                    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Post_Hog_modeling_dag_8f59938982.png"
+                    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Post_Hog_modeling_dag_8f59938982.png"
+                    alt="DAG view"
                     classes="rounded"
                     zoom={false}
                 />
