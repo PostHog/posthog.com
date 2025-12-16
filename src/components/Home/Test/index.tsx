@@ -243,8 +243,8 @@ const HomeHitCounter = () => {
 const Toolkits = () => {
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
-        { name: 'goal', width: 'minmax(150px,250px)', align: 'left' as const },
-        { name: 'products', width: 'minmax(auto,1fr)', align: 'left' as const },
+        { name: 'Category', width: 'minmax(150px,300px)', align: 'left' as const },
+        { name: 'Tools', width: 'minmax(auto,1fr)', align: 'left' as const },
     ]
 
     const rows = [
@@ -254,24 +254,13 @@ const Toolkits = () => {
                 {
                     content: (
                         <div className="flex flex-col gap-1">
-                            <span>product development</span>
+                            <span>Data stack</span>
                         </div>
                     ),
                     className: 'font-bold',
                 },
                 {
-                    content: (
-                        <ProductButtons
-                            productTypes={[
-                                'web_analytics',
-                                'product_analytics',
-                                'session_replay',
-                                'feature_flags',
-                                'experiments',
-                                'error_tracking',
-                            ]}
-                        />
-                    ),
+                    content: <ProductButtons productTypes={['cdp', 'data_in', 'visualize', 'data_out']} />,
                     className: 'text-sm flex-wrap gap-px',
                 },
             ],
@@ -282,7 +271,7 @@ const Toolkits = () => {
                 {
                     content: (
                         <div className="flex flex-col gap-1">
-                            <span>customer engagement</span>
+                            <span>Analytics & data viz</span>
                         </div>
                     ),
                     className: 'font-bold',
@@ -290,8 +279,22 @@ const Toolkits = () => {
                 {
                     content: (
                         <>
-                            <ProductButtons productTypes={['surveys', 'user_interviews', 'broadcasts', 'support']} />{' '}
-                            Support
+                            <ProductButtons
+                                productTypes={[
+                                    'web_analytics',
+                                    'product_analytics',
+                                    'trends',
+                                    'funnels',
+                                    'user_paths',
+                                    'correlation_analysis',
+                                    'retention',
+                                    'stickiness',
+                                    'lifecycle',
+                                    'sql',
+                                    'bi',
+                                    'dashboards',
+                                ]}
+                            />
                         </>
                     ),
                     className: 'text-sm',
@@ -304,7 +307,7 @@ const Toolkits = () => {
                 {
                     content: (
                         <div className="flex flex-col gap-1">
-                            <span>sales</span>
+                            <span>Product development</span>
                         </div>
                     ),
                     className: 'font-bold',
@@ -312,7 +315,47 @@ const Toolkits = () => {
                 {
                     content: (
                         <>
-                            CRM, Cross-sell/expansion <ProductButtons productTypes={['CRM', 'cross-sell/expansion']} />
+                            <ProductButtons
+                                productTypes={[
+                                    'posthog_ai',
+                                    'session_replay',
+                                    'feature_flags',
+                                    'experiments',
+                                    'error_tracking',
+                                    'llm_analytics',
+                                    'revenue_analytics',
+                                ]}
+                            />
+                        </>
+                    ),
+                    className: 'text-sm',
+                },
+            ],
+        },
+        {
+            cells: [
+                { content: 4 },
+                {
+                    content: (
+                        <div className="flex flex-col gap-1">
+                            <span>Customer communication & automation</span>
+                        </div>
+                    ),
+                    className: 'font-bold',
+                },
+                {
+                    content: (
+                        <>
+                            <ProductButtons
+                                productTypes={[
+                                    'posthog_ai',
+                                    'surveys',
+                                    'user_interviews',
+                                    'messaging',
+                                    'workflows',
+                                    'webhooks',
+                                ]}
+                            />{' '}
                         </>
                     ),
                     className: 'text-sm',
@@ -323,7 +366,7 @@ const Toolkits = () => {
 
     return (
         <div className="mt-4">
-            <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
+            <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" width="full" />
         </div>
     )
 }
