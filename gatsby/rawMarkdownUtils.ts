@@ -11,8 +11,7 @@ import {
 } from './turndownService'
 
 export const generateRawMarkdownPages = async (
-    docsNodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }>,
-    reporter?: any
+    docsNodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }>
 ) => {
     const publicPath = path.resolve(__dirname, '../public')
 
@@ -44,9 +43,6 @@ export const generateRawMarkdownPages = async (
             const htmlFilePath = path.join(publicPath, slug, 'index.html')
 
             if (!fs.existsSync(htmlFilePath)) {
-                if (reporter) {
-                    reporter.warn(`HTML file not found: ${htmlFilePath}`)
-                }
                 continue
             }
 
@@ -68,20 +64,9 @@ export const generateRawMarkdownPages = async (
 
             fs.writeFileSync(outputPath, markdown, 'utf8')
             processedPages.push({ slug, title })
-
-            if (reporter) {
-                reporter.info(`Generated: ${slug}.md`)
-            }
         } catch (error) {
-            const errorMsg = `Error generating markdown for ${node.fields.slug}: ${error}`
-            if (reporter) {
-                reporter.error(errorMsg)
-            }
+            continue
         }
-    }
-
-    if (reporter) {
-        reporter.info(`Generated ${processedPages.length} markdown files`)
     }
 
     return processedPages.map((page) => ({

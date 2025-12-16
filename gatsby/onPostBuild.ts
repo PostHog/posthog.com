@@ -572,7 +572,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
         }
     `)) as { data: { allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> } } }
 
-    const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes, reporter)
+    const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes)
     generateLlmsTxt(filteredPages)
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
