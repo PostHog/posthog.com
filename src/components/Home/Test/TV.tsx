@@ -48,7 +48,7 @@ const ControlButton = ({ icon, x, y, onClick }: ControlButtonProps) => {
     const iconOffsetY = (buttonHeight - iconSize.height) / 2
 
     // Top layer offset based on state
-    const topOffset = isPressed ? 2 : isHovered ? -2 : 0
+    const topOffset = isPressed ? 1.5 : isHovered ? -0.5 : 0
 
     return (
         <g
@@ -71,7 +71,7 @@ const ControlButton = ({ icon, x, y, onClick }: ControlButtonProps) => {
                 strokeWidth="2.35907"
             />
             {/* Top layer (button face) */}
-            <g style={{ transform: `translateY(${topOffset}px)`, transition: 'transform 0.1s ease' }}>
+            <g style={{ transform: `translateY(${topOffset}px)`, transition: 'transform 0.1s ease-out' }}>
                 <path
                     d="M29.135 26.176C29.135 28.385 27.344 30.176 25.135 30.176H4C1.791 30.176 0 28.385 0 26.176V4C0 1.791 1.791 0 4 0H25.135C27.344 0 29.135 1.791 29.135 4V26.176Z"
                     fill="#FDFDF7"
@@ -99,8 +99,8 @@ export default function TVScreen({
         <svg className={className} viewBox="0 0 484 565" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="tv">
                 <g id="viewport-frame">
-                    <foreignObject x="19" y="17.9827" width="445" height="445">
-                        <div style={{ width: '100%', height: '100%', position: 'relative' }}>{children}</div>
+                    <foreignObject x="28" y="27" width="428" height="428">
+                        <div className="w-full h-full relative">{children}</div>
                     </foreignObject>
                 </g>
                 <rect
