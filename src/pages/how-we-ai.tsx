@@ -117,7 +117,7 @@ const them = [
         title: 'What makes this possible',
         children: (
             <>
-                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
+                <div className="col-span-3 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-xl pb-4 @3xl:pb-20">
                     <p>Simply put, we have more data. PostHog captures more signals than point solutions: </p>
                     <p>
                         <span className="text-primary mr-2">•</span>What users do (analytics)
@@ -135,17 +135,17 @@ const them = [
                         <span className="text-primary mr-2">•</span>AI output (LLM analytics)
                     </p>
                     <p>
-                        PostHog AI then connects these into a single view of reality. And with ‘modes’ we’re building
+                        PostHog AI then connects these into a single view of reality. And with 'modes' we're building
                         agentive systems that do specific things really well (not just general purpose AI).
                     </p>
                 </div>
 
-                <div className="col-span-3 -mt-4 @3xl:-mt-8 @3xl:pb-8 text-center">
+                <div className="col-span-5 -mt-6 pb-8 text-center">
                     <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10346_8043a91132.png"
-                        width={220}
+                        width={320}
                     />
                     <p className="text-xs text-secondary mt-2 text-center">
                         Context switching takes about 23 minutes to recover from.
@@ -228,7 +228,7 @@ const us = [
 
         children: (
             <>
-                <div className="col-span-6 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-8 @3xl:pb-20">
+                <div className="col-span-3 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-xl pb-4 @3xl:pb-20">
                     <p>A lot of companies are building AI-powered integrated development environments.</p>
                     <p>Most of them are designed for:</p>
                     <p>
@@ -242,13 +242,13 @@ const us = [
                     <p>That’s not what we’re optimizing for (though it will do those things).</p>
                 </div>
 
-                <div className="col-span-2 -mt-6 pb-8 text-center">
+                <div className="col-span-5 -mt-6 pb-8 text-center">
                     <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
                         loading="eager"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/drake-hog-yes.png"
-                        width={234}
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Not_another_IDE_c791b29f48.png"
+                        width={350}
                         imgClassName="max-w-full"
                     />
                 </div>
@@ -764,7 +764,7 @@ export default function HowWeAI() {
         <>
             <SEO
                 title="How we do AI"
-                description="Most companies want to feel out how much they can squeeze out of you with AI. PostHog operates differently."
+                description="Most companies promise to automate everything and make you obsolete. PostHog operates differently."
                 image={`/images/og/sales.jpg`}
             />
             <Wizard
