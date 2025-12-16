@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { createContext, useContext, useEffect, useMemo, useState, useCallback, useRef } from 'react'
 import { AppWindow } from './Window'
 import { WindowSearchUI } from 'components/SearchUI'
@@ -44,8 +45,8 @@ type WindowElement = React.ReactNode & {
         location: {
             pathname: string
         }
-        pageContext: any
-        data: any
+        pageContext: Record<string, unknown>
+        data: Record<string, unknown>
         params: any
         path: string
         newWindow: boolean
@@ -484,7 +485,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/customer-data-infrastructure': {
+    '/data-stack': {
         size: {
             min: {
                 width: 750,
