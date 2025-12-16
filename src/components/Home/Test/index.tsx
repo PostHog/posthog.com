@@ -38,6 +38,7 @@ import {
     Digit9,
     DigitDash,
 } from 'components/OSIcons'
+import TVScreen from './TV'
 
 // Prompts with video IDs, grouped by slide (quotes added during render)
 const PROMPTS = [
@@ -687,12 +688,36 @@ export default function Home2() {
     const videoRef = useRef<WistiaVideoRef>(null)
     const [activePromptIndex, setActivePromptIndex] = useState(0)
     const [copied, setCopied] = useState(false)
+    const [isPlaying, setIsPlaying] = useState(true)
 
     const handleCopy = () => {
         navigator.clipboard.writeText('npx -y @posthog/wizard@latest')
         setCopied(true)
         setTimeout(() => setCopied(false), 3000)
     }
+
+    // Video control handlers for TVScreen buttons
+    const handlePrev = () => {
+        setActivePromptIndex((prev) => (prev - 1 + PROMPTS.length) % PROMPTS.length)
+    }
+
+    const handlePlayPause = () => {
+        if (isPlaying) {
+            videoRef.current?.pause()
+        } else {
+            videoRef.current?.play()
+        }
+        setIsPlaying(!isPlaying)
+    }
+
+    const handleNext = () => {
+        setActivePromptIndex((prev) => (prev + 1) % PROMPTS.length)
+    }
+
+    // Reset isPlaying to true when video changes (since new videos auto-play)
+    useEffect(() => {
+        setIsPlaying(true)
+    }, [activePromptIndex])
 
     // GraphQL query for MDX content
     const {
@@ -825,12 +850,12 @@ export default function Home2() {
             >
                 <ScrollArea
                     data-scheme="primary"
-                    className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:p-4 @lg:[&>div>div]:p-8 [&>div>div]:!pt-2 [&_.w-vulcan-v2]:!rounded-none bg-primary"
+                    className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:p-4 @lg:[&>div>div]:p-8 [&_.w-vulcan-v2]:!rounded-none bg-primary"
                 >
                     <article className={getProseClasses()}>
                         {/* Video Hero Section */}
                         <div className="flex flex-col @3xl:flex-row gap-8">
-                            <div className="flex-1 pt-8">
+                            <div className="flex-1 @3xl:pt-8">
                                 <div className="mb-8">
                                     <Logo
                                         className="inline-block"
@@ -842,7 +867,7 @@ export default function Home2() {
                                     Debug products. Ship features faster. With all user and product data in one stack.
                                 </p>
 
-                                <div className="max-w-md">
+                                <div className="@3xl:max-w-md">
                                     <Accordion
                                         key={activeAccordion}
                                         skin={false}
@@ -852,66 +877,26 @@ export default function Home2() {
                                         triggerClassName="[&_h2]:text-sm"
                                     />
                                 </div>
-
-                                <div
-                                    data-scheme="secondary"
-                                    className="mt-4 border border-primary bg-primary p-4 rounded"
-                                >
-                                    <p className="mt-0 mb-2">
-                                        <strong>
-                                            Install PostHog with AI{' '}
-                                            <IconSparkles className="inline-block size-4 relative -top-px" />{' '}
-                                        </strong>
-                                    </p>
-
-                                    <pre className="m-0 relative">
-                                        npx -y @posthog/wizard@latest
-                                        <button
-                                            onClick={handleCopy}
-                                            className="absolute right-1.5 top-1.5 p-0.5 border border-transparent hover:border-white rounded transition-colors"
-                                            aria-label="Copy to clipboard"
-                                        >
-                                            {copied ? (
-                                                <IconCheck className="size-5 text-green" />
-                                            ) : (
-                                                <IconCopy className="size-5" />
-                                            )}
-                                        </button>
-                                    </pre>
-
-                                    <p className="text-xs mt-2 mb-0">
-                                        Works with Next.js and AI coding tools like Cursor and Bolt
-                                    </p>
-                                </div>
                             </div>
                             <div className="flex flex-col items-center">
-                                <WistiaVideo
-                                    ref={videoRef}
-                                    videoId={currentVideoId}
-                                    onEnd={handleVideoEnd}
-                                    className="w-full @3xl:w-[400px] @4xl:w-[540px] [&_.w-chrome]:!rounded-none [&_.w-vulcan-v2]:!rounded-none [&_.w-chrome]:![clip-path:none]"
-                                    hideInitialControls
-                                    hideAudioControls
-                                />
-                                <p className="mt-4 mb-2 text-center italic">"{currentPrompt.text}"</p>
-                                <p className="text-sm text-center opacity-70 mt-0 mb-2">
-                                    PostHog AI + <ProductName handle={SLIDE_TO_PRODUCT[currentPrompt.slide]} />
-                                </p>
-                                <div className="flex gap-2">
-                                    {getPromptsForSlide(currentPrompt.slide).map((prompt) => {
-                                        const isActive = activePromptIndex === prompt.globalIndex
-                                        return (
-                                            <button
-                                                key={prompt.globalIndex}
-                                                onClick={() => setActivePromptIndex(prompt.globalIndex)}
-                                                className={`size-3 rounded-full transition-colors ${
-                                                    isActive ? 'bg-blue' : 'bg-accent hover:opacity-80'
-                                                }`}
-                                                aria-label={`Go to prompt: ${prompt.text}`}
-                                            />
-                                        )
-                                    })}
-                                </div>
+                                <TVScreen
+                                    className="relative w-full @3xl:w-[400px] @4xl:w-[500px]"
+                                    title={currentPrompt.text}
+                                    isPlaying={isPlaying}
+                                    videoNumber={activePromptIndex + 1}
+                                    onPrev={handlePrev}
+                                    onPlayPause={handlePlayPause}
+                                    onNext={handleNext}
+                                >
+                                    <WistiaVideo
+                                        ref={videoRef}
+                                        videoId={currentVideoId}
+                                        onEnd={handleVideoEnd}
+                                        className="absolute inset-0 [&_.w-chrome]:!rounded-none [&_video]:m-0 [&_.w-vulcan-v2]:!rounded-none [&_.w-chrome]:![clip-path:none]"
+                                        hideInitialControls
+                                        hideAudioControls
+                                    />
+                                </TVScreen>
                             </div>
                         </div>
 
