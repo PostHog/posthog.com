@@ -26,6 +26,19 @@ Every time a user opens the app, we send a request in the background to fetch th
 
 This means that for most screens, the feature flags are available immediately – **except for the first time a user visits**.
 
+To handle this, you can use the `onFeatureFlags` callback in your config to be notified when flags are loaded:
+
+```dart
+final config = PostHogConfig('<ph_project_api_key>');
+config.host = '<ph_client_api_host>';
+config.onFeatureFlags = () async {
+  if (await Posthog().isFeatureEnabled('flag-key')) {
+    // do something
+  }
+};
+await Posthog().setup(config);
+```
+
 ### Reloading feature flags
 
 Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call:
