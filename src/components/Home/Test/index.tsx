@@ -859,7 +859,7 @@ export default function Home2() {
                     <article className={getProseClasses()}>
                         {/* Video Hero Section */}
                         <div className="flex flex-col @3xl:flex-row gap-8">
-                            <div className="flex-1 @3xl:pt-8">
+                            <div className="flex-1 @3xl:pt-2 @4xl:pt-8">
                                 <div className="mb-8">
                                     <Logo
                                         className="inline-block"
