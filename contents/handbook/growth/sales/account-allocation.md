@@ -28,7 +28,7 @@ We track whether a customer is paying for each product in Vitally using the `Pay
 
 At the start of each quarter, TAMs should prepare their book of business with the following constraints in mind:
 
-**Target book size:** 10-15 accounts with a combined ~$1m ARR. This gives TAMs enough focus to actually move the needle on expansion and credit pre-purchases.
+**Target book size:** 10-15 accounts with a combined ~$1.5m ARR. This gives TAMs enough focus to actually move the needle on expansion and credit pre-purchases.
 
 **Maximum book size:** 15 accounts. New leads or handoffs from CS/Onboarding/TAEs will push a TAM above this throughout the quarter, but if you're starting a quarter at 18 accounts, you need to find a way to get to 15 or fewer.
 
