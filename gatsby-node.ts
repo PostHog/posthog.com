@@ -88,6 +88,7 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
                 types: path.resolve(__dirname, 'src', 'types'),
                 images: path.resolve(__dirname, 'src', 'images'),
                 components: path.resolve(__dirname, 'src', 'components'),
+                constants: path.resolve(__dirname, 'src', 'constants'),
                 logic: path.resolve(__dirname, 'src', 'logic'),
                 hooks: path.resolve(__dirname, 'src', 'hooks'),
                 // Mapping
