@@ -175,9 +175,9 @@ Ask for access in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3B
   
   We use Google Meet by default, but you can use Zoom for free (up to 40-minute calls). Should you need longer meetings, ask <TeamMember name="Simon Fisher" photo />. (But does anyone _really_ need longer meetings?)
 
-- <Link to="https://superhuman.com" external>Superhuman</Link>
+- <Link to="https://circleback.ai" external>Circleback</Link>
   
-  Everyone has their own favorite email app, but Superhuman users will make sure you don’t forget theirs. We have a team plan to keep those folks happy with inbox zero and inner peace.
+  It’s absolutely okay to use AI note-takers so you can stay engaged in meetings without writing everything down. Circleback is our preferred tool from a privacy standpoint. We have a company account - sign up with your @posthog.com email for Pro access.
 
 ### IDEs
 
