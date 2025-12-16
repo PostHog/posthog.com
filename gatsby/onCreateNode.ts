@@ -268,18 +268,6 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 console.error(`Error fetching input_schema for ${templateIds}: ${error}`)
             }
         }
-
-        const contentWithoutFrontmatter = stripFrontmatter(node.rawBody)
-
-        // Prepend title as H1 if it exists
-        const title = node.frontmatter?.title
-        const contentWithTitle = title ? `# ${title}\n\n${contentWithoutFrontmatter}` : contentWithoutFrontmatter
-
-        createNodeField({
-            node,
-            name: `contentWithSnippets`,
-            value: contentWithTitle,
-        })
     }
 
     if (node.internal.type === 'Plugin' && new URL(node.url).hostname === 'github.com' && process.env.GITHUB_API_KEY) {
