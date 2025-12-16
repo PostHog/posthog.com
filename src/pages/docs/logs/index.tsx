@@ -76,7 +76,7 @@ export const Content = () => {
                 <h2 className="mb-4 mt-0" id="pricing">
                     Pricing
                 </h2>
-                <p>Logs is currently in early alpha. While in alpha and beta, Logs is free to use.</p>
+                <p>Logs is currently in beta. While in beta, Logs is free to use.</p>
                 <p>
                     After the beta, pricing will be based on GB/ingest. We will offer 30 days standard retention. You'll
                     get 50GB ingest free each month, with discounts as your usage grows.
