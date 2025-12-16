@@ -44,17 +44,6 @@ export const workflows = {
             volume: 10000,
             unit: 'dispatch',
         },
-        {
-            key: 'workflows_sms',
-            label: 'SMS',
-            sliderConfig: {
-                marks: [10000, 50000, 100000, 1000000, 10000000],
-                min: 10000,
-                max: 10000000,
-            },
-            volume: 10000,
-            unit: 'sms',
-        },
     ],
     seo: {
         title: 'Workflows – Automate workflows with product data',
