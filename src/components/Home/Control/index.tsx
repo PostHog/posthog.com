@@ -1110,7 +1110,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         },
     },
     {
-        name: 'ButtonCDI',
+        name: 'ButtonDataStack',
         kind: 'flow',
         props: [],
         Editor: () => <Button url="/data-stack">README: PostHog data stack.md</Button>,
