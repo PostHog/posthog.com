@@ -204,9 +204,12 @@ export const CodeBlock = ({
 
     const websiteTheme = siteSettings.theme
 
-    const [expanded, setExpanded] = React.useState(false)
-    const linesToShow = currentLanguage.focusOnLines ? getLinesToShow(currentLanguage.focusOnLines) : []
-    const showRunInPostHog = currentLanguage.runInPostHog !== 'false'
+    const [expandedStates, setExpandedStates] = React.useState<Record<string, boolean>>({})
+    const [selectedIndex, setSelectedIndex] = React.useState(0)
+    const setExpanded = (language: string, value: boolean) => {
+        setExpandedStates((prev) => ({ ...prev, [language]: value }))
+    }
+    const getExpanded = (language: string) => expandedStates[language] || false
 
     React.useEffect(() => {
         // Browser check - no cookies on the server
@@ -237,15 +240,14 @@ export const CodeBlock = ({
             )
     }
 
-    const copyToClipboard = (): void => {
-        navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(currentLanguage.code)))
+    const copyToClipboard = (code: string): void => {
+        navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(code)))
         setTooltipVisible(true)
         setTimeout(() => setTooltipVisible(false), 500)
     }
 
-    const handleAskAboutCode = (): void => {
-        const code = replaceProjectInfo(stripAnnotationComments(currentLanguage.code))
-        const language = currentLanguage.language || ''
+    const handleAskAboutCode = (code: string, language: string): void => {
+        const processedCode = replaceProjectInfo(stripAnnotationComments(code))
         const pagePath = appWindow?.path || location.pathname?.replace(/\/$/, '') || ''
         const sourceUrl = `https://posthog.com${pagePath}`
 
@@ -253,26 +255,32 @@ export const CodeBlock = ({
         openNewChat({
             path: `ask-max-${pagePath}-code-${Date.now()}`,
             initialQuestion: `Explain this ${language || 'code'} code from ${sourceUrl}`,
-            codeSnippet: { code, language, sourceUrl },
+            codeSnippet: { code: processedCode, language, sourceUrl },
         })
     }
 
-    const highlightLineNumbers: number[] = []
-    const diffAddLineNumbers: number[] = []
-    const diffRemoveLineNumbers: number[] = []
+    const getHighlightLineNumbers = (
+        code: string
+    ): { highlight: number[]; diffAdd: number[]; diffRemove: number[] } => {
+        const highlightLineNumbers: number[] = []
+        const diffAddLineNumbers: number[] = []
+        const diffRemoveLineNumbers: number[] = []
 
-    const codeLines = currentLanguage.code.split('\n')
-    codeLines.forEach((line, index) => {
-        if (line.includes(highlightKey)) {
-            highlightLineNumbers.push(index)
-        }
-        if (line.includes(diffAddKey)) {
-            diffAddLineNumbers.push(index)
-        }
-        if (line.includes(diffRemoveKey)) {
-            diffRemoveLineNumbers.push(index)
-        }
-    })
+        const codeLines = code.split('\n')
+        codeLines.forEach((line, index) => {
+            if (line.includes(highlightKey)) {
+                highlightLineNumbers.push(index)
+            }
+            if (line.includes(diffAddKey)) {
+                diffAddLineNumbers.push(index)
+            }
+            if (line.includes(diffRemoveKey)) {
+                diffRemoveLineNumbers.push(index)
+            }
+        })
+
+        return { highlight: highlightLineNumbers, diffAdd: diffAddLineNumbers, diffRemove: diffRemoveLineNumbers }
+    }
 
     const generateSQLEditorLink = (code: string): string => {
         // Takes an SQL string and returns a URL string in the PostHog SQL editor format
@@ -287,9 +295,15 @@ export const CodeBlock = ({
             {showLabel && (
                 <div className="bg-accent text-sm flex items-center w-full rounded-t">
                     {selector === 'tabs' && languages.length > 1 ? (
-                        <Tab.Group onChange={(index) => onChange?.(languages[index])}>
+                        <Tab.Group
+                            selectedIndex={selectedIndex}
+                            onChange={(index) => {
+                                setSelectedIndex(index)
+                                onChange?.(languages[index])
+                            }}
+                        >
                             <Tab.List className="flex items-center gap-[1px] flex-wrap">
-                                {languages.map((option) => (
+                                {languages.map((option, index) => (
                                     <Tab
                                         key={option.language}
                                         className={({ selected }) =>
@@ -364,7 +378,7 @@ export const CodeBlock = ({
                             </div>
                         ) : null}
 
-                        {showRunInPostHog && currentLanguage.language === 'sql' && (
+                        {currentLanguage.runInPostHog !== 'false' && currentLanguage.language === 'sql' && (
                             <div className="relative flex items-center justify-center px-1">
                                 <a
                                     href={`${generateSQLEditorLink(currentLanguage.code)}`}
@@ -381,7 +395,7 @@ export const CodeBlock = ({
                         {showAskAI && (
                             <div className="relative flex items-center justify-center px-1 group/askai">
                                 <button
-                                    onClick={handleAskAboutCode}
+                                    onClick={() => handleAskAboutCode(currentLanguage.code, currentLanguage.language)}
                                     className="ask-posthog-ai-code-snippet inline-flex items-center gap-1 text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                 >
                                     <span className="hidden group-hover/askai:inline whitespace-nowrap text-sm">
@@ -395,7 +409,7 @@ export const CodeBlock = ({
                         {showCopy && (
                             <div className="relative flex items-center justify-center px-1">
                                 <button
-                                    onClick={copyToClipboard}
+                                    onClick={() => copyToClipboard(currentLanguage.code)}
                                     className="text-muted hover:text-secondary px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                     title="Copy to clipboard"
                                 >
@@ -433,166 +447,211 @@ export const CodeBlock = ({
                 </div>
             )}
 
-            <Highlight
-                {...defaultProps}
-                code={replaceProjectInfo(currentLanguage.code.trim())}
-                language={(languageMap[currentLanguage.language]?.language || currentLanguage.language) as Language}
-                theme={websiteTheme === 'dark' ? darkTheme : lightTheme}
-            >
-                {({ className, tokens, getLineProps, getTokenProps }) => (
-                    <pre
-                        data-scheme="primary"
-                        className={`w-full m-0 p-0 rounded-b bg-primary border-primary ${
-                            showLabel ? 'rounded-t-none border-t' : 'rounded-t'
-                        }`}
-                    >
-                        <ScrollArea>
-                            <div className="flex whitespace-pre min-w-fit relative pb-2" id={codeBlockId}>
-                                {showLineNumbers && (
-                                    <pre className="m-0 py-4 pr-3 pl-5 inline-block font-code font-medium text-sm bg-accent">
-                                        <span
-                                            className="select-none flex flex-col dark:text-white/60 text-black/60 shrink-0"
-                                            aria-hidden="true"
-                                        >
-                                            {!expanded && linesToShow.length > 0 && linesToShow[0] >= 0 && (
-                                                <div className="flex border-b border-dashed border-primary w-full mb-2 -mt-2">
-                                                    <button
-                                                        onClick={() => setExpanded(!expanded)}
-                                                        className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+            {languages.map((languageOption, index) => {
+                const isActive = index === selectedIndex
+                const languageId = `${codeBlockId}-${languageOption.language}`
+                const expanded = getExpanded(languageOption.language)
+                const linesToShow = languageOption.focusOnLines ? getLinesToShow(languageOption.focusOnLines) : []
+                const {
+                    highlight: highlightLineNumbers,
+                    diffAdd: diffAddLineNumbers,
+                    diffRemove: diffRemoveLineNumbers,
+                } = getHighlightLineNumbers(languageOption.code)
+
+                return (
+                    <div key={languageOption.language} className={isActive ? '' : 'hidden'} aria-hidden={!isActive}>
+                        <Highlight
+                            {...defaultProps}
+                            code={replaceProjectInfo(languageOption.code.trim())}
+                            language={
+                                (languageMap[languageOption.language]?.language || languageOption.language) as Language
+                            }
+                            theme={websiteTheme === 'dark' ? darkTheme : lightTheme}
+                        >
+                            {({ className, tokens, getLineProps, getTokenProps }) => (
+                                <pre
+                                    data-scheme="primary"
+                                    className={`w-full m-0 p-0 rounded-b bg-primary border-primary ${
+                                        showLabel ? 'rounded-t-none border-t' : 'rounded-t'
+                                    }`}
+                                >
+                                    <ScrollArea>
+                                        <div className="flex whitespace-pre min-w-fit relative pb-2" id={languageId}>
+                                            {showLineNumbers && (
+                                                <pre className="m-0 py-4 pr-3 pl-5 inline-block font-code font-medium text-sm bg-accent">
+                                                    <span
+                                                        className="select-none flex flex-col dark:text-white/60 text-black/60 shrink-0"
+                                                        aria-hidden="true"
                                                     >
-                                                        ...
-                                                    </button>
-                                                </div>
+                                                        {!expanded && linesToShow.length > 0 && linesToShow[0] >= 0 && (
+                                                            <div className="flex border-b border-dashed border-primary w-full mb-2 -mt-2">
+                                                                <button
+                                                                    onClick={() =>
+                                                                        setExpanded(languageOption.language, !expanded)
+                                                                    }
+                                                                    className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                                                >
+                                                                    ...
+                                                                </button>
+                                                            </div>
+                                                        )}
+                                                        {tokens.map((_, i) => {
+                                                            if (
+                                                                !linesToShow.length ||
+                                                                linesToShow.includes(i) ||
+                                                                expanded
+                                                            ) {
+                                                                return (
+                                                                    <span
+                                                                        className={`inline-block text-right align-middle`}
+                                                                        key={i}
+                                                                    >
+                                                                        <span>{i + lineNumberStart}</span>
+                                                                    </span>
+                                                                )
+                                                            }
+                                                            return
+                                                        })}
+                                                        {!expanded &&
+                                                            linesToShow.length > 0 &&
+                                                            linesToShow[linesToShow.length - 1] <=
+                                                                tokens.length - 1 && (
+                                                                <div className="flex border-t border-dashed border-primary w-full mt-2 -mb-2">
+                                                                    <button
+                                                                        onClick={() =>
+                                                                            setExpanded(
+                                                                                languageOption.language,
+                                                                                !expanded
+                                                                            )
+                                                                        }
+                                                                        className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                                                    >
+                                                                        ...
+                                                                    </button>
+                                                                </div>
+                                                            )}
+                                                    </span>
+                                                </pre>
                                             )}
-                                            {tokens.map((_, i) => {
-                                                if (!linesToShow.length || linesToShow.includes(i) || expanded) {
-                                                    return (
-                                                        <span
-                                                            className={`inline-block text-right align-middle`}
-                                                            key={i}
-                                                        >
-                                                            <span>{i + lineNumberStart}</span>
-                                                        </span>
-                                                    )
-                                                }
-                                                return
-                                            })}
-                                            {!expanded &&
-                                                linesToShow.length > 0 &&
-                                                linesToShow[linesToShow.length - 1] <= tokens.length - 1 && (
-                                                    <div className="flex border-t border-dashed border-primary w-full mt-2 -mb-2">
+
+                                            <code
+                                                className={`not-prose block rounded-none !m-0 p-4 shrink-0 flex-1 font-code font-medium text-sm ${className}`}
+                                            >
+                                                {!expanded && linesToShow.length > 0 && linesToShow[0] >= 0 && (
+                                                    <div className="flex border-b border-dashed border-primary w-full mb-2 -mt-2">
                                                         <button
-                                                            onClick={() => setExpanded(!expanded)}
+                                                            onClick={() =>
+                                                                setExpanded(languageOption.language, !expanded)
+                                                            }
                                                             className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
                                                         >
-                                                            ...
+                                                            Show full example
                                                         </button>
                                                     </div>
                                                 )}
-                                        </span>
-                                    </pre>
-                                )}
+                                                {tokens.map((line, i) => {
+                                                    if (
+                                                        linesToShow.length > 0 &&
+                                                        !linesToShow.includes(i) &&
+                                                        !expanded
+                                                    ) {
+                                                        return
+                                                    }
+                                                    const { className, ...props } = getLineProps({ line, key: i })
+                                                    const tooltipContent =
+                                                        tooltips?.find(
+                                                            (tooltip) => tooltip.lineNumber === i + lineNumberStart
+                                                        )?.content ||
+                                                        line
+                                                            .find((token) => token.content.startsWith(tooltipKey))
+                                                            ?.content.replace(tooltipKey, '')
+                                                    line.forEach((token) => {
+                                                        if (token.content.includes(highlightKey)) {
+                                                            token.content = token.content.replace(highlightKey, '')
+                                                        }
+                                                        if (token.content.includes(diffAddKey)) {
+                                                            token.content = token.content.replace(diffAddKey, '')
+                                                        }
+                                                        if (token.content.includes(diffRemoveKey)) {
+                                                            token.content = token.content.replace(diffRemoveKey, '')
+                                                        }
+                                                    })
 
-                                <code
-                                    className={`not-prose block rounded-none !m-0 p-4 shrink-0 flex-1 font-code font-medium text-sm ${className}`}
-                                >
-                                    {!expanded && linesToShow.length > 0 && linesToShow[0] >= 0 && (
-                                        <div className="flex border-b border-dashed border-primary w-full mb-2 -mt-2">
-                                            <button
-                                                onClick={() => setExpanded(!expanded)}
-                                                className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
-                                            >
-                                                Show full example
-                                            </button>
-                                        </div>
-                                    )}
-                                    {tokens.map((line, i) => {
-                                        if (linesToShow.length > 0 && !linesToShow.includes(i) && !expanded) {
-                                            return
-                                        }
-                                        const { className, ...props } = getLineProps({ line, key: i })
-                                        const tooltipContent =
-                                            tooltips?.find((tooltip) => tooltip.lineNumber === i + lineNumberStart)
-                                                ?.content ||
-                                            line
-                                                .find((token) => token.content.startsWith(tooltipKey))
-                                                ?.content.replace(tooltipKey, '')
-                                        line.forEach((token) => {
-                                            if (token.content.includes(highlightKey)) {
-                                                token.content = token.content.replace(highlightKey, '')
-                                            }
-                                            if (token.content.includes(diffAddKey)) {
-                                                token.content = token.content.replace(diffAddKey, '')
-                                            }
-                                            if (token.content.includes(diffRemoveKey)) {
-                                                token.content = token.content.replace(diffRemoveKey, '')
-                                            }
-                                        })
-
-                                        const firstContentIndex = line.findIndex((token) => !!token.content.trim())
-                                        return (
-                                            <div
-                                                key={i}
-                                                className={`${className} relative
-                                            ${highlightLineNumbers.includes(i) ? 'bg-yellow/10' : ''}
-                                            ${diffAddLineNumbers.includes(i) ? 'bg-green/10' : ''}
-                                            ${diffRemoveLineNumbers.includes(i) ? 'bg-red/10' : ''}
-                                            `}
-                                                {...props}
-                                            >
-                                                {line
-                                                    .filter((token) => !token.content.startsWith(tooltipKey))
-                                                    .map((token, key) => {
-                                                        const { className, children, ...props } = getTokenProps({
-                                                            token,
-                                                            key,
-                                                        })
-                                                        return (
-                                                            <span className="relative" key={key}>
-                                                                {firstContentIndex === key && tooltipContent && (
-                                                                    <Tooltip
-                                                                        content={() => (
-                                                                            <div className="text-center max-w-[200px]">
-                                                                                {tooltipContent.trim()}
-                                                                            </div>
-                                                                        )}
-                                                                    >
-                                                                        <span className="absolute -left-1 -translate-x-full top-1/2 -translate-y-1/2 flex h-3 w-3">
-                                                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue/80 opacity-75"></span>
-                                                                            <span className="relative inline-flex rounded-full h-3 w-3 bg-blue"></span>
+                                                    const firstContentIndex = line.findIndex(
+                                                        (token) => !!token.content.trim()
+                                                    )
+                                                    return (
+                                                        <div
+                                                            key={i}
+                                                            className={`${className} relative
+                                                        ${highlightLineNumbers.includes(i) ? 'bg-yellow/10' : ''}
+                                                        ${diffAddLineNumbers.includes(i) ? 'bg-green/10' : ''}
+                                                        ${diffRemoveLineNumbers.includes(i) ? 'bg-red/10' : ''}
+                                                        `}
+                                                            {...props}
+                                                        >
+                                                            {line
+                                                                .filter(
+                                                                    (token) => !token.content.startsWith(tooltipKey)
+                                                                )
+                                                                .map((token, key) => {
+                                                                    const { className, children, ...props } =
+                                                                        getTokenProps({
+                                                                            token,
+                                                                            key,
+                                                                        })
+                                                                    return (
+                                                                        <span className="relative" key={key}>
+                                                                            {firstContentIndex === key &&
+                                                                                tooltipContent && (
+                                                                                    <Tooltip
+                                                                                        content={() => (
+                                                                                            <div className="text-center max-w-[200px]">
+                                                                                                {tooltipContent.trim()}
+                                                                                            </div>
+                                                                                        )}
+                                                                                    >
+                                                                                        <span className="absolute -left-1 -translate-x-full top-1/2 -translate-y-1/2 flex h-3 w-3">
+                                                                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue/80 opacity-75"></span>
+                                                                                            <span className="relative inline-flex rounded-full h-3 w-3 bg-blue"></span>
+                                                                                        </span>
+                                                                                    </Tooltip>
+                                                                                )}
+                                                                            <span
+                                                                                className={`${className} text-shadow-none `}
+                                                                                {...props}
+                                                                            >
+                                                                                {children}
+                                                                            </span>
                                                                         </span>
-                                                                    </Tooltip>
-                                                                )}
-                                                                <span
-                                                                    className={`${className} text-shadow-none `}
-                                                                    {...props}
-                                                                >
-                                                                    {children}
-                                                                </span>
-                                                            </span>
-                                                        )
-                                                    })}
-                                            </div>
-                                        )
-                                    })}
-                                    {!expanded &&
-                                        linesToShow.length > 0 &&
-                                        linesToShow[linesToShow.length - 1] <= tokens.length - 1 && (
-                                            <div className="flex border-t border-dashed border-primary w-full mt-2 -mb-2">
-                                                <button
-                                                    onClick={() => setExpanded(!expanded)}
-                                                    className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
-                                                >
-                                                    Show full example
-                                                </button>
-                                            </div>
-                                        )}
-                                </code>
-                            </div>
-                        </ScrollArea>
-                    </pre>
-                )}
-            </Highlight>
+                                                                    )
+                                                                })}
+                                                        </div>
+                                                    )
+                                                })}
+                                                {!expanded &&
+                                                    linesToShow.length > 0 &&
+                                                    linesToShow[linesToShow.length - 1] <= tokens.length - 1 && (
+                                                        <div className="flex border-t border-dashed border-primary w-full mt-2 -mb-2">
+                                                            <button
+                                                                onClick={() =>
+                                                                    setExpanded(languageOption.language, !expanded)
+                                                                }
+                                                                className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                                            >
+                                                                Show full example
+                                                            </button>
+                                                        </div>
+                                                    )}
+                                            </code>
+                                        </div>
+                                    </ScrollArea>
+                                </pre>
+                            )}
+                        </Highlight>
+                    </div>
+                )
+            })}
         </div>
     )
 }
