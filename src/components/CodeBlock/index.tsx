@@ -378,71 +378,80 @@ export const CodeBlock = ({
                             </div>
                         ) : null}
 
-                        {currentLanguage.runInPostHog !== 'false' && currentLanguage.language === 'sql' && (
-                            <div className="relative flex items-center justify-center px-1">
-                                <a
-                                    href={`${generateSQLEditorLink(currentLanguage.code)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1 whitespace-nowrap text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
-                                >
-                                    Run in PostHog
-                                    <IconArrowUpRight className="w-4 h-4" />
-                                </a>
-                            </div>
-                        )}
+                        {(() => {
+                            const activeLanguage = languages[selectedIndex] || currentLanguage
+                            return (
+                                <>
+                                    {activeLanguage.runInPostHog !== 'false' && activeLanguage.language === 'sql' && (
+                                        <div className="relative flex items-center justify-center px-1">
+                                            <a
+                                                href={`${generateSQLEditorLink(activeLanguage.code)}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-1 whitespace-nowrap text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                            >
+                                                Run in PostHog
+                                                <IconArrowUpRight className="w-4 h-4" />
+                                            </a>
+                                        </div>
+                                    )}
 
-                        {showAskAI && (
-                            <div className="relative flex items-center justify-center px-1 group/askai">
-                                <button
-                                    onClick={() => handleAskAboutCode(currentLanguage.code, currentLanguage.language)}
-                                    className="ask-posthog-ai-code-snippet inline-flex items-center gap-1 text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
-                                >
-                                    <span className="hidden group-hover/askai:inline whitespace-nowrap text-sm">
-                                        PostHog AI
-                                    </span>
-                                    <IconSparkles className="w-4 h-4" />
-                                </button>
-                            </div>
-                        )}
+                                    {showAskAI && (
+                                        <div className="relative flex items-center justify-center px-1 group/askai">
+                                            <button
+                                                onClick={() =>
+                                                    handleAskAboutCode(activeLanguage.code, activeLanguage.language)
+                                                }
+                                                className="ask-posthog-ai-code-snippet inline-flex items-center gap-1 text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                            >
+                                                <span className="hidden group-hover/askai:inline whitespace-nowrap text-sm">
+                                                    PostHog AI
+                                                </span>
+                                                <IconSparkles className="w-4 h-4" />
+                                            </button>
+                                        </div>
+                                    )}
 
-                        {showCopy && (
-                            <div className="relative flex items-center justify-center px-1">
-                                <button
-                                    onClick={() => copyToClipboard(currentLanguage.code)}
-                                    className="text-muted hover:text-secondary px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
-                                    title="Copy to clipboard"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 18 18"
-                                        className="w-4 h-4 fill-current"
-                                    >
-                                        <g clipPath="url(#a)">
-                                            <path d="M3.079 5.843h2.103V2.419c0-.58.236-1.106.618-1.487A2.1 2.1 0 0 1 7.287.313h7.634c.58 0 1.106.237 1.487.619a2.1 2.1 0 0 1 .618 1.487v7.633a2.1 2.1 0 0 1-.618 1.488 2.1 2.1 0 0 1-1.487.618h-2.103v3.424c0 .58-.236 1.106-.618 1.487a2.1 2.1 0 0 1-1.487.618H3.079c-.58 0-1.106-.236-1.487-.618a2.1 2.1 0 0 1-.618-1.487V7.948c0-.58.236-1.106.618-1.487a2.1 2.1 0 0 1 1.487-.618Zm3.28 0h4.354c.58 0 1.106.236 1.487.618a2.1 2.1 0 0 1 .618 1.487v3.033h2.103a.925.925 0 0 0 .655-.273.926.926 0 0 0 .274-.655V2.418a.925.925 0 0 0-.274-.656.926.926 0 0 0-.655-.273H7.287a.924.924 0 0 0-.655.273.926.926 0 0 0-.273.656v3.424Zm-.586 1.176H3.077a.924.924 0 0 0-.655.274.926.926 0 0 0-.273.655v7.634c0 .254.104.487.273.655.169.169.401.274.655.274h7.634a.924.924 0 0 0 .656-.274.926.926 0 0 0 .273-.655V7.948a.925.925 0 0 0-.273-.655.926.926 0 0 0-.656-.274h-4.94.002Z" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="a">
-                                                <path d="M0 0h18v18H0z" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </button>
+                                    {showCopy && (
+                                        <div className="relative flex items-center justify-center px-1">
+                                            <button
+                                                onClick={() => copyToClipboard(activeLanguage.code)}
+                                                className="text-muted hover:text-secondary px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                                title="Copy to clipboard"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 18 18"
+                                                    className="w-4 h-4 fill-current"
+                                                >
+                                                    <g clipPath="url(#a)">
+                                                        <path d="M3.079 5.843h2.103V2.419c0-.58.236-1.106.618-1.487A2.1 2.1 0 0 1 7.287.313h7.634c.58 0 1.106.237 1.487.619a2.1 2.1 0 0 1 .618 1.487v7.633a2.1 2.1 0 0 1-.618 1.488 2.1 2.1 0 0 1-1.487.618h-2.103v3.424c0 .58-.236 1.106-.618 1.487a2.1 2.1 0 0 1-1.487.618H3.079c-.58 0-1.106-.236-1.487-.618a2.1 2.1 0 0 1-.618-1.487V7.948c0-.58.236-1.106.618-1.487a2.1 2.1 0 0 1 1.487-.618Zm3.28 0h4.354c.58 0 1.106.236 1.487.618a2.1 2.1 0 0 1 .618 1.487v3.033h2.103a.925.925 0 0 0 .655-.273.926.926 0 0 0 .274-.655V2.418a.925.925 0 0 0-.274-.656.926.926 0 0 0-.655-.273H7.287a.924.924 0 0 0-.655.273.926.926 0 0 0-.273.656v3.424Zm-.586 1.176H3.077a.924.924 0 0 0-.655.274.926.926 0 0 0-.273.655v7.634c0 .254.104.487.273.655.169.169.401.274.655.274h7.634a.924.924 0 0 0 .656-.274.926.926 0 0 0 .273-.655V7.948a.925.925 0 0 0-.273-.655.926.926 0 0 0-.656-.274h-4.94.002Z" />
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="a">
+                                                            <path d="M0 0h18v18H0z" />
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                            </button>
 
-                                {tooltipVisible && (
-                                    <AnimatePresence>
-                                        <motion.div
-                                            className="absolute top-full mt-2 -right-2 bg-black text-white font-semibold px-2 py-1 rounded z-10"
-                                            initial={{ translateY: '-50%', opacity: 0 }}
-                                            animate={{ translateY: 0, opacity: 1 }}
-                                            exit={{ opacity: 0 }}
-                                        >
-                                            Copied!
-                                        </motion.div>
-                                    </AnimatePresence>
-                                )}
-                            </div>
-                        )}
+                                            {tooltipVisible && (
+                                                <AnimatePresence>
+                                                    <motion.div
+                                                        className="absolute top-full mt-2 -right-2 bg-black text-white font-semibold px-2 py-1 rounded z-10"
+                                                        initial={{ translateY: '-50%', opacity: 0 }}
+                                                        animate={{ translateY: 0, opacity: 1 }}
+                                                        exit={{ opacity: 0 }}
+                                                    >
+                                                        Copied!
+                                                    </motion.div>
+                                                </AnimatePresence>
+                                            )}
+                                        </div>
+                                    )}
+                                </>
+                            )
+                        })()}
                     </div>
                 </div>
             )}
