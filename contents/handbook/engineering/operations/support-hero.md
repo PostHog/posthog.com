@@ -264,7 +264,7 @@ It's fine to politely direct users to the docs for [self-serve open-source suppo
 
 ## How should I handle organization ownership transfers?
 
-In case a user requests for organization permissions to be altered (e.g. the only member with owner memebership left the company) follow these steps:
+In case a user requests for organization permissions to be altered (e.g. the only member with owner membership left the company) follow these steps:
 
 1. Ask them to get the current owner to log in and update ownership.
 2. If the owner left and they can get access to the current owner’s email, ask them do a password reset and then login as the owner and perform the action themselves.
