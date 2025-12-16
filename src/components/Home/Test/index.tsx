@@ -365,8 +365,15 @@ const Toolkits = () => {
     ]
 
     return (
-        <div className="mt-4">
-            <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" width="full" />
+        <div className="mt-4 -mx-4 @md/reader-content-container:-mx-6 @lg/reader-content-container:-mx-8">
+            <OSTable
+                columns={columns}
+                rows={rows}
+                size="sm"
+                rowAlignment="top"
+                width="full"
+                className=" px-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8"
+            />
         </div>
     )
 }
