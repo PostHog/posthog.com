@@ -23,6 +23,7 @@ import TeamMember from 'components/TeamMember'
 import WistiaCustomPlayer from 'components/WistiaCustomPlayer'
 import DuckDBWaitlistSurvey from 'components/DuckDBWaitlistSurvey'
 import { CallToAction } from 'components/CallToAction'
+import { ProductScreenshot } from 'components/ProductScreenshot'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -211,7 +212,7 @@ export default function CDP(): JSX.Element {
                     warehousing experience available.
                 </p>
                 <p>
-                    <span className="font-bold">Bring your own tools</span> like DBT and Hex to customize your
+                    <span className="font-bold">Bring your own tools</span> like dbt and Hex to customize your
                     experience, or <span className="font-bold">use our built-in tooling</span> to get started quickly.
                     Anything that connects to Postgres can connect to your PostHog DuckDB warehouse using our{' '}
                     <Link to="https://github.com/posthog/duckgres" external>
@@ -246,7 +247,16 @@ export default function CDP(): JSX.Element {
                     modeling, and more so you can get started quickly.
                 </p>
 
+                <ProductScreenshot
+                    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Post_Hog_duckdb_stack_610acbe532.png"
+                    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Post_Hog_duckdb_stack_610acbe532.png"
+                    alt="Use our data stack tools or bring your own"
+                    classes="rounded"
+                    zoom={true}
+                />
+
                 <h3>Data stack products</h3>
+                <p>This is what we offer built-in - but feel free to bring your own tools if that's what you need.</p>
 
                 <ul className="list-none pl-0">
                     {dataStackProducts.map((product) => {
