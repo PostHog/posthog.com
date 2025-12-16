@@ -241,139 +241,92 @@ const HomeHitCounter = () => {
 }
 
 const Toolkits = () => {
+    const toolkits = [
+        {
+            category: 'Data stack',
+            productTypes: ['cdp', 'data_in', 'visualize', 'data_out'],
+        },
+        {
+            category: 'Analytics & data viz',
+            productTypes: [
+                'web_analytics',
+                'product_analytics',
+                'trends',
+                'funnels',
+                'user_paths',
+                'correlation_analysis',
+                'retention',
+                'stickiness',
+                'lifecycle',
+                'sql',
+                'bi',
+                'dashboards',
+            ],
+        },
+        {
+            category: 'Product development',
+            productTypes: [
+                'posthog_ai',
+                'session_replay',
+                'feature_flags',
+                'experiments',
+                'error_tracking',
+                'llm_analytics',
+                'revenue_analytics',
+            ],
+        },
+        {
+            category: 'Customer communication & automation',
+            productTypes: ['posthog_ai', 'surveys', 'user_interviews', 'messaging', 'workflows', 'webhooks'],
+        },
+    ]
+
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
         { name: 'Category', width: 'minmax(150px,300px)', align: 'left' as const },
         { name: 'Tools', width: 'minmax(auto,1fr)', align: 'left' as const },
     ]
 
-    const rows = [
-        {
-            cells: [
-                { content: 1 },
-                {
-                    content: (
-                        <div className="flex flex-col gap-1">
-                            <span>Data stack</span>
-                        </div>
-                    ),
-                    className: 'font-bold',
-                },
-                {
-                    content: <ProductButtons productTypes={['cdp', 'data_in', 'visualize', 'data_out']} />,
-                    className: 'text-sm flex-wrap gap-px',
-                },
-            ],
-        },
-        {
-            cells: [
-                { content: 2 },
-                {
-                    content: (
-                        <div className="flex flex-col gap-1">
-                            <span>Analytics & data viz</span>
-                        </div>
-                    ),
-                    className: 'font-bold',
-                },
-                {
-                    content: (
-                        <>
-                            <ProductButtons
-                                productTypes={[
-                                    'web_analytics',
-                                    'product_analytics',
-                                    'trends',
-                                    'funnels',
-                                    'user_paths',
-                                    'correlation_analysis',
-                                    'retention',
-                                    'stickiness',
-                                    'lifecycle',
-                                    'sql',
-                                    'bi',
-                                    'dashboards',
-                                ]}
-                            />
-                        </>
-                    ),
-                    className: 'text-sm',
-                },
-            ],
-        },
-        {
-            cells: [
-                { content: 3 },
-                {
-                    content: (
-                        <div className="flex flex-col gap-1">
-                            <span>Product development</span>
-                        </div>
-                    ),
-                    className: 'font-bold',
-                },
-                {
-                    content: (
-                        <>
-                            <ProductButtons
-                                productTypes={[
-                                    'posthog_ai',
-                                    'session_replay',
-                                    'feature_flags',
-                                    'experiments',
-                                    'error_tracking',
-                                    'llm_analytics',
-                                    'revenue_analytics',
-                                ]}
-                            />
-                        </>
-                    ),
-                    className: 'text-sm',
-                },
-            ],
-        },
-        {
-            cells: [
-                { content: 4 },
-                {
-                    content: (
-                        <div className="flex flex-col gap-1">
-                            <span>Customer communication & automation</span>
-                        </div>
-                    ),
-                    className: 'font-bold',
-                },
-                {
-                    content: (
-                        <>
-                            <ProductButtons
-                                productTypes={[
-                                    'posthog_ai',
-                                    'surveys',
-                                    'user_interviews',
-                                    'messaging',
-                                    'workflows',
-                                    'webhooks',
-                                ]}
-                            />{' '}
-                        </>
-                    ),
-                    className: 'text-sm',
-                },
-            ],
-        },
-    ]
+    const rows = toolkits.map((toolkit, index) => ({
+        cells: [
+            { content: index + 1 },
+            {
+                content: (
+                    <div className="flex flex-col gap-1">
+                        <span>{toolkit.category}</span>
+                    </div>
+                ),
+                className: 'font-bold',
+            },
+            {
+                content: <ProductButtons productTypes={toolkit.productTypes} />,
+                className: 'text-sm',
+            },
+        ],
+    }))
 
     return (
-        <div className="mt-4 -mx-4 @md/reader-content-container:-mx-6 @lg/reader-content-container:-mx-8">
-            <OSTable
-                columns={columns}
-                rows={rows}
-                size="sm"
-                rowAlignment="top"
-                width="full"
-                className=" px-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8"
-            />
+        <div>
+            {/* Small container: Stacked card layout */}
+            <div className="flex flex-col gap-4 @2xl:hidden">
+                {toolkits.map((toolkit, index) => (
+                    <div key={index} className="border border-primary">
+                        <div className="bg-input px-3 py-2 border-b border-primary">
+                            <span className="font-bold text-sm">
+                                {index + 1}. {toolkit.category}
+                            </span>
+                        </div>
+                        <div className="px-3 py-2">
+                            <ProductButtons productTypes={toolkit.productTypes} />
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* Larger container: Table layout */}
+            <div className="hidden @2xl:block">
+                <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" width="full" />
+            </div>
         </div>
     )
 }
@@ -669,28 +622,57 @@ const Customers = () => {
         },
     ]
 
+    const shuffleButton = (
+        <div className="mb-2">
+            <OSButton
+                onClick={toggleBreakdown}
+                variant="secondary"
+                size="sm"
+                className="font-semibold [&_span]:min-w-[146px]"
+                disabled={isAnimating}
+            >
+                {isAnimating ? (
+                    'Shuffling...'
+                ) : (
+                    <>
+                        <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
+                    </>
+                )}
+            </OSButton>
+        </div>
+    )
+
     return (
         <>
-            <div className="relative @xl:pt-1 pb-2 @xl:pb-0">
-                <div className="mb-2">
-                    <OSButton
-                        onClick={toggleBreakdown}
-                        variant="secondary"
-                        size="sm"
-                        className="font-semibold [&_span]:min-w-[146px]"
-                        disabled={isAnimating}
-                    >
-                        {isAnimating ? (
-                            'Shuffling...'
-                        ) : (
-                            <>
-                                <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
-                            </>
-                        )}
-                    </OSButton>
+            {/* Small container: Stacked card layout */}
+            <div className="@2xl:hidden">
+                <div className="relative pt-1 pb-2">{shuffleButton}</div>
+                <div className="flex flex-col gap-4">
+                    <div className="border border-primary">
+                        <div className="bg-input px-3 py-2 border-b border-primary">
+                            <span className="font-bold text-sm">{currentLabels.col1}</span>
+                        </div>
+                        <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center items-center p-4">
+                            {column1.map(renderCustomerWithLink)}
+                        </div>
+                    </div>
+                    <div className="border border-primary">
+                        <div className="bg-input px-3 py-2 border-b border-primary">
+                            <span className="font-bold text-sm">{currentLabels.col2}</span>
+                        </div>
+                        <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center items-center p-4">
+                            {column2.map(renderCustomerWithLink)}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
+
+            {/* Larger container: Table layout */}
+            <div className="hidden @2xl:block">
+                <div className="relative @xl:pt-1 pb-2 @xl:pb-0">{shuffleButton}</div>
+                <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
+            </div>
+
             <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
                 Open customers.mdx
             </OSButton>
