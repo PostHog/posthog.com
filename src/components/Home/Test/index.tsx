@@ -39,6 +39,44 @@ import {
     DigitDash,
 } from 'components/OSIcons'
 import TVScreen from './TV'
+import { IconArrowUpRight } from '@posthog/icons'
+
+interface ProductButtonsProps {
+    productTypes: string[]
+    className?: string
+    beta?: boolean
+}
+
+const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className = '', beta = false }) => {
+    const allProducts = useProduct()
+
+    // Helper to get product by handle
+    const getProduct = (handle: string) =>
+        Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === handle) : undefined
+
+    return (
+        <span className={`flex flex-wrap gap-1 pt-1 ${className}`}>
+            {productTypes.map((type, index) => {
+                const product = getProduct(type)
+                return product ? (
+                    <OSButton
+                        key={type}
+                        icon={product.Icon ? <product.Icon /> : undefined}
+                        iconClassName={`text-${product.color}`}
+                        color={product.color}
+                        className="font-medium text-primary hover:text-primary"
+                        to={`/${product.slug}`}
+                        state={{ newWindow: true }}
+                        asLink
+                    >
+                        {product.name}
+                        {beta && <span className="text-xs opacity-50">beta</span>}
+                    </OSButton>
+                ) : null
+            })}
+        </span>
+    )
+}
 
 // Prompts with video IDs, grouped by slide (quotes added during render)
 const PROMPTS = [
@@ -198,6 +236,94 @@ const HomeHitCounter = () => {
             >
                 Total hit count to posthog.com
             </Tooltip>
+        </div>
+    )
+}
+
+const Toolkits = () => {
+    const columns = [
+        { name: '', width: 'auto', align: 'center' as const },
+        { name: 'goal', width: 'minmax(150px,250px)', align: 'left' as const },
+        { name: 'products', width: 'minmax(auto,1fr)', align: 'left' as const },
+    ]
+
+    const rows = [
+        {
+            cells: [
+                { content: 1 },
+                {
+                    content: (
+                        <div className="flex flex-col gap-1">
+                            <span>product development</span>
+                        </div>
+                    ),
+                    className: 'font-bold',
+                },
+                {
+                    content: (
+                        <ProductButtons
+                            productTypes={[
+                                'web_analytics',
+                                'product_analytics',
+                                'session_replay',
+                                'feature_flags',
+                                'experiments',
+                                'error_tracking',
+                            ]}
+                        />
+                    ),
+                    className: 'text-sm flex-wrap gap-px',
+                },
+            ],
+        },
+        {
+            cells: [
+                { content: 2 },
+                {
+                    content: (
+                        <div className="flex flex-col gap-1">
+                            <span>customer engagement</span>
+                        </div>
+                    ),
+                    className: 'font-bold',
+                },
+                {
+                    content: (
+                        <>
+                            <ProductButtons productTypes={['surveys', 'user_interviews', 'broadcasts', 'support']} />{' '}
+                            Support
+                        </>
+                    ),
+                    className: 'text-sm',
+                },
+            ],
+        },
+        {
+            cells: [
+                { content: 3 },
+                {
+                    content: (
+                        <div className="flex flex-col gap-1">
+                            <span>sales</span>
+                        </div>
+                    ),
+                    className: 'font-bold',
+                },
+                {
+                    content: (
+                        <>
+                            CRM, Cross-sell/expansion <ProductButtons productTypes={['CRM', 'cross-sell/expansion']} />
+                        </>
+                    ),
+                    className: 'text-sm',
+                },
+            ],
+        },
+    ]
+
+    return (
+        <div className="mt-4">
+            <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
         </div>
     )
 }
@@ -541,6 +667,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <CTAs />,
+    },
+    {
+        name: 'Toolkits',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Toolkits />,
     },
     {
         name: 'HomeHitCounter',
