@@ -19,39 +19,34 @@ type BIFeature = {
 
 const biFeatures: BIFeature[] = [
     {
-        title: 'Table',
-        description: 'The view that real engineers prefer.',
-        status: 'available',
+        title: 'Basic visualizations',
+        description: 'Table, big number, line chart, bar chart, stacked bar chart, area chart.',
     },
     {
-        title: 'Big number',
-        description: 'Some numbers should be big.',
-        status: 'available',
-    },
-    {
-        title: 'Line chart',
-        description: 'You know what it does.',
-        status: 'available',
-    },
-    {
-        title: 'Bar chart',
-        description: 'You can have multiple series, too.',
-        status: 'available',
-    },
-    {
-        title: 'Stacked bar chart',
-        description: 'Pretty sweet for comparing parts of a whole over time.',
-        status: 'available',
-    },
-    {
-        title: 'Area chart',
-        description: 'Fill in the area under the line.',
-        status: 'available',
-    },
-    {
-        title: 'Pivot table',
-        description: 'Summarize and aggregate data across multiple dimensions for deeper insights.',
+        title: 'Advanced visualizations',
+        description: 'Pivot table, pie chart, scatter plot, heatmap, world maps, and more.',
         status: 'coming_soon',
+    },
+    {
+        title: 'No-code data exploration',
+        description: 'Easily explore and analyze your data without writing SQL queries.',
+        status: 'coming_soon',
+    },
+    {
+        title: 'Drag-and-drop dashboards',
+        description: 'Create and customize dashboards with a simple drag-and-drop interface.',
+    },
+    {
+        title: 'Dashboard filtering & variables',
+        description: 'Apply filters and variables to dashboards for ad-hoc data exploration.',
+    },
+    {
+        title: 'Product analytics insights',
+        description: 'Leverage built-in product analytics insights for quick access to key metrics.',
+    },
+    {
+        title: 'Text-to-SQL with PostHog AI',
+        description: 'Generate SQL queries from natural language prompts using PostHog AI.',
     },
 ]
 
