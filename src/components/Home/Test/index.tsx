@@ -686,9 +686,20 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
 export default function Home2() {
     const { siteSettings } = useApp()
     const videoRef = useRef<WistiaVideoRef>(null)
+    const tvScreenRef = useRef<HTMLDivElement>(null)
     const [activePromptIndex, setActivePromptIndex] = useState(0)
     const [copied, setCopied] = useState(false)
     const [isPlaying, setIsPlaying] = useState(true)
+
+    // Scroll TVScreen into view (for stacked layout on smaller windows)
+    const scrollToVideo = () => {
+        if (tvScreenRef.current) {
+            // Small delay to allow state to update first
+            setTimeout(() => {
+                tvScreenRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+            }, 100)
+        }
+    }
 
     const handleCopy = () => {
         navigator.clipboard.writeText('npx -y @posthog/wizard@latest')
@@ -747,6 +758,7 @@ export default function Home2() {
         const firstPromptIndex = PROMPTS.findIndex((p) => p.slide === value)
         if (firstPromptIndex !== -1) {
             setActivePromptIndex(firstPromptIndex)
+            scrollToVideo()
         }
     }
 
@@ -758,6 +770,7 @@ export default function Home2() {
         } else {
             setActivePromptIndex(index)
         }
+        scrollToVideo()
     }
 
     // Build prompts with global index
@@ -827,14 +840,16 @@ export default function Home2() {
                         >
                             Get started - free
                         </CallToAction>
-                        <CallToAction
-                            type="secondary"
-                            size="md"
-                            to="/docs/getting-started/install?tab=wizard"
-                            state={{ newWindow: true }}
-                        >
-                            Install with AI
-                        </CallToAction>
+                        <div className="hidden @3xl:block">
+                            <CallToAction
+                                type="secondary"
+                                size="md"
+                                to="/docs/getting-started/install?tab=wizard"
+                                state={{ newWindow: true }}
+                            >
+                                Install with AI
+                            </CallToAction>
+                        </div>
                     </div>
                 }
                 rightNavigation={
@@ -890,7 +905,7 @@ export default function Home2() {
                                     talk to a human
                                 </Link>
                             </div>
-                            <div className="flex flex-col items-center">
+                            <div ref={tvScreenRef} className="flex flex-col items-center">
                                 <TVScreen
                                     className="relative w-full @3xl:w-[400px] @4xl:w-[500px]"
                                     title={currentPrompt.text}
