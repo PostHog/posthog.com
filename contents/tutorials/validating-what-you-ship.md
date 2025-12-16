@@ -1,16 +1,14 @@
 ---
-title: Validating what you ship
+title: "Validating what you ship: Did anyone use it? Did it work?"
 date: 2025-12-15
 author:
-  - ceyniustranberg
+  - christophe-eynius-tranberg
 showTitle: true
 sidebar: Docs
 tags:
   - experimentation
   - feature flags
 ---
-
-# Validating what you ship: Did anyone use it? Did it work?
 
 You shipped. People clapped in Slack. Now what?
 
@@ -22,9 +20,9 @@ A feature can ship successfully and still fail completely. Without measurement, 
 
 Without pre-defined success criteria, you end up in one of two traps:
 
-**The moving goalpost**: You look at the data post-launch and adjust your definition of success to match what happened. "Well, we didn't hit 20% adoption, but 8% is pretty good for a v1."
+1. **The moving goalpost**: You look at the data post-launch and adjust your definition of success to match what happened. "Well, we didn't hit 20% adoption, but 8% is pretty good for a v1."
 
-**The infinite iteration loop**: You keep tweaking because you're not sure if it's working. Six months later, you're still on "v1.4" of something that should have been killed or promoted months ago.
+2. **The infinite iteration loop**: You keep tweaking because you're not sure if it's working. Six months later, you're still on "v1.4" of something that should have been killed or promoted months ago.
 
 The fix is simple but requires discipline: write down what success looks like before you ship, then hold yourself to it.
 
@@ -100,7 +98,7 @@ Rollout: 20% of all users
 
 ### Step 4: Build your dashboard before you ship
 
-Create a new dashboard called "New Onboarding Flow Launch - [Date]".
+Create a new dashboard called "New Onboarding Flow Launch - {Date}".
 
 **Onboarding funnel** (Funnel insight)
 - Step 1: `onboarding_started`
