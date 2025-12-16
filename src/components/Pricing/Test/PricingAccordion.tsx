@@ -68,6 +68,7 @@ const AccordionItem = ({
     type,
     includeAddonRates,
     categoryName,
+    productVariantName,
 }) => {
     const contentRef = useRef(null)
     const displayName = categoryName || name
@@ -168,7 +169,7 @@ const AccordionItem = ({
                             <div className="space-y-6">
                                 {/* Main product pricing */}
                                 <div>
-                                    <h5 className="text-sm font-semibold mb-3">{name}</h5>
+                                    <h5 className="text-sm font-semibold mb-3">{productVariantName || name}</h5>
                                     <PricingTiers plans={billingData?.plans} type={type} unit={unit} />
                                 </div>
                                 {/* Addon products pricing */}
