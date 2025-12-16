@@ -39,7 +39,7 @@ Before the quarter starts, review each account and remove those that meet any of
 - **Churned or dropped below $20k ARR** – unless you have a documented, specific plan to get them above $20k this quarter
 - **On YC Plan** – accounts $20k-$50k on the YC plan will go to the YC role on the CS team. Accounts above $50k should be a candidate for TAM referral if there is growth opportunity.
 - **Fully expanded and committed** – if the account has all 3 core products adopted (Session Replay, Feature Flags, Error Tracking), has a discount agreement in place, and has no viable levers for net new revenue, they should go to a CSM
-- **No viable expansion levers** – if there's genuinely no path to growth, it shouldn't be consuming TAM bandwidth
+- **No viable expansion levers** – if there's genuinely no path to growth, it shouldn't be consuming TAM bandwidth.  You need to document what you've tried here so that we know all avenues for growth have been exhausted.
 
 ### What is NOT a valid reason to hand off
 
