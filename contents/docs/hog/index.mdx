@@ -380,7 +380,7 @@ The HogVM had a few design constraints:
 
 Effectively, we wanted to run SQL (AKA HogQL) synchronously within a NodeJS process, at scale. So that's what we built, twice.
 
-We now have two identical HogVMs: one in [Python](https://github.com/PostHog/posthog/blob/master/hogvm/python/execute.py) (to run alongside queries, unreleased), and one in [TypeScript](https://github.com/PostHog/posthog/blob/master/hogvm/typescript/src/execute.ts) (to run in the pipeline, and in the browser). We might even build a third version in Rust soon. The surface area for the VM is really that small.
+We now have two identical HogVMs: one in [Python](https://github.com/PostHog/posthog/blob/master/common/hogvm/python/execute.py) (to run alongside queries, unreleased), and one in [TypeScript](https://github.com/PostHog/posthog/blob/master/common/hogvm/typescript/src/execute.ts) (to run in the pipeline, and in the browser). We might even build a third version in Rust soon. The surface area for the VM is really that small.
 
 ### Async HogVM
 
@@ -404,7 +404,7 @@ These are the early days for Hog and the HogVM. We will be evolving the language
 
 ## Running Hog locally
 
-To run Hog, first, you need to [clone and set up PostHog locally](/handbook/engineering/developing-locally). The repo has VMs to run the source code and complied bytecode as well as example files. The [default VM](https://github.com/PostHog/posthog/blob/master/hogvm/python) relies on PostHog's Python dependencies, but we also have a [Typescript VM](https://github.com/PostHog/posthog/blob/master/hogvm/typescript) that relies on those dependencies.
+To run Hog, first, you need to [clone and set up PostHog locally](/handbook/engineering/developing-locally). The repo has VMs to run the source code and complied bytecode as well as example files. The [default VM](https://github.com/PostHog/posthog/blob/master/common/hogvm/python) relies on PostHog's Python dependencies, but we also have a [Typescript VM](https://github.com/PostHog/posthog/blob/master/common/hogvm/typescript) that relies on those dependencies.
 
 Once you have PostHog set up, go into the repo and run `bin/hog` with a `.hog` file.
 
