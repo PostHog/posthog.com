@@ -2610,6 +2610,10 @@ export const docsMenu = {
                                     url: '/docs/sql/aggregations',
                                 },
                                 {
+                                    name: 'Optimizing SQL queries',
+                                    url: '/docs/sql/optimizing-queries',
+                                },
+                                {
                                     name: 'Tutorials',
                                     url: '/docs/sql/tutorials',
                                 },
