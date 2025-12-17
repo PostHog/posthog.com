@@ -3219,6 +3219,16 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/web-analytics/marketing-analytics',
+                        },
+                        {
+                            name: 'Column definitions',
+                            url: '/docs/web-analytics/marketing-analytics-schema',
+                        },
+                    ],
                 },
                 {
                     name: 'FAQ',
