@@ -7,18 +7,27 @@
 * Create weekly digest (warnings, resolved, recommendations, priorities...)
 * Stretch: correlate with event traffic to understand the context of a “spike”
 
+#### **Engagement** - Search & Speed (Driver: <TeamMember name="Aleksander Błaszkiewicz" />)
+* Move issues to CH to avoid dual DB query
+* Stretch: Improve loading speed on search results
+
 #### **Grouping** - Fingerprint & Sourcemaps (Driver: <TeamMember name="Hugues Pouillot" />)
-* Iterate on fingerprint algorithm using labelling tool
+* Iterate on fingerprint algorithm and compare with existing approach using rand index
 * Stretch: Add bundler plugins to make sourcemap uploads easier
 * Stretch: Explore embedding based grouping
 
 #### **Collection** - Cymbal refactoring & Mobile support (Driver: <TeamMember name="Hugues Pouillot" />)
 * Expose frame resolution and issue processing as endpoints
-* Make CLI compatible with stable chunk ids
-* Stretch: Add debug symbol upload command to CLI
-* Stretch: Support debug symbols with cymbal
+* Coordinate with Ingestion team to move cymbal processing into plugin server
+* Make CLI compatible with stable chunk ids to:
+    * be compatible with debug id specification and reuse current tooling.
+    * avoid rebuilding application
+    * speed up ingestion by reducing symbol set downloads
+    * reduce symbol set uploads
+* Add debug symbol upload command to CLI
+* Support debug symbols with cymbal
 
 #### **Monitoring** - Acquisition & KPIs (Driver: <TeamMember name="Cory Slater" />)
-* Define KPIs for tracking collection, grouping, alerting
+* Define KPIs for tracking collection, grouping, alerting, engagement
 * Deep dive into acquisition metrics
 * Case study around successful migration
