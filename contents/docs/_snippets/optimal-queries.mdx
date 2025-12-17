@@ -299,3 +299,7 @@ This approach is more efficient because:
 - **Scalable**: Performance doesn't degrade as you paginate through millions of rows
 
 **For geeks:** OFFSET-based pagination gets progressively slower because the database must scan and skip all the offset rows for each query. With timestamp-based pagination, the database uses the timestamp index to directly jump to the right starting point, maintaining consistent performance across all pages.
+
+### 6. Other SQL optimizations
+
+Options 1-5 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/product-analytics/sql) for commands, useful functions, and more to help you with this.
