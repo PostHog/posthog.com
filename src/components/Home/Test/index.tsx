@@ -277,7 +277,7 @@ const Toolkits = () => {
         },
         {
             category: 'Customer communication & automation',
-            productTypes: ['posthog_ai', 'surveys', 'user_interviews', 'messaging', 'workflows', 'webhooks'],
+            productTypes: ['posthog_ai', 'surveys', 'messaging', 'workflows', 'webhooks'],
         },
     ]
 
