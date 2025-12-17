@@ -269,7 +269,7 @@ In case a user requests for organization permissions to be altered (e.g. the onl
 1. Ask them to get the current owner to log in and update ownership.
 2. If the owner left and they can get access to the current owner’s email, ask them do a password reset and then login as the owner and perform the action themselves.
 3. If not, we should email the account owner’s email to see if we get a bounce back. Also check how long it is since they logged in.
-4. While checking the email, we should have the person requesting access verify their domain ownership by providing a TXT record example for posthog verification.
+4. If accessing the current owner's email is not an option, we should have the person requesting access verify their domain ownership by providing a TXT record example for posthog verification.
 5. Once verified, membership can be updated for the request. 
 6. Note, if they’re on a paid plan we might also need to switch the contact on Stripe via a separate request to billing @posthog.com
 
