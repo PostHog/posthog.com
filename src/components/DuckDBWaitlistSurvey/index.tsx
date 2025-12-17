@@ -64,7 +64,7 @@ export default function DuckDBWaitlistSurvey(): JSX.Element {
 
     if (!showForm) {
         return (
-            <OSButton onClick={() => setShowForm(true)} variant="primary" size="sm">
+            <OSButton onClick={() => setShowForm(true)} variant="primary" size="md">
                 Join the waitlist
             </OSButton>
         )

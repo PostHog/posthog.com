@@ -284,7 +284,7 @@ export default function CDP(): JSX.Element {
                                 <p className="text-sm text-secondary !my-0.5">{product.description}</p>
                                 {product.perfectFor && (
                                     <>
-                                        <p className="text-xs text-secondary ml-4 !my-0">
+                                        <p className="text-[13px] text-secondary !my-0">
                                             <span className="font-bold">
                                                 <IconArrowRight className="size-3 inline -mt-0.5" /> Perfect for:
                                             </span>{' '}
@@ -294,7 +294,7 @@ export default function CDP(): JSX.Element {
                                 )}
                                 {product.notReadyFor && (
                                     <>
-                                        <p className="text-xs text-secondary ml-4 !my-0">
+                                        <p className="text-[13px] text-secondary !my-0">
                                             <span className="font-bold">
                                                 <IconClock className="size-3 inline -mt-0.5" /> Not quite ready for:
                                             </span>{' '}

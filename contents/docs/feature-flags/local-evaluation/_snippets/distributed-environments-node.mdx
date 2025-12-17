@@ -1,0 +1,64 @@
+## Installation
+
+Import the interface from the SDK:
+
+```typescript
+import { FlagDefinitionCacheProvider, FlagDefinitionCacheData } from 'posthog-node/experimental'
+```
+
+## The interface
+
+To create a custom cache, implement the `FlagDefinitionCacheProvider` interface:
+
+```typescript
+interface FlagDefinitionCacheProvider {
+  // Retrieve cached flag definitions
+  getFlagDefinitions(): Promise<FlagDefinitionCacheData | undefined> | FlagDefinitionCacheData | undefined
+
+  // Determine if this instance should fetch new definitions
+  shouldFetchFlagDefinitions(): Promise<boolean> | boolean
+
+  // Store definitions after a successful fetch
+  onFlagDefinitionsReceived(data: FlagDefinitionCacheData): Promise<void> | void
+
+  // Clean up resources on shutdown
+  shutdown(): Promise<void> | void
+}
+```
+
+When the SDK fetches flag definitions from the API, it passes a `FlagDefinitionCacheData` object to `onFlagDefinitionsReceived()` for you to store:
+
+```typescript
+interface FlagDefinitionCacheData {
+  flags: PostHogFeatureFlag[]               // Feature flag definitions
+  groupTypeMapping: Record<string, string>  // Group type index to name mapping
+  cohorts: Record<string, PropertyGroup>    // Cohort definitions for local evaluation
+}
+```
+
+### Method details
+
+| Method | Purpose | Return value |
+| :----- | :------ | :----------- |
+| `getFlagDefinitions()` | Retrieve cached definitions. Called when the poller refreshes. | Cached data, or `undefined` if cache is empty |
+| `shouldFetchFlagDefinitions()` | Decide if this instance should fetch. Use for distributed coordination (e.g., locks). | `true` to fetch, `false` to skip |
+| `onFlagDefinitionsReceived(data)` | Store definitions after a successful API fetch. | void |
+| `shutdown()` | Release locks, close connections, clean up resources. | void |
+
+> **Note:** All methods may throw errors. The SDK catches and logs them gracefully, ensuring cache provider errors never break flag evaluation.
+
+## Using your cache provider
+
+Pass your cache provider when initializing PostHog:
+
+```typescript
+import { PostHog } from 'posthog-node'
+
+const cache = new YourCacheProvider()
+
+const posthog = new PostHog('<ph_project_api_key>', {
+  personalApiKey: '<ph_personal_api_key>',
+  enableLocalEvaluation: true,
+  flagDefinitionCacheProvider: cache,
+})
+```
