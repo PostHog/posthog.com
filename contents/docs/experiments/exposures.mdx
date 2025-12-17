@@ -44,6 +44,7 @@ The experiment view displays real-time exposure data to help you monitor partici
 />
 
 The exposures chart shows:
+
 | Metric | Description |
 |--------|-------------|
 | **Daily cumulative count** | Unique users exposed to each variant over time |
@@ -146,7 +147,7 @@ If you see a sample ratio mismatch warning, investigate before drawing conclusio
 
 2. **Review release conditions**: If you're using property-based release conditions, ensure those properties are available at evaluation time. Missing properties can cause users to fall out of the experiment unevenly. Consider using simple percentage-based rollout (e.g., 50/50) rather than complex conditions.
 
-3. **Check for ad-blockers or network issues**: These can prevent feature flag calls from reaching PostHog for certain users, skewing your distribution.
+3. **Check for ad-blockers or network issues**: These can prevent feature flag calls from reaching PostHog for certain users, skewing your distribution. Consider [setting up a reverse proxy](/docs/advanced/proxy) to route requests through your own domain, which bypasses ad blockers and typically increases event capture by 10-30%.
 
 4. **Look for performance differences between variants**: If one variant causes pages to load slower or crash more often, users may drop off before the exposure event fires.
 
