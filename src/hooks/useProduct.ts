@@ -57,7 +57,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'purple',
             category: 'communication',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: 'user-interviews',
+            slug: 'products',
             status: 'WIP',
         },
         {
