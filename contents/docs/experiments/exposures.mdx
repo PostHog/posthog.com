@@ -142,7 +142,7 @@ PostHog uses a significance threshold of p < 0.001 to flag mismatches. The p-val
 
 If you see a sample ratio mismatch warning, investigate before drawing conclusions from your experiment:
 
-1. **Check your feature flag implementation**: Verify the flag is being evaluated correctly across all code paths. Ensure you're calling `identify()` before evaluating flags (for frontend SDKs).
+1. **Check your feature flag implementation**: Verify the flag is being evaluated correctly across all code paths. Ensure you're calling [`identify()`](/docs/product-analytics/identify) before evaluating flags (for frontend SDKs).
 
 2. **Review release conditions**: If you're using property-based release conditions, ensure those properties are available at evaluation time. Missing properties can cause users to fall out of the experiment unevenly. Consider using simple percentage-based rollout (e.g., 50/50) rather than complex conditions.
 
