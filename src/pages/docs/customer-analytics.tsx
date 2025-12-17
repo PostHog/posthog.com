@@ -24,18 +24,18 @@ export const Content = ({ quickLinks = true }) => {
         <>
             <Intro
                 subheader="Getting started"
-                title="Customer analytics"
+                title="Customer Analytics"
                 description="Understand your customers without building dashboards from scratch. Track active users, signups, conversions, and engagement—the metrics that matter for product-market fit."
                 buttonText="Setup guide"
                 buttonLink="/docs/customer-analytics/start-here"
                 imageColumnClasses="max-w-96"
-                imageUrl="[TODO: Customer analytics hero image]"
+                imageUrl="[TODO: Customer Analytics hero image]"
             />
             <section className="mb-4">
                 <h2 className="mb-4">Overview</h2>
                 <div>
                     <p>
-                        Customer analytics enables users to understand their customer's demographics and individual
+                        Customer Analytics enables users to understand their customer's demographics and individual
                         behavior, providing good defaults and improved data visualizations.
                     </p>
                     <p>The product has two main interfaces: the dashboard and the individual customer profiles.</p>
@@ -110,7 +110,7 @@ export const Content = ({ quickLinks = true }) => {
 const CustomerAnalytics: React.FC<CustomerAnalyticsProps> = ({ data }) => {
     return (
         <ReaderView>
-            <SEO title="Customer analytics - Documentation - PostHog" />
+            <SEO title="Customer Analytics - Documentation - PostHog" />
 
             <Content />
         </ReaderView>

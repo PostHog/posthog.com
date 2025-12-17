@@ -1,5 +1,5 @@
 ---
-title: Customer analytics FAQ
+title: Customer Analytics FAQ
 sidebar: Docs
 showTitle: true
 ---
@@ -12,7 +12,7 @@ Have a question not covered here? [Let us know](https://us.posthog.com/home#supp
 
 ## What activity event does customer analytics use by default?
 
-Customer analytics uses `$pageview` events out of the box for tracking active users. For signups and conversions, you need to configure which events represent those actions in **Settings** > **Customer analytics**.
+Customer Analytics uses `$pageview` events out of the box for tracking active users. For signups and conversions, you need to configure which events represent those actions in **Settings** > **Customer Analytics**.
 
 ## How are active users calculated?
 
@@ -41,7 +41,7 @@ posthog.capture('signed up', {
 })
 ```
 
-Then configure this as your signup event in **Settings** > **Customer analytics**.
+Then configure this as your signup event in **Settings** > **Customer Analytics**.
 
 ## How do I track free-to-paid conversions?
 
@@ -54,7 +54,7 @@ posthog.capture('user_subscribed', {
 })
 ```
 
-Configure this event as your paid conversion event in **Settings** > **Customer analytics**.
+Configure this event as your paid conversion event in **Settings** > **Customer Analytics**.
 
 ## Can I use customer analytics with groups?
 
@@ -77,12 +77,12 @@ Enable [LLM observability](/docs/ai-engineering/observability) and instrument yo
 
 ## Is customer analytics free?
 
-Customer analytics is currently in beta and free to use. You'll only be charged for the underlying data: events are billed as part of [product analytics](/pricing), and data warehouse sources like Zendesk are billed as [data warehouse rows](/pricing).
+Customer Analytics is currently in beta and free to use. You'll only be charged for the underlying data: events are billed as part of [product analytics](/pricing), and data warehouse sources like Zendesk are billed as [data warehouse rows](/pricing).
 
 ## What's the difference between customer analytics and product analytics?
 
 [Product analytics](/docs/product-analytics) is for understanding user behavior in aggregate—funnels, trends, retention across your user base.
 
-Customer analytics is for understanding individual customers: their activity, engagement, and context. It's designed for when you need to know "who are my best customers?" or "what's going on with this specific account?"
+Customer Analytics is for understanding individual customers: their activity, engagement, and context. It's designed for when you need to know "who are my best customers?" or "what's going on with this specific account?"
 
 They work together: customer analytics enables the initial understanding of your customers and usage by providing good defaults and a framework to be followed. As your product grows and your data analysis needs get more specific, product analytics enables this next step with custom dashboards, different kinds of insights and SQL queries.

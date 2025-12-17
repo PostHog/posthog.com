@@ -4863,7 +4863,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Customer analytics',
+            name: 'Customer Analytics',
             icon: 'IconPeople',
             color: '[#FF6B6B]',
             url: '/docs/customer-analytics',
@@ -4875,7 +4875,7 @@ export const docsMenu = {
             },
             children: [
                 {
-                    name: 'Customer analytics',
+                    name: 'Customer Analytics',
                 },
                 {
                     name: 'Overview',
