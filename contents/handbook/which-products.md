@@ -40,12 +40,11 @@ From our [roadmap](/roadmap), here's what we're currently working on:
 - Logs - `#project-logs`
 - Product autonomy - `#team-array`
 - Customer analytics `#team-customer-analytics`
-- Revenue analytics `#team-revenue-analytics`
+  - Revenue analytics now included in customer analytics
 - Workflows `#team-workflows`
-- 100x the toolbar
 
 And these are the products we think we'll focus on next:
-- 100x the toolbar
+- 100x the toolbar - likely `#team-array`
 - Metrics
 - APM
 - BI over any database (not just those synced to our data warehouse)

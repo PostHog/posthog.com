@@ -1,0 +1,15 @@
+---
+title: Manual capture LLM analytics installation
+platformIconName: IconCode
+---
+
+import { ManualInstallation } from 'onboarding/llm-analytics/manual.tsx'
+import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
+import GenerationEvent from '../_snippets/generation-event.mdx'
+import TraceEvent from '../_snippets/trace-event.mdx'
+import SpanEvent from '../_snippets/span-event.mdx'
+import EmbeddingEvent from '../_snippets/embedding-event.mdx'
+
+<OnboardingContentWrapper snippets={{ GenerationEvent, TraceEvent, SpanEvent, EmbeddingEvent }}>
+    <ManualInstallation />
+</OnboardingContentWrapper>

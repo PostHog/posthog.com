@@ -47,7 +47,7 @@ If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing
 
 ## Configuration
 
-> **Important:** For Flutter Web, surveys are powered by the JavaScript Web SDK, so any Flutter-specific survey configuration will be ignored. Please refer to the [Web installation guide](/docs/surveys/installation?tab=Web) for proper setup.
+> **Important:** For Flutter Web, surveys are powered by the JavaScript Web SDK, so any Flutter-specific survey configuration will be ignored. Please refer to the [Web installation guide](/docs/surveys/installation/web) for proper setup.
 
 Surveys are enabled by default. If you want to disable surveys, you can do so when setting up your SDK instance:
 
@@ -61,20 +61,20 @@ config.surveys = false; // Disable surveys
 
 | Feature                           | Support                | 
 | --------------------------------- | ---------------------- |
-| **Questions**                                              |
+| **Questions** | |
 | All question types                | ✅                     |
 | Multi-question surveys            | ✅                     |
 | Confirmation message              | ✅                     |
 | Feedback button presentation      | ❌                     |
 | Conditional questions             | ✅                     |
-| **Customization / Appearance**                            |
+| **Customization / Appearance** | |
 | Set colors in PostHog dashboard   | ✅                     | 
 | Shuffle questions                 | ❌                     | 
 | PostHog branding                  | ❌                     | 
 | Delay popup after screen view     | ❌                     | 
-| Position config                   | ❌ Always bottom sheet | 
+| Position config                   | ❌ (always bottom sheet) | 
 | HTML content                      | ❌                     |
-| **Display conditions**                                     |
+| **Display conditions** | |
 | Feature flag & property targeting | ✅                     | 
 | Screen/URL targeting              | ❌                     | 
 | Device type targeting             | ✅                     | 
@@ -87,7 +87,7 @@ config.surveys = false; // Disable surveys
 
 - On Android, requires API >= 26.
 - On iOS, minimum deployment target is [iOS13](/docs/libraries/ios).
-- On Web, surveys are powered by the [JavaScript Web SDK](/docs/surveys/installation?tab=Web).
+- On Web, surveys are powered by the [JavaScript Web SDK](/docs/surveys/installation/web).
 - Requires PostHog Flutter SDK version >= 5.8.0
 
 ## Troubleshooting
@@ -96,7 +96,7 @@ config.surveys = false; // Disable surveys
 - Make sure to set the minimum platform version to iOS 13.0 in your Podfile.
 - Make sure you have disabled automatic SDK initialization. 
 - Run a clean build if you experience issues.
-- If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation?tab=Flutter#step-two-install-posthogobserver).
+- If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation/flutter#step-two-install-posthogobserver).
   - Using [navigationObservers](/docs/libraries/flutter#capturing-screen-views#using-navigatorobservers)
   - Using [go_router](/docs/libraries/flutter#capturing-screen-views#using-go-router)
 - If you are using multiple navigation observers and encounter a log message `[PostHog] Cannot show survey: No valid context found...`, try placing `PosthogObserver` first in the list of observers. We've noticed that order sometimes matters due to potential interference.

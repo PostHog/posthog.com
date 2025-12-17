@@ -30,7 +30,7 @@ them that they can save by removing the Group Analytics add-on from the billing 
 
 [Autocapture](/docs/product-analytics/autocapture) is a great way for users to get up and running with event capture without a huge engineering effort.  Autocapture can however get very noisy very quickly, and if users aren't leveraging these events they may not be getting value out of them.  You can understand a customer's Autocapture event volume from their Metabase customer usage dashboard (instructions above on how to get there).  There is a breakdown of the Key event volume Last 30 days which shows the number and % of Autocapture events they are sending across all projects.  If that is high (>50%) then check the Actions (by type) visualization on the same dashboard to see if they have any Autocapture actions defined.  If not they are likely to not be benefitting from Autocapture events.
 
-If they aren't benefitting from Autocapture you should reach out to the let them know how best to use it.  Alternatively, they can tune or turn it off by following the docs [here](/docs/product-analytics/autocapture#configuring-autocapture).
+If they aren't benefitting from Autocapture you should reach out to let them know how best to use it. Alternatively, they can tune or turn it off by following the [Autocapture configuration docs](/docs/product-analytics/autocapture#configuring-autocapture).
 
 ### Session replay targeting
 
@@ -75,7 +75,7 @@ ORDER BY groupidentify_event_count DESC
 
 `Posthog.reset()` will generate a new anonymous distinct ID.  If this is called before a user is identified then two anonymous unlinked user may be created.  There is no easy way to proactively diagnose this however if a customer says that their tracking between web and app is off, this is a common culprit.
 
-We have guidance on when to call `posthog.reset()` [here](/docs/libraries/js/features#resetting-a-user).
+We have guidance on when to call `posthog.reset()` in the [JavaScript library features guide](/docs/libraries/js/features#resetting-a-user).
 
 ### Reverse Proxies 
 
@@ -83,6 +83,24 @@ It is best practice for a customer to use PostHog's [Managed Reverse Proxy](/doc
 
 When using either PostHog's managed reverse proxy or deploying a [non-managed reverse proxy](/docs/advanced/proxy#deploying-a-reverse-proxy), events should populate the "Library custom API host" property. Host mapping and domains can potentially be seen in Metabase. You should verify the setup with a customer.  
 
+### Cookieless tracking
+
+If a customer mentions their user/event count seems to be missing a lot of data from their website, ask them if they have implemented cookie opt-in and to share the part of their code where PostHog is initialized. Some customers may not be aware that we have specific recommendations for how to initiatlize PostHog for [cookieless tracking](/tutorials/cookieless-tracking). 
+
+For example, if they implement PostHog on their website similar to as follows: 
+```
+posthog.init(...,
+    opt_out_capturing_by_default: true
+)
+
+if (cookiePreference === 'accepted') {
+    posthog.opt_in_capturing()
+}
+```
+
+They will not be capturing anything for customers who visit their website and opt-out of cookies or ignore the cookie banner completely. We recommend instead they use the `cookieless_mode` parameter in their initializer as outlined in the [cookieless tracking tutorial](/tutorials/cookieless-tracking). If the customer wants to move forward with implementing cookieless mode, ensure they enable "Cookieless server hash mode" in their project settings under Project Settings > Web analytics.
+
+Cookieless mode can help them have more accurate tracking totals because when using cookieless tracking, the PostHog SDK will generate a privacy-preserving hash, calculated on our servers.
 
 ## Are feature flags resilient?
 

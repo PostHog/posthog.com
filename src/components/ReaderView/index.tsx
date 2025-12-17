@@ -48,6 +48,7 @@ interface ReaderViewProps {
         type: 'mdx' | 'plain'
         content: string
         featuredImage?: any
+        featuredImageCaption?: string
         contributors?: any[]
         date?: string
         featuredVideo?: string
@@ -73,8 +74,8 @@ interface ReaderViewProps {
     onSearch?: (query: string) => void
     showSurvey?: boolean
     parent?: MenuItem
-    markdownContent?: string
     showQuestions?: boolean
+    sourceInstanceName?: string
 }
 
 interface BackgroundImageOption {
@@ -363,8 +364,8 @@ export default function ReaderView({
     onSearch,
     showSurvey = false,
     parent,
-    markdownContent,
     showQuestions = true,
+    sourceInstanceName,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -391,8 +392,8 @@ export default function ReaderView({
                 onSearch={onSearch}
                 showSurvey={showSurvey}
                 parent={parent}
-                markdownContent={markdownContent}
                 showQuestions={showQuestions}
+                sourceInstanceName={sourceInstanceName}
             >
                 {children}
             </ReaderViewContent>
@@ -524,8 +525,8 @@ function ReaderViewContent({
     onSearch,
     showSurvey = false,
     parent,
-    markdownContent,
     showQuestions = true,
+    sourceInstanceName,
 }) {
     const { openNewChat, compact } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
@@ -680,12 +681,19 @@ function ReaderViewContent({
                             >
                                 {/* <DebugContainerQuery /> */}
                                 {body.featuredImage && !body.featuredVideo && (
-                                    <div className="not-prose mb-4 text-center">
-                                        <GatsbyImage
-                                            image={getImage(body.featuredImage)}
-                                            alt={title}
-                                            className="rounded"
-                                        />
+                                    <div className="not-prose mb-6 relative">
+                                        <div className="text-center">
+                                            <GatsbyImage
+                                                image={getImage(body.featuredImage)}
+                                                alt={title}
+                                                className="rounded"
+                                            />
+                                        </div>
+                                        {body.featuredImageCaption && (
+                                            <div className="absolute right-0 bottom-0 m-2 text-sm text-white bg-black bg-opacity-75 font-medium py-1 px-2 rounded-sm italic text-right">
+                                                {body.featuredImageCaption}
+                                            </div>
+                                        )}
                                     </div>
                                 )}
                                 {title && !hideTitle && (
@@ -701,7 +709,7 @@ function ReaderViewContent({
                                 )}
                                 {(body.date || body.contributors || body.tags) && (
                                     <div
-                                        className={`flex items-center space-x-2 mb-4 flex-wrap mx-auto transition-all ${
+                                        className={`flex items-center space-x-2 mt-4 flex-wrap mx-auto transition-all ${
                                             fullWidthContent || body?.type !== 'mdx'
                                                 ? 'max-w-full'
                                                 : contentMaxWidthClass || 'max-w-2xl'
@@ -906,16 +914,15 @@ function ReaderViewContent({
                         }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
-                        {(markdownContent || body?.type === 'mdx') && (
-                            <CopyMarkdownActionsDropdown
-                                markdownContent={markdownContent || body.content}
-                                pageUrl={`https://posthog.com${appWindow?.path}`}
-                            />
-                        )}
+                        {appWindow?.path && <CopyMarkdownActionsDropdown pageUrl={appWindow.path} />}
                         {filePath && (
                             <OSButton
                                 asLink
-                                to={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                to={`https://github.com/PostHog/${
+                                    sourceInstanceName === 'posthog-main-repo'
+                                        ? 'posthog/blob/master'
+                                        : 'posthog.com/blob/master/contents'
+                                }/${filePath}`}
                                 icon={<IconPencil />}
                             />
                         )}

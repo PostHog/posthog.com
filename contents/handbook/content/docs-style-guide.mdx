@@ -16,6 +16,20 @@ This means our docs should be:
 
 The below is a style guide for writing good docs based on the above assumptions. It's not exhaustive, but it's a good starting point.
 
+## How to refer to PostHog Cloud vs self-hosted
+
+When writing docs, use the following terminology:
+
+- **PostHog**: Use this by default. This refers to our cloud product. Most users are on cloud, so we don't need to specify "Cloud" unless we're differentiating from self-hosted.
+- **PostHog Cloud**: Only use this when you need to explicitly differentiate cloud features from self-hosted deployments. For example, when a feature works differently or isn't available in self-hosted.
+- **Self-hosted PostHog** or **hobby deployments**": Use these when referring to self-hosted installations.
+
+> **Do:** "To create an insight in PostHog, go to the insights tab..."
+
+> **Do:** "This feature is only available in PostHog Cloud."
+
+> **Don't:** "To create an insight in PostHog Cloud, go to the insights tab..."
+
 ## Wikipedia-style internal links
 
 The first mention on a page of a PostHog term, feature, or SDK should link to its docs page.
@@ -326,7 +340,7 @@ You can use magic placeholders to replace the project API key, project name, app
 | `<ph_app_host>`            | Your PostHog instance URL     | `<ph_app_host>`                                 |
 | `<ph_client_api_host>`     | Your PostHog client API host  | `https://us.i.posthog.com`                      |
 | `<ph_region>`              | Your PostHog region (us/eu)   | `<ph_region>`                                   |
-| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2025-05-24`                                    |
+| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2025-11-30`                                    |
 | `<ph_proxy_path>`          | Your proxy path               | `relay-XXXX` (last 4 digits of project API key) |
 
 You can use these placeholders in the code block like this:
@@ -350,7 +364,71 @@ To debug, check for the common issues below:
 You can also try running the formatter script to fix some of the issues:
 
 ```bash
-yarn format:docs
+pnpm format:docs
 ```
 
 This will run the formatter against the current changes.
+
+## Platform logos
+
+Platform list pages, like installation guides or source integrations, use centralized logo management. All logo URLs are stored in `src/constants/logos.ts`.
+
+### Add a platform to an existing list
+
+1. Create an MDX file with frontmatter including `platformLogo`:
+
+   ```yaml
+   ---
+   title: Elixir error tracking installation
+   platformLogo: elixir
+   ---
+   ```
+
+2. Add the page to the sidebar in `src/navs/index.js`
+3. Order accordingly in the side nav `index.js` file. The order there = order on page
+3. Done! The `usePlatformList` hook automatically picks up the new platform
+
+### Add a new logo
+
+1. Upload the image to Cloudinary in SVG format
+2. Add a key to `src/constants/logos.ts`:
+
+   ```ts
+   export const LOGOS = {
+       // ... existing logos
+       myNewLogo: 'https://res.cloudinary.com/dmukukwp6/image/upload/...',
+   }
+   ```
+
+3. Reference using `platformLogo: myNewLogo` in MDX frontmatter
+
+### Naming conventions
+
+- Use the service/framework name in camelCase: `stripe`, `bigquery`, `nextjs`
+- Keep the list alphabetized
+- For generic icons, use descriptive names: `sqlDatabase`, `apiGeneric`
+
+### Available frontmatter fields
+
+| Field | Description | Example |
+|-------|-------------|---------|
+| `platformLogo` | Key from `src/constants/logos.ts` | `stripe`, `react`, `nodejs` |
+| `platformIconName` | Fallback icon if no logo | `IconCode` |
+| `platformSourceType` | For source lists: `managed` or `self-hosted` | `managed` |
+
+### Create a new platform list section
+
+1. Add `platformLogo` to all platform MDX files in the section
+2. Create a snippet component using `usePlatformList`:
+
+   ```tsx
+   import usePlatformList from 'hooks/docs/usePlatformList'
+
+   const MyPlatforms = () => {
+       const platforms = usePlatformList('docs/my-section/installation', 'installation')
+       return <List items={platforms} />
+   }
+   ```
+
+3. Update sidebar with section children in `src/navs/index.js`
+4. Import and use the snippet in your `index.mdx`

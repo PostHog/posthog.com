@@ -34,12 +34,7 @@ This is the repository for the PostHog website. It contains:
 
     Install [Node](https://nodejs.org/en/download/) (version 22) - if you installed Node using nvm, you can run `nvm use` to automatically switch to the correct version.
 
-    Install [Yarn](https://classic.yarnpkg.com/en/). (If you're on a Mac with Apple Silicon and get an error with `-86` in it, you may need to [install Rosetta](https://osxdaily.com/2020/12/04/how-install-rosetta-2-apple-silicon-mac/).)
-
-    ```bash
-    npm install --global yarn
-    ```
-
+    Install `pnpm`. The easiest way to do this is via `corepack use pnpm@latest-10`.
 
 
 2.  **Start developing**
@@ -50,7 +45,7 @@ This is the repository for the PostHog website. It contains:
     git clone git@github.com:PostHog/posthog.com.git && cd posthog.com/
     ```
 
-    If you're using an Apple Silicon Mac (M1) you'll need to run the following commands:
+    If you're using an Apple Silicon Mac (M1 or later) you'll need to run the following commands:
 
     ```bash
     rm -rf ./node_modules
@@ -60,8 +55,8 @@ This is the repository for the PostHog website. It contains:
     Then install the site dependencies, and start it up:
 
     ```bash
-    yarn
-    yarn start
+    pnpm install
+    pnpm start
     ```
 
     > **Tip:** Seeing a discrepancy between local development and staging/production? Preview the production build locally by running `gatsby build && gatsby serve`
@@ -78,15 +73,16 @@ See full instructions on [developing PostHog.com locally in our manual](https://
 
 ### Debugging errors on start
 1. Pull the latest changes from `master`
-2. Run `gatsby clean && yarn start` or delete `node_modules` and `.cache`
-3. Check builds are passing in [deployment to Vercel](https://github.com/PostHog/posthog.com/deployments)
+2. Run `gatsby clean && mkdir .cache & pnpm start` or delete `node_modules` and `.cache`
+3. Make sure you're not in an activated flox environment for a different project
+4. Check builds are passing in [deployment to Vercel](https://github.com/PostHog/posthog.com/deployments)
 
 ### Working on `/docs/api`?
 
 The site will load the API schema from US Cloud by default. You can override this to use your local PostHog instance with an env var:
 
 ```
-POSTHOG_OPEN_API_SPEC_URL="http://127.0.0.1:8000/api/schema/" yarn start
+POSTHOG_OPEN_API_SPEC_URL="http://127.0.0.1:8000/api/schema/" pnpm start
 ```
 
 
@@ -109,7 +105,7 @@ Currently, these environment variables are excluded from Vercel preview builds t
 
 To develop a dynamic open graph image:
 
-1. Run `yarn build` with both the `ASHBY_API_KEY` and `GITHUB_API_KEY` set.
+1. Run `pnpm build` with both the `ASHBY_API_KEY` and `GITHUB_API_KEY` set.
 1. In `gatsby/onPostBuild.ts`, temporarily comment out the following:
     ```
     if (process.env.VERCEL_GIT_COMMIT_REF !== 'master') return

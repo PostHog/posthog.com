@@ -111,7 +111,7 @@ Those glue areas don’t bring product-market fit by themselves, but neglecting 
 And remember: an org that over indexes on back-office teams early will:
 
 1. Optimize for fluffy internal goals more than real value.
-2. Create an approval culture that erodes autonomy and slows you down.
+2. Create an [approval culture that erodes autonomy](/newsletter/how-startups-lose-their-edge) and slows you down.
 
 That’s a death sentence, so choose wisely.
 

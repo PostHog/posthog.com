@@ -75,6 +75,17 @@ posthog.capture_exception(
 )
 ```
 
+```ruby
+posthog.capture_exception(
+  e,
+  distinct_id: 'user_distinct_id',
+  properties: {
+    custom_property: 'custom_value',
+    custom_list: ['custom_value_1', 'custom_value_2']
+  }
+)
+```
+
 </MultiLanguage>
 
 ## Customizing exception capture
@@ -103,7 +114,7 @@ try {
 } catch (error) {
  posthog.captureException(error, { 
       "custom_property": "custom_value",
-      // You can also *optionally* override generated properties like fingerprint
+      // Optional: you can also override generated properties like fingerprint
       "$exception_fingerprint": "CustomExceptionGroup",
     });
 }
@@ -115,7 +126,7 @@ try {
 } catch (error) {
  posthog.captureException(error, 'user_123', { 
       "custom_property": "custom_value",
-      // You can also *optionally* override generated properties like fingerprint
+      // Optional: you can also override generated properties like fingerprint
       "$exception_fingerprint": "CustomExceptionGroup",
     });
 }
@@ -134,7 +145,7 @@ with posthog.new_context():
     # When using context, you define properties with tags
     posthog.tag("custom_property", "custom_value")
 
-    # You can also *optionally* override generated properties like fingerprint
+    # Optional: you can also override generated properties like fingerprint
     posthog.tag("$exception_fingerprint", ["custom_fingerprint"])
 
     posthog.capture_exception(Exception("Test custom exception"))
@@ -149,6 +160,22 @@ posthog.capture_exception(
         "custom_property": "custom_value",
     },
 )
+```
+
+```ruby
+begin
+  subscriptions.activate(user_id, subscription_id)
+rescue => e
+  posthog.capture_exception(
+    e,
+    distinct_id: 'user_123',
+    properties: {
+      subscription_id: subscription_id,
+      # You can also *optionally* override generated properties like fingerprint
+      '$exception_fingerprint': 'CustomExceptionGroup'
+    }
+  )
+end
 ```
 
 </MultiLanguage>
@@ -182,7 +209,7 @@ The process is slightly different depending on the SDK you're using.
 
       if (exception) {
         event.properties["custom_property"] = "custom_value"
-        // You can also *optionally* override generated properties like fingerprint
+        // Optional: you can also override generated properties like fingerprint
         event.properties["$exception_fingerprint"] = "MyCustomGroup"
         // ... and any other properties you want to override
       }    
@@ -209,7 +236,7 @@ The process is slightly different depending on the SDK you're using.
       posthog.set_context_session(session_id="<session_id>")
 
       posthog.tag("custom_property", "custom_value")
-      # You can also *optionally* override generated properties like fingerprint
+      # Optional: you can also override generated properties like fingerprint
       posthog.tag("$exception_fingerprint", ["custom_fingerprint"])
 
       # When this exception is automatically captured, it will be tagged with the custom properties

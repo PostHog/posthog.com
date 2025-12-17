@@ -6,9 +6,9 @@ contentMaxWidthClass: max-w-5xl
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconCode, IconSearch, IconSettings } from '@posthog/icons'
-import Beta from './_snippets/beta.mdx'
+import LogsBetaSnippet from './_snippets/beta.mdx'
 
-<Beta />
+<LogsBetaSnippet />
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to search through your logs!">
 
@@ -42,14 +42,14 @@ Install and configure your logging client to send logs to PostHog:
 
 Once your logs are flowing into PostHog, you can:
 
-- **Search through logs** by level, message content, or custom attributes
+- **Search through logs** using multiple search tokens, negative filters, and exact phrase matching
 - **Filter by time ranges** to find specific events
 - **Correlate logs with events** from your PostHog analytics
 
 Navigate to the Logs section in your PostHog dashboard to start exploring your log data.
 
-<CallToAction type="primary" to="https://app.posthog.com/logs">
-  View your logs in PostHog
+<CallToAction type="primary" to="/docs/logs/search">
+  Learn how to search logs
 </CallToAction>
 
 </QuestLogItem>

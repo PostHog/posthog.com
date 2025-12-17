@@ -73,7 +73,7 @@ const Search = ({
 
     const handleChange = (hit: Hit) => {
         if (!hit) return
-        navigate(`/${hit.slug}`, { state: { newWindow: true } })
+        navigate(`${hit.fields?.slug || `/${hit.slug}`}`, { state: { newWindow: true } })
         onChange?.()
     }
 
@@ -160,7 +160,7 @@ const Search = ({
                                             >
                                                 <div className="py-2 px-4 block">
                                                     <p className="text-[13px] text-red dark:text-yellow font-medium m-0">
-                                                        /{hit.slug}
+                                                        {hit.fields?.slug || `/${hit.slug}`}
                                                     </p>
                                                     <h5 className="text-[15px] m-0 font-bold line-clamp-1">
                                                         {hit.title}

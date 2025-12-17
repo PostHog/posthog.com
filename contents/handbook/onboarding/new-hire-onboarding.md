@@ -21,7 +21,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 - Setup relevant [tools](/handbook/growth/sales/sales-and-cs-tools)
   - Integrate Gmail with Salesforce and Vitally to enable centralized communication history
 - If you start on a Monday, join your first PostHog All Hands (at 4.30 pm UK/8.30 am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
-- If you start on a Monday, join your first CS and Onboarding standup.
+- If you start on a Monday, join your first Onboarding standup.
   - We fill in a GitHub issue every week before this meeting, so we are prepared for the discussion topics. Magda will add your GitHub handle to the template.
 - Book time with Magda to go over the nuts and bolts of the role - which leads get onboarding, what signals we're looking for, and how to reach out. Start working through customer accounts together.
 
@@ -33,7 +33,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
  - Check out some [BuildBetter](https://app.buildbetter.app/) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
  - Learn and practice a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
-   - For familiarization and self-led training, follow the [product curriculum](/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You work through this with the [HogFlix Demo App project](https://eu.posthog.com/project/29925) which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
+   - For familiarization and self-led training, follow the [product curriculum](/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You work through this with the [HogFlix Demo App project](https://eu.posthog.com/project/29925), which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
  - Read all of the Onboarding section in the Handbook as well as the Sales and Customer Success section, and [update it as you learn more](/handbook/company/new-to-github#creating-a-pull-request).
  - Meet with [Charles](/community/profiles/28625), the exec responsible for CS and Onboarding.
 
@@ -49,7 +49,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 
 ## In-person onboarding
 
-Ideally, this will happen in Week 3 or 4, and will be with a few colleagues (depending on where we do it and who's around), and will be 3-4 days covering:
+Ideally, this will happen in Week 3, and will be with a few colleagues (depending on where we do it and who's around), and will be 3-4 days covering:
 
 - Demo practice session with the team.
 - The data we track on customers in PostHog and some hands-on exercises to get you comfortable using PostHog itself.
@@ -57,13 +57,15 @@ Ideally, this will happen in Week 3 or 4, and will be with a few colleagues (dep
 - Toolkit and internal processes.
 - No stupid questions session.
 
-Detailed checklist [here](https://docs.google.com/document/d/1DvZm6o3mBeSxwgMh2X8JAuXCLrOCS8sJAVLjC0K9VT8/edit?tab=t.0).
+Detailed checklist available in the [new hire onboarding checklist](https://docs.google.com/document/d/1DvZm6o3mBeSxwgMh2X8JAuXCLrOCS8sJAVLjC0K9VT8/edit?tab=t.0).
 
 ## Weeks 3-4
 
+- You're already reaching out to our customer base.
 - Focus on taking more and more ownership on calls so that team members are just there as a safety net.  
+- Continue to meet with customers - very quickly, you should be doing these solo. The customers you are working with will mostly just be getting started, so you'll see a lot of very familiar patterns emerge.
 - Make sure all your tooling is fully set up.
-- Continue to meet with customers - very quickly, you should be doing these solo. The customers you are working with will mostly just be getting started, so you'll see a lot of very familiar patterns emerge. 
+- Set up a call with [Daniel](https://posthog.com/community/profiles/34722) to get a "soft intro" to Vitally playbooks, segments, and our internal metrics. It's not a deep-dive - just getting familiar.
 
 
 ## How do I know if I'm on track?
@@ -72,7 +74,7 @@ By the end of month 1:
  - Have a good grasp of our internal processes and workflows.
  - Be leading customer calls on your own.
  - Converting customers to ['Onboarded'](/handbook/onboarding/onboarding-team#onboarding-lifecycle) in Vitally.
- - Passing off opportunities to AEs via the `Create AE lead` segment.
+ - Passing off opportunities to AEs via the `Onboarding referral` segment.
 
 By the end of month 2:
  - You're a PostHog power user - most questions you raise can only be answered by product engineers rather than the support team.
@@ -80,3 +82,46 @@ By the end of month 2:
 
 By the end of month 3:
  - You've implemented process and system-level changes to make your job better/more effective.
+ - Customers are happy after interacting with you.
+
+### General expectations
+
+Our customers are always central to our work. There’s time and space to work on fun projects, but that should never happen at the expense of our customers. Below are some non-exhaustive tips to help you stay on track during and after the probation period.
+
+**Core responsibilities**
+
+- Make sure you’re on top of our customer base in Vitally. Don’t let renewals fall through the cracks.
+- It's not a race - quality over quantity, always. Spend time reviewing accounts, be accurate, and genuinely helpful in what you email to customers. 
+- Listen to customers and respond to their needs. It’s a conversation, not a monologue with a set agenda. 
+- Make sure your Calendly schedule stays available for customers. You’re the master of your own calendar, and we trust you, but be reasonable.
+- Do the [Sales handoff](https://posthog.com/handbook/onboarding/sales-handover) where appropriate and always provide context on the customer.
+- Maintain the hygiene - follow the process in Vitally, add notes, or tasks when necessary. Remember that we share the workspace, so keep the order.
+- You’re the driver, so take initiative. Keep in mind improvements, optimization, process, or content updates as you go. Don’t be afraid to voice your ideas.
+
+**Communication and ownership**
+
+- Make sure you read the Handbook page on [Communication](https://posthog.com/handbook/company/communication). Always answer pings, even if it’s just to say “I’ll look into it later”. Emoji reactions can be helpful to indicate that you acknowledged or completed the task.
+- Publish your Sprint planning update on time. It should be done on Monday at the latest, so that others have time to read it before the Sprint planning call.
+- Be yourself and stay human. Don’t send AI-generated emails to customers. 
+- Set an autoresponder in your inbox whenever you take a longer time off, and direct your customers to `onboarding@posthog.com` so that we can pick up your conversations.
+- Share your knowledge! Share what you learnt, or found out - the whole team will benefit from it.
+- Share and ask for feedback. Remember that it should be kind and factual, not based on assumptions. More on that [in the Handbook](https://posthog.com/handbook/people/feedback).
+- Don’t be late for calls. It’s rude, the same as eating on them. 
+- Use the Time Off tool to communicate your absence in advance.
+- Keep your promises. If you promised to follow up with a customer or colleague, or work on a project, do it.
+- Stick to deadlines.
+
+**Staying up to date**
+
+Everything at PostHog changes really fast. That's how to keep up as a start:
+
+- Follow #tell-posthog-anything daily for general announcements.
+- Follow #cs-sales-support channel daily - it's crucial for all folks in customer-facing roles.
+- Stay on top of the #incidents channel to know what’s going on and be able to inform customers.
+- From time to time, it’s worth taking a look at #sales, #customer-success, #team-new-business-sales, #team-product-led-sales to get inspired by new ideas that other customer-facing folks implement, and what’s going on in general 
+- #changelog channel to stay up to date with newly released products and features.
+- #today-i-learnt set up by Daniel, great for sharing and learning new things.
+- Attend All-hands calls, and if you skip them for any reason, catch up with the recording. It lets you stay on top of the new features we release and our direction.
+- Set a Slack matcher for specific keywords (e.g, “onboarding referral” if you want to see leads we pass to Sales).
+- Slack also has a cool AI Recap feature - it might be helpful.
+- Don’t let your product knowledge get stale - check docs, use the product.
