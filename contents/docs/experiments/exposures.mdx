@@ -121,15 +121,15 @@ When your experiment has SRM, it means something may be systematically biasing w
 PostHog automatically calculates SRM once your experiment has at least 100 total exposures. You'll see the result below the exposures table:
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/pasted_image_2025_12_16_T17_02_08_386_Z_2abe6381e7.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/pasted_image_2025_12_16_T17_03_30_438_Z_7c656de517.png"
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_12_16_T17_02_08_386_Z_2abe6381e7.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_12_16_T17_03_30_438_Z_7c656de517.png"
   classes="rounded"
   alt="Screenshot of sample ratio mismatch indicator"
 />
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/pasted_image_2025_12_16_T17_02_38_879_Z_0f569a06b3.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/pasted_image_2025_12_16_T17_03_11_562_Z_ca54694954.png"
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_12_16_T17_02_38_879_Z_0f569a06b3.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_12_16_T17_03_11_562_Z_ca54694954.png"
   classes="rounded"
   alt="Screenshot of sample ratio mismatch indicator"
 />
@@ -143,7 +143,7 @@ PostHog uses a significance threshold of p < 0.001 to flag mismatches. The p-val
 
 If you see a sample ratio mismatch warning, investigate before drawing conclusions from your experiment:
 
-1. **Check your feature flag implementation**: Verify the flag is being evaluated correctly across all code paths. Ensure you're calling `identify()` before evaluating flags (for frontend SDKs).
+1. **Check your feature flag implementation**: Verify the flag is being evaluated correctly across all code paths. Ensure you're calling [`identify()`](/docs/product-analytics/identify) before evaluating flags (for frontend SDKs).
 
 2. **Review release conditions**: If you're using property-based release conditions, ensure those properties are available at evaluation time. Missing properties can cause users to fall out of the experiment unevenly. Consider using simple percentage-based rollout (e.g., 50/50) rather than complex conditions.
 
