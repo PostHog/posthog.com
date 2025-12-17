@@ -973,10 +973,10 @@ export default function Home2() {
                             width="full"
                             align="left"
                             onClick={() => handlePromptClick(prompt.globalIndex)}
-                            className={`before:opacity-0 hover:!border-transparent before:content-["►"] before:text-base before:absolute before:-left-4 before:top-0.5 active:!bg-transparent focus:!border-transparent ${
+                            className={`before:opacity-0 hover:!border-transparent before:content-["►"] before:text-base before:absolute before:-left-4 before:top-0.5 before:text-red dark:before:text-yellow active:!bg-transparent focus:!border-transparent ${
                                 activePromptIndex === prompt.globalIndex
-                                    ? 'font-bold before:opacity-100'
-                                    : 'hover:underline hover:font-medium hover:before:opacity-25'
+                                    ? 'font-bold before:opacity-100 !text-red dark:!text-yellow'
+                                    : 'hover:underline hover:before:opacity-25 before:!text-primary'
                             }`}
                         >
                             "{prompt.text}"
@@ -995,14 +995,8 @@ export default function Home2() {
                 image={`/images/og/default.png`}
             />
             <Wizard
-                navigationPosition="top"
                 leftNavigation={
                     <div className="flex gap-x-2 pl-2 @lg:pl-6">
-                        <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
-                    </div>
-                }
-                rightNavigation={
-                    <div className="flex gap-x-2 pr-2 @lg:pr-6">
                         <CallToAction
                             to="https://app.posthog.com/signup"
                             size="md"
@@ -1020,7 +1014,11 @@ export default function Home2() {
                                 Install with AI
                             </CallToAction>
                         </div>
-                        {/* <OSButton
+                    </div>
+                }
+                rightNavigation={
+                    <div className="flex gap-x-2 pr-2 @lg:pr-6">
+                        <OSButton
                             asLink
                             to="/talk-to-a-human"
                             size="md"
@@ -1029,7 +1027,7 @@ export default function Home2() {
                             state={{ newWindow: true }}
                         >
                             Talk to a human
-                        </OSButton> */}
+                        </OSButton>
                     </div>
                 }
             >
@@ -1040,13 +1038,13 @@ export default function Home2() {
                     <article className={`${getProseClasses()} max-w-7xl mx-auto`}>
                         {/* Video Hero Section */}
                         <div className="flex flex-col @3xl:flex-row gap-8">
-                            <div className="flex-1 @3xl:pt-8 @4xl:pt-12">
-                                {/* <div className="mb-8">
+                            <div className="flex-1 @3xl:pt-2 @4xl:pt-8 @5xl:pt-8">
+                                <div className="mb-8">
                                     <Logo
                                         className="inline-block"
                                         fill={siteSettings.theme === 'dark' ? 'white' : undefined}
                                     />
-                                </div> */}
+                                </div>
                                 <h1 className="!text-2xl font-bold">The AI platform for engineers</h1>
                                 <p className="text-base mt-0">
                                     Debug products. Ship features faster. <br />
