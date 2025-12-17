@@ -47,7 +47,6 @@ const partnerConfigs = [
             <>
                 <IconX className="size-8 text-white inline-block relative top-1" />
                 <img src={Logo1984} alt="1984" className="inline-block h-9 relative top-[.2rem]" />
-                <span>1984</span>
             </>
         ),
         value: '$50,000',
