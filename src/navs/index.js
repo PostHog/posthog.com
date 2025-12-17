@@ -2046,6 +2046,14 @@ export const docsMenu = {
                             url: '/docs/libraries/rust',
                         },
                         {
+                            name: 'Unity',
+                            url: '/docs/libraries/unity',
+                            badge: {
+                                title: 'Beta',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                            },
+                        },
+                        {
                             name: 'C#/.NET',
                             url: '/docs/libraries/dotnet',
                         },
@@ -3537,6 +3545,12 @@ export const docsMenu = {
                     url: '/docs/feature-flags/local-evaluation',
                     icon: 'IconBolt',
                     color: 'orange',
+                    children: [
+                        {
+                            name: 'Local evaluation in distributed or stateless environments',
+                            url: '/docs/feature-flags/local-evaluation/distributed-environments',
+                        },
+                    ],
                 },
                 {
                     name: 'Client-side bootstrapping',
@@ -5249,10 +5263,10 @@ export const productMenu = {
             category: 'tools',
         },
         {
-            name: 'Data warehouse',
+            name: 'Data stack',
             icon: 'IconDatabase',
             color: 'lilac',
-            url: '/data-warehouse',
+            url: '/data-stack',
             slug: 'data-warehouse',
         },
         {

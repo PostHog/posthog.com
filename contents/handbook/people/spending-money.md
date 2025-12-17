@@ -179,6 +179,10 @@ Ask for access in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3B
   
   Everyone has their own favorite email app, but Superhuman users will make sure you don’t forget theirs. We have a team plan to keep those folks happy with inbox zero and inner peace.
 
+- <Link to="https://circleback.ai" external>Circleback</Link>
+
+  It’s absolutely okay to use AI note-takers so you can stay engaged in meetings without writing everything down. Circleback is our preferred tool from a privacy standpoint. We have a company account - sign up with your @posthog.com email for Pro access.
+
 ### IDEs
 
 * IDEs range widely in cost. Best in class IDE suites can cost up to $700, which is a bad value proposition for most engineers. However, we are happy to revisit this policy if you have very specific needs.
