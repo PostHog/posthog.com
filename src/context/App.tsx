@@ -352,6 +352,19 @@ const appSettings: AppSettings = {
             },
         },
     },
+    '/posthog-101': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 850,
+                height: 1000,
+            },
+            fixed: false,
+        },
+    },
     '/careers-og': {
         size: {
             min: {
