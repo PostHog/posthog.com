@@ -1,0 +1,60 @@
+---
+title: SDK reference docs
+sidebar: Handbook
+showTitle: true
+---
+
+import HogRefSchema from '../_snippets/hogref-schema.mdx'
+
+SDK references document class, method signatures, and type interfaces for each SDK. They complement examples in tutorials and guides by providing a comprehensive reference with all the details. They're important for deep understanding of PostHog SDKs and as context for LLM-based tools. Tutorials and guides reference them for parameter and return type details.
+
+### Which SDKs have reference docs
+
+It's an ongoing effort to create SDK reference docs for all our SDKs, starting with popular SDKs. Here's the current status:
+
+| SDK | Status |
+|-----|--------|
+| JavaScript Web SDK | ✅ Completed |
+| Python SDK | ✅ Completed |
+| Node.js SDK | ✅ Completed |
+| React Native SDK | ✅ Completed |
+| iOS SDK | 🚧 In progress |
+| Flutter SDK | ⏳ Not started |
+| Android SDK | ⏳ Not started |
+| Go SDK | ⏳ Not started |
+| Java SDK | ⏳ Not started |
+| Rust SDK | ⏳ Not started |
+| PHP SDK | ⏳ Not started |
+| .NET SDK | ⏳ Not started |
+
+### How the SDK reference docs work
+
+1. SDKs are parsed for basic information like class names, method names, and type interfaces.
+2. Descriptions, parameters, return types, and examples are extracted from the SDKs or SDK doc comments.
+3. The information is rewritten into a standardized JSON format (HogRef). They're stored in each SDK's repository under a `references` directory. For example, the JavaScript Web SDK reference is [stored here](https://github.com/PostHog/posthog-js/tree/main/packages/browser/references).
+4. When an SDK releases a new version, the reference docs are generated automatically. Here's an [example workflow](https://github.com/PostHog/posthog-js/blob/main/.github/workflows/generate-references.yml).
+5. The Strapi instance behind the website is configured to [fetch the HogRef JSON files](https://github.com/PostHog/squeak-strapi/blob/main/config/cron-tasks.ts) from the SDK's repository and display them on the website via a cron job.
+6. The website renders the HogRef JSON files as a table on the SDK reference page.
+
+Each language works slightly differently, but the general process is the same.
+
+<details>
+<summary>HogRef JSON schema specification</summary>
+<HogRefSchema />
+</details>
+
+### How to create new SDK reference docs
+
+To contribute a new SDK reference doc:
+
+1. Create a script to parse the SDK's documentation and extract the information into a HogRef JSON file. The script should:
+   - Parse for class names, method names, and type interfaces
+   - Extract descriptions, parameters, return types, and examples from the SDK or SDK doc comments
+   - Format the information according to the [HogRef JSON schema specification](#hogref-json-schema-specification)
+   - Store the HogRef JSON file in a `references` directory in the SDK's repository
+   - See existing SDK repositories for examples, such as the [JavaScript Web SDK reference](https://github.com/PostHog/posthog-js/tree/main/packages/browser/references)
+2. Create a workflow to generate the HogRef JSON file when a new version of the SDK is released. See an [example workflow](https://github.com/PostHog/posthog-js/blob/main/.github/workflows/generate-references.yml).
+3. Update the [`cron-tasks.ts`](https://github.com/PostHog/squeak-strapi/blob/main/config/cron-tasks.ts) file to fetch the HogRef JSON file from the SDK's repository and display it on the website.
+4. Once the HogRef is ingested into the Strapi instance via the cron job, a new page should be created automatically on the website. The website will render the HogRef JSON file as a table on the SDK reference page. 
+5. Find existing links to the SDK's GitHub repository source code and point them to the new HogRef JSON file instead.
+
