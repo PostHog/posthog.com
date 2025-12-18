@@ -1,9 +1,5 @@
 name: Automerge
 
-env:
-    MERGE_METHOD: 'squash'
-    MERGE_RETRY_SLEEP: 300000
-
 on:
     pull_request:
         types:
@@ -18,18 +14,20 @@ on:
     check_suite:
         types:
             - completed
-    status: {}
+    status:
 
 jobs:
     automerge:
         name: Automerge if requested
         runs-on: ubuntu-latest
-        env:
-            IS_POSTHOG_BOT_AVAILABLE: ${{ secrets.POSTHOG_BOT_PAT != '' }}
+        permissions:
+            contents: write
+            pull-requests: write
         steps:
             - name: Automerge
-              if: env.IS_POSTHOG_BOT_AVAILABLE == 'true'
-              uses: pascalgn/automerge-action@v0.15.5
+              shell: bash
               env:
-                  GITHUB_TOKEN: ${{ secrets.POSTHOG_BOT_PAT }}
-            - run: echo
+                  GH_TOKEN: ${{ github.token }}
+                  PR_NUMBER: ${{ github.event.pull_request.number }}
+              run: |
+                  gh pr merge "$PR_NUMBER" --auto --squash
