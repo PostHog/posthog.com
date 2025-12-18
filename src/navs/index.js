@@ -1543,7 +1543,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Risk mitigation and churn prevention',
-                        url: '/handbook/sales/risk-mitigation-and-churn-prevention',
+                        url: '/handbook/growth/sales/risk-mitigation-and-churn-prevention',
                     },
                     {
                         name: 'Historical imports',
@@ -2070,6 +2070,14 @@ export const docsMenu = {
                         {
                             name: 'Rust',
                             url: '/docs/libraries/rust',
+                        },
+                        {
+                            name: 'Unity',
+                            url: '/docs/libraries/unity',
+                            badge: {
+                                title: 'Beta',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                            },
                         },
                         {
                             name: 'C#/.NET',
@@ -2628,6 +2636,10 @@ export const docsMenu = {
                                     url: '/docs/sql/aggregations',
                                 },
                                 {
+                                    name: 'Optimizing SQL queries',
+                                    url: '/docs/sql/optimizing-queries',
+                                },
+                                {
                                     name: 'Tutorials',
                                     url: '/docs/sql/tutorials',
                                 },
@@ -3009,6 +3021,26 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/product-analytics/installation' },
+                        { name: 'AI wizard', url: '/docs/product-analytics/installation/ai-wizard' },
+                        { name: 'Web', url: '/docs/product-analytics/installation/web' },
+                        { name: 'React', url: '/docs/product-analytics/installation/react' },
+                        { name: 'Node.js', url: '/docs/product-analytics/installation/nodejs' },
+                        { name: 'Python', url: '/docs/product-analytics/installation/python' },
+                        { name: 'PHP', url: '/docs/product-analytics/installation/php' },
+                        { name: 'Ruby', url: '/docs/product-analytics/installation/ruby' },
+                        { name: 'Go', url: '/docs/product-analytics/installation/go' },
+                        { name: 'React Native', url: '/docs/product-analytics/installation/react-native' },
+                        { name: 'Android', url: '/docs/product-analytics/installation/android' },
+                        { name: 'iOS', url: '/docs/product-analytics/installation/ios' },
+                        { name: 'Java', url: '/docs/product-analytics/installation/java' },
+                        { name: 'Rust', url: '/docs/product-analytics/installation/rust' },
+                        { name: 'Elixir', url: '/docs/product-analytics/installation/elixir' },
+                        { name: 'Flutter', url: '/docs/product-analytics/installation/flutter' },
+                        { name: '.NET', url: '/docs/product-analytics/installation/dotnet' },
+                        { name: 'API', url: '/docs/product-analytics/installation/api' },
+                    ],
                 },
                 {
                     name: 'Capturing events',
@@ -3255,6 +3287,22 @@ export const docsMenu = {
                     url: '/docs/web-analytics/installation',
                     icon: 'IconBook',
                     color: 'blue',
+                    children: [
+                        { name: 'Overview', url: '/docs/web-analytics/installation' },
+                        { name: 'AI wizard', url: '/docs/web-analytics/installation/ai-wizard' },
+                        { name: 'Web', url: '/docs/web-analytics/installation/web' },
+                        { name: 'React', url: '/docs/web-analytics/installation/react' },
+                        { name: 'Next.js', url: '/docs/web-analytics/installation/nextjs' },
+                        { name: 'GTM', url: '/docs/web-analytics/installation/gtm' },
+                        { name: 'Vue', url: '/docs/web-analytics/installation/vue' },
+                        { name: 'Nuxt', url: '/docs/web-analytics/installation/nuxt' },
+                        { name: 'Svelte', url: '/docs/web-analytics/installation/svelte' },
+                        { name: 'WordPress', url: '/docs/web-analytics/installation/wordpress' },
+                        { name: 'Astro', url: '/docs/web-analytics/installation/astro' },
+                        { name: 'Framer', url: '/docs/web-analytics/installation/framer' },
+                        { name: 'Webflow', url: '/docs/web-analytics/installation/webflow' },
+                        { name: 'Phoenix', url: '/docs/web-analytics/installation/phoenix' },
+                    ],
                 },
                 {
                     name: 'Getting started',
@@ -3327,6 +3375,14 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/session-replay/installation' },
+                        { name: 'Web', url: '/docs/session-replay/installation/web' },
+                        { name: 'Android', url: '/docs/session-replay/installation/android' },
+                        { name: 'iOS', url: '/docs/session-replay/installation/ios' },
+                        { name: 'React Native', url: '/docs/session-replay/installation/react-native' },
+                        { name: 'Flutter', url: '/docs/session-replay/installation/flutter' },
+                    ],
                 },
                 {
                     name: 'Watching recordings',
@@ -3438,6 +3494,24 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/feature-flags/installation' },
+                        { name: 'Web', url: '/docs/feature-flags/installation/web' },
+                        { name: 'React', url: '/docs/feature-flags/installation/react' },
+                        { name: 'Node.js', url: '/docs/feature-flags/installation/nodejs' },
+                        { name: 'Python', url: '/docs/feature-flags/installation/python' },
+                        { name: 'PHP', url: '/docs/feature-flags/installation/php' },
+                        { name: 'Ruby', url: '/docs/feature-flags/installation/ruby' },
+                        { name: 'Go', url: '/docs/feature-flags/installation/go' },
+                        { name: 'React Native', url: '/docs/feature-flags/installation/react-native' },
+                        { name: 'Android', url: '/docs/feature-flags/installation/android' },
+                        { name: 'iOS', url: '/docs/feature-flags/installation/ios' },
+                        { name: 'Java', url: '/docs/feature-flags/installation/java' },
+                        { name: 'Flutter', url: '/docs/feature-flags/installation/flutter' },
+                        { name: 'Elixir', url: '/docs/feature-flags/installation/elixir' },
+                        { name: '.NET', url: '/docs/feature-flags/installation/dotnet' },
+                        { name: 'API', url: '/docs/feature-flags/installation/api' },
+                    ],
                 },
                 {
                     name: 'Creating feature flags',
@@ -3501,6 +3575,12 @@ export const docsMenu = {
                     url: '/docs/feature-flags/local-evaluation',
                     icon: 'IconBolt',
                     color: 'orange',
+                    children: [
+                        {
+                            name: 'Local evaluation in distributed or stateless environments',
+                            url: '/docs/feature-flags/local-evaluation/distributed-environments',
+                        },
+                    ],
                 },
                 {
                     name: 'Client-side bootstrapping',
@@ -4143,6 +4223,13 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/surveys/installation' },
+                        { name: 'Web', url: '/docs/surveys/installation/web' },
+                        { name: 'React Native', url: '/docs/surveys/installation/react-native' },
+                        { name: 'iOS', url: '/docs/surveys/installation/ios' },
+                        { name: 'Flutter', url: '/docs/surveys/installation/flutter' },
+                    ],
                 },
                 {
                     name: 'Creating a survey',
@@ -4999,6 +5086,14 @@ export const docsMenu = {
                     icon: 'IconCode',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/logs/installation' },
+                        { name: 'Node.js', url: '/docs/logs/installation/nodejs' },
+                        { name: 'Python', url: '/docs/logs/installation/python' },
+                        { name: 'Java', url: '/docs/logs/installation/java' },
+                        { name: 'Go', url: '/docs/logs/installation/go' },
+                        { name: 'Other', url: '/docs/logs/installation/other' },
+                    ],
                 },
                 {
                     name: 'Search logs',
@@ -5198,10 +5293,10 @@ export const productMenu = {
             category: 'tools',
         },
         {
-            name: 'Data warehouse',
+            name: 'Data stack',
             icon: 'IconDatabase',
             color: 'lilac',
-            url: '/data-warehouse',
+            url: '/data-stack',
             slug: 'data-warehouse',
         },
         {
