@@ -80,7 +80,7 @@ Once Simon determines whether an account belongs with a TAM or CSM (and which re
 
 ### Mid-quarter changes
 
-Account removals should only happen at the end of the quarter so that quota can be calculated correctly. However, accounts can be **added** to your book at any time if you're confident there's growth potential.
+Account removals should only happen at the end of the quarter so that quota can be calculated correctly. However, accounts can be **added** to your book at any time if you're confident there's growth potential. Work with team leads when they are identified to confirm they are a solid addition and prompt assignment.  
 
 If you're assigned an account with a previous owner, work with them on a proper handover. If the customer isn't in a healthy state (usage and engagement-wise), push back and ask the previous owner to get them to a good state first.
 
