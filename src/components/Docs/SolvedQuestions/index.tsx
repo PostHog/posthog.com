@@ -71,7 +71,7 @@ export default function SolvedQuestions({ topicLabel, limit = 5, className = '' 
                                 <div className="flex items-start gap-3">
                                     <IconCheckCircle className="size-5 text-green flex-shrink-0 mt-0.5" />
                                     <div className="flex-1 min-w-0">
-                                        <span className="text-primary dark:text-primary-dark font-medium group-hover:text-red dark:group-hover:text-yellow">
+                                        <span className="text-primary font-medium group-hover:text-red dark:group-hover:text-yellow">
                                             {question.attributes.subject}
                                         </span>
                                         <div className="flex items-center gap-3 mt-1 text-sm opacity-60">
