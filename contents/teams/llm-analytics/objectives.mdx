@@ -8,27 +8,22 @@
 - **Code-based evaluations** for evaluating LLM outputs using user-defined code evaluators instead of LLM-as-a-Judge
 - **Offline evaluations** based on datasets for consistent, repeatable testing
 - **Alerts and surfacing** to proactively notify teams of evaluation issues via alerts, news feed, and other channels
-- **Evaluations** to GA
 
-#### Goal 2: Prompt Management
-
-*Description*: Complete the prompt management feature, allowing teams to manage, version, and optimize their prompts directly in PostHog.
-
-*What we will ship*:
-- **Prompts** to GA
-
-#### Goal 3: Feature GA Releases
+#### Goal 2: Feature GA Releases
 
 *Description*: Move several features currently in alpha/beta to general availability.
 
 *What we will ship*:
+- **Evaluations** to GA - online LLM-as-a-Judge evaluations for measuring AI output quality
+- **Prompts** to GA - prompt management directly in PostHog
+- **Clustering** to GA - automatic grouping of similar traces and outputs
 - **Errors** to GA - grouped error tracking for LLM applications
 - **Sessions** to GA - session-level observability
 - **Playground** to GA - interactive testing environment for prompts and models
-- **LLM translation** to GA -  translation of non-English LLM traces to English
+- **LLM translation** to GA - translation of non-English LLM traces to English
 - **LLM trace/session summarization** to GA - AI-generated summaries for quick understanding
 
-#### Goal 4: Ingestion Pipeline
+#### Goal 3: Ingestion Pipeline
 
 *Description*: Complete our new ingestion pipeline optimized for LLM events, enabling better performance and new capabilities.
 
@@ -36,7 +31,7 @@
 - **New ingestion pipeline** launch - dedicated pipeline optimized for LLM events
 - **Multimodal support** - ingest and store images, audio, and other media in LLM events
 
-#### Goal 5: OpenTelemetry & SDK
+#### Goal 4: OpenTelemetry & SDK
 
 *Description*: Add OpenTelemetry support and rethink our SDK architecture to better serve diverse integration patterns.
 
@@ -44,14 +39,7 @@
 - **OpenTelemetry support** - native Otel integration for teams using OpenTelemetry instrumentation
 - **SDK improvements** - rethink and improve our SDK architecture for better developer experience
 
-#### Goal 6: Clustering
-
-*Description*: Release our semantic clustering feature to help teams discover patterns and group similar LLM outputs automatically.
-
-*What we will ship*:
-- **Clustering** to GA - automatic grouping of similar traces and outputs
-
-#### Goal 7: PostHog AI Integration
+#### Goal 5: PostHog AI Integration
 
 *Description*: Integrate LLM Analytics capabilities with PostHog AI to enable powerful search and insights across traces.
 
@@ -61,7 +49,7 @@
 - **Trace/session summarization** via AI - leverage PostHog AI for generating summaries
 - **Trace translation** via AI - use PostHog AI for translating traces into English
 
-#### Goal 8: Agents Support
+#### Goal 6: Agents Support
 
 *Description*: Add first-class support for AI agents, enabling teams to track and analyze agentic workflows.
 
@@ -69,7 +57,7 @@
 - **Agents exploration** - research and design how to best support agent tracking
 - **Agents implementation** - build core agent tracking functionality
 
-#### Goal 9: Docs, Onboarding & Wizard
+#### Goal 7: Docs, Onboarding & Wizard
 
 *Description*: Make it easier for new users to get started with LLM Analytics across different frameworks and tools.
 
