@@ -122,4 +122,4 @@ jobs:
                         ]
                       }
               env:
-                  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_SALES_WEBHOOK }}
+                  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_SALES_ALERTS_CHANNEL }}
