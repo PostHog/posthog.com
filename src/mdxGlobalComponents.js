@@ -65,6 +65,7 @@ import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
 import { ZendeskTicket } from './components/ZendeskTicket'
 import { CalloutBox } from './components/Docs/CalloutBox'
+import SolvedQuestions from './components/Docs/SolvedQuestions'
 
 export const shortcodes = {
     ArrayCTA,
@@ -133,4 +134,5 @@ export const shortcodes = {
     FeatureOwnershipTable,
     TaskOwnershipTable,
     RainbowText,
+    SolvedQuestions,
 }

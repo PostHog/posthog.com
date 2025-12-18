@@ -4083,7 +4083,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/error-tracking/common-questions',
                     icon: 'IconQuestion',
                     color: 'purple',

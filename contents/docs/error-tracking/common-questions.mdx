@@ -1,85 +1,137 @@
 ---
-title: Error tracking troubleshooting and FAQs
+title: Error tracking troubleshooting
 ---
 
-## FAQs
+This page covers troubleshooting for error tracking. For setup, see the [installation guides](/docs/error-tracking/installation).
 
-### How much does error tracking cost?
+<AskMax
+    title="Questions about error tracking?"
+    layout="row"
+    quickQuestions={[
+        "How do I upload source maps?",
+        "Are web workers supported?",
+        "Can exceptions be sampled or ignored?"
+    ]}
+/>
 
-Your first 100,000 `$exception` events each month are free – i.e. if you never exceed this number, you can use error tracking for free.
+## Exceptions not appearing
 
-After this, we charge a small amount for each `$exception` event you send. The more events you send, the less each event costs.
+If PostHog isn't capturing errors:
 
-Go to the [pricing page](/pricing) to use our calculator to get an estimate. You can also view an estimate on [your billing page](https://us.posthog.com/organization/billing).
+1. Run `window.posthog.LIB_VERSION` in your browser console to check your SDK version and update if needed
+2. Verify **exception capture** is enabled in [project settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture)
+3. Only unhandled exceptions auto-capture. For caught errors, use `posthog.captureException()`:
 
-### Are web workers supported?
+    ```js
+    try {
+        // code that errors
+    } catch (error) {
+        posthog.captureException(error)
+    }
+    ```
 
-Yes. Error tracking will work as long as you initialize PostHog in the [web worker](/tutorials/web-worker). You will need to disable any features that rely on the `window` object:
+4. Wait a few minutes and check the [error tracking in the PostHog app](https://app.posthog.com/error_tracking) before assuming it's broken
 
-```js
-posthog.init(token, {
-    ...
-    autocapture: false,
-    capture_pageview: false,
-    capture_pageleave: false,
-    disable_session_recording: true,
-    disable_surveys: true,
-});
+You can also use the [SDK doctor](/docs/sdk-doctor) to diagnose common issues.
+
+## Source maps not resolving
+
+If stack traces show minified code instead of original source:
+
+1. Verify source maps are uploaded to the correct project in symbol sets by navigating to [Error tracking](https://app.posthog.com/error_tracking) and selecting **Configure** > **Symbol sets**
+2. The `release` tag in your SDK config must match the version you uploaded:
+
+    ```js
+    posthog.init('<ph_project_api_key>', {
+        ...
+        session_recording: {
+            recordCrossOriginIframes: true,
+        },
+        release: 'v1.2.3'
+    })
+    ```
+
+3. Source map paths must match your production bundle URLs exactly
+4. Upload source maps *before* deploying code that references them
+
+See the [source maps guide](/docs/error-tracking/upload-source-maps/) for upload instructions.
+
+## 'Script error' with no stack trace
+
+For security purposes, browsers hide error details from scripts loaded from different domains. This shows as `Script error.` with no stack trace.
+
+To fix, add `crossorigin="anonymous"` to your script tags:
+
+```html
+<script src="https://your-cdn.com/app.js" crossorigin="anonymous"></script>
 ```
 
-To `identify` users in web workers you will need to pass the distinct ID. This can be done via an env variable or sending it via `postMessage` from your main application.
-
-### Can exceptions be sampled / ignored
-
-Returning `null` for a given event in the [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) hook will cause it not to be captured. You may want to:
-- Drop certain types of exceptions
-- Randomly sample a subset of all exceptions 
-- Sample based on the events properties (e.g. URL or user)
-
-## Troubleshooting
-
-### What is a 'Script error.' with no stack traces?
-
-For security purposes, errors sent from a JavaScript file served on a different domain hide the original error to avoid unintentionally leaking sensitive information to any `onerror` handler. This is often the case for third party scripts running on a site and results in an obfuscated 'Script error.' with no associated stack trace.
-
-To see the actual error, the erroring script needs to be loaded `anonymously` which excludes potentially user-identifying information such as cookies from being transmitted when requesting the file.
+If the script is within your control, also set the `Access-Control-Allow-Origin` response header:
 
 ```
-<script src="https://third-party.domain/script.js" crossorigin="anonymous"></script>
+Access-Control-Allow-Origin: *
 ```
 
-It can be somewhat difficult to know which script is causing the error because the captured exception provides no context. There is no solution to this other than to work through a process of elimination.
+Or specify your domain:
 
-If the script is within your control, you also need to set the `Access-Control-Allow-Origin` response header to include the calling domain. This can be a comma separated list of valid domains or a global wildcard e.g `*`.
+```
+Access-Control-Allow-Origin: https://yourdomain.com
+```
 
-### What is a 'Non-Error promise rejection' error with no stack traces?
+It can be difficult to identify which script is causing the error. If you can't fix all scripts immediately, watch [session recordings](/docs/session-replay) to see what actions lead to the error.
 
-When you do not pass an `Error` object to a rejected promise, the resulting error captured will be a generic 'Non-Error promise rejection' and the stack trace context will not be included. An example of this is:
+## 'Non-Error promise rejection' with no stack trace
 
-```js
+This happens when you reject a promise with a string instead of an `Error` object. Without an `Error` object, there's no stack trace to capture.
+
+<MultiLanguage>
+
+```js file=Without stack trace
 new Promise((resolve, reject) => {
-    // the captured error will be 'Non-Error promise rejection' without a stack trace
-    reject('Something went wrong');
+  reject('Something went wrong'); // String has no stack trace
 });
+
+Promise.reject('Something went wrong');
 ```
 
-The easiest way to resolve this is to always reject promises with an `Error` object:
+```js file=With stack trace
+new Promise((resolve, reject) => {
+  reject(new Error('Something went wrong')); // Error includes stack trace
+});
+
+Promise.reject(new Error('Something went wrong'));
+```
+
+</MultiLanguage>
+
+For third-party libraries that reject with strings, wrap the rejection:
 
 ```js
-new Promise((resolve, reject) => {
-    // the captured error will be 'Something went wrong' with a stack trace
-    reject(new Error('Something went wrong'));
-});
+somePromise()
+  .catch(err => {
+    posthog.captureException(new Error(err))
+    throw err
+  })
 ```
 
-### What is a 'Minified React error' with no stack traces?
+## 'Minified React error' with no stack trace
 
-In order to reduce bundle size in production builds React removes useful debugging information from errors thrown by the framework. This results in errors that lack stack traces and look like the following:
+In production builds, React removes debugging information to reduce bundle size. Errors look like:
 
 ```
-Minified React error #123; visit https://reactjs.org/docs/error-decoder.html?invariant=123 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+Minified React error #123; visit https://reactjs.org/docs/error-decoder.html?invariant=123
 ```
 
-The link provided in the error message can be used to look up the full error message and understand the cause of the error. However, it will not tell you exactly where in your code the error originates from.
+To debug:
 
-One way to debug these kinds of issues is to watch session recordings to see what user actions lead up to the error occurring. From there you can try to reproduce the error by following the same steps in your development environment, where the full stack trace will be available.
+1. Upload source maps to get readable stack traces. See the [source maps guide](/docs/error-tracking/upload-source-maps/)
+2. Visit the error URL in the message to understand what went wrong, though it won't show where in your code the error originated
+3. Watch [session recordings](/docs/session-replay) to see what user actions triggered the error, then reproduce in development
+4. Use a development build which includes full error messages. Only use this for debugging, not production
+
+
+## Still having issues?
+
+Try the [SDK doctor](/docs/sdk-doctor) to diagnose common problems, or browse community solutions below.
+
+<SolvedQuestions topicLabel="Error tracking" limit={5} />

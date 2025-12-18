@@ -16,6 +16,7 @@ interface AskMaxProps {
     quickQuestions?: string[]
     linkOnly?: boolean
     children?: React.ReactNode
+    layout?: 'default' | 'row'
 }
 
 export default function AskMax({
@@ -25,6 +26,7 @@ export default function AskMax({
     quickQuestions,
     linkOnly = false,
     children,
+    layout = 'default',
 }: AskMaxProps) {
     const posthog = usePostHog()
     const { compact } = useLayoutData()
@@ -65,6 +67,33 @@ export default function AskMax({
             <button onClick={handleChatOpen} className={className}>
                 {children}
             </button>
+        )
+    }
+
+    if (layout === 'row') {
+        return (
+            <div className={`flex items-center gap-4 py-4 ${borderClasses} ${className}`}>
+                {compact ? null : (
+                    <>
+                        <IconLightBulb className="size-10 shrink-0 bg-accent rounded p-2 text-muted" />
+                        <div className="flex-1">
+                            <h3 className="m-0 !text-lg leading-tight">
+                                {title} <span className="text-red dark:text-yellow">Ask PostHog AI.</span>
+                            </h3>
+                        </div>
+                        <CallToAction
+                            type="secondary"
+                            size="md"
+                            className="group shrink-0 [&>span]:flex [&>span]:items-center [&>span]:gap-1.5 [&>span]:px-3"
+                            childClassName="whitespace-nowrap"
+                            onClick={handleChatOpen}
+                        >
+                            <IconChatHelp className="size-5 inline-block opacity-75 group-hover:opacity-100" />
+                            <span>Chat with PostHog AI</span>
+                        </CallToAction>
+                    </>
+                )}
+            </div>
         )
     }
 
