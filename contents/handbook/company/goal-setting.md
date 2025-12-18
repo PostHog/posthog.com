@@ -36,7 +36,7 @@ You may also want to write some overall thoughts about how the quarter generally
 
 This should be done BEFORE the meeting by everyone, independently and in this doc before the meeting starts. Spend 10 minutes in the meeting silently reading through everyone’s HOGS during the meeting. Add any common themes or otherwise important items to the section below as you read, then only discuss the themes (there generally isn't time to discuss every line of the HOGS).
 
-Add entries under each question with your initials/name like: "- BW: My comment"
+Add entries under each question with your initials/name like: "- (your name): My comment"
 
 - Hope
   - What are you most excited about this quarter?
