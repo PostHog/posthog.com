@@ -4899,11 +4899,21 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Dashboard',
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Dashboard events',
                     featured: true,
-                    url: '/docs/customer-analytics/dashboard',
+                    url: '/docs/customer-analytics/dashboard-events',
                     icon: 'IconDashboard',
                     color: 'red',
+                },
+                {
+                    name: 'Dashboard metrics',
+                    featured: true,
+                    url: '/docs/customer-analytics/dashboard-metrics',
+                    icon: 'IconBolt',
+                    color: 'orange',
                 },
                 {
                     name: 'Usage metrics',
