@@ -50,7 +50,7 @@ mprocs
 
 This will start the workbench and all its dependencies:
 
-- Making a change to the examples repo will instantly update the MCP content. 
+- Making a change to the examples repo will instantly update the MCP content.
 - Editing the wizard's code will automatically rebuild and link the changes globally. Run it against any project on your machine with `wizard --local-mcp`.
 - Review the contents of the MCP server by selecting the **mcp-inspector** tab and opening the link it provides in your browser.
 
@@ -66,7 +66,11 @@ Look for the text `Open inspector with token pre-filled.
 
 Access the link in your browser, set the transport type to **Streamable HTTP**, and set the URL to **http://localhost:8787/mcp**. (Alternatively, you can also inspect the production MCP by setting the URL to **https://mcp.posthog.com/mcp**).
 
-<img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_12_17_at_4_04_47_PM_df53b1ea2b.png" alt="MCP inspector" className="block mx-auto" style={{ maxWidth: 300 }} />
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_12_17_at_4_04_47_PM_df53b1ea2b.png"
+    alt="MCP inspector"
+    classes="rounded"
+/>
 
 You'll need a PostHog API key to access the MCP server. Get one from the [user API keys settings page](https://app.posthog.com/settings/user-api-keys?preset=mcp_server). Open the **Authentication** tab and paste the key into the **Bearer token** field.
 
