@@ -288,11 +288,7 @@ You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember na
 
 Use a decision tree when users need help choosing between multiple options. Instead of making users read through all possibilities, the tree asks questions and recommends the best path based on their answers.
 
-<CalloutBox icon="IconWarning" title="Keep it simple" type="caution">
-
-Decision trees can easily grow far too complex, so keep your logic minimal. Aim for 2-3 questions max with 5-6 options per question. If you need more, consider restructuring your content instead. A complicated decision tree is worse than a simple list.
-
-</CalloutBox>
+> **Note:** Decision trees can easily grow far too complex, so keep your logic minimal. Aim for 2-3 questions max with 5-6 options per question. If you need more, consider restructuring your content instead. A complicated decision tree is worse than a simple list.
 
 ```mdx
 <DecisionTree
@@ -337,13 +333,13 @@ Decision trees can easily grow far too complex, so keep your logic minimal. Aim 
 
 Props:
 
--   `questions`: array of question objects with `id`, `question`, `options`, and optional `description` and `condition`
--   `getRecommendation`: function that takes answers and returns `{ title, path, reason }`
--   `buttonText`: optional, defaults to "Follow the guide"
+-   **questions**: array of question objects with `id`, `question`, `options`, and optional `description` and `condition`
+-   **getRecommendation**: function that takes answers and returns `{ title, path, reason }`
+-   **buttonText**: optional, defaults to "Follow the guide", can change as needed
 
 The `condition` function receives all previous answers and returns `true` if the question should be shown. Use this for branching logic.
 
-For a full working example, see `contents/docs/advanced/proxy/_snippets/proxy-decision-tree.tsx`.
+To see this implemented, see `contents/docs/advanced/proxy/_snippets/proxy-decision-tree.tsx` or [Deploy a reverse proxy](https://posthog.com/docs/advanced/proxy) on the live site.
 
 ### Quest log
 
