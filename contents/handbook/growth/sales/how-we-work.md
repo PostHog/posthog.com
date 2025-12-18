@@ -129,8 +129,9 @@ If the answer to any of the above questions is 'no' then it's likely that there 
   - It also means that you are less likely to totally neglect existing customers because if they reduce usage, it hurts your overall ARR figure.
 - We apply a multiplier to each invoice in the calculation based on how many of our primary products they are paying for, to incentivise cross-sell.
   - Primary products are: Product Analytics, Session Replay, Feature Flags, Surveys, Error Tracking, LLM Analytics and Data Warehouse.
-  - We start off at a base of 0.8x for customers with only 1 paid product, as it represents a bigger churn risk.
-  - We then apply an additional 0.2x for each paid product above 1 (ie, 3 paid products = 1.2x)
+  - We start off at a base of 0.7x for customers with only 1 paid product, as it represents a bigger churn risk.
+  - We then apply an additional 0.2x for each paid product above 1 (ie, 3 paid products = 1.1x)
+  - A product is counted as paid if the invoice amount for that product is greater than $200
 - Commission is _uncapped_ and paid out based on the % of your quota you hit, on a sliding scale. Hit 100% commission, get 100% of commission. 0% for 0%. And 200% for 200%. Ways to hit quota:
   - Increase ARR for your monthly customers
   - For customers already on annual plans, additional usage ARR _beyond_ their annual run rate - for example, if you have a customer on a $120k annual contract, but they are being invoiced $20k/mo for their usage, you will get recognized on the additional $10k/mo
