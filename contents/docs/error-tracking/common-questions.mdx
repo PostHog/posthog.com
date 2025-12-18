@@ -1,11 +1,11 @@
 ---
-title: Error tracking troubleshooting
+title: Error Tracking troubleshooting
 ---
 
-This page covers troubleshooting for error tracking. For setup, see the [installation guides](/docs/error-tracking/installation).
+This page covers troubleshooting for Error Tracking. For setup, see the [installation guides](/docs/error-tracking/installation).
 
 <AskMax
-    title="Questions about error tracking?"
+    title="Questions about Error Tracking?"
     layout="row"
     quickQuestions={[
         "How do I upload source maps?",
@@ -30,7 +30,7 @@ If PostHog isn't capturing errors:
     }
     ```
 
-4. Wait a few minutes and check the [error tracking in the PostHog app](https://app.posthog.com/error_tracking) before assuming it's broken
+4. Wait a few minutes and check the [Error Tracking in the PostHog app](https://app.posthog.com/error_tracking) before assuming it's broken
 
 You can also use the [SDK doctor](/docs/sdk-doctor) to diagnose common issues.
 
@@ -38,7 +38,7 @@ You can also use the [SDK doctor](/docs/sdk-doctor) to diagnose common issues.
 
 If stack traces show minified code instead of original source:
 
-1. Verify source maps are uploaded to the correct project in symbol sets by navigating to [Error tracking](https://app.posthog.com/error_tracking) and selecting **Configure** > **Symbol sets**
+1. Verify source maps are uploaded to the correct project in symbol sets by navigating to [Error Tracking](https://app.posthog.com/error_tracking) and selecting **Configure** > **Symbol sets**
 2. The `release` tag in your SDK config must match the version you uploaded:
 
     ```js
@@ -134,4 +134,4 @@ To debug:
 
 Try the [SDK doctor](/docs/sdk-doctor) to diagnose common problems, or browse community solutions below.
 
-<SolvedQuestions topicLabel="Error tracking" limit={5} />
+<SolvedQuestions topicLabel="Error Tracking" limit={5} />
