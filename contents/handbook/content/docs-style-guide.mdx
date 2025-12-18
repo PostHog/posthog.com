@@ -284,6 +284,67 @@ You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember na
 </Steps>
 ```
 
+### Decision tree
+
+Use a decision tree when users need help choosing between multiple options. Instead of making users read through all possibilities, the tree asks questions and recommends the best path based on their answers.
+
+<CalloutBox icon="IconWarning" title="Keep it simple" type="caution">
+
+Decision trees can easily grow far too complex, so keep your logic minimal. Aim for 2-3 questions max with 5-6 options per question. If you need more, consider restructuring your content instead. A complicated decision tree is worse than a simple list.
+
+</CalloutBox>
+
+```mdx
+<DecisionTree
+    questions={[
+        {
+            id: 'platform',
+            question: 'Where are you deploying?',
+            description: 'Select your hosting platform.',
+            options: [
+                { value: 'vercel', label: 'Vercel' },
+                { value: 'netlify', label: 'Netlify' },
+                { value: 'other', label: 'Other' },
+            ],
+        },
+        {
+            id: 'framework',
+            question: 'What framework are you using?',
+            condition: (answers) => answers.platform === 'vercel',
+            options: [
+                { value: 'nextjs', label: 'Next.js' },
+                { value: 'other', label: 'Other' },
+            ],
+        },
+    ]}
+    getRecommendation={(answers) => {
+        if (answers.platform === 'vercel' && answers.framework === 'nextjs') {
+            return {
+                title: 'Use Next.js rewrites',
+                path: '/docs/advanced/proxy/nextjs',
+                reason: 'Next.js rewrites work seamlessly on Vercel.',
+            }
+        }
+        return {
+            title: 'Use the default option',
+            path: '/docs/advanced/proxy',
+            reason: 'This works for most setups.',
+        }
+    }}
+    buttonText="Follow the guide"
+/>
+```
+
+Props:
+
+-   `questions`: array of question objects with `id`, `question`, `options`, and optional `description` and `condition`
+-   `getRecommendation`: function that takes answers and returns `{ title, path, reason }`
+-   `buttonText`: optional, defaults to "Follow the guide"
+
+The `condition` function receives all previous answers and returns `true` if the question should be shown. Use this for branching logic.
+
+For a full working example, see `contents/docs/advanced/proxy/_snippets/proxy-decision-tree.tsx`.
+
 ### Quest log
 
 The `<QuestLog>` component is for syllabus-style pages. Inspired by video games, it outlines each section as a "quest" to give the reader a visual roadmap of what's needed to reach a larger goal or milestone – like fully adopting our error tracking app.
