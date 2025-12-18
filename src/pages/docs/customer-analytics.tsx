@@ -62,7 +62,7 @@ export const Content = ({ quickLinks = true }) => {
                     <ul>
                         <li>Have little time to spend building dashboards. The focus is on building the product.</li>
                         <li>Need to know customers and be in contact with them.</li>
-                        <li>Are (or should be) bsessed with finding PMF.</li>
+                        <li>Are (or should be) obsessed with finding PMF.</li>
                     </ul>
                 </div>
             </section>
