@@ -1,5 +1,5 @@
 ---
-title: PostHog for Vercel (Native Integration)
+title: Vercel Marketplace Integration
 sidebarTitle: Vercel Marketplace
 icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/vercel_icon_svgrepo_com_b7e78b41f9.svg
@@ -7,507 +7,94 @@ icon: >-
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Add PostHog feature flags to your Vercel projects with billing handled entirely inside Vercel.
+The Vercel Marketplace integration adds PostHog feature flags and experiments to your Vercel projects with billing handled through Vercel.
 
-## What you'll learn
+Choose this integration if you do not already have a PostHog account or you prefer to consolidate payment for PostHog inside your Vercel invoice.
 
-After reading this guide, you'll understand:
-- What the PostHog native integration provides
-- How to install PostHog from the Vercel Marketplace
-- How to create and manage feature flags
-- How to run A/B tests on your Vercel deployments
-- Where to manage billing and usage
+## Installing the integration
 
-## What is the PostHog native integration?
+1. Go to the [PostHog integration](https://vercel.com/integrations/posthog) on Vercel Marketplace
+2. Click **Install**
 
-The PostHog native integration adds feature flags to your Vercel projects, enabling:
+This creates a PostHog organization and project, and adds environment variables to your Vercel project.
 
-### Key capabilities:
-- **Feature toggles**: Turn features on/off without redeploying
-- **Gradual rollouts**: Release to 10%, then 50%, then 100% of users
-- **A/B testing**: Test variants and measure which performs better
-- **User targeting**: Show features to specific users or segments
-- **Environment flags**: Different flag values for preview vs. production
+## Environment variables
 
-### How billing works:
-- Billing is handled entirely through your Vercel account
-- Usage-based pricing: first 1 million feature flag requests free per month
-- One consolidated invoice from Vercel for all your services
-- No separate PostHog account or billing needed
+The integration adds:
+- `POSTHOG_PROJECT_API_KEY` - Your PostHog project API key
+- `POSTHOG_HOST` - PostHog API host URL
 
-### Automatic setup:
-When you install the integration:
-1. PostHog creates your organization and project
-2. Environment variables are automatically added to your Vercel project
-3. Feature flags are immediately available in your code
-4. Access the PostHog dashboard to create and manage flags
+These names work across all frameworks. For client-side frameworks, rename them in your Vercel project settings:
 
-<CalloutBox icon="IconInfo" title="Feature flags only" type="fyi">
+| Framework | Rename to |
+|-----------|-----------|
+| Next.js | `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST` |
+| Vite/SvelteKit | `VITE_POSTHOG_KEY`, `VITE_POSTHOG_HOST` |
+| Nuxt | `NUXT_PUBLIC_POSTHOG_KEY`, `NUXT_PUBLIC_POSTHOG_HOST` |
 
-The Vercel native integration provides **feature flags only**. For analytics, session replay, or error tracking, you can set up PostHog directly (outside the Vercel integration) on your own billing, or use another analytics tool alongside these feature flags.
+Server-side code can use the original names.
 
-</CalloutBox>
+## Installing the SDK
 
-## Installing the PostHog integration
+Install PostHog in your application using your framework's guide:
 
-### Option 1: From the Vercel Marketplace
+- [Next.js](/docs/libraries/next-js)
+- [React](/docs/libraries/react)
+- [Svelte](/docs/libraries/svelte)
+- [All frameworks](/docs/libraries)
 
-1. Visit the [PostHog integration](https://vercel.com/integrations/posthog) on Vercel Marketplace
-2. Click **Add Integration**
-3. Select the Vercel account where you want to install PostHog
-4. Choose which projects should have PostHog enabled (or select "All Projects")
-5. Click **Install** to complete the setup
-
-### Option 2: From your Vercel project dashboard
-
-1. Navigate to your project in the Vercel dashboard
-2. Click the **Integrations** tab
-3. Search for "PostHog" or browse the marketplace
-4. Click **Add** next to the PostHog integration
-5. Follow the prompts to complete installation
-
-### What happens during installation:
-
-- A new PostHog organization is created automatically
-- Environment variables (`NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST`) are added to your selected projects
-- Your PostHog project is linked to your Vercel organization
-- A usage-based billing plan is automatically activated (first 1M requests free)
-
-No credit card required - billing goes through your existing Vercel account.
-
-## Using feature flags in your application
-
-After installation, environment variables are automatically available. Add the PostHog SDK to check feature flags:
-
-### Next.js (App Router)
+When initializing, disable products not included in the integration:
 
 ```tsx
-// app/providers.tsx
-'use client'
-import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
-import { useEffect } from 'react'
-
-export function PHProvider({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
-      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-      // Feature flags only - no autocapture or session recording
-      autocapture: false,
-      disable_session_recording: true
-    })
-  }, [])
-
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
-}
-```
-
-```tsx
-// app/layout.tsx
-import { PHProvider } from './providers'
-
-export default function RootLayout({ children }) {
-  return (
-    <html>
-      <PHProvider>
-        <body>{children}</body>
-      </PHProvider>
-    </html>
-  )
-}
-```
-
-```tsx
-// Using a feature flag in a component
-'use client'
-import { useFeatureFlagEnabled } from 'posthog-js/react'
-
-export function NewFeature() {
-  const showNewCheckout = useFeatureFlagEnabled('new-checkout-flow')
-
-  if (!showNewCheckout) return <OldCheckout />
-  return <NewCheckout />
-}
-```
-
-### Next.js (Pages Router)
-
-```tsx
-// pages/_app.tsx
-import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
-import { useEffect } from 'react'
-
-export default function App({ Component, pageProps }) {
-  useEffect(() => {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
-      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-      autocapture: false,
-      disable_session_recording: true
-    })
-  }, [])
-
-  return (
-    <PostHogProvider client={posthog}>
-      <Component {...pageProps} />
-    </PostHogProvider>
-  )
-}
-```
-
-### Server-side feature flags (Next.js middleware or API routes)
-
-```typescript
-// lib/posthog.ts
-import { PostHog } from 'posthog-node'
-
-export const posthogServer = new PostHog(
-  process.env.POSTHOG_API_KEY!,
-  { host: process.env.POSTHOG_HOST }
-)
-```
-
-```typescript
-// middleware.ts or API route
-import { posthogServer } from '@/lib/posthog'
-import { NextRequest, NextResponse } from 'next/server'
-
-export async function middleware(request: NextRequest) {
-  const userId = getUserId(request) // your auth logic
-
-  const isEnabled = await posthogServer.isFeatureEnabled(
-    'new-feature',
-    userId
-  )
-
-  if (isEnabled) {
-    // Show new version
-    return NextResponse.next()
-  }
-
-  // Show old version
-  return NextResponse.next()
-}
-```
-
-### React / Vite
-
-```tsx
-// src/main.tsx
-import posthog from 'posthog-js'
-
-posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY!, {
-  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+  api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
   autocapture: false,
   disable_session_recording: true
 })
 ```
 
-<CalloutBox icon="IconInfo" title="Vite environment variables" type="fyi">
+Then use feature flags:
 
-For Vite, add a prefix to your environment variables in Vercel: `VITE_PUBLIC_POSTHOG_KEY` and `VITE_PUBLIC_POSTHOG_HOST`.
+```tsx
+import { useFeatureFlagEnabled } from 'posthog-js/react'
 
-</CalloutBox>
-
-### Svelte / SvelteKit
-
-```typescript
-// src/hooks.client.ts
-import posthog from 'posthog-js'
-import { browser } from '$app/environment'
-
-if (browser) {
-  posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
-    api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
-    autocapture: false,
-    disable_session_recording: true
-  })
+export function NewFeature() {
+  const enabled = useFeatureFlagEnabled('new-checkout')
+  return enabled ? <NewCheckout /> : <OldCheckout />
 }
 ```
 
-See the [PostHog documentation](/docs/libraries) for guides on other frameworks.
+## Creating feature flags and experiments
 
-## Creating and managing feature flags
+Access the PostHog dashboard from your Vercel project's **Integrations** tab.
 
-### Creating your first flag
+Feature flags and experiments you create automatically sync with Vercel's flags dashboard.
 
-1. Access PostHog from Vercel:
-   - Go to your Vercel project → **Integrations** → **PostHog**
-   - Click **View in PostHog** to open the dashboard
-2. Navigate to **Feature Flags** → **New feature flag**
-3. Configure your flag:
-   - **Key**: `new-checkout-flow` (used in code)
-   - **Name**: "New Checkout Flow" (for humans)
-   - **Rollout**: Start at 10% of users
+For full documentation:
+- [Creating feature flags](/docs/feature-flags/creating-feature-flags)
+- [Running experiments](/docs/experiments)
 
-### Rollout strategies
+## Billing
 
-#### Percentage rollout
-Release to a percentage of users:
-- 10% for initial testing
-- 50% after 24 hours with no issues
-- 100% for full release
+Billing goes through your Vercel account. View usage in Vercel under **Integrations** → **PostHog**.
 
-#### User targeting
-Show features to specific users:
-```typescript
-// Filter by email domain in PostHog dashboard
-email ends with: @yourcompany.com
-```
+See [posthog.com/pricing](https://posthog.com/pricing) for pricing details.
 
-Or target by any user property:
-```typescript
-// Tag users when initializing
-posthog.identify('user-id', {
-  email: 'user@example.com',
-  plan: 'enterprise'
-})
-
-// Then target by properties in PostHog dashboard
-plan = 'enterprise'
-```
-
-#### Environment-based flags
-
-Tag all events with the environment so you can target flags differently:
-
-```typescript
-// Tag users with environment on init
-posthog.init(key, {
-  api_host: host,
-  autocapture: false,
-  disable_session_recording: true,
-  bootstrap: {
-    distinctId: 'user-id'
-  }
-})
-
-// Register environment as a property
-posthog.register({
-  environment: process.env.VERCEL_ENV // 'production', 'preview', or 'development'
-})
-```
-
-Then in PostHog dashboard, create targeting rules:
-- Production: `environment = 'production'`
-- Preview deployments: `environment = 'preview'`
-
-### Running A/B tests
-
-1. Create a multivariate flag with variants in PostHog:
-   - Control (50%)
-   - Variant A (25%)
-   - Variant B (25%)
-
-2. Use in code:
-```typescript
-const variant = posthog.getFeatureFlag('checkout-test')
-
-if (variant === 'variant-a') {
-  return <CheckoutA />
-} else if (variant === 'variant-b') {
-  return <CheckoutB />
-} else {
-  return <CheckoutControl />
-}
-```
-
-3. **Measuring results**: The Vercel integration includes **flags only**, not analytics. To measure which variant performs better, you'll need to:
-   - Add PostHog analytics separately (outside Vercel integration), OR
-   - Use your own analytics tool (Google Analytics, Mixpanel, etc.)
-
-The integration provides the flag evaluation, but not the analytics to measure results.
-
-## Managing your PostHog integration
-
-### What you manage in Vercel:
-- **Billing**: View charges in your Vercel billing dashboard
-- **Usage**: Feature flag request count under **Integrations** → **PostHog** → **Usage**
-- **Installation**: Connect/disconnect projects, remove the integration
-- **Invoices**: Download from Vercel billing history
-
-### What you manage in PostHog:
-- **Feature flags**: Create, update, enable/disable flags
-- **Rollout rules**: Adjust percentages and targeting
-- **Team members**: Invite team to manage flags
-- **Experiments**: Set up multivariate tests
-
-### Pricing:
-- **Free tier**: 1 million feature flag requests per month
-- **Beyond free tier**: $0.0001 per request (1/10th of a cent)
-- Billed monthly through your Vercel account
-
-**Example**: 10 million flag requests/month = $0.90
-
-View detailed pricing at [posthog.com/pricing](https://posthog.com/pricing).
-
-### Checking your usage:
-1. In Vercel: **Integrations** → **PostHog** → **Usage** shows current billing period usage
-2. In PostHog: **Settings** → **Billing** shows detailed breakdown
-
-## Common tasks
-
-### Adding PostHog to additional projects
-
-1. In Vercel dashboard, go to **Integrations**
-2. Find the PostHog integration and click **Manage**
-3. Click **Add Project**
-4. Select the project and click **Add**
-
-Environment variables are automatically added to the new project.
-
-### Removing PostHog from a project
-
-1. In Vercel dashboard, go to the project's **Settings** → **Environment Variables**
-2. Remove `NEXT_PUBLIC_POSTHOG_KEY` and `NEXT_PUBLIC_POSTHOG_HOST`
-3. Deploy to apply changes
-
-This stops flag evaluation but preserves your existing flag configurations in PostHog.
-
-### Inviting team members
-
-Team members added to your Vercel team automatically get access to PostHog with the appropriate permissions:
-- Vercel **Owner** → PostHog **Admin**
-- Vercel **Member** → PostHog **Member**
-- Vercel **Viewer** → PostHog **Viewer**
-
-Or manually invite members in PostHog: **Settings** → **Organization** → **Members** → **Invite**
-
-### Disconnecting the integration
-
-⚠️ Warning: This will stop flag evaluation and you'll lose access to your flags.
-
-1. In Vercel dashboard, go to **Integrations**
-2. Find PostHog and click **Manage**
-3. Click **Remove Integration**
-4. Confirm the removal
-
-Your flag configurations will be deleted after 30 days.
-
-### Upgrading to full PostHog
-
-If you want analytics, session replay, and error tracking in addition to feature flags:
-
-1. [Contact PostHog support](https://posthog.com/support) to discuss migration
-2. Or set up PostHog directly (outside Vercel integration)
-3. Use the same feature flags but add analytics capabilities
-
-Note: Full PostHog would be billed separately, not through Vercel.
-
-## Environment variables
-
-The integration automatically adds these environment variables to your Vercel projects:
-
-| Variable | Description | Example Value |
-|----------|-------------|---------------|
-| `NEXT_PUBLIC_POSTHOG_KEY` | Your PostHog project API key (public, safe to expose) | `phc_abc123...` |
-| `NEXT_PUBLIC_POSTHOG_HOST` | PostHog API host URL | `https://us.i.posthog.com` or `https://eu.i.posthog.com` |
-
-### Framework-specific naming:
-
-Different frameworks expect different environment variable prefixes:
-
-| Framework | PostHog Key Variable | PostHog Host Variable |
-|-----------|---------------------|----------------------|
-| Next.js | `NEXT_PUBLIC_POSTHOG_KEY` | `NEXT_PUBLIC_POSTHOG_HOST` |
-| Vite | `VITE_PUBLIC_POSTHOG_KEY` | `VITE_PUBLIC_POSTHOG_HOST` |
-| SvelteKit | `VITE_PUBLIC_POSTHOG_KEY` | `VITE_PUBLIC_POSTHOG_HOST` |
-| Nuxt | `NUXT_PUBLIC_POSTHOG_KEY` | `NUXT_PUBLIC_POSTHOG_HOST` |
-
-You may need to manually rename these variables in Vercel for non-Next.js frameworks.
-
-## Frequently asked questions
-
-### Does this include analytics or session replay?
-
-No, the Vercel integration provides **feature flags only**. For analytics, session replay, or error tracking, you can:
-- Set up PostHog directly (outside Vercel integration) on your own billing
-- Use another analytics tool alongside these feature flags
-
-### How do I measure A/B test results?
-
-The integration provides flag evaluation (which variant each user sees) but not analytics. To measure results:
-- Add PostHog analytics separately, OR
-- Use your existing analytics tool (Google Analytics, Mixpanel, etc.)
-- Track which variant performed better manually
+## FAQ
 
 ### Can I use my existing PostHog account?
 
-No, the native integration creates a new PostHog organization for feature flags only. If you already have PostHog:
-- Keep both (Vercel integration for flags, existing account for analytics)
-- Or migrate to direct PostHog billing for the full platform
-
-### What's the difference between this and LaunchDarkly?
-
-Similar capabilities (feature flags, A/B testing, targeting) but:
-- **Pricing**: PostHog starts free (1M requests), LaunchDarkly starts at $10/seat
-- **Billing**: Integrated with Vercel vs. separate
-- **Scope**: PostHog can add analytics later, LaunchDarkly is flags-only always
-
-### Can I use these flags server-side?
-
-Yes! Use the `posthog-node` SDK for server-side flag evaluation:
-
-```typescript
-import { PostHog } from 'posthog-node'
-const posthog = new PostHog(process.env.POSTHOG_API_KEY!)
-const enabled = await posthog.isFeatureEnabled('flag-key', 'user-id')
-```
-
-Server-side requests count toward your usage.
-
-### What regions does PostHog support?
-
-PostHog offers two regions:
-- **US Cloud**: `https://us.i.posthog.com` (data stored in US)
-- **EU Cloud**: `https://eu.i.posthog.com` (data stored in EU)
-
-Your region is selected during installation and determines where your data is stored for GDPR compliance.
-
-### Can I use PostHog in preview deployments?
-
-Yes! The same PostHog project is available in all environments (development, preview, production). We recommend tagging users with the environment (see [Environment-based flags](#environment-based-flags)) so you can filter production vs. preview traffic.
+No. The integration creates a new organization.
 
 ## Limitations
 
-The PostHog native integration has these limitations:
-
-- **Single organization**: The integration creates one PostHog organization per Vercel team. You cannot link multiple PostHog organizations to the same Vercel team.
-- **Feature flags only**: The integration does not include analytics, session replay, or error tracking.
-- **No self-hosted support**: The integration only works with PostHog Cloud (US or EU regions).
-- **Billing managed by Vercel**: You cannot manage billing directly with PostHog for integrated accounts.
-- **Region selection**: Once selected during installation, your data region (US or EU) cannot be changed.
-- **Team sync is one-way**: Vercel team changes sync to PostHog, but PostHog member changes don't sync back to Vercel.
-
-For use cases not supported by the native integration, you can [connect to PostHog manually](/docs/getting-started/install) using your own API key.
-
-## Next steps
-
-Now that you've installed PostHog feature flags, explore these resources:
-
-### Learn feature flags:
-- [Feature flags guide](/docs/feature-flags) - Create and manage flags
-- [A/B testing guide](/docs/experiments) - Run experiments with PostHog
-- [Multivariate testing](/docs/experiments/creating-an-experiment) - Test multiple variants
-
-### Framework-specific guides:
-- [Next.js + PostHog](/docs/libraries/next-js)
-- [React + PostHog](/docs/libraries/react)
-- [Svelte + PostHog](/docs/libraries/svelte)
-- [More frameworks →](/docs/libraries)
-
-### Common recipes:
-- [Bootstrap feature flags](/tutorials/bootstrap-feature-flags) - Faster flag loading
-- [Server-side feature flags](/tutorials/node-feature-flags) - Use flags in Node.js
-- [Feature flag best practices](/tutorials/feature-flag-best-practices)
-
-### Get help:
-- [Community forum](https://posthog.com/questions)
-- [Documentation](https://posthog.com/docs)
-- [Support](https://posthog.com/support)
+- **One organization per Vercel team** - Cannot link multiple PostHog organizations
+- **Cloud only** - No self-hosted support (US or EU regions available)
+- **Region cannot be changed** - US or EU is selected during installation
+- **One-way team sync** - Vercel team changes sync to PostHog, not vice versa
 
 ## Further reading
 
-- [PostHog on Vercel platform features](/docs/libraries/vercel) - Vercel Functions, AI SDK, Flags SDK
-- [Next.js framework docs](/docs/libraries/next-js)
-- [Using Vercel rewrites as a reverse proxy](/docs/advanced/proxy/vercel)
+- [Feature flags documentation](/docs/feature-flags)
+- [Experiments documentation](/docs/experiments)
+- [PostHog on Vercel](/docs/libraries/vercel)
