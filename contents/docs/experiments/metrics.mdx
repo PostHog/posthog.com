@@ -65,13 +65,13 @@ Both the numerator and denominator support all aggregation methods (count, sum, 
 
 Use retention metrics to measure if users come back to perform a specific action within a defined time window after an initial action. This helps you measure engagement patterns, feature stickiness, and long-term user behavior.
 
-How it works:
-1. Define a **start event** (e.g., user signs up, completes onboarding, makes first purchase)
-2. Define a **completion event** (e.g., user logs in, uses a feature, makes another purchase)
-3. Set a **retention window** specifying when the completion event should occur (e.g., between 1 and 7 days after the start event)
-4. Each user either completes the action within the window (retained) or doesn't (not retained)
-5. We calculate the retention rate (proportion of users who returned) for each variant
-6. Statistical significance is determined using the difference in retention rates between variants
+Retention metrics track two events and a time window:
+
+| Event | Description | Examples |
+|-------|------------|----------|
+| Start event | The initial action that begins tracking | Signup, complete onboarding, first purchase |
+| Completion event | The action you want users to return for | Login, use feature, make another purchase |
+| Retention window | When the completion event should occur | Between 1 and 7 days after start event |
 
 **Retention window:**
 The retention window has two boundaries that define when the completion event counts:
