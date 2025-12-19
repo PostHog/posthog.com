@@ -638,6 +638,7 @@ export const posthog = {
             sdks: '14',
             server_side_sdks: true,
             sql: true,
+            terraform: 'Beta',
             tv_sdks: false,
         },
         tools: {

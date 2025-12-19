@@ -297,6 +297,7 @@ export const statsig = {
             sdks: false,
             server_side_sdks: false,
             sql: false,
+            terraform: false,
         },
         tools: {
             cms: '',

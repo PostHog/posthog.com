@@ -119,6 +119,26 @@ export const Content = ({ quickLinks = false }) => {
                 </CallToAction>
             </section>
 
+            <section className="mb-12">
+                <h3 className="mb-1 text-xl">Developer tools</h3>
+                <p className="text-[15px]">Programmatic ways to manage your analytics infrastructure.</p>
+
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
+                    <ResourceItem
+                        type="Docs"
+                        title="API"
+                        description="Query and manage PostHog programmatically"
+                        url="/docs/api"
+                    />
+                    <ResourceItem
+                        type="Guide"
+                        title="Terraform provider"
+                        description="Manage dashboards and insights as infrastructure-as-code"
+                        url="/docs/product-analytics/dashboards#managing-dashboards-with-terraform"
+                    />
+                </ul>
+            </section>
+
             <section>
                 <h3 className="mb-1 text-xl">Dashboard templates</h3>
                 <p className="text-[15px]">Choose from a variety of pre-built templates for your stage of growth.</p>
