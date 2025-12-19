@@ -36,7 +36,7 @@ If PostHog isn't capturing errors:
 
 If stack traces show minified code instead of original source:
 
-1. Verify source maps are uploaded to the correct project by navigating to [Error Tracking](https://app.posthog.com/error_tracking) and selecting **Configure** > **Symbol sets**
+1. Verify source maps are uploaded to the correct project by navigating to [Error Tracking](https://app.posthog.com/error_tracking) and selecting **Configure** > **Symbol sets**. You'll also see warnings for missing symbol sets
 2. The `release` tag in your SDK config must match the version you uploaded:
 
     ```js
