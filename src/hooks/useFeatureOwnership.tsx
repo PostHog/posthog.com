@@ -163,6 +163,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Feature flags',
         owner: ['feature-flags'],
     },
+    feed: {
+        feature: 'Feed',
+        owner: ['growth'],
+    },
     'group-analytics': {
         feature: 'Group analytics',
         owner: ['customer-analytics'],

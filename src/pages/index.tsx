@@ -6,5 +6,5 @@ import usePostHog from '../hooks/usePostHog'
 export default function Home() {
     const posthog = usePostHog()
 
-    return posthog?.getFeatureFlag?.('homepage-test') === 'control' ? <Control /> : <Test />
+    return posthog?.getFeatureFlag?.('homepage-test') === 'test' ? <Test /> : <Control />
 }
