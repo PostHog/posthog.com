@@ -486,9 +486,6 @@ export const productAnalytics = {
                 {
                     title: 'Group analytics for teams with B2B customers',
                 },
-                {
-                    title: 'Official Terraform provider for infrastructure-as-code workflows',
-                },
             ],
         },
         companies: [
