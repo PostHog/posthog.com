@@ -77,10 +77,9 @@ PostHog calculates the retention rate by measuring what proportion of users perf
 
 The **retention window** defines when completion events count. A "1 to 7 days" window means the completion event must occur at least 1 full day after the start event, up to and including day 7. PostHog compares calendar days rather than exact 24-hour periods, so a "7 days" window includes any completion event on the 7th calendar day. Hour-based windows work the same way.
 
-**Start handling:**
-You can choose how PostHog identifies the start event for each user:
-- **First seen**: Uses the first occurrence of the start event (ideal for one-time actions like signup)
-- **Last seen**: Uses the last occurrence of the start event (useful for recurring actions)
+For start handling, you can choose:
+- **First seen:** Uses the first occurrence of the start event, ideal for one-time actions like signup
+- **Last seen:** Uses the last occurrence of the start event, useful for recurring actions.
 
 Common use cases:
 - **Onboarding effectiveness**: Track if users who complete onboarding return within 7 days
