@@ -67,7 +67,7 @@ Before writing any code, document:
 | Progress | `onboarding_step_completed` | Are users moving through it? |
 | Completion | `onboarding_completed` | Are users finishing? |
 
-Include a `step_name` property so you can later analyze where users get stuck.
+> **Tip:** When capturing events, include a `step_name` property so you can later analyze where users get stuck.
 
 **Lagging indicators** tell you if the change improved outcomes:
 
@@ -98,25 +98,25 @@ Rollout: 20% of all users
 
 ### Step 4: Build your dashboard before you ship
 
-Create a new dashboard called "New Onboarding Flow Launch - {Date}".
+Create a new dashboard called "New Onboarding Flow Launch - {Date}". In it, include the following insights:
 
-**Onboarding funnel** (Funnel insight)
+**Onboarding funnel** (Funnel insight):
 - Step 1: `onboarding_started`
 - Step 2: `onboarding_step_completed` where `step_name = profile_setup`
 - Step 3: `onboarding_step_completed` where `step_name = first_project`
 - Step 4: `onboarding_completed`
 - Filter by feature flag `new-onboarding-flow = true`
 
-**Completion over time** (Trends insight)
+**Completion over time** (Trends insight):
 - Events: `onboarding_started`, `onboarding_completed`
 - Compare: Users with feature flag on vs. off
 
-**Activation rate** (Trends insight)
+**Activation rate** (Trends insight):
 - Event: Your key activation event (e.g., `first_project_created`, `first_invite_sent`)
 - Compare: Users with feature flag on vs. off
 - This is your primary success metric
 
-**Guardrails** (Trends insight)
+**Guardrails** (Trends insight):
 - Support tickets tagged "onboarding"
 - Errors in onboarding flow
 - Time to complete onboarding (should decrease, not increase)
@@ -193,13 +193,13 @@ For your validation setup, you should have:
 
 ## Common mistakes
 
-**Measuring too soon**: A launch on Monday doesn't tell you much by Friday. Most behavior change takes 2-4 weeks to stabilize.
+- **Measuring too soon**: A launch on Monday doesn't tell you much by Friday. Most behavior change takes 2-4 weeks to stabilize.
 
-**Changing the goal**: If you didn't hit your target, that's useful information. Retroactively adjusting your success criteria throws away that information.
+- **Changing the goal**: If you didn't hit your target, that's useful information. Retroactively adjusting your success criteria throws away that information.
 
-**Ignoring qualitative signals**: A 10% conversion rate tells you what's happening. A session replay of a user rage-clicking tells you why.
+- **Ignoring qualitative signals**: A 10% conversion rate tells you what's happening. A session replay of a user rage-clicking tells you why.
 
-**Skipping the post-mortem**: Whether your launch succeeded or failed, document what you learned. Your future self will thank you.
+- **Skipping the post-mortem**: Whether your launch succeeded or failed, document what you learned. Your future self will thank you.
 
 ## Next steps
 
