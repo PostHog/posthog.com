@@ -55,7 +55,7 @@ Before writing any code, document:
 - **What's your success threshold?** ("10 percentage point improvement in activation rate")
 - **What could go wrong?** ("Users might find the tutorial annoying and abandon earlier")
 
-> **Planning prompt**: If this launch fails, what metric would tell you that? Write down your failure condition alongside your success condition.
+> **Planning prompt**: What could go wrong? Write this down alongside your success condition.
 
 ### Step 2: Define your metrics
 
@@ -69,32 +69,37 @@ Before writing any code, document:
 
 > **Tip:** When capturing events, include a `step_name` property so you can later analyze where users get stuck.
 
+[Complete guide to event tracking](/tutorials/event-tracking-guide)
+
+
 **Lagging indicators** tell you if the change improved outcomes:
 
-| Metric | How to measure | What it tells you |
-|--------|----------------|-------------------|
-| Activation | Funnel to key action | Did this improve the goal you cared about? |
-| Retention | Week-over-week return rate | Does this have lasting impact? |
-| Revenue | Conversion to paid | Did this affect the business? |
+| Metric | How to measure | What it tells you | Resources |
+|--------|----------------|-------------------|-----------|
+| Activation | Track completion of key actions that indicate value | Whether users are experiencing value, which predicts retention and downstream metrics | [Activation and why you should care](/newsletter/wtf-is-activation)
+| Retention | Week-over-week return rate | Does this have lasting impact? | [Track retention] (/docs/product-analytics/retention) |
+| Revenue | Conversion to paid | Did this affect the business? | [See Stripe revenue in PostHog] (https://posthog.com/docs/cdp/sources/stripe) |
 
 **Guardrail metrics** tell you if you broke something:
 
-| Metric | What to watch | Warning threshold |
-|--------|---------------|-------------------|
-| Support volume | Tickets tagged "onboarding" | >10% increase |
-| Error rate | Errors in onboarding flow | Any increase |
-| Performance | Load time of onboarding pages | >200ms increase |
+| Metric | What to watch | Warning threshold | Resources |
+|--------|---------------|-------------------|-----------|
+| Support volume | Tickets tagged "onboarding" | >10% increase | [See Zendesk data in PostHog](/docs/data-warehouse/sources/zendesk) |
+| Error rate | Errors in onboarding flow | Any increase | [Setup error tracking](/docs/error-tracking/start-here) |
+| Performance | Load time of onboarding pages | >200ms increase |  |
 
-### Step 3: Create a feature flag for controlled rollout
 
-In PostHog, go to **Feature flags** → **New feature flag**.
+[Setup alerts to monitor these metrics] (https://posthog.com/docs/alerts)
 
-Set your flag to release to a percentage of users (start with 10-20%). This creates a natural control group: users without the flag give you a baseline for comparison.
 
-```
-Flag key: new-onboarding-flow
-Rollout: 20% of all users
-```
+### Step 3: Create an A/B test for controlled rollout
+
+In PostHog, go to **Experiments** → **New experiment**.
+
+Create an experiment that splits users into control and test groups (start with 10-20% in the test group). This creates a natural control group: users in the control group give you a baseline for comparison.
+
+![A/B testing setup](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/abtest_setup_912f3a7d44.png)
+
 
 ### Step 4: Build your dashboard before you ship
 
@@ -120,6 +125,7 @@ Create a new dashboard called "New Onboarding Flow Launch - {Date}". In it, incl
 - Support tickets tagged "onboarding"
 - Errors in onboarding flow
 - Time to complete onboarding (should decrease, not increase)
+
 
 ### Step 5: Set up alerts and qualitative checkpoints
 
