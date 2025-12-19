@@ -52,7 +52,7 @@ export default function SolvedQuestions({ topicLabel, limit = 5, className = '' 
 
     return (
         <div className={`bg-accent rounded-md p-6 ${className}`}>
-            <p className="text-[15px] opacity-75 mt-0 mb-4">
+            <p className="mt-0 mb-4">
                 These questions were asked and answered by the PostHog community. Browse them for real-world solutions
                 to common issues.
             </p>
