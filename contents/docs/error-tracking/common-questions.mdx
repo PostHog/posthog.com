@@ -18,7 +18,7 @@ This page covers troubleshooting for Error Tracking. For setup, see the [install
 
 If PostHog isn't capturing errors:
 
-1. Use the [SDK Doctor](/docs/sdk-doctor) to verify your SDKs are updated to the latest verison
+1. Use the [SDK Doctor](/docs/sdk-doctor) to verify your SDKs are updated to the latest version
 2. Verify **exception capture** is enabled in [project settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture)
 3. Only unhandled exceptions auto-capture. For caught errors, use `posthog.captureException()`:
 
