@@ -1,15 +1,6 @@
 ### Q1 2026 objectives
 
-#### Goal 1: Evals
-
-*Description*: Continue building out our evaluations system to help teams measure AI output quality at scale. This includes expanding how evaluations can be created and run, and improving how results surface actionable insights.
-
-*What we will ship*:
-- **Code-based evaluations** for evaluating LLM outputs using user-defined code evaluators instead of LLM-as-a-Judge
-- **Offline evaluations** based on datasets for consistent, repeatable testing
-- **Alerts and surfacing** to proactively notify teams of evaluation issues via alerts, news feed, and other channels
-
-#### Goal 2: Feature GA Releases
+#### Goal 1: Feature GA Releases
 
 *Description*: Move several features currently in alpha/beta to general availability.
 
@@ -23,15 +14,7 @@
 - **LLM translation** to GA - translation of non-English LLM traces to English
 - **LLM trace/session summarization** to GA - AI-generated summaries for quick understanding
 
-#### Goal 3: Ingestion Pipeline
-
-*Description*: Complete our new ingestion pipeline optimized for LLM events, enabling better performance and new capabilities.
-
-*What we will ship*:
-- **New ingestion pipeline** launch - dedicated pipeline optimized for LLM events
-- **Multimodal support** - ingest and store images, audio, and other media in LLM events
-
-#### Goal 4: OpenTelemetry & SDK
+#### Goal 2: OpenTelemetry & SDK
 
 *Description*: Add OpenTelemetry support and rethink our SDK architecture to better serve diverse integration patterns.
 
@@ -39,7 +22,32 @@
 - **OpenTelemetry support** - native Otel integration for teams using OpenTelemetry instrumentation
 - **SDK improvements** - rethink and improve our SDK architecture for better developer experience
 
-#### Goal 5: PostHog AI Integration
+#### Goal 3: Evals
+
+*Description*: Continue building out our evaluations system to help teams measure AI output quality at scale. This includes expanding how evaluations can be created and run, and improving how results surface actionable insights.
+
+*What we will ship*:
+- **Code-based evaluations** for evaluating LLM outputs using user-defined code evaluators instead of LLM-as-a-Judge
+- **Offline evaluations** based on datasets for consistent, repeatable testing
+- **Alerts and surfacing** to proactively notify teams of evaluation issues via alerts, news feed, and other channels
+
+#### Goal 4: Ingestion Pipeline
+
+*Description*: Complete our new ingestion pipeline optimized for LLM events, enabling better performance and new capabilities.
+
+*What we will ship*:
+- **New ingestion pipeline** launch - dedicated pipeline optimized for LLM events
+- **Multimodal support** - ingest and store images, audio, and other media in LLM events
+
+#### Goal 5: Docs, Onboarding & Wizard
+
+*Description*: Make it easier for new users to get started with LLM Analytics across different frameworks and tools.
+
+*What we will ship*:
+- **Framework guides** - documentation for every major LLM framework
+- **Wizard support** - add LLM Analytics to the PostHog setup wizard for seamless onboarding
+
+#### Goal 6: PostHog AI Integration
 
 *Description*: Integrate LLM Analytics capabilities with PostHog AI to enable powerful search and insights across traces.
 
@@ -48,19 +56,3 @@
 - **Find traces via evals** - search for traces based on evaluation results (passing or failing)
 - **Trace/session summarization** via AI - leverage PostHog AI for generating summaries
 - **Trace translation** via AI - use PostHog AI for translating traces into English
-
-#### Goal 6: Agents Support
-
-*Description*: Add first-class support for AI agents, enabling teams to track and analyze agentic workflows.
-
-*What we will ship*:
-- **Agents exploration** - research and design how to best support agent tracking
-- **Agents implementation** - build core agent tracking functionality
-
-#### Goal 7: Docs, Onboarding & Wizard
-
-*Description*: Make it easier for new users to get started with LLM Analytics across different frameworks and tools.
-
-*What we will ship*:
-- **Framework guides** - documentation for every major LLM framework
-- **Wizard support** - add LLM Analytics to the PostHog setup wizard for seamless onboarding
