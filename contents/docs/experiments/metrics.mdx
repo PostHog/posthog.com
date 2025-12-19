@@ -73,15 +73,9 @@ Retention metrics track two events and a time window:
 | Completion event | The action you want users to return for | Login, use feature, make another purchase |
 | Retention window | When the completion event should occur | Between 1 and 7 days after start event |
 
-**Retention window:**
-The retention window has two boundaries that define when the completion event counts:
-- **Start boundary** (inclusive): Earliest time after the start event (e.g., 1 day)
-- **End boundary** (inclusive): Latest time after the start event (e.g., 7 days means up to and including day 7)
+PostHog calculates the retention rate by measuring what proportion of users performed the completion event within the window. Statistical significance is determined using the difference in retention rates between variants.
 
-For example, a "1 to 7 days" retention window means the completion event must occur at least 1 full day after the start event, and up to 7 full days after (days 1-7 all count).
-
-**How time periods are calculated:**
-For day-based windows, PostHog compares calendar days rather than exact 24-hour periods. This means the retention window captures any time within the specified days. For example, a "7 days" window includes any completion event that occurs on the 7th calendar day after the start event, regardless of the specific times. Hour-based windows work the same way, using whole hours (e.g., 2 PM to 3 PM) rather than exact 60-minute durations.
+The **retention window** defines when completion events count. A "1 to 7 days" window means the completion event must occur at least 1 full day after the start event, up to and including day 7. PostHog compares calendar days rather than exact 24-hour periods, so a "7 days" window includes any completion event on the 7th calendar day. Hour-based windows work the same way.
 
 **Start handling:**
 You can choose how PostHog identifies the start event for each user:
