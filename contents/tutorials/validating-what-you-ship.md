@@ -133,15 +133,21 @@ Create a new dashboard called "New Onboarding Flow Launch - {Date}". In it, incl
 - Positive: Alert when a user completes onboarding and activates
 - Negative: Alert when support tickets tagged "onboarding" spike
 
+[Send PostHog event data to Slack webhooks](/docs/cdp/destinations/slack)
+
 **Post-interaction survey** (PostHog Surveys):
 - Trigger: After `onboarding_completed`
 - Question: "How easy was it to get started?" (1-5 rating + optional text)
 - Sample: 10-20% of users to avoid survey fatigue
 
-**Session replays**:
+[Creating surveys](/docs/surveys/creating-surveys)
+
+**Session replay**:
 - Create a filter for users in the new onboarding flow
-- Watch 5-10 sessions per week during the launch period
+- Watch 5-10 session recordings per week during the launch period
 - Look for: Confusion at specific steps, rage clicks, users skipping the tutorial
+
+[Explore session recordings](/tutorials/explore-insights-session-recordings)
 
 ## Reading your results
 
