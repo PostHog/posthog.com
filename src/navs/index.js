@@ -3417,12 +3417,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Cutting costs',
-                    url: '/docs/session-replay/cutting-costs',
-                    icon: 'IconPiggyBank',
-                    color: 'yellow',
-                },
-                {
                     type: 'divider',
                 },
                 {
