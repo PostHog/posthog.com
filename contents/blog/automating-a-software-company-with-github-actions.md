@@ -59,10 +59,10 @@ jobs:
                 python-version: ['3.7.8', '3.8.5', '3.9.0']
         steps:
             - name: Check out the repository
-            ses: actions/checkout@v2
+            ses: actions/checkout@v6
 
             - name: Set up Python
-              uses: actions/setup-python@v2
+              uses: actions/setup-python@v6
               with:
                   python-version: ${{ matrix.python-version }}
 
@@ -93,7 +93,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Check out the repository
-            uses: actions/checkout@v2
+            uses: actions/checkout@v6
 
           - name: Setup Node.js
             uses: actions/setup-node@v2
@@ -142,8 +142,8 @@ jobs:
     code-quality:
         runs-on: ubuntu-latest
         steps:
-            - name: Check out the repository 
-              uses: actions/checkout@v2
+            - name: Check out the repository
+              uses: actions/checkout@v6
 
             - name: Set up Node
               uses: actions/setup-node@v1
@@ -240,7 +240,7 @@ jobs:
                   mkdir deploy/
 
             - name: Check out main repository
-              uses: actions/checkout@v2
+              uses: actions/checkout@v6
               with:
                   path: 'deploy/'
 
@@ -309,7 +309,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Check out the repository
-              uses: actions/checkout@v2
+              uses: actions/checkout@v6
 
             - name: Lint Dockerfiles with Hadolint
               run: |
@@ -369,7 +369,7 @@ jobs:
             )
         steps:
             - name: Check out the repository
-              uses: actions/checkout@v2
+              uses: actions/checkout@v6
               with:
                   ref: ${{ github.event.pull_request.base.ref }}
 
@@ -447,10 +447,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Check out the repository
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v6
 
             - name: Set up Python
-              uses: actions/setup-python@v2
+              uses: actions/setup-python@v6
               with:
                   python-version: 3.8
 
@@ -530,7 +530,7 @@ jobs:
                   destination_branch: 'master'
             - name: Check out posthog-foss
               if: github.repository == 'PostHog/posthog'
-              uses: actions/checkout@v2
+              uses: actions/checkout@v6
               with:
                   repository: 'posthog/posthog-foss'
                   ref: master
