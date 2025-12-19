@@ -18,7 +18,7 @@ This page covers troubleshooting for Error Tracking. For setup, see the [install
 
 If PostHog isn't capturing errors:
 
-1. Run `window.posthog.LIB_VERSION` in your browser console to check your SDK version and update if needed
+1. Use the [SDK Doctor](/docs/sdk-doctor) to verify your SDKs are updated to the latest verison
 2. Verify **exception capture** is enabled in [project settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture)
 3. Only unhandled exceptions auto-capture. For caught errors, use `posthog.captureException()`:
 
@@ -30,15 +30,13 @@ If PostHog isn't capturing errors:
     }
     ```
 
-4. Wait a few minutes and check the [Error Tracking in the PostHog app](https://app.posthog.com/error_tracking) before assuming it's broken
-
-You can also use the [SDK doctor](/docs/sdk-doctor) to diagnose common issues.
+4. Wait a few minutes and check [Error Tracking in the PostHog app](https://app.posthog.com/error_tracking) before assuming it's broken
 
 ## Source maps not resolving
 
 If stack traces show minified code instead of original source:
 
-1. Verify source maps are uploaded to the correct project in symbol sets by navigating to [Error Tracking](https://app.posthog.com/error_tracking) and selecting **Configure** > **Symbol sets**
+1. Verify source maps are uploaded to the correct project by navigating to [Error Tracking](https://app.posthog.com/error_tracking) and selecting **Configure** > **Symbol sets**
 2. The `release` tag in your SDK config must match the version you uploaded:
 
     ```js
@@ -58,7 +56,7 @@ See the [source maps guide](/docs/error-tracking/upload-source-maps/) for upload
 
 ## 'Script error' with no stack trace
 
-For security purposes, browsers hide error details from scripts loaded from different domains. This shows as `Script error.` with no stack trace.
+For security purposes, browsers hide error details from scripts loaded from different domains. This shows as `Script error` with no stack trace.
 
 To fix, add `crossorigin="anonymous"` to your script tags:
 
@@ -78,7 +76,7 @@ Or specify your domain:
 Access-Control-Allow-Origin: https://yourdomain.com
 ```
 
-It can be difficult to identify which script is causing the error. If you can't fix all scripts immediately, watch [session recordings](/docs/session-replay) to see what actions lead to the error.
+You can also use [session recordings](/docs/session-replay) to see what user actions triggered the error.
 
 ## 'Non-Error promise rejection' with no stack trace
 
@@ -125,13 +123,13 @@ Minified React error #123; visit https://reactjs.org/docs/error-decoder.html?inv
 To debug:
 
 1. Upload source maps to get readable stack traces. See the [source maps guide](/docs/error-tracking/upload-source-maps/)
-2. Visit the error URL in the message to understand what went wrong, though it won't show where in your code the error originated
+2. Visit the error URL in the message to understand what went wrong
 3. Watch [session recordings](/docs/session-replay) to see what user actions triggered the error, then reproduce in development
 4. Use a development build which includes full error messages. Only use this for debugging, not production
 
 
 ## Still having issues?
 
-Try the [SDK doctor](/docs/sdk-doctor) to diagnose common problems, or browse community solutions below.
+Try the [SDK Doctor](/docs/sdk-doctor) to diagnose common problems, or browse community solutions below.
 
 <SolvedQuestions topicLabel="Error Tracking" limit={5} />
