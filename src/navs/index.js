@@ -4791,6 +4791,16 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Evaluations',
+                    url: '/docs/llm-analytics/evaluations',
+                    icon: 'IconTarget',
+                    color: 'yellow',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                    },
+                },
+                {
                     name: 'Link session replay',
                     url: '/docs/llm-analytics/link-session-replay',
                     icon: 'IconRewindPlay',
