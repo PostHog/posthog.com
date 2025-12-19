@@ -482,7 +482,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
     )
 }
 
-export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
+export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter }) => {
     // Generate API spec markdown files first
     try {
         const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
@@ -555,26 +555,24 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         generateSdkReferencesMarkdown(node)
     })
 
-    // Generate markdown files for llms.txt file and LLM ingestion (after API spec files exist)
-    const markdownQuery = await graphql(`
-        query pagesForMarkdown {
-            allMdx {
+    // Generate markdown files for llms.txt file and LLM ingestion (after pages are built)
+    // Convert HTML files to markdown using turndown
+    const docsQuery = (await graphql(`
+        query {
+            allMdx(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
                 nodes {
-                    frontmatter {
-                        title
-                        date
-                    }
-                    rawBody
                     fields {
                         slug
-                        contentWithSnippets
+                    }
+                    frontmatter {
+                        title
                     }
                 }
             }
         }
-    `)
+    `)) as { data: { allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> } } }
 
-    const filteredPages = await generateRawMarkdownPages(markdownQuery.data.allMdx.nodes)
+    const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes)
     generateLlmsTxt(filteredPages)
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {

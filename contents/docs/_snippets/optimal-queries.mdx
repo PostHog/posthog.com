@@ -1,0 +1,305 @@
+When writing custom queries, the burden of performance falls onto you. PostHog handles performance for queries we own (for example, in product analytics insights and experiments, etc.), but because performance depends on how queries are structured and written, we can't optimize them for you. Large data sets particularly require extra careful attention to performance. 
+
+Here is some advice for making sure your queries are quick and don't read over too much data (which can increase costs):
+
+### 1. Use shorter time ranges
+
+You should almost always include a time range in your queries, and the shorter the better. There are a variety of SQL features to help you do this including `now()`, `INTERVAL`, and `dateDiff`. See more about these in our [SQL docs](/docs/product-analytics/sql#date-and-time).
+
+<MultiLanguage>
+
+```sql
+SELECT count() FROM events WHERE timestamp >= now() - INTERVAL 7 DAY
+```
+
+```bash
+curl \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/ \
+  -d '{
+        "query": {
+          "kind": "HogQLQuery",
+          "query": "SELECT count() FROM events WHERE timestamp >= now() - INTERVAL 7 DAY"
+        },
+        "name": "event count in last 7 days"
+      }'
+```
+
+```python
+import requests
+import json
+
+url = "<ph_app_host>/api/projects/{project_id}/query/"
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {POSTHOG_PERSONAL_API_KEY}'
+}
+payload = {
+    "query": {
+        "kind": "HogQLQuery",
+        "query": """
+          SELECT count()
+          FROM events
+          WHERE timestamp >= now() - INTERVAL 7 DAY
+        """
+    },
+    "name": "event count in last 7 days"
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.json())
+```
+
+```node
+import fetch from "node-fetch";
+
+async function createQuery() {
+  const url = "<ph_app_host>/api/projects/:project_id/query/";
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+  };
+
+  const payload = {
+    "query": {
+      "kind": "HogQLQuery",
+      "query": `
+        SELECT count()
+        FROM events
+        WHERE timestamp >= now() - INTERVAL 7 DAY
+        LIMIT 100
+      `
+    },
+    "name": "event count in last 7 days"
+  }
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+createQuery()
+```
+
+</MultiLanguage>
+
+### 2. Materialize a view for the data you need
+
+The data warehouse enables you to [save and materialize views](/docs/data-warehouse/views/materialize) of your data. This means that the view is precomputed, which can significantly improve query performance.
+
+To do this, write your query in the [SQL editor](https://us.posthog.com/sql), click **Materialize**, then **Save and materialize**, and give it a name without spaces (I chose `mat_event_count`). You can also schedule to update the view at a specific interval.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_06_19_at_16_12_28_2x_db1e37a5cf.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_06_19_at_16_12_44_2x_90bd8f28ca.png"
+  alt="Materialize view"
+  classes="rounded"
+/>
+
+Once done, you can query the view like any other table.
+
+<MultiLanguage>
+
+```sql
+SELECT * FROM mat_event_count
+```
+
+```bash
+curl \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/ \
+  -d '{
+        "query": {
+          "kind": "HogQLQuery",
+          "query": "SELECT * FROM mat_event_count"
+        },
+        "name": "get materialized event count"
+      }'
+```
+
+```python
+import requests
+import json
+
+url = "<ph_app_host>/api/projects/{project_id}/query/"
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {POSTHOG_PERSONAL_API_KEY}'
+}
+payload = {
+    "query": {
+        "kind": "HogQLQuery",
+        "query": """
+          SELECT *
+          FROM mat_event_count
+        """
+    },
+    "name": "get materialized event count"
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.json())
+```
+
+```node
+import fetch from "node-fetch";
+
+async function createQuery() {
+  const url = "<ph_app_host>/api/projects/:project_id/query/";
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+  };
+
+  const payload = {
+    "query": {
+      "kind": "HogQLQuery",
+      "query": `
+        SELECT *
+        FROM mat_event_count
+      `
+    },
+    "name": "get materialized counts"
+  }
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+createQuery()
+```
+
+</MultiLanguage>
+
+### 3. Don't scan the same table multiple times
+
+Reading a large table like `events` or `persons` more than once in the same query multiplies the work PostHog has to do (more I/O, more CPU, more memory). For example, this query is inefficient:
+
+```sql
+WITH us_events AS (
+    SELECT *
+    FROM events
+    WHERE properties.$geoip_country_code = 'US'
+),
+ca_events AS (
+    SELECT *
+    FROM events
+    WHERE properties.$geoip_country_code = 'CA'
+)
+SELECT *
+FROM us_events
+UNION ALL
+SELECT *
+FROM ca_events
+```
+
+Instead, pull the rows you need **once** and save it as a [materialized view](/docs/data-warehouse/views/materialize). You can then query from that materialized view in all the other steps.
+
+Start by saving this materialized view, e.g. as `base_events`:
+
+```sql
+SELECT event, properties.$geoip_country_code as country
+FROM events
+WHERE properties.$geoip_country_code IN ('US', 'CA')
+```
+
+You can then query from `base_events` in your main query, which avoids scanning the raw `events` table multiple times:
+
+```sql
+WITH us_events AS (
+    SELECT event
+    FROM base_events
+    WHERE country = 'US'
+),
+ca_events AS (
+    SELECT event
+    FROM base_events
+    WHERE country = 'CA'
+)
+SELECT *
+FROM us_events
+UNION ALL
+SELECT *
+FROM ca_events
+```
+
+### 4. Name your queries for easier debugging
+
+Always provide a meaningful `name` parameter for your queries. This helps you:
+
+- Identify slow or problematic queries in the [`query_log` table](/docs/data/query-log)
+- Analyze query performance patterns over time
+- Debug issues more efficiently
+- Track resource usage by query type
+
+Good query names are descriptive and include the purpose:
+
+- `daily_active_users_last_7_days`
+- `funnel_signup_to_activation`
+- `revenue_by_country_monthly`
+
+Bad names are generic and vague:
+
+- `query1`
+- `test`
+- `data`
+
+### 5. Use timestamp-based pagination instead of OFFSET
+
+When querying large datasets like `events` or `query_log` over multiple batches, avoid using `OFFSET` for pagination. Instead, use timestamp-based pagination, which is much more efficient and scales better.
+
+**❌ Inefficient approach using OFFSET:**
+```sql
+-- First batch
+SELECT timestamp, event, distinct_id
+FROM events
+WHERE timestamp >= '2024-01-01'
+ORDER BY timestamp
+LIMIT 1000;
+
+-- Second batch
+SELECT timestamp, event, distinct_id
+FROM events
+WHERE timestamp >= '2024-01-01'
+ORDER BY timestamp
+LIMIT 1000 OFFSET 1000;  -- This gets slower with each page
+```
+
+**✅ Efficient approach using timestamp pagination:**
+```sql
+-- First batch
+SELECT timestamp, event, distinct_id
+FROM events
+WHERE timestamp >= '2024-01-01'
+ORDER BY timestamp
+LIMIT 1000;
+
+-- Second batch (use timestamp of last event from previous batch)
+SELECT timestamp, event, distinct_id
+FROM events
+WHERE timestamp > '2024-01-01 12:34:56.789'  -- timestamp from last row of previous batch
+ORDER BY timestamp
+LIMIT 1000;
+```
+
+This approach is more efficient because:
+- **Constant performance**: Each query executes in similar time regardless of how many rows you've already retrieved
+- **Index-friendly**: Uses the timestamp index effectively for filtering
+- **Scalable**: Performance doesn't degrade as you paginate through millions of rows
+
+**For geeks:** OFFSET-based pagination gets progressively slower because the database must scan and skip all the offset rows for each query. With timestamp-based pagination, the database uses the timestamp index to directly jump to the right starting point, maintaining consistent performance across all pages.
+
+### 6. Other SQL optimizations
+
+Options 1-5 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/product-analytics/sql) for commands, useful functions, and more to help you with this.
