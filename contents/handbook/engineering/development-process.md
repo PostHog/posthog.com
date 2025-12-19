@@ -217,6 +217,26 @@ git push origin --force <your branch>
 
 > Why does this work? As we mentioned earlier, our CI runs `test-runner.ts` on every push, so we don't really care if these images are conflicted as they are regenerated after you push to your branch.
 
+### Deployed Preview
+
+You can spin up a real deployed PostHog instance to test your branch by adding the `hobby-preview` label to your PR. This uses the hobby (Docker Compose) self-hosted setup under the hood.
+
+**How it works:**
+
+1. Add the `hobby-preview` label to your PR
+2. CI creates a DigitalOcean droplet and deploys PostHog with your branch
+3. A comment is posted to the PR with the preview URL (e.g., `https://hobby-pr-12345.posthog.dev`)
+4. The droplet persists across commits so you can iterate
+5. Remove the label or close the PR to clean up the droplet
+
+**When to use it:**
+
+- Testing changes in a real deployed environment
+- Manual QA before merging
+- Verifying Docker Compose or deployment script changes
+
+The workflow also runs a smoke test (health check) automatically on PRs that touch deployment-related files.
+
 ## Reviewing code
 
 When we review a PR, we'll look at the following things:
