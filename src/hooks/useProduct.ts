@@ -57,7 +57,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'purple',
             category: 'communication',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: 'user-interviews',
+            slug: 'products',
             status: 'WIP',
         },
         {
@@ -2643,7 +2643,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             Icon: IconGraph,
-            name: 'Business Intelligence (BI)',
+            name: 'Business intelligence (BI)',
             handle: 'visualize',
             type: 'visualize',
             slug: 'data-stack/business-intelligence',
@@ -2651,7 +2651,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'lilac',
             category: 'data',
             seo: {
-                title: 'Business Intelligence (BI)',
+                title: 'Business intelligence (BI)',
                 description: 'Analyze your data and create dashboards to share insights across your organization.',
             },
         },

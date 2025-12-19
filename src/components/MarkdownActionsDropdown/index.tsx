@@ -1,23 +1,15 @@
-import { Menu } from '@headlessui/react'
 import { IconCopy, IconEye, IconExternal, IconCheck } from '@posthog/icons'
-import { Chevron } from 'components/Icons'
-import CheckIcon from '../../images/check.svg'
 import Link from 'components/Link'
 import React, { useState } from 'react'
 import { Popover } from 'components/RadixUI/Popover'
 import OSButton from 'components/OSButton'
 
 interface CopyMarkdownActionsDropdownProps {
-    /** The markdown content to work with */
-    markdownContent: string
     /** Page URL for context */
     pageUrl: string
 }
 
-export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownProps> = ({
-    markdownContent,
-    pageUrl,
-}) => {
+export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownProps> = ({ pageUrl }) => {
     const [copied, setCopied] = useState(false)
     const [popoverOpen, setPopoverOpen] = useState(false)
     const menuItemButtonStyles =
@@ -26,8 +18,11 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
 
     // Helper function to safely create markdown URL
     const getMarkdownUrl = (url: string) => {
+        if (url.startsWith('/')) {
+            return `${url}.md`
+        }
+
         try {
-            // Try to parse as absolute URL first
             const urlObj = new URL(url)
             return `${urlObj.origin}${urlObj.pathname}.md`
         } catch {
@@ -35,11 +30,22 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
         }
     }
 
-    const handleCopyMarkdown = () => {
+    const handleCopyMarkdown = async () => {
         setPopoverOpen(false)
-        navigator.clipboard.writeText(markdownContent)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
+        try {
+            const markdownUrl = getMarkdownUrl(pageUrl)
+            const response = await fetch(markdownUrl)
+            if (response.ok) {
+                const markdownContent = await response.text()
+                navigator.clipboard.writeText(markdownContent)
+                setCopied(true)
+                setTimeout(() => setCopied(false), 2000)
+            } else {
+                console.error('Failed to fetch markdown:', response.statusText)
+            }
+        } catch (error) {
+            console.error('Error fetching markdown:', error)
+        }
     }
 
     return (
