@@ -36,7 +36,7 @@ posthog.identify('user_123', {
 Send a `signup` event:
 
 ```js
-posthog.capture('signed up', {
+posthog.capture('signed_up', {
 // Props are optional, but oh, they're so useful!
 })
 ```
@@ -61,7 +61,8 @@ Configure this event as your paid conversion event in **Settings** > **Customer 
 Yes. [Customer profiles](/docs/customer-analytics/customer-profiles) work with both [persons](/docs/data/persons) and [groups](/docs/product-analytics/group-analytics). This is useful for B2B products where you want to track company-level activity.
 The dashboard can also be used in B2B mode, showing the insights for your groups.
 
-<!--TODO: Maybe add a screenshot highlighting the b2c/b2b button?-->
+See [B2B mode](/docs/customer-analytics/b2b-mode) to learn more about it.
+
 
 ## How do I see support tickets in customer profiles?
 
@@ -80,9 +81,5 @@ Enable [LLM observability](/docs/ai-engineering/observability) and instrument yo
 Customer Analytics is currently in beta and free to use. You'll only be charged for the underlying data: events are billed as part of [product analytics](/pricing), and data warehouse sources like Zendesk are billed as [data warehouse rows](/pricing).
 
 ## What's the difference between customer analytics and product analytics?
-
-[Product analytics](/docs/product-analytics) is for understanding user behavior in aggregate—funnels, trends, retention across your user base.
-
-Customer Analytics is for understanding individual customers: their activity, engagement, and context. It's designed for when you need to know "who are my best customers?" or "what's going on with this specific account?"
 
 They work together: customer analytics enables the initial understanding of your customers and usage by providing good defaults and a framework to be followed. As your product grows and your data analysis needs get more specific, product analytics enables this next step with custom dashboards, different kinds of insights and SQL queries.
