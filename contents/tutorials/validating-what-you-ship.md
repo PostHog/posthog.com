@@ -189,13 +189,14 @@ Based on your data, you have three options:
 ## What success looks like
 
 For your validation setup, you should have:
-
-- [ ] Written hypothesis with specific success/failure thresholds
-- [ ] Events tracking the full journey through your change
-- [ ] A feature flag controlling rollout
-- [ ] Dashboard built before launch with leading, lagging, and guardrail metrics
-- [ ] Alerts set up for key milestones and problems
-- [ ] Survey and session replay filters ready to capture qualitative data
+```
+- Written hypothesis with specific success/failure thresholds
+- Events tracking the full journey through your change
+- A feature flag controlling rollout
+- Dashboard built before launch with leading, lagging, and guardrail metrics
+- Alerts set up for key milestones and problems
+- Survey and session replay filters ready to capture qualitative data
+```
 
 ## Common mistakes
 
