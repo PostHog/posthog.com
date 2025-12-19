@@ -20,6 +20,7 @@ import {
 } from '@posthog/icons'
 import Card from 'components/Card'
 import ResourceItem from 'components/Docs/ResourceItem'
+import CustomerAnalyticsBetaWarning from '../../../contents/docs/customer-analytics/_snippets/customer-analytics-beta-warning.mdx'
 
 const phFeatures = [
     {
@@ -90,6 +91,7 @@ export const Content = ({ quickLinks = true }) => {
             />
             <section className="mb-4">
                 <h2 className="mb-4">Overview</h2>
+                <CustomerAnalyticsBetaWarning />
                 <div>
                     <p>
                         Customer Analytics enables founders and engineers to understand their customer's demographics

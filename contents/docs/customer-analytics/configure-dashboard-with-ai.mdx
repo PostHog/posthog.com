@@ -2,12 +2,33 @@
 title: Configure dashboard with AI
 ---
 
-For each event to be configured in customer analytics dashboard we provide a “Configure with AI” button that prompts PostHog AI to find events that would be good matches for that specific category.
+You can use PostHog AI to find the best events to configure your Customer Analytics dashboard with.
 
+For each event in the [configuration page](https://posthog.com/docs/customer-analytics/configure-your-dashboard), there's a sparkle button right beside the event name. Clicking the button will pre-fill PostHog AI with a prompt to identify that specific event.
+
+Each dashboard event has a different button, because there is a different prompt for each event.
 
 <ProductScreenshot
-    imageLight="[TODO]"
-    imageDark="[TODO]"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_57_26_738_Z_f7ba279249.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_57_52_863_Z_f27de8d77e.png"
     alt="Configure dashboard events with AI"
+    classes="rounded"
+/>
+
+After PostHog AI finishes the research, it will provide a list of events that can be used to configure the dashboard. 
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T14_05_34_408_Z_a775b8f4de.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T14_04_28_677_Z_8f9e098c33.png"
+    alt="Configure with AI chat"
+    classes="rounded"
+/>
+
+To assign the event to the dashboard, copy the name of the event provided and search it in the event selector.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T14_24_01_132_Z_0f27630c56.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T14_23_43_640_Z_9a7d006df5.png"
+    alt="Use chat event suggestion"
     classes="rounded"
 />
