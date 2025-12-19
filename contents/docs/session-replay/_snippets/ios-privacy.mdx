@@ -29,15 +29,9 @@ imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
 
 <CalloutBox title="SwiftUI and Xcode 26" type="caution" icon="IconInfo">
 
-SwiftUI rendering behavior changed for apps built with Xcode 26 (including when running on iOS 26).
-This affects how SwiftUI maps to UIKit. As a result, the view modifiers `postHogMask()` and `postHogNoMask()` may behave inconsistently for primitive SwiftUI views like `Text`, `Image`, and `Button`.
+Apps built with Xcode 26 use a new SwiftUI rendering model that changes how SwiftUI views map to UIKit. This can cause `postHogMask()` and `postHogNoMask()` to behave inconsistently on primitive views like `Text`, `Image`, and `Button`.
 
-If you rely on these modifiers for privacy, we recommend validating masking after upgrading Xcode:
-
-- Text inputs like `TextField`, `TextEditor`, `SecureField` and custom views are not affected by this change.
-- For primitive views, try masking a parent view instead.
-- Use `ph-no-capture` tagging for UIKit-backed views.
-- Stop and restart session recording around sensitive screens.
+**If you're building with Xcode 26**, update to [version 3.36.2](https://github.com/PostHog/posthog-ios/releases/tag/3.36.2) or later to ensure these modifiers work correctly.
 
 </CalloutBox>
 
