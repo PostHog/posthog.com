@@ -17,6 +17,7 @@ import PostsTable from 'components/Edition/PostsTable'
 import { sortOptions } from 'components/Edition/Posts'
 import NotFoundPage from 'components/NotFoundPage'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { Popover } from 'components/RadixUI/Popover'
 import Stickers from 'components/Stickers/Index'
 import Tooltip from 'components/RadixUI/Tooltip'
 import dayjs from 'dayjs'
@@ -32,6 +33,8 @@ import {
     IconX,
     IconCheck,
     IconExternal,
+    IconPresent,
+    IconSparkles,
 } from '@posthog/icons'
 import { Fieldset } from 'components/OSFieldset'
 import { useFormik } from 'formik'
@@ -918,6 +921,10 @@ export default function ProfilePage({ params }: PageProps) {
     const { addToast } = useToast()
     const { user, getJwt } = useUser()
     const [isEditing, setIsEditing] = useState(false)
+    const [giftPopoverOpen, setGiftPopoverOpen] = useState(false)
+    const [giftAmount, setGiftAmount] = useState<number>()
+    const [giftNote, setGiftNote] = useState('')
+    const [giftSubmitting, setGiftSubmitting] = useState(false)
 
     const isCurrentUser = user?.profile?.id === id
     const isModerator = user?.role?.type === 'moderator'
@@ -1209,6 +1216,66 @@ export default function ProfilePage({ params }: PageProps) {
         },
     })
 
+    const handleGift = async () => {
+        if (!giftAmount || !giftNote?.trim()) {
+            addToast({
+                description: 'Amount and description are required',
+                error: true,
+                duration: 3000,
+            })
+            return
+        }
+
+        setGiftSubmitting(true)
+        try {
+            const jwt = await getJwt()
+            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/points/gift`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${jwt}`,
+                },
+                body: JSON.stringify({
+                    profileId: id,
+                    amount: giftAmount,
+                    note: giftNote.trim(),
+                }),
+            })
+
+            if (response.ok) {
+                addToast({
+                    description: (
+                        <>
+                            <IconCheck className="text-green size-4 inline-block mr-1" />
+                            Gift sent successfully
+                        </>
+                    ),
+                    duration: 3000,
+                })
+                setGiftPopoverOpen(false)
+                setGiftAmount(undefined)
+                setGiftNote('')
+                mutate()
+            } else {
+                const data = await response.json()
+                addToast({
+                    description: data?.error?.message || 'Failed to send gift',
+                    error: true,
+                    duration: 3000,
+                })
+            }
+        } catch (err) {
+            console.error(err)
+            addToast({
+                description: 'Failed to send gift',
+                error: true,
+                duration: 3000,
+            })
+        } finally {
+            setGiftSubmitting(false)
+        }
+    }
+
     if (!profile && isLoading) {
         return <ProfileSkeleton />
     } else if (!profile && !isLoading) {
@@ -1242,6 +1309,91 @@ export default function ProfilePage({ params }: PageProps) {
                             <>
                                 {isModerator && (
                                     <div className="flex gap-px border-r border-secondary pr-2 mr-2">
+                                        <Popover
+                                            dataScheme="primary"
+                                            open={giftPopoverOpen}
+                                            onOpenChange={setGiftPopoverOpen}
+                                            trigger={
+                                                <span>
+                                                    <OSButton
+                                                        asLink
+                                                        size="md"
+                                                        tooltip={<>Gift this user points</>}
+                                                        icon={<IconPresent />}
+                                                        iconClassName="size-5"
+                                                    />
+                                                </span>
+                                            }
+                                            contentClassName="w-80 !p-0 overflow-hidden border border-primary rounded-md"
+                                        >
+                                            <div className="bg-gradient-to-br from-yellow/20 via-orange/10 to-red/10 p-4 border-b border-primary">
+                                                <div className="flex items-center gap-2">
+                                                    <div className="bg-yellow/30 rounded-full p-2">
+                                                        <IconPresent className="size-5 text-orange" />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="text-sm font-bold m-0 flex items-center gap-1">
+                                                            Gift points to {firstName}
+                                                            <IconSparkles className="size-3.5 text-yellow" />
+                                                        </h4>
+                                                        <p className="text-xs text-secondary m-0">
+                                                            Reward great contributions
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="p-4 pt-2 space-y-2">
+                                                <div>
+                                                    <label
+                                                        htmlFor="gift-amount"
+                                                        className="text-xs font-semibold text-secondary block mb-1"
+                                                    >
+                                                        Points
+                                                    </label>
+                                                    <OSInput
+                                                        id="gift-amount"
+                                                        direction="column"
+                                                        showLabel={false}
+                                                        label="Points"
+                                                        type="number"
+                                                        min={1}
+                                                        value={giftAmount}
+                                                        onChange={(e) =>
+                                                            setGiftAmount(e.target.value ? Number(e.target.value) : '')
+                                                        }
+                                                        placeholder="How many points?"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label
+                                                        htmlFor="gift-reason"
+                                                        className="text-xs font-semibold  text-secondary block mb-1"
+                                                    >
+                                                        Reason
+                                                    </label>
+                                                    <OSInput
+                                                        id="gift-reason"
+                                                        direction="column"
+                                                        showLabel={false}
+                                                        label="Reason"
+                                                        type="text"
+                                                        value={giftNote}
+                                                        onChange={(e) => setGiftNote(e.target.value)}
+                                                        placeholder="What's this gift for?"
+                                                    />
+                                                </div>
+                                                <OSButton
+                                                    size="md"
+                                                    variant="primary"
+                                                    onClick={handleGift}
+                                                    disabled={giftSubmitting || !giftAmount || !giftNote?.trim()}
+                                                    width="full"
+                                                    icon={<IconSparkles />}
+                                                >
+                                                    {giftSubmitting ? 'Sending...' : 'Send gift'}
+                                                </OSButton>
+                                            </div>
+                                        </Popover>
                                         <OSButton
                                             asLink
                                             size="md"
