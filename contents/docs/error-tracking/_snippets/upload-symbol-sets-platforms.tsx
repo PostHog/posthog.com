@@ -44,6 +44,11 @@ const UploadSymbolSetsPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg',
         },
         {
+            label: 'Rollup',
+            url: '/docs/error-tracking/upload-source-maps/rollup',
+            icon: 'IconCode',
+        },
+        {
             label: 'CLI',
             url: '/docs/error-tracking/upload-source-maps/cli',
             icon: 'IconCode',
