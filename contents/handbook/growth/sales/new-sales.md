@@ -58,6 +58,21 @@ This is an overview for what you should actually be doing with a customer at eac
 
 Most people fill in the [form](/talk-to-a-human) via the website. Some email sales@posthog.com or open a Zendesk ticket.
 
+
+#### Big fish
+
+You'll also be assigned **Big fish** leads - these are people from big companies who have already signed up to PostHog.  Generic outreach emails don't work here, you need to check their recent session replays to figure out where they are at and any roadblocks to them trying PostHog out.  It's normally harder to get PostHog up and running in a bigger company so end up not being able to evaluate PostHog using their data.
+
+Specific things you could help with:
+
+- Demoing specific features to them, if they have also been checking out the docs.
+- See where they get stuck in onboarding. If they select specific products, then mention demoing those products to them specifically.
+- Offer to help them set up dashboards, etc., if they have been able to get PostHog connected to their app.
+- Offering to seed some demo data into their account if they need to get hands-on before actually integrating our SDK.  
+- If they are from an existing customer, they may have meant to join an existing org.  Let the PostHog account owner know that they might need to reach out to introduce themself and help the person get up and running in the correct organization.
+
+If you're still not sure what to say, ask your team in Slack to review the replays to see if they can help you be specific.  Again, **generic outreach doesn't work here.**
+
 ### 2. We assign and qualify
 
 Info on how leads are assigned can be [found here](/handbook/growth/sales/crm#how-we-do-lead-assignments). Once you have been assigned a lead, you'll want to qualify them before scheduling a call. Things to consider:
