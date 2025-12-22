@@ -54,6 +54,11 @@ const UploadSymbolSetsPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/webpack_3fc774b5a5.svg',
         },
         {
+            label: 'Vite',
+            url: '/docs/error-tracking/upload-source-maps/vite',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Vitejs_logo_98ffe5d5ee.svg',
+        },
+        {
             label: 'CLI',
             url: '/docs/error-tracking/upload-source-maps/cli',
             icon: 'IconCode',
