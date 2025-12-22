@@ -49,6 +49,11 @@ const UploadSymbolSetsPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Rollup_js_c306a2fde3.svg',
         },
         {
+            label: 'Webpack',
+            url: '/docs/error-tracking/upload-source-maps/webpack',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/webpack_3fc774b5a5.svg',
+        },
+        {
             label: 'CLI',
             url: '/docs/error-tracking/upload-source-maps/cli',
             icon: 'IconCode',

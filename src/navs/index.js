@@ -4025,6 +4025,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-source-maps/rollup',
                         },
                         {
+                            name: 'Webpack',
+                            url: '/docs/error-tracking/upload-source-maps/webpack',
+                        },
+                        {
                             name: 'CLI',
                             url: '/docs/error-tracking/upload-source-maps/cli',
                         },
