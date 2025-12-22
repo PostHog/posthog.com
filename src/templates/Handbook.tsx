@@ -340,7 +340,7 @@ export default function Handbook({
             hideRightSidebar,
             contentMaxWidthClass,
         },
-        fields: { slug, contributors, appConfig, templateConfigs, commits, contentWithSnippets },
+        fields: { slug, contributors, appConfig, templateConfigs, commits },
         excerpt,
     } = post
 
@@ -401,7 +401,7 @@ export default function Handbook({
                 showSurvey
                 hideRightSidebar={hideRightSidebar}
                 contentMaxWidthClass={contentMaxWidthClass}
-                markdownContent={contentWithSnippets}
+                sourceInstanceName={post.parent?.sourceInstanceName}
             />
         </>
     )
@@ -436,7 +436,6 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
-                contentWithSnippets
                 commits {
                     author {
                         avatar_url
@@ -543,6 +542,7 @@ export const query = graphql`
             }
             parent {
                 ... on File {
+                    sourceInstanceName
                     relativePath
                     fields {
                         gitLogLatestDate(formatString: "MMM DD, YYYY")

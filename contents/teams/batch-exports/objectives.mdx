@@ -1,9 +1,31 @@
-## Q4 2025 objectives
+# Q1 2026
 
-### Export any data warehouse view
+## Objective 1: Export anything anywhere
 
-Allow greater flexibility in what data customers can export out of PostHog.
+### Motivation
+* Users frequently request new destinations covered by CDP.
+* Users frequently request exporting of transformed and/or joined data, which can be achieved via a data warehouse materialized view.
 
-### Any realtime destination can be powered by batch exports
+### What we’ll ship
+* Enable multiple (or all) CDP destinations for batch exports.
+  * In the process, deprecate HTTP batch export in favor of using a CDP destination.
+* Assist with design and implementation of a unified data-pipelines UI.
+* Support a batch export for backfilling of PostHog Workflows using batch exports.
+* Maybe: Enable batch exporting of data warehouse views.
 
-This will unlock new possibilities, such as the ability to export historical data to realtime destinations.
+## Objective 2: Keep batch exports running into the future
+
+### Motivation
+* The team is feeling pressure from maintenance load, which is impacting goals and feature work.
+* The team sometimes takes too long to diagnose an issue due to lack of metrics and debugging tools.
+* Users, particularly larger-volume users, are demanding better performance when exporting and backfilling.
+* Users sometimes reach out to support because they lack tools to debug issues themselves.
+
+### What we’ll ship
+* Unified tooling for debugging a broken batch export.
+  * Including: Logs, metrics, configuration parameters, run history, and more!
+* Improve metrics and tracing to more quickly and accurately detect issues with batch exports.
+* Expose better logs and metrics for users to resolve issues themselves.
+* Review and adjust error recovery procedures (like automated retries).
+* Ensure performance can scale to larger users.
+* Ensure support for the most popular features of all destinations.
