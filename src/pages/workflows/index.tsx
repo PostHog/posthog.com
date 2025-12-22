@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 
-const PRODUCT_HANDLE = 'workflows'
+const PRODUCT_HANDLE = 'workflows_emails'
 
 const CustomPricingSlide = () => {
     return (

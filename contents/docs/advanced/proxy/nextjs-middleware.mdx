@@ -1,67 +1,355 @@
 ---
-title: Using Next.js middleware as a reverse proxy
+title: Next.js proxy file reverse proxy
 sidebar: Docs
 showTitle: true
+platformLogo: nextjs
 ---
 
-import RegionWarning from "../_snippets/region-warning.mdx"
-import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
-import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import ProxyCallout from "../_snippets/proxy-callout.mdx"
+import { Steps, Step } from 'components/Docs/Steps'
 
-<CalloutBox icon="IconWarning" title="Warning" type="fyi">
+<ProxyCallout />
 
-  1. <ProxyWarning />
-  2. <RegionWarning />
-  3. <ProxyPathNamesWarning />
+This guide shows you how to use [Next.js proxy](https://nextjs.org/docs/app/api-reference/file-conventions/proxy) (formerly middleware) as a reverse proxy for PostHog.
+
+<CalloutBox icon="IconInfo" title="Next.js 16 renamed middleware to proxy" type="fyi">
+
+In Next.js 16, `middleware.js` was renamed to `proxy.js`. The functionality is identical, but the file and export names changed. If you're on Next.js 15 or earlier, use `middleware.js` and export `middleware` instead of `proxy`.
+
+You can migrate existing middleware using: `npx @next/codemod@canary middleware-to-proxy .`
 
 </CalloutBox>
 
-If you are using Next.js and [rewrites aren't working for you](/docs/advanced/proxy/nextjs), you can write custom middleware to proxy requests to PostHog. 
+## How it works
 
-To do this using the [app router](/tutorials/nextjs-analytics), create a file named `middleware.js` in your base directory (same level as the `app` folder). In this file, set up code to match requests to a custom route, set a new `host` header, change the URL to point to PostHog, and rewrite the response.
+Next.js proxy runs on the edge before a request reaches your pages. When a request matches your proxy path, it rewrites the request to PostHog's servers and returns the response under your domain.
 
-```js
+Here's the request flow:
+
+1. User triggers an event in your app
+2. Request goes to your domain (e.g., `yourdomain.com/ph`)
+3. Next.js proxy intercepts the request before it reaches your pages
+4. Proxy rewrites the request URL to PostHog's servers
+5. PostHog processes the request and returns a response
+6. Proxy returns the response to the user under your domain
+
+This works because the proxy runs server-side, so the browser only sees requests to your domain. Ad blockers that filter by domain won't block these requests.
+
+## When to use proxy vs rewrites
+
+Next.js offers two ways to proxy PostHog: [rewrites](/docs/advanced/proxy/nextjs) and proxy. Both work with the app router and pages router.
+
+- [**Rewrites:**](/docs/advanced/proxy/nextjs) Simpler configuration in `next.config.js`. Use this for most cases, especially on Vercel or self-hosted Next.js.
+- **Proxy:** More control over request handling. Use this when rewrites return `503` or `400` errors on your hosting platform, or when you need custom logic like header modification.
+
+Try rewrites first. Use proxy if you encounter issues.
+
+## Prerequisites
+
+This guide works with any Next.js project using the app router or pages router. Requires Next.js 12.2 or later (use `middleware.js` for versions before 16, `proxy.js` for 16+).
+
+## Setup
+
+<Steps>
+
+<Step title="Create the proxy file">
+
+Create a file named `proxy.js` (or `proxy.ts` for TypeScript) in your project root, at the same level as your `app` or `pages` folder:
+
+<MultiLanguage>
+
+```js file=US
 import { NextResponse } from 'next/server'
- 
-export function middleware(request) {
-  let url = request.nextUrl.clone()
-  const hostname = url.pathname.startsWith("/<ph_proxy_path>/static/") ? 'us-assets.i.posthog.com' : 'us.i.posthog.com'
+
+export function proxy(request) {
+  const url = request.nextUrl.clone()
+  const hostname = url.pathname.startsWith('/ph/static/')
+    ? 'us-assets.i.posthog.com'
+    : 'us.i.posthog.com'
+
   const requestHeaders = new Headers(request.headers)
-  
   requestHeaders.set('host', hostname)
 
   url.protocol = 'https'
   url.hostname = hostname
-  url.port = 443
-  url.pathname = url.pathname.replace(/^\/<ph_proxy_path>/, '');
+  url.port = '443'
+  url.pathname = url.pathname.replace(/^\/ph/, '')
 
   return NextResponse.rewrite(url, {
     headers: requestHeaders,
   })
 }
- 
+
 export const config = {
-  matcher: '/<ph_proxy_path>/:path*',
+  matcher: '/ph/:path*',
 }
 ```
 
-Add the `skipTrailingSlashRedirect` option to your `next.config.js` file:
+```js file=EU
+import { NextResponse } from 'next/server'
+
+export function proxy(request) {
+  const url = request.nextUrl.clone()
+  const hostname = url.pathname.startsWith('/ph/static/')
+    ? 'eu-assets.i.posthog.com'
+    : 'eu.i.posthog.com'
+
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('host', hostname)
+
+  url.protocol = 'https'
+  url.hostname = hostname
+  url.port = '443'
+  url.pathname = url.pathname.replace(/^\/ph/, '')
+
+  return NextResponse.rewrite(url, {
+    headers: requestHeaders,
+  })
+}
+
+export const config = {
+  matcher: '/ph/:path*',
+}
+```
+
+</MultiLanguage>
+
+<details>
+<summary>Using Next.js 15 or earlier? Use middleware.js instead</summary>
+
+<MultiLanguage>
+
+```js file=US
+import { NextResponse } from 'next/server'
+
+export function middleware(request) {
+  const url = request.nextUrl.clone()
+  const hostname = url.pathname.startsWith('/ph/static/')
+    ? 'us-assets.i.posthog.com'
+    : 'us.i.posthog.com'
+
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('host', hostname)
+
+  url.protocol = 'https'
+  url.hostname = hostname
+  url.port = '443'
+  url.pathname = url.pathname.replace(/^\/ph/, '')
+
+  return NextResponse.rewrite(url, {
+    headers: requestHeaders,
+  })
+}
+
+export const config = {
+  matcher: '/ph/:path*',
+}
+```
+
+```js file=EU
+import { NextResponse } from 'next/server'
+
+export function middleware(request) {
+  const url = request.nextUrl.clone()
+  const hostname = url.pathname.startsWith('/ph/static/')
+    ? 'eu-assets.i.posthog.com'
+    : 'eu.i.posthog.com'
+
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('host', hostname)
+
+  url.protocol = 'https'
+  url.hostname = hostname
+  url.port = '443'
+  url.pathname = url.pathname.replace(/^\/ph/, '')
+
+  return NextResponse.rewrite(url, {
+    headers: requestHeaders,
+  })
+}
+
+export const config = {
+  matcher: '/ph/:path*',
+}
+```
+
+</MultiLanguage>
+
+The only differences are the filename (`middleware.js`) and the exported function name (`middleware` instead of `proxy`).
+
+</details>
+
+The proxy does the following:
+
+- The `matcher` config tells Next.js to only run this proxy for requests starting with `/ph`
+- It determines which PostHog host to use: the assets host for `/static/*` requests, the main host for everything else
+- It sets the `host` header so PostHog knows how to route the request. Without this, you'll get 401 errors.
+- It rewrites the URL to PostHog's domain and strips the `/ph` prefix
+
+See [Next.js proxy documentation](https://nextjs.org/docs/app/api-reference/file-conventions/proxy) for more details.
+
+</Step>
+
+<Step title="Configure trailing slash handling">
+
+Add `skipTrailingSlashRedirect` to your `next.config.js`:
 
 ```js
 // next.config.js
 const nextConfig = {
-  // This is required to support PostHog trailing slash API requests
-  skipTrailingSlashRedirect: true, 
+  skipTrailingSlashRedirect: true,
 }
+
 module.exports = nextConfig
 ```
 
-Once done, configure the PostHog client to send requests via your rewrite.
+PostHog's API endpoints use trailing slashes (like `/e/`). Without this setting, Next.js redirects these requests by removing the trailing slash, which breaks event capture.
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+In your application code, update your PostHog initialization to use your proxy path:
+
+<MultiLanguage>
+
+```js file=US
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+  api_host: '/ph',
+  ui_host: 'https://us.posthog.com'
+})
+```
+
+```js file=EU
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+  api_host: '/ph',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
+
+The `api_host` tells the SDK where to send events. Using a relative path ensures requests go to your domain. The `ui_host` must point to PostHog's actual domain so features like the toolbar link correctly.
+
+</Step>
+
+<Step title="Deploy your changes">
+
+Commit and push your changes. The proxy activates once deployed.
+
+In development, restart your dev server after creating the proxy file. Next.js doesn't hot-reload proxy changes.
+
+</Step>
+
+<Step checkpoint title="Verify your setup">
+
+Confirm events are flowing through your proxy:
+
+1. Open your browser's developer tools and go to the **Network** tab
+2. Navigate to your site or trigger an event
+3. Look for requests to your domain with your proxy path (e.g., `yourdomain.com/ph`)
+4. Verify the response status is `200 OK`
+5. Check the [PostHog app](https://app.posthog.com) to confirm events appear in your activity feed
+
+If you see errors, check [troubleshooting](#troubleshooting) below.
+
+</Step>
+
+</Steps>
+
+## Troubleshooting
+
+### Proxy not running
+
+If requests to your proxy path return 404 or don't get proxied:
+
+1. Verify your `proxy.js` (or `middleware.js` for Next.js <16) file is in the project root (same level as `app` or `pages`), not inside those folders
+2. Check that the `matcher` pattern matches your proxy path
+3. Restart your dev server after creating or modifying the proxy file
+
+### Using with Clerk or other auth solutions
+
+If you're using Clerk or similar auth solutions, handle PostHog routes before authentication. Add the proxy logic to your `beforeAuth` function and exclude the proxy path from auth:
+
+<MultiLanguage>
+
+```js file=US
+export default authMiddleware({
+  beforeAuth(req) {
+    if (req.nextUrl.pathname.startsWith('/ph')) {
+      const url = req.nextUrl.clone()
+      const hostname = url.pathname.startsWith('/ph/static/')
+        ? 'us-assets.i.posthog.com'
+        : 'us.i.posthog.com'
+
+      const requestHeaders = new Headers(req.headers)
+      requestHeaders.set('host', hostname)
+
+      url.protocol = 'https'
+      url.hostname = hostname
+      url.port = '443'
+      url.pathname = url.pathname.replace(/^\/ph/, '')
+
+      return NextResponse.rewrite(url, {
+        headers: requestHeaders,
+      })
+    }
+  },
+  ignoredRoutes: ['/ph(.*)'],
+})
+```
+
+```js file=EU
+export default authMiddleware({
+  beforeAuth(req) {
+    if (req.nextUrl.pathname.startsWith('/ph')) {
+      const url = req.nextUrl.clone()
+      const hostname = url.pathname.startsWith('/ph/static/')
+        ? 'eu-assets.i.posthog.com'
+        : 'eu.i.posthog.com'
+
+      const requestHeaders = new Headers(req.headers)
+      requestHeaders.set('host', hostname)
+
+      url.protocol = 'https'
+      url.hostname = hostname
+      url.port = '443'
+      url.pathname = url.pathname.replace(/^\/ph/, '')
+
+      return NextResponse.rewrite(url, {
+        headers: requestHeaders,
+      })
+    }
+  },
+  ignoredRoutes: ['/ph(.*)'],
+})
+```
+
+</MultiLanguage>
+
+### Cookies being forwarded to PostHog
+
+By default, the proxy forwards all headers including cookies to PostHog. If you don't want to forward authentication cookies, delete them from the request:
+
+```js
+const requestHeaders = new Headers(request.headers)
+requestHeaders.set('host', hostname)
+requestHeaders.delete('cookie')
+```
+
+Alternatively, configure PostHog to use `localStorage` instead of cookies:
 
 ```js
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-  api_host: "/<ph_proxy_path>",
-  ui_host: "<ph_app_host>"
+  api_host: '/ph',
+  persistence: 'localStorage'
 })
 ```
+
+### 503 or 400 errors persist
+
+If proxy doesn't resolve the errors, your hosting platform may be incompatible with Next.js proxying. Try:
+
+1. A platform-specific proxy like [Netlify redirects](/docs/advanced/proxy/netlify) or [Vercel rewrites](/docs/advanced/proxy/vercel)
+2. [PostHog's managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy)
+3. Self-hosting Next.js where you control the infrastructure

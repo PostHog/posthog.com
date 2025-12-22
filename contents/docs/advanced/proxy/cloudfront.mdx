@@ -1,68 +1,217 @@
 ---
-title: Setting up AWS CloudFront as a reverse proxy
+title: AWS CloudFront reverse proxy
 sidebar: Docs
 showTitle: true
+platformLogo: cloudfront
 ---
 
-import RegionWarning from "../_snippets/region-warning.mdx"
-import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
-import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import ProxyCallout from "../_snippets/proxy-callout.mdx"
+import { Steps, Step } from 'components/Docs/Steps'
 
-<CalloutBox icon="IconWarning" title="Warning" type="fyi">
+<ProxyCallout />
 
-  1. <ProxyWarning />
-  2. <RegionWarning />
-  3. <ProxyPathNamesWarning />
+This guide shows you how to configure [AWS CloudFront](https://docs.aws.amazon.com/cloudfront/) as a reverse proxy for PostHog.
 
-</CalloutBox>
+## Why CloudFront needs custom configuration
 
-CloudFront can be used as a reverse proxy. Although [there are multiple other options if you're using AWS](https://aws.amazon.com/blogs/architecture/serving-content-using-fully-managed-reverse-proxy-architecture/).
+CloudFront's default settings don't forward the headers, cookies, and query parameters PostHog needs to function. Without custom cache and origin request policies:
 
-By default, CloudFront doesn't forward headers, cookies, or query parameters received from the origin that PostHog uses. To set these up, you need an "origin request policy" as in the instructions below.
+- Events will fail to authenticate due to missing `Authorization` headers
+- CORS requests will be blocked due to missing `Origin` headers
+- Feature flags and session recording won't work correctly due to stripped query parameters
 
-## Create a distribution
+You'll need to create custom policies to ensure CloudFront passes everything through to PostHog.
 
-1. On the AWS dashboard, search for CloudFront, then create a new CloudFront distribution
-2. Set the origin domain to your PostHog instance `us.i.posthog.com` or `eu.i.posthog.com` for PostHog Cloud).
-3. Select HTTPS only.
-4. Under Default cache behavior, go to Viewer. “Under Allowed HTTP methods,” select “GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE,” and check OPTIONS under “Cache HTTP methods.” This allows all HTTP methods.
-5. Under [Cache policy](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy), click “Create cache policy.” On the “Create cache policy” page:
-    1. Name your policy “origin-cors.” 
-    2. Scroll to “Cache key settings,” click the dropdown for “Headers” that says “Include the following headers,” select Origin and Authorization. 
-    3. Under “Query strings,” select “All.”
-    4. Click “Create” at bottom of the page.
+## Architecture overview
 
-export const diagram = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/cloud/cloudfront-proxy/cache-policy.png"
+Your CloudFront distribution will route two types of requests:
 
-<img src={diagram} alt="a screenshot of the cloudfront cache policy settings" />
+- **Event and API requests:** Routes to your main origin, `us.i.posthog.com` or `eu.i.posthog.com`. This handles event capture, feature flags, session recordings, and all PostHog API calls.
+- **Static assets:** Routes to your assets origin, `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`. This serves PostHog's JavaScript SDK and other static files.
 
-6. Back on the “Create distribution” page, select your “origin-cors” cache policy.
-7. Under “Origin request policy,” choose “CORS-CustomOrigin.”
-8. Do not enable AWS Web Application Firewall (WAF).
-9. Click **Create distribution** at bottom of the page.
-10. Edit the Cloudfront Distribution and add the assets origin `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`.
-11. Add another behavior the path will be `/static/*`.
-12. Under **Origin**, choose the one created above.
-13. Under **cache policy**, choose `origin-cors`
-14. Under **Origin request policy**, click **Create origin request policy** on the **Create origin request policy** page:
-    1. Name your policy "origin-request-policy."
-    2. Under "Headers," select "Include the following headers."
-    3. Under "Add header", select "Origin."
-    4. Under "Query strings", select "All."
-    5. Click “Create” at bottom of the page.
-15. Under Origin request policy,” choose "origin-request-policy."
-16. Under **Response headers policy**, choose `CORS-with-preflight-and-SecurityHeadersPolicy`.
-    - If you are getting CORS errors, try setting this to a custom Response Headers Policy with the same settings, but under `Access-Control-Allow-Headers`, select **All headers.**
+CloudFront uses "behaviors" to route requests. The `/static/*` behavior routes to your assets origin, while the default behavior routes everything else to your main origin.
 
-Once created, copy the distribution domain name, and set it as your API host in your PostHog initialization like this:
+## Set up your CloudFront proxy
 
-```js
+<Steps>
+
+<Step title="Create a CloudFront distribution">
+
+In the CloudFront console, follow AWS's guide to [create a CloudFront distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html).
+
+Configure these CloudFront settings for your origin:
+
+Origin settings:
+
+- **Origin domain:** `us.i.posthog.com` or `eu.i.posthog.com`
+- **Protocol:** HTTPS only
+
+This tells CloudFront to forward requests to PostHog's ingestion endpoint. HTTPS only ensures all traffic is encrypted.
+
+Default cache behavior:
+
+- **Allowed HTTP methods:** `GET`, `HEAD`, `OPTIONS`, `PUT`, `POST`, `PATCH`, `DELETE`
+- **Cache HTTP methods:** Check `OPTIONS`
+
+PostHog needs all HTTP methods because you'll capture events (`POST`), retrieve feature flags (`GET`), and handle CORS preflight requests (`OPTIONS`).
+
+</Step>
+
+<Step title="Create a custom cache policy">
+
+In the CloudFront console, follow AWS's guide to [create a cache policy](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy).
+
+Configure this custom policy:
+
+- **Name:** `posthog-cache-policy` or any name you prefer
+- **Headers:** Include `Origin` and `Authorization`
+- **Query strings:** All
+
+This policy tells CloudFront to include these values when caching responses. Without this, CloudFront would strip authentication headers and break event capture.
+
+</Step>
+
+<Step title="Apply your custom cache policy">
+
+In the CloudFront console, edit your distribution's default cache behavior.
+
+Apply these CloudFront policies:
+
+- **Cache policy:** Your custom `posthog-cache-policy` from step 2
+- **Origin request policy:** `CORS-CustomOrigin`
+
+The `CORS-CustomOrigin` policy is built into AWS and forwards CORS-related headers to your origin. You don't need to create it.
+
+Leave AWS WAF disabled for now. If you enable it later, make sure its size limit is at least 1MB for events and 64MB for session recordings. AWS WAF defaults to 8KB, which will block PostHog traffic.
+
+</Step>
+
+<Step title="Add a second origin for static assets">
+
+In the CloudFront console, add a second origin to your distribution.
+
+Configure this origin:
+
+- **Origin domain:** `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`
+
+This origin serves PostHog's JavaScript SDK and other static files. Separating static assets from API requests allows different caching strategies.
+
+</Step>
+
+<Step title="Create a custom origin request policy">
+
+In the CloudFront console, follow AWS's guide to [create an origin request policy](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy).
+
+Configure this custom policy:
+
+- **Name:** `posthog-origin-request-policy` or any name you prefer
+- **Headers:** Include `Origin`
+- **Query strings:** All
+
+Origin request policies control what CloudFront sends to your origin, regardless of caching. This ensures PostHog receives all headers and query parameters it needs.
+
+</Step>
+
+<Step title="Create a cache behavior for static assets">
+
+In the CloudFront console, add a new cache behavior to your distribution.
+
+Configure this CloudFront behavior:
+
+- **Path pattern:** `/static/*`
+- **Origin:** Your assets origin, `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`
+- **Cache policy:** Your custom `posthog-cache-policy` from step 2
+- **Origin request policy:** Your custom `posthog-origin-request-policy` from step 5
+- **Response headers policy:** `CORS-with-preflight-and-SecurityHeadersPolicy`
+
+This behavior routes requests to `/static/*` to your assets origin instead of the main origin. The response headers policy is built into AWS and adds CORS headers to responses.
+
+If you encounter CORS errors after setup, you may need to create a custom response headers policy with `Access-Control-Allow-Headers` set to `*` for all headers. See [AWS's CORS troubleshooting guide](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web-cors) for details.
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+In your application code, update your PostHog initialization to use your CloudFront distribution domain:
+
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
-  api_host: 'https://<distribution_domain_name>.cloudfront.net',
-  ui_host: '<ph_app_host>',
-  defaults: '<ph_posthog_js_defaults>',
+  api_host: 'https://d111111abcdef8.cloudfront.net',
+  ui_host: 'https://us.posthog.com'
 })
 ```
 
-You can find out about [CloudFront pricing on the AWS website](https://aws.amazon.com/cloudfront/pricing/).
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://d111111abcdef8.cloudfront.net',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
+
+Replace `d111111abcdef8.cloudfront.net` with your actual CloudFront distribution domain. Find this in the CloudFront console under **distribution domain name**.
+
+The `ui_host` must point to PostHog's actual domain so features like the toolbar link correctly.
+
+</Step>
+
+<Step checkpoint title="Verify your setup">
+
+Confirm events are flowing through CloudFront:
+
+1. Open your browser's developer tools and go to the Network tab
+2. Trigger an event in your app, like a page view
+3. Look for a request to your CloudFront domain
+4. Verify the response is `200 OK`, not `403 Forbidden` or `400 Bad Request`
+5. Check the [PostHog app](https://app.posthog.com) to confirm events appear
+
+If you see `403` errors, your cache or origin request policies aren't forwarding required headers. Double-check your policy configurations.
+
+</Step>
+
+</Steps>
+
+## Troubleshooting
+
+### 403 Forbidden errors
+
+If CloudFront returns `403 Forbidden` when capturing events:
+
+1. Verify your cache policy includes `Authorization` and `Origin` headers
+2. Check that your origin request policy forwards all query strings
+3. Confirm you're using the `CORS-CustomOrigin` origin request policy on your default behavior
+
+CloudFront blocks requests when required headers are missing. The `Authorization` header is essential for PostHog to authenticate your events.
+
+### CORS errors in browser console
+
+If you see CORS errors like `No 'Access-Control-Allow-Origin' header`:
+
+1. Verify you applied the `CORS-with-preflight-and-SecurityHeadersPolicy` response headers policy to your `/static/*` behavior
+2. Check that your cache policy includes the `Origin` header
+3. If errors persist, create a custom response headers policy with `Access-Control-Allow-Headers` set to `*`
+
+See [AWS's CORS troubleshooting guide](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web-cors) for more details.
+
+### Events or recordings are being truncated
+
+If large events or session recordings aren't reaching PostHog:
+
+1. Check if you enabled AWS WAF on your distribution
+2. If enabled, verify the WAF body size limit is at least 64MB
+3. AWS WAF defaults to 8KB, which will block PostHog traffic
+
+PostHog events can be up to 1MB and session recordings up to 64MB per message. Any size limit below these values will silently drop data.
+
+### Static assets aren't loading
+
+If the PostHog SDK fails to load or you see 404 errors for `/static/*` requests:
+
+1. Verify you created a second origin pointing to `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`
+2. Confirm you created a cache behavior with path pattern `/static/*` pointing to this origin
+3. Check that the assets origin matches your PostHog region (US or EU)
+
+Without the `/static/*` behavior, CloudFront tries to serve static files from your main origin, which will fail.

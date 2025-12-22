@@ -217,6 +217,26 @@ git push origin --force <your branch>
 
 > Why does this work? As we mentioned earlier, our CI runs `test-runner.ts` on every push, so we don't really care if these images are conflicted as they are regenerated after you push to your branch.
 
+### Deployed Preview
+
+You can spin up a real deployed PostHog instance to test your branch by adding the `hobby-preview` label to your PR. This uses the hobby (Docker Compose) self-hosted setup under the hood.
+
+**How it works:**
+
+1. Add the `hobby-preview` label to your PR
+2. CI creates a DigitalOcean droplet and deploys PostHog with your branch
+3. A comment is posted to the PR with the preview URL (e.g., `https://hobby-pr-12345.posthog.dev`)
+4. The droplet persists across commits so you can iterate
+5. Remove the label or close the PR to clean up the droplet
+
+**When to use it:**
+
+- Testing changes in a real deployed environment
+- Manual QA before merging
+- Verifying Docker Compose or deployment script changes
+
+The workflow also runs a smoke test (health check) automatically on PRs that touch deployment-related files.
+
 ## Reviewing code
 
 When we review a PR, we'll look at the following things:
@@ -253,6 +273,25 @@ It's not the responsibility of either <SmallTeam slug="brand" /> or <SmallTeam s
 See our [docs style guide](/handbook/content/posthog-style-guide) for tips on how to write great docs.
 
 ## Releasing
+
+There are a few different ways to release code here:
+
+* just release the code change directly
+    * when you have hign confidence the change is safe 
+* release it behind a flag and slowly roll it out
+    * when you don't need to run an AB test but want to be sure you can check the impact of the change 
+* release it behind a flag and roll it out on demand (we call this a closed beta)
+    * when you want to slowly release this to people who know they'll likely need to give feedback
+    * you know it isn't complete and you need early feedback 
+* release it behind a flag and run it with an AB experiment
+    * you don't know what impact it will have and want to measure it 
+* release it behind a flag and put it in a feature preview (we call this an open beta)
+    *  when you want to slowly release this to people who know they'll likely need to give feedback
+    * you know it isn't 100% and you need feedback
+* run old and new at the same time
+    * sometimes called the strangler fig https://martinfowler.com/bliki/StranglerFigApplication.html
+    * run both old and new and compare the output / effect
+    * you can then cut across (sometimes in stages) before removing the old code  
 
 ### Best practices for full releases
 
