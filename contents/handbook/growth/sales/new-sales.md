@@ -247,6 +247,8 @@ By the end of either the 1st or 2nd call with a customer, you should have a defi
 3. **Authority** - Who will make the decision at the customer organization? Who holds the budget? 
 4. **Timeline** - When does the trial start? When are they looking to make a decision/have a contract in place?
 
+> It's really easy to convince yourself that you've got a well-qualified opportunity after a demo goes well.  Everybody has been laughing and having fun so they must love PostHog right?  You need to be more objective than that - ask the AI in the call recording to rate you on BANT qualification to see whether you actually got all of the information you need to confirm that a real opportunity exists here.  If you are missing any qualification information, don't be afraid to go back and ask your champion for additional context here.  It'll save you wasting a whole bunch of time helping a customer in an evaluation where they aren't serious about buying PostHog, and the inevitable **Closed - Lost** which comes as a result of that.
+
 ### 5. Product evaluation
 
 Once qualified, and if you think they are a good prospect for our sales-led process, your first priority is to try and get them into trial of PostHog with [a shared Slack channel](/handbook/growth/sales/slack-channels) as quickly as possible. If you close them, a shared Slack channel will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag `@support` to create a ticket in a thread. 
@@ -269,7 +271,7 @@ If the customer isn't super clear on how to articulate the success criteria then
 - Surveys: deploy a survey, view and analyze the results
 - Data warehouse: set up the warehouse, sync at least 1 data source or pull additional person data in to enrich an insight
 
-> The AE acts as the support person during this period and it's your opportunity to show them what working with you and PostHog will be like should they decide to become a paying customer.  You shouldn't just leave the customer to fend for themselves.
+> Don't be over-reliant on support during the evaluation.  As the AE, you should be highly focused on customers during their evaluation to maximize your chance of success.  We deliberately hire people we know customers will love working with, so now is your time to shine.
 
 1. Guide them on how to set up tracking depending on their app paying attention to common points of friction such as:
    * [Anonymous vs Identified](/docs/product-analytics/identify#anonymous-and-identified-events) events.
@@ -282,6 +284,8 @@ If the customer isn't super clear on how to articulate the success criteria then
 4. A week before the trial period ends have a wrap-up call to ensure that they have seen everything they need to see, and identify any last remaining areas you can help them with, and next steps after the trial ends.
 
 In an ideal world this involves multiple calls per week during the trial period so that you can build a trusted relationship with the customer, but don't force that if they prefer to use Slack/Email.
+
+> If non-technical people such as Product Managers, Marketing, etc. are involved we know from prior experience that the PostHog UI, while powerful, can be overwhelming, especially if they have used similar tools in the past.  You should be prepared to run multiple remote or in-person sessions with these people to ensure that they get what they need out of the evaluation. 
 
 We usually set up the following trials depending on likely contract size:
 
