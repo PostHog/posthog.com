@@ -1,6 +1,6 @@
 ---
 title: "Validating what you ship: Did anyone use it? Did it work?"
-date: 2025-12-15
+date: 2025-12-22
 author:
   - christophe-eynius-tranberg
 showTitle: true
@@ -52,7 +52,7 @@ Before writing any code, document:
 - **What are you changing?** (Be specific: "New onboarding flow with interactive tutorial")
 - **What do you expect to happen?** ("Users will activate at a higher rate because they understand the product faster")
 - **How will you measure it?** ("Compare activation rate between users who see new flow vs. old flow")
-- **What's your success threshold?** ("10 percentage point improvement in activation rate")
+- **What's your success threshold?** ("10% improvement in activation rate")
 - **What could go wrong?** ("Users might find the tutorial annoying and abandon earlier")
 
 > **Planning prompt**: What could go wrong? Write this down alongside your success condition.
@@ -69,8 +69,7 @@ Before writing any code, document:
 
 > **Tip:** When capturing events, include a `step_name` property so you can later analyze where users get stuck.
 
-If you're need help capturing the necessary events, try our [complete guide to event tracking](/tutorials/event-tracking-guide).
-
+If you need help capturing the necessary events, try our [complete guide to event tracking](/tutorials/event-tracking-guide).
 
 **Lagging indicators** tell you if the change improved outcomes:
 
@@ -78,19 +77,17 @@ If you're need help capturing the necessary events, try our [complete guide to e
 |--------|----------------|-------------------|-----------|
 | Activation | Track completion of key actions that indicate value | Whether users are experiencing value, which predicts retention and downstream metrics | [Activation and why you should care](/newsletter/wtf-is-activation)
 | Retention | Week-over-week return rate | Does this have lasting impact? | [Track retention](/docs/product-analytics/retention) |
-| Revenue | Conversion to paid | Did this affect the business? | [See Stripe revenue in PostHog](https://posthog.com/docs/cdp/sources/stripe) |
+| Revenue | Conversion to paid | Did this affect the business? | [See Stripe revenue in PostHog](/docs/cdp/sources/stripe) |
 
 **Guardrail metrics** tell you if you broke something:
 
 | Metric | What to watch | Warning threshold | Resources |
 |--------|---------------|-------------------|-----------|
 | Support volume | Tickets tagged "onboarding" | >10% increase | [See Zendesk data in PostHog](/docs/data-warehouse/sources/zendesk) |
-| Error rate | Errors in onboarding flow | Any increase | [Setup error tracking](/docs/error-tracking/start-here) |
-| Performance | Load time of onboarding pages | >200ms increase |  |
+| Error rate | Errors in onboarding flow | Any increase | [Set up error tracking](/docs/error-tracking/start-here) |
+| Performance | Load time of onboarding pages | >200ms increase | [Web vitals dashboard](/docs/web-analytics/web-vitals) |
 
-
-[Setup alerts to monitor these metrics](https://posthog.com/docs/alerts)
-
+To get notified faster when something breaks, you can [set up alerts to monitor these metrics](/docs/alerts).
 
 ### Step 3: Create an A/B test for controlled rollout
 
@@ -99,7 +96,6 @@ In PostHog, go to **Experiments** → **New experiment**.
 Create an experiment that splits users into control and test groups (start with 10-20% in the test group). This creates a natural control group: users in the control group give you a baseline for comparison.
 
 ![A/B testing setup](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/abtest_setup_912f3a7d44.png)
-
 
 ### Step 4: Build your dashboard before you ship
 
@@ -143,7 +139,7 @@ Create a new dashboard called "New Onboarding Flow Launch - {Date}". In it, incl
 [Creating surveys](/docs/surveys/creating-surveys)
 
 **Session replay**:
-- Create a filter for users in the new onboarding flow
+- Create a filter for users where `new-onboarding-flow` is true
 - Watch 5-10 session recordings per week during the launch period
 - Look for: Confusion at specific steps, rage clicks, users skipping the tutorial
 
@@ -194,14 +190,15 @@ Based on your data, you have three options:
 
 ## What success looks like
 
-For your validation setup, you should have:
+Here's a checklist of what you should have before you launch:
+
 ```
-- Written hypothesis with specific success/failure thresholds
-- Events tracking the full journey through your change
-- A feature flag controlling rollout
-- Dashboard built before launch with leading, lagging, and guardrail metrics
-- Alerts set up for key milestones and problems
-- Survey and session replay filters ready to capture qualitative data
+- [ ] Written hypothesis with specific success/failure thresholds
+- [ ] Events tracking the full journey through your change
+- [ ] A feature flag controlling rollout
+- [ ] Dashboard built before launch with leading, lagging, and guardrail metrics
+- [ ] Alerts set up for key milestones and problems
+- [ ] Survey and session replay filters ready to capture qualitative data
 ```
 
 ## Common mistakes
