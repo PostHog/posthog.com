@@ -46,7 +46,7 @@ const UploadSymbolSetsPlatforms = () => {
         {
             label: 'Rollup',
             url: '/docs/error-tracking/upload-source-maps/rollup',
-            icon: 'IconCode',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Rollup_js_c306a2fde3.svg',
         },
         {
             label: 'CLI',

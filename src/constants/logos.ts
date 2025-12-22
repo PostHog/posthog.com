@@ -58,6 +58,7 @@ export const LOGOS = {
     redditAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/reddit_logo_f6d4c5cb0b.svg',
     remix: 'https://res.cloudinary.com/dmukukwp6/image/upload/remix_letter_glowing_49183adce2.svg',
     revenuecat: 'https://res.cloudinary.com/dmukukwp6/image/upload/logomark_red_background_9ea591e17a.svg',
+    rollup: 'https://res.cloudinary.com/dmukukwp6/image/upload/Rollup_js_c306a2fde3.svg',
     ruby: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ruby.svg',
     rust: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/rust.svg',
     s3: 'https://res.cloudinary.com/dmukukwp6/image/upload/s3_8f86e011ce.svg',

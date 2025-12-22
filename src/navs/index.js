@@ -4021,6 +4021,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-mappings/android',
                         },
                         {
+                            name: 'Rollup',
+                            url: '/docs/error-tracking/upload-source-maps/rollup',
+                        },
+                        {
                             name: 'CLI',
                             url: '/docs/error-tracking/upload-source-maps/cli',
                         },
