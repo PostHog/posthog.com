@@ -4863,6 +4863,112 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Customer Analytics',
+            icon: 'IconPeople',
+            color: '[#FF6B6B]',
+            url: '/docs/customer-analytics',
+            description:
+                'Understand your customers to build products that solve real problems and achieve product-market fit.',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
+            children: [
+                {
+                    name: 'Customer Analytics',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/customer-analytics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                    featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/customer-analytics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Dashboard metrics',
+                    featured: true,
+                    url: '/docs/customer-analytics/dashboard-metrics',
+                    icon: 'IconBolt',
+                    color: 'orange',
+                },
+                {
+                    name: 'B2B mode',
+                    featured: true,
+                    url: '/docs/customer-analytics/b2b-mode',
+                    icon: 'IconCohort',
+                    color: 'red',
+                },
+                {
+                    name: 'Usage metrics',
+                    url: '/docs/customer-analytics/usage-metrics',
+                    icon: 'IconTrends',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Customer profiles',
+                    url: '/docs/customer-analytics/customer-profiles',
+                    icon: 'IconPerson',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Configure your dashboard',
+                    url: '/docs/customer-analytics/configure-your-dashboard',
+                    icon: 'IconDashboard',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Create usage metrics',
+                    url: '/docs/customer-analytics/create-usage-metrics',
+                    icon: 'IconG',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'AI',
+                },
+                {
+                    name: 'Configure dashboard with AI',
+                    url: '/docs/customer-analytics/configure-dashboard-with-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/customer-analytics/faq',
+                    icon: 'IconQuestion',
+                    color: 'blue',
+                    featured: true,
+                },
+            ],
+        },
+        {
             name: 'PostHog AI',
             icon: 'IconSparkles',
             color: 'blue',
