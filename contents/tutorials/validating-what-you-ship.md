@@ -37,9 +37,9 @@ Let's say you're launching a new onboarding flow for your SaaS product.
 - Timeline: Measured 4 weeks post-launch
 - Guardrail: Support ticket volume doesn't increase by more than 10%
 
-**At launch**, you ship to a subset of users first. Create a feature flag called `new-onboarding-flow` and roll it out to 20% of users. This gives you a natural control group for comparison.
+**At launch**, you ship to a subset of users first. [Create a feature flag](/docs/feature-flags/creating-feature-flags) called `new-onboarding-flow` and roll it out to 20% of users. This gives you a natural control group for comparison.
 
-**Post-launch**, the data tells a clear story. Activation rate went from 35% to 41%. Not the 45% you hoped for, but a measurable improvement. You also notice step 3 of onboarding has a 40% drop-off. That's your iteration target.
+**Post-launch**, the data tells a clear story. [Activation rate](/newsletter/wtf-is-activation) went from 35% to 41%. Not the 45% you hoped for, but a measurable improvement. You also notice step 3 of onboarding has a 40% drop-off. That's your iteration target.
 
 Without this setup, you'd be guessing. With it, you know exactly what happened and what to do next.
 
@@ -75,7 +75,7 @@ If you need help capturing the necessary events, try our [complete guide to even
 
 | Metric | How to measure | What it tells you | Resources |
 |--------|----------------|-------------------|-----------|
-| Activation | Track completion of key actions that indicate value | Whether users are experiencing value, which predicts retention and downstream metrics | [Activation and why you should care](/newsletter/wtf-is-activation)
+| Activation | Track completion of key actions that indicate value | Whether users are experiencing value, which predicts retention and downstream metrics | [Activation and why you should care](/newsletter/wtf-is-activation) |
 | Retention | Week-over-week return rate | Does this have lasting impact? | [Track retention](/docs/product-analytics/retention) |
 | Revenue | Conversion to paid | Did this affect the business? | [See Stripe revenue in PostHog](/docs/cdp/sources/stripe) |
 
@@ -93,13 +93,13 @@ To get notified faster when something breaks, you can [set up alerts to monitor 
 
 In PostHog, go to **Experiments** → **New experiment**.
 
-Create an experiment that splits users into control and test groups (start with 10-20% in the test group). This creates a natural control group: users in the control group give you a baseline for comparison.
+[Create an experiment](/docs/experiments/creating-an-experiment) that splits users into control and test groups (start with 10-20% in the test group). This creates a natural control group: users in the control group give you a baseline for comparison.
 
 ![A/B testing setup](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/abtest_setup_912f3a7d44.png)
 
 ### Step 4: Build your dashboard before you ship
 
-Create a new dashboard called "New Onboarding Flow Launch - {Date}". In it, include the following insights:
+[Create a new dashboard](/docs/product-analytics/dashboards) called "New Onboarding Flow Launch - {Date}". In it, include the following insights:
 
 **Onboarding funnel** (Funnel insight):
 - Step 1: `onboarding_started`
@@ -122,28 +122,21 @@ Create a new dashboard called "New Onboarding Flow Launch - {Date}". In it, incl
 - Errors in onboarding flow
 - Time to complete onboarding (should decrease, not increase)
 
-
 ### Step 5: Set up alerts and qualitative checkpoints
 
-**Proactive alerts** (Workflows → Slack notification):
+**Proactive alerts** (Workflows → [Slack notification](/docs/cdp/destinations/slack)):
 - Positive: Alert when a user completes onboarding and activates
 - Negative: Alert when support tickets tagged "onboarding" spike
 
-[Send PostHog event data to Slack webhooks](/docs/cdp/destinations/slack)
-
-**Post-interaction survey** (Surveys):
+**Post-interaction survey** ([Surveys](/docs/surveys/creating-surveys)):
 - Trigger: After `onboarding_completed`
 - Question: "How easy was it to get started?" (1-5 rating + optional text)
 - Sample: 10-20% of users to avoid survey fatigue
-
-[Creating surveys](/docs/surveys/creating-surveys)
 
 **Session replay**:
 - Create a filter for users where `new-onboarding-flow` is true
 - Watch 5-10 session recordings per week during the launch period
 - Look for: Confusion at specific steps, rage clicks, users skipping the tutorial
-
-[Explore session recordings](/tutorials/explore-insights-session-recordings)
 
 ## Reading your results
 
@@ -152,12 +145,12 @@ Give your launch 2-4 weeks before making big decisions. Behavior change takes ti
 ### Week 1: Sanity check
 
 - Is data flowing? (Check that events are firing as expected)
-- Any obvious errors? (Check guardrail metrics)
+- Any obvious errors? (Check [guardrail metrics](/product-engineers/guardrail-metrics))
 - Is discovery happening? (Users are at least seeing the change)
 
 ### Week 2-3: Pattern recognition
 
-- Where are users dropping off in the funnel?
+- Where are users dropping off in the [funnel](/docs/product-analytics/funnels)?
 - Are leading indicators trending up or flat?
 - What are survey responses and session replays telling you?
 
