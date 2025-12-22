@@ -59,7 +59,7 @@ export default function AskAIInput({ placeholder = DEFAULT_PLACEHOLDER, classNam
                 className="flex-1 bg-primary border border-primary rounded px-2.5 py-2.5 text-[15px] ring-0 focus:ring-0"
             />
             <OSButton variant="secondary" size="md" onClick={handleSubmit} icon={<IconSparkles />} iconPosition="right">
-                PostHog AI
+                Ask PostHog AI
             </OSButton>
         </div>
     )
