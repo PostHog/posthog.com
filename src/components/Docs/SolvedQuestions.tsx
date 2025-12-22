@@ -52,12 +52,14 @@ export default function SolvedQuestions({
     const isLoading = isPinnedLoading || isRecentLoading
 
     const questions = React.useMemo(() => {
-        const pinned = pinnedData?.data || []
+        // Show pinned questions
+        if (pinnedQuestions.length > 0) {
+            return { data: pinnedData?.data || [] }
+        }
+
+        // If no questions are pinned, show recent solved posts up to a defined limit (set limit to max 5)
         const recent = recentData?.data || []
-        const pinnedPermalinks = new Set(pinnedQuestions)
-        const filteredRecent = recent.filter((q) => !pinnedPermalinks.has(q.attributes.permalink))
-        const combined = [...pinned, ...filteredRecent].slice(0, limit)
-        return { data: combined }
+        return { data: recent.slice(0, limit) }
     }, [pinnedData, recentData, pinnedQuestions, limit])
 
     if (isLoading) {

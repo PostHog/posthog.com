@@ -388,7 +388,7 @@ export const CodeBlock = ({
                                                 href={`${generateSQLEditorLink(activeLanguage.code)}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="inline-flex items-center gap-1 whitespace-nowrap text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                                className="inline-flex items-center gap-1 whitespace-nowrap text-muted hover:text-secondary px-1 py-1 bg-transparent hover:bg-border border border-transparent hover:border rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                             >
                                                 Run in PostHog
                                                 <IconArrowUpRight className="w-4 h-4" />
@@ -402,7 +402,7 @@ export const CodeBlock = ({
                                                 onClick={() =>
                                                     handleAskAboutCode(activeLanguage.code, activeLanguage.language)
                                                 }
-                                                className="ask-posthog-ai-code-snippet inline-flex items-center gap-1 text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                                className="ask-posthog-ai-code-snippet inline-flex items-center gap-1 text-muted hover:text-secondary px-1 py-1 bg-transparent hover:bg-border border border-transparent hover:border rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                             >
                                                 <span className="hidden group-hover/askai:inline whitespace-nowrap text-sm">
                                                     PostHog AI
@@ -416,7 +416,7 @@ export const CodeBlock = ({
                                         <div className="relative flex items-center justify-center px-1">
                                             <button
                                                 onClick={() => copyToClipboard(activeLanguage.code)}
-                                                className="text-muted hover:text-secondary px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                                className="text-muted hover:text-secondary px-1 py-1 bg-transparent hover:bg-border border border-transparent hover:border rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                                 title="Copy to clipboard"
                                             >
                                                 <svg
