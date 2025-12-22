@@ -221,13 +221,15 @@ The component automatically tracks when users open PostHog AI and includes the c
 
 The `<AskAIInput>` component provides a text input for users to ask PostHog AI questions directly within documentation pages. Use this to replace traditional FAQ sections in troubleshooting guides and documentation pages where users frequently have questions. The component opens the PostHog AI chat window with the user's question pre-loaded and includes the current page context. Add a clear h2 heading like "Have a question? Ask PostHog AI" above the component.
 
+> **Note:** Customize the `placeholder` prop per page to provide context-specific guidance. The default is `Ask a question...`
+
 ```mdx
 ## Have a question? Ask PostHog AI
 
-<AskAIInput placeholder="Enter your question..." />
+<AskAIInput placeholder="Type your question and hit enter..." />
 ```
 
-<AskAIInput placeholder="Enter your question..." />
+<AskAIInput placeholder="Type your question and hit enter..." />
 
 > See [src/components/AskAIInput/index.tsx](https://github.com/PostHog/posthog.com/blob/master/src/components/AskAIInput/index.tsx) for all available props.
 
