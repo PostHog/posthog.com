@@ -217,6 +217,37 @@ Available props:
 
 The component automatically tracks when users open PostHog AI and includes the current page context.
 
+### AskAIInput
+
+The `<AskAIInput>` component provides a text input for users to ask PostHog AI questions directly within documentation pages. Use this to replace traditional FAQ sections in troubleshooting guides and documentation pages where users frequently have questions. The component opens the PostHog AI chat window with the user's question pre-loaded and includes the current page context. Add a clear h2 heading like "Have a question? Ask PostHog AI" above the component.
+
+```mdx
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Enter your question..." />
+```
+
+<AskAIInput placeholder="Enter your question..." />
+
+> See [src/components/AskAIInput/index.tsx](https://github.com/PostHog/posthog.com/blob/master/src/components/AskAIInput/index.tsx) for all available props.
+
+### SolvedQuestions
+
+The `<SolvedQuestions>` component displays resolved community questions from a specific topic. Use this in troubleshooting guides to highlight common issues and their solutions. Find question slugs by visiting the community question page and copying the URL slug.
+
+> **Note:** Use the `pinnedQuestions` prop to manually curate which questions appear. When provided, the component shows only those questions. If not provided, it shows recent solved posts.
+
+```mdx
+<SolvedQuestions
+    topicLabel="Error Tracking"
+    pinnedQuestions={[
+        'code-variables-for-external-libraries-for-python',
+        'trouble-setting-up-source-map-in-vite-react',
+        'webpack-turbopack-plugin-getting-sourcemaps-uploaded-to-vercel'
+    ]}
+/>
+```
+
 ### Steps
 
 Use the `<Steps>` component for content that walks the reader through a strict sequence of instructions. Think how-to guides or step-by-step tutorials.
