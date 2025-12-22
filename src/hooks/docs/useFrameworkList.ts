@@ -69,8 +69,8 @@ export default function useFrameworkList(): Framework[] {
 
     const result = allMdx.nodes
         .filter((node: any) => {
-            // Remove /index suffix from slug if present (for index.mdx files)
-            const normalizedSlug = node.slug.replace(/\/index$/, '')
+            // Remove trailing slash from slug if present (for index.mdx files in directories)
+            const normalizedSlug = node.slug.replace(/\/$/, '')
             const url = `/${normalizedSlug}`
             return frameworkUrls.includes(url)
         })
@@ -83,8 +83,8 @@ export default function useFrameworkList(): Framework[] {
                 label = howToMatch[1]
             }
 
-            // Remove /index suffix from slug if present (for index.mdx files)
-            const normalizedSlug = node.slug.replace(/\/index$/, '')
+            // Remove trailing slash from slug if present (for index.mdx files in directories)
+            const normalizedSlug = node.slug.replace(/\/$/, '')
 
             const framework: Framework = {
                 label,
