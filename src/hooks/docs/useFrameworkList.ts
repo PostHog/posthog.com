@@ -69,7 +69,9 @@ export default function useFrameworkList(): Framework[] {
 
     const result = allMdx.nodes
         .filter((node: any) => {
-            const url = `/${node.slug}`
+            // Remove /index suffix from slug if present (for index.mdx files)
+            const normalizedSlug = node.slug.replace(/\/index$/, '')
+            const url = `/${normalizedSlug}`
             return frameworkUrls.includes(url)
         })
         .map((node: any) => {
@@ -81,9 +83,12 @@ export default function useFrameworkList(): Framework[] {
                 label = howToMatch[1]
             }
 
+            // Remove /index suffix from slug if present (for index.mdx files)
+            const normalizedSlug = node.slug.replace(/\/index$/, '')
+
             const framework: Framework = {
                 label,
-                url: `/${node.slug}`,
+                url: `/${normalizedSlug}`,
             }
 
             if (node.frontmatter.icon?.publicURL) {
