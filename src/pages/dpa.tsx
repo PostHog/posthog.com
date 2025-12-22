@@ -1420,12 +1420,13 @@ function DpaGenerator() {
                         </p>
                         <p>The personal data processed relates to the following categories of data subjects:</p>
                         <p>Company's end users (including prospects, customer and contractors)</p>
+                        <p>Data subjects include the individuals about whom data is provided to the Processor in connection with the provision of Services by (or at the direction of) Company or its users</p>
 
                         <p>
                             <strong>Categories of personal data processed</strong>
                         </p>
                         <p>The personal data processed comprises the following categories of data:</p>
-                        <p>(As determined at the discretion of the Company):</p>
+                        <p>(As determined at the discretion of the Company, including data relating to the individuals provided to the Processor in connection with the provision of the Services, and including, without limitation):</p>
 
                         <ul>
                             <li>
