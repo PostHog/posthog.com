@@ -4,15 +4,9 @@ title: Error Tracking troubleshooting
 
 This page covers troubleshooting for Error Tracking. For setup, see the [installation guides](/docs/error-tracking/installation).
 
-<AskMax
-    title="Questions about Error Tracking?"
-    layout="row"
-    quickQuestions={[
-        "How do I upload source maps?",
-        "Are web workers supported?",
-        "Can exceptions be sampled or ignored?"
-    ]}
-/>
+## Have a question? Ask PostHog AI
+
+<AskAI placeholder="Enter your question..." />
 
 ## Exceptions not appearing
 
@@ -30,7 +24,7 @@ If PostHog isn't capturing errors:
     }
     ```
 
-4. Wait a few minutes and check [Error Tracking in the PostHog app](https://app.posthog.com/error_tracking). Issues may take a few minutes to update after ingesting new error events.
+4. Wait a few minutes and check [Error Tracking in the PostHog app](https://app.posthog.com/error_tracking). Issues may take a few minutes to update after ingesting new error events
 
 ## Source maps not resolving
 
@@ -64,16 +58,16 @@ To fix, add `crossorigin="anonymous"` to your script tags:
 <script src="https://your-cdn.com/app.js" crossorigin="anonymous"></script>
 ```
 
-If the script is within your control, also set the `Access-Control-Allow-Origin` response header:
-
-```
-Access-Control-Allow-Origin: *
-```
-
-Or specify your domain:
+If the script is within your control, also set the `Access-Control-Allow-Origin` response header to your origin:
 
 ```
 Access-Control-Allow-Origin: https://yourdomain.com
+```
+
+Or allow any origin:
+
+```
+Access-Control-Allow-Origin: *
 ```
 
 You can also use [session recordings](/docs/session-replay) to see what user actions triggered the error.
@@ -127,9 +121,6 @@ To debug:
 3. Watch [session recordings](/docs/session-replay) to see what user actions triggered the error, then reproduce in development
 4. Use a development build which includes full error messages. Only use this for debugging, not production
 
-
-## Still having issues?
-
-Try the [SDK Doctor](/docs/sdk-doctor) to diagnose common problems, or browse community solutions below.
+## Solved community questions
 
 <SolvedQuestions topicLabel="Error Tracking" limit={5} />

@@ -2,6 +2,7 @@
 
 import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
 import { ArrayCTA } from './components/ArrayCTA'
+import AskAI from './components/AskAI'
 import AskMax from './components/AskMax'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
@@ -129,6 +130,7 @@ export const shortcodes = {
     TeamMember,
     Steps,
     Step,
+    AskAI,
     AskMax,
     CountriesWeHireIn,
     FeatureOwnershipTable,
