@@ -69,7 +69,7 @@ Before writing any code, document:
 
 > **Tip:** When capturing events, include a `step_name` property so you can later analyze where users get stuck.
 
-[Complete guide to event tracking](/tutorials/event-tracking-guide)
+If you're need help capturing the necessary events, try our [complete guide to event tracking](/tutorials/event-tracking-guide).
 
 
 **Lagging indicators** tell you if the change improved outcomes:
@@ -77,8 +77,8 @@ Before writing any code, document:
 | Metric | How to measure | What it tells you | Resources |
 |--------|----------------|-------------------|-----------|
 | Activation | Track completion of key actions that indicate value | Whether users are experiencing value, which predicts retention and downstream metrics | [Activation and why you should care](/newsletter/wtf-is-activation)
-| Retention | Week-over-week return rate | Does this have lasting impact? | [Track retention] (/docs/product-analytics/retention) |
-| Revenue | Conversion to paid | Did this affect the business? | [See Stripe revenue in PostHog] (https://posthog.com/docs/cdp/sources/stripe) |
+| Retention | Week-over-week return rate | Does this have lasting impact? | [Track retention](/docs/product-analytics/retention) |
+| Revenue | Conversion to paid | Did this affect the business? | [See Stripe revenue in PostHog](https://posthog.com/docs/cdp/sources/stripe) |
 
 **Guardrail metrics** tell you if you broke something:
 
@@ -89,7 +89,7 @@ Before writing any code, document:
 | Performance | Load time of onboarding pages | >200ms increase |  |
 
 
-[Setup alerts to monitor these metrics] (https://posthog.com/docs/alerts)
+[Setup alerts to monitor these metrics](https://posthog.com/docs/alerts)
 
 
 ### Step 3: Create an A/B test for controlled rollout
@@ -135,7 +135,7 @@ Create a new dashboard called "New Onboarding Flow Launch - {Date}". In it, incl
 
 [Send PostHog event data to Slack webhooks](/docs/cdp/destinations/slack)
 
-**Post-interaction survey** (PostHog Surveys):
+**Post-interaction survey** (Surveys):
 - Trigger: After `onboarding_completed`
 - Question: "How easy was it to get started?" (1-5 rating + optional text)
 - Sample: 10-20% of users to avoid survey fatigue
