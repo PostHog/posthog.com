@@ -94,7 +94,7 @@ export const DecisionTree: React.FC<DecisionTreeProps> = ({
 
     if (recommendation) {
         return (
-            <div className="border border-primary rounded-md p-5 bg-accent dark:bg-accent-dark my-4">
+            <div className="border border-primary rounded-md p-5 bg-accent my-4">
                 <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-full bg-green flex items-center justify-center flex-shrink-0">
                         <IconCheck className="w-5 h-5 text-white" />
@@ -104,16 +104,18 @@ export const DecisionTree: React.FC<DecisionTreeProps> = ({
                         <p className="text-[15px] opacity-75 m-0 mb-4">{recommendation.reason}</p>
 
                         <div className="flex flex-wrap gap-2">
-                            <OSButton
-                                asLink
-                                to={recommendation.path}
-                                variant="primary"
-                                size="md"
-                                icon={<IconArrowRight className="w-4 h-4" />}
-                                iconPosition="right"
-                            >
-                                {buttonText}
-                            </OSButton>
+                            {buttonText && recommendation.path && (
+                                <OSButton
+                                    asLink
+                                    to={recommendation.path}
+                                    variant="primary"
+                                    size="md"
+                                    icon={<IconArrowRight className="w-4 h-4" />}
+                                    iconPosition="right"
+                                >
+                                    {buttonText}
+                                </OSButton>
+                            )}
                             <OSButton
                                 onClick={reset}
                                 variant="secondary"
@@ -132,7 +134,7 @@ export const DecisionTree: React.FC<DecisionTreeProps> = ({
     if (!currentQuestion) return null
 
     return (
-        <div className="border border-primary rounded-md p-5 bg-accent dark:bg-accent-dark my-4">
+        <div className="border border-primary rounded-md p-5 bg-accent my-4">
             {step > 0 && (
                 <OSButton
                     onClick={handleBack}
