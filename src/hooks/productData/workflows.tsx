@@ -23,17 +23,6 @@ export const workflows = {
     volume: 10000,
     addonSliders: [
         {
-            key: 'workflows_push',
-            label: 'Push notifications',
-            sliderConfig: {
-                marks: [10000, 50000, 100000, 1000000, 10000000],
-                min: 10000,
-                max: 10000000,
-            },
-            volume: 10000,
-            unit: 'notification',
-        },
-        {
             key: 'workflows_destinations',
             label: 'Destinations',
             sliderConfig: {
