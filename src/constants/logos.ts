@@ -75,6 +75,7 @@ export const LOGOS = {
     vitally: 'https://res.cloudinary.com/dmukukwp6/image/upload/vitally_a2d87ff23b.svg',
     vue: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/vue.svg',
     webflow: 'https://res.cloudinary.com/dmukukwp6/image/upload/webflow_63b6678590.svg',
+    webpack: 'https://res.cloudinary.com/dmukukwp6/image/upload/webpack_3fc774b5a5.svg',
     wordpress:
         'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/wordpress.svg',
     zendesk: 'https://res.cloudinary.com/dmukukwp6/image/upload/zendesk_icon_f56707bc5c.svg',
