@@ -32,9 +32,11 @@ What else did we get done? List items from the changelog or PRs merged if they w
 
 You may also want to write some overall thoughts about how the quarter generally went.
 
-## HOGS (10 minutes - do beforehand solo)
+## HOGS (10 minutes - all the content should be here **before** the meeting starts)
 
-This should be done BEFORE the meeting by everyone, independently. During the meeting, paste your items into the sections below. Spend 10 minutes in the meeting silently reading through everyone’s HOGS during the meeting. Add any common themes or otherwise important items to the section below as you read, then only discuss the themes (there generally isn't time to discuss every line of the HOGS). 
+This should be done BEFORE the meeting by everyone, independently and in this doc before the meeting starts. Spend 10 minutes in the meeting silently reading through everyone’s HOGS during the meeting. Add any common themes or otherwise important items to the section below as you read, then only discuss the themes (there generally isn't time to discuss every line of the HOGS).
+
+Add entries under each question with your initials/name like: "- (your name): My comment"
 
 - Hope
   - What are you most excited about this quarter?

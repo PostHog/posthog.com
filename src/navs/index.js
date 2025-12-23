@@ -635,24 +635,6 @@ export const handbookSidebar = [
                 url: '/handbook/content/brand-message',
             },
             {
-                name: 'Docs',
-                url: '/handbook/content/docs',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/content/docs',
-                    },
-                    {
-                        name: 'Docs ownership',
-                        url: '/handbook/content/docs-ownership',
-                    },
-                    {
-                        name: 'Docs style guide',
-                        url: '/handbook/content/docs-style-guide',
-                    },
-                ],
-            },
-            {
                 name: 'Video',
                 url: '/handbook/growth/marketing/video',
                 children: [
@@ -695,6 +677,50 @@ export const handbookSidebar = [
             {
                 name: 'Writing metadata',
                 url: '/handbook/content/metadata',
+            },
+        ],
+    },
+    {
+        name: 'Docs & wizard',
+        url: '/handbook/content/docs',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/content/docs',
+            },
+            {
+                name: 'Ownership',
+                url: '/handbook/content/docs-ownership',
+            },
+            {
+                name: 'Style guide',
+                url: '/handbook/content/docs-style-guide',
+            },
+            {
+                name: 'Runbook',
+                url: '/handbook/content/runbook',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/content/runbook',
+                    },
+                    {
+                        name: 'Onboarding docs',
+                        url: '/handbook/content/runbook/onboarding-docs',
+                    },
+                    {
+                        name: 'SDK reference docs',
+                        url: '/handbook/content/runbook/sdk-reference-docs',
+                    },
+                    {
+                        name: 'API specification',
+                        url: '/handbook/content/runbook/api-specifications',
+                    },
+                    {
+                        name: 'Developing the wizard',
+                        url: '/handbook/content/runbook/developing-the-wizard',
+                    },
+                ],
             },
         ],
     },
@@ -3391,12 +3417,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Cutting costs',
-                    url: '/docs/session-replay/cutting-costs',
-                    icon: 'IconPiggyBank',
-                    color: 'yellow',
-                },
-                {
                     type: 'divider',
                 },
                 {
@@ -4001,6 +4021,14 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-mappings/android',
                         },
                         {
+                            name: 'Rollup',
+                            url: '/docs/error-tracking/upload-source-maps/rollup',
+                        },
+                        {
+                            name: 'Webpack',
+                            url: '/docs/error-tracking/upload-source-maps/webpack',
+                        },
+                        {
                             name: 'CLI',
                             url: '/docs/error-tracking/upload-source-maps/cli',
                         },
@@ -4167,7 +4195,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/error-tracking/common-questions',
                     icon: 'IconQuestion',
                     color: 'purple',
@@ -4836,6 +4864,112 @@ export const docsMenu = {
                 {
                     name: 'FAQ',
                     url: '/docs/revenue-analytics/common-questions',
+                    icon: 'IconQuestion',
+                    color: 'blue',
+                    featured: true,
+                },
+            ],
+        },
+        {
+            name: 'Customer Analytics',
+            icon: 'IconPeople',
+            color: '[#FF6B6B]',
+            url: '/docs/customer-analytics',
+            description:
+                'Understand your customers to build products that solve real problems and achieve product-market fit.',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
+            children: [
+                {
+                    name: 'Customer Analytics',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/customer-analytics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                    featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/customer-analytics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Dashboard metrics',
+                    featured: true,
+                    url: '/docs/customer-analytics/dashboard-metrics',
+                    icon: 'IconBolt',
+                    color: 'orange',
+                },
+                {
+                    name: 'B2B mode',
+                    featured: true,
+                    url: '/docs/customer-analytics/b2b-mode',
+                    icon: 'IconCohort',
+                    color: 'red',
+                },
+                {
+                    name: 'Usage metrics',
+                    url: '/docs/customer-analytics/usage-metrics',
+                    icon: 'IconTrends',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Customer profiles',
+                    url: '/docs/customer-analytics/customer-profiles',
+                    icon: 'IconPerson',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Configure your dashboard',
+                    url: '/docs/customer-analytics/configure-your-dashboard',
+                    icon: 'IconDashboard',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Create usage metrics',
+                    url: '/docs/customer-analytics/create-usage-metrics',
+                    icon: 'IconG',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'AI',
+                },
+                {
+                    name: 'Configure dashboard with AI',
+                    url: '/docs/customer-analytics/configure-dashboard-with-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/customer-analytics/faq',
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,

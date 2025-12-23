@@ -11,6 +11,7 @@ import ProductComparisonTable from './components/ProductComparisonTable'
 import Snippet from '../contents/docs/integrate/snippet.mdx'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { CalloutBox } from './components/Docs/CalloutBox'
+import { DecisionTree } from './components/Docs/DecisionTree'
 import { Step, Steps } from './components/Docs/Steps'
 import { Emoji } from './components/Emoji'
 import { FeatureAvailability } from './components/FeatureAvailability'
@@ -40,6 +41,7 @@ export const shortcodes = {
     CalloutBox,
     Caption,
     ComparisonTable,
+    DecisionTree,
     ProductComparisonTable,
     Snippet,
     CompensationCalculator,
