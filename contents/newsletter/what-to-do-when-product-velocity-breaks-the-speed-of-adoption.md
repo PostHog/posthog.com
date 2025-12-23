@@ -1,22 +1,19 @@
----
 date: 2026-01-01
 title: What to do when product velocity breaks the speed of adoption
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
-author: cleo-lant
+author:
+  - cleo-lant
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/why_we_killed_our_ai_assistant_9e9565192e.png
 featuredImageType: full
-category: Product growth
 tags:
   - Product
   - Growth
+crosspost:
+  - Blog
+  - Founders
 seo:
   metaTitle: 'What to do when product velocity breaks the speed of adoption'
   metaDescription: 'When your team ships faster than users can adopt new features, you face a unique challenge. Here's how to balance product velocity with user adoption.'
----
 
 Is it possible to ship too much – or too fast?
 
@@ -56,8 +53,6 @@ In our case:
 - user comprehension (do they understand?)
 - user engagement (do they care?)
 
-![product marketing at PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/the_office_meme_a199c5af0a.png)
-
 When input exceeds the capacity of the bottleneck, a few predictable things happen:
 
 ### 1. Queue buildup
@@ -79,8 +74,6 @@ In software, that shows up as:
 - features used narrowly when they were designed to be foundational
 
 Your product keeps getting bigger and better, but not proportionally clearer.
-
-![product marketing at PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/the_office_meme_a199c5af0a.png)
 
 ## Does that mean you should slow down?
 No. Maybe? Definitely not.
