@@ -51,7 +51,7 @@ export const JSConfigBuilder: React.FC = () => {
                     id: 'useDefaults',
                     label: 'Use recommended defaults',
                     description: "Sets defaults: '2025-11-30' which enables the latest recommended behaviors",
-                    defaultValue: true,
+                    defaultValue: false,
                 },
                 {
                     id: 'enableAutocapture',
@@ -62,7 +62,7 @@ export const JSConfigBuilder: React.FC = () => {
                 {
                     id: 'spaMode',
                     label: 'Single-page app (SPA)',
-                    description: 'Detect page changes via history API',
+                    description: 'Detect page changes via history API instead of page loads',
                     defaultValue: false,
                 },
                 {
@@ -116,7 +116,7 @@ export const JSConfigBuilder: React.FC = () => {
                 {
                     id: 'crossSubdomainCookie',
                     label: 'Cross-subdomain cookies',
-                    description: 'Share identity across subdomains (e.g., app.example.com and www.example.com)',
+                    description: 'Share identity across subdomains (enabled by default)',
                     defaultValue: true,
                     group: 'advanced',
                 },
@@ -130,7 +130,7 @@ export const JSConfigBuilder: React.FC = () => {
                 {
                     id: 'alwaysCreateProfiles',
                     label: 'Always create person profiles',
-                    description: 'Create profiles for all users, not just identified ones',
+                    description: 'Create profiles for all users, not just identified ones (identified_only by default)',
                     defaultValue: false,
                     group: 'advanced',
                 },
