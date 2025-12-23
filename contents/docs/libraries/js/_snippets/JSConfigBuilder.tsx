@@ -1,5 +1,5 @@
 import React from 'react'
-import { ConfigBuilder, ConfigState } from './ConfigBuilder'
+import { ConfigBuilder, ConfigState } from 'components/Docs/ConfigBuilder'
 
 const generateCode = (config: ConfigState): string => {
     const { selectedValue, checkboxes, inputs } = config
