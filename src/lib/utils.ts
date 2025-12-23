@@ -89,7 +89,7 @@ export const isURL = (s: string): boolean => {
     try {
         new URL(s)
         return true
-    } catch (_) {
+    } catch {
         return false
     }
 }

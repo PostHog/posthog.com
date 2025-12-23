@@ -18,8 +18,27 @@ import { getCookie, setCookie } from './utils'
  */
 
 const COOKIE_NAME = 'ph_product_interest_onboarding'
-const COOKIE_DOMAIN = '.posthog.com'
-const COOKIE_DAYS = 14 // Very short duration, show contextual information on onboarding
+const COOKIE_DAYS = 14 // Very short duration, only meant to show contextual information on onboarding
+
+function getCookieDomain(): string | undefined {
+    if (typeof window === 'undefined') return undefined
+
+    const hostname = window.location.hostname
+
+    // Local development - don't set domain so cookie works on localhost
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        return undefined
+    }
+
+    // Preview environment on vercel, just set it to be shared across all vercel subdomains
+    if (hostname.includes('vercel.app')) {
+        return '.vercel.app'
+    }
+
+    // In any other case, cookie should be available across all of our posthog.com subdomains
+    // to be able to use this both in posthog.com, us.posthog.com, and eu.posthog.com
+    return '.posthog.com'
+}
 
 // Landing page/docs page slugs we want to track interest in
 const PRODUCT_SLUGS = new Set([
@@ -55,7 +74,7 @@ export function showedInterest(slug: string): void {
     const interests = getProductInterests()
     if (!interests.includes(slug)) {
         interests.push(slug)
-        setCookie(COOKIE_NAME, JSON.stringify(interests), COOKIE_DAYS, COOKIE_DOMAIN)
+        setCookie(COOKIE_NAME, JSON.stringify(interests), COOKIE_DAYS, getCookieDomain())
     }
 }
 
