@@ -1,0 +1,71 @@
+---
+title: iOS surveys installation
+platformLogo: ios
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import IOSInstall from "../../integrate/_snippets/install-ios.mdx"
+
+<Steps>
+
+<Step title="Add PostHog to your app" badge="required">
+
+Using it requires PostHog's iOS SDK version >= 3.31.0, but it's recommended to always use [the latest version](/docs/sdk-doctor).
+
+<IOSInstall />
+
+</Step>
+
+<Step title="Enable surveys in your configuration" badge="required">
+
+To enable surveys in your iOS app, enable surveys in your PostHog configuration:
+
+```swift
+let POSTHOG_API_KEY = "<ph_project_api_key>"
+// usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+let POSTHOG_HOST = "<ph_client_api_host>"
+let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST) // TIP: host is optional if you use https://us.i.posthog.com
+
+// Surveys require iOS 15.0 or later
+if #available(iOS 15.0, *) {
+    config.surveys = true
+}
+
+PostHogSDK.shared.setup(config)
+```
+
+</Step>
+
+</Steps>
+
+## Supported Features
+
+| Feature                           | Support                            |
+| --------------------------------- | ---------------------------------- |
+| **Questions** | |
+| All question types                | ✅                                 |
+| Multi-question surveys            | ✅                                 |
+| Confirmation message              | ✅                                 |
+| Feedback button presentation      | ❌                                 |
+| Conditional questions             | ✅                                 |
+| **Customization / Appearance** | |
+| Set colors in PostHog dashboard   | ✅                                 |
+| Shuffle questions                 | ❌                                 |
+| PostHog branding                  | ❌                                 |
+| Delay popup after screen view     | ❌                                 |
+| Position config                   | ❌ (always bottom sheet)             |
+| HTML content                      | ❌                                 |
+| **Display conditions** | |
+| Feature flag & property targeting | ✅                                 |
+| Screen targeting                  | ❌                                 |
+| Device type targeting             | ✅                                 |
+| Survey wait period                | ❌                                 |
+| Event triggers                    | ✅                                 |
+| Action triggers                   | ❌                                 |
+| Partial responses                 | ❌                                 |
+
+## Limitations
+
+- Surveys are only available on iOS
+- Surveys require iOS 15.0 or later

@@ -237,9 +237,6 @@ function Params({ params, objects, object, depth = 0 }) {
                                         </div>
                                     </>
                                 )}
-                                <div className="text-sm pt-2">
-                                    <ReactMarkdown>{param.schema.description || param.description}</ReactMarkdown>
-                                </div>
                             </div>
                         </div>
 
@@ -639,8 +636,6 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                             <SectionDivider />
                         </div>
                     )}
-
-                    <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
 
                     <Endpoints paths={paths} containerRef={contentContainerRef} />
 
