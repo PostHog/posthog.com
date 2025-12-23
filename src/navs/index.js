@@ -5137,12 +5137,6 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Best practices',
-                    url: '/docs/workflows/best-practices',
-                    icon: 'IconStar',
-                    color: 'red',
-                },
-                {
                     name: 'Guides',
                 },
                 {
@@ -5156,6 +5150,12 @@ export const docsMenu = {
                     url: '/docs/workflows/import-customerio-optouts',
                     icon: 'IconDatabase',
                     color: 'blue',
+                },
+                {
+                    name: 'Best practices',
+                    url: '/docs/workflows/best-practices',
+                    icon: 'IconStar',
+                    color: 'red',
                 },
                 {
                     name: 'Resources',

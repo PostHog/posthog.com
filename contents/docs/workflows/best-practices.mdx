@@ -62,7 +62,10 @@ If sending to external channels (e.g. Slack, SMS, webhooks), treat them as equal
 
 ### Test workflows in a safe environment or subset first (staging/small user group)
 
-Before a full rollout: test with internal users or a small percentage of real users. Monitor delivery (for emails/messages), event logs, user property updates, or other side-effects. Watch for unintended behavior: e.g. multiple emails, loops (if your workflow triggers events that retrigger the same workflow), or delays stacking up.
+Before a full rollout: test with internal users or a small percentage of real users. Monitor delivery for emails and messages, event logs, user property updates, or other side-effects. Watch for unintended behavior: 
+- multiple emails
+- loops (i.e. your workflow triggers events that retrigger the same workflow)
+- delays stacking up
 
 ## Observability and limits
 
