@@ -8,6 +8,8 @@ availability:
   enterprise: full
 ---
 
+import { Tab } from 'components/Tab'
+
 This page documents the column definitions used in [marketing analytics](/docs/web-analytics/marketing-analytics), including how each metric is calculated and where the data comes from for each advertising platform.
 
 ## Understanding "Reported" vs PostHog conversions
@@ -17,6 +19,13 @@ Marketing analytics displays two types of conversion data:
 1. **Reported conversions** - Conversion data reported directly by the ad platform (Google, Meta, LinkedIn, etc.). These use the platform's own tracking pixel and attribution model.
 
 2. **PostHog conversion goals** - Conversions you define in PostHog using events, actions, or data warehouse tables. These use PostHog's events and your custom attribution rules.
+
+**Examples:**
+
+| Type | Example conversions |
+|------|---------------------|
+| PostHog conversion goal | Any event you track: `user signed up`, `completed checkout`, `subscribed to newsletter`, `started trial`, `upgraded plan` |
+| Reported (ad platform) | It can track the same! Any conversion you defined. They key difference is the source of truth. |
 
 **Why does this matter?**
 
@@ -61,7 +70,17 @@ These columns are available for all platforms in the marketing analytics dashboa
 
 Each advertising platform provides data using different field names. PostHog normalizes these into the standard columns above.
 
-### Google Ads
+<Tab.Group tabs={['Google Ads', 'Meta Ads', 'LinkedIn Ads', 'Microsoft Ads', 'TikTok Ads', 'Reddit Ads']}>
+<Tab.List>
+<Tab>Google Ads</Tab>
+<Tab>Meta Ads</Tab>
+<Tab>LinkedIn Ads</Tab>
+<Tab>Microsoft Ads</Tab>
+<Tab>TikTok Ads</Tab>
+<Tab>Reddit Ads</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
 
 | PostHog Column | Google Ads Field | Notes | Platform Docs |
 |----------------|------------------|-------|---------------|
@@ -76,7 +95,8 @@ Each advertising platform provides data using different field names. PostHog nor
 
 **Required tables:** `campaign` and `campaign_stats`
 
-### Meta Ads
+</Tab.Panel>
+<Tab.Panel>
 
 | PostHog Column | Meta Ads Field | Notes | Platform Docs |
 |----------------|----------------|-------|---------------|
@@ -98,7 +118,8 @@ arraySum(x -> JSONExtractFloat(x, 'value'),
     JSONExtractArrayRaw(actions)))
 ```
 
-### LinkedIn Ads
+</Tab.Panel>
+<Tab.Panel>
 
 | PostHog Column | LinkedIn Ads Field | Notes | Platform Docs |
 |----------------|-------------------|-------|---------------|
@@ -113,7 +134,8 @@ arraySum(x -> JSONExtractFloat(x, 'value'),
 
 **Required tables:** `campaigns` and `campaign_stats`
 
-### Microsoft Advertising (Bing Ads)
+</Tab.Panel>
+<Tab.Panel>
 
 | PostHog Column | Bing Ads Field | Notes | Platform Docs |
 |----------------|----------------|-------|---------------|
@@ -128,7 +150,8 @@ arraySum(x -> JSONExtractFloat(x, 'value'),
 
 **Required tables:** `campaigns` and `campaign_performance_report`
 
-### TikTok Ads
+</Tab.Panel>
+<Tab.Panel>
 
 | PostHog Column | TikTok Ads Field | Notes | Platform Docs |
 |----------------|-----------------|-------|---------------|
@@ -143,7 +166,8 @@ arraySum(x -> JSONExtractFloat(x, 'value'),
 
 **Required tables:** `campaigns` and `campaign_report`
 
-### Reddit Ads
+</Tab.Panel>
+<Tab.Panel>
 
 | PostHog Column | Reddit Ads Field | Notes | Platform Docs |
 |----------------|-----------------|-------|---------------|
@@ -157,7 +181,12 @@ arraySum(x -> JSONExtractFloat(x, 'value'),
 | Date field | `date` | Reporting date | [Reddit Ads API](https://ads-api.reddit.com/docs/v3/operations/Get%20Ad%20Group) |
 
 **General notes:** The Reddit API docs are not very specific on the fields, so we've linked to the ad group docs where there are examples of the fields.
+
 **Required tables:** `campaigns` and `campaign_report`
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
 
 ## Currency handling
 
