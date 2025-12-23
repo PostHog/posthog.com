@@ -29,11 +29,11 @@
 - **What we'll ship:** Consider where product tours can be used as a support tool and where they could be used as a replacement for screenshots that we provide to the customer. Additionally consider the ways we could use product tours as a way of enabling/helping customers, leading to a reduction in ticket creation.
 - **We'll know we're successful when:** We've determined how useful product tours can be as a support tool and identified use cases that have been shared with the support team.
 
-### Explore how we can leverage PostHog AI
+### Explore AI accessibility for product capabilities
 - **Owner:** <TeamMember name="Joshua Ordehi" photo />
-- **Rationale:** Improving PostHog AI to keep up to date with the latest changes in the product helps improve PostHog AI's answers and in turn should reduce the support load.
-- **What we'll ship:** Consider and design how, without updating the docs, PostHog AI can have up to date knowledge about a product's features and how it works.
-- **We'll know we're successful when:** We have a POC for one product and where the knowledge of the AI is updated when the team ships a new feature / changes a feature.
+- **Rationale:** Keeping AI tools in sync with product changes currently requires manual updates. If we expose which operations are valid and what parameters they require as queryable product capabilities, AI could inherit this automatically and stay consistent with the API and UI. Improving PostHog AI to keep up to date with the latest changes in the product helps improve PostHog AI's answers and in turn should reduce the support load.
+- **What we'll ship:** Extract domain rules for one product (surveys) into a layer that both existing surfaces and AI tools can consume. Design validation flows that let PostHog AI query what operations are valid.
+- **We'll know we're successful when:** PostHog AI is able to validate against shared domain rules for our surveys product, and those rules update automatically when the product changes without requiring manual sync.
 
 ### Capture more context at the time a ticket is raised
 - **Owner:** <TeamMember name="Luke Belton" photo />
