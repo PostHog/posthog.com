@@ -32,33 +32,23 @@ Take our team at PostHog. With dozens of engineering teams shipping independentl
 Since PostHog is a work tool – not a [lifestyle brand](/merch) – even our most enthusiastic users won’t adopt an infinite number of new things per week. 
 
 In practice, B2B SaaS users tend to adopt:
-- one big new thing every few months
-- a couple of medium improvements
-- a handful of small quality-of-life upgrades
 
-Everything else gets ignored until someone explains why it matters. 
+- One big new thing every few months
+- A couple of medium improvements
+- A handful of small quality-of-life upgrades
 
-Luckily, someone has already figured out how to optimize for this problem in manufacturing and we can apply the same ideas to your startup.
+Everything else gets ignored until someone explains why it matters. This is a classic bottleneck.
 
-This simple principle comes from the **Theory of Constraints** (TOC):
+Luckily, bottlenecks have solutions. Manufacturers discovered this and crystallized it in a concept called **Theory of Constraints** (TOC). There's one principle of TOC that is particularly relevant here:
 
 > When upstream output increases without increasing downstream capacity, the system destabilizes.
 
 In our case:
 
-**Upstream**, we have:
+- **Upstream** we have 39 small teams [working asynchronously](/newsletter/how-we-work-async), shipping at a high velocity, and AI accelerating individual productivity.
+- **Downstream** we have limited user attention, comprehension, and engagement capacity.
 
-- 39 small teams [working asynchronously](/newsletter/how-we-work-async)
-- very high shipping velocity
-- AI accelerating individual productivity
-
-**Downstream**, we have:
-
-- user attention (do they notice?)
-- user comprehension (do they understand?)
-- user engagement (do they care?)
-
-When input exceeds the capacity of the bottleneck, a few predictable things happen:
+TOC can again help us understand the consequences of this mismatched capacity:
 
 ### 1. Queue buildup
 
@@ -77,9 +67,10 @@ Users struggle to keep up with what’s changed. Support and sales spend more ti
 When a bottleneck is overloaded, quality degrades through forced tradeoffs. 
 
 In software, that shows up as:
-- partial adoption instead of full behavior change
-- misunderstood capabilities
-- features used narrowly when they were designed to be foundational
+
+- Partial adoption instead of full behavior change
+- Misunderstood capabilities
+- Features used narrowly when they were designed to be foundational
 
 Your product keeps getting bigger and better, but not proportionally clearer.
 
@@ -94,7 +85,8 @@ Slowing down is what companies do when they run out of ideas (and clearly that's
 You could market harder. Push more announcements. Buy more attention. Top-of-funnel always looks good on a dashboard. But adoption still happens one human at a time, and each individual user has a finite amount of mental bandwidth.
 
 So the real question isn't whether to slow down. It's this:
-How do you elevate adoption without killing velocity? (and without [losing your edge](/newsletter/how-startups-lose-their-edge)).
+
+**How do you elevate adoption without killing velocity?**
 
 ## How to address the real bottleneck of user attention
 
@@ -118,19 +110,19 @@ Small teams will naturally optimize for their own product space, but suboptimall
 
 - Marketing on the same exhausted channels as everyone else ([every marketing channel sucks right](https://andrewchen.substack.com/p/every-marketing-channel-sucks-right))
 
-**Instead:**
+**Do this instead:**
 
-- Make [human-centric](https://www.youtube.com/watch?v=QeU5MmpqBg0&list=PLnOY1RYHjDfw2joBxUPADaadeX5IradbH&index=2), [absurd](https://www.youtube.com/watch?v=EXisgy6eWJ0&list=PLnOY1RYHjDfw2joBxUPADaadeX5IradbH&index=4), entertainment-first content
+- Making [human-centric](https://www.youtube.com/watch?v=QeU5MmpqBg0&list=PLnOY1RYHjDfw2joBxUPADaadeX5IradbH&index=2), [absurd](https://www.youtube.com/watch?v=EXisgy6eWJ0&list=PLnOY1RYHjDfw2joBxUPADaadeX5IradbH&index=4), entertainment-first content
 
-- [Partner with people](https://www.linkedin.com/feed/update/urn:li:activity:7401713037386379265) and brands who have mindshare and trust with your ICP
+- [Partnering with people](https://www.linkedin.com/feed/update/urn:li:activity:7401713037386379265) and brands who have mindshare and trust with your ICP
 
-- Build [cool things](/deskhog) that delight your target audience without selling your product
+- Building [cool things](/deskhog) that delight your target audience without selling your product
 
-- Turn internal jokes into [public canon](https://www.youtube.com/watch?v=_eLZqBVkxCc&list=PLnOY1RYHjDfw2joBxUPADaadeX5IradbH&index=3)
+- Turning internal jokes into [public canon](https://www.youtube.com/watch?v=_eLZqBVkxCc&list=PLnOY1RYHjDfw2joBxUPADaadeX5IradbH&index=3)
 
-- If you’re doing founder-led marketing, [commit to the bit](https://www.linkedin.com/in/j-hawkins/)
+- If you’re doing founder-led marketing, [committing to the bit](https://www.linkedin.com/in/j-hawkins/)
 
-- [Design a world](https://www.linkedin.com/posts/lottiecoxon_i-was-unsure-how-to-promote-that-we-are-now-activity-7368966636244049920-S3mU) (not a funnel) that people want to live in, and let them [explore it](https://x.com/MichaelAshmead/status/1966136656265687134) when they have the context to care
+- [Designing a world](https://www.linkedin.com/posts/lottiecoxon_i-was-unsure-how-to-promote-that-we-are-now-activity-7368966636244049920-S3mU) (not a funnel) that people want to live in, and let them [explore it](https://x.com/MichaelAshmead/status/1966136656265687134) when they have the context to care
 
 ### 2. Sequence launches based on user capacity, not team readiness
 
@@ -146,13 +138,13 @@ Marketing everything as soon as it’s shipped turns internal velocity into comp
 
 - Highlighting the what more than the why (*marketing [features > benefits](https://posthog.com/newsletter/marketing-for-devs) is typically a good move if you’re marketing to developers, but overindexing on ‘what’ makes adoption someone else’s problem)
 
-**Instead:**
+**Do this instead:**
 
-- Classify launches as _events_ or _infrastructure_: If it’s an event, treat it like the [biggest event of the year](https://www.linkedin.com/feed/update/urn:li:activity:7398759974686076928) 
+- Classifying launches as _events_ or _infrastructure_: If it’s an event, treat it like the [biggest event of the year](https://www.linkedin.com/feed/update/urn:li:activity:7398759974686076928) 
 
-- Instead of one-off updates, invest in producing a [narrative series](https://www.youtube.com/playlist?list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL) that users can follow
+- Insteading of one-off updates, invest in producing a [narrative series](https://www.youtube.com/playlist?list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL) that users can follow
 
-- Encourage engineers to [do support](/newsletter/engineers-do-support) and see first-hand where users get stuck
+- Encouraging engineers to [do support](/newsletter/engineers-do-support) and see first-hand where users get stuck
 
 ### 3. Build discovery into the product 
 
@@ -168,17 +160,17 @@ If realizing value requires explanation outside the product, you haven't removed
 
 - Adding so much to the UI that it subtracts from [user experience](/blog/redesigned-nav-menu)
 
-**Instead:**
+**Do this instead:**
 
-- Define [activation criteria](/product-engineers/activation-metrics) for new products, and track user behavior over time
+- Defining [activation criteria](/product-engineers/activation-metrics) for new products, and track user behavior over time
 
-- Leverage AI to surface features when a user is already doing the related job
+- Leveraging AI to surface features when a user is already doing the related job
 
-- Embed docs within your product to keep users in flow (linking to an external help center is a form of context switching)
+- Embedding docs within your product to keep users in flow (linking to an external help center is a form of context switching)
 
-- Leverage habit loops (trigger → action → reward → reinforcement) and other [PLG](https://productled.com/blog/product-led-growth-framework-for-saas-companies) tactics to keep users engaged
+- Leveraging habit loops (trigger → action → reward → reinforcement) and other [PLG](https://productled.com/blog/product-led-growth-framework-for-saas-companies) tactics to keep users engaged
 
-- Commit to [continuous discovery](https://www.youtube.com/watch?v=9RFaz9ZBXpk). Let user feedback and behavior influence what gets amplified next
+- Committing to [continuous discovery](https://www.youtube.com/watch?v=9RFaz9ZBXpk). Let user feedback and behavior influence what gets amplified next
 
 ### 4. Measure learning, not just usage
 
@@ -186,7 +178,7 @@ Adoption doesn’t really start with features. It starts with people getting bet
 
 **What failure looks like:**
 
-- Overemphasizing vanity metrics like clicks, impressions and daily active users (DAU)
+- Overemphasizing vanity metrics like clicks, impressions, and daily active users (DAU)
 
 - Incentivizing your product team to be a [feature factory](https://xenoss.io/blog/product-velocity-trap-solutions) instead of taste makers
 
@@ -194,24 +186,22 @@ Adoption doesn’t really start with features. It starts with people getting bet
 
 - Believing other people care about your product as much as you do (they don’t)
 
-**Instead:**
+**Do this instead:**
 
-- Publish [learnings](/blog/8-learnings-from-1-year-of-agents-posthog-ai), [works-in-progress](/blog/multi-modal-llm-user-behavior-analysis), and durable mental models that are useful with, or without your product 
+- Publishing [learnings](/blog/8-learnings-from-1-year-of-agents-posthog-ai), [works-in-progress](/blog/multi-modal-llm-user-behavior-analysis), and durable mental models that are useful with, or without, your product 
 
-- Teach others about your domain (Hubpsot teaches you how to be a [better marketer](https://blog.hubspot.com/), Figma teaches you how to be a [better designer](https://www.figma.com/blog/insights/))
+- Teaching others about your domain (HubSpot teaches you how to be a [better marketer](https://blog.hubspot.com/), Figma teaches you how to be a [better designer](https://www.figma.com/blog/insights/))
 
-- Share uncomfortable things like [postmortems](/blog/nov-24-shai-hulud-attack-post-mortem) for incidents 
+- Sharing uncomfortable things like [postmortems](/blog/nov-24-shai-hulud-attack-post-mortem) for incidents 
 
-- Be a good citizen, [create space](/handbook/people/hogpatch) for others to thrive, help developers (or whichever community you market to) without asking for anything in return
+- Being a good citizen, [create space](/handbook/people/hogpatch) for others to thrive, help developers (or whichever community you market to) without asking for anything in return
 
-- Turn internal knowledge into [public artifacts](/handbook) and give space for every role to author content that matters to them
+- Turning internal knowledge into [public artifacts](/handbook) and give space for every role to author content that matters to them
 
 ## Fast, not frantic
 
 It's tempting to treat “shipping too fast” as a humblebrag, but that’s lazy thinking. If users can’t adopt what we ship, it’s not velocity – it’s waste.
 
-Practically, that means we need to be explicit about what matters, get better at sequencing the big launches, make a select number of things very loud, and let everything else be quietly excellent. 
-
-And of course, do more things that would make a normal SaaS company nervous. Not everyone will like it, and that’s what makes velocity convert to value.
+Practically, that means we need to be explicit about what matters, doing things that would make normal SaaS companies nervous, get better at sequencing the big launches, make a select number of things very loud, and let everything else be quietly excellent. Doing this right helps velocity convert to value.
 
 <NewsletterForm />
