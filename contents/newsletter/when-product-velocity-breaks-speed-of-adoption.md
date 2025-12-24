@@ -58,7 +58,7 @@ The result is diffuse impact: lots of progress shipped, but less progress felt.
 
 ### 2. Time-to-value increases
 
-As that backlog grows, lead times stretch – not in engineering, but in adoption. Your team keeps shipping, but each new capability takes longer to move from available to useful.
+As that backlog grows, the gap between production and adoption stretches. Your team keeps shipping code, but each new capability takes longer to move from available to useful.
 
 Users struggle to keep up with what’s changed. Support and sales spend more time explaining context. Marketing lags releases instead of amplifying them.
 
@@ -200,8 +200,8 @@ Adoption doesn’t really start with features. It starts with people getting bet
 
 ## Fast, not frantic
 
-It's tempting to treat “shipping too fast” as a humblebrag, but that’s lazy thinking. If users can’t adopt what we ship, it’s not velocity – it’s waste.
+It's tempting to treat “shipping too fast” as a humblebrag, but that’s lazy thinking. If users can’t adopt what you ship, it’s not velocity – it’s waste.
 
-Practically, that means we need to be explicit about what matters, doing things that would make normal SaaS companies nervous, get better at sequencing the big launches, make a select number of things very loud, and let everything else be quietly excellent. Doing this right helps velocity convert to value.
+Practically, that means you need to be explicit about what matters, do things that would make normal SaaS companies nervous, get better at sequencing the big launches, make a select number of things very loud, and let everything else be quietly excellent. Doing this right helps velocity convert to value.
 
 <NewsletterForm />
