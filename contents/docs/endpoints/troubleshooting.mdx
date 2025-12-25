@@ -1,40 +1,63 @@
 ---
 title: Troubleshooting
-sidebar: Docs
-showTitle: true
 ---
+
 import EndpointsBetaSnippet from './_snippets/beta.mdx'
 
 <EndpointsBetaSnippet />
 
-## Endpoint not found
+## Endpoint not found (404)
 
-If you get a 404 error:
 - Verify the endpoint name is correct
-- Check that the endpoint exists in your team **and** is active
-- Ensure you're using the correct team ID
+- Check that the endpoint is **active** - inactive endpoints return 404
+- Ensure you're using the correct project ID
 
-## Authentication errors
+## Authentication errors (401/403)
 
-If you get authentication errors:
 - Verify your personal API key is correct
-- Check that your API key has the necessary `endpoint:read` scope
-- Ensure you're including the `Authorization` header in your requests
+- Check that your API key has the `endpoint:read` scope
+- Ensure you're including the `Authorization: Bearer <key>` header
+
+## Version not found
+
+If you get `"Version X not found for endpoint"`:
+- Check available versions in the endpoint's UI
+- Omit the `version` parameter to use the latest version
+
+## Wrong parameter type
+
+**"Only variables and filters_override are allowed when executing a HogQL query"**
+- You're passing `query_override` to a HogQL endpoint
+- Use `variables` instead for HogQL queries
+
+**"Only query_override and filters_override are allowed when executing an Insight query"**
+- You're passing `variables` to an Insight-based endpoint
+- Use `query_override` instead for Insight queries
+
+## Rate limiting (429)
+
+**"Too many concurrent requests. Please try again later."**
+- You've hit the concurrency limit
+- Reduce parallel requests or wait before retrying
+
+## Materialization errors
+
+**"Cannot materialize endpoint: ..."**
+- The endpoint has variables (not supported with materialization)
+- The endpoint is inactive
+
+**"Cannot enable materialization on inactive endpoint"**
+- Activate the endpoint first, then enable materialization
+
+## Column type errors
+
+**"There's no column... in table. Note: While in beta, not all column types may be fully supported"**
+- Some column types aren't fully supported yet
+- Try simplifying your query or casting columns to supported types
 
 ## Slow responses
 
-If endpoints are slow:
-- Look at the [endpoints usage tab](https://app.posthog.com/endpoints/usage) with the filter for the slow endpoint
-- Check if the underlying query is optimized
-- Consider materializing your endpoint
-- Review the query performance in the query log
-
-## Further reading
-
-- [Endpoints overview](/docs/endpoints) - Learn what endpoints are and when to use them
-- [Getting started](/docs/endpoints/start-here) - Create your first endpoint
-- [API reference](/docs/api/endpoints) - Complete API documentation
-- [API queries](/docs/api/queries) - Learn about standard API queries
-- [SQL documentation](/docs/sql) - Write SQL queries for your endpoints
-- [Insights](/docs/product-analytics/insights) - Create insights to use as endpoints
-
+- Check the [Usage tab](/docs/endpoints/usage-analytics) for query duration stats
+- Consider [materializing](/docs/endpoints/materialization) expensive queries
+- Optimize your underlying SQL query
+- Review if you're passing parameters that prevent materialization

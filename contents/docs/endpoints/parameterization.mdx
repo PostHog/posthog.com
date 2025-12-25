@@ -1,0 +1,69 @@
+---
+title: Parameterization
+---
+
+import EndpointsBetaSnippet from './_snippets/beta.mdx'
+
+<EndpointsBetaSnippet />
+
+Parameterization lets you customize endpoint results at execution time without creating multiple endpoints. There are three approaches depending on your query type.
+
+## Variables (HogQL queries)
+
+For HogQL endpoints, use **variables** to inject values into your query at runtime.
+
+Define variables in your query using the `{variables.variable_name}` syntax:
+
+```sql
+SELECT count()
+FROM events
+WHERE properties.$country = {variables.country}
+```
+
+Then pass values when executing:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"variables": {"country": "US"}}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+> **Note:** Endpoints with variables cannot be [materialized](/docs/endpoints/materialization) since the results depend on the input values.
+
+## Query override (Insight queries)
+
+For Insight-based endpoints (Trends, Funnels, etc.), use **query_override** to modify query parameters at runtime.
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"query_override": {"dateRange": {"date_from": "-7d"}}}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+This lets you override things like date ranges, intervals, or breakdown properties without changing the endpoint definition.
+
+## Filters override (all query types)
+
+Use **filters_override** to apply property filters to any endpoint type. This narrows results without modifying the underlying query.
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"filters_override": {"properties": [{"key": "email", "value": "@company.com", "operator": "icontains", "type": "person"}]}}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+## Which to use?
+
+| Query type | Use | When |
+|------------|-----|------|
+| HogQL | `variables` | Dynamic values in your SQL query |
+| Insight | `query_override` | Modify query parameters like date range |
+| Any | `filters_override` | Filter results by properties |
+
+You can combine `filters_override` with either `variables` or `query_override` in the same request.

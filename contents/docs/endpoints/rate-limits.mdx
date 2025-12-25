@@ -1,0 +1,24 @@
+---
+title: Rate limits
+---
+
+import EndpointsBetaSnippet from './_snippets/beta.mdx'
+
+<EndpointsBetaSnippet />
+
+Endpoints can provide better rate limits than other APIs depending on how they're configured.
+
+## Direct execution
+
+Endpoints running with direct execution (no materialization) have the same rate limits as the standard [API rate limits](/docs/api#rate-limiting).
+
+## Materialized endpoints
+
+Materialized endpoints have higher limits because their execution goes through a different compute path:
+
+- **10 concurrent requests**
+- Higher rate limits (work in progress)
+
+## Need higher limits?
+
+If you need higher rate and concurrency limits, [materialize your endpoints](/docs/endpoints/materialization).
