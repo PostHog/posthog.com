@@ -10,19 +10,53 @@ This page covers troubleshooting for Endpoints. For setup, see the [installation
 
 <AskAIInput placeholder="Type your question and hit enter..." />
 
-## Endpoint not found
+## Endpoint not found (404)
 
-If you get a 404 error:
 - Verify the endpoint name is correct
-- Check that the endpoint exists in your team **and** is active
-- Ensure you're using the correct team ID
+- Check that the endpoint is **active** - inactive endpoints return 404
+- Ensure you're using the correct project ID
 
-## Authentication errors
+## Authentication errors (401/403)
 
-If you get authentication errors:
 - Verify your personal API key is correct
-- Check that your API key has the necessary `endpoint:read` scope
-- Ensure you're including the `Authorization` header in your requests
+- Check that your API key has the `endpoint:read` scope
+- Ensure you're including the `Authorization: Bearer <key>` header
+
+## Version not found
+
+If you get `"Version X not found for endpoint"`:
+- Check available versions in the endpoint's UI
+- Omit the `version` parameter to use the latest version
+
+## Variable errors
+
+**"Variable 'X' is not allowed for this endpoint"**
+- Check the [variables documentation](/docs/endpoints/variables) for which variables are supported
+- SQL endpoints only accept variables explicitly defined in the query
+- Insight endpoints accept the breakdown property name and `date_from`/`date_to` (non-materialized only)
+
+> **Note:** `filters_override` is deprecated and will be removed in a future release. Use `variables` instead. See the [variables documentation](/docs/endpoints/variables) for migration guidance.
+
+## Rate limiting (429)
+
+**"Too many concurrent requests. Please try again later."**
+- You've hit the concurrency limit
+- Reduce parallel requests or wait before retrying
+
+## Materialization errors
+
+**"Cannot materialize endpoint: ..."**
+- The endpoint has variables (not supported with materialization)
+- The endpoint is inactive
+
+**"Cannot enable materialization on inactive endpoint"**
+- Activate the endpoint first, then enable materialization
+
+## Column type errors
+
+**"There's no column... in table. Note: While in beta, not all column types may be fully supported"**
+- Some column types aren't fully supported yet
+- Try simplifying your query or casting columns to supported types
 
 ## Slow responses
 

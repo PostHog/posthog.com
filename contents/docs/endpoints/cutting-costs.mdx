@@ -1,0 +1,87 @@
+---
+title: Cutting costs
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+
+
+<CalloutBox icon="IconInfo" type="fyi" title="Pricing not yet finalized">
+
+Endpoints is free during beta. The pricing structure below reflects our current thinking, but may change before general availability. We'll notify all beta users before any pricing goes into effect.
+
+</CalloutBox>
+
+## Understanding endpoint pricing
+
+Endpoints pricing will be based on two factors:
+
+- **Compute usage**: CPU time spent executing queries
+- **Data scanned**: Amount of data read from storage
+
+Both non-materialized and materialized endpoints consume these resources, but in different ways.
+
+## Optimizing query performance
+
+The most effective way to reduce costs is to write efficient queries:
+
+- **Filter early**: Add WHERE clauses to limit data scanned
+- **Use appropriate date ranges**: Avoid scanning more historical data than needed
+- **Select only needed columns**: Don't use `SELECT *` if you only need specific fields
+
+## Using materialization effectively
+
+[Materialization](/docs/endpoints/materialization) pre-computes query results, which can significantly reduce per-request costs for frequently accessed endpoints.
+
+### When materialization saves money
+
+Materialization is cost-effective when:
+- The endpoint is called frequently (many reads per sync)
+- The underlying query is expensive (scans lots of data)
+- Data freshness requirements allow for periodic syncs
+
+### When materialization adds cost
+
+Materialization may increase costs when:
+- The endpoint is rarely called
+- The query is already fast and cheap
+- You need real-time data
+
+### Sync frequency trade-offs
+
+Choose a sync frequency that balances freshness with cost:
+
+| Frequency | Best for |
+|-----------|----------|
+| Hourly | High-traffic endpoints where near-real-time matters |
+| Daily | Most customer-facing dashboards |
+| Weekly | Historical reports, slowly-changing data |
+
+## Caching strategies
+
+Endpoints support [caching](/docs/endpoints/caching) to reduce redundant query execution.
+
+### Setting appropriate cache duration
+
+- **5-15 minutes**: Data that changes frequently but doesn't need to be real-time
+- **1-6 hours**: Dashboards and reports viewed periodically
+- **24 hours**: Historical data or slowly-changing metrics
+
+Longer cache durations reduce costs but show less fresh data.
+
+## Monitoring usage
+
+Track your endpoint usage to identify optimization opportunities:
+
+1. Use the [endpoints usage page](https://app.posthog.com/endpoints/usage) to see request volumes
+2. Identify your most-called endpoints
+3. Look for endpoints with high compute time per request
+4. Consider materializing high-volume, expensive endpoints
+
+## Deactivating unused endpoints
+
+Inactive endpoints don't consume resources, but materialized endpoints and endpoint versions with active syncs do. Review your endpoints periodically and:
+
+- Deactivate endpoints and endpoint versions no longer in use
+- Disable materialization on endpoints that don't benefit from it
+- Delete endpoints that are no longer needed

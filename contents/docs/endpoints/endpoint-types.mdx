@@ -1,0 +1,74 @@
+---
+title: Endpoint types
+---
+
+
+
+
+Endpoints can be created from two types of sources: **insights** or **SQL queries**. Each has different strengths and use cases.
+
+## Insight-based endpoints
+
+Insight-based endpoints are created from existing PostHog insights. They're ideal when you want to expose data from an insight you've already built in the UI.
+
+**Supported insight types:**
+- Trends
+- Funnels
+- Retention
+- Lifecycle
+- Paths
+- Stickiness
+
+**Pros:**
+- Easy to create from existing insights
+- Visual query builder - no SQL required
+- Automatic [magic variables](/docs/endpoints/variables#variables-in-insight-based-endpoints) for breakdowns and date filtering
+
+**Cons:**
+- Less flexible than SQL
+- Limited to what the insight UI supports
+
+### Example use cases
+
+- Expose a trends chart showing daily active users per customer
+- Share funnel conversion rates with your customers
+- Provide retention data for customer health dashboards
+
+## SQL-based endpoints
+
+SQL-based endpoints are created from SQL queries written in the [SQL editor](https://us.posthog.com/sql). They give you full control over the query and output format.
+
+**Pros:**
+- Full SQL flexibility
+- Custom output shapes
+- Explicit [variables](/docs/endpoints/variables#variables-in-SQL-based-endpoints) with precise control
+- Can query any table in PostHog
+
+**Cons:**
+- Requires SQL knowledge
+
+### Example use cases
+
+- Custom aggregations not available in insights
+- Joining data across multiple tables
+- Complex filtering logic
+- Custom output formats for specific integrations
+
+## Choosing the right type
+
+| Use case | Recommended type |
+|----------|-----------------|
+| Already have an insight you want to expose | Insight-based |
+| Need a simple trends/funnel/retention query | Insight-based |
+| Need custom SQL or complex joins | SQL-based |
+| Want precise control over output format | SQL-based |
+| Need multiple explicit variables | SQL-based |
+
+## Variables
+
+Both endpoint types support variables for runtime customization, but they work differently:
+
+- **Insight-based**: Use [magic variables](/docs/endpoints/variables#variables-in-insight-based-endpoints) - the breakdown property and date filters are automatically available
+- **SQL-based**: Define [explicit variables](/docs/endpoints/variables#variables-in-SQL-based-endpoints) in your query using `{variables.name}` syntax
+
+See the [variables documentation](/docs/endpoints/variables) for details.

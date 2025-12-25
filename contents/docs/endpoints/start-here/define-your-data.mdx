@@ -1,0 +1,94 @@
+---
+title: Define the data for your endpoint
+showStepsToc: true
+---
+
+import EndpointsBetaSnippet from '../_snippets/beta.mdx'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CallToAction } from 'components/CallToAction'
+import { Steps, Step } from 'components/Docs/Steps'
+import Tab from 'components/Tab'
+
+
+
+<Steps>
+
+<Step title="Choose your data source" badge="required">
+
+Endpoints can be created from existing insights or SQL queries in PostHog. Choose the approach that best fits your use case.
+
+<Tab.Group tabs={['Insight', 'SQL']}>
+<Tab.List>
+<Tab>Insight-based</Tab>
+<Tab>SQL-based</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+**Best for:** Exposing data from existing insights you've already built.
+
+[Create an insight](/docs/product-analytics/insights) in PostHog that shows the data you want to expose. This could be:
+- A trend showing daily active users
+- A funnel tracking user conversion
+- A retention analysis
+- Any other insight type
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/abe_insight_funnel_example_r_eb45dee714.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/abe_insight_funnel_example_r_eb45dee714.png"
+  alt="Create an insight in PostHog"
+  classes="rounded"
+/>
+
+</Tab.Panel>
+<Tab.Panel>
+
+**Best for:** Custom queries, complex joins, or when you need [variables](/docs/endpoints/variables).
+
+Create a SQL query in the [SQL editor](https://us.posthog.com/sql) that returns the data you need. SQL-based endpoints give you full control over the query structure.
+
+```sql
+SELECT
+    toDate(timestamp) as day,
+    count() as event_count
+FROM events
+WHERE timestamp > now() - interval 30 day
+GROUP BY day
+ORDER BY day
+```
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T12_19_52_008_Z_34e3227830.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T12_19_25_138_Z_c1bcd9501d.png"
+  alt="Write a SQL query"
+  classes="rounded"
+/>
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+</Step>
+
+<Step title="Verify results of your query" badge="recommended">
+
+Before creating an endpoint, make sure your insight or SQL query returns the expected results:
+
+1. For **insights**: Check the visualization shows the data you expect
+2. For **SQL queries**: Click **Run** and review the results table
+
+This ensures your endpoint will return meaningful data when executed.
+
+</Step>
+
+<Step title="Next step">
+
+Once you have your data defined, create an endpoint from it.
+
+<CallToAction type="primary" to="/docs/endpoints/start-here/create-endpoint">
+Create an endpoint
+</CallToAction>
+
+</Step>
+
+</Steps>

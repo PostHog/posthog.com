@@ -1,0 +1,104 @@
+---
+title: Create an endpoint with variables
+---
+
+
+
+
+This guide walks through creating an endpoint that accepts variables, allowing you to filter results at execution time. We'll create a customer-specific analytics endpoint that filters data by a `customer_id` property.
+
+## Step 1: Write your SQL query with a variable
+
+Open the [SQL editor](https://us.posthog.com/sql) and write a query that uses the `{variables.variable_name}` syntax:
+
+```sql
+SELECT
+    toDate(timestamp) AS date,
+    count() AS event_count
+FROM events
+WHERE
+    properties.customer_id = {variables.customer_id}
+    AND timestamp >= now() - INTERVAL 30 DAY
+GROUP BY date
+ORDER BY date
+```
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pasted_image_2026_02_05_T12_59_55_871_Z_1c17ec304e.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pasted_image_2026_02_05_T12_59_18_267_Z_269f3e06f6.png"
+  alt="SQL query with variable in the editor"
+  classes="rounded"
+/>
+
+## Step 2: Define the variable
+
+In the `Variables` tab in the output pane, click **Add variable**, then **New variable** and fill in the modal.
+
+1. **Name**: A human-readable name (e.g., "Customer ID")
+3. **Type**: The variable type (String, Number, etc.)
+4. **Default value**: Optional default when no value is provided
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pasted_image_2026_02_05_T13_03_07_830_Z_952563f31e.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pasted_image_2026_02_05_T13_01_45_787_Z_44e98d6bcd.png"
+  alt="Configuring a variable in the SQL editor"
+  classes="rounded"
+/>
+
+## Step 3: Test your query
+
+Enter a test value for your variable and run the query to verify it works:
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_02_05_T13_32_16_983_Z_b30a6a3f84.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_02_05_T13_32_31_647_Z_ce80d5a635.png"
+  alt="Testing the query with a variable value"
+  classes="rounded"
+/>
+
+## Step 4: Create the endpoint
+
+Once your query works, click the `Endpoint` tab in the output pane:
+
+1. Enter a descriptive name (e.g., `customer_events_by_day`)
+2. Add an optional description
+3. Click **Create endpoint**
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_02_05_T13_33_42_282_Z_b8d9cfb8ae.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_02_05_T13_34_34_889_Z_d7de925054.png"
+  alt="Creating an endpoint from a SQL query"
+  classes="rounded"
+/>
+
+## Step 5: Execute with a variable
+
+Now you can call your endpoint and pass the variable value:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"variables": {"customer_id": "acme-corp"}}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/customer_events_by_day/run"
+```
+
+The response will only include events where `properties.customer_id = 'acme-corp'`.
+
+## Pay attention: Variables are required
+
+If your endpoint has a variable defined, you **must** provide a value when executing. This is a safety feature to prevent accidentally returning unfiltered data.
+
+Calling the endpoint without the required variable will return an error:
+
+```json
+{
+  "detail": "Required variable 'customer_id' not provided"
+}
+```
+
+## Next steps
+
+- Learn more about [variables](/docs/endpoints/variables) including magic variables for insight-based endpoints
+- [Materialize your endpoint](/docs/endpoints/materialization) for better performance
+- [Generate a typed SDK](/docs/endpoints/openapi-sdk-generation) from your endpoint's OpenAPI spec

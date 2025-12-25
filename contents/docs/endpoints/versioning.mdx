@@ -1,0 +1,104 @@
+---
+title: Versioning
+---
+
+
+
+
+Every time you update an endpoint's query, PostHog creates a new version. This gives you a history of changes and lets you run older versions if needed.
+
+## Why versioning exists
+
+Versioning helps you:
+
+- **Safely update queries** - If a change breaks something, you can still access the previous version
+- **Debug issues** - Compare results between versions to understand what changed
+- **Gradual rollouts** - Test a new query version before fully switching over (pro tip: you can use our feature flags to roll out a new version to a subset of your users)
+
+## How it works
+
+When you save changes to an endpoint's query, PostHog automatically creates a new version. The version number auto-increments (1, 2, 3, etc.) and the previous versions remain accessible.
+
+An endpoint version is a snapshot of the version's query at a point in time. However, you can change a version's description, caching and materialization behavior.
+
+You can see all the versions and their configuration in the `Versions` tab of your endpoint.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_02_05_T09_34_22_655_Z_1f2ea2f026.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_02_05_T09_36_11_676_Z_3a929cc4a5.png"
+  alt="endpoints versions tab" 
+  classes="rounded"
+/>
+
+From here, you can click on a version number to _view_ that version, which will show the insight or SQL query and that version's configurations.
+
+To update the query and create a new version, you'll first have to go back to the latest version.
+
+## Running a specific version
+
+By default, executing an endpoint runs the **latest version**.
+To run an older version, pass the `version` parameter as a query string or in the request body:
+
+<MultiLanguage>
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run?version=2"
+```
+
+```python
+import requests
+
+response = requests.post(
+    "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run",
+    headers={"Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"},
+    params={"version": 2}
+)
+```
+
+```node
+const response = await fetch(
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run?version=2",
+  { headers: { "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}" } }
+);
+```
+
+<CalloutBox icon="IconInfo" type="fyi" title="Endpoint version in the `Playground` tab">
+
+If you select a version in the `Versions` tab, and then check out the `Playground` tab, the request payload changes accordingly.
+
+</CalloutBox>
+
+</MultiLanguage>
+
+## Disabling a version
+
+If you'd like to make sure a version is no longer accessible (say, after making a mistake in the query), you can disable a version by:
+1. navigating to the `Versions` tab,
+2. clicking on the three dots on the right of the version you'd like to disable,
+3. and clicking `Deactivate version`.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_02_05_T09_52_34_963_Z_cf79fdf7ef.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_02_05_T09_52_08_964_Z_d7f7816d82.png"
+  alt="endpoints deactivate version" 
+  classes="rounded"
+/>
+
+<CalloutBox icon="IconInfo" type="fyi" title="Deactivating a version vs endpoint">
+
+Deactivating a version is different from deactivating an endpoint. 
+
+The former only makes requests to the specific endpoint version inaccessible, while the latter does that to the whole endpoint and all its versions.
+
+</CalloutBox>
+
+
+## Versioning and materialization
+
+Each version can be materialized independently, as long as the underlying query allows it.
+
+To change a version's materialization: 
+1. click on that version in the `Versions` tab,
+2. and turn materialization on/off in the `Configuration` tab.
