@@ -1,0 +1,96 @@
+---
+title: Getting started with endpoints
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import OSButton from 'components/OSButton'
+import EndpointsBetaSnippet from '../_snippets/beta.mdx'
+import RetrieveDataPlatforms from './_snippets/retrieve-data-platforms'
+
+
+
+<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="You're ready to use endpoints!">
+
+<QuestLogItem
+  title="Define your data"
+  subtitle="Required"
+  icon="IconGraph"
+>
+
+Create an insight or SQL query in PostHog that returns the data you want to expose via API.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T12_19_52_008_Z_34e3227830.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T12_19_25_138_Z_c1bcd9501d.png"
+  alt="Write a SQL query"
+  classes="rounded"
+/>
+
+<OSButton variant="primary" asLink to="/docs/endpoints/start-here/define-your-data">
+  Define your data
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Create an endpoint"
+  subtitle="Required"
+  icon="IconRocket"
+>
+
+Turn your insight or SQL query into a stable API endpoint you can call from your applications.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T12_23_46_230_Z_327116758f.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T12_24_23_094_Z_d167e6d4ae.png"
+  alt="Creating an endpoint from a SQL query"
+  classes="rounded"
+/>
+
+<OSButton variant="primary" asLink to="/docs/endpoints/start-here/create-endpoint">
+  Create an endpoint
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Retrieve your data"
+  subtitle="Required"
+  icon="IconCode"
+>
+
+Call your endpoint from your application using your preferred language or framework.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T11_07_48_215_Z_d1a9df2d6d.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T11_08_39_104_Z_bcbb8f48dc.png"
+  alt="Example Next.js app using PostHog Endpoints"
+  classes="rounded"
+/>
+
+### Choose your language
+
+<RetrieveDataPlatforms />
+
+<OSButton variant="primary" asLink to="/docs/endpoints/start-here/retrieve-data">
+  Retrieve your data
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Use for free"
+  subtitle="Recommended"
+  icon="IconPiggyBank"
+>
+
+Endpoints is **free during beta**. When pricing goes into effect, it will be based on compute usage and data scanned.
+
+- No credit card required to start
+- We'll notify all beta users before any pricing changes
+
+</QuestLogItem>
+
+</QuestLog>

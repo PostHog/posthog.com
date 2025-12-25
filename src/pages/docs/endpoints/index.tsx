@@ -18,20 +18,27 @@ export const Content = () => {
                 <div>
                     <p>
                         Endpoints enable you to create predefined queries from PostHog insights or SQL queries and
-                        expose them as API endpoints. You could use endpoints to:
+                        expose them as API endpoints. You can use endpoints to:
                     </p>
                     <ul>
                         <li>
                             <b>Build embedded analytics.</b> Show analytics to your customers in your own application
                         </li>
                         <li>
+                            <b>Data on your landing page.</b> Expose live metrics on your landing page in minutes.
+                        </li>
+                        <li>
                             <b>Pull aggregated PostHog data into your app.</b> Use PostHog data to create feeds with top
                             content, recommended items or more.
                         </li>
+                        <li>
+                            <b>Integrate your users' behavior data in internal tools.</b> Make a simple API call from
+                            your Retool app and show your users' behavior data right next to your admin tools.
+                        </li>
                     </ul>
                     <p>
-                        Endpoints offers a number of advantages over our query API, such as materialization (giving you
-                        better performance) and through the use of isolated resources.
+                        Endpoints offers a number of advantages over our query API, such as improved performance, more
+                        control and better developer experience.
                     </p>
                     <div className="flex justify-center mb-8">
                         <div className="text-center">
@@ -39,7 +46,7 @@ export const Content = () => {
                             <ProductScreenshot
                                 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/sql_query_from_endpoints_606a61f4c6.png"
                                 imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/sql_query_from_endpoints_606a61f4c6.png"
-                                alt="Example workflow"
+                                alt="Example endpoint"
                                 padding={false}
                                 classes="rounded @md:max-w-2xl"
                             />
@@ -57,46 +64,27 @@ export const Content = () => {
                     <p>Endpoints follow a simple workflow:</p>
                     <ol>
                         <li>
-                            <b>Create an insight or SQL query</b> in PostHog that defines the data you want to expose
+                            <b>Define your data</b> Create an insight or SQL query in PostHog that returns the data you
+                            want to expose.
                         </li>
                         <li>
-                            <b>Create an endpoint</b> from that insight or query, giving it a custom name
+                            <b>Create an endpoint</b> from that insight or query and get back a URL to retrieve your
+                            data.
                         </li>
                         <li>
-                            <b>Access the data</b> via a simple API endpoint with improved performance and rate limits
+                            <b>Retrieve the data</b> via a simple API endpoint with improved performance and higher rate
+                            limits.
                         </li>
                     </ol>
                 </div>
             </section>
 
             <section className="mb-8">
-                <h2 className="mb-4 mt-0" id="endpoint-url-pattern">
-                    Endpoint URL pattern
-                </h2>
-                <div>
-                    <p>Endpoints follow this URL pattern:</p>
-                    <code>/api/environments/:project_id/endpoints/:endpoint_name/run</code>
-                    <p>For example:</p>
-                    <ul>
-                        <li>
-                            <code>/api/environments/2/endpoints/example-sql-2/run</code>
-                        </li>
-                        <li>
-                            <code>/api/environments/2/endpoints/account_users_activity/run</code>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-
-            <section className="mb-8">
-                <h2 className="mb-4 mt-0" id="endpoints-vs-api-queries">
-                    Endpoints vs API queries
-                </h2>
-                <CalloutBox icon="IconInfo" type="fyi" title="Endpoints vs API queries">
+                <CalloutBox icon="IconInfo" type="fyi" title="Endpoints vs Query API?">
                     <p>You should use endpoints when you need:</p>
                     <ul>
                         <li>
-                            <b>Better performance</b>: Optimized for predefined queries
+                            <b>Better performance</b>: We can make them run faster when we know the query in advance.
                         </li>
                         <li>
                             <b>Higher rate limits</b>: More requests per minute/hour than standard API queries
