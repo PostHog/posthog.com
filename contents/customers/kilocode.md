@@ -6,9 +6,9 @@ featuredImage: >-
 date: 2025-12-26
 ---
 
-[Kilo Code](https://kilo.ai/) is a developer-first AI platform that lets teams access and experiment with hundreds of language models at extreme speed. In addition to the language models, the team also operates fast. In a matter of months, the team has shipped multiple products, expanded headcount aggressively, and built a platform that serves both registered users and developers who never create an account at all. That pace leaves very little room for fragmented tooling or slow feedback loops.
+[Kilo Code](https://kilo.ai/) is a developer-first AI platform that lets teams access and experiment with hundreds of language models at extreme speed. In addition to the fast language models, the team also ships fast. In a matter of months, they have shipped multiple products, expanded headcount significantly, and built a platform that serves both registered users and developers who never create an account at all. That pace leaves very little room for fragmented tooling or slow feedback loops.
 
-From the start, PostHog became the system that made this speed sustainable.
+From the start, PostHog became the system that made this speed sustainable. 
 
 Job Rietbergen joined Kilo Code shortly after the company was founded. While PostHog was already in place, he quickly expanded how it was used, turning it into a shared foundation for product, growth, and engineering decisions.
 
@@ -22,7 +22,7 @@ What mattered most wasn’t just analytics. It was having one place where experi
 
 ## One source of truth for a highly technical team
 
-KiloCode’s team is deeply technical across the board. Engineers, growth, DevRel, and marketing are all comfortable working directly with data: writing queries, building dashboards, and exploring insights on their own. That made PostHog a natural fit.
+Kilo Code’s team is deeply technical across the board. Engineers, growth, DevRel, and marketing are all comfortable working directly with data: writing queries, building dashboards, and exploring insights on their own. That made PostHog a natural fit.
 
 Instead of a single data owner or a slow request process, insights are created and acted on by anyone who needs them. [Product experiments](/experiments), feature launches, and behavioral analysis all happen in the same environment, which removes friction and shortens decision cycles.
 
@@ -52,10 +52,10 @@ PostHog is used to power telemetry across those environments, giving the team vi
 
 ## PostHog as the connective tissue
 
-Rather than pointing to a single metric improvement, Job describes PostHog as infrastructure that quietly supports everything else the team does – from abuse detection and alerts to activation tracking and experimentation.
+Rather than pointing to a single metric improvement, Job describes PostHog as infrastructure that quietly supports everything else the team does–from abuse detection and alerts to activation tracking and experimentation.
 
 _“PostHog is really the connective tissue behind a lot of what we’re doing. So many things depend on it, and it adapts as fast as the product does.”_
 
-This adaptability matters at Kilo Code’s pace. During a recent off-site, the company hired five engineers, flew them in, and had each ship a working product in under a week. Multiple products were released shortly after: a pace that would be difficult to sustain without tooling that removes friction instead of adding it.
+This adaptability matters at Kilo Code’s pace. During a recent offsite, the company hired five engineers, flew them in, and had each ship a working product in under a week. Multiple products were released shortly after: a pace that would be difficult to sustain without tooling that removes friction instead of adding it.
 
 _“Everything we do is about speed. PostHog helps us move fast without losing visibility into what’s actually happening.”_
