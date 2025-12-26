@@ -22,7 +22,7 @@ seo:
 
 Every developer's debugging journey ends at the same destination. You can start with an [error](/error-tracking) and get context with a [session replay](/session-replay), but eventually, you'll need logs to see what's actually happening in your system. This progression is so familiar, we barely think of it anymore.
 
-We started building [Logs (now in beta)](/docs/logs) right for this moment. Not as a new tool to adopt, but as the part of the investigation you were always headed toward anyway. Now you can get the backend context behind your errors and session replays right next to your favorite tools in PostHog, without having to leave the platform and open another tab. 
+We built [Logs (now in beta)](/docs/logs) for this debugging journey. Not as a new tool to adopt, but as the part of the investigation you were doing anyway. Now you can get the backend context behind your errors and session replays next to your favorite tools in PostHog, without having to leave the platform and open another tab. 
 
 ## Where context gets messy
 
