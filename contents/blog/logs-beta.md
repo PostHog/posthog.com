@@ -20,7 +20,7 @@ seo:
     }
 ---
 
-The moment you decide to debug something, you already know where you’ll end up. You’ll start with an [error](/error-tracking), move into a [session replay](/session-replay) to see what the user did, and eventually open logs to understand what the system was doing at the time. That path is so familiar it barely needs thinking anymore.
+Every developer's debugging journey ends at the same destination. You can start with an [error](/error-tracking) and get context with a [session replay](/session-replay), but eventually, you'll need logs to see what's actually happening in your system. This progression is so familiar, we barely think of it anymore.
 
 We started building [Logs (now in beta)](/docs/logs) right for this moment. Not as a new tool to adopt, but as the part of the investigation you were always headed toward anyway. Now you can get the backend context behind your errors and session replays right next to your favorite tools in PostHog, without having to leave the platform and open another tab. 
 
