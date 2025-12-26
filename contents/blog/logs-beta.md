@@ -32,7 +32,11 @@ The logs are still accurate and the system is still observable. But the story yo
 
 ## Debug faster with Logs next to Session Replays and Error Tracking
 
-With Logs, the investigation stays continuous. When you’re looking at an exception, the logs surrounding that failure are immediately available. When you’re watching a session replay, you can see what the backend was doing during that exact interaction. When you’re investigating a specific user or event, the relevant logs are part of the same view, not a separate search problem.
+With Logs, the debugging journey is continuous. 
+
+- When you’re looking at an exception, the logs surrounding that failure are immediately available. 
+- When you’re watching a session replay, you can see what the backend was doing during that exact interaction. 
+- When you’re investigating a specific user or event, the relevant logs are part of the same view, not a separate search problem.
 
 You're no longer reconstructing the timeline manually. The frontend behavior, backend activity, and failure point stay connected, which makes understanding faster and far less error-prone.
 
