@@ -38,7 +38,7 @@ With Logs, the debugging journey is continuous.
 - When you’re watching a session replay, you can see what the backend was doing during that exact interaction. 
 - When you’re investigating a specific user or event, the relevant logs are part of the same view, not a separate search problem.
 
-You're no longer reconstructing the timeline manually. The frontend behavior, backend activity, and failure point stay connected, which makes understanding faster and far less error-prone.
+You're no longer reconstructing the timeline manually. The frontend behavior, backend activity, and failure point stay connected, making understanding faster and less error-prone.
 
 ![Logs integration](https://res.cloudinary.com/dmukukwp6/image/upload/Group_2_06b7915c26.png)
 
