@@ -44,6 +44,8 @@ You're no longer reconstructing the timeline manually. The frontend behavior, ba
 
 ## What's next
 
-[Logs is in beta today](https://app.posthog.com/logs), free to use, and focused on tight integration with the rest of the PostHog debugging experience. Over the coming months, we’re working on deeper connections with Error Tracking and Session Replay, better defaults for viewing logs tied to users and events, and early AI-powered investigation so you can ask questions instead of reading through lines.
+[Logs is in beta today](https://app.posthog.com/logs), free to use, and focused on tight integration with the rest of the PostHog debugging experience. 
+
+Over the coming months, we’re working on deeper connections with Error Tracking and Session Replay, better defaults for viewing logs tied to users and events, and early AI-powered investigation so you can ask questions instead of reading through lines.
 
 The long-term goal is straightforward, even if it’s ambitious: build a logging product where you don’t need to read log lines to understand your system. [Try it out](https://app.posthog.com/logs) and let us know what you think, we’d love to have you help us shape this product. 
