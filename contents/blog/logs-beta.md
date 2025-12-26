@@ -40,6 +40,8 @@ With Logs, the debugging journey is continuous.
 
 You're no longer reconstructing the timeline manually. The frontend behavior, backend activity, and failure point stay connected, making understanding faster and less error-prone.
 
+Logs is built on OpenTelemetry, which means you don’t have to change how you log or adopt a proprietary SDK. If you’re already sending logs via OTLP, they work with PostHog out of the box.
+
 ![Logs integration](https://res.cloudinary.com/dmukukwp6/image/upload/Group_2_06b7915c26.png)
 
 ## What's next for Logs and the debugging journey
