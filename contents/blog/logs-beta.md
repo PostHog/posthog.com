@@ -1,5 +1,5 @@
 ---
-title: Meet Logs (beta) – with all the tools you’re already using
+title: Meet Logs (beta) – more debugging context, all in PostHog
 date: 2025-12-23
 rootPage: /blog
 sidebar: Blog
