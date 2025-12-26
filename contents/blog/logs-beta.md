@@ -28,7 +28,7 @@ We built [Logs (now in beta)](/docs/logs) for this debugging journey. Not as a n
 
 When logs live outside the rest of your debugging workflow, they lose their most important attribute: context. You leave the error view, open another tool, recreate the timeframe, match request IDs, and hope you’re looking at the same execution path you were just investigating.
 
-The logs are still accurate and the system is still observable. But the story you’re trying to piece together gets fragmented, and understanding takes longer than it should. At PostHog, we don’t think logs should be something you switch to. They should be something that’s already there when you need them.
+The logs are still accurate and the system is still observable. But the story you’re trying to piece together fragments, and understanding takes longer than it should. At PostHog, we don’t think logs should be something you switch to. They should be already there when you need them.
 
 ## Debug faster with Logs next to Session Replays and Error Tracking
 
