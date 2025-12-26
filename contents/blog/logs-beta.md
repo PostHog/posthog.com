@@ -30,7 +30,7 @@ When logs live outside the rest of your debugging workflow, they lose their most
 
 The logs are still accurate and the system is still observable. But the story you’re trying to piece together gets fragmented, and understanding takes longer than it should. At PostHog, we don’t think logs should be something you switch to. They should be something that’s already there when you need them.
 
-## Debug faster with Logs right next to Session Replays and Error Tracking
+## Debug faster with Logs next to Session Replays and Error Tracking
 
 With Logs, the investigation stays continuous. When you’re looking at an exception, the logs surrounding that failure are immediately available. When you’re watching a session replay, you can see what the backend was doing during that exact interaction. When you’re investigating a specific user or event, the relevant logs are part of the same view, not a separate search problem.
 
