@@ -42,7 +42,7 @@ You're no longer reconstructing the timeline manually. The frontend behavior, ba
 
 ![Logs integration](https://res.cloudinary.com/dmukukwp6/image/upload/Group_2_06b7915c26.png)
 
-## What's next
+## What's next for Logs and the debugging journey
 
 [Logs is in beta today](https://app.posthog.com/logs), free to use, and focused on tight integration with the rest of the PostHog debugging experience. 
 
