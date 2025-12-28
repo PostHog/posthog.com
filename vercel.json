@@ -1688,7 +1688,8 @@
         { "source": "/startups/[...slug]", "destination": "/startups" },
         { "source": "/customer-data-infrastructure/:path*", "destination": "/data-stack" },
         { "source": "/data-warehouse", "destination": "/data-stack" },
-        { "source": "/docs/error-tracking/common-questions", "destination": "/docs/error-tracking/troubleshooting" }
+        { "source": "/docs/error-tracking/common-questions", "destination": "/docs/error-tracking/troubleshooting" },
+        { "source": "/docs/web-analytics/faq", "destination": "/docs/web-analytics/troubleshooting" }
     ],
     "headers": [
         {

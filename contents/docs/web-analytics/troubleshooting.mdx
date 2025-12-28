@@ -1,11 +1,17 @@
 ---
-title: FAQs
+title: Web Analytics troubleshooting
 sidebar: Docs
 showTitle: true
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonRow } from 'components/ComparisonTable/row'
+
+This page covers troubleshooting for Web Analytics. For setup, see the [installation guides](/docs/web-analytics/installation).
+
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
 
 Have a question not covered here? [Let us know](http://app.posthog.com/home#supportModal).
 
@@ -29,7 +35,7 @@ No, we automatically block bots and crawlers. You can see exactly which ones [we
 
 ## Why is my pageview/user count different on PostHog than my other analytics tool?
 
-### 1. Ad blockers
+**1. Ad blockers**
 
 *Affects: visitor count, session count, pageview count*
 
@@ -37,7 +43,7 @@ Around 1 in 3 internet users use an ad blocker, more in some demographics, with 
 
 Google Analytics is blocked by almost every ad blocker, whereas other analytics tools are not always blocked. Additionally, you can use a [reverse proxy](/docs/advanced/proxy) which makes it harder for ad blockers to block our traffic.
 
-### 2. Different methods of counting unique users
+**2. Different methods of counting unique users**
 
 *Affects: visitor count*
 
@@ -47,13 +53,13 @@ Cookieless trackers, like [Plausible](/blog/posthog-vs-plausible) and Vercel, tr
 
 These cookieless trackers also incorrectly count the same user on different devices as different visitors, as the user agent would differ.
 
-### 3. Different methods of tracking sessions
+**3. Different methods of tracking sessions**
 
 *Affects: session count*
 
 A [session](/docs/data/sessions) is a grouping of user activity, which starts on the first event (e.g. pageview) and ends after 30 minutes of inactivity. By default, we store the user's current session ID in a cookie. Other tools might have a different timeout period or a different way of storing the session state which can affect the count.
 
-### 4. Bot detection
+**4. Bot detection**
 
 *Affects: visitor count, session count, pageview count*
 
@@ -80,7 +86,7 @@ Direct traffic usually refers to when a user enters the address to your website 
 
 This is called self-referral traffic, having a small amount (less than 5%) of self-referral traffic is normal, and it can happen for a few reasons:
 
-### Cross-domain tracking
+**Cross-domain tracking**
 
 For tracking users across different domains or websites, for example a marketing site at `marketing.com` and an app at `app.com`, or in some cases between subdomains, you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed. This typically means you need to pass the user's `distinct_id` and `session_id` between domains but check the guide for complete instructions.
 
@@ -89,7 +95,7 @@ This ensures that:
 - User journeys are tracked accurately from first touch to conversion
 - Analytics data from both sites is associated with the same user profile
 
-### Session timeout
+**Session timeout**
 
 1. A user visits a site (for example, `google.com`) that links to yours.
 
@@ -146,3 +152,9 @@ The recent online user count reflects the number of users we've seen in the last
 If users are online but not sending events (e.g., reading a nicely written blog post), they won't be included in the count.
 
 Ingestion delays can also cause the count not to update as expected.
+
+## Solved community questions
+
+<SolvedQuestions
+    topicLabel="Web Analytics"
+/>
