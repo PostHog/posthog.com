@@ -1690,7 +1690,8 @@
         { "source": "/data-warehouse", "destination": "/data-stack" },
         { "source": "/docs/error-tracking/common-questions", "destination": "/docs/error-tracking/troubleshooting" },
         { "source": "/docs/web-analytics/faq", "destination": "/docs/web-analytics/troubleshooting" },
-        { "source": "/docs/feature-flags/common-questions", "destination": "/docs/feature-flags/troubleshooting" }
+        { "source": "/docs/feature-flags/common-questions", "destination": "/docs/feature-flags/troubleshooting" },
+        { "source": "/docs/experiments/common-questions", "destination": "/docs/experiments/troubleshooting" }
     ],
     "headers": [
         {

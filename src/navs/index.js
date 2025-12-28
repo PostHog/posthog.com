@@ -3874,8 +3874,8 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/experiments/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/experiments/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'orange',
                     featured: true,
