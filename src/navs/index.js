@@ -3086,7 +3086,7 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/product-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'blue',
@@ -4147,7 +4147,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'AI',
+                    name: 'PostHog AI',
                 },
                 {
                     name: 'Debugging with MCP',
@@ -4206,7 +4206,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Troubleshooting',
-                    url: '/docs/error-tracking/common-questions',
+                    url: '/docs/error-tracking/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
                     featured: true,
