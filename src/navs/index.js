@@ -3414,7 +3414,7 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/session-replay/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
