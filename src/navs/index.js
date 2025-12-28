@@ -3550,8 +3550,8 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/feature-flags/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/feature-flags/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'seagreen',
                 },
