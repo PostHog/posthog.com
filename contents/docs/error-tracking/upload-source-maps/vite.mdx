@@ -62,21 +62,14 @@ Add these environment variables to your CI/CD service's project settings to auto
 
 <Step checkpoint title="Verify source map upload and injection">
 
-1. Confirm that source maps are successfully uploaded to PostHog.
+Confirm source maps were successfully uploaded:
 
-<div className="mt-4 mb-2">
+1. Go to your [symbol sets in PostHog](https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets) and verify your latest upload appears.
 
-<OSButton variant="secondary" asLink className="mb-2" size="sm" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external>
-    Check symbol sets in PostHog
-</OSButton>
-
-</div>
-
-2. Confirm that the served files are injected with the correct source map comment in production in dev tools:
+2. Check your production JavaScript files in browser dev tools. They should include a source map reference comment:
 
 ```js
 //# chunkId=0197e6db-9a73-7b91-9e80-4e1b7158db5c
-```
 
 </Step>
 
