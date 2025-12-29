@@ -411,8 +411,8 @@ export const dataPipelines = {
         },
 
         {
-            name: 'Troubleshooting and FAQs',
-            url: '/docs/cdp/common-questions',
+            name: 'Troubleshooting',
+            url: '/docs/cdp/troubleshooting',
             icon: 'IconQuestion',
             color: 'blue',
             featured: true,
@@ -4263,7 +4263,7 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/surveys/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'seagreen',
