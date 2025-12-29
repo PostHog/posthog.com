@@ -67,9 +67,9 @@ You'll also need:
 - **At least a few hundred users going through your flow**. You need enough data to spot patterns. If you're at an earlier stage, you can still follow this recipe; just watch more replays and lean harder on qualitative signals until your numbers catch up.
 
 <details>
-<summary><strong>If using PostHog</strong></summary>
+<summary><strong>If using PostHog...</strong></summary>
 
-PostHog installed in your product and receiving data. If you haven't set this up yet, [start here](https://posthog.com/docs/getting-started/install). Make sure you're capturing the key events in your onboarding flow (signups, form completions, button clicks, etc.). If you have autocapture enabled, you're probably already covered.
+You'll need it installed in your product and receiving data. If you haven't set this up yet, [start here](https://posthog.com/docs/getting-started/install). Make sure you're capturing the key events in your onboarding flow (signups, form completions, button clicks, etc.). If you have autocapture enabled, you're probably already covered.
 
 We highly recommend calling [`posthog.identify()`](https://posthog.com/docs/product-analytics/identify) when users sign up or log in; you'll be able to track them across sessions and devices, which makes your funnel data much more reliable.
 
@@ -91,7 +91,7 @@ We highly recommend calling [`posthog.identify()`](https://posthog.com/docs/prod
 
 Before you can fix your onboarding, you need to [define what a successful onboarding flow actually means](https://posthog.com/docs/new-to-posthog/activation). This is your activation event, the thing you'll measure everything against.
 
-Ask yourself: What's the moment when a user has gotten enough value that they're likely to stick around? What you're looking for is a ***value-producing action**.
+Ask yourself: What's the moment when a user has gotten enough value that they're likely to stick around? What you're looking for is a **value-producing action**.
 
 Some examples:
 - **For an e-commerce app**: Added item to cart and completed checkout
@@ -102,15 +102,15 @@ Some examples:
 - **For an analytics product**: Sent their first event and created an insight
 - **For a CRM**: Added their first contact and sent an email
 
-Not sure what yours is? Try looking at your retention data – [what do retained users do that churned users don't](product-engineers/customer-retention-metrics)? That should give you a starting point. 
+Not sure what yours is? Try looking at your retention data – [what do retained users do that churned users don't?](product-engineers/customer-retention-metrics) That should give you a starting point. 
 
 Here's [how we figured out our activation metric at PostHog](https://posthog.com/product-engineers/activation-metrics) (spoiler: it took a few iterations).
 
 Pick one. Be opinionated. You can always adjust later.
 
-> 👨‍🍳 *Chef's tip: Don't confuse the appetizer for the main course. Signing up or landing on a dashboard isn't activation. Also, your activation event might change as your product evolves. Revisit it if needed; what predicted retention two years ago might not be the best signal today.*
+> 👨‍🍳 *Chef's tip: Don't confuse the appetizer for the main course; signing up or landing on a dashboard aren't meaningful enough steps to be considered activation, for example. Also, as your product evolves your activation event might change – what predicted retention two years ago might not be the best signal today, so revisit it if needed.*
 
-<CalloutBox icon="IconInfo" title="ou're ready for the next step when...." type="fyi">
+<CalloutBox icon="IconInfo" title="You're ready for the next step when...." type="fyi">
 
 You can complete the sentence: "A user has successfully onboarded when they ____."
 
@@ -136,17 +136,17 @@ A few tips:
 - Set a reasonable conversion window (7 to 14 days is a good starting point).
 
 <details>
-<summary><strong>If using PostHog</strong></summary>
+<summary><strong>If using PostHog...</strong></summary>
 
 Head to [Product Analytics](https://app.posthog.com/insights) → **New insight** → [**Funnel**](https://posthog.com/docs/product-analytics/funnels). If you have [autocapture](https://posthog.com/docs/product-analytics/autocapture) enabled, many of these events may already be tracked for you; check your [activity](https://app.posthog.com/events) to see what's coming in.
 
 </details>
 
-> 👨‍🍳 *Chef's tip: Start with your core flow. Once it's optimized, create separate funnels for specific segments (by plan, referral source, etc.). Don't forget to name your funnel something specific (e.g., "Self-serve onboarding Q1 2025") so future-you knows what it's measuring when you have 47 funnels.*
+> 👨‍🍳 *Chef's tip: Start with your core flow. Once it's optimized, create separate funnels for specific segments. Don't forget to name your funnel something specific (e.g., "Self-serve onboarding Q1 2025") so future-you knows what it's measuring when you have 47 funnels.*
 
 <CalloutBox icon="IconInfo" title="You're ready for the next step when...." type="fyi">
 
-Your funnel is prepped: 3–5 steps, ending with your activation event, saved, and ready to collect data.
+Your funnel is prepped, ending with your activation event, saved, and ready to collect data.
 
 </CalloutBox>
 
@@ -190,14 +190,11 @@ If it's a context problem, try segmenting your funnel to find a clearer diagnosi
 - Browser, device, or OS
 - Plan type or pricing tier
 
-<details>
-<summary><strong>If using PostHog</strong></summary>
+**If using PostHog:**
 
 Click on the drop-off number in your funnel to see the actual users who didn't make it. You can save these as a [cohort](https://posthog.com/docs/data/cohorts) for further analysis – useful for targeting with surveys later, or watching their replays in Step 5.
 
 Use [breakdowns](https://posthog.com/docs/product-analytics/funnels#breakdowns) to slice your funnel by user properties, device, or any event property.
-
-</details>
 
 > 👨‍🍳 *Chef's tip: Export your cohort of dropped-off users. They're useful for more than just replays – you can target them with win-back marketing campaigns or surveys later.*
 
@@ -222,16 +219,13 @@ Watch 10–15 recordings. You're looking for patterns:
 
 If recordings are looking wildly different from one user to the next, go back to Step 4 and segment further; you're probably mixing multiple problems together. 
 
-<details>
-<summary><strong>If using PostHog</strong></summary>
+**If using PostHog**
 
-**Fastest way:** Click directly on the drop-off in your funnel – PostHog will pull up recordings for those users automatically. (This is one of the nice things about having replay and analytics in one tool!)
+- Fastest way: Click directly on the drop-off in your funnel – PostHog will pull up recordings for those users automatically. (This is one of the nice things about having replay and analytics in one tool!)
 
-**Manual way:** In [Session Replay](https://app.posthog.com/replay), click **Show filters** → **Filter for events or actions** → select the last event users completed before dropping off. ([Session replay filtering guide](https://posthog.com/tutorials/filter-session-recordings))
+- Manual way: In [Session Replay](https://app.posthog.com/replay), click **Show filters** → **Filter for events or actions** → select the last event users completed before dropping off. ([Session replay filtering guide](https://posthog.com/tutorials/filter-session-recordings))
 
 If you saved a cohort in Step 4, you can filter replays by that cohort directly.
-
-</details>
 
 > 👨‍🍳 *Chef's tip: Don't just watch drop-offs. Sometimes successful users struggled through the same friction – they just pushed through anyway. Watch both to taste the difference.*
 
@@ -263,16 +257,13 @@ Survey users who did complete onboarding to understand what almost stopped them:
 
 Trigger this right after your activation event fires; they'll remember while it's fresh.
 
-<details>
-<summary><strong>If using PostHog</strong></summary>
+**If using PostHog...**
 
 Go to [Surveys](https://app.posthog.com/surveys) → [**New survey**](https://posthog.com/docs/surveys/creating-surveys).
 
 You can set display conditions based on URL, user properties, or events. For the completion survey, trigger it when your activation event fires.
 
 > 👨‍🍳 *Chef's tip: Keep surveys short. One or two open-ended questions max. Users will give you more when you ask for less. Also, remember survey responses are seasoning, not the main dish; it's okay to just have a handful of responses. A few strong signals beat hundreds of vague ones.*
-
-</details>
 
 <CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
 
@@ -323,16 +314,13 @@ Want statistical proof it worked? [Run an A/B experiment](https://posthog.com/pr
 
 While step isn't mandatory, [it helps avoid "we think this worked" decisions](https://posthog.com/newsletter/what-we've-learned-about-ab-testing).
 
-<details>
-<summary><strong>If using PostHog</strong></summary>
+** If using PostHog...**
 
 Use [feature flags](https://posthog.com/docs/feature-flags) to roll out your fix to a percentage of users first.
 
 To run an experiment, go to [Experiments](https://app.posthog.com/experiments) → [**New experiment**](https://posthog.com/docs/experiments/creating-an-experiment). Use your feature flag as the basis – PostHog will split users into control and test groups and track your funnel as the goal metric.
 
 > 👨‍🍳 *Chef's tip: If you're nervous about a big change, start at 5% rollout. You can always ramp up, but you can't un-serve a burnt dish. Also, not every fix needs a full experiment – but if it's a big change, or you need to convince stakeholders, statistical proof is worth the extra time.*
-
-</details>
 
 <CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
 
@@ -354,20 +342,22 @@ Things to check:
 - Did drop-off move to a different step?
 - Do replays show smoother behavior?
 
-<details>
-<summary><strong>If using PostHog</strong></summary>
+**If using PostHog...**
 
 Set your funnel's Graph type to Historical trends to see conversion over time.
 
 If you used a feature flag or experiment, check the results in [Experiments](https://app.posthog.com/experiments) to see the impact with statistical significance.
 
-</details>
+> 👨‍🍳 *Chef's tip: Screenshot your before/after funnels. They make great artifacts for retros, stakeholder updates, and convincing your team that this stuff actually works.*
 
-If it worked: **congrats, you've improved activation!**
+
+<CalloutBox icon="IconInfo" title="You're done when..." type="fyi">
+
+Your fix worked. If so, **congrats, you've improved activation!**
 
 If it didn't, that's okay. Go back to Step 4 with a new hypothesis. Onboarding optimization is iterative, you're rarely done after one fix.
 
-> 👨‍🍳 *Chef's tip: Screenshot your before/after funnels. They make great artifacts for retros, stakeholder updates, and convincing your team that this stuff actually works.*
+</CalloutBox>
 
 ---
 
@@ -376,17 +366,17 @@ If it didn't, that's okay. Go back to Step 4 with a new hypothesis. Onboarding o
 <details>
 <summary><strong>What is onboarding drop-off?</strong></summary>
 
-Onboarding drop-off is when users start your onboarding flow but leave before completing it. They signed up and showed intent, but never reached the point where they experienced real value from your product (your activation event).
+**Onboarding drop-off **is when users start your onboarding flow but leave before completing it. They signed up and showed intent, but never reached the point where they experienced real value from your product (your activation event).
 
-Onboarding drop-off is not the same as churn – these users never really started using your product in the first place.
+Onboarding drop-off is [not the same as churn](tutorials/churn-rate) – these users never really started using your product in the first place.
 </details>
 
 <details>
 <summary><strong>What’s the difference between onboarding drop-off and churn?</strong></summary>
 
-Onboarding drop-off happens before users get value. They never activate.
+**Onboarding drop-off** happens before users get value. They never activate.
 
-Churn happens after activation. Users got value, used the product for some time, and then stopped.
+**Churn** happens after activation. Users got value, used the product for some time, and then stopped.
 
 Drop-off is usually caused by UX friction or broken flows. Churn is more often driven by value, habit, pricing, or competition.
 </details>
@@ -402,7 +392,6 @@ The most common causes are:
 - Required steps that don’t feel required  
 - Onboarding that takes too long to complete  
 
-Most onboarding drop-off is friction, not rejection.
 </details>
 
 <details>
@@ -420,7 +409,7 @@ More important than benchmarks is tracking your own completion rate over time an
 
 Optimizing the wrong metric.
 
-Teams often track signups, pageviews, or dashboard loads instead of the action that actually predicts retention. If your activation event is wrong, everything downstream will be misleading.
+Teams often track signups, pageviews, or dashboard loads instead of the action that actually predicts retention. **If your activation event is wrong, everything downstream will be misleading.**
 </details>
 
 <details>
@@ -437,8 +426,8 @@ Roll out changes gradually so you can measure impact and roll back if needed.
 <summary><strong>What tools do I need to track and fix onboarding drop-offs?</strong></summary>
 
 At a minimum, you need:
-- **Product analytics** to build funnels and see where users drop off  
-- **Session replay** to understand what users were doing before they left  
+- [**Product analytics**](blog/best-open-source-analytics-tools) to build funnels and see where users drop off  
+- [**Session replay**](blog/best-session-replay-tools) to understand what users were doing before they left  
 
 You can assemble this with separate tools (for example, analytics, replay, feature flags, and experiments), but that usually means more setup, more context switching, and slower iteration.
 
@@ -461,13 +450,13 @@ A unified stack makes it much easier to move from “where users drop off” to 
 
 Most teams piece this workflow together across 3–4 different tools: analytics in one place, replays in another, surveys or feature flags somewhere else. It works, but it's slow and you lose context switching between tabs.
 
-With PostHog, everything's connected in one place:
-- Funnels show you where users drop off
-- Breakdowns show you who's struggling
-- Session replay shows you why
-- Surveys tell you what users were thinking
-- Feature flags let you ship fixes safely
-- Experiments confirm whether the fix actually worked
+With PostHog, [everything's connected in one place](/products):
+- **Funnels** show you where users drop off
+- **Breakdowns** show you who's struggling
+- **Session replay** shows you why
+- **Surveys** tell you what users were thinking
+- **Feature flags** let you ship fixes safely
+- **Experiments** confirm whether the fix actually worked
 
 [Get started free](https://app.posthog.com/signup) with 1M events, 5K recordings, and 1M feature flag requests free every month!
 
