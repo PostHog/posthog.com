@@ -4872,8 +4872,8 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'FAQ',
-                    url: '/docs/revenue-analytics/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/revenue-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,

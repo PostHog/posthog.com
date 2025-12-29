@@ -1693,7 +1693,11 @@
         { "source": "/docs/feature-flags/common-questions", "destination": "/docs/feature-flags/troubleshooting" },
         { "source": "/docs/experiments/common-questions", "destination": "/docs/experiments/troubleshooting" },
         { "source": "/docs/cdp/common-questions", "destination": "/docs/cdp/troubleshooting" },
-        { "source": "/docs/data-warehouse/common-questions", "destination": "/docs/data-warehouse/troubleshooting" }
+        { "source": "/docs/data-warehouse/common-questions", "destination": "/docs/data-warehouse/troubleshooting" },
+        {
+            "source": "/docs/revenue-analytics/common-questions",
+            "destination": "/docs/revenue-analytics/troubleshooting"
+        }
     ],
     "headers": [
         {
