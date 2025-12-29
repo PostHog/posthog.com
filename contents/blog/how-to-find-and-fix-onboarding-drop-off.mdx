@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
-    - posthog-team
+    - natalia-amorim
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/Chat_GPT_Image_Dec_24_2025_02_56_33_PM_7c1d449f89.png
 featuredImageType: full
@@ -20,7 +20,6 @@ seo:
 ---
 
 *A PostHog recipe for people whose users keep leaving the table.*
-
 | | |
 |---|---|
 | **Prep time** | ~30 minutes setup, ~1 week of data |
@@ -29,11 +28,11 @@ seo:
 | **Best for** | Product engineers, technical founders, growth teams |
 | **Outcome** | Identify where users drop off during onboarding, why it happens, and what to fix first. |
 
-[Jump to recipe](#step-1-establish-the-finish-line)
+[Jump to recipe](#step-1-prep-the-finish-line)
 
 ---
 
-Seeing a spike in users leaving your onboarding flow can be discouraging, but **here's the good news:** [It doesn't mean your product sucks](https://posthog.com/founders/product-market-fit-game) (phew!)
+Seeing a spike in users leaving your onboarding flow can be discouraging, but **here's the good news:** [it doesn't mean your product sucks](https://posthog.com/founders/product-market-fit-game) (phew!)
 
 Onboarding drop-offs are usually an indication of friction, not rejection. Users don't rage-quit because they hate your product, they quit because something didn't make sense, didn't work, or asked for too much too soon.
 
@@ -42,6 +41,8 @@ Onboarding drop-offs are usually an indication of friction, not rejection. Users
 **Even better news**: onboarding friction is measurable, debuggable, and fixable.
 
 This recipe shows you how to find where users drop off during onboarding and, more importantly, how to fix it
+
+---
 
 ## What you'll need
 
@@ -73,7 +74,7 @@ You don't need a massive stack for this recipe.
 ### Before you start
 
 You'll need:
-- **A clear definition of what "successful onboarding" looks like*8. This is [your activation event](https://posthog.com/newsletter/wtf-is-activation) – the moment a user has gotten enough value to stick around (more on this below).
+- **A clear definition of what "successful onboarding" looks like**. This is [your activation event](https://posthog.com/newsletter/wtf-is-activation) – the moment a user has gotten enough value to stick around (more on this below).
 - **At least a few hundred users going through your flow**. You need enough data to spot patterns. If you're at an earlier stage, you can still follow this recipe; just watch more replays and lean harder on qualitative signals until your numbers catch up.
 
 <details>
@@ -84,6 +85,8 @@ PostHog installed in your product and receiving data. If you haven't set this up
 Identified users (*not required, but nice to have*). If you're calling [`posthog.identify()`](https://posthog.com/docs/product-analytics/identify) when users sign up or log in, you'll be able to track them across sessions and devices. This makes your funnel data much more reliable.
 
 </details>
+
+---
 
 ## Step 1: Prep the finish line
 
@@ -101,6 +104,8 @@ Some examples:
 Not sure what yours is? Try looking at your [retention data](https://posthog.com/docs/product-analytics/retention) – what do retained users do that churned users don't? That should give you a starting point. Here's [how we figured out our activation metric at PostHog](https://posthog.com/product-engineers/activation-metrics) (spoiler: it took a few iterations).
 
 Pick one. Be opinionated. You can always adjust later.
+
+---
 
 ## Step 2: Build a funnel
 
@@ -126,6 +131,8 @@ Head to [Product Analytics](https://app.posthog.com/insights) → **New insight*
 
 </details>
 
+---
+
 ## Step 3: Let it simmer
 
 Save your funnel and let data collect for at least a week. You need enough users going through the flow to see meaningful patterns; looking too early is how you end up "fixing" problems that don't exist.
@@ -139,6 +146,8 @@ While you wait, you can:
 - [Prep an exit survey for later](https://posthog.com/docs/surveys/creating-surveys) (we'll use it in Step 6)
 
 When you can throw the data at the wall and it starts sticking, you're ready for the next step.
+
+---
 
 ## Step 4: Find the leak
 
@@ -165,11 +174,11 @@ Use [breakdowns](https://posthog.com/docs/product-analytics/funnels#breakdowns) 
 
 </details>
 
----
-
 By the end of this step, you should be able to say: "Users drop off most at *[this step]*" and "It affects *[these users]* more than others." If you can't say both, don't move on yet.
 
 If you do, you're ready for the fun part: watching what actually happens.
+
+---
 
 ## Step 5: Watch the replays
 
@@ -196,6 +205,8 @@ If you saved a cohort in Step 4, you can filter replays by that cohort directly.
 </details>
 
 By the end of Step 5, you should be able to say "Users drop off here because *[this thing]* keeps happening."
+
+---
 
 ## Step 6: Fold in survey data *(optional, but recommended)*
 
@@ -226,6 +237,8 @@ You can set display conditions based on URL, user properties, or events. For the
 
 </details>
 
+---
+
 ## Step 7: Form a hypothesis and ship a fix
 
 By now you should have:
@@ -242,6 +255,8 @@ Some common fixes:
 - **Reorder the flow** – maybe you're asking for too much too soon
 
 Make one change at a time. If you change five things, you won't know what helped.
+
+---
 
 ## Step 8: Taste before serving *(optional, but recommended)*
 
@@ -268,6 +283,8 @@ To run an experiment, go to [Experiments](https://app.posthog.com/experiments) �
 
 </details>
 
+---
+
 ## Step 9: Measure the improvement
 
 After your fix has been live for a bit:
@@ -293,7 +310,9 @@ If you used a feature flag or experiment, check the results in [Experiments](htt
 
 </details>
 
-## Chef's notes
+---
+
+### Chef's notes
 
 **On sample size:** Don't make decisions based on 50 users. Wait for statistical significance, or at least a few hundred users through each step.
 
@@ -303,7 +322,9 @@ If you used a feature flag or experiment, check the results in [Experiments](htt
 
 **On iteration:** Most teams don't nail this on the first try. That's fine. The goal is to get a little better each cycle.
 
-## Why this recipe works especially well with PostHog
+---
+
+### Why this recipe works especially well with PostHog
 
 Most teams piece this workflow together across 3–4 different tools: analytics in one place, replays in another, surveys or feature flags somewhere else. It works, but it's slow and you lose context switching between tabs.
 
@@ -319,7 +340,9 @@ With PostHog, everything's connected in one place:
 
 <ArrayCTA />
 
-## Pairs well with
+---
+
+### Pairs well with
 
 - [The AARRR pirate funnel explained](https://posthog.com/product-engineers/aarrr-pirate-funnel)
 - [10 things we've learned about A/B testing](https://newsletter.posthog.com/p/10-things-weve-learned-about-ab-testing)
@@ -329,7 +352,7 @@ With PostHog, everything's connected in one place:
 
 ---
 
-## Did you make this recipe?
+### Did you make this recipe?
 
 Share your before-and-after funnel in the comments below.
 
