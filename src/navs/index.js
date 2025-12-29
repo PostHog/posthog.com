@@ -840,6 +840,24 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'SDKs',
+                url: '/handbook/engineering/sdks',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/engineering/sdks',
+                    },
+                    {
+                        name: 'Support rotation',
+                        url: '/handbook/engineering/sdks/support-rotation',
+                    },
+                    {
+                        name: 'Releases',
+                        url: '/handbook/engineering/sdks/releases',
+                    },
+                ],
+            },
+            {
                 name: 'PostHog AI',
                 url: '',
                 children: [
