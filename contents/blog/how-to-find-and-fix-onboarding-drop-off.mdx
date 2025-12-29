@@ -105,7 +105,7 @@ Here's [how we figured out our activation metric at PostHog](/product-engineers/
 
 Pick one. Be opinionated. You can always adjust later.
 
-> 👨‍🍳 *Chef's tip: Don't confuse the appetizer for the main course; signing up or landing on a dashboard aren't meaningful enough steps to be considered activation, for example. Also, as your product evolves your activation event might change – what predicted retention two years ago might not be the best signal today, so revisit it if needed.*
+> 👨‍🍳 *Chef's tip: Don't confuse the appetizer for the main course; signing up or landing on a dashboard aren't meaningful enough steps to be considered activations, for example. Also, as your product evolves your activation event might change – what predicted retention two years ago might not be the best signal today, so revisit it if needed.*
 
 <CalloutBox icon="IconInfo" title="You're ready for the next step when...." type="fyi">
 
@@ -132,7 +132,7 @@ A few tips:
 - Use sequential order (the default) so users must complete steps in the order you've defined.
 - Set a reasonable conversion window (7 to 14 days is a good starting point).
 
-**If using PostHog...**
+**If using PostHog:**
 
 Head to [Product Analytics](https://app.posthog.com/insights) → **New insight** → [**Funnel**](/docs/product-analytics/funnels). If you have [autocapture](/docs/product-analytics/autocapture) enabled, many of these events may already be tracked for you; check your [activity](https://app.posthog.com/events) to see what's coming in.
 
@@ -213,7 +213,7 @@ Watch 10–15 recordings. You're looking for patterns:
 
 If recordings are looking wildly different from one user to the next, go back to Step 4 and segment further; you're probably mixing multiple problems together. 
 
-**If using PostHog...**
+**If using PostHog:**
 
 - Fastest way: Click directly on the drop-off in your funnel – PostHog will pull up recordings for those users automatically. (This is one of the nice things about having replay and analytics in one tool!)
 
@@ -251,7 +251,7 @@ Survey users who did complete onboarding to understand what almost stopped them:
 
 Trigger this right after your activation event fires; they'll remember while it's fresh.
 
-**If using PostHog...**
+**If using PostHog:**
 
 Go to [Surveys](https://app.posthog.com/surveys) → [**New survey**](/docs/surveys/creating-surveys).
 
@@ -308,7 +308,7 @@ Want statistical proof it worked? [Run an A/B experiment](/product-engineers/how
 
 While step isn't mandatory, [it helps avoid "we think this worked" decisions](/newsletter/what-we've-learned-about-ab-testing).
 
-**If using PostHog...**
+**If using PostHog:**
 
 Use [feature flags](/docs/feature-flags) to roll out your fix to a percentage of users first.
 
@@ -336,7 +336,7 @@ Things to check:
 - Did drop-off move to a different step?
 - Do replays show smoother behavior?
 
-**If using PostHog...**
+**If using PostHog:**
 
 Set your funnel's Graph type to Historical trends to see conversion over time.
 
