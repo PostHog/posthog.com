@@ -4965,7 +4965,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'AI',
+                    name: 'PostHog AI',
                 },
                 {
                     name: 'Configure dashboard with AI',
@@ -4978,8 +4978,8 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'FAQ',
-                    url: '/docs/customer-analytics/faq',
+                    name: 'Troubleshooting',
+                    url: '/docs/customer-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,
