@@ -5171,7 +5171,7 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/workflows/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
