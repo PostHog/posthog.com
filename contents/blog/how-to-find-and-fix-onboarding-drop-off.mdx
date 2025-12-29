@@ -66,14 +66,11 @@ You'll also need:
 - **A clear definition of what "successful onboarding" looks like**. This is [your activation event](/newsletter/wtf-is-activation) – the moment a user has gotten enough value to stick around (more on this below).
 - **At least a few hundred users going through your flow**. You need enough data to spot patterns. If you're at an earlier stage, you can still follow this recipe; just watch more replays and lean harder on qualitative signals until your numbers catch up.
 
-<details>
-<summary><strong>If using PostHog...</strong></summary>
+**Want to cook with PostHog? Great choice!**
 
-You'll need it installed in your product and receiving data. If you haven't set this up yet, [start here](/docs/getting-started/install). Make sure you're capturing the key events in your onboarding flow (signups, form completions, button clicks, etc.). If you have autocapture enabled, you're probably already covered.
+If you haven't set it up yet, [start here](/docs/getting-started/install). Make sure you're capturing the key events in your onboarding flow (signups, form completions, button clicks, etc.). If you have autocapture enabled, you're probably already covered.
 
 We highly recommend calling [`posthog.identify()`](/docs/product-analytics/identify) when users sign up or log in; you'll be able to track them across sessions and devices, which makes your funnel data much more reliable.
-
-</details>
 
 ### Substitutions
 
@@ -135,7 +132,7 @@ A few tips:
 - Use sequential order (the default) so users must complete steps in the order you've defined.
 - Set a reasonable conversion window (7 to 14 days is a good starting point).
 
-If using PostHog...
+**If using PostHog...**
 
 Head to [Product Analytics](https://app.posthog.com/insights) → **New insight** → [**Funnel**](/docs/product-analytics/funnels). If you have [autocapture](/docs/product-analytics/autocapture) enabled, many of these events may already be tracked for you; check your [activity](https://app.posthog.com/events) to see what's coming in.
 
@@ -357,6 +354,24 @@ If it didn't, that's okay. Go back to Step 4 with a new hypothesis. Onboarding o
 
 ---
 
+### Why this recipe works especially well with PostHog
+
+Most teams piece this workflow together across 3–4 different tools: analytics in one place, replays in another, surveys or feature flags somewhere else. It works, but it's slow and you lose context switching between tabs.
+
+With PostHog, [everything's connected in one place](/products):
+- **Funnels** show you where users drop off
+- **Breakdowns** show you who's struggling
+- **Session replay** shows you why
+- **Surveys** tell you what users were thinking
+- **Feature flags** let you ship fixes safely
+- **Experiments** confirm whether the fix actually worked
+
+[Get started free](https://app.posthog.com/signup) with 1M events, 5K recordings, and 1M feature flag requests free every month!
+
+<ArrayCTA />
+
+---
+
 ### FAQ
 
 <details>
@@ -439,24 +454,6 @@ Most teams end up stitching together funnels, replays, surveys, and experiments 
 
 A unified stack makes it much easier to move from “where users drop off” to “why” to “did this fix work?”
 </details>
-
----
-
-### Why this recipe works especially well with PostHog
-
-Most teams piece this workflow together across 3–4 different tools: analytics in one place, replays in another, surveys or feature flags somewhere else. It works, but it's slow and you lose context switching between tabs.
-
-With PostHog, [everything's connected in one place](/products):
-- **Funnels** show you where users drop off
-- **Breakdowns** show you who's struggling
-- **Session replay** shows you why
-- **Surveys** tell you what users were thinking
-- **Feature flags** let you ship fixes safely
-- **Experiments** confirm whether the fix actually worked
-
-[Get started free](https://app.posthog.com/signup) with 1M events, 5K recordings, and 1M feature flag requests free every month!
-
-<ArrayCTA />
 
 ---
 
