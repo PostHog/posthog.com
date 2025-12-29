@@ -3343,6 +3343,16 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/web-analytics/marketing-analytics',
+                        },
+                        {
+                            name: 'Column definitions',
+                            url: '/docs/web-analytics/marketing-analytics-schema',
+                        },
+                    ],
                 },
                 {
                     name: 'FAQ',
@@ -3415,12 +3425,6 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                     featured: true,
-                },
-                {
-                    name: 'Cutting costs',
-                    url: '/docs/session-replay/cutting-costs',
-                    icon: 'IconPiggyBank',
-                    color: 'yellow',
                 },
                 {
                     type: 'divider',
@@ -4027,6 +4031,14 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-mappings/android',
                         },
                         {
+                            name: 'Rollup',
+                            url: '/docs/error-tracking/upload-source-maps/rollup',
+                        },
+                        {
+                            name: 'Webpack',
+                            url: '/docs/error-tracking/upload-source-maps/webpack',
+                        },
+                        {
                             name: 'CLI',
                             url: '/docs/error-tracking/upload-source-maps/cli',
                         },
@@ -4193,7 +4205,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/error-tracking/common-questions',
                     icon: 'IconQuestion',
                     color: 'purple',
@@ -4869,6 +4881,112 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Customer Analytics',
+            icon: 'IconPeople',
+            color: '[#FF6B6B]',
+            url: '/docs/customer-analytics',
+            description:
+                'Understand your customers to build products that solve real problems and achieve product-market fit.',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
+            children: [
+                {
+                    name: 'Customer Analytics',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/customer-analytics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                    featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/customer-analytics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Dashboard metrics',
+                    featured: true,
+                    url: '/docs/customer-analytics/dashboard-metrics',
+                    icon: 'IconBolt',
+                    color: 'orange',
+                },
+                {
+                    name: 'B2B mode',
+                    featured: true,
+                    url: '/docs/customer-analytics/b2b-mode',
+                    icon: 'IconCohort',
+                    color: 'red',
+                },
+                {
+                    name: 'Usage metrics',
+                    url: '/docs/customer-analytics/usage-metrics',
+                    icon: 'IconTrends',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Customer profiles',
+                    url: '/docs/customer-analytics/customer-profiles',
+                    icon: 'IconPerson',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Configure your dashboard',
+                    url: '/docs/customer-analytics/configure-your-dashboard',
+                    icon: 'IconDashboard',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Create usage metrics',
+                    url: '/docs/customer-analytics/create-usage-metrics',
+                    icon: 'IconG',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'AI',
+                },
+                {
+                    name: 'Configure dashboard with AI',
+                    url: '/docs/customer-analytics/configure-dashboard-with-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/customer-analytics/faq',
+                    icon: 'IconQuestion',
+                    color: 'blue',
+                    featured: true,
+                },
+            ],
+        },
+        {
             name: 'PostHog AI',
             icon: 'IconSparkles',
             color: 'blue',
@@ -5042,6 +5160,12 @@ export const docsMenu = {
                     url: '/docs/workflows/import-customerio-optouts',
                     icon: 'IconDatabase',
                     color: 'blue',
+                },
+                {
+                    name: 'Best practices',
+                    url: '/docs/workflows/best-practices',
+                    icon: 'IconStar',
+                    color: 'red',
                 },
                 {
                     name: 'Resources',
