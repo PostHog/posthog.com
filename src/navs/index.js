@@ -411,8 +411,8 @@ export const dataPipelines = {
         },
 
         {
-            name: 'Troubleshooting and FAQs',
-            url: '/docs/cdp/common-questions',
+            name: 'Troubleshooting',
+            url: '/docs/cdp/troubleshooting',
             icon: 'IconQuestion',
             color: 'blue',
             featured: true,
@@ -3086,7 +3086,7 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/product-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'blue',
@@ -3355,8 +3355,8 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'FAQ',
-                    url: '/docs/web-analytics/faq',
+                    name: 'Troubleshooting',
+                    url: '/docs/web-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,
@@ -3414,7 +3414,7 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/session-replay/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
@@ -3550,8 +3550,8 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/feature-flags/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/feature-flags/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'seagreen',
                 },
@@ -3874,8 +3874,8 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/experiments/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/experiments/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'orange',
                     featured: true,
@@ -4147,7 +4147,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'AI',
+                    name: 'PostHog AI',
                 },
                 {
                     name: 'Debugging with MCP',
@@ -4206,7 +4206,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Troubleshooting',
-                    url: '/docs/error-tracking/common-questions',
+                    url: '/docs/error-tracking/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
                     featured: true,
@@ -4263,7 +4263,7 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/surveys/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'seagreen',
@@ -4549,8 +4549,8 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/data-warehouse/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/data-warehouse/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'green',
                 },
@@ -4719,7 +4719,7 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/llm-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
@@ -4872,8 +4872,8 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'FAQ',
-                    url: '/docs/revenue-analytics/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/revenue-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,
@@ -4965,7 +4965,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'AI',
+                    name: 'PostHog AI',
                 },
                 {
                     name: 'Configure dashboard with AI',
@@ -4978,8 +4978,8 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'FAQ',
-                    url: '/docs/customer-analytics/faq',
+                    name: 'Troubleshooting',
+                    url: '/docs/customer-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,
@@ -5171,7 +5171,7 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/workflows/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
@@ -5230,7 +5230,7 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/logs/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',

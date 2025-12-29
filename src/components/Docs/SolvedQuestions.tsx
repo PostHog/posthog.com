@@ -52,14 +52,22 @@ export default function SolvedQuestions({
     const isLoading = isPinnedLoading || isRecentLoading
 
     const questions = React.useMemo(() => {
-        // Show pinned questions
-        if (pinnedQuestions.length > 0) {
-            return { data: pinnedData?.data || [] }
-        }
-
-        // If no questions are pinned, show recent solved posts up to a defined limit (set limit to max 5)
+        const pinned = pinnedData?.data || []
         const recent = recentData?.data || []
-        return { data: recent.slice(0, limit) }
+
+        // Get permalinks of pinned questions to filter duplicates
+        const pinnedPermalinks = new Set(pinnedQuestions)
+
+        // Filter out pinned questions from recent
+        const recentFiltered = recent.filter((q) => !pinnedPermalinks.has(q.attributes.permalink))
+
+        // Calculate how many recent questions we can show after pinned
+        const remainingSlots = Math.max(0, limit - pinned.length)
+
+        // Combine: pinned first, then recent to fill remaining slots
+        const combined = [...pinned, ...recentFiltered.slice(0, remainingSlots)]
+
+        return { data: combined }
     }, [pinnedData, recentData, pinnedQuestions, limit])
 
     if (isLoading) {
@@ -75,14 +83,18 @@ export default function SolvedQuestions({
     }
 
     if (!questions?.data?.length) {
-        return null
+        return (
+            <div className={`bg-accent rounded-md p-6 ${className}`}>
+                <p className="text-secondary m-0">No community questions have been answered for this topic yet.</p>
+            </div>
+        )
     }
 
     return (
         <div className={`bg-accent rounded-md p-6 ${className}`}>
             <p className="mt-0 mb-4">
-                These questions were asked and answered by the PostHog community. Browse them for real-world solutions
-                to common issues.
+                These {topicLabel} questions were asked and answered by the PostHog community. Browse them for
+                real-world solutions to common issues.
             </p>
             <ul className="list-none m-0 p-0 space-y-4">
                 {questions.data.map((question) => {
