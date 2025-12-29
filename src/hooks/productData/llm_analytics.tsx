@@ -56,7 +56,7 @@ export const llmAnalytics = {
             'Monitor and optimize AI products with LLM Analytics. Get full observability across every conversation. See model performance, cost, and errors.',
     },
     overview: {
-        title: 'Monitor and debug your AI products',
+        title: 'Ship better AI products, faster',
         description: 'Analyze traces, spans, per-user costs, latency, and usage of your AI features',
         textColor: 'text-white',
         layout: 'overlay',
@@ -98,7 +98,12 @@ export const llmAnalytics = {
         lovable: {
             headline: 'compared us to every other observability tool, just to be sure',
             description:
-                "If you're building a new product, just use PostHog.It's a no-brainer. It's the only all-in -one platform like it for developers.",
+                "If you're building a new product, just use PostHog. It's a no-brainer. It's the only all-in-one platform like it for developers.",
+        },
+        posthog: {
+            headline: 'uses LLM analytics to monitor the usage and performance of PostHog AI',
+            description:
+                'We use our own AI observability product to attribute costs, monitor latency and errors, compare models, and iterate on prompts in production.',
         },
     },
     features: [
@@ -437,6 +442,10 @@ export const llmAnalytics = {
                 name: 'Helicone',
                 key: 'helicone',
                 // link: '/blog/posthog-vs-helicone',
+            },
+            {
+                name: 'Braintrust',
+                key: 'braintrust',
             },
             {
                 name: 'PostHog',

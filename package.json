@@ -270,7 +270,7 @@
         "*.{js,ts,tsx}": "eslint",
         "*.{md,mdx}": "markdownlint-cli2 --fix"
     },
-    "packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b",
+    "packageManager": "pnpm@10.26.2+sha512.0e308ff2005fc7410366f154f625f6631ab2b16b1d2e70238444dd6ae9d630a8482d92a451144debc492416896ed16f7b114a86ec68b8404b2443869e68ffda6",
     "pnpm": {
         "onlyBuiltDependencies": [
             "@parcel/watcher",

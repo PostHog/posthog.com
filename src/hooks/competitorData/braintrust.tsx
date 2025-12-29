@@ -1,20 +1,21 @@
-export const langsmith = {
-    name: 'Langsmith',
+export const braintrust = {
+    name: 'Braintrust',
     products: {
         llm_analytics: {
             available: true,
             features: {
                 generation_tracking: true,
                 latency_tracking: true,
-                cost_tracking: false,
+                cost_tracking: true,
                 trace_visualization: true,
                 token_tracking: true,
                 prompt_playground: true,
                 prompt_evaluations: true,
                 alerting: true,
                 error_tracking: true,
-                clustering: false,
+                byok: true,
                 system_prompts: true,
+                clustering: false,
                 trace_summarization: true,
                 llm_translation: false,
             },

@@ -6,6 +6,7 @@ import { SlideContainer } from './SlidesTemplate'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { useCustomers } from 'hooks/useCustomers'
 
 interface Customer {
     slug: string
@@ -32,6 +33,62 @@ interface CustomersSlideProps {
 }
 
 export default function CustomersSlide({ productName, customers, customerData, hasCaseStudy }: CustomersSlideProps) {
+    const { customers: allCustomers } = useCustomers()
+
+    // Get 5 AI product engineer customers
+    const aiEngineerSlugs = ['11x', 'grantable', 'hostai', 'juicebox', 'zealot']
+    const aiEngineers = aiEngineerSlugs.map((slug) => allCustomers[slug]).filter(Boolean)
+
+    // Helper function to render a small customer logo
+    const renderSmallLogo = (customer: (typeof allCustomers)[string]) => {
+        if (!customer) return null
+
+        // Handle legacy logo format (URLs) - check if property exists
+        const customerWithLegacy = customer as typeof customer & { legacyLogo?: string; legacyLogoDark?: string }
+        if (customerWithLegacy.legacyLogo) {
+            return (
+                <>
+                    <img
+                        src={customerWithLegacy.legacyLogo}
+                        alt={customer.name}
+                        className="h-8 w-auto object-contain dark:hidden"
+                    />
+                    <img
+                        src={customerWithLegacy.legacyLogoDark || customerWithLegacy.legacyLogo}
+                        alt={customer.name}
+                        className="h-8 w-auto object-contain hidden dark:block"
+                    />
+                </>
+            )
+        }
+
+        // Check if logo is a React component (single SVG format)
+        if (customer.logo && typeof customer.logo === 'function') {
+            const LogoComponent = customer.logo
+            return <LogoComponent className="h-8 w-auto fill-current object-contain" />
+        }
+
+        // Otherwise, it's the existing light/dark object format
+        if (customer.logo && typeof customer.logo === 'object' && 'light' in customer.logo) {
+            return (
+                <>
+                    <img
+                        src={customer.logo.light}
+                        alt={customer.name}
+                        className="h-8 w-auto object-contain dark:hidden"
+                    />
+                    <img
+                        src={customer.logo.dark}
+                        alt={customer.name}
+                        className="h-8 w-auto object-contain hidden dark:block"
+                    />
+                </>
+            )
+        }
+
+        return null
+    }
+
     // Create table structure for customers
     const customerTableColumns = [
         { name: '', width: 'minmax(auto,80px)', align: 'center' as const },
@@ -203,6 +260,20 @@ export default function CustomersSlide({ productName, customers, customerData, h
                                 </div>
                             )
                         })}
+
+                    {/* AI Product Engineers Section - Mobile - Only for LLM Analytics */}
+                    {productName === 'LLM Analytics' && (
+                        <div className="mt-8 text-center">
+                            <p className="text-lg text-secondary mb-4">and AI product engineers at...</p>
+                            <div className="grid grid-cols-5 gap-4">
+                                {aiEngineers.map((customer) => (
+                                    <div key={customer.slug} className="flex items-center justify-center">
+                                        {renderSmallLogo(customer)}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 <div className="hidden @2xl:block">
@@ -213,6 +284,20 @@ export default function CustomersSlide({ productName, customers, customerData, h
                         width="full"
                     />
                 </div>
+
+                {/* AI Product Engineers Section - Only for LLM Analytics */}
+                {productName === 'LLM Analytics' && (
+                    <div className="mt-8 text-center">
+                        <p className="text-lg text-secondary mb-4">and AI product engineers at...</p>
+                        <div className="grid grid-cols-5 gap-4">
+                            {aiEngineers.map((customer) => (
+                                <div key={customer.slug} className="flex items-center justify-center">
+                                    {renderSmallLogo(customer)}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </ScrollArea>
         </SlideContainer>
     )
