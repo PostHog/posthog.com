@@ -5230,7 +5230,7 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/logs/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
