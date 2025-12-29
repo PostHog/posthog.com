@@ -323,6 +323,91 @@ If it didn't, that's okay. Go back to Step 4 with a new hypothesis. Onboarding o
 
 **On iteration:** Most teams don't nail this on the first try. That's fine. The goal is to get a little better each cycle.
 
+**FAQ**
+
+<details>
+<summary><strong>What is onboarding drop-off?</strong></summary>
+
+Onboarding drop-off is when users start your onboarding flow but leave before completing it. They signed up and showed intent, but never reached the point where they experienced real value from your product (your activation event).
+
+Onboarding drop-off is not the same as churn – these users never really started using your product in the first place.
+</details>
+
+<details>
+<summary><strong>What’s the difference between onboarding drop-off and churn?</strong></summary>
+
+Onboarding drop-off happens before users get value. They never activate.
+
+Churn happens after activation. Users got value, used the product for some time, and then stopped.
+
+Drop-off is usually caused by UX friction or broken flows. Churn is more often driven by value, habit, pricing, or competition.
+</details>
+
+<details>
+<summary><strong>What causes users to drop off during onboarding?</strong></summary>
+
+The most common causes are:
+- Asking for too much information too soon  
+- Confusing or unclear UI  
+- Unclear next steps or lack of guidance  
+- Broken flows, errors, or silent failures  
+- Required steps that don’t feel required  
+- Onboarding that takes too long to complete  
+
+Most onboarding drop-off is friction, not rejection.
+</details>
+
+<details>
+<summary><strong>What’s a good onboarding completion rate?</strong></summary>
+
+There’s no universal benchmark.
+
+For self-serve SaaS, **20–40%** onboarding completion is common. Higher-touch products with sales involvement often see higher rates.
+
+More important than benchmarks is tracking your own completion rate over time and improving it incrementally.
+</details>
+
+<details>
+<summary><strong>What’s the biggest mistake teams make with onboarding analytics?</strong></summary>
+
+Optimizing the wrong metric.
+
+Teams often track signups, pageviews, or dashboard loads instead of the action that actually predicts retention. If your activation event is wrong, everything downstream will be misleading.
+</details>
+
+<details>
+<summary><strong>How do I reduce onboarding drop-off?</strong></summary>
+
+Start by diagnosing the problem.
+
+Identify where users drop off, then look at what actually happens at that step. Fix **one thing at a time** by simplifying the flow, adding guidance, removing unnecessary fields, fixing bugs, or reordering steps.
+
+Roll out changes gradually so you can measure impact and roll back if needed.
+</details>
+
+<details>
+<summary><strong>What tools do I need to track and fix onboarding drop-offs?</strong></summary>
+
+At a minimum, you need:
+- **Product analytics** to build funnels and see where users drop off  
+- **Session replay** to understand what users were doing before they left  
+
+You can assemble this with separate tools (for example, analytics, replay, feature flags, and experiments), but that usually means more setup, more context switching, and slower iteration.
+
+Or you can use a unified platform like PostHog to do all of this in one place.
+</details>
+
+<details>
+<summary><strong>Can I do this without a unified analytics tool?</strong></summary>
+
+Yes, but it’s harder.
+
+Most teams end up stitching together funnels, replays, surveys, and experiments across multiple tools, which slows analysis and makes it harder to connect cause and effect.
+
+A unified stack makes it much easier to move from “where users drop off” to “why” to “did this fix work?”
+</details>
+
+
 ---
 
 ### Why this recipe works especially well with PostHog
@@ -355,6 +440,6 @@ With PostHog, everything's connected in one place:
 
 ### Did you make this recipe?
 
-Share your before-and-after funnel in the comments below.
+Share your before-and-after funnel below.
 
 ⭐⭐⭐⭐⭐ "*Finally fixed our onboarding. Down to only 3 existential crises per quarter.*" – Actual user, probably
