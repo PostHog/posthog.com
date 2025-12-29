@@ -1,0 +1,60 @@
+---
+title: Versioning
+---
+
+import EndpointsBetaSnippet from './_snippets/beta.mdx'
+
+<EndpointsBetaSnippet />
+
+Every time you update an endpoint's query, PostHog creates a new version. This gives you a history of changes and lets you run older versions if needed.
+
+## Why versioning exists
+
+Versioning helps you:
+
+- **Safely update queries** - If a change breaks something, you can still access the previous version
+- **Debug issues** - Compare results between versions to understand what changed
+- **Gradual rollouts** - Test a new query version before fully switching over
+
+## How it works
+
+When you save changes to an endpoint's query, PostHog automatically creates a new version. The version number increments (1, 2, 3, etc.) and the previous versions remain accessible.
+
+By default, calling an endpoint runs the **latest version**.
+
+## Running a specific version
+
+To run an older version, pass the `version` parameter as a query string or in the request body:
+
+<MultiLanguage>
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run?version=2"
+```
+
+```python
+import requests
+
+response = requests.get(
+    "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run",
+    headers={"Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"},
+    params={"version": 2}
+)
+```
+
+```node
+const response = await fetch(
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run?version=2",
+  { headers: { "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}" } }
+);
+```
+
+</MultiLanguage>
+
+## Versioning and materialization
+
+Only the **latest version** can be materialized. If you run an older version, it executes directly against the database (inline execution), which may be slower.
+
+If you need fast performance for an older query, consider creating a new endpoint with that query instead.

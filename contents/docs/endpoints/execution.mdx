@@ -1,0 +1,100 @@
+---
+title: Execution
+---
+
+import EndpointsBetaSnippet from './_snippets/beta.mdx'
+
+<EndpointsBetaSnippet />
+
+When you execute an endpoint, PostHog runs your query and returns the results. This page explains what happens under the hood and how to control execution behavior.
+
+## Trying it out
+
+Before integrating an endpoint into your app, use the **Playground** tab on the endpoint's page to experiment. You can test different parameters and see the response format without writing any code.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/placeholder_light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/placeholder_dark.png"
+  alt="Endpoint Playground tab"
+  classes="rounded"
+/>
+
+## Execution modes
+
+PostHog uses one of two execution modes depending on your endpoint configuration:
+
+### Direct execution
+
+Runs the query directly against the database. This is used when:
+
+- Materialization is not enabled
+- You're running an older [version](/docs/endpoints/versioning)
+- You're passing [variables, filters, or query overrides](/docs/endpoints/parameterization)
+- You request a fresh calculation with `refresh: "force_blocking"`
+
+### Materialized execution
+
+Reads from pre-computed results stored in S3. This is faster but only available when:
+
+- [Materialization](/docs/endpoints/materialization) is enabled and complete
+- You're running the latest version
+- No parameter overrides are passed
+- The materialized data is fresh (within the sync interval)
+
+## The refresh parameter
+
+Control whether to use cached results or calculate fresh:
+
+| Value | Behavior |
+|-------|----------|
+| `blocking` (default) | Returns cached results if fresh, otherwise runs the query and waits |
+| `force_blocking` | Always runs a fresh query, ignoring cache |
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"refresh": "force_blocking"}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+## Response format
+
+A successful response (HTTP 200) includes:
+
+```json
+{
+  "results": [
+    ["value1", "value2"],
+    ["value3", "value4"]
+  ],
+  "columns": ["column_a", "column_b"]
+}
+```
+
+- `results` - Array of rows, each row is an array of values
+- `columns` - Column names matching the order of values in each row
+- and a few more fields with additional metadata
+
+When running a specific version, the response also includes:
+
+```json
+{
+  "results": [...],
+  "columns": [...],
+  "endpoint_version": 2,
+  "endpoint_version_created_at": "2024-01-15T10:30:00Z"
+}
+```
+
+## Debugging
+
+Pass `debug: true` in the request body to include additional debugging information in the response:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"debug": true}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```
