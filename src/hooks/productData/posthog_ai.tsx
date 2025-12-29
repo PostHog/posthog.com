@@ -493,7 +493,7 @@ export const posthog_ai = {
             ],
         },
         {
-            label: 'Customer data infrastructure',
+            label: 'PostHog data stack',
         },
         {
             title: 'Data Stack',

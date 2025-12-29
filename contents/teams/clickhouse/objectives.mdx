@@ -12,37 +12,24 @@ Data Team's mission is to provide a storage and query engine that meets these re
 
 In service of this mission, our goals are:
 
-**Goals for Q4 2025:**
+**Goals for Q1 2026:**
 
-## ClickHouse Tooling
+**Resharding (P0)** - _Daniel Escribano_, _Rory Shanks_
+- Reshard US cluster to 8 shards
 
-- **Migrations service (P0)** - _Paweł Szczur_
-    - Make it easy for developers to apply changes to the ClickHouse schema
+**Storage optimizations (P0)** - _Rory Shanks_
+- Tables optimizations (resharding of events_recent, person)
+- Drop unused materialized columns
+- Rewrite `cohortpeople`
+- Track and provide visibility into disk usage cost by team
 
-- **Chargeback (P1)** - _Paweł Szczur, Jovan Sakovic_
-    - Let product teams know about query tagging properly
-    - Reject queries that are not tagged
-    - Proactively notify teams of bad performance
-    - Report top ClickHouse cost per team
+**Data deletion requests (P0)** - _Jovan Sakovic_
+- Enable event deletion from the app based on user-defined predicates (P1)
 
-- **SlopCop (query scheduling) (P1)** - _Jovan Sakovic, Paweł Szczur_
-    - Avoid retrying queries that are already running
-    - Query prioritization
+**Query cost visibility through Chargeback (P1)** - _Pawel Szczur_
+- Continue work on chargeback reporting to track query costs
+- Provide visibility into expensive queries with tooling to help teams debug and optimize them
 
-- **ClickHouse MCP for internal users (P2)** - _James Greenhill_
+**Workload management (P1)** - _Daniel Escribano_
+- Implement quotas and workload management to prioritize application queries
 
-- **ClickHouse Handbook(s) (P1)** - _Jovan Sakovic_
-    - Collab on HQL Handbook
-
-
-## ClickHouse Ops
-
-- **US resharding to 16 shards (P0)** - _Daniel Escribano, James Greenhill_
-
-- **Backup restore procedure (P0)** - _Daniel Escribano_
-    - Automated backup restore procedure
-
-- **ClickHouse security (P1)** - _Daniel Escribano_
-    - More constrained privilege on the users' access to the cluster
-    - Cluster locked down
-    - Audit log of activity on clusters

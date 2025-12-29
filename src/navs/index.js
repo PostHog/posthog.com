@@ -411,8 +411,8 @@ export const dataPipelines = {
         },
 
         {
-            name: 'Troubleshooting and FAQs',
-            url: '/docs/cdp/common-questions',
+            name: 'Troubleshooting',
+            url: '/docs/cdp/troubleshooting',
             icon: 'IconQuestion',
             color: 'blue',
             featured: true,
@@ -635,24 +635,6 @@ export const handbookSidebar = [
                 url: '/handbook/content/brand-message',
             },
             {
-                name: 'Docs',
-                url: '/handbook/content/docs',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/content/docs',
-                    },
-                    {
-                        name: 'Docs ownership',
-                        url: '/handbook/content/docs-ownership',
-                    },
-                    {
-                        name: 'Docs style guide',
-                        url: '/handbook/content/docs-style-guide',
-                    },
-                ],
-            },
-            {
                 name: 'Video',
                 url: '/handbook/growth/marketing/video',
                 children: [
@@ -695,6 +677,50 @@ export const handbookSidebar = [
             {
                 name: 'Writing metadata',
                 url: '/handbook/content/metadata',
+            },
+        ],
+    },
+    {
+        name: 'Docs & wizard',
+        url: '/handbook/content/docs',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/content/docs',
+            },
+            {
+                name: 'Ownership',
+                url: '/handbook/content/docs-ownership',
+            },
+            {
+                name: 'Style guide',
+                url: '/handbook/content/docs-style-guide',
+            },
+            {
+                name: 'Runbook',
+                url: '/handbook/content/runbook',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/content/runbook',
+                    },
+                    {
+                        name: 'Onboarding docs',
+                        url: '/handbook/content/runbook/onboarding-docs',
+                    },
+                    {
+                        name: 'SDK reference docs',
+                        url: '/handbook/content/runbook/sdk-reference-docs',
+                    },
+                    {
+                        name: 'API specification',
+                        url: '/handbook/content/runbook/api-specifications',
+                    },
+                    {
+                        name: 'Developing the wizard',
+                        url: '/handbook/content/runbook/developing-the-wizard',
+                    },
+                ],
             },
         ],
     },
@@ -1516,6 +1542,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/customer-churn-retros',
                     },
                     {
+                        name: 'Risk mitigation and churn prevention',
+                        url: '/handbook/growth/sales/risk-mitigation-and-churn-prevention',
+                    },
+                    {
                         name: 'Historical imports',
                         url: '/handbook/growth/sales/historical-import',
                     },
@@ -1534,6 +1564,10 @@ export const handbookSidebar = [
                     {
                         name: 'New customer onboarding',
                         url: '/handbook/growth/sales/customer-onboarding',
+                    },
+                    {
+                        name: 'Metabase account analysis',
+                        url: '/handbook/onboarding/metabase-account-analysis',
                     },
                 ],
             },
@@ -2038,6 +2072,14 @@ export const docsMenu = {
                             url: '/docs/libraries/rust',
                         },
                         {
+                            name: 'Unity',
+                            url: '/docs/libraries/unity',
+                            badge: {
+                                title: 'Beta',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                            },
+                        },
+                        {
                             name: 'C#/.NET',
                             url: '/docs/libraries/dotnet',
                         },
@@ -2206,6 +2248,10 @@ export const docsMenu = {
                         {
                             name: 'Actions',
                             url: '/docs/api/actions',
+                        },
+                        {
+                            name: 'Alerts',
+                            url: '/docs/api/alerts',
                         },
                         {
                             name: 'Activity log',
@@ -2590,6 +2636,10 @@ export const docsMenu = {
                                     url: '/docs/sql/aggregations',
                                 },
                                 {
+                                    name: 'Optimizing SQL queries',
+                                    url: '/docs/sql/optimizing-queries',
+                                },
+                                {
                                     name: 'Tutorials',
                                     url: '/docs/sql/tutorials',
                                 },
@@ -2971,6 +3021,26 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/product-analytics/installation' },
+                        { name: 'AI wizard', url: '/docs/product-analytics/installation/ai-wizard' },
+                        { name: 'Web', url: '/docs/product-analytics/installation/web' },
+                        { name: 'React', url: '/docs/product-analytics/installation/react' },
+                        { name: 'Node.js', url: '/docs/product-analytics/installation/nodejs' },
+                        { name: 'Python', url: '/docs/product-analytics/installation/python' },
+                        { name: 'PHP', url: '/docs/product-analytics/installation/php' },
+                        { name: 'Ruby', url: '/docs/product-analytics/installation/ruby' },
+                        { name: 'Go', url: '/docs/product-analytics/installation/go' },
+                        { name: 'React Native', url: '/docs/product-analytics/installation/react-native' },
+                        { name: 'Android', url: '/docs/product-analytics/installation/android' },
+                        { name: 'iOS', url: '/docs/product-analytics/installation/ios' },
+                        { name: 'Java', url: '/docs/product-analytics/installation/java' },
+                        { name: 'Rust', url: '/docs/product-analytics/installation/rust' },
+                        { name: 'Elixir', url: '/docs/product-analytics/installation/elixir' },
+                        { name: 'Flutter', url: '/docs/product-analytics/installation/flutter' },
+                        { name: '.NET', url: '/docs/product-analytics/installation/dotnet' },
+                        { name: 'API', url: '/docs/product-analytics/installation/api' },
+                    ],
                 },
                 {
                     name: 'Capturing events',
@@ -3016,7 +3086,7 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/product-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'blue',
@@ -3217,6 +3287,22 @@ export const docsMenu = {
                     url: '/docs/web-analytics/installation',
                     icon: 'IconBook',
                     color: 'blue',
+                    children: [
+                        { name: 'Overview', url: '/docs/web-analytics/installation' },
+                        { name: 'AI wizard', url: '/docs/web-analytics/installation/ai-wizard' },
+                        { name: 'Web', url: '/docs/web-analytics/installation/web' },
+                        { name: 'React', url: '/docs/web-analytics/installation/react' },
+                        { name: 'Next.js', url: '/docs/web-analytics/installation/nextjs' },
+                        { name: 'GTM', url: '/docs/web-analytics/installation/gtm' },
+                        { name: 'Vue', url: '/docs/web-analytics/installation/vue' },
+                        { name: 'Nuxt', url: '/docs/web-analytics/installation/nuxt' },
+                        { name: 'Svelte', url: '/docs/web-analytics/installation/svelte' },
+                        { name: 'WordPress', url: '/docs/web-analytics/installation/wordpress' },
+                        { name: 'Astro', url: '/docs/web-analytics/installation/astro' },
+                        { name: 'Framer', url: '/docs/web-analytics/installation/framer' },
+                        { name: 'Webflow', url: '/docs/web-analytics/installation/webflow' },
+                        { name: 'Phoenix', url: '/docs/web-analytics/installation/phoenix' },
+                    ],
                 },
                 {
                     name: 'Getting started',
@@ -3257,10 +3343,20 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/web-analytics/marketing-analytics',
+                        },
+                        {
+                            name: 'Column definitions',
+                            url: '/docs/web-analytics/marketing-analytics-schema',
+                        },
+                    ],
                 },
                 {
-                    name: 'FAQ',
-                    url: '/docs/web-analytics/faq',
+                    name: 'Troubleshooting',
+                    url: '/docs/web-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,
@@ -3289,6 +3385,14 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/session-replay/installation' },
+                        { name: 'Web', url: '/docs/session-replay/installation/web' },
+                        { name: 'Android', url: '/docs/session-replay/installation/android' },
+                        { name: 'iOS', url: '/docs/session-replay/installation/ios' },
+                        { name: 'React Native', url: '/docs/session-replay/installation/react-native' },
+                        { name: 'Flutter', url: '/docs/session-replay/installation/flutter' },
+                    ],
                 },
                 {
                     name: 'Watching recordings',
@@ -3310,7 +3414,7 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/session-replay/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
@@ -3321,12 +3425,6 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                     featured: true,
-                },
-                {
-                    name: 'Cutting costs',
-                    url: '/docs/session-replay/cutting-costs',
-                    icon: 'IconPiggyBank',
-                    color: 'yellow',
                 },
                 {
                     type: 'divider',
@@ -3400,6 +3498,24 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/feature-flags/installation' },
+                        { name: 'Web', url: '/docs/feature-flags/installation/web' },
+                        { name: 'React', url: '/docs/feature-flags/installation/react' },
+                        { name: 'Node.js', url: '/docs/feature-flags/installation/nodejs' },
+                        { name: 'Python', url: '/docs/feature-flags/installation/python' },
+                        { name: 'PHP', url: '/docs/feature-flags/installation/php' },
+                        { name: 'Ruby', url: '/docs/feature-flags/installation/ruby' },
+                        { name: 'Go', url: '/docs/feature-flags/installation/go' },
+                        { name: 'React Native', url: '/docs/feature-flags/installation/react-native' },
+                        { name: 'Android', url: '/docs/feature-flags/installation/android' },
+                        { name: 'iOS', url: '/docs/feature-flags/installation/ios' },
+                        { name: 'Java', url: '/docs/feature-flags/installation/java' },
+                        { name: 'Flutter', url: '/docs/feature-flags/installation/flutter' },
+                        { name: 'Elixir', url: '/docs/feature-flags/installation/elixir' },
+                        { name: '.NET', url: '/docs/feature-flags/installation/dotnet' },
+                        { name: 'API', url: '/docs/feature-flags/installation/api' },
+                    ],
                 },
                 {
                     name: 'Creating feature flags',
@@ -3434,8 +3550,8 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/feature-flags/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/feature-flags/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'seagreen',
                 },
@@ -3463,6 +3579,12 @@ export const docsMenu = {
                     url: '/docs/feature-flags/local-evaluation',
                     icon: 'IconBolt',
                     color: 'orange',
+                    children: [
+                        {
+                            name: 'Local evaluation in distributed or stateless environments',
+                            url: '/docs/feature-flags/local-evaluation/distributed-environments',
+                        },
+                    ],
                 },
                 {
                     name: 'Client-side bootstrapping',
@@ -3752,8 +3874,8 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/experiments/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/experiments/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'orange',
                     featured: true,
@@ -3909,6 +4031,14 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-mappings/android',
                         },
                         {
+                            name: 'Rollup',
+                            url: '/docs/error-tracking/upload-source-maps/rollup',
+                        },
+                        {
+                            name: 'Webpack',
+                            url: '/docs/error-tracking/upload-source-maps/webpack',
+                        },
+                        {
                             name: 'CLI',
                             url: '/docs/error-tracking/upload-source-maps/cli',
                         },
@@ -4017,7 +4147,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'AI',
+                    name: 'PostHog AI',
                 },
                 {
                     name: 'Debugging with MCP',
@@ -4075,8 +4205,8 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/error-tracking/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/error-tracking/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
                     featured: true,
@@ -4105,6 +4235,13 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/surveys/installation' },
+                        { name: 'Web', url: '/docs/surveys/installation/web' },
+                        { name: 'React Native', url: '/docs/surveys/installation/react-native' },
+                        { name: 'iOS', url: '/docs/surveys/installation/ios' },
+                        { name: 'Flutter', url: '/docs/surveys/installation/flutter' },
+                    ],
                 },
                 {
                     name: 'Creating a survey',
@@ -4126,7 +4263,7 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/surveys/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'seagreen',
@@ -4412,8 +4549,8 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/data-warehouse/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/data-warehouse/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'green',
                 },
@@ -4582,7 +4719,7 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/llm-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
@@ -4735,8 +4872,114 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'FAQ',
-                    url: '/docs/revenue-analytics/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/revenue-analytics/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'blue',
+                    featured: true,
+                },
+            ],
+        },
+        {
+            name: 'Customer Analytics',
+            icon: 'IconPeople',
+            color: '[#FF6B6B]',
+            url: '/docs/customer-analytics',
+            description:
+                'Understand your customers to build products that solve real problems and achieve product-market fit.',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
+            children: [
+                {
+                    name: 'Customer Analytics',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/customer-analytics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                    featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/customer-analytics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Dashboard metrics',
+                    featured: true,
+                    url: '/docs/customer-analytics/dashboard-metrics',
+                    icon: 'IconBolt',
+                    color: 'orange',
+                },
+                {
+                    name: 'B2B mode',
+                    featured: true,
+                    url: '/docs/customer-analytics/b2b-mode',
+                    icon: 'IconCohort',
+                    color: 'red',
+                },
+                {
+                    name: 'Usage metrics',
+                    url: '/docs/customer-analytics/usage-metrics',
+                    icon: 'IconTrends',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Customer profiles',
+                    url: '/docs/customer-analytics/customer-profiles',
+                    icon: 'IconPerson',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Configure your dashboard',
+                    url: '/docs/customer-analytics/configure-your-dashboard',
+                    icon: 'IconDashboard',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Create usage metrics',
+                    url: '/docs/customer-analytics/create-usage-metrics',
+                    icon: 'IconG',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'PostHog AI',
+                },
+                {
+                    name: 'Configure dashboard with AI',
+                    url: '/docs/customer-analytics/configure-dashboard-with-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/customer-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,
@@ -4919,10 +5162,16 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Best practices',
+                    url: '/docs/workflows/best-practices',
+                    icon: 'IconStar',
+                    color: 'red',
+                },
+                {
                     name: 'Resources',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/workflows/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
@@ -4961,6 +5210,14 @@ export const docsMenu = {
                     icon: 'IconCode',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/logs/installation' },
+                        { name: 'Node.js', url: '/docs/logs/installation/nodejs' },
+                        { name: 'Python', url: '/docs/logs/installation/python' },
+                        { name: 'Java', url: '/docs/logs/installation/java' },
+                        { name: 'Go', url: '/docs/logs/installation/go' },
+                        { name: 'Other', url: '/docs/logs/installation/other' },
+                    ],
                 },
                 {
                     name: 'Search logs',
@@ -4973,7 +5230,7 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/logs/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
@@ -5160,10 +5417,10 @@ export const productMenu = {
             category: 'tools',
         },
         {
-            name: 'Data warehouse',
+            name: 'Data stack',
             icon: 'IconDatabase',
             color: 'lilac',
-            url: '/data-warehouse',
+            url: '/data-stack',
             slug: 'data-warehouse',
         },
         {

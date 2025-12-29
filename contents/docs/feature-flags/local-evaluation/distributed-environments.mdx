@@ -1,0 +1,34 @@
+---
+title: Local evaluation in distributed or stateless environments
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+import Tab from "components/Tab"
+import LocalEvalDistributedEnvIntro from "./_snippets/distributed-environments-intro.mdx"
+import LocalEvalDistributedEnvCommonPatterns from "./_snippets/distributed-environments-common-patterns.mdx"
+import LocalEvalDistributedEnvNodeContent from "./_snippets/distributed-environments-node.mdx"
+import LocalEvalDistributedEnvPythonContent from "./_snippets/distributed-environments-python.mdx"
+
+<LocalEvalDistributedEnvIntro />
+
+<Tab.Group tabs={['Node.js', 'Python']}>
+    <Tab.List>
+        <Tab>Node.js</Tab>
+        <Tab>Python</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <LocalEvalDistributedEnvNodeContent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <LocalEvalDistributedEnvPythonContent />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+<LocalEvalDistributedEnvCommonPatterns />
