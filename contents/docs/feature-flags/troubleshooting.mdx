@@ -1,5 +1,5 @@
 ---
-title: Feature flag troubleshooting and FAQs
+title: Feature Flags troubleshooting 
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -10,11 +10,17 @@ export const BehavioralCohortsDark = "https://res.cloudinary.com/dmukukwp6/image
 export const DeuplicateAsStaticCohortLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/duplicate-as-static-cohort-light-mode.png"
 export const DeuplicateAsStaticCohortDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/duplicate-as-static-cohort-dark-mode.png"
 
+This page covers troubleshooting for Feature Flags. For setup, see the [installation guides](/docs/feature-flags/installation).
+
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+
 ## Why is my feature flag not working as expected?
 
 Here's a list of suggestions to troubleshoot your flag:
 
-### 1. Check your flag evaluation on the feature flags tab
+**1. Check your flag evaluation on the feature flags tab**
 
 Check the **feature flags tab** on [the persons page](https://app.posthog.com/persons) for your specific person.
 
@@ -29,7 +35,7 @@ Check the **feature flags tab** on [the persons page](https://app.posthog.com/pe
 - If the flag is shown as enabled here, there may be a problem in your code. Double-check the steps to [add feature flag code](/docs/feature-flags/adding-feature-flag-code).
 - Ensure you are capturing identified events.
 
-### 2. Check you're calling `identify()` before evaluating the flag
+**2. Check you're calling `identify()` before evaluating the flag**
 
 If you're [identifying](/docs/product-analytics/identify) users, they may see a different value for a feature flag before and after you call `identify()`. 
 
@@ -37,7 +43,7 @@ To ensure they experience consistent behavior, check that you call `identify()` 
 
 > **Note:** This only applies to frontend SDKs. Server-side SDKs do not need to call `identify()`.
 
-### 3. An ad-blocker may be blocking calls
+**3. An ad-blocker may be blocking calls**
 
 Check if an ad-blocker is interfering with PostHog calls. You can fix this by:
 
@@ -46,13 +52,13 @@ Check if an ad-blocker is interfering with PostHog calls. You can fix this by:
 
 See our guide on [preventing feature flags from being blocked](/tutorials/flags-adblock-prevention) for more details.
 
-### 4. User or group properties may not have been ingested yet
+**4. User or group properties may not have been ingested yet**
 
 If your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) depend on user or group properties and you immediately evaluate the feature flag after updating them, the properties may not be ingested in time to calculate the correct flag value.
 
 In this case, when making your `getFeatureFlag()` call, you can [manually include these properties](/docs/feature-flags/adding-feature-flag-code?tab=Web#overriding-server-properties) in the method arguments.
 
-### 5. Raise a support ticket
+**5. Raise a support ticket**
 
 If none of the above resolve your issue, you can [raise a support ticket](https://app.posthog.com/home#supportModal) to see if we can help debug.
 
@@ -184,3 +190,9 @@ Feature flags are charged based on the number of requests made to the `/flags` e
 import PostHogBillableUsageTemplate from "../_snippets/posthog-billable-usage-template.mdx"
 
 <PostHogBillableUsageTemplate />
+
+## Solved community questions
+
+<SolvedQuestions
+    topicLabel="Feature Flags"
+/>
