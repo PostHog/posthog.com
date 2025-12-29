@@ -83,7 +83,11 @@ export default function SolvedQuestions({
     }
 
     if (!questions?.data?.length) {
-        return null
+        return (
+            <div className={`bg-accent rounded-md p-6 ${className}`}>
+                <p className="text-secondary m-0">No community questions have been answered for this topic yet.</p>
+            </div>
+        )
     }
 
     return (
