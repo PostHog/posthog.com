@@ -19,6 +19,8 @@ seo:
     metaDescription: 'A step-by-step recipe for finding where users drop off during onboarding, understanding why it happens, and fixing it using real user behavior.'
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 *A PostHog recipe for people whose users keep leaving the table.*
 
 | | |
@@ -33,15 +35,13 @@ seo:
 
 ---
 
-Seeing a spike in users leaving your onboarding flow can be discouraging, but **here's the good news:** [it doesn't mean your product sucks](https://posthog.com/founders/product-market-fit-game) (phew!)
+Seeing your onboarding stats drop or stall can be discouraging, but **here's the good news:** [it doesn't mean your product sucks](https://posthog.com/founders/product-market-fit-game) (phew!)
 
 Onboarding drop-offs are usually an indication of friction, not rejection. Users don't rage-quit because they hate your product, they quit because something didn't make sense, didn't work, or asked for too much too soon.
 
 *It's like attempting a beef wellington, realizing you're in over your head somewhere around the "wrap the beef in mushroom duxelles" step, and bailing to order pizza instead. Ask me how I know.*
 
 **Even better news**: onboarding friction is measurable, debuggable, and fixable.
-
-This recipe shows you how to find where users drop off during onboarding and, more importantly, how to fix it
 
 ---
 
@@ -59,8 +59,21 @@ You don't need a massive stack for this recipe.
 - [Autocapture](https://posthog.com/docs/product-analytics/autocapture) (for skipping manual event setup)
 - [Cohorts or segmentation](https://posthog.com/docs/data/cohorts) (for slicing data by user type)
 - [Feature flags](https://posthog.com/feature-flags) (for safely rolling out fixes)
-- [Experiments](https://posthog.com/experiments) (for measuring statistical significance in your changes)
+- [Experiments](https://posthog.com/experiments) (for measuring your changes)
 - [Surveys](https://posthog.com/surveys) (for getting direct feedback from users)
+
+You'll also need:
+- **A clear definition of what "successful onboarding" looks like**. This is [your activation event](https://posthog.com/newsletter/wtf-is-activation) – the moment a user has gotten enough value to stick around (more on this below).
+- **At least a few hundred users going through your flow**. You need enough data to spot patterns. If you're at an earlier stage, you can still follow this recipe; just watch more replays and lean harder on qualitative signals until your numbers catch up.
+
+<details>
+<summary><strong>If using PostHog</strong></summary>
+
+PostHog installed in your product and receiving data. If you haven't set this up yet, [start here](https://posthog.com/docs/getting-started/install). Make sure you're capturing the key events in your onboarding flow (signups, form completions, button clicks, etc.). If you have autocapture enabled, you're probably already covered.
+
+We highly recommend calling [`posthog.identify()`](https://posthog.com/docs/product-analytics/identify) when users sign up or log in; you'll be able to track them across sessions and devices, which makes your funnel data much more reliable.
+
+</details>
 
 ### Substitutions
 
@@ -72,39 +85,36 @@ You don't need a massive stack for this recipe.
 
 **No cohorts or segmentation?** You can still run this recipe, you'll just be looking at all users as one group. If your drop-off is consistent across everyone, that's fine. If it's not, you'll have a harder time figuring out who's actually struggling.
 
-### Before you start
-
-You'll need:
-- **A clear definition of what "successful onboarding" looks like**. This is [your activation event](https://posthog.com/newsletter/wtf-is-activation) – the moment a user has gotten enough value to stick around (more on this below).
-- **At least a few hundred users going through your flow**. You need enough data to spot patterns. If you're at an earlier stage, you can still follow this recipe; just watch more replays and lean harder on qualitative signals until your numbers catch up.
-
-<details>
-<summary><strong>If using PostHog</strong></summary>
-
-PostHog installed in your product and receiving data. If you haven't set this up yet, [start here](https://posthog.com/docs/getting-started/install). Make sure you're capturing the key events in your onboarding flow (signups, form completions, button clicks, etc.). If you have autocapture enabled, you're probably already covered.
-
-Identified users (*not required, but nice to have*). If you're calling [`posthog.identify()`](https://posthog.com/docs/product-analytics/identify) when users sign up or log in, you'll be able to track them across sessions and devices. This makes your funnel data much more reliable.
-
-</details>
-
 ---
 
 ## Step 1: Prep the finish line
 
 Before you can fix your onboarding, you need to [define what a successful onboarding flow actually means](https://posthog.com/docs/new-to-posthog/activation). This is your activation event, the thing you'll measure everything against.
 
-Ask yourself: What's the moment when a user has gotten enough value that they're likely to stick around?
-
-*Signing up*, or *landing on a dashboard* is not it; what you're looking for is a *value-producing action*.
+Ask yourself: What's the moment when a user has gotten enough value that they're likely to stick around? What you're looking for is a ***value-producing action**.
 
 Some examples:
+- **For an e-commerce app**: Added item to cart and completed checkout
+- **For a streaming service**: Watched their first video or listened to their first song
 - **For a project management tool**: Created their first project and invited a teammate
+- **For a fintech app**: Linked their bank account or made their first transaction
+- **For a social app**: Followed their first account or posted their first content
 - **For an analytics product**: Sent their first event and created an insight
 - **For a CRM**: Added their first contact and sent an email
 
-Not sure what yours is? Try looking at your [retention data](https://posthog.com/docs/product-analytics/retention) – what do retained users do that churned users don't? That should give you a starting point. Here's [how we figured out our activation metric at PostHog](https://posthog.com/product-engineers/activation-metrics) (spoiler: it took a few iterations).
+Not sure what yours is? Try looking at your retention data – [what do retained users do that churned users don't](product-engineers/customer-retention-metrics)? That should give you a starting point. 
+
+Here's [how we figured out our activation metric at PostHog](https://posthog.com/product-engineers/activation-metrics) (spoiler: it took a few iterations).
 
 Pick one. Be opinionated. You can always adjust later.
+
+> 👨‍🍳 *Chef's tip: Don't confuse the appetizer for the main course. Signing up or landing on a dashboard isn't activation. Also, your activation event might change as your product evolves. Revisit it if needed; what predicted retention two years ago might not be the best signal today.*
+
+<CalloutBox icon="IconInfo" title="ou're ready for the next step when...." type="fyi">
+
+You can complete the sentence: "A user has successfully onboarded when they ____."
+
+</CalloutBox>
 
 ---
 
@@ -132,6 +142,14 @@ Head to [Product Analytics](https://app.posthog.com/insights) → **New insight*
 
 </details>
 
+> 👨‍🍳 *Chef's tip: Start with your core flow. Once it's optimized, create separate funnels for specific segments (by plan, referral source, etc.). Don't forget to name your funnel something specific (e.g., "Self-serve onboarding Q1 2025") so future-you knows what it's measuring when you have 47 funnels.*
+
+<CalloutBox icon="IconInfo" title="You're ready for the next step when...." type="fyi">
+
+Your funnel is prepped: 3–5 steps, ending with your activation event, saved, and ready to collect data.
+
+</CalloutBox>
+
 ---
 
 ## Step 3: Let it simmer
@@ -146,7 +164,13 @@ While you wait, you can:
 - [Set up session replay, if you haven't already](https://posthog.com/docs/session-replay)
 - [Prep an exit survey for later](https://posthog.com/docs/surveys/creating-surveys) (we'll use it in Step 6)
 
-When you can throw the data at the wall and it starts sticking, you're ready for the next step.
+> 👨‍🍳 *Chef's tip: Resist the urge to peek daily. Set a calendar reminder for one week out – watching the pot won't make it boil faster.*
+
+<CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
+
+Your data has had time to marinate – at least a few hundred users through the funnel with clear conversion rates at each step. Undercooked data leads to undercooked fixes.
+
+</CalloutBox>
 
 ---
 
@@ -175,9 +199,13 @@ Use [breakdowns](https://posthog.com/docs/product-analytics/funnels#breakdowns) 
 
 </details>
 
-By the end of this step, you should be able to say: "Users drop off most at *[this step]*" and "It affects *[these users]* more than others." If you can't say both, don't move on yet.
+> 👨‍🍳 *Chef's tip: Export your cohort of dropped-off users. They're useful for more than just replays – you can target them with win-back marketing campaigns or surveys later.*
 
-If you do, you're ready for the fun part: watching what actually happens.
+<CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
+
+You're be able to say: "Users drop off most at *[this step]*" and "It affects *[these users]* more than others." If you can't say both, don't move on yet.
+
+</CalloutBox>
 
 ---
 
@@ -192,7 +220,7 @@ Watch 10–15 recordings. You're looking for patterns:
 - Are they hitting errors? (Check the console logs in the replay; PostHog [captures these](https://posthog.com/docs/session-replay/console-log-recording) too.)
 - Is something failing quietly? Look at network requests if you have [network recording](https://posthog.com/docs/session-replay/network-recording) enabled.
 
-If recordings are looking wildly different from one user to the next, go back to Step 4 and segment further. You're probably mixing multiple problems together. Cleaner inputs make cleaner diagnoses.
+If recordings are looking wildly different from one user to the next, go back to Step 4 and segment further; you're probably mixing multiple problems together. 
 
 <details>
 <summary><strong>If using PostHog</strong></summary>
@@ -205,7 +233,13 @@ If you saved a cohort in Step 4, you can filter replays by that cohort directly.
 
 </details>
 
-By the end of Step 5, you should be able to say "Users drop off here because *[this thing]* keeps happening."
+> 👨‍🍳 *Chef's tip: Don't just watch drop-offs. Sometimes successful users struggled through the same friction – they just pushed through anyway. Watch both to taste the difference.*
+
+<CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
+
+You're able to say "Users drop off here because *[this thing]* keeps happening."
+
+</CalloutBox>
 
 ---
 
@@ -236,7 +270,15 @@ Go to [Surveys](https://app.posthog.com/surveys) → [**New survey**](https://po
 
 You can set display conditions based on URL, user properties, or events. For the completion survey, trigger it when your activation event fires.
 
+> 👨‍🍳 *Chef's tip: Keep surveys short. One or two open-ended questions max. Users will give you more when you ask for less. Also, remember survey responses are seasoning, not the main dish; it's okay to just have a handful of responses. A few strong signals beat hundreds of vague ones.*
+
 </details>
+
+<CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
+
+You've seasoned your data with user feedback that confirms, refines, or challenges what you saw in replays.
+
+</CalloutBox>
 
 ---
 
@@ -255,7 +297,13 @@ Some common fixes:
 - **Squash any bugs** – if replays showed errors, fix them
 - **Reorder the flow** – maybe you're asking for too much too soon
 
-Make one change at a time. If you change five things, you won't know what helped.
+> 👨‍🍳 *Chef's tip: One ingredient at a time. If you change five things at once, you won't know what fixed it (or broke it). Also, write down your hypothesis before you ship. It's easy to retrofit a narrative after you see results – having it on record keeps you honest.*
+
+<CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
+
+You've got one fix in the oven, designed to address your hypothesis.
+
+</CalloutBox>
 
 ---
 
@@ -282,7 +330,15 @@ Use [feature flags](https://posthog.com/docs/feature-flags) to roll out your fix
 
 To run an experiment, go to [Experiments](https://app.posthog.com/experiments) → [**New experiment**](https://posthog.com/docs/experiments/creating-an-experiment). Use your feature flag as the basis – PostHog will split users into control and test groups and track your funnel as the goal metric.
 
+> 👨‍🍳 *Chef's tip: If you're nervous about a big change, start at 5% rollout. You can always ramp up, but you can't un-serve a burnt dish. Also, not every fix needs a full experiment – but if it's a big change, or you need to convince stakeholders, statistical proof is worth the extra time.*
+
 </details>
+
+<CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
+
+Your fix is out of the kitchen, live (ideally behind a feature flag) and collecting data.
+
+</CalloutBox>
 
 ---
 
@@ -311,19 +367,11 @@ If it worked: **congrats, you've improved activation!**
 
 If it didn't, that's okay. Go back to Step 4 with a new hypothesis. Onboarding optimization is iterative, you're rarely done after one fix.
 
+> 👨‍🍳 *Chef's tip: Screenshot your before/after funnels. They make great artifacts for retros, stakeholder updates, and convincing your team that this stuff actually works.*
+
 ---
 
-### Chef's notes
-
-**On sample size:** Don't make decisions based on 50 users. Wait for statistical significance, or at least a few hundred users through each step.
-
-**On funnel scope:** Start with your core flow. Once it's optimized, create separate funnels for specific segments (by plan, referral source, etc.).
-
-**On watching successful users too:** Don't just watch drop-offs. Sometimes successful users struggled through the same friction, they just pushed through anyway.
-
-**On iteration:** Most teams don't nail this on the first try. That's fine. The goal is to get a little better each cycle.
-
-**FAQ**
+### FAQ
 
 <details>
 <summary><strong>What is onboarding drop-off?</strong></summary>
@@ -406,7 +454,6 @@ Most teams end up stitching together funnels, replays, surveys, and experiments 
 
 A unified stack makes it much easier to move from “where users drop off” to “why” to “did this fix work?”
 </details>
-
 
 ---
 
