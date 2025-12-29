@@ -4719,7 +4719,7 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/llm-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
