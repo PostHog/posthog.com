@@ -567,15 +567,30 @@ export default function SlidesTemplate({
                         </FeaturesSplit>
                     )
                 } else if (feature.template === 'splitImage') {
+                    // Map feature handles to gradient names and background colors
+                    const gradientMap: Record<string, string> = {
+                        trace_monitoring: 'trace-monitoring',
+                        cost_analysis: 'cost-analysis',
+                        performance_monitoring: 'performance-monitoring',
+                    }
+                    const bgColorMap: Record<string, string> = {
+                        trace_monitoring: 'blue',
+                        cost_analysis: 'purple',
+                        performance_monitoring: 'lilac',
+                    }
+                    const gradient = gradientMap[feature.handle || '']
+                    const bgColor = bgColorMap[feature.handle || ''] || productData?.color
+
                     featureContent = (
                         <FeaturesSplitWithImage
-                            bgColor={productData?.color}
-                            textColor={productData?.overview?.textColor}
+                            bgColor={bgColor}
+                            textColor="text-white"
                             headline={feature.headline}
                             description={feature.description}
                             icon={feature.icon}
                             features={feature.features}
                             images={feature.images}
+                            gradient={gradient}
                             {...props}
                         >
                             {feature.children}
