@@ -77,11 +77,72 @@ const subfeatures = [
 // Custom Features slide (mimics error tracking's features slide)
 const CustomFeaturesSlide = () => {
     const productData = useProduct({ handle: PRODUCT_HANDLE }) as any
-    const features = productData?.features || []
+    const allFeatures = productData?.features || []
+
+    // Define the desired order for features (only features without templates appear in this slide)
+    const featureOrder = [
+        'Dashboard',
+        'Traces',
+        'Generations',
+        'Users',
+        'Errors',
+        'Sessions',
+        'Playground',
+        'Evaluations',
+        'Datasets',
+        'Prompts',
+        'Analysis',
+        'Customizations',
+    ]
+
+    // Filter to items that should appear in the features slide (labels and features without templates)
+    const itemsForSlide = allFeatures.filter(
+        (f: any) => f.label || ((!f.template || f.template === 'tabs') && f.handle !== 'native_integrations')
+    )
+
+    // Separate labels and features
+    const labels = itemsForSlide.filter((f: any) => f.label)
+    const featuresWithoutTemplates = itemsForSlide.filter((f: any) => !f.label)
+
+    // Reorder features based on the desired order
+    const orderedFeatures = featureOrder
+        .map((title) => featuresWithoutTemplates.find((f: any) => f.title === title))
+        .filter((f) => f !== undefined)
+        .concat(featuresWithoutTemplates.filter((f: any) => !featureOrder.includes(f.title)))
+
+    // Build final features array maintaining label positions
+    // "Features" label goes first, then features up to Prompts, then "Advanced analytics" label, then Analysis and Customizations
+    const finalFeatures: any[] = []
+
+    // Add "Features" label first
+    const featuresLabel = labels.find((l: any) => l.label === 'Features')
+    if (featuresLabel) {
+        finalFeatures.push(featuresLabel)
+    }
+
+    // Add features up to and including Prompts
+    const featuresUpToPrompts = orderedFeatures.filter((f: any) => {
+        const index = featureOrder.indexOf(f.title)
+        return index >= 0 && index <= featureOrder.indexOf('Prompts')
+    })
+    finalFeatures.push(...featuresUpToPrompts)
+
+    // Add "Advanced analytics" label
+    const advancedLabel = labels.find((l: any) => l.label === 'Advanced analytics')
+    if (advancedLabel) {
+        finalFeatures.push(advancedLabel)
+    }
+
+    // Add Analysis and Customizations
+    const advancedFeatures = orderedFeatures.filter((f: any) => {
+        const index = featureOrder.indexOf(f.title)
+        return index >= featureOrder.indexOf('Analysis')
+    })
+    finalFeatures.push(...advancedFeatures)
 
     // Show all features in the tabbed slide (similar to error tracking)
     // Features with custom templates will still get their own individual slides automatically
-    return <FeaturesSlide features={features} />
+    return <FeaturesSlide features={finalFeatures} />
 }
 
 // Custom Native Integrations slide
@@ -349,7 +410,11 @@ export default function LLMAnalytics(): JSX.Element {
         order: [
             'overview',
             'customers',
+            'feature-trace_monitoring',
+            'feature-cost_analysis',
+            'feature-performance_monitoring',
             'features',
+            'native_integrations',
             'posthog-on-posthog',
             'comparison-summary',
             'feature-comparison',

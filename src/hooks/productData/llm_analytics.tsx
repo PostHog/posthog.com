@@ -3,6 +3,7 @@ import {
     IconBell,
     IconClockRewind,
     IconDashboard,
+    IconGear,
     IconGraph,
     IconHandMoney,
     IconLightBulb,
@@ -18,6 +19,10 @@ import {
     IconWarning,
     IconGlobe,
     IconListCheck,
+    IconMagicWand,
+    IconLlmPromptManagement,
+    IconLlmPromptEvaluation,
+    IconDatabase,
 } from '@posthog/icons'
 import {
     IconAnthropic,
@@ -108,10 +113,41 @@ export const llmAnalytics = {
     },
     features: [
         {
-            title: 'Trace monitoring',
+            label: 'Features',
+        },
+        {
+            title: 'Dashboard',
+            icon: <IconDashboard />,
+            color: 'purple',
+            headline: 'Dashboard',
+            description: 'Get a comprehensive overview of your LLM usage, costs, and performance',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    alt: 'LLM Analytics dashboard',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Traces',
+            icon: <IconListTreeConnected />,
+            color: 'seagreen',
+            headline: 'Traces',
+            description: 'Debug entire conversations, not just individual calls',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/trace_screenshot_1e0bdd0ad3.png',
+                    alt: 'LLM Analytics traces',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Traces',
             handle: 'trace_monitoring',
             template: 'splitImage',
-            headline: 'Trace monitoring',
+            headline: 'Traces',
             description: 'Debug entire conversations, not just individual calls',
             images: [
                 {
@@ -226,6 +262,180 @@ export const llmAnalytics = {
                     icon: <IconGlobe />,
                     title: 'Geographic performance',
                     description: 'See how performance varies by user location',
+                },
+            ],
+        },
+        {
+            title: 'Generations',
+            icon: <IconSparkles />,
+            color: 'yellow',
+            headline: 'Generations',
+            description: 'Track and analyze individual LLM generations with full context and metadata',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    alt: 'LLM Analytics generations',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Users',
+            icon: <IconUser />,
+            color: 'red',
+            headline: 'Users',
+            description: 'See which users are interacting with your AI features and understand their usage patterns',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_screenshot_716215eebb.png',
+                    alt: 'LLM Analytics users',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Errors',
+            icon: <IconWarning />,
+            color: 'yellow',
+            headline: 'Errors',
+            description: 'Monitor and debug errors in your LLM calls with detailed error tracking',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    alt: 'LLM Analytics errors',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Sessions',
+            icon: <IconRewindPlay />,
+            color: 'yellow',
+            headline: 'Sessions',
+            description: 'View session recordings alongside LLM traces to understand user interactions',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/sessions_screenshot_d6fc106ce9.png',
+                    alt: 'LLM Analytics sessions',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Playground',
+            icon: <IconMagicWand />,
+            color: 'purple',
+            headline: 'Playground',
+            description: 'Test and iterate on prompts in a safe environment before deploying to production',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    alt: 'LLM Analytics playground',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Evaluations',
+            icon: <IconLlmPromptEvaluation />,
+            color: 'blue',
+            headline: 'Evaluations',
+            description: 'Configure evaluation prompts and triggers to automatically assess your LLM generations.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    alt: 'LLM Analytics evaluations',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Datasets',
+            icon: <IconDatabase />,
+            color: 'lilac',
+            headline: 'Datasets',
+            description: 'Manage and organize datasets for prompt evaluation and model training',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    alt: 'LLM Analytics datasets',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Prompts',
+            icon: <IconLlmPromptManagement />,
+            color: 'purple',
+            headline: 'Prompts',
+            description: 'Create, manage, and version control your prompts from a central location',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    alt: 'LLM Analytics prompts',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            label: 'Advanced analytics',
+        },
+        {
+            title: 'Analysis',
+            icon: <IconTrends />,
+            color: 'blue',
+            headline: 'Go beyond basic metrics',
+            description: "Use PostHog's full analytics suite to understand AI feature adoption and impact.",
+            features: [
+                {
+                    title: 'Correlation analysis',
+                    description: 'See how AI usage correlates with retention, revenue, and engagement',
+                },
+                {
+                    title: 'Funnel analysis',
+                    description: 'Track conversion through AI-powered features',
+                },
+                {
+                    title: 'Cohort analysis',
+                    description: 'Compare heavy vs light AI users behavior',
+                },
+            ],
+            layout: 'single-column',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    alt: 'LLM Analytics analysis',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Customizations',
+            icon: <IconGear />,
+            color: 'seagreen',
+            headline: 'Customizations',
+            description: 'Customize your LLM analytics setup with advanced configuration options',
+            features: [
+                {
+                    title: 'Custom dashboards',
+                    description: 'Build dashboards combining AI and product metrics',
+                },
+                {
+                    title: 'SQL access',
+                    description: 'Query raw LLM data with HogQL for custom analysis',
+                },
+                {
+                    title: 'Privacy mode',
+                    description:
+                        'To avoid storing potentially sensitive prompt and completion data, you can enable privacy mode to exclude certain properties from being captured.',
+                },
+            ],
+            layout: 'single-column',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    alt: 'LLM Analytics customizations',
+                    className: 'justify-center items-center',
                 },
             ],
         },
