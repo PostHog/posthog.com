@@ -4,36 +4,59 @@ import Link from 'components/Link'
 import dayjs from 'dayjs'
 import Markdown from 'components/Squeak/components/Markdown'
 import { ChangelogEmojiReactions } from 'components/EmojiReactions'
+import { ChangelogPRMetadata } from 'components/ChangelogPRMetadata'
 
-const productToTeamsMap: Record<string, string[]> = {
-    'product analytics': ['product analytics', 'platform features'],
-    'web analytics': ['web analytics'],
-    'session replay': ['replay'],
-    'feature flags': ['feature flags'],
-    experiments: ['experiments'],
-    surveys: ['surveys'],
-    'data warehouse': ['data warehouse'],
-    'data pipelines': ['cdp'],
-    'revenue analytics': ['cdp'],
-    'error tracking': ['error tracking'],
-    'llm analytics': ['llm analytics'],
-    'marketing analytics': ['web analytics'],
+type ProductConfig = {
+    topic?: string // Filter by product tag/label (topic.label)
+    teams?: string[] // Filter by team name(s)
+}
+
+const productConfigMap: Record<string, ProductConfig> = {
+    'product analytics': { topic: 'Product analytics', teams: ['product analytics', 'analytics platform'] },
+    'web analytics': { topic: 'Web analytics', teams: ['web analytics'] },
+    'session replay': { topic: 'Session replay', teams: ['replay'] },
+    'feature flags': { topic: 'Feature flags', teams: ['feature flags'] },
+    experiments: { topic: 'Experiments', teams: ['experiments'] },
+    surveys: { topic: 'Surveys', teams: ['surveys'] },
+    'data warehouse': { topic: 'Data warehouse', teams: ['data warehouse', 'clickhouse'] },
+    'data pipelines': { topic: 'CDP', teams: ['batch exports'] },
+    workflows: { topic: 'Workflows', teams: ['workflows'] },
+    'error tracking': { topic: 'Error tracking', teams: ['error tracking'] },
+    'llm analytics': { topic: 'LLM analytics', teams: ['llm analytics'] },
+    'posthog ai': { topic: 'PostHog AI', teams: ['posthog ai'] },
+    endpoints: { topic: 'endpoints' },
+    'customer analytics': { teams: ['customer analytics'] },
+}
+
+const buildRoadmapFilters = (config: ProductConfig) => {
+    const filters: Record<string, any>[] = []
+
+    if (config.topic) {
+        filters.push({ topic: { label: { $eqi: config.topic } } })
+    }
+
+    if (config.teams && config.teams.length > 0) {
+        config.teams.forEach((team) => {
+            filters.push({ teams: { name: { $eqi: team } } })
+        })
+    }
+
+    return filters
 }
 
 export const ProductChangelog = ({ product }: { product: string }) => {
-    const teams = productToTeamsMap[product.toLowerCase()] || []
+    const config = productConfigMap[product.toLowerCase()] || {}
+    const orFilters = buildRoadmapFilters(config)
+    const fiveMonthsAgo = dayjs().subtract(5, 'month').format('YYYY-MM-DD')
 
     const { roadmaps, isLoading } = useRoadmaps({
         params: {
-            pagination: { limit: 30 },
+            pagination: { limit: 32 },
             sort: { dateCompleted: 'desc' },
             filters: {
                 complete: { $eq: true },
-                ...(teams.length > 0 && {
-                    $or: teams.map((team) => ({
-                        teams: { name: { $eqi: team } },
-                    })),
-                }),
+                dateCompleted: { $gte: fiveMonthsAgo },
+                ...(orFilters.length > 0 && { $or: orFilters }),
             },
         },
     })
@@ -56,33 +79,42 @@ export const ProductChangelog = ({ product }: { product: string }) => {
 
     return (
         <div className="w-full">
-            <div className="space-y-8">
+            <div>
                 {roadmaps.map((roadmap: { id: number; attributes: Record<string, any> }) => {
-                    const { title, squeakId, dateCompleted, description, teams } = roadmap?.attributes || {}
+                    const { title, squeakId, dateCompleted, description, teams, githubPRMetadata } =
+                        roadmap?.attributes || {}
                     const teamName = teams?.data?.[0]?.attributes?.name
 
                     return (
-                        <article
+                        <div
                             key={squeakId || roadmap.id}
-                            className="border-t border-primary pt-6 first:border-t-0 first:pt-0"
+                            className="border-t border-primary py-6 first:border-t-0 first:pt-0 mt-0"
                         >
-                            <h3 className="m-0 text-xl leading-tight">{title}</h3>
-                            <p className="m-0 mt-1 text-sm opacity-60">
+                            <h2 className="m-0">{title}</h2>
+                            <p className="m-0 mt-1 text-sm text-secondary">
                                 {dateCompleted && dayjs(dateCompleted).format('MMM D, YYYY')} | {teamName} Team
                             </p>
+
                             {description && (
                                 <div className="mt-3">
                                     <Markdown>{description}</Markdown>
                                 </div>
                             )}
+
                             <div className="mt-4 flex flex-row flex-wrap gap-1">
                                 <ChangelogEmojiReactions roadmapId={roadmap.id} />
                             </div>
-                        </article>
+
+                            {githubPRMetadata && (
+                                <div className="flex flex-row gap-x-7 text-sm mt-4">
+                                    <ChangelogPRMetadata githubPRMetadata={githubPRMetadata} truncated={true} />
+                                </div>
+                            )}
+                        </div>
                     )
                 })}
             </div>
-            <Link to="/changelog" className="inline-block mt-6 text-sm font-semibold text-red dark:text-yellow">
+            <Link to="/changelog" className="inline-block mt-6">
                 View full changelog →
             </Link>
         </div>

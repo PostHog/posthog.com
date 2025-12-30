@@ -3105,6 +3105,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Changelog',
+                    url: '/docs/product-analytics/changelog',
+                    icon: 'IconHistory',
+                    color: 'purple',
+                },
+                {
                     type: 'divider',
                 },
                 {

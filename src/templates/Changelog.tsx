@@ -3,20 +3,9 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
-import {
-    IconDownload,
-    IconPencil,
-    IconPlus,
-    IconShieldLock,
-    IconX,
-    IconGitBranch,
-    IconCommit,
-    IconCode,
-    IconPeople,
-    IconDocument,
-    IconComment,
-} from '@posthog/icons'
+import { IconDownload, IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
 import { ChangelogEmojiReactions } from 'components/EmojiReactions'
+import { ChangelogPRMetadata } from 'components/ChangelogPRMetadata'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import OSButton from 'components/OSButton'
@@ -168,120 +157,6 @@ export const Change = ({ title, teamName, media, description, cta }) => {
                     {cta.label}
                 </CallToAction>
             )}
-        </>
-    )
-}
-
-const GitHubPRInfo = ({ roadmap }: { roadmap: RoadmapNode }) => {
-    const gitHubData = roadmap.githubPRMetadata
-    const scrollContainerRef = React.useRef<HTMLDivElement>(null)
-
-    const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-        if (scrollContainerRef.current) {
-            const container = scrollContainerRef.current
-            const canScrollLeft = container.scrollLeft > 0
-            const canScrollRight = container.scrollLeft < container.scrollWidth - container.clientWidth
-
-            if ((e.deltaY > 0 && canScrollRight) || (e.deltaY < 0 && canScrollLeft)) {
-                e.preventDefault()
-                container.scrollLeft += e.deltaY
-            }
-        }
-    }
-
-    const handleMouseLeave = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollTo({ left: 0, behavior: 'smooth' })
-        }
-    }
-
-    return (
-        <>
-            <div className="flex flex-row items-center">
-                <IconGitBranch className="w-4 h-4 opacity-50 mr-1" />
-                <a href={gitHubData.html_url} target="_blank" rel="noopener noreferrer" className="opacity-50">
-                    #{gitHubData.number}
-                </a>
-            </div>
-            <div className="flex flex-row items-center overflow-hidden">
-                <IconPeople className="w-4 h-4 opacity-50 shrink-0 mr-1" />
-                <div
-                    ref={scrollContainerRef}
-                    onWheel={handleWheel}
-                    onMouseLeave={handleMouseLeave}
-                    className="flex flex-row items-center group overflow-x-auto scrollbar-hide"
-                >
-                    {[gitHubData.user, ...(gitHubData.reviewers || []), ...(gitHubData.commenters || [])]
-                        .filter(Boolean)
-                        .map((commenter, index, array) => (
-                            <Tooltip
-                                key={`avatar-${commenter.login}`}
-                                trigger={
-                                    <div
-                                        className={`relative transition-all duration-200 flex-none ${
-                                            index > 0 ? '-ml-2 group-hover:ml-0.5' : ''
-                                        }`}
-                                        style={{ zIndex: array.length - index }}
-                                    >
-                                        <img
-                                            src={commenter.avatar_url}
-                                            alt={`${commenter.login} avatar`}
-                                            loading="lazy"
-                                            decoding="async"
-                                            referrerPolicy="no-referrer"
-                                            className="w-5 h-5 min-w-5 min-h-5 rounded-full border-primary border flex-none"
-                                        />
-                                    </div>
-                                }
-                                side="top"
-                            >
-                                <a
-                                    href={commenter.html_url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="opacity-50 font-semibold underline"
-                                >
-                                    {commenter.login}
-                                </a>
-                            </Tooltip>
-                        ))}
-                </div>
-            </div>
-            <div className="flex flex-row items-center">
-                <IconCode className="w-4 h-4 opacity-50 shrink-0 mr-1" />
-                <div className="flex flex-row gap-x-1">
-                    <span className="text-green font-semibold">+{(gitHubData.additions ?? 0).toLocaleString()}</span>{' '}
-                    <span className="text-red font-semibold">-{(gitHubData.deletions ?? 0).toLocaleString()}</span>
-                </div>
-            </div>
-            <div className="flex flex-row items-center">
-                <IconCommit className="w-4 h-4 opacity-50 mr-1" />
-                <a
-                    href={gitHubData.html_url + '/commits'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="opacity-50"
-                >
-                    {gitHubData.commits}
-                </a>
-            </div>
-            <div className="flex flex-row items-center">
-                <IconDocument className="w-4 h-4 opacity-50 mr-1" />
-                <a
-                    href={gitHubData.html_url + '/files'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="opacity-50"
-                >
-                    {gitHubData.changed_files}
-                </a>
-            </div>
-            <div className="flex flex-row items-center">
-                <IconComment className="w-4 h-4 opacity-50 mr-1" />
-                <a href={gitHubData.html_url} target="_blank" rel="noopener noreferrer" className="opacity-50">
-                    {(gitHubData.comments ?? 0) + (gitHubData.review_comments ?? 0)}
-                </a>
-            </div>
         </>
     )
 }
@@ -439,7 +314,7 @@ const Roadmap = ({
 
                 {roadmap.githubPRMetadata && (
                     <div className="px-4 pb-4 pt-4.5 grid grid-cols-3 gap-x-3 gap-y-2 text-sm bg-primary border-t border-primary">
-                        <GitHubPRInfo roadmap={roadmap} />
+                        <ChangelogPRMetadata githubPRMetadata={roadmap.githubPRMetadata} />
                     </div>
                 )}
 
