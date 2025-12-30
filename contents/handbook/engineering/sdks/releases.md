@@ -18,7 +18,7 @@ Our SDK release process uses a dedicated GitHub App per repository that can push
 
 ## Setting up releases for a new SDK
 
-When creating a new SDK - or migrating an existing one to the new workflow -, follow these steps to set up the release infrastructure.
+When creating a new SDK, or migrating an existing one to the new workflow, follow these steps to set up the release infrastructure.
 
 ### 1. Create a GitHub App
 
