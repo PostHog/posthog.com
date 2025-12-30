@@ -235,6 +235,10 @@ export const platformFeatures = {
                 name: 'SQL',
                 description: 'Query flag and product data directly via SQL',
             },
+            terraform: {
+                name: 'Terraform',
+                description: 'Manage resources as infrastructure-as-code',
+            },
             collaboration: {
                 name: 'Collaboration',
                 description: 'Share your projects and sites with teammates',
