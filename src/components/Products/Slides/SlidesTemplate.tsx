@@ -528,8 +528,8 @@ export default function SlidesTemplate({
                 (f: any) => f.template && f.template !== 'tabs'
             )
 
-            // Add the default features slide if there are any default features
-            if (defaultFeatures.length > 0) {
+            // Add the default features slide if there are any default features OR if there's a custom component
+            if (defaultFeatures.length > 0 || CustomComponent) {
                 processedSlides.push({
                     name,
                     slug,

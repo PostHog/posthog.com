@@ -12,10 +12,16 @@ export default function OverviewSlideStacked({
     status,
 }: OverviewSlideProps) {
     const textColor = overview?.textColor || 'text-primary'
+    const isLLMAnalytics = color === 'purple'
 
     return (
-        <div className={`h-full flex flex-col items-center relative bg-${color} ${textColor}`}>
-            <div className="pt-8 px-4 @2xl:pt-12 @2xl:px-8 mb-4 w-full flex flex-col">
+        <div
+            className={`h-full flex flex-col items-center relative ${
+                isLLMAnalytics ? 'bg-purple' : `bg-${color}`
+            } ${textColor}`}
+        >
+            {isLLMAnalytics && <div className="absolute inset-0 bg-llm-analytics opacity-50" />}
+            <div className="pt-8 px-4 @2xl:pt-12 @2xl:px-8 mb-4 w-full flex flex-col relative z-10">
                 <div className="flex justify-center items-center gap-2 mb-4">
                     {Icon && <Icon className={`size-16 @2xl:size-10 drop-shadow-xl opacity-80 ${textColor}`} />}
                     <span className={`text-3xl @2xl:text-2xl font-semibold drop-shadow-xl opacity-80 ${textColor}`}>
@@ -23,8 +29,9 @@ export default function OverviewSlideStacked({
                     </span>
                     {status === 'beta' && (
                         <span
-                            className={`font-bold uppercase border-2 ${overview?.textColor === 'text-black' ? 'border-black' : 'border-white'} px-1 rounded-md text-lg ${overview?.textColor || 'text-primary'
-                                }`}
+                            className={`font-bold uppercase border-2 ${
+                                overview?.textColor === 'text-black' ? 'border-black' : 'border-white'
+                            } px-1 rounded-md text-lg ${overview?.textColor || 'text-primary'}`}
                         >
                             Beta
                         </span>
@@ -40,7 +47,7 @@ export default function OverviewSlideStacked({
                 </p>
             </div>
 
-            <div className="relative flex-1">
+            <div className="relative flex-1 z-10">
                 {screenshots?.overview?.srcMobile ? (
                     <>
                         {/* Show mobile version until @2xl */}

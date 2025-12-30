@@ -56,6 +56,8 @@ module.exports = {
             },
             backgroundImage: {
                 ai: 'radial-gradient(at 84% 83%, hsla(354,99%,77%,1) 0px, transparent 50%), radial-gradient(at 66% 38%, hsla(295,67%,67%,1) 0px, transparent 50%), radial-gradient(at 44% 51%, hsla(149,78%,70%,1) 0px, transparent 50%), radial-gradient(at 41% 14%, hsla(257,76%,72%,1) 0px, transparent 50%), radial-gradient(at 75% 97%, hsla(107,92%,67%,1) 0px, transparent 50%), radial-gradient(at 68% 35%, hsla(237,71%,71%,1) 0px, transparent 50%), radial-gradient(at 42% 23%, hsla(64,65%,79%,1) 0px, transparent 50%)',
+                'llm-analytics':
+                    'radial-gradient(ellipse 80% 60% at 15% 20%, #DE7AFF 0px, transparent 60%), radial-gradient(ellipse 100% 80% at 85% 15%, #EF7D9B 0px, transparent 55%), radial-gradient(ellipse 70% 100% at 90% 85%, #3795FF 0px, transparent 65%), radial-gradient(ellipse 90% 70% at 10% 90%, #40C8D8 0px, transparent 60%), radial-gradient(ellipse 60% 80% at 50% 50%, #DE7AFF 0px, transparent 70%)',
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'bullet-light':
                     'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 8"><path fill="%23D0D1C9" d="M4.23 7.704c-2.034 0-3.636-1.602-3.636-3.6 0-1.98 1.602-3.6 3.636-3.6 1.962 0 3.564 1.62 3.564 3.6 0 1.998-1.602 3.6-3.564 3.6Z"/></svg>\')',

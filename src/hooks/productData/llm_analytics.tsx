@@ -101,7 +101,7 @@ export const llmAnalytics = {
                 "If you're building a new product, just use PostHog. It's a no-brainer. It's the only all-in-one platform like it for developers.",
         },
         posthog: {
-            headline: 'uses LLM analytics to monitor the usage and performance of PostHog AI',
+            headline: 'monitors the usage and performance of PostHog AI with LLM Analytics',
             description:
                 'We use our own AI observability product to attribute costs, monitor latency and errors, compare models, and iterate on prompts in production.',
         },
@@ -232,41 +232,9 @@ export const llmAnalytics = {
         {
             title: 'Native integrations',
             handle: 'native_integrations',
-            template: 'grid',
+            // Custom component handles this slide - no template needed
             headline: 'Works with your AI stack',
             description: 'Simple SDKs for popular LLM providers and observability platforms.',
-            features: [
-                {
-                    icon: <IconOpenAI />,
-                    title: 'OpenAI SDK',
-                    // description: 'Drop-in integration for GPT models with one line of code',
-                },
-                {
-                    icon: <IconAnthropic />,
-                    title: 'Anthropic SDK',
-                    // description: 'Native support for Claude models',
-                },
-                {
-                    icon: <IconGemini />,
-                    title: 'Google Gemini',
-                    // description: 'Native support for Gemini models',
-                },
-                {
-                    icon: <IconLangChain />,
-                    title: 'LangChain',
-                    // description: 'Full observability for LangChain applications',
-                },
-                {
-                    icon: <IconVercel />,
-                    title: 'Vercel AI SDK',
-                    // description: 'Track streaming responses and edge functions',
-                },
-                {
-                    icon: <IconOpenRouter />,
-                    title: 'OpenRouter',
-                    // description: 'Native support for OpenRouter',
-                },
-            ],
         },
         {
             title: 'Platform integrations',
@@ -311,35 +279,6 @@ export const llmAnalytics = {
                     </ul>
                 </div>
             ),
-        },
-        {
-            title: 'Advanced analytics',
-            handle: 'advanced_analytics',
-            template: 'grid',
-            headline: 'Go beyond basic metrics',
-            description: "Use PostHog's full analytics suite to understand AI feature adoption and impact.",
-            features: [
-                {
-                    title: 'Correlation analysis',
-                    description: 'See how AI usage correlates with retention, revenue, and engagement',
-                },
-                {
-                    title: 'Funnel analysis',
-                    description: 'Track conversion through AI-powered features',
-                },
-                {
-                    title: 'Cohort analysis',
-                    description: 'Compare heavy vs light AI users behavior',
-                },
-                {
-                    title: 'Custom dashboards',
-                    description: 'Build dashboards combining AI and product metrics',
-                },
-                {
-                    title: 'SQL access',
-                    description: 'Query raw LLM data with HogQL for custom analysis',
-                },
-            ],
         },
     ],
     postHogOnPostHog: {
