@@ -424,7 +424,7 @@ export const dataPipelines = {
         {
             name: 'Changelog',
             url: '/docs/cdp/changelog',
-            icon: 'IconHistory',
+            icon: 'IconBook',
             color: 'purple',
         },
     ],
@@ -3113,7 +3113,7 @@ export const docsMenu = {
                 {
                     name: 'Changelog',
                     url: '/docs/product-analytics/changelog',
-                    icon: 'IconHistory',
+                    icon: 'IconBook',
                     color: 'purple',
                 },
                 {
@@ -3376,7 +3376,7 @@ export const docsMenu = {
                 {
                     name: 'Changelog',
                     url: '/docs/web-analytics/changelog',
-                    icon: 'IconHistory',
+                    icon: 'IconBook',
                     color: 'purple',
                 },
             ],
@@ -3447,7 +3447,7 @@ export const docsMenu = {
                 {
                     name: 'Changelog',
                     url: '/docs/session-replay/changelog',
-                    icon: 'IconHistory',
+                    icon: 'IconBook',
                     color: 'purple',
                 },
                 {
@@ -3589,7 +3589,7 @@ export const docsMenu = {
                 {
                     name: 'Changelog',
                     url: '/docs/feature-flags/changelog',
-                    icon: 'IconHistory',
+                    icon: 'IconBook',
                     color: 'purple',
                 },
                 {
@@ -3913,7 +3913,7 @@ export const docsMenu = {
                 {
                     name: 'Changelog',
                     url: '/docs/experiments/changelog',
-                    icon: 'IconHistory',
+                    icon: 'IconBook',
                     color: 'purple',
                 },
             ],
@@ -4250,7 +4250,7 @@ export const docsMenu = {
                 {
                     name: 'Changelog',
                     url: '/docs/error-tracking/changelog',
-                    icon: 'IconHistory',
+                    icon: 'IconBook',
                     color: 'purple',
                 },
             ],
@@ -4320,7 +4320,7 @@ export const docsMenu = {
                 {
                     name: 'Changelog',
                     url: '/docs/surveys/changelog',
-                    icon: 'IconHistory',
+                    icon: 'IconBook',
                     color: 'purple',
                 },
                 {
@@ -4612,7 +4612,7 @@ export const docsMenu = {
                 {
                     name: 'Changelog',
                     url: '/docs/data-warehouse/changelog',
-                    icon: 'IconHistory',
+                    icon: 'IconBook',
                     color: 'purple',
                 },
             ],
@@ -4781,7 +4781,7 @@ export const docsMenu = {
                 {
                     name: 'Changelog',
                     url: '/docs/llm-analytics/changelog',
-                    icon: 'IconHistory',
+                    icon: 'IconBook',
                     color: 'purple',
                 },
                 {
@@ -5047,7 +5047,7 @@ export const docsMenu = {
                 {
                     name: 'Changelog',
                     url: '/docs/customer-analytics/changelog',
-                    icon: 'IconHistory',
+                    icon: 'IconBook',
                     color: 'purple',
                 },
             ],
@@ -5152,7 +5152,7 @@ export const docsMenu = {
                 {
                     name: 'Changelog',
                     url: '/docs/posthog-ai/changelog',
-                    icon: 'IconHistory',
+                    icon: 'IconBook',
                     color: 'purple',
                 },
                 {
@@ -5251,7 +5251,7 @@ export const docsMenu = {
                 {
                     name: 'Changelog',
                     url: '/docs/workflows/changelog',
-                    icon: 'IconHistory',
+                    icon: 'IconBook',
                     color: 'purple',
                 },
             ],
@@ -5359,7 +5359,7 @@ export const docsMenu = {
                 {
                     name: 'Changelog',
                     url: '/docs/endpoints/changelog',
-                    icon: 'IconHistory',
+                    icon: 'IconBook',
                     color: 'purple',
                 },
             ],
