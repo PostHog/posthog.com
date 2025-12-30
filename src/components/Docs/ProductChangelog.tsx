@@ -25,6 +25,7 @@ const productConfigMap: Record<string, ProductConfig> = {
     'llm analytics': { topic: 'LLM analytics', teams: ['llm analytics'] },
     'posthog ai': { topic: 'PostHog AI', teams: ['posthog ai'] },
     endpoints: { topic: 'endpoints' },
+    logs: { topic: 'logs', teams: ['logs'] },
     'customer analytics': { teams: ['customer analytics'] },
 }
 
