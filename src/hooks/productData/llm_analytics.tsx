@@ -236,50 +236,50 @@ export const llmAnalytics = {
             headline: 'Works with your AI stack',
             description: 'Simple SDKs for popular LLM providers and observability platforms.',
         },
-        {
-            title: 'Platform integrations',
-            handle: 'platform_integrations',
-            template: 'split',
-            headline: 'Integrates with other LLM observability platforms',
-            description:
-                'Using another LLM observability platform? Send data to PostHog to analyze it with product usage data.',
-            features: [
-                {
-                    icon: <IconLangfuse />,
-                    title: 'Langfuse',
-                    description: '',
-                },
-                {
-                    icon: <IconHelicone />,
-                    title: 'Helicone',
-                    description: '',
-                },
-                {
-                    icon: <IconTraceloop />,
-                    title: 'Traceloop',
-                    description: '',
-                },
-                {
-                    icon: <IconKeywordsAI />,
-                    title: 'Keywords AI',
-                    description: '',
-                },
-            ],
-            children: (
-                <div className="prose-xl p-8">
-                    <h3>Answer questions like:</h3>
-                    <ul className="list-disc">
-                        <li>What are my LLM costs by customer, model, and in total?</li>
-                        <li>How many of my users are interacting with my LLM features?</li>
-                        <li>Are there generation latency spikes?</li>
-                        <li>
-                            Does interacting with LLM features correlate with other metrics (retention, usage, revenue,
-                            etc.)?
-                        </li>
-                    </ul>
-                </div>
-            ),
-        },
+        // {
+        //     title: 'Platform integrations',
+        //     handle: 'platform_integrations',
+        //     template: 'split',
+        //     headline: 'Integrates with other LLM observability platforms',
+        //     description:
+        //         'Using another LLM observability platform? Send data to PostHog to analyze it with product usage data.',
+        //     features: [
+        //         {
+        //             icon: <IconLangfuse />,
+        //             title: 'Langfuse',
+        //             description: '',
+        //         },
+        //         {
+        //             icon: <IconHelicone />,
+        //             title: 'Helicone',
+        //             description: '',
+        //         },
+        //         {
+        //             icon: <IconTraceloop />,
+        //             title: 'Traceloop',
+        //             description: '',
+        //         },
+        //         {
+        //             icon: <IconKeywordsAI />,
+        //             title: 'Keywords AI',
+        //             description: '',
+        //         },
+        //     ],
+        //     children: (
+        //         <div className="prose-xl p-8">
+        //             <h3>Answer questions like:</h3>
+        //             <ul className="list-disc">
+        //                 <li>What are my LLM costs by customer, model, and in total?</li>
+        //                 <li>How many of my users are interacting with my LLM features?</li>
+        //                 <li>Are there generation latency spikes?</li>
+        //                 <li>
+        //                     Does interacting with LLM features correlate with other metrics (retention, usage, revenue,
+        //                     etc.)?
+        //                 </li>
+        //             </ul>
+        //         </div>
+        //     ),
+        // },
     ],
     postHogOnPostHog: {
         title: 'How PostHog uses LLM Analytics',
@@ -416,5 +416,7 @@ export const llmAnalytics = {
     presenterNotes: {
         overview:
             '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',
+        native_integrations:
+            '<strong>Presenter notes:</strong> PostHog integrates with other LLM observability platforms including Langfuse, Helicone, Traceloop, and Keywords AI.',
     },
 }

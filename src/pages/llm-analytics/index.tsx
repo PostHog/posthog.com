@@ -2,11 +2,19 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
-import { IconRewindPlay, IconToggle, IconTrends, IconWarning, IconArrowUpRight } from '@posthog/icons'
+import { IconRewindPlay, IconToggle, IconTrends, IconWarning, IconArrowUpRight, IconLightBulb } from '@posthog/icons'
 import useProduct from 'hooks/useProduct'
 import FeaturesSlide from 'components/Products/Slides/FeaturesSlide'
 import Link from 'components/Link'
-import { IconAnthropic, IconGemini, IconLangChain, IconOpenAI, IconOpenRouter, IconVercel } from 'components/OSIcons'
+// Import logo images
+import AnthropicLogo from '../../../contents/images/docs/llms/Anthropic_logo_2025.svg'
+import VercelLogo from '../../../contents/images/docs/llms/Vercel_logo_2025.svg'
+import GeminiLogo from '../../../contents/images/docs/llms/Google_Gemini_Logo_2025.svg'
+import OpenRouterLogo from '../../../contents/images/docs/llms/OpenRouter_logo_2025.svg'
+import OpenAILogo from '../../../contents/images/docs/llms/OpenAI_Logo.svg'
+import LangChainLogo from '../../../contents/images/docs/llms/LangChain_Logo.svg'
+import LiteLLMLogoLight from '../../../contents/images/docs/llms/LiteLLM_logo_black.png'
+import LiteLLMLogoDark from '../../../contents/images/docs/llms/LiteLLM_logo_white.png'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'llm_analytics'
@@ -80,80 +88,113 @@ const CustomFeaturesSlide = () => {
 const NativeIntegrationsSlide = () => {
     const integrations = [
         {
-            icon: <IconOpenAI />,
-            name: 'OpenAI SDK',
+            logo: OpenAILogo,
+            name: 'OpenAI',
         },
         {
-            icon: <IconAnthropic />,
-            name: 'Anthropic SDK',
+            logo: AnthropicLogo,
+            name: 'Anthropic',
         },
         {
-            icon: <IconGemini />,
+            logo: GeminiLogo,
             name: 'Google Gemini',
         },
         {
-            icon: <IconLangChain />,
+            logo: LangChainLogo,
             name: 'LangChain',
         },
         {
-            icon: <IconVercel />,
+            logo: VercelLogo,
             name: 'Vercel AI SDK',
         },
         {
-            icon: <IconOpenRouter />,
+            logo: OpenRouterLogo,
             name: 'OpenRouter',
         },
         {
-            icon: null,
+            logoLight: LiteLLMLogoLight,
+            logoDark: LiteLLMLogoDark,
             name: 'LiteLLM',
+        },
+        {
+            isManualCapture: true,
+            name: '</> Manual Capture',
         },
     ]
 
     const additionalProviders = [
         'AWS Bedrock',
-        'Azure',
-        'Groq',
-        'Mistral AI',
-        'Cohere',
         'Perplexity',
+        'Azure',
         'Databricks',
+        'Groq',
+        'Lepton',
+        'Mistral AI',
         'Deepseek',
+        'Cohere',
+        'xAI',
+        'Fireworks',
         'And more...',
     ]
 
     return (
-        <div data-scheme="primary" className="flex flex-col h-full bg-primary text-primary px-8 py-12">
-            <div className="flex flex-col @2xl:flex-row @2xl:items-end gap-8">
-                <div className="flex-1 @2xl:pr-8">
-                    <h2 className="text-5xl text-balance mb-4">Simple SDKs for popular LLM providers</h2>
-                    <p className="text-xl text-secondary mb-8">
-                        PostHog works with every LLM provider. Native integration makes setup easy for popular models
-                        like ChatGPT and Claude.
-                    </p>
+        <div data-scheme="primary" className="flex flex-col h-full bg-primary text-primary px-12 @2xl:px-16 py-12">
+            <h2 className="text-5xl text-balance mb-4 text-center">Simple SDKs for popular LLM providers</h2>
+            <p className="text-xl text-secondary mb-10 @2xl:mb-12 text-center">
+                The PostHog SDK instruments your LLM calls by wrapping the provider client.
+                <br />
+                Use the wrappers below for popular models and observability platforms, or manual capture for everything
+                else.
+            </p>
 
-                    <div data-scheme="secondary" className="grid grid-cols-2 @lg:grid-cols-3 gap-6 @2xl:gap-8">
+            <div className="flex flex-col @2xl:flex-row @2xl:items-start gap-4 @2xl:gap-6 flex-1 min-h-0">
+                <div className="flex-[2]">
+                    <div data-scheme="secondary" className="grid grid-cols-2 gap-3 @2xl:gap-4">
                         {integrations.map((integration, index) => (
                             <div
                                 key={index}
-                                className="bg-primary rounded p-6 flex flex-col items-center justify-center text-center"
+                                className="bg-primary rounded p-4 @2xl:p-6 flex flex-col items-center justify-center text-center"
                             >
-                                {integration.icon && (
-                                    <div className="mb-2 flex items-center justify-center h-16">
-                                        <div className="size-12 text-primary fill-current">{integration.icon}</div>
-                                    </div>
+                                {integration.isManualCapture ? (
+                                    <h3 className="text-2xl font-semibold text-primary">&lt;/&gt; Manual Capture</h3>
+                                ) : (
+                                    <>
+                                        {integration.logo && (
+                                            <div className="flex items-center justify-center">
+                                                <img
+                                                    src={integration.logo}
+                                                    alt={integration.name}
+                                                    className={`w-auto object-contain ${
+                                                        integration.name === 'Anthropic' ? 'h-6' : 'h-8'
+                                                    }`}
+                                                />
+                                            </div>
+                                        )}
+                                        {integration.logoLight && integration.logoDark && (
+                                            <div className="flex items-center justify-center">
+                                                <img
+                                                    src={integration.logoLight}
+                                                    alt={integration.name}
+                                                    className="h-8 w-auto object-contain dark:hidden"
+                                                />
+                                                <img
+                                                    src={integration.logoDark}
+                                                    alt={integration.name}
+                                                    className="h-8 w-auto object-contain hidden dark:block"
+                                                />
+                                            </div>
+                                        )}
+                                    </>
                                 )}
-                                <h3 className={`text-xl font-semibold ${!integration.icon ? 'mt-0' : ''}`}>
-                                    {integration.name}
-                                </h3>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                <div className="@2xl:w-80 @2xl:flex-shrink-0">
-                    <div data-scheme="secondary" className="bg-primary rounded p-6">
+                <div className="flex-1 min-h-0">
+                    <div data-scheme="secondary" className="bg-primary rounded p-6 h-full flex flex-col min-h-0">
                         <h3 className="text-2xl font-semibold mb-4">We also support</h3>
-                        <ul className="space-y-2 mb-6">
+                        <ul className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6">
                             {additionalProviders.map((provider, index) => (
                                 <li key={index} className="text-lg text-secondary">
                                     {provider}
@@ -162,7 +203,7 @@ const NativeIntegrationsSlide = () => {
                         </ul>
                         <Link
                             to="/docs/llm-analytics/installation/manual-capture"
-                            className="text-lg font-semibold underline inline-flex items-center gap-1 group"
+                            className="text-lg font-semibold underline inline-flex items-center gap-1 group mt-auto mb-3"
                             state={{ newWindow: true }}
                         >
                             Learn about manual capture
@@ -171,6 +212,14 @@ const NativeIntegrationsSlide = () => {
                     </div>
                 </div>
             </div>
+
+            <p className="text-lg text-secondary text-center mt-8 flex items-center justify-center gap-2">
+                <IconLightBulb className="size-5 flex-shrink-0" />
+                <span>
+                    Using another LLM observability platform? Send data to PostHog to analyze it in context with product
+                    usage data.
+                </span>
+            </p>
         </div>
     )
 }
@@ -296,7 +345,7 @@ export default function LLMAnalytics(): JSX.Element {
         templates: {
             overview: 'stacked',
         },
-        exclude: ['answers', 'videos', 'pairs-with'],
+        exclude: ['answers', 'videos', 'pairs-with', 'feature-platform_integrations'],
         order: [
             'overview',
             'customers',
