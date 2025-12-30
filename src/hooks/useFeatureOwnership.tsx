@@ -420,6 +420,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Table exports',
         owner: ['analytics-platform'],
     },
+    terraform: {
+        feature: 'Terraform integration',
+        owner: ['analytics-platform'],
+        label: 'feature/terraform',
+    },
     'taxonomic-filters': {
         feature: 'Taxonomic filters',
         owner: ['platform-ux'],
