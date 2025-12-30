@@ -40,7 +40,7 @@ After creating the app:
 
 ![SDK Releaser bot icon](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2514924_640cf3f534.png)
 
-2. Generate a private key and save it locally — you'll need it later
+2. Click the big button to generate a private key and save it locally — you'll need it later
 3. Go to **Install App** in the sidebar
 4. Install the app, restricting it to only the SDK repository
 
