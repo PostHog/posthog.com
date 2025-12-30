@@ -421,6 +421,12 @@ export const dataPipelines = {
             name: 'Using Fivetran, Airbyte or other ETL tools with PostHog',
             url: '/docs/cdp/fivetran-airbyte',
         },
+        {
+            name: 'Changelog',
+            url: '/docs/cdp/changelog',
+            icon: 'IconHistory',
+            color: 'purple',
+        },
     ],
 }
 
@@ -3367,6 +3373,12 @@ export const docsMenu = {
                     color: 'blue',
                     featured: true,
                 },
+                {
+                    name: 'Changelog',
+                    url: '/docs/web-analytics/changelog',
+                    icon: 'IconHistory',
+                    color: 'purple',
+                },
             ],
         },
         {
@@ -3431,6 +3443,12 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/session-replay/changelog',
+                    icon: 'IconHistory',
+                    color: 'purple',
                 },
                 {
                     type: 'divider',
@@ -3567,6 +3585,12 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/feature-flags/changelog',
+                    icon: 'IconHistory',
+                    color: 'purple',
                 },
                 {
                     name: 'Settings',
@@ -3885,6 +3909,12 @@ export const docsMenu = {
                     icon: 'IconQuestion',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/experiments/changelog',
+                    icon: 'IconHistory',
+                    color: 'purple',
                 },
             ],
         },
@@ -4217,6 +4247,12 @@ export const docsMenu = {
                     color: 'purple',
                     featured: true,
                 },
+                {
+                    name: 'Changelog',
+                    url: '/docs/error-tracking/changelog',
+                    icon: 'IconHistory',
+                    color: 'purple',
+                },
             ],
         },
         {
@@ -4280,6 +4316,12 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/surveys/changelog',
+                    icon: 'IconHistory',
+                    color: 'purple',
                 },
                 {
                     type: 'divider',
@@ -4567,6 +4609,12 @@ export const docsMenu = {
                     color: 'seagreen',
                     featured: true,
                 },
+                {
+                    name: 'Changelog',
+                    url: '/docs/data-warehouse/changelog',
+                    icon: 'IconHistory',
+                    color: 'purple',
+                },
             ],
         },
         {
@@ -4728,6 +4776,12 @@ export const docsMenu = {
                     name: 'Troubleshooting',
                     url: '/docs/llm-analytics/troubleshooting',
                     icon: 'IconQuestion',
+                    color: 'purple',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/llm-analytics/changelog',
+                    icon: 'IconHistory',
                     color: 'purple',
                 },
                 {
@@ -4990,6 +5044,12 @@ export const docsMenu = {
                     color: 'blue',
                     featured: true,
                 },
+                {
+                    name: 'Changelog',
+                    url: '/docs/customer-analytics/changelog',
+                    icon: 'IconHistory',
+                    color: 'purple',
+                },
             ],
         },
         {
@@ -5090,6 +5150,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Changelog',
+                    url: '/docs/posthog-ai/changelog',
+                    icon: 'IconHistory',
+                    color: 'purple',
+                },
+                {
                     name: 'FAQ',
                     url: '/docs/posthog-ai/faq',
                     icon: 'IconShield',
@@ -5181,6 +5247,12 @@ export const docsMenu = {
                     url: '/docs/workflows/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/workflows/changelog',
+                    icon: 'IconHistory',
+                    color: 'purple',
                 },
             ],
         },
@@ -5283,6 +5355,12 @@ export const docsMenu = {
                     url: '/docs/endpoints/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/endpoints/changelog',
+                    icon: 'IconHistory',
+                    color: 'purple',
                 },
             ],
         },
