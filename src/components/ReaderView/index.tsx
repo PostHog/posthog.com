@@ -77,6 +77,7 @@ interface ReaderViewProps {
     parent?: MenuItem
     markdownContent?: string
     showQuestions?: boolean
+    showAbout?: boolean
 }
 
 interface BackgroundImageOption {
@@ -367,6 +368,7 @@ export default function ReaderView({
     parent,
     markdownContent,
     showQuestions = true,
+    showAbout = false,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -395,6 +397,7 @@ export default function ReaderView({
                 parent={parent}
                 markdownContent={markdownContent}
                 showQuestions={showQuestions}
+                showAbout={showAbout}
             >
                 {children}
             </ReaderViewContent>
@@ -528,6 +531,7 @@ function ReaderViewContent({
     parent,
     markdownContent,
     showQuestions = true,
+    showAbout = false,
 }) {
     const { openNewChat, compact } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
@@ -778,27 +782,29 @@ function ReaderViewContent({
                                         children
                                     )}
                                 </div>
-                                <div
-                                    className={`mt-8 mx-auto transition-all ${
-                                        fullWidthContent || body?.type !== 'mdx'
-                                            ? 'max-w-full'
-                                            : contentMaxWidthClass || 'max-w-2xl'
-                                    }`}
-                                >
-                                    <Blockquote>
-                                        PostHog is an all-in-one developer platform for building successful products. We
-                                        provide <a href="/product-analytics">product analytics</a>,{' '}
-                                        <a href="/web-analytics">web analytics</a>,{' '}
-                                        <a href="/session-replay">session replay</a>,{' '}
-                                        <a href="/error-tracking">error tracking</a>,{' '}
-                                        <a href="/feature-flags">feature flags</a>,{' '}
-                                        <a href="/experiments">experiments</a>, <a href="/surveys">surveys</a>,{' '}
-                                        <a href="/llm-analytics">LLM analytics</a>,{' '}
-                                        <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an{' '}
-                                        <a href="/ai">AI product assistant</a> to help debug your code, ship features
-                                        faster, and keep all your usage and customer data in one stack.
-                                    </Blockquote>
-                                </div>
+                                {showAbout && (
+                                    <div
+                                        className={`mt-8 mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
+                                        <Blockquote>
+                                            PostHog is an all-in-one developer platform for building successful
+                                            products. We provide <a href="/product-analytics">product analytics</a>,{' '}
+                                            <a href="/web-analytics">web analytics</a>,{' '}
+                                            <a href="/session-replay">session replay</a>,{' '}
+                                            <a href="/error-tracking">error tracking</a>,{' '}
+                                            <a href="/feature-flags">feature flags</a>,{' '}
+                                            <a href="/experiments">experiments</a>, <a href="/surveys">surveys</a>,{' '}
+                                            <a href="/llm-analytics">LLM analytics</a>,{' '}
+                                            <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an{' '}
+                                            <a href="/ai">AI product assistant</a> to help debug your code, ship
+                                            features faster, and keep all your usage and customer data in one stack.
+                                        </Blockquote>
+                                    </div>
+                                )}
                                 {showQuestions && (
                                     <div
                                         className={`mt-8 mx-auto transition-all ${
