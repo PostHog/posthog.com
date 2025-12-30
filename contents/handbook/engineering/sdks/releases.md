@@ -20,6 +20,8 @@ Our SDK release process uses a dedicated GitHub App per repository that can push
 
 When creating a new SDK, or migrating an existing one to the new workflow, follow these steps to set up the release infrastructure.
 
+> NOTE: Most of these steps require super administrator privileges on GitHub. Make sure you have the appropriate permissions to work on this.
+
 ### 1. Create a GitHub App
 
 Go to [GitHub App settings](https://github.com/organizations/PostHog/settings/apps) and create a new app:
