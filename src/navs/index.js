@@ -2127,10 +2127,6 @@ export const docsMenu = {
                             url: '/docs/libraries/astro',
                         },
                         {
-                            name: 'Bubble',
-                            url: '/docs/libraries/bubble',
-                        },
-                        {
                             name: 'Cloudflare Workers',
                             url: '/docs/libraries/cloudflare-workers',
                         },
@@ -2147,16 +2143,8 @@ export const docsMenu = {
                             url: '/docs/libraries/flask',
                         },
                         {
-                            name: 'Framer',
-                            url: '/docs/libraries/framer',
-                        },
-                        {
                             name: 'Gatsby',
                             url: '/docs/libraries/gatsby',
-                        },
-                        {
-                            name: 'Google Tag Manager',
-                            url: '/docs/libraries/google-tag-manager',
                         },
                         {
                             name: 'Hono',
@@ -2189,16 +2177,47 @@ export const docsMenu = {
                             ],
                         },
                         {
-                            name: 'n8n',
-                            url: '/docs/libraries/n8n',
-                        },
-                        {
                             name: 'Phoenix',
                             url: '/docs/libraries/phoenix',
                         },
                         {
                             name: 'Remix',
                             url: '/docs/libraries/remix',
+                        },
+                        {
+                            name: 'Svelte',
+                            url: '/docs/libraries/svelte',
+                        },
+                        {
+                            name: 'Vue.js',
+                            url: '/docs/libraries/vue-js',
+                        },
+                    ],
+                },
+                {
+                    name: 'Services',
+                    url: '/docs/services',
+                    icon: 'IconApps',
+                    children: [
+                        {
+                            name: 'Bubble',
+                            url: '/docs/libraries/bubble',
+                        },
+                        {
+                            name: 'Framer',
+                            url: '/docs/libraries/framer',
+                        },
+                        {
+                            name: 'Google Tag Manager',
+                            url: '/docs/libraries/google-tag-manager',
+                        },
+                        {
+                            name: 'MoEngage',
+                            url: '/docs/libraries/moengage',
+                        },
+                        {
+                            name: 'n8n',
+                            url: '/docs/libraries/n8n',
                         },
                         {
                             name: 'Retool',
@@ -2217,14 +2236,6 @@ export const docsMenu = {
                             url: '/docs/libraries/shopify',
                         },
                         {
-                            name: 'Svelte',
-                            url: '/docs/libraries/svelte',
-                        },
-                        {
-                            name: 'Vue.js',
-                            url: '/docs/libraries/vue-js',
-                        },
-                        {
                             name: 'Vercel',
                             url: '/docs/libraries/vercel',
                         },
@@ -2239,6 +2250,10 @@ export const docsMenu = {
                         {
                             name: 'WordPress',
                             url: '/docs/libraries/wordpress',
+                        },
+                        {
+                            name: 'Zapier',
+                            url: '/docs/libraries/zapier',
                         },
                     ],
                 },
