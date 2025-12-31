@@ -5,6 +5,12 @@ import dayjs from 'dayjs'
 import Markdown from 'components/Squeak/components/Markdown'
 import { ChangelogEmojiReactions } from 'components/EmojiReactions'
 import { ChangelogPRMetadata } from 'components/ChangelogPRMetadata'
+import { useUser } from 'hooks/useUser'
+import { useApp } from '../../context/App'
+import { IconPencil, IconPlus, IconShieldLock } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import Tooltip from 'components/RadixUI/Tooltip'
+import RoadmapWindow from 'components/Roadmap/RoadmapWindow'
 
 type ProductConfig = {
     topic?: string // Filter by product tag/label (topic.label)
@@ -46,9 +52,34 @@ const buildRoadmapFilters = (config: ProductConfig) => {
 }
 
 export const ProductChangelog = ({ product }: { product: string }) => {
+    const { isModerator } = useUser()
+    const { addWindow } = useApp()
     const config = productConfigMap[product.toLowerCase()] || {}
     const orFilters = buildRoadmapFilters(config)
     const fiveMonthsAgo = dayjs().subtract(5, 'month').format('YYYY-MM-DD')
+
+    const handleAddFeature = () => {
+        addWindow(
+            React.createElement(RoadmapWindow, {
+                location: { pathname: `add-roadmap` },
+                key: `add-roadmap`,
+                newWindow: true,
+                status: 'complete',
+            }) as unknown as never
+        )
+    }
+
+    const handleEditRoadmap = (id: number) => {
+        addWindow(
+            React.createElement(RoadmapWindow, {
+                location: { pathname: `edit-roadmap-${id}` },
+                key: `edit-roadmap-${id}`,
+                newWindow: true,
+                id: id,
+                status: 'complete',
+            }) as unknown as never
+        )
+    }
 
     const { roadmaps, isLoading } = useRoadmaps({
         params: {
@@ -80,6 +111,20 @@ export const ProductChangelog = ({ product }: { product: string }) => {
 
     return (
         <div className="w-full">
+            {isModerator && (
+                <div className="mb-4">
+                    <Tooltip
+                        trigger={
+                            <OSButton variant="secondary" size="md" icon={<IconPlus />} onClick={handleAddFeature}>
+                                Add changelog
+                            </OSButton>
+                        }
+                        delay={0}
+                    >
+                        <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" /> Add changelog
+                    </Tooltip>
+                </div>
+            )}
             <div>
                 {roadmaps.map((roadmap: { id: number; attributes: Record<string, any> }) => {
                     const { title, squeakId, dateCompleted, description, teams, githubPRMetadata } =
@@ -91,7 +136,24 @@ export const ProductChangelog = ({ product }: { product: string }) => {
                             key={squeakId || roadmap.id}
                             className="border-t border-primary py-6 first:border-t-0 first:pt-0 mt-0"
                         >
-                            <h2 className="m-0">{title}</h2>
+                            <div className="flex items-start justify-between gap-2">
+                                <h2 className="m-0">{title}</h2>
+                                {isModerator && (
+                                    <Tooltip
+                                        trigger={
+                                            <OSButton
+                                                size="md"
+                                                icon={<IconPencil />}
+                                                onClick={() => handleEditRoadmap(roadmap.id)}
+                                            />
+                                        }
+                                        delay={0}
+                                    >
+                                        <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                        Edit changelog
+                                    </Tooltip>
+                                )}
+                            </div>
                             <p className="m-0 mt-1 text-sm text-secondary">
                                 {dateCompleted && dayjs(dateCompleted).format('MMM D, YYYY')} | {teamName} Team
                             </p>
