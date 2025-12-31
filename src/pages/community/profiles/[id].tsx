@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react'
+import React, { ChangeEventHandler, useEffect, useMemo, useRef, useState } from 'react'
 import { PageProps } from 'gatsby'
 import SEO from 'components/seo'
 import { GitHub, LinkedIn, Twitter } from 'components/Icons'
@@ -50,6 +50,7 @@ import HeaderBar from 'components/OSChrome/HeaderBar'
 import OSButton from 'components/OSButton'
 import { IconNoEntry, IconStrapi } from 'components/OSIcons'
 import Points from 'components/Points'
+import { useWindow } from '../../../context/Window'
 
 dayjs.extend(relativeTime)
 
@@ -771,6 +772,7 @@ const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue, maxLength })
 }
 
 const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFieldValue }) => {
+    const { appWindow } = useWindow()
     const { user, isModerator } = useUser()
     const [sort, setSort] = useState(sortOptions[0].label)
     const [hasPosts, setHasPosts] = useState(false)
@@ -793,111 +795,119 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
         }
     }, [posts])
 
-    const tabs = [
-        {
-            value: 'bio',
-            label: 'Bio',
-            content: isEditing ? (
-                <BodyEditor
-                    values={values}
-                    setFieldValue={setFieldValue}
-                    bodyKey="biography"
-                    initialValue={profile.biography}
-                />
-            ) : (
-                <Markdown className="">{profile.biography || `${firstName} hasn't written a bio yet`}</Markdown>
-            ),
-        },
-        ...((isModerator && isEditing) || profile.readme
-            ? [
-                  {
-                      value: 'readme',
-                      label: 'README',
-                      content: isEditing ? (
-                          <BodyEditor
-                              values={values}
-                              setFieldValue={setFieldValue}
-                              bodyKey="readme"
-                              initialValue={profile.readme}
-                              maxLength={10000}
-                          />
-                      ) : (
-                          <Markdown className="prose dark:prose-invert prose-sm">{profile.readme}</Markdown>
-                      ),
-                  },
-              ]
-            : []),
-        {
-            value: 'discussions',
-            label: 'Discussions',
-            content: (
-                <>
-                    <Questions
-                        profileId={id}
-                        disclaimer={false}
-                        showForm={false}
-                        noQuestionsMessage={
-                            <p className="prose dark:prose-invert prose-sm max-w-full text-primary m-0">
-                                {firstName} hasn't participated in any discussions yet
-                            </p>
-                        }
+    const tabs = useMemo(
+        () => [
+            {
+                value: 'bio',
+                label: 'Bio',
+                content: isEditing ? (
+                    <BodyEditor
+                        values={values}
+                        setFieldValue={setFieldValue}
+                        bodyKey="biography"
+                        initialValue={profile.biography}
                     />
-                </>
-            ),
-        },
-        ...(hasPosts
-            ? [
-                  {
-                      value: 'posts',
-                      label: 'Posts',
-                      content: (
-                          <>
-                              <div className="flex justify-between items-center mb-4">
-                                  <h4 className="text-lg font-bold m-0">All posts</h4>
-                                  <Select
-                                      groups={[
-                                          {
-                                              items: sortOptions.map((option) => ({
-                                                  label: option.label,
-                                                  value: option.label,
-                                              })),
-                                              label: 'Sort by',
-                                          },
-                                      ]}
-                                      value={sort}
-                                      onValueChange={(value) => setSort(value)}
-                                  />
-                              </div>
-                              <PostsTable {...posts} />
-                          </>
-                      ),
-                  },
-              ]
-            : []),
-        ...(user?.profile?.id === id
-            ? [
-                  {
-                      value: 'likes',
-                      label: 'Liked posts',
-                      content: (
-                          <>
-                              <h4 className="text-lg font-bold mb-4">Your liked posts</h4>
-                              <LikedPosts profileID={id} />
-                          </>
-                      ),
-                  },
-                  {
-                      value: 'points',
-                      label: 'Points',
-                      content: <Points />,
-                  },
-              ]
-            : []),
-    ]
+                ) : (
+                    <Markdown className="">{profile.biography || `${firstName} hasn't written a bio yet`}</Markdown>
+                ),
+            },
+            ...((isModerator && isEditing) || profile.readme
+                ? [
+                      {
+                          value: 'readme',
+                          label: 'README',
+                          content: isEditing ? (
+                              <BodyEditor
+                                  values={values}
+                                  setFieldValue={setFieldValue}
+                                  bodyKey="readme"
+                                  initialValue={profile.readme}
+                                  maxLength={10000}
+                              />
+                          ) : (
+                              <Markdown className="prose dark:prose-invert prose-sm">{profile.readme}</Markdown>
+                          ),
+                      },
+                  ]
+                : []),
+            {
+                value: 'discussions',
+                label: 'Discussions',
+                content: (
+                    <>
+                        <Questions
+                            profileId={id}
+                            disclaimer={false}
+                            showForm={false}
+                            noQuestionsMessage={
+                                <p className="prose dark:prose-invert prose-sm max-w-full text-primary m-0">
+                                    {firstName} hasn't participated in any discussions yet
+                                </p>
+                            }
+                        />
+                    </>
+                ),
+            },
+            ...(hasPosts
+                ? [
+                      {
+                          value: 'posts',
+                          label: 'Posts',
+                          content: (
+                              <>
+                                  <div className="flex justify-between items-center mb-4">
+                                      <h4 className="text-lg font-bold m-0">All posts</h4>
+                                      <Select
+                                          groups={[
+                                              {
+                                                  items: sortOptions.map((option) => ({
+                                                      label: option.label,
+                                                      value: option.label,
+                                                  })),
+                                                  label: 'Sort by',
+                                              },
+                                          ]}
+                                          value={sort}
+                                          onValueChange={(value) => setSort(value)}
+                                      />
+                                  </div>
+                                  <PostsTable {...posts} />
+                              </>
+                          ),
+                      },
+                  ]
+                : []),
+            ...(user?.profile?.id === id
+                ? [
+                      {
+                          value: 'likes',
+                          label: 'Liked posts',
+                          content: (
+                              <>
+                                  <h4 className="text-lg font-bold mb-4">Your liked posts</h4>
+                                  <LikedPosts profileID={id} />
+                              </>
+                          ),
+                      },
+                      {
+                          value: 'points',
+                          label: 'Points',
+                          content: <Points />,
+                      },
+                  ]
+                : []),
+        ],
+        []
+    )
+
+    const initialTab = useMemo(() => {
+        const params = new URLSearchParams(appWindow?.location?.search)
+        return tabs.find((tab) => tab.value === params.get('tab'))?.value || tabs[0].value
+    }, [])
 
     return (
         <div data-scheme="secondary">
-            <OSTabs tabs={tabs} defaultValue={tabs[0].value} className="h-auto" triggerDataScheme="primary" />
+            <OSTabs tabs={tabs} defaultValue={initialTab} className="h-auto" triggerDataScheme="primary" />
         </div>
     )
 }
@@ -917,7 +927,6 @@ const ValidationSchema = Yup.object().shape({
 export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
     const posthog = usePostHog()
-    const nav = useTopicsNav()
     const { addToast } = useToast()
     const { user, getJwt } = useUser()
     const [isEditing, setIsEditing] = useState(false)
@@ -925,6 +934,7 @@ export default function ProfilePage({ params }: PageProps) {
     const [giftAmount, setGiftAmount] = useState<number>()
     const [giftNote, setGiftNote] = useState('')
     const [giftSubmitting, setGiftSubmitting] = useState(false)
+    const [giftConfirming, setGiftConfirming] = useState(false)
 
     const isCurrentUser = user?.profile?.id === id
     const isModerator = user?.role?.type === 'moderator'
@@ -1255,6 +1265,7 @@ export default function ProfilePage({ params }: PageProps) {
                 setGiftPopoverOpen(false)
                 setGiftAmount(undefined)
                 setGiftNote('')
+                setGiftConfirming(false)
                 mutate()
             } else {
                 const data = await response.json()
@@ -1273,6 +1284,7 @@ export default function ProfilePage({ params }: PageProps) {
             })
         } finally {
             setGiftSubmitting(false)
+            setGiftConfirming(false)
         }
     }
 
@@ -1382,16 +1394,47 @@ export default function ProfilePage({ params }: PageProps) {
                                                         placeholder="What's this gift for?"
                                                     />
                                                 </div>
-                                                <OSButton
-                                                    size="md"
-                                                    variant="primary"
-                                                    onClick={handleGift}
-                                                    disabled={giftSubmitting || !giftAmount || !giftNote?.trim()}
-                                                    width="full"
-                                                    icon={<IconSparkles />}
-                                                >
-                                                    {giftSubmitting ? 'Sending...' : 'Send gift'}
-                                                </OSButton>
+                                                {giftConfirming ? (
+                                                    <div className="space-y-2">
+                                                        <p className="text-sm text-secondary text-center">
+                                                            Send{' '}
+                                                            <span className="font-bold">
+                                                                {giftAmount} point{giftAmount === 1 ? '' : 's'}
+                                                            </span>{' '}
+                                                            to {profile?.firstName}?
+                                                        </p>
+                                                        <div className="flex gap-2">
+                                                            <OSButton
+                                                                size="md"
+                                                                variant="secondary"
+                                                                onClick={() => setGiftConfirming(false)}
+                                                                disabled={giftSubmitting}
+                                                                width="full"
+                                                            >
+                                                                Cancel
+                                                            </OSButton>
+                                                            <OSButton
+                                                                size="md"
+                                                                variant="primary"
+                                                                onClick={handleGift}
+                                                                disabled={giftSubmitting}
+                                                                width="full"
+                                                            >
+                                                                {giftSubmitting ? 'Sending...' : 'Confirm'}
+                                                            </OSButton>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <OSButton
+                                                        size="md"
+                                                        variant="primary"
+                                                        onClick={() => setGiftConfirming(true)}
+                                                        disabled={!giftAmount || !giftNote?.trim()}
+                                                        width="full"
+                                                    >
+                                                        Send gift
+                                                    </OSButton>
+                                                )}
                                             </div>
                                         </Popover>
                                         <OSButton

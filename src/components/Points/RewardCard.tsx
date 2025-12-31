@@ -168,7 +168,7 @@ export default function RewardCard({ reward, total }: { reward: Reward; total: n
                     : isActive
                     ? 'border-orange bg-orange/5 dark:bg-orange/10'
                     : canRedeem
-                    ? 'border-primary hover:border-green hover:bg-green/5 dark:hover:bg-green/10'
+                    ? 'border-primary'
                     : 'border-primary opacity-60'
             }`}
         >

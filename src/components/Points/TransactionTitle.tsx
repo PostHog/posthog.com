@@ -3,6 +3,7 @@ import { IconPresent, IconReceipt, IconBadge, IconCheck, IconCopy } from '@posth
 import CloudinaryImage from 'components/CloudinaryImage'
 import dayjs from 'dayjs'
 import type { TransactionMetadata } from './types'
+import Link from 'components/Link'
 
 const transactionTypeIcons: Record<string, React.ReactNode> = {
     gift: <IconPresent className="size-5 text-purple" />,
@@ -14,10 +15,15 @@ export default function TransactionTitle({
     type,
     metadata,
     date,
+    link,
 }: {
     type: string
     metadata?: TransactionMetadata
     date?: Date
+    link?: {
+        url: string
+        label: string
+    }
 }) {
     const iconURL = metadata?.achievement?.iconURL as `https://res.cloudinary.com/${string}` | undefined
     const typeKey = type.toLowerCase().replace(/_/g, '')
@@ -48,7 +54,20 @@ export default function TransactionTitle({
                 ) : null}
             </span>
             <div className="min-w-0 flex-1">
-                <p className="text-sm capitalize m-0 font-semibold truncate">{type.replace(/_/g, ' ').toLowerCase()}</p>
+                <div className="flex items-baseline gap-1 leading-none">
+                    <p className="text-sm capitalize m-0 font-semibold truncate">
+                        {type.replace(/_/g, ' ').toLowerCase()}
+                    </p>
+                    {link ? (
+                        <Link
+                            to={link.url}
+                            className="text-xs text-red dark:text-yellow shrink-0 font-semibold"
+                            state={{ newWindow: true }}
+                        >
+                            {link.label}
+                        </Link>
+                    ) : null}
+                </div>
                 <div className="flex items-baseline gap-1">
                     <p className="text-xs text-muted m-0 truncate">
                         <span className="text-primary">{description}</span>

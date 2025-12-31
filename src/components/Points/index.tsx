@@ -99,6 +99,14 @@ export default function Points() {
                                                 >
                                                     <div className="flex-1 min-w-0">
                                                         <TransactionTitle
+                                                            link={
+                                                                type === 'achievement'
+                                                                    ? {
+                                                                          url: `/community/achievements`,
+                                                                          label: 'View all',
+                                                                      }
+                                                                    : undefined
+                                                            }
                                                             type={type}
                                                             metadata={metadata as any}
                                                             date={date}
