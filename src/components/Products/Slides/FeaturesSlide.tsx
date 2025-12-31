@@ -290,7 +290,7 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                         </div>
                                         <aside className={item.imagesClasses || ''}>
                                             {item.images && item.images.length > 0 && (
-                                                <div className="max-w-3xl mx-auto">
+                                                <div className="max-w-6xl mx-auto">
                                                     <ProductImage images={item.images} />
                                                 </div>
                                             )}
@@ -325,7 +325,11 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                 </div>
                             )}
                             <div className="relative">
-                                <div className="pt-12 px-4 pb-8">
+                                <div
+                                    className={`pt-12 px-4 ${
+                                        item.features && item.features.length > 0 ? 'pb-8' : 'pb-4'
+                                    }`}
+                                >
                                     <h2 className="text-5xl mb-0 text-center">{item.headline}</h2>
                                     {item.description && (
                                         <p
@@ -370,7 +374,11 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                             </div>
                                         )}
                                         {item.images && item.images.length > 0 && (
-                                            <div className="max-w-3xl mx-auto mt-8">
+                                            <div
+                                                className={`max-w-6xl mx-auto ${
+                                                    item.features && item.features.length > 0 ? 'mt-8' : 'mt-4'
+                                                }`}
+                                            >
                                                 <ProductImage images={item.images} />
                                             </div>
                                         )}

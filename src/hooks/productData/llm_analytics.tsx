@@ -123,7 +123,7 @@ export const llmAnalytics = {
             description: 'Get a comprehensive overview of your LLM usage, costs, and performance',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_screenshot_ce72bbf715.png',
                     alt: 'LLM Analytics dashboard',
                     className: 'justify-center items-center',
                 },
@@ -270,10 +270,11 @@ export const llmAnalytics = {
             icon: <IconSparkles />,
             color: 'yellow',
             headline: 'Generations',
-            description: 'Track and analyze individual LLM generations with full context and metadata',
+            description:
+                'Every LLM call becomes a generation. See exactly what went in, what came out, and why it cost you $0.03.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/generations_screenshot_56f0f313ae.png',
                     alt: 'LLM Analytics generations',
                     className: 'justify-center items-center',
                 },
@@ -284,7 +285,8 @@ export const llmAnalytics = {
             icon: <IconUser />,
             color: 'red',
             headline: 'Users',
-            description: 'See which users are interacting with your AI features and understand their usage patterns',
+            description:
+                'See which users are interacting with your AI features and understand their usage pattern. Balance power users and tourists to refine your pricing model',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_screenshot_716215eebb.png',
@@ -298,10 +300,11 @@ export const llmAnalytics = {
             icon: <IconWarning />,
             color: 'yellow',
             headline: 'Errors',
-            description: 'Monitor and debug errors in your LLM calls with detailed error tracking',
+            description:
+                'Connect your LLM events to error tracking to debug failures and monitor exceptions. See the exact prompts, model responses, and metadata associated with failed AI workflows.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/errors_screenshot_e413f3f20b.png',
                     alt: 'LLM Analytics errors',
                     className: 'justify-center items-center',
                 },
@@ -326,10 +329,11 @@ export const llmAnalytics = {
             icon: <IconMagicWand />,
             color: 'purple',
             headline: 'Playground',
-            description: 'Test and iterate on prompts in a safe environment before deploying to production',
+            description:
+                'Test and iterate without touching production code. Experiment with different models, prompts, tool calls and configurations to find the best solution.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/playground_screenshot_eba10793cd.png',
                     alt: 'LLM Analytics playground',
                     className: 'justify-center items-center',
                 },
@@ -340,7 +344,8 @@ export const llmAnalytics = {
             icon: <IconLlmPromptEvaluation />,
             color: 'blue',
             headline: 'Evaluations',
-            description: 'Configure evaluation prompts and triggers to automatically assess your LLM generations.',
+            description:
+                'Run evals for relevance, toxicity, hallucinations, and more. Select a pre-configured template to get started quickly, or create your own from scratch',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
@@ -349,34 +354,20 @@ export const llmAnalytics = {
                 },
             ],
         },
-        {
-            title: 'Datasets',
-            icon: <IconDatabase />,
-            color: 'lilac',
-            headline: 'Datasets',
-            description: 'Manage and organize datasets for prompt evaluation and model training',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
-                    alt: 'LLM Analytics datasets',
-                    className: 'justify-center items-center',
-                },
-            ],
-        },
-        {
-            title: 'Prompts',
-            icon: <IconLlmPromptManagement />,
-            color: 'purple',
-            headline: 'Prompts',
-            description: 'Create, manage, and version control your prompts from a central location',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
-                    alt: 'LLM Analytics prompts',
-                    className: 'justify-center items-center',
-                },
-            ],
-        },
+        // {
+        //     title: 'Prompts',
+        //     icon: <IconLlmPromptManagement />,
+        //     color: 'purple',
+        //     headline: 'Prompts',
+        //     description: 'Create, manage, and version control your prompts from a central location',
+        //     images: [
+        //         {
+        //             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+        //             alt: 'LLM Analytics prompts',
+        //             className: 'justify-center items-center',
+        //         },
+        //     ],
+        // },
         {
             label: 'Advanced analytics',
         },
@@ -385,7 +376,8 @@ export const llmAnalytics = {
             icon: <IconTrends />,
             color: 'blue',
             headline: 'Go beyond basic metrics',
-            description: "Use PostHog's full analytics suite to understand AI feature adoption and impact.",
+            description:
+                'Go beyond "how many calls?" See how AI usage correlates with retention, revenue, and whether your feature is actually useful.',
             features: [
                 {
                     title: 'Correlation analysis',
@@ -414,7 +406,7 @@ export const llmAnalytics = {
             icon: <IconGear />,
             color: 'seagreen',
             headline: 'Customizations',
-            description: 'Customize your LLM analytics setup with advanced configuration options',
+            description: "One size doesn't fit all. Build custom dashboards and insights to fit your needs",
             features: [
                 {
                     title: 'Custom dashboards',
