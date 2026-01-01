@@ -589,39 +589,6 @@ const RoadmapCards = ({
         return () => clearTimeout(timer)
     }, [periods, width])
 
-    // Map vertical scroll to horizontal scroll
-    useEffect(() => {
-        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
-        if (!viewport) return
-
-        const handleWheel = (e: WheelEvent) => {
-            const targetViewport =
-                e.target instanceof Element
-                    ? (e.target.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null)
-                    : null
-            const targetViewportChild = targetViewport?.querySelector('div') as HTMLElement | null
-
-            if (
-                targetViewport &&
-                targetViewportChild &&
-                targetViewport !== viewport &&
-                targetViewportChild.getBoundingClientRect().height > targetViewport.getBoundingClientRect().height
-            )
-                return
-
-            // Only handle vertical scrolling (deltaY)
-            if (e.deltaY !== 0) {
-                e.preventDefault()
-                viewport.scrollLeft += e.deltaY
-            }
-        }
-
-        viewport.addEventListener('wheel', handleWheel, { passive: false })
-        return () => {
-            viewport.removeEventListener('wheel', handleWheel)
-        }
-    }, [])
-
     const handlePlayVideo = (video: ChangelogVideo) => {
         const size = {
             width: 500,
