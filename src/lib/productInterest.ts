@@ -54,7 +54,8 @@ export function showedInterest(slug: string): void {
     if (!posthog) return
 
     // Always add the new interest to the end of the list
-    const interests = [...getProductInterests().filter((interest) => interest !== slug), slug]
+    // and only keep at most 3 interests to keep the cookie size down
+    const interests = [...getProductInterests().filter((interest) => interest !== slug), slug].slice(-3)
     posthog.register({ [PROPERTY_NAME]: interests })
 }
 
