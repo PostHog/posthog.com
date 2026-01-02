@@ -20,6 +20,7 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     capture_pageview: false,
     capture_pageleave: true,
     persistence: 'localStorage+cookie',
+    cookie_persisted_properties: ['prod_interest'],
     uuid_version:'v7',
     session_recording: {
         maskAllInputs: false,

@@ -550,20 +550,33 @@ To get changes into production, the website deploys automatically from `master`.
 
 ## Product interest tracking for onboarding
 
-We track which products users have shown interest in by visiting product landing pages or docs. This data is stored in a cross-subdomain cookie that can be read by app.posthog.com during onboarding to personalize the experience.
+We track which products users have shown interest in by visiting product landing pages or docs. This data is stored using PostHog's `cookie_persisted_properties` feature, making it available across all posthog.com subdomains (including app.posthog.com) for onboarding personalization.
 
 ### How it works
 
-When a user visits a product-specific page (like `/product-analytics` or `/docs/session-replay`), we record that product's slug in a cookie - `ph_product_interest_onboarding` - for 14 days as a JSON array. This can be found in `src/lib/productInterest.ts`.
+When a user visits a product-specific page (like `/product-analytics` or `/docs/session-replay`), we record that product's slug using `posthog.register()` with the property `prod_interest`. This property is configured in `cookie_persisted_properties` in `gatsby/onPreBoostrap.ts`, which means it gets stored in a cross-subdomain cookie automatically.
+
+To read the interests, we use `posthog.get_property('prod_interest')` which returns an array of product slugs like `["product-analytics", "session-replay"]`.
+
+We always store the most recent interests last in the array.
 
 ### Code structure
 
 The tracking is implemented in:
 
-- `src/lib/productInterest.ts` - Core utilities for reading/writing the cookie
+- `src/lib/productInterest.ts` - Core utilities using `posthog.get_property()` and `posthog.register()`
 - `src/hooks/useProductInterest.ts` - React hooks for tracking
 - `src/components/Products/Slides/SlidesTemplate.tsx` - Integration for product landing pages
 - `src/templates/Handbook.tsx` - Integration for docs pages
+
+### Reading interests on app.posthog.com
+
+Since this uses PostHog's built-in cookie persistence, you can read the interests on any subdomain where PostHog is initialized:
+
+```javascript
+const interests = posthog.get_property('prod_interest') || []
+// interests = ["product-analytics", "session-replay", ...]
+```
 
 ### Expanding usage
 
