@@ -1310,6 +1310,10 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Community and Free Plan support',
+                url: '/handbook/support/community-and-free-support',
+            },
+            {
                 name: 'Troubleshooting tips',
                 url: '/handbook/support/troubleshooting-tips',
             },
