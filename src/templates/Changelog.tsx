@@ -1022,7 +1022,7 @@ export default function Changelog({
                         <div className={`min-h-0 flex-grow pt-2 ${hideEmpty ? 'mb-4' : ''}`}>
                             <RoadmapCards
                                 startYear={2020}
-                                endYear={2025}
+                                endYear={2026}
                                 roadmaps={filteredData}
                                 setPercentageOfScrollInView={setPercentageOfScrollInView}
                                 windowPercentageFromLeft={windowPercentageFromLeft}
@@ -1045,7 +1045,7 @@ export default function Changelog({
                                 >
                                     <Timeline
                                         startYear={2020}
-                                        endYear={2025}
+                                        endYear={2026}
                                         data={roadmapsGrouped}
                                         onDrag={handleDrag}
                                         windowX={windowX}
