@@ -130,6 +130,9 @@ module.exports = {
                     {
                         resolve: require.resolve('./plugins/gatsby-remark-video'),
                     },
+                    {
+                        resolve: require.resolve('./plugins/gatsby-remark-inline-jsx-paragraphs'),
+                    },
                 ],
             },
         },
@@ -393,7 +396,7 @@ module.exports = {
                 name: `posthog-main-repo`,
                 remote: `https://github.com/posthog/posthog.git`,
                 branch: process.env.GATSBY_POSTHOG_BRANCH || 'master',
-                patterns: `docs/published/**`,
+                patterns: ['docs/published/**', 'docs/onboarding/**'],
             },
         },
         // {

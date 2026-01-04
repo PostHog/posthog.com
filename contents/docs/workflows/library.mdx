@@ -1,0 +1,86 @@
+---
+title: Content library and message templates
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+Our library lets you create reusable message templates for your workflows. You can access it from the **Library** tab in workflows.
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/the_library_95255c0656.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/the_library_95255c0656.png"
+    classes="rounded"
+    alt="Library"
+/>
+
+Currently, we support email templates, with push notifications and SMS templates coming soon.
+
+## Liquid and merge tags
+
+All template types support [Liquid templating](https://shopify.github.io/liquid/) to personalize your messages with user properties and data. You can type liquid directly, or use the merge tag dropdown in your message templates, which will show you the entire list of available person properties (see email example below).
+
+<CalloutBox icon="IconInfo" title="Tip: Use default values with Liquid" type="fyi">
+
+When using Liquid with existing user properties, you should include a default value if the property could be null or may not exist. For example:
+
+```liquid
+{{ person.name | default: "there" }}
+```
+
+This ensures your message displays correctly even when a property is missing.
+
+</CalloutBox>
+
+## Email templates
+
+When you click on `new template` you will see a page like this:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/new_email_template_5a6354e3e7.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/new_email_template_5a6354e3e7.png"
+    classes="rounded"
+    alt="empty-email-template"
+/>
+
+This is our drag-and-drop email builder, which you can use to quickly build email templates. To save the template, you will need to give the template a name, and a subject for the email. 
+
+The builder allows you to:
+
+- Drag different types of content into the email like columns, buttons, text etc.
+- Format the content with blocks, breaking up content into multiple sections for example
+- Adjust fonts, colors and padding in the body selector
+
+Additionally our builder also supports custom HTML — just drag the HTML box into your template to add custom HTML code.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/html_block_3d949750ab.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/html_block_3d949750ab.png"
+    classes="rounded"
+    alt="html-blocks-in-email"
+/>
+
+Once you've mocked up your email, you can preview what the email would look like on different device types (desktop, tablet, and mobile) to ensure it displays correctly across all platforms.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viewing_email_c447c3ef0f.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viewing_email_c447c3ef0f.png"
+    classes="rounded"
+    alt="viewing-as-desktop"
+/>
+
+### Using Liquid in email templates
+
+You can type Liquid syntax directly into your email template. We also provide a merge tags dropdown that you can click to see all available user properties and easily insert them into your template.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/merge_tags_6c859a905f.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/merge_tags_6c859a905f.png"
+    classes="rounded"
+    alt="viewing-as-desktop"
+/>
+
+If you type Liquid syntax directly and the Liquid doesn't compile correctly, the email won't be sent. Always verify your Liquid syntax is valid before starting a workflow.
+
+### Testing templates
+
+It's best practice to test a message in a workflow before starting the workflow. This helps ensure your template displays correctly with real user data and that all Liquid variables resolve properly.
+
