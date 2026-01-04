@@ -501,5 +501,12 @@
         "link_type": "linkedin",
         "link_url": "https://linkedin.com/in/jinayoon963",
         "profile_id": 38655
+    },
+    {
+        "handle": "faisal",
+        "name": "Faisal-011",
+        "role": "Contributor",
+        "link_type": "github",
+        "link_url": "https://github.com/Faisal-011"
     }
 ]
