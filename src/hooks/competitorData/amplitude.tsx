@@ -400,6 +400,7 @@ export const amplitude = {
             proxies: false,
             sdks: false,
             sql: false,
+            terraform: false,
         },
         tools: {
             cms: '',

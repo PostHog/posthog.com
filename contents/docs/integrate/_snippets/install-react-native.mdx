@@ -76,9 +76,9 @@ Then you can access PostHog by importing your instance:
 import { posthog } from './posthog'
 
 export function MyApp1() {
-    useEffect(async () => {
+    useEffect(() => {
         posthog.capture('event_name')
-    }, [posthog])
+    }, [])
 
     return <View>Your app code</View>
 }
