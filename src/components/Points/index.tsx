@@ -38,7 +38,7 @@ export default function Points() {
 
     return (
         <div className="space-y-6">
-            <div className="space-y-2 relative">
+            <div className="space-y-2">
                 <div className="flex items-baseline justify-between">
                     <div className="flex items-baseline gap-2">
                         <span className="text-4xl font-bold tabular-nums text-green">{total.toLocaleString()}</span>
@@ -59,10 +59,10 @@ export default function Points() {
                         />
                     </div>
                 )}
-                <div className="text-right absolute -bottom-0.5 right-0 translate-y-full">
+                <div className="text-right !mt-1">
                     <Link
                         to="/community/achievements"
-                        className="text-sm font-semibold text-red dark:text-yellow"
+                        className="text-sm font-semibold text-red dark:text-yellow leading-none"
                         state={{ newWindow: true }}
                     >
                         How do I earn points?
