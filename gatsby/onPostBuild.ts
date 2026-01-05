@@ -559,7 +559,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
     // Convert HTML files to markdown using turndown
     const docsQuery = (await graphql(`
         query {
-            allMdx(filter: { fields: { slug: { regex: "/^/docs/" } } }) {
+            allMdx(filter: { fields: { slug: { regex: "/^/(docs|handbook)/" } } }) {
                 nodes {
                     fields {
                         slug
@@ -573,7 +573,9 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
     `)) as { data: { allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> } } }
 
     const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes)
-    generateLlmsTxt(filteredPages)
+    // Only include docs pages in llms.txt (not handbook)
+    const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs/'))
+    generateLlmsTxt(docsPages)
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
         console.log('Skipping onPostBuild tasks')
