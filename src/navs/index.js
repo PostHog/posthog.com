@@ -4466,6 +4466,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/shopify',
                         },
                         {
+                            name: 'Slack',
+                            url: '/docs/data-warehouse/sources/slack',
+                        },
+                        {
                             name: 'Supabase',
                             url: '/tutorials/supabase-query',
                         },
