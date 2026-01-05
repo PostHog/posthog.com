@@ -72,7 +72,7 @@ I think a few factors coming together will make PostHog feel a lot simpler:
 
 I believe this will 
 
-### We're big enough to hate
+### We're big enough to hate
 
 When you're really small, people will mostly ignore you, but a few will encourage you! It's pretty rare to get hate unless you're doing something egregious. As you get larger, especially after lots of fundraising, expectations are much higher. Rightfully so. Coping with this is harder. It feels like you've unlocked rocket launchers but have a bigger boss to kill. We have _much_ more resource now, but we also have more pressure to keep our growth high _and_ a much bigger surface area to look after.
 
@@ -92,7 +92,7 @@ Then I took over a bunch of engineering teams. Then I dropped marketing. Now I j
 
 This has worked remarkably well for us - despite having the "wrong" experience, we are both having much more fun and have way more energy. It turned out that what we're actually best at, wasn't what we had experience at doing initially. Don't default into doing what you've done before - pick what you want to focus more on. You'll figure it out and you'll have more fun regardless. Even today, everyone in a leadership role at PostHog was hired doing individual contributor work first, often for years. I think evolution means it's human nature to put people into boxes prematurely.
 
-## Marketing did some really cool new stuff
+## Marketing did some really cool new stuff
 
 We've kept bashing away at our newsletter, getting more and more readership. I used to be the only person that would write, now I am very regularly "outwritten" by our own team. As arrogant as it sounds, I never thought that'd be possible - I thought I'd always have the easiest time writing at PostHog because I've a natural advantage. It turns out that we've managed to find stronger and much more focused writers than me.
 
@@ -128,7 +128,7 @@ Combining this with our existing, but nascent, workflows product feels like it c
 
 Helping provide more of the tracking and infrastructure for agents is the other key area to explore. So many people are building agents, but making it easier to spin them up, understand their behavior and improve them feels like a dark art still. We have shipped LLM analytics already, but it's largely prompt-focused. We think extending our functionality for agents would make a ton of sense if we want to be where the puck is going.
 
-## We hired lots of people
+##  We hired lots of people
 
 Surprisingly this went super smoothly. We felt very confident that we'd overengineered the living daylights out of our culture, and that's pretty much what happened. The handbook was a _huge_ deal to have in place. We changed a lot of stuff, but we had remarkably few issues with adding far more people and more teams. We went from around ~80 people at the end of 2024 to 179 ish by the end of 2025.
 
