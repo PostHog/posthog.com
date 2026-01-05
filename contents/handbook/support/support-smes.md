@@ -6,19 +6,31 @@ showTitle: true
 
 ## Why we have SMEs
 
-As we add more products to PostHog, it becomes more difficult for individual support engineers to effectively work across every product. SMEs help us maintain deep expertise across our product areas while ensuring every ticket gets answered by someone who really knows their stuff.
+As we add more products to PostHog, it becomes increasingly difficult for individual support engineers to effectively work across every product. SMEs help us maintain deep expertise across our products and ensure every ticket gets answered by someone who really knows their stuff.
 
-This structure helps us own our product areas completely, build the knowledge needed to delight users with better and faster answers, and develop close relationships with product teams so we can advocate for fixes and features that actually matter to users.
+By allowing SMEs to own groups of PostHog products, we build the knowledge needed to delight users with better and faster answers, and develop close relationships with product teams so we can advocate for fixes and features that actually matter to users.
 
 ## Product ownership
 
+### Product groups
+
+The various PostHog products have been split into the following product groups:
+- Analytics (analytics platform, customer analytics, product analytics, web analytics, growth)
+- Unclassified (tickets in the 'Support' group)
+- Flags (experiments, feature flags, surveys)
+- Data (batch exports, data stack, ingestion, workflows)
+- Replay (replay, heatmaps, toolbar)
+- Observability + AI & SDK/Implementation (error tracking, PostHog AI, LLM analytics, SDK/Implementation, mobile)
+
+**A note on these groupings**: These product groups are based on current ticket volumes. As products grow or new ones launch, we'll split or reorganize them. This structure will evolve with our needs.
+
+### SME ownership
+
 All technical support engineers share responsibility for:
-- **Analytics products** (analytics platform, customer analytics, product analytics, web analytics, growth). These product areas are shared as they represent the highest proportion of our tickets.
-- **Unclassified tickets** (tickets in the 'Support' group). Where possible, these tickets should be updated with the correct product group.
+- **Analytics products** - this product group is shared as they represent the highest proportion of our tickets.
+- **Unclassified tickets** - where possible, these tickets should be updated with the correct product group.
 
-Beyond that, we have SMEs who own specific product areas. For each area, we select one person from EU and one from NA to maintain timezone coverage.
-
-### SME areas and owners
+Beyond that, we have SMEs who own specific product groups. For each product group, we select one person from EU and one from NA to maintain timezone coverage:
 
 **Flags** (experiments, feature flags, surveys)
 - EU: <TeamMember name="Ben Lea" photo />, NA: <TeamMember name="Joshua Ordehi" photo />
@@ -32,14 +44,13 @@ Beyond that, we have SMEs who own specific product areas. For each area, we sele
 **Observability + AI & SDK/Implementation** (error tracking, PostHog AI, LLM analytics, SDK/Implementation, mobile)
 - EU: TBD, NA: <TeamMember name="Steven Shults" photo />
 
-**A note on these groupings**: These SME areas are based on current ticket volumes. As products grow or new ones launch, we'll split or reorganize them. This structure is designed to evolve with our needs.
 
 ## What SMEs actually do
 
-Being an SME means you're the go-to person for your product area. This breaks down into two key aspects:
+Being an SME means you're the go-to person for your product group. This breaks down into two key aspects:
 
 ### Own the customer perspective
-- Maintain oversight of all tickets in your product area
+- Maintain oversight of all tickets in your product group
 - Spot patterns and common themes
 - Understand what bugs are frustrating users most
 - Know what features users are asking for
@@ -55,14 +66,14 @@ Being an SME means you're the go-to person for your product area. This breaks do
 
 ### Your Zendesk views
 
-Each SME area has a dedicated view in Zendesk that includes:
+SMEs each have a dedicated view in Zendesk that includes:
 - Tickets created from Slack channels
 - Tickets submitted via the help sidebar
 - Community questions
 
-These views contain tickets from your specific SME area (see groupings above) **and** all shared product areas (analytics and unclassified tickets). If there are any unclassified tickets that appear in your view (tickets in the 'Support' group), then where possible please assign these to the correct product group. Let <TeamMember name="Abigail Richardson" photo /> know if there are certain types of tickets which regularly appear in the 'Support' group.
+These views contain tickets from your specific product groups (see groupings above) **and** all shared product groups (analytics and unclassified tickets). If there are any unclassified tickets that appear in your view (tickets in the 'Support' group), then where possible please assign these to the correct product. Let <TeamMember name="Abigail Richardson" photo /> know if there are certain types of tickets which regularly appear in the 'Support' group.
 
-**Important**: These views show tickets assigned to other team members too, giving you full context of your area. Jump in if you know something off the top of your head or see someone stuck.
+**Important**: These views show tickets assigned to other team members too, giving you full context of your products. Jump in if you know something off the top of your head or see someone stuck.
 
 ### Your daily workflow
 
