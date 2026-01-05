@@ -451,6 +451,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['workflows'],
         label: 'feature/pipelines',
     },
+    'weekly-digest': {
+        feature: 'Weekly digest',
+        owner: ['growth'],
+    },
     workflows: {
         feature: 'Workflows',
         owner: ['workflows'],
