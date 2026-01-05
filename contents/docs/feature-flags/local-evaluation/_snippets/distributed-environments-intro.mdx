@@ -1,0 +1,21 @@
+When using [local evaluation](/docs/feature-flags/local-evaluation), the SDK fetches feature flag definitions and stores them in memory. This works well for single-instance applications, but in distributed or stateless environments (multiple servers, edge workers, lambdas), each instance fetches its own copy, wasting API calls and adding latency on cold starts.
+
+An **external cache provider** lets you store flag definitions in shared storage (Redis, database, Cloudflare KV, etc.) so all instances can read from a single source.
+
+This enables you to:
+
+- Share flag definitions across workers to reduce API calls
+- Coordinate fetching so only one worker polls at a time
+- Pre-cache definitions for ultra-low-latency flag evaluation
+
+> **Note:** External cache providers are currently available in Node.js and Python SDKs only. This feature is experimental and may change in minor versions.
+
+## When to use an external cache
+
+| Scenario | Recommendation |
+| :------- | :------------- |
+| Single server instance | SDK's built-in memory cache is sufficient |
+| Multiple workers (same process) | SDK's built-in memory cache is sufficient |
+| Multiple servers/containers | Use Redis or database caching with distributed locks |
+| Edge workers (Cloudflare, Vercel Edge) | Use KV storage with split read/write pattern |
+

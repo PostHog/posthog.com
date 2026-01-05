@@ -336,13 +336,13 @@ export default function Products(): JSX.Element {
                                     There are four main components to the Product OS toolkit:
                                 </p>
                                 <ul className="pl-4 mb-4 [&_li]:text-sm">
-                                    <li>Customer data infrastructure</li>
                                     <li>Product engineering tools</li>
                                     <li>Analytics/data viz</li>
                                     <li>
                                         Automation & AI{' '}
                                         <Icons.IconSparkles className="inline-block size-4 relative -top-px" />
                                     </li>
+                                    <li>PostHog data stack</li>
                                 </ul>
                                 {/* 
                                 <OSButton

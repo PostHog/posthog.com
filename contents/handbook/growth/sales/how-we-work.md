@@ -11,7 +11,7 @@ showTitle: true
 We have three types of role:
 - Technical Account Executives - closing new business from [inbound](/handbook/growth/sales/inbound-sales) and [outbound](/handbook/growth/sales/outbound-sales) leads and expanding their usage of PostHog in the next 12 months
 - Technical Account Managers - [expansion](/handbook/growth/sales/expansion-and-retention) from existing customers, closing new business from [product-led leads](/handbook/growth/sales/product-led-sales)
-- Technical Account Managers called Leon and Scott - [expansion](/handbook/growth/sales/expansion-and-retention) from a small set of very high potential existing customers
+- COMING SOON: Business Development Reps, aka BDRs - generating leads for team new business
 
 ### Technical Account Executives
 
@@ -114,7 +114,6 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 
 - When thinking about commission, we want to particularly incentivize:
   - Cross-selling new products - all-in-one is how we will beat the competition.
-  - Closing prepaid credit contracts (often annual, but may not be) - better retention, de-risks PostHog financially.
 - We aim for a 50/50 split between base/commission when calculating OTE by default.
 
 > This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
@@ -123,14 +122,18 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 
 - Your quota is set as _the additional $ on a usage basis you are expected to add to your book of business_ - ie. any new product usage counts. This is different from TAEs, because here we care about the invoiced usage _not_ the actual $ amount.
   - For example, if you start a quarter with $700k in ARR and are set a target to grow this by $200k ARR, your commission is based on your attainment towards the $200k figure based on amounts invoiced.
-  - We measure the change in annualised quarterly ARR. Take Q1's usage ARR x4, compare it to Q2's usage ARR x4 - the different in these numbers is your attainment towards quota.
+  - We measure the change in annualised quarterly ARR. Take Q1's usage ARR x4, compare it to Q2's usage ARR x4 - the difference in these numbers is your attainment towards quota.
      - Where a customer is new and has <3 periods in the previous quarter, we will use the number of periods to calculate the ARR. eg if it has one month it is that month multiplied by 12, if it has two invoices, then its the total of those two months multiplied by 6.
      - When a customer has churned eg they have no revenue in the final period of the month and/or they have cancelled their subscription, then that quarter will count as $0 ARR.
 - This means you can hit quota by a combo of bringing in new business and expanding existing. Because your target is based on invoiced usage, this means that even if you have an annual customer in your book, you can still expand their usage and get recognized for that.
   - It also means that you are less likely to totally neglect existing customers because if they reduce usage, it hurts your overall ARR figure.
+- We apply a multiplier to each invoice in the calculation based on how many of our primary products they are paying for, to incentivise cross-sell.
+  - Primary products are: Product Analytics, Session Replay, Feature Flags, Surveys, Error Tracking, LLM Analytics, Data Warehouse and PostHog AI.
+  - We start off at a base of 0.7x for customers with only 1 paid product, as it represents a bigger churn risk.
+  - We then apply an additional 0.2x for each paid product above 1 (ie, 3 paid products = 1.1x)
+  - A product is counted as paid if the invoice amount for that product is greater than $200
 - Commission is _uncapped_ and paid out based on the % of your quota you hit, on a sliding scale. Hit 100% commission, get 100% of commission. 0% for 0%. And 200% for 200%. Ways to hit quota:
   - Increase ARR for your monthly customers
-  - Convert monthly customers to a prepaid annual plan - in this case, their monthly usage invoices paid with annual credits will count 1.25x towards your quota
   - For customers already on annual plans, additional usage ARR _beyond_ their annual run rate - for example, if you have a customer on a $120k annual contract, but they are being invoiced $20k/mo for their usage, you will get recognized on the additional $10k/mo
   - Your quota will depend on your OTE
 - Commission is paid out quarterly, and in any case after an invoice is paid
@@ -150,12 +153,32 @@ You can see how we are tracking on the [TAM Quota Tracker](https://us.posthog.co
 
 ### TAM book of business rules
 
-1. Only accounts with the `AM Managed` segment in Vitally will be counted towards your quota.  Simon adds this manually after reviewing with you.
-2. If you are assigned an account with no previous owner, you have up to 3 months to figure out whether they should be in your book or not. Don't ask for the `AM Managed` segment to be added until you're happy that there is growth potential there.
-3. If you are assigned an account with a previous owner, work with them on the handover process.  If the customer isn't in a healthy state usage and engagement-wise, feel free to push back and ask for the previous owner's help in getting them to a good state before taking ownership.  If you really can't resolve this, then talk first to your team lead. If you can't resolve it, Simon will be the tie breaker.
-4. Accounts which you've previously been paid quota on need to stay in your `AM Managed` book until they are handed over as per 3 above, or until they churn/fall below $20K ARR.  In this case, we will keep them in the `AM Managed` segment for quota calculation purposes and then remove them after the quarterly calculations are complete.
-5. Nominally, you should have 15 accounts/around $1m in ARR in your `AM Managed` book.  There is some wiggle room here, but if you find yourself with 25+ accounts, it's unlikely that you'll be able to give them the level of focus we expect from a TAM, so you should be prepared to hand some over to another team member.
-6. You can have accounts added to your book at any time, if you are comfortable that there is growth potential there.  Removal of accounts should only happen at the end of the quarter so that quota can be calculated.
+1. Only accounts with the `AM Managed` segment in Vitally will be counted towards your quota.  Simon adds this manually after reviewing with you and your team lead.
+2. All accounts in the `AM Managed` segment need an account plan in Vitally, which is updated and reviewed with your manager regularly.
+3. If you are assigned an account with no previous owner, you have up to 3 months to figure out whether they should be in your book or not. Don't ask for the `AM Managed` segment to be added until you're happy that there is growth potential there.
+4. If you are assigned an account with a previous owner, work with them on the handover process.  If the customer isn't in a healthy state usage and engagement-wise, feel free to push back and ask for the previous owner's help in getting them to a good state before taking ownership.  If you really can't resolve this, then talk first to your team lead. If you can't resolve it, Simon will be the tie breaker.
+5. Accounts which you've previously been paid quota on need to stay in your `AM Managed` book until they are handed over as per 3 above, or until they churn/fall below $20K ARR.  In this case, we will keep them in the `AM Managed` segment for quota calculation purposes and then remove them after the quarterly calculations are complete.
+6. Nominally, you should have 15 accounts/around $1.5m in ARR in your `AM Managed` book.  There is some wiggle room here, but if you find yourself with 25+ accounts, it's unlikely that you'll be able to give them the level of focus we expect from a TAM, so you should be prepared to hand some over to another team member.
+7. You can have accounts added to your book at any time, if you are comfortable that there is growth potential there.  Removal of accounts should only happen at the end of the quarter so that quota can be calculated.
+
+## How commission works - BDRs
+
+**General principles**
+
+- When thinking about commission, we want to particularly incentivize:
+  - Generating high quality leads
+  - Getting people in who fit our ICP, ie. are easier for us to sell to
+- We aim for a 70/30 split between base/commission when calculating OTE by default.
+
+> This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
+
+**Variables**
+
+- Quota is based on the number of sales qualified opportunities you generate - basically when an account moves into the Opportunity stage in SFDC
+- Your quota is set for the year and then divided by 4 - this means you don't have to cram meetings into the end of a quarter.
+- Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%.
+- Commission is paid out quarterly.
+- There is no guaranteed commission during ramp, as the ramp period for BDRs is much shorter than for TAMs/TAEs. 
 
 ## Team lead quota
 

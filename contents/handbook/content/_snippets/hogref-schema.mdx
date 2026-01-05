@@ -1,0 +1,322 @@
+import Tab from 'components/Tab'
+
+The hierarchy of the HogRef JSON schema is as follows:
+
+```
+Root
+├── info (metadata)
+├── categories[] (string labels)
+├── classes[]
+│   ├── functions[]
+│   │   ├── params[]
+│   │   ├── returnType
+│   │   ├── examples[]
+│   │   ├── throws[]
+│   │   └── overloads[]
+│   ├── properties[]
+│   ├── staticMethods[]
+│   └── events[]
+└── types[]
+    ├── properties[]
+    ├── enumValues[]
+    └── generic[]
+```
+
+#### Root Object
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | string | ✓ | Unique identifier for the SDK (e.g., 'posthog-js', 'stripe-node') |
+| `schemaVersion` | string | | Version of this schema format being used |
+| `info` | [Info](#info) | ✓ | Metadata about the SDK |
+| `classes` | [Class](#class)[] | ✓ | Main classes/modules exposed by the SDK |
+| `types` | [Type](#type)[] | | Type definitions, interfaces, and enums |
+| `categories` | string[] | | List of functional categories for organizing methods |
+
+---
+
+#### Info
+
+Metadata about the SDK.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | string | ✓ | Package/library identifier |
+| `title` | string | ✓ | Human-readable name of the SDK |
+| `version` | string | ✓ | Current version of the SDK |
+| `description` | string | | Brief description of what the SDK does |
+| `slugPrefix` | string | | URL-friendly prefix for documentation links |
+| `specUrl` | string (uri) | | URL to the source specification or repository |
+| `docsUrl` | string (uri) | | URL to the official documentation |
+| `license` | string | | License type (e.g., 'MIT', 'Apache-2.0') |
+| `platforms` | string[] | | Supported platforms (e.g., 'browser', 'node', 'react-native') |
+
+---
+
+#### Class
+
+Main classes/modules exposed by the SDK.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | string | ✓ | Unique identifier for the class |
+| `title` | string | ✓ | Display name of the class |
+| `description` | string | | Overview of what this class provides |
+| `functions` | [Function](#function)[] | ✓ | Methods and functions available on this class |
+| `properties` | [Property](#property)[] | | Instance properties of this class |
+| `staticMethods` | [Function](#function)[] | | Static methods on this class |
+| `events` | [Event](#event)[] | | Events emitted by this class |
+
+---
+
+#### Function
+
+Methods and functions available on a class.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | string | ✓ | Unique identifier for the function |
+| `title` | string | ✓ | Function name as it appears in code |
+| `description` | string | | Brief description of what the function does |
+| `details` | string \| null | | Extended explanation, usage notes, or caveats |
+| `category` | string | | Functional category (e.g., 'Initialization', 'Capture') |
+| `releaseTag` | [ReleaseTag](#releasetag) | | Stability/visibility status of the function |
+| `showDocs` | boolean | | Whether to display in public documentation |
+| `params` | [Parameter](#parameter)[] | | Function parameters |
+| `returnType` | [TypeReference](#typereference) | | Return type of the function |
+| `examples` | [Example](#example)[] | | Code examples showing usage |
+| `throws` | [ThrowsClause](#throwsclause)[] | | Exceptions/errors that may be thrown |
+| `since` | string | | Version when this function was introduced |
+| `deprecated` | string \| boolean | | Deprecation notice or true if deprecated |
+| `seeAlso` | string[] | | Related functions or documentation links |
+| `path` | string | | Source file path for this function |
+| `async` | boolean | | Whether this is an async function |
+| `overloads` | [FunctionOverload](#functionoverload)[] | | Alternative function signatures |
+
+---
+
+#### Parameter
+
+Function parameters.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | string | ✓ | Parameter name |
+| `type` | string | ✓ | Type annotation for the parameter |
+| `description` | string | | What this parameter is for |
+| `isOptional` | boolean | | Whether this parameter is optional |
+| `defaultValue` | string | | Default value if not provided |
+| `isRest` | boolean | | Whether this is a rest parameter (...args) |
+
+---
+
+#### TypeReference
+
+Reference to a type, used for return types and property types.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | string | | Reference ID to a type definition |
+| `name` | string | ✓ | Display name of the type |
+
+---
+
+#### Type
+
+Type definitions, interfaces, and enums.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | string | ✓ | Unique identifier for this type |
+| `name` | string | ✓ | Type name |
+| `description` | string | | What this type represents |
+| `kind` | [TypeKind](#typekind) | | Kind of type definition |
+| `properties` | [Property](#property)[] | | Properties for object types |
+| `enumValues` | [EnumValue](#enumvalue)[] | | Values for enum types |
+| `example` | string | | Inline type definition or usage example |
+| `path` | string | | Source file path |
+| `extends` | string[] | | Types this type extends |
+| `generic` | [GenericParameter](#genericparameter)[] | | Generic type parameters |
+
+---
+
+#### Property
+
+Properties on types or classes.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | string | ✓ | Property name |
+| `type` | string | ✓ | Type of the property |
+| `description` | string | | What this property represents |
+| `isOptional` | boolean | | Whether this property is optional |
+| `isReadonly` | boolean | | Whether this property is read-only |
+| `defaultValue` | string | | Default value |
+| `deprecated` | string \| boolean | | Deprecation notice |
+
+---
+
+#### Example
+
+Code examples demonstrating usage.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | string | | Unique identifier for the example |
+| `name` | string | | Title describing what the example demonstrates |
+| `code` | string | ✓ | The example code |
+| `language` | string | | Programming language (e.g., 'javascript', 'typescript') |
+| `description` | string | | Additional explanation of the example |
+
+---
+
+#### Event
+
+Events emitted by a class.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | string | ✓ | Event name |
+| `description` | string | | When this event is emitted |
+| `payload` | string | | Type of data passed to event listeners |
+
+---
+
+#### ThrowsClause
+
+Exceptions/errors that may be thrown by a function.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `type` | string | | Type of error thrown |
+| `description` | string | | When this error is thrown |
+
+---
+
+#### EnumValue
+
+Values for enum types.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | string | ✓ | Enum member name |
+| `value` | string \| number | ✓ | Enum member value |
+| `description` | string | | What this enum value represents |
+
+---
+
+#### GenericParameter
+
+Generic type parameters.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | string | ✓ | Generic parameter name (e.g., 'T') |
+| `constraint` | string | | Type constraint (e.g., 'extends string') |
+| `default` | string | | Default type |
+
+---
+
+#### FunctionOverload
+
+Alternative function signatures for overloaded functions.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `params` | [Parameter](#parameter)[] | | Parameters for this overload |
+| `returnType` | [TypeReference](#typereference) | | Return type for this overload |
+| `description` | string | | Description specific to this overload |
+
+---
+
+#### Enumerations
+
+`ReleaseTag` enum:
+
+| Value | Description |
+|-------|-------------|
+| `public` | Stable, public API |
+| `beta` | Beta feature, may change |
+| `alpha` | Alpha feature, likely to change |
+| `internal` | Internal use only |
+| `deprecated` | Deprecated, avoid use |
+
+`TypeKind` enum:
+
+| Value | Description |
+|-------|-------------|
+| `interface` | Interface definition |
+| `type` | Type alias |
+| `enum` | Enumeration |
+| `class` | Class definition |
+
+#### Example JSON
+
+```json 
+{
+  "id": "example-sdk",
+  "schemaVersion": "1.0",
+  "info": {
+    "id": "example-sdk",
+    "title": "Example JavaScript SDK",
+    "version": "1.0.0",
+    "description": "Example SDK for tracking events.",
+    "slugPrefix": "example-sdk",
+    "specUrl": "https://github.com/example/example-sdk"
+  },
+  "categories": ["Capture"],
+  "classes": [
+    {
+      "id": "ExampleClient",
+      "title": "ExampleClient",
+      "description": "The main client for tracking events.",
+      "functions": [
+        {
+          "id": "capture",
+          "title": "capture",
+          "description": "Captures an event with optional properties.",
+          "details": "You can capture arbitrary object-like values as events.",
+          "category": "Capture",
+          "releaseTag": "public",
+          "showDocs": true,
+          "params": [
+            {
+              "name": "event_name",
+              "type": "string",
+              "description": "The name of the event (e.g., 'Sign Up', 'Button Click')",
+              "isOptional": false
+            },
+            {
+              "name": "properties",
+              "type": "Properties | null",
+              "description": "Properties to include with the event",
+              "isOptional": true
+            }
+          ],
+          "returnType": {
+            "id": "CaptureResult | undefined",
+            "name": "CaptureResult | undefined"
+          },
+          "examples": [
+            {
+              "id": "basic_event_capture",
+              "name": "basic event capture",
+              "code": "\n\n// basic event capture\nclient.capture('button-clicked', {\n    button_name: 'Get Started',\n    page: 'homepage'\n})\n\n"
+            }
+          ],
+          "path": "lib/src/client.d.ts"
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "id": "Properties",
+      "name": "Properties",
+      "properties": [],
+      "path": "lib/src/types.d.ts",
+      "example": "{\n    $timestamp: '2024-05-29T17:32:07.202Z',\n    $os: 'Mac OS X',\n    $browser: 'Chrome'\n}"
+    }
+  ]
+}
+```

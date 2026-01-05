@@ -93,7 +93,7 @@ export const TeamMember = (props: any) => {
         <div ref={ref}>
             <Link
                 to={`/community/profiles/${squeakId}`}
-                wrapperClassName={`group container-size not-prose aspect-[3/4] border border-primary bg-${color} block rounded max-w-96 relative`}
+                wrapperClassName={`group container-size not-prose aspect-[3/4] border border-primary bg-${color} block rounded max-w-96 relative z-0`}
                 state={{ newWindow: true }}
             >
                 {inView && (

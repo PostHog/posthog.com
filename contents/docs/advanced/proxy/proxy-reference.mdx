@@ -1,0 +1,123 @@
+---
+title: Self-hosted proxy reference
+sidebar: Docs
+showTitle: true
+---
+
+This page covers requirements and troubleshooting for self-hosted reverse proxies. For platform-specific setup, see the individual proxy guides.
+
+## Requirements
+
+Your proxy must route requests to these PostHog domains:
+
+| Region | Static assets `/static/*` | Everything else |
+|--------|----------------------------|-----------------|
+| US | `us-assets.i.posthog.com` | `us.i.posthog.com` |
+| EU | `eu-assets.i.posthog.com` | `eu.i.posthog.com` |
+
+Check your project URL in the [PostHog app](https://app.posthog.com) to confirm your region.
+
+### Checklist
+
+- Set the `Host` header to the PostHog domain (e.g., `Host: us.i.posthog.com`). Without this, you'll get 401 errors.
+- Allow `GET` and `POST`** on all paths.
+- Support 64MB request bodies, session recordings can be large.
+- Forward `X-Forwarded-For` to preserve client IPs for geolocation.
+- Avoid obvious paths** like `/analytics` or `/posthog`, use `/e` or `/ph` instead.
+
+### SDK configuration
+
+When using a proxy, set both `api_host` and `ui_host`:
+
+<MultiLanguage>
+
+```js file=US
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://us.posthog.com'
+})
+```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
+
+Without `ui_host`, the toolbar and session recordings player won't work correctly.
+
+## Troubleshooting
+
+### 401 Unauthorized
+
+PostHog rejected the request. Check:
+
+1. **Host header**: Must match the PostHog domain you're proxying to
+2. **Region**: Proxy must point to same region as your project
+3. **Request body**: Some platforms strip it, removing your API key
+
+### 405 Method Not Allowed
+
+Your proxy is blocking the HTTP method. Ensure both `GET` and `POST` are allowed.
+
+### 502 Bad Gateway
+
+Your proxy can't reach PostHog. Test connectivity:
+
+```bash
+curl -I https://us.i.posthog.com/decide?v=3
+```
+
+If this fails, check DNS, firewall rules (port 443), and internet access. For SSL errors, enable SNI in your proxy settings.
+
+### CORS errors
+
+Use a relative path to avoid cross-origin issues:
+
+<MultiLanguage>
+
+```js file=US
+posthog.init('<ph_project_api_key>', {
+  api_host: '/ph',
+  ui_host: 'https://us.posthog.com'
+})
+```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: '/ph',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
+
+### Events not appearing
+
+1. **Check your API key**: Find it in [project settings](https://us.posthog.com/settings/project#variables). Use the project API key, not a personal key.
+2. **Verify the region**: Must match your PostHog project.
+3. **Wait a few minutes**: Check the [activity feed](https://us.posthog.com/activity/explore) before assuming it's broken.
+
+### Wrong geolocation / same location for all users
+
+Your proxy isn't forwarding client IPs. Set the `X-Forwarded-For` header to the original client IP. If behind multiple proxies (e.g., Cloudflare + your proxy), ensure you're forwarding the original IP, not an intermediate one.
+
+### Large recordings failing
+
+Check body size limits in your:
+- Web server (nginx: `client_max_body_size`, Apache: `LimitRequestBody`)
+- CDN or WAF
+- Serverless function (if applicable)
+
+PostHog needs up to 64MB per message for session recordings.
+
+### Toolbar or recordings player not working
+
+You're missing `ui_host` in your SDK config. See [SDK configuration](#sdk-configuration) above.
+
+## Still having issues?
+
+For self-hosted proxies, check your proxy's logs and documentation, or ask in the [PostHog community](/community). If you're using the [managed reverse proxy](/docs/advanced/proxy), [contact support](mailto:support@posthog.com).
