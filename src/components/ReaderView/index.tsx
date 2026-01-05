@@ -74,7 +74,6 @@ interface ReaderViewProps {
     onSearch?: (query: string) => void
     showSurvey?: boolean
     parent?: MenuItem
-    markdownContent?: string
     showQuestions?: boolean
     sourceInstanceName?: string
 }
@@ -365,7 +364,6 @@ export default function ReaderView({
     onSearch,
     showSurvey = false,
     parent,
-    markdownContent,
     showQuestions = true,
     sourceInstanceName,
 }: ReaderViewProps) {
@@ -394,7 +392,6 @@ export default function ReaderView({
                 onSearch={onSearch}
                 showSurvey={showSurvey}
                 parent={parent}
-                markdownContent={markdownContent}
                 showQuestions={showQuestions}
                 sourceInstanceName={sourceInstanceName}
             >
@@ -528,7 +525,6 @@ function ReaderViewContent({
     onSearch,
     showSurvey = false,
     parent,
-    markdownContent,
     showQuestions = true,
     sourceInstanceName,
 }) {
@@ -918,12 +914,7 @@ function ReaderViewContent({
                         }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
-                        {(markdownContent || body?.type === 'mdx') && (
-                            <CopyMarkdownActionsDropdown
-                                markdownContent={markdownContent || body.content}
-                                pageUrl={`https://posthog.com${appWindow?.path}`}
-                            />
-                        )}
+                        {appWindow?.path && <CopyMarkdownActionsDropdown pageUrl={appWindow.path} />}
                         {filePath && (
                             <OSButton
                                 asLink

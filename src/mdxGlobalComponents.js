@@ -2,6 +2,7 @@
 
 import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
 import { ArrayCTA } from './components/ArrayCTA'
+import AskAIInput from './components/AskAIInput'
 import AskMax from './components/AskMax'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
@@ -65,6 +66,7 @@ import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
 import { ZendeskTicket } from './components/ZendeskTicket'
 import { CalloutBox } from './components/Docs/CalloutBox'
+import SolvedQuestions from './components/Docs/SolvedQuestions'
 
 export const shortcodes = {
     ArrayCTA,
@@ -128,9 +130,11 @@ export const shortcodes = {
     TeamMember,
     Steps,
     Step,
+    AskAIInput,
     AskMax,
     CountriesWeHireIn,
     FeatureOwnershipTable,
     TaskOwnershipTable,
     RainbowText,
+    SolvedQuestions,
 }
