@@ -188,7 +188,7 @@ export default function Timeline({
     }, [windowX, windowWidth, isDragging])
 
     return (
-        <ScrollArea>
+        <ScrollArea className="[&>div>div]:!table">
             <div className="px-4">
                 <div ref={containerRef} className="flex py-8 relative">
                     {(() => {
@@ -225,7 +225,10 @@ export default function Timeline({
 
                                             if (isCurrentMonth) {
                                                 // For current month: all periods before current, plus current period if non-empty
-                                                periodsToRender = Array.from({ length: currentPeriod - 1 }, (_, i) => i + 1)
+                                                periodsToRender = Array.from(
+                                                    { length: currentPeriod - 1 },
+                                                    (_, i) => i + 1
+                                                )
                                                 const currentPeriodCount =
                                                     data?.[year]?.[month]?.[currentPeriod]?.count || 0
                                                 if (currentPeriodCount > 0) {

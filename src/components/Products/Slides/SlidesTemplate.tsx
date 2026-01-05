@@ -5,6 +5,7 @@ import ScalableSlide from 'components/Presentation/ScalableSlide'
 import ResponsiveSlideContent from 'components/Presentation/ResponsiveSlideContent'
 import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'
+import { useProductInterest } from 'hooks/useProductInterest'
 import { docsMenu } from '../../../navs'
 import SlideThumbnails from './SlideThumbnails'
 import OverviewSlideColumns from './OverviewSlide/OverviewSlideColumns'
@@ -57,6 +58,9 @@ export default function SlidesTemplate({
 }: SlidesTemplateProps) {
     // Get product data early to check for AI section
     const productData = useProduct({ handle: productHandle }) as any
+
+    // Track product interest for cross-subdomain cookie
+    useProductInterest(productData?.slug)
 
     // Process slide configuration
     let processedSlideConfig = slideConfig
