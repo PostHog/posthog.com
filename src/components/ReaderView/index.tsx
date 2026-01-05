@@ -76,11 +76,8 @@ interface ReaderViewProps {
     showSurvey?: boolean
     parent?: MenuItem
     showQuestions?: boolean
-<<<<<<< positioning-module-in-blog
     showAbout?: boolean
-=======
     sourceInstanceName?: string
->>>>>>> master
 }
 
 interface BackgroundImageOption {
@@ -370,11 +367,8 @@ export default function ReaderView({
     showSurvey = false,
     parent,
     showQuestions = true,
-<<<<<<< positioning-module-in-blog
     showAbout = false,
-=======
     sourceInstanceName,
->>>>>>> master
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -402,11 +396,8 @@ export default function ReaderView({
                 showSurvey={showSurvey}
                 parent={parent}
                 showQuestions={showQuestions}
-<<<<<<< positioning-module-in-blog
                 showAbout={showAbout}
-=======
                 sourceInstanceName={sourceInstanceName}
->>>>>>> master
             >
                 {children}
             </ReaderViewContent>
@@ -539,11 +530,8 @@ function ReaderViewContent({
     showSurvey = false,
     parent,
     showQuestions = true,
-<<<<<<< positioning-module-in-blog
     showAbout = false,
-=======
     sourceInstanceName,
->>>>>>> master
 }) {
     const { openNewChat, compact } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
