@@ -14,7 +14,7 @@ This structure helps us own our product areas completely, build the knowledge ne
 
 All technical support engineers share responsibility for:
 - **Analytics products** (analytics platform, customer analytics, product analytics, web analytics, growth)
-- **Unclassified tickets** (tickets in the 'Support' group)
+- **Unclassified tickets** (tickets in the 'Support' group). Where possible, these tickets should be updated with the correct product group.
 
 Beyond that, we have SMEs who own specific product areas. For each area, we select one person from EU and one from NA to maintain timezone coverage.
 
@@ -60,7 +60,7 @@ Each SME area has a dedicated view in Zendesk that includes:
 - Tickets submitted via the help sidebar
 - Community questions
 
-These views contain tickets from your specific SME area (see groupings above) **and** all shared product areas (analytics and unclassified tickets).
+These views contain tickets from your specific SME area (see groupings above) **and** all shared product areas (analytics and unclassified tickets). If there are any unclassified tickets that appear in your view (tickets in the 'Support' group), then where possible please assign these to the correct product group. Let <TeamMember name="Abigail Richardson" photo /> know if there are certain types of tickets which regularly appear in the 'Support' group.
 
 **Important**: These views show tickets assigned to other team members too, giving you full context of your area. Jump in if you know something off the top of your head or see someone stuck.
 
