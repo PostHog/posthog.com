@@ -134,6 +134,6 @@ Surprisingly this went super smoothly. We felt very confident that we'd overengi
 
 ## We think 2026 will be one of our most challenging years
 
-2026 is the year we go from being the underdog to being the same order of magnitude in terms of revenue. We have a far bigger customer base than many of them in terms of numbrers.
+2026 is the year we go from being the underdog to being the same order of magnitude in terms of revenue. We have a far bigger customer base than many of them in terms of numbers.
 
 We think the key is we have to get bigger at handling larger customers - everyone says you're a toy until you aren't! - _and_ we have to keep innovating and building furiously. We'd better get on with hiring then!
