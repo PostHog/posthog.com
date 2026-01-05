@@ -30,7 +30,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
-import { getProseClasses } from '../../constants'
+import { getProseClasses, MARKDOWN_CONTENT_PATHS } from '../../constants'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
 import { Questions } from 'components/Squeak'
@@ -914,7 +914,10 @@ function ReaderViewContent({
                         }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
-                        {appWindow?.path && <CopyMarkdownActionsDropdown pageUrl={appWindow.path} />}
+                        {appWindow?.path &&
+                            MARKDOWN_CONTENT_PATHS.some((prefix) => appWindow.path.startsWith(prefix)) && (
+                                <CopyMarkdownActionsDropdown pageUrl={appWindow.path} />
+                            )}
                         {filePath && (
                             <OSButton
                                 asLink

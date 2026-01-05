@@ -14,6 +14,7 @@ import {
     generateLlmsTxt,
     generateSdkReferencesMarkdown,
 } from './rawMarkdownUtils'
+import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
 import blogTemplate from '../src/templates/OG/blog.js'
 import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
@@ -557,9 +558,11 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
 
     // Generate markdown files for llms.txt file and LLM ingestion (after pages are built)
     // Convert HTML files to markdown using turndown
+    // Build regex from MARKDOWN_CONTENT_PATHS constant (e.g., "/^/(docs|handbook)/")
+    const markdownPathsRegex = `/^/(${MARKDOWN_CONTENT_PATHS.map((p) => p.replace('/', '')).join('|')})/`
     const docsQuery = (await graphql(`
         query {
-            allMdx(filter: { fields: { slug: { regex: "/^/(docs|handbook)/" } } }) {
+            allMdx(filter: { fields: { slug: { regex: "${markdownPathsRegex}" } } }) {
                 nodes {
                     fields {
                         slug
