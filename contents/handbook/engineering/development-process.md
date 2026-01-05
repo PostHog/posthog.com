@@ -286,7 +286,7 @@ It's easy to just think "this makes more sense, let's just roll it out." Sometim
 
 #### A/B test metrics
 
-Experiment design is a bit of an art. There are different types of [metrics](/docs/experiments/metrics) you can use in PostHog experiments. Another benefit of running experimeints is forcing yourself to think through what other things your change might impact, which oftentimes doesn't happen in the regular release cycle!
+Experiment design is a bit of an art. There are different types of [metrics](/docs/experiments/metrics) you can use in PostHog experiments. Another benefit of running experiments is forcing yourself to think through what other things your change might impact, which oftentimes doesn't happen in the regular release cycle!
 
 Generally, a good pattern is to set up 1-2 primary metrics that you anticipate might be impacted by the A/B test, as well as 3+ secondary metrics that might also be good to keep an eye on, just in case. If you aren't sure what metrics to be testing, just ask! Lots of people are excited to help think this through (especially #team-growth and Raquel!).
 
