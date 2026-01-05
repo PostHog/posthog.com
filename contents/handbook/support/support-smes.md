@@ -6,7 +6,7 @@ showTitle: true
 
 ## Why we have SMEs
 
-As our product grows, so does the complexity of supporting it. SMEs help us maintain deep expertise across our product areas while ensuring every ticket gets answered by someone who really knows their stuff.
+As we add more products to PostHog, it becomes more difficult for individual support engineers to work across every product. SMEs help us maintain deep expertise across our product areas while ensuring every ticket gets answered by someone who really knows their stuff.
 
 This structure helps us own our product areas completely, build the knowledge needed to delight users with better and faster answers, and develop close relationships with product teams so we can advocate for fixes and features that actually matter to users.
 
@@ -31,7 +31,7 @@ Being an SME means you're the go-to person for your product area. This breaks do
 
 ### Your Zendesk views
 
-Each SME has a dedicated view in Zendesk that includes:
+Each product area has a dedicated view in Zendesk that includes:
 - Tickets created from Slack channels
 - Tickets submitted via the help sidebar
 - Community questions
