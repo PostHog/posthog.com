@@ -574,7 +574,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
 
     const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes)
     // Only include docs pages in llms.txt (not handbook)
-    const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs/'))
+    const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
     generateLlmsTxt(docsPages)
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
