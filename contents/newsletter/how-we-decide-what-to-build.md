@@ -76,7 +76,7 @@ For example, **mobile replay**, in the top right corner (high impact, high effor
 
 ## 4. Make ownership clear
 
-This process creates clear ownership and, in turn, makes deciding what to build much clearer. The owner becomes responsible for validating the idea, implementing the feature, making tweaks and bug fixes, and ensuring ongoing success.
+This process creates clear ownership and, in turn, makes deciding what to build much clearer. The owner becomes responsible for [validating the idea](/newsletter/validating-product-ideas), implementing the feature, making tweaks and bug fixes, and ensuring ongoing success.
 
 The unique qualities of [product engineers](/blog/what-is-a-product-engineer) are key here. They have all the skills needed to take an idea to a fully-featured, revenue-generating product. This enables them to work with a high degree of autonomy and speed.
 
