@@ -40,6 +40,7 @@ import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
+import { Blockquote } from 'components/BlockQuote'
 
 dayjs.extend(relativeTime)
 
@@ -74,8 +75,9 @@ interface ReaderViewProps {
     onSearch?: (query: string) => void
     showSurvey?: boolean
     parent?: MenuItem
-    markdownContent?: string
     showQuestions?: boolean
+    showAbout?: boolean
+    sourceInstanceName?: string
 }
 
 interface BackgroundImageOption {
@@ -364,8 +366,9 @@ export default function ReaderView({
     onSearch,
     showSurvey = false,
     parent,
-    markdownContent,
     showQuestions = true,
+    showAbout = false,
+    sourceInstanceName,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -392,8 +395,9 @@ export default function ReaderView({
                 onSearch={onSearch}
                 showSurvey={showSurvey}
                 parent={parent}
-                markdownContent={markdownContent}
                 showQuestions={showQuestions}
+                showAbout={showAbout}
+                sourceInstanceName={sourceInstanceName}
             >
                 {children}
             </ReaderViewContent>
@@ -525,8 +529,9 @@ function ReaderViewContent({
     onSearch,
     showSurvey = false,
     parent,
-    markdownContent,
     showQuestions = true,
+    showAbout = false,
+    sourceInstanceName,
 }) {
     const { openNewChat, compact } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
@@ -777,6 +782,29 @@ function ReaderViewContent({
                                         children
                                     )}
                                 </div>
+                                {showAbout && (
+                                    <div
+                                        className={`mt-8 mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
+                                        <Blockquote>
+                                            PostHog is an all-in-one developer platform for building successful
+                                            products. We provide <a href="/product-analytics">product analytics</a>,{' '}
+                                            <a href="/web-analytics">web analytics</a>,{' '}
+                                            <a href="/session-replay">session replay</a>,{' '}
+                                            <a href="/error-tracking">error tracking</a>,{' '}
+                                            <a href="/feature-flags">feature flags</a>,{' '}
+                                            <a href="/experiments">experiments</a>, <a href="/surveys">surveys</a>,{' '}
+                                            <a href="/llm-analytics">LLM analytics</a>,{' '}
+                                            <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an{' '}
+                                            <a href="/ai">AI product assistant</a> to help debug your code, ship
+                                            features faster, and keep all your usage and customer data in one stack.
+                                        </Blockquote>
+                                    </div>
+                                )}
                                 {showQuestions && (
                                     <div
                                         className={`mt-8 mx-auto transition-all ${
@@ -914,16 +942,15 @@ function ReaderViewContent({
                         }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
-                        {(markdownContent || body?.type === 'mdx') && (
-                            <CopyMarkdownActionsDropdown
-                                markdownContent={markdownContent || body.content}
-                                pageUrl={`https://posthog.com${appWindow?.path}`}
-                            />
-                        )}
+                        {appWindow?.path && <CopyMarkdownActionsDropdown pageUrl={appWindow.path} />}
                         {filePath && (
                             <OSButton
                                 asLink
-                                to={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                to={`https://github.com/PostHog/${
+                                    sourceInstanceName === 'posthog-main-repo'
+                                        ? 'posthog/blob/master'
+                                        : 'posthog.com/blob/master/contents'
+                                }/${filePath}`}
                                 icon={<IconPencil />}
                             />
                         )}

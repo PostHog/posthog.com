@@ -58,7 +58,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
         if (source === 'youtube') {
             // YouTube player initialization
             window.onYouTubeIframeAPIReady = () => {
-                const player = new window.YT.Player('video-player-iframe', {
+                const player = new window.YT.Player(`video-player-iframe-${videoId}`, {
                     host: 'https://www.youtube-nocookie.com',
                     videoId,
                     playerVars: {
@@ -70,6 +70,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                         iv_load_policy: 3,
                         fs: 1,
                     },
+                    height: undefined,
                     events: {
                         onStateChange: (event: any) => {
                             setPlayerState((prev: any) => ({
@@ -117,7 +118,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
             const initializeWistiaPlayer = () => {
                 const embedDiv = document.createElement('div')
                 embedDiv.className = `wistia_embed wistia_async_${videoId} videoFoam=true`
-                embedDiv.id = 'video-player-iframe'
+                embedDiv.id = `video-player-iframe-${videoId}`
                 embedDiv.style.width = '100%'
                 embedDiv.style.height = '100%'
 
@@ -274,7 +275,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
     }
 
     const toggleFullscreen = () => {
-        const iframe = document.getElementById('video-player-iframe') as any
+        const iframe = document.getElementById(`video-player-iframe-${videoId}`) as any
         if (iframe?.requestFullscreen) {
             iframe.requestFullscreen()
         } else if (iframe?.mozRequestFullScreen) {
@@ -341,7 +342,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                         {/* Main video area */}
                         <div className="flex-1 flex flex-col justify-center items-center bg-primary mb-2">
                             {source === 'youtube' ? (
-                                <div id="video-player-iframe" className="rounded w-full aspect-video" />
+                                <div id={`video-player-iframe-${videoId}`} className="rounded w-full aspect-video" />
                             ) : (
                                 <div ref={containerRef} className="rounded w-full aspect-video" />
                             )}
@@ -376,10 +377,11 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                                 <div
                                     className="absolute top-1/2 -translate-y-1/2 pointer-events-none"
                                     style={{
-                                        left: `calc(${((isScrubbing ? scrubTime : playerState.currentTime) /
-                                            playerState.duration) *
+                                        left: `calc(${
+                                            ((isScrubbing ? scrubTime : playerState.currentTime) /
+                                                playerState.duration) *
                                             100
-                                            }% + 5.5px)`,
+                                        }% + 5.5px)`,
                                     }}
                                 >
                                     <IconPlayhead className="w-[11px] h-[15px]" />

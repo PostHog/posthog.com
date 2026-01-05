@@ -45,9 +45,9 @@ This is our usual first round interview with a member of the People & Ops team.
 
 #### Small Team interview
 
-The technical interview with the relevant team lead usually lasts 45 minutes.  For this round, we will use scenario-based questions to assess your technical and customer skills, as well as your knowledge of PostHog. As part of this, we will ask you to give a quick pitch of PostHog (not a full demo). 
+The small team interview with the relevant team lead usually lasts 45 minutes.  For this round, we will use scenario-based questions to assess your technical and customer skills, as well as your knowledge of PostHog. As part of this, we will ask you to give a quick pitch of PostHog (not a full demo). 
 
-#### Technical and Sales Skill interview
+#### Technical interview
 
 In this 45-minute interview, you'll be meeting with [Simon](/community/profiles/28895) who will be trying to answer "Do they have the right customer acumen?" and "Do they have the technical depth required to do the role?".  
 

@@ -1,18 +1,18 @@
 import { useUser } from 'hooks/useUser'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Tooltip from 'components/Tooltip'
 import { IconTriangleUpFilled } from '@posthog/icons'
-import { PostsContext } from './Posts'
+import { useApp } from '../../context/App'
 
 export default function LikeButton({ className = '', postID, slug }: { postID: number; slug: string }) {
-    const { setLoginModalOpen } = useContext(PostsContext)
+    const { openSignIn } = useApp()
     const [liked, setLiked] = useState(false)
     const { likePost, user } = useUser()
 
     const handleClick = (e) => {
         e.preventDefault()
         if (!user) {
-            setLoginModalOpen(true)
+            openSignIn()
         } else {
             setLiked(!liked)
             likePost(postID, liked, slug)

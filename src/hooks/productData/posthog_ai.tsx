@@ -33,8 +33,33 @@ export const posthog_ai = {
         max: 100000,
     },
     volume: 2000,
-    customPricingContent: <div data-scheme="secondary" className="prose prose-sm text-lg mt-8 mb-12 leading-normal"><h3 className="text-xl font-bold text-primary mb-4">How credits work</h3><p>AI credits are based on the underlying token costs, which reflect the effort required to complete your request.</p><ul><li><strong>Simple queries</strong> like "What were my daily active users in October?" use very few tokens, and therefore very few credits.</li><li><strong>More complex tasks</strong> like analyzing hundreds of session recordings or rewriting a SQL query multiple times use more tokens and consume more credits.
-        While exact usage varies, credit consumption usually scales with complexity – more advanced tasks cost more but can deliver deeper insights and time savings. You’ll always see real-time cost information while using AI features.</li></ul><p>PostHog automatically selects the most efficient model for each AI feature. We apply a simple, consistent 20% markup over the underlying LLM provider’s cost: So 1 PostHog AI credit equals $0.8333 of raw inference, and 1,000 credits cost $10.</p></div>,
+    customPricingContent: (
+        <div data-scheme="secondary" className="prose prose-sm text-lg mt-8 mb-12 leading-normal text-primary">
+            <h3 className="text-xl font-bold text-primary mb-4">How credits work</h3>
+            <p>
+                AI credits are based on the underlying token costs, which reflect the effort required to complete your
+                request.
+            </p>
+            <ul>
+                <li>
+                    <strong className="text-primary">Simple queries</strong> like "What were my daily active users in
+                    October?" use very few tokens, and therefore very few credits.
+                </li>
+                <li>
+                    <strong className="text-primary">More complex tasks</strong> like analyzing hundreds of session
+                    recordings or rewriting a SQL query multiple times use more tokens and consume more credits. While
+                    exact usage varies, credit consumption usually scales with complexity – more advanced tasks cost
+                    more but can deliver deeper insights and time savings. You’ll always see real-time cost information
+                    while using AI features.
+                </li>
+            </ul>
+            <p>
+                PostHog automatically selects the most efficient model for each AI feature. We apply a simple,
+                consistent 20% markup over the underlying LLM provider’s cost: So 1 PostHog AI credit equals $0.8333 of
+                raw inference, and 1,000 credits cost $10.
+            </p>
+        </div>
+    ),
     seo: {
         title: 'PostHog AI – Your copilot for PostHog data and insights',
         description:
@@ -77,47 +102,6 @@ export const posthog_ai = {
             label: 'Analytics',
         },
         {
-            title: 'Web Analytics',
-            headline: 'Web Analytics',
-            team: 'web-analytics',
-            layout: 'ai',
-            icon: <IconPieChart className="size-5" />,
-            color: 'green',
-            description:
-                "Privacy-friendly web analytics that doesn't require selling your soul (or your users' data). PostHog AI surfaces why traffic tanked, and what's actually converting.",
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807222/web_analytics_45ba970699.png',
-                    alt: 'Web analytics',
-                    className: 'max-h-56 @2xl:mt-8',
-                    // stylize: true,
-                    // shadow: true,
-                },
-            ],
-            skills: [
-                {
-                    name: 'Insight generation',
-                    description:
-                        'Create insights with text prompts to analyze traffic patterns, conversion funnels, or user journeys',
-                    sticker: <StickerPath className="size-12" />,
-                    percent: 30,
-                },
-                {
-                    name: 'Conversational filters',
-                    description: 'Apply filters by page path, geography, device type, or referrer using plain language',
-                    sticker: <StickerPath className="size-12" />,
-                    percent: 30,
-                },
-                {
-                    name: 'Anomaly analysis',
-                    description:
-                        'Detect unusual traffic spikes or drops and get PostHog AI to explain potential causes',
-                    sticker: <StickerPath className="size-12" />,
-                    percent: 0,
-                },
-            ],
-        },
-        {
             title: 'Product Analytics',
             headline: 'Product Analytics',
             team: 'product-analytics',
@@ -149,6 +133,12 @@ export const posthog_ai = {
                     percent: 50,
                 },
                 {
+                    name: 'Deep dive',
+                    description: 'Get suggestions for what to investigate next',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 30,
+                },
+                {
                     name: 'Auto-naming',
                     description: 'Automatically generate descriptive names for insights and dashboards',
                     sticker: <StickerPath className="size-6" />,
@@ -158,6 +148,47 @@ export const posthog_ai = {
                     name: 'Anomaly detection',
                     description: 'Detect outliers with AI and configure alerts to catch them',
                     sticker: <StickerPath className="size-6" />,
+                    percent: 0,
+                },
+            ],
+        },
+        {
+            title: 'Web Analytics',
+            headline: 'Web Analytics',
+            team: 'web-analytics',
+            layout: 'ai',
+            icon: <IconPieChart className="size-5" />,
+            color: 'green',
+            description:
+                "Privacy-friendly web analytics that doesn't require selling your soul (or your users' data). PostHog AI surfaces why traffic tanked, and what's actually converting.",
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807222/web_analytics_45ba970699.png',
+                    alt: 'Web analytics',
+                    className: 'max-h-56 @2xl:mt-8',
+                    // stylize: true,
+                    // shadow: true,
+                },
+            ],
+            skills: [
+                {
+                    name: 'Conversational filters',
+                    description: 'Apply filters by page path, geography, device type, or referrer using plain language',
+                    sticker: <StickerPath className="size-12" />,
+                    percent: 70,
+                },
+                {
+                    name: 'Insight generation',
+                    description:
+                        'Create insights with text prompts to analyze traffic patterns, conversion funnels, or user journeys',
+                    sticker: <StickerPath className="size-12" />,
+                    percent: 30,
+                },
+                {
+                    name: 'Anomaly analysis',
+                    description:
+                        'Detect unusual traffic spikes or drops and get PostHog AI to explain potential causes',
+                    sticker: <StickerPath className="size-12" />,
                     percent: 0,
                 },
             ],
@@ -242,17 +273,17 @@ export const posthog_ai = {
                     percent: 70,
                 },
                 {
+                    name: 'Session summaries',
+                    description: 'Get a summary of one or more session replays',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 50,
+                },
+                {
                     name: 'Session clustering',
                     description:
                         'Ask PostHog AI to group similar sessions and surface representative examples from thousands',
                     sticker: <StickerPath className="size-6" />,
                     percent: 30,
-                },
-                {
-                    name: 'Configuration assistant',
-                    description: 'Set up privacy masking, regex rules, and recording settings with natural language',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 0,
                 },
             ],
         },
@@ -277,6 +308,12 @@ export const posthog_ai = {
                     name: 'Feature flag setup',
                     description: 'Create and configure feature flags using natural language',
                     sticker: <StickerPath className="size-6" />,
+                    percent: 70,
+                },
+                {
+                    name: 'Stale feature flag detection',
+                    description: 'Detect stale feature flags and automatically remove them from your app and codebase',
+                    sticker: <StickerPath className="size-6" />,
                     percent: 30,
                 },
                 {
@@ -290,12 +327,6 @@ export const posthog_ai = {
                     description: 'Delegate rule-based flag rollouts to AI',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
-                },
-                {
-                    name: 'Stale feature flag detection',
-                    description: 'Detect stale feature flags and automatically remove them from your app and codebase',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 30,
                 },
             ],
         },
@@ -322,7 +353,7 @@ export const posthog_ai = {
                     name: 'Experiment builder',
                     description: 'Create and configure A/B tests using natural language prompts',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 30,
+                    percent: 50,
                 },
                 {
                     name: 'Results analysis',
@@ -462,7 +493,7 @@ export const posthog_ai = {
             ],
         },
         {
-            label: 'Customer data infrastructure',
+            label: 'PostHog data stack',
         },
         {
             title: 'Data Stack',
@@ -537,7 +568,8 @@ export const posthog_ai = {
             title: 'Investigating web traffic',
             author: 'Edwin Lim',
             wistia: 'tgws1dixc0',
-            customThumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_investigating_web_traffic_86c3caa67d.png',
+            customThumb:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_investigating_web_traffic_86c3caa67d.png',
             chapters: [
                 {
                     title: 'Add a graph series for unique users',
@@ -559,13 +591,14 @@ export const posthog_ai = {
                     time: 285,
                     copyable: true,
                 },
-            ]
+            ],
         },
         maximizing_data_insights: {
             title: 'Maximizing data insights',
             author: 'Eric Duong',
             wistia: 'syysfftbzk',
-            customThumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_maximizing_data_insights_60ecdcb060.png',
+            customThumb:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_maximizing_data_insights_60ecdcb060.png',
             chapters: [
                 {
                     title: 'Last 10 Stripe charges',
@@ -583,20 +616,21 @@ export const posthog_ai = {
                     copyable: true,
                 },
                 {
-                    title: 'In Stripe data, what\'s the net amount charged and refunded in the last 7 days?',
+                    title: "In Stripe data, what's the net amount charged and refunded in the last 7 days?",
                     time: 140,
                     copyable: true,
                 },
-            ]
+            ],
         },
         answering_business_questions: {
             title: 'Answering business questions',
             author: 'Georgiy Tarasov',
             wistia: 'hjr4vq1py4',
-            customThumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_answering_business_questions_aed4278f7a.png',
+            customThumb:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_answering_business_questions_aed4278f7a.png',
             chapters: [
                 {
-                    title: 'What\'s the cache hit rate for AI generations?',
+                    title: "What's the cache hit rate for AI generations?",
                     time: 30,
                     copyable: true,
                 },
@@ -615,7 +649,26 @@ export const posthog_ai = {
                     time: 104,
                     copyable: true,
                 },
-            ]
+            ],
+        },
+        integrating_external_data: {
+            title: 'Integrating external data',
+            author: 'Natlaia Amorim',
+            wistia: '8yephrnt6h',
+            customThumb:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_integrating_external_data_ab4b91a189.png',
+            chapters: [
+                {
+                    title: 'How can I import a google sheet into PostHog so I can use it as a data source',
+                    time: 55,
+                    copyable: true,
+                },
+                {
+                    title: 'Now my table has been synced and is available as a data source. Help me create an insight where I can show our keyword rankings evolution over time (the Y axis should be the count, and X axis should be the month string and the ranking string.',
+                    time: 143,
+                    copyable: true,
+                },
+            ],
         },
     },
     answers: [
@@ -776,8 +829,7 @@ export const posthog_ai = {
         'getting-started':
             "PostHog AI is available in the sidebar of most PostHog pages—just click the icon and start asking questions. If you're not sure what to ask, try something simple like 'show me my top pages from last week' or 'create a funnel for signup to activation.' You'll immediately see how it interprets your request and builds the analysis.<br /><br />As you use it more, you'll learn what works well. Be specific when you can ('users in the US who signed up after Jan 1st'), and don't be afraid to iterate ('now add a breakdown by device type'). It's designed to have a conversation, not require perfect prompts on the first try.<br /><br />The AI credits you use are visible in real-time, so you'll quickly get a sense of what costs what. Most teams find that the time savings far outweigh the credit cost—especially for tasks like session replay analysis or complex SQL queries that would otherwise take significant manual effort.",
         demo: "These are all real questions you can ask PostHog AI right now. The examples show the range of what's possible—from high-level product questions ('What changed this week?') to specific technical tasks ('Write SQL for this query'). Notice they're not perfectly formatted prompts. You can be conversational. If you're signed into PostHog, you can click any of these and it'll actually start working on it for you. The demo cards highlight different capabilities: connecting data points across the platform, summarizing recordings, building dashboards from plain English, analyzing LLM usage (meta!), web traffic analysis, SQL debugging, joining external data, and answering 'how do I use PostHog' questions. The point is: it's not a toy. It's solving real problems that would otherwise eat up engineering time.",
-        videos:
-            "These are screen recordings of PostHog engineers actually using PostHog AI for real work—not staged demos. Watch Edwin investigate web traffic by asking AI to add graph series, create a dashboard with traffic breakdowns, find specific session recordings, and then summarize them into a report. Eric shows how to query Stripe data in the data warehouse, starting with simple requests and building up to complex CTEs and unions. Georgiy demonstrates business analysis: checking cache hit rates, breaking down by model, pulling in customer feedback, and summarizing session recordings. The videos show you can be conversational and iterate on your requests. You don't need to know the perfect query syntax upfront. The AI helps you refine as you go. These are the kinds of tasks that normally require SQL knowledge, data engineering skills, or significant manual work. PostHog AI handles them in minutes.",
+        videos: "These are screen recordings of PostHog engineers actually using PostHog AI for real work—not staged demos. Watch Edwin investigate web traffic by asking AI to add graph series, create a dashboard with traffic breakdowns, find specific session recordings, and then summarize them into a report. Eric shows how to query Stripe data in the data warehouse, starting with simple requests and building up to complex CTEs and unions. Georgiy demonstrates business analysis: checking cache hit rates, breaking down by model, pulling in customer feedback, and summarizing session recordings. The videos show you can be conversational and iterate on your requests. You don't need to know the perfect query syntax upfront. The AI helps you refine as you go. These are the kinds of tasks that normally require SQL knowledge, data engineering skills, or significant manual work. PostHog AI handles them in minutes.",
         you: "This slide shows how PostHog AI helps different roles, but here's the real insight: it's most valuable when it removes bottlenecks between teams. Founders get instant answers without waiting for engineering. Product Engineers can analyze data without context-switching to another tool. Product Managers can run experiments and dig into data without needing a data analyst. Growth teams can build dashboards without SQL knowledge. Data Analysts can offload repetitive 'quick questions' and focus on harder problems. The common thread: everyone becomes more self-sufficient. You're not creating ticket queues or Slack threads asking someone else to pull data. You ask PostHog AI, verify the output makes sense, and keep moving. It's not about replacing these roles—it's about making each role more effective at their actual job instead of being blocked waiting for someone else.",
         roadmap:
             "We're constantly shipping new AI capabilities and making existing ones deeper. Some examples: anomaly detection that explains why metrics changed, semantic grouping of errors by root cause instead of just stack traces, configuration assistants that set up features using natural language. The goal isn't to automate everything — it's to handle the repetitive pattern-matching work so humans can focus on the decisions that actually require judgment. We're also training the AI on more domain knowledge so it gets better at understanding product analytics concepts, not just executing commands. Check the roadmap regularly because we're shipping new stuff constantly, and you can vote on what you want us to prioritize next.",

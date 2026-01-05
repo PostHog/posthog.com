@@ -85,11 +85,15 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
     - Payment Method to `Credit Card`.
 9. If an MSA is being used rather than the standard terms you will need to replace the following text:
 
-    > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: /privacy (collectively the “Agreement”)
+    > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”)
 
-    with
+    with either
 
-    > PostHog Cloud License Terms executed by and between PostHog, Inc. and CUSTOMER LEGAL NAME (the “Agreement”)
+    > PostHog Cloud License Terms entered into by and between the Parties on or about the date hereof and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
+
+    or, if the Customer insists on including the exact date of the MSA to remove ambiguity,
+
+   > PostHog Cloud License Terms entered into by and between the Parties on or about [INSERT DATE OF EXECUTION OF MSA] and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
 
 10. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
 
@@ -148,9 +152,12 @@ We offer HIPAA Compliance on PostHog Cloud and as such health companies will req
 > We only provide our default BAA for platform add-on subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to a platform add-on - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. A customer who is on a platform add-on trial (with a credit card in PostHog) is eligible to sign a default BAA, but you should make it clear to them that the default BAA will be voided if/when the platform add-on subscription lapses. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
 
 ## Non-disclosure Agreement (NDA)
-In some cases, prospective or current customers require a mutual Non-disclosure Agreement in place before conversastion or product activity can proceed. Terms already specify Confidentiality and if there is still a situation where a documented agreement is requested this can be easily accommodated. 
+In some cases, prospective or current customers require a mutual Non-disclosure Agreement (MNDA) in place before conversastion or product activity can proceed. Terms already specify Confidentiality and if there is still a situation where a documented agreement is requested this can be easily accommodated. 
 
 - Access PandaDoc and Create a New Document
 - Use the current PostHog - NDA template
 - Add your desired contact as a recipient and follow the usual PandaDoc process
 - When document is complete, it will be stored in the Document library and can also be attached to the Salesforce account for future reference
+
+### Trust center approvals
+Requests that originate from the [Trust Center](https://trust.posthog.com/) automatically get sent an NDA in the request from SafeBase to PandaDoc. Once the document is fully signed, access will automatically be granted. 
