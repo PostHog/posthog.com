@@ -32,16 +32,16 @@ All technical support engineers share responsibility for:
 
 Beyond that, we have SMEs who own specific product groups. For each product group, we select one person from EU and one from NA to maintain timezone coverage:
 
-**Flags** (experiments, feature flags, surveys)
+**Flags**
 - EU: <TeamMember name="Ben Lea" photo />, NA: <TeamMember name="Joshua Ordehi" photo />
 
-**Data** (batch exports, data stack, ingestion, workflows)
+**Data**
 - EU: <TeamMember name="Luke Belton" photo />, NA: <TeamMember name="Kyle Swank" photo />
 
-**Replay** (replay, heatmaps, toolbar)
+**Replay**
 - EU: <TeamMember name="Christian Rafferty" photo />, NA: <TeamMember name="Ben Haynes" photo />
 
-**Observability + AI & SDK/Implementation** (error tracking, PostHog AI, LLM analytics, SDK/Implementation, mobile)
+**Observability + AI & SDK/Implementation**
 - EU: TBD, NA: <TeamMember name="Steven Shults" photo />
 
 
