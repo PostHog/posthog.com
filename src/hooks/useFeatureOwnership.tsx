@@ -173,7 +173,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     heatmaps: {
         feature: 'Heatmaps',
-        owner: ['replay'],
+        owner: ['web-analytics'],
     },
     hogql: {
         feature: 'HogQL',
