@@ -670,8 +670,6 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
             }
             docsHandbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook|^/docs/" } } }) {
                 nodes {
-                    rawBody
-                    body
                     fields {
                         slug
                         contributors {

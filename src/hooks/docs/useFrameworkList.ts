@@ -69,7 +69,9 @@ export default function useFrameworkList(): Framework[] {
 
     const result = allMdx.nodes
         .filter((node: any) => {
-            const url = `/${node.slug}`
+            // Remove trailing slash from slug if present (for index.mdx files in directories)
+            const normalizedSlug = node.slug.replace(/\/$/, '')
+            const url = `/${normalizedSlug}`
             return frameworkUrls.includes(url)
         })
         .map((node: any) => {
@@ -81,9 +83,12 @@ export default function useFrameworkList(): Framework[] {
                 label = howToMatch[1]
             }
 
+            // Remove trailing slash from slug if present (for index.mdx files in directories)
+            const normalizedSlug = node.slug.replace(/\/$/, '')
+
             const framework: Framework = {
                 label,
-                url: `/${node.slug}`,
+                url: `/${normalizedSlug}`,
             }
 
             if (node.frontmatter.icon?.publicURL) {
