@@ -271,7 +271,7 @@ There are two broad categories of things we A/B test:
 - Changes intended to move a metric (eg. changing CTAs to see if it improves click-through)
 - Changes that could impact large swaths of users and their behavior, to make sure there is no negative impact (eg. moving all items in the left nav into a drawer)
 
-The former is an optimization scheme; the latter is _required_ to make sure we don't break things. Just like we create tests in our codebase to make sure new code doesn't disrupt existing features, we also need to do behavioral testing to make sure our new features aren't disrupting existing user behaviors.
+The former is an optimization scheme; the latter makes sure we don't break things. Just like we create tests in our codebase to make sure new code doesn't disrupt existing features, we also need to do behavioral testing to make sure our new features aren't disrupting existing user behaviors.
 
 A/B tests make sense when:
 
@@ -280,9 +280,9 @@ A/B tests make sense when:
     - If the feature is designed to improve some other metric like retention or stickiness, then test away!
 - The change impacts user behavior (eg most backend changes should have code tests - not behavioral A/B tests)
 
-If you're not sure something should be A/B tested, run one anyway. Feature flags (which experiments run on top of) are a great kill-switch for rolling back features in case something goes sidwways. And it's always nice to know how your metrics move the numbers! 
+If you're not sure something should be A/B tested, run one anyway. Feature flags (which experiments run on top of) are a great kill-switch for rolling back features in case something goes sidwways. And it's always nice to know how your changes might move the numbers! 
 
-It's easy to just think "this makes more sense, let's just roll it out." Sometimes that's okay, sometimes that's being arrogant. We obviously can't and shouldn't test everything, but running A/B tests frequently gets you comfortable with being wrong, which is a _very_ handy skill to have.
+It's easy to just think "this makes more sense, let's just roll it out." Sometimes that's okay, sometimes it has unintended consequences. We obviously can't and shouldn't test everything, but running A/B tests frequently gets you comfortable with being wrong, which is a _very_ handy skill to have.
 
 #### A/B test metrics
 
