@@ -54,7 +54,12 @@ A quarter is too short to interview users, make changes, and measure metrics. Th
 
 #### External cache (Driver: <TeamMember name="Dustin Byrne" />)
 
-*TODO: Define what this is and what "done" looks like. Kick to high-priority customers for feedback.*
+When using local evaluation, SDKs fetch feature flag definitions and store them in memory. In highly distributed or stateless environments, it's preferred to store those feature flag definitions in a shared cache.
+
+Currently, Node.js and Python SDKs have experimental support for shared, external caching of feature flag definitions. In Q1 we'd like to:
+
+- Solidify the caching API, moving it out of "experimental" status
+- Expand the caching API to other server-side SDKs
 
 #### Better debuggability (Driver: <TeamMember name="Dustin Byrne" />)
 
