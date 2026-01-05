@@ -1,0 +1,73 @@
+---
+title: Upload source maps for Webpack
+showStepsToc: true
+---
+
+<Steps>
+<Step title="Install the PostHog Webpack plugin" badge="required">
+
+  ```shell
+  npm install @posthog/webpack-plugin
+  ```
+
+</Step>
+<Step title="Add PostHog plugin to your Webpack config" badge="required">
+
+  Add the following to your `webpack.config.js` file:
+
+  ```js file=webpack.config.js
+  const PostHogPlugin = require('@posthog/webpack-plugin')
+
+  module.exports = {
+    // ... your existing config
+    plugins: [
+      new PostHogPlugin({
+        personalApiKey: process.env.POSTHOG_API_KEY, // Personal API Key
+        envId: process.env.POSTHOG_ENV_ID, // Environment ID
+        host: process.env.POSTHOG_HOST, // (optional) defaults to https://us.i.posthog.com
+        sourcemaps: { // (optional)
+          enabled: true, // (optional) Enable sourcemaps generation and upload, defaults to true
+          project: 'my-application', // (optional) Project name
+          version: '1.0.0', // (optional) Release version
+          deleteAfterUpload: true, // (optional) Delete sourcemaps after upload, defaults to true
+        },
+      }),
+    ],
+  }
+  ```
+
+  Where you should set the following environment variables:
+
+  <div className="overflow-x-hidden">
+
+  | Environment Variable | Description |
+  | --- | --- |
+  | `POSTHOG_API_KEY` | [Personal API key](https://app.posthog.com/settings/user-api-keys#variables) with at least `write` access on `error tracking` |
+  | `POSTHOG_ENV_ID` | Project ID you can find in your [project settings](https://app.posthog.com/settings/environment#variables) |
+  | `POSTHOG_HOST` | (optional) Your PostHog instance URL. Defaults to `https://us.i.posthog.com` |
+
+  </div>
+
+  If you are using a CI/CD service, make sure these environment variables are added to your project settings, not just your local setup. This enables source maps to be automatically uploaded on your production build.
+</Step>
+
+<Step checkpoint title="Verify source map upload and injection">
+
+1. Confirm that source maps are successfully uploaded to PostHog.
+
+<div className="mt-4 mb-2">
+
+<OSButton variant="secondary" asLink className="mb-2" size="sm" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external>
+    Check symbol sets in PostHog
+</OSButton>
+
+</div>
+
+2. Confirm that the served files are injected with the correct source map comment in production in dev tools:
+
+```js
+//# chunkId=0197e6db-9a73-7b91-9e80-4e1b7158db5c
+```
+
+</Step>
+</Steps>

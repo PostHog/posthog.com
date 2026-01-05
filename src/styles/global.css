@@ -85,7 +85,7 @@
             }
 
             > div {
-                @apply ml-2 mt-2 rounded;
+                @apply ml-2 mr-2 mt-2 rounded;
             }
 
             ul,
