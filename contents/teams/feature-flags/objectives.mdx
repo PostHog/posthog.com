@@ -9,11 +9,9 @@ We've shipped a lot of features that are 80% done. Time to finish them by cleari
 - **Cohorts** <TeamMember name="Gustavo Henrique Strassburger" photo /> — Clear the `feature/cohorts` backlog
 - **Early access** <TeamMember name="Dustin Byrne" photo /> — Clear the `feature/early-access` backlog
 
-#### Remote config rebrand (Driver: TBD)
+#### Remote config to maintenance mode (Driver: <TeamMember name="Dylan Martin" />)
 
-Remote config works, but the value prop isn't clear. Rebrand and clarify positioning so users understand when to use it.
-
-*TODO: Define scope and assign a driver*
+Remote config is an interesting idea but right now it's a bit of a feature looking for a market, and its presence causes feature bloat without corresponding to much user value. We will move this feature to maintenance mode (existing users will still be able to use remote config flags, but new users will not be able to make new remote config flags) until we have bandwidth/demand to work on it further.
 
 #### Sand the flags UX (Driver: <TeamMember name="Dylan Martin" />)
 
@@ -38,17 +36,16 @@ Target flags based on user behavior (e.g. "users who completed X event").
 
 Get the Statsig and LaunchDarkly import flow over the line.
 
-#### Ship AI-powered flag cleanup (Driver: TBD)
+#### Ship AI-powered flag cleanup (Driver: <TeamMember name="Dylan Martin" />, but could be anyone with bandwidth)
 
-Automate stale flag cleanup. We've defined what "stale" means — now build the tooling.
+Automate stale flag cleanup. We've come up with a principled definition for what "stale" means — now we need to build the tooling. Eventually, I imagine this is a goal we share with PostHog AI/Array somewhat, but for this quarter the feature flags team will commit to a tool that:
 
-- Start with a copied prompt, finish with native Max integration
-- *TODO: Define scope for MCP integration (bidirectional?)*
-- *TODO: Assign a driver*
+- identifies stale flags in the UI and gives users the ability to remove them in bulk
+- provides a copyable prompt for LLM-assisted IDEs to use to clean up their flags on the application-side
 
 #### Understand users better (Driver: <TeamMember name="Annika Schmid" />)
 
-A quarter is too short to interview users, make changes, and measure metrics. The features we're already planning should move the metrics we care about — interviews help us figure out what to prioritize next.
+A quarter is too short to interview users, make changes, and measure metrics. The features we're already planning should move the metrics we care about — interviews help us (1) figure out what to prioritize next and (2) identify things we might be missing.
 
 - Conduct 10-15 user interviews
 - Understand: Why do people use flags? What holds them back? Why do they drop off?

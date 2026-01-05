@@ -6,9 +6,8 @@ This quarter we're focused on reliability, performance, and cleaning house. No i
 
 **Goal: No incidents.**
 
-- **Dedicated Redis cache** — Isolate flags from shared infrastructure. [RFC #909](https://github.com/PostHog/product-internal/pull/909)
+- **Isolated flags-specific infra** — Run the flags service on entirely dedicated infrastructure (Redis cache ([RFC #909](https://github.com/PostHog/product-internal/pull/909)), read replica DB, celery queue, etc.) rather than sharing with other services.
 - **Load testing framework** — Add tooling so we can load test the flags service
-- **Flags-specific read replica** — Reliable DB access that doesn't depend on shared infra
 
 #### Long term service improvements — <TeamMember name="Phil Haack" photo />
 
@@ -21,6 +20,6 @@ This quarter we're focused on reliability, performance, and cleaning house. No i
 
 Pay down tech debt and simplify the codebase.
 
-- Delete `/decide`
+- Delete all the code that backs `/decide` — it's not used anywhere, so let's get the cruft out of there
 - Split out `remote_config` from `/flags`
 - Get `/local_evaluation` in a good state — low cost to run, good performance
