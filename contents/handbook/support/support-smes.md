@@ -13,7 +13,7 @@ This structure helps us own our product areas completely, build the knowledge ne
 ## Product ownership
 
 All technical support engineers share responsibility for:
-- **Analytics products** (analytics platform, customer analytics, product analytics, web analytics, growth)
+- **Analytics products** (analytics platform, customer analytics, product analytics, web analytics, growth). These product areas are shared as they represent the highest proportion of our tickets.
 - **Unclassified tickets** (tickets in the 'Support' group). Where possible, these tickets should be updated with the correct product group.
 
 Beyond that, we have SMEs who own specific product areas. For each area, we select one person from EU and one from NA to maintain timezone coverage.
