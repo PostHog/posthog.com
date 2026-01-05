@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { PlaceType, PlaceItem } from './types'
 import { useUser } from '../../hooks/useUser'
+import { useUserLocation } from '../../hooks/useUserLocation'
 import SearchBar, { createSearchMarker } from './SearchBar'
 import { usePlacesMapData, Coordinates } from './PlacesLayer'
 import { renderToString } from 'react-dom/server'
@@ -59,6 +60,7 @@ export default function PlacesMap({
 }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
     const { isModerator, getJwt } = useUser()
+    const { location: userLocation, isLoading: isLocationLoading } = useUserLocation()
 
     useEffect(() => {
         setIsClient(true)
@@ -147,6 +149,10 @@ export default function PlacesMap({
             console.error('Not client')
             return
         }
+        if (isLocationLoading) {
+            // Wait for location to load before initializing map
+            return
+        }
         const mapboxgl = getMapbox()
         if (!mapboxgl) {
             console.error('No mapboxgl')
@@ -171,10 +177,11 @@ export default function PlacesMap({
             const currentLayers = layersRef.current
 
             // Filter places by layer if specified
-            const filteredPlaces =
-                !Array.isArray(currentLayers) || currentLayers.length === 0
-                    ? placesRef.current
-                    : placesRef.current.filter((p) => currentLayers.includes(p.type))
+            const filteredPlaces = !Array.isArray(currentLayers)
+                ? placesRef.current // Show all if layers is undefined
+                : currentLayers.length === 0
+                ? [] // Show none if layers is empty array
+                : placesRef.current.filter((p) => currentLayers.includes(p.type))
 
             // Use Mapbox clusters when zoomed out
             if (zoom < CLUSTER_ZOOM) {
@@ -259,7 +266,7 @@ export default function PlacesMap({
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current as HTMLDivElement,
             style: styleUrl,
-            center: [-0.1276, 51.5074], // London
+            center: [userLocation.longitude, userLocation.latitude],
             zoom: 4,
             attributionControl: true,
         })
@@ -306,7 +313,7 @@ export default function PlacesMap({
                 mapRef.current = null
             }
         }
-    }, [isClient, token, styleUrl])
+    }, [isClient, token, styleUrl, isLocationLoading, userLocation])
 
     useEffect(() => {
         return setupMap()
@@ -427,6 +434,11 @@ export default function PlacesMap({
 
     return (
         <div className="box-border w-full h-full overflow-hidden relative">
+            {isLocationLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-primary/50 z-20">
+                    <div className="text-primary text-sm">Loading map...</div>
+                </div>
+            )}
             <div ref={mapContainerRef} className="w-full h-full" />
             {isModerator && (
                 <div className="absolute top-4 left-4 z-10">

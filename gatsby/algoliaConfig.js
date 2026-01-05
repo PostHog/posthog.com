@@ -15,6 +15,7 @@ const retrievePages = (type, regex) => {
                   }
                   fields {
                     pageViews
+                    slug
                   }
                   rawBody
                   excerpt
