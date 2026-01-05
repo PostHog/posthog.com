@@ -247,28 +247,30 @@ export default function RewardCard({ reward, total }: { reward: Reward; total: n
                             <p className="font-bold font-code m-0 text-sm tracking-wide truncate">{couponCode}</p>
                             <CopyButton text={couponCode} />
                         </div>
-                        {reward.merchStoreHandle ? (
+
+                        <OSButton
+                            size="sm"
+                            variant="primary"
+                            width="full"
+                            asLink
+                            to={`/merch?coupon=${couponCode}&state=cart`}
+                            state={{ newWindow: true }}
+                        >
+                            Use in store
+                        </OSButton>
+                        {reward.merchStoreHandle && (
                             <OSButton
                                 size="sm"
-                                variant="primary"
+                                variant="secondary"
                                 width="full"
                                 onClick={handleUseInStore}
                                 disabled={isRedirecting}
+                                className="mt-1"
                             >
                                 {isRedirecting ? 'Opening...' : 'Order now'}
                             </OSButton>
-                        ) : (
-                            <OSButton
-                                size="sm"
-                                variant="primary"
-                                width="full"
-                                asLink
-                                to={`/merch?coupon=${couponCode}`}
-                                state={{ newWindow: true }}
-                            >
-                                Use in store
-                            </OSButton>
                         )}
+
                         <div className="flex justify-center">
                             <button
                                 onClick={handleCancel}

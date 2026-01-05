@@ -45,7 +45,7 @@ export default function Points() {
                     </div>
                     {nextReward && (
                         <p className="text-sm text-muted m-0">
-                            <span className="font-bold text-green">{pointsToNext}</span> more for{' '}
+                            <span className="font-bold text-green">{pointsToNext}</span> more for a{' '}
                             <strong className="text-primary">{nextReward.title}</strong>
                         </p>
                     )}
