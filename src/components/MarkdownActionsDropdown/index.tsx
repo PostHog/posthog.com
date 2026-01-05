@@ -4,18 +4,10 @@ import React, { useState, useEffect } from 'react'
 import { Popover } from 'components/RadixUI/Popover'
 import OSButton from 'components/OSButton'
 
-// Helper function to safely create markdown URL
-export const getMarkdownUrl = (url: string): string => {
-    if (url.startsWith('/')) {
-        return `${url}.md`
-    }
-
-    try {
-        const urlObj = new URL(url)
-        return `${urlObj.origin}${urlObj.pathname}.md`
-    } catch {
-        return `${url}.md`
-    }
+// Helper function to create markdown URL from page path
+export const getMarkdownUrl = (path: string): string => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://posthog.com'
+    return `${origin}${path}.md`
 }
 
 // Check if the markdown URL exists (returns 200) or not (returns 404)
@@ -102,10 +94,10 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                 <span>Copy as Markdown</span>
             </button>
 
-            <Link to={markdownUrl} externalNoIcon className={menuItemButtonStyles}>
+            <a href={markdownUrl} target="_blank" rel="noopener noreferrer" className={menuItemButtonStyles}>
                 <IconEye className={menuItemIconStyles} />
                 <span>View as Markdown</span>
-            </Link>
+            </a>
 
             <Link
                 to={`https://chat.openai.com/?q=${encodeURIComponent(
