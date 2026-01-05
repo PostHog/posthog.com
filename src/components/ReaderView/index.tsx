@@ -36,12 +36,26 @@ import { MenuItem, useApp } from '../../context/App'
 import { Questions } from 'components/Squeak'
 import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
-import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
+import CopyMarkdownActionsDropdown, { useMarkdownUrlExists } from 'components/MarkdownActionsDropdown'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
 
 dayjs.extend(relativeTime)
+
+// Wrapper component that conditionally renders CopyMarkdownActionsDropdown based on whether the markdown URL exists
+const ConditionalMarkdownDropdown = ({ pageUrl }: { pageUrl: string | undefined }) => {
+    // Check if path is in allowed content paths
+    const isAllowedPath = pageUrl && MARKDOWN_CONTENT_PATHS.some((path) => pageUrl.includes(path))
+    const markdownExists = useMarkdownUrlExists(isAllowedPath ? pageUrl : '')
+
+    // Don't render if path is not allowed, during loading, or if markdown doesn't exist
+    if (!isAllowedPath || markdownExists !== true) {
+        return null
+    }
+
+    return <CopyMarkdownActionsDropdown pageUrl={pageUrl} />
+}
 
 interface ReaderViewProps {
     body?: {
@@ -737,6 +751,7 @@ function ReaderViewContent({
                                     !hideMobileTableOfContents &&
                                     !hideRightSidebar && (
                                         <div
+                                            id="mobile-toc"
                                             data-scheme="secondary"
                                             className={`@4xl/app-reader:hidden mt-4 mx-auto transition-all ${
                                                 fullWidthContent || body?.type !== 'mdx'
@@ -914,9 +929,7 @@ function ReaderViewContent({
                         }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
-                        {appWindow?.path && MARKDOWN_CONTENT_PATHS.some((path) => appWindow.path.includes(path)) && (
-                            <CopyMarkdownActionsDropdown pageUrl={appWindow.path} />
-                        )}
+                        <ConditionalMarkdownDropdown pageUrl={appWindow?.path} />
                         {filePath && (
                             <OSButton
                                 asLink
