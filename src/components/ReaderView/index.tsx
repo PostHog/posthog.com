@@ -914,10 +914,9 @@ function ReaderViewContent({
                         }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
-                        {appWindow?.path &&
-                            MARKDOWN_CONTENT_PATHS.some((prefix) => appWindow.path.startsWith(prefix)) && (
-                                <CopyMarkdownActionsDropdown pageUrl={appWindow.path} />
-                            )}
+                        {appWindow?.path && MARKDOWN_CONTENT_PATHS.some((path) => appWindow.path.includes(path)) && (
+                            <CopyMarkdownActionsDropdown pageUrl={appWindow.path} />
+                        )}
                         {filePath && (
                             <OSButton
                                 asLink
