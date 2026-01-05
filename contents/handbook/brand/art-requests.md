@@ -7,7 +7,7 @@ hideAnchor: false
 
 > 🎨 **Need artwork?** Please request it using the [new art request template](https://github.com/PostHog/posthog.com/issues/new/choose). Do not request artwork over Slack or email.
 
-[Lottie](https://posthog.com/community/profiles/27881), our Illustration Lead, and [Daniel](https://posthog.com/community/profiles/34810), our Production Designer, handle all requests for branding and artwork. 
+[Lottie](https://posthog.com/community/profiles/27881), our Illustration Lead, Heidi our illustrator, and [Daniel](https://posthog.com/community/profiles/34810), our Production Designer, handle all requests for branding and artwork. 
 
 They can help you with things like:
 
