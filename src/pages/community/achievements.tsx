@@ -1,5 +1,6 @@
 import { IconCheck } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
+import Link from 'components/Link'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import SEO from 'components/seo'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -140,8 +141,11 @@ const Points = () => {
         <div>
             <div className="p-4">
                 <p className="text-sm text-secondary m-0">
-                    Earn achievements by contributing to discussions, helping others, and achieving milestones in the
-                    PostHog community.
+                    Earn achievements by contributing to{' '}
+                    <Link to="/questions" className="font-bold text-red dark:text-yellow" state={{ newWindow: true }}>
+                        discussions
+                    </Link>
+                    , helping others, and achieving milestones in the PostHog community.
                 </p>
 
                 <ul className="m-0 p-0 list-none mt-4">

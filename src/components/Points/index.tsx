@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { Fieldset } from 'components/OSFieldset'
+import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
 import RewardCard from './RewardCard'
 import TransactionTitle from './TransactionTitle'
@@ -37,7 +38,7 @@ export default function Points() {
 
     return (
         <div className="space-y-6">
-            <div className="space-y-2">
+            <div className="space-y-2 relative">
                 <div className="flex items-baseline justify-between">
                     <div className="flex items-baseline gap-2">
                         <span className="text-4xl font-bold tabular-nums text-green">{total.toLocaleString()}</span>
@@ -58,6 +59,15 @@ export default function Points() {
                         />
                     </div>
                 )}
+                <div className="text-right absolute -bottom-0.5 right-0 translate-y-full">
+                    <Link
+                        to="/community/achievements"
+                        className="text-sm font-semibold text-red dark:text-yellow"
+                        state={{ newWindow: true }}
+                    >
+                        How do I earn points?
+                    </Link>
+                </div>
             </div>
 
             <Fieldset legend="Redeem points">
@@ -99,14 +109,6 @@ export default function Points() {
                                                 >
                                                     <div className="flex-1 min-w-0">
                                                         <TransactionTitle
-                                                            link={
-                                                                type === 'achievement'
-                                                                    ? {
-                                                                          url: `/community/achievements`,
-                                                                          label: 'View all',
-                                                                      }
-                                                                    : undefined
-                                                            }
                                                             type={type}
                                                             metadata={metadata as any}
                                                             date={date}
