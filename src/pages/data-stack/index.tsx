@@ -248,8 +248,8 @@ export default function CDP(): JSX.Element {
                 </p>
 
                 <ProductScreenshot
-                    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Post_Hog_duckdb_stack_610acbe532.png"
-                    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Post_Hog_duckdb_stack_610acbe532.png"
+                    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_12_20_T11_16_00_398_Z_eff184f271.png"
+                    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_12_20_T11_16_00_398_Z_eff184f271.png"
                     alt="Use our data stack tools or bring your own"
                     classes="rounded"
                     zoom={true}
@@ -284,7 +284,7 @@ export default function CDP(): JSX.Element {
                                 <p className="text-sm text-secondary !my-0.5">{product.description}</p>
                                 {product.perfectFor && (
                                     <>
-                                        <p className="text-xs text-secondary ml-4 !my-0">
+                                        <p className="text-[13px] text-secondary !my-0">
                                             <span className="font-bold">
                                                 <IconArrowRight className="size-3 inline -mt-0.5" /> Perfect for:
                                             </span>{' '}
@@ -294,7 +294,7 @@ export default function CDP(): JSX.Element {
                                 )}
                                 {product.notReadyFor && (
                                     <>
-                                        <p className="text-xs text-secondary ml-4 !my-0">
+                                        <p className="text-[13px] text-secondary !my-0">
                                             <span className="font-bold">
                                                 <IconClock className="size-3 inline -mt-0.5" /> Not quite ready for:
                                             </span>{' '}
