@@ -136,3 +136,4 @@ Now the problem is designing just enough context that the wizard can serve way m
 - Our [examples repo](https://github.com/PostHog/examples) is full of example code and the [prompts](https://github.com/PostHog/examples/tree/main/llm-prompts/basic-integration) we’re using
 - The [PostHog MCP server](https://github.com/PostHog/posthog/tree/master/services/mcp) uses the examples repo to construct its resource offerings
 
+Now go forth and make the robots do your bidding!
