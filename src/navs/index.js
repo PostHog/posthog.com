@@ -2184,7 +2184,7 @@ export const docsMenu = {
                             name: 'Phoenix',
                             url: '/docs/libraries/phoenix',
                         },
-                      {
+                        {
                             name: 'React Router',
                             url: '/docs/libraries/react-router',
                             children: [
