@@ -2236,6 +2236,10 @@ export const docsMenu = {
                             url: '/docs/libraries/shopify',
                         },
                         {
+                            name: 'Slack',
+                            url: '/docs/libraries/slack',
+                        },
+                        {
                             name: 'Vercel',
                             url: '/docs/libraries/vercel',
                         },
@@ -4731,6 +4735,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Concepts',
+                },
+                {
+                    name: 'Basics',
+                    url: '/docs/llm-analytics/basics',
+                    icon: 'IconBook',
+                    color: 'red',
                 },
                 {
                     name: 'Generations',
