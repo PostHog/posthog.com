@@ -1033,12 +1033,6 @@ export default function Home2() {
                     {/* Video Hero Section */}
                     <div className="flex flex-col @3xl:flex-row gap-8">
                         <div className="flex-1 @3xl:pt-2 @4xl:pt-8 @5xl:pt-8">
-                            <div className="mb-8">
-                                <Logo
-                                    className="inline-block"
-                                    fill={siteSettings.theme === 'dark' ? 'white' : undefined}
-                                />
-                            </div>
                             <h1 className="!text-2xl font-bold">The AI platform for engineers</h1>
                             <p className="text-base mt-0">
                                 Debug products. Ship features faster. <br />
