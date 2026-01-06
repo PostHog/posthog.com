@@ -47,7 +47,7 @@ Web analytics groups data by **sessions** and counts metrics based on when the s
 
 ### Date boundary handling
 
-Web analytics uses "session expansion" by default, which includes sessions that started shortly before your selected date range if they have activity within it. This gives you more complete session data (like accurate bounce rates) but means totals won't exactly match event-based counts.
+Web analytics attributes all metrics to the session start time, not when individual events occurred. To calculate accurate session metrics (like duration and bounce rate), it fetches session data with a 3-day buffer around your selected date range, but only counts sessions that actually started within your range.
 
 **Example with sample data:**
 
@@ -63,17 +63,17 @@ Suppose you're looking at data for **January 2nd** and have these sessions:
 
 | Metric | Count | Explanation |
 |--------|-------|-------------|
-| Unique users | 2 | Bob and Carol (sessions started on Jan 2). Alice's session started Jan 1. |
-| Pageviews | 5 | Bob's 3 + Carol's 2. Alice's pageviews excluded because session started Jan 1. |
+| Unique users | 2 | Bob and Carol (sessions started on Jan 2). Alice excluded—her session started Jan 1. |
+| Pageviews | 4 | Bob's 3 + Carol's 1 (only pageviews from Jan 2 are counted). Alice's Jan 2 pageview excluded because her session started Jan 1. |
 
 **Product analytics results** (event-based, for Jan 2):
 
 | Metric | Count | Explanation |
 |--------|-------|-------------|
-| Unique users | 3 | Alice, Bob, and Carol all had pageviews on Jan 2 |
-| Pageviews | 6 | Alice's 1 (12:05 AM) + Bob's 3 + Carol's 1 (11:55 PM). Excludes pageviews that occurred on Jan 1 or Jan 3. |
+| Unique users | 3 | Alice, Bob, and Carol all had pageviews on Jan 2. |
+| Pageviews | 5 | Alice's 1 (12:05 AM) + Bob's 3 + Carol's 1 (11:55 PM). Only events that occurred on Jan 2 are counted. |
 
-The difference comes from _when_ each tool considers data to belong to a date: web analytics uses session start time, product analytics uses event time.
+The key difference: web analytics groups by session start time, while product analytics counts events by when they occurred. A pageview at 12:05 AM on Jan 2 might be counted in web analytics under Jan 1 (if that's when the session started) but under Jan 2 in product analytics.
 
 ### Which number is "correct"?
 
