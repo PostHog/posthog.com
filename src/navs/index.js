@@ -4737,6 +4737,12 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
+                    name: 'Basics',
+                    url: '/docs/llm-analytics/basics',
+                    icon: 'IconBook',
+                    color: 'red',
+                },
+                {
                     name: 'Generations',
                     url: '/docs/llm-analytics/generations',
                     icon: 'IconAIText',
