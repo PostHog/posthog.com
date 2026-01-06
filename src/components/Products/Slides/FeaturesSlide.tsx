@@ -333,7 +333,7 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                     <h2 className="text-5xl mb-0 text-center">{item.headline}</h2>
                                     {item.description && (
                                         <p
-                                            className="mt-4 text-xl [&_code]:text-xl text-center"
+                                            className="mt-4 text-xl [&_code]:text-xl text-center max-w-2xl mx-auto"
                                             {...(typeof item.description === 'string'
                                                 ? { dangerouslySetInnerHTML: { __html: item.description } }
                                                 : { children: item.description })}

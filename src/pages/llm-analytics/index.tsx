@@ -19,7 +19,7 @@ import LiteLLMLogoDark from '../../../contents/images/docs/llms/LiteLLM_logo_whi
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'llm_analytics'
 
-const Subfeature = ({
+export const Subfeature = ({
     title,
     description,
     className = '',
@@ -74,7 +74,7 @@ const subfeatures = [
     },
 ]
 
-// Custom Features slide (mimics error tracking's features slide)
+// Custom Features slide - reorders features and maintains label positions
 const CustomFeaturesSlide = () => {
     const productData = useProduct({ handle: PRODUCT_HANDLE }) as any
     const allFeatures = productData?.features || []
@@ -82,8 +82,8 @@ const CustomFeaturesSlide = () => {
     // Define the desired order for features (only features without templates appear in this slide)
     const featureOrder = [
         'Dashboard',
-        'Traces',
         'Generations',
+        'Traces',
         'Users',
         'Errors',
         'Sessions',
@@ -104,14 +104,17 @@ const CustomFeaturesSlide = () => {
     const labels = itemsForSlide.filter((f: any) => f.label)
     const featuresWithoutTemplates = itemsForSlide.filter((f: any) => !f.label)
 
-    // Reorder features based on the desired order
+    // Reorder features based on the desired order, keeping any features not in the order list at the end
     const orderedFeatures = featureOrder
         .map((title) => featuresWithoutTemplates.find((f: any) => f.title === title))
         .filter((f) => f !== undefined)
         .concat(featuresWithoutTemplates.filter((f: any) => !featureOrder.includes(f.title)))
 
-    // Build final features array maintaining label positions
-    // "Features" label goes first, then features up to Prompts, then "Advanced analytics" label, then Analysis and Customizations
+    // Build final features array maintaining label positions:
+    // 1. "Features" label
+    // 2. Features up to and including "Prompts"
+    // 3. "Advanced analytics" label
+    // 4. "Analysis" and "Customizations"
     const finalFeatures: any[] = []
 
     // Add "Features" label first
@@ -121,9 +124,10 @@ const CustomFeaturesSlide = () => {
     }
 
     // Add features up to and including Prompts
+    const promptsIndex = featureOrder.indexOf('Prompts')
     const featuresUpToPrompts = orderedFeatures.filter((f: any) => {
         const index = featureOrder.indexOf(f.title)
-        return index >= 0 && index <= featureOrder.indexOf('Prompts')
+        return index >= 0 && index <= promptsIndex
     })
     finalFeatures.push(...featuresUpToPrompts)
 
@@ -133,15 +137,14 @@ const CustomFeaturesSlide = () => {
         finalFeatures.push(advancedLabel)
     }
 
-    // Add Analysis and Customizations
+    // Add Analysis and Customizations (features after Prompts in the order)
+    const analysisIndex = featureOrder.indexOf('Analysis')
     const advancedFeatures = orderedFeatures.filter((f: any) => {
         const index = featureOrder.indexOf(f.title)
-        return index >= featureOrder.indexOf('Analysis')
+        return index >= analysisIndex
     })
     finalFeatures.push(...advancedFeatures)
 
-    // Show all features in the tabbed slide (similar to error tracking)
-    // Features with custom templates will still get their own individual slides automatically
     return <FeaturesSlide features={finalFeatures} />
 }
 
@@ -202,10 +205,8 @@ const NativeIntegrationsSlide = () => {
         <div data-scheme="primary" className="flex flex-col h-full bg-primary text-primary px-12 @2xl:px-16 py-12">
             <h2 className="text-5xl text-balance mb-4 text-center">Simple SDKs for popular LLM providers</h2>
             <p className="text-xl text-secondary mb-10 @2xl:mb-12 text-center">
-                The PostHog SDK instruments your LLM calls by wrapping the provider client.
-                <br />
-                Use the wrappers below for popular models and observability platforms, or manual capture for everything
-                else.
+                Instrument any LLM. Use PostHog-maintained wrappers for popular providers, or manual capture for
+                everything else.
             </p>
 
             <div className="flex flex-col @2xl:flex-row @2xl:items-start gap-4 @2xl:gap-6 flex-1 min-h-0">
@@ -276,10 +277,7 @@ const NativeIntegrationsSlide = () => {
 
             <p className="text-lg text-secondary text-center mt-8 flex items-center justify-center gap-2">
                 <IconLightBulb className="size-5 flex-shrink-0" />
-                <span>
-                    Using another LLM observability platform? Send data to PostHog to analyze it in context with product
-                    usage data.
-                </span>
+                <span>Using another LLM observability tool? Analyze that data alongside product usage in PostHog.</span>
             </p>
         </div>
     )
@@ -317,21 +315,9 @@ const ProductOSBenefitsSlide = () => {
 export default function LLMAnalytics(): JSX.Element {
     const contentData = useContentData()
 
-    // Combined GraphQL query for both tutorial data and product data
+    // GraphQL query for product data
     const data = useStaticQuery(graphql`
         query {
-            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    rawBody
-                    frontmatter {
-                        title
-                        description
-                    }
-                }
-            }
             allProductData {
                 nodes {
                     products {
@@ -378,12 +364,6 @@ export default function LLMAnalytics(): JSX.Element {
         }
     `)
 
-    // Merge content data with product data
-    const mergedData = {
-        ...data,
-        ...contentData,
-    }
-
     // Create slide configuration with custom templates
     const slides = createSlideConfig({
         custom: [
@@ -428,6 +408,12 @@ export default function LLMAnalytics(): JSX.Element {
             answersHeadline: 'What can LLM Analytics help me discover?',
         },
     })
+
+    // Merge content data with product data
+    const mergedData = {
+        ...data,
+        ...contentData,
+    }
 
     return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
 }

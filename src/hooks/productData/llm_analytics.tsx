@@ -120,7 +120,8 @@ export const llmAnalytics = {
             icon: <IconDashboard />,
             color: 'purple',
             headline: 'Dashboard',
-            description: 'Get a comprehensive overview of your LLM usage, costs, and performance',
+            description:
+                "Get a comprehensive overview of where your LLM budget goes, who's using AI features, and how they perform.",
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_screenshot_ce72bbf715.png',
@@ -130,11 +131,27 @@ export const llmAnalytics = {
             ],
         },
         {
+            title: 'Generations',
+            icon: <IconSparkles />,
+            color: 'yellow',
+            headline: 'Generations',
+            description:
+                'Every LLM call becomes a generation. See exactly what went in, what came out, and why it cost you $0.03.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/generations_screenshot_56f0f313ae.png',
+                    alt: 'LLM Analytics generations',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
             title: 'Traces',
             icon: <IconListTreeConnected />,
             color: 'seagreen',
             headline: 'Traces',
-            description: 'Debug entire conversations, not just individual calls',
+            description:
+                'Debug entire conversations, not just individual calls. PostHog automatically captures properties like person, total cost, total latency, and more.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/trace_screenshot_1e0bdd0ad3.png',
@@ -148,7 +165,7 @@ export const llmAnalytics = {
             handle: 'trace_monitoring',
             template: 'splitImage',
             headline: 'Traces',
-            description: 'Debug entire conversations, not just individual calls',
+            description: 'See an interaction timeline including all generation and span events.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_light_e4cea319cb.png',
@@ -181,7 +198,7 @@ export const llmAnalytics = {
                 {
                     icon: <IconShield />,
                     title: 'Privacy mode',
-                    description: 'Optionally exclude sensitive prompt and completion data',
+                    description: 'Optionally exclude sensitive data from being captured',
                 },
             ],
             // children: (<></>)
@@ -191,7 +208,7 @@ export const llmAnalytics = {
             handle: 'cost_analysis',
             template: 'splitImage',
             headline: 'Cost analysis',
-            description: 'Track costs by model, user, feature, and time period to optimize spending and pricing',
+            description: 'Track costs by model, user, feature, and time period to optimize spending and pricing.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cost_light_f2794e4e13.png',
@@ -228,7 +245,7 @@ export const llmAnalytics = {
             handle: 'performance_monitoring',
             template: 'splitImage',
             headline: 'Performance monitoring',
-            description: 'Monitor latency, error rates, and model performance',
+            description: 'Monitor latency, error rates, and model performance over time.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
@@ -241,7 +258,7 @@ export const llmAnalytics = {
                 {
                     icon: <IconDashboard />,
                     title: 'Latency tracking',
-                    description: 'Monitor response times and identify performance bottlenecks',
+                    description: 'optimize response times and identify performance bottlenecks',
                 },
                 {
                     icon: <IconWarning />,
@@ -266,27 +283,12 @@ export const llmAnalytics = {
             ],
         },
         {
-            title: 'Generations',
-            icon: <IconSparkles />,
-            color: 'yellow',
-            headline: 'Generations',
-            description:
-                'Every LLM call becomes a generation. See exactly what went in, what came out, and why it cost you $0.03.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/generations_screenshot_56f0f313ae.png',
-                    alt: 'LLM Analytics generations',
-                    className: 'justify-center items-center',
-                },
-            ],
-        },
-        {
             title: 'Users',
             icon: <IconUser />,
             color: 'red',
             headline: 'Users',
             description:
-                'See which users are interacting with your AI features and understand their usage pattern. Balance power users and tourists to refine your pricing model',
+                "Spot your power users, your biggest fans, and who's hitting errors. Most teams discover 20% of users drive 80% of costs.",
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_screenshot_716215eebb.png',
@@ -301,7 +303,7 @@ export const llmAnalytics = {
             color: 'yellow',
             headline: 'Errors',
             description:
-                'Connect your LLM events to error tracking to debug failures and monitor exceptions. See the exact prompts, model responses, and metadata associated with failed AI workflows.',
+                'Debug failed LLM calls and monitor exception rates with the full story: prompt, response, parameters, and metadata.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/errors_screenshot_e413f3f20b.png',
@@ -315,7 +317,8 @@ export const llmAnalytics = {
             icon: <IconRewindPlay />,
             color: 'yellow',
             headline: 'Sessions',
-            description: 'View session recordings alongside LLM traces to understand user interactions',
+            description:
+                'See complete user sessions with all LLM activity. Spot the difference: engaged at length, or stuck in a loop.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/sessions_screenshot_d6fc106ce9.png',
@@ -330,7 +333,7 @@ export const llmAnalytics = {
             color: 'purple',
             headline: 'Playground',
             description:
-                'Test and iterate without touching production code. Experiment with different models, prompts, tool calls and configurations to find the best solution.',
+                'Iterate system prompts without pushing code. Swap models, adjust tools, test the cursed inputs users will inevitably throw at you.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/playground_screenshot_eba10793cd.png',
@@ -345,7 +348,7 @@ export const llmAnalytics = {
             color: 'blue',
             headline: 'Evaluations',
             description:
-                'Run evals for relevance, toxicity, hallucinations, and more. Select a pre-configured template to get started quickly, or create your own from scratch',
+                'Catch regressions before users do. Run evals for hallucinations, toxicity, relevance, helpfulness, jailbreak attempts, or custom criteria.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
@@ -377,25 +380,28 @@ export const llmAnalytics = {
             color: 'blue',
             headline: 'Go beyond basic metrics',
             description:
-                'Go beyond "how many calls?" See how AI usage correlates with retention, revenue, and whether your feature is actually useful.',
+                'LLM observability tools tell you "how many calls?" LLM analytics shows how your AI features drive retention, revenue, and engagement.',
             features: [
                 {
                     title: 'Correlation analysis',
-                    description: 'See how AI usage correlates with retention, revenue, and engagement',
+                    description:
+                        'Connect AI performance to real business metrics. LLM traces, product analytics, session replay, and A/B testing in one tool.',
                 },
                 {
                     title: 'Funnel analysis',
-                    description: 'Track conversion through AI-powered features',
+                    description:
+                        'Track users through the entire product journey. Pinpoint where they drop off, and how AI was involved — latency, output quality, or UX.',
                 },
                 {
                     title: 'Cohort analysis',
-                    description: 'Compare heavy vs light AI users behavior',
+                    description:
+                        'Compare AI power users vs tourists. Are frequent users your best customers or just more expensive? Do they convert? Upgrade? Now you have answers.',
                 },
             ],
             layout: 'single-column',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/LLM_features_analysis_500cdd8b92.png',
                     alt: 'LLM Analytics analysis',
                     className: 'justify-center items-center',
                 },
@@ -406,28 +412,31 @@ export const llmAnalytics = {
             icon: <IconGear />,
             color: 'seagreen',
             headline: 'Customizations',
-            description: "One size doesn't fit all. Build custom dashboards and insights to fit your needs",
+            description:
+                'LLM analytics works best when you can analyze prompts, cost, and latency alongside events and metrics that matter to you.',
             features: [
                 {
-                    title: 'Custom dashboards',
-                    description: 'Build dashboards combining AI and product metrics',
-                },
-                {
-                    title: 'SQL access',
-                    description: 'Query raw LLM data with HogQL for custom analysis',
-                },
-                {
-                    title: 'Privacy mode',
+                    title: 'Custom dashboards and SQL',
                     description:
-                        'To avoid storing potentially sensitive prompt and completion data, you can enable privacy mode to exclude certain properties from being captured.',
+                        'Build dashboards that show AI performance in context with user behavior, and use HogQL to query raw LLM data when you need more detail.',
+                },
+                {
+                    title: 'Privacy without losing signal',
+                    description:
+                        'Exclude or hash sensitive prompt and response data while still keeping structure, metadata, and performance metrics.',
+                },
+                {
+                    title: 'Works with your AI stack',
+                    description:
+                        'Already using Langfuse, Helicone, or something custom? Send that data into PostHog and analyze it alongside product and user data.',
                 },
             ],
             layout: 'single-column',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
-                    alt: 'LLM Analytics customizations',
-                    className: 'justify-center items-center',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/LLM_features_70ab277d76.png',
+                    alt: 'LLM Analytics analysis',
+                    className: 'justify-center items-center p-8',
                 },
             ],
         },
