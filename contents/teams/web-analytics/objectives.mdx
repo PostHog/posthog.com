@@ -1,27 +1,49 @@
-## Q4 2025 Goals
+## Q1 2026 objectives
 
-* Marketing analytics <TeamMember name="Javier Bahamondes" photo />
-  * Release marketing analytics as generally available (GA)
-  * Add ROAS widget and at least two major integrations (TikTok/YouTube)
-  * Table it for a bit after this to see if it's useful for product engineers
-* Bring AI into web analytics <TeamMember name="Lucas Ricoy" photo /> & <TeamMember name="Javier Bahamondes" photo />
-  * Integrate web analytics with Max
-    * Make Max aware of web analytics and session metrics
-    * Canned insights for both event and session-level metrics
-    * Come up with filters like in Session Replay
-    * Stretch: Explain anomalies with deep research
-  * Add web analytics context to the MCP server so users can ask analytical questions
-  * Ship agent analytics v1 (detect and provide agent/bot traffic insights, figure out SDK/integration/pricing)
-* Improve the core experience <TeamMember name="Lucas Ricoy" photo />
-  * Make pre-aggregated tables reliable for the selected teams
-  * Improve performance for teams not using the pre-aggregated tables
-  * Get cookieless mode out of beta and fix bugs; don't invest a lot of time there for now
-  * Ship web vitals improvements (breakdowns + performance score)
-  * Ship real-time dashboard
-  * Ship a more granular world map
-* Improve the onboarding experience <TeamMember name="Anna Szell" photo /> & <TeamMember name="Lucas Ricoy" photo /> & <TeamMember name="Javier Bahamondes" photo /> & <FutureTeamMember href="/careers/product-engineer-web-analytics"/>
-  * Simplify referral channels and conversion goals setup
-  * Run an experiment simplifying the setup process
-  * Run an experiment revamping the product UX for new users (e.g. reordering tiles, etc.)
-  * Ship at least one improvement based on findings
+### Performance
 
+<TeamMember name="Lucas Ricoy" photo /> will be focusing on performance, reliability, and trust in Web Analytics.
+
+* Fix the current slowests paths (long date ranges, conversion goals)
+* Ship smart cache warming for Web Analytics for all projects
+* Optimize queries to use Sessions on Events/Sessions v3
+* Reuse intermediate query results
+* Ship pre-aggregated tables or incremental materialized views to all teams depending on experiment results
+
+### Marketing Analytics
+
+<TeamMember name="Javier Bahamondes" photo /> will be focusing on turning Marketing Analytics from "GA" to "feature parity".
+
+* Fix MA dashboard performance issues
+* Ship one opinionated default "Marketing Overview" report
+* Improve ROAS & attribution defaults
+* Clarify positioning: who MA is for and what problems it solves best
+* Stretch: Decide whether Marketing Analytics should become its own product surface
+
+### Agent & Bot Analytics
+
+<TeamMember name="Lucas Ricoy" photo /> will be focusing on shipping a beta version of agent/bot analytics.
+
+* Enable basic segmentation: human vs agent/bot in insights, web analytics and session replay
+* Publish documentation explaining detection methods and limitations
+* Ship an beta version of browser-controlled agent detection
+
+### Setup & Diagnostic
+
+<TeamMember name="Jordan Mryyan" photo /> will be focusing on reducing setup friction and misconfiguration pain.
+
+* Ship Installation Health v2 with clear, actionable fixes
+* Ship a setup/debug mode for the wizard that:
+  * Can identify common pitfalls
+  * Evaluate if all required integration is configured
+  * Identify changes on recent commits
+* Experiment with an fully AI-assisted onboarding for Web Analytics
+
+## Q4 2025 recap
+
+* Marketing Analytics launched as GA with strong user feedback
+* Web Analytics integrated with Posthog AI
+* Shipped Web Analytics components as insights
+* Pre-aggregated tables made available for selected teams
+* Query concurrency and performance improved
+* Many bug fixes and UX improvements across Web Analytics

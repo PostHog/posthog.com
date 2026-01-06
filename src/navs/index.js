@@ -1304,6 +1304,10 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Technical support SMEs',
+                        url: '/handbook/support/support-smes',
+                    },
+                    {
                         name: 'Support zero weeks',
                         url: '/handbook/support/support-zero',
                     },
