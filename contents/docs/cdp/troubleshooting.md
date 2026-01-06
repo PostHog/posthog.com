@@ -1,6 +1,12 @@
 ---
-title: Customer data platform troubleshooting and FAQs
+title: Customer Data Platform troubleshooting
 ---
+
+This page covers troubleshooting for CDP. For setup, see the [installation guides](/docs/cdp/sources).
+
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
 
 ## My transformation or destination isn't working, what do I do?
 
@@ -71,3 +77,9 @@ We recommend sending a `uuid` value with every captured event. Events with the s
 This is important because failures and retries happen, so your application or our library might send the same event multiple times. If you don't send UUIDs for every event, we aren't able to know if it's the same event, and hence we are not able to de-duplicate it for you.
 
 Some of our SDKs, such as JavaScript Web, do this automatically, other SDKs allow you to pass UUIDs. If you're using an SDK which doesn't currently support UUIDs for every event, please consider creating a PR or filing an issue in GitHub.
+
+## Solved community questions
+
+<SolvedQuestions
+    topicLabel="CDP"
+/>

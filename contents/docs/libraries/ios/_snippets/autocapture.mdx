@@ -9,7 +9,7 @@ PostHog autocapture automatically tracks the following events for you:
 -   **$screen** - when the user navigates (if using `UIViewController`)
 -   **$autocapture** - when the user interacts with elements in a screen (if using `UIKit`)
 
-> 🚧 **Note:** `$autocapture` is currently supported only in UIKit.
+> 🚧 **Note:** `$autocapture` captures interactions with UIKit elements. Some SwiftUI views use UIKit under the hood (e.g., `TextField` → `UITextField`, `Toggle` → `UISwitch`) and will also be autocaptured.
 
 ### Capturing screen views
 
@@ -79,7 +79,7 @@ var body: some View {
 }
 ```
 
-In this example, interactions with the _underlying_ UITextField will be captured with an additional identifier "usernameTextField".
+Since SwiftUI's `TextField` uses `UITextField` under the hood, interactions with it will be autocaptured with the additional identifier "usernameTextField".
 
 **Example of generated analytics data**
 
