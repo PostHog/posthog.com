@@ -2236,6 +2236,10 @@ export const docsMenu = {
                             url: '/docs/libraries/shopify',
                         },
                         {
+                            name: 'Slack',
+                            url: '/docs/libraries/slack',
+                        },
+                        {
                             name: 'Vercel',
                             url: '/docs/libraries/vercel',
                         },
@@ -4464,10 +4468,6 @@ export const docsMenu = {
                         {
                             name: 'Shopify',
                             url: '/docs/data-warehouse/sources/shopify',
-                        },
-                        {
-                            name: 'Slack',
-                            url: '/docs/data-warehouse/sources/slack',
                         },
                         {
                             name: 'Supabase',
