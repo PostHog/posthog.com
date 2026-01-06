@@ -41,7 +41,7 @@ PostHog automatically logs and displays the generation and its data within a con
   videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/ai_generation_in_app_18f37057ca.mp4" 
   alt="AI generation in-app view" 
   autoPlay="true"
-  loop="true"
+  loop
 />
 
 You can expect each generation to have the following properties (in addition to the [default event properties](/docs/data/events#default-properties)):
@@ -96,6 +96,10 @@ Spans are individual operations within a trace. Some spans represent generations
 />
 
 <Caption>Generations and spans are nested within a trace</Caption>
+
+## Evaluating generations
+
+You can automatically assess the quality of your generations using [evaluations](/docs/llm-analytics/evaluations). Evaluations use an LLM-as-a-judge approach to score outputs based on criteria like relevance, helpfulness, or safety.
 
 ## Event properties
 

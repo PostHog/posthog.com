@@ -29,6 +29,66 @@ const handleCookieConsent = (consent) => {
 };
 ```
 
+## Cookie-persisted properties
+
+When using `localStorage+cookie` persistence (the default), most properties are stored in `localStorage` while only essential values like `distinct_id` and session ID go in the cookie. Since `localStorage` doesn't work across subdomains but cookies do, you can use the `cookie_persisted_properties` configuration option to specify additional properties that should be stored in the cross-subdomain cookie.
+
+This is useful when you need specific properties to be available across subdomains. For example, you might want to track which products a user has shown interest in on your marketing site and use that data to personalize their onboarding experience on your app subdomain.
+
+```js
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    persistence: 'localStorage+cookie',
+    cookie_persisted_properties: ['user_preferences', 'signup_source'],
+})
+```
+
+You can then set these properties using `posthog.register()`:
+
+```js
+// Store a property that will persist in the cookie
+posthog.register({ signup_source: 'product-page' })
+
+// Later, read it back (works across subdomains)
+const source = posthog.get_property('signup_source')
+```
+
+### Example: tracking user interests across subdomains
+
+Here's an example of tracking which products a user has viewed on a marketing site, then using that data for personalized onboarding on an app subdomain (like we do!):
+
+```js
+// On marketing site (e.g., example.com)
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    persistence: 'localStorage+cookie',
+    cookie_persisted_properties: ['product_interests'],
+})
+
+// When user visits a product page
+function trackProductInterest(productSlug) {
+    const currentInterests = posthog.get_property('product_interests') || []
+    if (!currentInterests.includes(productSlug)) {
+        currentInterests.push(productSlug)
+    }
+    posthog.register({ product_interests: currentInterests })
+}
+
+// On app subdomain (e.g., app.example.com)
+// The property is automatically available because it's in the cross-subdomain cookie
+const interests = posthog.get_property('product_interests') || []
+// interests = ["analytics", "session-replay", ...]
+```
+
+> **Warning: Cookie size limits**
+>
+> Cookies have a maximum size of approximately 4KB. If your `cookie_persisted_properties` store large arrays or complex objects, you may exceed this limit, which can cause:
+> - Properties being silently truncated or not stored
+> - `431 Request Header Fields Too Large` errors from your server
+> - Unexpected behavior when reading properties
+>
+> Keep cookie-persisted values small (short strings, small arrays of IDs). For larger data, consider using `localStorage` persistence and a different cross-subdomain strategy, or store the data server-side.
+
 ## Persistence caveats
 
 - Be aware that `localStorage` and `sessionStorage` can't be used across subdomains. If you have multiple sites on the same domain, you may want to consider a `cookie` option or make sure to set all super properties across each subdomain.

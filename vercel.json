@@ -36,7 +36,6 @@
         { "source": "/docs/integrations/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/libraries/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/libraries/microsoft-teams", "destination": "/docs/integrate/webhooks/microsoft-teams" },
-        { "source": "/docs/libraries/slack", "destination": "/docs/integrate/webhooks/slack" },
         { "source": "/docs/integrate/webhooks/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/integrate/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
@@ -560,7 +559,6 @@
             "destination": "/docs/how-posthog-works/ingestion-pipeline"
         },
         { "source": "/blog/using-posting", "destination": "/blog/using-posthog" },
-        { "source": "/docs/libraries/slack", "destination": "/manual/subscriptions" },
         { "source": "/docs/integrate/client/snippet-installation", "destination": "/docs/integrate" },
         { "source": "/tutorials/posthog-for-vuejs", "destination": "/docs/libraries/vue-js" },
         { "source": "/blog/categories/comparisons", "destination": "/blog/tags/comparisons" },
@@ -1687,7 +1685,18 @@
         },
         { "source": "/startups/[...slug]", "destination": "/startups" },
         { "source": "/customer-data-infrastructure/:path*", "destination": "/data-stack" },
-        { "source": "/data-warehouse", "destination": "/data-stack" }
+        { "source": "/data-warehouse", "destination": "/data-stack" },
+        { "source": "/docs/error-tracking/common-questions", "destination": "/docs/error-tracking/troubleshooting" },
+        { "source": "/docs/web-analytics/faq", "destination": "/docs/web-analytics/troubleshooting" },
+        { "source": "/docs/feature-flags/common-questions", "destination": "/docs/feature-flags/troubleshooting" },
+        { "source": "/docs/experiments/common-questions", "destination": "/docs/experiments/troubleshooting" },
+        { "source": "/docs/cdp/common-questions", "destination": "/docs/cdp/troubleshooting" },
+        { "source": "/docs/data-warehouse/common-questions", "destination": "/docs/data-warehouse/troubleshooting" },
+        {
+            "source": "/docs/revenue-analytics/common-questions",
+            "destination": "/docs/revenue-analytics/troubleshooting"
+        },
+        { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" }
     ],
     "headers": [
         {

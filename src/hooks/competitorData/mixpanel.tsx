@@ -421,6 +421,7 @@ export const mixpanel = {
             proxies: false,
             sdks: false,
             sql: false,
+            terraform: false,
         },
         tools: {
             cms: '',

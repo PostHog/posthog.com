@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-If you have a general marketing question, go to `#marketing` in Slack.
+If you have a general marketing question, go to `#team-marketing` in Slack.
 
 If you need help with the website, go to `#posthogdotcom`.
 
@@ -53,9 +53,7 @@ If another company is interested in building an integration with PostHog, raise 
 <details>
 <summary>Someone wants us to sponsor them</summary>
 
-If it's an [influencer](/handbook/growth/marketing/influencers) or podcast, refer them to <TeamMember name="Ian Vanagas" />.
-
-We're not currently running newsletter sponsorships, but contact <TeamMember name="Lior Neu-ner" /> if you think it's sufficiently interesting.
+If it's an [influencer](/handbook/growth/marketing/influencers), newsletter or podcast, refer them to <TeamMember name="Ian Vanagas" />.
 
 If it's an event, speak to <TeamMember name="Daniel Zaltsman" />.
 </details>
@@ -74,7 +72,7 @@ If your idea is for PostHog Stories (HogTok), hit up <TeamMember name="Edwin Lim
 <details>
 <summary>A customer is interested in doing a case study with us</summary>
 
-Speak to <TeamMember name="Joe Martin" />.
+Speak to <TeamMember name="Joe Martin" />, <TeamMember name="Cleo Lant" />, or <TeamMember name="Sara Miteva" />.
 </details>
 
 <details>

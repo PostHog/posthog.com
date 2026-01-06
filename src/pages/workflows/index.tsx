@@ -2,6 +2,7 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
+import Link from 'components/Link'
 
 const PRODUCT_HANDLE = 'workflows_emails'
 
@@ -14,10 +15,12 @@ const CustomPricingSlide = () => {
             <h2 className="text-4xl font-bold mb-8">Pricing</h2>
 
             <div className="bg-accent border border-primary max-w-xl mx-auto rounded p-8 text-center">
-                <div className="text-2xl font-bold mb-4">Workflows is free during beta</div>
                 <p className="text-xl">
-                    Eventually we'll offer usage-based pricing with a generous monthly free tier – like we do with all
-                    of our paid products.
+                    For complete workflows pricing, please visit the{' '}
+                    <Link to="/pricing" className="text-primary underline">
+                        pricing page
+                    </Link>
+                    .
                 </p>
             </div>
         </div>
