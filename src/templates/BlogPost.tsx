@@ -391,6 +391,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
             />
 
             <ReaderView
+                showAbout
                 leftSidebar={
                     <>
                         <Filters tag={tag} setTag={setTag} sort={sort} setSort={setSort} activeMenu={activeMenu} />

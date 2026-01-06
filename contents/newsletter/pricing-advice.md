@@ -101,7 +101,7 @@ All of your favorite companies who aren’t called PostHog change their pricing 
 
 - Intercom reinvigorated and [doubled its growth](https://lennysvault.com/insights/growth-scaling-tactics/fba11d05-3cf2-4591-a811-995a1fcb325c) by launching its AI agent, Fin, with outcome-based pricing.
 
-Ultimately, changing your pricing when needed means you'll better align the value you create with how you charge for it. For example, we recently changed how we charge for [data pipelines](/customer-data-infrastructure/destinations) from events ingested to [rows exported and triggered events](/blog/data-pipeline-pricing) because it aligns better with that users actually used.
+Ultimately, changing your pricing when needed means you'll better align the value you create with how you charge for it. For example, we recently changed how we charge for [data pipelines](/docs/cdp) from events ingested to [rows exported and triggered events](/blog/data-pipeline-pricing) because it aligns better with that users actually used.
 
 > **Remember this:** Pricing changes require good communication. Give customers:
 >
@@ -165,7 +165,7 @@ The alternative we recommend is making your pricing more predictable and transpa
 
 ![Spend limits](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Frame_6_2b103471fc.png)
 
-- **Help users tune their spend** to what they’re actually using. Our <SmallTeam slug="customer-success" /> helps a lot with this and we provide docs pages on cutting costs for most of our products like [product analytics](/docs/product-analytics/cutting-costs), [session replay](/docs/session-replay/cutting-costs), and [feature flags](/docs/feature-flags/cutting-costs). Data infrastructure companies like Snowflake, Supabase, and PlanetScale all offer ways to identify costly queries and resources to optimize their spend.
+- **Help users tune their spend** to what they’re actually using. Our <SmallTeam slug="customer-success" /> helps a lot with this and we provide docs pages on cutting costs for most of our products like [product analytics](/docs/product-analytics/cutting-costs), [session replay](/docs/session-replay/how-to-control-which-sessions-you-record), and [feature flags](/docs/feature-flags/cutting-costs). Data infrastructure companies like Snowflake, Supabase, and PlanetScale all offer ways to identify costly queries and resources to optimize their spend.
 
 - **Be generous with refunds.** For example, we have [side project insurance](/side-project-insurance) that protects customers from huge bills if their product goes viral.
 
