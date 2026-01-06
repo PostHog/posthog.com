@@ -49,6 +49,32 @@ Web analytics groups data by **sessions** and counts metrics based on when the s
 
 Web analytics uses "session expansion" by default, which includes sessions that started shortly before your selected date range if they have activity within it. This gives you more complete session data (like accurate bounce rates) but means totals won't exactly match event-based counts.
 
+**Example with sample data:**
+
+Suppose you're looking at data for **January 2nd** and have these sessions:
+
+| Session | User | Session start | Pageview times | Pages viewed |
+|---------|------|--------------|----------------|--------------|
+| A | Alice | Jan 1, 11:50 PM | Jan 1 11:50 PM, Jan 2 12:05 AM | 2 |
+| B | Bob | Jan 2, 10:00 AM | Jan 2 10:00 AM, Jan 2 10:15 AM, Jan 2 10:30 AM | 3 |
+| C | Carol | Jan 2, 11:55 PM | Jan 2 11:55 PM, Jan 3 12:10 AM | 2 |
+
+**Web analytics results** (session-based, for Jan 2):
+
+| Metric | Count | Explanation |
+|--------|-------|-------------|
+| Unique users | 2 | Bob and Carol (sessions started on Jan 2). Alice's session started Jan 1. |
+| Pageviews | 5 | Bob's 3 + Carol's 2. Alice's pageviews excluded because session started Jan 1. |
+
+**Product analytics results** (event-based, for Jan 2):
+
+| Metric | Count | Explanation |
+|--------|-------|-------------|
+| Unique users | 3 | Alice, Bob, and Carol all had pageviews on Jan 2 |
+| Pageviews | 6 | Alice's 1 (12:05 AM) + Bob's 3 + Carol's 1 (11:55 PM). Excludes pageviews that occurred on Jan 1 or Jan 3. |
+
+The difference comes from _when_ each tool considers data to belong to a date: web analytics uses session start time, product analytics uses event time.
+
 ### Which number is "correct"?
 
 Both are correct—they're just measuring different things:
