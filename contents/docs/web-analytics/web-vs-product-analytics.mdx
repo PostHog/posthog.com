@@ -32,6 +32,32 @@ Here's a quick comparison:
     />
 </ComparisonTable>
 
+## Why do the numbers differ?
+
+You might notice that metrics like unique visitors or pageviews show different numbers in web analytics compared to a similar query in product analytics. This is expected and happens because the two tools count things differently.
+
+### Session-based vs event-based counting
+
+Web analytics groups data by **sessions** and counts metrics based on when the session started. Product analytics counts **events** based on when they occurred.
+
+**Example:** A visitor starts browsing your site at 11:55 PM on December 31st and views 3 pages, with the last pageview at 12:05 AM on January 1st.
+
+- **Web analytics** (for Jan 1-7): The session started on Dec 31st, so this visitor may not be counted in your January range
+- **Product analytics** (for Jan 1-7): The pageview at 12:05 AM is counted because the event occurred on January 1st
+
+### Date boundary handling
+
+Web analytics uses "session expansion" by default, which includes sessions that started shortly before your selected date range if they have activity within it. This gives you more complete session data (like accurate bounce rates) but means totals won't exactly match event-based counts.
+
+### Which number is "correct"?
+
+Both are correct—they're just measuring different things:
+
+- **Web analytics** answers: "How many sessions happened during this period?"
+- **Product analytics** answers: "How many events occurred during this period?"
+
+For most website metrics, the session-based approach in web analytics gives you a more accurate picture of user behavior. For precise event counting or custom analysis, use product analytics.
+
 ## When should you use web analytics?
 
 Web analytics gives you a single, pre-built [dashboard](https://us.posthog.com/web) for a high-level overview of your site. It's about collecting data in the aggregate, as opposed to tracking specific interactions from specific users.
