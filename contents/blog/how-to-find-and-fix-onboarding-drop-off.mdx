@@ -36,11 +36,11 @@ import { Checkbox } from 'components/RadixUI/Checkbox'
 
 ---
 
-Seeing your onboarding stats drop or stall can be discouraging, but **here's the good news:** [it doesn't mean your product sucks](https://posthog.com/founders/product-market-fit-game) (phew!)
+Seeing your onboarding stats drop or stall can be discouraging, but **here's the good news:** [it doesn't mean your product sucks](/founders/product-market-fit-game) (phew!)
 
 Onboarding drop-offs are usually an indication of friction, not rejection. Users don't rage-quit because they hate your product, they quit because something didn't make sense, didn't work, or asked for too much too soon.
 
-*It's like attempting a beef wellington, realizing you're in over your head somewhere around the "wrap the beef in mushroom duxelles" step, and bailing to order pizza instead. Ask me how I know.*
+It's like attempting a beef wellington, realizing you're in over your head somewhere around the "wrap the beef in mushroom duxelles" step, and bailing to order pizza instead. Ask me how I know.
 
 **Even better news**: onboarding friction is measurable, debuggable, and fixable.
 
@@ -115,7 +115,7 @@ We highly recommend calling [`posthog.identify()`](/docs/product-analytics/ident
 
 **No surveys?** It's okay, replays will get you 80% of the way there; the other 20% is context you'll have to infer.
 
-**No feature flags?** You can ship straight to production. We won't judge. (...we will judge a little.) If something breaks, you'll just have to roll back manually. [Here's why we think feature flags are worth it](/blog/feature-flag-benefits-use-cases).
+**No feature flags?** You can ship straight to production. We won't judge. (...we will judge a little.) If something breaks, you'll just have to roll back manually. [Here's why we think feature flags are worth it](/product-engineers/feature-flag-benefits-use-cases).
 
 **No cohorts or segmentation?** You can still run this recipe, you'll just be looking at all users as one group. If your drop-off is consistent across everyone, that's fine. If it's not, you'll have a harder time figuring out who's actually struggling.
 
@@ -142,7 +142,7 @@ Here's [how we figured out our activation metric at PostHog](/product-engineers/
 
 Pick one. Be opinionated. You can always adjust later.
 
-> 👨‍🍳 *Chef's tip: Don't confuse the appetizer for the main course; signing up or landing on a dashboard aren't meaningful enough steps to be considered activations, for example. Also, as your product evolves your activation event might change – what predicted retention two years ago might not be the best signal today, so revisit it if needed.*
+> 👨‍🍳 **Chef's tip:** Don't confuse the appetizer for the main course; signing up or landing on a dashboard aren't meaningful enough steps to be considered activations, for example. Also, as your product evolves your activation event might change – what predicted retention two years ago might not be the best signal today, so revisit it if needed.
 
 <CalloutBox icon="IconInfo" title="You're ready for the next step when...." type="fyi">
 
@@ -223,11 +223,9 @@ If it's a context problem, try segmenting your funnel to find a clearer diagnosi
 
 **If using PostHog:**
 
-Click on the drop-off number in your funnel to see the actual users who didn't make it. You can save these as a [cohort](/docs/data/cohorts) for further analysis – useful for targeting with surveys later, or watching their replays in Step 5.
+Click on the drop-off number in your funnel to see the actual users who didn't make it. Use [breakdowns](/docs/product-analytics/funnels#breakdowns) to slice your funnel by user properties, device, or any event property. If you have many steps or breakdown values, you can also sort for poor performers in terms of number of conversions, conversion percentage, and even time in the **Detailed results** section.
 
-Use [breakdowns](/docs/product-analytics/funnels#breakdowns) to slice your funnel by user properties, device, or any event property.
-
-> 👨‍🍳 *Chef's tip: Export your cohort of dropped-off users. They're useful for more than just replays – you can target them with win-back marketing campaigns or surveys later.*
+> 👨‍🍳 *Chef's tip: Export your [cohort](/docs/data/cohorts) of dropped-off users. They're useful for more than just replays – you can target them with win-back marketing campaigns or surveys later.*
 
 <CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
 
@@ -254,7 +252,7 @@ If recordings are looking wildly different from one user to the next, go back to
 
 - Fastest way: Click directly on the drop-off in your funnel – PostHog will pull up recordings for those users automatically. (This is one of the nice things about having replay and analytics in one tool!)
 
-- Manual way: In [Session Replay](https://app.posthog.com/replay), click **Show filters** → **Filter for events or actions** → select the last event users completed before dropping off. ([Session replay filtering guide](/tutorials/filter-session-recordings))
+- Manual way: In [Session Replay](https://app.posthog.com/replay), click **Show filters** → **Filter for events or actions** → select the last event users completed before dropping off. See our [session replay filtering guide](/tutorials/filter-session-recordings) for more.
 
 If you saved a cohort in Step 4, you can filter replays by that cohort directly.
 
@@ -338,7 +336,7 @@ Feature flags let you:
 - Target specific user segments (e.g., new users only)
 - Kill the change instantly if something goes wrong
 
-Want statistical proof it worked? [Run an A/B experiment](/product-engineers/how-to-do-ab-testing). This is optional, [not every fix needs one](https://newsletter.posthog.com/p/ab-testing-mistakes-i-learned-the). But it's worth it when:
+Want statistical proof it worked? [Run an A/B experiment](/product-engineers/how-to-do-ab-testing). This is optional, [not every fix needs one](/product-engineers/ab-testing-mistakes). But it's worth it when:
 - The change is significant (like a full flow redesign)
 - You're debating between multiple solutions
 - You need to convince stakeholders with data
@@ -375,7 +373,7 @@ Things to check:
 
 **If using PostHog:**
 
-Set your funnel's Graph type to Historical trends to see conversion over time.
+Set your funnel's **Graph type** to **Historical trends** to see conversion over time.
 
 If you used a feature flag or experiment, check the results in [Experiments](https://app.posthog.com/experiments) to see the impact with statistical significance.
 
@@ -391,7 +389,7 @@ If it didn't work as expected, that's okay. Go back to Step 4 with a new hypothe
 
 ---
 
-### Why this recipe works especially well with PostHog
+## Why this recipe works especially well with PostHog
 
 Most teams piece this workflow together across 3–4 different tools: analytics in one place, replays in another, surveys or feature flags somewhere else. It works, but it's slow and you lose context switching between tabs.
 
