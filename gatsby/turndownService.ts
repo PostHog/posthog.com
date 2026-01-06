@@ -5,48 +5,52 @@ export const preprocessHtmlForTabs = (html: string): string => {
     const dom = new JSDOM(html)
     const doc = dom.window.document
 
-    const tabContainers = Array.from(doc.querySelectorAll('div.my-4')) as HTMLElement[]
-    tabContainers.forEach((container) => {
-        const ul = container.querySelector('ul')
-        let tabs: HTMLElement[] = []
+    try {
+        const tabContainers = Array.from(doc.querySelectorAll('div.my-4')) as HTMLElement[]
+        tabContainers.forEach((container) => {
+            const ul = container.querySelector('ul')
+            let tabs: HTMLElement[] = []
 
-        if (ul) {
-            tabs = Array.from(ul.querySelectorAll('button[role="tab"]')) as HTMLElement[]
-        } else {
-            tabs = Array.from(container.querySelectorAll('button[role="tab"]')) as HTMLElement[]
-        }
-
-        const panels = Array.from(container.querySelectorAll('[role="tabpanel"]')) as HTMLElement[]
-
-        panels.forEach((panel, index) => {
-            if (tabs[index]) {
-                const tabLabel = tabs[index].textContent?.trim() || tabs[index].innerText?.trim() || ''
-                if (tabLabel) {
-                    panel.setAttribute('data-tab-label', tabLabel)
-                }
+            if (ul) {
+                tabs = Array.from(ul.querySelectorAll('button[role="tab"]')) as HTMLElement[]
+            } else {
+                tabs = Array.from(container.querySelectorAll('button[role="tab"]')) as HTMLElement[]
             }
-        })
-    })
 
-    const codeBlockContainers = Array.from(doc.querySelectorAll('div.code-block')) as HTMLElement[]
-    codeBlockContainers.forEach((container) => {
-        const tablist = container.querySelector('[role="tablist"]')
-        if (tablist) {
-            const tabs = Array.from(tablist.querySelectorAll('button[role="tab"]')) as HTMLElement[]
-            const codeBlocks = Array.from(container.querySelectorAll('pre')) as HTMLElement[]
+            const panels = Array.from(container.querySelectorAll('[role="tabpanel"]')) as HTMLElement[]
 
-            codeBlocks.forEach((codeBlock, index) => {
+            panels.forEach((panel, index) => {
                 if (tabs[index]) {
-                    const languageLabel = tabs[index].textContent?.trim() || tabs[index].innerText?.trim() || ''
-                    if (languageLabel) {
-                        codeBlock.setAttribute('data-language-label', languageLabel)
+                    const tabLabel = tabs[index].textContent?.trim() || tabs[index].innerText?.trim() || ''
+                    if (tabLabel) {
+                        panel.setAttribute('data-tab-label', tabLabel)
                     }
                 }
             })
-        }
-    })
+        })
 
-    return doc.documentElement.outerHTML
+        const codeBlockContainers = Array.from(doc.querySelectorAll('div.code-block')) as HTMLElement[]
+        codeBlockContainers.forEach((container) => {
+            const tablist = container.querySelector('[role="tablist"]')
+            if (tablist) {
+                const tabs = Array.from(tablist.querySelectorAll('button[role="tab"]')) as HTMLElement[]
+                const codeBlocks = Array.from(container.querySelectorAll('pre')) as HTMLElement[]
+
+                codeBlocks.forEach((codeBlock, index) => {
+                    if (tabs[index]) {
+                        const languageLabel = tabs[index].textContent?.trim() || tabs[index].innerText?.trim() || ''
+                        if (languageLabel) {
+                            codeBlock.setAttribute('data-language-label', languageLabel)
+                        }
+                    }
+                })
+            }
+        })
+
+        return doc.documentElement.outerHTML
+    } finally {
+        dom.window.close()
+    }
 }
 
 export const extractTitleFromHtml = (html: string): string => {

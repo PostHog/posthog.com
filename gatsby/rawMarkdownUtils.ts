@@ -36,23 +36,37 @@ export const generateRawMarkdownPages = async (
     })
 
     const processedPages: Array<{ slug: string; title: string }> = []
+    const BATCH_SIZE = 50 // Process in batches to allow memory cleanup
 
-    for (const node of filteredNodes) {
+    for (let i = 0; i < filteredNodes.length; i++) {
+        const node = filteredNodes[i]
+        const { slug } = node.fields
+
         try {
-            const { slug } = node.fields
+            // Log which file we're starting to process - helps identify hangs
+            console.log(`[${i + 1}/${filteredNodes.length}] Processing: ${slug}`)
+
             const htmlFilePath = path.join(publicPath, slug, 'index.html')
 
             if (!fs.existsSync(htmlFilePath)) {
+                console.log(`  Skipped: HTML file not found`)
                 continue
             }
 
             const html = fs.readFileSync(htmlFilePath, 'utf8')
+            console.log(`  Read HTML: ${Math.round(html.length / 1024)}KB`)
+
             const title = extractTitleFromHtml(html) || node.frontmatter.title || 'Untitled'
             const mainContent = extractMainContent(html)
+            console.log(`  Extracted main content: ${Math.round(mainContent.length / 1024)}KB`)
+
             const preprocessedContent = preprocessHtmlForTabs(mainContent)
+            console.log(`  Preprocessed for tabs`)
 
             const turndownService = createTurndownService(title)
             let markdown = turndownService.turndown(preprocessedContent)
+            console.log(`  Converted to markdown: ${Math.round(markdown.length / 1024)}KB`)
+
             markdown = postProcessMarkdown(markdown, title)
 
             const outputPath = path.join(publicPath, `${slug}.md`)
@@ -65,10 +79,33 @@ export const generateRawMarkdownPages = async (
             fs.writeFileSync(outputPath, markdown, 'utf8')
             console.log(`Generated: ${slug}.md`)
             processedPages.push({ slug, title })
+
+            // Log memory usage and hint GC every BATCH_SIZE pages
+            if (processedPages.length % BATCH_SIZE === 0) {
+                const memUsage = process.memoryUsage()
+                console.log(
+                    `[Memory - Processed ${processedPages.length} pages] RSS: ${Math.round(
+                        memUsage.rss / 1024 / 1024
+                    )}MB, Heap: ${Math.round(memUsage.heapUsed / 1024 / 1024)}MB`
+                )
+                // Hint to GC that now is a good time to collect
+                if (global.gc) {
+                    global.gc()
+                }
+            }
         } catch (error) {
+            console.error(`  Error processing ${slug}:`, error instanceof Error ? error.message : error)
             continue
         }
     }
+
+    // Final memory log
+    const memUsage = process.memoryUsage()
+    console.log(
+        `[Memory - Finished - ${processedPages.length} pages processed] RSS: ${Math.round(
+            memUsage.rss / 1024 / 1024
+        )}MB, Heap: ${Math.round(memUsage.heapUsed / 1024 / 1024)}MB`
+    )
 
     return processedPages.map((page) => ({
         fields: { slug: page.slug },
