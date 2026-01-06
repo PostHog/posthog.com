@@ -1,3 +1,5 @@
+import type { PostHog } from 'posthog-js'
+
 declare module '*.svg' {
     const content: React.HTMLImageElement
     export default content
@@ -20,5 +22,6 @@ declare global {
         __setPreferredTheme: (theme: string) => void
         __theme: string
         __onThemeChange: (theme: string) => void
+        posthog: PostHog | undefined
     }
 }
