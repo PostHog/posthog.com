@@ -91,6 +91,14 @@ export const posthog_ai = {
             alt: 'PostHog AI chat',
             imgClasses: 'max-w-[444px]',
         },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/max_sidebar_initial_light_cropped_d4ac0441a1.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/max_sidebar_initial_dark_cropped_240b38f95e.png',
+            alt: 'PostHog AI placeholder screenshot',
+            classes: 'justify-start items-end pr-4 @lg:pr-6',
+            imgClasses: 'rounded-tr-md shadow-2xl',
+        },
     },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_max_e80de99727.png',
