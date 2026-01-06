@@ -15,21 +15,19 @@ You know what’s boring?
 
 Integrating PostHog.
 
-It’s a task you’ll do once, but you’ll need to do it right, so that means carefully reading docs. Depending on your project’s framework and its version, there might be some caveats or edge cases you need to think about.
+It’s a task you’ll do once, but you’ll need to do it right, which means carefully reading docs. Depending on your project’s framework, there might be some caveats you need to think about.
  
-That sucks. So we built the wizard: a command line tool that scans your project structure and tailors a correct implementation of PostHog for you.
+All of this sucks. So we built the wizard: a command line tool that tailors a correct implementation of PostHog for you.
 
-This wizard can understand your business goals, where churn happens, and the conditions for your success, all as expressed by the structure of your code.
+This wizard can understand your business goals, where churn happens, and the conditions for your success, all as expressed in your code.
 
-And it can do this with just one command in your terminal.
+And it can do this with just one command.
 
 Try it out with your [Next.js projects](https://posthog.com/docs/libraries/next-js). We’re adding more frameworks and languages as you read this.
 
-But delivering custom code generation at this scale is hard. Getting to the point where we can do this with both correctness and consistency came through hard-won lessons.
+I spent a decent chunk of 2025 worried none of this would work. The world of LLMs is strange: there’s not always an objectively correct way to do things. And it's so easy for the robot to run off and do something unexpected.
 
-I spent a decent chunk of 2025 worried none of this would work. The world of LLMs is strange: there’s not always an objectively correct way to do things. Last year’s best practice might be obsolete with this year’s models and technology.
-
-But with enough stubbornness, we cracked this: we can generate correct yet automated PostHog integrations that give you time back in your life.
+But with enough stubbornness, we cracked this: we can generate correct, predictable, automated PostHog integrations so you can get on with the work you really care about.
 
 You can use LLMs to generate correct and predictable code, too. Here’s everything we learned. 
 
