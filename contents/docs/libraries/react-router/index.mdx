@@ -4,8 +4,7 @@ sidebarTitle: React Router
 sidebar: Docs
 showTitle: true
 github: 'https://github.com/PostHog/posthog-js'
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/rr_logo_light_970950178e.svg
+platformLogo: reactRouter
 features:
   eventCapture: true
   userIdentification: true
@@ -20,11 +19,16 @@ features:
 
 import Tab from "components/Tab"
 import ReactInstall from '../../integrate/_snippets/install-react.mdx'
+import ReactRouterDecisionTree from './_snippets/react-router-decision-tree'
 
 This guide walks you through setting up PostHog for React Router. React Router V7 has [**three** distinct](https://reactrouter.com/start/modes) modes, and each will require different setup. If you're still on React Router V6, we have a guide for that, too.
 
+## Which version/mode am I using?
+
+<ReactRouterDecisionTree />
+
 <details>
-<summary>Which version/mode am I using?</summary>
+<summary>Differentiating between React Router versions and modes</summary>
 
 Here's are quick tips to help you figure out which version/mode you're using:
 
@@ -47,7 +51,7 @@ Follow the [React Router docs](https://reactrouter.com/start/modes) to find out 
 
 | Guide | Description |
 |------|-------------|
-| [Framework mode (Remix V3)](/docs/libraries/react-router/react-router-v7-framework-mode) | This is the default mode. In framework mode, React Router functions as an SSR (server-side rendering) framework. |
-| [Declarative mode](/docs/libraries/react-router/react-router-v7-declarative-mode) | In declarative mode, you can build SPA (single-page applications) with basic routing. |
-| [Data mode](/docs/libraries/react-router/react-router-v7-data-mode) | Data mode is also for building SPAs, but comes with APIs like loader, action, and useFetcher. |
+| [V7 - Framework mode (Remix V3)](/docs/libraries/react-router/react-router-v7-framework-mode) | This is the default mode. In framework mode, React Router functions as an SSR (server-side rendering) framework. |
+| [V7 - Declarative mode](/docs/libraries/react-router/react-router-v7-declarative-mode) | In declarative mode, you can build SPA (single-page applications) with basic routing. |
+| [V7 - Data mode](/docs/libraries/react-router/react-router-v7-data-mode) | Data mode is also for building SPAs, but comes with APIs like loader, action, and useFetcher. |
 | [React Router V6](/docs/libraries/react-router/react-router-v6) | React Router V6 is for building SPAs and has features similar to React Router V7 in declarative or data mode. |

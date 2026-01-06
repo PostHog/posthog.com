@@ -36,6 +36,16 @@ tableOfContents: [
         depth: 1,
     },
     {
+        url: 'create-an-error-boundary',
+        value: 'Create an error boundary',
+        depth: 1,
+    },
+    {
+        url: 'tracking-element-visibility',
+        value: 'Tracking element visibility',
+        depth: 1,
+    },
+    {
         url: 'install-server-side-sdks',
         value: 'Install server-side SDKs',
         depth: 1,
@@ -51,18 +61,12 @@ tableOfContents: [
         depth: 1,
     },
     {
-        url: 'create-an-error-boundary',
-        value: 'Create an error boundary',
-        depth: 1,
-    },
-    {
         url: 'next-steps',
         value: 'Next steps',
         depth: 1,
     },
 ]
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/rr_logo_light_970950178e.svg
+platformLogo: reactRouter
 features:
   eventCapture: true
   userIdentification: true
@@ -153,6 +157,13 @@ startTransition(() => {
 
 To help PostHog track your user sessions across the client and server, you'll need to add the `__add_tracing_headers: ['your-backend-domain1.com', 'your-backend-domain2.com', ...]` option to your PostHog initialization. This will add the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers to your requests, which we'll later use on the server-side.
 
+<details>
+<summary>TypeError: Cannot read properties of undefined</summary>
+
+<TypeErrorSection />
+
+</details>
+
 </Step>
 
 <Step checkpoint title="Verify client-side events are captured" subtitle="Confirm that you can capture client-side events and see them in your PostHog project">
@@ -170,6 +181,37 @@ To help PostHog track your user sessions across the client and server, you'll ne
 <Step title="Identify your user" badge="recommended">
 
 <StepIdentifyUser />
+
+</Step>
+
+<Step title="Create an error boundary" badge="recommended">
+
+PostHog can capture exceptions thrown in your app through an error boundary. React Router in framework mode has a built-in error boundary that you can use to capture exceptions. You can create an error boundary by exporting `ErrorBoundary` from your `app/root.tsx` file.
+
+```tsx file=app/root.tsx
+import { usePostHog } from '@posthog/react'
+
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  const posthog = usePostHog();
+  posthog?.captureException(error);
+
+  // other error handling code...
+  return (
+    <div>
+      <h1>Something went wrong</h1>
+      <p>{error.message}</p>
+    </div>
+  );
+}
+```
+
+This will automatically capture exceptions thrown in your React Router app using the `posthog.captureException()` method.
+
+</Step>
+
+<Step title="Tracking element visibility" badge="recommended">
+
+<TrackingElementVisibility />
 
 </Step>
 
@@ -258,31 +300,6 @@ export async function action({ request, context }: Route.ActionArgs) {
 ```
 </Step>
 
-<Step title="Create an error boundary" badge="recommended">
-
-PostHog can capture exceptions thrown in your app through an error boundary. React Router in framework mode has a built-in error boundary that you can use to capture exceptions. You can create an error boundary by exporting `ErrorBoundary` from your `app/root.tsx` file.
-
-```tsx file=app/root.tsx
-import { usePostHog } from '@posthog/react'
-
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  const posthog = usePostHog();
-  posthog?.captureException(error);
-
-  // other error handling code...
-  return (
-    <div>
-      <h1>Something went wrong</h1>
-      <p>{error.message}</p>
-    </div>
-  );
-}
-```
-
-This will automatically capture exceptions thrown in your React Router app using the `posthog.captureException()` method.
-
-</Step>
-
 <Step title="Next steps" badge="recommended">
 
 <StepNextSteps />
@@ -290,66 +307,3 @@ This will automatically capture exceptions thrown in your React Router app using
 </Step>
 
 </Steps>
-
----
-
-## TypeError: Cannot read properties of undefined
-
-<TypeErrorSection />
-
-## Tracking element visibility
-
-<TrackingElementVisibility />
-
-## Feature flags
-
-import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
-
-<FeatureFlagsLibsIntro />
-
-import ReactFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-react.mdx'
-
-<ReactFeatureFlagsCode />
-
-### Bootstrapping flags
-
-import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
-
-<BootstrappingIntro />
-
-For details on how to implement bootstrapping, see our [bootstrapping guide](/docs/feature-flags/bootstrapping).
-
-## Experiments (A/B tests)
-
-Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
-
-```react
-// You can either use the `useFeatureFlagVariantKey` hook,
-// or you can use the feature flags component - /docs/libraries/react#feature-flags-react-component
-
-// Method one: using the useFeatureFlagVariantKey hook
-import { useFeatureFlagVariantKey } from '@posthog/react'
-
-function App() {
-    const variant = useFeatureFlagVariantKey('experiment-feature-flag-key')
-    if (variant == 'variant-name') {
-        // do something
-    }
-}
-
-// Method two: using the feature flags component
-import { PostHogFeature } from '@posthog/react'
-
-function App() {
-    return (
-        <PostHogFeature flag='experiment-feature-flag-key' match={'variant-name'}>
-            <!-- the component to show -->
-        </PostHogFeature>
-    )
-}
-
-// You can also test your code by overriding the feature flag:
-// e.g., posthog.featureFlags.overrideFeatureFlags({ flags: {'experiment-feature-flag-key': 'test'}})
-```
-
-It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).

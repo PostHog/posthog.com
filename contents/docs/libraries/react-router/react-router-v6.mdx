@@ -4,8 +4,7 @@ sidebarTitle: React Router V6
 sidebar: Docs
 showTitle: true
 github: 'https://github.com/PostHog/posthog-js'
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/rr_logo_light_970950178e.svg
+platformLogo: reactRouter
 features:
   eventCapture: true
   userIdentification: true
@@ -53,6 +52,11 @@ tableOfContents: [
         depth: 1,
     },
     {
+        url: 'tracking-element-visibility',
+        value: 'Tracking element visibility',
+        depth: 1,
+    },
+    {
         url: 'set-up-server-side-analytics',
         value: 'Set up server-side analytics',
         depth: 1,
@@ -60,11 +64,6 @@ tableOfContents: [
     {
         url: 'next-steps',
         value: 'Next steps',
-        depth: 1,
-    },
-    {
-        url: 'additional-usage',
-        value: 'Additional usage',
         depth: 1,
     },
 ]
@@ -140,6 +139,13 @@ ReactDOM.createRoot(root).render(
 
 This will initialize PostHog and pass it to your app through the `PostHogProvider` context.
 
+<details>
+<summary>TypeError: Cannot read properties of undefined</summary>
+
+<TypeErrorSection />
+
+</details>
+
 </Step>
 
 <Step checkpoint title="Verify client-side events are captured" subtitle="Confirm that you can capture client-side events and see them in your PostHog project">
@@ -186,6 +192,12 @@ This will automatically capture exceptions thrown in your React Router app using
 
 </Step>
 
+<Step title="Tracking element visibility" badge="recommended">
+
+<TrackingElementVisibility />
+
+</Step>
+
 <Step title="Set up server-side analytics" badge="recommended">
 
 Now that you've set up PostHog for React Router V7 in declarative mode, you can continue to set up server-side analytics. You can find our other SDKs in the [SDKs page](/docs/libraries).
@@ -210,20 +222,3 @@ This will add the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers to 
 
 </Step>
 </Steps>
-
----
-
-## Additional usage
-
-### TypeError: Cannot read properties of undefined
-
-<TypeErrorSection />
-
-### Tracking element visibility
-
-<TrackingElementVisibility />
-
-
-### Feature flags and experiments
-
-Feature flag and experiment setup is the same as React. You can find more details in the [React integration guide](/docs/libraries/react#feature-flags).
