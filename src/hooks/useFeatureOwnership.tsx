@@ -214,7 +214,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     notebooks: {
         feature: 'Notebooks',
-        owner: ['posthog-ai'],
+        owner: ['platform-features'],
         label: 'feature/notebooks',
     },
     onboarding: {
