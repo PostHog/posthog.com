@@ -9,7 +9,7 @@ import Link from 'components/Link'
 // Import logo images
 import AnthropicLogo from '../../../contents/images/docs/llms/Anthropic_logo_2025.svg'
 import VercelLogo from '../../../contents/images/docs/llms/Vercel_logo_2025.svg'
-import GeminiLogo from '../../../contents/images/docs/llms/Google_Gemini_Logo_2025.svg'
+import GeminiLogo from '../../../contents/images/docs/llms/Google_Gemini_logo_2025.svg'
 import OpenRouterLogo from '../../../contents/images/docs/llms/OpenRouter_logo_2025.svg'
 import OpenAILogo from '../../../contents/images/docs/llms/OpenAI_Logo.svg'
 import LangChainLogo from '../../../contents/images/docs/llms/LangChain_Logo.svg'
