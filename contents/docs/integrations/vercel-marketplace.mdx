@@ -1,5 +1,5 @@
 ---
-title: Vercel Marketplace Integration
+title: Vercel Marketplace integration
 sidebarTitle: Vercel Marketplace
 icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/vercel_icon_svgrepo_com_b7e78b41f9.svg
@@ -10,7 +10,7 @@ import Tab from "components/Tab"
 
 The Vercel Marketplace integration adds PostHog feature flags and experiments to your Vercel projects with billing handled through Vercel.
 
-Choose this integration if you do not already have a PostHog account or you prefer to consolidate payment for PostHog inside your Vercel invoice.
+Choose this integration if you do not already have a PostHog account and you prefer to consolidate payment for PostHog inside your Vercel invoice.
 
 <CalloutBox icon="IconInfo" title="New organizations only" type="fyi">
 
@@ -65,16 +65,15 @@ posthog.init('<ph_project_api_key>', {
 
 To use feature flags in your application:
 
-<!-- prettier-ignore -->
 <Tab.Group tabs={['Web', 'React']}>
-    <Tab.List>
-        <Tab>Web</Tab>
-        <Tab>React</Tab>
-    </Tab.List>
-    <Tab.Panels>
-        <Tab.Panel>
+<Tab.List>
+<Tab>Web</Tab>
+<Tab>React</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
 
-```js-web
+```js
 if (posthog.isFeatureEnabled('new-checkout')) {
     // Show new checkout
 } else {
@@ -82,10 +81,10 @@ if (posthog.isFeatureEnabled('new-checkout')) {
 }
 ```
 
-        </Tab.Panel>
-        <Tab.Panel>
+</Tab.Panel>
+<Tab.Panel>
 
-```react
+```js
 import { useFeatureFlagEnabled } from 'posthog-js/react'
 
 function App() {
@@ -95,8 +94,8 @@ function App() {
 }
 ```
 
-        </Tab.Panel>
-    </Tab.Panels>
+</Tab.Panel>
+</Tab.Panels>
 </Tab.Group>
 
 For more examples, see our [feature flag code guide](/docs/feature-flags/adding-feature-flag-code).
@@ -116,7 +115,6 @@ For full documentation:
 Billing goes through your Vercel account. View usage in Vercel under **Integrations** → **PostHog**.
 
 See [our pricing page](/pricing) for more details.
-
 
 ## Limitations
 
