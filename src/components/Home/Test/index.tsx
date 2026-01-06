@@ -992,29 +992,29 @@ export default function Home2() {
             data-scheme="primary"
             className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:p-4 @lg:[&>div>div]:p-8 [&_.w-vulcan-v2]:!rounded-none bg-primary"
         >
-            <article className={`${getProseClasses()} max-w-7xl mx-auto`}>
+            <article>
                 {/* Video Hero Section */}
                 <div className="flex flex-col @2xl:flex-row gap-8">
-                    <div className="flex-1 @2xl:pt-2 @4xl:pt-8 @5xl:pt-8">
-                        <h1 className="!text-2xl font-bold">The AI platform for engineers</h1>
-                        <p className="text-base mt-0">
+                    <div className="flex-1 @2xl:pt-2 @4xl:pt-8 @5xl:pt-8 @2xl:pt-16">
+                        <h1 className="text-4xl font-bold mb-4">The AI platform for engineers</h1>
+                        <p className="text-xl mb-8 mt-0">
                             Debug products. Ship features faster. <br />
                             With all user and product data in one stack.
                         </p>
-                        <div className="@2xl:max-w-md mb-6">
+                        <div className="@2xl:max-w-lg mb-6">
                             <Accordion
                                 key={activeAccordion}
                                 // skin={false}
                                 items={accordionItems}
                                 defaultValue={activeAccordion}
                                 onValueChange={handleAccordionChange}
-                                triggerClassName="[&_h2]:text-sm !bg-transparent"
+                                triggerClassName="[&_h2]:text-lg !bg-transparent"
                             />
                         </div>
                     </div>
                     <div ref={tvScreenRef} className="flex flex-col items-center">
                         <TVScreen
-                            className="relative w-full @2xl:w-[400px] @4xl:w-[500px]"
+                            className="relative w-full @2xl:w-[560px]"
                             title={currentPrompt.text}
                             isPlaying={isPlaying}
                             videoNumber={activePromptIndex + 1}
