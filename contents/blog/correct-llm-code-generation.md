@@ -1,5 +1,5 @@
 ---
-title: "How to make LLMs generate code you actually like"
+title: "You can have LLM code that's actually good"
 date: 2026-01-06
 author:
   - danilo-campos
