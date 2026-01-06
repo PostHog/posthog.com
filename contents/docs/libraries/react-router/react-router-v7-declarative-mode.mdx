@@ -137,7 +137,7 @@ ReactDOM.createRoot(root).render(
 );
 ```
 
-This will initialize PostHog and pass it to your app through the `PostHogProvider` context.
+This initializes PostHog and passes it to your app through the `PostHogProvider` context.
 
 <details>
 <summary>TypeError: Cannot read properties of undefined</summary>
@@ -188,7 +188,7 @@ ReactDOM.createRoot(root).render(
 );
 ```
 
-This will automatically capture exceptions thrown in your React Router app using the `posthog.captureException()` method.
+This automatically captures exceptions thrown in your React Router app using the `posthog.captureException()` method.
 
 </Step>
 
@@ -212,7 +212,7 @@ posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
 });
 ```
 
-This will add the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers to your requests, which you can later use on the server-side.
+This adds the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers to your requests, which you can later use on the server-side.
 
 </Step>
 
