@@ -94,7 +94,7 @@ You can do this without any fancy agent orchestration.
 
 Everyone thinks about [`tools`](https://modelcontextprotocol.io/specification/2025-06-18/server/tools) in MCP servers, but they can do other things too, like deliver [`resources`](https://modelcontextprotocol.io/specification/2025-06-18/server/resources). Resources bind data to a deterministic, consistent URI. You can be assured that `posthog://my-great-prompt` will always lead to the content you want.
 
-This allows the dog to take *itself* for a walk. For each stage of an integration, the agent gets a set of tasks. Once those tasks are complete, the agent is told to load the next piece of of the prompt.
+This allows the dog to take *itself* for a walk. For each stage of an integration, the agent is prompted with a set of tasks. Once those tasks are complete, the agent is told to load the next piece of of the prompt.
 
 Here’s an example, from the second-to-last stage of integration:
 
