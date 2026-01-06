@@ -29,5 +29,5 @@ export default function Login() {
 }
 ```
 
-PostHog automatically generates anonymous IDs for users before they're identified. When you call identify, a new identified person is created. All previous events tracked with the anonymous ID are linked to the new identified distinct ID, and all future captures on the same browser will be associated with the identified person.
+PostHog automatically generates anonymous IDs for users before they're identified. When you call identify, a new identified person is created. All previous events tracked with the anonymous ID link to the new identified distinct ID, and all future captures on the same browser associate with the identified person.
 

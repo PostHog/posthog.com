@@ -151,7 +151,7 @@ startTransition(() => {
 });
 ```
 
-To help PostHog track your user sessions across the client and server, you'll need to add the `__add_tracing_headers: ['your-backend-domain1.com', 'your-backend-domain2.com', ...]` option to your PostHog initialization. This will add the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers to your requests, which we'll later use on the server-side.
+To help PostHog track your user sessions across the client and server, you'll need to add the `__add_tracing_headers: ['your-backend-domain1.com', 'your-backend-domain2.com', ...]` option to your PostHog initialization. This adds the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers to your requests, which we'll later use on the server-side.
 
 </Step>
 
@@ -173,7 +173,7 @@ To help PostHog track your user sessions across the client and server, you'll ne
 
 </Step>
 
-<Step title="Install server-side SDKs" badge="required">
+<Step title="Install server-side SDKs" badge="recommended">
 
 Install the [PostHog Node SDK](/docs/libraries/node) using your package manager. This is the SDK you'll use to capture server-side events.
 
@@ -181,9 +181,9 @@ Install the [PostHog Node SDK](/docs/libraries/node) using your package manager.
 
 </Step>
 
-<Step title="Create a server-side middleware" badge="required">
+<Step title="Create a server-side middleware" badge="recommended">
 
-Next, create a server-side middleware to help you capture server-side events. This middleware will help you achieve the following:
+Next, create a server-side middleware to help you capture server-side events. This middleware helps you achieve the following:
 - Initialize a PostHog client
 - Fetch the session and distinct ID from the `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID` headers and pass them to your request as a [context](/docs/libraries/node#contexts). This automatically identifies the user and session for you in all subsequent event captures.
 - Calls `shutdown()` on the PostHog client to ensure all events are sent before the request is completed.
@@ -235,9 +235,9 @@ export const middleware: Route.MiddlewareFunction[] = [
 
 <Step checkpoint title="Verify server-side events are captured" subtitle="Confirm that you can capture server-side events and see them in your PostHog project">
 
-At this point, you should be able to capture server-side events and see them in your PostHog project.
+At this point, you should be able to capture server-side events and see them in your PostHog project. 
 
-In a route, you can access the PostHog client from the context and capture an event. Since we set the session and distinct ID in the middleware, events captured here will be associated with the correct user and session.
+In a route, you can access the PostHog client from the context and capture an event. The middleware assigns the session ID and the distinct ID. This ensures that the system associates events with the correct user and session.
 
 ```tsx file=app/routes/api.checkout.ts
 import type { PostHogContext } from "../lib/posthog-middleware";
@@ -279,7 +279,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 }
 ```
 
-This will automatically capture exceptions thrown in your React Router app using the `posthog.captureException()` method.
+This automatically captures exceptions thrown in your React Router app using the `posthog.captureException()` method.
 
 </Step>
 
