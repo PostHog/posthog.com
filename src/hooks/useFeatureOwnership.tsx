@@ -214,12 +214,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     notebooks: {
         feature: 'Notebooks',
-        owner: [],
-        notes: (
-            <>
-                <TeamMember name="David Newell" photo />
-            </>
-        ),
+        owner: ['posthog-ai'],
+        label: 'feature/notebooks',
     },
     onboarding: {
         feature: 'Onboarding',
