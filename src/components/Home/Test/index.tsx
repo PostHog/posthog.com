@@ -994,14 +994,14 @@ export default function Home2() {
         >
             <article className={`${getProseClasses()} max-w-7xl mx-auto`}>
                 {/* Video Hero Section */}
-                <div className="flex flex-col @3xl:flex-row gap-8">
-                    <div className="flex-1 @3xl:pt-2 @4xl:pt-8 @5xl:pt-8">
+                <div className="flex flex-col @2xl:flex-row gap-8">
+                    <div className="flex-1 @2xl:pt-2 @4xl:pt-8 @5xl:pt-8">
                         <h1 className="!text-2xl font-bold">The AI platform for engineers</h1>
                         <p className="text-base mt-0">
                             Debug products. Ship features faster. <br />
                             With all user and product data in one stack.
                         </p>
-                        <div className="@3xl:max-w-md mb-6">
+                        <div className="@2xl:max-w-md mb-6">
                             <Accordion
                                 key={activeAccordion}
                                 // skin={false}
@@ -1014,7 +1014,7 @@ export default function Home2() {
                     </div>
                     <div ref={tvScreenRef} className="flex flex-col items-center">
                         <TVScreen
-                            className="relative w-full @3xl:w-[400px] @4xl:w-[500px]"
+                            className="relative w-full @2xl:w-[400px] @4xl:w-[500px]"
                             title={currentPrompt.text}
                             isPlaying={isPlaying}
                             videoNumber={activePromptIndex + 1}
