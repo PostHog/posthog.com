@@ -130,14 +130,14 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'distinct_id_of_your_user',
   'event' => 'movie_played',
-  'properties' => array(
+  'properties' => [
     'movie_id' => '123',
     'category' => 'romcom'
-  )
-));
+  ]
+]);
 ```
 
 ```ruby
@@ -189,18 +189,18 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'distinct_id_of_your_user',
   'event' => 'movie_played',
-  'properties' => array(
-    '$set' => array(
+  'properties' => [
+    '$set' => [
       'location' => 'London'
-    ),
-    '$set_once' => array(
+    ],
+    '$set_once' => [
       'referred_by' => 'some ID'
-    )
-  )
-));
+    ]
+  ]
+]);
 ```
 
 ```ruby
@@ -267,11 +267,11 @@ posthog.capture({
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'distinct_id',
     'event' => 'some_event',
-    '$groups' => array("company" => "id:5")
-));
+    '$groups' => ['company' => 'id:5']
+]);
 ```
 
 ```segment
