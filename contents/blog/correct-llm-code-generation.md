@@ -84,15 +84,15 @@ Today, the Wizard is always primed with up-to-the-second documentation from the 
 
 But prose documentation alone, it turned out, was not enough. We needed a little more detail to ensure correctness. So for every framework we support, we build a [toy project](https://github.com/PostHog/examples/tree/main/basics) in code. These are not starter projects and you should not ship them: most obviously, the authorization flows are completely fake. They accept any password. Still, they demonstrate a PostHog integration in motion, giving the agent richer influence for doing the right thing.
 
+## Progressive disclosure
+
 The last wrinkle for a robot making thousands of project edits per month was harder: how do you do the work *predictably?*
 
 LLMs are non-deterministic systems. That’s the devil’s agreement of working with them. An agent can come up with many patterns and sequences for accomplishing the same goal.
 
-What worked best for us was bread-crumbing the prompts, revealing them in sequence. Instead of revealing the entire goal right away, we disclose bits at a time.
+What worked best for us was bread-crumbing the prompts, revealing them in sequence. Instead of dumping the entire plan right away, we disclose bits at a time.
 
 You can do this without any fancy agent orchestration.
-
-## MCP delivery
 
 [MCP](/blog/machine-copy-paste-mcp-intro) ties this all together in a way that creates amazing outcomes from our agent, while allowing all the content investments we’re making to be reusable elsewhere – say, your Cursor or Claude Code session.
 
@@ -112,9 +112,17 @@ Once all other tasks are complete, run any linter or prettier-like scripts found
 **Upon completion, access the following resource to continue:** posthog://workflows/basic-integration/conclude
 ```
 
-The result is that every integration follows the same general path and procedure, one that we know delivers great results. 
+The result is that every integration follows the same general path and procedure, one that we know delivers great results.
 
-Most importantly, *where* this content comes from is completely up to you in the design of an MCP server. We combine PostHog website content with sample code and prompts from a GitHub repo. The MCP can synthesize as many sources as you need into a single, one-stop surface for an agent to learn what it needs.
+I have to underscore that this piece created the breakthrough. The early agent-driven runs were useless in how *variable* they were. Sometimes integrations were solid. More often they were terrible. But the variability was the worst part. We couldn't ship something to users that was so unpredictable.
+
+Staging the context created something predictable and trustworthy.
+
+## MCP is your best friend
+
+Best of all, *where* this content comes from is completely up to you in the design of an MCP server. It's a server you can design any way you want. We combine PostHog website content with sample code and prompts from a GitHub repo. The MCP can synthesize as many sources as you need into a single, one-stop surface for an agent to learn what it needs.
+
+Other projects use MCP to deliver universal [static analysis](https://svelte.dev/docs/mcp/overview) to course correct wayward agents, and [even report errors](https://nextjs.org/docs/app/guides/mcp) to them live. 
 
 This is the most crucial job for successful LLM code generation: models are expensive to train, so the information they encode rots. In the case of PostHog integration code, it rots *fast*. Patching the rot with fresh context changes everything.
 
@@ -134,6 +142,7 @@ It’s weird out here.
 
 Now the problem is designing just enough context that the Wizard can serve way more languages and frameworks. So while we crack away at that, steal what’s interesting:
 
+- Because MCPs can do anything, you can use them for great user experiences. We just shipped the ability for the Wizard to create product analytics insights and dashboards. Thing about how your own MCP can act as a butler.
 - The AI Wizard repo is in a state of transition. Next.js is complete. You can compare our new approach to the old one by looking at the [diff in this pull request](https://github.com/PostHog/wizard/pull/214/files). Look how much we get to delete!
 - Our [examples repo](https://github.com/PostHog/examples) is full of example code and the [prompts](https://github.com/PostHog/examples/tree/main/llm-prompts/basic-integration) we’re using
 - The [PostHog MCP server](https://github.com/PostHog/posthog/tree/master/services/mcp) uses the examples repo to construct its resource offerings
