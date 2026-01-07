@@ -105,9 +105,9 @@ Also, Amazon regularly offer discounts on Apple products of around 10%, so alway
 
 For monitors, we suggest you pick one that supports 4K. This means you'll get a higher resolution than a standard HD monitor, and thus can fit more content onto the screen.
 
-We would expect to spend $250 to $350 on a monitor. Philips have a [great value model](https://www.amazon.com/Philips-276E8VJSB-3840x2160-UltraNarrow-DispalyPort/dp/B07JXCR263). It comes with an HDMI cable, but you'll need an adaptor to USB-C with most Apple laptops.
+We would expect to spend $250 to $350 on a monitor. The [LG Ultrafine range](https://www.amazon.co.uk/LG-UltraFine-Monitor-27U730A-B-Built/dp/B0F7M27H6F/ref=asc_df_B0F7M27H6F?mcid=d91fd0cc5e06349887121f1ba2c4d6b6&tag=googshopuk-21&linkCode=df0&hvadid=696386561242&hvpos=&hvnetw=g&hvrand=11057029523976072922&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9045888&hvtargid=pla-2442615442699&psc=1&hvocijid=11057029523976072922-B0F7M27H6F-&hvexpln=0&gad_source=1) have a good balance of value vs. quality - Apple used to sell them as a precursor to the Mac Studio Display.
 
-For engineers (because of the high density screen) and sales people (because of the in built high quality webcam and microphone), we recommend a Mac Studio Display ([Amazon US](https://www.amazon.com/Apple-Studio-Display-Standard-Tilt-Adjustable/dp/B0DZDDWSBG/ref=sr_1_1_sspa), [Amazon UK](https://www.amazon.co.uk/dp/B0DZDC2Q1N?tag=georiot-trd-21&th=1&ascsubtag=dcw-gb-1631306176175088319-21&geniuslink=true)), as long as you can get them for < $2k. If you buy one and leave PostHog, we do expect you to ship these back.
+For engineers (because of the high density screen) and salespeople (because of the in built high quality webcam and microphone), we recommend a Mac Studio Display ([Amazon US](https://www.amazon.com/Apple-Studio-Display-Standard-Tilt-Adjustable/dp/B0DZDDWSBG/ref=sr_1_1_sspa), [Amazon UK](https://www.amazon.co.uk/dp/B0DZDC2Q1N?tag=georiot-trd-21&th=1&ascsubtag=dcw-gb-1631306176175088319-21&geniuslink=true)), as long as you can get them for < $2k. If you buy one and leave PostHog, we do expect you to ship these back.
 
 ### Keyboard, mouse, and laptop stand
 
