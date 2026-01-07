@@ -85,7 +85,6 @@ const AchievementGroupRow = ({ achievementGroup, profile }) => {
 
 const Points = () => {
     const { user } = useUser()
-    console.log(user)
     const profile = user?.profile
     const {
         allAchievement: { nodes: achievements },
