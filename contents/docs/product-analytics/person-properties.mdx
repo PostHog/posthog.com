@@ -64,15 +64,15 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'distinct_id',
     'event' => 'event_name',
-    'properties' => array(
-        '$unset' => array(
+    'properties' => [
+        '$unset' => [
            'email'
-        )
-    )
-));
+        ]
+    ]
+]);
 ```
 
 ```ruby
