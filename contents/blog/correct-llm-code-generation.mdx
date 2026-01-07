@@ -102,8 +102,6 @@ What worked best for us was bread-crumbing the prompts, revealing them in sequen
 
 You can do this without any fancy agent orchestration.
 
-![MCP stack](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/MCP_stack_828ae89b82.png)
-
 [MCP](/blog/machine-copy-paste-mcp-intro) ties this all together in a way that creates amazing outcomes from our agent, while allowing all the content investments we’re making to be reusable elsewhere – say, your Cursor or Claude Code session.
 
 Everyone thinks about [`tools`](https://modelcontextprotocol.io/specification/2025-06-18/server/tools) in MCP servers, but they can do other things too, like deliver [`resources`](https://modelcontextprotocol.io/specification/2025-06-18/server/resources). Resources bind data to a deterministic, consistent URI. You can be assured that `posthog://my-great-prompt` will always lead to the content you want.
@@ -128,7 +126,9 @@ I have to underscore that this piece created the breakthrough. The early agent-d
 
 Staging the context created something predictable and trustworthy.
 
-## MCP is your best friend
+## MCP is your friend
+
+![MCP stack](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/MCP_stack_828ae89b82.png)
 
 Best of all, *where* this content comes from is completely up to you in the design of an MCP server. It's a server you can design any way you want. We combine PostHog website content with sample code and prompts from a GitHub repo. The MCP can synthesize as many sources as you need into a single, one-stop surface for an agent to learn what it needs.
 
