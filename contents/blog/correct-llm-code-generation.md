@@ -13,15 +13,17 @@ tags:
 
 You know what’s boring?
 
-Integrating PostHog.
+Writing integrations.
 
-It’s a task you’ll do once, but you’ll need to do it right, which means carefully reading docs. Depending on your project’s framework, there might be some caveats you need to think about.
+It’s a task you’ll do once, but you always need to do it right, which means carefully reading docs. Depending on your project’s framework, there might be some caveats you need to think about.
  
-All of this sucks. So we built the wizard: a command line tool that tailors a correct implementation of PostHog for you.
+All of this sucks. So we built the AI Wizard: a command line tool that tailors a correct implementation of PostHog for you.
 
-This wizard can understand your business goals, where churn happens, and the conditions for your success, all as expressed in your code.
+This tool can understand your business goals, where churn happens, and the conditions for your success, all as expressed in your code.
 
 And it can do this with just one command.
+
+[command snippet tk]
 
 Try it out with your [Next.js projects](https://posthog.com/docs/libraries/next-js). We’re adding more frameworks and languages as you read this.
 
@@ -33,15 +35,15 @@ You can use LLMs to generate correct and predictable code, too. Here’s everyth
 
 ## The dead-end of v1
 
-Our [first wizard](/blog/envoy-wizard-llm-agent) made you happy and we love that.
+Our [first version](/blog/envoy-wizard-llm-agent) made you happy and we love that.
 
 But architecturally, it was a dead-end.
 
 Maintaining it was a bear: documentation for the LLM was embedded in its code. Because of how fast both software frameworks and PostHog itself evolves, the documentation was constantly falling out of sync with our website, not the mention the web frameworks it targeted.
 
-Worse still, the wizard relied on a sort of Pareto luck: 80% of the time it could make the right edits. The rest of the time, it completely failed. It was a single-shot edit driven by an LLM, but scaffolded by a bunch of conventional code that hoped to find the right files. If your project was just a little weird, even just part of a monorepo, you were out of luck.
+Worse still, the Wizard relied on a sort of Pareto luck: 80% of the time it could make the right edits. The rest of the time, it completely failed. It was a single-shot edit driven by an LLM, but scaffolded by a bunch of conventional code that hoped to find the right files. If your project was just a little weird, even just part of a monorepo, you were out of luck.
 
-Most damning, the wizard didn’t know if it succeeded. It crossed its fingers.
+Most damning, the Wizard didn’t know if it succeeded. It crossed its fingers.
 
 All of this presented a low ceiling. We could install code snippets, but we couldn’t be more ambitious for you. We needed better tools.
 
@@ -74,9 +76,9 @@ I’d get emails over the summer: the wizard had correctly integrated PostHog, b
 
 This, understandably, made folks uneasy. *Did the robot hallucinate this pattern?*
 
-The future of the wizard needed to be hand-in-glove with whatever we’d written on posthog.com. Both sources had to agree.
+The future of the Wizard needed to be hand-in-glove with whatever we’d written on posthog.com. Both sources had to agree.
 
-Today, the wizard is always primed with up-to-the-second documentation from the website. If a framework gets a new way of integrating analytics, all we need is a website update for both humans and the wizard to do better. This saves a ton of labor, and it lets us trim back the wizard to something lighter. No more docs embedded in the code.
+Today, the Wizard is always primed with up-to-the-second documentation from the website. If a framework gets a new way of integrating analytics, all we need is a website update for both humans and the wizard to do better. This saves a ton of labor, and it lets us trim back the wizard to something lighter. No more docs embedded in the code.
 
 But prose documentation alone, it turned out, was not enough. We needed a little more detail to ensure correctness. So for every framework we support, we build a [toy project](https://github.com/PostHog/examples/tree/main/basics) in code. These are not starter projects and you should not ship them: most obviously, the authorization flows are completely fake. They accept any password. Still, they demonstrate a PostHog integration in motion, giving the agent richer influence for doing the right thing.
 
@@ -120,17 +122,17 @@ MCP provides a *universal surface* to meet this goal. No lock-in. You can change
 
 The hard bit was a reliable delivery vehicle.
 
-We had some false starts. I shipped a beta of the new wizard that didn’t actually bundle the Claude Agent CLI binary.
+We had some false starts. I shipped a beta of the new Wizard that didn’t actually bundle the Claude Agent CLI binary.
 
-But I didn’t notice because I had Claude Code installed locally, and the wizard just used that.
+But I didn’t notice because I had Claude Code installed locally, and the Wizard just used that.
 
 *And then,* it still worked in production for many people, because they *also* had Claude Code installed.
 
 It’s weird out here.
 
-Now the problem is designing just enough context that the wizard can serve way more languages and frameworks. So while we crack away at that, steal what’s interesting:
+Now the problem is designing just enough context that the Wizard can serve way more languages and frameworks. So while we crack away at that, steal what’s interesting:
 
-- The wizard repo is in a state of transition. Next.js is complete. You can compare our new approach to the old one by looking at the [diff in this pull request](https://github.com/PostHog/wizard/pull/214/files). Look how much we get to delete!
+- The AI Wizard repo is in a state of transition. Next.js is complete. You can compare our new approach to the old one by looking at the [diff in this pull request](https://github.com/PostHog/wizard/pull/214/files). Look how much we get to delete!
 - Our [examples repo](https://github.com/PostHog/examples) is full of example code and the [prompts](https://github.com/PostHog/examples/tree/main/llm-prompts/basic-integration) we’re using
 - The [PostHog MCP server](https://github.com/PostHog/posthog/tree/master/services/mcp) uses the examples repo to construct its resource offerings
 
