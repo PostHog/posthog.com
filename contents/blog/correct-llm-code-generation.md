@@ -27,7 +27,7 @@ And it can do this with just one command.
 
 Try it out with your [Next.js projects](https://posthog.com/docs/libraries/next-js). We’re adding more frameworks and languages as you read this.
 
-I spent a decent chunk of 2025 worried none of this would work. The world of LLMs is strange: there’s not always an objectively correct way to do things. And it's so easy for the robot to run off and do something unexpected.
+I spent a lot of 2025 worried none of this would work. The world of LLMs is strange: there’s not always an objectively correct way to do things. And it's so easy for the robot to run off and do something unexpected.
 
 But with enough stubbornness, we cracked this: we can generate correct, predictable, automated PostHog integrations so you can get on with the work you really care about.
 
@@ -40,6 +40,8 @@ Our [first version](/blog/envoy-wizard-llm-agent) made you happy and we love tha
 But architecturally, it was a dead-end.
 
 Maintaining it was a bear: documentation for the LLM was embedded in its code. Because of how fast both software frameworks and PostHog itself evolves, the documentation was constantly falling out of sync with our website, not the mention the web frameworks it targeted.
+
+This was a great MVP, but it emerged before we were all savvy to [context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
 
 Worse still, the Wizard relied on a sort of Pareto luck: 80% of the time it could make the right edits. The rest of the time, it completely failed. It was a single-shot edit driven by an LLM, but scaffolded by a bunch of conventional code that hoped to find the right files. If your project was just a little weird, even just part of a monorepo, you were out of luck.
 
