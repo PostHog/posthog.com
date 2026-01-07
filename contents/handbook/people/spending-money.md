@@ -181,7 +181,7 @@ Ask for access in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3B
 
 - <Link to="https://granola.ai" external>Granola</Link>
 
-  It’s absolutely okay to use AI note-takers so you can stay engaged in meetings without writing everything down. Feel free to choose your own but please be aware of who the sub-processors are to ensure they do not use a competitor for analytics. We have a company Granola account, ask in #team-people-and-ops to be added to the account.  
+  It’s absolutely okay to use AI note-takers so you can stay engaged in meetings without writing everything down. Feel free to choose your own but please be aware of who the sub-processors are to ensure they do not use a competitor for analytics. We have a company Granola account, ask in `#team-people-and-ops` to be added.  
   
 ### IDEs
 
