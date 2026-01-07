@@ -25,6 +25,8 @@ This tool can understand your business goals, where churn happens, and the condi
 
 And it can do this with just one command.
 
+![Wizard run](https://res.cloudinary.com/dmukukwp6/image/upload/wizard_run_adb8660e2a.gif)
+
 <Prompt />
 
 Try it out with your [Next.js projects](https://posthog.com/docs/libraries/next-js). We’re adding more frameworks and languages as you read this.
@@ -44,6 +46,8 @@ But architecturally, it was a dead-end.
 Maintaining it was a bear: documentation for the LLM was embedded in its code. Because of how fast both software frameworks and PostHog itself evolves, the documentation was constantly falling out of sync with our website, not the mention the web frameworks it targeted.
 
 This was a great MVP, but it emerged before we were all savvy to [context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+
+![Wizard v1](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/run_pray_finish_6daa2fea52.png)
 
 Worse still, the Wizard relied on a sort of Pareto luck: 80% of the time it could make the right edits. The rest of the time, it completely failed. It was a single-shot edit driven by an LLM, but scaffolded by a bunch of conventional code that hoped to find the right files. If your project was just a little weird, even just part of a monorepo, you were out of luck.
 
@@ -68,6 +72,8 @@ Instead of a car on a rail, we needed something that could steer, even backtrack
 A tool like the [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview) is perfect for this: it’s structured to both explore and integrate feedback. If a file isn’t where an agent expects, it can run a bash command to go looking for it.
 
 By contrast to our crude CLI, the agent was nimble as a spider. It could detect coding errors, and it could trigger linters, type checkers, and prettiers. It could come at a problem from multiple angles.
+
+![Wizard v2](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizardv2_8a75a8be43.png)
 
 The agent had all of the information encoded in the language model to inform its moves, and a broad set of tools it could use to make those moves.
 
