@@ -26,11 +26,11 @@ Property overrides bypass server-stored properties. They send properties directl
 
 Client-side SDKs can automatically include device and environment properties in every feature flag evaluation request. This ensures flags targeting properties like browser, OS, or app version work correctly without waiting for server-side processing.
 
-## Automatic overrides
+### Automatic overrides
 
 Client-side SDKs automatically cache properties from `identify()` and `group()` calls for use in flag evaluation. You don't need to do anything special for these to work. Client-side SDKs also include common device and environment properties by default. The methods below give you additional control when needed.
 
-### From identify calls
+#### From identify calls
 
 When you call `identify()` with person properties, those properties are automatically cached for flag evaluation. This means flags can use the properties immediately without waiting for server-side processing.
 
@@ -85,7 +85,7 @@ val showFeature = PostHog.isFeatureEnabled("enterprise-feature")
 
 </MultiLanguage>
 
-### From group calls
+#### From group calls
 
 Similarly, when you call `group()` with group properties, those properties are cached for flag evaluation:
 
