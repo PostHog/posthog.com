@@ -3,9 +3,10 @@ import { getReactSteps } from 'onboarding/product-analytics/react.tsx'
 import { OnboardingContentWrapper, useMDXComponents } from 'components/Docs/OnboardingContentWrapper'
 import { JSEventCapture } from 'onboarding/product-analytics/_snippets/js-event-capture.tsx'
 import { addNextStepsStep } from './pa-shared-helpers'
+import { dedent } from '../../../../../src/utils'
 
 const ReactInstallationContent = () => {
-    const { Steps, Step, CodeBlock, Markdown, dedent, snippets, Tab } = useMDXComponents()
+    const { Steps, Step, CodeBlock, Markdown, snippets, Tab } = useMDXComponents()
 
     const steps = addNextStepsStep(getReactSteps(CodeBlock, Markdown, dedent, snippets, Tab))
 
