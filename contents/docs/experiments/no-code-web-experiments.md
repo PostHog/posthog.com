@@ -74,10 +74,10 @@ If you need to update an element such as a button shared by many pages, use a co
 
 ### 3. Configure and launch in PostHog
 
-Once you save your experiment in the toolbar, it appears in the [experiments tab](https://us.posthog.com/experiments) in PostHog. From there you can:
+Once you save your experiment in the toolbar, it appears in the [experiments tab](https://app.posthog.com/experiments) in PostHog. From there you can:
 
 1. Add primary and secondary metrics to measure results.
-2. Configure experiment parameters like minimum sample size.
+2. Configure experiment parameters like [exposure criteria](/docs/experiments/exposures).
 3. Preview your variants using the **Variants** tab.
 4. Launch your experiment when ready.
 
