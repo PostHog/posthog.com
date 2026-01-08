@@ -4142,6 +4142,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-source-maps/webpack',
                         },
                         {
+                            name: 'Vite',
+                            url: '/docs/error-tracking/upload-source-maps/vite',
+                        },
+                        {
                             name: 'CLI',
                             url: '/docs/error-tracking/upload-source-maps/cli',
                         },
