@@ -38,7 +38,7 @@ export const sentry = {
             },
         },
         llm_analytics: {
-            available: true,
+            available: false,
         },
         session_replay: {
             available: true,
