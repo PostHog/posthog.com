@@ -22,7 +22,11 @@ Property overrides are useful when:
 
 Property overrides bypass server-stored properties. They send properties directly with the flag evaluation request. This way, results are immediate and consistent.
 
-## Automatic overrides in client-side SDKs
+## Client-side SDKs
+
+Client-side SDKs can automatically include device and environment properties in every feature flag evaluation request. This ensures flags targeting properties like browser, OS, or app version work correctly without waiting for server-side processing.
+
+## Automatic overrides
 
 Client-side SDKs automatically cache properties from `identify()` and `group()` calls for use in flag evaluation. You don't need to do anything special for these to work. Client-side SDKs also include common device and environment properties by default. The methods below give you additional control when needed.
 
@@ -133,11 +137,7 @@ val showFeature = PostHog.isFeatureEnabled("enterprise-companies-feature")
 
 </MultiLanguage>
 
-## Client-side SDKs
-
-Client-side SDKs can automatically include device and environment properties in every feature flag evaluation request. This ensures flags targeting properties like browser, OS, or app version work correctly without waiting for server-side processing.
-
-### Web SDK
+### Default properties in the web SDK
 
 By default, the web SDK sends initial session properties with flag requests:
 
@@ -201,7 +201,7 @@ This adds the following properties to flag requests:
 | `$raw_user_agent` | Raw user agent string |
 | `utm_source`, `utm_medium`, etc. | Current campaign parameters |
 
-### Mobile SDKs
+### Default properties in mobile SDKs
 
 Mobile SDKs (React Native, iOS, and Android) include common device and app properties in every feature flag evaluation request. The `setDefaultPersonProperties` configuration option controls this behavior and defaults to `true`.
 
