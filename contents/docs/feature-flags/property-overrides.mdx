@@ -24,7 +24,7 @@ Property overrides bypass the server-stored properties and instead send the prop
 
 ## Automatic overrides in client-side SDKs
 
-Client-side SDKs automatically cache properties from `identify()` and `group()` calls for use in flag evaluation. You don't need to do anything special for these to work. Mobile SDKs also include common device and app properties by default. The methods below give you additional control when needed.
+Client-side SDKs automatically cache properties from `identify()` and `group()` calls for use in flag evaluation. You don't need to do anything special for these to work. Client-side SDKs also include common device and environment properties by default. The methods below give you additional control when needed.
 
 ### From identify calls
 
@@ -135,23 +135,85 @@ val showFeature = PostHog.isFeatureEnabled("enterprise-companies-feature")
 
 ## Default person properties
 
-Mobile SDKs (React Native, iOS, and Android) can automatically include common device and app properties in every feature flag evaluation request. This ensures flags targeting properties like app version or OS work correctly without waiting for server-side processing.
+Client-side SDKs can automatically include device and environment properties in every feature flag evaluation request. This ensures flags targeting properties like browser, OS, or app version work correctly without waiting for server-side processing.
 
-This behavior is controlled by the `setDefaultPersonProperties` configuration option, which defaults to `true`.
+### Web SDK
 
-### Properties included
+By default, the web SDK sends only initial session properties with flag requests:
 
-When enabled, the following properties are automatically sent with flag requests:
+| Property | Description |
+|----------|-------------|
+| `$initial_referrer` | First referrer URL |
+| `$initial_referring_domain` | First referring domain |
+| `$initial_current_url` | First page URL visited |
+| `$initial_host` | First hostname |
+| `$initial_pathname` | First URL pathname |
+| `$initial_utm_source` | First UTM source |
+| `$initial_utm_medium` | First UTM medium |
+| `$initial_utm_campaign` | First UTM campaign |
+| `$initial_utm_content` | First UTM content |
+| `$initial_utm_term` | First UTM term |
+| `$initial_gclid` | First Google Ads click ID |
+| `$initial_fbclid` | First Facebook click ID |
+| `$initial_msclkid` | First Microsoft click ID |
+
+Other campaign parameters (`gad_source`, `mc_cid`, `dclid`, `gbraid`, `wbraid`, `twclid`, `li_fat_id`, `ttclid`, `rdt_cid`, etc.) are also included with the `$initial_` prefix when present in the first page URL.
+
+#### Including browser and device properties
+
+To include current browser and device properties (like `$browser`, `$os`, `$device_type`) with flag requests, use the `setAllPersonProfilePropertiesAsPersonPropertiesForFlags` customization.
+
+**Using npm:**
+
+```js
+import { setAllPersonProfilePropertiesAsPersonPropertiesForFlags } from 'posthog-js/lib/src/customizations'
+
+// Call after PostHog is initialized
+setAllPersonProfilePropertiesAsPersonPropertiesForFlags(posthog)
+```
+
+**Using the snippet:**
+
+```html
+<script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
+<script>
+  posthogCustomizations.setAllPersonProfilePropertiesAsPersonPropertiesForFlags(posthog)
+</script>
+```
+
+This adds the following properties to flag requests:
+
+| Property | Description |
+|----------|-------------|
+| `$browser` | Browser name (e.g., "Chrome", "Safari") |
+| `$browser_version` | Browser version |
+| `$os` | Operating system name (e.g., "Windows", "Mac OS X") |
+| `$os_version` | Operating system version |
+| `$device_type` | Device type ("Desktop", "Mobile", "Tablet") |
+| `$current_url` | Current page URL |
+| `$pathname` | URL pathname |
+| `$referrer` | HTTP referrer |
+| `$referring_domain` | Referring domain |
+| `$screen_height` | Screen height in pixels |
+| `$screen_width` | Screen width in pixels |
+| `$viewport_height` | Browser viewport height |
+| `$viewport_width` | Browser viewport width |
+| `$raw_user_agent` | Raw user agent string |
+| `utm_source`, `utm_medium`, etc. | Current campaign parameters |
+
+### Mobile SDKs
+
+Mobile SDKs (React Native, iOS, and Android) include common device and app properties in every feature flag evaluation request. This behavior is controlled by the `setDefaultPersonProperties` configuration option, which defaults to `true`.
 
 | Property | Description |
 |----------|-------------|
 | `$app_version` | App version from bundle/package info |
 | `$app_build` | App build number |
 | `$app_namespace` | App bundle identifier/namespace |
-| `$os_name` | Operating system name (`macOS`, `Android`) |
+| `$os_name` | Operating system name ("macOS", "iOS", "iPadOS", "tvOS", "watchOS", "visionOS", "Android") |
 | `$os_version` | Operating system version |
-| `$device_type` | Device type (`Mobile`, `Tablet`, `TV`, `CarPlay`, `Desktop` , `Vision`) |
-| `$lib` | SDK identifier (e.g., `posthog-ios`) |
+| `$device_type` | Device type ("Mobile", "Tablet", "TV", "CarPlay", "Desktop", "Vision") |
+| `$lib` | SDK identifier (e.g., "posthog-ios") |
 | `$lib_version` | SDK version |
 
 ### Manual overrides with `setPersonPropertiesForFlags`
@@ -348,15 +410,23 @@ PostHog.resetGroupPropertiesForFlags()
 
 </MultiLanguage>
 
-### Use case: Targeting by app version
+### Use case: Targeting by browser or device
 
-With `setDefaultPersonProperties` enabled, you can create feature flags that target specific app versions without any additional code:
+**Web example:** Target Chrome users on desktop
+
+First, enable browser properties using the customization (see [Including browser and device properties](#including-browser-and-device-properties) above). Then:
+
+1. Create a feature flag in PostHog
+2. Add filter conditions: `$browser` equals `Chrome` AND `$device_type` equals `Desktop`
+3. The flag automatically matches Chrome desktop users
+
+**Mobile example:** Target a specific app version
+
+With `setDefaultPersonProperties` enabled (the default), you can target app versions without any additional code:
 
 1. Create a feature flag in PostHog
 2. Add a filter condition: `$app_version` equals `2.0.0`
 3. The flag automatically matches users on version 2.0.0
-
-This works immediately because the SDK sends the app version with every flag request.
 
 ## GeoIP property overrides
 
@@ -514,6 +584,6 @@ Object flagValue = posthog.getFeatureFlag(
 
 ### GeoIP on server-side
 
-Server-side SDKs disable GeoIP by default. This is because PostHog derives GeoIP properties from the request's IP address, which for server-side requests is your server's IP rather than your user's.
+Server-side SDKs disable GeoIP by default because PostHog derives GeoIP properties from the request's IP address, which for server-side requests is your server's IP, not your user's. You can enable GeoIP with `disable_geoip=False`, but since there's no way to pass the user's IP for GeoIP resolution, it will resolve to your server's location.
 
 For geolocation-based flags, evaluate them on the client side where the user's actual IP is available.
