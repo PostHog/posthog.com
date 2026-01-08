@@ -291,7 +291,7 @@ export const llmAnalytics = {
                 "Spot your power users, your biggest fans, and who's hitting errors. Most teams discover 20% of users drive 80% of costs.",
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_screenshot_716215eebb.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_screenshot_2_d93795cbdc.png',
                     alt: 'LLM Analytics users',
                     className: 'justify-center items-center',
                 },
@@ -336,7 +336,7 @@ export const llmAnalytics = {
                 'Iterate system prompts without pushing code. Swap models, adjust tools, test the cursed inputs users will inevitably throw at you.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/playground_screenshot_eba10793cd.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/playground_screenshot_2_3364a67436.png',
                     alt: 'LLM Analytics playground',
                     className: 'justify-center items-center',
                 },
@@ -428,7 +428,7 @@ export const llmAnalytics = {
                 {
                     title: 'Works with your AI stack',
                     description:
-                        'Already using Langfuse, Helicone, or something custom? Send that data into PostHog and analyze it alongside product and user data.',
+                        'Already using an LLM observability tool? Send that data to PostHog to analyze alongside other product and user data.',
                 },
             ],
             layout: 'single-column',
@@ -513,7 +513,7 @@ export const llmAnalytics = {
             },
             {
                 title: 'Integrate with other tools',
-                description: 'like Langfuse, Helicone, and more',
+                description: 'in your LLM observability stack',
             },
             {
                 title: 'Build AI features',
@@ -627,7 +627,5 @@ export const llmAnalytics = {
     presenterNotes: {
         overview:
             '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',
-        native_integrations:
-            '<strong>Presenter notes:</strong> PostHog integrates with other LLM observability platforms including Langfuse, Helicone, Traceloop, and Keywords AI.',
     },
 }

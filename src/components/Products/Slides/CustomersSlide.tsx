@@ -35,8 +35,8 @@ interface CustomersSlideProps {
 export default function CustomersSlide({ productName, customers, customerData, hasCaseStudy }: CustomersSlideProps) {
     const { customers: allCustomers } = useCustomers()
 
-    // Get 5 AI product engineer customers
-    const aiEngineerSlugs = ['11x', 'grantable', 'hostai', 'juicebox', 'zealot']
+    // Get AI product engineer customers
+    const aiEngineerSlugs = ['grantable', 'hostai', 'juicebox', 'zealot']
     const aiEngineers = aiEngineerSlugs.map((slug) => allCustomers[slug]).filter(Boolean)
 
     // Helper function to render a small customer logo
@@ -265,7 +265,7 @@ export default function CustomersSlide({ productName, customers, customerData, h
                     {productName === 'LLM Analytics' && (
                         <div className="mt-8 text-center">
                             <p className="text-lg text-secondary mb-4">and AI product engineers at...</p>
-                            <div className="grid grid-cols-5 gap-4">
+                            <div className="grid grid-cols-4 gap-4 justify-items-center">
                                 {aiEngineers.map((customer) => (
                                     <div key={customer.slug} className="flex items-center justify-center">
                                         {renderSmallLogo(customer)}
@@ -289,7 +289,7 @@ export default function CustomersSlide({ productName, customers, customerData, h
                 {productName === 'LLM Analytics' && (
                     <div className="mt-8 text-center">
                         <p className="text-lg text-secondary mb-4">and AI product engineers at...</p>
-                        <div className="grid grid-cols-5 gap-4">
+                        <div className="grid grid-cols-4 gap-4 justify-items-center">
                             {aiEngineers.map((customer) => (
                                 <div key={customer.slug} className="flex items-center justify-center">
                                     {renderSmallLogo(customer)}
