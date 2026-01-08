@@ -229,7 +229,7 @@ export const sentry = {
         deployment: {
             eu_hosting: true,
             managed_reverse_proxy: false,
-            open_source: 'After 2 years',
+            open_source: 'Eventually',
             self_host: true,
         },
         pricing: {
