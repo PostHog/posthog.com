@@ -1971,6 +1971,10 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/persistence',
                                 },
                                 {
+                                    name: 'Types',
+                                    url: '/docs/libraries/js/types',
+                                },
+                                {
                                     name: 'Reference',
                                     url: '/docs/references/posthog-js',
                                 },
