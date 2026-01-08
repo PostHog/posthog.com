@@ -265,7 +265,7 @@ export default function CustomersSlide({ productName, customers, customerData, h
                     {productName === 'LLM Analytics' && (
                         <div className="mt-8 text-center">
                             <p className="text-lg text-secondary mb-4">and AI product engineers at...</p>
-                            <div className="grid grid-cols-4 gap-4 justify-items-center">
+                            <div className="grid grid-cols-4 gap-4">
                                 {aiEngineers.map((customer) => (
                                     <div key={customer.slug} className="flex items-center justify-center">
                                         {renderSmallLogo(customer)}
@@ -289,7 +289,7 @@ export default function CustomersSlide({ productName, customers, customerData, h
                 {productName === 'LLM Analytics' && (
                     <div className="mt-8 text-center">
                         <p className="text-lg text-secondary mb-4">and AI product engineers at...</p>
-                        <div className="grid grid-cols-4 gap-4 justify-items-center">
+                        <div className="grid grid-cols-4 gap-4">
                             {aiEngineers.map((customer) => (
                                 <div key={customer.slug} className="flex items-center justify-center">
                                     {renderSmallLogo(customer)}
