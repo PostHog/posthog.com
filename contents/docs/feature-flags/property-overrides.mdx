@@ -584,6 +584,6 @@ Object flagValue = posthog.getFeatureFlag(
 
 ### GeoIP on server-side
 
-Server-side SDKs disable GeoIP by default because PostHog derives GeoIP properties from the request's IP address, which for server-side requests is your server's IP, not your user's. You can enable GeoIP with `disable_geoip=False`, but since there's no way to pass the user's IP for GeoIP resolution, it will resolve to your server's location.
+Server-side SDKs disable GeoIP by default. This is because PostHog derives GeoIP properties from the request's IP address, which for server-side requests is your server's IP rather than your user's.
 
 For geolocation-based flags, evaluate them on the client side where the user's actual IP is available.
