@@ -22,6 +22,96 @@ If you go down the 'saving money' route, bear in mind two things:
 - Prepaid credit never works as an opener - 'save money by fixing implementation' >>> 'save money by committing to credit at a discount'
 - Buying a bunch of credits at a nice discount is much nicer to hear than 'please commit to a scary annual plan' - they can commit for a year, 6 months, whatever so long as they buy >$20k up front 
 
+## Finding real value before you reach out
+
+The whole TAM job is getting on calls with people who don't want calls. Engineers ignore generic check-ins. The only way to break through is bringing something genuinely valuable *first*.
+
+Before reaching out, spend 15-20 minutes in their PostHog project looking for patterns worth talking about.
+
+### Audit their implementation for cost savings
+
+**Duplicate identify calls** - Check if they're calling `identify()` multiple times per page load. Extremely common and costs real money.
+
+Example outreach:
+> "Hey [name], I was looking at your implementation and noticed you're calling `posthog.identify()` 3 times on page load instead of once. Here's a one-line fix:
+> ```js
+> if (!window.__posthogIdentified) {
+>   posthog.identify(userId);
+>   window.__posthogIdentified = true;
+> }
+> ```
+> This should save you roughly ~$X/month. Happy to hop on a quick call if you want me to walk through any other optimizations I spotted."
+
+**Other things to look for:**
+- Capturing unnecessary events (autocapture on scroll listeners, mouse movements, form field focus)
+- Session Replay on pages that don't need it (static pages, login screens, internal admin tools)
+- Feature flags being evaluated too frequently (in loops or on every render)
+
+### Connect their product activity to outreach
+
+**The "I tried your new feature" approach:**
+
+> "Hey [name], I was playing around with [new feature they shipped] and noticed [specific issue - got stuck, found a bug, had friction]. Not sure if this is happening to other users too, but Product Analytics + Session Replay together could surface whether this is widespread. Want me to show you how to set that up?"
+
+**How to find what they've shipped:**
+- Check their changelog/blog
+- Look at their GitHub releases
+- See what new events started appearing in PostHog recently
+- Follow their product on Twitter/LinkedIn
+
+### The "I found a bug before your users did" play
+
+If you spot something broken while exploring their product:
+
+> "Hey [name], was checking out [product] and hit an error on [page/flow]. Figured I'd flag it before more users run into it. By the way, Session Replay + Error Tracking together would catch these automatically - happy to show you the setup if useful."
+
+### Usage pattern insights
+
+Look at their PostHog usage for conversation starters:
+
+| Pattern | Outreach |
+|---------|----------|
+| Low DAU on a product they're paying for | "Noticed your team isn't using [product] much - want me to run a quick training session?" |
+| High error rates | "Saw error rates spike on [date] - everything okay? Here's what I found..." |
+| Feature flag with 0% rollout for weeks | "Noticed [flag name] has been at 0% for a while - anything blocking the rollout I can help with?" |
+
+### Cross-sell with context, not pitches
+
+**Don't:**
+> "Hey, have you considered trying our Experiments product?"
+
+**Do:**
+> "I noticed you're A/B testing [feature] by splitting traffic with feature flags. Our Experiments product would give you automatic statistical significance calculations and let you tie results to your analytics. Here's what the setup would look like: [screenshot]"
+
+### Template: value-first cold outreach
+
+**Subject:** [Specific finding] on your PostHog setup
+
+> Hey [name],
+>
+> [One sentence about what you found - cost savings, bug, optimization opportunity]
+>
+> [Specific details with code/screenshots if applicable]
+>
+> [Simple next step - not "can we schedule a call" but "here's the fix" or "want me to walk through it?"]
+
+**Key principles:**
+- Lead with the value, not the ask
+- Be specific - vague "let's optimize your setup" doesn't work
+- Make it easy to say yes to a small thing first
+- If they don't respond, you've still given them value (builds goodwill for next time)
+
+### Why this matters for TAMs specifically
+
+Unlike TAEs who work with prospects actively evaluating PostHog, TAMs work with customers who've already decided PostHog works for them. They have no burning need to talk to you.
+
+Your job is to create reasons where none exist. The only way to do that consistently is to:
+1. Actually use their product
+2. Actually look at their PostHog data
+3. Find something real to talk about
+
+Generic check-ins get ignored. Specific value gets responses.
+
 ## How to get people to talk to you
 
 This is usually the most difficult bit! Sometimes customers will proactively reach out to us because they see their bill rocketing, but we have many customers who have happily self-served to a very high level of spend without feeling any need to talk to us. In particular, engineers have no interest in jumping on a call with you 99% of the time.
