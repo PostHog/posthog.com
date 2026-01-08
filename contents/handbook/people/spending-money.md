@@ -136,7 +136,7 @@ If you're joining an offsite, please only use the offsite budget - it helps the 
 - Need access to WeWork?
   - We have a company All Access account - ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
 - Need Finance to pay a bill?
-  - Submit the bill using the ['Bill Pay' feature on Brex](https://www.brex.com/support/bill-pay-overview#pay-a-bill), with context on what it is for, and which budget the bill should be coming out of.
+  - Submit the bill using the ['Bill Pay' feature on Brex](https://www.brex.com/support/bill-pay-overview#pay-a-bill), with context on what it is for, and which budget the bill should be coming out of, once you have verified it.
   - Finance processes all bill payments on Wednesdays.
 - Wish to upgrade your flight ticket to premium or business using your personal points?
   - Book an economy ticket using your Brex,
