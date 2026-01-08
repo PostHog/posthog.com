@@ -15,7 +15,7 @@ jobs:
 
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
               with:
                   fetch-depth: 2 # Get current and previous commit for comparison
 
@@ -79,7 +79,7 @@ jobs:
                   echo "EOF" >> $GITHUB_OUTPUT
 
             - name: Send Slack notification
-              uses: 8398a7/action-slack@v3
+              uses: 8398a7/action-slack@77eaa4f1c608a7d68b38af4e3f739dcd8cba273e # v3.19.0
               with:
                   status: custom
                   custom_payload: |
@@ -122,4 +122,4 @@ jobs:
                         ]
                       }
               env:
-                  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_SALES_WEBHOOK }}
+                  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_SALES_ALERTS_CHANNEL }}

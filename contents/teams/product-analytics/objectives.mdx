@@ -1,17 +1,31 @@
-### Q4 2025 objectives
+### Q1 2026 objectives
 
-- Thomas
-  - E2E testing suite for charting regressions
-  - Integrating better with data warehouse (same charts, consistent editor/gui, etc.)
-    - DWH tables in funnels
-- Georgis
-  - Combine events in Trends (AND & OR operators)
-  - Allow multiple values when filtering with contains
-  - Better date time UX across filters/tables/tooltips (e.g display exact time ranges, display day of week in the tooltips)
-  - Auto-naming for Insights and Dashboards
-- Anirudh
-  - [Allow retention calculation based on 24h window](https://github.com/PostHog/posthog/issues/29958)
-  - [Retention support custom date ranges for return on](https://github.com/PostHog/posthog/issues/38080)
-  - Correlation analysis/Compass charts
-  - Automatic alert suggestions and setup
-  - Behavioral segments in Insights
+#### <TeamMember name="Thomas Obermüller" />
+
+- [Data warehouse support in all insights](https://github.com/PostHog/posthog/issues/24065)
+- [Funnel aggregation on a per step basis (might be necessary for supporting common DHW use cases)](https://github.com/PostHog/posthog/issues/37252)
+- [Allow multiple conversions per user in a funnel insight](https://github.com/PostHog/posthog/issues/27988)
+
+#### <TeamMember name="Anirudh Pillai" />
+
+- AI analysis 2.0
+  - Costing
+  - Rolled out for everyone
+  - For dashboards and important insights, show things like what has changed since last viewed
+  - Improve prompts, suggestions, and context
+  - Metrics on usage and relevancy, with ability to provide feedback
+  - On click interactions from the UI (for example clicking into insights improves suggestions by narrowing down)
+  - Fallback non AI insight suggestions for non scale add on users
+- Organising dashboards and insights with tags and improvements for the all insights and all dashboards page [1](https://github.com/PostHog/posthog/issues/24210)
+- [Behavioral segments in Insights](https://github.com/PostHog/posthog/issues/2594)
+
+#### <TeamMember name="Georgis Andonis" />
+
+- Autoname dashboards and insights using AI
+- Dashboard filtering enhancements
+  - Favourite filters (support saving and applying filters) [1](https://github.com/PostHog/posthog/issues/2895) [2](https://github.com/PostHog/posthog/issues/20314)
+  - [Pinned filters and properties](https://github.com/PostHog/posthog/issues/34958)
+  - Most used filters
+- Reduce noise in retention charts
+  - Plot multiple intervals (for example only Week 1 and Week 2)
+  - [Plot multiple cohorts](https://github.com/PostHog/posthog/issues/39227)

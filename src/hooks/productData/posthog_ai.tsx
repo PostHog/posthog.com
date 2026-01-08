@@ -493,7 +493,7 @@ export const posthog_ai = {
             ],
         },
         {
-            label: 'Customer data infrastructure',
+            label: 'PostHog data stack',
         },
         {
             title: 'Data Stack',
@@ -647,6 +647,25 @@ export const posthog_ai = {
                 {
                     title: 'Summarize session recordings for the given filters',
                     time: 104,
+                    copyable: true,
+                },
+            ],
+        },
+        integrating_external_data: {
+            title: 'Integrating external data',
+            author: 'Natlaia Amorim',
+            wistia: '8yephrnt6h',
+            customThumb:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_integrating_external_data_ab4b91a189.png',
+            chapters: [
+                {
+                    title: 'How can I import a google sheet into PostHog so I can use it as a data source',
+                    time: 55,
+                    copyable: true,
+                },
+                {
+                    title: 'Now my table has been synced and is available as a data source. Help me create an insight where I can show our keyword rankings evolution over time (the Y axis should be the count, and X axis should be the month string and the ranking string.',
+                    time: 143,
                     copyable: true,
                 },
             ],

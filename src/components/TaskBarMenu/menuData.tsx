@@ -452,6 +452,12 @@ export function useMenuData(): MenuType[] {
                     icon: <Icons.IconLaptop className="size-4 text-blue" />,
                 },
                 {
+                    type: 'item',
+                    label: 'Places',
+                    link: '/places',
+                    icon: <Icons.IconMap className="size-4 text-red" />,
+                },
+                {
                     type: 'separator',
                 },
                 {
@@ -680,6 +686,12 @@ export function useMenuData(): MenuType[] {
                             link: '/docs/privacy/hipaa-compliance',
                         },
                     ],
+                },
+                {
+                    type: 'item',
+                    label: 'Professional Services',
+                    link: '/professional-services',
+                    icon: <Icons.IconPerson className="size-4 text-seagreen" />,
                 },
                 {
                     type: 'separator',

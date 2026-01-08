@@ -1,0 +1,33 @@
+Now that you can capture basic client-side events, you'll want to identify your user so you can associate users with captured events. 
+
+Generally, you identify users when they log in or when they input some identifiable information (e.g. email, name, etc.). You can identify users by calling the `identify` method on the PostHog client:
+
+```tsx
+export default function Login() {
+  const { user, login } = useAuth();
+  const posthog = usePostHog(); // + 
+
+  const handleLogin = async (e: React.FormEvent) => {
+    // existing code to handle login...
+    const user = await login({ email, password });
+
+    posthog?.identify(user.email, // +
+      { // +
+        email: user.email, // +
+        name: user.name, // +
+      } // +
+    ); // +
+    posthog?.capture('user_logged_in'); // +
+  };
+
+  return (
+    <div>
+      {/* ... existing code ... */}
+      <button onClick={handleLogin}>Login</button>
+    </div>
+  );
+}
+```
+
+PostHog automatically generates anonymous IDs for users before they're identified. When you call identify, a new identified person is created. All previous events tracked with the anonymous ID link to the new identified distinct ID, and all future captures on the same browser associate with the identified person.
+
