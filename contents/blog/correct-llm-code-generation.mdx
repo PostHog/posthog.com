@@ -31,9 +31,9 @@ Try it out with your [Next.js projects](https://posthog.com/docs/libraries/next-
 
 <Prompt />
 
-I spent a lot of 2025 worried none of this would work. The world of LLMs is strange: there’s not always an objectively correct way to do things. And it's so easy for the robot to run off and do something unexpected.
+I spent a lot of 2025 anxious that none of this would work. The world of LLMs is strange: there’s not always an objectively correct way to do things. And it's so easy for the robot to run off and do something unexpected.
 
-But with enough stubbornness, we cracked this: we can generate correct, predictable, automated PostHog integrations so you can get on with the work you really care about.
+But with enough stubbornness, we cracked this: we can generate correct, predictable, automated PostHog integrations so you can get on with the work you really care about. And we can do it for thousands of customers every month.
 
 You can use LLMs to generate correct and predictable code, too. Here’s everything we learned. 
 
@@ -99,7 +99,7 @@ LLMs are non-deterministic systems. That’s the devil’s agreement of working 
 
 What worked best for us was bread-crumbing the prompts, revealing them in sequence. Instead of dumping the entire plan right away, we disclose bits at a time.
 
-You can do this without any fancy agent orchestration.
+You can do this without any fancy agent orchestration code. This is one of the strangest adjustments to make in the age of LLMs: you can accomplish so much with just natural language.
 
 [MCP](/blog/machine-copy-paste-mcp-intro) ties this all together in a way that creates amazing outcomes from our agent, while allowing all the content investments we’re making to be reusable elsewhere – say, your Cursor or Claude Code session.
 
@@ -133,7 +133,7 @@ Best of all, *where* this content comes from is completely up to you in the desi
 
 Other projects use MCP to deliver universal [static analysis](https://svelte.dev/docs/mcp/overview) to course correct wayward agents, and [even report errors](https://nextjs.org/docs/app/guides/mcp) to them live. 
 
-This is the most crucial job for successful LLM code generation: models are expensive to train, so the information they encode rots. In the case of PostHog integration code, it rots *fast*. Patching the rot with fresh context changes everything.
+This is the most crucial job for successful LLM code generation: models are expensive to train, so the information they encode rots. In the case of PostHog integration code, it rots *fast*, as PostHog and the larger ecosystem are both constantly shipping. Patching the rot with fresh context changes everything.
 
 MCP provides a *universal surface* to meet this goal. No lock-in. You can change agents, you can use multiple kinds of agents.
 
@@ -149,11 +149,12 @@ But I didn’t notice because I had Claude Code installed locally, and the Wizar
 
 It’s weird out here.
 
-Now the problem is designing just enough context that the Wizard can serve way more languages and frameworks. So while we crack away at that, steal what’s interesting:
+Now the problem is designing just enough context that the Wizard can serve way more languages and frameworks. So while [we crack away at that](https://posthog.com/teams/docs-wizard#goals-for-q1-2026), steal what’s interesting:
 
 - Because MCPs can do anything, you can use them for great user experiences. We just shipped the ability for the Wizard to create product analytics insights and dashboards. Think about how your own MCP can act as a butler.
 - The AI Wizard repo is in a state of transition. Next.js is complete. You can compare our new approach to the old one by looking at the [diff in this pull request](https://github.com/PostHog/wizard/pull/214/files). Look how much we get to delete!
 - Our [examples repo](https://github.com/PostHog/examples) is full of example code and the [prompts](https://github.com/PostHog/examples/tree/main/llm-prompts/basic-integration) we’re using
 - The [PostHog MCP server](https://github.com/PostHog/posthog/tree/master/services/mcp) uses the examples repo to construct its resource offerings
+- This project owes a debt to [Letta](https://www.letta.com), whose context engineering and [agent tools](https://github.com/letta-ai/letta-code) were essential for prototyping and developing my intuition around agent behavior. Try them out!
 
 Now go forth and make the robots do your bidding!
