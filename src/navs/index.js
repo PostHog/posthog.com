@@ -1971,6 +1971,10 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/persistence',
                                 },
                                 {
+                                    name: 'Types',
+                                    url: '/docs/libraries/js/types',
+                                },
+                                {
                                     name: 'Reference',
                                     url: '/docs/references/posthog-js',
                                 },
@@ -2184,7 +2188,7 @@ export const docsMenu = {
                             name: 'Phoenix',
                             url: '/docs/libraries/phoenix',
                         },
-                      {
+                        {
                             name: 'React Router',
                             url: '/docs/libraries/react-router',
                             children: [
