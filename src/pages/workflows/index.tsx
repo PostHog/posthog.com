@@ -107,6 +107,7 @@ export default function Workflows(): JSX.Element {
             answersDescription: '',
             answersHeadline: '',
         },
+        order: ['overview', 'features'],
     })
 
     // Override the pricing slide with our custom component

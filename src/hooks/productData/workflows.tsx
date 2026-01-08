@@ -85,6 +85,12 @@ export const workflows = {
             description:
                 'PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.',
         },
+        croissant: {
+            headline:
+                'paired Workflows with Product Analytics, Web Analytics, and Surveys to power up their B2B motion',
+            description:
+                'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
+        },
     },
     features: [
         {
