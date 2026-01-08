@@ -21,6 +21,9 @@ export const LOGOS = {
     cloudflare: 'https://res.cloudinary.com/dmukukwp6/image/upload/cloudflare_icon_ef34353f85.svg',
     cloudflareR2: 'https://res.cloudinary.com/dmukukwp6/image/upload/r2_0d79d88d1f.svg',
     cloudfront: 'https://res.cloudinary.com/dmukukwp6/image/upload/Cloud_Front_76c0f62ab5.svg',
+    django: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/django.svg',
+    docusaurus:
+        'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/docusaurus.svg',
     doit: 'https://res.cloudinary.com/dmukukwp6/image/upload/do_it_08203bf3a4.svg',
     dotnet: 'https://res.cloudinary.com/dmukukwp6/image/upload/dotnet_logo_7e446176f2.svg',
     elixir: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/elixir.svg',
@@ -38,6 +41,8 @@ export const LOGOS = {
     java: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/java.svg',
     javascript: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg',
     kubernetes: 'https://res.cloudinary.com/dmukukwp6/image/upload/kubernetes_svgrepo_com_b9716be409.svg',
+    laravel:
+        'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/laravel.svg',
     linkedinAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/4221chis9yaztef5phd0v3lal_12c6e6b2a1.svg',
     litellm: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/litellmicon_a2805d75e5.png',
     metaAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/meta_logo_56e02d5502.svg',

@@ -1,31 +1,23 @@
 ---
 title: Vue.js
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/vue.svg
+platformLogo: vue
 ---
 
-import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
-import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
-import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx"
+import { VueInstallation } from 'onboarding/product-analytics/vue.tsx'
+import { JSEventCapture } from 'onboarding/product-analytics/_snippets/js-event-capture.tsx'
+import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 
 PostHog makes it easy to get data about usage of your [Vue.js](https://vuejs.org/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
-This guide walks you through integrating PostHog into your app for both Vue.js major versions `2` and `3`. We'll use the [JavaScript Web SDK](/docs/libraries/js) for this. 
+This guide walks you through integrating PostHog into your app for both Vue.js major versions `2` and `3`. We'll use the [JavaScript Web SDK](/docs/libraries/js) for this.
 
 For integrating PostHog into a [Nuxt.js](https://nuxt.com/) app, see our [Nuxt guide](/docs/libraries/nuxt-js).
 
-## Prerequisites
-
-To follow this guide along, you need:
-
-1. A PostHog account (either [Cloud](/docs/getting-started/cloud) or [self-hosted](/docs/self-host))
-2. A running Vue.js app
-
 ## Setting up PostHog
 
-import VueSetup from "../../integrate/_snippets/vuejs/vue-setup.mdx"
-
-<VueSetup />
+<OnboardingContentWrapper snippets={{ JSEventCapture }}>
+    <VueInstallation />
+</OnboardingContentWrapper>
 
 ## Capturing custom events, using feature flags, and more
 

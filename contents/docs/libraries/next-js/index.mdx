@@ -1,7 +1,6 @@
 ---
 title: Next.js
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nextjs.svg
+platformLogo: nextjs
 features:
   eventCapture: true
   userIdentification: true
@@ -14,9 +13,9 @@ features:
   errorTracking: true
 ---
 
-import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
-import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
-import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx"
+import { NextJSInstallation } from 'onboarding/product-analytics/nextjs.tsx'
+import { JSEventCapture } from 'onboarding/product-analytics/_snippets/js-event-capture.tsx'
+import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 
 PostHog makes it easy to get data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
@@ -26,28 +25,11 @@ This guide walks you through integrating PostHog into your Next.js app using the
 
 Next.js has both client and server-side rendering, as well as pages and app routers. We'll cover all of these options in this guide.
 
-## Prerequisites
-
-To follow this guide along, you need:
-
-1. A PostHog instance (either [Cloud](https://app.posthog.com/signup) or [self-hosted](/docs/self-host))
-2. A Next.js application
-
-import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
-
-<AgentIntegrationSection framework="Next.js" />
-
 ## Client-side setup
 
-import NextJSInstall from "../../integrate/_snippets/nextjs/install-nextjs.mdx"
-
-<NextJSInstall />
-
-<DetailSetUpReverseProxy />
-
-<DetailGroupProductsInOneProject />
-
-<DetailPostHogIPs />
+<OnboardingContentWrapper snippets={{ JSEventCapture }}>
+    <NextJSInstallation />
+</OnboardingContentWrapper>
 
 ## Accessing PostHog
 

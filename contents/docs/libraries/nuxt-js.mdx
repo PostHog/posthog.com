@@ -1,60 +1,19 @@
 ---
 title: Nuxt.js
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nuxt.svg
+platformLogo: nuxt
 ---
 
-import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
-import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
-import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx"
+import { NuxtInstallation } from 'onboarding/product-analytics/nuxt.tsx'
+import { JSEventCapture } from 'onboarding/product-analytics/_snippets/js-event-capture.tsx'
+import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 
 PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
-For Nuxt 3.7 and above, we recommend using the official `@posthog/nuxt` module. This module provides:
-- Automatic PostHog client initialization for both Vue (client side) and Nitro (server side)
-- Automatic exception capture for error tracking
-- Source map configuration and upload for error tracking
-
 ## Installation
 
-Install the PostHog Nuxt module using your package manager:
-
-<MultiLanguage>
-
-```bash file=npm
-npm install @posthog/nuxt
-```
-
-```bash file=Yarn
-yarn add @posthog/nuxt
-```
-
-```bash file=pnpm
-pnpm add @posthog/nuxt
-```
-
-```bash file=Bun
-bun add @posthog/nuxt
-```
-
-</MultiLanguage>
-
-## Configuration
-
-Add the module to your `nuxt.config.ts` file:
-
-```typescript file=nuxt.config.ts
-export default defineNuxtConfig({
-  modules: ['@posthog/nuxt'],
-  posthogConfig: {
-    publicKey: '<ph_project_api_key>', // Find it in project settings https://app.posthog.com/settings/project
-    host: '<ph_client_api_host>', // Optional: defaults to https://us.i.posthog.com. Use https://eu.i.posthog.com for EU region
-    clientConfig: {
-      // Optional: PostHog client configuration options
-    },
-  },
-})
-```
+<OnboardingContentWrapper snippets={{ JSEventCapture }}>
+    <NuxtInstallation />
+</OnboardingContentWrapper>
 
 ## Usage on the client side
 
