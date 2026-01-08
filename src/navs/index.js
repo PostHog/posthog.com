@@ -3694,6 +3694,12 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
+                    name: 'Property overrides',
+                    url: '/docs/feature-flags/property-overrides',
+                    icon: 'IconPerson',
+                    color: 'blue',
+                },
+                {
                     name: 'Feature flag dependencies',
                     url: '/docs/feature-flags/dependencies',
                     icon: 'IconListTreeChild',
