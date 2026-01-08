@@ -44,7 +44,7 @@ Why? The company claims VAT back on these charges - if you don't use your Revolu
 
 
 ### RECEIPTS 🧾
-All expenses over $75 or £75 must have itemized receipts attached and memo updated within 14 days of the charge (required for audit documentation)
+All expenses over $75 or £75 must have itemized receipts attached and memo updated within 14 days of the charge (required for audit documentation).
 - Brex
   - upload the itemized receipt using the [Brex app, text, email or Slack](https://www.brex.com/support/receipts-for-expenses#attaching-receipts-to-a-specific-expense)
   - update the memo using the [Brex app, text, email or Slack](https://www.brex.com/support/memos-for-expenses#add-a-memo-to-a-single-expense)
@@ -153,9 +153,9 @@ If you're joining an offsite, please only use the offsite budget - it helps the 
 So, you may not use your Brex or Revolut for personal expenses.
 
 #### EXAMPLES OF INAPPROPRIATE SPEND
-- Personal gym expenses during work travel
+- Personal expenses during business travel (for example: gym sessions/fitness classes, groceries)
+- Entertainment subscriptions for personal use (for example: Spotify, Netflix, Amazon Prime, etc.)
 - Expenses that benefit you personally rather than the business
-- Spotify subscriptions
 - Anything you wouldn't feel comfortable explaining publicly
 
 _This list will be updated based on common questions/scenarios._
@@ -217,8 +217,9 @@ Individual software is down to your personal preference, and we encourage you to
   - [Loom](https://www.loom.com): you'll be added as a _Creator Lite_ which allows you to record 25 videos/mo at up to 5 minutes in length. Should you need a full Creator account (unlimited videos, advanced features), ask [Mine](https://posthog.com/community/profiles/29862) or [Simon](https://posthog.com/community/profiles/28895).
   - [Zoom](https://www.zoom.us): we use Google Meet by default, but you can use Zoom for free (up to 40-minute calls). Should you need longer meetings, ask [Simon](https://posthog.com/community/profiles/28895). (But does anyone _really_ need longer meetings?)
   - [Superhuman](https://superhuman.com): everyone has their own favorite email app, but Superhuman users will make sure you don’t forget theirs. We have a team plan to keep those folks happy with inbox zero and inner peace.
-  - [Circleback](https://circleback.ai): it’s absolutely okay to use AI note-takers so you can stay engaged in meetings without writing everything down. Circleback is our preferred tool from a privacy standpoint. We have a company account - sign up with your @posthog.com email for Pro access.
+  - [Granola](https://granola.ai): It’s absolutely okay to use AI note-takers so you can stay engaged in meetings without writing everything down. Feel free to choose your own but please be aware of who the sub-processors are to ensure they do not use a competitor for analytics.
 - IDEs: Visual Studio, VIM and PyCharm are the most popular within our team. IDEs range widely in cost; best in class IDE suites can cost up to $700, which is not a great value proposition for most engineers.
+
 
 ### SPONSORSHIPS
 If you believe an open-source project is fundamentally important to the success of PostHog then we should set up a recurring sponsorship. In this case, see the [open-source sponsorship Marketing initiative](/handbook/growth/marketing/open-source-sponsorship).
@@ -230,7 +231,9 @@ To get setup with Open Collective get in touch with [Charles](https://posthog.co
 _If you find a project that only supports [GitHub Sponsors](https://github.com/sponsors), please ask Charles to set up the sponsorship._ 
 
 ### TRAVEL
-- We travel in economy by default
+- We travel in economy by default and do not pay for business class
+  - If you're unsure of your travel plans and believe you may have to cancel, it may be worth spending a bit extra to book flex tickets that allow a full refund to your Brex
+  - It may be worth occasionally upgrading to Premium Economy if you're travelling a lot for work and the cost is not unreasonably high, particularly if you're working the next day
 - Consider signing up for programs like Global Entry if you are regularly traveling to countries that offer it, using your Brex; this saves you time, particularly when traveling to the US.
 - When traveling internationally, use your Brex to expense a reasonable eSIM. PostHog does not cover roaming charges for your phone.
 - When using your Brex internationally, use the local currency since Brex generally offers a better exchange rate.
