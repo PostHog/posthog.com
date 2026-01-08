@@ -63,7 +63,7 @@ This keeps what users see in the product and what they’re told about it in syn
 
 ## Less theory, more shipping
 
-At [Croissant](customers/croissant), Workflows is used to act on intent signals without moving data between tools. Their growth team triggers follow-ups directly from PostHog events, keeping experimentation and iteration fast.
+At [Croissant](/customers/croissant), Workflows is used to act on intent signals without moving data between tools. Their growth team triggers follow-ups directly from PostHog events, keeping experimentation and iteration fast.
 
 > “The main benefit is that everything’s already in PostHog. Syncing data across tools is always hit-or-miss, and expensive. Now it’s all in one place, and we can iterate way faster.”
 
