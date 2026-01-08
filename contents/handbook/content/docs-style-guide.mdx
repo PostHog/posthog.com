@@ -217,6 +217,39 @@ Available props:
 
 The component automatically tracks when users open PostHog AI and includes the current page context.
 
+### AskAIInput
+
+The `<AskAIInput>` component provides a text input for users to ask PostHog AI questions directly within documentation pages. Use this to replace traditional FAQ sections in troubleshooting guides and documentation pages where users frequently have questions. The component opens the PostHog AI chat window with the user's question pre-loaded and includes the current page context. Add a clear h2 heading like "Have a question? Ask PostHog AI" above the component.
+
+> **Note:** Customize the `placeholder` prop per page to provide context-specific guidance. The default is `Ask a question...`
+
+```mdx
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+```
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+
+> See [src/components/AskAIInput/index.tsx](https://github.com/PostHog/posthog.com/blob/master/src/components/AskAIInput/index.tsx) for all available props.
+
+### SolvedQuestions
+
+The `<SolvedQuestions>` component displays resolved community questions from a specific topic. Use this in troubleshooting guides to highlight common issues and their solutions. Find question slugs by visiting the community question page and copying the URL slug.
+
+> **Note:** Use the `pinnedQuestions` prop to manually curate which questions appear. When provided, the component shows only those questions. If not provided, it shows recent solved posts.
+
+```mdx
+<SolvedQuestions
+    topicLabel="Error Tracking"
+    pinnedQuestions={[
+        'code-variables-for-external-libraries-for-python',
+        'trouble-setting-up-source-map-in-vite-react',
+        'webpack-turbopack-plugin-getting-sourcemaps-uploaded-to-vercel'
+    ]}
+/>
+```
+
 ### Steps
 
 Use the `<Steps>` component for content that walks the reader through a strict sequence of instructions. Think how-to guides or step-by-step tutorials.
@@ -284,6 +317,74 @@ You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember na
 </Steps>
 ```
 
+### Decision tree
+
+import { DecisionTree } from '../../../src/components/Docs/DecisionTree'
+
+Use a decision tree when users need help choosing between multiple, branching options. Instead of making users read through all possibilities, the tree asks questions and recommends the best path based on their answers.
+
+You can use the following decision tree to help you decide if using one is good for your use case! 
+
+<DecisionTree
+    questions={[
+        {
+            id: 'multiple-options',
+            question: 'Are you helping users choose between multiple options?',
+            options: [
+                { value: 'yes', label: 'Yes' },
+                { value: 'no', label: 'No' },
+            ],
+        },
+        {
+            id: 'option-count',
+            question: 'How many options are there?',
+            condition: (answers) => answers['multiple-options'] === 'yes',
+            options: [
+                { value: 'few', label: '2-6 options' },
+                { value: 'many', label: 'More than 6 options' },
+            ],
+        },
+        {
+            id: 'complexity',
+            question: 'Can you give the user an option by asking 2-3 simple questions?',
+            condition: (answers) => answers['option-count'] === 'few',
+            options: [
+                { value: 'yes', label: 'Yes' },
+                { value: 'no', label: 'No' },
+            ],
+        },
+    ]}
+    getRecommendation={(answers) => {
+        if (answers['multiple-options'] === 'no') {
+            return {
+                title: "Don't use a decision tree",
+                path: '',
+                reason: "Decision trees are for helping users choose between options.",
+            }
+        }
+        if (answers['option-count'] === 'many') {
+            return {
+                title: "Don't use a decision tree",
+                path: '',
+                reason: "With more than 6 options, restructure your content or use a simple list instead.",
+            }
+        }
+        if (answers['complexity'] === 'no') {
+            return {
+                title: "Don't use a decision tree",
+                path: '',
+                reason: "If you need complex logic or many questions, a decision tree will be too complicated. Use a simple list instead.",
+            }
+        }
+        return {
+            title: 'Use a decision tree!',
+            path: '',
+            reason: "You have a manageable number of options and can guide users with a few simple questions.",
+        }
+    }}
+    buttonText=""
+/>
+
 ### Quest log
 
 The `<QuestLog>` component is for syllabus-style pages. Inspired by video games, it outlines each section as a "quest" to give the reader a visual roadmap of what's needed to reach a larger goal or milestone – like fully adopting our error tracking app.
@@ -340,7 +441,7 @@ You can use magic placeholders to replace the project API key, project name, app
 | `<ph_app_host>`            | Your PostHog instance URL     | `<ph_app_host>`                                 |
 | `<ph_client_api_host>`     | Your PostHog client API host  | `https://us.i.posthog.com`                      |
 | `<ph_region>`              | Your PostHog region (us/eu)   | `<ph_region>`                                   |
-| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2025-05-24`                                    |
+| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2025-11-30`                                    |
 | `<ph_proxy_path>`          | Your proxy path               | `relay-XXXX` (last 4 digits of project API key) |
 
 You can use these placeholders in the code block like this:
@@ -368,3 +469,67 @@ pnpm format:docs
 ```
 
 This will run the formatter against the current changes.
+
+## Platform logos
+
+Platform list pages, like installation guides or source integrations, use centralized logo management. All logo URLs are stored in `src/constants/logos.ts`.
+
+### Add a platform to an existing list
+
+1. Create an MDX file with frontmatter including `platformLogo`:
+
+   ```yaml
+   ---
+   title: Elixir error tracking installation
+   platformLogo: elixir
+   ---
+   ```
+
+2. Add the page to the sidebar in `src/navs/index.js`
+3. Order accordingly in the side nav `index.js` file. The order there = order on page
+3. Done! The `usePlatformList` hook automatically picks up the new platform
+
+### Add a new logo
+
+1. Upload the image to Cloudinary in SVG format
+2. Add a key to `src/constants/logos.ts`:
+
+   ```ts
+   export const LOGOS = {
+       // ... existing logos
+       myNewLogo: 'https://res.cloudinary.com/dmukukwp6/image/upload/...',
+   }
+   ```
+
+3. Reference using `platformLogo: myNewLogo` in MDX frontmatter
+
+### Naming conventions
+
+- Use the service/framework name in camelCase: `stripe`, `bigquery`, `nextjs`
+- Keep the list alphabetized
+- For generic icons, use descriptive names: `sqlDatabase`, `apiGeneric`
+
+### Available frontmatter fields
+
+| Field | Description | Example |
+|-------|-------------|---------|
+| `platformLogo` | Key from `src/constants/logos.ts` | `stripe`, `react`, `nodejs` |
+| `platformIconName` | Fallback icon if no logo | `IconCode` |
+| `platformSourceType` | For source lists: `managed` or `self-hosted` | `managed` |
+
+### Create a new platform list section
+
+1. Add `platformLogo` to all platform MDX files in the section
+2. Create a snippet component using `usePlatformList`:
+
+   ```tsx
+   import usePlatformList from 'hooks/docs/usePlatformList'
+
+   const MyPlatforms = () => {
+       const platforms = usePlatformList('docs/my-section/installation', 'installation')
+       return <List items={platforms} />
+   }
+   ```
+
+3. Update sidebar with section children in `src/navs/index.js`
+4. Import and use the snippet in your `index.mdx`

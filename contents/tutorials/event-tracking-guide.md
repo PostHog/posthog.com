@@ -41,7 +41,7 @@ Although autocapture is a great way to get started, it can be limiting for more 
 
 3. **Customization**. Although it is possible to [add properties to autocapture](/docs/product-analytics/autocapture#capturing-additional-properties-in-autocapture-events), getting exactly the data you want at the exact moment you want requires customization.
 
-4. **Pageviews rely on page loads**. Pageview captures rely on page load events. This means they don't work well with [single-page apps (SPAs)](/tutorials/single-page-app-pageviews). To fix this, you can rely on the [history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to capture pageviews by setting the `capture_pageview` configuration option to `history_change` or by using the most recent `defaults: '2025-05-24'`.
+4. **Pageviews rely on page loads**. Pageview captures rely on page load events. This means they don't work well with [single-page apps (SPAs)](/tutorials/single-page-app-pageviews). To fix this, you can rely on the [history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to capture pageviews by setting the `capture_pageview` configuration option to `history_change` or by using the most recent `defaults: '2025-11-30'`.
 
 ## Setting up custom events
 
@@ -130,14 +130,14 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'distinct_id_of_your_user',
   'event' => 'movie_played',
-  'properties' => array(
+  'properties' => [
     'movie_id' => '123',
     'category' => 'romcom'
-  )
-));
+  ]
+]);
 ```
 
 ```ruby
@@ -189,18 +189,18 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'distinct_id_of_your_user',
   'event' => 'movie_played',
-  'properties' => array(
-    '$set' => array(
+  'properties' => [
+    '$set' => [
       'location' => 'London'
-    ),
-    '$set_once' => array(
+    ],
+    '$set_once' => [
       'referred_by' => 'some ID'
-    )
-  )
-));
+    ]
+  ]
+]);
 ```
 
 ```ruby
@@ -267,11 +267,11 @@ posthog.capture({
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'distinct_id',
     'event' => 'some_event',
-    '$groups' => array("company" => "id:5")
-));
+    '$groups' => ['company' => 'id:5']
+]);
 ```
 
 ```segment

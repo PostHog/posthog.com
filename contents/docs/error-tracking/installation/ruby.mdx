@@ -1,0 +1,73 @@
+---
+title: Ruby error tracking installation
+showStepsToc: true
+platformLogo: ruby
+---
+
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+
+<Steps>
+<Step title="Install PostHog Ruby SDK" badge="required">
+
+Add the `posthog-ruby` gem to your Gemfile:
+
+```bash
+gem "posthog-ruby"
+```
+
+In your app, import the `posthog-ruby` library and set your project API key and host. You can find these in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
+
+```ruby
+require 'posthog'
+
+posthog = PostHog::Client.new(
+  api_key: '<ph_project_api_key>',
+  host: '<ph_client_api_host>',
+)
+```
+
+> **Note:** We do not recommend hardcoding API keys. Setting it as an environment variable is preferred.
+
+</Step>
+
+<Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
+
+Before proceeding, call `posthog.capture(...)` to make sure you can capture events.
+
+</Step>
+
+<Step title="Manually capture exceptions" badge="required">
+
+> **Note:** The Ruby SDK currently only supports manual exception capture. Automatic exception capture is not yet available.
+
+To capture exceptions in your Ruby application, use the `capture_exception` method:
+
+```ruby
+begin
+  # Code that might raise an exception
+  raise StandardError, "Something went wrong"
+rescue => e
+  posthog.capture_exception(
+    e,
+    distinct_id: 'user_distinct_id',
+    properties: {
+      custom_property: 'custom_value'
+    }
+  )
+end
+```
+
+The `capture_exception` method accepts the following parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `exception` | `Exception` | The exception object to capture (required) |
+| `distinct_id` | `String` | The distinct ID of the user (optional) |
+| `properties` | `Hash` | Additional properties to attach to the exception event (optional) |
+
+</Step>
+
+<StepVerifyErrorTracking />
+
+</Steps>
+

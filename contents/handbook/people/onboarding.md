@@ -64,6 +64,14 @@ Aim to keep things sensible and cheap. As always, use your best judgement when [
 
 > You should by default avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) as they serve different purposes. The focus of onboarding is generally on making the new team member successful, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time. However, it may occasionally make sense to combine the two - just use your judgement.
 
+It is important that you make the most out of the sync time with the new joiner on your team. You should not spend the whole week sitting next to them doing your usual work. Having something planned each day is sufficient, some ideas include:
+- An intro to PostHogs values & strategy
+- A history of your team, your current quarterly goals and a product demo of the features you own (product teams only)
+- Interview feedback session between the team lead and new joiner
+- Deep dive into a specific feature where you walk through the code (product teams only)
+- Mock demo (sales team only)
+- "No stupid questions" where the new joiner is expected to come with questions they had since starting
+
 ### Your first week
 
 Your first week can definitely be a bit overwhelming at any new company, so here's what you can (roughly) expect!
@@ -187,10 +195,10 @@ In this call the support engineer will be able to answer any questions, as well 
 -   [ ] [Advice on how to communicate with customers](/handbook/engineering/support-hero#how-do-i-communicate) and [prioritize tickets](/handbook/engineering/support-hero#how-do-i-prioritize)
 -   [ ] [How and when to mark tickets as 'On Hold' or 'Pending'](/handbook/engineering/support-hero#ticket-status)
 -   [ ] [What our SLAs](/handbook/support/customer-support#response-targets) are and [what ticket severity indicates](/docs/support-options#severity-levels)
--   [ ] How to deal with bug reports and feature requests
--   [ ] [How to use macros to answer questions quickly](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets)
--   [ ] How to avoid duplication of effort in ZenDesk
--   [ ] [How to create and use personal views in ZenDesk](https://support.zendesk.com/hc/en-us/articles/4408832792986-Managing-your-views)
+-   [ ] HogHero - how to deal with bug reports and feature requests, and how to merch customers (including [macros](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets))
+-   [ ] How to avoid duplication of effort in Zendesk
+-   [ ] [Which views should be used in Zendesk](https://support.zendesk.com/hc/en-us/articles/4408832792986-Managing-your-views)
+-   [ ] How to use [side conversations](https://support.zendesk.com/hc/en-us/articles/4604286879642-Creating-side-conversations) in Zendesk
 
 It can be especially helpful for new hires if support engineers demonstrate how to solve a few simple tickets from start to finish, through shadowing.
 

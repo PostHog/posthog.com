@@ -61,7 +61,7 @@ The responsibilities of a product manager still exist, but our engineers:
 -   Decide what to build within their product (and sometimes pitch whole new products).
 -   Have complete access to metrics like revenue, hosting costs, and (soon) staff costs, for their product.
 
-The concept internally is a "[product engineer](/blog/what-is-a-product-engineer)" – i.e. an engineer who is product-minded and autonomous, rather than mindlessly filing tickets.
+The concept internally is a "[product engineer](/blog/what-is-a-product-engineer)" – i.e. an [engineer who is product-minded and autonomous](/blog/product-engineer-vs-software-engineer), rather than mindlessly filing tickets.
 
 We have one product manager who steps in reactively if a small team needs more support.
 

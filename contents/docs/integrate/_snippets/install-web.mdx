@@ -49,7 +49,7 @@ import posthog from 'posthog-js/dist/module.full.no-external'
 import posthog from 'posthog-js/dist/module.full'
 
 // Finally you can also import specific extra dependencies 
-import "posthog-js/dist/recorder"
+import "posthog-js/dist/posthog-recorder"
 import "posthog-js/dist/surveys"
 import "posthog-js/dist/exception-autocapture"
 import "posthog-js/dist/tracing-headers"
@@ -79,6 +79,6 @@ if (!window.location.host.includes('127.0.0.1') && !window.location.host.include
 <details>
 <summary>What is the `defaults` option?</summary>
 
-The `defaults` is a date, such as `2025-05-24`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.
+The `defaults` is a date, such as `2025-11-30`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.
 
 </details>

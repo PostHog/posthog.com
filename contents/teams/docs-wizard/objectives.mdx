@@ -1,163 +1,145 @@
+## Missions for 2026
+
 <details>
-<summary>Even better SDK reference docs</summary>
+<summary>We’ve established the AI Wizard as the fastest way to activate PostHog</summary>
 
-**Owner:** Vincent Ge
-
-**Motivation:** We’ve got all the infrastructure to keep shipping SDK references. Now we want them to be versioned, updated automatically on push to master, and hosted in each SDK’s repo.
-
-**What we'll ship**
-
-* References for Flutter, Android, iOS, GoLang. (still by popularity)  
-* CI workflows + website code to automatically keep references up to date.  
-* Selectors to view references by version. This is important for teams that choose to remain on older SDK versions.
-
-**We'll know we're successful when**
-
-* THE definitive source of truth for human and LLM readers for popular SDKs.  
-* Versioned references published when new SDK versions are released, without any human in-the-loop.
+This means automatic integration for multiple products across multiple frameworks. This also means support for additional “skills” like migrations and troubleshooting. Ultimately, the Wizard closes the gap between curiosity and real usage. It delivers working PostHog solutions within a user’s codebase in minutes.
 
 </details>
 
 <details>
-<summary>Usable API reference docs</summary>
+<summary>We’ve created platform docs that give us a competitive edge</summary>
 
-**Owner:** Vincent Ge
+This means positioning PostHog as a leading developer platform by showing how the entire product suite works together in practice. We’re creating deep, platform-level content like learning paths, cross-product guides, and interactive material for hands-on learning. Success means developers clearly understand PostHog’s strengths and advantages as a dev platform and ecosystem just by reading our docs.
 
-**Motivation:** LLM based tools need these. Companies that want to deeply integrate with PostHog as a developer tool will need these. Doesn't need to be pretty, but information must be accurate.
+</details>
+
+<details>
+<summary>We’ve built systems that make product docs mostly self-serve</summary>
+
+This means each product engineering team writes and maintains their own product docs at a strong baseline level of quality by using the templates, tools, and processes we’ve put in place. We partner with teams to review, improve, or overhaul their docs when needed. Success means keeping current product docs updated and launching several new products with docs, without slowing down.
+
+</details>
+
+
+## Goals for Q1 2026 
+
+<details>
+<summary>Next milestones for the AI Wizard</summary>
+
+**Owner:** <TeamMember name="Danilo Campos" photo />
+
+**Motivation:** People are ecstatic about the Wizard, but we can’t give the best version of it to people who aren’t running Next.js. We’ve made investments all along the infrastructure, now it’s a matter of building and plugging in the content, then testing it. It's time to ship the v2 Wizard with even more features to as many people as possible. 
 
 **What we'll ship:** 
+- Broader support for frameworks and languages: Next.js, React, Node, Python, and mobile platforms like React Native, iOS, and Android
+- Expanded support for PostHog products like LLMA, feature flags, experiments, and surveys
+- In-app actions, dashboard creation, and updates to projects via OAuth
+- Updated CLI UX with a new onboarding flow and more flags and options
+- New Wizard skills like migration, troubleshooting, and diagnostics
+- Detection of 3rd party integrations (e.g. find Stripe integration and send data back to PostHog and then recommend CDP and data warehouse syncs)
+- Improvements to internal DX and tools like examples repo, workbench, CI/CD, and testing
 
-* Investigate how we generate SDK specs right now  
-* Examine past feedback about APIs  
-* Ship code and copy updates to correct *only* the parts that are wrong  
-* Make the website API references page slightly prettier
-
-**We'll know we're successful when**
-
-* A developer or LLM can use the API docs without being mislead.
-
-</details>
-
-<details>
-<summary>Next-generation installation instructions</summary>
-
-**Owner:** Vincent Ge
-
-**Motivation:** We now own onboarding, wizard, and docs. They have a few problems:
-
-* They’re inconsistent. The information should be generally the exact same. You should be able to start in onboarding, move to docs, and then to wizard and see the same general instructions/approach. This builds trust and makes installation easier to follow.  
-* They’re hard to maintain. We have 3 copies of the same information.  
-* They lack clear checkpoints. No self-checking mechanisms that help readers/LLMs understand if they’re succeeding.
-
-**What we'll ship**
-
-* A standardized set of “instructions” for humans and machines. Similar to GitHub Spec-Kit, but less general. [See RFC](https://github.com/PostHog/meta/pull/362)  
-* A way to define clear checkpoints for humans and LLMs to follow. Including APIs and MCP tools if necessary.  
-* Website, monorepo, and wizard updates where applicable to consume this.
-
-**We'll know we're successful when**
-
-* A single source to update for instructions.  
-* LLMs and humans aren’t lost when they implement PostHog in their apps.  
-* Technical writing teams are jealous we built this first.
+**We'll know we're successful when:** 
+- User feedback maintains the high energy we expect
+- Adding new frameworks, skills, or products to the Wizard is straightforward
+- Other companies duplicate our approach
+- Wizard installs and PostHog activations increase 
 
 </details>
 
 <details>
-<summary>Next-generation wizard</summary>
+<summary>Platform docs: Overhaul the getting started section</summary>
 
-**Owner:** Danilo Campos
+**Owner:** <TeamMember name="Vincent Ge" photo /> <TeamMember name="Sarah Sanders" photo />
 
-**Motivation**: The wizard’s architecture is a dead-end. It’s too hard to maintain, and it can’t support more ambitious integrations in its current form. The code, prompts and context to support integrations are tightly coupled, making maintenance expensive. Error correction is non-existent, so our success comes down to luck. While that luck is overall good, with 80% or more wizard runs happy and healthy, there’s still thousands of people who end up with a bad outcome.
-
-**What we'll ship**
-
-* A wrapped Claude Code SDK CLI tool that uses our MCP for prompting and context provisioning, able to error correct its output in realtime.  
-* Fully-runnable example project code per framework
-
-**We'll know we're successful when**:
-
-* Users can’t believe how deep yet CORRECT our auto-integration is  
-* Feedback about poor integration experiences decreases dramatically  
-* We can easily support additional product integrations by adding high-level prompts and docs resources
-
-</details>
-
-<details>
-<summary>Make the error tracking docs even better</summary>
-
-**Owner:** Edwin Lim
-
-**Motivation**: I know I know. I think it’s worth investing a bit more time into raising the product docs bar from "very good" to "holy shit". I don’t think we’re far away now that we’ve built the *foundation* (Hari Seldon would be proud). We won’t get the chance to do this with other products, at least not for a long while. A lot of this work can be reused for other Q4 projects. 
-
-**What we’ll ship:** 
-
-* Flagship use-case guides, example app, more docs components, robust troubleshooting, cross-product tutorials, deep-dive blog post, etc.
-
-**We'll know we're successful when**:
-
-* Other product teams want their docs to look like error tracking docs  
-* Users mention how good the error tracking docs are
-
-</details>
-
-<details>
-<summary>Docs Markdown service</summary>
-
-**Owner:** Edwin Lim
-
-**Motivation**: AI agents need high-quality, focused context on demand in order to do all their work. LLMS.txt is actually an amazing dev tool instead of a AEO tool. Let’s turn all our docs into a context service. 
-
-**What we’ll ship:** 
-
-* Utility scripts or workflows that creates a versioned directory of our docs for download  
-* Multiple versions for different tokenized use cases (e.g., prose vs. just code snippets)
-
-**We'll know we're successful when**:
-
-* Agents like the Wizard or Claude Code perform better by using this context service
-
-</details>
-
-<details>
-<summary>Example apps library + AI commandments</summary>  
-
-**Owner:** Edwin Lim, Danilo Campos
-
-**Motivation**: We need example apps. Even before the AI agent craze, our platform is starved for runnable applications with PostHog integrations that developers can learn from. Now AI agents need example apps for context. 
+**Motivation:** The current [getting started section](https://posthog.com/docs/getting-started/install) of our platform docs hasn't been meaningfully updated in months. More urgently, it does a bad job of getting users onboarded to the Posthog *platform*. It narrowly focuses on installs, methods like capture and identify, and reverse proxies, but even these concepts are poorly explained together. We need content that provides stronger guidance for core Posthog concepts and a clearer sequence for the cross-product, cross-framework steps a developer needs to take to get up and running.
 
 **What we'll ship:** 
+- A complete content overhaul of the current [Install and configure](https://posthog.com/docs/getting-started/install) section 
+- Information architecture changes to reorganize the sidebar and existing content
+- An emphasis on the Wizard to demonstrate and guide PostHog onboarding
 
-* Example apps in multiple frameworks that are annotated with code comments   
-* Markdown file writeups that detail the application’s architecture, use cases,  and implementation for LLMs and humans to learn from  
-* End-to-end tests that verify the code is running even when PostHog SDKs update  
-* A maintained list of AI commandments: prompts with curated instructions for each example app that the agent can follow for best practices   
-* A docs component that quotes code snippets from the example apps, replacing ad-hoc code examples in the docs
-
-**We'll know we're successful when**:
-
-* Agents are performing better when using these example apps as context  
-* We're using the code   
-* Users mention how good the error tracking docs are
+**We'll know we're successful when:** 
+- It makes sense to read the platform getting started section *first*, before visiting individual product docs
+- Developers are able to see meaningful data and insights in PostHog by following the new getting started section
+- The Wizard is clearly positioned as the canonical, end-to-end onboarding path for the PostHog platform
 
 </details>
 
 <details>
-<summary>Docs for new products and launches</summary> 
+<summary>Platform docs: AI education and jobs-to-be-done</summary>
 
-**Owner:** Edwin Lim, Vincent Ge
+**Owner:** <TeamMember name="Edwin Lim" photo />
 
-**Motivation**: We're shipping new, flagship products this quarter – especially developer and AI-focused ones like Array, logs, and Max AI with deep research. Marketing team also has upcoming product launches. These all need high-quality docs to go well.
+**Motivation:** As hyped and exciting as the paradigm shift is, most developers are still learning the basics of what AI can do for them, their jobs, and their products. With an AI fleet that consists of the Wizard, PostHog AI, our MCP, LLMA, and Array, we are uniquely positioned to educate developers on how to apply AI to real use cases and jobs-to-be-done entirely within the PostHog ecosystem. Our platform docs can become an exemplary resource for AI usage and product building for engineers.
 
 **What we'll ship:** 
+- A new, strongly-opinionated section in the platform docs that primarily focuses on the use of AI and PostHog together
+- Learning tracks that are organized by developer jobs-to-be-done and use cases that span multiple products
+- Multi-product guides that heavily emphasize using AI tools like the Wizard, MCP, and PostHog AI to accelerate or automate
 
-* MVP set of docs for each new product; overview, getting started, concepts, guides, AI, and resources, etc.
-* Potentially ship a new AI docs section to unify our collection of AI dev tools like Max AI, Array, Wizard, MCP, and more
+**We'll know we're successful when:** 
+- Our customer-facing teams send these docs to prospects or users interested in PostHog
+- Developers associate the PostHog platform with practical, end-to-end AI usage for building products 
+- It spiritually connects with the Winning with PostHog and Getting HogPilled content
 
-**We'll know we're successful when**:
+</details>
 
-* Users adopt new products without friction
-* Positive feedback from users during and after each product launch
-* PostHog is better positioned as platform for dev tools and AI
+<details>
+<summary>Revamp product installations and getting started content</summary>
+
+**Owner:** <TeamMember name="Sarah Sanders" photo />
+
+**Motivation:** We have a new architecture for maintaining and rendering product installation content in our docs and in our app. But only LLMA is using it today. Migrating the other products will let us standardize installation content and directly feed the Wizard with the same Markdown source.
+
+**What we'll ship:** 
+- Move installation docs to new shared rendering architecture for product analytics, web analytics, session replay, feature flags, experiments, error tracking, data warehouse, and surveys
+- Update examples repo to fetch the new installation docs for the Wizard to use as context
+- Marginal improvements to the existing content or getting started sections
+
+**We'll know we're successful when:** 
+- Products have installation content in the new shared rendering architecture
+- The Wizard is able to auto-implement the migrated products using the Markdown source as context
+- The Wizard is able to auto-implement the migrated products in multiple languages
+- Onboarding content becomes more consistent and maintainable and engineers are happy to update it
+
+
+</details>
+
+<details>
+<summary>Improve docs for event setup like identify, session tracking, and properties</summary>
+
+**Owner:** <TeamMember name="Vincent Ge" photo />
+
+**Motivation:** Some of our most important docs are the most confusing 🫠. Creating a clean, sensible PostHog setup is highly dependent on not screwing up basic setups like identification and cross-platform session tracking. These steps are crucial to make any sense of your PostHog data. We need to improve these docs to make sure developers can get up and running with PostHog effectively.
+
+**What we'll ship:** 
+- Improvements to identify, person properties, schema management, and other core event setup docs
+- Update examples repo to fetch the new docs for the Wizard to use as context
+- Information architecture changes to reorganize the sidebar for product analytics docs
+
+**We'll know we're successful when:** 
+- Developers are less confused by the core mechanics for PostHog event setup 
+- The Wizard can use the new docs to auto-implement event setup
+
+</details>
+
+<details>
+<summary>10x-ing docs contributors</summary>
+
+**Owner:** <TeamMember name="Edwin Lim" photo /> <TeamMember name="Sarah Sanders" photo />
+
+**Motivation:** Take three. We have like 6+ new products being launched or going GA in 2026. We're also increasing our headcount by 200+, most of which is engineering. Product docs need to be self-serve in order to scale. Full stop. It's critical that we get engineers and other teams contributing docs regularly by making the process clear and easy for them. The team alone probably can't ship 2x what we're doing now, but we as a company absolutely can.
+
+**What we'll ship:** 
+- The best team handbook in the company that details how we write product docs
+- A collection of templates, resources, and runbooks to help product docs be self-serve
+- Tooling to maintain docs like a prose linter, automated PR reviews, and screenshot validation
+
+**We'll know we're successful when:** 
+- New products are launched with a strongline baseline of docs
+- Engineers have a clear understanding of how to write docs and loop in our team
+- An early system for monitoring docs quality and consistency
 
 </details>

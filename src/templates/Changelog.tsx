@@ -4,6 +4,8 @@ import utc from 'dayjs/plugin/utc'
 import { navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import { IconDownload, IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
+import { ChangelogEmojiReactions } from 'components/EmojiReactions'
+import { ChangelogPRMetadata } from 'components/ChangelogPRMetadata'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import OSButton from 'components/OSButton'
@@ -27,8 +29,22 @@ import { Heading } from 'components/Heading'
 import slugify from 'slugify'
 import { Video } from 'cloudinary-react'
 import { useLocation } from '@reach/router'
+import MediaPlayer from 'components/MediaPlayer'
 
 dayjs.extend(utc)
+
+const updateDescriptors = [
+    'mind-blowing',
+    'earth-shattering',
+    'game-changing',
+    'jaw-dropping',
+    'awe-inspiring',
+    'groundbreaking',
+    'revolutionary',
+    'show-stopping',
+    'spectacular',
+    'legendary',
+]
 
 type RoadmapNode = {
     id: number | string
@@ -94,6 +110,8 @@ type RoadmapNode = {
             }
         }
     }
+    githubUrls?: any
+    githubPRMetadata?: any
 }
 
 type ChangelogVideo = {
@@ -198,7 +216,7 @@ const Roadmap = ({
                 exit={{ x: width }}
                 transition={{ duration: isResizing || !!initialActiveRoadmap ? 0 : 0.3, ease: 'easeInOut' }}
             >
-                <div className="flex justify-between space-x-2 p-4 border-b border-primary">
+                <div className="flex justify-between space-x-2 px-4 pt-4 pb-3.5 border-b border-primary">
                     <div className="flex-1">
                         <h4 className="m-0 text-lg leading-tight">{roadmap.title}</h4>
                         <p className="m-0 opacity-50 text-sm mt-1">{dayjs.utc(roadmap.date).format('MMMM D, YYYY')}</p>
@@ -286,10 +304,19 @@ const Roadmap = ({
                         {roadmap.description && (
                             <div className="py-2 px-4">
                                 <Markdown>{roadmap.description}</Markdown>
+                                <div className="mt-8 mb-4 flex flex-row flex-wrap gap-1">
+                                    <ChangelogEmojiReactions roadmapId={roadmap.id} />
+                                </div>
                             </div>
                         )}
                     </ScrollArea>
                 </div>
+
+                {roadmap.githubPRMetadata && (
+                    <div className="px-4 pb-4 pt-4.5 grid grid-cols-3 gap-x-3 gap-y-2 text-sm bg-primary border-t border-primary">
+                        <ChangelogPRMetadata githubPRMetadata={roadmap.githubPRMetadata} />
+                    </div>
+                )}
 
                 {roadmap.cta?.url && (
                     <div className="mt-auto py-2 px-4 border-t border-primary">
@@ -338,6 +365,16 @@ interface RoadmapCardsProps {
     videos: ChangelogVideo[]
 }
 
+const ChangelogVideo = ({ videoId, title }: { videoId: string; title: string }) => {
+    const { appWindow } = useWindow()
+    const { setWindowTitle } = useApp()
+
+    useEffect(() => {
+        if (!appWindow) return
+        setWindowTitle(appWindow, title)
+    }, [])
+    return <MediaPlayer videoId={videoId} source="youtube" />
+}
 const RoadmapCards = ({
     startYear,
     endYear,
@@ -352,6 +389,7 @@ const RoadmapCards = ({
     initialActiveRoadmap,
     videos,
 }: RoadmapCardsProps) => {
+    const { addWindow } = useApp()
     // Two-week buckets need to preserve the same overall per-month width, so each card spans two former week widths.
     const width = 600
 
@@ -551,38 +589,34 @@ const RoadmapCards = ({
         return () => clearTimeout(timer)
     }, [periods, width])
 
-    // Map vertical scroll to horizontal scroll
-    useEffect(() => {
-        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
-        if (!viewport) return
-
-        const handleWheel = (e: WheelEvent) => {
-            const targetViewport =
-                e.target instanceof Element
-                    ? (e.target.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null)
-                    : null
-            const targetViewportChild = targetViewport?.querySelector('div') as HTMLElement | null
-
-            if (
-                targetViewport &&
-                targetViewportChild &&
-                targetViewport !== viewport &&
-                targetViewportChild.getBoundingClientRect().height > targetViewport.getBoundingClientRect().height
-            )
-                return
-
-            // Only handle vertical scrolling (deltaY)
-            if (e.deltaY !== 0) {
-                e.preventDefault()
-                viewport.scrollLeft += e.deltaY
-            }
+    const handlePlayVideo = (video: ChangelogVideo) => {
+        const size = {
+            width: 500,
+            height: 467,
         }
-
-        viewport.addEventListener('wheel', handleWheel, { passive: false })
-        return () => {
-            viewport.removeEventListener('wheel', handleWheel)
+        const appSettings = {
+            size: {
+                min: size,
+                max: size,
+                autoHeight: true,
+            },
         }
-    }, [])
+        addWindow(
+            <ChangelogVideo
+                videoId={video.videoId}
+                title={video.title}
+                newWindow
+                location={{ pathname: `changelog-video-${video.videoId}` }}
+                key={`changelog-video-${video.videoId}`}
+                appSettings={appSettings}
+                position={{
+                    x: window.innerWidth - size.width - 20,
+                    y: window.innerHeight - size.height - 20,
+                }}
+                size={size}
+            />
+        )
+    }
 
     return (
         <ScrollArea className="size-full [&>div>div]:size-full [&>div>div]:!flex">
@@ -610,7 +644,7 @@ const RoadmapCards = ({
                             ),
                         }))
                         const periodKey = `${periodData.year}-${periodData.month}-${periodData.period}`
-                        const periodVideos = videosByPeriod.get(periodKey) || []
+                        const periodVideo = videosByPeriod.get(periodKey)?.[0] || null
 
                         return (
                             <div
@@ -626,33 +660,41 @@ const RoadmapCards = ({
                                 }}
                             >
                                 <div className="w-full h-full flex flex-col bg-white dark:bg-dark rounded border border-primary overflow-hidden">
-                                    <div className="flex items-center justify-between p-4 border-b border-primary">
-                                        <h4 className="m-0 text-lg font-semibold">
-                                            {monthName} {periodData.year} - {periodLabel}
-                                        </h4>
-                                        <div className="size-7 flex items-center justify-center bg-accent rounded-full text-sm font-semibold">
-                                            {count}
+                                    <div className="flex items-center justify-between p-2 border-b border-primary gap-4">
+                                        <div className="pl-2">
+                                            <h4 className="m-0 text-lg font-semibold">
+                                                {monthName} {periodData.year} - {periodLabel}
+                                            </h4>
+                                            <p className="m-0 text-sm text-secondary">
+                                                {count}{' '}
+                                                {
+                                                    updateDescriptors[
+                                                        (periodData.month * 2 +
+                                                            periodData.year * 24 +
+                                                            periodData.period) %
+                                                            updateDescriptors.length
+                                                    ]
+                                                }{' '}
+                                                update{count !== 1 ? 's' : ''}
+                                            </p>
                                         </div>
+                                        {periodVideo && (
+                                            <button
+                                                onClick={() => handlePlayVideo(periodVideo)}
+                                                className="shrink-0 w-[140px] aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.01] active:scale-[0.99] transition-all duration-100"
+                                            >
+                                                <img
+                                                    src={`https://img.youtube.com/vi/${periodVideo.videoId}/hqdefault.jpg`}
+                                                    alt={periodVideo.title}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                                <div className="absolute inset-0 flex items-center justify-center">
+                                                    <span className="text-white text-2xl">▶</span>
+                                                </div>
+                                            </button>
+                                        )}
                                     </div>
                                     <div className="w-full flex-1 min-h-0 flex flex-col">
-                                        {periodVideos.length > 0 && (
-                                            <div className="border-b border-primary divide-y divide-primary bg-primary/20">
-                                                {periodVideos.map((video) => (
-                                                    <div key={video.id} className="p-2">
-                                                        <div className="aspect-video rounded border border-primary overflow-hidden w-full bg-black max-w-screen">
-                                                            <iframe
-                                                                title={video.title}
-                                                                src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
-                                                                loading="lazy"
-                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                allowFullScreen
-                                                                className="w-full h-full"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        )}
                                         <div className="grid grid-cols-2 h-full divide-x divide-primary min-h-0">
                                             {columns.map((column) => (
                                                 <div key={column.weekNumber} className="flex flex-col min-h-0">
@@ -680,20 +722,22 @@ const RoadmapCards = ({
                                                                         >
                                                                             <button
                                                                                 data-scheme="secondary"
-                                                                                className={`group w-full text-left py-2 px-4 flex justify-between gap-1 ${active
+                                                                                className={`group w-full text-left py-2 px-4 flex justify-between gap-1 ${
+                                                                                    active
                                                                                         ? 'bg-primary'
                                                                                         : 'hover:bg-primary'
-                                                                                    }`}
+                                                                                }`}
                                                                                 onClick={() =>
                                                                                     handleRoadmapClick(roadmap)
                                                                                 }
                                                                             >
                                                                                 <div>
                                                                                     <h5
-                                                                                        className={`m-0  text-[15px] leading-tight mb-1 ${active
+                                                                                        className={`m-0  text-[15px] leading-tight mb-1 ${
+                                                                                            active
                                                                                                 ? ''
                                                                                                 : 'group-hover:underline'
-                                                                                            }`}
+                                                                                        }`}
                                                                                     >
                                                                                         {roadmap.title}
                                                                                     </h5>
@@ -927,6 +971,10 @@ export default function Changelog({
         navigate('')
     }
 
+    const handleRoadmapClick = (roadmap: RoadmapNode) => {
+        setActiveRoadmap(roadmap)
+    }
+
     return (
         <>
             <SEO title="Changelog - PostHog" />
@@ -974,12 +1022,12 @@ export default function Changelog({
                         <div className={`min-h-0 flex-grow pt-2 ${hideEmpty ? 'mb-4' : ''}`}>
                             <RoadmapCards
                                 startYear={2020}
-                                endYear={2025}
+                                endYear={2026}
                                 roadmaps={filteredData}
                                 setPercentageOfScrollInView={setPercentageOfScrollInView}
                                 windowPercentageFromLeft={windowPercentageFromLeft}
                                 setRoadmapsPercentageFromLeft={setRoadmapsPercentageFromLeft}
-                                onRoadmapClick={setActiveRoadmap}
+                                onRoadmapClick={handleRoadmapClick}
                                 containerWidth={containerWidth}
                                 activeRoadmap={activeRoadmap}
                                 hideEmpty={hideEmpty}
@@ -997,7 +1045,7 @@ export default function Changelog({
                                 >
                                     <Timeline
                                         startYear={2020}
-                                        endYear={2025}
+                                        endYear={2026}
                                         data={roadmapsGrouped}
                                         onDrag={handleDrag}
                                         windowX={windowX}
