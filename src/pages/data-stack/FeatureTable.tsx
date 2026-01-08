@@ -18,7 +18,7 @@ export default function FeatureTable({ features }: FeatureTableProps): JSX.Eleme
         { name: '', width: '60px', align: 'center' as const },
     ]
 
-    const featureRows = features.map((feature) => ({
+    const featureRows = features?.map((feature) => ({
         cells: [
             { content: <span className="font-bold">{feature.title}</span> },
             { content: feature.description, className: 'text-sm' },
