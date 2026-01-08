@@ -36,11 +36,11 @@ Add the following dependencies to your `pom.xml`:
 
 </Step>
 
-<Step title="Get your project token" badge="required">
+<Step title="Get your project API key" badge="required">
 
-You'll need your PostHog project token to authenticate log requests. This is the same token you use for capturing events and exceptions.
+You'll need your PostHog project API key to authenticate log requests. This is the same API key you use for capturing events and exceptions.
 
-You can find your project token in [Project Settings](https://app.posthog.com/settings/project).
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project).
 
 </Step>
 
@@ -59,7 +59,7 @@ SdkLoggerProvider loggerProvider = SdkLoggerProvider.builder()
         BatchLogRecordProcessor.builder(
             OtlpHttpLogRecordExporter.builder()
                 .setEndpoint("https://us.i.posthog.com/i/v1/logs")
-                .addHeader("Authorization", "Bearer " + YOUR_PROJECT_TOKEN)
+                .addHeader("Authorization", "Bearer " + YOUR_PROJECT_API_KEY)
                 .build()
         ).build()
     )
@@ -68,11 +68,11 @@ SdkLoggerProvider loggerProvider = SdkLoggerProvider.builder()
 GlobalLoggerProvider.set(loggerProvider);
 ```
 
-Alternatively, you can pass the token as a query parameter:
+Alternatively, you can pass the API key as a query parameter:
 
 ```java
 OtlpHttpLogRecordExporter.builder()
-    .setEndpoint("https://us.i.posthog.com/i/v1/logs?token=" + YOUR_PROJECT_TOKEN)
+    .setEndpoint("https://us.i.posthog.com/i/v1/logs?token=" + YOUR_PROJECT_API_KEY)
     .build()
 ```
 
