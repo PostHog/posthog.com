@@ -33,7 +33,7 @@ In addition to the weekly sprint planning meeting on a Monday, we do a weekly te
 3. Review deals (use this <PrivateLink url="https://posthog.lightning.force.com/lightning/r/Report/00OVx000003qcc9MAA/view">Salesforce view</PrivateLink>) for this quarter by Commit -> Best Case -> Pipeline 
    - For "Commit", how could it possibly end up "closed lost?"
    - For "Best Case", how does it advance to "Commit" (or what's keeping it from doing so?)
-   - For "Pipeline", 1-2 opps you're excited about or want to share with the group
+   - For "Pipeline", 1-2 oops you're excited about or want to share with the group
 4. Outbound successes and failures
 
 > The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
