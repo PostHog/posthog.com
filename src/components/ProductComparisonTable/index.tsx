@@ -77,6 +77,10 @@ import { uxcam } from '../../hooks/competitorData/uxcam'
 import { vwo } from '../../hooks/competitorData/vwo'
 import { walkme } from '../../hooks/competitorData/walkme'
 import { whatfix } from '../../hooks/competitorData/whatfix'
+import { zapier } from '../../hooks/competitorData/zapier'
+import { make } from '../../hooks/competitorData/make'
+import { customer_io } from '../../hooks/competitorData/customer_io'
+import { brevo } from '../../hooks/competitorData/brevo'
 
 // Feature definition imports
 import { cdpFeatures } from '../../hooks/featureDefinitions/cdp'
@@ -95,6 +99,7 @@ import { revenueAnalyticsFeatures } from '../../hooks/featureDefinitions/revenue
 import { sessionReplayFeatures } from '../../hooks/featureDefinitions/session_replay'
 import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
 import { webAnalyticsFeatures } from '../../hooks/featureDefinitions/web_analytics'
+import { workflowsFeatures } from '../../hooks/featureDefinitions/workflows'
 
 interface RowConfig {
     // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
@@ -147,6 +152,7 @@ export default function ProductComparisonTable({
         session_replay: sessionReplayFeatures,
         surveys: surveysFeatures,
         web_analytics: webAnalyticsFeatures,
+        workflows: workflowsFeatures,
     }
 
     // Resolve nested nodes by dot-path
@@ -648,6 +654,10 @@ export default function ProductComparisonTable({
         vwo,
         walkme,
         whatfix,
+        zapier,
+        make,
+        customer_io,
+        brevo,
     }
 
     // Helper to get feature value from competitor data

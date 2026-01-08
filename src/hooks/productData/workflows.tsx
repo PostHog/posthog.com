@@ -304,26 +304,27 @@ export const workflows = {
         },
         companies: [
             {
-                name: 'Langfuse',
-                key: 'langfuse',
-                // link: '/blog/posthog-vs-langfuse',
+                name: 'Zapier',
+                key: 'zapier',
             },
             {
-                name: 'Langsmith',
-                key: 'langsmith',
-                // link: '/blog/posthog-vs-langsmith',
+                name: 'Make',
+                key: 'make',
             },
             {
-                name: 'Helicone',
-                key: 'helicone',
-                // link: '/blog/posthog-vs-helicone',
+                name: 'Customer.io',
+                key: 'customer_io',
+            },
+            {
+                name: 'Brevo',
+                key: 'brevo',
             },
             {
                 name: 'PostHog',
                 key: 'posthog',
             },
         ],
-        rows: ['llm_analytics'],
+        rows: ['workflows'],
         excluded_sections: ['platform'],
     },
     pairsWith: [

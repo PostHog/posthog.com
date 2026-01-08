@@ -500,6 +500,23 @@ export const posthog = {
                 trace_visualization: true,
             },
         },
+        workflows: {
+            available: true,
+            features: {
+                real_time_triggers: true,
+                email_editor: true,
+                cohort_targeting: true,
+                native_event_triggers: true,
+                user_identity: true,
+                user_properties: true,
+                branching_logic: true,
+                no_data_syncing: true,
+                unified_analytics: true,
+                experiment_triggers: true,
+                webhook_actions: true,
+                run_based_pricing: true,
+            },
+        },
         data_warehouse: {
             available: true,
             pricing: {
