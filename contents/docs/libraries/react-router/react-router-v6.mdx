@@ -1,0 +1,224 @@
+---
+title: React Router V6
+sidebarTitle: React Router V6
+sidebar: Docs
+showTitle: true
+github: 'https://github.com/PostHog/posthog-js'
+platformLogo: reactRouter
+features:
+  eventCapture: true
+  userIdentification: true
+  autoCapture: true
+  sessionRecording: true
+  featureFlags: true
+  groupAnalytics: true
+  surveys: true
+  llmAnalytics: false
+  errorTracking: true
+tableOfContents: [
+    {
+        url: 'install-client-side-sdks',
+        value: 'Install client-side SDKs',
+        depth: 1,
+    },
+    {
+        url: 'add-your-environment-variables',
+        value: 'Add your environment variables',
+        depth: 1,
+    },
+    {
+        url: 'add-the-posthogprovider-to-your-app',
+        value: 'Add the PostHogProvider to your app',
+        depth: 1,
+    },
+    {
+        url: 'verify-client-side-events-are-captured',
+        value: 'Verify client-side events are captured',
+        depth: 1,
+    },
+    {
+        url: 'access-posthog-methods',
+        value: 'Access PostHog methods',
+        depth: 1,
+    },
+    {
+        url: 'identify-your-user',
+        value: 'Identify your user',
+        depth: 1,
+    },
+    {
+        url: 'create-an-error-boundary',
+        value: 'Create an error boundary',
+        depth: 1,
+    },
+    {
+        url: 'tracking-element-visibility',
+        value: 'Tracking element visibility',
+        depth: 1,
+    },
+    {
+        url: 'set-up-server-side-analytics',
+        value: 'Set up server-side analytics',
+        depth: 1,
+    },
+    {
+        url: 'next-steps',
+        value: 'Next steps',
+        depth: 1,
+    },
+]
+---
+
+
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallReactPackageManagers from "../../integrate/_snippets/install-react-package-managers.mdx"
+import InstallNodePackageManagers from "../../integrate/_snippets/install-node-package-managers.mdx"
+import UsageWarning from "./_snippets/usage-warning.mdx"
+import StepInstallClientSdks from "./_snippets/step-install-client-sdks.mdx"
+import StepEnvVariables from "./_snippets/step-env-variables.mdx"
+import StepVerifyClientEvents from "./_snippets/step-verify-client-events.mdx"
+import StepAccessPostHogMethods from "./_snippets/step-access-posthog-methods.mdx"
+import StepIdentifyUser from "./_snippets/step-identify-user.mdx"
+import StepNextSteps from "./_snippets/step-next-steps.mdx"
+import TypeErrorSection from "./_snippets/typeerror-section.mdx"
+import TrackingElementVisibility from "./_snippets/tracking-element-visibility.mdx"
+
+This guide walks you through setting up PostHog for React Router V6. If you're using React Router v7, find the guide for that mode in the [React Router page](/docs/libraries/react-router). If you're using React with another framework, go to the [React integration guide](/docs/libraries/react).
+
+<Steps>
+
+<Step title="Install client-side SDKs" badge="required">
+
+<StepInstallClientSdks />
+
+<InstallReactPackageManagers />
+
+</Step>
+
+<Step title="Add your environment variables" badge="required">
+
+<StepEnvVariables />
+
+</Step>
+
+<Step title="Add the PostHogProvider to your app" badge="required">
+
+In declarative mode, you'll need to wrap your `BrowserRouter` with the `PostHogProvider` context. This passes an initialized PostHog client to your app.
+
+```tsx file=src/main.tsx
+import { StrictMode } from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router";
+
+import posthog from 'posthog-js'; // +
+import { PostHogErrorBoundary, PostHogProvider } from '@posthog/react' // +
+
+// Initialize PostHog
+posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, { // +
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST, // +
+  defaults: '2025-11-30', // +
+}); // +
+
+const root = document.getElementById("root");
+
+ReactDOM.createRoot(root).render(
+  <StrictMode>
+    {/* Pass PostHog client through PostHogProvider */}
+    <PostHogProvider client={posthog}> // +
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Root />}>
+        {/* ... Your routes ... */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
+    </PostHogProvider> // +
+  </StrictMode>,
+);
+```
+
+This initializes PostHog and passes it to your app through the `PostHogProvider` context.
+
+<details>
+<summary>TypeError: Cannot read properties of undefined</summary>
+
+<TypeErrorSection />
+
+</details>
+
+</Step>
+
+<Step checkpoint title="Verify client-side events are captured" subtitle="Confirm that you can capture client-side events and see them in your PostHog project">
+
+<StepVerifyClientEvents />
+
+</Step>
+
+<Step title="Access PostHog methods" badge="required">
+
+<StepAccessPostHogMethods />
+
+</Step>
+
+<Step title="Identify your user" badge="recommended">
+
+<StepIdentifyUser />
+
+</Step>
+
+<Step title="Create an error boundary" badge="recommended">
+
+PostHog can capture exceptions thrown in your app through an error boundary. PostHog provides a `PostHogErrorBoundary` component that you can use to capture exceptions. You can wrap your app with this component to capture exceptions.
+
+```tsx
+ReactDOM.createRoot(root).render(
+  <StrictMode>
+    <PostHogProvider client={posthog}>
+    <PostHogErrorBoundary> // +
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Root />}>
+          {/* ... Your routes ... */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
+    </PostHogErrorBoundary> // +
+    </PostHogProvider>
+  </StrictMode>,
+);
+```
+
+This automatically captures exceptions thrown in your React Router app using the `posthog.captureException()` method.
+
+</Step>
+
+<Step title="Tracking element visibility" badge="recommended">
+
+<TrackingElementVisibility />
+
+</Step>
+
+<Step title="Set up server-side analytics" badge="recommended">
+
+Now that you've set up PostHog for React Router V7 in declarative mode, you can continue to set up server-side analytics. You can find our other SDKs in the [SDKs page](/docs/libraries).
+
+To help PostHog track your user sessions across the client and server, you'll need to add the `__add_tracing_headers: ['your-backend-domain1.com', 'your-backend-domain2.com', ...]` option to your PostHog initialization:
+
+```tsx
+posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  defaults: '2025-11-30',
+  __add_tracing_headers: [ window.location.host, 'localhost' ], // +
+});
+```
+
+This adds the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers to your requests, which you can later use on the server-side.
+
+</Step>
+
+<Step title="Next steps" badge="recommended">
+
+<StepNextSteps />
+
+</Step>
+</Steps>
