@@ -2,12 +2,12 @@ import React from 'react'
 import { getAndroidSteps } from 'onboarding/product-analytics/android.tsx'
 import { OnboardingContentWrapper, useMDXComponents } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './pa-shared-helpers'
-import { dedent } from '../../../../../src/utils'
+import { dedent } from '~/utils'
 
 const AndroidInstallationContent = () => {
-    const { Steps, Step, CodeBlock, Markdown, snippets, Tab } = useMDXComponents()
+    const { Steps, Step, CodeBlock, Markdown } = useMDXComponents()
 
-    const steps = addNextStepsStep(getAndroidSteps(CodeBlock, Markdown, dedent, snippets, Tab))
+    const steps = addNextStepsStep(getAndroidSteps(CodeBlock, Markdown, dedent))
 
     return (
         <Steps>

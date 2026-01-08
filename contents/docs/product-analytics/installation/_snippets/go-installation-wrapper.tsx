@@ -2,12 +2,12 @@ import React from 'react'
 import { getGoSteps } from 'onboarding/product-analytics/go.tsx'
 import { OnboardingContentWrapper, useMDXComponents } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './pa-shared-helpers'
-import { dedent } from '../../../../../src/utils'
+import { dedent } from '~/utils'
 
 const GoInstallationContent = () => {
-    const { Steps, Step, CodeBlock, Markdown, snippets, Tab } = useMDXComponents()
+    const { Steps, Step, CodeBlock, Markdown } = useMDXComponents()
 
-    const steps = addNextStepsStep(getGoSteps(CodeBlock, Markdown, dedent, snippets, Tab))
+    const steps = addNextStepsStep(getGoSteps(CodeBlock, Markdown, dedent))
 
     return (
         <Steps>

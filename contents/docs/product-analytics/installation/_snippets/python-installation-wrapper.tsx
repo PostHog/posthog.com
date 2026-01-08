@@ -3,12 +3,12 @@ import { getPythonSteps } from 'onboarding/product-analytics/python.tsx'
 import { OnboardingContentWrapper, useMDXComponents } from 'components/Docs/OnboardingContentWrapper'
 import { PythonEventCapture } from 'onboarding/product-analytics/_snippets/python-event-capture.tsx'
 import { addNextStepsStep } from './pa-shared-helpers'
-import { dedent } from '../../../../../src/utils'
+import { dedent } from '~/utils'
 
 const PythonInstallationContent = () => {
-    const { Steps, Step, CodeBlock, Markdown, snippets, Tab } = useMDXComponents()
+    const { Steps, Step, CodeBlock, Markdown, CalloutBox, snippets } = useMDXComponents()
 
-    const steps = addNextStepsStep(getPythonSteps(CodeBlock, Markdown, dedent, snippets, Tab))
+    const steps = addNextStepsStep(getPythonSteps(CodeBlock, Markdown, CalloutBox, dedent, snippets))
 
     return (
         <Steps>
