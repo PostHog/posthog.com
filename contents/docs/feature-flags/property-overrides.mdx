@@ -14,13 +14,13 @@ Property overrides let you provide person or group properties directly to PostHo
 
 Property overrides are useful when:
 
-1. **Properties are set elsewhere**: Properties might be set from different parts of your application (like a backend service or another client), and your frontend doesn't know if they've been processed. Additionally, when multiple clients set the same property, the value in PostHog can also change unpredictably as updates arrive from different sources.
+1. **Properties are set elsewhere**: Properties can come from different parts of your application, like a backend service or another client. Your frontend might not know if they have been processed. If several clients set the same property, the value in PostHog can change unexpectedly as updates arrive from various sources.
 
-2. **Values are transient or context-specific**: You may need to evaluate flags based on values that shouldn't be stored on the person record, such as session-specific context, derived values, or data you'd prefer not to persist.
+2. **Values are transient or context-specific**: You might need to evaluate flags using values that shouldn't be saved on the person record. This includes session-specific context, derived values, or information you prefer not to retain.
 
-3. **Testing and debugging**: You may want to test flag behavior with specific property values without modifying the actual user's properties.
+3. **Testing and debugging**: You can test flag behavior using specific property values. This way, you won't need to change the actual user's properties.
 
-Property overrides bypass the server-stored properties and instead send the properties directly with the flag evaluation request, ensuring consistent and immediate results.
+Property overrides bypass server-stored properties. They send properties directly with the flag evaluation request. This way, results are immediate and consistent.
 
 ## Automatic overrides in client-side SDKs
 
@@ -139,7 +139,7 @@ Client-side SDKs can automatically include device and environment properties in 
 
 ### Web SDK
 
-By default, the web SDK sends only initial session properties with flag requests:
+By default, the web SDK sends initial session properties with flag requests:
 
 | Property | Description |
 |----------|-------------|
@@ -203,7 +203,7 @@ This adds the following properties to flag requests:
 
 ### Mobile SDKs
 
-Mobile SDKs (React Native, iOS, and Android) include common device and app properties in every feature flag evaluation request. This behavior is controlled by the `setDefaultPersonProperties` configuration option, which defaults to `true`.
+Mobile SDKs (React Native, iOS, and Android) include common device and app properties in every feature flag evaluation request. The `setDefaultPersonProperties` configuration option controls this behavior and defaults to `true`.
 
 | Property | Description |
 |----------|-------------|
@@ -416,7 +416,7 @@ PostHog.resetGroupPropertiesForFlags()
 
 First, enable browser properties using the customization (see [Including browser and device properties](#including-browser-and-device-properties) above). Then:
 
-1. Create a feature flag in PostHog
+1. [Create a feature flag in PostHog](/docs/feature-flags/creating-feature-flags)
 2. Add filter conditions: `$browser` equals `Chrome` AND `$device_type` equals `Desktop`
 3. The flag automatically matches Chrome desktop users
 
@@ -424,7 +424,7 @@ First, enable browser properties using the customization (see [Including browser
 
 With `setDefaultPersonProperties` enabled (the default), you can target app versions without any additional code:
 
-1. Create a feature flag in PostHog
+1. [Create a feature flag in PostHog](/docs/feature-flags/creating-feature-flags)
 2. Add a filter condition: `$app_version` equals `2.0.0`
 3. The flag automatically matches users on version 2.0.0
 
@@ -448,7 +448,7 @@ PostHog's servers automatically derive GeoIP properties from the user's IP addre
 
 Create a feature flag targeting users in specific countries:
 
-1. Create a feature flag in PostHog
+1. [Create a feature flag in PostHog](/docs/feature-flags/creating-feature-flags)
 2. Add a filter condition: `$geoip_country_code` equals `US`
 3. The flag automatically matches users accessing from the United States
 
