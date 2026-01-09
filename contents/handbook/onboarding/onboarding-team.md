@@ -28,6 +28,16 @@ Since we primarily focus on customers who've signed up and have a forecasted bil
 -   Not signed up/generated a bill, but have contacted sales.
 -   Are early-stage startups on the startup plan with no billing/low credit usage (<$500/mo).
 
+### Merch store consultation
+
+Customers who normally fall outside our scope still have a chance to get help! They can buy an Onboarding consultation [via our merch store](https://posthog.com/merch?product=30-min-onboarding-consultation).
+
+After making the purchase, the customer gets a link to book a meeting, and they can contact our Billing team if they can't find an appropriate time slot. The billing team handles issuing credits/refunds accordingly. 
+
+The booking link has no expiry, so there's no need to follow up with the customer if they haven't booked the call instantly - they can do so at the most convenient time.
+
+If someone did book the meeting but didn't show up at a consultation, follow up with the customer to offer a meeting at another time. Set a task reminder in Vitally, and if we don't hear back within 1-2 weeks, offer issuing credits for the missed meeting.
+
 ### Tooling
 
 Check out the list of [shared tools](https://posthog.com/handbook/growth/sales/sales-and-cs-tools).
