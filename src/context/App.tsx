@@ -13,7 +13,7 @@ import useDataPipelinesNav from '../navs/useDataPipelinesNav'
 import initialMenu from '../navs'
 import { useToast } from './Toast'
 import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
-import { themeOptions } from '../hooks/useTheme'
+import { cycleToNextWallpaper } from '../utils/wallpaper'
 import ContactSales from 'components/ContactSales'
 import qs from 'qs'
 import usePostHog from '../hooks/usePostHog'
@@ -266,6 +266,7 @@ export const Context = createContext<AppContextType>({
         screensaverDisabled: false,
         clickBehavior: 'double',
         performanceBoost: false,
+        cycleWallpaper: false,
     },
     updateSiteSettings: () => {},
     openNewChat: () => {},
@@ -1128,6 +1129,7 @@ export interface SiteSettings {
         | '2001-bliss'
         | 'parade'
         | 'coding-at-night'
+    cycleWallpaper?: boolean
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
@@ -1146,6 +1148,7 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         wallpaper: 'keyboard-garden',
         clickBehavior: 'double',
         performanceBoost: false,
+        cycleWallpaper: false,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
         ...(!lastReset ? { experience: 'posthog' } : {}),
     }
@@ -1920,16 +1923,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 e.preventDefault()
                 e.stopPropagation()
 
-                // Get current wallpaper index
-                const currentIndex = themeOptions.findIndex((theme) => theme.value === siteSettings.wallpaper)
-                // Cycle to next wallpaper (wrap around to first if at end)
-                const nextIndex = (currentIndex + 1) % themeOptions.length
-                const nextWallpaper = themeOptions[nextIndex]
-
-                updateSiteSettings({
-                    ...siteSettings,
-                    wallpaper: nextWallpaper.value as SiteSettings['wallpaper'],
-                })
+                const nextWallpaper = cycleToNextWallpaper(siteSettings, updateSiteSettings)
 
                 // Add toast notification
                 addToast({
