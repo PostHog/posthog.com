@@ -83,7 +83,7 @@ It's also totally fine to ask a customer questions over email in advance of the 
 > - Who owns that data stack? Do you have a data team or data engineers?
 > - Who will be the consumers of PostHog data? How are they currently answering their questions, and how easy is it for them to do so with existing tooling?
 
-If you're pretty sure that they should be qualified out of our sales process, you should still be helpful over email - some customers just use the form to get in touch and don't want to actually have a demo (e.g. they have a billing question or are asking about compliance things like HIPAA.)
+If you're pretty sure that they should be qualified out of our sales process, you should still be helpful over email - some customers just use the form to get in touch and don't want to actually have a demo (e.g. they have a billing question or are asking about compliance things like HIPAA.) There is a [Claude skill](https://drive.google.com/file/d/1tGuKDf6nbG5vPVWkQRntkYkXBsRpKSLr/view?usp=drive_link) that can help draft genuinely helpful responses to folks like these - it will put together helpful resources from our docs and blog posts that can help customers get started, even if they don't qualify for a call with a salesperson.
 
 #### Requests for Proposals (RFPs)
 

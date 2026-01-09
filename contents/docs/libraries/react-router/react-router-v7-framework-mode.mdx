@@ -1,0 +1,309 @@
+---
+title: React Router V7 framework mode (Remix V3)
+sidebarTitle: React Router V7 framework mode
+sidebar: Docs
+showTitle: true
+github: 'https://github.com/PostHog/posthog-js'
+tableOfContents: [
+    {
+        url: 'install-client-side-sdks',
+        value: 'Install client-side SDKs',
+        depth: 1,
+    },
+    {
+        url: 'add-your-environment-variables',
+        value: 'Add your environment variables',
+        depth: 1,
+    },
+    {
+        url: 'add-the-posthogprovider-to-your-app',
+        value: 'Add the PostHogProvider to your app',
+        depth: 1,
+    },
+    {
+        url: 'verify-client-side-events-are-captured',
+        value: 'Verify client-side events are captured',
+        depth: 1,
+    },
+    {
+        url: 'access-posthog-methods',
+        value: 'Access PostHog methods',
+        depth: 1,
+    },
+    {
+        url: 'identify-your-user',
+        value: 'Identify your user',
+        depth: 1,
+    },
+    {
+        url: 'create-an-error-boundary',
+        value: 'Create an error boundary',
+        depth: 1,
+    },
+    {
+        url: 'tracking-element-visibility',
+        value: 'Tracking element visibility',
+        depth: 1,
+    },
+    {
+        url: 'install-server-side-sdks',
+        value: 'Install server-side SDKs',
+        depth: 1,
+    },
+    {
+        url: 'create-a-server-side-middleware',
+        value: 'Create a server-side middleware',
+        depth: 1,
+    },
+    {
+        url: 'verify-server-side-events-are-captured',
+        value: 'Verify server-side events are captured',
+        depth: 1,
+    },
+    {
+        url: 'next-steps',
+        value: 'Next steps',
+        depth: 1,
+    },
+]
+platformLogo: reactRouter
+features:
+  eventCapture: true
+  userIdentification: true
+  autoCapture: true
+  sessionRecording: true
+  featureFlags: true
+  groupAnalytics: true
+  surveys: true
+  llmAnalytics: false
+  errorTracking: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallReactPackageManagers from "../../integrate/_snippets/install-react-package-managers.mdx"
+import InstallNodePackageManagers from "../../integrate/_snippets/install-node-package-managers.mdx"
+import UsageWarning from "./_snippets/usage-warning.mdx"
+import StepInstallClientSdks from "./_snippets/step-install-client-sdks.mdx"
+import StepEnvVariables from "./_snippets/step-env-variables.mdx"
+import StepVerifyClientEvents from "./_snippets/step-verify-client-events.mdx"
+import StepAccessPostHogMethods from "./_snippets/step-access-posthog-methods.mdx"
+import StepIdentifyUser from "./_snippets/step-identify-user.mdx"
+import StepNextSteps from "./_snippets/step-next-steps.mdx"
+import TypeErrorSection from "./_snippets/typeerror-section.mdx"
+import TrackingElementVisibility from "./_snippets/tracking-element-visibility.mdx"
+
+This guide walks you through setting up PostHog for React Router V7 in framework mode. If you're using React Router in another mode, find the guide for that mode in the [React Router page](/docs/libraries/react-router). If you're using React with another framework, go to the [React integration guide](/docs/libraries/react).
+
+<Steps>
+
+<Step title="Install client-side SDKs" badge="required">
+
+<StepInstallClientSdks />
+
+<InstallReactPackageManagers />
+
+In framework mode, you'll also need to set `posthog-js` and `@posthog/react` as external packages in your `vite.config.ts` file to avoid SSR errors.
+
+```ts file=vite.config.ts
+// ... imports
+
+export default defineConfig({
+  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  ssr: {
+    noExternal: ['posthog-js', '@posthog/react']
+  }
+});
+```
+
+</Step>
+
+<Step title="Add your environment variables" badge="required">
+
+<StepEnvVariables />
+
+</Step>
+
+<Step title="Add the PostHogProvider to your app" badge="required">
+
+In framework mode, your app enters from the `app/entry.client.tsx` file. In this file, you'll need to initialize the PostHog SDK and pass it to your app through the `PostHogProvider` context.
+
+```tsx file=app/entry.client.tsx
+import { startTransition, StrictMode } from "react";
+import { hydrateRoot } from "react-dom/client";
+import { HydratedRouter } from "react-router/dom";
+
+import posthog from 'posthog-js'; // +
+import { PostHogProvider } from '@posthog/react'  // +
+
+posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, { // +
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST, // +
+  defaults: '2025-11-30', // +
+  __add_tracing_headers: [ window.location.host, 'localhost' ], // +
+}); // +
+
+
+startTransition(() => {
+  hydrateRoot(
+    document,
+    {/* Pass PostHog client through PostHogProvider */}
+    <PostHogProvider client={posthog}> // +
+      <StrictMode>
+        <HydratedRouter />
+      </StrictMode>
+    </PostHogProvider>, // +
+  );
+});
+```
+
+To help PostHog track your user sessions across the client and server, you'll need to add the `__add_tracing_headers: ['your-backend-domain1.com', 'your-backend-domain2.com', ...]` option to your PostHog initialization. This adds the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers to your requests, which we'll later use on the server-side.
+
+<details>
+<summary>TypeError: Cannot read properties of undefined</summary>
+
+<TypeErrorSection />
+
+</details>
+
+</Step>
+
+<Step checkpoint title="Verify client-side events are captured" subtitle="Confirm that you can capture client-side events and see them in your PostHog project">
+
+<StepVerifyClientEvents />
+
+</Step>
+
+<Step title="Access PostHog methods" badge="required">
+
+<StepAccessPostHogMethods />
+
+</Step>
+
+<Step title="Identify your user" badge="recommended">
+
+<StepIdentifyUser />
+
+</Step>
+
+<Step title="Create an error boundary" badge="recommended">
+
+PostHog can capture exceptions thrown in your app through an error boundary. React Router in framework mode has a built-in error boundary that you can use to capture exceptions. You can create an error boundary by exporting `ErrorBoundary` from your `app/root.tsx` file.
+
+```tsx file=app/root.tsx
+import { usePostHog } from '@posthog/react'
+
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  const posthog = usePostHog();
+  posthog?.captureException(error);
+
+  // other error handling code...
+  return (
+    <div>
+      <h1>Something went wrong</h1>
+      <p>{error.message}</p>
+    </div>
+  );
+}
+```
+
+This automatically captures exceptions thrown in your React Router app using the `posthog.captureException()` method.
+
+</Step>
+
+<Step title="Tracking element visibility" badge="recommended">
+
+<TrackingElementVisibility />
+
+</Step>
+
+<Step title="Install server-side SDKs" badge="recommended">
+
+Install the [PostHog Node SDK](/docs/libraries/node) using your package manager. This is the SDK you'll use to capture server-side events.
+
+<InstallNodePackageManagers />
+
+</Step>
+
+<Step title="Create a server-side middleware" badge="recommended">
+
+Next, create a server-side middleware to help you capture server-side events. This middleware helps you achieve the following:
+- Initialize a PostHog client
+- Fetch the session and distinct ID from the `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID` headers and pass them to your request as a [context](/docs/libraries/node#contexts). This automatically identifies the user and session for you in all subsequent event captures.
+- Calls `shutdown()` on the PostHog client to ensure all events are sent before the request is completed.
+
+```ts file=app/lib/posthog-middleware.ts
+import { PostHog } from "posthog-node";
+import type { RouterContextProvider } from "react-router";
+import type { Route } from "../+types/root";
+
+export interface PostHogContext extends RouterContextProvider {
+  posthog?: PostHog;
+}
+
+export const posthogMiddleware: Route.MiddlewareFunction = async ({ request, context }, next) => {
+  const posthog = new PostHog(process.env.VITE_PUBLIC_POSTHOG_KEY!, {
+    host: process.env.VITE_PUBLIC_POSTHOG_HOST!,
+    flushAt: 1,
+    flushInterval: 0,
+  });
+
+  const sessionId = request.headers.get('X-POSTHOG-SESSION-ID');
+  const distinctId = request.headers.get('X-POSTHOG-DISTINCT-ID');
+
+  (context as PostHogContext).posthog = posthog;
+
+  const response = await posthog.withContext(
+    { sessionId: sessionId ?? undefined, distinctId: distinctId ?? undefined },
+    next
+  );
+
+  await posthog.shutdown().catch(() => {});
+
+  return response;
+};
+```
+
+Then, you'll need to register the middleware in your app in the `app/root.tsx` file by exporting it in the `Route.MiddlewareFunction[]` array.
+
+```tsx file=app/root.tsx
+import { posthogMiddleware } from './lib/posthog-middleware';
+
+export const middleware: Route.MiddlewareFunction[] = [
+  posthogMiddleware,
+  // other middlewares...
+];
+```
+
+</Step>
+
+<Step checkpoint title="Verify server-side events are captured" subtitle="Confirm that you can capture server-side events and see them in your PostHog project">
+
+At this point, you should be able to capture server-side events and see them in your PostHog project. 
+
+In a route, you can access the PostHog client from the context and capture an event. The middleware assigns the session ID and the distinct ID. This ensures that the system associates events with the correct user and session.
+
+```tsx file=app/routes/api.checkout.ts
+import type { PostHogContext } from "../lib/posthog-middleware";
+
+export async function action({ request, context }: Route.ActionArgs) {
+  const body = await request.json();
+  // ... existing code ...
+
+  // Access the PostHog client from the context and capture an event
+  const posthog = (context as PostHogContext).posthog;
+  posthog?.capture({ event: 'checkout_completed' });
+  
+  return Response.json({ 
+    success: true, 
+    // ... existing code ...
+  });
+}
+```
+</Step>
+
+<Step title="Next steps" badge="recommended">
+
+<StepNextSteps />
+
+</Step>
+
+</Steps>

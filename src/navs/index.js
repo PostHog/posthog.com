@@ -411,8 +411,8 @@ export const dataPipelines = {
         },
 
         {
-            name: 'Troubleshooting and FAQs',
-            url: '/docs/cdp/common-questions',
+            name: 'Troubleshooting',
+            url: '/docs/cdp/troubleshooting',
             icon: 'IconQuestion',
             color: 'blue',
             featured: true,
@@ -420,6 +420,12 @@ export const dataPipelines = {
         {
             name: 'Using Fivetran, Airbyte or other ETL tools with PostHog',
             url: '/docs/cdp/fivetran-airbyte',
+        },
+        {
+            name: 'Changelog',
+            url: '/docs/cdp/changelog',
+            icon: 'IconRocket',
+            color: 'purple',
         },
     ],
 }
@@ -836,6 +842,24 @@ export const handbookSidebar = [
                     {
                         name: 'Writing HogQL queries in Python',
                         url: '/handbook/engineering/databases/hogql-python',
+                    },
+                ],
+            },
+            {
+                name: 'SDKs',
+                url: '/handbook/engineering/sdks',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/engineering/sdks',
+                    },
+                    {
+                        name: 'Support rotation',
+                        url: '/handbook/engineering/sdks/support-rotation',
+                    },
+                    {
+                        name: 'Releases',
+                        url: '/handbook/engineering/sdks/releases',
                     },
                 ],
             },
@@ -1279,6 +1303,10 @@ export const handbookSidebar = [
                 name: 'How we work',
                 url: '',
                 children: [
+                    {
+                        name: 'Technical support SMEs',
+                        url: '/handbook/support/support-smes',
+                    },
                     {
                         name: 'Support zero weeks',
                         url: '/handbook/support/support-zero',
@@ -1943,6 +1971,10 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/persistence',
                                 },
                                 {
+                                    name: 'Types',
+                                    url: '/docs/libraries/js/types',
+                                },
+                                {
                                     name: 'Reference',
                                     url: '/docs/references/posthog-js',
                                 },
@@ -2103,10 +2135,6 @@ export const docsMenu = {
                             url: '/docs/libraries/astro',
                         },
                         {
-                            name: 'Bubble',
-                            url: '/docs/libraries/bubble',
-                        },
-                        {
                             name: 'Cloudflare Workers',
                             url: '/docs/libraries/cloudflare-workers',
                         },
@@ -2123,16 +2151,8 @@ export const docsMenu = {
                             url: '/docs/libraries/flask',
                         },
                         {
-                            name: 'Framer',
-                            url: '/docs/libraries/framer',
-                        },
-                        {
                             name: 'Gatsby',
                             url: '/docs/libraries/gatsby',
-                        },
-                        {
-                            name: 'Google Tag Manager',
-                            url: '/docs/libraries/google-tag-manager',
                         },
                         {
                             name: 'Hono',
@@ -2165,16 +2185,73 @@ export const docsMenu = {
                             ],
                         },
                         {
-                            name: 'n8n',
-                            url: '/docs/libraries/n8n',
-                        },
-                        {
                             name: 'Phoenix',
                             url: '/docs/libraries/phoenix',
                         },
                         {
+                            name: 'React Router',
+                            url: '/docs/libraries/react-router',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/libraries/react-router',
+                                },
+                                {
+                                    name: 'V7 Framework mode',
+                                    url: '/docs/libraries/react-router/react-router-v7-framework-mode',
+                                },
+                                {
+                                    name: 'V7 Declarative mode',
+                                    url: '/docs/libraries/react-router/react-router-v7-declarative-mode',
+                                },
+                                {
+                                    name: 'V7 Data mode',
+                                    url: '/docs/libraries/react-router/react-router-v7-data-mode',
+                                },
+                                {
+                                    name: 'V6',
+                                    url: '/docs/libraries/react-router/react-router-v6',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Svelte',
+                            url: '/docs/libraries/svelte',
+                        },
+                        {
                             name: 'Remix',
                             url: '/docs/libraries/remix',
+                        },
+                        {
+                            name: 'Vue.js',
+                            url: '/docs/libraries/vue-js',
+                        },
+                    ],
+                },
+                {
+                    name: 'Services',
+                    url: '/docs/services',
+                    icon: 'IconApps',
+                    children: [
+                        {
+                            name: 'Bubble',
+                            url: '/docs/libraries/bubble',
+                        },
+                        {
+                            name: 'Framer',
+                            url: '/docs/libraries/framer',
+                        },
+                        {
+                            name: 'Google Tag Manager',
+                            url: '/docs/libraries/google-tag-manager',
+                        },
+                        {
+                            name: 'MoEngage',
+                            url: '/docs/libraries/moengage',
+                        },
+                        {
+                            name: 'n8n',
+                            url: '/docs/libraries/n8n',
                         },
                         {
                             name: 'Retool',
@@ -2193,12 +2270,8 @@ export const docsMenu = {
                             url: '/docs/libraries/shopify',
                         },
                         {
-                            name: 'Svelte',
-                            url: '/docs/libraries/svelte',
-                        },
-                        {
-                            name: 'Vue.js',
-                            url: '/docs/libraries/vue-js',
+                            name: 'Slack',
+                            url: '/docs/libraries/slack',
                         },
                         {
                             name: 'Vercel',
@@ -2215,6 +2288,10 @@ export const docsMenu = {
                         {
                             name: 'WordPress',
                             url: '/docs/libraries/wordpress',
+                        },
+                        {
+                            name: 'Zapier',
+                            url: '/docs/libraries/zapier',
                         },
                     ],
                 },
@@ -3086,7 +3163,7 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/product-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'blue',
@@ -3102,6 +3179,12 @@ export const docsMenu = {
                     name: 'Cutting costs',
                     url: '/docs/product-analytics/cutting-costs',
                     icon: 'IconPiggyBank',
+                    color: 'purple',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/product-analytics/changelog',
+                    icon: 'IconRocket',
                     color: 'purple',
                 },
                 {
@@ -3355,11 +3438,17 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'FAQ',
-                    url: '/docs/web-analytics/faq',
+                    name: 'Troubleshooting',
+                    url: '/docs/web-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/web-analytics/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
             ],
         },
@@ -3414,7 +3503,7 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/session-replay/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
@@ -3425,6 +3514,12 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/session-replay/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
                 {
                     type: 'divider',
@@ -3550,8 +3645,8 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/feature-flags/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/feature-flags/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'seagreen',
                 },
@@ -3561,6 +3656,12 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/feature-flags/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
                 {
                     name: 'Settings',
@@ -3591,6 +3692,12 @@ export const docsMenu = {
                     url: '/docs/feature-flags/bootstrapping',
                     icon: 'IconLaptop',
                     color: 'salmon',
+                },
+                {
+                    name: 'Property overrides',
+                    url: '/docs/feature-flags/property-overrides',
+                    icon: 'IconPerson',
+                    color: 'blue',
                 },
                 {
                     name: 'Feature flag dependencies',
@@ -3874,11 +3981,17 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/experiments/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/experiments/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/experiments/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
             ],
         },
@@ -4039,6 +4152,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-source-maps/webpack',
                         },
                         {
+                            name: 'Vite',
+                            url: '/docs/error-tracking/upload-source-maps/vite',
+                        },
+                        {
                             name: 'CLI',
                             url: '/docs/error-tracking/upload-source-maps/cli',
                         },
@@ -4147,7 +4264,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'AI',
+                    name: 'PostHog AI',
                 },
                 {
                     name: 'Debugging with MCP',
@@ -4206,10 +4323,16 @@ export const docsMenu = {
                 },
                 {
                     name: 'Troubleshooting',
-                    url: '/docs/error-tracking/common-questions',
+                    url: '/docs/error-tracking/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
                     featured: true,
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/error-tracking/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
             ],
         },
@@ -4263,7 +4386,7 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/surveys/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'seagreen',
@@ -4274,6 +4397,12 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/surveys/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
                 {
                     type: 'divider',
@@ -4549,8 +4678,8 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/data-warehouse/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/data-warehouse/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'green',
                 },
@@ -4560,6 +4689,12 @@ export const docsMenu = {
                     icon: 'IconMagicWand',
                     color: 'seagreen',
                     featured: true,
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/data-warehouse/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
             ],
         },
@@ -4646,6 +4781,12 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
+                    name: 'Basics',
+                    url: '/docs/llm-analytics/basics',
+                    icon: 'IconBook',
+                    color: 'red',
+                },
+                {
                     name: 'Generations',
                     url: '/docs/llm-analytics/generations',
                     icon: 'IconAIText',
@@ -4704,6 +4845,16 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Evaluations',
+                    url: '/docs/llm-analytics/evaluations',
+                    icon: 'IconTarget',
+                    color: 'yellow',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                    },
+                },
+                {
                     name: 'Link session replay',
                     url: '/docs/llm-analytics/link-session-replay',
                     icon: 'IconRewindPlay',
@@ -4719,9 +4870,15 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/llm-analytics/troubleshooting',
                     icon: 'IconQuestion',
+                    color: 'purple',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/llm-analytics/changelog',
+                    icon: 'IconRocket',
                     color: 'purple',
                 },
                 {
@@ -4872,8 +5029,8 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'FAQ',
-                    url: '/docs/revenue-analytics/common-questions',
+                    name: 'Troubleshooting',
+                    url: '/docs/revenue-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,
@@ -4965,7 +5122,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'AI',
+                    name: 'PostHog AI',
                 },
                 {
                     name: 'Configure dashboard with AI',
@@ -4978,11 +5135,17 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'FAQ',
-                    url: '/docs/customer-analytics/faq',
+                    name: 'Troubleshooting',
+                    url: '/docs/customer-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/customer-analytics/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
             ],
         },
@@ -5084,6 +5247,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Changelog',
+                    url: '/docs/posthog-ai/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
+                },
+                {
                     name: 'FAQ',
                     url: '/docs/posthog-ai/faq',
                     icon: 'IconShield',
@@ -5171,10 +5340,16 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/workflows/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/workflows/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
             ],
         },
@@ -5230,7 +5405,7 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'Troubleshooting and FAQs',
+                    name: 'Troubleshooting',
                     url: '/docs/logs/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
@@ -5277,6 +5452,12 @@ export const docsMenu = {
                     url: '/docs/endpoints/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/endpoints/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
             ],
         },
