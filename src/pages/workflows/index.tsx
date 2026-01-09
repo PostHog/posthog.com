@@ -102,11 +102,12 @@ export default function Workflows(): JSX.Element {
         templates: {
             overview: 'stacked',
         },
-        exclude: ['answers', 'posthog-on-posthog', 'feature-comparison', 'videos'],
+        exclude: ['answers', 'posthog-on-posthog', 'videos'],
         content: {
             answersDescription: '',
             answersHeadline: '',
         },
+        order: ['overview', 'features', 'comparison'],
     })
 
     // Override the pricing slide with our custom component
