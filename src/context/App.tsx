@@ -2055,6 +2055,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         if (compact) {
+            // nosemgrep: javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration - intentional for docs embedding, parent origin unknown, non-sensitive ready signal
             window.parent.postMessage(
                 {
                     type: 'docs-ready',
@@ -2092,6 +2093,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         if (compact) {
+            // nosemgrep: javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration - intentional for docs embedding, parent origin unknown, non-sensitive navigation data
             window.parent.postMessage(
                 {
                     type: 'internal-navigation',
