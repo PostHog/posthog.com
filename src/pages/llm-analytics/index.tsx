@@ -155,35 +155,43 @@ const NativeIntegrationsSlide = () => {
         {
             logo: OpenAILogo,
             name: 'OpenAI',
+            link: '/docs/llm-analytics/installation/openai',
         },
         {
             logo: AnthropicLogo,
             name: 'Anthropic',
+            link: '/docs/llm-analytics/installation/anthropic',
         },
         {
             logo: GeminiLogo,
             name: 'Google Gemini',
+            link: '/docs/llm-analytics/installation/google',
         },
         {
             logo: LangChainLogo,
             name: 'LangChain',
+            link: '/docs/llm-analytics/installation/langchain',
         },
         {
             logo: VercelLogo,
             name: 'Vercel AI SDK',
+            link: '/docs/llm-analytics/installation/vercel-ai',
         },
         {
             logo: OpenRouterLogo,
             name: 'OpenRouter',
+            link: '/docs/llm-analytics/installation/openrouter',
         },
         {
             logoLight: LiteLLMLogoLight,
             logoDark: LiteLLMLogoDark,
             name: 'LiteLLM',
+            link: '/docs/llm-analytics/installation/litellm',
         },
         {
             isManualCapture: true,
             name: '</> Manual Capture',
+            link: '/docs/llm-analytics/installation/manual-capture',
         },
     ]
 
@@ -214,9 +222,11 @@ const NativeIntegrationsSlide = () => {
                 <div className="flex-[2]">
                     <div data-scheme="secondary" className="grid grid-cols-2 gap-3 @2xl:gap-4">
                         {integrations.map((integration, index) => (
-                            <div
+                            <Link
                                 key={index}
-                                className="bg-primary rounded p-4 @2xl:p-6 flex flex-col items-center justify-center text-center"
+                                to={integration.link}
+                                state={{ newWindow: true }}
+                                className="bg-primary rounded p-4 @2xl:p-6 flex flex-col items-center justify-center text-center hover:opacity-80 transition-opacity"
                             >
                                 {integration.isManualCapture ? (
                                     <h3 className="text-2xl font-semibold text-primary">&lt;/&gt; Manual Capture</h3>
@@ -249,7 +259,7 @@ const NativeIntegrationsSlide = () => {
                                         )}
                                     </>
                                 )}
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>
