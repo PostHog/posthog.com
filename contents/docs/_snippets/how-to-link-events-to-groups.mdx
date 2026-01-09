@@ -86,16 +86,16 @@ posthog.capture({
 
 ```php
 // ❌ Not possible
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'user_distinct_id',
     'event' => 'user_signed_up',
-    '$groups' => array("company" => "company_id_in_your_db", "company" => "another_company_id_in_your_db")
-));
+    '$groups' => ['company' => 'company_id_in_your_db', 'company' => 'another_company_id_in_your_db']
+]);
 // ✅ Allowed
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'user_distinct_id',
     'event' => 'user_signed_up',
-    '$groups' => array("company" => "company_id_in_your_db", "channel" => "channel_id_in_your_db")
-));
+    '$groups' => ['company' => 'company_id_in_your_db', 'channel' => 'channel_id_in_your_db']
+]);
 ```
 </MultiLanguage>

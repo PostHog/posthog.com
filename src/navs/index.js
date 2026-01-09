@@ -1971,6 +1971,10 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/persistence',
                                 },
                                 {
+                                    name: 'Types',
+                                    url: '/docs/libraries/js/types',
+                                },
+                                {
                                     name: 'Reference',
                                     url: '/docs/references/posthog-js',
                                 },
@@ -3690,6 +3694,12 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
+                    name: 'Property overrides',
+                    url: '/docs/feature-flags/property-overrides',
+                    icon: 'IconPerson',
+                    color: 'blue',
+                },
+                {
                     name: 'Feature flag dependencies',
                     url: '/docs/feature-flags/dependencies',
                     icon: 'IconListTreeChild',
@@ -4140,6 +4150,10 @@ export const docsMenu = {
                         {
                             name: 'Webpack',
                             url: '/docs/error-tracking/upload-source-maps/webpack',
+                        },
+                        {
+                            name: 'Vite',
+                            url: '/docs/error-tracking/upload-source-maps/vite',
                         },
                         {
                             name: 'CLI',
