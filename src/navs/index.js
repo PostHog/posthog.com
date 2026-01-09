@@ -2184,7 +2184,7 @@ export const docsMenu = {
                             name: 'Phoenix',
                             url: '/docs/libraries/phoenix',
                         },
-                      {
+                        {
                             name: 'React Router',
                             url: '/docs/libraries/react-router',
                             children: [
@@ -3720,8 +3720,8 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Evaluation environments',
-                    url: '/docs/feature-flags/evaluation-environments',
+                    name: 'Evaluation contexts',
+                    url: '/docs/feature-flags/evaluation-contexts',
                     icon: 'IconDecisionTree',
                     color: 'red',
                 },
