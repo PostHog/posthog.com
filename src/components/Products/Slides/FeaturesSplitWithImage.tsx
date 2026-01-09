@@ -1,9 +1,6 @@
 import React from 'react'
 import ProductImage from './Image'
 
-// Tailwind class references for gradient backgrounds (ensures JIT compilation)
-// bg-trace-monitoring bg-cost-analysis bg-performance-monitoring
-
 interface Feature {
     title: string
     description: string
@@ -26,7 +23,7 @@ interface FeaturesSplitWithImageProps {
     children?: React.ReactNode
     bgColor?: string
     textColor?: string
-    gradient?: string
+    className?: string
 }
 
 export default function FeaturesSplitWithImage({
@@ -38,23 +35,11 @@ export default function FeaturesSplitWithImage({
     children,
     bgColor,
     textColor,
-    gradient,
+    className = '',
 }: FeaturesSplitWithImageProps) {
-    // Map gradient names to explicit class names for Tailwind JIT
-    // Ensure Tailwind can detect these classes: bg-trace-monitoring bg-cost-analysis bg-performance-monitoring
-    let gradientClass = ''
-    if (gradient === 'trace-monitoring') {
-        gradientClass = 'bg-trace-monitoring'
-    } else if (gradient === 'cost-analysis') {
-        gradientClass = 'bg-cost-analysis'
-    } else if (gradient === 'performance-monitoring') {
-        gradientClass = 'bg-performance-monitoring'
-    }
-
     return (
-        <div className={`h-full flex flex-col @2xl:flex-row @2xl:gap-4 bg-${bgColor} ${textColor} relative`}>
-            {gradientClass && <div className={`absolute inset-0 ${gradientClass}`} />}
-            <div className="@2xl:max-w-[40%] pt-8 px-8 @2xl:py-8 relative z-10">
+        <div className={`h-full flex flex-col @2xl:flex-row @2xl:gap-4 bg-${bgColor} ${textColor} ${className}`}>
+            <div className="@2xl:max-w-[40%] pt-8 px-8 @2xl:py-8">
                 <div className="mb-8">
                     {icon && (
                         <div className="flex justify-center mb-4">
@@ -92,7 +77,7 @@ export default function FeaturesSplitWithImage({
 
                 {children && <div className="mt-4">{children}</div>}
             </div>
-            <aside className="flex-1 flex relative z-10">
+            <aside className="flex-1 flex">
                 {images && images.length > 0 && (
                     <ProductImage
                         images={images.map((img) => ({

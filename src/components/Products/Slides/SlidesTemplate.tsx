@@ -532,8 +532,8 @@ export default function SlidesTemplate({
                 (f: any) => f.template && f.template !== 'tabs'
             )
 
-            // Add the default features slide if there are any default features OR if there's a custom component
-            if (defaultFeatures.length > 0 || CustomComponent) {
+            // Add the default features slide if there are any default features
+            if (defaultFeatures.length > 0) {
                 processedSlides.push({
                     name,
                     slug,
@@ -571,30 +571,16 @@ export default function SlidesTemplate({
                         </FeaturesSplit>
                     )
                 } else if (feature.template === 'splitImage') {
-                    // Map feature handles to gradient names and background colors
-                    const gradientMap: Record<string, string> = {
-                        trace_monitoring: 'trace-monitoring',
-                        cost_analysis: 'cost-analysis',
-                        performance_monitoring: 'performance-monitoring',
-                    }
-                    const bgColorMap: Record<string, string> = {
-                        trace_monitoring: 'blue',
-                        cost_analysis: 'purple',
-                        performance_monitoring: 'lilac',
-                    }
-                    const gradient = gradientMap[feature.handle || '']
-                    const bgColor = bgColorMap[feature.handle || ''] || productData?.color
-
                     featureContent = (
                         <FeaturesSplitWithImage
-                            bgColor={bgColor}
-                            textColor="text-white"
+                            className={feature.className}
+                            bgColor={productData?.color}
+                            textColor={productData?.overview?.textColor}
                             headline={feature.headline}
                             description={feature.description}
                             icon={feature.icon}
                             features={feature.features}
                             images={feature.images}
-                            gradient={gradient}
                             {...props}
                         >
                             {feature.children}

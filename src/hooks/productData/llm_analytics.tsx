@@ -163,6 +163,7 @@ export const llmAnalytics = {
         {
             title: 'Traces',
             handle: 'trace_monitoring',
+            className: 'bg-trace-monitoring !bg-blue',
             template: 'splitImage',
             headline: 'Traces',
             description: 'See an interaction timeline including all generation and span events.',
@@ -206,6 +207,7 @@ export const llmAnalytics = {
         {
             title: 'Cost analysis',
             handle: 'cost_analysis',
+            className: 'bg-cost-analysis !bg-purple',
             template: 'splitImage',
             headline: 'Cost analysis',
             description: 'Track costs by model, user, feature, and time period to optimize spending and pricing.',
@@ -243,6 +245,7 @@ export const llmAnalytics = {
         {
             title: 'Performance monitoring',
             handle: 'performance_monitoring',
+            className: 'bg-performance-monitoring !bg-lilac',
             template: 'splitImage',
             headline: 'Performance monitoring',
             description: 'Monitor latency, error rates, and model performance over time.',
