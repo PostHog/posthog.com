@@ -172,7 +172,7 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                                     <p className="text-lg">
                                                         The{' '}
                                                         <SmallTeam
-                                                            slug={(item as any).team as string}
+                                                            slug={item.team as string}
                                                             className="relative top-1"
                                                         />{' '}
                                                         is actively cooking and refining AI skills. Here's a
@@ -290,7 +290,7 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                         </div>
                                         <aside className={item.imagesClasses || ''}>
                                             {item.images && item.images.length > 0 && (
-                                                <div className="max-w-6xl mx-auto">
+                                                <div className="max-w-3xl mx-auto">
                                                     <ProductImage images={item.images} />
                                                 </div>
                                             )}
@@ -304,7 +304,7 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                         )
                     }
 
-                    // Default Grid Layout - Simple centered layout
+                    // Default Grid Layout
                     return (
                         <Tabs.Content
                             className="flex-1 bg-primary @2xl:border-l border-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full relative [&_a]:underline [&_a]:font-semibold"
@@ -325,15 +325,11 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                 </div>
                             )}
                             <div className="relative">
-                                <div
-                                    className={`pt-12 px-4 ${
-                                        item.features && item.features.length > 0 ? 'pb-8' : 'pb-4'
-                                    }`}
-                                >
+                                <div className="pt-12 px-4 pb-8">
                                     <h2 className="text-5xl mb-0 text-center">{item.headline}</h2>
                                     {item.description && (
                                         <p
-                                            className="mt-4 text-xl [&_code]:text-xl text-center max-w-2xl mx-auto"
+                                            className="mt-4 text-xl [&_code]:text-xl text-center"
                                             {...(typeof item.description === 'string'
                                                 ? { dangerouslySetInnerHTML: { __html: item.description } }
                                                 : { children: item.description })}
@@ -341,48 +337,19 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                     )}
                                 </div>
 
-                                {(item as any).layout === 'single-column' &&
-                                item.images &&
-                                item.images.length > 0 &&
-                                item.features &&
-                                item.features.length > 0 ? (
-                                    <div className="flex flex-col @2xl:flex-row gap-8 px-4">
-                                        <div className="flex-1">
-                                            <div className="space-y-4 max-w-2xl mx-auto">
-                                                {item.features.map((feature: Feature, featureIndex: number) => (
-                                                    <div key={featureIndex}>
-                                                        <h3 className="text-2xl mb-1">{feature.title}</h3>
-                                                        <p className="text-lg">{feature.description}</p>
-                                                    </div>
-                                                ))}
+                                <div className="grid grid-cols-2 gap-4 px-4">
+                                    {item.features &&
+                                        item.features.map((feature: Feature, featureIndex: number) => (
+                                            <div key={featureIndex}>
+                                                <h3 className="text-2xl mb-1">{feature.title}</h3>
+                                                <p className="text-lg">{feature.description}</p>
                                             </div>
-                                        </div>
-                                        <div className="flex-1 flex items-center justify-center">
-                                            <ProductImage images={item.images} />
-                                        </div>
+                                        ))}
+                                </div>
+                                {item.images && item.images.length > 0 && (
+                                    <div className="max-w-3xl mx-auto">
+                                        <ProductImage images={item.images} />
                                     </div>
-                                ) : (
-                                    <>
-                                        {item.features && item.features.length > 0 && (
-                                            <div className="space-y-4 px-4 max-w-2xl mx-auto">
-                                                {item.features.map((feature: Feature, featureIndex: number) => (
-                                                    <div key={featureIndex}>
-                                                        <h3 className="text-2xl mb-1">{feature.title}</h3>
-                                                        <p className="text-lg">{feature.description}</p>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        )}
-                                        {item.images && item.images.length > 0 && (
-                                            <div
-                                                className={`max-w-6xl mx-auto ${
-                                                    item.features && item.features.length > 0 ? 'mt-8' : 'mt-4'
-                                                }`}
-                                            >
-                                                <ProductImage images={item.images} />
-                                            </div>
-                                        )}
-                                    </>
                                 )}
                                 {(item as any).children && <div className="p-4">{(item as any).children}</div>}
                             </div>

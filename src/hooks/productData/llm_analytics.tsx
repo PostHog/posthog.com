@@ -398,7 +398,7 @@ export const llmAnalytics = {
                         'Compare AI power users vs tourists. Are frequent users your best customers or just more expensive? Do they convert? Upgrade? Now you have answers.',
                 },
             ],
-            layout: 'single-column',
+            layout: 'columns',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/LLM_features_analysis_500cdd8b92.png',
@@ -431,7 +431,7 @@ export const llmAnalytics = {
                         'Already using an LLM observability tool? Send that data to PostHog to analyze alongside other product and user data.',
                 },
             ],
-            layout: 'single-column',
+            layout: 'columns',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/LLM_features_70ab277d76.png',
