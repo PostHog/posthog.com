@@ -25,7 +25,7 @@ No-code experiments are great because they're quick to set up and require no cod
 
 No-code web experiments enable you to run A/B tests, multivariate tests, and other experiments that modify your website without writing a single line of code.
 
-You build your web experiment directly in the PostHog [toolbar](/docs/toolbar), our no-code tool. Once you save your experiment in the toolbar, it automatically appears in PostHog where you can configure metrics, launch it, and track results.
+You can build your web experiment directly in the PostHog [toolbar](/docs/toolbar), our no-code tool. Once you save your experiment in the toolbar, it automatically appears in PostHog where you can configure metrics, launch it, and track results.
 
 In this example, we will change the text of a button on a sample webpage without writing any code.
 
