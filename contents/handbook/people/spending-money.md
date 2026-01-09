@@ -13,7 +13,7 @@ Ask yourself:
 - Can you clearly explain why this expense is in PostHog's best interest?
 - Would you be comfortable explaining this expense to the entire team publicly?
 
-If the answer is **yes**, and you can confidently explain your expense decision to the entire team, it is likely the expense is in the best interest of the company and supports your productivity.
+If the answer is **yes**, it is likely the expense is in the best interest of the company and supports your productivity.
 
 **If not, think again**.
 
@@ -28,7 +28,7 @@ If the answer is **yes**, and you can confidently explain your expense decision 
 
 ### TRANSPARENCY & ACCOUNTABILITY 🧑‍🏫
 - All **expenses are visible company-wide**: we believe transparency drives better decision-making.
-- **Accountability**: Inappropriate expenses, missing documentation and memos will be addressed from Finance and/or Team Leads.
+- **Accountability**: If we have questions about an expense or need documentation, we'll reach out for clarification.
 - **Team lead oversight**: Monthly reports showing all direct report expenses.
 
 
@@ -49,7 +49,7 @@ All expenses over $75 or £75 must have itemized receipts attached and memo upda
   - update the memo using the [Brex app, text, email or Slack](https://www.brex.com/support/memos-for-expenses#add-a-memo-to-a-single-expense)
 - Revolut: email your itemized receipts to [ukinvoices@posthog.com](mailto:ukinvoices@posthog.com) along with a memo in the body of the email
 
-Expenses with no receipts above $75 or £75 may be deducted from your pay - particularly for repeat offenders.
+Expenses with no receipts above $75 or £75 may be deducted from your pay if we can't verify the business purpose - this is mainly for repeat issues where someone's clearly ignoring the policy.
 
 **We need an _itemized receipt/invoices_ (for example, the full booking confirmation email PDF for flights/hotels, detailed bill from the restaurant for a team dinner) - because Brex auto-verifies these using the information on the file.**
 - Please do not upload cropped images that show just the amount or just the credit card machine confirmation slip - without context, the receipt is pointless.
@@ -74,13 +74,7 @@ Expense reports will be shared with team leads monthly for their oversight and v
 
 
 ### WHY DOCUMENTATION MATTERS 🏦
-- Missing receipts and memos create work for everyone during audit season leading to
-  - delay in audit,
-  - increase in audit cost,
-  - creating a distraction for you,
-  - inviting investor scrutiny.
-- If your expenses lack proper documentation, the auditors may audit those expenses in detail, sometimes months later - asking what each expense was for and why you spent it.
-  - What could have been a 30-second task becomes hours of back-and-forth during audit.
+- Missing receipts and memos create extra work during audit season - auditors will need to dig into those expenses, which means hours of back-and-forth with you about charges from several months ago! A quick receipt upload and memo update now saves everyone time later.
 - Additionally, we're legally prohibited from paying personal expenses on behalf of team members. Poor expense documentation can:
   - Put PostHog at risk of tax penalties and fines,
   - Result in audit findings that appear in investor discussions,
@@ -144,7 +138,7 @@ If you're joining an offsite, please only use the offsite budget - it helps the 
     - Request a reimbursement for the cost of the economy fare in Brex, along with a screenshot of the cost of the economy fare at the time of booking.
 
 
-## POLICY VIOLATION AND ENFORCEMENT 👮
+## ADDRESSING POLICY ISSUES 👮
 #### INAPPROPRIATE SPEND
 - Audit compliance: Expenses that could be construed as personal will be flagged as non-business expenses by auditors,
 - If you pay for a personal expense using the company card, it would constitute a taxable benefit to you. The People & Ops team does not have the bandwidth to handle the admin burden.
@@ -159,10 +153,10 @@ So, you may not use your Brex or Revolut for personal expenses.
 
 _This list will be updated based on common questions/scenarios._
 
-#### ENFORCEMENT APPROACH
+#### CONSEQUENCES
 - Misunderstanding: you genuinely thought an expense was in PostHog’s best interest, but we disagree - we’ll provide clarification and context,
-- Abuse: knowingly and willingly spending money in ways not in PostHog’s best interest or to intentionally circumvent the guidelines will result in the individual being terminated for cause.
-  - Continual misuse (multiple transactions flagged frequently) will be treated like abuse and result in termination for cause.
+- Intentional violation: knowingly and willingly spending money in ways not in PostHog’s best interest or to intentionally circumvent the guidelines will result in the individual being terminated for cause.
+  - Continual misuse (multiple transactions flagged frequently) will be treated like policy violation and result in termination for cause.
 
 #### TEAM LEAD RESPONSIBILITIES
 - We recommend Team Leads review direct report expenses monthly/quarterly to assess if they’re in the best interest of the business. This helps in maintaining oversight over expenses, and approaches the review with appropriate context (Finance won’t always have the best context), which will be important during audits.
