@@ -55,7 +55,7 @@ Once on your site with the toolbar active:
 1. Click the **<IconTestTube className="inline w-4 h-4" /> Experiment** tab on the toolbar.
 2. Click **New experiment** to create a new web experiment.
 3. Give your experiment a name and configure your variants.
-4. Select the variant you want to modify the site for. In our case, we select the **test** variant.
+4. Select the variant of the experiment you want to modify. In our case, we select the **test** variant.
 5. Click **Add element** and select the element you want to modify. We select the main signup button on our page.
 6. Use the toolbar to modify the element's text, CSS, or HTML. We'll change the button's text to say "Sign up for free". Importantly, the **Text** field modifies the text of the element. The **CSS** field lets you change the styling of the element. The **HTML** field will override the entire element.
 7. If you'd like to change more parts of the page for this version of the experiment, click **Add element** to modify a second, third, or fourth element.
