@@ -7,15 +7,15 @@ showTitle: true
 There are many occasions when you will need to spend company money. PostHog is a lean organization - the less we spend, the more time we have to make sure the company takes off. However, it is more important you are productive, healthy, and happy.
 
 ## PHILOSOPHY & GUIDING PRINCIPLES 📙💭
-PostHog operates on a context-based expense policy inspired by Netflix's approach. We're empowering team members to make good decisions while maintaining transparency and accountability.
+PostHog operates on a context-based expense policy inspired by the book 'No Rules Rules'. We're empowering team members to make good decisions while maintaining transparency and accountability.
 
 Ask yourself:
 - Can you clearly explain why this expense is in PostHog's best interest?
 - Would you be comfortable explaining this expense to the entire team publicly?
 
-If the answer is **yes**, it is likely the expense is in the best interest of the company and supports your productivity. **If not, think again**.
+If the answer is **yes**, and you can confidently explain your expense decision to the entire team, it is likely the expense is in the best interest of the company and supports your productivity.
 
-If you can confidently explain your expense decision to the entire team, you're likely making the right choice. If you'd feel uncomfortable doing so, reconsider the expense.
+**If not, think again**.
 
 **When in doubt, ask your team lead for context, not permission.**
 - Still in doubt? Ask [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
@@ -40,8 +40,7 @@ Use your Revolut if
 
 If not, use your Brex.
 
-Why? The company claims VAT back on these charges - if you don't use your Revolut based on the conditions above, we lose money that can be reclaimed.
-
+Why? The company can claim back VAT on these larger purchases - the more money we claim back, the more money we have to #DoMoreWeird
 
 ### RECEIPTS 🧾
 All expenses over $75 or £75 must have itemized receipts attached and memo updated within 14 days of the charge (required for audit documentation).
@@ -177,7 +176,7 @@ _This list will be updated based on common questions/scenarios._
 Coordinate with [Tara](https://posthog.com/community/profiles/34526) who handles most Macbook and Apple Studio Display purchases - ping her on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ)
   - Having equipment purchases centralized helps ensure accurate accounting and tracking of fixed assets for the audit.
   - We expect you to ship the Macbook and Apple Studio Display back when you leave PostHog.
-  - Apple Studio Displays are only allowed for Engineering (high density screen) and Sales (in-built high quality webcam and microphone) teams
+  - Apple Studio Displays are only allowed for Product Engineers (high density screen) and Sales (in-built high quality webcam and microphone) teams
   - Guidelines
     - For engineering roles (product & support), we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. We recommend the 1TB SSD drive in order to make sure you have enough space to run the full stack locally.
     - For sales roles, we recommend a Macbook Pro 14-inch M4, with 10-core GPU, 16-core and the 32GB RAM upgrade. Again, grab the smallest SSD (512gb)
