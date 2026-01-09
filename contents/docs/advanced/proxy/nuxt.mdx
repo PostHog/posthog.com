@@ -171,7 +171,47 @@ Here's what the code does:
 
 <Step title="Update your PostHog SDK">
 
-In your Nuxt app, update your PostHog initialization to use your proxy path:
+Update your PostHog configuration to use your proxy path.
+
+### Using @posthog/nuxt (Nuxt 3.7+)
+
+If you're using the `@posthog/nuxt` module, update your `nuxt.config.ts`:
+
+<MultiLanguage>
+
+```ts file=US
+// nuxt.config.ts
+export default defineNuxtConfig({
+  modules: ['@posthog/nuxt'],
+  posthogConfig: {
+    publicKey: '<ph_project_api_key>',
+    clientConfig: {
+      api_host: '/ph',
+      ui_host: 'https://us.posthog.com'
+    }
+  }
+})
+```
+
+```ts file=EU
+// nuxt.config.ts
+export default defineNuxtConfig({
+  modules: ['@posthog/nuxt'],
+  posthogConfig: {
+    publicKey: '<ph_project_api_key>',
+    clientConfig: {
+      api_host: '/ph',
+      ui_host: 'https://eu.posthog.com'
+    }
+  }
+})
+```
+
+</MultiLanguage>
+
+### Using posthog-js plugin (Nuxt 3.0-3.6)
+
+If you're using the `posthog-js` library directly with a plugin:
 
 <MultiLanguage>
 
