@@ -75,8 +75,8 @@ importers:
         specifier: 0.36.0
         version: 0.36.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@posthog/types':
-        specifier: 1.316.1
-        version: 1.316.1
+        specifier: 1.317.0
+        version: 1.317.0
       '@radix-ui/react-accordion':
         specifier: ^1.2.3
         version: 1.2.12(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3142,8 +3142,8 @@ packages:
       react: '>=16.14.0'
       react-dom: '>=16.14.0'
 
-  '@posthog/types@1.316.1':
-    resolution: {integrity: sha512-rh8GSOnmnwd0fUIBYzQcXt4WYXMg9QPkY0tE46K0eneWYVyqNYXFXzcdf2U37g+ZYNiBq9ubLeCD7h0C0MDJgw==}
+  '@posthog/types@1.317.0':
+    resolution: {integrity: sha512-RCWLvX1PwaNXMEHpYjblVwdYP3Mc9p+GN/fIDsoFIZOCXVyTuNEvxAa9w9B3aWYM80mrX3ohsXxf8TZtEJ+jlg==}
 
   '@preact/signals-core@1.12.1':
     resolution: {integrity: sha512-BwbTXpj+9QutoZLQvbttRg5x3l5468qaV2kufh+51yha1c53ep5dY4kTuZR35+3pAZxpfQerGJiQqg34ZNZ6uA==}
@@ -18807,14 +18807,14 @@ snapshots:
   '@graphql-tools/optimize@1.4.0(graphql@15.10.1)':
     dependencies:
       graphql: 15.10.1
-      tslib: 2.8.1
+      tslib: 2.4.1
 
   '@graphql-tools/relay-operation-optimizer@6.5.18(graphql@15.10.1)':
     dependencies:
       '@ardatan/relay-compiler': 12.0.0(graphql@15.10.1)
       '@graphql-tools/utils': 9.2.1(graphql@15.10.1)
       graphql: 15.10.1
-      tslib: 2.8.1
+      tslib: 2.4.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -20439,7 +20439,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@posthog/types@1.316.1': {}
+  '@posthog/types@1.317.0': {}
 
   '@preact/signals-core@1.12.1': {}
 
