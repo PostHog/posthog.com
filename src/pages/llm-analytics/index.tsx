@@ -15,6 +15,7 @@ import OpenAILogo from '../../../contents/images/docs/llms/OpenAI_Logo.svg'
 import LangChainLogo from '../../../contents/images/docs/llms/LangChain_Logo.svg'
 import LiteLLMLogoLight from '../../../contents/images/docs/llms/LiteLLM_logo_black.png'
 import LiteLLMLogoDark from '../../../contents/images/docs/llms/LiteLLM_logo_white.png'
+import { useCustomers, type Customer } from 'hooks/useCustomers'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'llm_analytics'
@@ -283,6 +284,44 @@ const NativeIntegrationsSlide = () => {
     )
 }
 
+const CustomerLogo = ({ customer, className = 'h-8' }: { customer: Customer; className?: string }) => {
+    const { logo, name } = customer
+
+    if (typeof logo === 'function') {
+        const Logo = logo
+        return <Logo className={`${className} w-auto fill-current object-contain`} />
+    }
+
+    if (logo && 'light' in logo) {
+        return (
+            <>
+                <img src={logo.light} alt={name} className={`${className} w-auto object-contain dark:hidden`} />
+                <img src={logo.dark} alt={name} className={`${className} w-auto object-contain hidden dark:block`} />
+            </>
+        )
+    }
+
+    return null
+}
+
+const AIEngineers = () => {
+    const { getCustomers } = useCustomers()
+    const aiEngineers = getCustomers(['grantable', 'hostai', 'juicebox', 'zealot'])
+
+    return (
+        <div className="mt-8 text-center">
+            <p className="text-lg text-secondary mb-4">and AI product engineers at...</p>
+            <div className="grid grid-cols-4 gap-4">
+                {aiEngineers.map((customer) => (
+                    <div key={customer.slug} className="flex items-center justify-center">
+                        <CustomerLogo customer={customer} />
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
 // Custom ProductOS Benefits slide
 const ProductOSBenefitsSlide = () => {
     return (
@@ -406,6 +445,13 @@ export default function LLMAnalytics(): JSX.Element {
         content: {
             answersDescription: 'Track costs, performance, and usage of your AI features with detailed analytics',
             answersHeadline: 'What can LLM Analytics help me discover?',
+        },
+        overrides: {
+            customers: {
+                props: {
+                    belowContent: <AIEngineers />,
+                },
+            },
         },
     })
 
