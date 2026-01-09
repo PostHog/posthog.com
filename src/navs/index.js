@@ -1304,6 +1304,10 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Technical support SMEs',
+                        url: '/handbook/support/support-smes',
+                    },
+                    {
                         name: 'Support zero weeks',
                         url: '/handbook/support/support-zero',
                     },
@@ -1967,6 +1971,10 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/persistence',
                                 },
                                 {
+                                    name: 'Types',
+                                    url: '/docs/libraries/js/types',
+                                },
+                                {
                                     name: 'Reference',
                                     url: '/docs/references/posthog-js',
                                 },
@@ -2181,12 +2189,38 @@ export const docsMenu = {
                             url: '/docs/libraries/phoenix',
                         },
                         {
-                            name: 'Remix',
-                            url: '/docs/libraries/remix',
+                            name: 'React Router',
+                            url: '/docs/libraries/react-router',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/libraries/react-router',
+                                },
+                                {
+                                    name: 'V7 Framework mode',
+                                    url: '/docs/libraries/react-router/react-router-v7-framework-mode',
+                                },
+                                {
+                                    name: 'V7 Declarative mode',
+                                    url: '/docs/libraries/react-router/react-router-v7-declarative-mode',
+                                },
+                                {
+                                    name: 'V7 Data mode',
+                                    url: '/docs/libraries/react-router/react-router-v7-data-mode',
+                                },
+                                {
+                                    name: 'V6',
+                                    url: '/docs/libraries/react-router/react-router-v6',
+                                },
+                            ],
                         },
                         {
                             name: 'Svelte',
                             url: '/docs/libraries/svelte',
+                        },
+                        {
+                            name: 'Remix',
+                            url: '/docs/libraries/remix',
                         },
                         {
                             name: 'Vue.js',
@@ -2234,6 +2268,10 @@ export const docsMenu = {
                         {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
+                        },
+                        {
+                            name: 'Slack',
+                            url: '/docs/libraries/slack',
                         },
                         {
                             name: 'Vercel',
@@ -3656,6 +3694,12 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
+                    name: 'Property overrides',
+                    url: '/docs/feature-flags/property-overrides',
+                    icon: 'IconPerson',
+                    color: 'blue',
+                },
+                {
                     name: 'Feature flag dependencies',
                     url: '/docs/feature-flags/dependencies',
                     icon: 'IconListTreeChild',
@@ -4106,6 +4150,10 @@ export const docsMenu = {
                         {
                             name: 'Webpack',
                             url: '/docs/error-tracking/upload-source-maps/webpack',
+                        },
+                        {
+                            name: 'Vite',
+                            url: '/docs/error-tracking/upload-source-maps/vite',
                         },
                         {
                             name: 'CLI',
@@ -4731,6 +4779,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Concepts',
+                },
+                {
+                    name: 'Basics',
+                    url: '/docs/llm-analytics/basics',
+                    icon: 'IconBook',
+                    color: 'red',
                 },
                 {
                     name: 'Generations',

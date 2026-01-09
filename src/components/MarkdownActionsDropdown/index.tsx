@@ -1,8 +1,49 @@
 import { IconCopy, IconEye, IconExternal, IconCheck } from '@posthog/icons'
 import Link from 'components/Link'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Popover } from 'components/RadixUI/Popover'
 import OSButton from 'components/OSButton'
+
+// Helper function to create markdown URL from page path
+export const getMarkdownUrl = (path: string): string => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://posthog.com'
+    return `${origin}${path}.md`
+}
+
+// Check if the markdown URL exists (returns 200) or not (returns 404)
+export const checkMarkdownUrlExists = async (pageUrl: string): Promise<boolean> => {
+    try {
+        const markdownUrl = getMarkdownUrl(pageUrl)
+        const response = await fetch(markdownUrl, { method: 'HEAD' })
+        return response.ok
+    } catch {
+        return false
+    }
+}
+
+// Hook to check if markdown URL exists
+export const useMarkdownUrlExists = (pageUrl: string): boolean | null => {
+    const [exists, setExists] = useState<boolean | null>(null)
+
+    useEffect(() => {
+        let cancelled = false
+
+        const check = async () => {
+            const result = await checkMarkdownUrlExists(pageUrl)
+            if (!cancelled) {
+                setExists(result)
+            }
+        }
+
+        check()
+
+        return () => {
+            cancelled = true
+        }
+    }, [pageUrl])
+
+    return exists
+}
 
 interface CopyMarkdownActionsDropdownProps {
     /** Page URL for context */
@@ -16,24 +57,13 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
         'flex items-center gap-2 px-2 py-1 text-sm rounded hover:bg-accent transition-colors w-full'
     const menuItemIconStyles = 'size-4'
 
-    // Helper function to safely create markdown URL
-    const getMarkdownUrl = (url: string) => {
-        if (url.startsWith('/')) {
-            return `${url}.md`
-        }
+    const markdownUrl = getMarkdownUrl(pageUrl)
 
-        try {
-            const urlObj = new URL(url)
-            return `${urlObj.origin}${urlObj.pathname}.md`
-        } catch {
-            return `${url}.md`
-        }
-    }
+    console.log('markdownUrl', markdownUrl)
 
     const handleCopyMarkdown = async () => {
         setPopoverOpen(false)
         try {
-            const markdownUrl = getMarkdownUrl(pageUrl)
             const response = await fetch(markdownUrl)
             if (response.ok) {
                 const markdownContent = await response.text()
@@ -64,14 +94,14 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                 <span>Copy as Markdown</span>
             </button>
 
-            <Link to={`${getMarkdownUrl(pageUrl)}`} externalNoIcon className={menuItemButtonStyles}>
+            <a href={markdownUrl} target="_blank" rel="noopener noreferrer" className={menuItemButtonStyles}>
                 <IconEye className={menuItemIconStyles} />
                 <span>View as Markdown</span>
-            </Link>
+            </a>
 
             <Link
                 to={`https://chat.openai.com/?q=${encodeURIComponent(
-                    `Read from ${getMarkdownUrl(pageUrl)} so I can ask questions about it`
+                    `Read from ${markdownUrl} so I can ask questions about it`
                 )}`}
                 externalNoIcon
                 className={menuItemButtonStyles}
@@ -82,7 +112,7 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
 
             <Link
                 to={`https://claude.ai/new?q=${encodeURIComponent(
-                    `Read from ${getMarkdownUrl(pageUrl)} so I can ask questions about it`
+                    `Read from ${markdownUrl} so I can ask questions about it`
                 )}`}
                 externalNoIcon
                 className={menuItemButtonStyles}
