@@ -48,28 +48,28 @@ const subfeatures = [
     {
         title: 'Session replay',
         description:
-            'Watch session recordings of users interacting with your AI features to understand context and improve prompts.',
+            'Replay AI interactions end-to-end. Inspect user actions, model responses, and UI state together to debug with full context.',
         icon: <IconRewindPlay />,
         color: 'yellow',
     },
     {
         title: 'Product analytics',
         description:
-            'Analyze AI usage patterns, track feature adoption, and correlate AI interactions with user behavior and outcomes.',
+            'Capture every AI interaction as an event. Analyze usage, variants, and downstream user actions in one place.',
         icon: <IconTrends />,
         color: 'blue',
     },
     {
         title: 'Feature flags',
         description:
-            'Test new AI models, prompts, and features by rolling them out gradually to specific user segments.',
+            'Roll out models, prompts, and AI features behind flags. Control exposure by cohort, environment, or percentage.',
         icon: <IconToggle />,
         color: 'seagreen',
     },
     {
         title: 'Error tracking',
         description:
-            'Compare LLM traces with error tracking to get a rich picture of user experience and understand exactly what went wrong with your AI features.',
+            'Tie LLM traces directly to errors and exceptions. Inspect inputs, outputs, and stack traces to pinpoint failures fast.',
         icon: <IconWarning />,
         color: 'yellow',
     },
