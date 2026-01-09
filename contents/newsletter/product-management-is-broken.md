@@ -146,6 +146,8 @@ They can choose to reprioritize their projects, change their goals, or come up w
 
 This creates a healthy tension. Engineers maintain their autonomy in decision-making, but there's a clear feedback loop to ensure those decisions are delivering real value. Without this accountability, autonomy can become directionless. With it, teams are empowered to experiment, and pivot quickly based on real-time feedback.
 
+<NewsletterForm />
+
 ## 5. Learn fast by optimizing for speed
 
 These changes unblock engineers and free product managers from the (not very fun) gatekeeper role, but there’s one final step.
@@ -215,6 +217,4 @@ This is our playbook in its simplest terms:
 
 Getting this dynamic right is how we ship fast, build right, and win
 
-
 <NewsletterForm />
-
