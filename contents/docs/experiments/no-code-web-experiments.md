@@ -44,7 +44,7 @@ posthog.init('<ph_project_api_key>', {
 
 ### 2. Launch the toolbar and create your experiment
 
-After enabling the **No code web experiments** feature preview, launch the toolbar on your website:
+After enabling the [No code web experiments](https://app.posthog.com/settings/user-feature-previews) feature preview, launch the toolbar on your website:
 
 1. Go to the [toolbar tab](https://app.posthog.com/toolbar) in PostHog.
 2. Add your website URL as an authorized domain if you haven't already.
