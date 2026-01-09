@@ -11,6 +11,7 @@ import { IconCheck, IconX } from '@posthog/icons'
 import OSTable from 'components/OSTable'
 import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
 import StripeLogo from '../../images/stripe.svg'
+import Logo1984 from '../../images/1984.svg'
 import ODFLogo from '../../images/odf.svg'
 import Logo from 'components/Logo'
 import OSButton from 'components/OSButton'
@@ -36,6 +37,16 @@ const partnerConfigs = [
                 <IconX className="size-8 text-white inline-block relative top-1" />
                 <img src={StripeLogo} alt="Stripe" className="inline-block h-9 relative top-[.2rem]" />
                 <span>Atlas</span>
+            </>
+        ),
+        value: '$50,000',
+    },
+    {
+        slug: '1984',
+        title: (
+            <>
+                <IconX className="size-8 text-white inline-block relative top-1" />
+                <img src={Logo1984} alt="1984" className="inline-block h-9 relative top-[.2rem]" />
             </>
         ),
         value: '$50,000',
@@ -68,8 +79,8 @@ export default function Startups(): JSX.Element {
     return (
         <>
             <SEO
-                title="Startups - PostHog"
-                description="PostHog is the only developer platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
+                title="PostHog for Startups | $50K credits + free merch + partner perks"
+                description="Join thousands of early stage teams using PostHog to ship better products. Get 50k in credits, exclusive merch, and partner perks. Apply in just 2 minutes."
                 image={`/images/og/default.png`}
             />
             <Explorer

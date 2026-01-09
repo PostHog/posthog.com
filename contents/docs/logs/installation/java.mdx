@@ -1,0 +1,117 @@
+---
+title: Java logs installation
+platformLogo: java
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsBetaSnippet from '../_snippets/beta.mdx'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+<LogsBetaSnippet />
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required">
+
+Add the following dependencies to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>io.opentelemetry</groupId>
+    <artifactId>opentelemetry-api</artifactId>
+    <version>1.32.0</version>
+</dependency>
+<dependency>
+    <groupId>io.opentelemetry</groupId>
+    <artifactId>opentelemetry-sdk</artifactId>
+    <version>1.32.0</version>
+</dependency>
+<dependency>
+    <groupId>io.opentelemetry</groupId>
+    <artifactId>opentelemetry-exporter-otlp</artifactId>
+    <version>1.32.0</version>
+</dependency>
+```
+
+</Step>
+
+<Step title="Get your project API key" badge="required">
+
+You'll need your PostHog project API key to authenticate log requests. This is the same API key you use for capturing events and exceptions.
+
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project).
+
+</Step>
+
+<Step title="Configure the SDK" badge="required">
+
+Set up the OpenTelemetry SDK to send logs to PostHog.
+
+```java
+import io.opentelemetry.api.logs.GlobalLoggerProvider;
+import io.opentelemetry.sdk.logs.SdkLoggerProvider;
+import io.opentelemetry.sdk.logs.export.BatchLogRecordProcessor;
+import io.opentelemetry.exporter.otlp.logs.OtlpHttpLogRecordExporter;
+
+SdkLoggerProvider loggerProvider = SdkLoggerProvider.builder()
+    .addLogRecordProcessor(
+        BatchLogRecordProcessor.builder(
+            OtlpHttpLogRecordExporter.builder()
+                .setEndpoint("https://us.i.posthog.com/i/v1/logs")
+                .addHeader("Authorization", "Bearer " + YOUR_PROJECT_API_KEY)
+                .build()
+        ).build()
+    )
+    .build();
+
+GlobalLoggerProvider.set(loggerProvider);
+```
+
+Alternatively, you can pass the API key as a query parameter:
+
+```java
+OtlpHttpLogRecordExporter.builder()
+    .setEndpoint("https://us.i.posthog.com/i/v1/logs?token=" + YOUR_PROJECT_API_KEY)
+    .build()
+```
+
+</Step>
+
+<Step title="Use OpenTelemetry logging" badge="required">
+
+Now you can start logging with OpenTelemetry:
+
+```java
+import io.opentelemetry.api.logs.Logger;
+
+Logger logger = GlobalLoggerProvider.get().get("my-app");
+
+logger.logRecordBuilder()
+    .setBody("User action")
+    .setAttributes(Attributes.of(
+        AttributeKey.stringKey("userId"), "123",
+        AttributeKey.stringKey("action"), "login"
+    ))
+    .emit();
+```
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, test that logs are flowing into PostHog:
+
+1. Send a test log from your application
+2. Check the PostHog logs interface for your log entries
+3. Verify the logs appear in your project
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>

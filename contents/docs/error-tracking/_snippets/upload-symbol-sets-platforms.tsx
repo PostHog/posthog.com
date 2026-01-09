@@ -44,6 +44,21 @@ const UploadSymbolSetsPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg',
         },
         {
+            label: 'Rollup',
+            url: '/docs/error-tracking/upload-source-maps/rollup',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Rollup_js_c306a2fde3.svg',
+        },
+        {
+            label: 'Webpack',
+            url: '/docs/error-tracking/upload-source-maps/webpack',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/webpack_3fc774b5a5.svg',
+        },
+        {
+            label: 'Vite',
+            url: '/docs/error-tracking/upload-source-maps/vite',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Vitejs_logo_98ffe5d5ee.svg',
+        },
+        {
             label: 'CLI',
             url: '/docs/error-tracking/upload-source-maps/cli',
             icon: 'IconCode',

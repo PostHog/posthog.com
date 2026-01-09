@@ -1,0 +1,25 @@
+### Q1 2026 Objectives
+
+This quarter we're focused on reliability, performance, and cleaning house. No incidents, sub-100ms P99, and deleting legacy code that's holding us back.
+
+#### Short-mid term reliability focus — <TeamMember name="Phil Haack" photo />
+
+**Goal: No incidents.**
+
+- **Isolated flags-specific infra** — Run the flags service on entirely dedicated infrastructure (Redis cache ([RFC #909](https://github.com/PostHog/product-internal/pull/909)), read replica DB, celery queue, etc.) rather than sharing with other services.
+- **Load testing framework** — Add tooling so we can load test the flags service
+
+#### Long term service improvements — <TeamMember name="Phil Haack" photo />
+
+**Goal: Sub-100ms P99, consistent responses.**
+
+- 10x scaling the flags service
+- New architecture vision — can we decouple flag evaluation from the database? can we make the service even faster so that folks don't need to use local eval if they want a better experience?
+
+#### "This house is clean" — <TeamMember name="Matheus Batista" photo />
+
+Pay down tech debt and simplify the codebase.
+
+- Delete all the code that backs `/decide` — it's not used anywhere, so let's get the cruft out of there
+- Split out `remote_config` from `/flags`
+- Get `/local_evaluation` in a good state — low cost to run, good performance

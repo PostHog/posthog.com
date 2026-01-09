@@ -4,7 +4,8 @@ export enum PlaceType {
     HOTEL = 'Hotel',
     AIRBNB = 'Airbnb',
     CO_WORKING = 'Co-working',
-    OFFSITE = 'Offsite',
+    BAR = 'Bar',
+    //OFFSITE = 'Offsite',
 }
 export interface PlaceItem {
     id: number
