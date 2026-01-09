@@ -61,8 +61,9 @@ export const llmAnalytics = {
             'Monitor and optimize AI products with LLM Analytics. Get full observability across every conversation. See model performance, cost, and errors.',
     },
     overview: {
-        title: 'Ship better AI products, faster',
-        description: 'Analyze traces, spans, per-user costs, latency, and usage of your AI features',
+        title: 'Observe and debug AI in production',
+        description:
+            'Product analytics for LLMs. Inspect traces, spans, latency, usage, and per-user costs for AI-powered features.',
         textColor: 'text-white',
         layout: 'overlay',
     },
