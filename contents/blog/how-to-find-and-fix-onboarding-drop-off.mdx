@@ -32,7 +32,10 @@ import { Checkbox } from 'components/RadixUI/Checkbox'
 | **Best for** | Product engineers, technical founders, growth teams |
 | **Outcome** | Identify where users drop off during onboarding, why it happens, and what to fix first. |
 
-[Jump to recipe](#step-1-prep-the-finish-line)
+<a href="#step-1-prep-the-finish-line" 
+   style="display: inline-block; background-color: #EB9D29; color: #000; font-weight: 700; font-size: 15px; padding: 6px 12px; border-radius: 6px; text-decoration: none; border: 1.5px solid #000;">
+   Jump to recipe
+</a>
 
 ---
 
@@ -44,42 +47,6 @@ It's like attempting a beef wellington, realizing you're in over your head somew
 
 **Even better news**: onboarding friction is measurable, debuggable, and fixable.
 
-<details>
-<summary><strong>TL;DR (Recipe checklist)</strong></summary>
-
-<h4>Ingredients</h4>
-<div className="space-y-4 pl-6">
-  <div className="flex items-center gap-2"><Checkbox id="ingredient-1" defaultChecked={false} /><label htmlFor="ingredient-1" className="text-sm cursor-pointer">Product analytics tool</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="ingredient-2" defaultChecked={false} /><label htmlFor="ingredient-2" className="text-sm cursor-pointer">Session replay tool</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="ingredient-3" defaultChecked={false} /><label htmlFor="ingredient-3" className="text-sm cursor-pointer">Surveys (optional)</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="ingredient-4" defaultChecked={false} /><label htmlFor="ingredient-4" className="text-sm cursor-pointer">Feature flags (optional)</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="ingredient-5" defaultChecked={false} /><label htmlFor="ingredient-5" className="text-sm cursor-pointer">Experiments (optional)</label></div>
-</div>
-
-<h4>Steps</h4>
-<div className="space-y-4 pl-6">
-  <div className="flex items-center gap-2"><Checkbox id="step-1" defaultChecked={false} /><label htmlFor="step-1" className="text-sm cursor-pointer"><strong>1.</strong> Define your activation event</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="step-2" defaultChecked={false} /><label htmlFor="step-2" className="text-sm cursor-pointer"><strong>2.</strong> Build a 3–5 step funnel</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="step-3" defaultChecked={false} /><label htmlFor="step-3" className="text-sm cursor-pointer"><strong>3.</strong> Let data collect for ~1 week</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="step-4" defaultChecked={false} /><label htmlFor="step-4" className="text-sm cursor-pointer"><strong>4.</strong> Find the biggest drop-off</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="step-5" defaultChecked={false} /><label htmlFor="step-5" className="text-sm cursor-pointer"><strong>5.</strong> Watch 10–15 session replays</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="step-6" defaultChecked={false} /><label htmlFor="step-6" className="text-sm cursor-pointer"><strong>6.</strong> Fold in survey data</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="step-7" defaultChecked={false} /><label htmlFor="step-7" className="text-sm cursor-pointer"><strong>7.</strong> Form hypothesis, ship one fix</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="step-8" defaultChecked={false} /><label htmlFor="step-8" className="text-sm cursor-pointer"><strong>8.</strong> Roll out with feature flags</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="step-9" defaultChecked={false} /><label htmlFor="step-9" className="text-sm cursor-pointer"><strong>9.</strong> Measure and iterate</label></div>
-</div>
-
-<h4>You've nailed it when...</h4>
-<div className="space-y-4 pl-6">
-  <div className="flex items-center gap-2"><Checkbox id="nailed-1" defaultChecked={false} /><label htmlFor="nailed-1" className="text-sm cursor-pointer">You know your activation event</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="nailed-2" defaultChecked={false} /><label htmlFor="nailed-2" className="text-sm cursor-pointer">You can see where users drop off</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="nailed-3" defaultChecked={false} /><label htmlFor="nailed-3" className="text-sm cursor-pointer">You understand why they're dropping off</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="nailed-4" defaultChecked={false} /><label htmlFor="nailed-4" className="text-sm cursor-pointer">You've shipped a fix</label></div>
-  <div className="flex items-center gap-2"><Checkbox id="nailed-5" defaultChecked={false} /><label htmlFor="nailed-5" className="text-sm cursor-pointer">You've measured whether it worked</label></div>
-</div>
-
-</details>
-
 ---
 
 ## What you'll need
@@ -89,19 +56,25 @@ It's like attempting a beef wellington, realizing you're in over your head somew
 You don't need a massive stack for this recipe.
 
 **Required:**
-- [A product analytics tool](/blog/best-open-source-analytics-tools) (for building your onboarding funnel)
-- [A session replay tool](/blog/best-session-replay-tools) (for watching what users actually do)
+<div className="space-y-4 pl-6">
+  <div className="flex items-center gap-2"><Checkbox id="req-1" defaultChecked={false} /><label htmlFor="req-1" className="text-sm cursor-pointer"><a href="/blog/best-open-source-analytics-tools">A product analytics tool</a> (for building your onboarding funnel)</label></div>
+  <div className="flex items-center gap-2"><Checkbox id="req-2" defaultChecked={false} /><label htmlFor="req-2" className="text-sm cursor-pointer"><a href="/blog/best-session-replay-tools">A session replay tool</a> (for watching what users actually do)</label></div>
+</div>
 
 *Optional, but recommended:*
-- [Autocapture](/docs/product-analytics/autocapture) (for skipping manual event setup)
-- [Cohorts or segmentation](/docs/data/cohorts) (for slicing data by user type)
-- [Feature flags](/feature-flags) (for safely rolling out fixes)
-- [Experiments](/experiments) (for measuring your changes)
-- [Surveys](/surveys) (for getting direct feedback from users)
+<div className="space-y-4 pl-6">
+  <div className="flex items-center gap-2"><Checkbox id="opt-1" defaultChecked={false} /><label htmlFor="opt-1" className="text-sm cursor-pointer"><a href="/docs/product-analytics/autocapture">Autocapture</a> (for skipping manual event setup)</label></div>
+  <div className="flex items-center gap-2"><Checkbox id="opt-2" defaultChecked={false} /><label htmlFor="opt-2" className="text-sm cursor-pointer"><a href="/docs/data/cohorts">Cohorts or segmentation</a> (for slicing data by user type)</label></div>
+  <div className="flex items-center gap-2"><Checkbox id="opt-3" defaultChecked={false} /><label htmlFor="opt-3" className="text-sm cursor-pointer"><a href="/feature-flags">Feature flags</a> (for safely rolling out fixes)</label></div>
+  <div className="flex items-center gap-2"><Checkbox id="opt-4" defaultChecked={false} /><label htmlFor="opt-4" className="text-sm cursor-pointer"><a href="/experiments">Experiments</a> (for measuring your changes)</label></div>
+  <div className="flex items-center gap-2"><Checkbox id="opt-5" defaultChecked={false} /><label htmlFor="opt-5" className="text-sm cursor-pointer"><a href="/surveys">Surveys</a> (for getting direct feedback from users)</label></div>
+</div>
 
-You'll also need:
-- **A clear definition of what "successful onboarding" looks like**. This is [your activation event](/newsletter/wtf-is-activation) – the moment a user has gotten enough value to stick around (more on this below).
-- **At least a few hundred users going through your flow**. You need enough data to spot patterns. If you're at an earlier stage, you can still follow this recipe; just watch more replays and lean harder on qualitative signals until your numbers catch up.
+**You'll also need:**
+<div className="space-y-4 pl-6">
+  <div className="flex items-center gap-2"><Checkbox id="also-1" defaultChecked={false} /><label htmlFor="also-1" className="text-sm cursor-pointer"><strong>A clear definition of what "successful onboarding" looks like</strong>. This is <a href="/newsletter/wtf-is-activation">your activation event</a> – the moment a user has gotten enough value to stick around (more on this below).</label></div>
+  <div className="flex items-center gap-2"><Checkbox id="also-2" defaultChecked={false} /><label htmlFor="also-2" className="text-sm cursor-pointer"><strong><a href="/tutorials/event-tracking-guide">Events firing</a> & at least a few hundred users going through your flow</strong>. You need enough data to spot patterns. If you're at an earlier stage, you can still follow this recipe; just watch more replays and lean harder on qualitative signals until your numbers catch up.</label></div>
+</div>
 
 **Want to cook with PostHog? Great choice!**
 
@@ -377,6 +350,8 @@ Set your funnel's **Graph type** to **Historical trends** to see conversion over
 
 If you used a feature flag or experiment, check the results in [Experiments](https://app.posthog.com/experiments) to see the impact with statistical significance.
 
+For another perspective on your funnel, you can also break it by whether that feature flag was enabled for that user.
+
 > 👨‍🍳 *Chef's tip: Screenshot your before/after funnels. They make great artifacts for retros, stakeholder updates, and convincing your team that this stuff actually works.*
 
 <CalloutBox icon="IconInfo" title="You're done when..." type="fyi">
@@ -495,10 +470,10 @@ A unified stack makes it much easier to move from “where users drop off” to 
 ### Pairs well with
 
 - [The AARRR pirate funnel explained](/product-engineers/aarrr-pirate-funnel)
-- [10 things we've learned about A/B testing](https://newsletter.posthog.com/p/10-things-weve-learned-about-ab-testing)
+- [10 things we've learned about A/B testing](/newsletter/what-we've-learned-about-ab-testings)
 - [How to think like a growth engineer](/newsletter/think-like-a-growth-engineer)
 - [What we've learned about talking to users](/blog/product-for-engineers-1)
-- [50 things we've learned about building successful products](https://newsletter.posthog.com/p/50-things-weve-learned-about-building)
+- [50 things we've learned about building successful products](/newsletter/50-product-learnings)
 
 ---
 
