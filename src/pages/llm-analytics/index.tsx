@@ -452,6 +452,11 @@ export default function LLMAnalytics(): JSX.Element {
                     belowContent: <AIEngineers />,
                 },
             },
+            overview: {
+                props: {
+                    className: '!bg-purple bg-llm-analytics',
+                },
+            },
         },
     })
 
