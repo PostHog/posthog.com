@@ -988,119 +988,52 @@ export default function Home2() {
     })
 
     return (
-        <>
-            <SEO
-                title="Welcome to PostHog"
-                description="PostHog is the only developer platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
-                image={`/images/og/default.png`}
-            />
-            <Wizard
-                leftNavigation={
-                    <div className="flex gap-x-2 pl-2 @lg:pl-6">
-                        <CallToAction
-                            to="https://app.posthog.com/signup"
-                            size="md"
-                            state={{ newWindow: true, initialTab: 'signup' }}
-                        >
-                            Get started - free
-                        </CallToAction>
-                        <div className="hidden @3xl:block">
-                            <CallToAction
-                                type="secondary"
-                                size="md"
-                                to="/docs/getting-started/install?tab=wizard"
-                                state={{ newWindow: true }}
-                            >
-                                Install with AI
-                            </CallToAction>
+        <ScrollArea
+            data-scheme="primary"
+            className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:p-4 @lg:[&>div>div]:p-8 [&_.w-vulcan-v2]:!rounded-none bg-primary"
+        >
+            <article>
+                {/* Video Hero Section */}
+                <div className="flex flex-col @2xl:flex-row gap-8">
+                    <div className="flex-1 @2xl:pt-2 @4xl:pt-8 @5xl:pt-8 @2xl:pt-16">
+                        <h1 className="text-4xl font-bold mb-4">The AI platform for engineers</h1>
+                        <p className="text-xl mb-8 mt-0">
+                            Debug products. Ship features faster. <br />
+                            With all user and product data in one stack.
+                        </p>
+                        <div className="@2xl:max-w-lg mb-6">
+                            <Accordion
+                                key={activeAccordion}
+                                // skin={false}
+                                items={accordionItems}
+                                defaultValue={activeAccordion}
+                                onValueChange={handleAccordionChange}
+                                triggerClassName="[&_h2]:text-lg !bg-transparent"
+                            />
                         </div>
                     </div>
-                }
-                rightNavigation={
-                    <div className="flex gap-x-2 pr-2 @lg:pr-6">
-                        <OSButton
-                            asLink
-                            to="/talk-to-a-human"
-                            size="md"
-                            variant="underline"
-                            className="font-semibold underline"
-                            state={{ newWindow: true }}
+                    <div ref={tvScreenRef} className="flex flex-col items-center">
+                        <TVScreen
+                            className="relative w-full @2xl:w-[560px]"
+                            title={currentPrompt.text}
+                            isPlaying={isPlaying}
+                            videoNumber={activePromptIndex + 1}
+                            onPrev={handlePrev}
+                            onPlayPause={handlePlayPause}
+                            onNext={handleNext}
                         >
-                            Talk to a human
-                        </OSButton>
+                            <WistiaVideo
+                                ref={videoRef}
+                                videoId={currentVideoId}
+                                onEnd={handleVideoEnd}
+                                className="absolute inset-0 [&_.w-chrome]:!rounded-none [&_video]:m-0 [&_.w-vulcan-v2]:!rounded-none [&_.w-chrome]:![clip-path:none]"
+                                hideInitialControls
+                                hideAudioControls
+                            />
+                        </TVScreen>
                     </div>
-                }
-            >
-                <ScrollArea
-                    data-scheme="primary"
-                    className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:p-4 @lg:[&>div>div]:p-8 [&_.w-vulcan-v2]:!rounded-none bg-primary"
-                >
-                    <article className={`${getProseClasses()} max-w-7xl mx-auto`}>
-                        {/* Video Hero Section */}
-                        <div className="flex flex-col @3xl:flex-row gap-8">
-                            <div className="flex-1 @3xl:pt-2 @4xl:pt-8 @5xl:pt-8">
-                                <div className="mb-8">
-                                    <Logo
-                                        className="inline-block"
-                                        fill={siteSettings.theme === 'dark' ? 'white' : undefined}
-                                    />
-                                </div>
-                                <h1 className="!text-2xl font-bold">The AI platform for engineers</h1>
-                                <p className="text-base mt-0">
-                                    Debug products. Ship features faster. <br />
-                                    With all user and product data in one stack.
-                                </p>
-                                <div className="@3xl:max-w-md mb-6">
-                                    <Accordion
-                                        key={activeAccordion}
-                                        // skin={false}
-                                        items={accordionItems}
-                                        defaultValue={activeAccordion}
-                                        onValueChange={handleAccordionChange}
-                                        triggerClassName="[&_h2]:text-sm !bg-transparent"
-                                    />
-                                </div>
-                                <CTAs />
-                                Questions?{' '}
-                                <Link to="/demo" state={{ newWindow: true }}>
-                                    Watch a demo
-                                </Link>{' '}
-                                or{' '}
-                                <Link to="/talk-to-a-human" className="underline" state={{ newWindow: true }}>
-                                    talk to a human
-                                </Link>
-                            </div>
-                            <div ref={tvScreenRef} className="flex flex-col items-center">
-                                <TVScreen
-                                    className="relative w-full @3xl:w-[400px] @4xl:w-[500px]"
-                                    title={currentPrompt.text}
-                                    isPlaying={isPlaying}
-                                    videoNumber={activePromptIndex + 1}
-                                    onPrev={handlePrev}
-                                    onPlayPause={handlePlayPause}
-                                    onNext={handleNext}
-                                >
-                                    <WistiaVideo
-                                        ref={videoRef}
-                                        videoId={currentVideoId}
-                                        onEnd={handleVideoEnd}
-                                        className="absolute inset-0 [&_.w-chrome]:!rounded-none [&_video]:m-0 [&_.w-vulcan-v2]:!rounded-none [&_.w-chrome]:![clip-path:none]"
-                                        hideInitialControls
-                                        hideAudioControls
-                                    />
-                                </TVScreen>
-                            </div>
-                        </div>
-
-                        <MDXEditor
-                            noEditorWrapper
-                            jsxComponentDescriptors={jsxComponentDescriptors}
-                            body={rawBody}
-                            mdxBody={mdxBody}
-                        />
-                    </article>
-                </ScrollArea>
-            </Wizard>
-        </>
+                </div>
+            </article>
+        </ScrollArea>
     )
 }
