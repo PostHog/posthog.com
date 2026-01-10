@@ -54,6 +54,10 @@ You can also:
 
 - Define the retention period by any number of hours, days, weeks, or months. To analyze retention across a whole year, for example, you should configure your insight to say "in the last 12 months".
 
+- Configure [custom return time brackets](#custom-return-time-brackets) to measure retention at specific time intervals that align with your product's engagement patterns or business milestones, rather than using evenly-spaced periods.
+
+- Use [24-hour time window mode](#24-hour-time-window-mode) to calculate retention using rolling 24-hour periods from each user's start event, rather than calendar-based periods. This ensures consistent measurement windows for all users regardless of when they sign up.
+
 - Filter your retention insights using filter groups, such as event properties (country, device, etc.), person properties (job title, company name, etc.), feature flags (users who have a flag enabled), and existing [cohorts](/docs/data/cohorts) (pre-defined groups of users).
 
 - Choose between **first time** and **recurring** retention. **Recurring retention** counts a user or group as part of a cohort if they performed the start event during that time period, irrespective of if it was their first time or not. **First time retention** only counts a user or group as part of the cohort if it was their first time performing the start event.
@@ -129,6 +133,38 @@ There are two options for calculating who is included in the returning cohort:
 
 2. **On or after**. Also known as cumulative, rolling or unbounded retention. When selected, the retention number for a specific time interval, say Day 2, includes user who returned **on or after** Day 2 (i.e. users who returned on Day 3, Day 4,... are also counted in Day 2). This is essentially the inverse of your overall churn rate. It shows how many people used your product and eventually returned to find more value. This is useful for evaluating features that don't require users to come back in every time period.
 
+### Custom return time brackets
+
+By default, retention insights show evenly-spaced time periods (e.g., Day 1, Day 2, Day 3, Day 4...). With custom return time brackets, you can define specific time intervals that align with your product's unique engagement patterns or business milestones.
+
+**When to use custom brackets:**
+
+- **Non-standard engagement cycles**: If your users engage with your product on irregular schedules that don't align with standard daily or weekly patterns. For example, a subscription service where users typically renew every 45 days can create a custom 45-day bracket to measure retention aligned with their subscription cycle.
+
+- **Product lifecycle milestones**: When you want to measure retention at specific product milestones. For example, if your app has a 21-day free trial, you can create custom brackets for Day 1, Day 7, Day 21, and Day 30 to track retention at key trial stages and conversion points.
+
+- **Event-specific analysis**: For products with seasonal or event-driven usage patterns. For example, an e-commerce platform running sales every 60 days can create custom brackets (Day 1, Day 30, Day 60, Day 90) to assess how many users return for each sale event.
+
+- **Long-term retention focus**: When you're primarily interested in long-term retention rather than daily patterns. Instead of tracking Day 1 through Day 30, you might create custom brackets like Day 1, Day 7, Day 30, Day 90, Day 180 to focus on key retention milestones.
+
+Custom brackets help you focus on the time periods that matter most for your business, making it easier to identify trends and make data-driven decisions about user engagement.
+
+### 24-hour time window mode
+
+By default, retention insights use calendar-based periods (e.g., Day 1 refers to the first calendar day after the start event, Day 2 refers to the second calendar day, etc.). With 24-hour time window mode, retention is calculated using rolling 24-hour periods from when each user first performed the start event.
+
+**When to use 24-hour time windows:**
+
+- **Precise timing requirements**: When you need exact 24-hour measurement periods regardless of when users sign up. For example, if a user signs up at 11 PM, calendar-based Day 1 only gives them 1 hour, while 24-hour mode ensures they get a full 24 hours to return.
+
+- **Global products with timezone complexity**: For products with users across multiple time zones, calendar days can create inconsistent measurement windows. 24-hour windows provide uniform measurement regardless of a user's location or when they first engage.
+
+- **Time-sensitive features**: When measuring retention for features where the exact time elapsed matters more than calendar alignment. For example, a messaging app might want to measure if users return within 24 hours of sending their first message, regardless of what time of day that occurred.
+
+- **Consistent user experience windows**: When you want to ensure all users get the same amount of time to return, regardless of when they started. This is particularly useful for onboarding flows, trial periods, or time-limited features where fairness and consistency matter.
+
+**Example**: With calendar-based periods, a user who signs up at 11:59 PM on Monday would have only 1 minute counted as "Day 1", while a user who signs up at 12:01 AM on Tuesday gets a full 24 hours. With 24-hour time windows, both users get exactly 24 hours from their signup time, providing more accurate and fair retention measurement.
+
 ### Mean calculation logic
 
 You can choose between two different calculation options for the mean/average retention for each time interval.
@@ -158,6 +194,25 @@ When saving a retention insight, there are two things to consider:
 
 1. Whether you want it to show as a line or bar chart. Choose this on the chart when creating an insight.
 2. Whether you want it to show as a chart or a table (or both) on a dashboard. Choose this after saving the insight by clicking on **Options** and then set it to **Show table only**, **Show graph only**, or **Show both**.
+
+### Selecting specific periods to plot
+
+By default, retention charts display all available retention periods (e.g., Week 1, Week 2, Week 3, Week 4...). You can select a specific period to display in the chart, which helps reduce visual clutter and focus on the periods that matter most for your analysis.
+
+{/* TODO: for when we support selecting more than one column
+**When to use period selection:**
+
+- **Focusing on key milestones**: When you want to highlight specific retention periods that align with important business milestones. For example, if you're analyzing a 30-day trial, you might select only Week 1, Week 2, and Week 4 to focus on early retention and conversion points.
+
+- **Reducing visual complexity**: When you have many retention periods (e.g., 12+ weeks) and want to create a cleaner, more readable chart. Selecting a subset of periods makes it easier to identify trends without overwhelming the visualization.
+
+- **Comparing specific periods**: When you want to compare retention at particular intervals. For example, selecting Week 1, Week 4, Week 8, and Week 12 allows you to compare retention at monthly intervals without the noise of weekly data points.
+
+- **Analyzing long-term patterns**: When you're primarily interested in long-term retention trends. Instead of showing all 52 weeks, you might select Week 1, Week 4, Week 12, Week 24, and Week 52 to see retention evolution at key intervals.
+*/}
+
+To select specific periods, click on the retention table column you want to display. The chart will update to show only the selected period, making it easier to focus on the data that matters most for your analysis. 
+Note that period selection is not available for shared insights or embedded retention charts.
 
 ##  Retention vs. Stickiness
 
