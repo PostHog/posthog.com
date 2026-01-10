@@ -1,34 +1,23 @@
 ---
 title: Svelte
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/svelte.svg
+platformLogo: svelte
 ---
 
-import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
-import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
-import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx"
+import { SvelteInstallation } from 'onboarding/product-analytics/svelte.tsx'
+import { JSEventCapture } from 'onboarding/product-analytics/_snippets/js-event-capture.tsx'
+import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 
 PostHog makes it easy to get data about traffic and usage of your [Svelte](https://svelte.dev/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
 This guide walks you through integrating PostHog into your SvelteKit app using the [JavaScript Web](/docs/libraries/js) and [Node.js](/docs/libraries/node) SDKs.
 
-import AgentIntegrationSection from "../components/AgentIntegrationSection.mdx"
-
-<AgentIntegrationSection framework="Svelte" />
-
 ## Client-side setup
 
-import SvelteInstallClient from "../integrate/_snippets/install-svelte-client.mdx"
-
-<SvelteInstallClient />
+<OnboardingContentWrapper snippets={{ JSEventCapture }}>
+    <SvelteInstallation />
+</OnboardingContentWrapper>
 
 > ❗️ If you intend on using session replays with a server-side rendered Svelte app ensure that your [asset URLs are configured to be relative](/docs/session-replay/troubleshooting#ensure-assets-are-imported-from-the-base-URL-in-Svelte).
-
-<DetailSetUpReverseProxy />
-
-<DetailGroupProductsInOneProject />
-
-<DetailPostHogIPs />
 
 ## Server-side setup
 

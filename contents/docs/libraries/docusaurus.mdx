@@ -1,55 +1,19 @@
 ---
 title: Docusaurus
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/docusaurus.svg
+platformLogo: docusaurus
 tags:
   - community
 ---
 
-import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
-import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
-import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx"
+import { DocusaurusInstallation } from 'onboarding/product-analytics/docusaurus.tsx'
+import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 
-To easily track your Docusaurus site, you can install the [PostHog plugin](https://github.com/PostHog/posthog-docusaurus). This enables you to autocapture pageviews, clicks, session replays, as well as use the other features of PostHog such as [surveys](/docs/surveys). 
+To easily track your Docusaurus site, you can install the [PostHog plugin](https://github.com/PostHog/posthog-docusaurus). This enables you to autocapture pageviews, clicks, session replays, as well as use the other features of PostHog such as [surveys](/docs/surveys).
 
-## Install
+## Installation
 
-Once you have your Docusaurus site set up, install the PostHog plugin:
+<OnboardingContentWrapper>
+    <DocusaurusInstallation />
+</OnboardingContentWrapper>
 
-```bash
-npm install --save posthog-docusaurus
-```
-
-or 
-
-```bash
-yarn add posthog-docusaurus
-```
-
-Next, add it to your Docusaurus config with your project API key and instance address, both of which you can find in [your project settings](https://us.posthog.com/settings/project).
-
-```js
-// docusaurus.config.js
-module.exports = {
-  plugins: [
-    [
-      "posthog-docusaurus",
-      {
-        apiKey: "<ph_project_api_key>",
-        appUrl: "<ph_client_api_host>", // optional, defaults to "https://us.i.posthog.com"
-        enableInDevelopment: false, // optional
-      },
-    ],
-  ],
-};
-```
-
-Run your site again to see events autocaptured by PostHog.
-
-> **Note:**You can pass additional PostHog [config options](/docs/libraries/js/config) to the plugin, but they are passed through `JSON.stringify()`, so functions (such as `before_send`) are not supported.
-
-<DetailSetUpReverseProxy />
-
-<DetailGroupProductsInOneProject />
-
-<DetailPostHogIPs />
+> **Note:** You can pass additional PostHog [config options](/docs/libraries/js/config) to the plugin, but they are passed through `JSON.stringify()`, so functions (such as `before_send`) are not supported.

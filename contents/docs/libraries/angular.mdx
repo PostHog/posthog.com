@@ -1,13 +1,12 @@
 ---
 title: Angular
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/angular.svg
+platformLogo: angular
 ---
 
-import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
-import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
+import { AngularInstallation } from 'onboarding/product-analytics/angular.tsx'
+import { JSEventCapture } from 'onboarding/product-analytics/_snippets/js-event-capture.tsx'
+import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import InstallNodePackageManagers from "../integrate/_snippets/install-node-package-managers.mdx"
-import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx"
 
 PostHog makes it easy to get data about traffic and usage of your [Angular](https://angular.dev/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
@@ -15,46 +14,15 @@ This guide walks you through integrating PostHog into your Angular app using the
 
 ## Installation
 
-import AngularInstall from "../integrate/_snippets/install-angular.mdx"
-
-<AngularInstall />
+<OnboardingContentWrapper snippets={{ JSEventCapture }}>
+    <AngularInstallation />
+</OnboardingContentWrapper>
 
 > **Note:** If you're using Typescript, you might have some trouble getting your types to compile because we depend on `rrweb` but don't ship all of their types. To accommodate that, you'll need to add `@rrweb/types@2.0.0-alpha.17` and `rrweb-snapshot@2.0.0-alpha.17` as a dependency if you want your Angular compiler to typecheck correctly.
 >
 > Given the nature of this library, you might need to completely clear your `.npm` cache to get this to work as expected. Make sure your clear your CI's cache as well.
 >
 > In the rare case the versions above get out-of-date, you can check our [JavaScript SDK's `package.json`](https://github.com/PostHog/posthog-js/blob/main/package.json) to understand what's the exact version you need to depend on.
-
-<DetailSetUpReverseProxy />
-
-<DetailGroupProductsInOneProject />
-
-<DetailPostHogIPs />
-
-## Tracking pageviews
-
-PostHog automatically tracks your pageviews by hooking up to the browser's `navigator` API as long as you initialize PostHog with the `defaults` config option set after `2025-11-30`.
-
-## Capture custom events
-
-To [capture custom events](/docs/product-analytics/capture-events), import `posthog` and call `posthog.capture()`. Below is an example of how to do this in a component:
-
-```typescript file=app.component.ts
-import { Component } from '@angular/core';
-import posthog from 'posthog-js'
-
-@Component({
- // existing component code
-})
-
-export class AppComponent {
-  handleClick() {
-    posthog.capture(
-      'home_button_clicked', 
-    )
-  }
-}
-```
 
 ## Session replay
 
