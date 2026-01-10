@@ -36,5 +36,5 @@ export const AllSources = () => {
         image: getLogo('supabase'),
     }
 
-    return <List className="grid sm:grid-cols-2 mb-4" items={[...platforms, supabase]} />
+    return <List className="grid @2xl:grid-cols-2 @3xl:grid-cols-3 mb-4" items={[...platforms, supabase]} />
 }

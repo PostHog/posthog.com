@@ -337,7 +337,7 @@ const OSTable: React.FC<OSTableProps> = ({
                                       type={_group ? `${_group.toLowerCase()} ${type}` : type}
                                   />
                               ))
-                            : rows.map((row, rowIndex) => (
+                            : rows?.map((row, rowIndex) => (
                                   <Row
                                       key={row.key || rowIndex}
                                       row={row}
