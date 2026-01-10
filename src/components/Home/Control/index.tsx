@@ -703,6 +703,7 @@ const CompanyStageTabs = () => {
                             'surveys',
                             'dashboards',
                             'cdp',
+                            'workflows_emails',
                         ]}
                     />
                 </div>
