@@ -382,6 +382,10 @@ export const dataPipelines = {
                     name: 'Databricks',
                     url: '/docs/cdp/batch-exports/databricks',
                 },
+                {
+                    name: 'Azure Blob Storage',
+                    url: '/docs/cdp/batch-exports/azureblob',
+                },
             ],
         },
         {
