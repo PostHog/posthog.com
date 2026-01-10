@@ -359,4 +359,56 @@ export const workflows = {
         alt: 'A hedgehog automating workflows',
         classes: 'absolute bottom-0 right-4 max-w-[250px]',
     },
+    videos: {
+        automating_onboarding_with_posthog_workflows: {
+            title: 'Automating onboarding with PostHog Workflows',
+            author: 'Sara Miteva',
+            wistia: '9npwnc8sm6',
+            chapters: [
+                {
+                    title: 'Understanding triggers and user targeting',
+                    time: 29,
+                },
+                {
+                    title: 'Setting up workflow steps',
+                    time: 72,
+                },
+                {
+                    title: 'Incorporating delays and conditions',
+                    time: 108,
+                },
+                {
+                    title: 'Customizing user communication',
+                    time: 137,
+                },
+                {
+                    title: 'Email editor features',
+                    time: 178,
+                },
+                {
+                    title: 'Finalizing the onboarding sequence',
+                    time: 229,
+                },
+            ],
+        },
+        workflows_space_demo: {
+            title: 'PostHog Workflows demo in space',
+            author: 'Jordo Dibb',
+            wistia: '33f5pyiaxo',
+            chapters: [
+                {
+                    title: 'Building user journeys',
+                    time: 67,
+                },
+                {
+                    title: 'Implementing conditional logic',
+                    time: 97
+                },
+                {
+                    title: 'Chaining flows, audience splits, and integrations',
+                    time: 184
+                }
+            ],
+        },
+    },
 }

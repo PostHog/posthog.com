@@ -212,7 +212,7 @@ export default function Workflows(): JSX.Element {
         templates: {
             overview: 'stacked',
         },
-        exclude: ['answers', 'posthog-on-posthog', 'videos'],
+        exclude: ['answers', 'posthog-on-posthog'],
         content: {
             answersDescription: '',
             answersHeadline: '',
