@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-When working with our customers, it is important to do a basic account review to get a better understanding of whether we think the customer has things set up correctly. Below is a simple checklist of things to look for, and address on your discovery call with the customer, to get a better idea of whether they are set up for success or not. It's important to note that we can only check for certain things and some things (like backend implementation) will rely on us speaking to the customer to get a better understanding of their implementation. 
+When working with our customers, it is important to do a basic account review to get a better understanding of whether we think the customer has things set up correctly. You can see the basic account checklist for each of your customers here. A description for each of the checklist items and what you should be looking for is below. It's important to note that we can only check for certain things and some things (like backend implementation) will rely on us speaking to the customer to get a better understanding of their implementation. 
 
 ## Events and events properties
 
