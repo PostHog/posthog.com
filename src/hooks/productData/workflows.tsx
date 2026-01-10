@@ -354,4 +354,9 @@ export const workflows = {
         overview:
             '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',
     },
+    hog: {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
+        alt: 'A hedgehog automating workflows',
+        classes: 'absolute bottom-0 right-4 max-w-[250px]',
+    },
 }
