@@ -14,6 +14,7 @@ import { Questions } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import { Contributors } from '../../templates/BlogPost'
 import Link from 'components/Link'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 export const Post = ({ imageURL, title, date, belowTitle, body, cta, transformImageUri }) => {
     return (
@@ -98,83 +99,85 @@ export default function ClientPost({
     const imageURL = featuredImage?.url
 
     return (
-        <div className="@container">
-            <div className="flex flex-col-reverse @3xl:flex-row">
-                <div className={`article-content flex-1 transition-all md:pt-8 w-full overflow-auto`}>
-                    <div
-                        className={`mx-auto transition-all ${
-                            fullWidthContent ? 'max-w-full' : 'max-w-3xl'
-                        }  md:px-8 2xl:px-12`}
-                    >
-                        <SEO title={title + ' - PostHog'} />
-                        <article>
-                            <Post
-                                imageURL={imageURL}
-                                title={title}
-                                date={date || publishedAt}
-                                belowTitle={() =>
-                                    isModerator ? (
-                                        <div className="mt-2 text-sm inline-flex space-x-2 text-muted">
-                                            <Link
-                                                state={{
-                                                    id,
-                                                    initialValues: {
-                                                        title,
-                                                        category: post_category?.data,
-                                                        body,
-                                                        images: [],
-                                                        tags: post_tags?.data,
-                                                        excerpt,
-                                                    },
-                                                }}
-                                                to={`/posts/${id}/edit`}
-                                                className="text-red dark:text-yellow font-semibold"
-                                            >
-                                                Edit post
-                                            </Link>
-                                            <span>|</span>
-                                            <button onClick={handleDeletePost} className="text-red font-semibold">
-                                                {confirmDelete ? 'Click again to confirm' : 'Delete post'}
-                                            </button>
-                                        </div>
-                                    ) : null
-                                }
-                                body={body}
-                                cta={CTA}
-                            />
-                            <Upvote slug={slug} id={id} className="mt-6" />
-                            <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
-                                <Questions
-                                    disclaimer={false}
-                                    subject={false}
-                                    buttonText="Leave a comment"
-                                    slug={pathname}
+        <ScrollArea>
+            <div className="@container">
+                <div className="flex flex-col-reverse @3xl:flex-row">
+                    <div className="article-content flex-1 transition-all md:pt-8 w-full">
+                        <div
+                            className={`mx-auto transition-all ${
+                                fullWidthContent ? 'max-w-full' : 'max-w-3xl'
+                            }  md:px-8 2xl:px-12`}
+                        >
+                            <SEO title={title + ' - PostHog'} />
+                            <article>
+                                <Post
+                                    imageURL={imageURL}
+                                    title={title}
+                                    date={date || publishedAt}
+                                    belowTitle={() =>
+                                        isModerator ? (
+                                            <div className="mt-2 text-sm inline-flex space-x-2 text-muted">
+                                                <Link
+                                                    state={{
+                                                        id,
+                                                        initialValues: {
+                                                            title,
+                                                            category: post_category?.data,
+                                                            body,
+                                                            images: [],
+                                                            tags: post_tags?.data,
+                                                            excerpt,
+                                                        },
+                                                    }}
+                                                    to={`/posts/${id}/edit`}
+                                                    className="text-red dark:text-yellow font-semibold"
+                                                >
+                                                    Edit post
+                                                </Link>
+                                                <span>|</span>
+                                                <button onClick={handleDeletePost} className="text-red font-semibold">
+                                                    {confirmDelete ? 'Click again to confirm' : 'Delete post'}
+                                                </button>
+                                            </div>
+                                        ) : null
+                                    }
+                                    body={body}
+                                    cta={CTA}
                                 />
-                            </div>
-                        </article>
+                                <Upvote slug={slug} id={id} className="mt-6" />
+                                <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
+                                    <Questions
+                                        disclaimer={false}
+                                        subject={false}
+                                        buttonText="Leave a comment"
+                                        slug={pathname}
+                                    />
+                                </div>
+                            </article>
+                        </div>
                     </div>
+                    <aside
+                        className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full border-x border-input pt-4 xl:block hidden`}
+                    >
+                        <Upvote id={id} slug={slug} className="px-4 mb-4" />
+                        {author && (
+                            <Contributors
+                                contributors={[
+                                    {
+                                        profile_id: author.id,
+                                        image:
+                                            author.attributes?.avatar?.data?.attributes?.url ||
+                                            author.attributes.gravatarURL,
+                                        name: [author.attributes?.firstName, author.attributes?.lastName]
+                                            .filter(Boolean)
+                                            .join(' '),
+                                    },
+                                ]}
+                            />
+                        )}
+                    </aside>
                 </div>
-                <aside
-                    className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full border-x border-input pt-4 xl:block hidden`}
-                >
-                    <Upvote id={id} slug={slug} className="px-4 mb-4" />
-                    {author && (
-                        <Contributors
-                            contributors={[
-                                {
-                                    profile_id: author.id,
-                                    image:
-                                        author.attributes?.avatar?.data?.attributes?.url ||
-                                        author.attributes.gravatarURL,
-                                    name: [author.attributes?.firstName, author.attributes?.lastName]
-                                        .filter(Boolean)
-                                        .join(' '),
-                                },
-                            ]}
-                        />
-                    )}
-                </aside>
             </div>
-        </div>
+        </ScrollArea>
     )
 }
