@@ -22,14 +22,20 @@ Using PostHog's data pipelines is also often much cheaper than using an external
 
 ## Supported destinations
 
-PostHog batch exports support all major data warehouses:
+PostHog batch exports support all major data warehouses and cloud storage:
+
+**Data warehouses:**
 
 - [BigQuery](/docs/cdp/batch-exports/bigquery)
 - [Snowflake](/docs/cdp/batch-exports/snowflake)
 - [Redshift](/docs/cdp/batch-exports/redshift)
 - [Databricks](/docs/cdp/batch-exports/databricks)
-- [Postgres](/docs/cdp/batch-exports/postgres)
+
+**Cloud storage & databases:**
+
+- [Azure Blob Storage](/docs/cdp/batch-exports/azureblob)
 - [S3](/docs/cdp/batch-exports/s3) (for custom destinations)
+- [Postgres](/docs/cdp/batch-exports/postgres)
 
 ## Real-time alternatives
 
