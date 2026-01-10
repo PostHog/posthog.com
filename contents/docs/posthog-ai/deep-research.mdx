@@ -1,0 +1,44 @@
+---
+title: Deep research with PostHog AI
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import { isUnparsedSource } from 'typescript'
+
+<CalloutBox icon="IconInfo" title="Deep research is in beta" type="warning">
+
+Deep research is currently in beta. Results may not be accurate or complete. If you find issues or have suggestions, please [reach out to us](https://us.posthog.com/project/2/settings/#panel=support%3Asupport%3A%3A%3Afalse) to help us improve PostHog AI.
+
+</CalloutBox>
+
+Some questions can't be answered in just a sentence or two. Deep research is PostHog AI's way of digging deep into your data to answer complex questions. You can enable deep research in the [in-app chat](/docs/posthog-ai/chat) by toggling the **Think harder**.
+
+## How it works
+
+When you ask PostHog AI to **think harder**, PostHog AI will do the following:
+
+1. Break down your question into a plan
+2. Select the right tools to execute each step of the plan
+3. Collect the information from the queries and insights
+3. Create a report from the findings as a notebook
+
+<ProductVideo
+    videoLight="PLACEHOLDER"
+    alt="PostHog AI chat summarizing session recordings"
+    classes="rounded border border-primary @md:max-w-[80%] mx-auto"
+    autoPlay={true}
+    background={false}
+/>
+
+<Caption>
+PostHog AI creates a notebook as a report of the research
+</Caption>
+
+After the research is complete, PostHog AI will return the notebook to you. Feel free to keep asking PostHog AI questions about the research, or to edit the notebook to your liking.
+
+## Example prompts
+
+Try asking PostHog AI to think hard about these questions:
+- [`I enabled a new feature flag last week, how has it impacted my conversion rate?`](https://app.posthog.com/#panel=max:I%20enabled%20a%20new%20feature%20flag%20last%20week,%20how%20has%20it%20impacted%20my%20conversion%20rate?)
+- [`I'm trying to understand why my churn rate is increasing month over month. What are the top reasons and suggestions for fixing it?`](https://app.posthog.com/#panel=max:I'm%20trying%20to%20understand%20why%20my%20churn%20rate%20is%20increasing,%20can%20you%20help?)
+- [`What are the top errors impacting my conversion rate? Show me a breakdown, sessions, and person profiles.`](https://app.posthog.com/#panel=max:What%20are%20the%20top%20errors%20impacting%20my%20conversion%20rate?%20Show%20me%20a%20breakdown,%20sessions,%20and%20person%20profiles)
