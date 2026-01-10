@@ -125,6 +125,6 @@ Needless to say, a developer platform like PostHog is essential for tracking any
 
 - [Introduction to SaaS product metrics](/blog/b2b-saas-product-metrics): A guide to common B2B product metrics and how to measure them
 
-- [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
+- [How to actually measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
 <NewsletterForm />
