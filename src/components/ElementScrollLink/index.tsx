@@ -1,6 +1,8 @@
-import React, { ButtonHTMLAttributes, useEffect, useState, useContext, createContext, useMemo } from 'react'
+import React, { useEffect, useState, useContext, createContext, useMemo } from 'react'
+import Link from 'components/Link'
+import { useLocation } from '@reach/router'
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props {
     id: string
     label: string | React.ReactNode
     element: React.RefObject<HTMLElement>
@@ -53,9 +55,12 @@ export function ScrollSpyProvider({ children }: { children: React.ReactNode }): 
     )
 }
 
-export default function ElementScrollLink({ id, label, element, className = '', ...buttonProps }: Props): JSX.Element {
+export default function ElementScrollLink({ id, label, element, className = '' }: Props): JSX.Element {
     const { setSectionData, activeSection } = useContext(ScrollSpyContext)
     const isActive = activeSection === id
+    const location = useLocation()
+    // Full URL path with hash for internal navigation (e.g., /docs/page#section)
+    const fullUrl = `${location.pathname}#${id}`
 
     useEffect(() => {
         if (!element.current) return
@@ -82,7 +87,9 @@ export default function ElementScrollLink({ id, label, element, className = '', 
         return () => observer.disconnect()
     }, [id, element, setSectionData])
 
-    const handleClick = () => {
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault()
+
         if (!element.current) return
 
         const scrollViewport = element.current.closest('[data-radix-scroll-area-viewport]')
@@ -97,20 +104,22 @@ export default function ElementScrollLink({ id, label, element, className = '', 
                 top: relativeTop,
                 behavior: 'smooth',
             })
+
+            window.history.pushState(null, '', `#${id}`)
         }
     }
 
     return (
-        <button
-            {...buttonProps}
+        <Link
+            to={fullUrl}
             onClick={handleClick}
             className={` [overflow-wrap:anywhere]
                 text-left text-sm py-0.5 block relative active:top-px active:scale-[.99]
-                ${isActive ? 'font-semibold text-primary' : 'text-secondary hover:text-primary '} 
+                ${isActive ? 'font-semibold text-primary' : 'text-secondary hover:text-primary '}
                 ${className}
             `}
         >
             {label}
-        </button>
+        </Link>
     )
 }
