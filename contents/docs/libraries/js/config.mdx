@@ -4,21 +4,20 @@ sidebar: Docs
 showTitle: true
 ---
 
+import JSConfigBuilder from './_snippets/JSConfigBuilder'
+
 When calling `posthog.init`, there are various configuration options you can set to customize and control the behavior of PostHog.
 
-To configure these options, pass them as an object to the `posthog.init` call, like we do with `api_host`, `defaults`, `loaded`, and `autocapture` below.
+## Configuration builder
 
-```ts
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    defaults: '<ph_posthog_js_defaults>',
-    loaded: function (posthog) {
-        posthog.identify('[user unique id]')
-    },
-    autocapture: false,
-    // ... more options
-})
-```
+Use this interactive builder to generate your `posthog.init` configuration. Select the options you need and copy the generated code.
+
+<JSConfigBuilder />
+
+### Next steps
+
+1. Copy the generated code and add it to your app where PostHog is initialized.
+2. See the [full JavaScript SDK docs](/docs/libraries/js) for more features like identifying users, capturing custom events, and using feature flags.
 
 You can also use the `posthog.set_config` method to change the configuration after initialization.
 
