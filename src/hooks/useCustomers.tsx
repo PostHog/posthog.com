@@ -77,7 +77,8 @@ export interface Customer {
                 thumb: string
                 url?: string
             }
-            products: Record<string, string>
+            products?: Record<string, string>
+            quotes?: string[]
         }
     >
     featured: boolean
@@ -108,7 +109,8 @@ interface BaseCustomer {
                 thumb: string
                 url?: string
             }
-            products: Record<string, string>
+            products?: Record<string, string>
+            quotes?: string[]
         }
     >
     featured: boolean
@@ -314,6 +316,33 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     workflows:
                         'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
                 },
+            },
+        },
+    },
+    kilocode: {
+        name: 'KiloCode',
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'cdp'],
+        industries: ['AI'],
+        users: ['Engineering', 'Product', 'Growth', 'Marketing'],
+        featured: false,
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/kilocode_logo_c58c88f029.webp',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/kilocode_logo_c58c88f029.webp',
+        },
+        quotes: {
+            job_rietbergen: {
+                // This is the author handle used in OSQuote
+                name: 'Job Rietbergen',
+                role: 'Head of Growth',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/job_rietbergen_a86584acfc.jpeg',
+                },
+
+                quotes: [
+                    "In other setups, you end up with four different tools–analytics, experiments, recordings,and they don't really talk to each other. With PostHog, you can actually see the full picture.",
+                    "PostHog is really the connective tissue behind a lot of what we're doing. So many things depend on it, and it adapts as fast as the product does.",
+                    "Everything we do is about speed. PostHog helps us move fast without losing visibility into what's actually happening.",
+                ],
             },
         },
     },
