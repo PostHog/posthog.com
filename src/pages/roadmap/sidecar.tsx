@@ -30,7 +30,6 @@ export default function RoadmapPage() {
                     menu={[
                         { name: 'Questions', url: '/questions' },
                         { name: 'Roadmap', url: '/roadmap' },
-                        { name: 'Contributors', url: '/contributors' },
                         { name: 'Core team', url: '/team' },
                     ]}
                 >

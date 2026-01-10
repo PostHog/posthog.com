@@ -27,8 +27,6 @@ Thanks to all our community members for helping move PostHog forward! This relea
 
 Dimitris added an option to automatically refresh dashboards every couple of minutes. You can now have your PostHog dashboards in separate monitors or your conference room TV always in sync! Thanks for driving this forward, Dimitris!
 
-> _If you haven't seen it yet, we have a [new page](https://posthog.com/contributors) dedicated to our contributors. Every contributor gets their own digital card, and we provide a leaderboard with stats on each person's contributions. We also have a bot that sends a gift card for [PostHog merch](https://merch.posthog.com) to contributors for every PR merged, and we welcome all types of contributions!_
-
 ### Help Us Improve PostHog
 
 We’re working hard to improve the PostHog experience and would love to talk to you! Please join one of our Product, Engineering or Marketing team members in a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).

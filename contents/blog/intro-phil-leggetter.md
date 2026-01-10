@@ -15,7 +15,7 @@ category: Inside PostHog
 
 We’re proud to announce a new hire; Phil Leggetter will head up Developer Relations at PostHog.
 
-Developer relations sits at the intersection of product development, engineering, and marketing. The role serves communities of core and secondary customers through content, tutorials, events, and sponsorships. At PostHog, we’ve been blessed with a highly engaged community of [contributors](https://posthog.com/contributors), and we hope to improve our product to suit our users’ needs over the long run.
+Developer relations sits at the intersection of product development, engineering, and marketing. The role serves communities of core and secondary customers through content, tutorials, events, and sponsorships. At PostHog, we’ve been blessed with a highly engaged community of contributors, and we hope to improve our product to suit our users’ needs over the long run.
 
 Before joining PostHog, Phil managed developer relations at [tru.ID](https://tru.id/) (a mobile authentication platform), [Vonage](https://www.vonage.com/) (a communications API company), Nexmo (later acquired by Vonage), [Pusher](https://pusher.com/), and other tech startups (see [his LinkedIn profile](https://www.linkedin.com/in/leggetter/) for a full list). While at Nexmo, he built the developer relations team to 42 diverse, inclusive, and multifunctional individuals who worked everywhere from San Francisco to Singapore. He has also written a book on real-time web sockets, is currently reviewing another book on developer relations, and is now an advisor at several startups.
 

@@ -53,16 +53,6 @@ export type MenuItemType = {
     cta?: string
 }
 
-export interface Contributor {
-    login: string
-    name: string
-    avatar_url: string
-    profile: string
-    contributions: string[]
-    level: number
-    mvpWins: number
-}
-
 export interface AuthorsData {
     handle: string
     image: string
