@@ -1,5 +1,5 @@
 ---
-title: How to use evaluation runtimes and environments together for fine-grained flag control
+title: How to use evaluation runtimes and contexts together for fine-grained flag control
 date: 2025-10-07
 author:
   - dylan-martin
@@ -10,30 +10,30 @@ tags:
   - configuration
 ---
 
-Evaluation runtimes and evaluation environments are two complementary features that give you precise control over where and when your feature flags evaluate. This guide shows practical examples of using them together effectively.
+Evaluation runtimes and evaluation contexts are two complementary features that give you precise control over where and when your feature flags evaluate. This guide shows practical examples of using them together effectively.
 
-> **Prerequisites:** First understand [evaluation environments](/docs/feature-flags/evaluation-environments) and [evaluation runtime](/docs/feature-flags/creating-feature-flags#evaluation-runtime) individually.
+> **Prerequisites:** First understand [evaluation contexts](/docs/feature-flags/evaluation-contexts) and [evaluation runtime](/docs/feature-flags/creating-feature-flags#evaluation-runtime) individually.
 
 ## How they work together
 
 These features apply as sequential filters:
 
 1. **Runtime filter first**: Excludes flags based on the SDK type (client vs server)
-2. **Environment filter second**: Further filters based on environment context
+2. **Context filter second**: Further filters based on evaluation context
 
 ### Example filtering flow
 
 Consider a flag with:
 
 - Runtime: `server`
-- Evaluation environments: `["main-app", "api"]`
+- Evaluation contexts: `["main-app", "api"]`
 
 Here's what happens in different scenarios:
 
-| SDK Type | Environment Values | Result |
+| SDK Type | Context Values | Result |
 |----------|-------------------|--------|
 | JavaScript Web | `["main-app", "web"]` | ❌ Blocked by runtime (client SDK can't access server flag) |
-| Node.js | `["marketing-site", "backend"]` | ❌ Blocked by environments (neither "marketing-site" nor "backend" match flag's tags) |
+| Node.js | `["marketing-site", "backend"]` | ❌ Blocked by contexts (neither "marketing-site" nor "backend" match flag's tags) |
 | Node.js | `["main-app", "api"]` | ✅ Both filters pass |
 | Python | `["main-app", "backend"]` | ✅ Both filters pass ("main-app" matches) |
 
@@ -42,9 +42,9 @@ Here's what happens in different scenarios:
 You can configure both features when creating or editing a feature flag in PostHog:
 
 1. Set **evaluation runtime** to `server`, `client`, or `all`
-2. Add **evaluation environments** and mark them as constraints (bolt icon ⚡)
+2. Add **evaluation contexts** and mark them as constraints (bolt icon ⚡)
 
-Then configure your SDKs with matching `evaluation_environments`. See the [evaluation environments documentation](/docs/feature-flags/evaluation-environments#step-2-configure-your-sdks) for SDK configuration examples.
+Then configure your SDKs with matching `evaluation_contexts`. See the [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts#step-2-configure-your-sdks) for SDK configuration examples.
 
 ## Common use cases
 
@@ -55,20 +55,20 @@ Then configure your SDKs with matching `evaluation_environments`. See the [evalu
 **Configuration**:
 
 - Runtime: `server`
-- Evaluation environments: `["api"]`
+- Evaluation contexts: `["api"]`
 
-**Why both features?** Runtime ensures the flag never reaches browsers where it could be inspected. Environments let you exclude this flag from other server contexts (like background workers) to reduce evaluation costs.
+**Why both features?** Runtime ensures the flag never reaches browsers where it could be inspected. Contexts let you exclude this flag from other server contexts (like background workers) to reduce evaluation costs.
 
 ```javascript
 // API service - Gets the flag
 const posthog = new PostHog('KEY', {
-    evaluation_environments: ['main-app', 'api']
+    evaluation_contexts: ['main-app', 'api']
 })
 
 // Web browser - Never sees this flag (blocked by runtime)
 // Background worker - Doesn't get the flag (no 'api' tag)
 const posthog = new PostHog('KEY', {
-    evaluation_environments: ['main-app', 'workers']
+    evaluation_contexts: ['main-app', 'workers']
 })
 ```
 
@@ -79,18 +79,18 @@ const posthog = new PostHog('KEY', {
 **Configuration**:
 
 - Runtime: `all`
-- Evaluation environments: `["marketing-site"]`
+- Evaluation contexts: `["marketing-site"]`
 
-**Why both features?** You need the flag in both client and server contexts (runtime: `all`), but **only** for the marketing site. The environment constraint ensures main app services never evaluate this flag, even if they share code with the marketing site.
+**Why both features?** You need the flag in both client and server contexts (runtime: `all`), but **only** for the marketing site. The context constraint ensures main app services never evaluate this flag, even if they share code with the marketing site.
 
 ```python
 # Marketing site recommendation service - Gets the flag
 posthog = Posthog('KEY', 
-    evaluation_environments=['marketing-site', 'recommendations'])
+    evaluation_contexts=['marketing-site', 'recommendations'])
 
 # Main app recommendation service - Doesn't get the flag
 posthog = Posthog('KEY',
-    evaluation_environments=['main-app', 'recommendations'])
+    evaluation_contexts=['main-app', 'recommendations'])
 ```
 
 ### Rolling out mobile features without affecting web
@@ -100,19 +100,19 @@ posthog = Posthog('KEY',
 **Configuration**:
 
 - Runtime: `client`
-- Evaluation environments: `["mobile"]`
+- Evaluation contexts: `["mobile"]`
 
-**Why both features?** Runtime: `client` prevents server-side services from evaluating this UI-specific flag. The `mobile` tag ensures web browsers don't download or evaluate it, improving performance.
+**Why both features?** Runtime: `client` prevents server-side services from evaluating this UI-specific flag. The `mobile` context ensures web browsers don't download or evaluate it, improving performance.
 
 ```javascript
 // React Native app - Gets the flag
 posthog.init('KEY', {
-    evaluation_environments: ['main-app', 'mobile']
+    evaluation_contexts: ['main-app', 'mobile']
 })
 
 // Web app - Doesn't get the flag (no 'mobile' tag)
 posthog.init('KEY', {
-    evaluation_environments: ['main-app', 'web']
+    evaluation_contexts: ['main-app', 'web']
 })
 
 // API server - Never sees this flag (blocked by runtime)
@@ -125,24 +125,24 @@ posthog.init('KEY', {
 **Configuration**:
 
 - Runtime: `all`
-- Evaluation environments: `["billing"]`
+- Evaluation contexts: `["billing"]`
 
 **Why both features?** The pricing affects both frontend (checkout UI) and backend (billing service), so runtime is `all`. But you don't want every service and client evaluating this flag thousands of times - only the specific parts that handle billing.
 
 ```javascript
 // Checkout UI component - Gets the flag
 const posthog = new PostHog('KEY', {
-    evaluation_environments: ['main-app', 'billing', 'web']
+    evaluation_contexts: ['main-app', 'billing', 'web']
 })
 
 // Billing service - Gets the flag  
 const posthog = new PostHog('KEY', {
-    evaluation_environments: ['main-app', 'billing', 'api']
+    evaluation_contexts: ['main-app', 'billing', 'api']
 })
 
 // Main app dashboard - Doesn't get the flag (no 'billing' tag)
 const posthog = new PostHog('KEY', {
-    evaluation_environments: ['main-app', 'dashboard', 'web']
+    evaluation_contexts: ['main-app', 'dashboard', 'web']
 })
 ```
 
@@ -156,14 +156,14 @@ Set runtime to `server` for flags containing:
 - Rate limits or quotas
 - Infrastructure settings
 
-### Layer environments for precise control
+### Layer contexts for precise control
 
-Remember that evaluation environments use OR logic: `["marketing-site", "checkout"]` matches ANY marketing-site OR ANY checkout. For AND logic, use compound tags like `["marketing-site-checkout"]`.
+Remember that evaluation contexts use OR logic: `["marketing-site", "checkout"]` matches ANY marketing-site OR ANY checkout. For AND logic, use compound tags like `["marketing-site-checkout"]`.
 
 ### Start simple
 
 1. Set runtime first (security boundary)
-2. Add basic evaluation environment tags
+2. Add basic evaluation context tags
 3. Refine with specific tags as needed
 
 ## Troubleshooting combined setups
@@ -171,36 +171,36 @@ Remember that evaluation environments use OR logic: `["marketing-site", "checkou
 When a flag isn't working as expected, check in this order:
 
 1. **Runtime filter**: Is the SDK type (client/server) allowed?
-2. **Environment filter**: Does at least one evaluation tag match?
-3. **SDK config**: Is `evaluation_environments` set?
+2. **Context filter**: Does at least one evaluation tag match?
+3. **SDK config**: Is `evaluation_contexts` set?
 
-For detailed troubleshooting steps, see the [evaluation environments documentation](/docs/feature-flags/evaluation-environments#troubleshooting).
+For detailed troubleshooting steps, see the [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts#troubleshooting).
 
 ## Common pitfalls
 
 ### Forgetting the two-stage filter
 
-Runtime blocks first, then environments. A server-only flag will never reach client SDKs, regardless of evaluation environments.
+Runtime blocks first, then contexts. A server-only flag will never reach client SDKs, regardless of evaluation contexts.
 
 ### Missing SDK configuration
 
-Without `evaluation_environments` in your SDK, environment filtering won't work:
+Without `evaluation_contexts` in your SDK, context filtering won't work:
 
 ```javascript
-// This SDK ignores all environment filtering!
+// This SDK ignores all context filtering!
 const posthog = new PostHog('KEY', {
     host: 'https://app.posthog.com'
-    // evaluation_environments not set!
+    // evaluation_contexts not set!
 })
 ```
 
 ## Summary
 
 - **Runtime** filters by SDK type (security boundary)
-- **Environments** filter by context (organization)
-- They work sequentially: runtime blocks first, then environments filter
+- **Contexts** filter by application context (organization)
+- They work sequentially: runtime blocks first, then contexts filter
 
 For implementation details:
 
-- [Evaluation environments documentation](/docs/feature-flags/evaluation-environments)
+- [Evaluation contexts documentation](/docs/feature-flags/evaluation-contexts)
 - [Evaluation runtime](/docs/feature-flags/creating-feature-flags#evaluation-runtime)
