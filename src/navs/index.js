@@ -4815,6 +4815,16 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Errors',
+                    url: '/docs/llm-analytics/errors',
+                    icon: 'IconWarning',
+                    color: 'red',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Embeddings',
                     url: '/docs/llm-analytics/embeddings',
                     icon: 'IconDatabase',
