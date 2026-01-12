@@ -101,7 +101,7 @@ export const workflows = {
             description: 'No YAML, no syncing, no API juggling.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_10157_dc6cbaca72.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_10157_1_3d5bffb9a5.png',
                     alt: 'Workflow automation builder',
                     className: '@2xl:w-[80%] @2xl:ml-auto @2xl:mt-8',
                 },
@@ -137,7 +137,7 @@ export const workflows = {
             description: 'Send emails, Slack posts, or webhook messages based on product activity.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_10158_d6c301a631.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_10158_1_5b25e98912.png',
                     alt: 'Behavior-triggered messaging',
                     containerClassName: 'flex justify-end items-end @2xl:w-[85%] @2xl:ml-auto -mb-2',
                 },
@@ -173,7 +173,7 @@ export const workflows = {
             description: 'Shape user journeys with conditions, splits, delays, and lifecycle-based steps.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_10159_c35e985d7b.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_10159_1_2ff0d42149.png',
                     alt: 'Flow logic & timing controls',
                     containerClassName: 'flex justify-end items-center @2xl:w-[85%] @2xl:ml-auto',
                 },
@@ -210,7 +210,7 @@ export const workflows = {
                 'Reach users wherever they are. Pick from the standard channels or connect to one of the 35+ integrations (and counting) that we have.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_channels_9a8ee1d2d5.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_channels_2_1f26ef04dd.png',
                     alt: 'Channels',
                     containerClassName: 'flex justify-end items-center @2xl:ml-auto',
                 },
@@ -402,12 +402,12 @@ export const workflows = {
                 },
                 {
                     title: 'Implementing conditional logic',
-                    time: 97
+                    time: 97,
                 },
                 {
                     title: 'Chaining flows, audience splits, and integrations',
-                    time: 184
-                }
+                    time: 184,
+                },
             ],
         },
     },
