@@ -15,27 +15,27 @@ Here's how we'd break down use cases:
 
 ```mermaid
 flowchart TD
-    A{Is the API hitting <code style='padding: 4px; border-radius: 8px;'>/query</code> rate limits?}
-    B{Does the use case fit endpoints?<br />(i.e. B2B2C user-facing analytics, data-powered APIs, internal home-grown dashboards)}
-    C["Explain the use case in #project-endpoints <br />(we're taking alpha users!)"]
-    D{Should they use batch exports instead?}
-    E[Redirect them to start paying for batch exports.]
-    F[1. Assume we're not increasing rate limits.<br />2. Reach out to #team-clickhouse with query details.]
-    G["Go to the relevant team for that API<br />(Feature flags, Surveys, ..)"]
+  A{Is the API hitting query rate limits}
+  B{Does the use case fit Endpoints}
+  C[Explain the use case to the Endpoints team]
+  D{Should they use batch exports}
+  E[Redirect customer to batch exports]
+  F[Do not increase limits and contact ClickHouse team]
+  G[Route to the relevant product team]
 
-    A -->|Yes| B
-    A -->|No| G
-    B -->|Yes| C
-    B -->|No| D
-    D -->|Yes| E
-    D -->|No| F
+  A -->|Yes| B
+  A -->|No| G
+  B -->|Yes| C
+  B -->|No| D
+  D -->|Yes| E
+  D -->|No| F
 ```
 
 See [RFC #438](https://github.com/PostHog/requests-for-comments/pull/438) for more context.
 
 ## Can we control or reduce costs?
 
-Yes. We’re usage-based so you pay for what you use, and you can actively manage volume (capture rules, sampling where appropriate, dropping high-cardinality noise, and focusing on the events that drive decisions).
+Yes. PostHog is usage-based, so you pay for what you use, and we design pricing to stay aligned with our real infrastructure costs and our customers. We’ve even [deliberately reduced our own revenue](https://posthog.com/blog/analytics-pricing) to make PostHog cheaper at scale. You can actively manage spend by choosing what to capture, dropping noise, and using cheaper anonymous events where person-level analysis isn’t needed.
 
 ## How do you handle PII and session replay privacy?
 Posthog gives you privacy controls at different levels to protect user privacy and comply with regulations. We support masking and privacy controls so you can avoid capturing sensitive data in the first place, and redact where needed. 
