@@ -92,79 +92,68 @@ So the real question isn't whether to slow down. It's this:
 
 If you’re building anything serious (and using AI to increase throughput), you’ll hit this wall eventually.  
 
-We’re still figuring out what to do about it at PostHog, but directionally this is where the work needs to shift:
+We’re still figuring out the best approach at PostHog, but directionally here's what we've observed as needing to happen:
 
 ### 1. Treat attention like a scarce resource (because it is)
 
-Small teams will naturally optimize for their own product space, but suboptimally for users’ overall cognitive bandwidth. Marketing everything as soon as it’s shipped turns internal velocity into competition for the same slice of user attention (and everyone loses).
+[Small teams](/blog/why-small-teams-crush-tiger-teams) will naturally optimize for their own product space, but suboptimally for users’ overall cognitive bandwidth. Treating every cool thing you ship as equally deserving of attention guarantees shallow adoption. 
 
 **What failure looks like:**
-
-- Creating elaborate campaigns for every new feature
-
-- Not having a [launch tier framework](https://aakashgupta.medium.com/the-launch-tier-system-that-transforms-product-teams-fddbb55a785c)
-
-- Email blasting users without [segmentation](https://www.reforge.com/blog/what-is-user-segmentation) 
-
-- Producing lengthy demo videos that are sincere-but-forgettable
-
-- Marketing on the same exhausted channels as everyone else ([every marketing channel sucks right](https://andrewchen.substack.com/p/every-marketing-channel-sucks-right))
-
-**Do this instead:**
-
-- Making [human-centric](https://www.youtube.com/watch?v=QeU5MmpqBg0&list=PLnOY1RYHjDfw2joBxUPADaadeX5IradbH&index=2), [absurd](https://www.youtube.com/watch?v=EXisgy6eWJ0&list=PLnOY1RYHjDfw2joBxUPADaadeX5IradbH&index=4), entertainment-first content
-
-- [Partnering with people](https://www.linkedin.com/feed/update/urn:li:activity:7401713037386379265) and brands who have mindshare and trust with your ICP
-
-- Building [cool things](/deskhog) that delight your target audience without selling your product
-
-- Turning internal jokes into [public canon](https://www.youtube.com/watch?v=_eLZqBVkxCc&list=PLnOY1RYHjDfw2joBxUPADaadeX5IradbH&index=3)
-
-- If you’re doing founder-led marketing, [committing to the bit](https://www.linkedin.com/in/j-hawkins/)
-
-- [Designing a world](https://www.linkedin.com/posts/lottiecoxon_i-was-unsure-how-to-promote-that-we-are-now-activity-7368966636244049920-S3mU) (not a funnel) that people want to live in, and let them [explore it](https://x.com/MichaelAshmead/status/1966136656265687134) when they have the context to care
-
-### 2. Sequence launches based on user capacity, not team readiness
-
-Marketing everything as soon as it’s shipped turns internal velocity into competition for the same slice of user attention (everyone loses). 
-
-**What failure looks like:**
-
 - Treating launches as [outputs instead of outcomes](https://productschool.com/blog/analytics/output-vs-outcome)
+
+- Creating elaborate campaigns for every single new feature (asking users to care about everything ensures they care deeply about nothing)
 
 - Existing users experiencing [feature fatigue](https://www.linkedin.com/pulse/feature-fatigue-love-focus-derek-francis-mezxc/), and new users with release whiplash 
 
-- Expecting documentation to do the heavy lifting of product education
+- Producing lengthy demo videos that explain everything and persuade no one
 
-- Highlighting the what more than the why (*marketing [features > benefits](https://posthog.com/newsletter/marketing-for-devs) is typically a good move if you’re marketing to developers, but overindexing on ‘what’ makes adoption someone else’s problem)
+- Marketing on the same exhausted channels as everyone else ([every marketing channel sucks right](https://andrewchen.substack.com/p/every-marketing-channel-sucks-right))
+
+- Not sharing common goals across internal teams (we need to all paddle in the same direction)
 
 **Do this instead:**
+- Having a [launch tier framework](https://aakashgupta.medium.com/the-launch-tier-system-that-transforms-product-teams-fddbb55a785c) to classify releases as _events_ or _infrastructure_: If it’s an event, treat it like the [biggest event of the year](https://www.linkedin.com/feed/update/urn:li:activity:7398759974686076928) 
 
-- Classifying launches as _events_ or _infrastructure_: If it’s an event, treat it like the [biggest event of the year](https://www.linkedin.com/feed/update/urn:li:activity:7398759974686076928) 
+- Using entertainment and brand as force multipliers. [Hunmor](https://www.youtube.com/playlist?list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL), [absurdity](https://www.youtube.com/watch?v=EXisgy6eWJ0&list=PLnOY1RYHjDfw2joBxUPADaadeX5IradbH&index=4), and narrative work because they lower the cost of paying attention
 
-- Insteading of one-off updates, invest in producing a [narrative series](https://www.youtube.com/playlist?list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL) that users can follow
+- Inviting people to try things before they’re “ready to market,” so early adopters create context and pull others in organically
 
-- Encouraging engineers to [do support](/newsletter/engineers-do-support) and see first-hand where users get stuck
+-[Partnering with influencers](https://www.linkedin.com/feed/update/urn:li:activity:7401713037386379265) and brands who have mindshare and trust with your ICP
 
-### 3. Build discovery into the product 
+- [Designing a world](https://www.linkedin.com/posts/lottiecoxon_i-was-unsure-how-to-promote-that-we-are-now-activity-7368966636244049920-S3mU) (not a marketing funnel) that people want to live in, and let them [explore it](https://x.com/MichaelAshmead/status/1966136656265687134) when they have the context to care
 
-If realizing value requires explanation outside the product, you haven't removed the adoption bottleneck – you've just moved it downstream to marketing, sales, or support.
+- If you’re doing founder-led marketing, being consistent and ruthlessly [committing to the bit](https://www.linkedin.com/in/j-hawkins/)
+
+>Notion ships constantly, but markets selectively. Many features land with almost no fanfare, while a small number (AI, databases, templates) get sustained narrative investment over months.
+
+
+### 2. Build discovery into the product 
+
+If realizing value requires explanation outside the product, you haven't removed the adoption bottleneck – you've just moved it downstream to marketing, sales, or support. Discovery that’s timed to intent beats marketing that’s loud but premature.
 
 **What failure looks like:**
 
-- Treating external platforms as your main discovery engine (performative presence on Product Hunt, G2, Hacker News may not be [worth it](https://news.ycombinator.com/item?id=29864157)) 
+- Treating external platforms as your main discovery engine (performative presence on Product Hunt, G2, Hacker News probably isn't [worth the investment](https://news.ycombinator.com/item?id=29864157)) 
 
 - Relying on social media and emails broadcasts to communicate everything you shipped this week
 
+- Email blasting users a generic monthly product update without meaningful [segmentation](https://www.reforge.com/blog/what-is-user-segmentation) 
+
 - Disrupting the in-app experience with too many tooltips, banners, modals and popups
 
-- Adding so much to the UI that it subtracts from [user experience](/blog/redesigned-nav-menu)
+- Adding so much to the UI that it subtracts from the UX ([user experience](/blog/redesigned-nav-menu))
+
+- Highlighting the what more than the why (*marketing [features > benefits](https://posthog.com/newsletter/marketing-for-devs) is typically a good move if you’re marketing to developers, but overindexing on ‘what’ makes adoption someone else’s problem)
+
+>Atlassian famously struggled with feature sprawl across Jira, Confluence (and much more). Users just couldn't keep up with so much surface area. The solution wasn't  _more_ marketing, it was investing heavily in in-product discovery, clearer use-case documentation, and opinionated defaults to guide users to success.
 
 **Do this instead:**
 
 - Defining [activation criteria](/product-engineers/activation-metrics) for new products, and track user behavior over time
 
-- Leveraging AI to surface features when a user is already doing the related job
+- Anchoring new features to a task or process users already care about (“you’re using X, so we think you might be interested in Y”)
+
+- Encouraging engineers to [do support](/newsletter/engineers-do-support) and see first-hand where users get stuck
 
 - Embedding docs within your product to keep users in flow (linking to an external help center is a form of context switching)
 
@@ -172,9 +161,9 @@ If realizing value requires explanation outside the product, you haven't removed
 
 - Committing to [continuous discovery](https://www.youtube.com/watch?v=9RFaz9ZBXpk). Let user feedback and behavior influence what gets amplified next
 
-### 4. Measure learning, not just usage
+### 3. Measure learning, not just usage
 
-Adoption doesn’t really start with features. It starts with people getting better at their jobs. That’s why a lot of our marketing content isn’t really about PostHog at all – it’s about [how to be a better product engineer](https://newsletter.posthog.com/). 
+Adoption isn’t about people using features, it’s about them getting better at their jobs because those features exist. That’s why a lot of our marketing content isn’t really about PostHog at all – it’s about [how to be a better product engineer](https://newsletter.posthog.com/). 
 
 **What failure looks like:**
 
@@ -188,20 +177,34 @@ Adoption doesn’t really start with features. It starts with people getting bet
 
 **Do this instead:**
 
-- Publishing [learnings](/blog/8-learnings-from-1-year-of-agents-posthog-ai), [works-in-progress](/blog/multi-modal-llm-user-behavior-analysis), and durable mental models that are useful with, or without, your product 
+- Publishing [learnings](/blog/correct-llm-code-generation), and durable mental models that are useful with or without your product 
 
-- Teaching others about your domain (HubSpot teaches you how to be a [better marketer](https://blog.hubspot.com/), Figma teaches you how to be a [better designer](https://www.figma.com/blog/insights/))
+- Being open source if you can and building a community around it
+
+- Teaching the domain you operate in — not just how your product works (e.g. Figma teaches people how to be [better designers](https://www.figma.com/blog/insights/))
 
 - Sharing uncomfortable things like [postmortems](/blog/nov-24-shai-hulud-attack-post-mortem) for incidents 
 
-- Being a good citizen, [create space](/handbook/people/hogpatch) for others to thrive, help developers (or whichever community you market to) without asking for anything in return
-
 - Turning internal knowledge into [public artifacts](/handbook) and give space for every role to author content that matters to them
+
+- Not being too serious (e.g. Turning internal jokes into [public canon](https://www.youtube.com/watch?v=_eLZqBVkxCc&list=PLnOY1RYHjDfw2joBxUPADaadeX5IradbH&index=3))
+
+- Being a good citizen, [creating spaces](/handbook/people/hogpatch) for others to thrive, helping your community without asking for anything in return, building a reputation of trust and a transparency 
+
+>HubSpot pioneered inbound marketing by teaching people how to be better marketers before selling them software. For many young professionals, that learning happened years before any purchasing decision — and by then, brand equity was already baked in.
 
 ## Fast, not frantic
 
 It's tempting to treat “shipping too fast” as a humblebrag, but that’s lazy thinking. If users can’t adopt what you ship, it’s not velocity – it’s waste.
 
-Practically, that means you need to be explicit about what matters, do things that would make normal SaaS companies nervous, get better at sequencing the big launches, make a select number of things very loud, and let everything else be quietly excellent. Doing this right helps velocity convert to value.
+Practically, this means being explicit about what matters, and just as importantly, when and how you ask users to care.
+
+**So when _should_ you market a specific feature?**
+- It changes a core workflow, not just adds an another option
+- It compounds with existing behavior
+- It has a clear “aha” moment you can design for
+- You're able to support it with docs, onboarding, and follow-up content (not just a blog post)
+
+Velocity only compounds when adoption keeps up. If attention is the bottleneck, your job isn’t to slow down — it’s to be selective. Make a few things loud on purpose, and let the rest be quietly excellent.
 
 <NewsletterForm />
