@@ -38,9 +38,25 @@ See [RFC #438](https://github.com/PostHog/requests-for-comments/pull/438) for mo
 Yes. PostHog is usage-based, so you pay for what you use, and we design pricing to stay aligned with our real infrastructure costs and our customers. We’ve even [deliberately reduced our own revenue](https://posthog.com/blog/analytics-pricing) to make PostHog cheaper at scale. You can actively manage spend by choosing what to capture, dropping noise, and using cheaper anonymous events where person-level analysis isn’t needed.
 
 ## How do you handle PII and session replay privacy?
-Posthog gives you privacy controls at different levels to protect user privacy and comply with regulations. We support masking and privacy controls so you can avoid capturing sensitive data in the first place, and redact where needed. 
+PostHog gives you privacy controls at different levels to protect user privacy and comply with regulations. We support masking and privacy controls so you can avoid capturing sensitive data in the first place, and redact where needed. 
 
-For more information on PostHog's privacy compliance, see [our Privacy Compliance docs](/contents/docs/privacy/index.mdx).
+For more information on PostHog's privacy compliance, see [our Privacy Compliance docs](/docs/privacy/).
+
+## Do you offer professional services or paid implementation help?
+
+For larger or more complex customers, we can offer paid professional services such as implementation help, migrations, and training, typically delivered by a forward-deployed engineer.
+
+This is not offered by default and depends on fit and capacity. 
+
+See [Professional services](/handbook/growth/sales/professional-services.md) for details.
+
+## What support options do you offer?
+
+All users can get help via the community and in-app support. Paid customers may also have access to dedicated Slack support, training, and configuration assistance depending on plan.
+
+We connect customers directly with the engineers and product teams building PostHog, rather than a traditional tiered support desk.
+
+See [Support options](/docs/support-options/) for full details.
 
 ## Do you have plans to add more hosting options outside of the US and EU?
 
