@@ -1,6 +1,6 @@
 ---
 title: What to do when product velocity breaks the speed of adoption
-date: 2025-12-23
+date: 2026-01-11
 author:
   - cleo-lant
 featuredImage: >-
@@ -14,7 +14,7 @@ crosspost:
   - Founders
 seo:
   metaTitle: 'What to do when product velocity breaks the speed of adoption'
-  metaDescription: "When your team ships faster than users can adopt new features, you face a unique challenge. Here's how to balance product velocity with user adoption."
+  metaDescription: "When your team ships features faster than users can adopt them, you face a unique challenge: progress that stops compounding and starts competiting with itself for attention."
 ---
 
 Is it possible to ship too much – or too fast?
@@ -45,7 +45,7 @@ Luckily, bottlenecks have solutions. Manufacturers discovered this and crystalli
 
 In our case:
 
-- **Upstream** we have 39 small teams [working asynchronously](/newsletter/how-we-work-async), shipping at a high velocity, and AI accelerating individual productivity.
+- **Upstream** we have 40+ small teams [working asynchronously](/newsletter/how-we-work-async), shipping at a high velocity, and AI accelerating individual productivity.
 - **Downstream** we have limited user attention, comprehension, and engagement capacity.
 
 TOC can again help us understand the consequences of this mismatched capacity:
@@ -92,33 +92,33 @@ So the real question isn't whether to slow down. It's this:
 
 If you’re building anything serious (and using AI to increase throughput), you’ll hit this wall eventually.  
 
-We’re still figuring out the best approach at PostHog, but directionally here's what we've observed as needing to happen:
+At PostHog, we’re still figuring out the best way around it, but directionally here's what we've observed as 'do's' and 'do nots'.
 
 ### 1. Treat attention like a scarce resource (because it is)
 
-[Small teams](/blog/why-small-teams-crush-tiger-teams) will naturally optimize for their own product space, but suboptimally for users’ overall cognitive bandwidth. Treating every cool thing you ship as equally deserving of attention guarantees shallow adoption. 
+[Small product teams](/blog/why-small-teams-crush-tiger-teams) ship great things within their own surface area. But users experience the whole platform through a limited amount of cognitive bandwidth. Local optimization quickly adds up to global overload.
+
+And when teams are doing genuinely good work, it’s completely rational for each of them to want to be first in line for a launch and marketing support.
 
 **What failure looks like:**
-- Treating launches as [outputs instead of outcomes](https://productschool.com/blog/analytics/output-vs-outcome)
-
 - Creating elaborate campaigns for every single new feature (asking users to care about everything ensures they care deeply about nothing)
 
-- Existing users experiencing [feature fatigue](https://www.linkedin.com/pulse/feature-fatigue-love-focus-derek-francis-mezxc/), and new users with release whiplash 
+- Treating new feature launches as [outputs instead of outcomes](https://productschool.com/blog/analytics/output-vs-outcome)
 
-- Producing lengthy demo videos that explain everything and persuade no one
+- Posting the same product updates on the same exhausted channels as everyone else ([every marketing channel sucks right now](https://andrewchen.substack.com/p/every-marketing-channel-sucks-right))
 
-- Marketing on the same exhausted channels as everyone else ([every marketing channel sucks right](https://andrewchen.substack.com/p/every-marketing-channel-sucks-right))
+- Relying on social media and emails broadcasts to communicate everything you shipped this week
 
-- Not sharing common goals across internal teams (we need to all paddle in the same direction)
+- Active users experiencing [feature fatigue](https://www.linkedin.com/pulse/feature-fatigue-love-focus-derek-francis-mezxc/), while new users land in a product that feels overwhelming
 
 **Do this instead:**
 - Having a [launch tier framework](https://aakashgupta.medium.com/the-launch-tier-system-that-transforms-product-teams-fddbb55a785c) to classify releases as _events_ or _infrastructure_: If it’s an event, treat it like the [biggest event of the year](https://www.linkedin.com/feed/update/urn:li:activity:7398759974686076928) 
 
-- Using entertainment and brand as force multipliers. [Hunmor](https://www.youtube.com/playlist?list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL), [absurdity](https://www.youtube.com/watch?v=EXisgy6eWJ0&list=PLnOY1RYHjDfw2joBxUPADaadeX5IradbH&index=4), and narrative work because they lower the cost of paying attention
+- Using entertainment and brand as force multipliers. [Humor](https://www.youtube.com/playlist?list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL), [absurdity](https://www.youtube.com/watch?v=EXisgy6eWJ0&list=PLnOY1RYHjDfw2joBxUPADaadeX5IradbH&index=4), and narrative work because they lower the cost of paying attention
 
 - Inviting people to try things before they’re “ready to market,” so early adopters create context and pull others in organically
 
--[Partnering with influencers](https://www.linkedin.com/feed/update/urn:li:activity:7401713037386379265) and brands who have mindshare and trust with your ICP
+- [Partnering with influencers](https://www.linkedin.com/feed/update/urn:li:activity:7401713037386379265) and brands who have mindshare and trust with your ICP
 
 - [Designing a world](https://www.linkedin.com/posts/lottiecoxon_i-was-unsure-how-to-promote-that-we-are-now-activity-7368966636244049920-S3mU) (not a marketing funnel) that people want to live in, and let them [explore it](https://x.com/MichaelAshmead/status/1966136656265687134) when they have the context to care
 
@@ -131,19 +131,21 @@ We’re still figuring out the best approach at PostHog, but directionally here'
 
 If realizing value requires explanation outside the product, you haven't removed the adoption bottleneck – you've just moved it downstream to marketing, sales, or support. Discovery that’s timed to intent beats marketing that’s loud but premature.
 
+The goal isn’t to explain everything up front. It’s to surface the right thing at the moment a user is already trying to do the related job.
+
 **What failure looks like:**
 
 - Treating external platforms as your main discovery engine (performative presence on Product Hunt, G2, Hacker News probably isn't [worth the investment](https://news.ycombinator.com/item?id=29864157)) 
 
-- Relying on social media and emails broadcasts to communicate everything you shipped this week
+- Sales and marketing producing lengthy demo videos that explain everything and persuade no one
 
-- Email blasting users a generic monthly product update without meaningful [segmentation](https://www.reforge.com/blog/what-is-user-segmentation) 
+- Email blasting users a generic monthly product update without meaningful [segmentation](https://www.reforge.com/blog/what-is-user-segmentation) or timing
 
 - Disrupting the in-app experience with too many tooltips, banners, modals and popups
 
-- Adding so much to the UI that it subtracts from the UX ([user experience](/blog/redesigned-nav-menu))
+- Adding so much stuff to the UI that it subtracts from the UX ([user experience](/blog/redesigned-nav-menu))
 
-- Highlighting the what more than the why (*marketing [features > benefits](https://posthog.com/newsletter/marketing-for-devs) is typically a good move if you’re marketing to developers, but overindexing on ‘what’ makes adoption someone else’s problem)
+- Overemphasizing what shipped instead of why it matters ([marketing features > benefits](https://posthog.com/newsletter/marketing-for-devs) works for developers, but overindexing on “what” makes adoption someone else’s problem)
 
 >Atlassian famously struggled with feature sprawl across Jira, Confluence (and much more). Users just couldn't keep up with so much surface area. The solution wasn't  _more_ marketing, it was investing heavily in in-product discovery, clearer use-case documentation, and opinionated defaults to guide users to success.
 
