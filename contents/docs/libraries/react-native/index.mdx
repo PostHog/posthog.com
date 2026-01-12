@@ -84,6 +84,14 @@ PostHog autocapture can automatically track the following events for you:
 -   **$autocapture** - touch events when the user interacts with the screen
 -   **$exception** - when the app throws exceptions.
 
+> ⚠️ **React Navigation v7 users**
+>
+> React Navigation v7 restricts navigation hooks (such as `useNavigationState`) to components rendered inside a Screen that belongs to a Navigator.
+>
+> Because of this change, automatic screen tracking may throw errors if PostHog is initialized outside a screen context. This commonly affects apps upgrading from React Navigation v6 to v7.
+>
+> For React Navigation v7, we recommend disabling automatic screen capture for screens and manually calling `posthog.screen()` inside each screen component. See the [Capturing screen views](/docs/libraries/react-native#capturing-screen-views) section below.
+
 With autocapture, all touch events for children of `PosthogProvider` are tracked, capturing a snapshot of the view hierarchy at that point. This enables you to create [insights](/docs/product-analytics/insights) in PostHog without having to add custom events.
 
 PostHog will try to generate a sensible name for the touched element based on the React component `displayName` or `name`. If you prefer, you can set your own name using the `ph-label` prop:

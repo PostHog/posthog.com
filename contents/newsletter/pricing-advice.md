@@ -49,6 +49,8 @@ In short, **how much** you charge often doesn’t matter as much as **how** you 
 
 > **Remember this:** How you price your product should flow from your [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP). Our ICP is high-growth startups that are led by [product engineers](/blog/what-is-a-product-engineer), which is why we’ve chosen a self-serve model and usage-based pricing. It gives product engineers control and they can use as many flags as they please.
 
+<NewsletterForm />
+
 ## 2. Charging anything is better than giving it away
 
 It’s easy to give things away, especially zero marginal cost software, but it’s a trap for early-stage startups. Typically, startups delay figuring out pricing because:
