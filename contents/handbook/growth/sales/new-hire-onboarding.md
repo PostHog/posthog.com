@@ -190,7 +190,7 @@ Your first 3 months commission is guaranteed. This will be calculated based on t
 
 The number of months of guaranteed commission in your first quarter will correlate to the size of your quota in your second quarter. If you receive three months of guaranteed commission in your first quarter you will be on full quota for your second quarter. If you receive two months, you will be on two thirds of your ramped quota; if you receive one month, you will be on one third of your rammped quota. 
 
-You will always be on full quota by you third quarter - unless you start after the 15th in the last month of a quarter, in which case for quota purposes & guaranteed commission it will be like you started on the 1st of the new quarter.
+You will always be on full quota by your third quarter - unless you start after the 15th in the last month of a quarter, in which case for quota purposes & guaranteed commission it will be like you started on the 1st of the new quarter.
 
 ### How does support work at PostHog?
 
