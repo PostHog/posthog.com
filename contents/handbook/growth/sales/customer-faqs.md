@@ -33,6 +33,15 @@ flowchart TD
 
 See [RFC #438](https://github.com/PostHog/requests-for-comments/pull/438) for more context.
 
+## Can we control or reduce costs?
+
+Yes. We’re usage-based so you pay for what you use, and you can actively manage volume (capture rules, sampling where appropriate, dropping high-cardinality noise, and focusing on the events that drive decisions).
+
+## How do you handle PII and session replay privacy?
+Posthog gives you privacy controls at different levels to protect user privacy and comply with regulations. We support masking and privacy controls so you can avoid capturing sensitive data in the first place, and redact where needed. 
+
+For more information on PostHog's privacy compliance, see [our Privacy Compliance docs](/contents/docs/privacy/index.mdx).
+
 ## Do you have plans to add more hosting options outside of the US and EU?
 
 Right now, no. The vast majority of our customers are happy to host on one or the other, with EU being the preferred domain for GDPR compliance. This is not a "never", just not in the near future.
