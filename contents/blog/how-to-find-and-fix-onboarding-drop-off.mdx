@@ -69,22 +69,8 @@ You don't need a massive stack for this recipe.
   <div className="flex items-center gap-2"><Checkbox id="opt-5" defaultChecked={false} /><label htmlFor="opt-5" className="text-sm cursor-pointer"><a href="/surveys">Surveys</a> (for getting direct feedback from users)</label></div>
 </div>
 
-You'll also need:
-- **A clear definition of what "successful onboarding" looks like**. This is [your activation event](/newsletter/wtf-is-activation) – the moment a user has gotten enough value to stick around (more on this below).
-- **[Events firing](/tutorials/event-tracking-guide) & at least a few hundred users going through your flow**. You need enough data to spot patterns. If you're at an earlier stage, you can still follow this recipe; just watch more replays and lean harder on qualitative signals until your numbers catch up.
-
-**Want to cook with PostHog? Great choice!**
-
-If you haven't set it up yet, [start here](/docs/getting-started/install). Make sure you're capturing the key events in your onboarding flow (signups, form completions, button clicks, etc.). If you have autocapture enabled, you're probably already covered.
-
-We highly recommend calling [`posthog.identify()`](/docs/product-analytics/identify) when users sign up or log in; you'll be able to track them across sessions and devices, which makes your funnel data much more reliable.
-
-<CallToAction to="https://app.posthog.com/signup">
-  Try PostHog – it's free!
-</CallToAction>
-
-
-### Substitutions
+<details>
+<summary><strong>Substitutions</strong></summary>
 
 **No session replay tool?** You can interview users directly instead, but you'll be relying on their memory of what happened rather than what actually happened. It works, it's just slower and less reliable. [Here's our guide to running effective user interviews](/blog/10x-engineers-do-user-interviews) if you go this route.
 
@@ -93,8 +79,21 @@ We highly recommend calling [`posthog.identify()`](/docs/product-analytics/ident
 **No feature flags?** You can ship straight to production. We won't judge. (...we will judge a little.) If something breaks, you'll just have to roll back manually. [Here's why we think feature flags are worth it](/product-engineers/feature-flag-benefits-use-cases).
 
 **No cohorts or segmentation?** You can still run this recipe, you'll just be looking at all users as one group. If your drop-off is consistent across everyone, that's fine. If it's not, you'll have a harder time figuring out who's actually struggling.
+</details>
 
----
+You'll also need:
+- **A clear definition of what "successful onboarding" looks like**. This is [your activation event](/newsletter/wtf-is-activation) – the moment a user has gotten enough value to stick around (more on this below).
+- **[Events firing](/tutorials/event-tracking-guide) & at least a few hundred users going through your flow**. You need enough data to spot patterns. If you're at an earlier stage, you can still follow this recipe; just watch more replays and lean harder on qualitative signals until your numbers catch up.
+
+### **Want to cook with PostHog? Great choice!**
+
+If you haven't set it up yet, [start here](/docs/getting-started/install). Make sure you're capturing the key events in your onboarding flow (signups, form completions, button clicks, etc.). If you have autocapture enabled, you're probably already covered.
+
+We highly recommend calling [`posthog.identify()`](/docs/product-analytics/identify) when users sign up or log in; you'll be able to track them across sessions and devices, which makes your funnel data much more reliable.
+
+<CallToAction to="https://app.posthog.com/signup">
+  Cook with PostHog – it's free!
+</CallToAction>
 
 ## Step 1: Prep the finish line
 
@@ -489,7 +488,7 @@ A unified stack makes it much easier to move from “where users drop off” to 
 - [What we've learned about talking to users](/blog/product-for-engineers-1)
 - [50 things we've learned about building successful products](/newsletter/50-product-learnings)
 
-**Hungry for more?**
+...hungry for more?
 
 <NewsletterForm />
 
