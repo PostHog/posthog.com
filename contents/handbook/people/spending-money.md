@@ -7,7 +7,7 @@ showTitle: true
 There are many occasions when you will need to spend company money. PostHog is a lean organization - the less we spend, the more time we have to make sure the company takes off. However, it is more important you are productive, healthy, and happy.
 
 ## PHILOSOPHY & GUIDING PRINCIPLES 📙💭
-PostHog operates on a context-based expense policy inspired by the book 'No Rules Rules'. We're empowering team members to make good decisions while maintaining transparency and accountability.
+PostHog operates on a context-based expense policy [inspired by the book 'No Rules Rules'](https://posthog.com/handbook/story#things-that-influenced-us). We're empowering team members to make good decisions while maintaining transparency and accountability.
 
 Ask yourself:
 - Can you clearly explain why this expense is in PostHog's best interest?
@@ -62,33 +62,34 @@ Expenses with no receipts above $75 or £75 may be deducted from your pay if we 
 
 
 ## EXPENSE REVIEW 🔎
-Finance will be verifying:
+Finance reviews:
 - All expenses over $1000 (Brex),
-- Sampling of expenses under $1000 (Brex),
-- All expenses on Revolut.
+- Random sampling of expenses under $1000 (Brex),
+- All Revolut expenses.
 
 _We may adjust these thresholds depending on bandwidth in the team._
 
 #### Team Leads
-Expense reports will be shared with team leads monthly for their oversight and verification since they have the most context on their team's workings. This additional context and oversight will also be helpful to justify the context-based spend to the auditor. It is up to team leads how much scrutiny they take on reviewing these expenses. 
+You'll get monthly expense reports for your direct reports. You have context Finance doesn't, which will help justify spending decisions to the auditors. **How much you dig into these is up to you - the goal is catching patterns, not micromanaging.**
 
 
 ### WHY DOCUMENTATION MATTERS 🏦
 - Missing receipts and memos create extra work during audit season - auditors will need to dig into those expenses, which means hours of back-and-forth with you about charges from several months ago! A quick receipt upload and memo update now saves everyone time later.
-- Additionally, we're legally prohibited from paying personal expenses on behalf of team members. Poor expense documentation can:
-  - Put PostHog at risk of tax penalties and fines,
-  - Result in audit findings that appear in investor discussions,
-  - Force us to move to a restrictive pre-approval expense system.
+- Additionally, we're legally prohibited from paying personal expenses on behalf of team members.
+- Beyond the audit hassle, poor expense documentation can:
+  - Put PostHog at risk of tax penalties/fines,
+  - Create awkward conversations in investor discussions,
+  - Force us into a rigid pre-approval expense system (nobody wants this!!)
 
 > The flexible, trust-based policy we have only works when everyone maintains proper documentation. If team members consistently fail to upload receipts and add memos, we'll either need to implement rigid pre-approvals for all spending, or treat repeated violations as performance management issues.
 
 
 ## BUDGET STRUCTURE ON BREX 💳
-While we won’t enforce hard spend limits, we will continue to use budgets and limits on Brex for the following reasons:
-- **Audit**: maintaining budgets and limits help with proper categorization and tracking of expenses by department and function. Without this, detailed financial reporting for audits will involve a lot of manual intervention.
+We're not going to police your spending with hard limits but we will continue to use budgets and limits on Brex because:
+- **Audit**: maintaining budgets and limits help with proper categorization and tracking of expenses by department and function. Without this, financial reporting for audits becomes a manual nightmare.
 - **Financial Reporting**: accurate categorization of expenses is essential for Board reporting, tax compliance, and to track actual spend against budgets.
 
-These budgets are for categorization and reporting purposes only - they do not create spending restrictions:
+Think of these budgets as organizational tools, not spending restrictions:
 - Offsite budgets - managed by [Kendal](https://posthog.com/community/profiles/28628):
   - Whole company offsite
   - Mixed team offsites
@@ -98,7 +99,7 @@ These budgets are for categorization and reporting purposes only - they do not c
 - User Limit of $5,000 per month, per user: co-working/collaboration costs, training, individual software subscription, etc.
   - For subscriptions and other recurring monthly expenses, we recommend using the virtual card under your User Limit to ensure it gets categorized to the correct budget by default
 
-If you're joining an offsite, please only use the offsite budget - it helps the People & Ops track travel spend accurately against budgets. Let Kendal know in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
+Joining an offsite? Only use the offsite budget, not your User Limit - it helps the People & Ops track travel spend accurately against budgets. Let Kendal know in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
 
 
 ## FREQUENTLY ASKED QUESTIONS 🤨
@@ -131,10 +132,10 @@ If you're joining an offsite, please only use the offsite budget - it helps the 
 - Need Finance to pay a bill?
   - Submit the bill using the ['Bill Pay' feature on Brex](https://www.brex.com/support/bill-pay-overview#pay-a-bill), with context on what it is for, and which budget the bill should be coming out of, once you have verified it.
   - Finance processes all bill payments on Wednesdays.
-- Wish to upgrade your flight ticket to premium or business using your personal points?
+- Wish to upgrade your flight ticket to premium or business using your personal points/card?
   - Book an economy ticket using your Brex,
-  - Upgrade thereafter using your personal points.
-  - Can only book premium travel using personal miles or points?
+  - Upgrade thereafter using your personal points/card.
+  - Can only book premium travel using personal miles or points/card?
     - Request a reimbursement for the cost of the economy fare in Brex, along with a screenshot of the cost of the economy fare at the time of booking.
 
 
