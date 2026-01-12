@@ -42,6 +42,8 @@ Luke’s tips for engineers who want to talk to users:
 
 3. Build async feedback loops. Zoom calls are just one way to talk to users; Slack can be just as (if not more) effective.
 
+<NewsletterForm />
+
 ## 📸 User interviews + snapshots = action
 
 If you’re talking to users, you need a quick and repeatable way to share what you learn. Annika Schmid shares our solution, [interview snapshots](/blog/interview-snapshot-guide):

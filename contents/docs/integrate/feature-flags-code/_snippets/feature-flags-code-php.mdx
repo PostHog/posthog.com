@@ -33,13 +33,13 @@ There are two methods you can use to include feature flag information in your ev
  In the event properties, include `$feature/feature_flag_name: variant_key`:
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'distinct_id_of_your_user',
   'event' => 'event_name',
-  'properties' => array(
-    '$feature/feature-flag-key'  = 'variant-key' # replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
-  )
-));
+  'properties' => [
+    '$feature/feature-flag-key' => 'variant-key' // replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
+  ]
+]);
 ```
 
 #### Method 2: Set `send_feature_flags` to `true`
@@ -89,10 +89,10 @@ You can configure the `feature_flag_request_timeout_ms` parameter when initializ
 
 ```php
 PostHog::init("<ph_project_api_key>",
-  array(
+  [
     'host' => '<ph_client_api_host>',
     'feature_flag_request_timeout_ms' => 3000 // Time in milliseconds. Default is 3000 (3 seconds).
-  ) 
+  ]
 );
 ```
 

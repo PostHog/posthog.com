@@ -1,0 +1,71 @@
+The `PostHogCaptureOnViewed` component enables you to automatically capture events when elements scroll into view in the browser. This is useful for tracking impressions of important content, monitoring user engagement with specific sections, or understanding which parts of your page users are actually seeing.
+
+The component wraps your content and sends a `$element_viewed` event to PostHog when the wrapped element becomes visible in the viewport. It only fires once per component instance.
+
+**Basic usage:**
+
+```react
+import { PostHogCaptureOnViewed } from '@posthog/react'
+
+function App() {
+    return (
+        <PostHogCaptureOnViewed name="hero-banner">
+            <div>Your important content here</div>
+        </PostHogCaptureOnViewed>
+    )
+}
+```
+
+**With custom properties:**
+
+You can include additional properties with the event to provide more context:
+
+```react
+<PostHogCaptureOnViewed
+    name="product-card"
+    properties={{ 
+        product_id: '123', 
+        category: 'electronics',
+        price: 299.99
+    }}
+>
+    <ProductCard />
+</PostHogCaptureOnViewed>
+```
+
+**Tracking multiple children:**
+
+Use `trackAllChildren` to track each child element separately. This is useful for galleries or lists where you want to know which specific items were viewed:
+
+```react
+<PostHogCaptureOnViewed
+    name="product-gallery"
+    properties={{ gallery_type: 'featured' }}
+    trackAllChildren
+>
+    <ProductCard id="1" />
+    <ProductCard id="2" />
+    <ProductCard id="3" />
+</PostHogCaptureOnViewed>
+```
+
+When `trackAllChildren` is enabled, each child element sends its own event with a `child_index` property indicating its position.
+
+**Custom intersection observer options:**
+
+You can customize when elements are considered "viewed" by passing options to the `IntersectionObserver`:
+
+```react
+<PostHogCaptureOnViewed
+    name="footer"
+    observerOptions={{ 
+        threshold: 0.5,  // Element is 50% visible
+        rootMargin: '0px'
+    }}
+>
+    <Footer />
+</PostHogCaptureOnViewed>
+```
+
+The component passes all other props to the wrapper `div`, so you can add styling, classes, or other HTML attributes as needed.
+
