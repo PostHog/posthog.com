@@ -81,6 +81,7 @@ export const LOGOS = {
     segment:
         'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/segment.svg',
     shopify: 'https://res.cloudinary.com/dmukukwp6/image/upload/shopify_glyph_5a3ad7459b.svg',
+    slack: 'https://res.cloudinary.com/dmukukwp6/image/upload/Symbol_1_ac11ac22f6.svg',
     snowflake: 'https://res.cloudinary.com/dmukukwp6/image/upload/snowflake_color_517158afd5.svg',
     sqlDatabase: 'https://res.cloudinary.com/dmukukwp6/image/upload/sql_database_generic_8f6b358019.svg',
     stripe: 'https://res.cloudinary.com/dmukukwp6/image/upload/Stripe_Logo_revised_2016_24183d3284.svg',
