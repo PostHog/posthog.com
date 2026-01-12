@@ -46,6 +46,8 @@ Inertia is the default mode of most companies – most people, really. The day y
 
 > **What we’ve learned:** Transparency is key. All our small team off-sites include a [360-degree feedback session](/handbook/people/feedback). Good feedback is based on observations, not emotions. Our [SuperDays](https://newsletter.posthog.com/i/136720638/actual-work-is-x-more-valuable-than-interviews) are designed to see how candidates receive feedback.
 
+<NewsletterForm />
+
 ## 3. Taking shortcuts when hiring
 
 Hiring people is hard. 
@@ -167,6 +169,8 @@ You shouldn’t ignore competitors, but the decisions you make about your produc
 - **[How we built an (actually useful) AI community support bot](/blog/ai-community-answers) – <TeamMember name="Cory Watilo" />**
 
 _Words by Andy Vandervell, mechanical pencil enthusiast._
+
+<NewsletterForm />
 
 [^1]: Want to work for PostHog? Read [How to get a job at a startup](https://newsletter.posthog.com/p/how-to-get-a-job-at-a-startup), then head to [our careers page](https://posthog.com/careers) – we’re always hiring.
 

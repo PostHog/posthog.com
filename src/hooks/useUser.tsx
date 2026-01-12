@@ -3,9 +3,11 @@ import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
 import { ProfileData } from 'lib/strapi'
 import usePostHog from './usePostHog'
-import { COOKIELESS_SENTINEL_VALUE } from 'posthog-js/lib/src/constants'
 import Link from 'components/Link'
 import { useToast } from '../context/Toast'
+
+// Sentinel value used by posthog-js for cookieless tracking mode
+const COOKIELESS_SENTINEL_VALUE = '$posthog_cookieless'
 
 export type User = {
     id: number
