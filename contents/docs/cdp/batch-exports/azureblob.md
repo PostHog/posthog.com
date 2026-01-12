@@ -17,10 +17,6 @@ With batch exports, data can be exported to Azure Blob Storage.
 
 The Azure Blob Storage destination is currently in `beta`. This means the configuration and features are subject to change.
 
-You can request access via the [in-app support form](https://app.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue).
-
-We love feature requests and feedback. Please tell us what you think using the same link above.
-
 </CalloutBox>
 
 ## Setting up Azure Blob Storage access
@@ -37,19 +33,6 @@ To retrieve your connection string from the Azure Portal:
 1. Navigate to your Storage account.
 2. Go to **Security + networking** > **Access keys**.
 3. Copy the connection string from either the primary or secondary key.
-
-> **Note:** Store your connection string securely. Avoid storing it in plain text or committing it to version control. Microsoft recommends using Azure Key Vault or environment variables for secure storage.
-
-### Container naming rules
-
-Azure Blob Storage containers must follow these naming rules:
-
-- Container names must be between 3 and 63 characters long.
-- Container names can contain only lowercase letters, numbers, and hyphens (-).
-- Container names must begin and end with a letter or number.
-- Consecutive hyphens are not permitted.
-
-For more details, see [Azure's container naming documentation](https://learn.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata).
 
 <InboundIpAddresses />
 
@@ -121,10 +104,10 @@ Each file format supports a variety of compression methods. The compression meth
 
 The following compression methods are supported:
 
-* **Parquet:** zstd, gzip, brotli
+* **Parquet:** zstd, gzip, brotli, lz4, snappy
 * **JSONLines:** gzip, brotli
 
-> **Note on Parquet compression:** The compression type is included in the file extension, even for Parquet files. For example, files compressed with zstd will have the extension `parquet.zst`. Since compression is embedded in the format itself, the file should be read directly as a Parquet file and not uncompressed first.
+> **Note on Parquet compression:** The compression type is included in the file extension, even for Parquet files. For example, files compressed with zstd will have the extension `.parquet.zst`, lz4 will be `.parquet.lz4`, and snappy will be `.parquet.sz`. Since compression is embedded in the format itself, the file should be read directly as a Parquet file and not uncompressed first.
 
 ### Manifest file
 
