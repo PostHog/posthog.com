@@ -184,11 +184,11 @@ We have certain automations in Vitally and Zapier that your team lead needs to a
 
 ## New hire frequently asked questions
 
-### How does my quota work during my ramp period
+### How does my quota work during my ramp period?
 
-Your first 3 months commission is guaranteed. This will be calculated based on the date you start. If you start before the 15th of a month you will get guaranteeed commission for that month and all the remaining months in the quarter eg. If you start on the 13th January you will get guaranteed commission for Jan, Feb & March. If you start on the 17th Jan, you would get two months guaranteed commission. 
+Your first 3 months commission is paid at 100% fixed. This will be calculated based on the date you start. If you start before the 15th of a month you will get 100% commission for that month and all the remaining months in the quarter. For example, if you start on Jan 13th, you will get guaranteed commission for Jan, Feb & Mar. If you start _on_ Jan 17th, you would get two months of 100% commission. 
 
-The number of months of guaranteed commission in your first quarter will correlate to the size of your quota in your second quarter. If you receive three months of guaranteed commission in your first quarter you will be on full quota for your second quarter. If you receive two months, you will be on two thirds of your ramped quota; if you receive one month, you will be on one third of your rammped quota. 
+The number of months of commission in your first quarter will correlate to the size of your quota in your second quarter. If you receive three months of fixed commission in your first quarter you will be on full quota for your second quarter. If you receive two months, you will be on two thirds of your ramped quota; if you receive one month, you will be on one third of your rammped quota. 
 
 You will always be on full quota by your third quarter - unless you start after the 15th in the last month of a quarter, in which case for quota purposes & guaranteed commission it will be like you started on the 1st of the new quarter.
 
