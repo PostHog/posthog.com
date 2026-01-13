@@ -398,7 +398,7 @@ export default function Inbox(props) {
                         showSearch
                         rightActionButtons={
                             <div className="flex items-center gap-2 flex-wrap">
-                                <OSButton icon={<IconSearch />} onClick={() => openSearch('questions')} />
+                                <OSButton icon={<IconSearch />} onClick={() => openSearch('question')} />
                                 <CallToAction
                                     size="sm"
                                     onClick={() =>

@@ -66,7 +66,7 @@ export const posthog_ai = {
             'Your AI-powered product analyst. Write natural language to query and analyze PostHog data instantly, find insights, and speed up product decisions with PostHog AI.',
     },
     overview: {
-        title: 'Our resident AI agent who understands your product and data',
+        title: 'Ask questions about how people use your product',
         description:
             'PostHog AI builds insights, automates manual tasks, and routes more complex tasks to other AI agents for specialized work.',
         layout: 'ai',
@@ -90,6 +90,13 @@ export const posthog_ai = {
                 'https://res.cloudinary.com/dmukukwp6/image/upload/max_sidebar_initial_dark_cropped_240b38f95e.png',
             alt: 'PostHog AI chat',
             imgClasses: 'max-w-[444px]',
+        },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_light_f654818fb0.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_dark_35c03e330c.png',
+            alt: 'PostHog AI screenshot',
+            classes: 'justify-start items-end pr-4 @lg:pr-6',
+            imgClasses: 'rounded-tr-md shadow-2xl',
         },
     },
     hog: {
@@ -144,12 +151,12 @@ export const posthog_ai = {
                     sticker: <StickerPath className="size-6" />,
                     percent: 30,
                 },
-                {
-                    name: 'Anomaly detection',
-                    description: 'Detect outliers with AI and configure alerts to catch them',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 0,
-                },
+                // {
+                //     name: 'Anomaly detection',
+                //     description: 'Detect outliers with AI and configure alerts to catch them',
+                //     sticker: <StickerPath className="size-6" />,
+                //     percent: 0,
+                // },
             ],
         },
         {
@@ -236,12 +243,12 @@ export const posthog_ai = {
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
-                {
-                    name: 'Chat with traces',
-                    description: 'Query your trace data through the PostHog AI chat',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 0,
-                },
+                // {
+                //     name: 'Chat with traces',
+                //     description: 'Query your trace data through the PostHog AI chat',
+                //     sticker: <StickerPath className="size-6" />,
+                //     percent: 0,
+                // },
             ],
         },
         {

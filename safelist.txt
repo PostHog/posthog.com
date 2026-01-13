@@ -623,3 +623,10 @@ data-[highlighted]:bg-text-secondary
 @5xl/app-reader:block
 @6xl/app-reader:block
 @7xl/app-reader:block
+
+bg-trace-monitoring
+bg-cost-analysis
+bg-performance-monitoring
+
+bg-blue
+bg-lilac

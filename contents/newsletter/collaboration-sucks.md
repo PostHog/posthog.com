@@ -65,6 +65,8 @@ Everyone is to blame.
 
 * It is annoying, but sometimes a single person can’t ship certain things front to back to a high-enough quality, and we can’t just ship and iterate. We can fix broken code, but we can’t resend a newsletter.
 
+<NewsletterForm />
+
 ## How to crush collaboration (and go farther, faster)
 
 So if collaboration is your enemy, how do you defeat it? Here’s what we say:

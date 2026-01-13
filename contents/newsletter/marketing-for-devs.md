@@ -47,6 +47,8 @@ Here's what we've learned about marketing for developers.
 
 10. Speak like your users. Find out the terms and phrases they use and use those. Talking to users is a great way to figure this out. Doing so helps make your product legible to them.
 
+<NewsletterForm />
+
 11. Word of mouth is the best marketing. Overly optimizing for revenue can kill this as it encourages you to obsess over sales rather than building a great product and brand. Marketing is a lot easier if you have a great product to back you up.
 
 12. Think of the biggest reasons that would [stop someone from using your product](/blog/brand#what-would-stop-me-from-using-this-thing) and address those with your marketing. Early at PostHog, these were people doubting whether the team was strong and if the product would exist. Our [public handbook](/handbook) was our solution to this.

@@ -263,7 +263,7 @@ export const Context = createContext<AppContextType>({
         skinMode: 'modern',
         cursor: 'default',
         wallpaper: 'keyboard-garden',
-        screensaverDisabled: false,
+        screensaverDisabled: true,
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -1146,6 +1146,7 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         wallpaper: 'keyboard-garden',
         clickBehavior: 'double',
         performanceBoost: false,
+        screensaverDisabled: true,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
         ...(!lastReset ? { experience: 'posthog' } : {}),
     }
