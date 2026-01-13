@@ -1,23 +1,17 @@
 import React from 'react'
-import {
-    PHPInstallation,
-    BooleanFlagSnippet,
-    MultivariateFlagSnippet,
-    OverridePropertiesSnippet,
-} from 'onboarding/feature-flags'
+import { ReactNativeInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const PHPInstallationWrapper = () => {
+export const ReactNativeInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
                 BooleanFlagSnippet,
                 MultivariateFlagSnippet,
-                OverridePropertiesSnippet,
             }}
         >
-            <PHPInstallation modifySteps={addNextStepsStep} />
+            <ReactNativeInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }

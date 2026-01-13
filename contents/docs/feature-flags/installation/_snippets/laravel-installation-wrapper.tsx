@@ -1,23 +1,17 @@
 import React from 'react'
-import {
-    PHPInstallation,
-    BooleanFlagSnippet,
-    MultivariateFlagSnippet,
-    OverridePropertiesSnippet,
-} from 'onboarding/feature-flags'
+import { LaravelInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const PHPInstallationWrapper = () => {
+export const LaravelInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
                 BooleanFlagSnippet,
                 MultivariateFlagSnippet,
-                OverridePropertiesSnippet,
             }}
         >
-            <PHPInstallation modifySteps={addNextStepsStep} />
+            <LaravelInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }
