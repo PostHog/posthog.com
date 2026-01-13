@@ -276,7 +276,7 @@ Tips:
 -   Provide actionable information as an _Internal Note_ on the Zendesk ticket (e.g. partial investigation, notes for escalating or transferring to a different team, etc.). Do not use internal notes to communicate internally about a ticket, it is far too easy to miss these notes (see below!).
 -   Use _side conversations_ from Zendesk to Slack to communicate about a ticket internally. Slack is our primary communication tool and therefore it's much easier to have a discussion in Slack than through Zendesk internal notes. Side conversations can be started from the right hand side panel in Zendesk:
 
-![Opening side conversations](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/zendesk_side_conversation_b595f2b69f.png)
+![Opening side conversations](https://res.cloudinary.com/dmukukwp6/image/upload/h_500,c_limit,q_auto,f_auto/zendesk_side_conversation_b595f2b69f.png)
 
 ### Creating tickets on behalf of users or from existing tickets
 
