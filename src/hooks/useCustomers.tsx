@@ -20,6 +20,7 @@ import HostAILogo from '../components/CustomerLogos/HostAILogo'
 import CroissantLogo from '../images/customers/croissant-light.png'
 import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
+import LMArenaLogo from '../components/CustomerLogos/LMArenaLogo'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
@@ -401,6 +402,46 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: false,
         logo: JuiceboxLogo,
         height: 10,
+    },
+    lmarena: {
+        name: 'LMArena',
+        industries: ['LLMs'],
+        toolsUsed: [
+            'web_analytics',
+            'product_analytics',
+            'marketing_analytics',
+            'feature_flags',
+            'experiments',
+            'error_tracking',
+            'posthog_ai',
+        ],
+        notes: 'AI model comparison platform',
+        logo: LMArenaLogo,
+        height: 10,
+        featured: true,
+        quotes: {
+            matt_hova: {
+                name: 'Matt Hova',
+                role: 'Member of Technical Staff',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/matt_hova_8c119a92ad.jpeg',
+                },
+                products: {
+                    experiments:
+                        "I can't recommend PostHog enough, especially if you're just getting started out. It really helped us move fast and we've been really happy with it as we continue to scale.",
+                },
+            },
+            lily_d: {
+                name: 'Lily D',
+                role: 'Growth Marketer',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/lily_d_lmarena_7ce598fc8c.jpeg',
+                },
+                products: {
+                    product_analytics: '.',
+                },
+            },
+        },
     },
     'mention-me': {
         name: 'Mention Me',
