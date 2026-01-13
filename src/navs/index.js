@@ -4815,6 +4815,16 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Errors',
+                    url: '/docs/llm-analytics/errors',
+                    icon: 'IconWarning',
+                    color: 'red',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Embeddings',
                     url: '/docs/llm-analytics/embeddings',
                     icon: 'IconDatabase',
@@ -4849,6 +4859,16 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/evaluations',
                     icon: 'IconTarget',
                     color: 'yellow',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                    },
+                },
+                {
+                    name: 'Trace summarization',
+                    url: '/docs/llm-analytics/summarization',
+                    icon: 'IconAI',
+                    color: 'blue',
                     badge: {
                         title: 'Alpha',
                         className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
