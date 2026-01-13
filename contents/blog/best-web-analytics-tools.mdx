@@ -56,9 +56,35 @@ The best web analytics tools go further by giving you:
 
 Here's how some of the most popular web analytics tools compare:
 
-[comparison table - WILL ADD SOON!]
+<ProductComparisonTable
+    competitors={['posthog', 'plausible', 'fathom', 'matomo', 'mixpanel', 'cloudflare_web_analytics']}
+    rows={[
+        { label: 'Core web analytics' },
+        'web_analytics.features.pageviews',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+        'web_analytics.features.conversions',
+        'web_analytics.features.web_vitals',
 
-*Hey competitors 👋 We try our best to keep up with what you're shipping, but if we got something wrong or this looks outdated, open a PR and we'll fix it.
+        { label: 'Privacy & setup' },
+        'web_analytics.features.cookieless_tracking',
+        'web_analytics.features.script_size',
+
+        { label: 'Go beyond traffic' },
+        'product_analytics',
+        'session_replay',
+        'heatmaps',
+
+        { label: 'Dev + ops essentials' },
+        'platform.developer.api',
+        'platform.developer.sql',
+        'platform.pricing.free_tier',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+    ]}
+/>
+
+*Hey competitors 👋 We try our best to keep up with what you're shipping, but if we got something wrong or this looks outdated, open a PR and we'll fix it.*
 
 ## What's the best web analytics tool for developers?
 
