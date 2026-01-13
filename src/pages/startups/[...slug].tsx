@@ -48,7 +48,7 @@ const partnerConfigs = [
                 <img
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/wordmark_colour_light_7d9d5205c6.svg"
                     alt="Incident.io"
-                    className="inline-block h-9 relative top-[.2rem]"
+                    className="inline-block h-9 relative top-[-7px]"
                 />
             </>
         ),
