@@ -87,7 +87,7 @@ You'll also need:
 - **A clear definition of what "successful onboarding" looks like**. This is [your activation event](/newsletter/wtf-is-activation) – the moment a user has gotten enough value to stick around (more on this below).
 - **[Events firing](/tutorials/event-tracking-guide) & at least a few hundred users going through your flow**. You need enough data to spot patterns. If you're at an earlier stage, you can still follow this recipe; just watch more replays and lean harder on qualitative signals until your numbers catch up.
 
-### **Want to cook with PostHog? Great choice!**
+### **Want to cook with PostHog? Great choice.**
 
 If you haven't set it up yet, [start here](/docs/getting-started/install). Make sure you're capturing the key events in your onboarding flow (signups, form completions, button clicks, etc.). If you have autocapture enabled, you're probably already covered.
 
@@ -118,7 +118,10 @@ Here's [how we figured out our activation metric at PostHog](/product-engineers/
 
 Pick one. Be opinionated. You can always adjust later.
 
-> 👨‍🍳 **Chef's tip:** Don't confuse the appetizer for the main course; signing up or landing on a dashboard aren't meaningful enough steps to be considered product activations, for example. Also, your activation event might change over time – what predicted retention two years ago might not be the best signal today, so revisit it if needed.
+<details>
+<summary><strong>👨‍🍳 Chef's tip</strong></summary>
+Don't confuse the appetizer for the main course; signing up or landing on a dashboard aren't meaningful enough steps to be considered product activations, for example. Also, your activation event might change over time – what predicted retention two years ago might not be the best signal today, so revisit it if needed.
+</details>
 
 <CalloutBox icon="IconInfo" title="You're ready for the next step when...." type="fyi">
 
@@ -149,7 +152,11 @@ A few tips:
 
 Head to [Product Analytics](https://app.posthog.com/insights) → **New insight** → [**Funnel**](/docs/product-analytics/funnels). If you have [autocapture](/docs/product-analytics/autocapture) enabled, many of these events may already be tracked for you; check your [activity](https://app.posthog.com/events) to see what's coming in.
 
-> 👨‍🍳 **Chef's tip**: Start with your core flow. Once it's optimized, create separate funnels for specific segments. Don't forget to name your funnel something specific (e.g., "Self-serve onboarding Q1 2025") so future-you knows what it's measuring when you have 47 funnels.
+<details>
+<summary><strong>👨‍🍳 Chef's tip</strong></summary>
+Start with your core flow. Once it's optimized, create separate funnels for specific segments. Don't forget to name your funnel something specific (e.g., "Self-serve onboarding Q1 2025") so future-you knows what it's measuring when you have 47 funnels.
+</details>
+
 
 <CalloutBox icon="IconInfo" title="You're ready for the next step when...." type="fyi">
 
@@ -171,7 +178,10 @@ While you wait, you can:
 - [Set up session replay, if you haven't already](/docs/session-replay)
 - [Prep an exit survey for later](/docs/surveys/creating-surveys) (we'll use it in Step 6)
 
-> 👨‍🍳 **Chef's tip**: Resist the urge to peek daily. Set a calendar reminder for one week out – watching the pot won't make it boil faster.
+<details>
+<summary><strong>👨‍🍳 Chef's tip</strong></summary>
+Resist the urge to peek daily. Set a calendar reminder for one week out – watching the pot won't make it boil faster.
+</details>
 
 <CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
 
@@ -201,7 +211,11 @@ If it's a context problem, try segmenting your funnel to find a clearer diagnosi
 
 Click on the drop-off number in your funnel to see the actual users who didn't make it. Use [breakdowns](/docs/product-analytics/funnels#breakdowns) to slice your funnel by user properties, device, or any event property. If you have many steps or breakdown values, you can also sort for poor performers in terms of number of conversions, conversion percentage, and even time in the **Detailed results** section.
 
-> 👨‍🍳 **Chef's tip:** Export your [cohort](/docs/data/cohorts) of dropped-off users. They're useful for more than just replays – you can target them with win-back marketing campaigns or surveys later.
+<details>
+<summary><strong>👨‍🍳 Chef's tip</strong></summary>
+Export your [cohort](/docs/data/cohorts) of dropped-off users, they can be useful for more than just replays – you can use it target them with win-back marketing campaigns or surveys later.
+</details>
+
 
 <CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
 
@@ -232,7 +246,10 @@ If recordings are looking wildly different from one user to the next, go back to
 
 If you saved a cohort in Step 4, you can filter replays by that cohort directly.
 
-> 👨‍🍳 **Chef's tip:** Don't just watch drop-offs. Sometimes successful users struggled through the same friction – they just pushed through anyway. Watch both to taste the difference.
+<details>
+<summary><strong>👨‍🍳 Chef's tip</strong></summary>
+Don't just watch drop-offs. Sometimes successful users struggled through the same friction – they just pushed through anyway. Watch both to taste the difference.
+</details>
 
 <CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
 
@@ -268,7 +285,10 @@ Go to [Surveys](https://app.posthog.com/surveys) → [**New survey**](/docs/surv
 
 You can set display conditions based on URL, user properties, or events. For the completion survey, trigger it when your activation event fires.
 
-> 👨‍🍳 **Chef's tip:** Keep surveys short. One or two open-ended questions max. Users will give you more when you ask for less. Also, remember survey responses are seasoning, not the main dish; it's okay to just have a handful of responses. A few strong signals beat hundreds of vague ones.
+<details>
+<summary><strong>👨‍🍳 Chef's tip</strong></summary>
+Keep surveys short. One or two open-ended questions max. Users will give you more when you ask for less. Also, remember survey responses are seasoning, not the main dish; it's okay to just have a handful of responses. A few strong signals beat hundreds of vague ones.
+</details>
 
 <CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
 
@@ -293,7 +313,10 @@ Some common fixes:
 - **Squash any bugs** – if replays showed errors, fix them
 - **Reorder the flow** – maybe you're asking for too much too soon
 
-> 👨‍🍳 **Chef's tip**: One ingredient at a time. If you change five things at once, you won't know what fixed it (or broke it). Also, write down your hypothesis before you ship. It's easy to retrofit a narrative after you see results – having it on record keeps you honest.
+<details>
+<summary><strong>👨‍🍳 Chef's tip</strong></summary>
+One ingredient at a time. If you change five things at once, you won't know what fixed it (or broke it). Also, write down your hypothesis before you ship. It's easy to retrofit a narrative after you see results – having it on record keeps you honest.
+</details>
 
 <CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
 
@@ -325,7 +348,10 @@ Use [feature flags](/docs/feature-flags) to roll out your fix to a percentage of
 
 To run an experiment, go to [Experiments](https://app.posthog.com/experiments) → [**New experiment**](/docs/experiments/creating-an-experiment). Use your feature flag as the basis – PostHog will split users into control and test groups and track your funnel as the goal metric.
 
-> 👨‍🍳 **Chef's tip:** If you're nervous about a big change, start at 5% rollout. You can always ramp up, but you can't un-serve a burnt dish. Also, not every fix needs a full experiment – but if it's a big change, or you need to convince stakeholders, statistical proof is worth the extra time.
+<details>
+<summary><strong>👨‍🍳 Chef's tip</strong></summary>
+If you're nervous about a big change, start at 5% rollout. You can always ramp up, but you can't un-serve a burnt dish. Also, not every fix needs a full experiment – but if it's a big change, or you need to convince stakeholders, statistical proof is worth the extra time.
+</details>
 
 <CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
 
@@ -353,7 +379,10 @@ Set your funnel's **Graph type** to **Historical trends** to see conversion over
 
 If you used a feature flag or experiment, check the results in [Experiments](https://app.posthog.com/experiments) to see the impact with statistical significance. For another perspective on your funnel, you can also break it by whether that feature flag was enabled for that user.
 
-> 👨‍🍳 **Chef's tip:** Screenshot your before/after funnels. They make great artifacts for retros, stakeholder updates, and convincing your team that this stuff actually works.
+<details>
+<summary><strong>👨‍🍳 Chef's tip</strong></summary>
+Screenshot your before/after funnels. They make great artifacts for retros, stakeholder updates, and convincing your team that this stuff actually works.
+</details>
 
 <CalloutBox icon="IconInfo" title="You're done when..." type="fyi">
 
