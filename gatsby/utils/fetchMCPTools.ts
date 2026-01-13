@@ -2,7 +2,8 @@ import fetch from 'node-fetch'
 import path from 'path'
 import fs from 'fs'
 
-const MCP_TOOLS_URL = 'https://raw.githubusercontent.com/PostHog/mcp/refs/heads/main/schema/tool-definitions.json'
+const MCP_TOOLS_URL =
+    'https://raw.githubusercontent.com/PostHog/posthog/refs/heads/master/services/mcp/schema/tool-definitions.json'
 
 interface MCPTool {
     category?: string

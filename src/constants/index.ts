@@ -1,3 +1,6 @@
+// Paths that have raw markdown available for copying/downloading
+export const MARKDOWN_CONTENT_PATHS = ['/docs', '/handbook'] as const
+
 export const PRODUCT_COUNT = 10
 export const APP_COUNT = 34 // total of /products - ai agents.md and cdp readme.md
 export const CUSTOMER_COUNT = 190254

@@ -166,7 +166,7 @@ Once the org has had their full access restored, repeat the steps above, but thi
 
 ## When does an incident end?
 
-When we’ve identified the root cause of the issue and put a fix in place. End the incident by typing `/inc close` in the incident channel. Make sure to also mark the incident as resolved on the status page.
+When we've identified the root cause, implemented a fix, and confirmed all customer-facing services have returned to normal. End the incident by typing `/inc close` in the incident channel. Make sure to also mark the incident as resolved on the status page.
 
 ## What happens after an incident?
 

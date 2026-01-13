@@ -70,6 +70,8 @@ We take time every week to review these and make improvements to docs. We also b
 
 It is the repeated little improvements that creates a coveted polished docs experience.
 
+<NewsletterForm />
+
 ## 3. Your readers are in a rush
 
 ![Average book fan vs average docs enjoyer](https://res.cloudinary.com/dmukukwp6/image/upload/image_2_4ece7bbd84.png)

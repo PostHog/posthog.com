@@ -11,6 +11,7 @@ import { IconCheck, IconX } from '@posthog/icons'
 import OSTable from 'components/OSTable'
 import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
 import StripeLogo from '../../images/stripe.svg'
+import Logo1984 from '../../images/1984.svg'
 import ODFLogo from '../../images/odf.svg'
 import Logo from 'components/Logo'
 import OSButton from 'components/OSButton'
@@ -50,6 +51,16 @@ const partnerConfigs = [
                     alt="Incident.io"
                     className="inline-block h-9 relative top-[-7px]"
                 />
+            </>
+        ),
+        value: '$50,000',
+    },
+    {
+        slug: '1984',
+        title: (
+            <>
+                <IconX className="size-8 text-white inline-block relative top-1" />
+                <img src={Logo1984} alt="1984" className="inline-block h-9 relative top-[.2rem]" />
             </>
         ),
         value: '$50,000',

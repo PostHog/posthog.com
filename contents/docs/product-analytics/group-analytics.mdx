@@ -13,7 +13,7 @@ availability:
     className="rounded shadow-xl"
 />
 
-<CalloutBox icon="IconInfo" title="New: Customer analytics preview" type="fyi">
+<CalloutBox icon="IconInfo" title="New: Customer Analytics preview" type="fyi">
 
 Group analytics is getting a makeover! Sign up for the [customer analytics feature preview](https://app.posthog.com/settings/user-feature-previews#customer-analytics-roadmap) to get a sneak peek, and [share your feedback](https://app.posthog.com/#panel=support%3Afeedback%3Acrm%3Alow).
 
@@ -177,19 +177,19 @@ posthog.capture({
 // Call PostHog::groupIdentify() to create a group before capturing events.
 // It sends a `$groupidentify` event to create or update the group.
 // It will also create the group type if it doesn't exist.
-PostHog::groupIdentify(array(
+PostHog::groupIdentify([
     'groupType' => 'company',
     'groupKey' => 'company_id_in_your_db'
-));
+]);
 
 // Once the group is created, you can associate events with it by
 // passing the `$groups` property. The `$groups` property is required
 // for every event that should be associated with the group.
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'user_distinct_id',
     'event' => 'user_signed_up',
-    '$groups' => array("company" => "company_id_in_your_db")
-));
+    '$groups' => ['company' => 'company_id_in_your_db']
+]);
 ```
 
 ```ios_swift
@@ -528,18 +528,18 @@ posthog.capture({
 
 ```php
 // Not possible
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'user_distinct_id',
     'event' => 'user_signed_up',
-    '$groups' => array("company" => "company_id_in_your_db", "company" => "another_company_id_in_your_db")
-));
+    '$groups' => ['company' => 'company_id_in_your_db', 'company' => 'another_company_id_in_your_db']
+]);
 
 // Allowed
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'user_distinct_id',
     'event' => 'user_signed_up',
-    '$groups' => array("company" => "company_id_in_your_db", "channel" => "channel_id_in_your_db")
-));
+    '$groups' => ['company' => 'company_id_in_your_db', 'channel' => 'channel_id_in_your_db']
+]);
 ```
 
 </MultiLanguage>
@@ -575,11 +575,11 @@ client.Enqueue(posthog.Capture{
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'static_string_for_group_events',
     'event' => 'group_event_name',
-    '$groups' => array("company" => "company_id_in_your_db")
-));
+    '$groups' => ['company' => 'company_id_in_your_db']
+]);
 ```
 
 ```bash
@@ -669,7 +669,7 @@ if posthog.feature_enabled("new-groups-feature", "user_distinct_id", groups={"co
 ```
 
 ```php
-if (PostHog::isFeatureEnabled('new-groups-feature', 'user_distinct_id', false, array("company" => "company_id_in_your_db"))) {
+if (PostHog::isFeatureEnabled('new-groups-feature', 'user_distinct_id', false, ['company' => 'company_id_in_your_db'])) {
     // Do something
 }
 ```
@@ -686,7 +686,7 @@ if (isFlagEnabled) {
 
 ### Rename group types
 
-Change how group types display in PostHog in [Settings > Customer analytics](https://app.posthog.com/settings/project-customer-analytics#group-analytics).
+Change how group types display in PostHog in [Settings > Customer Analytics](https://app.posthog.com/settings/project-customer-analytics#group-analytics).
 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/project_Setting_Light_ff8617214d.png"

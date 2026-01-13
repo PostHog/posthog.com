@@ -3,12 +3,11 @@ import { SEO } from 'components/seo'
 import ResourceItem from 'components/Docs/ResourceItem'
 import Intro from 'components/Docs/Intro'
 import ReaderView from 'components/ReaderView'
-import OSTable from 'components/OSTable'
 import Link from 'components/Link'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { Caption } from 'components/Caption'
 import ChannelPlatforms from '../../../../contents/docs/workflows/_snippets/channel-platforms'
-import WorkflowsBetaSnippet from '../../../../contents/docs/workflows/_snippets/beta.mdx'
+import PricingTable from '../../../../contents/docs/workflows/_snippets/pricing-table.mdx'
 
 export const Content = () => {
     return (
@@ -17,7 +16,6 @@ export const Content = () => {
                 <h2 className="mb-4" id="overview">
                     Overview
                 </h2>
-                <WorkflowsBetaSnippet />
                 <div>
                     <p>
                         Workflows is PostHog's no-code, drag-and-drop tool for building logic that automates processes
@@ -79,12 +77,13 @@ export const Content = () => {
                 <h2 className="mb-4 mt-0" id="pricing">
                     Pricing
                 </h2>
-                <p>Workflows is currently in early beta. While in beta, workflows is free to use.</p>
                 <p>
-                    After the beta, pricing will be based on how many real-time destinations you use and how many
-                    messages you send each month. You'll get 10,000 destinations or messages free each month, with
-                    discounts as your usage grows.
+                    After our beta period ends, pricing will be based on how many real-time destinations you use and how
+                    many messages you send each month. You'll get 10,000 destinations or messages free each month, with
+                    discounts as your usage grows. We are constantly striving to make pricing the best possible and will
+                    start with the following tiers:
                 </p>
+                <PricingTable />
             </section>
 
             <section className="mb-8">

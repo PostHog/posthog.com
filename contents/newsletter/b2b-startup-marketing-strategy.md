@@ -54,6 +54,8 @@ Above all, don’t get distracted by rivals doing something better than you. Sti
 
 > **Further reading:** [How we spend our marketing budget (with actual $ figures)](https://posthog.com/founders/actual-marketing-budget)
 
+<NewsletterForm />
+
 ## 2. Compete on depth, not breadth 👨‍🎓
 
 Trying to go head-to-head with much larger competitors on content output is a losing game, so focus on quality. One great article >>> 25 generic ones. We write approx. ⅓ SEO articles, ⅓ tutorials, ⅓ anything goes.

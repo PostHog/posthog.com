@@ -1,0 +1,138 @@
+---
+title: React Native session replay installation
+platformLogo: react
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import ReactNativeInstall from "../../integrate/_snippets/install-react-native.mdx"
+
+export const EnableSessionReplayDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-dark-mode.png"
+export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-light-mode.png"
+
+> Session Replay is currently supported only on Android and iOS platforms.
+
+<Steps>
+
+<Step title="Add PostHog to your app" badge="required">
+
+<ReactNativeInstall />
+
+> Requires PostHog React Native SDK version >= [3.2.0](https://github.com/PostHog/posthog-js/releases), and it's recommended to always use [the latest version](/docs/sdk-doctor).
+
+</Step>
+
+<Step title="Install the session replay plugin" badge="required">
+
+```bash
+yarn add posthog-react-native-session-replay
+# or npm
+npm i -s posthog-react-native-session-replay
+```
+
+</Step>
+
+<Step title="Enable session recordings in your project settings" badge="required">
+
+Enable session recordings in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
+<ProductScreenshot
+  imageLight={EnableSessionReplayLight}
+  imageDark={EnableSessionReplayDark}
+  alt="Enable session recordings in your PostHog'"
+  classes="rounded"
+/>
+
+</Step>
+
+<Step title="Configure replay settings" badge="required">
+
+Add `enableSessionReplay: true` to your PostHog configuration alongside any of your other configuration options:
+
+```ts
+export const posthog = new PostHog(
+  '<ph_project_api_key>',
+  {
+    // Enable session recording. Requires enabling in your project settings as well.
+    // Default is false.
+    enableSessionReplay: true,
+    sessionReplayConfig: {
+      // Whether text and text input fields are masked. Default is true.
+      // Password inputs are always masked regardless
+      maskAllTextInputs: true,
+      // Whether images are masked. Default is true.
+      maskAllImages: true,
+      // Enable masking of all sandboxed system views like UIImagePickerController, PHPickerViewController and CNContactPickerViewController. Default is true.
+      // iOS only
+      maskAllSandboxedViews: true,
+      // Capture logs automatically. Default is true.
+      // Android only (Native Logcat only)
+      captureLog: true,
+      // Whether network requests are captured in recordings. Default is true
+      // Only metric-like data like speed, size, and response code are captured.
+      // No data is captured from the request or response body.
+      // iOS only
+      captureNetworkTelemetry: true,
+      // Throttling delay used to reduce the number of snapshots captured and reduce performance impact
+      // The lower the number more snapshots will be captured but higher the performance impact
+      // Default is 1000ms
+      throttleDelayMs: 1000,
+    },
+  },
+);
+```
+
+Or using the `PostHogProvider`:
+
+```ts
+<PostHogProvider
+        apiKey="<ph_project_api_key>"
+        options={{
+          enableSessionReplay: true,
+          ...
+        }}
+      >
+```
+
+</Step>
+
+</Steps>
+
+## Expo
+
+Mobile Session Replay for Expo works normally, but prefer the `expo` tools for installing and running your project.
+
+Install the session replay plugin.
+
+```bash
+npx expo install posthog-react-native-session-replay
+```
+
+Expo Go isn't supported since it uses Native plugins, please use development build.
+
+```bash
+# Run Android development build
+npx expo run:android --no-build-cache --device
+
+# Run iOS development build
+npx expo run:ios --no-build-cache --device
+```
+
+## Limitations
+
+- On Android, requires API >= 26.
+- On iOS, minimum deployment target is [iOS13](/docs/libraries/ios)
+- Keyboard is not supported. A placeholder will be shown.
+- Wireframe mode isn't supported, only screenshot mode.
+- Expo Go isn't supported since it uses Native plugins, please use development build.
+- Masking individual view components within a WebView isn't supported, if your WebView displays sensitive view components, you've to [mask](/docs/session-replay/privacy?tab=React+Native) the whole WebView.
+- Session Replay is currently supported only on Android and iOS platforms.
+
+## Troubleshooting
+
+- Run a clean build if you experience issues such as `The package 'posthog-react-native-session-replay' doesn't seem to be linked`.
+- Update your SDK and iOS Pods.
+- If you have enabled session replay using feature flags, the flags are evaluated on the device once the PostHog SDK starts as early as possible. The SDK might be using the cached flags from the previous SDK start. If you have changed the flag or its condition, kill and reopen the app to force a new SDK start at least once.
+    - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users. We're tracking this bug in [issue #263](https://github.com/PostHog/posthog-ios/issues/263).
+    - Session replay feature flag evaluation does not capture `$feature_flag_called` events, so the `Usage` tab on the feature flag page won't show anything. We're tracking this feature request in [issue #250](https://github.com/PostHog/posthog-android/issues/250).
