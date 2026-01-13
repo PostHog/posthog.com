@@ -18,7 +18,7 @@ import { bugsnag } from '../../hooks/competitorData/bugsnag'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
 import { chameleon } from '../../hooks/competitorData/chameleon'
 import { clarity } from '../../hooks/competitorData/clarity'
-import { cloudflare_web_analytics } from '../../hooks/competitorData/cloudflare_web_analytics'
+import { cloudflare } from '../../hooks/competitorData/clarity'
 import { contentsquare } from '../../hooks/competitorData/contentsquare'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
 import { datadog } from '../../hooks/competitorData/datadog'
@@ -591,6 +591,7 @@ export default function ProductComparisonTable({
         chartmogul,
         chameleon,
         clarity,
+        cloudflare,
         contentsquare,
         crazy_egg,
         datadog,

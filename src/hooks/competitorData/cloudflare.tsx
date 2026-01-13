@@ -1,4 +1,4 @@
-export const cloudflare_web_analytics = {
+export const cloudflare = {
     name: 'Cloudflare Web Analytics',
     key: 'cloudflare',
     assets: {
