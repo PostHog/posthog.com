@@ -26,17 +26,17 @@ Data wasn’t just fragmented — it was also incomplete due to the limitations 
 />
 </BorderWrapper>
 
-## Using product analytics and Max AI to get insights, fast
+## Using product analytics and PostHog AI to get insights, fast
 
 Before switching to PostHog, which they deployed server-side via the Node SDK, Supabase’s team struggled to produce quick analysis of attribution and product usage patterns.
 
-Now, every Supabase team can use the same set of data and interact with it effortlessly — either by using existing insight types, writing their own SQL, or using [Max AI](/max) to generate SQL queries for them.
+Now, every Supabase team can use the same set of data and interact with it effortlessly — either by using existing insight types, writing their own SQL, or using [PostHog AI](/ai) to generate SQL queries for them.
 
 "PostHog has proven to be easy to use and adopt for product engineers. It’s also very easy to slice and dice data and to trace events back to a user, project, or an organization. PostHog also comes with built-in analysis tools—like funnels, retention, and user journey breakdowns—that make digging into the data easy."
 
-Max AI, PostHog’s built-in AI assistant, is especially useful for complex investigations. Not only can Max easily write SQL queries on your behalf (or fix errors if you want to work alongside it), but it can be given access to your product data to help you find what you need.
+PostHog AI, PostHog’s built-in AI assistant, is especially useful for complex investigations. Not only can PostHog AI easily write SQL queries on your behalf (or fix errors if you want to work alongside it), but it can be given access to your product data to help you find what you need.
 
-“I like Max as an AI helper because it knows PostHog terminology, as well as the data model, and schemas. It can fix my mistakes, help me join the right tables, and more. It makes everything a lot easier and faster.”
+“I like PostHog AI as a helper because it knows PostHog terminology, as well as the data model, and schemas. It can fix my mistakes, help me join the right tables, and more. It makes everything a lot easier and faster.”
 
 ![supabase growth chart](https://res.cloudinary.com/dmukukwp6/image/upload/Supabase_growth_chart_603d22cf6b.png)
 

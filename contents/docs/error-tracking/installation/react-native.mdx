@@ -1,0 +1,119 @@
+---
+title: React Native error tracking installation
+showStepsToc: true
+platformLogo: react
+tableOfContents: [
+  {
+    url: 'install-posthog-react-native-sdk',
+    value: 'Install PostHog React Native SDK',
+    depth: 1,
+  },
+  {
+    url: 'set-up-exception-autocapture',
+    value: 'Set up exception autocapture',
+    depth: 1,
+  },
+  {
+    url: 'manually-capture-exceptions',
+    value: 'Manually capture exceptions',
+    depth: 1,
+  },
+  {
+    url: 'verify-error-tracking',
+    value: 'Verify error tracking',
+    depth: 1,
+  },
+  {
+    url: 'upload-source-maps',
+    value: 'Upload source maps',
+    depth: 1,
+  }
+]
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+import InstallReactNative from "../../integrate/_snippets/install-react-native.mdx"
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
+
+<CalloutBox icon="IconInfo" title="Planned features" type="fyi">
+
+We currently don't support the following features:
+
+- No native Android and iOS exception capture
+- No automatic source map uploads on React Native web
+
+These features will be added in future releases.
+
+</CalloutBox>
+
+<Steps>
+
+<Step title="Install PostHog React Native SDK" badge="required">
+
+<CalloutBox icon="IconInfo" title="Hermes engine" type="fyi">
+
+React Native error tracking is supported for Android and iOS apps compiled with the [Hermes engine](https://reactnative.dev/docs/hermes) enabled.
+
+</CalloutBox>
+
+A minimum SDK version of [4.14.0](https://github.com/PostHog/posthog-js/releases/tag/posthog-react-native@4.14.0) is required, but we recommend [keeping up with the latest SDK version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
+
+<InstallReactNative />
+
+</Step>
+
+<Step title="Set up exception autocapture" badge="recommended">
+
+This configuration is client-side only. Support for remote configuration in the [error tracking settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture) will be added in a future release.
+
+You can autocapture exceptions by configuring the `errorTracking` when setting up PostHog:
+
+```react-native
+export const posthog = new PostHog('<ph_project_api_key>', {
+  errorTracking: {
+    autocapture: {
+      uncaughtExceptions: true,
+      unhandledRejections: true,
+      console: ['error', 'warn'],
+    },
+  },
+})
+```
+
+**Configuration options:**
+
+- **`uncaughtExceptions`**: Captures Uncaught exceptions (ReactNativeGlobal.ErrorUtils.setGlobalHandler)
+- **`unhandledRejections`**: Captures Unhandled rejections (ReactNativeGlobal.onunhandledrejection)
+- **`console`**: Captures console logs as errors according to the reported `LogLevel.`
+
+</Step>
+
+<Step title="Manually capture exceptions" badge="optional">
+
+You can manually capture exceptions using the `captureException` method:
+
+```react-native
+try {
+    // Your awesome code that may throw
+    someRiskyOperation();
+} catch (error) {
+    posthog.captureException(error)
+}
+```
+
+This is helpful if you've built your own error handling logic or want to capture exceptions that are handled by your application code.
+
+</Step>
+
+<StepVerifyErrorTracking />
+
+<Step title="Upload source maps" badge="required">
+
+<StepUploadSymbolSets urlPath="react-native" framework="React Native" />
+
+</Step>
+
+</Steps>

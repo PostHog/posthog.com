@@ -147,7 +147,7 @@ PostHog as an analytics tool allows users to slice and dice their data in many w
 
 Rather than materialize all columns, we built a solution that looks at recent slow queries using `system.query_log`, determines which properties need materializing from there, and backfills the data on a weekend. This works well because not every query needs optimizing and a relatively small subset of properties make up most of what’s being filtered on by our users.
 
-You can find the code for this [here](https://github.com/PostHog/posthog/blob/c23704b3909ae8ebb827e6a43453e32b3d3487bd/ee/clickhouse/materialized_columns/analyze.py#L42-L119) and [here](https://github.com/PostHog/posthog/blob/c23704b3909ae8ebb827e6a43453e32b3d3487bd/ee/clickhouse/materialized_columns/columns.py#L37-L130).
+You can find the code for this in [analyze.py](https://github.com/PostHog/posthog/blob/c23704b3909ae8ebb827e6a43453e32b3d3487bd/ee/clickhouse/materialized_columns/analyze.py#L42-L119) and [columns.py](https://github.com/PostHog/posthog/blob/c23704b3909ae8ebb827e6a43453e32b3d3487bd/ee/clickhouse/materialized_columns/columns.py#L37-L130).
 
 After materializing our top 100 properties and updating our queries, we analyzed slow queries (>3 seconds long). **The average improvement in our query times was 55%, with 99th percentile improvement being 25x.**
 

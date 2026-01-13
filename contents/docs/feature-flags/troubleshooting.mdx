@@ -1,0 +1,198 @@
+---
+title: Feature Flags troubleshooting 
+---
+
+import { ProductScreenshot } from 'components/ProductScreenshot'
+export const PersonsFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/persons-feature-flag-tab-light-mode.png"
+export const PersonsFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/persons-feature-flag-tab-dark-mode.png"
+export const BehavioralCohortsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/behavioral-cohorts-light-mode.png"
+export const BehavioralCohortsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/behavioral-cohorts-dark-mode.png"
+export const DeuplicateAsStaticCohortLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/duplicate-as-static-cohort-light-mode.png"
+export const DeuplicateAsStaticCohortDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/duplicate-as-static-cohort-dark-mode.png"
+
+This page covers troubleshooting for Feature Flags. For setup, see the [installation guides](/docs/feature-flags/installation).
+
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+
+## Why is my feature flag not working as expected?
+
+Here's a list of suggestions to troubleshoot your flag:
+
+**1. Check your flag evaluation on the feature flags tab**
+
+Check the **feature flags tab** on [the persons page](https://app.posthog.com/persons) for your specific person.
+
+<ProductScreenshot
+    imageLight={PersonsFeatureFlagLight} 
+    imageDark={PersonsFeatureFlagDark}
+    alt="Persons feature flag tab" 
+    classes="rounded"
+/>
+
+- If the flag is shown as disabled here, check the "match evaluation" column to understand why.
+- If the flag is shown as enabled here, there may be a problem in your code. Double-check the steps to [add feature flag code](/docs/feature-flags/adding-feature-flag-code).
+- Ensure you are capturing identified events.
+
+**2. Check you're calling `identify()` before evaluating the flag**
+
+If you're [identifying](/docs/product-analytics/identify) users, they may see a different value for a feature flag before and after you call `identify()`. 
+
+To ensure they experience consistent behavior, check that you call `identify()` before evaluating the feature flag.
+
+> **Note:** This only applies to frontend SDKs. Server-side SDKs do not need to call `identify()`.
+
+**3. An ad-blocker may be blocking calls**
+
+Check if an ad-blocker is interfering with PostHog calls. You can fix this by:
+
+- [Deploying a reverse proxy](/docs/advanced/proxy) for your PostHog requests
+- Using the [`flags_api_host`](/docs/libraries/js/config) configuration option to separate feature flag requests from analytics requests
+
+See our guide on [preventing feature flags from being blocked](/tutorials/flags-adblock-prevention) for more details.
+
+**4. User or group properties may not have been ingested yet**
+
+If your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) depend on user or group properties and you immediately evaluate the feature flag after updating them, the properties may not be ingested in time to calculate the correct flag value.
+
+In this case, when making your `getFeatureFlag()` call, you can [manually include these properties](/docs/feature-flags/adding-feature-flag-code?tab=Web#overriding-server-properties) in the method arguments.
+
+**5. Raise a support ticket**
+
+If none of the above resolve your issue, you can [raise a support ticket](https://app.posthog.com/home#supportModal) to see if we can help debug.
+
+import FAQFalseOrNoneEvents from "./snippets/faq-false-or-none-events.mdx"
+
+<FAQFalseOrNoneEvents />
+
+## How can I reduce the latency of feature flag requests on my server?
+
+Evaluating feature flags requires making a request to PostHog. However, you can [evaluate feature flags locally](/docs/feature-flags/local-evaluation) instead – without having to make a request to PostHog.
+
+We are also experimenting with with client-side feature flag assignments. Check out our [fast feature flag minisite](https://posthog-fast-feature-flags.vercel.app/) to learn more.
+
+## Why do feature flags sometimes cause my app to flicker?
+
+By default, fetching flags from our servers takes about 100-500ms. During this time, the flag is disabled. When the request is complete, the flag is updated. This may be the cause of the flickering.
+
+To fix this, you can [bootstrap feature flags](/docs/feature-flags/bootstrapping). Alternatively, you can [prevent the element from displaying until the feature flags load](/tutorials/prevent-fouc-ab-tests).
+
+## Why can't I use a cohort with behavioral filters in my feature flag?
+
+Behavioral cohorts are [dynamic cohorts](/docs/data/cohorts#dynamic-cohorts) created using an event or action filter (i.e., the options under the "behavioral" subheading)
+
+<ProductScreenshot
+    imageLight={BehavioralCohortsLight} 
+    imageDark={BehavioralCohortsDark}
+    alt="Behavioral cohorts" 
+    classes="rounded"
+/>
+
+<Caption>
+Behavioral cohorts are dynamic cohorts created using the options under the "behavioral" subheading.
+</Caption>
+
+We don't support using them with feature flags because querying them is relatively slow. Feature flags require fast evaluation and these queries would significantly impact the evaluation speed of the entire service. 
+
+### How do I create a flag that targets users who completed an event?
+
+Although you can't use behavioral cohorts, you still might want to target users who completed an event. 
+
+One option to do this is to create a dynamic behavioral cohort and then duplicate it as a static cohort (using the button on the top right of the cohort page).
+
+<ProductScreenshot
+    imageLight={DeuplicateAsStaticCohortLight} 
+    imageDark={DeuplicateAsStaticCohortDark}
+    alt="How to duplicate as static cohort" 
+    classes="rounded"
+/>
+
+Another option is to set a person property on the event and then target that property. For example, you can set a person property on a `signed up` event and then target the `business_industry` property with the feature flag.
+
+```js
+posthog.capture(
+  'signed up',
+  {
+    $set: { business_industry: 'finance'  },
+  }
+)
+```
+
+If you plan to call the flag immediately after the event, you will likely need to [set the property for the flag manually](/docs/libraries/js/features#overriding-server-properties) with `setPersonPropertiesForFlags()`.
+
+```js
+posthog.setPersonPropertiesForFlags({
+  business_industry: 'finance'
+})
+```
+
+## Why do I see multiple feature flag calls when I only expect one?
+
+This is likely because the `onFeatureFlags()` callback is invoked every time feature flags are reloaded. This happens by default when person properties change, when you call `reloadFeatureFlags()`, or when other flag-reloading triggers happen.
+
+If you are using [React](/docs/libraries/react#feature-flags), an alternative is to use `useFeatureFlagEnabled` or related hooks.
+
+## Why is my feature flag always returning false?
+
+If your flag is returning false and you expect it to return another value, check the following:
+
+- All the reasons listed in [Why is my feature flag not working as expected?](#why-is-my-feature-flag-not-working-as-expected)
+
+- The flag is enabled, rolled out, and has the correct release conditions.
+
+- You are evaluating the flag with all the information and arguments it needs in the correct order. For example, in Python, you need both the flag key and distinct ID to call `feature_enabled()`.
+
+- Your flags are loaded before you evaluate them. Test this by evaluating the flag in the `onFeatureFlags()` callback.
+
+## If a user matches multiple release conditions, which one is used?
+
+During feature flag evaluation, condition sets are evaluated from top to bottom as seen in your flag configuration. The first condition set that matches will be used. A condition matches when all property filters pass and the target falls within the rollout percentage.
+
+## Why does it take so long for flag properties to appear in filters and breakdowns?
+
+There can be ingestion latency for all events and properties, including ones related to flags. See our [status page](https://status.posthog.com/) for ingestion latency times.
+
+On top of this, we need to do extra processing for new properties which can take longer than just ingesting an event.
+
+#### What happens when I change a roll out percentage?
+
+PostHog uses a deterministic hashing strategy to assign users. We hash the user's `distinct_id` to a number between 0 and 1 (0-100%), and compare it against the roll out percentage.
+
+- If you **increase** the percentage, users who already matched will continue to match, and more users may now qualify.
+
+- If you **decrease** the percentage, some users who previously matched may fall outside the new threshold and stop qualifying.
+
+This applies to both boolean and multivariate flags. Multivariate flags assign users to specific variants based on the rollout split. If you want to roll out one variant to everyone, set it to 100% and the others to 0%.
+
+## How are feature flags billed?
+
+Feature flags are charged based on requests made to our `/flags` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation.
+
+The number of `/flags` requests and the number of `$feature_flag_called` events are **not** directly related.
+
+You can read more about how feature flags are billed and how to reduce your bill in our [dedicated guide](/docs/feature-flags/cutting-costs).
+
+## Why am I being charged for feature flags when I'm not using them?
+
+We make a request to fetch feature flags (using the [`/flags` endpoint](/docs/api/flags)) when one of the below occurs:
+
+- The PostHog SDK is initialized
+- A user is [identified](/docs/data/identify) 
+- A user's [properties](/docs/product-analytics/person-properties) are updated
+- You call `posthog.reloadFeatureFlags()` in your code
+- You create a [group](/docs/product-analytics/group-analytics)
+
+Feature flags are charged based on the number of requests made to the `/flags` endpoint. This means even if no feature flag events are generated, you may still be charged for feature flag requests.
+
+## How do I generate reports on feature flag usage?
+
+import PostHogBillableUsageTemplate from "../_snippets/posthog-billable-usage-template.mdx"
+
+<PostHogBillableUsageTemplate />
+
+## Solved community questions
+
+<SolvedQuestions
+    topicLabel="Feature Flags"
+/>

@@ -1,10 +1,11 @@
 ---
 title: Hono error tracking installation
 showStepsToc: true
+platformLogo: hono
 ---
 
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
-import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 
 <Steps>
@@ -46,7 +47,7 @@ app.onError(async (err, c) => {
 
 <Step title="Upload source maps" badge="required">
 
-<StepUploadSourceMaps urlPath="cli" />
+<StepUploadSymbolSets urlPath="cli" />
 
 </Step>
 

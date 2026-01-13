@@ -1,7 +1,12 @@
 ---
-title: Troubleshooting and FAQs
+title: LLM Analytics troubleshooting
 ---
 
+This page covers troubleshooting for LLM Analytics. For setup, see the [installation guides](/docs/llm-analytics/installation).
+
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
 
 ## How much does LLM analytics cost?
 
@@ -15,5 +20,11 @@ Go to the [pricing page](/pricing) to use our calculator to get an estimate. You
 
 There are a few reasons why you might not be seeing any LLM events:
 
-- There might be a delay in the events being processed. You can check the status of our ingestion [here](https://status.posthog.com/).
+- There might be a delay in the events being processed. You can check the status of our ingestion on the [PostHog status page](https://status.posthog.com/).
 - If you are in a serverless environment make sure you are calling `posthog.shutdown()` before ending the request.
+
+## Solved community questions
+
+<SolvedQuestions
+    topicLabel="LLM Analytics"
+/>

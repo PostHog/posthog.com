@@ -1,0 +1,89 @@
+---
+title: Customer Analytics troubleshooting
+sidebar: Docs
+showTitle: true
+---
+
+import CustomerAnalyticsBetaWarning from './_snippets/customer-analytics-beta-warning.mdx'
+
+<CustomerAnalyticsBetaWarning />
+
+This page covers troubleshooting for Customer Analytics. For setup, see the [installation guides](/docs/customer-analytics/installation).
+
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+
+## What activity event does customer analytics use by default?
+
+Customer Analytics uses `$pageview` events out of the box for tracking active users. For signups and conversions, you need to configure which events represent those actions in **Settings** > **Customer Analytics**.
+
+## How are active users calculated?
+
+A user is considered active if they triggered at least one `$pageview` event in the given period:
+
+- **DAU (Daily Active Users)**: Users with at least one pageview in the past day
+- **WAU (Weekly Active Users)**: Users with at least one pageview in the past 7 days
+- **MAU (Monthly Active Users)**: Users with at least one pageview in the past 30 days
+
+## How do I track signups?
+
+[Identify users](/docs/product-analytics/identify) when they create an account:
+
+```js
+posthog.identify('user_123', {
+    email: 'user@example.com',
+    created_at: new Date().toISOString()
+})
+```
+
+Send a `signup` event:
+
+```js
+posthog.capture('signed_up', {
+// Props are optional, but oh, they're so useful!
+})
+```
+
+Then configure this as your signup event in **Settings** > **Customer Analytics**.
+
+## How do I track free-to-paid conversions?
+
+Capture an event when a user upgrades to a paid plan:
+
+```js
+posthog.capture('user_subscribed', {
+    plan: 'pro',
+    amount: 2900
+})
+```
+
+Configure this event as your paid conversion event in **Settings** > **Customer Analytics**.
+
+## Can I use customer analytics with groups?
+
+Yes. [Customer profiles](/docs/customer-analytics/customer-profiles) work with both [persons](/docs/data/persons) and [groups](/docs/product-analytics/group-analytics). This is useful for B2B products where you want to track company-level activity.
+The dashboard can also be used in B2B mode, showing the insights for your groups.
+
+See [B2B mode](/docs/customer-analytics/b2b-mode) to learn more about it.
+
+
+## How do I see support tickets in customer profiles?
+
+Connect Zendesk as a [data warehouse source](/docs/cdp/sources/zendesk). Once synced, support tickets appear in customer profiles alongside events and errors. To understand how we assign tickets to a person/group, see [connecting support tickets](/docs/customer-analytics/customer-profiles#connecting-support-tickets).
+
+## How do I see errors in customer profiles?
+
+Enable [error tracking](/docs/error-tracking) in your project. Errors are automatically associated with users and appear in their feeds.
+
+## How do I see LLM traces in customer profiles?
+
+Enable [LLM observability](/docs/ai-engineering/observability) and instrument your LLM calls. Traces are automatically associated with users and appear in their feeds.
+
+## Is customer analytics free?
+
+Customer Analytics is currently in beta and free to use. You'll only be charged for the underlying data: events are billed as part of [product analytics](/pricing), and data warehouse sources like Zendesk are billed as [data warehouse rows](/pricing).
+
+## What's the difference between customer analytics and product analytics?
+
+They work together: customer analytics enables the initial understanding of your customers and usage by providing good defaults and a framework to be followed. As your product grows and your data analysis needs get more specific, product analytics enables this next step with custom dashboards, different kinds of insights and SQL queries.

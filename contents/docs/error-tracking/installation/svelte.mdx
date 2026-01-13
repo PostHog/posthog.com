@@ -1,6 +1,7 @@
 ---
 title: SvelteKit error tracking installation
 showStepsToc: true
+platformLogo: svelte
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
@@ -8,7 +9,7 @@ import { Steps, Step } from 'components/Docs/Steps'
 import SvelteInstallClient from '../../integrate/_snippets/install-svelte-client.mdx'
 import SvelteInstallServer from '../../integrate/_snippets/install-svelte-server.mdx'
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
-import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 <Steps>
 <Step title="Install PostHog" subtitle="Your goal in this step: Install the PostHog JavaScript web and Node SDKs." badge="required">
@@ -66,7 +67,7 @@ export const handleError = async ({ error, status }: HandleServerError) => {
 
 <Step title="Upload source maps" badge="required">
 
-<StepUploadSourceMaps urlPath="web" />
+<StepUploadSymbolSets urlPath="web" />
 
 </Step>
 

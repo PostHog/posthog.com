@@ -1,6 +1,7 @@
 ---
-title: Nuxt error tracking installation
+title: Nuxt error tracking installation (v3.7 and above)
 showStepsToc: true
+platformLogo: nuxt
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
@@ -10,7 +11,7 @@ import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
 import CLIDownload from "../_snippets/cli/download.mdx"
 import InstallNuxt from "../../integrate/_snippets/install-nuxt.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
-import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 For Nuxt v3.7 and above, we recommend using the official `@posthog/nuxt` module which provides automatic error tracking with built-in source map support. 
 
@@ -68,7 +69,7 @@ export default defineNuxtConfig({
     },
     sourcemaps: {
       enabled: true,
-      envId: '<ph_environment_id>', // Your environment ID from PostHog settings https://app.posthog.com/settings/environment#variables
+      envId: '<ph_environment_id>', // Your project ID from PostHog settings https://app.posthog.com/settings/environment#variables
       personalApiKey: '<ph_personal_api_key>', // Your personal API key from PostHog settings https://app.posthog.com/settings/user-api-keys (requires organization:read and error_tracking:write scopes)
       project: 'my-application', // Optional: defaults to git repository name
       version: '1.0.0', // Optional: defaults to current git commit

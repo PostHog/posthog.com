@@ -1,40 +1,176 @@
 ---
-title: Using Railway as a reverse proxy
+title: Railway reverse proxy
 sidebar: Docs
 showTitle: true
+platformLogo: railway
 ---
 
-import RegionWarning from "../_snippets/region-warning.mdx"
-import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
-import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import ProxyCallout from "../_snippets/proxy-callout.mdx"
+import { Steps, Step } from 'components/Docs/Steps'
 
+<ProxyCallout />
 
-<CalloutBox icon="IconWarning" title="Warning" type="fyi">
+This guide shows you how to deploy a PostHog reverse proxy on [Railway](https://railway.app/).
 
-  1. <ProxyWarning />
-  2. <RegionWarning />
-  3. <ProxyPathNamesWarning />
+## How it works
 
-</CalloutBox>
+Railway provides a one-click deployment template that runs an nginx-based reverse proxy. When deployed, Railway gives you a domain that routes all requests to PostHog's servers.
 
-Railway provides a simple way to deploy a [reverse proxy for PostHog](https://railway.com/deploy/posthog-proxy?referralCode=FQRCYT&utm_medium=integration&utm_source=template&utm_campaign=docs-railway-proxy). Click the button below to deploy a reverse proxy on Railway:
+Here's the request flow:
 
+1. User triggers an event in your app
+2. Request goes to your Railway domain (e.g., `your-project.up.railway.app`)
+3. The nginx proxy running on Railway forwards the request to PostHog
+4. PostHog processes the request and returns a response
+5. The proxy returns PostHog's response to the user
+
+This works because ad blockers see requests going to Railway's domain (or your custom domain), not PostHog's.
+
+## Prerequisites
+
+This guide requires a [Railway account](https://railway.app/) (free tier works).
+
+## Setup
+
+<Steps>
+
+<Step title="Deploy the template">
+
+Click the button below to deploy a pre-configured PostHog reverse proxy on Railway:
 
 <div className="w-fit">
-    <a href="https://railway.com/deploy/posthog-proxy?referralCode=FQRCYT&utm_medium=integration&utm_source=template&utm_campaign=docs-railway-proxy">
-        <img src="https://railway.com/button.svg" alt="Deploy on Railway" className="max-w-[200px] h-auto mb-4" noZoom />
+    <a href="https://railway.app/template/posthog-proxy?referralCode=FQRCYT" target="_blank" rel="noopener">
+        <img src="https://railway.app/button.svg" alt="Deploy on Railway" className="max-w-[200px] h-auto mb-4" noZoom />
     </a>
 </div>
 
+This template deploys an nginx container configured to proxy requests to PostHog.
 
-Make sure to set the `POSTHOG_CLOUD_REGION` variable to either `us` or `eu` depending on your PostHog cloud region.
+</Step>
 
-Afterwards, configure your PostHog client to send requests through your reverse proxy.
+<Step title="Configure your region">
 
-```js
+During deployment, Railway prompts you to set the `POSTHOG_CLOUD_REGION` environment variable:
+
+- Set to `us` for US region
+- Set to `eu` for EU region
+
+This tells the proxy which PostHog servers to forward requests to. Make sure this matches your PostHog project's region.
+
+</Step>
+
+<Step title="Wait for deployment">
+
+Railway automatically builds and deploys your proxy. This usually takes 1-2 minutes.
+
+Once deployed, Railway provides you with a domain like `your-project-name.up.railway.app`. You can find this in your project's **Settings** → **Networking** section.
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+In your application code, update your PostHog initialization to use your Railway domain:
+
+<MultiLanguage>
+
+```js file=US
 posthog.init('<ph_project_api_key>', {
-  api_host: 'https://your-project-name.up.railway.app', // Your Railway domain
-  ui_host: 'https://us.posthog.com', // Or https://eu.posthog.com depending on your cloud region.
+  api_host: 'https://your-project-name.up.railway.app',
+  ui_host: 'https://us.posthog.com'
 })
 ```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://your-project-name.up.railway.app',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
+
+Replace `your-project-name.up.railway.app` with your actual Railway domain.
+
+</Step>
+
+<Step title="Add a custom domain" badge="optional">
+
+For better blocking resistance, use your own domain instead of Railway's default:
+
+1. Go to your Railway project's **Settings** → **Networking**
+2. Click **Add Domain**
+3. Follow [Railway's custom domains guide](https://docs.railway.app/guides/public-networking#custom-domains) to configure DNS
+
+Then update your SDK to use your custom domain:
+
+<MultiLanguage>
+
+```js file=US
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://us.posthog.com'
+})
+```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
+
+</Step>
+
+<Step checkpoint title="Verify your setup">
+
+Confirm events are flowing through your proxy:
+
+1. Test the proxy directly:
+
+   ```bash
+   curl -I https://your-project-name.up.railway.app/decide?v=3
+   ```
+   You should see a `200 OK` response.
+
+2. Open your browser's developer tools and go to the **Network** tab
+3. Trigger an event in your app
+4. Look for requests to your Railway domain
+5. Verify the response status is `200 OK`
+6. Check the [PostHog app](https://app.posthog.com) to confirm events appear
+
+If you see errors, check [troubleshooting](#troubleshooting) below.
+
+</Step>
+
+</Steps>
+
+## Troubleshooting
+
+### Proxy stops working periodically
+
+If your proxy stops responding intermittently:
+
+1. **Check sleep settings:** Free tier services may sleep after inactivity. Go to **Settings** → **Service** and check if sleep mode is enabled.
+2. **Monitor resource usage:** Check the **Metrics** tab for memory or CPU spikes that might cause restarts.
+3. **View logs:** Look for error messages in the **Deployments** tab.
+4. **Consider upgrading:** Paid plans include better uptime guarantees and disable sleep mode.
+
+If issues persist, check [Railway's status page](https://status.railway.app/).
+
+### Deployment failed
+
+If the initial deployment fails:
+
+1. Check the build logs for error messages
+2. Verify you set the `POSTHOG_CLOUD_REGION` variable correctly (must be `us` or `eu`)
+3. Try redeploying from the Railway dashboard
+
+### 502 Bad Gateway errors
+
+If the proxy returns 502 errors:
+
+1. Verify the `POSTHOG_CLOUD_REGION` variable matches your PostHog project's region
+2. Check that the Railway service is running in the dashboard
+3. View the service logs for connection errors

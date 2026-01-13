@@ -1,6 +1,7 @@
 ---
 title: Android error tracking installation
 showStepsToc: true
+platformLogo: android
 tableOfContents: [
   {
     url: 'install-posthog-android-sdk',
@@ -21,6 +22,11 @@ tableOfContents: [
     url: 'verify-error-tracking',
     value: 'Verify error tracking',
     depth: 1,
+  },
+  {
+    url: 'upload-mappings',
+    value: 'Upload mappings',
+    depth: 1,
   }
 ]
 ---
@@ -30,10 +36,11 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 import InstallAndroid from "../../integrate/_snippets/install-android.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 <CalloutBox icon="IconInfo" title="Planned features" type="fyi">
 
-We currently don't support demangling stacktraces of minified builds ([isMinifyEnabled=true](https://developer.android.com/topic/performance/app-optimization/enable-app-optimization)) or [source code context](/docs/error-tracking/stack-traces) associated with an exception. 
+We currently don't support [source code context](/docs/error-tracking/stack-traces) associated with an exception. 
 
 These features will be added in a future release.
 
@@ -45,11 +52,17 @@ These features will be added in a future release.
 
 <CalloutBox icon="IconInfo" title="SDK version requirement" type="action">
 
-A minimum SDK version of [3.24.0](https://github.com/PostHog/posthog-android/releases/tag/android-v3.24.0) is required, but we recommend [keeping up to date with the latest version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
+A minimum SDK version of [3.27.1](https://github.com/PostHog/posthog-android/releases/tag/android-v3.27.1) is required, but we recommend [keeping up with the latest SDK version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
 
 </CalloutBox>
 
 <InstallAndroid />
+
+<CalloutBox icon="IconInfo" title="Stack traces in Compose" type="action">
+
+If you're using Jetpack Compose, we recommend [adding source information to your stack traces](https://developer.android.com/develop/ui/compose/tooling/stacktraces) to improve their readability.
+
+</CalloutBox>
 
 </Step>
 
@@ -96,5 +109,17 @@ This is helpful if you've built your own error handling logic or want to capture
 </Step>
 
 <StepVerifyErrorTracking />
+
+<Step title="Upload mappings" badge="recommended">
+
+<CalloutBox icon="IconInfo" title="ProGuard/R8 mappings" type="fyi">
+
+This configuration is required if your app has minified builds ([isMinifyEnabled=true](https://developer.android.com/topic/performance/app-optimization/enable-app-optimization)) enabled for demangling stacktraces.
+
+</CalloutBox>
+
+<StepUploadSymbolSets urlPath="android" framework="Android" symbolType="mappings" basePath="upload-mappings" />
+
+</Step>
 
 </Steps>
