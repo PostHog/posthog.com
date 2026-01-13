@@ -500,7 +500,7 @@ export default function Startups(): JSX.Element {
                                             <Link to="/pricing" className="underline font-semibold">
                                                 another PostHog plan
                                             </Link>
-                                            . You'll continue to be considered part of the starup program in terms of
+                                            . You'll continue to be considered part of the startup program in terms of
                                             invites to office hour events, and other perks.
                                         </p>
                                     ),
