@@ -39,3 +39,7 @@ A beginner's guide to some of our custom Slack emojis and various anecdotes you'
 * When we hit 10,000 GitHub stars, <TeamMember name="Ian Vanagas" photo /> read every username on a live stream that took over six hours.
 
 * We like to nail things. It's not uncommon to see a GitHub issue titled "Nail [feature name]". Sometimes we'll even assign an absurd version number like "3000". (The codename for the next generation UI of the PostHog app is referred to as PostHog 3000, and other projects have also adopted this naming convention as well.)
+
+* <TeamMember name="James Hawkins" photo /> once decided to go off piste in a new starters intro of all hands and asked the question “Do you moisturize?”
+
+* <TeamMember name="James Hawkins" photo /> has also gone viral [multiple](https://x.com/james406/status/1824083929860583858?s=20) [times](https://x.com/james406/status/2005715590372020669) for his tweets about "hopping on a quick call" and that is entirely what he is known for now. 
