@@ -13,6 +13,7 @@ import { amplitude } from '../../hooks/competitorData/amplitude'
 import { appcues } from '../../hooks/competitorData/appcues'
 import { appsignal } from '../../hooks/competitorData/appsignal'
 import { baremetrics } from '../../hooks/competitorData/baremetrics'
+import { braintrust } from '../../hooks/competitorData/braintrust'
 import { bugsnag } from '../../hooks/competitorData/bugsnag'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
 import { chameleon } from '../../hooks/competitorData/chameleon'
@@ -590,6 +591,7 @@ export default function ProductComparisonTable({
         appcues,
         appsignal,
         baremetrics,
+        braintrust,
         bugsnag,
         chartmogul,
         chameleon,

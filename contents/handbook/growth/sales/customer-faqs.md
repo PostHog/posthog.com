@@ -17,7 +17,7 @@ Here's how we'd break down use cases:
 flowchart TD
     A{Is the API hitting <code style='padding: 4px; border-radius: 8px;'>/query</code> rate limits?}
     B{Does the use case fit endpoints?<br />(i.e. B2B2C user-facing analytics, data-powered APIs, internal home-grown dashboards)}
-    C["Explain the use case in #project-endpoints <br />(we're taking alpha users!)"]
+    C["Explain the use case in #team-data-modeling <br />(we're keen to talk to beta users!)"]
     D{Should they use batch exports instead?}
     E[Redirect them to start paying for batch exports.]
     F[1. Assume we're not increasing rate limits.<br />2. Reach out to #team-clickhouse with query details.]
