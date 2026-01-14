@@ -15,23 +15,48 @@ Here's how we'd break down use cases:
 
 ```mermaid
 flowchart TD
-    A{Is the API hitting <code style='padding: 4px; border-radius: 8px;'>/query</code> rate limits?}
-    B{Does the use case fit endpoints?<br />(i.e. B2B2C user-facing analytics, data-powered APIs, internal home-grown dashboards)}
-    C["Explain the use case in #project-endpoints <br />(we're taking alpha users!)"]
-    D{Should they use batch exports instead?}
-    E[Redirect them to start paying for batch exports.]
-    F[1. Assume we're not increasing rate limits.<br />2. Reach out to #team-clickhouse with query details.]
-    G["Go to the relevant team for that API<br />(Feature flags, Surveys, ..)"]
+  A{Is the API hitting query rate limits}
+  B{Does the use case fit Endpoints}
+  C[Explain the use case to the Endpoints team]
+  D{Should they use batch exports}
+  E[Redirect customer to batch exports]
+  F[Do not increase limits and contact ClickHouse team]
+  G[Route to the relevant product team]
 
-    A -->|Yes| B
-    A -->|No| G
-    B -->|Yes| C
-    B -->|No| D
-    D -->|Yes| E
-    D -->|No| F
+  A -->|Yes| B
+  A -->|No| G
+  B -->|Yes| C
+  B -->|No| D
+  D -->|Yes| E
+  D -->|No| F
 ```
 
 See [RFC #438](https://github.com/PostHog/requests-for-comments/pull/438) for more context.
+
+## Can we control or reduce costs?
+
+Yes. PostHog is usage-based, so you pay for what you use, and we design pricing to stay aligned with our real infrastructure costs and our customers. We’ve even [deliberately reduced our own revenue](https://posthog.com/blog/analytics-pricing) to make PostHog cheaper at scale. You can actively manage spend by choosing what to capture, dropping noise, and using cheaper anonymous events where person-level analysis isn’t needed.
+
+## How do you handle PII and session replay privacy?
+PostHog gives you privacy controls at different levels to protect user privacy and comply with regulations. We support masking and privacy controls so you can avoid capturing sensitive data in the first place, and redact where needed. 
+
+For more information on PostHog's privacy compliance, see [our Privacy Compliance docs](/docs/privacy/).
+
+## Do you offer professional services or paid implementation help?
+
+For larger or more complex customers, we can offer paid professional services such as implementation help, migrations, and training, typically delivered by a forward-deployed engineer.
+
+This is not offered by default and depends on fit and capacity. 
+
+See [Professional services](/handbook/growth/sales/professional-services.md) for details.
+
+## What support options do you offer?
+
+All users can get help via the community and in-app support. Paid customers may also have access to dedicated Slack support, training, and configuration assistance depending on plan.
+
+We connect customers directly with the engineers and product teams building PostHog, rather than a traditional tiered support desk.
+
+See [Support options](/docs/support-options/) for full details.
 
 ## Do you have plans to add more hosting options outside of the US and EU?
 
