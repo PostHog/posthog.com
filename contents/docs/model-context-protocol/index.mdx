@@ -81,6 +81,17 @@ We recommend the following best practices to mitigate security risks when using 
 
 </details>
 
+<details>
+
+<summary>Alternative: Manual authentication with API key</summary>
+
+If your MCP client doesn't support OAuth, you can authenticate manually:
+
+1. Get a personal API key from the [user API keys settings page](https://app.posthog.com/settings/user-api-keys?preset=mcp_server)
+2. Add the `Authorization: Bearer YOUR_API_KEY` header to your MCP configuration
+
+</details>
+
 
 ## Available Tools
 
