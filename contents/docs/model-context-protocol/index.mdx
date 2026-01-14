@@ -69,28 +69,17 @@ If your PostHog project is on EU Cloud, add `?region=eu` to the MCP URLs. For ex
     </Tab.Panels>
 </Tab.Group>
 
-<details>
+<CalloutBox icon="IconShield" title="Security tips" type="info">
 
-<summary>Security considerations</summary>
+**Scope to a specific project** to limit access and maintain data isolation. **Be mindful of prompt injection** – LLMs can be tricked into following untrusted commands. Always review tool calls before executing them.
 
-We recommend the following best practices to mitigate security risks when using the PostHog MCP server:
+</CalloutBox>
 
-- **Project scoping:** Scope your MCP server to a specific PostHog project, limiting access to only that project's resources. This prevents AI agents from accessing data from other projects in your PostHog account and helps maintain data isolation.
+<CalloutBox icon="IconKey" title="Using an API key instead?" type="info">
 
-- **Be mindful of prompt injection:** Keep in mind that LLMs can be tricked into following untrusted commands within user content. Always review and sanitize tool calls before executing them.
+If your MCP client doesn't support OAuth, get a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) and add the `Authorization: Bearer YOUR_API_KEY` header to your MCP configuration.
 
-</details>
-
-<details>
-
-<summary>Alternative: Manual authentication with API key</summary>
-
-If your MCP client doesn't support OAuth, you can authenticate manually:
-
-1. Get a personal API key from the [user API keys settings page](https://app.posthog.com/settings/user-api-keys?preset=mcp_server)
-2. Add the `Authorization: Bearer YOUR_API_KEY` header to your MCP configuration
-
-</details>
+</CalloutBox>
 
 
 ## Available Tools
