@@ -24,6 +24,7 @@ interface FeaturesSplitWithImageProps {
     children?: React.ReactNode
     bgColor?: string
     textColor?: string
+    className?: string
 }
 
 export default function FeaturesSplitWithImage({
@@ -35,9 +36,10 @@ export default function FeaturesSplitWithImage({
     children,
     bgColor,
     textColor,
+    className = '',
 }: FeaturesSplitWithImageProps) {
     return (
-        <div className={`h-full flex flex-col @2xl:flex-row @2xl:gap-4 bg-${bgColor} ${textColor}`}>
+        <div className={`h-full flex flex-col @2xl:flex-row @2xl:gap-4 bg-${bgColor} ${textColor} ${className}`}>
             <div className="@2xl:max-w-[40%] pt-8 px-8 @2xl:py-8">
                 <div className="mb-8">
                     {icon && (
