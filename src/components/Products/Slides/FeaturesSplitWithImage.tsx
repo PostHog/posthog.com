@@ -19,6 +19,7 @@ interface FeaturesSplitWithImageProps {
         stylize?: boolean
         shadow?: boolean
         className?: string
+        containerClassName?: string
     }>
     children?: React.ReactNode
     bgColor?: string
@@ -88,6 +89,7 @@ export default function FeaturesSplitWithImage({
                             stylize: img.stylize || false,
                             shadow: img.shadow || false,
                             className: img.className || '',
+                            containerClassName: img.containerClassName || '',
                         }))}
                     />
                 )}
