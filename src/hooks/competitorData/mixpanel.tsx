@@ -393,6 +393,7 @@ export const mixpanel = {
             datadog: false,
             exports: false,
             google_ads: false,
+            google_search_console: false,
             hubspot: true,
             imports: false,
             intercom: true,

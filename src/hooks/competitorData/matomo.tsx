@@ -12,6 +12,7 @@ export const matomo = {
                 advertising_analytics: false,
                 autocapture: false,
                 cohorts: true,
+                cookieless_tracking: true,
                 custom_events: true,
                 custom_properties: true,
                 monetization_analytics: false,
@@ -53,6 +54,7 @@ export const matomo = {
                 insights: {
                     available: true,
                     features: {
+                        ai_insight_builder: false,
                         formula_mode: false,
                         ready_made_insight_types: false,
                         sampling: false,
@@ -147,6 +149,7 @@ export const matomo = {
             api: true,
             mobile_sdks: true,
             server_side_sdks: true,
+            sql: false,
         },
         tools: {
             cms: '',

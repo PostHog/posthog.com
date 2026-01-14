@@ -22,15 +22,13 @@ seo:
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-*Hi, my name is Bob, and I'm 10 days sober from GA4.*
-
 Welcome. Grab a chair.
 
-This is a [safe space for developers who set up web analytics](newsletter/misconceptions-about-analytics), still don't trust the numbers, and have rage-closed at least one dashboard this year.
+There’s coffee in the back. No one’s judging you for ignoring your analytics for six months. We’ve all been there.
 
-If you’re anything like Bob, you’re not alone. Most web analytics tools were built for marketers, not developers — and finding one that actually fits a modern dev workflow isn’t always straightforward.
+This is a safe space for developers with a complicated relationship with web analytics.
 
-![Uno GA4](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_13_at_5_08_32_PM_e9584ccfa3.png)
+If this sounds like you, you’re not alone. Most web analytics tools were built for marketers — not developers — which makes finding one that actually fits a modern dev workflow harder than it should be.
 
 In this guide, we compare the best web analytics tools for developers, so you can understand users, debug faster, and actually trust your data.
 
@@ -69,21 +67,29 @@ Here's how some of the most popular web analytics tools compare:
         'product_analytics',
         'session_replay',
         'heatmaps',
+        'platform.integrations.google_search_console',
         'platform.developer.api',
         'platform.developer.sql',
+        'product_analytics.insights.features.ai_insight_builder',
         'platform.pricing.free_tier',
         'platform.pricing.transparent_pricing',
         'platform.deployment.open_source',
     ]}
 />
 
-*Hey competitors 👋 We try our best to keep up with what you're shipping, but if we got something wrong or this looks outdated, open a PR and we'll fix it.*
+*Hey competitors 👋 We try our best to keep up with what you're shipping, but if we got something wrong or this looks outdated, feel free to open a PR and we'll fix it.*
+
+You might notice one obvious omission: [Google Analytics 4](blog/ga4-alternatives). That’s intentional. GA4 is powerful and widely used, but it’s also opinionated, complex, and fundamentally built for a different audience. 
+
+Rather than rehash the same frustrations, this guide focuses on tools that are easier to reason about, more developer-friendly, or better aligned with modern product workflows.
+
+![Uno GA4](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_13_at_5_08_32_PM_e9584ccfa3.png)
 
 ## What's the best web analytics tool for developers?
 
 ### 1. PostHog
 
-PostHog is an all-in-one developer platform that combines [web analytics](/web-analytics) with [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and [LLM analytics](/llm-analytics) in one place.
+PostHog is an all-in-one developer platform that combines [web analytics](/web-analytics) with [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and [LLM analytics](/llm-analytics) in one place.
 
 Unlike standalone web analytics tools, PostHog lets you follow a visitor's journey from their first pageview through to product usage; you still get the fundamentals, but they're directly connected to how users actually behave in your product. 
 
@@ -98,9 +104,9 @@ PostHog also uses simple [usage-based pricing](/pricing) with a generous free ti
 **Strengths:**
 
 - Complete visitor-to-user journey tracking
-- Unified suite: analytics, feature flags, experiments, [surveys](/surveys), error tracking, and more
-- Developer-friendly setup and SDKs
-- PostHog AI to query data in natural language and debug issues faster
+- Unified suite of developer tools in one platform
+- [Developer-friendly setup](/docs/ai-engineering/ai-wizard) and [SDKs](/docs/libraries)
+- [PostHog AI](https://posthog.com/ai) to query data in natural language and debug issues faster
 - [SQL access](/docs/product-analytics/sql) and raw data ownership
 
 **Community:**
@@ -152,7 +158,7 @@ Privacy-conscious developers who want simple, essential website metrics without 
 
 Speaking of privacy, [Fathom](/blog/posthog-vs-fathom) is a minimalist, privacy-focused web analytics tool built for teams that want to minimize overhead. Like Plausible, it's designed to be easy to install, easy to understand, and respectful of user privacy by default.
 
-The script is lightweight (~2KB), works without cookies, and offers permanent data retention so you never lose historical analytics. There's no invasive tracking and no need for cookie banners.
+The script is lightweight (~2KB), works without cookies, and offers permanent data retention so you never lose historical analytics.
 
 [Fathom](/blog/best-fathom-alternatives) integrates cleanly with almost any stack; their script can be added to virtually any CMS, framework, or site setup (from WordPress and Webflow to modern frameworks like Next.js and Vue). There's no complex setup, no special build steps, and no lock-in to a specific platform.
 
@@ -184,9 +190,9 @@ Developers who want privacy-friendly website analytics that integrate effortless
 
 [Matomo](/blog/posthog-vs-matomo) is one of the most established [open-source web analytics platforms](/blog/best-open-source-analytics-tools), used by over one million websites, including government agencies, universities, and large enterprises.
 
-Matomo's interface will ring a bell to anyone who's used Universal Analytics [(which many still prefer over GA4 – RIP)](/blog/ga4-alternatives). It offers a comparable feature set, but with full data ownership.
+Matomo's interface will ring a bell to anyone who's used Universal Analytics (RIP). It offers a comparable feature set, but with full data ownership.
 
-Matomo is built for teams that want depth and flexibility, not minimalism. With great power comes great complexity. Setup, configuration, and ongoing maintenance can take more time, especially if you're self-hosting or enabling multiple plugins.
+Matomo is built for teams that want depth and flexibility, not minimalism. With great power comes great ~~responsibility~~ complexity. Setup, configuration, and ongoing maintenance can take more time, especially if you're self-hosting or enabling multiple plugins.
 
 The on-premise version is free and gives you complete control over your data. The cloud version includes premium features like heatmaps, session recordings, and A/B testing as paid add-ons; it starts at €22/month (excl. tax) for up to 50,000 hits, with discounts for annual billing.
 
@@ -272,11 +278,11 @@ Developers already using Cloudflare who want free, privacy-first website metrics
 
 ## Which web analytics tool should you choose?
 
-- Want web analytics connected to product analytics, session replay, feature flags, and experiments? **[PostHog](/web-analytics)**
-- Want simple, privacy-first traffic analytics with minimal setup? **Plausible** or **Fathom**
-- Want full data ownership with a GA-style reporting model? **Matomo**
-- Is your "website" really a product where activation and retention matter more than pageviews? **Mixpanel**
-- Want free, privacy-friendly traffic visibility and already use Cloudflare? **Cloudflare Web Analytics**
+- Want web analytics connected to product analytics, session replay, feature flags, and experiments? **[PostHog](/web-analytics)**.
+- Want simple, privacy-first traffic analytics with minimal setup? **Plausible** or **Fathom**.
+- Want full data ownership with a GA-style reporting model? **Matomo**.
+- Is your "website" really a product where activation and retention matter more than pageviews? **Mixpanel**.
+- Want free, privacy-friendly traffic visibility and already use Cloudflare? **Cloudflare Web Analytics**.
 
 ### Recommendations by team type
 
@@ -312,7 +318,7 @@ Developers already using Cloudflare who want free, privacy-first website metrics
 <details>
   <summary>What is web analytics, really?</summary>
 
-Web analytics is the art and science of understanding how people find your site, what they do on it, and what happens next. At its simplest, that means tracking pageviews and referrers. At its most useful, it means understanding behavior, friction, and outcomes.
+**Web analytics** is the art and science of understanding how people find your site, what they do on it, and what happens next. At its simplest, that means tracking pageviews and referrers. At its most useful, [it means understanding behavior, friction, and outcomes](newsletter/misconceptions-about-analytics).
 
 Good web analytics answers questions like: Why did users bounce? Where did they drop off? What landing page worked?
 
@@ -321,7 +327,7 @@ Good web analytics answers questions like: Why did users bounce? Where did they 
 <details>
   <summary>What metrics matter most in web analytics?</summary>
 
-Most teams should start with: traffic sources (where users come from), landing pages (where sessions start), bounce rate or engagement (whether users do anything meaningful), and conversions (sign-ups, purchases, or key actions).
+Most teams should start with: **traffic sources** (where users come from), **landing pages** (where sessions start), **bounce rate or engagement** (how they spend, or dont spend, time on your website), and **conversions** (sign-ups, purchases, or key actions).
 
 As your site becomes more product-like, event-based metrics (clicks, actions, feature usage) become more important than raw pageviews.
 
@@ -332,16 +338,16 @@ As your site becomes more product-like, event-based metrics (clicks, actions, fe
 
 Yes, but they're rarely sufficient.
 
-Pageviews are good for understanding reach and interest, especially for content sites. They're much less useful for explaining why users behaved a certain way or whether something broke.
+**Pageviews** are good for understanding reach and interest, especially for content sites. They're much less useful for explaining why users behaved a certain way or whether something broke.
 
-That's why many modern tools pair pageviews with events, funnels, or session replay.
+That's why many modern tools pair pageviews with [events](docs/product-analytics/capture-events), [funnels](docs/product-analytics/funnels), or [session replay](docs/session-replay).
 
 </details>
 
 <details>
   <summary>What's the difference between cookieless and cookie-based analytics?</summary>
 
-Cookie-based analytics track users across sessions using identifiers stored in the browser. Cookieless analytics avoid this and rely on aggregated or anonymous signals instead.
+**Cookie-based analytics** track users across sessions using identifiers stored in the browser. Cookieless analytics avoid this and rely on aggregated or anonymous signals instead.
 
 [Cookieless tools are easier to make privacy-compliant and less invasive for users](/blog/best-gdpr-compliant-analytics-tools). The tradeoff is less granular user-level tracking. For many sites, that's a feature, not a bug.
 
@@ -364,7 +370,7 @@ It depends on the tool and your jurisdiction. **Plausible**, **Fathom**, and **C
 <details>
   <summary>What's the difference between web analytics and product analytics?</summary>
 
-Web analytics focuses on traffic and pages (who visited, where they came from, what they viewed). [Product analytics](/blog/what-is-product-analytics) focuses on behavior and users (what actions users took, how they activate, retain, or churn).
+**Web analytics** focuses on traffic and pages (who visited, where they came from, what they viewed). [Product analytics](/blog/what-is-product-analytics) focuses on behavior and users (what actions users took, how they activate, retain, or churn).
 
 Tools like **PostHog** combine both, so you can see how traffic turns into real [product usage](/product-analytics).
 
@@ -387,7 +393,7 @@ Watch for how tools measure usage. Some charge by pageviews, others by events, o
 <details>
   <summary>Do I need session replay with web analytics?</summary>
 
-Not always — but it's extremely useful when debugging issues or understanding drop-offs. Tools like PostHog link analytics directly to [session replay](/blog/best-session-replay-tools), so you can see exactly what users did instead of guessing from charts.
+Not always — but it's extremely useful when debugging issues or understanding drop-offs. Tools like **PostHog** link analytics directly to [session replay](/blog/best-session-replay-tools), so you can see exactly what users did instead of guessing from charts.
 
 </details>
 
@@ -408,7 +414,7 @@ For blogs, documentation, and marketing sites: **Plausible** and **Fathom** are 
 <details>
   <summary>Which web analytics tool is best for product-led web apps?</summary>
 
-If your website behaves like a product: **[PostHog](/web-analytics)** is best if you want analytics plus [replay](/session-replay), [flags](/feature-flags), [experiments](/experiments), and debugging. **Mixpanel** is a good choice if you care primarily about events, funnels, and retention — not pageviews.
+If your website behaves like a product: **[PostHog](/web-analytics)** is best if you want analytics plus [replay](/session-replay), [flags](/feature-flags), [experiments](/experiments), and debugging. **Mixpanel** is another good choice if you care primarily about events, funnels, and retention.
 
 </details>
 
