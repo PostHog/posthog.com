@@ -19,13 +19,6 @@ availability:
             boost: true
             scale: true
             enterprise: true
-        github: true
-        gitlab: true
-        google:
-            openSource: false
-            free: true
-            selfServe: true
-            enterprise: true
         saml:
             free: false
             selfServe: false
@@ -109,8 +102,6 @@ Looking for a provider that's not here? [Reach out to us](https://app.posthog.co
 
 ### GitHub
 
-<FeatureAvailability availability={_frontmatter.availability.features.github} />
-
 1. Go to <a href='https://github.com/settings/applications/new' target='_blank'>Register a new OAuth application</a>
 
 > If you want to have this application as part of an organisation, you'll need to go to your organization's settings -> OAuth apps -> New OAuth App.
@@ -130,8 +121,6 @@ Looking for a provider that's not here? [Reach out to us](https://app.posthog.co
 
 ### GitLab
 
-<FeatureAvailability availability={_frontmatter.availability.features.gitlab} />
-
 1. Go to **Settings** -> **Applications** in your GitLab instance (<a href='https://gitlab.com/profile/applications' target='_blank'>open the GitLab.com applications settings</a>)
 
 2. Register your application
@@ -145,7 +134,7 @@ Looking for a provider that's not here? [Reach out to us](https://app.posthog.co
 
 ### Google
 
-<FeatureAvailability availability={_frontmatter.availability.features.google} />
+> ❗️ Google SSO is not available for open source deployments.
 
 To set up Google SSO please follow these instructions:
 
@@ -380,34 +369,33 @@ Before setting up SCIM, you need:
 
 ### Example: Okta
 
-If your existing SAML app supports SCIM 2.0 provisioning, you can use it. Otherwise, follow these steps to create a new app that supports both SAML and SCIM:
+If you already have a custom SAML app configured for PostHog, you can enable SCIM provisioning directly on it. If not, first set up SAML following the [Okta SAML example](#example-okta), then continue with these steps:
 
-1. In Okta admin, go to Applications and click **Create App Integration**.
+1. In Okta admin, go to **Applications** and open your PostHog app.
 
-2. Search for `SCIM 2.0 Test App (Auth Bearer Token)` and select it.
- 
-3. Leave **SAML sign-on** method enabled. Configure SAML following the steps in the [Okta SAML example](#example-okta).
+2. Navigate to the **Provisioning** tab and click **Configure API Integration**.
 
-4. In PostHog, open your existing SAML configuration for the domain and update it with the new values from Okta (SAML ACS URL, SAML Entity ID, and SAML X.509 certificate).
-
-5. Navigate to the **Provisioning** tab in Okta and click **Configure API Integration**.
-
-6. Check **Enable API integration** and enter:
+3. Check **Enable API integration** and enter:
     - **SCIM Base URL** from PostHog
     - **API Token** (the SCIM Token from PostHog)
 
-7. Click **Test API Credentials** to verify the connection.
+4. Click **Test API Credentials** to verify the connection.
 
-8. In the **Provisioning to App** settings, enable:
+5. In the **Provisioning to App** settings, enable:
     - Create Users
     - Update User Attributes
     - Deactivate Users
 
-9. Go to the **Assignments** tab and configure role mapping. 
+6. Go to the **Assignments** tab and assign the application to users and groups.
+    - Click **Assign to People** and select the users you want to provision into PostHog.
+    - Click **Assign to Groups** and select the Okta groups to provision.
 
-10. Assign users to the PostHog application. Their email, name, and groups will be automatically updated in PostHog.
-
-11. Once everything is working, you can remove or deactivate your old SAML-only application.
+7. Go to the **Push Groups** tab.
+    - To push specific groups, select **Find groups by name**, then choose **Create Group** (creates a new role in PostHog) or **Link Group** (links it to an existing PostHog role). When you link the group to an existing role in PostHog, the role name will be updated to match Okta.
+    - If you have lots of groups, you can choose **Find groups by rule**. This way, all groups matching the rule are pushed to PostHog.
+    - Verify the pushed groups show as **Active**.
+    
+    For detailed Okta instructions, see [Okta's SCIM provisioning documentation](https://help.okta.com/en-us/content/topics/apps/apps_app_integration_wizard_scim.htm).
 
 ### Example: OneLogin
 

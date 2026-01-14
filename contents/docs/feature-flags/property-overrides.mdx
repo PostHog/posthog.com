@@ -1,0 +1,589 @@
+---
+title: Property overrides for flag evaluation
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+Property overrides let you provide person or group properties directly to PostHog for feature flag evaluation, instead of relying on properties stored on the server. This is useful when properties are set from a different client (like a backend service setting a property that your frontend needs immediately), or when multiple clients setting the same property could cause inconsistent flag evaluations.
+
+## Why use property overrides?
+
+Property overrides are useful when:
+
+1. **Properties are set elsewhere**: Properties can come from different parts of your application, like a backend service or another client. Your frontend might not know if they have been processed. If several clients set the same property, the value in PostHog can change unexpectedly as updates arrive from various sources.
+
+2. **Values are transient or context-specific**: You might need to evaluate flags using values that shouldn't be saved on the person record. This includes session-specific context, derived values, or information you prefer not to retain.
+
+3. **Testing and debugging**: You can test flag behavior using specific property values. This way, you won't need to change the actual user's properties.
+
+Property overrides bypass server-stored properties. They send properties directly with the flag evaluation request. This way, results are immediate and consistent.
+
+## Client-side SDKs
+
+Client-side SDKs can automatically include device and environment properties in every feature flag evaluation request. This ensures flags targeting properties like browser, OS, or app version work correctly without waiting for server-side processing.
+
+### Automatic overrides
+
+Client-side SDKs automatically cache properties from `identify()` and `group()` calls for use in flag evaluation. You don't need to do anything special for these to work. Client-side SDKs also include common device and environment properties by default. The methods below give you additional control when needed.
+
+#### From identify calls
+
+When you call `identify()` with person properties, those properties are automatically cached for flag evaluation. This means flags can use the properties immediately without waiting for server-side processing.
+
+<MultiLanguage>
+
+```js file=Web
+// Properties are automatically available for flag evaluation
+posthog.identify('user-123', {
+    email: 'user@company.com',
+    plan: 'enterprise'
+})
+
+// This flag check can use 'plan' immediately
+const showFeature = posthog.isFeatureEnabled('enterprise-feature')
+```
+
+```react-native
+// Properties are automatically available for flag evaluation
+posthog.identify('user-123', {
+    email: 'user@company.com',
+    plan: 'enterprise'
+})
+
+// This flag check can use 'plan' immediately
+const showFeature = posthog.isFeatureEnabled('enterprise-feature')
+```
+
+```swift file=iOS
+// Properties are automatically available for flag evaluation
+PostHogSDK.shared.identify("user-123", userProperties: [
+    "email": "user@company.com",
+    "plan": "enterprise"
+])
+
+// This flag check can use 'plan' immediately
+let showFeature = PostHogSDK.shared.isFeatureEnabled("enterprise-feature")
+```
+
+```kotlin file=Android
+// Properties are automatically available for flag evaluation
+PostHog.identify(
+    "user-123",
+    userProperties = mapOf(
+        "email" to "user@company.com",
+        "plan" to "enterprise"
+    )
+)
+
+// This flag check can use 'plan' immediately
+val showFeature = PostHog.isFeatureEnabled("enterprise-feature")
+```
+
+</MultiLanguage>
+
+#### From group calls
+
+Similarly, when you call `group()` with group properties, those properties are cached for flag evaluation:
+
+<MultiLanguage>
+
+```js file=Web
+posthog.group('company', 'company-123', {
+    name: 'Acme Inc',
+    plan: 'enterprise'
+})
+
+// Group properties are available for flag evaluation
+const showFeature = posthog.isFeatureEnabled('enterprise-companies-feature')
+```
+
+```react-native
+posthog.group('company', 'company-123', {
+    name: 'Acme Inc',
+    plan: 'enterprise'
+})
+
+// Group properties are available for flag evaluation
+const showFeature = posthog.isFeatureEnabled('enterprise-companies-feature')
+```
+
+```swift file=iOS
+PostHogSDK.shared.group(type: "company", key: "company-123", groupProperties: [
+    "name": "Acme Inc",
+    "plan": "enterprise"
+])
+
+// Group properties are available for flag evaluation
+let showFeature = PostHogSDK.shared.isFeatureEnabled("enterprise-companies-feature")
+```
+
+```kotlin file=Android
+PostHog.group(
+    "company",
+    "company-123",
+    groupProperties = mapOf(
+        "name" to "Acme Inc",
+        "plan" to "enterprise"
+    )
+)
+
+// Group properties are available for flag evaluation
+val showFeature = PostHog.isFeatureEnabled("enterprise-companies-feature")
+```
+
+</MultiLanguage>
+
+### Default properties in the web SDK
+
+By default, the web SDK sends initial session properties with flag requests:
+
+| Property | Description |
+|----------|-------------|
+| `$initial_referrer` | First referrer URL |
+| `$initial_referring_domain` | First referring domain |
+| `$initial_current_url` | First page URL visited |
+| `$initial_host` | First hostname |
+| `$initial_pathname` | First URL pathname |
+| `$initial_utm_source` | First UTM source |
+| `$initial_utm_medium` | First UTM medium |
+| `$initial_utm_campaign` | First UTM campaign |
+| `$initial_utm_content` | First UTM content |
+| `$initial_utm_term` | First UTM term |
+| `$initial_gclid` | First Google Ads click ID |
+| `$initial_fbclid` | First Facebook click ID |
+| `$initial_msclkid` | First Microsoft click ID |
+
+Other campaign parameters (`gad_source`, `mc_cid`, `dclid`, `gbraid`, `wbraid`, `twclid`, `li_fat_id`, `ttclid`, `rdt_cid`, etc.) are also included with the `$initial_` prefix when present in the first page URL.
+
+#### Including browser and device properties
+
+To include current browser and device properties (like `$browser`, `$os`, `$device_type`) with flag requests, use the `setAllPersonProfilePropertiesAsPersonPropertiesForFlags` customization.
+
+**Using npm:**
+
+```js
+import { setAllPersonProfilePropertiesAsPersonPropertiesForFlags } from 'posthog-js/lib/src/customizations'
+
+// Call after PostHog is initialized
+setAllPersonProfilePropertiesAsPersonPropertiesForFlags(posthog)
+```
+
+**Using the snippet:**
+
+```html
+<script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
+<script>
+  posthogCustomizations.setAllPersonProfilePropertiesAsPersonPropertiesForFlags(posthog)
+</script>
+```
+
+This adds the following properties to flag requests:
+
+| Property | Description |
+|----------|-------------|
+| `$browser` | Browser name (e.g., "Chrome", "Safari") |
+| `$browser_version` | Browser version |
+| `$os` | Operating system name (e.g., "Windows", "Mac OS X") |
+| `$os_version` | Operating system version |
+| `$device_type` | Device type ("Desktop", "Mobile", "Tablet") |
+| `$current_url` | Current page URL |
+| `$pathname` | URL pathname |
+| `$referrer` | HTTP referrer |
+| `$referring_domain` | Referring domain |
+| `$screen_height` | Screen height in pixels |
+| `$screen_width` | Screen width in pixels |
+| `$viewport_height` | Browser viewport height |
+| `$viewport_width` | Browser viewport width |
+| `$raw_user_agent` | Raw user agent string |
+| `utm_source`, `utm_medium`, etc. | Current campaign parameters |
+
+### Default properties in mobile SDKs
+
+Mobile SDKs (React Native, iOS, and Android) include common device and app properties in every feature flag evaluation request. The `setDefaultPersonProperties` configuration option controls this behavior and defaults to `true`.
+
+| Property | Description |
+|----------|-------------|
+| `$app_version` | App version from bundle/package info |
+| `$app_build` | App build number |
+| `$app_namespace` | App bundle identifier/namespace |
+| `$os` | Operating system name ("macOS", "iOS", "iPadOS", "tvOS", "watchOS", "visionOS", "Android") |
+| `$os_version` | Operating system version |
+| `$device_type` | Device type ("Mobile", "Tablet", "TV", "CarPlay", "Desktop", "Vision") |
+| `$lib` | SDK identifier (e.g., "posthog-ios") |
+| `$lib_version` | SDK version |
+
+### Manual overrides with `setPersonPropertiesForFlags`
+
+Use `setPersonPropertiesForFlags()` to explicitly set properties for flag evaluation. These properties are merged additively and persist in storage until you call `resetPersonPropertiesForFlags()` or `reset()`.
+
+<MultiLanguage>
+
+```js file=Web
+// Set properties for flag evaluation
+posthog.setPersonPropertiesForFlags({
+    plan: 'enterprise',
+    company_size: 'large'
+})
+
+// Properties persist across flag evaluations
+const showFeature = posthog.isFeatureEnabled('enterprise-feature')
+```
+
+```react-native
+// Set properties for flag evaluation
+posthog.setPersonPropertiesForFlags({
+    plan: 'enterprise',
+    company_size: 'large'
+})
+
+// Properties persist across flag evaluations
+const showFeature = posthog.isFeatureEnabled('enterprise-feature')
+```
+
+```swift file=iOS
+// Set properties for flag evaluation
+PostHogSDK.shared.setPersonPropertiesForFlags([
+    "plan": "enterprise",
+    "company_size": "large"
+])
+
+// Properties persist across flag evaluations
+let showFeature = PostHogSDK.shared.isFeatureEnabled("enterprise-feature")
+```
+
+```kotlin file=Android
+// Set properties for flag evaluation
+PostHog.setPersonPropertiesForFlags(
+    mapOf(
+        "plan" to "enterprise",
+        "company_size" to "large"
+    )
+)
+
+// Properties persist across flag evaluations
+val showFeature = PostHog.isFeatureEnabled("enterprise-feature")
+```
+
+</MultiLanguage>
+
+> **Note:** Properties set with `setPersonPropertiesForFlags()` are additive. Each call merges new properties with existing ones rather than replacing them.
+
+### Controlling automatic flag reload
+
+By default, calling `setPersonPropertiesForFlags()` triggers an automatic reload of feature flags. You can disable this if you plan to set multiple properties before reloading:
+
+<MultiLanguage>
+
+```js file=Web
+// Set properties without reloading
+posthog.setPersonPropertiesForFlags({ plan: 'enterprise' }, false)
+posthog.setPersonPropertiesForFlags({ company_size: 'large' }, false)
+
+// Manually reload when ready
+posthog.reloadFeatureFlags()
+```
+
+```react-native
+// Set properties without reloading
+posthog.setPersonPropertiesForFlags({ plan: 'enterprise' }, false)
+posthog.setPersonPropertiesForFlags({ company_size: 'large' }, false)
+
+// Manually reload when ready
+posthog.reloadFeatureFlags()
+```
+
+```swift file=iOS
+// Set properties without reloading
+PostHogSDK.shared.setPersonPropertiesForFlags(["plan": "enterprise"], reloadFeatureFlags: false)
+PostHogSDK.shared.setPersonPropertiesForFlags(["company_size": "large"], reloadFeatureFlags: false)
+
+// Manually reload when ready
+PostHogSDK.shared.reloadFeatureFlags()
+```
+
+```kotlin file=Android
+// Set properties without reloading
+PostHog.setPersonPropertiesForFlags(mapOf("plan" to "enterprise"), reloadFeatureFlags = false)
+PostHog.setPersonPropertiesForFlags(mapOf("company_size" to "large"), reloadFeatureFlags = false)
+
+// Manually reload when ready
+PostHog.reloadFeatureFlags()
+```
+
+</MultiLanguage>
+
+### Resetting property overrides
+
+To clear all manually set property overrides:
+
+<MultiLanguage>
+
+```js file=Web
+posthog.resetPersonPropertiesForFlags()
+```
+
+```react-native
+posthog.resetPersonPropertiesForFlags()
+```
+
+```swift file=iOS
+PostHogSDK.shared.resetPersonPropertiesForFlags()
+```
+
+```kotlin file=Android
+PostHog.resetPersonPropertiesForFlags()
+```
+
+</MultiLanguage>
+
+On mobile SDKs, this automatically triggers a feature flag reload. Pass `false` to reset without reloading. On web, flags are not automatically reloaded. Call `reloadFeatureFlags()` manually if needed.
+
+### Group property overrides
+
+You can also override group properties for flag evaluation:
+
+<MultiLanguage>
+
+```js file=Web
+// Set group properties for flag evaluation
+posthog.setGroupPropertiesForFlags({
+    company: {
+        plan: 'enterprise',
+        employee_count: 500
+    }
+})
+
+// Reset group properties for a specific group type
+posthog.resetGroupPropertiesForFlags('company')
+
+// Reset all group properties
+posthog.resetGroupPropertiesForFlags()
+```
+
+```react-native
+// Set group properties for flag evaluation
+posthog.setGroupPropertiesForFlags({
+    company: {
+        plan: 'enterprise',
+        employee_count: 500
+    }
+})
+
+// Reset all group properties
+posthog.resetGroupPropertiesForFlags()
+```
+
+```swift file=iOS
+// Set group properties for flag evaluation
+PostHogSDK.shared.setGroupPropertiesForFlags("company", properties: [
+    "plan": "enterprise",
+    "employee_count": 500
+])
+
+// Reset group properties for a specific type
+PostHogSDK.shared.resetGroupPropertiesForFlags("company")
+
+// Reset all group properties
+PostHogSDK.shared.resetGroupPropertiesForFlags()
+```
+
+```kotlin file=Android
+// Set group properties for flag evaluation
+PostHog.setGroupPropertiesForFlags(
+    "company",
+    mapOf(
+        "plan" to "enterprise",
+        "employee_count" to 500
+    )
+)
+
+// Reset group properties for a specific type
+PostHog.resetGroupPropertiesForFlags("company")
+
+// Reset all group properties
+PostHog.resetGroupPropertiesForFlags()
+```
+
+</MultiLanguage>
+
+### Use case: Targeting by browser or device
+
+**Web example:** Target Chrome users on desktop
+
+First, enable browser properties using the customization (see [Including browser and device properties](#including-browser-and-device-properties) above). Then:
+
+1. [Create a feature flag in PostHog](/docs/feature-flags/creating-feature-flags)
+2. Add filter conditions: `$browser` equals `Chrome` AND `$device_type` equals `Desktop`
+3. The flag automatically matches Chrome desktop users
+
+**Mobile example:** Target a specific app version
+
+With `setDefaultPersonProperties` enabled (the default), you can target app versions without any additional code:
+
+1. [Create a feature flag in PostHog](/docs/feature-flags/creating-feature-flags)
+2. Add a filter condition: `$app_version` equals `2.0.0`
+3. The flag automatically matches users on version 2.0.0
+
+## GeoIP property overrides
+
+PostHog's servers automatically derive GeoIP properties from the user's IP address for feature flag evaluation. This enables geolocation-based flags without any manual setup on client-side SDKs.
+
+### Properties included
+
+| Property | Description |
+|----------|-------------|
+| `$geoip_city_name` | City name |
+| `$geoip_country_name` | Country name |
+| `$geoip_country_code` | Two-letter country code |
+| `$geoip_continent_name` | Continent name |
+| `$geoip_continent_code` | Continent code |
+| `$geoip_postal_code` | Postal/ZIP code |
+| `$geoip_time_zone` | Time zone |
+
+### Use case: Geolocation targeting
+
+Create a feature flag targeting users in specific countries:
+
+1. [Create a feature flag in PostHog](/docs/feature-flags/creating-feature-flags)
+2. Add a filter condition: `$geoip_country_code` equals `US`
+3. The flag automatically matches users accessing from the United States
+
+No additional configuration is required on the client side.
+
+## Server-side SDKs
+
+Server-side SDKs handle property overrides differently. Instead of persistent session-based overrides, you pass properties directly when evaluating each flag.
+
+<MultiLanguage selector="tabs">
+
+```node
+const flagValue = await client.getFeatureFlag(
+    'feature-flag-key',
+    'user-distinct-id',
+    {
+        personProperties: {
+            plan: 'enterprise',
+            company_size: 'large'
+        },
+        groups: {
+            company: 'company-123'
+        },
+        groupProperties: {
+            company: {
+                plan: 'enterprise',
+                employee_count: 500
+            }
+        }
+    }
+)
+```
+
+```python
+flag_value = posthog.get_feature_flag(
+    'feature-flag-key',
+    'user-distinct-id',
+    person_properties={
+        'plan': 'enterprise',
+        'company_size': 'large'
+    },
+    groups={
+        'company': 'company-123'
+    },
+    group_properties={
+        'company': {
+            'plan': 'enterprise',
+            'employee_count': 500
+        }
+    }
+)
+```
+
+```php
+$flagValue = PostHog::getFeatureFlag(
+    'feature-flag-key',
+    'user-distinct-id',
+    [],  // groups
+    [    // personProperties
+        'plan' => 'enterprise',
+        'company_size' => 'large'
+    ],
+    [    // groupProperties
+        'company' => [
+            'plan' => 'enterprise',
+            'employee_count' => 500
+        ]
+    ]
+);
+```
+
+```ruby
+flag_value = posthog.get_feature_flag(
+    'feature-flag-key',
+    'user-distinct-id',
+    person_properties: {
+        'plan' => 'enterprise',
+        'company_size' => 'large'
+    },
+    groups: {
+        'company' => 'company-123'
+    },
+    group_properties: {
+        'company' => {
+            'plan' => 'enterprise',
+            'employee_count' => 500
+        }
+    }
+)
+```
+
+```go
+flagValue, err := client.GetFeatureFlag(
+    posthog.FeatureFlagPayload{
+        Key:        "feature-flag-key",
+        DistinctId: "user-distinct-id",
+        PersonProperties: posthog.NewProperties().
+            Set("plan", "enterprise").
+            Set("company_size", "large"),
+        Groups: posthog.NewGroups().
+            Set("company", "company-123"),
+        GroupProperties: map[string]map[string]interface{}{
+            "company": {
+                "plan":           "enterprise",
+                "employee_count": 500,
+            },
+        },
+    },
+)
+```
+
+```java
+Object flagValue = posthog.getFeatureFlag(
+    "user-distinct-id",
+    "feature-flag-key",
+    PostHogFeatureFlagOptions.builder()
+        .groups(Map.of("company", "company-123"))
+        .personProperties(Map.of(
+            "plan", "enterprise",
+            "company_size", "large"
+        ))
+        .groupProperties(Map.of(
+            "company", Map.of(
+                "plan", "enterprise",
+                "employee_count", 500
+            )
+        ))
+        .build()
+);
+```
+
+</MultiLanguage>
+
+### GeoIP on server-side
+
+Server-side SDKs disable GeoIP by default. This is because PostHog derives GeoIP properties from the request's IP address, which for server-side requests is your server's IP rather than your user's.
+
+For geolocation-based flags, evaluate them on the client side where the user's actual IP is available.

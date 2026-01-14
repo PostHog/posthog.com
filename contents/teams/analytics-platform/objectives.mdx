@@ -1,12 +1,18 @@
-### Q4 2025 objectives
+### Q1 2026 objectives
 
-* Alerts / exports / subscriptions stability <TeamMember name="Andy Zhao" photo /> <TeamMember name="Vasco de Krijger" photo />
-  * Improve observability and alerting
-  * Reduce error rate and improve stability using what we learn from the above
-  * Unify the insight execution path
-* Schema validation <TeamMember name="Sandy Spicer" photo />
-  * Define and ship a beta / MVP for the schema validation system
-* Query performance <TeamMember name="Robbie Coomber" photo />
-  * Instrument where time is spent while users are waiting for query responses
-  * Fix queries that are slow due to JSON property references
-  * Implement sessions on events
+* Do everything in the [Query Performance mega-issue](https://github.com/PostHog/posthog/issues/39639) <TeamMember name="Robbie Coomber" photo />
+* Iterate on schema validation <TeamMember name="Sandy Spicer" photo />
+  * Schema in code
+  * Versioning
+* 99.9% uptime for alerts, subscriptions, exports, and query service <TeamMember name="Andy Zhao" photo /><TeamMember name="Vasco de Krijger" photo />
+* Improve query cache stability <TeamMember name="Andy Zhao" photo />
+  * Move to its own redis cluster
+  * Add per-team limits to cache usage and cache warming
+  * Use cluster mode in ElastiCache to enable scaling horizontally
+* Get on top of support / open github issues <TeamMember name="Vasco de Krijger" photo />
+  * Create high priority list of GitHub issues and do them
+* Re-imagine dashboards <FutureTeamMember href="/careers/product-engineer"/>
+  * Let customers define their own dashboard templates
+* Do a hackathon around https://github.com/PostHog/requests-for-comments-internal/pull/941 <TeamMember name="Anna Szell" photo />
+* Terraform provider beta hardening / path to GA <TeamMember name="Vasco de Krijger" photo />
+

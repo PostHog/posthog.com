@@ -36,7 +36,6 @@
         { "source": "/docs/integrations/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/libraries/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/libraries/microsoft-teams", "destination": "/docs/integrate/webhooks/microsoft-teams" },
-        { "source": "/docs/libraries/slack", "destination": "/docs/integrate/webhooks/slack" },
         { "source": "/docs/integrate/webhooks/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/integrate/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
@@ -560,7 +559,6 @@
             "destination": "/docs/how-posthog-works/ingestion-pipeline"
         },
         { "source": "/blog/using-posting", "destination": "/blog/using-posthog" },
-        { "source": "/docs/libraries/slack", "destination": "/manual/subscriptions" },
         { "source": "/docs/integrate/client/snippet-installation", "destination": "/docs/integrate" },
         { "source": "/tutorials/posthog-for-vuejs", "destination": "/docs/libraries/vue-js" },
         { "source": "/blog/categories/comparisons", "destination": "/blog/tags/comparisons" },
@@ -689,6 +687,10 @@
         { "source": "/manual/recordings", "destination": "/docs/session-replay/manual" },
         { "source": "/docs/session-recording", "destination": "/docs/session-replay" },
         { "source": "/docs/session-replay/configure", "destination": "/docs/session-replay/manual" },
+        {
+            "source": "/docs/session-replay/cutting-costs",
+            "destination": "/docs/session-replay/how-to-control-which-sessions-you-record"
+        },
         { "source": "/handbook/small-teams/experimentation", "destination": "/handbook/small-teams/feature-success" },
         { "source": "/handbook/small-teams/session-recording", "destination": "/handbook/small-teams/replay" },
         { "source": "/handbook/growth/strategy", "destination": "/handbook/growth/sales/overview" },
@@ -1236,6 +1238,10 @@
         { "source": "/tutorials/laudspeaker-posthog", "destination": "/docs/cdp/laudspeaker-connector" },
         { "source": "/tutorials/react-popups", "destination": "/tutorials/react-surveys" },
         {
+            "source": "/tutorials/node-external-cache",
+            "destination": "/docs/feature-flags/local-evaluation/distributed-environments?tab=Node.js"
+        },
+        {
             "source": "/blog/gdpr-google-analytics-privacy-shield",
             "destination": "/blog/best-gdpr-compliant-analytics-tools"
         },
@@ -1677,7 +1683,20 @@
             "source": "/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell",
             "destination": "/handbook/growth/cross-selling/how-we-upsell-and-cross-sell"
         },
-        { "source": "/startups/[...slug]", "destination": "/startups" }
+        { "source": "/startups/[...slug]", "destination": "/startups" },
+        { "source": "/customer-data-infrastructure/:path*", "destination": "/data-stack" },
+        { "source": "/data-warehouse", "destination": "/data-stack" },
+        { "source": "/docs/error-tracking/common-questions", "destination": "/docs/error-tracking/troubleshooting" },
+        { "source": "/docs/web-analytics/faq", "destination": "/docs/web-analytics/troubleshooting" },
+        { "source": "/docs/feature-flags/common-questions", "destination": "/docs/feature-flags/troubleshooting" },
+        { "source": "/docs/experiments/common-questions", "destination": "/docs/experiments/troubleshooting" },
+        { "source": "/docs/cdp/common-questions", "destination": "/docs/cdp/troubleshooting" },
+        { "source": "/docs/data-warehouse/common-questions", "destination": "/docs/data-warehouse/troubleshooting" },
+        {
+            "source": "/docs/revenue-analytics/common-questions",
+            "destination": "/docs/revenue-analytics/troubleshooting"
+        },
+        { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" }
     ],
     "headers": [
         {

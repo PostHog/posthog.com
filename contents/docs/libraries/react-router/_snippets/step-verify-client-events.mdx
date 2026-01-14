@@ -1,0 +1,15 @@
+At this point, you should be able to capture client-side events and see them in your PostHog project. This includes basic events like page views and button clicks that are [autocaptured](/docs/product-analytics/autocapture).
+
+You can also try to capture a custom event to verify it's working. You can access PostHog in any component using the `usePostHog` hook.
+
+```tsx
+import { usePostHog } from '@posthog/react'
+
+function App() {
+  const posthog = usePostHog()
+  return <button onClick={() => posthog?.capture('button_clicked')}>Click me</button>
+}
+```
+
+You should see these events in a minute or two in the [activity tab](https://app.posthog.com/activity/explore).
+
