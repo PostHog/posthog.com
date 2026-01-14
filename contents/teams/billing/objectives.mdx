@@ -1,41 +1,47 @@
-## Q4 2025 Objectives
+## Q1 2026 Objectives
 
+1. **Implement and switch to the new revenue model (eng leads: <TeamMember name="Patricio Tarantino" />, <TeamMember name="Marce Coll" />, revops lead: <TeamMember name="Mine Kansu" />)**
+    - New model implemented, understood and trusted across the team, and easy to work with
+    - Differences vs old model expected and explained
+    - All internal dashboards and investor reports re-implemented based on the new model
 
-### Pawel
+2. **Make billing the source of truth (leads: <TeamMember name="Pawel Cebula" />, <TeamMember name="Marce Coll" />)**
+    - Write an RFC on this and alternative directions and decide
+    - Implement the chosen direction
 
-- Implement pricing changes and launches (e.g. Data warehouse, Max, Tasks, Logs, Messaging/Workflows)
-- Launch a new, more compact billing page
-- Investigate and improve subscribe flow (e.g. status check timeouts, 3DS)
-- Experiment with the unsubscribe flow to reduce churn
-- Research usage-based billing providers to learn how they deal with challenges we face
+3. **Ship all expected pricing launches and changes (lead:<TeamMember name="Pawel Cebula" />)**
+    - Expected
+        - Workflows (push, sms)
+        - Logs
+        - Data warehouse (storage)
+        - Array
+        - Endpoints
+    - Blockers
+        - Implement solution to the limit of max 20 subscription items
+        - Enable support for non-incremental usage metrics (e.g. storage for data warehouse, endpoints)
 
-### Pato
+4. **Integrate billing and revenue data with Campfire (lead: <TeamMember name="Patricio Tarantino" />)**
+    - Decide on the architecture
+    - Implement API connections
+    - Push data needed for accounting (Stripe objects)
+    - Push data from revenue model
 
-- Improve billing system, introducing pattern designs and abstractions (strategies for billing limits, forecasting and usage report)
-- Update legacy Stripe API version
-- Move Stripe flows to billing admin (e.g. credit notes, refunds, payments)
-- Collaborate with Mine & BigTimeData to deliver new revenue models
-- Implement pricing changes and launches (with Pawel)
-- Learn to ride a bike properly
+5. **Improve quota limiting stability and accuracy (lead: <TeamMember name="Marce Coll" />)**
+    - Deploy money domain limiting strategy
+    - Align usage and limit calculations in `/billing` API response with money domain limit strategy
 
-### Marce
+6. **Reduce tech debt and improve developer experience (lead: <TeamMember name="Marce Coll" />)**
+    - Switch from Nginx to Granian
+    - Improve observability and tracing
+    - Migrate PostgreSQL
+    - Upgrade Stripe API version
 
-- Produce and maintain a single source of truth for billing logic
-- Comprehensive set of assertions on the billing system (incl. historical tables)
-- Real-time usage reporting RFC
+7. **Improve how we identify and prioritize self-serve orgs for sales engagement using intent based signals (lead: <TeamMember name="Mine Kansu" />)**
 
-### Mine
+8. **Roll out the custom PostHog Org object in Salesforce and update all integrations and lead triggers for smooth transition (lead: <TeamMember name="Mine Kansu" />)**
 
-- Deliver v1 reconciled revenue reporting with monthly reconciled revenue numbers and migrate all key metrics to the new model as the single source of truth
-- Update lifecycle metrics under new revenue model to include resurrected/paused accounts so expansion/churn views are more realistic
-- Create an end to end dashboard tying marketing -> sales pipeline -> revenue attribution 
-- Ship custom posthog org object in salesforce
-- Work with sales team on automation and tracking of outbound leads
-
-### Bonus
-
-- Upgrade billing postgres
-- Enable local payment options in key markets (e.g. India, China; verify the need/ROI first)
-- Improve self-serve credit purchase flow (credit expiry logic, granting credits upfront)
-- Enable billing through partners (e.g. AWS self-serve, Vercel)
-- Support coupons (e.g. newsletters, hackathons)
+9. **Launch an engineering-led outbound motion for high signal leads (lead: <TeamMember name="Abhischek Thottakara" />)**\
+    - Source and curate datasets of Entities (Company) and Contacts (Person) (i.e the leads)
+    - Automate qualification of leads based on signals
+    - Automate sequencing and outreach for high signal leads
+    

@@ -2,12 +2,19 @@ import path from 'path'
 import fs from 'fs'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference'
 import { getLanguageFromSdkId } from '../src/components/SdkReferences/utils'
+import {
+    createTurndownService,
+    extractTitleFromHtml,
+    extractMainContent,
+    postProcessMarkdown,
+    preprocessHtmlForTabs,
+} from './turndownService'
 
-// Function to generate raw markdown files
-export const generateRawMarkdownPages = async (pages) => {
-    console.log('Generating markdown files for LLMs...')
+export const generateRawMarkdownPages = async (
+    docsNodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }>
+) => {
+    const publicPath = path.resolve(__dirname, '../public')
 
-    // Filter out any pages with certain slugs
     const excludeTerms = [
         '/_snippets',
         '/snippets/',
@@ -23,53 +30,50 @@ export const generateRawMarkdownPages = async (pages) => {
         '/startups',
         '/example-components',
     ]
-    const filteredPages = pages.filter((doc) => !excludeTerms.some((term) => doc.fields.slug.includes(term)))
 
-    console.log(`Found ${filteredPages.length} docs to generate markdown for (filtered from ${pages.length} total)`)
+    const filteredNodes = docsNodes.filter((node) => {
+        return !excludeTerms.some((term) => node.fields.slug.includes(term))
+    })
 
-    for (const doc of filteredPages) {
+    const processedPages: Array<{ slug: string; title: string }> = []
+
+    for (const node of filteredNodes) {
         try {
-            const { slug, contentWithSnippets } = doc.fields
-            const { title } = doc.frontmatter
-            const body = contentWithSnippets || doc.rawBody
+            const { slug } = node.fields
+            const htmlFilePath = path.join(publicPath, slug, 'index.html')
 
-            // Create the frontmatter, so it always has the page title
-            let markdownContent = `---\ntitle: ${title}\nslug: ${slug}\n---\n`
-
-            // Add the content
-            if (body) {
-                // Process internal links to point to .md equivalents
-                let processedBody = body.replace(/\[([^\]]+)\]\(\/([^)]+)\)/g, (match, text, path) => {
-                    // Only convert if the path doesn't already end with .md
-                    if (!path.endsWith('.md')) {
-                        return `[${text}](/${path}.md)`
-                    }
-                    return match
-                })
-
-                markdownContent += processedBody
+            if (!fs.existsSync(htmlFilePath)) {
+                continue
             }
 
-            // Create the directory structure
-            const publicPath = path.resolve(__dirname, '../public')
-            const filePath = path.join(publicPath, `${slug}.md`)
-            const dirPath = path.dirname(filePath)
+            const html = fs.readFileSync(htmlFilePath, 'utf8')
+            const title = extractTitleFromHtml(html) || node.frontmatter.title || 'Untitled'
+            const mainContent = extractMainContent(html)
+            const preprocessedContent = preprocessHtmlForTabs(mainContent)
 
-            // Ensure directory exists
+            const turndownService = createTurndownService(title)
+            let markdown = turndownService.turndown(preprocessedContent)
+            markdown = postProcessMarkdown(markdown, title)
+
+            const outputPath = path.join(publicPath, `${slug}.md`)
+            const dirPath = path.dirname(outputPath)
+
             if (!fs.existsSync(dirPath)) {
                 fs.mkdirSync(dirPath, { recursive: true })
             }
 
-            // Write the file
-            fs.writeFileSync(filePath, markdownContent, 'utf8')
+            fs.writeFileSync(outputPath, markdown, 'utf8')
             console.log(`Generated: ${slug}.md`)
+            processedPages.push({ slug, title })
         } catch (error) {
-            console.error(`Error generating markdown for ${doc.fields.slug}:`, error)
+            continue
         }
     }
 
-    // Return filtered pages for use in generateLlmsTxt
-    return filteredPages
+    return processedPages.map((page) => ({
+        fields: { slug: page.slug },
+        frontmatter: { title: page.title },
+    }))
 }
 
 // Function to generate individual API endpoint markdown files from the OpenAPI spec

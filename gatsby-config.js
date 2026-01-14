@@ -130,6 +130,9 @@ module.exports = {
                     {
                         resolve: require.resolve('./plugins/gatsby-remark-video'),
                     },
+                    {
+                        resolve: require.resolve('./plugins/gatsby-remark-inline-jsx-paragraphs'),
+                    },
                 ],
             },
         },

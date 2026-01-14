@@ -2,7 +2,7 @@
 title: Nuxt reverse proxy
 sidebar: Docs
 showTitle: true
-platformImageUrl: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nuxt.svg
+platformLogo: nuxt
 ---
 
 import ProxyCallout from "../_snippets/proxy-callout.mdx"
@@ -43,21 +43,27 @@ Create a file at `server/routes/ph/[...path].ts`:
 ```ts file=US
 export default defineEventHandler(async (event) => {
   const path = event.context.params?.path || ''
+  const url = getRequestURL(event)
+  const search = url.search || ''
 
   const hostname = path.startsWith('static/')
     ? 'us-assets.i.posthog.com'
     : 'us.i.posthog.com'
 
-  const targetUrl = `https://${hostname}/${path}`
+  const targetUrl = `https://${hostname}/${path}${search}`
 
+  // Forward headers, excluding ones that shouldn't be proxied
   const headers = new Headers()
-  headers.set('host', hostname)
+  const excludedHeaders = ['host', 'connection', 'content-length', 'transfer-encoding', 'accept-encoding']
 
-  // Forward relevant headers
-  const contentType = getHeader(event, 'content-type')
-  if (contentType) {
-    headers.set('content-type', contentType)
+  const requestHeaders = getRequestHeaders(event)
+  for (const [key, value] of Object.entries(requestHeaders)) {
+    if (value && !excludedHeaders.includes(key.toLowerCase())) {
+      headers.set(key, value)
+    }
   }
+
+  headers.set('host', hostname)
 
   // Forward client IP for geolocation
   const clientIp = getHeader(event, 'x-forwarded-for') || getRequestIP(event)
@@ -65,8 +71,9 @@ export default defineEventHandler(async (event) => {
     headers.set('x-forwarded-for', clientIp)
   }
 
+  // Read body as binary buffer to preserve gzip compression
   const body = event.method !== 'GET' && event.method !== 'HEAD'
-    ? await readRawBody(event)
+    ? await readRawBody(event, false)
     : undefined
 
   const response = await fetch(targetUrl, {
@@ -75,39 +82,45 @@ export default defineEventHandler(async (event) => {
     body,
   })
 
-  // Copy response headers
-  const responseHeaders: Record<string, string> = {}
-  response.headers.forEach((value, key) => {
-    if (key.toLowerCase() !== 'content-encoding' && key.toLowerCase() !== 'content-length') {
-      responseHeaders[key] = value
+  // Copy response headers, excluding problematic ones
+  for (const [key, value] of response.headers.entries()) {
+    if (!['content-encoding', 'content-length', 'transfer-encoding'].includes(key.toLowerCase())) {
+      setResponseHeader(event, key, value)
     }
-  })
+  }
 
-  setResponseHeaders(event, responseHeaders)
   setResponseStatus(event, response.status)
 
-  return response.text()
+  // Return binary response
+  const arrayBuffer = await response.arrayBuffer()
+  return Buffer.from(arrayBuffer)
 })
 ```
 
 ```ts file=EU
 export default defineEventHandler(async (event) => {
   const path = event.context.params?.path || ''
+  const url = getRequestURL(event)
+  const search = url.search || ''
 
   const hostname = path.startsWith('static/')
     ? 'eu-assets.i.posthog.com'
     : 'eu.i.posthog.com'
 
-  const targetUrl = `https://${hostname}/${path}`
+  const targetUrl = `https://${hostname}/${path}${search}`
 
+  // Forward headers, excluding ones that shouldn't be proxied
   const headers = new Headers()
-  headers.set('host', hostname)
+  const excludedHeaders = ['host', 'connection', 'content-length', 'transfer-encoding', 'accept-encoding']
 
-  // Forward relevant headers
-  const contentType = getHeader(event, 'content-type')
-  if (contentType) {
-    headers.set('content-type', contentType)
+  const requestHeaders = getRequestHeaders(event)
+  for (const [key, value] of Object.entries(requestHeaders)) {
+    if (value && !excludedHeaders.includes(key.toLowerCase())) {
+      headers.set(key, value)
+    }
   }
+
+  headers.set('host', hostname)
 
   // Forward client IP for geolocation
   const clientIp = getHeader(event, 'x-forwarded-for') || getRequestIP(event)
@@ -115,8 +128,9 @@ export default defineEventHandler(async (event) => {
     headers.set('x-forwarded-for', clientIp)
   }
 
+  // Read body as binary buffer to preserve gzip compression
   const body = event.method !== 'GET' && event.method !== 'HEAD'
-    ? await readRawBody(event)
+    ? await readRawBody(event, false)
     : undefined
 
   const response = await fetch(targetUrl, {
@@ -125,18 +139,18 @@ export default defineEventHandler(async (event) => {
     body,
   })
 
-  // Copy response headers
-  const responseHeaders: Record<string, string> = {}
-  response.headers.forEach((value, key) => {
-    if (key.toLowerCase() !== 'content-encoding' && key.toLowerCase() !== 'content-length') {
-      responseHeaders[key] = value
+  // Copy response headers, excluding problematic ones
+  for (const [key, value] of response.headers.entries()) {
+    if (!['content-encoding', 'content-length', 'transfer-encoding'].includes(key.toLowerCase())) {
+      setResponseHeader(event, key, value)
     }
-  })
+  }
 
-  setResponseHeaders(event, responseHeaders)
   setResponseStatus(event, response.status)
 
-  return response.text()
+  // Return binary response
+  const arrayBuffer = await response.arrayBuffer()
+  return Buffer.from(arrayBuffer)
 })
 ```
 
@@ -147,15 +161,57 @@ The `[...path]` in the filename is a Nuxt [catch-all route](https://nuxt.com/doc
 Here's what the code does:
 
 - Routes `/static/*` requests to PostHog's asset server and everything else to the main API
-- Sets the `host` header so PostHog can route the request correctly
+- Preserves query parameters (like `?compression=gzip-js`) required for compressed requests
+- Forwards relevant headers while excluding ones that shouldn't be proxied
+- Reads the request body as binary to preserve gzip-compressed data
 - Forwards the client's IP address for accurate geolocation
-- Strips content encoding headers to avoid issues with compressed responses
+- Returns the response as binary data to handle all content types correctly
 
 </Step>
 
 <Step title="Update your PostHog SDK">
 
-In your Nuxt app, update your PostHog initialization to use your proxy path:
+Update your PostHog configuration to use your proxy path.
+
+### Using @posthog/nuxt (Nuxt 3.7+)
+
+If you're using the `@posthog/nuxt` module, update your `nuxt.config.ts`:
+
+<MultiLanguage>
+
+```ts file=US
+// nuxt.config.ts
+export default defineNuxtConfig({
+  modules: ['@posthog/nuxt'],
+  posthogConfig: {
+    publicKey: '<ph_project_api_key>',
+    clientConfig: {
+      api_host: '/ph',
+      ui_host: 'https://us.posthog.com'
+    }
+  }
+})
+```
+
+```ts file=EU
+// nuxt.config.ts
+export default defineNuxtConfig({
+  modules: ['@posthog/nuxt'],
+  posthogConfig: {
+    publicKey: '<ph_project_api_key>',
+    clientConfig: {
+      api_host: '/ph',
+      ui_host: 'https://eu.posthog.com'
+    }
+  }
+})
+```
+
+</MultiLanguage>
+
+### Using posthog-js plugin (Nuxt 3.0-3.6)
+
+If you're using the `posthog-js` library directly with a plugin:
 
 <MultiLanguage>
 

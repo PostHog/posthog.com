@@ -13,7 +13,7 @@ export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/u
 
 [A/B tests](/experiments) helps you improve your React Native app by enabling you to compare the impact of changes on key metrics. 
 
-PostHog makes [A/B testing in React Native](/docs/experiments/installation?tab=React+Native) simple. To show you how to set it up, we create a basic app with Expo, add PostHog, create an A/B test, and implement the code for it.
+PostHog makes [A/B testing in React Native](/docs/experiments/installation/react-native) simple. To show you how to set it up, we create a basic app with Expo, add PostHog, create an A/B test, and implement the code for it.
 
 > This tutorial focuses on React Native apps built with [Expo](https://expo.dev/). However, PostHog also supports non-Expo apps. See our [React Native docs](/docs/libraries/react-native) for details.
 

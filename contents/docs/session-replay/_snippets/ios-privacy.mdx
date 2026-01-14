@@ -26,6 +26,15 @@ imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
     .postHogNoMask()
   ```
 
+
+<CalloutBox title="SwiftUI and Xcode 26" type="caution" icon="IconInfo">
+
+Apps built with Xcode 26 use a new SwiftUI rendering model that changes how SwiftUI views map to UIKit. This can cause `postHogMask()` and `postHogNoMask()` to behave inconsistently on primitive views like `Text`, `Image`, and `Button`.
+
+**If you're building with Xcode 26**, update to [version 3.36.2](https://github.com/PostHog/posthog-ios/releases/tag/3.36.2) or later to ensure these modifiers work correctly.
+
+</CalloutBox>
+
 ### Handling sensitive third-party screens
 
 Third-party components (like payment forms or authentication screens) are often rendered in separate view hierarchies that can't be accessed or modified for masking.

@@ -76,7 +76,7 @@ export default function ProductImage({ images, className = '' }: ProductImagePro
             alt={currentImage.alt}
             className={`w-full h-full object-contain ${
                 currentImage.stylize ? 'bg-accent p-4 rounded border border-primary' : ''
-            } ${currentImage.shadow ? 'shadow-xl' : ''} || ''}`}
+            } ${currentImage.shadow ? 'shadow-xl' : ''}`}
             imgClassName={currentImage.className || ''}
         />
     )

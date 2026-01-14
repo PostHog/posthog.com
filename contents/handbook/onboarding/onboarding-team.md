@@ -16,7 +16,7 @@ We also care about net dollar retention for this segment, but we treat it as an 
 
 The segment consists of customers who self-serve PostHog and generate a forecasted bill of over $100. In practice, because billing is metered and in arrears, and we don't know what people will pay when they sign up (or when they first exceed a $100 forecast), so _most_ accounts > $100 forecast are routed to us. We also handle a couple of other segments:
 
--   YC program participants
+-   YC program participants.
 -   Startup customers rolling off, who have generated a first bill in the $500-$1500 range.
 -   Startup plan customers with high credit usage (> ~$1500).
 -   Hype startups we want to work with (despite being below $ thresholds), or longer-standing customers that have paid in this range and need billing or setup assistance.
@@ -28,17 +28,27 @@ Since we primarily focus on customers who've signed up and have a forecasted bil
 -   Not signed up/generated a bill, but have contacted sales.
 -   Are early-stage startups on the startup plan with no billing/low credit usage (<$500/mo).
 
+### Merch store consultation
+
+Customers who normally fall outside our scope still have a chance to get help! They can buy an Onboarding consultation [via our merch store](https://posthog.com/merch?product=30-min-onboarding-consultation).
+
+After making the purchase, the customer gets a link to book a meeting, and they can contact our Billing team if they can't find an appropriate time slot. The billing team handles issuing credits/refunds accordingly. 
+
+The booking link has no expiry, so there's no need to follow up with the customer if they haven't booked the call instantly - they can do so at the most convenient time.
+
+If someone did book the meeting but didn't show up at a consultation, follow up with the customer to offer a meeting at another time. Set a task reminder in Vitally, and if we don't hear back within 1-2 weeks, offer issuing credits for the missed meeting.
+
 ### Tooling
 
 Check out the list of [shared tools](https://posthog.com/handbook/growth/sales/sales-and-cs-tools).
 
 The team-specific tools for this team are:
 
-- Onboarding hub in Vitally, and [main view](https://posthog.vitally-eu.io/hubs/08486fc6-0250-4c4c-abd8-3c5a168fd874/9f17c73c-94d2-487f-bc9a-e5041a568c8b) with Onboarding accounts
+- Onboarding hub in Vitally, and [main view](https://posthog.vitally-eu.io/hubs/08486fc6-0250-4c4c-abd8-3c5a168fd874/9f17c73c-94d2-487f-bc9a-e5041a568c8b) with Onboarding accounts.
 - [Shared Calendly link](https://calendly.com/posthog-onboarding-team) - make sure to add buffer to your schedule to avoid having calls back-to-back.
-- [Github project board](https://github.com/orgs/PostHog/projects/134/views/1)
-- [Onboarding Google Drive](https://drive.google.com/drive/u/0/folders/0ADuSyIJNgdr-Uk9PVA) with all relevant documents
-- [Alfred workflows](https://github.com/PostHog/company-internal/tree/master/onboarding-team)
+- [Github project board](https://github.com/orgs/PostHog/projects/134/views/1).
+- [Onboarding Google Drive](https://drive.google.com/drive/u/0/folders/0ADuSyIJNgdr-Uk9PVA) with all relevant documents.
+- [Alfred workflows](https://github.com/PostHog/company-internal/tree/master/onboarding-team).
 
 ### Internal process (Vitally)
 
