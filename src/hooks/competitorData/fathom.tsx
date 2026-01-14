@@ -137,7 +137,6 @@ export const fathom = {
             mobile_sdks: false,
             server_side_sdks: false,
             sql: false,
-
         },
         tools: {
             cms: '',
