@@ -145,7 +145,7 @@ export default function WebAnalytics(): JSX.Element {
             'pairs-with',
             'getting-started',
         ],
-        exclude: ['posthog-on-posthog', 'videos'],
+        exclude: ['videos'],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },
