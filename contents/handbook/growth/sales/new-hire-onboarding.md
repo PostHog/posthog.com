@@ -189,7 +189,7 @@ We have certain automations in Vitally and Zapier that your team lead needs to a
 Your first three months of commission are paid at 100% fixed OTE. This will be calculated based on the date you start. If you start before the 15th of a month, you will get 100% fixed OTE for that month and two of the subsequent months. For example, if you start on Jan 13th, you will get 100% fixed OTE for Jan, Feb & Mar. If you start _on_ Jan 17th, you would get two months of 100% fixed OTE for Q1 and one month of 100% commission for Q2 in addition to two months of your quota'ed commission.
 
 <img
-    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_01_14_T11_10_14_671_Z_f81ba558b9.png"
+    src="https://res.cloudinary.com/dmukukwp6/image/upload/shapes_at_26_01_14_12_33_57_dcf4e9458a.svg"
     alt="New hire quota ramp visual"
     className="my-6 rounded-md shadow-md"
 />
