@@ -382,6 +382,10 @@ export const dataPipelines = {
                     name: 'Databricks',
                     url: '/docs/cdp/batch-exports/databricks',
                 },
+                {
+                    name: 'Azure Blob Storage',
+                    url: '/docs/cdp/batch-exports/azureblob',
+                },
             ],
         },
         {
@@ -1971,6 +1975,10 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/persistence',
                                 },
                                 {
+                                    name: 'Types',
+                                    url: '/docs/libraries/js/types',
+                                },
+                                {
                                     name: 'Reference',
                                     url: '/docs/references/posthog-js',
                                 },
@@ -2184,7 +2192,7 @@ export const docsMenu = {
                             name: 'Phoenix',
                             url: '/docs/libraries/phoenix',
                         },
-                      {
+                        {
                             name: 'React Router',
                             url: '/docs/libraries/react-router',
                             children: [
@@ -3690,6 +3698,12 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
+                    name: 'Property overrides',
+                    url: '/docs/feature-flags/property-overrides',
+                    icon: 'IconPerson',
+                    color: 'blue',
+                },
+                {
                     name: 'Feature flag dependencies',
                     url: '/docs/feature-flags/dependencies',
                     icon: 'IconListTreeChild',
@@ -4805,6 +4819,16 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Errors',
+                    url: '/docs/llm-analytics/errors',
+                    icon: 'IconWarning',
+                    color: 'red',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Embeddings',
                     url: '/docs/llm-analytics/embeddings',
                     icon: 'IconDatabase',
@@ -4839,6 +4863,16 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/evaluations',
                     icon: 'IconTarget',
                     color: 'yellow',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                    },
+                },
+                {
+                    name: 'Trace summarization',
+                    url: '/docs/llm-analytics/summarization',
+                    icon: 'IconAI',
+                    color: 'blue',
                     badge: {
                         title: 'Alpha',
                         className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',

@@ -58,6 +58,8 @@ Researching options and evaluation happens simultaneously because our team knows
 
 When we were looking for [scalable replacements for Postgres](/blog/how-we-turned-clickhouse-into-our-eventmansion) in our early days, for example, we knew we needed it to be open source and self-hostable. This immediately eliminated options like Snowflake, Redshift, or BigQuery.
 
+<NewsletterForm />
+
 ## 2. We evaluate as close to reality as possible
 
 Bias for action is one of core values. This means:
@@ -77,8 +79,6 @@ Another example is how we evaluated Warpstream. This evaluation was triggered by
 Testing this way meant they could also evaluate Warpstream’s deployment process, provisioning, performance, and scalability at the same time, which saved time.
 
 Testing technologies is often a non-trivial part of teams' development process. It is common to see tests or proofs of concept as a quarterly team goal. For example, building out a Warpstream proof of concept was a Q3 goal for the Pipeline team.
-
-<NewsletterForm />
 
 ## 3. We consider technical AND business factors
 
