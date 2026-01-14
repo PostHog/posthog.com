@@ -13,6 +13,7 @@ If you are using React Native Web, ensure source maps are generated
 
 ```bash
 # example command
+# Files are usually under the '$buildFolder/_expo/static/js/web' folder ($name.js and $name.js.map)
 npx expo export --source-maps --platform web
 ```
 
@@ -60,6 +61,8 @@ module.exports = config
 </Step>
 
 <Step title="Upload" badge="required">
+
+Automatic source map uploading is handled through the Gradle build process on Android and the Xcode build process on iOS.
 
 1. Expo: Update the [app.json](https://docs.expo.dev/versions/latest/config/app/#plugins) file in your app's root directory.
 
