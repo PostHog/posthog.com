@@ -2,29 +2,16 @@ import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 're
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { navigate } from 'gatsby'
-import { useUser, User } from 'hooks/useUser'
-import { addRoadmapEmojiReaction, fetchRoadmapReactions, EmojiReaction } from 'hooks/useRoadmaps'
-import {
-    IconDownload,
-    IconPencil,
-    IconPlus,
-    IconShieldLock,
-    IconX,
-    IconEmojiAdd,
-    IconGitBranch,
-    IconCommit,
-    IconCode,
-    IconPeople,
-    IconDocument,
-    IconComment,
-} from '@posthog/icons'
+import { useUser } from 'hooks/useUser'
+import { IconDownload, IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
+import { ChangelogEmojiReactions } from 'components/EmojiReactions'
+import { ChangelogPRMetadata } from 'components/ChangelogPRMetadata'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import OSButton from 'components/OSButton'
 import { useApp } from '../context/App'
 import RoadmapWindow from 'components/Roadmap/RoadmapWindow'
 import Tooltip from 'components/RadixUI/Tooltip'
-import { Popover } from 'components/RadixUI/Popover'
 import Timeline from 'components/Timeline'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -174,286 +161,6 @@ export const Change = ({ title, teamName, media, description, cta }) => {
     )
 }
 
-const EmojiReactions = ({ roadmapId }: { roadmapId: number | string }) => {
-    const { user, getJwt } = useUser()
-    const { openSignIn } = useApp()
-    const [reactions, setReactions] = useState<EmojiReaction[]>([])
-    const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
-
-    // Fetch reactions on mount and when roadmapId changes
-    useEffect(() => {
-        fetchRoadmapReactions(roadmapId).then(setReactions)
-    }, [roadmapId])
-
-    const emojiMap = {
-        hedgehog: '🦔',
-        'raised-hands': '🙌',
-        clap: '👏',
-        'thumbs-up': '👍',
-        'pinched-fingers': '🤌',
-        'rock-on': '🤘',
-        'nail-polish': '💅',
-        surprised: '😮',
-        exhale: '😮‍💨',
-        shaking: '🫨',
-        'mind-blown': '🤯',
-        laugh: '😂',
-        grin: '😁',
-        cool: '😎',
-        'heart-eyes': '😍',
-        cowboy: '🤠',
-        chef: '👨‍🍳',
-        robot: '🤖',
-        wizard: '🧙',
-        sparkles: '✨',
-        rocket: '🚀',
-        eyes: '👀',
-        hundred: '💯',
-        fire: '🔥',
-        heart: '❤️',
-        'blue-heart': '💙',
-        boom: '💥',
-        check: '✅',
-        plus: '➕',
-        party: '🎉',
-        'hot-pepper': '🌶️',
-        brain: '🧠',
-        ship: '🚢',
-        zap: '⚡️',
-        ribbon: '🎀',
-        beers: '🍻',
-        champagne: '🍾',
-        dancer: '💃',
-        'disco-ball': '🪩',
-        target: '🎯',
-        siren: '🚨',
-        unicorn: '🦄',
-        dinosaur: '🦖',
-        rainbow: '🌈',
-        bouquet: '💐',
-        flag: '🏁',
-        toolbox: '🧰',
-        camera: '📷',
-        graph: '📈',
-    }
-
-    const checkUserHasReacted = (reaction: EmojiReaction): boolean => {
-        const profiles = reaction?.profiles ? reaction.profiles : []
-        return profiles.some((profile) => profile.id === user?.profile?.id) ?? false
-    }
-
-    const performEmojiReaction = async (emojiKey: string, authenticatedUser?: User) => {
-        const currentUser = authenticatedUser || user
-        if (!currentUser) return
-
-        try {
-            const existingReaction = reactions.find((r) => r.emoji === emojiKey)
-            const userHasReacted = existingReaction
-                ? existingReaction.profiles?.some((profile) => profile.id === currentUser?.profile?.id) ?? false
-                : false
-
-            const jwt = await getJwt()
-
-            if (!jwt) {
-                console.error('No JWT token available')
-                return
-            }
-
-            await addRoadmapEmojiReaction({
-                roadmapId: typeof roadmapId === 'string' ? parseInt(roadmapId) : roadmapId,
-                emoji: emojiKey,
-                remove: userHasReacted,
-                jwt,
-            })
-
-            setIsEmojiPickerOpen(false)
-
-            // Refetch reactions after update
-            const updatedReactions = await fetchRoadmapReactions(roadmapId)
-            setReactions(updatedReactions)
-        } catch (error) {
-            console.error('Failed to update emoji reaction:', error)
-        }
-    }
-
-    const handleEmojiSelect = async (emojiKey: keyof typeof emojiMap) => {
-        if (!user) {
-            openSignIn()
-            setIsEmojiPickerOpen(false)
-            return
-        }
-
-        await performEmojiReaction(emojiKey)
-    }
-
-    return (
-        <>
-            {reactions.map((reaction, index) => {
-                const userHasReacted = checkUserHasReacted(reaction)
-                return (
-                    <button
-                        key={index}
-                        onClick={() => handleEmojiSelect(reaction.emoji as keyof typeof emojiMap)}
-                        className={`rounded-lg px-2 flex flex-row items-center gap-x-1 hover:cursor-pointer border ${
-                            userHasReacted
-                                ? 'border-orange bg-orange/20 dark:bg-orange-dark/20 dark:border-orange-dark'
-                                : 'bg-accent/30 hover:bg-accent/50 border-transparent hover:border-primary'
-                        }`}
-                    >
-                        <span className="text-lg">{emojiMap[reaction.emoji]}</span>
-                        <span
-                            className={`text-xs ${
-                                userHasReacted ? 'font-semibold text-orange-dark dark:text-white' : ''
-                            }`}
-                        >
-                            {(reaction.profiles?.length ?? 0).toLocaleString()}
-                        </span>
-                    </button>
-                )
-            })}
-            <Popover
-                trigger={
-                    <button className="bg-accent/30 rounded-lg px-3 py-1 flex flex-row items-center gap-x-1 hover:cursor-pointer hover:bg-accent/50 border border-transparent hover:border-primary mr-2">
-                        <IconEmojiAdd className="w-4 h-4" />
-                    </button>
-                }
-                contentClassName="border border-primary px-1 py-1"
-                dataScheme="secondary"
-                open={isEmojiPickerOpen}
-                onOpenChange={setIsEmojiPickerOpen}
-                side="top"
-            >
-                <div className="grid grid-cols-7 gap-1 px-2 max-h-[160px] overflow-y-auto scrollbar-hide">
-                    {(Object.keys(emojiMap) as Array<keyof typeof emojiMap>).map((emojiKey, index) => (
-                        <button
-                            key={index}
-                            onClick={() => handleEmojiSelect(emojiKey)}
-                            className="text-xl hover:bg-accent/50 rounded transition-colors py-1 px-1.5"
-                            title={emojiKey}
-                        >
-                            {emojiMap[emojiKey]}
-                        </button>
-                    ))}
-                </div>
-            </Popover>
-        </>
-    )
-}
-
-const GitHubPRInfo = ({ roadmap }: { roadmap: RoadmapNode }) => {
-    const gitHubData = roadmap.githubPRMetadata
-    const scrollContainerRef = React.useRef<HTMLDivElement>(null)
-
-    const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-        if (scrollContainerRef.current) {
-            const container = scrollContainerRef.current
-            const canScrollLeft = container.scrollLeft > 0
-            const canScrollRight = container.scrollLeft < container.scrollWidth - container.clientWidth
-
-            if ((e.deltaY > 0 && canScrollRight) || (e.deltaY < 0 && canScrollLeft)) {
-                e.preventDefault()
-                container.scrollLeft += e.deltaY
-            }
-        }
-    }
-
-    const handleMouseLeave = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollTo({ left: 0, behavior: 'smooth' })
-        }
-    }
-
-    return (
-        <>
-            <div className="flex flex-row items-center">
-                <IconGitBranch className="w-4 h-4 opacity-50 mr-1" />
-                <a href={gitHubData.html_url} target="_blank" rel="noopener noreferrer" className="opacity-50">
-                    #{gitHubData.number}
-                </a>
-            </div>
-            <div className="flex flex-row items-center overflow-hidden">
-                <IconPeople className="w-4 h-4 opacity-50 shrink-0 mr-1" />
-                <div
-                    ref={scrollContainerRef}
-                    onWheel={handleWheel}
-                    onMouseLeave={handleMouseLeave}
-                    className="flex flex-row items-center group overflow-x-auto scrollbar-hide"
-                >
-                    {[gitHubData.user, ...(gitHubData.reviewers || []), ...(gitHubData.commenters || [])]
-                        .filter(Boolean)
-                        .map((commenter, index, array) => (
-                            <Tooltip
-                                key={`avatar-${commenter.login}`}
-                                trigger={
-                                    <div
-                                        className={`relative transition-all duration-200 flex-none ${
-                                            index > 0 ? '-ml-2 group-hover:ml-0.5' : ''
-                                        }`}
-                                        style={{ zIndex: array.length - index }}
-                                    >
-                                        <img
-                                            src={commenter.avatar_url}
-                                            alt={`${commenter.login} avatar`}
-                                            loading="lazy"
-                                            decoding="async"
-                                            referrerPolicy="no-referrer"
-                                            className="w-5 h-5 min-w-5 min-h-5 rounded-full border-primary border flex-none"
-                                        />
-                                    </div>
-                                }
-                                side="top"
-                            >
-                                <a
-                                    href={commenter.html_url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="opacity-50 font-semibold underline"
-                                >
-                                    {commenter.login}
-                                </a>
-                            </Tooltip>
-                        ))}
-                </div>
-            </div>
-            <div className="flex flex-row items-center">
-                <IconCode className="w-4 h-4 opacity-50 shrink-0 mr-1" />
-                <div className="flex flex-row gap-x-1">
-                    <span className="text-green font-semibold">+{(gitHubData.additions ?? 0).toLocaleString()}</span>{' '}
-                    <span className="text-red font-semibold">-{(gitHubData.deletions ?? 0).toLocaleString()}</span>
-                </div>
-            </div>
-            <div className="flex flex-row items-center">
-                <IconCommit className="w-4 h-4 opacity-50 mr-1" />
-                <a
-                    href={gitHubData.html_url + '/commits'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="opacity-50"
-                >
-                    {gitHubData.commits}
-                </a>
-            </div>
-            <div className="flex flex-row items-center">
-                <IconDocument className="w-4 h-4 opacity-50 mr-1" />
-                <a
-                    href={gitHubData.html_url + '/files'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="opacity-50"
-                >
-                    {gitHubData.changed_files}
-                </a>
-            </div>
-            <div className="flex flex-row items-center">
-                <IconComment className="w-4 h-4 opacity-50 mr-1" />
-                <a href={gitHubData.html_url} target="_blank" rel="noopener noreferrer" className="opacity-50">
-                    {(gitHubData.comments ?? 0) + (gitHubData.review_comments ?? 0)}
-                </a>
-            </div>
-        </>
-    )
-}
-
 const Roadmap = ({
     roadmap,
     onClose,
@@ -598,7 +305,7 @@ const Roadmap = ({
                             <div className="py-2 px-4">
                                 <Markdown>{roadmap.description}</Markdown>
                                 <div className="mt-8 mb-4 flex flex-row flex-wrap gap-1">
-                                    <EmojiReactions roadmapId={roadmap.id} />
+                                    <ChangelogEmojiReactions roadmapId={roadmap.id} />
                                 </div>
                             </div>
                         )}
@@ -607,7 +314,7 @@ const Roadmap = ({
 
                 {roadmap.githubPRMetadata && (
                     <div className="px-4 pb-4 pt-4.5 grid grid-cols-3 gap-x-3 gap-y-2 text-sm bg-primary border-t border-primary">
-                        <GitHubPRInfo roadmap={roadmap} />
+                        <ChangelogPRMetadata githubPRMetadata={roadmap.githubPRMetadata} />
                     </div>
                 )}
 
@@ -881,39 +588,6 @@ const RoadmapCards = ({
         const timer = setTimeout(handleInitialScroll, 100)
         return () => clearTimeout(timer)
     }, [periods, width])
-
-    // Map vertical scroll to horizontal scroll
-    useEffect(() => {
-        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
-        if (!viewport) return
-
-        const handleWheel = (e: WheelEvent) => {
-            const targetViewport =
-                e.target instanceof Element
-                    ? (e.target.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null)
-                    : null
-            const targetViewportChild = targetViewport?.querySelector('div') as HTMLElement | null
-
-            if (
-                targetViewport &&
-                targetViewportChild &&
-                targetViewport !== viewport &&
-                targetViewportChild.getBoundingClientRect().height > targetViewport.getBoundingClientRect().height
-            )
-                return
-
-            // Only handle vertical scrolling (deltaY)
-            if (e.deltaY !== 0) {
-                e.preventDefault()
-                viewport.scrollLeft += e.deltaY
-            }
-        }
-
-        viewport.addEventListener('wheel', handleWheel, { passive: false })
-        return () => {
-            viewport.removeEventListener('wheel', handleWheel)
-        }
-    }, [])
 
     const handlePlayVideo = (video: ChangelogVideo) => {
         const size = {
@@ -1348,7 +1022,7 @@ export default function Changelog({
                         <div className={`min-h-0 flex-grow pt-2 ${hideEmpty ? 'mb-4' : ''}`}>
                             <RoadmapCards
                                 startYear={2020}
-                                endYear={2025}
+                                endYear={2026}
                                 roadmaps={filteredData}
                                 setPercentageOfScrollInView={setPercentageOfScrollInView}
                                 windowPercentageFromLeft={windowPercentageFromLeft}
@@ -1371,7 +1045,7 @@ export default function Changelog({
                                 >
                                     <Timeline
                                         startYear={2020}
-                                        endYear={2025}
+                                        endYear={2026}
                                         data={roadmapsGrouped}
                                         onDrag={handleDrag}
                                         windowX={windowX}

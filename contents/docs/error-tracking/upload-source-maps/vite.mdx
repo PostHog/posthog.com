@@ -1,0 +1,77 @@
+---
+title: Upload source maps for Vite
+showStepsToc: true
+---
+
+<Steps>
+
+<Step title="Install the PostHog Rollup plugin" badge="required">
+
+  Vite uses Rollup under the hood, so you can use the PostHog Rollup plugin to upload source maps:
+
+  ```shell
+  npm install @posthog/rollup-plugin
+  ```
+
+</Step>
+
+<Step title="Add PostHog plugin to your Vite config" badge="required">
+
+  Add the PostHog plugin to your `vite.config.js` file:
+
+  ```js file=vite.config.js
+  import { defineConfig } from 'vite'
+  import posthog from '@posthog/rollup-plugin'
+
+  export default defineConfig({
+    plugins: [
+      posthog({
+        personalApiKey: process.env.POSTHOG_API_KEY, // Personal API Key
+        envId: process.env.POSTHOG_ENV_ID, // Environment ID
+        host: process.env.POSTHOG_HOST, // (optional) defaults to https://us.i.posthog.com
+        sourcemaps: { // (optional)
+          enabled: true, // (optional) Enable sourcemaps generation and upload, defaults to true
+          project: 'my-application', // (optional) Project name
+          version: '1.0.0', // (optional) Release version
+          deleteAfterUpload: true, // (optional) Delete sourcemaps after upload, defaults to true
+        },
+      }),
+    ],
+  })
+  ```
+
+  Set the following environment variables:
+
+  <div className="overflow-x-hidden">
+
+  | Environment variable | Description |
+  | --- | --- |
+  | `POSTHOG_API_KEY` | [Personal API key](https://app.posthog.com/settings/user-api-keys#variables) with at least `write` access on `error tracking` |
+  | `POSTHOG_ENV_ID` | Project ID you can find in your [project settings](https://app.posthog.com/settings/environment#variables) |
+  | `POSTHOG_HOST` | (optional) Your PostHog instance URL. Defaults to `https://us.i.posthog.com` |
+
+  </div>
+
+<CalloutBox icon="IconInfo" title="Using CI/CD?" type="action">
+
+Add these environment variables to your CI/CD service's project settings to automatically upload source maps during production builds.
+
+</CalloutBox>
+
+</Step>
+
+<Step checkpoint title="Verify source map upload and injection">
+
+Confirm source maps were successfully uploaded:
+
+1. Go to your [symbol sets in PostHog](https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets) and verify your latest upload appears.
+
+2. Check your production JavaScript files in browser dev tools. They should include a source map reference comment:
+
+```js
+//# chunkId=0197e6db-9a73-7b91-9e80-4e1b7158db5c
+```
+
+</Step>
+
+</Steps>
