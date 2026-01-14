@@ -8,7 +8,8 @@ if [ -n "$FLOX_ENV" ]; then
     exit 1
 fi
 
-export NODE_OPTIONS='--max_old_space_size=8192' # At least 8GB of RAM is required for the build to succeed
+export NODE_OPTIONS='--max_old_space_size=16384' # At least 16GB of RAM is required for the build to succeed
+# nosemgrep: trailofbits.generic.node-disable-certificate-validation.node-disable-certificate-validation - local dev script only, needed for local HTTPS proxies
 export NODE_TLS_REJECT_UNAUTHORIZED=0
 export TAILWIND_MODE=watch
 

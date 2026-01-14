@@ -30,6 +30,7 @@ PostHog batch exports support all major data warehouses:
 - [Databricks](/docs/cdp/batch-exports/databricks)
 - [Postgres](/docs/cdp/batch-exports/postgres)
 - [S3](/docs/cdp/batch-exports/s3) (for custom destinations)
+- [Azure Blob Storage](/docs/cdp/batch-exports/azureblob)
 
 ## Real-time alternatives
 
