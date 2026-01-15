@@ -97,8 +97,8 @@ Once you've passed the verification hash from your server to the frontend, use i
 
 ```js
 // These values come from your server (e.g., embedded in the page or fetched via API)
-const distinctId = window.__USER_ID__
-const verificationHash = window.__VERIFICATION_HASH__
+const distinctId = window.__POSTHOG_DISTINCT_ID__
+const verificationHash = window.__POSTHOG_VERIFICATION_HASH__
 
 posthog.identify(distinctId, {
     $verification_hash: verificationHash
