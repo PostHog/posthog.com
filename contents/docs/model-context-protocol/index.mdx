@@ -80,6 +80,21 @@ If your MCP client doesn't support OAuth, you can authenticate manually:
 1. Create a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) using the **MCP Server** preset (this scopes access to a specific project)
 2. Add the `Authorization: Bearer YOUR_API_KEY` header to your MCP configuration
 
+Example for Cursor (add to `.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "posthog": {
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer phx_your_api_key_here"
+      }
+    }
+  }
+}
+```
+
 </details>
 
 
