@@ -6,6 +6,7 @@ templateId:
 
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 Validates events using a shared secret to verify `distinct_id` authenticity. Events can be marked as verified or dropped if validation fails.
 
@@ -84,6 +85,25 @@ This transformation supports a secondary shared secret for key rotation. When ro
 4. Once all clients are updated, remove the secondary secret
 
 Events signed with either secret will be accepted during the rotation period.
+
+## Enforcing secure mode
+
+By default, this transformation marks events as verified or unverified but still ingests all events. This allows you to monitor verification status without risking data loss.
+
+When you're ready to block unverified events, you can enable **Enforce secure mode** in the configuration.
+
+<CalloutBox icon="IconWarning" title="Before enabling enforce mode" type="warning">
+
+Only enable enforce mode after you have confirmed that all events you care about have `$verified_distinct_id: true`. Once enabled, **any event without a valid `$verification_hash` will be permanently dropped**.
+
+Before enabling:
+
+1. Deploy the verification hash generation to all your applications
+2. Run with enforce mode disabled and monitor the `$verified_distinct_id` property on incoming events
+3. Use PostHog insights to check what percentage of events are being marked as verified
+4. Only enable enforce mode once you're confident all legitimate events include valid hashes
+
+</CalloutBox>
 
 <HideOnCDPIndex>
 
