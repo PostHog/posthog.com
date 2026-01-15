@@ -56,7 +56,7 @@ We kept exercising and eating healthily, but we had to make up for lost time to 
 
 We decided there would be two major goals. The first would be a Hacker News launch. The second would be landing a large paid pilot. 
 
-Our partners encouraged us to speak to the best people in the world at running open source companies – we reached out, and every single one of them said yes! In general, we’ve found that people are really helpful when you’re seeking advice and not trying to sell them something.
+Our partners encouraged us to speak to the best people in the world at running open source companies – we reached out, and every single one of them said yes! In general, we’ve found that people are really helpful when [you’re seeking advice](/newsletter/how-i-get-good-advice) and not trying to sell them something.
 
 We emailed or met the founders of GitLab, Mattermost, and Docker, on top of the meeting with the folks from Sentry we’d already had. They helped us understand how open source business models work. They also made us realize that we needed to work on the community before anything else – that with a lot of usage, and a vibrant community, what follows is inbound interest.
 

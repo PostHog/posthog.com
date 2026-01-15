@@ -33,7 +33,7 @@ Why? I'm still learning and decoding how it all works, but it seems as if everyt
 
 ## Honesty from leadership
 
-It’s an all-remote workplace, with an aggressive focus on writing things down. But that’s basic, everyone knows that advice.
+It’s an all-remote workplace, with an aggressive focus on writing things down. But that’s basic, everyone knows that [advice](/newsletter/how-i-get-good-advice).
 
 What feels distinct is that PostHog’s small executive team doesn’t exempt itself from this approach.
 
