@@ -14,7 +14,7 @@ pod "PostHog", "~> 3.0"
 
 Add PostHog as a dependency in your Xcode project "Package Dependencies" and select the project target for your app, as appropriate.
 
-For a Swift Package Manager based project, add PostHog as a dependency in your "Package.swift" file's Package dependencies section:
+For a Swift Package Manager based project, add PostHog as a dependency in your `Package.swift` file's Package dependencies section:
 
 ```swift file=Package.swift
 dependencies: [
@@ -31,6 +31,10 @@ and then as a dependency for the Package target utilizing PostHog:
 ```
 
 ### Configuration
+
+Configuration is done through the `PostHogConfig` object. Here's a basic configuration example to get you started. 
+
+You can find more advanced configuration options in the [configuration page](/docs/libraries/ios/configuration).
 
 <Tab.Group tabs={['App Delegate/UIKit', 'SwiftUI Lifecycle']}>
      <Tab.List>

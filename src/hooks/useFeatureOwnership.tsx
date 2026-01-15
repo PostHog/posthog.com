@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import TeamMember from '../components/TeamMember'
 import { PrivateLink } from '../components/PrivateLink'
+import SmallTeam from 'components/SmallTeam'
 
 export interface Feature {
     slug: string
@@ -114,6 +115,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Dashboards',
         owner: ['product-analytics', 'analytics-platform'],
     },
+    'dashboard-templates': {
+        feature: 'Dashboard templates',
+        owner: ['analytics-platform'],
+    },
     'data-colors-themes': {
         feature: 'Data colors & themes',
         owner: ['analytics-platform'],
@@ -145,6 +150,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['feature-flags'],
         label: 'feature/feature-flags',
     },
+    endpoints: {
+        feature: 'Endpoints',
+        owner: ['data-stack'],
+    },
     'error-tracking': {
         feature: 'Error tracking',
         owner: ['error-tracking'],
@@ -158,13 +167,17 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Feature flags',
         owner: ['feature-flags'],
     },
+    feed: {
+        feature: 'Feed',
+        owner: ['growth'],
+    },
     'group-analytics': {
         feature: 'Group analytics',
         owner: ['customer-analytics'],
     },
     heatmaps: {
         feature: 'Heatmaps',
-        owner: ['replay'],
+        owner: ['web-analytics'],
     },
     hogql: {
         feature: 'HogQL',
@@ -203,22 +216,24 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['posthog-ai'],
         label: 'feature/mcp',
     },
-    messaging: {
-        feature: 'Messaging',
-        owner: ['workflows'],
-    },
     notebooks: {
         feature: 'Notebooks',
-        owner: [],
         notes: (
             <>
-                <TeamMember name="David Newell" photo />
+                Owns the notebooks feature and triages other tickets out to the right owner (e.g. insights in notebooks
+                is owned by product analytics)
             </>
         ),
+        owner: ['platform-features'],
+        label: 'feature/notebooks',
     },
     onboarding: {
         feature: 'Onboarding',
         owner: ['growth'],
+    },
+    'organization-management-deletion': {
+        feature: 'Organization Management & Deletion',
+        owner: ['platform-features'],
     },
     'path-cleaning': {
         feature: 'Path cleaning',
@@ -315,7 +330,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                     #support-client-libraries
                 </PrivateLink>
                 . There is an engineer assigned to SDK support on a rotating schedule. Check the{' '}
-                <PrivateLink url="https://posthog.pagerduty.com/schedules#P7B7NTR">Pager Duty schedule</PrivateLink>.
+                <PrivateLink url="https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MD6JK1TEGAK97450S">
+                    incident.io schedule
+                </PrivateLink>
+                .
                 <br />
                 <br />
                 <strong>For Mobile SDK issues, defer to the Mobile team first.</strong>
@@ -335,11 +353,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
             <>
                 Shared responsibility with the relevant small team for feature-owned areas.
                 <br />
-                <br /> Start with the{' '}
-                <a href="https://github.com/orgs/PostHog/teams/team-mobile" target="_blank" rel="noopener noreferrer">
-                    Mobile team
-                </a>{' '}
-                for triage, loop in
+                <br /> Start with the <SmallTeam slug="mobile" /> for triage, loop in
                 <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink> as
                 needed.
             </>
@@ -370,6 +384,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Session analytics',
         owner: ['web-analytics'],
         label: 'feature/sessions',
+    },
+    'session-explorer': {
+        feature: 'Session explorer',
+        owner: ['web-analytics'],
+        label: 'feature/session-explorer',
     },
     settings: {
         feature: 'Settings structure (personal & project)',
@@ -407,6 +426,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Table exports',
         owner: ['analytics-platform'],
     },
+    terraform: {
+        feature: 'Terraform integration',
+        owner: ['analytics-platform'],
+        label: 'feature/terraform',
+    },
     'taxonomic-filters': {
         feature: 'Taxonomic filters',
         owner: ['platform-ux'],
@@ -432,6 +456,19 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Webhook delivery service',
         owner: ['workflows'],
         label: 'feature/pipelines',
+    },
+    'weekly-digest': {
+        feature: 'Weekly digest',
+        owner: ['growth'],
+    },
+    workflows: {
+        feature: 'Workflows',
+        owner: ['workflows'],
+        label: 'feature/workflows',
+    },
+    wizard: {
+        feature: 'Wizard',
+        owner: ['docs-wizard'],
     },
 }
 

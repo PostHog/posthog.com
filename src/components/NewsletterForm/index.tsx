@@ -42,7 +42,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
     }, [user])
 
     return (
-        <>
+        <div className="@container">
             <div
                 className={`
                 flex flex-col @md:flex-row @md:justify-center items-center gap-4 @md:gap-8 border-primary ${placementClasses} ${className}`}
@@ -54,7 +54,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                         className="w-full h-full max-w-[200px] @lg:max-w-[250px] mx-auto flex-shrink-0"
                     />
                 </div>
-                <div className="w-full max-w-md">
+                <div className="w-full max-w-md @container">
                     {!submitted ? (
                         <>
                             <p className="!text-sm opacity-50 !m-0">Subscribe to our newsletter</p>
@@ -65,7 +65,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                             <div className="">
                                 <form
                                     onSubmit={handleSubmit}
-                                    className="flex flex-col @sm:flex-row items-center justify-center @sm:justify-start @sm:items-start gap-2 my-4 @lg:my-2"
+                                    className="flex flex-col @md:flex-row items-center justify-center @md:justify-start @md:items-start gap-2 my-4 @lg:my-2"
                                 >
                                     <input
                                         required
@@ -75,11 +75,11 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                                         className="dark:bg-accent-dark border border-primary rounded text-[15px] w-full flex-1"
                                         value={email}
                                     />
-                                    <button className={`${container(undefined, 'md')} -mt-px w-full lg:w-auto`}>
+                                    <button className={`${container(undefined, 'md')} -mt-px w-full @md:w-auto`}>
                                         <span className={child(undefined, undefined, undefined, 'md')}>Subscribe</span>
                                     </button>
                                 </form>
-                                <p className="!text-sm opacity-50 text-center @sm:text-left !mb-0">
+                                <p className="!text-sm opacity-50 text-left @lg:text-left !mb-0">
                                     We'll share your email with{' '}
                                     <span className="whitespace-nowrap">
                                         Substack
@@ -110,6 +110,6 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                     )}
                 </div>
             </div>
-        </>
+        </div>
     )
 }

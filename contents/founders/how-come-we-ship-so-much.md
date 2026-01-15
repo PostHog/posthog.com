@@ -61,7 +61,7 @@ The responsibilities of a product manager still exist, but our engineers:
 -   Decide what to build within their product (and sometimes pitch whole new products).
 -   Have complete access to metrics like revenue, hosting costs, and (soon) staff costs, for their product.
 
-The concept internally is a "[product engineer](/blog/what-is-a-product-engineer)" – i.e. an engineer who is product-minded and autonomous, rather than mindlessly filing tickets.
+The concept internally is a "[product engineer](/blog/what-is-a-product-engineer)" – i.e. an [engineer who is product-minded and autonomous](/blog/product-engineer-vs-software-engineer), rather than mindlessly filing tickets.
 
 We have one product manager who steps in reactively if a small team needs more support.
 
@@ -103,7 +103,7 @@ At the time of writing, [we are 37 people](/people), only 11 of whom are in Go T
 
 ![company composition](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/hubs/how-we-designed-our-company-for-speed/posthog-team.png)
 
-We don't do outbound sales, our [marketing team](/teams/marketing) is very small, we only have one product manager, and our [Blitzscale Team](/teams/blitzscale) is only 3 people. These things are all by design.
+We don't do outbound sales, our <SmallTeam slug="marketing" /> is very small, we only have one product manager, and our <SmallTeam slug="blitzscale" /> is only 3 people. These things are all by design.
 
 We're product-led because our ideal users, engineers, want to try something rather than sit on a call.
 

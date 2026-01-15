@@ -1,0 +1,105 @@
+---
+title: Node.js logs installation
+platformLogo: nodejs
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsBetaSnippet from '../_snippets/beta.mdx'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+<LogsBetaSnippet />
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required">
+
+```bash
+npm install @opentelemetry/sdk-node @opentelemetry/exporter-logs-otlp-http @opentelemetry/api-logs @opentelemetry/resources
+```
+
+</Step>
+
+<Step title="Get your project API key" badge="required">
+
+You'll need your PostHog project API key to authenticate log requests. This is the same API key you use for capturing events and exceptions.
+
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project).
+
+</Step>
+
+<Step title="Configure the SDK" badge="required">
+
+Set up the OpenTelemetry SDK to send logs to PostHog.
+
+```javascript
+import { NodeSDK } from '@opentelemetry/sdk-node';
+import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-http';
+import { BatchLogRecordProcessor } from '@opentelemetry/sdk-logs';
+import { resourceFromAttributes } from '@opentelemetry/resources';
+
+const sdk = new NodeSDK({
+  resource: resourceFromAttributes({
+    'service.name': 'my-node-service',
+  }),
+  logRecordProcessor: new BatchLogRecordProcessor(
+    new OTLPLogExporter({
+      url: 'https://us.i.posthog.com/i/v1/logs',
+      headers: {
+        'Authorization': `Bearer ${YOUR_PROJECT_API_KEY}`
+      }
+    })
+  )
+});
+
+sdk.start();
+```
+
+Alternatively, you can pass the API key as a query parameter:
+
+```javascript
+const sdk = new NodeSDK({
+  logRecordProcessor: new BatchLogRecordProcessor(
+    new OTLPLogExporter({
+      url: `https://us.i.posthog.com/i/v1/logs?token=${YOUR_PROJECT_API_KEY}`
+    })
+  )
+});
+```
+
+</Step>
+
+<Step title="Use OpenTelemetry logging" badge="required">
+
+Now you can start logging with OpenTelemetry:
+
+```javascript
+import { logs } from '@opentelemetry/api-logs';
+
+const logger = logs.getLogger('my-app');
+
+// Log with different levels and attributes
+logger.emit({ severityText: 'trace', body: 'log data', attributes: {'my_attribute': 'stringValue'} });
+logger.emit({ severityText: 'warn', body: 'log data', attributes: {'warning_count': 3} });
+logger.emit({ severityText: 'error', body: 'log data', attributes: {'json_attribute': [1,2,3]} });
+```
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, test that logs are flowing into PostHog:
+
+1. Send a test log from your application
+2. Check the PostHog logs interface for your log entries
+3. Verify the logs appear in your project
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown, { Components } from 'react-markdown'
 import rehypeSanitize from 'rehype-sanitize'
 import { ZoomImage } from 'components/ZoomImage'
 import { TransformImage } from 'react-markdown/lib/ast-to-react'
@@ -23,21 +23,25 @@ export const Markdown = ({
     allowedElements,
     regularText,
     className,
+    components,
 }: {
     children: string
     transformImageUri?: TransformImage | undefined
     allowedElements?: string[]
     regularText?: 'false'
     className?: string
+    components?: Partial<Components>
 }) => {
     return (
+        // transformImageUri is safe, rehypeSanitize sanitizes all HTML output
+        // nosemgrep: typescript.react.security.react-markdown-insecure-html.react-markdown-insecure-html
         <ReactMarkdown
             allowedElements={allowedElements}
             remarkPlugins={[remarkGfm]}
             transformImageUri={transformImageUri}
             rehypePlugins={[rehypeSanitize]}
             className={cn(
-                'markdown prose dark:prose-invert prose-sm max-w-full text-primary [&_a]:font-semibold',
+                'markdown prose dark:prose-invert prose-sm max-w-full text-primary [&_a]:font-semibold break-words [overflow-wrap:anywhere]',
                 !regularText,
                 className
             )}
@@ -72,6 +76,7 @@ export const Markdown = ({
                     return <Link rel="nofollow noopener noreferrer" {...props} state={{ newWindow: true }} />
                 },
                 img: ZoomImage,
+                ...components,
             }}
         >
             {replaceMentions(children)}

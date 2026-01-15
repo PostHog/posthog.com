@@ -26,19 +26,19 @@ jobs:
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
 
             - name: Setup Node.js
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v6
               with:
                   node-version: '22'
-                  cache: 'yarn'
+                  cache: 'pnpm'
 
             - name: Install dependencies
-              run: yarn install --frozen-lockfile
+              run: pnpm install --frozen-lockfile
 
             - name: Build site
-              run: yarn build
+              run: pnpm build
 
             - name: Check links (console only)
               if: ${{ github.event_name == 'workflow_dispatch' && inputs.save_results == false }}
@@ -70,15 +70,25 @@ jobs:
 
             - name: Send Slack notification
               if: always()
+              env:
+                  INPUT_SEND_SLACK: ${{ inputs.send_slack_notification }}
+                  INPUT_SAVE_RESULTS: ${{ inputs.save_results }}
+                  GH_REPOSITORY: ${{ github.repository }}
+                  GH_RUN_ID: ${{ github.run_id }}
+                  GH_JOB_STATUS: ${{ job.status }}
+                  GH_EVENT_NAME: ${{ github.event_name }}
+                  GH_ACTOR: ${{ github.actor }}
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_LINKS_CHECK_WEBHOOK }}
+                  ARTIFACT_ID: ${{ steps.upload-results.outputs.artifact-id }}
               run: |
                   # Default to true for scheduled runs, use input value for manual runs
-                  SEND_SLACK="${{ inputs.send_slack_notification }}"
+                  SEND_SLACK="$INPUT_SEND_SLACK"
                   if [ "$SEND_SLACK" = "" ]; then SEND_SLACK="true"; fi
 
-                  if [ "$SEND_SLACK" = "true" ] && [ -n "${{ secrets.SLACK_LINKS_CHECK_WEBHOOK }}" ]; then
-                    WORKFLOW_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-                    
-                    if [ "${{ job.status }}" = "success" ]; then
+                  if [ "$SEND_SLACK" = "true" ] && [ -n "$SLACK_WEBHOOK" ]; then
+                    WORKFLOW_URL="https://github.com/$GH_REPOSITORY/actions/runs/$GH_RUN_ID"
+
+                    if [ "$GH_JOB_STATUS" = "success" ]; then
                       COLOR="good"
                       EMOJI=":white_check_mark:"
                       STATUS="completed successfully"
@@ -87,16 +97,16 @@ jobs:
                       EMOJI=":x:"
                       STATUS="failed"
                     fi
-                    
+
                     # Set triggered_by based on event type
-                    if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-                      TRIGGERED_BY="manually run by ${{ github.actor }}"
-                    elif [ "${{ github.event_name }}" = "schedule" ]; then
+                    if [ "$GH_EVENT_NAME" = "workflow_dispatch" ]; then
+                      TRIGGERED_BY="manually run by $GH_ACTOR"
+                    elif [ "$GH_EVENT_NAME" = "schedule" ]; then
                       TRIGGERED_BY="Triggered via schedule"
                     else
-                      TRIGGERED_BY="${{ github.actor }}"
+                      TRIGGERED_BY="$GH_ACTOR"
                     fi
-                    
+
                     # Extract statistics from the environment variable (suppress extra output)
                     if [ -n "$LINK_CHECK_OUTPUT" ]; then
                       MARKDOWN_FILES=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Scanned [0-9]* markdown files" | grep -o "[0-9]*" | head -1 || echo "0")
@@ -113,28 +123,27 @@ jobs:
                       BROKEN_LINKS="0"
                       BROKEN_ANCHORS="0"
                     fi
-                    
+
                     # Prepare variables for Slack payload
                     # Default to true for scheduled runs, use input value for manual runs
-                    SAVE_RESULTS="${{ inputs.save_results }}"
+                    SAVE_RESULTS="$INPUT_SAVE_RESULTS"
                     if [ "$SAVE_RESULTS" = "" ]; then SAVE_RESULTS="true"; fi
-                    
+
                     RESULTS_DOWNLOAD=""
                     if [ "$SAVE_RESULTS" = "true" ]; then
-                      ARTIFACT_ID="${{ steps.upload-results.outputs.artifact-id }}"
                       if [ -n "$ARTIFACT_ID" ]; then
-                        RESULTS_DOWNLOAD="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/$ARTIFACT_ID"
+                        RESULTS_DOWNLOAD="https://github.com/$GH_REPOSITORY/actions/runs/$GH_RUN_ID/artifacts/$ARTIFACT_ID"
                       else
                         RESULTS_DOWNLOAD="$WORKFLOW_URL"
                       fi
                     fi
-                    
-                    curl -s -X POST "${{ secrets.SLACK_LINKS_CHECK_WEBHOOK }}" \
+
+                    curl -s -X POST "$SLACK_WEBHOOK" \
                       -H "Content-Type: application/json" \
                       -d "{
                         \"status\": \"$STATUS\",
                         \"emoji\": \"$EMOJI\",
-                        \"repository\": \"${{ github.repository }}\",
+                        \"repository\": \"$GH_REPOSITORY\",
                         \"triggered_by\": \"$TRIGGERED_BY\",
                         \"workflow_url\": \"$WORKFLOW_URL\",
                         \"markdown_files\": \"$MARKDOWN_FILES\",
@@ -146,7 +155,7 @@ jobs:
                         \"results_download\": \"$RESULTS_DOWNLOAD\",
                         \"save_results\": \"$SAVE_RESULTS\"
                       }" > /dev/null 2>&1
-                    
+
                     echo "✅ Slack notification sent successfully"
                   else
                     if [ "$SEND_SLACK" = "false" ]; then
@@ -158,9 +167,11 @@ jobs:
 
             - name: Report results
               if: always()
+              env:
+                  INPUT_SAVE_RESULTS: ${{ inputs.save_results }}
               run: |
                   # Default to true for scheduled runs, use input value for manual runs
-                  SAVE_RESULTS="${{ inputs.save_results }}"
+                  SAVE_RESULTS="$INPUT_SAVE_RESULTS"
                   if [ "$SAVE_RESULTS" = "" ]; then SAVE_RESULTS="true"; fi
 
                   echo "Link check completed!"

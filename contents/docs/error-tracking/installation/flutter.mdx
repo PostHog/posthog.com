@@ -1,0 +1,151 @@
+---
+title: Flutter error tracking installation
+showStepsToc: true
+platformLogo: flutter
+tableOfContents: [
+  {
+    url: 'install-posthog-flutter-sdk',
+    value: 'Install PostHog Flutter SDK',
+    depth: 1,
+  },
+  {
+    url: 'set-up-exception-autocapture',
+    value: 'Set up exception autocapture',
+    depth: 1,
+  },
+  {
+    url: 'manually-capture-exceptions',
+    value: 'Manually capture exceptions',
+    depth: 1,
+  },
+  {
+    url: 'verify-error-tracking',
+    value: 'Verify error tracking',
+    depth: 1,
+  }
+]
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+import InstallFlutter from "../../integrate/_snippets/install-flutter-manual.mdx"
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+
+<CalloutBox icon="IconInfo" title="Planned features" type="fyi">
+
+We currently don't support the following features:
+
+- No de-obfuscating stacktraces from obfuscated builds ([--obfuscate](https://docs.flutter.dev/deployment/obfuscate) and [--split-debug-info](https://docs.flutter.dev/deployment/obfuscate)) for Dart code
+- No de-obfuscating stacktraces when [isMinifyEnabled](https://developer.android.com/topic/performance/app-optimization/enable-app-optimization) is enabled for Java/Kotlin code
+- No [Source code context](/docs/error-tracking/stack-traces) associated with an exception
+- No native iOS exception capture
+- No native C/C++ exception capture on Android (Java/Kotlin only)
+- No background isolate error capture
+- No Flutter web support
+
+These features will be added in future releases.
+
+</CalloutBox>
+
+<Steps>
+
+<Step title="Install PostHog Flutter SDK" badge="required">
+
+<CalloutBox icon="IconInfo" title="SDK version requirement" type="action">
+
+A minimum SDK version of [5.9.0](https://github.com/PostHog/posthog-flutter/releases/tag/5.9.0) is required, but we recommend [keeping up with the latest SDK version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
+
+</CalloutBox>
+
+<InstallFlutter />
+
+</Step>
+
+<Step title="Set up exception autocapture" badge="recommended">
+
+<CalloutBox icon="IconInfo" title="Client-side configuration only" type="fyi">
+
+This configuration is client-side only. Support for remote configuration in the [error tracking settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture) will be added in a future release.
+
+</CalloutBox>
+
+You can autocapture exceptions by configuring the `errorTrackingConfig` when setting up PostHog:
+
+```dart
+final config = PostHogConfig('<ph_project_api_key>');
+
+// Enable exception autocapture
+config.errorTrackingConfig.captureFlutterErrors = true;
+config.errorTrackingConfig.capturePlatformDispatcherErrors = true;
+config.errorTrackingConfig.captureIsolateErrors = true;
+config.errorTrackingConfig.captureNativeExceptions = true; // Android only
+config.errorTrackingConfig.captureSilentFlutterErrors = false;
+
+await Posthog().setup(config);
+```
+
+**Configuration options:**
+
+- **`captureFlutterErrors`**: Captures Flutter framework errors (FlutterError.onError)
+- **`capturePlatformDispatcherErrors`**: Captures Dart runtime errors (PlatformDispatcher.onError)
+- **`captureIsolateErrors`**: Captures errors from main isolate
+- **`captureNativeExceptions`**: Captures native exceptions (Android only - Java/Kotlin exceptions)
+- **`captureSilentFlutterErrors`**: Captures Flutter errors that are marked as silent (default: false)
+
+</Step>
+
+<Step title="Manually capture exceptions" badge="optional">
+
+### Basic usage
+
+You can manually capture exceptions using the `captureException` method:
+
+```dart
+try {
+  // Your awesome code that may throw
+  await someRiskyOperation();
+} catch (exception, stackTrace) {
+  // Capture the exception with PostHog
+  await Posthog().captureException(
+    error: exception,
+    stackTrace: stackTrace,
+    properties: {
+      'user_action': 'button_press',
+      'feature_name': 'data_sync',
+    },
+  );
+}
+```
+
+This is helpful if you've built your own error handling logic or want to capture exceptions that are handled by your application code.
+
+### Error tracking configuration
+
+You can configure error tracking behavior when setting up PostHog:
+
+```dart
+final config = PostHogConfig('<ph_project_api_key>');
+
+// Configure error tracking
+config.errorTrackingConfig.inAppIncludes = ['package:your_app'];
+config.errorTrackingConfig.inAppExcludes = ['package:third_party_lib'];
+config.errorTrackingConfig.inAppByDefault = true;
+
+await Posthog().setup(config);
+```
+
+**Configuration options:**
+
+- **`inAppIncludes`**: List of package names to be considered inApp frames (takes precedence over excludes)
+- **`inAppExcludes`**: List of package names to be excluded from inApp frames  
+- **`inAppByDefault`**: Whether frames are considered inApp by default when their origin cannot be determined
+
+`inApp` frames are stack trace frames that belong to your application code (as opposed to third-party libraries or system code). 
+These are highlighted in the PostHog error tracking interface to help you focus on the relevant parts of the stack trace.
+
+</Step>
+
+<StepVerifyErrorTracking />
+
+</Steps>

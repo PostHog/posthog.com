@@ -1,7 +1,7 @@
 ---
 title: How to set up WooCommerce analytics with PostHog
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/Woo_Commerce_logo_1b49a43cb1.svg
+sidebarTitle: WooCommerce
+platformLogo: woocommerce
 ---
 
 Getting traffic, usage, and user behavior data about your WooCommerce site is simple with PostHog. Once set up, PostHog gives you the tools to view [session replays](/docs/session-replay) to understand customer behavior, use [experiments](/docs/experiments) to improve checkout flows, and run [CSAT surveys](/templates/csat-survey) to measure customer experience.  

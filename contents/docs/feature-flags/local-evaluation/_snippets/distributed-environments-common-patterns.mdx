@@ -1,0 +1,31 @@
+## Common patterns
+
+### Shared caches with locking
+
+When running multiple server instances with a shared cache like Redis, coordinate fetching so only one instance polls PostHog at a time.
+
+The recommended pattern:
+
+- One instance owns the lock for its entire lifetime, not just during a single fetch
+- Refresh the lock TTL each polling cycle to maintain ownership
+- Release on shutdown, but only if you own the lock
+- Let locks expire if a process crashes, so another instance can take over
+
+#### Redis example
+
+A complete working example written in Python using Redis with distributed locking is available in the [posthog-python repository](https://github.com/PostHog/posthog-python/blob/master/examples/redis_flag_cache.py). It implements the locking pattern described above.
+
+### Caches without locking
+
+Some storage backends like Cloudflare KV don't support atomic locking operations. In these cases, use a split read/write pattern:
+
+1. A scheduled job (cron) periodically fetches flag definitions and writes to the cache
+2. Request handlers read from the cache and evaluate flags locally, with no API calls
+
+This separates the concerns entirely. One process writes, all others read.
+
+#### Cloudflare Workers example
+
+A complete working example written in TypeScript is available in the [posthog-js repository](https://github.com/PostHog/posthog-js/tree/main/examples/example-cloudflare-kv-cache). It uses the split read/write pattern described above. The worker's scheduled job writes flag definitions to KV, and request handlers read from it.
+
+This pattern is ideal for high-traffic edge applications where flag evaluation must be extremely fast and you can tolerate flag updates being slightly delayed.

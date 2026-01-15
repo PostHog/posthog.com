@@ -1,0 +1,88 @@
+import { Steps, Step } from 'components/Docs/Steps'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+PostHog's managed reverse proxy routes traffic through our infrastructure. We handle SSL certificates, routing, and maintenance automatically.
+
+This option requires our [platforms add-ons](https://posthog.com/platform-packages) and access to your domain's DNS settings.
+
+<Steps>
+
+<Step title="Create your proxy">
+
+1. Go to [organization proxy settings](https://app.posthog.com/settings/organization-proxy)
+2. Click **new managed proxy**
+3. Enter a subdomain you control. For example, if your app runs on `myapp.com`, use `yoursubdomain.myapp.com`
+
+<CalloutBox icon="IconInfo" title="Before you start" type="fyi">
+
+Choose a neutral subdomain that doesn't include words like `analytics`, `tracking`, `telemetry`, or `posthog`. Ad blockers target obvious terms.
+
+</CalloutBox>
+
+</Step>
+
+<Step title="Create a DNS record">
+
+Go to your DNS provider and create a new **CNAME record**:
+
+1. Set the **Name** to your chosen subdomain (just the subdomain part, like `yoursubdomain`)
+2. Set the **Target** to the proxy domain PostHog generated in the previous step. You'll see it in your proxy settings, it looks like `4854cf84789d8596ad01.proxy-us.posthog.com`
+3. Save the record
+
+> **Note:** If you're using Cloudflare, disable proxying on this CNAME record by clicking the cloud icon and set it to **DNS only**. Cloudflare's proxy interferes with PostHog's SSL certificate provisioning.
+
+</Step>
+
+<Step title="Wait for propagation and provisioning">
+
+Your proxy status will change from **waiting** → **issuing** → **live**. This typically takes 2-5 minutes for a new record, but can take up to 30 minutes if DNS propagation is slow. (Propagation can take a few hours if you're making changes to an existing CNAME.)
+
+PostHog will automatically detect your DNS record and provision an SSL certificate. No further action needed.
+
+> **Note:** If your proxy stays in **issuing** for more than 30 minutes, see [troubleshooting](/docs/advanced/proxy/proxy-reference#troubleshooting).
+
+</Step>
+
+<Step title="Update your PostHog SDK">
+
+Update your PostHog initialization to use your new subdomain:
+
+<MultiLanguage>
+
+```js file=US
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://yoursubdomain.myapp.com',
+  ui_host: 'https://us.posthog.com'
+})
+```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://yoursubdomain.myapp.com',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
+
+Replace `yoursubdomain.myapp.com` with your actual subdomain, and provide your **project API key**.
+
+Always set both `api_host` (your proxy) and `ui_host` (PostHog's actual domain) so features like the toolbar work correctly.
+
+</Step>
+
+<Step checkpoint title="Verify your setup">
+
+Confirm events are flowing through your proxy:
+
+1. Open your browser's developer tools and go to the **Network** tab
+2. Trigger an event in your app, like a page view
+3. Look for a request to your proxy subdomain (e.g., `yoursubdomain.myapp.com`)
+4. Verify the response is `200 OK`
+5. Check the [PostHog app](https://app.posthog.com) to confirm events appear
+
+If you see errors or events aren't appearing, see [troubleshooting](/docs/advanced/proxy/proxy-reference#troubleshooting).
+
+</Step>
+
+</Steps>

@@ -1,6 +1,7 @@
 ---
 title: PHP experiments installation
 showStepsToc: true
+platformLogo: php
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
@@ -10,27 +11,12 @@ import StepAddPrimaryMetric from './_snippets/step-add-primary-metric.mdx'
 import StepValidateExperimentEvents from './_snippets/step-validate-experiment-events.mdx'
 import StepValidateFeatureFlags from './_snippets/step-validate-feature-flags.mdx'
 import StepEvaluateExperimentResults from './_snippets/step-evaluate-experiment-results.mdx'
-import Wizard from '../../getting-started/_snippets/wizard.mdx'
-import Tab from "components/Tab"
 
 <Steps>
 
 <Step title="Install PostHog PHP SDK" badge="required">
 
-<Tab.Group tabs={['Wizard', 'Manual']}>
-<Tab.List>
-<Tab>Wizard</Tab>
-<Tab>Manual</Tab>
-</Tab.List>
-<Tab.Panels>
-<Tab.Panel>
-    <Wizard />
-</Tab.Panel>
-<Tab.Panel>
-    <PHPInstall />
-</Tab.Panel>
-</Tab.Panels>
-</Tab.Group>
+<PHPInstall />
 
 </Step>
 
@@ -41,10 +27,10 @@ Once PostHog is initialized, you should be able to capture events. For your expe
 For this tutorial, let's report a conversion event when a clicks a CTA. In server SDKs like Node, this can be called when a specific route is visited or reported from your client side app.
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
         'distinct_id' => 'user_distinct_id', 
         'event' => 'cta clicked'
-    ))
+    ])
 ```
 
 </Step>

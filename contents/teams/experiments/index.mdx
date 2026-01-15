@@ -16,9 +16,70 @@ Some of the things we're working on:
 - Statistical analysis – implementing statistical methods to ensure accurate interpretation of results.
 - Documentation – writing documentation and tutorials to help users get the most out of Experiments.
 
+## User personas
+
+### Assessing customer fit
+Use this guide to determine if a prospect's use case is a good fit for Experiments now, in the future, or at all.
+
+### Engineers (product, growth, software, etc.)
+**✅ Fully supported now**
+
+They get the most value since they can run experiments end-to-end, which allows them to test ideas quickly without coordination overhead.
+
+**Best fit:** Teams where engineers can run experiments directly.
+
+---
+
+### Product Managers
+**✅ Fully supported now**
+
+They use PostHog to decide what to test, monitor experiment results, and make data-driven decisions. While they typically need an engineer to implement the test, they can independently analyze results using our charts, statistical analysis, and AI summaries.
+
+**Best fit:** PMs who work with engineers for implementation but want to independently analyze results.
+
+---
+
+### Data Scientists/Analysts
+**⏳ Growing support → Full support planned (2026)**
+
+**What works today:** Frequentist and bayesian analysis, delta charts, timeseries, funnel breakdowns
+
+**Coming soon:** Advanced statistical methods (CUPED, variance reduction techniques, multilayer experiments) - planned for 2026
+
+**Is this customer a fit?**
+- ✅ Yes, if they need standard statistical analysis
+- ⏳ Wait or set expectations if they require advanced methods like CUPED (coming 2026)
+
+---
+
+### Growth/Marketing teams
+**⏳ Limited support → Full support planned (further out)**
+
+**What works today:** Can run experiments on messaging, landing pages, campaigns - but require engineering help for implementation
+
+**Coming later:** AI-powered visual editor will enable independent experiment setup without engineering (further out - requires mature code generation)
+
+**Is this customer a fit?**
+- ✅ Yes, if they have dedicated engineering resources
+- ⏳ Wait if they need no-code/independent setup (AI editor coming but no firm timeline)
+
+---
+
+### Designers
+**⏳ Limited support → Full support planned (further out)**
+
+**What works today:** Can implement simple experiments (copy changes, styling updates) independently; need engineering for complex components
+
+**Coming later:** AI-powered visual editor will enable more complex implementations (further out - requires mature code generation)
+
+**Is this customer a fit?**
+- ✅ Yes, if simple UI experiments or they have engineering support
+- ⏳ Wait if they need to independently implement complex UI changes (AI editor coming but no firm timeline)
+
+
 ## Slack channel
 
 [#team-experiments](https://posthog.slack.com/messages/team-experiments)
 
 ## Feature ownership
-You can find out more about the features we (and the other teams) own [here](/handbook/engineering/feature-ownership)
+You can find out more about the features we (and the other teams) own in the [feature ownership handbook page](/handbook/engineering/feature-ownership)

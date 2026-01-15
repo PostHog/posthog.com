@@ -1,6 +1,7 @@
 ---
 title: Angular error tracking installation
 showStepsToc: true
+platformLogo: angular
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
@@ -8,7 +9,7 @@ import { Steps, Step } from 'components/Docs/Steps'
 import InstallWebPackageManagers from "../../integrate/_snippets/install-web-package-managers.mdx"
 import InstallAngular from "../../integrate/_snippets/install-angular.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
-import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 <Steps>
 <Step title="Installing PostHog Angular SDK" subtitle="Your goal in this step: Install the PostHog Angular SDK." badge="required">
@@ -23,7 +24,7 @@ Before proceeding, confirm that you can capture events with PostHog using `posth
 
 </Step>
 
-<Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Angular application." badge="required">
+<Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Angular application." badge="recommended">
   
 Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any exception thrown by your Angular application.
 
@@ -170,7 +171,7 @@ posthog.captureException(e, additionalProperties)
 
 <Step title="Upload source maps" badge="required">
 
-<StepUploadSourceMaps urlPath="angular" framework="Angular" />
+<StepUploadSymbolSets urlPath="angular" framework="Angular" />
 
 </Step>
 

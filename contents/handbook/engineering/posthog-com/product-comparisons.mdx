@@ -1,0 +1,481 @@
+---
+title: Product & feature comparisons
+---
+
+import OSTabs from 'components/OSTabs'
+
+Keeping product comparison charts up-to-date across a large website with multiple products is tricky, so we've built a way to source data from a single place. That way, if a competitor adds a new feature (or updates an existing one), we can update the data in one place and have it automatically reflected across the entire website in existing product comparison tables, blog posts, and other documentation.
+
+To do this, we need a source of record for:
+
+-   feature definitions (each PostHog product and its feature set)
+-   competitor data (each competitor and their product and feature offerings)
+
+By standardizing all features across all products and competitors, we can generate a comparison table without any hard-coded data.
+
+## Example
+
+This is not an ordinary Markdown table. (In fact, it's not Markdown at all!)
+
+<OSTabs
+    padding
+    triggerDataScheme="primary"
+    tabs={[
+        {
+            label: 'Output',
+            value: 'table',
+            content: (
+                <ProductComparisonTable
+                    competitors={['posthog', 'amplitude']}
+                    rows={[
+                        { label: 'Some product summaries' },
+                        'product_analytics',
+                        'experiments',
+                        { label: 'Cherry-picked rows about Product Analytics' },
+                        {
+                            path: 'product_analytics.pricing.free_tier',
+                            label: 'Free usage',
+                            description: 'Custom description for the pricing row',
+                        },
+                        'product_analytics.features.autocapture',
+                        'product_analytics.insights.sql_editor',
+                        'product_analytics.cohorts',
+                    ]}
+                />
+            ),
+        },
+        {
+            label: 'Code',
+            value: 'code',
+            content: (
+                <pre>
+                    <code className="language-mdx">{`<ProductComparisonTable
+  competitors={['posthog', 'amplitude']}
+  rows={[
+    { label: 'Some product summaries' },
+    'product_analytics',
+    'experiments',
+    { label: 'Info about Product Analytics' },
+    {
+      path: 'product_analytics.pricing.free_tier',
+      label: 'Free usage',
+      description: 'Monthly free tier',
+    },
+    'product_analytics.features.autocapture',
+    'product_analytics.insights.sql_editor',
+    'product_analytics.cohorts',
+  ]}
+/>`}</code>
+                </pre>
+            ),
+        },
+    ]}
+/>
+
+See more examples in the [PostHog vs Amplitude blog post](/blog/posthog-vs-amplitude). All tables are dynamically rendered from data sourced from json arrays.
+
+## Product & platform features
+
+Feature definitions for PostHog products are stored in:
+
+```
+/src/hooks/featureDefinitions/{productName}.tsx // individual products
+/src/hooks/featureDefinitions/platform.tsx // overall platform
+```
+
+### Session Replay example:
+
+`/src/hooks/featureDefinitions/session_replay.tsx`
+
+Features can live in the `features` node, or nested inside in a logical grouping. (This is a truncated example.)
+
+```typescript
+export const sessionReplayFeatures = {
+    summary: {
+        name: 'Session Replay',
+        description: 'Watch real user sessions to understand behavior and fix issues',
+        url: '/session-replay',
+        docsUrl: '/docs/session-replay',
+    },
+    features: {
+        canvas_recording: {
+            name: 'Canvas recording',
+            description: 'Capture canvas elements in your app',
+        },
+        chat_with_recordings: {
+            name: 'Chat with your recordings',
+            description: 'Discover useful recordings using AI-powered chat',
+        },
+    },
+    platform_support: {
+        description: 'Record on web and mobile across major frameworks',
+        features: {
+            web_app_recordings: {
+                name: 'Web app recordings',
+                description: 'Capture recordings from single-page apps and websites',
+            },
+            mobile_app_recordings: {
+                name: 'Mobile app recordings',
+                description: 'Capture recordings in iOS and Android apps',
+            },
+            ios_recordings: {
+                name: 'iOS recordings',
+                description: 'Record sessions from iOS mobile apps',
+            },
+        },
+    },
+}
+```
+
+## Competitor (& PostHog) data
+
+Competitor data is stored in:
+
+```
+/src/hooks/competitorData/{competitorName}.tsx
+/src/hooks/competitorData/posthog.tsx
+```
+
+### Amplitude example:
+
+`/src/hooks/competitorData/amplitude.tsx`
+
+Feature-level data for competitors is stored in the same format, with the exception being that products are namespaced under the `products` node in a single file instead of being spread across multiple files for each product.
+
+There's also a `platform` node below the `product` array.
+
+```typescript
+export const amplitude = {
+    name: 'Amplitude',
+    key: 'amplitude',
+    assets: {
+        icon: '/images/competitors/amplitude.svg',
+        comparisonArticle: '/blog/posthog-vs-amplitude',
+    },
+    products: {
+        session_replay: {
+            available: true,
+            pricing: {
+                free_tier: '1,000 recordings',
+            },
+            features: {
+                canvas_recording: false,
+                chat_with_recordings: false,
+                clickmaps: false,
+                conditional_recording: false,
+            },
+        },
+    },
+
+    platform: {
+        deployment: {
+            eu_hosting: true,
+            open_source: false,
+            self_host: false,
+        },
+        pricing: {
+            free_tier: true,
+            transparent_pricing: false,
+            usage_based_pricing: true,
+        },
+    },
+}
+```
+
+## Referencing data
+
+There are several ways to assemble competitor tables. It uses the `<ProductComparisonTable />` component which uses `<OSTable />` internally.
+
+### Compare products between competitors
+
+This will list out the top-level product names and descriptions.
+
+<OSTabs
+    padding
+    triggerDataScheme="primary"
+    tabs={[
+        {
+            label: 'Output',
+            value: 'table',
+            content: (
+                <ProductComparisonTable
+                    competitors={['posthog', 'amplitude']}
+                    rows={[
+                        { product: 'product_analytics' },
+                        { product: 'web_analytics' },
+                        { product: 'session_replay' },
+                    ]}
+                />
+            ),
+        },
+        {
+            label: 'Code',
+            value: 'code',
+            content: (
+                <pre>
+                    <code className="language-mdx">{`<ProductComparisonTable
+  competitors={['posthog', 'amplitude']}
+  rows={[
+    { product: 'product_analytics' },
+    { product: 'web_analytics' },
+    { product: 'session_replay' }
+  ]}
+/>`}</code>
+                </pre>
+            ),
+        },
+    ]}
+/>
+
+### Render all items within a node
+
+Use `features` to render all items inside the node.
+
+This is helpful for comparing all features within a product without having to reference them individually.
+
+<OSTabs
+    padding
+    triggerDataScheme="primary"
+    tabs={[
+        {
+            label: 'Output',
+            value: 'table',
+            content: (
+                <ProductComparisonTable
+                    competitors={['posthog', 'amplitude']}
+                    rows={['product_analytics.features', { label: 'Optional custom section header' }, 'dashboards']}
+                />
+            ),
+        },
+        {
+            label: 'Code',
+            value: 'code',
+            content: (
+                <pre>
+                    <code className="language-mdx">{`<ProductComparisonTable
+  competitors={['posthog', 'amplitude']}
+  rows={[
+    'product_analytics.features', // includes "Features" section header
+    { label: 'Optional custom section header' },
+    'dashboards' // only renders true/false for 'available' and sources text from dashboards.tsx using the 'summary' node
+  ]}
+/>`}</code>
+                </pre>
+            ),
+        },
+    ]}
+/>
+
+### Compare specific features between competitors
+
+If you want to cherry-pick specific features, just reference the key directly. (This is useful for blog posts that compare specific features between competitors in a manually set order.)
+
+<OSTabs
+    padding
+    triggerDataScheme="primary"
+    tabs={[
+        {
+            label: 'Output',
+            value: 'table',
+            content: (
+                <ProductComparisonTable
+                    competitors={['posthog', 'amplitude']}
+                    rows={[
+                        {
+                            path: 'product_analytics.pricing.free_tier',
+                            label: 'Free usage',
+                            description: 'Monthly free tier',
+                        },
+                        { label: 'Core features' },
+                        'product_analytics.features.autocapture',
+                        'product_analytics.insights.sql_editor',
+                        'dashboards',
+                    ]}
+                />
+            ),
+        },
+        {
+            label: 'Code',
+            value: 'code',
+            content: (
+                <pre>
+                    <code className="language-mdx">{`<ProductComparisonTable
+  competitors={['posthog', 'amplitude']}
+  rows={[
+    {
+      path: 'product_analytics.pricing.free_tier',
+      label: 'Free usage',
+      description: 'Monthly free tier',
+    },
+    { label: 'Core features' },
+    'product_analytics.features.autocapture',
+    'product_analytics.insights.sql_editor',
+    'dashboards',
+  ]}
+/>`}</code>
+                </pre>
+            ),
+        },
+    ]}
+/>
+
+### Override label/description but source values from competitor files
+
+This is useful when referencing a global feature but want to tailor the label or description to be more personalized to the product or feature.
+
+_Example: If there's a global data retention for 7 years but in reference to heatmaps, you might want to say "Heatmap data retained for 7 years."_
+
+```
+{
+    label: 'Custom label',
+    description: 'Custom description about heatmaps',
+    path: 'heatmaps.features.heatmaps',
+},
+```
+
+### Add custom line items with arbitrary values
+
+If you need to add a custom row that doesn't exist in the competitor data, you can use the `values` property to specify a value for each competitor.
+
+<OSTabs
+    padding
+    triggerDataScheme="primary"
+    tabs={[
+        {
+            label: 'Output',
+            value: 'table',
+            content: (
+                <ProductComparisonTable
+                    competitors={['posthog', 'fullstory']}
+                    rows={[
+                        {
+                            label: 'In-app prompts and messages',
+                            description: 'Send messages to users in your app',
+                            values: [true, false],
+                        },
+                        {
+                            label: 'Custom pricing tier',
+                            description: 'Special pricing available',
+                            values: ['Enterprise only', 'All plans'],
+                        },
+                    ]}
+                />
+            ),
+        },
+        {
+            label: 'Code',
+            value: 'code',
+            content: (
+                <pre>
+                    <code className="language-mdx">{`<ProductComparisonTable
+  competitors={['posthog', 'amplitude']}
+  rows={[
+    {
+      label: 'In-app prompts and messages',
+      description: 'Send messages to users in your app',
+      values: [true, false],
+    },
+    {
+      label: 'Custom pricing tier',
+      description: 'Special pricing available',
+      values: ['Enterprise only', 'All plans'],
+    },
+  ]}
+/>`}</code>
+                </pre>
+            ),
+        },
+    ]}
+/>
+
+The `values` array should have the same length as the `competitors` array, with each value corresponding to a competitor in order.
+
+### Section headers
+
+Add section headers to organize comparison tables into logical groups. Headers only require a `label` property:
+
+```tsx
+<ProductComparisonTable
+    competitors={['posthog', 'amplitude']}
+    rows={[
+        { label: 'Core Features' }, // Section header - no description needed
+        'product_analytics.features.autocapture',
+        'product_analytics.features.cohorts',
+        { label: 'Advanced Features' }, // Another section header
+        'product_analytics.insights.sql_editor',
+        'product_analytics.group_analytics',
+    ]}
+/>
+```
+
+Headers automatically span across all columns and are styled with a border to visually separate sections.
+
+## Product page overrides
+
+### Excluding sections
+
+Product pages list out all sections within a product's feature set by default, but in some cases it doesn't make sense to do so.
+
+For example, showing the `platform.integrations` section might make sense for the [Product Analytics comparison](/product-analytics#feature-comparison), but not for [LLM Analytics comparison](/llm-analytics#feature-comparison) where that product doesn't really integrate with the tools that are otherwise integrated across the PostHog platform.
+
+If you want to exclude a section from rendering, you can use the `excludedSections` property.
+
+```tsx
+<ProductComparisonTable
+    competitors={['posthog', 'amplitude']}
+    rows={['product_analytics.features']}
+    excludedSections={['platform']}
+/>
+```
+
+For product pages, this is handled by the `excluded_sections` property in the product's feature definition file.
+
+`/src/hooks/productData/llm_analytics.tsx`:
+
+```typescript
+export const llmAnalytics = {
+    ...
+    comparison: {
+        companies: [
+            {
+                name: 'Langfuse',
+                key: 'langfuse',
+            },
+            {
+                name: 'Langsmith',
+                key: 'langsmith',
+            },
+            {
+                name: 'Helicone',
+                key: 'helicone',
+            },
+            {
+                name: 'Braintrust',
+                key: 'braintrust',
+            },
+            {
+                name: 'PostHog',
+                key: 'posthog',
+            },
+        ],
+        rows: ['llm_analytics'],
+        excluded_sections: ['platform'], // or an individual node like 'platform.integrations'
+    },
+}
+```
+
+### Excluding rows with missing data
+
+By default, the component will show rows where a competitor's cell doesn't have a value. This can be overridden on a per-product basis by setting `require_complete_data: true` in the product's feature definition file.
+
+`/src/hooks/productData/product_analytics.tsx`:
+
+```typescript
+export const productAnalytics = {
+    ...
+    comparison: {
+        rows: ['product_analytics'],
+        require_complete_data: true,
+    },
+}
+```

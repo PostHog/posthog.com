@@ -9,17 +9,11 @@ PostHog autocapture automatically tracks the following events for you:
 -   **$screen** - when the user navigates (if using `UIViewController`)
 -   **$autocapture** - when the user interacts with elements in a screen (if using `UIKit`)
 
-> 🚧 **Note:** `$autocapture` is currently supported only in UIKit.
-
-### Autocapture configuration
-
-You can enable or disable autocapture through the `PostHogConfig` object.
-
-<AutocaptureConfig />
+> 🚧 **Note:** `$autocapture` captures interactions with UIKit elements. Some SwiftUI views use UIKit under the hood (e.g., `TextField` → `UITextField`, `Toggle` → `UISwitch`) and will also be autocaptured.
 
 ### Capturing screen views
 
-With [`configuration.captureScreenViews`](/docs/libraries/ios#all-configuration-options) set as `true`, PostHog will try to record all screen changes automatically.
+With [`configuration.captureScreenViews`](/docs/libraries/ios/configuration#all-configuration-options) set as `true`, PostHog will try to record all screen changes automatically.
 
 If you want to manually send a new screen capture event, use the `screen` function.
 
@@ -62,7 +56,7 @@ PostHog automatically captures interactions with various UI elements in your app
 
 While this provides basic tracking, it can be challenging to pinpoint specific interactions with particular elements in your analytics. To make your data more meaningful and actionable, you can assign custom labels to any autocaptured element. These labels act as descriptive identifiers, making it easier to identify, filter, and analyze events in your reports.
 
-** Adding a custom label in UIKit **
+**Adding a custom label in UIKit**
 
 To assign a custom label to a UIView, use the `postHogLabel` property:
 
@@ -73,7 +67,7 @@ view.postHogLabel = "usernameTextField"
 
 In this example, interactions with the UITextField will be captured with an additional identifier "usernameTextField".
 
-** Adding a custom label in SwiftUI **
+**Adding a custom label in SwiftUI**
 
 In SwiftUI, use the `.postHogLabel(_:)` modifier instead:
 
@@ -85,7 +79,7 @@ var body: some View {
 }
 ```
 
-In this example, interactions with the _underlying_ UITextField will be captured with an additional identifier "usernameTextField".
+Since SwiftUI's `TextField` uses `UITextField` under the hood, interactions with it will be autocaptured with the additional identifier "usernameTextField".
 
 **Example of generated analytics data**
 
@@ -104,3 +98,21 @@ To locate and filter interactions with specific elements in PostHog reports, you
 - CSS Selector (the generated `id` attribute in this example)
 
 In the examples above, we can filter for the specific text field using the CSS Selector `#usernameTextField`
+### Interaction autocapture
+
+Interaction autocapture records when users interact with UI elements in your app. This includes:
+
+- User interactions like `touch`, `swipe`, `pan`, `pinch`, `rotation`, `long_press`, `scroll`
+- Control types `value_changed`, `submit`, `toggle`, `primary_action`, `menu_action`, `change`
+
+Interaction autocapture is **not enabled by default**. You can enable it by setting `captureElementInteractions` to `true` in the config.
+
+```swift
+let config = PostHogConfig(apiKey: <ph_project_api_key>, host: <ph_client_api_host>)
+config.captureElementInteractions = true // Disabled by default
+PostHogSDK.shared.setup(config)
+```
+
+### Autocapture configuration
+
+You can enable or disable autocapture through the `PostHogConfig` object. Find more details about autocapture configuration in the [configuration page](/docs/libraries/ios/configuration#autocapture-configuration).

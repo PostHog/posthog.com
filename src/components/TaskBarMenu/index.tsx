@@ -11,13 +11,11 @@ import {
     IconBookmark,
     IconUpload,
     IconCode,
-    IconCheck,
-    IconCopy,
-    IconShare,
+    IconFeatures,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
-import MenuBar, { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
+import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
 import OSButton from 'components/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -27,13 +25,10 @@ import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
-import { Popover } from 'components/RadixUI/Popover'
 
 export default function TaskBarMenu() {
     const {
         windows,
-        bringToFront,
-        focusedWindow,
         openSearch,
         openSignIn,
         siteSettings,
@@ -43,7 +38,6 @@ export default function TaskBarMenu() {
         addWindow,
         taskbarRef,
         posthogInstance,
-        copyDesktopParams,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
@@ -194,6 +188,12 @@ export default function TaskBarMenu() {
                                     label: 'Components',
                                     link: '/components',
                                     icon: <IconCode className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Feature matrix',
+                                    link: '/feature-matrix',
+                                    icon: <IconFeatures className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                             ]
                           : []),

@@ -13,6 +13,7 @@ import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { Heading } from 'components/Heading'
 import TutorialsSlider from 'components/TutorialsSlider'
+import TutorialsList from 'components/TutorialsList'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import { useLayoutData } from 'components/Layout/hooks'
 import Title from 'components/Edition/Title'
@@ -36,6 +37,7 @@ import { TreeMenu } from 'components/TreeMenu'
 import { postsMenu as menu } from '../navs/posts'
 import MenuBar from 'components/RadixUI/MenuBar'
 import slugify from 'slugify'
+import { getVideoClasses } from '../constants'
 const A = (props) => <Link {...props} state={{ newWindow: true }} />
 
 export const Intro = ({
@@ -47,6 +49,7 @@ export const Intro = ({
     date,
     tags,
     imageURL,
+    fullWidthContent = false,
 }) => {
     return (
         <div className="mb-6">
@@ -55,7 +58,7 @@ export const Intro = ({
                 <p className="mb-1 opacity-70">{date}</p>
             </div>
 
-            {featuredVideo && <iframe src={featuredVideo} />}
+            {featuredVideo && <iframe src={featuredVideo} className={getVideoClasses(fullWidthContent)} />}
             {!featuredVideo && featuredImage && (
                 <GatsbyImage className={`rounded-sm z-0 bg-accent rounded`} image={getImage(featuredImage)} />
             )}
@@ -281,8 +284,17 @@ const Filters = ({ tag, setTag, sort, setSort, activeMenu }) => {
 export default function BlogPost({ data, pageContext, location, mobile = false }) {
     const { postData } = data
     const { body, excerpt, fields } = postData
-    const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, tags, seo } =
-        postData?.frontmatter
+    const {
+        date,
+        title,
+        featuredImage,
+        featuredImageCaption,
+        featuredVideo,
+        featuredImageType,
+        contributors,
+        tags,
+        seo,
+    } = postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
     const category = postData?.parent?.category
@@ -305,6 +317,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         ),
         a: A,
         TutorialsSlider,
+        TutorialsList,
         NewsletterForm,
         BuiltBy,
         TeamMember,
@@ -378,6 +391,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
             />
 
             <ReaderView
+                showAbout
                 leftSidebar={
                     <>
                         <Filters tag={tag} setTag={setTag} sort={sort} setSort={setSort} activeMenu={activeMenu} />
@@ -415,6 +429,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                     type: 'mdx',
                     content: body,
                     featuredImage,
+                    featuredImageCaption,
                     contributors,
                     date,
                     featuredVideo,
@@ -473,6 +488,7 @@ export const query = graphql`
                         gatsbyImageData
                     }
                 }
+                featuredImageCaption
                 contributors: authorData {
                     id
                     name

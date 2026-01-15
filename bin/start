@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Exit if running inside a Flox environment
+# This is very common for developers also working on the posthog/posthog project
+# and this repository will simply not boot up if inside flox - because of mismatching dependencies.
+if [ -n "$FLOX_ENV" ]; then
+    echo "Error: Cannot run inside a Flox environment. Please exit your Flox shell first."
+    exit 1
+fi
+
+export NODE_OPTIONS='--max_old_space_size=16384' # At least 16GB of RAM is required for the build to succeed
+# nosemgrep: trailofbits.generic.node-disable-certificate-validation.node-disable-certificate-validation - local dev script only, needed for local HTTPS proxies
+export NODE_TLS_REJECT_UNAUTHORIZED=0
+export TAILWIND_MODE=watch
+
+gatsby develop -H 0.0.0.0 -p 8001

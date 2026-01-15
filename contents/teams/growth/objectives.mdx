@@ -1,34 +1,49 @@
-## Q4 2025 objectives
-
-This team is now back online after a short time of having no assigned engineers to it - the old team did such a great job they now have their own product!
-
-This is also only a half quarter for this team, plus we're onboarding <TeamMember name="Matthew Brooker" photo />.
-
-
-### Cross-Sell
-
-<TeamMember name="Rafael Audibert" photo /> will be working on cross-sell motions to continue easing our customers into adopting more of our products - that's our moat.
-
-- Make use of the huge amount of data we capture for product intent signals inside PostHog.
-- Work with [Team Platform UX](/teams/platform-ux) to improve the sidebar experience for long-term onboarding (activation for our other products).
-- Expose PostHog signals to Array
-  - It's not yet clear what's Growth team's responsibility here. Each team will send individual signals from their product to Array. The intention here at the moment is that Growth team should send signals to foster feature adoption (introduce error tracking, introduce session replay, add a new NPS survey, etc.)
-  - If the feature is actually implemented we should offer some sort of credit to the customer to justify the feature adoption.
-- Stretch goal: Explore the PostHog Ads concept (using the sidebar? using notifications? using email marketing?). Task success implies an MVP that let's us answer whether we should focus on this or not. If so, decide on a plan for it.
+## Q1 2026 objectives
 
 ### Integrations
 
-<TeamMember name="Matthew Brooker" photo /> will be working on integrations with external partners to drive growth. We already have an MCP and Array but we don't closely integrate with partners.
+<TeamMember name="Matt Brooker" photo /> will be focusing on integrations with external partners.
 
-- Launch our Vercel integration
-- Integrate with other AI tools (and get them to integrate with us) - this can be either via an MCP or custom integration.
-  - PostHog MCP OAuth flow enables Interaction (and any other MCP-consuming tools) to use us, and for us to be available in Claude, ChatGPT pages
-    - Add new self-serve OAuth screen to let apps generate custom OAuth apps
-    - Stretch goal: Metrics on OAuth usage
-  - Expose PostHog natively inside vibecoding platforms (needs buy-in from platforms)
-    - Might require a forward deployed engineer approach
-- Focus on increasing top of funnel adoption - the more sign ups/orgs created the better!
+- GA launch 1 integration with an AI partner + 1 new AI partner integration
+- Finish Vercel integration and have PostHog included in the Feature Flags integration page
+- Stretch: have PostHog and Vercel more tightly integrated (analytics, replay, experiments, logs)
 
+### Cross-sell
+
+<TeamMember name="Rafael Audibert" photo /> will be working on cross-sell improvements.
+
+- Improve sidebar cross-selling algorithm
+  - Add ML model or make it suggest products in a smarter/more frequent way
+
+### Post-onboarding
+
+<TeamMember name="Rafael Audibert" photo /> will be working on improving the post-onboarding experience by making it less overwhelming.
+
+- Bring "Quick Start" into the main part of the app and into each individual product
+- Introduce the concept of "Product health" like we have on Web Analytics (iterate on it, it's not the best UI/UX right now, but it's a great step on the right direction)
+- Tighter integration with Wizard to have more accurate empty states for Prod Analytics
+  - Know what events exist, etc.
+- Add some more up-and-front PostHog AI prompts "how do I do X?", "How does my retention look like?"
+
+### Experimentation culture
+
+<TeamMember name="Rafael Audibert" photo /> <TeamMember name="Matt Brooker" photo /> will get more used to running tiny experiments in search of huge ROI.
+
+- Every other Friday is Experiments Friday where we spend the day working on a (some) tiny experiment(s)
+
+### Stretch goals
+
+- Explore a take on how we could better use AI on our onboarding flow
+
+## Q4 2025 recap
+
+- Onboarded <TeamMember name="Matt Brooker" photo /> to the team
+- Worked on our Vercel integration (in progress)
+- Improved sidebar by including only relevant products + slow cross-selling
+- PostHog MCP with OAuth flow (in progress)
+- Several new experiments on onboarding
+- Work on the sidebar to avoid problematic states
+- ...and much more, look at the [changelog](/changelog)
 
 ## Next quarters
 

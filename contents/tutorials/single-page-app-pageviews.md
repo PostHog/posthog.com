@@ -17,18 +17,18 @@ A single-page application (or SPA) dynamically loads content for new pages using
 
 PostHog's JavaScript Web SDK automatically captures pageview events on page load. The problem with SPAs is that **page loads don't happen beyond the initial one**. This means user navigation in your SPA isn't tracked.
 
-Luckily, you can opt-in to tracking this behavior by setting `defaults: '2025-05-24'` when initializing PostHog to use the most recent defaults. This default uses `capture_pageview: 'history_change'`, which captures SPA navigation using the browser [history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) 
+Luckily, you can opt-in to tracking this behavior by setting `defaults: '2025-11-30'` when initializing PostHog to use the most recent defaults. This default uses `capture_pageview: 'history_change'`, which captures SPA navigation using the browser [history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) 
 
 This tutorial shows you how to follow the recommended approach for the most popular SPA frameworks like [Next.js](#tracking-pageviews-in-nextjs-app-router), [Vue](#tracking-pageviews-in-vue), [Svelte](#tracking-pageviews-in-svelte), and [Angular](#tracking-pageviews-in-angular). 
 
 > **Prerequisite:** Each of these requires you to have an app created and PostHog installed. To install the [PostHog JavaScript Web SDK](/docs/libraries/js), run the following command for the package manager of your choice:
 >
 > ```bash
-> yarn add posthog-js
+> yarn add posthog-js @posthog/react
 > # or
-> npm install --save posthog-js
+> npm install --save posthog-js @posthog/react
 > # or
-> pnpm add posthog-js
+> pnpm add posthog-js @posthog/react
 > ```
 
 ## Tracking pageviews in Next.js (app router)
@@ -39,7 +39,7 @@ To add PostHog to your [Next.js app](/docs/libraries/next-js) use it to capture 
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
@@ -76,7 +76,7 @@ export default function RootLayout({ children }) {
 
 ## Tracking pageviews in React Router v7
 
-If you are using [React Router](https://reactrouter.com/en/main), start by setting `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file.
+If you are using [React Router](https://reactrouter.com/en/main), start by setting `posthog-js` and `@posthog/react` as external packages in your `vite.config.ts` file.
 
 ```ts file=vite.config.ts
 // ... imports
@@ -84,7 +84,7 @@ If you are using [React Router](https://reactrouter.com/en/main), start by setti
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   ssr: {
-    noExternal: ['posthog-js', 'posthog-js/react']
+    noExternal: ['posthog-js', '@posthog/react']
   }
 });
 ```
@@ -94,7 +94,7 @@ Next, create a `providers.tsx` file in the `app` folder. PostHog will automatica
 ```ts
 // app/providers.tsx
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
   posthog.init('<ph_project_api_key>', {
@@ -147,7 +147,7 @@ If you are using React Router v6 or below AKA `react-router-dom`, start by addin
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
   posthog.init('<ph_project_api_key>', {

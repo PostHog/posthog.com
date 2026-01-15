@@ -1,0 +1,42 @@
+---
+title: Product analytics installation
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+import ProductAnalyticsInstallationPlatforms from './_snippets/installation-platforms'
+import ProductAnalyticsInstallationFrameworks from './_snippets/installation-frameworks'
+import AgentPrompt from '../../integrate/_snippets/agent-prompt.mdx'
+import DetailSetUpReverseProxy from '../../integrate/_snippets/details/set-up-reverse-proxy.mdx'
+import DetailGroupProductsInOneProject from '../../integrate/_snippets/details/group-products-in-one-project.mdx'
+import DetailPostHogIPs from '../../integrate/_snippets/details/posthog-ips.mdx'
+
+## AI wizard
+
+Install PostHog in seconds with our wizard by running this command in your project directory with your terminal (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
+
+<AgentPrompt />
+
+Wait for it to finish and test the setup once the wizard is complete.
+
+The wizard supports React, Next.js, Svelte, and React Native. We've got more on the way.
+
+Check out the wizard's [GitHub repo](https://github.com/PostHog/wizard) for more details.
+
+## Platforms
+
+<ProductAnalyticsInstallationPlatforms />
+
+## Frameworks
+
+<ProductAnalyticsInstallationFrameworks />
+
+<DetailSetUpReverseProxy />
+
+<DetailGroupProductsInOneProject />
+
+<DetailPostHogIPs />

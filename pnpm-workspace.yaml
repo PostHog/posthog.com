@@ -1,0 +1,15 @@
+packages:
+    - .
+    - plugins/*
+
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+    - '@posthog/types'
+
+# Hoist Gatsby's internal dependencies for webpack compatibility
+publicHoistPattern:
+    - '*webpack-hot-middleware*'
+    - '*error-stack-parser*'
+    - '*platform*'
+    - '*css.escape*'
+    - '*anser*'

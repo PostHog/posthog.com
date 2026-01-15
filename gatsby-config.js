@@ -3,6 +3,10 @@ const algoliaConfig = require('./gatsby/algoliaConfig')
 const qs = require('qs')
 
 require('dotenv').config({
+    path: `.env.${process.env.NODE_ENV}.local`,
+})
+
+require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
 })
 
@@ -125,6 +129,9 @@ module.exports = {
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
                     {
                         resolve: require.resolve('./plugins/gatsby-remark-video'),
+                    },
+                    {
+                        resolve: require.resolve('./plugins/gatsby-remark-inline-jsx-paragraphs'),
                     },
                 ],
             },
@@ -389,7 +396,7 @@ module.exports = {
                 name: `posthog-main-repo`,
                 remote: `https://github.com/posthog/posthog.git`,
                 branch: process.env.GATSBY_POSTHOG_BRANCH || 'master',
-                patterns: `docs/published/**`,
+                patterns: ['docs/published/**', 'docs/onboarding/**'],
             },
         },
         // {

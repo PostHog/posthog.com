@@ -1,12 +1,18 @@
 ---
-title: Troubleshooting and FAQs
+title: Product Analytics troubleshooting
 ---
 
-## Event capture FAQ
+This page covers troubleshooting for Product Analytics and event capture. For setup, see the [installation guides](/docs/product-analytics/installation).
+
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+
+## Event capture questions
 
 ### Why are events not appearing in my project?
 
-#### 1. Your library is configured incorrectly
+**1. Your library is configured incorrectly**
 
 This is the most common reason events don't appear. To debug this, you can try sending events to `https://webhook.site/`. Make sure to not use sensitive data while debugging using third-party tools.
 
@@ -33,7 +39,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
-import { PostHogProvider} from 'posthog-js/react'
+import { PostHogProvider} from '@posthog/react'
 
 const options = {
   api_host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>' } // Replace with the URL you copied from webhook.site
@@ -70,13 +76,13 @@ If events are visible in webhook.site, it means that you have configured PostHog
 
 ![Events visible on webhook.site](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/events-in-webhook.site.png)
 
-#### 2. PostHog is adblocked
+**2. PostHog is adblocked**
 
 PostHog can be adblocked, even locally. This prevents requests from being sent from your app to PostHog. If you're just testing your setup in development, disable your browser ad blocker and make sure you can see PostHog requests succeeding in the network tab of your browser's developer tools.
 
 For production, the best way to limit the impact of ad blockers is to [set up a reverse proxy](/docs/advanced/proxy).
 
-#### 3. An app has been configured incorrectly
+**3. An app has been configured incorrectly**
 
 Another common reason for missing events is that an app has been configured to drop certain or all events. To debug if this is the case, follow these steps in order:
 
@@ -84,7 +90,7 @@ Another common reason for missing events is that an app has been configured to d
 2. Try to temporarily disable the Filter Out plugin.
 3. Try to temporarily disable all other enabled plugins.
 
-#### 4. There is a bug in the PostHog library
+**4. There is a bug in the PostHog library**
 
 Sometimes, bugs in the PostHog library may be the cause of missing events. However, this is quite rare.
 
@@ -99,7 +105,7 @@ If you're using the [JavaScript web](/docs/libraries/js) library, you can identi
 
 ![network request being sent to posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/network-request-to-posthog.png)
 
-#### 5. Events are not ingested after being received by PostHog
+**5. Events are not ingested after being received by PostHog**
 
 If your library is configured correctly and successfully sending events to PostHog, events may get lost in the [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline) – e.g. if there is an ongoing outage.
 
@@ -118,9 +124,9 @@ To confirm if this is the issue, use the following steps:
 
 Once you have confirmed there is an issue with event ingestion, you can [report your issue](#report-your-issue) to get further support.
 
-#### It's none of the above. How do I report an issue?
+### It's none of the above. How do I report an issue?
 
-##### Step 1: Decode your cURL command
+**Step 1: Decode your cURL command**
 
 1. Your copied cURL command will look similar to this:
 ```
@@ -152,7 +158,7 @@ Body:
 }
 ```
 
-##### Step 2: Submit a support ticket
+**Step 2: Submit a support ticket**
 
 1. [Submit a support ticket via the app](https://app.posthog.com/home#supportModal=bug%3Aingestion). Submit your issue in the below format, and also include the decoded request from step 1.
 ```
@@ -232,7 +238,7 @@ import ExposedApiKeys from "../_snippets/exposed-api-keys.mdx"
 
 It's not possible to rename events in PostHog. Renaming is very resource intensive because it requires updating every existing event in the database. It's more practical to give events aliases instead using [actions](/docs/data/actions). This [tutorial](/tutorials/how-to-rename-events) covers this in detail.
 
-## Insights and queries FAQ
+## Insights and queries questions
 
 ### How do I speed up my insights and queries?
 
@@ -240,21 +246,21 @@ PostHog dedicates huge amounts of infrastructure to running your insight and que
 
 Sometimes, insights and queries can still be slow. Here are some things you can do to speed them up:
 
-#### 1. Select a specific event
+**1. Select a specific event**
 
 Filtering by "All events" is useful, but is also much slower than filtering by a specific event. Try using a specific autocaptured or custom event instead.
 
-#### 2. Reduce the period you're filtering on
+**2. Reduce the period you're filtering on**
 
 A smaller time period means less data to process. You can always adjust the period later if you need to.
 
-#### 3. Use faster person properties mode
+**3. Use faster person properties mode**
 
 Avoid using `pdi.person.properties.<property>` in your filters and breakdowns, this should only be used if you absolutely need to see what the data for a person looks like right now. Instead, prefer to use `person.properties.<property>` which is much faster.
 
 You can find more details about how these modes works in our doc on [how querying works](/docs/how-posthog-works/queries#filtering-on-person-properties).
 
-#### 4. Use sampling
+**4. Use sampling**
 
 [Sampling](/docs/product-analytics/sampling) speeds up insights and queries by taking a portion of your data to calculate aggregate results.
 
@@ -267,3 +273,9 @@ This can be enabled on insights by clicking the "Sampling" toggle on insights or
 To combine events, you can use [actions](/docs/data/actions). This enables you to combine and filter events for use in insights and other areas of PostHog.
 
 Note that actions are different from [group analytics](/docs/product-analytics/group-analytics), which enable you to aggregate events at an entity-level, such as organizations or companies
+
+## Solved community questions
+
+<SolvedQuestions
+    topicLabel="Product Analytics"
+/>

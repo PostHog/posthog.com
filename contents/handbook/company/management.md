@@ -27,16 +27,18 @@ This guidance applies to all teams, irrespective of whether you manage an engine
 
 ### Part-time managers
 
-Because of the relatively short list of tasks that managers have, management at PostHog is a part-time job. That means everyone, including the founders, still spend the majority of their time on practising what they do best - for most managers, this isn't actually management!
+Because of the relatively short list of tasks that managers have, management at PostHog is a part-time job. That means nearly everyone still spends the majority of their time on practising what they do best. For most managers, this isn't actually management!
 
-As an engineer, you wouldn't respect the opinion of someone who can't code on a coding-specific question.
+As an engineer, you want the opinion of someone who can actually code.
 As a designer, you really want your manager to have an eye for design.
 As an operator, you want to be managed by someone who has scaled a business.
 That's why it's important for managers to keep practising their craft.
 
 However, management tasks do come _first_, as giving context to your team tends to have a multiplying effect vs. getting one more PR out. After that though, it's back to work.
 
-> You'll sometimes hear us use the term "team lead". A team lead is the leader of a small team. By default they also manage the individuals that are part of their team, though very occasionally they don't, such as when a new small team has just been created. 
+Management is intentionally spread thin at PostHog. This is a forcing function for making sure that teams and ICs continue to have high levels of autonomy. Bored managers are micromanagers. By working across several teams, people like #team-blitzscale and product managers are forced to only give their attention where it's truly needed, and give space & autonomy everywhere else.
+
+> You'll sometimes hear us use the term "team lead". A team lead is the leader of a small team. By default they also manage the individuals that are part of their team, though very occasionally they don't, such as when a new small team has just been created.
 
 ## How do I set context?
 
@@ -106,7 +108,7 @@ That form will be shared with the relevant team Blitzscale member, so they can h
 
 ### Weave
 
-We use a tool called [Weave](https://workweave.dev/) to collect stats for engineers. Engineers can log in to see how their numbers compare to averages across the company. 
+We use a tool called [Weave](https://workweave.dev/) to collect stats for engineers. Engineers can log in to see their numbers and those of other engineers. 
 
 We understand that all the work an engineer does can't be properly represented in a tool that just looks at PR output. Data in Weave is _not_ the decision-maker for whether someone is succeeding in their role at PostHog. It can be, however, a part of the conversation.
 
@@ -138,6 +140,8 @@ Management roles at PostHog are often (but not always) temporary. That's because
 As such, management roles are paid on the same pay scale as other ICs. Becoming a manager does not mean you get a pay raise, and going from a manager role back to an IC role does not mean you get a pay decrease. 
 
 Management is a skill of its own, and it's not any more important than any other skills that make someone a great IC. It's possible that you may be a manager for a short time, but it becomes clear that your strengths lie primarily in the other skills that are involved with being an IC. In this case we might move you back to a pure IC position, where your skills can really shine, and move someone else from your team or from around the company into the manager / team lead role.
+
+Additionally, managers who are excelling with their teams may have limited interaction with their own manager. This is because, as discussed [above](#part-time-managers), management is intentionally spread thin. If you feel like your manager is mostly ignoring you, this isn't necessarily a bad thing and usually means you and your team are doing a fine job!
 
 ## Recommended reading
 

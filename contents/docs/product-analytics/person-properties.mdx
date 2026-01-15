@@ -64,15 +64,15 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'distinct_id',
     'event' => 'event_name',
-    'properties' => array(
-        '$unset' => array(
+    'properties' => [
+        '$unset' => [
            'email'
-        )
-    )
-));
+        ]
+    ]
+]);
 ```
 
 ```ruby
@@ -189,8 +189,8 @@ By default, the [GeoIP plugin](/docs/apps/geoip-enrichment) is turned on for all
 | `$geoip_postal_code` | Postal Code | Approximated postal code matched to this event's IP address. | 2000, 600004, 11211 |
 | `$geoip_subdivision_1_code` | Subdivision 1 Code | Code of the subdivision matched to this event's IP address. | NSW, TN, NY |
 | `$geoip_subdivision_1_name` | Subdivision 1 Name | Name of the subdivision matched to this event's IP address. | New South Wales, Tamil Nadu, New York |
-| `$geoip_subdivision_2_code` | Subdivision 2 Code | Code of the second subdivision matched to this event's IP address. |
-| `$geoip_subdivision_2_name` | Subdivision 2 Name | Name of the second subdivision matched to this event's IP address. |
+| `$geoip_subdivision_2_code` | Subdivision 2 Code | Code of the second subdivision matched to this event's IP address. | 201, 141, 045 |
+| `$geoip_subdivision_2_name` | Subdivision 2 Name | Name of the second subdivision matched to this event's IP address. | Inner West, Chennai Central, Kings County |
 | `$geoip_time_zone` | Timezone | Timezone matched to this event's IP address. | Australia/Sydney, Asia/Kolkata, America/New_York |
 | `$initial_geoip_city_name` | Initial City Name | Name of the city matched to this event's IP address. Data from the first time this user was seen. | Sydney, Chennai, Brooklyn |
 | `$initial_geoip_continent_code` | Initial Continent Code | Code of the continent matched to this event's IP address. Data from the first time this user was seen. | OC, AS,  NA |
@@ -202,6 +202,6 @@ By default, the [GeoIP plugin](/docs/apps/geoip-enrichment) is turned on for all
 | `$initial_geoip_longitude` | Initial Longitude | Approximated longitude matched to this event's IP address. Data from the first time this user was seen. | 151.2, 80.8008, -73.9 |
 | `$initial_geoip_postal_code` | Initial Postal Code | Approximated postal code matched to this event's IP address. Data from the first time this user was seen. | 2000, 600004, 11211 |
 | `$initial_geoip_subdivision_1_name` | Initial Subdivision 1 Name | Name of the subdivision matched to this event's IP address. Data from the first time this user was seen. | New South Wales, Tamil Nadu, New York |
-| `$initial_geoip_subdivision_2_code` | Initial Subdivision 2 Code | Code of the second subdivision matched to this event's IP address. Data from the first time this user was seen. |
-| `$initial_geoip_subdivision_2_name` | Initial Subdivision 2 Name | Name of the second subdivision matched to this event's IP address. Data from the first time this user was seen. |
+| `$initial_geoip_subdivision_2_code` | Initial Subdivision 2 Code | Code of the second subdivision matched to this event's IP address. Data from the first time this user was seen. | 201, 141, 045 |
+| `$initial_geoip_subdivision_2_name` | Initial Subdivision 2 Name | Name of the second subdivision matched to this event's IP address. Data from the first time this user was seen. | Inner West, Chennai Central, Kings County |
 | `$initial_geoip_time_zone` | Initial Timezone | Timezone matched to this event's IP address. Data from the first time this user was seen. | Australia/Sydney, Asia/Kolkata, America/New_York |

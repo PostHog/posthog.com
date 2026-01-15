@@ -1,10 +1,10 @@
 ---
 title: How to set up WordPress analytics with PostHog
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/wordpress.svg
+sidebarTitle: WordPress
+platformLogo: wordpress
 ---
 
-Getting traffic, usage, and user behavior data about your [WordPress](https://www.wordpress.org/) site is simple with PostHog. Once you have that data, you can discover insights and build dashboards with our suite of analytics tools.
+Getting traffic, usage, and user behavior data about your [WordPress](https://www.wordpress.org/) site is simple with PostHog. Once you have that data, you can discover insights and build dashboards with our suite of dev tools.
 
 ## How to add PostHog to your WordPress site
 

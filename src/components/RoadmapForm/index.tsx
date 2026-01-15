@@ -441,6 +441,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                                         margin: `${socialValues.titleSpacing}px 0`,
                                                     }}
                                                     className="text-center leading-none"
+                                                    // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - form title from state, not external user input
                                                     dangerouslySetInnerHTML={{ __html: socialValues.title }}
                                                 />
                                                 {imageURL && (
@@ -716,16 +717,16 @@ export default function RoadmapForm({
                         searchable={false}
                     />
                 )}
-                {(status === 'in-progress' || status === 'under-consideration') && (
-                    <GitHubURLs
-                        urls={values.githubUrls}
-                        onChange={(githubUrls) => setFieldValue('githubUrls', githubUrls)}
-                        multiple={status === 'in-progress'}
-                        placeholder={`https://github.com/PostHog/posthog/${
-                            status === 'under-consideration' ? 'issues' : 'pull'
-                        }/1`}
-                    />
-                )}
+
+                <GitHubURLs
+                    urls={values.githubUrls}
+                    onChange={(githubUrls) => setFieldValue('githubUrls', githubUrls)}
+                    multiple={status === 'in-progress'}
+                    placeholder={`https://github.com/PostHog/posthog/${
+                        status === 'under-consideration' ? 'issues' : 'pull'
+                    }/1`}
+                />
+
                 {status !== 'under-consideration' && (
                     <div className="p-4 border border-primary">
                         <label className="text-sm text-secondary pt-4 block mb-2">Options</label>

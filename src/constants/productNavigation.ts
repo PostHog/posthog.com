@@ -15,18 +15,20 @@ export const categoryOrder = [
     'dataviz',
     'product',
     // 'engineering',
+    'automation',
     'communication',
     'product_os',
 ] as const
 
 // Display names for categories
 export const categoryDisplayNames: Record<string, string> = {
-    data: 'Customer data infrastructure',
+    data: 'PostHog data stack',
     product_engineering: 'Product engineering',
     analytics: 'Analytics dashboards',
     dataviz: 'Data visualization',
     product: 'Product',
     // engineering: 'Engineering',
+    automation: 'Automation',
     communication: 'Communication',
     product_os: 'Utilities, add-ons, & packages',
 }
@@ -39,6 +41,7 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
     dataviz: { icon: 'IconTrends', color: 'yellow' },
     product: { icon: 'IconApps', color: 'red' },
     // engineering: { icon: 'IconWrench', color: 'gray' },
+    automation: { icon: 'IconBolt', color: 'blue' },
     communication: { icon: 'IconMessage', color: 'sky-blue' },
     product_os: { icon: 'IconGear', color: 'gray' },
 }
@@ -46,7 +49,7 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
 // Product ordering within categories
 // Products not listed here will be sorted alphabetically
 export const productOrder: Record<string, string[]> = {
-    data: ['customer-data-infrastructure', 'integrations', 'data_in', 'transformations', 'visualize', 'data_out'],
+    data: ['data-stack', 'integrations', 'data_in', 'transformations', 'visualize', 'data_out'],
     product_engineering: ['session_replay', 'experiments', 'feature_flags', 'error_tracking', 'early_access'],
     analytics: [
         'web_analytics',
@@ -68,8 +71,9 @@ export const productOrder: Record<string, string[]> = {
         'sql',
         'bi',
     ],
+    automation: ['posthog_ai', 'workflows', 'webhooks'],
     communication: ['surveys', 'messaging', 'user-interviews'],
-    product_os: ['posthog_ai', 'api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
+    product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
 }
 
 // Non-product pages that appear in the product navigation
@@ -81,34 +85,27 @@ export const nonProductPages = {
         icon: 'IconPlug',
         color: 'sky-blue',
     },
-    'data-warehouse': {
-        slug: 'data-warehouse',
-        url: '/data-warehouse',
+    'data-stack': {
+        slug: 'data-stack',
+        url: '/data-stack',
         icon: 'IconAsterisk',
         color: 'purple',
     },
-    'customer-data-infrastructure': {
-        slug: 'customer-data-infrastructure',
-        url: '/customer-data-infrastructure',
-        icon: 'IconDocument',
-        color: 'blue',
-        description: 'CDP manifesto',
-    },
-    'customer-data-infrastructure/sources': {
-        slug: 'customer-data-infrastructure/sources',
-        url: '/customer-data-infrastructure/sources',
+    'data-stack/sources': {
+        slug: 'data-stack/sources',
+        url: '/data-stack/sources',
         icon: 'IconArrowRight',
         color: 'orange',
     },
-    'customer-data-infrastructure/transformations': {
-        slug: 'customer-data-infrastructure/transformations',
-        url: '/customer-data-infrastructure/transformations',
+    'data-stack/data-modeling': {
+        slug: 'data-stack/data-modeling',
+        url: '/data-stack/data-modeling',
         icon: 'IconRefresh',
         color: 'green',
     },
-    'customer-data-infrastructure/destinations': {
-        slug: 'customer-data-infrastructure/destinations',
-        url: '/customer-data-infrastructure/destinations',
+    'data-stack/reverse-etl-export': {
+        slug: 'data-stack/reverse-etl-export',
+        url: '/data-stack/reverse-etl-export',
         icon: 'IconDecisionTree',
         color: 'purple',
     },
@@ -238,7 +235,7 @@ export function buildCategoryMenuItems(category: string, allProducts: any[]): an
 // Helper function to build menu items for all products sorted alphabetically
 export function buildAllProductsMenuItems(allProducts: any[]): any[] {
     // Handles to filter out
-    const filteredHandles = ['ai', 'annika', 'marius', 'customer-data-infrastructure', 'data_in', 'data_out']
+    const filteredHandles = ['ai', 'annika', 'marius', 'data-stack', 'data_in', 'data_out']
 
     // Label overrides by slug
     const labelOverrides: Record<string, string> = {

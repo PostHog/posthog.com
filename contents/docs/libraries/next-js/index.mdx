@@ -1,7 +1,6 @@
 ---
 title: Next.js
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nextjs.svg
+platformLogo: nextjs
 features:
   eventCapture: true
   userIdentification: true
@@ -16,12 +15,13 @@ features:
 
 import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
 import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
+import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx"
 
 PostHog makes it easy to get data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
 This guide walks you through integrating PostHog into your Next.js app using the [React](/docs/libraries/react) and the [Node.js](/docs/libraries/node) SDKs.
 
-> You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/main/packages/browser/playground/nextjs).
+> You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/main/playground/nextjs).
 
 Next.js has both client and server-side rendering, as well as pages and app routers. We'll cover all of these options in this guide.
 
@@ -45,6 +45,8 @@ import NextJSInstall from "../../integrate/_snippets/nextjs/install-nextjs.mdx"
 <DetailSetUpReverseProxy />
 
 <DetailGroupProductsInOneProject />
+
+<DetailPostHogIPs />
 
 ## Accessing PostHog
 
@@ -142,7 +144,7 @@ Technically, you can also use a `window` object check to initialize PostHog. Thi
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
@@ -160,7 +162,7 @@ export function PHProvider({ children }) {
 // app/providers.tsx
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
@@ -184,12 +186,12 @@ The problem with this is that it can cause a [hydration and/or mismatch error](h
 
 ### Why did the pageview component need a `useEffect`?
 
-Before updating the JavaScript Web SDK's default behavior when capturing pageviews (`'2025-05-24'`), we suggested using a `useEffect` hook to capture pageviews. This is because it's the simplest way to accurately capture pageviews. Other approaches include:
+Before updating the JavaScript Web SDK's default behavior when capturing pageviews (`'2025-11-30'`), we suggested using a `useEffect` hook to capture pageviews. This is because it's the simplest way to accurately capture pageviews. Other approaches include:
 
 1. Not using a `useEffect` hook, but this might lead to duplicate page views being tracked if the component re-renders for reasons other than navigation. It might work depending on your implementation.
 2. Using `window.navigation` to track pageviews, but this approach is more complex and is [not supported](https://developer.mozilla.org/en-US/docs/Web/API/Window/navigation) in all browsers.
 
-> **Note:** This approach of manually capturing pageviews is no longer recommended. We recommend using `defaults: '2025-05-24'` or `capture_pageview: 'history_change'` instead, which automatically handles both `$pageview` and `$pageleave` events.
+> **Note:** This approach of manually capturing pageviews is no longer recommended. We recommend using `defaults: '2025-11-30'` or `capture_pageview: 'history_change'` instead, which automatically handles both `$pageview` and `$pageleave` events.
 >
 > If you're still capturing pageviews manually, you should also capture `$pageleave` events to track important engagement metrics like time on page (`$prev_pageview_duration`) and scroll depth (`$prev_pageview_max_scroll_percentage`). To do this, set up a listener on window unload (similar to [how PostHog does it](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/posthog-core.ts#L644-L646)):
 >

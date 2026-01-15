@@ -44,6 +44,8 @@ He’s still a core member of the team three years later.
 
 **Why is this important?** People who show a strong interest in your product in its infancy likely understand the problem you’re trying to solve, either because they have it now or have experienced it in the past. That’s valuable knowledge when you’re trying to find product-market fit.
 
+<NewsletterForm />
+
 ## 3. Make your job ads weirdly transparent
 
 Here are three ways to do that:
@@ -85,8 +87,6 @@ As Charles Cook, our head of ops and a veteran of multiple startups, [explains](
 >“If you are struggling to hire for a role, first ask yourself 'am I spending 20% of my time recruiting?' If the answer is yes, then go complain to your recruiter.”
 
 **Why is this important?** Managers need to properly own hiring. Those that don’t end up hiring average people and blaming their recruiters.
-
-<NewsletterForm />
 
 ## 6. Good people are always in demand
 
@@ -145,17 +145,17 @@ In contrast, someone who’s worked exclusively at FAANG-type companies c.2012-2
 
 ## Good reads about hiring 📚
 
-[How to hire your first engineer](https://www.ycombinator.com/library/4H-how-to-hire-your-first-engineer/)** – Haj Taggar:** ”Candidates think differently to investors and you'll need to tweak the message that worked for your fundraise e.g. candidates will think less about your market size and more about your most interesting product challenges.”
+[How to hire your first engineer](https://www.ycombinator.com/library/4H-how-to-hire-your-first-engineer/) — **Haj Taggar:** ”Candidates think differently to investors and you'll need to tweak the message that worked for your fundraise e.g. candidates will think less about your market size and more about your most interesting product challenges.”
 
-[Myths (and truths) I've learned from 10 years of startup hiring](https://posthog.com/founders/early-stage-startup-hiring-strategy)** – Charles Cook:** ”I've managed and hired for teams across engineering, ops, people, marketing, and design, interviewing some 800 people in the process. These are the destructive myths and important truths I've learned over that time.”
+[Myths (and truths) I've learned from 10 years of startup hiring](https://posthog.com/founders/early-stage-startup-hiring-strategy) — **Charles Cook:** ”I've managed and hired for teams across engineering, ops, people, marketing, and design, interviewing some 800 people in the process. These are the destructive myths and important truths I've learned over that time.”
 
-**[The SaaSy guide to hiring](https://staysaasy.com/hiring/2022/09/23/saasy-guide-to-hiring-how-to-hire.html/) – Stay SaaSy:** “If you’re a tech company, it’s worth your while to refine your recruiting process as if you were a company like Toyota or Apple refining their supply chain. Recruiting should be a priority for the smartest and most driven people at your company, rather than a backwater activity that gets passed around like a hot potato.”
+[The SaaSy guide to hiring](https://staysaasy.com/hiring/2022/09/23/saasy-guide-to-hiring-how-to-hire.html/) — **Stay SaaSy:** “If you’re a tech company, it’s worth your while to refine your recruiting process as if you were a company like Toyota or Apple refining their supply chain. Recruiting should be a priority for the smartest and most driven people at your company, rather than a backwater activity that gets passed around like a hot potato.”
 
-**[PostHog hiring handbook](https://posthog.com/handbook/people/hiring-process/) – PostHog:** “For everyone on the PostHog team meeting a candidate, ask yourself – will this person raise the bar at PostHog? The answer should be yes if we want to hire them.”
+[PostHog hiring handbook](https://posthog.com/handbook/people/hiring-process/) — **PostHog:** “For everyone on the PostHog team meeting a candidate, ask yourself – will this person raise the bar at PostHog? The answer should be yes if we want to hire them.”
 
-**[Why do companies over-hire?](https://waysofworkingcollection.substack.com/p/why-do-companies-over-hire/) – Josephine Conneely:** “If [hiring for growth] ask yourself, what would the leanest version of hiring look like? What is the expected output difference versus current hiring plans? It may be possible to achieve most of your growth goals with a smaller team.”
+[Why do companies over-hire?](https://waysofworkingcollection.substack.com/p/why-do-companies-over-hire/) — **Josephine Conneely:** “If [hiring for growth] ask yourself, what would the leanest version of hiring look like? What is the expected output difference versus current hiring plans? It may be possible to achieve most of your growth goals with a smaller team.”
 
-**[What we learned about hiring from our first five employees](https://posthog.com/blog/posthog-first-five) – Andy Vandervell:** “While it's tempting to search for "that hire" who will magically transform your product and company, this is a fool's errand. Successful companies are built on collective strength, which is why talent compounds is one of our core values.”
+[What we learned about hiring from our first five employees](https://posthog.com/blog/posthog-first-five) — **Andy Vandervell:** “While it's tempting to search for "that hire" who will magically transform your product and company, this is a fool's errand. Successful companies are built on collective strength, which is why talent compounds is one of our core values.”
 
 _Words by Andy Vandervell, who thinks watermelon is pointless._
 

@@ -5,17 +5,16 @@ import Logo from 'components/Logo'
 import { SlideContainer } from './SlidesTemplate'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface Customer {
     slug: string
     name: string
     logo?:
-    | React.ComponentType<any>
-    | {
-        light: string
-        dark: string
-    }
+        | React.ComponentType<any>
+        | {
+              light: string
+              dark: string
+          }
     height?: number
 }
 
@@ -29,9 +28,16 @@ interface CustomersSlideProps {
     customers: Customer[]
     customerData: Record<string, CustomerData>
     hasCaseStudy: (slug: string) => boolean
+    belowContent?: React.ReactNode
 }
 
-export default function CustomersSlide({ productName, customers, customerData, hasCaseStudy }: CustomersSlideProps) {
+export default function CustomersSlide({
+    productName,
+    customers,
+    customerData,
+    hasCaseStudy,
+    belowContent = null,
+}: CustomersSlideProps) {
     // Create table structure for customers
     const customerTableColumns = [
         { name: '', width: 'minmax(auto,80px)', align: 'center' as const },
@@ -206,8 +212,15 @@ export default function CustomersSlide({ productName, customers, customerData, h
                 </div>
 
                 <div className="hidden @2xl:block">
-                    <OSTable columns={customerTableColumns} rows={customerTableRows} className="bg-primary" />
+                    <OSTable
+                        columns={customerTableColumns}
+                        rows={customerTableRows}
+                        className="bg-primary"
+                        width="full"
+                    />
                 </div>
+
+                {belowContent}
             </ScrollArea>
         </SlideContainer>
     )

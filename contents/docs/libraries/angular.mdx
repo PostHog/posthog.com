@@ -1,12 +1,12 @@
 ---
 title: Angular
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/angular.svg
+platformLogo: angular
 ---
 
 import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
 import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
 import InstallNodePackageManagers from "../integrate/_snippets/install-node-package-managers.mdx"
+import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx"
 
 PostHog makes it easy to get data about traffic and usage of your [Angular](https://angular.dev/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
@@ -28,9 +28,11 @@ import AngularInstall from "../integrate/_snippets/install-angular.mdx"
 
 <DetailGroupProductsInOneProject />
 
+<DetailPostHogIPs />
+
 ## Tracking pageviews
 
-PostHog automatically tracks your pageviews by hooking up to the browser's `navigator` API as long as you initialize PostHog with the `defaults` config option set after `2025-05-24`.
+PostHog automatically tracks your pageviews by hooking up to the browser's `navigator` API as long as you initialize PostHog with the `defaults` config option set after `2025-11-30`.
 
 ## Capture custom events
 

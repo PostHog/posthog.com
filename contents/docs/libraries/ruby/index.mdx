@@ -4,8 +4,7 @@ sidebarTitle: Ruby
 sidebar: Docs
 showTitle: true
 github: 'https://github.com/PostHog/posthog-ruby'
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ruby.svg
+platformLogo: ruby
 features:
   eventCapture: true
   userIdentification: true
@@ -13,6 +12,7 @@ features:
   groupAnalytics: true
   surveys: false
   llmAnalytics: false
+  errorTracking: true
 ---
 
 The `posthog-ruby` library provides tracking functionality on the server-side for applications built in Ruby.
@@ -24,10 +24,6 @@ It uses an internal queue to make calls fast and non-blocking. It also batches r
 import RubyInstall from '../../integrate/_snippets/install-ruby.mdx'
 
 <RubyInstall />
-
-### Debug logging
-
-The log level by default is set to WARN. You can change it to DEBUG if you want to debug the client by running `posthog.logger.level = Logger::DEBUG`, where `posthog` is your initialized `PostHog::Client` instance.
 
 ## Capturing events
 
@@ -145,7 +141,7 @@ It's also possible to [run experiments without using feature flags](/docs/experi
 
 Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
-> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+> **Note:**  This is a paid feature and is not available on the open-source or free cloud plan. Learn more on the [pricing page](/pricing).
 
 -   Capture an event and associate it with a group
 
@@ -180,6 +176,53 @@ posthog.group_identify(
 The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
 If the optional `distinct_id` is not provided in the group identify call, it defaults to `${groupType}_${groupKey}` (e.g., `$company_company_id_in_your_db` in the example above). This default behavior will result in each group appearing as a separate person in PostHog. To avoid this, it's often more practical to use a consistent `distinct_id`, such as `group_identifier`.
+
+## Exception capture
+
+You can capture exceptions using the `posthog-ruby` library. This enables you to see stack traces and debug errors in your application. Learn more in our [error tracking docs](/docs/error-tracking/installation/ruby).
+
+> **Note:** The Ruby SDK currently only supports manual exception capture. Automatic exception capture is not yet available.
+
+To capture exceptions, use the `capture_exception` method:
+
+```ruby
+begin
+  # Code that might raise an exception
+  raise StandardError, "Something went wrong"
+rescue => e
+  posthog.capture_exception(
+    e,
+    distinct_id: 'user_distinct_id',
+    properties: {
+      custom_property: 'custom_value'
+    }
+  )
+end
+```
+
+The `capture_exception` method accepts the following parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `exception` | `Exception` | The exception object to capture (required) |
+| `distinct_id` | `String` | The distinct ID of the user (optional) |
+| `properties` | `Hash` | Additional properties to attach to the exception event (optional) |
+
+You can also override the [fingerprint](/docs/error-tracking/fingerprints) to customize how exceptions are grouped into issues:
+
+```ruby
+posthog.capture_exception(
+  e,
+  distinct_id: 'user_distinct_id',
+  properties: {
+    '$exception_fingerprint': 'CustomExceptionGroup'
+  }
+)
+```
+
+## Debug mode
+
+The Ruby SDK debug logs by default. The log level by default is set to `WARN`. You can change it to `DEBUG` if you want to debug the client by running `posthog.logger.level = Logger::DEBUG`, where `posthog` is your initialized `PostHog::Client` instance.
 
 ## Thank you
 

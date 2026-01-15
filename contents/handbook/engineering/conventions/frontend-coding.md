@@ -22,7 +22,7 @@ Hence the explicit separation between the data and view layers.
 #### Do-s & Don't-s
 
 - General
-  - Write all new code with TypeScript and proper typing.
+  - Write all new code with TypeScript and proper typing. See [Type system guide](/docs/contribute/type-system) for guidance on generated vs handwritten types.
   - Write your frontend data handling code first, and write it in a Kea `logic`.
   - Don't use `useState` or `useEffect` to store local state. It's false convenience. Take the extra 3 minutes and change it to a `logic` early on in the development.
   - Logics still have a tiny initialization cost. Hence this rule doesn't apply to library components in the `lib/` folder, which might be rendered hundreds of times on a page with different sets of data. Still feel free to write a logic for a complicated `lib/` component when needed.
@@ -60,4 +60,6 @@ Hence the explicit separation between the data and view layers.
 - Testing
   - Write [logic tests](https://keajs.org/docs/intro/testing) for all logic files. 
   - If your component is in the `lib/` folder, and has some interactivity, write a [react testing library](https://testing-library.com/docs/react-testing-library/intro/) test for it.
-  - Add all new presentational elements and scenes to [our storybook](https://storybook.posthog.net/). Run `pnpm storybook` locally.
+  - Add all new presentational elements and scenes to [our storybook](https://storybook.dev.posthog.dev/). Run `pnpm storybook` locally.
+
+> Sync note: This file is also copied to posthog/posthog/.claude/commands/conventions.md for Claude Code. When updating this file, please also update the copy there. -->

@@ -59,6 +59,21 @@ You can also request multiple blobs at once using `?source=blob_v2&start_blob_ke
 
 > **Note:** You can request a maximum of 20 blob keys at a time. You will need to tune this for your application as 20 blobs could be a lot of data and timeout. For example, `?source=blob_v2&start_blob_key=0&end_blob_key=20` is invalid as it requests 21 keys.
 
+#### The `decompress` parameter
+
+By default, the API decompresses data before returning it. You can control this behavior using the `decompress` query parameter:
+
+- `decompress=true` (default): Returns JSONL (newline-delimited JSON) data
+- `decompress=false`: Returns snappy compressed data
+
+For example:
+
+`https://us.posthog.com/api/environments/{the project id}/session_recordings/{the session id}/snapshots?source=blob_v2&blob_key=0&decompress=false`
+
+Using `decompress=false` results in much faster API calls since the server doesn't need to decompress the data before sending it. This is useful when you want to handle decompression on the client side or when exporting data in bulk.
+
+When using `decompress=false`, you'll need to decompress the snappy-compressed data yourself before processing it.
+
 ### Post-processing
 
 All post-processing entrypoints in [our code can be found on GitHub](https://github.com/PostHog/posthog/blob/37babfa29f05f2d4e169e2f33f1643fffe540e95/frontend/src/scenes/session-recordings/player/snapshot-processing/process-all-snapshots.ts)

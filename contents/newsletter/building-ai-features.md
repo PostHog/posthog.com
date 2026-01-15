@@ -109,6 +109,8 @@ When building Max, we quickly realized answering questions like “How do I incr
 
 For example, Max can write better SQL because it knows which tables are available, and answer product questions with native visualizations because it’s built-in and understands the tools available.
 
+<NewsletterForm />
+
 ## Implementing your idea
 
 Now that you have an idea of what you want to build, you need to make sure it actually works. Here are some core bits to focus on getting right:
@@ -206,7 +208,7 @@ Each node of the router then has its own conditions to route through to get to t
 
 Ideally all the structure you’ve built up to this point prevents failure, but you still need to [give the AI guardrails](/blog/envoy-wizard-llm-agent) because it _will_ inevitably smash into them.
 
-First, you need to know when something goes wrong, so [implement monitoring](/docs/llm-analytics/start-here) from the beginning. [Georgiy](/community/profiles/30798) from our [PostHog AI](/teams/posthog-ai) team relayed how important this is:
+First, you need to know when something goes wrong, so [implement monitoring](/docs/llm-analytics/start-here) from the beginning. <TeamMember name="Georgiy Tarasov" photo /> from our <SmallTeam slug="posthog-ai" /> relayed how important this is:
 
 > Monitoring production traces is essential. We even built a [monitoring tool](/llm-analytics) for [dogfooding](/product-engineers/dogfooding), and I wish we had that tool from the beginning. It becomes harder to monitor traces at scale (we’re here), so online evaluations will be helpful (our next priority).
 >
@@ -250,7 +252,7 @@ Building AI-powered features shouldn’t be the responsibility of some “AI guy
 
 There are a few ways you can encourage this:
 
--   **Build primitives and make your AI functionality composable**, so teams don’t need to re-invent prompts, streaming, consent, evals, and [analytics](/llm-analytics). This helps teams focus on unique and value-added AI functionality.
+-   **Build primitives and make your AI functionality composable**, so teams don’t need to re-invent prompts, streaming, consent, evals, and [analytics](/llm-analytics). This helps developers focus on unique and value-added AI functionality.
 
 -   **Have a consistent UX pattern across your app.** For us, that’s [Max](/max). This prevents death by a thousand AI widgets.
 
@@ -305,3 +307,5 @@ Remember, you’re aiming to build something valuable to users, not shiny tech d
 All the lessons you’ve learned about building great products still apply. [Talk to users](/newsletter/talk-to-users), [ship fast](/newsletter/this-is-why-youre-not-shipping), [run experiments](/product-engineers/ab-testing-mistakes), and repeat.
 
 _Words by [Ian Vanagas](http://x.com/ianvanagas), who wrote this newsletter by hand as much as he would have liked to one-shot it with AI._
+
+<NewsletterForm />

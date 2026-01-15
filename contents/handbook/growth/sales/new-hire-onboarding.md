@@ -77,6 +77,7 @@ Ideally, this will happen in Week 3 or 4, and will be with a few existing team m
 
 - Focus on taking more and more ownership on calls so that team members are just there as a safety net.
 - Continue to meet with customers and reaching out to new leads.
+- Add your Calendly link to your Slack profile so customers can book in with you directly (this works!)
 
 ### How do I know if I'm on track?
 
@@ -141,6 +142,8 @@ Ideally, this will happen in Week 3 or 4, and will be with a few existing team m
 
 - Focus on taking more and more ownership on calls so that team members are just there as a safety net.
 - Continue to meet with your book of customers and inbound leads.
+- Add your Calendly link to your Slack profile so customers can book in with you directly (this works!)
+
 
 ### How do I know if I'm on track?
 
@@ -180,6 +183,16 @@ We have certain automations in Vitally and Zapier that your team lead needs to a
 - <PrivateLink url="https://zapier.com/editor/256779675/published?conversationId=5e6e7f58-89b3-434d-bc1f-35ce52756088"> Annual plan credit alerting </PrivateLink>: in step 8 look up table, add new team member's email and Slack member ID
 
 ## New hire frequently asked questions
+
+### How does my quota work during my ramp period?
+
+Your first three months of commission are paid at 100% fixed OTE. This will be calculated based on the date you start. If you start before the 15th of a month, you will get 100% fixed OTE for that month and two of the subsequent months. For example, if you start on Jan 13th, you will get 100% fixed OTE for Jan, Feb & Mar. If you start _on_ Jan 17th, you would get two months of 100% fixed OTE for Q1 and one month of 100% fixed OTE for Q2 in addition to two months of your quota'ed commission.
+
+<img
+    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/shapes_at_26_01_14_12_45_06_b0c13c36a5.png"
+    alt="New hire quota ramp visual"
+    className="my-6 rounded-md shadow-md"
+/>
 
 ### How does support work at PostHog?
 

@@ -27,6 +27,7 @@ Behold the virtuous circle:
 
 1. Create a valuable free product and a community around it. Collaborate with the community. The free product gets more valuable and more popular as a result. The community grows faster and faster.
 1. Larger companies using the free product think the paid product looks valuable. They email asking to buy [PostHog Scale](/pricing) or they increase their usage to 10s or 100s of millions of events/month.
+<!-- markdownlint-disable-next-line MD059 -->
 1. Get money from paid product, to get [even](raising-3m-for-os) [more](posthog-announces-9-million-dollar-series-A) money from venture capitalists, go to step 1.
 
 ## Who we made this change for
@@ -106,6 +107,6 @@ We've therefore already applied this increase to any customers who are paying pe
 
 After all, PostHog's mission is to increase the number of successful products in the world.
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
+> PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />

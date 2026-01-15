@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import Markdown from 'markdown-to-jsx'
-import { User, useUser } from 'hooks/useUser'
+import { useUser } from 'hooks/useUser'
 import { CallToAction } from 'components/CallToAction'
 import { useRoadmaps } from 'hooks/useRoadmaps'
 import {
@@ -18,8 +18,6 @@ import {
 } from '@posthog/icons'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import { Skeleton } from 'components/Questions/QuestionsTable'
-import SideModal from 'components/Modal/SideModal'
-import { Authentication } from 'components/Squeak'
 import groupBy from 'lodash.groupby'
 import UpdateWrapper from './UpdateWrapper'
 import RoadmapForm from 'components/RoadmapForm'
@@ -39,6 +37,7 @@ import { Select } from 'components/RadixUI/Select'
 import {
     createFuseInstance,
     processItemsWithHighlighting,
+    generateHighlightedText,
     HighlightedText,
     HighlightedMarkdown,
 } from 'components/Editor/SearchUtils'
@@ -117,8 +116,8 @@ export const VoteBox = ({ likeCount, liked }) => {
 
 export const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate, githubUrls }) => {
     const { user, likeRoadmap } = useUser()
+    const { openSignIn } = useApp()
     const { search } = useLocation()
-    const [authModalOpen, setAuthModalOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const teamName = teams?.data?.[0]?.attributes?.name
     const liked = user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === id)
@@ -127,15 +126,10 @@ export const Feature = ({ id, title, teams, description, likeCount, onLike, onUp
         setLoading(false)
     }, [liked])
 
-    const like = async (user?: User) => {
+    const like = async () => {
         setLoading(true)
         await likeRoadmap({ id, title, user, unlike: liked })
         onLike?.()
-    }
-
-    const onAuth = (user: User) => {
-        like(user)
-        setAuthModalOpen(false)
     }
 
     useEffect(() => {
@@ -147,29 +141,6 @@ export const Feature = ({ id, title, teams, description, likeCount, onLike, onUp
 
     return (
         <>
-            <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
-                <h4 className="mb-4">Sign into PostHog.com</h4>
-                <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                    <p className="text-sm mb-2">
-                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                    </p>
-
-                    <p className="text-sm mb-0">
-                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
-                        account.
-                    </p>
-                </div>
-
-                <Authentication
-                    initialView="sign-in"
-                    onAuth={(user) => {
-                        setAuthModalOpen(false)
-                        like(user)
-                    }}
-                    showBanner={false}
-                    showProfile={false}
-                />
-            </SideModal>
             <UpdateWrapper
                 id={id}
                 status="under-consideration"
@@ -204,7 +175,7 @@ export const Feature = ({ id, title, teams, description, likeCount, onLike, onUp
                                     if (user) {
                                         like()
                                     } else {
-                                        setAuthModalOpen(true)
+                                        openSignIn()
                                     }
                                 }}
                                 size="sm"
@@ -289,14 +260,9 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
     const [selectedTeam, setSelectedTeam] = useState('All teams')
     const [roadmapSearch, setRoadmapSearch] = useState('')
     const [loading, setLoading] = useState(false)
-    const [authModalOpen, setAuthModalOpen] = useState(false)
     const [expandedDescriptions, setExpandedDescriptions] = useState<Record<number, boolean>>({})
-    const [selectedRoadmapId, setSelectedRoadmapId] = useState<{
-        id: number
-        title: string
-    } | null>(null)
     const [localFilteredRoadmaps, setLocalFilteredRoadmaps] = useState()
-    const { addWindow } = useApp()
+    const { addWindow, openSignIn } = useApp()
     const isModerator = user?.role?.type === 'moderator'
 
     // Get search context if available (from Editor)
@@ -530,11 +496,7 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                                     if (user) {
                                         like(roadmap.id, roadmap.attributes.title)
                                     } else {
-                                        setSelectedRoadmapId({
-                                            id: roadmap.id,
-                                            title: roadmap.attributes.title,
-                                        })
-                                        setAuthModalOpen(true)
+                                        openSignIn()
                                     }
                                 }}
                                 size="xs"
@@ -586,23 +548,12 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                 {
                     content: (
                         <h3 className="text-[15px] m-0 font-normal leading-tight">
-                            {effectiveSearchTerm && effectiveSearchTerm.length > 1 ? (
-                                // Direct approach for highlighting when we have a search term
-                                <span
-                                    dangerouslySetInnerHTML={{
-                                        __html: roadmap.attributes.title.replace(
-                                            new RegExp(
-                                                `(${effectiveSearchTerm.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')})`,
-                                                'gi'
-                                            ),
-                                            '<strong>$1</strong>'
-                                        ),
-                                    }}
-                                />
-                            ) : (
-                                // Use the HighlightedText component when no direct search
-                                <HighlightedText text={roadmap.attributes.title} highlights={highlightedTitle} />
-                            )}
+                            <HighlightedText
+                                text={roadmap.attributes.title}
+                                highlights={highlightedTitle || (effectiveSearchTerm && effectiveSearchTerm.length > 1
+                                    ? generateHighlightedText(roadmap.attributes.title, [], effectiveSearchTerm)
+                                    : undefined)}
+                            />
                         </h3>
                     ),
                     className: '!pt-0.75',
@@ -735,31 +686,6 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
     return (
         <section>
             <>
-                <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
-                    <h4 className="mb-4">Sign into PostHog.com</h4>
-                    <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                        <p className="text-sm mb-2">
-                            <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                        </p>
-
-                        <p className="text-sm mb-0">
-                            We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
-                            account.
-                        </p>
-                    </div>
-
-                    <Authentication
-                        initialView="sign-in"
-                        onAuth={(user) => {
-                            setAuthModalOpen(false)
-                            if (selectedRoadmapId) {
-                                like(selectedRoadmapId.id, selectedRoadmapId.title)
-                            }
-                        }}
-                        showBanner={false}
-                        showProfile={false}
-                    />
-                </SideModal>
                 {isLoading ? (
                     <ProgressBar title="roadmap" />
                 ) : (
