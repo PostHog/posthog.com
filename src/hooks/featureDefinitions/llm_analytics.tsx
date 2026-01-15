@@ -8,7 +8,7 @@ export const llmAnalyticsFeatures = {
     features: {
         generation_tracking: {
             name: 'Generation tracking',
-            description: 'Track the generation of your LLM-powered features',
+            description: '',
         },
         latency_tracking: {
             name: 'Latency tracking',
@@ -28,15 +28,35 @@ export const llmAnalyticsFeatures = {
         },
         prompt_playground: {
             name: 'Prompt playground',
-            description: '',
+            description: 'interactive testing environment for prompts and models',
         },
         prompt_evaluations: {
             name: 'Prompt evaluations',
-            description: '',
+            description: 'online LLM-as-a-Judge evaluations for measuring AI output quality',
         },
         alerting: {
             name: 'Alerting',
             description: '',
+        },
+        error_tracking: {
+            name: 'Error tracking',
+            description: 'grouped error tracking for LLM applications',
+        },
+        system_prompts: {
+            name: 'System prompts',
+            description: 'create and manage system prompts from the PostHog UI',
+        },
+        clustering: {
+            name: 'Clustering',
+            description: 'automatic grouping of similar traces and outputs',
+        },
+        trace_summarization: {
+            name: 'Trace summarization',
+            description: 'AI-generated summaries  quick understanding',
+        },
+        llm_translation: {
+            name: 'LLM translation',
+            description: 'translation of non-English LLM traces to English',
         },
     },
 }

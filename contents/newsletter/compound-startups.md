@@ -73,6 +73,8 @@ Other advantages include:
 
 - **Value:** Compound startups can generate more value for customers, and are more ambitious and valuable themselves as a result.
 
+<NewsletterForm />
+
 ## Arguments against compound startups
 
 The arguments against are basically the ones that dictate it’s better to focus on one thing and do it well. And, a lot of the time, that’s still valid advice.

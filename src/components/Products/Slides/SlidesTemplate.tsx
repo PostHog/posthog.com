@@ -573,6 +573,7 @@ export default function SlidesTemplate({
                 } else if (feature.template === 'splitImage') {
                     featureContent = (
                         <FeaturesSplitWithImage
+                            className={feature.className}
                             bgColor={productData?.color}
                             textColor={productData?.overview?.textColor}
                             headline={feature.headline}

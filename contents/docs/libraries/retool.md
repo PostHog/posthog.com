@@ -1,7 +1,6 @@
 ---
 title: Retool
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/retool.svg
+platformLogo: retool
 ---
 
 ## Objective

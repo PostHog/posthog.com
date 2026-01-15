@@ -322,7 +322,7 @@ function VideoCard({ video, onClick }: { video: Video; onClick: () => void }) {
     return (
         <button
             onClick={onClick}
-            className="group relative rounded overflow-hidden hover:ring-2 hover:ring-yellow h-full"
+            className="group relative rounded overflow-hidden hover:ring-2 hover:ring-yellow h-full flex flex-col"
         >
             <div className="aspect-video bg-black flex items-center justify-center relative">
                 {isLoading ? (
