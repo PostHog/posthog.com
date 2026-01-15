@@ -19,6 +19,7 @@ interface FeaturesSplitWithImageProps {
         stylize?: boolean
         shadow?: boolean
         className?: string
+        containerClassName?: string
     }>
     children?: React.ReactNode
     bgColor?: string
@@ -51,6 +52,7 @@ export default function FeaturesSplitWithImage({
                         <p
                             className="mt-3 opacity-80 text-3xl @2xl:text-2xl [&_code]:text-2xl"
                             {...(typeof description === 'string'
+                                // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - CMS content, not user input
                                 ? { dangerouslySetInnerHTML: { __html: description } }
                                 : { children: description })}
                         />
@@ -87,6 +89,7 @@ export default function FeaturesSplitWithImage({
                             stylize: img.stylize || false,
                             shadow: img.shadow || false,
                             className: img.className || '',
+                            containerClassName: img.containerClassName || '',
                         }))}
                     />
                 )}

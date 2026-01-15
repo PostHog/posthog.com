@@ -406,6 +406,7 @@ export default function SalesforceForm({
         submitted ? (
             <>
                 <div className="bg-primary text-primary border border-green p-4 rounded flex justify-center items-center">
+                    {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - form message from Salesforce API, not external user input */}
                     {customMessage || <div dangerouslySetInnerHTML={{ __html: form?.message || '' }} />}
                 </div>
             </>
