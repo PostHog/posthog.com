@@ -28,7 +28,7 @@ We're working on adding more supported tools to the wizard. If you're using anot
 
 Add the MCP configuration to any desktop client you use, such as Cursor, Windsurf, or Claude Desktop. When you first use the MCP server, you'll be prompted to log in to PostHog to authenticate.
 
-<CalloutBox icon="IconFlag" title="EU region users" type="info">
+<CalloutBox icon="IconFlag" title="EU region users" type="fyi">
 
 If your PostHog project is on EU Cloud, add `?region=eu` to the MCP URLs. For example: `https://mcp.posthog.com/mcp?region=eu`
 
@@ -69,17 +69,18 @@ If your PostHog project is on EU Cloud, add `?region=eu` to the MCP URLs. For ex
     </Tab.Panels>
 </Tab.Group>
 
-<CalloutBox icon="IconShield" title="Security tips" type="info">
+Be mindful of prompt injection – LLMs can be tricked into following untrusted commands, so always review tool calls before executing them.
 
-**Scope to a specific project** to limit access and maintain data isolation. **Be mindful of prompt injection** – LLMs can be tricked into following untrusted commands. Always review tool calls before executing them.
+<details>
 
-</CalloutBox>
+<summary>Using an API key instead of OAuth?</summary>
 
-<CalloutBox icon="IconKey" title="Using an API key instead?" type="info">
+If your MCP client doesn't support OAuth, you can authenticate manually:
 
-If your MCP client doesn't support OAuth, get a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) and add the `Authorization: Bearer YOUR_API_KEY` header to your MCP configuration.
+1. Create a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) using the **MCP Server** preset (this scopes access to a specific project)
+2. Add the `Authorization: Bearer YOUR_API_KEY` header to your MCP configuration
 
-</CalloutBox>
+</details>
 
 
 ## Available Tools
