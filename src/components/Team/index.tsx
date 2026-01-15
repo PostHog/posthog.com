@@ -752,6 +752,7 @@ export default function Team({
                     <h2>Goals</h2>
                     <div className="article-content team-page-content">
                         <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember }}>
+                            {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - team objectives from CMS, not user input */}
                             <div dangerouslySetInnerHTML={{ __html: objectives }} />
                         </MDXProvider>
                     </div>
