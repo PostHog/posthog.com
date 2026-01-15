@@ -1,5 +1,5 @@
 ---
-title: Workflows is now GA. Congrats, your product data just got a job
+title: You product data just got a job: Workflows is now out
 date: 2025-12-30
 rootPage: /blog
 sidebar: Blog
