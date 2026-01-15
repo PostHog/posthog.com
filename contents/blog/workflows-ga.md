@@ -1,5 +1,5 @@
 ---
-title: Your product data just got a job: Workflows is now out
+title: "Your product data just got a job: Workflows is now out"
 date: 2025-12-30
 rootPage: /blog
 sidebar: Blog
