@@ -92,11 +92,11 @@ Rather than rehash the same frustrations, this guide focuses on tools that are e
 
 PostHog is an all-in-one developer platform that combines [web analytics](/web-analytics) with [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and [LLM analytics](/llm-analytics) in one place.
 
-Unlike standalone web analytics tools, PostHog lets you follow a visitor's journey from their first pageview through to product usage; you still get the fundamentals, but they're directly connected to how users actually behave in your product. 
+Unlike standalone web analytics tools, PostHog lets you follow a visitor's journey from their first pageview through to product usage; you still get the fundamentals, but they're directly connected to how users actually behave in your product. Every pageview can be tied to events, users, recordings, flag variants, errors, and more. 
 
-Every pageview can be tied to events, users, recordings, flag variants, errors, and more. You can see which channels bring high-value users, combine analytics and replays to understand drop-offs, and run experiments to optimize conversion – all without switching tools.
+The web analytics dashboard includes [real-time activity](/docs/web-analytics/dashboard), [conversion goals](/docs/web-analytics/conversion-goals), and near-full compatibility with product analytics – meaning you can open any chart as an [insight](/docs/product-analytics/insights), query it with [SQL](/docs/data-warehouse/sql), or build funnels, retention, and cohorts on your web data.
 
-The web analytics dashboard also includes [real-time activity](/docs/web-analytics/dashboard), [conversion goals](/docs/web-analytics/conversion-goals), and the flexibility to open any chart as a [product analytics insight](/docs/product-analytics/insights) or query it directly with [SQL](/docs/data-warehouse/sql).
+You can also run [A/B tests](/experiments) using web vitals as goals, track ad spend and ROAS with [marketing analytics](/docs/web-analytics/marketing-analytics), and embed analytics into your own product using the [API endpoints](/docs/api) (in beta).
 
 PostHog uses simple [usage-based pricing](/pricing) with a generous free tier that includes 1 million events per month, which is enough for most early-stage teams to get real value before paying anything.
 
@@ -138,7 +138,7 @@ Adding Plausible to your stack is painless: setup takes minutes, the script is t
 
 The dashboard is intentionally simple: a single page with the essential metrics. You get traffic, sources, pages, locations, and devices. Plausible deliberately trades analytical depth for simplicity and strong privacy guarantees.
 
-Because [Plausible](/blog/best-plausible-alternatives) avoids deep user tracking by design, there's no session replay, no detailed funnels, no user-level timelines, and no product analytics.
+Because [Plausible](/blog/best-plausible-alternatives) avoids deep user tracking by design, there's no session replay, no detailed funnels, no user-level timelines, and no product analytics. Unique visitor counts are also [approximations](https://plausible.io/data-policy#how-we-count-unique-users-without-cookies) – the tradeoff for being fully cookieless.
 
 Plausible doesn't have a free tier. Plans start at $9/month for a single site with 3 years of data retention, and scale to $14/month and $19/month as you add more sites, team members, and features like funnels, custom properties, revenue attribution, and API access. An Enterprise plan is available for larger setups, with SSO, higher API limits, raw data exports, and priority support.
 
@@ -233,7 +233,7 @@ Developers that need full-featured, self-hosted analytics with complete data own
 
 ### 5. Mixpanel
 
-![Matomo](https://res.cloudinary.com/dmukukwp6/image/upload/matomo_69f99f4666.png)
+![Mixpanel](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mixpanel_ca2e3a5b11.png)
 
 [Mixpanel](/blog/posthog-vs-mixpanel) is primarily a product analytics platform, but it now includes dedicated web analytics features that make it worth considering for certain use cases.
 
@@ -304,7 +304,7 @@ Developers already using Cloudflare who want free, privacy-first website metrics
 - Want web analytics connected to product analytics, session replay, feature flags, and experiments? **[PostHog](/web-analytics)**.
 - Want simple, privacy-first traffic analytics with minimal setup? **Plausible** or **Fathom**.
 - Want full data ownership with a GA-style reporting model? **Matomo**.
-- Is your "website" really a product where activation and retention matter more than pageviews? **Mixpanel**.
+- Is your "website" really a product where activation and retention matter more than pageviews? **Mixpanel** or **PostHog**.
 - Want free, privacy-friendly traffic visibility and already use Cloudflare? **Cloudflare Web Analytics**.
 
 ### Recommendations by team type
@@ -350,7 +350,7 @@ Good web analytics answers questions like: Why did users bounce? Where did they 
 <details>
   <summary>What metrics matter most in web analytics?</summary>
 
-Most teams should start with: **traffic sources** (where users come from), **landing pages** (where sessions start), **bounce rate or engagement** (how they spend, or dont spend, time on your website), and **conversions** (sign-ups, purchases, or key actions).
+Most teams should start with: **channel types** (where users come from), **landing pages** (where sessions start), **bounce rate or engagement** (how they spend, or dont spend, time on your website), and **conversions** (sign-ups, purchases, or key actions).
 
 As your site becomes more product-like, event-based metrics (clicks, actions, feature usage) become more important than raw pageviews.
 
@@ -379,7 +379,7 @@ That's why many modern tools pair pageviews with [events](/docs/product-analytic
 <details>
   <summary>Is web analytics affected by ad blockers?</summary>
 
-Yes, especially tools that rely entirely on client-side JavaScript. Privacy-first tools, server-side collection, or edge-based analytics (like Cloudflare's) tend to be more resilient, but no analytics setup is 100% immune. You can also [set up a reverse proxy](/docs/advanced/proxy) to route analytics through your own domain, which can reduce the impact of blockers.
+Yes, especially tools that rely entirely on client-side JavaScript. Privacy-first tools, server-side collection, or edge-based analytics (like Cloudflare's) tend to be more resilient, but no analytics setup is 100% immune. You can also [set up a reverse proxy](/docs/advanced/proxy) to route analytics through your own domain, or combine client-side and server-side tracking to fill in gaps.
 
 Even then, it's best to treat web analytics as directionally accurate and focus on trends and patterns — not exact counts.
 
@@ -395,7 +395,7 @@ It depends on the tool and your jurisdiction. **Plausible**, **Fathom**, and **C
 <details>
   <summary>What's the difference between web analytics and product analytics?</summary>
 
-**Web analytics** focuses on traffic and pages (who visited, where they came from, what they viewed). [Product analytics](/blog/what-is-product-analytics) focuses on behavior and users (what actions users took, how they activate, retain, or churn).
+**Web analytics** focuses on traffic and pages (who visited, where they came from, what they viewed). [Product analytics](/blog/what-is-product-analytics) focuses on behavior and users (what actions users took, how they activate, retain, or churn). We break this down in more detail in [web analytics vs. product analytics](/docs/web-analytics/web-vs-product-analytics).
 
 Tools like **PostHog** combine both, so you can see how traffic turns into real [product usage](/product-analytics).
 
