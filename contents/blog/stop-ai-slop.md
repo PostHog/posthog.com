@@ -161,6 +161,8 @@ AI slop is real. Evals are how you stop shipping it.
 
 If you're already using [LLM analytics](/llm-analytics) in PostHog, you can start creating evaluations right away. Your first 100 evaluation runs are on us. After that, evals count as regular LLM events (100K events included on our free tier).
 
-< CallToAction to="http://app.posthog.com/llm-analytics/evaluations" >
-Try evaluations in PostHog
-< / CalltoAction >
+<p>
+	<CallToAction to="http://app.posthog.com/llm-analytics/evaluations">
+		Try evaluations in PostHog
+	</CallToAction>
+</p>
