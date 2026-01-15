@@ -897,8 +897,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                         `https://raw.githubusercontent.com/posthog/segment-docs/refs/heads/develop/src/connections/destinations/catalog/${pipeline.id.replace(
                             'segment-',
                             ''
-                        )}/index.md`,
-                        { headers: githubHeaders }
+                        )}/index.md`
                     )
                     let markdown = await response.text()
                     if (response.status !== 200) markdown = ''
