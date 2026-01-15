@@ -100,16 +100,76 @@ Once you've passed the hash from your server to the frontend, you need to ensure
 const distinctId = window.__POSTHOG_DISTINCT_ID__
 const distinctIdHash = window.__POSTHOG_DISTINCT_ID_HASH__
 
-// Identify the user
-posthog.identify(distinctId)
-
 // Register the hash as a super property so it's sent with every event
 posthog.register({
     $distinct_id_hash: distinctIdHash
 })
+
+// Identify the user
+posthog.identify(distinctId)
 ```
 
 All subsequent events captured by PostHog will automatically include the `$distinct_id_hash` property and can be validated by the transformation.
+
+### Using the hash in backend SDKs
+
+When capturing events from your backend, include the `$distinct_id_hash` property directly with each event:
+
+<MultiLanguage>
+
+```js file=Node.js
+import crypto from 'crypto'
+import { PostHog } from 'posthog-node'
+
+const posthog = new PostHog('<ph_project_api_key>')
+
+function generateDistinctIdHash(distinctId) {
+    const sharedSecret = process.env.POSTHOG_SHARED_SECRET
+    return crypto
+        .createHmac('sha256', sharedSecret)
+        .update(distinctId)
+        .digest('hex')
+}
+
+const distinctId = 'user_123'
+
+posthog.capture({
+    distinctId,
+    event: 'user_signed_up',
+    properties: {
+        $distinct_id_hash: generateDistinctIdHash(distinctId)
+    }
+})
+```
+
+```python file=Python
+import hmac
+import hashlib
+import os
+from posthog import Posthog
+
+posthog = Posthog('<ph_project_api_key>')
+
+def generate_distinct_id_hash(distinct_id):
+    shared_secret = os.environ['POSTHOG_SHARED_SECRET']
+    return hmac.new(
+        shared_secret.encode(),
+        distinct_id.encode(),
+        hashlib.sha256
+    ).hexdigest()
+
+distinct_id = 'user_123'
+
+posthog.capture(
+    distinct_id,
+    'user_signed_up',
+    {
+        '$distinct_id_hash': generate_distinct_id_hash(distinct_id)
+    }
+)
+```
+
+</MultiLanguage>
 
 ## Rotating secrets
 
