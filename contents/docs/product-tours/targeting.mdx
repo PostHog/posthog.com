@@ -1,0 +1,59 @@
+---
+title: Targeting and conditions
+sidebar: Docs
+showTitle: true
+---
+
+import Alpha from './_snippets/alpha.mdx'
+
+<Alpha />
+
+Targeting controls who sees your tours and when they appear. A user must match **all** conditions to see a tour.
+
+## URL conditions
+
+Show tours on specific pages using URL matching.
+
+| Type | Description | Example |
+|------|-------------|---------|
+| **Exact** | URL must match exactly | `https://app.example.com/dashboard` |
+| **Contains** | URL must contain the string | `/dashboard` matches any URL with `/dashboard` |
+| **Regex** | URL must match the pattern | `/users/[0-9]+` |
+
+The URL is matched against the full `window.location.href`.
+
+## User targeting
+
+Target specific users using [feature flag](/docs/feature-flags) filters. Every tour has an auto-created internal feature flag, and you can add targeting filters to control who sees the tour.
+
+This lets you show tours to:
+
+- Users with specific properties (e.g., `plan = pro`)
+- Users in specific [cohorts](/docs/data/cohorts)
+- A percentage of users (rollout)
+
+## Auto-launch delay
+
+Set a delay (in seconds) before the tour appears after the page loads. This is useful when:
+
+- You want users to orient themselves before the tour starts
+- Target elements load asynchronously
+
+## Display frequency
+
+Controls how often a tour shows to users.
+
+**Tours** show until the user interacts with them (completes or dismisses). Once a user interacts, they won't see the tour again.
+
+**Announcements** have configurable display frequencies:
+
+| Type | Options |
+|------|---------|
+| **Modal announcements** | Show once (default), or until interacted |
+| **Banners** | Until interacted (default), or always |
+
+This is handled via person properties:
+- `$product_tour_completed/{tour_id}`
+- `$product_tour_dismissed/{tour_id}`
+
+These properties are set automatically and used to filter out users who have already interacted with a tour.

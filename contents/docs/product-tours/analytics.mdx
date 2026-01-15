@@ -1,0 +1,43 @@
+---
+title: Analytics
+sidebar: Docs
+showTitle: true
+---
+
+import Alpha from './_snippets/alpha.mdx'
+
+<Alpha />
+
+## Dashboard metrics
+
+Every tour shows these metrics in the PostHog UI:
+
+- **Shown** - How many users saw the tour (unique and total)
+- **Completed** - How many users finished all steps
+- **Dismissed** - How many users closed early
+- **Tour funnel** - Shows step-by-step where users drop off
+
+## Events
+
+Product tours capture these events automatically:
+
+| Event | Description |
+|-------|-------------|
+| `product tour shown` | Tour was displayed |
+| `product tour completed` | User finished all steps |
+| `product tour dismissed` | User closed early |
+| `product tour step shown` | A step was displayed |
+| `product tour step completed` | User advanced past a step |
+| `product tour step selector failed` | Element selector didn't find the target |
+
+All events include `$tour_id`, `$tour_name`, and step events include `$step_id` and `$step_index`.
+
+## Person properties
+
+These properties are set when users interact with tours:
+
+- `$product_tour_shown/{tour_id}` - Set to `true` when shown
+- `$product_tour_completed/{tour_id}` - Set to `true` when completed
+- `$product_tour_dismissed/{tour_id}` - Set to `true` when dismissed
+
+Use these for targeting other tours or creating [cohorts](/docs/data/cohorts).

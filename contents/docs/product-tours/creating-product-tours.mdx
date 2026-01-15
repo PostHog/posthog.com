@@ -1,0 +1,49 @@
+---
+title: Creating product tours
+sidebar: Docs
+showTitle: true
+---
+
+import Alpha from './_snippets/alpha.mdx'
+
+<Alpha />
+
+Product tours are multi-step walkthroughs that highlight elements in your UI. You build them visually using the PostHog toolbar directly on your site.
+
+## Launch the toolbar
+
+1. Go to [Product tours](https://us.posthog.com/product-tours) in PostHog
+2. Click **New tour** and select **Product tour**
+3. Enter the URL where you want to build the tour and click **Open toolbar**
+
+## Select elements
+
+Click elements on your page to create steps. PostHog generates a CSS selector for each element automatically.
+
+>**Note:** If your target elements do not have stable selectors like `id` or `data-*`, the tour may fail to correctly identify them. We're working on a new element-finding algorithm, stay tuned!
+
+## Add step content
+
+The toolbar includes a lightweight editor for basic formatting and images. For more control, edit your tour in the main PostHog app.
+
+## Step progression
+
+Steps can progress via buttons or when the user clicks the target element. Guide users through real interactions, not just info.
+
+## Step types
+
+### Element steps
+
+The default. Highlights a specific element with a tooltip. Positioning is automatic based on available viewport space.
+
+### Modal steps
+
+Screen-positioned dialogs not anchored to any element. Useful for welcome messages or summary screens.
+
+### Survey steps
+
+Embed a survey question mid-tour (open text or rating scale). Responses are captured as events.
+
+## Save and launch
+
+Click **Save** in the toolbar to save your tour as a draft. When ready, [launch the tour](/docs/product-tours/managing-tours).
