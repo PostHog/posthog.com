@@ -22,7 +22,7 @@ If you enable **Enforce secure mode**, events from anonymous users will be dropp
 
 ## Requirements
 
-You'll need to configure your application to generate an HMAC-SHA256 hash of the `distinct_id` using a shared secret and include it in the event properties as `$verification_hash`.
+You'll need to configure your application to generate an HMAC-SHA256 hash of the `distinct_id` using a shared secret and include it in the event properties as `$distinct_id_hash`.
 
 ## Installation
 
@@ -36,7 +36,7 @@ You'll need to configure your application to generate an HMAC-SHA256 hash of the
 
 When an event arrives, this transformation:
 
-1. Looks for a `$verification_hash` property on the event
+1. Looks for a `$distinct_id_hash` property on the event
 2. Generates an HMAC-SHA256 hash of the `distinct_id` using your configured shared secret
 3. Compares the two hashes to verify authenticity
 4. Either marks the event with `$verified_distinct_id: true/false` or drops invalid events (depending on your configuration)
@@ -52,7 +52,7 @@ To use this transformation, you need to generate the verification hash **on your
 ```js file=Node.js
 import crypto from 'crypto'
 
-function generateVerificationHash(distinctId) {
+function generateDistinctIdHash(distinctId) {
     const sharedSecret = process.env.POSTHOG_SHARED_SECRET
     return crypto
         .createHmac('sha256', sharedSecret)
@@ -63,7 +63,7 @@ function generateVerificationHash(distinctId) {
 // When rendering your page or handling an API request,
 // generate the hash and pass it to the frontend
 const distinctId = 'user_123'
-const verificationHash = generateVerificationHash(distinctId)
+const distinctIdHash = generateDistinctIdHash(distinctId)
 
 // Pass these values to your frontend (e.g., via template variables, API response, etc.)
 ```
@@ -73,7 +73,7 @@ import hmac
 import hashlib
 import os
 
-def generate_verification_hash(distinct_id):
+def generate_distinct_id_hash(distinct_id):
     shared_secret = os.environ['POSTHOG_SHARED_SECRET']
     return hmac.new(
         shared_secret.encode(),
@@ -84,7 +84,7 @@ def generate_verification_hash(distinct_id):
 # When rendering your page or handling an API request,
 # generate the hash and pass it to the frontend
 distinct_id = 'user_123'
-verification_hash = generate_verification_hash(distinct_id)
+distinct_id_hash = generate_distinct_id_hash(distinct_id)
 
 # Pass these values to your frontend (e.g., via template context, API response, etc.)
 ```
@@ -98,10 +98,10 @@ Once you've passed the verification hash from your server to the frontend, use i
 ```js
 // These values come from your server (e.g., embedded in the page or fetched via API)
 const distinctId = window.__POSTHOG_DISTINCT_ID__
-const verificationHash = window.__POSTHOG_VERIFICATION_HASH__
+const distinctIdHash = window.__POSTHOG_DISTINCT_ID_HASH__
 
 posthog.identify(distinctId, {
-    $verification_hash: verificationHash
+    $distinct_id_hash: distinctIdHash
 })
 ```
 
@@ -126,7 +126,7 @@ When you're ready to block unverified events, you can enable **Enforce secure mo
 
 <CalloutBox icon="IconWarning" title="Before enabling enforce mode" type="warning">
 
-Only enable enforce mode after you have confirmed that all events you care about have `$verified_distinct_id: true`. Once enabled, **any event without a valid `$verification_hash` will be permanently dropped**.
+Only enable enforce mode after you have confirmed that all events you care about have `$verified_distinct_id: true`. Once enabled, **any event without a valid `$distinct_id_hash` will be permanently dropped**.
 
 This includes events from **anonymous users** — since anonymous users have client-generated `distinct_id` values, there is no way to securely generate a verification hash for them. If you rely on tracking anonymous users before they log in, do not enable enforce mode.
 
@@ -151,9 +151,9 @@ Before enabling:
 
 By default, events that fail validation are marked with `$verified_distinct_id: false` but still ingested. If you enable **Enforce secure mode**, invalid events are dropped entirely and will not be ingested.
 
-### What if an event doesn't have a verification hash?
+### What if an event doesn't have a distinct_id hash?
 
-Events without a `$verification_hash` property are treated as unverified. With enforce mode disabled, they're marked as `$verified_distinct_id: false`. With enforce mode enabled, they're dropped.
+Events without a `$distinct_id_hash` property are treated as unverified. With enforce mode disabled, they're marked as `$verified_distinct_id: false`. With enforce mode enabled, they're dropped.
 
 ### Is the source code for this transformation available?
 
