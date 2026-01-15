@@ -856,81 +856,81 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
             return ''
         }
-
-        const fetchPostHogPipelines = async (
-            type: 'transformation' | 'destination' | 'source_webhook',
-            generateSlug: (pipeline: any) => string
-        ) => {
-            const { results } = await fetch(
-                `https://us.posthog.com/api/public_hog_function_templates?type=${type}&limit=350`
-            ).then((res) => res.json())
-            await Promise.all(
-                results.map(async (pipeline) => {
-                    let additionalData = {}
-
-                    if (pipeline.id.startsWith('segment-')) {
-                        const cleanMarkdown = (markdown: string) => {
-                            return markdown
-                                .replaceAll(/^---[\s\S]*?---/g, '') // Remove frontmatter
-                                .replaceAll(/{%\s*.*?\s*%}/g, '') // Remove {% ... %}
-                                .replaceAll(/{:.*?}/g, '') // Remove {: ... }
-                                .replaceAll(/{{.*?}}/g, '') // Remove {{ ... }}
-                                .replaceAll('Segment', 'PostHog')
-                                .replaceAll('Connections > Catalog', 'Data pipelines')
-                                .replaceAll('Catalog', 'Data pipelines')
-                                .replaceAll(' (Actions)', '')
-                                .replaceAll('segmentio', 'posthog')
-                                .replaceAll(/\[([^\]]+)\]\(https?:\/\/[^\/]*segment\.com[^)]*\)(\s*\{:.*?\})?/g, '$1') // Remove segment.com links completely, keeping only the link text
-                                .replaceAll(/> \w+ ""/g, '')
-                                .replaceAll(/^.*Both of these destinations receive data from PostHog.*$/gm, '') // Remove banner regarding the Actions-framework
-                                .replaceAll(
-                                    /^.*(?:maintains this destination|maintained by|contact.*support|support.*team).*$/gm,
-                                    ''
-                                ) // Remove lines about other companies maintaining destinations or contact support
-                                .trim()
-                        }
-
-                        const response = await fetch(
-                            `https://raw.githubusercontent.com/posthog/segment-docs/refs/heads/develop/src/connections/destinations/catalog/${pipeline.id.replace(
-                                'segment-',
-                                ''
-                            )}/index.md`,
-                            { headers: githubHeaders }
-                        )
-                        let markdown = await response.text()
-                        if (response.status !== 200) markdown = ''
-                        markdown = cleanMarkdown(markdown)
-
-                        additionalData = {
-                            introSnippet: extractIntroSection(markdown),
-                            installationSnippet: extractGettingStartedSection(markdown),
-                        }
-                    }
-
-                    const slug = generateSlug(pipeline)
-                    const node = {
-                        id: createNodeId(`posthog-pipeline-${pipeline.id}`),
-                        internal: {
-                            type: 'PostHogPipeline',
-                            contentDigest: createContentDigest({ pipeline }),
-                        },
-                        pipelineId: pipeline.id,
-                        slug,
-                        type,
-                        ...pipeline,
-                        ...additionalData,
-                    }
-                    createNode(node)
-                })
-            )
-        }
-
-        await fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', ''))
-        await fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', ''))
-        await fetchPostHogPipelines('source_webhook', (pipeline) => pipeline.id.replace('template-', ''))
     }
 
     await sourceGithubNodes()
+
+    const fetchPostHogPipelines = async (
+        type: 'transformation' | 'destination' | 'source_webhook',
+        generateSlug: (pipeline: any) => string
+    ) => {
+        const { results } = await fetch(
+            `https://us.posthog.com/api/public_hog_function_templates?type=${type}&limit=350`
+        ).then((res) => res.json())
+        await Promise.all(
+            results.map(async (pipeline) => {
+                let additionalData = {}
+
+                if (pipeline.id.startsWith('segment-')) {
+                    const cleanMarkdown = (markdown: string) => {
+                        return markdown
+                            .replaceAll(/^---[\s\S]*?---/g, '') // Remove frontmatter
+                            .replaceAll(/{%\s*.*?\s*%}/g, '') // Remove {% ... %}
+                            .replaceAll(/{:.*?}/g, '') // Remove {: ... }
+                            .replaceAll(/{{.*?}}/g, '') // Remove {{ ... }}
+                            .replaceAll('Segment', 'PostHog')
+                            .replaceAll('Connections > Catalog', 'Data pipelines')
+                            .replaceAll('Catalog', 'Data pipelines')
+                            .replaceAll(' (Actions)', '')
+                            .replaceAll('segmentio', 'posthog')
+                            .replaceAll(/\[([^\]]+)\]\(https?:\/\/[^\/]*segment\.com[^)]*\)(\s*\{:.*?\})?/g, '$1') // Remove segment.com links completely, keeping only the link text
+                            .replaceAll(/> \w+ ""/g, '')
+                            .replaceAll(/^.*Both of these destinations receive data from PostHog.*$/gm, '') // Remove banner regarding the Actions-framework
+                            .replaceAll(
+                                /^.*(?:maintains this destination|maintained by|contact.*support|support.*team).*$/gm,
+                                ''
+                            ) // Remove lines about other companies maintaining destinations or contact support
+                            .trim()
+                    }
+
+                    const response = await fetch(
+                        `https://raw.githubusercontent.com/posthog/segment-docs/refs/heads/develop/src/connections/destinations/catalog/${pipeline.id.replace(
+                            'segment-',
+                            ''
+                        )}/index.md`,
+                        { headers: githubHeaders }
+                    )
+                    let markdown = await response.text()
+                    if (response.status !== 200) markdown = ''
+                    markdown = cleanMarkdown(markdown)
+
+                    additionalData = {
+                        introSnippet: extractIntroSection(markdown),
+                        installationSnippet: extractGettingStartedSection(markdown),
+                    }
+                }
+
+                const slug = generateSlug(pipeline)
+                const node = {
+                    id: createNodeId(`posthog-pipeline-${pipeline.id}`),
+                    internal: {
+                        type: 'PostHogPipeline',
+                        contentDigest: createContentDigest({ pipeline }),
+                    },
+                    pipelineId: pipeline.id,
+                    slug,
+                    type,
+                    ...pipeline,
+                    ...additionalData,
+                }
+                createNode(node)
+            })
+        )
+    }
+
+    await fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', ''))
+    await fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', ''))
+    await fetchPostHogPipelines('source_webhook', (pipeline) => pipeline.id.replace('template-', ''))
 
     const fetchReferences = async (page = 1) => {
         const referenceQuery = qs.stringify(
