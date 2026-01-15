@@ -16,27 +16,27 @@ tags:
   - LLM analytics
 ---
 
-Every time your AI product generates text, code, or images, it's being judged
+Every time your AI product generates text, code, or images, it's being judged.
 
-Not against MMLU scores or your internal metrics. It's being judged by a user who's tired, distracted, and one bad output away from a final verdict:
+Not against some complex scoring matrix or your internal metrics, but by a user who's tired, distracted, and one bad output away from a final verdict:
 - "This helped me."
 - "This wasted my time."
 - "This is AI slop and now I don't trust you."
 
-If you’re shipping anything LLM-powered in production, you need a simple way to answer: “is this AI model doing what I want it to?”.
+If you’re shipping anything LLM-powered in production, you need a simple way to answer: “Is this AI model doing what I want it to?”
 
 That's what evaluations are for.
 
-## Your judge, jury and execution environment
+## Your judge, jury, and execution environment
 PostHog [evaluations](/docs/llm-analytics/evaluations) use LLM-as-a-judge to automatically score generative AI outputs against criteria like relevance, helpfulness, or toxicity. 
 
-**How it works**
+**How it works:**
 - Write a short evaluation prompt 
 - Choose a sampling rate (0.1% – 100%)
 - Define pass/fail criteria 
 - Optionally add property filters to narrow which generations get evaluated
 
-_*To avoid false negatives from incomplete context, we apply an N/A label when the judge can't access the necessary information to make a determination._
+_To avoid false negatives from incomplete context, we apply an N/A label when the judge can't access the necessary information to make a determination._
 
 Running evals with AI enables you to batch test hundreds or thousands of traces, then apply human judgement to investigate pass/fail samples. To help you get started, we included five pre-built templates:
 
@@ -57,7 +57,7 @@ You can also create custom evals to suit the specific use cases of your AI featu
 ## Why use evals? A tale of two math problems
 **Problem 1: Manual review doesn’t scale**
 
-LLM [oberservability tools](/blog/best-open-source-llm-observability-tools) capture the inputs, outputs, latency, tokens, costs, and errors associated with AI workflows. This makes it simple for engineers to review generations and traces, and hunt for "AI slop". 
+[LLM observability tools](/blog/best-open-source-llm-observability-tools) capture the inputs, outputs, latency, tokens, costs, and errors associated with AI workflows. This makes it simple for engineers to review generations and traces, and hunt for "AI slop". 
 
 Slop (a disguting yet accurate term) is any output from an LLM that feels generic, low quality, or just plain wrong.
 
@@ -66,7 +66,7 @@ The problem with manual review is that it doesn't scale. Suppose looking through
 - 100 traces = half a work week
 - 10,000 traces = existential dread
 
-Since the average AI product has tens- or hundreds of thousands of generations occurring per day, there's no way to review them all and maintain sanity.
+Since the average AI product has tens or hundreds of thousands of generations occurring per day, there's no way to review them all and maintain sanity.
 
 **Problem 2:  Margin of error affects your margins**
 
@@ -87,6 +87,8 @@ Luckily, the [best practices](https://hamel.dev/blog/posts/llm-judge/) for writi
 - Include examples of good vs bad, and edge cases when relevant
 - Keep prompts concise and specific (avoid trying to evaluate multiple things in one shot)
 
+Here's a template you can use:
+
 ```text
 You are a [DOMAIN] evaluator judging whether an assistant response satisfies the requirement below.
 
@@ -106,7 +108,7 @@ Examples:
 - [Edge case example]
 
 ```
->LLMs fail in unpredictable ways. Using one LLM to judge another will sometimes produce bizarre results. Keep humans in the loop to verify the judge isn't also hallucinating. Your evaluation criteria will drift as you discover new failure modes in production.
+> LLMs fail in unpredictable ways. Using one LLM to judge another will sometimes produce bizarre results. Keep humans in the loop to verify the judge isn't also hallucinating. Your evaluation criteria will drift as you discover new failure modes in production.
 
 **Examples of AI slop you can catch with evals:**
 - Fake product capabilities and integrations (nightmare for sales and support)
@@ -137,12 +139,12 @@ When you connect eval results to real user behavior, you can see which AI behavi
 
 **The AI product improvement loop:**
 
-**1. [LLM Analytics](/llm-analytics)** shows you what your AI is doing
+**1. [LLM Analytics](/llm-analytics)** shows what your AI is doing
 - See inputs, outputs, latency, tokens, costs, errors
 - Summarize LLM traces and events for quick debugging 
 - Run evals to batch test for issues and opportunities 
 
-**3. [Session Replay](/session-replay)** shows you what users see when they interact with AI
+**2. [Session Replay](/session-replay)** shows what users see when they interact with AI
 - Compare the front-end user journey with the trace log 
 - Watch how users react to poor outputs. Do they retry? Rage-click? Navigate elsewhere?
 
