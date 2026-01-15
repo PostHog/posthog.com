@@ -7,6 +7,19 @@ import CLIDownload from "../_snippets/cli/download.mdx"
 import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
 import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
 
+<CalloutBox icon="IconInfo" title="React Native Web" type="action">
+
+If you are using React Native Web, ensure source maps are generated
+
+```bash
+# example command
+# Files are usually under the '$buildFolder/_expo/static/js/web' folder ($name.js and $name.js.map)
+npx expo export --source-maps --platform web
+```
+
+Then use our standard [CLI approach](/docs/error-tracking/upload-source-maps/cli) to inject and upload them.
+
+</CalloutBox>
 
 <Steps>
 
@@ -49,11 +62,7 @@ module.exports = config
 
 <Step title="Upload" badge="required">
 
-<CalloutBox icon="IconInfo" title="No automatic source map uploads on React Native web" type="action">
-
-Automatic source map uploading is handled through the Gradle build process on Android and the Xcode build process on iOS. For React Native web, please use our [CLI](/docs/error-tracking/upload-source-maps/cli#upload) instead.
-
-</CalloutBox>
+Automatic source map uploading is handled through the Gradle build process on Android and the Xcode build process on iOS.
 
 1. Expo: Update the [app.json](https://docs.expo.dev/versions/latest/config/app/#plugins) file in your app's root directory.
 
@@ -101,14 +110,6 @@ To do this through Xcode, open your project in Xcode, go to the project settings
 
 -`"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
 +/bin/sh `"$NODE_BINARY" --print "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog-xcode.sh')"` `"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
-```
-
-4. Web: Ensure that your React Native web build generates source maps.
-
-```bash
-# Example using React Native and Expo with the --source-maps flag.
-# Files are usually under the '$buildFolder/_expo/static/js/web' folder ($name.js and $name.js.map)
-npx expo export --source-maps --platform web
 ```
 
 </Step>

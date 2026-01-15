@@ -36,7 +36,7 @@ Other times you might have an idea for a great product we should build. In that 
 
 From our [roadmap](/roadmap), here's what we're currently working on:
 
-- Endpoints - `#project-endpoints`
+- Endpoints - `#team-data-modeling`
 - Logs - `#project-logs`
 - Product autonomy - `#team-array`
 - Customer Analytics `#team-customer-analytics`

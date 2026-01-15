@@ -25,7 +25,7 @@ export const webAnalytics = {
     },
     videos: {
         overview: {
-            wistia: 'x05zb7x023',
+            wistia: '092mo7cump',
         },
     },
     screenshots: {
