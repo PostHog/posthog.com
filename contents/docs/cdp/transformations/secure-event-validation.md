@@ -43,45 +43,69 @@ When an event arrives, this transformation:
 
 ## Client-side implementation
 
-To use this transformation, you need to generate the verification hash on your server and include it when identifying users or sending events.
+To use this transformation, you need to generate the verification hash **on your server** and pass it to the frontend. The hash must be generated server-side to keep your shared secret secure — never expose the secret in client-side code.
 
-Example in Node.js:
+### Generating the hash server-side
 
-```javascript
+<MultiLanguage>
+
+```js file=Node.js
 import crypto from 'crypto'
 
-const sharedSecret = process.env.POSTHOG_SHARED_SECRET
-const distinctId = 'user_123'
+function generateVerificationHash(distinctId) {
+    const sharedSecret = process.env.POSTHOG_SHARED_SECRET
+    return crypto
+        .createHmac('sha256', sharedSecret)
+        .update(distinctId)
+        .digest('hex')
+}
 
-const verificationHash = crypto
-    .createHmac('sha256', sharedSecret)
-    .update(distinctId)
-    .digest('hex')
+// When rendering your page or handling an API request,
+// generate the hash and pass it to the frontend
+const distinctId = 'user_123'
+const verificationHash = generateVerificationHash(distinctId)
+
+// Pass these values to your frontend (e.g., via template variables, API response, etc.)
+```
+
+```python file=Python
+import hmac
+import hashlib
+import os
+
+def generate_verification_hash(distinct_id):
+    shared_secret = os.environ['POSTHOG_SHARED_SECRET']
+    return hmac.new(
+        shared_secret.encode(),
+        distinct_id.encode(),
+        hashlib.sha256
+    ).hexdigest()
+
+# When rendering your page or handling an API request,
+# generate the hash and pass it to the frontend
+distinct_id = 'user_123'
+verification_hash = generate_verification_hash(distinct_id)
+
+# Pass these values to your frontend (e.g., via template context, API response, etc.)
+```
+
+</MultiLanguage>
+
+### Using the hash in the browser
+
+Once you've passed the verification hash from your server to the frontend, use it when identifying users with the PostHog JavaScript SDK:
+
+```js
+// These values come from your server (e.g., embedded in the page or fetched via API)
+const distinctId = window.__USER_ID__
+const verificationHash = window.__VERIFICATION_HASH__
 
 posthog.identify(distinctId, {
     $verification_hash: verificationHash
 })
 ```
 
-Example in Python:
-
-```python
-import hmac
-import hashlib
-
-shared_secret = os.environ['POSTHOG_SHARED_SECRET']
-distinct_id = 'user_123'
-
-verification_hash = hmac.new(
-    shared_secret.encode(),
-    distinct_id.encode(),
-    hashlib.sha256
-).hexdigest()
-
-posthog.identify(distinct_id, {
-    '$verification_hash': verification_hash
-})
-```
+All subsequent events captured by PostHog will include this verification hash and can be validated by the transformation.
 
 ## Rotating secrets
 
