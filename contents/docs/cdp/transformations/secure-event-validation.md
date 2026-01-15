@@ -12,6 +12,14 @@ Validates events using a shared secret to verify `distinct_id` authenticity. Eve
 
 This transformation uses HMAC-SHA256 to verify that events were sent from a trusted source. It checks a hash value in the event properties against a hash generated from the `distinct_id` and your shared secret.
 
+<CalloutBox icon="IconInfo" title="Best suited for authenticated users" type="info">
+
+This approach is only effective for securing events where you know the identity of your users (i.e., logged-in users). The verification hash must be generated server-side using a known `distinct_id`, which means anonymous users with client-generated IDs cannot be securely validated.
+
+If you enable **Enforce secure mode**, events from anonymous users will be dropped since there is no way to generate a valid verification hash for them.
+
+</CalloutBox>
+
 ## Requirements
 
 You'll need to configure your application to generate an HMAC-SHA256 hash of the `distinct_id` using a shared secret and include it in the event properties as `$verification_hash`.
@@ -95,6 +103,8 @@ When you're ready to block unverified events, you can enable **Enforce secure mo
 <CalloutBox icon="IconWarning" title="Before enabling enforce mode" type="warning">
 
 Only enable enforce mode after you have confirmed that all events you care about have `$verified_distinct_id: true`. Once enabled, **any event without a valid `$verification_hash` will be permanently dropped**.
+
+This includes events from **anonymous users** — since anonymous users have client-generated `distinct_id` values, there is no way to securely generate a verification hash for them. If you rely on tracking anonymous users before they log in, do not enable enforce mode.
 
 Before enabling:
 
