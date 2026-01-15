@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import { Avatar } from './Avatar'
 import { graphql, useStaticQuery } from 'gatsby'
 import Map from './Map'
+import Toggle from 'components/Toggle'
 
 const avatarStyles = [
     { color: '#DCB1E3', className: 'right-[-30rem] top-[-2.5rem]', size: 'lg' },
@@ -19,6 +20,7 @@ const avatarStyles = [
 export const AboutTeam = (): JSX.Element => {
     const { avatarTeamMembers, teamMembers } = useStaticQuery(query)
     const maxTheHedgehog = 1
+    const [showPineapple, setShowPineapple] = useState(false)
 
     return (
         <section id="team" className="pt-16 pb-12 px-4">
@@ -36,9 +38,17 @@ export const AboutTeam = (): JSX.Element => {
                 </CallToAction>
             </div>
 
+            <div className="flex justify-center mb-2">
+                <Toggle
+                    checked={showPineapple}
+                    onChange={setShowPineapple}
+                    label="Show pineapple on pizza preference"
+                />
+            </div>
+
             <div className="relative text-center py-14 md:py-28">
                 <div className="absolute inset-1/2 scale-[.4] sm:scale-[.6] md:scale-100">
-                    {avatarTeamMembers.nodes.map(({ firstName, lastName, country, avatar }, index) => {
+                    {avatarTeamMembers.nodes.map(({ firstName, lastName, country, avatar, pineappleOnPizza }, index) => {
                         const styles = avatarStyles[index]
                         const name = [firstName, lastName].filter(Boolean).join(' ')
                         return (
@@ -50,6 +60,8 @@ export const AboutTeam = (): JSX.Element => {
                                 image={avatar?.url}
                                 name={name}
                                 country={country}
+                                pineappleOnPizza={pineappleOnPizza}
+                                showPineapple={showPineapple}
                             />
                         )
                     })}
@@ -75,6 +87,7 @@ const query = graphql`
                 country
                 firstName
                 lastName
+                pineappleOnPizza
                 avatar {
                     url
                 }
