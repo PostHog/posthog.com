@@ -70,7 +70,7 @@ Since the average AI product has tens or hundreds of thousands of generations oc
 
 **Problem 2:  Margin of error affects your margins**
 
-In January 2024, a user convinced DPD's delivery chatbot to start swearing and criticizing the company. It wrote a poem calling itself "a useless chatbot" and DPD "a customer's worst nightmare." 1.3 million views later, the bot was disabled.
+In January 2024, a user convinced [DPD](https://www.bbc.com/news/technology-68025677)'s delivery chatbot to start swearing and criticizing the company. It wrote a poem calling itself "a useless chatbot" and DPD "a customer's worst nightmare." 1.3 million views later, the bot was disabled.
 
 Around the same time, Air Canada's chatbot told a bereaved customer they could retroactively apply for bereavement fares (a policy that didn't actually exist). The airline argued the chatbot was "a separate legal entity." A tribunal disagreed and ordered them to pay $812 plus fees.
 
@@ -161,3 +161,6 @@ AI slop is real. Evals are how you stop shipping it.
 
 If you're already using [LLM analytics](/llm-analytics) in PostHog, you can start creating evaluations right away. Your first 100 evaluation runs are on us. After that, evals count as regular LLM events (100K events included on our free tier).
 
+< CallToAction to="http://app.posthog.com/llm-analytics/evaluations" >
+Try evaluations in PostHog
+< / CalltoAction >
