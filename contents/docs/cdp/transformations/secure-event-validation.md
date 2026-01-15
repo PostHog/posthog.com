@@ -93,19 +93,23 @@ distinct_id_hash = generate_distinct_id_hash(distinct_id)
 
 ### Using the hash in the browser
 
-Once you've passed the verification hash from your server to the frontend, use it when identifying users with the PostHog JavaScript SDK:
+Once you've passed the hash from your server to the frontend, you need to ensure it's included with **every event**. Use `posthog.register()` to set it as a [super property](/docs/libraries/js/usage#super-properties) that will automatically be sent with all subsequent events:
 
 ```js
 // These values come from your server (e.g., embedded in the page or fetched via API)
 const distinctId = window.__POSTHOG_DISTINCT_ID__
 const distinctIdHash = window.__POSTHOG_DISTINCT_ID_HASH__
 
-posthog.identify(distinctId, {
+// Identify the user
+posthog.identify(distinctId)
+
+// Register the hash as a super property so it's sent with every event
+posthog.register({
     $distinct_id_hash: distinctIdHash
 })
 ```
 
-All subsequent events captured by PostHog will include this verification hash and can be validated by the transformation.
+All subsequent events captured by PostHog will automatically include the `$distinct_id_hash` property and can be validated by the transformation.
 
 ## Rotating secrets
 
