@@ -66,7 +66,7 @@ The problem with manual review is that it doesn't scale. Suppose looking through
 - 100 traces = half a work week
 - 10,000 traces = existential dread
 
-Since the average AI product has tens- or hundreds of thousands of generations occuring per day, there's no way to review them all and maintain sanity.
+Since the average AI product has tens- or hundreds of thousands of generations occurring per day, there's no way to review them all and maintain sanity.
 
 **Problem 2:  Margin of error affects your margins**
 
