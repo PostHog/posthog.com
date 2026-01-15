@@ -13,7 +13,7 @@ import {
     DEFAULT_SPREAD_RADIUS,
 } from './hogMapUtils'
 import Toggle from 'components/Toggle'
-import { IconPineapple } from '@posthog/icons'
+import { IconPineapple, IconPeople } from '@posthog/icons'
 
 const PopupHtml = ({
     name,
@@ -131,6 +131,7 @@ const useCoordsByQuery = (isClient: boolean, token: string | undefined, members:
 
 export default function PeopleMap({ members: membersProp }: { members?: any[] }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
+    const [showClusters, setShowClusters] = useState(true)
     const [showPineapple, setShowPineapple] = useState(false)
     const { location: userLocation, isLoading: isLocationLoading } = useUserLocation()
 
@@ -145,6 +146,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
     const membersRef = useRef<ProfileNode[]>([])
     const coordsByQueryRef = useRef<Record<string, Coordinates>>({})
     const jitteredPositionsByGroupRef = useRef<Record<string, Array<{ longitude: number; latitude: number }>>>({})
+    const showClustersRef = useRef<boolean>(true)
     const showPineappleRef = useRef<boolean>(false)
 
     const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
@@ -164,6 +166,18 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
     useEffect(() => {
         coordsByQueryRef.current = coordsByQuery
     }, [coordsByQuery])
+
+    useEffect(() => {
+        showClustersRef.current = showClusters
+        // Re-render markers when clusters toggle changes
+        if (mapRef.current && isStyleReady(mapRef.current)) {
+            try {
+                renderMarkersRef.current && renderMarkersRef.current()
+            } catch {
+                // ignore
+            }
+        }
+    }, [showClusters])
 
     useEffect(() => {
         showPineappleRef.current = showPineapple
@@ -248,8 +262,8 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
             clearMarkers()
             const zoom = mapRef.current.getZoom()
 
-            // Use Mapbox clusters when zoomed out
-            if (zoom < CLUSTER_ZOOM) {
+            // Use Mapbox clusters when zoomed out and clusters are enabled
+            if (showClustersRef.current && zoom < CLUSTER_ZOOM) {
                 // People clusters
                 const peopleFeatures = membersRef.current
                     .map((m) => {
@@ -457,7 +471,13 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                     <div className="text-primary text-sm">Loading map...</div>
                 </div>
             )}
-            <div className="absolute top-2 left-2 z-10 bg-white dark:bg-dark rounded-md shadow-md px-3 py-2">
+            <div className="absolute top-2 left-2 z-10 bg-white dark:bg-dark rounded-md shadow-md px-3 py-2 flex flex-col gap-2">
+                <Toggle
+                    checked={showClusters}
+                    onChange={setShowClusters}
+                    iconRight={<IconPeople className="size-4 ml-1" />}
+                    label="Group"
+                />
                 <Toggle
                     checked={showPineapple}
                     onChange={setShowPineapple}
