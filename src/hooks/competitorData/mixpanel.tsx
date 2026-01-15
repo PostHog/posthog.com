@@ -418,8 +418,8 @@ export const mixpanel = {
             user_privacy_options: true,
         },
         developer: {
-            api: true,
             proxies: false,
+            api: true,
             sdks: false,
             sql: false,
             terraform: false,
