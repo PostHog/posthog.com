@@ -825,40 +825,40 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
             createNode(node)
         })
-
-        const extractIntroSection = (markdown: string): string => {
-            const headingMatch = markdown.match(/^#{1,2}\s+/m)
-
-            if (headingMatch) {
-                const headingIndex = markdown.indexOf(headingMatch[0])
-                return markdown.substring(0, headingIndex).trim()
-            }
-
-            return markdown
-        }
-
-        const extractGettingStartedSection = (markdown: string): string => {
-            const gettingStartedMatch = markdown.match(/^#{1,2}\s+Getting started\s*$/im)
-
-            if (gettingStartedMatch) {
-                const startIndex = markdown.indexOf(gettingStartedMatch[0])
-                const afterHeading = markdown.substring(startIndex + gettingStartedMatch[0].length)
-
-                const nextHeadingMatch = afterHeading.match(/^#+\s+/m)
-
-                if (nextHeadingMatch) {
-                    const endIndex = afterHeading.indexOf(nextHeadingMatch[0])
-                    return '## Installation\n\n' + afterHeading.substring(0, endIndex).trim()
-                }
-
-                return '## Installation\n\n' + afterHeading.trim()
-            }
-
-            return ''
-        }
     }
 
     await sourceGithubNodes()
+
+    const extractIntroSection = (markdown: string): string => {
+        const headingMatch = markdown.match(/^#{1,2}\s+/m)
+
+        if (headingMatch) {
+            const headingIndex = markdown.indexOf(headingMatch[0])
+            return markdown.substring(0, headingIndex).trim()
+        }
+
+        return markdown
+    }
+
+    const extractGettingStartedSection = (markdown: string): string => {
+        const gettingStartedMatch = markdown.match(/^#{1,2}\s+Getting started\s*$/im)
+
+        if (gettingStartedMatch) {
+            const startIndex = markdown.indexOf(gettingStartedMatch[0])
+            const afterHeading = markdown.substring(startIndex + gettingStartedMatch[0].length)
+
+            const nextHeadingMatch = afterHeading.match(/^#+\s+/m)
+
+            if (nextHeadingMatch) {
+                const endIndex = afterHeading.indexOf(nextHeadingMatch[0])
+                return '## Installation\n\n' + afterHeading.substring(0, endIndex).trim()
+            }
+
+            return '## Installation\n\n' + afterHeading.trim()
+        }
+
+        return ''
+    }
 
     const fetchPostHogPipelines = async (
         type: 'transformation' | 'destination' | 'source_webhook',
