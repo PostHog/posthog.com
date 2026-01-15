@@ -418,7 +418,7 @@ export const mixpanel = {
             user_privacy_options: true,
         },
         developer: {
-            api: false,
+            api: true,
             proxies: false,
             sdks: false,
             sql: false,
