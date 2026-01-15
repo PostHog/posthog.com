@@ -57,9 +57,11 @@ You can also create custom evals to suit the specific use cases of your AI featu
 ## Why use evals? A tale of two math problems
 **Problem 1: Manual review doesn’t scale**
 
-LLM oberservability tools capture the inputs, outputs, latency, tokens, costs, and errors associated with AI workflows. This makes it simple for engineers to review generations and traces, and hunt for "AI slop,". Slop (a disguting yet accurate term) is any output that feels generic, low quality, or just plain wrong.
+LLM [oberservability tools](/blog/best-open-source-llm-observability-tools) capture the inputs, outputs, latency, tokens, costs, and errors associated with AI workflows. This makes it simple for engineers to review generations and traces, and hunt for "AI slop". 
 
-The problem is that manual review doesn't scale. If looking through one complex trace takes an engineer ~15 minutes:
+Slop (a disguting yet accurate term) is any output from an LLM that feels generic, low quality, or just plain wrong.
+
+The problem with manual review is that it doesn't scale. Suppose looking through one complex trace takes an engineer ~15 minutes:
 - 10 traces = 2.5 hours
 - 100 traces = half a work week
 - 10,000 traces = existential dread
@@ -82,7 +84,7 @@ Good output or bad output? That depends on the task. An evaluation configured fo
 Luckily, the [best practices](https://hamel.dev/blog/posts/llm-judge/) for writing evals are simple:
 - Set the domain expertise (_"you are a world class sommelier"_ or _"you are are evaluating whether a user is attempting to manipulate an LLM"_)
 - Be specific about pass/fail criteria 
-- Include examples of pass/fail, and edge cases when relevant
+- Include examples of good vs bad, and edge cases when relevant
 - Keep prompts concise and specific (avoid trying to evaluate multiple things in one shot)
 
 ```text
@@ -118,7 +120,7 @@ Evals are primarily used to prevent negative outputs or regressions, but you can
 **Examples of positive signals you can catch with evals:**
 - Users discovering creative use cases for AI features you didn't anticipate (potential feature gap)
 - Happy users who might become community champions or case studies (informal NPS)
-- Power users hitting rate limits (signals upsell opportunity)
+- Power users hitting rate limits (upsell opportunity)
 - Feature discovery moments: "Wait, this can do X?" (onboarding gaps)
 
 ![evals in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_15_at_11_33_37_AM_2615fb0939.png)
@@ -127,9 +129,9 @@ Evals are primarily used to prevent negative outputs or regressions, but you can
 ## Connect evals to your product data
 Evals are unit tests for your AI product. And like all product data, if you measure it, you can improve it. 
 
-This is important because AI-native products have a [retention problem](https://www.growthunhinged.com/p/the-ai-churn-wave). Generous free tiers and easy cancellation turn users into "AI tourists" – they extract value, then disappear. 
+This is important because AI-native products have a [retention problem](https://www.growthunhinged.com/p/the-ai-churn-wave). Generous free tiers and easy cancellation attracts "AI tourists" – they extract value, then disappear. 
 
-**The AI product imporvement loop:**
+**The AI product improvement loop:**
 
 **1. [LLM Analytics](/llm-analytics)** shows you what your AI is doing
 - See inputs, outputs, latency, tokens, costs, errors
