@@ -12,6 +12,8 @@ import {
     isStyleReady,
     DEFAULT_SPREAD_RADIUS,
 } from './hogMapUtils'
+import Toggle from 'components/Toggle'
+import { IconPineapple } from '@posthog/icons'
 
 const PopupHtml = ({
     name,
@@ -52,6 +54,7 @@ type ProfileNode = {
     country?: string
     location?: string
     avatar?: { url?: string }
+    pineappleOnPizza?: boolean | null
 }
 
 const buildMemberQuery = (m: ProfileNode): string | null => {
@@ -128,6 +131,7 @@ const useCoordsByQuery = (isClient: boolean, token: string | undefined, members:
 
 export default function PeopleMap({ members: membersProp }: { members?: any[] }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
+    const [showPineapple, setShowPineapple] = useState(false)
     const { location: userLocation, isLoading: isLocationLoading } = useUserLocation()
 
     useEffect(() => {
@@ -141,6 +145,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
     const membersRef = useRef<ProfileNode[]>([])
     const coordsByQueryRef = useRef<Record<string, Coordinates>>({})
     const jitteredPositionsByGroupRef = useRef<Record<string, Array<{ longitude: number; latitude: number }>>>({})
+    const showPineappleRef = useRef<boolean>(false)
 
     const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
     const styleUrl = 'mapbox://styles/mapbox/streets-v12'
@@ -159,6 +164,18 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
     useEffect(() => {
         coordsByQueryRef.current = coordsByQuery
     }, [coordsByQuery])
+
+    useEffect(() => {
+        showPineappleRef.current = showPineapple
+        // Re-render markers when pineapple toggle changes
+        if (mapRef.current && isStyleReady(mapRef.current)) {
+            try {
+                renderMarkersRef.current && renderMarkersRef.current()
+            } catch {
+                // ignore
+            }
+        }
+    }, [showPineapple])
 
     // Precompute static spread positions for members that share the same location query
     useEffect(() => {
@@ -283,7 +300,11 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                 profiles.forEach((p, idx) => {
                     const pos = positions[idx] || { longitude, latitude }
                     const el = document.createElement('div')
-                    el.className = 'size-12 rounded-full flex items-center justify-center overflow-hidden'
+                    el.className = 'relative'
+                    
+                    const avatarContainer = document.createElement('div')
+                    avatarContainer.className = 'size-12 rounded-full flex items-center justify-center overflow-hidden'
+                    
                     const img = document.createElement('img')
                     img.src = p.avatar?.url || avatarFallback
                     img.alt = [p.firstName, p.lastName].filter(Boolean).join(' ') || 'Team member'
@@ -297,7 +318,30 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                         'h-full',
                         'object-cover'
                     )
-                    el.appendChild(img)
+                    avatarContainer.appendChild(img)
+                    el.appendChild(avatarContainer)
+                    
+                    // Add pineapple indicator when toggle is on
+                    if (showPineappleRef.current) {
+                        const pineappleIndicator = document.createElement('div')
+                        pineappleIndicator.className = 'absolute -right-1 -bottom-1 size-5 rounded-full flex items-center justify-center text-xs shadow-sm'
+                        
+                        if (p.pineappleOnPizza === true) {
+                            pineappleIndicator.style.backgroundColor = '#6AA84F'
+                            pineappleIndicator.title = 'Loves pineapple on pizza'
+                            pineappleIndicator.innerHTML = '🍍'
+                        } else if (p.pineappleOnPizza === false) {
+                            pineappleIndicator.style.backgroundColor = '#CC0000'
+                            pineappleIndicator.title = 'Does not like pineapple on pizza'
+                            pineappleIndicator.innerHTML = '🚫'
+                        } else {
+                            pineappleIndicator.style.backgroundColor = '#888888'
+                            pineappleIndicator.title = 'Undecided about pineapple on pizza'
+                            pineappleIndicator.innerHTML = '❓'
+                        }
+                        
+                        el.appendChild(pineappleIndicator)
+                    }
                     const name = [p.firstName, p.lastName].filter(Boolean).join(' ')
                     const role = p.companyRole || ''
                     const href = p.squeakId ? `/community/profiles/${p.squeakId}` : ''
@@ -413,6 +457,14 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                     <div className="text-primary text-sm">Loading map...</div>
                 </div>
             )}
+            <div className="absolute top-2 left-2 z-10 bg-white dark:bg-dark rounded-md shadow-md px-3 py-2">
+                <Toggle
+                    checked={showPineapple}
+                    onChange={setShowPineapple}
+                    iconRight={<IconPineapple className="size-4 ml-1" />}
+                    label="Pineapple"
+                />
+            </div>
             <div ref={mapContainerRef} className="w-full h-full" />
         </div>
     )
