@@ -21,11 +21,11 @@ seo:
 ---
 If your product data was a person, they'd basically be unemployed. They could get picked up in the occasional "freelance" query, but would ideally be looking for more steady work. 
 
-Workflows is basically PostHog's version of an employment agency, giving your data a steady job it can do all the time.
-
 We’ve always been good at collecting product data. In PostHog, you could see when a user hits an important milestone in your product, but couldn’t act on it. If PostHog already knows what happened, why does the next step have to happen in another system? That question is what led to Workflows.
 
-We introduced [Workflows in alpha]/blog/workflows-alpha) asking: could we let teams define what happens next directly on top of the same events and user data they already trust for analytics? [During the beta](/blog/workflows-beta), we saw it used to automate onboarding, coordinate feature rollouts, and trigger messages based on real product behavior. 
+Workflows is basically PostHog's version of an employment agency, giving your data a steady job it can do all the time.
+
+We introduced [Workflows in alpha](/blog/workflows-alpha) asking: could we let teams define what happens next directly on top of the same events and user data they already trust for analytics? [During the beta](/blog/workflows-beta), we saw it used to automate onboarding, coordinate feature rollouts, and trigger messages based on real product behavior. 
 
 After seeing this usage and getting positive feedback, **[Workflows](https://app.posthog.com/workflows)** is now generally available. 
 
