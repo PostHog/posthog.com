@@ -93,7 +93,7 @@ export const mixpanel = {
                 pre_configured_dashboards: false,
                 real_time_reporting: false,
                 revenue_tracking: false,
-                script_size: false,
+                script_size: '95kb',
                 scrollmaps: false,
                 session_and_duration_tracking: false,
                 sessions: true,

@@ -69,6 +69,9 @@ export const cloudflare = {
             ccpa_ready: true,
             data_retention: '6 months',
         },
+        integrations: {
+            google_search_console: false,
+        },
     },
     pricing: {
         model: 'Free',

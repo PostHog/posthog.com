@@ -88,6 +88,8 @@ Rather than rehash the same frustrations, this guide focuses on tools that are e
 
 ### 1. PostHog
 
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/Posthog_web_analytics_679d394b35.png)
+
 PostHog is an all-in-one developer platform that combines [web analytics](/web-analytics) with [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and [LLM analytics](/llm-analytics) in one place.
 
 Unlike standalone web analytics tools, PostHog lets you follow a visitor's journey from their first pageview through to product usage; you still get the fundamentals, but they're directly connected to how users actually behave in your product. 
@@ -124,6 +126,8 @@ Developers who want full-stack visibility from website traffic through to produc
 
 ### 2. Plausible
 
+![Plausible](https://res.cloudinary.com/dmukukwp6/image/upload/plausible_49dba33714.webp)
+
 [Plausible](/blog/posthog-vs-plausible) is a lightweight, privacy-first analytics tool that positions itself as an ethical alternative to Google Analytics. 
 
 Adding Plausible to your stack is painless: setup takes minutes, the script is tiny, and the UI is refreshingly easy to understand. It doesn't require cookies and is fully GDPR compliant out of the box.
@@ -157,6 +161,8 @@ Privacy-conscious developers who want simple, essential website metrics without 
 
 ### 3. Fathom
 
+![Fathom](https://res.cloudinary.com/dmukukwp6/image/upload/fathom_34ae33dcf6.webp)
+
 Speaking of privacy, [Fathom](/blog/posthog-vs-fathom) is a minimalist, privacy-focused web analytics tool built for teams that want to minimize overhead. Like Plausible, it's designed to be easy to install, easy to understand, and respectful of user privacy by default.
 
 The script is lightweight (~2KB), works without cookies, and offers permanent data retention so you never lose historical analytics.
@@ -175,11 +181,11 @@ Pricing is straightforward and traffic-based. Plans start at $15/month for up to
 
 **Community:**
 
-- Fathom Lite is (open source)[https://github.com/usefathom/fathom]
+- Fathom Lite is open source at https://github.com/usefathom/fathom
 - The main product is closed-source but actively developed
 - Strong community of privacy advocates
 
-<CalloutBox icon="IconStarFilled" title="Fathom is best for" type="fyi">
+<CalloutBox icon="IconStarFilled" title="Fathom is best for..." type="fyi">
 
 Developers who want privacy-friendly website analytics that integrate effortlessly with their existing stack and provide clean, reliable metrics without complexity.
 
@@ -188,6 +194,8 @@ Developers who want privacy-friendly website analytics that integrate effortless
 ---
 
 ### 4. Matomo
+
+![Matomo](https://res.cloudinary.com/dmukukwp6/image/upload/matomo_69f99f4666.png)
 
 [Matomo](/blog/posthog-vs-matomo) is one of the most established [open-source web analytics platforms](/blog/best-open-source-analytics-tools), used by over one million websites, including government agencies, universities, and large enterprises.
 
@@ -221,6 +229,8 @@ Developers that need full-featured, self-hosted analytics with complete data own
 
 ### 5. Mixpanel
 
+![Matomo](https://res.cloudinary.com/dmukukwp6/image/upload/matomo_69f99f4666.png)
+
 [Mixpanel](/blog/posthog-vs-mixpanel) is primarily a product analytics platform, but it now includes dedicated web analytics features that make it worth considering for certain use cases.
 
 Unlike traditional web analytics tools that focus on pageviews and traffic, Mixpanel is built around events and users. You track actions like sign-ups, button clicks, feature usage, and conversions, then analyze them using funnels, retention, cohorts, and breakdowns.
@@ -236,7 +246,13 @@ Mixpanel offers a free plan that includes 1 million events per month, with paid 
 - Strong support for product-led growth use cases
 - Mature ecosystem and integrations
 
-<CalloutBox icon="IconStarFilled" title="Mixpanel is best for" type="fyi">
+**Community:**
+
+- Closed-source platform (SDKs are open source)
+- [Active Slack community](https://www.mixpanel.com/community-slack) with over 11k members
+- 74 public repos on GitHub for SDKs and integrations
+
+<CalloutBox icon="IconStarFilled" title="Mixpanel is best for..." type="fyi">
 
 Product-led web applications where understanding user actions, activation, and retention matters more than traditional traffic metrics like pageviews and referrers.
 
@@ -245,6 +261,8 @@ Product-led web applications where understanding user actions, activation, and r
 ---
 
 ### 6. Cloudflare Web Analytics
+
+![Cloudflare](https://res.cloudinary.com/dmukukwp6/image/upload/cloudflare_09b27f4c91.png)
 
 Cloudflare Web Analytics is a free, privacy-first analytics tool from Cloudflare. 
 
@@ -269,7 +287,7 @@ If you're already using Cloudflare for DNS, CDN, or security, adding Web Analyti
 - Closed-source commercial product (part of Cloudflare's free tier)
 - Active development as part of Cloudflare's broader analytics suite
 
-<CalloutBox icon="IconStarFilled" title="Cloudflare Web Analytics is best for" type="fyi">
+<CalloutBox icon="IconStarFilled" title="Cloudflare Web Analytics is best for..." type="fyi">
 
 Developers already using Cloudflare who want free, privacy-first website metrics with zero setup – or anyone who needs a simple, no-cost baseline for traffic monitoring.
 
@@ -357,7 +375,9 @@ That's why many modern tools pair pageviews with [events](/docs/product-analytic
 <details>
   <summary>Is web analytics affected by ad blockers?</summary>
 
-Yes, especially tools that rely entirely on client-side JavaScript. Privacy-first tools, server-side collection, or edge-based analytics (like Cloudflare's) tend to be more resilient, but no analytics setup is 100% immune. This is another reason to focus on trends and patterns, not exact counts.
+Yes, especially tools that rely entirely on client-side JavaScript. Privacy-first tools, server-side collection, or edge-based analytics (like Cloudflare's) tend to be more resilient, but no analytics setup is 100% immune. You can also [set up a reverse proxy](/docs/advanced/proxy) to route analytics through your own domain, which can reduce the impact of blockers.
+
+Even then, it's best to treat web analytics as directionally accurate and focus on trends and patterns — not exact counts.
 
 </details>
 

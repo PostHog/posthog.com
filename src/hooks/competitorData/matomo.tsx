@@ -95,8 +95,8 @@ export const matomo = {
                 traffic_breakdown: true,
                 utm_tracking: true,
                 visitor_and_view_tracking: false,
-                web_vitals: false,
-                web_vitals_reporting: false,
+                web_vitals: true,
+                web_vitals_reporting: true,
             },
         },
         session_replay: {
