@@ -129,7 +129,11 @@ Evals are primarily used to prevent negative outputs or regressions, but you can
 ## Connect evals to your product data
 Evals are unit tests for your AI product. And like all product data, if you measure it, you can improve it. 
 
+But evals alone aren’t enough. A model can “work” and still fail to earn a habit.
+
 This is important because AI-native products have a [retention problem](https://www.growthunhinged.com/p/the-ai-churn-wave). Generous free tiers and easy cancellation attracts "AI tourists" – they extract value, then disappear. 
+
+When you connect eval results to real user behavior, you can see which AI behaviors actually affect retention, where users get stuck, and what’s worth fixing next.
 
 **The AI product improvement loop:**
 
