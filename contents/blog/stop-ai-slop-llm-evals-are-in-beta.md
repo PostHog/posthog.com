@@ -64,7 +64,7 @@ The problem is that manual review doesn't scale. If looking through one complex 
 - 100 traces = half a work week
 - 10,000 traces = existential dread
 
-Since the average AI product has tens- or hundreds of thousands of generations occuring per day, there's no way to review them all and maintain sanity.
+Since the average AI product has tens- or hundreds of thousands of generations occurring per day, there's no way to review them all and maintain sanity.
 
 **Problem 2:  Margin of error affects your margins**
 
@@ -129,7 +129,7 @@ Evals are unit tests for your AI product. And like all product data, if you meas
 
 This is important because AI-native products have a [retention problem](https://www.growthunhinged.com/p/the-ai-churn-wave). Generous free tiers and easy cancellation turn users into "AI tourists" – they extract value, then disappear. 
 
-**The AI product imporvement loop:**
+**The AI product improvement loop:**
 
 **1. [LLM Analytics](/llm-analytics)** shows you what your AI is doing
 - See inputs, outputs, latency, tokens, costs, errors
