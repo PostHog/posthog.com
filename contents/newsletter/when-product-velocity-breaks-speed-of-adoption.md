@@ -125,7 +125,7 @@ The result is predictable: local optimization turns into global overload.
 
 - If you’re doing founder-led marketing, be consistent and ruthlessly [commit to the bit](https://www.linkedin.com/in/j-hawkins/)
 
->Notion ships constantly, but markets selectively. Many features land with almost no fanfare, while a small number (AI, databases, templates) get sustained narrative investment over months.
+> **What this looks like:** Notion ships constantly, but markets selectively. Many features land with almost no fanfare, while a small number (AI, databases, templates) get sustained narrative investment over months.
 
 
 ### 2. Build discovery into the product 
@@ -148,7 +148,7 @@ The goal isn’t to explain everything up front. It’s to surface the right thi
 
 - Overemphasizing what your shipped instead of why it matters. [Marketing features > benefits](https://posthog.com/newsletter/marketing-for-devs) works for developers, but too much focus on “what” makes adoption someone else’s problem.
 
->Atlassian famously struggled with feature sprawl across Jira, Confluence (and much more). Users just couldn't keep up with so much surface area. The solution wasn't _more_ marketing, it was investing heavily in in-product discovery, clearer use-case documentation, and opinionated defaults to guide users to success.
+> **What this looks like:** Atlassian famously struggled with feature sprawl across Jira, Confluence and their other products. Users couldn't keep up with so much surface area. The solution wasn't _more_ marketing, it was investing heavily in in-product discovery, clearer use-case documentation, and opinionated defaults to guide users to success.
 
 **Do this instead:**
 
