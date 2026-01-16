@@ -135,19 +135,21 @@ response = requests.get(
 
 </MultiLanguage>
 
-To delete the persons and their events, you can use the [DELETE Persons API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id)
+To delete persons and their events, you can use either the single delete endpoint (if you have the person UUID) or the bulk delete endpoint (if you have distinct IDs).
 
-To do that, iterate through the persons returned in the previous step and use the person's `id` in the DELETE call. To delete the person's corresponding events in addition to the person, add the `delete_events=true` parameter. For example:
+#### Deleting by person UUID
+
+If you have the person's UUID (returned as `id` in the persons API response), use the [DELETE Persons API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id). To delete the person's corresponding events, add the `delete_events=true` parameter:
 
 <MultiLanguage>
 
 ```bash
-curl -X DELETE "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true" \
+curl -X DELETE "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{PERSON_UUID}?delete_events=true" \
      -H "Authorization: Bearer {YOUR_API_KEY}"
 ```
 
 ```javascript
-fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true", {
+fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{PERSON_UUID}?delete_events=true", {
   method: 'DELETE',
   headers: {
     'Authorization': 'Bearer {YOUR_API_KEY}'
@@ -161,7 +163,7 @@ fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?d
 ```python
 import requests
 
-url = "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true"
+url = "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{PERSON_UUID}?delete_events=true"
 headers = {
     'Authorization': 'Bearer {YOUR_API_KEY}'
 }
@@ -171,6 +173,61 @@ print(response.json())
 ```
 
 </MultiLanguage>
+
+#### Deleting by distinct ID (for anonymous users)
+
+If you only have the user's distinct ID (for example, the auto-generated ID assigned to anonymous users by posthog-js), you must use the [bulk delete endpoint](/docs/api/persons#post-api-projects-project_id-persons-bulk_delete). This works even for deleting a single person:
+
+<MultiLanguage>
+
+```bash
+curl -X POST "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/bulk_delete/" \
+     -H "Authorization: Bearer {YOUR_API_KEY}" \
+     -H "Content-Type: application/json" \
+     -d '{"distinct_ids": ["{DISTINCT_ID}"], "delete_events": true}'
+```
+
+```javascript
+fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/bulk_delete/", {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer {YOUR_API_KEY}',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    distinct_ids: ["{DISTINCT_ID}"],
+    delete_events: true
+  })
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+```
+
+```python
+import requests
+
+url = "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/bulk_delete/"
+headers = {
+    'Authorization': 'Bearer {YOUR_API_KEY}',
+    'Content-Type': 'application/json'
+}
+data = {
+    'distinct_ids': ['{DISTINCT_ID}'],
+    'delete_events': True
+}
+
+response = requests.post(url, headers=headers, json=data)
+print(response.json())
+```
+
+</MultiLanguage>
+
+<CalloutBox type="info">
+The single delete endpoint (`DELETE /persons/{id}`) only accepts the person UUID, not a distinct ID. If you try to use a distinct ID with this endpoint, you'll receive an error. Use the bulk delete endpoint instead when you only have a distinct ID.
+</CalloutBox>
+
+You can delete up to 1,000 persons per request using the bulk delete endpoint. The endpoint also accepts `ids` (person UUIDs) instead of `distinct_ids` if you prefer.
 
 This request will delete all events of the person(s) that have been captured before the deletion request.
 
