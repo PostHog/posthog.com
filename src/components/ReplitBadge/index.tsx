@@ -1,12 +1,19 @@
 import React from 'react'
-import Link from 'components/Link'
+import { CallToAction } from 'components/CallToAction'
 
 interface ReplitBadgeProps {
     mcpConfig: string
 }
 
 const ReplitIcon = () => (
-    <svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width="16"
+        height="16"
+        viewBox="0 0 32 32"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="inline-block"
+    >
         <path
             d="M7 5.5C7 4.67157 7.67157 4 8.5 4H15.5C16.3284 4 17 4.67157 17 5.5V12H8.5C7.67157 12 7 11.3284 7 10.5V5.5Z"
             fill="currentColor"
@@ -23,15 +30,12 @@ export const ReplitBadge: React.FC<ReplitBadgeProps> = ({ mcpConfig }) => {
     const url = `https://replit.com/integrations?mcp=${mcpConfig}`
 
     return (
-        <Link
-            to={url}
-            external
-            externalNoIcon
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-md border-[1.5px] border-light dark:border-dark bg-accent dark:bg-accent-dark hover:bg-light dark:hover:bg-dark text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark transition-all hover:-translate-y-0.5 active:translate-y-0 no-underline hover:no-underline"
-        >
-            <ReplitIcon />
-            Add to Replit
-        </Link>
+        <CallToAction href={url} type="secondary" size="md" externalNoIcon>
+            <span className="inline-flex items-center gap-2">
+                <ReplitIcon />
+                Add to Replit
+            </span>
+        </CallToAction>
     )
 }
 
