@@ -112,6 +112,12 @@ https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123
 Without the parameter, responses are collected anonymously and cannot be linked to users.
 With the parameter, responses are attributed to the specified user, enabling you to see survey data alongside other user events and properties.
 
+#### Adding metadata to hosted survey responses
+When directing users to a hosted survey, you can attach contextual metadata using URL parameters. These parameters are automatically captured as event properties on the survey sent event.
+```
+https://us.posthog.com/external_surveys/your-survey-id?order_id=12345
+```
+
 #### Pre-filling survey responses via URL
 
 You can pre-fill survey answers using URL parameters, which is especially useful for creating one-click survey links in emails. This feature works with single choice, multiple choice, and rating questions.
