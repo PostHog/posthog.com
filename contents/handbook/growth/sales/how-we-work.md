@@ -108,7 +108,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
   - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commission into the above 4 buckets and how you did.
-- In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how qoutas work in your ramp period [here](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+- In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how qoutas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
 
 ## How commission works - Technical Account Managers
 
