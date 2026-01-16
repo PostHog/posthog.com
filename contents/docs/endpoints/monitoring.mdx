@@ -1,0 +1,45 @@
+---
+title: Monitoring usage
+sidebar: Docs
+showTitle: true
+---
+
+import EndpointsBetaSnippet from './_snippets/beta.mdx'
+
+<EndpointsBetaSnippet />
+
+The [**Usage** tab](https://us.posthog.com/endpoints/usage) shows endpoint performance and costs. Metrics are filtered to personal API key requests only, so you see actual endpoint usage rather than all API activity.
+
+## Usage metrics
+
+| Metric | Description |
+|--------|-------------|
+| Total requests | Total number of endpoint executions |
+| Bytes read | Sum of bytes read from storage |
+| CPU seconds | Sum of CPU time consumed |
+| Avg query duration | Average query execution time |
+| P95 query duration | 95th percentile query execution time |
+| Error rate | Percentage of failed executions |
+| Materialized requests | Count of executions using materialized data |
+| Inline requests | Count of executions running queries directly |
+
+Each metric shows the percentage change compared to the previous period.
+
+## Filtering
+
+Filter by specific endpoints, date range, or materialization type (materialized vs inline).
+
+## Trends
+
+The trends view shows how metrics change over time. Track requests, bytes read, CPU seconds, query duration, or error rate. Use **Breakdown** to compare across different dimensions.
+
+## Optimizing costs
+
+Use the Usage tab to spot optimization opportunities:
+
+- **High bytes read** – [Materialize](/docs/endpoints/configuration#materialization) frequently-accessed endpoints to reduce data scans
+- **High CPU seconds** – Review and optimize the underlying queries
+- **Many inline requests** – Materialize endpoints that are called frequently
+- **High error rates** – Investigate and fix failing endpoints
+
+See [writing performant queries](/docs/api/queries#writing-performant-queries) for more tips.

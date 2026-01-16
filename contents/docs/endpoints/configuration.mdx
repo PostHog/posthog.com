@@ -1,0 +1,272 @@
+---
+title: Configuration
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import EndpointsBetaSnippet from './_snippets/beta.mdx'
+
+<EndpointsBetaSnippet />
+
+This page covers how to configure your [endpoints](/docs/endpoints/start-here) for better performance and control.
+
+## Versioning
+
+PostHog creates a new version whenever you change an endpoint's underlying query. This lets you safely roll out changes while keeping older versions available. Versioning is useful for gradual rollouts and rollbacks.
+
+### How versions work
+
+A new version is only created when the query actually changes - submitting the same query again won't create a duplicate. Each version stores an immutable snapshot of the query at that point in time.
+
+The latest version is used by default when calling `/run`. Only the latest version can be materialized. When you update a materialized endpoint, PostHog automatically transfers materialization to the new version.
+
+### Running a specific version
+
+To run a specific version instead of the latest, add the `version` parameter:
+
+**As a query parameter:**
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run?version=1
+```
+
+**In the request body:**
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"version": 1}' \
+  <ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run
+```
+
+The response includes version metadata:
+
+```json
+{
+  "results": [...],
+  "endpoint_version": 1,
+  "endpoint_version_created_at": "2025-01-15T10:30:00Z"
+}
+```
+
+### Viewing version history
+
+Use the API to list all versions and their details:
+
+**List all versions:**
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/versions
+```
+
+**Get a specific version:**
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/versions/1
+```
+
+Versions are returned in descending order (latest first).
+
+### Using the version selector
+
+Each endpoint shows its current version and total version count in the overview.
+
+To generate code examples for a specific version, use the version selector in the **How to call this endpoint** section. Selecting an older version automatically adds the `version` parameter to the request body.
+
+You can view and test all versions in the **Playground** tab.
+
+## Materialization
+
+Materialize your endpoints to improve performance. Materialized queries are precomputed on a schedule, so API calls return stored results instead of running the query every time. This is best for queries that don't need real-time data.
+
+<CalloutBox icon="IconInfo" type="fyi" title="Enabled by default for HogQL-based endpoints">
+
+Materialization is enabled by default for new HogQL-based endpoints with a 24-hour sync frequency. Insight-based endpoints can also be materialized, but you need to enable it manually in the **Configuration** tab.
+
+You can disable materialization or change the frequency at any time.
+
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" type="fyi" title="Supported query types">
+
+Both SQL-based and insight-based endpoints can be materialized. Supported query types include:
+
+- HogQL queries
+- Trends
+- Funnels
+- Lifecycle
+- Retention
+- Paths
+- Stickiness
+
+Queries with variables can't be materialized.
+
+</CalloutBox>
+
+### Enable materialization
+
+1. Open your endpoint
+2. Go to the **Configuration** tab
+3. Enable **Materialization**
+4. Set your refresh frequency
+
+### Checking materialization status
+
+The **Configuration** tab shows the current materialization status (e.g., "Pending", "Ready", "Failed"). Click the refresh button next to the status to check for updates.
+
+You can also see when each endpoint was last materialized from the [endpoints list](https://us.posthog.com/endpoints). The **Last materialized at** column shows the most recent materialization timestamp.
+
+**Checking status via API:**
+
+To programmatically check an endpoint's materialization status, use the dedicated status endpoint:
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/materialization_status/
+```
+
+The response varies based on whether the endpoint is materialized:
+
+**When not materialized:**
+
+```json
+{
+  "can_materialize": true
+}
+```
+
+If the endpoint can't be materialized, the response includes a reason:
+
+```json
+{
+  "can_materialize": false,
+  "reason": "Queries with variables cannot be materialized"
+}
+```
+
+**When materialized:**
+
+```json
+{
+  "can_materialize": true,
+  "status": "Ready",
+  "last_materialized_at": "2025-01-15T10:30:00Z",
+  "error": null,
+  "sync_frequency": "6hour"
+}
+```
+
+The `status` field can be `Pending`, `Ready`, or `Failed`. If materialization failed, the `error` field contains the error message.
+
+### Refresh frequency options
+
+Choose how often materialized data refreshes. More frequent syncs mean fresher data but higher costs.
+
+| Frequency | Best for |
+|-----------|----------|
+| Every hour | Hourly reports and frequently changing metrics |
+| Every 6 hours | Semi-daily updates |
+| Once a day | Daily reports and summaries |
+| Once a week | Weekly summaries and stable data |
+
+### How it works
+
+With materialization enabled, PostHog precomputes and stores your query results. API calls return these stored results instantly, refreshing automatically at your chosen frequency.
+
+### Using filters with materialized endpoints
+
+Use `filters_override` to filter materialized results without bypassing materialization. PostHog applies these as WHERE clauses to the stored results, keeping your filtered queries fast.
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "filters_override": {
+      "properties": [
+        {
+          "key": "$browser",
+          "value": "Chrome",
+          "type": "event"
+        }
+      ]
+    }
+  }' \
+  <ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run
+```
+
+### When materialization is bypassed
+
+PostHog runs the query directly instead of using materialized results when:
+- The materialized data is stale (older than the refresh frequency interval)
+- The cached results are older than the last materialization run (e.g., after updating the endpoint's query)
+- You use `direct` [execution mode](#execution-modes) (explicitly bypasses materialization)
+- You use `variables` (queries with variables can't be materialized)
+- You use `query_override` to modify the query structure
+
+### Automatic deactivation
+
+PostHog deactivates materializations that aren't being used to save costs. A daily check deactivates materialization for endpoints where:
+
+- The materialization has been active for at least 30 days
+- The endpoint hasn't been called via API in over 30 days
+
+This only affects materializations that are actively running (syncing at least once per day).
+
+To re-enable, go to the **Configuration** tab and toggle **Materialization** back on.
+
+## Caching
+
+Cache age controls how long your endpoint returns cached results before re-running the query. Longer cache times improve performance but may return stale data.
+
+Choose from these options:
+
+- Default caching behavior (uses PostHog's default based on query intervals)
+- 5 minutes
+- 15 minutes
+- 30 minutes
+- 1 hour
+- 3 hours
+- 1 day
+- 3 days
+
+To configure:
+
+1. Open your endpoint
+2. Go to the **Configuration** tab
+3. Select your preferred **Cache age**
+
+## Execution modes
+
+The `refresh` parameter controls how PostHog fetches endpoint results.
+
+| Mode | Default | Description |
+|------|---------|-------------|
+| `cache` | Yes | Returns cached results if available, otherwise uses materialized results or runs against raw data. Fastest option. |
+| `force` | No | Bypasses cache but still uses materialization if available. Use when you need fresher data. |
+| `direct` | No | Bypasses both cache and materialization to query raw data. Only works on materialized endpoints. Use for real-time data. |
+
+### Example
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"refresh": "force"}' \
+  <ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run
+```
+
+<CalloutBox icon="IconInfo" type="fyi" title="Direct mode limitation">
+
+Using `direct` mode on a non-materialized endpoint returns a 400 error. Use `cache` or `force` instead.
+
+</CalloutBox>

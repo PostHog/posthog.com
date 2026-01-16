@@ -27,6 +27,13 @@ If you get authentication errors:
 - Check that your API key has the necessary `endpoint:read` scope
 - Ensure you're including the `Authorization` header in your requests
 
+## Direct mode errors
+
+If you get a 400 error when using `"refresh": "direct"`:
+- `direct` mode only works on [materialized endpoints](/docs/endpoints/configuration#materialization)
+- For non-materialized endpoints, use `cache` (default) or `force` instead
+- See [execution modes](/docs/endpoints/configuration#execution-modes) for details on when to use each mode
+
 ## Slow responses
 
 If endpoints are slow:
@@ -34,6 +41,30 @@ If endpoints are slow:
 - Check if the underlying query is optimized
 - Consider materializing your endpoint
 - Review the query performance in the query log
+
+## Debug mode
+
+Add `debug: true` to your request body to see how your query was processed:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"debug": true}' \
+  <ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run
+```
+
+The response includes these additional fields:
+
+| Field | Description |
+|-------|-------------|
+| `hogql` | The executed HogQL query |
+| `timings` | Timing breakdown for query execution |
+| `cache_key` | The cache key used for this request |
+| `calculation_trigger` | What triggered the calculation |
+| `explain` | Query execution plan |
+| `modifiers` | Any modifiers applied to the query |
+| `resolved_date_range` | The actual date range used |
 
 ## Further reading
 

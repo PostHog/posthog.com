@@ -1,0 +1,125 @@
+---
+title: Generate SDK clients
+sidebar: Docs
+showTitle: true
+---
+
+import EndpointsBetaSnippet from './_snippets/beta.mdx'
+
+<EndpointsBetaSnippet />
+
+Each endpoint generates an OpenAPI 3.0 spec you can use with SDK generators like [openapi-generator](https://openapi-generator.tech/), [hey-api](https://heyapi.vercel.app/), or any other OpenAPI-compatible tool to create typed clients.
+
+## Get the OpenAPI spec
+
+Each endpoint has a `/openapi.json` route:
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/openapi.json/
+```
+
+The spec includes:
+
+- Endpoint metadata (name, description, version)
+- Request schema (`variables` for SQL endpoints, or `query_override`/`filters_override` for insight endpoints)
+- Response schema (the `results` array structure)
+- Authentication (Bearer token using your [personal API key](/docs/api#personal-api-keys))
+
+## Generate a typed client
+
+### Using hey-api
+
+[hey-api](https://heyapi.vercel.app/) generates TypeScript clients:
+
+```bash
+# Install hey-api
+npm install @hey-api/openapi-ts
+
+# Fetch the spec and generate a client
+curl -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/openapi.json/ \
+  > openapi.json
+
+npx @hey-api/openapi-ts -i openapi.json -o ./src/client
+```
+
+Then use it in your code:
+
+```typescript
+import { runDailyActiveUsers } from './src/client';
+
+const result = await runDailyActiveUsers({
+  body: {
+    variables: { date_range: '-30d' }
+  }
+});
+```
+
+### Using openapi-generator
+
+[openapi-generator](https://openapi-generator.tech/) supports many languages:
+
+```bash
+# Install openapi-generator (requires Java)
+brew install openapi-generator
+
+# Generate a Python client
+openapi-generator generate \
+  -i openapi.json \
+  -g python \
+  -o ./python-client
+```
+
+## What's in the spec
+
+The spec adapts to your endpoint type:
+
+| Endpoint type | Request body includes |
+|---------------|----------------------|
+| SQL-based (HogQL) | `variables` for query parameters |
+| Insight-based | `query_override` and `filters_override` |
+
+Both types include `version`, `refresh`, and `client_query_id` parameters.
+
+## Example spec
+
+```json
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "daily_active_users",
+    "version": "1"
+  },
+  "paths": {
+    "/api/environments/{project_id}/endpoints/daily_active_users/run": {
+      "post": {
+        "operationId": "run_daily_active_users",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EndpointRunRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Query results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": { "type": "array" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
