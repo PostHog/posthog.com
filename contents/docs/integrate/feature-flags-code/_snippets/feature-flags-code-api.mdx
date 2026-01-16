@@ -266,7 +266,9 @@ The response varies depending on whether you include the `config=true` query par
 
 ##### Basic response (`/flags?v=2`)
 
-Use this endpoint when you only need to evaluate feature flags. It returns a response with just the flag evaluation results:
+Use this endpoint when you only need to evaluate feature flags. It returns a response with just the flag evaluation results.
+
+> **Note:** If a feature flag is associated with an experiment that has a [holdout group](/docs/experiments/holdouts), users in the holdout receive a variant value in the format `holdout-{holdout_id}` (e.g., `holdout-727`). You can detect holdout users by checking if the variant starts with `holdout-`.
 
 ```json
 {
