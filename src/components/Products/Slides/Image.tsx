@@ -9,6 +9,7 @@ export interface Image {
     stylize?: boolean
     shadow?: boolean
     className?: string
+    containerClassName?: string
 }
 
 interface ProductImageProps {
@@ -82,7 +83,7 @@ export default function ProductImage({ images, className = '' }: ProductImagePro
     )
 
     return (
-        <div className={`relative rounded ${className}`}>
+        <div className={`relative rounded ${className || currentImage.containerClassName}`}>
             <button className="flex items-center justify-center w-full">
                 <ZoomImage>{content}</ZoomImage>
             </button>

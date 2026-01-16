@@ -26,6 +26,7 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 4. First signup from a company with 1000+ employees ('Big Fish') signaling a high potential large account early in their product led journey.
 5. Customers who have used 50% or more of their startup credits and had a last invoice greater than $5000
 6. Using PostHog but not spending money and trigger a signal for: hiring increase in engineers, web/social traffic hike, and/or recently fundraised
+7. Outbound leads manually qualified by Dmytro and flagged as high potential.
 
 Anyone at PostHog can also manually flag an account as a high potential lead. This includes new or low spend accounts with strong net new potential or existing paying customers with credible expansion potential. To create a lead, go to the customer's Vitally record and add a Segment for `AM referral` (product-led sales) or `AE referral` (new business). 
 

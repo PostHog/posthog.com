@@ -47,6 +47,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
             </head>
             <body {...props.bodyAttributes} className="light" data-wallpaper="keyboard-garden">
                 {props.preBodyComponents}
+                {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - Gatsby body content from build, not user input */}
                 <div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />
                 {props.postBodyComponents}
             </body>

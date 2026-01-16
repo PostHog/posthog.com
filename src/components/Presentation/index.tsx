@@ -473,6 +473,7 @@ export default function Presentation({
                                         <div className="p-4 text-sm prose dark:prose-invert prose-sm">
                                             {currentSlideNotes ? (
                                                 typeof currentSlideNotes === 'string' ? (
+                                                    // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - presentation notes from CMS, not user input
                                                     <div dangerouslySetInnerHTML={{ __html: currentSlideNotes }} />
                                                 ) : (
                                                     currentSlideNotes

@@ -104,6 +104,7 @@ export default function StackedTemplate({
                                 image ? '' : '@2xl:max-w-xl'
                             }`}
                             dangerouslySetInnerHTML={{
+                                // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - presentation content from CMS, not user input
                                 __html: title.replace('{companyName}', companyName || ''),
                             }}
                         />
