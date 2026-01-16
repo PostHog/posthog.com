@@ -1270,8 +1270,8 @@ export const handbookSidebar = [
                 url: '/handbook/product/visiting-customers',
             },
             {
-                name: 'Releasing as beta',
-                url: '/handbook/product/releasing-as-beta',
+                name: 'Releasing new products and features',
+                url: '/handbook/product/releasing-new-products-and-features',
             },
             {
                 name: 'Product manager role',
