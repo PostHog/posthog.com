@@ -217,6 +217,26 @@ git push origin --force <your branch>
 
 > Why does this work? As we mentioned earlier, our CI runs `test-runner.ts` on every push, so we don't really care if these images are conflicted as they are regenerated after you push to your branch.
 
+### Deployed Preview
+
+You can spin up a real deployed PostHog instance to test your branch by adding the `hobby-preview` label to your PR. This uses the hobby (Docker Compose) self-hosted setup under the hood.
+
+**How it works:**
+
+1. Add the `hobby-preview` label to your PR
+2. CI creates a DigitalOcean droplet and deploys PostHog with your branch
+3. A comment is posted to the PR with the preview URL (e.g., `https://hobby-pr-12345.posthog.dev`)
+4. The droplet persists across commits so you can iterate
+5. Remove the label or close the PR to clean up the droplet
+
+**When to use it:**
+
+- Testing changes in a real deployed environment
+- Manual QA before merging
+- Verifying Docker Compose or deployment script changes
+
+The workflow also runs a smoke test (health check) automatically on PRs that touch deployment-related files.
+
 ## Reviewing code
 
 When we review a PR, we'll look at the following things:
@@ -242,7 +262,59 @@ Always request a review on your pull request by a fellow team member (or leave u
 
 Once you merge a pull request, it will automatically deploy to all environments. The deployment process is documented in our [charts repository](https://github.com/PostHog/charts/blob/main/DEPLOYMENT.md). Check out the `#platform-bots` Slack channel to see how your deploy is progressing. 
 
-We're managing deployments with [ArgoCD](http://go/argo) where you can also see individual resources and their status. 
+We're managing deployments with [ArgoCD](http://go/argo) where you can also see individual resources and their status.
+
+### Verifying your deployment
+
+After merging, your code should deploy automatically. If you need to verify your changes are live (or troubleshoot why they're not), here's how:
+
+#### 1. Check state.yaml (what *should* be deployed)
+
+The [charts repository state.yaml](https://github.com/PostHog/charts/blob/main/state.yaml) is the source of truth for what ArgoCD is trying to deploy. Find your service (e.g., `ingestion`, `posthog`) and check the commit SHA listed.
+
+#### 2. Check running pods (what's *actually* deployed)
+
+If you have [cluster access](/handbook/engineering/how-to-access-posthog-cloud-infra), verify what's running:
+
+```bash
+# Find your service's pods
+kubectl -n posthog get pods | grep <service-name>
+
+# Get the image/commit running on a pod
+kubectl -n posthog get pod <pod-name> -o jsonpath='{.spec.containers[0].image}'
+```
+
+#### 3. Verify your commit is included
+
+Use `git merge-base` to check if your commit is an ancestor of the deployed commit:
+
+```bash
+git fetch origin
+git merge-base --is-ancestor <your-commit-sha> <deployed-commit-sha> && echo "Deployed" || echo "Not deployed"
+```
+
+#### 4. Troubleshooting with ArgoCD
+
+If `state.yaml` shows a newer commit than what's running on pods, check ArgoCD:
+
+1. **Find the specific app** - Don't just look at the parent grouping (e.g., `ingestion`). Drill down to the specific environment app like `ingestion-events-prod-us` or `posthog-prod-eu`.
+
+2. **Check sync status** - Is it "Synced" or "OutOfSync"? When was the last successful sync?
+
+3. **Check if auto-sync is enabled** - Some apps may have auto-sync disabled and require manual syncing.
+
+4. **Look at the diff** - Click "DIFF" to see what's different between desired and live state.
+
+#### Common deployment issues
+
+| Symptom | Likely cause | Solution |
+|---------|--------------|----------|
+| App shows "OutOfSync" | Auto-sync disabled or sync error | Check if auto-sync is enabled; try manual sync |
+| state.yaml updated but pods unchanged | ArgoCD hasn't synced yet | Check ArgoCD app status; may need manual intervention |
+| Pods running old commit | Rollout stuck or image not built | Check deployment rollout status; verify CI built the image |
+| Can't find your service in ArgoCD | Looking at wrong app grouping | Search for your specific service + environment (e.g., `ingestion-events-prod-us`) |
+
+If a deployment appears stuck, reach out in `#team-infrastructure`.
 
 ## Documenting
 
@@ -283,11 +355,31 @@ Engineers should apply the following best practices for _all_ new releases:
 -   Ensure docs are updated to reflect the new release.
 -   Ensure all new features include at least one pre-made template (or equivalent) for users.
 
-### Self-hosted and hobby versions
+### When to A/B test
 
-We have [sunset support for our kubernetes and helm chart managed self-hosted offering](/blog/sunsetting-helm-support-posthog). This means we no longer offer support for fixing to specific versions of PostHog. A [docker image is pushed for each commit to master](https://hub.docker.com/r/posthog/posthog). Each of those versions is immediately deployed to PostHog Cloud.
+There are two broad categories of things we A/B test:
 
-The [deploy-hobby script](https://github.com/PostHog/posthog/blob/master/bin/deploy-hobby) allows you to set a `POSTHOG_APP_TAG` environment variable and fix your docker-compose deployed version of PostHog. Or you can edit your docker-compose file to replace each instance of `image: posthog/posthog:$POSTHOG_APP_TAG` with a specific tag e.g. `image: posthog/posthog:9c68581779c78489cfe737cfa965b73f7fc5503c`
+- Changes intended to move a metric (eg. changing CTAs to see if it improves click-through)
+- Changes that could impact large swaths of users and their behavior, to make sure there is no negative impact (eg. moving all items in the left nav into a drawer)
+
+The former is an optimization scheme; the latter makes sure we don't break things. Just like we create tests in our codebase to make sure new code doesn't disrupt existing features, we also need to do behavioral testing to make sure our new features aren't disrupting existing user behaviors.
+
+A/B tests make sense when:
+
+- There is sufficient traffic to give results in 1-2 weeks
+- The change isn't simply adding a new feature (eg adding a totally new feature and A/B testing if people use the feature isn't exactly informative, though you _should_ be looking at metrics for features you ship to see if anyone uses them)
+    - If the feature is designed to improve some other metric like retention or stickiness, then test away!
+- The change impacts user behavior (eg most backend changes should have code tests - not behavioral A/B tests)
+
+If you're not sure something should be A/B tested, run one anyway. Feature flags (which experiments run on top of) are a great kill-switch for rolling back features in case something goes sidwways. And it's always nice to know how your changes might move the numbers! 
+
+It's easy to just think "this makes more sense, let's just roll it out." Sometimes that's okay, sometimes it has unintended consequences. We obviously can't and shouldn't test everything, but running A/B tests frequently gets you comfortable with being wrong, which is a _very_ handy skill to have.
+
+#### A/B test metrics
+
+Experiment design is a bit of an art. There are different types of [metrics](/docs/experiments/metrics) you can use in PostHog experiments. Another benefit of running experiments is forcing yourself to think through what other things your change might impact, which oftentimes doesn't happen in the regular release cycle!
+
+Generally, a good pattern is to set up 1-2 primary metrics that you anticipate might be impacted by the A/B test, as well as 3+ secondary metrics that might also be good to keep an eye on, just in case. If you aren't sure what metrics to be testing, just ask! Lots of people are excited to help think this through (especially #team-growth and Raquel!).
 
 ### Releasing as a beta
 
@@ -304,3 +396,9 @@ Announcements, whether for beta or final updates, are a Marketing responsibility
 In order to ensure a smooth launch [the owner](/handbook/engineering/development-process#assign-an-owner) should tell Marketing about upcoming updates as soon as possible, or include them in an All-Hands update.
 
 It's _never_ too early to give Marketing a heads-up about something by tagging them in an issue or via the Marketing Slack channel.
+
+### Self-hosted and hobby versions
+
+We have [sunset support for our kubernetes and helm chart managed self-hosted offering](/blog/sunsetting-helm-support-posthog). This means we no longer offer support for fixing to specific versions of PostHog. A [docker image is pushed for each commit to master](https://hub.docker.com/r/posthog/posthog). Each of those versions is immediately deployed to PostHog Cloud.
+
+The [deploy-hobby script](https://github.com/PostHog/posthog/blob/master/bin/deploy-hobby) allows you to set a `POSTHOG_APP_TAG` environment variable and fix your docker-compose deployed version of PostHog. Or you can edit your docker-compose file to replace each instance of `image: posthog/posthog:$POSTHOG_APP_TAG` with a specific tag e.g. `image: posthog/posthog:9c68581779c78489cfe737cfa965b73f7fc5503c`

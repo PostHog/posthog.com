@@ -32,10 +32,10 @@ jobs:
 
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
 
             - name: Install uv
-              uses: astral-sh/setup-uv@v4
+              uses: astral-sh/setup-uv@3259c6206f993105e3a61b142c2d97bf4b9ef83d # v7.1.0
 
             - name: Set up Python
               run: uv python install 3.12
@@ -52,18 +52,20 @@ jobs:
                   AWS_REGION: ${{ secrets.PODCAST_AWS_REGION || 'us-east-1' }}
                   PODBEAN_CLIENT_ID: ${{ secrets.PODBEAN_CLIENT_ID }}
                   PODBEAN_CLIENT_SECRET: ${{ secrets.PODBEAN_CLIENT_SECRET }}
+                  INPUT_DRY_RUN: ${{ github.event.inputs.dry_run }}
+                  INPUT_STATUS: ${{ github.event.inputs.status }}
               run: |
                   cd scripts/hogfm
 
                   # Determine arguments based on inputs
                   ARGS=""
 
-                  if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+                  if [ "$INPUT_DRY_RUN" = "true" ]; then
                     ARGS="$ARGS --dry-run"
                   fi
 
-                  if [ -n "${{ github.event.inputs.status }}" ]; then
-                    ARGS="$ARGS --status ${{ github.event.inputs.status }}"
+                  if [ -n "$INPUT_STATUS" ]; then
+                    ARGS="$ARGS --status $INPUT_STATUS"
                   else
                     ARGS="$ARGS --status draft"
                   fi

@@ -4,6 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
+> **Want to apply for our startups program?** [Sign-up here](/startups), or [apply on Bookface if you're in Y Combinator](https://bookface.ycombinator.com/deals/687). 
+
 We run two special programs for early-stage teams. The primary place for discussing both programs is the [#project-startups-and-yc](https://posthog.slack.com/archives/C088RSQKH2T) channel in Slack.
 
 | Feature                     | Startups                                              | Y Combinator                                          |

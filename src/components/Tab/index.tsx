@@ -77,9 +77,32 @@ const TabPanels: typeof HeadlessTab.Panels = ({ children }) => {
 
 TabPanels.displayName = 'TabPanels'
 
+const TabPanel = ({ children, className, ...props }: React.ComponentProps<typeof HeadlessTab.Panel>) => {
+    // Extract static and unmount to avoid conflicts, always use static=true
+    const { static: staticProp, unmount, ...restProps } = props as any
+
+    return (
+        <HeadlessTab.Panel
+            {...restProps}
+            static={true}
+            className={({ selected }: { selected: boolean }) => {
+                const baseClass = selected ? '' : 'hidden'
+                if (typeof className === 'function') {
+                    return classNames(baseClass, className({ selected }))
+                }
+                return classNames(baseClass, className)
+            }}
+        >
+            {children}
+        </HeadlessTab.Panel>
+    )
+}
+
+TabPanel.displayName = 'TabPanel'
+
 Tab.Group = TabGroup
 Tab.List = TabList
-Tab.Panel = HeadlessTab.Panel
+Tab.Panel = TabPanel
 Tab.Panels = TabPanels
 
 export default Tab

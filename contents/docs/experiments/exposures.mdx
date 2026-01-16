@@ -44,6 +44,7 @@ The experiment view displays real-time exposure data to help you monitor partici
 />
 
 The exposures chart shows:
+
 | Metric | Description |
 |--------|-------------|
 | **Daily cumulative count** | Unique users exposed to each variant over time |
@@ -102,6 +103,60 @@ Users exposed to multiple variants are completely removed from the experiment an
 
 ### Use first seen variant
 Users are analyzed based on the first variant they were exposed to, regardless of subsequent exposures. This maximizes sample size but may introduce some noise into your results.
+
+## Sample ratio mismatch detection
+
+Sample ratio mismatch (SRM) is an automatic check that compares your actual user distribution across variants against your configured rollout percentages. PostHog uses a chi-squared statistical test to detect when the observed distribution is significantly different from what's expected.
+
+### Why SRM matters
+
+When your experiment has SRM, it means something may be systematically biasing which users end up in each variant. This can invalidate your experiment results because:
+
+- The variants may no longer be comparable populations
+- Any differences in metrics could be due to the bias rather than your changes
+- Statistical conclusions become unreliable
+
+### How it's displayed
+
+PostHog automatically calculates SRM once your experiment has at least 100 total exposures. You'll see the result below the exposures table:
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_12_16_T17_02_08_386_Z_2abe6381e7.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_12_16_T17_03_30_438_Z_7c656de517.png"
+  classes="rounded"
+  alt="Screenshot of sample ratio mismatch indicator"
+/>
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_12_16_T17_02_38_879_Z_0f569a06b3.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_12_16_T17_03_11_562_Z_ca54694954.png"
+  classes="rounded"
+  alt="Screenshot of sample ratio mismatch indicator"
+/>
+
+- **Green checkmark**: Distribution matches your rollout percentages. The observed difference is within normal random variation.
+- **Yellow warning**: Sample ratio mismatch detected. The distribution is significantly different from expected.
+
+PostHog uses a significance threshold of p < 0.001 to flag mismatches. The p-value is displayed alongside the status—a lower p-value indicates stronger evidence of a mismatch.
+
+### What to do if SRM is detected
+
+If you see a sample ratio mismatch warning, investigate before drawing conclusions from your experiment:
+
+1. **Check your feature flag implementation**: Verify the flag is being evaluated correctly across all code paths. Ensure you're calling [`identify()`](/docs/product-analytics/identify) before evaluating flags (for frontend SDKs).
+
+2. **Review release conditions**: If you're using property-based release conditions, ensure those properties are available at evaluation time. Missing properties can cause users to fall out of the experiment unevenly. Consider using simple percentage-based rollout (e.g., 50/50) rather than complex conditions.
+
+3. **Check for ad-blockers or network issues**: These can prevent feature flag calls from reaching PostHog for certain users, skewing your distribution. Consider [setting up a reverse proxy](/docs/advanced/proxy) to route requests through your own domain, which bypasses ad blockers and typically increases event capture by 10-30%.
+
+4. **Look for performance differences between variants**: If one variant causes pages to load slower or crash more often, users may drop off before the exposure event fires.
+
+5. **Look for bot traffic**: Bots may trigger exposures unevenly across variants.
+
+6. **Check for race conditions**: If your exposure event can fire before the feature flag is fully evaluated, some users may be incorrectly assigned.
+
+7. **Verify test account filtering**: Ensure internal users aren't being included in ways that skew the distribution.
+
 
 ## Test account filtering
 

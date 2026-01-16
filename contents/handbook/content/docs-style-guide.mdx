@@ -217,6 +217,39 @@ Available props:
 
 The component automatically tracks when users open PostHog AI and includes the current page context.
 
+### AskAIInput
+
+The `<AskAIInput>` component provides a text input for users to ask PostHog AI questions directly within documentation pages. Use this to replace traditional FAQ sections in troubleshooting guides and documentation pages where users frequently have questions. The component opens the PostHog AI chat window with the user's question pre-loaded and includes the current page context. Add a clear h2 heading like "Have a question? Ask PostHog AI" above the component.
+
+> **Note:** Customize the `placeholder` prop per page to provide context-specific guidance. The default is `Ask a question...`
+
+```mdx
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+```
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+
+> See [src/components/AskAIInput/index.tsx](https://github.com/PostHog/posthog.com/blob/master/src/components/AskAIInput/index.tsx) for all available props.
+
+### SolvedQuestions
+
+The `<SolvedQuestions>` component displays resolved community questions from a specific topic. Use this in troubleshooting guides to highlight common issues and their solutions. Find question slugs by visiting the community question page and copying the URL slug.
+
+> **Note:** Use the `pinnedQuestions` prop to manually curate which questions appear. When provided, the component shows only those questions. If not provided, it shows recent solved posts.
+
+```mdx
+<SolvedQuestions
+    topicLabel="Error Tracking"
+    pinnedQuestions={[
+        'code-variables-for-external-libraries-for-python',
+        'trouble-setting-up-source-map-in-vite-react',
+        'webpack-turbopack-plugin-getting-sourcemaps-uploaded-to-vercel'
+    ]}
+/>
+```
+
 ### Steps
 
 Use the `<Steps>` component for content that walks the reader through a strict sequence of instructions. Think how-to guides or step-by-step tutorials.
@@ -283,6 +316,74 @@ You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember na
 
 </Steps>
 ```
+
+### Decision tree
+
+import { DecisionTree } from '../../../src/components/Docs/DecisionTree'
+
+Use a decision tree when users need help choosing between multiple, branching options. Instead of making users read through all possibilities, the tree asks questions and recommends the best path based on their answers.
+
+You can use the following decision tree to help you decide if using one is good for your use case! 
+
+<DecisionTree
+    questions={[
+        {
+            id: 'multiple-options',
+            question: 'Are you helping users choose between multiple options?',
+            options: [
+                { value: 'yes', label: 'Yes' },
+                { value: 'no', label: 'No' },
+            ],
+        },
+        {
+            id: 'option-count',
+            question: 'How many options are there?',
+            condition: (answers) => answers['multiple-options'] === 'yes',
+            options: [
+                { value: 'few', label: '2-6 options' },
+                { value: 'many', label: 'More than 6 options' },
+            ],
+        },
+        {
+            id: 'complexity',
+            question: 'Can you give the user an option by asking 2-3 simple questions?',
+            condition: (answers) => answers['option-count'] === 'few',
+            options: [
+                { value: 'yes', label: 'Yes' },
+                { value: 'no', label: 'No' },
+            ],
+        },
+    ]}
+    getRecommendation={(answers) => {
+        if (answers['multiple-options'] === 'no') {
+            return {
+                title: "Don't use a decision tree",
+                path: '',
+                reason: "Decision trees are for helping users choose between options.",
+            }
+        }
+        if (answers['option-count'] === 'many') {
+            return {
+                title: "Don't use a decision tree",
+                path: '',
+                reason: "With more than 6 options, restructure your content or use a simple list instead.",
+            }
+        }
+        if (answers['complexity'] === 'no') {
+            return {
+                title: "Don't use a decision tree",
+                path: '',
+                reason: "If you need complex logic or many questions, a decision tree will be too complicated. Use a simple list instead.",
+            }
+        }
+        return {
+            title: 'Use a decision tree!',
+            path: '',
+            reason: "You have a manageable number of options and can guide users with a few simple questions.",
+        }
+    }}
+    buttonText=""
+/>
 
 ### Quest log
 

@@ -20,11 +20,11 @@ pip install opentelemetry-api opentelemetry-sdk opentelemetry-exporter-otlp
 
 </Step>
 
-<Step title="Get your project token" badge="required">
+<Step title="Get your project API key" badge="required">
 
-You'll need your PostHog project token to authenticate log requests. This is the same token you use for capturing events and exceptions.
+You'll need your PostHog project API key to authenticate log requests. This is the same API key you use for capturing events and exceptions.
 
-You can find your project token in [Project Settings](https://app.posthog.com/settings/project).
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project).
 
 </Step>
 
@@ -42,10 +42,10 @@ from opentelemetry.exporter.otlp.proto.http._log_exporter import OTLPLogExporter
 logger_provider = LoggerProvider()
 logs.set_logger_provider(logger_provider)
 
-# Create OTLP exporter with token in header
+# Create OTLP exporter with API key in header
 otlp_exporter = OTLPLogExporter(
     endpoint="https://us.i.posthog.com/i/v1/logs",
-    headers={"Authorization": f"Bearer {YOUR_PROJECT_TOKEN}"}
+    headers={"Authorization": f"Bearer {YOUR_PROJECT_API_KEY}"}
 )
 
 # Add processor
@@ -57,11 +57,11 @@ logger_provider.add_log_record_processor(
 logger = logs.get_logger("my-app")
 ```
 
-Alternatively, you can pass the token as a query parameter:
+Alternatively, you can pass the API key as a query parameter:
 
 ```python
 otlp_exporter = OTLPLogExporter(
-    endpoint=f"https://us.i.posthog.com/i/v1/logs?token={YOUR_PROJECT_TOKEN}"
+    endpoint=f"https://us.i.posthog.com/i/v1/logs?token={YOUR_PROJECT_API_KEY}"
 )
 ```
 

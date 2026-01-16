@@ -16,6 +16,7 @@ export const plausible = {
                 breakdown_by_geoip: false,
                 clickmaps: false,
                 conversions: true,
+                cookieless_tracking: true,
                 custom_channel_types: false,
                 entry_exit_paths: true,
                 first_party_cookies: false,
@@ -91,6 +92,7 @@ export const plausible = {
                 insights: {
                     available: false,
                     features: {
+                        ai_insight_builder: false,
                         formula_mode: false,
                         ready_made_insight_types: false,
                         sampling: false,
@@ -147,6 +149,7 @@ export const plausible = {
             api: 'Partial',
             mobile_sdks: false,
             server_side_sdks: false,
+            sql: false,
         },
         tools: {
             cms: '',

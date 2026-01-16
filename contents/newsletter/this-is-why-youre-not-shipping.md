@@ -51,6 +51,8 @@ Instead, use them to brainstorm, plant the seed of an idea before sharing it mor
 
 If 1:1s become just about problems you have, they become a chore that no one enjoys.
 
+<NewsletterForm />
+
 ## 2. You need another team to approve your work
 
 This can happen for all sorts of reasons:

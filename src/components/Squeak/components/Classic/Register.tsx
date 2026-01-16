@@ -23,19 +23,22 @@ const Input = ({
     [key: string]: any
 }) => {
     return (
-        <div className="flex items-center space-x-2">
-            <label htmlFor={props.name} className="w-[90px] font-semibold text-sm">
-                {label}
-            </label>
-            <div>
-                <input
-                    className={`rounded-md border p-1 ${touched && error ? '!border-red' : '!border-border'}`}
-                    type={type}
-                    id={props.name}
-                    placeholder={label}
-                    {...props}
-                />
+        <div>
+            <div className="flex items-center space-x-2">
+                <label htmlFor={props.name} className="w-[90px] font-semibold text-sm">
+                    {label}
+                </label>
+                <div>
+                    <input
+                        className={`rounded-md border p-1 ${touched && error ? '!border-red' : '!border-border'}`}
+                        type={type}
+                        id={props.name}
+                        placeholder={label}
+                        {...props}
+                    />
+                </div>
             </div>
+            {touched && error && <p className="text-red text-xs m-0 mt-1 ml-[98px]">{error}</p>}
         </div>
     )
 }
@@ -68,6 +71,8 @@ const RegisterForm: React.FC = () => {
                 errors.email = 'Required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
+            } else if (values.email.toLowerCase().endsWith('@posthog.com')) {
+                errors.email = 'Your employee account is created automatically. Reset your password to log in.'
             }
             if (!values.password) {
                 errors.password = 'Required'

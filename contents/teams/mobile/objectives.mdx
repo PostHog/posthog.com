@@ -1,7 +1,38 @@
-### Q4 2025 Objectives
+### Q1 2026 Objectives
 
-#### Ship mobile error tracking (Driver: <TeamMember name="Manoel Aranda Neto" />)
-* Complete 'straightforward' section of the [megaissue](https://github.com/PostHog/posthog/issues/38845)
-* Support suppression rules
-* Add suppression of minified exceptions before cymbal processing
-* Build dashboard template including crash free sessions / users metric
+#### Goal 1: Replay cost control - [parity tracker issue](https://github.com/PostHog/posthog/issues/30889) - (Driver: <TeamMember name="Ioannis Josephides" />)
+
+* [Programmatically start and stop recordings](https://posthog.com/docs/session-replay/how-to-control-which-sessions-you-record#programmatically-start-and-stop-recordings) (React Native and Flutter)
+* [Min. recording duration](https://posthog.com/docs/session-replay/how-to-control-which-sessions-you-record#minimum-duration) (SDKs TBD)
+* [Sampling rate](https://posthog.com/docs/session-replay/how-to-control-which-sessions-you-record#sampling) (SDKs TBD)
+* Event triggers (SDKs TBD)
+
+#### Goal 2: Mobile error tracking v2 - [parity tracker issue](https://github.com/PostHog/posthog/issues/43012) - (Driver: <TeamMember name="Manoel Aranda Neto" />)
+
+* [iOS error tracking](https://github.com/PostHog/posthog-ios/issues/407)
+* [React Native native exceptions support](https://github.com/PostHog/posthog-js/issues/2656)
+* [Flutter native exceptions support](https://github.com/PostHog/posthog-flutter/issues/238)
+* [Flutter web error tracking](https://github.com/PostHog/posthog-flutter/issues/237)
+
+#### Goal 3: Wider SDK coverage - (Driver: <TeamMember name="Manoel Aranda Neto" />)
+
+* [Flutter desktop support](https://github.com/PostHog/posthog-flutter/issues/51) (Windows and Linux)
+
+### Goal 4: Make it easier to run the team - (Driver: <TeamMember name="Manoel Aranda Neto" />)
+
+* Internal metrics (e.g. how many mobile SDK users use different products)
+    * feature usage breakdown per SDK
+    * events, flags requests and revenue breakdown per SDK
+* Improve the release process (it's semi-automatic, but can be fully automated)
+    * Android
+    * iOS
+    * Flutter
+    * RN session replay plugin
+* Hire and onboard another SDK engineer
+
+#### Stretch goal: Improve experience for mobile customers using feature flags - (Driver: <TeamMember name="Ioannis Josephides" />)
+
+* [Semantic versioning filters](https://github.com/PostHog/posthog/issues/24485)
+* [Remote config support](https://github.com/PostHog/posthog/issues/26567)
+* [Human readable device models](https://github.com/PostHog/posthog/issues/18025)
+* [Overriding server properties for feature flags](https://github.com/PostHog/posthog-ios/issues/148) (Flutter)

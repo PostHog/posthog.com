@@ -439,31 +439,31 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
 
                     ...(chatWindows.length > 0
                         ? [
-                            {
-                                type: 'separator',
-                            },
-                            ...chatWindows.map((appWindow, index) => ({
-                                type: 'item',
-                                label: appWindow.meta?.title || `Chat ${index + 1}`,
-                                onClick: () => {
-                                    const newAppWindow = updateWindow(appWindow, {
-                                        element: {
-                                            ...appWindow.element,
-                                            props: {
-                                                ...appWindow.props,
-                                                context: [
-                                                    {
-                                                        type: 'page',
-                                                        value: { path: item.path, label: item.meta?.title },
-                                                    },
-                                                ],
-                                            },
-                                        },
-                                    })
-                                    bringToFront(newAppWindow)
-                                },
-                            })),
-                        ]
+                              {
+                                  type: 'separator',
+                              },
+                              ...chatWindows.map((appWindow, index) => ({
+                                  type: 'item',
+                                  label: appWindow.meta?.title || `Chat ${index + 1}`,
+                                  onClick: () => {
+                                      const newAppWindow = updateWindow(appWindow, {
+                                          element: {
+                                              ...appWindow.element,
+                                              props: {
+                                                  ...appWindow.props,
+                                                  context: [
+                                                      {
+                                                          type: 'page',
+                                                          value: { path: item.path, label: item.meta?.title },
+                                                      },
+                                                  ],
+                                              },
+                                          },
+                                      })
+                                      bringToFront(newAppWindow)
+                                  },
+                              })),
+                          ]
                         : []),
                 ],
             },
@@ -572,18 +572,23 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             data-app="AppWindow"
                             data-scheme="tertiary"
                             suppressHydrationWarning
-                            className={`@container absolute !select-auto flex flex-col ${item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-transparent'
-                                } ${siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
+                            className={`@container absolute !select-auto flex flex-col ${
+                                item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-transparent'
+                            } ${
+                                siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
                                     ? 'border-b border-primary'
-                                    : `${focusedWindow === item
-                                        ? 'shadow-2xl border-primary'
-                                        : 'shadow-lg border-input'
-                                    } ${dragging ? '[&_*]:select-none' : ''} ${item.minimal
-                                        ? '!shadow-none'
-                                        : `flex flex-col ${siteSettings.experience === 'boring' ? '' : 'border rounded'
-                                        }`
-                                    }`
-                                } ${chrome ? 'overflow-hidden' : ''}`}
+                                    : `${
+                                          focusedWindow === item
+                                              ? 'shadow-2xl border-primary'
+                                              : 'shadow-lg border-input'
+                                      } ${dragging ? '[&_*]:select-none' : ''} ${
+                                          item.minimal
+                                              ? '!shadow-none'
+                                              : `flex flex-col ${
+                                                    siteSettings.experience === 'boring' ? '' : 'border rounded'
+                                                }`
+                                      }`
+                            } ${chrome ? 'overflow-hidden' : ''}`}
                             style={{
                                 zIndex: item.zIndex,
                             }}
@@ -604,8 +609,8 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     siteSettings.experience === 'boring'
                                         ? '100%'
                                         : item.appSettings?.size?.autoHeight
-                                            ? 'auto'
-                                            : size.height,
+                                        ? 'auto'
+                                        : size.height,
                             }}
                             animate={{
                                 scale: 1,
@@ -616,26 +621,26 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     siteSettings.experience === 'boring'
                                         ? '100%'
                                         : item.appSettings?.size?.autoHeight
-                                            ? 'auto'
-                                            : size.height,
+                                        ? 'auto'
+                                        : size.height,
                                 transition: {
                                     duration:
                                         siteSettings.experience === 'boring' ||
-                                            siteSettings.performanceBoost ||
-                                            leftDragResizing
+                                        siteSettings.performanceBoost ||
+                                        leftDragResizing
                                             ? 0
                                             : 0.2,
                                     scale: {
                                         duration:
                                             siteSettings.experience === 'boring' ||
-                                                siteSettings.performanceBoost ||
-                                                !windowPosition
+                                            siteSettings.performanceBoost ||
+                                            !windowPosition
                                                 ? 0
                                                 : 0.2,
                                         delay:
                                             siteSettings.experience === 'boring' ||
-                                                siteSettings.performanceBoost ||
-                                                !windowPosition
+                                            siteSettings.performanceBoost ||
+                                            !windowPosition
                                                 ? 0
                                                 : 0.2,
                                         ease: [0.2, 0.2, 0.8, 1],
@@ -685,8 +690,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 <div
                                     data-scheme="tertiary"
                                     onDoubleClick={handleDoubleClick}
-                                    className={`flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary/50 backdrop-blur-3xl skin-classic:bg-primary border-b border-input ${siteSettings.experience === 'boring' ? '' : 'cursor-move'
-                                        }`}
+                                    className={`flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary/50 backdrop-blur-3xl skin-classic:bg-primary border-b border-input ${
+                                        siteSettings.experience === 'boring' ? '' : 'cursor-move'
+                                    }`}
                                     onPointerDown={(e) => controls.start(e)}
                                 >
                                     <MenuBar
@@ -788,7 +794,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                                                         <span>
                                                                             <IconSquare className="size-5 group-hover:hidden" />
                                                                             {!isSSR &&
-                                                                                size.width >= window?.innerWidth ? (
+                                                                            size.width >= window?.innerWidth ? (
                                                                                 <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
                                                                             ) : (
                                                                                 <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
@@ -884,8 +890,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             )}
                             <div
                                 ref={contentRef}
-                                className={`size-full flex-grow ${chrome ? 'bg-light dark:bg-dark overflow-hidden' : ''
-                                    }`}
+                                className={`size-full flex-grow ${
+                                    chrome ? 'bg-light dark:bg-dark overflow-hidden' : ''
+                                }`}
                             >
                                 {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
                                     <Router

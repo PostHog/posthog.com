@@ -14,7 +14,6 @@ import TeamRoadmap from 'components/TeamRoadmap'
 import TeamMembers from 'components/TeamMembers'
 import { CategoryData } from 'components/Blog/constants/categories'
 import { TutorialTags } from 'components/Tutorials/constants/tags'
-import { Emoji } from 'components/Emoji'
 import TeamUpdate from 'components/TeamUpdate'
 import CopyCode from 'components/CopyCode'
 import TeamMember from 'components/TeamMember'
@@ -24,7 +23,6 @@ import Configuration from 'components/Product/Pipelines/Configuration'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import { IconWarning, IconCheck, IconX } from '@posthog/icons'
-import { CopyMarkdownActionsDropdown } from 'components/MarkdownActionsDropdown'
 import IsEU from 'components/IsEU'
 import IsUS from 'components/IsUS'
 import { CallToAction } from 'components/CallToAction'
@@ -34,47 +32,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { useState } from 'react'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Contributor from 'components/Docs/Contributors'
-import OverflowContainer from 'components/OverflowContainer'
-
-function parseStepsFromMDX(mdxString: string) {
-    const steps = []
-    let stepNumber = 1
-
-    // Find all Step components with their props
-    const stepRegex = /mdx\(Step,\s*\{([^}]*)\}/g
-    let match
-
-    while ((match = stepRegex.exec(mdxString)) !== null) {
-        const propsString = match[1]
-
-        // Extract title
-        const titleMatch = propsString.match(/\btitle:\s*["'](.*?)["']/)
-        if (!titleMatch) continue
-
-        const title = titleMatch[1]
-
-        // Check if checkpoint prop is present
-        const hasCheckpoint = /\bcheckpoint\b/.test(propsString)
-
-        const url = title
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/^-+|-+$/g, '')
-
-        steps.push({
-            depth: 0,
-            value: hasCheckpoint ? `Checkpoint: ${title}` : `Step ${stepNumber}: ${title}`,
-            url: url,
-        })
-
-        // Only increment step number for non-checkpoint steps
-        if (!hasCheckpoint) {
-            stepNumber++
-        }
-    }
-
-    return steps
-}
+import { useProductInterestFromPathname } from 'hooks/useProductInterest'
 
 const DestinationsLibraryCallout = () => {
     return (
@@ -327,10 +285,7 @@ export const TemplateParametersFactory: (params: TemplateParametersProps) => Rea
 
 const A = (props) => <Link {...props} />
 
-export default function Handbook({
-    data: { post },
-    pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
-}) {
+export default function Handbook({ data: { post }, pageContext: { breadcrumbBase, tableOfContents } }) {
     const {
         body,
         frontmatter: {
@@ -340,9 +295,12 @@ export default function Handbook({
             hideRightSidebar,
             contentMaxWidthClass,
         },
-        fields: { slug, contributors, appConfig, templateConfigs, commits, contentWithSnippets },
+        fields: { slug, appConfig, templateConfigs, commits },
         excerpt,
     } = post
+
+    // Track product interest for cross-subdomain cookie
+    useProductInterestFromPathname(slug)
 
     const components = {
         Team,
@@ -401,7 +359,7 @@ export default function Handbook({
                 showSurvey
                 hideRightSidebar={hideRightSidebar}
                 contentMaxWidthClass={contentMaxWidthClass}
-                markdownContent={contentWithSnippets}
+                sourceInstanceName={post.parent?.sourceInstanceName}
             />
         </>
     )
@@ -436,7 +394,6 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
-                contentWithSnippets
                 commits {
                     author {
                         avatar_url
@@ -543,6 +500,7 @@ export const query = graphql`
             }
             parent {
                 ... on File {
+                    sourceInstanceName
                     relativePath
                     fields {
                         gitLogLatestDate(formatString: "MMM DD, YYYY")

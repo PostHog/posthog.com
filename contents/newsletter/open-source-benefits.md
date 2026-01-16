@@ -68,6 +68,8 @@ Both these groups boost open-source startups in launches and beyond. They create
 
 We continue to see this. There are many reasons to choose PostHog, but we still get many signups where being open source is the most important one.
 
+<NewsletterForm />
+
 ## 2. It helps you hire great talent
 
 We've written before about [how important hiring is](/newsletter/43-lessons-about-hiring-for-startups). Any advantage you can get here is huge. As non-obvious as it might seem, we've found being open source is one of them.

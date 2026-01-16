@@ -1,0 +1,84 @@
+---
+title: Evaluations
+---
+
+import AlphaCallout from "./_snippets/alpha.mdx"
+
+<AlphaCallout />
+
+Evaluations automatically assess the quality of your LLM [generations](/docs/llm-analytics/generations) using an "LLM-as-a-judge" approach. Each evaluation runs a customizable prompt against your generations and returns a pass/fail result with reasoning.
+
+## Why use evaluations?
+
+- **Monitor output quality at scale** – Automatically check if generations are helpful, relevant, or safe without manual review.
+- **Detect problematic content** – Catch hallucinations, toxicity, or jailbreak attempts before they reach users.
+- **Track quality trends** – See pass rates across models, prompts, or user segments over time.
+- **Debug with reasoning** – Each evaluation provides an explanation for its decision, making it easy to understand failures.
+
+## How evaluations work
+
+When a [generation](/docs/llm-analytics/generations) is captured, PostHog samples it based on your configured rate (0.1% to 100%). If sampled, the generation's input and output are sent to an LLM judge with your evaluation prompt. The judge returns a boolean pass/fail result plus reasoning, which is stored and linked to the original generation.
+
+You can optionally filter which generations get evaluated using [property filters](/docs/llm-analytics/custom-properties). For example, only evaluate generations from production, from a specific model, or above a certain cost threshold.
+
+## Built-in templates
+
+PostHog provides five pre-built evaluation templates to get you started:
+
+| Template | What it checks | Best for |
+|----------|---------------|----------|
+| **Relevance** | Whether the output addresses the user's input | Customer support bots, Q&A systems |
+| **Helpfulness** | Whether the response is useful and actionable | Chat assistants, productivity tools |
+| **Jailbreak** | Attempts to bypass safety guardrails | Security-sensitive applications |
+| **Hallucination** | Made-up facts or unsupported claims | RAG systems, knowledge bases |
+| **Toxicity** | Harmful, offensive, or inappropriate content | User-facing applications |
+
+## Creating an evaluation
+
+1. Navigate to **LLM analytics** > **Evaluations**
+2. Click **New evaluation**
+3. Choose a template or start from scratch
+4. Configure the evaluation:
+   - **Name**: A descriptive name for the evaluation
+   - **Prompt**: The instructions for the LLM judge (templates provide sensible defaults)
+   - **Sampling rate**: Percentage of generations to evaluate (0.1% – 100%)
+   - **Property filters** (optional): Narrow which generations to evaluate
+5. Enable the evaluation and click **Save**
+
+## Viewing results
+
+The **Evaluations** tab shows all your evaluations with their pass rates and recent activity. Click an evaluation to see its run history, including individual pass/fail results and the reasoning from the LLM judge.
+
+You can also filter generations by evaluation results or create [insights](/docs/product-analytics/insights) based on evaluation data to build quality monitoring dashboards.
+
+## Writing custom prompts
+
+When creating a custom evaluation, your prompt should instruct the LLM judge to return `true` (pass) or `false` (fail) along with reasoning. The judge receives the generation's input and output for context.
+
+Tips for effective evaluation prompts:
+
+- Be specific about what constitutes a pass or fail
+- Include examples of edge cases when relevant
+- Keep the prompt concise but comprehensive
+
+Example custom prompt:
+
+```text
+You are evaluating whether an LLM response follows our brand voice guidelines.
+
+Given the user input and assistant response, determine if the response:
+- Uses a friendly, conversational tone
+- Avoids corporate jargon
+- Addresses the user by name when provided
+
+Return true if the response follows these guidelines, false otherwise.
+Explain your reasoning briefly.
+```
+
+## Pricing
+
+Each evaluation run counts as one LLM analytics event toward your quota.
+
+Evaluations use OpenAI to run the LLM judge. Your first 100 evaluation runs are on us so you can try the feature right away. After that, add your own OpenAI API key in [project settings](https://us.posthog.com/llm-analytics/settings) to keep running evaluations.
+
+Use sampling rates strategically to balance coverage and cost – 5-10% sampling often provides sufficient signal for quality monitoring.

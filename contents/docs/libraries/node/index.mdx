@@ -4,8 +4,7 @@ sidebarTitle: Node.js
 sidebar: Docs
 showTitle: true
 github: 'https://github.com/PostHog/posthog-js/tree/main/packages/node'
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg
+platformLogo: nodejs
 features:
   eventCapture: true
   userIdentification: true
@@ -247,9 +246,9 @@ await client.reloadFeatureFlags()
 // Do something with feature flags here
 ```
 
-#### External caching
+#### Distributed environments
 
-In multi-worker or edge environments, you can implement custom caching for flag definitions using Redis, Cloudflare KV, or other storage backends. This enables sharing definitions across workers and coordinating fetches. See the [external caching guide](/tutorials/node-external-cache) for details.
+In multi-worker or edge environments, you can implement custom caching for flag definitions using Redis, Cloudflare KV, or other storage backends. This enables sharing definitions across workers and coordinating fetches. See our guide for [local evaluation in distributed environments](/docs/feature-flags/local-evaluation/distributed-environments?tab=Node.js) for details.
 
 ## Experiments (A/B tests)
 

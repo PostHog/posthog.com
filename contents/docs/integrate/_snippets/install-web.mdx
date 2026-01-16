@@ -4,6 +4,34 @@ import Snippet from "./install-js-snippet.mdx"
 
 <Snippet />
 
+<details>
+<summary>Using TypeScript with the script tag?</summary>
+
+If you're using TypeScript and want type safety for `window.posthog`, install the `@posthog/types` package:
+
+```bash
+npm install @posthog/types
+```
+
+Then create a type declaration file:
+
+```typescript
+// posthog.d.ts
+import type { PostHog } from '@posthog/types'
+
+declare global {
+    interface Window {
+        posthog?: PostHog
+    }
+}
+
+export {}
+```
+
+See the [TypeScript types documentation](/docs/libraries/js/types) for more details.
+
+</details>
+
 ### Option 2: Install via package manager
 
 import InstallWebPackageManagers from "./install-web-package-managers.mdx"
@@ -49,7 +77,7 @@ import posthog from 'posthog-js/dist/module.full.no-external'
 import posthog from 'posthog-js/dist/module.full'
 
 // Finally you can also import specific extra dependencies 
-import "posthog-js/dist/recorder"
+import "posthog-js/dist/posthog-recorder"
 import "posthog-js/dist/surveys"
 import "posthog-js/dist/exception-autocapture"
 import "posthog-js/dist/tracing-headers"

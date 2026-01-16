@@ -36,10 +36,10 @@ Other times you might have an idea for a great product we should build. In that 
 
 From our [roadmap](/roadmap), here's what we're currently working on:
 
-- Endpoints - `#project-endpoints`
+- Endpoints - `#team-data-modeling`
 - Logs - `#project-logs`
 - Product autonomy - `#team-array`
-- Customer analytics `#team-customer-analytics`
+- Customer Analytics `#team-customer-analytics`
   - Revenue analytics now included in customer analytics
 - Workflows `#team-workflows`
 
@@ -62,4 +62,3 @@ Later on, you can then _innovate_ several ways:
 * unpeel your product - you start with the software, then offer API access, then offer better API access, then infrastructure (if you are feeling brave) - *by default, start with this* reminder: charge for API access appropriately, speak to Annika for help figuring this out. Doing this increases our luck surface area (it means your users will find new use cases).
 * features more specific to our ICP (make it more engineering-y, more customization, more power)
 * integrate it with our other products (either feature them _in_ the product you just built, or feature your product in _theirs_)
-

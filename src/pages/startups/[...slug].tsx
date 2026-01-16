@@ -11,6 +11,7 @@ import { IconCheck, IconX } from '@posthog/icons'
 import OSTable from 'components/OSTable'
 import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
 import StripeLogo from '../../images/stripe.svg'
+import Logo1984 from '../../images/1984.svg'
 import ODFLogo from '../../images/odf.svg'
 import Logo from 'components/Logo'
 import OSButton from 'components/OSButton'
@@ -36,6 +37,30 @@ const partnerConfigs = [
                 <IconX className="size-8 text-white inline-block relative top-1" />
                 <img src={StripeLogo} alt="Stripe" className="inline-block h-9 relative top-[.2rem]" />
                 <span>Atlas</span>
+            </>
+        ),
+        value: '$50,000',
+    },
+    {
+        slug: 'incident-io',
+        title: (
+            <>
+                <IconX className="size-8 text-white inline-block relative top-1" />
+                <img
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/wordmark_colour_light_7d9d5205c6.svg"
+                    alt="Incident.io"
+                    className="inline-block h-9 relative top-[-7px]"
+                />
+            </>
+        ),
+        value: '$50,000',
+    },
+    {
+        slug: '1984',
+        title: (
+            <>
+                <IconX className="size-8 text-white inline-block relative top-1" />
+                <img src={Logo1984} alt="1984" className="inline-block h-9 relative top-[.2rem]" />
             </>
         ),
         value: '$50,000',
@@ -69,13 +94,13 @@ export default function Startups(): JSX.Element {
         <>
             <SEO
                 title="PostHog for Startups | $50K credits + free merch + partner perks"
-                description="Join thousands of early stage teams using PostHog to ship better products. Get 50k in credits, exclusive merch, and partner perks. Apply in just 2 minutes."
+                description="Join thousands of early stage teams using the PostHog startup program to ship better products. Get 50k in credits, exclusive merch, and partner perks. Apply in just 2 minutes."
                 image={`/images/og/default.png`}
             />
             <Explorer
                 template="generic"
                 slug="startups"
-                title="PostHog for startups"
+                title="PostHog startup program"
                 selectOptions={selectOptions}
                 selectedCategory="startups"
                 // options below only needed to override matching the slug
@@ -110,7 +135,10 @@ export default function Startups(): JSX.Element {
                                                         complete this form
                                                     </Link>
                                                 </li>
-                                                <li>If accepted, you'll be notified by email</li>
+                                                <li>
+                                                    If accepted into the PostHog startup program, you'll be notified by
+                                                    email
+                                                </li>
                                             </ol>
                                         </>
                                     ),
@@ -126,7 +154,9 @@ export default function Startups(): JSX.Element {
                                     trigger: (
                                         <>
                                             <IconCheck className={`text-green size-5 inline-block`} />
-                                            <span className="flex-1">Qualifications</span>
+                                            <span className="flex-1">
+                                                Qualifications for the PostHog startup program
+                                            </span>
                                         </>
                                     ),
                                     content: (
@@ -272,8 +302,10 @@ export default function Startups(): JSX.Element {
                     </div>
 
                     <div className="m-4 @3xl:m-8 max-w-6xl">
-                        <h2 className="mb-2">Compare startup programs</h2>
-                        <p className="mb-8">tl;dr: PostHog is the only program with a free laptop sticker...</p>
+                        <h2 className="mb-2">Compare others to PostHog's startup programs</h2>
+                        <p className="mb-8">
+                            tl;dr: PostHog has the only startups program with a free laptop sticker...
+                        </p>
 
                         <div className="overflow-x-auto">
                             <OSTable
@@ -409,7 +441,7 @@ export default function Startups(): JSX.Element {
                                                 form
                                             </Link>
                                             . We will apply the credit automatically if you're eligible. If you're
-                                            accepted into the program, we will notify you by email.
+                                            accepted into the startups program, we will notify you by email.
                                         </p>
                                     ),
                                 },
@@ -450,8 +482,8 @@ export default function Startups(): JSX.Element {
                                     trigger: "Can I get this deal if I'm part of YC?",
                                     content: (
                                         <p>
-                                            We have a separate deal for YC folks - check out Bookface. No, they don't
-                                            stack!
+                                            We have a separate deal for YC folks - [check out
+                                            Bookface](https://bookface.ycombinator.com/deals/687). No, they don't stack!
                                         </p>
                                     ),
                                 },
@@ -479,8 +511,8 @@ export default function Startups(): JSX.Element {
                                             <Link to="/pricing" className="underline font-semibold">
                                                 another PostHog plan
                                             </Link>
-                                            . You'll continue to be considered part of the program in terms of invites
-                                            to office hour events, and other perks.
+                                            . You'll continue to be considered part of the startup program in terms of
+                                            invites to office hour events, and other perks.
                                         </p>
                                     ),
                                 },

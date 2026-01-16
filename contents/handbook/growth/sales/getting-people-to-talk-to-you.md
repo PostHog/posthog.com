@@ -50,12 +50,18 @@ When crafting a message, consider the following:
 3. Lead with value within the first sentence. If it takes a paragraph to get there, you won't get responses.
 4. Ask yourself, if I got this email to the sales@ email box, would I engage it? Would I even give it a second look?
 
-An example good email could look like:
+Some examples of good emails that have worked: 
 
 > Hello [name],
 > It looks like your Product Analytics usage has increased over the past month and I wanted to ensure that the increase was expected.
 > [Here are some tools you can use](https://posthog.com/docs/product-analytics/cutting-costs) to ensure you are collecting the correct events and getting valuable insights from them. We have a whole host of [tutorials and guides](https://posthog.com/docs/product-analytics/tutorials) to help you get the most out of PostHog.
 > If you have any questions, don't hesitate to ask.
+
+> [First],
+> Wanted to reach out direct since I noticed the [Company] team ramp up usage in PostHog recently.
+> We'll typically reach out to help with optimizing event capture and make recommendations with regards to instrumentation + querying in PostHog.
+> Up for a chat? Here's my calendar, feel free to grab a time that works best for you.
+> Cheers,
 
 ### Asking for introductions
 

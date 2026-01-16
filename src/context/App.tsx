@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { createContext, useContext, useEffect, useMemo, useState, useCallback, useRef } from 'react'
 import { AppWindow } from './Window'
 import { WindowSearchUI } from 'components/SearchUI'
@@ -15,6 +16,7 @@ import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { themeOptions } from '../hooks/useTheme'
 import ContactSales from 'components/ContactSales'
 import qs from 'qs'
+import usePostHog from '../hooks/usePostHog'
 
 declare global {
     interface Window {
@@ -44,8 +46,8 @@ type WindowElement = React.ReactNode & {
         location: {
             pathname: string
         }
-        pageContext: any
-        data: any
+        pageContext: Record<string, unknown>
+        data: Record<string, unknown>
         params: any
         path: string
         newWindow: boolean
@@ -128,6 +130,7 @@ interface AppContextType {
     copyDesktopParams: () => void
     desktopCopied: boolean
     shareableDesktopURL: string
+    windowsInView: AppWindow[]
 }
 
 interface AppProviderProps {
@@ -260,7 +263,7 @@ export const Context = createContext<AppContextType>({
         skinMode: 'modern',
         cursor: 'default',
         wallpaper: 'keyboard-garden',
-        screensaverDisabled: false,
+        screensaverDisabled: true,
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -287,9 +290,14 @@ export const Context = createContext<AppContextType>({
     copyDesktopParams: () => {},
     desktopCopied: false,
     shareableDesktopURL: '',
+    windowsInView: [],
 })
 
 export interface AppSetting {
+    experiment?: {
+        variant: 'control' | 'test'
+        flag: string
+    }
     size: {
         min: { width: number; height: number }
         max: { width: number; height: number }
@@ -313,6 +321,10 @@ export interface AppSettings {
 
 const appSettings: AppSettings = {
     '/': {
+        experiment: {
+            variant: 'control',
+            flag: 'homepage-test',
+        },
         size: {
             min: {
                 width: 700,
@@ -321,6 +333,47 @@ const appSettings: AppSettings = {
             max: {
                 width: 850,
                 height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
+                if (typeof window === 'undefined') {
+                    return {
+                        x: 0,
+                        y: 0,
+                    }
+                }
+
+                const { x, y } = getDesktopCenterPosition(size)
+                const keyboardGardenImageWidth = 700
+                const keyboardGardenImageLeft = window.innerWidth - keyboardGardenImageWidth
+                const windowRight = x + size.width
+                if (windowRight > keyboardGardenImageLeft) {
+                    const newX = x - (windowRight - keyboardGardenImageLeft)
+                    return {
+                        x: newX < 115 ? x : newX,
+                        y,
+                    }
+                }
+                return { x, y }
+            },
+        },
+    },
+    'home-test': {
+        experiment: {
+            variant: 'test',
+            flag: 'homepage-test',
+        },
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 900,
             },
             fixed: false,
         },
@@ -482,7 +535,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/customer-data-infrastructure': {
+    '/data-stack': {
         size: {
             min: {
                 width: 750,
@@ -994,6 +1047,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/community/achievements': {
+        size: {
+            min: {
+                width: 500,
+                height: 1000,
+            },
+            max: {
+                width: 500,
+                height: 1000,
+            },
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/fm': {
         size: {
             min: {
@@ -1093,6 +1162,7 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         wallpaper: 'keyboard-garden',
         clickBehavior: 'double',
         performanceBoost: false,
+        screensaverDisabled: true,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
         ...(!lastReset ? { experience: 'posthog' } : {}),
     }
@@ -1113,11 +1183,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
     const [desktopCopied, setDesktopCopied] = useState(false)
+    const [windowsInView, setWindowsInView] = useState<AppWindow[]>([])
     const urlObj = isSSR ? null : new URL(location.href)
     const queryString = isSSR ? '' : urlObj?.search.substring(1)
     const parsed = isSSR ? {} : qs.parse(queryString)
     const paramsWindows = parsed?.windows
     const stateWindows = element.props?.location?.state?.savedWindows
+    const posthog = usePostHog()
 
     const [windows, setWindows] = useState<AppWindow[]>(
         (location.key === 'initial' && location.pathname === '/' && isMobile) || !!paramsWindows
@@ -1426,6 +1498,19 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         return [createNewWindow(element, [], location, isSSR, taskbarHeight)]
     }
 
+    function getKey(key: string) {
+        const experiment = appSettings[key]?.experiment
+        if (!experiment?.flag) return key
+        const assignedVariant = posthog?.getFeatureFlag?.(experiment?.flag)
+        if (!assignedVariant) return key
+        const keyToUse = Object.keys(appSettings).find(
+            (key) =>
+                appSettings[key]?.experiment?.flag === experiment?.flag &&
+                appSettings[key]?.experiment?.variant === assignedVariant
+        )
+        return keyToUse || key
+    }
+
     function createNewWindow(
         element: WindowElement,
         windows: AppWindow[],
@@ -1438,13 +1523,14 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             zIndex?: number
         }
     ) {
-        const size = element.props?.location?.state?.size || element.props.size || getInitialSize(element.key)
+        const keyToUse = getKey(element.key)
+        const size = element.props?.location?.state?.size || element.props.size || getInitialSize(keyToUse)
         const position =
             element.props?.location?.state?.position ||
             element.props.position ||
-            appSettings[element.key]?.position?.getPositionDefaults?.(size, windows, getDesktopCenterPosition) ||
-            getPositionDefaults(element.key, size, windows)
-        const settings = appSettings[element.key]
+            appSettings[keyToUse]?.position?.getPositionDefaults?.(size, windows, getDesktopCenterPosition) ||
+            getPositionDefaults(keyToUse, size, windows)
+        const settings = appSettings[keyToUse]
         const lastClickedElementRect = getLastClickedElementRect()
 
         const newWindow: AppWindow = {
@@ -1476,7 +1562,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                   }
                 : undefined,
             minimal: element.props.minimal ?? false,
-            appSettings: appSettings[element.key],
+            appSettings: appSettings[keyToUse],
             location,
         }
 
@@ -1986,6 +2072,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         if (compact) {
+            // nosemgrep: javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration - intentional for docs embedding, parent origin unknown, non-sensitive ready signal
             window.parent.postMessage(
                 {
                     type: 'docs-ready',
@@ -2023,6 +2110,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         if (compact) {
+            // nosemgrep: javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration - intentional for docs embedding, parent origin unknown, non-sensitive navigation data
             window.parent.postMessage(
                 {
                     type: 'internal-navigation',
@@ -2119,6 +2207,39 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [])
 
+    useEffect(() => {
+        const visibleWindows = windows.filter((window) => {
+            if (window.minimized) return false
+
+            const windowsAbove = windows.filter((w) => w !== window && w.zIndex > window.zIndex && !w.minimized)
+
+            let coveredArea = 0
+            const currentArea = window.size.width * window.size.height
+
+            for (const windowAbove of windowsAbove) {
+                const left = Math.max(window.position.x, windowAbove.position.x)
+                const right = Math.min(
+                    window.position.x + window.size.width,
+                    windowAbove.position.x + windowAbove.size.width
+                )
+                const top = Math.max(window.position.y, windowAbove.position.y)
+                const bottom = Math.min(
+                    window.position.y + window.size.height,
+                    windowAbove.position.y + windowAbove.size.height
+                )
+
+                if (left < right && top < bottom) {
+                    coveredArea += (right - left) * (bottom - top)
+                }
+            }
+
+            const coverageRatio = currentArea > 0 ? coveredArea / currentArea : 0
+            return coverageRatio < 0.8
+        })
+
+        setWindowsInView(visibleWindows)
+    }, [windows])
+
     return (
         <Context.Provider
             value={{
@@ -2167,6 +2288,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 copyDesktopParams,
                 desktopCopied,
                 shareableDesktopURL,
+                windowsInView,
             }}
         >
             {children}

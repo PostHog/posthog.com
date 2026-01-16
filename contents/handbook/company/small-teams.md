@@ -78,13 +78,13 @@ Some guidelines on how to do this are below, but if in doubt team leads should a
 ### Adding ideas to the roadmap
 
 -   [ ] As soon as you start seriously planning a new product, add it to [the in-app feature preview roadmap](https://posthog.com/docs/feature-flags/early-access-feature-management) as a `concept`.
--   [ ] Inform the marketing teams a new roadmap item is available via the #marketing channel
+-   [ ] Inform the marketing teams a new roadmap item is available via the #team-marketing channel
 
 ### Launching a new beta
 
 -   [ ] As soon as user opt-in is available, move your roadmap item from `concept` to `beta`
 -   [ ] Ensure your opt-in beta has a feedback link and docs link
--   [ ] Inform the marketing teams a new beta is available via the #marketing channel
+-   [ ] Inform the marketing teams a new beta is available via the #team-marketing channel
 
 ### Launching a new product
 
