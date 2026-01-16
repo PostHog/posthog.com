@@ -1494,7 +1494,7 @@ function Privacy() {
                             change and acknowledgement of the updated Policy.
                         </p>
                         <p>
-                            Last Updated: December __, 2025
+                            Last Updated: January 19, 2026
                         </p>
                     </div>
                     <div>
