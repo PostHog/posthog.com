@@ -52,7 +52,7 @@ TOC can again help us understand the consequences of this mismatched capacity:
 
 ### 1. Queue buildup
 
-In manufacturing, this looks like excess inventory. In software, this creates a kind of invisible backlog – work that’s finished on your side, but unfinished in terms of user value. 
+In manufacturing, this looks like excess inventory. In software, this creates a kind of invisible backlog – work that’s finished on your side, but unfinished in terms of user awareness and understanding. 
 
 The result is diffuse impact: lots of progress shipped, but less progress felt.
 
@@ -104,7 +104,7 @@ The result is predictable: local optimization turns into global overload.
 
 **What failure looks like:**
 
-- Marketing every single feature that hits production (asking users to care about everything ensures they care deeply about nothing)
+- Marketing every single feature that hits production. Asking users to care about everything ensures they care deeply about nothing. 
 
 - Treating launches as [outputs instead of outcomes](https://productschool.com/blog/analytics/output-vs-outcome)
 
@@ -113,7 +113,7 @@ The result is predictable: local optimization turns into global overload.
 - Active users are experiencing [feature fatigue](https://www.linkedin.com/pulse/feature-fatigue-love-focus-derek-francis-mezxc/) 
 
 **Do this instead:**
-- Have a [launch tier framework](https://aakashgupta.medium.com/the-launch-tier-system-that-transforms-product-teams-fddbb55a785c) to classify releases as _events_ or _infrastructure_: If it’s an event, treat it like the [biggest event of the year](https://www.linkedin.com/feed/update/urn:li:activity:7398759974686076928) 
+- Have a [launch tier framework](https://aakashgupta.medium.com/the-launch-tier-system-that-transforms-product-teams-fddbb55a785c) to classify releases as _events_ or _infrastructure_. If it’s an event, treat it like the [biggest event of the year](https://www.linkedin.com/feed/update/urn:li:activity:7398759974686076928).
 
 - Use entertainment and brand as force multipliers. [Humor](https://www.youtube.com/playlist?list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL), [absurdity](https://www.youtube.com/watch?v=EXisgy6eWJ0&list=PLnOY1RYHjDfw2joBxUPADaadeX5IradbH&index=4), and narrative work because they lower the cost of paying attention
 
@@ -140,21 +140,21 @@ The goal isn’t to explain everything up front. It’s to surface the right thi
 
 - Overindexing on Product Hunt, G2, and Hacker News (it probably isn't [worth the investment](https://news.ycombinator.com/item?id=29864157)) 
 
-- Your sales and marketing producing lengthy demo videos that explain everything and persuade no one
+- Producing lengthy demo videos that explain everything and persuade no one
 
 - Email blasting users a generic monthly product update without meaningful [segmentation](https://www.reforge.com/blog/what-is-user-segmentation) or timing
 
 - Disrupting the in-app ([user experience](/blog/redesigned-nav-menu)) with too many tooltips, banners, modals and popups
 
-- Overemphasizing what your shipped instead of why it matters ([marketing features > benefits](https://posthog.com/newsletter/marketing-for-devs) works for developers, but too much focus on “what” makes adoption someone else’s problem)
+- Overemphasizing what your shipped instead of why it matters. [Marketing features > benefits](https://posthog.com/newsletter/marketing-for-devs) works for developers, but too much focus on “what” makes adoption someone else’s problem.
 
 >Atlassian famously struggled with feature sprawl across Jira, Confluence (and much more). Users just couldn't keep up with so much surface area. The solution wasn't _more_ marketing, it was investing heavily in in-product discovery, clearer use-case documentation, and opinionated defaults to guide users to success.
 
 **Do this instead:**
 
-- Define [activation criteria](/product-engineers/activation-metrics) for new products, and track user behavior over time
+- Define [activation criteria](/product-engineers/activation-metrics) for new products and build features to improve it
 
-- Anchor new features to a task or process users already care about (“you’re using X, so we think you might be interested in Y”)
+- Anchor new features to a task or process users already care about. Use emails and tooltips too tell them “you’re using X, so we think you might be interested in Y.”
 
 - Encourage engineers to [do support](/newsletter/engineers-do-support) and see first-hand where users get stuck
 
