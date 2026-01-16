@@ -5,7 +5,6 @@ import Logo from 'components/Logo'
 import { SlideContainer } from './SlidesTemplate'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface Customer {
     slug: string
@@ -29,9 +28,16 @@ interface CustomersSlideProps {
     customers: Customer[]
     customerData: Record<string, CustomerData>
     hasCaseStudy: (slug: string) => boolean
+    belowContent?: React.ReactNode
 }
 
-export default function CustomersSlide({ productName, customers, customerData, hasCaseStudy }: CustomersSlideProps) {
+export default function CustomersSlide({
+    productName,
+    customers,
+    customerData,
+    hasCaseStudy,
+    belowContent = null,
+}: CustomersSlideProps) {
     // Create table structure for customers
     const customerTableColumns = [
         { name: '', width: 'minmax(auto,80px)', align: 'center' as const },
@@ -213,6 +219,8 @@ export default function CustomersSlide({ productName, customers, customerData, h
                         width="full"
                     />
                 </div>
+
+                {belowContent}
             </ScrollArea>
         </SlideContainer>
     )

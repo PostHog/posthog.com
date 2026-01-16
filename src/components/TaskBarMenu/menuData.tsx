@@ -584,7 +584,7 @@ export function useMenuData(): MenuType[] {
                         {
                             type: 'item',
                             label: 'Instagram',
-                            link: 'https://www.instagram.com/posthog',
+                            link: 'https://www.instagram.com/teamposthog',
                             icon: <IconInstagram className="size-4" />,
                             external: true,
                         },

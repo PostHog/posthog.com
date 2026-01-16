@@ -38,6 +38,9 @@ export default function ReverseETLExport(): JSX.Element {
                 <p>Schedule regular exports of your data to data warehouses and cloud storage.</p>
                 <ul>
                     <li>
+                        <strong>Azure Blob Storage</strong>
+                    </li>
+                    <li>
                         <strong>BigQuery</strong>
                     </li>
                     <li>

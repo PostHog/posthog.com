@@ -371,7 +371,7 @@ export function createSearchMarker({
     selectLabel.className = 'block text-xs text-secondary mb-1'
     selectLabel.textContent = 'Place type'
     const select = document.createElement('select')
-    ;['Coffee', 'Restaurant', 'Airbnb', 'Hotel', 'Co-working'].forEach((opt) => {
+    ;['Coffee', 'Restaurant', 'Airbnb', 'Hotel', 'Co-working', 'Bar'].forEach((opt) => {
         const o = document.createElement('option')
         o.value = opt
         o.textContent = opt

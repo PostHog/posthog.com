@@ -63,6 +63,7 @@ export const generateRawMarkdownPages = async (
             }
 
             fs.writeFileSync(outputPath, markdown, 'utf8')
+            console.log(`Generated: ${slug}.md`)
             processedPages.push({ slug, title })
         } catch (error) {
             continue

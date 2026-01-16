@@ -79,6 +79,8 @@ The more you do this, the more you’ll instinctively build them into your work,
 
 > **Recommended reading:** [_Design is Storytelling_](https://www.amazon.com/Design-Storytelling-Ellen-Lupton/dp/194230319X) by Ellen Upton is a fun treatise on the power of narrative to help software communicate with users.
 
+<NewsletterForm />
+
 * * *
 
 ##  2. Detect and eliminate obvious jank

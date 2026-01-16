@@ -36,7 +36,6 @@
         { "source": "/docs/integrations/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/libraries/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/libraries/microsoft-teams", "destination": "/docs/integrate/webhooks/microsoft-teams" },
-        { "source": "/docs/libraries/slack", "destination": "/docs/integrate/webhooks/slack" },
         { "source": "/docs/integrate/webhooks/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/integrate/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
@@ -560,7 +559,6 @@
             "destination": "/docs/how-posthog-works/ingestion-pipeline"
         },
         { "source": "/blog/using-posting", "destination": "/blog/using-posthog" },
-        { "source": "/docs/libraries/slack", "destination": "/manual/subscriptions" },
         { "source": "/docs/integrate/client/snippet-installation", "destination": "/docs/integrate" },
         { "source": "/tutorials/posthog-for-vuejs", "destination": "/docs/libraries/vue-js" },
         { "source": "/blog/categories/comparisons", "destination": "/blog/tags/comparisons" },

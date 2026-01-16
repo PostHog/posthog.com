@@ -244,6 +244,14 @@ export const createTurndownService = (title: string) => {
         replacement: (content) => content,
     })
 
+    turndownService.addRule('removeTableOfContents', {
+        filter: (node) => {
+            const id = node.getAttribute && node.getAttribute('id')
+            return id === 'toc' || id === 'mobile-toc'
+        },
+        replacement: () => '',
+    })
+
     turndownService.addRule('handleHorizontalRules', {
         filter: (node) => {
             return node.nodeName === 'HR'

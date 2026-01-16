@@ -305,7 +305,7 @@ export const CodeBlock = ({
                             <Tab.List className="flex items-center gap-[1px] flex-wrap">
                                 {languages.map((option, index) => (
                                     <Tab
-                                        key={option.language}
+                                        key={option.file || option.label || index}
                                         className={({ selected }) =>
                                             `cursor-pointer text-sm px-3 py-2 rounded-full relative after:h-[2px] after:-bottom-[1px] after:left-0 after:right-0 after:absolute after:content-['']  ${
                                                 selected
