@@ -558,14 +558,14 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                     <div className="flex gap-1">
                         <button
                             onClick={() => setBadgeType('none')}
-                            className={`px-2 py-1 text-xs rounded ${badgeType === 'none' ? 'bg-accent text-white' : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
+                            className={`px-2 py-1 text-xs rounded text-primary font-medium ${badgeType === 'none' ? 'bg-accent' : 'bg-primary hover:bg-accent'}`}
                             title="No badge"
                         >
                             None
                         </button>
                         <button
                             onClick={() => setBadgeType('pineapple')}
-                            className={`px-2 py-1 text-xs rounded flex items-center gap-1 ${badgeType === 'pineapple' ? 'bg-accent text-white' : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
+                            className={`px-2 py-1 text-xs rounded flex items-center gap-1 text-primary font-medium ${badgeType === 'pineapple' ? 'bg-accent' : 'bg-primary hover:bg-accent'}`}
                             title="Show pineapple preference"
                         >
                             <IconPineapple className="size-3" />
@@ -573,7 +573,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                         </button>
                         <button
                             onClick={() => setBadgeType('team')}
-                            className={`px-2 py-1 text-xs rounded flex items-center gap-1 ${badgeType === 'team' ? 'bg-accent text-white' : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
+                            className={`px-2 py-1 text-xs rounded flex items-center gap-1 text-primary font-medium ${badgeType === 'team' ? 'bg-accent' : 'bg-primary hover:bg-accent'}`}
                             title="Show small team"
                         >
                             <IconDecisionTree className="size-3" />
