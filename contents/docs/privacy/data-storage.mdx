@@ -144,15 +144,15 @@ If you have the person's UUID (returned as `id` in the persons API response), us
 <MultiLanguage>
 
 ```bash
-curl -X DELETE "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{PERSON_UUID}?delete_events=true" \
-     -H "Authorization: Bearer {YOUR_API_KEY}"
+curl -X DELETE "https://us.posthog.com/api/projects/:project_id/persons/:person_uuid?delete_events=true" \
+     -H "Authorization: Bearer [your personal api key]"
 ```
 
 ```javascript
-fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{PERSON_UUID}?delete_events=true", {
+fetch('https://us.posthog.com/api/projects/:project_id/persons/:person_uuid?delete_events=true', {
   method: 'DELETE',
   headers: {
-    'Authorization': 'Bearer {YOUR_API_KEY}'
+    'Authorization': 'Bearer [your personal api key]'
   }
 })
 .then(response => response.json())
@@ -163,10 +163,14 @@ fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{PERSO
 ```python
 import requests
 
-url = "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{PERSON_UUID}?delete_events=true"
-headers = {
-    'Authorization': 'Bearer {YOUR_API_KEY}'
-}
+api_key = "[your personal api key]"
+project_id = "[your project id]"
+person_uuid = "[person uuid]"
+
+url = "https://us.posthog.com/api/projects/{}/persons/{}?delete_events=true".format(
+    project_id, person_uuid
+)
+headers = {"Authorization": "Bearer {}".format(api_key)}
 
 response = requests.delete(url, headers=headers)
 print(response.json())
@@ -181,21 +185,21 @@ If you only have the user's distinct ID (for example, the auto-generated ID assi
 <MultiLanguage>
 
 ```bash
-curl -X POST "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/bulk_delete/" \
-     -H "Authorization: Bearer {YOUR_API_KEY}" \
+curl -X POST "https://us.posthog.com/api/projects/:project_id/persons/bulk_delete/" \
+     -H "Authorization: Bearer [your personal api key]" \
      -H "Content-Type: application/json" \
-     -d '{"distinct_ids": ["{DISTINCT_ID}"], "delete_events": true}'
+     -d '{"distinct_ids": ["your-distinct-id"], "delete_events": true}'
 ```
 
 ```javascript
-fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/bulk_delete/", {
+fetch('https://us.posthog.com/api/projects/:project_id/persons/bulk_delete/', {
   method: 'POST',
   headers: {
-    'Authorization': 'Bearer {YOUR_API_KEY}',
+    'Authorization': 'Bearer [your personal api key]',
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
-    distinct_ids: ["{DISTINCT_ID}"],
+    distinct_ids: ['your-distinct-id'],
     delete_events: true
   })
 })
@@ -207,14 +211,17 @@ fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/bulk_d
 ```python
 import requests
 
-url = "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/bulk_delete/"
+api_key = "[your personal api key]"
+project_id = "[your project id]"
+
+url = "https://us.posthog.com/api/projects/{}/persons/bulk_delete/".format(project_id)
 headers = {
-    'Authorization': 'Bearer {YOUR_API_KEY}',
-    'Content-Type': 'application/json'
+    "Authorization": "Bearer {}".format(api_key),
+    "Content-Type": "application/json"
 }
 data = {
-    'distinct_ids': ['{DISTINCT_ID}'],
-    'delete_events': True
+    "distinct_ids": ["your-distinct-id"],
+    "delete_events": True
 }
 
 response = requests.post(url, headers=headers, json=data)
