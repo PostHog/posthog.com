@@ -145,7 +145,6 @@ If you have the person's UUID (returned as `id` in the persons API response), us
 
 ```bash
 curl -X DELETE "https://app.posthog.com/api/projects/<project_id>/persons/<person_uuid>?delete_events=true" \
-
      -H "Authorization: Bearer <personal_api_key>"
 ```
 
@@ -189,6 +188,7 @@ curl -X POST "https://app.posthog.com/api/projects/<project_id>/persons/bulk_del
      -H "Authorization: Bearer <personal_api_key>" \
      -H "Content-Type: application/json" \
      -d '{"distinct_ids": ["<distinct_id>"], "delete_events": true}'
+```
 
 ```javascript
 fetch('https://app.posthog.com/api/projects/<project_id>/persons/bulk_delete/', {
