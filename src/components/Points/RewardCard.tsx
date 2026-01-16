@@ -253,7 +253,9 @@ export default function RewardCard({ reward, total }: { reward: Reward; total: n
                             variant="primary"
                             width="full"
                             asLink
-                            to={`/merch?coupon=${couponCode}&state=cart`}
+                            to={`/merch?coupon=${couponCode}&state=cart${
+                                reward.merchStoreHandle ? `&add=${reward.merchStoreHandle}` : ''
+                            }`}
                             state={{ newWindow: true }}
                         >
                             Use in store
