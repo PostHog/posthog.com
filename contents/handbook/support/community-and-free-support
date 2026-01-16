@@ -1,0 +1,119 @@
+---
+title: Community and Free Plan support
+sidebar: Handbook
+showTitle: true
+---
+
+## Overview
+
+This page covers how the support team handles community questions and free plan support tickets. Community support is fundamentally different from paid customer support—we prioritize peer-to-peer help and sustainable support practices while maintaining our commitment to helping all users succeed with PostHog.
+
+## What are community questions?
+
+Community questions are questions posted by users on our docs pages (at the bottom of any page on posthog.com/docs) or directly in our community forums at posthog.com/questions. These questions:
+
+- Are public and searchable
+- Help improve our documentation
+- Build a knowledge base for all users
+- Encourage peer-to-peer support
+
+Community questions are integrated into the support team's workflow through Zendesk, allowing us to provide better coverage while maintaining appropriate prioritization.
+
+For broader context on PostHog's community strategy and how the community platform works, see the [Community handbook page](https://posthog.com/handbook/community).
+
+## How community tickets work in Zendesk
+
+### Ticket creation and routing
+
+When a user posts a community question, a ticket is automatically created in Zendesk. These tickets are:
+
+- Assigned a **PostHog Priority of "Community"**
+- Given a **target response time of two weeks**
+- **Assigned to the appropriate product group** where it can be determined (e.g., tickets from Product Analytics pages are assigned to the Product Analytics group)
+- Defaulted to the **'Support' group** if the product area can't be automatically determined
+- **Included in all support views in Zendesk** including: [Technical Support Shared View](https://posthoghelp.zendesk.com/agent/filters/32900756121627), [Billing & Accounts Support Shared View](https://posthoghelp.zendesk.com/agent/filters/38698822910875), and dedicated [Technical SME views](https://posthog.com/handbook/support/support-smes)
+
+**Why two weeks?** This extended timeline serves two important purposes:
+1. It gives the community a chance to answer questions peer-to-peer before we jump in
+2. It ensures community tickets don't take precedence over tickets raised via Slack or in-app support
+
+**Note on default routing:** If you notice tickets being defaulted to the Support group that should have been routed elsewhere, consider why the automatic routing didn't work and whether there's a way to improve the routing logic in future.
+
+### How community ticket sync works
+
+Community tickets have a two-way sync between the community forum and Zendesk:
+
+**From community → Zendesk:**
+- Original question creates the ticket
+- Follow-up comments from the customer or other community members add to the ticket
+- When a customer marks a response as the solution, the ticket is automatically solved
+- If a ticket is Pending or Solved and the customer responds, the ticket reopens as normal
+
+**From Zendesk → community:**
+- Public replies from support agents post to the community thread
+- Private/internal notes stay in Zendesk only
+
+**Things to note:**
+- Zendesk is set up so that it doesn't send emails about community tickets (neither ticket creation nor replies). Community handles its own email notifications to users.
+- No CSAT survey is sent for community tickets. Zendesk is purely a way for us to manage these questions and ensure customers get responses—we're not treating them like traditional support tickets.
+- Once a ticket is closed in Zendesk, follow-up tickets don't currently work as expected.
+
+## Answering community questions as a support engineer
+
+### How to respond effectively
+
+For detailed guidance on tone, style, and best practices when answering community questions, see [Answering community questions](https://posthog.com/handbook/community/questions).
+
+**Keep responses public and helpful:**
+- Answer community questions with the same quality and care as paid support, but be mindful of scope
+- Write responses that benefit not just the original poster but anyone who finds the question later
+- Link to relevant documentation whenever possible
+- If you're making assumptions or suggesting approaches, be clear about that
+
+**When responding in Zendesk:**
+- Write your response as a public reply
+- Your response will automatically post to the community thread
+- Use Zendesk statuses in the same way you would for any other ticket
+
+### When to convert to a private support ticket
+
+Use your best judgement when deciding whether a community question should become a private support ticket. Some cases where you might want to convert:
+
+- The conversation involves sensitive information (account details, billing, security, private data)
+- The issue requires deep investigation into a customer's specific setup
+- Multiple back-and-forth exchanges would be needed
+- The customer needs access to their PostHog instance to debug
+
+**How to convert:**
+1. Reply on the community thread with something like: "This needs some account-specific investigation, so I've created a support ticket for you. Check your email - we'll follow up there."
+2. Create a new ticket in Zendesk on the customer's behalf
+3. Archive the community question (this hides it from the forum listing and removes it from search indexes)
+4. Mark the original community ticket as Solved in Zendesk
+
+## Free plan support policy
+
+Free plan support is achieved via community questions. Free plan customers are entitled to community support and are not entitled to in-app support.
+
+There are certain circumstances, however, where free plan tickets can exist within Zendesk via other means (such as through email or other channels). Free plan tickets are given the same target response time as community questions: **two weeks**.
+
+### Supporting free users
+
+When helping free users, be genuinely helpful while maintaining appropriate boundaries:
+
+- Point to relevant documentation
+- Answer general "how-to" questions
+- Explain concepts and troubleshooting approaches
+- Be honest if they need more than community support can provide
+
+Avoid getting into deep account-specific debugging, writing custom code for their use case, or providing ongoing consulting-style support. If someone needs more hands-on help, that's a signal they should consider a paid plan.
+
+## Self-hosted and open-source support
+
+**We do not provide customer support for self-hosted PostHog instances.** This is explicit in our documentation and support policies.
+
+When self-hosted users reach out through community questions:
+
+- Direct them to [self-hosting documentation](https://posthog.com/docs/self-host), troubleshooting guides, and GitHub
+- Be clear that hosting environments vary too widely for us to debug effectively
+- We can answer general product questions but can't help with infrastructure, deployment, or performance issues
+- Suggest migrating to PostHog Cloud if they're hitting scaling challenges or need more support (generous free tier: 1M events, 5k recordings, 1M flag requests, 100k exceptions, 1500 survey responses/month)
