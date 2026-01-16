@@ -222,9 +222,9 @@ export default function Startups(): JSX.Element {
                         </div>
                         <div className="bg-[#E6B2F8] rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_docs_ae8043058c.png" />
-                            <h3 className="text-base my-1 leading-tight">Better docs with Mintlify</h3>
+                            <h3 className="text-base my-1 leading-tight">Easier incidents with Incident.io</h3>
                             <p className="text-sm mb-0">
-                                The best products deserve the best documentation. Get 50% off Mintlify for 6 months.
+                                Avoid additional stress by getting $1,500 off a teams plan for Incident.io.
                             </p>
                         </div>
                         <div className="bg-[#C4D9FF] -rotate-2 p-4 text-black @2xl:p-2 @3xl:p-4">
@@ -496,7 +496,7 @@ export default function Startups(): JSX.Element {
                                     ),
                                 },
                                 {
-                                    trigger: 'How do I get the Mintlify/Speakeasy/Chroma discount?',
+                                    trigger: 'How do I get the Incident.io/Speakeasy/Chroma discount?',
                                     content: (
                                         <p>
                                             Once you're accepted into the PostHog for Startups program, we'll email you
