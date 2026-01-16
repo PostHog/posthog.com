@@ -24,9 +24,8 @@ const ProductTours: React.FC = () => {
                 description="Guide users through your product with interactive tours, announcements, and banners."
                 buttonText="Create your first tour"
                 buttonLink="/docs/product-tours/start-here"
-                imageColumnClasses="mt-8 md:mt-0 max-w-96"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
-                imageClasses=""
+                imageClasses="max-h-48 md:max-h-64"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_tours_3b98daa3aa.png"
             />
             <section className="mb-12">
                 <h3 className="m-0 text-xl">
