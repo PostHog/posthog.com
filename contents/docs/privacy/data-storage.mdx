@@ -135,7 +135,7 @@ response = requests.get(
 
 </MultiLanguage>
 
-To delete persons and their events, you can use either the single delete endpoint (if you have the person UUID) or the bulk delete endpoint (if you have distinct IDs).
+To delete persons and their events, you can use the single delete endpoint if you have the person UUID or the bulk delete endpoint if you have distinct IDs.
 
 #### Deleting by person UUID
 
@@ -144,15 +144,16 @@ If you have the person's UUID (returned as `id` in the persons API response), us
 <MultiLanguage>
 
 ```bash
-curl -X DELETE "https://us.posthog.com/api/projects/:project_id/persons/:person_uuid?delete_events=true" \
-     -H "Authorization: Bearer [your personal api key]"
+curl -X DELETE "https://us.posthog.com/api/projects/<project_id>/persons/<person_uuid>?delete_events=true" \
+
+     -H "Authorization: Bearer <personal_api_key>"
 ```
 
 ```javascript
-fetch('https://us.posthog.com/api/projects/:project_id/persons/:person_uuid?delete_events=true', {
+fetch('https://us.posthog.com/api/projects/<project_id>/persons/<person_uuid>?delete_events=true', {
   method: 'DELETE',
   headers: {
-    'Authorization': 'Bearer [your personal api key]'
+    'Authorization': 'Bearer <personal_api_key>'
   }
 })
 .then(response => response.json())
@@ -163,9 +164,9 @@ fetch('https://us.posthog.com/api/projects/:project_id/persons/:person_uuid?dele
 ```python
 import requests
 
-api_key = "[your personal api key]"
-project_id = "[your project id]"
-person_uuid = "[person uuid]"
+api_key = "<personal_api_key>"
+project_id = "<project_id>"
+person_uuid = "<person_uuid>"
 
 url = "https://us.posthog.com/api/projects/{}/persons/{}?delete_events=true".format(
     project_id, person_uuid
@@ -174,32 +175,30 @@ headers = {"Authorization": "Bearer {}".format(api_key)}
 
 response = requests.delete(url, headers=headers)
 print(response.json())
-```
 
 </MultiLanguage>
 
-#### Deleting by distinct ID (for anonymous users)
+#### Deleting anonymous users by distinct ID
 
-If you only have the user's distinct ID (for example, the auto-generated ID assigned to anonymous users by posthog-js), you must use the [bulk delete endpoint](/docs/api/persons#post-api-projects-project_id-persons-bulk_delete). This works even for deleting a single person:
+If you only have the user's distinct ID, for example, the auto-generated ID assigned to anonymous users by `posthog-js`, you must use the [bulk delete endpoint](/docs/api/persons#post-api-projects-project_id-persons-bulk_delete). This works for deleting a single person too:
 
 <MultiLanguage>
 
 ```bash
-curl -X POST "https://us.posthog.com/api/projects/:project_id/persons/bulk_delete/" \
-     -H "Authorization: Bearer [your personal api key]" \
+curl -X POST "https://us.posthog.com/api/projects/<project_id>/persons/bulk_delete/" \
+     -H "Authorization: Bearer <personal_api_key>" \
      -H "Content-Type: application/json" \
-     -d '{"distinct_ids": ["your-distinct-id"], "delete_events": true}'
-```
+     -d '{"distinct_ids": ["<distinct_id>"], "delete_events": true}'
 
 ```javascript
-fetch('https://us.posthog.com/api/projects/:project_id/persons/bulk_delete/', {
+fetch('https://us.posthog.com/api/projects/<project_id>/persons/bulk_delete/', {
   method: 'POST',
   headers: {
-    'Authorization': 'Bearer [your personal api key]',
+    'Authorization': 'Bearer <personal_api_key>',
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
-    distinct_ids: ['your-distinct-id'],
+    distinct_ids: ['<distinct_id>'],
     delete_events: true
   })
 })
@@ -211,8 +210,8 @@ fetch('https://us.posthog.com/api/projects/:project_id/persons/bulk_delete/', {
 ```python
 import requests
 
-api_key = "[your personal api key]"
-project_id = "[your project id]"
+api_key = "<personal_api_key>"
+project_id = "<project_id>"
 
 url = "https://us.posthog.com/api/projects/{}/persons/bulk_delete/".format(project_id)
 headers = {
@@ -220,7 +219,7 @@ headers = {
     "Content-Type": "application/json"
 }
 data = {
-    "distinct_ids": ["your-distinct-id"],
+    "distinct_ids": ["<distinct_id>"],
     "delete_events": True
 }
 
@@ -231,7 +230,9 @@ print(response.json())
 </MultiLanguage>
 
 <CalloutBox type="info" title="Using distinct IDs vs person UUIDs">
+
 The single delete endpoint (`DELETE /persons/:id`) only accepts the person UUID, not a distinct ID. If you try to use a distinct ID with this endpoint, you'll receive an error. Use the bulk delete endpoint instead when you only have a distinct ID.
+
 </CalloutBox>
 
 You can delete up to 1,000 persons per request using the bulk delete endpoint. The endpoint also accepts `ids` (person UUIDs) instead of `distinct_ids` if you prefer.
