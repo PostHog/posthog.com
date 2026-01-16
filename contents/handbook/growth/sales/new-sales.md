@@ -113,6 +113,14 @@ If you can't identify anyone who has recently signed up to PostHog, then ask the
 
 If it's a solicited RFP, you're free to proceed so long as the opportunity is qualified as a whole and you carefully balance the level of effort required in the RFP against the opportunity for you & PostHog. Again, a 500 question RFP may not be worth it if they plan on spending <$20k for PostHog (a 50 question RFP may not even be worth it in this instance)! Use your best judgement, and it is generally still wise to timebox your effort.
 
+#### Bigger Opportunities at Bigger Companies
+
+When you're working a deal north of $100k at a larger company, the playbook shifts. Generally, expect to challenge their stated evaluation criteria early, as well as sell to multiple people and functions within the organization. You need to dig past the surface-level requirements they may list and get to the real decision drivers. Question the "why" and "how" behind their stated criteria, because committee-driven procurement processes can hide the actual priorities behind "just so" rubrics that can obscure the real reasons they will buy (or disqualify). 
+
+On the relationship side, you need a strategy for engaging their leadership and developing champions at multiple levels within the account. If a key leadership stakeholder goes dark, escalate to PostHog leadership to help re-engage. If needed, don't be afraid to translate PostHog titles to something they would understand (e.g. Generic Exec Person = COO). For deals this size, on-site presence can also matter — you should attempt to build relationships in person, not just over Zoom. 
+
+Lastly, take a prescriptive and consultative approach to their evaluation process. The larger the opportunity, the more proactive you need to be about controlling the process. Ask for help from your lead, your team, and in Slack. These opportunities take a team effort. 
+
 #### Startups
 
 If they're eligible for the [Startup Plan](/startups), route them to the application form and disqualify them as it's not an immediate opportunity (but we sincerely hope they grow into loyal PostHog customers). If their usage will burn through their credits quickly, you should feel free to switch their lead status to `Nurture` and keep close tabs on them. Per our [usual approach to sales](/handbook/growth/sales/overview), we want to make sure they're successful in this "high-use" scenario and are building with us for the long-term.
