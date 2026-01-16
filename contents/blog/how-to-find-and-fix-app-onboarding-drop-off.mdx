@@ -8,15 +8,15 @@ hideAnchor: true
 author:
     - natalia-amorim
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/Untitled_design_af9b8ab475.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/cooking_w_PH_hero_1_279b09be96.png
 featuredImageType: full
 category: General
 tags:
     - Growth
     - Product engineers
 seo:
-    metaTitle: 'Product onboarding: How to fix drop-off points'
-    metaDescription: 'A step-by-step recipe for finding where users drop off during app onboarding, understanding why it happens, and improving activation rates.'
+    metaTitle: 'App onboarding: How to fix drop-off points'
+    metaDescription: 'A step-by-step recipe for finding where users drop off during your product onboarding, understanding why it happens, and improving activation rates.'
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
@@ -133,6 +133,8 @@ You can complete the sentence: "A user has successfully onboarded when they ____
 
 </CalloutBox>
 
+---
+
 ## Step 2: Build a funnel
 
 Now you're ready to cook.
@@ -159,12 +161,13 @@ Head to [Product Analytics](https://app.posthog.com/insights) → **New insight*
 Start with your core flow. Once it's optimized, create separate funnels for specific segments. Don't forget to name your funnel something specific (e.g., "Self-serve onboarding Q1 2025") so future-you knows what it's measuring when you have 47 funnels.
 </details>
 
-
 <CalloutBox icon="IconInfo" title="You're ready for the next step when...." type="fyi">
 
 Your funnel is prepped, ending with your activation event, saved, and ready to collect data.
 
 </CalloutBox>
+
+---
 
 ## Step 3: Let it simmer
 
@@ -188,6 +191,8 @@ Resist the urge to peek daily. Set a calendar reminder for one week out – watc
 Your data has had time to marinate – at least a few hundred users through the funnel with clear conversion rates at each step. Undercooked data leads to undercooked fixes.
 
 </CalloutBox>
+
+---
 
 ## Step 4: Find the leak
 
@@ -220,6 +225,8 @@ You're able to say: "Users drop off most at *[this step]*" and "It affects *[the
 
 </CalloutBox>
 
+---
+
 ## Step 5: Watch the replays
 
 You know where users drop off, [now you need to find out *why*](/tutorials/explore-insights-session-recordings).
@@ -251,6 +258,8 @@ Don't just watch drop-offs. Sometimes successful users struggled through the sam
 You're able to say "Users drop off here because *[this thing]* keeps happening."
 
 </CalloutBox>
+
+---
 
 ## Step 6: Fold in survey data *(optional, but recommended)*
 
@@ -289,6 +298,8 @@ You've seasoned your data with user feedback that confirms, refines, or challeng
 
 </CalloutBox>
 
+---
+
 ## Step 7: Form a hypothesis and ship a fix
 
 By now you should have:
@@ -314,6 +325,8 @@ One ingredient at a time. If you change five things at once, you won't know what
 You've got one fix in the oven, designed to address your hypothesis.
 
 </CalloutBox>
+
+---
 
 ## Step 8: Taste before serving *(optional, but recommended)*
 
@@ -348,6 +361,8 @@ Your fix is out of the kitchen, live (ideally behind a feature flag) and collect
 
 </CalloutBox>
 
+---
+
 ## Step 9: Measure the improvement
 
 After your fix has been live for a bit:
@@ -378,6 +393,8 @@ You can see a lift in activation rates after deploying your fix.
 If it didn't work as expected, that's okay. Go back to Step 4 with a new hypothesis. Onboarding optimization is iterative, you're rarely done after one fix.
 
 </CalloutBox>
+
+---
 
 ## Why this recipe works especially well with PostHog
 
@@ -420,7 +437,7 @@ Onboarding drop-off is [not the same as churn](/tutorials/churn-rate) – these 
 </details>
 
 <details>
-<summary><strong>What’s the difference between onboarding drop-off and churn?</strong></summary>
+<summary><strong>What's the difference between onboarding drop-off and churn?</strong></summary>
 
 **Onboarding drop-off** happens before users get value. They never activate.
 
@@ -437,15 +454,15 @@ The most common causes are:
 - Confusing or unclear UI  
 - Unclear next steps or lack of guidance  
 - Broken flows, errors, or silent failures  
-- Required steps that don’t feel required  
+- Required steps that don't feel required  
 - Onboarding that takes too long to complete  
 
 </details>
 
 <details>
-<summary><strong>What’s a good onboarding completion rate?</strong></summary>
+<summary><strong>What's a good onboarding completion rate?</strong></summary>
 
-There’s no universal benchmark.
+There's no universal benchmark.
 
 For self-serve SaaS, **20–40%** onboarding completion is common. Higher-touch products with sales involvement often see higher rates.
 
@@ -453,7 +470,7 @@ More important than benchmarks is tracking your own completion rate over time an
 </details>
 
 <details>
-<summary><strong>What’s the biggest mistake teams make with onboarding analytics?</strong></summary>
+<summary><strong>What's the biggest mistake teams make with onboarding analytics?</strong></summary>
 
 Optimizing the wrong metric.
 
@@ -485,12 +502,14 @@ Or you can use a unified platform like PostHog to do all of this in one place.
 <details>
 <summary><strong>Can I do this without a unified analytics tool?</strong></summary>
 
-Yes, but it’s harder.
+Yes, but it's harder.
 
 Most teams end up stitching together funnels, replays, surveys, and experiments across multiple tools, which slows analysis and makes it harder to connect cause and effect.
 
 A unified stack makes it much easier to move from “where users drop off” to “why” to “did this fix work?”
 </details>
+
+---
 
 ### Pairs well with
 
