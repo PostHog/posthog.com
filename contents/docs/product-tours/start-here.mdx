@@ -20,6 +20,13 @@ import Alpha from './_snippets/alpha.mdx'
 
 Product tours are multi-step walkthroughs that highlight elements in your UI and guide users through features. You build them visually using the PostHog toolbar.
 
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/pt_demo_67b4b87c6e.mp4" 
+  alt="Use product tours to guide users through your app" 
+  autoPlay={true}
+  loop={true}
+/>
+
 ### How it works
 
 1. Launch the toolbar on your site
@@ -46,6 +53,27 @@ Announcements are single-step messages for when you don't need a full tour. Choo
 
 - **Modals** - Centered popups for important messages, changelogs, or feature launches
 - **Banners** - Top or bottom page alerts for subtle notifications
+
+<div className="grid sm:grid-cols-2 gap-4 my-4">
+    <div>
+        <ProductScreenshot
+            imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_16_at_12_44_39_PM_b1e4fb4ce4.png"
+            alt="Modal announcement example"
+            classes="rounded"
+        />
+        <Caption>Modal announcement</Caption>
+    </div>
+    <div>
+        <ProductScreenshot
+            imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_16_at_12_44_14_PM_1614e763bf.png"
+            alt="Banner announcement example"
+            classes="rounded"
+        />
+        <Caption>Banner announcement</Caption>
+    </div>
+</div>
+
+Announcement buttons can open links or trigger a product tour, making them a great entry point for onboarding flows.
 
 You can create announcements directly from the PostHog app without using the toolbar.
 
@@ -107,11 +135,30 @@ Once your tour is ready, set a start date to launch it. PostHog automatically tr
 - **Dismissed** - How many closed early
 - **Tour funnel** - Shows step-by-step where users drop off
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_16_at_12_07_08_PM_54e558bc6e.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_16_at_12_08_05_PM_2f34b3d315.png"
+    alt="Product tour analytics"
+    classes="rounded"
+    padding={false}
+/>
+
 ### Integrate with product analytics
 
 Tour events work with the rest of PostHog. Create funnels to see if tours improve activation, or use [cohorts](/docs/data/cohorts) to target users who haven't completed onboarding.
 
 Person properties like `$product_tour_completed/{id}` are set automatically, so you can filter and segment based on tour interactions.
+</QuestLogItem>
+
+<QuestLogItem
+    title="Use for free"
+    subtitle="No cost"
+    icon="IconPiggyBank"
+>
+
+Product tours is completely free while in alpha. No usage limits, no credit card required.
+
+We'll introduce pricing once we're out of beta – we'll give you plenty of notice before that happens.
 
 ---
 
@@ -120,18 +167,6 @@ That's it! You're ready to start guiding users.
 <OSButton variant="primary" asLink to="/docs/product-tours/creating-product-tours">
   Create your first tour
 </OSButton>
-
-</QuestLogItem>
-
-<QuestLogItem
-    title="Free during alpha"
-    subtitle="No cost"
-    icon="IconPiggyBank"
->
-
-Product tours is completely free while in alpha. No usage limits, no credit card required.
-
-We'll introduce pricing once we're out of beta – we'll give you plenty of notice before that happens.
 
 </QuestLogItem>
 

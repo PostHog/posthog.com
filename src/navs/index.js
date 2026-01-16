@@ -4450,6 +4450,9 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
+                    name: 'Getting started',
+                },
+                {
                     name: 'Start here',
                     url: '/docs/product-tours/start-here',
                     icon: 'IconRocket',
@@ -4457,43 +4460,40 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
-                    name: 'Getting started',
-                },
-                {
-                    name: 'Creating product tours',
+                    name: 'Create product tours',
                     url: '/docs/product-tours/creating-product-tours',
                     icon: 'IconSpotlight',
                     color: 'orange',
                 },
                 {
-                    name: 'Creating announcements',
+                    name: 'Make an announcement',
                     url: '/docs/product-tours/creating-announcements',
                     icon: 'IconMessage',
                     color: 'orange',
                 },
                 {
-                    name: 'Launching and managing',
+                    name: 'Launch and manage tours',
                     url: '/docs/product-tours/managing-tours',
                     icon: 'IconToggle',
                     color: 'orange',
                 },
                 {
-                    name: 'Features',
+                    name: 'Guides',
                 },
                 {
-                    name: 'Targeting & conditions',
+                    name: 'Target users and set display conditions',
                     url: '/docs/product-tours/targeting',
                     icon: 'IconTarget',
                     color: 'orange',
                 },
                 {
-                    name: 'Customization',
+                    name: 'Customize styles and layouts',
                     url: '/docs/product-tours/customization',
                     icon: 'IconColor',
                     color: 'orange',
                 },
                 {
-                    name: 'Analytics',
+                    name: 'View and create analytics',
                     url: '/docs/product-tours/analytics',
                     icon: 'IconGraph',
                     color: 'orange',
