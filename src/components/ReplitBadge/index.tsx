@@ -33,7 +33,7 @@ export const ReplitBadge: React.FC<ReplitBadgeProps> = ({ mcpConfig }) => {
         <CallToAction href={url} type="secondary" size="md" externalNoIcon>
             <span className="inline-flex items-center gap-2">
                 <ReplitIcon />
-                Add to Replit
+                Add PostHog to Replit
             </span>
         </CallToAction>
     )
